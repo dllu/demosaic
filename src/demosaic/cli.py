@@ -134,8 +134,12 @@ def main(argv=None):
                 "split": args.split,
                 "patch_size": args.patch_size,
                 "sources": len(loader.dataset),
+                "batch_size": args.batch_size,
+                "evaluated_images": min(len(loader.dataset), args.max_batches * args.batch_size)
+                if args.max_batches > 0
+                else len(loader.dataset),
                 "max_batches": args.max_batches,
-                "noise": {"shot": 0.001, "read": 1e-6},
+                "noise": {"shot": 0.001, "read": 1e-6, "seed": 20261014},
                 **scores,
             },
         )

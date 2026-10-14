@@ -46,8 +46,9 @@ project matches its performance.
 ## Proposed model
 
 A noise-conditioned, multiscale gated convolutional encoder/decoder operates at
-half sensor resolution on four spatial Bayer phases, four variance maps and four
-color-label maps. It fuses projected DINOv3 intermediate features near its
+half sensor resolution on four spatial Bayer phases, four variance maps and 12
+one-hot phase/color maps, with WB/matrix conditioning for highlight recovery.
+It fuses projected DINOv3 intermediate features near its
 bottleneck, with trainable zero-initialized gates. The decoder uses pixel shuffle
 and a bilinear demosaic residual baseline. Local paths retain fine geometry;
 DINO supplies context, never fabricated training targets. Linear and rendered
@@ -62,3 +63,11 @@ stating that the account is not on the authorized list. Access has been requeste
 from the user, who confirmed that review is pending and authorized experiments
 with other architectures and the data pipeline. Implement the branch and continue base training; never silently
 substitute random foundation weights or describe a no-backbone run as DINO-trained.
+
+Later on the same day, the official endpoint returned HTTP 200. The genuine
+21,596,544-parameter ViT-S/16 weights downloaded successfully. A CUDA BF16
+forward/backward run verified finite reconstruction, a nonzero fusion-gate
+gradient and no gradients on the frozen backbone. The HF revision is
+`114c1379950215c8b35dfcd4e90a5c251dde0d32` and is pinned in the 8192-source
+experiment and restoration checkpoints. This branch is now training.
+Its quality contribution still requires a matched no-DINO control.

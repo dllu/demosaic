@@ -30,8 +30,11 @@ step-500 checkpoint. A second experiment uses a reference-white target and
 explicit WB/matrix conditioning while retaining physical input clipping.
 Further changes add rendered highlight masking, ADC black offsets and source
 snapshots for future runs. All are documented separately to avoid confusing
-software capability with learned quality. Current tests: 27 passed before the
-latest source-provenance changes, with a verification run underway.
+software capability with learned quality. All 27 tests pass after these changes.
+At v2 step 3000, the neutral highlight diagnostic reduced chroma MAE from
+0.015744 to 0.005378 (~66%), with rendered PSNR 34.646→34.943 dB. Inspection of
+the scientific comparison confirms that the magenta center is reduced; thin-line
+color errors remain. This does not establish real highlight quality.
 
 Official DINOv3 approval is still pending. Its original license is included with
 attribution; no weights have been obtained or used. Active jobs and experiment

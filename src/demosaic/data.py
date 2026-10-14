@@ -50,14 +50,18 @@ def synthetic(size: int, rng: random.Random) -> torch.Tensor:
 
 class CleanDataset(Dataset):
     def __init__(
-        self, manifest: str | Path, split="train", patch_size=256, synthetic_fraction=0.2, seed=42
+        self,
+        manifest: str | Path,
+        split="train",
+        patch_size=256,
+        synthetic_fraction=0.2,
+        seed=42,
+        records=None,
     ):
         self.manifest = Path(manifest)
-        self.rows = [
-            r
-            for line in self.manifest.read_text().splitlines()
-            if (r := json.loads(line))["split"] == split
-        ]
+        if records is None:
+            records = [json.loads(line) for line in self.manifest.read_text().splitlines()]
+        self.rows = [row for row in records if row["split"] == split]
         if not self.rows:
             raise ValueError(f"No {split} images in {manifest}")
         if patch_size % 16 or patch_size < 32:

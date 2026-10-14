@@ -50,7 +50,9 @@ def restore_tiled(
     if isinstance(raw, np.ndarray):
         raw = torch.from_numpy(np.ascontiguousarray(raw, dtype=np.float32))
     raw = raw.detach().cpu().float()
-    if raw.ndim != 2 or min(raw.shape) < 2 or not torch.isfinite(raw).all():
+    # NumPy checks the CPU view in one SIMD pass; torch.isfinite materializes
+    # several full-image intermediates on this host before the reduction.
+    if raw.ndim != 2 or min(raw.shape) < 2 or not np.isfinite(raw.numpy()).all():
         raise ValueError("Raw must be a finite H×W normalized mosaic")
     original_h, original_w = raw.shape
     h = max(tile, original_h + original_h % 2)

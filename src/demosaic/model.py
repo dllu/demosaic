@@ -91,6 +91,10 @@ class DinoContext(nn.Module):
 
         # No random fallback: access failures are actionable errors.
         self.backbone = AutoModel.from_pretrained(config.dino_model, revision=config.dino_revision)
+        # Frozen weights are loaded separately; pin the exact upstream revision.
+        config.dino_revision = (
+            getattr(self.backbone.config, "_commit_hash", None) or config.dino_revision
+        )
         self.backbone.requires_grad_(False).eval()
         self.adapter = nn.Conv2d(self.backbone.config.hidden_size * 3, channels, 1)
         self.gate = nn.Parameter(torch.zeros(1, channels, 1, 1))

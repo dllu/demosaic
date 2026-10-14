@@ -4,7 +4,6 @@ import hashlib
 import json
 import math
 import random
-import shutil
 import time
 from contextlib import nullcontext
 from pathlib import Path
@@ -95,25 +94,31 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     if resume and initialize:
         raise ValueError("Choose resume or initialize, not both")
     config = yaml.safe_load(Path(config_path).read_text())
-    manifest_hash = hashlib.sha256(Path(config["manifest"]).read_bytes()).hexdigest()
+    manifest_payload = Path(config["manifest"]).read_bytes()
+    manifest_hash = hashlib.sha256(manifest_payload).hexdigest()
+    records = [json.loads(line) for line in manifest_payload.splitlines()]
     config["manifest_sha256"] = manifest_hash
     run = writable_path(config["run"])
     run.mkdir(parents=True, exist_ok=True)
     # Capture the actual code, including uncommitted research changes, so a
     # later edit cannot obscure what produced this run's weights.
-    snapshot = run / "source"
-    snapshot.mkdir(exist_ok=True)
-    code_hash = hashlib.sha256()
-    for source in sorted(Path(__file__).parent.glob("*.py")):
-        payload = source.read_bytes()
-        code_hash.update(source.name.encode() + payload)
-        if not resume:
-            (snapshot / source.name).write_bytes(payload)
-    config["source_sha256"] = code_hash.hexdigest()
     repository = Path(__file__).resolve().parents[2]
-    if not resume:
-        for name in ("pyproject.toml", "uv.lock"):
-            shutil.copyfile(repository / name, snapshot / name)
+    payloads = {
+        source.name: source.read_bytes() for source in sorted(Path(__file__).parent.glob("*.py"))
+    }
+    payloads.update(
+        {name: (repository / name).read_bytes() for name in ("pyproject.toml", "uv.lock")}
+    )
+    code_hash = hashlib.sha256()
+    for name, payload in sorted(payloads.items()):
+        code_hash.update(name.encode() + payload)
+    config["source_sha256"] = code_hash.hexdigest()
+    snapshot = run / "source" / config["source_sha256"]
+    snapshot.mkdir(parents=True, exist_ok=True)
+    for name, payload in payloads.items():
+        (snapshot / name).write_bytes(payload)
+    (snapshot / "manifest.jsonl").write_bytes(manifest_payload)
+    config["source_snapshot"] = str(snapshot)
     device = torch.device(config.get("device", "cuda"))
     torch.set_num_threads(config.get("cpu_threads", 4))
     torch.set_float32_matmul_precision("high")
@@ -177,6 +182,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         patch_size=config.get("patch_size", 256),
         seed=seed,
         synthetic_fraction=config.get("synthetic_fraction", 0.2),
+        records=records,
     )
     workers = config.get("workers", 2)
     loader = DataLoader(
@@ -191,7 +197,12 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         **({"prefetch_factor": 2} if workers else {}),
     )
     validation = DataLoader(
-        CleanDataset(config["manifest"], split="val", patch_size=config.get("patch_size", 256)),
+        CleanDataset(
+            config["manifest"],
+            split="val",
+            patch_size=config.get("patch_size", 256),
+            records=records,
+        ),
         batch_size=batch_size,
         num_workers=0,
         generator=torch.Generator().manual_seed(seed),

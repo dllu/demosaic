@@ -22,6 +22,7 @@ fixed WB [2,1,1.5], identity color matrix, RGGB, and a fixed noise seed:
 | Bootstrap, 1000 steps | 36.617 | 32.381 |
 | RawNIND UtNet2, input-mean gain | 29.818 | 26.807 |
 | RawNIND UtNet2, CFA least-squares gain | 33.756 | 28.914 |
+| Highlight-v2, 5000 steps, 925 train sources | 37.216 | 32.857 |
 
 This is one synthetic condition close to our training distribution. It does not
 prove real-camera generalization, perceptual superiority, or state of the art.
@@ -46,6 +47,7 @@ Real 10000×10000 restoration, 512 sensor-pixel tiles, overlap 64, batch 8:
 | Initial NCHW tile loop | 13.631 | 0.722 |
 | Channels-last weights, old host packing | 10.732 | 0.722 |
 | Channels-last + per-batch device packing | 9.878 | 0.722 |
+| Trained highlight-v2, SIMD input validation | 9.341 | 0.747 |
 
 The final row includes validation/host accumulation/normalization and avoids a
 second full-image Bayer packing allocation. GPU kernels were warmed. It excludes
@@ -72,7 +74,13 @@ references by clipping linear sRGB before transport to camera space. The noisy
 input still experiences physical per-channel sensor clipping. This gives neutral
 reference highlights without making up saturated detail. A regression test proves
 the target correction; it does not prove the trained network has learned it.
-This run uses the initial camera-space highlight mask and ADC black=0.
+This run uses the initial camera-space highlight mask and ADC black=0. At step
+3000, a controlled neutral highlight with diagonal fine lines reduced highlight
+chroma MAE from bootstrap's 0.015744 to 0.005378 (about 66%). Rendered PSNR
+improved 34.646→34.943 dB. The diagnostic figure was inspected: the main magenta
+cast is suppressed, but small color errors remain on fine lines. This is one
+synthetic case; real highlight quality remains unproven. Artifacts are in
+`/mnt/external/demosaic/evaluation/highlights-v2/`.
 
 `highlight-v3` adds a rendered-space highlight mask and an ADC black offset so
 negative black-subtracted read noise survives. New runs archive the actual source
