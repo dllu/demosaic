@@ -44,6 +44,12 @@ and excluded. Decode/encode and final DINO-model timing remain separate gates.
 
 All 27 tests pass; Ruff and diff checks pass. Environment configuration now also
 keeps Matplotlib/XDG config and CUDA compiler caches in authorized storage.
-Next: verify the first DINO checkpoint reload, finish/evaluate broad training,
-compare a matched no-DINO run, measure real noise conditioning and inspect more
+The DINO step-1500 checkpoint subsequently reloaded with its exact frozen
+backbone revision and produced finite 128×128 RGB. Verified that frozen-backbone
+parameters are absent from the saved restoration weights.
+
+Started a matched `configs/control-8192.yaml` run: same data, batch 4, seed,
+schedule, optimizer, degradation and v2 initialization, with DINO disabled.
+Concurrent training timings are not isolated GPU benchmarks.
+Next: finish/evaluate both runs, measure real noise conditioning and inspect more
 texture/highlight/high-ISO examples before claiming completion.

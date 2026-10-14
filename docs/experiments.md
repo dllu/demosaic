@@ -87,3 +87,27 @@ negative black-subtracted read noise survives. New runs archive the actual sourc
 code/lockfile and manifest SHA. These changes need trained-model validation and
 comparison with v2. The v3 config is available; its training is not yet established
 by this document.
+
+## DINOv3 and matched broad-data experiments
+
+Access became available later on October 14. The genuine DINOv3-S/16 branch
+passed a CUDA BF16 forward/backward check with a nonzero fusion-gate gradient
+and a frozen 21,596,544-parameter encoder. Revision
+`114c1379950215c8b35dfcd4e90a5c251dde0d32` is pinned. A step-1500 restoration
+checkpoint reloaded and produced finite predictions while loading its encoder
+separately, verifying the checkpoint contract with real weights.
+
+The immutable 8192-source manifest contains 7378 train / 427 validation / 387 test
+sources. `configs/dino-8192.yaml` and `configs/control-8192.yaml` use the same
+data, batch size, seed, 20000-step schedule, degradation and highlight-v2 EMA
+initialization; only the pretrained branch differs. Both runs are in progress.
+Periodic training validation uses up to 64 crops; final comparison must evaluate
+the full validation set across multiple conditions. Neither run has established
+a DINO quality benefit yet. Full-corpus preparation continues independently.
+
+Local real-camera comparisons confirm RAW support for all four named camera
+models. Architecture, ocean spray and sky crops show that RawNIND smooths more
+strongly, while our early model retains more grain/texture. These are diagnostic
+observations, not proof of a perceptual win. More detail/high-ISO cases and noise
+calibration are needed. Private source images and comparison figures remain
+local; no personal images have been added to training or published in Git.
