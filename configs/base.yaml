@@ -1,0 +1,24 @@
+manifest: /mnt/external/demosaic/commons-v1/manifest.jsonl
+run: /mnt/external/demosaic/runs/base-v1
+device: cuda
+seed: 42
+steps: 20000
+batch_size: 8
+patch_size: 256
+workers: 2
+cpu_threads: 4
+synthetic_fraction: 0.2
+lr: 0.0002
+warmup_steps: 200
+checkpoint_every: 500
+val_batches: 16
+log_every: 25
+amp: true
+min_available_gb: 12
+model:
+  width: 32
+  encoder_blocks: [2, 2, 4]
+  middle_blocks: 6
+  decoder_blocks: [2, 2, 2]
+  attention: true
+  dino: false

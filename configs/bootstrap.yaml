@@ -1,0 +1,25 @@
+# First real-data experiment. This is a pipeline/learning check, not a quality release.
+manifest: /mnt/external/demosaic/commons-v1/bootstrap-256.jsonl
+run: /mnt/external/demosaic/runs/bootstrap-v1
+device: cuda
+seed: 42
+steps: 1000
+batch_size: 8
+patch_size: 256
+workers: 2
+cpu_threads: 4
+synthetic_fraction: 0.2
+lr: 0.0002
+warmup_steps: 50
+checkpoint_every: 100
+val_batches: 4
+log_every: 10
+amp: true
+min_available_gb: 12
+model:
+  width: 32
+  encoder_blocks: [2, 2, 4]
+  middle_blocks: 6
+  decoder_blocks: [2, 2, 2]
+  attention: true
+  dino: false

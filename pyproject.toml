@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "demosaic"
+version = "0.1.0"
+description = "Noise-conditioned, DINOv3-guided linear RAW demosaicing and denoising"
+requires-python = ">=3.12"
+dependencies = [
+  "torch>=2.9,<3",
+  "numpy>=2.2,<3",
+  "pillow>=11,<13",
+  "tifffile>=2025.3.13",
+  "rawpy>=0.25,<0.27",
+  "transformers>=4.56,<5",
+  "huggingface-hub>=0.34,<1",
+  "safetensors>=0.6",
+  "pyyaml>=6",
+  "psutil>=7",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.12"]
+
+[project.scripts]
+demosaic = "demosaic.cli:main"
+
+[tool.uv.sources]
+torch = { index = "pytorch" }
+
+[[tool.uv.index]]
+name = "pytorch"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
+
+[tool.hatch.build.targets.wheels]
+packages = ["src/demosaic"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--basetemp=.cache/pytest"
+
+[tool.ruff]
+line-length = 100
