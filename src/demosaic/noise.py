@@ -34,7 +34,9 @@ def sample_coefficients(batch: int, device) -> tuple[Tensor, Tensor]:
     return capacity.reciprocal(), (read_e / capacity).square()
 
 
-def add_noise(clean: Tensor, shot, read, *, bit_depth=16, generator=None) -> Tensor:
+def add_noise(
+    clean: Tensor, shot, read, *, bit_depth=16, black_level=0.0, generator=None
+) -> Tensor:
     """Var(y|x)=shot*x+read before clipping. Saturation happens AFTER noise.
 
     `clean` may exceed 1 for overexposed scenes. Counting before the ADC clip
@@ -42,8 +44,11 @@ def add_noise(clean: Tensor, shot, read, *, bit_depth=16, generator=None) -> Ten
     """
     shot = torch.as_tensor(shot, device=clean.device, dtype=torch.float32)
     read = torch.as_tensor(read, device=clean.device, dtype=torch.float32)
+    black = torch.as_tensor(black_level, device=clean.device, dtype=torch.float32)
     if bool((shot < 0).any() or (read < 0).any()):
         raise ValueError("Noise coefficients must be nonnegative")
+    if bool((black < 0).any() or (black >= 1).any()):
+        raise ValueError("ADC black level must be in [0,1)")
     safe_shot = shot.clamp_min(1e-12)
     poisson = torch.poisson(clean.clamp_min(0) / safe_shot, generator=generator) * safe_shot
     signal = torch.where(shot > 0, poisson, clean)
@@ -53,7 +58,8 @@ def add_noise(clean: Tensor, shot, read, *, bit_depth=16, generator=None) -> Ten
         * read.sqrt()
     )
     levels = (1 << bit_depth) - 1
-    return (signal.clamp(0, 1) * levels).round() / levels
+    adc = (signal * (1 - black) + black).clamp(0, 1)
+    return ((adc * levels).round() / levels - black) / (1 - black)
 
 
 def variance_map(noisy: Tensor, shot, read) -> Tensor:

@@ -31,8 +31,10 @@ scene-disjoint benchmark. Additional scene deduplication is required before a
 strong generalization claim. `manifest.jsonl`, `summary.json`, and
 `errors.jsonl` document the result. Image files and the manifest are atomically
 renamed, and rerunning reuses completed caches. Use a new destination when changing
-the binning recipe. Each process decodes only one original at a time (120 MP cap)
-and processes float averages in small bands.
+the binning recipe. Each worker decodes only one original at a time (120 MP cap)
+and processes float averages in small bands. `--workers 4` enables bounded
+parallel preparation; an OS lock protects each destination. Recipe mismatches
+fail explicitly, and prepared caches carry SHA-256 checksums.
 
 ## Training
 
@@ -55,12 +57,18 @@ sampled with a true Poisson distribution in electrons, then independent Gaussian
 read noise is added and the 16-bit ADC clips/quantizes. Full-well priors scale with
 photosite area (3–6 µm), with ISO gains from 0.5 to 128 and read noise 0.7–5 e-.
 These are broad representative priors; no particular camera has been calibrated.
-The current simulator clips negative noise at normalized black; real cameras can
-retain negative black-subtracted values. This domain gap must be evaluated.
+With `preserve_negative_read_noise: true`, a randomized ADC black offset allows
+negative black-subtracted read noise, matching the native RAW convention. Older
+bootstrap/v2 runs used ADC black=0, a known domain gap for deep shadows.
 
 The model receives four spatial Bayer phases, their standard deviations and 12
 one-hot phase/color indicators. It predicts linear camera RGB plus an auxiliary
-clean mosaic. Losses combine linear and sRGB reconstruction, rendered gradients,
+clean mosaic. Camera-conditioned variants additionally receive 3 WB and 9 matrix
+entries. Highlight references clip exposed linear sRGB before camera transport,
+while input sensor channels still clip independently after noise. This avoids
+training on the false-color white reference found in the bootstrap recipe.
+It cannot recover information destroyed by complete saturation.
+Losses combine linear and sRGB reconstruction, rendered gradients,
 highlight-region chroma error and clean-mosaic reconstruction. Rendered training
 loss does not make the inference output an sRGB image.
 
@@ -70,6 +78,9 @@ Training writes JSONL metrics, resolved config, `last.pt` and validation-selecte
 `--stop-after N` makes controlled, resumable experiments. Clean draws/augmentation
 are determined by sample index, independent of DataLoader worker scheduling.
 CPU tests verify restart equivalence. CUDA BF16 kernels may have nondeterminism.
+`--initialize CHECKPOINT` warm-starts restoration weights with a fresh optimizer,
+including zero-weight expansion for new camera-metadata channels. New runs retain
+a source snapshot, lockfile, and manifest fingerprint in addition to checkpoints.
 Workers/batch size are bounded; a low available-system-memory threshold triggers
 a checkpoint and stop. Other users' processes are never changed.
 
@@ -83,6 +94,22 @@ Final evaluation must include all CFA phases, multiple noise/exposure conditions
 edge/highlight/shadow and texture crops, scene deduplication, real RAW inspection,
 and correctly calibrated comparisons with RawNIND and strong current baselines.
 Neither passing numerical tests nor beating bilinear establishes state of the art.
+
+To fetch and compare the original RawNIND weights, separately licensed and
+checksum-pinned:
+
+```bash
+uv run python scripts/fetch_rawnind.py
+uv run demosaic evaluate /path/to/best.pt --manifest /path/to/manifest.jsonl \
+  --rawnind /mnt/external/demosaic/references/rawnind \
+  --output /mnt/external/demosaic/evaluation/comparison.json
+uv run --extra eval python scripts/diagnose_highlights.py /path/to/best.pt \
+  --output /mnt/external/demosaic/evaluation/highlights
+```
+
+The reference adapter retains native pixel geometry for all four Bayer phases,
+runs the upstream network in FP32, and reports both input-mean and observed-CFA
+least-squares gain matching. Neither gain method uses the target image.
 
 ## RAW and TIFF conventions
 
@@ -112,14 +139,15 @@ arrays, rather than full-image neural activations. CPU/CUDA allocations still
 occupy separate memory in PyTorch on the GB10 despite shared physical DRAM.
 
 ```bash
-uv run demosaic benchmark /mnt/external/demosaic/runs/base-v1/best.pt \
+uv run demosaic benchmark /mnt/external/demosaic/runs/base-v3/best.pt \
   --height 10000 --width 10000 --tile 512 --batch-size 8 \
-  --output /mnt/external/demosaic/benchmarks/base-v1-100mp.json
+  --output /mnt/external/demosaic/benchmarks/base-v3-100mp.json
 ```
 
 Benchmark results include a real full-image invocation, warmup, output-finiteness
 check, tile geometry, GPU name and peak allocated CUDA memory. Timings currently
-cover tiled model execution/transfers/accumulation, excluding RAW decode/TIFF
+cover input validation, tiled model execution/transfers/accumulation, excluding RAW decode/TIFF
 encoding and setup; end-to-end latency must be measured separately for a strict
-10-second photo-processing claim. Global/coarse attention and DINO context can
+10-second photo-processing claim. `infer` additionally records complete local
+decode/load/restoration/encode time as `end_to_end_seconds`. Global/coarse attention and DINO context can
 vary by tile, so overlap seams require visual and numerical checks after training.

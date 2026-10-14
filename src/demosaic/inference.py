@@ -5,7 +5,6 @@ from contextlib import nullcontext
 
 import numpy as np
 import torch
-from torch.nn import functional as F
 
 from .cfa import pack
 
@@ -42,6 +41,7 @@ def restore_tiled(
     outputs or full-resolution feature tensors are retained on UMA systems.
     Even tile coordinates preserve the original CFA phase for every pattern.
     """
+    full_started = time.perf_counter()
     if tile < 32 or tile % 16 or overlap < 0 or overlap % 2 or overlap >= tile:
         raise ValueError("Tile must be >=32 and divisible by 16; overlap must be even and <tile")
     if batch_size < 1 or min(shot, read) < 0:
@@ -50,22 +50,18 @@ def restore_tiled(
     if isinstance(raw, np.ndarray):
         raw = torch.from_numpy(np.ascontiguousarray(raw, dtype=np.float32))
     raw = raw.detach().cpu().float()
-    if raw.ndim != 2 or not torch.isfinite(raw).all():
+    if raw.ndim != 2 or min(raw.shape) < 2 or not torch.isfinite(raw).all():
         raise ValueError("Raw must be a finite H×W normalized mosaic")
     original_h, original_w = raw.shape
     h = max(tile, original_h + original_h % 2)
     w = max(tile, original_w + original_w % 2)
     # Extend CFA values by whole 2×2 cells; replication of individual edge
     # pixels would assign a red measurement to a green phase on odd borders.
-    raw = F.pad(raw[None, None], (0, original_w % 2, 0, original_h % 2), mode="replicate")
-    if original_h % 2 and original_h > 1:
-        raw[..., -1, :] = raw[..., original_h - 2, :]
-    if original_w % 2 and original_w > 1:
-        raw[..., :, -1] = raw[..., :, original_w - 2]
-    packed = pack(raw)
-    packed = F.pad(
-        packed, (0, w // 2 - packed.shape[-1], 0, h // 2 - packed.shape[-2]), mode="replicate"
-    )
+    if (h, w) != (original_h, original_w):
+        rows, cols = torch.arange(h), torch.arange(w)
+        rows = torch.where(rows < original_h, rows, 2 * ((original_h - 2) // 2) + rows % 2)
+        cols = torch.where(cols < original_w, cols, 2 * ((original_w - 2) // 2) + cols % 2)
+        raw = raw.index_select(0, rows).index_select(1, cols)
     stride = tile - overlap
     coords = [(y, x) for y in positions(h, tile, stride) for x in positions(w, tile, stride)]
     # Positive weights avoid division by zero at the exterior image boundaries.
@@ -76,14 +72,21 @@ def restore_tiled(
     colors = torch.as_tensor(colors, device=device, dtype=torch.long)
     model.eval()
     if device.type == "cuda":
+        model.to(memory_format=torch.channels_last)
         torch.cuda.synchronize(device)
         torch.cuda.reset_peak_memory_stats(device)
     started = time.perf_counter()
+    compute_seconds, blend_seconds = 0.0, 0.0
     for start in range(0, len(coords), batch_size):
+        compute_started = time.perf_counter()
         current = coords[start : start + batch_size]
-        tiles = torch.cat(
-            [packed[..., y // 2 : (y + tile) // 2, x // 2 : (x + tile) // 2] for y, x in current]
-        ).to(device)
+        # Pack only each active batch on the device, avoiding a second 100 MP
+        # host allocation and a full-image pixel-unshuffle pass.
+        tiles = pack(
+            torch.stack([raw[y : y + tile, x : x + tile] for y, x in current])[:, None].to(device)
+        )
+        if device.type == "cuda":
+            tiles = tiles.contiguous(memory_format=torch.channels_last)
         variance = tiles.clamp_min(0) * shot + read
         batch_colors = (
             colors[None].expand(len(current), -1)
@@ -112,15 +115,21 @@ def restore_tiled(
         with context:
             outputs = model(tiles, variance, batch_colors, batch_wb, batch_matrix)
         outputs = outputs.float().cpu()
+        compute_seconds += time.perf_counter() - compute_started
+        blend_started = time.perf_counter()
         for output, (y, x) in zip(outputs, current):
             accum[:, y : y + tile, x : x + tile].add_(output * weight)
             norm[y : y + tile, x : x + tile].add_(weight)
+        blend_seconds += time.perf_counter() - blend_started
     if device.type == "cuda":
         torch.cuda.synchronize(device)
-    seconds = time.perf_counter() - started
     accum.div_(norm.clamp_min_(1e-12))
+    tile_seconds = time.perf_counter() - started
     return accum[:, :original_h, :original_w], {
-        "seconds": seconds,
+        "seconds": time.perf_counter() - full_started,
+        "tile_seconds": tile_seconds,
+        "compute_transfer_seconds": compute_seconds,
+        "blend_seconds": blend_seconds,
         "megapixels": original_h * original_w / 1e6,
         "tiles": len(coords),
         "tile": tile,

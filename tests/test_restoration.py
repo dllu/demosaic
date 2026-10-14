@@ -6,11 +6,13 @@ import tifffile
 import torch
 
 from demosaic.cfa import bilinear, color_indices, mosaic, unpack
-from demosaic.data import degrade
+from demosaic.color import render
+from demosaic.data import camera_pair, degrade
 from demosaic.inference import load_checkpoint, restore_tiled
-from demosaic.io import write_rgb16
+from demosaic.io import camera_matrix, write_rgb16
 from demosaic.losses import reconstruction_loss
 from demosaic.model import JointDemosaic, ModelConfig
+from demosaic.reference import RawNind
 from demosaic.safety import writable_path
 
 
@@ -82,3 +84,64 @@ def test_forbidden_output_locations():
     ):
         with pytest.raises(ValueError):
             writable_path(path)
+
+
+def test_libraw_camera_matrix_direction_and_neutral_response():
+    rgb_to_xyz = np.array(
+        [
+            [0.412453, 0.357580, 0.180423],
+            [0.212671, 0.715160, 0.072169],
+            [0.019334, 0.119193, 0.950227],
+        ]
+    )
+    # A camera whose primaries are sRGB must yield an identity transform.
+    np.testing.assert_allclose(camera_matrix(np.linalg.inv(rgb_to_xyz)), np.eye(3), atol=1e-12)
+    gfx = np.array(
+        [[1.6212, -0.8423, -0.1583], [-0.4336, 1.2583, 0.1937], [-0.0195, 0.0726, 0.6199]]
+    )
+    matrix = camera_matrix(gfx)
+    np.testing.assert_allclose(matrix @ np.ones(3), np.ones(3), atol=1e-12)
+    assert np.max(np.abs(matrix)) < 3
+
+
+def test_overexposed_neutral_reference_has_no_channel_clipping_fringe():
+    ramp = torch.linspace(0, 3, 128)[None, None, None, :].expand(1, 3, 4, -1)
+    wb = torch.tensor([[2.0, 1.0, 1.5]])
+    inverse = torch.tensor([[[0.9, 0.05, 0.05], [0.05, 0.9, 0.05], [0.05, 0.05, 0.9]]])
+    matrix = torch.linalg.inv(inverse)
+    sensor, target = camera_pair(ramp, inverse, wb, reconstruct_highlights=True)
+    assert sensor.amax() > 1
+    rendered = render(target, wb, matrix)
+    torch.testing.assert_close(rendered[:, 0], rendered[:, 1])
+    torch.testing.assert_close(rendered[:, 1], rendered[:, 2])
+    bad_reference = render(sensor.clamp(0, 1), wb, matrix)
+    assert (bad_reference[:, 0] - bad_reference[:, 1]).abs().max() > 0.01
+    model = JointDemosaic(
+        ModelConfig(
+            width=4,
+            encoder_blocks=(1,),
+            middle_blocks=0,
+            decoder_blocks=(1,),
+            attention=False,
+            camera_conditioning=True,
+        )
+    )
+    batch = degrade(torch.rand(1, 3, 32, 32), reconstruct_highlights=True)
+    output = model(
+        batch["packed"], batch["variance"], batch["colors"], batch["wb"], batch["matrix"]
+    )
+    assert output.shape == (1, 3, 32, 32)
+
+
+@pytest.mark.parametrize("pattern", ["RGGB", "BGGR", "GRBG", "GBRG"])
+def test_reference_adapter_preserves_sensor_geometry(pattern):
+    class CanonicalDemosaic(torch.nn.Module):
+        def forward(self, packed):
+            return bilinear(packed, color_indices("RGGB"))
+
+    rgb = torch.rand(1, 3, 32, 48)
+    colors = color_indices(pattern)
+    sampled = mosaic(rgb, colors)
+    adapter = RawNind(CanonicalDemosaic(), gain_mode="cfa-ls")
+    output = adapter(sampled, torch.zeros_like(sampled), colors)
+    torch.testing.assert_close(mosaic(output, colors), sampled)

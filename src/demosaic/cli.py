@@ -2,6 +2,7 @@
 
 import argparse
 import json
+import time
 from dataclasses import asdict
 from pathlib import Path
 
@@ -22,9 +23,13 @@ def parser():
     prepare.add_argument("--limit", type=int, default=0)
     prepare.add_argument("--factor", type=int, default=8)
     prepare.add_argument("--min-size", type=int, default=256)
+    prepare.add_argument("--workers", type=int, default=2)
     training = commands.add_parser("train")
     training.add_argument("config", type=Path)
     training.add_argument("--resume", type=Path)
+    training.add_argument(
+        "--initialize", type=Path, help="Warm-start model weights with a fresh optimizer"
+    )
     training.add_argument(
         "--stop-after", type=int, help="Save and exit after this many additional steps"
     )
@@ -39,6 +44,9 @@ def parser():
     evaluate.add_argument("--max-batches", type=int, default=0)
     evaluate.add_argument("--output", type=Path, required=True)
     evaluate.add_argument("--device", default="cuda")
+    evaluate.add_argument(
+        "--rawnind", type=Path, help="Directory containing separately fetched reference"
+    )
     infer = commands.add_parser("infer", help="Camera RAW or 16-bit Bayer NPY/TIFF to RGB16 TIFF")
     infer.add_argument("checkpoint", type=Path)
     infer.add_argument("input", type=Path)
@@ -82,12 +90,19 @@ def main(argv=None):
         from .prepare import prepare_commons
 
         prepare_commons(
-            args.source, args.output, limit=args.limit, factor=args.factor, min_size=args.min_size
+            args.source,
+            args.output,
+            limit=args.limit,
+            factor=args.factor,
+            min_size=args.min_size,
+            workers=args.workers,
         )
     elif args.command == "train":
         from .train import train
 
-        train(args.config, resume=args.resume, stop_after=args.stop_after)
+        train(
+            args.config, resume=args.resume, initialize=args.initialize, stop_after=args.stop_after
+        )
     elif args.command == "evaluate":
         from torch.utils.data import DataLoader
 
@@ -100,6 +115,16 @@ def main(argv=None):
             CleanDataset(args.manifest, args.split, args.patch_size), batch_size=args.batch_size
         )
         scores = evaluate(model, loader, args.device, max_batches=args.max_batches)
+        if args.rawnind:
+            from .reference import load_rawnind
+
+            for gain_mode in ("input-mean", "cfa-ls"):
+                baseline = load_rawnind(args.rawnind, gain_mode=gain_mode, device=args.device)
+                reference_scores = evaluate(
+                    baseline, loader, args.device, max_batches=args.max_batches, amp=False
+                )
+                scores[f"rawnind_{gain_mode}"] = reference_scores
+                del baseline
         dump(
             args.output,
             {
@@ -115,6 +140,7 @@ def main(argv=None):
             },
         )
     elif args.command == "infer":
+        end_to_end_started = time.perf_counter()
         from .cfa import color_indices
         from .color import render
         from .inference import load_checkpoint, restore_tiled
@@ -128,6 +154,12 @@ def main(argv=None):
             raise ValueError("Inference output must not overwrite its input")
         if args.preview:
             writable_path(args.preview)
+            if args.preview.resolve() == output:
+                raise ValueError("Linear and sRGB output paths must differ")
+        if output == args.checkpoint.resolve() or (
+            args.preview and args.preview.resolve() == args.checkpoint.resolve()
+        ):
+            raise ValueError("Inference output must not overwrite its checkpoint")
         suffix = args.input.suffix.lower()
         metadata = None
         if suffix in (".npy", ".tif", ".tiff"):
@@ -189,6 +221,7 @@ def main(argv=None):
                 "read": args.read,
                 "pattern": pattern,
                 "raw_metadata": asdict(metadata) if metadata else None,
+                "end_to_end_seconds": time.perf_counter() - end_to_end_started,
                 **stats,
             },
         )
@@ -223,6 +256,7 @@ def main(argv=None):
                 "width": args.width,
                 "finite": bool(torch.isfinite(rgb).all()),
                 "target_seconds": 10,
+                "warmed": True,
                 **stats,
             },
         )

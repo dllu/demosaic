@@ -54,6 +54,16 @@ def test_clipping_and_zero_noise():
     torch.testing.assert_close(noisy, clean.clamp(0, 1), atol=1 / 65535, rtol=0)
 
 
+def test_adc_black_offset_preserves_negative_read_noise_and_saturates_white():
+    dark = add_noise(
+        torch.zeros(100000), 0, 1e-6, black_level=0.03, generator=torch.Generator().manual_seed(3)
+    )
+    assert (dark < 0).float().mean() > 0.48
+    assert abs(float(dark.mean())) < 1e-5
+    white = add_noise(torch.full((100,), 2.0), 0, 0, black_level=0.03)
+    torch.testing.assert_close(white, torch.ones_like(white))
+
+
 def test_manifest_license_and_splits():
     assert free_license("CC BY-SA 4.0")
     assert free_license("CC BY 2.0 de")

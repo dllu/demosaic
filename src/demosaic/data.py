@@ -148,7 +148,26 @@ def optical_blur(rgb, rng):
     return F.conv2d(F.pad(rgb[None], (3, 3, 3, 3), mode="reflect"), kernel, groups=3)[0]
 
 
-def degrade(rgb, *, training=True, generator=None):
+def camera_pair(exposed_rgb, inverse, wb, *, reconstruct_highlights=False):
+    """Keep physical sensor clipping separate from the bounded reference white.
+
+    Independent sensor-channel clipping can turn an overexposed neutral scene
+    magenta after WB/color conversion. Reference-white clipping occurs in
+    linear sRGB before camera transport; it does not alter the noisy input.
+    """
+    clean = torch.einsum("bij,bjhw->bihw", inverse, exposed_rgb) / wb[..., None, None]
+    target = torch.einsum("bij,bjhw->bihw", inverse, exposed_rgb.clamp(0, 1)) / wb[..., None, None]
+    return clean, target if reconstruct_highlights else clean.clamp(0, 1)
+
+
+def degrade(
+    rgb,
+    *,
+    training=True,
+    generator=None,
+    reconstruct_highlights=False,
+    preserve_negative_read_noise=False,
+):
     """Convert clean linear sRGB to randomized camera RGB, then mosaic/noise.
 
     The target is clipped linear camera RGB before white balance. A mild,
@@ -176,13 +195,20 @@ def degrade(rgb, *, training=True, generator=None):
         exposure = 1
         colors = color_indices("RGGB", device=device)[None].expand(batch, -1)
         shot, read = rgb.new_full((batch, 1, 1, 1), 0.001), rgb.new_full((batch, 1, 1, 1), 1e-6)
-    clean = torch.einsum("bij,bjhw->bihw", inverse, rgb * exposure) / wb[..., None, None]
-    observed = add_noise(mosaic(clean, colors), shot, read, generator=generator)
+    clean, target = camera_pair(
+        rgb * exposure, inverse, wb, reconstruct_highlights=reconstruct_highlights
+    )
+    black = (
+        torch.empty(batch, 1, 1, 1, device=device).uniform_(0.002, 0.06)
+        if (training and preserve_negative_read_noise)
+        else 0.0
+    )
+    observed = add_noise(mosaic(clean, colors), shot, read, black_level=black, generator=generator)
     return {
         "packed": observed,
         "variance": variance_map(observed, shot, read),
         "colors": colors,
-        "target": clean.clamp(0, 1),
+        "target": target,
         "wb": wb,
         "matrix": matrix,
         "shot": shot,

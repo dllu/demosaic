@@ -20,6 +20,7 @@ class ModelConfig:
     dino: bool = False
     dino_model: str = "facebook/dinov3-vits16-pretrain-lvd1689m"
     dino_revision: str = "main"
+    camera_conditioning: bool = False
 
     def to_dict(self):
         return asdict(self)
@@ -135,7 +136,7 @@ class JointDemosaic(nn.Module):
         if len(cfg.encoder_blocks) != len(cfg.decoder_blocks) or cfg.width < 4:
             raise ValueError("Invalid encoder/decoder configuration")
         self.multiple = 2 ** len(cfg.encoder_blocks)
-        self.stem = nn.Conv2d(20, cfg.width, 3, padding=1)
+        self.stem = nn.Conv2d(32 if cfg.camera_conditioning else 20, cfg.width, 3, padding=1)
         self.encoders, self.downs = nn.ModuleList(), nn.ModuleList()
         channels = cfg.width
         for count in cfg.encoder_blocks:
@@ -172,6 +173,18 @@ class JointDemosaic(nn.Module):
         inputs = torch.cat(
             (packed, variance.clamp_min(0).sqrt(), labels.expand(-1, -1, height, width)), dim=1
         )
+        if self.config.camera_conditioning:
+            balance = packed.new_ones(batch, 3) if wb is None else wb.to(packed)
+            transform = (
+                torch.eye(3, device=packed.device, dtype=packed.dtype)[None].expand(batch, -1, -1)
+                if matrix is None
+                else matrix.to(packed)
+            )
+            # Highlight recovery depends on white point and camera primaries.
+            metadata = torch.cat((balance.clamp_min(1e-6).log2(), transform.flatten(1)), dim=1)
+            inputs = torch.cat(
+                (inputs, metadata[:, :, None, None].expand(-1, -1, height, width)), dim=1
+            )
         x = self.stem(
             F.pad(inputs, (0, -width % self.multiple, 0, -height % self.multiple), mode="replicate")
         )

@@ -8,6 +8,8 @@ patch_size: 256
 workers: 2
 cpu_threads: 4
 synthetic_fraction: 0.2
+reconstruct_highlights: true
+preserve_negative_read_noise: true
 lr: 0.0002
 warmup_steps: 200
 checkpoint_every: 500
@@ -22,3 +24,4 @@ model:
   decoder_blocks: [2, 2, 2]
   attention: true
   dino: true
+  camera_conditioning: true

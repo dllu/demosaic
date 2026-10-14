@@ -22,7 +22,7 @@ def reconstruction_loss(prediction, batch, auxiliary=None):
         / 2
     )
     # Dilate the saturation region; penalize wrong chroma, including its boundary.
-    saturated = (target.amax(1, keepdim=True) > 0.95).float()
+    saturated = (truth.amax(1, keepdim=True) > 0.98).float()
     boundary = F.max_pool2d(saturated, 7, 1, 3)
     chroma_error = (display - display.mean(1, keepdim=True)) - (truth - truth.mean(1, keepdim=True))
     highlight = (chroma_error.abs() * boundary).sum() / (boundary.sum() * 3).clamp_min(1)

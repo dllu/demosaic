@@ -1,8 +1,10 @@
 """Resumable bounded-memory training with EMA and deterministic held-out crops."""
 
+import hashlib
 import json
 import math
 import random
+import shutil
 import time
 from contextlib import nullcontext
 from pathlib import Path
@@ -89,10 +91,29 @@ def save_checkpoint(path, model, optimizer, ema, step, config, best):
     temporary.replace(path)
 
 
-def train(config_path, *, resume=None, stop_after=None):
+def train(config_path, *, resume=None, initialize=None, stop_after=None):
+    if resume and initialize:
+        raise ValueError("Choose resume or initialize, not both")
     config = yaml.safe_load(Path(config_path).read_text())
+    manifest_hash = hashlib.sha256(Path(config["manifest"]).read_bytes()).hexdigest()
+    config["manifest_sha256"] = manifest_hash
     run = writable_path(config["run"])
     run.mkdir(parents=True, exist_ok=True)
+    # Capture the actual code, including uncommitted research changes, so a
+    # later edit cannot obscure what produced this run's weights.
+    snapshot = run / "source"
+    snapshot.mkdir(exist_ok=True)
+    code_hash = hashlib.sha256()
+    for source in sorted(Path(__file__).parent.glob("*.py")):
+        payload = source.read_bytes()
+        code_hash.update(source.name.encode() + payload)
+        if not resume:
+            (snapshot / source.name).write_bytes(payload)
+    config["source_sha256"] = code_hash.hexdigest()
+    repository = Path(__file__).resolve().parents[2]
+    if not resume:
+        for name in ("pyproject.toml", "uv.lock"):
+            shutil.copyfile(repository / name, snapshot / name)
     device = torch.device(config.get("device", "cuda"))
     torch.set_num_threads(config.get("cpu_threads", 4))
     torch.set_float32_matmul_precision("high")
@@ -101,6 +122,27 @@ def train(config_path, *, resume=None, stop_after=None):
     random.seed(seed)
     torch.manual_seed(seed)
     model = JointDemosaic(ModelConfig(**config.get("model", {}))).to(device)
+    if config.get("reconstruct_highlights", False) and not model.config.camera_conditioning:
+        raise ValueError("Highlight training requires white-balance/color-matrix conditioning")
+    if initialize:
+        initial = torch.load(initialize, map_location="cpu", weights_only=True)
+        weights = initial.get("ema", initial["model"])
+        if model.config.camera_conditioning and weights["stem.weight"].shape[1] == 20:
+            # Preserve the prior mapping while adding 12 zero-weight metadata maps.
+            expanded = torch.zeros_like(model.stem.weight, device="cpu")
+            expanded[:, :20] = weights["stem.weight"]
+            weights["stem.weight"] = expanded
+        incompatible = model.load_state_dict(weights, strict=False)
+        if incompatible.unexpected_keys or any(
+            not k.startswith("context.") for k in incompatible.missing_keys
+        ):
+            raise ValueError(f"Incompatible initialization: {incompatible}")
+        config["initialized_from"] = {
+            "path": str(Path(initialize).resolve()),
+            "sha256": hashlib.sha256(Path(initialize).read_bytes()).hexdigest(),
+            "step": initial.get("step"),
+        }
+        del initial
     # Keep just one frozen DINO backbone: EMA contains restoration weights only.
     ema = {key: value.detach().clone() for key, value in model.restoration_state_dict().items()}
     optimizer = torch.optim.AdamW(
@@ -111,7 +153,10 @@ def train(config_path, *, resume=None, stop_after=None):
     first, best = 0, -math.inf
     if resume:
         state = torch.load(resume, map_location="cpu", weights_only=True)
-        if state["model_config"] != model.config.to_dict():
+        previous_manifest_hash = state["config"].get("manifest_sha256")
+        if previous_manifest_hash and previous_manifest_hash != manifest_hash:
+            raise ValueError("Resume manifest differs from the checkpoint's training data")
+        if ModelConfig(**state["model_config"]).to_dict() != model.config.to_dict():
             raise ValueError("Resume model configuration differs from checkpoint")
         incompatible = model.load_state_dict(state["model"], strict=False)
         if incompatible.unexpected_keys or any(
@@ -185,7 +230,11 @@ def train(config_path, *, resume=None, stop_after=None):
         for group in optimizer.param_groups:
             group["lr"] = lr
         model.train()
-        batch = degrade(clean["rgb"].to(device))
+        batch = degrade(
+            clean["rgb"].to(device),
+            reconstruct_highlights=config.get("reconstruct_highlights", False),
+            preserve_negative_read_noise=config.get("preserve_negative_read_noise", False),
+        )
         optimizer.zero_grad(set_to_none=True)
         with amp_context(device, amp):
             prediction, auxiliary = model(

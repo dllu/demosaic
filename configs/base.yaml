@@ -1,5 +1,5 @@
 manifest: /mnt/external/demosaic/commons-v1/manifest.jsonl
-run: /mnt/external/demosaic/runs/base-v1
+run: /mnt/external/demosaic/runs/base-v3
 device: cuda
 seed: 42
 steps: 20000
@@ -8,6 +8,8 @@ patch_size: 256
 workers: 2
 cpu_threads: 4
 synthetic_fraction: 0.2
+reconstruct_highlights: true
+preserve_negative_read_noise: true
 lr: 0.0002
 warmup_steps: 200
 checkpoint_every: 500
@@ -22,3 +24,4 @@ model:
   decoder_blocks: [2, 2, 2]
   attention: true
   dino: false
+  camera_conditioning: true
