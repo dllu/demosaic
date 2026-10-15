@@ -63,6 +63,39 @@ classical comparator. It is not the learned V6 model: V6 predicts additional
 corrections using the restoration network and DINO features. Historical suites
 predating this comparator retain their original source snapshots and method lists.
 
+New quality runs use channels-last CUDA weights and inputs, matching the tiled
+inference layout, and record neural precision/layout in each model receipt.
+Historical evaluation used contiguous tensors; its archived scores remain
+unchanged. `--precision float16` or `--precision float32` selects another compute
+mode. Compare precision modes with the same layout and observations before
+attributing a difference to numerical precision alone.
+
+For a matched three-precision diagnostic, `scripts/compare_precision.py` freezes
+one checkpoint and uses the same RGGB observations, channels-last layout and
+global IEEE FP32 policy in every mode. It reports paired source-bootstrap
+intervals and a separate ADC-only fine-contrast response check. The latter
+measures changes in neural correction relative to a flat input, not accuracy.
+
+```bash
+uv run python scripts/compare_precision.py /path/to/model.pt \
+  --manifest /path/to/audited/manifest.jsonl --images 16 \
+  --output /mnt/external/demosaic/evaluation/compute-precision
+```
+
+`scripts/diagnose_highlights.py` provides a separate controlled clipping check:
+four HDR scenes (neutral circle, slanted edge, colored emission and detailed
+sign), two white balances and all four Bayer phases. It applies physical sensor
+clipping and the same 16-bit ADC/noise generator as the suite. It freezes
+checkpoints, runs the requested inference precision/layout, and records the
+same boundary-ring metrics, individual cases and a visual comparison. Its
+32 cases per model complement the photographic suite.
+
+```bash
+uv run --extra eval python scripts/diagnose_highlights.py /path/to/model.pt \
+  --rawnind /mnt/external/demosaic/references/rawnind \
+  --output /mnt/external/demosaic/evaluation/highlight-boundaries
+```
+
 The 24k-source training config monitors 16 native validation crops across all
 28 CFA/condition cases, and selects EMA checkpoints by balanced rendered PSNR.
 It still logs the older single-condition diagnostic. The panel is a training

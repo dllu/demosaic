@@ -1,0 +1,76 @@
+{
+  "step": 20000,
+  "checkpoint_sha256": "ba3e0e05a5b2e26b348c5edfc94559267b59a5e48256d0a236464f74e5d8f761",
+  "model_config": {
+    "width": 32,
+    "encoder_blocks": [
+      2,
+      2,
+      4
+    ],
+    "middle_blocks": 6,
+    "decoder_blocks": [
+      2,
+      2,
+      2
+    ],
+    "attention": true,
+    "dino": true,
+    "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+    "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+    "camera_conditioning": true,
+    "noise_modulation": true,
+    "physical_fp32": true,
+    "baseline": "wiener-malvar",
+    "prior_window": 7
+  },
+  "shot": 2e-05,
+  "read": 1.6e-09,
+  "megapixels": 101.995852,
+  "seconds": 36.68944790400565,
+  "end_to_end_seconds": 57.334293582011014,
+  "tile_seconds": 36.5816030530259,
+  "compute_transfer_seconds": 36.15774387959391,
+  "blend_seconds": 0.3440290307626128,
+  "tiles": 520,
+  "tile": 512,
+  "overlap": 64,
+  "batch_size": 8,
+  "compute_precision": "float16",
+  "memory_format": "channels_last",
+  "peak_cuda_gb": 0.82000128,
+  "camera": "GFX100S",
+  "iso": 100,
+  "pattern": "RGGB",
+  "tiff_checks": [
+    {
+      "space": "linear",
+      "shape": [
+        8746,
+        11662,
+        3
+      ],
+      "dtype": "uint16",
+      "bits": 16,
+      "icc": false,
+      "bytes": 611975976,
+      "unique_values_in_sample": 24296,
+      "off_8bit_grid_values_in_sample": 195869
+    },
+    {
+      "space": "srgb",
+      "shape": [
+        8746,
+        11662,
+        3
+      ],
+      "dtype": "uint16",
+      "bits": 16,
+      "icc": true,
+      "bytes": 611976568,
+      "unique_values_in_sample": 22584,
+      "off_8bit_grid_values_in_sample": 195831
+    }
+  ],
+  "timing_caveat": "Concurrent training and quality suite; not an idle speed benchmark."
+}

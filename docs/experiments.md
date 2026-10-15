@@ -253,3 +253,94 @@ memory was 0.820 GB; host RAW/output arrays are additional shared-DRAM allocatio
 The idle, warmed step-5000 100 MP benchmark takes 12.767 s, excluding decode,
 checkpoint loading and encoding. Compiler acceleration is being evaluated
 separately with explicit numerical comparisons.
+
+## Full V6 step-20000 validation
+
+The paired 427-photo, four-CFA, seven-condition comparison is complete. It uses
+the exact V6 step-20000 and V4 step-30000 EMA snapshots; the latter was deliberately
+stopped before its planned 100k endpoint. All methods share observations and
+physical color/metric conventions. The learned models use historical contiguous
+BF16 inference in this suite. Hashes, protocol, per-condition scores and paired
+intervals are retained in
+[results/prior20k-vs-main30k.json](results/prior20k-vs-main30k.json).
+
+| Method | Camera-linear PSNR | Rendered PSNR | Rendered SSIM |
+| --- | ---: | ---: | ---: |
+| V6 variance-prior DINO, step 20000 | 37.654 | 30.919 | 0.9105 |
+| V4 DINO, step 30000 | 36.431 | 30.373 | 0.9006 |
+| Variance prior + Malvar, no learned correction | 35.055 | 29.297 | 0.8881 |
+| Malvar 2004, pre-WB | 34.194 | 28.539 | 0.8395 |
+| RawNIND, global CFA gain | 31.217 | 26.671 | 0.7872 |
+
+V6 leads V4 by 0.5458 dB rendered PSNR (source-bootstrap 95% interval
+0.4906–0.6006), 1.2226 dB camera-linear PSNR (1.1746–1.2700), and 0.00982
+SSIM (0.00832–0.01121). These recipes differ in initialization, data, baseline,
+curriculum and training history; these gains are not a causal DINO ablation.
+
+| Condition | V6 PSNR / SSIM | RawNIND PSNR / SSIM |
+| --- | ---: | ---: |
+| ADC only | 31.181 / 0.9391 | 26.265 / 0.7894 |
+| ISO 100 prior | 31.306 / 0.9385 | 26.260 / 0.7890 |
+| ISO 1600 prior | 30.967 / 0.9225 | 26.192 / 0.7836 |
+| ISO 12800 prior | 29.094 / 0.8499 | 25.795 / 0.7594 |
+| Shadows | 35.867 / 0.9046 | 33.510 / 0.8524 |
+| Highlights | 27.682 / 0.9202 | 22.577 / 0.7590 |
+| Earlier noise condition | 30.335 / 0.8985 | 26.097 / 0.7773 |
+
+V6 closes the earlier ADC-only photographic deficit to Malvar (29.923/0.9294).
+It also improves photographic highlight-boundary chroma error to 0.02591 versus
+V4's 0.02654 and RawNIND's 0.03242. However, on the separate 16 procedural
+stress sources V6 trails V4 by 0.6586 dB and 0.01592 SSIM. The older network's
+advantage on these patterns remains a quality concern while V6 continues training.
+
+A complementary 32-case physical-clipping diagnostic uses four HDR scenes,
+two white balances, all four CFAs and 256×512 sensor crops. With channels-last
+BF16 inference, V6 reaches 36.258 dB and boundary chroma MAE 0.01030 versus
+RawNIND's 26.104 dB/0.03598. V4 has lower boundary chroma MAE (0.00890), despite
+lower overall PSNR (34.437 dB). The neutral scenes show visibly cleaner white
+highlights than RawNIND, but this does not establish universal absence of fringing.
+Exact records are in
+[results/prior20k-highlight-boundaries.json](results/prior20k-highlight-boundaries.json).
+
+The step-20000 real night crops substantially reduce V4's grain; RawNIND still
+smooths flat pavement more strongly. On separate Q2 rock texture, a7R II
+airplane windows/clipped fuselage, GFX50R architecture and GFX100S streetcar
+crops, FP16 V6 retains fine edges without the conspicuous magenta spot visible
+in the RawNIND fuselage crop. These are local visual observations without clean
+ground truth, using disclosed nominal noise priors. Personal photos remain
+read-only and outside training and Git.
+
+## Inference precision diagnostic
+
+Using the same frozen V6 step-20000 model, 16 native validation photos, seven
+conditions and RGGB observations, a matched channels-last IEEE comparison gives
+31.8760 dB/0.924986 for BF16, 31.8960/0.925621 for FP16 and 31.8961/0.925639
+for FP32. A four-DN sinusoid around linear gray 0.5 changes the learned correction
+by RMS 1.10e-8 in BF16, 8.95e-6 in FP16 and 3.08e-6 in FP32. This measures
+response, not accuracy: the FP32 physical interpolation path already preserves
+fine contrasts in every mode. The experiment is executable through
+`scripts/compare_precision.py`; its receipt and paired intervals are in
+[results/prior20k-compute-precision.json](results/prior20k-compute-precision.json).
+
+The full FP16 channels-last suite reaches 30.9407 dB/0.911183 on 427 photos and
+29.9172/0.901137 on 16 procedural sources. See
+[results/prior20k-fp16.json](results/prior20k-fp16.json). The BF16 full suite above
+used contiguous layout, so the small difference combines precision and layout;
+a matched channels-last comparison now isolates the precision effect. FP16
+improves photo PSNR by 0.02181 dB (source-bootstrap 95% interval
+0.01967–0.02481) and SSIM by 0.000723 (0.000661–0.000783). It improves mean
+PSNR and SSIM in every declared condition, and improves the separate procedural
+set by 0.00865 dB/0.000333. This modest gain does not close V6's gap to V4 on
+procedural patterns. Exact receipts and intervals are in
+[results/prior20k-fp16-vs-bf16.json](results/prior20k-fp16-vs-bf16.json).
+BF16 remains the historical default and active training compute mode; use
+`--precision float16` to reproduce the improved V6 inference results.
+
+FP16 step-20000 also processed a full 8746×11662 GFX100S streetcar RAW into
+camera RGB16 and ICC-tagged sRGB16 TIFFs. Both files have genuine 16-bit tags;
+a 256×256 sample has over 22000 unique values and over 195000 channel values
+off the 8-bit grid. Restoration took 36.689 s and end-to-end processing 57.334 s
+with training and the quality suite running concurrently. These times demonstrate
+capability and are not an idle speed benchmark. The full-frame preview and
+native crops were inspected locally. The non-private receipt is in
+[results/prior20k-fp16-102mp.json](results/prior20k-fp16-102mp.json).

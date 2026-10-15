@@ -1,0 +1,5018 @@
+{
+  "format_version": 1,
+  "protocol": {
+    "patterns": [
+      "RGGB",
+      "BGGR",
+      "GRBG",
+      "GBRG"
+    ],
+    "white_balance": [
+      2.0,
+      1.0,
+      1.5
+    ],
+    "camera_to_srgb": [
+      [
+        1.1176470588,
+        -0.0588235294,
+        -0.0588235294
+      ],
+      [
+        -0.0588235294,
+        1.1176470588,
+        -0.0588235294
+      ],
+      [
+        -0.0588235294,
+        -0.0588235294,
+        1.1176470588
+      ]
+    ],
+    "border": 8,
+    "seed": 20261014,
+    "conditions": [
+      {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      {
+        "name": "iso1600-prior",
+        "shot": 0.00032,
+        "read": 4.096e-07,
+        "exposure": 1.0
+      },
+      {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      {
+        "name": "shadows",
+        "shot": 0.00064,
+        "read": 1.6384e-06,
+        "exposure": 0.125
+      },
+      {
+        "name": "highlights",
+        "shot": 8e-05,
+        "read": 2.56e-08,
+        "exposure": 4.0
+      },
+      {
+        "name": "legacy-noise",
+        "shot": 0.001,
+        "read": 1e-06,
+        "exposure": 1.0
+      }
+    ]
+  },
+  "models": [
+    {
+      "label": "0:dino-prior-44732-v6:step-20000",
+      "source": "/mnt/external/demosaic/runs/dino-prior-44732-v6/last.pt",
+      "training_run": "/mnt/external/demosaic/runs/dino-prior-44732-v6",
+      "snapshot": "/mnt/external/demosaic/evaluation/prior-v6-mid-vs-main30k/weights/weights-ba3e0e05a5b2e26b348c5edfc94559267b59a5e48256d0a236464f74e5d8f761.pt",
+      "sha256": "ba3e0e05a5b2e26b348c5edfc94559267b59a5e48256d0a236464f74e5d8f761",
+      "step": 20000,
+      "model_config": {
+        "width": 32,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+        "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+        "camera_conditioning": true,
+        "noise_modulation": true,
+        "physical_fp32": true,
+        "baseline": "wiener-malvar",
+        "prior_window": 7
+      },
+      "effective_model_config": {
+        "width": 32,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+        "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+        "camera_conditioning": true,
+        "noise_modulation": true,
+        "physical_fp32": true,
+        "baseline": "wiener-malvar",
+        "prior_window": 7
+      },
+      "training_manifest_sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a"
+    },
+    {
+      "label": "1:dino-noise-24576-v4:step-30000",
+      "source": "/mnt/external/demosaic/runs/dino-noise-24576-v4/last.pt",
+      "training_run": "/mnt/external/demosaic/runs/dino-noise-24576-v4",
+      "snapshot": "/mnt/external/demosaic/evaluation/prior-v6-mid-vs-main30k/weights/weights-f308530b37a196a10398b667c87e6620f0198203f9e01173e353e234e839ad97.pt",
+      "sha256": "f308530b37a196a10398b667c87e6620f0198203f9e01173e353e234e839ad97",
+      "step": 30000,
+      "model_config": {
+        "width": 32,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+        "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+        "camera_conditioning": true,
+        "noise_modulation": true,
+        "physical_fp32": true
+      },
+      "effective_model_config": {
+        "width": 32,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+        "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+        "camera_conditioning": true,
+        "noise_modulation": true,
+        "physical_fp32": true,
+        "baseline": "bilinear",
+        "prior_window": 7
+      },
+      "training_manifest_sha256": "369623dde3c671b6ca65c8d4ddcb58b071d4de7496cf27398c70a6192060fa78"
+    },
+    {
+      "label": "RawNIND:CFA-LS",
+      "directory": "/mnt/external/demosaic/references/rawnind",
+      "weight_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+      "gain": "observed-CFA-least-squares",
+      "precision": "float32"
+    },
+    {
+      "label": "RawNIND:CFA-channel",
+      "directory": "/mnt/external/demosaic/references/rawnind",
+      "weight_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+      "gain": "per-channel-observed-CFA-least-squares",
+      "precision": "float32"
+    }
+  ],
+  "manifest": "/mnt/external/demosaic/evaluation/manifests/common-8192-44732-val-v1.jsonl",
+  "manifest_sha256": "7cc76f460019582eeec519b332e9f9f53e030bdf579e2f27b915916a741cce0d",
+  "split": "val",
+  "sources": 427,
+  "synthetic_sources": 16,
+  "patch_size": 256,
+  "native_crop": true,
+  "batch_size": 4,
+  "adc_bits": 16,
+  "adc_black": 0.03,
+  "classical_baselines": [
+    "Bilinear:IEEE-FP32",
+    "Malvar2004:white-balanced:IEEE-FP32",
+    "Wiener7+Malvar2004:white-balanced:IEEE-FP32"
+  ],
+  "torch": "2.14.1+cu130",
+  "inference_source_sha256": "a6901715d812a1eea88e444ec742382700b16aea39040059b92a34a14069262e",
+  "inference_source_snapshot": "/mnt/external/demosaic/evaluation/prior-v6-mid-vs-main30k/source/a6901715d812a1eea88e444ec742382700b16aea39040059b92a34a14069262e",
+  "observation_and_metrics_precision": "IEEE FP32",
+  "noise_pairing": "per-source/condition/CFA seed; independent of model and batch size",
+  "overall": [
+    {
+      "model": "0:dino-prior-44732-v6:step-20000",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 37.6538941738158,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 30.918877299153394,
+          "count": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.9104603701369266,
+          "count": 427
+        },
+        "chroma_mae": {
+          "mean": 0.01310248971723618,
+          "count": 427
+        },
+        "gradient_mae": {
+          "mean": 0.021335828227869648,
+          "count": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.025911476040491835,
+          "count": 425
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.030990542400030276,
+          "count": 425
+        },
+        "shadow_linear_psnr": {
+          "mean": 43.7429023550683,
+          "count": 426
+        }
+      }
+    },
+    {
+      "model": "0:dino-prior-44732-v6:step-20000",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 34.00956382070269,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 29.90860230582101,
+          "count": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.9008035780861974,
+          "count": 16
+        },
+        "chroma_mae": {
+          "mean": 0.014929636271907448,
+          "count": 16
+        },
+        "gradient_mae": {
+          "mean": 0.019989669201355094,
+          "count": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03414193666055022,
+          "count": 16
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.0356316019227961,
+          "count": 16
+        },
+        "shadow_linear_psnr": {
+          "mean": 45.75369051524571,
+          "count": 14
+        }
+      }
+    },
+    {
+      "model": "1:dino-noise-24576-v4:step-30000",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 36.431312801447866,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 30.373059742902985,
+          "count": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.9006449730251098,
+          "count": 427
+        },
+        "chroma_mae": {
+          "mean": 0.013754657410230983,
+          "count": 427
+        },
+        "gradient_mae": {
+          "mean": 0.022077736112501745,
+          "count": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.026544118120458305,
+          "count": 425
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.0326924667925478,
+          "count": 425
+        },
+        "shadow_linear_psnr": {
+          "mean": 42.349805084539156,
+          "count": 426
+        }
+      }
+    },
+    {
+      "model": "1:dino-noise-24576-v4:step-30000",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 34.53650963306427,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 30.567249706813268,
+          "count": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.9167249109596014,
+          "count": 16
+        },
+        "chroma_mae": {
+          "mean": 0.014521856160302247,
+          "count": 16
+        },
+        "gradient_mae": {
+          "mean": 0.01687778056085725,
+          "count": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03016649108321872,
+          "count": 16
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03063106451785037,
+          "count": 16
+        },
+        "shadow_linear_psnr": {
+          "mean": 45.7846040725708,
+          "count": 14
+        }
+      }
+    },
+    {
+      "model": "Bilinear",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 32.33166211725837,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 27.554808643598864,
+          "count": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.8117023673134132,
+          "count": 427
+        },
+        "chroma_mae": {
+          "mean": 0.021580360622923015,
+          "count": 427
+        },
+        "gradient_mae": {
+          "mean": 0.02888960624145773,
+          "count": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03780230302674075,
+          "count": 425
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.042343216813728664,
+          "count": 425
+        },
+        "shadow_linear_psnr": {
+          "mean": 38.53799434950654,
+          "count": 426
+        }
+      }
+    },
+    {
+      "model": "Bilinear",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 30.734240976827486,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 28.946296236344743,
+          "count": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.8488764657772013,
+          "count": 16
+        },
+        "chroma_mae": {
+          "mean": 0.020149018651864026,
+          "count": 16
+        },
+        "gradient_mae": {
+          "mean": 0.02373580361563654,
+          "count": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03039698663536304,
+          "count": 16
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.030082379887850647,
+          "count": 16
+        },
+        "shadow_linear_psnr": {
+          "mean": 44.00048637390137,
+          "count": 14
+        }
+      }
+    },
+    {
+      "model": "Malvar2004:WB",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 34.19429575499582,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 28.538646323100984,
+          "count": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.8395195346277029,
+          "count": 427
+        },
+        "chroma_mae": {
+          "mean": 0.018675397006045473,
+          "count": 427
+        },
+        "gradient_mae": {
+          "mean": 0.02758123904535545,
+          "count": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03286145584424958,
+          "count": 425
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03580864751353111,
+          "count": 425
+        },
+        "shadow_linear_psnr": {
+          "mean": 43.070076897643744,
+          "count": 426
+        }
+      }
+    },
+    {
+      "model": "Malvar2004:WB",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 29.52271144092083,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 27.338598004409242,
+          "count": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.8075417624786496,
+          "count": 16
+        },
+        "chroma_mae": {
+          "mean": 0.02092033063620745,
+          "count": 16
+        },
+        "gradient_mae": {
+          "mean": 0.029947503563952135,
+          "count": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03903245566568027,
+          "count": 16
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.04086002269177698,
+          "count": 16
+        },
+        "shadow_linear_psnr": {
+          "mean": 44.19787904194423,
+          "count": 14
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 31.217053976295063,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 26.670839643988888,
+          "count": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.7871659583483464,
+          "count": 427
+        },
+        "chroma_mae": {
+          "mean": 0.015599437437142092,
+          "count": 427
+        },
+        "gradient_mae": {
+          "mean": 0.029549123115454465,
+          "count": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03242104872692531,
+          "count": 425
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.06217021038655337,
+          "count": 425
+        },
+        "shadow_linear_psnr": {
+          "mean": 36.1996365095075,
+          "count": 426
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 27.499999799898692,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 24.974814321313584,
+          "count": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.7204116798072522,
+          "count": 16
+        },
+        "chroma_mae": {
+          "mean": 0.028688606159578613,
+          "count": 16
+        },
+        "gradient_mae": {
+          "mean": 0.028517726994843024,
+          "count": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.062057807923216995,
+          "count": 16
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.07009469814171704,
+          "count": 16
+        },
+        "shadow_linear_psnr": {
+          "mean": 40.93958967072623,
+          "count": 14
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-channel",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 31.207222289646616,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 26.658587821393795,
+          "count": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.7870282375441622,
+          "count": 427
+        },
+        "chroma_mae": {
+          "mean": 0.015743470337419217,
+          "count": 427
+        },
+        "gradient_mae": {
+          "mean": 0.029553567989239065,
+          "count": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03282166466963769,
+          "count": 425
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.062397520184932345,
+          "count": 425
+        },
+        "shadow_linear_psnr": {
+          "mean": 36.18219264172453,
+          "count": 426
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-channel",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 27.51059103650706,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 24.986111815486634,
+          "count": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.7204994786796826,
+          "count": 16
+        },
+        "chroma_mae": {
+          "mean": 0.02872100202616171,
+          "count": 16
+        },
+        "gradient_mae": {
+          "mean": 0.02850929997553716,
+          "count": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.06247517394561631,
+          "count": 16
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.07022985158643374,
+          "count": 16
+        },
+        "shadow_linear_psnr": {
+          "mean": 40.929200002125334,
+          "count": 14
+        }
+      }
+    },
+    {
+      "model": "Wiener7+Malvar2004:WB",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 35.054602692062616,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 29.29697169616255,
+          "count": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.8880977090853199,
+          "count": 427
+        },
+        "chroma_mae": {
+          "mean": 0.01679573952386133,
+          "count": 427
+        },
+        "gradient_mae": {
+          "mean": 0.02434521615387765,
+          "count": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.0325057805019691,
+          "count": 425
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03534936393200255,
+          "count": 425
+        },
+        "shadow_linear_psnr": {
+          "mean": 43.53058949957059,
+          "count": 426
+        }
+      }
+    },
+    {
+      "model": "Wiener7+Malvar2004:WB",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 30.20364397764206,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 27.951185179608206,
+          "count": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.8604902879201941,
+          "count": 16
+        },
+        "chroma_mae": {
+          "mean": 0.019115856280612725,
+          "count": 16
+        },
+        "gradient_mae": {
+          "mean": 0.026109456135080627,
+          "count": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.0389688541792566,
+          "count": 16
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.040459310273096585,
+          "count": 16
+        },
+        "shadow_linear_psnr": {
+          "mean": 44.785987854003906,
+          "count": 14
+        }
+      }
+    }
+  ],
+  "artifact_directory": "/mnt/external/demosaic/evaluation/prior-v6-mid-vs-main30k",
+  "learned_compute_precision": "bfloat16",
+  "learned_memory_format": "contiguous (historical evaluator)",
+  "per_condition": [
+    {
+      "model": "0:dino-prior-44732-v6:step-20000",
+      "kind": "photo",
+      "condition": "adc-only",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 37.75922524119429,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 31.18114325815956,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.9390788261868077,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.012644158903440129,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.01942623708701411,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.024000131142605886,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.027210788890991707,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 43.92025414840231,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "0:dino-prior-44732-v6:step-20000",
+      "kind": "photo",
+      "condition": "highlights",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 29.52872726118816,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 27.68234250472915,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.9201917640289043,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.01789165767596665,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.026309915650436572,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.030795720798675628,
+          "sources": 425
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.035263911915449975,
+          "sources": 425
+        },
+        "shadow_linear_psnr": {
+          "mean": 36.938056742138876,
+          "sources": 391
+        }
+      }
+    },
+    {
+      "model": "0:dino-prior-44732-v6:step-20000",
+      "kind": "photo",
+      "condition": "iso100-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 37.712356005675346,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 31.305895442426625,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.9384868242003599,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.012427966107409316,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.019611771748993118,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.023615925639208755,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.027293744649426317,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 43.87562170568502,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "0:dino-prior-44732-v6:step-20000",
+      "kind": "photo",
+      "condition": "iso12800-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 34.53175018319481,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 29.094465356241624,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.8499134670445735,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.015366663625632878,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.02689918071746966,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.025991999329920162,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03557743060607779,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 41.42415389587295,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "0:dino-prior-44732-v6:step-20000",
+      "kind": "photo",
+      "condition": "iso1600-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 36.97134601204401,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 30.966523578072042,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.922520569916073,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.012924057365200466,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.021301075537793722,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.02392207674102037,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.02905097788030092,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 43.430246972812796,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "0:dino-prior-44732-v6:step-20000",
+      "kind": "photo",
+      "condition": "legacy-noise",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 35.97634353682364,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 30.334717141939826,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.8984684500258756,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.013710239819802815,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.023415939157051133,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.02462162749991768,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03148441471739562,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 42.79710950154178,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "0:dino-prior-44732-v6:step-20000",
+      "kind": "photo",
+      "condition": "shadows",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 51.09751097659037,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 35.867053812504935,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.9045626895558918,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.006752684523200996,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.012386677696329238,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "shadow_linear_psnr": {
+          "mean": 53.12140556568271,
+          "sources": 426
+        }
+      }
+    },
+    {
+      "model": "0:dino-prior-44732-v6:step-20000",
+      "kind": "synthetic",
+      "condition": "adc-only",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 33.00253248214722,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 29.66420716047287,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.9208136890083551,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.01323198853424401,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.0202180033447803,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03163040635020783,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.032194756514703236,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "0:dino-prior-44732-v6:step-20000",
+      "kind": "synthetic",
+      "condition": "highlights",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 27.20595270395279,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 27.957075029611588,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.8880256675183773,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.018433530603942927,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.016540650714887306,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.0396434083980109,
+          "sources": 7
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.04068391869908997,
+          "sources": 7
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "0:dino-prior-44732-v6:step-20000",
+      "kind": "synthetic",
+      "condition": "iso100-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 33.1585014462471,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 29.78060954809189,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.9223727928474545,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.013495285500539467,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.02021864352718694,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.031803886561344065,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03242397750727832,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "0:dino-prior-44732-v6:step-20000",
+      "kind": "synthetic",
+      "condition": "iso12800-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 31.25964707136154,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 28.26783138513565,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.8605532553046942,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.018982991256052628,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.0259892497851979,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03791203171325227,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.04128728880702207,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "0:dino-prior-44732-v6:step-20000",
+      "kind": "synthetic",
+      "condition": "iso1600-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 32.930112063884735,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 29.590674221515656,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.9116587052121758,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.014916109015757684,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.021532881408347748,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03304485747745882,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.034353780055729054,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "0:dino-prior-44732-v6:step-20000",
+      "kind": "synthetic",
+      "condition": "legacy-noise",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 32.32254761457443,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 29.12099391222,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.8931246027350426,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.016556473870878108,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.02323570681619458,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03480225599681338,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.036998693249188364,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "0:dino-prior-44732-v6:step-20000",
+      "kind": "synthetic",
+      "condition": "shadows",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 48.18765336275101,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 34.97882488369942,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.909076333977282,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.00889107512193732,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.012192548812890891,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "shadow_linear_psnr": {
+          "mean": 45.75369051524571,
+          "sources": 14
+        }
+      }
+    },
+    {
+      "model": "1:dino-noise-24576-v4:step-30000",
+      "kind": "photo",
+      "condition": "adc-only",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 35.50665891254255,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 30.104260006888968,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.9194550271335754,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.013705159141627562,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.021540844817351402,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.025713295279607428,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.029957656153098883,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 40.862619482121374,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "1:dino-noise-24576-v4:step-30000",
+      "kind": "photo",
+      "condition": "highlights",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 27.901137551881668,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 27.1677502335095,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.9116010884350859,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.01820355044875923,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.026944397240545898,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.031273356080876995,
+          "sources": 425
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.036788033456815514,
+          "sources": 425
+        },
+        "shadow_linear_psnr": {
+          "mean": 35.215396681709976,
+          "sources": 391
+        }
+      }
+    },
+    {
+      "model": "1:dino-noise-24576-v4:step-30000",
+      "kind": "photo",
+      "condition": "iso100-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 36.035517797537096,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 30.64266158378655,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.9275594684502559,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.012807478636884364,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.021023010721635205,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.02406625146800021,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.02901373030252802,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 42.06684760440071,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "1:dino-noise-24576-v4:step-30000",
+      "kind": "photo",
+      "condition": "iso12800-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 34.039435461477595,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 28.91346653172227,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.8462864263484852,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.016034665612386107,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.026330478348446446,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.026408780170446733,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.036459902385881135,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 40.76033678594625,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "1:dino-noise-24576-v4:step-30000",
+      "kind": "photo",
+      "condition": "iso1600-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 35.73728345875438,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 30.446646784172682,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.9146822293832095,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.013247330530041684,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.022178346219958425,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.024158797931257574,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.030598457548293774,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 42.214569519150935,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "1:dino-noise-24576-v4:step-30000",
+      "kind": "photo",
+      "condition": "legacy-noise",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 35.10705399792423,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 29.922918625681966,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.8910310498724497,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.014281659077338228,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.023868693812015254,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.0248695695701734,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03277754342593884,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 41.86376561196345,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "1:dino-noise-24576-v4:step-30000",
+      "kind": "photo",
+      "condition": "shadows",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 50.69210243001755,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 35.41371443455895,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.8938995215527068,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.008002758424579705,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.012658381627559601,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "shadow_linear_psnr": {
+          "mean": 52.679174481423246,
+          "sources": 426
+        }
+      }
+    },
+    {
+      "model": "1:dino-noise-24576-v4:step-30000",
+      "kind": "synthetic",
+      "condition": "adc-only",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 34.031410813331604,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 30.62782984972,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.9429520899429917,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.012416666228091344,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.016441241168649867,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.026268508944970865,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.025719247486752767,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "1:dino-noise-24576-v4:step-30000",
+      "kind": "synthetic",
+      "condition": "highlights",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 26.626358777284622,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 28.110203623771667,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.9120075069367886,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.018340947368415073,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.013604543968540384,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03541175269388727,
+          "sources": 7
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03459439433312842,
+          "sources": 7
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "1:dino-noise-24576-v4:step-30000",
+      "kind": "synthetic",
+      "condition": "iso100-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 34.35681000351906,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 30.908717811107635,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.9442402515560389,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.012197574018500745,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.01615424462943338,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.027217929329102237,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.026933406402046483,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "1:dino-noise-24576-v4:step-30000",
+      "kind": "synthetic",
+      "condition": "iso12800-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 31.685374796390533,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 28.792366087436676,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.8699882691726089,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.019133423353196122,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.02293327152437996,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.034926807430262365,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03758467272079239,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "1:dino-noise-24576-v4:step-30000",
+      "kind": "synthetic",
+      "condition": "iso1600-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 33.82482632994652,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 30.498166352510452,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.9298397609964013,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.013973913904919755,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.01782036897202488,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.02916858089156449,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.0297592122030134,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "1:dino-noise-24576-v4:step-30000",
+      "kind": "synthetic",
+      "condition": "legacy-noise",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 32.9736342728138,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 29.842819213867188,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.9084046939387918,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.016028434140025638,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.01984972682839725,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.031380446550125875,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03287863560641805,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "1:dino-noise-24576-v4:step-30000",
+      "kind": "synthetic",
+      "condition": "shadows",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 48.25715243816376,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 35.19064500927925,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.9096418041735888,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.009562034108967055,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.011341066834575031,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "shadow_linear_psnr": {
+          "mean": 45.7846040725708,
+          "sources": 14
+        }
+      }
+    },
+    {
+      "model": "Bilinear",
+      "kind": "photo",
+      "condition": "adc-only",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 33.48211772101266,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 28.11853609933786,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.8779960818745771,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.0168591108909435,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.025993484591825843,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03364750232529763,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.037776995199768,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 38.01417913976705,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "Bilinear",
+      "kind": "photo",
+      "condition": "highlights",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 15.487127313010866,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 24.5888513390856,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.8651414070042849,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.02760309566208216,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.032054239089897435,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.04274378531064619,
+          "sources": 425
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.045868334779515865,
+          "sources": 425
+        },
+        "shadow_linear_psnr": {
+          "mean": 30.755940028773548,
+          "sources": 391
+        }
+      }
+    },
+    {
+      "model": "Bilinear",
+      "kind": "photo",
+      "condition": "iso100-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 33.44352445222734,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 28.081338847828135,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.8755068247156345,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.01722612781442655,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.026299724866190612,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.033825015450800154,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03814398074064845,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 38.00022693512575,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "Bilinear",
+      "kind": "photo",
+      "condition": "iso12800-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 31.021275661030753,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 25.42855506088471,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.665554082749599,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.030841129317779346,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.038846754247597495,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.04112941339075313,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.048907232867017134,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 36.716429311149525,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "Bilinear",
+      "kind": "photo",
+      "condition": "iso1600-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 33.015292174363864,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 27.672234731759062,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.8397418328973113,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.019947260811780984,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.028752182431211498,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.035252417527707455,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.040532580891355745,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 37.846589035582994,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "Bilinear",
+      "kind": "photo",
+      "condition": "legacy-noise",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 32.29350362281889,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 27.005030503596856,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.7825561812457211,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.023433269839079514,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.03199039342288643,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03731352761940304,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.043632103889486046,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 37.58973852193581,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "Bilinear",
+      "kind": "photo",
+      "condition": "shadows",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 47.57879387634421,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 31.989113922699833,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.7754201607067636,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.015152530024369058,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.018290465040594794,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "shadow_linear_psnr": {
+          "mean": 49.95883393847327,
+          "sources": 426
+        }
+      }
+    },
+    {
+      "model": "Bilinear",
+      "kind": "synthetic",
+      "condition": "adc-only",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 32.83278611302376,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 29.663724839687347,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.9095487678423524,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.014702490152558312,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.02188206211940269,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.023628469847608358,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.022512678561421733,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "Bilinear",
+      "kind": "synthetic",
+      "condition": "highlights",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 11.180090561509132,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 26.183269560337067,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.9144157031551003,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.026679482412873767,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.013410723315246287,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03896939801052213,
+          "sources": 7
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03579367597454361,
+          "sources": 7
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "Bilinear",
+      "kind": "synthetic",
+      "condition": "iso100-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 32.783799320459366,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 29.628753304481506,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.9067457411438227,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.015645555999071803,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.02281652414239943,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.024328239688960213,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.023427106828118365,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "Bilinear",
+      "kind": "synthetic",
+      "condition": "iso12800-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 29.40837264060974,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 26.841558575630188,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.7146963151171803,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.02811762414057739,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.03503820643527433,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03467520710546523,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.037208497834702335,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "Bilinear",
+      "kind": "synthetic",
+      "condition": "iso1600-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 32.14626187086105,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 29.146363854408264,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.871775952167809,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.018871987384045497,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.0260124170454219,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.026849277239913743,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.027028365720373888,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "Bilinear",
+      "kind": "synthetic",
+      "condition": "legacy-noise",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 31.076460540294647,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 28.294865161180496,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.8118592873215675,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.022490772520541213,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.02956793511111755,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.029785497191672526,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.031041052386475105,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "Bilinear",
+      "kind": "synthetic",
+      "condition": "shadows",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 45.7119157910347,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 32.865538358688354,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.8130934936925769,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.014535217953380197,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.017422757140593603,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "shadow_linear_psnr": {
+          "mean": 44.00048637390137,
+          "sources": 14
+        }
+      }
+    },
+    {
+      "model": "Malvar2004:WB",
+      "kind": "photo",
+      "condition": "adc-only",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 37.171549938880865,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 29.92250422180676,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.9293536434617478,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.01462842415210497,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.02126594483052542,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.028283728684211876,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.029956686054356398,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 43.75240592124327,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "Malvar2004:WB",
+      "kind": "photo",
+      "condition": "highlights",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 15.65548794107638,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 25.42136126770627,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.8998615194539554,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.025949723631976743,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.030023588083932507,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03959761639673482,
+          "sources": 425
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.04056563097490545,
+          "sources": 425
+        },
+        "shadow_linear_psnr": {
+          "mean": 36.80429453861988,
+          "sources": 391
+        }
+      }
+    },
+    {
+      "model": "Malvar2004:WB",
+      "kind": "photo",
+      "condition": "iso100-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 37.05027481878669,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 29.851433768484576,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.9255617270704175,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.014912908250521606,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.021817713183423383,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.02841837376857303,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03038727926165339,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 43.70756193152014,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "Malvar2004:WB",
+      "kind": "photo",
+      "condition": "iso12800-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 31.84800467278974,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 25.614777199836748,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.6742633721099804,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.025863238599149192,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.04201453454155623,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.034315206139679935,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.04331480310756271,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 40.226788336375975,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "Malvar2004:WB",
+      "kind": "photo",
+      "condition": "iso1600-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 35.8581782827891,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 29.05868799960027,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.8764740039858383,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.017124702439117803,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.02598074549101337,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.029549985895548962,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03324604951105696,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 43.174946476828374,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "Malvar2004:WB",
+      "kind": "photo",
+      "condition": "legacy-noise",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 34.204915357138574,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 27.87979668364871,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.8043787353770236,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.01999052173831005,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.03136976169306671,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03123008516514516,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03697399411871398,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 42.392191262740006,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "Malvar2004:WB",
+      "kind": "photo",
+      "condition": "shadows",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 47.5716592735094,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 32.02196312062355,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.7667437409349571,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.012258260231137939,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.02059638549397052,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "shadow_linear_psnr": {
+          "mean": 50.82120800689912,
+          "sources": 426
+        }
+      }
+    },
+    {
+      "model": "Malvar2004:WB",
+      "kind": "synthetic",
+      "condition": "adc-only",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 31.367926090955734,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 27.886441320180893,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.8866722024977207,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.01652880251276656,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.025818267953582108,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03430277962858479,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03485642241624494,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "Malvar2004:WB",
+      "kind": "synthetic",
+      "condition": "highlights",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 11.13194452226162,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 25.39042216539383,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.8721060827374458,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.02792031687567942,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.018730275729467394,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.0461758242786995,
+          "sources": 7
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.04451678147805589,
+          "sources": 7
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "Malvar2004:WB",
+      "kind": "synthetic",
+      "condition": "iso100-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 31.324265152215958,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 27.85150694847107,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.8817678820341825,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.017333253177639563,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.027186027669813484,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03469294546327243,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03557083220221102,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "Malvar2004:WB",
+      "kind": "synthetic",
+      "condition": "iso12800-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 28.058388620615005,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 25.07374307513237,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.6567939640954137,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.027830232837004587,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.0456637766037602,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.04186219202044109,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.049435080417121455,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "Malvar2004:WB",
+      "kind": "synthetic",
+      "condition": "iso1600-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 30.744366884231567,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 27.36629581451416,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.8321847980841994,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.02008415208547376,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.03194248568615876,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.036270381533540785,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.038813781420079366,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "Malvar2004:WB",
+      "kind": "synthetic",
+      "condition": "legacy-noise",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 29.719219207763672,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 26.517503052949905,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.7595713250339031,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.023119587742257863,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.03733204331365414,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03835356084164232,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.04291839346600076,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "Malvar2004:WB",
+      "kind": "synthetic",
+      "condition": "shadows",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 44.31286960840225,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 31.28427365422249,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.763696082867682,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.013625969222630374,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.02295964799122885,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "shadow_linear_psnr": {
+          "mean": 44.19787904194423,
+          "sources": 14
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "kind": "photo",
+      "condition": "adc-only",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 31.077578107981267,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 26.265460599501743,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.7894256288748436,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.014625055150933038,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.031171544963627264,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.02929589501858326,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.05924278904439219,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 35.20869383609519,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "kind": "photo",
+      "condition": "highlights",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 15.452717181949481,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 22.577472020647285,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.7590009014381737,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.027486003804744703,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.038098145960299194,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.040255587784683,
+          "sources": 425
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.07064756311037962,
+          "sources": 425
+        },
+        "shadow_linear_psnr": {
+          "mean": 27.171127506534155,
+          "sources": 391
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "kind": "photo",
+      "condition": "iso100-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 31.069320649676357,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 26.259539900116394,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.78903907711947,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.0146606617716026,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.031180492258597703,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.02930103250575978,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.05927156129441524,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 35.20602009206448,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "kind": "photo",
+      "condition": "iso12800-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 30.64051407003291,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 25.79477495108611,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.7593644735091464,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.015843842358249885,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.031246905415948694,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.02983600665495526,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.061302483613973766,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 34.81697043382896,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "kind": "photo",
+      "condition": "iso1600-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 30.979013369289994,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 26.192285420464685,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.783631916487245,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.01497760458862457,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.03126072488305054,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.02941885982241513,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.0596166497889622,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 35.17068433086827,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "kind": "photo",
+      "condition": "legacy-noise",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 30.85825979067514,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 26.096824538791488,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.7772576369223048,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.015226947705575485,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.03127155706204095,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.02953373955215438,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.06016993714492547,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 35.09039883231217,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "kind": "photo",
+      "condition": "shadows",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 48.441974664460304,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 33.509520077314534,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.8524420740872412,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.006375946680264356,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.012614491264616898,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "shadow_linear_psnr": {
+          "mean": 49.68276684273017,
+          "sources": 426
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "kind": "synthetic",
+      "condition": "adc-only",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 27.449405133724213,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 24.220473259687424,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.695549753960222,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.02928581186279189,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.03335318440804258,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.06246591825038195,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.06897250989762446,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "kind": "synthetic",
+      "condition": "highlights",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 11.257191628217697,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 22.924301207065582,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.7981720576062799,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.0376257742755115,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.018000051757553592,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.0666995012600507,
+          "sources": 7
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.07902979238757066,
+          "sources": 7
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "kind": "synthetic",
+      "condition": "iso100-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 27.443975269794464,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 24.21975615620613,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.6953552484046668,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.02931802648527082,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.03336457395926118,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.06248977974367639,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.06898583914153278,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "kind": "synthetic",
+      "condition": "iso12800-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 26.958375066518784,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 23.867780208587646,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.679605423938483,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.03135013606515713,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.03362399872276001,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.06463170478430888,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.07115915588413677,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "kind": "synthetic",
+      "condition": "iso1600-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 27.370208978652954,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 24.173920661211014,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.6920201000757515,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.029700664337724447,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.033506029183627106,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.06280381434286635,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.06928054057061672,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "kind": "synthetic",
+      "condition": "legacy-noise",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 27.23169896006584,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 24.07951334118843,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.6867203512229025,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.030260117346188053,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.0336182864557486,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.06344194438618918,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.06993810320273042,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "kind": "synthetic",
+      "condition": "shadows",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 44.789143562316895,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 31.33795541524887,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.7954588234424591,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.013279712744406424,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.014157964476908091,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "shadow_linear_psnr": {
+          "mean": 40.939589670726235,
+          "sources": 14
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-channel",
+      "kind": "photo",
+      "condition": "adc-only",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 31.079628709886894,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 26.264275345366787,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.7894006083595111,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.014667210532798087,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.031169346284731433,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.029372019933978633,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.059255494526192797,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 35.198603642436694,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-channel",
+      "kind": "photo",
+      "condition": "highlights",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 15.347979920251028,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 22.509263088887415,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.7580519396052707,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.028379327082266023,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.038135109052571316,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.04121077832820661,
+          "sources": 425
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.07125584552393241,
+          "sources": 425
+        },
+        "shadow_linear_psnr": {
+          "mean": 27.1437584061147,
+          "sources": 391
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-channel",
+      "kind": "photo",
+      "condition": "iso100-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 31.071402806588022,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 26.258181781902806,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.7890181428724485,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.014702074305169104,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.031178899079714453,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.0293795770971436,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.05928635193820317,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 35.19583412836183,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-channel",
+      "kind": "photo",
+      "condition": "iso12800-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 30.646521759256547,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 25.79150198215065,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.759452179876926,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.01584131503109635,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.031245437853934736,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.029932058904462065,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.0613023097530181,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 34.79730456167797,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-channel",
+      "kind": "photo",
+      "condition": "iso1600-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 30.980981190254873,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 26.18879502718566,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.7836428070026482,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.015014597002102772,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.031259936231065245,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.029498178881032677,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.05963339251584484,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 35.1584025677645,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-channel",
+      "kind": "photo",
+      "condition": "legacy-noise",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 30.865542954527523,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 26.095507457608083,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.7772968845219467,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.015245316489746868,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.03127116827262605,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.02962540798579832,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.06018963498517208,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 35.07392518700294,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-channel",
+      "kind": "photo",
+      "condition": "shadows",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 48.45849868676143,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 33.50259006665518,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.8523351005703839,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.00635445191875532,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.012615079150030246,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "shadow_linear_psnr": {
+          "mean": 49.65681575497551,
+          "sources": 426
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-channel",
+      "kind": "synthetic",
+      "condition": "adc-only",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 27.463122636079788,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 24.243305921554565,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.695814568316564,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.029313981300219893,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.033338847963023,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.06258185293215017,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.06885458707499008,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-channel",
+      "kind": "synthetic",
+      "condition": "highlights",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 11.213365986943245,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 22.85896474123001,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.7972644255496562,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.038186412857612595,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.018020095565589145,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.06758993238742862,
+          "sources": 7
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.07953907136938401,
+          "sources": 7
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-channel",
+      "kind": "synthetic",
+      "condition": "iso100-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 27.45823833346367,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 24.242676109075546,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.6956196031533182,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.029326128234970383,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.0333503239453421,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.06260576696755986,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.06887337324830393,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-channel",
+      "kind": "synthetic",
+      "condition": "iso12800-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 26.98564648628235,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 23.89577955007553,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.679903466720134,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.03117501610540785,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.033608468424063176,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.06472671288065612,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.07108702339852849,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-channel",
+      "kind": "synthetic",
+      "condition": "iso1600-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 27.387001991271973,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 24.197991222143173,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.6922969301231205,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.02965415970538743,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.03349063669156749,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.06291390288000305,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.0691854665055871,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-channel",
+      "kind": "synthetic",
+      "condition": "legacy-noise",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 27.25171384215355,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 24.10472822189331,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.6870115997735411,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.030167489414452575,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.033602265451918356,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.06355123066653809,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.06986163440160453,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-channel",
+      "kind": "synthetic",
+      "condition": "shadows",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 44.81504797935486,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 31.35933694243431,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.7955857571214437,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.013223826565081254,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.014154461787256878,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "shadow_linear_psnr": {
+          "mean": 40.92920000212533,
+          "sources": 14
+        }
+      }
+    },
+    {
+      "model": "Wiener7+Malvar2004:WB",
+      "kind": "photo",
+      "condition": "adc-only",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 37.171549938880865,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 29.92250422180676,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.9293536434617478,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.01462842415210497,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.02126594483052542,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.028283728684211876,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.029956686054356398,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 43.75240592124327,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "Wiener7+Malvar2004:WB",
+      "kind": "photo",
+      "condition": "highlights",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 15.660947703645157,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 25.435838107482052,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.9017001827371762,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.02586575828024254,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.02986098039985153,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03957444430657608,
+          "sources": 425
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.04053796792841133,
+          "sources": 425
+        },
+        "shadow_linear_psnr": {
+          "mean": 36.815934044625756,
+          "sources": 391
+        }
+      }
+    },
+    {
+      "model": "Wiener7+Malvar2004:WB",
+      "kind": "photo",
+      "condition": "iso100-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 37.08556179587121,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 29.872856144603578,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.9266687222610313,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.014830139031015125,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.021676626184128335,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.028394865149718916,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03035477391341543,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 43.71647894270015,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "Wiener7+Malvar2004:WB",
+      "kind": "photo",
+      "condition": "iso12800-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 33.691589216996135,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 27.311014723721936,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.8081661960070808,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.020106077778198925,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.0321249167157601,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03246247100553049,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.04098188582476292,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 41.1384209968009,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "Wiener7+Malvar2004:WB",
+      "kind": "photo",
+      "condition": "iso1600-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 36.29157208167976,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 29.38167947795966,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.9017850446407912,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.016089225272755456,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.02424376966122023,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.02924472330132168,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03282287457851314,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 43.324263492845134,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "Wiener7+Malvar2004:WB",
+      "kind": "photo",
+      "condition": "legacy-noise",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 35.2229233402279,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 28.67369653581177,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.8693827712075214,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.017506948077071902,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.027172393239617447,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03042044714547031,
+          "sources": 295
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03589562026732522,
+          "sources": 295
+        },
+        "shadow_linear_psnr": {
+          "mean": 42.74660952586048,
+          "sources": 424
+        }
+      }
+    },
+    {
+      "model": "Wiener7+Malvar2004:WB",
+      "kind": "photo",
+      "condition": "shadows",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 50.2580747671373,
+          "sources": 427
+        },
+        "srgb_psnr": {
+          "mean": 34.481212661752096,
+          "sources": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.8796274032818908,
+          "sources": 427
+        },
+        "chroma_mae": {
+          "mean": 0.008543604075640388,
+          "sources": 427
+        },
+        "gradient_mae": {
+          "mean": 0.01407188204604046,
+          "sources": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "shadow_linear_psnr": {
+          "mean": 52.54905942460181,
+          "sources": 426
+        }
+      }
+    },
+    {
+      "model": "Wiener7+Malvar2004:WB",
+      "kind": "synthetic",
+      "condition": "adc-only",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 31.367926090955734,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 27.886441320180893,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.8866722024977207,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.01652880251276656,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.025818267953582108,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03430277962858479,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03485642241624494,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "Wiener7+Malvar2004:WB",
+      "kind": "synthetic",
+      "condition": "highlights",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 11.132083684206009,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 25.392159432172775,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.8732575094327331,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.027914097358006984,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.018497403394576395,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.046161578569029055,
+          "sources": 7
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.04449157516605087,
+          "sources": 7
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "Wiener7+Malvar2004:WB",
+      "kind": "synthetic",
+      "condition": "iso100-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 31.340904146432877,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 27.865360617637634,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.8845052039250731,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.017035698307154234,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.02659405246959068,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03469717797512809,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03556863439735025,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "Wiener7+Malvar2004:WB",
+      "kind": "synthetic",
+      "condition": "iso12800-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 29.530216455459595,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 26.401312679052353,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.8029896002262831,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.02282329203444533,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.03514081102912314,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.04148066466829429,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.047491243962819375,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "Wiener7+Malvar2004:WB",
+      "kind": "synthetic",
+      "condition": "iso1600-prior",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 31.006280571222305,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 27.588663458824158,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.8659272873774171,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.018709745767409913,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.029141911756596528,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03628206885575007,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.038657378017281495,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "Wiener7+Malvar2004:WB",
+      "kind": "synthetic",
+      "condition": "legacy-noise",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 30.43391442298889,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 27.134770214557648,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.8405163390561938,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.02042672801326262,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.03173908694589045,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03828950078847508,
+          "sources": 12
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.04228305925304691,
+          "sources": 12
+        },
+        "shadow_linear_psnr": {
+          "mean": null,
+          "sources": 0
+        }
+      }
+    },
+    {
+      "model": "Wiener7+Malvar2004:WB",
+      "kind": "synthetic",
+      "condition": "shadows",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 46.614182472229004,
+          "sources": 16
+        },
+        "srgb_psnr": {
+          "mean": 33.389588534832,
+          "sources": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.8695638729259372,
+          "sources": 16
+        },
+        "chroma_mae": {
+          "mean": 0.010372629971243441,
+          "sources": 16
+        },
+        "gradient_mae": {
+          "mean": 0.015834659396205097,
+          "sources": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": null,
+          "sources": 0
+        },
+        "shadow_linear_psnr": {
+          "mean": 44.785987854003906,
+          "sources": 14
+        }
+      }
+    }
+  ],
+  "paired_comparisons": [
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "1:dino-noise-24576-v4:step-30000",
+      "kind": "photo",
+      "metric": "linear_psnr",
+      "sources": 427,
+      "mean_first_minus_second": 1.222581372367933,
+      "source_bootstrap_95_interval": [
+        1.1745671844953036,
+        1.269953861193499
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "1:dino-noise-24576-v4:step-30000",
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "sources": 427,
+      "mean_first_minus_second": 0.5458175562504106,
+      "source_bootstrap_95_interval": [
+        0.49057778988286566,
+        0.6006339765225178
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "1:dino-noise-24576-v4:step-30000",
+      "kind": "photo",
+      "metric": "srgb_ssim",
+      "sources": 427,
+      "mean_first_minus_second": 0.009815397111816764,
+      "source_bootstrap_95_interval": [
+        0.008316465710623484,
+        0.011207788847523928
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "1:dino-noise-24576-v4:step-30000",
+      "kind": "synthetic",
+      "metric": "linear_psnr",
+      "sources": 16,
+      "mean_first_minus_second": -0.5269458123615822,
+      "source_bootstrap_95_interval": [
+        -0.721975171672448,
+        -0.28440243910465973
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "1:dino-noise-24576-v4:step-30000",
+      "kind": "synthetic",
+      "metric": "srgb_psnr",
+      "sources": 16,
+      "mean_first_minus_second": -0.658647400992258,
+      "source_bootstrap_95_interval": [
+        -0.8354913412460274,
+        -0.45760001625333596
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "1:dino-noise-24576-v4:step-30000",
+      "kind": "synthetic",
+      "metric": "srgb_ssim",
+      "sources": 16,
+      "mean_first_minus_second": -0.015921332873404033,
+      "source_bootstrap_95_interval": [
+        -0.02253287374041976,
+        -0.009453815544423242
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "Bilinear",
+      "kind": "photo",
+      "metric": "linear_psnr",
+      "sources": 427,
+      "mean_first_minus_second": 5.322232056557434,
+      "source_bootstrap_95_interval": [
+        5.208946108042335,
+        5.423546622755856
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "Bilinear",
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "sources": 427,
+      "mean_first_minus_second": 3.364068655554528,
+      "source_bootstrap_95_interval": [
+        3.2663280517889843,
+        3.4604545992965803
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "Bilinear",
+      "kind": "photo",
+      "metric": "srgb_ssim",
+      "sources": 427,
+      "mean_first_minus_second": 0.09875800282351345,
+      "source_bootstrap_95_interval": [
+        0.09610023988231982,
+        0.10145570302762866
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "Bilinear",
+      "kind": "synthetic",
+      "metric": "linear_psnr",
+      "sources": 16,
+      "mean_first_minus_second": 3.2753228438752036,
+      "source_bootstrap_95_interval": [
+        2.6268748528723203,
+        3.96073383747467
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "Bilinear",
+      "kind": "synthetic",
+      "metric": "srgb_psnr",
+      "sources": 16,
+      "mean_first_minus_second": 0.962306069476264,
+      "source_bootstrap_95_interval": [
+        0.24691309982112483,
+        1.7321911697941175
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "Bilinear",
+      "kind": "synthetic",
+      "metric": "srgb_ssim",
+      "sources": 16,
+      "mean_first_minus_second": 0.05192711230899606,
+      "source_bootstrap_95_interval": [
+        0.030109719073932065,
+        0.07660290540661663
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "Malvar2004:WB",
+      "kind": "photo",
+      "metric": "linear_psnr",
+      "sources": 427,
+      "mean_first_minus_second": 3.45959841881998,
+      "source_bootstrap_95_interval": [
+        3.3358172986929375,
+        3.579549463214424
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "Malvar2004:WB",
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "sources": 427,
+      "mean_first_minus_second": 2.3802309760524105,
+      "source_bootstrap_95_interval": [
+        2.2996134757357485,
+        2.473649127098899
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "Malvar2004:WB",
+      "kind": "photo",
+      "metric": "srgb_ssim",
+      "sources": 427,
+      "mean_first_minus_second": 0.07094083550922366,
+      "source_bootstrap_95_interval": [
+        0.06814572387641342,
+        0.07388560621515937
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "Malvar2004:WB",
+      "kind": "synthetic",
+      "metric": "linear_psnr",
+      "sources": 16,
+      "mean_first_minus_second": 4.486852379781858,
+      "source_bootstrap_95_interval": [
+        4.113736274306262,
+        4.9227218906262085
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "Malvar2004:WB",
+      "kind": "synthetic",
+      "metric": "srgb_psnr",
+      "sources": 16,
+      "mean_first_minus_second": 2.570004301411765,
+      "source_bootstrap_95_interval": [
+        2.1053724699786716,
+        3.1402412404971467
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "Malvar2004:WB",
+      "kind": "synthetic",
+      "metric": "srgb_ssim",
+      "sources": 16,
+      "mean_first_minus_second": 0.09326181560754776,
+      "source_bootstrap_95_interval": [
+        0.07959496727479355,
+        0.10558808481520307
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "RawNIND:CFA-LS",
+      "kind": "photo",
+      "metric": "linear_psnr",
+      "sources": 427,
+      "mean_first_minus_second": 6.436840197520736,
+      "source_bootstrap_95_interval": [
+        6.345288457404654,
+        6.52037315404148
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "RawNIND:CFA-LS",
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "sources": 427,
+      "mean_first_minus_second": 4.248037655164502,
+      "source_bootstrap_95_interval": [
+        4.157820158680374,
+        4.334373222389681
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "RawNIND:CFA-LS",
+      "kind": "photo",
+      "metric": "srgb_ssim",
+      "sources": 427,
+      "mean_first_minus_second": 0.12329441178858021,
+      "source_bootstrap_95_interval": [
+        0.11788702810656149,
+        0.12942878291685123
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "RawNIND:CFA-LS",
+      "kind": "synthetic",
+      "metric": "linear_psnr",
+      "sources": 16,
+      "mean_first_minus_second": 6.509564020803996,
+      "source_bootstrap_95_interval": [
+        5.8132045684116225,
+        7.3107751706349
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "RawNIND:CFA-LS",
+      "kind": "synthetic",
+      "metric": "srgb_psnr",
+      "sources": 16,
+      "mean_first_minus_second": 4.933787984507425,
+      "source_bootstrap_95_interval": [
+        4.298544961001193,
+        5.626758373315845
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "RawNIND:CFA-LS",
+      "kind": "synthetic",
+      "metric": "srgb_ssim",
+      "sources": 16,
+      "mean_first_minus_second": 0.18039189827894528,
+      "source_bootstrap_95_interval": [
+        0.09487505494367462,
+        0.27901232866154585
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "RawNIND:CFA-channel",
+      "kind": "photo",
+      "metric": "linear_psnr",
+      "sources": 427,
+      "mean_first_minus_second": 6.4466718841691835,
+      "source_bootstrap_95_interval": [
+        6.356278926596748,
+        6.531120902267975
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "RawNIND:CFA-channel",
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "sources": 427,
+      "mean_first_minus_second": 4.260289477759597,
+      "source_bootstrap_95_interval": [
+        4.168108213187141,
+        4.34550799122021
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "RawNIND:CFA-channel",
+      "kind": "photo",
+      "metric": "srgb_ssim",
+      "sources": 427,
+      "mean_first_minus_second": 0.12343213259276438,
+      "source_bootstrap_95_interval": [
+        0.11803641441558897,
+        0.12958445447615782
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "RawNIND:CFA-channel",
+      "kind": "synthetic",
+      "metric": "linear_psnr",
+      "sources": 16,
+      "mean_first_minus_second": 6.498972784195628,
+      "source_bootstrap_95_interval": [
+        5.805427247977683,
+        7.3069037291620464
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "RawNIND:CFA-channel",
+      "kind": "synthetic",
+      "metric": "srgb_psnr",
+      "sources": 16,
+      "mean_first_minus_second": 4.922490490334374,
+      "source_bootstrap_95_interval": [
+        4.283315862289497,
+        5.599935033704552
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "RawNIND:CFA-channel",
+      "kind": "synthetic",
+      "metric": "srgb_ssim",
+      "sources": 16,
+      "mean_first_minus_second": 0.18030409940651482,
+      "source_bootstrap_95_interval": [
+        0.09481475301020378,
+        0.2790333640595366
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "Wiener7+Malvar2004:WB",
+      "kind": "photo",
+      "metric": "linear_psnr",
+      "sources": 427,
+      "mean_first_minus_second": 2.599291481753184,
+      "source_bootstrap_95_interval": [
+        2.531606754512043,
+        2.668267438542528
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "Wiener7+Malvar2004:WB",
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "sources": 427,
+      "mean_first_minus_second": 1.621905602990843,
+      "source_bootstrap_95_interval": [
+        1.5738655779185442,
+        1.6730756360737127
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "Wiener7+Malvar2004:WB",
+      "kind": "photo",
+      "metric": "srgb_ssim",
+      "sources": 427,
+      "mean_first_minus_second": 0.022362661051606603,
+      "source_bootstrap_95_interval": [
+        0.021495521968674915,
+        0.023228590014802243
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "Wiener7+Malvar2004:WB",
+      "kind": "synthetic",
+      "metric": "linear_psnr",
+      "sources": 16,
+      "mean_first_minus_second": 3.8059198430606296,
+      "source_bootstrap_95_interval": [
+        3.537821960396,
+        4.08647564745375
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "Wiener7+Malvar2004:WB",
+      "kind": "synthetic",
+      "metric": "srgb_psnr",
+      "sources": 16,
+      "mean_first_minus_second": 1.9574171262128013,
+      "source_bootstrap_95_interval": [
+        1.4634518259337965,
+        2.5482384019664366
+      ]
+    },
+    {
+      "first": "0:dino-prior-44732-v6:step-20000",
+      "second": "Wiener7+Malvar2004:WB",
+      "kind": "synthetic",
+      "metric": "srgb_ssim",
+      "sources": 16,
+      "mean_first_minus_second": 0.04031329016600336,
+      "source_bootstrap_95_interval": [
+        0.02947015754013721,
+        0.05415545836689748
+      ]
+    }
+  ]
+}

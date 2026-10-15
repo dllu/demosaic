@@ -2,13 +2,13 @@
 
 import hashlib
 import time
-from contextlib import nullcontext
 from pathlib import Path
 
 import numpy as np
 import torch
 
 from .cfa import pack
+from .precision import COMPUTE_DTYPES, amp_context
 
 
 def positions(length, tile, stride):
@@ -35,6 +35,7 @@ def restore_tiled(
     wb=None,
     matrix=None,
     amp=True,
+    precision="bfloat16",
 ):
     """Return CPU float32 RGB and timing. `tile`/`overlap` use sensor pixels.
 
@@ -48,6 +49,8 @@ def restore_tiled(
         raise ValueError("Tile must be >=32 and divisible by 16; overlap must be even and <tile")
     if batch_size < 1 or min(shot, read) < 0:
         raise ValueError("Invalid batch size or noise coefficients")
+    if precision not in COMPUTE_DTYPES:
+        raise ValueError(f"Unknown compute precision {precision!r}")
     device = torch.device(device)
     if isinstance(raw, np.ndarray):
         raw = torch.from_numpy(np.ascontiguousarray(raw, dtype=np.float32))
@@ -111,12 +114,7 @@ def restore_tiled(
             .reshape(1, 3, 3)
             .expand(len(current), -1, -1)
         )
-        context = (
-            torch.autocast("cuda", dtype=torch.bfloat16)
-            if (amp and device.type == "cuda")
-            else nullcontext()
-        )
-        with context:
+        with amp_context(device, amp, dtype=precision):
             outputs = model(tiles, variance, batch_colors, batch_wb, batch_matrix)
         outputs = outputs.float().cpu()
         compute_seconds += time.perf_counter() - compute_started
@@ -139,6 +137,8 @@ def restore_tiled(
         "tile": tile,
         "overlap": overlap,
         "batch_size": batch_size,
+        "compute_precision": precision if amp and device.type == "cuda" else "float32",
+        "memory_format": "channels_last" if device.type == "cuda" else "contiguous",
         "peak_cuda_gb": torch.cuda.max_memory_allocated(device) / 1e9
         if device.type == "cuda"
         else 0,

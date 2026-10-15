@@ -21,7 +21,7 @@ from demosaic.color import render
 from demosaic.inference import load_checkpoint
 from demosaic.io import read_raw
 from demosaic.noise import Sensor
-from demosaic.precision import amp_context
+from demosaic.precision import COMPUTE_DTYPES, amp_context
 from demosaic.prior import wiener_packed
 from demosaic.reference import load_rawnind
 from demosaic.safety import writable_path
@@ -35,6 +35,7 @@ def main():
     parser.add_argument("checkpoint", nargs="+", type=Path)
     parser.add_argument("--rawnind", type=Path)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--precision", choices=COMPUTE_DTYPES, default="bfloat16")
     args = parser.parse_args()
     output = writable_path(args.output)
     output.mkdir(parents=True, exist_ok=True)
@@ -43,10 +44,20 @@ def main():
     for path in args.checkpoint:
         frozen, digest = freeze_checkpoint(path, output / "weights")
         model, state = load_checkpoint(frozen, "cuda")
+        model.eval().to(memory_format=torch.channels_last)
         run_name = Path(state.get("config", {}).get("run", path.parent)).name
         label = f"{run_name}, step {state['step']}"
         models.append((label, model, True))
-        weights.append({"label": label, "source": str(path), "sha256": digest, "amp": "BF16"})
+        weights.append(
+            {
+                "label": label,
+                "source": str(path),
+                "sha256": digest,
+                "snapshot": str(frozen),
+                "compute_precision": args.precision,
+                "memory_format": "channels_last",
+            }
+        )
         del state
     if args.rawnind:
         models.insert(
@@ -74,7 +85,7 @@ def main():
         crop = torch.from_numpy(raw[y : y + size, x : x + size].copy()).to("cuda")
         del raw
         colors = color_indices(metadata.pattern, device="cuda")[None]
-        packed = pack(crop[None, None])
+        packed = pack(crop[None, None]).contiguous(memory_format=torch.channels_last)
         # These priors are disclosed assumptions, not camera calibration.
         shot, read = Sensor(iso=metadata.iso or 100).coefficients()
         if ("shot" in selection) != ("read" in selection):
@@ -89,7 +100,7 @@ def main():
             ("Variance prior + Malvar", malvar(wiener_packed(packed, variance), colors, wb)),
         ]
         for label, model, amp in models:
-            with amp_context("cuda", amp):
+            with amp_context("cuda", amp, dtype=args.precision):
                 images.append((label, model(packed, variance, colors, wb, matrix)))
         for col, (label, rgb) in enumerate(images):
             display = render(rgb * selection.get("display_exposure", 1), wb, matrix)

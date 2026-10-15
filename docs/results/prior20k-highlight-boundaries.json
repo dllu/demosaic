@@ -1,0 +1,390 @@
+{
+  "format_version": 2,
+  "checkpoint_records": [
+    {
+      "label": "dino-prior-44732-v6:step-20000",
+      "sha256": "ba3e0e05a5b2e26b348c5edfc94559267b59a5e48256d0a236464f74e5d8f761",
+      "snapshot": "/mnt/external/demosaic/evaluation/prior-v6-mid-vs-main30k/highlights/weights/weights-ba3e0e05a5b2e26b348c5edfc94559267b59a5e48256d0a236464f74e5d8f761.pt",
+      "model_config": {
+        "width": 32,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+        "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+        "camera_conditioning": true,
+        "noise_modulation": true,
+        "physical_fp32": true,
+        "baseline": "wiener-malvar",
+        "prior_window": 7
+      }
+    },
+    {
+      "label": "dino-noise-24576-v4:step-30000",
+      "sha256": "f308530b37a196a10398b667c87e6620f0198203f9e01173e353e234e839ad97",
+      "snapshot": "/mnt/external/demosaic/evaluation/prior-v6-mid-vs-main30k/highlights/weights/weights-f308530b37a196a10398b667c87e6620f0198203f9e01173e353e234e839ad97.pt",
+      "model_config": {
+        "width": 32,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+        "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+        "camera_conditioning": true,
+        "noise_modulation": true,
+        "physical_fp32": true,
+        "baseline": "bilinear",
+        "prior_window": 7
+      }
+    },
+    {
+      "label": "RawNIND:CFA-LS",
+      "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+    }
+  ],
+  "cases_per_model": 32,
+  "seed": 7,
+  "condition": {
+    "name": "physical-clipping",
+    "shot": 2e-05,
+    "read": 1.6e-09,
+    "exposure": 1.0
+  },
+  "camera_to_srgb": [
+    [
+      1.1176470588,
+      -0.0588235294,
+      -0.0588235294
+    ],
+    [
+      -0.0588235294,
+      1.1176470588,
+      -0.0588235294
+    ],
+    [
+      -0.0588235294,
+      -0.0588235294,
+      1.1176470588
+    ]
+  ],
+  "white_balances": [
+    [
+      2.0,
+      1.0,
+      1.5
+    ],
+    [
+      1.2,
+      1.0,
+      2.4
+    ]
+  ],
+  "compute_precision": "bfloat16",
+  "memory_format": "channels_last",
+  "torch": "2.14.1+cu130",
+  "border": 8,
+  "adc_black": 0.03,
+  "adc_bits": 16,
+  "script_sha256": "89286db385eada6220e51a2e054443c9510315df2af38868cf45bb4279ebc57c",
+  "overall": {
+    "Bilinear": {
+      "srgb_psnr": 28.692797780036926,
+      "srgb_ssim": 0.9653437957167625,
+      "highlight_boundary_chroma_mae": 0.011476640473119915,
+      "highlight_boundary_rgb_mae": 0.012358235209831037
+    },
+    "Malvar2004:WB": {
+      "srgb_psnr": 33.047548830509186,
+      "srgb_ssim": 0.9797948058694601,
+      "highlight_boundary_chroma_mae": 0.012889883160823956,
+      "highlight_boundary_rgb_mae": 0.014769473695196211
+    },
+    "RawNIND:CFA-LS": {
+      "srgb_psnr": 26.103534519672394,
+      "srgb_ssim": 0.9174422677606344,
+      "highlight_boundary_chroma_mae": 0.03597966063534841,
+      "highlight_boundary_rgb_mae": 0.04316756740445271
+    },
+    "Wiener7+Malvar2004:WB": {
+      "srgb_psnr": 33.07484310865402,
+      "srgb_ssim": 0.9827257860451937,
+      "highlight_boundary_chroma_mae": 0.012889449877548032,
+      "highlight_boundary_rgb_mae": 0.01476691612333525
+    },
+    "dino-noise-24576-v4:step-30000": {
+      "srgb_psnr": 34.437081933021545,
+      "srgb_ssim": 0.9821533281356096,
+      "highlight_boundary_chroma_mae": 0.008898126092390157,
+      "highlight_boundary_rgb_mae": 0.010671791511413176
+    },
+    "dino-prior-44732-v6:step-20000": {
+      "srgb_psnr": 36.25803864002228,
+      "srgb_ssim": 0.9817663356661797,
+      "highlight_boundary_chroma_mae": 0.01029538474540459,
+      "highlight_boundary_rgb_mae": 0.013099842188239563
+    }
+  },
+  "artifact_directory": "/mnt/external/demosaic/evaluation/prior-v6-mid-vs-main30k/highlights",
+  "per_scene": [
+    {
+      "model": "Bilinear",
+      "scene": "colored-emission",
+      "metrics": {
+        "srgb_psnr": 24.72998857498169,
+        "srgb_ssim": 0.9583308920264244,
+        "highlight_boundary_chroma_mae": 0.009267729590646923,
+        "highlight_boundary_rgb_mae": 0.012023017392493784
+      }
+    },
+    {
+      "model": "Bilinear",
+      "scene": "fine-detail-sign",
+      "metrics": {
+        "srgb_psnr": 23.951426029205322,
+        "srgb_ssim": 0.946655884385109,
+        "highlight_boundary_chroma_mae": 0.013735912274569273,
+        "highlight_boundary_rgb_mae": 0.014233487658202648
+      }
+    },
+    {
+      "model": "Bilinear",
+      "scene": "neutral-circle",
+      "metrics": {
+        "srgb_psnr": 30.798848628997803,
+        "srgb_ssim": 0.9602610766887665,
+        "highlight_boundary_chroma_mae": 0.007494769291952252,
+        "highlight_boundary_rgb_mae": 0.0067742696846835315
+      }
+    },
+    {
+      "model": "Bilinear",
+      "scene": "neutral-slanted-edge",
+      "metrics": {
+        "srgb_psnr": 35.29092788696289,
+        "srgb_ssim": 0.9961273297667503,
+        "highlight_boundary_chroma_mae": 0.01540815073531121,
+        "highlight_boundary_rgb_mae": 0.016402166103944182
+      }
+    },
+    {
+      "model": "Malvar2004:WB",
+      "scene": "colored-emission",
+      "metrics": {
+        "srgb_psnr": 24.524746656417847,
+        "srgb_ssim": 0.9326166808605194,
+        "highlight_boundary_chroma_mae": 0.023124743485823274,
+        "highlight_boundary_rgb_mae": 0.029681876068934798
+      }
+    },
+    {
+      "model": "Malvar2004:WB",
+      "scene": "fine-detail-sign",
+      "metrics": {
+        "srgb_psnr": 33.750669956207275,
+        "srgb_ssim": 0.9951191842556,
+        "highlight_boundary_chroma_mae": 0.009956490830518305,
+        "highlight_boundary_rgb_mae": 0.01017753523774445
+      }
+    },
+    {
+      "model": "Malvar2004:WB",
+      "scene": "neutral-circle",
+      "metrics": {
+        "srgb_psnr": 38.598134994506836,
+        "srgb_ssim": 0.9969317317008972,
+        "highlight_boundary_chroma_mae": 0.0063298598397523165,
+        "highlight_boundary_rgb_mae": 0.0059355710400268435
+      }
+    },
+    {
+      "model": "Malvar2004:WB",
+      "scene": "neutral-slanted-edge",
+      "metrics": {
+        "srgb_psnr": 35.316643714904785,
+        "srgb_ssim": 0.9945116266608238,
+        "highlight_boundary_chroma_mae": 0.012148438487201929,
+        "highlight_boundary_rgb_mae": 0.013282912434078753
+      }
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "scene": "colored-emission",
+      "metrics": {
+        "srgb_psnr": 21.770519971847534,
+        "srgb_ssim": 0.8745660409331322,
+        "highlight_boundary_chroma_mae": 0.0770766194909811,
+        "highlight_boundary_rgb_mae": 0.09581993333995342
+      }
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "scene": "fine-detail-sign",
+      "metrics": {
+        "srgb_psnr": 21.05176615715027,
+        "srgb_ssim": 0.8905069008469582,
+        "highlight_boundary_chroma_mae": 0.020320827839896083,
+        "highlight_boundary_rgb_mae": 0.025682530598714948
+      }
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "scene": "neutral-circle",
+      "metrics": {
+        "srgb_psnr": 27.585678815841675,
+        "srgb_ssim": 0.9137880876660347,
+        "highlight_boundary_chroma_mae": 0.016573168570175767,
+        "highlight_boundary_rgb_mae": 0.017378686694428325
+      }
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "scene": "neutral-slanted-edge",
+      "metrics": {
+        "srgb_psnr": 34.0061731338501,
+        "srgb_ssim": 0.9909080415964127,
+        "highlight_boundary_chroma_mae": 0.029948026640340686,
+        "highlight_boundary_rgb_mae": 0.03378911898471415
+      }
+    },
+    {
+      "model": "Wiener7+Malvar2004:WB",
+      "scene": "colored-emission",
+      "metrics": {
+        "srgb_psnr": 24.537890672683716,
+        "srgb_ssim": 0.939690075814724,
+        "highlight_boundary_chroma_mae": 0.02311130496673286,
+        "highlight_boundary_rgb_mae": 0.02966544800437987
+      }
+    },
+    {
+      "model": "Wiener7+Malvar2004:WB",
+      "scene": "fine-detail-sign",
+      "metrics": {
+        "srgb_psnr": 33.757731437683105,
+        "srgb_ssim": 0.9952331557869911,
+        "highlight_boundary_chroma_mae": 0.009960361290723085,
+        "highlight_boundary_rgb_mae": 0.010179628385230899
+      }
+    },
+    {
+      "model": "Wiener7+Malvar2004:WB",
+      "scene": "neutral-circle",
+      "metrics": {
+        "srgb_psnr": 38.61790323257446,
+        "srgb_ssim": 0.996957927942276,
+        "highlight_boundary_chroma_mae": 0.006334837235044688,
+        "highlight_boundary_rgb_mae": 0.005938633868936449
+      }
+    },
+    {
+      "model": "Wiener7+Malvar2004:WB",
+      "scene": "neutral-slanted-edge",
+      "metrics": {
+        "srgb_psnr": 35.385847091674805,
+        "srgb_ssim": 0.9990219846367836,
+        "highlight_boundary_chroma_mae": 0.012151296017691493,
+        "highlight_boundary_rgb_mae": 0.013283954234793782
+      }
+    },
+    {
+      "model": "dino-noise-24576-v4:step-30000",
+      "scene": "colored-emission",
+      "metrics": {
+        "srgb_psnr": 25.287528038024902,
+        "srgb_ssim": 0.9512493014335632,
+        "highlight_boundary_chroma_mae": 0.01765062683261931,
+        "highlight_boundary_rgb_mae": 0.020277676405385137
+      }
+    },
+    {
+      "model": "dino-noise-24576-v4:step-30000",
+      "scene": "fine-detail-sign",
+      "metrics": {
+        "srgb_psnr": 30.79681634902954,
+        "srgb_ssim": 0.9893861636519432,
+        "highlight_boundary_chroma_mae": 0.006462950725108385,
+        "highlight_boundary_rgb_mae": 0.00777860073139891
+      }
+    },
+    {
+      "model": "dino-noise-24576-v4:step-30000",
+      "scene": "neutral-circle",
+      "metrics": {
+        "srgb_psnr": 37.57912588119507,
+        "srgb_ssim": 0.9917973354458809,
+        "highlight_boundary_chroma_mae": 0.004297788138501346,
+        "highlight_boundary_rgb_mae": 0.005165453330846503
+      }
+    },
+    {
+      "model": "dino-noise-24576-v4:step-30000",
+      "scene": "neutral-slanted-edge",
+      "metrics": {
+        "srgb_psnr": 44.08485746383667,
+        "srgb_ssim": 0.9961805120110512,
+        "highlight_boundary_chroma_mae": 0.0071811386733315885,
+        "highlight_boundary_rgb_mae": 0.009465435578022152
+      }
+    },
+    {
+      "model": "dino-prior-44732-v6:step-20000",
+      "scene": "colored-emission",
+      "metrics": {
+        "srgb_psnr": 25.12252712249756,
+        "srgb_ssim": 0.9407155811786652,
+        "highlight_boundary_chroma_mae": 0.02521406509913504,
+        "highlight_boundary_rgb_mae": 0.030719635542482138
+      }
+    },
+    {
+      "model": "dino-prior-44732-v6:step-20000",
+      "scene": "fine-detail-sign",
+      "metrics": {
+        "srgb_psnr": 33.56625699996948,
+        "srgb_ssim": 0.9936033636331558,
+        "highlight_boundary_chroma_mae": 0.005997311789542437,
+        "highlight_boundary_rgb_mae": 0.007746906368993223
+      }
+    },
+    {
+      "model": "dino-prior-44732-v6:step-20000",
+      "scene": "neutral-circle",
+      "metrics": {
+        "srgb_psnr": 39.56093406677246,
+        "srgb_ssim": 0.9941762760281563,
+        "highlight_boundary_chroma_mae": 0.0036047617613803595,
+        "highlight_boundary_rgb_mae": 0.004837111540837213
+      }
+    },
+    {
+      "model": "dino-prior-44732-v6:step-20000",
+      "scene": "neutral-slanted-edge",
+      "metrics": {
+        "srgb_psnr": 46.78243637084961,
+        "srgb_ssim": 0.9985701218247414,
+        "highlight_boundary_chroma_mae": 0.006365400331560522,
+        "highlight_boundary_rgb_mae": 0.00909571530064568
+      }
+    }
+  ]
+}

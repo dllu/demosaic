@@ -10,7 +10,7 @@ import yaml
 
 from demosaic.cfa import bilinear
 from demosaic.inference import load_checkpoint
-from demosaic.precision import amp_context
+from demosaic.precision import COMPUTE_DTYPES, amp_context
 from demosaic.reference import load_rawnind
 from demosaic.safety import writable_path
 from demosaic.suite import freeze_checkpoint, observation
@@ -25,6 +25,7 @@ def main():
     parser.add_argument("--config", type=Path, default=Path("configs/evaluation.yaml"))
     parser.add_argument("--size", type=int, default=256)
     parser.add_argument("--border", type=int, default=32)
+    parser.add_argument("--precision", choices=COMPUTE_DTYPES, default="bfloat16")
     args = parser.parse_args()
     if args.size < 64 or args.size % 16 or not 0 <= args.border < args.size // 2:
         raise ValueError("Use a size divisible by 16 and a border smaller than half the size")
@@ -36,7 +37,9 @@ def main():
     for i, path in enumerate(args.checkpoint):
         frozen, digest = freeze_checkpoint(path, output / "weights")
         model, state = load_checkpoint(frozen, "cuda")
-        label = f"{i}:{path.parent.name}:step-{state['step']}"
+        run_name = Path(state.get("config", {}).get("run", path.parent)).name
+        label = f"{i}:{run_name}:step-{state['step']}"
+        model.to(memory_format=torch.channels_last)
         models.append((label, model.eval(), True))
         provenance.append(
             {
@@ -44,6 +47,9 @@ def main():
                 "sha256": digest,
                 "config": model.config.to_dict(),
                 "training_run": state.get("config", {}).get("run"),
+                "snapshot": str(frozen),
+                "compute_precision": args.precision,
+                "memory_format": "channels_last",
             }
         )
         del state
@@ -75,9 +81,11 @@ def main():
             protocol["camera_to_srgb"],
             protocol.get("seed", 42),
         )
+        for key in ("packed", "variance"):
+            batch[key] = batch[key].contiguous(memory_format=torch.channels_last)
         predictions = [("Bilinear", bilinear(batch["packed"], batch["colors"]))]
         for label, model, amp in models:
-            with amp_context("cuda", amp):
+            with amp_context("cuda", amp, dtype=args.precision):
                 predictions.append(
                     (
                         label,

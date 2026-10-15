@@ -1,0 +1,417 @@
+{
+  "checkpoint": "/mnt/external/demosaic/evaluation/precision-v6-step20k-rg-gb/weights/weights-ba3e0e05a5b2e26b348c5edfc94559267b59a5e48256d0a236464f74e5d8f761.pt",
+  "sha256": "ba3e0e05a5b2e26b348c5edfc94559267b59a5e48256d0a236464f74e5d8f761",
+  "step": 20000,
+  "model_config": {
+    "width": 32,
+    "encoder_blocks": [
+      2,
+      2,
+      4
+    ],
+    "middle_blocks": 6,
+    "decoder_blocks": [
+      2,
+      2,
+      2
+    ],
+    "attention": true,
+    "dino": true,
+    "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+    "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+    "camera_conditioning": true,
+    "noise_modulation": true,
+    "physical_fp32": true,
+    "baseline": "wiener-malvar",
+    "prior_window": 7
+  },
+  "protocol": {
+    "patterns": [
+      "RGGB",
+      "BGGR",
+      "GRBG",
+      "GBRG"
+    ],
+    "white_balance": [
+      2.0,
+      1.0,
+      1.5
+    ],
+    "camera_to_srgb": [
+      [
+        1.1176470588,
+        -0.0588235294,
+        -0.0588235294
+      ],
+      [
+        -0.0588235294,
+        1.1176470588,
+        -0.0588235294
+      ],
+      [
+        -0.0588235294,
+        -0.0588235294,
+        1.1176470588
+      ]
+    ],
+    "border": 8,
+    "seed": 20261014,
+    "conditions": [
+      {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      {
+        "name": "iso1600-prior",
+        "shot": 0.00032,
+        "read": 4.096e-07,
+        "exposure": 1.0
+      },
+      {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      {
+        "name": "shadows",
+        "shot": 0.00064,
+        "read": 1.6384e-06,
+        "exposure": 0.125
+      },
+      {
+        "name": "highlights",
+        "shot": 8e-05,
+        "read": 2.56e-08,
+        "exposure": 4.0
+      },
+      {
+        "name": "legacy-noise",
+        "shot": 0.001,
+        "read": 1e-06,
+        "exposure": 1.0
+      }
+    ]
+  },
+  "sources": 16,
+  "manifest_sha256": "7cc76f460019582eeec519b332e9f9f53e030bdf579e2f27b915916a741cce0d",
+  "pattern": "RGGB",
+  "patch_size": 256,
+  "memory_format": "channels_last",
+  "global_ieee_fp32": true,
+  "torch": "2.14.1+cu130",
+  "low_contrast_response": [
+    {
+      "compute_precision": "bfloat16",
+      "wave_amplitude_dn16": 0,
+      "correction_response_rms": 0.0
+    },
+    {
+      "compute_precision": "bfloat16",
+      "wave_amplitude_dn16": 4,
+      "correction_response_rms": 1.0972448727386563e-08
+    },
+    {
+      "compute_precision": "bfloat16",
+      "wave_amplitude_dn16": 16,
+      "correction_response_rms": 6.786642359202233e-09
+    },
+    {
+      "compute_precision": "bfloat16",
+      "wave_amplitude_dn16": 64,
+      "correction_response_rms": 0.0001479021302657202
+    },
+    {
+      "compute_precision": "bfloat16",
+      "wave_amplitude_dn16": 256,
+      "correction_response_rms": 0.0002959608973469585
+    },
+    {
+      "compute_precision": "float16",
+      "wave_amplitude_dn16": 0,
+      "correction_response_rms": 0.0
+    },
+    {
+      "compute_precision": "float16",
+      "wave_amplitude_dn16": 4,
+      "correction_response_rms": 8.951497875386849e-06
+    },
+    {
+      "compute_precision": "float16",
+      "wave_amplitude_dn16": 16,
+      "correction_response_rms": 1.924521529872436e-05
+    },
+    {
+      "compute_precision": "float16",
+      "wave_amplitude_dn16": 64,
+      "correction_response_rms": 5.9878530009882525e-05
+    },
+    {
+      "compute_precision": "float16",
+      "wave_amplitude_dn16": 256,
+      "correction_response_rms": 0.0002027056907536462
+    },
+    {
+      "compute_precision": "float32",
+      "wave_amplitude_dn16": 0,
+      "correction_response_rms": 0.0
+    },
+    {
+      "compute_precision": "float32",
+      "wave_amplitude_dn16": 4,
+      "correction_response_rms": 3.0810806492809206e-06
+    },
+    {
+      "compute_precision": "float32",
+      "wave_amplitude_dn16": 16,
+      "correction_response_rms": 1.3477870197675657e-05
+    },
+    {
+      "compute_precision": "float32",
+      "wave_amplitude_dn16": 64,
+      "correction_response_rms": 5.906237129238434e-05
+    },
+    {
+      "compute_precision": "float32",
+      "wave_amplitude_dn16": 256,
+      "correction_response_rms": 0.0002031323965638876
+    }
+  ],
+  "response_note": "Learned correction relative to Malvar, not an accuracy score.",
+  "overall": [
+    {
+      "model": "bfloat16",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 38.535456265722004,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 31.876035707337515,
+          "count": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.9249861756605762,
+          "count": 16
+        },
+        "chroma_mae": {
+          "mean": 0.011543542063528938,
+          "count": 16
+        },
+        "gradient_mae": {
+          "mean": 0.018350908902773102,
+          "count": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.028175659293386467,
+          "count": 16
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.033769750249727316,
+          "count": 16
+        },
+        "shadow_linear_psnr": {
+          "mean": 43.30895158222744,
+          "count": 16
+        }
+      }
+    },
+    {
+      "model": "float16",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 38.54560315608978,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 31.895960961069378,
+          "count": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.9256205548133168,
+          "count": 16
+        },
+        "chroma_mae": {
+          "mean": 0.011511425335941437,
+          "count": 16
+        },
+        "gradient_mae": {
+          "mean": 0.018284944908893,
+          "count": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.02817050722660497,
+          "count": 16
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.033757426106603816,
+          "count": 16
+        },
+        "shadow_linear_psnr": {
+          "mean": 43.3236847945622,
+          "count": 16
+        }
+      }
+    },
+    {
+      "model": "float32",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 38.544843673706055,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 31.89614544595991,
+          "count": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.925638633114951,
+          "count": 16
+        },
+        "chroma_mae": {
+          "mean": 0.011510378099046648,
+          "count": 16
+        },
+        "gradient_mae": {
+          "mean": 0.018283095963332538,
+          "count": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.0281701623268115,
+          "count": 16
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03375536868891989,
+          "count": 16
+        },
+        "shadow_linear_psnr": {
+          "mean": 43.32346253735678,
+          "count": 16
+        }
+      }
+    }
+  ],
+  "paired_comparisons": [
+    {
+      "first": "bfloat16",
+      "second": "float16",
+      "kind": "photo",
+      "metric": "linear_psnr",
+      "sources": 16,
+      "mean_first_minus_second": -0.01014689036778127,
+      "source_bootstrap_95_interval": [
+        -0.01392977109977291,
+        -0.006624311634473662
+      ]
+    },
+    {
+      "first": "bfloat16",
+      "second": "float16",
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "sources": 16,
+      "mean_first_minus_second": -0.0199252537318646,
+      "source_bootstrap_95_interval": [
+        -0.026445286614555558,
+        -0.014573783533914631
+      ]
+    },
+    {
+      "first": "bfloat16",
+      "second": "float16",
+      "kind": "photo",
+      "metric": "srgb_ssim",
+      "sources": 16,
+      "mean_first_minus_second": -0.0006343791527407688,
+      "source_bootstrap_95_interval": [
+        -0.0007945701346865801,
+        -0.0004856477491558008
+      ]
+    },
+    {
+      "first": "bfloat16",
+      "second": "float32",
+      "kind": "photo",
+      "metric": "linear_psnr",
+      "sources": 16,
+      "mean_first_minus_second": -0.00938740798405302,
+      "source_bootstrap_95_interval": [
+        -0.013066573228154521,
+        -0.005938367758478647
+      ]
+    },
+    {
+      "first": "bfloat16",
+      "second": "float32",
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "sources": 16,
+      "mean_first_minus_second": -0.020109738622393403,
+      "source_bootstrap_95_interval": [
+        -0.02675657740661071,
+        -0.014608321019581132
+      ]
+    },
+    {
+      "first": "bfloat16",
+      "second": "float32",
+      "kind": "photo",
+      "metric": "srgb_ssim",
+      "sources": 16,
+      "mean_first_minus_second": -0.0006524574543748801,
+      "source_bootstrap_95_interval": [
+        -0.0008218301859285376,
+        -0.0004980570503643839
+      ]
+    },
+    {
+      "first": "float16",
+      "second": "float32",
+      "kind": "photo",
+      "metric": "linear_psnr",
+      "sources": 16,
+      "mean_first_minus_second": 0.0007594823837282494,
+      "source_bootstrap_95_interval": [
+        0.0005055367946625644,
+        0.0010384495769230895
+      ]
+    },
+    {
+      "first": "float16",
+      "second": "float32",
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "sources": 16,
+      "mean_first_minus_second": -0.00018448489052880213,
+      "source_bootstrap_95_interval": [
+        -0.000391289166040365,
+        5.435943604220598e-06
+      ]
+    },
+    {
+      "first": "float16",
+      "second": "float32",
+      "kind": "photo",
+      "metric": "srgb_ssim",
+      "sources": 16,
+      "mean_first_minus_second": -1.8078301634111282e-05,
+      "source_bootstrap_95_interval": [
+        -2.797611856035654e-05,
+        -1.119957970719173e-05
+      ]
+    }
+  ],
+  "source_sha256": "eb18c9be18273bf144b036e5be91970f3870971d50c4c259795f9b57aafa6968",
+  "artifact_directory": "/mnt/external/demosaic/evaluation/precision-v6-step20k-rg-gb"
+}

@@ -12,6 +12,7 @@ from demosaic.inference import load_checkpoint, restore_tiled
 from demosaic.io import camera_matrix, write_rgb16
 from demosaic.losses import reconstruction_loss
 from demosaic.model import JointDemosaic, ModelConfig
+from demosaic.precision import amp_context
 from demosaic.reference import RawNind
 from demosaic.safety import writable_path
 
@@ -189,3 +190,39 @@ def test_color_transforms_preserve_precision_inside_autocast():
         legacy = render(rgb, wb, matrix, fp32=False)
     torch.testing.assert_close(actual, expected, atol=0, rtol=0)
     assert (legacy - expected).abs().max() > 1e-4
+
+
+def test_explicit_fp32_restores_outer_autocast_after_an_exception():
+    # A requested FP32 reference must remain FP32 in an enclosing AMP scope.
+    values = torch.linspace(0.1, 0.9, 64).reshape(8, 8)
+    expected = values @ values
+    with torch.autocast("cpu", dtype=torch.bfloat16):
+        with pytest.raises(RuntimeError, match="diagnostic"), amp_context("cpu", dtype="float32"):
+            actual = values @ values
+            assert actual.dtype == torch.float32
+            torch.testing.assert_close(actual, expected, atol=0, rtol=0)
+            raise RuntimeError("diagnostic")
+        assert (values @ values).dtype == torch.bfloat16
+
+
+@pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA numerical precision check")
+@pytest.mark.parametrize("precision", ["float16", "bfloat16"])
+def test_half_compute_preserves_fine_16bit_baseline(small_model, precision):
+    # Four-DN contrasts must survive half-precision neural compute and blending.
+    axis = torch.arange(64, dtype=torch.float32)
+    raw = 0.5 + (axis[:, None] + axis[None, :]).sin() * (4 / 65535)
+    colors = color_indices("GRBG")
+    expected = bilinear(torch.nn.functional.pixel_unshuffle(raw[None, None], 2), colors)[0]
+    actual, timing = restore_tiled(
+        small_model.cuda(),
+        raw,
+        colors,
+        shot=0,
+        read=0,
+        tile=64,
+        overlap=0,
+        device="cuda",
+        precision=precision,
+    )
+    torch.testing.assert_close(actual, expected, atol=2e-7, rtol=0)
+    assert timing["compute_precision"] == precision

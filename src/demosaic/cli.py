@@ -9,6 +9,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
+from .precision import COMPUTE_DTYPES
 from .safety import writable_path
 
 
@@ -94,6 +95,13 @@ def parser():
     quality.add_argument("--synthetic-count", type=int, default=8)
     quality.add_argument("--rawnind", type=Path)
     quality.add_argument("--device", default="cuda")
+    for command in (infer, benchmark, quality):
+        command.add_argument(
+            "--precision",
+            choices=COMPUTE_DTYPES,
+            default="bfloat16",
+            help="Neural compute precision; physical interpolation/color stays FP32",
+        )
     audit = commands.add_parser(
         "audit-split", help="Screen protected splits for perceptual duplicates"
     )
@@ -242,6 +250,7 @@ def main(argv=None):
             device=args.device,
             wb=wb,
             matrix=matrix,
+            precision=args.precision,
         )
         write_rgb16(output, rgb.permute(1, 2, 0).numpy(), metadata=metadata, flip=flip)
         if args.preview:
@@ -293,6 +302,7 @@ def main(argv=None):
             synthetic_count=args.synthetic_count,
             rawnind=args.rawnind,
             device=args.device,
+            precision=args.precision,
         )
     elif args.command == "noise-profile":
         from .calibration import estimate_noise
@@ -330,6 +340,7 @@ def main(argv=None):
             "overlap": args.overlap,
             "batch_size": args.batch_size,
             "device": args.device,
+            "precision": args.precision,
         }
         restore_tiled(model, raw[: args.tile, : args.tile], color_indices("RGGB"), **kwargs)
         rgb, stats = restore_tiled(model, raw, color_indices("RGGB"), **kwargs)

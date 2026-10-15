@@ -64,7 +64,8 @@ half sensor resolution on four spatial Bayer phases, four variance maps and 12
 one-hot phase/color maps, with WB/matrix conditioning for highlight recovery.
 It fuses projected DINOv3 intermediate features near its
 bottleneck, with trainable zero-initialized gates. The decoder uses pixel shuffle
-and a bilinear demosaic residual baseline. Local paths retain fine geometry;
+and a demosaic residual baseline (initially bilinear; V6 uses variance-adaptive
+Malvar interpolation). Local paths retain fine geometry;
 DINO supplies context, never fabricated training targets. Linear and rendered
 reconstruction, gradients and highlight chroma losses address texture and fringes.
 No adversarial/diffusion objective is planned: faithful recovery is the priority.
@@ -92,5 +93,7 @@ the follow-up survey, so no claimed reproduction or pretrained baseline is used.
 Samsung's released implementation carries CC BY-NC-SA 4.0, incompatible with
 the requested commercially usable pipeline. Neither observation establishes our
 model's standing against those methods. The independently implemented Malvar
-2004 filters provide an additional classical sanity check, including low-noise
-cases in which they still beat our trained model.
+2004 filters provide an additional classical sanity check. They exposed the
+earlier models' low-noise photographic deficit; V6 step20000 now exceeds their
+mean ADC-only PSNR and SSIM in the declared 427-photo protocol, while separate
+procedural stress patterns still expose weaknesses.

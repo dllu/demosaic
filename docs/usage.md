@@ -183,6 +183,18 @@ pixels of overlap. Memory stays bounded by tile features plus CPU raw/output
 arrays, rather than full-image neural activations. CPU/CUDA allocations still
 occupy separate memory in PyTorch on the GB10 despite shared physical DRAM.
 
+`infer`, `benchmark` and `quality` accept `--precision bfloat16` (the historical
+default), `--precision float16`, or `--precision float32`. This selects neural
+compute precision. New checkpoints keep physical interpolation, the variance
+prior, color conversion and overlap accumulation in FP32. Explicit `float32`
+also disables TF32; CPU inference uses FP32. Training still uses BF16.
+The output sidecar records the effective compute precision and memory layout.
+FP16 gives a small measured quality gain for V6: a matched 427-photo comparison
+finds +0.0218 dB and +0.000723 SSIM over BF16. The 16-photo FP32 reference is
+close to FP16. Use the explicit flag when reproducing those results; final-model
+checks remain pending. Neither half-precision option makes the learned feature
+stream equivalent to full FP32 computation.
+
 ```bash
 uv run demosaic benchmark /mnt/external/demosaic/runs/base-v3/best.pt \
   --height 10000 --width 10000 --tile 512 --batch-size 8 \

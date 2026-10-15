@@ -15,7 +15,7 @@ from .data import CleanDataset, camera_pair, synthetic
 from .inference import load_checkpoint
 from .metrics import quality_metrics
 from .noise import add_noise, variance_map
-from .precision import amp_context
+from .precision import COMPUTE_DTYPES, amp_context
 from .prior import wiener_packed
 from .reference import RawNind, load_rawnind
 from .safety import writable_path
@@ -218,6 +218,7 @@ def run_suite(
     synthetic_count=8,
     rawnind=None,
     device="cuda",
+    precision="bfloat16",
 ):
     output = writable_path(output)
     output.mkdir(parents=True, exist_ok=True)
@@ -232,6 +233,8 @@ def run_suite(
         raise ValueError("Invalid noise/exposure condition")
     if batch_size < 1 or limit < 0 or synthetic_count < 0:
         raise ValueError("Invalid evaluation counts")
+    if precision not in COMPUTE_DTYPES:
+        raise ValueError(f"Unknown compute precision {precision!r}")
     border = protocol.get("border", 8)
     if border < 0 or patch_size - 2 * border < 11:
         raise ValueError("Border leaves too few pixels for SSIM")
@@ -249,6 +252,8 @@ def run_suite(
         frozen, digest = freeze_checkpoint(source, output / "weights")
         model, state = load_checkpoint(frozen, device)
         model.eval()
+        if torch.device(device).type == "cuda":
+            model.to(memory_format=torch.channels_last)
         run_name = Path(state.get("config", {}).get("run", Path(source).parent)).name
         label = f"{index}:{run_name}:step-{state['step']}"
         models.append((label, model, True))
@@ -263,6 +268,12 @@ def run_suite(
                 "model_config": state["model_config"],
                 "effective_model_config": model.config.to_dict(),
                 "training_manifest_sha256": state["config"].get("manifest_sha256"),
+                "compute_precision": precision
+                if torch.device(device).type == "cuda"
+                else "float32",
+                "memory_format": "channels_last"
+                if torch.device(device).type == "cuda"
+                else "contiguous",
             }
         )
     if rawnind:
@@ -354,6 +365,9 @@ def run_suite(
                         protocol["camera_to_srgb"],
                         protocol.get("seed", 42),
                     )
+                    if torch.device(device).type == "cuda":
+                        for name in ("packed", "variance"):
+                            batch[name] = batch[name].contiguous(memory_format=torch.channels_last)
                     predictions = [
                         ("Bilinear", bilinear(batch["packed"], batch["colors"])),
                         ("Malvar2004:WB", malvar(batch["packed"], batch["colors"], batch["wb"])),
@@ -367,7 +381,7 @@ def run_suite(
                         ),
                     ]
                     for label, model, amp in models:
-                        with amp_context(device, amp):
+                        with amp_context(device, amp, dtype=precision):
                             prediction = model(
                                 batch["packed"],
                                 batch["variance"],
