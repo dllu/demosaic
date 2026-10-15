@@ -78,7 +78,7 @@ with the same V11 initialization and training proportions/losses/LR as V15.
 Different initialization consumes a different RNG sequence, so it is a capacity
 trial rather than a matched data-sequence ablation. Its first 1000-step review
 improved real/synthetic scores over V15 at the same step count; it is being
-extended to 5000. See [the separate early review](wide-refinement-review.md).
+extended to 5000 and improved again. See [the completed V16 review](wide-refinement-review.md).
 
 Synthetic crop sources: Roy Egloff,
 [Villeneuve Vertigo-Swiss-Riviera](https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg),

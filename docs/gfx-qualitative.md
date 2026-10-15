@@ -21,7 +21,7 @@ framing, aperture, depth of field and moving subjects, ten minutes later. It is
 a useful qualitative reference, **not exact GT**; no PSNR/SSIM is computed against
 it. Crops retain native sensor pixels without warping or rescaling.
 
-These 160×160 comparisons use V15 step5000, FP16 neural inference with an IEEE
+These 160×160 comparisons use V16 step5000, FP16 neural inference with an IEEE
 FP32 refinement branch, after restoring the entire 101.996 MP frame. Tiles are
 512×512, overlap 64, batch 4, blended in FP32. All panels use the high-ISO capture's WB and color matrix and the
 same +2 EV display exposure. No panel receives automatic brightness, sharpening
@@ -31,12 +31,12 @@ sRGB previews; the restoration pipeline retains floating point/16-bit output.
 
 Overcast sky:
 
-![GFX sky: noisy, V15 denoised, independently captured ISO100 reference](images/gfx-overcast-sky-v15.png)
+![GFX sky: noisy, V16 denoised, independently captured ISO100 reference](images/gfx-overcast-sky-v16.png)
 
 Building detail (approximately corresponding regions; residual displacement and
 aperture differences remain):
 
-![GFX building: noisy, V15 denoised, independently captured ISO100 reference](images/gfx-building-detail-v15.png)
+![GFX building: noisy, V16 denoised, independently captured ISO100 reference](images/gfx-building-detail-v16.png)
 
 For the same regions, RawNIND (publisher normalization, signed/unclipped input,
 observed-CFA least-squares gain, IEEE FP32), also restored as a complete frame:
@@ -52,18 +52,23 @@ not evidence that the project has reached its quality goal. The input-only noise
 fit found too little intensity range to identify both physical coefficients, so
 this run uses the disclosed nominal ISO6400 prior, not a measured camera profile.
 
-Both methods produced full 11662×8746×3 unsigned16 TIFFs: linear camera RGB and
-color-managed sRGB with +2 EV. All four files were checked for shape, 16-bit
-sample tags and thousands of distinct sampled code values; both sRGB files have
-ICC profiles. Files are under
+V16 produced complete 11662×8746×3 unsigned16 TIFFs, linear camera RGB and sRGB
+with +2 EV. Both were checked for shape and 16-bit sample tags, with 10990/39759
+distinct sampled code values; the sRGB file has an ICC profile. They are under
+`/mnt/external/demosaic/evaluation/gfx-refiner-wide-v16-5k-full/` as
+`restored-0-{linear16,srgb16}.tiff`.
+[The V16 receipt](results/gfx-refiner-wide-v16-5k-full.json) records file hashes,
+weight/source identities, display settings, crop coordinates and timing.
+Restoration took 53.28 seconds while V17 was training, excluding decode/load,
+rendering and TIFF encoding. This is not an idle benchmark; the 10-second target
+remains unmet. Peak CUDA allocation was 0.804 GB, not total system memory.
+
+The displayed RawNIND crops and complete RGB16/sRGB16 files remain from the
+preceding full-frame run, under
 `/mnt/external/demosaic/evaluation/gfx-refiner-v15-5k-full/` as
-`restored-0-{linear16,srgb16}.tiff` (V15) and
-`restored-1-{linear16,srgb16}.tiff` (RawNIND).
-[The whole-frame receipt](results/gfx-refiner-v15-5k-full.json) records file
-hashes, weight/source identities, display settings, crop coordinates and timing.
-Restoration took 28.89 seconds for V15 and 16.35 for RawNIND while another
-evaluation was running; these are not idle benchmark timings and exclude
-decode/load/color rendering/TIFF encoding. The 10-second target remains unmet.
+`restored-1-{linear16,srgb16}.tiff`; [that receipt](results/gfx-refiner-v15-5k-full.json)
+also retains V15's earlier outputs and timings. Both runs use the same scene,
+noise priors, coordinates, tile geometry and display transforms.
 
 To reproduce or test another checkpoint, with the cached files present:
 

@@ -168,6 +168,21 @@ selection on resume is rejected. The photo-trained V15 recipe is
 real RAW development quality, but it is still behind RawNIND. Flat-only V14 is
 rejected. See [the review and native crop comparisons](photo-refinement-review.md).
 
+The larger `configs/dino-paired-refiner-wide-v16.yaml` has completed its 5000-step
+review and supplies the current README examples. It remains behind RawNIND on
+real development data. The optional `model.coarse_refinement_factor` adds a
+pooled RGB correction (factor 2/4/8/16; default 0 disables it).
+`coarse_refiner_only: true` freezes everything except that new branch and cannot
+be combined with `refiner_only`. Its first V17 trial is not promoted. See
+[residual scales and limitations](residual-scales.md).
+
+For controlled training comparisons, `trace_observations: true` logs a SHA-256
+of actual batch inputs/targets/metadata at logged steps. It canonicalizes tensor
+strides and includes types/shapes; it does not hash model predictions. The option
+defaults off. V18/V19 use it to verify sampled observations match while changing
+only the trainable parameter selection. Hashing requires a small CPU copy and is
+diagnostic overhead, not an inference feature.
+
 `flat_fraction` optionally adds continuous-precision smooth scenes, spanning
 neutral/color flat fields and gentle ramps down to deep shadows. The default is
 zero, preserving existing sample draws. With `flat_fraction: 0.1` and the default

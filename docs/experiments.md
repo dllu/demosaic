@@ -582,6 +582,24 @@ V11), with auxiliary RGB PSNR 38.9752/37.3160 and SSIM 0.91754/0.89840. RawNIND
 still leads by 0.9688/0.7104 dB measured PSNR. Full 427-photo synthetic PSNR/SSIM
 improves slightly to 31.44165/0.921748. Native crop reports show remaining
 texture loss and color variation. Complete 102 MP GFX RGB16/sRGB16 files were
-rendered and inspected; a larger V16 branch is undergoing its first 1000-step
-review and is now extending to 5000. See [the V15 review and native crops](photo-refinement-review.md) and
+rendered and inspected. See [the V15 review and native crops](photo-refinement-review.md) and
 [the GFX comparison](gfx-qualitative.md). The quality objective remains open.
+
+V16's larger 144,072-parameter correction branch completed 5000 steps. Known/
+unseen measured-CFA PSNR reaches 53.27466/53.07857, auxiliary RGB PSNR
+39.15836/37.65963 and SSIM 0.92152/0.90718. Full 427-photo synthetic PSNR/SSIM
+is 31.48800/0.923018. These improve over V15; RawNIND still leads real primary
+PSNR by 0.79394/0.48363 dB. Full GFX RGB16/sRGB16 outputs and native crop reports
+were inspected. See [the complete V16 review](wide-refinement-review.md).
+
+A [spatial-scale diagnostic](residual-scales.md) found that the correction
+branches reduce fine noise much more than coarse error. V17's separate pooled
+RGB branch, with all previous weights frozen, does not meaningfully improve
+real scores or the diagnostic at step1000, and is not promoted. V18/V19 now
+compare joint restoration/fine-refiner tuning against fine-refiner-only
+continuation from the same V16 weights, seed 43, data and LR 3e-5, with sampled
+observation/target hashes to verify matched draws. At their first 1000-step review,
+all 41 sampled hashes and checkpoint RNG states match. Joint tuning improves the
+synthetic screen but loses known-camera measured PSNR versus control; neither
+candidate is promoted. Both continue to 5000. See [the matched review with native
+crops](joint-tuning-review.md).
