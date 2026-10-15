@@ -75,16 +75,28 @@ def test_raw_clean_preparation_is_readonly_resumable_and_protected_split_checked
     monkeypatch.setattr(
         native, "read_raw", lambda path: (np.full((320, 320), 0.1, dtype=np.float32), meta)
     )
+    permissions = tmp_path / "permissions.txt"
+    credits = b"blood_oranges: CC0, by Fixture\n"
+    permissions.write_bytes(credits)
+    attribution = {
+        "filename": permissions.name,
+        "path": str(permissions),
+        "bytes": len(credits),
+        "publisher_checksum": {"type": "MD5", "value": hashlib.md5(credits).hexdigest()},
+        "sha256": hashlib.sha256(credits).hexdigest(),
+    }
     source = {
         "split": "train",
         "selection": [{"scene": "blood_oranges", "unknown_sensor": False, "clean": [record]}],
         "dataset_license": {"rightsIdentifier": "CC-BY-SA-4.0"},
         "attribution": "Fixture",
+        "auxiliary": [attribution],
     }
     manifest = tmp_path / "source.json"
     manifest.write_text(json.dumps(source))
     output = tmp_path / "prepared"
     first = prepare_raw_clean(manifest, output, min_size=32)
+    assert (output / "permissions.txt").read_bytes() == credits
     assert original.read_bytes() == payload and len(first["rows"]) == 1
     cache = output / first["rows"][0]["cache"]
     stamp = cache.stat().st_mtime_ns

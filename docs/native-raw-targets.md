@@ -43,6 +43,8 @@ clipped highlights and optical limitations remain. Per-image caches contain
 9,846–47,494 distinct uint16 codes; this does not establish that many bits of
 independent sensor information. Source hashes, camera metadata, attribution and
 cache hashes are retained. Preparation is locked, resumable and recipe checked.
+The publisher's per-scene `permissions.txt` is checksum verified and copied
+beside the prepared manifest, preserving individual credits with the cache.
 
 Training samples scenes uniformly, then captures within each scene. Crops use
 shrink-only scaling, rotations/flips and existing optical/geometry augmentation.

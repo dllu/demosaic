@@ -74,6 +74,13 @@ def prepare_raw_clean(manifest, output, *, factor=8, min_size=256):
         raise ValueError("RAW clean preparation requires the protected-scene-free train selection")
     if source["dataset_license"].get("rightsIdentifier") != "CC-BY-SA-4.0":
         raise ValueError("Expected the licensed RawNIND publisher selection")
+    permissions = [r for r in source.get("auxiliary", []) if r["filename"] == "permissions.txt"]
+    if len(permissions) != 1:
+        raise ValueError("Expected publisher permissions.txt for scene attribution")
+    checked_permissions = verify_file(permissions[0]["path"], permissions[0])
+    if checked_permissions["sha256"] != permissions[0]["sha256"]:
+        raise ValueError("Scene attribution checksum mismatch")
+    permission_bytes = Path(checked_permissions["path"]).read_bytes()
     if factor < 2 or factor % 2 or min_size < 32:
         raise ValueError("Invalid bin factor/minimum size")
     algorithm = hashlib.sha256(
@@ -102,6 +109,7 @@ def prepare_raw_clean(manifest, output, *, factor=8, min_size=256):
         ) != recipe:
             raise ValueError("RAW clean cache recipe differs; choose a new destination")
         (output / "recipe.json").write_text(json.dumps(recipe, indent=2) + "\n")
+        (output / "permissions.txt").write_bytes(permission_bytes)
         archive = output / "source"
         archive.mkdir(exist_ok=True)
         for p in [Path(__file__), Path(io.__file__)]:
