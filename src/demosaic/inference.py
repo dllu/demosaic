@@ -1,7 +1,9 @@
 """Bounded-memory, phase-preserving, overlapping tiled inference."""
 
+import hashlib
 import time
 from contextlib import nullcontext
+from pathlib import Path
 
 import numpy as np
 import torch
@@ -146,7 +148,12 @@ def restore_tiled(
 def load_checkpoint(path, device="cpu"):
     from .model import JointDemosaic, ModelConfig
 
-    checkpoint = torch.load(path, map_location="cpu", weights_only=True)
+    # Hash the same opened inode that was loaded, even if a live trainer
+    # atomically replaces its last.pt pathname while the model is loading.
+    with Path(path).open("rb") as handle:
+        checkpoint = torch.load(handle, map_location="cpu", weights_only=True)
+        handle.seek(0)
+        checkpoint["loaded_sha256"] = hashlib.file_digest(handle, "sha256").hexdigest()
     model = JointDemosaic(ModelConfig.from_checkpoint(checkpoint["model_config"]))
     weights = checkpoint.get("ema", checkpoint["model"])
     missing, unexpected = model.load_state_dict(weights, strict=False)

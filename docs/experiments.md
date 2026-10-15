@@ -183,3 +183,73 @@ restoration scale and IEEE FP32 physical operations. Selection uses the balanced
 This experiment changes data, precision, conditioning and training budget; any
 eventual improvement cannot be attributed to noise modulation alone. Training
 results and final quality/speed checks remain pending.
+
+## Broader main-run and smooth-scene comparison
+
+The full paired 427-photo / 16-stress-image suite compared the V4 checkpoint at
+16000 steps after DINO20k against V5's 5000-step fine-tuning from V4 step 11000.
+They have the same nominal number of restoration updates since DINO20k, but
+different LR/optimizer and data recipes; this is not a causal flat-fraction ablation.
+Exact hashes and per-condition scores are in
+[results/main16k-vs-smooth5k.json](results/main16k-vs-smooth5k.json).
+
+| Method | Camera-linear PSNR | Rendered PSNR | Rendered SSIM |
+| --- | ---: | ---: | ---: |
+| V4 main, step 16000 | 35.917 | 29.854 | 0.8855 |
+| V5 smooth-scene trial, step 5000 | 35.899 | 29.778 | 0.8830 |
+| Earlier DINO20k | 35.305 | 29.095 | 0.8527 |
+| RawNIND, global CFA gain | 31.217 | 26.671 | 0.7872 |
+
+V4 exceeds RawNIND in mean PSNR and SSIM in each of the seven declared
+conditions. In shadows, V4 reaches 34.768 dB/0.8768 versus RawNIND's
+33.510/0.8524; at the ISO12800 prior it reaches 28.195/0.8124 versus
+25.795/0.7594. These results close earlier synthetic-condition failures, but
+real night crops still show substantially more grain than RawNIND. Low-noise
+detail also remains a gap: ADC-only V4 scores 29.717/0.9124 versus Malvar's
+29.923/0.9294. No global state-of-the-art claim follows from this protocol.
+
+V5's flat-field bias improves, but it trails V4 by 0.0758 dB rendered PSNR
+(source-bootstrap 95% interval 0.0717–0.0804 in V4's favor) and 0.00248 SSIM.
+It remains stopped at its planned 5000-step review point. V4 was subsequently
+interrupted deliberately after verifying a finite, resumable step-30000 checkpoint;
+its 100000-step schedule did not complete. Only our own training process was stopped.
+
+## Variance-adaptive residual baseline on the full corpus
+
+`configs/dino-prior-44732.yaml` uses all 40170 training sources from the full
+audited corpus (2303 validation / 2255 untouched test / 4 excluded).
+Its learned network retains the frozen DINOv3 branch and multiscale noise
+modulation, but predicts corrections to white-balanced Malvar interpolation of
+a variance-adaptively filtered mosaic. The filter treats each spatial sensor
+phase independently, shrinks low-contrast areas toward their local mean, and
+returns zero-variance samples exactly. Its local second-moment assumptions are
+approximate near clipping and weak texture; neural correction remains necessary.
+
+A 16-photo RGGB pilot found a seven-phase-pixel window better than 15/31 for
+noisy photographic detail. The prior is also included as an independent classical
+comparator in new quality runs. In V6, V4 step-23000 feature weights initialize
+the restoration network; the RGB and mosaic output heads are reset to zero so
+its initial output equals the declared prior. Batch size is eight. Ten percent
+of clean draws are smooth scenes, 20% detailed procedural and 70% photographic;
+independently, 10% of noise draws are ADC-only to train low-noise detail directly.
+The first invocation saves/stops at 5000 steps before continuing the 100k schedule.
+These changes are a new recipe, not an isolated architecture ablation.
+
+At V6 step 1000, the 16-photo balanced monitor is 31.0246 dB/0.91337 SSIM.
+RGGB ADC-only reaches 31.352/0.9447 and shadows 36.163/0.9083. At step 5000,
+the balanced monitor reaches 31.3982/0.91846. These are training-monitor scores;
+full-set evaluation and final qualitative checks remain pending. On a 0.01-level
+ISO1600-prior flat, residual sigma falls to 0.260 of bilinear versus V5's 0.632;
+RawNIND still reaches 0.0356. Real night crops visibly reduce the older model's
+grain, but low-frequency color variation remains. Passing software tests alone
+does not establish final restoration quality.
+
+The V6 step-1000 model processed an entire 8746×11662 GFX100S RAW to linear
+camera RGB16 and ICC-tagged sRGB16 TIFFs. TIFF tags, dimensions and many
+non-8-bit-grid values were checked. With two concurrent training jobs, cold
+restoration took 39.264 s and decode/load/restore/preview/encode took 58.714 s;
+this is a capability check, not an idle speed benchmark. Peak allocated CUDA
+memory was 0.820 GB; host RAW/output arrays are additional shared-DRAM allocations.
+The idle, warmed step-5000 100 MP benchmark takes 12.767 s, excluding decode,
+checkpoint loading and encoding. Compiler acceleration is being evaluated
+separately with explicit numerical comparisons.

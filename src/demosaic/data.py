@@ -210,6 +210,7 @@ def degrade(
     reconstruct_highlights=False,
     preserve_negative_read_noise=False,
     physical_fp32=True,
+    noise_free_fraction=0.0,
 ):
     """Convert clean linear sRGB to randomized camera RGB, then mosaic/noise.
 
@@ -218,6 +219,8 @@ def degrade(
     """
     batch, _, _, _ = rgb.shape
     device = rgb.device
+    if not 0 <= noise_free_fraction <= 1:
+        raise ValueError("Noise-free fraction must be in [0,1]")
     if training:
         wb = torch.ones(batch, 3, device=device)
         wb[:, 0] = torch.empty(batch, device=device).uniform_(1.3, 2.6)
@@ -231,6 +234,9 @@ def degrade(
             torch.randint(4, (batch,), device=device)
         ]
         shot, read = sample_coefficients(batch, device)
+        if noise_free_fraction:
+            keep = torch.rand_like(shot) >= noise_free_fraction
+            shot, read = shot * keep, read * keep
     else:
         wb = rgb.new_tensor([2.0, 1.0, 1.5])[None].expand(batch, -1)
         inverse = torch.eye(3, device=device)[None].expand(batch, -1, -1)

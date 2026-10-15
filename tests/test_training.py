@@ -8,7 +8,10 @@ import yaml
 from demosaic.train import train
 
 
-def test_checkpoint_resume_matches_uninterrupted_training(tmp_path):
+@pytest.mark.parametrize(
+    "warm_start,legacy_metadata", [(False, False), (True, False), (True, True)]
+)
+def test_checkpoint_resume_matches_uninterrupted_training(tmp_path, warm_start, legacy_metadata):
     """RNG, augmentation, draw position, optimizer, LR and EMA survive a restart."""
     source = tmp_path / "clean.npy"
     rng = np.random.default_rng(7)
@@ -44,17 +47,27 @@ def test_checkpoint_resume_matches_uninterrupted_training(tmp_path):
     }
     path = tmp_path / "config.yaml"
     path.write_text(yaml.safe_dump(config))
-    full = train(path)
+    initialize = None
+    if warm_start:
+        initialize = train(path)
+        config["run"] = str(tmp_path / "fine-full")
+        path.write_text(yaml.safe_dump(config))
+    full = train(path, initialize=initialize)
     with pytest.raises(ValueError, match="already has checkpoints"):
         train(path)
     config["run"] = str(tmp_path / "resumed")
     path.write_text(yaml.safe_dump(config))
-    interrupted = train(path, stop_after=2)
+    interrupted = train(path, initialize=initialize, stop_after=2)
     assert torch.load(interrupted, weights_only=True)["step"] == 2
+    if legacy_metadata:
+        state = torch.load(interrupted, weights_only=True)
+        del state["config"]["initialized_from"]
+        torch.save(state, interrupted)
     resumed = train(path, resume=interrupted)
     expected = torch.load(full, weights_only=True)
     actual = torch.load(resumed, weights_only=True)
     assert actual["step"] == 4
+    assert actual["config"].get("initialized_from") == expected["config"].get("initialized_from")
     for group in ("model", "ema"):
         for name, value in expected[group].items():
             assert torch.equal(actual[group][name], value), name

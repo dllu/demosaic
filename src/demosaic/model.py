@@ -6,8 +6,9 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
-from .cfa import bilinear
+from .cfa import bilinear, malvar
 from .color import render
+from .prior import wiener_packed
 
 
 @dataclass
@@ -23,6 +24,8 @@ class ModelConfig:
     camera_conditioning: bool = False
     noise_modulation: bool = False
     physical_fp32: bool = True
+    baseline: str = "bilinear"
+    prior_window: int = 7
 
     def to_dict(self):
         return asdict(self)
@@ -162,6 +165,8 @@ class JointDemosaic(nn.Module):
         cfg = self.config
         if len(cfg.encoder_blocks) != len(cfg.decoder_blocks) or cfg.width < 4:
             raise ValueError("Invalid encoder/decoder configuration")
+        if cfg.baseline not in ("bilinear", "wiener-malvar"):
+            raise ValueError("Unknown restoration baseline")
         self.multiple = 2 ** len(cfg.encoder_blocks)
         self.stem = nn.Conv2d(32 if cfg.camera_conditioning else 20, cfg.width, 3, padding=1)
         self.encoders, self.downs = nn.ModuleList(), nn.ModuleList()
@@ -203,7 +208,12 @@ class JointDemosaic(nn.Module):
             raise ValueError("Expected four packed phases and matching variance maps")
         if colors.ndim == 1:
             colors = colors[None].expand(batch, -1)
-        baseline = bilinear(packed, colors, fp32=self.config.physical_fp32)
+        auxiliary_base = packed
+        if self.config.baseline == "wiener-malvar":
+            auxiliary_base = wiener_packed(packed, variance, self.config.prior_window)
+            baseline = malvar(auxiliary_base, colors, wb)
+        else:
+            baseline = bilinear(packed, colors, fp32=self.config.physical_fp32)
         labels = F.one_hot(colors, 3).to(packed.dtype).reshape(batch, 12, 1, 1)
         inputs = torch.cat(
             (packed, variance.clamp_min(0).sqrt(), labels.expand(-1, -1, height, width)), dim=1
@@ -252,7 +262,7 @@ class JointDemosaic(nn.Module):
         x = x[..., :height, :width]
         prediction = baseline + F.pixel_shuffle(self.head(x), 2).float()
         if auxiliary:
-            return prediction, packed + self.mosaic_head(x).float()
+            return prediction, auxiliary_base + self.mosaic_head(x).float()
         return prediction
 
     def restoration_state_dict(self):

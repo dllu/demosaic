@@ -263,6 +263,8 @@ def main(argv=None):
                 "input": str(args.input),
                 "checkpoint": str(args.checkpoint),
                 "step": checkpoint.get("step"),
+                "checkpoint_sha256": checkpoint["loaded_sha256"],
+                "model_config": model.config.to_dict(),
                 "shot": args.shot,
                 "read": args.read,
                 "pattern": pattern,
@@ -312,9 +314,13 @@ def main(argv=None):
     elif args.command == "benchmark":
         from .cfa import color_indices
         from .inference import load_checkpoint, restore_tiled
+        from .suite import freeze_checkpoint
 
         writable_path(args.output)
-        model, checkpoint = load_checkpoint(args.checkpoint, args.device)
+        if args.output.resolve() == args.checkpoint.resolve():
+            raise ValueError("Benchmark output must not overwrite its checkpoint")
+        frozen, digest = freeze_checkpoint(args.checkpoint, args.output.parent / "weights")
+        model, checkpoint = load_checkpoint(frozen, args.device)
         # Warm kernels before timing; benchmark records hardware and dimensions.
         raw = torch.rand(args.height, args.width, generator=torch.Generator().manual_seed(42))
         kwargs = {
@@ -331,6 +337,9 @@ def main(argv=None):
             args.output,
             {
                 "checkpoint": str(args.checkpoint),
+                "checkpoint_snapshot": str(frozen),
+                "checkpoint_sha256": digest,
+                "model_config": model.config.to_dict(),
                 "step": checkpoint.get("step"),
                 "hardware": torch.cuda.get_device_name()
                 if args.device.startswith("cuda")

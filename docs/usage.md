@@ -111,6 +111,15 @@ Validation never substitutes procedural examples for held-out photographs.
 The V5 config tests this targeted curriculum as fine-tuning from a frozen V4
 checkpoint; it is a separate run with a fresh optimizer.
 
+The full-corpus V6 config, `configs/dino-prior-44732.yaml`, selects
+`model.baseline: wiener-malvar` and `prior_window: 7`. It uses the declared
+variance map for a local phase-wise filter before Malvar demosaicing, then the
+network predicts RGB and clean-mosaic corrections. The default baseline remains
+bilinear for existing checkpoints. `reset_output_heads: true` resets only those
+two heads during `--initialize`, so initial predictions equal the new baseline;
+it does not reset them on resume. `noise_free_fraction` adds explicit ADC-only
+training samples. Its default is zero and preserves the earlier RNG sequence.
+
 `validation_protocol`, `validation_images` and `configs/evaluation.yaml` enable
 the balanced multi-condition training monitor. `best.pt` then follows panel
 rendered PSNR, with per-case SSIM/PSNR also logged. Its protocol is copied into

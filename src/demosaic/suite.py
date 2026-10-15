@@ -16,6 +16,7 @@ from .inference import load_checkpoint
 from .metrics import quality_metrics
 from .noise import add_noise, variance_map
 from .precision import amp_context
+from .prior import wiener_packed
 from .reference import RawNind, load_rawnind
 from .safety import writable_path
 
@@ -248,12 +249,14 @@ def run_suite(
         frozen, digest = freeze_checkpoint(source, output / "weights")
         model, state = load_checkpoint(frozen, device)
         model.eval()
-        label = f"{index}:{Path(source).parent.name}:step-{state['step']}"
+        run_name = Path(state.get("config", {}).get("run", Path(source).parent)).name
+        label = f"{index}:{run_name}:step-{state['step']}"
         models.append((label, model, True))
         model_records.append(
             {
                 "label": label,
                 "source": str(source),
+                "training_run": state.get("config", {}).get("run"),
                 "snapshot": str(frozen),
                 "sha256": digest,
                 "step": state["step"],
@@ -312,7 +315,11 @@ def run_suite(
         "batch_size": batch_size,
         "adc_bits": 16,
         "adc_black": 0.03,
-        "classical_baselines": ["Bilinear:IEEE-FP32", "Malvar2004:white-balanced:IEEE-FP32"],
+        "classical_baselines": [
+            "Bilinear:IEEE-FP32",
+            "Malvar2004:white-balanced:IEEE-FP32",
+            "Wiener7+Malvar2004:white-balanced:IEEE-FP32",
+        ],
         "torch": str(torch.__version__),
         "inference_source_sha256": source_digest.hexdigest(),
         "inference_source_snapshot": str(snapshot),
@@ -350,6 +357,14 @@ def run_suite(
                     predictions = [
                         ("Bilinear", bilinear(batch["packed"], batch["colors"])),
                         ("Malvar2004:WB", malvar(batch["packed"], batch["colors"], batch["wb"])),
+                        (
+                            "Wiener7+Malvar2004:WB",
+                            malvar(
+                                wiener_packed(batch["packed"], batch["variance"]),
+                                batch["colors"],
+                                batch["wb"],
+                            ),
+                        ),
                     ]
                     for label, model, amp in models:
                         with amp_context(device, amp):

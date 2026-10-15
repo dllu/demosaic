@@ -136,6 +136,13 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     random.seed(seed)
     torch.manual_seed(seed)
     resume_state = torch.load(resume, map_location="cpu", weights_only=True) if resume else None
+    lineage_path = run / "initialization.json"
+    if resume_state:
+        lineage = resume_state["config"].get("initialized_from")
+        if lineage is None and lineage_path.exists():
+            lineage = json.loads(lineage_path.read_text())
+        if lineage is not None:
+            config["initialized_from"] = lineage
     model_options = dict(config.get("model", {}))
     if resume_state and "physical_fp32" not in model_options:
         model_options["physical_fp32"] = ModelConfig.from_checkpoint(
@@ -167,7 +174,16 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             "sha256": hashlib.sha256(Path(initialize).read_bytes()).hexdigest(),
             "step": initial.get("step"),
         }
+        if config.get("reset_output_heads", False):
+            for head in (model.head, model.mosaic_head):
+                torch.nn.init.zeros_(head.weight)
+                torch.nn.init.zeros_(head.bias)
         del initial
+    if "initialized_from" in config:
+        lineage = config["initialized_from"]
+        if lineage_path.exists() and json.loads(lineage_path.read_text()) != lineage:
+            raise ValueError("Run initialization record differs from the checkpoint")
+        lineage_path.write_text(json.dumps(lineage, indent=2) + "\n")
     # Keep just one frozen DINO backbone: EMA contains restoration weights only.
     ema = {key: value.detach().clone() for key, value in model.restoration_state_dict().items()}
     optimizer = torch.optim.AdamW(
@@ -271,6 +287,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             reconstruct_highlights=config.get("reconstruct_highlights", False),
             preserve_negative_read_noise=config.get("preserve_negative_read_noise", False),
             physical_fp32=model.config.physical_fp32,
+            noise_free_fraction=config.get("noise_free_fraction", 0.0),
         )
         optimizer.zero_grad(set_to_none=True)
         with amp_context(device, amp):

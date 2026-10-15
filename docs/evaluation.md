@@ -58,6 +58,11 @@ global and per-channel least-squares gains against observed CFA samples; neither
 method uses clean targets. Its original network and weights remain separately
 fetched and checksum-pinned.
 
+New runs also include `Wiener7+Malvar2004:WB`, an independent variance-adaptive
+classical comparator. It is not the learned V6 model: V6 predicts additional
+corrections using the restoration network and DINO features. Historical suites
+predating this comparator retain their original source snapshots and method lists.
+
 The 24k-source training config monitors 16 native validation crops across all
 28 CFA/condition cases, and selects EMA checkpoints by balanced rendered PSNR.
 It still logs the older single-condition diagnostic. The panel is a training

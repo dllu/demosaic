@@ -22,6 +22,7 @@ from demosaic.inference import load_checkpoint
 from demosaic.io import read_raw
 from demosaic.noise import Sensor
 from demosaic.precision import amp_context
+from demosaic.prior import wiener_packed
 from demosaic.reference import load_rawnind
 from demosaic.safety import writable_path
 from demosaic.suite import freeze_checkpoint
@@ -42,7 +43,8 @@ def main():
     for path in args.checkpoint:
         frozen, digest = freeze_checkpoint(path, output / "weights")
         model, state = load_checkpoint(frozen, "cuda")
-        label = f"{path.parent.name}, step {state['step']}"
+        run_name = Path(state.get("config", {}).get("run", path.parent)).name
+        label = f"{run_name}, step {state['step']}"
         models.append((label, model, True))
         weights.append({"label": label, "source": str(path), "sha256": digest, "amp": "BF16"})
         del state
@@ -58,8 +60,8 @@ def main():
     selections = json.loads(args.selection.read_text())
     figure, axes = plt.subplots(
         len(selections),
-        len(models) + 2,
-        figsize=(4 * (len(models) + 2), 4 * len(selections)),
+        len(models) + 3,
+        figsize=(4 * (len(models) + 3), 4 * len(selections)),
         squeeze=False,
     )
     records = []
@@ -84,6 +86,7 @@ def main():
         images = [
             ("Bilinear", bilinear(packed, colors)),
             ("Malvar 2004, WB", malvar(packed, colors, wb)),
+            ("Variance prior + Malvar", malvar(wiener_packed(packed, variance), colors, wb)),
         ]
         for label, model, amp in models:
             with amp_context("cuda", amp):
