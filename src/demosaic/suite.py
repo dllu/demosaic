@@ -18,6 +18,7 @@ from .noise import add_noise, variance_map
 from .precision import COMPUTE_DTYPES, amp_context
 from .prior import wiener_packed
 from .reference import RawNind, load_rawnind
+from .reporting import center_crop, display_crop, save_triplet, write_report
 from .safety import writable_path
 
 
@@ -352,10 +353,13 @@ def run_suite(
         "noise_pairing": "per-source/condition/CFA seed; independent of model and batch size",
     }
     (output / "protocol.json").write_text(json.dumps(metadata, indent=2) + "\n")
-    records = []
+    records, crops = [], []
     entries = [("photo", data.rows[i]["id"], i) for i in range(count)] + [
         ("synthetic", f"synthetic-{i}", i) for i in range(synthetic_count)
     ]
+    crop_ids = {identity for _, identity, _ in entries[:2]}
+    crop_condition = max(conditions, key=lambda c: c["shot"] + c["read"])["name"]
+    crop_models = {row["label"]: row for row in model_records}
     with (output / "per-image.jsonl").open("w") as stream:
         for start in range(0, len(entries), batch_size):
             current = entries[start : start + batch_size]
@@ -410,6 +414,54 @@ def run_suite(
                         else (...,)
                     )
                     for label, prediction in predictions:
+                        if (
+                            label in crop_models
+                            and condition["name"] == crop_condition
+                            and pattern == patterns[0]
+                        ):
+                            xywh = center_crop(prediction.shape, border=border)
+                            for i, (kind, identity, source_index) in enumerate(current):
+                                if identity not in crop_ids:
+                                    continue
+                                panels = [
+                                    ("Noisy (Malvar)", predictions[1][1]),
+                                    ("Denoised", prediction),
+                                    ("GT (synthetic)", batch["target"]),
+                                ]
+                                images = [
+                                    (
+                                        name,
+                                        display_crop(
+                                            rgb[i : i + 1],
+                                            batch["wb"][i : i + 1],
+                                            batch["matrix"][i : i + 1],
+                                            xywh,
+                                        ),
+                                    )
+                                    for name, rgb in panels
+                                ]
+                                crops.append(
+                                    save_triplet(
+                                        output,
+                                        f"{identity}:{label}",
+                                        images,
+                                        caption=f"{identity} / {condition['name']} / {pattern} / {label}",
+                                        metadata={
+                                            "source_id": identity,
+                                            "source": data.rows[source_index]
+                                            if kind == "photo"
+                                            else {},
+                                            "validation_index": source_index,
+                                            "validation_seed": data.seed,
+                                            "evaluation_tile_xywh": xywh,
+                                            "condition": condition,
+                                            "pattern": pattern,
+                                            "model": crop_models[label],
+                                            "display_exposure": 1.0,
+                                            "reference": "Exact synthetic clean target",
+                                        },
+                                    )
+                                )
                         metrics = quality_metrics(
                             prediction[trim], batch["target"][trim], batch["wb"], batch["matrix"]
                         )
@@ -439,6 +491,14 @@ def run_suite(
                 ),
                 flush=True,
             )
-    result = {**metadata, **summarize(records)}
+    result = {**metadata, **summarize(records), "native_crops": crops}
     (output / "summary.json").write_text(json.dumps(result, indent=2, allow_nan=False) + "\n")
+    write_report(
+        output,
+        result,
+        crops,
+        title="Synthetic quality evaluation",
+        note="Synthetic noisy observations with exact clean targets; real RAW quality is assessed separately.",
+        metrics=("srgb_psnr", "srgb_ssim", "linear_psnr"),
+    )
     return result

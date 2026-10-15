@@ -15,6 +15,7 @@ from .metrics import quality_metrics
 from .precision import COMPUTE_DTYPES, amp_context
 from .prior import wiener_packed
 from .reference import RawNind, load_rawnind, publisher_input_scale
+from .reporting import center_crop, display_crop, save_triplet, write_report
 from .safety import writable_path
 from .suite import freeze_checkpoint, summarize
 
@@ -109,7 +110,7 @@ def evaluate_pairs(
                 "precision": "IEEE float32",
             }
         )
-    rows, pair_rows, pictures, baseline_scales = [], [], [], []
+    rows, pair_rows, pictures, baseline_scales, crops = [], [], [], [], []
     high_cases = {}
     for case in data["cases"]:
         previous = high_cases.get(case["scene"])
@@ -117,6 +118,7 @@ def evaluate_pairs(
             previous["metadata"].get("iso") or 0
         ):
             high_cases[case["scene"]] = case
+    crop_scenes = set(sorted(high_cases)[:2])
     with (output / "per-crop.jsonl").open("w") as stream:
         for case in data["cases"]:
             meta = case["metadata"]
@@ -218,6 +220,46 @@ def evaluate_pairs(
                         rows.append(row)
                         case_records.append(row)
                         stream.write(json.dumps(row, allow_nan=False) + "\n")
+                    center = len(case["crops"]) // 2
+                    if (
+                        label in {item[0] for item in current_models}
+                        and case["scene"] in crop_scenes
+                        and case is high_cases[case["scene"]]
+                        and start <= center < start + count
+                    ):
+                        i = center - start
+                        xywh = center_crop(prediction.shape, border=border)
+                        images = [
+                            (
+                                name,
+                                display_crop(
+                                    rgb[i : i + 1], wb[i : i + 1], matrix[i : i + 1], xywh
+                                ),
+                            )
+                            for name, rgb in [
+                                ("Noisy (Malvar)", predictions[1][1]),
+                                ("Denoised", prediction),
+                                ("AHD reference", tensors["reference_rgb"]),
+                            ]
+                        ]
+                        crops.append(
+                            save_triplet(
+                                output,
+                                f"{case['scene']}:{label}",
+                                images,
+                                caption=f"{case['scene']} / ISO {meta.get('iso')} / {label}",
+                                metadata={
+                                    "scene": case["scene"],
+                                    "noisy_sha256": case["noisy"]["sha256"],
+                                    "prepared_crop": crop_records[i],
+                                    "evaluation_tile_xywh": xywh,
+                                    "model_label": label,
+                                    "display_exposure": 1.0,
+                                    "variance_multiplier": noise_multiplier,
+                                    "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA",
+                                },
+                            )
+                        )
                 if gallery and case is high_cases[case["scene"]]:
                     center = len(case["crops"]) // 2
                     if start <= center < start + count:
@@ -285,9 +327,18 @@ def evaluate_pairs(
         "dataset_license": data["dataset_license"],
         "attribution": data["attribution"],
         "per_pair": pair_rows,
+        "native_crops": crops,
         **aggregate,
     }
     (output / "summary.json").write_text(json.dumps(result, indent=2, allow_nan=False) + "\n")
+    write_report(
+        output,
+        result,
+        crops,
+        title="Paired real RAW evaluation",
+        note="Primary scores use measured clean CFA samples. The displayed reference is auxiliary LibRaw AHD, not exact RGB ground truth.",
+        metrics=("sensor_psnr", "ahd_srgb_psnr", "ahd_srgb_ssim"),
+    )
     if pictures:
         import matplotlib
 

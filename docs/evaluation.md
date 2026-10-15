@@ -1,5 +1,27 @@
 # Quality and noise diagnostics
 
+Every improved-model performance report must include at least two small 100%
+noisy/denoised/GT crop triplets. Both `demosaic quality` and
+`scripts/evaluate_paired_raw.py` now write `report.md`, native PNG triplets and
+JSON crop receipts automatically, independently of the optional overview gallery.
+Each panel is 160×160 pixels with no resizing, using common WB, color transform
+and exposure. The noisy view is Malvar demosaicing without denoising; PNGs are
+8-bit sRGB previews of the unquantized evaluation arrays. Open the original PNG
+at 100% if a Markdown viewer scales it. Quantitative evaluation remains floating
+point and inference still supports 16-bit TIFF output.
+
+Synthetic reports select the first two source entries, the protocol's first CFA
+pattern and the condition with greatest shot+read coefficients. Real reports
+select the first two scene names, highest-ISO capture in each scene, middle
+prepared tile and its center. These choices precede model output inspection;
+all methods use the same regions. Receipts retain source identities, coordinates,
+model identity and display settings; summary JSON holds full checkpoint hashes.
+Synthetic GT is exact. Paired real RGB is an auxiliary calibrated AHD reference;
+primary real scores use measured clean CFA samples. Independently captured
+personal photos require an explicit qualitative-reference label; see
+[the GFX scene](gfx-qualitative.md). Add representative native crops to the README
+when promoting an improved model, and preserve any visible failures in its report.
+
 ## Multi-condition evaluation
 
 `demosaic quality` freezes the exact checkpoint bytes before loading them, so

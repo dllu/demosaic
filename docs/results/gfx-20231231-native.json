@@ -1,0 +1,813 @@
+{
+  "selection": {
+    "noisy": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+    "reference": ".cache/gfx-qualitative-20231231/2023-12-31-17-17-29_DSCF3883_5aca341358e235a261977d539b38bdbbedc40fc3.raf",
+    "display_exposure": 4.0,
+    "notes": "GFX100S / 55mm. Noisy: ISO6400, f/1.7, 1/300s, underexposed to retain platform/train lights. Reference: ISO100, f/5.6, 2.5s, captured about ten minutes later. Framing, aperture, depth of field, clouds, lights and moving subjects differ. Independently selected native sensor regions: qualitative reference, not exact ground truth. No resizing or warping. These photos are evaluation-only, never training.",
+    "regions": [
+      {
+        "name": "overcast-sky",
+        "noisy_xy": [
+          5800,
+          1400
+        ],
+        "reference_xy": [
+          6700,
+          970
+        ],
+        "size": 160
+      },
+      {
+        "name": "building-detail",
+        "noisy_xy": [
+          5680,
+          2840
+        ],
+        "reference_xy": [
+          5934,
+          2440
+        ],
+        "size": 160
+      }
+    ]
+  },
+  "sources": [
+    {
+      "role": "noisy",
+      "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e",
+      "metadata": {
+        "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+        "camera": "GFX100S",
+        "pattern": "RGGB",
+        "black_levels": [
+          4098.0,
+          4097.0,
+          4104.0,
+          4104.0
+        ],
+        "white_levels": [
+          65535.0,
+          65535.0,
+          65535.0,
+          65535.0
+        ],
+        "white_balance": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "camera_to_srgb": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "flip": 0,
+        "iso": 6400,
+        "adc_white_level": 65535.0
+      }
+    },
+    {
+      "role": "reference",
+      "sha256": "7de8e3493e76d8b3f8663ebe0237d72d14aa8626b5962ee8a1e7d10ee3fd4806",
+      "metadata": {
+        "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-29_DSCF3883_5aca341358e235a261977d539b38bdbbedc40fc3.raf",
+        "camera": "GFX100S",
+        "pattern": "RGGB",
+        "black_levels": [
+          256.0,
+          255.0,
+          256.0,
+          256.0
+        ],
+        "white_levels": [
+          65535.0,
+          65535.0,
+          65535.0,
+          65535.0
+        ],
+        "white_balance": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "camera_to_srgb": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "flip": 0,
+        "iso": 100,
+        "adc_white_level": 65535.0
+      }
+    }
+  ],
+  "models": [
+    {
+      "label": "0:dino-paired-commons-44732-v11:step-5000",
+      "sha256": "bb8177fc53f69173cd8ea39f75ed20ed474cd7e78cc4efb13916848a37290fbd",
+      "snapshot": "/mnt/external/demosaic/evaluation/gfx-20231231-native-v2/weights/weights-bb8177fc53f69173cd8ea39f75ed20ed474cd7e78cc4efb13916848a37290fbd.pt",
+      "precision": "float16",
+      "model_config": {
+        "width": 32,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+        "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+        "camera_conditioning": true,
+        "noise_modulation": true,
+        "physical_fp32": true,
+        "baseline": "wiener-malvar",
+        "prior_window": 7,
+        "standardized_noise": false,
+        "noise_refinement": false,
+        "refinement_width": 24,
+        "refinement_blocks": 4,
+        "refinement_window": 63
+      }
+    },
+    {
+      "label": "1:dino-flat-refiner-v14:step-1000",
+      "sha256": "8dd5dd893b9e040a5c93c49cce0396eed4e647cdae78555c8c41576086d745c9",
+      "snapshot": "/mnt/external/demosaic/evaluation/gfx-20231231-native-v2/weights/weights-8dd5dd893b9e040a5c93c49cce0396eed4e647cdae78555c8c41576086d745c9.pt",
+      "precision": "float16",
+      "model_config": {
+        "width": 32,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+        "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+        "camera_conditioning": true,
+        "noise_modulation": true,
+        "physical_fp32": true,
+        "baseline": "wiener-malvar",
+        "prior_window": 7,
+        "standardized_noise": false,
+        "noise_refinement": true,
+        "refinement_width": 24,
+        "refinement_blocks": 4,
+        "refinement_window": 63
+      }
+    },
+    {
+      "label": "RawNIND:CFA-LS",
+      "precision": "IEEE float32",
+      "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+    }
+  ],
+  "noise_estimate": {
+    "shot": null,
+    "read": null,
+    "reliable": false,
+    "reason": "insufficient_intensity_span",
+    "candidate_patches": 4096,
+    "accepted_patches": 765,
+    "intensity_span": 0.038634646125137784,
+    "reference_intensity": 0.012820597738027573,
+    "reference_variance": 1.972013160411734e-05,
+    "shot_interval": null,
+    "read_interval": null,
+    "bins": [
+      {
+        "mean": 0.007329472806304693,
+        "variance": 1.1212351637368556e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.008058307692408562,
+        "variance": 1.2951884855283424e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.00863637961447239,
+        "variance": 1.376775207972969e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.00912708230316639,
+        "variance": 1.4333081253425917e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.009817061014473438,
+        "variance": 1.49797733683954e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.010441528633236885,
+        "variance": 1.6194640011235606e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.01121448166668415,
+        "variance": 1.765823344612727e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.012145820073783398,
+        "variance": 1.9053898540732916e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.013172911014407873,
+        "variance": 2.0338953618193045e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.01416056603193283,
+        "variance": 2.262902671645861e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.01539386436343193,
+        "variance": 2.358829169679666e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.01708341483026743,
+        "variance": 2.6296196665498428e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.018991870805621147,
+        "variance": 2.922604380728444e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.022024966776371002,
+        "variance": 3.354269210831262e-05,
+        "patches": 47
+      },
+      {
+        "mean": 0.03205864876508713,
+        "variance": 4.5584198232972994e-05,
+        "patches": 47
+      },
+      {
+        "mean": 0.05841492861509323,
+        "variance": 8.342704677488655e-05,
+        "patches": 47
+      }
+    ]
+  },
+  "conditioning": {
+    "shot": 0.00128,
+    "read": 6.553600000000001e-06,
+    "source": "nominal ISO prior (not calibrated)"
+  },
+  "reference_calibration": {
+    "rgb_to_sensor_gains": [
+      1.0000663817425588,
+      1.0000572249368773,
+      1.000089292653889
+    ],
+    "samples": [
+      931092,
+      2287985,
+      685590
+    ]
+  },
+  "native_crops": [
+    {
+      "image": "crop-702bcbaeb2562e55.png",
+      "caption": "overcast-sky / 0:dino-paired-commons-44732-v11:step-5000",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 reference",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "b9e41cfd435cac4d5b440f9db7108f5472dff0405472f6a1edc44754f4eb33d5",
+      "region": {
+        "name": "overcast-sky",
+        "noisy_xy": [
+          5800,
+          1400
+        ],
+        "reference_xy": [
+          6700,
+          970
+        ],
+        "size": 160
+      },
+      "model_label": "0:dino-paired-commons-44732-v11:step-5000",
+      "context_xywh": [
+        5624,
+        1224,
+        512,
+        512
+      ],
+      "display_exposure": 4.0,
+      "shared_wb": [
+        1.5132450331125828,
+        1.0,
+        2.2152317880794703
+      ],
+      "shared_matrix": [
+        [
+          1.0725188393098881,
+          0.17123593128834644,
+          -0.24375477059823436
+        ],
+        [
+          -0.1267191317089774,
+          1.4310509369654432,
+          -0.3043318052564657
+        ],
+        [
+          -0.009697676902906037,
+          -0.29348063283422965,
+          1.3031783097371357
+        ]
+      ],
+      "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+      "repository_image": "docs/images/gfx-overcast-sky-v11.png"
+    },
+    {
+      "image": "crop-67e901cc09d0cca3.png",
+      "caption": "overcast-sky / 1:dino-flat-refiner-v14:step-1000",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 reference",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "a109df2ef1f82d46eeaae9154bd04a5096b83bb8819951f5b8a87f6f51c03517",
+      "region": {
+        "name": "overcast-sky",
+        "noisy_xy": [
+          5800,
+          1400
+        ],
+        "reference_xy": [
+          6700,
+          970
+        ],
+        "size": 160
+      },
+      "model_label": "1:dino-flat-refiner-v14:step-1000",
+      "context_xywh": [
+        5624,
+        1224,
+        512,
+        512
+      ],
+      "display_exposure": 4.0,
+      "shared_wb": [
+        1.5132450331125828,
+        1.0,
+        2.2152317880794703
+      ],
+      "shared_matrix": [
+        [
+          1.0725188393098881,
+          0.17123593128834644,
+          -0.24375477059823436
+        ],
+        [
+          -0.1267191317089774,
+          1.4310509369654432,
+          -0.3043318052564657
+        ],
+        [
+          -0.009697676902906037,
+          -0.29348063283422965,
+          1.3031783097371357
+        ]
+      ],
+      "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping"
+    },
+    {
+      "image": "crop-cd6c40601304fad3.png",
+      "caption": "overcast-sky / RawNIND:CFA-LS",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 reference",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "f080e887d52cf793c4ff7cc996aa963cf96d3be2f7fbcff53fec61e54787f8f1",
+      "region": {
+        "name": "overcast-sky",
+        "noisy_xy": [
+          5800,
+          1400
+        ],
+        "reference_xy": [
+          6700,
+          970
+        ],
+        "size": 160
+      },
+      "model_label": "RawNIND:CFA-LS",
+      "context_xywh": [
+        5624,
+        1224,
+        512,
+        512
+      ],
+      "display_exposure": 4.0,
+      "shared_wb": [
+        1.5132450331125828,
+        1.0,
+        2.2152317880794703
+      ],
+      "shared_matrix": [
+        [
+          1.0725188393098881,
+          0.17123593128834644,
+          -0.24375477059823436
+        ],
+        [
+          -0.1267191317089774,
+          1.4310509369654432,
+          -0.3043318052564657
+        ],
+        [
+          -0.009697676902906037,
+          -0.29348063283422965,
+          1.3031783097371357
+        ]
+      ],
+      "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping"
+    },
+    {
+      "image": "crop-4c6b2465b692266d.png",
+      "caption": "building-detail / 0:dino-paired-commons-44732-v11:step-5000",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 reference",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "40d0acfabca29c54df3fb2768146addce1868c50d922db592b8a73bc2e7cb7db",
+      "region": {
+        "name": "building-detail",
+        "noisy_xy": [
+          5680,
+          2840
+        ],
+        "reference_xy": [
+          5934,
+          2440
+        ],
+        "size": 160
+      },
+      "model_label": "0:dino-paired-commons-44732-v11:step-5000",
+      "context_xywh": [
+        5504,
+        2664,
+        512,
+        512
+      ],
+      "display_exposure": 4.0,
+      "shared_wb": [
+        1.5132450331125828,
+        1.0,
+        2.2152317880794703
+      ],
+      "shared_matrix": [
+        [
+          1.0725188393098881,
+          0.17123593128834644,
+          -0.24375477059823436
+        ],
+        [
+          -0.1267191317089774,
+          1.4310509369654432,
+          -0.3043318052564657
+        ],
+        [
+          -0.009697676902906037,
+          -0.29348063283422965,
+          1.3031783097371357
+        ]
+      ],
+      "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+      "repository_image": "docs/images/gfx-building-detail-v11.png"
+    },
+    {
+      "image": "crop-b14ec0ca323c2d7c.png",
+      "caption": "building-detail / 1:dino-flat-refiner-v14:step-1000",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 reference",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "98a0148889edd7c99df147834ab8f589aa9d95349084cd0d922db075d8321af6",
+      "region": {
+        "name": "building-detail",
+        "noisy_xy": [
+          5680,
+          2840
+        ],
+        "reference_xy": [
+          5934,
+          2440
+        ],
+        "size": 160
+      },
+      "model_label": "1:dino-flat-refiner-v14:step-1000",
+      "context_xywh": [
+        5504,
+        2664,
+        512,
+        512
+      ],
+      "display_exposure": 4.0,
+      "shared_wb": [
+        1.5132450331125828,
+        1.0,
+        2.2152317880794703
+      ],
+      "shared_matrix": [
+        [
+          1.0725188393098881,
+          0.17123593128834644,
+          -0.24375477059823436
+        ],
+        [
+          -0.1267191317089774,
+          1.4310509369654432,
+          -0.3043318052564657
+        ],
+        [
+          -0.009697676902906037,
+          -0.29348063283422965,
+          1.3031783097371357
+        ]
+      ],
+      "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping"
+    },
+    {
+      "image": "crop-4c22fb35b83dce6f.png",
+      "caption": "building-detail / RawNIND:CFA-LS",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 reference",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "239b4a879d63d602677816fc4199e3116312c893d2928876bdb913a2ca89dad9",
+      "region": {
+        "name": "building-detail",
+        "noisy_xy": [
+          5680,
+          2840
+        ],
+        "reference_xy": [
+          5934,
+          2440
+        ],
+        "size": 160
+      },
+      "model_label": "RawNIND:CFA-LS",
+      "context_xywh": [
+        5504,
+        2664,
+        512,
+        512
+      ],
+      "display_exposure": 4.0,
+      "shared_wb": [
+        1.5132450331125828,
+        1.0,
+        2.2152317880794703
+      ],
+      "shared_matrix": [
+        [
+          1.0725188393098881,
+          0.17123593128834644,
+          -0.24375477059823436
+        ],
+        [
+          -0.1267191317089774,
+          1.4310509369654432,
+          -0.3043318052564657
+        ],
+        [
+          -0.009697676902906037,
+          -0.29348063283422965,
+          1.3031783097371357
+        ]
+      ],
+      "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping"
+    }
+  ],
+  "usage": "Qualitative evaluation only; never training",
+  "quality_scores": null,
+  "cache_receipt": [
+    {
+      "source": "/mnt/dataz/pictures/raw/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+      "cache": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+      "bytes": 133748704,
+      "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e",
+      "copy_seconds": 1.3328438480384648,
+      "usage": "Qualitative evaluation only; never training"
+    },
+    {
+      "source": "/mnt/dataz/pictures/raw/2023-12-31-17-17-29_DSCF3883_5aca341358e235a261977d539b38bdbbedc40fc3.raf",
+      "cache": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-29_DSCF3883_5aca341358e235a261977d539b38bdbbedc40fc3.raf",
+      "bytes": 107044336,
+      "sha256": "7de8e3493e76d8b3f8663ebe0237d72d14aa8626b5962ee8a1e7d10ee3fd4806",
+      "copy_seconds": 0.3791858048643917,
+      "usage": "Qualitative evaluation only; never training"
+    }
+  ]
+}
