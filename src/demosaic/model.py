@@ -32,6 +32,10 @@ class ModelConfig:
     refinement_width: int = 24
     refinement_blocks: int = 4
     refinement_window: int = 63
+    coarse_refinement_factor: int = 0
+    coarse_refinement_width: int = 24
+    coarse_refinement_blocks: int = 4
+    coarse_refinement_window: int = 31
 
     def to_dict(self):
         return asdict(self)
@@ -97,11 +101,22 @@ class RgbNoiseRefiner(nn.Module):
     makes the correction exactly zero. This small branch keeps IEEE FP32 math.
     """
 
-    def __init__(self, context_channels, width=24, blocks=4, window=63):
+    def __init__(
+        self,
+        context_channels,
+        width=24,
+        blocks=4,
+        window=63,
+        *,
+        normalization_floor=1e-4,
+        variance_floor=1e-8,
+    ):
         super().__init__()
         if width < 12 or blocks < 0 or window < 3 or window % 2 == 0:
             raise ValueError("Invalid RGB noise-refinement configuration")
         self.window = window
+        self.normalization_floor = normalization_floor
+        self.variance_floor = variance_floor
         self.context = nn.Conv2d(context_channels, 12, 1)
         self.stem = nn.Conv2d(36, width, 3, padding=1)
         self.blocks = nn.Sequential(*(GatedBlock(width) for _ in range(blocks)))
@@ -111,11 +126,19 @@ class RgbNoiseRefiner(nn.Module):
 
     def forward(self, rgb, variance, colors, features):
         with torch.autocast(device_type=rgb.device.type, enabled=False), ieee_fp32():
-            rgb = rgb.float()
             rgb_variance = bilinear(box_mean(variance.float().clamp_min(0), 7), colors)
+            return self.from_rgb_variance(rgb, rgb_variance, features)
+
+    def from_rgb_variance(self, rgb, rgb_variance, features):
+        """Correct dense RGB using a specified RGB noise-scale proxy."""
+        with torch.autocast(device_type=rgb.device.type, enabled=False), ieee_fp32():
+            rgb = rgb.float()
+            rgb_variance = rgb_variance.float()
             scale = rgb_variance.clamp_min(0).sqrt()
-            residual = (rgb - box_mean(rgb, self.window)) / scale.clamp_min(1e-4)
-            noise = (rgb_variance.clamp_min(1e-8).log() + 12) / 6
+            residual = (rgb - box_mean(rgb, self.window)) / scale.clamp_min(
+                self.normalization_floor
+            )
+            noise = (rgb_variance.clamp_min(self.variance_floor).log() + 12) / 6
             inputs = torch.cat(
                 (
                     F.pixel_unshuffle(residual.clamp(-8, 8), 2),
@@ -126,6 +149,42 @@ class RgbNoiseRefiner(nn.Module):
             )
             correction = F.pixel_shuffle(self.head(self.blocks(self.stem(inputs))), 2)
             return correction * scale
+
+
+class CoarseRgbNoiseRefiner(nn.Module):
+    """Predict a smooth correction from pooled RGB and decoder context.
+
+    Pooled input variance supplies a scale proxy, not an assertion that the
+    nonlinear restoration residual is independent noise. The learned correction
+    is zero at initialization and at zero sensor variance. Fine detail bypasses
+    this branch; its output is interpolated back to the original RGB geometry.
+    """
+
+    def __init__(self, context_channels, factor=8, width=24, blocks=4, window=31):
+        super().__init__()
+        if factor not in (2, 4, 8, 16):
+            raise ValueError("Coarse RGB factor must be 2, 4, 8 or 16")
+        self.factor = factor
+        self.network = RgbNoiseRefiner(
+            context_channels, width, blocks, window, normalization_floor=1e-6, variance_floor=1e-12
+        )
+
+    def forward(self, rgb, variance, colors, features):
+        with torch.autocast(device_type=rgb.device.type, enabled=False), ieee_fp32():
+            h, w = features.shape[-2:]
+            factor = self.factor
+            ph, pw = -h % factor, -w % factor
+            rgb_variance = bilinear(box_mean(variance.float().clamp_min(0), 7), colors)
+            rgb = F.pad(rgb.float(), (0, 2 * pw, 0, 2 * ph), mode="replicate")
+            rgb_variance = F.pad(rgb_variance, (0, 2 * pw, 0, 2 * ph), mode="replicate")
+            features = F.pad(features.float(), (0, pw, 0, ph), mode="replicate")
+            pooled = F.avg_pool2d(rgb, factor, factor)
+            proxy = F.avg_pool2d(rgb_variance, factor, factor) / factor**2
+            context = F.avg_pool2d(features, factor, factor)
+            correction = self.network.from_rgb_variance(pooled, proxy, context)
+            return F.interpolate(
+                correction, scale_factor=factor, mode="bilinear", align_corners=False
+            )[..., : 2 * h, : 2 * w]
 
 
 class ChannelAttention(nn.Module):
@@ -257,6 +316,17 @@ class JointDemosaic(nn.Module):
             if cfg.noise_refinement
             else None
         )
+        self.coarse_refiner = (
+            CoarseRgbNoiseRefiner(
+                cfg.width,
+                cfg.coarse_refinement_factor,
+                cfg.coarse_refinement_width,
+                cfg.coarse_refinement_blocks,
+                cfg.coarse_refinement_window,
+            )
+            if cfg.coarse_refinement_factor
+            else None
+        )
 
     def forward(self, packed, variance, colors, wb=None, matrix=None, *, auxiliary=False):
         batch, phases, height, width = packed.shape
@@ -321,6 +391,8 @@ class JointDemosaic(nn.Module):
         prediction = baseline + F.pixel_shuffle(self.head(x), 2).float()
         if self.refiner is not None:
             prediction = prediction + self.refiner(prediction, variance, colors, x)
+        if self.coarse_refiner is not None:
+            prediction = prediction + self.coarse_refiner(prediction, variance, colors, x)
         if auxiliary:
             return prediction, auxiliary_base + self.mosaic_head(x).float()
         return prediction

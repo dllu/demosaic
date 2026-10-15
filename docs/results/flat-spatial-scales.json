@@ -1,0 +1,1276 @@
+{
+  "protocol": "Measure spatial scales of residual noise on exact synthetic flat targets.\n\nBlock-average error power is an orthogonal piecewise-constant projection, not a\nphotographic quality score. A spatially independent zero-mean residual has an\nexpected retained power of 1/k^2 after averaging k-by-k blocks.\n",
+  "condition": {
+    "name": "iso6400-prior",
+    "exposure": 1.0,
+    "shot": 0.00128,
+    "read": 6.5536e-06
+  },
+  "size": 512,
+  "border": 64,
+  "camera_metadata": {
+    "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+    "camera": "GFX100S",
+    "pattern": "RGGB",
+    "black_levels": [
+      4098.0,
+      4097.0,
+      4104.0,
+      4104.0
+    ],
+    "white_levels": [
+      65535.0,
+      65535.0,
+      65535.0,
+      65535.0
+    ],
+    "white_balance": [
+      1.5132450331125828,
+      1.0,
+      2.2152317880794703
+    ],
+    "camera_to_srgb": [
+      [
+        1.0725188393098881,
+        0.17123593128834644,
+        -0.24375477059823436
+      ],
+      [
+        -0.1267191317089774,
+        1.4310509369654432,
+        -0.3043318052564657
+      ],
+      [
+        -0.009697676902906037,
+        -0.29348063283422965,
+        1.3031783097371357
+      ]
+    ],
+    "flip": 0,
+    "iso": 6400,
+    "adc_white_level": 65535.0
+  },
+  "camera_receipt_sha256": "0b06029a247455f9eb6c1048c8279b0e225fd3ca0338e6013d6405b40c961ca3",
+  "models": [
+    {
+      "label": "0:dino-paired-commons-44732-v11:step-5000",
+      "step": 5000,
+      "sha256": "bb8177fc53f69173cd8ea39f75ed20ed474cd7e78cc4efb13916848a37290fbd",
+      "snapshot": "/mnt/external/demosaic/evaluation/flat-scale-diagnostic-20261015/weights/weights-bb8177fc53f69173cd8ea39f75ed20ed474cd7e78cc4efb13916848a37290fbd.pt",
+      "model_config": {
+        "width": 32,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+        "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+        "camera_conditioning": true,
+        "noise_modulation": true,
+        "physical_fp32": true,
+        "baseline": "wiener-malvar",
+        "prior_window": 7,
+        "standardized_noise": false,
+        "noise_refinement": false,
+        "refinement_width": 24,
+        "refinement_blocks": 4,
+        "refinement_window": 63
+      }
+    },
+    {
+      "label": "1:dino-paired-refiner-v15:step-5000",
+      "step": 5000,
+      "sha256": "3a1f9f007a7366d2e930d756d343f1c6904002ed29c594464be1b45b45cfcae7",
+      "snapshot": "/mnt/external/demosaic/evaluation/flat-scale-diagnostic-20261015/weights/weights-3a1f9f007a7366d2e930d756d343f1c6904002ed29c594464be1b45b45cfcae7.pt",
+      "model_config": {
+        "width": 32,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+        "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+        "camera_conditioning": true,
+        "noise_modulation": true,
+        "physical_fp32": true,
+        "baseline": "wiener-malvar",
+        "prior_window": 7,
+        "standardized_noise": false,
+        "noise_refinement": true,
+        "refinement_width": 24,
+        "refinement_blocks": 4,
+        "refinement_window": 63
+      }
+    },
+    {
+      "label": "2:dino-paired-refiner-wide-v16:step-2000",
+      "step": 2000,
+      "sha256": "d910cf059beee3abfe5a54604f30d952f9e843db545b97dcd6cf5c454e4581aa",
+      "snapshot": "/mnt/external/demosaic/evaluation/flat-scale-diagnostic-20261015/weights/weights-d910cf059beee3abfe5a54604f30d952f9e843db545b97dcd6cf5c454e4581aa.pt",
+      "model_config": {
+        "width": 32,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+        "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+        "camera_conditioning": true,
+        "noise_modulation": true,
+        "physical_fp32": true,
+        "baseline": "wiener-malvar",
+        "prior_window": 7,
+        "standardized_noise": false,
+        "noise_refinement": true,
+        "refinement_width": 48,
+        "refinement_blocks": 8,
+        "refinement_window": 63
+      }
+    }
+  ],
+  "rows": [
+    {
+      "model": "Noisy:Malvar",
+      "scene_level": 0.002,
+      "camera_mse": 8.013636033865623e-06,
+      "camera_abs_bias": 7.527391062467359e-06,
+      "camera_centered_sigma": 0.0028308252803981304,
+      "scales": [
+        {
+          "block": 1,
+          "centered_error_power": 8.013572369236499e-06,
+          "retained_power_fraction": 1.0
+        },
+        {
+          "block": 2,
+          "centered_error_power": 3.7235633953969227e-06,
+          "retained_power_fraction": 0.46465709805488586
+        },
+        {
+          "block": 4,
+          "centered_error_power": 1.2392649750836426e-06,
+          "retained_power_fraction": 0.15464575588703156
+        },
+        {
+          "block": 8,
+          "centered_error_power": 3.5795738995147985e-07,
+          "retained_power_fraction": 0.04466889053583145
+        },
+        {
+          "block": 16,
+          "centered_error_power": 1.0241041792369288e-07,
+          "retained_power_fraction": 0.01277962140738964
+        },
+        {
+          "block": 32,
+          "centered_error_power": 2.4251036734312947e-08,
+          "retained_power_fraction": 0.0030262453947216272
+        },
+        {
+          "block": 64,
+          "centered_error_power": 6.062436330722676e-09,
+          "retained_power_fraction": 0.0007565210689790547
+        },
+        {
+          "block": 128,
+          "centered_error_power": 1.5784380469341386e-09,
+          "retained_power_fraction": 0.00019697059178724885
+        }
+      ]
+    },
+    {
+      "model": "Noisy:Malvar",
+      "scene_level": 0.01,
+      "camera_mse": 1.4718107195221819e-05,
+      "camera_abs_bias": 8.92513071448775e-06,
+      "camera_centered_sigma": 0.0038364026695489883,
+      "scales": [
+        {
+          "block": 1,
+          "centered_error_power": 1.4717986232426483e-05,
+          "retained_power_fraction": 1.0
+        },
+        {
+          "block": 2,
+          "centered_error_power": 6.80868197378004e-06,
+          "retained_power_fraction": 0.4626096189022064
+        },
+        {
+          "block": 4,
+          "centered_error_power": 2.238808065158082e-06,
+          "retained_power_fraction": 0.15211375057697296
+        },
+        {
+          "block": 8,
+          "centered_error_power": 6.573317250513355e-07,
+          "retained_power_fraction": 0.04466179758310318
+        },
+        {
+          "block": 16,
+          "centered_error_power": 1.821319415284961e-07,
+          "retained_power_fraction": 0.012374786660075188
+        },
+        {
+          "block": 32,
+          "centered_error_power": 4.620705595925756e-08,
+          "retained_power_fraction": 0.003139495849609375
+        },
+        {
+          "block": 64,
+          "centered_error_power": 1.2026652562724394e-08,
+          "retained_power_fraction": 0.0008171398076228797
+        },
+        {
+          "block": 128,
+          "centered_error_power": 2.3817008365512038e-09,
+          "retained_power_fraction": 0.00016182246326934546
+        }
+      ]
+    },
+    {
+      "model": "Noisy:Malvar",
+      "scene_level": 0.05,
+      "camera_mse": 4.638158134184778e-05,
+      "camera_abs_bias": 1.7811522411648184e-05,
+      "camera_centered_sigma": 0.006810378283262253,
+      "scales": [
+        {
+          "block": 1,
+          "centered_error_power": 4.638125028577633e-05,
+          "retained_power_fraction": 1.0
+        },
+        {
+          "block": 2,
+          "centered_error_power": 2.1418565665953793e-05,
+          "retained_power_fraction": 0.4617936313152313
+        },
+        {
+          "block": 4,
+          "centered_error_power": 6.996353477006778e-06,
+          "retained_power_fraction": 0.15084443986415863
+        },
+        {
+          "block": 8,
+          "centered_error_power": 2.0603790744644357e-06,
+          "retained_power_fraction": 0.04442267119884491
+        },
+        {
+          "block": 16,
+          "centered_error_power": 5.388279191720358e-07,
+          "retained_power_fraction": 0.011617365293204784
+        },
+        {
+          "block": 32,
+          "centered_error_power": 1.3723385450248315e-07,
+          "retained_power_fraction": 0.0029588218312710524
+        },
+        {
+          "block": 64,
+          "centered_error_power": 3.7677732933616426e-08,
+          "retained_power_fraction": 0.0008123483858071268
+        },
+        {
+          "block": 128,
+          "centered_error_power": 4.984030965715647e-09,
+          "retained_power_fraction": 0.00010745788313215598
+        }
+      ]
+    },
+    {
+      "model": "0:dino-paired-commons-44732-v11:step-5000",
+      "scene_level": 0.002,
+      "camera_mse": 1.7080320446893893e-07,
+      "camera_abs_bias": 3.553280475898646e-05,
+      "camera_centered_sigma": 0.0004108143039047718,
+      "scales": [
+        {
+          "block": 1,
+          "centered_error_power": 1.6876838060397858e-07,
+          "retained_power_fraction": 1.0
+        },
+        {
+          "block": 2,
+          "centered_error_power": 6.962202547811103e-08,
+          "retained_power_fraction": 0.4125300347805023
+        },
+        {
+          "block": 4,
+          "centered_error_power": 3.769145706655763e-08,
+          "retained_power_fraction": 0.2233324497938156
+        },
+        {
+          "block": 8,
+          "centered_error_power": 2.163682921718646e-08,
+          "retained_power_fraction": 0.12820428609848022
+        },
+        {
+          "block": 16,
+          "centered_error_power": 1.1111788822404378e-08,
+          "retained_power_fraction": 0.0658404678106308
+        },
+        {
+          "block": 32,
+          "centered_error_power": 4.859553204283884e-09,
+          "retained_power_fraction": 0.028794215992093086
+        },
+        {
+          "block": 64,
+          "centered_error_power": 2.308498281422544e-09,
+          "retained_power_fraction": 0.01367849949747324
+        },
+        {
+          "block": 128,
+          "centered_error_power": 1.1297356383721535e-09,
+          "retained_power_fraction": 0.00669400067999959
+        }
+      ]
+    },
+    {
+      "model": "0:dino-paired-commons-44732-v11:step-5000",
+      "scene_level": 0.01,
+      "camera_mse": 4.1725360233613173e-07,
+      "camera_abs_bias": 5.0123679102398455e-05,
+      "camera_centered_sigma": 0.0006417753174901009,
+      "scales": [
+        {
+          "block": 1,
+          "centered_error_power": 4.1187553279087297e-07,
+          "retained_power_fraction": 1.0
+        },
+        {
+          "block": 2,
+          "centered_error_power": 1.7854533496119984e-07,
+          "retained_power_fraction": 0.433493435382843
+        },
+        {
+          "block": 4,
+          "centered_error_power": 8.579898747029802e-08,
+          "retained_power_fraction": 0.20831289887428284
+        },
+        {
+          "block": 8,
+          "centered_error_power": 4.505282191757942e-08,
+          "retained_power_fraction": 0.10938455164432526
+        },
+        {
+          "block": 16,
+          "centered_error_power": 2.1277100969996354e-08,
+          "retained_power_fraction": 0.051659055054187775
+        },
+        {
+          "block": 32,
+          "centered_error_power": 9.84530679204454e-09,
+          "retained_power_fraction": 0.02390359714627266
+        },
+        {
+          "block": 64,
+          "centered_error_power": 4.087632454741197e-09,
+          "retained_power_fraction": 0.00992443598806858
+        },
+        {
+          "block": 128,
+          "centered_error_power": 1.1448241243883217e-09,
+          "retained_power_fraction": 0.0027795389760285616
+        }
+      ]
+    },
+    {
+      "model": "0:dino-paired-commons-44732-v11:step-5000",
+      "scene_level": 0.05,
+      "camera_mse": 1.0865129524972872e-06,
+      "camera_abs_bias": 0.00022409003577195108,
+      "camera_centered_sigma": 0.0010118207428604364,
+      "scales": [
+        {
+          "block": 1,
+          "centered_error_power": 1.0237812375635258e-06,
+          "retained_power_fraction": 1.0
+        },
+        {
+          "block": 2,
+          "centered_error_power": 4.489331502099958e-07,
+          "retained_power_fraction": 0.4385049641132355
+        },
+        {
+          "block": 4,
+          "centered_error_power": 2.3520362901763292e-07,
+          "retained_power_fraction": 0.22974012792110443
+        },
+        {
+          "block": 8,
+          "centered_error_power": 1.3033098866799264e-07,
+          "retained_power_fraction": 0.12730355560779572
+        },
+        {
+          "block": 16,
+          "centered_error_power": 6.792232909447193e-08,
+          "retained_power_fraction": 0.06634457409381866
+        },
+        {
+          "block": 32,
+          "centered_error_power": 2.976261193055052e-08,
+          "retained_power_fraction": 0.0290712621062994
+        },
+        {
+          "block": 64,
+          "centered_error_power": 1.2445279473638493e-08,
+          "retained_power_fraction": 0.012156190350651741
+        },
+        {
+          "block": 128,
+          "centered_error_power": 4.338186254670973e-09,
+          "retained_power_fraction": 0.0042374152690172195
+        }
+      ]
+    },
+    {
+      "model": "1:dino-paired-refiner-v15:step-5000",
+      "scene_level": 0.002,
+      "camera_mse": 4.205555015346363e-08,
+      "camera_abs_bias": 3.648694837465882e-05,
+      "camera_centered_sigma": 0.0001987104769796133,
+      "scales": [
+        {
+          "block": 1,
+          "centered_error_power": 3.948585458601883e-08,
+          "retained_power_fraction": 1.0
+        },
+        {
+          "block": 2,
+          "centered_error_power": 2.8613676761324314e-08,
+          "retained_power_fraction": 0.7246564030647278
+        },
+        {
+          "block": 4,
+          "centered_error_power": 2.3496657064470128e-08,
+          "retained_power_fraction": 0.595065176486969
+        },
+        {
+          "block": 8,
+          "centered_error_power": 1.6825376647489065e-08,
+          "retained_power_fraction": 0.42611148953437805
+        },
+        {
+          "block": 16,
+          "centered_error_power": 9.736078609989818e-09,
+          "retained_power_fraction": 0.24657130241394043
+        },
+        {
+          "block": 32,
+          "centered_error_power": 4.627282557123635e-09,
+          "retained_power_fraction": 0.11718835681676865
+        },
+        {
+          "block": 64,
+          "centered_error_power": 2.2728656734471997e-09,
+          "retained_power_fraction": 0.057561516761779785
+        },
+        {
+          "block": 128,
+          "centered_error_power": 1.1307652592051909e-09,
+          "retained_power_fraction": 0.028637224808335304
+        }
+      ]
+    },
+    {
+      "model": "1:dino-paired-refiner-v15:step-5000",
+      "scene_level": 0.01,
+      "camera_mse": 9.571567716193385e-08,
+      "camera_abs_bias": 5.0378701416775584e-05,
+      "camera_centered_sigma": 0.0002986424951814115,
+      "scales": [
+        {
+          "block": 1,
+          "centered_error_power": 8.918733840346249e-08,
+          "retained_power_fraction": 1.0
+        },
+        {
+          "block": 2,
+          "centered_error_power": 6.727001533590737e-08,
+          "retained_power_fraction": 0.7542552351951599
+        },
+        {
+          "block": 4,
+          "centered_error_power": 5.369970779156574e-08,
+          "retained_power_fraction": 0.602100133895874
+        },
+        {
+          "block": 8,
+          "centered_error_power": 3.6286056825929336e-08,
+          "retained_power_fraction": 0.4068520963191986
+        },
+        {
+          "block": 16,
+          "centered_error_power": 1.9411174889683025e-08,
+          "retained_power_fraction": 0.21764495968818665
+        },
+        {
+          "block": 32,
+          "centered_error_power": 9.47756451097348e-09,
+          "retained_power_fraction": 0.10626580566167831
+        },
+        {
+          "block": 64,
+          "centered_error_power": 4.000770825740574e-09,
+          "retained_power_fraction": 0.04485805705189705
+        },
+        {
+          "block": 128,
+          "centered_error_power": 1.1317671244626126e-09,
+          "retained_power_fraction": 0.012689773924648762
+        }
+      ]
+    },
+    {
+      "model": "1:dino-paired-refiner-v15:step-5000",
+      "scene_level": 0.05,
+      "camera_mse": 2.8867017931588634e-07,
+      "camera_abs_bias": 0.00020799844060093164,
+      "camera_centered_sigma": 0.0004810919926967472,
+      "scales": [
+        {
+          "block": 1,
+          "centered_error_power": 2.3144950489495386e-07,
+          "retained_power_fraction": 1.0
+        },
+        {
+          "block": 2,
+          "centered_error_power": 1.8536226775722753e-07,
+          "retained_power_fraction": 0.8008756041526794
+        },
+        {
+          "block": 4,
+          "centered_error_power": 1.5372414452485827e-07,
+          "retained_power_fraction": 0.6641800403594971
+        },
+        {
+          "block": 8,
+          "centered_error_power": 1.0766311220322677e-07,
+          "retained_power_fraction": 0.46516889333724976
+        },
+        {
+          "block": 16,
+          "centered_error_power": 6.221219450708304e-08,
+          "retained_power_fraction": 0.26879382133483887
+        },
+        {
+          "block": 32,
+          "centered_error_power": 2.9064612050433425e-08,
+          "retained_power_fraction": 0.1255764663219452
+        },
+        {
+          "block": 64,
+          "centered_error_power": 1.242947167412467e-08,
+          "retained_power_fraction": 0.05370273441076279
+        },
+        {
+          "block": 128,
+          "centered_error_power": 4.281835774833098e-09,
+          "retained_power_fraction": 0.018500085920095444
+        }
+      ]
+    },
+    {
+      "model": "2:dino-paired-refiner-wide-v16:step-2000",
+      "scene_level": 0.002,
+      "camera_mse": 3.636369427795216e-08,
+      "camera_abs_bias": 3.494800694170408e-05,
+      "camera_centered_sigma": 0.00018511082453187555,
+      "scales": [
+        {
+          "block": 1,
+          "centered_error_power": 3.426601935530016e-08,
+          "retained_power_fraction": 1.0
+        },
+        {
+          "block": 2,
+          "centered_error_power": 2.463402282160132e-08,
+          "retained_power_fraction": 0.7189052700996399
+        },
+        {
+          "block": 4,
+          "centered_error_power": 2.119377029430325e-08,
+          "retained_power_fraction": 0.618506908416748
+        },
+        {
+          "block": 8,
+          "centered_error_power": 1.588836084920331e-08,
+          "retained_power_fraction": 0.4636768698692322
+        },
+        {
+          "block": 16,
+          "centered_error_power": 9.38592314980724e-09,
+          "retained_power_fraction": 0.2739134430885315
+        },
+        {
+          "block": 32,
+          "centered_error_power": 4.573760925552506e-09,
+          "retained_power_fraction": 0.13347803056240082
+        },
+        {
+          "block": 64,
+          "centered_error_power": 2.2706603264310843e-09,
+          "retained_power_fraction": 0.06626565754413605
+        },
+        {
+          "block": 128,
+          "centered_error_power": 1.127928972444181e-09,
+          "retained_power_fraction": 0.0329168364405632
+        }
+      ]
+    },
+    {
+      "model": "2:dino-paired-refiner-wide-v16:step-2000",
+      "scene_level": 0.01,
+      "camera_mse": 8.385208616346063e-08,
+      "camera_abs_bias": 5.258961027720943e-05,
+      "camera_centered_sigma": 0.00027870730264112353,
+      "scales": [
+        {
+          "block": 1,
+          "centered_error_power": 7.767776111222702e-08,
+          "retained_power_fraction": 1.0
+        },
+        {
+          "block": 2,
+          "centered_error_power": 5.825575044582365e-08,
+          "retained_power_fraction": 0.7499669194221497
+        },
+        {
+          "block": 4,
+          "centered_error_power": 4.885768944973279e-08,
+          "retained_power_fraction": 0.6289790868759155
+        },
+        {
+          "block": 8,
+          "centered_error_power": 3.4639846546724584e-08,
+          "retained_power_fraction": 0.4459429085254669
+        },
+        {
+          "block": 16,
+          "centered_error_power": 1.9035239162690232e-08,
+          "retained_power_fraction": 0.24505391716957092
+        },
+        {
+          "block": 32,
+          "centered_error_power": 9.494735664361542e-09,
+          "retained_power_fraction": 0.1222323551774025
+        },
+        {
+          "block": 64,
+          "centered_error_power": 4.0149532587463455e-09,
+          "retained_power_fraction": 0.051687292754650116
+        },
+        {
+          "block": 128,
+          "centered_error_power": 1.131625348982368e-09,
+          "retained_power_fraction": 0.014568202197551727
+        }
+      ]
+    },
+    {
+      "model": "2:dino-paired-refiner-wide-v16:step-2000",
+      "scene_level": 0.05,
+      "camera_mse": 2.690115366021928e-07,
+      "camera_abs_bias": 0.00021866806491743773,
+      "camera_centered_sigma": 0.0004563613620121032,
+      "scales": [
+        {
+          "block": 1,
+          "centered_error_power": 2.0826570334975258e-07,
+          "retained_power_fraction": 1.0
+        },
+        {
+          "block": 2,
+          "centered_error_power": 1.6311975059579709e-07,
+          "retained_power_fraction": 0.7832290530204773
+        },
+        {
+          "block": 4,
+          "centered_error_power": 1.4083207133808173e-07,
+          "retained_power_fraction": 0.6762134432792664
+        },
+        {
+          "block": 8,
+          "centered_error_power": 1.0348572487828278e-07,
+          "retained_power_fraction": 0.4968927800655365
+        },
+        {
+          "block": 16,
+          "centered_error_power": 6.125522844513398e-08,
+          "retained_power_fraction": 0.29412057995796204
+        },
+        {
+          "block": 32,
+          "centered_error_power": 2.8867567891666113e-08,
+          "retained_power_fraction": 0.13860931992530823
+        },
+        {
+          "block": 64,
+          "centered_error_power": 1.2402983529113953e-08,
+          "retained_power_fraction": 0.05955365300178528
+        },
+        {
+          "block": 128,
+          "centered_error_power": 4.352325166934179e-09,
+          "retained_power_fraction": 0.020897945389151573
+        }
+      ]
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "scene_level": 0.002,
+      "camera_mse": 8.192120759531463e-09,
+      "camera_abs_bias": 6.737275543855503e-05,
+      "camera_centered_sigma": 4.216724119032733e-05,
+      "scales": [
+        {
+          "block": 1,
+          "centered_error_power": 1.7780762417984874e-09,
+          "retained_power_fraction": 1.0
+        },
+        {
+          "block": 2,
+          "centered_error_power": 1.7206984725959273e-09,
+          "retained_power_fraction": 0.9677304029464722
+        },
+        {
+          "block": 4,
+          "centered_error_power": 1.63233171424082e-09,
+          "retained_power_fraction": 0.9180324673652649
+        },
+        {
+          "block": 8,
+          "centered_error_power": 1.5338023073852014e-09,
+          "retained_power_fraction": 0.8626189827919006
+        },
+        {
+          "block": 16,
+          "centered_error_power": 1.362514878699983e-09,
+          "retained_power_fraction": 0.7662859559059143
+        },
+        {
+          "block": 32,
+          "centered_error_power": 1.1404510669166257e-09,
+          "retained_power_fraction": 0.6413960456848145
+        },
+        {
+          "block": 64,
+          "centered_error_power": 8.298031151099394e-10,
+          "retained_power_fraction": 0.4666858911514282
+        },
+        {
+          "block": 128,
+          "centered_error_power": 4.760764560352015e-10,
+          "retained_power_fraction": 0.26774805784225464
+        }
+      ]
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "scene_level": 0.01,
+      "camera_mse": 9.198237727048308e-09,
+      "camera_abs_bias": 4.4055308535462245e-05,
+      "camera_centered_sigma": 8.123780571622774e-05,
+      "scales": [
+        {
+          "block": 1,
+          "centered_error_power": 6.59958132587235e-09,
+          "retained_power_fraction": 1.0
+        },
+        {
+          "block": 2,
+          "centered_error_power": 6.478271696863658e-09,
+          "retained_power_fraction": 0.9816185832023621
+        },
+        {
+          "block": 4,
+          "centered_error_power": 6.178575873150294e-09,
+          "retained_power_fraction": 0.9362072348594666
+        },
+        {
+          "block": 8,
+          "centered_error_power": 5.751484621896452e-09,
+          "retained_power_fraction": 0.871492326259613
+        },
+        {
+          "block": 16,
+          "centered_error_power": 4.989018531631473e-09,
+          "retained_power_fraction": 0.7559598684310913
+        },
+        {
+          "block": 32,
+          "centered_error_power": 3.907219880971979e-09,
+          "retained_power_fraction": 0.5920405983924866
+        },
+        {
+          "block": 64,
+          "centered_error_power": 2.7734476937268937e-09,
+          "retained_power_fraction": 0.4202460050582886
+        },
+        {
+          "block": 128,
+          "centered_error_power": 9.49758716117799e-10,
+          "retained_power_fraction": 0.1439119577407837
+        }
+      ]
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "scene_level": 0.05,
+      "camera_mse": 4.947676401911849e-08,
+      "camera_abs_bias": 0.00011750353587558493,
+      "camera_centered_sigma": 0.0001655220112297684,
+      "scales": [
+        {
+          "block": 1,
+          "centered_error_power": 2.739753490743624e-08,
+          "retained_power_fraction": 1.0
+        },
+        {
+          "block": 2,
+          "centered_error_power": 2.646254060323372e-08,
+          "retained_power_fraction": 0.9658730626106262
+        },
+        {
+          "block": 4,
+          "centered_error_power": 2.4573788337534097e-08,
+          "retained_power_fraction": 0.8969342708587646
+        },
+        {
+          "block": 8,
+          "centered_error_power": 2.2383577658047216e-08,
+          "retained_power_fraction": 0.8169924020767212
+        },
+        {
+          "block": 16,
+          "centered_error_power": 1.889313949732241e-08,
+          "retained_power_fraction": 0.6895926594734192
+        },
+        {
+          "block": 32,
+          "centered_error_power": 1.4635666012452475e-08,
+          "retained_power_fraction": 0.5341964364051819
+        },
+        {
+          "block": 64,
+          "centered_error_power": 9.15934617040648e-09,
+          "retained_power_fraction": 0.3343127965927124
+        },
+        {
+          "block": 128,
+          "centered_error_power": 4.107225226590572e-09,
+          "retained_power_fraction": 0.14991222321987152
+        }
+      ]
+    }
+  ],
+  "native_crops": [
+    {
+      "image": "crop-16651dbfa7b13f28.png",
+      "caption": "0:dino-paired-commons-44732-v11:step-5000 / scene level 0.002 / +2 EV display",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (flat)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "9fcaa80ecb8d8767fd28b45a5e037b20e50b76740516f2adac606ef4030ebde2",
+      "xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "scene_level": 0.002,
+      "model_label": "0:dino-paired-commons-44732-v11:step-5000",
+      "display_exposure": 4.0
+    },
+    {
+      "image": "crop-cc87df1a6f41e372.png",
+      "caption": "0:dino-paired-commons-44732-v11:step-5000 / scene level 0.01 / +2 EV display",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (flat)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "c797921600138902e4df73d9926e09f81ccff7b89b17bdb72369bd2c9d9fa921",
+      "xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "scene_level": 0.01,
+      "model_label": "0:dino-paired-commons-44732-v11:step-5000",
+      "display_exposure": 4.0
+    },
+    {
+      "image": "crop-2d97b62cba613aef.png",
+      "caption": "1:dino-paired-refiner-v15:step-5000 / scene level 0.002 / +2 EV display",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (flat)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "90f1cad667e82a3a8b987463f07dfe2ea8a25f6874faf25bba4504c11c43c765",
+      "xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "scene_level": 0.002,
+      "model_label": "1:dino-paired-refiner-v15:step-5000",
+      "display_exposure": 4.0,
+      "repository_image": "docs/images/flat-scales-v15-0.png"
+    },
+    {
+      "image": "crop-f167c5c35a175f8d.png",
+      "caption": "1:dino-paired-refiner-v15:step-5000 / scene level 0.01 / +2 EV display",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (flat)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "7568f2d1edfa5e66c3e22c93f28261efcbe734fa45754916c650658e85d64019",
+      "xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "scene_level": 0.01,
+      "model_label": "1:dino-paired-refiner-v15:step-5000",
+      "display_exposure": 4.0,
+      "repository_image": "docs/images/flat-scales-v15-1.png"
+    },
+    {
+      "image": "crop-5b1b7adc9e323e60.png",
+      "caption": "2:dino-paired-refiner-wide-v16:step-2000 / scene level 0.002 / +2 EV display",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (flat)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "0ae7f81c6093f8178a0b4683b61d975fafc9a3e1af3fd5564d20c837f6b64427",
+      "xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "scene_level": 0.002,
+      "model_label": "2:dino-paired-refiner-wide-v16:step-2000",
+      "display_exposure": 4.0
+    },
+    {
+      "image": "crop-9f8f4878f8a466ea.png",
+      "caption": "2:dino-paired-refiner-wide-v16:step-2000 / scene level 0.01 / +2 EV display",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (flat)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "e54b15665fe9215195b2b7c4b138da99861e86ca14aa25feb25e7a3e15cbffc5",
+      "xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "scene_level": 0.01,
+      "model_label": "2:dino-paired-refiner-wide-v16:step-2000",
+      "display_exposure": 4.0
+    },
+    {
+      "image": "crop-4658b28b23d9b3e1.png",
+      "caption": "RawNIND:CFA-LS / scene level 0.002 / +2 EV display",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (flat)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "18d33934483cfcf85309efcb4c64f146fe5d28b456575a3086d2abbdb84c39c6",
+      "xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "scene_level": 0.002,
+      "model_label": "RawNIND:CFA-LS",
+      "display_exposure": 4.0
+    },
+    {
+      "image": "crop-f7ae281f36be2d31.png",
+      "caption": "RawNIND:CFA-LS / scene level 0.01 / +2 EV display",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (flat)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "8225ec331d544cfe8e9d4247e21537da718366c0625ba842652e78c0ac9b513e",
+      "xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "scene_level": 0.01,
+      "model_label": "RawNIND:CFA-LS",
+      "display_exposure": 4.0
+    }
+  ],
+  "rawnind_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+  "report": "/mnt/external/demosaic/evaluation/flat-scale-diagnostic-20261015/result.json",
+  "report_sha256": "a9d407bfface2d6d56c443341925060b5ec75df495600b2b96cad09ad6daae3f",
+  "compatibility_check": {
+    "checkpoint_sha256": "3a1f9f007a7366d2e930d756d343f1c6904002ed29c594464be1b45b45cfcae7",
+    "old_source_sha256": "bb5459ab70a7815b9d273eb50b14a1f15281d1e137a3acd678aac038eb0d0136",
+    "new_source_sha256": "3308a7f84e973c517c8f596ea699767c27e00058d2c3cffe91db0a8691b87eee",
+    "rgb_shape": [
+      2,
+      3,
+      512,
+      512
+    ],
+    "precision": "float16 base, IEEE FP32 refiner",
+    "different_elements": 0,
+    "maximum_absolute_error": 0.0
+  }
+}

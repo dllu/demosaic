@@ -72,6 +72,17 @@ def update_ema(model, ema, decay):
                 ema[name].copy_(value)
 
 
+def batch_fingerprint(batch):
+    """Trace actual observations/targets independently of strides and dict order."""
+    digest = hashlib.sha256()
+    for name, value in sorted(batch.items()):
+        header = {"name": name, "dtype": str(value.dtype), "shape": list(value.shape)}
+        digest.update(json.dumps(header, sort_keys=True).encode() + b"\0")
+        data = value.detach().contiguous().reshape(-1).view(torch.uint8).cpu().numpy()
+        digest.update(data.tobytes())
+    return digest.hexdigest()
+
+
 def expand_stem(weights, source_config, model):
     """Preserve channel roles while adding zero-weight conditioning features."""
     source, target = ModelConfig.from_checkpoint(source_config), model.config
@@ -121,6 +132,8 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     if resume and initialize:
         raise ValueError("Choose resume or initialize, not both")
     config = yaml.safe_load(Path(config_path).read_text())
+    if config.get("refiner_only", False) and config.get("coarse_refiner_only", False):
+        raise ValueError("Choose fine or coarse refiner-only training, not both")
     precision = config.get("precision", "bfloat16")
     if precision not in ("bfloat16", "float32"):
         raise ValueError("Training precision must be bfloat16 or float32")
@@ -213,6 +226,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 else ()
             )
             + (("refiner.",) if model.config.noise_refinement else ())
+            + (("coarse_refiner.",) if model.config.coarse_refinement_factor else ())
         )
         if incompatible.unexpected_keys or any(
             not k.startswith(allowed_prefixes) for k in incompatible.missing_keys
@@ -238,6 +252,11 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             raise ValueError("Refiner-only training requires model.noise_refinement")
         model.requires_grad_(False)
         model.refiner.requires_grad_(True)
+    if config.get("coarse_refiner_only", False):
+        if model.coarse_refiner is None:
+            raise ValueError("Coarse-only training requires model.coarse_refinement_factor")
+        model.requires_grad_(False)
+        model.coarse_refiner.requires_grad_(True)
     # Keep just one frozen DINO backbone: EMA contains restoration weights only.
     ema = {key: value.detach().clone() for key, value in model.restoration_state_dict().items()}
     optimizer = torch.optim.AdamW(
@@ -262,6 +281,10 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         if state["config"].get("precision", "bfloat16") != precision:
             raise ValueError("Resume training precision differs; initialize a new run")
         if state["config"].get("refiner_only", False) != config.get("refiner_only", False):
+            raise ValueError("Resume trainable-parameter selection differs; initialize a new run")
+        if state["config"].get("coarse_refiner_only", False) != config.get(
+            "coarse_refiner_only", False
+        ):
             raise ValueError("Resume trainable-parameter selection differs; initialize a new run")
         if ModelConfig.from_checkpoint(state["model_config"]).to_dict() != model.config.to_dict():
             raise ValueError("Resume model configuration differs from checkpoint")
@@ -383,6 +406,12 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 noise_free_fraction=config.get("noise_free_fraction", 0.0),
                 broad_camera=config.get("broad_camera", False),
             )
+        log_step = step == first + 1 or step % config.get("log_every", 25) == 0
+        fingerprint = (
+            batch_fingerprint(batch)
+            if log_step and config.get("trace_observations", False)
+            else None
+        )
         optimizer.zero_grad(set_to_none=True)
         with amp_context(device, amp or precision == "float32", dtype=precision):
             prediction, auxiliary = model(
@@ -405,14 +434,20 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 )
         if not torch.isfinite(loss):
             raise RuntimeError(f"Nonfinite loss at step {step}; last checkpoint retained")
-        with ieee_fp32() if precision == "float32" or model.refiner is not None else nullcontext():
+        with (
+            ieee_fp32()
+            if precision == "float32"
+            or model.refiner is not None
+            or model.coarse_refiner is not None
+            else nullcontext()
+        ):
             loss.backward()
             grad_norm = torch.nn.utils.clip_grad_norm_(
                 model.parameters(), 1, error_if_nonfinite=True
             )
         optimizer.step()
         update_ema(model, ema, min(config.get("ema_decay", 0.999), (1 + step) / (10 + step)))
-        if step == first + 1 or step % config.get("log_every", 25) == 0:
+        if log_step:
             metrics = {
                 "event": "train",
                 "step": step,
@@ -424,6 +459,8 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 "domain": "paired-RAW" if use_pair else "synthetic",
                 **{key: value.item() for key, value in terms.items()},
             }
+            if fingerprint is not None:
+                metrics["batch_sha256"] = fingerprint
             with (run / "metrics.jsonl").open("a") as log:
                 log.write(json.dumps(metrics) + "\n")
             print(json.dumps(metrics), flush=True)
