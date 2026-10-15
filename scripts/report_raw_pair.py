@@ -17,7 +17,7 @@ import torch
 from demosaic.calibration import estimate_noise
 from demosaic.cfa import color_indices, malvar, pack
 from demosaic.color import render
-from demosaic.gaussian import StabilizedGaussianPrior, load_gaussian_prior
+from demosaic.gaussian import load_gaussian_prior
 from demosaic.inference import load_checkpoint, restore_tiled
 from demosaic.io import read_raw, write_rgb16
 from demosaic.noise import Sensor
@@ -145,7 +145,7 @@ def main():
         reference_display = display_crop(clean, wb, matrix, [0, 0, size, size], exposure=exposure)
         contexts.append((region, tx, ty, packed, variance, xywh, noisy, reference_display))
     for model_index, (label, model, precision) in enumerate(models):
-        if isinstance(model, StabilizedGaussianPrior):
+        if hasattr(model, "set_noise"):
             model.set_noise(shot, read)
         if isinstance(model, RawNind):
             model.input_scale = torch.tensor(

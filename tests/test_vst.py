@@ -22,7 +22,7 @@ def test_centered_gat_algebraic_roundtrip_keeps_sub_16bit_precision(shot, read):
     torch.testing.assert_close(actual, raw, atol=2e-7, rtol=1e-7)
 
 
-@pytest.mark.parametrize("read_e", [0.0, 0.4, 2.0])
+@pytest.mark.parametrize("read_e", [0.0, 0.4, 2.0, 16.0, 1000.0])
 def test_expectation_inverse_matches_independent_dense_gaussian_integration(read_e):
     # Independent integration in Gaussian coordinates, with no root substitution
     # or access to the implementation's interpolation grid.
@@ -52,6 +52,14 @@ def test_expectation_inverse_matches_independent_dense_gaussian_integration(read
 def test_invalid_gat_profiles_rejected(shot, read):
     with pytest.raises(ValueError, match="finite positive"):
         GeneralizedAnscombe(shot, read)
+
+
+def test_centered_expectation_table_remains_stable_in_gaussian_limit():
+    transform = GeneralizedAnscombe(1e-10, 1e-4)
+    raw = torch.tensor([-0.02, -0.01, 0.0, 0.005, 0.01, 0.1])
+    transformed = transform(raw)
+    torch.testing.assert_close(transformed, raw / 0.01, atol=2e-7, rtol=1e-6)
+    torch.testing.assert_close(transform.inverse(transformed), raw, atol=2e-8, rtol=1e-6)
 
 
 class IdentityGaussian(nn.Module):

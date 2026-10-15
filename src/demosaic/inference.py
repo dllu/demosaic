@@ -81,6 +81,8 @@ def restore_tiled(
     norm = torch.zeros(h, w, dtype=torch.float32)
     colors = torch.as_tensor(colors, device=device, dtype=torch.long)
     model.eval()
+    if hasattr(model, "set_noise"):
+        model.set_noise(shot, read)
     if device.type == "cuda":
         model.to(memory_format=torch.channels_last)
         torch.cuda.synchronize(device)

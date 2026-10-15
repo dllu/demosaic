@@ -20,10 +20,15 @@ not just software that executes. This checklist records the evidence required.
 Photo directories are read-only. All writes, downloads, temporary files and caches
 must stay in this repository or `/mnt/external`. Do not modify `PROMPT.md`.
 
-V28's [first 1k pretrained RGB/DINO review](pretrained-rgb-v28-review.md) adds
-33.43530/.947856 on the same 16-photo synthetic screen (+1.01706 dB over V16),
-real primary53.99180/53.62905 and verified full102MP RGB16 restoration in24.88s.
-Known-camera rendered quality and both real SSIM means still trail RawNIND;
-bootstrap intervals include zero for primary superiority. This is early
-progress, not satisfaction of the quality/speed gates. Original5k training is
-continuing; full427/protected-final evaluation and matched DINO ablation remain.
+V28's [completed 5k review](pretrained-rgb-v28-5k-review.md) reaches
+32.97457/.940248 on the complete 427-photo synthetic evaluation, +1.48657 dB
+over V16 (95% source-bootstrap interval [+1.35947,+1.58359]). Real primary
+PSNR is 54.11062/53.65897; small advantages over RawNIND have intervals including
+zero, and rendered quality/SSIM still trail it. The architecture's earlier
+step1000 full 102 MP RGB16 restoration took 24.88s; new weights still need a
+fresh full-frame review. [V29 step1000](stabilized-rgb-v29-review.md) improves
+the matched 16-photo screen by 1.32563 dB and known-camera scores, with mixed
+unseen-camera results. Its clipping-calibration trial, full evaluation,
+protected-final review and matched DINO ablation remain. Quality/speed gates
+are unmet. [More Commons originals](commons-download.md) are downloading in the
+background, with a 512 GiB reserve; active manifests remain frozen.

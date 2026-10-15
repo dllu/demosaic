@@ -11,6 +11,7 @@ This is a single-pass trainable model, not the frozen GAT/HQS comparator.
 """
 
 import hashlib
+import math
 from pathlib import Path
 
 import torch
@@ -21,6 +22,7 @@ from .cfa import bilinear, malvar
 from .color import render
 from .precision import ieee_fp32
 from .prior import box_mean
+from .vst import GeneralizedAnscombe
 
 
 class ResidualBlock(nn.Module):
@@ -85,7 +87,9 @@ class RgbRestorationTrunk(nn.Module):
             return self.m_tail(x.float() + x1)
 
 
-def physical_rgb_features(packed, variance, colors, wb=None, matrix=None):
+def physical_rgb_features(
+    packed, variance, colors, wb=None, matrix=None, *, rgb=None, stabilized=False
+):
     """Build normalized camera RGB and actual CFA/camera metadata in IEEE FP32.
 
     No input fitting, reference or learned denoiser is used here. The spatial
@@ -98,7 +102,7 @@ def physical_rgb_features(packed, variance, colors, wb=None, matrix=None):
         batch, _, h, w = packed.shape
         if colors.ndim == 1:
             colors = colors[None].expand(batch, -1)
-        rgb = malvar(packed, colors, wb)
+        rgb = malvar(packed, colors, wb) if rgb is None else rgb.float()
         offset = rgb.amin((1, 2, 3), keepdim=True)
         rgb_variance = bilinear(box_mean(variance.clamp_min(0), 7), colors)
         sigma = rgb_variance.mean(1, keepdim=True).clamp_min(0).sqrt()
@@ -108,7 +112,10 @@ def physical_rgb_features(packed, variance, colors, wb=None, matrix=None):
         # nearly flat tiles, a conservative eight-sigma floor avoids feeding
         # an arbitrarily large normalized noise level to the pretrained trunk.
         span = torch.maximum(image_range, 8 * sigma.amax((1, 2, 3), keepdim=True))
-        span = torch.where(image_range <= 1e-6, torch.ones_like(span), span.clamp_min(1e-4))
+        flat_span = torch.ones_like(span)
+        if stabilized:
+            flat_span = torch.maximum(flat_span, 8 * sigma.amax((1, 2, 3), keepdim=True))
+        span = torch.where(image_range <= 1e-6, flat_span, span.clamp_min(1e-4))
         normalized = (rgb - offset) / span
         noise = sigma / span
         phase_masks = F.one_hot(colors, 3).transpose(1, 2)[..., None, None].float()
@@ -135,20 +142,129 @@ def physical_rgb_features(packed, variance, colors, wb=None, matrix=None):
         return rgb, normalized, noise, condition, offset, span
 
 
+def stabilized_photometry(profiles, offset, span):
+    """Encode physical black/white coordinates and the noise-family/read ratio.
+
+    Sensor-measurement black/white anchors preserve clipping photometry across ISO,
+    including constant tiles whose normalized RGB/noise alone are ambiguous.
+    They replace the three constant unit-variance log channels, adding no
+    parameters. These are measurement coordinates, not expectations of noisy
+    transformed observations. asinh compresses them without clipping.
+    """
+    with torch.autocast(offset.device.type, enabled=False), ieee_fp32():
+        values = []
+        for b, (transform, scale, stochastic) in enumerate(profiles):
+            white = torch.ones_like(offset[b : b + 1])
+            white = transform(white) if transform is not None else white / scale
+            black_coordinate = -offset[b : b + 1] / span[b : b + 1]
+            white_coordinate = (white - offset[b : b + 1]) / span[b : b + 1]
+            family = (
+                math.log1p(transform.read_e) / 3
+                if transform is not None
+                else -1.0
+                if stochastic
+                else -2.0
+            )
+            values.append(
+                torch.cat(
+                    (
+                        black_coordinate.asinh(),
+                        white_coordinate.asinh(),
+                        torch.full_like(black_coordinate, family),
+                    ),
+                    dim=1,
+                )
+            )
+        return torch.cat(values)
+
+
 class PretrainedRgbDemosaic(nn.Module):
     """One trainable RGB pass with CFA/noise/camera input and frozen DINO context."""
 
-    def __init__(self):
+    def __init__(self, *, stabilized=False, physical_anchors=False):
         super().__init__()
+        if physical_anchors and not stabilized:
+            raise ValueError("Physical anchors require variance stabilization")
         self.network = RgbRestorationTrunk()
         self.measurement_adapter = nn.Conv2d(21, 64, 1)
         nn.init.zeros_(self.measurement_adapter.weight)
         nn.init.zeros_(self.measurement_adapter.bias)
+        self.stabilized = stabilized
+        self.physical_anchors = physical_anchors
+        self._noise_key = None
+        self._noise_profiles = None
+
+    def set_noise(self, shot, read):
+        """Condition explicitly on supplied scalar/per-image physical priors.
+
+        Tables depend only on shot/read, never observations or reference data.
+        These transient, nonlearned profiles are excluded from checkpoints/EMA.
+        """
+        if not self.stabilized:
+            return self
+        shot = torch.as_tensor(shot, dtype=torch.float64).detach().flatten().cpu()
+        read = torch.as_tensor(read, dtype=torch.float64).detach().flatten().cpu()
+        count = max(len(shot), len(read))
+        if count == 0 or len(shot) not in (1, count) or len(read) not in (1, count):
+            raise ValueError("Shot/read require compatible scalar or per-image profiles")
+        shot, read = shot.expand(count), read.expand(count)
+        if not (torch.isfinite(shot).all() and torch.isfinite(read).all()):
+            raise ValueError("Shot/read must be finite nonnegative priors")
+        if (shot < 0).any() or (read < 0).any():
+            raise ValueError("Shot/read must be finite nonnegative priors")
+        device = self.measurement_adapter.weight.device
+        key = (tuple(zip(shot.tolist(), read.tolist())), device)
+        if key != self._noise_key:
+            self._noise_profiles = [
+                (
+                    GeneralizedAnscombe(a, r).to(device) if a else None,
+                    math.sqrt(r) if r else 1.0,
+                    bool(a or r),
+                )
+                for a, r in key[0]
+            ]
+            self._noise_key = key
+        return self
 
     def forward(self, packed, variance, colors, wb=None, matrix=None, context=None):
+        profiles, preview, base_rgb = None, None, None
+        if self.stabilized:
+            if self._noise_profiles is None:
+                raise ValueError(
+                    "Supply explicit shot/read conditioning before stabilized inference"
+                )
+            if len(self._noise_profiles) not in (1, len(packed)):
+                raise ValueError("Noise profiles must be scalar or match the image batch")
+            profiles = (
+                self._noise_profiles * len(packed)
+                if len(self._noise_profiles) == 1
+                else self._noise_profiles
+            )
+            if colors.ndim == 1:
+                colors = colors[None].expand(len(packed), -1)
+            if context is not None:
+                # Foundation features retain the ordinary camera/WB rendering;
+                # stabilized coordinates are only for the restoration trunk.
+                preview = malvar(packed, colors, wb)
+            transformed, proxies, interpolated = [], [], []
+            for b, (transform, scale, stochastic) in enumerate(profiles):
+                raw = packed[b : b + 1]
+                with torch.autocast(raw.device.type, enabled=False), ieee_fp32():
+                    z = transform(raw) if transform is not None else (raw.double() / scale).float()
+                transformed.append(z)
+                proxies.append(torch.ones_like(z) if stochastic else torch.zeros_like(z))
+                balance = None if transform is not None or wb is None else wb[b : b + 1]
+                interpolated.append(malvar(z, colors[b : b + 1], balance))
+            packed, variance = torch.cat(transformed), torch.cat(proxies)
+            base_rgb = torch.cat(interpolated)
         rgb, normalized, noise, condition, offset, span = physical_rgb_features(
-            packed, variance, colors, wb, matrix
+            packed, variance, colors, wb, matrix, rgb=base_rgb, stabilized=self.stabilized
         )
+        if self.physical_anchors:
+            anchors = stabilized_photometry(profiles, offset, span)
+            condition = torch.cat(
+                (condition[:, :6], anchors.expand(-1, -1, *rgb.shape[-2:]), condition[:, 9:]), dim=1
+            )
         h, w = rgb.shape[-2:]
         pad = (0, -w % 8, 0, -h % 8)
         normalized, noise, condition = (
@@ -159,14 +275,24 @@ class PretrainedRgbDemosaic(nn.Module):
         middle_offset = None
         if context is not None:
             middle_offset = context(
-                render(rgb, wb, matrix),
+                render(rgb if preview is None else preview, wb, matrix),
                 (normalized.shape[-2] // 8, normalized.shape[-1] // 8),
             )
         prediction = self.network(
             normalized, noise, head_offset=head_offset, middle_offset=middle_offset
         )[..., :h, :w]
         with torch.autocast(packed.device.type, enabled=False), ieee_fp32():
-            return prediction.float() * span + offset
+            output = prediction.float() * span + offset
+            if profiles is not None:
+                output = torch.cat(
+                    [
+                        transform.inverse(output[b : b + 1])
+                        if transform is not None
+                        else (output[b : b + 1].double() * scale).float()
+                        for b, (transform, scale, _) in enumerate(profiles)
+                    ]
+                )
+            return output
 
 
 def initialize_rgb_prior(model, receipt, *, archive=None):
@@ -183,5 +309,9 @@ def initialize_rgb_prior(model, receipt, *, archive=None):
         "sha256": hashlib.sha256(Path(receipt).read_bytes()).hexdigest(),
         "prior": prior.receipt,
         "new_adapters": "Zero measurement/camera projection and zero DINO fusion gate",
-        "physical_representation": "Affine-normalized linear camera RGB; spatial noise proxy; no GAT",
+        "physical_representation": (
+            "Centered GAT / expectation inverse with explicit shot/read; unit-noise CFA"
+            if model.config.variance_stabilization
+            else "Affine-normalized linear camera RGB; spatial noise proxy; no GAT"
+        ),
     }

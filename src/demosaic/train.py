@@ -45,6 +45,8 @@ def evaluate(
             generator=generator,
             physical_fp32=physical_fp32,
         )
+        if hasattr(model, "set_noise"):
+            model.set_noise(batch["shot"], batch["read"])
         with amp_context(device, amp or precision == "float32", dtype=precision):
             output = model(
                 batch["packed"], batch["variance"], batch["colors"], batch["wb"], batch["matrix"]
@@ -538,6 +540,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             else None
         )
         optimizer.zero_grad(set_to_none=True)
+        model.set_noise(batch["shot"], batch["read"])
         with amp_context(device, amp or precision == "float32", dtype=precision):
             prediction, auxiliary = model(
                 batch["packed"],

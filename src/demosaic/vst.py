@@ -22,12 +22,22 @@ def expectation_table(read_e):
     96-node quadrature after a square-root substitution, Poisson counts
     0..320, and a fine low-count grid. The substitution removes the clipped
     square root's integration singularity at zero.
+    For read_e>=16, the endpoint is negligible and centered 32-node Hermite
+    quadrature avoids cancellation in the read-dominated Gaussian limit.
     These are numerical approximations, not exact symbolic expectations.
     """
     nodes, weights = np.polynomial.legendre.leggauss(96)
     counts = np.arange(321, dtype=np.float64)
     q = 3 / 8 + read_e**2
-    if read_e:
+    if read_e >= 16:
+        # The clipped-root endpoint is >16 Gaussian standard deviations away.
+        # Integrate the centered expression directly to avoid subtracting two
+        # huge constants when read noise dominates shot noise.
+        gaussian_nodes, gaussian_weights = np.polynomial.hermite.hermgauss(32)
+        signal = counts[:, None] + math.sqrt(2) * read_e * gaussian_nodes
+        centered = 2 * signal / (np.sqrt(signal + q) + math.sqrt(q))
+        conditional = (centered * gaussian_weights).sum(1) / math.sqrt(math.pi)
+    elif read_e:
         lower = np.sqrt(np.maximum(counts + q - 10 * read_e, 0))
         upper = np.sqrt(counts + q + 10 * read_e)
         radius = (upper - lower) / 2

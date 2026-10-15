@@ -82,7 +82,9 @@ forked data workers. Only that owned attempt/workers were terminated. Training
 now runs in a fresh CLI process with `worker_start_method: spawn`. The first
 1,000 steps completed with the same first-batch fingerprint; matched development
 and full 102 MP evaluation are in the [first review](pretrained-rgb-v28-review.md).
-Training continues to5k. No GFX images were fitted
+Training completed 5k; see the [full 427-photo and real review](pretrained-rgb-v28-5k-review.md).
+The [matched V29 trial](stabilized-rgb-v29-review.md) evaluates explicit shot/read
+variance stabilization with the same initial neural tensors. No GFX images were fitted
 or used in training. See [startup/validation evidence](results/pretrained-rgb-v28-startup.json).
 
 Reproduce with the locked environment after obtaining the pinned original

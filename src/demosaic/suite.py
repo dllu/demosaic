@@ -12,7 +12,7 @@ import yaml
 
 from .cfa import PATTERNS, bilinear, color_indices, malvar, mosaic
 from .data import CleanDataset, camera_pair, synthetic
-from .gaussian import StabilizedGaussianPrior, load_gaussian_prior
+from .gaussian import load_gaussian_prior
 from .inference import load_checkpoint
 from .metrics import quality_metrics
 from .noise import add_noise, variance_map
@@ -102,6 +102,8 @@ def evaluate_panel(
                     protocol["camera_to_srgb"],
                     protocol.get("seed", 42),
                 )
+                if hasattr(model, "set_noise"):
+                    model.set_noise(condition["shot"], condition["read"])
                 with amp_context(device, amp or precision == "float32", dtype=precision):
                     prediction = model(
                         batch["packed"],
@@ -413,7 +415,7 @@ def run_suite(
                         ),
                     ]
                     for label, model, amp in models:
-                        if isinstance(model, StabilizedGaussianPrior):
+                        if hasattr(model, "set_noise"):
                             model.set_noise(condition["shot"], condition["read"])
                         with amp_context(device, dtype=precision if amp else "float32"):
                             prediction = model(

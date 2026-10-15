@@ -10,7 +10,7 @@ import torch
 
 from .cfa import bilinear, color_indices, malvar, pack
 from .color import render
-from .gaussian import StabilizedGaussianPrior, load_gaussian_prior
+from .gaussian import load_gaussian_prior
 from .inference import load_checkpoint
 from .metrics import quality_metrics
 from .precision import COMPUTE_DTYPES, amp_context
@@ -189,8 +189,15 @@ def evaluate_pairs(
                     ("Wiener7+Malvar2004:WB", malvar(wiener_packed(packed, variance), labels, wb)),
                 ]
                 for label, model, compute in current_models:
-                    if isinstance(model, StabilizedGaussianPrior):
-                        model.set_noise(shot, read)
+                    if hasattr(model, "set_noise"):
+                        multiplier = (
+                            noise_multiplier
+                            if getattr(
+                                getattr(model, "config", None), "variance_stabilization", False
+                            )
+                            else 1.0
+                        )
+                        model.set_noise(shot * multiplier, read * multiplier)
                     with amp_context(device, dtype=compute):
                         prediction = model(packed, variance * noise_multiplier, labels, wb, matrix)
                     predictions.append((label, prediction))

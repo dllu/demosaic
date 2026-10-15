@@ -41,6 +41,8 @@ class ModelConfig:
     pyramid_measurements: bool = True
     pyramid_width: int = 24
     pyramid_blocks: int = 2
+    variance_stabilization: bool = False
+    physical_anchors: bool = False
 
     def to_dict(self):
         return asdict(self)
@@ -347,8 +349,12 @@ class JointDemosaic(nn.Module):
         self.config = config or ModelConfig()
         self.refinement_precision = "float32"
         cfg = self.config
+        if cfg.physical_anchors and not cfg.variance_stabilization:
+            raise ValueError("Physical anchors require variance stabilization")
         if cfg.restoration_backbone not in ("local", "pretrained-rgb"):
             raise ValueError("Unknown restoration backbone")
+        if cfg.variance_stabilization and cfg.restoration_backbone != "pretrained-rgb":
+            raise ValueError("Variance stabilization requires the pretrained RGB backbone")
         if cfg.restoration_backbone == "pretrained-rgb":
             from .pretrained_rgb import PretrainedRgbDemosaic
 
@@ -366,7 +372,9 @@ class JointDemosaic(nn.Module):
                     "Pretrained RGB requires width64, FP32 physical camera features "
                     "and no legacy noise/refiner branches"
                 )
-            self.pretrained_rgb = PretrainedRgbDemosaic()
+            self.pretrained_rgb = PretrainedRgbDemosaic(
+                stabilized=cfg.variance_stabilization, physical_anchors=cfg.physical_anchors
+            )
             self.context = DinoContext(cfg, 512) if cfg.dino else None
             self.refiner = self.coarse_refiner = self.pyramid_refiner = None
             return
@@ -440,6 +448,11 @@ class JointDemosaic(nn.Module):
             if cfg.pyramid_refinement
             else None
         )
+
+    def set_noise(self, shot, read):
+        if self.config.variance_stabilization:
+            self.pretrained_rgb.set_noise(shot, read)
+        return self
 
     def set_refinement_precision(self, precision):
         """Set inference arithmetic without changing weights or physical maps."""
