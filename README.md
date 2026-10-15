@@ -7,6 +7,8 @@ Reviewed V16 still trails RawNIND on paired real RAW development. An experimenta
 [stabilized RGB prior](docs/stabilized-gaussian-review.md) improves unseen-camera
 PSNR, with remaining known-camera and SSIM deficits. Quality work continues;
 state-of-the-art performance is not established.
+The [pretrained RGB/DINO first review](docs/pretrained-rgb-v28-review.md) records
+an experimental single-pass model; it remains below the overall quality target.
 
 Native 160×160 validation crops: noisy → denoised → GT, using V16 step5000
 (FP16, ISO12800 synthetic noise prior). These are 100% crops at the 8×8-binned

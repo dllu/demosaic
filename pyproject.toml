@@ -37,8 +37,12 @@ name = "pytorch"
 url = "https://download.pytorch.org/whl/cu130"
 explicit = true
 
-[tool.hatch.build.targets.wheels]
+[tool.hatch.build.targets.wheel]
 packages = ["src/demosaic"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"third_party/gaussian" = "demosaic/licenses/gaussian"
+"third_party/dinov3/LICENSE.md" = "demosaic/licenses/dinov3-LICENSE.md"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

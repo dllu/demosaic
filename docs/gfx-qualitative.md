@@ -79,6 +79,11 @@ joint RGB priors. Joint RGB preserves more fence structure, but still softens
 leaves and leaves isolated colored dots. Those context crops are separate from
 the full-frame V16/RawNIND results on this page.
 
+That review also includes [full-frame Joint8 comparisons](stabilized-gaussian-review.md#full-102-mp-gfx-output)
+and verified RGB16 files. The fence advantage survives full-frame blending,
+but restoration takes 967.31 seconds in a shared-machine run and foliage remains
+soft. This is an expensive experimental reference; it is not the deployed model.
+
 Full 11662×8746×3 unsigned16 linear-camera-RGB and ICC sRGB TIFFs are saved in
 `/mnt/external/demosaic/evaluation/gfx-3879-3880-v16-5k-full/` as
 `restored-{0,1}-{linear16,srgb16}.tiff` (0 = V16, 1 = RawNIND).

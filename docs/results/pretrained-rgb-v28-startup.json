@@ -1,0 +1,156 @@
+{
+  "observed_utc": "2026-10-15T22:45:20.508986+00:00",
+  "previous_goal_turn": "progress: fixed Joint8 expanded evaluation/native-crop review completed and pushed; full 102MP run started.",
+  "initial_checkpoint": {
+    "path": "/mnt/external/demosaic/runs/dino-pretrained-rgb-v28/initialization-v28.pt",
+    "sha256": "27ca0258972b4213cdddc470c3fa217c5d3e0587129b3396235b586ce937dfb3",
+    "parameters": 54829760,
+    "trainable_parameters": 33233216,
+    "lineage": {
+      "type": "verified RGB Gaussian restoration pretraining",
+      "path": "/home/dllu/proj/demosaic/docs/results/gaussian-color-source-and-weights.json",
+      "sha256": "8d907542c3344e8a980854e067fd79a3e61b920f5c23a0f61d69c52ed9a54129",
+      "prior": {
+        "label": "DRUNet-RGB:GAT-table:HQS4",
+        "weights_sha256": "479abe3c5327dfd10ff54a80ec7d4098ca80752a5c9492cdff31cee430bec4b4",
+        "sha256": "479abe3c5327dfd10ff54a80ec7d4098ca80752a5c9492cdff31cee430bec4b4",
+        "source_sha256": "bd44add95919f0b0baca45ce8760ff634fd1fb4b0d670606ce38ce1a7f0bc772",
+        "snapshot": "/mnt/external/demosaic/runs/dino-pretrained-rgb-v28/gaussian-reference/weights-479abe3c5327dfd10ff54a80ec7d4098ca80752a5c9492cdff31cee430bec4b4.pth",
+        "inverse": "table",
+        "compute_precision": "IEEE float32",
+        "conditioning": "Explicit shot/read priors; no input fitting or target gain",
+        "source_receipt": "docs/results/gaussian-color-source-and-weights.json",
+        "physical_compute_precision": "float64 transform/inverse; float32 RGB and neural prior",
+        "joint_sigmas": [
+          8.0,
+          4.0,
+          2.0,
+          1.0
+        ],
+        "joint_weight": 0.23
+      },
+      "new_adapters": "Zero measurement/camera projection and zero DINO fusion gate",
+      "physical_representation": "Affine-normalized linear camera RGB; spatial noise proxy; no GAT"
+    }
+  },
+  "workflow": {
+    "pid": 3697059,
+    "session_id": 69188,
+    "script": ".cache/run_pretrained_v28_workflow.py",
+    "script_sha256": "8ca8a0f63fcb10d49d0f4ac4aa850b438ee1f6470061c8bc6379ed863d076970",
+    "log": ".cache/pretrained-rgb-v28-workflow.log",
+    "state_file": ".cache/pretrained-rgb-v28-workflow-state.json",
+    "phase_at_observation": "waiting for original live full GFX process 3616786",
+    "stages": [
+      "wait for original full GFX process to exit; never restart it",
+      "validate all six full RGB16 TIFF hashes, geometry, bit depth, ICC and >256 sampled codes",
+      "complete CUDA-enabled test suite",
+      "genuine DINO BF16 CUDA gradient check",
+      "step-zero 16-photo +4-procedural photographic screen",
+      "train V28 for first 1000 steps of planned5000"
+    ]
+  },
+  "full_gfx_dependency": {
+    "pid": 3616786,
+    "session_id": 21388,
+    "log": ".cache/gfx-gat-joint8-v2-full.log",
+    "output": "/mnt/external/demosaic/evaluation/gfx-3879-3880-gat-joint8-v2-full",
+    "state_at_observation": "running; live process verified"
+  },
+  "recipe": {
+    "path": "configs/dino-pretrained-rgb-v28.yaml",
+    "sha256": "833317f584e724927ae3983362410b6b53100b8806230f7f8106b533494bb1e6"
+  },
+  "validation": {
+    "cpu_tests": "216 passed, 8 CUDA checks skipped in11.31s; .cache/tests-pretrained-rgb-full-cpu-final.log",
+    "genuine_dino_cpu_training": "two steps completed on synthetic and native-RAW-synthetic batches, then resumed2->4 retaining optimizer/lineage; logs .cache/pretrained-rgb-cpu-smoke.log and .cache/pretrained-rgb-cpu-resume.log",
+    "wheel": "built and verified exact final source bytes plus both MIT notices and DINOv3 license; .cache/build-pretrained-rgb-final.log",
+    "ruff": "passed"
+  },
+  "limitations": [
+    "V28 is not quality-reviewed or promoted.",
+    "First1000-step training and CUDA checks have not started at observation.",
+    "Complete427-photo fixed Joint8 evaluation remains pending.",
+    "GFX images/siblings excluded from all training and fitting.",
+    "PROMPT quality and speed objectives remain unmet."
+  ],
+  "follow_up": {
+    "observed_utc": "2026-10-15T22:56:07.970165+00:00",
+    "normalization_fix": "Constant RGB unit fallback and near-flat eight-sigma range floor before first GPU training; no trainable weights changed. Waiting wrapper3697059 terminated and reloaded.",
+    "full_gfx": "Terminal0; complete967.313756s Joint8 run; all6TIFF hashes/geometry/tags/ICC/code diversity verified; docs/results/gfx-joint8-full-review.json.",
+    "cuda_tests": "225 passed11.97s before worker fix; final226 passed18.08s including deterministic spawned-worker restart.",
+    "cuda_smoke": {
+      "loss": 0.007919064722955227,
+      "frozen_dino_parameters": 21596544,
+      "gate_gradient_norm": 0.007315901108086109,
+      "measurement_gradient_norm": 0.03176320716738701,
+      "peak_cuda_gb": 0.405570048
+    },
+    "fork_stall": {
+      "reason": "Training blocked waiting for data after in-process evaluation; GPU0% and all workers idle with one futex wait. Suspected fork/thread-pool inheritance. One step completed; no later training checkpoint. Preserve initialization and restart fresh CLI with spawn workers.",
+      "parent": 3733205,
+      "children": [
+        3768236,
+        3768240,
+        3768247,
+        3768255,
+        3768279,
+        3768283,
+        3768287,
+        3768292
+      ],
+      "latest_log": "{\"event\": \"train\", \"step\": 1, \"loss\": 0.022082488983869553, \"lr\": 1.0000000000000002e-06, \"grad_norm\": 1.7112443447113037, \"seconds_per_step\": 1.546514221932739, \"cuda_gb\": 2.108981248, \"domain\": \"synthetic\", \"linear\": 0.01112540066242218, \"rendered\": 0.015207763761281967, \"gradient\": 0.014466837048530579, \"highlight\": 0.009510383009910583, \"sensor\": 0.009554838761687279, \"batch_sha256\": \"547fc5b20b77e819370f931c2d3d16b048ecb8954c679d8c7c66da4315025aad\"}"
+    },
+    "fresh_training": {
+      "pid": 3794631,
+      "session_id": 37597,
+      "log": ".cache/train-pretrained-rgb-v28.log",
+      "run": "/mnt/external/demosaic/runs/dino-pretrained-rgb-v28",
+      "worker_start_method": "spawn",
+      "source_sha256": "06729a26bec0f53587ef84a8956ba9402b360ab8e746aaa61bfb685ecaebabdb",
+      "source_snapshot": "/mnt/external/demosaic/runs/dino-pretrained-rgb-v28/source/06729a26bec0f53587ef84a8956ba9402b360ab8e746aaa61bfb685ecaebabdb",
+      "recipe_sha256": "18b9e102d9d55cf4fc23e66ce960c005134b1879eb8f9f253748d0863d4e4060",
+      "step1000_logged": true,
+      "memory_peak_cuda_gb": 2.21531648
+    },
+    "first_review": {
+      "session_id": 53420,
+      "script": ".cache/eval_pretrained_v28_1k.py",
+      "log": ".cache/eval-pretrained-rgb-v28-1k.log",
+      "status": "All paired known/unseen,16-photo screen and GFX contexts complete; published docs/results/pretrained-rgb-v28-1k-review.json."
+    }
+  },
+  "continuing_workflow": {
+    "session_id": 86120,
+    "parent_pid": 3832216,
+    "script": ".cache/full_v28_1k_then_resume.py",
+    "log": ".cache/full-v28-1k-then-resume.log",
+    "full_child_pid_at_start": 3832220,
+    "full_output": "/mnt/external/demosaic/evaluation/gfx-3879-3880-pretrained-rgb-v28-1k-full",
+    "full_log": ".cache/gfx-pretrained-rgb-v28-1k-full.log",
+    "then": "Resume original schedule from1000 to5000, freshCLI/spawn, .cache/train-pretrained-rgb-v28-5k.log",
+    "limitation": "Full output validation and5k review pending; verify processes before restart."
+  },
+  "latest_observation": {
+    "observed_utc": "2026-10-15T23:06:33.192588+00:00",
+    "full1k": "Terminal0, all6RGB16 files/12native triplets validated; docs/results/gfx-pretrained-rgb-v28-1k-full.json",
+    "restoration_seconds": {
+      "v16": 30.530703332973644,
+      "v28": 24.876716094091535,
+      "rawnind": 17.427528964122757
+    },
+    "continuing_parent_pid": 3832216,
+    "continuing_session": 86120,
+    "training_pid": 3832886,
+    "training_log": ".cache/train-pretrained-rgb-v28-5k.log",
+    "training_status": "Live, resumed1000->5000; passed1800. Verify actual PID/status before restart.",
+    "quality_status": "Not promoted. First1k close toRaw primary, aux/SSIM deficits; full427/protected-final quality and10s speed unmet.",
+    "evaluation_after_5k": {
+      "pid": 3833838,
+      "session_id": 2125,
+      "script": ".cache/eval_pretrained_v28_5k.py",
+      "log": ".cache/eval-pretrained-rgb-v28-5k.log",
+      "status": "Waiting on original training PID3832886 via pidfd; then known4/unseen5,16-photo screen and GFX context. No duplicate training."
+    }
+  }
+}

@@ -56,6 +56,11 @@ architecture. The foundation backbone is excluded from EMA/optimizer copies and
 restoration checkpoints; it is loaded independently from its named HF source.
 Run environments must retain the matching backbone and its license.
 
+The [V28 pretrained restoration experiment](pretrained-rgb-restoration.md) adds
+an opt-in native RGB trunk with verified Gaussian restoration initialization,
+CFA/camera conditioning and frozen DINOv3 context. It is unreviewed; existing
+model defaults remain the local restoration backbone.
+
 Clean targets include 20% procedurally supersampled shapes, thin lines and chirps.
 Photographic crops are shrunk or gently warped; rotations/flips precede mosaicing
 so the CFA stays correct. Small Gaussian, radial, motion, coma and astigmatism

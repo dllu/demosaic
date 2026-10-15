@@ -1,0 +1,53 @@
+manifest: /mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl
+run: /mnt/external/demosaic/runs/dino-pretrained-rgb-v28
+device: cuda
+seed: 45
+steps: 5000
+batch_size: 4
+patch_size: 256
+workers: 4
+worker_start_method: spawn
+cpu_threads: 4
+synthetic_fraction: 0.2
+flat_fraction: 0.1
+noise_free_fraction: 0.1
+reconstruct_highlights: true
+preserve_negative_read_noise: true
+broad_camera: true
+lr: 0.0001
+warmup_steps: 100
+checkpoint_every: 1000
+val_batches: 4
+log_every: 25
+amp: true
+precision: bfloat16
+channels_last: true
+min_available_gb: 12
+trace_observations: true
+data_seed_per_step: true
+gaussian_initialization: docs/results/gaussian-color-source-and-weights.json
+model:
+  restoration_backbone: pretrained-rgb
+  width: 64
+  dino: true
+  dino_revision: 114c1379950215c8b35dfcd4e90a5c251dde0d32
+  camera_conditioning: true
+  physical_fp32: true
+validation_protocol: configs/evaluation.yaml
+validation_images: 8
+paired_manifest: /mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json
+paired_fraction: 0.25
+paired_workers: 2
+raw_clean_manifest: /mnt/external/demosaic/raw-clean-train32-bin8-v1/manifest.json
+raw_clean_fraction: 0.25
+raw_clean_workers: 2
+experiment_notes: >-
+  One-pass native RGB restoration initialized strictly from verified original RGB
+  DRUNet weights, zero measurement/camera input adapter and zero frozen DINOv3
+  fusion gate. Affine-normalized linear camera RGB with a spatial marginal-noise
+  proxy; no GAT/HQS iterations. All restoration weights trainable. Expected mix:
+  50% Commons/procedural, 25% paired RAW, 25% binned native RAW synthetic. Existing
+  calibrated measured-CFA/auxiliary losses and highlight/exposure augmentation.
+  Stop after 1000 steps for review against frozen V16 and HQS8. No protected-final
+  or GFX qualitative scene/siblings. Compare later matched no-DINO arm separately;
+  neither this recipe nor an initialization smoke is a quality claim.

@@ -19,3 +19,11 @@ not just software that executes. This checklist records the evidence required.
 
 Photo directories are read-only. All writes, downloads, temporary files and caches
 must stay in this repository or `/mnt/external`. Do not modify `PROMPT.md`.
+
+V28's [first 1k pretrained RGB/DINO review](pretrained-rgb-v28-review.md) adds
+33.43530/.947856 on the same 16-photo synthetic screen (+1.01706 dB over V16),
+real primary53.99180/53.62905 and verified full102MP RGB16 restoration in24.88s.
+Known-camera rendered quality and both real SSIM means still trail RawNIND;
+bootstrap intervals include zero for primary superiority. This is early
+progress, not satisfaction of the quality/speed gates. Original5k training is
+continuing; full427/protected-final evaluation and matched DINO ablation remain.

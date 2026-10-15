@@ -56,7 +56,7 @@ final scenes remain unused. Parameters are fixed across images; no per-image
 fitting occurs.
 
 The external neural source and original KAIR weights are checksum-verified,
-loaded strictly, frozen and archived with MIT notices. The source stays outside
+loaded strictly, frozen and archived with MIT notices. The comparator source stays outside
 this repository. [Gray source/weight receipt](results/noise2vst-source-and-weights.json),
 [RGB four-step receipt](results/gaussian-color-source-and-weights.json),
 [fixed eight-step recipe and weights](results/gaussian-color-joint8-source-and-weights.json).
@@ -228,6 +228,60 @@ and preserves considerably more fence structure than V16/RawNIND. Leaves remain
 smoothed and isolated colored dots persist, especially in sky/shadows. The
 sharper f/5.6 reference cannot establish which missing details the f/1.7 capture
 contains. No pixelwise scores are computed for this pair.
+
+## Full 102 MP GFX output
+
+The fixed Joint8 method completed the entire 11662×8746 image, tiled at 512px
+with 64px overlap, batch4 and 520 tiles. [The full-frame receipt](results/gfx-joint8-full-review.json)
+includes source/checkpoint hashes, exact native ROIs and all six output TIFF
+hashes/validations. Files are under
+`/mnt/external/demosaic/evaluation/gfx-3879-3880-gat-joint8-v2-full/`:
+`restored-{0,1,2}-{linear16,srgb16}.tiff`, with indices V16, RawNIND, Joint8.
+
+| Method | Restoration seconds | Peak CUDA GB |
+| --- | ---: | ---: |
+| V16 FP16 base / FP32 refinement | 29.51 | .972 |
+| RawNIND IEEE FP32 | 15.99 | 1.512 |
+| Joint8 IEEE FP32 neural / float64 physical | **967.31** | .882 |
+
+These are single shared-machine timings, including overlapping CPU work and
+another user's GPU process; they exclude RAW decoding, loading, rendering and
+TIFF encoding. Peak CUDA allocation is not total UMA. The 10-second target is
+unmet; Joint8 is currently an expensive qualitative/reference method.
+
+All six files were rehashed and verified as 8746×11662×3 uint16 with 16-bit sample
+tags. All three sRGB files carry ICC profiles. Subsampled unique output codes
+range from 5,441 to 5,510 for linear files and 25,508 to 26,006 for sRGB files,
+confirming more than 256 levels. This validates output precision/geometry, not
+quality. An averaged full-frame overview was inspected for gross artifacts;
+that does not establish seam-free behavior at every native pixel.
+
+The following panels come from the blended FP32 **full-frame** output, not the
+512px-context experiments above. Same native160px foliage/fence coordinates,
+shared +2 EV, WB and matrix. The last panel remains the independent ISO100
+qualitative reference, **not GT**. Native pixel hashes and identical noisy/
+reference panel bytes across methods were checked.
+
+Joint8 foliage, then fence:
+
+![Full-frame Joint8 foliage: noisy, denoised, ISO100 reference](images/gfx-joint8-full-10.png)
+![Full-frame Joint8 fence: noisy, denoised, ISO100 reference](images/gfx-joint8-full-11.png)
+
+Matched V16:
+
+![Full-frame V16 foliage: noisy, denoised, ISO100 reference](images/gfx-joint8-full-02.png)
+![Full-frame V16 fence: noisy, denoised, ISO100 reference](images/gfx-joint8-full-03.png)
+
+Matched RawNIND:
+
+![Full-frame RawNIND foliage: noisy, denoised, ISO100 reference](images/gfx-joint8-full-06.png)
+![Full-frame RawNIND fence: noisy, denoised, ISO100 reference](images/gfx-joint8-full-07.png)
+
+The fence structure advantage survives full-frame blending. Foliage is still
+soft; isolated colored dots remain. Neither capture's different aperture/motion
+nor this comparison supports an exact-detail recovery claim. The
+[V28 trainable pretrained RGB/DINO experiment](pretrained-rgb-restoration.md)
+tests a single-pass direction; it is not yet quality reviewed.
 
 ## Earlier pilots and rejected gain diagnostic
 

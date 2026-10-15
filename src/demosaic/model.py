@@ -14,6 +14,7 @@ from .prior import box_mean, standardized_noise, wiener_packed
 
 @dataclass
 class ModelConfig:
+    restoration_backbone: str = "local"
     width: int = 32
     encoder_blocks: tuple[int, ...] = (2, 2, 4)
     middle_blocks: int = 6
@@ -346,6 +347,29 @@ class JointDemosaic(nn.Module):
         self.config = config or ModelConfig()
         self.refinement_precision = "float32"
         cfg = self.config
+        if cfg.restoration_backbone not in ("local", "pretrained-rgb"):
+            raise ValueError("Unknown restoration backbone")
+        if cfg.restoration_backbone == "pretrained-rgb":
+            from .pretrained_rgb import PretrainedRgbDemosaic
+
+            if (
+                cfg.width != 64
+                or not cfg.camera_conditioning
+                or not cfg.physical_fp32
+                or cfg.noise_modulation
+                or cfg.standardized_noise
+                or cfg.noise_refinement
+                or cfg.coarse_refinement_factor
+                or cfg.pyramid_refinement
+            ):
+                raise ValueError(
+                    "Pretrained RGB requires width64, FP32 physical camera features "
+                    "and no legacy noise/refiner branches"
+                )
+            self.pretrained_rgb = PretrainedRgbDemosaic()
+            self.context = DinoContext(cfg, 512) if cfg.dino else None
+            self.refiner = self.coarse_refiner = self.pyramid_refiner = None
+            return
         if len(cfg.encoder_blocks) != len(cfg.decoder_blocks) or cfg.width < 4:
             raise ValueError("Invalid encoder/decoder configuration")
         if cfg.baseline not in ("bilinear", "wiener-malvar"):
@@ -433,6 +457,9 @@ class JointDemosaic(nn.Module):
             raise ValueError("Expected four packed phases and matching variance maps")
         if colors.ndim == 1:
             colors = colors[None].expand(batch, -1)
+        if self.config.restoration_backbone == "pretrained-rgb":
+            prediction = self.pretrained_rgb(packed, variance, colors, wb, matrix, self.context)
+            return (prediction, mosaic(prediction, colors)) if auxiliary else prediction
         auxiliary_base = packed
         if self.config.baseline == "wiener-malvar":
             auxiliary_base = wiener_packed(packed, variance, self.config.prior_window)

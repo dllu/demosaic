@@ -217,6 +217,9 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         protocol = Path(config["validation_protocol"]).read_bytes()
         payloads["validation_protocol.yaml"] = protocol
         config["validation_protocol_sha256"] = hashlib.sha256(protocol).hexdigest()
+    if config.get("model", {}).get("restoration_backbone") == "pretrained-rgb":
+        for name in ("Noise2VST-LICENSE", "KAIR-LICENSE"):
+            payloads[name] = (repository / "third_party/gaussian" / name).read_bytes()
     code_hash = hashlib.sha256()
     for name, payload in sorted(payloads.items()):
         code_hash.update(name.encode() + payload)
@@ -254,8 +257,23 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             resume_state["model_config"]
         ).physical_fp32
     model = JointDemosaic(ModelConfig(**model_options)).to(device)
+    if config.get("channels_last", False):
+        model.to(memory_format=torch.channels_last)
     if config.get("reconstruct_highlights", False) and not model.config.camera_conditioning:
         raise ValueError("Highlight training requires white-balance/color-matrix conditioning")
+    gaussian_initialization = config.get("gaussian_initialization")
+    if gaussian_initialization and model.config.restoration_backbone != "pretrained-rgb":
+        raise ValueError("Gaussian initialization requires the pretrained-rgb backbone")
+    if model.config.restoration_backbone == "pretrained-rgb" and not (resume or initialize):
+        if not gaussian_initialization:
+            raise ValueError(
+                "Fresh pretrained RGB training requires verified Gaussian initialization"
+            )
+        from .pretrained_rgb import initialize_rgb_prior
+
+        config["initialized_from"] = initialize_rgb_prior(
+            model, gaussian_initialization, archive=run
+        )
     if initialize:
         initial = torch.load(initialize, map_location="cpu", weights_only=True)
         weights = initial.get("ema", initial["model"])
@@ -376,6 +394,10 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         records=records,
     )
     workers = config.get("workers", 2)
+    worker_start_method = config.get("worker_start_method")
+    if worker_start_method not in (None, "spawn", "forkserver", "fork"):
+        raise ValueError("Unknown data-worker start method")
+    worker_options = {"multiprocessing_context": worker_start_method} if worker_start_method else {}
     loader = DataLoader(
         data,
         batch_size=batch_size,
@@ -385,7 +407,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         pin_memory=False,
         persistent_workers=workers > 0,
         generator=torch.Generator().manual_seed(seed),
-        **({"prefetch_factor": 2} if workers else {}),
+        **({"prefetch_factor": 2, **worker_options} if workers else {}),
     )
     paired_iterator = None
     if paired_data is not None:
@@ -405,7 +427,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 pin_memory=False,
                 persistent_workers=paired_workers > 0,
                 generator=torch.Generator().manual_seed(seed + 17),
-                **({"prefetch_factor": 2} if paired_workers else {}),
+                **({"prefetch_factor": 2, **worker_options} if paired_workers else {}),
             )
         )
     raw_clean_iterator = None
@@ -427,7 +449,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 pin_memory=False,
                 persistent_workers=native_workers > 0,
                 generator=torch.Generator().manual_seed(seed + 31),
-                **({"prefetch_factor": 2} if native_workers else {}),
+                **({"prefetch_factor": 2, **worker_options} if native_workers else {}),
             )
         )
     validation = DataLoader(
@@ -546,6 +568,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             or model.refiner is not None
             or model.coarse_refiner is not None
             or model.pyramid_refiner is not None
+            or model.config.restoration_backbone == "pretrained-rgb"
             else nullcontext()
         ):
             loss.backward()
