@@ -311,3 +311,11 @@ and ADC-only inputs; physical arithmetic stays IEEE FP32. See
 [the matched supervision experiment](scale-aware-supervision.md). The new term
 is a training objective, not a posterior-noise calibration or an established
 quality improvement.
+
+Optional `--gaussian-reference /path/to/verified-receipt.json` on `quality`,
+`scripts/evaluate_paired_raw.py` and `scripts/report_raw_pair.py` evaluates a
+frozen Gaussian denoising prior with physical variance stabilization. The
+reference receipt pins external source/weights; each report archives them.
+No evaluation-image fitting or target-derived gain is used. This comparator
+is experimental and has substantial photographic limitations; see
+[the method and native-crop review](stabilized-gaussian-review.md).

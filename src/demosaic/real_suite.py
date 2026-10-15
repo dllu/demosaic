@@ -10,6 +10,7 @@ import torch
 
 from .cfa import bilinear, color_indices, malvar, pack
 from .color import render
+from .gaussian import StabilizedGaussianPrior, load_gaussian_prior
 from .inference import load_checkpoint
 from .metrics import quality_metrics
 from .precision import COMPUTE_DTYPES, amp_context
@@ -43,6 +44,7 @@ def evaluate_pairs(
     noise_multiplier=1.0,
     prior_window=None,
     refinement_precision="float32",
+    gaussian_reference=None,
 ):
     if (
         precision not in COMPUTE_DTYPES
@@ -101,6 +103,10 @@ def evaluate_pairs(
             }
         )
         del state
+    if gaussian_reference:
+        gaussian = load_gaussian_prior(gaussian_reference, device=device, archive=output)
+        models.append((gaussian.receipt["label"], gaussian, "float32"))
+        receipts.append(gaussian.receipt)
     reference = load_rawnind(rawnind, gain_mode="cfa-ls", device=device) if rawnind else None
     if reference:
         receipts.append(
@@ -183,6 +189,8 @@ def evaluate_pairs(
                     ("Wiener7+Malvar2004:WB", malvar(wiener_packed(packed, variance), labels, wb)),
                 ]
                 for label, model, compute in current_models:
+                    if isinstance(model, StabilizedGaussianPrior):
+                        model.set_noise(shot, read)
                     with amp_context(device, dtype=compute):
                         prediction = model(packed, variance * noise_multiplier, labels, wb, matrix)
                     predictions.append((label, prediction))

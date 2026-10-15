@@ -94,6 +94,7 @@ def parser():
     quality.add_argument("--limit", type=int, default=0)
     quality.add_argument("--synthetic-count", type=int, default=8)
     quality.add_argument("--rawnind", type=Path)
+    quality.add_argument("--gaussian-reference", type=Path)
     quality.add_argument("--device", default="cuda")
     for command in (infer, benchmark, quality):
         command.add_argument(
@@ -319,6 +320,7 @@ def main(argv=None):
             device=args.device,
             precision=args.precision,
             refinement_precision=args.refinement_precision,
+            gaussian_reference=args.gaussian_reference,
         )
     elif args.command == "noise-profile":
         from .calibration import estimate_noise

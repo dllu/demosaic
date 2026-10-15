@@ -12,6 +12,7 @@ import yaml
 
 from .cfa import PATTERNS, bilinear, color_indices, malvar, mosaic
 from .data import CleanDataset, camera_pair, synthetic
+from .gaussian import StabilizedGaussianPrior, load_gaussian_prior
 from .inference import load_checkpoint
 from .metrics import quality_metrics
 from .noise import add_noise, variance_map
@@ -236,6 +237,7 @@ def run_suite(
     device="cuda",
     precision="bfloat16",
     refinement_precision="float32",
+    gaussian_reference=None,
 ):
     output = writable_path(output)
     output.mkdir(parents=True, exist_ok=True)
@@ -296,6 +298,10 @@ def run_suite(
                 else "contiguous",
             }
         )
+    if gaussian_reference:
+        gaussian = load_gaussian_prior(gaussian_reference, device=device, archive=output)
+        models.append((gaussian.receipt["label"], gaussian, False))
+        model_records.append(gaussian.receipt)
     if rawnind:
         reference = load_rawnind(rawnind, gain_mode="cfa-ls", device=device)
         models.append(("RawNIND:CFA-LS", reference, False))
@@ -407,6 +413,8 @@ def run_suite(
                         ),
                     ]
                     for label, model, amp in models:
+                        if isinstance(model, StabilizedGaussianPrior):
+                            model.set_noise(condition["shot"], condition["read"])
                         with amp_context(device, dtype=precision if amp else "float32"):
                             prediction = model(
                                 batch["packed"],

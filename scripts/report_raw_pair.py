@@ -17,6 +17,7 @@ import torch
 from demosaic.calibration import estimate_noise
 from demosaic.cfa import color_indices, malvar, pack
 from demosaic.color import render
+from demosaic.gaussian import StabilizedGaussianPrior, load_gaussian_prior
 from demosaic.inference import load_checkpoint, restore_tiled
 from demosaic.io import read_raw, write_rgb16
 from demosaic.noise import Sensor
@@ -35,6 +36,7 @@ def main():
     parser.add_argument("checkpoint", type=Path, nargs="+")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--rawnind", type=Path)
+    parser.add_argument("--gaussian-reference", type=Path)
     parser.add_argument("--precision", choices=COMPUTE_DTYPES, default="float16")
     parser.add_argument("--refinement-precision", choices=REFINEMENT_DTYPES, default="float32")
     parser.add_argument(
@@ -91,6 +93,10 @@ def main():
                 ).hexdigest(),
             }
         )
+    if args.gaussian_reference:
+        gaussian = load_gaussian_prior(args.gaussian_reference, device="cuda", archive=output)
+        models.append((gaussian.receipt["label"], gaussian, "float32"))
+        weights.append(gaussian.receipt)
     raw, meta = read_raw(selection["noisy"])
     reference_raw, reference, refmeta, calibration = read_reference(selection["reference"])
     del reference_raw
@@ -139,6 +145,8 @@ def main():
         reference_display = display_crop(clean, wb, matrix, [0, 0, size, size], exposure=exposure)
         contexts.append((region, tx, ty, packed, variance, xywh, noisy, reference_display))
     for model_index, (label, model, precision) in enumerate(models):
+        if isinstance(model, StabilizedGaussianPrior):
+            model.set_noise(shot, read)
         if isinstance(model, RawNind):
             model.input_scale = torch.tensor(
                 publisher_input_scale(meta.white_levels, meta.black_levels, meta.adc_white_level),
