@@ -138,8 +138,13 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             expanded[:, :20] = weights["stem.weight"]
             weights["stem.weight"] = expanded
         incompatible = model.load_state_dict(weights, strict=False)
+        allowed_prefixes = ("context.",) + (
+            ("noise_encoder.", "noise_middle.", "noise_decoder.")
+            if model.config.noise_modulation
+            else ()
+        )
         if incompatible.unexpected_keys or any(
-            not k.startswith("context.") for k in incompatible.missing_keys
+            not k.startswith(allowed_prefixes) for k in incompatible.missing_keys
         ):
             raise ValueError(f"Incompatible initialization: {incompatible}")
         config["initialized_from"] = {

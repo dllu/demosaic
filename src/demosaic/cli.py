@@ -55,8 +55,11 @@ def parser():
     infer.add_argument("--pattern", choices=("RGGB", "BGGR", "GRBG", "GBRG"), default="RGGB")
     infer.add_argument("--black", type=float, default=0)
     infer.add_argument("--white", type=float, default=65535)
-    infer.add_argument("--shot", type=float, required=True, help="Var(y|x) = shot*x + read")
-    infer.add_argument("--read", type=float, required=True, help="Normalized read-noise variance")
+    infer.add_argument("--shot", type=float, help="Var(y|x) = shot*x + read")
+    infer.add_argument("--read", type=float, help="Normalized read-noise variance")
+    infer.add_argument(
+        "--noise-profile", type=Path, help="Reliable estimate from noise-profile command"
+    )
     infer.add_argument("--tile", type=int, default=256)
     infer.add_argument("--overlap", type=int, default=64)
     infer.add_argument("--batch-size", type=int, default=4)
@@ -72,6 +75,30 @@ def parser():
     benchmark.add_argument("--batch-size", type=int, default=8)
     benchmark.add_argument("--device", default="cuda")
     benchmark.add_argument("--output", type=Path, required=True)
+    profile = commands.add_parser(
+        "noise-profile", help="Estimate shot/read noise from flat RAW patches"
+    )
+    profile.add_argument("input", type=Path)
+    profile.add_argument("output", type=Path)
+    profile.add_argument("--patch", type=int, default=32)
+    profile.add_argument("--max-patches", type=int, default=4096)
+    quality = commands.add_parser("quality", help="Paired CFA/noise/exposure quality suite")
+    quality.add_argument("checkpoint", type=Path, nargs="+")
+    quality.add_argument("--manifest", type=Path, required=True)
+    quality.add_argument("--output", type=Path, required=True)
+    quality.add_argument("--config", type=Path, default=Path("configs/evaluation.yaml"))
+    quality.add_argument("--split", choices=("val", "test"), default="val")
+    quality.add_argument("--patch-size", type=int, default=256)
+    quality.add_argument("--batch-size", type=int, default=4)
+    quality.add_argument("--limit", type=int, default=0)
+    quality.add_argument("--synthetic-count", type=int, default=8)
+    quality.add_argument("--rawnind", type=Path)
+    quality.add_argument("--device", default="cuda")
+    audit = commands.add_parser(
+        "audit-split", help="Screen protected splits for perceptual duplicates"
+    )
+    audit.add_argument("manifest", type=Path)
+    audit.add_argument("output", type=Path)
     return root
 
 
@@ -164,6 +191,17 @@ def main(argv=None):
             args.preview and args.preview.resolve() == args.checkpoint.resolve()
         ):
             raise ValueError("Inference output must not overwrite its checkpoint")
+        profile = None
+        if args.noise_profile:
+            if args.shot is not None or args.read is not None:
+                raise ValueError("Use a noise profile or explicit shot/read coefficients")
+            profile = json.loads(args.noise_profile.read_text())
+            estimate = profile.get("estimate", profile)
+            if not estimate.get("reliable"):
+                raise ValueError(f"Noise estimate is not identifiable: {estimate.get('reason')}")
+            args.shot, args.read = estimate["shot"], estimate["read"]
+        elif args.shot is None or args.read is None:
+            raise ValueError("Supply both --shot and --read, or --noise-profile")
         suffix = args.input.suffix.lower()
         metadata = None
         if suffix in (".npy", ".tif", ".tiff"):
@@ -187,6 +225,10 @@ def main(argv=None):
                 metadata.camera_to_srgb,
                 metadata.flip,
             )
+            if profile and profile.get("raw_metadata"):
+                identity = profile["raw_metadata"]
+                if identity["camera"] != metadata.camera or identity.get("iso") != metadata.iso:
+                    raise ValueError("Noise profile camera/ISO differs from this RAW")
         model, checkpoint = load_checkpoint(args.checkpoint, args.device)
         rgb, stats = restore_tiled(
             model,
@@ -225,8 +267,46 @@ def main(argv=None):
                 "read": args.read,
                 "pattern": pattern,
                 "raw_metadata": asdict(metadata) if metadata else None,
+                "noise_profile": str(args.noise_profile) if args.noise_profile else None,
                 "end_to_end_seconds": time.perf_counter() - end_to_end_started,
                 **stats,
+            },
+        )
+    elif args.command == "audit-split":
+        from .audit import audit_split
+
+        audit_split(args.manifest, args.output)
+    elif args.command == "quality":
+        from .suite import run_suite
+
+        run_suite(
+            args.checkpoint,
+            args.manifest,
+            args.output,
+            args.config,
+            split=args.split,
+            patch_size=args.patch_size,
+            batch_size=args.batch_size,
+            limit=args.limit,
+            synthetic_count=args.synthetic_count,
+            rawnind=args.rawnind,
+            device=args.device,
+        )
+    elif args.command == "noise-profile":
+        from .calibration import estimate_noise
+        from .io import read_raw
+
+        writable_path(args.output)
+        if args.output.resolve() == args.input.resolve():
+            raise ValueError("Noise profile must not overwrite its RAW input")
+        raw, metadata = read_raw(args.input)
+        estimate = estimate_noise(raw, patch=args.patch, max_patches=args.max_patches)
+        dump(
+            args.output,
+            {
+                "method": "flat-patch-Haar-NNLS-v1",
+                "raw_metadata": asdict(metadata),
+                "estimate": estimate.to_dict(),
             },
         )
     elif args.command == "benchmark":

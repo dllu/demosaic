@@ -1,0 +1,17 @@
+# Coefficients are declared sensor priors, not measured ISO calibrations.
+patterns: [RGGB, BGGR, GRBG, GBRG]
+white_balance: [2.0, 1.0, 1.5]
+camera_to_srgb:
+  - [1.1176470588, -0.0588235294, -0.0588235294]
+  - [-0.0588235294, 1.1176470588, -0.0588235294]
+  - [-0.0588235294, -0.0588235294, 1.1176470588]
+border: 8
+seed: 20261014
+conditions:
+  - {name: adc-only, shot: 0.0, read: 0.0, exposure: 1.0}
+  - {name: iso100-prior, shot: 0.00002, read: 0.0000000016, exposure: 1.0}
+  - {name: iso1600-prior, shot: 0.00032, read: 0.0000004096, exposure: 1.0}
+  - {name: iso12800-prior, shot: 0.00256, read: 0.0000262144, exposure: 1.0}
+  - {name: shadows, shot: 0.00064, read: 0.0000016384, exposure: 0.125}
+  - {name: highlights, shot: 0.00008, read: 0.0000000256, exposure: 4.0}
+  - {name: legacy-noise, shot: 0.001, read: 0.000001, exposure: 1.0}

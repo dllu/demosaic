@@ -57,6 +57,7 @@ class CleanDataset(Dataset):
         synthetic_fraction=0.2,
         seed=42,
         records=None,
+        native_crop=False,
     ):
         self.manifest = Path(manifest)
         if records is None:
@@ -68,6 +69,7 @@ class CleanDataset(Dataset):
             raise ValueError("Patch size must be >=32 and divisible by 16")
         self.split, self.size, self.seed = split, patch_size, seed
         self.synthetic_fraction = synthetic_fraction if split == "train" else 0
+        self.native_crop = native_crop
 
     def __len__(self):
         return len(self.rows)
@@ -87,8 +89,8 @@ class CleanDataset(Dataset):
             if min(h, w) < size:
                 raise ValueError(f"Cached image {record['id']} smaller than patch")
             # Only shrink cached images, never stretch away the binning benefit.
-            crop_h = rng.randint(size, min(h, int(size * 1.4)))
-            crop_w = rng.randint(size, min(w, int(size * 1.4)))
+            crop_h = size if self.native_crop else rng.randint(size, min(h, int(size * 1.4)))
+            crop_w = size if self.native_crop else rng.randint(size, min(w, int(size * 1.4)))
             y, x = rng.randrange(h - crop_h + 1), rng.randrange(w - crop_w + 1)
             rgb = (
                 torch.from_numpy(

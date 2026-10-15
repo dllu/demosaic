@@ -145,3 +145,19 @@ def test_reference_adapter_preserves_sensor_geometry(pattern):
     adapter = RawNind(CanonicalDemosaic(), gain_mode="cfa-ls")
     output = adapter(sampled, torch.zeros_like(sampled), colors)
     torch.testing.assert_close(mosaic(output, colors), sampled)
+
+
+def test_deep_noise_modulation_preserves_warm_start_and_receives_gradients(small_model):
+    torch.nn.init.normal_(small_model.head.weight, std=0.01)
+    config = small_model.config.to_dict()
+    config["noise_modulation"] = True
+    modulated = JointDemosaic(ModelConfig(**config))
+    missing, unexpected = modulated.load_state_dict(small_model.state_dict(), strict=False)
+    assert not unexpected and all(k.startswith("noise_") for k in missing)
+    batch = degrade(torch.rand(2, 3, 32, 48))
+    inputs = (batch["packed"], batch["variance"], batch["colors"])
+    prediction = modulated(*inputs)
+    torch.testing.assert_close(prediction, small_model(*inputs), atol=0, rtol=0)
+    loss, _ = reconstruction_loss(prediction, batch)
+    loss.backward()
+    assert modulated.noise_encoder[0].affine[-1].weight.grad.abs().sum() > 0

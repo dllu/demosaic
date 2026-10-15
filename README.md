@@ -22,5 +22,6 @@ uv run pytest -q
 Noise values above are examples, not measured camera profiles. Setup requires
 Linux, Python 3.12+, uv, and a CUDA 13-compatible NVIDIA driver for this lockfile.
 DINOv3 additionally requires approved Hugging Face access via `HF_TOKEN`.
-See [experiment results](docs/experiments.md), [usage and data conventions](docs/usage.md), [research](docs/research.md),
+See [experiment results](docs/experiments.md), [quality and noise diagnostics](docs/evaluation.md),
+[usage and data conventions](docs/usage.md), [research](docs/research.md),
 and the [completion evidence checklist](docs/requirements.md).

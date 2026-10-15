@@ -21,6 +21,7 @@ class ModelConfig:
     dino_model: str = "facebook/dinov3-vits16-pretrain-lvd1689m"
     dino_revision: str = "main"
     camera_conditioning: bool = False
+    noise_modulation: bool = False
 
     def to_dict(self):
         return asdict(self)
@@ -54,6 +55,21 @@ class GatedBlock(nn.Module):
         x = x + self.project(a * b) * self.scale1
         a, b = self.ffn(self.norm2(x)).chunk(2, 1)
         return x + self.ffn_out(a * b) * self.scale2
+
+
+class NoiseModulation(nn.Module):
+    """Identity-initialized spatial scale/shift from log sensor variance."""
+
+    def __init__(self, channels):
+        super().__init__()
+        self.affine = nn.Sequential(nn.Conv2d(4, 32, 1), nn.SiLU(), nn.Conv2d(32, channels * 2, 1))
+        nn.init.zeros_(self.affine[-1].weight)
+        nn.init.zeros_(self.affine[-1].bias)
+
+    def forward(self, x, log_variance):
+        condition = F.interpolate(log_variance, size=x.shape[-2:], mode="area")
+        scale, shift = self.affine(condition).chunk(2, 1)
+        return x * (1 + 0.5 * scale.tanh()) + shift
 
 
 class ChannelAttention(nn.Module):
@@ -165,6 +181,14 @@ class JointDemosaic(nn.Module):
         nn.init.zeros_(self.head.bias)
         nn.init.zeros_(self.mosaic_head.weight)
         nn.init.zeros_(self.mosaic_head.bias)
+        self.noise_encoder = nn.ModuleList()
+        self.noise_decoder = nn.ModuleList()
+        self.noise_middle = None
+        if cfg.noise_modulation:
+            widths = [cfg.width * 2**i for i in range(len(cfg.encoder_blocks))]
+            self.noise_encoder.extend(NoiseModulation(c) for c in widths)
+            self.noise_middle = NoiseModulation(cfg.width * self.multiple)
+            self.noise_decoder.extend(NoiseModulation(c) for c in reversed(widths))
 
     def forward(self, packed, variance, colors, wb=None, matrix=None, *, auxiliary=False):
         batch, phases, height, width = packed.shape
@@ -192,16 +216,30 @@ class JointDemosaic(nn.Module):
         x = self.stem(
             F.pad(inputs, (0, -width % self.multiple, 0, -height % self.multiple), mode="replicate")
         )
+        log_variance = None
+        if self.config.noise_modulation:
+            log_variance = F.pad(
+                (variance.float().clamp_min(1e-8).log() + 12) / 6,
+                (0, -width % self.multiple, 0, -height % self.multiple),
+                mode="replicate",
+            )
         skips = []
-        for encoder, down in zip(self.encoders, self.downs):
+        for index, (encoder, down) in enumerate(zip(self.encoders, self.downs)):
+            if self.config.noise_modulation:
+                x = self.noise_encoder[index](x, log_variance)
             x = encoder(x)
             skips.append(x)
             x = down(x)
         if self.context is not None:
             x = x + self.context(render(baseline, wb, matrix), x.shape[-2:])
+        if self.noise_middle is not None:
+            x = self.noise_middle(x, log_variance)
         x = self.middle(x)
-        for up, decoder, skip in zip(self.ups, self.decoders, reversed(skips)):
-            x = decoder(up(x) + skip)
+        for index, (up, decoder, skip) in enumerate(zip(self.ups, self.decoders, reversed(skips))):
+            x = up(x) + skip
+            if self.config.noise_modulation:
+                x = self.noise_decoder[index](x, log_variance)
+            x = decoder(x)
         x = x[..., :height, :width]
         prediction = baseline + F.pixel_shuffle(self.head(x), 2).float()
         if auxiliary:
