@@ -1,0 +1,74 @@
+manifest: /mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl
+run: /mnt/external/demosaic/runs/dino-pyramid-raw-v25
+device: cuda
+seed: 45
+steps: 5000
+batch_size: 8
+patch_size: 256
+workers: 4
+cpu_threads: 4
+synthetic_fraction: 0.2
+flat_fraction: 0.1
+noise_free_fraction: 0.1
+reconstruct_highlights: true
+preserve_negative_read_noise: true
+broad_camera: true
+lr: 0.0005
+warmup_steps: 100
+checkpoint_every: 1000
+val_batches: 4
+log_every: 25
+amp: true
+min_available_gb: 12
+model:
+  width: 32
+  encoder_blocks:
+  - 2
+  - 2
+  - 4
+  middle_blocks: 6
+  decoder_blocks:
+  - 2
+  - 2
+  - 2
+  attention: true
+  dino: true
+  dino_model: facebook/dinov3-vits16-pretrain-lvd1689m
+  dino_revision: 114c1379950215c8b35dfcd4e90a5c251dde0d32
+  camera_conditioning: true
+  noise_modulation: true
+  physical_fp32: true
+  baseline: wiener-malvar
+  prior_window: 7
+  standardized_noise: false
+  noise_refinement: true
+  refinement_width: 48
+  refinement_blocks: 8
+  refinement_window: 63
+  coarse_refinement_factor: 0
+  coarse_refinement_width: 24
+  coarse_refinement_blocks: 4
+  coarse_refinement_window: 31
+  pyramid_refinement: true
+  pyramid_measurements: true
+  pyramid_width: 24
+  pyramid_blocks: 2
+validation_protocol: configs/evaluation.yaml
+validation_images: 8
+reset_output_heads: false
+experiment_notes: Initialize frozen V16 step5000 EMA; train only new two-level pyramid
+  correction, width24 blocks2, seed45 LR5e-4, existing 50/50 paired/Commons loss/data
+  recipe. V24 zeros the four measured-CFA innovation channels; V25 supplies (packed
+  - sample(prediction))/sqrt(smoothed variance). Same capacity/initial weights and
+  per-step data RNG, trace actual sampled batches. Planned5000-step schedule, predeclared
+  first review1000. Physical feature construction and refinement neural math IEEEFP32,
+  old body/DINO/fine branch frozen. No protected final or GFX qualitative scene/siblings
+  in training.
+paired_manifest: /mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json
+paired_fraction: 0.5
+paired_workers: 2
+refiner_only: false
+precision: bfloat16
+pyramid_refiner_only: true
+data_seed_per_step: true
+trace_observations: true

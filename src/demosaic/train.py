@@ -156,8 +156,9 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     if resume and initialize:
         raise ValueError("Choose resume or initialize, not both")
     config = yaml.safe_load(Path(config_path).read_text())
-    if config.get("refiner_only", False) and config.get("coarse_refiner_only", False):
-        raise ValueError("Choose fine or coarse refiner-only training, not both")
+    refinement_modes = ("refiner_only", "coarse_refiner_only", "pyramid_refiner_only")
+    if sum(bool(config.get(k, False)) for k in refinement_modes) > 1:
+        raise ValueError("Choose only one refiner-only training mode")
     precision = config.get("precision", "bfloat16")
     if precision not in ("bfloat16", "float32"):
         raise ValueError("Training precision must be bfloat16 or float32")
@@ -265,6 +266,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             )
             + (("refiner.",) if model.config.noise_refinement else ())
             + (("coarse_refiner.",) if model.config.coarse_refinement_factor else ())
+            + (("pyramid_refiner.",) if model.config.pyramid_refinement else ())
         )
         if incompatible.unexpected_keys or any(
             not k.startswith(allowed_prefixes) for k in incompatible.missing_keys
@@ -295,6 +297,11 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             raise ValueError("Coarse-only training requires model.coarse_refinement_factor")
         model.requires_grad_(False)
         model.coarse_refiner.requires_grad_(True)
+    if config.get("pyramid_refiner_only", False):
+        if model.pyramid_refiner is None:
+            raise ValueError("Pyramid-only training requires model.pyramid_refinement")
+        model.requires_grad_(False)
+        model.pyramid_refiner.requires_grad_(True)
     # Keep just one frozen DINO backbone: EMA contains restoration weights only.
     ema = {key: value.detach().clone() for key, value in model.restoration_state_dict().items()}
     optimizer = torch.optim.AdamW(
@@ -332,6 +339,10 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             raise ValueError("Resume trainable-parameter selection differs; initialize a new run")
         if state["config"].get("coarse_refiner_only", False) != config.get(
             "coarse_refiner_only", False
+        ):
+            raise ValueError("Resume trainable-parameter selection differs; initialize a new run")
+        if state["config"].get("pyramid_refiner_only", False) != config.get(
+            "pyramid_refiner_only", False
         ):
             raise ValueError("Resume trainable-parameter selection differs; initialize a new run")
         if ModelConfig.from_checkpoint(state["model_config"]).to_dict() != model.config.to_dict():
@@ -525,6 +536,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             if precision == "float32"
             or model.refiner is not None
             or model.coarse_refiner is not None
+            or model.pyramid_refiner is not None
             else nullcontext()
         ):
             loss.backward()

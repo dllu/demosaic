@@ -294,3 +294,12 @@ encoding and setup; end-to-end latency must be measured separately for a strict
 10-second photo-processing claim. `infer` additionally records complete local
 decode/load/restoration/encode time as `end_to_end_seconds`. Global/coarse attention and DINO context can
 vary by tile, so overlap seams require visual and numerical checks after training.
+
+Experimental `model.pyramid_refinement: true` adds a two-level correction network
+with direct measured-CFA innovation. `pyramid_measurements: false` supplies zeros
+to those channels for a capacity-matched control. `pyramid_refiner_only: true`
+freezes every preceding restoration/DINO/fine/coarse parameter and trains only
+that branch; it cannot be combined with other refiner-only modes or changed on
+resume. Existing checkpoint defaults remain disabled. See
+[the matched experiment and startup validation](pyramid-refinement.md); no quality
+gain is established yet.

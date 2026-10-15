@@ -6,7 +6,7 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
-from .cfa import bilinear, malvar
+from .cfa import bilinear, malvar, mosaic
 from .color import render
 from .precision import REFINEMENT_DTYPES, amp_context, ieee_fp32
 from .prior import box_mean, standardized_noise, wiener_packed
@@ -36,6 +36,10 @@ class ModelConfig:
     coarse_refinement_width: int = 24
     coarse_refinement_blocks: int = 4
     coarse_refinement_window: int = 31
+    pyramid_refinement: bool = False
+    pyramid_measurements: bool = True
+    pyramid_width: int = 24
+    pyramid_blocks: int = 2
 
     def to_dict(self):
         return asdict(self)
@@ -185,6 +189,81 @@ class CoarseRgbNoiseRefiner(nn.Module):
             )[..., : 2 * h, : 2 * w]
 
 
+class PyramidNoiseRefiner(nn.Module):
+    """Multiscale noise-unit correction with explicit measured-CFA innovation.
+
+    Innovation is the observation minus the current RGB estimate sampled at
+    the actual CFA phases. Disabling it supplies zeros to the same channels,
+    preserving initialization and capacity for a matched ablation. Physical
+    feature construction/scaling stays IEEE FP32. No reference or target
+    image is available to this module.
+    """
+
+    def __init__(self, context_channels, width=24, blocks=2, *, measurements=True):
+        super().__init__()
+        if width < 12 or blocks < 1:
+            raise ValueError("Invalid pyramid refinement configuration")
+        self.measurements = measurements
+        self.compute_precision = "float32"
+        self.context = nn.Conv2d(context_channels, 12, 1)
+        self.stem = nn.Conv2d(52, width, 3, padding=1)
+        self.encoders, self.downs = nn.ModuleList(), nn.ModuleList()
+        channels = width
+        for _ in range(2):
+            self.encoders.append(nn.Sequential(*(GatedBlock(channels) for _ in range(blocks))))
+            self.downs.append(nn.Conv2d(channels, channels * 2, 2, stride=2))
+            channels *= 2
+        self.middle = nn.Sequential(*(GatedBlock(channels) for _ in range(blocks)))
+        self.ups, self.decoders = nn.ModuleList(), nn.ModuleList()
+        for _ in range(2):
+            self.ups.append(nn.Sequential(nn.Conv2d(channels, channels * 2, 1), nn.PixelShuffle(2)))
+            channels //= 2
+            self.decoders.append(nn.Sequential(*(GatedBlock(channels) for _ in range(blocks))))
+        self.head = nn.Conv2d(width, 12, 3, padding=1)
+        nn.init.zeros_(self.head.weight)
+        nn.init.zeros_(self.head.bias)
+
+    def forward(self, rgb, packed, variance, colors, features):
+        with torch.autocast(device_type=rgb.device.type, enabled=False), ieee_fp32():
+            rgb, packed = rgb.float(), packed.float()
+            phase_variance = box_mean(variance.float().clamp_min(0), 7)
+            rgb_variance = bilinear(phase_variance, colors)
+            scale = rgb_variance.clamp_min(0).sqrt()
+            residual = (rgb - box_mean(rgb, 63)) / scale.clamp_min(1e-4)
+            noise = (rgb_variance.clamp_min(1e-8).log() + 12) / 6
+            innovation = (
+                (packed - mosaic(rgb, colors)) / phase_variance.clamp_min(1e-8).sqrt()
+                if self.measurements
+                else torch.zeros_like(packed)
+            )
+            if colors.ndim == 1:
+                colors = colors[None].expand(rgb.shape[0], -1)
+            h, w = packed.shape[-2:]
+            labels = F.one_hot(colors, 3).float().flatten(1)[:, :, None, None].expand(-1, -1, h, w)
+            with amp_context(rgb.device, dtype=self.compute_precision):
+                inputs = torch.cat(
+                    (
+                        F.pixel_unshuffle(residual.clamp(-8, 8), 2),
+                        F.pixel_unshuffle(noise, 2),
+                        innovation.clamp(-8, 8),
+                        labels,
+                        self.context(features.float()),
+                    ),
+                    dim=1,
+                )
+                x = self.stem(F.pad(inputs, (0, -w % 4, 0, -h % 4), mode="replicate"))
+                skips = []
+                for encoder, down in zip(self.encoders, self.downs):
+                    x = encoder(x)
+                    skips.append(x)
+                    x = down(x)
+                x = self.middle(x)
+                for up, decoder, skip in zip(self.ups, self.decoders, reversed(skips)):
+                    x = decoder(up(x) + skip)
+                correction = F.pixel_shuffle(self.head(x[..., :h, :w]), 2)
+            return correction.float() * scale
+
+
 class ChannelAttention(nn.Module):
     """Transposed attention: O(HW C²), used only on coarse spatial features."""
 
@@ -327,12 +406,23 @@ class JointDemosaic(nn.Module):
             else None
         )
 
+        self.pyramid_refiner = (
+            PyramidNoiseRefiner(
+                cfg.width,
+                cfg.pyramid_width,
+                cfg.pyramid_blocks,
+                measurements=cfg.pyramid_measurements,
+            )
+            if cfg.pyramid_refinement
+            else None
+        )
+
     def set_refinement_precision(self, precision):
         """Set inference arithmetic without changing weights or physical maps."""
         if precision not in REFINEMENT_DTYPES:
             raise ValueError(f"Unknown refinement precision {precision!r}")
         for module in self.modules():
-            if isinstance(module, RgbNoiseRefiner):
+            if isinstance(module, (RgbNoiseRefiner, PyramidNoiseRefiner)):
                 module.compute_precision = precision
         self.refinement_precision = precision
         return self
@@ -402,6 +492,8 @@ class JointDemosaic(nn.Module):
             prediction = prediction + self.refiner(prediction, variance, colors, x)
         if self.coarse_refiner is not None:
             prediction = prediction + self.coarse_refiner(prediction, variance, colors, x)
+        if self.pyramid_refiner is not None:
+            prediction = prediction + self.pyramid_refiner(prediction, packed, variance, colors, x)
         if auxiliary:
             return prediction, auxiliary_base + self.mosaic_head(x).float()
         return prediction
