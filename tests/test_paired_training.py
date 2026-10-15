@@ -123,7 +123,8 @@ def test_paired_schedule_continues_at_global_step_without_rng_state():
     assert torch.equal(before, torch.get_rng_state())
 
 
-def test_paired_training_resume_matches_uninterrupted_weights(tmp_path):
+@pytest.mark.parametrize("paired_fraction", [0.5, 1.0])
+def test_paired_training_resume_matches_uninterrupted_weights(tmp_path, paired_fraction):
     manifest = make_manifest(tmp_path)
     photo = tmp_path / "photo.npy"
     np.save(photo, np.full((40, 40, 3), 10000, np.uint16))
@@ -134,7 +135,7 @@ def test_paired_training_resume_matches_uninterrupted_weights(tmp_path):
     config = {
         "manifest": str(commons),
         "paired_manifest": str(manifest),
-        "paired_fraction": 1.0,
+        "paired_fraction": paired_fraction,
         "run": str(tmp_path / "full"),
         "device": "cpu",
         "steps": 4,

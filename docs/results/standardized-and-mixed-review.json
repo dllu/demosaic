@@ -1,0 +1,5303 @@
+{
+  "format_version": 1,
+  "scope": "Development diagnostics only. Standardized features not promoted; mixed training continues.",
+  "reports": [
+    {
+      "path": "/mnt/external/demosaic/evaluation/paired-raw-development-standardized-5k/summary.json",
+      "sha256": "89454f93ab66450f2a062de86b2e6fe30e5310f44fdddb249e3383686c6f9acb",
+      "models": [
+        {
+          "label": "0:dino-standardized-44732-v9:step-5000",
+          "snapshot": "/mnt/external/demosaic/evaluation/paired-raw-development-standardized-5k/weights/weights-bbbbfd0bbf9c29ab889a5da305e7968d18a13a8bd61d2f8ed32fd768770e05fb.pt",
+          "sha256": "bbbbfd0bbf9c29ab889a5da305e7968d18a13a8bd61d2f8ed32fd768770e05fb",
+          "step": 5000,
+          "model_config": {
+            "width": 32,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "camera_conditioning": true,
+            "noise_modulation": true,
+            "physical_fp32": true,
+            "baseline": "wiener-malvar",
+            "prior_window": 7,
+            "standardized_noise": true
+          },
+          "compute_precision": "float16"
+        },
+        {
+          "label": "1:dino-broad-followup-44732-v10:step-5000",
+          "snapshot": "/mnt/external/demosaic/evaluation/paired-raw-development-standardized-5k/weights/weights-5c248b01821024bf54066f7fbe406a6a1a94f172cf891b0161432120a8c42911.pt",
+          "sha256": "5c248b01821024bf54066f7fbe406a6a1a94f172cf891b0161432120a8c42911",
+          "step": 5000,
+          "model_config": {
+            "width": 32,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "camera_conditioning": true,
+            "noise_modulation": true,
+            "physical_fp32": true,
+            "baseline": "wiener-malvar",
+            "prior_window": 7,
+            "standardized_noise": false
+          },
+          "compute_precision": "float16"
+        },
+        {
+          "label": "RawNIND",
+          "weight_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "input": "Publisher global-ADC normalization; signed/unclipped",
+          "gain": "Observed original-unit CFA, global and per-channel variants; no clean target",
+          "precision": "IEEE float32"
+        }
+      ],
+      "scenes": 4,
+      "pairs": 8,
+      "split": "development",
+      "precision": "float16",
+      "source_sha256": "5d8796e68f76c24555962263687555e20afc3958476ff1f681f3e9c096d91d23",
+      "prepared_sha256": "9fe6a7dc3981024516b421a67de6a81b819f57d9d52b19838458e783b0cb744c",
+      "protocol": "Mean crops within each noisy capture, mean captures within scene, mean scenes. Bootstrap scenes, not crops.",
+      "reference": "Primary: measured clean CFA samples after shared integer alignment/gain. Auxiliary RGB: calibrated LibRaw AHD.",
+      "overall": [
+        {
+          "model": "0:dino-standardized-44732-v9:step-5000",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 51.49773041407268,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 37.55274375279745,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.8833103262715869,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.00803568211914454,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.009355914914825311,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "1:dino-broad-followup-44732-v10:step-5000",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 51.4672712220086,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 37.552889347076416,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.8826479696565204,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.008055391517700627,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.009387922146642167,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "Bilinear",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 44.10599215825399,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 29.836332321166992,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.5878955717715952,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.02503708149823878,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.02472208865866479,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "Malvar2004:WB",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 43.80425209469266,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 30.016488790512085,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.5982528728329473,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.020380146206460066,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.025714163138117228,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 54.08474085066054,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 39.7171000374688,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.9288313032852279,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.0061995219681800036,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.0065557970147993826,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 54.06859636306763,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 39.678047551049126,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.928810535205735,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.006295617572808018,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.006555553548322577,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 50.071689976586235,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 35.86313165558709,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.8550734726919068,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.01000751066668373,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.010634852324276127,
+              "count": 4
+            }
+          }
+        }
+      ],
+      "paired_comparisons": [
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "1:dino-broad-followup-44732-v10:step-5000",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 0.03045919206407177,
+          "source_bootstrap_95_interval": [
+            0.009202056460905439,
+            0.04261795679728486
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "1:dino-broad-followup-44732-v10:step-5000",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -0.00014559427897076205,
+          "source_bootstrap_95_interval": [
+            -0.05540148417155066,
+            0.04120699564615826
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "1:dino-broad-followup-44732-v10:step-5000",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.0006623566150665283,
+          "source_bootstrap_95_interval": [
+            0.00013993349340224448,
+            0.0012223016884592153
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 7.391738255818682,
+          "source_bootstrap_95_interval": [
+            5.188595983717171,
+            9.594880527920193
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 7.716411431630454,
+          "source_bootstrap_95_interval": [
+            6.030559142430623,
+            9.657244020038183
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.29541475449999166,
+          "source_bootstrap_95_interval": [
+            0.22575044300821093,
+            0.34911900924311745
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 7.6934783193800165,
+          "source_bootstrap_95_interval": [
+            5.581366274091925,
+            9.78864182366265
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 7.536254962285361,
+          "source_bootstrap_95_interval": [
+            5.941570520401003,
+            9.57699818081326
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.28505745343863964,
+          "source_bootstrap_95_interval": [
+            0.2210983712640074,
+            0.3257135703331894
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -2.5870104365878657,
+          "source_bootstrap_95_interval": [
+            -3.9005228678385464,
+            -1.507424513498945
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -2.164356284671358,
+          "source_bootstrap_95_interval": [
+            -2.987988736894394,
+            -1.3422209421793632
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.04552097701364094,
+          "source_bootstrap_95_interval": [
+            -0.07266455557611257,
+            -0.024300484193695904
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -2.570865948994957,
+          "source_bootstrap_95_interval": [
+            -3.936634275648329,
+            -1.4200316535102022
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -2.1253037982516823,
+          "source_bootstrap_95_interval": [
+            -3.176781707339817,
+            -1.1827479468451614
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.045500208934148106,
+          "source_bootstrap_95_interval": [
+            -0.07255745348003168,
+            -0.024266450769371367
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 1.426040437486435,
+          "source_bootstrap_95_interval": [
+            1.3483599026997855,
+            1.5014647377861863
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 1.6896120972103539,
+          "source_bootstrap_95_interval": [
+            1.4166901906331368,
+            1.962534003787571
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.028236853579680088,
+          "source_bootstrap_95_interval": [
+            0.018026400771405854,
+            0.03902155326472387
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 7.36127906375461,
+          "source_bootstrap_95_interval": [
+            5.149038420783146,
+            9.573519706726074
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 7.716557025909425,
+          "source_bootstrap_95_interval": [
+            6.016526354683768,
+            9.712645504209734
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.29475239788492513,
+          "source_bootstrap_95_interval": [
+            0.22541315025753447,
+            0.34793422950638664
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 7.663019127315945,
+          "source_bootstrap_95_interval": [
+            5.541101243760846,
+            9.779439767201744
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 7.536400556564332,
+          "source_bootstrap_95_interval": [
+            5.927537732654148,
+            9.63239966498481
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.2843950968235731,
+          "source_bootstrap_95_interval": [
+            0.22091438662674698,
+            0.3248354068232907
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -2.6174696286519374,
+          "source_bootstrap_95_interval": [
+            -3.909724924299452,
+            -1.5476895438300247
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -2.1642106903923874,
+          "source_bootstrap_95_interval": [
+            -2.9585805469089053,
+            -1.3698408338758696
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.04618333362870747,
+          "source_bootstrap_95_interval": [
+            -0.07388685726457178,
+            -0.024550633298026203
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -2.6013251410590286,
+          "source_bootstrap_95_interval": [
+            -3.9458363321092342,
+            -1.4602966838412819
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -2.1251582039727115,
+          "source_bootstrap_95_interval": [
+            -3.1283113161722795,
+            -1.2103678385416679
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.046162565549214635,
+          "source_bootstrap_95_interval": [
+            -0.07377975516849089,
+            -0.0245134615235858
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 1.3955812454223633,
+          "source_bootstrap_95_interval": [
+            1.3080948723687058,
+            1.4801039165920677
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 1.6897576914893246,
+          "source_bootstrap_95_interval": [
+            1.3890702989366304,
+            1.990445084042019
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.02757449696461356,
+          "source_bootstrap_95_interval": [
+            0.01775341398186145,
+            0.03779925157626465
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 0.30174006356133454,
+          "source_bootstrap_95_interval": [
+            0.0,
+            0.9052201906840036
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -0.18015646934509277,
+          "source_bootstrap_95_interval": [
+            -0.371234946780735,
+            0.01092200809054944
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.010357301061352062,
+          "source_bootstrap_95_interval": [
+            -0.023405438909927995,
+            0.0026908367872238714
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -9.978748692406548,
+          "source_bootstrap_95_interval": [
+            -13.387424627939861,
+            -6.882888370090058
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -9.880767716301811,
+          "source_bootstrap_95_interval": [
+            -12.670944319831001,
+            -7.408568859100344
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.34093573151363266,
+          "source_bootstrap_95_interval": [
+            -0.41575026346577537,
+            -0.2500509272019068
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -9.962604204813639,
+          "source_bootstrap_95_interval": [
+            -13.423536035749644,
+            -6.809941397772892
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -9.841715229882137,
+          "source_bootstrap_95_interval": [
+            -12.859737290276424,
+            -7.216773562961155
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.34091496343413974,
+          "source_bootstrap_95_interval": [
+            -0.41574589908123005,
+            -0.2500168937775823
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -5.965697818332247,
+          "source_bootstrap_95_interval": [
+            -8.093415790134006,
+            -3.8379798465304873
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -6.0267993344201,
+          "source_bootstrap_95_interval": [
+            -7.664010630713573,
+            -4.686423752042983
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.2671779009203116,
+          "source_bootstrap_95_interval": [
+            -0.3112660447756449,
+            -0.2000511313478152
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -10.280488755967882,
+          "source_bootstrap_95_interval": [
+            -13.689164691501196,
+            -7.08879078759087
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -9.700611246956719,
+          "source_bootstrap_95_interval": [
+            -12.591109858618841,
+            -7.319168859057959
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.3305784304522806,
+          "source_bootstrap_95_interval": [
+            -0.3923448245558473,
+            -0.2453988554577033
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -10.264344268374973,
+          "source_bootstrap_95_interval": [
+            -13.725276099310978,
+            -7.001397927602127
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -9.661558760537044,
+          "source_bootstrap_95_interval": [
+            -12.779902829064264,
+            -7.127373562918771
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.3305576623727877,
+          "source_bootstrap_95_interval": [
+            -0.3923404601713021,
+            -0.24536482203337875
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -6.267437881893581,
+          "source_bootstrap_95_interval": [
+            -8.30340772204929,
+            -4.23300637139214
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -5.846642865075007,
+          "source_bootstrap_95_interval": [
+            -7.58376479148865,
+            -4.597435130013363
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.25682059985895955,
+          "source_bootstrap_95_interval": [
+            -0.29685723822977816,
+            -0.19989737578564226
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 0.016144487592908874,
+          "source_bootstrap_95_interval": [
+            -0.040657997131347656,
+            0.0873928599887428
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 0.03905248641967596,
+          "source_bootstrap_95_interval": [
+            -0.18396128548516444,
+            0.18696361117893012
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 2.0768079492833325e-05,
+          "source_bootstrap_95_interval": [
+            -8.196963204279428e-05,
+            9.842216968547479e-05
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 4.013050874074301,
+          "source_bootstrap_95_interval": [
+            2.8557844161987305,
+            5.385756969451906
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 3.853968381881712,
+          "source_bootstrap_95_interval": [
+            2.7589111328125,
+            4.949025630950924
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.07375783059332103,
+          "source_bootstrap_95_interval": [
+            0.04303144249651164,
+            0.11168610884083643
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-ls:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 3.996906386481392,
+          "source_bootstrap_95_interval": [
+            2.7683915562099877,
+            5.4218683772616885
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-ls:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 3.814915895462036,
+          "source_bootstrap_95_interval": [
+            2.599438137478298,
+            5.085181236267086
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-ls:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.0737370625138282,
+          "source_bootstrap_95_interval": [
+            0.04299427072207124,
+            0.11157900674475554
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/mnt/external/demosaic/evaluation/paired-unseen-development-standardized-5k/summary.json",
+      "sha256": "360effcb626e21ec032835ad7101e39052f0d76fe0281ec0f09df04fb1c0ee51",
+      "models": [
+        {
+          "label": "0:dino-standardized-44732-v9:step-5000",
+          "snapshot": "/mnt/external/demosaic/evaluation/paired-unseen-development-standardized-5k/weights/weights-bbbbfd0bbf9c29ab889a5da305e7968d18a13a8bd61d2f8ed32fd768770e05fb.pt",
+          "sha256": "bbbbfd0bbf9c29ab889a5da305e7968d18a13a8bd61d2f8ed32fd768770e05fb",
+          "step": 5000,
+          "model_config": {
+            "width": 32,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "camera_conditioning": true,
+            "noise_modulation": true,
+            "physical_fp32": true,
+            "baseline": "wiener-malvar",
+            "prior_window": 7,
+            "standardized_noise": true
+          },
+          "compute_precision": "float16"
+        },
+        {
+          "label": "1:dino-broad-followup-44732-v10:step-5000",
+          "snapshot": "/mnt/external/demosaic/evaluation/paired-unseen-development-standardized-5k/weights/weights-5c248b01821024bf54066f7fbe406a6a1a94f172cf891b0161432120a8c42911.pt",
+          "sha256": "5c248b01821024bf54066f7fbe406a6a1a94f172cf891b0161432120a8c42911",
+          "step": 5000,
+          "model_config": {
+            "width": 32,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "camera_conditioning": true,
+            "noise_modulation": true,
+            "physical_fp32": true,
+            "baseline": "wiener-malvar",
+            "prior_window": 7,
+            "standardized_noise": false
+          },
+          "compute_precision": "float16"
+        },
+        {
+          "label": "RawNIND",
+          "weight_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "input": "Publisher global-ADC normalization; signed/unclipped",
+          "gain": "Observed original-unit CFA, global and per-channel variants; no clean target",
+          "precision": "IEEE float32"
+        }
+      ],
+      "scenes": 5,
+      "pairs": 10,
+      "split": "development",
+      "precision": "float16",
+      "source_sha256": "5d8796e68f76c24555962263687555e20afc3958476ff1f681f3e9c096d91d23",
+      "prepared_sha256": "2d78a7ba2a56e24af3f05b32ea01277853dc135dff3834810766b7c5ed2f0fa7",
+      "protocol": "Mean crops within each noisy capture, mean captures within scene, mean scenes. Bootstrap scenes, not crops.",
+      "reference": "Primary: measured clean CFA samples after shared integer alignment/gain. Auxiliary RGB: calibrated LibRaw AHD.",
+      "overall": [
+        {
+          "model": "0:dino-standardized-44732-v9:step-5000",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 50.8679987165663,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 35.22250980801053,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.8308102203740015,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.010901190288778808,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.011314536506930987,
+              "count": 5
+            }
+          }
+        },
+        {
+          "model": "1:dino-broad-followup-44732-v10:step-5000",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 50.83296534220377,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 35.18192041185167,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.829694331354565,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.010955532505694362,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.011368196597322822,
+              "count": 5
+            }
+          }
+        },
+        {
+          "model": "Bilinear",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 41.41325357225206,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 25.49506827460395,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.37466897865136467,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.042432663072314525,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.03895158672498332,
+              "count": 5
+            }
+          }
+        },
+        {
+          "model": "Malvar2004:WB",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 40.937970352172854,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 25.86025329165988,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.4032435259057416,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.03489497504714463,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.03896706760343579,
+              "count": 5
+            }
+          }
+        },
+        {
+          "model": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 53.76821780734592,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 38.56191194322374,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.9221266448497772,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.0071724309792949095,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.006613127592330177,
+              "count": 5
+            }
+          }
+        },
+        {
+          "model": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 53.56220122443305,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 38.144836574130586,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.9183798478709327,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.00781363517873817,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.006614771273194088,
+              "count": 5
+            }
+          }
+        },
+        {
+          "model": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 49.59129096137152,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 33.028770722283255,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.7922076225280761,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.014855502649313873,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.012288579556884038,
+              "count": 5
+            }
+          }
+        }
+      ],
+      "paired_comparisons": [
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "1:dino-broad-followup-44732-v10:step-5000",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 0.03503337436252139,
+          "source_bootstrap_95_interval": [
+            0.0239986419677777,
+            0.04545853614806642
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "1:dino-broad-followup-44732-v10:step-5000",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 0.04058939615885464,
+          "source_bootstrap_95_interval": [
+            0.028383276197644136,
+            0.05833447774251539
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "1:dino-broad-followup-44732-v10:step-5000",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.0011158890194363335,
+          "source_bootstrap_95_interval": [
+            0.0008844474951426485,
+            0.001360415087805844
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 9.454745144314238,
+          "source_bootstrap_95_interval": [
+            8.550840123494469,
+            10.598430971569483
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 9.727441533406576,
+          "source_bootstrap_95_interval": [
+            9.105990727742512,
+            10.464181815253365
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.4561412417226368,
+          "source_bootstrap_95_interval": [
+            0.42912114411592484,
+            0.48386213688386814
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 9.930028364393447,
+          "source_bootstrap_95_interval": [
+            8.753324635823567,
+            11.101501803927954
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 9.36225651635064,
+          "source_bootstrap_95_interval": [
+            8.695825576782227,
+            10.14069037967258
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.4275666944682598,
+          "source_bootstrap_95_interval": [
+            0.3956090312865046,
+            0.4609447582728333
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -2.9002190907796246,
+          "source_bootstrap_95_interval": [
+            -3.670418506198459,
+            -2.118704760869348
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -3.3394021352132173,
+          "source_bootstrap_95_interval": [
+            -4.079833009507918,
+            -2.2908538606431774
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.09131642447577579,
+          "source_bootstrap_95_interval": [
+            -0.11117451588312781,
+            -0.06414834393395315
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -2.6942025078667555,
+          "source_bootstrap_95_interval": [
+            -3.3282146877712675,
+            -1.9578220791286924
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -2.9223267661200594,
+          "source_bootstrap_95_interval": [
+            -3.722073046366367,
+            -1.9300103505452468
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.08756962749693124,
+          "source_bootstrap_95_interval": [
+            -0.10297101868523484,
+            -0.0637994017865922
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 1.2767077551947694,
+          "source_bootstrap_95_interval": [
+            1.1531741809844944,
+            1.41354382832845
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 2.1937390857272674,
+          "source_bootstrap_95_interval": [
+            1.9849865383572038,
+            2.4111494700113925
+          ]
+        },
+        {
+          "first": "0:dino-standardized-44732-v9:step-5000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.038602597845925256,
+          "source_bootstrap_95_interval": [
+            0.032569520672162386,
+            0.044635675019688126
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 9.419711769951716,
+          "source_bootstrap_95_interval": [
+            8.517839813232424,
+            10.572848443984983
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 9.68685213724772,
+          "source_bootstrap_95_interval": [
+            9.05678482055664,
+            10.428050571017796
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.45502535270320044,
+          "source_bootstrap_95_interval": [
+            0.4281715560290548,
+            0.48292639429370565
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 9.894994990030927,
+          "source_bootstrap_95_interval": [
+            8.713274510701499,
+            11.071638488769533
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 9.321667120191787,
+          "source_bootstrap_95_interval": [
+            8.654407776726618,
+            10.112347242567276
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.4264508054488235,
+          "source_bootstrap_95_interval": [
+            0.39442800167534087,
+            0.4599070943892002
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -2.9352524651421463,
+          "source_bootstrap_95_interval": [
+            -3.70028182135688,
+            -2.1545306428273565
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -3.3799915313720716,
+          "source_bootstrap_95_interval": [
+            -4.129591115315755,
+            -2.3259444342719204
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.09243231349521212,
+          "source_bootstrap_95_interval": [
+            -0.11219733556111648,
+            -0.06512586077054346
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -2.729235882229277,
+          "source_bootstrap_95_interval": [
+            -3.358078002929689,
+            -1.9909756978352917
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -2.962916162278914,
+          "source_bootstrap_95_interval": [
+            -3.7767777760823504,
+            -1.9614711761474581
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.08868551651636758,
+          "source_bootstrap_95_interval": [
+            -0.10421642793549421,
+            -0.06477691862318251
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 1.241674380832248,
+          "source_bootstrap_95_interval": [
+            1.1175001356336778,
+            1.3786327362060546
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 2.153149689568413,
+          "source_bootstrap_95_interval": [
+            1.9493173811170805,
+            2.376438967386882
+          ]
+        },
+        {
+          "first": "1:dino-broad-followup-44732-v10:step-5000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.037486708826488926,
+          "source_bootstrap_95_interval": [
+            0.03167765107419751,
+            0.043295766578780336
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 0.4752832200792099,
+          "source_bootstrap_95_interval": [
+            0.0,
+            1.4258496602376298
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -0.3651850170559342,
+          "source_bootstrap_95_interval": [
+            -0.42933548821343237,
+            -0.31138581169975976
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.028574547254376935,
+          "source_bootstrap_95_interval": [
+            -0.03469006750318736,
+            -0.022459027005566512
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -12.354964235093863,
+          "source_bootstrap_95_interval": [
+            -14.144905132717557,
+            -10.691296852959534
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -13.066843668619793,
+          "source_bootstrap_95_interval": [
+            -14.386205736796057,
+            -11.631939160029093
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.5474576661984126,
+          "source_bootstrap_95_interval": [
+            -0.5891048297286033,
+            -0.498783275205642
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -12.148947652180993,
+          "source_bootstrap_95_interval": [
+            -13.834630966186527,
+            -10.613972345987962
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -12.649768299526635,
+          "source_bootstrap_95_interval": [
+            -13.822975773281517,
+            -11.221427639325457
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.543710869219568,
+          "source_bootstrap_95_interval": [
+            -0.5821194580859608,
+            -0.4980267805378471
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -8.178037389119469,
+          "source_bootstrap_95_interval": [
+            -9.354929596583053,
+            -7.2688039567735485
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -7.533702447679309,
+          "source_bootstrap_95_interval": [
+            -8.075787099202476,
+            -7.032841279771593
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.4175386438767116,
+          "source_bootstrap_95_interval": [
+            -0.44966954655117464,
+            -0.3895432880355252
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -12.83024745517307,
+          "source_bootstrap_95_interval": [
+            -14.771920310126413,
+            -10.888574600219732
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -12.701658651563857,
+          "source_bootstrap_95_interval": [
+            -14.074819925096298,
+            -11.228996276855472
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.5188831189440356,
+          "source_bootstrap_95_interval": [
+            -0.5666458027230369,
+            -0.4640136067238119
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -12.624230872260203,
+          "source_bootstrap_95_interval": [
+            -14.42971649169922,
+            -10.818745252821184
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -12.2845832824707,
+          "source_bootstrap_95_interval": [
+            -13.511589961581757,
+            -10.778685353067184
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.5151363219651912,
+          "source_bootstrap_95_interval": [
+            -0.5596604310803943,
+            -0.4621978171356022
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -8.653320609198678,
+          "source_bootstrap_95_interval": [
+            -9.833923043145074,
+            -7.379462814331058
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -7.168517430623373,
+          "source_bootstrap_95_interval": [
+            -7.766781573825415,
+            -6.642175928751628
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.3889640966223346,
+          "source_bootstrap_95_interval": [
+            -0.4253823489778572,
+            -0.355061351093981
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 0.20601658291286923,
+          "source_bootstrap_95_interval": [
+            0.062334187825523205,
+            0.38736678229437727
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 0.4170753690931576,
+          "source_bootstrap_95_interval": [
+            0.18589765760634408,
+            0.7243756522072686
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.0037467969788445464,
+          "source_bootstrap_95_interval": [
+            0.00033166276084055645,
+            0.010013275676303456
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 4.1769268459743945,
+          "source_bootstrap_95_interval": [
+            3.3212673187255874,
+            4.937997266981339
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 5.533141220940484,
+          "source_bootstrap_95_interval": [
+            4.317134512265526,
+            6.419716963768007
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.12991902232170105,
+          "source_bootstrap_95_interval": [
+            0.10059585207038454,
+            0.15270803736315836
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-ls:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 3.970910263061525,
+          "source_bootstrap_95_interval": [
+            3.1518331739637615,
+            4.595793448554147
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-ls:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 5.116065851847327,
+          "source_bootstrap_95_interval": [
+            3.9702254401312915,
+            6.056363741556798
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-ls:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.1261722253428565,
+          "source_bootstrap_95_interval": [
+            0.09754545821083913,
+            0.14593356019920772
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/mnt/external/demosaic/evaluation/paired-raw-development-mixed-1k/summary.json",
+      "sha256": "b1737e57da21870eb9069980ce27cb6339ff278be6cab821d2c56750032df25c",
+      "models": [
+        {
+          "label": "0:dino-paired-commons-44732-v11:step-1000",
+          "snapshot": "/mnt/external/demosaic/evaluation/paired-raw-development-mixed-1k/weights/weights-defb577cf8317547875377ca2588e9a20e679382d4c937caef97769cd8f764aa.pt",
+          "sha256": "defb577cf8317547875377ca2588e9a20e679382d4c937caef97769cd8f764aa",
+          "step": 1000,
+          "model_config": {
+            "width": 32,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "camera_conditioning": true,
+            "noise_modulation": true,
+            "physical_fp32": true,
+            "baseline": "wiener-malvar",
+            "prior_window": 7,
+            "standardized_noise": false
+          },
+          "compute_precision": "float16"
+        },
+        {
+          "label": "1:dino-broad-camera-44732-v7:step-5000",
+          "snapshot": "/mnt/external/demosaic/evaluation/paired-raw-development-mixed-1k/weights/weights-c10992100d935f5c80c38e976c68beaf91568cd1dab31c566c8977024e76820a.pt",
+          "sha256": "c10992100d935f5c80c38e976c68beaf91568cd1dab31c566c8977024e76820a",
+          "step": 5000,
+          "model_config": {
+            "width": 32,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "camera_conditioning": true,
+            "noise_modulation": true,
+            "physical_fp32": true,
+            "baseline": "wiener-malvar",
+            "prior_window": 7,
+            "standardized_noise": false
+          },
+          "compute_precision": "float16"
+        },
+        {
+          "label": "RawNIND",
+          "weight_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "input": "Publisher global-ADC normalization; signed/unclipped",
+          "gain": "Observed original-unit CFA, global and per-channel variants; no clean target",
+          "precision": "IEEE float32"
+        }
+      ],
+      "scenes": 4,
+      "pairs": 8,
+      "split": "development",
+      "precision": "float16",
+      "source_sha256": "5d8796e68f76c24555962263687555e20afc3958476ff1f681f3e9c096d91d23",
+      "prepared_sha256": "9fe6a7dc3981024516b421a67de6a81b819f57d9d52b19838458e783b0cb744c",
+      "protocol": "Mean crops within each noisy capture, mean captures within scene, mean scenes. Bootstrap scenes, not crops.",
+      "reference": "Primary: measured clean CFA samples after shared integer alignment/gain. Auxiliary RGB: calibrated LibRaw AHD.",
+      "overall": [
+        {
+          "model": "0:dino-paired-commons-44732-v11:step-1000",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 51.69216966629029,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 37.66253341568841,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.8837653199831645,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.008048521959507423,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.009397158476834495,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "1:dino-broad-camera-44732-v7:step-5000",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 51.448058499230285,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 37.413733853234184,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.8816485901673634,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.008177526010614302,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.009434869939771792,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "Bilinear",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 44.10599215825399,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 29.836332321166992,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.5878955717715952,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.02503708149823878,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.02472208865866479,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "Malvar2004:WB",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 43.80425209469266,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 30.016488790512085,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.5982528728329473,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.020380146206460066,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.025714163138117228,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 54.08474085066054,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 39.7171000374688,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.9288313032852279,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.0061995219681800036,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.0065557970147993826,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 54.06859636306763,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 39.678047551049126,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.928810535205735,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.006295617572808018,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.006555553548322577,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 50.071689976586235,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 35.86313165558709,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.8550734726919068,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.01000751066668373,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.010634852324276127,
+              "count": 4
+            }
+          }
+        }
+      ],
+      "paired_comparisons": [
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "1:dino-broad-camera-44732-v7:step-5000",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 0.24411116706000513,
+          "source_bootstrap_95_interval": [
+            0.11132113138834754,
+            0.38264883889092616
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "1:dino-broad-camera-44732-v7:step-5000",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 0.2487995624542254,
+          "source_bootstrap_95_interval": [
+            0.12503544489542762,
+            0.4883582327101017
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "1:dino-broad-camera-44732-v7:step-5000",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.0021167298158010217,
+          "source_bootstrap_95_interval": [
+            0.0014034195078743983,
+            0.002970791525310934
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 7.586177508036297,
+          "source_bootstrap_95_interval": [
+            5.375141779581707,
+            9.797213236490887
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 7.826201094521417,
+          "source_bootstrap_95_interval": [
+            6.0347680250803615,
+            9.927321539984813
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.2958697482115692,
+          "source_bootstrap_95_interval": [
+            0.2257637224263615,
+            0.3495784236325158
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 7.887917571597631,
+          "source_bootstrap_95_interval": [
+            5.804183430141871,
+            10.089561939239506
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 7.646044625176324,
+          "source_bootstrap_95_interval": [
+            5.945779403050741,
+            9.847075700759891
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.2855124471502172,
+          "source_bootstrap_95_interval": [
+            0.22122322809365066,
+            0.3263961395455731
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -2.392571184370251,
+          "source_bootstrap_95_interval": [
+            -3.5996027522616902,
+            -1.2846073574489996
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -2.0545666217803955,
+          "source_bootstrap_95_interval": [
+            -2.800503253936764,
+            -1.308629989624027
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.045065983302063406,
+          "source_bootstrap_95_interval": [
+            -0.07240434156523815,
+            -0.02396012677086723
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -2.376426696777342,
+          "source_bootstrap_95_interval": [
+            -3.6357141600714726,
+            -1.1972144974602568
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -2.0155141353607195,
+          "source_bootstrap_95_interval": [
+            -2.8880679342481805,
+            -1.1491569942898252
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.04504521522257057,
+          "source_bootstrap_95_interval": [
+            -0.07229723946915725,
+            -0.023922954996426826
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 1.6204796897040499,
+          "source_bootstrap_95_interval": [
+            1.504107793172203,
+            1.7948982450697173
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 1.7994017601013166,
+          "source_bootstrap_95_interval": [
+            1.414541880289713,
+            2.1971133020189058
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.02869184729125762,
+          "source_bootstrap_95_interval": [
+            0.01894898133145434,
+            0.03928176727559829
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 7.342066340976292,
+          "source_bootstrap_95_interval": [
+            5.178444862365723,
+            9.50568781958686
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 7.577401532067191,
+          "source_bootstrap_95_interval": [
+            5.901393440034654,
+            9.439332882563273
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.2937530183957682,
+          "source_bootstrap_95_interval": [
+            0.2243603029184871,
+            0.34687953193982435
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 7.643806404537626,
+          "source_bootstrap_95_interval": [
+            5.565819899241129,
+            9.70691310034858
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 7.3972450627220985,
+          "source_bootstrap_95_interval": [
+            5.812404818005033,
+            9.359087043338349
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.28339571733441615,
+          "source_bootstrap_95_interval": [
+            0.21982940162221593,
+            0.3237164339257611
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -2.636682351430256,
+          "source_bootstrap_95_interval": [
+            -3.9822515911526164,
+            -1.5229708883497413
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -2.303366184234621,
+          "source_bootstrap_95_interval": [
+            -3.1876331965128593,
+            -1.4394712448120153
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.04718271311786443,
+          "source_bootstrap_95_interval": [
+            -0.07537513309054908,
+            -0.025494694709777888
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -2.620537863837347,
+          "source_bootstrap_95_interval": [
+            -4.018362998962399,
+            -1.4355780283609985
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -2.264313697814945,
+          "source_bootstrap_95_interval": [
+            -3.3764261669582822,
+            -1.2799982494778135
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.047161945038371594,
+          "source_bootstrap_95_interval": [
+            -0.07526803099446819,
+            -0.025457522935337484
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 1.3763685226440447,
+          "source_bootstrap_95_interval": [
+            1.3328135278489892,
+            1.4122720294528541
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 1.5506021976470912,
+          "source_bootstrap_95_interval": [
+            1.2750946150885678,
+            1.7817645072936976
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.0265751174754566,
+          "source_bootstrap_95_interval": [
+            0.017123337421152185,
+            0.036310975750287355
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 0.30174006356133454,
+          "source_bootstrap_95_interval": [
+            0.0,
+            0.9052201906840036
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -0.18015646934509277,
+          "source_bootstrap_95_interval": [
+            -0.371234946780735,
+            0.01092200809054944
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.010357301061352062,
+          "source_bootstrap_95_interval": [
+            -0.023405438909927995,
+            0.0026908367872238714
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -9.978748692406548,
+          "source_bootstrap_95_interval": [
+            -13.387424627939861,
+            -6.882888370090058
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -9.880767716301811,
+          "source_bootstrap_95_interval": [
+            -12.670944319831001,
+            -7.408568859100344
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.34093573151363266,
+          "source_bootstrap_95_interval": [
+            -0.41575026346577537,
+            -0.2500509272019068
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -9.962604204813639,
+          "source_bootstrap_95_interval": [
+            -13.423536035749644,
+            -6.809941397772892
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -9.841715229882137,
+          "source_bootstrap_95_interval": [
+            -12.859737290276424,
+            -7.216773562961155
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.34091496343413974,
+          "source_bootstrap_95_interval": [
+            -0.41574589908123005,
+            -0.2500168937775823
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -5.965697818332247,
+          "source_bootstrap_95_interval": [
+            -8.093415790134006,
+            -3.8379798465304873
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -6.0267993344201,
+          "source_bootstrap_95_interval": [
+            -7.664010630713573,
+            -4.686423752042983
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.2671779009203116,
+          "source_bootstrap_95_interval": [
+            -0.3112660447756449,
+            -0.2000511313478152
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -10.280488755967882,
+          "source_bootstrap_95_interval": [
+            -13.689164691501196,
+            -7.08879078759087
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -9.700611246956719,
+          "source_bootstrap_95_interval": [
+            -12.591109858618841,
+            -7.319168859057959
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.3305784304522806,
+          "source_bootstrap_95_interval": [
+            -0.3923448245558473,
+            -0.2453988554577033
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -10.264344268374973,
+          "source_bootstrap_95_interval": [
+            -13.725276099310978,
+            -7.001397927602127
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -9.661558760537044,
+          "source_bootstrap_95_interval": [
+            -12.779902829064264,
+            -7.127373562918771
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.3305576623727877,
+          "source_bootstrap_95_interval": [
+            -0.3923404601713021,
+            -0.24536482203337875
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -6.267437881893581,
+          "source_bootstrap_95_interval": [
+            -8.30340772204929,
+            -4.23300637139214
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -5.846642865075007,
+          "source_bootstrap_95_interval": [
+            -7.58376479148865,
+            -4.597435130013363
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.25682059985895955,
+          "source_bootstrap_95_interval": [
+            -0.29685723822977816,
+            -0.19989737578564226
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 0.016144487592908874,
+          "source_bootstrap_95_interval": [
+            -0.040657997131347656,
+            0.0873928599887428
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 0.03905248641967596,
+          "source_bootstrap_95_interval": [
+            -0.18396128548516444,
+            0.18696361117893012
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 2.0768079492833325e-05,
+          "source_bootstrap_95_interval": [
+            -8.196963204279428e-05,
+            9.842216968547479e-05
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 4.013050874074301,
+          "source_bootstrap_95_interval": [
+            2.8557844161987305,
+            5.385756969451906
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 3.853968381881712,
+          "source_bootstrap_95_interval": [
+            2.7589111328125,
+            4.949025630950924
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.07375783059332103,
+          "source_bootstrap_95_interval": [
+            0.04303144249651164,
+            0.11168610884083643
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-ls:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 3.996906386481392,
+          "source_bootstrap_95_interval": [
+            2.7683915562099877,
+            5.4218683772616885
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-ls:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 3.814915895462036,
+          "source_bootstrap_95_interval": [
+            2.599438137478298,
+            5.085181236267086
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-ls:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.0737370625138282,
+          "source_bootstrap_95_interval": [
+            0.04299427072207124,
+            0.11157900674475554
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/mnt/external/demosaic/evaluation/paired-unseen-development-mixed-1k/summary.json",
+      "sha256": "b0283f626de042d7afe1f2c85c201141b8fd97875fba15dc1ec1d0f66579e1ea",
+      "models": [
+        {
+          "label": "0:dino-paired-commons-44732-v11:step-1000",
+          "snapshot": "/mnt/external/demosaic/evaluation/paired-unseen-development-mixed-1k/weights/weights-defb577cf8317547875377ca2588e9a20e679382d4c937caef97769cd8f764aa.pt",
+          "sha256": "defb577cf8317547875377ca2588e9a20e679382d4c937caef97769cd8f764aa",
+          "step": 1000,
+          "model_config": {
+            "width": 32,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "camera_conditioning": true,
+            "noise_modulation": true,
+            "physical_fp32": true,
+            "baseline": "wiener-malvar",
+            "prior_window": 7,
+            "standardized_noise": false
+          },
+          "compute_precision": "float16"
+        },
+        {
+          "label": "1:dino-broad-camera-44732-v7:step-5000",
+          "snapshot": "/mnt/external/demosaic/evaluation/paired-unseen-development-mixed-1k/weights/weights-c10992100d935f5c80c38e976c68beaf91568cd1dab31c566c8977024e76820a.pt",
+          "sha256": "c10992100d935f5c80c38e976c68beaf91568cd1dab31c566c8977024e76820a",
+          "step": 5000,
+          "model_config": {
+            "width": 32,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "camera_conditioning": true,
+            "noise_modulation": true,
+            "physical_fp32": true,
+            "baseline": "wiener-malvar",
+            "prior_window": 7,
+            "standardized_noise": false
+          },
+          "compute_precision": "float16"
+        },
+        {
+          "label": "RawNIND",
+          "weight_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "input": "Publisher global-ADC normalization; signed/unclipped",
+          "gain": "Observed original-unit CFA, global and per-channel variants; no clean target",
+          "precision": "IEEE float32"
+        }
+      ],
+      "scenes": 5,
+      "pairs": 10,
+      "split": "development",
+      "precision": "float16",
+      "source_sha256": "5d8796e68f76c24555962263687555e20afc3958476ff1f681f3e9c096d91d23",
+      "prepared_sha256": "2d78a7ba2a56e24af3f05b32ea01277853dc135dff3834810766b7c5ed2f0fa7",
+      "protocol": "Mean crops within each noisy capture, mean captures within scene, mean scenes. Bootstrap scenes, not crops.",
+      "reference": "Primary: measured clean CFA samples after shared integer alignment/gain. Auxiliary RGB: calibrated LibRaw AHD.",
+      "overall": [
+        {
+          "model": "0:dino-paired-commons-44732-v11:step-1000",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 50.96141132778591,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 35.30284281836616,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.8322323275936974,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.010815081290072864,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.011378241495953666,
+              "count": 5
+            }
+          }
+        },
+        {
+          "model": "1:dino-broad-camera-44732-v7:step-5000",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 50.83641628689236,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 35.08295625050862,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.8265908254517449,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.01112032387819555,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.01146573877065546,
+              "count": 5
+            }
+          }
+        },
+        {
+          "model": "Bilinear",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 41.41325357225206,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 25.49506827460395,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.37466897865136467,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.042432663072314525,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.03895158672498332,
+              "count": 5
+            }
+          }
+        },
+        {
+          "model": "Malvar2004:WB",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 40.937970352172854,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 25.86025329165988,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.4032435259057416,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.03489497504714463,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.03896706760343579,
+              "count": 5
+            }
+          }
+        },
+        {
+          "model": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 53.76821780734592,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 38.56191194322374,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.9221266448497772,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.0071724309792949095,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.006613127592330177,
+              "count": 5
+            }
+          }
+        },
+        {
+          "model": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 53.56220122443305,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 38.144836574130586,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.9183798478709327,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.00781363517873817,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.006614771273194088,
+              "count": 5
+            }
+          }
+        },
+        {
+          "model": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 49.59129096137152,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 33.028770722283255,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.7922076225280761,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.014855502649313873,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.012288579556884038,
+              "count": 5
+            }
+          }
+        }
+      ],
+      "paired_comparisons": [
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "1:dino-broad-camera-44732-v7:step-5000",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 0.12499504089355185,
+          "source_bootstrap_95_interval": [
+            0.07793307834201357,
+            0.17989179823133128
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "1:dino-broad-camera-44732-v7:step-5000",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 0.21988656785753163,
+          "source_bootstrap_95_interval": [
+            0.11679992675781108,
+            0.325046624077693
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "1:dino-broad-camera-44732-v7:step-5000",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.005641502141952493,
+          "source_bootstrap_95_interval": [
+            0.0037215612497594475,
+            0.0069921805130110275
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 9.548157755533856,
+          "source_bootstrap_95_interval": [
+            8.636529498630104,
+            10.700498114691834
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 9.807774543762207,
+          "source_bootstrap_95_interval": [
+            9.135684733920627,
+            10.619347763061521
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.45756334894233275,
+          "source_bootstrap_95_interval": [
+            0.4293625184231334,
+            0.48578068920307693
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 10.023440975613067,
+          "source_bootstrap_95_interval": [
+            8.85230424669054,
+            11.194577704535591
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 9.442589526706271,
+          "source_bootstrap_95_interval": [
+            8.716700511508519,
+            10.287037256028915
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.42898880168795583,
+          "source_bootstrap_95_interval": [
+            0.39605356628696126,
+            0.4631144322454929
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -2.8068064795600067,
+          "source_bootstrap_95_interval": [
+            -3.5773426055908217,
+            -2.0241697629292843
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -3.2590691248575867,
+          "source_bootstrap_95_interval": [
+            -3.9518995920817064,
+            -2.306975576612686
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.0898943172560798,
+          "source_bootstrap_95_interval": [
+            -0.10970203876495359,
+            -0.06321709619628062
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -2.6007898966471372,
+          "source_bootstrap_95_interval": [
+            -3.2351387871636303,
+            -1.8771871482001439
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -2.841993755764429,
+          "source_bootstrap_95_interval": [
+            -3.577583567301427,
+            -1.91241645812988
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.08614752027723524,
+          "source_bootstrap_95_interval": [
+            -0.10135954353544445,
+            -0.06286815404891968
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 1.3701203664143875,
+          "source_bootstrap_95_interval": [
+            1.241605763965182,
+            1.5207912021213077
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 2.274072096082898,
+          "source_bootstrap_95_interval": [
+            1.9787016550699874,
+            2.5590677261352512
+          ]
+        },
+        {
+          "first": "0:dino-paired-commons-44732-v11:step-1000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.04002470506562126,
+          "source_bootstrap_95_interval": [
+            0.03389973673555584,
+            0.04614967339568667
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 9.423162714640304,
+          "source_bootstrap_95_interval": [
+            8.535286373562288,
+            10.532781936857436
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 9.587887975904675,
+          "source_bootstrap_95_interval": [
+            8.969579272800022,
+            10.325000317891432
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.4519218468003802,
+          "source_bootstrap_95_interval": [
+            0.4258010726835993,
+            0.47908907375401927
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 9.898445934719515,
+          "source_bootstrap_95_interval": [
+            8.733133019341365,
+            11.044521331787115
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 9.222702958848739,
+          "source_bootstrap_95_interval": [
+            8.563948101467556,
+            9.99978716108534
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.42334729954600336,
+          "source_bootstrap_95_interval": [
+            0.39185583343108493,
+            0.4564143032663398
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -2.9318015204535586,
+          "source_bootstrap_95_interval": [
+            -3.7273989783392976,
+            -2.126981645160252
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -3.478955692715118,
+          "source_bootstrap_95_interval": [
+            -4.235505421956384,
+            -2.3973502053154845
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.09553581939803228,
+          "source_bootstrap_95_interval": [
+            -0.11606471538543697,
+            -0.06726380785306296
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -2.725784937540689,
+          "source_bootstrap_95_interval": [
+            -3.3851951599121066,
+            -1.9593685997856993
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -3.0618803236219607,
+          "source_bootstrap_95_interval": [
+            -3.8915417141384525,
+            -2.0404230541653066
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.09178902241918774,
+          "source_bootstrap_95_interval": [
+            -0.10786614815394077,
+            -0.06691486570570201
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 1.2451253255208357,
+          "source_bootstrap_95_interval": [
+            1.1519145117865677,
+            1.3728631761338987
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 2.0541855282253665,
+          "source_bootstrap_95_interval": [
+            1.8637873967488616,
+            2.2543076621161533
+          ]
+        },
+        {
+          "first": "1:dino-broad-camera-44732-v7:step-5000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.03438320292366877,
+          "source_bootstrap_95_interval": [
+            0.02896312442090776,
+            0.03980328142642977
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 0.4752832200792099,
+          "source_bootstrap_95_interval": [
+            0.0,
+            1.4258496602376298
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -0.3651850170559342,
+          "source_bootstrap_95_interval": [
+            -0.42933548821343237,
+            -0.31138581169975976
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.028574547254376935,
+          "source_bootstrap_95_interval": [
+            -0.03469006750318736,
+            -0.022459027005566512
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -12.354964235093863,
+          "source_bootstrap_95_interval": [
+            -14.144905132717557,
+            -10.691296852959534
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -13.066843668619793,
+          "source_bootstrap_95_interval": [
+            -14.386205736796057,
+            -11.631939160029093
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.5474576661984126,
+          "source_bootstrap_95_interval": [
+            -0.5891048297286033,
+            -0.498783275205642
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -12.148947652180993,
+          "source_bootstrap_95_interval": [
+            -13.834630966186527,
+            -10.613972345987962
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -12.649768299526635,
+          "source_bootstrap_95_interval": [
+            -13.822975773281517,
+            -11.221427639325457
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.543710869219568,
+          "source_bootstrap_95_interval": [
+            -0.5821194580859608,
+            -0.4980267805378471
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -8.178037389119469,
+          "source_bootstrap_95_interval": [
+            -9.354929596583053,
+            -7.2688039567735485
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -7.533702447679309,
+          "source_bootstrap_95_interval": [
+            -8.075787099202476,
+            -7.032841279771593
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.4175386438767116,
+          "source_bootstrap_95_interval": [
+            -0.44966954655117464,
+            -0.3895432880355252
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -12.83024745517307,
+          "source_bootstrap_95_interval": [
+            -14.771920310126413,
+            -10.888574600219732
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -12.701658651563857,
+          "source_bootstrap_95_interval": [
+            -14.074819925096298,
+            -11.228996276855472
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.5188831189440356,
+          "source_bootstrap_95_interval": [
+            -0.5666458027230369,
+            -0.4640136067238119
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -12.624230872260203,
+          "source_bootstrap_95_interval": [
+            -14.42971649169922,
+            -10.818745252821184
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -12.2845832824707,
+          "source_bootstrap_95_interval": [
+            -13.511589961581757,
+            -10.778685353067184
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.5151363219651912,
+          "source_bootstrap_95_interval": [
+            -0.5596604310803943,
+            -0.4621978171356022
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -8.653320609198678,
+          "source_bootstrap_95_interval": [
+            -9.833923043145074,
+            -7.379462814331058
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -7.168517430623373,
+          "source_bootstrap_95_interval": [
+            -7.766781573825415,
+            -6.642175928751628
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.3889640966223346,
+          "source_bootstrap_95_interval": [
+            -0.4253823489778572,
+            -0.355061351093981
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 0.20601658291286923,
+          "source_bootstrap_95_interval": [
+            0.062334187825523205,
+            0.38736678229437727
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 0.4170753690931576,
+          "source_bootstrap_95_interval": [
+            0.18589765760634408,
+            0.7243756522072686
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.0037467969788445464,
+          "source_bootstrap_95_interval": [
+            0.00033166276084055645,
+            0.010013275676303456
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 4.1769268459743945,
+          "source_bootstrap_95_interval": [
+            3.3212673187255874,
+            4.937997266981339
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 5.533141220940484,
+          "source_bootstrap_95_interval": [
+            4.317134512265526,
+            6.419716963768007
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.12991902232170105,
+          "source_bootstrap_95_interval": [
+            0.10059585207038454,
+            0.15270803736315836
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-ls:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 3.970910263061525,
+          "source_bootstrap_95_interval": [
+            3.1518331739637615,
+            4.595793448554147
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-ls:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 5.116065851847327,
+          "source_bootstrap_95_interval": [
+            3.9702254401312915,
+            6.056363741556798
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-ls:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.1261722253428565,
+          "source_bootstrap_95_interval": [
+            0.09754545821083913,
+            0.14593356019920772
+          ]
+        }
+      ]
+    }
+  ],
+  "flat_probe": {
+    "path": "/mnt/external/demosaic/evaluation/standardized-5k-noise-response/result.json",
+    "sha256": "332d3692b6661273abd7e7730749b86ec49e33d15f100616c67de82264022891",
+    "models": [
+      {
+        "label": "0:dino-standardized-44732-v9:step-5000",
+        "sha256": "bbbbfd0bbf9c29ab889a5da305e7968d18a13a8bd61d2f8ed32fd768770e05fb",
+        "config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": true
+        },
+        "training_run": "/mnt/external/demosaic/runs/dino-standardized-44732-v9",
+        "snapshot": "/mnt/external/demosaic/evaluation/standardized-5k-noise-response/weights/weights-bbbbfd0bbf9c29ab889a5da305e7968d18a13a8bd61d2f8ed32fd768770e05fb.pt",
+        "compute_precision": "float16",
+        "memory_format": "channels_last"
+      },
+      {
+        "label": "1:dino-broad-followup-44732-v10:step-5000",
+        "sha256": "5c248b01821024bf54066f7fbe406a6a1a94f172cf891b0161432120a8c42911",
+        "config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": false
+        },
+        "training_run": "/mnt/external/demosaic/runs/dino-broad-followup-44732-v10",
+        "snapshot": "/mnt/external/demosaic/evaluation/standardized-5k-noise-response/weights/weights-5c248b01821024bf54066f7fbe406a6a1a94f172cf891b0161432120a8c42911.pt",
+        "compute_precision": "float16",
+        "memory_format": "channels_last"
+      },
+      {
+        "label": "RawNIND:CFA-LS",
+        "gain": "observed-CFA-least-squares",
+        "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+      }
+    ],
+    "cases": [
+      {
+        "model": "Bilinear",
+        "condition": "adc-only",
+        "scene_level": 0.001,
+        "camera_abs_bias": 5.117675755172968e-06,
+        "unclamped_camera_psnr": 105.31017303466797,
+        "camera_sigma": 0.0,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "Bilinear",
+        "condition": "adc-only",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.7418136596679688e-06,
+        "unclamped_camera_psnr": 110.68144226074219,
+        "camera_sigma": 0.0,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "Bilinear",
+        "condition": "adc-only",
+        "scene_level": 0.1,
+        "camera_abs_bias": 2.9938917123217834e-06,
+        "unclamped_camera_psnr": 106.84211730957031,
+        "camera_sigma": 0.0,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "Bilinear",
+        "condition": "adc-only",
+        "scene_level": 0.5,
+        "camera_abs_bias": 5.553166374738794e-06,
+        "unclamped_camera_psnr": 104.8618392944336,
+        "camera_sigma": 0.0,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "adc-only",
+        "scene_level": 0.001,
+        "camera_abs_bias": 3.0773731850786135e-05,
+        "unclamped_camera_psnr": 87.06004333496094,
+        "camera_sigma": 2.864505586330779e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "adc-only",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.0296976799727418e-05,
+        "unclamped_camera_psnr": 87.79731750488281,
+        "camera_sigma": 2.8694572392851114e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "adc-only",
+        "scene_level": 0.1,
+        "camera_abs_bias": 1.4214107068255544e-05,
+        "unclamped_camera_psnr": 88.0873794555664,
+        "camera_sigma": 3.544025094015524e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "adc-only",
+        "scene_level": 0.5,
+        "camera_abs_bias": 7.14186899131164e-05,
+        "unclamped_camera_psnr": 77.8495101928711,
+        "camera_sigma": 0.00010055955499410629,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "adc-only",
+        "scene_level": 0.001,
+        "camera_abs_bias": 3.6882680433336645e-05,
+        "unclamped_camera_psnr": 86.19277954101562,
+        "camera_sigma": 2.9273476684466004e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "adc-only",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.7980520826531574e-05,
+        "unclamped_camera_psnr": 86.30599975585938,
+        "camera_sigma": 3.116951847914606e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "adc-only",
+        "scene_level": 0.1,
+        "camera_abs_bias": 1.7315374861937016e-05,
+        "unclamped_camera_psnr": 87.32415008544922,
+        "camera_sigma": 3.877245762851089e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "adc-only",
+        "scene_level": 0.5,
+        "camera_abs_bias": 8.192819950636476e-05,
+        "unclamped_camera_psnr": 77.1046371459961,
+        "camera_sigma": 0.00010466593084856868,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "adc-only",
+        "scene_level": 0.001,
+        "camera_abs_bias": 7.918129995232448e-06,
+        "unclamped_camera_psnr": 98.65253448486328,
+        "camera_sigma": 7.10918675395078e-06,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "adc-only",
+        "scene_level": 0.01,
+        "camera_abs_bias": 9.357338967674877e-06,
+        "unclamped_camera_psnr": 97.11083984375,
+        "camera_sigma": 7.687310244364198e-06,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "adc-only",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00017336569726467133,
+        "unclamped_camera_psnr": 72.95758819580078,
+        "camera_sigma": 7.096982153598219e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "adc-only",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0005504786968231201,
+        "unclamped_camera_psnr": 60.151947021484375,
+        "camera_sigma": 0.0003538321179803461,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso100-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.9000014478697267e-07,
+        "unclamped_camera_psnr": 80.41355895996094,
+        "camera_sigma": 9.416820830665529e-05,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso100-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.0263846636225935e-06,
+        "unclamped_camera_psnr": 70.66716003417969,
+        "camera_sigma": 0.0002890383475460112,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso100-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 1.3974340618005954e-05,
+        "unclamped_camera_psnr": 60.726890563964844,
+        "camera_sigma": 0.0009069828083738685,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso100-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 8.1190946730203e-06,
+        "unclamped_camera_psnr": 53.70243453979492,
+        "camera_sigma": 0.0020352392457425594,
+        "retained_sigma_fraction": 0.9999998807907104
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "iso100-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 0.00011775089660659432,
+        "unclamped_camera_psnr": 76.52450561523438,
+        "camera_sigma": 8.630991214886308e-05,
+        "retained_sigma_fraction": 0.9165504574775696
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "iso100-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 1.713826713967137e-05,
+        "unclamped_camera_psnr": 80.25566101074219,
+        "camera_sigma": 9.442016016691923e-05,
+        "retained_sigma_fraction": 0.3266700208187103
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "iso100-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 1.4769711924600415e-05,
+        "unclamped_camera_psnr": 74.07266998291016,
+        "camera_sigma": 0.0001944123359862715,
+        "retained_sigma_fraction": 0.214350625872612
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "iso100-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00013509161362890154,
+        "unclamped_camera_psnr": 66.14531707763672,
+        "camera_sigma": 0.00046707558794878423,
+        "retained_sigma_fraction": 0.22949416935443878
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "iso100-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 8.556481770938262e-05,
+        "unclamped_camera_psnr": 79.2030258178711,
+        "camera_sigma": 5.7500466937199235e-05,
+        "retained_sigma_fraction": 0.6106144189834595
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "iso100-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.977216718136333e-05,
+        "unclamped_camera_psnr": 82.13240051269531,
+        "camera_sigma": 7.060467032715678e-05,
+        "retained_sigma_fraction": 0.24427440762519836
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "iso100-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 2.003505505854264e-05,
+        "unclamped_camera_psnr": 74.46916961669922,
+        "camera_sigma": 0.00018584879580885172,
+        "retained_sigma_fraction": 0.2049088478088379
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "iso100-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0001171838230220601,
+        "unclamped_camera_psnr": 66.44601440429688,
+        "camera_sigma": 0.00045725656673312187,
+        "retained_sigma_fraction": 0.2246696650981903
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso100-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 7.610589364048792e-06,
+        "unclamped_camera_psnr": 88.77877044677734,
+        "camera_sigma": 3.417952757445164e-05,
+        "retained_sigma_fraction": 0.3629624843597412
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso100-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 1.548092404846102e-05,
+        "unclamped_camera_psnr": 78.16292572021484,
+        "camera_sigma": 0.00011923442070838064,
+        "retained_sigma_fraction": 0.4125211238861084
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso100-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00014978228136897087,
+        "unclamped_camera_psnr": 65.02568054199219,
+        "camera_sigma": 0.0005148219643160701,
+        "retained_sigma_fraction": 0.5676203966140747
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso100-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0006610793061554432,
+        "unclamped_camera_psnr": 55.98731231689453,
+        "camera_sigma": 0.001249876688234508,
+        "retained_sigma_fraction": 0.6141177415847778
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso1600-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 5.334001798473764e-06,
+        "unclamped_camera_psnr": 64.28795623779297,
+        "camera_sigma": 0.0006087037036195397,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso1600-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 4.875304057350149e-06,
+        "unclamped_camera_psnr": 58.087860107421875,
+        "camera_sigma": 0.00123437843285501,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso1600-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 4.750082007376477e-05,
+        "unclamped_camera_psnr": 48.53118133544922,
+        "camera_sigma": 0.0036957922857254744,
+        "retained_sigma_fraction": 0.9999998211860657
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso1600-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 2.5424260456929915e-05,
+        "unclamped_camera_psnr": 41.673431396484375,
+        "camera_sigma": 0.008129003457725048,
+        "retained_sigma_fraction": 1.0000001192092896
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 7.018055475782603e-05,
+        "unclamped_camera_psnr": 73.20416259765625,
+        "camera_sigma": 0.00020316817972343415,
+        "retained_sigma_fraction": 0.33377188444137573
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 3.3613887353567407e-05,
+        "unclamped_camera_psnr": 71.17279052734375,
+        "camera_sigma": 0.0002710717380978167,
+        "retained_sigma_fraction": 0.2196018099784851
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00010332843521609902,
+        "unclamped_camera_psnr": 63.017940521240234,
+        "camera_sigma": 0.0006838286062702537,
+        "retained_sigma_fraction": 0.18502892553806305
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00022192849428392947,
+        "unclamped_camera_psnr": 55.993072509765625,
+        "camera_sigma": 0.0015431715874001384,
+        "retained_sigma_fraction": 0.1898352950811386
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 5.587752093560994e-05,
+        "unclamped_camera_psnr": 73.7584228515625,
+        "camera_sigma": 0.00018989526142831892,
+        "retained_sigma_fraction": 0.3119666576385498
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 3.5869565181201324e-05,
+        "unclamped_camera_psnr": 71.47357940673828,
+        "camera_sigma": 0.00026075460482388735,
+        "retained_sigma_fraction": 0.2112436443567276
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 8.725275984033942e-05,
+        "unclamped_camera_psnr": 63.051597595214844,
+        "camera_sigma": 0.0006829513004049659,
+        "retained_sigma_fraction": 0.18479155004024506
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00015804004215169698,
+        "unclamped_camera_psnr": 56.03631591796875,
+        "camera_sigma": 0.0015431068604812026,
+        "retained_sigma_fraction": 0.1898273378610611
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso1600-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.8617487259907648e-05,
+        "unclamped_camera_psnr": 88.3579330444336,
+        "camera_sigma": 2.0343195501482114e-05,
+        "retained_sigma_fraction": 0.03342052176594734
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso1600-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.4730732548050582e-05,
+        "unclamped_camera_psnr": 85.31188201904297,
+        "camera_sigma": 4.3900985474465415e-05,
+        "retained_sigma_fraction": 0.03556525707244873
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso1600-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00032583606662228703,
+        "unclamped_camera_psnr": 67.11692810058594,
+        "camera_sigma": 0.00017318330355919898,
+        "retained_sigma_fraction": 0.04685957729816437
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso1600-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0010354649275541306,
+        "unclamped_camera_psnr": 46.43267059326172,
+        "camera_sigma": 0.004574764519929886,
+        "retained_sigma_fraction": 0.5627707242965698
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso12800-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 8.436829375568777e-05,
+        "unclamped_camera_psnr": 47.89952087402344,
+        "camera_sigma": 0.004023808520287275,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso12800-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.298828258062713e-05,
+        "unclamped_camera_psnr": 45.785499572753906,
+        "camera_sigma": 0.0051186708733439445,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso12800-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 1.5249176612996962e-05,
+        "unclamped_camera_psnr": 39.18806838989258,
+        "camera_sigma": 0.010856470093131065,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso12800-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00013689621118828654,
+        "unclamped_camera_psnr": 32.574623107910156,
+        "camera_sigma": 0.023216210305690765,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 0.0009595499141141772,
+        "unclamped_camera_psnr": 58.832035064697266,
+        "camera_sigma": 0.0006190764252096415,
+        "retained_sigma_fraction": 0.15385335683822632
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 8.910495671443641e-05,
+        "unclamped_camera_psnr": 60.30083465576172,
+        "camera_sigma": 0.0009495436097495258,
+        "retained_sigma_fraction": 0.18550589680671692
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.0001876808237284422,
+        "unclamped_camera_psnr": 54.39680480957031,
+        "camera_sigma": 0.0018616410670801997,
+        "retained_sigma_fraction": 0.1714775711297989
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0003469398943707347,
+        "unclamped_camera_psnr": 46.950904846191406,
+        "camera_sigma": 0.0043933033011853695,
+        "retained_sigma_fraction": 0.18923430144786835
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 0.0009592862334102392,
+        "unclamped_camera_psnr": 58.81581115722656,
+        "camera_sigma": 0.0006224520038813353,
+        "retained_sigma_fraction": 0.15469224750995636
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 9.979335300158709e-05,
+        "unclamped_camera_psnr": 60.21047592163086,
+        "camera_sigma": 0.0009589130058884621,
+        "retained_sigma_fraction": 0.18733632564544678
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.0001863909128587693,
+        "unclamped_camera_psnr": 54.36000061035156,
+        "camera_sigma": 0.0018705984111875296,
+        "retained_sigma_fraction": 0.17230263352394104
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0002871716860681772,
+        "unclamped_camera_psnr": 46.914512634277344,
+        "camera_sigma": 0.004420712124556303,
+        "retained_sigma_fraction": 0.1904148906469345
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso12800-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 0.00015555105346720666,
+        "unclamped_camera_psnr": 75.34752655029297,
+        "camera_sigma": 4.491751315072179e-05,
+        "retained_sigma_fraction": 0.011162934824824333
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso12800-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 0.00025770528009161353,
+        "unclamped_camera_psnr": 70.43782043457031,
+        "camera_sigma": 0.00011915282811969519,
+        "retained_sigma_fraction": 0.02327807992696762
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso12800-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.000476431887364015,
+        "unclamped_camera_psnr": 64.34133911132812,
+        "camera_sigma": 0.00034084380604326725,
+        "retained_sigma_fraction": 0.031395453959703445
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso12800-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0018557229777798057,
+        "unclamped_camera_psnr": 52.45218276977539,
+        "camera_sigma": 0.000951156485825777,
+        "retained_sigma_fraction": 0.040969498455524445
+      },
+      {
+        "model": "Bilinear",
+        "condition": "shadows",
+        "scene_level": 0.001,
+        "camera_abs_bias": 1.5855926903896034e-05,
+        "unclamped_camera_psnr": 60.03697967529297,
+        "camera_sigma": 0.0009950887179002166,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "shadows",
+        "scene_level": 0.01,
+        "camera_abs_bias": 1.497727043897612e-05,
+        "unclamped_camera_psnr": 58.91302490234375,
+        "camera_sigma": 0.0011304512154310942,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "shadows",
+        "scene_level": 0.1,
+        "camera_abs_bias": 2.1748204744653776e-05,
+        "unclamped_camera_psnr": 53.66994857788086,
+        "camera_sigma": 0.0020566433668136597,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "shadows",
+        "scene_level": 0.5,
+        "camera_abs_bias": 4.1497929487377405e-05,
+        "unclamped_camera_psnr": 47.474971771240234,
+        "camera_sigma": 0.004169217776507139,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "shadows",
+        "scene_level": 0.001,
+        "camera_abs_bias": 0.0004933300078846514,
+        "unclamped_camera_psnr": 65.31088256835938,
+        "camera_sigma": 0.0002183075703214854,
+        "retained_sigma_fraction": 0.219385027885437
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "shadows",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.8936909075127915e-05,
+        "unclamped_camera_psnr": 71.4659423828125,
+        "camera_sigma": 0.00026297138538211584,
+        "retained_sigma_fraction": 0.23262515664100647
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "shadows",
+        "scene_level": 0.1,
+        "camera_abs_bias": 6.564048817381263e-05,
+        "unclamped_camera_psnr": 67.22652435302734,
+        "camera_sigma": 0.0004253018996678293,
+        "retained_sigma_fraction": 0.20679418742656708
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "shadows",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0001336743007414043,
+        "unclamped_camera_psnr": 62.00920867919922,
+        "camera_sigma": 0.0007618169183842838,
+        "retained_sigma_fraction": 0.18272417783737183
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "shadows",
+        "scene_level": 0.001,
+        "camera_abs_bias": 0.000470894476165995,
+        "unclamped_camera_psnr": 65.6764907836914,
+        "camera_sigma": 0.0002094256051350385,
+        "retained_sigma_fraction": 0.21045923233032227
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "shadows",
+        "scene_level": 0.01,
+        "camera_abs_bias": 3.357989407959394e-05,
+        "unclamped_camera_psnr": 71.693359375,
+        "camera_sigma": 0.000255226856097579,
+        "retained_sigma_fraction": 0.22577431797981262
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "shadows",
+        "scene_level": 0.1,
+        "camera_abs_bias": 7.04720732755959e-05,
+        "unclamped_camera_psnr": 67.28386688232422,
+        "camera_sigma": 0.0004202121344860643,
+        "retained_sigma_fraction": 0.20431940257549286
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "shadows",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00013718816626351327,
+        "unclamped_camera_psnr": 62.02260971069336,
+        "camera_sigma": 0.0007613786729052663,
+        "retained_sigma_fraction": 0.18261906504631042
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "shadows",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.4133709302986972e-05,
+        "unclamped_camera_psnr": 91.32454681396484,
+        "camera_sigma": 8.590647667006124e-06,
+        "retained_sigma_fraction": 0.008633047342300415
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "shadows",
+        "scene_level": 0.01,
+        "camera_abs_bias": 3.0204635550035164e-05,
+        "unclamped_camera_psnr": 86.97538757324219,
+        "camera_sigma": 3.1590781873092055e-05,
+        "retained_sigma_fraction": 0.02794528566300869
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "shadows",
+        "scene_level": 0.1,
+        "camera_abs_bias": 4.646969318855554e-05,
+        "unclamped_camera_psnr": 81.31501007080078,
+        "camera_sigma": 6.138368917163461e-05,
+        "retained_sigma_fraction": 0.029846539720892906
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "shadows",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0002976774121634662,
+        "unclamped_camera_psnr": 68.38545989990234,
+        "camera_sigma": 0.00016205516294576228,
+        "retained_sigma_fraction": 0.03886944055557251
+      },
+      {
+        "model": "Bilinear",
+        "condition": "highlights",
+        "scene_level": 0.001,
+        "camera_abs_bias": 1.5689390693296446e-06,
+        "unclamped_camera_psnr": 68.40097045898438,
+        "camera_sigma": 0.0003753674100153148,
+        "retained_sigma_fraction": 0.9999999403953552
+      },
+      {
+        "model": "Bilinear",
+        "condition": "highlights",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.147133636754006e-05,
+        "unclamped_camera_psnr": 58.57386016845703,
+        "camera_sigma": 0.0011631688103079796,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "highlights",
+        "scene_level": 0.1,
+        "camera_abs_bias": 3.4969740227097645e-05,
+        "unclamped_camera_psnr": 48.62744903564453,
+        "camera_sigma": 0.003652189625427127,
+        "retained_sigma_fraction": 0.9999999403953552
+      },
+      {
+        "model": "Bilinear",
+        "condition": "highlights",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.27659833431243896,
+        "unclamped_camera_psnr": 9.237232208251953,
+        "camera_sigma": 0.0012975622666999698,
+        "retained_sigma_fraction": 0.9999980926513672
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "highlights",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.356126788072288e-05,
+        "unclamped_camera_psnr": 77.78385162353516,
+        "camera_sigma": 0.00012424190936144441,
+        "retained_sigma_fraction": 0.33098745346069336
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "highlights",
+        "scene_level": 0.01,
+        "camera_abs_bias": 3.543075581546873e-05,
+        "unclamped_camera_psnr": 72.30927276611328,
+        "camera_sigma": 0.0002359083155170083,
+        "retained_sigma_fraction": 0.2028152048587799
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "highlights",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.0001565375569043681,
+        "unclamped_camera_psnr": 62.355140686035156,
+        "camera_sigma": 0.0007345960475504398,
+        "retained_sigma_fraction": 0.20113851130008698
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "highlights",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0037588877603411674,
+        "unclamped_camera_psnr": 45.10913848876953,
+        "camera_sigma": 0.0028720262926071882,
+        "retained_sigma_fraction": 2.213397264480591
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "highlights",
+        "scene_level": 0.001,
+        "camera_abs_bias": 3.384105002623983e-05,
+        "unclamped_camera_psnr": 79.24292755126953,
+        "camera_sigma": 0.00010202376142842695,
+        "retained_sigma_fraction": 0.2717970609664917
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "highlights",
+        "scene_level": 0.01,
+        "camera_abs_bias": 3.0393606721190736e-05,
+        "unclamped_camera_psnr": 72.57939147949219,
+        "camera_sigma": 0.00022976126638241112,
+        "retained_sigma_fraction": 0.19753046333789825
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "highlights",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00010122773528564721,
+        "unclamped_camera_psnr": 62.50447082519531,
+        "camera_sigma": 0.000731109525077045,
+        "retained_sigma_fraction": 0.20018388330936432
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "highlights",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.004514719359576702,
+        "unclamped_camera_psnr": 43.298423767089844,
+        "camera_sigma": 0.002641021041199565,
+        "retained_sigma_fraction": 2.035367488861084
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "highlights",
+        "scene_level": 0.001,
+        "camera_abs_bias": 1.98265552171506e-05,
+        "unclamped_camera_psnr": 88.14307403564453,
+        "camera_sigma": 3.117142478004098e-05,
+        "retained_sigma_fraction": 0.08304242789745331
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "highlights",
+        "scene_level": 0.01,
+        "camera_abs_bias": 0.00011904703569598496,
+        "unclamped_camera_psnr": 73.99531555175781,
+        "camera_sigma": 0.0001192610216094181,
+        "retained_sigma_fraction": 0.10253113508224487
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "highlights",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.0008452962501905859,
+        "unclamped_camera_psnr": 52.52311325073242,
+        "camera_sigma": 0.0021398337557911873,
+        "retained_sigma_fraction": 0.5859043002128601
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "highlights",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.27742815017700195,
+        "unclamped_camera_psnr": 9.173507690429688,
+        "camera_sigma": 0.002291231183335185,
+        "retained_sigma_fraction": 1.7657934427261353
+      },
+      {
+        "model": "Bilinear",
+        "condition": "legacy-noise",
+        "scene_level": 0.001,
+        "camera_abs_bias": 1.1855016055051237e-05,
+        "unclamped_camera_psnr": 59.90692138671875,
+        "camera_sigma": 0.0010072863660752773,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "legacy-noise",
+        "scene_level": 0.01,
+        "camera_abs_bias": 7.210153853520751e-06,
+        "unclamped_camera_psnr": 53.186256408691406,
+        "camera_sigma": 0.002165411598980427,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "legacy-noise",
+        "scene_level": 0.1,
+        "camera_abs_bias": 7.323517638724297e-05,
+        "unclamped_camera_psnr": 43.65131378173828,
+        "camera_sigma": 0.006475555710494518,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "legacy-noise",
+        "scene_level": 0.5,
+        "camera_abs_bias": 7.84064395702444e-05,
+        "unclamped_camera_psnr": 36.73355484008789,
+        "camera_sigma": 0.014375119470059872,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "legacy-noise",
+        "scene_level": 0.001,
+        "camera_abs_bias": 9.978079469874501e-05,
+        "unclamped_camera_psnr": 69.41632843017578,
+        "camera_sigma": 0.00032061839010566473,
+        "retained_sigma_fraction": 0.31829914450645447
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "legacy-noise",
+        "scene_level": 0.01,
+        "camera_abs_bias": 5.081099152448587e-05,
+        "unclamped_camera_psnr": 65.6092758178711,
+        "camera_sigma": 0.0005165623733773828,
+        "retained_sigma_fraction": 0.23855158686637878
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "legacy-noise",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00020794622832909226,
+        "unclamped_camera_psnr": 58.487850189208984,
+        "camera_sigma": 0.001147290226072073,
+        "retained_sigma_fraction": 0.1771724671125412
+      },
+      {
+        "model": "0:dino-standardized-44732-v9:step-5000",
+        "condition": "legacy-noise",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0003445883048698306,
+        "unclamped_camera_psnr": 50.988746643066406,
+        "camera_sigma": 0.0027490705251693726,
+        "retained_sigma_fraction": 0.19123810529708862
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "legacy-noise",
+        "scene_level": 0.001,
+        "camera_abs_bias": 9.300597594119608e-05,
+        "unclamped_camera_psnr": 69.42729949951172,
+        "camera_sigma": 0.00031965336529538035,
+        "retained_sigma_fraction": 0.3173410892486572
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "legacy-noise",
+        "scene_level": 0.01,
+        "camera_abs_bias": 6.438110722228885e-05,
+        "unclamped_camera_psnr": 65.59403228759766,
+        "camera_sigma": 0.0005157742998562753,
+        "retained_sigma_fraction": 0.23818765580654144
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "legacy-noise",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00018740385712590069,
+        "unclamped_camera_psnr": 58.496299743652344,
+        "camera_sigma": 0.0011495249345898628,
+        "retained_sigma_fraction": 0.1775175780057907
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "condition": "legacy-noise",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0002551883226260543,
+        "unclamped_camera_psnr": 50.99958038330078,
+        "camera_sigma": 0.0027556761633604765,
+        "retained_sigma_fraction": 0.1916976124048233
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "legacy-noise",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.3055543351802044e-05,
+        "unclamped_camera_psnr": 88.56918334960938,
+        "camera_sigma": 2.7768917789217085e-05,
+        "retained_sigma_fraction": 0.027568046003580093
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "legacy-noise",
+        "scene_level": 0.01,
+        "camera_abs_bias": 4.2137351556448266e-05,
+        "unclamped_camera_psnr": 82.03083801269531,
+        "camera_sigma": 6.435668183257803e-05,
+        "retained_sigma_fraction": 0.029720298945903778
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "legacy-noise",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00033479262492619455,
+        "unclamped_camera_psnr": 66.25118255615234,
+        "camera_sigma": 0.00022745730530004948,
+        "retained_sigma_fraction": 0.035125527530908585
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "legacy-noise",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0018993671983480453,
+        "unclamped_camera_psnr": 52.369842529296875,
+        "camera_sigma": 0.0008433012990280986,
+        "retained_sigma_fraction": 0.058663949370384216
+      }
+    ]
+  }
+}

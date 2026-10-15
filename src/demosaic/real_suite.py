@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import math
 from pathlib import Path
 
 import numpy as np
@@ -38,9 +39,17 @@ def evaluate_pairs(
     batch_size=4,
     gallery=False,
     device="cuda",
+    noise_multiplier=1.0,
+    prior_window=None,
 ):
-    if precision not in COMPUTE_DTYPES or batch_size < 1:
-        raise ValueError("Invalid compute precision or batch size")
+    if (
+        precision not in COMPUTE_DTYPES
+        or batch_size < 1
+        or not math.isfinite(noise_multiplier)
+        or noise_multiplier <= 0
+        or (prior_window is not None and (prior_window < 3 or prior_window % 2 == 0))
+    ):
+        raise ValueError("Invalid precision, batch size, variance multiplier or prior window")
     output = writable_path(output)
     if any((output / name).exists() for name in ("per-crop.jsonl", "summary.json")):
         raise ValueError("Evaluation output already contains results; choose a new directory")
@@ -65,6 +74,10 @@ def evaluate_pairs(
     for index, source in enumerate(checkpoints):
         frozen, digest = freeze_checkpoint(source, output / "weights")
         model, state = load_checkpoint(frozen, device)
+        if prior_window is not None:
+            if model.config.baseline != "wiener-malvar":
+                raise ValueError("A prior-window override requires the Wiener-Malvar model")
+            model.config.prior_window = prior_window
         model.eval()
         if torch.device(device).type == "cuda":
             model.to(memory_format=torch.channels_last)
@@ -78,6 +91,7 @@ def evaluate_pairs(
                 "sha256": digest,
                 "step": state["step"],
                 "model_config": model.config.to_dict(),
+                "checkpoint_model_config": state["model_config"],
                 "compute_precision": precision,
             }
         )
@@ -164,7 +178,7 @@ def evaluate_pairs(
                 ]
                 for label, model, compute in current_models:
                     with amp_context(device, dtype=compute):
-                        prediction = model(packed, variance, labels, wb, matrix)
+                        prediction = model(packed, variance * noise_multiplier, labels, wb, matrix)
                     predictions.append((label, prediction))
                 border = 32
                 region = (..., slice(border, -border), slice(border, -border))
@@ -258,6 +272,8 @@ def evaluate_pairs(
         "precision": precision,
         "border": 32,
         "batch_size": batch_size,
+        "learned_model_variance_multiplier": noise_multiplier,
+        "prior_window_override": prior_window,
         "source_sha256": source_sha256,
         "torch": str(torch.__version__),
         "scenes": len({c["scene"] for c in data["cases"]}),

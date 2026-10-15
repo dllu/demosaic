@@ -512,6 +512,11 @@ V9 tests four additional per-phase local residual features expressed in noise
 units, initialized with zero stem weights. V10 is a matched control with the same
 V7 initialization, seed, fresh optimizer, camera distribution and original loss.
 These trials do not change physical sensor values or DINO token resolution.
+At their 5000-step stops, V9/V10 measured-sensor scores are 51.4977/51.4673 dB
+on the four known-sensor scenes and 50.8680/50.8330 on the five M100 scenes.
+Flat-field residual variation is essentially unchanged and sometimes worse
+(ISO1600-prior sigma fractions 0.2196/0.2112). Standardized features are not
+promoted into the mixed-training recipe.
 
 ## Separate real RAW training subset
 
@@ -530,7 +535,33 @@ Commons simulation and half from this separate paired subset. Real supervision
 uses measured clean CFA samples for detail and 4×4 RGB means for auxiliary color;
 fine-scale AHD output is not a full-resolution RGB target. Geometric augmentation
 transforms measured masks and Bayer phases together. The original synthetic loss
-and architecture remain unchanged. Initial CUDA losses/gradients are finite;
-there is no V11 quality result yet. All 148 tests, including exact CPU restart
-equivalence for real-pair training, pass. Official final test images remain unused
-for model selection.
+and architecture remain unchanged. Initial CUDA losses/gradients are finite.
+All 149 tests pass, including exact CPU restart equivalence for both fully paired
+and 50/50 mixed training. Official final test images remain unused for model
+selection.
+
+At V11's first 1000-step checkpoint, known-sensor measured PSNR rises to 51.6922
+dB and M100 to 50.9614, versus its V7 initialization's 51.4481/50.8364. Rendered
+auxiliary scores improve to 37.6625/35.3028 dB. These preliminary gains remain
+well below RawNIND. Diagnostics and frozen checkpoint receipts are in
+[results/standardized-and-mixed-review.json](results/standardized-and-mixed-review.json).
+
+V11's 5000-step review shows a plateau: known-sensor measured PSNR is 51.6932 dB
+and M100 50.9835, nearly unchanged from step1000. Full synthetic photo PSNR/SSIM
+is 31.3749/0.91803 versus the additional-Common-only control's 31.4285/0.91851.
+Further training with the same recipe is held at this review point.
+
+A diagnostic doubling the learned model's variance input raises real measured
+PSNR to 52.2278/51.6196 dB and auxiliary rendered PSNR to 38.0131/36.1273, still
+below RawNIND. A factor of four performs worse. This is a model-response setting,
+not a corrected physical noise measurement: measured-reference residuals in
+reference-defined flat blocks agree with the input Haar variance estimate, with
+capture medians ranging 0.872–1.081. Reference noise/registration can affect that
+check. Increasing the prior window from 7 to 15 or 31 also fails to improve the
+overall result; it is not promoted without retraining/evidence.
+
+Temporarily removing the frozen context at inference also worsens flat variation;
+this distribution-shift diagnostic is not a matched DINO ablation and does not
+prove a causal training benefit. No inference optimization or stronger prior is
+promoted from these checks. Reports, source/weight hashes and the empirical noise
+diagnostic are in [results/mixed5k-denoising-diagnostics.json](results/mixed5k-denoising-diagnostics.json).

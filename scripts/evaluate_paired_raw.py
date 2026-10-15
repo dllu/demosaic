@@ -17,6 +17,13 @@ def main():
     )
     parser.add_argument("--batch-size", type=int, default=4)
     parser.add_argument("--gallery", action="store_true")
+    parser.add_argument(
+        "--noise-multiplier",
+        type=float,
+        default=1.0,
+        help="Diagnostic multiplier on learned-restorer variance inputs",
+    )
+    parser.add_argument("--prior-window", type=int, help="Diagnostic learned-model prior override")
     args = parser.parse_args()
     evaluate_pairs(
         args.checkpoint,
@@ -26,6 +33,8 @@ def main():
         precision=args.precision,
         batch_size=args.batch_size,
         gallery=args.gallery,
+        noise_multiplier=args.noise_multiplier,
+        prior_window=args.prior_window,
     )
 
 
