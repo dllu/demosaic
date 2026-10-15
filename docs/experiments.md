@@ -127,6 +127,8 @@ are photo means, balanced within each image. Observations and targets are shared
 between methods; an eight-pixel border is excluded. Artifacts and exact weight
 hashes are in
 `/mnt/external/demosaic/evaluation/paired-20k-reference-gains-v2/`.
+A compact machine-readable record of the protocol, weight hashes, overall and
+per-condition scores is retained in [results/paired-20k-v2.json](results/paired-20k-v2.json).
 
 | Method | Camera-linear PSNR | Rendered PSNR | Rendered SSIM |
 | --- | ---: | ---: | ---: |

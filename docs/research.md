@@ -28,8 +28,22 @@ project matches its performance.
   mixing with transposed channel attention at coarse resolution. It is a new
   experimental design, not a reproduction of that paper's scores.
 * [JDD-LI, September 2026](https://www.sciencedirect.com/science/article/pii/S1047320326002191)
-  was located during the survey, but its architecture/results have not yet been
-  independently inspected. It is not used as implementation evidence.
+  describes separate RAW denoising, pretrained demosaicing and RGB denoising
+  stages, with demosaicer pretraining followed by denoiser training. Only the
+  primary abstract was accessible; detailed results/weights were not reproduced.
+* [JD3Net, WACV workshop 2026](https://arxiv.org/html/2601.00703v2)
+  uses downsampled isotropic trunks of simplified NAF blocks without channel
+  attention. It studies width/depth/downsampling tradeoffs and supports testing
+  compact convolutional alternatives. Its [official repository](https://github.com/cory-fan/jd3net)
+  has no checked-in weights or root model license in the inspected tree at
+  `47489cbe3eba746e13ad8be8898956d7895f1835`; the camera-pipeline subcomponent has
+  a separate license. No upstream model code has been incorporated here.
+* [FFNet, April 2026](https://doi.org/10.3390/math14071175)
+  studies frequency-domain features for JDD. The
+  [authors' repository](https://github.com/Donghui-Zhang2005/Demosaicing-and-Denoising)
+  at `62be4ab8c6d859001b3523779f04387e2ef11ed7` has no license file or checked-in
+  weights in the inspected tree. It is research context, not a claimed reproduced
+  baseline. Neither repository limitation blocks our own ongoing training.
 * [Samsung unified demosaicing, ICCP 2025](https://github.com/SamsungLabs/unified-demosaicing)
   examines single, quad and nona Bayer. Our initial scope is ordinary Bayer,
   matching the named GFX, Leica Q2 and Sony a7R II cameras. Reject unsupported

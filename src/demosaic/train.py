@@ -96,6 +96,8 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     records = [json.loads(line) for line in manifest_payload.splitlines()]
     config["manifest_sha256"] = manifest_hash
     run = writable_path(config["run"])
+    if not resume and any((run / name).exists() for name in ("last.pt", "best.pt")):
+        raise ValueError("Run already has checkpoints; resume it or choose a new run directory")
     run.mkdir(parents=True, exist_ok=True)
     # Capture the actual code, including uncommitted research changes, so a
     # later edit cannot obscure what produced this run's weights.
@@ -204,6 +206,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         patch_size=config.get("patch_size", 256),
         seed=seed,
         synthetic_fraction=config.get("synthetic_fraction", 0.2),
+        flat_fraction=config.get("flat_fraction", 0.0),
         records=records,
     )
     workers = config.get("workers", 2)

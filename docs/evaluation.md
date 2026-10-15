@@ -65,6 +65,19 @@ monitor, not a substitute for full held-out evaluation. Its archived protocol ha
 must match on resume; noise generation uses private generators and leaves the
 training RNG unchanged.
 
+`scripts/probe_noise_response.py` measures a complementary failure mode on
+constant scene-linear fields at four intensity levels. It records absolute
+camera bias, residual standard deviation, its ratio to bilinear, and unclamped
+camera PSNR. The default is a 256-pixel field with a 32-pixel excluded border.
+These scores measure noise suppression and bias only; a method that destroys
+detail can score well, so they cannot replace photographic quality checks.
+
+```bash
+uv run python scripts/probe_noise_response.py /path/to/model.pt \
+  --rawnind /mnt/external/demosaic/references/rawnind \
+  --output /mnt/external/demosaic/evaluation/flat-response
+```
+
 ## Duplicate screening
 
 `audit-split` checks all protected sources against the corpus using 256-bit

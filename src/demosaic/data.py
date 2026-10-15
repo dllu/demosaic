@@ -49,6 +49,25 @@ def synthetic(size: int, rng: random.Random) -> torch.Tensor:
     return rgb
 
 
+def smooth_scene(size: int, rng: random.Random) -> torch.Tensor:
+    """Continuous-precision flat fields/ramps, including deep shadows.
+
+    These deliberately lack texture: a restoration model should not retain
+    sensor noise or introduce a color offset into an otherwise uniform scene.
+    They complement detailed shapes and real photos rather than replace them.
+    """
+    intensity = 2 ** rng.uniform(-13, -1)
+    tint = [1.0] * 3 if rng.random() < 0.5 else [rng.uniform(0.3, 1.5) for _ in range(3)]
+    rgb = torch.tensor(tint, dtype=torch.float32)[:, None, None] * intensity
+    rgb = rgb.expand(-1, size, size).clone()
+    if rng.random() < 0.5:
+        y, x = torch.meshgrid(
+            torch.linspace(-1, 1, size), torch.linspace(-1, 1, size), indexing="ij"
+        )
+        rgb *= 1 + rng.uniform(-0.4, 0.4) * x + rng.uniform(-0.4, 0.4) * y
+    return rgb.clamp(0, 1)
+
+
 class CleanDataset(Dataset):
     def __init__(
         self,
@@ -59,6 +78,7 @@ class CleanDataset(Dataset):
         seed=42,
         records=None,
         native_crop=False,
+        flat_fraction=0.0,
     ):
         self.manifest = Path(manifest)
         if records is None:
@@ -69,7 +89,10 @@ class CleanDataset(Dataset):
         if patch_size % 16 or patch_size < 32:
             raise ValueError("Patch size must be >=32 and divisible by 16")
         self.split, self.size, self.seed = split, patch_size, seed
+        if not 0 <= synthetic_fraction <= 1 or not 0 <= flat_fraction <= 1 - synthetic_fraction:
+            raise ValueError("Procedural sample fractions must be nonnegative and sum to <=1")
         self.synthetic_fraction = synthetic_fraction if split == "train" else 0
+        self.flat_fraction = flat_fraction if split == "train" else 0
         self.native_crop = native_crop
 
     def __len__(self):
@@ -79,7 +102,10 @@ class CleanDataset(Dataset):
         # Validation always uses a fixed crop; training uses worker-seeded RNG.
         rng = random.Random(self.seed + index)
         size = self.size
-        if rng.random() < self.synthetic_fraction:
+        draw = rng.random()
+        if draw < self.flat_fraction:
+            rgb = smooth_scene(size, rng)
+        elif draw < self.flat_fraction + self.synthetic_fraction:
             rgb = synthetic(size, rng)
         else:
             record = self.rows[

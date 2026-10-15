@@ -36,6 +36,14 @@ and processes float averages in small bands. `--workers 4` enables bounded
 parallel preparation; an OS lock protects each destination. Recipe mismatches
 fail explicitly, and prepared caches carry SHA-256 checksums.
 
+The completed local preparation contains 44732 licensed sources (40170 train,
+2306 validation, 2256 test); 875 records were filtered by the license policy and
+14 failed decoding/preparation. `commons-44732.jsonl` is an immutable copy of the
+completed manifest. The full screen excludes four protected sources, leaving
+40170 train / 2303 validation / 2255 test / 4 excluded. The audited manifest is
+`/mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl`; training still uses
+the previously frozen, audited 24576-source manifest.
+
 ## Training
 
 `demosaic train configs/base.yaml` starts the no-foundation baseline.
@@ -83,6 +91,8 @@ including zero-weight expansion for new camera-metadata channels. New runs retai
 a source snapshot, lockfile, and manifest fingerprint in addition to checkpoints.
 Workers/batch size are bounded; a low available-system-memory threshold triggers
 a checkpoint and stop. Other users' processes are never changed.
+Starting afresh in a directory that already contains checkpoints is rejected;
+use a new run directory or resume the existing run explicitly.
 
 The larger experiment uses `configs/dino-noise-24576.yaml`, initialized from
 the completed 20k DINO run. It requires the frozen audited 24576-source manifest.
@@ -92,6 +102,14 @@ camera transforms and rendered loss in IEEE FP32 while neural features use BF16.
 Old checkpoints lacking this field retain their historical arithmetic on load.
 New checkpoints record it explicitly. Changing this mode requires a new run via
 `--initialize`, not an exact continuation via `--resume`.
+
+`flat_fraction` optionally adds continuous-precision smooth scenes, spanning
+neutral/color flat fields and gentle ramps down to deep shadows. The default is
+zero, preserving existing sample draws. With `flat_fraction: 0.1` and the default
+20% detailed procedural draws, 70% of training samples remain photographic.
+Validation never substitutes procedural examples for held-out photographs.
+The V5 config tests this targeted curriculum as fine-tuning from a frozen V4
+checkpoint; it is a separate run with a fresh optimizer.
 
 `validation_protocol`, `validation_images` and `configs/evaluation.yaml` enable
 the balanced multi-condition training monitor. `best.pt` then follows panel

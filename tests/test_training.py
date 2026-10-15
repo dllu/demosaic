@@ -1,6 +1,7 @@
 import json
 
 import numpy as np
+import pytest
 import torch
 import yaml
 
@@ -44,6 +45,8 @@ def test_checkpoint_resume_matches_uninterrupted_training(tmp_path):
     path = tmp_path / "config.yaml"
     path.write_text(yaml.safe_dump(config))
     full = train(path)
+    with pytest.raises(ValueError, match="already has checkpoints"):
+        train(path)
     config["run"] = str(tmp_path / "resumed")
     path.write_text(yaml.safe_dump(config))
     interrupted = train(path, stop_after=2)
