@@ -5,6 +5,7 @@ from torch.nn import functional as F
 
 from .color import render
 from .losses import psnr
+from .precision import ieee_fp32
 
 
 def ssim(prediction, target):
@@ -17,7 +18,7 @@ def ssim(prediction, target):
 
     def smooth(x):
         # Reduced-precision TF32 convolution biases small local variances.
-        with torch.backends.cudnn.flags(allow_tf32=False):
+        with ieee_fp32():
             return F.conv2d(F.conv2d(x, horizontal, groups=3), vertical, groups=3)
 
     p, t = prediction.float(), target.float()

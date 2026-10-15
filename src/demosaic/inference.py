@@ -147,7 +147,7 @@ def load_checkpoint(path, device="cpu"):
     from .model import JointDemosaic, ModelConfig
 
     checkpoint = torch.load(path, map_location="cpu", weights_only=True)
-    model = JointDemosaic(ModelConfig(**checkpoint["model_config"]))
+    model = JointDemosaic(ModelConfig.from_checkpoint(checkpoint["model_config"]))
     weights = checkpoint.get("ema", checkpoint["model"])
     missing, unexpected = model.load_state_dict(weights, strict=False)
     if unexpected or any(not key.startswith("context.backbone.") for key in missing):

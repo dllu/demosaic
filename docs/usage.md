@@ -84,6 +84,21 @@ a source snapshot, lockfile, and manifest fingerprint in addition to checkpoints
 Workers/batch size are bounded; a low available-system-memory threshold triggers
 a checkpoint and stop. Other users' processes are never changed.
 
+The larger experiment uses `configs/dino-noise-24576.yaml`, initialized from
+the completed 20k DINO run. It requires the frozen audited 24576-source manifest.
+`noise_modulation: true` adds identity-initialized spatial conditioning from log
+sensor variance at every scale. `physical_fp32: true` keeps interpolation,
+camera transforms and rendered loss in IEEE FP32 while neural features use BF16.
+Old checkpoints lacking this field retain their historical arithmetic on load.
+New checkpoints record it explicitly. Changing this mode requires a new run via
+`--initialize`, not an exact continuation via `--resume`.
+
+`validation_protocol`, `validation_images` and `configs/evaluation.yaml` enable
+the balanced multi-condition training monitor. `best.pt` then follows panel
+rendered PSNR, with per-case SSIM/PSNR also logged. Its protocol is copied into
+the source snapshot and checked on resume. Final full-set evaluation remains
+necessary; keep the test split out of training and selection.
+
 ## Evaluation and quality
 
 The initial `evaluate` command uses fixed crops, RGGB, fixed WB and Poisson/read
@@ -107,9 +122,10 @@ uv run --extra eval python scripts/diagnose_highlights.py /path/to/best.pt \
   --output /mnt/external/demosaic/evaluation/highlights
 ```
 
-The reference adapter retains native pixel geometry for all four Bayer phases,
-runs the upstream network in FP32, and reports both input-mean and observed-CFA
-least-squares gain matching. Neither gain method uses the target image.
+The reference adapter retains native pixel geometry for all four Bayer phases
+and runs the upstream network in FP32. `evaluate` reports input-mean/global
+observed-CFA gain matching; `quality` reports global/per-channel CFA gains.
+These methods use observed samples without target access.
 
 ## RAW and TIFF conventions
 
@@ -123,7 +139,9 @@ are Bayer models, but actual file support must be exercised on local samples.
 Supply normalized `--shot` and `--read` variance coefficients; ISO alone does not
 determine noise. `Sensor.coefficients()` converts an assumed electron full well,
 read noise and ISO to this convention. Measure camera-specific coefficients for
-reliable results, especially at high ISO. Automatic calibration is not implemented.
+reliable results, especially at high ISO. `noise-profile` provides conservative
+single-image estimates and `--noise-profile` applies reliable camera/ISO-matched
+fits; see [limitations and commands](evaluation.md#noise-profiles).
 
 The main TIFF is linear **camera RGB**, before WB and color conversion, with a
 JSON description. It is not a rendered sRGB TIFF. `--preview` produces a separate

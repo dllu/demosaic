@@ -3,6 +3,8 @@
 import numpy as np
 import torch
 
+from .precision import ieee_fp32
+
 
 def srgb_to_linear(x):
     if isinstance(x, np.ndarray):
@@ -16,8 +18,19 @@ def linear_to_srgb(x):
     return torch.where(x <= 0.0031308, 12.92 * x, 1.055 * x.clamp_min(1e-10).pow(1 / 2.4) - 0.055)
 
 
-def render(rgb, white_balance=None, matrix=None):
+def render(rgb, white_balance=None, matrix=None, *, fp32=True):
     """B×3×H×W camera RGB -> clipped sRGB, for previews and display losses."""
+    if fp32:
+        with torch.autocast(device_type=rgb.device.type, enabled=False), ieee_fp32():
+            return _render(
+                rgb.float(),
+                None if white_balance is None else white_balance.float(),
+                None if matrix is None else matrix.float(),
+            )
+    return _render(rgb, white_balance, matrix)
+
+
+def _render(rgb, white_balance, matrix):
     if white_balance is not None:
         rgb = rgb * white_balance[..., None, None]
     if matrix is not None:

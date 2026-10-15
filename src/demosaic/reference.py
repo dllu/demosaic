@@ -15,7 +15,7 @@ from .cfa import PATTERNS, mosaic, pack, unpack
 class RawNind(nn.Module):
     def __init__(self, network, gain_mode="input-mean"):
         super().__init__()
-        if gain_mode not in ("input-mean", "cfa-ls"):
+        if gain_mode not in ("input-mean", "cfa-ls", "cfa-channel"):
             raise ValueError("Unknown gain matching method")
         self.network = network.eval()
         self.gain_mode = gain_mode
@@ -47,7 +47,19 @@ class RawNind(nn.Module):
                 )
             else:
                 observed = mosaic(output, labels[None])
-                gain = (observed * sample[None]).sum() / observed.square().sum().clamp_min(1e-12)
+                if self.gain_mode == "cfa-ls":
+                    gain = (observed * sample[None]).sum() / observed.square().sum().clamp_min(
+                        1e-12
+                    )
+                else:
+                    gains = []
+                    for channel in range(3):
+                        mask = (labels == channel)[None, :, None, None]
+                        gains.append(
+                            (observed * sample[None] * mask).sum()
+                            / (observed.square() * mask).sum().clamp_min(1e-12)
+                        )
+                    gain = torch.stack(gains)[None, :, None, None]
             outputs.append(output * gain)
         return torch.cat(outputs)
 

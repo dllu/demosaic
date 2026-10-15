@@ -10,14 +10,14 @@ import numpy as np
 import torch
 import yaml
 
-from .cfa import PATTERNS, bilinear, color_indices, mosaic
+from .cfa import PATTERNS, bilinear, color_indices, malvar, mosaic
 from .data import CleanDataset, camera_pair, synthetic
 from .inference import load_checkpoint
 from .metrics import quality_metrics
 from .noise import add_noise, variance_map
-from .reference import load_rawnind
+from .precision import amp_context
+from .reference import RawNind, load_rawnind
 from .safety import writable_path
-from .train import amp_context
 
 
 def freeze_checkpoint(source, destination):
@@ -67,6 +67,71 @@ def observation(rgb, identities, condition, pattern, wb, matrix, seed):
 def _number(value):
     value = float(value)
     return value if math.isfinite(value) else None
+
+
+@torch.inference_mode()
+def evaluate_panel(model, dataset, config, device, *, images=16, batch_size=4, amp=True):
+    """Small balanced monitor for training; full-suite evaluation remains separate."""
+    model.eval()
+    protocol = yaml.safe_load(Path(config).read_text())
+    count = min(images, len(dataset))
+    if count < 1 or batch_size < 1:
+        raise ValueError("Validation panel requires positive image/batch counts")
+    groups = {}
+    border = protocol.get("border", 8)
+    for start in range(0, count, batch_size):
+        indices = list(range(start, min(start + batch_size, count)))
+        rgb = torch.stack([dataset[i]["rgb"] for i in indices]).to(device)
+        ids = [dataset.rows[i]["id"] for i in indices]
+        for condition in protocol["conditions"]:
+            for pattern in protocol["patterns"]:
+                batch = observation(
+                    rgb,
+                    ids,
+                    condition,
+                    pattern,
+                    protocol["white_balance"],
+                    protocol["camera_to_srgb"],
+                    protocol.get("seed", 42),
+                )
+                with amp_context(device, amp):
+                    prediction = model(
+                        batch["packed"],
+                        batch["variance"],
+                        batch["colors"],
+                        batch["wb"],
+                        batch["matrix"],
+                    )
+                trim = (
+                    (slice(None), slice(None), slice(border, -border), slice(border, -border))
+                    if border
+                    else (...,)
+                )
+                scores = quality_metrics(
+                    prediction[trim], batch["target"][trim], batch["wb"], batch["matrix"]
+                )
+                group = groups.setdefault((condition["name"], pattern), {})
+                for name, values in scores.items():
+                    group.setdefault(name, []).extend(
+                        v for v in values.cpu().tolist() if math.isfinite(v)
+                    )
+    cases = [
+        {
+            "condition": key[0],
+            "pattern": key[1],
+            "images": count,
+            "metrics": {
+                name: float(np.mean(values)) if values else None for name, values in scores.items()
+            },
+        }
+        for key, scores in sorted(groups.items())
+    ]
+    return {
+        "panel_images": count,
+        "panel_srgb_psnr": float(np.mean([c["metrics"]["srgb_psnr"] for c in cases])),
+        "panel_srgb_ssim": float(np.mean([c["metrics"]["srgb_ssim"] for c in cases])),
+        "panel_cases": cases,
+    }
 
 
 def summarize(records):
@@ -193,6 +258,7 @@ def run_suite(
                 "sha256": digest,
                 "step": state["step"],
                 "model_config": state["model_config"],
+                "effective_model_config": model.config.to_dict(),
                 "training_manifest_sha256": state["config"].get("manifest_sha256"),
             }
         )
@@ -210,6 +276,28 @@ def run_suite(
                 "precision": "float32",
             }
         )
+        models.append(("RawNIND:CFA-channel", RawNind(reference.network, "cfa-channel"), False))
+        model_records.append(
+            {
+                "label": "RawNIND:CFA-channel",
+                "directory": str(rawnind),
+                "weight_sha256": model_records[-1]["weight_sha256"],
+                "gain": "per-channel-observed-CFA-least-squares",
+                "precision": "float32",
+            }
+        )
+    source_payloads = {
+        source.name: source.read_bytes() for source in sorted(Path(__file__).parent.glob("*.py"))
+    }
+    source_digest = hashlib.sha256()
+    for name, contents in sorted(source_payloads.items()):
+        source_digest.update(name.encode() + contents)
+    snapshot = output / "source" / source_digest.hexdigest()
+    snapshot.mkdir(parents=True, exist_ok=True)
+    for name, contents in source_payloads.items():
+        (snapshot / name).write_bytes(contents)
+    (snapshot / "manifest.jsonl").write_bytes(payload)
+    (snapshot / "protocol.yaml").write_bytes(Path(config).read_bytes())
     metadata = {
         "format_version": 1,
         "protocol": protocol,
@@ -224,7 +312,11 @@ def run_suite(
         "batch_size": batch_size,
         "adc_bits": 16,
         "adc_black": 0.03,
+        "classical_baselines": ["Bilinear:IEEE-FP32", "Malvar2004:white-balanced:IEEE-FP32"],
         "torch": str(torch.__version__),
+        "inference_source_sha256": source_digest.hexdigest(),
+        "inference_source_snapshot": str(snapshot),
+        "observation_and_metrics_precision": "IEEE FP32",
         "noise_pairing": "per-source/condition/CFA seed; independent of model and batch size",
     }
     (output / "protocol.json").write_text(json.dumps(metadata, indent=2) + "\n")
@@ -255,7 +347,10 @@ def run_suite(
                         protocol["camera_to_srgb"],
                         protocol.get("seed", 42),
                     )
-                    predictions = [("Bilinear", bilinear(batch["packed"], batch["colors"]))]
+                    predictions = [
+                        ("Bilinear", bilinear(batch["packed"], batch["colors"])),
+                        ("Malvar2004:WB", malvar(batch["packed"], batch["colors"], batch["wb"])),
+                    ]
                     for label, model, amp in models:
                         with amp_context(device, amp):
                             prediction = model(

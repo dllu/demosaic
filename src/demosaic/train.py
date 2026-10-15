@@ -5,7 +5,6 @@ import json
 import math
 import random
 import time
-from contextlib import nullcontext
 from pathlib import Path
 
 import psutil
@@ -18,19 +17,12 @@ from .color import render
 from .data import CleanDataset, degrade
 from .losses import psnr, reconstruction_loss
 from .model import JointDemosaic, ModelConfig
+from .precision import amp_context
 from .safety import writable_path
 
 
-def amp_context(device, enabled=True):
-    return (
-        torch.autocast("cuda", dtype=torch.bfloat16)
-        if (enabled and torch.device(device).type == "cuda")
-        else nullcontext()
-    )
-
-
 @torch.inference_mode()
-def evaluate(model, loader, device, *, max_batches=16, amp=True):
+def evaluate(model, loader, device, *, max_batches=16, amp=True, physical_fp32=True):
     model.eval()
     generator = torch.Generator(device=device).manual_seed(20261014)
     scores = {
@@ -42,19 +34,24 @@ def evaluate(model, loader, device, *, max_batches=16, amp=True):
     for i, clean in enumerate(loader):
         if max_batches and i >= max_batches:
             break
-        batch = degrade(clean["rgb"].to(device), training=False, generator=generator)
+        batch = degrade(
+            clean["rgb"].to(device),
+            training=False,
+            generator=generator,
+            physical_fp32=physical_fp32,
+        )
         with amp_context(device, amp):
             output = model(
                 batch["packed"], batch["variance"], batch["colors"], batch["wb"], batch["matrix"]
             )
-        baseline = bilinear(batch["packed"], batch["colors"])
+        baseline = bilinear(batch["packed"], batch["colors"], fp32=physical_fp32)
         target = batch["target"]
         for prefix, rgb in (("", output), ("bilinear_", baseline)):
             scores[prefix + "linear_psnr"].extend(psnr(rgb.clamp(0, 1), target).tolist())
             scores[prefix + "srgb_psnr"].extend(
                 psnr(
-                    render(rgb, batch["wb"], batch["matrix"]),
-                    render(target, batch["wb"], batch["matrix"]),
+                    render(rgb, batch["wb"], batch["matrix"], fp32=physical_fp32),
+                    render(target, batch["wb"], batch["matrix"], fp32=physical_fp32),
                 ).tolist()
             )
     return {key: sum(values) / len(values) for key, values in scores.items()}
@@ -109,6 +106,10 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     payloads.update(
         {name: (repository / name).read_bytes() for name in ("pyproject.toml", "uv.lock")}
     )
+    if config.get("validation_protocol"):
+        protocol = Path(config["validation_protocol"]).read_bytes()
+        payloads["validation_protocol.yaml"] = protocol
+        config["validation_protocol_sha256"] = hashlib.sha256(protocol).hexdigest()
     code_hash = hashlib.sha256()
     for name, payload in sorted(payloads.items()):
         code_hash.update(name.encode() + payload)
@@ -119,6 +120,12 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         (snapshot / name).write_bytes(payload)
     (snapshot / "manifest.jsonl").write_bytes(manifest_payload)
     config["source_snapshot"] = str(snapshot)
+    if "validation_protocol.yaml" in payloads:
+        config["validation_protocol"] = str(snapshot / "validation_protocol.yaml")
+    if config.get("model", {}).get("dino"):
+        (run / "DINOV3-LICENSE.md").write_bytes(
+            (repository / "third_party/dinov3/LICENSE.md").read_bytes()
+        )
     device = torch.device(config.get("device", "cuda"))
     torch.set_num_threads(config.get("cpu_threads", 4))
     torch.set_float32_matmul_precision("high")
@@ -126,7 +133,13 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     seed = config.get("seed", 42)
     random.seed(seed)
     torch.manual_seed(seed)
-    model = JointDemosaic(ModelConfig(**config.get("model", {}))).to(device)
+    resume_state = torch.load(resume, map_location="cpu", weights_only=True) if resume else None
+    model_options = dict(config.get("model", {}))
+    if resume_state and "physical_fp32" not in model_options:
+        model_options["physical_fp32"] = ModelConfig.from_checkpoint(
+            resume_state["model_config"]
+        ).physical_fp32
+    model = JointDemosaic(ModelConfig(**model_options)).to(device)
     if config.get("reconstruct_highlights", False) and not model.config.camera_conditioning:
         raise ValueError("Highlight training requires white-balance/color-matrix conditioning")
     if initialize:
@@ -162,11 +175,15 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     )
     first, best = 0, -math.inf
     if resume:
-        state = torch.load(resume, map_location="cpu", weights_only=True)
+        state = resume_state
+        if state["config"].get("validation_protocol_sha256") != config.get(
+            "validation_protocol_sha256"
+        ):
+            raise ValueError("Resume validation protocol differs; initialize a new run instead")
         previous_manifest_hash = state["config"].get("manifest_sha256")
         if previous_manifest_hash and previous_manifest_hash != manifest_hash:
             raise ValueError("Resume manifest differs from the checkpoint's training data")
-        if ModelConfig(**state["model_config"]).to_dict() != model.config.to_dict():
+        if ModelConfig.from_checkpoint(state["model_config"]).to_dict() != model.config.to_dict():
             raise ValueError("Resume model configuration differs from checkpoint")
         incompatible = model.load_state_dict(state["model"], strict=False)
         if incompatible.unexpected_keys or any(
@@ -250,6 +267,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             clean["rgb"].to(device),
             reconstruct_highlights=config.get("reconstruct_highlights", False),
             preserve_negative_read_noise=config.get("preserve_negative_read_noise", False),
+            physical_fp32=model.config.physical_fp32,
         )
         optimizer.zero_grad(set_to_none=True)
         with amp_context(device, amp):
@@ -261,7 +279,9 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 batch["matrix"],
                 auxiliary=True,
             )
-            loss, terms = reconstruction_loss(prediction, batch, auxiliary)
+            loss, terms = reconstruction_loss(
+                prediction, batch, auxiliary, physical_fp32=model.config.physical_fp32
+            )
         if not torch.isfinite(loss):
             raise RuntimeError(f"Nonfinite loss at step {step}; last checkpoint retained")
         loss.backward()
@@ -287,16 +307,47 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             current = {k: v.detach().clone() for k, v in model.restoration_state_dict().items()}
             model.load_state_dict(ema, strict=False)
             scores = evaluate(
-                model, validation, device, max_batches=config.get("val_batches", 16), amp=amp
+                model,
+                validation,
+                device,
+                max_batches=config.get("val_batches", 16),
+                amp=amp,
+                physical_fp32=model.config.physical_fp32,
             )
+            if config.get("validation_protocol"):
+                from .suite import evaluate_panel
+
+                panel_data = CleanDataset(
+                    config["manifest"],
+                    split="val",
+                    patch_size=config.get("patch_size", 256),
+                    records=records,
+                    native_crop=True,
+                )
+                scores.update(
+                    evaluate_panel(
+                        model,
+                        panel_data,
+                        config["validation_protocol"],
+                        device,
+                        images=config.get("validation_images", 16),
+                        batch_size=batch_size,
+                        amp=amp,
+                    )
+                )
             model.load_state_dict(current, strict=False)
             del current
             metrics = {"event": "validation", "step": step, **scores}
             with (run / "metrics.jsonl").open("a") as log:
                 log.write(json.dumps(metrics) + "\n")
             print(json.dumps(metrics), flush=True)
-            improved = scores["srgb_psnr"] > best
-            best = max(best, scores["srgb_psnr"])
+            monitored = (
+                scores["panel_srgb_psnr"]
+                if config.get("validation_protocol")
+                else scores["srgb_psnr"]
+            )
+            improved = monitored > best
+            best = max(best, monitored)
             save_checkpoint(run / "last.pt", model, optimizer, ema, step, config, best)
             if improved:
                 save_checkpoint(run / "best.pt", model, optimizer, ema, step, config, best)

@@ -3,7 +3,7 @@ import pytest
 import torch
 from PIL import Image
 
-from demosaic.cfa import PATTERNS, bilinear, color_indices, mosaic, pack, unpack
+from demosaic.cfa import PATTERNS, bilinear, color_indices, malvar, mosaic, pack, unpack
 from demosaic.noise import Sensor, add_noise
 from demosaic.prepare import bin_linear, free_license, split_for
 
@@ -26,6 +26,27 @@ def test_bilinear_reconstructs_constant_camera_colors(pattern):
     colors = color_indices(pattern)
     result = bilinear(mosaic(rgb, colors), colors)
     torch.testing.assert_close(result, rgb)
+
+
+@pytest.mark.parametrize("pattern", PATTERNS)
+def test_malvar_sampling_and_constant_colors(pattern):
+    colors = color_indices(pattern)
+    rgb = torch.rand(2, 3, 32, 48)
+    sampled = mosaic(rgb, colors)
+    torch.testing.assert_close(mosaic(malvar(sampled, colors), colors), sampled, atol=0, rtol=0)
+    rgb = torch.tensor([0.2, 0.5, 0.8])[None, :, None, None].expand(1, 3, 32, 48)
+    torch.testing.assert_close(malvar(mosaic(rgb, colors), colors), rgb, atol=1e-6, rtol=0)
+
+
+def test_interpolation_preserves_fp32_precision_inside_bfloat16_autocast():
+    packed = torch.rand(1, 4, 32, 48)
+    colors = color_indices("RGGB")
+    reference = bilinear(packed, colors)
+    with torch.autocast("cpu", dtype=torch.bfloat16):
+        actual = bilinear(packed, colors)
+        legacy = bilinear(packed, colors, fp32=False)
+    torch.testing.assert_close(actual, reference, atol=0, rtol=0)
+    assert (legacy - reference).abs().max() > 1e-4
 
 
 def test_binning_is_linear_and_preserves_sub_8bit_values():

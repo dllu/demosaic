@@ -1,6 +1,7 @@
 import torch
 
-from demosaic.suite import observation, summarize
+from demosaic.cfa import bilinear
+from demosaic.suite import evaluate_panel, observation, summarize
 
 
 def test_observation_pairs_noise_by_source_independently_of_batch_size():
@@ -41,3 +42,37 @@ def test_suite_aggregates_per_source_and_retains_empty_region_counts():
     assert delta["sources"] == 2
     assert delta["mean_first_minus_second"] == 2
     assert delta["source_bootstrap_95_interval"] == [2.0, 2.0]
+
+
+def test_training_panel_is_balanced_and_does_not_change_global_rng(tmp_path):
+    import yaml
+
+    class FlatData:
+        def __init__(self):
+            self.rows = [{"id": "flat"}]
+
+        def __len__(self):
+            return 1
+
+        def __getitem__(self, index):
+            return {"rgb": torch.full((3, 32, 32), 0.2)}
+
+    class Interpolate(torch.nn.Module):
+        def forward(self, packed, variance, colors, wb, matrix):
+            return bilinear(packed, colors)
+
+    config = {
+        "patterns": ["RGGB", "GBRG"],
+        "white_balance": [1.0, 1.0, 1.0],
+        "camera_to_srgb": torch.eye(3).tolist(),
+        "border": 2,
+        "conditions": [{"name": "adc", "shot": 0, "read": 0, "exposure": 1}],
+    }
+    path = tmp_path / "panel.yaml"
+    path.write_text(yaml.safe_dump(config))
+    before = torch.get_rng_state()
+    result = evaluate_panel(Interpolate(), FlatData(), path, "cpu", images=1)
+    assert torch.equal(torch.get_rng_state(), before)
+    assert result["panel_srgb_psnr"] > 100
+    assert result["panel_srgb_ssim"] > 0.9999
+    assert len(result["panel_cases"]) == 2

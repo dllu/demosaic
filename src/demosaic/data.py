@@ -13,6 +13,7 @@ from torch.utils.data import Dataset
 
 from .cfa import PATTERNS, color_indices, mosaic
 from .noise import add_noise, sample_coefficients, variance_map
+from .precision import ieee_fp32
 
 
 def synthetic(size: int, rng: random.Random) -> torch.Tensor:
@@ -154,13 +155,22 @@ def optical_blur(rgb, rng):
     return F.conv2d(F.pad(rgb[None], (3, 3, 3, 3), mode="reflect"), kernel, groups=3)[0]
 
 
-def camera_pair(exposed_rgb, inverse, wb, *, reconstruct_highlights=False):
+def camera_pair(exposed_rgb, inverse, wb, *, reconstruct_highlights=False, physical_fp32=True):
     """Keep physical sensor clipping separate from the bounded reference white.
 
     Independent sensor-channel clipping can turn an overexposed neutral scene
     magenta after WB/color conversion. Reference-white clipping occurs in
     linear sRGB before camera transport; it does not alter the noisy input.
     """
+    if physical_fp32:
+        with torch.autocast(device_type=exposed_rgb.device.type, enabled=False), ieee_fp32():
+            return _camera_pair(
+                exposed_rgb.float(), inverse.float(), wb.float(), reconstruct_highlights
+            )
+    return _camera_pair(exposed_rgb, inverse, wb, reconstruct_highlights)
+
+
+def _camera_pair(exposed_rgb, inverse, wb, reconstruct_highlights):
     clean = torch.einsum("bij,bjhw->bihw", inverse, exposed_rgb) / wb[..., None, None]
     target = torch.einsum("bij,bjhw->bihw", inverse, exposed_rgb.clamp(0, 1)) / wb[..., None, None]
     return clean, target if reconstruct_highlights else clean.clamp(0, 1)
@@ -173,6 +183,7 @@ def degrade(
     generator=None,
     reconstruct_highlights=False,
     preserve_negative_read_noise=False,
+    physical_fp32=True,
 ):
     """Convert clean linear sRGB to randomized camera RGB, then mosaic/noise.
 
@@ -202,7 +213,11 @@ def degrade(
         colors = color_indices("RGGB", device=device)[None].expand(batch, -1)
         shot, read = rgb.new_full((batch, 1, 1, 1), 0.001), rgb.new_full((batch, 1, 1, 1), 1e-6)
     clean, target = camera_pair(
-        rgb * exposure, inverse, wb, reconstruct_highlights=reconstruct_highlights
+        rgb * exposure,
+        inverse,
+        wb,
+        reconstruct_highlights=reconstruct_highlights,
+        physical_fp32=physical_fp32,
     )
     black = (
         torch.empty(batch, 1, 1, 1, device=device).uniform_(0.002, 0.06)

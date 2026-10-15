@@ -11,11 +11,11 @@ def charbonnier(error):
     return (error.square() + 1e-6).sqrt().mean()
 
 
-def reconstruction_loss(prediction, batch, auxiliary=None):
+def reconstruction_loss(prediction, batch, auxiliary=None, *, physical_fp32=True):
     target = batch["target"]
     linear = charbonnier(prediction - target)
-    display = render(prediction, batch["wb"], batch["matrix"])
-    truth = render(target, batch["wb"], batch["matrix"])
+    display = render(prediction, batch["wb"], batch["matrix"], fp32=physical_fp32)
+    truth = render(target, batch["wb"], batch["matrix"], fp32=physical_fp32)
     rendered = charbonnier(display - truth)
     gradient = (
         sum(charbonnier(torch.diff(display, dim=d) - torch.diff(truth, dim=d)) for d in (-1, -2))

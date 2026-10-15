@@ -9,6 +9,13 @@ per-image metrics and paired source-level bootstrap intervals. Predictions from
 every method use exactly the same noisy observations. Noise seeds depend on the
 source ID, condition and CFA pattern, not the model or batch order.
 
+Current runs also archive the evaluation source, manifest and protocol. Physical
+color transforms, classical interpolation and metrics use IEEE FP32 even inside
+autocast. The learned network may use BF16. Checkpoints predating the precision
+fix retain their original interpolation/DINO-preview arithmetic; their effective
+configuration is recorded so old predictions remain reproducible. Historical
+scores generated before this fix retain their original protocol and source hash.
+
 ```bash
 source scripts/env.sh
 uv run demosaic audit-split /mnt/external/demosaic/commons-v1/commons-8192.jsonl \
@@ -43,6 +50,21 @@ Use `--limit 8 --synthetic-count 2` for a software/early-model diagnostic, not a
 quality claim. Final comparisons require complete held-out sources, matched
 training budgets, real RAW inspection and additional camera/noise conditions.
 
+The suite includes independently implemented
+[Malvar–He–Cutler 2004 filters](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/Demosaicing_ICASSP04.pdf),
+with WB applied before interpolation and undone afterward. This is a useful
+classical demosaicing comparator, not a denoiser. RawNIND is evaluated with both
+global and per-channel least-squares gains against observed CFA samples; neither
+method uses clean targets. Its original network and weights remain separately
+fetched and checksum-pinned.
+
+The 24k-source training config monitors 16 native validation crops across all
+28 CFA/condition cases, and selects EMA checkpoints by balanced rendered PSNR.
+It still logs the older single-condition diagnostic. The panel is a training
+monitor, not a substitute for full held-out evaluation. Its archived protocol hash
+must match on resume; noise generation uses private generators and leaves the
+training RNG unchanged.
+
 ## Duplicate screening
 
 `audit-split` checks all protected sources against the corpus using 256-bit
@@ -57,6 +79,11 @@ The 8192-source audit found no matches at Hamming distance <=8 and correlation
 of complete scene separation: crops and different viewpoints can still evade it.
 Original caches and source manifests are never modified. Review `audit.json` and
 its excluded IDs before interpreting evaluation counts.
+
+The frozen 24576-source manifest audit excluded one training-linked validation
+image, leaving 22059 train / 1262 validation / 1254 test sources. Test images
+remain unused for model selection. Broader preparation continues separately;
+training uses the immutable audited manifest.
 
 ## Noise profiles
 

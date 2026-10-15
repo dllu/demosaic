@@ -69,5 +69,14 @@ Later on the same day, the official endpoint returned HTTP 200. The genuine
 forward/backward run verified finite reconstruction, a nonzero fusion-gate
 gradient and no gradients on the frozen backbone. The HF revision is
 `114c1379950215c8b35dfcd4e90a5c251dde0d32` and is pinned in the 8192-source
-experiment and restoration checkpoints. This branch is now training.
-Its quality contribution still requires a matched no-DINO control.
+experiment and restoration checkpoints. The completed matched 20k-step control
+shows a small positive effect across the 427-photo multi-condition validation
+suite; see [the results and remaining failures](experiments.md).
+
+The 2026 structural-guidance paper's linked repository returned HTTP 404 during
+the follow-up survey, so no claimed reproduction or pretrained baseline is used.
+Samsung's released implementation carries CC BY-NC-SA 4.0, incompatible with
+the requested commercially usable pipeline. Neither observation establishes our
+model's standing against those methods. The independently implemented Malvar
+2004 filters provide an additional classical sanity check, including low-noise
+cases in which they still beat our trained model.

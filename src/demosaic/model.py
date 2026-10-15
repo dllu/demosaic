@@ -22,9 +22,16 @@ class ModelConfig:
     dino_revision: str = "main"
     camera_conditioning: bool = False
     noise_modulation: bool = False
+    physical_fp32: bool = True
 
     def to_dict(self):
         return asdict(self)
+
+    @classmethod
+    def from_checkpoint(cls, values):
+        values = dict(values)
+        values.setdefault("physical_fp32", values.pop("baseline_fp32", False))
+        return cls(**values)
 
 
 class PixelNorm(nn.Module):
@@ -196,7 +203,7 @@ class JointDemosaic(nn.Module):
             raise ValueError("Expected four packed phases and matching variance maps")
         if colors.ndim == 1:
             colors = colors[None].expand(batch, -1)
-        baseline = bilinear(packed, colors)
+        baseline = bilinear(packed, colors, fp32=self.config.physical_fp32)
         labels = F.one_hot(colors, 3).to(packed.dtype).reshape(batch, 12, 1, 1)
         inputs = torch.cat(
             (packed, variance.clamp_min(0).sqrt(), labels.expand(-1, -1, height, width)), dim=1
@@ -231,7 +238,9 @@ class JointDemosaic(nn.Module):
             skips.append(x)
             x = down(x)
         if self.context is not None:
-            x = x + self.context(render(baseline, wb, matrix), x.shape[-2:])
+            x = x + self.context(
+                render(baseline, wb, matrix, fp32=self.config.physical_fp32), x.shape[-2:]
+            )
         if self.noise_middle is not None:
             x = self.noise_middle(x, log_variance)
         x = self.middle(x)

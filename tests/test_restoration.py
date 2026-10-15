@@ -161,3 +161,31 @@ def test_deep_noise_modulation_preserves_warm_start_and_receives_gradients(small
     loss, _ = reconstruction_loss(prediction, batch)
     loss.backward()
     assert modulated.noise_encoder[0].affine[-1].weight.grad.abs().sum() > 0
+
+
+def test_reference_per_channel_gain_removes_photometric_bias_without_target_access():
+    class BiasedDemosaic(torch.nn.Module):
+        def forward(self, packed):
+            rgb = bilinear(packed, color_indices("RGGB"))
+            return rgb * rgb.new_tensor([2.0, 0.6, 1.3])[None, :, None, None]
+
+    rgb = torch.rand(1, 3, 32, 48)
+    colors = color_indices("GRBG")
+    sampled = mosaic(rgb, colors)
+    model = RawNind(BiasedDemosaic(), gain_mode="cfa-channel")
+    output = model(sampled, torch.zeros_like(sampled), colors)
+    torch.testing.assert_close(mosaic(output, colors), sampled, atol=2e-7, rtol=1e-6)
+
+
+def test_color_transforms_preserve_precision_inside_autocast():
+    rgb = torch.rand(2, 3, 32, 48)
+    wb = torch.tensor([[2.0, 1.0, 1.5]]).expand(2, -1)
+    matrix = torch.tensor([[[1.1, -0.05, -0.05], [-0.05, 1.1, -0.05], [-0.05, -0.05, 1.1]]]).expand(
+        2, -1, -1
+    )
+    expected = render(rgb, wb, matrix)
+    with torch.autocast("cpu", dtype=torch.bfloat16):
+        actual = render(rgb, wb, matrix)
+        legacy = render(rgb, wb, matrix, fp32=False)
+    torch.testing.assert_close(actual, expected, atol=0, rtol=0)
+    assert (legacy - expected).abs().max() > 1e-4

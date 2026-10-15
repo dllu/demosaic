@@ -55,6 +55,12 @@ RAW decode, checkpoint loading and TIFF encoding. Timing includes process noise;
 repeat idle measurements and the final trained network are still needed. See
 `/mnt/external/demosaic/benchmarks/` for machine-readable records.
 
+These measurements use the original interpolation precision. The completed
+20k-step DINO model takes 14.528 s for the same warmed 100 MP restoration
+(13.302 s in its tile loop), with 0.803 GB peak allocated CUDA memory. It misses
+the 10 s target. Neither this timing nor the earlier 9.34 s result measures RAW
+decode/load/TIFF encoding. The new FP32 model needs a new speed measurement.
+
 A real GFX100S RAF produced 8746×11662 RGB16 TIFFs in camera-linear and sRGB
 forms without modifying the source. Its cold restoration took 17.043 s, including
 kernel startup. This older invocation did not measure complete decode/encode
@@ -100,10 +106,11 @@ separately, verifying the checkpoint contract with real weights.
 The immutable 8192-source manifest contains 7378 train / 427 validation / 387 test
 sources. `configs/dino-8192.yaml` and `configs/control-8192.yaml` use the same
 data, batch size, seed, 20000-step schedule, degradation and highlight-v2 EMA
-initialization; only the pretrained branch differs. Both runs are in progress.
+initialization; only the pretrained branch differs. Both runs completed 20000 steps.
 Periodic training validation uses up to 64 crops; final comparison must evaluate
-the full validation set across multiple conditions. Neither run has established
-a DINO quality benefit yet. Full-corpus preparation continues independently.
+the full validation set across multiple conditions. Their final CUDA noise RNG
+states and training manifest hashes match exactly. Full-corpus preparation
+continues independently.
 
 Local real-camera comparisons confirm RAW support for all four named camera
 models. Architecture, ocean spray and sky crops show that RawNIND smooths more
@@ -111,3 +118,66 @@ strongly, while our early model retains more grain/texture. These are diagnostic
 observations, not proof of a perceptual win. More detail/high-ISO cases and noise
 calibration are needed. Private source images and comparison figures remain
 local; no personal images have been added to training or published in Git.
+
+## Complete paired 20k-step comparison
+
+The paired suite used all 427 validation photos, 16 separate procedural stress
+images, all four Bayer phases, and seven fixed noise/exposure cases. Scores below
+are photo means, balanced within each image. Observations and targets are shared
+between methods; an eight-pixel border is excluded. Artifacts and exact weight
+hashes are in
+`/mnt/external/demosaic/evaluation/paired-20k-reference-gains-v2/`.
+
+| Method | Camera-linear PSNR | Rendered PSNR | Rendered SSIM |
+| --- | ---: | ---: | ---: |
+| DINO, 20000 steps | 35.305 | 29.095 | 0.8527 |
+| Matched no-DINO control | 35.274 | 29.041 | 0.8489 |
+| Bilinear | 32.332 | 27.555 | 0.8117 |
+| Malvar 2004, pre-WB | 34.194 | 28.539 | 0.8395 |
+| RawNIND, global CFA gain | 31.217 | 26.671 | 0.7872 |
+| RawNIND, per-channel CFA gain | 31.207 | 26.659 | 0.7870 |
+
+DINO's paired gain over its matched control is 0.0534 dB rendered PSNR
+(source-bootstrap 95% interval 0.0426–0.0659), 0.0315 dB camera-linear PSNR
+(0.0285–0.0343), and 0.00377 SSIM (0.00272–0.00501). This is a modest positive
+effect on this synthesis, not evidence of state of the art. Per-channel RawNIND
+gain matching does not close its aggregate gap here.
+
+The aggregate hides important failures. Values below average the four CFAs:
+
+| Condition | DINO PSNR / SSIM | RawNIND global gain PSNR / SSIM |
+| --- | ---: | ---: |
+| ADC only | 29.885 / 0.9144 | 26.265 / 0.7894 |
+| ISO 100 prior | 29.843 / 0.9123 | 26.260 / 0.7890 |
+| ISO 1600 prior | 29.330 / 0.8821 | 26.192 / 0.7836 |
+| ISO 12800 prior | 26.711 / 0.7236 | 25.795 / 0.7594 |
+| Shadows | 33.048 / 0.8168 | 33.510 / 0.8524 |
+| Highlights | 26.344 / 0.8880 | 22.577 / 0.7590 |
+| Earlier noise condition | 28.501 / 0.8313 | 26.097 / 0.7773 |
+
+RawNIND wins shadow PSNR/SSIM and high-noise SSIM. At negligible noise, Malvar
+slightly exceeds DINO's PSNR and has higher SSIM. Ours also trails Malvar's
+highlight SSIM despite better highlight PSNR. The required broad qualitative
+superiority has therefore not been demonstrated. The 387 test sources were not
+used. These suites predate the full FP32 physical-color fix below; keep their
+archived protocol/source hashes when comparing future results.
+
+## Precision fix and larger noise-conditioned training
+
+An explicit CUDA interpolation check found that BF16 autocast rounded the
+original bilinear residual baseline: maximum error was 0.00553 against a float64
+reference on the checked sample. New interpolation and physical color transforms
+disable autocast and TF32 locally. IEEE FP32 interpolation differed by at most
+5.96e-8 on that sample. cuDNN remains enabled. CPU autocast regression checks and
+the complete 43-test suite pass. Old 20k-step inference was compared with its
+archived source and remains bitwise identical through checkpoint compatibility.
+
+`configs/dino-noise-24576.yaml` starts a fresh 100000-step schedule from the 20k
+DINO EMA, using 22059 audited photographic training sources plus 20% procedural
+draws. It enables identity-initialized, spatial log-variance modulation at each
+restoration scale and IEEE FP32 physical operations. Selection uses the balanced
+16-image/28-condition validation panel. The immutable audited split contains
+1262 validation and 1254 untouched test sources after excluding one duplicate.
+This experiment changes data, precision, conditioning and training budget; any
+eventual improvement cannot be attributed to noise modulation alone. Training
+results and final quality/speed checks remain pending.
