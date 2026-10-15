@@ -131,7 +131,7 @@ uv run demosaic train configs/dino-paired-commons-44732.yaml \
 `paired_manifest` must point to a prepared **train** manifest;
 `paired_fraction` sets the fraction of whole batches from that dataset. The
 loader verifies cache checksums and refuses development/test or unknown-sensor
-scenes. Training averages scenes/captures equally when drawing crops, preserves
+scenes. Training draws scenes and captures uniformly, preserves
 Bayer/mask geometry through rotations/reflections, and retains signed input noise.
 The step schedule is deterministic across restarts. Checkpoints hash/archive both
 training manifests; a changed paired manifest or batch fraction is rejected on

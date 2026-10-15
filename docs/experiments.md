@@ -519,7 +519,7 @@ Prepared a fixed 32-scene RawNIND training selection: 119 checksum-verified RAWs
 (5.291 GB), 64 noisy captures, 576 aligned 512-pixel crops, no rejected pairs.
 It covers Sony ILCE-7C, Nikon Z6/D40 and Canon 6D. The selection excludes all
 25 development/official-test scenes and unknown sensors, with zero shared
-capture SHA1s against all 214 protected RAW captures. A perceptual screen of
+capture SHA1s against 203 protected RAW captures plus 11 sidecars. A perceptual screen of
 one predeclared reference per training scene found no near duplicates among
 4558 Commons validation/test sources. Crops, edits and related views can evade
 this screen; complete scene separation is not established. See

@@ -23,7 +23,7 @@ camera/noise channel roles. Trials are unpromoted pending real/detail checks.
 Acquired/prepared a separate fixed 32-scene paired training subset: 119 RAWs,
 5.291 GB, 64 pairs, 576 crops, no rejections, four camera models. All published
 checksums pass. Exact capture/scene separation from the 25 protected scenes is
-verified, including all 214 protected capture SHA1s. A conservative perceptual
+verified, including 203 protected RAW capture SHA1s plus 11 sidecars. A conservative perceptual
 screen found no matches to 4558 Commons validation/test photos; arbitrary crops,
 edits and related views can evade it. The existing Commons corpus contains three
 NIND-labeled museum photos; their titles are different from the protected scenes,
