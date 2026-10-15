@@ -31,6 +31,15 @@ def main():
         raise ValueError("Use a size divisible by 16 and a border smaller than half the size")
     output = writable_path(args.output)
     output.mkdir(parents=True, exist_ok=True)
+    payloads = {p.name: p.read_bytes() for p in Path("src/demosaic").glob("*.py")}
+    payloads[Path(__file__).name] = Path(__file__).read_bytes()
+    source_digest = hashlib.sha256()
+    for name, payload in sorted(payloads.items()):
+        source_digest.update(name.encode() + payload)
+    source_dir = output / "source" / source_digest.hexdigest()
+    source_dir.mkdir(parents=True, exist_ok=True)
+    for name, payload in payloads.items():
+        (source_dir / name).write_bytes(payload)
     torch.set_num_threads(4)
     protocol = yaml.safe_load(args.config.read_text())
     models, provenance = [], []
@@ -64,6 +73,8 @@ def main():
                 "sha256": hashlib.sha256(
                     (args.rawnind / "utnet2-bayer.pt").read_bytes()
                 ).hexdigest(),
+                "compute_precision": "IEEE float32",
+                "input": "Signed/unclipped synthetic sensor units",
             }
         )
     levels = [0.001, 0.01, 0.1, 0.5]
@@ -85,7 +96,7 @@ def main():
             batch[key] = batch[key].contiguous(memory_format=torch.channels_last)
         predictions = [("Bilinear", bilinear(batch["packed"], batch["colors"]))]
         for label, model, amp in models:
-            with amp_context("cuda", amp, dtype=args.precision):
+            with amp_context("cuda", dtype=args.precision if amp else "float32"):
                 predictions.append(
                     (
                         label,
@@ -126,6 +137,9 @@ def main():
         "size": args.size,
         "border": args.border,
         "pattern": "RGGB",
+        "source_sha256": source_digest.hexdigest(),
+        "source_snapshot": str(source_dir),
+        "torch": str(torch.__version__),
         "cases": rows,
         "note": "Constant scene-linear RGB. Measures bias/noise suppression, not detail fidelity.",
     }

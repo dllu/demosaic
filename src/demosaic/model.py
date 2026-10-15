@@ -8,7 +8,8 @@ from torch.nn import functional as F
 
 from .cfa import bilinear, malvar
 from .color import render
-from .prior import standardized_noise, wiener_packed
+from .precision import ieee_fp32
+from .prior import box_mean, standardized_noise, wiener_packed
 
 
 @dataclass
@@ -27,6 +28,10 @@ class ModelConfig:
     baseline: str = "bilinear"
     prior_window: int = 7
     standardized_noise: bool = False
+    noise_refinement: bool = False
+    refinement_width: int = 24
+    refinement_blocks: int = 4
+    refinement_window: int = 63
 
     def to_dict(self):
         return asdict(self)
@@ -81,6 +86,46 @@ class NoiseModulation(nn.Module):
         condition = F.interpolate(log_variance, size=x.shape[-2:], mode="area")
         scale, shift = self.affine(condition).chunk(2, 1)
         return x * (1 + 0.5 * scale.tanh()) + shift
+
+
+class RgbNoiseRefiner(nn.Module):
+    """Predict a noise-scaled RGB correction from the actual restored estimate.
+
+    Unit-scale local residuals expose weak noise without requiring the network
+    to reproduce the nonlinear Bayer prior. Decoder features retain structural
+    context. Zero initialization preserves the base model; zero sensor variance
+    makes the correction exactly zero. This small branch keeps IEEE FP32 math.
+    """
+
+    def __init__(self, context_channels, width=24, blocks=4, window=63):
+        super().__init__()
+        if width < 12 or blocks < 0 or window < 3 or window % 2 == 0:
+            raise ValueError("Invalid RGB noise-refinement configuration")
+        self.window = window
+        self.context = nn.Conv2d(context_channels, 12, 1)
+        self.stem = nn.Conv2d(36, width, 3, padding=1)
+        self.blocks = nn.Sequential(*(GatedBlock(width) for _ in range(blocks)))
+        self.head = nn.Conv2d(width, 12, 3, padding=1)
+        nn.init.zeros_(self.head.weight)
+        nn.init.zeros_(self.head.bias)
+
+    def forward(self, rgb, variance, colors, features):
+        with torch.autocast(device_type=rgb.device.type, enabled=False), ieee_fp32():
+            rgb = rgb.float()
+            rgb_variance = bilinear(box_mean(variance.float().clamp_min(0), 7), colors)
+            scale = rgb_variance.clamp_min(0).sqrt()
+            residual = (rgb - box_mean(rgb, self.window)) / scale.clamp_min(1e-4)
+            noise = (rgb_variance.clamp_min(1e-8).log() + 12) / 6
+            inputs = torch.cat(
+                (
+                    F.pixel_unshuffle(residual.clamp(-8, 8), 2),
+                    F.pixel_unshuffle(noise, 2),
+                    self.context(features.float()),
+                ),
+                dim=1,
+            )
+            correction = F.pixel_shuffle(self.head(self.blocks(self.stem(inputs))), 2)
+            return correction * scale
 
 
 class ChannelAttention(nn.Module):
@@ -205,6 +250,13 @@ class JointDemosaic(nn.Module):
             self.noise_encoder.extend(NoiseModulation(c) for c in widths)
             self.noise_middle = NoiseModulation(cfg.width * self.multiple)
             self.noise_decoder.extend(NoiseModulation(c) for c in reversed(widths))
+        self.refiner = (
+            RgbNoiseRefiner(
+                cfg.width, cfg.refinement_width, cfg.refinement_blocks, cfg.refinement_window
+            )
+            if cfg.noise_refinement
+            else None
+        )
 
     def forward(self, packed, variance, colors, wb=None, matrix=None, *, auxiliary=False):
         batch, phases, height, width = packed.shape
@@ -267,6 +319,8 @@ class JointDemosaic(nn.Module):
             x = decoder(x)
         x = x[..., :height, :width]
         prediction = baseline + F.pixel_shuffle(self.head(x), 2).float()
+        if self.refiner is not None:
+            prediction = prediction + self.refiner(prediction, variance, colors, x)
         if auxiliary:
             return prediction, auxiliary_base + self.mosaic_head(x).float()
         return prediction

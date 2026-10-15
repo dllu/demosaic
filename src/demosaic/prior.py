@@ -6,6 +6,16 @@ from torch.nn import functional as F
 from .precision import ieee_fp32
 
 
+def box_mean(image, window):
+    """Separable reflected mean, reducing the window for small images."""
+    if window < 3 or window % 2 == 0 or min(image.shape[-2:]) < 2:
+        raise ValueError("Use an odd window >=3 and spatial dimensions >=2")
+    window = min(window, 2 * min(image.shape[-2:]) - 1)
+    radius = window // 2
+    padded = F.pad(image, (radius, radius, radius, radius), mode="reflect")
+    return F.avg_pool2d(F.avg_pool2d(padded, (1, window), stride=1), (window, 1), stride=1)
+
+
 def standardized_noise(packed, variance, window=31):
     """Expose local phase residuals in noise units, including deep shadows.
 

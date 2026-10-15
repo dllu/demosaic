@@ -203,10 +203,14 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         weights = initial.get("ema", initial["model"])
         expand_stem(weights, initial["model_config"], model)
         incompatible = model.load_state_dict(weights, strict=False)
-        allowed_prefixes = ("context.",) + (
-            ("noise_encoder.", "noise_middle.", "noise_decoder.")
-            if model.config.noise_modulation
-            else ()
+        allowed_prefixes = (
+            ("context.",)
+            + (
+                ("noise_encoder.", "noise_middle.", "noise_decoder.")
+                if model.config.noise_modulation
+                else ()
+            )
+            + (("refiner.",) if model.config.noise_refinement else ())
         )
         if incompatible.unexpected_keys or any(
             not k.startswith(allowed_prefixes) for k in incompatible.missing_keys
@@ -227,6 +231,11 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         if lineage_path.exists() and json.loads(lineage_path.read_text()) != lineage:
             raise ValueError("Run initialization record differs from the checkpoint")
         lineage_path.write_text(json.dumps(lineage, indent=2) + "\n")
+    if config.get("refiner_only", False):
+        if model.refiner is None:
+            raise ValueError("Refiner-only training requires model.noise_refinement")
+        model.requires_grad_(False)
+        model.refiner.requires_grad_(True)
     # Keep just one frozen DINO backbone: EMA contains restoration weights only.
     ema = {key: value.detach().clone() for key, value in model.restoration_state_dict().items()}
     optimizer = torch.optim.AdamW(
@@ -250,6 +259,8 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             raise ValueError("Resume paired training fraction differs from checkpoint")
         if state["config"].get("precision", "bfloat16") != precision:
             raise ValueError("Resume training precision differs; initialize a new run")
+        if state["config"].get("refiner_only", False) != config.get("refiner_only", False):
+            raise ValueError("Resume trainable-parameter selection differs; initialize a new run")
         if ModelConfig.from_checkpoint(state["model_config"]).to_dict() != model.config.to_dict():
             raise ValueError("Resume model configuration differs from checkpoint")
         incompatible = model.load_state_dict(state["model"], strict=False)
@@ -324,6 +335,9 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             {
                 "event": "start",
                 "parameters": total_parameters,
+                "trainable_parameters": sum(
+                    p.numel() for p in model.parameters() if p.requires_grad
+                ),
                 "train_sources": len(data),
                 "validation_sources": len(validation.dataset),
                 "start_step": first,
@@ -389,7 +403,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 )
         if not torch.isfinite(loss):
             raise RuntimeError(f"Nonfinite loss at step {step}; last checkpoint retained")
-        with ieee_fp32() if precision == "float32" else nullcontext():
+        with ieee_fp32() if precision == "float32" or model.refiner is not None else nullcontext():
             loss.backward()
             grad_norm = torch.nn.utils.clip_grad_norm_(
                 model.parameters(), 1, error_if_nonfinite=True

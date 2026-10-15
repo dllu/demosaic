@@ -565,3 +565,12 @@ this distribution-shift diagnostic is not a matched DINO ablation and does not
 prove a causal training benefit. No inference optimization or stronger prior is
 promoted from these checks. Reports, source/weight hashes and the empirical noise
 diagnostic are in [results/mixed5k-denoising-diagnostics.json](results/mixed5k-denoising-diagnostics.json).
+
+Matched 1000-step flat-only controls V12 (BF16) and V13 (full IEEE FP32) retain
+nearly identical noise, so training precision is not the main explanation in
+this recipe. V14's new optional RGB refinement branch suppresses flat noise much
+more strongly but worsens real measured-CFA PSNR to 48.4693 dB versus V11's
+51.6932, with visible detail loss. It is rejected for promotion. See the
+[review with native crop triplets](refinement-review.md) and
+[source/weight/metric receipts](results/flat-precision-and-refiner-review.json).
+V11 remains the illustrative checkpoint, not an achieved quality target.

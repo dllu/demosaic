@@ -1,0 +1,4787 @@
+{
+  "flat_bf16_vs_fp32_f16": {
+    "report": "/mnt/external/demosaic/evaluation/flat-precision-1k-float16/result.json",
+    "report_sha256": "5adaeca994278f91054f4cf29034c198be56a6a584ed91e73f3788ba17d497a6",
+    "source_sha256": "67f1dd71b837c4dbdb642d13bbc79973600861d11108eb6bd3bfb9c1c0027294",
+    "models": [
+      {
+        "label": "0:dino-flat-bf16-v12:step-1000",
+        "sha256": "8804a8140986b707e19ea5ad2e77827c3b32ced899bf1ce05534fce6ae40cdfb",
+        "config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": false
+        },
+        "training_run": "/mnt/external/demosaic/runs/dino-flat-bf16-v12",
+        "snapshot": "/mnt/external/demosaic/evaluation/flat-precision-1k-float16/weights/weights-8804a8140986b707e19ea5ad2e77827c3b32ced899bf1ce05534fce6ae40cdfb.pt",
+        "compute_precision": "float16",
+        "memory_format": "channels_last"
+      },
+      {
+        "label": "1:dino-flat-fp32-v13:step-1000",
+        "sha256": "6cbadb5107037c585ac77b3d93b4d73d3b0e115d7bf02d1b23c434514ef28370",
+        "config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": false
+        },
+        "training_run": "/mnt/external/demosaic/runs/dino-flat-fp32-v13",
+        "snapshot": "/mnt/external/demosaic/evaluation/flat-precision-1k-float16/weights/weights-6cbadb5107037c585ac77b3d93b4d73d3b0e115d7bf02d1b23c434514ef28370.pt",
+        "compute_precision": "float16",
+        "memory_format": "channels_last"
+      },
+      {
+        "label": "2:dino-paired-commons-44732-v11:step-5000",
+        "sha256": "bb8177fc53f69173cd8ea39f75ed20ed474cd7e78cc4efb13916848a37290fbd",
+        "config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": false
+        },
+        "training_run": "/mnt/external/demosaic/runs/dino-paired-commons-44732-v11",
+        "snapshot": "/mnt/external/demosaic/evaluation/flat-precision-1k-float16/weights/weights-bb8177fc53f69173cd8ea39f75ed20ed474cd7e78cc4efb13916848a37290fbd.pt",
+        "compute_precision": "float16",
+        "memory_format": "channels_last"
+      },
+      {
+        "label": "RawNIND:CFA-LS",
+        "gain": "observed-CFA-least-squares",
+        "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "compute_precision": "IEEE float32",
+        "input": "Signed/unclipped synthetic sensor units"
+      }
+    ],
+    "cases": [
+      {
+        "model": "Bilinear",
+        "condition": "adc-only",
+        "scene_level": 0.001,
+        "camera_abs_bias": 5.117675755172968e-06,
+        "unclamped_camera_psnr": 105.31017303466797,
+        "camera_sigma": 0.0,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "Bilinear",
+        "condition": "adc-only",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.7418136596679688e-06,
+        "unclamped_camera_psnr": 110.68144226074219,
+        "camera_sigma": 0.0,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "Bilinear",
+        "condition": "adc-only",
+        "scene_level": 0.1,
+        "camera_abs_bias": 2.9938917123217834e-06,
+        "unclamped_camera_psnr": 106.84211730957031,
+        "camera_sigma": 0.0,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "Bilinear",
+        "condition": "adc-only",
+        "scene_level": 0.5,
+        "camera_abs_bias": 5.553166374738794e-06,
+        "unclamped_camera_psnr": 104.8618392944336,
+        "camera_sigma": 0.0,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "adc-only",
+        "scene_level": 0.001,
+        "camera_abs_bias": 3.0219363907235675e-05,
+        "unclamped_camera_psnr": 88.72885131835938,
+        "camera_sigma": 1.9140541553497314e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "adc-only",
+        "scene_level": 0.01,
+        "camera_abs_bias": 3.257329808548093e-05,
+        "unclamped_camera_psnr": 87.98987579345703,
+        "camera_sigma": 1.913295272970572e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "adc-only",
+        "scene_level": 0.1,
+        "camera_abs_bias": 2.2242624254431576e-05,
+        "unclamped_camera_psnr": 89.03836059570312,
+        "camera_sigma": 2.3900545784272254e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "adc-only",
+        "scene_level": 0.5,
+        "camera_abs_bias": 9.95074660750106e-05,
+        "unclamped_camera_psnr": 77.223876953125,
+        "camera_sigma": 8.793550659902394e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "adc-only",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.4607052182545885e-05,
+        "unclamped_camera_psnr": 90.43472290039062,
+        "camera_sigma": 1.7137454051407985e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "adc-only",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.2514923330163583e-05,
+        "unclamped_camera_psnr": 90.56941223144531,
+        "camera_sigma": 1.773562325979583e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "adc-only",
+        "scene_level": 0.1,
+        "camera_abs_bias": 1.175853958557127e-05,
+        "unclamped_camera_psnr": 90.60977935791016,
+        "camera_sigma": 2.6075291316374205e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "adc-only",
+        "scene_level": 0.5,
+        "camera_abs_bias": 8.484566933475435e-05,
+        "unclamped_camera_psnr": 77.33809661865234,
+        "camera_sigma": 9.60501201916486e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "adc-only",
+        "scene_level": 0.001,
+        "camera_abs_bias": 3.943254705518484e-05,
+        "unclamped_camera_psnr": 85.0820083618164,
+        "camera_sigma": 3.298419323982671e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "adc-only",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.957554897875525e-05,
+        "unclamped_camera_psnr": 86.41312408447266,
+        "camera_sigma": 3.310793181299232e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "adc-only",
+        "scene_level": 0.1,
+        "camera_abs_bias": 4.799223825102672e-05,
+        "unclamped_camera_psnr": 83.1932373046875,
+        "camera_sigma": 3.9489019400207326e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "adc-only",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.000125910562928766,
+        "unclamped_camera_psnr": 74.28714752197266,
+        "camera_sigma": 0.00010137259232578799,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "adc-only",
+        "scene_level": 0.001,
+        "camera_abs_bias": 7.879402801336255e-06,
+        "unclamped_camera_psnr": 98.67729949951172,
+        "camera_sigma": 7.120594091247767e-06,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "adc-only",
+        "scene_level": 0.01,
+        "camera_abs_bias": 8.604705726611428e-06,
+        "unclamped_camera_psnr": 97.65011596679688,
+        "camera_sigma": 7.674092557863332e-06,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "adc-only",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00015887357585597783,
+        "unclamped_camera_psnr": 73.48812103271484,
+        "camera_sigma": 6.916832353454083e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "adc-only",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0005500981351360679,
+        "unclamped_camera_psnr": 59.906768798828125,
+        "camera_sigma": 0.00033669848926365376,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso100-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.9000014478697267e-07,
+        "unclamped_camera_psnr": 80.41355895996094,
+        "camera_sigma": 9.416820830665529e-05,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso100-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.0263846636225935e-06,
+        "unclamped_camera_psnr": 70.66716003417969,
+        "camera_sigma": 0.0002890383475460112,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso100-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 1.3974340618005954e-05,
+        "unclamped_camera_psnr": 60.726890563964844,
+        "camera_sigma": 0.0009069828083738685,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso100-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 8.1190946730203e-06,
+        "unclamped_camera_psnr": 53.70243453979492,
+        "camera_sigma": 0.0020352392457425594,
+        "retained_sigma_fraction": 0.9999998807907104
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "iso100-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.5185890990542248e-05,
+        "unclamped_camera_psnr": 85.63348388671875,
+        "camera_sigma": 3.706826100824401e-05,
+        "retained_sigma_fraction": 0.39363881945610046
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "iso100-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.9277207431732677e-05,
+        "unclamped_camera_psnr": 82.97257995605469,
+        "camera_sigma": 6.352329364744946e-05,
+        "retained_sigma_fraction": 0.21977461874485016
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "iso100-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 1.727522976580076e-05,
+        "unclamped_camera_psnr": 74.70594024658203,
+        "camera_sigma": 0.00018053418898489326,
+        "retained_sigma_fraction": 0.1990491896867752
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "iso100-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 5.059933027951047e-05,
+        "unclamped_camera_psnr": 66.92872619628906,
+        "camera_sigma": 0.00044218794209882617,
+        "retained_sigma_fraction": 0.2172657996416092
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso100-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 1.4101528904575389e-05,
+        "unclamped_camera_psnr": 87.95823669433594,
+        "camera_sigma": 3.710681266966276e-05,
+        "retained_sigma_fraction": 0.39404818415641785
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso100-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 1.8843689758796245e-05,
+        "unclamped_camera_psnr": 83.6665267944336,
+        "camera_sigma": 6.168597610667348e-05,
+        "retained_sigma_fraction": 0.21341796219348907
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso100-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 2.6652309315977618e-05,
+        "unclamped_camera_psnr": 74.75819396972656,
+        "camera_sigma": 0.0001778494770405814,
+        "retained_sigma_fraction": 0.19608913362026215
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso100-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 3.623034353950061e-05,
+        "unclamped_camera_psnr": 67.07099151611328,
+        "camera_sigma": 0.0004367601068224758,
+        "retained_sigma_fraction": 0.2145988792181015
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "iso100-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 8.527223690180108e-05,
+        "unclamped_camera_psnr": 79.28236389160156,
+        "camera_sigma": 5.56424492970109e-05,
+        "retained_sigma_fraction": 0.5908836126327515
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "iso100-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 1.997026993194595e-05,
+        "unclamped_camera_psnr": 82.21542358398438,
+        "camera_sigma": 7.102725066943094e-05,
+        "retained_sigma_fraction": 0.24573642015457153
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "iso100-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00012374884681776166,
+        "unclamped_camera_psnr": 73.04216766357422,
+        "camera_sigma": 0.0001814550196286291,
+        "retained_sigma_fraction": 0.20006445050239563
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "iso100-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00018325980636291206,
+        "unclamped_camera_psnr": 66.02971649169922,
+        "camera_sigma": 0.0004530747828539461,
+        "retained_sigma_fraction": 0.22261497378349304
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso100-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 7.570773050247226e-06,
+        "unclamped_camera_psnr": 88.7831802368164,
+        "camera_sigma": 3.418179403524846e-05,
+        "retained_sigma_fraction": 0.36298656463623047
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso100-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 1.4982956599851605e-05,
+        "unclamped_camera_psnr": 78.1640396118164,
+        "camera_sigma": 0.0001192980125779286,
+        "retained_sigma_fraction": 0.41274112462997437
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso100-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.0001551908499095589,
+        "unclamped_camera_psnr": 65.02146911621094,
+        "camera_sigma": 0.0005148061318323016,
+        "retained_sigma_fraction": 0.5676029920578003
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso100-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0006874729297123849,
+        "unclamped_camera_psnr": 55.9697265625,
+        "camera_sigma": 0.0012481517624109983,
+        "retained_sigma_fraction": 0.6132702231407166
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso1600-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 5.334001798473764e-06,
+        "unclamped_camera_psnr": 64.28795623779297,
+        "camera_sigma": 0.0006087037036195397,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso1600-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 4.875304057350149e-06,
+        "unclamped_camera_psnr": 58.087860107421875,
+        "camera_sigma": 0.00123437843285501,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso1600-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 4.750082007376477e-05,
+        "unclamped_camera_psnr": 48.53118133544922,
+        "camera_sigma": 0.0036957922857254744,
+        "retained_sigma_fraction": 0.9999998211860657
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso1600-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 2.5424260456929915e-05,
+        "unclamped_camera_psnr": 41.673431396484375,
+        "camera_sigma": 0.008129003457725048,
+        "retained_sigma_fraction": 1.0000001192092896
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.6164059818256646e-05,
+        "unclamped_camera_psnr": 77.3740463256836,
+        "camera_sigma": 0.0001279120333492756,
+        "retained_sigma_fraction": 0.21013842523097992
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 1.821668047341518e-05,
+        "unclamped_camera_psnr": 72.6233139038086,
+        "camera_sigma": 0.00022893527057021856,
+        "retained_sigma_fraction": 0.18546603620052338
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 6.943228072486818e-05,
+        "unclamped_camera_psnr": 63.369720458984375,
+        "camera_sigma": 0.0006602144567295909,
+        "retained_sigma_fraction": 0.1786394566297531
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 2.94787732855184e-05,
+        "unclamped_camera_psnr": 56.37870788574219,
+        "camera_sigma": 0.0014855781337246299,
+        "retained_sigma_fraction": 0.18275035917758942
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 1.3385249985731207e-05,
+        "unclamped_camera_psnr": 77.6028060913086,
+        "camera_sigma": 0.00012916175182908773,
+        "retained_sigma_fraction": 0.21219150722026825
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 1.819477984099649e-05,
+        "unclamped_camera_psnr": 72.76339721679688,
+        "camera_sigma": 0.00022562697995454073,
+        "retained_sigma_fraction": 0.18278589844703674
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 8.096792589640245e-05,
+        "unclamped_camera_psnr": 63.324554443359375,
+        "camera_sigma": 0.0006599397165700793,
+        "retained_sigma_fraction": 0.178565114736557
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0002193898835685104,
+        "unclamped_camera_psnr": 56.267974853515625,
+        "camera_sigma": 0.0014889793237671256,
+        "retained_sigma_fraction": 0.18316875398159027
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 5.549479101318866e-05,
+        "unclamped_camera_psnr": 74.05442810058594,
+        "camera_sigma": 0.00018273034947924316,
+        "retained_sigma_fraction": 0.3001959025859833
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 4.930198338115588e-05,
+        "unclamped_camera_psnr": 71.46257019042969,
+        "camera_sigma": 0.0002558955457061529,
+        "retained_sigma_fraction": 0.20730720460414886
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00011086599988630041,
+        "unclamped_camera_psnr": 63.06732940673828,
+        "camera_sigma": 0.000669169588945806,
+        "retained_sigma_fraction": 0.1810625195503235
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00044652208453044295,
+        "unclamped_camera_psnr": 55.66619110107422,
+        "camera_sigma": 0.0015253182500600815,
+        "retained_sigma_fraction": 0.1876390427350998
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso1600-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.8568922061822377e-05,
+        "unclamped_camera_psnr": 88.3696060180664,
+        "camera_sigma": 2.0354429580038413e-05,
+        "retained_sigma_fraction": 0.03343897685408592
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso1600-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.43511804001173e-05,
+        "unclamped_camera_psnr": 85.37374877929688,
+        "camera_sigma": 4.392655682750046e-05,
+        "retained_sigma_fraction": 0.03558597341179848
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso1600-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00032120090327225626,
+        "unclamped_camera_psnr": 67.25362396240234,
+        "camera_sigma": 0.0001733185927150771,
+        "retained_sigma_fraction": 0.04689618572592735
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso1600-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00106291682459414,
+        "unclamped_camera_psnr": 46.42109298706055,
+        "camera_sigma": 0.004574150778353214,
+        "retained_sigma_fraction": 0.5626952052116394
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso12800-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 8.436829375568777e-05,
+        "unclamped_camera_psnr": 47.89952087402344,
+        "camera_sigma": 0.004023808520287275,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso12800-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.298828258062713e-05,
+        "unclamped_camera_psnr": 45.785499572753906,
+        "camera_sigma": 0.0051186708733439445,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso12800-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 1.5249176612996962e-05,
+        "unclamped_camera_psnr": 39.18806838989258,
+        "camera_sigma": 0.010856470093131065,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso12800-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00013689621118828654,
+        "unclamped_camera_psnr": 32.574623107910156,
+        "camera_sigma": 0.023216210305690765,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 0.0009448938071727753,
+        "unclamped_camera_psnr": 59.179378509521484,
+        "camera_sigma": 0.0005570659996010363,
+        "retained_sigma_fraction": 0.13844247162342072
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 0.00010049947013612837,
+        "unclamped_camera_psnr": 60.932464599609375,
+        "camera_sigma": 0.0008775328169576824,
+        "retained_sigma_fraction": 0.17143763601779938
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.0001137787476181984,
+        "unclamped_camera_psnr": 54.69769287109375,
+        "camera_sigma": 0.0017989402404055,
+        "retained_sigma_fraction": 0.16570213437080383
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0002807831624522805,
+        "unclamped_camera_psnr": 47.16856384277344,
+        "camera_sigma": 0.004270363599061966,
+        "retained_sigma_fraction": 0.1839388757944107
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 0.0007954878965392709,
+        "unclamped_camera_psnr": 60.20879364013672,
+        "camera_sigma": 0.0005586369661614299,
+        "retained_sigma_fraction": 0.13883289694786072
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 8.680816245032474e-05,
+        "unclamped_camera_psnr": 60.95000457763672,
+        "camera_sigma": 0.0008780711214058101,
+        "retained_sigma_fraction": 0.17154279351234436
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00015110631647985429,
+        "unclamped_camera_psnr": 54.69578170776367,
+        "camera_sigma": 0.0017959848046302795,
+        "retained_sigma_fraction": 0.16542990505695343
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00026649280334822834,
+        "unclamped_camera_psnr": 47.143802642822266,
+        "camera_sigma": 0.00429554795846343,
+        "retained_sigma_fraction": 0.18502365052700043
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 0.0008613689569756389,
+        "unclamped_camera_psnr": 59.45460891723633,
+        "camera_sigma": 0.0006181257776916027,
+        "retained_sigma_fraction": 0.15361709892749786
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 0.00017674773698672652,
+        "unclamped_camera_psnr": 60.134498596191406,
+        "camera_sigma": 0.0009522829204797745,
+        "retained_sigma_fraction": 0.18604105710983276
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00014146204921416938,
+        "unclamped_camera_psnr": 54.33684539794922,
+        "camera_sigma": 0.0018829902401193976,
+        "retained_sigma_fraction": 0.17344406247138977
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00047856703167781234,
+        "unclamped_camera_psnr": 46.86279296875,
+        "camera_sigma": 0.004402968566864729,
+        "retained_sigma_fraction": 0.18965061008930206
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso12800-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 0.0001555346534587443,
+        "unclamped_camera_psnr": 75.34931945800781,
+        "camera_sigma": 4.49268554802984e-05,
+        "retained_sigma_fraction": 0.01116525661200285
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso12800-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 0.0002571303048171103,
+        "unclamped_camera_psnr": 70.4515380859375,
+        "camera_sigma": 0.00011917098163394257,
+        "retained_sigma_fraction": 0.023281626403331757
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso12800-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00047094898764044046,
+        "unclamped_camera_psnr": 64.41558074951172,
+        "camera_sigma": 0.00034096671151928604,
+        "retained_sigma_fraction": 0.03140677511692047
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso12800-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0018265207763761282,
+        "unclamped_camera_psnr": 52.572486877441406,
+        "camera_sigma": 0.0009520822204649448,
+        "retained_sigma_fraction": 0.04100937396287918
+      },
+      {
+        "model": "Bilinear",
+        "condition": "shadows",
+        "scene_level": 0.001,
+        "camera_abs_bias": 1.5855926903896034e-05,
+        "unclamped_camera_psnr": 60.03697967529297,
+        "camera_sigma": 0.0009950887179002166,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "shadows",
+        "scene_level": 0.01,
+        "camera_abs_bias": 1.497727043897612e-05,
+        "unclamped_camera_psnr": 58.91302490234375,
+        "camera_sigma": 0.0011304512154310942,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "shadows",
+        "scene_level": 0.1,
+        "camera_abs_bias": 2.1748204744653776e-05,
+        "unclamped_camera_psnr": 53.66994857788086,
+        "camera_sigma": 0.0020566433668136597,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "shadows",
+        "scene_level": 0.5,
+        "camera_abs_bias": 4.1497929487377405e-05,
+        "unclamped_camera_psnr": 47.474971771240234,
+        "camera_sigma": 0.004169217776507139,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "shadows",
+        "scene_level": 0.001,
+        "camera_abs_bias": 0.0003775459190364927,
+        "unclamped_camera_psnr": 67.68984985351562,
+        "camera_sigma": 0.00016091568977572024,
+        "retained_sigma_fraction": 0.16170988976955414
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "shadows",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.7699352358467877e-05,
+        "unclamped_camera_psnr": 74.06881713867188,
+        "camera_sigma": 0.0001924568641697988,
+        "retained_sigma_fraction": 0.17024782299995422
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "shadows",
+        "scene_level": 0.1,
+        "camera_abs_bias": 4.497797635849565e-05,
+        "unclamped_camera_psnr": 68.2207260131836,
+        "camera_sigma": 0.00037905757199041545,
+        "retained_sigma_fraction": 0.18430884182453156
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "shadows",
+        "scene_level": 0.5,
+        "camera_abs_bias": 9.775029320735484e-05,
+        "unclamped_camera_psnr": 62.479854583740234,
+        "camera_sigma": 0.0007264240412041545,
+        "retained_sigma_fraction": 0.17423509061336517
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "shadows",
+        "scene_level": 0.001,
+        "camera_abs_bias": 0.0002235683932667598,
+        "unclamped_camera_psnr": 71.17417907714844,
+        "camera_sigma": 0.0001591158943483606,
+        "retained_sigma_fraction": 0.1599012166261673
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "shadows",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.2599784642807208e-05,
+        "unclamped_camera_psnr": 74.11719512939453,
+        "camera_sigma": 0.00019332367810420692,
+        "retained_sigma_fraction": 0.17101460695266724
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "shadows",
+        "scene_level": 0.1,
+        "camera_abs_bias": 3.684808689286001e-05,
+        "unclamped_camera_psnr": 68.29549407958984,
+        "camera_sigma": 0.00037694041384384036,
+        "retained_sigma_fraction": 0.18327942490577698
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "shadows",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00011616539995884523,
+        "unclamped_camera_psnr": 62.43178939819336,
+        "camera_sigma": 0.0007259284611791372,
+        "retained_sigma_fraction": 0.17411622405052185
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "shadows",
+        "scene_level": 0.001,
+        "camera_abs_bias": 0.00042458923417143524,
+        "unclamped_camera_psnr": 66.46308135986328,
+        "camera_sigma": 0.00020440874504856765,
+        "retained_sigma_fraction": 0.20541760325431824
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "shadows",
+        "scene_level": 0.01,
+        "camera_abs_bias": 4.407595406519249e-05,
+        "unclamped_camera_psnr": 71.72987365722656,
+        "camera_sigma": 0.000248537864536047,
+        "retained_sigma_fraction": 0.21985721588134766
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "shadows",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00010599949746392667,
+        "unclamped_camera_psnr": 67.16792297363281,
+        "camera_sigma": 0.0004138985532335937,
+        "retained_sigma_fraction": 0.20124955475330353
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "shadows",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00014020776143297553,
+        "unclamped_camera_psnr": 62.194847106933594,
+        "camera_sigma": 0.0007463627844117582,
+        "retained_sigma_fraction": 0.17901746928691864
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "shadows",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.4131002646754496e-05,
+        "unclamped_camera_psnr": 91.3251953125,
+        "camera_sigma": 8.59400097397156e-06,
+        "retained_sigma_fraction": 0.008636416867375374
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "shadows",
+        "scene_level": 0.01,
+        "camera_abs_bias": 3.0141640309011564e-05,
+        "unclamped_camera_psnr": 86.97994995117188,
+        "camera_sigma": 3.160376945743337e-05,
+        "retained_sigma_fraction": 0.027956774458289146
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "shadows",
+        "scene_level": 0.1,
+        "camera_abs_bias": 4.586210707202554e-05,
+        "unclamped_camera_psnr": 81.37814331054688,
+        "camera_sigma": 6.137331365607679e-05,
+        "retained_sigma_fraction": 0.02984149567782879
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "shadows",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00029472599271684885,
+        "unclamped_camera_psnr": 68.48179626464844,
+        "camera_sigma": 0.00016206626605708152,
+        "retained_sigma_fraction": 0.03887210413813591
+      },
+      {
+        "model": "Bilinear",
+        "condition": "highlights",
+        "scene_level": 0.001,
+        "camera_abs_bias": 1.5689390693296446e-06,
+        "unclamped_camera_psnr": 68.40097045898438,
+        "camera_sigma": 0.0003753674100153148,
+        "retained_sigma_fraction": 0.9999999403953552
+      },
+      {
+        "model": "Bilinear",
+        "condition": "highlights",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.147133636754006e-05,
+        "unclamped_camera_psnr": 58.57386016845703,
+        "camera_sigma": 0.0011631688103079796,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "highlights",
+        "scene_level": 0.1,
+        "camera_abs_bias": 3.4969740227097645e-05,
+        "unclamped_camera_psnr": 48.62744903564453,
+        "camera_sigma": 0.003652189625427127,
+        "retained_sigma_fraction": 0.9999999403953552
+      },
+      {
+        "model": "Bilinear",
+        "condition": "highlights",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.27659833431243896,
+        "unclamped_camera_psnr": 9.237232208251953,
+        "camera_sigma": 0.0012975622666999698,
+        "retained_sigma_fraction": 0.9999980926513672
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "highlights",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.6225377951050177e-05,
+        "unclamped_camera_psnr": 81.66627502441406,
+        "camera_sigma": 7.679627015022561e-05,
+        "retained_sigma_fraction": 0.2045895904302597
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "highlights",
+        "scene_level": 0.01,
+        "camera_abs_bias": 1.1389607607270591e-05,
+        "unclamped_camera_psnr": 72.90962982177734,
+        "camera_sigma": 0.0002219068119302392,
+        "retained_sigma_fraction": 0.19077782332897186
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "highlights",
+        "scene_level": 0.1,
+        "camera_abs_bias": 5.1335977332200855e-05,
+        "unclamped_camera_psnr": 62.84336471557617,
+        "camera_sigma": 0.0007046167738735676,
+        "retained_sigma_fraction": 0.1929299384355545
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "highlights",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.018482264131307602,
+        "unclamped_camera_psnr": 33.72797775268555,
+        "camera_sigma": 0.003267771564424038,
+        "retained_sigma_fraction": 2.518388032913208
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "highlights",
+        "scene_level": 0.001,
+        "camera_abs_bias": 1.5413037544931285e-05,
+        "unclamped_camera_psnr": 82.17688751220703,
+        "camera_sigma": 7.498946797568351e-05,
+        "retained_sigma_fraction": 0.19977617263793945
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "highlights",
+        "scene_level": 0.01,
+        "camera_abs_bias": 3.127218224108219e-05,
+        "unclamped_camera_psnr": 73.00762939453125,
+        "camera_sigma": 0.00021755379566457123,
+        "retained_sigma_fraction": 0.1870354413986206
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "highlights",
+        "scene_level": 0.1,
+        "camera_abs_bias": 6.059068255126476e-05,
+        "unclamped_camera_psnr": 62.87382507324219,
+        "camera_sigma": 0.0007028483087196946,
+        "retained_sigma_fraction": 0.19244572520256042
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "highlights",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.008844124153256416,
+        "unclamped_camera_psnr": 38.219295501708984,
+        "camera_sigma": 0.003683066461235285,
+        "retained_sigma_fraction": 2.8384451866149902
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "highlights",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.5644134439062327e-05,
+        "unclamped_camera_psnr": 79.3831558227539,
+        "camera_sigma": 0.00010036458115791902,
+        "retained_sigma_fraction": 0.2673768997192383
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "highlights",
+        "scene_level": 0.01,
+        "camera_abs_bias": 8.147503103828058e-05,
+        "unclamped_camera_psnr": 72.26641082763672,
+        "camera_sigma": 0.000223554132389836,
+        "retained_sigma_fraction": 0.19219405949115753
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "highlights",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.0001438639737898484,
+        "unclamped_camera_psnr": 62.5908317565918,
+        "camera_sigma": 0.0007128857541829348,
+        "retained_sigma_fraction": 0.1951940506696701
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "highlights",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.006628374569118023,
+        "unclamped_camera_psnr": 41.574920654296875,
+        "camera_sigma": 0.0027925465255975723,
+        "retained_sigma_fraction": 2.152144432067871
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "highlights",
+        "scene_level": 0.001,
+        "camera_abs_bias": 1.9626291759777814e-05,
+        "unclamped_camera_psnr": 88.17658233642578,
+        "camera_sigma": 3.115865547442809e-05,
+        "retained_sigma_fraction": 0.08300841599702835
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "highlights",
+        "scene_level": 0.01,
+        "camera_abs_bias": 0.00011750198609661311,
+        "unclamped_camera_psnr": 74.08434295654297,
+        "camera_sigma": 0.00011933164205402136,
+        "retained_sigma_fraction": 0.1025918498635292
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "highlights",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.000867013237439096,
+        "unclamped_camera_psnr": 52.505836486816406,
+        "camera_sigma": 0.00213896157220006,
+        "retained_sigma_fraction": 0.5856654644012451
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "highlights",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.27750661969184875,
+        "unclamped_camera_psnr": 9.171936988830566,
+        "camera_sigma": 0.0023033786565065384,
+        "retained_sigma_fraction": 1.7751551866531372
+      },
+      {
+        "model": "Bilinear",
+        "condition": "legacy-noise",
+        "scene_level": 0.001,
+        "camera_abs_bias": 1.1855016055051237e-05,
+        "unclamped_camera_psnr": 59.90692138671875,
+        "camera_sigma": 0.0010072863660752773,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "legacy-noise",
+        "scene_level": 0.01,
+        "camera_abs_bias": 7.210153853520751e-06,
+        "unclamped_camera_psnr": 53.186256408691406,
+        "camera_sigma": 0.002165411598980427,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "legacy-noise",
+        "scene_level": 0.1,
+        "camera_abs_bias": 7.323517638724297e-05,
+        "unclamped_camera_psnr": 43.65131378173828,
+        "camera_sigma": 0.006475555710494518,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "legacy-noise",
+        "scene_level": 0.5,
+        "camera_abs_bias": 7.84064395702444e-05,
+        "unclamped_camera_psnr": 36.73355484008789,
+        "camera_sigma": 0.014375119470059872,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "legacy-noise",
+        "scene_level": 0.001,
+        "camera_abs_bias": 5.3616531658917665e-05,
+        "unclamped_camera_psnr": 73.47771453857422,
+        "camera_sigma": 0.00020143167057540268,
+        "retained_sigma_fraction": 0.19997458159923553
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "legacy-noise",
+        "scene_level": 0.01,
+        "camera_abs_bias": 4.422041092766449e-05,
+        "unclamped_camera_psnr": 66.89054870605469,
+        "camera_sigma": 0.00044220787822268903,
+        "retained_sigma_fraction": 0.20421423017978668
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "legacy-noise",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00011591975635383278,
+        "unclamped_camera_psnr": 58.909446716308594,
+        "camera_sigma": 0.0010996051132678986,
+        "retained_sigma_fraction": 0.16980861127376556
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "legacy-noise",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00021402262791525573,
+        "unclamped_camera_psnr": 51.29149627685547,
+        "camera_sigma": 0.002654112409800291,
+        "retained_sigma_fraction": 0.18463237583637238
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "legacy-noise",
+        "scene_level": 0.001,
+        "camera_abs_bias": 3.724706039065495e-05,
+        "unclamped_camera_psnr": 73.60743713378906,
+        "camera_sigma": 0.00020347590907476842,
+        "retained_sigma_fraction": 0.20200403034687042
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "legacy-noise",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.788119309116155e-05,
+        "unclamped_camera_psnr": 66.91441345214844,
+        "camera_sigma": 0.000442893331637606,
+        "retained_sigma_fraction": 0.20453079044818878
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "legacy-noise",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.0001851074630394578,
+        "unclamped_camera_psnr": 58.8414306640625,
+        "camera_sigma": 0.0010992900934070349,
+        "retained_sigma_fraction": 0.16975995898246765
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "legacy-noise",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0001526924315840006,
+        "unclamped_camera_psnr": 51.2452392578125,
+        "camera_sigma": 0.0026755589060485363,
+        "retained_sigma_fraction": 0.1861242949962616
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "legacy-noise",
+        "scene_level": 0.001,
+        "camera_abs_bias": 6.541750190081075e-05,
+        "unclamped_camera_psnr": 69.9342269897461,
+        "camera_sigma": 0.00030444186995737255,
+        "retained_sigma_fraction": 0.30223962664604187
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "legacy-noise",
+        "scene_level": 0.01,
+        "camera_abs_bias": 9.653676534071565e-05,
+        "unclamped_camera_psnr": 65.54364013671875,
+        "camera_sigma": 0.0005071969935670495,
+        "retained_sigma_fraction": 0.23422659933567047
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "legacy-noise",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00014947843737900257,
+        "unclamped_camera_psnr": 58.608978271484375,
+        "camera_sigma": 0.0011381985386833549,
+        "retained_sigma_fraction": 0.17576847970485687
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "legacy-noise",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0004945139517076313,
+        "unclamped_camera_psnr": 50.89120864868164,
+        "camera_sigma": 0.0027472898364067078,
+        "retained_sigma_fraction": 0.19111423194408417
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "legacy-noise",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.300438609381672e-05,
+        "unclamped_camera_psnr": 88.577392578125,
+        "camera_sigma": 2.7774083719123155e-05,
+        "retained_sigma_fraction": 0.027573175728321075
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "legacy-noise",
+        "scene_level": 0.01,
+        "camera_abs_bias": 4.1514853364787996e-05,
+        "unclamped_camera_psnr": 82.07320404052734,
+        "camera_sigma": 6.434768147300929e-05,
+        "retained_sigma_fraction": 0.029716143384575844
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "legacy-noise",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.0003291398170404136,
+        "unclamped_camera_psnr": 66.375732421875,
+        "camera_sigma": 0.00022728931799065322,
+        "retained_sigma_fraction": 0.035099584609270096
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "legacy-noise",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0018719605868682265,
+        "unclamped_camera_psnr": 52.493255615234375,
+        "camera_sigma": 0.0008436423959210515,
+        "retained_sigma_fraction": 0.05868767946958542
+      }
+    ],
+    "border": 32,
+    "size": 256
+  },
+  "flat_bf16_vs_fp32_f32": {
+    "report": "/mnt/external/demosaic/evaluation/flat-precision-1k-float32/result.json",
+    "report_sha256": "063847cff9881c62167acc1102f00b02733b8665585a54f8e082089009970c89",
+    "source_sha256": "67f1dd71b837c4dbdb642d13bbc79973600861d11108eb6bd3bfb9c1c0027294",
+    "models": [
+      {
+        "label": "0:dino-flat-bf16-v12:step-1000",
+        "sha256": "8804a8140986b707e19ea5ad2e77827c3b32ced899bf1ce05534fce6ae40cdfb",
+        "config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": false
+        },
+        "training_run": "/mnt/external/demosaic/runs/dino-flat-bf16-v12",
+        "snapshot": "/mnt/external/demosaic/evaluation/flat-precision-1k-float32/weights/weights-8804a8140986b707e19ea5ad2e77827c3b32ced899bf1ce05534fce6ae40cdfb.pt",
+        "compute_precision": "float32",
+        "memory_format": "channels_last"
+      },
+      {
+        "label": "1:dino-flat-fp32-v13:step-1000",
+        "sha256": "6cbadb5107037c585ac77b3d93b4d73d3b0e115d7bf02d1b23c434514ef28370",
+        "config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": false
+        },
+        "training_run": "/mnt/external/demosaic/runs/dino-flat-fp32-v13",
+        "snapshot": "/mnt/external/demosaic/evaluation/flat-precision-1k-float32/weights/weights-6cbadb5107037c585ac77b3d93b4d73d3b0e115d7bf02d1b23c434514ef28370.pt",
+        "compute_precision": "float32",
+        "memory_format": "channels_last"
+      },
+      {
+        "label": "2:dino-paired-commons-44732-v11:step-5000",
+        "sha256": "bb8177fc53f69173cd8ea39f75ed20ed474cd7e78cc4efb13916848a37290fbd",
+        "config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": false
+        },
+        "training_run": "/mnt/external/demosaic/runs/dino-paired-commons-44732-v11",
+        "snapshot": "/mnt/external/demosaic/evaluation/flat-precision-1k-float32/weights/weights-bb8177fc53f69173cd8ea39f75ed20ed474cd7e78cc4efb13916848a37290fbd.pt",
+        "compute_precision": "float32",
+        "memory_format": "channels_last"
+      },
+      {
+        "label": "RawNIND:CFA-LS",
+        "gain": "observed-CFA-least-squares",
+        "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "compute_precision": "IEEE float32",
+        "input": "Signed/unclipped synthetic sensor units"
+      }
+    ],
+    "cases": [
+      {
+        "model": "Bilinear",
+        "condition": "adc-only",
+        "scene_level": 0.001,
+        "camera_abs_bias": 5.117675755172968e-06,
+        "unclamped_camera_psnr": 105.31017303466797,
+        "camera_sigma": 0.0,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "Bilinear",
+        "condition": "adc-only",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.7418136596679688e-06,
+        "unclamped_camera_psnr": 110.68144226074219,
+        "camera_sigma": 0.0,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "Bilinear",
+        "condition": "adc-only",
+        "scene_level": 0.1,
+        "camera_abs_bias": 2.9938917123217834e-06,
+        "unclamped_camera_psnr": 106.84211730957031,
+        "camera_sigma": 0.0,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "Bilinear",
+        "condition": "adc-only",
+        "scene_level": 0.5,
+        "camera_abs_bias": 5.553166374738794e-06,
+        "unclamped_camera_psnr": 104.8618392944336,
+        "camera_sigma": 0.0,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "adc-only",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.9972503398312256e-05,
+        "unclamped_camera_psnr": 88.9879150390625,
+        "camera_sigma": 1.711414552119095e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "adc-only",
+        "scene_level": 0.01,
+        "camera_abs_bias": 3.251638190704398e-05,
+        "unclamped_camera_psnr": 88.19080352783203,
+        "camera_sigma": 1.7047681467374787e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "adc-only",
+        "scene_level": 0.1,
+        "camera_abs_bias": 2.2002435798640363e-05,
+        "unclamped_camera_psnr": 89.29466247558594,
+        "camera_sigma": 2.2496511519420892e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "adc-only",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00010066161485156044,
+        "unclamped_camera_psnr": 77.21638488769531,
+        "camera_sigma": 8.7256237748079e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "adc-only",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.2132275262265466e-05,
+        "unclamped_camera_psnr": 91.43733978271484,
+        "camera_sigma": 1.4811657820246182e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "adc-only",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.031967233051546e-05,
+        "unclamped_camera_psnr": 91.70576477050781,
+        "camera_sigma": 1.5573685232084244e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "adc-only",
+        "scene_level": 0.1,
+        "camera_abs_bias": 1.2021157999697607e-05,
+        "unclamped_camera_psnr": 90.86307525634766,
+        "camera_sigma": 2.4723352908040397e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "adc-only",
+        "scene_level": 0.5,
+        "camera_abs_bias": 8.36940307635814e-05,
+        "unclamped_camera_psnr": 77.36192321777344,
+        "camera_sigma": 9.582764323567972e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "adc-only",
+        "scene_level": 0.001,
+        "camera_abs_bias": 4.21570148319006e-05,
+        "unclamped_camera_psnr": 84.90962982177734,
+        "camera_sigma": 3.177253165631555e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "adc-only",
+        "scene_level": 0.01,
+        "camera_abs_bias": 3.2078722142614424e-05,
+        "unclamped_camera_psnr": 86.34962463378906,
+        "camera_sigma": 3.1472471164306626e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "adc-only",
+        "scene_level": 0.1,
+        "camera_abs_bias": 4.6065393689787015e-05,
+        "unclamped_camera_psnr": 83.26776123046875,
+        "camera_sigma": 3.8352878618752584e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "adc-only",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00012908451026305556,
+        "unclamped_camera_psnr": 74.15995788574219,
+        "camera_sigma": 0.00010127032146556303,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "adc-only",
+        "scene_level": 0.001,
+        "camera_abs_bias": 7.879402801336255e-06,
+        "unclamped_camera_psnr": 98.67729949951172,
+        "camera_sigma": 7.120594091247767e-06,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "adc-only",
+        "scene_level": 0.01,
+        "camera_abs_bias": 8.604705726611428e-06,
+        "unclamped_camera_psnr": 97.65011596679688,
+        "camera_sigma": 7.674092557863332e-06,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "adc-only",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00015887357585597783,
+        "unclamped_camera_psnr": 73.48812103271484,
+        "camera_sigma": 6.916832353454083e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "adc-only",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0005500981351360679,
+        "unclamped_camera_psnr": 59.906768798828125,
+        "camera_sigma": 0.00033669848926365376,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso100-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.9000014478697267e-07,
+        "unclamped_camera_psnr": 80.41355895996094,
+        "camera_sigma": 9.416820830665529e-05,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso100-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.0263846636225935e-06,
+        "unclamped_camera_psnr": 70.66716003417969,
+        "camera_sigma": 0.0002890383475460112,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso100-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 1.3974340618005954e-05,
+        "unclamped_camera_psnr": 60.726890563964844,
+        "camera_sigma": 0.0009069828083738685,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso100-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 8.1190946730203e-06,
+        "unclamped_camera_psnr": 53.70243453979492,
+        "camera_sigma": 0.0020352392457425594,
+        "retained_sigma_fraction": 0.9999998807907104
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "iso100-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.6859916033572517e-05,
+        "unclamped_camera_psnr": 85.72826385498047,
+        "camera_sigma": 3.514720810926519e-05,
+        "retained_sigma_fraction": 0.37323856353759766
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "iso100-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.848828080459498e-05,
+        "unclamped_camera_psnr": 83.13422393798828,
+        "camera_sigma": 6.233798194443807e-05,
+        "retained_sigma_fraction": 0.21567374467849731
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "iso100-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 1.888428960228339e-05,
+        "unclamped_camera_psnr": 74.72866821289062,
+        "camera_sigma": 0.00017980723350774497,
+        "retained_sigma_fraction": 0.19824767112731934
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "iso100-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 5.0988077418878675e-05,
+        "unclamped_camera_psnr": 66.93415832519531,
+        "camera_sigma": 0.0004418890457600355,
+        "retained_sigma_fraction": 0.21711894869804382
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso100-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 1.1954226465604734e-05,
+        "unclamped_camera_psnr": 88.4840087890625,
+        "camera_sigma": 3.4945034713018686e-05,
+        "retained_sigma_fraction": 0.3710916340351105
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso100-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 1.65463425219059e-05,
+        "unclamped_camera_psnr": 83.93479919433594,
+        "camera_sigma": 6.0200061852810904e-05,
+        "retained_sigma_fraction": 0.20827707648277283
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso100-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 3.124531212961301e-05,
+        "unclamped_camera_psnr": 74.74365997314453,
+        "camera_sigma": 0.00017755541193764657,
+        "retained_sigma_fraction": 0.1957649141550064
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso100-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 3.428813943173736e-05,
+        "unclamped_camera_psnr": 67.07769775390625,
+        "camera_sigma": 0.00043664564145728946,
+        "retained_sigma_fraction": 0.21454264223575592
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "iso100-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 8.439601515419781e-05,
+        "unclamped_camera_psnr": 79.36331176757812,
+        "camera_sigma": 5.3674157243222e-05,
+        "retained_sigma_fraction": 0.5699816942214966
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "iso100-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.2754335077479482e-05,
+        "unclamped_camera_psnr": 82.3089599609375,
+        "camera_sigma": 6.953763659112155e-05,
+        "retained_sigma_fraction": 0.24058273434638977
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "iso100-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00012165467342128977,
+        "unclamped_camera_psnr": 73.11507415771484,
+        "camera_sigma": 0.00018061461742036045,
+        "retained_sigma_fraction": 0.1991378664970398
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "iso100-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0001868053077487275,
+        "unclamped_camera_psnr": 66.00582885742188,
+        "camera_sigma": 0.00045248307287693024,
+        "retained_sigma_fraction": 0.22232423722743988
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso100-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 7.570773050247226e-06,
+        "unclamped_camera_psnr": 88.7831802368164,
+        "camera_sigma": 3.418179403524846e-05,
+        "retained_sigma_fraction": 0.36298656463623047
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso100-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 1.4982956599851605e-05,
+        "unclamped_camera_psnr": 78.1640396118164,
+        "camera_sigma": 0.0001192980125779286,
+        "retained_sigma_fraction": 0.41274112462997437
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso100-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.0001551908499095589,
+        "unclamped_camera_psnr": 65.02146911621094,
+        "camera_sigma": 0.0005148061318323016,
+        "retained_sigma_fraction": 0.5676029920578003
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso100-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0006874729297123849,
+        "unclamped_camera_psnr": 55.9697265625,
+        "camera_sigma": 0.0012481517624109983,
+        "retained_sigma_fraction": 0.6132702231407166
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso1600-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 5.334001798473764e-06,
+        "unclamped_camera_psnr": 64.28795623779297,
+        "camera_sigma": 0.0006087037036195397,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso1600-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 4.875304057350149e-06,
+        "unclamped_camera_psnr": 58.087860107421875,
+        "camera_sigma": 0.00123437843285501,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso1600-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 4.750082007376477e-05,
+        "unclamped_camera_psnr": 48.53118133544922,
+        "camera_sigma": 0.0036957922857254744,
+        "retained_sigma_fraction": 0.9999998211860657
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso1600-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 2.5424260456929915e-05,
+        "unclamped_camera_psnr": 41.673431396484375,
+        "camera_sigma": 0.008129003457725048,
+        "retained_sigma_fraction": 1.0000001192092896
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.7660662453854457e-05,
+        "unclamped_camera_psnr": 77.38770294189453,
+        "camera_sigma": 0.00012740840611513704,
+        "retained_sigma_fraction": 0.20931103825569153
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 1.9708631953108124e-05,
+        "unclamped_camera_psnr": 72.63056182861328,
+        "camera_sigma": 0.0002285918453708291,
+        "retained_sigma_fraction": 0.18518781661987305
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 6.929431401658803e-05,
+        "unclamped_camera_psnr": 63.37228775024414,
+        "camera_sigma": 0.0006600321503356099,
+        "retained_sigma_fraction": 0.17859013378620148
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 3.355391891091131e-05,
+        "unclamped_camera_psnr": 56.38066101074219,
+        "camera_sigma": 0.0014851263258606195,
+        "retained_sigma_fraction": 0.18269477784633636
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 1.7835618564276956e-05,
+        "unclamped_camera_psnr": 77.61444091796875,
+        "camera_sigma": 0.00012849539052695036,
+        "retained_sigma_fraction": 0.21109677851200104
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.351096918573603e-05,
+        "unclamped_camera_psnr": 72.76797485351562,
+        "camera_sigma": 0.00022505185916088521,
+        "retained_sigma_fraction": 0.1823199838399887
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 8.705687650945038e-05,
+        "unclamped_camera_psnr": 63.32025146484375,
+        "camera_sigma": 0.000659368874039501,
+        "retained_sigma_fraction": 0.17841066420078278
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00021297484636306763,
+        "unclamped_camera_psnr": 56.27594757080078,
+        "camera_sigma": 0.0014884250704199076,
+        "retained_sigma_fraction": 0.18310058116912842
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 5.578429772867821e-05,
+        "unclamped_camera_psnr": 74.09052276611328,
+        "camera_sigma": 0.00018193986034020782,
+        "retained_sigma_fraction": 0.29889723658561707
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 4.800160968443379e-05,
+        "unclamped_camera_psnr": 71.4813232421875,
+        "camera_sigma": 0.0002552731893956661,
+        "retained_sigma_fraction": 0.20680302381515503
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00010919342457782477,
+        "unclamped_camera_psnr": 63.079833984375,
+        "camera_sigma": 0.0006688553257845342,
+        "retained_sigma_fraction": 0.1809774935245514
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00045085075544193387,
+        "unclamped_camera_psnr": 55.659568786621094,
+        "camera_sigma": 0.0015248273266479373,
+        "retained_sigma_fraction": 0.18757864832878113
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso1600-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.8568922061822377e-05,
+        "unclamped_camera_psnr": 88.3696060180664,
+        "camera_sigma": 2.0354429580038413e-05,
+        "retained_sigma_fraction": 0.03343897685408592
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso1600-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.43511804001173e-05,
+        "unclamped_camera_psnr": 85.37374877929688,
+        "camera_sigma": 4.392655682750046e-05,
+        "retained_sigma_fraction": 0.03558597341179848
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso1600-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00032120090327225626,
+        "unclamped_camera_psnr": 67.25362396240234,
+        "camera_sigma": 0.0001733185927150771,
+        "retained_sigma_fraction": 0.04689618572592735
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso1600-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00106291682459414,
+        "unclamped_camera_psnr": 46.42109298706055,
+        "camera_sigma": 0.004574150778353214,
+        "retained_sigma_fraction": 0.5626952052116394
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso12800-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 8.436829375568777e-05,
+        "unclamped_camera_psnr": 47.89952087402344,
+        "camera_sigma": 0.004023808520287275,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso12800-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.298828258062713e-05,
+        "unclamped_camera_psnr": 45.785499572753906,
+        "camera_sigma": 0.0051186708733439445,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso12800-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 1.5249176612996962e-05,
+        "unclamped_camera_psnr": 39.18806838989258,
+        "camera_sigma": 0.010856470093131065,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso12800-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00013689621118828654,
+        "unclamped_camera_psnr": 32.574623107910156,
+        "camera_sigma": 0.023216210305690765,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 0.000952515983954072,
+        "unclamped_camera_psnr": 59.12773132324219,
+        "camera_sigma": 0.0005570255452767015,
+        "retained_sigma_fraction": 0.13843241333961487
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 0.00010100008512381464,
+        "unclamped_camera_psnr": 60.93157196044922,
+        "camera_sigma": 0.0008773968438617885,
+        "retained_sigma_fraction": 0.17141106724739075
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.0001147951406892389,
+        "unclamped_camera_psnr": 54.69841766357422,
+        "camera_sigma": 0.00179863756056875,
+        "retained_sigma_fraction": 0.16567425429821014
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00028323644073680043,
+        "unclamped_camera_psnr": 47.16720199584961,
+        "camera_sigma": 0.004270579200237989,
+        "retained_sigma_fraction": 0.18394815921783447
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 0.0008055599755607545,
+        "unclamped_camera_psnr": 60.1366081237793,
+        "camera_sigma": 0.0005586015759035945,
+        "retained_sigma_fraction": 0.13882409036159515
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 8.948315371526405e-05,
+        "unclamped_camera_psnr": 60.948490142822266,
+        "camera_sigma": 0.0008777970215305686,
+        "retained_sigma_fraction": 0.17148925364017487
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00015424430603161454,
+        "unclamped_camera_psnr": 54.693946838378906,
+        "camera_sigma": 0.001795765943825245,
+        "retained_sigma_fraction": 0.16540974378585815
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00026485457783564925,
+        "unclamped_camera_psnr": 47.14555358886719,
+        "camera_sigma": 0.004294872283935547,
+        "retained_sigma_fraction": 0.18499454855918884
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 0.0008606871124356985,
+        "unclamped_camera_psnr": 59.459529876708984,
+        "camera_sigma": 0.0006175857852213085,
+        "retained_sigma_fraction": 0.15348289906978607
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 0.00017534877406433225,
+        "unclamped_camera_psnr": 60.137962341308594,
+        "camera_sigma": 0.0009520460735075176,
+        "retained_sigma_fraction": 0.18599478900432587
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00014397833729162812,
+        "unclamped_camera_psnr": 54.33876419067383,
+        "camera_sigma": 0.0018823500722646713,
+        "retained_sigma_fraction": 0.17338509857654572
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0004826500953640789,
+        "unclamped_camera_psnr": 46.861209869384766,
+        "camera_sigma": 0.0044026924297213554,
+        "retained_sigma_fraction": 0.18963871896266937
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso12800-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 0.0001555346534587443,
+        "unclamped_camera_psnr": 75.34931945800781,
+        "camera_sigma": 4.49268554802984e-05,
+        "retained_sigma_fraction": 0.01116525661200285
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso12800-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 0.0002571303048171103,
+        "unclamped_camera_psnr": 70.4515380859375,
+        "camera_sigma": 0.00011917098163394257,
+        "retained_sigma_fraction": 0.023281626403331757
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso12800-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00047094898764044046,
+        "unclamped_camera_psnr": 64.41558074951172,
+        "camera_sigma": 0.00034096671151928604,
+        "retained_sigma_fraction": 0.03140677511692047
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso12800-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0018265207763761282,
+        "unclamped_camera_psnr": 52.572486877441406,
+        "camera_sigma": 0.0009520822204649448,
+        "retained_sigma_fraction": 0.04100937396287918
+      },
+      {
+        "model": "Bilinear",
+        "condition": "shadows",
+        "scene_level": 0.001,
+        "camera_abs_bias": 1.5855926903896034e-05,
+        "unclamped_camera_psnr": 60.03697967529297,
+        "camera_sigma": 0.0009950887179002166,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "shadows",
+        "scene_level": 0.01,
+        "camera_abs_bias": 1.497727043897612e-05,
+        "unclamped_camera_psnr": 58.91302490234375,
+        "camera_sigma": 0.0011304512154310942,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "shadows",
+        "scene_level": 0.1,
+        "camera_abs_bias": 2.1748204744653776e-05,
+        "unclamped_camera_psnr": 53.66994857788086,
+        "camera_sigma": 0.0020566433668136597,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "shadows",
+        "scene_level": 0.5,
+        "camera_abs_bias": 4.1497929487377405e-05,
+        "unclamped_camera_psnr": 47.474971771240234,
+        "camera_sigma": 0.004169217776507139,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "shadows",
+        "scene_level": 0.001,
+        "camera_abs_bias": 0.0003833575174212456,
+        "unclamped_camera_psnr": 67.58475494384766,
+        "camera_sigma": 0.00016026133380364627,
+        "retained_sigma_fraction": 0.16105230152606964
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "shadows",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.9865735996281728e-05,
+        "unclamped_camera_psnr": 74.07086181640625,
+        "camera_sigma": 0.00019203871488571167,
+        "retained_sigma_fraction": 0.16987793147563934
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "shadows",
+        "scene_level": 0.1,
+        "camera_abs_bias": 4.412516864249483e-05,
+        "unclamped_camera_psnr": 68.22510528564453,
+        "camera_sigma": 0.00037877069553360343,
+        "retained_sigma_fraction": 0.18416936695575714
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "shadows",
+        "scene_level": 0.5,
+        "camera_abs_bias": 9.823295840760693e-05,
+        "unclamped_camera_psnr": 62.48014831542969,
+        "camera_sigma": 0.0007261676946654916,
+        "retained_sigma_fraction": 0.17417360842227936
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "shadows",
+        "scene_level": 0.001,
+        "camera_abs_bias": 0.00023281073663383722,
+        "unclamped_camera_psnr": 70.95782470703125,
+        "camera_sigma": 0.00015826661547180265,
+        "retained_sigma_fraction": 0.15904773771762848
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "shadows",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.7563892217585817e-05,
+        "unclamped_camera_psnr": 74.10916900634766,
+        "camera_sigma": 0.00019288067414890975,
+        "retained_sigma_fraction": 0.17062273621559143
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "shadows",
+        "scene_level": 0.1,
+        "camera_abs_bias": 3.9629972889088094e-05,
+        "unclamped_camera_psnr": 68.29608917236328,
+        "camera_sigma": 0.0003765000437851995,
+        "retained_sigma_fraction": 0.18306531012058258
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "shadows",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00011893928603967652,
+        "unclamped_camera_psnr": 62.422210693359375,
+        "camera_sigma": 0.000725744990631938,
+        "retained_sigma_fraction": 0.17407222092151642
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "shadows",
+        "scene_level": 0.001,
+        "camera_abs_bias": 0.00042528792982921004,
+        "unclamped_camera_psnr": 66.45201110839844,
+        "camera_sigma": 0.00020355153537821025,
+        "retained_sigma_fraction": 0.2045561671257019
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "shadows",
+        "scene_level": 0.01,
+        "camera_abs_bias": 4.179776442470029e-05,
+        "unclamped_camera_psnr": 71.74235534667969,
+        "camera_sigma": 0.0002480072434991598,
+        "retained_sigma_fraction": 0.21938782930374146
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "shadows",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00010590216697892174,
+        "unclamped_camera_psnr": 67.17467498779297,
+        "camera_sigma": 0.00041355632129125297,
+        "retained_sigma_fraction": 0.20108315348625183
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "shadows",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0001391381083521992,
+        "unclamped_camera_psnr": 62.2030029296875,
+        "camera_sigma": 0.0007459141197614372,
+        "retained_sigma_fraction": 0.17890985310077667
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "shadows",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.4131002646754496e-05,
+        "unclamped_camera_psnr": 91.3251953125,
+        "camera_sigma": 8.59400097397156e-06,
+        "retained_sigma_fraction": 0.008636416867375374
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "shadows",
+        "scene_level": 0.01,
+        "camera_abs_bias": 3.0141640309011564e-05,
+        "unclamped_camera_psnr": 86.97994995117188,
+        "camera_sigma": 3.160376945743337e-05,
+        "retained_sigma_fraction": 0.027956774458289146
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "shadows",
+        "scene_level": 0.1,
+        "camera_abs_bias": 4.586210707202554e-05,
+        "unclamped_camera_psnr": 81.37814331054688,
+        "camera_sigma": 6.137331365607679e-05,
+        "retained_sigma_fraction": 0.02984149567782879
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "shadows",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00029472599271684885,
+        "unclamped_camera_psnr": 68.48179626464844,
+        "camera_sigma": 0.00016206626605708152,
+        "retained_sigma_fraction": 0.03887210413813591
+      },
+      {
+        "model": "Bilinear",
+        "condition": "highlights",
+        "scene_level": 0.001,
+        "camera_abs_bias": 1.5689390693296446e-06,
+        "unclamped_camera_psnr": 68.40097045898438,
+        "camera_sigma": 0.0003753674100153148,
+        "retained_sigma_fraction": 0.9999999403953552
+      },
+      {
+        "model": "Bilinear",
+        "condition": "highlights",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.147133636754006e-05,
+        "unclamped_camera_psnr": 58.57386016845703,
+        "camera_sigma": 0.0011631688103079796,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "highlights",
+        "scene_level": 0.1,
+        "camera_abs_bias": 3.4969740227097645e-05,
+        "unclamped_camera_psnr": 48.62744903564453,
+        "camera_sigma": 0.003652189625427127,
+        "retained_sigma_fraction": 0.9999999403953552
+      },
+      {
+        "model": "Bilinear",
+        "condition": "highlights",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.27659833431243896,
+        "unclamped_camera_psnr": 9.237232208251953,
+        "camera_sigma": 0.0012975622666999698,
+        "retained_sigma_fraction": 0.9999980926513672
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "highlights",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.5630593881942332e-05,
+        "unclamped_camera_psnr": 81.7703628540039,
+        "camera_sigma": 7.5791213021148e-05,
+        "retained_sigma_fraction": 0.201912060379982
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "highlights",
+        "scene_level": 0.01,
+        "camera_abs_bias": 1.329477072431473e-05,
+        "unclamped_camera_psnr": 72.92903137207031,
+        "camera_sigma": 0.00022127343981992453,
+        "retained_sigma_fraction": 0.19023330509662628
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "highlights",
+        "scene_level": 0.1,
+        "camera_abs_bias": 5.525270171347074e-05,
+        "unclamped_camera_psnr": 62.85257339477539,
+        "camera_sigma": 0.0007036005845293403,
+        "retained_sigma_fraction": 0.19265170395374298
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "highlights",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.018646202981472015,
+        "unclamped_camera_psnr": 33.647735595703125,
+        "camera_sigma": 0.003282231744378805,
+        "retained_sigma_fraction": 2.5295321941375732
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "highlights",
+        "scene_level": 0.001,
+        "camera_abs_bias": 1.3187025615479797e-05,
+        "unclamped_camera_psnr": 82.34579467773438,
+        "camera_sigma": 7.378734881058335e-05,
+        "retained_sigma_fraction": 0.1965736597776413
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "highlights",
+        "scene_level": 0.01,
+        "camera_abs_bias": 3.650984581327066e-05,
+        "unclamped_camera_psnr": 73.00057220458984,
+        "camera_sigma": 0.0002169623039662838,
+        "retained_sigma_fraction": 0.18652692437171936
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "highlights",
+        "scene_level": 0.1,
+        "camera_abs_bias": 5.934404180152342e-05,
+        "unclamped_camera_psnr": 62.881412506103516,
+        "camera_sigma": 0.00070238730404526,
+        "retained_sigma_fraction": 0.19231949746608734
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "highlights",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.008993513882160187,
+        "unclamped_camera_psnr": 38.203887939453125,
+        "camera_sigma": 0.003712837351486087,
+        "retained_sigma_fraction": 2.861388921737671
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "highlights",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.8676498914137483e-05,
+        "unclamped_camera_psnr": 79.43352508544922,
+        "camera_sigma": 9.91461201920174e-05,
+        "retained_sigma_fraction": 0.2641308605670929
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "highlights",
+        "scene_level": 0.01,
+        "camera_abs_bias": 7.92099381214939e-05,
+        "unclamped_camera_psnr": 72.33002471923828,
+        "camera_sigma": 0.00022248257300816476,
+        "retained_sigma_fraction": 0.1912728101015091
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "highlights",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00014645686314906925,
+        "unclamped_camera_psnr": 62.589454650878906,
+        "camera_sigma": 0.0007125501288101077,
+        "retained_sigma_fraction": 0.19510215520858765
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "highlights",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.006791198626160622,
+        "unclamped_camera_psnr": 41.39674377441406,
+        "camera_sigma": 0.002814110368490219,
+        "retained_sigma_fraction": 2.1687629222869873
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "highlights",
+        "scene_level": 0.001,
+        "camera_abs_bias": 1.9626291759777814e-05,
+        "unclamped_camera_psnr": 88.17658233642578,
+        "camera_sigma": 3.115865547442809e-05,
+        "retained_sigma_fraction": 0.08300841599702835
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "highlights",
+        "scene_level": 0.01,
+        "camera_abs_bias": 0.00011750198609661311,
+        "unclamped_camera_psnr": 74.08434295654297,
+        "camera_sigma": 0.00011933164205402136,
+        "retained_sigma_fraction": 0.1025918498635292
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "highlights",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.000867013237439096,
+        "unclamped_camera_psnr": 52.505836486816406,
+        "camera_sigma": 0.00213896157220006,
+        "retained_sigma_fraction": 0.5856654644012451
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "highlights",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.27750661969184875,
+        "unclamped_camera_psnr": 9.171936988830566,
+        "camera_sigma": 0.0023033786565065384,
+        "retained_sigma_fraction": 1.7751551866531372
+      },
+      {
+        "model": "Bilinear",
+        "condition": "legacy-noise",
+        "scene_level": 0.001,
+        "camera_abs_bias": 1.1855016055051237e-05,
+        "unclamped_camera_psnr": 59.90692138671875,
+        "camera_sigma": 0.0010072863660752773,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "legacy-noise",
+        "scene_level": 0.01,
+        "camera_abs_bias": 7.210153853520751e-06,
+        "unclamped_camera_psnr": 53.186256408691406,
+        "camera_sigma": 0.002165411598980427,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "legacy-noise",
+        "scene_level": 0.1,
+        "camera_abs_bias": 7.323517638724297e-05,
+        "unclamped_camera_psnr": 43.65131378173828,
+        "camera_sigma": 0.006475555710494518,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "legacy-noise",
+        "scene_level": 0.5,
+        "camera_abs_bias": 7.84064395702444e-05,
+        "unclamped_camera_psnr": 36.73355484008789,
+        "camera_sigma": 0.014375119470059872,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "legacy-noise",
+        "scene_level": 0.001,
+        "camera_abs_bias": 5.577831689151935e-05,
+        "unclamped_camera_psnr": 73.46825408935547,
+        "camera_sigma": 0.00020114716608077288,
+        "retained_sigma_fraction": 0.19969213008880615
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "legacy-noise",
+        "scene_level": 0.01,
+        "camera_abs_bias": 4.4277643610257655e-05,
+        "unclamped_camera_psnr": 66.89492797851562,
+        "camera_sigma": 0.00044180575059726834,
+        "retained_sigma_fraction": 0.20402853190898895
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "legacy-noise",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.0001195555305457674,
+        "unclamped_camera_psnr": 58.9100341796875,
+        "camera_sigma": 0.0010991673916578293,
+        "retained_sigma_fraction": 0.16974101960659027
+      },
+      {
+        "model": "0:dino-flat-bf16-v12:step-1000",
+        "condition": "legacy-noise",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.000220586167415604,
+        "unclamped_camera_psnr": 51.28974533081055,
+        "camera_sigma": 0.002654129406437278,
+        "retained_sigma_fraction": 0.1846335530281067
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "legacy-noise",
+        "scene_level": 0.001,
+        "camera_abs_bias": 4.2313953599659726e-05,
+        "unclamped_camera_psnr": 73.58137512207031,
+        "camera_sigma": 0.0002030682226177305,
+        "retained_sigma_fraction": 0.20159929990768433
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "legacy-noise",
+        "scene_level": 0.01,
+        "camera_abs_bias": 3.180341445840895e-05,
+        "unclamped_camera_psnr": 66.9149169921875,
+        "camera_sigma": 0.0004424765647854656,
+        "retained_sigma_fraction": 0.20433831214904785
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "legacy-noise",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.0001915574976010248,
+        "unclamped_camera_psnr": 58.8370361328125,
+        "camera_sigma": 0.0010987407295033336,
+        "retained_sigma_fraction": 0.16967512667179108
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "legacy-noise",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0001440400956198573,
+        "unclamped_camera_psnr": 51.24760055541992,
+        "camera_sigma": 0.0026751947589218616,
+        "retained_sigma_fraction": 0.18609896302223206
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "legacy-noise",
+        "scene_level": 0.001,
+        "camera_abs_bias": 6.233117892406881e-05,
+        "unclamped_camera_psnr": 69.94983673095703,
+        "camera_sigma": 0.00030398316448554397,
+        "retained_sigma_fraction": 0.3017842471599579
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "legacy-noise",
+        "scene_level": 0.01,
+        "camera_abs_bias": 9.602731734048575e-05,
+        "unclamped_camera_psnr": 65.54835510253906,
+        "camera_sigma": 0.0005069401231594384,
+        "retained_sigma_fraction": 0.23410797119140625
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "legacy-noise",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.0001488732232246548,
+        "unclamped_camera_psnr": 58.610958099365234,
+        "camera_sigma": 0.0011380811920389533,
+        "retained_sigma_fraction": 0.17575034499168396
+      },
+      {
+        "model": "2:dino-paired-commons-44732-v11:step-5000",
+        "condition": "legacy-noise",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0004990792367607355,
+        "unclamped_camera_psnr": 50.88732147216797,
+        "camera_sigma": 0.002747588325291872,
+        "retained_sigma_fraction": 0.1911349892616272
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "legacy-noise",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.300438609381672e-05,
+        "unclamped_camera_psnr": 88.577392578125,
+        "camera_sigma": 2.7774083719123155e-05,
+        "retained_sigma_fraction": 0.027573175728321075
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "legacy-noise",
+        "scene_level": 0.01,
+        "camera_abs_bias": 4.1514853364787996e-05,
+        "unclamped_camera_psnr": 82.07320404052734,
+        "camera_sigma": 6.434768147300929e-05,
+        "retained_sigma_fraction": 0.029716143384575844
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "legacy-noise",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.0003291398170404136,
+        "unclamped_camera_psnr": 66.375732421875,
+        "camera_sigma": 0.00022728931799065322,
+        "retained_sigma_fraction": 0.035099584609270096
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "legacy-noise",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0018719605868682265,
+        "unclamped_camera_psnr": 52.493255615234375,
+        "camera_sigma": 0.0008436423959210515,
+        "retained_sigma_fraction": 0.05868767946958542
+      }
+    ],
+    "border": 32,
+    "size": 256
+  },
+  "flat_refiner": {
+    "report": "/mnt/external/demosaic/evaluation/flat-refiner-v14-review/result.json",
+    "report_sha256": "cb0c377b62de3938037fbc6d4d586526e23d24c46f54776f3fe79e6175cfe667",
+    "source_sha256": "9e8efb101708b778a0cfcf57bff02c758d9ed678018cd03df1e612b84b344b7a",
+    "models": [
+      {
+        "label": "0:dino-flat-refiner-v14:step-1000",
+        "sha256": "8dd5dd893b9e040a5c93c49cce0396eed4e647cdae78555c8c41576086d745c9",
+        "config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": true,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63
+        },
+        "training_run": "/mnt/external/demosaic/runs/dino-flat-refiner-v14",
+        "snapshot": "/mnt/external/demosaic/evaluation/flat-refiner-v14-review/weights/weights-8dd5dd893b9e040a5c93c49cce0396eed4e647cdae78555c8c41576086d745c9.pt",
+        "compute_precision": "float16",
+        "memory_format": "channels_last"
+      },
+      {
+        "label": "1:dino-flat-fp32-v13:step-1000",
+        "sha256": "6cbadb5107037c585ac77b3d93b4d73d3b0e115d7bf02d1b23c434514ef28370",
+        "config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63
+        },
+        "training_run": "/mnt/external/demosaic/runs/dino-flat-fp32-v13",
+        "snapshot": "/mnt/external/demosaic/evaluation/flat-refiner-v14-review/weights/weights-6cbadb5107037c585ac77b3d93b4d73d3b0e115d7bf02d1b23c434514ef28370.pt",
+        "compute_precision": "float16",
+        "memory_format": "channels_last"
+      },
+      {
+        "label": "RawNIND:CFA-LS",
+        "gain": "observed-CFA-least-squares",
+        "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "compute_precision": "IEEE float32",
+        "input": "Signed/unclipped synthetic sensor units"
+      }
+    ],
+    "cases": [
+      {
+        "model": "Bilinear",
+        "condition": "adc-only",
+        "scene_level": 0.001,
+        "camera_abs_bias": 5.117675755172968e-06,
+        "unclamped_camera_psnr": 105.31017303466797,
+        "camera_sigma": 0.0,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "Bilinear",
+        "condition": "adc-only",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.7418136596679688e-06,
+        "unclamped_camera_psnr": 110.68144226074219,
+        "camera_sigma": 0.0,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "Bilinear",
+        "condition": "adc-only",
+        "scene_level": 0.1,
+        "camera_abs_bias": 2.9938917123217834e-06,
+        "unclamped_camera_psnr": 106.84211730957031,
+        "camera_sigma": 0.0,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "Bilinear",
+        "condition": "adc-only",
+        "scene_level": 0.5,
+        "camera_abs_bias": 5.553166374738794e-06,
+        "unclamped_camera_psnr": 104.8618392944336,
+        "camera_sigma": 0.0,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "adc-only",
+        "scene_level": 0.001,
+        "camera_abs_bias": 3.943254705518484e-05,
+        "unclamped_camera_psnr": 85.0820083618164,
+        "camera_sigma": 3.298419323982671e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "adc-only",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.957554897875525e-05,
+        "unclamped_camera_psnr": 86.41312408447266,
+        "camera_sigma": 3.310793181299232e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "adc-only",
+        "scene_level": 0.1,
+        "camera_abs_bias": 4.799223825102672e-05,
+        "unclamped_camera_psnr": 83.1932373046875,
+        "camera_sigma": 3.9489019400207326e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "adc-only",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.000125910562928766,
+        "unclamped_camera_psnr": 74.28714752197266,
+        "camera_sigma": 0.00010137259232578799,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "adc-only",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.4607052182545885e-05,
+        "unclamped_camera_psnr": 90.43472290039062,
+        "camera_sigma": 1.7137454051407985e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "adc-only",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.2514923330163583e-05,
+        "unclamped_camera_psnr": 90.56941223144531,
+        "camera_sigma": 1.773562325979583e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "adc-only",
+        "scene_level": 0.1,
+        "camera_abs_bias": 1.175853958557127e-05,
+        "unclamped_camera_psnr": 90.60977935791016,
+        "camera_sigma": 2.6075291316374205e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "adc-only",
+        "scene_level": 0.5,
+        "camera_abs_bias": 8.484566933475435e-05,
+        "unclamped_camera_psnr": 77.33809661865234,
+        "camera_sigma": 9.60501201916486e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "adc-only",
+        "scene_level": 0.001,
+        "camera_abs_bias": 7.879402801336255e-06,
+        "unclamped_camera_psnr": 98.67729949951172,
+        "camera_sigma": 7.120594091247767e-06,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "adc-only",
+        "scene_level": 0.01,
+        "camera_abs_bias": 8.604705726611428e-06,
+        "unclamped_camera_psnr": 97.65011596679688,
+        "camera_sigma": 7.674092557863332e-06,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "adc-only",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00015887357585597783,
+        "unclamped_camera_psnr": 73.48812103271484,
+        "camera_sigma": 6.916832353454083e-05,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "adc-only",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0005500981351360679,
+        "unclamped_camera_psnr": 59.906768798828125,
+        "camera_sigma": 0.00033669848926365376,
+        "retained_sigma_fraction": null
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso100-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.9000014478697267e-07,
+        "unclamped_camera_psnr": 80.41355895996094,
+        "camera_sigma": 9.416820830665529e-05,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso100-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.0263846636225935e-06,
+        "unclamped_camera_psnr": 70.66716003417969,
+        "camera_sigma": 0.0002890383475460112,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso100-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 1.3974340618005954e-05,
+        "unclamped_camera_psnr": 60.726890563964844,
+        "camera_sigma": 0.0009069828083738685,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso100-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 8.1190946730203e-06,
+        "unclamped_camera_psnr": 53.70243453979492,
+        "camera_sigma": 0.0020352392457425594,
+        "retained_sigma_fraction": 0.9999998807907104
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "iso100-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 8.039647218538448e-05,
+        "unclamped_camera_psnr": 80.84925842285156,
+        "camera_sigma": 1.9773211533902213e-05,
+        "retained_sigma_fraction": 0.20997756719589233
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "iso100-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.3526976292487234e-05,
+        "unclamped_camera_psnr": 89.70447540283203,
+        "camera_sigma": 2.093420880555641e-05,
+        "retained_sigma_fraction": 0.07242710143327713
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "iso100-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 8.924493158701807e-05,
+        "unclamped_camera_psnr": 79.57782745361328,
+        "camera_sigma": 5.228433292359114e-05,
+        "retained_sigma_fraction": 0.05764644220471382
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "iso100-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00021631682466249913,
+        "unclamped_camera_psnr": 71.11360931396484,
+        "camera_sigma": 0.00013403300545178354,
+        "retained_sigma_fraction": 0.06585613638162613
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso100-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 1.4101528904575389e-05,
+        "unclamped_camera_psnr": 87.95823669433594,
+        "camera_sigma": 3.710681266966276e-05,
+        "retained_sigma_fraction": 0.39404818415641785
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso100-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 1.8843689758796245e-05,
+        "unclamped_camera_psnr": 83.6665267944336,
+        "camera_sigma": 6.168597610667348e-05,
+        "retained_sigma_fraction": 0.21341796219348907
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso100-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 2.6652309315977618e-05,
+        "unclamped_camera_psnr": 74.75819396972656,
+        "camera_sigma": 0.0001778494770405814,
+        "retained_sigma_fraction": 0.19608913362026215
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso100-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 3.623034353950061e-05,
+        "unclamped_camera_psnr": 67.07099151611328,
+        "camera_sigma": 0.0004367601068224758,
+        "retained_sigma_fraction": 0.2145988792181015
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso100-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 7.570773050247226e-06,
+        "unclamped_camera_psnr": 88.7831802368164,
+        "camera_sigma": 3.418179403524846e-05,
+        "retained_sigma_fraction": 0.36298656463623047
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso100-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 1.4982956599851605e-05,
+        "unclamped_camera_psnr": 78.1640396118164,
+        "camera_sigma": 0.0001192980125779286,
+        "retained_sigma_fraction": 0.41274112462997437
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso100-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.0001551908499095589,
+        "unclamped_camera_psnr": 65.02146911621094,
+        "camera_sigma": 0.0005148061318323016,
+        "retained_sigma_fraction": 0.5676029920578003
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso100-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0006874729297123849,
+        "unclamped_camera_psnr": 55.9697265625,
+        "camera_sigma": 0.0012481517624109983,
+        "retained_sigma_fraction": 0.6132702231407166
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso1600-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 5.334001798473764e-06,
+        "unclamped_camera_psnr": 64.28795623779297,
+        "camera_sigma": 0.0006087037036195397,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso1600-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 4.875304057350149e-06,
+        "unclamped_camera_psnr": 58.087860107421875,
+        "camera_sigma": 0.00123437843285501,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso1600-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 4.750082007376477e-05,
+        "unclamped_camera_psnr": 48.53118133544922,
+        "camera_sigma": 0.0036957922857254744,
+        "retained_sigma_fraction": 0.9999998211860657
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso1600-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 2.5424260456929915e-05,
+        "unclamped_camera_psnr": 41.673431396484375,
+        "camera_sigma": 0.008129003457725048,
+        "retained_sigma_fraction": 1.0000001192092896
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 4.6044278860790655e-05,
+        "unclamped_camera_psnr": 81.64158630371094,
+        "camera_sigma": 5.926304584136233e-05,
+        "retained_sigma_fraction": 0.09735943377017975
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.7867294193129055e-05,
+        "unclamped_camera_psnr": 81.24732971191406,
+        "camera_sigma": 7.54894208512269e-05,
+        "retained_sigma_fraction": 0.06115581467747688
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00010113891039509326,
+        "unclamped_camera_psnr": 72.65333557128906,
+        "camera_sigma": 0.00017947459127753973,
+        "retained_sigma_fraction": 0.04856186360120773
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0004503738309722394,
+        "unclamped_camera_psnr": 63.45861053466797,
+        "camera_sigma": 0.0004313849494792521,
+        "retained_sigma_fraction": 0.053067389875650406
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 1.3385249985731207e-05,
+        "unclamped_camera_psnr": 77.6028060913086,
+        "camera_sigma": 0.00012916175182908773,
+        "retained_sigma_fraction": 0.21219150722026825
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 1.819477984099649e-05,
+        "unclamped_camera_psnr": 72.76339721679688,
+        "camera_sigma": 0.00022562697995454073,
+        "retained_sigma_fraction": 0.18278589844703674
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 8.096792589640245e-05,
+        "unclamped_camera_psnr": 63.324554443359375,
+        "camera_sigma": 0.0006599397165700793,
+        "retained_sigma_fraction": 0.178565114736557
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso1600-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0002193898835685104,
+        "unclamped_camera_psnr": 56.267974853515625,
+        "camera_sigma": 0.0014889793237671256,
+        "retained_sigma_fraction": 0.18316875398159027
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso1600-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.8568922061822377e-05,
+        "unclamped_camera_psnr": 88.3696060180664,
+        "camera_sigma": 2.0354429580038413e-05,
+        "retained_sigma_fraction": 0.03343897685408592
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso1600-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.43511804001173e-05,
+        "unclamped_camera_psnr": 85.37374877929688,
+        "camera_sigma": 4.392655682750046e-05,
+        "retained_sigma_fraction": 0.03558597341179848
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso1600-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00032120090327225626,
+        "unclamped_camera_psnr": 67.25362396240234,
+        "camera_sigma": 0.0001733185927150771,
+        "retained_sigma_fraction": 0.04689618572592735
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso1600-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00106291682459414,
+        "unclamped_camera_psnr": 46.42109298706055,
+        "camera_sigma": 0.004574150778353214,
+        "retained_sigma_fraction": 0.5626952052116394
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso12800-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 8.436829375568777e-05,
+        "unclamped_camera_psnr": 47.89952087402344,
+        "camera_sigma": 0.004023808520287275,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso12800-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.298828258062713e-05,
+        "unclamped_camera_psnr": 45.785499572753906,
+        "camera_sigma": 0.0051186708733439445,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso12800-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 1.5249176612996962e-05,
+        "unclamped_camera_psnr": 39.18806838989258,
+        "camera_sigma": 0.010856470093131065,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "iso12800-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00013689621118828654,
+        "unclamped_camera_psnr": 32.574623107910156,
+        "camera_sigma": 0.023216210305690765,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 0.0007930536521598697,
+        "unclamped_camera_psnr": 61.768131256103516,
+        "camera_sigma": 0.00017878580547403544,
+        "retained_sigma_fraction": 0.04443198814988136
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 0.00015222953516058624,
+        "unclamped_camera_psnr": 69.94158935546875,
+        "camera_sigma": 0.0002655080461408943,
+        "retained_sigma_fraction": 0.05187050625681877
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 9.916735871229321e-05,
+        "unclamped_camera_psnr": 65.11650085449219,
+        "camera_sigma": 0.0005187636706978083,
+        "retained_sigma_fraction": 0.04778382554650307
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0005518465768545866,
+        "unclamped_camera_psnr": 56.64588165283203,
+        "camera_sigma": 0.001323752454482019,
+        "retained_sigma_fraction": 0.0570184551179409
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 0.0007954878965392709,
+        "unclamped_camera_psnr": 60.20879364013672,
+        "camera_sigma": 0.0005586369661614299,
+        "retained_sigma_fraction": 0.13883289694786072
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 8.680816245032474e-05,
+        "unclamped_camera_psnr": 60.95000457763672,
+        "camera_sigma": 0.0008780711214058101,
+        "retained_sigma_fraction": 0.17154279351234436
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00015110631647985429,
+        "unclamped_camera_psnr": 54.69578170776367,
+        "camera_sigma": 0.0017959848046302795,
+        "retained_sigma_fraction": 0.16542990505695343
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "iso12800-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00026649280334822834,
+        "unclamped_camera_psnr": 47.143802642822266,
+        "camera_sigma": 0.00429554795846343,
+        "retained_sigma_fraction": 0.18502365052700043
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso12800-prior",
+        "scene_level": 0.001,
+        "camera_abs_bias": 0.0001555346534587443,
+        "unclamped_camera_psnr": 75.34931945800781,
+        "camera_sigma": 4.49268554802984e-05,
+        "retained_sigma_fraction": 0.01116525661200285
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso12800-prior",
+        "scene_level": 0.01,
+        "camera_abs_bias": 0.0002571303048171103,
+        "unclamped_camera_psnr": 70.4515380859375,
+        "camera_sigma": 0.00011917098163394257,
+        "retained_sigma_fraction": 0.023281626403331757
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso12800-prior",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00047094898764044046,
+        "unclamped_camera_psnr": 64.41558074951172,
+        "camera_sigma": 0.00034096671151928604,
+        "retained_sigma_fraction": 0.03140677511692047
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "iso12800-prior",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0018265207763761282,
+        "unclamped_camera_psnr": 52.572486877441406,
+        "camera_sigma": 0.0009520822204649448,
+        "retained_sigma_fraction": 0.04100937396287918
+      },
+      {
+        "model": "Bilinear",
+        "condition": "shadows",
+        "scene_level": 0.001,
+        "camera_abs_bias": 1.5855926903896034e-05,
+        "unclamped_camera_psnr": 60.03697967529297,
+        "camera_sigma": 0.0009950887179002166,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "shadows",
+        "scene_level": 0.01,
+        "camera_abs_bias": 1.497727043897612e-05,
+        "unclamped_camera_psnr": 58.91302490234375,
+        "camera_sigma": 0.0011304512154310942,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "shadows",
+        "scene_level": 0.1,
+        "camera_abs_bias": 2.1748204744653776e-05,
+        "unclamped_camera_psnr": 53.66994857788086,
+        "camera_sigma": 0.0020566433668136597,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "shadows",
+        "scene_level": 0.5,
+        "camera_abs_bias": 4.1497929487377405e-05,
+        "unclamped_camera_psnr": 47.474971771240234,
+        "camera_sigma": 0.004169217776507139,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "shadows",
+        "scene_level": 0.001,
+        "camera_abs_bias": 0.00038373982533812523,
+        "unclamped_camera_psnr": 68.13179779052734,
+        "camera_sigma": 6.241194205358624e-05,
+        "retained_sigma_fraction": 0.06271997839212418
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "shadows",
+        "scene_level": 0.01,
+        "camera_abs_bias": 3.9782295061741024e-05,
+        "unclamped_camera_psnr": 81.05548858642578,
+        "camera_sigma": 7.55215878598392e-05,
+        "retained_sigma_fraction": 0.06680658459663391
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "shadows",
+        "scene_level": 0.1,
+        "camera_abs_bias": 7.56341905798763e-05,
+        "unclamped_camera_psnr": 76.40565490722656,
+        "camera_sigma": 0.00011644423648249358,
+        "retained_sigma_fraction": 0.0566185861825943
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "shadows",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00010629271855577826,
+        "unclamped_camera_psnr": 72.41959381103516,
+        "camera_sigma": 0.00020372786093503237,
+        "retained_sigma_fraction": 0.04886476695537567
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "shadows",
+        "scene_level": 0.001,
+        "camera_abs_bias": 0.0002235683932667598,
+        "unclamped_camera_psnr": 71.17417907714844,
+        "camera_sigma": 0.0001591158943483606,
+        "retained_sigma_fraction": 0.1599012166261673
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "shadows",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.2599784642807208e-05,
+        "unclamped_camera_psnr": 74.11719512939453,
+        "camera_sigma": 0.00019332367810420692,
+        "retained_sigma_fraction": 0.17101460695266724
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "shadows",
+        "scene_level": 0.1,
+        "camera_abs_bias": 3.684808689286001e-05,
+        "unclamped_camera_psnr": 68.29549407958984,
+        "camera_sigma": 0.00037694041384384036,
+        "retained_sigma_fraction": 0.18327942490577698
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "shadows",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00011616539995884523,
+        "unclamped_camera_psnr": 62.43178939819336,
+        "camera_sigma": 0.0007259284611791372,
+        "retained_sigma_fraction": 0.17411622405052185
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "shadows",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.4131002646754496e-05,
+        "unclamped_camera_psnr": 91.3251953125,
+        "camera_sigma": 8.59400097397156e-06,
+        "retained_sigma_fraction": 0.008636416867375374
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "shadows",
+        "scene_level": 0.01,
+        "camera_abs_bias": 3.0141640309011564e-05,
+        "unclamped_camera_psnr": 86.97994995117188,
+        "camera_sigma": 3.160376945743337e-05,
+        "retained_sigma_fraction": 0.027956774458289146
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "shadows",
+        "scene_level": 0.1,
+        "camera_abs_bias": 4.586210707202554e-05,
+        "unclamped_camera_psnr": 81.37814331054688,
+        "camera_sigma": 6.137331365607679e-05,
+        "retained_sigma_fraction": 0.02984149567782879
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "shadows",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00029472599271684885,
+        "unclamped_camera_psnr": 68.48179626464844,
+        "camera_sigma": 0.00016206626605708152,
+        "retained_sigma_fraction": 0.03887210413813591
+      },
+      {
+        "model": "Bilinear",
+        "condition": "highlights",
+        "scene_level": 0.001,
+        "camera_abs_bias": 1.5689390693296446e-06,
+        "unclamped_camera_psnr": 68.40097045898438,
+        "camera_sigma": 0.0003753674100153148,
+        "retained_sigma_fraction": 0.9999999403953552
+      },
+      {
+        "model": "Bilinear",
+        "condition": "highlights",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.147133636754006e-05,
+        "unclamped_camera_psnr": 58.57386016845703,
+        "camera_sigma": 0.0011631688103079796,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "highlights",
+        "scene_level": 0.1,
+        "camera_abs_bias": 3.4969740227097645e-05,
+        "unclamped_camera_psnr": 48.62744903564453,
+        "camera_sigma": 0.003652189625427127,
+        "retained_sigma_fraction": 0.9999999403953552
+      },
+      {
+        "model": "Bilinear",
+        "condition": "highlights",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.27659833431243896,
+        "unclamped_camera_psnr": 9.237232208251953,
+        "camera_sigma": 0.0012975622666999698,
+        "retained_sigma_fraction": 0.9999980926513672
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "highlights",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.8117950932937674e-05,
+        "unclamped_camera_psnr": 87.00057220458984,
+        "camera_sigma": 3.170526906615123e-05,
+        "retained_sigma_fraction": 0.08446462452411652
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "highlights",
+        "scene_level": 0.01,
+        "camera_abs_bias": 4.651193739846349e-05,
+        "unclamped_camera_psnr": 81.77897644042969,
+        "camera_sigma": 6.245679105632007e-05,
+        "retained_sigma_fraction": 0.05369538068771362
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "highlights",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.000178739515831694,
+        "unclamped_camera_psnr": 71.04413604736328,
+        "camera_sigma": 0.00019747589249163866,
+        "retained_sigma_fraction": 0.05407054349780083
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "highlights",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.006573641672730446,
+        "unclamped_camera_psnr": 42.28863525390625,
+        "camera_sigma": 0.0007476411992684007,
+        "retained_sigma_fraction": 0.5761879682540894
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "highlights",
+        "scene_level": 0.001,
+        "camera_abs_bias": 1.5413037544931285e-05,
+        "unclamped_camera_psnr": 82.17688751220703,
+        "camera_sigma": 7.498946797568351e-05,
+        "retained_sigma_fraction": 0.19977617263793945
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "highlights",
+        "scene_level": 0.01,
+        "camera_abs_bias": 3.127218224108219e-05,
+        "unclamped_camera_psnr": 73.00762939453125,
+        "camera_sigma": 0.00021755379566457123,
+        "retained_sigma_fraction": 0.1870354413986206
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "highlights",
+        "scene_level": 0.1,
+        "camera_abs_bias": 6.059068255126476e-05,
+        "unclamped_camera_psnr": 62.87382507324219,
+        "camera_sigma": 0.0007028483087196946,
+        "retained_sigma_fraction": 0.19244572520256042
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "highlights",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.008844124153256416,
+        "unclamped_camera_psnr": 38.219295501708984,
+        "camera_sigma": 0.003683066461235285,
+        "retained_sigma_fraction": 2.8384451866149902
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "highlights",
+        "scene_level": 0.001,
+        "camera_abs_bias": 1.9626291759777814e-05,
+        "unclamped_camera_psnr": 88.17658233642578,
+        "camera_sigma": 3.115865547442809e-05,
+        "retained_sigma_fraction": 0.08300841599702835
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "highlights",
+        "scene_level": 0.01,
+        "camera_abs_bias": 0.00011750198609661311,
+        "unclamped_camera_psnr": 74.08434295654297,
+        "camera_sigma": 0.00011933164205402136,
+        "retained_sigma_fraction": 0.1025918498635292
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "highlights",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.000867013237439096,
+        "unclamped_camera_psnr": 52.505836486816406,
+        "camera_sigma": 0.00213896157220006,
+        "retained_sigma_fraction": 0.5856654644012451
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "highlights",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.27750661969184875,
+        "unclamped_camera_psnr": 9.171936988830566,
+        "camera_sigma": 0.0023033786565065384,
+        "retained_sigma_fraction": 1.7751551866531372
+      },
+      {
+        "model": "Bilinear",
+        "condition": "legacy-noise",
+        "scene_level": 0.001,
+        "camera_abs_bias": 1.1855016055051237e-05,
+        "unclamped_camera_psnr": 59.90692138671875,
+        "camera_sigma": 0.0010072863660752773,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "legacy-noise",
+        "scene_level": 0.01,
+        "camera_abs_bias": 7.210153853520751e-06,
+        "unclamped_camera_psnr": 53.186256408691406,
+        "camera_sigma": 0.002165411598980427,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "legacy-noise",
+        "scene_level": 0.1,
+        "camera_abs_bias": 7.323517638724297e-05,
+        "unclamped_camera_psnr": 43.65131378173828,
+        "camera_sigma": 0.006475555710494518,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "Bilinear",
+        "condition": "legacy-noise",
+        "scene_level": 0.5,
+        "camera_abs_bias": 7.84064395702444e-05,
+        "unclamped_camera_psnr": 36.73355484008789,
+        "camera_sigma": 0.014375119470059872,
+        "retained_sigma_fraction": 1.0
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "legacy-noise",
+        "scene_level": 0.001,
+        "camera_abs_bias": 4.609237294062041e-05,
+        "unclamped_camera_psnr": 78.7001953125,
+        "camera_sigma": 9.664238314144313e-05,
+        "retained_sigma_fraction": 0.09594330191612244
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "legacy-noise",
+        "scene_level": 0.01,
+        "camera_abs_bias": 6.867537013022229e-05,
+        "unclamped_camera_psnr": 74.78244018554688,
+        "camera_sigma": 0.0001520836667623371,
+        "retained_sigma_fraction": 0.07023314386606216
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "legacy-noise",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.00016584932745900005,
+        "unclamped_camera_psnr": 68.81766510009766,
+        "camera_sigma": 0.00030734098982065916,
+        "retained_sigma_fraction": 0.04746171832084656
+      },
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "condition": "legacy-noise",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.00042451336048543453,
+        "unclamped_camera_psnr": 60.62218475341797,
+        "camera_sigma": 0.0008022473193705082,
+        "retained_sigma_fraction": 0.05580804497003555
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "legacy-noise",
+        "scene_level": 0.001,
+        "camera_abs_bias": 3.724706039065495e-05,
+        "unclamped_camera_psnr": 73.60743713378906,
+        "camera_sigma": 0.00020347590907476842,
+        "retained_sigma_fraction": 0.20200403034687042
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "legacy-noise",
+        "scene_level": 0.01,
+        "camera_abs_bias": 2.788119309116155e-05,
+        "unclamped_camera_psnr": 66.91441345214844,
+        "camera_sigma": 0.000442893331637606,
+        "retained_sigma_fraction": 0.20453079044818878
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "legacy-noise",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.0001851074630394578,
+        "unclamped_camera_psnr": 58.8414306640625,
+        "camera_sigma": 0.0010992900934070349,
+        "retained_sigma_fraction": 0.16975995898246765
+      },
+      {
+        "model": "1:dino-flat-fp32-v13:step-1000",
+        "condition": "legacy-noise",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0001526924315840006,
+        "unclamped_camera_psnr": 51.2452392578125,
+        "camera_sigma": 0.0026755589060485363,
+        "retained_sigma_fraction": 0.1861242949962616
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "legacy-noise",
+        "scene_level": 0.001,
+        "camera_abs_bias": 2.300438609381672e-05,
+        "unclamped_camera_psnr": 88.577392578125,
+        "camera_sigma": 2.7774083719123155e-05,
+        "retained_sigma_fraction": 0.027573175728321075
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "legacy-noise",
+        "scene_level": 0.01,
+        "camera_abs_bias": 4.1514853364787996e-05,
+        "unclamped_camera_psnr": 82.07320404052734,
+        "camera_sigma": 6.434768147300929e-05,
+        "retained_sigma_fraction": 0.029716143384575844
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "legacy-noise",
+        "scene_level": 0.1,
+        "camera_abs_bias": 0.0003291398170404136,
+        "unclamped_camera_psnr": 66.375732421875,
+        "camera_sigma": 0.00022728931799065322,
+        "retained_sigma_fraction": 0.035099584609270096
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "condition": "legacy-noise",
+        "scene_level": 0.5,
+        "camera_abs_bias": 0.0018719605868682265,
+        "unclamped_camera_psnr": 52.493255615234375,
+        "camera_sigma": 0.0008436423959210515,
+        "retained_sigma_fraction": 0.05868767946958542
+      }
+    ],
+    "border": 32,
+    "size": 256
+  },
+  "real_refiner": {
+    "report": "/mnt/external/demosaic/evaluation/paired-raw-flat-refiner-v14/summary.json",
+    "report_sha256": "7e48047bc5153eaa2aea8518c80b84c60050325a7c2010f581f3fe5478e2b538",
+    "source_sha256": "208dd2c31d05fec8c6bb1fcf10f93dce3142c7126bda0ff66d2ae61f75f01d20",
+    "models": [
+      {
+        "label": "0:dino-flat-refiner-v14:step-1000",
+        "snapshot": "/mnt/external/demosaic/evaluation/paired-raw-flat-refiner-v14/weights/weights-8dd5dd893b9e040a5c93c49cce0396eed4e647cdae78555c8c41576086d745c9.pt",
+        "sha256": "8dd5dd893b9e040a5c93c49cce0396eed4e647cdae78555c8c41576086d745c9",
+        "step": 1000,
+        "model_config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": true,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63
+        },
+        "checkpoint_model_config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": true,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63
+        },
+        "compute_precision": "float16"
+      },
+      {
+        "label": "RawNIND",
+        "weight_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "input": "Publisher global-ADC normalization; signed/unclipped",
+        "gain": "Observed original-unit CFA, global and per-channel variants; no clean target",
+        "precision": "IEEE float32"
+      }
+    ],
+    "overall": [
+      {
+        "model": "0:dino-flat-refiner-v14:step-1000",
+        "kind": "real",
+        "metrics": {
+          "sensor_psnr": {
+            "mean": 48.46934933132595,
+            "count": 4
+          },
+          "reference_samples": {
+            "mean": 200661.7361111111,
+            "count": 4
+          },
+          "ahd_srgb_psnr": {
+            "mean": 35.85693324936761,
+            "count": 4
+          },
+          "ahd_srgb_ssim": {
+            "mean": 0.8991940104299122,
+            "count": 4
+          },
+          "ahd_chroma_mae": {
+            "mean": 0.009243305327901099,
+            "count": 4
+          },
+          "ahd_gradient_mae": {
+            "mean": 0.007921843527583405,
+            "count": 4
+          }
+        }
+      },
+      {
+        "model": "Bilinear",
+        "kind": "real",
+        "metrics": {
+          "sensor_psnr": {
+            "mean": 44.10599215825399,
+            "count": 4
+          },
+          "reference_samples": {
+            "mean": 200661.7361111111,
+            "count": 4
+          },
+          "ahd_srgb_psnr": {
+            "mean": 29.836332321166992,
+            "count": 4
+          },
+          "ahd_srgb_ssim": {
+            "mean": 0.5878955717715952,
+            "count": 4
+          },
+          "ahd_chroma_mae": {
+            "mean": 0.02503708149823878,
+            "count": 4
+          },
+          "ahd_gradient_mae": {
+            "mean": 0.02472208865866479,
+            "count": 4
+          }
+        }
+      },
+      {
+        "model": "Malvar2004:WB",
+        "kind": "real",
+        "metrics": {
+          "sensor_psnr": {
+            "mean": 43.80425209469266,
+            "count": 4
+          },
+          "reference_samples": {
+            "mean": 200661.7361111111,
+            "count": 4
+          },
+          "ahd_srgb_psnr": {
+            "mean": 30.016488790512085,
+            "count": 4
+          },
+          "ahd_srgb_ssim": {
+            "mean": 0.5982528728329473,
+            "count": 4
+          },
+          "ahd_chroma_mae": {
+            "mean": 0.020380146206460066,
+            "count": 4
+          },
+          "ahd_gradient_mae": {
+            "mean": 0.025714163138117228,
+            "count": 4
+          }
+        }
+      },
+      {
+        "model": "RawNIND:cfa-channel:publisher",
+        "kind": "real",
+        "metrics": {
+          "sensor_psnr": {
+            "mean": 54.08474085066054,
+            "count": 4
+          },
+          "reference_samples": {
+            "mean": 200661.7361111111,
+            "count": 4
+          },
+          "ahd_srgb_psnr": {
+            "mean": 39.7171000374688,
+            "count": 4
+          },
+          "ahd_srgb_ssim": {
+            "mean": 0.9288313032852279,
+            "count": 4
+          },
+          "ahd_chroma_mae": {
+            "mean": 0.0061995219681800036,
+            "count": 4
+          },
+          "ahd_gradient_mae": {
+            "mean": 0.0065557970147993826,
+            "count": 4
+          }
+        }
+      },
+      {
+        "model": "RawNIND:cfa-ls:publisher",
+        "kind": "real",
+        "metrics": {
+          "sensor_psnr": {
+            "mean": 54.06859636306763,
+            "count": 4
+          },
+          "reference_samples": {
+            "mean": 200661.7361111111,
+            "count": 4
+          },
+          "ahd_srgb_psnr": {
+            "mean": 39.678047551049126,
+            "count": 4
+          },
+          "ahd_srgb_ssim": {
+            "mean": 0.928810535205735,
+            "count": 4
+          },
+          "ahd_chroma_mae": {
+            "mean": 0.006295617572808018,
+            "count": 4
+          },
+          "ahd_gradient_mae": {
+            "mean": 0.006555553548322577,
+            "count": 4
+          }
+        }
+      },
+      {
+        "model": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metrics": {
+          "sensor_psnr": {
+            "mean": 50.071689976586235,
+            "count": 4
+          },
+          "reference_samples": {
+            "mean": 200661.7361111111,
+            "count": 4
+          },
+          "ahd_srgb_psnr": {
+            "mean": 35.86313165558709,
+            "count": 4
+          },
+          "ahd_srgb_ssim": {
+            "mean": 0.8550734726919068,
+            "count": 4
+          },
+          "ahd_chroma_mae": {
+            "mean": 0.01000751066668373,
+            "count": 4
+          },
+          "ahd_gradient_mae": {
+            "mean": 0.010634852324276127,
+            "count": 4
+          }
+        }
+      }
+    ],
+    "prepared_sha256": "9fe6a7dc3981024516b421a67de6a81b819f57d9d52b19838458e783b0cb744c",
+    "native_crops": [
+      {
+        "image": "crop-ed0cc153d80ee941.png",
+        "caption": "2pilesofplates / ISO 12800 / 0:dino-flat-refiner-v14:step-1000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "AHD reference",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "41cd7ab9ff8b6e6b2c2f401a908c614ce078c2c6b06de155256536e9da913a00",
+        "scene": "2pilesofplates",
+        "noisy_sha256": "c8ed38ce03b5fe6df0ece5615d148c2e524bb9adbcab535773db71b0f85fbdbe",
+        "prepared_crop": {
+          "id": "2pilesofplates:c8ed38ce03b5fe6df0ece5615d148c2e524bb9adbcab535773db71b0f85fbdbe:1756:2756",
+          "path": "crop-1a2b558160c55a70a0fcdec4.npz",
+          "sha256": "ce5be43933be44a44ceb04a984d40f2c90bc4caf6cb8ce085afdf85644af64a2",
+          "xywh": [
+            2756,
+            1756,
+            512,
+            512
+          ],
+          "valid_fraction": 0.9999008178710938
+        },
+        "evaluation_tile_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "model_label": "0:dino-flat-refiner-v14:step-1000",
+        "display_exposure": 1.0,
+        "variance_multiplier": 1.0,
+        "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA",
+        "repository_image": "docs/images/refiner-v14-plates.png"
+      },
+      {
+        "image": "crop-ec064f05af183504.png",
+        "caption": "2pilesofplates / ISO 12800 / RawNIND:cfa-ls:publisher",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "AHD reference",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "93012b7ca5471a08fc66a480cdbb129f00c001b61af8ccdb63be93692bbc096d",
+        "scene": "2pilesofplates",
+        "noisy_sha256": "c8ed38ce03b5fe6df0ece5615d148c2e524bb9adbcab535773db71b0f85fbdbe",
+        "prepared_crop": {
+          "id": "2pilesofplates:c8ed38ce03b5fe6df0ece5615d148c2e524bb9adbcab535773db71b0f85fbdbe:1756:2756",
+          "path": "crop-1a2b558160c55a70a0fcdec4.npz",
+          "sha256": "ce5be43933be44a44ceb04a984d40f2c90bc4caf6cb8ce085afdf85644af64a2",
+          "xywh": [
+            2756,
+            1756,
+            512,
+            512
+          ],
+          "valid_fraction": 0.9999008178710938
+        },
+        "evaluation_tile_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "model_label": "RawNIND:cfa-ls:publisher",
+        "display_exposure": 1.0,
+        "variance_multiplier": 1.0,
+        "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA"
+      },
+      {
+        "image": "crop-e7d0f796d23dc988.png",
+        "caption": "2pilesofplates / ISO 12800 / RawNIND:cfa-channel:publisher",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "AHD reference",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "bcea716a8344dee98664201e841fde527bbde2c39466762988713ad70c38a9f2",
+        "scene": "2pilesofplates",
+        "noisy_sha256": "c8ed38ce03b5fe6df0ece5615d148c2e524bb9adbcab535773db71b0f85fbdbe",
+        "prepared_crop": {
+          "id": "2pilesofplates:c8ed38ce03b5fe6df0ece5615d148c2e524bb9adbcab535773db71b0f85fbdbe:1756:2756",
+          "path": "crop-1a2b558160c55a70a0fcdec4.npz",
+          "sha256": "ce5be43933be44a44ceb04a984d40f2c90bc4caf6cb8ce085afdf85644af64a2",
+          "xywh": [
+            2756,
+            1756,
+            512,
+            512
+          ],
+          "valid_fraction": 0.9999008178710938
+        },
+        "evaluation_tile_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "model_label": "RawNIND:cfa-channel:publisher",
+        "display_exposure": 1.0,
+        "variance_multiplier": 1.0,
+        "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA"
+      },
+      {
+        "image": "crop-5c5d2553be50efc7.png",
+        "caption": "7D-1 / ISO 12800 / 0:dino-flat-refiner-v14:step-1000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "AHD reference",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "065981fdd94e154a85fcc6edf9dced74d1b1195cf667ecb5eb204c82ec31a4e2",
+        "scene": "7D-1",
+        "noisy_sha256": "ceb7d71d6a184aa2e7cf47f22b84c61fe4545746f9be72397d6fa03dbd4751ad",
+        "prepared_crop": {
+          "id": "7D-1:ceb7d71d6a184aa2e7cf47f22b84c61fe4545746f9be72397d6fa03dbd4751ad:1476:2344",
+          "path": "crop-a3ba859368f3f95bd70632ea.npz",
+          "sha256": "57bc05d205ddff3c74c42082faea8cecaf27bbb5f4befcee9c73b9fb92835e09",
+          "xywh": [
+            2344,
+            1476,
+            512,
+            512
+          ],
+          "valid_fraction": 0.9965286254882812
+        },
+        "evaluation_tile_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "model_label": "0:dino-flat-refiner-v14:step-1000",
+        "display_exposure": 1.0,
+        "variance_multiplier": 1.0,
+        "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA",
+        "repository_image": "docs/images/refiner-v14-building.png"
+      },
+      {
+        "image": "crop-32b9a6635214c93c.png",
+        "caption": "7D-1 / ISO 12800 / RawNIND:cfa-ls:publisher",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "AHD reference",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "b6d0c92e17c0ebb7275d8a765e2556a48ede5abd5aa187ab6daa97570e327a77",
+        "scene": "7D-1",
+        "noisy_sha256": "ceb7d71d6a184aa2e7cf47f22b84c61fe4545746f9be72397d6fa03dbd4751ad",
+        "prepared_crop": {
+          "id": "7D-1:ceb7d71d6a184aa2e7cf47f22b84c61fe4545746f9be72397d6fa03dbd4751ad:1476:2344",
+          "path": "crop-a3ba859368f3f95bd70632ea.npz",
+          "sha256": "57bc05d205ddff3c74c42082faea8cecaf27bbb5f4befcee9c73b9fb92835e09",
+          "xywh": [
+            2344,
+            1476,
+            512,
+            512
+          ],
+          "valid_fraction": 0.9965286254882812
+        },
+        "evaluation_tile_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "model_label": "RawNIND:cfa-ls:publisher",
+        "display_exposure": 1.0,
+        "variance_multiplier": 1.0,
+        "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA"
+      },
+      {
+        "image": "crop-12c160f6ce4481f7.png",
+        "caption": "7D-1 / ISO 12800 / RawNIND:cfa-channel:publisher",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "AHD reference",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "fe10c1cda6c24ccbb837e2053871e806fd7fcd7ad83bb64d7e94a69580b7858e",
+        "scene": "7D-1",
+        "noisy_sha256": "ceb7d71d6a184aa2e7cf47f22b84c61fe4545746f9be72397d6fa03dbd4751ad",
+        "prepared_crop": {
+          "id": "7D-1:ceb7d71d6a184aa2e7cf47f22b84c61fe4545746f9be72397d6fa03dbd4751ad:1476:2344",
+          "path": "crop-a3ba859368f3f95bd70632ea.npz",
+          "sha256": "57bc05d205ddff3c74c42082faea8cecaf27bbb5f4befcee9c73b9fb92835e09",
+          "xywh": [
+            2344,
+            1476,
+            512,
+            512
+          ],
+          "valid_fraction": 0.9965286254882812
+        },
+        "evaluation_tile_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "model_label": "RawNIND:cfa-channel:publisher",
+        "display_exposure": 1.0,
+        "variance_multiplier": 1.0,
+        "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA"
+      }
+    ],
+    "border": 32,
+    "precision": "float16",
+    "reference": "Primary: measured clean CFA samples after shared integer alignment/gain. Auxiliary RGB: calibrated LibRaw AHD.",
+    "dataset_license": {
+      "name": "License Creative Commons\u00a0CC BY-SA. \u00a0This license enables reusers to\u00a0copy,\u00a0distribute, remix, adapt, and build upon the material in any medium or format, so long as attribution is given to the creator. The license allows for commercial use. If\u00a0 a reuser\u00a0remixes, adapts, or builds upon the material,\u00a0 he\u00a0must license the modified material under identical terms.",
+      "uri": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "iconUri": "https://licensebuttons.net/l/by-sa/4.0/88x31.png",
+      "rightsIdentifier": "CC-BY-SA-4.0",
+      "rightsIdentifierScheme": "SPDX",
+      "schemeUri": "https://spdx.org/licenses/",
+      "languageCode": "en"
+    },
+    "attribution": "Benoit Brummer and Christophe De Vleeschouwer, Raw Natural Image Noise Dataset (2025). See permissions.txt for individual scene credits and CC0 grants."
+  },
+  "real_v11": {
+    "report": "/mnt/external/demosaic/evaluation/paired-raw-development-mixed-5k/summary.json",
+    "report_sha256": "3d514ff4221dfd2aff133a971c28d1b4556abf508177c39aff926d60f3dc7f7a",
+    "source_sha256": "5d8796e68f76c24555962263687555e20afc3958476ff1f681f3e9c096d91d23",
+    "models": [
+      {
+        "label": "0:dino-paired-commons-44732-v11:step-5000",
+        "snapshot": "/mnt/external/demosaic/evaluation/paired-raw-development-mixed-5k/weights/weights-bb8177fc53f69173cd8ea39f75ed20ed474cd7e78cc4efb13916848a37290fbd.pt",
+        "sha256": "bb8177fc53f69173cd8ea39f75ed20ed474cd7e78cc4efb13916848a37290fbd",
+        "step": 5000,
+        "model_config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": false
+        },
+        "compute_precision": "float16"
+      },
+      {
+        "label": "1:dino-broad-followup-44732-v10:step-5000",
+        "snapshot": "/mnt/external/demosaic/evaluation/paired-raw-development-mixed-5k/weights/weights-5c248b01821024bf54066f7fbe406a6a1a94f172cf891b0161432120a8c42911.pt",
+        "sha256": "5c248b01821024bf54066f7fbe406a6a1a94f172cf891b0161432120a8c42911",
+        "step": 5000,
+        "model_config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": false
+        },
+        "compute_precision": "float16"
+      },
+      {
+        "label": "RawNIND",
+        "weight_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "input": "Publisher global-ADC normalization; signed/unclipped",
+        "gain": "Observed original-unit CFA, global and per-channel variants; no clean target",
+        "precision": "IEEE float32"
+      }
+    ],
+    "overall": [
+      {
+        "model": "0:dino-paired-commons-44732-v11:step-5000",
+        "kind": "real",
+        "metrics": {
+          "sensor_psnr": {
+            "mean": 51.69318776660495,
+            "count": 4
+          },
+          "reference_samples": {
+            "mean": 200661.7361111111,
+            "count": 4
+          },
+          "ahd_srgb_psnr": {
+            "mean": 37.66383695602417,
+            "count": 4
+          },
+          "ahd_srgb_ssim": {
+            "mean": 0.8848198139005237,
+            "count": 4
+          },
+          "ahd_chroma_mae": {
+            "mean": 0.008027731036741493,
+            "count": 4
+          },
+          "ahd_gradient_mae": {
+            "mean": 0.009357276382312799,
+            "count": 4
+          }
+        }
+      },
+      {
+        "model": "1:dino-broad-followup-44732-v10:step-5000",
+        "kind": "real",
+        "metrics": {
+          "sensor_psnr": {
+            "mean": 51.4672712220086,
+            "count": 4
+          },
+          "reference_samples": {
+            "mean": 200661.7361111111,
+            "count": 4
+          },
+          "ahd_srgb_psnr": {
+            "mean": 37.552889347076416,
+            "count": 4
+          },
+          "ahd_srgb_ssim": {
+            "mean": 0.8826479696565204,
+            "count": 4
+          },
+          "ahd_chroma_mae": {
+            "mean": 0.008055391517700627,
+            "count": 4
+          },
+          "ahd_gradient_mae": {
+            "mean": 0.009387922146642167,
+            "count": 4
+          }
+        }
+      },
+      {
+        "model": "Bilinear",
+        "kind": "real",
+        "metrics": {
+          "sensor_psnr": {
+            "mean": 44.10599215825399,
+            "count": 4
+          },
+          "reference_samples": {
+            "mean": 200661.7361111111,
+            "count": 4
+          },
+          "ahd_srgb_psnr": {
+            "mean": 29.836332321166992,
+            "count": 4
+          },
+          "ahd_srgb_ssim": {
+            "mean": 0.5878955717715952,
+            "count": 4
+          },
+          "ahd_chroma_mae": {
+            "mean": 0.02503708149823878,
+            "count": 4
+          },
+          "ahd_gradient_mae": {
+            "mean": 0.02472208865866479,
+            "count": 4
+          }
+        }
+      },
+      {
+        "model": "Malvar2004:WB",
+        "kind": "real",
+        "metrics": {
+          "sensor_psnr": {
+            "mean": 43.80425209469266,
+            "count": 4
+          },
+          "reference_samples": {
+            "mean": 200661.7361111111,
+            "count": 4
+          },
+          "ahd_srgb_psnr": {
+            "mean": 30.016488790512085,
+            "count": 4
+          },
+          "ahd_srgb_ssim": {
+            "mean": 0.5982528728329473,
+            "count": 4
+          },
+          "ahd_chroma_mae": {
+            "mean": 0.020380146206460066,
+            "count": 4
+          },
+          "ahd_gradient_mae": {
+            "mean": 0.025714163138117228,
+            "count": 4
+          }
+        }
+      },
+      {
+        "model": "RawNIND:cfa-channel:publisher",
+        "kind": "real",
+        "metrics": {
+          "sensor_psnr": {
+            "mean": 54.08474085066054,
+            "count": 4
+          },
+          "reference_samples": {
+            "mean": 200661.7361111111,
+            "count": 4
+          },
+          "ahd_srgb_psnr": {
+            "mean": 39.7171000374688,
+            "count": 4
+          },
+          "ahd_srgb_ssim": {
+            "mean": 0.9288313032852279,
+            "count": 4
+          },
+          "ahd_chroma_mae": {
+            "mean": 0.0061995219681800036,
+            "count": 4
+          },
+          "ahd_gradient_mae": {
+            "mean": 0.0065557970147993826,
+            "count": 4
+          }
+        }
+      },
+      {
+        "model": "RawNIND:cfa-ls:publisher",
+        "kind": "real",
+        "metrics": {
+          "sensor_psnr": {
+            "mean": 54.06859636306763,
+            "count": 4
+          },
+          "reference_samples": {
+            "mean": 200661.7361111111,
+            "count": 4
+          },
+          "ahd_srgb_psnr": {
+            "mean": 39.678047551049126,
+            "count": 4
+          },
+          "ahd_srgb_ssim": {
+            "mean": 0.928810535205735,
+            "count": 4
+          },
+          "ahd_chroma_mae": {
+            "mean": 0.006295617572808018,
+            "count": 4
+          },
+          "ahd_gradient_mae": {
+            "mean": 0.006555553548322577,
+            "count": 4
+          }
+        }
+      },
+      {
+        "model": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metrics": {
+          "sensor_psnr": {
+            "mean": 50.071689976586235,
+            "count": 4
+          },
+          "reference_samples": {
+            "mean": 200661.7361111111,
+            "count": 4
+          },
+          "ahd_srgb_psnr": {
+            "mean": 35.86313165558709,
+            "count": 4
+          },
+          "ahd_srgb_ssim": {
+            "mean": 0.8550734726919068,
+            "count": 4
+          },
+          "ahd_chroma_mae": {
+            "mean": 0.01000751066668373,
+            "count": 4
+          },
+          "ahd_gradient_mae": {
+            "mean": 0.010634852324276127,
+            "count": 4
+          }
+        }
+      }
+    ],
+    "prepared_sha256": "9fe6a7dc3981024516b421a67de6a81b819f57d9d52b19838458e783b0cb744c",
+    "border": 32,
+    "precision": "float16",
+    "reference": "Primary: measured clean CFA samples after shared integer alignment/gain. Auxiliary RGB: calibrated LibRaw AHD.",
+    "dataset_license": {
+      "name": "License Creative Commons\u00a0CC BY-SA. \u00a0This license enables reusers to\u00a0copy,\u00a0distribute, remix, adapt, and build upon the material in any medium or format, so long as attribution is given to the creator. The license allows for commercial use. If\u00a0 a reuser\u00a0remixes, adapts, or builds upon the material,\u00a0 he\u00a0must license the modified material under identical terms.",
+      "uri": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "iconUri": "https://licensebuttons.net/l/by-sa/4.0/88x31.png",
+      "rightsIdentifier": "CC-BY-SA-4.0",
+      "rightsIdentifierScheme": "SPDX",
+      "schemeUri": "https://spdx.org/licenses/",
+      "languageCode": "en"
+    },
+    "attribution": "Benoit Brummer and Christophe De Vleeschouwer, Raw Natural Image Noise Dataset (2025). See permissions.txt for individual scene credits and CC0 grants."
+  }
+}
