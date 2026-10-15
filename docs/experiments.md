@@ -636,3 +636,12 @@ bit-identical. Raw access improves the 64-photo screen by 0.01158 dB over contro
 but reduces mean known/unseen primary PSNR by 0.02093/0.00608 dB (intervals cross
 zero). Flat residual noise increases and GFX foliage/fence detail loss remains.
 Neither is promoted. See [the review with native paired and GFX crops](pyramid-refinement.md).
+
+V26/V27 test scale-aware measured-CFA supervision with identical frozen-parent
+coarse branches and matched inputs. At 1000 steps all 41 sampled hashes/RNG
+states match; primary differences are +0.01218/−0.00884 dB known/unseen, and
+coarse flat residuals are nearly unchanged. Neither is promoted. See
+[the matched loss review and native crops](scale-aware-supervision.md).
+A separate [frozen Gaussian-prior probe](gaussian-prior-probe.md) reduces exact
+flat sigma to 0.00002598 versus RawNIND 0.00008124 at level 0.01, with lower bias,
+but does not establish texture preservation or a photographic quality gain.

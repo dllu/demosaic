@@ -1,0 +1,978 @@
+{
+  "protocol": "Diagnostic on exact synthetic flats only; independent grayscale DRUNet per packed CFA phase, then WB-aware Malvar. Sigma from known synthetic shot/read and observed phase mean; no target used for inference. Per-phase input normalization is the inspected source default norm_equiv=True. IEEEFP32. Not Noise2VST adaptation, not a trained joint/DINO model, not a photographic score.",
+  "source": "/mnt/external/demosaic/references/noise2vst/src/noise2vst/models/drunet.py",
+  "source_sha256": "bd44add95919f0b0baca45ce8760ff634fd1fb4b0d670606ce38ce1a7f0bc772",
+  "weights": "/mnt/external/demosaic/evaluation/gaussian-drunet-flat-probe-v2/weights/weights-e27fb29456732c604c8ee3ac3e92ecadd2a7a4e36a8be675e92ebbf93a240de4.pt",
+  "weights_sha256": "e27fb29456732c604c8ee3ac3e92ecadd2a7a4e36a8be675e92ebbf93a240de4",
+  "source_receipt": "docs/results/noise2vst-source-and-weights.json",
+  "source_archive": "/mnt/external/demosaic/evaluation/gaussian-drunet-flat-probe-v2/source",
+  "probe_source_sha256": "a7a1c15bd6c0b01453c25c046ac6614534957303cf8d8ac070cfd9423ceeaea4",
+  "camera_receipt_sha256": "1fd6f84d089961c687b6970110377b20d5238a8377890372f069ec3b2563f512",
+  "camera": {
+    "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+    "camera": "GFX100S",
+    "pattern": "RGGB",
+    "black_levels": [
+      4101.0,
+      4098.0,
+      4104.0,
+      4106.0
+    ],
+    "white_levels": [
+      65535.0,
+      65535.0,
+      65535.0,
+      65535.0
+    ],
+    "white_balance": [
+      1.5132450331125828,
+      1.0,
+      2.2152317880794703
+    ],
+    "camera_to_srgb": [
+      [
+        1.0725188393098881,
+        0.17123593128834644,
+        -0.24375477059823436
+      ],
+      [
+        -0.1267191317089774,
+        1.4310509369654432,
+        -0.3043318052564657
+      ],
+      [
+        -0.009697676902906037,
+        -0.29348063283422965,
+        1.3031783097371357
+      ]
+    ],
+    "flip": 0,
+    "iso": 6400,
+    "adc_white_level": 65535.0
+  },
+  "levels": [
+    0.002,
+    0.01,
+    0.05
+  ],
+  "condition": {
+    "name": "iso6400-prior",
+    "exposure": 1.0,
+    "shot": 0.00128,
+    "read": 6.5536e-06
+  },
+  "seed": 20261015,
+  "phase_sigmas": [
+    [
+      0.0028702218551188707,
+      0.0030152660328894854,
+      0.0030190746765583754,
+      0.0027756295166909695
+    ],
+    [
+      0.0038743079639971256,
+      0.004402962513267994,
+      0.004400288686156273,
+      0.003514115931466222
+    ],
+    [
+      0.006989298854023218,
+      0.008396046236157417,
+      0.008398022502660751,
+      0.005953839048743248
+    ]
+  ],
+  "rows": [
+    {
+      "scene_level": 0.002,
+      "camera_centered_sigma": 1.8999839085154235e-05,
+      "camera_abs_bias": 9.370567568112165e-06,
+      "scales": {
+        "8": 1.6001000403775834e-05,
+        "32": 1.545087798149325e-05,
+        "64": 1.474429063819116e-05
+      }
+    },
+    {
+      "scene_level": 0.01,
+      "camera_centered_sigma": 2.5982593797380105e-05,
+      "camera_abs_bias": 7.524916782131186e-06,
+      "scales": {
+        "8": 2.3417016564053483e-05,
+        "32": 2.2579195501748472e-05,
+        "64": 2.1203670257818885e-05
+      }
+    },
+    {
+      "scene_level": 0.05,
+      "camera_centered_sigma": 4.117605203646235e-05,
+      "camera_abs_bias": 1.2758828233927488e-05,
+      "scales": {
+        "8": 3.383870716788806e-05,
+        "32": 3.2428797567263246e-05,
+        "64": 3.0564093322027475e-05
+      }
+    }
+  ],
+  "native_crops": [
+    {
+      "image": "crop-24f6eb27d6be7cf7.png",
+      "caption": "DRUNet-gray independent CFA phases + Malvar, exact flat 0.002",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "DRUNet + Malvar",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic flat)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "a05ba2e191ad31bd7dba3b68db2eccb53c3a018d091fbf085538499b56e7cf7a",
+      "xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "scene_level": 0.002,
+      "display_exposure": 4.0,
+      "condition": {
+        "name": "iso6400-prior",
+        "exposure": 1.0,
+        "shot": 0.00128,
+        "read": 6.5536e-06
+      },
+      "phase_sigmas": [
+        0.0028702218551188707,
+        0.0030152660328894854,
+        0.0030190746765583754,
+        0.0027756295166909695
+      ],
+      "weights_sha256": "e27fb29456732c604c8ee3ac3e92ecadd2a7a4e36a8be675e92ebbf93a240de4",
+      "repository_image": "docs/images/gaussian-drunet-flat-0.png"
+    },
+    {
+      "image": "crop-87778307f9160aed.png",
+      "caption": "DRUNet-gray independent CFA phases + Malvar, exact flat 0.01",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "DRUNet + Malvar",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic flat)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "6091e451d29e78d20b50ce7a8c042092489b269e2dc55a37897d26aebbcb9839",
+      "xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "scene_level": 0.01,
+      "display_exposure": 4.0,
+      "condition": {
+        "name": "iso6400-prior",
+        "exposure": 1.0,
+        "shot": 0.00128,
+        "read": 6.5536e-06
+      },
+      "phase_sigmas": [
+        0.0038743079639971256,
+        0.004402962513267994,
+        0.004400288686156273,
+        0.003514115931466222
+      ],
+      "weights_sha256": "e27fb29456732c604c8ee3ac3e92ecadd2a7a4e36a8be675e92ebbf93a240de4",
+      "repository_image": "docs/images/gaussian-drunet-flat-1.png"
+    }
+  ],
+  "parent_comparison": {
+    "report": "/mnt/external/demosaic/evaluation/flat-scales-scale-v26-v27-1k/result.json",
+    "sha256": "f5e102c4c92f068df8f68aee1b0ce004ae4d498afbe4f30809a931af72cf323f",
+    "rows": [
+      {
+        "model": "Noisy:Malvar",
+        "scene_level": 0.002,
+        "camera_mse": 8.013636033865623e-06,
+        "camera_abs_bias": 7.527391062467359e-06,
+        "camera_centered_sigma": 0.0028308252803981304,
+        "scales": [
+          {
+            "block": 1,
+            "centered_error_power": 8.013572369236499e-06,
+            "retained_power_fraction": 1.0
+          },
+          {
+            "block": 2,
+            "centered_error_power": 3.7235633953969227e-06,
+            "retained_power_fraction": 0.46465709805488586
+          },
+          {
+            "block": 4,
+            "centered_error_power": 1.2392649750836426e-06,
+            "retained_power_fraction": 0.15464575588703156
+          },
+          {
+            "block": 8,
+            "centered_error_power": 3.5795738995147985e-07,
+            "retained_power_fraction": 0.04466889053583145
+          },
+          {
+            "block": 16,
+            "centered_error_power": 1.0241041792369288e-07,
+            "retained_power_fraction": 0.01277962140738964
+          },
+          {
+            "block": 32,
+            "centered_error_power": 2.4251036734312947e-08,
+            "retained_power_fraction": 0.0030262453947216272
+          },
+          {
+            "block": 64,
+            "centered_error_power": 6.062436330722676e-09,
+            "retained_power_fraction": 0.0007565210689790547
+          },
+          {
+            "block": 128,
+            "centered_error_power": 1.5784380469341386e-09,
+            "retained_power_fraction": 0.00019697059178724885
+          }
+        ]
+      },
+      {
+        "model": "Noisy:Malvar",
+        "scene_level": 0.01,
+        "camera_mse": 1.4718107195221819e-05,
+        "camera_abs_bias": 8.92513071448775e-06,
+        "camera_centered_sigma": 0.0038364026695489883,
+        "scales": [
+          {
+            "block": 1,
+            "centered_error_power": 1.4717986232426483e-05,
+            "retained_power_fraction": 1.0
+          },
+          {
+            "block": 2,
+            "centered_error_power": 6.80868197378004e-06,
+            "retained_power_fraction": 0.4626096189022064
+          },
+          {
+            "block": 4,
+            "centered_error_power": 2.238808065158082e-06,
+            "retained_power_fraction": 0.15211375057697296
+          },
+          {
+            "block": 8,
+            "centered_error_power": 6.573317250513355e-07,
+            "retained_power_fraction": 0.04466179758310318
+          },
+          {
+            "block": 16,
+            "centered_error_power": 1.821319415284961e-07,
+            "retained_power_fraction": 0.012374786660075188
+          },
+          {
+            "block": 32,
+            "centered_error_power": 4.620705595925756e-08,
+            "retained_power_fraction": 0.003139495849609375
+          },
+          {
+            "block": 64,
+            "centered_error_power": 1.2026652562724394e-08,
+            "retained_power_fraction": 0.0008171398076228797
+          },
+          {
+            "block": 128,
+            "centered_error_power": 2.3817008365512038e-09,
+            "retained_power_fraction": 0.00016182246326934546
+          }
+        ]
+      },
+      {
+        "model": "Noisy:Malvar",
+        "scene_level": 0.05,
+        "camera_mse": 4.638158134184778e-05,
+        "camera_abs_bias": 1.7811522411648184e-05,
+        "camera_centered_sigma": 0.006810378283262253,
+        "scales": [
+          {
+            "block": 1,
+            "centered_error_power": 4.638125028577633e-05,
+            "retained_power_fraction": 1.0
+          },
+          {
+            "block": 2,
+            "centered_error_power": 2.1418565665953793e-05,
+            "retained_power_fraction": 0.4617936313152313
+          },
+          {
+            "block": 4,
+            "centered_error_power": 6.996353477006778e-06,
+            "retained_power_fraction": 0.15084443986415863
+          },
+          {
+            "block": 8,
+            "centered_error_power": 2.0603790744644357e-06,
+            "retained_power_fraction": 0.04442267119884491
+          },
+          {
+            "block": 16,
+            "centered_error_power": 5.388279191720358e-07,
+            "retained_power_fraction": 0.011617365293204784
+          },
+          {
+            "block": 32,
+            "centered_error_power": 1.3723385450248315e-07,
+            "retained_power_fraction": 0.0029588218312710524
+          },
+          {
+            "block": 64,
+            "centered_error_power": 3.7677732933616426e-08,
+            "retained_power_fraction": 0.0008123483858071268
+          },
+          {
+            "block": 128,
+            "centered_error_power": 4.984030965715647e-09,
+            "retained_power_fraction": 0.00010745788313215598
+          }
+        ]
+      },
+      {
+        "model": "0:dino-paired-refiner-wide-v16:step-5000",
+        "scene_level": 0.002,
+        "camera_mse": 2.6027199950817703e-08,
+        "camera_abs_bias": 3.3251351851504296e-05,
+        "camera_centered_sigma": 0.00015425786841660738,
+        "scales": [
+          {
+            "block": 1,
+            "centered_error_power": 2.3795491799205593e-08,
+            "retained_power_fraction": 1.0
+          },
+          {
+            "block": 2,
+            "centered_error_power": 1.9396154016249056e-08,
+            "retained_power_fraction": 0.8151188492774963
+          },
+          {
+            "block": 4,
+            "centered_error_power": 1.7276217789685688e-08,
+            "retained_power_fraction": 0.7260290384292603
+          },
+          {
+            "block": 8,
+            "centered_error_power": 1.3865272485702462e-08,
+            "retained_power_fraction": 0.5826848745346069
+          },
+          {
+            "block": 16,
+            "centered_error_power": 8.713691102002485e-09,
+            "retained_power_fraction": 0.3661908507347107
+          },
+          {
+            "block": 32,
+            "centered_error_power": 4.425399158236587e-09,
+            "retained_power_fraction": 0.18597637116909027
+          },
+          {
+            "block": 64,
+            "centered_error_power": 2.250254205193869e-09,
+            "retained_power_fraction": 0.09456641227006912
+          },
+          {
+            "block": 128,
+            "centered_error_power": 1.1308058933678922e-09,
+            "retained_power_fraction": 0.04752185568213463
+          }
+        ]
+      },
+      {
+        "model": "0:dino-paired-refiner-wide-v16:step-5000",
+        "scene_level": 0.01,
+        "camera_mse": 5.999090291197717e-08,
+        "camera_abs_bias": 4.8589536163490266e-05,
+        "camera_centered_sigma": 0.00023195130052044988,
+        "scales": [
+          {
+            "block": 1,
+            "centered_error_power": 5.380140422062141e-08,
+            "retained_power_fraction": 1.0
+          },
+          {
+            "block": 2,
+            "centered_error_power": 4.517737295373081e-08,
+            "retained_power_fraction": 0.8397061824798584
+          },
+          {
+            "block": 4,
+            "centered_error_power": 3.991490160615285e-08,
+            "retained_power_fraction": 0.7418932914733887
+          },
+          {
+            "block": 8,
+            "centered_error_power": 3.071058074510802e-08,
+            "retained_power_fraction": 0.5708137154579163
+          },
+          {
+            "block": 16,
+            "centered_error_power": 1.7991354184232478e-08,
+            "retained_power_fraction": 0.33440306782722473
+          },
+          {
+            "block": 32,
+            "centered_error_power": 9.305621162525313e-09,
+            "retained_power_fraction": 0.17296242713928223
+          },
+          {
+            "block": 64,
+            "centered_error_power": 3.992332686664213e-09,
+            "retained_power_fraction": 0.07420498877763748
+          },
+          {
+            "block": 128,
+            "centered_error_power": 1.1328266102950124e-09,
+            "retained_power_fraction": 0.021055707708001137
+          }
+        ]
+      },
+      {
+        "model": "0:dino-paired-refiner-wide-v16:step-5000",
+        "scene_level": 0.05,
+        "camera_mse": 2.1177405074013222e-07,
+        "camera_abs_bias": 0.0002236314321635291,
+        "camera_centered_sigma": 0.00038502816460095346,
+        "scales": [
+          {
+            "block": 1,
+            "centered_error_power": 1.482466984725761e-07,
+            "retained_power_fraction": 1.0
+          },
+          {
+            "block": 2,
+            "centered_error_power": 1.303466632407435e-07,
+            "retained_power_fraction": 0.8792550563812256
+          },
+          {
+            "block": 4,
+            "centered_error_power": 1.1779248154653033e-07,
+            "retained_power_fraction": 0.7945706844329834
+          },
+          {
+            "block": 8,
+            "centered_error_power": 9.305439618856326e-08,
+            "retained_power_fraction": 0.627699613571167
+          },
+          {
+            "block": 16,
+            "centered_error_power": 5.7995453772718975e-08,
+            "retained_power_fraction": 0.39120906591415405
+          },
+          {
+            "block": 32,
+            "centered_error_power": 2.80507279626363e-08,
+            "retained_power_fraction": 0.18921653926372528
+          },
+          {
+            "block": 64,
+            "centered_error_power": 1.2275465088862347e-08,
+            "retained_power_fraction": 0.08280430734157562
+          },
+          {
+            "block": 128,
+            "centered_error_power": 4.21797263783219e-09,
+            "retained_power_fraction": 0.02845238894224167
+          }
+        ]
+      },
+      {
+        "model": "1:dino-scale-loss-v26:step-1000",
+        "scene_level": 0.002,
+        "camera_mse": 2.645362684461361e-08,
+        "camera_abs_bias": 3.452340024523437e-05,
+        "camera_centered_sigma": 0.0001545091363368556,
+        "scales": [
+          {
+            "block": 1,
+            "centered_error_power": 2.38730741841664e-08,
+            "retained_power_fraction": 1.0
+          },
+          {
+            "block": 2,
+            "centered_error_power": 1.947327099571794e-08,
+            "retained_power_fraction": 0.8157001733779907
+          },
+          {
+            "block": 4,
+            "centered_error_power": 1.7351306169643976e-08,
+            "retained_power_fraction": 0.7268149256706238
+          },
+          {
+            "block": 8,
+            "centered_error_power": 1.3932368148061869e-08,
+            "retained_power_fraction": 0.5836017727851868
+          },
+          {
+            "block": 16,
+            "centered_error_power": 8.736103396245198e-09,
+            "retained_power_fraction": 0.3659396171569824
+          },
+          {
+            "block": 32,
+            "centered_error_power": 4.42399716860109e-09,
+            "retained_power_fraction": 0.18531325459480286
+          },
+          {
+            "block": 64,
+            "centered_error_power": 2.2367414587165513e-09,
+            "retained_power_fraction": 0.09369306266307831
+          },
+          {
+            "block": 128,
+            "centered_error_power": 1.1265439692209611e-09,
+            "retained_power_fraction": 0.0471888929605484
+          }
+        ]
+      },
+      {
+        "model": "1:dino-scale-loss-v26:step-1000",
+        "scene_level": 0.01,
+        "camera_mse": 6.083313763838305e-08,
+        "camera_abs_bias": 5.106997559778392e-05,
+        "camera_centered_sigma": 0.00023235188564285636,
+        "scales": [
+          {
+            "block": 1,
+            "centered_error_power": 5.398739943984765e-08,
+            "retained_power_fraction": 1.0
+          },
+          {
+            "block": 2,
+            "centered_error_power": 4.536169129210066e-08,
+            "retained_power_fraction": 0.8402273654937744
+          },
+          {
+            "block": 4,
+            "centered_error_power": 4.009345033750833e-08,
+            "retained_power_fraction": 0.7426446080207825
+          },
+          {
+            "block": 8,
+            "centered_error_power": 3.086927691242636e-08,
+            "retained_power_fraction": 0.5717867016792297
+          },
+          {
+            "block": 16,
+            "centered_error_power": 1.8040234195382254e-08,
+            "retained_power_fraction": 0.3341563940048218
+          },
+          {
+            "block": 32,
+            "centered_error_power": 9.313640525476785e-09,
+            "retained_power_fraction": 0.17251507937908173
+          },
+          {
+            "block": 64,
+            "centered_error_power": 3.975757056906559e-09,
+            "retained_power_fraction": 0.0736423134803772
+          },
+          {
+            "block": 128,
+            "centered_error_power": 1.1285210543832136e-09,
+            "retained_power_fraction": 0.020903415977954865
+          }
+        ]
+      },
+      {
+        "model": "1:dino-scale-loss-v26:step-1000",
+        "scene_level": 0.05,
+        "camera_mse": 2.140496064839681e-07,
+        "camera_abs_bias": 0.00022663440904580057,
+        "camera_centered_sigma": 0.0003856340772472322,
+        "scales": [
+          {
+            "block": 1,
+            "centered_error_power": 1.487136387368082e-07,
+            "retained_power_fraction": 1.0
+          },
+          {
+            "block": 2,
+            "centered_error_power": 1.30808544440697e-07,
+            "retained_power_fraction": 0.8796001672744751
+          },
+          {
+            "block": 4,
+            "centered_error_power": 1.1823626522300401e-07,
+            "retained_power_fraction": 0.7950599789619446
+          },
+          {
+            "block": 8,
+            "centered_error_power": 9.344481810558136e-08,
+            "retained_power_fraction": 0.6283540725708008
+          },
+          {
+            "block": 16,
+            "centered_error_power": 5.806371206062977e-08,
+            "retained_power_fraction": 0.3904397189617157
+          },
+          {
+            "block": 32,
+            "centered_error_power": 2.7998652285532444e-08,
+            "retained_power_fraction": 0.18827225267887115
+          },
+          {
+            "block": 64,
+            "centered_error_power": 1.2205629396078166e-08,
+            "retained_power_fraction": 0.08207471668720245
+          },
+          {
+            "block": 128,
+            "centered_error_power": 4.181851753770616e-09,
+            "retained_power_fraction": 0.028120163828134537
+          }
+        ]
+      },
+      {
+        "model": "2:dino-scale-control-v27:step-1000",
+        "scene_level": 0.002,
+        "camera_mse": 2.575842117380489e-08,
+        "camera_abs_bias": 3.4580174542497844e-05,
+        "camera_centered_sigma": 0.00015393753710668534,
+        "scales": [
+          {
+            "block": 1,
+            "centered_error_power": 2.3696765438785405e-08,
+            "retained_power_fraction": 1.0
+          },
+          {
+            "block": 2,
+            "centered_error_power": 1.9298566300562925e-08,
+            "retained_power_fraction": 0.8143966197967529
+          },
+          {
+            "block": 4,
+            "centered_error_power": 1.7183513278951068e-08,
+            "retained_power_fraction": 0.725141704082489
+          },
+          {
+            "block": 8,
+            "centered_error_power": 1.3785618868666916e-08,
+            "retained_power_fraction": 0.5817511081695557
+          },
+          {
+            "block": 16,
+            "centered_error_power": 8.674733820157599e-09,
+            "retained_power_fraction": 0.36607247591018677
+          },
+          {
+            "block": 32,
+            "centered_error_power": 4.4041734703625934e-09,
+            "retained_power_fraction": 0.1858554631471634
+          },
+          {
+            "block": 64,
+            "centered_error_power": 2.2399697652275563e-09,
+            "retained_power_fraction": 0.09452639520168304
+          },
+          {
+            "block": 128,
+            "centered_error_power": 1.1271034106030697e-09,
+            "retained_power_fraction": 0.047563597559928894
+          }
+        ]
+      },
+      {
+        "model": "2:dino-scale-control-v27:step-1000",
+        "scene_level": 0.01,
+        "camera_mse": 5.929613422495095e-08,
+        "camera_abs_bias": 5.04871568409726e-05,
+        "camera_centered_sigma": 0.00023145241721067578,
+        "scales": [
+          {
+            "block": 1,
+            "centered_error_power": 5.35702220361145e-08,
+            "retained_power_fraction": 1.0
+          },
+          {
+            "block": 2,
+            "centered_error_power": 4.494909688901316e-08,
+            "retained_power_fraction": 0.8390687108039856
+          },
+          {
+            "block": 4,
+            "centered_error_power": 3.969901385403318e-08,
+            "retained_power_fraction": 0.7410649657249451
+          },
+          {
+            "block": 8,
+            "centered_error_power": 3.0524763161565716e-08,
+            "retained_power_fraction": 0.5698084235191345
+          },
+          {
+            "block": 16,
+            "centered_error_power": 1.790198389528541e-08,
+            "retained_power_fraction": 0.3341778814792633
+          },
+          {
+            "block": 32,
+            "centered_error_power": 9.261717615061116e-09,
+            "retained_power_fraction": 0.17288929224014282
+          },
+          {
+            "block": 64,
+            "centered_error_power": 3.976919238368737e-09,
+            "retained_power_fraction": 0.07423749566078186
+          },
+          {
+            "block": 128,
+            "centered_error_power": 1.129622950735154e-09,
+            "retained_power_fraction": 0.021086769178509712
+          }
+        ]
+      },
+      {
+        "model": "2:dino-scale-control-v27:step-1000",
+        "scene_level": 0.05,
+        "camera_mse": 2.1723236898196774e-07,
+        "camera_abs_bias": 0.0002352909359615296,
+        "camera_centered_sigma": 0.0003842923033516854,
+        "scales": [
+          {
+            "block": 1,
+            "centered_error_power": 1.4768056644243188e-07,
+            "retained_power_fraction": 1.0
+          },
+          {
+            "block": 2,
+            "centered_error_power": 1.29789228253685e-07,
+            "retained_power_fraction": 0.8788511157035828
+          },
+          {
+            "block": 4,
+            "centered_error_power": 1.1727190951660305e-07,
+            "retained_power_fraction": 0.7940917015075684
+          },
+          {
+            "block": 8,
+            "centered_error_power": 9.262226541295604e-08,
+            "retained_power_fraction": 0.6271798014640808
+          },
+          {
+            "block": 16,
+            "centered_error_power": 5.7809067754988064e-08,
+            "retained_power_fraction": 0.39144667983055115
+          },
+          {
+            "block": 32,
+            "centered_error_power": 2.8013198871690292e-08,
+            "retained_power_fraction": 0.18968777358531952
+          },
+          {
+            "block": 64,
+            "centered_error_power": 1.2266824001017085e-08,
+            "retained_power_fraction": 0.08306322246789932
+          },
+          {
+            "block": 128,
+            "centered_error_power": 4.222334926140547e-09,
+            "retained_power_fraction": 0.02859099954366684
+          }
+        ]
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "scene_level": 0.002,
+        "camera_mse": 8.192120759531463e-09,
+        "camera_abs_bias": 6.737275543855503e-05,
+        "camera_centered_sigma": 4.216724119032733e-05,
+        "scales": [
+          {
+            "block": 1,
+            "centered_error_power": 1.7780762417984874e-09,
+            "retained_power_fraction": 1.0
+          },
+          {
+            "block": 2,
+            "centered_error_power": 1.7206984725959273e-09,
+            "retained_power_fraction": 0.9677304029464722
+          },
+          {
+            "block": 4,
+            "centered_error_power": 1.63233171424082e-09,
+            "retained_power_fraction": 0.9180324673652649
+          },
+          {
+            "block": 8,
+            "centered_error_power": 1.5338023073852014e-09,
+            "retained_power_fraction": 0.8626189827919006
+          },
+          {
+            "block": 16,
+            "centered_error_power": 1.362514878699983e-09,
+            "retained_power_fraction": 0.7662859559059143
+          },
+          {
+            "block": 32,
+            "centered_error_power": 1.1404510669166257e-09,
+            "retained_power_fraction": 0.6413960456848145
+          },
+          {
+            "block": 64,
+            "centered_error_power": 8.298031151099394e-10,
+            "retained_power_fraction": 0.4666858911514282
+          },
+          {
+            "block": 128,
+            "centered_error_power": 4.760764560352015e-10,
+            "retained_power_fraction": 0.26774805784225464
+          }
+        ]
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "scene_level": 0.01,
+        "camera_mse": 9.198237727048308e-09,
+        "camera_abs_bias": 4.4055308535462245e-05,
+        "camera_centered_sigma": 8.123780571622774e-05,
+        "scales": [
+          {
+            "block": 1,
+            "centered_error_power": 6.59958132587235e-09,
+            "retained_power_fraction": 1.0
+          },
+          {
+            "block": 2,
+            "centered_error_power": 6.478271696863658e-09,
+            "retained_power_fraction": 0.9816185832023621
+          },
+          {
+            "block": 4,
+            "centered_error_power": 6.178575873150294e-09,
+            "retained_power_fraction": 0.9362072348594666
+          },
+          {
+            "block": 8,
+            "centered_error_power": 5.751484621896452e-09,
+            "retained_power_fraction": 0.871492326259613
+          },
+          {
+            "block": 16,
+            "centered_error_power": 4.989018531631473e-09,
+            "retained_power_fraction": 0.7559598684310913
+          },
+          {
+            "block": 32,
+            "centered_error_power": 3.907219880971979e-09,
+            "retained_power_fraction": 0.5920405983924866
+          },
+          {
+            "block": 64,
+            "centered_error_power": 2.7734476937268937e-09,
+            "retained_power_fraction": 0.4202460050582886
+          },
+          {
+            "block": 128,
+            "centered_error_power": 9.49758716117799e-10,
+            "retained_power_fraction": 0.1439119577407837
+          }
+        ]
+      },
+      {
+        "model": "RawNIND:CFA-LS",
+        "scene_level": 0.05,
+        "camera_mse": 4.947676401911849e-08,
+        "camera_abs_bias": 0.00011750353587558493,
+        "camera_centered_sigma": 0.0001655220112297684,
+        "scales": [
+          {
+            "block": 1,
+            "centered_error_power": 2.739753490743624e-08,
+            "retained_power_fraction": 1.0
+          },
+          {
+            "block": 2,
+            "centered_error_power": 2.646254060323372e-08,
+            "retained_power_fraction": 0.9658730626106262
+          },
+          {
+            "block": 4,
+            "centered_error_power": 2.4573788337534097e-08,
+            "retained_power_fraction": 0.8969342708587646
+          },
+          {
+            "block": 8,
+            "centered_error_power": 2.2383577658047216e-08,
+            "retained_power_fraction": 0.8169924020767212
+          },
+          {
+            "block": 16,
+            "centered_error_power": 1.889313949732241e-08,
+            "retained_power_fraction": 0.6895926594734192
+          },
+          {
+            "block": 32,
+            "centered_error_power": 1.4635666012452475e-08,
+            "retained_power_fraction": 0.5341964364051819
+          },
+          {
+            "block": 64,
+            "centered_error_power": 9.15934617040648e-09,
+            "retained_power_fraction": 0.3343127965927124
+          },
+          {
+            "block": 128,
+            "centered_error_power": 4.107225226590572e-09,
+            "retained_power_fraction": 0.14991222321987152
+          }
+        ]
+      }
+    ]
+  },
+  "report": "/mnt/external/demosaic/evaluation/gaussian-drunet-flat-probe-v2/result.json",
+  "prototype_rows_identical": true
+}
