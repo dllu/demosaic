@@ -44,6 +44,9 @@ completed manifest. The full screen excludes four protected sources, leaving
 `/mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl`; training still uses
 the previously frozen, audited 24576-source manifest.
 
+For an additional camera-linear target source prepared directly from licensed
+low-ISO Bayer captures, see [native RAW targets](native-raw-targets.md).
+
 ## Training
 
 `demosaic train configs/base.yaml` starts the no-foundation baseline.

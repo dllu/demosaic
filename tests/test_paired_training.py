@@ -123,8 +123,19 @@ def test_paired_schedule_continues_at_global_step_without_rng_state():
     assert torch.equal(before, torch.get_rng_state())
 
 
-@pytest.mark.parametrize("paired_fraction", [0.5, 1.0])
-def test_paired_training_resume_matches_uninterrupted_weights(tmp_path, paired_fraction):
+@pytest.mark.parametrize(
+    "paired_fraction,native_fraction,step_rng,steps",
+    [
+        (0.5, 0.0, False, 4),
+        (1.0, 0.0, False, 4),
+        (0.0, 1.0, True, 8),
+        (0.5, 0.25, True, 12),
+        (0.5, 0.25, False, 12),
+    ],
+)
+def test_paired_training_resume_matches_uninterrupted_weights(
+    tmp_path, capsys, paired_fraction, native_fraction, step_rng, steps
+):
     manifest = make_manifest(tmp_path)
     photo = tmp_path / "photo.npy"
     np.save(photo, np.full((40, 40, 3), 10000, np.uint16))
@@ -132,20 +143,47 @@ def test_paired_training_resume_matches_uninterrupted_weights(tmp_path, paired_f
     commons.write_text(
         "\n".join(json.dumps({"id": s, "cache": photo.name, "split": s}) for s in ("train", "val"))
     )
+    native = tmp_path / "native.json"
+    native.write_text(
+        json.dumps(
+            {
+                "split": "train",
+                "rows": [
+                    {
+                        "split": "train",
+                        "scene": "sewingmachine",
+                        "cache": photo.name,
+                        "cache_sha256": hashlib.sha256(photo.read_bytes()).hexdigest(),
+                        "shape": [40, 40, 3],
+                        "color_space": "linear-camera-RGB",
+                        "raw_metadata": {
+                            "white_balance": [1.5, 1.0, 1.8],
+                            "camera_to_srgb": torch.eye(3).tolist(),
+                        },
+                    }
+                ],
+            }
+        )
+    )
     config = {
         "manifest": str(commons),
         "paired_manifest": str(manifest),
         "paired_fraction": paired_fraction,
+        "raw_clean_manifest": str(native),
+        "raw_clean_fraction": native_fraction,
+        "data_seed_per_step": step_rng,
+        "trace_observations": True,
+        "log_every": 1,
         "run": str(tmp_path / "full"),
         "device": "cpu",
-        "steps": 4,
+        "steps": steps,
         "batch_size": 1,
         "patch_size": 32,
         "workers": 0,
         "cpu_threads": 2,
         "amp": False,
         "warmup_steps": 1,
-        "checkpoint_every": 4,
+        "checkpoint_every": steps,
         "min_available_gb": 0,
         "model": {
             "width": 4,
@@ -159,15 +197,50 @@ def test_paired_training_resume_matches_uninterrupted_weights(tmp_path, paired_f
     path = tmp_path / "config.yaml"
     path.write_text(yaml.safe_dump(config))
     full = train(path)
+    full_draws = {
+        row["step"]: (row["domain"], row["batch_sha256"])
+        for line in capsys.readouterr().out.splitlines()
+        if (row := json.loads(line)).get("event") == "train"
+    }
+    if native_fraction:
+        domains = {domain for domain, _ in full_draws.values()}
+        assert "native-RAW-synthetic" in domains
+        if paired_fraction:
+            assert domains == {"synthetic", "paired-RAW", "native-RAW-synthetic"}
     config["run"] = str(tmp_path / "resumed")
     path.write_text(yaml.safe_dump(config))
     interrupted = train(path, stop_after=2)
     resumed = train(path, resume=interrupted)
+    continued_draws = {
+        row["step"]: (row["domain"], row["batch_sha256"])
+        for line in capsys.readouterr().out.splitlines()
+        if (row := json.loads(line)).get("event") == "train"
+    }
+    assert continued_draws == full_draws
     expected, actual = [torch.load(p, weights_only=True) for p in (full, resumed)]
-    assert (
-        actual["config"]["paired_manifest_sha256"]
-        == hashlib.sha256(manifest.read_bytes()).hexdigest()
-    )
+    if paired_fraction:
+        assert (
+            actual["config"]["paired_manifest_sha256"]
+            == hashlib.sha256(manifest.read_bytes()).hexdigest()
+        )
+    if native_fraction:
+        assert (
+            actual["config"]["raw_clean_manifest_sha256"]
+            == hashlib.sha256(native.read_bytes()).hexdigest()
+        )
     for group in ("model", "ema"):
         for name, value in expected[group].items():
             assert torch.equal(actual[group][name], value), name
+    if native_fraction:
+        for key, value, message in [
+            ("raw_clean_fraction", native_fraction / 2, "native RAW fraction"),
+            ("data_seed_per_step", not step_rng, "data RNG protocol"),
+        ]:
+            changed = {**config, key: value}
+            path.write_text(yaml.safe_dump(changed))
+            with pytest.raises(ValueError, match=message):
+                train(path, resume=resumed)
+        native.write_text(native.read_text() + "\n")
+        path.write_text(yaml.safe_dump(config))
+        with pytest.raises(ValueError, match="native RAW manifest"):
+            train(path, resume=resumed)

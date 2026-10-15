@@ -5,7 +5,7 @@ import json
 import math
 import random
 import time
-from contextlib import nullcontext
+from contextlib import contextmanager, nullcontext
 from pathlib import Path
 
 import psutil
@@ -20,6 +20,7 @@ from .losses import psnr, reconstruction_loss
 from .model import JointDemosaic, ModelConfig
 from .paired_training import PairedDataset, paired_reconstruction_loss, paired_step
 from .precision import amp_context, ieee_fp32
+from .raw_clean import RawCleanDataset, degrade_raw_clean, raw_clean_step
 from .safety import writable_path
 
 
@@ -83,6 +84,29 @@ def batch_fingerprint(batch):
     return digest.hexdigest()
 
 
+@contextmanager
+def data_random_context(device, seed, step, enabled):
+    """Optional per-step data RNG: source substitution cannot shift later noise."""
+    if not enabled:
+        yield
+        return
+    device = torch.device(device)
+    index = (
+        (device.index if device.index is not None else torch.cuda.current_device())
+        if device.type == "cuda"
+        else None
+    )
+    value = int.from_bytes(
+        hashlib.sha256(f"data:{seed}:{step}".encode()).digest()[:8], "little"
+    ) % (2**63)
+    with torch.random.fork_rng(devices=[] if index is None else [index]):
+        torch.set_rng_state(torch.Generator().manual_seed(value).get_state())
+        if index is not None:
+            with torch.cuda.device(index):
+                torch.cuda.manual_seed(value)
+        yield
+
+
 def expand_stem(weights, source_config, model):
     """Preserve channel roles while adding zero-weight conditioning features."""
     source, target = ModelConfig.from_checkpoint(source_config), model.config
@@ -138,8 +162,9 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     if precision not in ("bfloat16", "float32"):
         raise ValueError("Training precision must be bfloat16 or float32")
     paired_fraction = config.get("paired_fraction", 0.0)
-    if not 0 <= paired_fraction <= 1:
-        raise ValueError("Paired training fraction must be in [0,1]")
+    raw_clean_fraction = config.get("raw_clean_fraction", 0.0)
+    if not 0 <= paired_fraction <= 1 or not 0 <= raw_clean_fraction <= 1 - paired_fraction:
+        raise ValueError("Paired/native fractions must be nonnegative and sum to <=1")
     paired_data = (
         PairedDataset(
             config["paired_manifest"],
@@ -151,6 +176,17 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     )
     if paired_data is not None:
         config["paired_manifest_sha256"] = paired_data.sha256
+    raw_clean_data = (
+        RawCleanDataset(
+            config["raw_clean_manifest"],
+            patch_size=config.get("patch_size", 256),
+            seed=config.get("seed", 42),
+        )
+        if raw_clean_fraction
+        else None
+    )
+    if raw_clean_data is not None:
+        config["raw_clean_manifest_sha256"] = raw_clean_data.sha256
     manifest_payload = Path(config["manifest"]).read_bytes()
     manifest_hash = hashlib.sha256(manifest_payload).hexdigest()
     records = [json.loads(line) for line in manifest_payload.splitlines()]
@@ -170,6 +206,8 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     )
     if paired_data is not None:
         payloads["paired-manifest.json"] = paired_data.payload
+    if raw_clean_data is not None:
+        payloads["raw-clean-manifest.json"] = raw_clean_data.payload
     if config.get("validation_protocol"):
         protocol = Path(config["validation_protocol"]).read_bytes()
         payloads["validation_protocol.yaml"] = protocol
@@ -278,6 +316,16 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             raise ValueError("Resume paired manifest differs from checkpoint")
         if state["config"].get("paired_fraction", 0.0) != paired_fraction:
             raise ValueError("Resume paired training fraction differs from checkpoint")
+        if state["config"].get("raw_clean_manifest_sha256") != config.get(
+            "raw_clean_manifest_sha256"
+        ):
+            raise ValueError("Resume native RAW manifest differs from checkpoint")
+        if state["config"].get("raw_clean_fraction", 0.0) != raw_clean_fraction:
+            raise ValueError("Resume native RAW fraction differs from checkpoint")
+        if state["config"].get("data_seed_per_step", False) != config.get(
+            "data_seed_per_step", False
+        ):
+            raise ValueError("Resume data RNG protocol differs; initialize a new run")
         if state["config"].get("precision", "bfloat16") != precision:
             raise ValueError("Resume training precision differs; initialize a new run")
         if state["config"].get("refiner_only", False) != config.get("refiner_only", False):
@@ -343,6 +391,28 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 **({"prefetch_factor": 2} if paired_workers else {}),
             )
         )
+    raw_clean_iterator = None
+    if raw_clean_data is not None:
+        native_workers = config.get("raw_clean_workers", min(workers, 2))
+        native_sampler = (
+            index
+            for step in range(first + 1, steps + 1)
+            if not paired_step(step, seed, paired_fraction)
+            and raw_clean_step(step, seed, raw_clean_fraction, paired_fraction)
+            for index in range((step - 1) * batch_size, step * batch_size)
+        )
+        raw_clean_iterator = iter(
+            DataLoader(
+                raw_clean_data,
+                batch_size=batch_size,
+                sampler=native_sampler,
+                num_workers=native_workers,
+                pin_memory=False,
+                persistent_workers=native_workers > 0,
+                generator=torch.Generator().manual_seed(seed + 31),
+                **({"prefetch_factor": 2} if native_workers else {}),
+            )
+        )
     validation = DataLoader(
         CleanDataset(
             config["manifest"],
@@ -370,6 +440,8 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 "dino": model.config.dino,
                 "paired_train_scenes": len(paired_data) if paired_data is not None else 0,
                 "paired_fraction": paired_fraction,
+                "raw_clean_train_scenes": len(raw_clean_data) if raw_clean_data is not None else 0,
+                "raw_clean_fraction": raw_clean_fraction,
                 "compute_precision": precision,
             }
         ),
@@ -395,17 +467,31 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             group["lr"] = lr
         model.train()
         use_pair = paired_iterator is not None and paired_step(step, seed, paired_fraction)
-        if use_pair:
-            batch = {k: v.to(device) for k, v in next(paired_iterator).items()}
-        else:
-            batch = degrade(
-                clean["rgb"].to(device),
-                reconstruct_highlights=config.get("reconstruct_highlights", False),
-                preserve_negative_read_noise=config.get("preserve_negative_read_noise", False),
-                physical_fp32=model.config.physical_fp32,
-                noise_free_fraction=config.get("noise_free_fraction", 0.0),
-                broad_camera=config.get("broad_camera", False),
-            )
+        use_native = (
+            raw_clean_iterator is not None
+            and not use_pair
+            and raw_clean_step(step, seed, raw_clean_fraction, paired_fraction)
+        )
+        with data_random_context(device, seed, step, config.get("data_seed_per_step", False)):
+            if use_pair:
+                batch = {k: v.to(device) for k, v in next(paired_iterator).items()}
+            elif use_native:
+                native = {k: v.to(device) for k, v in next(raw_clean_iterator).items()}
+                batch = degrade_raw_clean(
+                    native,
+                    reconstruct_highlights=config.get("reconstruct_highlights", False),
+                    preserve_negative_read_noise=config.get("preserve_negative_read_noise", False),
+                    noise_free_fraction=config.get("noise_free_fraction", 0.0),
+                )
+            else:
+                batch = degrade(
+                    clean["rgb"].to(device),
+                    reconstruct_highlights=config.get("reconstruct_highlights", False),
+                    preserve_negative_read_noise=config.get("preserve_negative_read_noise", False),
+                    physical_fp32=model.config.physical_fp32,
+                    noise_free_fraction=config.get("noise_free_fraction", 0.0),
+                    broad_camera=config.get("broad_camera", False),
+                )
         log_step = step == first + 1 or step % config.get("log_every", 25) == 0
         fingerprint = (
             batch_fingerprint(batch)
@@ -456,7 +542,11 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 "grad_norm": float(grad_norm),
                 "seconds_per_step": (time.perf_counter() - started) / (step - first),
                 "cuda_gb": torch.cuda.max_memory_allocated() / 1e9 if device.type == "cuda" else 0,
-                "domain": "paired-RAW" if use_pair else "synthetic",
+                "domain": "paired-RAW"
+                if use_pair
+                else "native-RAW-synthetic"
+                if use_native
+                else "synthetic",
                 **{key: value.item() for key, value in terms.items()},
             }
             if fingerprint is not None:
