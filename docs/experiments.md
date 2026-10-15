@@ -628,3 +628,11 @@ arm. Native targets improve known measured-CFA PSNR over control by 0.02622 dB
 but reduce unseen PSNR by 0.01494 dB, despite improved auxiliary rendered PSNR.
 The 64-photo screen loses 0.04881 dB versus control; neither candidate is
 promoted. See [the body-adaptation review with native crops](native-joint-review.md).
+
+A matched two-level pyramid correction trial V24/V25 tests direct measured-CFA
+innovation while the parent V16 remains frozen. At step1000, all 41 sampled
+observations and checkpoint RNG states match; original weights/EMA remain
+bit-identical. Raw access improves the 64-photo screen by 0.01158 dB over control
+but reduces mean known/unseen primary PSNR by 0.02093/0.00608 dB (intervals cross
+zero). Flat residual noise increases and GFX foliage/fence detail loss remains.
+Neither is promoted. See [the review with native paired and GFX crops](pyramid-refinement.md).

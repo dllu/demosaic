@@ -1,35 +1,38 @@
 # Multiscale measured-CFA correction trials
 
 Previous turn made progress: new GFX pair/crops, optional FP16 refinement and
-completed native body/control review committed/pushed. Full goal remains open:
-V16 still trails RawNIND on real development and does not reach10sec/100MP.
+completed native body/control review committed/pushed. The full goal remains
+open: V16 still trails RawNIND on real development and misses 10 s per 100 MP.
 
-Implemented optional255,840-parameter pyramid correction with noise-unit RGB,
-variance/CFA/context features and direct packed RAW minus CFA-sampled prediction
-innovation. Two-level gated encoder/decoder is identity-initialized and exactly
-zero atzero sensor variance. Existing checkpoints disable the new branch.
-Physical operations remain IEEEFP32; neural inference precision canbe selected.
-Added mutually exclusive pyramid-only training and exactresume mode checking.
+Implemented an optional 255,840-parameter pyramid correction with noise-unit
+RGB, variance/CFA/context features and direct packed RAW minus CFA-sampled
+prediction innovation. Its two-level gated encoder/decoder starts as identity;
+zero sensor variance forces zero correction. Existing checkpoints disable the
+new branch. Physical operations remain IEEE FP32. Added mutually exclusive
+pyramid-only training and exact resume mode checking.
 
-182tests pass in12.44s, Ruff passes. Tests verify measured-CFA access acrossfour
-patterns and its removal in thecontrol, arbitrary even geometry, warmstart,
-frozenweights, zerovariance, CUDAhalf/FP32physical outputs and exactCPUresume.
-ActualDINO/V16 startupcheck covered6,291,456 RGBvalues perarm: both are bitwise
-identical toparent acrossfourCFAs×ADC/noisy. Initialweights match betweenarms.
+All 182 tests passed in 12.44 s; Ruff passed. Tests verify measured-CFA access
+across four patterns and its removal in the control, arbitrary even geometry,
+warm start, frozen weights, zero variance, CUDA half/FP32 physical outputs and
+exact CPU resume. Genuine DINO/V16 startup checks covered 6,291,456 RGB values
+per arm: both are bitwise identical to the parent across four CFAs and ADC/noisy
+conditions. Initial restoration weights match between arms.
 
-Started V24control (innovationzeroed) andV25 (innovationenabled), same255840
-parameters, seed45, LR5e-4, original50/50 paired/Commonsloss/data, perstepRNG,
-sampledactualbatchhashes. Planned5000schedule, stopfirst1000 forreview. Existing
-body/DINO/finebranch frozen. No native-targetsubstitution or protectedfinal/GFX
-scenes. Startup sampledhashes match. Ownjobs session6699/71267; logs
-`.cache/train-pyramid-{control-v24,raw-v25}-1k.log`; sourcearchived perrun.
-Observedstep50 finitegradients/loss, ~.5sec/step perarm underconcurrency,
-~1.81GB CUDApeak each, ~70GiB available. Donot restart onobservation timeout.
+Started V24 control (innovation zeroed) and V25 (innovation enabled), with the
+same 255,840 parameters, seed 45, LR 5e-4, original 50/50 paired/Commons losses
+and data, per-step RNG, and sampled batch hashes. Planned 5000-step schedule;
+stop at the first 1000 steps for review. Existing body/DINO/fine branch frozen.
+No native-target substitution or protected final/GFX scenes. Startup sampled
+hashes match. Own jobs: sessions 6699/71267, logs
+`.cache/train-pyramid-{control-v24,raw-v25}-1k.log`; source archived per run.
+Observed step 50: finite gradients/loss, about 0.5 s per step per arm under
+concurrency, about 1.81 GB peak CUDA each, and 70 GiB system memory available.
+Do not restart on observation timeout.
 
-Hypothesis: direct measurement access pluslarger context may restore detail
-removedby preceding interpolation/denoising and suppress coarseresiduals. This
-is not proven bystartupchecks. No promotion or performanceclaim. Reviewboth
-realpanels, matchedsyntheticscreen and>=2nativecroptriplets per candidate.
-Configs and methodlimitations: `docs/pyramid-refinement.md`. Newly inspected
-AIM2025 abstract is researchcontext forcamera-general synthetictraining, not a
-reproduced method or support forour untestedinnovation representation.
+Hypothesis: direct measurement access and larger context may restore detail
+removed by preceding stages and suppress coarse residuals. Startup checks do
+not prove that. No promotion or performance claim. Review both real panels,
+the matched synthetic screen, and at least two native triplets per candidate.
+See `docs/pyramid-refinement.md`. The inspected AIM 2025 abstract is context
+for camera-general synthetic training, not a reproduced method or evidence
+for this untested innovation representation.

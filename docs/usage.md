@@ -301,5 +301,4 @@ to those channels for a capacity-matched control. `pyramid_refiner_only: true`
 freezes every preceding restoration/DINO/fine/coarse parameter and trains only
 that branch; it cannot be combined with other refiner-only modes or changed on
 resume. Existing checkpoint defaults remain disabled. See
-[the matched experiment and startup validation](pyramid-refinement.md); no quality
-gain is established yet.
+[the matched experiment and startup validation](pyramid-refinement.md); the first 1000-step review does not establish a real-photo quality gain.
