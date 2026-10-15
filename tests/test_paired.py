@@ -72,6 +72,21 @@ def test_selection_is_metadata_only_and_keeps_publisher_test_reserve_separate():
         paired.select_pairs(dataset, files, "development", scenes=["TEST_protected"])
 
 
+def test_training_selection_cannot_include_validation_test_or_unknown_sensor():
+    dataset, files = fixture_catalog("sewingmachine")
+    assert paired.select_pairs(dataset, files, "train", scenes=["sewingmachine"])
+    dataset["Bayer"]["sewingmachine"]["unknown_sensor"] = True
+    with pytest.raises(ValueError, match="fixed training selection"):
+        paired.select_pairs(dataset, files, "train", scenes=["sewingmachine"])
+    for name in ("2pilesofplates", "LucieB_3apples", "7D-2"):
+        dataset, files = fixture_catalog(name)
+        with pytest.raises(ValueError, match="fixed training selection"):
+            paired.select_pairs(dataset, files, "train", scenes=[name])
+    dataset, files = fixture_catalog("sewingmachine", reserved=True)
+    with pytest.raises(ValueError, match="other split"):
+        paired.select_pairs(dataset, files, "train", scenes=["sewingmachine"])
+
+
 def test_verified_download_reuses_bytes_without_network(tmp_path, monkeypatch):
     payload = b"raw sensor bytes"
     record = descriptor("example.arw", payload)

@@ -1,4 +1,4 @@
-"""Verified acquisition of commercially usable paired RAW evaluation data."""
+"""Verified acquisition of commercially usable paired RAW data with fixed splits."""
 
 import hashlib
 import json
@@ -21,6 +21,40 @@ CATALOG_URL = (
 )
 DATA_URL = "https://dataverse.uclouvain.be/api/access/datafile/"
 DEVELOPMENT_SCENES = ("2pilesofplates", "7D-1", "MuseeL-CopteArch-C500D", "D60-2")
+TRAINING_SCENES = (
+    "blood_oranges",
+    "sewingmachine",
+    "Matthias_salt",
+    "Metalldel",
+    "Iain01",
+    "Kyckling-i-kruka",
+    "dustpan",
+    "Elplint",
+    "fan",
+    "couch",
+    "damaged_root",
+    "foodstuff2",
+    "penne",
+    "helmet",
+    "target",
+    "in_piano_lit",
+    "dirtymug",
+    "bark_beetled_log",
+    "mjbookshelf2",
+    "rad_control",
+    "bananapi",
+    "sprouting_garlic",
+    "cactus",
+    "white_cat",
+    "fireplace",
+    "Kortlek",
+    "thermostat4",
+    "wet_charred_wood",
+    "plomberie",
+    "European_hornbeam_bark",
+    "icteam_mug_logo",
+    "redbox",
+)
 RAW_SUFFIXES = {
     ".arw",
     ".cr2",
@@ -56,16 +90,16 @@ def select_pairs(dataset, files, split, *, scenes=None):
     pretrained comparator may have seen them, so they are not an unbiased test
     of that comparator. Official test scenes remain separate from development.
     """
-    if split not in ("development", "test"):
-        raise ValueError("Split must be development or test")
+    if split not in ("train", "development", "test"):
+        raise ValueError("Split must be train, development or test")
     lookup = {entry["dataFile"]["filename"]: entry for entry in files}
     bayer = dataset["Bayer"]
     if scenes is None:
-        scenes = (
-            DEVELOPMENT_SCENES
-            if split == "development"
-            else sorted(name for name, row in bayer.items() if row.get("test_reserve"))
-        )
+        scenes = {
+            "train": TRAINING_SCENES,
+            "development": DEVELOPMENT_SCENES,
+            "test": sorted(name for name, row in bayer.items() if row.get("test_reserve")),
+        }[split]
     if not scenes or len(set(scenes)) != len(scenes):
         raise ValueError("Select at least one unique scene")
     output = []
@@ -75,6 +109,8 @@ def select_pairs(dataset, files, split, *, scenes=None):
         reserved = bool(row.get("test_reserve")) or any("_TEST_" in name for name in filenames)
         if reserved != (split == "test"):
             raise ValueError(f"Scene {scene} belongs to the other split")
+        if split == "train" and (scene not in TRAINING_SCENES or row.get("unknown_sensor")):
+            raise ValueError(f"Scene {scene} is outside the fixed training selection")
         # The published descriptor also lists XMP sidecars as clean images.
         clean = sorted(
             (x for x in row["clean_images"] if Path(x["filename"]).suffix.lower() in RAW_SUFFIXES),
@@ -265,7 +301,11 @@ def fetch_paired(output, *, split="development", workers=2, scenes=None):
         "auxiliary": auxiliary,
         "attribution": "Benoit Brummer and Christophe De Vleeschouwer, Raw Natural Image Noise Dataset (2025). See permissions.txt for individual scene credits and CC0 grants.",
         "selection_rule": "Up to two clean frames; noisy ISO nearest 1600 plus highest remaining ISO <=12800; metadata-only selection.",
-        "usage": "Evaluation only. These images are not added to the Commons training manifest.",
+        "usage": (
+            "Paired RAW training only; fixed allowlist excludes development, official test and unknown sensors."
+            if split == "train"
+            else "Evaluation only. These images are not added to the Commons training manifest."
+        ),
         "development_caveat": "RawNIND may have trained on development scenes. Keep publisher test scenes separate until final model selection.",
     }
     writable_path(output / f"manifest-{split}.json").write_text(json.dumps(result, indent=2) + "\n")

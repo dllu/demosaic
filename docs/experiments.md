@@ -475,3 +475,62 @@ The full paired receipts and diagnostic means are in
 
 The current V6 run remains a control. Broader camera augmentation and stronger
 real denoising must pass these development checks before final testing.
+
+## Completed V6 and broad-camera review
+
+V6 completed 100000 steps. Its 427-photo synthetic score is 31.7410 dB/0.92339
+SSIM, and the 16 procedural sources score 30.9055/0.92494. This protocol covers
+all four CFAs and seven conditions. The corrected, signed-input IEEE-FP32
+RawNIND reference scores 26.6958/0.79003 on the same photos at the step51000
+review. Merging the two reports verified all 37212 common classical records;
+source manifests, conditions and noise identities match. See
+[the complete synthetic review](results/camera-5k-synthetic-review.json).
+
+Real RAW results show why the synthetic result is insufficient:
+
+| Candidate | Known-sensor development: sensor / rendered dB | Unseen M100 development: sensor / rendered dB |
+| --- | ---: | ---: |
+| V6 step100000 | 51.2588 / 36.8021 | 39.7816 / 21.9121 |
+| V7 broad cameras, 5000 steps | 51.4481 / 37.4137 | 50.8364 / 35.0830 |
+| V8 broad cameras + normalized loss, 5000 steps | 51.6149 / 37.5616 | 50.9469 / 35.2102 |
+| RawNIND CFA-LS | 54.0686 / 39.6780 | 53.5622 / 38.1448 |
+
+V7 removes the severe cast without discarding camera metadata. V8 adds a small
+real improvement, but costs 0.5446 dB on the full synthetic photo set relative to
+V7 (paired 95% interval 0.5253–0.5634 dB). Its procedural score also falls by
+0.5570 dB. The 0.02 normalized-loss recipe is not promoted. V7 itself trails the
+completed V6 synthetic photo score by 0.3361 dB, while substantially improving
+unseen-camera behavior. Neither meets the real quality objective.
+
+Flat-field measurements still show V7/V8 retaining much more variation than
+RawNIND: at scene level 0.01 and ISO1600-prior noise, residual sigma fractions
+relative to bilinear are 0.2145/0.1982 versus 0.0356. Exact receipts, scene-level
+intervals and all probe conditions are in
+[the real review](results/camera-5k-real-review.json).
+
+V9 tests four additional per-phase local residual features expressed in noise
+units, initialized with zero stem weights. V10 is a matched control with the same
+V7 initialization, seed, fresh optimizer, camera distribution and original loss.
+These trials do not change physical sensor values or DINO token resolution.
+
+## Separate real RAW training subset
+
+Prepared a fixed 32-scene RawNIND training selection: 119 checksum-verified RAWs
+(5.291 GB), 64 noisy captures, 576 aligned 512-pixel crops, no rejected pairs.
+It covers Sony ILCE-7C, Nikon Z6/D40 and Canon 6D. The selection excludes all
+25 development/official-test scenes and unknown sensors, with zero shared
+capture SHA1s against all 214 protected RAW captures. A perceptual screen of
+one predeclared reference per training scene found no near duplicates among
+4558 Commons validation/test sources. Crops, edits and related views can evade
+this screen; complete scene separation is not established. See
+[the acquisition and separation receipt](results/paired-train32-acquisition.json).
+
+V11 has started from the V7 step5000 EMA, with half the training batches from
+Commons simulation and half from this separate paired subset. Real supervision
+uses measured clean CFA samples for detail and 4×4 RGB means for auxiliary color;
+fine-scale AHD output is not a full-resolution RGB target. Geometric augmentation
+transforms measured masks and Bayer phases together. The original synthetic loss
+and architecture remain unchanged. Initial CUDA losses/gradients are finite;
+there is no V11 quality result yet. All 148 tests, including exact CPU restart
+equivalence for real-pair training, pass. Official final test images remain unused
+for model selection.

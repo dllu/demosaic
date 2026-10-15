@@ -8,7 +8,7 @@ from torch.nn import functional as F
 
 from .cfa import bilinear, malvar
 from .color import render
-from .prior import wiener_packed
+from .prior import standardized_noise, wiener_packed
 
 
 @dataclass
@@ -26,6 +26,7 @@ class ModelConfig:
     physical_fp32: bool = True
     baseline: str = "bilinear"
     prior_window: int = 7
+    standardized_noise: bool = False
 
     def to_dict(self):
         return asdict(self)
@@ -168,7 +169,10 @@ class JointDemosaic(nn.Module):
         if cfg.baseline not in ("bilinear", "wiener-malvar"):
             raise ValueError("Unknown restoration baseline")
         self.multiple = 2 ** len(cfg.encoder_blocks)
-        self.stem = nn.Conv2d(32 if cfg.camera_conditioning else 20, cfg.width, 3, padding=1)
+        input_channels = (32 if cfg.camera_conditioning else 20) + (
+            4 if cfg.standardized_noise else 0
+        )
+        self.stem = nn.Conv2d(input_channels, cfg.width, 3, padding=1)
         self.encoders, self.downs = nn.ModuleList(), nn.ModuleList()
         channels = cfg.width
         for count in cfg.encoder_blocks:
@@ -230,6 +234,8 @@ class JointDemosaic(nn.Module):
             inputs = torch.cat(
                 (inputs, metadata[:, :, None, None].expand(-1, -1, height, width)), dim=1
             )
+        if self.config.standardized_noise:
+            inputs = torch.cat((inputs, standardized_noise(packed, variance)), dim=1)
         x = self.stem(
             F.pad(inputs, (0, -width % self.multiple, 0, -height % self.multiple), mode="replicate")
         )

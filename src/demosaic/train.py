@@ -17,6 +17,7 @@ from .color import render
 from .data import CleanDataset, degrade
 from .losses import psnr, reconstruction_loss
 from .model import JointDemosaic, ModelConfig
+from .paired_training import PairedDataset, paired_reconstruction_loss, paired_step
 from .precision import amp_context
 from .safety import writable_path
 
@@ -66,6 +67,30 @@ def update_ema(model, ema, decay):
                 ema[name].copy_(value)
 
 
+def expand_stem(weights, source_config, model):
+    """Preserve channel roles while adding zero-weight conditioning features."""
+    source, target = ModelConfig.from_checkpoint(source_config), model.config
+    if source.camera_conditioning and not target.camera_conditioning:
+        raise ValueError("Initialization cannot discard camera conditioning")
+    if source.standardized_noise and not target.standardized_noise:
+        raise ValueError("Initialization cannot discard standardized noise channels")
+    if (source.camera_conditioning, source.standardized_noise) == (
+        target.camera_conditioning,
+        target.standardized_noise,
+    ):
+        return
+    old = weights["stem.weight"]
+    expanded = torch.zeros_like(model.stem.weight, device="cpu")
+    expanded[:, :20] = old[:, :20]
+    if source.camera_conditioning:
+        expanded[:, 20:32] = old[:, 20:32]
+    if source.standardized_noise:
+        old_offset = 32 if source.camera_conditioning else 20
+        new_offset = 32 if target.camera_conditioning else 20
+        expanded[:, new_offset:] = old[:, old_offset:]
+    weights["stem.weight"] = expanded
+
+
 def save_checkpoint(path, model, optimizer, ema, step, config, best):
     state = {
         "format_version": 1,
@@ -91,6 +116,20 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     if resume and initialize:
         raise ValueError("Choose resume or initialize, not both")
     config = yaml.safe_load(Path(config_path).read_text())
+    paired_fraction = config.get("paired_fraction", 0.0)
+    if not 0 <= paired_fraction <= 1:
+        raise ValueError("Paired training fraction must be in [0,1]")
+    paired_data = (
+        PairedDataset(
+            config["paired_manifest"],
+            patch_size=config.get("patch_size", 256),
+            seed=config.get("seed", 42),
+        )
+        if paired_fraction
+        else None
+    )
+    if paired_data is not None:
+        config["paired_manifest_sha256"] = paired_data.sha256
     manifest_payload = Path(config["manifest"]).read_bytes()
     manifest_hash = hashlib.sha256(manifest_payload).hexdigest()
     records = [json.loads(line) for line in manifest_payload.splitlines()]
@@ -108,6 +147,8 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     payloads.update(
         {name: (repository / name).read_bytes() for name in ("pyproject.toml", "uv.lock")}
     )
+    if paired_data is not None:
+        payloads["paired-manifest.json"] = paired_data.payload
     if config.get("validation_protocol"):
         protocol = Path(config["validation_protocol"]).read_bytes()
         payloads["validation_protocol.yaml"] = protocol
@@ -154,11 +195,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     if initialize:
         initial = torch.load(initialize, map_location="cpu", weights_only=True)
         weights = initial.get("ema", initial["model"])
-        if model.config.camera_conditioning and weights["stem.weight"].shape[1] == 20:
-            # Preserve the prior mapping while adding 12 zero-weight metadata maps.
-            expanded = torch.zeros_like(model.stem.weight, device="cpu")
-            expanded[:, :20] = weights["stem.weight"]
-            weights["stem.weight"] = expanded
+        expand_stem(weights, initial["model_config"], model)
         incompatible = model.load_state_dict(weights, strict=False)
         allowed_prefixes = ("context.",) + (
             ("noise_encoder.", "noise_middle.", "noise_decoder.")
@@ -201,6 +238,10 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         previous_manifest_hash = state["config"].get("manifest_sha256")
         if previous_manifest_hash and previous_manifest_hash != manifest_hash:
             raise ValueError("Resume manifest differs from the checkpoint's training data")
+        if state["config"].get("paired_manifest_sha256") != config.get("paired_manifest_sha256"):
+            raise ValueError("Resume paired manifest differs from checkpoint")
+        if state["config"].get("paired_fraction", 0.0) != paired_fraction:
+            raise ValueError("Resume paired training fraction differs from checkpoint")
         if ModelConfig.from_checkpoint(state["model_config"]).to_dict() != model.config.to_dict():
             raise ValueError("Resume model configuration differs from checkpoint")
         incompatible = model.load_state_dict(state["model"], strict=False)
@@ -237,6 +278,27 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         generator=torch.Generator().manual_seed(seed),
         **({"prefetch_factor": 2} if workers else {}),
     )
+    paired_iterator = None
+    if paired_data is not None:
+        paired_workers = config.get("paired_workers", min(workers, 2))
+        paired_sampler = (
+            index
+            for step in range(first + 1, steps + 1)
+            if paired_step(step, seed, paired_fraction)
+            for index in range((step - 1) * batch_size, step * batch_size)
+        )
+        paired_iterator = iter(
+            DataLoader(
+                paired_data,
+                batch_size=batch_size,
+                sampler=paired_sampler,
+                num_workers=paired_workers,
+                pin_memory=False,
+                persistent_workers=paired_workers > 0,
+                generator=torch.Generator().manual_seed(seed + 17),
+                **({"prefetch_factor": 2} if paired_workers else {}),
+            )
+        )
     validation = DataLoader(
         CleanDataset(
             config["manifest"],
@@ -259,6 +321,8 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 "start_step": first,
                 "steps": steps,
                 "dino": model.config.dino,
+                "paired_train_scenes": len(paired_data) if paired_data is not None else 0,
+                "paired_fraction": paired_fraction,
             }
         ),
         flush=True,
@@ -282,14 +346,18 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         for group in optimizer.param_groups:
             group["lr"] = lr
         model.train()
-        batch = degrade(
-            clean["rgb"].to(device),
-            reconstruct_highlights=config.get("reconstruct_highlights", False),
-            preserve_negative_read_noise=config.get("preserve_negative_read_noise", False),
-            physical_fp32=model.config.physical_fp32,
-            noise_free_fraction=config.get("noise_free_fraction", 0.0),
-            broad_camera=config.get("broad_camera", False),
-        )
+        use_pair = paired_iterator is not None and paired_step(step, seed, paired_fraction)
+        if use_pair:
+            batch = {k: v.to(device) for k, v in next(paired_iterator).items()}
+        else:
+            batch = degrade(
+                clean["rgb"].to(device),
+                reconstruct_highlights=config.get("reconstruct_highlights", False),
+                preserve_negative_read_noise=config.get("preserve_negative_read_noise", False),
+                physical_fp32=model.config.physical_fp32,
+                noise_free_fraction=config.get("noise_free_fraction", 0.0),
+                broad_camera=config.get("broad_camera", False),
+            )
         optimizer.zero_grad(set_to_none=True)
         with amp_context(device, amp):
             prediction, auxiliary = model(
@@ -300,13 +368,16 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 batch["matrix"],
                 auxiliary=True,
             )
-            loss, terms = reconstruction_loss(
-                prediction,
-                batch,
-                auxiliary,
-                physical_fp32=model.config.physical_fp32,
-                normalized_sensor_weight=config.get("normalized_sensor_weight", 0.0),
-            )
+            if use_pair:
+                loss, terms = paired_reconstruction_loss(prediction, batch, auxiliary)
+            else:
+                loss, terms = reconstruction_loss(
+                    prediction,
+                    batch,
+                    auxiliary,
+                    physical_fp32=model.config.physical_fp32,
+                    normalized_sensor_weight=config.get("normalized_sensor_weight", 0.0),
+                )
         if not torch.isfinite(loss):
             raise RuntimeError(f"Nonfinite loss at step {step}; last checkpoint retained")
         loss.backward()
@@ -322,6 +393,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 "grad_norm": float(grad_norm),
                 "seconds_per_step": (time.perf_counter() - started) / (step - first),
                 "cuda_gb": torch.cuda.max_memory_allocated() / 1e9 if device.type == "cuda" else 0,
+                "domain": "paired-RAW" if use_pair else "synthetic",
                 **{key: value.item() for key, value in terms.items()},
             }
             with (run / "metrics.jsonl").open("a") as log:

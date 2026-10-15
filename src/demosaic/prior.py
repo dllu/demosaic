@@ -6,6 +6,27 @@ from torch.nn import functional as F
 from .precision import ieee_fp32
 
 
+def standardized_noise(packed, variance, window=31):
+    """Expose local phase residuals in noise units, including deep shadows.
+
+    Mean subtraction removes the scene's DC level; raw/metadata channels still
+    carry it separately. A bounded signal makes weak noise visible to the neural
+    stem without changing any physical sensor values or reconstruction units.
+    """
+    if packed.shape != variance.shape or window < 3 or window % 2 == 0:
+        raise ValueError("Use matching phase/variance maps and an odd window >=3")
+    window = min(window, 2 * min(packed.shape[-2:]) - 1)
+    if window < 3:
+        raise ValueError("Packed phase dimensions must be at least two")
+    with torch.autocast(device_type=packed.device.type, enabled=False), ieee_fp32():
+        raw, variance = packed.float(), variance.float().clamp_min(0)
+        radius = window // 2
+        padded = F.pad(raw, (radius, radius, radius, radius), mode="reflect")
+        mean = F.avg_pool2d(F.avg_pool2d(padded, (1, window), stride=1), (window, 1), stride=1)
+        residual = (raw - mean) / variance.clamp_min(1e-8).sqrt()
+        return torch.where(variance > 0, residual.clamp(-8, 8), torch.zeros_like(raw))
+
+
 def wiener_packed(packed, variance, window=7):
     """Local linear-MMSE prior, applied independently to each sensor phase.
 

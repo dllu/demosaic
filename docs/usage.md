@@ -109,6 +109,39 @@ Its default is zero. `configs/dino-normalized-camera-44732.yaml` is matched to
 the broad-camera experiment except for this weight; neither recipe is promoted
 without real development and detail-preservation evidence.
 
+`model.standardized_noise: true` optionally appends four local Bayer-phase
+residual maps divided by sensor standard deviation. They are computed in IEEE
+FP32, bounded to ±8, and zero on ADC-only inputs. The 31-pixel phase window is
+reduced for small patches. Warm-start expansion gives the new stem channels zero
+weights and preserves existing metadata/noise channel roles. V9/V10 compare this
+option with the same initialization and original loss; it remains experimental.
+
+For separate real RAW training, first acquire and prepare the fixed train split:
+
+```bash
+uv run python scripts/fetch_paired_raw.py --split train \
+  --output /mnt/external/demosaic/references/rawnind-train32
+uv run python scripts/prepare_paired_raw.py \
+  /mnt/external/demosaic/references/rawnind-train32/manifest-train.json \
+  --output /mnt/external/demosaic/evaluation/paired-train32-prepared-v1
+uv run demosaic train configs/dino-paired-commons-44732.yaml \
+  --initialize /path/to/frozen-broad-camera-checkpoint.pt
+```
+
+`paired_manifest` must point to a prepared **train** manifest;
+`paired_fraction` sets the fraction of whole batches from that dataset. The
+loader verifies cache checksums and refuses development/test or unknown-sensor
+scenes. Training averages scenes/captures equally when drawing crops, preserves
+Bayer/mask geometry through rotations/reflections, and retains signed input noise.
+The step schedule is deterministic across restarts. Checkpoints hash/archive both
+training manifests; a changed paired manifest or batch fraction is rejected on
+resume. Measured clean CFA values supervise real detail; 4×4 AHD-derived RGB means
+supply coarse color only. Low-ISO reference noise remains a limitation.
+
+The optional `scripts/audit_paired_training.py` screens those RAW references
+against protected Commons photos, recording hashes, thresholds and limitations.
+Selection and near-duplicate screening do not establish model quality.
+
 The larger experiment uses `configs/dino-noise-24576.yaml`, initialized from
 the completed 20k DINO run. It requires the frozen audited 24576-source manifest.
 `noise_modulation: true` adds identity-initialized spatial conditioning from log

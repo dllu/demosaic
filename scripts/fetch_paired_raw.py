@@ -1,4 +1,4 @@
-"""Fetch a small, verified RawNIND paired-RAW evaluation subset under CC BY-SA 4.0."""
+"""Fetch fixed, verified RawNIND paired-RAW subsets under CC BY-SA 4.0."""
 
 import argparse
 from pathlib import Path
@@ -11,7 +11,9 @@ def main():
     parser.add_argument(
         "--output", type=Path, default=Path("/mnt/external/demosaic/references/rawnind-dataset")
     )
-    parser.add_argument("--split", choices=("development", "test", "both"), default="development")
+    parser.add_argument(
+        "--split", choices=("train", "development", "test", "both"), default="development"
+    )
     parser.add_argument("--workers", type=int, default=2)
     args = parser.parse_args()
     for split in ("development", "test") if args.split == "both" else (args.split,):
