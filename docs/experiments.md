@@ -573,4 +573,15 @@ more strongly but worsens real measured-CFA PSNR to 48.4693 dB versus V11's
 51.6932, with visible detail loss. It is rejected for promotion. See the
 [review with native crop triplets](refinement-review.md) and
 [source/weight/metric receipts](results/flat-precision-and-refiner-review.json).
-V11 remains the illustrative checkpoint, not an achieved quality target.
+V11 remains the initialization reference for the following photo-trained trial.
+
+V15 trains only the new 27,696-parameter RGB correction branch on the normal
+50/50 Commons/paired-RAW mixture, with the V11 base/DINO frozen. At step5000,
+known/unseen measured-CFA PSNR reaches 53.0998/52.8518 dB (+1.4066/+1.8683 over
+V11), with auxiliary RGB PSNR 38.9752/37.3160 and SSIM 0.91754/0.89840. RawNIND
+still leads by 0.9688/0.7104 dB measured PSNR. Full 427-photo synthetic PSNR/SSIM
+improves slightly to 31.44165/0.921748. Native crop reports show remaining
+texture loss and color variation. Complete 102 MP GFX RGB16/sRGB16 files were
+rendered and inspected; a larger V16 branch is undergoing its first 1000-step
+review and is now extending to 5000. See [the V15 review and native crops](photo-refinement-review.md) and
+[the GFX comparison](gfx-qualitative.md). The quality objective remains open.

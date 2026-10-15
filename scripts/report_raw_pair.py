@@ -16,8 +16,9 @@ import torch
 
 from demosaic.calibration import estimate_noise
 from demosaic.cfa import color_indices, malvar, pack
-from demosaic.inference import load_checkpoint
-from demosaic.io import read_raw
+from demosaic.color import render
+from demosaic.inference import load_checkpoint, restore_tiled
+from demosaic.io import read_raw, write_rgb16
 from demosaic.noise import Sensor
 from demosaic.precision import COMPUTE_DTYPES, amp_context
 from demosaic.realdata import read_reference
@@ -35,6 +36,11 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--rawnind", type=Path)
     parser.add_argument("--precision", choices=COMPUTE_DTYPES, default="float16")
+    parser.add_argument(
+        "--full-frame",
+        action="store_true",
+        help="Restore the complete photo before cropping; also save linear/sRGB16 TIFFs",
+    )
     args = parser.parse_args()
     torch.set_num_threads(4)
     selection = json.loads(args.selection.read_text())
@@ -96,7 +102,7 @@ def main():
     wb = torch.tensor(meta.white_balance, device="cuda")[None]
     matrix = torch.tensor(meta.camera_to_srgb, device="cuda")[None]
     exposure = selection.get("display_exposure", 4.0)
-    crops = []
+    crops, contexts, full_frames = [], [], []
     for region in selection["regions"]:
         x, y = region["noisy_xy"]
         rx, ry = region["reference_xy"]
@@ -127,17 +133,67 @@ def main():
             .cuda()
         )
         reference_display = display_crop(clean, wb, matrix, [0, 0, size, size], exposure=exposure)
-        for label, model, precision in models:
-            if isinstance(model, RawNind):
-                model.input_scale = torch.tensor(
-                    publisher_input_scale(
-                        meta.white_levels, meta.black_levels, meta.adc_white_level
-                    ),
-                    device="cuda",
+        contexts.append((region, tx, ty, packed, variance, xywh, noisy, reference_display))
+    for model_index, (label, model, precision) in enumerate(models):
+        if isinstance(model, RawNind):
+            model.input_scale = torch.tensor(
+                publisher_input_scale(meta.white_levels, meta.black_levels, meta.adc_white_level),
+                device="cuda",
+            )
+        if args.full_frame:
+            restored, timing = restore_tiled(
+                model,
+                raw,
+                colors[0],
+                shot=shot,
+                read=read,
+                tile=512,
+                overlap=64,
+                batch_size=4,
+                wb=meta.white_balance,
+                matrix=meta.camera_to_srgb,
+                precision=precision,
+            )
+            paths = [
+                output / f"restored-{model_index}-linear16.tiff",
+                output / f"restored-{model_index}-srgb16.tiff",
+            ]
+            write_rgb16(paths[0], restored.permute(1, 2, 0).numpy(), metadata=meta, flip=meta.flip)
+            preview = render(restored[None] * exposure, wb.cpu(), matrix.cpu())[0]
+            write_rgb16(
+                paths[1],
+                preview.permute(1, 2, 0).numpy(),
+                metadata={"raw": asdict(meta), "display_exposure": exposure},
+                color_space="sRGB",
+                flip=meta.flip,
+            )
+            files = []
+            for path in paths:
+                with path.open("rb") as handle:
+                    digest = hashlib.file_digest(handle, "sha256").hexdigest()
+                files.append({"path": path.name, "bytes": path.stat().st_size, "sha256": digest})
+            full_frames.append(
+                {
+                    "model_label": label,
+                    "timing": timing,
+                    "files": files,
+                    "display_exposure": exposure,
+                    "crop_source": "Blended FP32 full frame before RGB16 encoding",
+                }
+            )
+            del preview
+            print(json.dumps({"event": "full-frame", "model": label, **timing}), flush=True)
+        for region, tx, ty, packed, variance, xywh, noisy, reference_display in contexts:
+            if args.full_frame:
+                x, y = region["noisy_xy"]
+                size = region.get("size", 160)
+                denoised = display_crop(
+                    restored[None], wb.cpu(), matrix.cpu(), [x, y, size, size], exposure=exposure
                 )
-            with amp_context("cuda", dtype=precision):
-                prediction = model(packed, variance, colors, wb, matrix)
-            denoised = display_crop(prediction, wb, matrix, xywh, exposure=exposure)
+            else:
+                with amp_context("cuda", dtype=precision):
+                    prediction = model(packed, variance, colors, wb, matrix)
+                denoised = display_crop(prediction, wb, matrix, xywh, exposure=exposure)
             crops.append(
                 save_triplet(
                     output,
@@ -145,13 +201,17 @@ def main():
                     [
                         ("Noisy (Malvar)", noisy),
                         ("Denoised", denoised),
-                        ("ISO100 reference", reference_display),
+                        (
+                            f"ISO{refmeta.iso:g} reference" if refmeta.iso else "Low-ISO reference",
+                            reference_display,
+                        ),
                     ],
                     caption=f"{region['name']} / {label}",
                     metadata={
                         "region": region,
                         "model_label": label,
-                        "context_xywh": [tx, ty, tile, tile],
+                        "context_xywh": None if args.full_frame else [tx, ty, tile, tile],
+                        "full_frame": args.full_frame,
                         "display_exposure": exposure,
                         "shared_wb": meta.white_balance,
                         "shared_matrix": meta.camera_to_srgb,
@@ -159,6 +219,8 @@ def main():
                     },
                 )
             )
+        if args.full_frame:
+            del restored
     sources = []
     for key, metadata in (("noisy", meta), ("reference", refmeta)):
         with Path(selection[key]).open("rb") as handle:
@@ -178,6 +240,7 @@ def main():
         },
         "reference_calibration": calibration,
         "native_crops": crops,
+        "full_frames": full_frames,
         "usage": "Qualitative evaluation only; never training",
         "quality_scores": None,
     }

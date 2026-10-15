@@ -159,6 +159,15 @@ training does not change inference defaults: select `--precision float32` when
 evaluating that arithmetic. The flat-only V12/V13 configs are learnability
 diagnostics, not recommended photographic training recipes.
 
+`model.noise_refinement: true` adds an identity-initialized RGB correction branch
+in estimated-noise units. The branch keeps IEEE FP32 arithmetic even when the
+base network uses BF16/FP16. With `refiner_only: true`, only that branch trains;
+all original restoration/DINO parameters are frozen. Changing that trainable
+selection on resume is rejected. The photo-trained V15 recipe is
+`configs/dino-paired-refiner-v15.yaml`; its frozen step5000 evaluation improves
+real RAW development quality, but it is still behind RawNIND. Flat-only V14 is
+rejected. See [the review and native crop comparisons](photo-refinement-review.md).
+
 `flat_fraction` optionally adds continuous-precision smooth scenes, spanning
 neutral/color flat fields and gentle ramps down to deep shadows. The default is
 zero, preserving existing sample draws. With `flat_fraction: 0.1` and the default
@@ -243,7 +252,7 @@ occupy separate memory in PyTorch on the GB10 despite shared physical DRAM.
 default), `--precision float16`, or `--precision float32`. This selects neural
 compute precision. New checkpoints keep physical interpolation, the variance
 prior, color conversion and overlap accumulation in FP32. Explicit `float32`
-also disables TF32; CPU inference uses FP32. Training still uses BF16.
+also disables TF32; CPU inference uses FP32. Training defaults to BF16.
 The output sidecar records the effective compute precision and memory layout.
 FP16 gives a small measured quality gain for V6: a matched 427-photo comparison
 finds +0.0218 dB and +0.000723 SSIM over BF16. The 16-photo FP32 reference is

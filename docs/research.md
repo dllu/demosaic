@@ -109,3 +109,20 @@ separate older `test_reserve.yaml` file does not enumerate that current reserve;
 the acquisition pipeline uses descriptor flags and corrected filename prefixes.
 Small development and untouched official-test subsets are now checksum-verified;
 see [data selection and reference-unit caveats](evaluation.md#paired-real-raw-evaluation-sources).
+
+## Follow-up on weak-signal representation
+
+[Ke et al., CVPR workshop 2025](https://arxiv.org/html/2312.03640) compare linear
+RAW/HDR training with perceptual input/output encodings and losses. Their results
+motivate testing signal representation separately from numerical precision;
+they do not establish which representation works best for our Bayer task. Our
+matched BF16/IEEE-FP32 flat controls are close. The noise-unit RGB correction
+branch is an independent experiment; it is not a reproduction of that study.
+
+[YOND, June 2025](https://arxiv.org/abs/2506.03645) combines noise estimation,
+expectation-matched variance stabilization and an SNR-guided denoiser. Its
+[official repository](https://github.com/fenghansen/YOND_public) labels the code
+MIT but states that core CNE/EM-VST modules are obfuscated pending acceptance;
+weights are linked through Baidu Netdisk. No YOND code or weights have been
+incorporated, and no reproduced baseline score is claimed. It remains useful
+primary-source context for variance stabilization and calibrated noise handling.

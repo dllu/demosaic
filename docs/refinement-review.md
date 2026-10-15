@@ -51,8 +51,9 @@ SSIM rises while measured-CFA and rendered PSNR worsen. Smoothing removes actual
 structure and leaves visible phase patterns at edges.
 V14 is **rejected for promotion**. The same trial is retained in the local GFX
 comparison; no claim of improvement follows from a cleaner-looking sky alone.
-No further training is currently running, and the official final-test targets
-remain unused for model selection. The real RAW quality goal remains unmet.
+V14 stopped at step1000. Subsequent photo-trained trials are tracked in
+[experiments.md](experiments.md). Official final-test targets remain unused for
+model selection. The real RAW quality goal remains unmet.
 
 Sources: Benoit Brummer and Christophe De Vleeschouwer, *Raw Natural Image Noise
 Dataset (2025)*, [dataset](https://doi.org/10.14428/DVN/DEQCIM),

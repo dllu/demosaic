@@ -1,0 +1,672 @@
+{
+  "selection": {
+    "noisy": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+    "reference": ".cache/gfx-qualitative-20231231/2023-12-31-17-17-29_DSCF3883_5aca341358e235a261977d539b38bdbbedc40fc3.raf",
+    "display_exposure": 4.0,
+    "notes": "GFX100S / 55mm. Noisy: ISO6400, f/1.7, 1/300s, underexposed to retain platform/train lights. Reference: ISO100, f/5.6, 2.5s, captured about ten minutes later. Framing, aperture, depth of field, clouds, lights and moving subjects differ. Independently selected native sensor regions: qualitative reference, not exact ground truth. No resizing or warping. These photos are evaluation-only, never training.",
+    "regions": [
+      {
+        "name": "overcast-sky",
+        "noisy_xy": [
+          5800,
+          1400
+        ],
+        "reference_xy": [
+          6700,
+          970
+        ],
+        "size": 160
+      },
+      {
+        "name": "building-detail",
+        "noisy_xy": [
+          5680,
+          2840
+        ],
+        "reference_xy": [
+          5934,
+          2440
+        ],
+        "size": 160
+      }
+    ]
+  },
+  "sources": [
+    {
+      "role": "noisy",
+      "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e",
+      "metadata": {
+        "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+        "camera": "GFX100S",
+        "pattern": "RGGB",
+        "black_levels": [
+          4098.0,
+          4097.0,
+          4104.0,
+          4104.0
+        ],
+        "white_levels": [
+          65535.0,
+          65535.0,
+          65535.0,
+          65535.0
+        ],
+        "white_balance": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "camera_to_srgb": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "flip": 0,
+        "iso": 6400,
+        "adc_white_level": 65535.0
+      }
+    },
+    {
+      "role": "reference",
+      "sha256": "7de8e3493e76d8b3f8663ebe0237d72d14aa8626b5962ee8a1e7d10ee3fd4806",
+      "metadata": {
+        "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-29_DSCF3883_5aca341358e235a261977d539b38bdbbedc40fc3.raf",
+        "camera": "GFX100S",
+        "pattern": "RGGB",
+        "black_levels": [
+          256.0,
+          255.0,
+          256.0,
+          256.0
+        ],
+        "white_levels": [
+          65535.0,
+          65535.0,
+          65535.0,
+          65535.0
+        ],
+        "white_balance": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "camera_to_srgb": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "flip": 0,
+        "iso": 100,
+        "adc_white_level": 65535.0
+      }
+    }
+  ],
+  "models": [
+    {
+      "label": "0:dino-paired-refiner-v15:step-5000",
+      "sha256": "3a1f9f007a7366d2e930d756d343f1c6904002ed29c594464be1b45b45cfcae7",
+      "snapshot": "/mnt/external/demosaic/evaluation/gfx-refiner-v15-5k-full/weights/weights-3a1f9f007a7366d2e930d756d343f1c6904002ed29c594464be1b45b45cfcae7.pt",
+      "precision": "float16",
+      "model_config": {
+        "width": 32,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+        "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+        "camera_conditioning": true,
+        "noise_modulation": true,
+        "physical_fp32": true,
+        "baseline": "wiener-malvar",
+        "prior_window": 7,
+        "standardized_noise": false,
+        "noise_refinement": true,
+        "refinement_width": 24,
+        "refinement_blocks": 4,
+        "refinement_window": 63
+      }
+    },
+    {
+      "label": "RawNIND:CFA-LS",
+      "precision": "IEEE float32",
+      "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+    }
+  ],
+  "noise_estimate": {
+    "shot": null,
+    "read": null,
+    "reliable": false,
+    "reason": "insufficient_intensity_span",
+    "candidate_patches": 4096,
+    "accepted_patches": 765,
+    "intensity_span": 0.038634646125137784,
+    "reference_intensity": 0.012820597738027573,
+    "reference_variance": 1.972013160411734e-05,
+    "shot_interval": null,
+    "read_interval": null,
+    "bins": [
+      {
+        "mean": 0.007329472806304693,
+        "variance": 1.1212351637368556e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.008058307692408562,
+        "variance": 1.2951884855283424e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.00863637961447239,
+        "variance": 1.376775207972969e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.00912708230316639,
+        "variance": 1.4333081253425917e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.009817061014473438,
+        "variance": 1.49797733683954e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.010441528633236885,
+        "variance": 1.6194640011235606e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.01121448166668415,
+        "variance": 1.765823344612727e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.012145820073783398,
+        "variance": 1.9053898540732916e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.013172911014407873,
+        "variance": 2.0338953618193045e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.01416056603193283,
+        "variance": 2.262902671645861e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.01539386436343193,
+        "variance": 2.358829169679666e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.01708341483026743,
+        "variance": 2.6296196665498428e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.018991870805621147,
+        "variance": 2.922604380728444e-05,
+        "patches": 48
+      },
+      {
+        "mean": 0.022024966776371002,
+        "variance": 3.354269210831262e-05,
+        "patches": 47
+      },
+      {
+        "mean": 0.03205864876508713,
+        "variance": 4.5584198232972994e-05,
+        "patches": 47
+      },
+      {
+        "mean": 0.05841492861509323,
+        "variance": 8.342704677488655e-05,
+        "patches": 47
+      }
+    ]
+  },
+  "conditioning": {
+    "shot": 0.00128,
+    "read": 6.553600000000001e-06,
+    "source": "nominal ISO prior (not calibrated)"
+  },
+  "reference_calibration": {
+    "rgb_to_sensor_gains": [
+      1.0000663817425588,
+      1.0000572249368773,
+      1.000089292653889
+    ],
+    "samples": [
+      931092,
+      2287985,
+      685590
+    ]
+  },
+  "native_crops": [
+    {
+      "image": "crop-714fc374e7fd528e.png",
+      "caption": "overcast-sky / 0:dino-paired-refiner-v15:step-5000",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 reference",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "55cf259cf532393bd7b5054928a12a95bee31ce9362d7d81c23ca7b7834b9766",
+      "region": {
+        "name": "overcast-sky",
+        "noisy_xy": [
+          5800,
+          1400
+        ],
+        "reference_xy": [
+          6700,
+          970
+        ],
+        "size": 160
+      },
+      "model_label": "0:dino-paired-refiner-v15:step-5000",
+      "context_xywh": null,
+      "full_frame": true,
+      "display_exposure": 4.0,
+      "shared_wb": [
+        1.5132450331125828,
+        1.0,
+        2.2152317880794703
+      ],
+      "shared_matrix": [
+        [
+          1.0725188393098881,
+          0.17123593128834644,
+          -0.24375477059823436
+        ],
+        [
+          -0.1267191317089774,
+          1.4310509369654432,
+          -0.3043318052564657
+        ],
+        [
+          -0.009697676902906037,
+          -0.29348063283422965,
+          1.3031783097371357
+        ]
+      ],
+      "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+      "repository_image": "docs/images/gfx-overcast-sky-v15.png"
+    },
+    {
+      "image": "crop-c2b44226c8639fbb.png",
+      "caption": "building-detail / 0:dino-paired-refiner-v15:step-5000",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 reference",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "a09ddc6ad0d9bb10a68b62f3d90c75bd0b24b7deab3c3fc2fbe1b3a26b6e8200",
+      "region": {
+        "name": "building-detail",
+        "noisy_xy": [
+          5680,
+          2840
+        ],
+        "reference_xy": [
+          5934,
+          2440
+        ],
+        "size": 160
+      },
+      "model_label": "0:dino-paired-refiner-v15:step-5000",
+      "context_xywh": null,
+      "full_frame": true,
+      "display_exposure": 4.0,
+      "shared_wb": [
+        1.5132450331125828,
+        1.0,
+        2.2152317880794703
+      ],
+      "shared_matrix": [
+        [
+          1.0725188393098881,
+          0.17123593128834644,
+          -0.24375477059823436
+        ],
+        [
+          -0.1267191317089774,
+          1.4310509369654432,
+          -0.3043318052564657
+        ],
+        [
+          -0.009697676902906037,
+          -0.29348063283422965,
+          1.3031783097371357
+        ]
+      ],
+      "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+      "repository_image": "docs/images/gfx-building-detail-v15.png"
+    },
+    {
+      "image": "crop-cd6c40601304fad3.png",
+      "caption": "overcast-sky / RawNIND:CFA-LS",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 reference",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "ca803ec9552aa3cc2da206aa32695ed0861a2cf67a7374c1a9b26d9fd8dee4e7",
+      "region": {
+        "name": "overcast-sky",
+        "noisy_xy": [
+          5800,
+          1400
+        ],
+        "reference_xy": [
+          6700,
+          970
+        ],
+        "size": 160
+      },
+      "model_label": "RawNIND:CFA-LS",
+      "context_xywh": null,
+      "full_frame": true,
+      "display_exposure": 4.0,
+      "shared_wb": [
+        1.5132450331125828,
+        1.0,
+        2.2152317880794703
+      ],
+      "shared_matrix": [
+        [
+          1.0725188393098881,
+          0.17123593128834644,
+          -0.24375477059823436
+        ],
+        [
+          -0.1267191317089774,
+          1.4310509369654432,
+          -0.3043318052564657
+        ],
+        [
+          -0.009697676902906037,
+          -0.29348063283422965,
+          1.3031783097371357
+        ]
+      ],
+      "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+      "repository_image": "docs/images/gfx-overcast-sky-rawnind.png"
+    },
+    {
+      "image": "crop-4c22fb35b83dce6f.png",
+      "caption": "building-detail / RawNIND:CFA-LS",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 reference",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "515dea56b86934a7b044a6f3fc4defb2930a7509240542745a40854ff4c66b34",
+      "region": {
+        "name": "building-detail",
+        "noisy_xy": [
+          5680,
+          2840
+        ],
+        "reference_xy": [
+          5934,
+          2440
+        ],
+        "size": 160
+      },
+      "model_label": "RawNIND:CFA-LS",
+      "context_xywh": null,
+      "full_frame": true,
+      "display_exposure": 4.0,
+      "shared_wb": [
+        1.5132450331125828,
+        1.0,
+        2.2152317880794703
+      ],
+      "shared_matrix": [
+        [
+          1.0725188393098881,
+          0.17123593128834644,
+          -0.24375477059823436
+        ],
+        [
+          -0.1267191317089774,
+          1.4310509369654432,
+          -0.3043318052564657
+        ],
+        [
+          -0.009697676902906037,
+          -0.29348063283422965,
+          1.3031783097371357
+        ]
+      ],
+      "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+      "repository_image": "docs/images/gfx-building-detail-rawnind.png"
+    }
+  ],
+  "full_frames": [
+    {
+      "model_label": "0:dino-paired-refiner-v15:step-5000",
+      "timing": {
+        "seconds": 28.894355366006494,
+        "tile_seconds": 28.706555895041674,
+        "compute_transfer_seconds": 28.08382763247937,
+        "blend_seconds": 0.5618086042813957,
+        "megapixels": 101.995852,
+        "tiles": 520,
+        "tile": 512,
+        "overlap": 64,
+        "batch_size": 4,
+        "compute_precision": "float16",
+        "memory_format": "channels_last",
+        "peak_cuda_gb": 0.634397184
+      },
+      "files": [
+        {
+          "path": "restored-0-linear16.tiff",
+          "bytes": 611976040,
+          "sha256": "fb75f832e2a2db4f30335fdbbb477247b999bbacde73d6270949ba2af13375c6"
+        },
+        {
+          "path": "restored-0-srgb16.tiff",
+          "bytes": 611976664,
+          "sha256": "61c1a185a141c19bf58e15728af530401d46e45b005fceed1f137ed378e5d6fa"
+        }
+      ],
+      "display_exposure": 4.0,
+      "crop_source": "Blended FP32 full frame before RGB16 encoding"
+    },
+    {
+      "model_label": "RawNIND:CFA-LS",
+      "timing": {
+        "seconds": 16.353025279007852,
+        "tile_seconds": 16.284973203903064,
+        "compute_transfer_seconds": 15.882620377698913,
+        "blend_seconds": 0.3234003249090165,
+        "megapixels": 101.995852,
+        "tiles": 520,
+        "tile": 512,
+        "overlap": 64,
+        "batch_size": 4,
+        "compute_precision": "float32",
+        "memory_format": "channels_last",
+        "peak_cuda_gb": 1.374068736
+      },
+      "files": [
+        {
+          "path": "restored-1-linear16.tiff",
+          "bytes": 611976040,
+          "sha256": "65553cf4ce3d3c07bcc2cc5fb3e4c0ade083fe7416ebbed4fdc4a1b300f56633"
+        },
+        {
+          "path": "restored-1-srgb16.tiff",
+          "bytes": 611976664,
+          "sha256": "8db05de828f9ab998091929a35b212c2a81dbd3ff37695a68317bfe4ab82c31b"
+        }
+      ],
+      "display_exposure": 4.0,
+      "crop_source": "Blended FP32 full frame before RGB16 encoding"
+    }
+  ],
+  "usage": "Qualitative evaluation only; never training",
+  "quality_scores": null,
+  "report": "/mnt/external/demosaic/evaluation/gfx-refiner-v15-5k-full/report.json",
+  "report_sha256": "aa3bbdafa72d11b6bcf82ab2e0cb9282d72659d57a75cfd582bd7c207433be48",
+  "tiff_verification": {
+    "shape": [
+      8746,
+      11662,
+      3
+    ],
+    "dtype": "uint16",
+    "bits_per_sample": 16,
+    "sampled_distinct_values": [
+      10969,
+      39713,
+      11012,
+      38858
+    ],
+    "srgb_icc": true,
+    "note": "All four complete TIFFs inspected; sample stride37. Timing overlapped other evaluation jobs; not an idle speed benchmark."
+  }
+}

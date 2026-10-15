@@ -3,23 +3,22 @@
 Joint Bayer demosaicing and denoising in linear camera RGB, with 16-bit TIFF
 output, physical noise conditioning, tiled inference, and an optional DINOv3
 feature branch. Experimental: training and quality validation are in progress.
-Synthetic validation has improved, but paired real RAW development currently
-favors RawNIND and exposed a camera-conditioning failure. Quality work continues;
+Paired real RAW development still favors RawNIND. Quality work continues;
 state-of-the-art performance is not established.
 
-Native 160×160 validation crops: noisy → denoised → GT, using V11 step5000
+Native 160×160 validation crops: noisy → denoised → GT, using V15 step5000
 (FP16, ISO12800 synthetic noise prior). These are 100% crops at the 8×8-binned
 evaluation resolution, with identical display transforms; open the PNG at 100%.
 They illustrate current behavior, including lost fine detail.
 
-![Noisy, denoised and GT: fabric detail](docs/images/validation-fabric-v11.png)
+![Noisy, denoised and GT: fabric detail](docs/images/validation-fabric-v15.png)
 
-![Noisy, denoised and GT: building and sky](docs/images/validation-building-v11.png)
+![Noisy, denoised and GT: building and sky](docs/images/validation-building-v15.png)
 
 Sources: [Roy Egloff](https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg)
 and [Dietmar Rabich](https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg),
 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); modified by binning,
-cropping, simulated noise and restoration. See [crop receipts](docs/results/native-crop-examples-v11.json)
+cropping, simulated noise and restoration. See [the performance review and crop receipts](docs/photo-refinement-review.md)
 and [real GFX100S crops](docs/gfx-qualitative.md).
 
 ```bash

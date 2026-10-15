@@ -1,0 +1,58 @@
+manifest: /mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl
+run: /mnt/external/demosaic/runs/dino-paired-refiner-v15
+device: cuda
+seed: 42
+steps: 5000
+batch_size: 8
+patch_size: 256
+workers: 4
+cpu_threads: 4
+synthetic_fraction: 0.2
+flat_fraction: 0.1
+noise_free_fraction: 0.1
+reconstruct_highlights: true
+preserve_negative_read_noise: true
+broad_camera: true
+lr: 0.0005
+warmup_steps: 100
+checkpoint_every: 1000
+val_batches: 4
+log_every: 25
+amp: true
+min_available_gb: 12
+model:
+  width: 32
+  encoder_blocks:
+  - 2
+  - 2
+  - 4
+  middle_blocks: 6
+  decoder_blocks:
+  - 2
+  - 2
+  - 2
+  attention: true
+  dino: true
+  camera_conditioning: true
+  dino_revision: 114c1379950215c8b35dfcd4e90a5c251dde0d32
+  noise_modulation: true
+  physical_fp32: true
+  baseline: wiener-malvar
+  prior_window: 7
+  noise_refinement: true
+  refinement_width: 24
+  refinement_blocks: 4
+  refinement_window: 63
+validation_protocol: configs/evaluation.yaml
+validation_images: 8
+reset_output_heads: false
+experiment_notes: Initialize frozen V11 step5000 EMA with a zero-output RGB refiner.
+  Train only the 27696-parameter refiner, with original losses and the normal 50/50
+  paired-RAW and Commons distribution (including real structure); all original restoration/DINO
+  weights frozen. Review at step1000 before extending. GFX qualitative scene/siblings
+  and all development/final-test RAWs excluded from training.
+paired_manifest: /mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json
+paired_fraction: 0.5
+paired_workers: 2
+refiner_only: true
+precision: bfloat16
