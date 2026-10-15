@@ -65,6 +65,37 @@
     "ruff": "passed",
     "wheel": "built; exact implementation and four license notices verified"
   },
-  "status": "Prepared matched anchored trial; no quality result yet",
-  "planned_stop": 1000
+  "status": "Training first1000; first batch fingerprint matches V29. Evaluations queued sequentially; no quality result yet.",
+  "planned_stop": 1000,
+  "started_utc": "2026-10-15T23:49:51.889245+00:00",
+  "workflow": {
+    "state": "/mnt/external/demosaic/runs/dino-anchored-stabilized-rgb-v30/workflow.json",
+    "log": ".cache/anchored-stabilized-rgb-v30-workflow.log",
+    "train_log": ".cache/train-anchored-stabilized-rgb-v30-1k.log",
+    "stop_after": 1000,
+    "after_training": [
+      "compare all logged observation hashes against V29",
+      "known real development",
+      "unseen real development",
+      "synthetic16 screen",
+      "GFX native contexts"
+    ],
+    "source_commit": "fdbd1f840e7de07f91ce500a2d5217b5a388064e"
+  },
+  "first_training_batch": {
+    "event": "train",
+    "step": 1,
+    "loss": 0.022227244451642036,
+    "lr": 1.0000000000000002e-06,
+    "grad_norm": 2.0250260829925537,
+    "seconds_per_step": 10.56194108701311,
+    "cuda_gb": 2.11151616,
+    "domain": "synthetic",
+    "linear": 0.010890456847846508,
+    "rendered": 0.01592344418168068,
+    "gradient": 0.01396507304161787,
+    "highlight": 0.010544977150857449,
+    "sensor": 0.009240612387657166,
+    "batch_sha256": "547fc5b20b77e819370f931c2d3d16b048ecb8954c679d8c7c66da4315025aad"
+  }
 }
