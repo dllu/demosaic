@@ -5,6 +5,7 @@ import json
 import math
 import random
 import time
+from contextlib import nullcontext
 from pathlib import Path
 
 import psutil
@@ -18,12 +19,14 @@ from .data import CleanDataset, degrade
 from .losses import psnr, reconstruction_loss
 from .model import JointDemosaic, ModelConfig
 from .paired_training import PairedDataset, paired_reconstruction_loss, paired_step
-from .precision import amp_context
+from .precision import amp_context, ieee_fp32
 from .safety import writable_path
 
 
 @torch.inference_mode()
-def evaluate(model, loader, device, *, max_batches=16, amp=True, physical_fp32=True):
+def evaluate(
+    model, loader, device, *, max_batches=16, amp=True, physical_fp32=True, precision="bfloat16"
+):
     model.eval()
     generator = torch.Generator(device=device).manual_seed(20261014)
     scores = {
@@ -41,7 +44,7 @@ def evaluate(model, loader, device, *, max_batches=16, amp=True, physical_fp32=T
             generator=generator,
             physical_fp32=physical_fp32,
         )
-        with amp_context(device, amp):
+        with amp_context(device, amp or precision == "float32", dtype=precision):
             output = model(
                 batch["packed"], batch["variance"], batch["colors"], batch["wb"], batch["matrix"]
             )
@@ -116,6 +119,9 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     if resume and initialize:
         raise ValueError("Choose resume or initialize, not both")
     config = yaml.safe_load(Path(config_path).read_text())
+    precision = config.get("precision", "bfloat16")
+    if precision not in ("bfloat16", "float32"):
+        raise ValueError("Training precision must be bfloat16 or float32")
     paired_fraction = config.get("paired_fraction", 0.0)
     if not 0 <= paired_fraction <= 1:
         raise ValueError("Paired training fraction must be in [0,1]")
@@ -242,6 +248,8 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             raise ValueError("Resume paired manifest differs from checkpoint")
         if state["config"].get("paired_fraction", 0.0) != paired_fraction:
             raise ValueError("Resume paired training fraction differs from checkpoint")
+        if state["config"].get("precision", "bfloat16") != precision:
+            raise ValueError("Resume training precision differs; initialize a new run")
         if ModelConfig.from_checkpoint(state["model_config"]).to_dict() != model.config.to_dict():
             raise ValueError("Resume model configuration differs from checkpoint")
         incompatible = model.load_state_dict(state["model"], strict=False)
@@ -323,6 +331,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 "dino": model.config.dino,
                 "paired_train_scenes": len(paired_data) if paired_data is not None else 0,
                 "paired_fraction": paired_fraction,
+                "compute_precision": precision,
             }
         ),
         flush=True,
@@ -359,7 +368,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 broad_camera=config.get("broad_camera", False),
             )
         optimizer.zero_grad(set_to_none=True)
-        with amp_context(device, amp):
+        with amp_context(device, amp or precision == "float32", dtype=precision):
             prediction, auxiliary = model(
                 batch["packed"],
                 batch["variance"],
@@ -380,8 +389,11 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 )
         if not torch.isfinite(loss):
             raise RuntimeError(f"Nonfinite loss at step {step}; last checkpoint retained")
-        loss.backward()
-        grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 1, error_if_nonfinite=True)
+        with ieee_fp32() if precision == "float32" else nullcontext():
+            loss.backward()
+            grad_norm = torch.nn.utils.clip_grad_norm_(
+                model.parameters(), 1, error_if_nonfinite=True
+            )
         optimizer.step()
         update_ema(model, ema, min(config.get("ema_decay", 0.999), (1 + step) / (10 + step)))
         if step == first + 1 or step % config.get("log_every", 25) == 0:
@@ -410,6 +422,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 max_batches=config.get("val_batches", 16),
                 amp=amp,
                 physical_fp32=model.config.physical_fp32,
+                precision=precision,
             )
             if config.get("validation_protocol"):
                 from .suite import evaluate_panel
@@ -430,6 +443,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                         images=config.get("validation_images", 16),
                         batch_size=batch_size,
                         amp=amp,
+                        precision=precision,
                     )
                 )
             model.load_state_dict(current, strict=False)

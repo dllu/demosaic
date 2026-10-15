@@ -151,6 +151,14 @@ Old checkpoints lacking this field retain their historical arithmetic on load.
 New checkpoints record it explicitly. Changing this mode requires a new run via
 `--initialize`, not an exact continuation via `--resume`.
 
+Training `precision: float32` selects IEEE FP32 neural forward, loss and backward,
+including validation; TF32 is disabled inside those operations. The historical
+default is `bfloat16`. A precision change requires a new initialized run.
+`physical_fp32` remains a separate setting for sensor/color operations. FP32
+training does not change inference defaults: select `--precision float32` when
+evaluating that arithmetic. The flat-only V12/V13 configs are learnability
+diagnostics, not recommended photographic training recipes.
+
 `flat_fraction` optionally adds continuous-precision smooth scenes, spanning
 neutral/color flat fields and gentle ramps down to deep shadows. The default is
 zero, preserving existing sample draws. With `flat_fraction: 0.1` and the default

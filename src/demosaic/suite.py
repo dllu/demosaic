@@ -71,7 +71,9 @@ def _number(value):
 
 
 @torch.inference_mode()
-def evaluate_panel(model, dataset, config, device, *, images=16, batch_size=4, amp=True):
+def evaluate_panel(
+    model, dataset, config, device, *, images=16, batch_size=4, amp=True, precision="bfloat16"
+):
     """Small balanced monitor for training; full-suite evaluation remains separate."""
     model.eval()
     protocol = yaml.safe_load(Path(config).read_text())
@@ -95,7 +97,7 @@ def evaluate_panel(model, dataset, config, device, *, images=16, batch_size=4, a
                     protocol["camera_to_srgb"],
                     protocol.get("seed", 42),
                 )
-                with amp_context(device, amp):
+                with amp_context(device, amp or precision == "float32", dtype=precision):
                     prediction = model(
                         batch["packed"],
                         batch["variance"],
