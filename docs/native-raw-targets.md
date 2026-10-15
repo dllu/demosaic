@@ -81,3 +81,16 @@ Dataset (2025)*, [dataset](https://doi.org/10.14428/DVN/DEQCIM),
 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
 Individual scene credits and additional CC0 grants are in the acquired
 `permissions.txt`.
+
+Additional native-RAW source survey (2026-10-15): the [raw.pixls.us catalog](https://raw.pixls.us/)
+contains 2016 entries in the fetched snapshot, of which 1870 individually link
+to CC0, covering 925 distinct make/model pairs. Legacy entries with other
+licenses are separate. Nine inspected candidate metadata files span Nikon Z7/
+Z7II, GFX50R/GFX100S, Leica Q2/SL2, Sony a7RIV/a7RV and Panasonic S1R, all
+ISO50–100. [Catalog hash, entry license links and metadata receipts](results/public-raw-candidate-survey.json)
+are retained. This is a source survey: no RAW pixels have been downloaded,
+prepared, scored or added to training. Published catalog labels can describe
+compression modes imperfectly; verify actual Bayer geometry and bit depth.
+Camera samples may overlap the user's own contributed/public photos or existing
+protected scenes. A checksum and scene/near-duplicate audit must precede any
+new training manifest. These candidates do not change the matched V24/V25 data.
