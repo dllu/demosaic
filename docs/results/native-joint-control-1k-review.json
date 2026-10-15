@@ -1,0 +1,4743 @@
+{
+  "known": {
+    "summary": "/mnt/external/demosaic/evaluation/paired-raw-native-joint-v22-control-v23-1k/summary.json",
+    "summary_sha256": "a3e962a02e861f84bc82036eae60b3f03e48640b71a0bb03417fa82e6f2ac310",
+    "models": [
+      {
+        "label": "0:dino-native-joint-v22:step-1000",
+        "snapshot": "/mnt/external/demosaic/evaluation/paired-raw-native-joint-v22-control-v23-1k/weights/weights-8bafa37175ebfccfa35b52aa7ed16bb9bc06aee0848159c9bc9b8de4e9b748ab.pt",
+        "sha256": "8bafa37175ebfccfa35b52aa7ed16bb9bc06aee0848159c9bc9b8de4e9b748ab",
+        "step": 1000,
+        "model_config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": true,
+          "refinement_width": 48,
+          "refinement_blocks": 8,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31
+        },
+        "checkpoint_model_config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": true,
+          "refinement_width": 48,
+          "refinement_blocks": 8,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31
+        },
+        "compute_precision": "float16",
+        "refinement_compute_precision": "float32"
+      },
+      {
+        "label": "1:dino-native-joint-control-v23:step-1000",
+        "snapshot": "/mnt/external/demosaic/evaluation/paired-raw-native-joint-v22-control-v23-1k/weights/weights-977fd7169410c28b410b8676cc5bf36686b982567c415dadee9a1acd663cba25.pt",
+        "sha256": "977fd7169410c28b410b8676cc5bf36686b982567c415dadee9a1acd663cba25",
+        "step": 1000,
+        "model_config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": true,
+          "refinement_width": 48,
+          "refinement_blocks": 8,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31
+        },
+        "checkpoint_model_config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": true,
+          "refinement_width": 48,
+          "refinement_blocks": 8,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31
+        },
+        "compute_precision": "float16",
+        "refinement_compute_precision": "float32"
+      }
+    ],
+    "overall": [
+      {
+        "model": "0:dino-native-joint-v22:step-1000",
+        "kind": "real",
+        "metrics": {
+          "sensor_psnr": {
+            "mean": 53.28997092776828,
+            "count": 4
+          },
+          "reference_samples": {
+            "mean": 200661.7361111111,
+            "count": 4
+          },
+          "ahd_srgb_psnr": {
+            "mean": 39.144125911924576,
+            "count": 4
+          },
+          "ahd_srgb_ssim": {
+            "mean": 0.922002983589967,
+            "count": 4
+          },
+          "ahd_chroma_mae": {
+            "mean": 0.006657150624151757,
+            "count": 4
+          },
+          "ahd_gradient_mae": {
+            "mean": 0.0068837020177549375,
+            "count": 4
+          }
+        }
+      },
+      {
+        "model": "1:dino-native-joint-control-v23:step-1000",
+        "kind": "real",
+        "metrics": {
+          "sensor_psnr": {
+            "mean": 53.263751347859696,
+            "count": 4
+          },
+          "reference_samples": {
+            "mean": 200661.7361111111,
+            "count": 4
+          },
+          "ahd_srgb_psnr": {
+            "mean": 39.07982765303717,
+            "count": 4
+          },
+          "ahd_srgb_ssim": {
+            "mean": 0.9212988706098663,
+            "count": 4
+          },
+          "ahd_chroma_mae": {
+            "mean": 0.006713454129769363,
+            "count": 4
+          },
+          "ahd_gradient_mae": {
+            "mean": 0.006925513363158744,
+            "count": 4
+          }
+        }
+      },
+      {
+        "model": "Bilinear",
+        "kind": "real",
+        "metrics": {
+          "sensor_psnr": {
+            "mean": 44.10599215825399,
+            "count": 4
+          },
+          "reference_samples": {
+            "mean": 200661.7361111111,
+            "count": 4
+          },
+          "ahd_srgb_psnr": {
+            "mean": 29.836332321166992,
+            "count": 4
+          },
+          "ahd_srgb_ssim": {
+            "mean": 0.5878955717715952,
+            "count": 4
+          },
+          "ahd_chroma_mae": {
+            "mean": 0.02503708149823878,
+            "count": 4
+          },
+          "ahd_gradient_mae": {
+            "mean": 0.02472208865866479,
+            "count": 4
+          }
+        }
+      },
+      {
+        "model": "Malvar2004:WB",
+        "kind": "real",
+        "metrics": {
+          "sensor_psnr": {
+            "mean": 43.80425209469266,
+            "count": 4
+          },
+          "reference_samples": {
+            "mean": 200661.7361111111,
+            "count": 4
+          },
+          "ahd_srgb_psnr": {
+            "mean": 30.016488790512085,
+            "count": 4
+          },
+          "ahd_srgb_ssim": {
+            "mean": 0.5982528728329473,
+            "count": 4
+          },
+          "ahd_chroma_mae": {
+            "mean": 0.020380146206460066,
+            "count": 4
+          },
+          "ahd_gradient_mae": {
+            "mean": 0.025714163138117228,
+            "count": 4
+          }
+        }
+      },
+      {
+        "model": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metrics": {
+          "sensor_psnr": {
+            "mean": 50.071689976586235,
+            "count": 4
+          },
+          "reference_samples": {
+            "mean": 200661.7361111111,
+            "count": 4
+          },
+          "ahd_srgb_psnr": {
+            "mean": 35.86313165558709,
+            "count": 4
+          },
+          "ahd_srgb_ssim": {
+            "mean": 0.8550734726919068,
+            "count": 4
+          },
+          "ahd_chroma_mae": {
+            "mean": 0.01000751066668373,
+            "count": 4
+          },
+          "ahd_gradient_mae": {
+            "mean": 0.010634852324276127,
+            "count": 4
+          }
+        }
+      }
+    ],
+    "paired_comparisons": [
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "1:dino-native-joint-control-v23:step-1000",
+        "kind": "real",
+        "metric": "sensor_psnr",
+        "sources": 4,
+        "mean_first_minus_second": 0.026219579908582702,
+        "source_bootstrap_95_interval": [
+          0.013810210757785768,
+          0.03529432084825501
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "1:dino-native-joint-control-v23:step-1000",
+        "kind": "real",
+        "metric": "ahd_srgb_psnr",
+        "sources": 4,
+        "mean_first_minus_second": 0.06429825888739771,
+        "source_bootstrap_95_interval": [
+          0.0343653361002616,
+          0.09423118167453381
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "1:dino-native-joint-control-v23:step-1000",
+        "kind": "real",
+        "metric": "ahd_srgb_ssim",
+        "sources": 4,
+        "mean_first_minus_second": 0.0007041129801008128,
+        "source_bootstrap_95_interval": [
+          0.00012841489579940024,
+          0.0012798110644022254
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Bilinear",
+        "kind": "real",
+        "metric": "sensor_psnr",
+        "sources": 4,
+        "mean_first_minus_second": 9.183978769514296,
+        "source_bootstrap_95_interval": [
+          6.192180739508732,
+          12.38242594401042
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Bilinear",
+        "kind": "real",
+        "metric": "ahd_srgb_psnr",
+        "sources": 4,
+        "mean_first_minus_second": 9.307793590757584,
+        "source_bootstrap_95_interval": [
+          6.618130286534631,
+          12.36893134646946
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Bilinear",
+        "kind": "real",
+        "metric": "ahd_srgb_ssim",
+        "sources": 4,
+        "mean_first_minus_second": 0.33410741181837184,
+        "source_bootstrap_95_interval": [
+          0.2468124371435907,
+          0.4045370039012697
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Malvar2004:WB",
+        "kind": "real",
+        "metric": "sensor_psnr",
+        "sources": 4,
+        "mean_first_minus_second": 9.48571883307563,
+        "source_bootstrap_95_interval": [
+          6.485378954145638,
+          12.684166007571754
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_psnr",
+        "sources": 4,
+        "mean_first_minus_second": 9.12763712141249,
+        "source_bootstrap_95_interval": [
+          6.528730286492247,
+          12.2890968852573
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_ssim",
+        "sources": 4,
+        "mean_first_minus_second": 0.32375011075701976,
+        "source_bootstrap_95_interval": [
+          0.24216036539938715,
+          0.3811315649913417
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metric": "sensor_psnr",
+        "sources": 4,
+        "mean_first_minus_second": 3.2182809511820487,
+        "source_bootstrap_95_interval": [
+          2.252372582753498,
+          4.3807582855224645
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_psnr",
+        "sources": 4,
+        "mean_first_minus_second": 3.2809942563374843,
+        "source_bootstrap_95_interval": [
+          2.0422519577874123,
+          4.594375292460121
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_ssim",
+        "sources": 4,
+        "mean_first_minus_second": 0.06692951089806023,
+        "source_bootstrap_95_interval": [
+          0.040588062670495695,
+          0.09875877946615216
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Bilinear",
+        "kind": "real",
+        "metric": "sensor_psnr",
+        "sources": 4,
+        "mean_first_minus_second": 9.157759189605713,
+        "source_bootstrap_95_interval": [
+          6.161907090081105,
+          12.368615733252634
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Bilinear",
+        "kind": "real",
+        "metric": "ahd_srgb_psnr",
+        "sources": 4,
+        "mean_first_minus_second": 9.243495331870186,
+        "source_bootstrap_95_interval": [
+          6.5171816878848645,
+          12.336221800910103
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Bilinear",
+        "kind": "real",
+        "metric": "ahd_srgb_ssim",
+        "sources": 4,
+        "mean_first_minus_second": 0.333403298838271,
+        "source_bootstrap_95_interval": [
+          0.24607080055607694,
+          0.4036397635936737
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Malvar2004:WB",
+        "kind": "real",
+        "metric": "sensor_psnr",
+        "sources": 4,
+        "mean_first_minus_second": 9.459499253167047,
+        "source_bootstrap_95_interval": [
+          6.455824746025931,
+          12.670355796813968
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_psnr",
+        "sources": 4,
+        "mean_first_minus_second": 9.063338862525093,
+        "source_bootstrap_95_interval": [
+          6.42778168784248,
+          12.256387339697945
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_ssim",
+        "sources": 4,
+        "mean_first_minus_second": 0.323045997776919,
+        "source_bootstrap_95_interval": [
+          0.2414187288118734,
+          0.38023432468374574
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metric": "sensor_psnr",
+        "sources": 4,
+        "mean_first_minus_second": 3.192061371273466,
+        "source_bootstrap_95_interval": [
+          2.222818374633791,
+          4.366948074764679
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_psnr",
+        "sources": 4,
+        "mean_first_minus_second": 3.2166959974500866,
+        "source_bootstrap_95_interval": [
+          1.9413033591376454,
+          4.561665746900767
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_ssim",
+        "sources": 4,
+        "mean_first_minus_second": 0.06622539791795942,
+        "source_bootstrap_95_interval": [
+          0.04007707701789004,
+          0.09730552385250726
+        ]
+      },
+      {
+        "first": "Bilinear",
+        "second": "Malvar2004:WB",
+        "kind": "real",
+        "metric": "sensor_psnr",
+        "sources": 4,
+        "mean_first_minus_second": 0.30174006356133454,
+        "source_bootstrap_95_interval": [
+          0.0,
+          0.9052201906840036
+        ]
+      },
+      {
+        "first": "Bilinear",
+        "second": "Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_psnr",
+        "sources": 4,
+        "mean_first_minus_second": -0.18015646934509277,
+        "source_bootstrap_95_interval": [
+          -0.371234946780735,
+          0.01092200809054944
+        ]
+      },
+      {
+        "first": "Bilinear",
+        "second": "Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_ssim",
+        "sources": 4,
+        "mean_first_minus_second": -0.010357301061352062,
+        "source_bootstrap_95_interval": [
+          -0.023405438909927995,
+          0.0026908367872238714
+        ]
+      },
+      {
+        "first": "Bilinear",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metric": "sensor_psnr",
+        "sources": 4,
+        "mean_first_minus_second": -5.965697818332247,
+        "source_bootstrap_95_interval": [
+          -8.093415790134006,
+          -3.8379798465304873
+        ]
+      },
+      {
+        "first": "Bilinear",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_psnr",
+        "sources": 4,
+        "mean_first_minus_second": -6.0267993344201,
+        "source_bootstrap_95_interval": [
+          -7.664010630713573,
+          -4.686423752042983
+        ]
+      },
+      {
+        "first": "Bilinear",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_ssim",
+        "sources": 4,
+        "mean_first_minus_second": -0.2671779009203116,
+        "source_bootstrap_95_interval": [
+          -0.3112660447756449,
+          -0.2000511313478152
+        ]
+      },
+      {
+        "first": "Malvar2004:WB",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metric": "sensor_psnr",
+        "sources": 4,
+        "mean_first_minus_second": -6.267437881893581,
+        "source_bootstrap_95_interval": [
+          -8.30340772204929,
+          -4.23300637139214
+        ]
+      },
+      {
+        "first": "Malvar2004:WB",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_psnr",
+        "sources": 4,
+        "mean_first_minus_second": -5.846642865075007,
+        "source_bootstrap_95_interval": [
+          -7.58376479148865,
+          -4.597435130013363
+        ]
+      },
+      {
+        "first": "Malvar2004:WB",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_ssim",
+        "sources": 4,
+        "mean_first_minus_second": -0.25682059985895955,
+        "source_bootstrap_95_interval": [
+          -0.29685723822977816,
+          -0.19989737578564226
+        ]
+      }
+    ],
+    "native_crops": [
+      {
+        "image": "crop-6ac5a0e033b66c05.png",
+        "caption": "2pilesofplates / ISO 12800 / 0:dino-native-joint-v22:step-1000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "AHD reference",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "fb1695415d5204ee3e26d1c7bd1958e4f5a44f94870973472078d543904d6f00",
+        "scene": "2pilesofplates",
+        "conditioning": {
+          "shot": 0.001425164014313677,
+          "read": 1.570807341075873e-06,
+          "method": "input-only-Haar-fit",
+          "estimate": {
+            "shot": 0.001425164014313677,
+            "read": 1.570807341075873e-06,
+            "reliable": true,
+            "reason": "fit",
+            "candidate_patches": 4096,
+            "accepted_patches": 3066,
+            "intensity_span": 0.11289423820562661,
+            "reference_intensity": 0.04300604201853275,
+            "reference_variance": 6.10495189903304e-05,
+            "shot_interval": [
+              0.001401216475477223,
+              0.001451191419994426
+            ],
+            "read_interval": [
+              7.1832378857234e-07,
+              2.0128426680637594e-06
+            ],
+            "bins": [
+              {
+                "mean": 0.009904302656650543,
+                "variance": 1.575388159835711e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.015269115101546049,
+                "variance": 2.3452917957911268e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.019404741004109383,
+                "variance": 2.85378464468522e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.024549812078475952,
+                "variance": 3.709991869982332e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.02950599230825901,
+                "variance": 4.5091836000210606e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.033303260803222656,
+                "variance": 4.973154682375025e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.037457238882780075,
+                "variance": 5.3862695494899526e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.04108747839927673,
+                "variance": 5.9306823459337465e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.04504532553255558,
+                "variance": 6.301554094534367e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.05010216683149338,
+                "variance": 7.077066402416676e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.061802107840776443,
+                "variance": 9.140941256191581e-05,
+                "patches": 191
+              },
+              {
+                "mean": 0.07137370854616165,
+                "variance": 0.00010577607463346794,
+                "patches": 191
+              },
+              {
+                "mean": 0.079582080245018,
+                "variance": 0.00011791579163400456,
+                "patches": 191
+              },
+              {
+                "mean": 0.08843494206666946,
+                "variance": 0.00012957565195392817,
+                "patches": 191
+              },
+              {
+                "mean": 0.09782949090003967,
+                "variance": 0.00014059861132409424,
+                "patches": 191
+              },
+              {
+                "mean": 0.15633051097393036,
+                "variance": 0.00022209645248949528,
+                "patches": 191
+              }
+            ]
+          }
+        },
+        "white_balance": [
+          2.40625,
+          1.0,
+          1.69140625
+        ],
+        "camera_to_srgb": [
+          [
+            1.6353747641867242,
+            -0.42196120206077053,
+            -0.21341356212595397
+          ],
+          [
+            -0.13106821045315706,
+            1.5426731789357453,
+            -0.411604968482588
+          ],
+          [
+            0.011429855280569487,
+            -0.4196218028471881,
+            1.4081919475666185
+          ]
+        ],
+        "checkpoint_sha256": "8bafa37175ebfccfa35b52aa7ed16bb9bc06aee0848159c9bc9b8de4e9b748ab",
+        "noisy_sha256": "c8ed38ce03b5fe6df0ece5615d148c2e524bb9adbcab535773db71b0f85fbdbe",
+        "prepared_crop": {
+          "id": "2pilesofplates:c8ed38ce03b5fe6df0ece5615d148c2e524bb9adbcab535773db71b0f85fbdbe:1756:2756",
+          "path": "crop-1a2b558160c55a70a0fcdec4.npz",
+          "sha256": "ce5be43933be44a44ceb04a984d40f2c90bc4caf6cb8ce085afdf85644af64a2",
+          "xywh": [
+            2756,
+            1756,
+            512,
+            512
+          ],
+          "valid_fraction": 0.9999008178710938
+        },
+        "evaluation_tile_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "model_label": "0:dino-native-joint-v22:step-1000",
+        "display_exposure": 1.0,
+        "variance_multiplier": 1.0,
+        "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA",
+        "repository_image": "docs/images/native-joint-v22-1k-plates.png"
+      },
+      {
+        "image": "crop-6819363d9bd7b9ec.png",
+        "caption": "2pilesofplates / ISO 12800 / 1:dino-native-joint-control-v23:step-1000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "AHD reference",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "288db0c6a510fcd7a50afc8810df8fb2d5c50eac4adadd1f619b1029a52529d2",
+        "scene": "2pilesofplates",
+        "conditioning": {
+          "shot": 0.001425164014313677,
+          "read": 1.570807341075873e-06,
+          "method": "input-only-Haar-fit",
+          "estimate": {
+            "shot": 0.001425164014313677,
+            "read": 1.570807341075873e-06,
+            "reliable": true,
+            "reason": "fit",
+            "candidate_patches": 4096,
+            "accepted_patches": 3066,
+            "intensity_span": 0.11289423820562661,
+            "reference_intensity": 0.04300604201853275,
+            "reference_variance": 6.10495189903304e-05,
+            "shot_interval": [
+              0.001401216475477223,
+              0.001451191419994426
+            ],
+            "read_interval": [
+              7.1832378857234e-07,
+              2.0128426680637594e-06
+            ],
+            "bins": [
+              {
+                "mean": 0.009904302656650543,
+                "variance": 1.575388159835711e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.015269115101546049,
+                "variance": 2.3452917957911268e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.019404741004109383,
+                "variance": 2.85378464468522e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.024549812078475952,
+                "variance": 3.709991869982332e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.02950599230825901,
+                "variance": 4.5091836000210606e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.033303260803222656,
+                "variance": 4.973154682375025e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.037457238882780075,
+                "variance": 5.3862695494899526e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.04108747839927673,
+                "variance": 5.9306823459337465e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.04504532553255558,
+                "variance": 6.301554094534367e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.05010216683149338,
+                "variance": 7.077066402416676e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.061802107840776443,
+                "variance": 9.140941256191581e-05,
+                "patches": 191
+              },
+              {
+                "mean": 0.07137370854616165,
+                "variance": 0.00010577607463346794,
+                "patches": 191
+              },
+              {
+                "mean": 0.079582080245018,
+                "variance": 0.00011791579163400456,
+                "patches": 191
+              },
+              {
+                "mean": 0.08843494206666946,
+                "variance": 0.00012957565195392817,
+                "patches": 191
+              },
+              {
+                "mean": 0.09782949090003967,
+                "variance": 0.00014059861132409424,
+                "patches": 191
+              },
+              {
+                "mean": 0.15633051097393036,
+                "variance": 0.00022209645248949528,
+                "patches": 191
+              }
+            ]
+          }
+        },
+        "white_balance": [
+          2.40625,
+          1.0,
+          1.69140625
+        ],
+        "camera_to_srgb": [
+          [
+            1.6353747641867242,
+            -0.42196120206077053,
+            -0.21341356212595397
+          ],
+          [
+            -0.13106821045315706,
+            1.5426731789357453,
+            -0.411604968482588
+          ],
+          [
+            0.011429855280569487,
+            -0.4196218028471881,
+            1.4081919475666185
+          ]
+        ],
+        "checkpoint_sha256": "977fd7169410c28b410b8676cc5bf36686b982567c415dadee9a1acd663cba25",
+        "noisy_sha256": "c8ed38ce03b5fe6df0ece5615d148c2e524bb9adbcab535773db71b0f85fbdbe",
+        "prepared_crop": {
+          "id": "2pilesofplates:c8ed38ce03b5fe6df0ece5615d148c2e524bb9adbcab535773db71b0f85fbdbe:1756:2756",
+          "path": "crop-1a2b558160c55a70a0fcdec4.npz",
+          "sha256": "ce5be43933be44a44ceb04a984d40f2c90bc4caf6cb8ce085afdf85644af64a2",
+          "xywh": [
+            2756,
+            1756,
+            512,
+            512
+          ],
+          "valid_fraction": 0.9999008178710938
+        },
+        "evaluation_tile_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "model_label": "1:dino-native-joint-control-v23:step-1000",
+        "display_exposure": 1.0,
+        "variance_multiplier": 1.0,
+        "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA",
+        "repository_image": "docs/images/native-joint-v23-1k-plates.png"
+      },
+      {
+        "image": "crop-47fc9082e80a2268.png",
+        "caption": "7D-1 / ISO 12800 / 0:dino-native-joint-v22:step-1000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "AHD reference",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "884195236d9980ef0c44ce65be225b5bb0ccceddfae1303538cad06bd42914dd",
+        "scene": "7D-1",
+        "conditioning": {
+          "shot": 0.004811973071234885,
+          "read": 6.621451009845082e-05,
+          "method": "input-only-Haar-fit",
+          "estimate": {
+            "shot": 0.004811973071234885,
+            "read": 6.621451009845082e-05,
+            "reliable": true,
+            "reason": "fit",
+            "candidate_patches": 4096,
+            "accepted_patches": 1453,
+            "intensity_span": 0.27435737997293463,
+            "reference_intensity": 0.12920920550823212,
+            "reference_variance": 0.0006928789662197232,
+            "shot_interval": [
+              0.0044978704529584825,
+              0.005009805981911022
+            ],
+            "read_interval": [
+              4.824885318210063e-05,
+              0.00011607347588089777
+            ],
+            "bins": [
+              {
+                "mean": 0.0434560552239418,
+                "variance": 0.00025572895538061857,
+                "patches": 91
+              },
+              {
+                "mean": 0.05798434466123581,
+                "variance": 0.0003326775331515819,
+                "patches": 91
+              },
+              {
+                "mean": 0.06499770283699036,
+                "variance": 0.0003967982775066048,
+                "patches": 91
+              },
+              {
+                "mean": 0.0739697515964508,
+                "variance": 0.0004433743597473949,
+                "patches": 91
+              },
+              {
+                "mean": 0.0837249606847763,
+                "variance": 0.0004850530531257391,
+                "patches": 91
+              },
+              {
+                "mean": 0.0951637476682663,
+                "variance": 0.0005445044371299446,
+                "patches": 91
+              },
+              {
+                "mean": 0.10861015319824219,
+                "variance": 0.00060031667817384,
+                "patches": 91
+              },
+              {
+                "mean": 0.12333296239376068,
+                "variance": 0.0006808409816585481,
+                "patches": 91
+              },
+              {
+                "mean": 0.13387498259544373,
+                "variance": 0.0007385513745248318,
+                "patches": 91
+              },
+              {
+                "mean": 0.14330899715423584,
+                "variance": 0.0007729700300842524,
+                "patches": 91
+              },
+              {
+                "mean": 0.15605947375297546,
+                "variance": 0.0008342682849615812,
+                "patches": 91
+              },
+              {
+                "mean": 0.16992981731891632,
+                "variance": 0.0008656613063067198,
+                "patches": 91
+              },
+              {
+                "mean": 0.19597478210926056,
+                "variance": 0.000990415341220796,
+                "patches": 91
+              },
+              {
+                "mean": 0.2349516674876213,
+                "variance": 0.0011563157313503325,
+                "patches": 90
+              },
+              {
+                "mean": 0.2859645336866379,
+                "variance": 0.0013906416133977473,
+                "patches": 90
+              },
+              {
+                "mean": 0.3511311560869217,
+                "variance": 0.001681389519944787,
+                "patches": 90
+              }
+            ]
+          }
+        },
+        "white_balance": [
+          2.0732421875,
+          1.0,
+          1.662109375
+        ],
+        "camera_to_srgb": [
+          [
+            1.9204999025301575,
+            -1.0413495812710656,
+            0.12084967874090806
+          ],
+          [
+            -0.24696281331132816,
+            1.7593124803218942,
+            -0.5123496670105661
+          ],
+          [
+            -0.006956121305943532,
+            -0.4895846857258788,
+            1.4965408070318222
+          ]
+        ],
+        "checkpoint_sha256": "8bafa37175ebfccfa35b52aa7ed16bb9bc06aee0848159c9bc9b8de4e9b748ab",
+        "noisy_sha256": "ceb7d71d6a184aa2e7cf47f22b84c61fe4545746f9be72397d6fa03dbd4751ad",
+        "prepared_crop": {
+          "id": "7D-1:ceb7d71d6a184aa2e7cf47f22b84c61fe4545746f9be72397d6fa03dbd4751ad:1476:2344",
+          "path": "crop-a3ba859368f3f95bd70632ea.npz",
+          "sha256": "57bc05d205ddff3c74c42082faea8cecaf27bbb5f4befcee9c73b9fb92835e09",
+          "xywh": [
+            2344,
+            1476,
+            512,
+            512
+          ],
+          "valid_fraction": 0.9965286254882812
+        },
+        "evaluation_tile_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "model_label": "0:dino-native-joint-v22:step-1000",
+        "display_exposure": 1.0,
+        "variance_multiplier": 1.0,
+        "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA",
+        "repository_image": "docs/images/native-joint-v22-1k-7d.png"
+      },
+      {
+        "image": "crop-232e2ea756e5051c.png",
+        "caption": "7D-1 / ISO 12800 / 1:dino-native-joint-control-v23:step-1000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "AHD reference",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "103dcc17df9699ce18580c099316b839ede59e147eee3d6036cccb508aa6e2a5",
+        "scene": "7D-1",
+        "conditioning": {
+          "shot": 0.004811973071234885,
+          "read": 6.621451009845082e-05,
+          "method": "input-only-Haar-fit",
+          "estimate": {
+            "shot": 0.004811973071234885,
+            "read": 6.621451009845082e-05,
+            "reliable": true,
+            "reason": "fit",
+            "candidate_patches": 4096,
+            "accepted_patches": 1453,
+            "intensity_span": 0.27435737997293463,
+            "reference_intensity": 0.12920920550823212,
+            "reference_variance": 0.0006928789662197232,
+            "shot_interval": [
+              0.0044978704529584825,
+              0.005009805981911022
+            ],
+            "read_interval": [
+              4.824885318210063e-05,
+              0.00011607347588089777
+            ],
+            "bins": [
+              {
+                "mean": 0.0434560552239418,
+                "variance": 0.00025572895538061857,
+                "patches": 91
+              },
+              {
+                "mean": 0.05798434466123581,
+                "variance": 0.0003326775331515819,
+                "patches": 91
+              },
+              {
+                "mean": 0.06499770283699036,
+                "variance": 0.0003967982775066048,
+                "patches": 91
+              },
+              {
+                "mean": 0.0739697515964508,
+                "variance": 0.0004433743597473949,
+                "patches": 91
+              },
+              {
+                "mean": 0.0837249606847763,
+                "variance": 0.0004850530531257391,
+                "patches": 91
+              },
+              {
+                "mean": 0.0951637476682663,
+                "variance": 0.0005445044371299446,
+                "patches": 91
+              },
+              {
+                "mean": 0.10861015319824219,
+                "variance": 0.00060031667817384,
+                "patches": 91
+              },
+              {
+                "mean": 0.12333296239376068,
+                "variance": 0.0006808409816585481,
+                "patches": 91
+              },
+              {
+                "mean": 0.13387498259544373,
+                "variance": 0.0007385513745248318,
+                "patches": 91
+              },
+              {
+                "mean": 0.14330899715423584,
+                "variance": 0.0007729700300842524,
+                "patches": 91
+              },
+              {
+                "mean": 0.15605947375297546,
+                "variance": 0.0008342682849615812,
+                "patches": 91
+              },
+              {
+                "mean": 0.16992981731891632,
+                "variance": 0.0008656613063067198,
+                "patches": 91
+              },
+              {
+                "mean": 0.19597478210926056,
+                "variance": 0.000990415341220796,
+                "patches": 91
+              },
+              {
+                "mean": 0.2349516674876213,
+                "variance": 0.0011563157313503325,
+                "patches": 90
+              },
+              {
+                "mean": 0.2859645336866379,
+                "variance": 0.0013906416133977473,
+                "patches": 90
+              },
+              {
+                "mean": 0.3511311560869217,
+                "variance": 0.001681389519944787,
+                "patches": 90
+              }
+            ]
+          }
+        },
+        "white_balance": [
+          2.0732421875,
+          1.0,
+          1.662109375
+        ],
+        "camera_to_srgb": [
+          [
+            1.9204999025301575,
+            -1.0413495812710656,
+            0.12084967874090806
+          ],
+          [
+            -0.24696281331132816,
+            1.7593124803218942,
+            -0.5123496670105661
+          ],
+          [
+            -0.006956121305943532,
+            -0.4895846857258788,
+            1.4965408070318222
+          ]
+        ],
+        "checkpoint_sha256": "977fd7169410c28b410b8676cc5bf36686b982567c415dadee9a1acd663cba25",
+        "noisy_sha256": "ceb7d71d6a184aa2e7cf47f22b84c61fe4545746f9be72397d6fa03dbd4751ad",
+        "prepared_crop": {
+          "id": "7D-1:ceb7d71d6a184aa2e7cf47f22b84c61fe4545746f9be72397d6fa03dbd4751ad:1476:2344",
+          "path": "crop-a3ba859368f3f95bd70632ea.npz",
+          "sha256": "57bc05d205ddff3c74c42082faea8cecaf27bbb5f4befcee9c73b9fb92835e09",
+          "xywh": [
+            2344,
+            1476,
+            512,
+            512
+          ],
+          "valid_fraction": 0.9965286254882812
+        },
+        "evaluation_tile_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "model_label": "1:dino-native-joint-control-v23:step-1000",
+        "display_exposure": 1.0,
+        "variance_multiplier": 1.0,
+        "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA",
+        "repository_image": "docs/images/native-joint-v23-1k-7d.png"
+      }
+    ]
+  },
+  "unseen": {
+    "summary": "/mnt/external/demosaic/evaluation/paired-unseen-native-joint-v22-control-v23-1k/summary.json",
+    "summary_sha256": "4f232bff970c0f20168609c2f247c2598d966879df776e7ea37e6976e68f51e2",
+    "models": [
+      {
+        "label": "0:dino-native-joint-v22:step-1000",
+        "snapshot": "/mnt/external/demosaic/evaluation/paired-unseen-native-joint-v22-control-v23-1k/weights/weights-8bafa37175ebfccfa35b52aa7ed16bb9bc06aee0848159c9bc9b8de4e9b748ab.pt",
+        "sha256": "8bafa37175ebfccfa35b52aa7ed16bb9bc06aee0848159c9bc9b8de4e9b748ab",
+        "step": 1000,
+        "model_config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": true,
+          "refinement_width": 48,
+          "refinement_blocks": 8,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31
+        },
+        "checkpoint_model_config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": true,
+          "refinement_width": 48,
+          "refinement_blocks": 8,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31
+        },
+        "compute_precision": "float16",
+        "refinement_compute_precision": "float32"
+      },
+      {
+        "label": "1:dino-native-joint-control-v23:step-1000",
+        "snapshot": "/mnt/external/demosaic/evaluation/paired-unseen-native-joint-v22-control-v23-1k/weights/weights-977fd7169410c28b410b8676cc5bf36686b982567c415dadee9a1acd663cba25.pt",
+        "sha256": "977fd7169410c28b410b8676cc5bf36686b982567c415dadee9a1acd663cba25",
+        "step": 1000,
+        "model_config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": true,
+          "refinement_width": 48,
+          "refinement_blocks": 8,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31
+        },
+        "checkpoint_model_config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": true,
+          "refinement_width": 48,
+          "refinement_blocks": 8,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31
+        },
+        "compute_precision": "float16",
+        "refinement_compute_precision": "float32"
+      }
+    ],
+    "overall": [
+      {
+        "model": "0:dino-native-joint-v22:step-1000",
+        "kind": "real",
+        "metrics": {
+          "sensor_psnr": {
+            "mean": 53.07098384433323,
+            "count": 5
+          },
+          "reference_samples": {
+            "mean": 220744.8111111111,
+            "count": 5
+          },
+          "ahd_srgb_psnr": {
+            "mean": 37.714798545837404,
+            "count": 5
+          },
+          "ahd_srgb_ssim": {
+            "mean": 0.9072437816196018,
+            "count": 5
+          },
+          "ahd_chroma_mae": {
+            "mean": 0.00802958488671316,
+            "count": 5
+          },
+          "ahd_gradient_mae": {
+            "mean": 0.0071650025383051905,
+            "count": 5
+          }
+        }
+      },
+      {
+        "model": "1:dino-native-joint-control-v23:step-1000",
+        "kind": "real",
+        "metrics": {
+          "sensor_psnr": {
+            "mean": 53.08592736985948,
+            "count": 5
+          },
+          "reference_samples": {
+            "mean": 220744.8111111111,
+            "count": 5
+          },
+          "ahd_srgb_psnr": {
+            "mean": 37.612948883904345,
+            "count": 5
+          },
+          "ahd_srgb_ssim": {
+            "mean": 0.9069399615128836,
+            "count": 5
+          },
+          "ahd_chroma_mae": {
+            "mean": 0.008174564166822367,
+            "count": 5
+          },
+          "ahd_gradient_mae": {
+            "mean": 0.0071536485778374796,
+            "count": 5
+          }
+        }
+      },
+      {
+        "model": "Bilinear",
+        "kind": "real",
+        "metrics": {
+          "sensor_psnr": {
+            "mean": 41.41325357225206,
+            "count": 5
+          },
+          "reference_samples": {
+            "mean": 220744.8111111111,
+            "count": 5
+          },
+          "ahd_srgb_psnr": {
+            "mean": 25.49506827460395,
+            "count": 5
+          },
+          "ahd_srgb_ssim": {
+            "mean": 0.37466897865136467,
+            "count": 5
+          },
+          "ahd_chroma_mae": {
+            "mean": 0.042432663072314525,
+            "count": 5
+          },
+          "ahd_gradient_mae": {
+            "mean": 0.03895158672498332,
+            "count": 5
+          }
+        }
+      },
+      {
+        "model": "Malvar2004:WB",
+        "kind": "real",
+        "metrics": {
+          "sensor_psnr": {
+            "mean": 40.937970352172854,
+            "count": 5
+          },
+          "reference_samples": {
+            "mean": 220744.8111111111,
+            "count": 5
+          },
+          "ahd_srgb_psnr": {
+            "mean": 25.86025329165988,
+            "count": 5
+          },
+          "ahd_srgb_ssim": {
+            "mean": 0.4032435259057416,
+            "count": 5
+          },
+          "ahd_chroma_mae": {
+            "mean": 0.03489497504714463,
+            "count": 5
+          },
+          "ahd_gradient_mae": {
+            "mean": 0.03896706760343579,
+            "count": 5
+          }
+        }
+      },
+      {
+        "model": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metrics": {
+          "sensor_psnr": {
+            "mean": 49.59129096137152,
+            "count": 5
+          },
+          "reference_samples": {
+            "mean": 220744.8111111111,
+            "count": 5
+          },
+          "ahd_srgb_psnr": {
+            "mean": 33.028770722283255,
+            "count": 5
+          },
+          "ahd_srgb_ssim": {
+            "mean": 0.7922076225280761,
+            "count": 5
+          },
+          "ahd_chroma_mae": {
+            "mean": 0.014855502649313873,
+            "count": 5
+          },
+          "ahd_gradient_mae": {
+            "mean": 0.012288579556884038,
+            "count": 5
+          }
+        }
+      }
+    ],
+    "paired_comparisons": [
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "1:dino-native-joint-control-v23:step-1000",
+        "kind": "real",
+        "metric": "sensor_psnr",
+        "sources": 5,
+        "mean_first_minus_second": -0.014943525526257417,
+        "source_bootstrap_95_interval": [
+          -0.028690338134764203,
+          -0.001018100314668402
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "1:dino-native-joint-control-v23:step-1000",
+        "kind": "real",
+        "metric": "ahd_srgb_psnr",
+        "sources": 5,
+        "mean_first_minus_second": 0.10184966193304916,
+        "source_bootstrap_95_interval": [
+          0.052954186333549556,
+          0.14616063435872065
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "1:dino-native-joint-control-v23:step-1000",
+        "kind": "real",
+        "metric": "ahd_srgb_ssim",
+        "sources": 5,
+        "mean_first_minus_second": 0.00030382010671827777,
+        "source_bootstrap_95_interval": [
+          -0.0002536223994361153,
+          0.0007370293140411377
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Bilinear",
+        "kind": "real",
+        "metric": "sensor_psnr",
+        "sources": 5,
+        "mean_first_minus_second": 11.657730272081166,
+        "source_bootstrap_95_interval": [
+          10.382776811387805,
+          13.22923656039768
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Bilinear",
+        "kind": "real",
+        "metric": "ahd_srgb_psnr",
+        "sources": 5,
+        "mean_first_minus_second": 12.219730271233452,
+        "source_bootstrap_95_interval": [
+          11.158950275844997,
+          13.139278644985618
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Bilinear",
+        "kind": "real",
+        "metric": "ahd_srgb_ssim",
+        "sources": 5,
+        "mean_first_minus_second": 0.5325748029682371,
+        "source_bootstrap_95_interval": [
+          0.4924729079525504,
+          0.5666836851172977
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Malvar2004:WB",
+        "kind": "real",
+        "metric": "sensor_psnr",
+        "sources": 5,
+        "mean_first_minus_second": 12.133013492160377,
+        "source_bootstrap_95_interval": [
+          10.580400933159725,
+          13.685626051161028
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_psnr",
+        "sources": 5,
+        "mean_first_minus_second": 11.854545254177518,
+        "source_bootstrap_95_interval": [
+          10.755698924594455,
+          12.827892833285858
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_ssim",
+        "sources": 5,
+        "mean_first_minus_second": 0.5040002557138602,
+        "source_bootstrap_95_interval": [
+          0.4577720464455585,
+          0.542159307996432
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metric": "sensor_psnr",
+        "sources": 5,
+        "mean_first_minus_second": 3.4796928829616975,
+        "source_bootstrap_95_interval": [
+          2.930078612433537,
+          3.889096535576712
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_psnr",
+        "sources": 5,
+        "mean_first_minus_second": 4.686027823554143,
+        "source_bootstrap_95_interval": [
+          3.926814524332684,
+          5.382695918613005
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_ssim",
+        "sources": 5,
+        "mean_first_minus_second": 0.11503615909152562,
+        "source_bootstrap_95_interval": [
+          0.09171095722251468,
+          0.13410505420631835
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Bilinear",
+        "kind": "real",
+        "metric": "sensor_psnr",
+        "sources": 5,
+        "mean_first_minus_second": 11.672673797607423,
+        "source_bootstrap_95_interval": [
+          10.386276626586914,
+          13.236249499850803
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Bilinear",
+        "kind": "real",
+        "metric": "ahd_srgb_psnr",
+        "sources": 5,
+        "mean_first_minus_second": 12.117880609300403,
+        "source_bootstrap_95_interval": [
+          11.108044242858886,
+          13.016197522481283
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Bilinear",
+        "kind": "real",
+        "metric": "ahd_srgb_ssim",
+        "sources": 5,
+        "mean_first_minus_second": 0.5322709828615189,
+        "source_bootstrap_95_interval": [
+          0.49264096030137605,
+          0.5658737579981485
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Malvar2004:WB",
+        "kind": "real",
+        "metric": "sensor_psnr",
+        "sources": 5,
+        "mean_first_minus_second": 12.147957017686632,
+        "source_bootstrap_95_interval": [
+          10.59394454956055,
+          13.701969485812716
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_psnr",
+        "sources": 5,
+        "mean_first_minus_second": 11.752695592244468,
+        "source_bootstrap_95_interval": [
+          10.704792891608344,
+          12.704811710781524
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_ssim",
+        "sources": 5,
+        "mean_first_minus_second": 0.5036964356071418,
+        "source_bootstrap_95_interval": [
+          0.4574087675267624,
+          0.5419954223765268
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metric": "sensor_psnr",
+        "sources": 5,
+        "mean_first_minus_second": 3.494636408487955,
+        "source_bootstrap_95_interval": [
+          2.9536529159545903,
+          3.892571979098848
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_psnr",
+        "sources": 5,
+        "mean_first_minus_second": 4.584178161621094,
+        "source_bootstrap_95_interval": [
+          3.8613137563069655,
+          5.24602688683404
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_ssim",
+        "sources": 5,
+        "mean_first_minus_second": 0.11473233898480735,
+        "source_bootstrap_95_interval": [
+          0.09133589565753934,
+          0.1337325410710441
+        ]
+      },
+      {
+        "first": "Bilinear",
+        "second": "Malvar2004:WB",
+        "kind": "real",
+        "metric": "sensor_psnr",
+        "sources": 5,
+        "mean_first_minus_second": 0.4752832200792099,
+        "source_bootstrap_95_interval": [
+          0.0,
+          1.4258496602376298
+        ]
+      },
+      {
+        "first": "Bilinear",
+        "second": "Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_psnr",
+        "sources": 5,
+        "mean_first_minus_second": -0.3651850170559342,
+        "source_bootstrap_95_interval": [
+          -0.42933548821343237,
+          -0.31138581169975976
+        ]
+      },
+      {
+        "first": "Bilinear",
+        "second": "Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_ssim",
+        "sources": 5,
+        "mean_first_minus_second": -0.028574547254376935,
+        "source_bootstrap_95_interval": [
+          -0.03469006750318736,
+          -0.022459027005566512
+        ]
+      },
+      {
+        "first": "Bilinear",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metric": "sensor_psnr",
+        "sources": 5,
+        "mean_first_minus_second": -8.178037389119469,
+        "source_bootstrap_95_interval": [
+          -9.354929596583053,
+          -7.2688039567735485
+        ]
+      },
+      {
+        "first": "Bilinear",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_psnr",
+        "sources": 5,
+        "mean_first_minus_second": -7.533702447679309,
+        "source_bootstrap_95_interval": [
+          -8.075787099202476,
+          -7.032841279771593
+        ]
+      },
+      {
+        "first": "Bilinear",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_ssim",
+        "sources": 5,
+        "mean_first_minus_second": -0.4175386438767116,
+        "source_bootstrap_95_interval": [
+          -0.44966954655117464,
+          -0.3895432880355252
+        ]
+      },
+      {
+        "first": "Malvar2004:WB",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metric": "sensor_psnr",
+        "sources": 5,
+        "mean_first_minus_second": -8.653320609198678,
+        "source_bootstrap_95_interval": [
+          -9.833923043145074,
+          -7.379462814331058
+        ]
+      },
+      {
+        "first": "Malvar2004:WB",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_psnr",
+        "sources": 5,
+        "mean_first_minus_second": -7.168517430623373,
+        "source_bootstrap_95_interval": [
+          -7.766781573825415,
+          -6.642175928751628
+        ]
+      },
+      {
+        "first": "Malvar2004:WB",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "real",
+        "metric": "ahd_srgb_ssim",
+        "sources": 5,
+        "mean_first_minus_second": -0.3889640966223346,
+        "source_bootstrap_95_interval": [
+          -0.4253823489778572,
+          -0.355061351093981
+        ]
+      }
+    ],
+    "native_crops": [
+      {
+        "image": "crop-e1166ecb2417f7ce.png",
+        "caption": "LucieB_3apples / ISO 6400 / 0:dino-native-joint-v22:step-1000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "AHD reference",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "efffc90d55d84445cd528ac888b7837956b1b7ed85bc27bd620ce254b7638eea",
+        "scene": "LucieB_3apples",
+        "conditioning": {
+          "shot": 0.0023020145669588325,
+          "read": 5.020910101285205e-05,
+          "method": "input-only-Haar-fit",
+          "estimate": {
+            "shot": 0.0023020145669588325,
+            "read": 5.020910101285205e-05,
+            "reliable": true,
+            "reason": "fit",
+            "candidate_patches": 4096,
+            "accepted_patches": 2179,
+            "intensity_span": 0.26184514854103325,
+            "reference_intensity": 0.06364081054925919,
+            "reference_variance": 0.00020263275655452162,
+            "shot_interval": [
+              0.0021055881961980273,
+              0.002529057494860391
+            ],
+            "read_interval": [
+              3.950000272599639e-05,
+              6.403357839379571e-05
+            ],
+            "bins": [
+              {
+                "mean": 0.024905603379011154,
+                "variance": 9.725704148877412e-05,
+                "patches": 137
+              },
+              {
+                "mean": 0.028337951749563217,
+                "variance": 0.00011527248716447502,
+                "patches": 137
+              },
+              {
+                "mean": 0.03277125954627991,
+                "variance": 0.0001205114385811612,
+                "patches": 137
+              },
+              {
+                "mean": 0.037343623116612434,
+                "variance": 0.00013657450472237542,
+                "patches": 136
+              },
+              {
+                "mean": 0.042015191167593,
+                "variance": 0.00015514064580202103,
+                "patches": 136
+              },
+              {
+                "mean": 0.048172976821660995,
+                "variance": 0.0001670044002821669,
+                "patches": 136
+              },
+              {
+                "mean": 0.05408396199345589,
+                "variance": 0.00017970892076846212,
+                "patches": 136
+              },
+              {
+                "mean": 0.06046304479241371,
+                "variance": 0.00019921286730095744,
+                "patches": 136
+              },
+              {
+                "mean": 0.06593036651611328,
+                "variance": 0.00020608177146641538,
+                "patches": 136
+              },
+              {
+                "mean": 0.07145505398511887,
+                "variance": 0.00022196234203875065,
+                "patches": 136
+              },
+              {
+                "mean": 0.07783377543091774,
+                "variance": 0.00023936464276630431,
+                "patches": 136
+              },
+              {
+                "mean": 0.08975507318973541,
+                "variance": 0.000266207498498261,
+                "patches": 136
+              },
+              {
+                "mean": 0.10335686802864075,
+                "variance": 0.0002986309555126354,
+                "patches": 136
+              },
+              {
+                "mean": 0.1205376461148262,
+                "variance": 0.0003312686749268323,
+                "patches": 136
+              },
+              {
+                "mean": 0.23012421280145645,
+                "variance": 0.0005683678318746388,
+                "patches": 136
+              },
+              {
+                "mean": 0.31927336752414703,
+                "variance": 0.0006947826768737286,
+                "patches": 136
+              }
+            ]
+          }
+        },
+        "white_balance": [
+          0.9794921875,
+          1.0,
+          2.162109375
+        ],
+        "camera_to_srgb": [
+          [
+            2.0060677171962595,
+            -1.2336652639354324,
+            0.22759754673917293
+          ],
+          [
+            -0.23706710137989376,
+            1.8006883583827236,
+            -0.5636212570028296
+          ],
+          [
+            -0.015706646354080415,
+            -0.555168390672119,
+            1.5708750370261992
+          ]
+        ],
+        "checkpoint_sha256": "8bafa37175ebfccfa35b52aa7ed16bb9bc06aee0848159c9bc9b8de4e9b748ab",
+        "noisy_sha256": "43c4b5592f33763de8ecc303986932cd30c0f07330e1987380f7e8c526c23614",
+        "prepared_crop": {
+          "id": "LucieB_3apples:43c4b5592f33763de8ecc303986932cd30c0f07330e1987380f7e8c526c23614:1754:2756",
+          "path": "crop-37aeb608babd2ebd25d92520.npz",
+          "sha256": "3c8aabdb22bb0543be9810496a2c0e34d336f7d4164e7462c97106e781feb08a",
+          "xywh": [
+            2756,
+            1754,
+            512,
+            512
+          ],
+          "valid_fraction": 0.99993896484375
+        },
+        "evaluation_tile_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "model_label": "0:dino-native-joint-v22:step-1000",
+        "display_exposure": 1.0,
+        "variance_multiplier": 1.0,
+        "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA"
+      },
+      {
+        "image": "crop-6b0f745019470666.png",
+        "caption": "LucieB_3apples / ISO 6400 / 1:dino-native-joint-control-v23:step-1000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "AHD reference",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "62d6cd17ea226327a7f38c19f23a6ce198736fad50ade53f8f8fcc4f0c8ca8b8",
+        "scene": "LucieB_3apples",
+        "conditioning": {
+          "shot": 0.0023020145669588325,
+          "read": 5.020910101285205e-05,
+          "method": "input-only-Haar-fit",
+          "estimate": {
+            "shot": 0.0023020145669588325,
+            "read": 5.020910101285205e-05,
+            "reliable": true,
+            "reason": "fit",
+            "candidate_patches": 4096,
+            "accepted_patches": 2179,
+            "intensity_span": 0.26184514854103325,
+            "reference_intensity": 0.06364081054925919,
+            "reference_variance": 0.00020263275655452162,
+            "shot_interval": [
+              0.0021055881961980273,
+              0.002529057494860391
+            ],
+            "read_interval": [
+              3.950000272599639e-05,
+              6.403357839379571e-05
+            ],
+            "bins": [
+              {
+                "mean": 0.024905603379011154,
+                "variance": 9.725704148877412e-05,
+                "patches": 137
+              },
+              {
+                "mean": 0.028337951749563217,
+                "variance": 0.00011527248716447502,
+                "patches": 137
+              },
+              {
+                "mean": 0.03277125954627991,
+                "variance": 0.0001205114385811612,
+                "patches": 137
+              },
+              {
+                "mean": 0.037343623116612434,
+                "variance": 0.00013657450472237542,
+                "patches": 136
+              },
+              {
+                "mean": 0.042015191167593,
+                "variance": 0.00015514064580202103,
+                "patches": 136
+              },
+              {
+                "mean": 0.048172976821660995,
+                "variance": 0.0001670044002821669,
+                "patches": 136
+              },
+              {
+                "mean": 0.05408396199345589,
+                "variance": 0.00017970892076846212,
+                "patches": 136
+              },
+              {
+                "mean": 0.06046304479241371,
+                "variance": 0.00019921286730095744,
+                "patches": 136
+              },
+              {
+                "mean": 0.06593036651611328,
+                "variance": 0.00020608177146641538,
+                "patches": 136
+              },
+              {
+                "mean": 0.07145505398511887,
+                "variance": 0.00022196234203875065,
+                "patches": 136
+              },
+              {
+                "mean": 0.07783377543091774,
+                "variance": 0.00023936464276630431,
+                "patches": 136
+              },
+              {
+                "mean": 0.08975507318973541,
+                "variance": 0.000266207498498261,
+                "patches": 136
+              },
+              {
+                "mean": 0.10335686802864075,
+                "variance": 0.0002986309555126354,
+                "patches": 136
+              },
+              {
+                "mean": 0.1205376461148262,
+                "variance": 0.0003312686749268323,
+                "patches": 136
+              },
+              {
+                "mean": 0.23012421280145645,
+                "variance": 0.0005683678318746388,
+                "patches": 136
+              },
+              {
+                "mean": 0.31927336752414703,
+                "variance": 0.0006947826768737286,
+                "patches": 136
+              }
+            ]
+          }
+        },
+        "white_balance": [
+          0.9794921875,
+          1.0,
+          2.162109375
+        ],
+        "camera_to_srgb": [
+          [
+            2.0060677171962595,
+            -1.2336652639354324,
+            0.22759754673917293
+          ],
+          [
+            -0.23706710137989376,
+            1.8006883583827236,
+            -0.5636212570028296
+          ],
+          [
+            -0.015706646354080415,
+            -0.555168390672119,
+            1.5708750370261992
+          ]
+        ],
+        "checkpoint_sha256": "977fd7169410c28b410b8676cc5bf36686b982567c415dadee9a1acd663cba25",
+        "noisy_sha256": "43c4b5592f33763de8ecc303986932cd30c0f07330e1987380f7e8c526c23614",
+        "prepared_crop": {
+          "id": "LucieB_3apples:43c4b5592f33763de8ecc303986932cd30c0f07330e1987380f7e8c526c23614:1754:2756",
+          "path": "crop-37aeb608babd2ebd25d92520.npz",
+          "sha256": "3c8aabdb22bb0543be9810496a2c0e34d336f7d4164e7462c97106e781feb08a",
+          "xywh": [
+            2756,
+            1754,
+            512,
+            512
+          ],
+          "valid_fraction": 0.99993896484375
+        },
+        "evaluation_tile_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "model_label": "1:dino-native-joint-control-v23:step-1000",
+        "display_exposure": 1.0,
+        "variance_multiplier": 1.0,
+        "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA"
+      },
+      {
+        "image": "crop-84a2108fddd87814.png",
+        "caption": "LucieB_Coulicoco / ISO 12800 / 0:dino-native-joint-v22:step-1000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "AHD reference",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "5795ccf68f75673cee2cfc39337cf095d617c539e3ee54c568282c288a55f830",
+        "scene": "LucieB_Coulicoco",
+        "conditioning": {
+          "shot": 0.0023482592096665538,
+          "read": 0.00017038157420448983,
+          "method": "input-only-Haar-fit",
+          "estimate": {
+            "shot": 0.0023482592096665538,
+            "read": 0.00017038157420448983,
+            "reliable": true,
+            "reason": "fit",
+            "candidate_patches": 4096,
+            "accepted_patches": 1199,
+            "intensity_span": 0.06260512955486772,
+            "reference_intensity": 0.06184215098619461,
+            "reference_variance": 0.0003241711820010096,
+            "shot_interval": [
+              0.0017713892032946148,
+              0.003107752589990377
+            ],
+            "read_interval": [
+              0.000130196057114057,
+              0.00021017072927938582
+            ],
+            "bins": [
+              {
+                "mean": 0.037331704050302505,
+                "variance": 0.00024029890482779592,
+                "patches": 75
+              },
+              {
+                "mean": 0.0426618754863739,
+                "variance": 0.0002583925670478493,
+                "patches": 75
+              },
+              {
+                "mean": 0.04648628085851669,
+                "variance": 0.00027513832901604474,
+                "patches": 75
+              },
+              {
+                "mean": 0.049039408564567566,
+                "variance": 0.00028016348369419575,
+                "patches": 75
+              },
+              {
+                "mean": 0.05116194486618042,
+                "variance": 0.0002882984990719706,
+                "patches": 75
+              },
+              {
+                "mean": 0.05317879468202591,
+                "variance": 0.0003091453108936548,
+                "patches": 75
+              },
+              {
+                "mean": 0.0560268759727478,
+                "variance": 0.000310206669382751,
+                "patches": 75
+              },
+              {
+                "mean": 0.06038716062903404,
+                "variance": 0.0003285295970272273,
+                "patches": 75
+              },
+              {
+                "mean": 0.06320273876190186,
+                "variance": 0.00033291729050688446,
+                "patches": 75
+              },
+              {
+                "mean": 0.06547649204730988,
+                "variance": 0.00033622721093706787,
+                "patches": 75
+              },
+              {
+                "mean": 0.06830255687236786,
+                "variance": 0.00034963031066581607,
+                "patches": 75
+              },
+              {
+                "mean": 0.07187666743993759,
+                "variance": 0.0003632954030763358,
+                "patches": 75
+              },
+              {
+                "mean": 0.07532474398612976,
+                "variance": 0.0003655982727650553,
+                "patches": 75
+              },
+              {
+                "mean": 0.081906259059906,
+                "variance": 0.0003507589572109282,
+                "patches": 75
+              },
+              {
+                "mean": 0.09307220578193665,
+                "variance": 0.00036906631430611014,
+                "patches": 75
+              },
+              {
+                "mean": 0.10986495018005371,
+                "variance": 0.00039619908784516156,
+                "patches": 74
+              }
+            ]
+          }
+        },
+        "white_balance": [
+          1.00390625,
+          1.0,
+          2.080078125
+        ],
+        "camera_to_srgb": [
+          [
+            2.0060677171962595,
+            -1.2336652639354324,
+            0.22759754673917293
+          ],
+          [
+            -0.23706710137989376,
+            1.8006883583827236,
+            -0.5636212570028296
+          ],
+          [
+            -0.015706646354080415,
+            -0.555168390672119,
+            1.5708750370261992
+          ]
+        ],
+        "checkpoint_sha256": "8bafa37175ebfccfa35b52aa7ed16bb9bc06aee0848159c9bc9b8de4e9b748ab",
+        "noisy_sha256": "f1807182ee7fbe2975c478d8228882dc06d69d1624898f28d05f289c8f3ae14f",
+        "prepared_crop": {
+          "id": "LucieB_Coulicoco:f1807182ee7fbe2975c478d8228882dc06d69d1624898f28d05f289c8f3ae14f:1754:2756",
+          "path": "crop-3f2c548379b685589c712dab.npz",
+          "sha256": "c505657aeee878dc737558f09981d364631aa2512354cce6557135a5fb7d368f",
+          "xywh": [
+            2756,
+            1754,
+            512,
+            512
+          ],
+          "valid_fraction": 1.0
+        },
+        "evaluation_tile_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "model_label": "0:dino-native-joint-v22:step-1000",
+        "display_exposure": 1.0,
+        "variance_multiplier": 1.0,
+        "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA"
+      },
+      {
+        "image": "crop-f911047674233998.png",
+        "caption": "LucieB_Coulicoco / ISO 12800 / 1:dino-native-joint-control-v23:step-1000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "AHD reference",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "2a6ca94c78133dcf69b99b0f863e893be8d53ffe4a0a0022a49fb817b5e2a8ad",
+        "scene": "LucieB_Coulicoco",
+        "conditioning": {
+          "shot": 0.0023482592096665538,
+          "read": 0.00017038157420448983,
+          "method": "input-only-Haar-fit",
+          "estimate": {
+            "shot": 0.0023482592096665538,
+            "read": 0.00017038157420448983,
+            "reliable": true,
+            "reason": "fit",
+            "candidate_patches": 4096,
+            "accepted_patches": 1199,
+            "intensity_span": 0.06260512955486772,
+            "reference_intensity": 0.06184215098619461,
+            "reference_variance": 0.0003241711820010096,
+            "shot_interval": [
+              0.0017713892032946148,
+              0.003107752589990377
+            ],
+            "read_interval": [
+              0.000130196057114057,
+              0.00021017072927938582
+            ],
+            "bins": [
+              {
+                "mean": 0.037331704050302505,
+                "variance": 0.00024029890482779592,
+                "patches": 75
+              },
+              {
+                "mean": 0.0426618754863739,
+                "variance": 0.0002583925670478493,
+                "patches": 75
+              },
+              {
+                "mean": 0.04648628085851669,
+                "variance": 0.00027513832901604474,
+                "patches": 75
+              },
+              {
+                "mean": 0.049039408564567566,
+                "variance": 0.00028016348369419575,
+                "patches": 75
+              },
+              {
+                "mean": 0.05116194486618042,
+                "variance": 0.0002882984990719706,
+                "patches": 75
+              },
+              {
+                "mean": 0.05317879468202591,
+                "variance": 0.0003091453108936548,
+                "patches": 75
+              },
+              {
+                "mean": 0.0560268759727478,
+                "variance": 0.000310206669382751,
+                "patches": 75
+              },
+              {
+                "mean": 0.06038716062903404,
+                "variance": 0.0003285295970272273,
+                "patches": 75
+              },
+              {
+                "mean": 0.06320273876190186,
+                "variance": 0.00033291729050688446,
+                "patches": 75
+              },
+              {
+                "mean": 0.06547649204730988,
+                "variance": 0.00033622721093706787,
+                "patches": 75
+              },
+              {
+                "mean": 0.06830255687236786,
+                "variance": 0.00034963031066581607,
+                "patches": 75
+              },
+              {
+                "mean": 0.07187666743993759,
+                "variance": 0.0003632954030763358,
+                "patches": 75
+              },
+              {
+                "mean": 0.07532474398612976,
+                "variance": 0.0003655982727650553,
+                "patches": 75
+              },
+              {
+                "mean": 0.081906259059906,
+                "variance": 0.0003507589572109282,
+                "patches": 75
+              },
+              {
+                "mean": 0.09307220578193665,
+                "variance": 0.00036906631430611014,
+                "patches": 75
+              },
+              {
+                "mean": 0.10986495018005371,
+                "variance": 0.00039619908784516156,
+                "patches": 74
+              }
+            ]
+          }
+        },
+        "white_balance": [
+          1.00390625,
+          1.0,
+          2.080078125
+        ],
+        "camera_to_srgb": [
+          [
+            2.0060677171962595,
+            -1.2336652639354324,
+            0.22759754673917293
+          ],
+          [
+            -0.23706710137989376,
+            1.8006883583827236,
+            -0.5636212570028296
+          ],
+          [
+            -0.015706646354080415,
+            -0.555168390672119,
+            1.5708750370261992
+          ]
+        ],
+        "checkpoint_sha256": "977fd7169410c28b410b8676cc5bf36686b982567c415dadee9a1acd663cba25",
+        "noisy_sha256": "f1807182ee7fbe2975c478d8228882dc06d69d1624898f28d05f289c8f3ae14f",
+        "prepared_crop": {
+          "id": "LucieB_Coulicoco:f1807182ee7fbe2975c478d8228882dc06d69d1624898f28d05f289c8f3ae14f:1754:2756",
+          "path": "crop-3f2c548379b685589c712dab.npz",
+          "sha256": "c505657aeee878dc737558f09981d364631aa2512354cce6557135a5fb7d368f",
+          "xywh": [
+            2756,
+            1754,
+            512,
+            512
+          ],
+          "valid_fraction": 1.0
+        },
+        "evaluation_tile_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "model_label": "1:dino-native-joint-control-v23:step-1000",
+        "display_exposure": 1.0,
+        "variance_multiplier": 1.0,
+        "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA"
+      }
+    ]
+  },
+  "synthetic_screen": {
+    "summary": "/mnt/external/demosaic/evaluation/synthetic-native-joint-v22-control-v23-1k-screen/summary.json",
+    "summary_sha256": "095fdf9513dd73f747cd91b07fd5ec3f002438a183f600d97a1e06072a0025c3",
+    "models": [
+      {
+        "label": "0:dino-native-joint-v22:step-1000",
+        "source": "/mnt/external/demosaic/evaluation/paired-raw-native-joint-v22-control-v23-1k/weights/weights-8bafa37175ebfccfa35b52aa7ed16bb9bc06aee0848159c9bc9b8de4e9b748ab.pt",
+        "training_run": "/mnt/external/demosaic/runs/dino-native-joint-v22",
+        "snapshot": "/mnt/external/demosaic/evaluation/synthetic-native-joint-v22-control-v23-1k-screen/weights/weights-8bafa37175ebfccfa35b52aa7ed16bb9bc06aee0848159c9bc9b8de4e9b748ab.pt",
+        "sha256": "8bafa37175ebfccfa35b52aa7ed16bb9bc06aee0848159c9bc9b8de4e9b748ab",
+        "step": 1000,
+        "model_config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": true,
+          "refinement_width": 48,
+          "refinement_blocks": 8,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31
+        },
+        "effective_model_config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": true,
+          "refinement_width": 48,
+          "refinement_blocks": 8,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31
+        },
+        "training_manifest_sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a",
+        "compute_precision": "float16",
+        "refinement_compute_precision": "float32",
+        "memory_format": "channels_last"
+      },
+      {
+        "label": "1:dino-native-joint-control-v23:step-1000",
+        "source": "/mnt/external/demosaic/evaluation/paired-raw-native-joint-v22-control-v23-1k/weights/weights-977fd7169410c28b410b8676cc5bf36686b982567c415dadee9a1acd663cba25.pt",
+        "training_run": "/mnt/external/demosaic/runs/dino-native-joint-control-v23",
+        "snapshot": "/mnt/external/demosaic/evaluation/synthetic-native-joint-v22-control-v23-1k-screen/weights/weights-977fd7169410c28b410b8676cc5bf36686b982567c415dadee9a1acd663cba25.pt",
+        "sha256": "977fd7169410c28b410b8676cc5bf36686b982567c415dadee9a1acd663cba25",
+        "step": 1000,
+        "model_config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": true,
+          "refinement_width": 48,
+          "refinement_blocks": 8,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31
+        },
+        "effective_model_config": {
+          "width": 32,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "camera_conditioning": true,
+          "noise_modulation": true,
+          "physical_fp32": true,
+          "baseline": "wiener-malvar",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": true,
+          "refinement_width": 48,
+          "refinement_blocks": 8,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31
+        },
+        "training_manifest_sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a",
+        "compute_precision": "float16",
+        "refinement_compute_precision": "float32",
+        "memory_format": "channels_last"
+      }
+    ],
+    "overall": [
+      {
+        "model": "0:dino-native-joint-v22:step-1000",
+        "kind": "photo",
+        "metrics": {
+          "linear_psnr": {
+            "mean": 38.52642211105142,
+            "count": 64
+          },
+          "srgb_psnr": {
+            "mean": 31.965884208679203,
+            "count": 64
+          },
+          "srgb_ssim": {
+            "mean": 0.9250322217454336,
+            "count": 64
+          },
+          "chroma_mae": {
+            "mean": 0.011507935051992848,
+            "count": 64
+          },
+          "gradient_mae": {
+            "mean": 0.01839272582700297,
+            "count": 64
+          },
+          "highlight_boundary_chroma_mae": {
+            "mean": 0.025226327227907554,
+            "count": 64
+          },
+          "highlight_boundary_rgb_mae": {
+            "mean": 0.03090731288193638,
+            "count": 64
+          },
+          "shadow_linear_psnr": {
+            "mean": 44.84924936649345,
+            "count": 64
+          }
+        }
+      },
+      {
+        "model": "0:dino-native-joint-v22:step-1000",
+        "kind": "synthetic",
+        "metrics": {
+          "linear_psnr": {
+            "mean": 33.48438611200878,
+            "count": 8
+          },
+          "srgb_psnr": {
+            "mean": 29.248918754713877,
+            "count": 8
+          },
+          "srgb_ssim": {
+            "mean": 0.9120620909546103,
+            "count": 8
+          },
+          "chroma_mae": {
+            "mean": 0.015414677872156193,
+            "count": 8
+          },
+          "gradient_mae": {
+            "mean": 0.0192038206046813,
+            "count": 8
+          },
+          "highlight_boundary_chroma_mae": {
+            "mean": 0.030608621350256725,
+            "count": 8
+          },
+          "highlight_boundary_rgb_mae": {
+            "mean": 0.032601037970744075,
+            "count": 8
+          },
+          "shadow_linear_psnr": {
+            "mean": 47.68429517745972,
+            "count": 8
+          }
+        }
+      },
+      {
+        "model": "1:dino-native-joint-control-v23:step-1000",
+        "kind": "photo",
+        "metrics": {
+          "linear_psnr": {
+            "mean": 38.585340871342595,
+            "count": 64
+          },
+          "srgb_psnr": {
+            "mean": 32.014697731605594,
+            "count": 64
+          },
+          "srgb_ssim": {
+            "mean": 0.9254283931305898,
+            "count": 64
+          },
+          "chroma_mae": {
+            "mean": 0.011368175910709917,
+            "count": 64
+          },
+          "gradient_mae": {
+            "mean": 0.01835433792465275,
+            "count": 64
+          },
+          "highlight_boundary_chroma_mae": {
+            "mean": 0.024997033700401516,
+            "count": 64
+          },
+          "highlight_boundary_rgb_mae": {
+            "mean": 0.030667865008884597,
+            "count": 64
+          },
+          "shadow_linear_psnr": {
+            "mean": 44.88789079657622,
+            "count": 64
+          }
+        }
+      },
+      {
+        "model": "1:dino-native-joint-control-v23:step-1000",
+        "kind": "synthetic",
+        "metrics": {
+          "linear_psnr": {
+            "mean": 33.49430343082973,
+            "count": 8
+          },
+          "srgb_psnr": {
+            "mean": 29.26335690702711,
+            "count": 8
+          },
+          "srgb_ssim": {
+            "mean": 0.912124683282205,
+            "count": 8
+          },
+          "chroma_mae": {
+            "mean": 0.01529339914018887,
+            "count": 8
+          },
+          "gradient_mae": {
+            "mean": 0.019269590376227694,
+            "count": 8
+          },
+          "highlight_boundary_chroma_mae": {
+            "mean": 0.03054675997118466,
+            "count": 8
+          },
+          "highlight_boundary_rgb_mae": {
+            "mean": 0.03247552101771968,
+            "count": 8
+          },
+          "shadow_linear_psnr": {
+            "mean": 47.75909423828125,
+            "count": 8
+          }
+        }
+      },
+      {
+        "model": "Bilinear",
+        "kind": "photo",
+        "metrics": {
+          "linear_psnr": {
+            "mean": 32.79709966800043,
+            "count": 64
+          },
+          "srgb_psnr": {
+            "mean": 28.146084658801556,
+            "count": 64
+          },
+          "srgb_ssim": {
+            "mean": 0.8162215915841183,
+            "count": 64
+          },
+          "chroma_mae": {
+            "mean": 0.02044227686591122,
+            "count": 64
+          },
+          "gradient_mae": {
+            "mean": 0.026721385252780498,
+            "count": 64
+          },
+          "highlight_boundary_chroma_mae": {
+            "mean": 0.03787389581323926,
+            "count": 64
+          },
+          "highlight_boundary_rgb_mae": {
+            "mean": 0.042197009737416614,
+            "count": 64
+          },
+          "shadow_linear_psnr": {
+            "mean": 39.52442230568046,
+            "count": 64
+          }
+        }
+      },
+      {
+        "model": "Bilinear",
+        "kind": "synthetic",
+        "metrics": {
+          "linear_psnr": {
+            "mean": 29.69681032640593,
+            "count": 8
+          },
+          "srgb_psnr": {
+            "mean": 27.653625650065287,
+            "count": 8
+          },
+          "srgb_ssim": {
+            "mean": 0.8278689195535013,
+            "count": 8
+          },
+          "chroma_mae": {
+            "mean": 0.02254277749411163,
+            "count": 8
+          },
+          "gradient_mae": {
+            "mean": 0.025656676998810975,
+            "count": 8
+          },
+          "highlight_boundary_chroma_mae": {
+            "mean": 0.03016544818334902,
+            "count": 8
+          },
+          "highlight_boundary_rgb_mae": {
+            "mean": 0.029885022670108202,
+            "count": 8
+          },
+          "shadow_linear_psnr": {
+            "mean": 44.75528848171234,
+            "count": 8
+          }
+        }
+      },
+      {
+        "model": "Malvar2004:WB",
+        "kind": "photo",
+        "metrics": {
+          "linear_psnr": {
+            "mean": 34.32274765255195,
+            "count": 64
+          },
+          "srgb_psnr": {
+            "mean": 28.87615830770561,
+            "count": 64
+          },
+          "srgb_ssim": {
+            "mean": 0.833587159984745,
+            "count": 64
+          },
+          "chroma_mae": {
+            "mean": 0.018186026988327546,
+            "count": 64
+          },
+          "gradient_mae": {
+            "mean": 0.026496021720439397,
+            "count": 64
+          },
+          "highlight_boundary_chroma_mae": {
+            "mean": 0.034109518309075305,
+            "count": 64
+          },
+          "highlight_boundary_rgb_mae": {
+            "mean": 0.03687586878944178,
+            "count": 64
+          },
+          "shadow_linear_psnr": {
+            "mean": 43.60055169108368,
+            "count": 64
+          }
+        }
+      },
+      {
+        "model": "Malvar2004:WB",
+        "kind": "synthetic",
+        "metrics": {
+          "linear_psnr": {
+            "mean": 28.84635238988059,
+            "count": 8
+          },
+          "srgb_psnr": {
+            "mean": 26.544206431933812,
+            "count": 8
+          },
+          "srgb_ssim": {
+            "mean": 0.7974514665880373,
+            "count": 8
+          },
+          "chroma_mae": {
+            "mean": 0.022061460707586127,
+            "count": 8
+          },
+          "gradient_mae": {
+            "mean": 0.031374802704833976,
+            "count": 8
+          },
+          "highlight_boundary_chroma_mae": {
+            "mean": 0.036783614657664054,
+            "count": 8
+          },
+          "highlight_boundary_rgb_mae": {
+            "mean": 0.039128658804111184,
+            "count": 8
+          },
+          "shadow_linear_psnr": {
+            "mean": 44.87024462223053,
+            "count": 8
+          }
+        }
+      },
+      {
+        "model": "Wiener7+Malvar2004:WB",
+        "kind": "photo",
+        "metrics": {
+          "linear_psnr": {
+            "mean": 35.411669112209765,
+            "count": 64
+          },
+          "srgb_psnr": {
+            "mean": 29.74740160469498,
+            "count": 64
+          },
+          "srgb_ssim": {
+            "mean": 0.8884052203502506,
+            "count": 64
+          },
+          "chroma_mae": {
+            "mean": 0.016122373831032225,
+            "count": 64
+          },
+          "gradient_mae": {
+            "mean": 0.022948027773184422,
+            "count": 64
+          },
+          "highlight_boundary_chroma_mae": {
+            "mean": 0.03369742752541545,
+            "count": 64
+          },
+          "highlight_boundary_rgb_mae": {
+            "mean": 0.03636041021112153,
+            "count": 64
+          },
+          "shadow_linear_psnr": {
+            "mean": 44.04891410292614,
+            "count": 64
+          }
+        }
+      },
+      {
+        "model": "Wiener7+Malvar2004:WB",
+        "kind": "synthetic",
+        "metrics": {
+          "linear_psnr": {
+            "mean": 29.40059721469879,
+            "count": 8
+          },
+          "srgb_psnr": {
+            "mean": 27.0631058045796,
+            "count": 8
+          },
+          "srgb_ssim": {
+            "mean": 0.8515637437147754,
+            "count": 8
+          },
+          "chroma_mae": {
+            "mean": 0.020249866913737993,
+            "count": 8
+          },
+          "gradient_mae": {
+            "mean": 0.0275344108522404,
+            "count": 8
+          },
+          "highlight_boundary_chroma_mae": {
+            "mean": 0.03672966978629119,
+            "count": 8
+          },
+          "highlight_boundary_rgb_mae": {
+            "mean": 0.03876001125512024,
+            "count": 8
+          },
+          "shadow_linear_psnr": {
+            "mean": 45.73160743713379,
+            "count": 8
+          }
+        }
+      }
+    ],
+    "paired_comparisons": [
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "1:dino-native-joint-control-v23:step-1000",
+        "kind": "photo",
+        "metric": "linear_psnr",
+        "sources": 64,
+        "mean_first_minus_second": -0.05891876029116755,
+        "source_bootstrap_95_interval": [
+          -0.10788318807525293,
+          -0.030463393405079822
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "1:dino-native-joint-control-v23:step-1000",
+        "kind": "photo",
+        "metric": "srgb_psnr",
+        "sources": 64,
+        "mean_first_minus_second": -0.048813522926398845,
+        "source_bootstrap_95_interval": [
+          -0.0717259566432666,
+          -0.031971452305359964
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "1:dino-native-joint-control-v23:step-1000",
+        "kind": "photo",
+        "metric": "srgb_ssim",
+        "sources": 64,
+        "mean_first_minus_second": -0.0003961713851562444,
+        "source_bootstrap_95_interval": [
+          -0.0005276049670230954,
+          -0.00023185217287390709
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "1:dino-native-joint-control-v23:step-1000",
+        "kind": "synthetic",
+        "metric": "linear_psnr",
+        "sources": 8,
+        "mean_first_minus_second": -0.00991731882095337,
+        "source_bootstrap_95_interval": [
+          -0.023812898567745933,
+          0.002105521304267821
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "1:dino-native-joint-control-v23:step-1000",
+        "kind": "synthetic",
+        "metric": "srgb_psnr",
+        "sources": 8,
+        "mean_first_minus_second": -0.014438152313232866,
+        "source_bootstrap_95_interval": [
+          -0.04101851731538873,
+          0.007938197680881885
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "1:dino-native-joint-control-v23:step-1000",
+        "kind": "synthetic",
+        "metric": "srgb_ssim",
+        "sources": 8,
+        "mean_first_minus_second": -6.25923275947432e-05,
+        "source_bootstrap_95_interval": [
+          -0.00027023349622530416,
+          0.0001542316483600054
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Bilinear",
+        "kind": "photo",
+        "metric": "linear_psnr",
+        "sources": 64,
+        "mean_first_minus_second": 5.729322443050998,
+        "source_bootstrap_95_interval": [
+          5.359117496479302,
+          6.103896688949316
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Bilinear",
+        "kind": "photo",
+        "metric": "srgb_psnr",
+        "sources": 64,
+        "mean_first_minus_second": 3.8197995498776436,
+        "source_bootstrap_95_interval": [
+          3.5679689262860586,
+          4.064667657150753
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Bilinear",
+        "kind": "photo",
+        "metric": "srgb_ssim",
+        "sources": 64,
+        "mean_first_minus_second": 0.1088106301613152,
+        "source_bootstrap_95_interval": [
+          0.10218449366553355,
+          0.1159536054952436
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Bilinear",
+        "kind": "synthetic",
+        "metric": "linear_psnr",
+        "sources": 8,
+        "mean_first_minus_second": 3.7875757856028422,
+        "source_bootstrap_95_interval": [
+          2.7540033030722824,
+          5.101854300924709
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Bilinear",
+        "kind": "synthetic",
+        "metric": "srgb_psnr",
+        "sources": 8,
+        "mean_first_minus_second": 1.5952931046485896,
+        "source_bootstrap_95_interval": [
+          0.337022134235927,
+          3.162015899377209
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Bilinear",
+        "kind": "synthetic",
+        "metric": "srgb_ssim",
+        "sources": 8,
+        "mean_first_minus_second": 0.08419317140110902,
+        "source_bootstrap_95_interval": [
+          0.04795642001554369,
+          0.1288065104213144
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Malvar2004:WB",
+        "kind": "photo",
+        "metric": "linear_psnr",
+        "sources": 64,
+        "mean_first_minus_second": 4.203674458499465,
+        "source_bootstrap_95_interval": [
+          3.81194834979251,
+          4.612454856320151
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Malvar2004:WB",
+        "kind": "photo",
+        "metric": "srgb_psnr",
+        "sources": 64,
+        "mean_first_minus_second": 3.0897259009735922,
+        "source_bootstrap_95_interval": [
+          2.8893053908433233,
+          3.300710025190243
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Malvar2004:WB",
+        "kind": "photo",
+        "metric": "srgb_ssim",
+        "sources": 64,
+        "mean_first_minus_second": 0.09144506176068848,
+        "source_bootstrap_95_interval": [
+          0.08338699724325647,
+          0.10001168696367782
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Malvar2004:WB",
+        "kind": "synthetic",
+        "metric": "linear_psnr",
+        "sources": 8,
+        "mean_first_minus_second": 4.638033722128187,
+        "source_bootstrap_95_interval": [
+          4.450243047411952,
+          4.840455006914479
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Malvar2004:WB",
+        "kind": "synthetic",
+        "metric": "srgb_psnr",
+        "sources": 8,
+        "mean_first_minus_second": 2.704712322780064,
+        "source_bootstrap_95_interval": [
+          2.2674265148384225,
+          3.1820203674691063
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Malvar2004:WB",
+        "kind": "synthetic",
+        "metric": "srgb_ssim",
+        "sources": 8,
+        "mean_first_minus_second": 0.11461062436657293,
+        "source_bootstrap_95_interval": [
+          0.09118548738104956,
+          0.1336726562918297
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "photo",
+        "metric": "linear_psnr",
+        "sources": 64,
+        "mean_first_minus_second": 3.1147529988416602,
+        "source_bootstrap_95_interval": [
+          2.877409368141422,
+          3.349390203505755
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "photo",
+        "metric": "srgb_psnr",
+        "sources": 64,
+        "mean_first_minus_second": 2.218482603984219,
+        "source_bootstrap_95_interval": [
+          2.0773143869159467,
+          2.3456983407427154
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "photo",
+        "metric": "srgb_ssim",
+        "sources": 64,
+        "mean_first_minus_second": 0.03662700139518295,
+        "source_bootstrap_95_interval": [
+          0.03376505361936454,
+          0.03992456030848968
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "synthetic",
+        "metric": "linear_psnr",
+        "sources": 8,
+        "mean_first_minus_second": 4.083788897309985,
+        "source_bootstrap_95_interval": [
+          3.9089958763548323,
+          4.250286457048996
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "synthetic",
+        "metric": "srgb_psnr",
+        "sources": 8,
+        "mean_first_minus_second": 2.185812950134277,
+        "source_bootstrap_95_interval": [
+          1.7306938660996298,
+          2.729690086202961
+        ]
+      },
+      {
+        "first": "0:dino-native-joint-v22:step-1000",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "synthetic",
+        "metric": "srgb_ssim",
+        "sources": 8,
+        "mean_first_minus_second": 0.06049834723983494,
+        "source_bootstrap_95_interval": [
+          0.04812734494251866,
+          0.07928902002583654
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Bilinear",
+        "kind": "photo",
+        "metric": "linear_psnr",
+        "sources": 64,
+        "mean_first_minus_second": 5.7882412033421655,
+        "source_bootstrap_95_interval": [
+          5.410385246534965,
+          6.178886502808226
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Bilinear",
+        "kind": "photo",
+        "metric": "srgb_psnr",
+        "sources": 64,
+        "mean_first_minus_second": 3.868613072804042,
+        "source_bootstrap_95_interval": [
+          3.6142140776717238,
+          4.119976046654796
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Bilinear",
+        "kind": "photo",
+        "metric": "srgb_ssim",
+        "sources": 64,
+        "mean_first_minus_second": 0.10920680154647144,
+        "source_bootstrap_95_interval": [
+          0.10257789729886489,
+          0.11629715741936314
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Bilinear",
+        "kind": "synthetic",
+        "metric": "linear_psnr",
+        "sources": 8,
+        "mean_first_minus_second": 3.7974931044237956,
+        "source_bootstrap_95_interval": [
+          2.7736027224787656,
+          5.107017225027083
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Bilinear",
+        "kind": "synthetic",
+        "metric": "srgb_psnr",
+        "sources": 8,
+        "mean_first_minus_second": 1.6097312569618225,
+        "source_bootstrap_95_interval": [
+          0.35907982076917344,
+          3.1597389504313473
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Bilinear",
+        "kind": "synthetic",
+        "metric": "srgb_ssim",
+        "sources": 8,
+        "mean_first_minus_second": 0.08425576372870376,
+        "source_bootstrap_95_interval": [
+          0.04806253455047094,
+          0.12891058484757587
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Malvar2004:WB",
+        "kind": "photo",
+        "metric": "linear_psnr",
+        "sources": 64,
+        "mean_first_minus_second": 4.262593218790633,
+        "source_bootstrap_95_interval": [
+          3.8584628878294365,
+          4.6809069244058
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Malvar2004:WB",
+        "kind": "photo",
+        "metric": "srgb_psnr",
+        "sources": 64,
+        "mean_first_minus_second": 3.1385394238999913,
+        "source_bootstrap_95_interval": [
+          2.929354080424777,
+          3.353084822318384
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Malvar2004:WB",
+        "kind": "photo",
+        "metric": "srgb_ssim",
+        "sources": 64,
+        "mean_first_minus_second": 0.09184123314584473,
+        "source_bootstrap_95_interval": [
+          0.08376421220766912,
+          0.10034699600031932
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Malvar2004:WB",
+        "kind": "synthetic",
+        "metric": "linear_psnr",
+        "sources": 8,
+        "mean_first_minus_second": 4.64795104094914,
+        "source_bootstrap_95_interval": [
+          4.462412207360777,
+          4.844814461469651
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Malvar2004:WB",
+        "kind": "synthetic",
+        "metric": "srgb_psnr",
+        "sources": 8,
+        "mean_first_minus_second": 2.7191504750932967,
+        "source_bootstrap_95_interval": [
+          2.3040476696831838,
+          3.183467483520509
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Malvar2004:WB",
+        "kind": "synthetic",
+        "metric": "srgb_ssim",
+        "sources": 8,
+        "mean_first_minus_second": 0.11467321669416768,
+        "source_bootstrap_95_interval": [
+          0.09142885014547833,
+          0.1335985888327871
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "photo",
+        "metric": "linear_psnr",
+        "sources": 64,
+        "mean_first_minus_second": 3.1736717591328283,
+        "source_bootstrap_95_interval": [
+          2.937937947775104,
+          3.4059149167899583
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "photo",
+        "metric": "srgb_psnr",
+        "sources": 64,
+        "mean_first_minus_second": 2.267296126910618,
+        "source_bootstrap_95_interval": [
+          2.1315186053780564,
+          2.3929189881309862
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "photo",
+        "metric": "srgb_ssim",
+        "sources": 64,
+        "mean_first_minus_second": 0.03702317278033919,
+        "source_bootstrap_95_interval": [
+          0.03415053206346262,
+          0.04031872352518672
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "synthetic",
+        "metric": "linear_psnr",
+        "sources": 8,
+        "mean_first_minus_second": 4.093706216130938,
+        "source_bootstrap_95_interval": [
+          3.928070721243111,
+          4.249254865412202
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "synthetic",
+        "metric": "srgb_psnr",
+        "sources": 8,
+        "mean_first_minus_second": 2.2002511024475098,
+        "source_bootstrap_95_interval": [
+          1.7645243385008405,
+          2.7317537048033302
+        ]
+      },
+      {
+        "first": "1:dino-native-joint-control-v23:step-1000",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "synthetic",
+        "metric": "srgb_ssim",
+        "sources": 8,
+        "mean_first_minus_second": 0.06056093956742968,
+        "source_bootstrap_95_interval": [
+          0.04828784499716548,
+          0.07933421140935804
+        ]
+      },
+      {
+        "first": "Bilinear",
+        "second": "Malvar2004:WB",
+        "kind": "photo",
+        "metric": "linear_psnr",
+        "sources": 64,
+        "mean_first_minus_second": -1.5256479845515318,
+        "source_bootstrap_95_interval": [
+          -1.7042738684586118,
+          -1.3340417580412973
+        ]
+      },
+      {
+        "first": "Bilinear",
+        "second": "Malvar2004:WB",
+        "kind": "photo",
+        "metric": "srgb_psnr",
+        "sources": 64,
+        "mean_first_minus_second": -0.7300736489040511,
+        "source_bootstrap_95_interval": [
+          -0.9490958672016856,
+          -0.5169640218572961
+        ]
+      },
+      {
+        "first": "Bilinear",
+        "second": "Malvar2004:WB",
+        "kind": "photo",
+        "metric": "srgb_ssim",
+        "sources": 64,
+        "mean_first_minus_second": -0.017365568400626717,
+        "source_bootstrap_95_interval": [
+          -0.026834399922518043,
+          -0.008278396741038044
+        ]
+      },
+      {
+        "first": "Bilinear",
+        "second": "Malvar2004:WB",
+        "kind": "synthetic",
+        "metric": "linear_psnr",
+        "sources": 8,
+        "mean_first_minus_second": 0.8504579365253448,
+        "source_bootstrap_95_interval": [
+          -0.5285524630120828,
+          1.9313765638640947
+        ]
+      },
+      {
+        "first": "Bilinear",
+        "second": "Malvar2004:WB",
+        "kind": "synthetic",
+        "metric": "srgb_psnr",
+        "sources": 8,
+        "mean_first_minus_second": 1.1094192181314741,
+        "source_bootstrap_95_interval": [
+          -0.1746718172516136,
+          2.0271659729736187
+        ]
+      },
+      {
+        "first": "Bilinear",
+        "second": "Malvar2004:WB",
+        "kind": "synthetic",
+        "metric": "srgb_ssim",
+        "sources": 8,
+        "mean_first_minus_second": 0.030417452965463915,
+        "source_bootstrap_95_interval": [
+          -0.023320237493940757,
+          0.07509529883308072
+        ]
+      },
+      {
+        "first": "Bilinear",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "photo",
+        "metric": "linear_psnr",
+        "sources": 64,
+        "mean_first_minus_second": -2.6145694442093372,
+        "source_bootstrap_95_interval": [
+          -2.8118541625461404,
+          -2.417111657413521
+        ]
+      },
+      {
+        "first": "Bilinear",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "photo",
+        "metric": "srgb_psnr",
+        "sources": 64,
+        "mean_first_minus_second": -1.6013169458934242,
+        "source_bootstrap_95_interval": [
+          -1.8114360049366955,
+          -1.4012148235791502
+        ]
+      },
+      {
+        "first": "Bilinear",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "photo",
+        "metric": "srgb_ssim",
+        "sources": 64,
+        "mean_first_minus_second": -0.07218362876613224,
+        "source_bootstrap_95_interval": [
+          -0.08018932706368755,
+          -0.06518965853902045
+        ]
+      },
+      {
+        "first": "Bilinear",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "synthetic",
+        "metric": "linear_psnr",
+        "sources": 8,
+        "mean_first_minus_second": 0.29621311170714293,
+        "source_bootstrap_95_interval": [
+          -0.9524133771657942,
+          1.2485090206776348
+        ]
+      },
+      {
+        "first": "Bilinear",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "synthetic",
+        "metric": "srgb_psnr",
+        "sources": 8,
+        "mean_first_minus_second": 0.5905198454856873,
+        "source_bootstrap_95_interval": [
+          -0.5433543271252099,
+          1.4072805115154816
+        ]
+      },
+      {
+        "first": "Bilinear",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "synthetic",
+        "metric": "srgb_ssim",
+        "sources": 8,
+        "mean_first_minus_second": -0.02369482416127408,
+        "source_bootstrap_95_interval": [
+          -0.060461116003404765,
+          0.006135668891615105
+        ]
+      },
+      {
+        "first": "Malvar2004:WB",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "photo",
+        "metric": "linear_psnr",
+        "sources": 64,
+        "mean_first_minus_second": -1.0889214596578052,
+        "source_bootstrap_95_interval": [
+          -1.3244365832635332,
+          -0.8878026653746407
+        ]
+      },
+      {
+        "first": "Malvar2004:WB",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "photo",
+        "metric": "srgb_psnr",
+        "sources": 64,
+        "mean_first_minus_second": -0.8712432969893731,
+        "source_bootstrap_95_interval": [
+          -1.0331465533801492,
+          -0.7419015807232692
+        ]
+      },
+      {
+        "first": "Malvar2004:WB",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "photo",
+        "metric": "srgb_ssim",
+        "sources": 64,
+        "mean_first_minus_second": -0.05481806036550554,
+        "source_bootstrap_95_interval": [
+          -0.06412028921809648,
+          -0.04696203900176834
+        ]
+      },
+      {
+        "first": "Malvar2004:WB",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "synthetic",
+        "metric": "linear_psnr",
+        "sources": 8,
+        "mean_first_minus_second": -0.5542448248182019,
+        "source_bootstrap_95_interval": [
+          -0.7495695125843792,
+          -0.35404436364769826
+        ]
+      },
+      {
+        "first": "Malvar2004:WB",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "synthetic",
+        "metric": "srgb_psnr",
+        "sources": 8,
+        "mean_first_minus_second": -0.5188993726457869,
+        "source_bootstrap_95_interval": [
+          -0.7193570317966593,
+          -0.33520555198192636
+        ]
+      },
+      {
+        "first": "Malvar2004:WB",
+        "second": "Wiener7+Malvar2004:WB",
+        "kind": "synthetic",
+        "metric": "srgb_ssim",
+        "sources": 8,
+        "mean_first_minus_second": -0.054112277126737995,
+        "source_bootstrap_95_interval": [
+          -0.07838805342492249,
+          -0.02999568626151554
+        ]
+      }
+    ],
+    "native_crops": [
+      {
+        "image": "crop-e5c36885fea4f1e1.png",
+        "caption": "0014aa4e075b1827f91ef8a02069e1e318f040ba / iso12800-prior / RGGB / 0:dino-native-joint-v22:step-1000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "bb80a15342a9c98d825e239fddef605277dd9d7938c1eab9c9961ce9b645c621",
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "source": {
+          "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Roy Egloff",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": null,
+          "credit": "Own work",
+          "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+          "width": 3888,
+          "height": 2592,
+          "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+          "shape": [
+            324,
+            486,
+            3
+          ],
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+        },
+        "validation_index": 0,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "model": {
+          "label": "0:dino-native-joint-v22:step-1000",
+          "source": "/mnt/external/demosaic/evaluation/paired-raw-native-joint-v22-control-v23-1k/weights/weights-8bafa37175ebfccfa35b52aa7ed16bb9bc06aee0848159c9bc9b8de4e9b748ab.pt",
+          "training_run": "/mnt/external/demosaic/runs/dino-native-joint-v22",
+          "snapshot": "/mnt/external/demosaic/evaluation/synthetic-native-joint-v22-control-v23-1k-screen/weights/weights-8bafa37175ebfccfa35b52aa7ed16bb9bc06aee0848159c9bc9b8de4e9b748ab.pt",
+          "sha256": "8bafa37175ebfccfa35b52aa7ed16bb9bc06aee0848159c9bc9b8de4e9b748ab",
+          "step": 1000,
+          "model_config": {
+            "width": 32,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "camera_conditioning": true,
+            "noise_modulation": true,
+            "physical_fp32": true,
+            "baseline": "wiener-malvar",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": true,
+            "refinement_width": 48,
+            "refinement_blocks": 8,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31
+          },
+          "effective_model_config": {
+            "width": 32,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "camera_conditioning": true,
+            "noise_modulation": true,
+            "physical_fp32": true,
+            "baseline": "wiener-malvar",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": true,
+            "refinement_width": 48,
+            "refinement_blocks": 8,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31
+          },
+          "training_manifest_sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a",
+          "compute_precision": "float16",
+          "refinement_compute_precision": "float32",
+          "memory_format": "channels_last"
+        },
+        "display_exposure": 1.0,
+        "reference": "Exact synthetic clean target"
+      },
+      {
+        "image": "crop-2aa6817ee772f233.png",
+        "caption": "002fc6eeadf637e81d5a327f117b79abb86becd9 / iso12800-prior / RGGB / 0:dino-native-joint-v22:step-1000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "af2bcf442f0025c5f3998e6cef4ed45650b659e07e0cb88eea9d783987e16e69",
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "source": {
+          "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Vancouver_%28BC%2C_Canada%29%2C_Coal_Harbour_Seaside_Park%2C_Blick_in_den_Himmel_--_2022_--_2158.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Dietmar Rabich",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "Dietmar Rabich",
+          "credit": "Own work",
+          "sha1": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "sha1_hex": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "download_path": "images/00/2f/002fc6eeadf637e81d5a327f117b79abb86becd9.jpg",
+          "width": 3809,
+          "height": 2857,
+          "id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/002fc6eeadf637e81d5a327f117b79abb86becd9.npy",
+          "shape": [
+            357,
+            476,
+            3
+          ],
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf"
+        },
+        "validation_index": 1,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "model": {
+          "label": "0:dino-native-joint-v22:step-1000",
+          "source": "/mnt/external/demosaic/evaluation/paired-raw-native-joint-v22-control-v23-1k/weights/weights-8bafa37175ebfccfa35b52aa7ed16bb9bc06aee0848159c9bc9b8de4e9b748ab.pt",
+          "training_run": "/mnt/external/demosaic/runs/dino-native-joint-v22",
+          "snapshot": "/mnt/external/demosaic/evaluation/synthetic-native-joint-v22-control-v23-1k-screen/weights/weights-8bafa37175ebfccfa35b52aa7ed16bb9bc06aee0848159c9bc9b8de4e9b748ab.pt",
+          "sha256": "8bafa37175ebfccfa35b52aa7ed16bb9bc06aee0848159c9bc9b8de4e9b748ab",
+          "step": 1000,
+          "model_config": {
+            "width": 32,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "camera_conditioning": true,
+            "noise_modulation": true,
+            "physical_fp32": true,
+            "baseline": "wiener-malvar",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": true,
+            "refinement_width": 48,
+            "refinement_blocks": 8,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31
+          },
+          "effective_model_config": {
+            "width": 32,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "camera_conditioning": true,
+            "noise_modulation": true,
+            "physical_fp32": true,
+            "baseline": "wiener-malvar",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": true,
+            "refinement_width": 48,
+            "refinement_blocks": 8,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31
+          },
+          "training_manifest_sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a",
+          "compute_precision": "float16",
+          "refinement_compute_precision": "float32",
+          "memory_format": "channels_last"
+        },
+        "display_exposure": 1.0,
+        "reference": "Exact synthetic clean target"
+      },
+      {
+        "image": "crop-fe7c22d3fb4d7e30.png",
+        "caption": "0014aa4e075b1827f91ef8a02069e1e318f040ba / iso12800-prior / RGGB / 1:dino-native-joint-control-v23:step-1000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "0e3c255b5f7802ccd2baed697a57c689a8a4e0f0232b830a292d58f08877c3ee",
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "source": {
+          "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Roy Egloff",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": null,
+          "credit": "Own work",
+          "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+          "width": 3888,
+          "height": 2592,
+          "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+          "shape": [
+            324,
+            486,
+            3
+          ],
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+        },
+        "validation_index": 0,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "model": {
+          "label": "1:dino-native-joint-control-v23:step-1000",
+          "source": "/mnt/external/demosaic/evaluation/paired-raw-native-joint-v22-control-v23-1k/weights/weights-977fd7169410c28b410b8676cc5bf36686b982567c415dadee9a1acd663cba25.pt",
+          "training_run": "/mnt/external/demosaic/runs/dino-native-joint-control-v23",
+          "snapshot": "/mnt/external/demosaic/evaluation/synthetic-native-joint-v22-control-v23-1k-screen/weights/weights-977fd7169410c28b410b8676cc5bf36686b982567c415dadee9a1acd663cba25.pt",
+          "sha256": "977fd7169410c28b410b8676cc5bf36686b982567c415dadee9a1acd663cba25",
+          "step": 1000,
+          "model_config": {
+            "width": 32,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "camera_conditioning": true,
+            "noise_modulation": true,
+            "physical_fp32": true,
+            "baseline": "wiener-malvar",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": true,
+            "refinement_width": 48,
+            "refinement_blocks": 8,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31
+          },
+          "effective_model_config": {
+            "width": 32,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "camera_conditioning": true,
+            "noise_modulation": true,
+            "physical_fp32": true,
+            "baseline": "wiener-malvar",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": true,
+            "refinement_width": 48,
+            "refinement_blocks": 8,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31
+          },
+          "training_manifest_sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a",
+          "compute_precision": "float16",
+          "refinement_compute_precision": "float32",
+          "memory_format": "channels_last"
+        },
+        "display_exposure": 1.0,
+        "reference": "Exact synthetic clean target"
+      },
+      {
+        "image": "crop-09223580f92ea96d.png",
+        "caption": "002fc6eeadf637e81d5a327f117b79abb86becd9 / iso12800-prior / RGGB / 1:dino-native-joint-control-v23:step-1000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "8be1b58ace85f59623f5ac944e032b68be7a59644272e622a76f7e4e0084fefc",
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "source": {
+          "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Vancouver_%28BC%2C_Canada%29%2C_Coal_Harbour_Seaside_Park%2C_Blick_in_den_Himmel_--_2022_--_2158.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Dietmar Rabich",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "Dietmar Rabich",
+          "credit": "Own work",
+          "sha1": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "sha1_hex": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "download_path": "images/00/2f/002fc6eeadf637e81d5a327f117b79abb86becd9.jpg",
+          "width": 3809,
+          "height": 2857,
+          "id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/002fc6eeadf637e81d5a327f117b79abb86becd9.npy",
+          "shape": [
+            357,
+            476,
+            3
+          ],
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf"
+        },
+        "validation_index": 1,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "model": {
+          "label": "1:dino-native-joint-control-v23:step-1000",
+          "source": "/mnt/external/demosaic/evaluation/paired-raw-native-joint-v22-control-v23-1k/weights/weights-977fd7169410c28b410b8676cc5bf36686b982567c415dadee9a1acd663cba25.pt",
+          "training_run": "/mnt/external/demosaic/runs/dino-native-joint-control-v23",
+          "snapshot": "/mnt/external/demosaic/evaluation/synthetic-native-joint-v22-control-v23-1k-screen/weights/weights-977fd7169410c28b410b8676cc5bf36686b982567c415dadee9a1acd663cba25.pt",
+          "sha256": "977fd7169410c28b410b8676cc5bf36686b982567c415dadee9a1acd663cba25",
+          "step": 1000,
+          "model_config": {
+            "width": 32,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "camera_conditioning": true,
+            "noise_modulation": true,
+            "physical_fp32": true,
+            "baseline": "wiener-malvar",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": true,
+            "refinement_width": 48,
+            "refinement_blocks": 8,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31
+          },
+          "effective_model_config": {
+            "width": 32,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "camera_conditioning": true,
+            "noise_modulation": true,
+            "physical_fp32": true,
+            "baseline": "wiener-malvar",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": true,
+            "refinement_width": 48,
+            "refinement_blocks": 8,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31
+          },
+          "training_manifest_sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a",
+          "compute_precision": "float16",
+          "refinement_compute_precision": "float32",
+          "memory_format": "channels_last"
+        },
+        "display_exposure": 1.0,
+        "reference": "Exact synthetic clean target"
+      }
+    ]
+  },
+  "observation_audit": "docs/results/native-joint-observations-1k.json"
+}

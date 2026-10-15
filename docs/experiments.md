@@ -621,3 +621,10 @@ unchanged weights and bit-identical default arithmetic. On the new GFX pair,
 single successive 102 MP runs took 36.39 s FP32-refinement versus 26.81 s FP16;
 these are shared-machine timings, not an idle benchmark. Defaults stay FP32
 and the 10-second target remains unmet. See [precision evidence and native crops](refinement-precision.md).
+
+The matched V22/V23 body-adaptation native-target/control pilot also stopped at
+1000 steps. All 41 sampled draws match each corresponding V20/V21 fine-only
+arm. Native targets improve known measured-CFA PSNR over control by 0.02622 dB
+but reduce unseen PSNR by 0.01494 dB, despite improved auxiliary rendered PSNR.
+The 64-photo screen loses 0.04881 dB versus control; neither candidate is
+promoted. See [the body-adaptation review with native crops](native-joint-review.md).
