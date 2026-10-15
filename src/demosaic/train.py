@@ -288,6 +288,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             preserve_negative_read_noise=config.get("preserve_negative_read_noise", False),
             physical_fp32=model.config.physical_fp32,
             noise_free_fraction=config.get("noise_free_fraction", 0.0),
+            broad_camera=config.get("broad_camera", False),
         )
         optimizer.zero_grad(set_to_none=True)
         with amp_context(device, amp):
@@ -300,7 +301,11 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 auxiliary=True,
             )
             loss, terms = reconstruction_loss(
-                prediction, batch, auxiliary, physical_fp32=model.config.physical_fp32
+                prediction,
+                batch,
+                auxiliary,
+                physical_fp32=model.config.physical_fp32,
+                normalized_sensor_weight=config.get("normalized_sensor_weight", 0.0),
             )
         if not torch.isfinite(loss):
             raise RuntimeError(f"Nonfinite loss at step {step}; last checkpoint retained")

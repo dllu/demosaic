@@ -94,6 +94,21 @@ a checkpoint and stop. Other users' processes are never changed.
 Starting afresh in a directory that already contains checkpoints is rejected;
 use a new run directory or resume the existing run explicitly.
 
+`broad_camera: true` widens training illuminants (red/blue WB 0.65–3.6) and
+neutral-preserving primary mixing, including near-identity draws. It avoids
+nearly singular transforms and copies no validation-camera profiles. The
+default remains the historical mild augmentation so old runs keep their draw
+sequence. This is a synthetic augmentation distribution, not a camera calibration.
+`configs/dino-broad-camera-44732.yaml` tests it from the frozen V6 step51000 EMA.
+
+`normalized_sensor_weight: 0.02` optionally adds observed-CFA reconstruction
+error divided by clean-target shot/read standard deviation (floor 1e-4).
+It strengthens deep-shadow gradients while retaining all original losses.
+Rendered highlights and ADC-only draws are excluded from this additional term.
+Its default is zero. `configs/dino-normalized-camera-44732.yaml` is matched to
+the broad-camera experiment except for this weight; neither recipe is promoted
+without real development and detail-preservation evidence.
+
 The larger experiment uses `configs/dino-noise-24576.yaml`, initialized from
 the completed 20k DINO run. It requires the frozen audited 24576-source manifest.
 `noise_modulation: true` adds identity-initialized spatial conditioning from log

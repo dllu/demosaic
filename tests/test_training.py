@@ -9,9 +9,12 @@ from demosaic.train import train
 
 
 @pytest.mark.parametrize(
-    "warm_start,legacy_metadata", [(False, False), (True, False), (True, True)]
+    "warm_start,legacy_metadata,new_recipe",
+    [(False, False, False), (True, False, False), (True, True, False), (True, False, True)],
 )
-def test_checkpoint_resume_matches_uninterrupted_training(tmp_path, warm_start, legacy_metadata):
+def test_checkpoint_resume_matches_uninterrupted_training(
+    tmp_path, warm_start, legacy_metadata, new_recipe
+):
     """RNG, augmentation, draw position, optimizer, LR and EMA survive a restart."""
     source = tmp_path / "clean.npy"
     rng = np.random.default_rng(7)
@@ -45,6 +48,8 @@ def test_checkpoint_resume_matches_uninterrupted_training(tmp_path, warm_start, 
             "attention": False,
         },
     }
+    if new_recipe:
+        config.update(broad_camera=True, normalized_sensor_weight=0.02)
     path = tmp_path / "config.yaml"
     path.write_text(yaml.safe_dump(config))
     initialize = None

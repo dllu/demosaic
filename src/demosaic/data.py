@@ -202,6 +202,32 @@ def _camera_pair(exposed_rgb, inverse, wb, reconstruct_highlights):
     return clean, target if reconstruct_highlights else clean.clamp(0, 1)
 
 
+def sample_broad_cameras(batch, device):
+    """Neutral-preserving camera primaries and warm/cool illuminants.
+
+    The original near-identity transforms and red WB >=1.3 miss ordinary real
+    cameras. Broader nonnegative spectral mixing covers much stronger primary
+    overlap without sampling unstable inverses. These are augmentations, not
+    calibrated camera profiles. No evaluation-camera matrix is copied here.
+    """
+    wb = torch.ones(batch, 3, device=device)
+    wb[:, (0, 2)] = (
+        torch.empty(batch, 2, device=device).uniform_(math.log2(0.65), math.log2(3.6)).exp2()
+    )
+    limits = wb.new_tensor([[0, 0.55, 0.20], [0.18, 0, 0.35], [0.12, 0.40, 0]])
+    broad = torch.rand(batch, 3, 3, device=device) * limits
+    # Retain near-identity coverage in the same recipe.
+    mild = torch.rand_like(broad) * 0.12
+    mild.diagonal(dim1=-2, dim2=-1).zero_()
+    off = torch.where(torch.rand(batch, 1, 1, device=device) < 0.25, mild, broad)
+    off *= 0.65 / off.sum(-1, keepdim=True).clamp_min(0.65)
+    eye = torch.eye(3, device=device)[None]
+    inverse = eye * (1 - off.sum(-1, keepdim=True)) + off
+    off *= torch.where(torch.linalg.det(inverse)[:, None, None] < 0.08, 0.5, 1.0)
+    inverse = eye * (1 - off.sum(-1, keepdim=True)) + off
+    return wb, inverse
+
+
 def degrade(
     rgb,
     *,
@@ -211,6 +237,7 @@ def degrade(
     preserve_negative_read_noise=False,
     physical_fp32=True,
     noise_free_fraction=0.0,
+    broad_camera=False,
 ):
     """Convert clean linear sRGB to randomized camera RGB, then mosaic/noise.
 
@@ -222,12 +249,15 @@ def degrade(
     if not 0 <= noise_free_fraction <= 1:
         raise ValueError("Noise-free fraction must be in [0,1]")
     if training:
-        wb = torch.ones(batch, 3, device=device)
-        wb[:, 0] = torch.empty(batch, device=device).uniform_(1.3, 2.6)
-        wb[:, 2] = torch.empty(batch, device=device).uniform_(1.1, 2.4)
-        off = torch.rand(batch, 3, 3, device=device) * 0.12
-        off.diagonal(dim1=-2, dim2=-1).zero_()
-        inverse = torch.eye(3, device=device)[None] * (1 - off.sum(-1, keepdim=True)) + off
+        if broad_camera:
+            wb, inverse = sample_broad_cameras(batch, device)
+        else:
+            wb = torch.ones(batch, 3, device=device)
+            wb[:, 0] = torch.empty(batch, device=device).uniform_(1.3, 2.6)
+            wb[:, 2] = torch.empty(batch, device=device).uniform_(1.1, 2.4)
+            off = torch.rand(batch, 3, 3, device=device) * 0.12
+            off.diagonal(dim1=-2, dim2=-1).zero_()
+            inverse = torch.eye(3, device=device)[None] * (1 - off.sum(-1, keepdim=True)) + off
         matrix = torch.linalg.inv(inverse)
         exposure = 2 ** torch.empty(batch, 1, 1, 1, device=device).uniform_(-3, 2)
         colors = torch.stack([color_indices(p, device=device) for p in PATTERNS])[
