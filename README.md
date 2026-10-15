@@ -21,14 +21,15 @@ and [Dietmar Rabich](https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Cana
 cropping, simulated noise and restoration. See [the performance review and crop receipts](docs/wide-refinement-review.md)
 and [real GFX100S crops](docs/gfx-qualitative.md).
 
-Real GFX100S crops at native sensor resolution, also 160×160 pixels:
-noisy ISO6400 → V16 → separate ISO100 f/5.6 capture, with shared +2 EV display.
-Framing, aperture and moving subjects differ; the last panel is a qualitative
-reference, **not GT**.
+Real GFX100S foliage and chain-link-fence crops at native 160×160 sensor resolution:
+DSCF3879 noisy ISO6400 → V16 → DSCF3880 ISO100 f/5.6, with shared +2 EV display.
+This closer pair is now the standing test. Framing is nearly identical, 3m38s
+apart; aperture and moving subjects differ, so the last panel is a qualitative
+reference, **not GT**. [All four regions and matched RawNIND comparisons](docs/gfx-qualitative.md).
 
-![GFX sky: noisy, denoised and separate low-ISO reference](docs/images/gfx-overcast-sky-v16.png)
+![GFX foliage: noisy, denoised and separate low-ISO reference](docs/images/gfx3879-foliage-v16.png)
 
-![GFX building: noisy, denoised and separate low-ISO reference](docs/images/gfx-building-detail-v16.png)
+![GFX fence: noisy, denoised and separate low-ISO reference](docs/images/gfx3879-chain-link-fence-v16.png)
 
 ```bash
 source scripts/env.sh
