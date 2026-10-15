@@ -70,6 +70,28 @@ def test_suite_only_pairs_shared_sources_when_methods_have_different_coverage():
         assert comparison["mean_first_minus_second"] == 0
 
 
+def test_custom_comparison_metric_uses_only_measured_regions():
+    rows = [
+        {
+            "model": model,
+            "kind": "real",
+            "id": identity,
+            "condition": "paired",
+            "pattern": "RGGB",
+            "metrics": {"sensor_psnr": value},
+        }
+        for model, identity, value in [
+            ("a", "valid", 40.0),
+            ("b", "valid", 39.0),
+            ("a", "clipped", None),
+            ("b", "clipped", None),
+        ]
+    ]
+    result = summarize(rows, comparison_metrics=("sensor_psnr",))
+    assert result["paired_comparisons"][0]["sources"] == 1
+    assert result["paired_comparisons"][0]["mean_first_minus_second"] == 1
+
+
 def test_training_panel_is_balanced_and_does_not_change_global_rng(tmp_path):
     import yaml
 

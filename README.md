@@ -3,8 +3,9 @@
 Joint Bayer demosaicing and denoising in linear camera RGB, with 16-bit TIFF
 output, physical noise conditioning, tiled inference, and an optional DINOv3
 feature branch. Experimental: training and quality validation are in progress.
-Held-out synthetic validation exceeds RawNIND; broad real-photo superiority and
-state-of-the-art quality remain unproven.
+Synthetic validation has improved, but paired real RAW development currently
+favors RawNIND and exposed a camera-conditioning failure. Quality work continues;
+state-of-the-art performance is not established.
 
 ```bash
 source scripts/env.sh

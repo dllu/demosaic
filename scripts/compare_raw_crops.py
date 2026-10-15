@@ -23,7 +23,7 @@ from demosaic.io import read_raw
 from demosaic.noise import Sensor
 from demosaic.precision import COMPUTE_DTYPES, amp_context
 from demosaic.prior import wiener_packed
-from demosaic.reference import load_rawnind
+from demosaic.reference import RawNind, load_rawnind, publisher_input_scale
 from demosaic.safety import writable_path
 from demosaic.suite import freeze_checkpoint
 
@@ -100,6 +100,14 @@ def main():
             ("Variance prior + Malvar", malvar(wiener_packed(packed, variance), colors, wb)),
         ]
         for label, model, amp in models:
+            if isinstance(model, RawNind):
+                model.input_scale = torch.tensor(
+                    publisher_input_scale(
+                        metadata.white_levels, metadata.black_levels, metadata.adc_white_level
+                    ),
+                    device="cuda",
+                    dtype=torch.float32,
+                )
             with amp_context("cuda", amp, dtype=args.precision):
                 images.append((label, model(packed, variance, colors, wb, matrix)))
         for col, (label, rgb) in enumerate(images):

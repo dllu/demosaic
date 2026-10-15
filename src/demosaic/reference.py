@@ -12,13 +12,30 @@ from torch.nn import functional as F
 from .cfa import PATTERNS, mosaic, pack, unpack
 
 
+def publisher_input_scale(white_levels, black_levels, adc_white_level):
+    """Convert our per-phase camera-white units to upstream global-ADC units."""
+    if adc_white_level is None or len(white_levels) != 4 or len(black_levels) != 4:
+        raise ValueError("Four phase levels and the global ADC white level are required")
+    if any(adc_white_level <= b or w <= b for w, b in zip(white_levels, black_levels)):
+        raise ValueError("Invalid RAW normalization levels")
+    return [(w - b) / (adc_white_level - b) for w, b in zip(white_levels, black_levels)]
+
+
 class RawNind(nn.Module):
-    def __init__(self, network, gain_mode="input-mean"):
+    def __init__(self, network, gain_mode="input-mean", *, input_scale=None, clip_input=False):
         super().__init__()
         if gain_mode not in ("input-mean", "cfa-ls", "cfa-channel"):
             raise ValueError("Unknown gain matching method")
         self.network = network.eval()
         self.gain_mode = gain_mode
+        self.clip_input = clip_input
+        self.register_buffer(
+            "input_scale",
+            None
+            if input_scale is None
+            else torch.as_tensor(input_scale, dtype=torch.float32).reshape(4),
+            persistent=False,
+        )
 
     def forward(self, packed, variance, colors, wb=None, matrix=None):
         if colors.ndim == 1:
@@ -30,7 +47,12 @@ class RawNind(nn.Module):
         # PixelShuffle's spatial phase is part of the pretrained model contract.
         for sample, labels in zip(packed, colors):
             pattern = patterns[tuple(labels.tolist())]
-            raw = unpack(sample[None].float().clamp(0, 1))
+            prepared = sample.float()
+            if self.input_scale is not None:
+                prepared = prepared * self.input_scale.to(prepared)[:, None, None]
+            if self.clip_input:
+                prepared = prepared.clamp(0, 1)
+            raw = unpack(prepared[None])
             if flips[pattern]:
                 raw = raw.flip(flips[pattern])
             canonical = pack(raw)
@@ -42,7 +64,8 @@ class RawNind(nn.Module):
                 output = output.flip(flips[pattern])
             if self.gain_mode == "input-mean":
                 denominator = output.mean()
-                gain = sample.clamp(0, 1).mean() / torch.where(
+                measured = sample.clamp(0, 1) if self.clip_input else sample
+                gain = measured.mean() / torch.where(
                     denominator.abs() > 1e-12, denominator, denominator.new_ones(())
                 )
             else:
@@ -64,7 +87,9 @@ class RawNind(nn.Module):
         return torch.cat(outputs)
 
 
-def load_rawnind(directory, *, gain_mode="input-mean", device="cpu"):
+def load_rawnind(
+    directory, *, gain_mode="input-mean", device="cpu", input_scale=None, clip_input=False
+):
     directory = Path(directory)
     # The imported upstream module only uses rawproc in a separate Passthrough
     # class. Avoid importing its entire research training dependency stack.
@@ -87,4 +112,8 @@ def load_rawnind(directory, *, gain_mode="input-mean", device="cpu"):
     network = module.UtNet2(in_channels=4, funit=32, activation="LeakyReLU")
     state = torch.load(directory / "utnet2-bayer.pt", map_location="cpu", weights_only=True)
     network.load_state_dict(state, strict=True)
-    return RawNind(network, gain_mode).to(device).eval()
+    return (
+        RawNind(network, gain_mode, input_scale=input_scale, clip_input=clip_input)
+        .to(device)
+        .eval()
+    )

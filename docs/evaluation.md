@@ -189,6 +189,40 @@ per-channel-white-level sensor units. Calibrate RGB references against their own
 clean CFA measurements; do not compare these units directly. Raw-domain scores
 against measured reference samples can avoid a demosaicer-dependent ground truth.
 
+`prepare_paired_raw.py` now performs bounded green-plane integer registration,
+fits one exposure gain per clean/noisy capture, calibrates auxiliary AHD RGB
+against that clean capture's own CFA, and saves a fixed 3×3 grid of 512-pixel
+crops. The primary reference consists of measured clean CFA samples, with the
+reference color phase adjusted for odd registration shifts. Saturated and
+out-of-rendering-gamut reference regions are excluded from that primary score.
+Noise conditioning uses only the noisy input's reliable Haar fit, with a
+disclosed nominal ISO fallback. Source RAWs are never modified.
+
+```bash
+uv run python scripts/prepare_paired_raw.py \
+  /mnt/external/demosaic/references/rawnind-dataset/manifest-development.json \
+  --output /mnt/external/demosaic/evaluation/paired-prepared
+uv run python scripts/evaluate_paired_raw.py /path/to/model.pt \
+  --prepared /mnt/external/demosaic/evaluation/paired-prepared/manifest.json \
+  --rawnind /mnt/external/demosaic/references/rawnind \
+  --output /mnt/external/demosaic/evaluation/paired-comparison --gallery
+```
+
+The evaluator hashes prepared crops, freezes checkpoint bytes, archives source,
+and reports measured-sensor PSNR plus auxiliary AHD-derived rendered metrics.
+It averages crops within capture, captures within scene, then scenes; bootstrap
+intervals resample scenes. Low-ISO captures retain noise and AHD is an auxiliary
+reference, so neither metric is exact ground truth. The small development sets
+do not support a broad generalization claim.
+
+RawNIND's publisher preprocessing retains signed and above-white measurements
+and uses the global ADC white level. The adapter now follows that convention,
+including per-phase conversion from our camera-white normalization. Earlier
+reports clipped its input and understated this comparator; those archived
+reports are historical and require a new comparison. New synthetic suites also
+run RawNIND in IEEE FP32. See the real development results in
+[experiments](experiments.md#paired-real-raw-development-and-camera-conditioning).
+
 ## Noise profiles
 
 `noise-profile` estimates the coefficients of `Var(y|x)=shot*x+read` on normalized

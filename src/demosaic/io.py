@@ -23,6 +23,7 @@ class RawMetadata:
     camera_to_srgb: list[list[float]]
     flip: int
     iso: float | None = None
+    adc_white_level: float | None = None
 
 
 def camera_matrix(cam_xyz):
@@ -105,6 +106,7 @@ def read_raw(path):
             matrix.tolist(),
             int(raw.sizes.flip),
             identity.get("ISO"),
+            float(raw.white_level),
         )
     return image, meta
 

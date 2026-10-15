@@ -1,0 +1,2465 @@
+{
+  "format_version": 1,
+  "scope": "Development only; not final test. No paired RAW training used.",
+  "runs": [
+    {
+      "report": "/mnt/external/demosaic/evaluation/paired-raw-development-v6-51k/summary.json",
+      "report_sha256": "d0180a4133d7823f1a1a0d637b0af157fcc0b58831eec4bd81c66af2a4987d39",
+      "scenes": 4,
+      "pairs": 8,
+      "split": "development",
+      "protocol": "Mean crops within each noisy capture, mean captures within scene, mean scenes. Bootstrap scenes, not crops.",
+      "reference": "Primary: measured clean CFA samples after shared integer alignment/gain. Auxiliary RGB: calibrated LibRaw AHD.",
+      "caveats": [
+        "Low-ISO references retain noise; AHD-derived RGB is not exact RGB ground truth.",
+        "Development scenes may be in RawNIND training. Test targets must stay out of model selection."
+      ],
+      "models": [
+        {
+          "label": "0:dino-prior-44732-v6:step-51000",
+          "snapshot": "/mnt/external/demosaic/evaluation/paired-raw-development-v6-51k/weights/weights-0827497572fdbbb3f84773ce02ea1247eae182a0f89700e9b72cd98568392afa.pt",
+          "sha256": "0827497572fdbbb3f84773ce02ea1247eae182a0f89700e9b72cd98568392afa",
+          "step": 51000,
+          "model_config": {
+            "width": 32,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "camera_conditioning": true,
+            "noise_modulation": true,
+            "physical_fp32": true,
+            "baseline": "wiener-malvar",
+            "prior_window": 7
+          },
+          "compute_precision": "float16"
+        },
+        {
+          "label": "1:dino-prior-44732-v6:step-20000",
+          "snapshot": "/mnt/external/demosaic/evaluation/paired-raw-development-v6-51k/weights/weights-ba3e0e05a5b2e26b348c5edfc94559267b59a5e48256d0a236464f74e5d8f761.pt",
+          "sha256": "ba3e0e05a5b2e26b348c5edfc94559267b59a5e48256d0a236464f74e5d8f761",
+          "step": 20000,
+          "model_config": {
+            "width": 32,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "camera_conditioning": true,
+            "noise_modulation": true,
+            "physical_fp32": true,
+            "baseline": "wiener-malvar",
+            "prior_window": 7
+          },
+          "compute_precision": "float16"
+        },
+        {
+          "label": "2:dino-noise-24576-v4:step-30000",
+          "snapshot": "/mnt/external/demosaic/evaluation/paired-raw-development-v6-51k/weights/weights-f308530b37a196a10398b667c87e6620f0198203f9e01173e353e234e839ad97.pt",
+          "sha256": "f308530b37a196a10398b667c87e6620f0198203f9e01173e353e234e839ad97",
+          "step": 30000,
+          "model_config": {
+            "width": 32,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "camera_conditioning": true,
+            "noise_modulation": true,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7
+          },
+          "compute_precision": "float16"
+        },
+        {
+          "label": "RawNIND",
+          "weight_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "input": "Publisher global-ADC normalization; signed/unclipped",
+          "gain": "Observed original-unit CFA, global and per-channel variants; no clean target",
+          "precision": "IEEE float32"
+        }
+      ],
+      "precision": "float16",
+      "source_sha256": "7233cbe8ad6d6701b99b9dad753a57a4e650594c7f62a926c746935641ff7e61",
+      "overall": [
+        {
+          "model": "0:dino-prior-44732-v6:step-51000",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 51.22247621748183,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 36.90056451161702,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.869528287814723,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.00898365477526871,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.010126946105932197,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "1:dino-prior-44732-v6:step-20000",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 51.15986352496677,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 36.99211253060235,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.8709759447309706,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.008823822110166982,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.010075080729115548,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "2:dino-noise-24576-v4:step-30000",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 49.72661209106445,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 35.6954476568434,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.8280636767546337,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.010702345740153558,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.01169463911274862,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "Bilinear",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 44.10599215825399,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 29.836332321166992,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.5878955717715952,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.02503708149823878,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.02472208865866479,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "Malvar2004:WB",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 43.80425209469266,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 30.016488790512085,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.5982528728329473,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.020380146206460066,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.025714163138117228,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 54.08474085066054,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 39.7171000374688,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.9288313032852279,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.0061995219681800036,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.0065557970147993826,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 54.06859636306763,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 39.678047551049126,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.928810535205735,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.006295617572808018,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.006555553548322577,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 50.071689976586235,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 35.86313165558709,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.8550734726919068,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.01000751066668373,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.010634852324276127,
+              "count": 4
+            }
+          }
+        }
+      ],
+      "paired_comparisons": [
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "1:dino-prior-44732-v6:step-20000",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 0.06261269251505652,
+          "source_bootstrap_95_interval": [
+            -0.17652479807535926,
+            0.3017501831054723
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "1:dino-prior-44732-v6:step-20000",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -0.09154801898532305,
+          "source_bootstrap_95_interval": [
+            -0.2927122116088867,
+            0.10961617363824061
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "1:dino-prior-44732-v6:step-20000",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.0014476569162474584,
+          "source_bootstrap_95_interval": [
+            -0.005600987209214037,
+            0.00270567337671912
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "2:dino-noise-24576-v4:step-30000",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 1.4958641264173735,
+          "source_bootstrap_95_interval": [
+            0.4680023193359375,
+            3.030824078453916
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "2:dino-noise-24576-v4:step-30000",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 1.2051168547736264,
+          "source_bootstrap_95_interval": [
+            0.42982991536458215,
+            2.436840083863995
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "2:dino-noise-24576-v4:step-30000",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.04146461106008956,
+          "source_bootstrap_95_interval": [
+            0.03168434649705887,
+            0.05032256080044642
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 7.116484059227837,
+          "source_bootstrap_95_interval": [
+            4.935837639702687,
+            9.297130478752987
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 7.064232190450034,
+          "source_bootstrap_95_interval": [
+            5.7469755013783805,
+            8.924675120247736
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.2816327160431279,
+          "source_bootstrap_95_interval": [
+            0.21886646002531046,
+            0.32581492265065515
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 7.418224122789171,
+          "source_bootstrap_95_interval": [
+            5.539317766825356,
+            9.488542980617948
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 6.884075721104941,
+          "source_bootstrap_95_interval": [
+            5.65798687934876,
+            8.844429281022812
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.2712754149817759,
+          "source_bootstrap_95_interval": [
+            0.2177139938705497,
+            0.30940869491961276
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -2.862264633178711,
+          "source_bootstrap_95_interval": [
+            -4.19026682111952,
+            -1.423915333218046
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -2.816535525851778,
+          "source_bootstrap_95_interval": [
+            -3.8139044443766252,
+            -1.725662655300562
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.05930301547050473,
+          "source_bootstrap_95_interval": [
+            -0.0931275685628255,
+            -0.028670690125889298
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -2.846120145585802,
+          "source_bootstrap_95_interval": [
+            -4.23673311869303,
+            -1.3261675834655762
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -2.777483039432102,
+          "source_bootstrap_95_interval": [
+            -3.895272466871475,
+            -1.5338673591613734
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.0592822473910119,
+          "source_bootstrap_95_interval": [
+            -0.09302046646674461,
+            -0.028633518351448894
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 1.1507862408955898,
+          "source_bootstrap_95_interval": [
+            0.8064200613233776,
+            1.4765729904174805
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 1.037432856029934,
+          "source_bootstrap_95_interval": [
+            0.7910823292202416,
+            1.2837833828396263
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.014454815122816295,
+          "source_bootstrap_95_interval": [
+            0.009446442127227783,
+            0.019463188118404806
+          ]
+        },
+        {
+          "first": "1:dino-prior-44732-v6:step-20000",
+          "second": "2:dino-noise-24576-v4:step-30000",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 1.433251433902317,
+          "source_bootstrap_95_interval": [
+            0.32762002944945934,
+            2.8962434132893904
+          ]
+        },
+        {
+          "first": "1:dino-prior-44732-v6:step-20000",
+          "second": "2:dino-noise-24576-v4:step-30000",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 1.2966648737589495,
+          "source_bootstrap_95_interval": [
+            0.7204026910993768,
+            2.364810069402054
+          ]
+        },
+        {
+          "first": "1:dino-prior-44732-v6:step-20000",
+          "second": "2:dino-noise-24576-v4:step-30000",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.042912267976337015,
+          "source_bootstrap_95_interval": [
+            0.030627508958180782,
+            0.05029830502139193
+          ]
+        },
+        {
+          "first": "1:dino-prior-44732-v6:step-20000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 7.05387136671278,
+          "source_bootstrap_95_interval": [
+            4.933959854973683,
+            9.173782878451878
+          ]
+        },
+        {
+          "first": "1:dino-prior-44732-v6:step-20000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 7.155780209435357,
+          "source_bootstrap_95_interval": [
+            5.749143573972915,
+            8.904438893000284
+          ]
+        },
+        {
+          "first": "1:dino-prior-44732-v6:step-20000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.2830803729593754,
+          "source_bootstrap_95_interval": [
+            0.21780962248643237,
+            0.3314159098598692
+          ]
+        },
+        {
+          "first": "1:dino-prior-44732-v6:step-20000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 7.355611430274115,
+          "source_bootstrap_95_interval": [
+            5.445448133680548,
+            9.353962315453423
+          ]
+        },
+        {
+          "first": "1:dino-prior-44732-v6:step-20000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 6.975623740090264,
+          "source_bootstrap_95_interval": [
+            5.660154951943294,
+            8.82419305377536
+          ]
+        },
+        {
+          "first": "1:dino-prior-44732-v6:step-20000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.27272307189802325,
+          "source_bootstrap_95_interval": [
+            0.214992490493589,
+            0.3116803504526615
+          ]
+        },
+        {
+          "first": "1:dino-prior-44732-v6:step-20000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -2.9248773256937675,
+          "source_bootstrap_95_interval": [
+            -4.335202376047773,
+            -1.643342653910322
+          ]
+        },
+        {
+          "first": "1:dino-prior-44732-v6:step-20000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -2.724987506866455,
+          "source_bootstrap_95_interval": [
+            -3.754229916466606,
+            -1.6717007954915388
+          ]
+        },
+        {
+          "first": "1:dino-prior-44732-v6:step-20000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.057855358554257275,
+          "source_bootstrap_95_interval": [
+            -0.08839890857537588,
+            -0.03137636350260842
+          ]
+        },
+        {
+          "first": "1:dino-prior-44732-v6:step-20000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -2.9087328381008586,
+          "source_bootstrap_95_interval": [
+            -4.3713137838575555,
+            -1.5559497939215792
+          ]
+        },
+        {
+          "first": "1:dino-prior-44732-v6:step-20000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -2.685935020446779,
+          "source_bootstrap_95_interval": [
+            -3.943022886912029,
+            -1.4799054993523502
+          ]
+        },
+        {
+          "first": "1:dino-prior-44732-v6:step-20000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.05783459047476444,
+          "source_bootstrap_95_interval": [
+            -0.08829180647929499,
+            -0.031339191728168014
+          ]
+        },
+        {
+          "first": "1:dino-prior-44732-v6:step-20000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 1.0881735483805333,
+          "source_bootstrap_95_interval": [
+            0.9717117945353202,
+            1.2124417622884085
+          ]
+        },
+        {
+          "first": "1:dino-prior-44732-v6:step-20000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 1.128980875015257,
+          "source_bootstrap_95_interval": [
+            0.9722225930955659,
+            1.2537302970886195
+          ]
+        },
+        {
+          "first": "1:dino-prior-44732-v6:step-20000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.015902472039063753,
+          "source_bootstrap_95_interval": [
+            0.008215043279859696,
+            0.022510540982087462
+          ]
+        },
+        {
+          "first": "2:dino-noise-24576-v4:step-30000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 5.620619932810463,
+          "source_bootstrap_95_interval": [
+            4.467835320366749,
+            6.773404545254177
+          ]
+        },
+        {
+          "first": "2:dino-noise-24576-v4:step-30000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 5.859115335676408,
+          "source_bootstrap_95_interval": [
+            4.934225638707479,
+            6.55190433396234
+          ]
+        },
+        {
+          "first": "2:dino-noise-24576-v4:step-30000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.24016810498303834,
+          "source_bootstrap_95_interval": [
+            0.1871821135282516,
+            0.28342799676789177
+          ]
+        },
+        {
+          "first": "2:dino-noise-24576-v4:step-30000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 5.922359996371798,
+          "source_bootstrap_95_interval": [
+            5.071315447489418,
+            6.773404545254177
+          ]
+        },
+        {
+          "first": "2:dino-noise-24576-v4:step-30000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 5.678958866331315,
+          "source_bootstrap_95_interval": [
+            4.844825638665095,
+            6.472069872750181
+          ]
+        },
+        {
+          "first": "2:dino-noise-24576-v4:step-30000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.22981080392168626,
+          "source_bootstrap_95_interval": [
+            0.18387584512432414,
+            0.2628253120929003
+          ]
+        },
+        {
+          "first": "2:dino-noise-24576-v4:step-30000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -4.3581287595960845,
+          "source_bootstrap_95_interval": [
+            -7.2314457893371635,
+            -1.9709626833597813
+          ]
+        },
+        {
+          "first": "2:dino-noise-24576-v4:step-30000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -4.0216523806254045,
+          "source_bootstrap_95_interval": [
+            -6.11903998586866,
+            -2.474343220392864
+          ]
+        },
+        {
+          "first": "2:dino-noise-24576-v4:step-30000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.10076762653059429,
+          "source_bootstrap_95_interval": [
+            -0.13232226669788355,
+            -0.06286881367365524
+          ]
+        },
+        {
+          "first": "2:dino-noise-24576-v4:step-30000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -4.341984272003176,
+          "source_bootstrap_95_interval": [
+            -7.267557197146946,
+            -1.8835698233710385
+          ]
+        },
+        {
+          "first": "2:dino-noise-24576-v4:step-30000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -3.9825998942057286,
+          "source_bootstrap_95_interval": [
+            -6.307832956314083,
+            -2.2825479242536755
+          ]
+        },
+        {
+          "first": "2:dino-noise-24576-v4:step-30000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.10074685845110146,
+          "source_bootstrap_95_interval": [
+            -0.1323179023133383,
+            -0.0628347802493307
+          ]
+        },
+        {
+          "first": "2:dino-noise-24576-v4:step-30000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -0.34507788552178376,
+          "source_bootstrap_95_interval": [
+            -1.8456888198852575,
+            0.8848217328389492
+          ]
+        },
+        {
+          "first": "2:dino-noise-24576-v4:step-30000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -0.16768399874369244,
+          "source_bootstrap_95_interval": [
+            -1.183653566572401,
+            0.48115197817484656
+          ]
+        },
+        {
+          "first": "2:dino-noise-24576-v4:step-30000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.027009795937273262,
+          "source_bootstrap_95_interval": [
+            -0.04032232198450306,
+            -0.012869017819563594
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 0.30174006356133454,
+          "source_bootstrap_95_interval": [
+            0.0,
+            0.9052201906840036
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -0.18015646934509277,
+          "source_bootstrap_95_interval": [
+            -0.371234946780735,
+            0.01092200809054944
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.010357301061352062,
+          "source_bootstrap_95_interval": [
+            -0.023405438909927995,
+            0.0026908367872238714
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -9.978748692406548,
+          "source_bootstrap_95_interval": [
+            -13.387424627939861,
+            -6.882888370090058
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -9.880767716301811,
+          "source_bootstrap_95_interval": [
+            -12.670944319831001,
+            -7.408568859100344
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.34093573151363266,
+          "source_bootstrap_95_interval": [
+            -0.41575026346577537,
+            -0.2500509272019068
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -9.962604204813639,
+          "source_bootstrap_95_interval": [
+            -13.423536035749644,
+            -6.809941397772892
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -9.841715229882137,
+          "source_bootstrap_95_interval": [
+            -12.859737290276424,
+            -7.216773562961155
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.34091496343413974,
+          "source_bootstrap_95_interval": [
+            -0.41574589908123005,
+            -0.2500168937775823
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -5.965697818332247,
+          "source_bootstrap_95_interval": [
+            -8.093415790134006,
+            -3.8379798465304873
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -6.0267993344201,
+          "source_bootstrap_95_interval": [
+            -7.664010630713573,
+            -4.686423752042983
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.2671779009203116,
+          "source_bootstrap_95_interval": [
+            -0.3112660447756449,
+            -0.2000511313478152
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -10.280488755967882,
+          "source_bootstrap_95_interval": [
+            -13.689164691501196,
+            -7.08879078759087
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -9.700611246956719,
+          "source_bootstrap_95_interval": [
+            -12.591109858618841,
+            -7.319168859057959
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.3305784304522806,
+          "source_bootstrap_95_interval": [
+            -0.3923448245558473,
+            -0.2453988554577033
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -10.264344268374973,
+          "source_bootstrap_95_interval": [
+            -13.725276099310978,
+            -7.001397927602127
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -9.661558760537044,
+          "source_bootstrap_95_interval": [
+            -12.779902829064264,
+            -7.127373562918771
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.3305576623727877,
+          "source_bootstrap_95_interval": [
+            -0.3923404601713021,
+            -0.24536482203337875
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -6.267437881893581,
+          "source_bootstrap_95_interval": [
+            -8.30340772204929,
+            -4.23300637139214
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -5.846642865075007,
+          "source_bootstrap_95_interval": [
+            -7.58376479148865,
+            -4.597435130013363
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -0.25682059985895955,
+          "source_bootstrap_95_interval": [
+            -0.29685723822977816,
+            -0.19989737578564226
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 0.016144487592908874,
+          "source_bootstrap_95_interval": [
+            -0.040657997131347656,
+            0.0873928599887428
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 0.03905248641967596,
+          "source_bootstrap_95_interval": [
+            -0.18396128548516444,
+            0.18696361117893012
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 2.0768079492833325e-05,
+          "source_bootstrap_95_interval": [
+            -8.196963204279428e-05,
+            9.842216968547479e-05
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 4.013050874074301,
+          "source_bootstrap_95_interval": [
+            2.8557844161987305,
+            5.385756969451906
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 3.853968381881712,
+          "source_bootstrap_95_interval": [
+            2.7589111328125,
+            4.949025630950924
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.07375783059332103,
+          "source_bootstrap_95_interval": [
+            0.04303144249651164,
+            0.11168610884083643
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-ls:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 3.996906386481392,
+          "source_bootstrap_95_interval": [
+            2.7683915562099877,
+            5.4218683772616885
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-ls:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": 3.814915895462036,
+          "source_bootstrap_95_interval": [
+            2.599438137478298,
+            5.085181236267086
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-ls:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": 0.0737370625138282,
+          "source_bootstrap_95_interval": [
+            0.04299427072207124,
+            0.11157900674475554
+          ]
+        }
+      ],
+      "prepared_sha256": "9fe6a7dc3981024516b421a67de6a81b819f57d9d52b19838458e783b0cb744c"
+    },
+    {
+      "report": "/mnt/external/demosaic/evaluation/paired-unseen-development-v6-51k/summary.json",
+      "report_sha256": "f97bf4900b4361af86e0dc4a927c9cf509e6e64ae24c04b53bce32795d1c40d6",
+      "scenes": 5,
+      "pairs": 10,
+      "split": "development",
+      "protocol": "Mean crops within each noisy capture, mean captures within scene, mean scenes. Bootstrap scenes, not crops.",
+      "reference": "Primary: measured clean CFA samples after shared integer alignment/gain. Auxiliary RGB: calibrated LibRaw AHD.",
+      "caveats": [
+        "Low-ISO references retain noise; AHD-derived RGB is not exact RGB ground truth.",
+        "Development scenes may be in RawNIND training. Test targets must stay out of model selection."
+      ],
+      "models": [
+        {
+          "label": "0:dino-prior-44732-v6:step-51000",
+          "snapshot": "/mnt/external/demosaic/evaluation/paired-unseen-development-v6-51k/weights/weights-0827497572fdbbb3f84773ce02ea1247eae182a0f89700e9b72cd98568392afa.pt",
+          "sha256": "0827497572fdbbb3f84773ce02ea1247eae182a0f89700e9b72cd98568392afa",
+          "step": 51000,
+          "model_config": {
+            "width": 32,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "camera_conditioning": true,
+            "noise_modulation": true,
+            "physical_fp32": true,
+            "baseline": "wiener-malvar",
+            "prior_window": 7
+          },
+          "compute_precision": "float16"
+        },
+        {
+          "label": "1:dino-noise-24576-v4:step-30000",
+          "snapshot": "/mnt/external/demosaic/evaluation/paired-unseen-development-v6-51k/weights/weights-f308530b37a196a10398b667c87e6620f0198203f9e01173e353e234e839ad97.pt",
+          "sha256": "f308530b37a196a10398b667c87e6620f0198203f9e01173e353e234e839ad97",
+          "step": 30000,
+          "model_config": {
+            "width": 32,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "camera_conditioning": true,
+            "noise_modulation": true,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7
+          },
+          "compute_precision": "float16"
+        },
+        {
+          "label": "RawNIND",
+          "weight_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "input": "Publisher global-ADC normalization; signed/unclipped",
+          "gain": "Observed original-unit CFA, global and per-channel variants; no clean target",
+          "precision": "IEEE float32"
+        }
+      ],
+      "precision": "float16",
+      "source_sha256": "9051a8271d632eca28d38306657458789fb2163990f17cf0d48f96adb9a99eaa",
+      "overall": [
+        {
+          "model": "0:dino-prior-44732-v6:step-51000",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 36.44867095947266,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 18.935064061482745,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.5350716857446565,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.10114300213754177,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.012503281846228573,
+              "count": 5
+            }
+          }
+        },
+        {
+          "model": "1:dino-noise-24576-v4:step-30000",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 45.36412607828776,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 29.48106286790636,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.5820589888426994,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.025773986977421576,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.022756066400971674,
+              "count": 5
+            }
+          }
+        },
+        {
+          "model": "Bilinear",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 41.41325357225206,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 25.49506827460395,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.37466897865136467,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.042432663072314525,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.03895158672498332,
+              "count": 5
+            }
+          }
+        },
+        {
+          "model": "Malvar2004:WB",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 40.937970352172854,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 25.86025329165988,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.4032435259057416,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.03489497504714463,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.03896706760343579,
+              "count": 5
+            }
+          }
+        },
+        {
+          "model": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 53.76821780734592,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 38.56191194322374,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.9221266448497772,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.0071724309792949095,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.006613127592330177,
+              "count": 5
+            }
+          }
+        },
+        {
+          "model": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 53.56220122443305,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 38.144836574130586,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.9183798478709327,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.00781363517873817,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.006614771273194088,
+              "count": 5
+            }
+          }
+        },
+        {
+          "model": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 49.59129096137152,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 33.028770722283255,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.7922076225280761,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.014855502649313873,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.012288579556884038,
+              "count": 5
+            }
+          }
+        }
+      ],
+      "paired_comparisons": [
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "1:dino-noise-24576-v4:step-30000",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -8.915455118815101,
+          "source_bootstrap_95_interval": [
+            -9.824065441555446,
+            -8.031452157762311
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "1:dino-noise-24576-v4:step-30000",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -10.545998806423611,
+          "source_bootstrap_95_interval": [
+            -11.418974749247232,
+            -9.501430002848307
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "1:dino-noise-24576-v4:step-30000",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.04698730309804282,
+          "source_bootstrap_95_interval": [
+            -0.07566167298290463,
+            -0.018312933213181014
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -4.964582612779401,
+          "source_bootstrap_95_interval": [
+            -5.738373396131725,
+            -4.130636427137581
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -6.560004213121202,
+          "source_bootstrap_95_interval": [
+            -8.078705808851455,
+            -5.205300097995333
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.1604027070932918,
+          "source_bootstrap_95_interval": [
+            0.10789155140519142,
+            0.21291386278139218
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -4.489299392700191,
+          "source_bootstrap_95_interval": [
+            -5.697328058878578,
+            -3.1478832668728245
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -6.9251892301771365,
+          "source_bootstrap_95_interval": [
+            -8.417584525214298,
+            -5.581058544582789
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.13182815983891488,
+          "source_bootstrap_95_interval": [
+            0.08166881650686264,
+            0.18198750317096707
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -17.319546847873266,
+          "source_bootstrap_95_interval": [
+            -18.528825463189015,
+            -15.929344304402672
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -19.626847881740993,
+          "source_bootstrap_95_interval": [
+            -21.905302980211047,
+            -17.44995909796821
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.3870549591051208,
+          "source_bootstrap_95_interval": [
+            -0.4621768476234543,
+            -0.2948326790912285
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -17.113530264960396,
+          "source_bootstrap_95_interval": [
+            -18.303371153937444,
+            -15.852019797431101
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -19.209772512647838,
+          "source_bootstrap_95_interval": [
+            -21.24431073930528,
+            -17.161902021831935
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.3833081621262762,
+          "source_bootstrap_95_interval": [
+            -0.458800449139542,
+            -0.2944841661304236
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -13.142620001898871,
+          "source_bootstrap_95_interval": [
+            -13.997735510932074,
+            -12.363154135810001
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -14.09370666080051,
+          "source_bootstrap_95_interval": [
+            -15.76223797268338,
+            -12.860310660468206
+          ]
+        },
+        {
+          "first": "0:dino-prior-44732-v6:step-51000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.2571359367834197,
+          "source_bootstrap_95_interval": [
+            -0.31565488394763735,
+            -0.19245910400317778
+          ]
+        },
+        {
+          "first": "1:dino-noise-24576-v4:step-30000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 3.950872506035701,
+          "source_bootstrap_95_interval": [
+            3.2463229709201413,
+            4.566819085015193
+          ]
+        },
+        {
+          "first": "1:dino-noise-24576-v4:step-30000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 3.98599459330241,
+          "source_bootstrap_95_interval": [
+            3.242903349134656,
+            4.675169225268897
+          ]
+        },
+        {
+          "first": "1:dino-noise-24576-v4:step-30000",
+          "second": "Bilinear",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.20739001019133463,
+          "source_bootstrap_95_interval": [
+            0.16508121664325398,
+            0.24149840043650736
+          ]
+        },
+        {
+          "first": "1:dino-noise-24576-v4:step-30000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 4.426155726114911,
+          "source_bootstrap_95_interval": [
+            3.9142734527587906,
+            4.925005467732751
+          ]
+        },
+        {
+          "first": "1:dino-noise-24576-v4:step-30000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 3.620809576246476,
+          "source_bootstrap_95_interval": [
+            2.9264677895439997,
+            4.30050438774957
+          ]
+        },
+        {
+          "first": "1:dino-noise-24576-v4:step-30000",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.1788154629369577,
+          "source_bootstrap_95_interval": [
+            0.14394310853547518,
+            0.2081844626201524
+          ]
+        },
+        {
+          "first": "1:dino-noise-24576-v4:step-30000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -8.404091729058162,
+          "source_bootstrap_95_interval": [
+            -10.251379182603625,
+            -6.327989790174696
+          ]
+        },
+        {
+          "first": "1:dino-noise-24576-v4:step-30000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -9.080849075317383,
+          "source_bootstrap_95_interval": [
+            -10.879228125678168,
+            -6.890262413024904
+          ]
+        },
+        {
+          "first": "1:dino-noise-24576-v4:step-30000",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.340067656007078,
+          "source_bootstrap_95_interval": [
+            -0.4155414253473282,
+            -0.25855574309825896
+          ]
+        },
+        {
+          "first": "1:dino-noise-24576-v4:step-30000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -8.198075146145293,
+          "source_bootstrap_95_interval": [
+            -9.909175364176434,
+            -6.1585556454128705
+          ]
+        },
+        {
+          "first": "1:dino-noise-24576-v4:step-30000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -8.663773706224225,
+          "source_bootstrap_95_interval": [
+            -10.315998162163627,
+            -6.575057559543181
+          ]
+        },
+        {
+          "first": "1:dino-noise-24576-v4:step-30000",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.33632085902823344,
+          "source_bootstrap_95_interval": [
+            -0.40572198861175107,
+            -0.25840052796734697
+          ]
+        },
+        {
+          "first": "1:dino-noise-24576-v4:step-30000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -4.227164883083768,
+          "source_bootstrap_95_interval": [
+            -5.373769802517363,
+            -3.006722471449109
+          ]
+        },
+        {
+          "first": "1:dino-noise-24576-v4:step-30000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -3.547707854376898,
+          "source_bootstrap_95_interval": [
+            -4.557447306315107,
+            -2.5937967252731284
+          ]
+        },
+        {
+          "first": "1:dino-noise-24576-v4:step-30000",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.21014863368537692,
+          "source_bootstrap_95_interval": [
+            -0.26571689248085023,
+            -0.1545803748899036
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 0.4752832200792099,
+          "source_bootstrap_95_interval": [
+            0.0,
+            1.4258496602376298
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -0.3651850170559342,
+          "source_bootstrap_95_interval": [
+            -0.42933548821343237,
+            -0.31138581169975976
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.028574547254376935,
+          "source_bootstrap_95_interval": [
+            -0.03469006750318736,
+            -0.022459027005566512
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -12.354964235093863,
+          "source_bootstrap_95_interval": [
+            -14.144905132717557,
+            -10.691296852959534
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -13.066843668619793,
+          "source_bootstrap_95_interval": [
+            -14.386205736796057,
+            -11.631939160029093
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.5474576661984126,
+          "source_bootstrap_95_interval": [
+            -0.5891048297286033,
+            -0.498783275205642
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -12.148947652180993,
+          "source_bootstrap_95_interval": [
+            -13.834630966186527,
+            -10.613972345987962
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -12.649768299526635,
+          "source_bootstrap_95_interval": [
+            -13.822975773281517,
+            -11.221427639325457
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.543710869219568,
+          "source_bootstrap_95_interval": [
+            -0.5821194580859608,
+            -0.4980267805378471
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -8.178037389119469,
+          "source_bootstrap_95_interval": [
+            -9.354929596583053,
+            -7.2688039567735485
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -7.533702447679309,
+          "source_bootstrap_95_interval": [
+            -8.075787099202476,
+            -7.032841279771593
+          ]
+        },
+        {
+          "first": "Bilinear",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.4175386438767116,
+          "source_bootstrap_95_interval": [
+            -0.44966954655117464,
+            -0.3895432880355252
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -12.83024745517307,
+          "source_bootstrap_95_interval": [
+            -14.771920310126413,
+            -10.888574600219732
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -12.701658651563857,
+          "source_bootstrap_95_interval": [
+            -14.074819925096298,
+            -11.228996276855472
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.5188831189440356,
+          "source_bootstrap_95_interval": [
+            -0.5666458027230369,
+            -0.4640136067238119
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -12.624230872260203,
+          "source_bootstrap_95_interval": [
+            -14.42971649169922,
+            -10.818745252821184
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -12.2845832824707,
+          "source_bootstrap_95_interval": [
+            -13.511589961581757,
+            -10.778685353067184
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.5151363219651912,
+          "source_bootstrap_95_interval": [
+            -0.5596604310803943,
+            -0.4621978171356022
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -8.653320609198678,
+          "source_bootstrap_95_interval": [
+            -9.833923043145074,
+            -7.379462814331058
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": -7.168517430623373,
+          "source_bootstrap_95_interval": [
+            -7.766781573825415,
+            -6.642175928751628
+          ]
+        },
+        {
+          "first": "Malvar2004:WB",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": -0.3889640966223346,
+          "source_bootstrap_95_interval": [
+            -0.4253823489778572,
+            -0.355061351093981
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 0.20601658291286923,
+          "source_bootstrap_95_interval": [
+            0.062334187825523205,
+            0.38736678229437727
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 0.4170753690931576,
+          "source_bootstrap_95_interval": [
+            0.18589765760634408,
+            0.7243756522072686
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.0037467969788445464,
+          "source_bootstrap_95_interval": [
+            0.00033166276084055645,
+            0.010013275676303456
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 4.1769268459743945,
+          "source_bootstrap_95_interval": [
+            3.3212673187255874,
+            4.937997266981339
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 5.533141220940484,
+          "source_bootstrap_95_interval": [
+            4.317134512265526,
+            6.419716963768007
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-channel:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.12991902232170105,
+          "source_bootstrap_95_interval": [
+            0.10059585207038454,
+            0.15270803736315836
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-ls:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 3.970910263061525,
+          "source_bootstrap_95_interval": [
+            3.1518331739637615,
+            4.595793448554147
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-ls:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 5,
+          "mean_first_minus_second": 5.116065851847327,
+          "source_bootstrap_95_interval": [
+            3.9702254401312915,
+            6.056363741556798
+          ]
+        },
+        {
+          "first": "RawNIND:cfa-ls:publisher",
+          "second": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 5,
+          "mean_first_minus_second": 0.1261722253428565,
+          "source_bootstrap_95_interval": [
+            0.09754545821083913,
+            0.14593356019920772
+          ]
+        }
+      ],
+      "prepared_sha256": "2d78a7ba2a56e24af3f05b32ea01277853dc135dff3834810766b7c5ed2f0fa7"
+    }
+  ],
+  "metadata_diagnostic": {
+    "source": "/mnt/external/demosaic/evaluation/paired-unseen-development-v6-51k/camera-conditioning-diagnostic.json",
+    "sha256": "509b0002ecd0db50b5b82e3ecf7f1aaea728cee1f61d44be48be50a248391da9",
+    "scope": "Center crop only, ten captures of five development scenes; counterfactual metadata diagnostic, not an inference option",
+    "means": [
+      {
+        "variant": "native",
+        "sensor_psnr": 34.49333381652832,
+        "srgb_psnr": 18.085213470458985,
+        "srgb_ssim": 0.4757683604955673
+      },
+      {
+        "variant": "identity-matrix",
+        "sensor_psnr": 48.75464630126953,
+        "srgb_psnr": 32.77993812561035,
+        "srgb_ssim": 0.7919279932975769
+      },
+      {
+        "variant": "training-wb",
+        "sensor_psnr": 41.28532485961914,
+        "srgb_psnr": 23.09161205291748,
+        "srgb_ssim": 0.6069178432226181
+      },
+      {
+        "variant": "both",
+        "sensor_psnr": 49.26627464294434,
+        "srgb_psnr": 33.10825061798096,
+        "srgb_ssim": 0.7995038270950318
+      },
+      {
+        "variant": "neutral",
+        "sensor_psnr": 49.43495178222656,
+        "srgb_psnr": 32.52574844360352,
+        "srgb_ssim": 0.7861185312271118
+      }
+    ]
+  }
+}

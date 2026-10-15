@@ -13,7 +13,7 @@ from demosaic.io import camera_matrix, write_rgb16
 from demosaic.losses import reconstruction_loss
 from demosaic.model import JointDemosaic, ModelConfig
 from demosaic.precision import amp_context
-from demosaic.reference import RawNind
+from demosaic.reference import RawNind, publisher_input_scale
 from demosaic.safety import writable_path
 
 
@@ -176,6 +176,32 @@ def test_reference_per_channel_gain_removes_photometric_bias_without_target_acce
     model = RawNind(BiasedDemosaic(), gain_mode="cfa-channel")
     output = model(sampled, torch.zeros_like(sampled), colors)
     torch.testing.assert_close(mosaic(output, colors), sampled, atol=2e-7, rtol=1e-6)
+
+
+@pytest.mark.parametrize("pattern", ["RGGB", "BGGR", "GRBG", "GBRG"])
+def test_reference_preserves_signed_input_and_matches_original_sensor_units(pattern):
+    class Observe(torch.nn.Module):
+        def forward(self, packed):
+            assert packed.min() < 0 and packed.max() > 1
+            return bilinear(packed, color_indices("RGGB"))
+
+    rgb = torch.linspace(-0.03, 1.3, 3 * 32 * 32).reshape(1, 3, 32, 32)
+    colors = color_indices(pattern)
+    packed = mosaic(rgb, colors)
+    scale = [0.94 if c != 1 else 0.93 for c in colors]
+    model = RawNind(Observe(), gain_mode="cfa-channel", input_scale=scale)
+    actual = model(packed, torch.zeros_like(packed), colors)
+    torch.testing.assert_close(mosaic(actual, colors), packed, atol=3e-7, rtol=1e-6)
+
+
+def test_reference_normalization_converts_camera_white_to_publisher_adc_units():
+    white = [15360.0, 15360.0, 15360.0, 15360.0]
+    black = [512.0, 511.0, 513.0, 512.0]
+    scale = publisher_input_scale(white, black, 16383.0)
+    raw = np.array([-0.01, 0.1, 0.5, 1.03])
+    counts = raw * (np.array(white) - black) + black
+    expected = (counts - black) / (16383 - np.array(black))
+    np.testing.assert_allclose(raw * scale, expected, rtol=0, atol=1e-16)
 
 
 def test_color_transforms_preserve_precision_inside_autocast():

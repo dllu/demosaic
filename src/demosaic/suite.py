@@ -135,7 +135,7 @@ def evaluate_panel(model, dataset, config, device, *, images=16, batch_size=4, a
     }
 
 
-def summarize(records):
+def summarize(records, *, comparison_metrics=("linear_psnr", "srgb_psnr", "srgb_ssim")):
     """Balanced group means and paired source-level bootstrap differences."""
     groups, by_image = {}, {}
     for row in records:
@@ -182,12 +182,20 @@ def summarize(records):
             )
             if not ids:
                 continue
-            for metric in ("linear_psnr", "srgb_psnr", "srgb_ssim"):
+            for metric in comparison_metrics:
+                valid_ids = [
+                    identity
+                    for identity in ids
+                    if image_means[first, kind, identity].get(metric, {}).get("mean") is not None
+                    and image_means[second, kind, identity].get(metric, {}).get("mean") is not None
+                ]
+                if not valid_ids:
+                    continue
                 delta = np.array(
                     [
                         image_means[first, kind, identity][metric]["mean"]
                         - image_means[second, kind, identity][metric]["mean"]
-                        for identity in ids
+                        for identity in valid_ids
                     ]
                 )
                 rng = np.random.default_rng(42)
@@ -289,7 +297,8 @@ def run_suite(
                     (Path(rawnind) / "utnet2-bayer.pt").read_bytes()
                 ).hexdigest(),
                 "gain": "observed-CFA-least-squares",
-                "precision": "float32",
+                "precision": "IEEE float32",
+                "input": "Signed/unclipped synthetic sensor units; no camera/global-ADC scale difference",
             }
         )
         models.append(("RawNIND:CFA-channel", RawNind(reference.network, "cfa-channel"), False))
@@ -299,7 +308,8 @@ def run_suite(
                 "directory": str(rawnind),
                 "weight_sha256": model_records[-1]["weight_sha256"],
                 "gain": "per-channel-observed-CFA-least-squares",
-                "precision": "float32",
+                "precision": "IEEE float32",
+                "input": "Signed/unclipped synthetic sensor units; no camera/global-ADC scale difference",
             }
         )
     source_payloads = {
@@ -383,7 +393,7 @@ def run_suite(
                         ),
                     ]
                     for label, model, amp in models:
-                        with amp_context(device, amp, dtype=precision):
+                        with amp_context(device, dtype=precision if amp else "float32"):
                             prediction = model(
                                 batch["packed"],
                                 batch["variance"],

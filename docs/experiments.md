@@ -438,3 +438,40 @@ from 0.240 to 0.201 (ISO1600 prior), 0.218 to 0.185 (ISO12800 prior), and
 0.268 to 0.204 (shadows). RawNIND still suppresses flat variation more strongly.
 The current recipe continues toward 100000 steps; these results support continued
 training without introducing another architecture change at this review point.
+
+## Paired real RAW development and camera conditioning
+
+The first measured-CFA comparisons do **not** satisfy the quality objective.
+All methods use shared registration, exposure gain and sensor units; AHD-derived
+RGB is an auxiliary reference. Means balance scenes. RawNIND now receives the
+publisher's signed, unclipped global-ADC input normalization; earlier clipped
+comparisons understated it and must not be used as the final quality claim.
+No paired RAW images have been used to train our checkpoints.
+
+| Development set / method | Measured-sensor PSNR | Auxiliary rendered PSNR / SSIM |
+| --- | ---: | ---: |
+| Four known-sensor scenes, V6 step51000 | 51.2225 | 36.9006 / 0.86953 |
+| Four known-sensor scenes, RawNIND CFA-LS | 54.0686 | 39.6780 / 0.92881 |
+| Five unseen-sensor scenes, V6 step51000 | 36.4487 | 18.9351 / 0.53507 |
+| Five unseen-sensor scenes, V4 step30000 | 45.3641 | 29.4811 / 0.58206 |
+| Five unseen-sensor scenes, Wiener7 + Malvar | 49.5913 | 33.0288 / 0.79221 |
+| Five unseen-sensor scenes, RawNIND CFA-LS | 53.5622 | 38.1448 / 0.91838 |
+
+The four known-sensor scenes may occur in RawNIND training. The five additional
+Canon M100 scenes are marked as an unknown sensor by the publisher and are
+outside its official test reserve. They add 20 verified RAW files and 90 fixed
+crops. The 16 official test scenes and Commons test sources remain unused for
+model selection.
+
+Visual review shows residual grain, chroma mottling and isolated color speckles
+on the first set. The M100 set additionally exposes a severe color cast. Its
+white balance (red ≈0.87–1.00) and matrix (red diagonal ≈2.01, red/green coupling
+≈−1.23) are outside the narrow synthetic training range. On the ten predeclared
+center crops, replacing only the conditioning matrix with identity improves
+auxiliary PSNR from 18.0852 to 32.7799 dB. This counterfactual isolates a major
+failure mechanism; it does not justify discarding camera metadata in production.
+The full paired receipts and diagnostic means are in
+[results/paired-real-development-v6-51k.json](results/paired-real-development-v6-51k.json).
+
+The current V6 run remains a control. Broader camera augmentation and stronger
+real denoising must pass these development checks before final testing.
