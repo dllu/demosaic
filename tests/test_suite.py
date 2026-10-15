@@ -1,7 +1,23 @@
 import torch
 
 from demosaic.cfa import bilinear
+from demosaic.color import render
+from demosaic.metrics import quality_metrics
 from demosaic.suite import evaluate_panel, observation, summarize
+
+
+def test_reference_white_survives_wb_below_one_and_perfect_prediction_scores_perfectly():
+    # A neutral linear-sRGB white requires camera red >1 at WB red=.7.
+    # Evaluation must retain that range through the color transform, while
+    # the separately defined sensor-range metric clips both compared arrays.
+    rgb = torch.ones(1, 3, 32, 32)
+    case = {"name": "white", "exposure": 1, "shot": 0.0, "read": 0.0}
+    batch = observation(rgb, ["white"], case, "RGGB", [0.7, 1.0, 1.2], torch.eye(3).tolist(), 42)
+    assert batch["target"].max() > 1.4
+    torch.testing.assert_close(render(batch["target"], batch["wb"], batch["matrix"]), rgb)
+    scores = quality_metrics(batch["target"], batch["target"], batch["wb"], batch["matrix"])
+    assert scores["linear_psnr"].item() >= 119.9
+    assert scores["srgb_psnr"].item() >= 119.9
 
 
 def test_observation_pairs_noise_by_source_independently_of_batch_size():

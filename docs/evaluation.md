@@ -68,6 +68,16 @@ means first balance conditions within each image, then images. Bootstrap paired
 differences resample images, not correlated pixels or repeated CFA observations.
 Procedural stress cases use separate seeds and are reported apart from photos.
 
+Reference-white clipping happens in linear sRGB before camera transport. A WB
+gain below one can require a target camera channel above one; preserve that
+value until WB/color rendering, or even a neutral white acquires a color cast.
+The separate camera-domain PSNR clips **both** arrays to normalized sensor range
+[0,1]. A regression test checks perfect prediction at WB red=0.7: both PSNRs
+reach the numerical 120 dB limit. Earlier code clipped only the prediction for
+camera PSNR and clipped the synthetic target too early. The historical default
+evaluation protocol has bounded camera targets, so its scores are unaffected;
+new broad-WB protocols must use the corrected implementation/source receipt.
+
 Use `--limit 8 --synthetic-count 2` for a software/early-model diagnostic, not a
 quality claim. Final comparisons require complete held-out sources, matched
 training budgets, real RAW inspection and additional camera/noise conditions.

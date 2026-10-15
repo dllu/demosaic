@@ -51,7 +51,9 @@ def evaluate(
         baseline = bilinear(batch["packed"], batch["colors"], fp32=physical_fp32)
         target = batch["target"]
         for prefix, rgb in (("", output), ("bilinear_", baseline)):
-            scores[prefix + "linear_psnr"].extend(psnr(rgb.clamp(0, 1), target).tolist())
+            scores[prefix + "linear_psnr"].extend(
+                psnr(rgb.clamp(0, 1), target.clamp(0, 1)).tolist()
+            )
             scores[prefix + "srgb_psnr"].extend(
                 psnr(
                     render(rgb, batch["wb"], batch["matrix"], fp32=physical_fp32),

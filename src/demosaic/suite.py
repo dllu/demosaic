@@ -62,7 +62,10 @@ def observation(rgb, identities, condition, pattern, wb, matrix, seed):
         "colors": colors,
         "wb": balance,
         "matrix": transform,
-        "target": target.clamp(0, 1),
+        # Camera channels may exceed one when a WB gain is below one. Preserve
+        # the reference-white target through WB/matrix rendering; clipping here
+        # would create a color cast even for a perfect reconstruction.
+        "target": target,
     }
 
 
@@ -341,6 +344,7 @@ def run_suite(
         "batch_size": batch_size,
         "adc_bits": 16,
         "adc_black": 0.03,
+        "reference_target": "Reference-white clipping in linear sRGB; retain camera values through WB/matrix. Camera PSNR clips both arrays to sensor range [0,1].",
         "classical_baselines": [
             "Bilinear:IEEE-FP32",
             "Malvar2004:white-balanced:IEEE-FP32",

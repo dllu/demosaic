@@ -43,6 +43,7 @@ def _masked_mean(values, mask):
 
 def quality_metrics(prediction, target, wb, matrix):
     linear = prediction.float().clamp(0, 1)
+    sensor_target = target.float().clamp(0, 1)
     display, truth = render(prediction.float(), wb, matrix), render(target, wb, matrix)
     error = display - truth
     chroma = error - error.mean(1, keepdim=True)
@@ -51,9 +52,9 @@ def quality_metrics(prediction, target, wb, matrix):
     eroded = 1 - F.max_pool2d(1 - clipped, 7, 1, 3)
     ring = dilated - eroded
     shadow = (target.mean(1, keepdim=True) < 0.02).float()
-    shadow_mse = _masked_mean((linear - target).square(), shadow)
+    shadow_mse = _masked_mean((linear - sensor_target).square(), shadow)
     return {
-        "linear_psnr": psnr(linear, target),
+        "linear_psnr": psnr(linear, sensor_target),
         "srgb_psnr": psnr(display, truth),
         "srgb_ssim": ssim(display, truth),
         "chroma_mae": chroma.abs().flatten(1).mean(1),
