@@ -180,6 +180,8 @@ def summarize(records):
                 {k[2] for k in image_means if k[:2] == (first, kind)}
                 & {k[2] for k in image_means if k[:2] == (second, kind)}
             )
+            if not ids:
+                continue
             for metric in ("linear_psnr", "srgb_psnr", "srgb_ssim"):
                 delta = np.array(
                     [

@@ -97,3 +97,15 @@ model's standing against those methods. The independently implemented Malvar
 earlier models' low-noise photographic deficit; V6 step20000 now exceeds their
 mean ADC-only PSNR and SSIM in the declared 427-photo protocol, while separate
 procedural stress patterns still expose weaknesses.
+
+The follow-up real-noise evaluation survey inspected RawNIND's publisher catalog
+and [paper's validation method](https://arxiv.org/html/2501.08924v2#S4).
+The dataset is commercially usable under CC BY-SA 4.0, with additional per-scene
+CC0 grants/credits in the publisher's permissions file. It contains paired
+low/high-ISO RAW captures; geometric alignment, exposure matching and invalid
+regions are material to scoring. The catalog's current `dataset.yaml` flags
+identify 16 reserved Bayer scenes, including six unknown-sensor scenes. The
+separate older `test_reserve.yaml` file does not enumerate that current reserve;
+the acquisition pipeline uses descriptor flags and corrected filename prefixes.
+Small development and untouched official-test subsets are now checksum-verified;
+see [data selection and reference-unit caveats](evaluation.md#paired-real-raw-evaluation-sources).

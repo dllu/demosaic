@@ -15,7 +15,7 @@ not just software that executes. This checklist records the evidence required.
 | 100 MP possible, target <10 s on GB10 | Actual 100 MP run, memory and timing; quality takes priority if speed misses | V6 full 102 MP RGB16/ICC-sRGB16 outputs verified; idle warmed 100 MP step5k restoration 12.77 s, 0.820 GB CUDA; final quality/speed gate pending |
 | Python/PyTorch/uv and shared-machine care | Locked environment, bounded memory, resumable training, measured GB10 operation | Implemented and verified; CPU restart equivalence and GB10 runs pass |
 | Diary, concise README, detailed docs | Current reproducible commands, experiment records and limitations | Present and being updated |
-| Commit and push meaningful progress | Git commits and successful remote pushes | Repeated progress pushed through 8fa62d6; continuing |
+| Commit and push meaningful progress | Git commits and successful remote pushes | Meaningful progress is committed and pushed regularly; see the Git history and diary |
 
 Photo directories are read-only. All writes, downloads, temporary files and caches
 must stay in this repository or `/mnt/external`. Do not modify `PROMPT.md`.

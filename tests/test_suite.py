@@ -44,6 +44,32 @@ def test_suite_aggregates_per_source_and_retains_empty_region_counts():
     assert delta["source_bootstrap_95_interval"] == [2.0, 2.0]
 
 
+def test_suite_only_pairs_shared_sources_when_methods_have_different_coverage():
+    rows = []
+    for model, kind, identity in [
+        ("full", "photo", "photo-one"),
+        ("full", "synthetic", "pattern-one"),
+        ("large-tile", "synthetic", "pattern-one"),
+    ]:
+        rows.append(
+            {
+                "model": model,
+                "kind": kind,
+                "id": identity,
+                "condition": "adc-only",
+                "pattern": "RGGB",
+                "metrics": {"linear_psnr": 35.0, "srgb_psnr": 30.0, "srgb_ssim": 0.9},
+            }
+        )
+    result = summarize(rows)
+    assert len(result["overall"]) == 3
+    assert len(result["paired_comparisons"]) == 3
+    for comparison in result["paired_comparisons"]:
+        assert comparison["kind"] == "synthetic"
+        assert comparison["sources"] == 1
+        assert comparison["mean_first_minus_second"] == 0
+
+
 def test_training_panel_is_balanced_and_does_not_change_global_rng(tmp_path):
     import yaml
 

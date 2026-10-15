@@ -1,0 +1,357 @@
+{
+  "format_version": 1,
+  "checkpoint_sha256": "ba3e0e05a5b2e26b348c5edfc94559267b59a5e48256d0a236464f74e5d8f761",
+  "step": 20000,
+  "protocol": {
+    "patterns": [
+      "RGGB",
+      "BGGR",
+      "GRBG",
+      "GBRG"
+    ],
+    "white_balance": [
+      2.0,
+      1.0,
+      1.5
+    ],
+    "camera_to_srgb": [
+      [
+        1.1176470588,
+        -0.0588235294,
+        -0.0588235294
+      ],
+      [
+        -0.0588235294,
+        1.1176470588,
+        -0.0588235294
+      ],
+      [
+        -0.0588235294,
+        -0.0588235294,
+        1.1176470588
+      ]
+    ],
+    "border": 8,
+    "seed": 20261014,
+    "conditions": [
+      {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      {
+        "name": "iso1600-prior",
+        "shot": 0.00032,
+        "read": 4.096e-07,
+        "exposure": 1.0
+      },
+      {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      {
+        "name": "shadows",
+        "shot": 0.00064,
+        "read": 1.6384e-06,
+        "exposure": 0.125
+      },
+      {
+        "name": "highlights",
+        "shot": 8e-05,
+        "read": 2.56e-08,
+        "exposure": 4.0
+      },
+      {
+        "name": "legacy-noise",
+        "shot": 0.001,
+        "read": 1e-06,
+        "exposure": 1.0
+      }
+    ]
+  },
+  "sources": 29,
+  "synthetic_sources": 3,
+  "photo_size": 512,
+  "synthetic_size": 1024,
+  "precision": "float16",
+  "memory_format": "channels_last",
+  "runtime_context_max_side": {
+    "0:native": 0,
+    "1:context256": 256
+  },
+  "artifact_directories": {
+    "0:native": "/mnt/external/demosaic/evaluation/tiling-v6-step20k-full",
+    "1:context256": "/mnt/external/demosaic/evaluation/tiling-v6-step20k-cap256"
+  },
+  "unchanged_256_tile_max_metric_difference": 0.0,
+  "overall": [
+    {
+      "model": "0:native",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 40.08801947203763,
+          "count": 29
+        },
+        "srgb_psnr": {
+          "mean": 33.37295715914571,
+          "count": 29
+        },
+        "srgb_ssim": {
+          "mean": 0.9306813198797809,
+          "count": 29
+        },
+        "chroma_mae": {
+          "mean": 0.00912162632190535,
+          "count": 29
+        },
+        "gradient_mae": {
+          "mean": 0.014520991694530827,
+          "count": 29
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.025108765300240195,
+          "count": 29
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.029974881382980222,
+          "count": 29
+        },
+        "shadow_linear_psnr": {
+          "mean": 48.234356470687445,
+          "count": 29
+        },
+        "shared_join_rgb_mae": {
+          "mean": 0.012702756624707833,
+          "count": 29
+        },
+        "shared_nonjoin_rgb_mae": {
+          "mean": 0.011854620121523803,
+          "count": 29
+        }
+      }
+    },
+    {
+      "model": "0:native",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 55.663325491405665,
+          "count": 3
+        },
+        "srgb_psnr": {
+          "mean": 46.10309655325754,
+          "count": 3
+        },
+        "srgb_ssim": {
+          "mean": 0.9730093982957658,
+          "count": 3
+        },
+        "chroma_mae": {
+          "mean": 0.003233643820359638,
+          "count": 3
+        },
+        "gradient_mae": {
+          "mean": 0.005338165261145194,
+          "count": 3
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.0026891551933658775,
+          "count": 2
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.0041545818870266284,
+          "count": 2
+        },
+        "shadow_linear_psnr": {
+          "mean": 61.65813144048055,
+          "count": 3
+        },
+        "shared_join_rgb_mae": {
+          "mean": 0.00530118862003465,
+          "count": 3
+        },
+        "shared_nonjoin_rgb_mae": {
+          "mean": 0.005647280262478273,
+          "count": 3
+        }
+      }
+    },
+    {
+      "model": "1:context256",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 40.01691646059159,
+          "count": 29
+        },
+        "srgb_psnr": {
+          "mean": 33.24653899141133,
+          "count": 29
+        },
+        "srgb_ssim": {
+          "mean": 0.926918301235866,
+          "count": 29
+        },
+        "chroma_mae": {
+          "mean": 0.009284256032600387,
+          "count": 29
+        },
+        "gradient_mae": {
+          "mean": 0.014752369744214571,
+          "count": 29
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.02530073041990185,
+          "count": 29
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03018782422248938,
+          "count": 29
+        },
+        "shadow_linear_psnr": {
+          "mean": 48.09408682163909,
+          "count": 29
+        },
+        "shared_join_rgb_mae": {
+          "mean": 0.012921266768011842,
+          "count": 29
+        },
+        "shared_nonjoin_rgb_mae": {
+          "mean": 0.012074409476383887,
+          "count": 29
+        }
+      }
+    },
+    {
+      "model": "1:context256",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 55.2798365184239,
+          "count": 3
+        },
+        "srgb_psnr": {
+          "mean": 45.58320349738711,
+          "count": 3
+        },
+        "srgb_ssim": {
+          "mean": 0.9657191470974968,
+          "count": 3
+        },
+        "chroma_mae": {
+          "mean": 0.0033707071188906583,
+          "count": 3
+        },
+        "gradient_mae": {
+          "mean": 0.005679815090843476,
+          "count": 3
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.0027326219145227997,
+          "count": 2
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.004287507452924425,
+          "count": 2
+        },
+        "shadow_linear_psnr": {
+          "mean": 61.129248036278625,
+          "count": 3
+        },
+        "shared_join_rgb_mae": {
+          "mean": 0.005751735999573221,
+          "count": 3
+        },
+        "shared_nonjoin_rgb_mae": {
+          "mean": 0.006115281890656445,
+          "count": 3
+        }
+      }
+    }
+  ],
+  "paired_comparisons": [
+    {
+      "first": "0:native",
+      "second": "1:context256",
+      "kind": "photo",
+      "metric": "linear_psnr",
+      "sources": 29,
+      "mean_first_minus_second": 0.07110301144604601,
+      "source_bootstrap_95_interval": [
+        0.05149317357340484,
+        0.09110720093027025
+      ]
+    },
+    {
+      "first": "0:native",
+      "second": "1:context256",
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "sources": 29,
+      "mean_first_minus_second": 0.1264181677343806,
+      "source_bootstrap_95_interval": [
+        0.10126885739453179,
+        0.14853571524173698
+      ]
+    },
+    {
+      "first": "0:native",
+      "second": "1:context256",
+      "kind": "photo",
+      "metric": "srgb_ssim",
+      "sources": 29,
+      "mean_first_minus_second": 0.003763018643914783,
+      "source_bootstrap_95_interval": [
+        0.002896462828654981,
+        0.00471084177347242
+      ]
+    },
+    {
+      "first": "0:native",
+      "second": "1:context256",
+      "kind": "synthetic",
+      "metric": "linear_psnr",
+      "sources": 3,
+      "mean_first_minus_second": 0.3834889729817732,
+      "source_bootstrap_95_interval": [
+        0.0026134763445213594,
+        0.6070236478533104
+      ]
+    },
+    {
+      "first": "0:native",
+      "second": "1:context256",
+      "kind": "synthetic",
+      "metric": "srgb_psnr",
+      "sources": 3,
+      "mean_first_minus_second": 0.5198930558704191,
+      "source_bootstrap_95_interval": [
+        0.11385045732770749,
+        0.7833690643310547
+      ]
+    },
+    {
+      "first": "0:native",
+      "second": "1:context256",
+      "kind": "synthetic",
+      "metric": "srgb_ssim",
+      "sources": 3,
+      "mean_first_minus_second": 0.0072902511982690195,
+      "source_bootstrap_95_interval": [
+        0.0018497811896459604,
+        0.016527831554412842
+      ]
+    }
+  ],
+  "decision": "Do not promote the context cap: photographic and procedural quality decline."
+}

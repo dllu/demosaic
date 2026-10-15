@@ -110,6 +110,23 @@ camera PSNR. The default is a 256-pixel field with a 32-pixel excluded border.
 These scores measure noise suppression and bias only; a method that destroys
 detail can score well, so they cannot replace photographic quality checks.
 
+`scripts/compare_tiling.py` exercises the actual host-streamed tile driver,
+comparing 256/64 and 512/64 sensor-pixel tile/overlap geometry. It selects every
+validation image large enough for a native 512-pixel crop, without enlarging
+references, and adds three 1024-pixel procedural scenes (flat, chirp and clipped
+disc). Those scenes also receive a single-1024-tile prediction. All methods share
+observations; single-tile predictions are a sensitivity reference, not ground
+truth. Shared eight-pixel strips centered on 256/64 overlap regions measure
+local RGB error alongside errors away from those strips. Scene texture affects
+both, so these measurements complement visual seam checks.
+
+```bash
+uv run python scripts/compare_tiling.py /path/to/model.pt \
+  --manifest /path/to/audited/manifest.jsonl --precision float16 \
+  --rawnind /mnt/external/demosaic/references/rawnind \
+  --output /mnt/external/demosaic/evaluation/tiling
+```
+
 ```bash
 uv run python scripts/probe_noise_response.py /path/to/model.pt \
   --rawnind /mnt/external/demosaic/references/rawnind \
@@ -135,6 +152,42 @@ The frozen 24576-source manifest audit excluded one training-linked validation
 image, leaving 22059 train / 1262 validation / 1254 test sources. Test images
 remain unused for model selection. Broader preparation continues separately;
 training uses the immutable audited manifest.
+
+## Paired real-RAW evaluation sources
+
+The publisher's [RawNIND dataset](https://doi.org/10.14428/DVN/DEQCIM) provides
+real noisy/clean RAW pairs. Its [Dataverse metadata](https://dataverse.uclouvain.be/api/datasets/:persistentId/?persistentId=doi:10.14428/DVN/DEQCIM)
+identifies release 1.0 as CC BY-SA 4.0; `permissions.txt` also records individual
+scene credits and CC0 grants. The downloader preserves those records and the
+complete source catalog. Files stay outside Git and outside Commons training.
+
+```bash
+uv run python scripts/fetch_paired_raw.py --split both \
+  --output /mnt/external/demosaic/references/rawnind-dataset
+```
+
+The development subset uses four explicitly named scenes outside the publisher's
+test reserve. The pretrained RawNIND comparator may have trained on these scenes,
+so development comparisons are not an unbiased test of that comparator.
+The separate test subset uses all 16 publisher-reserved Bayer scenes, including
+six marked as an unknown sensor. Keep them unused for model selection.
+Both subsets select up to two clean frames and two noisy frames per scene using
+only filename ISO metadata: nearest to ISO1600, plus the highest remaining ISO
+at most 12800. Publisher XMP sidecars are excluded from image selection.
+
+Every RAW must match its published byte count, MD5 and descriptor SHA1. A local
+SHA256 receipt is also retained. Existing invalid files are preserved and
+rejected; interrupted downloads leave no completed manifest. The checked release
+produces 13 development files (366 MB) and 57 test files (2.090 GB). See
+[the acquisition receipt](results/paired-raw-acquisition.json).
+
+Acquisition alone establishes no quality result. Pair alignment, exposure gain,
+reference processing and noise conditioning must be explicit before scoring.
+On the checked Sony reference, LibRaw AHD with raw color, unit WB, linear output
+and auto brightness disabled still differs by about 6.9% from this project's
+per-channel-white-level sensor units. Calibrate RGB references against their own
+clean CFA measurements; do not compare these units directly. Raw-domain scores
+against measured reference samples can avoid a demosaicer-dependent ground truth.
 
 ## Noise profiles
 

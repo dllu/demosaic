@@ -344,3 +344,97 @@ with training and the quality suite running concurrently. These times demonstrat
 capability and are not an idle speed benchmark. The full-frame preview and
 native crops were inspected locally. The non-private receipt is in
 [results/prior20k-fp16-102mp.json](results/prior20k-fp16-102mp.json).
+
+## Tile-size sensitivity on native references
+
+The full audited validation split contains 29 images large enough for a native
+512-pixel crop, and none supporting 768/1024 pixels after 8×8 binning. The new
+tile-driver suite uses all 29 without resizing, plus three known 1024-pixel
+procedural scenes. V6 step20000 uses FP16 neural compute and FP32 physical
+operations/blending, all four CFAs, seven conditions and a 16-pixel excluded
+border. These source sizes/crops differ from the 427-photo protocol above.
+Records are in [results/prior20k-tiling.json](results/prior20k-tiling.json).
+
+| Method | 29-photo PSNR / SSIM | 1024-pixel procedural PSNR / SSIM |
+| --- | ---: | ---: |
+| V6, tile 256 / overlap 64 | 33.3451 / 0.93050 | 46.2898 / 0.97292 |
+| V6, tile 512 / overlap 64 | 33.3730 / 0.93068 | 46.1031 / 0.97301 |
+| V6, single 1024 tile | — | 45.8239 / 0.97176 |
+| Variance prior + Malvar | 31.4803 / 0.90509 | 42.6711 / 0.95993 |
+| RawNIND, CFA-LS | 28.7211 / 0.80780 | 43.7185 / 0.97928 |
+
+512-pixel tiles improve photographic PSNR by 0.02785 dB (paired source-bootstrap
+95% interval 0.01681–0.03866). The SSIM difference is small and its interval
+includes zero. Shared boundary-strip RGB MAE is 0.01270 versus 0.01273 for
+256-pixel tiling; corresponding errors away from strips are 0.01185/0.01187.
+This supports the 512-pixel serving choice on these photos without claiming
+exhaustive seam absence. The larger procedural cases favor 256-pixel PSNR by
+0.1867 dB, while RawNIND retains higher procedural SSIM, especially on the noisy
+flat. Larger DINO context is not uniformly better. The small procedural suite
+does not replace the separate 16-source stress test or photographic validation.
+
+## Four-camera matrix check and further timing prototypes
+
+A 16-scene diagnostic repeats the seven conditions using actual WB/color-matrix
+metadata examples from each personal camera type, with its recorded Bayer phase.
+All learned inference uses channels-last FP16. These are synthetic observations
+using camera metadata, not real-noise ground truth; the same 16 scenes repeat,
+so the result does not contain 64 independent scenes. Full receipts are in
+[results/prior20k-camera-matrices.json](results/prior20k-camera-matrices.json).
+
+| Metadata example | V6 PSNR / SSIM | V4 PSNR / SSIM | RawNIND CFA-LS PSNR / SSIM |
+| --- | ---: | ---: | ---: |
+| GFX100S | 31.277 / 0.9182 | 30.545 / 0.9042 | 27.413 / 0.8269 |
+| GFX50R | 30.270 / 0.9043 | 29.452 / 0.8849 | 26.911 / 0.8175 |
+| Leica Q2 | 31.307 / 0.9198 | 30.639 / 0.9077 | 27.576 / 0.8256 |
+| Sony a7R II | 29.755 / 0.8901 | 29.036 / 0.8696 | 26.756 / 0.8122 |
+
+An FP16 compiler pilot, with fixed global IEEE FP32 and precision-cast emulation,
+nearly preserves the 16-photo RGGB diagnostic: eager 31.89596 dB/0.925621,
+compiled FP32 residual features 31.89595/0.925621, and compiled FP16 residual
+features 31.89586/0.925617. Numerical differences are nonzero and broader quality
+validation is required before promotion. No active training parameters changed.
+
+The corresponding full 100 MP timing comparison includes nontrivial WB/matrix
+metadata. Only our own training process was suspended, with a bounded watchdog
+and `finally` resume; it subsequently continued without a restart or lost RNG.
+Warmed second runs take 21.341 s eager FP16, 14.362 s compiled with FP32 residual
+features, and 13.197 s compiled with FP16 residual features. Earlier BF16 timing
+has different precision/metadata settings and is not a matched comparison.
+The 10 s target is still unmet. All variants produced finite 100 MP output;
+compiler memory statistics are affected by graph allocation/replay and concurrent
+resident candidates. The unpromoted prototype receipt is in
+[results/prior20k-fp16-compile-timing.json](results/prior20k-fp16-compile-timing.json).
+
+A further DINO-only preview cap was evaluated against the same complete native
+tiling suite. It downsamples foundation previews above 256 pixels, while keeping
+every physical sensor/CNN pixel and all weights. On 512-pixel photographic
+inference, the cap reduces PSNR from 33.3730 to 33.2465 and SSIM from 0.93068
+to 0.92692. The larger procedural cases fall from 46.1031/0.97301 to
+45.5832/0.96572. The 256-pixel tile control is unchanged. This optimization is
+rejected for the quality path; its earlier speed improvement does not justify
+assuming equivalent restoration. Paired intervals and control checks are in
+[results/prior20k-context-cap.json](results/prior20k-context-cap.json).
+
+## Midpoint convergence review at step 51000
+
+The fixed 16-photo monitor plus all 16 procedural stress sources was rerun with
+all four CFAs and seven conditions, using identical channels-last FP16 inference
+for V6 step51000, V6 step20000 and V4 step30000. It is a convergence diagnostic;
+the 16-photo score is not the complete 427-photo validation score.
+Receipts are in [results/prior51k-midpoint.json](results/prior51k-midpoint.json).
+
+| Checkpoint | 16-photo PSNR / SSIM | 16-stress PSNR / SSIM |
+| --- | ---: | ---: |
+| V6 step51000 | 32.3925 / 0.93205 | 30.6359 / 0.91891 |
+| V6 step20000 | 31.8818 / 0.92527 | 29.9172 / 0.90114 |
+| V4 step30000 | 31.3519 / 0.91653 | 30.5854 / 0.91749 |
+| RawNIND CFA-LS | 27.6991 / 0.82670 | 24.9748 / 0.72041 |
+
+The earlier average procedural deficit to V4 has closed, although this does not
+prove improvement in every case or general superiority on all fine patterns.
+At scene level 0.01, V6's residual sigma fractions relative to bilinear improve
+from 0.240 to 0.201 (ISO1600 prior), 0.218 to 0.185 (ISO12800 prior), and
+0.268 to 0.204 (shadows). RawNIND still suppresses flat variation more strongly.
+The current recipe continues toward 100000 steps; these results support continued
+training without introducing another architecture change at this review point.
