@@ -302,3 +302,12 @@ freezes every preceding restoration/DINO/fine/coarse parameter and trains only
 that branch; it cannot be combined with other refiner-only modes or changed on
 resume. Existing checkpoint defaults remain disabled. See
 [the matched experiment and startup validation](pyramid-refinement.md); the first 1000-step review does not establish a real-photo quality gain.
+
+`multiscale_sensor_weight` optionally adds pooled measured-CFA reconstruction
+in input-noise units at 8/32/64 sensor-pixel footprints to both synthetic and
+paired training. Its default is zero. The value must be finite and nonnegative
+and cannot change on resume. Reference masks exclude incomplete/clipped blocks
+and ADC-only inputs; physical arithmetic stays IEEE FP32. See
+[the matched supervision experiment](scale-aware-supervision.md). The new term
+is a training objective, not a posterior-noise calibration or an established
+quality improvement.

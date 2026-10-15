@@ -1,10 +1,13 @@
 """Reconstruction losses that explicitly measure edge and highlight chroma errors."""
 
+import math
+
 import torch
 from torch.nn import functional as F
 
 from .cfa import mosaic
 from .color import render
+from .precision import ieee_fp32
 
 
 def charbonnier(error):
@@ -30,11 +33,60 @@ def noise_normalized_sensor_loss(prediction, batch, rendered_reference):
     return penalty.masked_fill(~valid, 0).sum() / valid.sum().clamp_min(1)
 
 
+def multiscale_sensor_loss(prediction, batch, rendered_reference=None):
+    """Measure pooled CFA error in input-noise units at 8/32/64 sensor pixels.
+
+    A block sums independent *input* variances, not posterior restoration
+    covariance. Real targets contain measured reference CFA samples only;
+    synthetic targets are sampled at the same CFA phases. Reject blocks with
+    any invalid reference samples and omit ADC-only observations. Reference
+    shot/read noise remains a limitation of real pairs.
+    """
+    with torch.autocast(device_type=prediction.device.type, enabled=False), ieee_fp32():
+        colors = batch["colors"]
+        if "sensor_reference" in batch:
+            reference = mosaic(batch["sensor_reference"].float(), colors)
+            valid = mosaic(batch["sensor_mask"].bool(), colors)
+        else:
+            target = batch["target"].float()
+            reference = mosaic(target, colors)
+            truth = rendered_reference
+            if truth is None:
+                truth = render(target, batch["wb"], batch["matrix"])
+            valid = mosaic(
+                (target >= 0) & (target < 0.98) & (truth.amax(1, keepdim=True) < 0.98),
+                colors,
+            )
+        variance = batch["shot"] * reference.clamp_min(0) + batch["read"]
+        valid = valid & ((batch["shot"] > 0) | (batch["read"] > 0))
+        error = (mosaic(prediction.float(), colors) - reference).masked_fill(~valid, 0)
+        terms = []
+        for side in (4, 16, 32):
+            if side > min(error.shape[-2:]):
+                continue
+            count = side**2
+            pooled_error = F.avg_pool2d(error, side, side) * count
+            summed_variance = F.avg_pool2d(variance.masked_fill(~valid, 0), side, side) * count
+            complete = F.avg_pool2d(valid.float(), side, side) == 1
+            standardized = pooled_error / summed_variance.clamp_min(1e-12).sqrt()
+            penalty = (standardized.square() + 1e-6).sqrt() - 1e-3
+            terms.append(penalty.masked_fill(~complete, 0).sum() / complete.sum().clamp_min(1))
+        return torch.stack(terms).mean() if terms else error.sum() * 0
+
+
 def reconstruction_loss(
-    prediction, batch, auxiliary=None, *, physical_fp32=True, normalized_sensor_weight=0.0
+    prediction,
+    batch,
+    auxiliary=None,
+    *,
+    physical_fp32=True,
+    normalized_sensor_weight=0.0,
+    multiscale_sensor_weight=0.0,
 ):
     if normalized_sensor_weight < 0:
         raise ValueError("Normalized sensor loss weight must be nonnegative")
+    if not math.isfinite(multiscale_sensor_weight) or multiscale_sensor_weight < 0:
+        raise ValueError("Multiscale sensor loss weight must be finite and nonnegative")
     target = batch["target"]
     linear = charbonnier(prediction - target)
     display = render(prediction, batch["wb"], batch["matrix"], fp32=physical_fp32)
@@ -64,6 +116,10 @@ def reconstruction_loss(
         normalized = noise_normalized_sensor_loss(prediction, batch, truth)
         loss = loss + normalized_sensor_weight * normalized
         terms["normalized_sensor"] = normalized
+    if multiscale_sensor_weight:
+        multiscale = multiscale_sensor_loss(prediction, batch, truth)
+        loss = loss + multiscale_sensor_weight * multiscale
+        terms["multiscale_sensor"] = multiscale
     return loss, terms
 
 

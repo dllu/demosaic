@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import math
 import random
 from pathlib import Path
 
@@ -12,6 +13,7 @@ from torch.utils.data import Dataset
 
 from .cfa import color_indices, mosaic, pack
 from .color import render
+from .losses import multiscale_sensor_loss
 from .noise import variance_map
 from .paired import TRAINING_SCENES
 
@@ -115,13 +117,15 @@ def masked_charbonnier(error, mask):
     ).sum() / mask.sum().clamp_min(1)
 
 
-def paired_reconstruction_loss(prediction, batch, auxiliary=None):
+def paired_reconstruction_loss(prediction, batch, auxiliary=None, *, multiscale_sensor_weight=0.0):
     """Measured samples determine detail; AHD supplies only coarse RGB color.
 
     The 4x4 spatial means avoid supervising the network with AHD's fine-scale
     interpolation artifacts. Reference saturation masks apply to both losses.
     Independent low-ISO reference noise remains a limitation of real pairs.
     """
+    if not math.isfinite(multiscale_sensor_weight) or multiscale_sensor_weight < 0:
+        raise ValueError("Multiscale sensor loss weight must be finite and nonnegative")
     reference, valid = batch["sensor_reference"], batch["sensor_mask"].bool()
     sensor = masked_charbonnier(prediction - reference, valid)
     coarse_valid = F.avg_pool2d(valid.any(1, keepdim=True).float(), 4, 4) >= 0.999
@@ -135,8 +139,14 @@ def paired_reconstruction_loss(prediction, batch, auxiliary=None):
         auxiliary_loss = masked_charbonnier(
             auxiliary - mosaic(reference, batch["colors"]), mosaic(valid, batch["colors"])
         )
-    return sensor + 0.5 * coarse + 0.1 * auxiliary_loss, {
+    loss = sensor + 0.5 * coarse + 0.1 * auxiliary_loss
+    terms = {
         "paired_sensor": sensor,
         "paired_coarse_rendered": coarse,
         "paired_auxiliary": auxiliary_loss,
     }
+    if multiscale_sensor_weight:
+        multiscale = multiscale_sensor_loss(prediction, batch)
+        loss = loss + multiscale_sensor_weight * multiscale
+        terms["multiscale_sensor"] = multiscale
+    return loss, terms

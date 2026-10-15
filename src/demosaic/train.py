@@ -156,6 +156,10 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     if resume and initialize:
         raise ValueError("Choose resume or initialize, not both")
     config = yaml.safe_load(Path(config_path).read_text())
+    multiscale_weight = float(config.get("multiscale_sensor_weight", 0.0))
+    if not math.isfinite(multiscale_weight) or multiscale_weight < 0:
+        raise ValueError("Multiscale sensor loss weight must be finite and nonnegative")
+    config["multiscale_sensor_weight"] = multiscale_weight
     refinement_modes = ("refiner_only", "coarse_refiner_only", "pyramid_refiner_only")
     if sum(bool(config.get(k, False)) for k in refinement_modes) > 1:
         raise ValueError("Choose only one refiner-only training mode")
@@ -329,6 +333,8 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             raise ValueError("Resume native RAW manifest differs from checkpoint")
         if state["config"].get("raw_clean_fraction", 0.0) != raw_clean_fraction:
             raise ValueError("Resume native RAW fraction differs from checkpoint")
+        if state["config"].get("multiscale_sensor_weight", 0.0) != multiscale_weight:
+            raise ValueError("Resume multiscale loss differs; initialize a new run")
         if state["config"].get("data_seed_per_step", False) != config.get(
             "data_seed_per_step", False
         ):
@@ -520,7 +526,9 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 auxiliary=True,
             )
             if use_pair:
-                loss, terms = paired_reconstruction_loss(prediction, batch, auxiliary)
+                loss, terms = paired_reconstruction_loss(
+                    prediction, batch, auxiliary, multiscale_sensor_weight=multiscale_weight
+                )
             else:
                 loss, terms = reconstruction_loss(
                     prediction,
@@ -528,6 +536,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                     auxiliary,
                     physical_fp32=model.config.physical_fp32,
                     normalized_sensor_weight=config.get("normalized_sensor_weight", 0.0),
+                    multiscale_sensor_weight=multiscale_weight,
                 )
         if not torch.isfinite(loss):
             raise RuntimeError(f"Nonfinite loss at step {step}; last checkpoint retained")

@@ -1,6 +1,7 @@
 import json
 
 import numpy as np
+import pytest
 import torch
 import yaml
 
@@ -70,7 +71,10 @@ def test_coarse_correction_can_remove_broad_error_without_following_fine_detail(
     assert after < before / 10
 
 
-def test_coarse_only_training_resumes_exactly_and_preserves_frozen_weights(tmp_path):
+@pytest.mark.parametrize("multiscale_weight", [0.0, 0.01])
+def test_coarse_only_training_resumes_exactly_and_preserves_frozen_weights(
+    tmp_path, multiscale_weight
+):
     torch.set_num_threads(2)
     array = tmp_path / "clean.npy"
     np.save(array, np.full((40, 40, 3), 10000, dtype=np.uint16))
@@ -107,6 +111,7 @@ def test_coarse_only_training_resumes_exactly_and_preserves_frozen_weights(tmp_p
         "log_every": 4,
         "min_available_gb": 0,
         "coarse_refiner_only": True,
+        "multiscale_sensor_weight": multiscale_weight,
         "model": {
             **base.config.to_dict(),
             "coarse_refinement_factor": 4,
@@ -130,3 +135,7 @@ def test_coarse_only_training_resumes_exactly_and_preserves_frozen_weights(tmp_p
     for key, value in base.restoration_state_dict().items():
         torch.testing.assert_close(actual["model"][key], value, atol=0, rtol=0)
     assert actual["model"]["coarse_refiner.network.head.weight"].abs().sum() > 0
+    config["multiscale_sensor_weight"] = 0.02
+    path.write_text(yaml.safe_dump(config))
+    with pytest.raises(ValueError, match="multiscale loss differs"):
+        train(path, resume=partial)
