@@ -250,6 +250,15 @@ def evaluate_pairs(
                                 caption=f"{case['scene']} / ISO {meta.get('iso')} / {label}",
                                 metadata={
                                     "scene": case["scene"],
+                                    "conditioning": case["conditioning"],
+                                    "white_balance": meta["white_balance"],
+                                    "camera_to_srgb": meta["camera_to_srgb"],
+                                    "checkpoint_sha256": next(
+                                        r.get("sha256", r.get("weight_sha256"))
+                                        for r in receipts
+                                        if r["label"] == label
+                                        or (r["label"] == "RawNIND" and label.startswith("RawNIND"))
+                                    ),
                                     "noisy_sha256": case["noisy"]["sha256"],
                                     "prepared_crop": crop_records[i],
                                     "evaluation_tile_xywh": xywh,

@@ -601,5 +601,16 @@ continuation from the same V16 weights, seed 43, data and LR 3e-5, with sampled
 observation/target hashes to verify matched draws. At their first 1000-step review,
 all 41 sampled hashes and checkpoint RNG states match. Joint tuning improves the
 synthetic screen but loses known-camera measured PSNR versus control; neither
-candidate is promoted. Both continue to 5000. See [the matched review with native
-crops](joint-tuning-review.md).
+candidate is promoted. Both have now completed 5000: joint tuning remains worse
+on known-camera measured PSNR (53.13418 versus control 53.29175), with mixed
+unseen-camera results. All 202 logged input hashes match. V19's full 427-photo
+synthetic PSNR/SSIM is 31.49630/0.923228, a small gain over V16. Neither is promoted.
+See [the completed matched review with native crops](joint-tuning-review.md).
+
+The [native RAW target pipeline](native-raw-targets.md) prepares 53 low-ISO
+captures from 31 training scenes as phase-aligned, 8× binned uint16 camera RGB.
+Its first matched V20/V21 correction-branch pilot stopped at 1000 steps. Native
+targets do not establish a gain: measured PSNR is 53.25157/53.07420 versus control
+53.27959/53.07429. All 34 logged shared batches match, with 7 logged substitutions;
+frozen weights and RNG states match. No promotion follows. See
+[the review and native crop comparisons](native-target-review.md).

@@ -7,12 +7,15 @@ white balance and color matrix. This is a data experiment, with no demonstrated
 quality gain yet. V16 remains the fully reviewed model.
 
 The V20/V21 pilot starts from the same frozen V16 step5000 EMA and updates only
-the fine RGB correction branch, with seed44, LR3e-5 and a planned 5000-step
+the fine RGB correction branch, with seed 44, LR 3e-5 and a planned 5000-step
 schedule. Both stop for review at 1000. V20 substitutes native targets for half
 the non-paired batches; V21 retains the existing 50/50 paired/synthetic recipe.
 Both enable per-step data RNG and observation tracing. Configs are
 `configs/dino-native-target-v20.yaml` and `configs/dino-native-control-v21.yaml`.
 No inference default changes while these experiments run.
+
+Both stopped at step1000. The [matched review with native crops](native-target-review.md)
+finds no convincing quality gain, so neither candidate is promoted.
 
 The first cache contains 53 captures from 31 scenes: 46 Sony ILCE-7C, four Canon
 EOS 6D and three Nikon Z6 captures, at ISO 50/100. It occupies 118,193,524 bytes.
