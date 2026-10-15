@@ -42,6 +42,7 @@ def evaluate_pairs(
     device="cuda",
     noise_multiplier=1.0,
     prior_window=None,
+    refinement_precision="float32",
 ):
     if (
         precision not in COMPUTE_DTYPES
@@ -74,7 +75,7 @@ def evaluate_pairs(
     models, receipts = [], []
     for index, source in enumerate(checkpoints):
         frozen, digest = freeze_checkpoint(source, output / "weights")
-        model, state = load_checkpoint(frozen, device)
+        model, state = load_checkpoint(frozen, device, refinement_precision=refinement_precision)
         if prior_window is not None:
             if model.config.baseline != "wiener-malvar":
                 raise ValueError("A prior-window override requires the Wiener-Malvar model")
@@ -94,6 +95,9 @@ def evaluate_pairs(
                 "model_config": model.config.to_dict(),
                 "checkpoint_model_config": state["model_config"],
                 "compute_precision": precision,
+                "refinement_compute_precision": refinement_precision
+                if torch.device(device).type == "cuda"
+                else "float32",
             }
         )
         del state

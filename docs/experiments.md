@@ -614,3 +614,10 @@ targets do not establish a gain: measured PSNR is 53.25157/53.07420 versus contr
 53.27959/53.07429. All 34 logged shared batches match, with 7 logged substitutions;
 frozen weights and RNG states match. No promotion follows. See
 [the review and native crop comparisons](native-target-review.md).
+
+Optional FP16 refinement inference preserves V16 development quality to within
+0.00009 dB measured-CFA PSNR and 0.000005 dB full 427-photo synthetic PSNR, with
+unchanged weights and bit-identical default arithmetic. On the new GFX pair,
+single successive 102 MP runs took 36.39 s FP32-refinement versus 26.81 s FP16;
+these are shared-machine timings, not an idle benchmark. Defaults stay FP32
+and the 10-second target remains unmet. See [precision evidence and native crops](refinement-precision.md).

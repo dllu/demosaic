@@ -36,6 +36,7 @@ def restore_tiled(
     matrix=None,
     amp=True,
     precision="bfloat16",
+    refinement_precision=None,
 ):
     """Return CPU float32 RGB and timing. `tile`/`overlap` use sensor pixels.
 
@@ -51,6 +52,8 @@ def restore_tiled(
         raise ValueError("Invalid batch size or noise coefficients")
     if precision not in COMPUTE_DTYPES:
         raise ValueError(f"Unknown compute precision {precision!r}")
+    if refinement_precision is not None:
+        model.set_refinement_precision(refinement_precision)
     device = torch.device(device)
     if isinstance(raw, np.ndarray):
         raw = torch.from_numpy(np.ascontiguousarray(raw, dtype=np.float32))
@@ -138,6 +141,9 @@ def restore_tiled(
         "overlap": overlap,
         "batch_size": batch_size,
         "compute_precision": precision if amp and device.type == "cuda" else "float32",
+        "refinement_compute_precision": getattr(model, "refinement_precision", "float32")
+        if device.type == "cuda"
+        else "float32",
         "memory_format": "channels_last" if device.type == "cuda" else "contiguous",
         "peak_cuda_gb": torch.cuda.max_memory_allocated(device) / 1e9
         if device.type == "cuda"
@@ -145,7 +151,7 @@ def restore_tiled(
     }
 
 
-def load_checkpoint(path, device="cpu"):
+def load_checkpoint(path, device="cpu", *, refinement_precision="float32"):
     from .model import JointDemosaic, ModelConfig
 
     # Hash the same opened inode that was loaded, even if a live trainer
@@ -159,4 +165,5 @@ def load_checkpoint(path, device="cpu"):
     missing, unexpected = model.load_state_dict(weights, strict=False)
     if unexpected or any(not key.startswith("context.backbone.") for key in missing):
         raise ValueError(f"Incompatible checkpoint: missing={missing}, unexpected={unexpected}")
+    model.set_refinement_precision(refinement_precision)
     return model.to(device), checkpoint

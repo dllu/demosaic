@@ -62,3 +62,60 @@ def test_refinement_keeps_fine_signal_in_fp32_inside_amp():
         actual = module(*args)
     assert actual.dtype == torch.float32
     torch.testing.assert_close(actual, expected, atol=0, rtol=0)
+
+
+def test_refinement_precision_is_runtime_only_and_cpu_keeps_fp32(tmp_path):
+    from demosaic.inference import load_checkpoint
+
+    model = JointDemosaic(
+        ModelConfig(
+            width=8,
+            encoder_blocks=(1,),
+            middle_blocks=1,
+            decoder_blocks=(1,),
+            noise_refinement=True,
+            refinement_blocks=1,
+            coarse_refinement_factor=2,
+        )
+    )
+    torch.nn.init.normal_(model.refiner.head.weight, std=0.01)
+    weights = {k: v.clone() for k, v in model.restoration_state_dict().items()}
+    path = tmp_path / "model.pt"
+    torch.save({"model_config": model.config.to_dict(), "model": weights, "step": 0}, path)
+    default, _ = load_checkpoint(path)
+    half, _ = load_checkpoint(path, refinement_precision="float16")
+    assert default.refiner.compute_precision == "float32"
+    assert (
+        half.refiner.compute_precision == half.coarse_refiner.network.compute_precision == "float16"
+    )
+    assert default.config.to_dict() == half.config.to_dict()
+    for k, v in half.restoration_state_dict().items():
+        assert torch.equal(v, weights[k])
+    batch = degrade(torch.rand(1, 3, 32, 48))
+    args = [batch[k] for k in ("packed", "variance", "colors", "wb", "matrix")]
+    torch.testing.assert_close(default(*args), half(*args), atol=0, rtol=0)
+    with pytest.raises(ValueError, match="refinement precision"):
+        half.set_refinement_precision("bfloat16")
+
+
+@pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA FP16 refinement")
+def test_half_refinement_keeps_fp32_output_and_exact_zero_noise_correction():
+    torch.manual_seed(16)
+    module = RgbNoiseRefiner(8, width=12, blocks=1).cuda()
+    torch.nn.init.normal_(module.head.weight, std=0.01)
+    rgb = torch.rand(2, 3, 32, 48, device="cuda") * 0.3
+    variance = torch.full((2, 4, 16, 24), 1e-5, device="cuda")
+    variance[1].zero_()
+    features = torch.rand(2, 8, 16, 24, device="cuda")
+    args = (rgb, variance, color_indices("GRBG", device="cuda"), features)
+    expected = module(*args)
+    observed_types = []
+    hook = module.head.register_forward_hook(lambda m, a, out: observed_types.append(out.dtype))
+    module.compute_precision = "float16"
+    with amp_context("cuda", dtype="bfloat16"):
+        actual = module(*args)
+    hook.remove()
+    assert observed_types == [torch.float16]
+    assert actual.dtype == torch.float32 and torch.isfinite(actual).all()
+    assert actual[1].count_nonzero() == 0
+    assert (actual - expected).abs().max() < 2e-5

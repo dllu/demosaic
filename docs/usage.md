@@ -163,8 +163,11 @@ evaluating that arithmetic. The flat-only V12/V13 configs are learnability
 diagnostics, not recommended photographic training recipes.
 
 `model.noise_refinement: true` adds an identity-initialized RGB correction branch
-in estimated-noise units. The branch keeps IEEE FP32 arithmetic even when the
-base network uses BF16/FP16. With `refiner_only: true`, only that branch trains;
+in estimated-noise units. The branch defaults to IEEE FP32 arithmetic even when the
+base network uses BF16/FP16. Optional inference flag
+`--refinement-precision float16` accelerates only its neural operations; physical
+noise/high-pass/scaling operations remain IEEE FP32. CPU execution stays FP32,
+and training is unchanged. See [validation and native crops](refinement-precision.md). With `refiner_only: true`, only that branch trains;
 all original restoration/DINO parameters are frozen. Changing that trainable
 selection on resume is rejected. The photo-trained V15 recipe is
 `configs/dino-paired-refiner-v15.yaml`; its frozen step5000 evaluation improves

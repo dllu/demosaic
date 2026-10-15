@@ -235,6 +235,7 @@ def run_suite(
     rawnind=None,
     device="cuda",
     precision="bfloat16",
+    refinement_precision="float32",
 ):
     output = writable_path(output)
     output.mkdir(parents=True, exist_ok=True)
@@ -266,7 +267,7 @@ def run_suite(
     models, model_records = [], []
     for index, source in enumerate(checkpoints):
         frozen, digest = freeze_checkpoint(source, output / "weights")
-        model, state = load_checkpoint(frozen, device)
+        model, state = load_checkpoint(frozen, device, refinement_precision=refinement_precision)
         model.eval()
         if torch.device(device).type == "cuda":
             model.to(memory_format=torch.channels_last)
@@ -285,6 +286,9 @@ def run_suite(
                 "effective_model_config": model.config.to_dict(),
                 "training_manifest_sha256": state["config"].get("manifest_sha256"),
                 "compute_precision": precision
+                if torch.device(device).type == "cuda"
+                else "float32",
+                "refinement_compute_precision": refinement_precision
                 if torch.device(device).type == "cuda"
                 else "float32",
                 "memory_format": "channels_last"

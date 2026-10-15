@@ -8,7 +8,7 @@ from torch.nn import functional as F
 
 from .cfa import bilinear, malvar
 from .color import render
-from .precision import ieee_fp32
+from .precision import REFINEMENT_DTYPES, amp_context, ieee_fp32
 from .prior import box_mean, standardized_noise, wiener_packed
 
 
@@ -98,7 +98,8 @@ class RgbNoiseRefiner(nn.Module):
     Unit-scale local residuals expose weak noise without requiring the network
     to reproduce the nonlinear Bayer prior. Decoder features retain structural
     context. Zero initialization preserves the base model; zero sensor variance
-    makes the correction exactly zero. This small branch keeps IEEE FP32 math.
+    makes the correction exactly zero. Physical operations keep IEEE FP32 math;
+    neural operations default to FP32 with an optional FP16 inference mode.
     """
 
     def __init__(
@@ -117,6 +118,7 @@ class RgbNoiseRefiner(nn.Module):
         self.window = window
         self.normalization_floor = normalization_floor
         self.variance_floor = variance_floor
+        self.compute_precision = "float32"
         self.context = nn.Conv2d(context_channels, 12, 1)
         self.stem = nn.Conv2d(36, width, 3, padding=1)
         self.blocks = nn.Sequential(*(GatedBlock(width) for _ in range(blocks)))
@@ -139,16 +141,12 @@ class RgbNoiseRefiner(nn.Module):
                 self.normalization_floor
             )
             noise = (rgb_variance.clamp_min(self.variance_floor).log() + 12) / 6
-            inputs = torch.cat(
-                (
-                    F.pixel_unshuffle(residual.clamp(-8, 8), 2),
-                    F.pixel_unshuffle(noise, 2),
-                    self.context(features.float()),
-                ),
-                dim=1,
-            )
-            correction = F.pixel_shuffle(self.head(self.blocks(self.stem(inputs))), 2)
-            return correction * scale
+            residual = F.pixel_unshuffle(residual.clamp(-8, 8), 2)
+            noise = F.pixel_unshuffle(noise, 2)
+            with amp_context(rgb.device, dtype=self.compute_precision):
+                inputs = torch.cat((residual, noise, self.context(features.float())), dim=1)
+                correction = F.pixel_shuffle(self.head(self.blocks(self.stem(inputs))), 2)
+            return correction.float() * scale
 
 
 class CoarseRgbNoiseRefiner(nn.Module):
@@ -267,6 +265,7 @@ class JointDemosaic(nn.Module):
     def __init__(self, config: ModelConfig | None = None):
         super().__init__()
         self.config = config or ModelConfig()
+        self.refinement_precision = "float32"
         cfg = self.config
         if len(cfg.encoder_blocks) != len(cfg.decoder_blocks) or cfg.width < 4:
             raise ValueError("Invalid encoder/decoder configuration")
@@ -327,6 +326,16 @@ class JointDemosaic(nn.Module):
             if cfg.coarse_refinement_factor
             else None
         )
+
+    def set_refinement_precision(self, precision):
+        """Set inference arithmetic without changing weights or physical maps."""
+        if precision not in REFINEMENT_DTYPES:
+            raise ValueError(f"Unknown refinement precision {precision!r}")
+        for module in self.modules():
+            if isinstance(module, RgbNoiseRefiner):
+                module.compute_precision = precision
+        self.refinement_precision = precision
+        return self
 
     def forward(self, packed, variance, colors, wb=None, matrix=None, *, auxiliary=False):
         batch, phases, height, width = packed.shape

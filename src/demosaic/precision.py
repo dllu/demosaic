@@ -5,6 +5,7 @@ from contextlib import contextmanager, nullcontext
 import torch
 
 COMPUTE_DTYPES = ("bfloat16", "float16", "float32")
+REFINEMENT_DTYPES = ("float32", "float16")
 
 
 @contextmanager

@@ -16,6 +16,7 @@ def main():
         "--precision", choices=("bfloat16", "float16", "float32"), default="float16"
     )
     parser.add_argument("--batch-size", type=int, default=4)
+    parser.add_argument("--refinement-precision", choices=("float32", "float16"), default="float32")
     parser.add_argument("--gallery", action="store_true")
     parser.add_argument(
         "--noise-multiplier",
@@ -35,6 +36,7 @@ def main():
         gallery=args.gallery,
         noise_multiplier=args.noise_multiplier,
         prior_window=args.prior_window,
+        refinement_precision=args.refinement_precision,
     )
 
 

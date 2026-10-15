@@ -9,7 +9,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from .precision import COMPUTE_DTYPES
+from .precision import COMPUTE_DTYPES, REFINEMENT_DTYPES
 from .safety import writable_path
 
 
@@ -102,6 +102,13 @@ def parser():
             default="bfloat16",
             help="Neural compute precision; physical interpolation/color stays FP32",
         )
+    for command in (evaluate, infer, benchmark, quality):
+        command.add_argument(
+            "--refinement-precision",
+            choices=REFINEMENT_DTYPES,
+            default="float32",
+            help="RGB correction neural precision; sensor maps and scaling stay FP32",
+        )
     audit = commands.add_parser(
         "audit-split", help="Screen protected splits for perceptual duplicates"
     )
@@ -145,7 +152,9 @@ def main(argv=None):
         from .inference import load_checkpoint
         from .train import evaluate
 
-        model, checkpoint = load_checkpoint(args.checkpoint, args.device)
+        model, checkpoint = load_checkpoint(
+            args.checkpoint, args.device, refinement_precision=args.refinement_precision
+        )
         loader = DataLoader(
             CleanDataset(args.manifest, args.split, args.patch_size), batch_size=args.batch_size
         )
@@ -174,6 +183,9 @@ def main(argv=None):
                 if args.max_batches > 0
                 else len(loader.dataset),
                 "max_batches": args.max_batches,
+                "refinement_compute_precision": args.refinement_precision
+                if args.device.startswith("cuda")
+                else "float32",
                 "noise": {"shot": 0.001, "read": 1e-6, "seed": 20261014},
                 **scores,
             },
@@ -237,7 +249,9 @@ def main(argv=None):
                 identity = profile["raw_metadata"]
                 if identity["camera"] != metadata.camera or identity.get("iso") != metadata.iso:
                     raise ValueError("Noise profile camera/ISO differs from this RAW")
-        model, checkpoint = load_checkpoint(args.checkpoint, args.device)
+        model, checkpoint = load_checkpoint(
+            args.checkpoint, args.device, refinement_precision=args.refinement_precision
+        )
         rgb, stats = restore_tiled(
             model,
             raw,
@@ -251,6 +265,7 @@ def main(argv=None):
             wb=wb,
             matrix=matrix,
             precision=args.precision,
+            refinement_precision=args.refinement_precision,
         )
         write_rgb16(output, rgb.permute(1, 2, 0).numpy(), metadata=metadata, flip=flip)
         if args.preview:
@@ -303,6 +318,7 @@ def main(argv=None):
             rawnind=args.rawnind,
             device=args.device,
             precision=args.precision,
+            refinement_precision=args.refinement_precision,
         )
     elif args.command == "noise-profile":
         from .calibration import estimate_noise
@@ -330,7 +346,9 @@ def main(argv=None):
         if args.output.resolve() == args.checkpoint.resolve():
             raise ValueError("Benchmark output must not overwrite its checkpoint")
         frozen, digest = freeze_checkpoint(args.checkpoint, args.output.parent / "weights")
-        model, checkpoint = load_checkpoint(frozen, args.device)
+        model, checkpoint = load_checkpoint(
+            frozen, args.device, refinement_precision=args.refinement_precision
+        )
         # Warm kernels before timing; benchmark records hardware and dimensions.
         raw = torch.rand(args.height, args.width, generator=torch.Generator().manual_seed(42))
         kwargs = {

@@ -20,7 +20,7 @@ from demosaic.color import render
 from demosaic.inference import load_checkpoint, restore_tiled
 from demosaic.io import read_raw, write_rgb16
 from demosaic.noise import Sensor
-from demosaic.precision import COMPUTE_DTYPES, amp_context
+from demosaic.precision import COMPUTE_DTYPES, REFINEMENT_DTYPES, amp_context
 from demosaic.realdata import read_reference
 from demosaic.reference import RawNind, load_rawnind, publisher_input_scale
 from demosaic.reporting import display_crop, save_triplet
@@ -36,6 +36,7 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--rawnind", type=Path)
     parser.add_argument("--precision", choices=COMPUTE_DTYPES, default="float16")
+    parser.add_argument("--refinement-precision", choices=REFINEMENT_DTYPES, default="float32")
     parser.add_argument(
         "--full-frame",
         action="store_true",
@@ -56,7 +57,9 @@ def main():
     models, weights = [], []
     for i, path in enumerate(args.checkpoint):
         frozen, digest = freeze_checkpoint(path, output / "weights")
-        model, state = load_checkpoint(frozen, "cuda")
+        model, state = load_checkpoint(
+            frozen, "cuda", refinement_precision=args.refinement_precision
+        )
         model.eval().to(memory_format=torch.channels_last)
         label = f"{i}:{Path(state['config']['run']).name}:step-{state['step']}"
         models.append((label, model, args.precision))
@@ -66,6 +69,7 @@ def main():
                 "sha256": digest,
                 "snapshot": str(frozen),
                 "precision": args.precision,
+                "refinement_compute_precision": args.refinement_precision,
                 "model_config": model.config.to_dict(),
             }
         )
