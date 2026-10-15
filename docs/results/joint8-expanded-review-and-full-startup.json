@@ -1,0 +1,38 @@
+{
+  "observed_utc": "2026-10-15T22:30:37.504597+00:00",
+  "previous_goal_turn": "progress: physical Gaussian comparators implemented/tested, full gray evaluation completed; promising fixed joint8 pilot led to expanded development evaluation.",
+  "expanded_evaluation": {
+    "script": ".cache/eval_joint_gaussian_full.py",
+    "log": ".cache/eval-gat-joint8-v2-full.log",
+    "status": "terminal; all three summaries present, completion log and process exit verified",
+    "summaries": [
+      "/mnt/external/demosaic/evaluation/paired-known-gat-joint8-v2/summary.json",
+      "/mnt/external/demosaic/evaluation/paired-unseen-gat-joint8-v2/summary.json",
+      "/mnt/external/demosaic/evaluation/synthetic-gat-joint8-v2-16-screen/summary.json"
+    ]
+  },
+  "full_gfx": {
+    "script": ".cache/run_joint8_gfx_full.py",
+    "script_sha256": "e4b7da0bf99287d65eb146e34c140cd051f7cefb34779ddf1932e3d5fca656aa",
+    "log": ".cache/gfx-gat-joint8-v2-full.log",
+    "process_pid": 3616786,
+    "session_id": 21388,
+    "status_at_observation": "running; live PID verified",
+    "output": "/mnt/external/demosaic/evaluation/gfx-3879-3880-gat-joint8-v2-full",
+    "methods": [
+      "V16 float16 base / float32 refinement",
+      "RawNIND IEEE float32, observed CFA global LS",
+      "DRUNet-RGB GAT table HQS8, IEEE float32 neural / float64 physical"
+    ]
+  },
+  "recipe": "docs/results/gaussian-color-joint8-source-and-weights.json",
+  "recipe_sha256": "b02eda9d4b7b3d8a20cf1258ecb40d70555b5c82db7c37d8e903630de1955538",
+  "limitations": [
+    "All numerical panels are development evidence; protected final untouched.",
+    "Full 427-photo joint8 comparison not run.",
+    "Known-camera and SSIM deficits remain; quality/speed goals unmet.",
+    "New joint8 full-frame run unfinished; do not infer 102 MP time from context crops.",
+    "GFX scene/siblings evaluation-only, no fitting or training."
+  ],
+  "next": "Verify the specific live full-frame process before any restart; check completion, full TIFF geometry/tags/ICC/code diversity and native crops, then run the complete photographic development evaluation if warranted."
+}

@@ -3,7 +3,9 @@
 Joint Bayer demosaicing and denoising in linear camera RGB, with 16-bit TIFF
 output, physical noise conditioning, tiled inference, and an optional DINOv3
 feature branch. Experimental: training and quality validation are in progress.
-Paired real RAW development still favors RawNIND. Quality work continues;
+Reviewed V16 still trails RawNIND on paired real RAW development. An experimental
+[stabilized RGB prior](docs/stabilized-gaussian-review.md) improves unseen-camera
+PSNR, with remaining known-camera and SSIM deficits. Quality work continues;
 state-of-the-art performance is not established.
 
 Native 160×160 validation crops: noisy → denoised → GT, using V16 step5000

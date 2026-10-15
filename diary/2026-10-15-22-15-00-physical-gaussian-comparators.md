@@ -21,8 +21,8 @@ ICC profiles and thousands of sampled codes. Gray baseline restoration148.05s,
 V16 31.35s in the same shared-machine run; not idle timing. Quality/speed open.
 
 Complete gray method known/unseen primary53.28781/52.08223 versus V16
-53.27466/53.07857, RawNIND54.06860/53.56220. RGB39? actual gray38.34481/35.28710,
-SSIM.905832/.855573: substantial general-camera deficit. GFX crop inspection
+53.27466/53.07857, RawNIND54.06860/53.56220. Gray rendered RGB PSNR is
+38.34481/35.28710, SSIM .905832/.855573: substantial general-camera deficit. GFX crop inspection
 shows clearer fence/foliage than V16 but remaining colored specks/checkerboard.
 No promotion. Complete synthetic64-photo screen also behind V16.
 

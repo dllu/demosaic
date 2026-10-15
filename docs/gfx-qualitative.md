@@ -73,6 +73,12 @@ Building detail, V16 then RawNIND:
 Open each PNG at 100%. One sensor pixel occupies one PNG pixel. These are
 qualitative diagnostics; the project's quality goal remains open.
 
+The [stabilized Gaussian-prior review](stabilized-gaussian-review.md) adds matched
+512px-context foliage/fence comparisons with independent-phase and eight-step
+joint RGB priors. Joint RGB preserves more fence structure, but still softens
+leaves and leaves isolated colored dots. Those context crops are separate from
+the full-frame V16/RawNIND results on this page.
+
 Full 11662×8746×3 unsigned16 linear-camera-RGB and ICC sRGB TIFFs are saved in
 `/mnt/external/demosaic/evaluation/gfx-3879-3880-v16-5k-full/` as
 `restored-{0,1}-{linear16,srgb16}.tiff` (0 = V16, 1 = RawNIND).
