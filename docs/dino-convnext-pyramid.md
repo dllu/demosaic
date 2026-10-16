@@ -276,3 +276,15 @@ ConvNeXt is −0.04024 dB photo, +0.10783 dB known primary and −0.10475 dB uns
 primary against no-context at the same step. Some weak/flat diagnostic measures
 improve, while fine-detail loss persists. Continue its original schedule without
 promotion; this first gate does not establish convergence or a universal effect.
+
+The [original-schedule continuation is now running](results/dino-convnext-pyramid-v58-10k-launch.json)
+under controller601329 in the same frozen797cfc8 source. It restores the complete
+immutable1000 state, adds2000 updates to3000 and then7000 to10000, matching the
+original controls' resume boundaries. Immutable3000/10000 checkpoints are
+created only after each actual endpoint passes state/source/counter checks.
+The resumed step1001 batch matches every original arm; the first42 logged
+observations are exact. The driver requires122/403 matches at the endpoints.
+It then recomputes all four final neural models and references on the full
+paired/photo/analytic/GFX/additional-camera review. Its terminal state still
+leaves manual review pending. No model, data, loss, LR plan, initialization or
+precision change is introduced, and the separately expanded corpus stays out.
