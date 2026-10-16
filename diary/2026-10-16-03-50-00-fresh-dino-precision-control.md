@@ -40,3 +40,9 @@ exact across arms. Recompute both RawNIND calibration variants with the complete
 paired/photo/procedural/GFX review; include at least two native exact-GT crops
 per neural checkpoint and verify all ten fullRGB16 outputs. One early seed/gate
 does not establish convergence, current DINO benefit or SOTA.
+
+Launch update: the sequential controller is live in8580a4e, starting with
+V45 no-context. Actual finite training losses, Gaussian-only initialization and
+FP32 middle-skip policy verify. S and B follow automatically, then the complete
+matched review including both RawNIND calibration variants. No reference alias
+or README crop changes.

@@ -72,3 +72,9 @@ sky/building/foliage/fence scene with verified RGB16 outputs. Add the existing
 RawNIND calibration variants as direct comparators. An early gate is not
 convergence or SOTA. Current V43/README aliases stay fixed until the complete
 trained comparison supports a selection; protected-final scoring remains closed.
+
+The [sequential workflow is now live](results/fresh-dino-capacity-launch.json)
+in frozen `8580a4e`: no-context first, S next, B last. The first arm reports
+finite losses with verified Gaussian-only lineage and the explicit precision
+policy. RawNIND source/weight hashes and fixed manifest hashes are bound in the
+plan. Trained results and cross-arm data equality are still pending.

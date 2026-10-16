@@ -1,8 +1,8 @@
 # Fresh DINO comparison for the current pipeline
 
-V44 and V45 are prepared recipes for a matched training comparison of DINOv3
-context in the current full-resolution pretrained RGB architecture. **Training
-has not started.** The V37/V39/V43 corpus continuation and its complete review
+V44 and V45 are part of the [live no-context/S/B comparison](fresh-dino-capacity.md)
+of DINOv3 context in the current full-resolution pretrained RGB architecture.
+**Sequential training has started with the no-context arm.** The V37/V39/V43 corpus continuation and its complete review
 finished; V50 is also complete. The [expanded CPU/GPU preflight](fresh-dino-capacity.md)
 adds a genuine frozen ViT-B candidate and corrects a mixed-precision confound
 before any of these fresh arms train. Earlier DINO ablations used a different restoration architecture;
