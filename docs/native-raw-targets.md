@@ -138,4 +138,5 @@ base rows/cache paths and embedding the complete SHA-pinned admission. The
 loader accepts exactly those public source/cache/camera records; changing
 quarantine split flags or relabeling a public source as a legacy scene is
 rejected. All304 tests pass. The V32–V38 trials retain their original53 targets;
-the new dataset is an explicit future experiment choice.
+V39 tests the new dataset in a separate controlled first1000 trial. Old/new
+loaders reproduce all53 original captures exactly; no quality gain is assumed.

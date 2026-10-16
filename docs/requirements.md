@@ -6,7 +6,7 @@ not just software that executes. This checklist records the evidence required.
 | Requirement | Evidence needed | Current state |
 | --- | --- | --- |
 | Modern method and DINOv3 recommendation | Primary-source research, architecture rationale, licensed pretrained backbone and ablation | Official pinned weights; matched 20k-step ablation complete; small positive gain on 427 photos, not SOTA evidence |
-| Free, broad training data | Source attribution manifest, content-grouped held-out split, real corpus training | Active frozen corpus: 40,170 train / 2,303 val / 2,255 untouched test / 4 excluded. A separately audited extension adds 1,808 train sources and reserves 196 new holdout sources; current trials remain unchanged. Separate licensed paired/native RAW train subsets are verified. Near-duplicate screening is not complete scene recognition |
+| Free, broad training data | Source attribution manifest, content-grouped held-out split, real corpus training | Active frozen corpus: 40,170 train / 2,303 val / 2,255 untouched test / 4 excluded. A separately audited extension adds 1,808 train sources and reserves 196 new holdout sources. A separate reviewed native extension adds six CC0 outdoor captures, giving59 captures/37 scenes; V37/V38 remain on53/31. Near-duplicate screening is not complete scene recognition |
 | 8×8 binning with additional precision | Linear-light float averaging and >8-bit cache, numerical tests | Implemented and tested; all 44732 eligible licensed sources prepared |
 | Geometry, optical blur, exposure, synthetic fine detail | Executable data augmentation and inspected samples | Implemented. Complete 4×→geometry/PSF→2× Commons/native targets improve full-photo PSNR by .50990 dB in the matched V34 trial; original 8× validation remains fixed |
 | Physical Bayer noise across cameras and ISO | Electron-domain Poisson/read noise, metadata and tests | Moment-tested simulation, conservative single-image estimates on three cameras; dedicated calibration still missing |
@@ -45,15 +45,19 @@ gain. [Both step2000 reviews](corpus-v32-v35-2k-review.md) are now stopped after
 mixed results: the expanded arm improves known means but loses unseen primary
 versus its first1k. Both complete4× corpora are frozen after reusing26,314 caches.
 V34/V36 first1000 and full427/full102MP reviews are complete and stopped.
-[Nine public RAW samples](public-raw-pilot.md) are separately quarantined and
-have not entered training. The full **292-test suite** and final **15 targeted
-packed-prototype checks** pass; Ruff passes. Trained quality, protected-final evaluation
+[Nine public RAW samples](public-raw-pilot.md) retain their original quarantine.
+Six reviewed sources have a separate opt-in native extension; the chart and two
+clipped sources are excluded. Current architecture trials remain unchanged.
+All **304 tests pass**; Ruff passes. Trained quality, protected-final evaluation
 and the 10-second speed gate remain outstanding.
 
 
 The [packed-resolution prototype](packed-rgb.md) retains all Bayer phases,
-genuine DINO and IEEE FP32 physical reconstruction. V37/V38 will compare it to
-a matched full-resolution control from the same V34 EMA, batch16, seed47 and
-complete4× data. Its six-step CLI smoke is engineering evidence only. The
-throughput sweep starts after the complete preceding GPU review; quality and
-speed outcomes are not assumed.
+genuine DINO and IEEE FP32 physical reconstruction. Its completed batch16 sweep
+finds2.34× training throughput with51% less CUDA allocation, but the matched
+[V37/V38 real review](packed-v37-v38-first-review.md) rejects V38: substantial
+grain and a10.12dB unseen primary loss. All41 logged observations match. Full427
+confirms a3.75dB photo deficit; fullGFX took19.90s and all ten RGB16 files verify.
+Neither a quality gain nor10-second inference is established. The full-resolution
+model remains the working reference. V39 now tests the six-source native
+extension separately, retaining V37's initialization, seed, batch and schedule.

@@ -92,7 +92,13 @@ Changing quarantine split flags, camera metadata, cache identity or scene names
 is rejected, including attempts to relabel a public row as a legacy scene.
 The receipt is embedded in the new manifest, so training's existing source
 snapshot and resume hash capture the complete admission. This is an explicit
-future dataset choice, not automatic growth of an active run.
+dataset choice, not automatic growth of an active run. V39 now tests it against
+the V37 full-resolution control, with the same V34 parent bytes, seed47,
+batch16 and schedule. Before training, old/new loader output hashes match for
+all53 legacy captures; numerical/model/trainer/evaluator source bytes match,
+apart from admission validation and its helper. Commons/paired observation
+hashes must match at the first1000 gate. CanonM100 andDMC-GH1 camera holdouts
+are preserved; the six added camera models differ. No quality gain is assumed.
 
 ```bash
 source scripts/env.sh
