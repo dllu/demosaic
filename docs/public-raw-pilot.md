@@ -1,5 +1,9 @@
 # Public low-ISO RAW candidates
 
+The [larger second quarantine](public-raw-expansion-v2.md) now scouts more camera
+models and sources separately. Its pending review does not alter the six-source
+admission or any existing training manifest described below.
+
 Nine camera samples from [raw.pixls.us](https://raw.pixls.us/) were acquired and
 decoded into **quarantine**. Six now have a separately reviewed native-training
 extension; the original quarantine and the completed V37/V38 datasets stay fixed.
