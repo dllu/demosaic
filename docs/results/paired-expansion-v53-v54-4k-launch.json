@@ -1,0 +1,234 @@
+{
+  "purpose": "Finish unchanged original paired-data-only4000-step schedules after complete first1000 numerical/native review and actual prior GPU-controller exit. Whole model/EMA/AdamW/Python/Torch/CUDA RNG retained;1000 snapshots immutable; no new model/data/precision policy.",
+  "controller": {
+    "pid": 2939648,
+    "created": 1792158946.06,
+    "review_sha256": "9df3d16727c4ea8f1735f17d71a259e4547c2a3fcf9fdeaf24361978116dc3aa",
+    "driver_sha256": "54fb4f3bb71182d91ac8cb5e3b88596672873f565facc97d1765a1ed63b93c77",
+    "worktree": "/home/dllu/proj/demosaic/.cache/paired-v53-v54-worktree",
+    "log": "/home/dllu/proj/demosaic/.cache/paired-v53-v54-worktree/.cache/paired-expansion-4k-workflow.log"
+  },
+  "observed_status": {
+    "updated_utc": "2026-10-16T13:55:49.892524+00:00",
+    "status": "training-to4000",
+    "review": "/home/dllu/proj/demosaic/docs/results/paired-expansion-v53-v54-review.json",
+    "review_sha256": "9df3d16727c4ea8f1735f17d71a259e4547c2a3fcf9fdeaf24361978116dc3aa",
+    "initial_checkpoints": [
+      {
+        "name": "dino-paired-control-b16-v53",
+        "path": "/mnt/external/demosaic/models/dino-paired-control-b16-v53-step1000.pt",
+        "checkpoint_sha256": "b086a692e728926fed9b0e628661534c484dc66af2c3e03b777461eb45279ed8",
+        "source_sha256": "89f8a1577d0564a3dad40a03214759f88bb0be92452e01f42e82784229963e61"
+      },
+      {
+        "name": "dino-paired-expanded-b16-v54",
+        "path": "/mnt/external/demosaic/models/dino-paired-expanded-b16-v54-step1000.pt",
+        "checkpoint_sha256": "975d47ffbd0cedc6ba2fa307d96265f1f3406d96bbeed6657bc32b44b37346d1",
+        "source_sha256": "7e3ab2ef9acc6c4b5ef9dd1deb71e50fa43944c49476e37e3a976d6a92b3d3a8"
+      }
+    ],
+    "continuation": "Resume exact full model/EMA/AdamW/Python/Torch/CUDA RNG from immutable step1000. Finish original4000-step schedule with3000 additional updates per arm; identical nonpaired observations, original manifests and source. No reset or model/data policy change.",
+    "source_commit": "b62c996ce7ad5896bee269096a4bb6cdb72be4ec",
+    "driver_sha256": "54fb4f3bb71182d91ac8cb5e3b88596672873f565facc97d1765a1ed63b93c77",
+    "arm": "dino-paired-control-b16-v53"
+  },
+  "plan": {
+    "arms": [
+      {
+        "name": "dino-paired-control-b16-v53",
+        "config": "/home/dllu/proj/demosaic/.cache/paired-v53-v54-worktree/configs/dino-paired-control-b16-v53.yaml",
+        "config_sha256": "b4149d8babde479fa04208c07bf190b357e1aa31b2fa931f0309e33d0cea00bc",
+        "paired_manifest": "/mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json",
+        "paired_manifest_sha256": "b3b36d3ec28b0e2d339cb28f3bc810cc17b31102f4ce6a3454fdfec9a4a4b5e3"
+      },
+      {
+        "name": "dino-paired-expanded-b16-v54",
+        "config": "/home/dllu/proj/demosaic/.cache/paired-v53-v54-worktree/configs/dino-paired-expanded-b16-v54.yaml",
+        "config_sha256": "05f5302c06ef8ecbabec4028e94c077ecdd59a1a09e8c709a6994ce54b9646dd",
+        "paired_manifest": "/mnt/external/demosaic/evaluation/paired-train83-reviewed-v1/manifest.json",
+        "paired_manifest_sha256": "0a740eb55280a6b6d7d45d4eed9454a6fdd8692f30e4371dbbb7e346933595fb"
+      }
+    ],
+    "parent": "/mnt/external/demosaic/evaluation/paired-known-native-corpus-v37-v39-v43-2k/weights/weights-0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5.pt",
+    "parent_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+    "source_files": {
+      "paired_admission.py": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825",
+      "prior.py": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a",
+      "metrics.py": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31",
+      "inference.py": "911e71e8dcbeb1872ed591bc5234ed2b79bae063a859b4704516537d94a1df0b",
+      "train.py": "11ee82099426a91af23e0d5a5fa74fdc7e95783f043d970018ea962beafdbd55",
+      "dino_adaptation.py": "6670fa42e83ef14605208a225b6ff5890754692d5c60dcbcc16e96400664347f",
+      "paired_training.py": "71a2481213bba174bd3d6b3de9ae9b89f88333635810e15d0958352d9d8d053d",
+      "reference.py": "54ed094d58e245a56993ea3ce3ef9e21d2164e902d41d03bba9132bacd22891f",
+      "prepare.py": "e4c0733bb260c289b3ce8aaf5f393abc5919d8d81cdcf462b70032d790429712",
+      "realdata.py": "ed24db2b066531281a196e6fa074130cb0ee78a640eae5ccaaace234f5ad5421",
+      "cfa.py": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252",
+      "paired.py": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d",
+      "audit.py": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d",
+      "losses.py": "548b1481a035ad937d4a046754a74e70684864a9842296765c62079a002e5120",
+      "gaussian.py": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72",
+      "real_suite.py": "2d8cd262a22b8c11d12159e7a90f96022219915ecf0dada36665467fd0f7ccee",
+      "raw_clean.py": "a143ce351ac4e1b2425d4d561000d3e8934477fe9172c88f90ce76d9b32a7a6c",
+      "raw_admission.py": "1948afbbf05129190273ab77466f26d9d27dc942716beaab16f077c8c3330803",
+      "vst.py": "355124a374177f1c08271834149c5979ab3477fdf255c60aa7cee0d47792a76b",
+      "io.py": "0a1599ffe7f6d935e92fc71e6b086430c6f82678a74952c3b8f31155a0bea83b",
+      "data.py": "379c2ba5cfbc2d2760785896ffe9dc030284851621975ff15c90b51ad42b714a",
+      "__init__.py": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d",
+      "calibration.py": "e86f4c602a6cd7fd855d0bcfeb790cf17ed87611f19d97926f9db174909b2d26",
+      "noise.py": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce",
+      "__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+      "precision.py": "9aa850fb5ee0e9abc3e9adc4847ce3518c1acb37c93f6bc54ff9206bb0c94c3a",
+      "cli.py": "ae48ac49a52fcb9fa72521b1194e71fe8603a2ac301cf94be4a172a29a4d9003",
+      "reporting.py": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d",
+      "model.py": "6c6da18fedac5804ed8daea34675f4a0b1b666274fcb44e411419551543d0d95",
+      "color.py": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+      "safety.py": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7",
+      "pretrained_rgb.py": "256d1680608e1e1c55d951bb517eb23e273ec310a823085a7037a836ed0e3686",
+      "registration.py": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202",
+      "suite.py": "a474ff659df10dd4ec11d577082034a6e6dcba1a2a2b29c39065056cff5527b4"
+    },
+    "manifests": {
+      "/mnt/external/demosaic/audits/commons-bin4-frozen44732-v1/manifest.jsonl": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+      "/mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json": "0dde4a0ca1ad68332d8a1c9d61fdc561db6501cd262d534647b979de82e3cf80",
+      "/mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a",
+      "/mnt/external/demosaic/evaluation/manifests/common-8192-44732-val-v1.jsonl": "7cc76f460019582eeec519b332e9f9f53e030bdf579e2f27b915916a741cce0d",
+      "/mnt/external/demosaic/evaluation/paired-raw-development-prepared-v1/manifest.json": "9fe6a7dc3981024516b421a67de6a81b819f57d9d52b19838458e783b0cb744c",
+      "/mnt/external/demosaic/evaluation/paired-unseen-development-prepared-v1/manifest.json": "2d78a7ba2a56e24af3f05b32ea01277853dc135dff3834810766b7c5ed2f0fa7"
+    },
+    "source_commit": "b62c996ce7ad5896bee269096a4bb6cdb72be4ec",
+    "driver_sha256": "54fb4f3bb71182d91ac8cb5e3b88596672873f565facc97d1765a1ed63b93c77",
+    "raw_reference": {
+      "utnet2-bayer.pt": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+      "raw_denoiser.py": "154868a016cc83a74f8efc54675a2c4ffd120e3f30c159d10f11e012e8ca8d65"
+    },
+    "purpose": "Data-only paired train32 versus reviewed83 publisher IDs/71 groups from identical retained V43 EMA; seed52 B16 LR3e-5 planned4000 first1000, same nonpaired observations/precision/augmentation. No quality claim before full review.",
+    "review": "/home/dllu/proj/demosaic/docs/results/paired-expansion-v53-v54-review.json",
+    "review_sha256": "9df3d16727c4ea8f1735f17d71a259e4547c2a3fcf9fdeaf24361978116dc3aa",
+    "initial_checkpoints": [
+      {
+        "name": "dino-paired-control-b16-v53",
+        "path": "/mnt/external/demosaic/models/dino-paired-control-b16-v53-step1000.pt",
+        "checkpoint_sha256": "b086a692e728926fed9b0e628661534c484dc66af2c3e03b777461eb45279ed8",
+        "source_sha256": "89f8a1577d0564a3dad40a03214759f88bb0be92452e01f42e82784229963e61"
+      },
+      {
+        "name": "dino-paired-expanded-b16-v54",
+        "path": "/mnt/external/demosaic/models/dino-paired-expanded-b16-v54-step1000.pt",
+        "checkpoint_sha256": "975d47ffbd0cedc6ba2fa307d96265f1f3406d96bbeed6657bc32b44b37346d1",
+        "source_sha256": "7e3ab2ef9acc6c4b5ef9dd1deb71e50fa43944c49476e37e3a976d6a92b3d3a8"
+      }
+    ],
+    "continuation": "Resume exact full model/EMA/AdamW/Python/Torch/CUDA RNG from immutable step1000. Finish original4000-step schedule with3000 additional updates per arm; identical nonpaired observations, original manifests and source. No reset or model/data policy change."
+  },
+  "plan_sha256": "64b901c1cad0978b5fe04332458b6b667dcd54979c49dc53603203c10c6c0ed2",
+  "actual_resume_start": {
+    "event": "start",
+    "parameters": 54829760,
+    "trainable_parameters": 33233216,
+    "train_sources": 40170,
+    "validation_sources": 2303,
+    "start_step": 1000,
+    "steps": 4000,
+    "dino": true,
+    "paired_train_scenes": 32,
+    "paired_fraction": 0.25,
+    "raw_clean_train_scenes": 106,
+    "raw_clean_fraction": 0.25,
+    "compute_precision": "bfloat16"
+  },
+  "first_observed_training_update": {
+    "event": "train",
+    "step": 1001,
+    "loss": 0.018222659826278687,
+    "lr": 2.659768053359446e-05,
+    "grad_norm": 1.02269446849823,
+    "seconds_per_step": 13.26261753984727,
+    "cuda_gb": 7.213026304,
+    "domain": "synthetic",
+    "linear": 0.010196438059210777,
+    "rendered": 0.00758400559425354,
+    "gradient": 0.006144265178591013,
+    "highlight": 0.026502210646867752,
+    "sensor": 0.009695710614323616,
+    "batch_sha256": "06dbc8489d895baa14f2fcc5dd03d9222fda4e91af6d4912aeef675a088ce17b"
+  },
+  "latest_observed_training_update": {
+    "event": "train",
+    "step": 1050,
+    "loss": 0.018421988934278488,
+    "lr": 2.6236233039141496e-05,
+    "grad_norm": 2.4246175289154053,
+    "seconds_per_step": 0.9087382031790913,
+    "cuda_gb": 7.213026304,
+    "domain": "synthetic",
+    "linear": 0.008591912686824799,
+    "rendered": 0.010861052200198174,
+    "gradient": 0.0072596753016114235,
+    "highlight": 0.02856939285993576,
+    "sensor": 0.008166428655385971,
+    "batch_sha256": "462d560fffa1a43fe3cff07e187e0c20db05b781bcace7dac386b94c470db3b7"
+  },
+  "actual_children": [
+    {
+      "pid": 2939651,
+      "name": "python3",
+      "status": "sleeping"
+    },
+    {
+      "pid": 2939684,
+      "name": "uv",
+      "status": "sleeping"
+    },
+    {
+      "pid": 2939687,
+      "name": "demosaic",
+      "status": "running"
+    },
+    {
+      "pid": 2939750,
+      "name": "python3",
+      "status": "sleeping"
+    },
+    {
+      "pid": 2939751,
+      "name": "pt_data_worker",
+      "status": "sleeping"
+    },
+    {
+      "pid": 2939775,
+      "name": "pt_data_worker",
+      "status": "sleeping"
+    },
+    {
+      "pid": 2939798,
+      "name": "pt_data_worker",
+      "status": "sleeping"
+    },
+    {
+      "pid": 2939821,
+      "name": "pt_data_worker",
+      "status": "running"
+    },
+    {
+      "pid": 2939950,
+      "name": "pt_data_worker",
+      "status": "sleeping"
+    },
+    {
+      "pid": 2939976,
+      "name": "pt_data_worker",
+      "status": "sleeping"
+    },
+    {
+      "pid": 2940011,
+      "name": "pt_data_worker",
+      "status": "sleeping"
+    },
+    {
+      "pid": 2940066,
+      "name": "pt_data_worker",
+      "status": "sleeping"
+    }
+  ],
+  "source_validation": "Same frozenb62c996 package as451-test CUDA and genuine-parent preflight; no source/recipe changes or repeated GPU suite for continuation. Lineage/optimizer1000-step/manifest/source/review hash guards pass before training."
+}
