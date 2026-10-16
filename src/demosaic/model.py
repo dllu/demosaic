@@ -44,6 +44,7 @@ class ModelConfig:
     variance_stabilization: bool = False
     physical_anchors: bool = False
     rgb_processing_scale: int = 1
+    packed_detail_prior: bool = False
 
     def to_dict(self):
         return asdict(self)
@@ -352,6 +353,8 @@ class JointDemosaic(nn.Module):
         cfg = self.config
         if cfg.rgb_processing_scale not in (1, 2):
             raise ValueError("RGB processing scale must be 1 or 2")
+        if cfg.packed_detail_prior and cfg.rgb_processing_scale != 2:
+            raise ValueError("The packed detail prior requires RGB processing scale 2")
         if cfg.rgb_processing_scale == 2 and (
             cfg.restoration_backbone != "pretrained-rgb" or not cfg.variance_stabilization
         ):
@@ -383,6 +386,7 @@ class JointDemosaic(nn.Module):
                 stabilized=cfg.variance_stabilization,
                 physical_anchors=cfg.physical_anchors,
                 processing_scale=cfg.rgb_processing_scale,
+                detail_prior=cfg.packed_detail_prior,
             )
             self.context = DinoContext(cfg, 512) if cfg.dino else None
             self.refiner = self.coarse_refiner = self.pyramid_refiner = None

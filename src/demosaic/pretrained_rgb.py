@@ -106,6 +106,25 @@ def pooled_malvar_kernels():
     return torch.stack(kernels)
 
 
+@lru_cache(maxsize=1)
+def detail_malvar_energy():
+    """Interior MHC-minus-expanded-area2 noise energy per RGB/output/input phase.
+
+    Independent unit CFA noise gives variance equal to squared coefficient
+    sums. Keeping input phases separate permits actual Gaussian WB ratios.
+    The central 2x2 output has complete support inside the 12x12 sensor field.
+    """
+    impulses = torch.eye(144, dtype=torch.float32).reshape(144, 4, 6, 6)
+    result = []
+    for pattern in PATTERNS:
+        rgb = malvar(impulses, color_indices(pattern))
+        low = F.avg_pool2d(rgb, 2)
+        expanded = F.interpolate(low, scale_factor=2, mode="bilinear", align_corners=False)
+        coefficients = (rgb - expanded)[..., 6:8, 6:8].flatten(1).T.reshape(12, 4, 6, 6)
+        result.append(coefficients.square().sum((-2, -1)))
+    return torch.stack(result)
+
+
 def physical_rgb_features(
     packed, variance, colors, wb=None, matrix=None, *, rgb=None, stabilized=False
 ):
@@ -200,12 +219,14 @@ def stabilized_photometry(profiles, offset, span):
 class PretrainedRgbDemosaic(nn.Module):
     """One trainable RGB pass with CFA/noise/camera input and frozen DINO context."""
 
-    def __init__(self, *, stabilized=False, physical_anchors=False, processing_scale=1):
+    def __init__(self, *, stabilized=False, physical_anchors=False, processing_scale=1, detail_prior=False):
         super().__init__()
         if physical_anchors and not stabilized:
             raise ValueError("Physical anchors require variance stabilization")
         if processing_scale not in (1, 2) or processing_scale == 2 and not stabilized:
             raise ValueError("Packed processing requires variance stabilization and scale 2")
+        if detail_prior and processing_scale != 2:
+            raise ValueError("The detail prior requires packed processing")
         self.network = RgbRestorationTrunk()
         self.measurement_adapter = nn.Conv2d(21, 64, 1)
         nn.init.zeros_(self.measurement_adapter.weight)
@@ -213,6 +234,7 @@ class PretrainedRgbDemosaic(nn.Module):
         self.stabilized = stabilized
         self.physical_anchors = physical_anchors
         self.processing_scale = processing_scale
+        self.detail_prior = detail_prior
         if processing_scale == 2:
             self.phase_adapter = nn.Conv2d(16, 64, 1)
             self.phase_head = nn.Conv2d(80, 12, 3, padding=1)
@@ -227,6 +249,8 @@ class PretrainedRgbDemosaic(nn.Module):
             self.register_buffer(
                 "phase_patterns", torch.tensor(list(PATTERNS.values())), persistent=False
             )
+            if detail_prior:
+                self.register_buffer("detail_energy", detail_malvar_energy().clone(), persistent=False)
         self._noise_key = None
         self._noise_profiles = None
 
@@ -278,6 +302,29 @@ class PretrainedRgbDemosaic(nn.Module):
         ]
         return ((kernel * ratio).square().sum((1, 2, 3, 4)) / 3).sqrt()[:, None, None, None]
 
+    def detail_noise_variance(self, colors, balance):
+        """Periodic RGB marginal variance, not a covariance-whitening transform."""
+        matches = (colors[:, None] == self.phase_patterns[None]).all(-1)
+        if not matches.any(-1).all():
+            raise ValueError("Expected an ordinary Bayer phase pattern")
+        energy = self.detail_energy[matches.long().argmax(-1)]
+        balance = balance.float().clamp_min(1e-6)
+        ratio = balance.gather(1, colors)[:, None, :] / balance.repeat_interleave(4, 1)[..., None]
+        variance = (energy * ratio.square()).sum(-1)
+        return F.pixel_shuffle(variance[..., None, None], 2)
+
+    def filter_detail(self, detail, variance):
+        """Local Wiener prior in normalized physical units; preserve zero-noise detail.
+
+        Variance is an interior Gaussian marginal proxy; GAT variance and tile
+        boundaries are approximate. No reference image or fitted transform enters.
+        """
+        energy = box_mean(detail.square(), 7)
+        signal = (energy - box_mean(variance, 7)).clamp_min(0)
+        gain = signal / (signal + variance).clamp_min(1e-12)
+        gain = torch.where(variance > 0, gain, torch.ones_like(gain))
+        return detail * gain
+
     def forward_packed(
         self, normalized, noise, condition, packed, colors, wb, matrix, profiles,
         offset, span, preview, context,
@@ -323,7 +370,17 @@ class PretrainedRgbDemosaic(nn.Module):
             )[..., :h, :w]
             phase_features = torch.cat((features.float(), phase), dim=1)
             phase_correction = F.pixel_shuffle(self.phase_head(phase_features), 2)[..., :h, :w]
-            return normalized + correction + phase_correction
+            prediction = normalized + correction + phase_correction
+            if self.detail_prior:
+                expanded = F.interpolate(
+                    low_rgb, scale_factor=2, mode="bilinear", align_corners=False
+                )[..., :h, :w]
+                detail = normalized - expanded
+                variance = noise.square() * self.detail_noise_variance(colors, balance).repeat(
+                    1, 1, h // 2, w // 2
+                )
+                prediction = prediction + (self.filter_detail(detail, variance) - detail)
+            return prediction
 
     def forward(self, packed, variance, colors, wb=None, matrix=None, context=None):
         profiles, preview, base_rgb = None, None, None
