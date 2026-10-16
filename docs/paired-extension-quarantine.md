@@ -84,3 +84,11 @@ Per-series apertures match (f/7.1 bark, f/4 bouquet), but low-ISO exposures are
 1/4s and0.4s versus1/500s and1/320s. Scene movement and reference sharpness need
 further native review before admission. Both scenes have CC0 grants by Peter
 Wemmert; source RAWs are read-only and preview transforms are disclosed.
+
+The [complete CPU review is queued](results/paired-extension-review-queue.json)
+in frozen `b9a7d37`. Its controller waits for the identity-matched download
+process to exit and the complete231-file manifest to exist, re-verifies every
+RAW, then screens both references of all59 scenes and prepares only screen-clear
+quarantine records. Two CPU threads are used; CUDA is disabled. It requires the
+actual training loader to reject the resulting manifest. Live status:
+`/mnt/external/demosaic/runs/paired-extension-review-v1-workflow.json`.

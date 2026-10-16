@@ -144,6 +144,11 @@ exceed ViT-S on the listed benchmarks; that is not RAW restoration evidence.
 The authorized account can fetch genuine config/weights at revision
 `5931719e67bbdb9737e363e781fb0c67687896bc`. Both are cached with hashes, including
 the weights' LFS SHA256 verification. [Availability receipt](results/dino-vitb-availability-v1.json).
-No model has been constructed, benchmarked or trained with those weights here.
-A future matched trial must compare fresh initialization, quality, memory and
-latency. V50 retains ViT-S and tests data membership alone.
+The [matched current-architecture capacity trial](fresh-dino-capacity.md) has
+now passed genuine CPU/GPU initialization, gradient and portability preflights
+and completed the [first1000 trained review](fresh-dino-capacity-1k-review.md).
+No-context leads photo/unseen primary at that gate; B improves photo versus S
+without surpassing no-context. Fifty native comparisons and ten full RGB16
+files verify. A whole-state continuation to3000 on the original10000 schedule
+is live; convergence and a restoration benefit from larger context remain
+unproven. V50 separately retained ViT-S and tested data membership alone.

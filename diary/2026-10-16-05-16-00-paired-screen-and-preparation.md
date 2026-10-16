@@ -27,3 +27,10 @@ Matched no-context/S/B continuation and ADC-policy queue stay live. No-context
 has completed3000; S is continuing, B awaits its turn. The goal is incomplete:
 broader real-image superiority, mature context attribution, protected-final
 quality and the10-second target still require evidence.
+
+CPU review controller PID1845975 is live in frozenb9a7d37 with source/input hashes
+and archive. It waits for download PID1830704/create1792152141.51 to exit, then
+requires and re-verifies the complete231-file acquisition. Both-reference
+screening and per-scene preparation follow with two CPU threads/CUDA disabled.
+Actual training-loader rejection is checked on the final quarantine manifest.
+The queue receipt is docs/results/paired-extension-review-queue.json.
