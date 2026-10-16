@@ -6,6 +6,11 @@ show a comparable shift. This is a demonstrated failure on one observation,
 not a claim of broader regression or an identified training cause.
 [All float predictions, source/ROI/checkpoint records and native PNGs](results/fresh-none-S-3k10k-color-means-cpu.json).
 
+The follow-up [colored-flat diagnostic](colored-flat-camera-diagnostic.md)
+reproduces a large color shift on uniform fields, including ADC-only input.
+It adds an input-identical camera-feature counterfactual and an independent
+audit of 96 saved predictions; it does not establish a training cause.
+
 A later [input-CFA gain probe](saved-input-cfa-gain-cpu.md) on the same saved
 predictions substantially reduces the shifted fabric's color error, while its
 fine cords remain missing. It uses no target in the gain fit and changes no

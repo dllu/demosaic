@@ -146,12 +146,14 @@ The authorized account can fetch genuine config/weights at revision
 the weights' LFS SHA256 verification. [Availability receipt](results/dino-vitb-availability-v1.json).
 The [matched current-architecture capacity trial](fresh-dino-capacity.md) has
 now passed genuine CPU/GPU initialization, gradient and portability preflights
-and completed the [first1000 trained review](fresh-dino-capacity-1k-review.md)
-and [whole-state continuation to3000](fresh-dino-capacity-3k-review.md).
-No-context still leads photo/unseen primary at3000; B improves photo versus S
-without surpassing no-context. All three improve from1000, but none establish
-convergence on the original10000 schedule or a benefit from larger context.
-Fifty native comparisons and ten full RGB16 files verify at each gate. V50
+and completed the [first1000 trained review](fresh-dino-capacity-1k-review.md),
+[whole-state continuation to3000](fresh-dino-capacity-3k-review.md) and
+[original10000 schedule](fresh-dino-capacity-10k-review.md).
+No-context leads photographic PSNR at10k; neither ViT-S nor ViT-B improves its
+photo mean. All three improve their own3k full-photo scores, but selected late
+fabric color errors prevent promotion. This finite single-seed comparison does
+not establish convergence or a universal foundation-model effect. Native
+comparisons and complete RGB16 files verify at each gate. V50
 separately retained ViT-S and tested data membership alone. The subsequent
 [paired-data-only trial](paired-expansion-v53-v54-4k-review.md) completes both
 original 4,000-step schedules without sustaining its early photographic gain.
@@ -195,7 +197,18 @@ then loses natural-photo and known-camera means, with no clear native detail
 advantage. The option stays default-off. One seed/1,000 updates is not convergence
 or a universal rejection of input adaptation. A same-source control replay is
 now complete in the [unchanged-control replay](control-replay-v57-review.md).
-The original fresh schedules are [continuing to 10,000 updates](fresh-dino-capacity-10k.md).
+The original fresh schedules now have a [complete 10,000-update review](fresh-dino-capacity-10k-review.md).
+
+## Recent RAW denoising comparator
+
+[Sánchez-Beeckman and Buades (April 2026)](https://arxiv.org/abs/2604.17453)
+study learned nonlocal feature matching and filtering for RAW-to-RAW denoising.
+The [official source and release](https://github.com/MIA-UIB/nonlocal-matchfilter)
+now have a [genuine-weight CPU probe](nonlocal-matchfilter-cpu-probe.md) here:
+strict upstream tensor matching, actual native CPU sampling and two fixed
+photographic observations followed by independent Malvar. Fine cords and cloud
+detail remain soft. This is a small cascade comparison, with different training
+data and budget; no full-suite, real-camera, CUDA, SOTA or speed result follows.
 
 ## DINOv3 convolutional feature pyramid
 
@@ -207,8 +220,10 @@ four spatial feature maps at 1/4, 1/8, 1/16 and 1/32 input resolution. That moti
 an [optional top-down fusion branch](dino-convnext-pyramid.md) at three CNN
 resolutions, rather than claiming that a denser feature grid guarantees more
 faithful image detail. Backbone and fusion capacity change together. Genuine
-CPU engineering and a four-update actual-trainer complete-state restart now
-pass, including Commons/native/paired domains. A CUDA preflight is prepared,
-but only its live-owner rejection has run while the original longer comparison
-continues. Full CUDA checks, matched training, native triplets and real-camera
-review remain.
+CPU engineering and a four-update actual-trainer complete-state restart pass,
+including Commons/native/paired domains. Genuine CUDA preflight and the complete
+496-test CUDA suite pass. Its [first1000 trained review](dino-convnext-pyramid-v58-1k-review.md)
+includes120 inspected native comparisons and full GFX/three-camera evidence,
+without a clear overall winner. The original10k schedule now
+[continues with full optimizer/EMA/RNG state](results/dino-convnext-pyramid-v58-10k-launch.json);
+its mature review remains pending.
