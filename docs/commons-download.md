@@ -92,3 +92,50 @@ reserved buckets, cache corruption and concurrent output ownership. Full suite:
 **260 passed in 32.71s**; Ruff passed. A future 4× version must rebin the admitted
 new sources and preserve this audit before testing the expanded corpus with
 augmentation before the last reduction.
+
+## Reuse the 4× base when extending the corpus
+
+`scripts/rebin_commons_extension.py prepare` is now preparing only the **1,808
+admitted new training sources** at 4×, with one worker. It does not decode or copy
+the old corpus. Its archived implementation and frozen selection are under
+`/mnt/external/demosaic/commons-extension-20261016-bin4-v1/`; progress is in
+`.cache/prepare-extension-four.log`, launcher PID in `.cache/prepare-extension-four.pid`.
+
+The separate `freeze` stage requires the complete frozen old 4× corpus and the
+complete new preparation. It combines their absolute cache paths without copying
+pixels. The expected result is 41,978 train / 2,303 validation / 2,255 test;
+reserved/excluded sources are omitted and remain recorded in the audit. Every
+active source/split and its attribution must match the audited 8× membership.
+Cache shapes/dtypes are checked from actual NumPy headers. Producer checksums
+are retained; the merge does not rehash all old pixels. The audit is published
+before the final manifest, with a cooperative lock and no overwrite of frozen
+output. Partial producers, wrong dimensions, changed splits/credits and duplicate
+identities are rejected.
+
+```bash
+source scripts/env.sh
+COMMONS_BASE=/mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl
+COMMONS_EXT=/mnt/external/demosaic/commons-extension-20261016-v1/audit/manifest.jsonl
+COMMONS_EXT4=/mnt/external/demosaic/commons-extension-20261016-bin4-v1
+uv run --no-sync python scripts/rebin_commons_extension.py prepare \
+  --base-manifest "$COMMONS_BASE" --expanded-manifest "$COMMONS_EXT" \
+  --output "$COMMONS_EXT4" --workers 1
+# Only after the full old4x freeze and new preparation finish:
+uv run --no-sync python scripts/rebin_commons_extension.py freeze \
+  --base-manifest "$COMMONS_BASE" --expanded-manifest "$COMMONS_EXT" \
+  --base-rebinned-manifest /mnt/external/demosaic/audits/commons-bin4-frozen44732-v1/manifest.jsonl \
+  --output "$COMMONS_EXT4"
+```
+
+An owned detached workflow waits on the live base-freezer process before the
+second command. Its final path will be
+`/mnt/external/demosaic/commons-extension-20261016-bin4-v1/audit/manifest.jsonl`;
+this combined corpus is **not ready yet**. Current trials do not use partial data.
+Eleven new preparation/merge tests pass; the full suite passes **271 tests in
+40.91s**, with Ruff passing. [The matched data/augmentation recipes](training-pipeline.md#matched-corpus-and-augmentation-pilot)
+keep validation on the original 8× selection.
+
+Four actual new-source precision checks compare unaugmented 4×→2× averaging
+against their independently prepared direct 8× caches: maximum difference is
+one uint16 code. This checks cache precision before geometry, not trained-model
+quality. [Selection, code hashes and precision checks](results/commons-augmentation-pilot-startup.json).

@@ -350,7 +350,7 @@ native crops were inspected locally. The non-private receipt is in
 The full audited validation split contains 29 images large enough for a native
 512-pixel crop, and none supporting 768/1024 pixels after 8×8 binning. The new
 tile-driver suite uses all 29 without resizing, plus three known 1024-pixel
-procedural scenes. V6 step20000 uses FP16 neural compute and FP32 physical
+procedural scenes. V6 step 20000 uses FP16 neural compute and FP32 physical
 operations/blending, all four CFAs, seven conditions and a 16-pixel excluded
 border. These source sizes/crops differ from the 427-photo protocol above.
 Records are in [results/prior20k-tiling.json](results/prior20k-tiling.json).
@@ -420,14 +420,14 @@ assuming equivalent restoration. Paired intervals and control checks are in
 
 The fixed 16-photo monitor plus all 16 procedural stress sources was rerun with
 all four CFAs and seven conditions, using identical channels-last FP16 inference
-for V6 step51000, V6 step20000 and V4 step30000. It is a convergence diagnostic;
+for V6 step51000, V6 step 20000 and V4 step30000. It is a convergence diagnostic;
 the 16-photo score is not the complete 427-photo validation score.
 Receipts are in [results/prior51k-midpoint.json](results/prior51k-midpoint.json).
 
 | Checkpoint | 16-photo PSNR / SSIM | 16-stress PSNR / SSIM |
 | --- | ---: | ---: |
 | V6 step51000 | 32.3925 / 0.93205 | 30.6359 / 0.91891 |
-| V6 step20000 | 31.8818 / 0.92527 | 29.9172 / 0.90114 |
+| V6 step 20000 | 31.8818 / 0.92527 | 29.9172 / 0.90114 |
 | V4 step30000 | 31.3519 / 0.91653 | 30.5854 / 0.91749 |
 | RawNIND CFA-LS | 27.6991 / 0.82670 | 24.9748 / 0.72041 |
 
@@ -654,7 +654,9 @@ LR schedule; all 27 logged same-domain batch intersections match. V32 reaches
 real rendered means with 50% paired batches, while losing .12672 dB unseen
 measured-CFA PSNR versus V30. Channel-calibrated RawNIND still leads all three
 unseen means. Native triplets show soft foliage, imperfect mesh and residual
-colored points. V33 continues only to the next step-2000 review gate.
+colored points. [V33's step-2000 gate](paired50-v33-2k-review.md) is complete and
+stopped: unseen primary improves over its first 1k, while known primary and the
+photographic synthetic screen decline.
 
 The [training pipeline](training-pipeline.md) selects domains before loading,
 supports 4× binning → geometry/PSF → 2× reduction for Commons and native targets,
@@ -664,4 +666,11 @@ without changing tables. The complete 4× Commons corpus is still preparing;
 partial output cannot enter V34. The [first downloaded-data extension](commons-download.md#first-prepared-extension)
 adds 1,808 training sources in a separate frozen 8× manifest, preserving all old
 records and evaluation membership. No current trial silently changes data.
-All 260 software tests pass; quality and speed goals remain open.
+The [matched corpus/augmentation pilot](training-pipeline.md#matched-corpus-and-augmentation-pilot)
+completes [V35 first 1k](expanded-v35-1k-review.md) with the 1,808-source extension,
+keeping V32's other training inputs fixed. All 27 logged paired/native hashes
+match; unseen primary improves .04306 dB, while the 16-photo screen loses .06106 dB.
+Both arms continue to their matched step 2000 gate. V34/V36 remain gated on full
+4× preparation. Only new admitted sources are
+rebinned for the extension; the complete base is reused without copying pixels.
+All 271 software tests pass; quality and speed goals remain open.

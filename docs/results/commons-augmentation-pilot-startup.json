@@ -1,0 +1,131 @@
+{
+  "status": "V35 first1000 training/development review complete; V32 and V35 continue their original schedules to matched step2000 review. V34/V36 not started, gated on complete4x manifests. No broad expanded-data quality gain established.",
+  "v35_config": "configs/dino-anchored-expanded-b16-v35.yaml",
+  "v36_config": "configs/dino-anchored-expanded-pre-downsample-b16-v36.yaml",
+  "runtime_source_sha256": "e40755f17b21f3b0a7ce06a41564c52ff76ac94b7203e69e19a825143cdcf239",
+  "runtime_initialized_from": {
+    "path": "/mnt/external/demosaic/evaluation/paired-known-anchored-stabilized-rgb-v30-1k/weights/weights-3a529117f127b2b48c203d6d23d154aeea0924f1aeb7ca649b1778ac8c0686c6.pt",
+    "sha256": "3a529117f127b2b48c203d6d23d154aeea0924f1aeb7ca649b1778ac8c0686c6",
+    "step": 1000
+  },
+  "validation_manifest_sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a",
+  "paired_manifest_sha256": "b3b36d3ec28b0e2d339cb28f3bc810cc17b31102f4ce6a3454fdfec9a4a4b5e3",
+  "raw_clean_manifest_sha256": "ee4eb06815096504ddcae25cec27ecaf327ab7fc67963f516d0d6e2216860935",
+  "base_manifest_sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a",
+  "expanded_manifest_sha256": "38ac5fc61892ee31ddf841ad2b06ebf5ec68b6cb2196b4f7aa97b49775cbfb78",
+  "v35_workflow": "/mnt/external/demosaic/runs/dino-anchored-expanded-b16-v35/pilot-workflow.json",
+  "extension4_recipe": {
+    "base_manifest": "/mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl",
+    "base_sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a",
+    "expanded_manifest": "/mnt/external/demosaic/commons-extension-20261016-v1/audit/manifest.jsonl",
+    "expanded_sha256": "38ac5fc61892ee31ddf841ad2b06ebf5ec68b6cb2196b4f7aa97b49775cbfb78",
+    "source": "/mnt/external/qi",
+    "factor": 4,
+    "min_size": 512,
+    "selected": 1808,
+    "selection_sha256": "78bcf5235b29e55a1a152c233eddde648ea5cc04d23cc87cd05465fa7b5d0129"
+  },
+  "extension4_implementation": {
+    "files": {
+      "scripts/rebin_commons_extension.py": {
+        "sha256": "169fefa9514b77ed94189f569f40ac765bc65bba7d15aeebe33d3632fc47a390",
+        "mtime_epoch": 1792114973.8950262
+      },
+      "src/demosaic/prepare.py": {
+        "sha256": "e4c0733bb260c289b3ce8aaf5f393abc5919d8d81cdcf462b70032d790429712",
+        "mtime_epoch": 1792108672.0614295
+      },
+      "src/demosaic/color.py": {
+        "sha256": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+        "mtime_epoch": 1792025491.7960532
+      }
+    },
+    "archived_before_prepare": true,
+    "base_freezer_pid": 52903
+  },
+  "extension4_workflow": "/mnt/external/demosaic/commons-extension-20261016-bin4-v1/workflow.json",
+  "extension4_future_manifest": "/mnt/external/demosaic/commons-extension-20261016-bin4-v1/audit/manifest.jsonl",
+  "tests": "271 passed in40.91s;11 new rebin/merge tests. Ruff passed.",
+  "v35_first_gate": {
+    "updated_utc": "2026-10-16T01:49:49.520325+00:00",
+    "status": "completed-first1000-and-development-review",
+    "shared_noncommons_logged": 27,
+    "total_logged": 41,
+    "source_sha256": "e40755f17b21f3b0a7ce06a41564c52ff76ac94b7203e69e19a825143cdcf239"
+  },
+  "v35_completed_review": "docs/results/expanded-v35-1k-review.json",
+  "continuation_workflow": "/mnt/external/demosaic/runs/corpus-v32-v35-2k-workflow.json",
+  "new_four_precision_spot_check": {
+    "scope": "Four actual newly admitted training sources, unaugmented4x cache ->2x average compared with independently prepared original8x cache. Not a trained-model or interpolation-quality result.",
+    "cases": [
+      {
+        "id": "001578b30995218e568aad27a634e4d1ea418c9f",
+        "four_cache_sha256": "bf8e2a03b3ef2fed12811d1ed4cec786d0e048073c47a2f2db4ce4ee45ed4422",
+        "eight_cache_sha256": "44570ff3f7ade24eb2f869ee9d401030d4e39ef7408a9e189f3d76f468b9cc02",
+        "four_shape": [
+          616,
+          1189,
+          3
+        ],
+        "eight_shape": [
+          308,
+          594,
+          3
+        ],
+        "max_uint16_code_difference": 1,
+        "mean_absolute_code_difference": 0.1450070692494935
+      },
+      {
+        "id": "002f43d19014540d80c82b285093fda3a1b517f2",
+        "four_cache_sha256": "95eb0752573e0075a5d23ce0014317e036365f76adf2b5226e554a18f4c39d41",
+        "eight_cache_sha256": "947ea43f88747181cf149160e503cb0bf5b762eae1567882743617e43d7a4b59",
+        "four_shape": [
+          612,
+          925,
+          3
+        ],
+        "eight_shape": [
+          306,
+          462,
+          3
+        ],
+        "max_uint16_code_difference": 1,
+        "mean_absolute_code_difference": 0.1461604843957785
+      },
+      {
+        "id": "003721f3f39a1bf3b2b958c4fcc77b6a8732151b",
+        "four_cache_sha256": "3d7bc5922b6b21223a7389d252b9256e1e38dc66c4f11a7d1e80d1d10d408c05",
+        "eight_cache_sha256": "f05d62c590121d853f25c2f0d4297c1d09b2bf88b67b814cef6e614c35822121",
+        "four_shape": [
+          787,
+          1194,
+          3
+        ],
+        "eight_shape": [
+          393,
+          597,
+          3
+        ],
+        "max_uint16_code_difference": 1,
+        "mean_absolute_code_difference": 0.14632819170776132
+      },
+      {
+        "id": "00663a7714247c3ed4faf082881f023c4b7578ac",
+        "four_cache_sha256": "da6ec07b283db29ba421928dbe5858903f26ff416631051b64830a9c154d0002",
+        "eight_cache_sha256": "74c33e3b014997bc70776573bbe3cef2e23665bbaece50d0ac2e53726c523c07",
+        "four_shape": [
+          781,
+          1172,
+          3
+        ],
+        "eight_shape": [
+          390,
+          586,
+          3
+        ],
+        "max_uint16_code_difference": 1,
+        "mean_absolute_code_difference": 0.14658411364896007
+      }
+    ]
+  }
+}

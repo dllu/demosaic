@@ -130,9 +130,10 @@ Restoration times were **36.14/35.42/35.77/18.42 seconds**, respectively,
 tile 512 / overlap 64 / batch 4. These are successive shared-machine runs, excluding
 decode/model loading/rendering/encoding. The 10-second target remains unmet.
 
-V33 continues with its unchanged original 3,000-step recipe to step 2,000 for a
-new development review gate. V32 is retained as the stronger synthetic reference
-and matched control for the forthcoming 4×→augmentation→2× trial. Neither
-continuation nor the new corpus has yet established an additional quality gain.
+V33's [step-2000 review](paired50-v33-2k-review.md) is now complete: unseen primary
+PSNR improves over step1000, but known primary and the photographic screen
+decline. It stops at that gate. V32 is retained as the stronger synthetic reference
+and matched control for the forthcoming 4×→augmentation→2× and corpus-extension
+trials. The new corpus has not yet established an additional quality gain.
 GFX/siblings and protected-final sources remain outside training; final remains
 unscored during development.

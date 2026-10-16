@@ -24,8 +24,9 @@ The [completed V32/V33 matched review](low-lr-paired-v32-v33-review.md) includes
 real development, all 427 synthetic photographs, native exact-GT triplets and
 full-frame GFX foliage/fence comparisons. Both arms use the same V30 EMA with
 fresh optimizers, batch 16 and LR 3e-5. V32 is the stronger synthetic reference;
-V33 continues to its next step-2000 development gate. This does not establish
-broad real-camera superiority or a decisive qualitative gain.
+V33's [step-2000 gate](paired50-v33-2k-review.md) is now complete and stopped
+after mixed results. This does not establish broad real-camera superiority or
+a decisive qualitative gain.
 
 The [training pipeline](training-pipeline.md) implements augmentation before
 the last reduction and avoids discarded Commons batches. A batch sweep selects
@@ -36,5 +37,11 @@ trains; native 4× targets already retain the same 53 captures / 31 scenes.
 [More Commons originals](commons-download.md) continue downloading with a 512 GiB
 reserve. Their first separately frozen extension adds 1,808 training sources;
 active experiments and all existing validation/test assignments stay fixed.
-All **260 software tests pass**. Trained quality, protected-final evaluation
+The [matched corpus/augmentation pilot](training-pipeline.md#matched-corpus-and-augmentation-pilot)
+tests the 1,808-source extension separately from the geometry change.
+[V35 first 1k](expanded-v35-1k-review.md) improves unseen primary PSNR by .04306 dB
+versus V32, with a .06106 dB photographic-screen regression and no decisive GFX
+gain. Both continue to the matched step 2000 gate; V34/V36 remain gated on complete
+frozen 4× data. All **271 software
+tests pass**. Trained quality, protected-final evaluation
 and the 10-second speed gate remain outstanding.

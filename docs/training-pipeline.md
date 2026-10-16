@@ -122,7 +122,7 @@ source hash. [Complete measurements and reproduction receipt](results/training-b
 
 [V31's recipe](../configs/dino-anchored-stabilized-rgb-b16-v31.yaml) continues
 frozen V30 step1000 with batch16, retaining model/AdamW/EMA/RNG state and the
-existing8× dataset. It stops after1,000 additional updates (step2000) for paired,
+existing8× dataset. It stops after1,000 additional updates (step 2000) for paired,
 synthetic and GFX review. This processes16,000 additional examples and changes
 global sample indices to the batch16 recipe. It is not an equal-image or
 batch-only quality ablation. The complete4× selection prepares separately;
@@ -156,3 +156,38 @@ gate. The [first Commons extension](commons-download.md#first-prepared-extension
 adds1,808 eligible training sources in a separate frozen manifest. Neither this
 extension nor partial4× preparation has been admitted to these matched trials.
 The new ingestion/audit tests bring the full suite to **260 passing tests**.
+
+## Matched corpus and augmentation pilot
+
+These four recipes share the V30 step1000 EMA initializer, fresh AdamW/EMA,
+batch 16, seed 46, LR 3e-5 / planned 3,000 steps and a first review after 1,000
+updates. Domain proportions stay 25% paired / 25% native / 50% Commons, with
+the same paired/native source identities. Every arm validates on the original
+frozen 8× manifest. This is a single-seed pilot, not convergence evidence.
+
+| Commons train corpus | Existing 8× augmentation | 4× → geometry/PSF → 2× |
+| --- | --- | --- |
+| 40,170 sources | V32: first 1k reviewed, continuing to 2k | [V34](../configs/dino-anchored-pre-downsample-b16-v34.yaml): gated, not started |
+| 41,978 sources | [V35](../configs/dino-anchored-expanded-b16-v35.yaml): first 1k reviewed, continuing to 2k | [V36](../configs/dino-anchored-expanded-pre-downsample-b16-v36.yaml): gated, not started |
+
+The geometry change applies to both Commons and native synthetic targets;
+registered paired RAW keeps its exact sensor-phase transforms. The corpus change
+adds only the [1,808 audited Commons training sources](commons-download.md#first-prepared-extension).
+V35's validation, paired and native manifest hashes and runtime code/initializer
+match V32. All 27 shared logged paired/native batches match at the first 1k gate;
+Commons draws change with the corpus.
+V34/V36 cannot start until their complete frozen 4× manifests exist. The expanded
+4× job prepares only new sources and reuses old cache paths, preserving protected
+membership and attribution.
+
+[V35's first review](expanded-v35-1k-review.md) finds +.04306 dB unseen primary
+PSNR versus V32 (95% scene interval[+.00727,+.07886]) and −.06106 dB on the
+16-photo synthetic screen. No decisive GFX visual gain is established. Both
+continue only to the next matched step 2000 review with their existing schedules.
+[Startup/runtime identities and rebin implementation](results/commons-augmentation-pilot-startup.json)
+are retained; V35's report records its frozen first 1k weights separately.
+
+[V33's step 2000 continuation review](paired50-v33-2k-review.md) is complete and
+stopped: better unseen primary PSNR versus its first 1k, mixed rendered scores,
+and a lower photographic screen mean. It does not replace these matched controls.
+The rebin/merge guards bring validation to **271 passing tests**.
