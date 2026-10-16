@@ -2,7 +2,7 @@
 
 Nine camera samples from [raw.pixls.us](https://raw.pixls.us/) were acquired and
 decoded into **quarantine**. Six now have a separately reviewed native-training
-extension; the original quarantine and the running V37/V38 datasets stay fixed.
+extension; the original quarantine and the completed V37/V38 datasets stay fixed.
 Each selected catalog entry explicitly
 links CC0, and all nine published SHA256 values and HTTP byte counts verified:
 909,367,652 bytes total. The acquisition archives the catalog, selection, EXIF,
@@ -92,13 +92,16 @@ Changing quarantine split flags, camera metadata, cache identity or scene names
 is rejected, including attempts to relabel a public row as a legacy scene.
 The receipt is embedded in the new manifest, so training's existing source
 snapshot and resume hash capture the complete admission. This is an explicit
-dataset choice, not automatic growth of an active run. V39 now tests it against
+dataset choice, not automatic growth of an active run. V39 completed its first
+1000-update test against
 the V37 full-resolution control, with the same V34 parent bytes, seed47,
 batch16 and schedule. Before training, old/new loader output hashes match for
 all53 legacy captures; numerical/model/trainer/evaluator source bytes match,
 apart from admission validation and its helper. Commons/paired observation
-hashes must match at the first1000 gate. CanonM100 andDMC-GH1 camera holdouts
-are preserved; the six added camera models differ. No quality gain is assumed.
+hashes match at all33 logged shared observations. CanonM100 andDMC-GH1 camera
+holdouts are preserved; the six added camera models differ. Its
+[completed review](native-v39-1k-review.md) finds small, uncertain real mean
+gains and mixed synthetic results; no broad quality improvement is established.
 
 ```bash
 source scripts/env.sh

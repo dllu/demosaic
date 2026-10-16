@@ -59,5 +59,7 @@ finds2.34× training throughput with51% less CUDA allocation, but the matched
 grain and a10.12dB unseen primary loss. All41 logged observations match. Full427
 confirms a3.75dB photo deficit; fullGFX took19.90s and all ten RGB16 files verify.
 Neither a quality gain nor10-second inference is established. The full-resolution
-model remains the working reference. V39 now tests the six-source native
-extension separately, retaining V37's initialization, seed, batch and schedule.
+model remains the working reference. V39's
+[completed six-source native review](native-v39-1k-review.md) retains V37's
+initialization, seed, batch and schedule and finds small, uncertain real mean
+gains with mixed synthetic results. No decisive overall gain is established.
