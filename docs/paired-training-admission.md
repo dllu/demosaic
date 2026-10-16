@@ -46,5 +46,7 @@ discarded BF16 updates at B16/native256 with genuine unchanged pinned DINO;
 common initialization and portable FP16 reloads match exactly. The matched
 quality trial [completes its first1000-update review](paired-expansion-v53-v54-review.md):
 expanded photo PSNR+.09654dB with positive source interval, mixed real-camera
-scores and subtle GFX native differences. Both arms now resume their original
-4000-step schedules; no model promotion or convergence claim.
+scores and subtle GFX native differences. Both arms then finish their original
+[4000-step schedules](paired-expansion-v53-v54-4k-review.md). The early photo
+gain disappears; real-camera differences remain uncertain. The expanded corpus
+stays opt-in, with no model promotion or convergence claim.

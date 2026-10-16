@@ -1,5 +1,9 @@
 # Reviewed paired-data expansion: matched step1000 comparison
 
+The subsequent [complete4000-step review](paired-expansion-v53-v54-4k-review.md)
+finds that the early synthetic-photo advantage below is not sustained.
+The corpus remains opt-in; no model promotion follows from this first gate.
+
 The expanded corpus improves photo PSNR by+.09654dB[+.06749,+.13638] and
 SSIM by+.000471[+.000361,+.000572] over the matched control. Real-camera
 primary changes are mixed, with intervals crossing zero; native GFX differences

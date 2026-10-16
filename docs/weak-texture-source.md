@@ -64,14 +64,26 @@ are compatibility evidence, not a full-epoch proof or a model-quality result.
 [Prepared V55](../configs/dino-paired-weak-texture-b16-v55.yaml) keeps the V54
 reviewed83-ID corpus, identical V43 step2000 initializer, seed52/B16/LR3e-5/
 planned4000 schedule and all model/loss/noise/inference flags. Only the weak
-quota and run/notes differ. The current4000-step quality workflow runs in its
-unchanged frozen source. New-source CUDA/genuine-parent preflight must wait
-for that owner's actual exit; V55 quality training has not started.
+quota and run/notes differ. Both original4000 schedules are now
+[reviewed](paired-expansion-v53-v54-4k-review.md): the early expanded-photo
+advantage disappears and real-camera differences stay uncertain. The corpus
+remains opt-in; V55 uses a fixed V54 control to isolate the weak-source change,
+without claiming that the expanded corpus is globally preferred.
 [Queued engineering receipt](results/weak-texture-v55-gpu-queue.json): frozen
-8eea803 controller3940514 waits for the live4000 review owner before running
-the complete CUDA suite and two discarded genuine-parent updates per arm.
-This queues validation only; it does not launch V55 quality training or claim
-that pending GPU checks have passed.
+8eea803 controller3940514 waited for the4000 review owner's actual exit.
+The [actual validation](results/weak-texture-v55-gpu-validation.json) then passes
+472 CUDA tests in55.03s plus two discarded BF16 updates per arm with genuine
+unchanged DINO, equal initialization/common FP16 output and exact portable reload.
+
+[V55 training is live](results/weak-texture-v55-launch.json) after both prior
+owners exit and the4000 native review completes. The first unchanged batch
+matches the control hash exactly. This first gate stops at1000 updates on the
+original4000 schedule, recomputes both neural models and all baselines, and adds
+the [texture/flat evaluator](../scripts/evaluate_texture_candidates.py).
+It uses384 CPU-seeded carriers and64 flats, with native triplets and separate
+false spatial/band/peak energy measurements. Two exact-metric tests and a complete
+896-case CPU engineering smoke with an untrained tiny local model pass; that
+smoke supplies execution evidence only. V55 quality is not established yet.
 
 [Hybrid texture-acutance training research](https://arxiv.org/html/2404.07212v1)
 motivates separate texture checks; this code does not reproduce its dead-leaves
