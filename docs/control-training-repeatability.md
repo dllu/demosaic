@@ -40,4 +40,10 @@ The [actual launch receipt](results/control-replay-v57-launch.json) records the
 live controller, original source/config identities and matching logged batches.
 The first input hash matches exactly; the first CUDA loss differs by about
 1.80e-6. Its cause is not isolated, and this observation alone does not explain
-the eventual quality difference. The complete review is still running.
+the eventual quality difference. The [complete review](control-replay-v57-review.md)
+now finds replay−original photo −0.04346 dB, known primary −0.05946 dB and
+nearly unchanged unseen primary. All 41 logged inputs, model configuration,
+source bundle and final RNG states match, but restoration weights differ.
+This observed spread makes small single-trajectory claims less decisive; it
+does not estimate seed variance or prove the cause of any earlier difference.
+All 46 native triplets and eight full RGB16 outputs verify. No model promotion.
