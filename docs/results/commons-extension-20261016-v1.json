@@ -1,0 +1,94 @@
+{
+  "status": "Complete8x extension, frozen and available for a separate future training experiment; active V32/V33/V34 recipes unchanged.",
+  "selection": {
+    "base_sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a",
+    "since": "2026-10-15T23:44:50+00:00",
+    "source": "/mnt/external/qi",
+    "factor": 8,
+    "min_size": 256,
+    "max_pixels": 120000000
+  },
+  "selection_sha256": "8829bbbe8b51019ef3b5cb6daa4aebdb8e4823f4ea6a630b6e3cf3d35e6e1870",
+  "audit": {
+    "base_manifest": "/mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl",
+    "base_sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a",
+    "addition_manifest": "/mnt/external/demosaic/commons-extension-20261016-v1/prepared8/manifest.jsonl",
+    "addition_sha256": "0c5053362b921d79de33d491f8afba33bfa0ce172d60da5481d6cb0479005322",
+    "base_counts": {
+      "train": 40170,
+      "val": 2303,
+      "test": 2255,
+      "excluded": 4
+    },
+    "counts": {
+      "train": 41978,
+      "val": 2303,
+      "test": 2255,
+      "excluded": 6,
+      "reserved": 196
+    },
+    "added_train": 1808,
+    "new_reserved": 196,
+    "new_excluded": 2,
+    "skipped_existing_ids": [],
+    "cache": {
+      "computed": 46738,
+      "reused": 0
+    },
+    "max_hamming": 8,
+    "min_correlation": 0.99,
+    "verified_union_edges": [
+      {
+        "first": "3b40ad51e1438ba8d1099741366960d835878cac",
+        "second": "446182eb4468c3f6ff842d5102574674dfb9b2b4",
+        "method": "dihedral-dhash256-correlation",
+        "hamming": 1,
+        "correlation": 0.9978458881378174,
+        "orientation": 0
+      },
+      {
+        "first": "3f986a0e31461f126fafb6764c4df42bfddf1c6a",
+        "second": "787117b3f5d86da6016192f5213c2eb7e1a00c66",
+        "method": "dihedral-dhash256-correlation",
+        "hamming": 0,
+        "correlation": 0.99989914894104,
+        "orientation": 6
+      }
+    ],
+    "policy": "Every existing source/split preserved. New groups linked to any existing source excluded. New val/test buckets reserved; active evaluation membership unchanged. New-only duplicate groups retain one source, preferring a reserved bucket.",
+    "limitation": "Near-duplicate screening, not complete scene recognition: arbitrary crops and different viewpoints can remain.",
+    "manifest_sha256": "38ac5fc61892ee31ddf841ad2b06ebf5ec68b6cb2196b4f7aa97b49775cbfb78"
+  },
+  "implementation": {
+    "pid": 121046,
+    "process_started_epoch": 1792112967.73,
+    "files": {
+      "scripts/expand_commons.py": {
+        "sha256": "f6dd3d014d6584c41347f9a268f7db3fed2f6f34f8f320d0e22eec963cfe10e5",
+        "mtime_before_process_start": true
+      },
+      "src/demosaic/audit.py": {
+        "sha256": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d",
+        "mtime_before_process_start": true
+      },
+      "src/demosaic/prepare.py": {
+        "sha256": "e4c0733bb260c289b3ce8aaf5f393abc5919d8d81cdcf462b70032d790429712",
+        "mtime_before_process_start": true
+      },
+      "src/demosaic/color.py": {
+        "sha256": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+        "mtime_before_process_start": true
+      }
+    },
+    "selection_sha256": "8829bbbe8b51019ef3b5cb6daa4aebdb8e4823f4ea6a630b6e3cf3d35e6e1870"
+  },
+  "verification": "All44732 original records preserved field-for-field; existing2303 val and2255 test records exactly identical. Published manifest SHA verified. Fingerprint stage verified cache SHA256 on all46738 first-seen prepared caches.",
+  "standing_capture_metadata_sanity_check": {
+    "sources": 46738,
+    "capture_metadata_present": 42487,
+    "matches": [],
+    "errors": [],
+    "scope": "Read-only Commons header metadata check for explicit standing capture stems or GFX100S on2023-12-31. Not visual scene recognition; metadata can be absent. No training or scoring on GFX/reference pixels."
+  },
+  "tests": "260 passed in32.71s including4 extension tests; Ruff passed. Near-duplicate fixtures cover protected split anchoring/bridges, rotated duplicates, reserved buckets and changed cached pixels."
+}

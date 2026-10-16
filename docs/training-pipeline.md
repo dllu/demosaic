@@ -147,3 +147,12 @@ with the original table construction at batch16 (two alternating runs each,
 same6.94GB allocation). Full validation including the native4 extension and
 complete-manifest freeze gate now passes **256 tests**. Model quality remains
 under development; these software/throughput checks do not establish it.
+
+The completed [V32/V33 lower-LR mixture review](low-lr-paired-v32-v33-review.md)
+uses batch16 and the cached grid with the original8× data. V32 improves full427
+photo PSNR by.17289dB over V30; V33 improves real rendered means while giving up
+unseen measured-CFA accuracy versus V30. V33 continues only to its next review
+gate. The [first Commons extension](commons-download.md#first-prepared-extension)
+adds1,808 eligible training sources in a separate frozen manifest. Neither this
+extension nor partial4× preparation has been admitted to these matched trials.
+The new ingestion/audit tests bring the full suite to **260 passing tests**.

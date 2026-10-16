@@ -6,13 +6,13 @@ not just software that executes. This checklist records the evidence required.
 | Requirement | Evidence needed | Current state |
 | --- | --- | --- |
 | Modern method and DINOv3 recommendation | Primary-source research, architecture rationale, licensed pretrained backbone and ablation | Official pinned weights; matched 20k-step ablation complete; small positive gain on 427 photos, not SOTA evidence |
-| Free, broad training data | Source attribution manifest, content-grouped held-out split, real corpus training | 44732 prepared/audited sources: 40170 train / 2303 val / 2255 untouched test / 4 excluded; V6 completed 100k steps. A separate 32-scene licensed paired RAW subset is verified; V11 mixed and V15/V16 refiner training completed 5k-step reviews. Complete scene separation is not guaranteed |
+| Free, broad training data | Source attribution manifest, content-grouped held-out split, real corpus training | Active frozen corpus: 40,170 train / 2,303 val / 2,255 untouched test / 4 excluded. A separately audited extension adds 1,808 train sources and reserves 196 new holdout sources; current trials remain unchanged. Separate licensed paired/native RAW train subsets are verified. Near-duplicate screening is not complete scene recognition |
 | 8×8 binning with additional precision | Linear-light float averaging and >8-bit cache, numerical tests | Implemented and tested; all 44732 eligible licensed sources prepared |
-| Geometry, optical blur, exposure, synthetic fine detail | Executable data augmentation and inspected samples | Implemented; augmentation and artifact review ongoing |
+| Geometry, optical blur, exposure, synthetic fine detail | Executable data augmentation and inspected samples | Implemented, including optional 4×→geometry/PSF→2× for Commons/native targets; full Commons 4× preparation and matched trained-quality comparison pending |
 | Physical Bayer noise across cameras and ISO | Electron-domain Poisson/read noise, metadata and tests | Moment-tested simulation, conservative single-image estimates on three cameras; dedicated calibration still missing |
 | 16-bit photos and personal cameras | Native RAW metadata/CFA handling, 16-bit output, read-only photo source, real-camera examples | All four cameras loaded; GFX100S 102 MP RGB16 outputs and other-camera crops verified; final quality pending |
-| State-of-the-art quality, substantially better than RawNIND | Reproducible held-out numerical results and qualitative comparisons, including clipping boundaries, texture and shadows | Unmet. V16's known/unseen real measured-CFA PSNR is 53.27466/53.07857, still 0.79/0.48 dB behind RawNIND. A fixed eight-step stabilized RGB Gaussian prior reaches 53.81110/53.84615: −0.26/+0.28 dB versus RawNIND, with bootstrap intervals including zero and lower SSIM. GFX fence detail improves, but foliage softness and colored dots remain. See [the comparator review](stabilized-gaussian-review.md). Full 427 synthetic V16 PSNR/SSIM is 31.48800/0.923018; V6 retains the stronger synthetic PSNR. V17–V27 and independent gray-prior controls are unpromoted. Final quality/protected-test evaluation remain. |
-| 100 MP possible, target <10 s on GB10 | Actual 100 MP run, memory and timing; quality takes priority if speed misses | V6, V15 and V16 full 102 MP RGB16/ICC-sRGB16 outputs verified. V6 idle warmed 100 MP restoration 12.77 s; V16 new-pair 102 MP restoration 36.39 s with default FP32 refinement and 26.81 s with optional validated FP16 refinement, single successive shared-machine runs; 0.840/0.708 GB peak CUDA (not total system memory). The 10-second target and final quality/speed gate remain unmet |
+| State-of-the-art quality, substantially better than RawNIND | Reproducible held-out numerical results and qualitative comparisons, including clipping boundaries, texture and shadows | Unmet. V32 step1000 full427 synthetic PSNR/SSIM is 33.95672/.950119, +.17289 dB versus V30. V33 improves our rendered real-development means, but channel-calibrated RawNIND leads all three unseen-camera means. GFX foliage remains soft, mesh irregular and colored points remain. [Matched metrics and native crops](low-lr-paired-v32-v33-review.md). Protected-final remains unscored; matched DINO ablation of this architecture remains |
+| 100 MP possible, target <10 s on GB10 | Actual 100 MP run, memory and timing; quality takes priority if speed misses | V30/V32/V33/RawNIND full 102 MP RGB16/ICC-sRGB16 outputs and all eight file hashes verified. V32/V33 restoration took 35.42/35.77 s, tile512/overlap64/batch4, successive shared-machine runs excluding decode/load/render/encoding. The 10-second target and final quality/speed gate remain unmet |
 | Python/PyTorch/uv and shared-machine care | Locked environment, bounded memory, resumable training, measured GB10 operation | Implemented and verified; CPU restart equivalence and GB10 runs pass |
 | Diary, concise README, detailed docs | Current reproducible commands, experiment records and limitations | Present and being updated; comparator reports include native exact-GT synthetic triplets and independently labeled real references, matched foliage/fence, source/checkpoint hashes and noise/display settings |
 | Commit and push meaningful progress | Git commits and successful remote pushes | Meaningful progress is committed and pushed regularly; see the Git history and diary |
@@ -20,34 +20,21 @@ not just software that executes. This checklist records the evidence required.
 Photo directories are read-only. All writes, downloads, temporary files and caches
 must stay in this repository or `/mnt/external`. Do not modify `PROMPT.md`.
 
-V28's [completed 5k review](pretrained-rgb-v28-5k-review.md) reaches
-32.97457/.940248 on the complete 427-photo synthetic evaluation, +1.48657 dB
-over V16 (95% source-bootstrap interval [+1.35947,+1.58359]). Real primary
-PSNR is 54.11062/53.65897; small advantages over RawNIND have intervals including
-zero, and rendered quality/SSIM still trail it. The architecture's earlier
-step1000 full 102 MP RGB16 restoration took 24.88s; new weights still need a
-fresh full-frame review. [V29 step1000](stabilized-rgb-v29-review.md) improves
-the matched 16-photo screen by 1.32563 dB and known-camera scores, with mixed
-unseen-camera results. Its clipping-calibration trial, full evaluation,
-protected-final review and matched DINO ablation remain. Quality/speed gates
-are unmet. [More Commons originals](commons-download.md) are downloading in the
-background, with a 512 GiB reserve; active manifests remain frozen.
+The [completed V32/V33 matched review](low-lr-paired-v32-v33-review.md) includes
+real development, all 427 synthetic photographs, native exact-GT triplets and
+full-frame GFX foliage/fence comparisons. Both arms use the same V30 EMA with
+fresh optimizers, batch 16 and LR 3e-5. V32 is the stronger synthetic reference;
+V33 continues to its next step-2000 development gate. This does not establish
+broad real-camera superiority or a decisive qualitative gain.
 
-[V30's calibrated first1k review](anchored-stabilized-rgb-v30-review.md) improves
-the matched V29 real primary means to54.25796/53.75824 and synthetic16 to
-34.81952/.957844. Known RawNIND superiority remains uncertain and unseen RGB
-PSNR/SSIM still trail it. Full427 and final quality remain unproven. The
-[training pipeline changes](training-pipeline.md) address interpolation after
-binning, discarded Commons loading and measured batch-size selection; 248
-software tests pass. These are progress toward the goal, not completion evidence
-for its unmet quality/speed requirements.
-
-[V31's batch16 continuation](anchored-rgb-b16-v31-review.md) improves the
-synthetic16 screen to35.08524/.958737 but regresses known/unseen real primary
-means to54.13644/53.54885, so V30 remains the quality reference. Fresh matched
-lower-LR/data-mixture trials are underway. The native4×→augmentation→2× cache
-now retains exactly53 captures/31 training scenes, and complete Commons4×
-membership must pass a freeze gate before training. [Reusing the invariant
-Poisson grid](expectation-grid-performance.md) preserves numeric tables and adds
-about11% measured batch16 training throughput. All256 software tests pass;
-the requested quality, protected-final review and10s/100MP gates remain unmet.
+The [training pipeline](training-pipeline.md) implements augmentation before
+the last reduction and avoids discarded Commons batches. A batch sweep selects
+16 for throughput/memory balance. [Invariant Poisson-grid reuse](expectation-grid-performance.md)
+adds about 11% measured batch-16 throughput with bitwise-identical tables.
+Full 4× Commons preparation must pass a complete-membership gate before V34
+trains; native 4× targets already retain the same 53 captures / 31 scenes.
+[More Commons originals](commons-download.md) continue downloading with a 512 GiB
+reserve. Their first separately frozen extension adds 1,808 training sources;
+active experiments and all existing validation/test assignments stay fixed.
+All **260 software tests pass**. Trained quality, protected-final evaluation
+and the 10-second speed gate remain outstanding.

@@ -120,3 +120,10 @@ Historical DSCF3842/DSCF3883 results remain unchanged: [V16 receipt](results/gfx
 [earlier crop-only receipt](results/gfx-20231231-native.json).
 The small GFX crops are from the user's own photographs, with permission
 recorded in `PROMPT.md`.
+
+The [V32/V33 review](low-lr-paired-v32-v33-review.md#standing-gfx-test-and-full-102-mp-files)
+adds the same four native regions from complete blended102MP restorations.
+All eight V30/V32/V33/RawNIND RGB16 files were verified. V32/V33 took35.42/35.77s
+in that successive shared-machine run; foliage remains soft and mesh irregular.
+The README now shows the V33 foliage/fence triplets. ISO100 remains a separate
+qualitative reference, not GT.

@@ -645,3 +645,23 @@ coarse flat residuals are nearly unchanged. Neither is promoted. See
 A separate [frozen Gaussian-prior probe](gaussian-prior-probe.md) reduces exact
 flat sigma to 0.00002598 versus RawNIND 0.00008124 at level 0.01, with lower bias,
 but does not establish texture preservation or a photographic quality gain.
+
+The [V32/V33 matched lower-LR review](low-lr-paired-v32-v33-review.md) completes
+real development, all 427 photographic synthetic sources and full 102 MP GFX
+output at step 1000. Both use batch 16, the same V30 EMA initializer, seed and
+LR schedule; all 27 logged same-domain batch intersections match. V32 reaches
+33.95672/.950119 photographic PSNR/SSIM, +.17289 dB over V30. V33 improves our
+real rendered means with 50% paired batches, while losing .12672 dB unseen
+measured-CFA PSNR versus V30. Channel-calibrated RawNIND still leads all three
+unseen means. Native triplets show soft foliage, imperfect mesh and residual
+colored points. V33 continues only to the next step-2000 review gate.
+
+The [training pipeline](training-pipeline.md) selects domains before loading,
+supports 4× binning → geometry/PSF → 2× reduction for Commons and native targets,
+and uses an actual mixed-training batch sweep. Batch 16 gives about 16% more
+images/s than batch 4; invariant Poisson-grid caching adds about 11% at batch 16
+without changing tables. The complete 4× Commons corpus is still preparing;
+partial output cannot enter V34. The [first downloaded-data extension](commons-download.md#first-prepared-extension)
+adds 1,808 training sources in a separate frozen 8× manifest, preserving all old
+records and evaluation membership. No current trial silently changes data.
+All 260 software tests pass; quality and speed goals remain open.

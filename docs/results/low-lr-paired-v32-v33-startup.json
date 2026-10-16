@@ -1,5 +1,5 @@
 {
-  "status": "V32 first1000 training complete; V33 paired50 training. Matched development evaluation follows both. No quality result yet.",
+  "status": "Both first1000 arms and real/full427/full102MP reviews complete. V33 continuation to2000 runs separately with unchanged original planned3000 schedule.",
   "workflow": "/mnt/external/demosaic/runs/paired-fraction-v32-v33-workflow.json",
   "log": ".cache/v32-v33-workflow.log",
   "parent": {
@@ -31,28 +31,16 @@
       "commons": 0.25
     }
   },
-  "shared_observation_check": "After both arms, all logged intersections selecting the same domain must hash identically before evaluating.",
+  "shared_observation_check": {
+    "updated_utc": "2026-10-16T01:00:48.798200+00:00",
+    "status": "completed",
+    "shared_logged_observations": 27,
+    "total_logged_each": 41,
+    "source_sha256": "e40755f17b21f3b0a7ce06a41564c52ff76ac94b7203e69e19a825143cdcf239",
+    "hashes_equal": true,
+    "scope": "All27 logged same-domain intersections match;41 logged observations per arm. Unlogged observations not separately hashed."
+  },
   "datasets": "Original8x; protected memberships unchanged. GFX/final never train or transform fit.",
   "both_runtime_source_and_initializer_equal": true,
-  "current_shared_logged_prefix": {
-    "steps": [
-      1,
-      25,
-      75,
-      100,
-      175,
-      200,
-      225,
-      250,
-      275,
-      300,
-      325,
-      350,
-      375,
-      400
-    ],
-    "count": 14,
-    "hashes_equal": true,
-    "scope": "Current V33 prefix only; complete intersection is checked again after both arms finish."
-  }
+  "completed_review": "docs/results/low-lr-paired-v32-v33-1k-review.json"
 }
