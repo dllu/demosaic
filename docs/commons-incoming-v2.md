@@ -40,3 +40,19 @@ Review its outcomes before publishing any separate frozen training extension.
 Prepare matching4× caches for the current augmentation path and preserve the
 existing validation/test identities before a new matched model trial. Running
 and completed V47/V48 recipes retain their original40170-source Commons manifest.
+
+## Completed8× review and4× preparation
+
+The8× producer finishes with11,949 caches and three preparation failures.
+Protected screening clears11,761 and quarantines188; all flags stay excluded.
+Duplicate auditing admits10,558 new training images, reserves1,199 new holdouts
+and excludes four duplicates. The separate reviewed8× corpus has52,536 training
+images,2,303 validation and2,255 test images; old rows and evaluation membership
+are exact. Relative to the current40,170 training recipe, this also includes
+the earlier1,808-image extension. [Reviewed freeze and4× launch](results/commons-incoming-v2-reviewed8.json).
+
+CPU-only matching4× preparation has started for only the10,558 newly admitted
+images, reusing the previous46,536 active4× caches. All new cache SHA256s will
+verify before the separate4× freeze. Its status is `rebin4-workflow.json` under
+the quarantine root. The data are for a future matched trial; V49 and current
+models keep the original data. The finite screening limitations still apply.
