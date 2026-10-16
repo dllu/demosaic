@@ -1,0 +1,847 @@
+{
+  "kind": "reviewed-public-raw-admission-v1",
+  "status": "reviewed",
+  "quarantine_manifest": "/mnt/external/demosaic/raw-pixls-quarantine-v1/manifest.json",
+  "quarantine_manifest_sha256": "84ed98324de7fb7c19fec95934ba9357c176eba8371c2db53f8888011846566e",
+  "acquisition": "/mnt/external/demosaic/references/raw-pixls-pilot-v1/manifest.json",
+  "acquisition_sha256": "004c454871c1faeaaea52c72c2946ed2dcce72d528641cfc28919b1005e2c445",
+  "existing_corpus_screen": {
+    "path": "/mnt/external/demosaic/raw-pixls-quarantine-v1/scene-screen.json",
+    "sha256": "d981625d8b534107437e25f040b7d7298ce1f36b27f9e3c583613b272303bbba"
+  },
+  "protected_scene_screen": {
+    "path": "/mnt/external/demosaic/audits/public-raw-protected-scenes-v2/result.json",
+    "sha256": "fee2581dc98fd67765844b824e9c1d2d387332f975f7b0402277bf2d1c8c9246"
+  },
+  "manual_review": {
+    "path": "/mnt/external/demosaic/audits/public-raw-protected-scenes-v2/manual-review.json",
+    "sha256": "a0a7610fc8bc4a987a1852df6189590633a0f96f649fc55639b5ab81d5477e50",
+    "purpose": "Data separation and source quality only; no model/final performance scoring.",
+    "screen": "/mnt/external/demosaic/audits/public-raw-protected-scenes-v2/result.json",
+    "screen_sha256": "fee2581dc98fd67765844b824e9c1d2d387332f975f7b0402277bf2d1c8c9246",
+    "reviewed_protected_references": 42,
+    "reviewed_public_sources": 9,
+    "overview": "/mnt/external/demosaic/audits/public-raw-protected-scenes-v2/protected-overview.png",
+    "overview_sha256": "a9b00c4498fab491840a8a8899d214942b9eb438b7aed6b0d5deb26714cdd450",
+    "decisions": [
+      {
+        "file_id": 3204,
+        "decision": "different-scenes",
+        "protected_indices": [
+          0,
+          1
+        ],
+        "reason": "River ferry/sky versus stacked plates/tabletop. Broad dHash OR gate flags smooth horizontal structure; correlations <=.531 and full/partial views show distinct scenes."
+      }
+    ],
+    "content": "Public sources are outdoor landscapes/architecture or the rejected chart. Protected development/final sources show distinct indoor objects/artwork or a distinct close-up fern; the cached train/platform is distinct. All42 reference overviews and all9 candidate overviews inspected; flagged ferry also viewed at full binned-preview size.",
+    "limitations": "Manual review plus finite thumbnail/crop identity screening; arbitrary viewpoints or crops can still evade detection. No guarantee of complete scene recognition."
+  },
+  "source_quality": {
+    "policy": "Exclude chart and sources with >0.1% bin4 pixels having any camera channel >=65500/65535. Selection uses source data only, before any new model performance.",
+    "rows": [
+      {
+        "file_id": 2788,
+        "fraction_any_camera_channel_at_least65500": 2.1034475505353273e-06
+      },
+      {
+        "file_id": 2979,
+        "fraction_any_camera_channel_at_least65500": 4.679603169651213e-06
+      },
+      {
+        "file_id": 3204,
+        "fraction_any_camera_channel_at_least65500": 0.0
+      },
+      {
+        "file_id": 3478,
+        "fraction_any_camera_channel_at_least65500": 0.20395255566535606
+      },
+      {
+        "file_id": 3652,
+        "fraction_any_camera_channel_at_least65500": 3.4005647657963033e-07
+      },
+      {
+        "file_id": 4213,
+        "fraction_any_camera_channel_at_least65500": 0.0
+      },
+      {
+        "file_id": 4493,
+        "fraction_any_camera_channel_at_least65500": 0.0
+      },
+      {
+        "file_id": 6231,
+        "fraction_any_camera_channel_at_least65500": 2.103443126053036e-06
+      },
+      {
+        "file_id": 7872,
+        "fraction_any_camera_channel_at_least65500": 0.03582909699178885
+      }
+    ],
+    "sony3478_detail": {
+      "top_third_green_phase_saturation_fractions": [
+        0.5212123273879379,
+        0.521015398157071
+      ],
+      "top_third_blue_saturation_fraction": 0.1885463314626911,
+      "libraw_check": "Clipped-sky color appears in independent LibRaw rendering as well; source is not an appropriate clean unclipped RGB reference."
+    }
+  },
+  "approved": [
+    {
+      "id": "35109fc20a849026c43c47674902431ef5a2d54b09b616995263dc75df17912f",
+      "file_id": 2979,
+      "split": "quarantine",
+      "source": {
+        "file_id": 2979,
+        "filename": "2979.raf",
+        "url": "https://raw.pixls.us/getfile.php/2979/nice/Fujifilm%20-%20GFX%2050R%20-%2014bit%2014bit%20compressed%20%283:2%29.raf",
+        "publisher_checksum": {
+          "type": "SHA-256",
+          "value": "35109fc20a849026c43c47674902431ef5a2d54b09b616995263dc75df17912f"
+        },
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "make": "Fujifilm",
+        "model": "GFX 50R",
+        "catalog_mode": "14bit 14bit compressed (3:2)",
+        "catalog_row": [
+          "Fujifilm",
+          "GFX 50R",
+          "14bit 14bit compressed (3:2)",
+          57.23,
+          "",
+          "<a href='https://creativecommons.org/publicdomain/zero/1.0/' title='Creative Commons 0 - Public Domain' class='cc'>co</a>",
+          "2019-01-25",
+          "<a href='https://raw.pixls.us/getfile.php/2979/nice/Fujifilm - GFX 50R - 14bit 14bit compressed (3:2).raf'>Fujifilm - GFX 50R - 14bit 14bit compressed (3:2).raf</a><div class='checksumdata'><span title='sha256 Checksum'>35109fc20a849026c43c47674902431ef5a2d54b09b616995263dc75df17912f</span>&nbsp;(49.73MB)</div>",
+          "<a target='_blank' href='https://raw.pixls.us/getfile.php/2979/exif/2019-01-24-14-03-03_DSCF1317_c9ab436f1532b532976eec431f0e4db7e9f2b8e2.raf.exif.txt'>exifdata</a>"
+        ],
+        "metadata_path": "/mnt/external/demosaic/references/raw-pixls-pilot-v1/metadata/exif-2979.txt",
+        "metadata_url": "https://raw.pixls.us/getfile.php/2979/exif/2019-01-24-14-03-03_DSCF1317_c9ab436f1532b532976eec431f0e4db7e9f2b8e2.raf.exif.txt",
+        "metadata_sha256": "ed61c48b68cb9d62b164ca4301adefca05804c2902d9184a2e83c617abe15189",
+        "scouted_iso": 100,
+        "metadata_origin_path": "/mnt/external/demosaic/references/raw-pixls/exif-2979.txt",
+        "bytes": 52148704,
+        "sha256": "35109fc20a849026c43c47674902431ef5a2d54b09b616995263dc75df17912f",
+        "path": "/mnt/external/demosaic/references/raw-pixls-pilot-v1/files/2979.raf"
+      },
+      "raw_shape": [
+        6208,
+        8280
+      ],
+      "raw_metadata": {
+        "source": "/mnt/external/demosaic/references/raw-pixls-pilot-v1/files/2979.raf",
+        "camera": "GFX 50R",
+        "pattern": "RGGB",
+        "black_levels": [
+          65.0,
+          65.0,
+          65.0,
+          65.0
+        ],
+        "white_levels": [
+          15872.0,
+          15872.0,
+          15872.0,
+          15872.0
+        ],
+        "white_balance": [
+          1.6357615894039734,
+          1.0,
+          1.718543046357616
+        ],
+        "camera_to_srgb": [
+          [
+            1.474794070769569,
+            -0.19416920770899534,
+            -0.28062486306057394
+          ],
+          [
+            -0.23507562604513235,
+            1.6967978053199106,
+            -0.4617221792747782
+          ],
+          [
+            -0.0026595712410704,
+            -0.4699886543873294,
+            1.4726482256283997
+          ]
+        ],
+        "flip": 0,
+        "iso": 100,
+        "adc_white_level": 15872.0
+      },
+      "exif": {
+        "SourceFile": "/mnt/external/demosaic/references/raw-pixls-pilot-v1/files/2979.raf",
+        "DateTimeOriginal": "2019:01:24 14:03:03",
+        "Artist": "DANIEL LAWRENCE LU",
+        "Copyright": ""
+      },
+      "caches": [
+        {
+          "path": "/mnt/external/demosaic/raw-pixls-quarantine-v1/bin4/35109fc20a849026c43c47674902431ef5a2d54b09b616995263dc75df17912f.npy",
+          "sha256": "75258a59d867c8d70100ca445f41385f76e8773d30b32da3fc7924c86cce8a7f",
+          "shape": [
+            1550,
+            2068,
+            3
+          ],
+          "dtype": "uint16",
+          "bin_factor": 4,
+          "color_space": "linear-camera-RGB",
+          "unique_codes": 33926
+        },
+        {
+          "path": "/mnt/external/demosaic/raw-pixls-quarantine-v1/bin8/35109fc20a849026c43c47674902431ef5a2d54b09b616995263dc75df17912f.npy",
+          "sha256": "f4a5bd79e2c4e0f3108ab70ef772d6b2fd7a732b6198f9f4576053d71c6c8466",
+          "shape": [
+            774,
+            1033,
+            3
+          ],
+          "dtype": "uint16",
+          "bin_factor": 8,
+          "color_space": "linear-camera-RGB",
+          "unique_codes": 28680
+        }
+      ],
+      "screen_cache": "/mnt/external/demosaic/raw-pixls-quarantine-v1/screen-2979.npy",
+      "screen_sha256": "c41cf61d14b93c882d2512c3d06a3149857bbbcf631e730082ba64a59025bda8",
+      "preview": "/mnt/external/demosaic/raw-pixls-quarantine-v1/preview-2979.png",
+      "preview_sha256": "395c254122ee0e6616a8fc814ac496f9a0f8d60a96941dddea0bf2b7bfbd59a3",
+      "preview_display_exposure": 1.0
+    },
+    {
+      "id": "a71f98405e9e9c1e4ac0f2d2e6c52d65daae3234fc0a9f6eed2a84ee4ce794ad",
+      "file_id": 3204,
+      "split": "quarantine",
+      "source": {
+        "file_id": 3204,
+        "filename": "3204.dng",
+        "url": "https://raw.pixls.us/getfile.php/3204/nice/Leica%20-%20Q2%20-%2014bit%2014bit%20uncompressed%20%283:2%29.DNG",
+        "publisher_checksum": {
+          "type": "SHA-256",
+          "value": "a71f98405e9e9c1e4ac0f2d2e6c52d65daae3234fc0a9f6eed2a84ee4ce794ad"
+        },
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "make": "Leica",
+        "model": "Q2",
+        "catalog_mode": "14bit 14bit uncompressed (3:2)",
+        "catalog_row": [
+          "Leica",
+          "Q2",
+          "14bit 14bit uncompressed (3:2)",
+          47.44,
+          "",
+          "<a href='https://creativecommons.org/publicdomain/zero/1.0/' title='Creative Commons 0 - Public Domain' class='cc'>co</a>",
+          "2019-06-02",
+          "<a href='https://raw.pixls.us/getfile.php/3204/nice/Leica - Q2 - 14bit 14bit uncompressed (3:2).DNG'>Leica - Q2 - 14bit 14bit uncompressed (3:2).DNG</a><div class='checksumdata'><span title='sha256 Checksum'>a71f98405e9e9c1e4ac0f2d2e6c52d65daae3234fc0a9f6eed2a84ee4ce794ad</span>&nbsp;(83.16MB)</div>",
+          "<a target='_blank' href='https://raw.pixls.us/getfile.php/3204/exif/L1000750.DNG.exif.txt'>exifdata</a>"
+        ],
+        "metadata_path": "/mnt/external/demosaic/references/raw-pixls-pilot-v1/metadata/exif-3204.txt",
+        "metadata_url": "https://raw.pixls.us/getfile.php/3204/exif/L1000750.DNG.exif.txt",
+        "metadata_sha256": "7c91a6566d2af55b519fc9b6add4c790ac121a4ffdb2811be843121ccc58b175",
+        "scouted_iso": 100,
+        "metadata_origin_path": "/mnt/external/demosaic/references/raw-pixls/exif-3204.txt",
+        "bytes": 87194624,
+        "sha256": "a71f98405e9e9c1e4ac0f2d2e6c52d65daae3234fc0a9f6eed2a84ee4ce794ad",
+        "path": "/mnt/external/demosaic/references/raw-pixls-pilot-v1/files/3204.dng"
+      },
+      "raw_shape": [
+        5632,
+        8392
+      ],
+      "raw_metadata": {
+        "source": "/mnt/external/demosaic/references/raw-pixls-pilot-v1/files/3204.dng",
+        "camera": "LEICA Q2",
+        "pattern": "GBRG",
+        "black_levels": [
+          512.0,
+          512.0,
+          512.0,
+          512.0
+        ],
+        "white_levels": [
+          16383.0,
+          16383.0,
+          16383.0,
+          16383.0
+        ],
+        "white_balance": [
+          2.041015625,
+          1.0,
+          1.48828125
+        ],
+        "camera_to_srgb": [
+          [
+            1.2486980365881155,
+            -0.06457115493095107,
+            -0.18412688165716443
+          ],
+          [
+            -0.09512700077260573,
+            1.1885042279444495,
+            -0.09337722717184385
+          ],
+          [
+            0.013758207840115224,
+            -0.29287099976587055,
+            1.2791127919257554
+          ]
+        ],
+        "flip": 0,
+        "iso": 100,
+        "adc_white_level": 16383.0
+      },
+      "exif": {
+        "SourceFile": "/mnt/external/demosaic/references/raw-pixls-pilot-v1/files/3204.dng",
+        "DateTimeOriginal": "2019:04:14 08:20:41",
+        "OriginalFileName": "L1000750.DNG",
+        "Artist": "",
+        "Copyright": ""
+      },
+      "caches": [
+        {
+          "path": "/mnt/external/demosaic/raw-pixls-quarantine-v1/bin4/a71f98405e9e9c1e4ac0f2d2e6c52d65daae3234fc0a9f6eed2a84ee4ce794ad.npy",
+          "sha256": "d01af5973088a213b620bcdcea3c6e3f0b7b2e480048a7aea82b0485e3404459",
+          "shape": [
+            1406,
+            2096,
+            3
+          ],
+          "dtype": "uint16",
+          "bin_factor": 4,
+          "color_space": "linear-camera-RGB",
+          "unique_codes": 32516
+        },
+        {
+          "path": "/mnt/external/demosaic/raw-pixls-quarantine-v1/bin8/a71f98405e9e9c1e4ac0f2d2e6c52d65daae3234fc0a9f6eed2a84ee4ce794ad.npy",
+          "sha256": "1f31a9bbc5894fb5aa480746ae99184d252bc2425442e65b882f0e5f7e00bd4a",
+          "shape": [
+            702,
+            1047,
+            3
+          ],
+          "dtype": "uint16",
+          "bin_factor": 8,
+          "color_space": "linear-camera-RGB",
+          "unique_codes": 22570
+        }
+      ],
+      "screen_cache": "/mnt/external/demosaic/raw-pixls-quarantine-v1/screen-3204.npy",
+      "screen_sha256": "61cb8ad8070538681a3fe6fee60d108762a56bc7575e805e7dfce9cb7bfad39c",
+      "preview": "/mnt/external/demosaic/raw-pixls-quarantine-v1/preview-3204.png",
+      "preview_sha256": "a2fb71635064f3b6eec7d09f06c56d07d0eb991f4d95671aff278f786d86740e",
+      "preview_display_exposure": 1.0
+    },
+    {
+      "id": "8b8a969617705d9997ee0461354c99905b964ae08b820cd24c6d4e440461e24c",
+      "file_id": 3652,
+      "split": "quarantine",
+      "source": {
+        "file_id": 3652,
+        "filename": "3652.rw2",
+        "url": "https://raw.pixls.us/getfile.php/3652/nice/Panasonic%20-%20DC-S1R%20-%203:2.RW2",
+        "publisher_checksum": {
+          "type": "SHA-256",
+          "value": "8b8a969617705d9997ee0461354c99905b964ae08b820cd24c6d4e440461e24c"
+        },
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "make": "Panasonic",
+        "model": "DC-S1R",
+        "catalog_mode": "3:2",
+        "catalog_row": [
+          "Panasonic",
+          "DC-S1R",
+          "3:2",
+          47,
+          "",
+          "<a href='https://creativecommons.org/publicdomain/zero/1.0/' title='Creative Commons 0 - Public Domain' class='cc'>co</a>",
+          "2019-12-31",
+          "<a href='https://raw.pixls.us/getfile.php/3652/nice/Panasonic - DC-S1R - 3:2.RW2'>Panasonic - DC-S1R - 3:2.RW2</a><div class='checksumdata'><span title='sha256 Checksum'>8b8a969617705d9997ee0461354c99905b964ae08b820cd24c6d4e440461e24c</span>&nbsp;(66.64MB)</div>",
+          "<a target='_blank' href='https://raw.pixls.us/getfile.php/3652/exif/P1000077.RW2.exif.txt'>exifdata</a>"
+        ],
+        "metadata_path": "/mnt/external/demosaic/references/raw-pixls-pilot-v1/metadata/exif-3652.txt",
+        "metadata_url": "https://raw.pixls.us/getfile.php/3652/exif/P1000077.RW2.exif.txt",
+        "metadata_sha256": "b379146ad2efa106d8023f7eac237a620c264eb3ee0a25aafadafa03ebc14641",
+        "scouted_iso": 100,
+        "metadata_origin_path": "/mnt/external/demosaic/references/raw-pixls/exif-3652.txt",
+        "bytes": 69873664,
+        "sha256": "8b8a969617705d9997ee0461354c99905b964ae08b820cd24c6d4e440461e24c",
+        "path": "/mnt/external/demosaic/references/raw-pixls-pilot-v1/files/3652.rw2"
+      },
+      "raw_shape": [
+        5620,
+        8392
+      ],
+      "raw_metadata": {
+        "source": "/mnt/external/demosaic/references/raw-pixls-pilot-v1/files/3652.rw2",
+        "camera": "DC-S1R",
+        "pattern": "GBRG",
+        "black_levels": [
+          510.0,
+          510.0,
+          510.0,
+          510.0
+        ],
+        "white_levels": [
+          16319.0,
+          16319.0,
+          16319.0,
+          16319.0
+        ],
+        "white_balance": [
+          1.9609375,
+          1.0,
+          1.52734375
+        ],
+        "camera_to_srgb": [
+          [
+            1.2329432222213812,
+            -0.04683857321863128,
+            -0.18610464900274978
+          ],
+          [
+            -0.10821501291601254,
+            1.2000698246325416,
+            -0.09185481171652923
+          ],
+          [
+            -0.0033237223708705668,
+            -0.2729941957302798,
+            1.2763179181011504
+          ]
+        ],
+        "flip": 0,
+        "iso": 100,
+        "adc_white_level": 16319.0
+      },
+      "exif": {
+        "SourceFile": "/mnt/external/demosaic/references/raw-pixls-pilot-v1/files/3652.rw2",
+        "DateTimeOriginal": "2019:12:31 14:36:42",
+        "Artist": "",
+        "Copyright": ""
+      },
+      "caches": [
+        {
+          "path": "/mnt/external/demosaic/raw-pixls-quarantine-v1/bin4/8b8a969617705d9997ee0461354c99905b964ae08b820cd24c6d4e440461e24c.npy",
+          "sha256": "a64a320c6944fe8c18e13b1b5cf83d600556b3f6c610a6bc0f11ccc12449d027",
+          "shape": [
+            1403,
+            2096,
+            3
+          ],
+          "dtype": "uint16",
+          "bin_factor": 4,
+          "color_space": "linear-camera-RGB",
+          "unique_codes": 57105
+        },
+        {
+          "path": "/mnt/external/demosaic/raw-pixls-quarantine-v1/bin8/8b8a969617705d9997ee0461354c99905b964ae08b820cd24c6d4e440461e24c.npy",
+          "sha256": "2cefa2193447e1cda5370f9f393ba3a4fa00be94a1872a84fb492d388255d406",
+          "shape": [
+            700,
+            1047,
+            3
+          ],
+          "dtype": "uint16",
+          "bin_factor": 8,
+          "color_space": "linear-camera-RGB",
+          "unique_codes": 52427
+        }
+      ],
+      "screen_cache": "/mnt/external/demosaic/raw-pixls-quarantine-v1/screen-3652.npy",
+      "screen_sha256": "cb33043dbe62558f175e933452a5308eb252e1e1d433398b20115ed90c082c8f",
+      "preview": "/mnt/external/demosaic/raw-pixls-quarantine-v1/preview-3652.png",
+      "preview_sha256": "a31f669f767b79484bd923d9e507e0a8e3db91e4addc633d1bbf4ab8fec42e11",
+      "preview_display_exposure": 1.0
+    },
+    {
+      "id": "dc83d3e49db54ca9c3a1e41dc847afd213c822d482c40158e42d01ee8968f33b",
+      "file_id": 4213,
+      "split": "quarantine",
+      "source": {
+        "file_id": 4213,
+        "filename": "4213.nef",
+        "url": "https://raw.pixls.us/getfile.php/4213/nice/Nikon%20-%20Z%207_2%20-%2014bit%2014bit%20compressed%20%28Lossless%29%20%283:2%29.NEF",
+        "publisher_checksum": {
+          "type": "SHA-256",
+          "value": "dc83d3e49db54ca9c3a1e41dc847afd213c822d482c40158e42d01ee8968f33b"
+        },
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "make": "Nikon",
+        "model": "Z 7_2",
+        "catalog_mode": "14bit 14bit compressed (Lossless) (3:2)",
+        "catalog_row": [
+          "Nikon",
+          "Z 7_2",
+          "14bit 14bit compressed (Lossless) (3:2)",
+          45.75,
+          "",
+          "<a href='https://creativecommons.org/publicdomain/zero/1.0/' title='Creative Commons 0 - Public Domain' class='cc'>co</a>",
+          "2020-12-12",
+          "<a href='https://raw.pixls.us/getfile.php/4213/nice/Nikon - Z 7_2 - 14bit 14bit compressed (Lossless) (3:2).NEF'>Nikon - Z 7_2 - 14bit 14bit compressed (Lossless) (3:2).NEF</a><div class='checksumdata'><span title='sha256 Checksum'>dc83d3e49db54ca9c3a1e41dc847afd213c822d482c40158e42d01ee8968f33b</span>&nbsp;(51.61MB)</div>",
+          "<a target='_blank' href='https://raw.pixls.us/getfile.php/4213/exif/Z72_0027.NEF.exif.txt'>exifdata</a>"
+        ],
+        "metadata_path": "/mnt/external/demosaic/references/raw-pixls-pilot-v1/metadata/exif-4213.txt",
+        "metadata_url": "https://raw.pixls.us/getfile.php/4213/exif/Z72_0027.NEF.exif.txt",
+        "metadata_sha256": "8625da55ad82fe2968a576ad6b0673e3ffc1116111b88a3e0eab2787c2699d72",
+        "scouted_iso": 100,
+        "metadata_origin_path": "/mnt/external/demosaic/references/raw-pixls/exif-4213.txt",
+        "bytes": 54112772,
+        "sha256": "dc83d3e49db54ca9c3a1e41dc847afd213c822d482c40158e42d01ee8968f33b",
+        "path": "/mnt/external/demosaic/references/raw-pixls-pilot-v1/files/4213.nef"
+      },
+      "raw_shape": [
+        5520,
+        8288
+      ],
+      "raw_metadata": {
+        "source": "/mnt/external/demosaic/references/raw-pixls-pilot-v1/files/4213.nef",
+        "camera": "NIKON Z 7_2",
+        "pattern": "RGGB",
+        "black_levels": [
+          1008.0,
+          1008.0,
+          1008.0,
+          1008.0
+        ],
+        "white_levels": [
+          15311.0,
+          15311.0,
+          15311.0,
+          15311.0
+        ],
+        "white_balance": [
+          1.931640625,
+          1.0,
+          1.158203125
+        ],
+        "camera_to_srgb": [
+          [
+            1.2743164412670065,
+            -0.08630887361086616,
+            -0.1880075676561407
+          ],
+          [
+            -0.1083627499353953,
+            1.4216547569814815,
+            -0.313292007046086
+          ],
+          [
+            0.00531226924958847,
+            -0.3527316685509758,
+            1.3474193993013874
+          ]
+        ],
+        "flip": 0,
+        "iso": 100,
+        "adc_white_level": 16383.0
+      },
+      "exif": {
+        "SourceFile": "/mnt/external/demosaic/references/raw-pixls-pilot-v1/files/4213.nef",
+        "DateTimeOriginal": "2020:12:12 11:47:42",
+        "Artist": "",
+        "Copyright": ""
+      },
+      "caches": [
+        {
+          "path": "/mnt/external/demosaic/raw-pixls-quarantine-v1/bin4/dc83d3e49db54ca9c3a1e41dc847afd213c822d482c40158e42d01ee8968f33b.npy",
+          "sha256": "dbf55961b830aaba19d0d3d4b61e77804918e78ba55f135f1ef01c423b914783",
+          "shape": [
+            1378,
+            2070,
+            3
+          ],
+          "dtype": "uint16",
+          "bin_factor": 4,
+          "color_space": "linear-camera-RGB",
+          "unique_codes": 25800
+        },
+        {
+          "path": "/mnt/external/demosaic/raw-pixls-quarantine-v1/bin8/dc83d3e49db54ca9c3a1e41dc847afd213c822d482c40158e42d01ee8968f33b.npy",
+          "sha256": "e825914bba3b81aa5c99dcdfb6e7ff96545fcb3ed2e0430c4024a925b4f7b7d6",
+          "shape": [
+            688,
+            1034,
+            3
+          ],
+          "dtype": "uint16",
+          "bin_factor": 8,
+          "color_space": "linear-camera-RGB",
+          "unique_codes": 24651
+        }
+      ],
+      "screen_cache": "/mnt/external/demosaic/raw-pixls-quarantine-v1/screen-4213.npy",
+      "screen_sha256": "7812db0e62c09dc98242c7dca657168f8638e2275f9f0a5c1464aaa9fdc1c650",
+      "preview": "/mnt/external/demosaic/raw-pixls-quarantine-v1/preview-4213.png",
+      "preview_sha256": "88c500b3aad134b42996b86ed2649752f4c8b052d8c7f0f976402b56848c04e7",
+      "preview_display_exposure": 1.0
+    },
+    {
+      "id": "79bd20f5ed2fe5c0d1d0ff5b317dedb41f16feb55e693e5569e165fd1c7bcaa4",
+      "file_id": 4493,
+      "split": "quarantine",
+      "source": {
+        "file_id": 4493,
+        "filename": "4493.raf",
+        "url": "https://raw.pixls.us/getfile.php/4493/nice/Fujifilm%20-%20GFX100S%20-%2016bit%2016bit%20uncompressed%20%284:3%29.RAF",
+        "publisher_checksum": {
+          "type": "SHA-256",
+          "value": "79bd20f5ed2fe5c0d1d0ff5b317dedb41f16feb55e693e5569e165fd1c7bcaa4"
+        },
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "make": "Fujifilm",
+        "model": "GFX100S",
+        "catalog_mode": "16bit 16bit uncompressed (4:3)",
+        "catalog_row": [
+          "Fujifilm",
+          "GFX100S",
+          "16bit 16bit uncompressed (4:3)",
+          103.37,
+          "",
+          "<a href='https://creativecommons.org/publicdomain/zero/1.0/' title='Creative Commons 0 - Public Domain' class='cc'>co</a>",
+          "2021-04-16",
+          "<a href='https://raw.pixls.us/getfile.php/4493/nice/Fujifilm - GFX100S - 16bit 16bit uncompressed (4:3).RAF'>Fujifilm - GFX100S - 16bit 16bit uncompressed (4:3).RAF</a><div class='checksumdata'><span title='sha256 Checksum'>79bd20f5ed2fe5c0d1d0ff5b317dedb41f16feb55e693e5569e165fd1c7bcaa4</span>&nbsp;(200.42MB)</div>",
+          "<a target='_blank' href='https://raw.pixls.us/getfile.php/4493/exif/Fujifilm-GFX100S-16bits-uncompress-4_3.RAF.exif.txt'>exifdata</a>"
+        ],
+        "metadata_path": "/mnt/external/demosaic/references/raw-pixls-pilot-v1/metadata/exif-4493.txt",
+        "metadata_url": "https://raw.pixls.us/getfile.php/4493/exif/Fujifilm-GFX100S-16bits-uncompress-4_3.RAF.exif.txt",
+        "metadata_sha256": "d1618af79cea8452780df2540155b18453ab753bb6038f7d1f069182daf164e8",
+        "scouted_iso": 100,
+        "metadata_origin_path": "/mnt/external/demosaic/references/raw-pixls/exif-4493.txt",
+        "bytes": 210160256,
+        "sha256": "79bd20f5ed2fe5c0d1d0ff5b317dedb41f16feb55e693e5569e165fd1c7bcaa4",
+        "path": "/mnt/external/demosaic/references/raw-pixls-pilot-v1/files/4493.raf"
+      },
+      "raw_shape": [
+        8746,
+        11662
+      ],
+      "raw_metadata": {
+        "source": "/mnt/external/demosaic/references/raw-pixls-pilot-v1/files/4493.raf",
+        "camera": "GFX100S",
+        "pattern": "RGGB",
+        "black_levels": [
+          255.0,
+          255.0,
+          255.0,
+          255.0
+        ],
+        "white_levels": [
+          65535.0,
+          65535.0,
+          65535.0,
+          65535.0
+        ],
+        "white_balance": [
+          1.6920529801324504,
+          1.0,
+          1.8708609271523178
+        ],
+        "camera_to_srgb": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "flip": 0,
+        "iso": 100,
+        "adc_white_level": 65535.0
+      },
+      "exif": {
+        "SourceFile": "/mnt/external/demosaic/references/raw-pixls-pilot-v1/files/4493.raf",
+        "DateTimeOriginal": "2021:04:16 17:52:09",
+        "Artist": "",
+        "Copyright": ""
+      },
+      "caches": [
+        {
+          "path": "/mnt/external/demosaic/raw-pixls-quarantine-v1/bin4/79bd20f5ed2fe5c0d1d0ff5b317dedb41f16feb55e693e5569e165fd1c7bcaa4.npy",
+          "sha256": "e3b75e607a074264d5bf86bf0cc1b473e83258e4c27fecd7010784d0b98700ae",
+          "shape": [
+            2184,
+            2913,
+            3
+          ],
+          "dtype": "uint16",
+          "bin_factor": 4,
+          "color_space": "linear-camera-RGB",
+          "unique_codes": 52663
+        },
+        {
+          "path": "/mnt/external/demosaic/raw-pixls-quarantine-v1/bin8/79bd20f5ed2fe5c0d1d0ff5b317dedb41f16feb55e693e5569e165fd1c7bcaa4.npy",
+          "sha256": "e6bb8789a4254071ae21061ffc3bf5e5ee140e353b9d3a204dc4f118a1a3ba1d",
+          "shape": [
+            1091,
+            1455,
+            3
+          ],
+          "dtype": "uint16",
+          "bin_factor": 8,
+          "color_space": "linear-camera-RGB",
+          "unique_codes": 51408
+        }
+      ],
+      "screen_cache": "/mnt/external/demosaic/raw-pixls-quarantine-v1/screen-4493.npy",
+      "screen_sha256": "a10b08a3527fbfcf7eb15d4bee126fde83de83d44d05e407b245db0e0722028e",
+      "preview": "/mnt/external/demosaic/raw-pixls-quarantine-v1/preview-4493.png",
+      "preview_sha256": "614320a0e7a6b883ef61060d4d0e88591063c538d97993add55766e879b09699",
+      "preview_display_exposure": 1.0
+    },
+    {
+      "id": "8918ba274f0919be4f9902f9eebcab4663445ebe441d22fb48f3f328198ac2ee",
+      "file_id": 6231,
+      "split": "quarantine",
+      "source": {
+        "file_id": 6231,
+        "filename": "6231.arw",
+        "url": "https://raw.pixls.us/getfile.php/6231/nice/Sony%20-%20ILCE-7RM5%20-%2014bit%2014bit%20uncompressed%20%283:2%29.ARW",
+        "publisher_checksum": {
+          "type": "SHA-256",
+          "value": "8918ba274f0919be4f9902f9eebcab4663445ebe441d22fb48f3f328198ac2ee"
+        },
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "make": "Sony",
+        "model": "ILCE-7RM5",
+        "catalog_mode": "14bit 14bit uncompressed (3:2)",
+        "catalog_row": [
+          "Sony",
+          "ILCE-7RM5",
+          "14bit 14bit uncompressed (3:2)",
+          61.21,
+          "taken in daylight",
+          "<a href='https://creativecommons.org/publicdomain/zero/1.0/' title='Creative Commons 0 - Public Domain' class='cc'>co</a>",
+          "2022-12-18",
+          "<a href='https://raw.pixls.us/getfile.php/6231/nice/Sony - ILCE-7RM5 - 14bit 14bit uncompressed (3:2).ARW'>Sony - ILCE-7RM5 - 14bit 14bit uncompressed (3:2).ARW</a><div class='checksumdata'><span title='sha256 Checksum'>8918ba274f0919be4f9902f9eebcab4663445ebe441d22fb48f3f328198ac2ee</span>&nbsp;(128.46MB)</div>",
+          "<a target='_blank' href='https://raw.pixls.us/getfile.php/6231/exif/7RM5-LosslessUncompressed.ARW.exif.txt'>exifdata</a>"
+        ],
+        "metadata_path": "/mnt/external/demosaic/references/raw-pixls-pilot-v1/metadata/exif-6231.txt",
+        "metadata_url": "https://raw.pixls.us/getfile.php/6231/exif/7RM5-LosslessUncompressed.ARW.exif.txt",
+        "metadata_sha256": "c3f53535f6053e9b464500bc19291ee1e526c2bebacca3de060394883d8e8ad9",
+        "scouted_iso": 100,
+        "metadata_origin_path": "/mnt/external/demosaic/references/raw-pixls/exif-6231.txt",
+        "bytes": 134701056,
+        "sha256": "8918ba274f0919be4f9902f9eebcab4663445ebe441d22fb48f3f328198ac2ee",
+        "path": "/mnt/external/demosaic/references/raw-pixls-pilot-v1/files/6231.arw"
+      },
+      "raw_shape": [
+        6376,
+        9564
+      ],
+      "raw_metadata": {
+        "source": "/mnt/external/demosaic/references/raw-pixls-pilot-v1/files/6231.arw",
+        "camera": "ILCE-7RM5",
+        "pattern": "RGGB",
+        "black_levels": [
+          512.0,
+          512.0,
+          512.0,
+          512.0
+        ],
+        "white_levels": [
+          15360.0,
+          15360.0,
+          15360.0,
+          15360.0
+        ],
+        "white_balance": [
+          2.4794921875,
+          1.0,
+          1.734375
+        ],
+        "camera_to_srgb": [
+          [
+            1.52218699025113,
+            -0.33977310142286066,
+            -0.18241388882826956
+          ],
+          [
+            -0.16887055903668843,
+            1.6325735636184262,
+            -0.46370300458173797
+          ],
+          [
+            -0.012807461349497277,
+            -0.4179565376843098,
+            1.430763999033807
+          ]
+        ],
+        "flip": 0,
+        "iso": 100,
+        "adc_white_level": 16383.0
+      },
+      "exif": {
+        "SourceFile": "/mnt/external/demosaic/references/raw-pixls-pilot-v1/files/6231.arw",
+        "DateTimeOriginal": "2022:12:17 16:03:31"
+      },
+      "caches": [
+        {
+          "path": "/mnt/external/demosaic/raw-pixls-quarantine-v1/bin4/8918ba274f0919be4f9902f9eebcab4663445ebe441d22fb48f3f328198ac2ee.npy",
+          "sha256": "304643ad319d1ebf625203619e83c47f56f19d5bf0280fb80e49cf2c4ecf3dc9",
+          "shape": [
+            1592,
+            2389,
+            3
+          ],
+          "dtype": "uint16",
+          "bin_factor": 4,
+          "color_space": "linear-camera-RGB",
+          "unique_codes": 41731
+        },
+        {
+          "path": "/mnt/external/demosaic/raw-pixls-quarantine-v1/bin8/8918ba274f0919be4f9902f9eebcab4663445ebe441d22fb48f3f328198ac2ee.npy",
+          "sha256": "28439a44c96b817e2b9e6ad61b50f58b85bf549c8e94221fbd03d8c0fe5545c7",
+          "shape": [
+            795,
+            1193,
+            3
+          ],
+          "dtype": "uint16",
+          "bin_factor": 8,
+          "color_space": "linear-camera-RGB",
+          "unique_codes": 35281
+        }
+      ],
+      "screen_cache": "/mnt/external/demosaic/raw-pixls-quarantine-v1/screen-6231.npy",
+      "screen_sha256": "e322f82821f96de090e1bf4ca1cf44739a1df88dd6f299083fa6a39f6d29415b",
+      "preview": "/mnt/external/demosaic/raw-pixls-quarantine-v1/preview-6231.png",
+      "preview_sha256": "dd2c39140006bc670f3f0c25a549b87e03c8f4c480896bf611d56ea7557bd2c6",
+      "preview_display_exposure": 1.0
+    }
+  ],
+  "rejected": [
+    {
+      "file_id": 2788,
+      "id": "ef046d37ffb11807648dd0b55589c02825f98c2c99416f4a7a74ae965a8eeb72",
+      "reason": "Calibration-chart/shallow-focus sample; excluded from photographic extension."
+    },
+    {
+      "file_id": 3478,
+      "id": "04918dfe85dc1da51f875d22030f39776e99ffa2af3d210b83659933234688fa",
+      "reason": "Prior source saturation exceeds0.1% of binned pixels; do not supervise clipped-source RGB as a clean highlight target."
+    },
+    {
+      "file_id": 7872,
+      "id": "d00f05468793e4509b53230e90dcdc078e823b254eee95f1c68b29e217df99bf",
+      "reason": "Prior source saturation exceeds0.1% of binned pixels; do not supervise clipped-source RGB as a clean highlight target."
+    }
+  ],
+  "usage": "Six reviewed CC0 camera-linear low-noise source estimates for a separate future training extension. Original quarantine/caches and active V37/V38 datasets remain unchanged. Not exact noiseless GT. Any training manifest must retain this exact admission payload/hash and all source/cache provenance.",
+  "script_sha256": "0522205b3f5fbd778fecc54b4cd884b864812db8c80ffd4c0dbae5f8c6770cad"
+}

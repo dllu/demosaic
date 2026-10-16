@@ -117,17 +117,25 @@ to CC0, covering 925 distinct make/model pairs. Legacy entries with other
 licenses are separate. Nine inspected candidate metadata files span Nikon Z7/
 Z7II, GFX50R/GFX100S, Leica Q2/SL2, Sony a7RIV/a7RV and Panasonic S1R, all
 ISO50–100. [Catalog hash, entry license links and metadata receipts](results/public-raw-candidate-survey.json)
-are retained. This is a source survey: no RAW pixels have been downloaded,
+are retained. At survey time, no RAW pixels had been downloaded,
 prepared, scored or added to training. Published catalog labels can describe
 compression modes imperfectly; verify actual Bayer geometry and bit depth.
 Camera samples may overlap the user's own contributed/public photos or existing
 protected scenes. A checksum and scene/near-duplicate audit must precede any
 new training manifest. These candidates do not change the matched V24/V25 data.
 
-The subsequent [public RAW pilot](public-raw-pilot.md) has now acquired and
-decoded nine checksum-pinned CC0 samples into separate4×/8× quarantine caches.
-Eight show landscapes/architecture; one color-chart sample is omitted from the
-proposed photographic subset. No source identity or near-duplicate matches were
-flagged in the documented checks, with stated scene-screen limitations. This is
-not yet training admission and changes none of the53-source native targets used
-by V32/V34/V35/V36.
+The subsequent [public RAW pilot](public-raw-pilot.md) acquired and decoded nine
+checksum-pinned CC0 samples into separate4×/8× quarantine caches. A further
+data-only overlap review covers42 protected references and resolves one broad
+hash false positive by source inspection. The chart and two landscapes with
+substantial prior clipping are excluded. Six reviewed outdoor captures now form
+a **separate59-capture/37-scene extension**, with all53 existing captures intact.
+No original/quarantine pixels change; no screening render becomes a target.
+These remain low-noise estimates, not exact noiseless GT.
+
+`scripts/extend_native_targets.py` freezes each factor separately, preserving
+base rows/cache paths and embedding the complete SHA-pinned admission. The
+loader accepts exactly those public source/cache/camera records; changing
+quarantine split flags or relabeling a public source as a legacy scene is
+rejected. All304 tests pass. The V32–V38 trials retain their original53 targets;
+the new dataset is an explicit future experiment choice.

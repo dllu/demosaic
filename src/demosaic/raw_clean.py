@@ -222,10 +222,17 @@ class RawCleanDataset(Dataset):
         self.seed = seed
         self.augmentation_downsample = augmentation_downsample
         self.scenes = {}
+        from .raw_admission import approved_public_rows
+
+        public_rows = approved_public_rows(data)
         for row in data["rows"]:
+            public = public_rows.get((row.get("id"), row.get("bin_factor")))
+            valid_source = (
+                row.get("source_family") is None and row["scene"] in TRAINING_SCENES
+            ) or row == public
             if (
                 row["split"] != "train"
-                or row["scene"] not in TRAINING_SCENES
+                or not valid_source
                 or row["color_space"] != "linear-camera-RGB"
             ):
                 raise ValueError("RAW clean manifest includes a protected/non-camera source")
