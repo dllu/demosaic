@@ -756,3 +756,13 @@ and ten verified full GFX RGB16 outputs. Fabric color regression and weak-detail
 loss prevent promotion; V43 remains the README working reference. Source
 intervals do not quantify training repeatability. Protected-final scoring and
 the broader quality/speed goals remain open.
+
+The [ConvNeXt pyramid first1000 review](dino-convnext-pyramid-v58-1k-review.md)
+finds 34.55768 dB on 427 photos, 0.04024 dB below matched no-context and close to
+ViT-B. Known primary improves 0.10783 dB, unseen primary falls 0.10475 dB; all 41
+logged training observations match each original arm. Weak-carrier gains and
+neutral-flat residuals improve slightly at the selected settings, but fine
+fabric and real-photo detail stay soft. All 120 native PNGs were viewed, with
+12 verified full GFX RGB16 outputs and independently rebuilt statistics. All
+old synthetic/paired controls replay exactly. Finish the original 10,000-update
+schedule without promotion; source intervals are not training-repeat uncertainty.

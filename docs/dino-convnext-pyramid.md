@@ -1,10 +1,13 @@
 # DINOv3 ConvNeXt feature-pyramid candidate
 
-An optional reconstruction branch now uses genuine frozen DINOv3 ConvNeXt-Tiny
-features at multiple CNN resolutions. It is engineering preparation, not a
-trained quality result. The original fresh no-context/ViT-S/ViT-B arms are
-[continuing to 10,000 updates](fresh-dino-capacity-10k.md) in their own frozen
-worktree; this candidate does not change that experiment.
+An optional reconstruction branch uses genuine frozen DINOv3 ConvNeXt-Tiny
+features at multiple CNN resolutions. Its
+[completed first 1,000-update review](dino-convnext-pyramid-v58-1k-review.md)
+finds mixed early results and no model promotion. It will finish its original
+10,000-update schedule with the same frozen data and source. The original
+[no-context/ViT-S/ViT-B comparison is complete](fresh-dino-capacity-10k-review.md).
+The implementation, preflights and staged launch records below retain their
+historical scope.
 
 The [official model card](https://huggingface.co/facebook/dinov3-convnext-tiny-pretrain-lvd1689m)
 identifies ConvNeXt-Tiny as a DINOv3 model distilled from ViT-7B. Its pinned
@@ -263,3 +266,13 @@ are nonzero. Immutable checkpoint SHA256:
 `afc0806d0c99a38bed33364bbf93ab94302080e4d78e1da044a2b782a97c7dfa`.
 Automated evaluation is running. These boundary checks do not establish quality;
 native crop inspection and the complete review remain pending.
+
+The [complete first 1,000 review](dino-convnext-pyramid-v58-1k-review.md) now
+supersedes that boundary-only status. All 120 native PNGs were actually viewed;
+12 full RGB16 TIFFs and 35 float contexts passed independent integrity checks.
+The statistics checker rebuilt 113,094 rows and 432 source-bootstrap intervals.
+All 99,232 original synthetic control cases and 1,296 paired cases replay exactly.
+ConvNeXt is −0.04024 dB photo, +0.10783 dB known primary and −0.10475 dB unseen
+primary against no-context at the same step. Some weak/flat diagnostic measures
+improve, while fine-detail loss persists. Continue its original schedule without
+promotion; this first gate does not establish convergence or a universal effect.
