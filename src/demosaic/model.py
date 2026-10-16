@@ -23,6 +23,7 @@ class ModelConfig:
     dino: bool = False
     dino_model: str = "facebook/dinov3-vits16-pretrain-lvd1689m"
     dino_revision: str = "main"
+    dino_lora_rank: int = 0
     camera_conditioning: bool = False
     noise_modulation: bool = False
     physical_fp32: bool = True
@@ -310,6 +311,12 @@ class DinoContext(nn.Module):
             getattr(self.backbone.config, "_commit_hash", None) or config.dino_revision
         )
         self.backbone.requires_grad_(False).eval()
+        if config.dino_lora_rank:
+            from .dino_adaptation import install_qv_adapters
+
+            self.lora = install_qv_adapters(self.backbone, config.dino_lora_rank)
+        else:
+            self.lora = nn.ModuleDict()
         self.adapter = nn.Conv2d(self.backbone.config.hidden_size * 3, channels, 1)
         self.gate = nn.Parameter(torch.zeros(1, channels, 1, 1))
         self.register_buffer("mean", torch.tensor([0.485, 0.456, 0.406])[None, :, None, None])
@@ -324,7 +331,7 @@ class DinoContext(nn.Module):
         # Keep native token geometry and pad to 16, without a classification crop.
         h, w = preview.shape[-2:]
         preview = F.pad(preview, (0, -w % 16, 0, -h % 16), mode="replicate")
-        with torch.no_grad():
+        with torch.set_grad_enabled(bool(self.lora) and torch.is_grad_enabled()):
             outputs = self.backbone(
                 pixel_values=(preview - self.mean) / self.std, output_hidden_states=True
             )
@@ -352,6 +359,10 @@ class JointDemosaic(nn.Module):
         self.config = config or ModelConfig()
         self.refinement_precision = "float32"
         cfg = self.config
+        if type(cfg.dino_lora_rank) is not int or cfg.dino_lora_rank < 0:
+            raise ValueError("DINO adapter rank must be a nonnegative integer")
+        if cfg.dino_lora_rank and not cfg.dino:
+            raise ValueError("DINO adapters require DINO context")
         if cfg.rgb_processing_scale not in (1, 2):
             raise ValueError("RGB processing scale must be 1 or 2")
         if cfg.packed_detail_prior and cfg.rgb_processing_scale != 2:

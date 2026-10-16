@@ -126,3 +126,11 @@ MIT but states that core CNE/EM-VST modules are obfuscated pending acceptance;
 weights are linked through Baidu Netdisk. No YOND code or weights have been
 incorporated, and no reproduced baseline score is claimed. It remains useful
 primary-source context for variance stabilization and calibrated noise handling.
+
+The optional [DINO low-rank adaptation experiment](dino-low-rank-adaptation.md)
+uses the original [LoRA construction](https://arxiv.org/abs/2106.09685) for
+query/value updates, while retaining the pinned DINOv3 pretrained tensors.
+CPU gradient/checkpoint/restart checks and a genuine-weight fixture pass; no
+trained RAW quality or speed claim follows. The separate
+[fresh matched DINO control](fresh-dino-ablation.md) is prepared to test the
+current foundation branch without inherited JDD training history.
