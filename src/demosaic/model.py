@@ -24,6 +24,7 @@ class ModelConfig:
     dino_model: str = "facebook/dinov3-vits16-pretrain-lvd1689m"
     dino_revision: str = "main"
     dino_lora_rank: int = 0
+    dino_input_adapter: bool = False
     camera_conditioning: bool = False
     noise_modulation: bool = False
     physical_fp32: bool = True
@@ -324,6 +325,14 @@ class DinoContext(nn.Module):
         self.gate = nn.Parameter(torch.zeros(1, channels, 1, 1))
         self.register_buffer("mean", torch.tensor([0.485, 0.456, 0.406])[None, :, None, None])
         self.register_buffer("std", torch.tensor([0.229, 0.224, 0.225])[None, :, None, None])
+        self.input_adapter = None
+        if config.dino_input_adapter:
+            from .dino_adaptation import DinoInputAdapter
+
+            # Keep subsequent common layers' initialization and global RNG
+            # identical when adding an initially identity feature-input path.
+            with torch.random.fork_rng(devices=[]):
+                self.input_adapter = DinoInputAdapter()
 
     def train(self, mode=True):
         super().train(mode)
@@ -331,10 +340,13 @@ class DinoContext(nn.Module):
         return self
 
     def forward(self, preview, size):
+        if self.input_adapter is not None:
+            preview = self.input_adapter(preview)
         # Keep native token geometry and pad to 16, without a classification crop.
         h, w = preview.shape[-2:]
         preview = F.pad(preview, (0, -w % 16, 0, -h % 16), mode="replicate")
-        with torch.set_grad_enabled(bool(self.lora) and torch.is_grad_enabled()):
+        adapt_encoder_input = self.input_adapter is not None or bool(self.lora)
+        with torch.set_grad_enabled(adapt_encoder_input and torch.is_grad_enabled()):
             outputs = self.backbone(
                 pixel_values=(preview - self.mean) / self.std, output_hidden_states=True
             )
@@ -374,6 +386,10 @@ class JointDemosaic(nn.Module):
             raise ValueError("DINO adapter rank must be a nonnegative integer")
         if cfg.dino_lora_rank and not cfg.dino:
             raise ValueError("DINO adapters require DINO context")
+        if type(cfg.dino_input_adapter) is not bool:
+            raise ValueError("DINO input adapter must be a boolean")
+        if cfg.dino_input_adapter and not cfg.dino:
+            raise ValueError("DINO input adapter requires DINO context")
         if cfg.rgb_processing_scale not in (1, 2):
             raise ValueError("RGB processing scale must be 1 or 2")
         if cfg.packed_detail_prior and cfg.rgb_processing_scale != 2:

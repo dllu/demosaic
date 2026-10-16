@@ -126,7 +126,10 @@ def test_target_validation_precedes_mutation(tiny_backbone):
         install_qv_adapters(tiny_backbone, 1000)
 
 
-def test_training_resume_preserves_low_rank_optimizer_ema_and_rng(tiny_backbone, tmp_path):
+@pytest.mark.parametrize("adaptation", ["lora", "input"])
+def test_training_resume_preserves_adaptation_optimizer_ema_and_rng(
+    tiny_backbone, tmp_path, adaptation
+):
     import json
 
     import numpy as np
@@ -167,7 +170,8 @@ def test_training_resume_preserves_low_rank_optimizer_ema_and_rng(tiny_backbone,
             "attention": False,
             "dino": True,
             "dino_revision": "test-fixture",
-            "dino_lora_rank": 2,
+            "dino_lora_rank": 2 if adaptation == "lora" else 0,
+            "dino_input_adapter": adaptation == "input",
         },
     }
     path = tmp_path / "config.yaml"
@@ -182,11 +186,12 @@ def test_training_resume_preserves_low_rank_optimizer_ema_and_rng(tiny_backbone,
         assert full[field].keys() == actual[field].keys()
         for name, value in full[field].items():
             torch.testing.assert_close(value, actual[field][name], rtol=0, atol=0)
-    assert any(
-        v.abs().sum() > 0
-        for k, v in actual["model"].items()
-        if k.startswith("context.lora.") and k.endswith(".up")
+    learned_keys = (
+        [k for k in actual["model"] if k.startswith("context.lora.") and k.endswith(".up")]
+        if adaptation == "lora"
+        else ["context.input_adapter.layers.4.weight"]
     )
+    assert any(actual["model"][k].abs().sum() > 0 for k in learned_keys)
     assert full["optimizer"]["param_groups"] == actual["optimizer"]["param_groups"]
     for key, state in full["optimizer"]["state"].items():
         for field, value in state.items():

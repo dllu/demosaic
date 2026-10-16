@@ -176,3 +176,16 @@ and compute budgets differ from our commercially usable joint reconstruction.
 [Experimental weak-texture source and actual CPU preparation](weak-texture-source.md)
 remain separate from active recipes. Any change needs matched trained quality,
 flat-region false-detail checks and the standing full/native/GFX review.
+
+## Learned input adaptation candidate
+
+Re-reading the [August 2026 structural-guidance method](https://arxiv.org/html/2608.09995v1#S3.SS3)
+confirms that it adapts frozen DINOv3 patch features after encoding a fixed
+sparse pseudo-RGB input. It does not evaluate the learned RGB input adapter
+implemented here. Our [optional input-adaptation experiment](dino-input-adaptation.md)
+instead adds a local residual before the encoder, preserving its initial input
+exactly and differentiating through frozen pretrained weights. The motivation
+is the measured noisy-preview feature gap and negative current-branch ablation,
+not a claimed reproduction or an inference that feature similarity guarantees
+restoration quality. Actual parent-weight identity/gradient/portability checks
+and the 483-test CUDA-enabled suite pass; matched trained quality remains pending.

@@ -1,0 +1,199 @@
+{
+  "status": "passed-full-suite-and-genuine-preflight",
+  "receipt": "/mnt/external/demosaic/benchmarks/dino-input-v56-parent-gpu-v1/receipt.json",
+  "receipt_sha256": "922f3eef863b16b8caa209b15f8b1d68d01b4083e66477459f14638a3336b8e8",
+  "full_suite": {
+    "log": "/mnt/external/demosaic/benchmarks/dino-input-v56-validation-v1/full-cuda-suite.log",
+    "sha256": "864483747b472d5b09c82557f38b5064efb579c0eecf816a21f23a0705395984",
+    "result": "483 passed in 47.39s",
+    "cuda_available": true
+  },
+  "preflight": {
+    "scope": "Execution, gradient, identity and portability evidence only; discarded updates do not establish quality or speed.",
+    "parent": "/mnt/external/demosaic/evaluation/paired-known-native-corpus-v37-v39-v43-2k/weights/weights-0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5.pt",
+    "parent_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+    "config": {
+      "amp": true,
+      "augmentation_downsample": 2,
+      "batch_size": 16,
+      "broad_camera": true,
+      "channels_last": true,
+      "checkpoint_every": 1000,
+      "cpu_threads": 4,
+      "data_seed_per_step": true,
+      "device": "cuda",
+      "experiment_notes": "Matched V56 input-adapter-only trial against immutable V54 step1000. Same V43 EMA/fresh AdamW/EMA/seed52/B16/LR3e-5/planned4000 and fixed reviewed paired83/native128/Commons40170. Add only identity-initialized 3-layer RGB preview adapter before frozen genuine DINO; gradient crosses encoder without updating pretrained weights. No weak-source change, loss change or preview target. First1000 gate requires complete shared-observation replay and known/unseen/full427/analytic-flat/full102MP GFX native review. Corpus stays opt-in; no architecture, quality, convergence or speed claim before evaluation.",
+      "flat_fraction": 0.1,
+      "gaussian_initialization": "docs/results/gaussian-color-source-and-weights.json",
+      "initialize_parent": {
+        "checkpoint": "/mnt/external/demosaic/evaluation/paired-known-native-corpus-v37-v39-v43-2k/weights/weights-0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5.pt",
+        "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+        "step": 2000,
+        "selection": "Retained V43 step2000 EMA; identical learned trunk/camera/DINO tensors, fresh AdamW/EMA in both arms."
+      },
+      "log_every": 25,
+      "lr": 3e-05,
+      "manifest": "/mnt/external/demosaic/audits/commons-bin4-frozen44732-v1/manifest.jsonl",
+      "min_available_gb": 12,
+      "model": {
+        "camera_conditioning": true,
+        "dino": true,
+        "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+        "physical_anchors": true,
+        "physical_fp32": true,
+        "restoration_backbone": "pretrained-rgb",
+        "variance_stabilization": true,
+        "width": 64,
+        "rgb_processing_scale": 1,
+        "rgb_hidden_autocast": false,
+        "rgb_center_camera_matrix": false,
+        "dino_lora_rank": 0,
+        "dino_input_adapter": true
+      },
+      "noise_free_fraction": 0.1,
+      "paired_fraction": 0.25,
+      "paired_manifest": "/mnt/external/demosaic/evaluation/paired-train83-reviewed-v1/manifest.json",
+      "paired_workers": 2,
+      "patch_size": 256,
+      "precision": "bfloat16",
+      "preserve_negative_read_noise": true,
+      "raw_clean_augmentation_downsample": 2,
+      "raw_clean_fraction": 0.25,
+      "raw_clean_manifest": "/mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json",
+      "raw_clean_workers": 2,
+      "reconstruct_highlights": true,
+      "run": "/mnt/external/demosaic/runs/dino-input-adapter-b16-v56",
+      "seed": 52,
+      "steps": 4000,
+      "synthetic_fraction": 0.2,
+      "trace_observations": true,
+      "val_batches": 4,
+      "validation_images": 8,
+      "validation_manifest": "/mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl",
+      "validation_protocol": "configs/evaluation.yaml",
+      "warmup_steps": 100,
+      "worker_start_method": "spawn",
+      "workers": 4
+    },
+    "config_sha256": "98fcf7af2494d6332609d2a562ac8b6e55983b891d53496071ae5dc46f9e5754",
+    "source_files": {
+      "paired_admission.py": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825",
+      "prior.py": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a",
+      "metrics.py": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31",
+      "inference.py": "911e71e8dcbeb1872ed591bc5234ed2b79bae063a859b4704516537d94a1df0b",
+      "train.py": "e8a82a3cbf2fed7059490db6ca347ab8b5ef7e345f4289c2ec1d36b8c1163c2b",
+      "dino_adaptation.py": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861",
+      "paired_training.py": "71a2481213bba174bd3d6b3de9ae9b89f88333635810e15d0958352d9d8d053d",
+      "reference.py": "54ed094d58e245a56993ea3ce3ef9e21d2164e902d41d03bba9132bacd22891f",
+      "prepare.py": "e4c0733bb260c289b3ce8aaf5f393abc5919d8d81cdcf462b70032d790429712",
+      "realdata.py": "ed24db2b066531281a196e6fa074130cb0ee78a640eae5ccaaace234f5ad5421",
+      "cfa.py": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252",
+      "paired.py": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d",
+      "audit.py": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d",
+      "losses.py": "548b1481a035ad937d4a046754a74e70684864a9842296765c62079a002e5120",
+      "gaussian.py": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72",
+      "real_suite.py": "2d8cd262a22b8c11d12159e7a90f96022219915ecf0dada36665467fd0f7ccee",
+      "raw_clean.py": "a143ce351ac4e1b2425d4d561000d3e8934477fe9172c88f90ce76d9b32a7a6c",
+      "raw_admission.py": "1948afbbf05129190273ab77466f26d9d27dc942716beaab16f077c8c3330803",
+      "vst.py": "355124a374177f1c08271834149c5979ab3477fdf255c60aa7cee0d47792a76b",
+      "io.py": "0a1599ffe7f6d935e92fc71e6b086430c6f82678a74952c3b8f31155a0bea83b",
+      "data.py": "b3277bca23d8c17b365ee364e175ea8a850d45a79cf02686628db606341e7be3",
+      "__init__.py": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d",
+      "calibration.py": "e86f4c602a6cd7fd855d0bcfeb790cf17ed87611f19d97926f9db174909b2d26",
+      "noise.py": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce",
+      "__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+      "precision.py": "9aa850fb5ee0e9abc3e9adc4847ce3518c1acb37c93f6bc54ff9206bb0c94c3a",
+      "cli.py": "ae48ac49a52fcb9fa72521b1194e71fe8603a2ac301cf94be4a172a29a4d9003",
+      "reporting.py": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d",
+      "model.py": "eb93073189554966893515450017ca59d38efa338eb6efe5ae6ea1834b2c5f5e",
+      "color.py": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+      "textures.py": "b4bc304a50de272cf7fcba272e67b828c163466ffc23ea3337a6a66f076dc664",
+      "safety.py": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7",
+      "pretrained_rgb.py": "256d1680608e1e1c55d951bb517eb23e273ec310a823085a7037a836ed0e3686",
+      "registration.py": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202",
+      "suite.py": "a474ff659df10dd4ec11d577082034a6e6dcba1a2a2b29c39065056cff5527b4"
+    },
+    "script_sha256": "525e0c2625eec82467578118230103c393d2cd2a6a8db773e4037eafcedf5c63",
+    "records": [
+      {
+        "input_adapter": false,
+        "initial_common_sha256": "886ce35a59edb10100beab55c591c4adc4a655686c02d4864fffb6a36986dd09",
+        "initial_predictions": {
+          "float32": "5edf4bd92b8808eb2ba4cdf85fec425f97a996400f9dba7f605e4bb0820d6734",
+          "bfloat16": "437ecb9d7612a23ed255bc9256f6453fff9aef459cb0e9088e8eb09b338d220f",
+          "float16": "cfa91e053457d373b9a65f79107fbe0daf326bcd5ae074ec34e9dd938f373a8b",
+          "native256_fp16": "d06cd4e8d3a6a3ad05d5ebe9a73ac53c5355c58b3f3375329a2255a71c371315"
+        },
+        "frozen_foundation_sha256": "ae3761f320a5d173e8215db7007bf2a3eed386d7af9f50e0cccf98d90d73b697",
+        "input_parameters": 0,
+        "discarded_updates": [
+          {
+            "step": 1,
+            "loss": 0.012896734289824963,
+            "gradient_norm": 0.964923620223999,
+            "input_adapter_gradient_norms": {},
+            "observation_sha256": "3e622abef2f21bfaa06eb96b92104a382a8016a7f13c420fdf50e8eddbb6806b"
+          },
+          {
+            "step": 2,
+            "loss": 0.01519748754799366,
+            "gradient_norm": 2.753333330154419,
+            "input_adapter_gradient_norms": {},
+            "observation_sha256": "c0ec2990e4ab58cac61ca724629154d76240a9763ec5fd57429d2b6eacb2cc2f"
+          }
+        ],
+        "portable_fp16_exact": true,
+        "checkpoint": "/mnt/external/demosaic/benchmarks/dino-input-v56-parent-gpu-v1/discarded-0.pt",
+        "checkpoint_sha256": "68cc6b9d42f936bc8f0d39679a8cf9e1ff9a0b12d134ab628195ebd7e11265a3",
+        "peak_cuda_gb": 6.844754944
+      },
+      {
+        "input_adapter": true,
+        "initial_common_sha256": "886ce35a59edb10100beab55c591c4adc4a655686c02d4864fffb6a36986dd09",
+        "initial_predictions": {
+          "float32": "5edf4bd92b8808eb2ba4cdf85fec425f97a996400f9dba7f605e4bb0820d6734",
+          "bfloat16": "437ecb9d7612a23ed255bc9256f6453fff9aef459cb0e9088e8eb09b338d220f",
+          "float16": "cfa91e053457d373b9a65f79107fbe0daf326bcd5ae074ec34e9dd938f373a8b",
+          "native256_fp16": "d06cd4e8d3a6a3ad05d5ebe9a73ac53c5355c58b3f3375329a2255a71c371315"
+        },
+        "frozen_foundation_sha256": "ae3761f320a5d173e8215db7007bf2a3eed386d7af9f50e0cccf98d90d73b697",
+        "input_parameters": 6531,
+        "discarded_updates": [
+          {
+            "step": 1,
+            "loss": 0.012896734289824963,
+            "gradient_norm": 0.9649256467819214,
+            "input_adapter_gradient_norms": {
+              "layers.0.weight": 0.0,
+              "layers.0.bias": 0.0,
+              "layers.2.weight": 0.0,
+              "layers.2.bias": 0.0,
+              "layers.4.weight": 0.001638045534491539,
+              "layers.4.bias": 0.0011673757107928395
+            },
+            "observation_sha256": "3e622abef2f21bfaa06eb96b92104a382a8016a7f13c420fdf50e8eddbb6806b"
+          },
+          {
+            "step": 2,
+            "loss": 0.0151954535394907,
+            "gradient_norm": 2.750783920288086,
+            "input_adapter_gradient_norms": {
+              "layers.0.weight": 1.1720984502971987e-06,
+              "layers.0.bias": 2.42819510276604e-07,
+              "layers.2.weight": 2.6384886950836517e-06,
+              "layers.2.bias": 5.77341040752799e-07,
+              "layers.4.weight": 0.0016446528024971485,
+              "layers.4.bias": 0.001231540460139513
+            },
+            "observation_sha256": "c0ec2990e4ab58cac61ca724629154d76240a9763ec5fd57429d2b6eacb2cc2f"
+          }
+        ],
+        "portable_fp16_exact": true,
+        "checkpoint": "/mnt/external/demosaic/benchmarks/dino-input-v56-parent-gpu-v1/discarded-1.pt",
+        "checkpoint_sha256": "ef6e56862a732814c9f86efdef4a0968826b395e91c9f17d72515eb49e308ac4",
+        "peak_cuda_gb": 7.331422208
+      }
+    ]
+  },
+  "limitations": "Execution/identity/gradient/restart/portability evidence only; two discarded full-model updates do not establish trained quality, speed or convergence."
+}

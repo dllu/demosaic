@@ -1,9 +1,33 @@
-"""Optional zero-initialized low-rank updates to DINO attention queries/values."""
+"""Optional identity-initialized adaptation around a frozen DINO encoder."""
 
 import math
 
 from torch import nn
 from torch.nn.utils import parametrize
+
+
+class DinoInputAdapter(nn.Module):
+    """Learn a local preview residual before the frozen patch encoder.
+
+    This internal feature input is not a restored-image output or a teacher
+    target. A zero final convolution initially preserves the supplied preview.
+    The original CFA restoration path and its physical units stay independent.
+    """
+
+    def __init__(self):
+        super().__init__()
+        self.layers = nn.Sequential(
+            nn.Conv2d(3, 24, 3, padding=1, padding_mode="replicate"),
+            nn.SiLU(),
+            nn.Conv2d(24, 24, 3, padding=1, padding_mode="replicate"),
+            nn.SiLU(),
+            nn.Conv2d(24, 3, 3, padding=1, padding_mode="replicate"),
+        )
+        nn.init.zeros_(self.layers[-1].weight)
+        nn.init.zeros_(self.layers[-1].bias)
+
+    def forward(self, preview):
+        return preview + self.layers(preview).to(preview.dtype)
 
 
 class LowRankWeight(nn.Module):
