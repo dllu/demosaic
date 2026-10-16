@@ -48,7 +48,7 @@ V34/V36 first1000 and full427/full102MP reviews are complete and stopped.
 [Nine public RAW samples](public-raw-pilot.md) retain their original quarantine.
 Six reviewed sources have a separate opt-in native extension; the chart and two
 clipped sources are excluded. Current architecture trials remain unchanged.
-The complete CUDA suite now passes **352 tests in 30.78 s**. The optional DINO
+The complete CUDA suite now passes **358 tests in 27.81 s**. The optional DINO
 adapters pass genuine full-model BF16/FP16 initial-output equality, backward,
 original-weight preservation and full-state training-resume checks.
 [GPU receipt](results/dino-lora-gpu-preflight-v1.json). The
@@ -108,7 +108,12 @@ the selected patterns, while anchor removal harms them and DINO removal is
 mixed. This is an inference intervention, not a trained ablation. Classical
 cases replay exactly; small neural replay differences remain explicitly marked
 as failing the original strict tolerance. V46 exports only that weight-slice
-change and has completed full measurement; broader comparison/review remains.
+change. Its [complete review](camera-projection-v46-review.md) finds photo and
+procedural PSNR gains but known-camera accuracy loss, so it is not promoted.
+The [camera-matrix centering experiment](camera-matrix-centering.md) instead
+retains all metadata and preserves the parent's exact initial forward while
+changing matrix optimization coordinates. All358 CUDA tests and genuine
+all-CFA/noise/precision/checkpoint checks pass; matched trained quality is pending.
 The [completed V43 first-gate review](native-v43-1k-review.md) now finds modest
 positive unseen-primary/photo gains versus both matched controls. All33 logged
 shared Commons/paired hashes match; ten native triplets and both full RGB16 files

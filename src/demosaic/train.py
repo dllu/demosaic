@@ -338,6 +338,9 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         initial = torch.load(initialize, map_location="cpu", weights_only=True)
         weights = initial.get("ema", initial["model"])
         expand_stem(weights, initial["model_config"], model)
+        new_camera_reference = model.config.rgb_center_camera_matrix and not initial[
+            "model_config"
+        ].get("rgb_center_camera_matrix", False)
         incompatible = model.load_state_dict(weights, strict=False)
         allowed_prefixes = (
             ("context.",)
@@ -354,6 +357,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 if model.config.rgb_processing_scale == 2
                 else ()
             )
+            + (("pretrained_rgb.camera_matrix_reference",) if new_camera_reference else ())
         )
         if incompatible.unexpected_keys or any(
             not k.startswith(allowed_prefixes) for k in incompatible.missing_keys
@@ -364,6 +368,11 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             "sha256": hashlib.sha256(Path(initialize).read_bytes()).hexdigest(),
             "step": initial.get("step"),
         }
+        if new_camera_reference:
+            model.pretrained_rgb.initialize_camera_matrix_reference()
+            config["initialized_from"]["camera_matrix_centering"] = (
+                "Fixed parent diagonal reference; trainable tensors and initial forward unchanged"
+            )
         if config.get("reset_output_heads", False):
             for head in (model.head, model.mosaic_head):
                 torch.nn.init.zeros_(head.weight)

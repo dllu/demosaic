@@ -227,7 +227,7 @@ class PretrainedRgbDemosaic(nn.Module):
 
     def __init__(
         self, *, stabilized=False, physical_anchors=False, processing_scale=1,
-        detail_prior=False, hidden_autocast=False,
+        detail_prior=False, hidden_autocast=False, center_camera_matrix=False,
     ):
         super().__init__()
         if physical_anchors and not stabilized:
@@ -240,6 +240,11 @@ class PretrainedRgbDemosaic(nn.Module):
         self.measurement_adapter = nn.Conv2d(21, 64, 1)
         nn.init.zeros_(self.measurement_adapter.weight)
         nn.init.zeros_(self.measurement_adapter.bias)
+        self.center_camera_matrix = center_camera_matrix
+        self.register_buffer(
+            "camera_matrix_reference",
+            torch.zeros(64, 3) if center_camera_matrix else None,
+        )
         self.stabilized = stabilized
         self.physical_anchors = physical_anchors
         self.processing_scale = processing_scale
@@ -262,6 +267,31 @@ class PretrainedRgbDemosaic(nn.Module):
                 self.register_buffer("detail_energy", detail_malvar_energy().clone(), persistent=False)
         self._noise_key = None
         self._noise_profiles = None
+
+    @torch.no_grad()
+    def initialize_camera_matrix_reference(self):
+        """Preserve a parent's exact forward while centering matrix gradients.
+
+        Store the three individual diagonal columns so equal weights subtract
+        exactly after device moves; a pre-summed CPU reference can round
+        differently from the CUDA reduction.
+        """
+        if not self.center_camera_matrix:
+            raise ValueError("Camera matrix centering is disabled")
+        self.camera_matrix_reference.copy_(
+            self.measurement_adapter.weight[:, [12, 16, 20], 0, 0]
+        )
+
+    def project_measurements(self, condition):
+        if not self.center_camera_matrix:
+            return self.measurement_adapter(condition)
+        weight = self.measurement_adapter.weight
+        correction = (weight[:, [12, 16, 20], 0, 0] - self.camera_matrix_reference).sum(1)
+        # W M + b - (W - W_reference) I has derivative M-I with respect
+        # to matrix weights. Camera information and representational capacity
+        # remain intact, and the reference makes the parent's initial forward
+        # exact without rebasing its trainable bias.
+        return F.conv2d(condition, weight, self.measurement_adapter.bias - correction)
 
     def set_noise(self, shot, read):
         """Condition explicitly on supplied scalar/per-image physical priors.
@@ -377,7 +407,7 @@ class PretrainedRgbDemosaic(nn.Module):
                 F.pad(value, pad, mode="replicate")
                 for value in (low_rgb, low_noise, low_condition, phase)
             )
-            head_offset = self.measurement_adapter(low_condition) + self.phase_adapter(phase)
+            head_offset = self.project_measurements(low_condition) + self.phase_adapter(phase)
         middle_offset = None
         if context is not None:
             middle_offset = context(
@@ -453,7 +483,7 @@ class PretrainedRgbDemosaic(nn.Module):
                 F.pad(value, pad, mode="replicate") for value in (normalized, noise, condition)
             )
             with torch.autocast(packed.device.type, enabled=False), ieee_fp32():
-                head_offset = self.measurement_adapter(condition)
+                head_offset = self.project_measurements(condition)
             middle_offset = None
             if context is not None:
                 middle_offset = context(
