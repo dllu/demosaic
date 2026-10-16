@@ -28,3 +28,10 @@ shared venv and frozen PYTHONPATH. No overlapping owned GPU benchmarks.
 The new policy's actual CUDA/all-condition/paired/full-GFX check must wait for
 that controller's actual exit and success. No alias/README promotion or
 real-noise quality claim. Goal remains active.
+
+Queued controller PID1827537 from frozenbf665d4 with85 file hashes and source
+archive. Identity-matched wait uses capacity controller PID1627905 and its
+creation time, not status alone. Terminal success is required before CUDA
+checks; failure stops the queue. Positive-noise synthetic/paired metrics and
+full GFX parent/export RGB16 pixels must match exactly. Live state is recorded
+in docs/results/adc-projection-v52-queue.json; actual results remain pending.

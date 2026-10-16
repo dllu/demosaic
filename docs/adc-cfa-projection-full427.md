@@ -94,3 +94,12 @@ Max nonclipped CFA error is5.96e−8; tiled native16-bit ramp error4.47e−8, wi
 more than256 sampled codes. CUDA was not initialized. GPU preflight, the full
 suite and seven-condition/paired/full-GFX evaluation wait for the live matched
 capacity continuation to finish and exit; no promotion follows before review.
+
+[The all-condition GPU workflow is queued](results/adc-projection-v52-queue.json)
+in frozen `bf665d4`, with85 source/test/script/config/dependency hashes and a
+separate source archive. It waits for PID1627905's identity-matched process
+exit and terminal success, then runs the full suite and actual-weight GPU
+preflight before quality evaluation. It will require exact metric parity on
+all positive-noise synthetic cases and paired crops, plus identical parent/export
+full GFX RGB16 pixels. Live status:
+`/mnt/external/demosaic/runs/adc-projection-v52-workflow.json`.
