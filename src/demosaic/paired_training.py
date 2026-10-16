@@ -16,6 +16,7 @@ from .color import render
 from .losses import multiscale_sensor_loss
 from .noise import variance_map
 from .paired import TRAINING_SCENES
+from .paired_admission import approved_extension_cases, case_key
 
 
 def paired_step(step, seed, fraction):
@@ -38,10 +39,21 @@ class PairedDataset(Dataset):
             raise ValueError("Paired training requires an explicitly separate train manifest")
         if patch_size < 32 or patch_size % 16:
             raise ValueError("Paired patch size must be >=32 and divisible by 16")
+        approved = approved_extension_cases(data)
+        seen_extensions = set()
         self.size, self.seed, self.scenes = patch_size, seed, {}
         for case in data["cases"]:
-            if case["scene"] not in TRAINING_SCENES or case.get("unknown_sensor"):
+            key = case_key(case)
+            reviewed = approved.get(key)
+            valid_source = (
+                case["scene"] in TRAINING_SCENES and case.get("paired_source_family") is None
+            ) or case == reviewed
+            if not valid_source or case.get("unknown_sensor"):
                 raise ValueError("Paired training manifest contains a protected/unknown scene")
+            if reviewed is not None:
+                if key in seen_extensions:
+                    raise ValueError("Repeated reviewed paired case")
+                seen_extensions.add(key)
             if not case["crops"]:
                 continue
             for crop in case["crops"]:
@@ -51,6 +63,8 @@ class PairedDataset(Dataset):
                 if digest != crop["sha256"]:
                     raise ValueError(f"Paired training crop checksum mismatch: {path}")
             self.scenes.setdefault(case["scene"], []).append(case)
+        if seen_extensions != set(approved):
+            raise ValueError("Paired training manifest omits reviewed extension cases")
         self.names = sorted(self.scenes)
         if not self.names:
             raise ValueError("Paired training has no usable scenes")

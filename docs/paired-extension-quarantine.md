@@ -92,3 +92,42 @@ RAW, then screens both references of all59 scenes and prepares only screen-clear
 quarantine records. Two CPU threads are used; CUDA is disabled. It requires the
 actual training loader to reject the resulting manifest. Live status:
 `/mnt/external/demosaic/runs/paired-extension-review-v1-workflow.json`.
+
+## Full acquisition and screen complete
+
+[All231 files verify](results/paired-extension-full-screen.json), totaling
+11,031,685,946 bytes. The screen checks113 clean references against42 protected
+RAW/GFX references and4,558 Commons holdout sources. **52 scenes screen clear;
+seven remain held.** Clear is a finite identity-screen outcome, not approval.
+Actual clean cameras are108 Sony ILCE-7C references, three Canon EOS6D and two
+Nikon D40; neither held-out EOSM100 nor GH1 appears. All seven flags remain held
+without automatic false-positive resolution. Alignment/crop preparation is live.
+
+All six content pages were inspected: textures/logs, cloth/yarn, books/shelves,
+fruit, signs, tools, plants, paintings, still-life props and a chart. Repeated
+framing/lighting variants require grouping or subset selection. Reference motion,
+sharpness and native crop validity remain pending. These resized contacts are
+data inspection, not model-performance or native-pixel comparisons:
+
+![Clean references, page1](images/paired-extension-full-content-00.jpg)
+
+![Clean references, page2](images/paired-extension-full-content-01.jpg)
+
+![Clean references, page3](images/paired-extension-full-content-02.jpg)
+
+![Clean references, page4](images/paired-extension-full-content-03.jpg)
+
+![Clean references, page5](images/paired-extension-full-content-04.jpg)
+
+![Clean references, page6](images/paired-extension-full-content-05.jpg)
+
+Source: Benoit Brummer and Christophe De Vleeschouwer,
+[RawNIND](https://doi.org/10.14428/DVN/DEQCIM), CC BY-SA4.0 with individual CC0
+grants/credits in the pinned permissions file. Modified by LibRaw linear
+rendering, area reduction, sRGB display, resizing and labels; the previews
+retain the source grant. Scene credits and source/cache hashes remain in the
+acquisition and screening receipts.
+
+The [paired loader's review contract](paired-training-admission.md) is ready
+and defaults closed. Its registry stays empty until native review is complete;
+quarantine preparation alone cannot enable training.
