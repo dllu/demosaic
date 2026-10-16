@@ -1,10 +1,10 @@
-# ADC-only consistency: positive small probe, full check pending
+# ADC-only consistency: initial small probe
 
 An input-only correction improves the fixed eight-photo ADC-only development
 sample by **1.74463dB**[.29822,4.42683] and SSIM by.004012. Across all16 procedural
 sources, sRGB PSNR improves1.42705dB[.01476,3.43347], but SSIM falls.005121 with an
 interval including zero. These are evaluation-source bootstrap intervals.
-**This is not a promoted model, full427 result or real-noise improvement.**
+**These are the initial small-sample results. The [full427 follow-up](adc-cfa-projection-full427.md) is complete; no model is promoted and no real-noise gain is claimed.**
 [Measurements, source identities and eight native triplets](results/adc-cfa-projection-probe-v1.json).
 
 For a prediction P, original CFA samples y, sampling operator A and fixed
@@ -17,8 +17,8 @@ interpolation can change. MHC interpolation can introduce colored edges/aliasing
 so consistency alone is insufficient evidence of better reconstruction.
 
 The [standalone probe](../scripts/probe_adc_cfa_projection.py) accepts only the
-protocol's ADC-only condition, shot=read=0. It is separate from production
-inference and the live fresh-DINO training. No claim applies to ISO100 shot noise
+protocol's ADC-only condition, shot=read=0. The original probe was separate from inference; the later optional integration
+keeps its default off and does not alter the frozen fresh-DINO training. No claim applies to ISO100 shot noise
 or the real GFX scene. Real Poisson/read-noise inputs need denoising; enforcing
 their samples exactly would inject noise. The earlier broad
 [local-mean correction](cfa-mean-consistency-probe.md) remains rejected.
@@ -65,14 +65,9 @@ and [Dietmar Rabich](https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Cana
 [CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/). Modified by binning,
 crop, ADC quantization, reconstruction and rendering; previews retain that license.
 
-The next check covers all427 photographs and16 procedural sources, four CFAs,
-GPUFP16 and5,316 cases across parent/projection/Malvar. It must wait for the
-actual live fresh-DINO controller to finish and exit before using the GPU.
-Neither the checkpoint/README aliases nor any training recipe change.
-
-The [full-sample check is queued](results/adc-cfa-projection-full427-queue.json)
-with frozen package/script/protocol/dependency snapshots and exact parent/data
-hashes. It waits for PID1462820's actual exit and terminal success, then scores
-all427 photos/16 procedural sources with the parent and Malvar in the same
-GPUFP16 batches. Live state is
-`/mnt/external/demosaic/runs/adc-cfa-projection-full427-workflow.json`.
+The [full-sample follow-up](adc-cfa-projection-full427.md) completed5316
+parent/projection/Malvar cases after the original fresh-DINO controller exited.
+It confirms a smaller photo gain of.52882dB, while procedural SSIM falls. An
+optional explicitly conditioned inference policy now exists; see the follow-up
+for its separate compatibility checks. Original aliases and training recipes
+remain unchanged.

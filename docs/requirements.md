@@ -150,3 +150,10 @@ all41 logged observations match,50 native triplets and ten full RGB16 files
 verify. No-context leads unseen primary/photo; B improves photo versus S but
 neither beats no context. No promotion; continue the matched arms before a
 convergence decision. Current-architecture capacity benefit remains unproven.
+
+The [full427 ADC-only correction](adc-cfa-projection-full427.md) improves photo
+PSNR by.52882dB and SSIM by.003923, while procedural SSIM falls. Its optional
+inference flag defaults off and activates only for explicit shot=read=0. The
+V52 export preserves all V43 step2000 EMA tensors. CPU compatibility and actual
+pinned-weight preflight pass; all-condition/CUDA/real checks remain pending.
+This supplies no real-noise gain and does not repair the broad SOTA deficit.

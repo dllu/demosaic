@@ -1,18 +1,10 @@
-import importlib.util
-from pathlib import Path
-
 import pytest
 import torch
 
 from demosaic.cfa import PATTERNS, color_indices, mosaic
-
-spec = importlib.util.spec_from_file_location(
-    "probe_adc_cfa_projection",
-    Path(__file__).resolve().parents[1] / "scripts/probe_adc_cfa_projection.py",
-)
-module = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(module)
-project = module.adc_cfa_projection
+from demosaic.cfa import adc_cfa_projection as project
+from demosaic.inference import load_checkpoint
+from demosaic.model import JointDemosaic, ModelConfig
 
 
 def fixture():
@@ -67,3 +59,94 @@ def test_invalid_dimensions_rejected(bad_cfa):
     rgb, packed, colors, wb = fixture()
     with pytest.raises(ValueError):
         project(rgb, packed[:, :3] if bad_cfa else packed[..., :-1], colors, wb)
+
+
+def model_config(**kwargs):
+    return ModelConfig(
+        restoration_backbone="pretrained-rgb", width=64, camera_conditioning=True,
+        variance_stabilization=True, physical_anchors=True, **kwargs,
+    )
+
+
+@pytest.mark.parametrize("precision", [torch.float32, torch.bfloat16])
+@torch.no_grad()
+def test_explicit_profiles_select_only_adc_images_and_preserve_auxiliary(precision):
+    torch.manual_seed(17)
+    model = JointDemosaic(model_config(adc_cfa_projection=True)).eval()
+    _, packed, colors, wb = fixture()
+    model.set_noise([0, 0.001, 0, 0], [0, 0, 0, 0.00001])
+    # The variance map must not override supplied shot/read: deliberately use
+    # a positive map for ADC images and zero for the noisy ones.
+    variance = torch.zeros_like(packed)
+    variance[[0, 2]] = 0.01
+    with torch.autocast("cpu", dtype=precision, enabled=precision != torch.float32):
+        model.pretrained_rgb.adc_projection = False
+        parent = model(packed, variance, colors, wb)
+        model.pretrained_rgb.adc_projection = True
+        actual, sampled = model(packed, variance, colors, wb, auxiliary=True)
+    torch.testing.assert_close(actual[[1, 3]], parent[[1, 3]], rtol=0, atol=0)
+    expected = project(parent[[0, 2]], packed[[0, 2]], colors[[0, 2]], wb[[0, 2]])
+    torch.testing.assert_close(actual[[0, 2]], expected, rtol=0, atol=0)
+    torch.testing.assert_close(sampled, mosaic(actual, colors), rtol=0, atol=0)
+    torch.testing.assert_close(sampled[[0, 2]], packed[[0, 2]], rtol=0, atol=2e-7)
+
+
+@pytest.mark.parametrize("shot,read", [(0.001, 0), (0, 0.00001), (0.001, 0.00001)])
+@torch.no_grad()
+def test_scalar_noisy_prior_is_an_exact_noop(shot, read):
+    model = JointDemosaic(model_config(adc_cfa_projection=True)).eval().set_noise(shot, read)
+    _, packed, colors, wb = fixture()
+    variance = torch.zeros_like(packed)
+    parent = model(packed, variance, colors, wb)
+    model.pretrained_rgb.adc_projection = False
+    torch.testing.assert_close(model(packed, variance, colors, wb), parent, rtol=0, atol=0)
+
+
+@torch.no_grad()
+def test_scalar_adc_prior_broadcasts_without_white_balance():
+    model = JointDemosaic(model_config(adc_cfa_projection=True)).eval().set_noise(0, 0)
+    _, packed, colors, _ = fixture()
+    actual = model(packed, torch.zeros_like(packed), colors)
+    torch.testing.assert_close(mosaic(actual, colors), packed, rtol=0, atol=2e-7)
+
+
+def test_projection_has_finite_gradients_and_preserves_unselected_batch_gradients():
+    rgb, packed, colors, wb = fixture()
+    rgb.requires_grad_(True)
+    indices = torch.tensor([0, 2])
+    corrected = project(rgb[indices], packed[indices], colors[indices], wb[indices])
+    output = rgb.index_copy(0, indices, corrected)
+    gradient, = torch.autograd.grad(output.sum(), rgb)
+    assert torch.isfinite(gradient).all()
+    torch.testing.assert_close(gradient[[1, 3]], torch.ones_like(gradient[[1, 3]]), rtol=0, atol=0)
+
+
+@pytest.mark.parametrize("enabled", [False, True])
+@torch.no_grad()
+def test_portable_checkpoint_policy_and_missing_legacy_default(tmp_path, enabled):
+    model = JointDemosaic(model_config(adc_cfa_projection=enabled)).eval()
+    config = model.config.to_dict()
+    if not enabled:
+        config.pop("adc_cfa_projection")
+    path = tmp_path / "portable.pt"
+    torch.save({"model_config": config, "model": model.restoration_state_dict(), "step": 0}, path)
+    restored, _ = load_checkpoint(path)
+    assert restored.config.adc_cfa_projection is enabled
+    assert restored.pretrained_rgb.adc_projection is enabled
+    assert restored.restoration_state_dict().keys() == model.restoration_state_dict().keys()
+    model.set_noise(0, 0)
+    restored.set_noise(0, 0)
+    _, packed, colors, wb = fixture()
+    variance = torch.zeros_like(packed)
+    torch.testing.assert_close(model(packed, variance, colors, wb), restored(packed, variance, colors, wb), rtol=0, atol=0)
+
+
+def test_projection_requires_explicit_noise_conditioning():
+    model = JointDemosaic(model_config(adc_cfa_projection=True))
+    _, packed, colors, wb = fixture()
+    with pytest.raises(ValueError, match="explicit shot/read"):
+        model(packed, torch.zeros_like(packed), colors, wb)
+    with pytest.raises(ValueError, match="ADC CFA projection"):
+        JointDemosaic(ModelConfig(adc_cfa_projection=True))
+    with pytest.raises(ValueError, match="ADC CFA projection"):
+        JointDemosaic(ModelConfig(restoration_backbone="pretrained-rgb", variance_stabilization=False, adc_cfa_projection=True))

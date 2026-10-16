@@ -19,7 +19,7 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
-from .cfa import PATTERNS, bilinear, color_indices, malvar
+from .cfa import PATTERNS, adc_cfa_projection, bilinear, color_indices, malvar
 from .color import render
 from .precision import ieee_fp32
 from .prior import box_mean
@@ -233,11 +233,13 @@ class PretrainedRgbDemosaic(nn.Module):
     def __init__(
         self, *, stabilized=False, physical_anchors=False, processing_scale=1,
         detail_prior=False, hidden_autocast=False, center_camera_matrix=False,
-        middle_skip_fp32=False,
+        middle_skip_fp32=False, adc_projection=False,
     ):
         super().__init__()
         if physical_anchors and not stabilized:
             raise ValueError("Physical anchors require variance stabilization")
+        if adc_projection and not stabilized:
+            raise ValueError("ADC CFA projection requires explicit stabilized RGB noise conditioning")
         if processing_scale not in (1, 2) or processing_scale == 2 and not stabilized:
             raise ValueError("Packed processing requires variance stabilization and scale 2")
         if detail_prior and processing_scale != 2:
@@ -254,6 +256,7 @@ class PretrainedRgbDemosaic(nn.Module):
             torch.zeros(64, 3) if center_camera_matrix else None,
         )
         self.stabilized = stabilized
+        self.adc_projection = adc_projection
         self.physical_anchors = physical_anchors
         self.processing_scale = processing_scale
         self.detail_prior = detail_prior
@@ -441,6 +444,7 @@ class PretrainedRgbDemosaic(nn.Module):
             return prediction
 
     def forward(self, packed, variance, colors, wb=None, matrix=None, context=None):
+        original_packed = packed
         profiles, preview, base_rgb = None, None, None
         if self.stabilized:
             if self._noise_profiles is None:
@@ -512,6 +516,22 @@ class PretrainedRgbDemosaic(nn.Module):
                         for b, (transform, scale, _) in enumerate(profiles)
                     ]
                 )
+            if self.adc_projection:
+                # Explicit shot/read profiles alone choose the policy, never
+                # an observed variance map or a fitted residual threshold.
+                selected = [b for b, (_, _, stochastic) in enumerate(profiles) if not stochastic]
+                if selected:
+                    if len(selected) == len(output):
+                        output = adc_cfa_projection(output, original_packed, colors, wb)
+                    else:
+                        indices = torch.tensor(selected, device=output.device)
+                        balance = (
+                            None if wb is None else wb.reshape(-1, 3).expand(len(output), -1)[indices]
+                        )
+                        corrected = adc_cfa_projection(
+                            output[indices], original_packed[indices], colors[indices], balance
+                        )
+                        output = output.index_copy(0, indices, corrected)
             return output
 
 

@@ -82,3 +82,12 @@ ViT-B narrows the photo deficit versus S. Fine texture remains deficient.
 All three merit a coupled continuation to3000 on the original10000 schedule;
 immutable first1000 copies preserve this review. No promotion or convergence
 claim follows from this first gate.
+
+The [coupled continuation is running](results/fresh-dino-capacity-3k-launch.json)
+in the same frozen8580a4e source. It restores each immutable1000 checkpoint,
+whole optimizer/EMA/RNG and original schedule, adding2000 updates per arm.
+It will verify all122 logged observations, preserve immutable3000 copies,
+then evaluate paired/full427/full102MP GFX with both direct RawNIND variants.
+The first launch exited before imports because uv selected an empty worktree
+venv; the retry explicitly uses the shared installed environment and frozen
+package via PYTHONPATH. No training occurred in the failed attempt.

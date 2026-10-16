@@ -10,11 +10,11 @@ from pathlib import Path
 import torch
 import yaml
 
-from demosaic.cfa import malvar, mosaic
+from demosaic.cfa import adc_cfa_projection, malvar, mosaic
 from demosaic.data import CleanDataset, synthetic
 from demosaic.inference import load_checkpoint
 from demosaic.metrics import quality_metrics
-from demosaic.precision import amp_context, ieee_fp32
+from demosaic.precision import amp_context
 from demosaic.reporting import display_crop, save_triplet
 from demosaic.safety import writable_path
 from demosaic.suite import observation, summarize
@@ -27,24 +27,6 @@ DEFAULT_CHECKPOINT = BASE / "models/v43-step2000.pt"
 def sha(path):
     with Path(path).open("rb") as f:
         return hashlib.file_digest(f, "sha256").hexdigest()
-
-
-def adc_cfa_projection(prediction, packed, colors, wb):
-    """Experimental noiseless-CFA correction; caller must supply ADC-only data.
-
-    Near-black/clipped samples have zero residual. This preserves their measured
-    channel predictions while allowing neighboring RGB interpolation to change.
-    No target, fit, output clamp or noise-uncertainty claim is involved.
-    """
-    if packed.ndim != 4 or packed.shape[1] != 4:
-        raise ValueError("Expected four packed CFA phases")
-    if prediction.shape != (packed.shape[0], 3, packed.shape[2] * 2, packed.shape[3] * 2):
-        raise ValueError("Prediction and CFA dimensions disagree")
-    with torch.autocast(device_type=prediction.device.type, enabled=False), ieee_fp32():
-        prediction, packed = prediction.float(), packed.float()
-        valid = (packed > 1 / 65535) & (packed < 1 - 1 / 65535)
-        residual = (packed - mosaic(prediction, colors)) * valid
-        return prediction + malvar(residual, colors, wb)
 
 
 @torch.inference_mode()

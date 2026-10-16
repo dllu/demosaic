@@ -46,6 +46,25 @@ def mosaic(rgb: Tensor, colors: Tensor) -> Tensor:
     ).squeeze(1)
 
 
+def adc_cfa_projection(prediction: Tensor, packed: Tensor, colors: Tensor, wb=None) -> Tensor:
+    """Backproject nonclipped ADC-only samples; caller must ensure shot=read=0.
+
+    Retain the prediction's Malvar nullspace component with P+K(y-A(P)).
+    Near-black/clipped residuals are zero, preserving their measured channels
+    while allowing neighboring unmeasured RGB to change. No target fitting or
+    output clamp is used. Enforcing noisy observations would inject noise.
+    """
+    if packed.ndim != 4 or packed.shape[1] != 4:
+        raise ValueError("Expected four packed CFA phases")
+    if prediction.shape != (packed.shape[0], 3, packed.shape[2] * 2, packed.shape[3] * 2):
+        raise ValueError("Prediction and CFA dimensions disagree")
+    with torch.autocast(device_type=prediction.device.type, enabled=False), ieee_fp32():
+        prediction, packed = prediction.float(), packed.float()
+        valid = (packed > 1 / 65535) & (packed < 1 - 1 / 65535)
+        residual = (packed - mosaic(prediction, colors)) * valid
+        return prediction + malvar(residual, colors, wb)
+
+
 def bilinear(packed: Tensor, colors: Tensor, *, fp32=True) -> Tensor:
     """Normalized interpolation, kept in FP32 even inside network autocast."""
     if fp32:

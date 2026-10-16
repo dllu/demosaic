@@ -49,6 +49,7 @@ class ModelConfig:
     rgb_hidden_autocast: bool = False
     rgb_center_camera_matrix: bool = False
     rgb_middle_skip_fp32: bool = False
+    adc_cfa_projection: bool = False
 
     def to_dict(self):
         return asdict(self)
@@ -361,6 +362,10 @@ class JointDemosaic(nn.Module):
         self.config = config or ModelConfig()
         self.refinement_precision = "float32"
         cfg = self.config
+        if cfg.adc_cfa_projection and (
+            cfg.restoration_backbone != "pretrained-rgb" or not cfg.variance_stabilization
+        ):
+            raise ValueError("ADC CFA projection requires explicit stabilized RGB noise conditioning")
         if cfg.rgb_center_camera_matrix and cfg.restoration_backbone != "pretrained-rgb":
             raise ValueError("Centered camera matrices require the pretrained RGB backbone")
         if cfg.rgb_middle_skip_fp32 and cfg.restoration_backbone != "pretrained-rgb":
@@ -410,6 +415,7 @@ class JointDemosaic(nn.Module):
                 hidden_autocast=cfg.rgb_hidden_autocast,
                 center_camera_matrix=cfg.rgb_center_camera_matrix,
                 middle_skip_fp32=cfg.rgb_middle_skip_fp32,
+                adc_projection=cfg.adc_cfa_projection,
             )
             self.context = DinoContext(cfg, 512) if cfg.dino else None
             self.refiner = self.coarse_refiner = self.pyramid_refiner = None
