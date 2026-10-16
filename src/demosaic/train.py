@@ -214,6 +214,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             config["raw_clean_manifest"],
             patch_size=config.get("patch_size", 256),
             seed=config.get("seed", 42),
+            augmentation_downsample=config.get("raw_clean_augmentation_downsample", 1),
         )
         if raw_clean_fraction
         else None
@@ -396,6 +397,10 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             raise ValueError("Resume native RAW manifest differs from checkpoint")
         if state["config"].get("raw_clean_fraction", 0.0) != raw_clean_fraction:
             raise ValueError("Resume native RAW fraction differs from checkpoint")
+        if state["config"].get("raw_clean_augmentation_downsample", 1) != config.get(
+            "raw_clean_augmentation_downsample", 1
+        ):
+            raise ValueError("Resume native RAW augmentation differs; initialize a new run")
         if state["config"].get("multiscale_sensor_weight", 0.0) != multiscale_weight:
             raise ValueError("Resume multiscale loss differs; initialize a new run")
         if state["config"].get("data_seed_per_step", False) != config.get(

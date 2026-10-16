@@ -1,0 +1,60 @@
+manifest: /mnt/external/demosaic/audits/commons-bin4-frozen44732-v1/manifest.jsonl
+run: /mnt/external/demosaic/runs/dino-anchored-pre-downsample-b16-v34
+device: cuda
+seed: 46
+steps: 3000
+batch_size: 16
+patch_size: 256
+workers: 4
+worker_start_method: spawn
+cpu_threads: 4
+synthetic_fraction: 0.2
+flat_fraction: 0.1
+noise_free_fraction: 0.1
+reconstruct_highlights: true
+preserve_negative_read_noise: true
+broad_camera: true
+lr: 3.0e-05
+warmup_steps: 100
+checkpoint_every: 1000
+val_batches: 4
+log_every: 25
+amp: true
+precision: bfloat16
+channels_last: true
+min_available_gb: 12
+trace_observations: true
+data_seed_per_step: true
+gaussian_initialization: docs/results/gaussian-color-source-and-weights.json
+model:
+  restoration_backbone: pretrained-rgb
+  width: 64
+  dino: true
+  dino_revision: 114c1379950215c8b35dfcd4e90a5c251dde0d32
+  camera_conditioning: true
+  physical_fp32: true
+  variance_stabilization: true
+  physical_anchors: true
+validation_protocol: configs/evaluation.yaml
+validation_images: 8
+paired_manifest: /mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json
+paired_fraction: 0.25
+paired_workers: 2
+raw_clean_manifest: /mnt/external/demosaic/raw-clean-train32-bin4-v1/manifest.json
+raw_clean_fraction: 0.25
+raw_clean_workers: 2
+experiment_notes: 'Matched pre-downsample augmentation trial against V32: same V30step1000
+  EMA initialization/fresh optimizer, seed46, batch16, LR3e-5/planned3000, source
+  identities/splits, domain proportions and original8x validation. Commons and native
+  targets now4x cache -> geometry/PSF at2x target ->2x linear average. Native4 cache
+  has exactly the same53 captures/31scenes. Complete Commons4 selection must be frozen
+  by scripts/freeze_rebinned_manifest.py; never use partial producer output. Stop
+  after1000 for paired/synthetic/GFX review. No GFX/final training or fitting.'
+initialize_parent:
+  checkpoint: /mnt/external/demosaic/evaluation/paired-known-anchored-stabilized-rgb-v30-1k/weights/weights-3a529117f127b2b48c203d6d23d154aeea0924f1aeb7ca649b1778ac8c0686c6.pt
+  sha256: 3a529117f127b2b48c203d6d23d154aeea0924f1aeb7ca649b1778ac8c0686c6
+  step: 1000
+  selection: EMA; optimizer starts fresh in both arms
+validation_manifest: /mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl
+augmentation_downsample: 2
+raw_clean_augmentation_downsample: 2

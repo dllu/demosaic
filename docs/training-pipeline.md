@@ -61,10 +61,19 @@ in a new experiment configuration. Validation source hashes and source snapshots
 are recorded, and resume rejects a changed validation/augmentation recipe.
 Newly downloaded images are not silently admitted by this frozen rebinning job.
 
-This option currently applies to Commons/procedural clean RGB. Registered
-paired RAW retains exact sensor-phase transforms. Native-RAW synthetic targets
-still use their existing 8× camera-linear caches and augmentation; extending the
-same sampling order there requires a separately prepared 4× native cache.
+The option also applies to [native camera-linear targets](native-raw-targets.md#augmentation-before-the-final-reduction)
+via `raw_clean_augmentation_downsample: 2`. Their4× cache is complete with the
+same53 training captures/31 scenes. Registered paired RAW uses exact sensor-phase
+transforms. Existing experiments retain their original8× configurations.
+
+`scripts/freeze_rebinned_manifest.py` will freeze the complete Commons4× producer
+output only after its lock is released and all active source identities/splits
+match the audited selection exactly. Partial output, changed protected splits,
+missing sources and an existing frozen manifest are rejected. A waiting owned
+job will create `/mnt/external/demosaic/audits/commons-bin4-frozen44732-v1/manifest.jsonl`
+after full preparation. [V34's matched augmentation recipe](../configs/dino-anchored-pre-downsample-b16-v34.yaml)
+points there, with original8× validation; it cannot accidentally train on the
+producer's current256-source manifest. V34 has not started.
 
 For general ingestion while the archive downloads, SQLite now reads committed
 WAL data in read-only mode and releases its metadata snapshot before decoding.
@@ -126,3 +135,15 @@ execution, not the quality of a model trained with the new augmentation path.
 Validation: **248 tests passed in 20.53s**, including sampling precision,
 projective/constant-color behavior, frozen source splits, live WAL ingestion,
 selected-domain fetch guards, and deterministic mixed-data restart. Ruff passed.
+
+Subsequent [invariant-grid caching](expectation-grid-performance.md) removes
+repeated Poisson table work without changing numeric outputs. The
+[V31 quality review](anchored-rgb-b16-v31-review.md) finds synthetic gains but
+real-camera regression after batch16 continuation, so V30 remains the quality
+reference. Lower-LR/data-mixture trials are separate from the throughput choice.
+
+The subsequent invariant-grid comparison reaches29.07images/s versus26.18
+with the original table construction at batch16 (two alternating runs each,
+same6.94GB allocation). Full validation including the native4 extension and
+complete-manifest freeze gate now passes **256 tests**. Model quality remains
+under development; these software/throughput checks do not establish it.

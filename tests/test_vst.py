@@ -10,7 +10,31 @@ from torch import nn
 
 from demosaic.cfa import PATTERNS, color_indices, malvar, mosaic
 from demosaic.gaussian import JointGaussianPrior, StabilizedGaussianPrior, load_gaussian_prior
-from demosaic.vst import GeneralizedAnscombe
+from demosaic.vst import GeneralizedAnscombe, expectation_grid, expectation_table
+
+
+def test_fresh_noise_profiles_reuse_one_readonly_poisson_grid(monkeypatch):
+    expectation_table.cache_clear()
+    expectation_grid.cache_clear()
+    original = np.exp
+    large_exponentials = []
+
+    def instrument(values, *args, **kwargs):
+        if values.size > 500_000:
+            large_exponentials.append(values.shape)
+        return original(values, *args, **kwargs)
+
+    monkeypatch.setattr(np, "exp", instrument)
+    tables = [expectation_table(r) for r in [0.0, 0.4, 2.0, 5.0, 16.0, 1000.0]]
+    assert len(large_exponentials) == 1
+    assert all(means is tables[0][1] for _, means in tables)
+    counts, means, probability, *_ = expectation_grid()
+    np.testing.assert_allclose(probability.sum(1), 1, atol=2e-13, rtol=0)
+    assert counts.shape == (321,) and means.shape == (2721,)
+    for array in expectation_grid():
+        assert not array.flags.writeable
+    with pytest.raises(ValueError, match="read-only"):
+        probability[0, 0] = 0
 
 
 @pytest.mark.parametrize("shot,read", [(1e-3, 4e-6), (2e-5, 0.0), (1e-10, 1e-4)])

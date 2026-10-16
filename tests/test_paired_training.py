@@ -124,21 +124,23 @@ def test_paired_schedule_continues_at_global_step_without_rng_state():
 
 
 @pytest.mark.parametrize(
-    "paired_fraction,native_fraction,step_rng,steps",
+    "paired_fraction,native_fraction,step_rng,steps,native_downsample",
     [
-        (0.5, 0.0, False, 4),
-        (1.0, 0.0, False, 4),
-        (0.0, 1.0, True, 8),
-        (0.5, 0.25, True, 12),
-        (0.5, 0.25, False, 12),
+        (0.5, 0.0, False, 4, 1),
+        (1.0, 0.0, False, 4, 1),
+        (0.0, 1.0, True, 8, 1),
+        (0.5, 0.25, True, 12, 1),
+        (0.5, 0.25, False, 12, 1),
+        (0.5, 0.25, True, 12, 2),
     ],
 )
 def test_paired_training_resume_matches_uninterrupted_weights(
-    tmp_path, capsys, paired_fraction, native_fraction, step_rng, steps
+    tmp_path, capsys, paired_fraction, native_fraction, step_rng, steps, native_downsample
 ):
     manifest = make_manifest(tmp_path)
     photo = tmp_path / "photo.npy"
-    np.save(photo, np.full((40, 40, 3), 10000, np.uint16))
+    shape = (80, 80, 3) if native_downsample == 2 else (40, 40, 3)
+    np.save(photo, np.full(shape, 10000, np.uint16))
     commons = tmp_path / "commons.jsonl"
     commons.write_text(
         "\n".join(json.dumps({"id": s, "cache": photo.name, "split": s}) for s in ("train", "val"))
@@ -154,7 +156,8 @@ def test_paired_training_resume_matches_uninterrupted_weights(
                         "scene": "sewingmachine",
                         "cache": photo.name,
                         "cache_sha256": hashlib.sha256(photo.read_bytes()).hexdigest(),
-                        "shape": [40, 40, 3],
+                        "shape": list(shape),
+                        "bin_factor": 4 if native_downsample == 2 else 8,
                         "color_space": "linear-camera-RGB",
                         "raw_metadata": {
                             "white_balance": [1.5, 1.0, 1.8],
@@ -171,6 +174,7 @@ def test_paired_training_resume_matches_uninterrupted_weights(
         "paired_fraction": paired_fraction,
         "raw_clean_manifest": str(native),
         "raw_clean_fraction": native_fraction,
+        "raw_clean_augmentation_downsample": native_downsample,
         "data_seed_per_step": step_rng,
         "trace_observations": True,
         "log_every": 1,
@@ -232,6 +236,11 @@ def test_paired_training_resume_matches_uninterrupted_weights(
         for name, value in expected[group].items():
             assert torch.equal(actual[group][name], value), name
     if native_fraction:
+        if native_downsample == 2:
+            changed = {**config, "raw_clean_augmentation_downsample": 1}
+            path.write_text(yaml.safe_dump(changed))
+            with pytest.raises(ValueError, match="native RAW augmentation"):
+                train(path, resume=resumed)
         for key, value, message in [
             ("raw_clean_fraction", native_fraction / 2, "native RAW fraction"),
             ("data_seed_per_step", not step_rng, "data RNG protocol"),

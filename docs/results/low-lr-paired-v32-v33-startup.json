@@ -1,0 +1,36 @@
+{
+  "status": "V32 lower-LR control training; V33 paired50 queued sequentially. No new quality result yet.",
+  "workflow": "/mnt/external/demosaic/runs/paired-fraction-v32-v33-workflow.json",
+  "log": ".cache/v32-v33-workflow.log",
+  "parent": {
+    "checkpoint": "/mnt/external/demosaic/evaluation/paired-known-anchored-stabilized-rgb-v30-1k/weights/weights-3a529117f127b2b48c203d6d23d154aeea0924f1aeb7ca649b1778ac8c0686c6.pt",
+    "sha256": "3a529117f127b2b48c203d6d23d154aeea0924f1aeb7ca649b1778ac8c0686c6",
+    "step": 1000,
+    "selection": "EMA; optimizer starts fresh in both arms"
+  },
+  "runtime_initialized_from": {
+    "path": "/mnt/external/demosaic/evaluation/paired-known-anchored-stabilized-rgb-v30-1k/weights/weights-3a529117f127b2b48c203d6d23d154aeea0924f1aeb7ca649b1778ac8c0686c6.pt",
+    "sha256": "3a529117f127b2b48c203d6d23d154aeea0924f1aeb7ca649b1778ac8c0686c6",
+    "step": 1000
+  },
+  "runtime_source_sha256": "e40755f17b21f3b0a7ce06a41564c52ff76ac94b7203e69e19a825143cdcf239",
+  "batch_size": 16,
+  "seed": 46,
+  "lr": 3e-05,
+  "planned_steps": 3000,
+  "stop_after": 1000,
+  "arms": {
+    "v32": {
+      "paired": 0.25,
+      "native": 0.25,
+      "commons": 0.5
+    },
+    "v33": {
+      "paired": 0.5,
+      "native": 0.25,
+      "commons": 0.25
+    }
+  },
+  "shared_observation_check": "After both arms, all logged intersections selecting the same domain must hash identically before evaluating.",
+  "datasets": "Original8x; protected memberships unchanged. GFX/final never train or transform fit."
+}

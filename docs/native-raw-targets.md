@@ -4,7 +4,9 @@ The optional native-target source avoids the rendered JPEG, inverse-gamma and
 approximate camera-unprocessing stages used by Commons training. It starts from
 the already downloaded public **training** references, retaining each camera's
 white balance and color matrix. This is a data experiment, with no demonstrated
-quality gain yet. V16 remains the fully reviewed model.
+quality gain in the original matched source-substitution trial. Newer
+[pretrained restoration trials](anchored-stabilized-rgb-v30-review.md) use this
+source in a broader mixture; its independent contribution remains unresolved.
 
 The V20/V21 pilot starts from the same frozen V16 step5000 EMA and updates only
 the fine RGB correction branch, with seed 44, LR 3e-5 and a planned 5000-step
@@ -81,6 +83,33 @@ Dataset (2025)*, [dataset](https://doi.org/10.14428/DVN/DEQCIM),
 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
 Individual scene credits and additional CC0 grants are in the acquired
 `permissions.txt`.
+
+## Augmentation before the final reduction
+
+The4× cache now contains the **same53 captures/31 scenes** as the8× cache,
+474,370,336 bytes with the same verified source identities, protected exclusions
+and `permissions.txt`. Its minimum side is512px. Set
+`raw_clean_augmentation_downsample: 2` with this manifest to crop/scale/rotate
+and apply optical PSFs at twice the final target resolution, then average2×2
+cells before camera exposure/Bayer/noise simulation. WB and camera matrix remain
+attached to each camera-linear sample. Registered paired RAW retains its exact
+sensor-phase transforms.
+
+```bash
+source scripts/env.sh
+uv run --no-sync python scripts/prepare_raw_clean.py \
+  --manifest /mnt/external/demosaic/references/rawnind-train32/manifest-train.json \
+  --output /mnt/external/demosaic/raw-clean-train32-bin4-v1 \
+  --factor 4 --min-size 512
+```
+
+The option requires declared4× caches and sufficient native dimensions; resume
+rejects a changed augmentation recipe. Defaults retain the original8× path.
+Tests cover camera units/metadata, source-cache integrity, noise-free mosaicing,
+protected-source rejection and exact mixed-data restart. See
+[cache/source receipt](results/native-four-stage-startup.json) and
+[the combined Commons/native trial recipe](../configs/dino-anchored-pre-downsample-b16-v34.yaml).
+These remain low-noise estimates, **not exact noiseless RGB GT**.
 
 Additional native-RAW source survey (2026-10-15): the [raw.pixls.us catalog](https://raw.pixls.us/)
 contains 2016 entries in the fetched snapshot, of which 1870 individually link

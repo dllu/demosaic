@@ -158,3 +158,72 @@ def test_step_data_rng_isolates_substituted_sources_and_restores_global_state(de
     assert torch.equal(cpu_before, torch.get_rng_state())
     if cuda_before is not None:
         assert torch.equal(cuda_before, torch.cuda.get_rng_state())
+
+
+def test_native_four_then_two_augmentation_preserves_camera_units_and_source_cache(tmp_path):
+    values = np.broadcast_to(np.array([500, 900, 1300], np.uint16), (80, 96, 3)).copy()
+    cache = tmp_path / "four.npy"
+    np.save(cache, values)
+    checksum = hashlib.sha256(cache.read_bytes()).hexdigest()
+    source = {
+        "split": "train",
+        "rows": [
+            {
+                "split": "train",
+                "scene": "sewingmachine",
+                "cache": cache.name,
+                "cache_sha256": checksum,
+                "shape": list(values.shape),
+                "bin_factor": 4,
+                "color_space": "linear-camera-RGB",
+                "raw_metadata": {
+                    "white_balance": [1.5, 1.0, 1.8],
+                    "camera_to_srgb": np.eye(3).tolist(),
+                },
+            }
+        ],
+    }
+    path = tmp_path / "manifest.json"
+    path.write_text(json.dumps(source))
+    dataset = RawCleanDataset(path, patch_size=32, augmentation_downsample=2)
+    for index in range(10):
+        first, second = dataset[index], dataset[index]
+        assert first["camera_rgb"].shape == (3, 32, 32)
+        assert torch.equal(first["camera_rgb"], second["camera_rgb"])
+        torch.testing.assert_close(
+            first["camera_rgb"].mean((-2, -1)),
+            torch.tensor([500, 900, 1300]) / 65535,
+            atol=1e-7,
+            rtol=0,
+        )
+        torch.testing.assert_close(first["wb"], torch.tensor([1.5, 1.0, 1.8]), atol=0, rtol=0)
+        torch.testing.assert_close(first["matrix"], torch.eye(3), atol=0, rtol=0)
+    assert hashlib.sha256(cache.read_bytes()).hexdigest() == checksum
+    batch = {k: v[None] for k, v in first.items()}
+    result = degrade_raw_clean(batch, noise_free_fraction=1.0)
+    torch.testing.assert_close(
+        result["packed"], mosaic(result["target"], result["colors"]), atol=1 / 65535, rtol=0
+    )
+
+
+def test_native_pre_downsample_path_rejects_eight_binned_or_undersized_sources(tmp_path):
+    cache = tmp_path / "native.npy"
+    np.save(cache, np.full((40, 40, 3), 1000, np.uint16))
+    row = {
+        "split": "train",
+        "scene": "sewingmachine",
+        "cache": cache.name,
+        "cache_sha256": hashlib.sha256(cache.read_bytes()).hexdigest(),
+        "shape": [40, 40, 3],
+        "bin_factor": 8,
+        "color_space": "linear-camera-RGB",
+        "raw_metadata": {},
+    }
+    path = tmp_path / "manifest.json"
+    path.write_text(json.dumps({"split": "train", "rows": [row]}))
+    with pytest.raises(ValueError, match="4x-binned"):
+        RawCleanDataset(path, patch_size=32, augmentation_downsample=2)
+    row["bin_factor"] = 4
+    path.write_text(json.dumps({"split": "train", "rows": [row]}))
+    with pytest.raises(ValueError, match="smaller"):
+        RawCleanDataset(path, patch_size=32, augmentation_downsample=2)

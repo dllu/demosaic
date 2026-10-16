@@ -15,6 +15,29 @@ from torch import nn
 from .precision import ieee_fp32
 
 
+@lru_cache(maxsize=1)
+def expectation_grid():
+    """Immutable integration grids shared by every physical noise profile.
+
+    The Poisson probabilities depend on counts and means, not read noise.
+    Building their large matrix and the quadrature nodes per image is wasted
+    work when training draws fresh read noise coefficients for every sample.
+    Keep the original arithmetic/reduction order for bitwise-identical tables.
+    """
+    counts = np.arange(321, dtype=np.float64)
+    means = np.concatenate((np.linspace(0, 16, 1601), np.linspace(16.1, 128, 1120)))
+    log_factorial = np.array([math.lgamma(n + 1) for n in counts])
+    probability = np.exp(
+        counts[None] * np.log(means.clip(1e-300))[:, None] - means[:, None] - log_factorial[None]
+    )
+    nodes, weights = np.polynomial.legendre.leggauss(96)
+    gaussian_nodes, gaussian_weights = np.polynomial.hermite.hermgauss(32)
+    arrays = counts, means, probability, nodes, weights, gaussian_nodes, gaussian_weights
+    for array in arrays:
+        array.flags.writeable = False
+    return arrays
+
+
 @lru_cache(maxsize=64)
 def expectation_table(read_e):
     """Tabulate E[centered GAT(N + Gaussian)] for Poisson mean 0..128.
@@ -26,14 +49,12 @@ def expectation_table(read_e):
     quadrature avoids cancellation in the read-dominated Gaussian limit.
     These are numerical approximations, not exact symbolic expectations.
     """
-    nodes, weights = np.polynomial.legendre.leggauss(96)
-    counts = np.arange(321, dtype=np.float64)
+    counts, means, probability, nodes, weights, gaussian_nodes, gaussian_weights = expectation_grid()
     q = 3 / 8 + read_e**2
     if read_e >= 16:
         # The clipped-root endpoint is >16 Gaussian standard deviations away.
         # Integrate the centered expression directly to avoid subtracting two
         # huge constants when read noise dominates shot noise.
-        gaussian_nodes, gaussian_weights = np.polynomial.hermite.hermgauss(32)
         signal = counts[:, None] + math.sqrt(2) * read_e * gaussian_nodes
         centered = 2 * signal / (np.sqrt(signal + q) + math.sqrt(q))
         conditional = (centered * gaussian_weights).sum(1) / math.sqrt(math.pi)
@@ -48,11 +69,6 @@ def expectation_table(read_e):
         conditional -= 2 * math.sqrt(q)
     else:
         conditional = 2 * counts / (np.sqrt(counts + q) + math.sqrt(q))
-    means = np.concatenate((np.linspace(0, 16, 1601), np.linspace(16.1, 128, 1120)))
-    log_factorial = np.array([math.lgamma(n + 1) for n in counts])
-    probability = np.exp(
-        counts[None] * np.log(means.clip(1e-300))[:, None] - means[:, None] - log_factorial[None]
-    )
     expected = (probability * conditional[None]).sum(1)
     if not np.isfinite(expected).all() or not (np.diff(expected) > 0).all():
         raise ValueError("Noise profile does not produce a stable monotone inverse table")

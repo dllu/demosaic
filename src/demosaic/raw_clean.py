@@ -13,7 +13,7 @@ from torch.nn import functional as F
 from torch.utils.data import Dataset
 
 from .cfa import PATTERNS, color_indices, mosaic
-from .data import homography, optical_blur
+from .data import augment_before_downsample, homography, optical_blur
 from .io import read_raw
 from .noise import add_noise, sample_coefficients, variance_map
 from .paired import TRAINING_SCENES, verify_file
@@ -207,7 +207,7 @@ def prepare_raw_clean(manifest, output, *, factor=8, min_size=256):
 class RawCleanDataset(Dataset):
     """Scene-balanced camera RGB with deterministic crops and physical metadata."""
 
-    def __init__(self, manifest, *, patch_size=256, seed=42):
+    def __init__(self, manifest, *, patch_size=256, seed=42, augmentation_downsample=1):
         self.path = Path(manifest)
         self.payload = self.path.read_bytes()
         data = json.loads(self.payload)
@@ -215,9 +215,12 @@ class RawCleanDataset(Dataset):
             raise ValueError("Native RAW targets require a train manifest")
         if patch_size < 32 or patch_size % 16:
             raise ValueError("Patch must be >=32 and divisible by16")
+        if augmentation_downsample not in (1, 2):
+            raise ValueError("Native augmentation downsample must be 1 or 2")
         self.sha256 = hashlib.sha256(self.payload).hexdigest()
         self.size = patch_size
         self.seed = seed
+        self.augmentation_downsample = augmentation_downsample
         self.scenes = {}
         for row in data["rows"]:
             if (
@@ -229,7 +232,9 @@ class RawCleanDataset(Dataset):
             path = self.path.parent / row["cache"]
             if hashlib.sha256(path.read_bytes()).hexdigest() != row["cache_sha256"]:
                 raise ValueError("RAW clean cache checksum mismatch")
-            if min(row["shape"][:2]) < patch_size:
+            if augmentation_downsample == 2 and row.get("bin_factor") != 4:
+                raise ValueError("Native pre-downsample augmentation requires 4x-binned caches")
+            if min(row["shape"][:2]) < patch_size * augmentation_downsample:
                 raise ValueError("Native cache is smaller than the training patch")
             self.scenes.setdefault(row["scene"], []).append(row)
         self.names = sorted(self.scenes)
@@ -244,7 +249,7 @@ class RawCleanDataset(Dataset):
         row = rng.choice(self.scenes[rng.choice(self.names)])
         array = np.load(self.path.parent / row["cache"], mmap_mode="r", allow_pickle=False)
         h, w = array.shape[:2]
-        size = self.size
+        size = self.size * self.augmentation_downsample
         ch, cw = (rng.randint(size, min(n, int(size * 1.4))) for n in (h, w))
         y, x = rng.randrange(h - ch + 1), rng.randrange(w - cw + 1)
         rgb = (
@@ -253,14 +258,17 @@ class RawCleanDataset(Dataset):
             )
             / 65535
         )
-        rgb = F.interpolate(rgb[None], size=(size, size), mode="area")[0]
-        rgb = torch.rot90(rgb, rng.randrange(4), (-2, -1))
-        if rng.random() < 0.5:
-            rgb = rgb.flip(-1)
-        if rng.random() < 0.25:
-            rgb = optical_blur(rgb, rng)
-        if rng.random() < 0.2:
-            rgb = homography(rgb, rng)
+        if self.augmentation_downsample == 2:
+            rgb = augment_before_downsample(rgb, self.size, rng)
+        else:
+            rgb = F.interpolate(rgb[None], size=(size, size), mode="area")[0]
+            rgb = torch.rot90(rgb, rng.randrange(4), (-2, -1))
+            if rng.random() < 0.5:
+                rgb = rgb.flip(-1)
+            if rng.random() < 0.25:
+                rgb = optical_blur(rgb, rng)
+            if rng.random() < 0.2:
+                rgb = homography(rgb, rng)
         meta = row["raw_metadata"]
         return {
             "camera_rgb": rgb.contiguous(),

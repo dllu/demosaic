@@ -41,3 +41,13 @@ PSNR/SSIM still trail it. Full427 and final quality remain unproven. The
 binning, discarded Commons loading and measured batch-size selection; 248
 software tests pass. These are progress toward the goal, not completion evidence
 for its unmet quality/speed requirements.
+
+[V31's batch16 continuation](anchored-rgb-b16-v31-review.md) improves the
+synthetic16 screen to35.08524/.958737 but regresses known/unseen real primary
+means to54.13644/53.54885, so V30 remains the quality reference. Fresh matched
+lower-LR/data-mixture trials are underway. The native4×→augmentation→2× cache
+now retains exactly53 captures/31 training scenes, and complete Commons4×
+membership must pass a freeze gate before training. [Reusing the invariant
+Poisson grid](expectation-grid-performance.md) preserves numeric tables and adds
+about11% measured batch16 training throughput. All256 software tests pass;
+the requested quality, protected-final review and10s/100MP gates remain unmet.
