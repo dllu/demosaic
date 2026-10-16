@@ -46,6 +46,14 @@ identities are verified. Evaluation-only scripts are separately pinned; all41
 logged observations must match and full native/numerical reviews follow.
 No duplicate GPU work starts before actual V56 exit and published review.
 
+Actual V57 launch after V56 terminal success/owner exit and report commitfbe5a24:
+controller91971 created1792167974.54 in the original b62c996 worktree. First
+input hash matches V54 exactly, first loss differs−1.80e-6 (cause unisolated).
+The live launch receipt records observed progress and matching logged batches;
+full review remains pending. V56 review JSON SHA b6599e7b… is pinned by this
+controller and must remain unchanged while it runs. This replay is a new run;
+no historical checkpoints or schedules are restarted or overwritten.
+
 Original fresh no-context/S/B3000 snapshots and original10000 schedules remain
 intact, with complete optimizer/RNG/source audits. Their continuation driver is
 prepared but not launched while this check takes priority. The QI downloader

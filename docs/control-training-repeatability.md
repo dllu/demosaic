@@ -35,3 +35,9 @@ schedules and full reviews. This replay does not silently adopt the newer model
 code or restart any existing run. The unfinished original fresh no-context/S/B
 10,000-step schedules remain separately preserved and audited; completing them
 can follow this repeatability check. No model or data recipe is promoted here.
+
+The [actual launch receipt](results/control-replay-v57-launch.json) records the
+live controller, original source/config identities and matching logged batches.
+The first input hash matches exactly; the first CUDA loss differs by about
+1.80e-6. Its cause is not isolated, and this observation alone does not explain
+the eventual quality difference. The complete review is still running.
