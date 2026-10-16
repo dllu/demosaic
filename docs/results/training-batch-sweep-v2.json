@@ -1,0 +1,383 @@
+{
+  "kind": "training throughput; not quality/convergence evidence",
+  "config": "/home/dllu/proj/demosaic/.cache/public-native-expansion-worktree/configs/dino-anchored-native-diverse-b16-v43.yaml",
+  "config_sha256": "da03a17db11a27354dccc218a3b2e97dc67e78234bffbfa4ef2591a26fa0b4dd",
+  "initialize": "/mnt/external/demosaic/evaluation/paired-known-native-diverse-v43-1k-newonly/weights/weights-8ee3e960acdf95d88ba06eab30ac9abbab8bab28b0dc63d79b304a960eb535c5.pt",
+  "initialization_sha256": "8ee3e960acdf95d88ba06eab30ac9abbab8bab28b0dc63d79b304a960eb535c5",
+  "warmup_steps_excluded": 15,
+  "measured_steps": 45,
+  "cases": [
+    [
+      0,
+      8
+    ],
+    [
+      1,
+      8
+    ],
+    [
+      0,
+      16
+    ],
+    [
+      0,
+      64
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      1,
+      32
+    ],
+    [
+      1,
+      16
+    ],
+    [
+      1,
+      64
+    ],
+    [
+      0,
+      32
+    ]
+  ],
+  "timing": "Difference of cumulative training wall times; includes selected-domain loading/degradation, DINO, forward/backward, AdamW and EMA. Excludes startup/warmup, validation and checkpoint serialization.",
+  "shared_machine": true,
+  "results": [
+    {
+      "batch": 8,
+      "repeat": 0,
+      "images_per_second": 29.77034541057494,
+      "seconds_per_step": 0.2687237883762767,
+      "measured_seconds": 12.092570476932451,
+      "peak_cuda_gb": 3.725843968,
+      "domains": {
+        "synthetic": 24,
+        "paired-RAW": 11,
+        "native-RAW-synthetic": 10
+      },
+      "whole_process_seconds": 47.44145098305307,
+      "case": "/mnt/external/demosaic/benchmarks/mixed-training-4x-native128-batch-sweep-v2/batch8-repeat0",
+      "source_sha256": "bd08aed2689112a6cb3319c20da81577a62de23fe550dc00a355bd17f8012efc",
+      "before": {
+        "available_gb": 76.889731072,
+        "load_average": [
+          3.54638671875,
+          3.61279296875,
+          3.76025390625
+        ]
+      },
+      "available_gb_after": 76.100489216
+    },
+    {
+      "batch": 8,
+      "repeat": 1,
+      "images_per_second": 29.53498043369723,
+      "seconds_per_step": 0.27086525477675927,
+      "measured_seconds": 12.188936464954168,
+      "peak_cuda_gb": 3.725843968,
+      "domains": {
+        "synthetic": 24,
+        "paired-RAW": 11,
+        "native-RAW-synthetic": 10
+      },
+      "whole_process_seconds": 45.28569320193492,
+      "case": "/mnt/external/demosaic/benchmarks/mixed-training-4x-native128-batch-sweep-v2/batch8-repeat1",
+      "source_sha256": "bd08aed2689112a6cb3319c20da81577a62de23fe550dc00a355bd17f8012efc",
+      "before": {
+        "available_gb": 76.100489216,
+        "load_average": [
+          2.67626953125,
+          3.35107421875,
+          3.66162109375
+        ]
+      },
+      "available_gb_after": 75.6370432
+    },
+    {
+      "batch": 16,
+      "repeat": 0,
+      "images_per_second": 30.9065433042065,
+      "seconds_per_step": 0.5176897281108217,
+      "measured_seconds": 23.296037764986977,
+      "peak_cuda_gb": 6.9543168,
+      "domains": {
+        "synthetic": 24,
+        "paired-RAW": 11,
+        "native-RAW-synthetic": 10
+      },
+      "whole_process_seconds": 62.47313857101835,
+      "case": "/mnt/external/demosaic/benchmarks/mixed-training-4x-native128-batch-sweep-v2/batch16-repeat0",
+      "source_sha256": "bd08aed2689112a6cb3319c20da81577a62de23fe550dc00a355bd17f8012efc",
+      "before": {
+        "available_gb": 75.6370432,
+        "load_average": [
+          2.87451171875,
+          3.26513671875,
+          3.615234375
+        ]
+      },
+      "available_gb_after": 75.616022528
+    },
+    {
+      "batch": 64,
+      "repeat": 0,
+      "images_per_second": 30.398723475818453,
+      "seconds_per_step": 2.1053515635586035,
+      "measured_seconds": 94.74082036013715,
+      "peak_cuda_gb": 26.325735936,
+      "domains": {
+        "synthetic": 24,
+        "paired-RAW": 11,
+        "native-RAW-synthetic": 10
+      },
+      "whole_process_seconds": 192.73093390883878,
+      "case": "/mnt/external/demosaic/benchmarks/mixed-training-4x-native128-batch-sweep-v2/batch64-repeat0",
+      "source_sha256": "bd08aed2689112a6cb3319c20da81577a62de23fe550dc00a355bd17f8012efc",
+      "before": {
+        "available_gb": 75.616022528,
+        "load_average": [
+          3.84130859375,
+          3.48828125,
+          3.67236328125
+        ]
+      },
+      "available_gb_after": 53.085999104
+    },
+    {
+      "batch": 4,
+      "repeat": 1,
+      "images_per_second": 27.366973228730537,
+      "seconds_per_step": 0.1461615782851974,
+      "measured_seconds": 6.577271022833884,
+      "peak_cuda_gb": 2.227218944,
+      "domains": {
+        "synthetic": 24,
+        "paired-RAW": 11,
+        "native-RAW-synthetic": 10
+      },
+      "whole_process_seconds": 41.05383021198213,
+      "case": "/mnt/external/demosaic/benchmarks/mixed-training-4x-native128-batch-sweep-v2/batch4-repeat1",
+      "source_sha256": "bd08aed2689112a6cb3319c20da81577a62de23fe550dc00a355bd17f8012efc",
+      "before": {
+        "available_gb": 53.086068736,
+        "load_average": [
+          6.0654296875,
+          4.228515625,
+          3.88330078125
+        ]
+      },
+      "available_gb_after": 56.078594048
+    },
+    {
+      "batch": 4,
+      "repeat": 0,
+      "images_per_second": 27.57499266093169,
+      "seconds_per_step": 0.14505896879774,
+      "measured_seconds": 6.5276535958983,
+      "peak_cuda_gb": 2.226171392,
+      "domains": {
+        "synthetic": 24,
+        "paired-RAW": 11,
+        "native-RAW-synthetic": 10
+      },
+      "whole_process_seconds": 38.27576619014144,
+      "case": "/mnt/external/demosaic/benchmarks/mixed-training-4x-native128-batch-sweep-v2/batch4-repeat0",
+      "source_sha256": "bd08aed2689112a6cb3319c20da81577a62de23fe550dc00a355bd17f8012efc",
+      "before": {
+        "available_gb": 56.078594048,
+        "load_average": [
+          5.52392578125,
+          4.359375,
+          3.94580078125
+        ]
+      },
+      "available_gb_after": 55.861334016
+    },
+    {
+      "batch": 32,
+      "repeat": 1,
+      "images_per_second": 31.169135357900455,
+      "seconds_per_step": 1.0266566471144971,
+      "measured_seconds": 46.19954912015237,
+      "peak_cuda_gb": 13.41145088,
+      "domains": {
+        "synthetic": 24,
+        "paired-RAW": 11,
+        "native-RAW-synthetic": 10
+      },
+      "whole_process_seconds": 97.17681425390765,
+      "case": "/mnt/external/demosaic/benchmarks/mixed-training-4x-native128-batch-sweep-v2/batch32-repeat1",
+      "source_sha256": "bd08aed2689112a6cb3319c20da81577a62de23fe550dc00a355bd17f8012efc",
+      "before": {
+        "available_gb": 55.861334016,
+        "load_average": [
+          4.8564453125,
+          4.33056640625,
+          3.95361328125
+        ]
+      },
+      "available_gb_after": 56.537399296
+    },
+    {
+      "batch": 16,
+      "repeat": 1,
+      "images_per_second": 30.707932705340966,
+      "seconds_per_step": 0.521038005180243,
+      "measured_seconds": 23.446710233110934,
+      "peak_cuda_gb": 6.9543168,
+      "domains": {
+        "synthetic": 24,
+        "paired-RAW": 11,
+        "native-RAW-synthetic": 10
+      },
+      "whole_process_seconds": 62.18805066612549,
+      "case": "/mnt/external/demosaic/benchmarks/mixed-training-4x-native128-batch-sweep-v2/batch16-repeat1",
+      "source_sha256": "bd08aed2689112a6cb3319c20da81577a62de23fe550dc00a355bd17f8012efc",
+      "before": {
+        "available_gb": 56.537399296,
+        "load_average": [
+          4.15087890625,
+          4.16845703125,
+          3.927734375
+        ]
+      },
+      "available_gb_after": 57.0379264
+    },
+    {
+      "batch": 64,
+      "repeat": 1,
+      "images_per_second": 31.13085173694076,
+      "seconds_per_step": 2.0558383863315814,
+      "measured_seconds": 92.51272738492116,
+      "peak_cuda_gb": 26.325735936,
+      "domains": {
+        "synthetic": 24,
+        "paired-RAW": 11,
+        "native-RAW-synthetic": 10
+      },
+      "whole_process_seconds": 167.00720638292842,
+      "case": "/mnt/external/demosaic/benchmarks/mixed-training-4x-native128-batch-sweep-v2/batch64-repeat1",
+      "source_sha256": "bd08aed2689112a6cb3319c20da81577a62de23fe550dc00a355bd17f8012efc",
+      "before": {
+        "available_gb": 57.0379264,
+        "load_average": [
+          2.873046875,
+          3.775390625,
+          3.80517578125
+        ]
+      },
+      "available_gb_after": 59.27213056
+    },
+    {
+      "batch": 32,
+      "repeat": 0,
+      "images_per_second": 31.257296300780496,
+      "seconds_per_step": 1.0237609706249915,
+      "measured_seconds": 46.06924367812462,
+      "peak_cuda_gb": 13.41145088,
+      "domains": {
+        "synthetic": 24,
+        "paired-RAW": 11,
+        "native-RAW-synthetic": 10
+      },
+      "whole_process_seconds": 96.66842969693244,
+      "case": "/mnt/external/demosaic/benchmarks/mixed-training-4x-native128-batch-sweep-v2/batch32-repeat0",
+      "source_sha256": "bd08aed2689112a6cb3319c20da81577a62de23fe550dc00a355bd17f8012efc",
+      "before": {
+        "available_gb": 59.27213056,
+        "load_average": [
+          2.98828125,
+          3.44775390625,
+          3.67138671875
+        ]
+      },
+      "available_gb_after": 59.161501696
+    }
+  ],
+  "status": "complete",
+  "source_summary": "/mnt/external/demosaic/benchmarks/mixed-training-4x-native128-batch-sweep-v2/summary.json",
+  "source_summary_sha256": "911f3ab657f6148c1b47e495938e4207253d9b397ad0221f90099d8caa905065",
+  "verified_runtime_configs": [
+    {
+      "runtime_config": "/mnt/external/demosaic/benchmarks/mixed-training-4x-native128-batch-sweep-v2/batch8-repeat0/run/config.yaml",
+      "sha256": "4f6b69e45cbcb6223329fadf9fc6b5bc768eb985aabcf4b9b52c9a46d9cd5cee"
+    },
+    {
+      "runtime_config": "/mnt/external/demosaic/benchmarks/mixed-training-4x-native128-batch-sweep-v2/batch8-repeat1/run/config.yaml",
+      "sha256": "491916ba4d92a453914d49f2efae5a8359eb44445536cf6099e9cfb048702ae6"
+    },
+    {
+      "runtime_config": "/mnt/external/demosaic/benchmarks/mixed-training-4x-native128-batch-sweep-v2/batch16-repeat0/run/config.yaml",
+      "sha256": "c56d3da2e04f6b5e84c712bacd374f9066f3887e1c354f79b7a9cfc2348f0d3c"
+    },
+    {
+      "runtime_config": "/mnt/external/demosaic/benchmarks/mixed-training-4x-native128-batch-sweep-v2/batch64-repeat0/run/config.yaml",
+      "sha256": "8d102f8c9f7edec306edced06bd7ab7567f2121ac1854b297e56605d716fcc90"
+    },
+    {
+      "runtime_config": "/mnt/external/demosaic/benchmarks/mixed-training-4x-native128-batch-sweep-v2/batch4-repeat1/run/config.yaml",
+      "sha256": "f3a09e38814a3ef37eda5c6144df6c4d47ec388191f93611ead3a06920929730"
+    },
+    {
+      "runtime_config": "/mnt/external/demosaic/benchmarks/mixed-training-4x-native128-batch-sweep-v2/batch4-repeat0/run/config.yaml",
+      "sha256": "0618bee66621d1974c8e615b328b88242881c930a52a852e04bfa09dc96bbcc9"
+    },
+    {
+      "runtime_config": "/mnt/external/demosaic/benchmarks/mixed-training-4x-native128-batch-sweep-v2/batch32-repeat1/run/config.yaml",
+      "sha256": "922fb135586a9d46f5e859f2a6b8f399dbb949063ca3af95d41ea3804040f156"
+    },
+    {
+      "runtime_config": "/mnt/external/demosaic/benchmarks/mixed-training-4x-native128-batch-sweep-v2/batch16-repeat1/run/config.yaml",
+      "sha256": "2e1f0253c113d510d944a1b6fdea167073affaa22700840bc3a94451941033d7"
+    },
+    {
+      "runtime_config": "/mnt/external/demosaic/benchmarks/mixed-training-4x-native128-batch-sweep-v2/batch64-repeat1/run/config.yaml",
+      "sha256": "600ab96e3d21d87f29b1b7102a19af84bf30670607e88f2beb08b0c31baca828"
+    },
+    {
+      "runtime_config": "/mnt/external/demosaic/benchmarks/mixed-training-4x-native128-batch-sweep-v2/batch32-repeat0/run/config.yaml",
+      "sha256": "c8d25e1f48b769e23152adb72a598e840143e7027a6a1c0d19ed53a646a40bea"
+    }
+  ],
+  "aggregate": {
+    "4": {
+      "mean": 27.470982944831114,
+      "min": 27.366973228730537,
+      "max": 27.57499266093169,
+      "peak_cuda_gb": 2.227218944
+    },
+    "8": {
+      "mean": 29.652662922136084,
+      "min": 29.53498043369723,
+      "max": 29.77034541057494,
+      "peak_cuda_gb": 3.725843968
+    },
+    "16": {
+      "mean": 30.807238004773733,
+      "min": 30.707932705340966,
+      "max": 30.9065433042065,
+      "peak_cuda_gb": 6.9543168
+    },
+    "32": {
+      "mean": 31.213215829340477,
+      "min": 31.169135357900455,
+      "max": 31.257296300780496,
+      "peak_cuda_gb": 13.41145088
+    },
+    "64": {
+      "mean": 30.764787606379606,
+      "min": 30.398723475818453,
+      "max": 31.13085173694076,
+      "peak_cuda_gb": 26.325735936
+    }
+  },
+  "selection": "Keep batch16 fixed for controlled quality comparisons; batch32 has a small mean throughput lead at roughly twice CUDA allocation. Two shared-machine repeats do not establish a unique optimum or convergence benefit."
+}

@@ -1,0 +1,120 @@
+{
+  "status": "Complete CUDA execution/conditioning/backward and full-state optimizer-resume fixture; not quality evidence",
+  "parent": "/mnt/external/demosaic/evaluation/paired-known-native-diverse-v43-1k-newonly/weights/weights-8ee3e960acdf95d88ba06eab30ac9abbab8bab28b0dc63d79b304a960eb535c5.pt",
+  "parent_sha256": "8ee3e960acdf95d88ba06eab30ac9abbab8bab28b0dc63d79b304a960eb535c5",
+  "cuda": {
+    "initial_full_model_all_cfa_outputs_exact": {
+      "bfloat16": true,
+      "float16": true
+    },
+    "output_dtype": "float32",
+    "up_gradient_l1": 0.05518338829278946,
+    "original_foundation_tensors_unchanged": true,
+    "peak_cuda_gb": 0.713188352,
+    "conditioning": {
+      "shot": 0.001,
+      "read": 1e-06
+    },
+    "native_shape": [
+      4,
+      3,
+      64,
+      64
+    ]
+  },
+  "optimizer_steps": [
+    2,
+    4
+  ],
+  "source_sha256": "cae51c974e1e53206ce4b1791edd7c9d3580cc672d23b3b9ca4e4c26c683eab1",
+  "step2_sha256": "2fef040009acd49a4b9bef7764cbc2d7255d12a7b6d02458f3555df5aa7d09d6",
+  "step4_sha256": "4e016e4612e85abaa94bfc3dc58e285ed7c8f5c67a887fbe888215785a72437b",
+  "learned_lora_tensors": 48,
+  "ema_checkpoint_tensors_exact_after_loading": true,
+  "recipe": "/mnt/external/demosaic/benchmarks/dino-lora-gpu-preflight-v1/config.yaml",
+  "recipe_sha256": "8b9fa4862c050d2bfa260f985549e90811c119cd2fa98b4130dc34f10a5ec557",
+  "training_observations": [
+    {
+      "event": "train",
+      "step": 1,
+      "loss": 0.0029311771504580975,
+      "lr": 3.0000000000000004e-07,
+      "grad_norm": 0.1410289704799652,
+      "seconds_per_step": 1.7081375939305872,
+      "cuda_gb": 1.41996544,
+      "domain": "synthetic",
+      "linear": 0.0013306152541190386,
+      "rendered": 0.0025003314949572086,
+      "gradient": 0.0022111693397164345,
+      "highlight": 0.0,
+      "sensor": 0.0012927921488881111,
+      "batch_sha256": "cf53408f23a5119e0a6e227e38435160b2fe12bd1992f0390f3c8622fab4caa6"
+    },
+    {
+      "event": "train",
+      "step": 2,
+      "loss": 0.04451081529259682,
+      "lr": 6.000000000000001e-07,
+      "grad_norm": 2.883063554763794,
+      "seconds_per_step": 0.9228984864894301,
+      "cuda_gb": 1.610365952,
+      "domain": "synthetic",
+      "linear": 0.03390970826148987,
+      "rendered": 0.011225879192352295,
+      "gradient": 0.01087726280093193,
+      "highlight": 0.011080292984843254,
+      "sensor": 0.02792414277791977,
+      "batch_sha256": "349fadbee9c5a3ef60847071c305d39fc89234019e93c26bc9873b150a7f0bea"
+    },
+    {
+      "event": "train",
+      "step": 3,
+      "loss": 0.015292968600988388,
+      "lr": 9e-07,
+      "grad_norm": 3.2826614379882812,
+      "seconds_per_step": 0.11535992403514683,
+      "cuda_gb": 1.610365952,
+      "domain": "synthetic",
+      "linear": 0.006105831824243069,
+      "rendered": 0.011624045670032501,
+      "gradient": 0.010488627478480339,
+      "highlight": 0.01831423118710518,
+      "sensor": 0.004948273301124573,
+      "batch_sha256": "6b763f6a5fa5cad65ba4c82a3eea890476df253c105e6051f7a734ca7ab60a22"
+    },
+    {
+      "event": "train",
+      "step": 4,
+      "loss": 0.003833154682070017,
+      "lr": 1.2000000000000002e-06,
+      "grad_norm": 0.239327073097229,
+      "seconds_per_step": 0.11142026993911713,
+      "cuda_gb": 1.617312768,
+      "domain": "paired-RAW",
+      "paired_sensor": 0.0013365180930122733,
+      "paired_coarse_rendered": 0.004656246397644281,
+      "paired_auxiliary": 0.0016851341351866722,
+      "batch_sha256": "73a9ab32664b9444faae25bb4178a8968fd99101db269783c3c187dfe1040063"
+    }
+  ],
+  "script_sha256": "37f1ff5fc6a2d06b69cdb0d9f599e761aa0e6667336ee5f4e5d378219220d7ea",
+  "remaining": "A matched training and full numerical/qualitative crop review are required before claiming improvement.",
+  "source_receipt": "/mnt/external/demosaic/benchmarks/dino-lora-gpu-preflight-v1/receipt.json",
+  "source_receipt_sha256": "4721e4a7221419f20e9df86412f031fc9f394dc13fa4b0336bc45271a539a163",
+  "workflow": {
+    "updated_utc": "2026-10-16T08:13:22.178042+00:00",
+    "status": "complete",
+    "plan": "/mnt/external/demosaic/benchmarks/dino-lora-gpu-checks-plan-v1.json",
+    "regression_log": "/mnt/external/demosaic/benchmarks/dino-lora-cuda-regression-v1.log",
+    "regression_log_sha256": "824135b6b6cd4861d7f2bbf1939298ae7e41a63bec7c1b870e44ad1f9a6b3a29",
+    "receipt": "/mnt/external/demosaic/benchmarks/dino-lora-gpu-preflight-v1/receipt.json",
+    "receipt_sha256": "4721e4a7221419f20e9df86412f031fc9f394dc13fa4b0336bc45271a539a163"
+  },
+  "code_commit": "ca846a0e78ae12fd0f8758e262618d9d7ee4ee81",
+  "cuda_regression": {
+    "passed": 352,
+    "seconds": 30.78,
+    "log": "/mnt/external/demosaic/benchmarks/dino-lora-cuda-regression-v1.log",
+    "log_sha256": "824135b6b6cd4861d7f2bbf1939298ae7e41a63bec7c1b870e44ad1f9a6b3a29"
+  }
+}

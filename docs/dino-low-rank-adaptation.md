@@ -4,7 +4,7 @@
 attention to noisy RAW previews. The current model keeps its original pretrained
 DINO tensors fixed and learns only its feature projection/gate. This option also
 learns low-rank changes to the foundation model's attention query/value matrices.
-**It is implemented and CPU-checked, not trained or selected for image quality.**
+**It passes CPU/GPU execution checks; it is not quality-trained or selected.**
 Existing checkpoints and recipes default to rank0 and keep their original path.
 Running private corpus/throughput workflows use their frozen source unchanged.
 
@@ -54,14 +54,22 @@ restoration checkpoint. It uses no personal or protected image gradients.
 
 The CPU regression run passes343 tests with eight CUDA tests skipped; all nine
 dedicated adapter tests pass, including the subsequently added training-resume
-check. GPU arithmetic, memory, full-model backward and restart checks are now
-[queued in a frozen checkout](results/dino-lora-gpu-checks-queue-v1.json) behind
-the current-pipeline batch sweep. Source/fixture/script hashes
-are recorded in the preflight receipt. Execution checks do not establish quality
-or speed. The corpus review selected V43 step2000 as the photographic reference;
-its first1000 alias remains fixed for reproduction.
+check. The complete CUDA suite now passes **352 tests in 30.78 s**. The
+[genuine full-model GPU preflight](results/dino-lora-gpu-preflight-v1.json)
+preserves exact initial predictions under both BF16 and FP16 on all four CFAs,
+with FP32 output. LoRA receives finite nonzero gradients and original foundation
+tensors remain unchanged. A four-update training fixture preserves complete
+AdamW state through step2 → step4 resume; all48 learned matrices are saved and
+EMA tensors reload exactly. Those few updates verify execution, not quality.
 
-After GPU checks, a matched rank0/rank4 quality trial should use one reviewed
+The checks ran in the frozen ca846a0 checkout after the owned current-pipeline
+batch sweep completed and exited. Source/config/checkpoint/script and regression
+log hashes remain in the receipts. Neither these fixtures nor their small-patch
+allocation measurements establish full-batch throughput or restoration quality.
+The corpus review selected V43 step2000 as the photographic reference; its
+first1000 alias remains fixed for reproduction.
+
+A matched rank0/rank4 quality trial should use one reviewed
 parent with fresh AdamW/EMA and identical per-step data, LR and update budget.
 Preserve all common parent tensors and verify zero-update predictions before
 training. Publish complete known/unseen and427-photo/16-procedural results,

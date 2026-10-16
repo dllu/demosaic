@@ -48,10 +48,12 @@ V34/V36 first1000 and full427/full102MP reviews are complete and stopped.
 [Nine public RAW samples](public-raw-pilot.md) retain their original quarantine.
 Six reviewed sources have a separate opt-in native extension; the chart and two
 clipped sources are excluded. Current architecture trials remain unchanged.
-The complete CUDA suite passed **343 tests** before optional DINO adaptation.
-Its nine dedicated CPU tests and genuine-weight fixture now pass; the complete
-352-test CUDA run and full-model adapter checks are queued after the current
-batch sweep. [Queue receipt](results/dino-lora-gpu-checks-queue-v1.json).
+The complete CUDA suite now passes **352 tests in 30.78 s**. The optional DINO
+adapters pass genuine full-model BF16/FP16 initial-output equality, backward,
+original-weight preservation and full-state training-resume checks.
+[GPU receipt](results/dino-lora-gpu-preflight-v1.json). The
+[current-pipeline batch sweep](current-pipeline-batch-sweep.md) is complete and
+retains batch16 for controlled quality comparisons.
 Trained quality, protected-final evaluation and the 10-second speed gate remain
 outstanding.
 
@@ -95,9 +97,9 @@ primary means versus its first gate, but regresses on low-noise procedural
 sources and unseen AHD SSIM. All three arms stop at this gate pending failure
 analysis. The README uses its photographic experimental checkpoint, with the
 first1000 alias retained. A new batch sweep measures the actual current
-4× Commons/native128 path before queued adapter GPU checks. The
+4× Commons/native128 path, followed by completed adapter GPU checks. The
 [fresh DINO presence/absence trial](fresh-dino-ablation.md) is prepared; the
-[low-rank option](dino-low-rank-adaptation.md) is CPU-verified, not quality-trained.
+[low-rank option](dino-low-rank-adaptation.md) is CPU/GPU-verified, not quality-trained.
 The [completed V43 first-gate review](native-v43-1k-review.md) now finds modest
 positive unseen-primary/photo gains versus both matched controls. All33 logged
 shared Commons/paired hashes match; ten native triplets and both full RGB16 files
