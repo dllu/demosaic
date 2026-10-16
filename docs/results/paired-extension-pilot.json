@@ -1,0 +1,451 @@
+{
+  "screen": {
+    "path": "/mnt/external/demosaic/paired-extension-20261016-quarantine-v1/pilot-first2-screen/summary.json",
+    "sha256": "ca96bed852f077c60f6a35b3cce5c259490b8070ae09a73b2e07c23efc1062e7",
+    "clear_scenes": [
+      "Bark",
+      "Blombukett"
+    ],
+    "held_scenes": [],
+    "protected_raw_references": 42,
+    "protected_commons_sources": 4558,
+    "recipe": {
+      "script_sha256": "b7fe09dd1e37955ea6c2748f8649479fab69457dae6221f82837cb09ceb815da",
+      "shared_screen_sha256": "065679b7b6609d0e7e179971b80ce9b3b613b0c888cc0f4a877781908714cf8e",
+      "manifest_sha256": "53c3355a29360539c87c54d2fac9ae25e1906c42a3e6109fb8becb96ffcf3548",
+      "protected_sha256": "fee2581dc98fd67765844b824e9c1d2d387332f975f7b0402277bf2d1c8c9246",
+      "commons_sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a",
+      "method": "Both clean references; seven full/center/corner views x8 dihedral transforms on both sides; informative std>.005, aspect4%, dHash<=40 OR correlation>=.95. Any flag/decode error holds the whole scene."
+    }
+  },
+  "preparation": {
+    "path": "/mnt/external/demosaic/paired-extension-20261016-quarantine-v1/pilot-first2-prepared/manifest.json",
+    "sha256": "99a6900ce0b0182a6f772ce90d839ead0e2d1f54f021345670b06edb1ddbbd39",
+    "split": "quarantine",
+    "cases": 4,
+    "crops": 36,
+    "outcomes": [
+      {
+        "scene": "Bark",
+        "status": "prepared",
+        "cases": 2,
+        "crops": 18,
+        "manifest": "/mnt/external/demosaic/paired-extension-20261016-quarantine-v1/pilot-first2-prepared/scenes/3ebaec6ba84c8234aa25/manifest.json",
+        "manifest_sha256": "dacdeedd12f2f82eeade89fd49ca3926e5ece394055ee47184b1f2380e7b5841"
+      },
+      {
+        "scene": "Blombukett",
+        "status": "prepared",
+        "cases": 2,
+        "crops": 18,
+        "manifest": "/mnt/external/demosaic/paired-extension-20261016-quarantine-v1/pilot-first2-prepared/scenes/e72127a6d6ce6f17945c/manifest.json",
+        "manifest_sha256": "9c0a991c4c2171a3d15413d228a0f6fbb605ad50933ee45dcf46f919da41b44c"
+      }
+    ],
+    "manual_review": "Pending; no training admission",
+    "cameras": [
+      "Canon EOS 6D"
+    ]
+  },
+  "actual_decoder_preflight": {
+    "source_sha256": "5fcbae3faf1181e9a822784286bd55f69f63ee5d63f3d897b404f2fa1559d273",
+    "source": {
+      "filename": "Bayer_Bark_GT_ISO100_sha1=f15da1140d949ee30c15ce7b251839a7b7a41de7.cr2",
+      "file_id": 29023,
+      "bytes": 30222296,
+      "publisher_checksum": {
+        "type": "MD5",
+        "value": "68079c03f3039c2ad9e86d695bc7b2cf"
+      },
+      "sha1": "f15da1140d949ee30c15ce7b251839a7b7a41de7",
+      "iso_label": 100,
+      "role": "reference",
+      "url": "https://dataverse.uclouvain.be/api/access/datafile/29023",
+      "sha256": "5fcbae3faf1181e9a822784286bd55f69f63ee5d63f3d897b404f2fa1559d273",
+      "path": "/mnt/external/demosaic/paired-extension-20261016-quarantine-v1/files/Bayer_Bark_GT_ISO100_sha1=f15da1140d949ee30c15ce7b251839a7b7a41de7.cr2"
+    },
+    "screen_cache": "/mnt/external/demosaic/paired-extension-20261016-quarantine-v1/decoder-preflight-v1/5fcbae3faf1181e9a822784286bd55f69f63ee5d63f3d897b404f2fa1559d273.npy",
+    "screen_sha256": "e92cb72ab640ce816bb9511ffcb1a35e7dc8754eeb97723e0b8eee3066cb5268",
+    "screen_shape": [
+      458,
+      687,
+      3
+    ],
+    "identity": {
+      "SourceFile": "/mnt/external/demosaic/paired-extension-20261016-quarantine-v1/files/Bayer_Bark_GT_ISO100_sha1=f15da1140d949ee30c15ce7b251839a7b7a41de7.cr2",
+      "Model": "Canon EOS 6D",
+      "ISO": 100
+    },
+    "pattern": "RGGB",
+    "sensor_shape": [
+      3670,
+      5496
+    ],
+    "render": "LibRaw half-size linear-sRGB/camera-WB/no auto bright/no rotation, then area4; identity screening only",
+    "script_sha256": "b7fe09dd1e37955ea6c2748f8649479fab69457dae6221f82837cb09ceb815da",
+    "purpose": "Actual RAW decode/ordinary-Bayer/metadata/cache preflight; data identity only"
+  },
+  "interpretation": "Two-scene actual-RAW execution/identity/alignment pilot only. Contact sheet shows bark texture and an indoor flower bouquet. Neither training admission nor learned-model quality evidence. Archives retain the actual pilot source versions; full review will use the frozen post-test scripts.",
+  "native_registration_pairs": [
+    {
+      "scene": "Bark",
+      "image": "docs/images/paired-extension-pilot-bark-native.png",
+      "sha256": "d86acec6b2795f573493f926e4385dceadf8e87d03d4c5cfee42139819c1b710",
+      "prepared_crop": {
+        "id": "Bark:fa3f3691f1e9f2374e9ebc48d5c0b0a71a85539fe92af900c9866381a050ae9e:1578:2492",
+        "path": "scenes/3ebaec6ba84c8234aa25/crop-c13150b38f019dc652bb6c3a.npz",
+        "sha256": "f8417d05d4def34e33bf1d918b5e99b8d089e33d364d8fccae14f4943c526d35",
+        "xywh": [
+          2492,
+          1578,
+          512,
+          512
+        ],
+        "valid_fraction": 0.9998817443847656
+      },
+      "crop_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "display_exposure": 2,
+      "white_balance": [
+        2.0322265625,
+        1.0,
+        1.6279296875
+      ],
+      "camera_to_srgb": [
+        [
+          1.9125487280735187,
+          -1.0586550296184556,
+          0.14610630154493662
+        ],
+        [
+          -0.22485285228230345,
+          1.6465456844740258,
+          -0.4216928321917224
+        ],
+        [
+          0.009865214627096813,
+          -0.5093244421965412,
+          1.4994592275694443
+        ]
+      ],
+      "pattern": "RGGB",
+      "conditioning": {
+        "shot": 0.00256,
+        "read": 2.6214400000000004e-05,
+        "method": "nominal-ISO-fallback",
+        "estimate": {
+          "shot": null,
+          "read": null,
+          "reliable": false,
+          "reason": "insufficient_flat_patches",
+          "candidate_patches": 4096,
+          "accepted_patches": 2,
+          "intensity_span": 0.0,
+          "reference_intensity": null,
+          "reference_variance": null,
+          "shot_interval": null,
+          "read_interval": null,
+          "bins": []
+        }
+      },
+      "source": {
+        "filename": "Bayer_Bark_ISO12800_sha1=1b272e3c62cb33ea2031e1480b46182bbc1e3a3c.cr2",
+        "file_id": 29343,
+        "bytes": 33909101,
+        "publisher_checksum": {
+          "type": "MD5",
+          "value": "5cff6e9667b272c56ee88e594618c88b"
+        },
+        "sha1": "1b272e3c62cb33ea2031e1480b46182bbc1e3a3c",
+        "iso_label": 12800,
+        "role": "noisy",
+        "url": "https://dataverse.uclouvain.be/api/access/datafile/29343",
+        "sha256": "fa3f3691f1e9f2374e9ebc48d5c0b0a71a85539fe92af900c9866381a050ae9e",
+        "path": "/mnt/external/demosaic/paired-extension-20261016-quarantine-v1/files/Bayer_Bark_ISO12800_sha1=1b272e3c62cb33ea2031e1480b46182bbc1e3a3c.cr2"
+      },
+      "references": [
+        {
+          "sha256": "5fcbae3faf1181e9a822784286bd55f69f63ee5d63f3d897b404f2fa1559d273",
+          "alignment": {
+            "dy": -10,
+            "dx": 7,
+            "gain": 0.9979941725907838,
+            "green_l1": 0.009169477969408035,
+            "samples": 146769,
+            "coarse_shift": [
+              -8,
+              8
+            ]
+          },
+          "rgb_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0323742191657417,
+              1.0323160558116293,
+              1.0323573543491371
+            ],
+            "samples": [
+              310500,
+              621396,
+              310304
+            ]
+          }
+        }
+      ],
+      "reference_label": "Independent low-ISO AHD reference, exposure/alignment calibrated from sensor samples; not exact RGB GT",
+      "scope": "Native data/registration review only, no denoised model output or performance claim"
+    },
+    {
+      "scene": "Blombukett",
+      "image": "docs/images/paired-extension-pilot-blombukett-native.png",
+      "sha256": "98a83bb03ff33c828414e058f6e7ea7e882dca3e61c15a2f746a583cc5120d20",
+      "prepared_crop": {
+        "id": "Blombukett:25fba5f29d735c6ee9eeb600fd6c9003c2e059171271b3e9fdf9d9c9427cf5cb:1578:2492",
+        "path": "scenes/e72127a6d6ce6f17945c/crop-e459e71d6ddde5636094fa6a.npz",
+        "sha256": "6e3c3418ee73f1fefed89716d4d3c3c330e989ee74ffce9274438098cd07cc7a",
+        "xywh": [
+          2492,
+          1578,
+          512,
+          512
+        ],
+        "valid_fraction": 0.9938125610351562
+      },
+      "crop_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "display_exposure": 2,
+      "white_balance": [
+        2.0322265625,
+        1.0,
+        1.6279296875
+      ],
+      "camera_to_srgb": [
+        [
+          1.9125487280735187,
+          -1.0586550296184556,
+          0.14610630154493662
+        ],
+        [
+          -0.22485285228230345,
+          1.6465456844740258,
+          -0.4216928321917224
+        ],
+        [
+          0.009865214627096813,
+          -0.5093244421965412,
+          1.4994592275694443
+        ]
+      ],
+      "pattern": "RGGB",
+      "conditioning": {
+        "shot": 0.0016196954772532796,
+        "read": 9.267577238113206e-06,
+        "method": "input-only-Haar-fit",
+        "estimate": {
+          "shot": 0.0016196954772532796,
+          "read": 9.267577238113206e-06,
+          "reliable": true,
+          "reason": "fit",
+          "candidate_patches": 4096,
+          "accepted_patches": 2063,
+          "intensity_span": 0.1811447324231267,
+          "reference_intensity": 0.06940732896327972,
+          "reference_variance": 0.00012069290096405894,
+          "shot_interval": [
+            0.001588439984467234,
+            0.0016646472109111462
+          ],
+          "read_interval": [
+            7.578180071471278e-06,
+            1.069088054407027e-05
+          ],
+          "bins": [
+            {
+              "mean": 0.015023225918412209,
+              "variance": 3.371067941770889e-05,
+              "patches": 129
+            },
+            {
+              "mean": 0.022744014859199524,
+              "variance": 4.511607767199166e-05,
+              "patches": 129
+            },
+            {
+              "mean": 0.02909529209136963,
+              "variance": 5.775589670520276e-05,
+              "patches": 129
+            },
+            {
+              "mean": 0.03547494858503342,
+              "variance": 6.76658601150848e-05,
+              "patches": 129
+            },
+            {
+              "mean": 0.04156063497066498,
+              "variance": 7.634562643943354e-05,
+              "patches": 129
+            },
+            {
+              "mean": 0.04992879182100296,
+              "variance": 8.982470171758905e-05,
+              "patches": 129
+            },
+            {
+              "mean": 0.05803699791431427,
+              "variance": 0.00010323892638552934,
+              "patches": 129
+            },
+            {
+              "mean": 0.06503649801015854,
+              "variance": 0.00011574194650165737,
+              "patches": 129
+            },
+            {
+              "mean": 0.07305029034614563,
+              "variance": 0.00012766984582412988,
+              "patches": 129
+            },
+            {
+              "mean": 0.08221505582332611,
+              "variance": 0.0001395094150211662,
+              "patches": 129
+            },
+            {
+              "mean": 0.09342357516288757,
+              "variance": 0.00015968827938195318,
+              "patches": 129
+            },
+            {
+              "mean": 0.10366746783256531,
+              "variance": 0.0001743988395901397,
+              "patches": 129
+            },
+            {
+              "mean": 0.12223934382200241,
+              "variance": 0.0002115190145559609,
+              "patches": 129
+            },
+            {
+              "mean": 0.1458868682384491,
+              "variance": 0.00024060251598712057,
+              "patches": 129
+            },
+            {
+              "mean": 0.17723524570465088,
+              "variance": 0.0002887061273213476,
+              "patches": 129
+            },
+            {
+              "mean": 0.24071095883846283,
+              "variance": 0.0004216932720737532,
+              "patches": 128
+            }
+          ]
+        }
+      },
+      "source": {
+        "filename": "Bayer_Blombukett_ISO12800_sha1=50346c9c9118806654d6e4987b878dd45fcb7ca6.cr2",
+        "file_id": 29171,
+        "bytes": 31723992,
+        "publisher_checksum": {
+          "type": "MD5",
+          "value": "224b3ce0ce0596a97263c2a640053cc4"
+        },
+        "sha1": "50346c9c9118806654d6e4987b878dd45fcb7ca6",
+        "iso_label": 12800,
+        "role": "noisy",
+        "url": "https://dataverse.uclouvain.be/api/access/datafile/29171",
+        "sha256": "25fba5f29d735c6ee9eeb600fd6c9003c2e059171271b3e9fdf9d9c9427cf5cb",
+        "path": "/mnt/external/demosaic/paired-extension-20261016-quarantine-v1/files/Bayer_Blombukett_ISO12800_sha1=50346c9c9118806654d6e4987b878dd45fcb7ca6.cr2"
+      },
+      "references": [
+        {
+          "sha256": "64189378ccfe017a4c7c4ae74008fb1670f0c071fb502646a58ded45971ad148",
+          "alignment": {
+            "dy": 0,
+            "dx": 0,
+            "gain": 0.9860412149865957,
+            "green_l1": 0.008081196807324886,
+            "samples": 143613,
+            "coarse_shift": [
+              0,
+              0
+            ]
+          },
+          "rgb_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0323339304787191,
+              1.0322883187800702,
+              1.032298933065693
+            ],
+            "samples": [
+              299732,
+              609592,
+              298579
+            ]
+          }
+        }
+      ],
+      "reference_label": "Independent low-ISO AHD reference, exposure/alignment calibrated from sensor samples; not exact RGB GT",
+      "scope": "Native data/registration review only, no denoised model output or performance claim"
+    }
+  ],
+  "native_publication_script_sha256": "912fef58a61af800cae1151f90503626a0b97ecaccb89324cee1cf9323dfad58",
+  "pilot_capture_metadata": [
+    {
+      "SourceFile": "/mnt/external/demosaic/paired-extension-20261016-quarantine-v1/files/Bayer_Bark_GT_ISO100_sha1=f15da1140d949ee30c15ce7b251839a7b7a41de7.cr2",
+      "Model": "Canon EOS 6D",
+      "ISO": 100,
+      "FNumber": 7.1,
+      "ExposureTime": "1/4",
+      "DateTimeOriginal": "2021:04:30 16:27:58"
+    },
+    {
+      "SourceFile": "/mnt/external/demosaic/paired-extension-20261016-quarantine-v1/files/Bayer_Bark_ISO1600_sha1=db6334331fcca3e28c71fa33cea02002b7d98767.cr2",
+      "Model": "Canon EOS 6D",
+      "ISO": 1600,
+      "FNumber": 7.1,
+      "ExposureTime": "1/60",
+      "DateTimeOriginal": "2021:04:30 16:28:14"
+    },
+    {
+      "SourceFile": "/mnt/external/demosaic/paired-extension-20261016-quarantine-v1/files/Bayer_Bark_ISO12800_sha1=1b272e3c62cb33ea2031e1480b46182bbc1e3a3c.cr2",
+      "Model": "Canon EOS 6D",
+      "ISO": 12800,
+      "FNumber": 7.1,
+      "ExposureTime": "1/500",
+      "DateTimeOriginal": "2021:04:30 16:28:27"
+    },
+    {
+      "SourceFile": "/mnt/external/demosaic/paired-extension-20261016-quarantine-v1/files/Bayer_Blombukett_GT_ISO100_sha1=d5bfd59f3b549fc79af1381e65f72922c05fec55.cr2",
+      "Model": "Canon EOS 6D",
+      "ISO": 100,
+      "FNumber": 4.0,
+      "ExposureTime": 0.4,
+      "DateTimeOriginal": "2021:04:27 14:24:57"
+    },
+    {
+      "SourceFile": "/mnt/external/demosaic/paired-extension-20261016-quarantine-v1/files/Bayer_Blombukett_ISO1600_sha1=856e952e90dc3856130c157438ee1f803cc00bce.cr2",
+      "Model": "Canon EOS 6D",
+      "ISO": 1600,
+      "FNumber": 4.0,
+      "ExposureTime": "1/40",
+      "DateTimeOriginal": "2021:04:27 14:25:20"
+    },
+    {
+      "SourceFile": "/mnt/external/demosaic/paired-extension-20261016-quarantine-v1/files/Bayer_Blombukett_ISO12800_sha1=50346c9c9118806654d6e4987b878dd45fcb7ca6.cr2",
+      "Model": "Canon EOS 6D",
+      "ISO": 12800,
+      "FNumber": 4.0,
+      "ExposureTime": "1/320",
+      "DateTimeOriginal": "2021:04:27 14:25:38"
+    }
+  ]
+}

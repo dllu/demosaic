@@ -48,3 +48,39 @@ scene separation. Downloading or preparing data alone establishes no model gain.
 Sixteen targeted acquisition/selection tests pass: original paired acquisition
 tests plus new metadata-only/quarantine/split/family/source-alias/license tests.
 No enlarged full-suite count is claimed from this separate invocation.
+
+The [background acquisition](results/paired-extension-download-launch.json) runs
+from frozen `e2db058`. The new screen checks **both** clean references against
+all42 cached protected RAW/GFX views and all4,558 Commons val/test images.
+Both sides use seven full/center/corner views and eight dihedral transforms;
+aspect4%, dHash≤40 OR correlation≥.95 flags hold the whole scene. Uninformative
+or unidentified-camera references are held. Source/cache hashes, duplicate IDs,
+safe ledger names, locks, frozen recipes and interruption reuse are checked.
+Flags remain quarantined for review; no scoring model is loaded.
+
+[The actual two-scene pilot](results/paired-extension-pilot.json) decoded Canon
+EOS6D Bark and Blombukett, passed the identity screen, registered four noisy
+pairs and verified36 fixed512px crops. All prepared records retain quarantine.
+The ordinary-Bayer decoder preflight reports RGGB/3670×5496 for Bark. A separate
+preparer records failed scenes, verifies every NPZ's hash/dimensions/native
+float32 data/measured-reference mask, and preserves per-scene outcomes for
+restart. Screen-clear or successful preparation is not training admission.
+Eleven targeted screening/preparation tests pass separately from acquisition.
+
+These resized contact images are for dataset content inspection:
+
+![Bark texture and indoor flower bouquet](images/paired-extension-pilot-content.jpg)
+
+Native160px data/registration pairs, **noisy Malvar → independent AHD reference**,
+shared+1EV and fixed ROI[176,176,160,160] inside the center512px prepared crop:
+
+![Bark native data pair](images/paired-extension-pilot-bark-native.png)
+
+![Blombukett native data pair](images/paired-extension-pilot-blombukett-native.png)
+
+These are not learned-model outputs or exact-GT comparisons. The high-ISO frames
+are ISO12800; source/ROI/registration/noise/display settings are in the receipt.
+Per-series apertures match (f/7.1 bark, f/4 bouquet), but low-ISO exposures are
+1/4s and0.4s versus1/500s and1/320s. Scene movement and reference sharpness need
+further native review before admission. Both scenes have CC0 grants by Peter
+Wemmert; source RAWs are read-only and preview transforms are disclosed.

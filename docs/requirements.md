@@ -5,7 +5,7 @@ not just software that executes. This checklist records the evidence required.
 
 | Requirement | Evidence needed | Current state |
 | --- | --- | --- |
-| Modern method and DINOv3 recommendation | Primary-source research, architecture rationale, licensed pretrained backbone and ablation | Official pinned weights; an earlier architecture's matched 20k-step ablation has a small positive gain on 427 photos. A trained ablation of the current pretrained-RGB architecture remains; SOTA is unproven |
+| Modern method and DINOv3 recommendation | Primary-source research, architecture rationale, licensed pretrained backbone and ablation | Official pinned weights; an earlier architecture's matched 20k-step ablation has a small positive gain on 427 photos. The current architecture’s matched fresh no-context/S/B first1000 comparison finds no context gain; the whole-state continuation to3000 is live. Mature attribution and SOTA remain unproven |
 | Free, broad training data | Source attribution manifest, content-grouped held-out split, real corpus training | Active frozen Commons: 40,170 train / 2,303 val / 2,255 untouched test / 4 excluded; a separate reviewed4× extension reaches52,536 train while preserving active holdouts and is now used only by the V50 data-only trial. The [larger native extension](public-raw-expansion-v2.md) freezes 128 captures/106 declared scene groups, adding 69 reviewed CC0 photos to the prior six. V43 is its matched trial; V37/V38 remain on53/31 and V39 on59/37. Finite screening/manual review is not complete scene recognition |
 | 8×8 binning with additional precision | Linear-light float averaging and >8-bit cache, numerical tests | Implemented and tested; all 44732 eligible licensed sources prepared |
 | Geometry, optical blur, exposure, synthetic fine detail | Executable data augmentation and inspected samples | Implemented. Complete 4×→geometry/PSF→2× Commons/native targets improve full-photo PSNR by .50990 dB in the matched V34 trial; original 8× validation remains fixed |
@@ -157,3 +157,10 @@ inference flag defaults off and activates only for explicit shot=read=0. The
 V52 export preserves all V43 step2000 EMA tensors. CPU compatibility and actual
 pinned-weight preflight pass; all-condition/CUDA/real checks remain pending.
 This supplies no real-noise gain and does not repair the broad SOTA deficit.
+
+A separate [paired-RAW quarantine](paired-extension-quarantine.md) selects59 new
+scene candidates/231 files/11.03GB without relaxing train32. Acquisition runs in
+frozen source; the actual two-scene identity/alignment pilot verifies36 crops.
+Both references are screened against cached protected scenes and Commons
+val/test. Screen/preparation successes retain quarantine; content, motion,
+reference sharpness and a reviewed admission contract remain before training.
