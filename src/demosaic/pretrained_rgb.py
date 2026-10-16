@@ -46,8 +46,9 @@ class RgbRestorationTrunk(nn.Module):
     vary spatially. Optional offsets start at zero in the joint model.
     """
 
-    def __init__(self):
+    def __init__(self, *, hidden_autocast=False):
         super().__init__()
+        self.hidden_autocast = hidden_autocast
         self.m_head = nn.Conv2d(4, 64, 3, padding=1, bias=False)
         for level, (a, b) in enumerate(zip((64, 128, 256), (128, 256, 512)), 1):
             setattr(
@@ -76,7 +77,12 @@ class RgbRestorationTrunk(nn.Module):
             x1 = self.m_head(torch.cat((rgb.float(), noise.float()), dim=1))
             if head_offset is not None:
                 x1 = x1 + head_offset.float()
-        x2 = self.m_down1(x1)
+        hidden = x1
+        if self.hidden_autocast and torch.is_autocast_enabled(x1.device.type):
+            # Keep the original FP32 head for the final native skip. Only the
+            # hidden encoder branch follows the active CNN autocast dtype.
+            hidden = hidden.to(torch.get_autocast_dtype(x1.device.type))
+        x2 = self.m_down1(hidden)
         x3 = self.m_down2(x2)
         x4 = self.m_down3(x3)
         if middle_offset is not None:
@@ -219,7 +225,10 @@ def stabilized_photometry(profiles, offset, span):
 class PretrainedRgbDemosaic(nn.Module):
     """One trainable RGB pass with CFA/noise/camera input and frozen DINO context."""
 
-    def __init__(self, *, stabilized=False, physical_anchors=False, processing_scale=1, detail_prior=False):
+    def __init__(
+        self, *, stabilized=False, physical_anchors=False, processing_scale=1,
+        detail_prior=False, hidden_autocast=False,
+    ):
         super().__init__()
         if physical_anchors and not stabilized:
             raise ValueError("Physical anchors require variance stabilization")
@@ -227,7 +236,7 @@ class PretrainedRgbDemosaic(nn.Module):
             raise ValueError("Packed processing requires variance stabilization and scale 2")
         if detail_prior and processing_scale != 2:
             raise ValueError("The detail prior requires packed processing")
-        self.network = RgbRestorationTrunk()
+        self.network = RgbRestorationTrunk(hidden_autocast=hidden_autocast)
         self.measurement_adapter = nn.Conv2d(21, 64, 1)
         nn.init.zeros_(self.measurement_adapter.weight)
         nn.init.zeros_(self.measurement_adapter.bias)

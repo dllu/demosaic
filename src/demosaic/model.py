@@ -45,6 +45,7 @@ class ModelConfig:
     physical_anchors: bool = False
     rgb_processing_scale: int = 1
     packed_detail_prior: bool = False
+    rgb_hidden_autocast: bool = False
 
     def to_dict(self):
         return asdict(self)
@@ -363,6 +364,8 @@ class JointDemosaic(nn.Module):
             raise ValueError("Physical anchors require variance stabilization")
         if cfg.restoration_backbone not in ("local", "pretrained-rgb"):
             raise ValueError("Unknown restoration backbone")
+        if cfg.rgb_hidden_autocast and cfg.restoration_backbone != "pretrained-rgb":
+            raise ValueError("RGB hidden autocast requires the pretrained RGB backbone")
         if cfg.variance_stabilization and cfg.restoration_backbone != "pretrained-rgb":
             raise ValueError("Variance stabilization requires the pretrained RGB backbone")
         if cfg.restoration_backbone == "pretrained-rgb":
@@ -387,6 +390,7 @@ class JointDemosaic(nn.Module):
                 physical_anchors=cfg.physical_anchors,
                 processing_scale=cfg.rgb_processing_scale,
                 detail_prior=cfg.packed_detail_prior,
+                hidden_autocast=cfg.rgb_hidden_autocast,
             )
             self.context = DinoContext(cfg, 512) if cfg.dino else None
             self.refiner = self.coarse_refiner = self.pyramid_refiner = None
