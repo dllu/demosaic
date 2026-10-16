@@ -37,6 +37,13 @@ copy holds its lock. To stop gracefully, send SIGTERM to the downloader Python
 process; it records completed work and finishes active writes.
 
 Downloading does **not** change an active training or evaluation manifest.
+
+A later [16,231-source quarantine preparation](commons-incoming-v3.md) now
+processes arrivals beyond the earlier incoming selection with two CPU workers.
+It excludes every previously seen candidate, queues cached protected-scene and
+duplicate screening, and stops before training admission. Current model/data
+memberships remain fixed.
+
 V32/V33 and the V34 augmentation recipe retain the frozen 44,732-source selection.
 Existing validation/test membership and the excluded GFX scene/siblings remain
 fixed.
