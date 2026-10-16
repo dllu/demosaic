@@ -10,10 +10,12 @@ import numpy as np
 
 from .safety import writable_path
 
-# Deliberate data admission, reviewed in docs/public-raw-pilot.md. Merely
+# Deliberate data admission, reviewed in docs/public-raw-pilot.md and
+# docs/public-raw-expansion-v2.md. Merely
 # changing a quarantine manifest's split must never enable training.
 REVIEWED_ADMISSIONS = frozenset({
     "367b12e3b64817ce06ba0791c4131c2bc77a75971dac2ede03fe227b732ffce0",
+    "7b1eb85c10d738875f6e0abdda5274ed900c42783b48e0a6987e83d9e76ce591",
 })
 
 

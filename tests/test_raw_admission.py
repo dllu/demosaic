@@ -132,3 +132,25 @@ def test_pinned_real_receipt_and_exclusions_match_the_reviewed_sources():
     assert {r["file_id"] for r in receipt["rejected"]} == {2788, 3478, 7872}
     rows = admission.approved_public_rows({"format_version": 2, "split": "train", "public_raw_admission": {"sha256": digest, "payload": payload.decode()}})
     assert len(rows) == 12
+
+
+def test_second_pinned_review_preserves_prior_sources_and_new_quality_exclusions():
+    from pathlib import Path
+
+    root = Path(__file__).parents[1] / "docs/results"
+    prior = json.loads((root / "public-raw-admission-v1.json").read_text())
+    payload = (root / "public-raw-admission-v2.json").read_bytes()
+    digest = hashlib.sha256(payload).hexdigest()
+    assert digest in admission.REVIEWED_ADMISSIONS
+    reviewed = json.loads(payload)
+    assert len(reviewed["approved"]) == 75
+    approved = {r["file_id"]: r for r in reviewed["approved"]}
+    for row in prior["approved"]:
+        assert approved[row["file_id"]] == row
+    assert len(set(approved) - {r["file_id"] for r in prior["approved"]}) == 69
+    assert not set(approved) & {r["file_id"] for r in reviewed["rejected"]}
+    assert not set(approved) & {1275, 2401, 1118, 2788, 3478, 7872, 2980, 4494, 4215, 6232}
+    assert all(r["bin4_any_channel_near_white_fraction"] <= .001 for r in reviewed["source_quality"]["verified"])
+    assert len(reviewed["source_quality"]["verified"]) == 75
+    rows = admission.approved_public_rows({"format_version": 2, "split": "train", "public_raw_admission": {"sha256": digest, "payload": payload.decode()}})
+    assert len(rows) == 150

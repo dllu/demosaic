@@ -1,10 +1,15 @@
 # Broader public RAW quarantine
 
-The native clean corpus has only 31 original scenes, or 37 with the six-source
-public extension. This larger selection investigates more camera-native scene
-diversity before another matched quality trial. It is **quarantine**, not an
-approved training corpus, and establishes no model quality gain.
+The reviewed extension adds **69 new CC0 photographic captures**. Together with
+the six prior public sources and 53 original native captures, its frozen 4×/8×
+datasets contain **128 captures across 106 declared scene groups** (previously
+53/31, or 59/37 with the small public extension). Scene counts describe reviewed
+capture groups, not proof of every physical-place identity. The original
+quarantine remains unchanged; only a separate SHA-pinned subset is admitted.
+No model quality gain is established by data admission.
 [Frozen selection and producer checks](results/public-raw-expansion-v2-startup.json).
+[Complete source admission](results/public-raw-admission-v2.json),
+[frozen dataset identities](results/native-public-extension-v2.json).
 
 The metadata survey inspects 291 catalog entries across 185 camera models and
 selects 138 models with explicit per-entry CC0 links and ISO 50–200. It prefers
@@ -61,8 +66,62 @@ any channel ≥65500; passing it is insufficient for admission.
 
 A genuine GFX50R source reproduces the old producer's bin4, bin8 and screen
 cache bytes exactly. Resume reuses both target files without changing mtimes.
-All 342 tests pass (26.95 s), including unseen-camera aliases and standing GFX
-siblings with differing file numbers. No new review receipt is pinned and no
-existing training manifest changes. Remaining steps are actual content/quality
-inspection, protected/Commons/native/intra-candidate scene-overlap screening,
-explicit admission and a matched full-resolution training/quality trial.
+All 343 tests pass (27.49 s), including unseen-camera aliases and standing GFX
+siblings with differing file numbers. Quarantine preparation changes no
+existing training manifest. The completed review
+below subsequently pins its explicit opt-in subset.
+
+## Source review and separate admission
+
+All 138 downloads verify, totaling 5,835,986,623 bytes. 131 decode successfully;
+seven have unsupported formats or unusable color matrices. 102 decoded sources
+pass the clipping criterion. Reviewing all seven contact sheets and flagged
+references retains 69 new photographic sources: landscape, architecture,
+foliage, fences, water, wildlife and a few photographic indoor/plant subjects.
+Charts, staged props, clipped sources and duplicate/ambiguous variants are
+excluded. Plant 1275/2925 and building 2401/2403 are manually grouped even though
+the finite fingerprint screen misses them; building 1118 is conservatively
+omitted as a possible family variant of 1533. The prior six sources remain exact.
+
+The identity audit compares all 131 new renders against 42 protected references,
+53 original native references, nine previous public candidates and each other.
+Full/center 75%/center 50%/four corner 50% views and eight dihedral orientations
+use dHash≤40 OR correlation≥.95 after aspect/information checks. Cached protected
+screen hashes, source-manifest identities and standing selection bytes verify.
+It also checks 46,738 Commons records using full-view cross-render thresholds
+dHash≤24 AND correlation≥.97 with 3% aspect tolerance. No Commons matches appear.
+
+Three new sources flag against protected data. The staged D6 jar is excluded;
+retained SF/Korean skylines differ clearly from the flagged development plate
+stack. Other retained flags compare scenery with ferry, plumbing, radiator,
+redbox or different landscapes and are resolved by full-source inspection.
+The retained European rail station and unfinished-house source were directly
+compared with the cached Tokyo GFX river/platform view and are different scenes.
+Protected-final model performance is never scored. These finite screens and
+visual checks are **not complete scene recognition**; arbitrary crops, changing
+lighting, aspect and viewpoint remain limitations.
+
+The admission preserves the existing pinned review and adds exactly this new
+payload SHA256:
+`7b1eb85c10d738875f6e0abdda5274ed900c42783b48e0a6987e83d9e76ce591`.
+Both native extensions preserve all 53 legacy rows and all six prior public
+source/cache/metadata identities. Originals, quarantine manifests and active
+training datasets are unchanged. Targets remain low-noise estimates, not exact
+GT. Self-signing, flipping quarantine splits or relabeling a source still fails.
+
+Representative source inspection, **resized**, metadata-WB/color/sRGB rendering
+at ×1. It is dataset inspection, not a performance/native-pixel comparison:
+
+![Selected CC0 RAW source inspection, resized](images/public-raw-v2-selected-overview.png)
+
+All sources are explicitly CC0; per-file URLs, original metadata, checksums and
+license links are retained in the admission. The preview applies phase binning,
+WB/color rendering, orientation and resizing.
+
+The [V43 recipe](../configs/dino-anchored-native-diverse-b16-v43.yaml) tests this
+larger native dataset against frozen V37/V39 controls. Same immutable V34 EMA,
+fresh AdamW/EMA, seed 47, batch 16, LR 3e-5/planned 3000, 25% paired/25% native/50%
+Commons, original 8× validation and full-resolution CNN/precision policy. Only
+the native dataset changes. V42's inference precision export is separate.
+Stop after 1000 updates for known/unseen, full 427-photo/procedural and full 102 MP GFX
+review with native crops; shared logged Commons/paired hashes must match.
