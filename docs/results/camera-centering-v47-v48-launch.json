@@ -1,0 +1,43 @@
+{
+  "status": "Matched first1000 training launched; quality comparison pending",
+  "recorded_utc": "2026-10-16T09:01:06.566791+00:00",
+  "controller_pid": 1150371,
+  "source_commit": "7cd1f12c37cf05694d9eeb9ce501a4cdc5ce12d5",
+  "private_worktree": "/home/dllu/proj/demosaic/.cache/camera-centering-worktree",
+  "plan": {
+    "arms": [
+      {
+        "name": "dino-camera-control-b16-v47",
+        "config": "/home/dllu/proj/demosaic/.cache/camera-centering-worktree/configs/dino-camera-control-b16-v47.yaml",
+        "config_sha256": "ff1713ee174805ef70356565c4ac3e6b9b97c4d27786ccdebc86b2792e0fc94a",
+        "parent": "/mnt/external/demosaic/evaluation/paired-known-native-diverse-v43-1k-newonly/weights/weights-8ee3e960acdf95d88ba06eab30ac9abbab8bab28b0dc63d79b304a960eb535c5.pt",
+        "parent_sha256": "8ee3e960acdf95d88ba06eab30ac9abbab8bab28b0dc63d79b304a960eb535c5",
+        "centered": false
+      },
+      {
+        "name": "dino-camera-centered-b16-v48",
+        "config": "/home/dllu/proj/demosaic/.cache/camera-centering-worktree/configs/dino-camera-centered-b16-v48.yaml",
+        "config_sha256": "b6475197bbd1169dddbd1349ae3177ccc99a08d51cc44a9dde6153cc61054f15",
+        "parent": "/mnt/external/demosaic/evaluation/paired-known-native-diverse-v43-1k-newonly/weights/weights-8ee3e960acdf95d88ba06eab30ac9abbab8bab28b0dc63d79b304a960eb535c5.pt",
+        "parent_sha256": "8ee3e960acdf95d88ba06eab30ac9abbab8bab28b0dc63d79b304a960eb535c5",
+        "centered": true
+      }
+    ],
+    "code_commit": "7cd1f12",
+    "preflight_receipt_sha256": "415ce992a4deda5f541d9618b8baa7fee7f9ed9d369d1a9191605972fa9b8725",
+    "script_sha256": "5d20d99cdc6fbe0f9501c20a9b0e0bda9156b9e401c3f7d4a2efe3c1adb89d7a"
+  },
+  "plan_sha256": "5c699bba68ce9a3582a5bb333273a79db4290152cd88d37e9a70f6f76a6d75ae",
+  "workflow": "/mnt/external/demosaic/runs/camera-centering-v47-v48-workflow.json",
+  "observed_workflow": {
+    "updated_utc": "2026-10-16T08:59:08.279097+00:00",
+    "status": "training-first1000",
+    "arm": "dino-camera-control-b16-v47",
+    "plan": "/mnt/external/demosaic/runs/camera-centering-v47-v48-plan.json"
+  },
+  "archived_driver": "/mnt/external/demosaic/runs/camera-centering-v47-v48-workflow.py",
+  "driver_sha256": "5d20d99cdc6fbe0f9501c20a9b0e0bda9156b9e401c3f7d4a2efe3c1adb89d7a",
+  "evidence": "358 CUDA tests; genuine parent checks verify all common tensors and exact all-CFA FP32/BF16/FP16 initial predictions at3 noise priors, no new trainable parameters, fixed-reference/EMA/optimizer-resume persistence.",
+  "comparison": "Same V43-first1000 EMA, seed50, batch16, fresh AdamW/EMA and LR3e-5/planned3000; current frozen data/precision. Only camera matrix optimization coordinates differ. All41 logged input/target hashes must match.",
+  "next": "Sequential V47/V48 training to1000, full known/unseen/427-photo/16-procedural/102MP GFX evaluation and native triplets. No checkpoint promotion from initial equivalence or training loss."
+}

@@ -50,6 +50,10 @@ separate from quality evidence.
 
 ## Matched training gate
 
+The [guarded workflow is launched](results/camera-centering-v47-v48-launch.json)
+in frozen source7cd1f12; quality results are pending. It trains the two arms
+sequentially, checks all logged observations, then runs the complete review.
+
 [V47 control](../configs/dino-camera-control-b16-v47.yaml) and
 [V48 centered](../configs/dino-camera-centered-b16-v48.yaml) share immutable V43
 first1000 EMA `8ee3e960acdf95d88ba06eab30ac9abbab8bab28b0dc63d79b304a960eb535c5`.
