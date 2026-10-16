@@ -1,0 +1,72 @@
+{
+  "status": "continuation launched; quality at step2000 is pending",
+  "recorded_utc": "2026-10-16T07:23:27.678375+00:00",
+  "controller_pid": 1038531,
+  "workflow_script": "/mnt/external/demosaic/runs/native-corpus-v37-v39-v43-2k-workflow.py",
+  "workflow_script_sha256": "8ba7f4cfc4121dc91775b6a6c53febe73cc416f0eb0c14c32ed44142b553bd29",
+  "plan_source": "/mnt/external/demosaic/runs/native-corpus-v37-v39-v43-2k-plan.json",
+  "plan_source_sha256": "73ec45264331e06eb4f255df60bd0842338329b0a6f755885e13149ea16abc30",
+  "arms": [
+    {
+      "tag": "v37",
+      "name": "dino-anchored-packed-control-b16-v37",
+      "worktree": "/home/dllu/proj/demosaic/.cache/packed-restoration-worktree",
+      "config": "/home/dllu/proj/demosaic/.cache/packed-restoration-worktree/configs/dino-anchored-packed-control-b16-v37.yaml",
+      "resume": "/mnt/external/demosaic/evaluation/paired-known-packed-v37-v38-1k/weights/weights-2e79285ba72003417eb681cae2bc304106548c8a8d3235dd20a4ea7218ec332a.pt",
+      "resume_sha256": "2e79285ba72003417eb681cae2bc304106548c8a8d3235dd20a4ea7218ec332a",
+      "source_sha256": "547ac4dabc408e342960baa5ee9928257ec5522741c24cd35528b46af94c2110",
+      "snapshot": "/mnt/external/demosaic/runs/dino-anchored-packed-control-b16-v37/source/547ac4dabc408e342960baa5ee9928257ec5522741c24cd35528b46af94c2110",
+      "optimizer_parameter_steps": [
+        1000.0
+      ],
+      "optimizer_lrs": [
+        2.4076025382392166e-05
+      ],
+      "checkpoint_step": 1000
+    },
+    {
+      "tag": "v39",
+      "name": "dino-anchored-native-expanded-b16-v39",
+      "worktree": "/home/dllu/proj/demosaic/.cache/native-expansion-worktree",
+      "config": "/home/dllu/proj/demosaic/.cache/native-expansion-worktree/configs/dino-anchored-native-expanded-b16-v39.yaml",
+      "resume": "/mnt/external/demosaic/evaluation/paired-known-native-expanded-v39-1k-newonly/weights/weights-2270562379ea5e683e7036e75b8e158bfb097709fb709f9fc7992d138f36e8c0.pt",
+      "resume_sha256": "2270562379ea5e683e7036e75b8e158bfb097709fb709f9fc7992d138f36e8c0",
+      "source_sha256": "c2040061c24775f61f0541a64708cce69e8e82e6df32d9237cea312c51480f87",
+      "snapshot": "/mnt/external/demosaic/runs/dino-anchored-native-expanded-b16-v39/source/c2040061c24775f61f0541a64708cce69e8e82e6df32d9237cea312c51480f87",
+      "optimizer_parameter_steps": [
+        1000.0
+      ],
+      "optimizer_lrs": [
+        2.4076025382392166e-05
+      ],
+      "checkpoint_step": 1000
+    },
+    {
+      "tag": "v43",
+      "name": "dino-anchored-native-diverse-b16-v43",
+      "worktree": "/home/dllu/proj/demosaic/.cache/public-native-expansion-worktree",
+      "config": "/home/dllu/proj/demosaic/.cache/public-native-expansion-worktree/configs/dino-anchored-native-diverse-b16-v43.yaml",
+      "resume": "/mnt/external/demosaic/evaluation/paired-known-native-diverse-v43-1k-newonly/weights/weights-8ee3e960acdf95d88ba06eab30ac9abbab8bab28b0dc63d79b304a960eb535c5.pt",
+      "resume_sha256": "8ee3e960acdf95d88ba06eab30ac9abbab8bab28b0dc63d79b304a960eb535c5",
+      "source_sha256": "c758d2b56213869607fd3097936fae6cacf0e6a1f2a79ff9dea5b40c5d971bac",
+      "snapshot": "/mnt/external/demosaic/runs/dino-anchored-native-diverse-b16-v43/source/c758d2b56213869607fd3097936fae6cacf0e6a1f2a79ff9dea5b40c5d971bac",
+      "optimizer_parameter_steps": [
+        1000.0
+      ],
+      "optimizer_lrs": [
+        2.4076025382392166e-05
+      ],
+      "checkpoint_step": 1000
+    }
+  ],
+  "observed_workflow": {
+    "updated_utc": "2026-10-16T07:18:40.217411+00:00",
+    "status": "training-to2000",
+    "arm": "v37",
+    "resume_sha256": "2e79285ba72003417eb681cae2bc304106548c8a8d3235dd20a4ea7218ec332a"
+  },
+  "schedule": "Continue steps1001\u20132000 of the existing planned3000 schedule; preserve AdamW, EMA, torch/CUDA RNG and original per-arm source.",
+  "comparison": "Only native source selection changes:53,59,128 captures. Shared logged Commons/paired batch hashes must match across all three. V42 hidden autocast remains excluded.",
+  "evaluation": "After all three continue, run known4/unseen5 paired, full427 photographic plus16 procedural, and complete102MP GFX with native160px crops and independent RGB16 output checks. Cached comparators require exact protocol/evaluator and classical-case parity.",
+  "limitations": "The next gate has not completed. Broader SOTA superiority, protected-final performance, current-architecture DINO ablation and10s/100MP remain unproven."
+}
