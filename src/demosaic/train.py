@@ -15,7 +15,7 @@ from torch.utils.data import DataLoader
 
 from .cfa import bilinear
 from .color import render
-from .data import CleanDataset, degrade
+from .data import CleanDataset, degrade, validate_flat_chroma_stops
 from .losses import psnr, reconstruction_loss
 from .model import JointDemosaic, ModelConfig
 from .paired_training import PairedDataset, paired_reconstruction_loss, paired_step
@@ -218,6 +218,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     if resume and initialize:
         raise ValueError("Choose resume or initialize, not both")
     config = yaml.safe_load(Path(config_path).read_text())
+    config["flat_chroma_stops"] = validate_flat_chroma_stops(config.get("flat_chroma_stops", 0.0))
     multiscale_weight = float(config.get("multiscale_sensor_weight", 0.0))
     if not math.isfinite(multiscale_weight) or multiscale_weight < 0:
         raise ValueError("Multiscale sensor loss weight must be finite and nonnegative")
@@ -434,6 +435,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         for key, default, label in [
             ("synthetic_fraction", 0.2, "synthetic fraction"),
             ("flat_fraction", 0.0, "flat fraction"),
+            ("flat_chroma_stops", 0.0, "flat chroma stops"),
             ("weak_texture_fraction", 0.0, "weak texture fraction"),
         ]:
             if state["config"].get(key, default) != config.get(key, default):
@@ -498,6 +500,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         flat_fraction=config.get("flat_fraction", 0.0),
         augmentation_downsample=config.get("augmentation_downsample", 1),
         weak_texture_fraction=config.get("weak_texture_fraction", 0.0),
+        flat_chroma_stops=config["flat_chroma_stops"],
         records=records,
     )
     workers = config.get("workers", 2)

@@ -50,15 +50,32 @@ def synthetic(size: int, rng: random.Random) -> torch.Tensor:
     return rgb
 
 
-def smooth_scene(size: int, rng: random.Random) -> torch.Tensor:
+def validate_flat_chroma_stops(value) -> float:
+    """Bound the optional smooth-field log tint span; zero keeps legacy draws."""
+    value = float(value)
+    if not math.isfinite(value) or not 0 <= value <= 16:
+        raise ValueError("Flat chroma stops must be finite and within [0,16]")
+    return value
+
+
+def smooth_scene(size: int, rng: random.Random, *, chroma_stops=0.0) -> torch.Tensor:
     """Continuous-precision flat fields/ramps, including deep shadows.
 
     These deliberately lack texture: a restoration model should not retain
     sensor noise or introduce a color offset into an otherwise uniform scene.
     They complement detailed shapes and real photos rather than replace them.
+    Positive chroma_stops remaps the existing colored tint draws to a log
+    palette, preserving their mean before clipping. Neutral fields and RNG
+    consumption stay unchanged. Zero preserves the original tensors exactly.
     """
+    chroma_stops = validate_flat_chroma_stops(chroma_stops)
     intensity = 2 ** rng.uniform(-13, -1)
-    tint = [1.0] * 3 if rng.random() < 0.5 else [rng.uniform(0.3, 1.5) for _ in range(3)]
+    neutral = rng.random() < 0.5
+    tint = [1.0] * 3 if neutral else [rng.uniform(0.3, 1.5) for _ in range(3)]
+    if chroma_stops and not neutral:
+        logarithmic = [2 ** (chroma_stops * ((t - 0.3) / 1.2 - 1)) for t in tint]
+        scale = sum(tint) / sum(logarithmic)
+        tint = [t * scale for t in logarithmic]
     rgb = torch.tensor(tint, dtype=torch.float32)[:, None, None] * intensity
     rgb = rgb.expand(-1, size, size).clone()
     if rng.random() < 0.5:
@@ -82,7 +99,9 @@ class CleanDataset(Dataset):
         flat_fraction=0.0,
         augmentation_downsample=1,
         weak_texture_fraction=0.0,
+        flat_chroma_stops=0.0,
     ):
+        self.flat_chroma_stops = validate_flat_chroma_stops(flat_chroma_stops)
         self.manifest = Path(manifest)
         if records is None:
             records = [json.loads(line) for line in self.manifest.read_text().splitlines()]
@@ -121,7 +140,7 @@ class CleanDataset(Dataset):
         size = self.size * self.augmentation_downsample
         draw = rng.random()
         if draw < self.flat_fraction:
-            rgb = smooth_scene(size, rng)
+            rgb = smooth_scene(size, rng, chroma_stops=self.flat_chroma_stops)
         elif draw < self.flat_fraction + self.synthetic_fraction:
             if draw < self.flat_fraction + self.weak_texture_fraction:
                 rgb, _ = weak_texture(size, rng, pixel_scale=self.augmentation_downsample)

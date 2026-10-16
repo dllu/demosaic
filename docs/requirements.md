@@ -247,3 +247,9 @@ labeled independent ISO100 references. Learned fence lines are more continuous
 than RawNIND, while fine foliage remains soft and the learned models stay close.
 This is not a new 102 MP output, reference score or promotion; full matched
 GPU review is still pending.
+
+The [wider smooth-palette trial](wide-flat-palette.md) is prepared to target
+selected mature saturated-field failures. Legacy/default data is exact in CPU
+checks and the genuine-parent complete-state restart passes. Production CUDA
+validation and trained photo/real gains remain pending; this is not a model
+promotion or completion of the quality requirement.

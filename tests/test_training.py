@@ -144,6 +144,7 @@ def test_checkpoint_resume_matches_uninterrupted_training(
     if legacy_metadata:
         state = torch.load(interrupted, weights_only=True)
         del state["config"]["initialized_from"]
+        del state["config"]["flat_chroma_stops"]
         torch.save(state, interrupted)
     resumed = train(path, resume=interrupted)
     expected = torch.load(full, weights_only=True)
@@ -273,6 +274,7 @@ def test_pre_downsample_training_keeps_frozen_validation_and_resume_recipe(tmp_p
         ("weak_texture_fraction", 0.1, "weak texture fraction"),
         ("synthetic_fraction", 0.3, "synthetic fraction"),
         ("flat_fraction", 0.1, "flat fraction"),
+        ("flat_chroma_stops", 8, "flat chroma stops"),
     ]:
         config[key] = value
         path.write_text(yaml.safe_dump(config))

@@ -128,3 +128,7 @@ No new noise draws, output correction, RAW decoding or CUDA context was needed.
 execution metadata and individual ROI/conditioning records are linked in the
 machine-readable receipt. The warm target reuses only the earlier fabric ROI's
 three channel means, not its photographic pixels.
+
+The [optional wider-palette intervention](wide-flat-palette.md) now passes CPU
+legacy-data and genuine-parent restart checks. Its matched V59/V60 recipes are
+prepared; CUDA numerics and trained quality remain unproven.
