@@ -25,6 +25,11 @@ def parser():
     prepare.add_argument("--factor", type=int, default=8)
     prepare.add_argument("--min-size", type=int, default=256)
     prepare.add_argument("--workers", type=int, default=2)
+    prepare.add_argument(
+        "--selection-manifest",
+        type=Path,
+        help="Reprepare a frozen source selection at a new bin factor, preserving its splits",
+    )
     training = commands.add_parser("train")
     training.add_argument("config", type=Path)
     training.add_argument("--resume", type=Path)
@@ -139,6 +144,7 @@ def main(argv=None):
             factor=args.factor,
             min_size=args.min_size,
             workers=args.workers,
+            selection_manifest=args.selection_manifest,
         )
     elif args.command == "train":
         from .train import train

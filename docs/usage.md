@@ -5,14 +5,17 @@
 Run commands from the repository root after `source scripts/env.sh`. This keeps
 uv, Hugging Face, Torch, compiler caches and temporary files inside the repository.
 Large generated data and runs belong in `/mnt/external/demosaic`. Source photo
-directories and the existing Commons corpus are read-only; output APIs reject
+directories and Commons originals are read-only for ingestion; the authorized
+[background downloader](commons-download.md) adds verified archive files.
+Output APIs reject
 writes outside this repository and `/mnt/external`, and reject the Commons source.
 Do not run environment/setup commands without the cache environment.
 
 ## Commons preparation
 
 `demosaic prepare --output /mnt/external/demosaic/commons-v1 --limit 1024`
-queries the existing SQLite index in immutable read-only mode. It accepts CC BY,
+queries a short read-only SQLite metadata snapshot, including committed WAL data
+while the downloader runs. It accepts CC BY,
 CC BY-SA, CC0 and public-domain records, records the original author, license,
 credit and URLs, and omits unknown or noncommercial/no-derivatives licenses.
 It does not redownload or modify originals. Original ICC profiles are converted
@@ -42,7 +45,10 @@ The completed local preparation contains 44732 licensed sources (40170 train,
 completed manifest. The full screen excludes four protected sources, leaving
 40170 train / 2303 validation / 2255 test / 4 excluded. The audited manifest is
 `/mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl`; training still uses
-the previously frozen, audited 24576-source manifest.
+the frozen audit appropriate to each experiment. V28–V30 use all 40,170 training
+sources in this 44,732-source audit. [The optional 4×→2× augmentation path](training-pipeline.md)
+rebins a frozen selection without changing its protected membership and retains
+the original 8× validation manifest.
 
 For an additional camera-linear target source prepared directly from licensed
 low-ISO Bayer captures, see [native RAW targets](native-raw-targets.md).
@@ -58,8 +64,12 @@ Run environments must retain the matching backbone and its license.
 
 The [V28 pretrained restoration experiment](pretrained-rgb-restoration.md) adds
 an opt-in native RGB trunk with verified Gaussian restoration initialization,
-CFA/camera conditioning and frozen DINOv3 context. It is unreviewed; existing
-model defaults remain the local restoration backbone.
+CFA/camera conditioning and frozen DINOv3 context. Its [5k review](pretrained-rgb-v28-5k-review.md)
+and [matched calibrated stabilized trial](anchored-stabilized-rgb-v30-review.md)
+record progress and remaining quality deficits; existing model defaults remain
+the local restoration backbone. Mixed training now loads only the selected
+domain instead of preparing discarded Commons batches; see [pipeline validation
+and the batch-size sweep](training-pipeline.md).
 
 Clean targets include 20% procedurally supersampled shapes, thin lines and chirps.
 Photographic crops are shrunk or gently warped; rotations/flips precede mosaicing

@@ -79,6 +79,7 @@ class CleanDataset(Dataset):
         records=None,
         native_crop=False,
         flat_fraction=0.0,
+        augmentation_downsample=1,
     ):
         self.manifest = Path(manifest)
         if records is None:
@@ -94,6 +95,15 @@ class CleanDataset(Dataset):
         self.synthetic_fraction = synthetic_fraction if split == "train" else 0
         self.flat_fraction = flat_fraction if split == "train" else 0
         self.native_crop = native_crop
+        if augmentation_downsample not in (1, 2) or (
+            augmentation_downsample != 1 and split != "train"
+        ):
+            raise ValueError("Augmentation downsample must be 1, or 2 for training")
+        if augmentation_downsample == 2 and any(row.get("bin_factor") != 4 for row in self.rows):
+            raise ValueError(
+                "Pre-downsample augmentation requires linear 4x-binned training caches"
+            )
+        self.augmentation_downsample = augmentation_downsample
 
     def __len__(self):
         return len(self.rows)
@@ -101,7 +111,7 @@ class CleanDataset(Dataset):
     def __getitem__(self, index):
         # Validation always uses a fixed crop; training uses worker-seeded RNG.
         rng = random.Random(self.seed + index)
-        size = self.size
+        size = self.size * self.augmentation_downsample
         draw = rng.random()
         if draw < self.flat_fraction:
             rgb = smooth_scene(size, rng)
@@ -125,8 +135,11 @@ class CleanDataset(Dataset):
                 ).permute(2, 0, 1)
                 / 65535
             )
-            rgb = F.interpolate(rgb[None], size=(size, size), mode="area")[0]
-        if self.split == "train":
+            if self.augmentation_downsample == 1:
+                rgb = F.interpolate(rgb[None], size=(size, size), mode="area")[0]
+        if self.augmentation_downsample == 2:
+            rgb = augment_before_downsample(rgb, self.size, rng)
+        elif self.split == "train":
             rgb = torch.rot90(rgb, rng.randrange(4), (-2, -1))
             if rng.random() < 0.5:
                 rgb = rgb.flip(-1)
@@ -137,9 +150,29 @@ class CleanDataset(Dataset):
         return {"rgb": rgb.contiguous(), "index": index}
 
 
-def homography(rgb, rng):
+def augment_before_downsample(rgb, size, rng):
+    """Compose geometry at 2x target resolution, then average linear 2x2 cells.
+
+    Photographs start as 4x-binned linear uint16 caches. D4 transforms are exact;
+    projective sampling also handles the anisotropic crop-to-output scaling in
+    one interpolation. Optical PSFs use final-pixel units at this higher scale.
+    No geometric interpolation follows the final reduction.
+    """
+    rgb = torch.rot90(rgb, rng.randrange(4), (-2, -1))
+    if rng.random() < 0.5:
+        rgb = rgb.flip(-1)
+    if rng.random() < 0.2:
+        rgb = homography(rgb, rng, output_size=2 * size)
+    elif rgb.shape[-2:] != (2 * size, 2 * size):
+        rgb = F.interpolate(rgb[None], size=(2 * size, 2 * size), mode="area")[0]
+    if rng.random() < 0.25:
+        rgb = optical_blur(rgb, rng, pixel_scale=2)
+    return F.avg_pool2d(rgb, 2)
+
+
+def homography(rgb, rng, *, output_size=None):
     """Small projective rotations/shears with an inward sampling margin."""
-    size = rgb.shape[-1]
+    size = rgb.shape[-1] if output_size is None else output_size
     yy, xx = torch.meshgrid(
         torch.linspace(-0.85, 0.85, size), torch.linspace(-0.85, 0.85, size), indexing="ij"
     )
@@ -156,7 +189,7 @@ def homography(rgb, rng):
     )[0]
 
 
-def optical_blur(rgb, rng):
+def optical_blur(rgb, rng, *, pixel_scale=1):
     """Small Gaussian, motion, coma/astigmatism PSFs or radial integration."""
     kind = rng.choice(("gaussian", "motion", "coma", "astigmatism", "radial"))
     if kind == "radial":
@@ -168,7 +201,9 @@ def optical_blur(rgb, rng):
                 rgb[None], grid, padding_mode="reflection", align_corners=False
             )[0]
         return result / 4
-    yy, xx = torch.meshgrid(torch.arange(-3, 4).float(), torch.arange(-3, 4).float(), indexing="ij")
+    radius = 3 * pixel_scale
+    coordinates = torch.arange(-radius, radius + 1).float() / pixel_scale
+    yy, xx = torch.meshgrid(coordinates, coordinates, indexing="ij")
     angle = rng.uniform(0, math.pi)
     u, v = xx * math.cos(angle) + yy * math.sin(angle), -xx * math.sin(angle) + yy * math.cos(angle)
     sx, sy = rng.uniform(0.35, 1.0), rng.uniform(0.35, 0.8)
@@ -178,7 +213,7 @@ def optical_blur(rgb, rng):
     if kind == "coma":
         kernel += 0.35 * torch.exp(-0.5 * (((u - 1) / 0.9).square() + (v / 0.5).square()))
     kernel = (kernel / kernel.sum())[None, None].expand(3, 1, -1, -1)
-    return F.conv2d(F.pad(rgb[None], (3, 3, 3, 3), mode="reflect"), kernel, groups=3)[0]
+    return F.conv2d(F.pad(rgb[None], (radius,) * 4, mode="reflect"), kernel, groups=3)[0]
 
 
 def camera_pair(exposed_rgb, inverse, wb, *, reconstruct_highlights=False, physical_fp32=True):

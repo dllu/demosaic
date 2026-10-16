@@ -109,6 +109,32 @@ def data_random_context(device, seed, step, enabled):
         yield
 
 
+def training_domain(step, seed, paired_fraction, raw_clean_fraction):
+    """Choose the original deterministic domain before any sample is fetched."""
+    if paired_step(step, seed, paired_fraction):
+        return "paired"
+    if raw_clean_step(step, seed, raw_clean_fraction, paired_fraction):
+        return "native"
+    return "commons"
+
+
+def domain_indices(domain, first, last, batch_size, seed, paired_fraction, raw_clean_fraction):
+    """Keep global sample indices, omitting batches that another domain replaces."""
+    for step in range(first + 1, last + 1):
+        if training_domain(step, seed, paired_fraction, raw_clean_fraction) == domain:
+            yield from range((step - 1) * batch_size, step * batch_size)
+
+
+def selected_batches(loaders, first, last, seed, paired_fraction, raw_clean_fraction):
+    """Start workers lazily and fetch only batches selected for actual training."""
+    iterators = {}
+    for step in range(first + 1, last + 1):
+        domain = training_domain(step, seed, paired_fraction, raw_clean_fraction)
+        if domain not in iterators:
+            iterators[domain] = iter(loaders[domain])
+        yield step, domain, next(iterators[domain])
+
+
 def expand_stem(weights, source_config, model):
     """Preserve channel roles while adding zero-weight conditioning features."""
     source, target = ModelConfig.from_checkpoint(source_config), model.config
@@ -198,6 +224,13 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     manifest_hash = hashlib.sha256(manifest_payload).hexdigest()
     records = [json.loads(line) for line in manifest_payload.splitlines()]
     config["manifest_sha256"] = manifest_hash
+    validation_manifest = config.get("validation_manifest", config["manifest"])
+    if Path(validation_manifest).resolve() == Path(config["manifest"]).resolve():
+        validation_payload, validation_records = manifest_payload, records
+    else:
+        validation_payload = Path(validation_manifest).read_bytes()
+        validation_records = [json.loads(line) for line in validation_payload.splitlines()]
+    config["validation_manifest_sha256"] = hashlib.sha256(validation_payload).hexdigest()
     run = writable_path(config["run"])
     if not resume and any((run / name).exists() for name in ("last.pt", "best.pt")):
         raise ValueError("Run already has checkpoints; resume it or choose a new run directory")
@@ -215,6 +248,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         payloads["paired-manifest.json"] = paired_data.payload
     if raw_clean_data is not None:
         payloads["raw-clean-manifest.json"] = raw_clean_data.payload
+    payloads["validation-manifest.jsonl"] = validation_payload
     if config.get("validation_protocol"):
         protocol = Path(config["validation_protocol"]).read_bytes()
         payloads["validation_protocol.yaml"] = protocol
@@ -343,6 +377,15 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         previous_manifest_hash = state["config"].get("manifest_sha256")
         if previous_manifest_hash and previous_manifest_hash != manifest_hash:
             raise ValueError("Resume manifest differs from the checkpoint's training data")
+        if (
+            state["config"].get("validation_manifest_sha256", previous_manifest_hash)
+            != config["validation_manifest_sha256"]
+        ):
+            raise ValueError("Resume validation manifest differs from checkpoint")
+        if state["config"].get("augmentation_downsample", 1) != config.get(
+            "augmentation_downsample", 1
+        ):
+            raise ValueError("Resume augmentation downsample differs; initialize a new run")
         if state["config"].get("paired_manifest_sha256") != config.get("paired_manifest_sha256"):
             raise ValueError("Resume paired manifest differs from checkpoint")
         if state["config"].get("paired_fraction", 0.0) != paired_fraction:
@@ -393,6 +436,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         seed=seed,
         synthetic_fraction=config.get("synthetic_fraction", 0.2),
         flat_fraction=config.get("flat_fraction", 0.0),
+        augmentation_downsample=config.get("augmentation_downsample", 1),
         records=records,
     )
     workers = config.get("workers", 2)
@@ -400,10 +444,14 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     if worker_start_method not in (None, "spawn", "forkserver", "fork"):
         raise ValueError("Unknown data-worker start method")
     worker_options = {"multiprocessing_context": worker_start_method} if worker_start_method else {}
-    loader = DataLoader(
+    last_step = min(steps, first + stop_after) if stop_after else steps
+    loaders = {}
+    loaders["commons"] = DataLoader(
         data,
         batch_size=batch_size,
-        sampler=range(first * batch_size, steps * batch_size),
+        sampler=domain_indices(
+            "commons", first, last_step, batch_size, seed, paired_fraction, raw_clean_fraction
+        ),
         num_workers=workers,
         # Pinning duplicates memory on UMA; enable only if profiling justifies it.
         pin_memory=False,
@@ -411,55 +459,52 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         generator=torch.Generator().manual_seed(seed),
         **({"prefetch_factor": 2, **worker_options} if workers else {}),
     )
-    paired_iterator = None
     if paired_data is not None:
         paired_workers = config.get("paired_workers", min(workers, 2))
-        paired_sampler = (
-            index
-            for step in range(first + 1, steps + 1)
-            if paired_step(step, seed, paired_fraction)
-            for index in range((step - 1) * batch_size, step * batch_size)
+        loaders["paired"] = DataLoader(
+            paired_data,
+            batch_size=batch_size,
+            sampler=domain_indices(
+                "paired",
+                first,
+                last_step,
+                batch_size,
+                seed,
+                paired_fraction,
+                raw_clean_fraction,
+            ),
+            num_workers=paired_workers,
+            pin_memory=False,
+            persistent_workers=paired_workers > 0,
+            generator=torch.Generator().manual_seed(seed + 17),
+            **({"prefetch_factor": 2, **worker_options} if paired_workers else {}),
         )
-        paired_iterator = iter(
-            DataLoader(
-                paired_data,
-                batch_size=batch_size,
-                sampler=paired_sampler,
-                num_workers=paired_workers,
-                pin_memory=False,
-                persistent_workers=paired_workers > 0,
-                generator=torch.Generator().manual_seed(seed + 17),
-                **({"prefetch_factor": 2, **worker_options} if paired_workers else {}),
-            )
-        )
-    raw_clean_iterator = None
     if raw_clean_data is not None:
         native_workers = config.get("raw_clean_workers", min(workers, 2))
-        native_sampler = (
-            index
-            for step in range(first + 1, steps + 1)
-            if not paired_step(step, seed, paired_fraction)
-            and raw_clean_step(step, seed, raw_clean_fraction, paired_fraction)
-            for index in range((step - 1) * batch_size, step * batch_size)
-        )
-        raw_clean_iterator = iter(
-            DataLoader(
-                raw_clean_data,
-                batch_size=batch_size,
-                sampler=native_sampler,
-                num_workers=native_workers,
-                pin_memory=False,
-                persistent_workers=native_workers > 0,
-                generator=torch.Generator().manual_seed(seed + 31),
-                **({"prefetch_factor": 2, **worker_options} if native_workers else {}),
-            )
+        loaders["native"] = DataLoader(
+            raw_clean_data,
+            batch_size=batch_size,
+            sampler=domain_indices(
+                "native",
+                first,
+                last_step,
+                batch_size,
+                seed,
+                paired_fraction,
+                raw_clean_fraction,
+            ),
+            num_workers=native_workers,
+            pin_memory=False,
+            persistent_workers=native_workers > 0,
+            generator=torch.Generator().manual_seed(seed + 31),
+            **({"prefetch_factor": 2, **worker_options} if native_workers else {}),
         )
     validation = DataLoader(
         CleanDataset(
-            config["manifest"],
+            validation_manifest,
             split="val",
             patch_size=config.get("patch_size", 256),
-            records=records,
+            records=validation_records,
         ),
         batch_size=batch_size,
         num_workers=0,
@@ -491,7 +536,9 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     started = time.perf_counter()
     checkpoint_interval = config.get("checkpoint_every", 500)
     amp = config.get("amp", True)
-    for step, clean in enumerate(loader, start=first + 1):
+    for step, domain, clean in selected_batches(
+        loaders, first, last_step, seed, paired_fraction, raw_clean_fraction
+    ):
         if step == first + 1 or step % 50 == 0:
             available_gb = psutil.virtual_memory().available / 1e9
             if available_gb < config.get("min_available_gb", 12):
@@ -507,17 +554,12 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         for group in optimizer.param_groups:
             group["lr"] = lr
         model.train()
-        use_pair = paired_iterator is not None and paired_step(step, seed, paired_fraction)
-        use_native = (
-            raw_clean_iterator is not None
-            and not use_pair
-            and raw_clean_step(step, seed, raw_clean_fraction, paired_fraction)
-        )
+        use_pair, use_native = domain == "paired", domain == "native"
         with data_random_context(device, seed, step, config.get("data_seed_per_step", False)):
             if use_pair:
-                batch = {k: v.to(device) for k, v in next(paired_iterator).items()}
+                batch = {k: v.to(device) for k, v in clean.items()}
             elif use_native:
-                native = {k: v.to(device) for k, v in next(raw_clean_iterator).items()}
+                native = {k: v.to(device) for k, v in clean.items()}
                 batch = degrade_raw_clean(
                     native,
                     reconstruct_highlights=config.get("reconstruct_highlights", False),
@@ -618,10 +660,10 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 from .suite import evaluate_panel
 
                 panel_data = CleanDataset(
-                    config["manifest"],
+                    validation_manifest,
                     split="val",
                     patch_size=config.get("patch_size", 256),
-                    records=records,
+                    records=validation_records,
                     native_crop=True,
                 )
                 scores.update(

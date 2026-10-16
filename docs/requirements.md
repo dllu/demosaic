@@ -32,3 +32,12 @@ unseen-camera results. Its clipping-calibration trial, full evaluation,
 protected-final review and matched DINO ablation remain. Quality/speed gates
 are unmet. [More Commons originals](commons-download.md) are downloading in the
 background, with a 512 GiB reserve; active manifests remain frozen.
+
+[V30's calibrated first1k review](anchored-stabilized-rgb-v30-review.md) improves
+the matched V29 real primary means to54.25796/53.75824 and synthetic16 to
+34.81952/.957844. Known RawNIND superiority remains uncertain and unseen RGB
+PSNR/SSIM still trail it. Full427 and final quality remain unproven. The
+[training pipeline changes](training-pipeline.md) address interpolation after
+binning, discarded Commons loading and measured batch-size selection; 248
+software tests pass. These are progress toward the goal, not completion evidence
+for its unmet quality/speed requirements.

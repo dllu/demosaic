@@ -130,4 +130,6 @@ the expectation inverse. V29 checkpoints retain their original behavior.
 Software validation: **238 tests passed in 19.18s**. Genuine DINO BF16 backward
 checks produced finite FP32 outputs, nonzero adapter/gate gradients and no
 frozen-backbone gradients. These checks establish execution and invariants,
-not final image quality. V29 is stopped at step1000 pending the anchored trial.
+not final image quality. V29 is stopped at step1000. The
+[anchored V30 review](anchored-stabilized-rgb-v30-review.md) now records the
+matched trial's small synthetic and real-camera improvements and remaining gaps.

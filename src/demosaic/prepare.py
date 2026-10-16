@@ -61,6 +61,7 @@ def prepare_commons(
     min_size=256,
     max_pixels=120_000_000,
     workers=2,
+    selection_manifest=None,
 ):
     """Atomic caches; restart safely reuses finished samples. Never alter source."""
     source, destination = source.resolve(), writable_path(destination)
@@ -85,26 +86,44 @@ def prepare_commons(
         "transfer": "linear-sRGB",
         "dtype": "uint16",
     }
+    selection = None
+    if selection_manifest is not None:
+        payload = Path(selection_manifest).read_bytes()
+        recipe["selection_manifest_sha256"] = hashlib.sha256(payload).hexdigest()
+        selection = [json.loads(line) for line in payload.splitlines()]
     recipe_path = destination / "recipe.json"
     if recipe_path.exists() and json.loads(recipe_path.read_text()) != recipe:
         lock.close()
         raise ValueError("Cache recipe differs; choose a new destination")
     recipe_path.write_text(json.dumps(recipe, indent=2) + "\n")
-    connection = sqlite3.connect(
-        f"file:{source / 'quality_images.sqlite3'}?mode=ro&immutable=1", uri=True
-    )
-    connection.row_factory = sqlite3.Row
     query = """SELECT title, page_url, original_url, author, license, license_url,
         attribution, credit, sha1, sha1_hex, download_path, width, height
         FROM images WHERE status='downloaded' AND width>=? AND height>=?
         AND width*height<=? ORDER BY sha1"""
+    if selection is None:
+        # Honour committed WAL rows while the downloader runs. Materialize just
+        # metadata, then release the read snapshot before lengthy image work so
+        # a long preparation cannot pin the downloader's WAL/checkpoints.
+        connection = sqlite3.connect(f"file:{source / 'quality_images.sqlite3'}?mode=ro", uri=True)
+        connection.row_factory = sqlite3.Row
+        try:
+            selection = [
+                dict(row)
+                for row in connection.execute(
+                    query, (min_size * factor, min_size * factor, max_pixels)
+                )
+            ]
+        finally:
+            connection.close()
     counts = {"train": 0, "val": 0, "test": 0, "failed": 0, "unlicensed": 0}
     seen = set()
     manifest_tmp = destination / "manifest.jsonl.tmp"
     errors_tmp = destination / "errors.jsonl.tmp"
 
     def records():
-        for row in connection.execute(query, (min_size * factor, min_size * factor, max_pixels)):
+        for row in selection:
+            if row.get("split", "train") not in ("train", "val", "test"):
+                continue
             record = dict(row)
             if not free_license(record["license"]):
                 counts["unlicensed"] += 1
@@ -115,7 +134,7 @@ def prepare_commons(
             seen.add(key)
             record.update(
                 id=key,
-                split=split_for(key),
+                split=row.get("split", split_for(key)),
                 bin_factor=factor,
                 color_space="linear-sRGB",
                 dtype="uint16",
@@ -163,7 +182,6 @@ def prepare_commons(
                 for future in pending:
                     future.cancel()
                 break
-    connection.close()
     manifest_tmp.replace(destination / "manifest.jsonl")
     errors_tmp.replace(destination / "errors.jsonl")
     (destination / "summary.json").write_text(json.dumps(counts, indent=2) + "\n")

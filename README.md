@@ -5,8 +5,9 @@ output, physical noise conditioning, tiled inference, and an optional DINOv3
 feature branch. Experimental: training and quality validation are in progress.
 The [completed RGB/DINO review](docs/pretrained-rgb-v28-5k-review.md) improves
 the full synthetic evaluation; real-camera advantages remain uncertain.
-A [matched variance-stabilized trial](docs/stabilized-rgb-v29-review.md) improves
-the smaller synthetic screen with mixed real-camera results. Quality work
+A [matched calibrated stabilized trial](docs/anchored-stabilized-rgb-v30-review.md)
+improves the smaller synthetic screen and real primary means, with remaining
+rendered-quality deficits. Quality work
 continues; state-of-the-art performance is not established.
 
 Native 160×160 validation crops: noisy → denoised → GT, using V28 step5000
@@ -25,15 +26,15 @@ cropping, simulated noise and restoration. See [the performance review and crop 
 and [real GFX100S crops](docs/gfx-qualitative.md).
 
 Real GFX100S foliage and chain-link-fence crops at native 160×160 sensor resolution:
-DSCF3879 noisy ISO6400 → experimental V29 step1000 → DSCF3880 ISO100 f/5.6,
+DSCF3879 noisy ISO6400 → experimental V30 step1000 → DSCF3880 ISO100 f/5.6,
 with shared +2 EV display and 512px context.
 This closer pair is now the standing test. Framing is nearly identical, 3m38s
 apart; aperture and moving subjects differ, so the last panel is a qualitative
-reference, **not GT**. [All four regions and matched comparisons](docs/stabilized-rgb-v29-review.md).
+reference, **not GT**. [All four regions and matched comparisons](docs/anchored-stabilized-rgb-v30-review.md).
 
-![GFX foliage: noisy, denoised and separate low-ISO reference](docs/images/v29-1k-gfx-v29-1k-foliage.png)
+![GFX foliage: noisy, denoised and separate low-ISO reference](docs/images/v30-1k-gfx-v30-foliage.png)
 
-![GFX fence: noisy, denoised and separate low-ISO reference](docs/images/v29-1k-gfx-v29-1k-chain-link-fence.png)
+![GFX fence: noisy, denoised and separate low-ISO reference](docs/images/v30-1k-gfx-v30-chain-link-fence.png)
 
 ```bash
 source scripts/env.sh
@@ -57,3 +58,5 @@ See [experiment results](docs/experiments.md), [quality and noise diagnostics](d
 and the [completion evidence checklist](docs/requirements.md).
 The [Commons archive download](docs/commons-download.md) is running separately;
 active experiments retain frozen manifests.
+See [training pipeline work](docs/training-pipeline.md) for augmentation before
+the last reduction, selected-domain loading and the batch-size sweep.
