@@ -169,6 +169,13 @@ old paired dataset with the newly reviewed extension under the same model,
 optimizer setup, seed/schedule and nonpaired observations. It does not assume
 that a larger context branch or more data automatically improves quality.
 
+A separate [training-only input-sensitivity diagnostic](dino-preview-sensitivity.md)
+uses genuine frozen DINO-S on sixteen Commons photographs. A fixed Wiener7
+preview improves early-layer high-noise feature agreement but does not
+consistently improve middle/deep spatial features. It does not establish a
+restoration improvement or explain the trained branch gap; production preview
+preprocessing stays unchanged.
+
 All50 native PNGs verify SHA/dimensions/metadata and common noisy/reference
 panel bytes. All ten complete8746×11662×3 RGB16 TIFFs verify fullSHA/size/dtype/
 dimensions/16-bit tags and>256 sampled codes; sRGB outputs carry ICC profiles.
