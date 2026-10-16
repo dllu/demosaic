@@ -167,7 +167,7 @@ def compare_summary(rows, summary):
     }
 
 
-def audit_photo(root):
+def audit_photo(root, expected_methods=8):
     summary = json.loads((root / "summary.json").read_text())
     require(sha(summary["manifest"]) == summary["manifest_sha256"], "Photo manifest hash changed")
     manifest = load_rows(summary["manifest"])
@@ -176,7 +176,11 @@ def audit_photo(root):
     require(summary["synthetic_sources"] == 16, "Expected 16 procedural sources")
     labels = [row["label"] for row in summary["models"]]
     methods = CLASSICAL | set(labels)
-    require(len(labels) == len(set(labels)) == 5 and len(methods) == 8, "Expected eight methods")
+    require(
+        len(labels) == len(set(labels)) == expected_methods - len(CLASSICAL)
+        and len(methods) == expected_methods,
+        f"Expected {expected_methods} photo methods",
+    )
     conditions = {row["name"] for row in summary["protocol"]["conditions"]}
     patterns = set(summary["protocol"]["patterns"])
     require(
@@ -205,13 +209,13 @@ def audit_photo(root):
     return {
         "cases": len(rows),
         "sources": 443,
-        "methods": 8,
+        "methods": expected_methods,
         "nullable_metric_cases": nulls,
         **compare_summary(rows, summary),
     }
 
 
-def audit_real(root, scenes, pairs, crops):
+def audit_real(root, scenes, pairs, crops, expected_methods=8):
     summary = json.loads((root / "summary.json").read_text())
     require(
         sha(summary["prepared_manifest"]) == summary["prepared_sha256"], "Prepared manifest changed"
@@ -228,14 +232,14 @@ def audit_real(root, scenes, pairs, crops):
         | (labels - {"RawNIND"})
         | {"RawNIND:cfa-ls:publisher", "RawNIND:cfa-channel:publisher"}
     )
-    require(len(methods) == 8, "Expected eight real methods")
+    require(len(methods) == expected_methods, f"Expected {expected_methods} real methods")
     expected = {
         (method, "real", crop["id"], case["noisy"]["sha256"], case["metadata"]["pattern"])
         for case in prepared["cases"]
         for crop in case["crops"]
         for method in methods
     }
-    require(len(expected) == crops * 8, "Real crop count changed")
+    require(len(expected) == crops * expected_methods, "Real crop count changed")
     original = load_rows(root / "per-crop.jsonl")
     tile_scene = {crop["id"]: case["scene"] for case in prepared["cases"] for crop in case["crops"]}
     for row in original:
@@ -296,32 +300,51 @@ def audit_real(root, scenes, pairs, crops):
         "scenes": scenes,
         "pairs": pairs,
         "crops_per_method": crops,
-        "methods": 8,
+        "methods": expected_methods,
         **compare_summary(capture_rows, summary),
     }
 
 
-def main(steps, output):
-    suffix = {3000: "3k", 10000: "10k"}[steps]
-    workflow = BASE / f"runs/fresh-dino-capacity-{suffix}-workflow.json"
+def main(steps, output, trial="fresh"):
+    if trial == "convnext-v58":
+        require(steps == 1000, "The ConvNeXt trial currently defines only the first1000 gate")
+        workflow = BASE / "runs/dino-convnext-pyramid-v58-workflow.json"
+        expected_status = "completed-first1000-and-evaluation-awaiting-manual-review"
+        expected_methods = 9
+        directories = [
+            ("photo", "synthetic-convnext-v58-fresh-1k-full427"),
+            ("known", "paired-known-convnext-v58-fresh-1k"),
+            ("unseen", "paired-unseen-convnext-v58-fresh-1k"),
+        ]
+    else:
+        require(steps in [3000, 10000], "Original fresh audits support3000/10000")
+        suffix = {3000: "3k", 10000: "10k"}[steps]
+        workflow = BASE / f"runs/fresh-dino-capacity-{suffix}-workflow.json"
+        expected_status = f"completed-to{steps}-and-full-review"
+        expected_methods = 8
+        directories = [
+            ("photo", f"synthetic-fresh-dino-capacity-{suffix}-full427"),
+            ("known", f"paired-known-fresh-dino-capacity-{suffix}"),
+            ("unseen", f"paired-unseen-fresh-dino-capacity-{suffix}"),
+        ]
     state = json.loads(workflow.read_text())
     require(
-        state["status"] == f"completed-to{steps}-and-full-review",
+        state["status"] == expected_status,
         "Workflow is not complete; inspect/wait, do not restart",
     )
     output = writable_path(output)
     require(not output.exists(), "Audit output already exists")
     results, inputs = {}, {}
-    for name, directory in [
-        ("photo", f"synthetic-fresh-dino-capacity-{suffix}-full427"),
-        ("known", f"paired-known-fresh-dino-capacity-{suffix}"),
-        ("unseen", f"paired-unseen-fresh-dino-capacity-{suffix}"),
-    ]:
+    for name, directory in directories:
         root = BASE / "evaluation" / directory
         results[name] = (
-            audit_photo(root)
+            audit_photo(root, expected_methods)
             if name == "photo"
-            else audit_real(root, *({"known": (4, 8, 72), "unseen": (5, 10, 90)}[name]))
+            else audit_real(
+                root,
+                *({"known": (4, 8, 72), "unseen": (5, 10, 90)}[name]),
+                expected_methods=expected_methods,
+            )
         )
         inputs[name] = {
             path.name: sha(path) for path in [root / "summary.json", *root.glob("*.jsonl")]
@@ -329,6 +352,7 @@ def main(steps, output):
     receipt = {
         "scope": "Independent saved-score coverage and arithmetic audit only; no inference, pixel/GT-definition validation, speed result, training-repeat uncertainty or model selection.",
         "steps": steps,
+        "trial": trial,
         "workflow": str(workflow),
         "workflow_sha256": sha(workflow),
         "results": results,
@@ -344,7 +368,8 @@ def main(steps, output):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--steps", type=int, choices=[3000, 10000], required=True)
+    parser.add_argument("--steps", type=int, choices=[1000, 3000, 10000], required=True)
+    parser.add_argument("--trial", choices=["fresh", "convnext-v58"], default="fresh")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
-    main(args.steps, args.output)
+    main(args.steps, args.output, args.trial)

@@ -240,3 +240,18 @@ configuration, genuine preflight, manifests, original first1000 checkpoints and
 the completed original10k review. Its automated terminal status explicitly
 leaves manual crop review pending. This live-prefix observation is not a final
 batch-replay or quality result.
+
+After automated evaluation completes, independently rebuild saved-score
+coverage, means and source-bootstrap intervals with the main checkout's auditor:
+
+```bash
+uv run --no-sync python scripts/audit_fresh_dino_statistics.py \
+  --trial convnext-v58 --steps 1000 \
+  --output /mnt/external/demosaic/evaluation/convnext-v58-statistics-audit.json
+```
+
+It requires all nine methods and the trial's completed evaluation status, while
+leaving manual crop review separate. The extended auditor reproduces the
+original10k audit's100,528 rows and336 intervals exactly and rejects the live
+new trial before creating output. This is audit-readiness evidence, not an
+audit of the as-yet unfinished candidate results.
