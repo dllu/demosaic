@@ -29,11 +29,11 @@ from demosaic.safety import writable_path
 from demosaic.suite import freeze_checkpoint
 
 
-def rawnind_comparators(directory, modes):
+def rawnind_comparators(directory, modes, *, device="cuda"):
     """Separate gain adapters share the same immutable upstream network weights."""
     labels = {"cfa-ls": "RawNIND:CFA-LS", "cfa-channel": "RawNIND:CFA-channel"}
     modes = list(dict.fromkeys(modes))
-    first = load_rawnind(directory, gain_mode=modes[0], device="cuda")
+    first = load_rawnind(directory, gain_mode=modes[0], device=device)
     digest = hashlib.sha256((directory / "utnet2-bayer.pt").read_bytes()).hexdigest()
     models, receipts = [], []
     for index, mode in enumerate(modes):
@@ -45,6 +45,7 @@ def rawnind_comparators(directory, modes):
                 "label": labels[mode],
                 "gain_mode": mode,
                 "precision": "IEEE float32",
+                "device": str(device),
                 "sha256": digest,
             }
         )

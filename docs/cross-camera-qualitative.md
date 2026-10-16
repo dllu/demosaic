@@ -5,6 +5,11 @@ additional personal-camera captures. This extends the standing GFX100S scene;
 it does not replace DSCF3879/DSCF3880 or promote a newly trained model.
 [All 12 triplets, source/ROI/noise/checkpoint records and float artifacts](results/cross-camera-v43-qualitative.json).
 
+A later [CPU FP32 check against the completed fresh no-context10k arm](cross-camera-none10k-cpu-review.md)
+reruns both models and RawNIND, adds direct learned comparisons and two exact-GT
+synthetic examples. It finds no clear new real-capture winner; V43 remains the
+reference while the complete long comparison continues.
+
 Each row is **noisy Malvar → V43 → RawNIND comparator (not GT)**. There is no
 clean reference or pixelwise quality score. Both RawNIND global/channel CFA
 calibrations use the same publisher weights and observed noisy CFA, without

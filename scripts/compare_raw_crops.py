@@ -44,8 +44,11 @@ def main():
         "--rawnind-gain-modes", nargs="+", choices=("cfa-ls", "cfa-channel"), default=["cfa-ls"]
     )
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--device", choices=("cpu", "cuda"), default="cuda")
     parser.add_argument("--precision", choices=COMPUTE_DTYPES, default="bfloat16")
     args = parser.parse_args()
+    if args.device == "cpu" and args.precision != "float32":
+        raise ValueError("CPU qualitative comparisons require --precision float32")
     output = writable_path(args.output)
     output.mkdir(parents=True, exist_ok=True)
     if (output / "selection-and-metadata.json").exists():
@@ -63,7 +66,7 @@ def main():
     models, weights = [], []
     for path in args.checkpoint:
         frozen, digest = freeze_checkpoint(path, output / "weights")
-        model, state = load_checkpoint(frozen, "cuda")
+        model, state = load_checkpoint(frozen, args.device)
         model.eval().to(memory_format=torch.channels_last)
         run_name = Path(state.get("config", {}).get("run", path.parent)).name
         label = f"{run_name}, step {state['step']}"
@@ -75,13 +78,16 @@ def main():
                 "sha256": digest,
                 "snapshot": str(frozen),
                 "compute_precision": args.precision,
+                "device": args.device,
                 "memory_format": "channels_last",
                 "model_config": model.config.to_dict(),
             }
         )
         del state
     if args.rawnind:
-        references, receipts = rawnind_comparators(args.rawnind, args.rawnind_gain_modes)
+        references, receipts = rawnind_comparators(
+            args.rawnind, args.rawnind_gain_modes, device=args.device
+        )
         models = references + models
         weights += receipts
     selections = json.loads(args.selection.read_text())
@@ -107,9 +113,9 @@ def main():
             raise ValueError("RAW context must be even, at least32 and fit the capture")
         y = min(h - size, int(h * selection["y"])) // 2 * 2
         x = min(w - size, int(w * selection["x"])) // 2 * 2
-        crop = torch.from_numpy(raw[y : y + size, x : x + size].copy()).to("cuda")
+        crop = torch.from_numpy(raw[y : y + size, x : x + size].copy()).to(args.device)
         del raw
-        colors = color_indices(metadata.pattern, device="cuda")[None]
+        colors = color_indices(metadata.pattern, device=args.device)[None]
         packed = pack(crop[None, None]).contiguous(memory_format=torch.channels_last)
         # These priors are disclosed assumptions, not camera calibration.
         shot, read = Sensor(iso=metadata.iso or 100).coefficients()
@@ -117,8 +123,12 @@ def main():
             raise ValueError("A crop noise override requires both shot and read")
         shot, read = selection.get("shot", shot), selection.get("read", read)
         variance = packed.clamp_min(0) * shot + read
-        wb = torch.tensor(metadata.white_balance, device="cuda")[None]
-        matrix = torch.tensor(metadata.camera_to_srgb, device="cuda")[None]
+        wb = torch.tensor(metadata.white_balance, device=args.device)[None]
+        matrix = torch.tensor(metadata.camera_to_srgb, device=args.device)[None]
+        print(
+            json.dumps({"event": "camera-start", "camera": metadata.camera, "device": args.device}),
+            flush=True,
+        )
         images = [
             ("Bilinear", bilinear(packed, colors)),
             ("Malvar 2004, WB", malvar(packed, colors, wb)),
@@ -130,12 +140,12 @@ def main():
                     publisher_input_scale(
                         metadata.white_levels, metadata.black_levels, metadata.adc_white_level
                     ),
-                    device="cuda",
+                    device=args.device,
                     dtype=torch.float32,
                 )
             if hasattr(model, "set_noise"):
                 model.set_noise(shot, read)
-            with amp_context("cuda", dtype=precision):
+            with amp_context(args.device, dtype=precision):
                 prediction = model(packed, variance, colors, wb, matrix)
             if not torch.isfinite(prediction).all():
                 raise ValueError(f"Nonfinite qualitative prediction: {label}")
@@ -192,6 +202,7 @@ def main():
                                 "model_label": label,
                                 "checkpoint_sha256": model_receipt["sha256"],
                                 "compute_precision": precision,
+                                "device": args.device,
                                 "baseline": reference_receipt,
                                 "conditioning": {
                                     "shot": shot,
@@ -237,6 +248,16 @@ def main():
                 **selection,
             }
         )
+        print(
+            json.dumps(
+                {
+                    "event": "camera-complete",
+                    "camera": metadata.camera,
+                    "native_crops_so_far": len(crops),
+                }
+            ),
+            flush=True,
+        )
     figure.tight_layout()
     figure.savefig(output / "comparison.png", dpi=140)
     plt.close(figure)
@@ -251,7 +272,15 @@ def main():
         "source_files": {
             p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in archive.glob("*.py")
         },
+        "runtime": {
+            "device": args.device,
+            "neural_precision": args.precision,
+            "torch": str(torch.__version__),
+            "cuda_initialized": torch.cuda.is_initialized(),
+        },
     }
+    if args.device == "cpu" and result["runtime"]["cuda_initialized"]:
+        raise RuntimeError("CPU comparison unexpectedly initialized CUDA")
     (output / "report.json").write_text(json.dumps(result, indent=2) + "\n")
     lines = [
         "# Cross-camera qualitative comparison",

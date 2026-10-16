@@ -231,3 +231,11 @@ paired domains. CUDA validation and trained quality remain. The prepared fresh
 V58 recipe changes backbone and fusion together.
 It does not change the running original no-context/S/B comparison or establish
 a foundation-model benefit, convergence or SOTA.
+
+The [completed CPU additional-camera check](cross-camera-none10k-cpu-review.md)
+compares fresh no-context10k with V43 using the same FP32 inference. All 38 native
+PNGs were inspected, including two fixed source examples with exact simulated
+GT; 21 real float context arrays and shared pixels verify. The real methods stay
+close, fine cords remain absent and a fabric color bias is visible in the fresh
+model. No promotion or causal DINO/duration conclusion follows from this check;
+the full matched S/B/GFX evaluation remains pending.
