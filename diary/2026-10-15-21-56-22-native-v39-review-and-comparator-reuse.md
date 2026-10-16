@@ -56,4 +56,4 @@ native FP32 phase output/head and the coarse correction. Test allCFAs/odd packed
 sizes/16bit ADC ramps, MonteCarlo variance, gradient/checkpoint/default parity.
 Then compare phase-head/adapter LR1 versus10 with fixed pretrained-trunk LR3e-5,
 same V34 initializer/seed47/batch16/original53 native data as V37/V38. This isolates
-the architectural fix from V39's data change. No GPU training is currently live.
+the architectural fix from V39's data change. No owned GPU training is currently live.
