@@ -26,7 +26,7 @@ installed PyTorch versions. The copied evaluation-only scripts have explicit
 hashes. Main-worktree edits cannot change the frozen training package.
 
 Each arm resumes model/EMA/AdamW/Python/Torch/CUDA RNG and performs 7,000 more
-updates. Older1,000/3,000 snapshots stay intact. All403 logged observation hashes
+updates. Older1,000/3,000 snapshots stay intact. All 403 logged observation hashes
 must match across arms. Final quality review recomputes known/unseen development,
 the full427-photo/16-procedural suite, analytic weak-carrier/flats and the complete
 102 MP GFX scene. Native source/ROI/noise/display/checkpoint receipts and ten
@@ -56,3 +56,16 @@ These are training-boundary checks, not final quality or convergence evidence.
 S/B and the full numerical/native/analytic/GFX review remain. The controller will
 make immutable 10,000-step model copies after all three arms finish; no expected
 copy path was created early.
+
+The [second-arm boundary receipt](results/fresh-dino-capacity-S10k-boundary.json)
+now verifies that DINO-S also finished its original 10,000 updates with final
+LR1e-5, finite recorded training/model values and a nonzero learned context
+gate. All 403 logged observations match no-context. DINO-B has resumed from its
+original 3,000-step state at the same 3,001 LR; the receipt records its matching
+prefix through 3,150. These are historical boundary observations; B continues.
+
+A [small matched no-context/S CPU review](fresh-none-S10k-cpu-review.md) reuses
+the four fixed GFX contexts and two serialized exact-GT observations. It includes
+ten native PNGs, four retained float predictions, and identical noisy/reference
+pixels. Outputs remain close and fine detail still fails; no model is promoted.
+The B/full-suite/analytic/full-frame review remains pending.
