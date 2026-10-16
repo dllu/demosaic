@@ -100,6 +100,15 @@ first1000 alias retained. A new batch sweep measures the actual current
 4× Commons/native128 path, followed by completed adapter GPU checks. The
 [fresh DINO presence/absence trial](fresh-dino-ablation.md) is prepared; the
 [low-rank option](dino-low-rank-adaptation.md) is CPU/GPU-verified, not quality-trained.
+
+The [selected low-noise failure diagnosis](native-low-noise-camera-diagnosis.md)
+finds strong sensitivity to the learned WB/matrix projection. Native exact-GT
+examples show a large color bias; zeroing only that input group recovers it on
+the selected patterns, while anchor removal harms them and DINO removal is
+mixed. This is an inference intervention, not a trained ablation. Classical
+cases replay exactly; small neural replay differences remain explicitly marked
+as failing the original strict tolerance. V46 exports only that weight-slice
+change and has completed full measurement; broader comparison/review remains.
 The [completed V43 first-gate review](native-v43-1k-review.md) now finds modest
 positive unseen-primary/photo gains versus both matched controls. All33 logged
 shared Commons/paired hashes match; ten native triplets and both full RGB16 files
