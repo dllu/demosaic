@@ -38,3 +38,18 @@ training observation hashes to match immutable V54 first1000, then recompute
 both networks and all baselines on known/unseen/full427/analytic-flat/fullGFX,
 with native crop provenance and RGB16 validation. No quality promotion or
 convergence claim follows from engineering validation alone.
+
+Actual launch: frozen source 4bf85a2, controller PID59217 created1792166159.56,
+log .cache/dino-input-v56-worktree/.cache/dino-input-training-workflow.log.
+First input hash matches V54 exactly; independent CUDA first loss differs by
+about2.5e-7, so exact optimization trajectories are not claimed. Six logged
+observations through125 match. Source guards and full first-gate review run
+inside the controller. Main source/preflight commit pushed successfully.
+
+Independent CPU-only audit verifies original fresh no-context/S/B step3000
+snapshots against their live last.pt copies, complete AdamW at3000 and all
+Python/Torch/CUDA RNG, exact original source/configs and planned10000 schedules.
+LR remains8.2252435921195e-5 in every arm. These schedules are unfinished,
+not converged. A continuation driver is prepared without launching another GPU
+job; V56 review takes priority. Audit receipt is public and original snapshots
+remain untouched.

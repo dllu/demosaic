@@ -67,6 +67,12 @@ corpus stays opt-in after its [full-schedule review](paired-expansion-v53-v54-4k
 No weak-source change is included. All 41 logged observation hashes must match
 the control before numerical, analytic/flat, native and full GFX review.
 
+The [actual launch receipt](results/dino-input-v56-launch.json) records frozen
+source `4bf85a2`, controller identity, first update and matching observations
+through step 125. Training is live; the receipt is a launch observation, not
+a trained-quality result. The controller recomputes both models and baselines
+and verifies full RGB16 outputs after the first gate.
+
 The recent [structural-guidance JDD paper](https://arxiv.org/abs/2608.09995)
 uses frozen DINOv3 and adaptation after patch tokens; it does not supply this
 input adapter or evidence for its quality. This is an independent extension.
