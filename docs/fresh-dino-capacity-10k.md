@@ -44,3 +44,15 @@ controller164667 and the frozen source/plan identities. The no-context arm has
 resumed at step3,001 with LR8.22411e-5 and finite updates beyond3,000; S/B follow
 sequentially. All122 historical logged observations through3,000 remain matched.
 Final10,000 quality/native results are pending.
+
+The [first-arm boundary receipt](results/fresh-dino-capacity-no-context-10k-boundary.json)
+now verifies that no-context finished all 10,000 updates: AdamW state is at
+10,000, final LR is 1e-5, all 403 logged training losses/gradient norms and all
+model tensors are finite, and the original source bundle remains unchanged.
+The controller has moved to DINO-S, which resumes at 3,001 with the original
+8.2241071e-5 LR and a matching observation. Its first 131 logged inputs through
+3,200 match no-context; all 122 historical inputs still match across all three.
+These are training-boundary checks, not final quality or convergence evidence.
+S/B and the full numerical/native/analytic/GFX review remain. The controller will
+make immutable 10,000-step model copies after all three arms finish; no expected
+copy path was created early.
