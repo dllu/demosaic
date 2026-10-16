@@ -6,6 +6,11 @@ show a comparable shift. This is a demonstrated failure on one observation,
 not a claim of broader regression or an identified training cause.
 [All float predictions, source/ROI/checkpoint records and native PNGs](results/fresh-none-S-3k10k-color-means-cpu.json).
 
+A later [input-CFA gain probe](saved-input-cfa-gain-cpu.md) on the same saved
+predictions substantially reduces the shifted fabric's color error, while its
+fine cords remain missing. It uses no target in the gain fit and changes no
+production default. The two-source result does not establish broad correction.
+
 The replay uses the same two serialized CPU observations as the
 [earlier no-context/S review](fresh-none-S10k-cpu-review.md). It computes all
 four arm/checkpoint combinations on both inputs in CPU FP32, without new noise,

@@ -1,0 +1,1826 @@
+{
+  "scope": "Exploratory two-source counterfactual; input-only gains on existing eight CPU predictions, no inference/training/new noise or production change.",
+  "parent": "/mnt/external/demosaic/evaluation/fresh-none-S-3k10k-color-means-cpu-v1/report.json",
+  "parent_sha256": "254dc018977a6b3fd283fa52a2df1a49e1a9fb67faec6dead262830d422ed5d3",
+  "results": [
+    {
+      "model": {
+        "arm": "none",
+        "step": 3000,
+        "snapshot": "/mnt/external/demosaic/models/control-anchored-native-fresh-b16-v45-step3000.pt",
+        "sha256": "6f9948c361cda74a294ad0cc9db4718dfb3fe0a9cc5a4c1cc867e986e0a7eedf"
+      },
+      "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+      "observation": {
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "binned_source_tile_xywh": [
+          189,
+          3,
+          256,
+          256
+        ],
+        "binned_source_roi_xywh": [
+          237,
+          51,
+          160,
+          160
+        ],
+        "evaluation_tile_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8",
+        "observation_sha256": "1a180a0ab7821e8d0bd5d735a4b84be541deacb974cb962836f9bf8389131f7d",
+        "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+        "arrays_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+        "noise_device": "cpu",
+        "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+      },
+      "gains_fitted_to_observed_CFA_only": [
+        1.003399816969057,
+        1.0012703697781955,
+        0.9926058895261572
+      ],
+      "before": {
+        "camera_RGB_mean_error": [
+          -0.0008933454093357795,
+          -0.0009096768851379977,
+          0.0011003278620395395
+        ],
+        "camera_RGB_MSE": 4.216578806425988e-05,
+        "display_sRGB_PSNR": 40.35606094399908
+      },
+      "after": {
+        "camera_RGB_mean_error": [
+          0.0006202166804132503,
+          -0.00037417404317046987,
+          0.0003756399675116423
+        ],
+        "camera_RGB_MSE": 4.149255679828103e-05,
+        "display_sRGB_PSNR": 40.678329099698296
+      }
+    },
+    {
+      "model": {
+        "arm": "none",
+        "step": 3000,
+        "snapshot": "/mnt/external/demosaic/models/control-anchored-native-fresh-b16-v45-step3000.pt",
+        "sha256": "6f9948c361cda74a294ad0cc9db4718dfb3fe0a9cc5a4c1cc867e986e0a7eedf"
+      },
+      "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+      "observation": {
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "binned_source_tile_xywh": [
+          195,
+          89,
+          256,
+          256
+        ],
+        "binned_source_roi_xywh": [
+          243,
+          137,
+          160,
+          160
+        ],
+        "evaluation_tile_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf",
+        "observation_sha256": "dd2d0ceb311a5ad4e62e03b92e186873229c038f69bdb67ab2398e57cd9047ec",
+        "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+        "arrays_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+        "noise_device": "cpu",
+        "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+      },
+      "gains_fitted_to_observed_CFA_only": [
+        1.0046823273028707,
+        1.0011342027046315,
+        1.003735272969051
+      ],
+      "before": {
+        "camera_RGB_mean_error": [
+          -0.00010386160743300566,
+          -0.0003323534145703544,
+          -0.0011830661772396977
+        ],
+        "camera_RGB_MSE": 9.9034134160136e-05,
+        "display_sRGB_PSNR": 34.70924210521367
+      },
+      "after": {
+        "camera_RGB_mean_error": [
+          0.00043051988953401234,
+          -2.5286007553040334e-05,
+          -0.0003542003283002515
+        ],
+        "camera_RGB_MSE": 9.851226313667023e-05,
+        "display_sRGB_PSNR": 34.70229795614132
+      }
+    },
+    {
+      "model": {
+        "arm": "none",
+        "step": 10000,
+        "snapshot": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/weights/weights-0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4.pt",
+        "sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4"
+      },
+      "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+      "observation": {
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "binned_source_tile_xywh": [
+          189,
+          3,
+          256,
+          256
+        ],
+        "binned_source_roi_xywh": [
+          237,
+          51,
+          160,
+          160
+        ],
+        "evaluation_tile_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8",
+        "observation_sha256": "1a180a0ab7821e8d0bd5d735a4b84be541deacb974cb962836f9bf8389131f7d",
+        "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+        "arrays_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+        "noise_device": "cpu",
+        "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+      },
+      "gains_fitted_to_observed_CFA_only": [
+        1.2145073809889348,
+        1.0505569217840012,
+        1.0744468497807838
+      ],
+      "before": {
+        "camera_RGB_mean_error": [
+          -0.08924699362027695,
+          -0.022617866594212898,
+          -0.006890515322588406
+        ],
+        "camera_RGB_MSE": 0.0030076892156508366,
+        "display_sRGB_PSNR": 25.021121164709058
+      },
+      "after": {
+        "camera_RGB_mean_error": [
+          -0.012703112171998328,
+          -0.0024039547278908915,
+          -0.00018896199272944614
+        ],
+        "camera_RGB_MSE": 0.0001423655013540581,
+        "display_sRGB_PSNR": 37.17268459719073
+      }
+    },
+    {
+      "model": {
+        "arm": "none",
+        "step": 10000,
+        "snapshot": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/weights/weights-0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4.pt",
+        "sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4"
+      },
+      "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+      "observation": {
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "binned_source_tile_xywh": [
+          195,
+          89,
+          256,
+          256
+        ],
+        "binned_source_roi_xywh": [
+          243,
+          137,
+          160,
+          160
+        ],
+        "evaluation_tile_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf",
+        "observation_sha256": "dd2d0ceb311a5ad4e62e03b92e186873229c038f69bdb67ab2398e57cd9047ec",
+        "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+        "arrays_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+        "noise_device": "cpu",
+        "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+      },
+      "gains_fitted_to_observed_CFA_only": [
+        1.0036380113901406,
+        1.0003697140821421,
+        1.0021054642248748
+      ],
+      "before": {
+        "camera_RGB_mean_error": [
+          -0.0003180294365359004,
+          8.112745558357836e-05,
+          -0.0007913737939104592
+        ],
+        "camera_RGB_MSE": 8.871581020129017e-05,
+        "display_sRGB_PSNR": 35.12317256372121
+      },
+      "after": {
+        "camera_RGB_mean_error": [
+          9.63879411820101e-05,
+          0.0001813745480038964,
+          -0.00032334160544277067
+        ],
+        "camera_RGB_MSE": 8.855465136006844e-05,
+        "display_sRGB_PSNR": 35.123043918338716
+      }
+    },
+    {
+      "model": {
+        "arm": "S",
+        "step": 3000,
+        "snapshot": "/mnt/external/demosaic/models/dino-anchored-native-fresh-b16-v44-step3000.pt",
+        "sha256": "b6adac140926920d7faad223acf545f32904c41d6883ab982a1ac9d5bdce3312"
+      },
+      "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+      "observation": {
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "binned_source_tile_xywh": [
+          189,
+          3,
+          256,
+          256
+        ],
+        "binned_source_roi_xywh": [
+          237,
+          51,
+          160,
+          160
+        ],
+        "evaluation_tile_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8",
+        "observation_sha256": "1a180a0ab7821e8d0bd5d735a4b84be541deacb974cb962836f9bf8389131f7d",
+        "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+        "arrays_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+        "noise_device": "cpu",
+        "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+      },
+      "gains_fitted_to_observed_CFA_only": [
+        1.010870248326912,
+        1.0007178173174684,
+        0.9841335461761409
+      ],
+      "before": {
+        "camera_RGB_mean_error": [
+          -0.004638923213256021,
+          -0.0008920745227908355,
+          0.002013463544287468
+        ],
+        "camera_RGB_MSE": 4.945603658333457e-05,
+        "display_sRGB_PSNR": 39.41851524206744
+      },
+      "after": {
+        "camera_RGB_mean_error": [
+          0.00015967968432505585,
+          -0.00058947825748362,
+          0.00044392320526700504
+        ],
+        "camera_RGB_MSE": 4.0736701563897096e-05,
+        "display_sRGB_PSNR": 40.59243386096241
+      }
+    },
+    {
+      "model": {
+        "arm": "S",
+        "step": 3000,
+        "snapshot": "/mnt/external/demosaic/models/dino-anchored-native-fresh-b16-v44-step3000.pt",
+        "sha256": "b6adac140926920d7faad223acf545f32904c41d6883ab982a1ac9d5bdce3312"
+      },
+      "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+      "observation": {
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "binned_source_tile_xywh": [
+          195,
+          89,
+          256,
+          256
+        ],
+        "binned_source_roi_xywh": [
+          243,
+          137,
+          160,
+          160
+        ],
+        "evaluation_tile_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf",
+        "observation_sha256": "dd2d0ceb311a5ad4e62e03b92e186873229c038f69bdb67ab2398e57cd9047ec",
+        "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+        "arrays_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+        "noise_device": "cpu",
+        "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+      },
+      "gains_fitted_to_observed_CFA_only": [
+        1.0053611128924405,
+        1.0007760526067355,
+        1.0059948025176852
+      ],
+      "before": {
+        "camera_RGB_mean_error": [
+          -0.0002757147699501117,
+          -8.750381247486949e-05,
+          -0.0015360749062662338
+        ],
+        "camera_RGB_MSE": 0.00010336718481970018,
+        "display_sRGB_PSNR": 34.4977162863853
+      },
+      "after": {
+        "camera_RGB_mean_error": [
+          0.0003352133613261266,
+          0.0001227901389828734,
+          -0.000207930346112577
+        ],
+        "camera_RGB_MSE": 0.00010237048315684679,
+        "display_sRGB_PSNR": 34.49941331811764
+      }
+    },
+    {
+      "model": {
+        "arm": "S",
+        "step": 10000,
+        "snapshot": "/mnt/external/demosaic/evaluation/fresh-none-S10k-cached-cpu-v1/weights/weights-ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad.pt",
+        "sha256": "ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad"
+      },
+      "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+      "observation": {
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "binned_source_tile_xywh": [
+          189,
+          3,
+          256,
+          256
+        ],
+        "binned_source_roi_xywh": [
+          237,
+          51,
+          160,
+          160
+        ],
+        "evaluation_tile_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8",
+        "observation_sha256": "1a180a0ab7821e8d0bd5d735a4b84be541deacb974cb962836f9bf8389131f7d",
+        "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+        "arrays_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+        "noise_device": "cpu",
+        "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+      },
+      "gains_fitted_to_observed_CFA_only": [
+        1.0720026992183413,
+        1.017078450632259,
+        1.0094220338689683
+      ],
+      "before": {
+        "camera_RGB_mean_error": [
+          -0.04100304793092164,
+          -0.010097502416745528,
+          -0.0012224395302424928
+        ],
+        "camera_RGB_MSE": 0.0007182310011679227,
+        "display_sRGB_PSNR": 31.19558609572099
+      },
+      "after": {
+        "camera_RGB_mean_error": [
+          -0.01183622341404316,
+          -0.0030552856107919977,
+          -0.00032088251640139065
+        ],
+        "camera_RGB_MSE": 0.00016375542869928364,
+        "display_sRGB_PSNR": 36.946452092823804
+      }
+    },
+    {
+      "model": {
+        "arm": "S",
+        "step": 10000,
+        "snapshot": "/mnt/external/demosaic/evaluation/fresh-none-S10k-cached-cpu-v1/weights/weights-ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad.pt",
+        "sha256": "ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad"
+      },
+      "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+      "observation": {
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "binned_source_tile_xywh": [
+          195,
+          89,
+          256,
+          256
+        ],
+        "binned_source_roi_xywh": [
+          243,
+          137,
+          160,
+          160
+        ],
+        "evaluation_tile_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf",
+        "observation_sha256": "dd2d0ceb311a5ad4e62e03b92e186873229c038f69bdb67ab2398e57cd9047ec",
+        "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+        "arrays_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+        "noise_device": "cpu",
+        "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+      },
+      "gains_fitted_to_observed_CFA_only": [
+        1.003484202899713,
+        1.000710450703747,
+        1.0026732322025664
+      ],
+      "before": {
+        "camera_RGB_mean_error": [
+          -0.00020928032594931921,
+          4.1638826951180266e-05,
+          -0.00095658666758899
+        ],
+        "camera_RGB_MSE": 9.272347203939447e-05,
+        "display_sRGB_PSNR": 35.00911445522051
+      },
+      "after": {
+        "camera_RGB_mean_error": [
+          0.00018799514426753427,
+          0.0002342478433056616,
+          -0.00036278470236998927
+        ],
+        "camera_RGB_MSE": 9.24466883680121e-05,
+        "display_sRGB_PSNR": 35.00761048444845
+      }
+    }
+  ],
+  "native_crops": [
+    {
+      "image": "crop-9eae27ed7cec7800.png",
+      "caption": "none-3000-source-0-rgb-f32-cfa-channel-gain",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Input-CFA channel gain",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "8841533a4b9a93334810aff3f3b73e7b2b7516d5cb25574476ee24baccb91837",
+      "model": {
+        "arm": "none",
+        "step": 3000,
+        "snapshot": "/mnt/external/demosaic/models/control-anchored-native-fresh-b16-v45-step3000.pt",
+        "sha256": "6f9948c361cda74a294ad0cc9db4718dfb3fe0a9cc5a4c1cc867e986e0a7eedf"
+      },
+      "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+      "observation": {
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "binned_source_tile_xywh": [
+          189,
+          3,
+          256,
+          256
+        ],
+        "binned_source_roi_xywh": [
+          237,
+          51,
+          160,
+          160
+        ],
+        "evaluation_tile_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8",
+        "observation_sha256": "1a180a0ab7821e8d0bd5d735a4b84be541deacb974cb962836f9bf8389131f7d",
+        "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+        "arrays_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+        "noise_device": "cpu",
+        "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+      },
+      "gains_fitted_to_observed_CFA_only": [
+        1.003399816969057,
+        1.0012703697781955,
+        0.9926058895261572
+      ],
+      "before": {
+        "camera_RGB_mean_error": [
+          -0.0008933454093357795,
+          -0.0009096768851379977,
+          0.0011003278620395395
+        ],
+        "camera_RGB_MSE": 4.216578806425988e-05,
+        "display_sRGB_PSNR": 40.35606094399908
+      },
+      "after": {
+        "camera_RGB_mean_error": [
+          0.0006202166804132503,
+          -0.00037417404317046987,
+          0.0003756399675116423
+        ],
+        "camera_RGB_MSE": 4.149255679828103e-05,
+        "display_sRGB_PSNR": 40.678329099698296
+      },
+      "source": {
+        "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Roy Egloff",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "attribution": null,
+        "credit": "Own work",
+        "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+        "width": 3888,
+        "height": 2592,
+        "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+        "shape": [
+          324,
+          486,
+          3
+        ],
+        "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+      },
+      "conditioning": {
+        "shot": 0.00256,
+        "read": 2.62144e-05
+      },
+      "roi_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "checkpoint_sha256": "6f9948c361cda74a294ad0cc9db4718dfb3fe0a9cc5a4c1cc867e986e0a7eedf",
+      "display_exposure": 1.0,
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "reference": "Exact simulated target used only for evaluation; gain fit uses observed CFA and saved prediction.",
+      "repository_image": "docs/images/cfa-gain-cpu-none-3000-fabric.png",
+      "manually_viewed": true
+    },
+    {
+      "image": "crop-d5cf94eb6926235a.png",
+      "caption": "none-3000-source-1-rgb-f32-cfa-channel-gain",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Input-CFA channel gain",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "8c37c79010115a622359dd1b2cebd546726fa8481bfcc78fb95e249857295fa1",
+      "model": {
+        "arm": "none",
+        "step": 3000,
+        "snapshot": "/mnt/external/demosaic/models/control-anchored-native-fresh-b16-v45-step3000.pt",
+        "sha256": "6f9948c361cda74a294ad0cc9db4718dfb3fe0a9cc5a4c1cc867e986e0a7eedf"
+      },
+      "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+      "observation": {
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "binned_source_tile_xywh": [
+          195,
+          89,
+          256,
+          256
+        ],
+        "binned_source_roi_xywh": [
+          243,
+          137,
+          160,
+          160
+        ],
+        "evaluation_tile_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf",
+        "observation_sha256": "dd2d0ceb311a5ad4e62e03b92e186873229c038f69bdb67ab2398e57cd9047ec",
+        "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+        "arrays_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+        "noise_device": "cpu",
+        "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+      },
+      "gains_fitted_to_observed_CFA_only": [
+        1.0046823273028707,
+        1.0011342027046315,
+        1.003735272969051
+      ],
+      "before": {
+        "camera_RGB_mean_error": [
+          -0.00010386160743300566,
+          -0.0003323534145703544,
+          -0.0011830661772396977
+        ],
+        "camera_RGB_MSE": 9.9034134160136e-05,
+        "display_sRGB_PSNR": 34.70924210521367
+      },
+      "after": {
+        "camera_RGB_mean_error": [
+          0.00043051988953401234,
+          -2.5286007553040334e-05,
+          -0.0003542003283002515
+        ],
+        "camera_RGB_MSE": 9.851226313667023e-05,
+        "display_sRGB_PSNR": 34.70229795614132
+      },
+      "source": {
+        "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Vancouver_%28BC%2C_Canada%29%2C_Coal_Harbour_Seaside_Park%2C_Blick_in_den_Himmel_--_2022_--_2158.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Dietmar Rabich",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "attribution": "Dietmar Rabich",
+        "credit": "Own work",
+        "sha1": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "sha1_hex": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "download_path": "images/00/2f/002fc6eeadf637e81d5a327f117b79abb86becd9.jpg",
+        "width": 3809,
+        "height": 2857,
+        "id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/00/002fc6eeadf637e81d5a327f117b79abb86becd9.npy",
+        "shape": [
+          357,
+          476,
+          3
+        ],
+        "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf"
+      },
+      "conditioning": {
+        "shot": 0.00256,
+        "read": 2.62144e-05
+      },
+      "roi_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "checkpoint_sha256": "6f9948c361cda74a294ad0cc9db4718dfb3fe0a9cc5a4c1cc867e986e0a7eedf",
+      "display_exposure": 1.0,
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "reference": "Exact simulated target used only for evaluation; gain fit uses observed CFA and saved prediction.",
+      "repository_image": "docs/images/cfa-gain-cpu-none-3000-building.png",
+      "manually_viewed": true
+    },
+    {
+      "image": "crop-e7ec465fc5a66830.png",
+      "caption": "none-10000-source-0-rgb-f32-cfa-channel-gain",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Input-CFA channel gain",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "387f7bf281c0c5ff33508e3c1d72df9c6f47b70f75204fcd56c706dbe85ad708",
+      "model": {
+        "arm": "none",
+        "step": 10000,
+        "snapshot": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/weights/weights-0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4.pt",
+        "sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4"
+      },
+      "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+      "observation": {
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "binned_source_tile_xywh": [
+          189,
+          3,
+          256,
+          256
+        ],
+        "binned_source_roi_xywh": [
+          237,
+          51,
+          160,
+          160
+        ],
+        "evaluation_tile_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8",
+        "observation_sha256": "1a180a0ab7821e8d0bd5d735a4b84be541deacb974cb962836f9bf8389131f7d",
+        "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+        "arrays_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+        "noise_device": "cpu",
+        "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+      },
+      "gains_fitted_to_observed_CFA_only": [
+        1.2145073809889348,
+        1.0505569217840012,
+        1.0744468497807838
+      ],
+      "before": {
+        "camera_RGB_mean_error": [
+          -0.08924699362027695,
+          -0.022617866594212898,
+          -0.006890515322588406
+        ],
+        "camera_RGB_MSE": 0.0030076892156508366,
+        "display_sRGB_PSNR": 25.021121164709058
+      },
+      "after": {
+        "camera_RGB_mean_error": [
+          -0.012703112171998328,
+          -0.0024039547278908915,
+          -0.00018896199272944614
+        ],
+        "camera_RGB_MSE": 0.0001423655013540581,
+        "display_sRGB_PSNR": 37.17268459719073
+      },
+      "source": {
+        "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Roy Egloff",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "attribution": null,
+        "credit": "Own work",
+        "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+        "width": 3888,
+        "height": 2592,
+        "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+        "shape": [
+          324,
+          486,
+          3
+        ],
+        "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+      },
+      "conditioning": {
+        "exposure": 1.0,
+        "name": "iso12800-prior",
+        "read": 2.62144e-05,
+        "shot": 0.00256
+      },
+      "roi_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "checkpoint_sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4",
+      "display_exposure": 1.0,
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "reference": "Exact simulated target used only for evaluation; gain fit uses observed CFA and saved prediction.",
+      "repository_image": "docs/images/cfa-gain-cpu-none-10000-fabric.png",
+      "manually_viewed": true
+    },
+    {
+      "image": "crop-5c802e02bb934adb.png",
+      "caption": "none-10000-source-1-rgb-f32-cfa-channel-gain",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Input-CFA channel gain",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "026133225417e61968aa888e440fb6b0912e8a4ada976dc94566140a7b8ba093",
+      "model": {
+        "arm": "none",
+        "step": 10000,
+        "snapshot": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/weights/weights-0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4.pt",
+        "sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4"
+      },
+      "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+      "observation": {
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "binned_source_tile_xywh": [
+          195,
+          89,
+          256,
+          256
+        ],
+        "binned_source_roi_xywh": [
+          243,
+          137,
+          160,
+          160
+        ],
+        "evaluation_tile_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf",
+        "observation_sha256": "dd2d0ceb311a5ad4e62e03b92e186873229c038f69bdb67ab2398e57cd9047ec",
+        "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+        "arrays_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+        "noise_device": "cpu",
+        "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+      },
+      "gains_fitted_to_observed_CFA_only": [
+        1.0036380113901406,
+        1.0003697140821421,
+        1.0021054642248748
+      ],
+      "before": {
+        "camera_RGB_mean_error": [
+          -0.0003180294365359004,
+          8.112745558357836e-05,
+          -0.0007913737939104592
+        ],
+        "camera_RGB_MSE": 8.871581020129017e-05,
+        "display_sRGB_PSNR": 35.12317256372121
+      },
+      "after": {
+        "camera_RGB_mean_error": [
+          9.63879411820101e-05,
+          0.0001813745480038964,
+          -0.00032334160544277067
+        ],
+        "camera_RGB_MSE": 8.855465136006844e-05,
+        "display_sRGB_PSNR": 35.123043918338716
+      },
+      "source": {
+        "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Vancouver_%28BC%2C_Canada%29%2C_Coal_Harbour_Seaside_Park%2C_Blick_in_den_Himmel_--_2022_--_2158.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Dietmar Rabich",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "attribution": "Dietmar Rabich",
+        "credit": "Own work",
+        "sha1": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "sha1_hex": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "download_path": "images/00/2f/002fc6eeadf637e81d5a327f117b79abb86becd9.jpg",
+        "width": 3809,
+        "height": 2857,
+        "id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/00/002fc6eeadf637e81d5a327f117b79abb86becd9.npy",
+        "shape": [
+          357,
+          476,
+          3
+        ],
+        "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf"
+      },
+      "conditioning": {
+        "exposure": 1.0,
+        "name": "iso12800-prior",
+        "read": 2.62144e-05,
+        "shot": 0.00256
+      },
+      "roi_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "checkpoint_sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4",
+      "display_exposure": 1.0,
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "reference": "Exact simulated target used only for evaluation; gain fit uses observed CFA and saved prediction.",
+      "repository_image": "docs/images/cfa-gain-cpu-none-10000-building.png",
+      "manually_viewed": true
+    },
+    {
+      "image": "crop-ca990d8f366a88fd.png",
+      "caption": "S-3000-source-0-rgb-f32-cfa-channel-gain",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Input-CFA channel gain",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "f15d37c56c9d6dfbf9dd79ab4b0de85adc1efe17bebed722932269b2a85a603f",
+      "model": {
+        "arm": "S",
+        "step": 3000,
+        "snapshot": "/mnt/external/demosaic/models/dino-anchored-native-fresh-b16-v44-step3000.pt",
+        "sha256": "b6adac140926920d7faad223acf545f32904c41d6883ab982a1ac9d5bdce3312"
+      },
+      "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+      "observation": {
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "binned_source_tile_xywh": [
+          189,
+          3,
+          256,
+          256
+        ],
+        "binned_source_roi_xywh": [
+          237,
+          51,
+          160,
+          160
+        ],
+        "evaluation_tile_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8",
+        "observation_sha256": "1a180a0ab7821e8d0bd5d735a4b84be541deacb974cb962836f9bf8389131f7d",
+        "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+        "arrays_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+        "noise_device": "cpu",
+        "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+      },
+      "gains_fitted_to_observed_CFA_only": [
+        1.010870248326912,
+        1.0007178173174684,
+        0.9841335461761409
+      ],
+      "before": {
+        "camera_RGB_mean_error": [
+          -0.004638923213256021,
+          -0.0008920745227908355,
+          0.002013463544287468
+        ],
+        "camera_RGB_MSE": 4.945603658333457e-05,
+        "display_sRGB_PSNR": 39.41851524206744
+      },
+      "after": {
+        "camera_RGB_mean_error": [
+          0.00015967968432505585,
+          -0.00058947825748362,
+          0.00044392320526700504
+        ],
+        "camera_RGB_MSE": 4.0736701563897096e-05,
+        "display_sRGB_PSNR": 40.59243386096241
+      },
+      "source": {
+        "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Roy Egloff",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "attribution": null,
+        "credit": "Own work",
+        "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+        "width": 3888,
+        "height": 2592,
+        "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+        "shape": [
+          324,
+          486,
+          3
+        ],
+        "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+      },
+      "conditioning": {
+        "shot": 0.00256,
+        "read": 2.62144e-05
+      },
+      "roi_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "checkpoint_sha256": "b6adac140926920d7faad223acf545f32904c41d6883ab982a1ac9d5bdce3312",
+      "display_exposure": 1.0,
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "reference": "Exact simulated target used only for evaluation; gain fit uses observed CFA and saved prediction.",
+      "repository_image": "docs/images/cfa-gain-cpu-S-3000-fabric.png",
+      "manually_viewed": true
+    },
+    {
+      "image": "crop-4f0f87691b34a8b8.png",
+      "caption": "S-3000-source-1-rgb-f32-cfa-channel-gain",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Input-CFA channel gain",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "825a436a75a9172d77657db84a39c50a0c5497f94b6afe03a67677060fb00e24",
+      "model": {
+        "arm": "S",
+        "step": 3000,
+        "snapshot": "/mnt/external/demosaic/models/dino-anchored-native-fresh-b16-v44-step3000.pt",
+        "sha256": "b6adac140926920d7faad223acf545f32904c41d6883ab982a1ac9d5bdce3312"
+      },
+      "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+      "observation": {
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "binned_source_tile_xywh": [
+          195,
+          89,
+          256,
+          256
+        ],
+        "binned_source_roi_xywh": [
+          243,
+          137,
+          160,
+          160
+        ],
+        "evaluation_tile_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf",
+        "observation_sha256": "dd2d0ceb311a5ad4e62e03b92e186873229c038f69bdb67ab2398e57cd9047ec",
+        "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+        "arrays_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+        "noise_device": "cpu",
+        "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+      },
+      "gains_fitted_to_observed_CFA_only": [
+        1.0053611128924405,
+        1.0007760526067355,
+        1.0059948025176852
+      ],
+      "before": {
+        "camera_RGB_mean_error": [
+          -0.0002757147699501117,
+          -8.750381247486949e-05,
+          -0.0015360749062662338
+        ],
+        "camera_RGB_MSE": 0.00010336718481970018,
+        "display_sRGB_PSNR": 34.4977162863853
+      },
+      "after": {
+        "camera_RGB_mean_error": [
+          0.0003352133613261266,
+          0.0001227901389828734,
+          -0.000207930346112577
+        ],
+        "camera_RGB_MSE": 0.00010237048315684679,
+        "display_sRGB_PSNR": 34.49941331811764
+      },
+      "source": {
+        "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Vancouver_%28BC%2C_Canada%29%2C_Coal_Harbour_Seaside_Park%2C_Blick_in_den_Himmel_--_2022_--_2158.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Dietmar Rabich",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "attribution": "Dietmar Rabich",
+        "credit": "Own work",
+        "sha1": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "sha1_hex": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "download_path": "images/00/2f/002fc6eeadf637e81d5a327f117b79abb86becd9.jpg",
+        "width": 3809,
+        "height": 2857,
+        "id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/00/002fc6eeadf637e81d5a327f117b79abb86becd9.npy",
+        "shape": [
+          357,
+          476,
+          3
+        ],
+        "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf"
+      },
+      "conditioning": {
+        "shot": 0.00256,
+        "read": 2.62144e-05
+      },
+      "roi_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "checkpoint_sha256": "b6adac140926920d7faad223acf545f32904c41d6883ab982a1ac9d5bdce3312",
+      "display_exposure": 1.0,
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "reference": "Exact simulated target used only for evaluation; gain fit uses observed CFA and saved prediction.",
+      "repository_image": "docs/images/cfa-gain-cpu-S-3000-building.png",
+      "manually_viewed": true
+    },
+    {
+      "image": "crop-142da9b29ae9642a.png",
+      "caption": "S-10000-source-0-rgb-f32-cfa-channel-gain",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Input-CFA channel gain",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "aa8e65c755b004028037ca6efe3e86cf7ac1f1d78f09f607bc9d1056b8b1a030",
+      "model": {
+        "arm": "S",
+        "step": 10000,
+        "snapshot": "/mnt/external/demosaic/evaluation/fresh-none-S10k-cached-cpu-v1/weights/weights-ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad.pt",
+        "sha256": "ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad"
+      },
+      "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+      "observation": {
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "binned_source_tile_xywh": [
+          189,
+          3,
+          256,
+          256
+        ],
+        "binned_source_roi_xywh": [
+          237,
+          51,
+          160,
+          160
+        ],
+        "evaluation_tile_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8",
+        "observation_sha256": "1a180a0ab7821e8d0bd5d735a4b84be541deacb974cb962836f9bf8389131f7d",
+        "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+        "arrays_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+        "noise_device": "cpu",
+        "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+      },
+      "gains_fitted_to_observed_CFA_only": [
+        1.0720026992183413,
+        1.017078450632259,
+        1.0094220338689683
+      ],
+      "before": {
+        "camera_RGB_mean_error": [
+          -0.04100304793092164,
+          -0.010097502416745528,
+          -0.0012224395302424928
+        ],
+        "camera_RGB_MSE": 0.0007182310011679227,
+        "display_sRGB_PSNR": 31.19558609572099
+      },
+      "after": {
+        "camera_RGB_mean_error": [
+          -0.01183622341404316,
+          -0.0030552856107919977,
+          -0.00032088251640139065
+        ],
+        "camera_RGB_MSE": 0.00016375542869928364,
+        "display_sRGB_PSNR": 36.946452092823804
+      },
+      "source": {
+        "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Roy Egloff",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "attribution": null,
+        "credit": "Own work",
+        "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+        "width": 3888,
+        "height": 2592,
+        "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+        "shape": [
+          324,
+          486,
+          3
+        ],
+        "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+      },
+      "conditioning": {
+        "shot": 0.00256,
+        "read": 2.62144e-05
+      },
+      "roi_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "checkpoint_sha256": "ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad",
+      "display_exposure": 1.0,
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "reference": "Exact simulated target used only for evaluation; gain fit uses observed CFA and saved prediction.",
+      "repository_image": "docs/images/cfa-gain-cpu-S-10000-fabric.png",
+      "manually_viewed": true
+    },
+    {
+      "image": "crop-5b437ee40ed93153.png",
+      "caption": "S-10000-source-1-rgb-f32-cfa-channel-gain",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Input-CFA channel gain",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "ec4530e69482648b92b7635aa114b979a3d8fe3ae296fe9618afdd6299abc6ef",
+      "model": {
+        "arm": "S",
+        "step": 10000,
+        "snapshot": "/mnt/external/demosaic/evaluation/fresh-none-S10k-cached-cpu-v1/weights/weights-ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad.pt",
+        "sha256": "ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad"
+      },
+      "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+      "observation": {
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "binned_source_tile_xywh": [
+          195,
+          89,
+          256,
+          256
+        ],
+        "binned_source_roi_xywh": [
+          243,
+          137,
+          160,
+          160
+        ],
+        "evaluation_tile_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf",
+        "observation_sha256": "dd2d0ceb311a5ad4e62e03b92e186873229c038f69bdb67ab2398e57cd9047ec",
+        "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+        "arrays_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+        "noise_device": "cpu",
+        "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+      },
+      "gains_fitted_to_observed_CFA_only": [
+        1.003484202899713,
+        1.000710450703747,
+        1.0026732322025664
+      ],
+      "before": {
+        "camera_RGB_mean_error": [
+          -0.00020928032594931921,
+          4.1638826951180266e-05,
+          -0.00095658666758899
+        ],
+        "camera_RGB_MSE": 9.272347203939447e-05,
+        "display_sRGB_PSNR": 35.00911445522051
+      },
+      "after": {
+        "camera_RGB_mean_error": [
+          0.00018799514426753427,
+          0.0002342478433056616,
+          -0.00036278470236998927
+        ],
+        "camera_RGB_MSE": 9.24466883680121e-05,
+        "display_sRGB_PSNR": 35.00761048444845
+      },
+      "source": {
+        "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Vancouver_%28BC%2C_Canada%29%2C_Coal_Harbour_Seaside_Park%2C_Blick_in_den_Himmel_--_2022_--_2158.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Dietmar Rabich",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "attribution": "Dietmar Rabich",
+        "credit": "Own work",
+        "sha1": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "sha1_hex": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "download_path": "images/00/2f/002fc6eeadf637e81d5a327f117b79abb86becd9.jpg",
+        "width": 3809,
+        "height": 2857,
+        "id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/00/002fc6eeadf637e81d5a327f117b79abb86becd9.npy",
+        "shape": [
+          357,
+          476,
+          3
+        ],
+        "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf"
+      },
+      "conditioning": {
+        "shot": 0.00256,
+        "read": 2.62144e-05
+      },
+      "roi_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "checkpoint_sha256": "ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad",
+      "display_exposure": 1.0,
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "reference": "Exact simulated target used only for evaluation; gain fit uses observed CFA and saved prediction.",
+      "repository_image": "docs/images/cfa-gain-cpu-S-10000-building.png",
+      "manually_viewed": true
+    }
+  ],
+  "corrected_arrays": [
+    {
+      "path": "/mnt/external/demosaic/evaluation/fresh-saved-input-cfa-gain-cpu-v2/none-3000-source-0-rgb-f32-cfa-channel-gain.npy",
+      "sha256": "cc4fe0a7aad6adf7ca3a6aa740dda0dfd8bedcc55505f6ad4e4eef5fd801da84"
+    },
+    {
+      "path": "/mnt/external/demosaic/evaluation/fresh-saved-input-cfa-gain-cpu-v2/none-3000-source-1-rgb-f32-cfa-channel-gain.npy",
+      "sha256": "561dca0c8793a755a9837c1431cc8b3b9fc9f57e51f9e2bbb64999da71e923eb"
+    },
+    {
+      "path": "/mnt/external/demosaic/evaluation/fresh-saved-input-cfa-gain-cpu-v2/none-10000-source-0-rgb-f32-cfa-channel-gain.npy",
+      "sha256": "ca2ce38afde63d1caebffd3b894e98b0a3419530a82dbf8a989e67cdd8b45841"
+    },
+    {
+      "path": "/mnt/external/demosaic/evaluation/fresh-saved-input-cfa-gain-cpu-v2/none-10000-source-1-rgb-f32-cfa-channel-gain.npy",
+      "sha256": "60dba872f097ba9196d182cbf10fab6d9eb896130eea26dd749a86d920e5dbe2"
+    },
+    {
+      "path": "/mnt/external/demosaic/evaluation/fresh-saved-input-cfa-gain-cpu-v2/S-3000-source-0-rgb-f32-cfa-channel-gain.npy",
+      "sha256": "d14c013d47201253683334f8c441f7ad6e286b612bb4739c96e976ab62b6b49f"
+    },
+    {
+      "path": "/mnt/external/demosaic/evaluation/fresh-saved-input-cfa-gain-cpu-v2/S-3000-source-1-rgb-f32-cfa-channel-gain.npy",
+      "sha256": "be10693aa437c73a4e24fc43c7f6245936c32d71e49b1ca234ea4ac06e199cce"
+    },
+    {
+      "path": "/mnt/external/demosaic/evaluation/fresh-saved-input-cfa-gain-cpu-v2/S-10000-source-0-rgb-f32-cfa-channel-gain.npy",
+      "sha256": "8f98c101a217196321295c3bdf3c2c0592276d0e47a25eabf8d48e9521e42861"
+    },
+    {
+      "path": "/mnt/external/demosaic/evaluation/fresh-saved-input-cfa-gain-cpu-v2/S-10000-source-1-rgb-f32-cfa-channel-gain.npy",
+      "sha256": "1bc9dfdcd2a829031858d1a2ed56fc649842109dc10bfc6c4ec87d650680a69c"
+    }
+  ],
+  "CUDA_initialized": false,
+  "driver_sha256": "7442df0c785f4a3746ef6d26aec42305550954a7459f7f70c63439f8872db57b",
+  "limitations": "Eight predictions from two sources and one noise setting. Gains are fit over each256px tile and may vary with content/clipping/noise correlations; no broad real-image, seam, saturated-color or quality validation. Not a proposed default or trained-model improvement.",
+  "execution_report": "/mnt/external/demosaic/evaluation/fresh-saved-input-cfa-gain-cpu-v2/report.json",
+  "execution_report_sha256": "bcac6c929943c6b2c34111cdae88d5293d6d401c9df81dd5e1a0b7a74d750543",
+  "native_PNGs_actually_viewed": 8,
+  "independent_gain_rebuild_max_absolute_difference": 1.021405182655144e-14,
+  "repository_images": [
+    "docs/images/cfa-gain-cpu-none-3000-fabric.png",
+    "docs/images/cfa-gain-cpu-none-3000-building.png",
+    "docs/images/cfa-gain-cpu-none-10000-fabric.png",
+    "docs/images/cfa-gain-cpu-none-10000-building.png",
+    "docs/images/cfa-gain-cpu-S-3000-fabric.png",
+    "docs/images/cfa-gain-cpu-S-3000-building.png",
+    "docs/images/cfa-gain-cpu-S-10000-fabric.png",
+    "docs/images/cfa-gain-cpu-S-10000-building.png"
+  ],
+  "publication_driver_sha256": "68aebbef960fe4175fe5c3285b22347bdec2e4b90b7c8784d032071fbc46ce81",
+  "decision": "No default change. Input-only gain largely reduces this fabric color shift but does not recover fine cords; broader saturated/real/full-frame checks would be required."
+}
