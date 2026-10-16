@@ -81,6 +81,10 @@ def test_zero_variance_keeps_detail_and_flat_gaussian_noise_is_attenuated():
     branch = model.pretrained_rgb
     detail = torch.randn(2, 3, 18, 26)
     torch.testing.assert_close(branch.filter_detail(detail, torch.zeros_like(detail)), detail, rtol=0, atol=0)
+    checkerboard = ((torch.arange(26)[None] + torch.arange(18)[:, None]) % 2 * 2 - 1).float()
+    texture = checkerboard[None, None].expand(1, 3, -1, -1) * .02
+    preserved = branch.filter_detail(texture, torch.full_like(texture, 1e-8))
+    torch.testing.assert_close(preserved, texture, rtol=0, atol=1e-6)
     branch.network = IdentityTrunk()
     model.set_noise(0, 1e-4)
     torch.manual_seed(109)

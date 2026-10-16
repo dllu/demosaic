@@ -35,10 +35,10 @@ keeps the old single optimizer group. Other positive finite values create
 separate groups; warmup/cosine scheduling preserves the multiplier. Resume
 rejects a changed multiplier or changed model configuration.
 
-[Engineering smoke/resume receipt](results/packed-detail-smoke-v1.json): eight
+[Engineering smoke/resume receipt](results/packed-detail-smoke-v1.json): ten
 actual CUDA updates across Commons/native/paired domains, genuine pinned DINO,
 finite losses/gradients and nonzero updates in both phase modules. Resume from
-step6 to8 keeps a10× LR ratio; an attempted change to1 is rejected without
+step6 to8 and then10 keeps a10× LR ratio; an attempted change to1 is rejected without
 changing the checkpoint. These steps are not quality or throughput evidence.
 
 All321 tests pass. Added checks compare default packed output bit-for-bit with
@@ -46,6 +46,9 @@ a SHA-pinned V38 implementation, validate every CFA's color/phase variance by
 Monte Carlo with actual WB, preserve16-bit ADC ramps under BF16 and odd packed
 dimensions, attenuate flat Gaussian detail noise, verify gradients/checkpoint
 roundtrip in channels-last, and check optimizer grouping/scheduling/resume.
+All32 targeted checks also pass after the final metadata reuse optimization.
+Metadata is validated once and variance prepared before the CNN, avoiding a
+second CUDA-to-host boolean synchronization after the deep forward.
 
 The planned matched trial is [V40](../configs/dino-anchored-packed-detail-b16-v40.yaml)
 versus [V41](../configs/dino-anchored-packed-detail-fast-phase-b16-v41.yaml):

@@ -286,28 +286,32 @@ class PretrainedRgbDemosaic(nn.Module):
             self._noise_key = key
         return self
 
-    def pooled_noise_gain(self, colors, balance):
+    def _phase_indices(self, colors):
+        matches = (colors[:, None] == self.phase_patterns[None]).all(-1)
+        if not matches.any(-1).all():
+            raise ValueError("Expected an ordinary Bayer phase pattern")
+        return matches.long().argmax(-1)
+
+    def pooled_noise_gain(self, colors, balance, *, indices=None):
         """RMS marginal gain of MHC+area2 for independent unit CFA noise.
 
         RGB/spatial covariance remains; this does not whiten the observation.
         GAT's unit variance is itself approximate at low photon counts.
         """
-        matches = (colors[:, None] == self.phase_patterns[None]).all(-1)
-        if not matches.any(-1).all():
-            raise ValueError("Expected an ordinary Bayer phase pattern")
-        kernel = self.pooled_kernels[matches.long().argmax(-1)].reshape(-1, 3, 4, 3, 3)
+        if indices is None:
+            indices = self._phase_indices(colors)
+        kernel = self.pooled_kernels[indices].reshape(-1, 3, 4, 3, 3)
         balance = balance.float().clamp_min(1e-6)
         ratio = balance.gather(1, colors)[:, None, :, None, None] / balance[
             :, :, None, None, None
         ]
         return ((kernel * ratio).square().sum((1, 2, 3, 4)) / 3).sqrt()[:, None, None, None]
 
-    def detail_noise_variance(self, colors, balance):
+    def detail_noise_variance(self, colors, balance, *, indices=None):
         """Periodic RGB marginal variance, not a covariance-whitening transform."""
-        matches = (colors[:, None] == self.phase_patterns[None]).all(-1)
-        if not matches.any(-1).all():
-            raise ValueError("Expected an ordinary Bayer phase pattern")
-        energy = self.detail_energy[matches.long().argmax(-1)]
+        if indices is None:
+            indices = self._phase_indices(colors)
+        energy = self.detail_energy[indices]
         balance = balance.float().clamp_min(1e-6)
         ratio = balance.gather(1, colors)[:, None, :] / balance.repeat_interleave(4, 1)[..., None]
         variance = (energy * ratio.square()).sum(-1)
@@ -342,7 +346,17 @@ class PretrainedRgbDemosaic(nn.Module):
             if wb is not None:
                 use_wb = packed.new_tensor([p[0] is None for p in profiles], dtype=torch.bool)
                 balance = torch.where(use_wb[:, None], wb.float(), balance)
-            low_noise = F.avg_pool2d(noise, 2) * self.pooled_noise_gain(colors, balance)
+            phase_indices = self._phase_indices(colors)
+            low_noise = F.avg_pool2d(noise, 2) * self.pooled_noise_gain(
+                colors, balance, indices=phase_indices
+            )
+            # Validate metadata once, before the deep CNN. Rechecking a CUDA
+            # boolean afterwards would introduce a needless host synchronization.
+            native_variance = None
+            if self.detail_prior:
+                native_variance = noise.square() * self.detail_noise_variance(
+                    colors, balance, indices=phase_indices
+                ).repeat(1, 1, h // 2, w // 2)
             low_condition = F.avg_pool2d(condition, 2)
             labels = F.one_hot(colors, 3).transpose(1, 2).reshape(len(packed), 12, 1, 1)
             phase = torch.cat(
@@ -376,10 +390,7 @@ class PretrainedRgbDemosaic(nn.Module):
                     low_rgb, scale_factor=2, mode="bilinear", align_corners=False
                 )[..., :h, :w]
                 detail = normalized - expanded
-                variance = noise.square() * self.detail_noise_variance(colors, balance).repeat(
-                    1, 1, h // 2, w // 2
-                )
-                prediction = prediction + (self.filter_detail(detail, variance) - detail)
+                prediction = prediction + (self.filter_detail(detail, native_variance) - detail)
             return prediction
 
     def forward(self, packed, variance, colors, wb=None, matrix=None, context=None):

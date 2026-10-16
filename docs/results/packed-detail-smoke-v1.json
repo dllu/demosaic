@@ -1,17 +1,17 @@
 {
   "purpose": "Engineering smoke/resume, not quality or speed evidence.",
   "checkpoint": "/mnt/external/demosaic/benchmarks/packed-detail-smoke-v1/run/last.pt",
-  "checkpoint_sha256": "d9b9c99f2b08ed437e81f9105a6da0c4195151e4800c1a85d8821f9a4cd92dfe",
-  "step": 8,
+  "checkpoint_sha256": "a5619782c982228bc5f0d271189003f21ec814a0f1dc6328896b147362e5b937",
+  "step": 10,
   "initial_step6_sha256": "ba4ad2bd5443a2ca29bc728b1c997125f06b7cc7cc85d8fbe3edc07bf7697caf",
   "invalid_multiplier_resume_rejected_without_checkpoint_change": true,
   "actual_group_learning_rates": [
-    2.4000000000000003e-06,
-    2.4000000000000004e-05
+    3e-06,
+    3e-05
   ],
   "phase_parameter_l1": {
-    "pretrained_rgb.phase_adapter.": 0.034038541838526726,
-    "pretrained_rgb.phase_head.": 0.22179914026492042
+    "pretrained_rgb.phase_adapter.": 0.044535776833072305,
+    "pretrained_rgb.phase_head.": 0.28109576636052225
   },
   "config": {
     "amp": true,
@@ -78,8 +78,8 @@
     "raw_clean_manifest_sha256": "9a10bac0e84b4d0107663cefd1a930eb811c97b31d5da4c304cadc6a134b576e",
     "manifest_sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
     "validation_manifest_sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a",
-    "source_sha256": "4bd26074e419e6a56a4a9fc20c9eeabaac5959b44e626dea9b55b92056ef1fbe",
-    "source_snapshot": "/mnt/external/demosaic/benchmarks/packed-detail-smoke-v1/run/source/4bd26074e419e6a56a4a9fc20c9eeabaac5959b44e626dea9b55b92056ef1fbe",
+    "source_sha256": "4d70507e08f19e0efbc4344083d844ecbf0939e57021db3a95bda794286e6fb0",
+    "source_snapshot": "/mnt/external/demosaic/benchmarks/packed-detail-smoke-v1/run/source/4d70507e08f19e0efbc4344083d844ecbf0939e57021db3a95bda794286e6fb0",
     "initialized_from": {
       "path": "/mnt/external/demosaic/evaluation/paired-known-geometry-corpus-v34-v36-1k/weights/weights-4da823a0bcff4d02335ba2a9eb04ef7c54d8e2ff7d5d96c1116e9f1ce72899b7.pt",
       "sha256": "4da823a0bcff4d02335ba2a9eb04ef7c54d8e2ff7d5d96c1116e9f1ce72899b7",
@@ -212,8 +212,39 @@
       "highlight": 0.056967075914144516,
       "sensor": 0.025305211544036865,
       "batch_sha256": "da8424512106a346e9186db31ce4864ad45b51ce8a66b44807ce6172922e40d8"
+    },
+    {
+      "event": "train",
+      "step": 9,
+      "loss": 0.006295576225966215,
+      "lr": 2.7e-06,
+      "grad_norm": 0.8313542604446411,
+      "seconds_per_step": 1.9886305381078273,
+      "cuda_gb": 1.545718272,
+      "domain": "paired-RAW",
+      "paired_sensor": 0.0028624585829675198,
+      "paired_coarse_rendered": 0.006187845021486282,
+      "paired_auxiliary": 0.003391953418031335,
+      "batch_sha256": "441379c4549f00c81a0368ab0e1d7eda598eac1c7f1437d1531731b62ef9745c"
+    },
+    {
+      "event": "train",
+      "step": 10,
+      "loss": 0.011036821641027927,
+      "lr": 3e-06,
+      "grad_norm": 1.2443970441818237,
+      "seconds_per_step": 1.050212042988278,
+      "cuda_gb": 1.545718272,
+      "domain": "native-RAW-synthetic",
+      "linear": 0.004668110981583595,
+      "rendered": 0.008609133772552013,
+      "gradient": 0.007599690929055214,
+      "highlight": 0.008435706607997417,
+      "sensor": 0.00460602855309844,
+      "batch_sha256": "c655957267b7869820a178050195d700ade1ceaf6f87fa33dcedc9da16a617d7"
     }
   ],
   "tests": "321 passed in26.63s; Ruff passed.",
-  "script_sha256": "7e2563f9ddb9403f92585c8efd8cc788b0e49ba2e585f631c3ebedc877363d83"
+  "script_sha256": "7e2563f9ddb9403f92585c8efd8cc788b0e49ba2e585f631c3ebedc877363d83",
+  "final_verification": "321 full tests passed;32 targeted tests passed after phase-index reuse, early variance computation and high-SNR texture preservation check. Real CUDA resume8->10 finite; all domains covered; phaseLR ratio10."
 }
