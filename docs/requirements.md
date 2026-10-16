@@ -6,7 +6,7 @@ not just software that executes. This checklist records the evidence required.
 | Requirement | Evidence needed | Current state |
 | --- | --- | --- |
 | Modern method and DINOv3 recommendation | Primary-source research, architecture rationale, licensed pretrained backbone and ablation | Official pinned weights; an earlier architecture's matched 20k-step ablation has a small positive gain on 427 photos. A trained ablation of the current pretrained-RGB architecture remains; SOTA is unproven |
-| Free, broad training data | Source attribution manifest, content-grouped held-out split, real corpus training | Active frozen Commons: 40,170 train / 2,303 val / 2,255 untouched test / 4 excluded; a separate extension adds 1,808 train and reserves 196 holdouts. The [larger native extension](public-raw-expansion-v2.md) freezes 128 captures/106 declared scene groups, adding 69 reviewed CC0 photos to the prior six. V43 is its matched trial; V37/V38 remain on53/31 and V39 on59/37. Finite screening/manual review is not complete scene recognition |
+| Free, broad training data | Source attribution manifest, content-grouped held-out split, real corpus training | Active frozen Commons: 40,170 train / 2,303 val / 2,255 untouched test / 4 excluded; a separate reviewed future extension reaches52,536 train while preserving active holdouts; matching4× caches are preparing. The [larger native extension](public-raw-expansion-v2.md) freezes 128 captures/106 declared scene groups, adding 69 reviewed CC0 photos to the prior six. V43 is its matched trial; V37/V38 remain on53/31 and V39 on59/37. Finite screening/manual review is not complete scene recognition |
 | 8×8 binning with additional precision | Linear-light float averaging and >8-bit cache, numerical tests | Implemented and tested; all 44732 eligible licensed sources prepared |
 | Geometry, optical blur, exposure, synthetic fine detail | Executable data augmentation and inspected samples | Implemented. Complete 4×→geometry/PSF→2× Commons/native targets improve full-photo PSNR by .50990 dB in the matched V34 trial; original 8× validation remains fixed |
 | Physical Bayer noise across cameras and ISO | Electron-domain Poisson/read noise, metadata and tests | Moment-tested simulation, conservative single-image estimates on three cameras; dedicated calibration still missing |
@@ -48,7 +48,8 @@ V34/V36 first1000 and full427/full102MP reviews are complete and stopped.
 [Nine public RAW samples](public-raw-pilot.md) retain their original quarantine.
 Six reviewed sources have a separate opt-in native extension; the chart and two
 clipped sources are excluded. Current architecture trials remain unchanged.
-The complete CUDA suite now passes **358 tests in 27.81 s**. The optional DINO
+The last complete CUDA suite passed **358 tests in 27.81 s**;15 newly added
+CPU identity-screen/diagnostic tests pass separately. The optional DINO
 adapters pass genuine full-model BF16/FP16 initial-output equality, backward,
 original-weight preservation and full-state training-resume checks.
 [GPU receipt](results/dino-lora-gpu-preflight-v1.json). The
@@ -99,7 +100,8 @@ analysis. The README uses its photographic experimental checkpoint, with the
 first1000 alias retained. A new batch sweep measures the actual current
 4× Commons/native128 path, followed by completed adapter GPU checks. The
 [fresh DINO presence/absence trial](fresh-dino-ablation.md) is prepared; the
-[low-rank option](dino-low-rank-adaptation.md) is CPU/GPU-verified, not quality-trained.
+[low-rank option](dino-low-rank-adaptation.md) is CPU/GPU-verified; its first
+[trained V49 gate](dino-lora-v49-review.md) is now rejected.
 
 The [selected low-noise failure diagnosis](native-low-noise-camera-diagnosis.md)
 finds strong sensitivity to the learned WB/matrix projection. Native exact-GT
@@ -123,9 +125,15 @@ verify. The larger native corpus becomes the next data recipe and V43 the curren
 experimental reference, with the parent-primary tradeoff and single-seed limits
 explicit. The stable first-gate model alias and README crops are updated.
 
-The optional DINO low-rank adapters now enter their first
-[matched training gate](dino-lora-v49-trial.md), reusing V47 only after source and
-shared observation checks. The independent
+The optional DINO low-rank adapters complete their first
+[matched training gate](dino-lora-v49-review.md), reusing V47 after source and
+shared observation checks. They regress and stop at1000. The independent
 [Commons extension](commons-incoming-v2.md) has10,558 newly reviewed training
 sources; matching4× caches are preparing. Neither changes the current V49
 data recipe or establishes a quality gain.
+
+The [V49 rank4 review](dino-lora-v49-review.md) finishes with all41 shared
+observations exact. Unseen primary/photo PSNR fall, so V49 stops at1000.
+Twenty native comparisons, two full102MP RGB16 files and actual-trained
+weak-signal CUDA checks verify. The larger Commons membership is the next
+data-only trial; original frozen DINO remains.

@@ -1,5 +1,9 @@
 # First trained DINO low-rank trial
 
+**Completed and stopped at1000: [the full review](dino-lora-v49-review.md)
+rejects this rank4 recipe.** Unseen primary/photo PSNR regress; V43 stays the
+photographic reference.
+
 V49 tests the [verified query/value adapters](dino-low-rank-adaptation.md) at
 rank4 against the completed V47 control. There are73,728 new parameters in24
 DINO attention projections; all21,596,544 original foundation parameters remain
@@ -28,9 +32,9 @@ with two exact synthetic-GT crops plus paired/GFX native references and verified
 RGB16 outputs. Model selection waits for that complete review. V43 step2000
 remains the experimental photographic reference; no new quality gain is claimed.
 
-The [guarded workflow is now running](results/dino-lora-v49-launch.json) in
-frozen checkout `d3cc159`. Its first logged observations match V47 exactly.
+The [guarded workflow launch](results/dino-lora-v49-launch.json) in
+frozen checkout `d3cc159` is retained. All41 logged observations match V47 exactly.
 The archive driver and plan are under `/mnt/external/demosaic/runs/`; live status
-is `dino-lora-v49-workflow.json`. Training stops after1000 updates before any
-model selection. This is the first quality trial of the adapters; it is not
+is `dino-lora-v49-workflow.json`. Training stopped after1000 updates and the full review rejected this recipe.
+This is the first quality trial of the adapters; it is not
 the still-needed fresh DINO presence/absence attribution experiment.
