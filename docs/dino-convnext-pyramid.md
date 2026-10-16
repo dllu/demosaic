@@ -232,3 +232,11 @@ original step1000 controls with the new pyramid on identical logged inputs.
 It will recompute paired/full427, weak/flat, full GFX and three locally cached
 additional-camera comparisons. A numerical first gate does not replace manual
 native-crop review or establish convergence. No model is promoted here.
+
+The [first1000 trial is now running](results/dino-convnext-pyramid-v58-launch.json)
+in the frozen797cfc8 checkout, controller557627. Its first six logged batches
+through step125 match all three original arms exactly. The plan pins the source,
+configuration, genuine preflight, manifests, original first1000 checkpoints and
+the completed original10k review. Its automated terminal status explicitly
+leaves manual crop review pending. This live-prefix observation is not a final
+batch-replay or quality result.
