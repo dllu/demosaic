@@ -326,6 +326,11 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             + (("refiner.",) if model.config.noise_refinement else ())
             + (("coarse_refiner.",) if model.config.coarse_refinement_factor else ())
             + (("pyramid_refiner.",) if model.config.pyramid_refinement else ())
+            + (
+                ("pretrained_rgb.phase_adapter.", "pretrained_rgb.phase_head.")
+                if model.config.rgb_processing_scale == 2
+                else ()
+            )
         )
         if incompatible.unexpected_keys or any(
             not k.startswith(allowed_prefixes) for k in incompatible.missing_keys

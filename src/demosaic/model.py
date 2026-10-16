@@ -43,6 +43,7 @@ class ModelConfig:
     pyramid_blocks: int = 2
     variance_stabilization: bool = False
     physical_anchors: bool = False
+    rgb_processing_scale: int = 1
 
     def to_dict(self):
         return asdict(self)
@@ -349,6 +350,12 @@ class JointDemosaic(nn.Module):
         self.config = config or ModelConfig()
         self.refinement_precision = "float32"
         cfg = self.config
+        if cfg.rgb_processing_scale not in (1, 2):
+            raise ValueError("RGB processing scale must be 1 or 2")
+        if cfg.rgb_processing_scale == 2 and (
+            cfg.restoration_backbone != "pretrained-rgb" or not cfg.variance_stabilization
+        ):
+            raise ValueError("Packed RGB processing requires the stabilized pretrained backbone")
         if cfg.physical_anchors and not cfg.variance_stabilization:
             raise ValueError("Physical anchors require variance stabilization")
         if cfg.restoration_backbone not in ("local", "pretrained-rgb"):
@@ -373,7 +380,9 @@ class JointDemosaic(nn.Module):
                     "and no legacy noise/refiner branches"
                 )
             self.pretrained_rgb = PretrainedRgbDemosaic(
-                stabilized=cfg.variance_stabilization, physical_anchors=cfg.physical_anchors
+                stabilized=cfg.variance_stabilization,
+                physical_anchors=cfg.physical_anchors,
+                processing_scale=cfg.rgb_processing_scale,
             )
             self.context = DinoContext(cfg, 512) if cfg.dino else None
             self.refiner = self.coarse_refiner = self.pyramid_refiner = None

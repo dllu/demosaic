@@ -12,13 +12,14 @@ This is a single-pass trainable model, not the frozen GAT/HQS comparator.
 
 import hashlib
 import math
+from functools import lru_cache
 from pathlib import Path
 
 import torch
 from torch import nn
 from torch.nn import functional as F
 
-from .cfa import bilinear, malvar
+from .cfa import PATTERNS, bilinear, color_indices, malvar
 from .color import render
 from .precision import ieee_fp32
 from .prior import box_mean
@@ -68,7 +69,7 @@ class RgbRestorationTrunk(nn.Module):
         self.m_body = nn.Sequential(*(ResidualBlock(512) for _ in range(4)))
         self.m_tail = nn.Conv2d(64, 3, 3, padding=1, bias=False)
 
-    def forward(self, rgb, noise, *, head_offset=None, middle_offset=None):
+    def forward(self, rgb, noise, *, head_offset=None, middle_offset=None, return_features=False):
         # Preserve weak native RGB variations through the first skip even when
         # deep features use BF16/FP16. Absolute RGB is projected in IEEE FP32.
         with torch.autocast(rgb.device.type, enabled=False), ieee_fp32():
@@ -84,7 +85,25 @@ class RgbRestorationTrunk(nn.Module):
         x = self.m_up2(x + x3)
         x = self.m_up1(x + x2)
         with torch.autocast(rgb.device.type, enabled=False), ieee_fp32():
-            return self.m_tail(x.float() + x1)
+            features = x.float() + x1
+            prediction = self.m_tail(features)
+            return (prediction, features) if return_features else prediction
+
+
+@lru_cache(maxsize=1)
+def pooled_malvar_kernels():
+    """Linear coefficients for a 2x2 RGB mean, expressed in packed CFA cells.
+
+    Basis impulses derive these small physical kernels from our MHC operator,
+    without any image/reference fitting. The central 2x2 output has full 5x5
+    support inside a 6x6 Bayer field, so no boundary extension enters the result.
+    """
+    impulses = torch.eye(36, dtype=torch.float32).reshape(36, 4, 3, 3)
+    kernels = []
+    for pattern in PATTERNS:
+        rgb = malvar(impulses, color_indices(pattern))
+        kernels.append(rgb[..., 2:4, 2:4].mean((-2, -1)).T.reshape(3, 4, 3, 3))
+    return torch.stack(kernels)
 
 
 def physical_rgb_features(
@@ -181,16 +200,33 @@ def stabilized_photometry(profiles, offset, span):
 class PretrainedRgbDemosaic(nn.Module):
     """One trainable RGB pass with CFA/noise/camera input and frozen DINO context."""
 
-    def __init__(self, *, stabilized=False, physical_anchors=False):
+    def __init__(self, *, stabilized=False, physical_anchors=False, processing_scale=1):
         super().__init__()
         if physical_anchors and not stabilized:
             raise ValueError("Physical anchors require variance stabilization")
+        if processing_scale not in (1, 2) or processing_scale == 2 and not stabilized:
+            raise ValueError("Packed processing requires variance stabilization and scale 2")
         self.network = RgbRestorationTrunk()
         self.measurement_adapter = nn.Conv2d(21, 64, 1)
         nn.init.zeros_(self.measurement_adapter.weight)
         nn.init.zeros_(self.measurement_adapter.bias)
         self.stabilized = stabilized
         self.physical_anchors = physical_anchors
+        self.processing_scale = processing_scale
+        if processing_scale == 2:
+            self.phase_adapter = nn.Conv2d(16, 64, 1)
+            self.phase_head = nn.Conv2d(80, 12, 3, padding=1)
+            for module in [self.phase_adapter, self.phase_head]:
+                nn.init.zeros_(module.weight)
+                nn.init.zeros_(module.bias)
+            # Store support flattened: Module.to(channels_last) treats 5D
+            # buffers as volumes and rejects this training memory format.
+            self.register_buffer(
+                "pooled_kernels", pooled_malvar_kernels().flatten(2).clone(), persistent=False
+            )
+            self.register_buffer(
+                "phase_patterns", torch.tensor(list(PATTERNS.values())), persistent=False
+            )
         self._noise_key = None
         self._noise_profiles = None
 
@@ -225,6 +261,69 @@ class PretrainedRgbDemosaic(nn.Module):
             ]
             self._noise_key = key
         return self
+
+    def pooled_noise_gain(self, colors, balance):
+        """RMS marginal gain of MHC+area2 for independent unit CFA noise.
+
+        RGB/spatial covariance remains; this does not whiten the observation.
+        GAT's unit variance is itself approximate at low photon counts.
+        """
+        matches = (colors[:, None] == self.phase_patterns[None]).all(-1)
+        if not matches.any(-1).all():
+            raise ValueError("Expected an ordinary Bayer phase pattern")
+        kernel = self.pooled_kernels[matches.long().argmax(-1)].reshape(-1, 3, 4, 3, 3)
+        balance = balance.float().clamp_min(1e-6)
+        ratio = balance.gather(1, colors)[:, None, :, None, None] / balance[
+            :, :, None, None, None
+        ]
+        return ((kernel * ratio).square().sum((1, 2, 3, 4)) / 3).sqrt()[:, None, None, None]
+
+    def forward_packed(
+        self, normalized, noise, condition, packed, colors, wb, matrix, profiles,
+        offset, span, preview, context,
+    ):
+        """Run the pretrained CNN on packed resolution; predict every output phase.
+
+        All four CFA values and their color identities remain available to the
+        trunk. A full-resolution physical bypass keeps detail at initialization;
+        a zero-initialized phase head learns 12 outputs per packed cell.
+        """
+        h, w = normalized.shape[-2:]
+        with torch.autocast(packed.device.type, enabled=False), ieee_fp32():
+            low_rgb = F.avg_pool2d(normalized, 2)
+            balance = packed.new_ones(len(packed), 3)
+            if wb is not None:
+                use_wb = packed.new_tensor([p[0] is None for p in profiles], dtype=torch.bool)
+                balance = torch.where(use_wb[:, None], wb.float(), balance)
+            low_noise = F.avg_pool2d(noise, 2) * self.pooled_noise_gain(colors, balance)
+            low_condition = F.avg_pool2d(condition, 2)
+            labels = F.one_hot(colors, 3).transpose(1, 2).reshape(len(packed), 12, 1, 1)
+            phase = torch.cat(
+                ((packed.float() - offset) / span, labels.expand(-1, -1, *packed.shape[-2:])),
+                dim=1,
+            )
+            pad = (0, -low_rgb.shape[-1] % 8, 0, -low_rgb.shape[-2] % 8)
+            low_rgb, low_noise, low_condition, phase = (
+                F.pad(value, pad, mode="replicate")
+                for value in (low_rgb, low_noise, low_condition, phase)
+            )
+            head_offset = self.measurement_adapter(low_condition) + self.phase_adapter(phase)
+        middle_offset = None
+        if context is not None:
+            middle_offset = context(
+                render(preview, wb, matrix), (low_rgb.shape[-2] // 8, low_rgb.shape[-1] // 8)
+            )
+        coarse, features = self.network(
+            low_rgb, low_noise, head_offset=head_offset, middle_offset=middle_offset,
+            return_features=True,
+        )
+        with torch.autocast(packed.device.type, enabled=False), ieee_fp32():
+            correction = F.interpolate(
+                coarse.float() - low_rgb, scale_factor=2, mode="bilinear", align_corners=False
+            )[..., :h, :w]
+            phase_features = torch.cat((features.float(), phase), dim=1)
+            phase_correction = F.pixel_shuffle(self.phase_head(phase_features), 2)[..., :h, :w]
+            return normalized + correction + phase_correction
 
     def forward(self, packed, variance, colors, wb=None, matrix=None, context=None):
         profiles, preview, base_rgb = None, None, None
@@ -265,22 +364,28 @@ class PretrainedRgbDemosaic(nn.Module):
             condition = torch.cat(
                 (condition[:, :6], anchors.expand(-1, -1, *rgb.shape[-2:]), condition[:, 9:]), dim=1
             )
-        h, w = rgb.shape[-2:]
-        pad = (0, -w % 8, 0, -h % 8)
-        normalized, noise, condition = (
-            F.pad(value, pad, mode="replicate") for value in (normalized, noise, condition)
-        )
-        with torch.autocast(packed.device.type, enabled=False), ieee_fp32():
-            head_offset = self.measurement_adapter(condition)
-        middle_offset = None
-        if context is not None:
-            middle_offset = context(
-                render(rgb if preview is None else preview, wb, matrix),
-                (normalized.shape[-2] // 8, normalized.shape[-1] // 8),
+        if self.processing_scale == 2:
+            prediction = self.forward_packed(
+                normalized, noise, condition, packed, colors, wb, matrix, profiles,
+                offset, span, rgb if preview is None else preview, context,
             )
-        prediction = self.network(
-            normalized, noise, head_offset=head_offset, middle_offset=middle_offset
-        )[..., :h, :w]
+        else:
+            h, w = rgb.shape[-2:]
+            pad = (0, -w % 8, 0, -h % 8)
+            normalized, noise, condition = (
+                F.pad(value, pad, mode="replicate") for value in (normalized, noise, condition)
+            )
+            with torch.autocast(packed.device.type, enabled=False), ieee_fp32():
+                head_offset = self.measurement_adapter(condition)
+            middle_offset = None
+            if context is not None:
+                middle_offset = context(
+                    render(rgb if preview is None else preview, wb, matrix),
+                    (normalized.shape[-2] // 8, normalized.shape[-1] // 8),
+                )
+            prediction = self.network(
+                normalized, noise, head_offset=head_offset, middle_offset=middle_offset
+            )[..., :h, :w]
         with torch.autocast(packed.device.type, enabled=False), ieee_fp32():
             output = prediction.float() * span + offset
             if profiles is not None:
@@ -308,7 +413,15 @@ def initialize_rgb_prior(model, receipt, *, archive=None):
         "path": str(Path(receipt).resolve()),
         "sha256": hashlib.sha256(Path(receipt).read_bytes()).hexdigest(),
         "prior": prior.receipt,
-        "new_adapters": "Zero measurement/camera projection and zero DINO fusion gate",
+        "new_adapters": (
+            "Zero measurement/camera projection and zero DINO fusion gate"
+            + (
+                "; zero packed phase projection and output head"
+                if model.config.rgb_processing_scale == 2
+                else ""
+            )
+        ),
+        "rgb_processing_scale": model.config.rgb_processing_scale,
         "physical_representation": (
             "Centered GAT / expectation inverse with explicit shot/read; unit-noise CFA"
             if model.config.variance_stabilization
