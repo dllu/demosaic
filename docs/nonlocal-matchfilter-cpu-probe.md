@@ -7,6 +7,10 @@ followed by independent Malvar demosaicing**, with no paper-score reproduction,
 real-camera result or promoted model.
 [Complete acquisition, weights, operator checks, observations and crops](results/nonlocal-matchfilter-cpu-probe.json).
 
+The follow-up [optional evaluator and standing GFX review](nonlocal-reference-integration.md)
+now reproduces these CPU outputs exactly and adds the four fixed real regions,
+including foliage and fence. GPU numerical checks remain pending.
+
 [Sánchez-Beeckman and Buades, April 2026](https://arxiv.org/abs/2604.17453)
 propose learned nonlocal matching and filtering for RAW-to-RAW denoising.
 The [official implementation](https://github.com/MIA-UIB/nonlocal-matchfilter)

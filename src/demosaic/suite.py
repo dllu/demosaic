@@ -16,6 +16,7 @@ from .gaussian import load_gaussian_prior
 from .inference import load_checkpoint
 from .metrics import quality_metrics
 from .noise import add_noise, variance_map
+from .nonlocal_reference import load_nonlocal_reference
 from .precision import COMPUTE_DTYPES, amp_context
 from .prior import wiener_packed
 from .reference import RawNind, load_rawnind
@@ -240,6 +241,7 @@ def run_suite(
     precision="bfloat16",
     refinement_precision="float32",
     gaussian_reference=None,
+    nonlocal_reference=None,
 ):
     output = writable_path(output)
     output.mkdir(parents=True, exist_ok=True)
@@ -304,6 +306,10 @@ def run_suite(
         gaussian = load_gaussian_prior(gaussian_reference, device=device, archive=output)
         models.append((gaussian.receipt["label"], gaussian, False))
         model_records.append(gaussian.receipt)
+    if nonlocal_reference:
+        reference = load_nonlocal_reference(nonlocal_reference, device=device, archive=output)
+        models.append((reference.receipt["label"], reference, False))
+        model_records.append(reference.receipt)
     if rawnind:
         reference = load_rawnind(rawnind, gain_mode="cfa-ls", device=device)
         models.append(("RawNIND:CFA-LS", reference, False))

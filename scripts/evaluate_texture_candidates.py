@@ -13,6 +13,7 @@ import yaml
 
 from demosaic.cfa import malvar
 from demosaic.inference import load_checkpoint
+from demosaic.nonlocal_reference import load_nonlocal_reference
 from demosaic.precision import amp_context
 from demosaic.reporting import display_crop, save_triplet
 from demosaic.safety import writable_path
@@ -49,7 +50,7 @@ def flat_metrics(prediction, target, roi=probe.ROI):
 
 
 @torch.inference_mode()
-def main(checkpoints, output, *, device="cuda", precision="float16"):
+def main(checkpoints, output, *, device="cuda", precision="float16", nonlocal_reference=None):
     device = torch.device(device)
     if device.type == "cpu" and precision != "float32":
         raise ValueError("CPU evaluation requires explicit float32")
@@ -83,6 +84,10 @@ def main(checkpoints, output, *, device="cuda", precision="float16"):
             }
         )
         del state
+    if nonlocal_reference:
+        reference = load_nonlocal_reference(nonlocal_reference, device=device, archive=output)
+        models.append((reference.receipt["label"], reference))
+        provenance.append(reference.receipt)
     conditions = [
         next(c for c in protocol["conditions"] if c["name"] == name) for name in probe.CONDITIONS
     ]
@@ -254,8 +259,15 @@ if __name__ == "__main__":
     parser.add_argument("checkpoint", type=Path, nargs="+")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--device", choices=["cpu", "cuda"], default="cuda")
+    parser.add_argument("--nonlocal-reference", type=Path)
     parser.add_argument(
         "--precision", choices=["float32", "float16", "bfloat16"], default="float16"
     )
     args = parser.parse_args()
-    main(args.checkpoint, args.output, device=args.device, precision=args.precision)
+    main(
+        args.checkpoint,
+        args.output,
+        device=args.device,
+        precision=args.precision,
+        nonlocal_reference=args.nonlocal_reference,
+    )

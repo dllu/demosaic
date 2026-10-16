@@ -13,6 +13,7 @@ from .color import render
 from .gaussian import load_gaussian_prior
 from .inference import load_checkpoint
 from .metrics import quality_metrics
+from .nonlocal_reference import load_nonlocal_reference
 from .precision import COMPUTE_DTYPES, amp_context
 from .prior import wiener_packed
 from .reference import RawNind, load_rawnind, publisher_input_scale
@@ -45,6 +46,7 @@ def evaluate_pairs(
     prior_window=None,
     refinement_precision="float32",
     gaussian_reference=None,
+    nonlocal_reference=None,
 ):
     if (
         precision not in COMPUTE_DTYPES
@@ -107,6 +109,10 @@ def evaluate_pairs(
         gaussian = load_gaussian_prior(gaussian_reference, device=device, archive=output)
         models.append((gaussian.receipt["label"], gaussian, "float32"))
         receipts.append(gaussian.receipt)
+    if nonlocal_reference:
+        reference = load_nonlocal_reference(nonlocal_reference, device=device, archive=output)
+        models.append((reference.receipt["label"], reference, "float32"))
+        receipts.append(reference.receipt)
     reference = load_rawnind(rawnind, gain_mode="cfa-ls", device=device) if rawnind else None
     if reference:
         receipts.append(

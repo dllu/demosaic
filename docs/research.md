@@ -209,6 +209,10 @@ strict upstream tensor matching, actual native CPU sampling and two fixed
 photographic observations followed by independent Malvar. Fine cords and cloud
 detail remain soft. This is a small cascade comparison, with different training
 data and budget; no full-suite, real-camera, CUDA, SOTA or speed result follows.
+The [optional evaluator and standing GFX contexts](nonlocal-reference-integration.md)
+now pass genuine CPU replay and native review. The fence has a different
+grain/regularity tradeoff from V43; this one scene does not establish broad real
+superiority. Actual CUDA numerical checks remain pending.
 
 ## DINOv3 convolutional feature pyramid
 

@@ -26,6 +26,7 @@ from demosaic.color import render
 from demosaic.inference import load_checkpoint
 from demosaic.io import read_raw
 from demosaic.noise import Sensor
+from demosaic.nonlocal_reference import load_nonlocal_reference
 from demosaic.precision import COMPUTE_DTYPES, amp_context
 from demosaic.prior import wiener_packed
 from demosaic.reference import RawNind, publisher_input_scale
@@ -40,6 +41,7 @@ def main():
     parser.add_argument("selection", type=Path)
     parser.add_argument("checkpoint", nargs="+", type=Path)
     parser.add_argument("--rawnind", type=Path)
+    parser.add_argument("--nonlocal-reference", type=Path)
     parser.add_argument(
         "--rawnind-gain-modes", nargs="+", choices=("cfa-ls", "cfa-channel"), default=["cfa-ls"]
     )
@@ -90,6 +92,12 @@ def main():
         )
         models = references + models
         weights += receipts
+    if args.nonlocal_reference:
+        reference = load_nonlocal_reference(
+            args.nonlocal_reference, device=args.device, archive=output
+        )
+        models.append((reference.receipt["label"], reference, "float32"))
+        weights.append(reference.receipt)
     selections = json.loads(args.selection.read_text())
     figure, axes = plt.subplots(
         len(selections),

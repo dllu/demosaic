@@ -22,6 +22,7 @@ from demosaic.gaussian import load_gaussian_prior
 from demosaic.inference import load_checkpoint, restore_tiled
 from demosaic.io import read_raw, write_rgb16
 from demosaic.noise import Sensor
+from demosaic.nonlocal_reference import load_nonlocal_reference
 from demosaic.precision import COMPUTE_DTYPES, REFINEMENT_DTYPES, amp_context
 from demosaic.realdata import read_reference
 from demosaic.reference import RawNind, load_rawnind, publisher_input_scale
@@ -68,6 +69,7 @@ def main():
         help="Input-only calibration variants; defaults to the historical global CFA-LS",
     )
     parser.add_argument("--gaussian-reference", type=Path)
+    parser.add_argument("--nonlocal-reference", type=Path)
     parser.add_argument("--device", choices=("cpu", "cuda"), default="cuda")
     parser.add_argument("--precision", choices=COMPUTE_DTYPES, default="float16")
     parser.add_argument("--refinement-precision", choices=REFINEMENT_DTYPES, default="float32")
@@ -123,6 +125,12 @@ def main():
         gaussian = load_gaussian_prior(args.gaussian_reference, device=args.device, archive=output)
         models.append((gaussian.receipt["label"], gaussian, "float32"))
         weights.append(gaussian.receipt)
+    if args.nonlocal_reference:
+        reference = load_nonlocal_reference(
+            args.nonlocal_reference, device=args.device, archive=output
+        )
+        models.append((reference.receipt["label"], reference, "float32"))
+        weights.append(reference.receipt)
     raw, meta = read_raw(selection["noisy"])
     reference_raw, reference, refmeta, calibration = read_reference(selection["reference"])
     del reference_raw

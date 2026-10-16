@@ -13,6 +13,7 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--rawnind", type=Path)
     parser.add_argument("--gaussian-reference", type=Path)
+    parser.add_argument("--nonlocal-reference", type=Path)
     parser.add_argument(
         "--precision", choices=("bfloat16", "float16", "float32"), default="float16"
     )
@@ -39,6 +40,7 @@ def main():
         prior_window=args.prior_window,
         refinement_precision=args.refinement_precision,
         gaussian_reference=args.gaussian_reference,
+        nonlocal_reference=args.nonlocal_reference,
     )
 
 
