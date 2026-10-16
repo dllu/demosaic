@@ -52,9 +52,10 @@ uv run --no-sync demosaic prepare --source /mnt/external/qi \
   --selection-manifest /mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl
 ```
 
-The first 256 sources are prepared and checked (237 train/13 val/6 test).
-Full preparation is running after the completed batch sweep and full-frame review,
-which avoided competing with throughput measurements. Excluded sources remain excluded; only
+Both complete frozen 4× corpora are prepared and checked: 40,170 and 41,978
+training sources, with unchanged 2,303 validation and 2,255 test sources.
+Preparation followed the batch sweep and full-frame review to avoid competing
+with throughput measurements. Excluded sources remain excluded; only
 training rows enter the training loader. Use `manifest` for the new 4× training
 selection and explicitly retain the original 8× audited `validation_manifest`
 in a new experiment configuration. Validation source hashes and source snapshots
@@ -66,14 +67,15 @@ via `raw_clean_augmentation_downsample: 2`. Their4× cache is complete with the
 same53 training captures/31 scenes. Registered paired RAW uses exact sensor-phase
 transforms. Existing experiments retain their original8× configurations.
 
-`scripts/freeze_rebinned_manifest.py` will freeze the complete Commons4× producer
+`scripts/freeze_rebinned_manifest.py` freezes the complete Commons4× producer
 output only after its lock is released and all active source identities/splits
 match the audited selection exactly. Partial output, changed protected splits,
 missing sources and an existing frozen manifest are rejected. A waiting owned
-job will create `/mnt/external/demosaic/audits/commons-bin4-frozen44732-v1/manifest.jsonl`
+job created `/mnt/external/demosaic/audits/commons-bin4-frozen44732-v1/manifest.jsonl`
 after full preparation. [V34's matched augmentation recipe](../configs/dino-anchored-pre-downsample-b16-v34.yaml)
 points there, with original8× validation; it cannot accidentally train on the
-producer's current256-source manifest. V34 has not started.
+producer's earlier 256-source partial manifest. V34 and V36 have completed their
+first 1,000-update and full-photo reviews.
 
 For general ingestion while the archive downloads, SQLite now reads committed
 WAL data in read-only mode and releases its metadata snapshot before decoding.
@@ -167,8 +169,8 @@ frozen 8× manifest. This is a single-seed pilot, not convergence evidence.
 
 | Commons train corpus | Existing 8× augmentation | 4× → geometry/PSF → 2× |
 | --- | --- | --- |
-| 40,170 sources | V32: first1k/2k reviewed, stopped | [V34](../configs/dino-anchored-pre-downsample-b16-v34.yaml): first1k complete, review pending |
-| 41,978 sources | [V35](../configs/dino-anchored-expanded-b16-v35.yaml): first1k/2k reviewed, stopped | [V36](../configs/dino-anchored-expanded-pre-downsample-b16-v36.yaml): training |
+| 40,170 sources | V32: first1k/2k reviewed, stopped | [V34](../configs/dino-anchored-pre-downsample-b16-v34.yaml): first1k/full427 reviewed |
+| 41,978 sources | [V35](../configs/dino-anchored-expanded-b16-v35.yaml): first1k/2k reviewed, stopped | [V36](../configs/dino-anchored-expanded-pre-downsample-b16-v36.yaml): first1k/full427 reviewed |
 
 The geometry change applies to both Commons and native synthetic targets;
 registered paired RAW keeps its exact sensor-phase transforms. The corpus change
@@ -176,7 +178,7 @@ adds only the [1,808 audited Commons training sources](commons-download.md#first
 V35's validation, paired and native manifest hashes and runtime code/initializer
 match V32. All 27 shared logged paired/native batches match at the first 1k gate;
 Commons draws change with the corpus.
-V34/V36 cannot start until their complete frozen 4× manifests exist. The expanded
+V34/V36 started only after their complete frozen 4× manifests existed. The expanded
 4× job prepares only new sources and reuses old cache paths, preserving protected
 membership and attribution.
 
@@ -187,7 +189,7 @@ have now completed [the matched step2000 gate](corpus-v32-v35-2k-review.md) and
 stopped. At2k the expanded arm improves known means but trails V32 on unseen
 means; its own unseen primary mean falls .10983dB versus its first1k. All51
 logged paired/native hashes match across82 observations per arm. Full427 and
-full102MP checks are running separately. The [gain diagnostic](paired-bias-v35.md)
+full102MP checks are complete. The [gain diagnostic](paired-bias-v35.md)
 does not support adding an input-only gain correction to this model.
 [Startup/runtime identities and rebin implementation](results/commons-augmentation-pilot-startup.json)
 are retained; V35's report records its frozen first 1k weights separately.
@@ -200,8 +202,8 @@ The rebin/merge guards bring validation to **271 passing tests**.
 The [preparation worker sweep](commons-download.md#preparation-workers) selects
 eight workers for the remaining base4× preparation, reusing26,314 finished
 caches. New-source4× preparation is complete (1,808 train, no failures). Its
-merge waits for the full base audit. The detached V34/V36 workflow waited
-for the current full quality review to finish before either trainer starts,
+merge completed after the full base audit. The detached V34/V36 workflow waited
+for the preceding full quality review to finish before either trainer started,
 checks exact original source memberships and source-module bytes, and retains
 the same initializer/schedule. The source bundle hash also includes the native
 manifest, so the4× versus8× hashes intentionally differ in that data file;
@@ -212,7 +214,7 @@ candidates remain outside these recipes. Current validation passes **279 tests**
 
 Both [complete4× corpora](results/commons-four-complete.json) are now frozen,
 with40,170/41,978 training sources and unchanged2,303/2,255 validation/test
-membership. V34 started on2026-10-16 at02:53:56UTC; V36 follows sequentially.
+membership. V34 started on2026-10-16 at02:53:56UTC; V36 followed sequentially.
 The preflight verified source-module bytes and the initializer against V32;
 all12 logged paired batches through step625 match. The new source-bundle SHA is
 `15af15b4c3e817599e54d1e3995dbd95f9f14213dace0e3a7735985cef8300ea`;
@@ -223,5 +225,13 @@ RGB16/ICC outputs and both RawNIND calibrations are verified. Small screens did
 not predict the continuation gains; use the [full report](corpus-v32-v35-2k-review.md).
 
 
-Status at2026-10-16 03:10UTC: V34 completed first1000 updates; V36 is training.
-Both will receive matched development and full427/full-frame GFX reviews.
+The [completed augmentation review](geometry-corpus-v34-v36-review.md) confirms
+V34's **+0.50990 dB** full-photo gain over V32 at the matched first 1,000 updates,
+95% source interval [+0.47646,+0.54728]. The expanded arm gains +0.63571 dB over
+its own old-order control. V36 differs from V34 by only +0.00916 dB, with an
+interval crossing zero and weaker procedural/unseen means. V34's real-camera
+primary changes are small and uncertain. The new order becomes the next trial's
+training recipe; its original 8× scoring protocol remains fixed. All 16 logged
+paired hashes match across V32/V34/V36, and all 11 logged native hashes match
+between the two 4× arms. Both stop at the review gate. Fine texture is still
+too soft; the full-frame GFX review is documented with the same fixed regions.

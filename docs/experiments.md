@@ -3,6 +3,12 @@
 All numbers below are local observations on the NVIDIA GB10, not reproduced
 paper results. The project has not passed its final quality gate.
 
+The [latest augmentation review](geometry-corpus-v34-v36-review.md) confirms
+a 0.51 dB improvement across all 427 synthetic-noise photographs from applying
+geometry before the final reduction. It includes matched real-camera metrics,
+native synthetic GT triplets and full GFX foliage/fence comparisons. Fine detail
+and the 10-second speed target remain unresolved.
+
 ## Bootstrap, October 14, 2026
 
 `configs/bootstrap.yaml`: 4,328,700 parameters, 1000 steps, batch 8, 256 sensor

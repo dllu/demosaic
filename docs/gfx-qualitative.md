@@ -10,6 +10,11 @@ paths, byte counts, matching SHA-256 hashes and unchanged source metadata.
 Subsequent tests read the local cache, leaving the source hard drives idle.
 Private RAWs and full-resolution renders are not checked into Git.
 
+The [latest V34/V36 augmentation review](geometry-corpus-v34-v36-review.md)
+contains full-frame crops for both models and both RawNIND calibrations, plus
+verified RGB16 outputs. V34 is the current README example. The earlier V16
+gallery below remains a historical comparison with the same fixed regions.
+
 Both captures are 11662×8746 Bayer images from the GFX100S and 55 mm lens:
 
 | Capture | Time | ISO | Aperture | Shutter |
