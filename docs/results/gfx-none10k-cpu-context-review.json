@@ -1,0 +1,4885 @@
+{
+  "scope": "CPU FP32 512px-context qualitative check of completed fresh no-context10000 and retained V43 on standing DSCF3879/3880 pair; no new full-frame output, reference scoring or promotion.",
+  "execution_directory": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1",
+  "execution_report": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/report.json",
+  "execution_report_sha256": "c3ec3fa299b802bd8dea73e50ab98f007c9171032490147640377373d395d59a",
+  "exit_code": 0,
+  "execution": {
+    "selection": {
+      "noisy": ".cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+      "reference": ".cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+      "display_exposure": 4.0,
+      "notes": "GFX100S / 55mm. Noisy DSCF3879: ISO6400, f/1.7, 1/240s, 17:13:27. Reference DSCF3880: ISO100, f/5.6, 3s, 17:17:05. Captured 3m38s apart with nearly identical framing. Aperture, depth of field, clouds, lights and moving subjects still differ. Native sensor crops with input/reference-only integer coordinate matching; no resizing or warping, no per-panel brightness adjustment. Qualitative reference, not exact ground truth; evaluation-only, never training.",
+      "regions": [
+        {
+          "name": "overcast-sky",
+          "noisy_xy": [
+            5800,
+            1400
+          ],
+          "reference_xy": [
+            5800,
+            1400
+          ],
+          "size": 160,
+          "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+          "context_green_correlation": null
+        },
+        {
+          "name": "building-detail",
+          "noisy_xy": [
+            5790,
+            2690
+          ],
+          "reference_xy": [
+            5791,
+            2690
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.6824449896812439
+        },
+        {
+          "name": "foliage",
+          "noisy_xy": [
+            8890,
+            5570
+          ],
+          "reference_xy": [
+            8890,
+            5570
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9597686529159546
+        },
+        {
+          "name": "chain-link-fence",
+          "noisy_xy": [
+            2240,
+            6000
+          ],
+          "reference_xy": [
+            2241,
+            6000
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9550720453262329
+        }
+      ]
+    },
+    "sources": [
+      {
+        "role": "noisy",
+        "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+        "metadata": {
+          "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "camera": "GFX100S",
+          "pattern": "RGGB",
+          "black_levels": [
+            4101.0,
+            4098.0,
+            4104.0,
+            4106.0
+          ],
+          "white_levels": [
+            65535.0,
+            65535.0,
+            65535.0,
+            65535.0
+          ],
+          "white_balance": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "camera_to_srgb": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "flip": 0,
+          "iso": 6400,
+          "adc_white_level": 65535.0
+        }
+      },
+      {
+        "role": "reference",
+        "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+        "metadata": {
+          "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+          "camera": "GFX100S",
+          "pattern": "RGGB",
+          "black_levels": [
+            256.0,
+            255.0,
+            256.0,
+            256.0
+          ],
+          "white_levels": [
+            65535.0,
+            65535.0,
+            65535.0,
+            65535.0
+          ],
+          "white_balance": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "camera_to_srgb": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "flip": 0,
+          "iso": 100,
+          "adc_white_level": 65535.0
+        }
+      }
+    ],
+    "models": [
+      {
+        "label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+        "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+        "snapshot": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/weights/weights-0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5.pt",
+        "precision": "float32",
+        "device": "cpu",
+        "refinement_compute_precision": "float32",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "bottleneck",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": false,
+          "adc_cfa_projection": false
+        }
+      },
+      {
+        "label": "1:control-anchored-native-fresh-b16-v45:step-10000",
+        "sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4",
+        "snapshot": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/weights/weights-0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4.pt",
+        "precision": "float32",
+        "device": "cpu",
+        "refinement_compute_precision": "float32",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": false,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "bottleneck",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false
+        }
+      },
+      {
+        "label": "RawNIND:CFA-LS",
+        "gain_mode": "cfa-ls",
+        "precision": "IEEE float32",
+        "device": "cpu",
+        "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+      },
+      {
+        "label": "RawNIND:CFA-channel",
+        "gain_mode": "cfa-channel",
+        "precision": "IEEE float32",
+        "device": "cpu",
+        "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+      }
+    ],
+    "noise_estimate": {
+      "shot": 0.0014635775921166604,
+      "read": 1.0715704128646712e-06,
+      "reliable": true,
+      "reason": "fit",
+      "candidate_patches": 4096,
+      "accepted_patches": 645,
+      "intensity_span": 0.058098717592656515,
+      "reference_intensity": 0.013063262216746807,
+      "reference_variance": 2.0586847313097678e-05,
+      "shot_interval": [
+        0.0013873977272578202,
+        0.0015542473214514446
+      ],
+      "read_interval": [
+        1.8621814355963164e-08,
+        2.19451244875327e-06
+      ],
+      "bins": [
+        {
+          "mean": 0.0073381210677325726,
+          "variance": 1.0893240869336296e-05,
+          "patches": 41
+        },
+        {
+          "mean": 0.008090663701295853,
+          "variance": 1.3062794096185826e-05,
+          "patches": 41
+        },
+        {
+          "mean": 0.008793020620942116,
+          "variance": 1.3721637515118346e-05,
+          "patches": 41
+        },
+        {
+          "mean": 0.009301926009356976,
+          "variance": 1.4725441360496916e-05,
+          "patches": 41
+        },
+        {
+          "mean": 0.009990067221224308,
+          "variance": 1.5952460671542212e-05,
+          "patches": 41
+        },
+        {
+          "mean": 0.010706164874136448,
+          "variance": 1.6955834325926844e-05,
+          "patches": 40
+        },
+        {
+          "mean": 0.011773624923080206,
+          "variance": 1.8662036382011138e-05,
+          "patches": 40
+        },
+        {
+          "mean": 0.012733590323477983,
+          "variance": 2.0284909624024294e-05,
+          "patches": 40
+        },
+        {
+          "mean": 0.013618120923638344,
+          "variance": 2.1752697648480535e-05,
+          "patches": 40
+        },
+        {
+          "mean": 0.01464441604912281,
+          "variance": 2.326590310985921e-05,
+          "patches": 40
+        },
+        {
+          "mean": 0.0159450089558959,
+          "variance": 2.489935650373809e-05,
+          "patches": 40
+        },
+        {
+          "mean": 0.01751871034502983,
+          "variance": 2.7330595003149938e-05,
+          "patches": 40
+        },
+        {
+          "mean": 0.019594436511397362,
+          "variance": 2.9680180887226015e-05,
+          "patches": 40
+        },
+        {
+          "mean": 0.0239607160910964,
+          "variance": 3.561083212844096e-05,
+          "patches": 40
+        },
+        {
+          "mean": 0.03781210631132126,
+          "variance": 5.6878670875448734e-05,
+          "patches": 40
+        },
+        {
+          "mean": 0.08589096739888191,
+          "variance": 0.00011813548917416483,
+          "patches": 40
+        }
+      ]
+    },
+    "conditioning": {
+      "shot": 0.0014635775921166604,
+      "read": 1.0715704128646712e-06,
+      "source": "input Haar fit"
+    },
+    "reference_calibration": {
+      "rgb_to_sensor_gains": [
+        1.0000624759971717,
+        1.0000575400374918,
+        1.000083683987943
+      ],
+      "samples": [
+        922554,
+        2316454,
+        693995
+      ]
+    },
+    "native_crops": [
+      {
+        "image": "crop-7695cb844cf53615.png",
+        "caption": "overcast-sky / 0:dino-anchored-native-diverse-b16-v43:step-2000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "db21d2a4b407ba12b94fd75a68caacd0ce00f2b5712da6806ba1dd7e9fdee0c2",
+        "region": {
+          "name": "overcast-sky",
+          "noisy_xy": [
+            5800,
+            1400
+          ],
+          "reference_xy": [
+            5800,
+            1400
+          ],
+          "size": 160,
+          "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+          "context_green_correlation": null
+        },
+        "model_label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+        "checkpoint_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+        "compute_precision": "float32",
+        "device": "cpu",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          5624,
+          1224,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "repository_image": "docs/images/gfx-none10k-cpu-overcast-sky-v43.png"
+      },
+      {
+        "image": "crop-d862a19f3f5860b0.png",
+        "caption": "building-detail / 0:dino-anchored-native-diverse-b16-v43:step-2000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "8551309cf78eeb873bbf751f98b5e9de3803fddbffcf3615f8a5bf5e613480b2",
+        "region": {
+          "name": "building-detail",
+          "noisy_xy": [
+            5790,
+            2690
+          ],
+          "reference_xy": [
+            5791,
+            2690
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.6824449896812439
+        },
+        "model_label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+        "checkpoint_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+        "compute_precision": "float32",
+        "device": "cpu",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          5614,
+          2514,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "repository_image": "docs/images/gfx-none10k-cpu-building-detail-v43.png"
+      },
+      {
+        "image": "crop-a7415758dd5136b2.png",
+        "caption": "foliage / 0:dino-anchored-native-diverse-b16-v43:step-2000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "fd8d809540748c79fa7f59f346275514023800dcc594b575ab66ec6070f66b3e",
+        "region": {
+          "name": "foliage",
+          "noisy_xy": [
+            8890,
+            5570
+          ],
+          "reference_xy": [
+            8890,
+            5570
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9597686529159546
+        },
+        "model_label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+        "checkpoint_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+        "compute_precision": "float32",
+        "device": "cpu",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          8714,
+          5394,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "repository_image": "docs/images/gfx-none10k-cpu-foliage-v43.png"
+      },
+      {
+        "image": "crop-4919d32109aa8e9b.png",
+        "caption": "chain-link-fence / 0:dino-anchored-native-diverse-b16-v43:step-2000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "5ea587410582c2189b3d0dc0ed2da3c5a811717b5973bddc52637832a79db706",
+        "region": {
+          "name": "chain-link-fence",
+          "noisy_xy": [
+            2240,
+            6000
+          ],
+          "reference_xy": [
+            2241,
+            6000
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9550720453262329
+        },
+        "model_label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+        "checkpoint_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+        "compute_precision": "float32",
+        "device": "cpu",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          2064,
+          5824,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "repository_image": "docs/images/gfx-none10k-cpu-chain-link-fence-v43.png"
+      },
+      {
+        "image": "crop-1643b443e30cfe90.png",
+        "caption": "overcast-sky / 1:control-anchored-native-fresh-b16-v45:step-10000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "36a2ec3b6eb6073a9afd58e7d9760dd262c4cad0758ffb884e4bfc09b8fc2087",
+        "region": {
+          "name": "overcast-sky",
+          "noisy_xy": [
+            5800,
+            1400
+          ],
+          "reference_xy": [
+            5800,
+            1400
+          ],
+          "size": 160,
+          "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+          "context_green_correlation": null
+        },
+        "model_label": "1:control-anchored-native-fresh-b16-v45:step-10000",
+        "checkpoint_sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4",
+        "compute_precision": "float32",
+        "device": "cpu",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          5624,
+          1224,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "repository_image": "docs/images/gfx-none10k-cpu-overcast-sky-none10k.png"
+      },
+      {
+        "image": "crop-ce13f2c164a8de34.png",
+        "caption": "building-detail / 1:control-anchored-native-fresh-b16-v45:step-10000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "1ac723f896d914d46d6ecc9d7fed201fddfd5f2e9a7ab1a83bb325610f513704",
+        "region": {
+          "name": "building-detail",
+          "noisy_xy": [
+            5790,
+            2690
+          ],
+          "reference_xy": [
+            5791,
+            2690
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.6824449896812439
+        },
+        "model_label": "1:control-anchored-native-fresh-b16-v45:step-10000",
+        "checkpoint_sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4",
+        "compute_precision": "float32",
+        "device": "cpu",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          5614,
+          2514,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "repository_image": "docs/images/gfx-none10k-cpu-building-detail-none10k.png"
+      },
+      {
+        "image": "crop-13a35fbdee90a10e.png",
+        "caption": "foliage / 1:control-anchored-native-fresh-b16-v45:step-10000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "07a34b85414763fc2590bd99956230dd7d85b567ebd8b838e5d5fcc57f40b876",
+        "region": {
+          "name": "foliage",
+          "noisy_xy": [
+            8890,
+            5570
+          ],
+          "reference_xy": [
+            8890,
+            5570
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9597686529159546
+        },
+        "model_label": "1:control-anchored-native-fresh-b16-v45:step-10000",
+        "checkpoint_sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4",
+        "compute_precision": "float32",
+        "device": "cpu",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          8714,
+          5394,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "repository_image": "docs/images/gfx-none10k-cpu-foliage-none10k.png"
+      },
+      {
+        "image": "crop-500c78e2954407d2.png",
+        "caption": "chain-link-fence / 1:control-anchored-native-fresh-b16-v45:step-10000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "4ed696197857cd2251f2319d9a4ec2ef6dc086ee5d53a9b9ac281cd7407fd610",
+        "region": {
+          "name": "chain-link-fence",
+          "noisy_xy": [
+            2240,
+            6000
+          ],
+          "reference_xy": [
+            2241,
+            6000
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9550720453262329
+        },
+        "model_label": "1:control-anchored-native-fresh-b16-v45:step-10000",
+        "checkpoint_sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4",
+        "compute_precision": "float32",
+        "device": "cpu",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          2064,
+          5824,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "repository_image": "docs/images/gfx-none10k-cpu-chain-link-fence-none10k.png"
+      },
+      {
+        "image": "crop-cd6c40601304fad3.png",
+        "caption": "overcast-sky / RawNIND:CFA-LS",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "63ce55fc97be2fc076d20b941151f9707e1530a3c94f55dfd56ad6ed1b1aa1a8",
+        "region": {
+          "name": "overcast-sky",
+          "noisy_xy": [
+            5800,
+            1400
+          ],
+          "reference_xy": [
+            5800,
+            1400
+          ],
+          "size": 160,
+          "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+          "context_green_correlation": null
+        },
+        "model_label": "RawNIND:CFA-LS",
+        "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "compute_precision": "float32",
+        "device": "cpu",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          5624,
+          1224,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "repository_image": "docs/images/gfx-none10k-cpu-overcast-sky-cfa-ls.png"
+      },
+      {
+        "image": "crop-4c22fb35b83dce6f.png",
+        "caption": "building-detail / RawNIND:CFA-LS",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "027be942b6d287db509bce4bbedea2b7548c818748a5d557162e5d64f75b61ce",
+        "region": {
+          "name": "building-detail",
+          "noisy_xy": [
+            5790,
+            2690
+          ],
+          "reference_xy": [
+            5791,
+            2690
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.6824449896812439
+        },
+        "model_label": "RawNIND:CFA-LS",
+        "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "compute_precision": "float32",
+        "device": "cpu",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          5614,
+          2514,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "repository_image": "docs/images/gfx-none10k-cpu-building-detail-cfa-ls.png"
+      },
+      {
+        "image": "crop-5df334d3b1e0bb3e.png",
+        "caption": "foliage / RawNIND:CFA-LS",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "d566b787de2546389044d82165402c3736f0fa15619c0cd6589fe0ffc1416cea",
+        "region": {
+          "name": "foliage",
+          "noisy_xy": [
+            8890,
+            5570
+          ],
+          "reference_xy": [
+            8890,
+            5570
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9597686529159546
+        },
+        "model_label": "RawNIND:CFA-LS",
+        "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "compute_precision": "float32",
+        "device": "cpu",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          8714,
+          5394,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "repository_image": "docs/images/gfx-none10k-cpu-foliage-cfa-ls.png"
+      },
+      {
+        "image": "crop-f2aa7e64222c696e.png",
+        "caption": "chain-link-fence / RawNIND:CFA-LS",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "e7feec1467f9681ed5014c02bad9af61a37f99242197444742a348568a4455b7",
+        "region": {
+          "name": "chain-link-fence",
+          "noisy_xy": [
+            2240,
+            6000
+          ],
+          "reference_xy": [
+            2241,
+            6000
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9550720453262329
+        },
+        "model_label": "RawNIND:CFA-LS",
+        "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "compute_precision": "float32",
+        "device": "cpu",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          2064,
+          5824,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "repository_image": "docs/images/gfx-none10k-cpu-chain-link-fence-cfa-ls.png"
+      },
+      {
+        "image": "crop-13aee51839823416.png",
+        "caption": "overcast-sky / RawNIND:CFA-channel",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "7909f33be53d2d27b50bc6d6e9cd687001cb720ca9809d1cdd5975bad614c101",
+        "region": {
+          "name": "overcast-sky",
+          "noisy_xy": [
+            5800,
+            1400
+          ],
+          "reference_xy": [
+            5800,
+            1400
+          ],
+          "size": 160,
+          "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+          "context_green_correlation": null
+        },
+        "model_label": "RawNIND:CFA-channel",
+        "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "compute_precision": "float32",
+        "device": "cpu",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          5624,
+          1224,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "repository_image": "docs/images/gfx-none10k-cpu-overcast-sky-cfa-channel.png"
+      },
+      {
+        "image": "crop-0019b16339eb637d.png",
+        "caption": "building-detail / RawNIND:CFA-channel",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "ece71fb5fc24e75a5a876ba814a32570be258f986e222ef0f21a76cf17e27b06",
+        "region": {
+          "name": "building-detail",
+          "noisy_xy": [
+            5790,
+            2690
+          ],
+          "reference_xy": [
+            5791,
+            2690
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.6824449896812439
+        },
+        "model_label": "RawNIND:CFA-channel",
+        "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "compute_precision": "float32",
+        "device": "cpu",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          5614,
+          2514,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "repository_image": "docs/images/gfx-none10k-cpu-building-detail-cfa-channel.png"
+      },
+      {
+        "image": "crop-adfcc7cc42aa36b8.png",
+        "caption": "foliage / RawNIND:CFA-channel",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "1cf55fd081fa99be30de90318894bd37bd6847d591600750e156e569f4ae41b8",
+        "region": {
+          "name": "foliage",
+          "noisy_xy": [
+            8890,
+            5570
+          ],
+          "reference_xy": [
+            8890,
+            5570
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9597686529159546
+        },
+        "model_label": "RawNIND:CFA-channel",
+        "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "compute_precision": "float32",
+        "device": "cpu",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          8714,
+          5394,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "repository_image": "docs/images/gfx-none10k-cpu-foliage-cfa-channel.png"
+      },
+      {
+        "image": "crop-4a52fe4d62961d7a.png",
+        "caption": "chain-link-fence / RawNIND:CFA-channel",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "17764bc0874cf8cff16a2f82c80fa700aee49f035abc529357a84bc5e9b4a927",
+        "region": {
+          "name": "chain-link-fence",
+          "noisy_xy": [
+            2240,
+            6000
+          ],
+          "reference_xy": [
+            2241,
+            6000
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9550720453262329
+        },
+        "model_label": "RawNIND:CFA-channel",
+        "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "compute_precision": "float32",
+        "device": "cpu",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          2064,
+          5824,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "repository_image": "docs/images/gfx-none10k-cpu-chain-link-fence-cfa-channel.png"
+      }
+    ],
+    "full_frames": [],
+    "float_contexts": [
+      {
+        "image": "overcast-sky-noisy-packed-f32.npy",
+        "sha256": "f875de8e6dcc3441800ee23c96b348dcb6d48fe26789c04f79f583568a53bd4d",
+        "shape": [
+          1,
+          4,
+          256,
+          256
+        ],
+        "dtype": "float32",
+        "role": "noisy-packed",
+        "region": {
+          "name": "overcast-sky",
+          "noisy_xy": [
+            5800,
+            1400
+          ],
+          "reference_xy": [
+            5800,
+            1400
+          ],
+          "size": 160,
+          "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+          "context_green_correlation": null
+        },
+        "context_xywh": [
+          5624,
+          1224,
+          512,
+          512
+        ],
+        "pattern": "RGGB",
+        "encoding": "Four packed CFA phases, black-subtracted/white-normalized sensor units"
+      },
+      {
+        "image": "overcast-sky-reference-rgb-f32.npy",
+        "sha256": "a566b9ebfa173e706b820988dd1f47302f9d2e6521de7873dddd18f5a0ee6c49",
+        "shape": [
+          1,
+          3,
+          160,
+          160
+        ],
+        "dtype": "float32",
+        "role": "reference-rgb",
+        "region": {
+          "name": "overcast-sky",
+          "noisy_xy": [
+            5800,
+            1400
+          ],
+          "reference_xy": [
+            5800,
+            1400
+          ],
+          "size": 160,
+          "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+          "context_green_correlation": null
+        },
+        "source_roi_xywh": [
+          5800,
+          1400,
+          160,
+          160
+        ],
+        "encoding": "Independent LibRaw AHD camera RGB calibrated against its own CFA; not GT"
+      },
+      {
+        "image": "building-detail-noisy-packed-f32.npy",
+        "sha256": "d4e189e0cd48f85c05fd041001770728a6e2c5af496849516fb0f43ed98b2666",
+        "shape": [
+          1,
+          4,
+          256,
+          256
+        ],
+        "dtype": "float32",
+        "role": "noisy-packed",
+        "region": {
+          "name": "building-detail",
+          "noisy_xy": [
+            5790,
+            2690
+          ],
+          "reference_xy": [
+            5791,
+            2690
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.6824449896812439
+        },
+        "context_xywh": [
+          5614,
+          2514,
+          512,
+          512
+        ],
+        "pattern": "RGGB",
+        "encoding": "Four packed CFA phases, black-subtracted/white-normalized sensor units"
+      },
+      {
+        "image": "building-detail-reference-rgb-f32.npy",
+        "sha256": "d4ce7ad0a632979efcb19e8153e0585167771a846923ea71c8c0e75ab7ad216c",
+        "shape": [
+          1,
+          3,
+          160,
+          160
+        ],
+        "dtype": "float32",
+        "role": "reference-rgb",
+        "region": {
+          "name": "building-detail",
+          "noisy_xy": [
+            5790,
+            2690
+          ],
+          "reference_xy": [
+            5791,
+            2690
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.6824449896812439
+        },
+        "source_roi_xywh": [
+          5791,
+          2690,
+          160,
+          160
+        ],
+        "encoding": "Independent LibRaw AHD camera RGB calibrated against its own CFA; not GT"
+      },
+      {
+        "image": "foliage-noisy-packed-f32.npy",
+        "sha256": "a67eec1789664a3e3ea1aaa43e7cb8ece9c8cb9001a8f3b2d7717053d802f278",
+        "shape": [
+          1,
+          4,
+          256,
+          256
+        ],
+        "dtype": "float32",
+        "role": "noisy-packed",
+        "region": {
+          "name": "foliage",
+          "noisy_xy": [
+            8890,
+            5570
+          ],
+          "reference_xy": [
+            8890,
+            5570
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9597686529159546
+        },
+        "context_xywh": [
+          8714,
+          5394,
+          512,
+          512
+        ],
+        "pattern": "RGGB",
+        "encoding": "Four packed CFA phases, black-subtracted/white-normalized sensor units"
+      },
+      {
+        "image": "foliage-reference-rgb-f32.npy",
+        "sha256": "35a77f7035e67561ffde8d214a0275b3f174a2859e6981f968a49a63d535670a",
+        "shape": [
+          1,
+          3,
+          160,
+          160
+        ],
+        "dtype": "float32",
+        "role": "reference-rgb",
+        "region": {
+          "name": "foliage",
+          "noisy_xy": [
+            8890,
+            5570
+          ],
+          "reference_xy": [
+            8890,
+            5570
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9597686529159546
+        },
+        "source_roi_xywh": [
+          8890,
+          5570,
+          160,
+          160
+        ],
+        "encoding": "Independent LibRaw AHD camera RGB calibrated against its own CFA; not GT"
+      },
+      {
+        "image": "chain-link-fence-noisy-packed-f32.npy",
+        "sha256": "b145f28630c1abce870c99bc24160fa0276ef31bcff14e5a72d577c964c9d495",
+        "shape": [
+          1,
+          4,
+          256,
+          256
+        ],
+        "dtype": "float32",
+        "role": "noisy-packed",
+        "region": {
+          "name": "chain-link-fence",
+          "noisy_xy": [
+            2240,
+            6000
+          ],
+          "reference_xy": [
+            2241,
+            6000
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9550720453262329
+        },
+        "context_xywh": [
+          2064,
+          5824,
+          512,
+          512
+        ],
+        "pattern": "RGGB",
+        "encoding": "Four packed CFA phases, black-subtracted/white-normalized sensor units"
+      },
+      {
+        "image": "chain-link-fence-reference-rgb-f32.npy",
+        "sha256": "07b02153c74b8d92052f0fc15ce417f64e54f551433ab87a6006eee44eeafe6a",
+        "shape": [
+          1,
+          3,
+          160,
+          160
+        ],
+        "dtype": "float32",
+        "role": "reference-rgb",
+        "region": {
+          "name": "chain-link-fence",
+          "noisy_xy": [
+            2240,
+            6000
+          ],
+          "reference_xy": [
+            2241,
+            6000
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9550720453262329
+        },
+        "source_roi_xywh": [
+          2241,
+          6000,
+          160,
+          160
+        ],
+        "encoding": "Independent LibRaw AHD camera RGB calibrated against its own CFA; not GT"
+      },
+      {
+        "image": "overcast-sky-method-0-rgb-f32.npy",
+        "sha256": "b78464bde50bcb4f3e55c5187abcd5e577314fec1680907f615fbedc5d4309fb",
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "float32",
+        "role": "restored-context",
+        "region": {
+          "name": "overcast-sky",
+          "noisy_xy": [
+            5800,
+            1400
+          ],
+          "reference_xy": [
+            5800,
+            1400
+          ],
+          "size": 160,
+          "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+          "context_green_correlation": null
+        },
+        "model_label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+        "checkpoint_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+        "context_xywh": [
+          5624,
+          1224,
+          512,
+          512
+        ],
+        "encoding": "Unquantized linear camera RGB before display exposure/clipping"
+      },
+      {
+        "image": "building-detail-method-0-rgb-f32.npy",
+        "sha256": "f56200af777027bca5a4dd3d146e127d3722a43a896cd905a2f2aa363eea6ffa",
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "float32",
+        "role": "restored-context",
+        "region": {
+          "name": "building-detail",
+          "noisy_xy": [
+            5790,
+            2690
+          ],
+          "reference_xy": [
+            5791,
+            2690
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.6824449896812439
+        },
+        "model_label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+        "checkpoint_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+        "context_xywh": [
+          5614,
+          2514,
+          512,
+          512
+        ],
+        "encoding": "Unquantized linear camera RGB before display exposure/clipping"
+      },
+      {
+        "image": "foliage-method-0-rgb-f32.npy",
+        "sha256": "b2038c3ea3d3a298bbd69f98eeaa2e0bfc3199c002fd6a22ff0a05ee63b5e4f2",
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "float32",
+        "role": "restored-context",
+        "region": {
+          "name": "foliage",
+          "noisy_xy": [
+            8890,
+            5570
+          ],
+          "reference_xy": [
+            8890,
+            5570
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9597686529159546
+        },
+        "model_label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+        "checkpoint_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+        "context_xywh": [
+          8714,
+          5394,
+          512,
+          512
+        ],
+        "encoding": "Unquantized linear camera RGB before display exposure/clipping"
+      },
+      {
+        "image": "chain-link-fence-method-0-rgb-f32.npy",
+        "sha256": "3eab86a5d8a7eae026fe83b8fb4c281f7ef9e2b8f3dfaab84dc0ae7675c2ca61",
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "float32",
+        "role": "restored-context",
+        "region": {
+          "name": "chain-link-fence",
+          "noisy_xy": [
+            2240,
+            6000
+          ],
+          "reference_xy": [
+            2241,
+            6000
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9550720453262329
+        },
+        "model_label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+        "checkpoint_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+        "context_xywh": [
+          2064,
+          5824,
+          512,
+          512
+        ],
+        "encoding": "Unquantized linear camera RGB before display exposure/clipping"
+      },
+      {
+        "image": "overcast-sky-method-1-rgb-f32.npy",
+        "sha256": "0a5afef2f0e952e48458f807b64768aee5cebf342e501549fcb09924c0b15619",
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "float32",
+        "role": "restored-context",
+        "region": {
+          "name": "overcast-sky",
+          "noisy_xy": [
+            5800,
+            1400
+          ],
+          "reference_xy": [
+            5800,
+            1400
+          ],
+          "size": 160,
+          "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+          "context_green_correlation": null
+        },
+        "model_label": "1:control-anchored-native-fresh-b16-v45:step-10000",
+        "checkpoint_sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4",
+        "context_xywh": [
+          5624,
+          1224,
+          512,
+          512
+        ],
+        "encoding": "Unquantized linear camera RGB before display exposure/clipping"
+      },
+      {
+        "image": "building-detail-method-1-rgb-f32.npy",
+        "sha256": "c5a84e5625d79521267f9ee4dc98df0570c0675699ef1633283ae3646266aba9",
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "float32",
+        "role": "restored-context",
+        "region": {
+          "name": "building-detail",
+          "noisy_xy": [
+            5790,
+            2690
+          ],
+          "reference_xy": [
+            5791,
+            2690
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.6824449896812439
+        },
+        "model_label": "1:control-anchored-native-fresh-b16-v45:step-10000",
+        "checkpoint_sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4",
+        "context_xywh": [
+          5614,
+          2514,
+          512,
+          512
+        ],
+        "encoding": "Unquantized linear camera RGB before display exposure/clipping"
+      },
+      {
+        "image": "foliage-method-1-rgb-f32.npy",
+        "sha256": "7bf41dc5c1ef074fdead9687d2f2e95a46bc4df5cc301733a09c71f6686eb5c6",
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "float32",
+        "role": "restored-context",
+        "region": {
+          "name": "foliage",
+          "noisy_xy": [
+            8890,
+            5570
+          ],
+          "reference_xy": [
+            8890,
+            5570
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9597686529159546
+        },
+        "model_label": "1:control-anchored-native-fresh-b16-v45:step-10000",
+        "checkpoint_sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4",
+        "context_xywh": [
+          8714,
+          5394,
+          512,
+          512
+        ],
+        "encoding": "Unquantized linear camera RGB before display exposure/clipping"
+      },
+      {
+        "image": "chain-link-fence-method-1-rgb-f32.npy",
+        "sha256": "d152e9910712d225ed6817f9dec389447af4efd161531e970a9da75e2ba8aa95",
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "float32",
+        "role": "restored-context",
+        "region": {
+          "name": "chain-link-fence",
+          "noisy_xy": [
+            2240,
+            6000
+          ],
+          "reference_xy": [
+            2241,
+            6000
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9550720453262329
+        },
+        "model_label": "1:control-anchored-native-fresh-b16-v45:step-10000",
+        "checkpoint_sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4",
+        "context_xywh": [
+          2064,
+          5824,
+          512,
+          512
+        ],
+        "encoding": "Unquantized linear camera RGB before display exposure/clipping"
+      },
+      {
+        "image": "overcast-sky-method-2-rgb-f32.npy",
+        "sha256": "c0e84da8819df939e032dcde5097fe8bdbe5056ef803711d28fca2cc2e306537",
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "float32",
+        "role": "restored-context",
+        "region": {
+          "name": "overcast-sky",
+          "noisy_xy": [
+            5800,
+            1400
+          ],
+          "reference_xy": [
+            5800,
+            1400
+          ],
+          "size": 160,
+          "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+          "context_green_correlation": null
+        },
+        "model_label": "RawNIND:CFA-LS",
+        "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "context_xywh": [
+          5624,
+          1224,
+          512,
+          512
+        ],
+        "encoding": "Unquantized linear camera RGB before display exposure/clipping"
+      },
+      {
+        "image": "building-detail-method-2-rgb-f32.npy",
+        "sha256": "2fa10ed0300dc25be8b890844da13902bd34d02ce65797d72b1135a70b98befb",
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "float32",
+        "role": "restored-context",
+        "region": {
+          "name": "building-detail",
+          "noisy_xy": [
+            5790,
+            2690
+          ],
+          "reference_xy": [
+            5791,
+            2690
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.6824449896812439
+        },
+        "model_label": "RawNIND:CFA-LS",
+        "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "context_xywh": [
+          5614,
+          2514,
+          512,
+          512
+        ],
+        "encoding": "Unquantized linear camera RGB before display exposure/clipping"
+      },
+      {
+        "image": "foliage-method-2-rgb-f32.npy",
+        "sha256": "67955099e3763f1ff5470e1e1875fd7da588a597c149afc2f058ed820cd5cce4",
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "float32",
+        "role": "restored-context",
+        "region": {
+          "name": "foliage",
+          "noisy_xy": [
+            8890,
+            5570
+          ],
+          "reference_xy": [
+            8890,
+            5570
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9597686529159546
+        },
+        "model_label": "RawNIND:CFA-LS",
+        "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "context_xywh": [
+          8714,
+          5394,
+          512,
+          512
+        ],
+        "encoding": "Unquantized linear camera RGB before display exposure/clipping"
+      },
+      {
+        "image": "chain-link-fence-method-2-rgb-f32.npy",
+        "sha256": "e6462e7269b4b9f604d33334940e8d4c078a30fd55b58eac918593269e152153",
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "float32",
+        "role": "restored-context",
+        "region": {
+          "name": "chain-link-fence",
+          "noisy_xy": [
+            2240,
+            6000
+          ],
+          "reference_xy": [
+            2241,
+            6000
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9550720453262329
+        },
+        "model_label": "RawNIND:CFA-LS",
+        "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "context_xywh": [
+          2064,
+          5824,
+          512,
+          512
+        ],
+        "encoding": "Unquantized linear camera RGB before display exposure/clipping"
+      },
+      {
+        "image": "overcast-sky-method-3-rgb-f32.npy",
+        "sha256": "9dd3889c9bf6118a651680e2533f70a6a449e8fa8f5f4414e44463f81a109710",
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "float32",
+        "role": "restored-context",
+        "region": {
+          "name": "overcast-sky",
+          "noisy_xy": [
+            5800,
+            1400
+          ],
+          "reference_xy": [
+            5800,
+            1400
+          ],
+          "size": 160,
+          "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+          "context_green_correlation": null
+        },
+        "model_label": "RawNIND:CFA-channel",
+        "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "context_xywh": [
+          5624,
+          1224,
+          512,
+          512
+        ],
+        "encoding": "Unquantized linear camera RGB before display exposure/clipping"
+      },
+      {
+        "image": "building-detail-method-3-rgb-f32.npy",
+        "sha256": "16589b8aa9f9cdb40c44568dbb1fe479a0362aacb6c0c76a72e1c2bd08fe2d70",
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "float32",
+        "role": "restored-context",
+        "region": {
+          "name": "building-detail",
+          "noisy_xy": [
+            5790,
+            2690
+          ],
+          "reference_xy": [
+            5791,
+            2690
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.6824449896812439
+        },
+        "model_label": "RawNIND:CFA-channel",
+        "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "context_xywh": [
+          5614,
+          2514,
+          512,
+          512
+        ],
+        "encoding": "Unquantized linear camera RGB before display exposure/clipping"
+      },
+      {
+        "image": "foliage-method-3-rgb-f32.npy",
+        "sha256": "e94285f2e4973347e62de1ec2ccbec5f75284e8fbf24a355043095190f039c0b",
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "float32",
+        "role": "restored-context",
+        "region": {
+          "name": "foliage",
+          "noisy_xy": [
+            8890,
+            5570
+          ],
+          "reference_xy": [
+            8890,
+            5570
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9597686529159546
+        },
+        "model_label": "RawNIND:CFA-channel",
+        "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "context_xywh": [
+          8714,
+          5394,
+          512,
+          512
+        ],
+        "encoding": "Unquantized linear camera RGB before display exposure/clipping"
+      },
+      {
+        "image": "chain-link-fence-method-3-rgb-f32.npy",
+        "sha256": "63281d83adadb9427954b819d5ed6b08b6cff0d4f509321ef1cec7644a144cfb",
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "float32",
+        "role": "restored-context",
+        "region": {
+          "name": "chain-link-fence",
+          "noisy_xy": [
+            2240,
+            6000
+          ],
+          "reference_xy": [
+            2241,
+            6000
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9550720453262329
+        },
+        "model_label": "RawNIND:CFA-channel",
+        "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "context_xywh": [
+          2064,
+          5824,
+          512,
+          512
+        ],
+        "encoding": "Unquantized linear camera RGB before display exposure/clipping"
+      }
+    ],
+    "runtime": {
+      "device": "cpu",
+      "neural_precision": "float32",
+      "torch": "2.14.1+cu130",
+      "cuda_initialized": false
+    },
+    "usage": "Qualitative evaluation only; never training",
+    "quality_scores": null
+  },
+  "direct_learned_comparisons": [
+    {
+      "image": "crop-164ee4053e061ffc.png",
+      "caption": "overcast-sky / noisy, V43, fresh no-context10000; neither learned panel is GT",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V43 CPU FP32",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Fresh none10k / FP32",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "45b336c9a47732b6ae93e5de3b958c41de56894dab741856b31d6c2daee087f9",
+      "region": {
+        "name": "overcast-sky",
+        "noisy_xy": [
+          5800,
+          1400
+        ],
+        "reference_xy": [
+          5800,
+          1400
+        ],
+        "size": 160,
+        "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+        "context_green_correlation": null
+      },
+      "context_xywh": [
+        5624,
+        1224,
+        512,
+        512
+      ],
+      "models": [
+        {
+          "label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+          "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+          "snapshot": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/weights/weights-0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5.pt",
+          "precision": "float32",
+          "device": "cpu",
+          "refinement_compute_precision": "float32",
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "bottleneck",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": false,
+            "adc_cfa_projection": false
+          }
+        },
+        {
+          "label": "1:control-anchored-native-fresh-b16-v45:step-10000",
+          "sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4",
+          "snapshot": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/weights/weights-0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4.pt",
+          "precision": "float32",
+          "device": "cpu",
+          "refinement_compute_precision": "float32",
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": false,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "bottleneck",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false
+          }
+        }
+      ],
+      "conditioning": {
+        "shot": 0.0014635775921166604,
+        "read": 1.0715704128646712e-06,
+        "source": "input Haar fit"
+      },
+      "sources": [
+        {
+          "role": "noisy",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+          "metadata": {
+            "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+            "camera": "GFX100S",
+            "pattern": "RGGB",
+            "black_levels": [
+              4101.0,
+              4098.0,
+              4104.0,
+              4106.0
+            ],
+            "white_levels": [
+              65535.0,
+              65535.0,
+              65535.0,
+              65535.0
+            ],
+            "white_balance": [
+              1.5132450331125828,
+              1.0,
+              2.2152317880794703
+            ],
+            "camera_to_srgb": [
+              [
+                1.0725188393098881,
+                0.17123593128834644,
+                -0.24375477059823436
+              ],
+              [
+                -0.1267191317089774,
+                1.4310509369654432,
+                -0.3043318052564657
+              ],
+              [
+                -0.009697676902906037,
+                -0.29348063283422965,
+                1.3031783097371357
+              ]
+            ],
+            "flip": 0,
+            "iso": 6400,
+            "adc_white_level": 65535.0
+          }
+        },
+        {
+          "role": "reference",
+          "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+          "metadata": {
+            "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+            "camera": "GFX100S",
+            "pattern": "RGGB",
+            "black_levels": [
+              256.0,
+              255.0,
+              256.0,
+              256.0
+            ],
+            "white_levels": [
+              65535.0,
+              65535.0,
+              65535.0,
+              65535.0
+            ],
+            "white_balance": [
+              1.5132450331125828,
+              1.0,
+              2.2152317880794703
+            ],
+            "camera_to_srgb": [
+              [
+                1.0725188393098881,
+                0.17123593128834644,
+                -0.24375477059823436
+              ],
+              [
+                -0.1267191317089774,
+                1.4310509369654432,
+                -0.3043318052564657
+              ],
+              [
+                -0.009697676902906037,
+                -0.29348063283422965,
+                1.3031783097371357
+              ]
+            ],
+            "flip": 0,
+            "iso": 100,
+            "adc_white_level": 65535.0
+          }
+        }
+      ],
+      "display_exposure": 4.0,
+      "shared_wb": [
+        1.5132450331125828,
+        1.0,
+        2.2152317880794703
+      ],
+      "shared_matrix": [
+        [
+          1.0725188393098881,
+          0.17123593128834644,
+          -0.24375477059823436
+        ],
+        [
+          -0.1267191317089774,
+          1.4310509369654432,
+          -0.3043318052564657
+        ],
+        [
+          -0.009697676902906037,
+          -0.29348063283422965,
+          1.3031783097371357
+        ]
+      ],
+      "reference": "Two learned methods, neither GT; independent ISO100 reference shown in primary triplets.",
+      "derived_from": [
+        {
+          "image": "crop-7695cb844cf53615.png",
+          "png_sha256": "db21d2a4b407ba12b94fd75a68caacd0ce00f2b5712da6806ba1dd7e9fdee0c2"
+        },
+        {
+          "image": "crop-1643b443e30cfe90.png",
+          "png_sha256": "36a2ec3b6eb6073a9afd58e7d9760dd262c4cad0758ffb884e4bfc09b8fc2087"
+        }
+      ],
+      "method": "Exact saved display pixels copied into a new labeled canvas; no resampling or display adjustment.",
+      "repository_image": "docs/images/gfx-none10k-cpu-overcast-sky-direct.png"
+    },
+    {
+      "image": "crop-06dcec8d326a3aad.png",
+      "caption": "building-detail / noisy, V43, fresh no-context10000; neither learned panel is GT",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V43 CPU FP32",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Fresh none10k / FP32",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "cd3ec14d74355835fa312d97f8a2e32abb528490c695cf0d149db6af38c02e8a",
+      "region": {
+        "name": "building-detail",
+        "noisy_xy": [
+          5790,
+          2690
+        ],
+        "reference_xy": [
+          5791,
+          2690
+        ],
+        "size": 160,
+        "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+        "context_green_correlation": 0.6824449896812439
+      },
+      "context_xywh": [
+        5614,
+        2514,
+        512,
+        512
+      ],
+      "models": [
+        {
+          "label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+          "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+          "snapshot": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/weights/weights-0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5.pt",
+          "precision": "float32",
+          "device": "cpu",
+          "refinement_compute_precision": "float32",
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "bottleneck",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": false,
+            "adc_cfa_projection": false
+          }
+        },
+        {
+          "label": "1:control-anchored-native-fresh-b16-v45:step-10000",
+          "sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4",
+          "snapshot": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/weights/weights-0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4.pt",
+          "precision": "float32",
+          "device": "cpu",
+          "refinement_compute_precision": "float32",
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": false,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "bottleneck",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false
+          }
+        }
+      ],
+      "conditioning": {
+        "shot": 0.0014635775921166604,
+        "read": 1.0715704128646712e-06,
+        "source": "input Haar fit"
+      },
+      "sources": [
+        {
+          "role": "noisy",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+          "metadata": {
+            "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+            "camera": "GFX100S",
+            "pattern": "RGGB",
+            "black_levels": [
+              4101.0,
+              4098.0,
+              4104.0,
+              4106.0
+            ],
+            "white_levels": [
+              65535.0,
+              65535.0,
+              65535.0,
+              65535.0
+            ],
+            "white_balance": [
+              1.5132450331125828,
+              1.0,
+              2.2152317880794703
+            ],
+            "camera_to_srgb": [
+              [
+                1.0725188393098881,
+                0.17123593128834644,
+                -0.24375477059823436
+              ],
+              [
+                -0.1267191317089774,
+                1.4310509369654432,
+                -0.3043318052564657
+              ],
+              [
+                -0.009697676902906037,
+                -0.29348063283422965,
+                1.3031783097371357
+              ]
+            ],
+            "flip": 0,
+            "iso": 6400,
+            "adc_white_level": 65535.0
+          }
+        },
+        {
+          "role": "reference",
+          "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+          "metadata": {
+            "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+            "camera": "GFX100S",
+            "pattern": "RGGB",
+            "black_levels": [
+              256.0,
+              255.0,
+              256.0,
+              256.0
+            ],
+            "white_levels": [
+              65535.0,
+              65535.0,
+              65535.0,
+              65535.0
+            ],
+            "white_balance": [
+              1.5132450331125828,
+              1.0,
+              2.2152317880794703
+            ],
+            "camera_to_srgb": [
+              [
+                1.0725188393098881,
+                0.17123593128834644,
+                -0.24375477059823436
+              ],
+              [
+                -0.1267191317089774,
+                1.4310509369654432,
+                -0.3043318052564657
+              ],
+              [
+                -0.009697676902906037,
+                -0.29348063283422965,
+                1.3031783097371357
+              ]
+            ],
+            "flip": 0,
+            "iso": 100,
+            "adc_white_level": 65535.0
+          }
+        }
+      ],
+      "display_exposure": 4.0,
+      "shared_wb": [
+        1.5132450331125828,
+        1.0,
+        2.2152317880794703
+      ],
+      "shared_matrix": [
+        [
+          1.0725188393098881,
+          0.17123593128834644,
+          -0.24375477059823436
+        ],
+        [
+          -0.1267191317089774,
+          1.4310509369654432,
+          -0.3043318052564657
+        ],
+        [
+          -0.009697676902906037,
+          -0.29348063283422965,
+          1.3031783097371357
+        ]
+      ],
+      "reference": "Two learned methods, neither GT; independent ISO100 reference shown in primary triplets.",
+      "derived_from": [
+        {
+          "image": "crop-d862a19f3f5860b0.png",
+          "png_sha256": "8551309cf78eeb873bbf751f98b5e9de3803fddbffcf3615f8a5bf5e613480b2"
+        },
+        {
+          "image": "crop-ce13f2c164a8de34.png",
+          "png_sha256": "1ac723f896d914d46d6ecc9d7fed201fddfd5f2e9a7ab1a83bb325610f513704"
+        }
+      ],
+      "method": "Exact saved display pixels copied into a new labeled canvas; no resampling or display adjustment.",
+      "repository_image": "docs/images/gfx-none10k-cpu-building-detail-direct.png"
+    },
+    {
+      "image": "crop-4de35d414d283a62.png",
+      "caption": "foliage / noisy, V43, fresh no-context10000; neither learned panel is GT",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V43 CPU FP32",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Fresh none10k / FP32",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "637614c6b6b7333c2ee46fa30f7f0cb5a8537ba46d5569e42a771b699e09d326",
+      "region": {
+        "name": "foliage",
+        "noisy_xy": [
+          8890,
+          5570
+        ],
+        "reference_xy": [
+          8890,
+          5570
+        ],
+        "size": 160,
+        "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+        "context_green_correlation": 0.9597686529159546
+      },
+      "context_xywh": [
+        8714,
+        5394,
+        512,
+        512
+      ],
+      "models": [
+        {
+          "label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+          "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+          "snapshot": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/weights/weights-0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5.pt",
+          "precision": "float32",
+          "device": "cpu",
+          "refinement_compute_precision": "float32",
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "bottleneck",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": false,
+            "adc_cfa_projection": false
+          }
+        },
+        {
+          "label": "1:control-anchored-native-fresh-b16-v45:step-10000",
+          "sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4",
+          "snapshot": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/weights/weights-0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4.pt",
+          "precision": "float32",
+          "device": "cpu",
+          "refinement_compute_precision": "float32",
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": false,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "bottleneck",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false
+          }
+        }
+      ],
+      "conditioning": {
+        "shot": 0.0014635775921166604,
+        "read": 1.0715704128646712e-06,
+        "source": "input Haar fit"
+      },
+      "sources": [
+        {
+          "role": "noisy",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+          "metadata": {
+            "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+            "camera": "GFX100S",
+            "pattern": "RGGB",
+            "black_levels": [
+              4101.0,
+              4098.0,
+              4104.0,
+              4106.0
+            ],
+            "white_levels": [
+              65535.0,
+              65535.0,
+              65535.0,
+              65535.0
+            ],
+            "white_balance": [
+              1.5132450331125828,
+              1.0,
+              2.2152317880794703
+            ],
+            "camera_to_srgb": [
+              [
+                1.0725188393098881,
+                0.17123593128834644,
+                -0.24375477059823436
+              ],
+              [
+                -0.1267191317089774,
+                1.4310509369654432,
+                -0.3043318052564657
+              ],
+              [
+                -0.009697676902906037,
+                -0.29348063283422965,
+                1.3031783097371357
+              ]
+            ],
+            "flip": 0,
+            "iso": 6400,
+            "adc_white_level": 65535.0
+          }
+        },
+        {
+          "role": "reference",
+          "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+          "metadata": {
+            "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+            "camera": "GFX100S",
+            "pattern": "RGGB",
+            "black_levels": [
+              256.0,
+              255.0,
+              256.0,
+              256.0
+            ],
+            "white_levels": [
+              65535.0,
+              65535.0,
+              65535.0,
+              65535.0
+            ],
+            "white_balance": [
+              1.5132450331125828,
+              1.0,
+              2.2152317880794703
+            ],
+            "camera_to_srgb": [
+              [
+                1.0725188393098881,
+                0.17123593128834644,
+                -0.24375477059823436
+              ],
+              [
+                -0.1267191317089774,
+                1.4310509369654432,
+                -0.3043318052564657
+              ],
+              [
+                -0.009697676902906037,
+                -0.29348063283422965,
+                1.3031783097371357
+              ]
+            ],
+            "flip": 0,
+            "iso": 100,
+            "adc_white_level": 65535.0
+          }
+        }
+      ],
+      "display_exposure": 4.0,
+      "shared_wb": [
+        1.5132450331125828,
+        1.0,
+        2.2152317880794703
+      ],
+      "shared_matrix": [
+        [
+          1.0725188393098881,
+          0.17123593128834644,
+          -0.24375477059823436
+        ],
+        [
+          -0.1267191317089774,
+          1.4310509369654432,
+          -0.3043318052564657
+        ],
+        [
+          -0.009697676902906037,
+          -0.29348063283422965,
+          1.3031783097371357
+        ]
+      ],
+      "reference": "Two learned methods, neither GT; independent ISO100 reference shown in primary triplets.",
+      "derived_from": [
+        {
+          "image": "crop-a7415758dd5136b2.png",
+          "png_sha256": "fd8d809540748c79fa7f59f346275514023800dcc594b575ab66ec6070f66b3e"
+        },
+        {
+          "image": "crop-13a35fbdee90a10e.png",
+          "png_sha256": "07a34b85414763fc2590bd99956230dd7d85b567ebd8b838e5d5fcc57f40b876"
+        }
+      ],
+      "method": "Exact saved display pixels copied into a new labeled canvas; no resampling or display adjustment.",
+      "repository_image": "docs/images/gfx-none10k-cpu-foliage-direct.png"
+    },
+    {
+      "image": "crop-763cc8e0242d7fc6.png",
+      "caption": "chain-link-fence / noisy, V43, fresh no-context10000; neither learned panel is GT",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V43 CPU FP32",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Fresh none10k / FP32",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "65977d7ca389815d9a0d40f7592bd5f22b677fa40d0c5e19a3da9e8f24c95414",
+      "region": {
+        "name": "chain-link-fence",
+        "noisy_xy": [
+          2240,
+          6000
+        ],
+        "reference_xy": [
+          2241,
+          6000
+        ],
+        "size": 160,
+        "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+        "context_green_correlation": 0.9550720453262329
+      },
+      "context_xywh": [
+        2064,
+        5824,
+        512,
+        512
+      ],
+      "models": [
+        {
+          "label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+          "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+          "snapshot": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/weights/weights-0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5.pt",
+          "precision": "float32",
+          "device": "cpu",
+          "refinement_compute_precision": "float32",
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "bottleneck",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": false,
+            "adc_cfa_projection": false
+          }
+        },
+        {
+          "label": "1:control-anchored-native-fresh-b16-v45:step-10000",
+          "sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4",
+          "snapshot": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/weights/weights-0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4.pt",
+          "precision": "float32",
+          "device": "cpu",
+          "refinement_compute_precision": "float32",
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": false,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "bottleneck",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false
+          }
+        }
+      ],
+      "conditioning": {
+        "shot": 0.0014635775921166604,
+        "read": 1.0715704128646712e-06,
+        "source": "input Haar fit"
+      },
+      "sources": [
+        {
+          "role": "noisy",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+          "metadata": {
+            "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+            "camera": "GFX100S",
+            "pattern": "RGGB",
+            "black_levels": [
+              4101.0,
+              4098.0,
+              4104.0,
+              4106.0
+            ],
+            "white_levels": [
+              65535.0,
+              65535.0,
+              65535.0,
+              65535.0
+            ],
+            "white_balance": [
+              1.5132450331125828,
+              1.0,
+              2.2152317880794703
+            ],
+            "camera_to_srgb": [
+              [
+                1.0725188393098881,
+                0.17123593128834644,
+                -0.24375477059823436
+              ],
+              [
+                -0.1267191317089774,
+                1.4310509369654432,
+                -0.3043318052564657
+              ],
+              [
+                -0.009697676902906037,
+                -0.29348063283422965,
+                1.3031783097371357
+              ]
+            ],
+            "flip": 0,
+            "iso": 6400,
+            "adc_white_level": 65535.0
+          }
+        },
+        {
+          "role": "reference",
+          "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+          "metadata": {
+            "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+            "camera": "GFX100S",
+            "pattern": "RGGB",
+            "black_levels": [
+              256.0,
+              255.0,
+              256.0,
+              256.0
+            ],
+            "white_levels": [
+              65535.0,
+              65535.0,
+              65535.0,
+              65535.0
+            ],
+            "white_balance": [
+              1.5132450331125828,
+              1.0,
+              2.2152317880794703
+            ],
+            "camera_to_srgb": [
+              [
+                1.0725188393098881,
+                0.17123593128834644,
+                -0.24375477059823436
+              ],
+              [
+                -0.1267191317089774,
+                1.4310509369654432,
+                -0.3043318052564657
+              ],
+              [
+                -0.009697676902906037,
+                -0.29348063283422965,
+                1.3031783097371357
+              ]
+            ],
+            "flip": 0,
+            "iso": 100,
+            "adc_white_level": 65535.0
+          }
+        }
+      ],
+      "display_exposure": 4.0,
+      "shared_wb": [
+        1.5132450331125828,
+        1.0,
+        2.2152317880794703
+      ],
+      "shared_matrix": [
+        [
+          1.0725188393098881,
+          0.17123593128834644,
+          -0.24375477059823436
+        ],
+        [
+          -0.1267191317089774,
+          1.4310509369654432,
+          -0.3043318052564657
+        ],
+        [
+          -0.009697676902906037,
+          -0.29348063283422965,
+          1.3031783097371357
+        ]
+      ],
+      "reference": "Two learned methods, neither GT; independent ISO100 reference shown in primary triplets.",
+      "derived_from": [
+        {
+          "image": "crop-4919d32109aa8e9b.png",
+          "png_sha256": "5ea587410582c2189b3d0dc0ed2da3c5a811717b5973bddc52637832a79db706"
+        },
+        {
+          "image": "crop-500c78e2954407d2.png",
+          "png_sha256": "4ed696197857cd2251f2319d9a4ec2ef6dc086ee5d53a9b9ac281cd7407fd610"
+        }
+      ],
+      "method": "Exact saved display pixels copied into a new labeled canvas; no resampling or display adjustment.",
+      "repository_image": "docs/images/gfx-none10k-cpu-chain-link-fence-direct.png"
+    }
+  ],
+  "artifact_audit": {
+    "path": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/artifact-audit.json",
+    "sha256": "9a25262274e64911fb0106ba2302c307074b446d80119d2432b858dbf57bb153",
+    "native_pngs_verified": 20,
+    "float_arrays_verified": 24,
+    "rerender_max_8bit_difference": 0,
+    "shared_noisy_and_iso100_reference_panels_byte_exact": true,
+    "direct_pixels_copied_exactly": true
+  },
+  "source_files": {
+    "paired.py": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d",
+    "__init__.py": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d",
+    "suite.py": "a474ff659df10dd4ec11d577082034a6e6dcba1a2a2b29c39065056cff5527b4",
+    "dino_pyramid.py": "246944874671ceb4449b0487fcb347a00f8b82d713d5b4c9fee5a7c8a68aa95f",
+    "metrics.py": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31",
+    "losses.py": "548b1481a035ad937d4a046754a74e70684864a9842296765c62079a002e5120",
+    "audit.py": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d",
+    "inference.py": "911e71e8dcbeb1872ed591bc5234ed2b79bae063a859b4704516537d94a1df0b",
+    "noise.py": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce",
+    "data.py": "b3277bca23d8c17b365ee364e175ea8a850d45a79cf02686628db606341e7be3",
+    "color.py": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+    "prepare.py": "e4c0733bb260c289b3ce8aaf5f393abc5919d8d81cdcf462b70032d790429712",
+    "textures.py": "b4bc304a50de272cf7fcba272e67b828c163466ffc23ea3337a6a66f076dc664",
+    "paired_training.py": "71a2481213bba174bd3d6b3de9ae9b89f88333635810e15d0958352d9d8d053d",
+    "reporting.py": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d",
+    "cli.py": "ae48ac49a52fcb9fa72521b1194e71fe8603a2ac301cf94be4a172a29a4d9003",
+    "io.py": "0a1599ffe7f6d935e92fc71e6b086430c6f82678a74952c3b8f31155a0bea83b",
+    "gaussian.py": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72",
+    "__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+    "dino_adaptation.py": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861",
+    "paired_admission.py": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825",
+    "raw_admission.py": "1948afbbf05129190273ab77466f26d9d27dc942716beaab16f077c8c3330803",
+    "model.py": "c37f530b3c4265e23af8d04b81e65e19b8ee585538874445e4a95bc337f23a71",
+    "cfa.py": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252",
+    "prior.py": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a",
+    "safety.py": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7",
+    "calibration.py": "e86f4c602a6cd7fd855d0bcfeb790cf17ed87611f19d97926f9db174909b2d26",
+    "precision.py": "9aa850fb5ee0e9abc3e9adc4847ce3518c1acb37c93f6bc54ff9206bb0c94c3a",
+    "train.py": "e8a82a3cbf2fed7059490db6ca347ab8b5ef7e345f4289c2ec1d36b8c1163c2b",
+    "registration.py": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202",
+    "pretrained_rgb.py": "10ea25fc01bf561a3ea9087002566eb319717c338f44f54d2da46fc6ee0d7026",
+    "reference.py": "54ed094d58e245a56993ea3ce3ef9e21d2164e902d41d03bba9132bacd22891f",
+    "report_raw_pair.py": "a931f9acd6d0c6cd50fd686d7623e0614f634c32bd28497dd1e2b4fa9bfb043c",
+    "real_suite.py": "2d8cd262a22b8c11d12159e7a90f96022219915ecf0dada36665467fd0f7ccee",
+    "vst.py": "355124a374177f1c08271834149c5979ab3477fdf255c60aa7cee0d47792a76b",
+    "raw_clean.py": "a143ce351ac4e1b2425d4d561000d3e8934477fe9172c88f90ce76d9b32a7a6c",
+    "realdata.py": "ed24db2b066531281a196e6fa074130cb0ee78a640eae5ccaaace234f5ad5421"
+  },
+  "reused_exact_gt_examples": {
+    "receipt": "docs/results/cross-camera-none10k-cpu-review.json",
+    "receipt_sha256": "09d2d11c3468d9f774e937ff61c5c46052c2e96e6e41c3c5ba22dffe863c968a",
+    "scope": "Four unchanged learned-model triplets from two fixed simulated cases. Same checkpoint hashes and CPU FP32. Reused pixels/inference, not a new full427 evaluation.",
+    "native_crops": [
+      {
+        "image": "crop-09daca8a7d6943a8.png",
+        "caption": "0014aa4e075b1827f91ef8a02069e1e318f040ba / iso12800-prior / RGGB / 0:dino-anchored-native-diverse-b16-v43:step-2000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "e62e06127576b1f08d17a245ee0d1692db5140e57d94ee12593780147297f9c3",
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "source": {
+          "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Roy Egloff",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": null,
+          "credit": "Own work",
+          "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+          "width": 3888,
+          "height": 2592,
+          "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+          "shape": [
+            324,
+            486,
+            3
+          ],
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+        },
+        "validation_index": 0,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "exposure": 1.0,
+          "name": "iso12800-prior",
+          "read": 2.62144e-05,
+          "shot": 0.00256
+        },
+        "pattern": "RGGB",
+        "model": {
+          "label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+          "source": "/mnt/external/demosaic/models/v43-step2000.pt",
+          "training_run": "/mnt/external/demosaic/runs/dino-anchored-native-diverse-b16-v43",
+          "snapshot": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/weights/weights-0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5.pt",
+          "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+          "step": 2000,
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false
+          },
+          "effective_model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "bottleneck",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": false,
+            "adc_cfa_projection": false
+          },
+          "training_manifest_sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+          "compute_precision": "float32",
+          "refinement_compute_precision": "float32",
+          "memory_format": "contiguous"
+        },
+        "display_exposure": 1.0,
+        "reference": "Exact synthetic clean target",
+        "repository_image": "docs/images/none10k-cpu-example-fabric-v43.png"
+      },
+      {
+        "image": "crop-85a1c5fe7f7cd992.png",
+        "caption": "0014aa4e075b1827f91ef8a02069e1e318f040ba / iso12800-prior / RGGB / 1:control-anchored-native-fresh-b16-v45:step-10000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "243697fd2414d5688667688ed5d2a32e2dc5355320f8a673bddb162f0ba23217",
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "source": {
+          "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Roy Egloff",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": null,
+          "credit": "Own work",
+          "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+          "width": 3888,
+          "height": 2592,
+          "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+          "shape": [
+            324,
+            486,
+            3
+          ],
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+        },
+        "validation_index": 0,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "exposure": 1.0,
+          "name": "iso12800-prior",
+          "read": 2.62144e-05,
+          "shot": 0.00256
+        },
+        "pattern": "RGGB",
+        "model": {
+          "label": "1:control-anchored-native-fresh-b16-v45:step-10000",
+          "source": "/mnt/external/demosaic/runs/control-anchored-native-fresh-b16-v45/last.pt",
+          "training_run": "/mnt/external/demosaic/runs/control-anchored-native-fresh-b16-v45",
+          "snapshot": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/weights/weights-0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4.pt",
+          "sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4",
+          "step": 10000,
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": false,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "dino_lora_rank": 0,
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true
+          },
+          "effective_model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": false,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "bottleneck",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false
+          },
+          "training_manifest_sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+          "compute_precision": "float32",
+          "refinement_compute_precision": "float32",
+          "memory_format": "contiguous"
+        },
+        "display_exposure": 1.0,
+        "reference": "Exact synthetic clean target",
+        "repository_image": "docs/images/none10k-cpu-example-fabric-none10k.png"
+      },
+      {
+        "image": "crop-085432538346e7c9.png",
+        "caption": "002fc6eeadf637e81d5a327f117b79abb86becd9 / iso12800-prior / RGGB / 0:dino-anchored-native-diverse-b16-v43:step-2000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "bae60debf1312de2ab1e34eb991153280c0ba99a43c017a181464bc4919278be",
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "source": {
+          "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Vancouver_%28BC%2C_Canada%29%2C_Coal_Harbour_Seaside_Park%2C_Blick_in_den_Himmel_--_2022_--_2158.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Dietmar Rabich",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "Dietmar Rabich",
+          "credit": "Own work",
+          "sha1": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "sha1_hex": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "download_path": "images/00/2f/002fc6eeadf637e81d5a327f117b79abb86becd9.jpg",
+          "width": 3809,
+          "height": 2857,
+          "id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/002fc6eeadf637e81d5a327f117b79abb86becd9.npy",
+          "shape": [
+            357,
+            476,
+            3
+          ],
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf"
+        },
+        "validation_index": 1,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "exposure": 1.0,
+          "name": "iso12800-prior",
+          "read": 2.62144e-05,
+          "shot": 0.00256
+        },
+        "pattern": "RGGB",
+        "model": {
+          "label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+          "source": "/mnt/external/demosaic/models/v43-step2000.pt",
+          "training_run": "/mnt/external/demosaic/runs/dino-anchored-native-diverse-b16-v43",
+          "snapshot": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/weights/weights-0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5.pt",
+          "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+          "step": 2000,
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false
+          },
+          "effective_model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "bottleneck",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": false,
+            "adc_cfa_projection": false
+          },
+          "training_manifest_sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+          "compute_precision": "float32",
+          "refinement_compute_precision": "float32",
+          "memory_format": "contiguous"
+        },
+        "display_exposure": 1.0,
+        "reference": "Exact synthetic clean target",
+        "repository_image": "docs/images/none10k-cpu-example-building-v43.png"
+      },
+      {
+        "image": "crop-3562f18bbaf822d9.png",
+        "caption": "002fc6eeadf637e81d5a327f117b79abb86becd9 / iso12800-prior / RGGB / 1:control-anchored-native-fresh-b16-v45:step-10000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "7508ef2f929e093139fd235974aedb28ae519be0b6997f4c78ec53728c97fcf6",
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "source": {
+          "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Vancouver_%28BC%2C_Canada%29%2C_Coal_Harbour_Seaside_Park%2C_Blick_in_den_Himmel_--_2022_--_2158.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Dietmar Rabich",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "Dietmar Rabich",
+          "credit": "Own work",
+          "sha1": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "sha1_hex": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "download_path": "images/00/2f/002fc6eeadf637e81d5a327f117b79abb86becd9.jpg",
+          "width": 3809,
+          "height": 2857,
+          "id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/002fc6eeadf637e81d5a327f117b79abb86becd9.npy",
+          "shape": [
+            357,
+            476,
+            3
+          ],
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf"
+        },
+        "validation_index": 1,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "exposure": 1.0,
+          "name": "iso12800-prior",
+          "read": 2.62144e-05,
+          "shot": 0.00256
+        },
+        "pattern": "RGGB",
+        "model": {
+          "label": "1:control-anchored-native-fresh-b16-v45:step-10000",
+          "source": "/mnt/external/demosaic/runs/control-anchored-native-fresh-b16-v45/last.pt",
+          "training_run": "/mnt/external/demosaic/runs/control-anchored-native-fresh-b16-v45",
+          "snapshot": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/weights/weights-0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4.pt",
+          "sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4",
+          "step": 10000,
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": false,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "dino_lora_rank": 0,
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true
+          },
+          "effective_model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": false,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "bottleneck",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false
+          },
+          "training_manifest_sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+          "compute_precision": "float32",
+          "refinement_compute_precision": "float32",
+          "memory_format": "contiguous"
+        },
+        "display_exposure": 1.0,
+        "reference": "Exact synthetic clean target",
+        "repository_image": "docs/images/none10k-cpu-example-building-none10k.png"
+      }
+    ]
+  },
+  "sky_input_consistency": {
+    "scope": "Full512 context; four phase means in linear sensor units. Differences relative to the noisy input, not a quality score or comparison to the independent ISO100 frame; no noise-independence confidence claim.",
+    "phase_order": [
+      "R",
+      "G1",
+      "G2",
+      "B"
+    ],
+    "context_xywh": [
+      5624,
+      1224,
+      512,
+      512
+    ],
+    "rows": [
+      {
+        "model_label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+        "observed_cfa_phase_means": [
+          0.013203561305999756,
+          0.02163207158446312,
+          0.02173791453242302,
+          0.010725731961429119
+        ],
+        "predicted_cfa_phase_means": [
+          0.013198834843933582,
+          0.021629899740219116,
+          0.021635031327605247,
+          0.010690496303141117
+        ],
+        "mean_prediction_minus_input": [
+          -4.726409315480851e-06,
+          -2.1744763216702268e-06,
+          -0.00010288305929861963,
+          -3.523606574162841e-05
+        ],
+        "relative_mean_change_percent": [
+          -0.035796474665403366,
+          -0.010052095167338848,
+          -0.47328853607177734,
+          -0.32851898670196533
+        ]
+      },
+      {
+        "model_label": "1:control-anchored-native-fresh-b16-v45:step-10000",
+        "observed_cfa_phase_means": [
+          0.013203561305999756,
+          0.02163207158446312,
+          0.02173791453242302,
+          0.010725731961429119
+        ],
+        "predicted_cfa_phase_means": [
+          0.013241642154753208,
+          0.021754832938313484,
+          0.02176787331700325,
+          0.010744582861661911
+        ],
+        "mean_prediction_minus_input": [
+          3.808011024375446e-05,
+          0.00012275965127628297,
+          2.9958056984469295e-05,
+          1.8849808839149773e-05
+        ],
+        "relative_mean_change_percent": [
+          0.2884078621864319,
+          0.5674890875816345,
+          0.13781477510929108,
+          0.17574378848075867
+        ]
+      },
+      {
+        "model_label": "RawNIND:CFA-LS",
+        "observed_cfa_phase_means": [
+          0.013203561305999756,
+          0.02163207158446312,
+          0.02173791453242302,
+          0.010725731961429119
+        ],
+        "predicted_cfa_phase_means": [
+          0.013331029564142227,
+          0.02164968103170395,
+          0.02165146917104721,
+          0.010735854506492615
+        ],
+        "mean_prediction_minus_input": [
+          0.0001274680398637429,
+          1.760726809152402e-05,
+          -8.644704212201759e-05,
+          1.0122081221197732e-05
+        ],
+        "relative_mean_change_percent": [
+          0.9654065370559692,
+          0.08139427751302719,
+          -0.3976786136627197,
+          0.09437194466590881
+        ]
+      },
+      {
+        "model_label": "RawNIND:CFA-channel",
+        "observed_cfa_phase_means": [
+          0.013203561305999756,
+          0.02163207158446312,
+          0.02173791453242302,
+          0.010725731961429119
+        ],
+        "predicted_cfa_phase_means": [
+          0.013208537362515926,
+          0.021688295528292656,
+          0.021690085530281067,
+          0.010732073336839676
+        ],
+        "mean_prediction_minus_input": [
+          4.976736818207428e-06,
+          5.622086246148683e-05,
+          -4.783027179655619e-05,
+          6.341255357256159e-06
+        ],
+        "relative_mean_change_percent": [
+          0.03769238293170929,
+          0.25989586114883423,
+          -0.22003155946731567,
+          0.05912189185619354
+        ]
+      }
+    ],
+    "max_learned_relative_phase_mean_change_percent": 0.5674890875816345,
+    "used_for_model_selection": false
+  },
+  "visual_review": {
+    "new_native_pngs_inspected": 20,
+    "repository_images_inspected": [
+      "docs/images/gfx-none10k-cpu-overcast-sky-v43.png",
+      "docs/images/gfx-none10k-cpu-building-detail-v43.png",
+      "docs/images/gfx-none10k-cpu-foliage-v43.png",
+      "docs/images/gfx-none10k-cpu-chain-link-fence-v43.png",
+      "docs/images/gfx-none10k-cpu-overcast-sky-none10k.png",
+      "docs/images/gfx-none10k-cpu-building-detail-none10k.png",
+      "docs/images/gfx-none10k-cpu-foliage-none10k.png",
+      "docs/images/gfx-none10k-cpu-chain-link-fence-none10k.png",
+      "docs/images/gfx-none10k-cpu-overcast-sky-cfa-ls.png",
+      "docs/images/gfx-none10k-cpu-building-detail-cfa-ls.png",
+      "docs/images/gfx-none10k-cpu-foliage-cfa-ls.png",
+      "docs/images/gfx-none10k-cpu-chain-link-fence-cfa-ls.png",
+      "docs/images/gfx-none10k-cpu-overcast-sky-cfa-channel.png",
+      "docs/images/gfx-none10k-cpu-building-detail-cfa-channel.png",
+      "docs/images/gfx-none10k-cpu-foliage-cfa-channel.png",
+      "docs/images/gfx-none10k-cpu-chain-link-fence-cfa-channel.png",
+      "docs/images/gfx-none10k-cpu-overcast-sky-direct.png",
+      "docs/images/gfx-none10k-cpu-building-detail-direct.png",
+      "docs/images/gfx-none10k-cpu-foliage-direct.png",
+      "docs/images/gfx-none10k-cpu-chain-link-fence-direct.png"
+    ],
+    "sky": "All methods remove most visible grain; comparison to the separately exposed ISO100 frame is qualitative.",
+    "building": "The learned models remain close; fine bracket/truss detail is softened. Reference aperture/motion differences prevent assigning every gap to the models.",
+    "foliage": "V43 and no-context10000 stay close and soften fine leaf texture.",
+    "fence": "Both learned models retain more continuous mesh lines than the two RawNIND variants; a clear new winner over V43 is not established.",
+    "reference": "ISO100 f/5.6, 3s, captured3m38 later than ISO6400 f/1.7,1/240; independently AHD-demosaiced/own-CFA-calibrated, qualitative only; never exact GT."
+  },
+  "tool_validation": {
+    "actual_cpu_context_inference_complete": true,
+    "cpu_half_neural_or_refinement_labels_rejected_before_io": true,
+    "full_frame_cpu_executed": false,
+    "cuda_initialized": false,
+    "ruff_passed": true,
+    "running_frozen_evaluation_files_unchanged": true,
+    "production_package_unchanged": true
+  },
+  "decision": {
+    "promoted": false,
+    "retained_reference": "V43/README unchanged",
+    "next": "Finish original S/B and complete matched numerical/native/analytic/full-frame GFX review before recipe/model selection."
+  },
+  "publication_script_sha256": "fd83fa2be08dbb0b71d475f82a0b080d75739e3d14d520aefe2324ad17506a74"
+}

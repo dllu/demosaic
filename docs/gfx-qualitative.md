@@ -10,10 +10,13 @@ paths, byte counts, matching SHA-256 hashes and unchanged source metadata.
 Subsequent tests read the local cache, leaving the source hard drives idle.
 Private RAWs and full-resolution renders are not checked into Git.
 
-The [latest V34/V36 augmentation review](geometry-corpus-v34-v36-review.md)
-contains full-frame crops for both models and both RawNIND calibrations, plus
-verified RGB16 outputs. V34 is the current README example. The earlier V16
-gallery below remains a historical comparison with the same fixed regions.
+The [retained V43 review](native-corpus-2k-review.md) contains the current README
+examples and verified full-frame RGB16 outputs. A later
+[CPU context check of completed fresh no-context10k versus V43](gfx-none10k-cpu-context-review.md)
+adds the same four fixed regions, both RawNIND calibrations and saved float
+contexts without a new promotion. Its full matched S/B/102 MP review remains
+pending. The [V34/V36 augmentation review](geometry-corpus-v34-v36-review.md) and
+the V16 gallery below remain historical comparisons using the same regions.
 
 Both captures are 11662×8746 Bayer images from the GFX100S and 55 mm lens:
 
@@ -40,7 +43,8 @@ resized, sharpened or adjusted independently.
 | Foliage | (8890,5570) | (8890,5570) |
 | Chain-link fence | (2240,6000) | (2241,6000) |
 
-Each model restores the entire 101.996 MP frame before cropping. V16 step5000
+In the historical V16 comparison below, each model restores the entire
+101.996 MP frame before cropping. V16 step5000
 uses FP16 neural inference with its default IEEE FP32 RGB refinement branch.
 RawNIND uses publisher normalization, signed/unclipped input, observed-CFA
 least-squares gain and IEEE FP32. Both use 512×512 tiles, overlap 64, batch 4,

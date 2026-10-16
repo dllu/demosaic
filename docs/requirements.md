@@ -239,3 +239,11 @@ GT; 21 real float context arrays and shared pixels verify. The real methods stay
 close, fine cords remain absent and a fabric color bias is visible in the fresh
 model. No promotion or causal DINO/duration conclusion follows from this check;
 the full matched S/B/GFX evaluation remains pending.
+
+The [standing GFX CPU context check](gfx-none10k-cpu-context-review.md) adds all
+four fixed regions for V43/no-context10k and both RawNIND calibrations. All 20
+new native PNGs and 24 float arrays verify, with exact rerendering and accurately
+labeled independent ISO100 references. Learned fence lines are more continuous
+than RawNIND, while fine foliage remains soft and the learned models stay close.
+This is not a new 102 MP output, reference score or promotion; full matched
+GPU review is still pending.

@@ -12,6 +12,7 @@ import json
 from dataclasses import asdict
 from pathlib import Path
 
+import numpy as np
 import torch
 
 from demosaic.calibration import estimate_noise
@@ -67,6 +68,7 @@ def main():
         help="Input-only calibration variants; defaults to the historical global CFA-LS",
     )
     parser.add_argument("--gaussian-reference", type=Path)
+    parser.add_argument("--device", choices=("cpu", "cuda"), default="cuda")
     parser.add_argument("--precision", choices=COMPUTE_DTYPES, default="float16")
     parser.add_argument("--refinement-precision", choices=REFINEMENT_DTYPES, default="float32")
     parser.add_argument(
@@ -75,6 +77,10 @@ def main():
         help="Restore the complete photo before cropping; also save linear/sRGB16 TIFFs",
     )
     args = parser.parse_args()
+    if args.device == "cpu" and (
+        args.precision != "float32" or args.refinement_precision != "float32"
+    ):
+        raise ValueError("CPU paired-capture comparisons require explicit float32 precision")
     torch.set_num_threads(4)
     selection = json.loads(args.selection.read_text())
     output = writable_path(args.output)
@@ -90,7 +96,7 @@ def main():
     for i, path in enumerate(args.checkpoint):
         frozen, digest = freeze_checkpoint(path, output / "weights")
         model, state = load_checkpoint(
-            frozen, "cuda", refinement_precision=args.refinement_precision
+            frozen, args.device, refinement_precision=args.refinement_precision
         )
         model.eval().to(memory_format=torch.channels_last)
         label = f"{i}:{Path(state['config']['run']).name}:step-{state['step']}"
@@ -101,17 +107,20 @@ def main():
                 "sha256": digest,
                 "snapshot": str(frozen),
                 "precision": args.precision,
+                "device": args.device,
                 "refinement_compute_precision": args.refinement_precision,
                 "model_config": model.config.to_dict(),
             }
         )
         del state
     if args.rawnind:
-        references, receipts = rawnind_comparators(args.rawnind, args.rawnind_gain_modes)
+        references, receipts = rawnind_comparators(
+            args.rawnind, args.rawnind_gain_modes, device=args.device
+        )
         models.extend(references)
         weights.extend(receipts)
     if args.gaussian_reference:
-        gaussian = load_gaussian_prior(args.gaussian_reference, device="cuda", archive=output)
+        gaussian = load_gaussian_prior(args.gaussian_reference, device=args.device, archive=output)
         models.append((gaussian.receipt["label"], gaussian, "float32"))
         weights.append(gaussian.receipt)
     raw, meta = read_raw(selection["noisy"])
@@ -125,11 +134,30 @@ def main():
         if estimate.reliable
         else Sensor(iso=meta.iso or 100).coefficients()
     )
-    colors = color_indices(meta.pattern, device="cuda")[None]
-    wb = torch.tensor(meta.white_balance, device="cuda")[None]
-    matrix = torch.tensor(meta.camera_to_srgb, device="cuda")[None]
+    colors = color_indices(meta.pattern, device=args.device)[None]
+    wb = torch.tensor(meta.white_balance, device=args.device)[None]
+    matrix = torch.tensor(meta.camera_to_srgb, device=args.device)[None]
     exposure = selection.get("display_exposure", 4.0)
-    crops, contexts, full_frames = [], [], []
+    crops, contexts, full_frames, float_contexts = [], [], [], []
+
+    def save_float(values, name, **metadata):
+        path = output / name
+        array = values.detach().float().cpu().numpy()
+        if not np.isfinite(array).all():
+            raise ValueError(f"Nonfinite qualitative float artifact: {name}")
+        np.save(path, array, allow_pickle=False)
+        with path.open("rb") as handle:
+            digest = hashlib.file_digest(handle, "sha256").hexdigest()
+        float_contexts.append(
+            {
+                "image": path.name,
+                "sha256": digest,
+                "shape": list(array.shape),
+                "dtype": "float32",
+                **metadata,
+            }
+        )
+
     for region in selection["regions"]:
         x, y = region["noisy_xy"]
         rx, ry = region["reference_xy"]
@@ -147,7 +175,7 @@ def main():
         ):
             raise ValueError("Region/context outside the visible sensor")
         packed = pack(
-            torch.from_numpy(raw[ty : ty + tile, tx : tx + tile].copy())[None, None].cuda()
+            torch.from_numpy(raw[ty : ty + tile, tx : tx + tile].copy())[None, None].to(args.device)
         )
         packed = packed.contiguous(memory_format=torch.channels_last)
         variance = packed.clamp_min(0) * shot + read
@@ -157,9 +185,26 @@ def main():
         clean = (
             torch.from_numpy(reference[ry : ry + size, rx : rx + size].copy())
             .permute(2, 0, 1)[None]
-            .cuda()
+            .to(args.device)
         )
         reference_display = display_crop(clean, wb, matrix, [0, 0, size, size], exposure=exposure)
+        save_float(
+            packed,
+            f"{region['name']}-noisy-packed-f32.npy",
+            role="noisy-packed",
+            region=region,
+            context_xywh=[tx, ty, tile, tile],
+            pattern=meta.pattern,
+            encoding="Four packed CFA phases, black-subtracted/white-normalized sensor units",
+        )
+        save_float(
+            clean,
+            f"{region['name']}-reference-rgb-f32.npy",
+            role="reference-rgb",
+            region=region,
+            source_roi_xywh=[rx, ry, size, size],
+            encoding="Independent LibRaw AHD camera RGB calibrated against its own CFA; not GT",
+        )
         contexts.append((region, tx, ty, packed, variance, xywh, noisy, reference_display))
     for model_index, (label, model, precision) in enumerate(models):
         if hasattr(model, "set_noise"):
@@ -167,7 +212,7 @@ def main():
         if isinstance(model, RawNind):
             model.input_scale = torch.tensor(
                 publisher_input_scale(meta.white_levels, meta.black_levels, meta.adc_white_level),
-                device="cuda",
+                device=args.device,
             )
         if args.full_frame:
             restored, timing = restore_tiled(
@@ -182,6 +227,7 @@ def main():
                 wb=meta.white_balance,
                 matrix=meta.camera_to_srgb,
                 precision=precision,
+                device=args.device,
             )
             paths = [
                 output / f"restored-{model_index}-linear16.tiff",
@@ -220,8 +266,18 @@ def main():
                     restored[None], wb.cpu(), matrix.cpu(), [x, y, size, size], exposure=exposure
                 )
             else:
-                with amp_context("cuda", dtype=precision):
+                with amp_context(args.device, dtype=precision):
                     prediction = model(packed, variance, colors, wb, matrix)
+                save_float(
+                    prediction,
+                    f"{region['name']}-method-{model_index}-rgb-f32.npy",
+                    role="restored-context",
+                    region=region,
+                    model_label=label,
+                    checkpoint_sha256=weights[model_index].get("sha256"),
+                    context_xywh=[tx, ty, tile, tile],
+                    encoding="Unquantized linear camera RGB before display exposure/clipping",
+                )
                 denoised = display_crop(prediction, wb, matrix, xywh, exposure=exposure)
             crops.append(
                 save_triplet(
@@ -231,7 +287,9 @@ def main():
                         ("Noisy (Malvar)", noisy),
                         ("Denoised", denoised),
                         (
-                            f"ISO{refmeta.iso:g} reference" if refmeta.iso else "Low-ISO reference",
+                            f"ISO{refmeta.iso:g} ref (not GT)"
+                            if refmeta.iso
+                            else "Low-ISO ref (not GT)",
                             reference_display,
                         ),
                     ],
@@ -239,6 +297,10 @@ def main():
                     metadata={
                         "region": region,
                         "model_label": label,
+                        "checkpoint_sha256": weights[model_index].get("sha256"),
+                        "compute_precision": precision,
+                        "device": args.device,
+                        "conditioning": {"shot": shot, "read": read},
                         "context_xywh": None if args.full_frame else [tx, ty, tile, tile],
                         "full_frame": args.full_frame,
                         "display_exposure": exposure,
@@ -247,6 +309,17 @@ def main():
                         "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
                     },
                 )
+            )
+            print(
+                json.dumps(
+                    {
+                        "event": "context-crop",
+                        "model": label,
+                        "region": region["name"],
+                        "device": args.device,
+                    }
+                ),
+                flush=True,
             )
         if args.full_frame:
             del restored
@@ -270,9 +343,18 @@ def main():
         "reference_calibration": calibration,
         "native_crops": crops,
         "full_frames": full_frames,
+        "float_contexts": float_contexts,
+        "runtime": {
+            "device": args.device,
+            "neural_precision": args.precision,
+            "torch": str(torch.__version__),
+            "cuda_initialized": torch.cuda.is_initialized(),
+        },
         "usage": "Qualitative evaluation only; never training",
         "quality_scores": None,
     }
+    if args.device == "cpu" and receipt["runtime"]["cuda_initialized"]:
+        raise RuntimeError("CPU paired-capture comparison unexpectedly initialized CUDA")
     (output / "report.json").write_text(json.dumps(receipt, indent=2) + "\n")
     lines = [
         "# GFX native-pixel qualitative comparison",
