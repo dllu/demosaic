@@ -67,6 +67,11 @@ planned4000 schedule and all model/loss/noise/inference flags. Only the weak
 quota and run/notes differ. The current4000-step quality workflow runs in its
 unchanged frozen source. New-source CUDA/genuine-parent preflight must wait
 for that owner's actual exit; V55 quality training has not started.
+[Queued engineering receipt](results/weak-texture-v55-gpu-queue.json): frozen
+8eea803 controller3940514 waits for the live4000 review owner before running
+the complete CUDA suite and two discarded genuine-parent updates per arm.
+This queues validation only; it does not launch V55 quality training or claim
+that pending GPU checks have passed.
 
 [Hybrid texture-acutance training research](https://arxiv.org/html/2404.07212v1)
 motivates separate texture checks; this code does not reproduce its dead-leaves
