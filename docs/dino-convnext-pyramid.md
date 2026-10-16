@@ -255,3 +255,11 @@ leaving manual crop review separate. The extended auditor reproduces the
 original10k audit's100,528 rows and336 intervals exactly and rejects the live
 new trial before creating output. This is audit-readiness evidence, not an
 audit of the as-yet unfinished candidate results.
+
+The [first1000 training boundary](results/dino-convnext-pyramid-v58-boundary.json)
+has now completed. All41 logged observations match each original arm; stored
+model/EMA tensors are finite, AdamW counters equal1000, and all three EMA gates
+are nonzero. Immutable checkpoint SHA256:
+`afc0806d0c99a38bed33364bbf93ab94302080e4d78e1da044a2b782a97c7dfa`.
+Automated evaluation is running. These boundary checks do not establish quality;
+native crop inspection and the complete review remain pending.
