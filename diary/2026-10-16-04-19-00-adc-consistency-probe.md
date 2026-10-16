@@ -28,3 +28,9 @@ Production model code and the live frozen training source remain unchanged.
 Queue the fullADC-only parent/projection/Malvar check after the actual fresh
 capacity controller exits; no owned GPU overlap. Current V43/README aliases and
 protected-final closure remain unchanged.
+
+Launch update: the frozen ADC full-sample queue is live and waiting for the
+actual fresh capacity owner1462820 to exit after successful review. Source,
+protocol, parent and manifest identities are pinned; no GPU overlap. All three
+fresh arms now finish1000 updates with all41 logged hashes exact. Paired
+evaluation has started; no quality conclusion yet.

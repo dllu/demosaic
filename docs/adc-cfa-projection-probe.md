@@ -69,3 +69,10 @@ The next check covers all427 photographs and16 procedural sources, four CFAs,
 GPUFP16 and5,316 cases across parent/projection/Malvar. It must wait for the
 actual live fresh-DINO controller to finish and exit before using the GPU.
 Neither the checkpoint/README aliases nor any training recipe change.
+
+The [full-sample check is queued](results/adc-cfa-projection-full427-queue.json)
+with frozen package/script/protocol/dependency snapshots and exact parent/data
+hashes. It waits for PID1462820's actual exit and terminal success, then scores
+all427 photos/16 procedural sources with the parent and Malvar in the same
+GPUFP16 batches. Live state is
+`/mnt/external/demosaic/runs/adc-cfa-projection-full427-workflow.json`.
