@@ -122,6 +122,15 @@ Keep LR unchanged and review image quality before extending training. Peak CUDA
 allocation is not total system RAM usage. All10 cases share the same archived
 source hash. [Complete measurements and reproduction receipt](results/training-batch-sweep-v1.json).
 
+A second sweep is now queued for the current complete 4× Commons/native128
+pipeline, using V43's frozen first1000 EMA initializer. It repeats batches
+4/8/16/32/64 twice with the same 15 excluded warmup and 45 measured updates.
+The queue verifies that the owned V37/V39/V43 step2000 training/full evaluation
+has completed and exited before starting. All cases use the same frozen source,
+data, model and initialization. [Queue and exact command](results/current-pipeline-batch-sweep-queue.json).
+**Results are pending.** Batch16 remains fixed in the running quality comparison
+and the prepared fresh DINO control, regardless of this timing experiment.
+
 [V31's recipe](../configs/dino-anchored-stabilized-rgb-b16-v31.yaml) continues
 frozen V30 step1000 with batch16, retaining model/AdamW/EMA/RNG state and the
 existing8× dataset. It stops after1,000 additional updates (step 2000) for paired,
