@@ -3,38 +3,39 @@
 Joint Bayer demosaicing and denoising in linear camera RGB, with 16-bit TIFF
 output, physical noise conditioning, tiled inference, and an optional DINOv3
 feature branch. Experimental: training and quality validation are in progress.
-The [latest native-data review](docs/native-v43-1k-review.md) finds modest
-0.05 dB gains on 427 synthetic-noise photos and unseen-camera measured samples
-versus its matched control. The [augmentation change](docs/geometry-corpus-v34-v36-review.md)
-previously gained 0.51 dB. Real-camera tradeoffs and fine-detail deficits remain.
+The [latest native-data review](docs/native-corpus-2k-review.md) finds a
+0.09 dB gain on 427 synthetic-noise photos versus the matched control at step 2000.
+The [augmentation change](docs/geometry-corpus-v34-v36-review.md) previously
+gained 0.51 dB. Low-noise pattern regression, real-camera tradeoffs and fine-detail
+deficits remain.
 Quality work continues;
 state-of-the-art performance is not established.
 
-Native 160×160 validation crops: noisy → denoised → GT, using V43 step1000
+Native 160×160 validation crops: noisy → denoised → GT, using V43 step 2000
 (FP16, ISO12800 synthetic noise prior). These are 100% crops at the 8×8-binned
 evaluation resolution, with identical display transforms; open the PNG at 100%.
 They illustrate current behavior, including lost fine detail.
 
-![Noisy, denoised and GT: fabric detail](docs/images/native-v43-full427-0014aa4e.png)
+![Noisy, denoised and GT: fabric detail](docs/images/native-2k-v43-full427-0014aa4e.png)
 
-![Noisy, denoised and GT: building and sky](docs/images/native-v43-full427-002fc6ee.png)
+![Noisy, denoised and GT: building and sky](docs/images/native-2k-v43-full427-002fc6ee.png)
 
 Sources: [Roy Egloff](https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg)
 and [Dietmar Rabich](https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg),
 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); modified by binning,
-cropping, simulated noise and restoration. See [the performance review and crop receipts](docs/native-v43-1k-review.md)
+cropping, simulated noise and restoration. See [the performance review and crop receipts](docs/native-corpus-2k-review.md)
 and [real GFX100S crops](docs/gfx-qualitative.md).
 
 Real GFX100S foliage and chain-link-fence crops at native 160×160 sensor resolution:
-DSCF3879 noisy ISO6400 → experimental V43 step1000 → DSCF3880 ISO100 f/5.6,
+DSCF3879 noisy ISO6400 → experimental V43 step 2000 → DSCF3880 ISO100 f/5.6,
 with shared +2 EV display, cropped from the full 102 MP output.
 This closer pair is now the standing test. Framing is nearly identical, 3m38s
 apart; aperture and moving subjects differ, so the last panel is a qualitative
-reference, **not GT**. [All four regions and matched comparisons](docs/native-v43-1k-review.md).
+reference, **not GT**. [All four regions and matched comparisons](docs/native-corpus-2k-review.md).
 
-![GFX foliage: noisy, denoised and separate low-ISO reference](docs/images/native-v43-gfx-full-foliage.png)
+![GFX foliage: noisy, denoised and separate low-ISO reference](docs/images/native-2k-v43-gfx-full-foliage.png)
 
-![GFX fence: noisy, denoised and separate low-ISO reference](docs/images/native-v43-gfx-full-chain-link-fence.png)
+![GFX fence: noisy, denoised and separate low-ISO reference](docs/images/native-2k-v43-gfx-full-chain-link-fence.png)
 
 ```bash
 source scripts/env.sh
@@ -44,7 +45,7 @@ uv run demosaic train configs/base.yaml
 uv run demosaic evaluate /mnt/external/demosaic/runs/base-v3/best.pt \
   --manifest /mnt/external/demosaic/commons-v1/manifest.jsonl \
   --output /mnt/external/demosaic/evaluation/base-v3.json
-uv run demosaic infer /mnt/external/demosaic/models/v43-first1000.pt photo.raf \
+uv run demosaic infer /mnt/external/demosaic/models/v43-step2000.pt photo.raf \
   /mnt/external/demosaic/output/photo-linear.tiff \
   --preview /mnt/external/demosaic/output/photo-srgb.tiff --shot 0.001 --read 0.000001 \
   --tile 512 --overlap 64 --precision float16

@@ -54,11 +54,12 @@ restoration checkpoint. It uses no personal or protected image gradients.
 
 The CPU regression run passes343 tests with eight CUDA tests skipped; all nine
 dedicated adapter tests pass, including the subsequently added training-resume
-check. GPU arithmetic, memory,
-full-model backward and restart checks remain pending behind the owned corpus
-review and queued current-pipeline batch sweep. Source/fixture/script hashes
+check. GPU arithmetic, memory, full-model backward and restart checks are now
+[queued in a frozen checkout](results/dino-lora-gpu-checks-queue-v1.json) behind
+the current-pipeline batch sweep. Source/fixture/script hashes
 are recorded in the preflight receipt. Execution checks do not establish quality
-or speed. Keep the current V43 README checkpoint and its first1000 alias fixed.
+or speed. The corpus review selected V43 step2000 as the photographic reference;
+its first1000 alias remains fixed for reproduction.
 
 After GPU checks, a matched rank0/rank4 quality trial should use one reviewed
 parent with fresh AdamW/EMA and identical per-step data, LR and update budget.

@@ -11,7 +11,7 @@ not just software that executes. This checklist records the evidence required.
 | Geometry, optical blur, exposure, synthetic fine detail | Executable data augmentation and inspected samples | Implemented. Complete 4×→geometry/PSF→2× Commons/native targets improve full-photo PSNR by .50990 dB in the matched V34 trial; original 8× validation remains fixed |
 | Physical Bayer noise across cameras and ISO | Electron-domain Poisson/read noise, metadata and tests | Moment-tested simulation, conservative single-image estimates on three cameras; dedicated calibration still missing |
 | 16-bit photos and personal cameras | Native RAW metadata/CFA handling, 16-bit output, read-only photo source, real-camera examples | All four cameras loaded; GFX100S 102 MP RGB16 outputs and other-camera crops verified; final quality pending |
-| State-of-the-art quality, substantially better than RawNIND | Reproducible held-out numerical results and qualitative comparisons, including clipping boundaries, texture and shadows | Unmet. [V43](native-v43-1k-review.md) reaches full427 34.70399/.955576 and gains .04984dB unseen primary versus matched V37. Known primary is slightly lower with interval crossingzero; V34 parent still has a higher unseen primary mean with uncertain difference. V43 approximately ties channel-calibrated RawNIND unseen auxiliary RGB/SSIM. Fine foliage/fabric remains soft. V43 is the current experimental reference; broad superiority, protected-final scoring and a current-architecture trained DINO ablation remain |
+| State-of-the-art quality, substantially better than RawNIND | Reproducible held-out numerical results and qualitative comparisons, including clipping boundaries, texture and shadows | Unmet. [V43 step 2000](native-corpus-2k-review.md) reaches full427 34.89934/.957126, gaining .08870 dB over matched V37 and .19536 dB over its first gate. Unseen primary improves .07632 dB versus its first gate, while AHD SSIM falls and procedural PSNR loses .56471 dB with large low-noise failures. V43 step2000 is the photographic experimental reference; fine foliage/fabric remains soft. Broad superiority, protected-final scoring and a current-architecture trained DINO ablation remain |
 | 100 MP possible, target <10 s on GB10 | Actual 100 MP run, memory and timing; quality takes priority if speed misses | Full 102 MP RGB16/ICC outputs are independently verified for retained models and rejected packed variants. V42 is an unchanged-tensor V37 inference export with explicit hidden autocast; its complete quality/native-crop and repeated full-frame timing evidence is in the [review](hidden-autocast-v42-review.md). The 10-second target remains unmet. Packed V38/V40/V41 fail the quality gate |
 | Python/PyTorch/uv and shared-machine care | Locked environment, bounded memory, resumable training, measured GB10 operation | Implemented and verified; CPU restart equivalence and GB10 runs pass |
 | Diary, concise README, detailed docs | Current reproducible commands, experiment records and limitations | Present and being updated; comparator reports include native exact-GT synthetic triplets and independently labeled real references, matched foliage/fence, source/checkpoint hashes and noise/display settings |
@@ -48,8 +48,12 @@ V34/V36 first1000 and full427/full102MP reviews are complete and stopped.
 [Nine public RAW samples](public-raw-pilot.md) retain their original quarantine.
 Six reviewed sources have a separate opt-in native extension; the chart and two
 clipped sources are excluded. Current architecture trials remain unchanged.
-All **343 tests pass**; Ruff passes. Trained quality, protected-final evaluation
-and the 10-second speed gate remain outstanding.
+The complete CUDA suite passed **343 tests** before optional DINO adaptation.
+Its nine dedicated CPU tests and genuine-weight fixture now pass; the complete
+352-test CUDA run and full-model adapter checks are queued after the current
+batch sweep. [Queue receipt](results/dino-lora-gpu-checks-queue-v1.json).
+Trained quality, protected-final evaluation and the 10-second speed gate remain
+outstanding.
 
 
 The [packed-resolution prototype](packed-rgb.md) retains all Bayer phases,
@@ -83,6 +87,17 @@ The [V43 recipe](../configs/dino-anchored-native-diverse-b16-v43.yaml) changes
 only this native dataset against V37/V39; it retains full-resolution/precision
 policy and other data. The first1000 training/full-review workflow is complete;
 data admission and training loss alone do not establish a quality gain.
+
+The [matched continuation to step2000](native-corpus-2k-review.md) is complete.
+All 65 shared logged Commons/paired observations match. Its 30 native triplets
+and six full RGB16 outputs are verified. V43 improves photographic and unseen
+primary means versus its first gate, but regresses on low-noise procedural
+sources and unseen AHD SSIM. All three arms stop at this gate pending failure
+analysis. The README uses its photographic experimental checkpoint, with the
+first1000 alias retained. A new batch sweep measures the actual current
+4× Commons/native128 path before queued adapter GPU checks. The
+[fresh DINO presence/absence trial](fresh-dino-ablation.md) is prepared; the
+[low-rank option](dino-low-rank-adaptation.md) is CPU-verified, not quality-trained.
 The [completed V43 first-gate review](native-v43-1k-review.md) now finds modest
 positive unseen-primary/photo gains versus both matched controls. All33 logged
 shared Commons/paired hashes match; ten native triplets and both full RGB16 files
