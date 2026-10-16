@@ -69,3 +69,9 @@ the four fixed GFX contexts and two serialized exact-GT observations. It include
 ten native PNGs, four retained float predictions, and identical noisy/reference
 pixels. Outputs remain close and fine detail still fails; no model is promoted.
 The B/full-suite/analytic/full-frame review remains pending.
+
+An [independent saved-score audit](fresh-dino-statistics-audit.md) is ready for
+the completed results. It has actually rebuilt the historical 3,000-step panel:
+100,528 case rows and 336 paired comparisons match the published arithmetic to
+within 1.5e-14. The 10,000-step mode rejects the still-incomplete workflow before
+writing a result; final 10,000 statistics have not been checked yet.

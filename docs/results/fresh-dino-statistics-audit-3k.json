@@ -1,0 +1,129 @@
+{
+  "scope": "Arithmetic and case-coverage audit of completed 3000-step results; no new model inference, visual review or quality selection.",
+  "execution": {
+    "scope": "Independent saved-score coverage and arithmetic audit only; no inference, pixel/GT-definition validation, speed result, training-repeat uncertainty or model selection.",
+    "steps": 3000,
+    "workflow": "/mnt/external/demosaic/runs/fresh-dino-capacity-3k-workflow.json",
+    "workflow_sha256": "bc2cecdb695bc0227f6f080a5d8d472a74d10cc1cd402de4f6d41d871e2e2fc9",
+    "results": {
+      "photo": {
+        "cases": 99232,
+        "sources": 443,
+        "methods": 8,
+        "nullable_metric_cases": {
+          "highlight_boundary_chroma_mae": 36288,
+          "highlight_boundary_rgb_mae": 36288,
+          "shadow_linear_psnr": 4800
+        },
+        "group_rows": 448,
+        "overall_rows": 16,
+        "paired_comparisons": 168,
+        "max_absolute_arithmetic_difference": 1.4210854715202004e-14
+      },
+      "known": {
+        "cases": 576,
+        "scenes": 4,
+        "pairs": 8,
+        "crops_per_method": 72,
+        "methods": 8,
+        "group_rows": 64,
+        "overall_rows": 8,
+        "paired_comparisons": 84,
+        "max_absolute_arithmetic_difference": 7.105427357601002e-15
+      },
+      "unseen": {
+        "cases": 720,
+        "scenes": 5,
+        "pairs": 10,
+        "crops_per_method": 90,
+        "methods": 8,
+        "group_rows": 80,
+        "overall_rows": 8,
+        "paired_comparisons": 84,
+        "max_absolute_arithmetic_difference": 1.4210854715202004e-14
+      }
+    },
+    "inputs": {
+      "photo": {
+        "summary.json": "102be180b1fa5b59c4a6b65b82b6ce97b634aabe0434aae5d9a9a20036899772",
+        "per-image.jsonl": "4bbb2487da025966b375b4a6a2c2d74dae445298699f560820965cbb886b02ad"
+      },
+      "known": {
+        "summary.json": "ac24b5fd48ac9fe949a5e0a9f8e719d601dc8438620fdbc58a7ee2a3f981beda",
+        "per-crop.jsonl": "45177fc29ae01f877aefabf3719c0e12857cab1439b7c1f2b4511012134bd837"
+      },
+      "unseen": {
+        "summary.json": "b363cc4cb49d61232de06d0591ecbb63a386032653ee7059b4e1e24620a70b20",
+        "per-crop.jsonl": "2be302888bc0bc6cd8742104ad774cb34c3d341a894ef56b9f6ff8ef46b1ea39"
+      }
+    },
+    "driver_sha256": "942a29aa967ba4e5615b0e9c90c92ee0ec4bc191887c2f3d7ab16f5a6e45296b",
+    "production_aggregation_imported": false,
+    "resampling": "1000 paired source/scene bootstrap resamples, seed42, percentile95 interval; matches current declared procedure."
+  },
+  "execution_receipt": "/mnt/external/demosaic/evaluation/fresh-dino-statistics-audit-3k-v3/receipt.json",
+  "execution_receipt_sha256": "9a7a689585b2ddfaf6c4edb5d6273b71796bde3c26c1108067163d99825e1cc4",
+  "negative_checks": {
+    "auditor_sha256": "942a29aa967ba4e5615b0e9c90c92ee0ec4bc191887c2f3d7ab16f5a6e45296b",
+    "driver_sha256": "5a8d2d3f65c0b838add14e329b301b6a3d9b67825d5687dbc81cc1587451f52e",
+    "based_on": "/mnt/external/demosaic/evaluation/paired-known-fresh-dino-capacity-3k",
+    "negative_checks": [
+      {
+        "case": "duplicate-observation",
+        "rejected": true,
+        "reason": "Duplicate observation: ('Bilinear', 'real', '2pilesofplates:4598b6cf16bb2e85743800c63e7ae6fcc821c3ec768e7959c5fb8fd61dfe8ed1:160:160', '4598b6cf16bb2e85743800c63e7ae6fcc821c3ec768e7959c5fb8fd61dfe8ed1', 'RGGB')"
+      },
+      {
+        "case": "missing-observation",
+        "rejected": true,
+        "reason": "Observation coverage mismatch: missing=1, extra=0"
+      },
+      {
+        "case": "missing-primary-metric",
+        "rejected": true,
+        "reason": "Missing core metric: ('Bilinear', 'real', '2pilesofplates:4598b6cf16bb2e85743800c63e7ae6fcc821c3ec768e7959c5fb8fd61dfe8ed1:160:160', '4598b6cf16bb2e85743800c63e7ae6fcc821c3ec768e7959c5fb8fd61dfe8ed1', 'RGGB') sensor_psnr"
+      },
+      {
+        "case": "altered-overall-mean",
+        "rejected": true,
+        "reason": "Summary mismatch: (('0:control-anchored-native-fresh-b16-v45:step-3000', 'real'), 'sensor_psnr'): 0.0010000000000047748"
+      },
+      {
+        "case": "altered-bootstrap-interval",
+        "rejected": true,
+        "reason": "Summary mismatch: ('0:control-anchored-native-fresh-b16-v45:step-3000', '1:dino-anchored-native-fresh-b16-v44:step-3000', 'real', 'sensor_psnr', 'interval'): 0.0010000000000000009"
+      },
+      {
+        "case": "empty-bootstrap-interval",
+        "rejected": true,
+        "reason": "Invalid bootstrap interval length"
+      },
+      {
+        "case": "missing-paired-comparison",
+        "rejected": true,
+        "reason": "Missing paired comparisons"
+      },
+      {
+        "case": "method-dependent-missing-optional-metric",
+        "rejected": true,
+        "reason": "Metric validity differs between methods: ('photo', '0014aa4e075b1827f91ef8a02069e1e318f040ba', 'adc-only', 'RGGB')"
+      },
+      {
+        "case": "incomplete-live-10000-workflow",
+        "rejected": true,
+        "output_created": false
+      }
+    ],
+    "torch_imported": false
+  },
+  "negative_checks_receipt": "/mnt/external/demosaic/evaluation/fresh-dino-statistics-audit-3k-v3/negative-checks.json",
+  "negative_checks_sha256": "d011e83e2e6992a43c54a648f386f23e2e91a1836142f983320c6eede1b0c374",
+  "archived_source": "/mnt/external/demosaic/evaluation/fresh-dino-statistics-audit-3k-v3/source",
+  "existing_quality_and_native_review": "docs/fresh-dino-capacity-3k-review.md",
+  "max_arithmetic_difference": 1.4210854715202004e-14,
+  "total_saved_case_rows_verified": 100528,
+  "total_paired_comparisons_verified": 336,
+  "production_code_changed": false,
+  "cuda_work_started": false,
+  "promoted": false
+}
