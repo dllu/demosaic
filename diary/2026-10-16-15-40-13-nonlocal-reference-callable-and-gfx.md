@@ -37,3 +37,14 @@ Sources/ROI/checkpoint/noise/exposure and exact source snapshots are retained.
 Details:docs/nonlocal-reference-integration.md. The mature V58 review,new4x
 completion,CUDA reference checks,broad real superiority/protected-final scores
 and10-second speed gate remain open. V43 README crops stay fixed.
+
+Committed/pushed06e6133 and froze that source in a detached worktree. Queued
+controller1016386(creation1792191000.07) waits for actual V58 owner exit plus its
+successful terminal status. Only then may it run all509 CUDA tests,genuine native
+CPU/CUDA checks and full development/GFX/three-camera reference evaluation.
+Both queued process and GPU owner are confirmed live; no new GPU child exists.
+The live-owner guard was actually exercised(exit2,noCUDA/output). The first
+queue launcher exited before creating output because a symlink alias was used
+as a resolved dictionary key; it was corrected to pin/recheck the alias path,
+and that failed pre-output attempt/log is retained. No duplicate queue runs.
+Launch provenance:docs/results/nonlocal-reference-full-launch.json.

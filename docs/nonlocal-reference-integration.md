@@ -66,6 +66,16 @@ operator forward/gradients, actual author-network CPU/GPU agreement and enclosin
 autocast behavior. Its live-owner rejection was exercised successfully before
 any CUDA initialization or output creation. It has not yet run GPU numerics.
 
+The [source-pinned full workflow](results/nonlocal-reference-full-launch.json)
+is now queued in detached `06e6133`. Controller1016386
+(creation1792191000.07) waits for V58 controller601329's actual exit and its
+successful terminal evaluation status. It then requires all509 CUDA tests and
+the numerical preflight before full427+16 procedural, known4/unseen5, analytic,
+full102MP GFX and three cached personal-camera comparisons. The queue process
+and preceding owner were both confirmed live; no reference GPU child or output
+exists yet. Its final status will still require manual/statistical/native review.
+No training, current recipe or protected-final scoring changes.
+
 The same two high-noise synthetic observations retain exact simulated GT.
 These native triplets are reproduced unchanged by the callable: RGGB,
 shot .00256/read variance .0000262144, WB[2,1,1.5], original matrix and
