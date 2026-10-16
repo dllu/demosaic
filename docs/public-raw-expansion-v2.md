@@ -125,3 +125,6 @@ Commons, original 8× validation and full-resolution CNN/precision policy. Only
 the native dataset changes. V42's inference precision export is separate.
 Stop after 1000 updates for known/unseen, full 427-photo/procedural and full 102 MP GFX
 review with native crops; shared logged Commons/paired hashes must match.
+The [completed first-gate review](native-v43-1k-review.md) verifies all 33 shared
+logged observations and finds modest unseen/photo gains. It adopts the larger
+corpus for further training; broad RawNIND superiority remains unproven.

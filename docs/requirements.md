@@ -11,7 +11,7 @@ not just software that executes. This checklist records the evidence required.
 | Geometry, optical blur, exposure, synthetic fine detail | Executable data augmentation and inspected samples | Implemented. Complete 4×→geometry/PSF→2× Commons/native targets improve full-photo PSNR by .50990 dB in the matched V34 trial; original 8× validation remains fixed |
 | Physical Bayer noise across cameras and ISO | Electron-domain Poisson/read noise, metadata and tests | Moment-tested simulation, conservative single-image estimates on three cameras; dedicated calibration still missing |
 | 16-bit photos and personal cameras | Native RAW metadata/CFA handling, 16-bit output, read-only photo source, real-camera examples | All four cameras loaded; GFX100S 102 MP RGB16 outputs and other-camera crops verified; final quality pending |
-| State-of-the-art quality, substantially better than RawNIND | Reproducible held-out numerical results and qualitative comparisons, including clipping boundaries, texture and shadows | Unmet. V34 first1000 full427 synthetic PSNR/SSIM is 34.46662/.954201, +.50990 dB versus its matched old-order control. Expanded V36 has a similar photo mean but weaker procedural/unseen means. Real primary changes are small and uncertain; channel-calibrated RawNIND leads unseen auxiliary RGB/SSIM. GFX foliage remains soft and colored points remain despite more legible wire mesh. [Matched metrics and native crops](geometry-corpus-v34-v36-review.md). Protected-final remains unscored; matched DINO ablation of this architecture remains |
+| State-of-the-art quality, substantially better than RawNIND | Reproducible held-out numerical results and qualitative comparisons, including clipping boundaries, texture and shadows | Unmet. [V43](native-v43-1k-review.md) reaches full427 34.70399/.955576 and gains .04984dB unseen primary versus matched V37. Known primary is slightly lower with interval crossingzero; V34 parent still has a higher unseen primary mean with uncertain difference. V43 approximately ties channel-calibrated RawNIND unseen auxiliary RGB/SSIM. Fine foliage/fabric remains soft. V43 is the current experimental reference; broad superiority, protected-final scoring and a current-architecture trained DINO ablation remain |
 | 100 MP possible, target <10 s on GB10 | Actual 100 MP run, memory and timing; quality takes priority if speed misses | Full 102 MP RGB16/ICC outputs are independently verified for retained models and rejected packed variants. V42 is an unchanged-tensor V37 inference export with explicit hidden autocast; its complete quality/native-crop and repeated full-frame timing evidence is in the [review](hidden-autocast-v42-review.md). The 10-second target remains unmet. Packed V38/V40/V41 fail the quality gate |
 | Python/PyTorch/uv and shared-machine care | Locked environment, bounded memory, resumable training, measured GB10 operation | Implemented and verified; CPU restart equivalence and GB10 runs pass |
 | Diary, concise README, detailed docs | Current reproducible commands, experiment records and limitations | Present and being updated; comparator reports include native exact-GT synthetic triplets and independently labeled real references, matched foliage/fence, source/checkpoint hashes and noise/display settings |
@@ -81,5 +81,11 @@ content and overlap review, and preserves the prior 53+6 targets. Both 4×/8×
 datasets are frozen separately with exact source/cache/admission identities.
 The [V43 recipe](../configs/dino-anchored-native-diverse-b16-v43.yaml) changes
 only this native dataset against V37/V39; it retains full-resolution/precision
-policy and other data. First1000 training/full-review workflow is active;
-data admission and training loss do not establish a quality gain.
+policy and other data. The first1000 training/full-review workflow is complete;
+data admission and training loss alone do not establish a quality gain.
+The [completed V43 first-gate review](native-v43-1k-review.md) now finds modest
+positive unseen-primary/photo gains versus both matched controls. All33 logged
+shared Commons/paired hashes match; ten native triplets and both full RGB16 files
+verify. The larger native corpus becomes the next data recipe and V43 the current
+experimental reference, with the parent-primary tradeoff and single-seed limits
+explicit. The stable first-gate model alias and README crops are updated.
