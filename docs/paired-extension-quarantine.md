@@ -131,3 +131,8 @@ acquisition and screening receipts.
 The [paired loader's review contract](paired-training-admission.md) is ready
 and defaults closed. Its registry stays empty until native review is complete;
 quarantine preparation alone cannot enable training.
+
+The [measured-residual diagnostic](paired-target-residuals.md) now checks the
+original training set and two-scene pilot. Most supported pairs have low lag
+correlation, but selected cases show structure requiring closer native review.
+It does not alter targets or automatically admit/reject sources.
