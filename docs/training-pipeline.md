@@ -167,8 +167,8 @@ frozen 8× manifest. This is a single-seed pilot, not convergence evidence.
 
 | Commons train corpus | Existing 8× augmentation | 4× → geometry/PSF → 2× |
 | --- | --- | --- |
-| 40,170 sources | V32: first 1k reviewed, continuing to 2k | [V34](../configs/dino-anchored-pre-downsample-b16-v34.yaml): gated, not started |
-| 41,978 sources | [V35](../configs/dino-anchored-expanded-b16-v35.yaml): first 1k reviewed, continuing to 2k | [V36](../configs/dino-anchored-expanded-pre-downsample-b16-v36.yaml): gated, not started |
+| 40,170 sources | V32: first1k/2k reviewed, stopped | [V34](../configs/dino-anchored-pre-downsample-b16-v34.yaml): first1k complete, review pending |
+| 41,978 sources | [V35](../configs/dino-anchored-expanded-b16-v35.yaml): first1k/2k reviewed, stopped | [V36](../configs/dino-anchored-expanded-pre-downsample-b16-v36.yaml): training |
 
 The geometry change applies to both Commons and native synthetic targets;
 registered paired RAW keeps its exact sensor-phase transforms. The corpus change
@@ -183,7 +183,12 @@ membership and attribution.
 [V35's first review](expanded-v35-1k-review.md) finds +.04306 dB unseen primary
 PSNR versus V32 (95% scene interval[+.00727,+.07886]) and −.06106 dB on the
 16-photo synthetic screen. No decisive GFX visual gain is established. Both
-continue only to the next matched step 2000 review with their existing schedules.
+have now completed [the matched step2000 gate](corpus-v32-v35-2k-review.md) and
+stopped. At2k the expanded arm improves known means but trails V32 on unseen
+means; its own unseen primary mean falls .10983dB versus its first1k. All51
+logged paired/native hashes match across82 observations per arm. Full427 and
+full102MP checks are running separately. The [gain diagnostic](paired-bias-v35.md)
+does not support adding an input-only gain correction to this model.
 [Startup/runtime identities and rebin implementation](results/commons-augmentation-pilot-startup.json)
 are retained; V35's report records its frozen first 1k weights separately.
 
@@ -191,3 +196,32 @@ are retained; V35's report records its frozen first 1k weights separately.
 stopped: better unseen primary PSNR versus its first 1k, mixed rendered scores,
 and a lower photographic screen mean. It does not replace these matched controls.
 The rebin/merge guards bring validation to **271 passing tests**.
+
+The [preparation worker sweep](commons-download.md#preparation-workers) selects
+eight workers for the remaining base4× preparation, reusing26,314 finished
+caches. New-source4× preparation is complete (1,808 train, no failures). Its
+merge waits for the full base audit. The detached V34/V36 workflow waited
+for the current full quality review to finish before either trainer starts,
+checks exact original source memberships and source-module bytes, and retains
+the same initializer/schedule. The source bundle hash also includes the native
+manifest, so the4× versus8× hashes intentionally differ in that data file;
+code files, validation and paired sources must match exactly. Logged paired
+draws must match V32; native draws must match between V34/V36. Public RAW
+candidates remain outside these recipes. Current validation passes **279 tests**.
+
+
+Both [complete4× corpora](results/commons-four-complete.json) are now frozen,
+with40,170/41,978 training sources and unchanged2,303/2,255 validation/test
+membership. V34 started on2026-10-16 at02:53:56UTC; V36 follows sequentially.
+The preflight verified source-module bytes and the initializer against V32;
+all12 logged paired batches through step625 match. The new source-bundle SHA is
+`15af15b4c3e817599e54d1e3995dbd95f9f14213dace0e3a7735985cef8300ea`;
+its native4× manifest is the intended data-file difference from the8× control.
+The full V32/V35 review is also complete: V32-2k gains.06767dB over its first1k
+on all427 photos, while the expanded arm trails it by.12055dB. Full-frame
+RGB16/ICC outputs and both RawNIND calibrations are verified. Small screens did
+not predict the continuation gains; use the [full report](corpus-v32-v35-2k-review.md).
+
+
+Status at2026-10-16 03:10UTC: V34 completed first1000 updates; V36 is training.
+Both will receive matched development and full427/full-frame GFX reviews.

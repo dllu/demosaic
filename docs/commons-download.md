@@ -95,7 +95,7 @@ augmentation before the last reduction.
 
 ## Reuse the 4× base when extending the corpus
 
-`scripts/rebin_commons_extension.py prepare` is now preparing only the **1,808
+`scripts/rebin_commons_extension.py prepare` prepared only the **1,808
 admitted new training sources** at 4×, with one worker. It does not decode or copy
 the old corpus. Its archived implementation and frozen selection are under
 `/mnt/external/demosaic/commons-extension-20261016-bin4-v1/`; progress is in
@@ -127,10 +127,10 @@ uv run --no-sync python scripts/rebin_commons_extension.py freeze \
   --output "$COMMONS_EXT4"
 ```
 
-An owned detached workflow waits on the live base-freezer process before the
-second command. Its final path will be
+The owned detached workflow waited on the base-freezer process before the
+second command. Its final path is
 `/mnt/external/demosaic/commons-extension-20261016-bin4-v1/audit/manifest.jsonl`;
-this combined corpus is **not ready yet**. Current trials do not use partial data.
+this combined corpus is **complete and frozen**. Current trials do not use partial data.
 Eleven new preparation/merge tests pass; the full suite passes **271 tests in
 40.91s**, with Ruff passing. [The matched data/augmentation recipes](training-pipeline.md#matched-corpus-and-augmentation-pilot)
 keep validation on the original 8× selection.
@@ -139,3 +139,57 @@ Four actual new-source precision checks compare unaugmented 4×→2× averaging
 against their independently prepared direct 8× caches: maximum difference is
 one uint16 code. This checks cache precision before geometry, not trained-model
 quality. [Selection, code hashes and precision checks](results/commons-augmentation-pilot-startup.json).
+
+## Preparation workers
+
+A matched 48-source preparation sweep measures two shuffled repeats at 2/4/8
+workers, using warmed originals and fresh output directories. Timing includes
+decode/ICC conversion, linear binning, cache writing/checksums and publication;
+child import/startup is excluded. The existing two-worker full preparation stays
+live throughout. All 48 cache hashes match across all six cases.
+
+| Workers | Mean images/s | Two-run range | Peak process RSS GiB |
+| ---: | ---: | ---: | ---: |
+| 2 | 4.19 | 4.18–4.19 | .93 |
+| 4 | 7.56 | 7.48–7.64 | 1.23 |
+| 8 | **12.20** | 12.10–12.29 | 1.83 |
+
+This is about 2.91× preprocessing throughput on this small shared-machine sample,
+not a training-speed gain or a complete-corpus timing claim.
+[Full preparation sweep receipt](results/commons4-preparation-workers-v1.json).
+
+At 2026-10-16 02:27 UTC, the owned full preparation resumed with eight workers,
+reusing **26,314 published caches**. The frozen source selection/recipe is
+unchanged. Existing caches are header/checksum verified and reused; original
+photos are not decoded again for them. The old temporary ledger was archived
+before restart. The first handoff attempt returned before the freezer reached
+its stopped state and safely restored it; the corrected controller waits for
+that state before replacing the producer.
+
+Current log: `.cache/prepare-commons-bin4-full-workers8.log`; controller PID:
+`.cache/resume-prepare-workers8.pid`; state:
+`/mnt/external/demosaic/audits/commons-bin4-workers8-resume-v2/status.json`.
+The controller keeps the original freeze waiter stopped while the new producer
+runs, then resumes it in cleanup. The existing extension waiter follows that
+same process. Both complete source memberships still pass their normal freeze
+checks; no partial output enters training. The queued V34/V36 workflow waits for
+both audited manifests and the current GPU review before starting.
+
+
+Both complete4× manifests froze on2026-10-16 at02:53UTC. The base contains
+40,170 train/2,303 val/2,255 test; the extension contains41,978 train with the
+same val/test membership. Base SHA256:
+`22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3`.
+Expanded SHA256:
+`475052a7a63eefa7db785023a2b5fe9d4a69e99062dee9e5258c95364cf2bcfc`.
+All1,808 new caches completed with zero failures, and the full base completed
+with zero failures. The freeze waiter resumed and both exact-membership checks
+passed; every expanded4× cache header was checked against its metadata.
+[Complete freeze/selection/controller receipts](results/commons-four-complete.json).
+V34 now trains on the complete base4× manifest; V36 follows on the complete
+extension. Neither uses producer temporaries. The remaining18,414 uncached
+sources plus revalidation/publication took26m06s after the eight-worker resume.
+
+
+Status at2026-10-16 03:10UTC: V34 completed first1000 updates; V36 is training.
+Both will receive matched development and full427/full-frame GFX reviews.

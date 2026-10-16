@@ -81,8 +81,10 @@ visual gain is evident. All four regions and matched methods are retained in
 the receipt. PNG hashes/dimensions, shared source/ROI/noise/display metadata and
 identical noisy/reference panel bytes were checked.
 
-V32 and V35 both continue with their original schedules to step 2000 for a
-matched review. Neither arm changes geometry or data during continuation.
+V32 and V35 completed [the step2000 matched review](corpus-v32-v35-2k-review.md)
+with their original schedules. The expanded arm improves known-camera means,
+but its unseen primary mean declines versus first1k; both stop at this gate.
+Neither arm changed geometry or data during continuation.
 The [four-recipe pilot](training-pipeline.md#matched-corpus-and-augmentation-pilot)
 will test the new augmentation separately after the complete 4× manifests freeze.
 Protected-final remains unscored and the quality/speed goal remains open.

@@ -674,3 +674,37 @@ Both arms continue to their matched step 2000 gate. V34/V36 remain gated on full
 4× preparation. Only new admitted sources are
 rebinned for the extension; the complete base is reused without copying pixels.
 All 271 software tests pass; quality and speed goals remain open.
+
+The [completed V32/V35 step2000 gate](corpus-v32-v35-2k-review.md) has mixed
+tradeoffs: expanded-data known primary improves .04403dB over control, while
+unseen primary is .06561dB lower (interval crosses zero). V35's own unseen mean
+loses .10983dB versus first1k. All51 logged paired/native hashes match across82
+observations per arm; both stop. Full427 and full102MP checks are running. The
+[center-crop gain diagnostic](paired-bias-v35.md) does not support an input-only
+gain correction. The GFX tool can now compare both RawNIND calibrations with
+separate gain adapters sharing one upstream network.
+
+An actual [preparation-worker sweep](commons-download.md#preparation-workers)
+measures4.19/7.56/12.20images/s at2/4/8 workers, with identical cache hashes.
+The base4× producer resumed with eight workers, reusing26,314 caches; its full
+freeze gates remain. The augmentation matrix is queued after those audits and
+the current GPU review. [Nine CC0 public RAW samples](public-raw-pilot.md) decoded
+into separate4×/8× quarantine caches; eight natural scenes and one chart were
+inspected. They have not entered training. All279 tests pass; quality/speed and
+protected-final requirements remain open.
+
+
+Full427 continuation reverses the small-screen trend: V32 step2000 reaches
+34.02439/.950653, +.06767dB over its first1k, and V35 reaches33.90384/.950506,
++.06377dB over its first1k but.12055dB below V32-2k. Source-bootstrap intervals
+are in [the completed review](corpus-v32-v35-2k-review.md). Both full102MP neural
+outputs and both RawNIND calibrations passed all8 RGB16/ICC/hash checks, taking
+40.24/40.23/20.68/20.17s in shared runs with preprocessing active. Fine detail
+and the10-second target remain unresolved. The README uses V32-2k representatives.
+
+Complete base/expanded4× manifests froze at02:53UTC, with44,728/46,536 active
+sources and exact audited memberships; no failures. V34 is now training with
+geometry/PSF before final2× reduction, with V36 queued next. Source modules/init
+are byte-identical to the original controls; all12 logged paired observations
+through step625 match. New public RAWs remain quarantine and do not change these
+trials. Tests279 pass; the overall quality/speed goal remains open.

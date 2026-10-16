@@ -33,6 +33,8 @@ def main():
     torch.set_num_threads(4)
     output = writable_path(args.output)
     output.mkdir(parents=True, exist_ok=True)
+    if (output / "result.json").exists():
+        raise ValueError("Choose a new diagnostic directory")
     frozen, digest = freeze_checkpoint(args.checkpoint, output / "weights")
     model, state = load_checkpoint(frozen, "cuda")
     model.eval().to(memory_format=torch.channels_last)
@@ -73,10 +75,17 @@ def main():
             reference.input_scale = packed.new_tensor(
                 publisher_input_scale(meta["white_levels"], meta["black_levels"], adc)
             )
+            # Stabilized models require the actual shot/read profile, not only
+            # the per-pixel variance map supplied to older model generations.
+            if hasattr(model, "set_noise"):
+                model.set_noise(case["conditioning"]["shot"], case["conditioning"]["read"])
             with amp_context("cuda", dtype="float16"):
                 prediction = model(packed, variance, colors, wb, matrix)
             with amp_context("cuda", dtype="float32"):
+                reference.gain_mode = "cfa-ls"
                 baseline = reference(packed, variance, colors, wb, matrix)
+                reference.gain_mode = "cfa-channel"
+                channel_baseline = reference(packed, variance, colors, wb, matrix)
             sampled = mosaic(prediction, colors)
             valid = (packed >= 0) & (packed < 0.98)
             products = sampled * packed * valid
@@ -93,7 +102,8 @@ def main():
                 ("Model", prediction),
                 ("Model:gain", prediction * gain),
                 ("Model:channel-gain", prediction * gains[None, :, None, None]),
-                ("RawNIND", baseline),
+                ("RawNIND:global", baseline),
+                ("RawNIND:channel", channel_baseline),
             ]:
                 trim = (..., slice(32, -32), slice(32, -32))
                 p, target, mask = (
@@ -135,12 +145,15 @@ def main():
                         ).item(),
                         "input_only_global_gain": gain.item(),
                         "input_only_channel_gains": gains.tolist(),
+                        "conditioning": case["conditioning"],
                     }
                 )
     result = {
         "checkpoint_sha256": digest,
         "checkpoint_step": state["step"],
         "checkpoint_run": state["config"]["run"],
+        "checkpoint_snapshot": str(frozen),
+        "diagnostic_source_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "rawnind_weight_sha256": hashlib.sha256(
             (args.rawnind / "utnet2-bayer.pt").read_bytes()
         ).hexdigest(),

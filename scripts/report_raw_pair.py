@@ -29,6 +29,28 @@ from demosaic.safety import writable_path
 from demosaic.suite import freeze_checkpoint
 
 
+def rawnind_comparators(directory, modes):
+    """Separate gain adapters share the same immutable upstream network weights."""
+    labels = {"cfa-ls": "RawNIND:CFA-LS", "cfa-channel": "RawNIND:CFA-channel"}
+    modes = list(dict.fromkeys(modes))
+    first = load_rawnind(directory, gain_mode=modes[0], device="cuda")
+    digest = hashlib.sha256((directory / "utnet2-bayer.pt").read_bytes()).hexdigest()
+    models, receipts = [], []
+    for index, mode in enumerate(modes):
+        adapter = first if index == 0 else RawNind(first.network, gain_mode=mode)
+        adapter.eval()
+        models.append((labels[mode], adapter, "float32"))
+        receipts.append(
+            {
+                "label": labels[mode],
+                "gain_mode": mode,
+                "precision": "IEEE float32",
+                "sha256": digest,
+            }
+        )
+    return models, receipts
+
+
 @torch.inference_mode()
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -36,6 +58,13 @@ def main():
     parser.add_argument("checkpoint", type=Path, nargs="+")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--rawnind", type=Path)
+    parser.add_argument(
+        "--rawnind-gain-modes",
+        nargs="+",
+        choices=("cfa-ls", "cfa-channel"),
+        default=["cfa-ls"],
+        help="Input-only calibration variants; defaults to the historical global CFA-LS",
+    )
     parser.add_argument("--gaussian-reference", type=Path)
     parser.add_argument("--precision", choices=COMPUTE_DTYPES, default="float16")
     parser.add_argument("--refinement-precision", choices=REFINEMENT_DTYPES, default="float32")
@@ -77,22 +106,9 @@ def main():
         )
         del state
     if args.rawnind:
-        models.append(
-            (
-                "RawNIND:CFA-LS",
-                load_rawnind(args.rawnind, gain_mode="cfa-ls", device="cuda"),
-                "float32",
-            )
-        )
-        weights.append(
-            {
-                "label": "RawNIND:CFA-LS",
-                "precision": "IEEE float32",
-                "sha256": hashlib.sha256(
-                    (args.rawnind / "utnet2-bayer.pt").read_bytes()
-                ).hexdigest(),
-            }
-        )
+        references, receipts = rawnind_comparators(args.rawnind, args.rawnind_gain_modes)
+        models.extend(references)
+        weights.extend(receipts)
     if args.gaussian_reference:
         gaussian = load_gaussian_prior(args.gaussian_reference, device="cuda", archive=output)
         models.append((gaussian.receipt["label"], gaussian, "float32"))

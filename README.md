@@ -3,36 +3,36 @@
 Joint Bayer demosaicing and denoising in linear camera RGB, with 16-bit TIFF
 output, physical noise conditioning, tiled inference, and an optional DINOv3
 feature branch. Experimental: training and quality validation are in progress.
-The [latest matched review](docs/low-lr-paired-v32-v33-review.md) finds a gain
-across 427 synthetic-noise photographs for V32 and higher rendered real-photo scores for V33,
-with remaining detail loss and a measured-CFA tradeoff. Quality work continues;
+The [latest matched review](docs/corpus-v32-v35-2k-review.md) finds a further gain
+across 427 synthetic-noise photographs for V32 and mixed results from more data,
+with remaining real-camera detail/SSIM deficits. Quality work continues;
 state-of-the-art performance is not established.
 
-Native 160×160 validation crops: noisy → denoised → GT, using V32 step1000
+Native 160×160 validation crops: noisy → denoised → GT, using V32 step2000
 (FP16, ISO12800 synthetic noise prior). These are 100% crops at the 8×8-binned
 evaluation resolution, with identical display transforms; open the PNG at 100%.
 They illustrate current behavior, including lost fine detail.
 
-![Noisy, denoised and GT: fabric detail](docs/images/v32-v33-1k-full427-v32-0014aa4e.png)
+![Noisy, denoised and GT: fabric detail](docs/images/corpus-2k-full427-v32-2k-0014aa4e.png)
 
-![Noisy, denoised and GT: building and sky](docs/images/v32-v33-1k-full427-v32-002fc6ee.png)
+![Noisy, denoised and GT: building and sky](docs/images/corpus-2k-full427-v32-2k-002fc6ee.png)
 
 Sources: [Roy Egloff](https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg)
 and [Dietmar Rabich](https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg),
 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); modified by binning,
-cropping, simulated noise and restoration. See [the performance review and crop receipts](docs/low-lr-paired-v32-v33-review.md)
+cropping, simulated noise and restoration. See [the performance review and crop receipts](docs/corpus-v32-v35-2k-review.md)
 and [real GFX100S crops](docs/gfx-qualitative.md).
 
 Real GFX100S foliage and chain-link-fence crops at native 160×160 sensor resolution:
-DSCF3879 noisy ISO6400 → experimental V33 step1000 → DSCF3880 ISO100 f/5.6,
+DSCF3879 noisy ISO6400 → experimental V32 step2000 → DSCF3880 ISO100 f/5.6,
 with shared +2 EV display, cropped from the full 102 MP output.
 This closer pair is now the standing test. Framing is nearly identical, 3m38s
 apart; aperture and moving subjects differ, so the last panel is a qualitative
-reference, **not GT**. [All four regions and matched comparisons](docs/low-lr-paired-v32-v33-review.md).
+reference, **not GT**. [All four regions and matched comparisons](docs/corpus-v32-v35-2k-review.md).
 
-![GFX foliage: noisy, denoised and separate low-ISO reference](docs/images/v32-v33-1k-gfx-full-v33-foliage.png)
+![GFX foliage: noisy, denoised and separate low-ISO reference](docs/images/corpus-2k-gfx-full-v32-2k-foliage.png)
 
-![GFX fence: noisy, denoised and separate low-ISO reference](docs/images/v32-v33-1k-gfx-full-v33-chain-link-fence.png)
+![GFX fence: noisy, denoised and separate low-ISO reference](docs/images/corpus-2k-gfx-full-v32-2k-chain-link-fence.png)
 
 ```bash
 source scripts/env.sh

@@ -123,3 +123,11 @@ compression modes imperfectly; verify actual Bayer geometry and bit depth.
 Camera samples may overlap the user's own contributed/public photos or existing
 protected scenes. A checksum and scene/near-duplicate audit must precede any
 new training manifest. These candidates do not change the matched V24/V25 data.
+
+The subsequent [public RAW pilot](public-raw-pilot.md) has now acquired and
+decoded nine checksum-pinned CC0 samples into separate4×/8× quarantine caches.
+Eight show landscapes/architecture; one color-chart sample is omitted from the
+proposed photographic subset. No source identity or near-duplicate matches were
+flagged in the documented checks, with stated scene-screen limitations. This is
+not yet training admission and changes none of the53-source native targets used
+by V32/V34/V35/V36.

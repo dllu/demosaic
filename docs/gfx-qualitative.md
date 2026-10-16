@@ -127,3 +127,11 @@ All eight V30/V32/V33/RawNIND RGB16 files were verified. V32/V33 took35.42/35.77
 in that successive shared-machine run; foliage remains soft and mesh irregular.
 The README now shows the V33 foliage/fence triplets. ISO100 remains a separate
 qualitative reference, not GT.
+
+`report_raw_pair.py --rawnind-gain-modes cfa-ls cfa-channel` can now include
+both input-only RawNIND calibrations, with separate gain adapters sharing the
+same upstream weights. The default remains the historical global CFA-LS.
+Receipts record each gain mode and the common weight hash. The new full102MP
+V32/V35 step2000 review includes both variants; all eight full-frame RGB16 files
+are verified in the [completed review](corpus-v32-v35-2k-review.md). The README
+now shows V32-2k full-frame foliage/fence. Detail loss and colored points remain.
