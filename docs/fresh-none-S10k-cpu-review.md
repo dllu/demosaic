@@ -5,11 +5,17 @@ the fixed GFX crops, and both still lose fine fabric cords in the exact-GT
 example. These fixed examples do not establish a broad DINO benefit or justify
 replacing V43 in the README. [All ten new native PNGs, hashes and provenance](results/fresh-none-S10k-cpu-review.json).
 
-This is a small **CPU FP32 qualitative check** while DINO-B continues training.
+This initial **CPU FP32 qualitative check** ran while DINO-B continued training.
 It restores four cached 512×512 GFX contexts and two previously serialized
 256×256 synthetic observations. It does not produce a full-frame output,
 full-suite score or speed result. The [original matched trial](fresh-dino-capacity-10k.md)
-still requires B and the complete numerical/native/analytic/full-frame review.
+has now completed all three original schedules; its complete numerical/native/
+analytic/full-frame review remains pending.
+
+A later [matched 3k→10k replay with retained float predictions](fresh-color-mean-diagnostic.md)
+confirms a large fabric color/brightness regression in both arms. The building
+case has no comparable mean shift. This is a case-level finding rather than a
+broad quality claim; the full review remains necessary.
 
 ## Matched training and inputs
 
@@ -203,7 +209,9 @@ those predictions reproduces their displayed pixels byte exactly. Every shared
 noisy/reference panel and all direct-comparison pixels match their parents
 exactly. Synthetic noisy/GT panels also rerender exactly from the saved
 observations. The two new synthetic restored float arrays were not separately
-saved, so their restoration panels have no independent float rerender audit.
+saved in that initial execution. The later
+[color-residual replay](fresh-color-mean-diagnostic.md) now saves their float
+predictions and reproduces all four original 10k restoration panels exactly.
 
 The replay archives its production source and checkpoint snapshot; the artifact
 audit/publication driver is archived alongside them. No CUDA context was

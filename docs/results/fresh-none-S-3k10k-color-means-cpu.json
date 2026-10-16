@@ -1,0 +1,3249 @@
+{
+  "execution_report": "/mnt/external/demosaic/evaluation/fresh-none-S-3k10k-color-means-cpu-v1/report.json",
+  "execution_report_sha256": "254dc018977a6b3fd283fa52a2df1a49e1a9fb67faec6dead262830d422ed5d3",
+  "execution": {
+    "scope": "Matched two-source CPU replay: retain floats and quantify spatial mean error.\n\nNo output correction, target fitting, training or new noise draw. This is not\nan estimate of statistical estimator bias or a full-suite quality comparison.\n",
+    "models": [
+      {
+        "arm": "none",
+        "step": 3000,
+        "snapshot": "/mnt/external/demosaic/models/control-anchored-native-fresh-b16-v45-step3000.pt",
+        "sha256": "6f9948c361cda74a294ad0cc9db4718dfb3fe0a9cc5a4c1cc867e986e0a7eedf"
+      },
+      {
+        "arm": "none",
+        "step": 10000,
+        "snapshot": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/weights/weights-0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4.pt",
+        "sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4"
+      },
+      {
+        "arm": "S",
+        "step": 3000,
+        "snapshot": "/mnt/external/demosaic/models/dino-anchored-native-fresh-b16-v44-step3000.pt",
+        "sha256": "b6adac140926920d7faad223acf545f32904c41d6883ab982a1ac9d5bdce3312"
+      },
+      {
+        "arm": "S",
+        "step": 10000,
+        "snapshot": "/mnt/external/demosaic/evaluation/fresh-none-S10k-cached-cpu-v1/weights/weights-ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad.pt",
+        "sha256": "ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad"
+      }
+    ],
+    "float_predictions": [
+      {
+        "image": "none-3000-source-0-rgb-f32.npy",
+        "sha256": "325812b8d18a246931b9047a4af1ad80029147818e338763a634624dd06fe5f0",
+        "shape": [
+          1,
+          3,
+          256,
+          256
+        ],
+        "dtype": "float32",
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "model": {
+          "arm": "none",
+          "step": 3000,
+          "snapshot": "/mnt/external/demosaic/models/control-anchored-native-fresh-b16-v45-step3000.pt",
+          "sha256": "6f9948c361cda74a294ad0cc9db4718dfb3fe0a9cc5a4c1cc867e986e0a7eedf"
+        }
+      },
+      {
+        "image": "none-3000-source-1-rgb-f32.npy",
+        "sha256": "19fa62c2a2e17f589e0e250c4e1ba1959b2bc5ef8bd57d8aac6215b13b596d17",
+        "shape": [
+          1,
+          3,
+          256,
+          256
+        ],
+        "dtype": "float32",
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "model": {
+          "arm": "none",
+          "step": 3000,
+          "snapshot": "/mnt/external/demosaic/models/control-anchored-native-fresh-b16-v45-step3000.pt",
+          "sha256": "6f9948c361cda74a294ad0cc9db4718dfb3fe0a9cc5a4c1cc867e986e0a7eedf"
+        }
+      },
+      {
+        "image": "none-10000-source-0-rgb-f32.npy",
+        "sha256": "31ebaa48876e8a894e9d270e628ae2282abaf82517402fa819a90fd23b60f115",
+        "shape": [
+          1,
+          3,
+          256,
+          256
+        ],
+        "dtype": "float32",
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "model": {
+          "arm": "none",
+          "step": 10000,
+          "snapshot": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/weights/weights-0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4.pt",
+          "sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4"
+        }
+      },
+      {
+        "image": "none-10000-source-1-rgb-f32.npy",
+        "sha256": "9b4a6349ad3b0d9faf02ec29f5ed2fa090bf01d80c21723eb30fea927470ce1b",
+        "shape": [
+          1,
+          3,
+          256,
+          256
+        ],
+        "dtype": "float32",
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "model": {
+          "arm": "none",
+          "step": 10000,
+          "snapshot": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/weights/weights-0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4.pt",
+          "sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4"
+        }
+      },
+      {
+        "image": "S-3000-source-0-rgb-f32.npy",
+        "sha256": "7dea147bb0e3f2bf9b898ad34d72c95e0aa52a6fe1bb37f2768538675c192c45",
+        "shape": [
+          1,
+          3,
+          256,
+          256
+        ],
+        "dtype": "float32",
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "model": {
+          "arm": "S",
+          "step": 3000,
+          "snapshot": "/mnt/external/demosaic/models/dino-anchored-native-fresh-b16-v44-step3000.pt",
+          "sha256": "b6adac140926920d7faad223acf545f32904c41d6883ab982a1ac9d5bdce3312"
+        }
+      },
+      {
+        "image": "S-3000-source-1-rgb-f32.npy",
+        "sha256": "704f57c29458df7620574429af12bb2d48af7647e9a96a9093f09016629e1f61",
+        "shape": [
+          1,
+          3,
+          256,
+          256
+        ],
+        "dtype": "float32",
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "model": {
+          "arm": "S",
+          "step": 3000,
+          "snapshot": "/mnt/external/demosaic/models/dino-anchored-native-fresh-b16-v44-step3000.pt",
+          "sha256": "b6adac140926920d7faad223acf545f32904c41d6883ab982a1ac9d5bdce3312"
+        }
+      },
+      {
+        "image": "S-10000-source-0-rgb-f32.npy",
+        "sha256": "090b412abd38d3041c3f70deb787fa357d54ca7b52efe80b3f4a04499f1c19cc",
+        "shape": [
+          1,
+          3,
+          256,
+          256
+        ],
+        "dtype": "float32",
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "model": {
+          "arm": "S",
+          "step": 10000,
+          "snapshot": "/mnt/external/demosaic/evaluation/fresh-none-S10k-cached-cpu-v1/weights/weights-ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad.pt",
+          "sha256": "ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad"
+        }
+      },
+      {
+        "image": "S-10000-source-1-rgb-f32.npy",
+        "sha256": "fb5f9a57d6d91200f0d4ad429c2b9e86e9cbd1391a884a3115f4dd5622328883",
+        "shape": [
+          1,
+          3,
+          256,
+          256
+        ],
+        "dtype": "float32",
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "model": {
+          "arm": "S",
+          "step": 10000,
+          "snapshot": "/mnt/external/demosaic/evaluation/fresh-none-S10k-cached-cpu-v1/weights/weights-ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad.pt",
+          "sha256": "ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad"
+        }
+      }
+    ],
+    "measurements": [
+      {
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "model": {
+          "arm": "none",
+          "step": 3000,
+          "snapshot": "/mnt/external/demosaic/models/control-anchored-native-fresh-b16-v45-step3000.pt",
+          "sha256": "6f9948c361cda74a294ad0cc9db4718dfb3fe0a9cc5a4c1cc867e986e0a7eedf"
+        },
+        "scopes": {
+          "whole256": {
+            "roi_xywh": [
+              0,
+              0,
+              256,
+              256
+            ],
+            "camera_RGB_mean_error_unclipped": [
+              -0.0015212778792899617,
+              -0.00028645540639727545,
+              0.0008722410474943642
+            ],
+            "camera_RGB_MSE_unclipped": 3.790002982399728e-05,
+            "spatial_channel_mean_component_of_MSE": 1.0523825102684192e-06,
+            "spatial_channel_mean_component_fraction": 0.027767326705428575,
+            "spatially_centered_residual_MSE": 3.6847647313728865e-05,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.0017559753084905871,
+              -0.0002956336607184695,
+              -0.00017843736731737447,
+              0.00081395338723219
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -0.00033323131582319726,
+              -0.00018822477576298235,
+              0.00015135498410367987,
+              -2.353076755869099e-05
+            ],
+            "display_sRGB_mean_error": [
+              -0.001997856295456346,
+              0.0003156514099884565,
+              0.003424205963435059
+            ],
+            "scope": "Spatial decomposition of this residual, not expectation over noise/training. No output centering/correction is performed."
+          },
+          "metric-interior240": {
+            "roi_xywh": [
+              8,
+              8,
+              240,
+              240
+            ],
+            "camera_RGB_mean_error_unclipped": [
+              -0.0013613562627378744,
+              -0.0002983883503470259,
+              0.0009243667128358966
+            ],
+            "camera_RGB_MSE_unclipped": 3.842922709380926e-05,
+            "spatial_channel_mean_component_of_MSE": 9.322601005058311e-07,
+            "spatial_channel_mean_component_fraction": 0.02425914261117193,
+            "spatially_centered_residual_MSE": 3.749696699330343e-05,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.0015774428243371908,
+              -0.0003061956079977474,
+              -0.0002056519219330413,
+              0.0008745145943980898
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -0.00023741520822910268,
+              -0.00016051851230866672,
+              0.00019618467101736314,
+              2.1569710068097456e-05
+            ],
+            "display_sRGB_mean_error": [
+              -0.0017916006402510396,
+              0.00025160993829053053,
+              0.003640313378828817
+            ],
+            "scope": "Spatial decomposition of this residual, not expectation over noise/training. No output centering/correction is performed."
+          },
+          "native160": {
+            "roi_xywh": [
+              48,
+              48,
+              160,
+              160
+            ],
+            "camera_RGB_mean_error_unclipped": [
+              -0.0008933454093357795,
+              -0.0009096768851379977,
+              0.0011003278620395395
+            ],
+            "camera_RGB_MSE_unclipped": 4.216578806425988e-05,
+            "spatial_channel_mean_component_of_MSE": 9.454331532387285e-07,
+            "spatial_channel_mean_component_fraction": 0.022421806792699,
+            "spatially_centered_residual_MSE": 4.1220354911021153e-05,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.0011807670282905746,
+              -0.0009780344479111136,
+              -0.000755947016027676,
+              0.001035945558649649
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -3.791263445918958e-05,
+              2.173098827142894e-06,
+              -0.0001624066698917659,
+              0.00019564270860511712
+            ],
+            "display_sRGB_mean_error": [
+              -0.0013011449491750681,
+              -0.0006518248111245129,
+              0.004111788908108558
+            ],
+            "scope": "Spatial decomposition of this residual, not expectation over noise/training. No output centering/correction is performed."
+          }
+        },
+        "observation": {
+          "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "binned_source_tile_xywh": [
+            189,
+            3,
+            256,
+            256
+          ],
+          "binned_source_roi_xywh": [
+            237,
+            51,
+            160,
+            160
+          ],
+          "evaluation_tile_roi_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8",
+          "observation_sha256": "1a180a0ab7821e8d0bd5d735a4b84be541deacb974cb962836f9bf8389131f7d",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "arrays_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+          "noise_device": "cpu",
+          "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+        }
+      },
+      {
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "model": {
+          "arm": "none",
+          "step": 3000,
+          "snapshot": "/mnt/external/demosaic/models/control-anchored-native-fresh-b16-v45-step3000.pt",
+          "sha256": "6f9948c361cda74a294ad0cc9db4718dfb3fe0a9cc5a4c1cc867e986e0a7eedf"
+        },
+        "scopes": {
+          "whole256": {
+            "roi_xywh": [
+              0,
+              0,
+              256,
+              256
+            ],
+            "camera_RGB_mean_error_unclipped": [
+              -0.0002462683222123848,
+              -0.0005131392221992791,
+              -0.0010766508073722213
+            ],
+            "camera_RGB_MSE_unclipped": 0.00011444040001260082,
+            "spatial_channel_mean_component_of_MSE": 4.943789696332801e-07,
+            "spatial_channel_mean_component_fraction": 0.004319968905900757,
+            "spatially_centered_residual_MSE": 0.00011394602104296754,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.00037101104469331944,
+              -0.00015738204029536185,
+              -0.0007424313468375188,
+              -0.0010250733586793515
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -0.000292509234500183,
+              -5.657316468966195e-05,
+              -0.000339308995820832,
+              -0.0001268413296318105
+            ],
+            "display_sRGB_mean_error": [
+              0.0006083129942681979,
+              -3.1970571204254964e-05,
+              -0.001153202334583714
+            ],
+            "scope": "Spatial decomposition of this residual, not expectation over noise/training. No output centering/correction is performed."
+          },
+          "metric-interior240": {
+            "roi_xywh": [
+              8,
+              8,
+              240,
+              240
+            ],
+            "camera_RGB_mean_error_unclipped": [
+              -0.0002648679929337488,
+              -0.0004143388207603138,
+              -0.0010213574319584949
+            ],
+            "camera_RGB_MSE_unclipped": 0.00011209693001783146,
+            "spatial_channel_mean_component_of_MSE": 4.283342386288838e-07,
+            "spatial_channel_mean_component_fraction": 0.0038211058818537484,
+            "spatially_centered_residual_MSE": 0.00011166859577920259,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.0003657217831619598,
+              -0.00014882023413848502,
+              -0.0005595211453342585,
+              -0.0009749945154624761
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -0.0002732640090527975,
+              -6.054828317133677e-05,
+              -0.00027370897514582596,
+              -9.802718613804649e-05
+            ],
+            "display_sRGB_mean_error": [
+              0.0005380766844586729,
+              0.000101794990085408,
+              -0.0011404078176873453
+            ],
+            "scope": "Spatial decomposition of this residual, not expectation over noise/training. No output centering/correction is performed."
+          },
+          "native160": {
+            "roi_xywh": [
+              48,
+              48,
+              160,
+              160
+            ],
+            "camera_RGB_mean_error_unclipped": [
+              -0.00010386160743300566,
+              -0.0003323534145703544,
+              -0.0011830661772396977
+            ],
+            "camera_RGB_MSE_unclipped": 9.9034134160136e-05,
+            "spatial_channel_mean_component_of_MSE": 5.069638684678978e-07,
+            "spatial_channel_mean_component_fraction": 0.005119082150485088,
+            "spatially_centered_residual_MSE": 9.852717029166812e-05,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.000288145995755924,
+              -0.00025093214058699684,
+              -0.0002902155503429782,
+              -0.0009986311916439661
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -6.68762300349801e-05,
+              -5.6467699496085546e-05,
+              -0.00010158745513203726,
+              -9.2015588694494e-06
+            ],
+            "display_sRGB_mean_error": [
+              0.0011916036196037603,
+              0.00037569565235440644,
+              -0.0016406160798726433
+            ],
+            "scope": "Spatial decomposition of this residual, not expectation over noise/training. No output centering/correction is performed."
+          }
+        },
+        "observation": {
+          "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "binned_source_tile_xywh": [
+            195,
+            89,
+            256,
+            256
+          ],
+          "binned_source_roi_xywh": [
+            243,
+            137,
+            160,
+            160
+          ],
+          "evaluation_tile_roi_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf",
+          "observation_sha256": "dd2d0ceb311a5ad4e62e03b92e186873229c038f69bdb67ab2398e57cd9047ec",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "arrays_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+          "noise_device": "cpu",
+          "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+        }
+      },
+      {
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "model": {
+          "arm": "none",
+          "step": 10000,
+          "snapshot": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/weights/weights-0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4.pt",
+          "sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4"
+        },
+        "scopes": {
+          "whole256": {
+            "roi_xywh": [
+              0,
+              0,
+              256,
+              256
+            ],
+            "camera_RGB_mean_error_unclipped": [
+              -0.07394898643268427,
+              -0.01874352100718826,
+              -0.006426454345348541
+            ],
+            "camera_RGB_MSE_unclipped": 0.002375203052966034,
+            "spatial_channel_mean_component_of_MSE": 0.0019536904965403597,
+            "spatial_channel_mean_component_fraction": 0.8225362013157945,
+            "spatially_centered_residual_MSE": 0.0004215125564256746,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.07457934551495526,
+              -0.018658713905312957,
+              -0.018677177230348053,
+              -0.006349518725725138
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -0.00033323131582319726,
+              -0.00018822477576298235,
+              0.00015135498410367987,
+              -2.353076755869099e-05
+            ],
+            "display_sRGB_mean_error": [
+              -0.07718603251692091,
+              -0.008264952123303613,
+              8.403256883574581e-05
+            ],
+            "scope": "Spatial decomposition of this residual, not expectation over noise/training. No output centering/correction is performed."
+          },
+          "metric-interior240": {
+            "roi_xywh": [
+              8,
+              8,
+              240,
+              240
+            ],
+            "camera_RGB_mean_error_unclipped": [
+              -0.07608413830681204,
+              -0.019305311666461284,
+              -0.00637207449004712
+            ],
+            "camera_RGB_MSE_unclipped": 0.0024593238411601275,
+            "spatial_channel_mean_component_of_MSE": 0.00206736483124534,
+            "spatial_channel_mean_component_fraction": 0.840623262640397,
+            "spatially_centered_residual_MSE": 0.00039195900991478817,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.07675328145483541,
+              -0.019213603773801,
+              -0.019272019110532963,
+              -0.006289896693395391
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -0.00023741520822910268,
+              -0.00016051851230866672,
+              0.00019618467101736314,
+              2.1569710068097456e-05
+            ],
+            "display_sRGB_mean_error": [
+              -0.07942983580019952,
+              -0.00861148902959937,
+              0.0006734399948195587
+            ],
+            "scope": "Spatial decomposition of this residual, not expectation over noise/training. No output centering/correction is performed."
+          },
+          "native160": {
+            "roi_xywh": [
+              48,
+              48,
+              160,
+              160
+            ],
+            "camera_RGB_mean_error_unclipped": [
+              -0.08924699362027695,
+              -0.022617866594212898,
+              -0.006890515322588406
+            ],
+            "camera_RGB_MSE_unclipped": 0.003007689215650836,
+            "spatial_channel_mean_component_of_MSE": 0.0028413576536473976,
+            "spatial_channel_mean_component_fraction": 0.9446978892839345,
+            "spatially_centered_residual_MSE": 0.00016633156200343883,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.08976433620393437,
+              -0.022527622565671663,
+              -0.022574871596065124,
+              -0.006831274966321175
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -3.791263445918958e-05,
+              2.173098827142894e-06,
+              -0.0001624066698917659,
+              0.00019564270860511712
+            ],
+            "display_sRGB_mean_error": [
+              -0.09283908912395418,
+              -0.010408351956190814,
+              0.0016767530683651443
+            ],
+            "scope": "Spatial decomposition of this residual, not expectation over noise/training. No output centering/correction is performed."
+          }
+        },
+        "observation": {
+          "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "binned_source_tile_xywh": [
+            189,
+            3,
+            256,
+            256
+          ],
+          "binned_source_roi_xywh": [
+            237,
+            51,
+            160,
+            160
+          ],
+          "evaluation_tile_roi_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8",
+          "observation_sha256": "1a180a0ab7821e8d0bd5d735a4b84be541deacb974cb962836f9bf8389131f7d",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "arrays_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+          "noise_device": "cpu",
+          "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+        }
+      },
+      {
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "model": {
+          "arm": "none",
+          "step": 10000,
+          "snapshot": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/weights/weights-0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4.pt",
+          "sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4"
+        },
+        "scopes": {
+          "whole256": {
+            "roi_xywh": [
+              0,
+              0,
+              256,
+              256
+            ],
+            "camera_RGB_mean_error_unclipped": [
+              -0.0005159561117207704,
+              -0.00014292144189783848,
+              -0.0006736107297602018
+            ],
+            "camera_RGB_MSE_unclipped": 0.00010261681986979634,
+            "spatial_channel_mean_component_of_MSE": 2.4679622100808156e-07,
+            "spatial_channel_mean_component_fraction": 0.0024050269860362546,
+            "spatially_centered_residual_MSE": 0.00010237002364878825,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.0005075847454303443,
+              0.00010146455943726984,
+              -0.00044055587100358395,
+              -0.000726976891202491
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -0.000292509234500183,
+              -5.657316468966195e-05,
+              -0.000339308995820832,
+              -0.0001268413296318105
+            ],
+            "display_sRGB_mean_error": [
+              -0.0011924687515803807,
+              0.0003200766548937962,
+              -0.0006478059596366492
+            ],
+            "scope": "Spatial decomposition of this residual, not expectation over noise/training. No output centering/correction is performed."
+          },
+          "metric-interior240": {
+            "roi_xywh": [
+              8,
+              8,
+              240,
+              240
+            ],
+            "camera_RGB_mean_error_unclipped": [
+              -0.0005627006175561978,
+              -7.054518682464009e-05,
+              -0.0007113014100824463
+            ],
+            "camera_RGB_MSE_unclipped": 0.00010015987218720644,
+            "spatial_channel_mean_component_of_MSE": 2.758527681225087e-07,
+            "spatial_channel_mean_component_fraction": 0.0027541246019855024,
+            "spatially_centered_residual_MSE": 9.988401941908393e-05,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.0005517654718548649,
+              8.911983242417894e-05,
+              -0.00029774921956929903,
+              -0.0007168159799540617
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -0.0002732640090527975,
+              -6.054828317133677e-05,
+              -0.00027370897514582596,
+              -9.802718613804649e-05
+            ],
+            "display_sRGB_mean_error": [
+              -0.001237574928358795,
+              0.0004233876199167893,
+              -0.0007418806017641246
+            ],
+            "scope": "Spatial decomposition of this residual, not expectation over noise/training. No output centering/correction is performed."
+          },
+          "native160": {
+            "roi_xywh": [
+              48,
+              48,
+              160,
+              160
+            ],
+            "camera_RGB_mean_error_unclipped": [
+              -0.0003180294365359004,
+              8.112745558357836e-05,
+              -0.0007913737939104592
+            ],
+            "camera_RGB_MSE_unclipped": 8.871581020129017e-05,
+            "spatial_channel_mean_component_of_MSE": 2.4466562274701395e-07,
+            "spatial_channel_mean_component_fraction": 0.0027578581787382,
+            "spatially_centered_residual_MSE": 8.847114457854315e-05,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.0003503847284247552,
+              8.060157498732679e-05,
+              3.08644145254533e-05,
+              -0.0007432198992128747
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -6.68762300349801e-05,
+              -5.6467699496085546e-05,
+              -0.00010158745513203726,
+              -9.2015588694494e-06
+            ],
+            "display_sRGB_mean_error": [
+              -0.00043828970041907015,
+              0.0008109752518599267,
+              -0.0010957588633823433
+            ],
+            "scope": "Spatial decomposition of this residual, not expectation over noise/training. No output centering/correction is performed."
+          }
+        },
+        "observation": {
+          "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "binned_source_tile_xywh": [
+            195,
+            89,
+            256,
+            256
+          ],
+          "binned_source_roi_xywh": [
+            243,
+            137,
+            160,
+            160
+          ],
+          "evaluation_tile_roi_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf",
+          "observation_sha256": "dd2d0ceb311a5ad4e62e03b92e186873229c038f69bdb67ab2398e57cd9047ec",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "arrays_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+          "noise_device": "cpu",
+          "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+        }
+      },
+      {
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "model": {
+          "arm": "S",
+          "step": 3000,
+          "snapshot": "/mnt/external/demosaic/models/dino-anchored-native-fresh-b16-v44-step3000.pt",
+          "sha256": "b6adac140926920d7faad223acf545f32904c41d6883ab982a1ac9d5bdce3312"
+        },
+        "scopes": {
+          "whole256": {
+            "roi_xywh": [
+              0,
+              0,
+              256,
+              256
+            ],
+            "camera_RGB_mean_error_unclipped": [
+              -0.004483172657042622,
+              -0.00023517893252207687,
+              0.0017346868661883609
+            ],
+            "camera_RGB_MSE_unclipped": 4.476907834386732e-05,
+            "spatial_channel_mean_component_of_MSE": 7.721094908961074e-06,
+            "spatial_channel_mean_component_fraction": 0.1724649064619117,
+            "spatially_centered_residual_MSE": 3.704798343490625e-05,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.004797212325877709,
+              -0.0001723429983696012,
+              -6.161477411506522e-05,
+              0.0016956434247785562
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -0.00033323131582319726,
+              -0.00018822477576298235,
+              0.00015135498410367987,
+              -2.353076755869099e-05
+            ],
+            "display_sRGB_mean_error": [
+              -0.0045394514049243995,
+              0.00043863833622373796,
+              0.00662113609639523
+            ],
+            "scope": "Spatial decomposition of this residual, not expectation over noise/training. No output centering/correction is performed."
+          },
+          "metric-interior240": {
+            "roi_xywh": [
+              8,
+              8,
+              240,
+              240
+            ],
+            "camera_RGB_mean_error_unclipped": [
+              -0.00441325654537094,
+              -0.00034894737633574003,
+              0.0018321585317420694
+            ],
+            "camera_RGB_MSE_unclipped": 4.509727279084253e-05,
+            "spatial_channel_mean_component_of_MSE": 7.651800830715432e-06,
+            "spatial_channel_mean_component_fraction": 0.1696732497817298,
+            "spatially_centered_residual_MSE": 3.74454719601271e-05,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.004684579478556164,
+              -0.000246135434514056,
+              -0.00021922374955595262,
+              0.0017905501428021372
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -0.00023741520822910268,
+              -0.00016051851230866672,
+              0.00019618467101736314,
+              2.1569710068097456e-05
+            ],
+            "display_sRGB_mean_error": [
+              -0.004423232676353008,
+              0.00025776800061285044,
+              0.006946467704366568
+            ],
+            "scope": "Spatial decomposition of this residual, not expectation over noise/training. No output centering/correction is performed."
+          },
+          "native160": {
+            "roi_xywh": [
+              48,
+              48,
+              160,
+              160
+            ],
+            "camera_RGB_mean_error_unclipped": [
+              -0.004638923213256021,
+              -0.0008920745227908355,
+              0.002013463544287468
+            ],
+            "camera_RGB_MSE_unclipped": 4.945603658333457e-05,
+            "spatial_channel_mean_component_of_MSE": 8.789813658957573e-06,
+            "spatial_channel_mean_component_fraction": 0.17772984384113621,
+            "spatially_centered_residual_MSE": 4.0666222924377003e-05,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.004933790545492229,
+              -0.0008815445751520201,
+              -0.0006606889016893547,
+              0.0019577735322917535
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -3.791263445918958e-05,
+              2.173098827142894e-06,
+              -0.0001624066698917659,
+              0.00019564270860511712
+            ],
+            "display_sRGB_mean_error": [
+              -0.004629113845076063,
+              -0.000373530908941575,
+              0.007567465042555739
+            ],
+            "scope": "Spatial decomposition of this residual, not expectation over noise/training. No output centering/correction is performed."
+          }
+        },
+        "observation": {
+          "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "binned_source_tile_xywh": [
+            189,
+            3,
+            256,
+            256
+          ],
+          "binned_source_roi_xywh": [
+            237,
+            51,
+            160,
+            160
+          ],
+          "evaluation_tile_roi_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8",
+          "observation_sha256": "1a180a0ab7821e8d0bd5d735a4b84be541deacb974cb962836f9bf8389131f7d",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "arrays_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+          "noise_device": "cpu",
+          "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+        }
+      },
+      {
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "model": {
+          "arm": "S",
+          "step": 3000,
+          "snapshot": "/mnt/external/demosaic/models/dino-anchored-native-fresh-b16-v44-step3000.pt",
+          "sha256": "b6adac140926920d7faad223acf545f32904c41d6883ab982a1ac9d5bdce3312"
+        },
+        "scopes": {
+          "whole256": {
+            "roi_xywh": [
+              0,
+              0,
+              256,
+              256
+            ],
+            "camera_RGB_mean_error_unclipped": [
+              -0.0003897979609830079,
+              -0.0003296580992303254,
+              -0.0017344406460102432
+            ],
+            "camera_RGB_MSE_unclipped": 0.00011784316059636943,
+            "spatial_channel_mean_component_of_MSE": 1.0896337557690306e-06,
+            "spatial_channel_mean_component_fraction": 0.009246474299015029,
+            "spatially_centered_residual_MSE": 0.00011675352684060041,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.0005633992060758812,
+              9.137943431869466e-05,
+              -0.0005826556976477326,
+              -0.0015966206041325703
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -0.000292509234500183,
+              -5.657316468966195e-05,
+              -0.000339308995820832,
+              -0.0001268413296318105
+            ],
+            "display_sRGB_mean_error": [
+              -2.9934654362341834e-05,
+              0.00037977503817947407,
+              -0.0018295349274285444
+            ],
+            "scope": "Spatial decomposition of this residual, not expectation over noise/training. No output centering/correction is performed."
+          },
+          "metric-interior240": {
+            "roi_xywh": [
+              8,
+              8,
+              240,
+              240
+            ],
+            "camera_RGB_mean_error_unclipped": [
+              -0.0004269361121155911,
+              -0.0002496332828057548,
+              -0.0016359988148855675
+            ],
+            "camera_RGB_MSE_unclipped": 0.00011520619763247319,
+            "spatial_channel_mean_component_of_MSE": 9.73694447339912e-07,
+            "spatial_channel_mean_component_fraction": 0.008451754049258341,
+            "spatially_centered_residual_MSE": 0.00011423250318513326,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.0005925569792857388,
+              8.63706615834619e-05,
+              -0.00041492891810665674,
+              -0.0014900321519476418
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -0.0002732640090527975,
+              -6.054828317133677e-05,
+              -0.00027370897514582596,
+              -9.802718613804649e-05
+            ],
+            "display_sRGB_mean_error": [
+              -0.00019715570787505368,
+              0.0004928440161604601,
+              -0.001720696342144063
+            ],
+            "scope": "Spatial decomposition of this residual, not expectation over noise/training. No output centering/correction is performed."
+          },
+          "native160": {
+            "roi_xywh": [
+              48,
+              48,
+              160,
+              160
+            ],
+            "camera_RGB_mean_error_unclipped": [
+              -0.0002757147699501117,
+              -8.750381247486949e-05,
+              -0.0015360749062662338
+            ],
+            "camera_RGB_MSE_unclipped": 0.00010336718481970018,
+            "spatial_channel_mean_component_of_MSE": 8.14400556409033e-07,
+            "spatial_channel_mean_component_fraction": 0.007878714679417495,
+            "spatially_centered_residual_MSE": 0.00010255278426329115,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.0004626626623815877,
+              4.664254645547317e-05,
+              -4.3154243155427705e-05,
+              -0.0013211556760549569
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -6.68762300349801e-05,
+              -5.6467699496085546e-05,
+              -0.00010158745513203726,
+              -9.2015588694494e-06
+            ],
+            "display_sRGB_mean_error": [
+              0.0007329939863906774,
+              0.0008838344105502615,
+              -0.0017014544751262407
+            ],
+            "scope": "Spatial decomposition of this residual, not expectation over noise/training. No output centering/correction is performed."
+          }
+        },
+        "observation": {
+          "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "binned_source_tile_xywh": [
+            195,
+            89,
+            256,
+            256
+          ],
+          "binned_source_roi_xywh": [
+            243,
+            137,
+            160,
+            160
+          ],
+          "evaluation_tile_roi_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf",
+          "observation_sha256": "dd2d0ceb311a5ad4e62e03b92e186873229c038f69bdb67ab2398e57cd9047ec",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "arrays_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+          "noise_device": "cpu",
+          "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+        }
+      },
+      {
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "model": {
+          "arm": "S",
+          "step": 10000,
+          "snapshot": "/mnt/external/demosaic/evaluation/fresh-none-S10k-cached-cpu-v1/weights/weights-ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad.pt",
+          "sha256": "ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad"
+        },
+        "scopes": {
+          "whole256": {
+            "roi_xywh": [
+              0,
+              0,
+              256,
+              256
+            ],
+            "camera_RGB_mean_error_unclipped": [
+              -0.028532983537593537,
+              -0.006744380989174489,
+              -0.0009398465612007684
+            ],
+            "camera_RGB_MSE_unclipped": 0.0004313074858833426,
+            "spatial_channel_mean_component_of_MSE": 0.0002868337120141076,
+            "spatial_channel_mean_component_fraction": 0.6650330017496813,
+            "spatially_centered_residual_MSE": 0.00014447377386923489,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.02866302626820172,
+              -0.0066016010114755,
+              -0.006864763004159665,
+              -0.0009348637190874347
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -0.00033323131582319726,
+              -0.00018822477576298235,
+              0.00015135498410367987,
+              -2.353076755869099e-05
+            ],
+            "display_sRGB_mean_error": [
+              -0.028890529132527654,
+              -0.0028223655861409763,
+              0.0041059901313907875
+            ],
+            "scope": "Spatial decomposition of this residual, not expectation over noise/training. No output centering/correction is performed."
+          },
+          "metric-interior240": {
+            "roi_xywh": [
+              8,
+              8,
+              240,
+              240
+            ],
+            "camera_RGB_mean_error_unclipped": [
+              -0.029634096426063683,
+              -0.0070229613474776615,
+              -0.0008587638287570668
+            ],
+            "camera_RGB_MSE_unclipped": 0.00045719661525520956,
+            "spatial_channel_mean_component_of_MSE": 0.00030941304413032903,
+            "spatial_channel_mean_component_fraction": 0.676761449683115,
+            "spatially_centered_residual_MSE": 0.00014778357112488056,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.029796446668980126,
+              -0.006844397857052008,
+              -0.00719279906721068,
+              -0.0008404660435658033
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -0.00023741520822910268,
+              -0.00016051851230866672,
+              0.00019618467101736314,
+              2.1569710068097456e-05
+            ],
+            "display_sRGB_mean_error": [
+              -0.03001215396711915,
+              -0.0030019148260073793,
+              0.004598027317692901
+            ],
+            "scope": "Spatial decomposition of this residual, not expectation over noise/training. No output centering/correction is performed."
+          },
+          "native160": {
+            "roi_xywh": [
+              48,
+              48,
+              160,
+              160
+            ],
+            "camera_RGB_mean_error_unclipped": [
+              -0.04100304793092164,
+              -0.010097502416745528,
+              -0.0012224395302424928
+            ],
+            "camera_RGB_MSE_unclipped": 0.0007182310011679227,
+            "spatial_channel_mean_component_of_MSE": 0.0005949012843622462,
+            "spatial_channel_mean_component_fraction": 0.8282868372360302,
+            "spatially_centered_residual_MSE": 0.00012332971680567657,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.04131333420506053,
+              -0.010021867310945254,
+              -0.010172196678667547,
+              -0.0012005553063589103
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -3.791263445918958e-05,
+              2.173098827142894e-06,
+              -0.0001624066698917659,
+              0.00019564270860511712
+            ],
+            "display_sRGB_mean_error": [
+              -0.041391699455634805,
+              -0.00461889432222506,
+              0.0062593360528829575
+            ],
+            "scope": "Spatial decomposition of this residual, not expectation over noise/training. No output centering/correction is performed."
+          }
+        },
+        "observation": {
+          "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "binned_source_tile_xywh": [
+            189,
+            3,
+            256,
+            256
+          ],
+          "binned_source_roi_xywh": [
+            237,
+            51,
+            160,
+            160
+          ],
+          "evaluation_tile_roi_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8",
+          "observation_sha256": "1a180a0ab7821e8d0bd5d735a4b84be541deacb974cb962836f9bf8389131f7d",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "arrays_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+          "noise_device": "cpu",
+          "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+        }
+      },
+      {
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "model": {
+          "arm": "S",
+          "step": 10000,
+          "snapshot": "/mnt/external/demosaic/evaluation/fresh-none-S10k-cached-cpu-v1/weights/weights-ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad.pt",
+          "sha256": "ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad"
+        },
+        "scopes": {
+          "whole256": {
+            "roi_xywh": [
+              0,
+              0,
+              256,
+              256
+            ],
+            "camera_RGB_mean_error_unclipped": [
+              -0.00036049917679763666,
+              -0.00021058710160478875,
+              -0.0007728800268663391
+            ],
+            "camera_RGB_MSE_unclipped": 0.00010540841623656303,
+            "spatial_channel_mean_component_of_MSE": 2.5721670658766414e-07,
+            "spatial_channel_mean_component_fraction": 0.0024401913601510253,
+            "spatially_centered_residual_MSE": 0.00010515119952997538,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.0004809254618486185,
+              0.00030351661560490406,
+              -0.0005859481655220711,
+              -0.0007315643552223972
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -0.000292509234500183,
+              -5.657316468966195e-05,
+              -0.000339308995820832,
+              -0.0001268413296318105
+            ],
+            "display_sRGB_mean_error": [
+              -0.00032998987271186825,
+              0.0002927998071301941,
+              -0.0008476003018470027
+            ],
+            "scope": "Spatial decomposition of this residual, not expectation over noise/training. No output centering/correction is performed."
+          },
+          "metric-interior240": {
+            "roi_xywh": [
+              8,
+              8,
+              240,
+              240
+            ],
+            "camera_RGB_mean_error_unclipped": [
+              -0.0004121836259065395,
+              -0.00012843637296109577,
+              -0.0008185762445659606
+            ],
+            "camera_RGB_MSE_unclipped": 0.00010314243204455779,
+            "spatial_channel_mean_component_of_MSE": 2.854861038441917e-07,
+            "spatial_channel_mean_component_fraction": 0.002767882220586586,
+            "spatially_centered_residual_MSE": 0.0001028569459407136,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.0005433745743616332,
+              0.00028477960034832805,
+              -0.0004087708785178279,
+              -0.0007477331153356835
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -0.0002732640090527975,
+              -6.054828317133677e-05,
+              -0.00027370897514582596,
+              -9.802718613804649e-05
+            ],
+            "display_sRGB_mean_error": [
+              -0.0004803197110568381,
+              0.00038504594402125785,
+              -0.0009638290467100082
+            ],
+            "scope": "Spatial decomposition of this residual, not expectation over noise/training. No output centering/correction is performed."
+          },
+          "native160": {
+            "roi_xywh": [
+              48,
+              48,
+              160,
+              160
+            ],
+            "camera_RGB_mean_error_unclipped": [
+              -0.00020928032594931921,
+              4.1638826951180266e-05,
+              -0.00095658666758899
+            ],
+            "camera_RGB_MSE_unclipped": 9.272347203939447e-05,
+            "spatial_channel_mean_component_of_MSE": 3.201966997827775e-07,
+            "spatial_channel_mean_component_fraction": 0.00345324320520201,
+            "spatially_centered_residual_MSE": 9.240327533961168e-05,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.00037080897879515184,
+              0.00025316291222850397,
+              -5.748438066781603e-05,
+              -0.0008249308278579548
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -6.68762300349801e-05,
+              -5.6467699496085546e-05,
+              -0.00010158745513203726,
+              -9.2015588694494e-06
+            ],
+            "display_sRGB_mean_error": [
+              0.0001820801366777645,
+              0.0007193056229230565,
+              -0.0014236264554740963
+            ],
+            "scope": "Spatial decomposition of this residual, not expectation over noise/training. No output centering/correction is performed."
+          }
+        },
+        "observation": {
+          "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "binned_source_tile_xywh": [
+            195,
+            89,
+            256,
+            256
+          ],
+          "binned_source_roi_xywh": [
+            243,
+            137,
+            160,
+            160
+          ],
+          "evaluation_tile_roi_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf",
+          "observation_sha256": "dd2d0ceb311a5ad4e62e03b92e186873229c038f69bdb67ab2398e57cd9047ec",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "arrays_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+          "noise_device": "cpu",
+          "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+        }
+      }
+    ],
+    "native_crops": [
+      {
+        "image": "crop-153d21a00156d60b.png",
+        "caption": "0014aa4e075b1827f91ef8a02069e1e318f040ba / fresh none3000 / same fixed CPU observation / exact simulated GT",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "none / 3000 / FP32",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "54f515f6befebd1aa28124c00af06bd18835c67dc9c9989bc3778cfbc006d600",
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "source": {
+          "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Roy Egloff",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": null,
+          "credit": "Own work",
+          "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+          "width": 3888,
+          "height": 2592,
+          "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+          "shape": [
+            324,
+            486,
+            3
+          ],
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+        },
+        "model": {
+          "arm": "none",
+          "step": 3000,
+          "snapshot": "/mnt/external/demosaic/models/control-anchored-native-fresh-b16-v45-step3000.pt",
+          "sha256": "6f9948c361cda74a294ad0cc9db4718dfb3fe0a9cc5a4c1cc867e986e0a7eedf"
+        },
+        "observation": {
+          "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "binned_source_tile_xywh": [
+            189,
+            3,
+            256,
+            256
+          ],
+          "binned_source_roi_xywh": [
+            237,
+            51,
+            160,
+            160
+          ],
+          "evaluation_tile_roi_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8",
+          "observation_sha256": "1a180a0ab7821e8d0bd5d735a4b84be541deacb974cb962836f9bf8389131f7d",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "arrays_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+          "noise_device": "cpu",
+          "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+        },
+        "evaluation_tile_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1.0,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact simulated clean target; two illustrative cases, not a full quality suite.",
+        "repository_image": "docs/images/fresh-color-means-cpu-none-fabric-3k.png"
+      },
+      {
+        "image": "crop-145bb04a71fcf9ca.png",
+        "caption": "002fc6eeadf637e81d5a327f117b79abb86becd9 / fresh none3000 / same fixed CPU observation / exact simulated GT",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "none / 3000 / FP32",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "3809e1196c274834de0c509047b5dbcbfc299b6aea6434fa0a3a94ea7184b233",
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "source": {
+          "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Vancouver_%28BC%2C_Canada%29%2C_Coal_Harbour_Seaside_Park%2C_Blick_in_den_Himmel_--_2022_--_2158.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Dietmar Rabich",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "Dietmar Rabich",
+          "credit": "Own work",
+          "sha1": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "sha1_hex": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "download_path": "images/00/2f/002fc6eeadf637e81d5a327f117b79abb86becd9.jpg",
+          "width": 3809,
+          "height": 2857,
+          "id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/002fc6eeadf637e81d5a327f117b79abb86becd9.npy",
+          "shape": [
+            357,
+            476,
+            3
+          ],
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf"
+        },
+        "model": {
+          "arm": "none",
+          "step": 3000,
+          "snapshot": "/mnt/external/demosaic/models/control-anchored-native-fresh-b16-v45-step3000.pt",
+          "sha256": "6f9948c361cda74a294ad0cc9db4718dfb3fe0a9cc5a4c1cc867e986e0a7eedf"
+        },
+        "observation": {
+          "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "binned_source_tile_xywh": [
+            195,
+            89,
+            256,
+            256
+          ],
+          "binned_source_roi_xywh": [
+            243,
+            137,
+            160,
+            160
+          ],
+          "evaluation_tile_roi_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf",
+          "observation_sha256": "dd2d0ceb311a5ad4e62e03b92e186873229c038f69bdb67ab2398e57cd9047ec",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "arrays_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+          "noise_device": "cpu",
+          "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+        },
+        "evaluation_tile_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1.0,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact simulated clean target; two illustrative cases, not a full quality suite.",
+        "repository_image": "docs/images/fresh-color-means-cpu-none-building-3k.png"
+      },
+      {
+        "image": "crop-986fd63d533d0b77.png",
+        "caption": "0014aa4e075b1827f91ef8a02069e1e318f040ba / fresh S3000 / same fixed CPU observation / exact simulated GT",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "S / 3000 / FP32",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "6a9c5896ee297b0165c89ee7739126eaa610168489f6b19aaebb815543262207",
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "source": {
+          "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Roy Egloff",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": null,
+          "credit": "Own work",
+          "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+          "width": 3888,
+          "height": 2592,
+          "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+          "shape": [
+            324,
+            486,
+            3
+          ],
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+        },
+        "model": {
+          "arm": "S",
+          "step": 3000,
+          "snapshot": "/mnt/external/demosaic/models/dino-anchored-native-fresh-b16-v44-step3000.pt",
+          "sha256": "b6adac140926920d7faad223acf545f32904c41d6883ab982a1ac9d5bdce3312"
+        },
+        "observation": {
+          "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "binned_source_tile_xywh": [
+            189,
+            3,
+            256,
+            256
+          ],
+          "binned_source_roi_xywh": [
+            237,
+            51,
+            160,
+            160
+          ],
+          "evaluation_tile_roi_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8",
+          "observation_sha256": "1a180a0ab7821e8d0bd5d735a4b84be541deacb974cb962836f9bf8389131f7d",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "arrays_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+          "noise_device": "cpu",
+          "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+        },
+        "evaluation_tile_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1.0,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact simulated clean target; two illustrative cases, not a full quality suite.",
+        "repository_image": "docs/images/fresh-color-means-cpu-S-fabric-3k.png"
+      },
+      {
+        "image": "crop-2b3187be2f853ca1.png",
+        "caption": "002fc6eeadf637e81d5a327f117b79abb86becd9 / fresh S3000 / same fixed CPU observation / exact simulated GT",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "S / 3000 / FP32",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "c80a5c2c4db4073c14fd3c1437a35fdc17f87071d613dee1347934c492b0cfaf",
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "source": {
+          "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Vancouver_%28BC%2C_Canada%29%2C_Coal_Harbour_Seaside_Park%2C_Blick_in_den_Himmel_--_2022_--_2158.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Dietmar Rabich",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "Dietmar Rabich",
+          "credit": "Own work",
+          "sha1": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "sha1_hex": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "download_path": "images/00/2f/002fc6eeadf637e81d5a327f117b79abb86becd9.jpg",
+          "width": 3809,
+          "height": 2857,
+          "id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/002fc6eeadf637e81d5a327f117b79abb86becd9.npy",
+          "shape": [
+            357,
+            476,
+            3
+          ],
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf"
+        },
+        "model": {
+          "arm": "S",
+          "step": 3000,
+          "snapshot": "/mnt/external/demosaic/models/dino-anchored-native-fresh-b16-v44-step3000.pt",
+          "sha256": "b6adac140926920d7faad223acf545f32904c41d6883ab982a1ac9d5bdce3312"
+        },
+        "observation": {
+          "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "binned_source_tile_xywh": [
+            195,
+            89,
+            256,
+            256
+          ],
+          "binned_source_roi_xywh": [
+            243,
+            137,
+            160,
+            160
+          ],
+          "evaluation_tile_roi_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf",
+          "observation_sha256": "dd2d0ceb311a5ad4e62e03b92e186873229c038f69bdb67ab2398e57cd9047ec",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "arrays_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+          "noise_device": "cpu",
+          "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+        },
+        "evaluation_tile_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1.0,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact simulated clean target; two illustrative cases, not a full quality suite.",
+        "repository_image": "docs/images/fresh-color-means-cpu-S-building-3k.png"
+      }
+    ],
+    "direct_training_step_comparisons": [
+      {
+        "image": "crop-3914a362160decfa.png",
+        "caption": "0014aa4e075b1827f91ef8a02069e1e318f040ba / fresh none3000 versus10000 / both CPU FP32 / neither method is GT",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "none / 3000",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "none / 10000",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "07469020ca21a0bfdec0b962c24cbe505e39d559fca7846c9a430dd2f62e08d3",
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "source": {
+          "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Roy Egloff",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": null,
+          "credit": "Own work",
+          "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+          "width": 3888,
+          "height": 2592,
+          "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+          "shape": [
+            324,
+            486,
+            3
+          ],
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+        },
+        "observation": {
+          "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "binned_source_tile_xywh": [
+            189,
+            3,
+            256,
+            256
+          ],
+          "binned_source_roi_xywh": [
+            237,
+            51,
+            160,
+            160
+          ],
+          "evaluation_tile_roi_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8",
+          "observation_sha256": "1a180a0ab7821e8d0bd5d735a4b84be541deacb974cb962836f9bf8389131f7d",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "arrays_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+          "noise_device": "cpu",
+          "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+        },
+        "evaluation_tile_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1.0,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Two learned outputs; neither panel is GT.",
+        "models": [
+          {
+            "arm": "none",
+            "step": 3000,
+            "snapshot": "/mnt/external/demosaic/models/control-anchored-native-fresh-b16-v45-step3000.pt",
+            "sha256": "6f9948c361cda74a294ad0cc9db4718dfb3fe0a9cc5a4c1cc867e986e0a7eedf"
+          },
+          {
+            "arm": "none",
+            "step": 10000,
+            "snapshot": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/weights/weights-0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4.pt",
+            "sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4"
+          }
+        ],
+        "method": "Exact parent display pixels copied into a new canvas, no resizing or display adjustment.",
+        "repository_image": "docs/images/fresh-color-means-cpu-none-fabric-direct.png"
+      },
+      {
+        "image": "crop-a5e4b89b3b6a5855.png",
+        "caption": "002fc6eeadf637e81d5a327f117b79abb86becd9 / fresh none3000 versus10000 / both CPU FP32 / neither method is GT",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "none / 3000",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "none / 10000",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "1b428bce49bd9943920b77b34d2e3db8d272df335e004e228d52c9a31485f5b5",
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "source": {
+          "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Vancouver_%28BC%2C_Canada%29%2C_Coal_Harbour_Seaside_Park%2C_Blick_in_den_Himmel_--_2022_--_2158.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Dietmar Rabich",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "Dietmar Rabich",
+          "credit": "Own work",
+          "sha1": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "sha1_hex": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "download_path": "images/00/2f/002fc6eeadf637e81d5a327f117b79abb86becd9.jpg",
+          "width": 3809,
+          "height": 2857,
+          "id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/002fc6eeadf637e81d5a327f117b79abb86becd9.npy",
+          "shape": [
+            357,
+            476,
+            3
+          ],
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf"
+        },
+        "observation": {
+          "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "binned_source_tile_xywh": [
+            195,
+            89,
+            256,
+            256
+          ],
+          "binned_source_roi_xywh": [
+            243,
+            137,
+            160,
+            160
+          ],
+          "evaluation_tile_roi_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf",
+          "observation_sha256": "dd2d0ceb311a5ad4e62e03b92e186873229c038f69bdb67ab2398e57cd9047ec",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "arrays_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+          "noise_device": "cpu",
+          "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+        },
+        "evaluation_tile_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1.0,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Two learned outputs; neither panel is GT.",
+        "models": [
+          {
+            "arm": "none",
+            "step": 3000,
+            "snapshot": "/mnt/external/demosaic/models/control-anchored-native-fresh-b16-v45-step3000.pt",
+            "sha256": "6f9948c361cda74a294ad0cc9db4718dfb3fe0a9cc5a4c1cc867e986e0a7eedf"
+          },
+          {
+            "arm": "none",
+            "step": 10000,
+            "snapshot": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/weights/weights-0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4.pt",
+            "sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4"
+          }
+        ],
+        "method": "Exact parent display pixels copied into a new canvas, no resizing or display adjustment.",
+        "repository_image": "docs/images/fresh-color-means-cpu-none-building-direct.png"
+      },
+      {
+        "image": "crop-88d098a34671d01c.png",
+        "caption": "0014aa4e075b1827f91ef8a02069e1e318f040ba / fresh S3000 versus10000 / both CPU FP32 / neither method is GT",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "S / 3000",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "S / 10000",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "1c22219a22e67747453a086d2392215b017de95f7f6e651f61d774f3cd495910",
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "source": {
+          "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Roy Egloff",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": null,
+          "credit": "Own work",
+          "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+          "width": 3888,
+          "height": 2592,
+          "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+          "shape": [
+            324,
+            486,
+            3
+          ],
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+        },
+        "observation": {
+          "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "binned_source_tile_xywh": [
+            189,
+            3,
+            256,
+            256
+          ],
+          "binned_source_roi_xywh": [
+            237,
+            51,
+            160,
+            160
+          ],
+          "evaluation_tile_roi_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8",
+          "observation_sha256": "1a180a0ab7821e8d0bd5d735a4b84be541deacb974cb962836f9bf8389131f7d",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "arrays_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+          "noise_device": "cpu",
+          "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+        },
+        "evaluation_tile_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1.0,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Two learned outputs; neither panel is GT.",
+        "models": [
+          {
+            "arm": "S",
+            "step": 3000,
+            "snapshot": "/mnt/external/demosaic/models/dino-anchored-native-fresh-b16-v44-step3000.pt",
+            "sha256": "b6adac140926920d7faad223acf545f32904c41d6883ab982a1ac9d5bdce3312"
+          },
+          {
+            "arm": "S",
+            "step": 10000,
+            "snapshot": "/mnt/external/demosaic/evaluation/fresh-none-S10k-cached-cpu-v1/weights/weights-ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad.pt",
+            "sha256": "ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad"
+          }
+        ],
+        "method": "Exact parent display pixels copied into a new canvas, no resizing or display adjustment.",
+        "repository_image": "docs/images/fresh-color-means-cpu-S-fabric-direct.png"
+      },
+      {
+        "image": "crop-166444329479cae5.png",
+        "caption": "002fc6eeadf637e81d5a327f117b79abb86becd9 / fresh S3000 versus10000 / both CPU FP32 / neither method is GT",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "S / 3000",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "S / 10000",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "0cd2b404259e400ecb23e5a5c137059cacb736c963e36028e76d6e01ecc4ce67",
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "source": {
+          "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Vancouver_%28BC%2C_Canada%29%2C_Coal_Harbour_Seaside_Park%2C_Blick_in_den_Himmel_--_2022_--_2158.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Dietmar Rabich",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "Dietmar Rabich",
+          "credit": "Own work",
+          "sha1": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "sha1_hex": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "download_path": "images/00/2f/002fc6eeadf637e81d5a327f117b79abb86becd9.jpg",
+          "width": 3809,
+          "height": 2857,
+          "id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/002fc6eeadf637e81d5a327f117b79abb86becd9.npy",
+          "shape": [
+            357,
+            476,
+            3
+          ],
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf"
+        },
+        "observation": {
+          "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "binned_source_tile_xywh": [
+            195,
+            89,
+            256,
+            256
+          ],
+          "binned_source_roi_xywh": [
+            243,
+            137,
+            160,
+            160
+          ],
+          "evaluation_tile_roi_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf",
+          "observation_sha256": "dd2d0ceb311a5ad4e62e03b92e186873229c038f69bdb67ab2398e57cd9047ec",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "arrays_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+          "noise_device": "cpu",
+          "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+        },
+        "evaluation_tile_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1.0,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Two learned outputs; neither panel is GT.",
+        "models": [
+          {
+            "arm": "S",
+            "step": 3000,
+            "snapshot": "/mnt/external/demosaic/models/dino-anchored-native-fresh-b16-v44-step3000.pt",
+            "sha256": "b6adac140926920d7faad223acf545f32904c41d6883ab982a1ac9d5bdce3312"
+          },
+          {
+            "arm": "S",
+            "step": 10000,
+            "snapshot": "/mnt/external/demosaic/evaluation/fresh-none-S10k-cached-cpu-v1/weights/weights-ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad.pt",
+            "sha256": "ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad"
+          }
+        ],
+        "method": "Exact parent display pixels copied into a new canvas, no resizing or display adjustment.",
+        "repository_image": "docs/images/fresh-color-means-cpu-S-building-direct.png"
+      }
+    ],
+    "reused_10000_triplets": [
+      {
+        "image": "crop-d2eb63ccc0fb1626.png",
+        "caption": "0014aa4e075b1827f91ef8a02069e1e318f040ba / dino-anchored-native-fresh-b16-v44:step10000 / exact simulated GT / CPU FP32",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "DINO / CPU FP32",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "fc75d26dd8826ddbe1141b116deb8a2f252304627f2034330bf90b7739d51c34",
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "source": {
+          "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Roy Egloff",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": null,
+          "credit": "Own work",
+          "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+          "width": 3888,
+          "height": 2592,
+          "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+          "shape": [
+            324,
+            486,
+            3
+          ],
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+        },
+        "model": {
+          "label": "dino-anchored-native-fresh-b16-v44:step10000",
+          "sha256": "ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad",
+          "snapshot": "/mnt/external/demosaic/evaluation/fresh-none-S10k-cached-cpu-v1/weights/weights-ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad.pt",
+          "device": "cpu",
+          "precision": "float32",
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "bottleneck",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false
+          }
+        },
+        "observation": {
+          "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "binned_source_tile_xywh": [
+            189,
+            3,
+            256,
+            256
+          ],
+          "binned_source_roi_xywh": [
+            237,
+            51,
+            160,
+            160
+          ],
+          "evaluation_tile_roi_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8",
+          "observation_sha256": "1a180a0ab7821e8d0bd5d735a4b84be541deacb974cb962836f9bf8389131f7d",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "arrays_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+          "noise_device": "cpu",
+          "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+        },
+        "conditioning": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1.0,
+        "reference": "Exact simulated clean target; two illustrative cases, not full427 evaluation.",
+        "repository_image": "docs/images/fresh-none-S10k-cpu-example-fabric-S.png"
+      },
+      {
+        "image": "crop-08783a87aa451ea1.png",
+        "caption": "002fc6eeadf637e81d5a327f117b79abb86becd9 / dino-anchored-native-fresh-b16-v44:step10000 / exact simulated GT / CPU FP32",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "DINO / CPU FP32",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "29daee28cbc255936211c1c86822a0dab62b1ae3bf22052b2c63206561d19a01",
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "source": {
+          "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Vancouver_%28BC%2C_Canada%29%2C_Coal_Harbour_Seaside_Park%2C_Blick_in_den_Himmel_--_2022_--_2158.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Dietmar Rabich",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "Dietmar Rabich",
+          "credit": "Own work",
+          "sha1": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "sha1_hex": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "download_path": "images/00/2f/002fc6eeadf637e81d5a327f117b79abb86becd9.jpg",
+          "width": 3809,
+          "height": 2857,
+          "id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/002fc6eeadf637e81d5a327f117b79abb86becd9.npy",
+          "shape": [
+            357,
+            476,
+            3
+          ],
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf"
+        },
+        "model": {
+          "label": "dino-anchored-native-fresh-b16-v44:step10000",
+          "sha256": "ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad",
+          "snapshot": "/mnt/external/demosaic/evaluation/fresh-none-S10k-cached-cpu-v1/weights/weights-ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad.pt",
+          "device": "cpu",
+          "precision": "float32",
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "bottleneck",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false
+          }
+        },
+        "observation": {
+          "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "binned_source_tile_xywh": [
+            195,
+            89,
+            256,
+            256
+          ],
+          "binned_source_roi_xywh": [
+            243,
+            137,
+            160,
+            160
+          ],
+          "evaluation_tile_roi_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf",
+          "observation_sha256": "dd2d0ceb311a5ad4e62e03b92e186873229c038f69bdb67ab2398e57cd9047ec",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "arrays_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+          "noise_device": "cpu",
+          "note": "CPU-generated replay; not the CUDA observation from the previous full427 report."
+        },
+        "conditioning": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1.0,
+        "reference": "Exact simulated clean target; two illustrative cases, not full427 evaluation.",
+        "repository_image": "docs/images/fresh-none-S10k-cpu-example-building-S.png"
+      },
+      {
+        "image": "crop-85a1c5fe7f7cd992.png",
+        "caption": "0014aa4e075b1827f91ef8a02069e1e318f040ba / iso12800-prior / RGGB / 1:control-anchored-native-fresh-b16-v45:step-10000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "243697fd2414d5688667688ed5d2a32e2dc5355320f8a673bddb162f0ba23217",
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "source": {
+          "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Roy Egloff",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": null,
+          "credit": "Own work",
+          "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+          "width": 3888,
+          "height": 2592,
+          "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+          "shape": [
+            324,
+            486,
+            3
+          ],
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+        },
+        "validation_index": 0,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "exposure": 1.0,
+          "name": "iso12800-prior",
+          "read": 2.62144e-05,
+          "shot": 0.00256
+        },
+        "pattern": "RGGB",
+        "model": {
+          "label": "1:control-anchored-native-fresh-b16-v45:step-10000",
+          "source": "/mnt/external/demosaic/runs/control-anchored-native-fresh-b16-v45/last.pt",
+          "training_run": "/mnt/external/demosaic/runs/control-anchored-native-fresh-b16-v45",
+          "snapshot": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/weights/weights-0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4.pt",
+          "sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4",
+          "step": 10000,
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": false,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "dino_lora_rank": 0,
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true
+          },
+          "effective_model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": false,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "bottleneck",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false
+          },
+          "training_manifest_sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+          "compute_precision": "float32",
+          "refinement_compute_precision": "float32",
+          "memory_format": "contiguous"
+        },
+        "display_exposure": 1.0,
+        "reference": "Exact synthetic clean target",
+        "repository_image": "docs/images/none10k-cpu-example-fabric-none10k.png"
+      },
+      {
+        "image": "crop-3562f18bbaf822d9.png",
+        "caption": "002fc6eeadf637e81d5a327f117b79abb86becd9 / iso12800-prior / RGGB / 1:control-anchored-native-fresh-b16-v45:step-10000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "7508ef2f929e093139fd235974aedb28ae519be0b6997f4c78ec53728c97fcf6",
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "source": {
+          "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Vancouver_%28BC%2C_Canada%29%2C_Coal_Harbour_Seaside_Park%2C_Blick_in_den_Himmel_--_2022_--_2158.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Dietmar Rabich",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "Dietmar Rabich",
+          "credit": "Own work",
+          "sha1": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "sha1_hex": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "download_path": "images/00/2f/002fc6eeadf637e81d5a327f117b79abb86becd9.jpg",
+          "width": 3809,
+          "height": 2857,
+          "id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/002fc6eeadf637e81d5a327f117b79abb86becd9.npy",
+          "shape": [
+            357,
+            476,
+            3
+          ],
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf"
+        },
+        "validation_index": 1,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "exposure": 1.0,
+          "name": "iso12800-prior",
+          "read": 2.62144e-05,
+          "shot": 0.00256
+        },
+        "pattern": "RGGB",
+        "model": {
+          "label": "1:control-anchored-native-fresh-b16-v45:step-10000",
+          "source": "/mnt/external/demosaic/runs/control-anchored-native-fresh-b16-v45/last.pt",
+          "training_run": "/mnt/external/demosaic/runs/control-anchored-native-fresh-b16-v45",
+          "snapshot": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/weights/weights-0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4.pt",
+          "sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4",
+          "step": 10000,
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": false,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "dino_lora_rank": 0,
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true
+          },
+          "effective_model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": false,
+            "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+            "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "bottleneck",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false
+          },
+          "training_manifest_sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+          "compute_precision": "float32",
+          "refinement_compute_precision": "float32",
+          "memory_format": "contiguous"
+        },
+        "display_exposure": 1.0,
+        "reference": "Exact synthetic clean target",
+        "repository_image": "docs/images/none10k-cpu-example-building-none10k.png"
+      }
+    ],
+    "inputs": [
+      {
+        "path": "docs/results/fresh-none-S10k-cpu-review.json",
+        "sha256": "0f3b0c1016e8b0037099d271a2f6e1b7a12cf5384d73f6410c3c5d21d83bdae6"
+      },
+      {
+        "path": "docs/results/cross-camera-none10k-cpu-review.json",
+        "sha256": "09d2d11c3468d9f774e937ff61c5c46052c2e96e6e41c3c5ba22dffe863c968a"
+      }
+    ],
+    "runtime": {
+      "device": "cpu",
+      "precision": "float32",
+      "memory_format": "contiguous",
+      "cuda_initialized": false
+    },
+    "checks": {
+      "all_four_10000_restored_panels_reproduce_prior_pixels_exactly": true,
+      "all_shared_noisy_and_GT_panels_exact": true
+    },
+    "source_files": {
+      "paired.py": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d",
+      "__init__.py": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d",
+      "suite.py": "a474ff659df10dd4ec11d577082034a6e6dcba1a2a2b29c39065056cff5527b4",
+      "dino_pyramid.py": "246944874671ceb4449b0487fcb347a00f8b82d713d5b4c9fee5a7c8a68aa95f",
+      "metrics.py": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31",
+      "losses.py": "548b1481a035ad937d4a046754a74e70684864a9842296765c62079a002e5120",
+      "audit.py": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d",
+      "inference.py": "911e71e8dcbeb1872ed591bc5234ed2b79bae063a859b4704516537d94a1df0b",
+      "noise.py": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce",
+      "data.py": "b3277bca23d8c17b365ee364e175ea8a850d45a79cf02686628db606341e7be3",
+      "color.py": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+      "prepare.py": "e4c0733bb260c289b3ce8aaf5f393abc5919d8d81cdcf462b70032d790429712",
+      "textures.py": "b4bc304a50de272cf7fcba272e67b828c163466ffc23ea3337a6a66f076dc664",
+      "paired_training.py": "71a2481213bba174bd3d6b3de9ae9b89f88333635810e15d0958352d9d8d053d",
+      "reporting.py": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d",
+      "cli.py": "ae48ac49a52fcb9fa72521b1194e71fe8603a2ac301cf94be4a172a29a4d9003",
+      "io.py": "0a1599ffe7f6d935e92fc71e6b086430c6f82678a74952c3b8f31155a0bea83b",
+      "gaussian.py": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72",
+      "__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+      "dino_adaptation.py": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861",
+      "paired_admission.py": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825",
+      "raw_admission.py": "1948afbbf05129190273ab77466f26d9d27dc942716beaab16f077c8c3330803",
+      "model.py": "c37f530b3c4265e23af8d04b81e65e19b8ee585538874445e4a95bc337f23a71",
+      "cfa.py": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252",
+      "diagnose_fixed_cpu_color_means.py": "5b34c969b0001ca846d3d2594c873518f5134781650d52ee560ed0fcdb12bfeb",
+      "prior.py": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a",
+      "safety.py": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7",
+      "calibration.py": "e86f4c602a6cd7fd855d0bcfeb790cf17ed87611f19d97926f9db174909b2d26",
+      "precision.py": "9aa850fb5ee0e9abc3e9adc4847ce3518c1acb37c93f6bc54ff9206bb0c94c3a",
+      "train.py": "e8a82a3cbf2fed7059490db6ca347ab8b5ef7e345f4289c2ec1d36b8c1163c2b",
+      "registration.py": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202",
+      "pretrained_rgb.py": "10ea25fc01bf561a3ea9087002566eb319717c338f44f54d2da46fc6ee0d7026",
+      "reference.py": "54ed094d58e245a56993ea3ce3ef9e21d2164e902d41d03bba9132bacd22891f",
+      "real_suite.py": "2d8cd262a22b8c11d12159e7a90f96022219915ecf0dada36665467fd0f7ccee",
+      "vst.py": "355124a374177f1c08271834149c5979ab3477fdf255c60aa7cee0d47792a76b",
+      "raw_clean.py": "a143ce351ac4e1b2425d4d561000d3e8934477fe9172c88f90ce76d9b32a7a6c",
+      "realdata.py": "ed24db2b066531281a196e6fa074130cb0ee78a640eae5ccaaace234f5ad5421"
+    },
+    "limitations": "Two sources/one high-noise condition on CPU. Does not reproduce BF16 CUDA monitor or establish broad regression/cause. No output calibration or model change. Unclipped camera RGB mean errors are spatial residuals, not statistical estimator bias."
+  },
+  "artifact_audit": {
+    "new_PNGs_verified": 8,
+    "new_float_predictions_verified": 8,
+    "reused_10000_triplets_verified": 4,
+    "all_primary_and_reused_panels_rerender_byte_exact": true,
+    "direct_pixels_match_parents_exactly": true,
+    "independent_numpy_spatial_statistics_max_absolute_difference": 1.1102230246251565e-16,
+    "CFA_pattern": "RGGB",
+    "phase_order": [
+      "TL(R)",
+      "TR(G1)",
+      "BL(G2)",
+      "BR(B)"
+    ],
+    "camera_channel_order": [
+      "R",
+      "G",
+      "B"
+    ],
+    "cuda_initialized": false,
+    "driver_sha256": "8a8c7ed0c2dee54b2a4d620d4fe90e22306c2272ec2a0b79d808927c27fa3a57",
+    "visual_review_is_separate": true
+  },
+  "visual_review": {
+    "new_native_PNGs_inspected": 8,
+    "images": [
+      "docs/images/fresh-color-means-cpu-none-fabric-3k.png",
+      "docs/images/fresh-color-means-cpu-none-building-3k.png",
+      "docs/images/fresh-color-means-cpu-S-fabric-3k.png",
+      "docs/images/fresh-color-means-cpu-S-building-3k.png",
+      "docs/images/fresh-color-means-cpu-none-fabric-direct.png",
+      "docs/images/fresh-color-means-cpu-none-building-direct.png",
+      "docs/images/fresh-color-means-cpu-S-fabric-direct.png",
+      "docs/images/fresh-color-means-cpu-S-building-direct.png"
+    ],
+    "fabric": "Both10000 outputs are darker/more yellow than their matched3000 output and exact target. Fine cords remain absent. Camera-space channel means confirm a large scene-dependent shift on this case.",
+    "building": "Outputs remain close and channel-mean residuals are small; no comparable shift is seen on this second example."
+  },
+  "decision": {
+    "model_changed": false,
+    "output_correction_applied": false,
+    "promoted": false,
+    "next": "Complete full427/numerical/native/analytic/GFX review; prioritize color fidelity before selecting another experiment."
+  },
+  "artifact_audit_file": {
+    "path": "/mnt/external/demosaic/evaluation/fresh-none-S-3k10k-color-means-cpu-v1/artifact-audit.json",
+    "sha256": "8729bd8a59d55db1cbcff8b422c93525f8072a369d9d6bd04bf801d24341c7ef"
+  },
+  "runtime_versions_at_publication": {
+    "torch": "2.14.1+cu130",
+    "numpy": "2.5.4",
+    "pillow": "12.3.0",
+    "transformers": "4.57.6"
+  }
+}

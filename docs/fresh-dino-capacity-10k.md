@@ -1,9 +1,12 @@
 # Completing the original fresh-model schedules
 
-The no-context, DINOv3 ViT-S and ViT-B arms continue from their complete 3,000-step
-states to the originally planned 10,000 updates, sequentially on the shared GB10.
-This finishes an existing controlled experiment; no optimizer, EMA, RNG or LR
-reset is introduced. [Resume audit](results/fresh-dino-capacity-10k-resume-audit.json).
+The no-context, DINOv3 ViT-S and ViT-B arms have completed their originally
+planned 10,000 updates, sequentially on the shared GB10. The
+[completed training-boundary audit](results/fresh-dino-capacity-10k-boundary.json)
+verifies all 403 matching logged observations, finite stored model/EMA tensors,
+AdamW states at 10,000 and final LR 1e-5. Full quality evaluation/review is running.
+The continuation introduced no optimizer, EMA, RNG or LR reset.
+[Resume audit](results/fresh-dino-capacity-10k-resume-audit.json).
 The [3,000-step review](fresh-dino-capacity-3k-review.md) remains historical evidence,
 not convergence or proof of a general foundation-model effect.
 
@@ -59,7 +62,7 @@ copy path was created early.
 
 The [second-arm boundary receipt](results/fresh-dino-capacity-S10k-boundary.json)
 now verifies that DINO-S also finished its original 10,000 updates with final
-LR1e-5, finite recorded training/model values and a nonzero learned context
+LR 1e-5, finite recorded training/model values and a nonzero learned context
 gate. All 403 logged observations match no-context. DINO-B has resumed from its
 original 3,000-step state at the same 3,001 LR; the receipt records its matching
 prefix through 3,150. These are historical boundary observations; B continues.
@@ -108,3 +111,16 @@ and EMA tensors. B's existing 4k best was copied from one opened checkpoint inod
 to a private immutable diagnostic snapshot. This preserves evidence without
 changing the trainer or creating the controller's expected final 10k paths.
 The small monitor does not establish that these are broader quality optima.
+
+A [matched CPU color-residual diagnostic](fresh-color-mean-diagnostic.md) now
+replays the two fixed serialized observations at 3k/10k for no-context/S. It
+demonstrates a large fabric color/brightness regression in both, while the
+building example stays close. All four 10k restored panels reproduce previous
+pixels exactly, and eight float predictions are retained. This isolates the
+observed change from a new noise draw or inference-precision change on these
+two cases; it does not identify a cause or establish broad regression.
+
+The controller has made its immutable final 10k model copies and finished both
+paired development panels. At the boundary audit it is evaluating the full427
+suite; analytic/native/full-frame/manual review still remains. No model is
+promoted and no new GPU experiment starts before that review and owner exit.

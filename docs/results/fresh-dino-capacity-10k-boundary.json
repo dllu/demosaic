@@ -1,0 +1,68 @@
+{
+  "status": "all-three-original10000-schedules-complete-full-quality-evaluation-running",
+  "recorded_utc": "2026-10-16T20:17:05.461030+00:00",
+  "controller": {
+    "pid": 164667,
+    "created": 1792170467.85,
+    "worktree": "/home/dllu/proj/demosaic/.cache/fresh-dino-capacity-worktree",
+    "source_commit": "8580a4e0908c76ead6f9619ce635f8e4e9eef0ec",
+    "review_publication_commit": "5dadf9a9e1ff89d267c961c520d84fd5bf8ad1d3",
+    "review_sha256": "2655b7ccb4eec9d06631a958d4d53b386c770f6d6eddd3384f97ed032db70133",
+    "driver_sha256": "5292e9d7ca833ddba74cef9dc5ec4038fbd8252ea27ae2ae3cc7628168751a53",
+    "log": "/home/dllu/proj/demosaic/.cache/fresh-dino-capacity-worktree/.cache/fresh-dino-capacity-to10k-workflow.log"
+  },
+  "evaluation_stage_at_audit": "evaluating-full427",
+  "models": [
+    {
+      "name": "control-anchored-native-fresh-b16-v45",
+      "path": "/mnt/external/demosaic/models/control-anchored-native-fresh-b16-v45-step10000.pt",
+      "checkpoint_sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4",
+      "source_sha256": "2f1a2251d8141d335e99266343b46b61b8da3cb13012fc63d79ea5c3968ad01c",
+      "step": 10000,
+      "optimizer_updates": 10000,
+      "final_lr": 1e-05,
+      "model_tensors": 66,
+      "ema_tensors": 66,
+      "optimizer_parameter_states": 66,
+      "model_and_EMA_tensors_and_logged_loss_gradnorm_finite": true,
+      "ema_context_gate_l2": null,
+      "dino_model": null,
+      "dino_revision": null
+    },
+    {
+      "name": "dino-anchored-native-fresh-b16-v44",
+      "path": "/mnt/external/demosaic/models/dino-anchored-native-fresh-b16-v44-step10000.pt",
+      "checkpoint_sha256": "ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad",
+      "source_sha256": "2f1a2251d8141d335e99266343b46b61b8da3cb13012fc63d79ea5c3968ad01c",
+      "step": 10000,
+      "optimizer_updates": 10000,
+      "final_lr": 1e-05,
+      "model_tensors": 71,
+      "ema_tensors": 71,
+      "optimizer_parameter_states": 69,
+      "model_and_EMA_tensors_and_logged_loss_gradnorm_finite": true,
+      "ema_context_gate_l2": 0.03153374418616295,
+      "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+      "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32"
+    },
+    {
+      "name": "dino-base-anchored-native-fresh-b16-v51",
+      "path": "/mnt/external/demosaic/models/dino-base-anchored-native-fresh-b16-v51-step10000.pt",
+      "checkpoint_sha256": "dcf3e96591d7ede1890482f874b0233a1ba9516bb9e31a042e5efa82e242ced1",
+      "source_sha256": "2f1a2251d8141d335e99266343b46b61b8da3cb13012fc63d79ea5c3968ad01c",
+      "step": 10000,
+      "optimizer_updates": 10000,
+      "final_lr": 1e-05,
+      "model_tensors": 71,
+      "ema_tensors": 71,
+      "optimizer_parameter_states": 69,
+      "model_and_EMA_tensors_and_logged_loss_gradnorm_finite": true,
+      "ema_context_gate_l2": 0.020015055313706398,
+      "dino_model": "facebook/dinov3-vitb16-pretrain-lvd1689m",
+      "dino_revision": "5931719e67bbdb9737e363e781fb0c67687896bc"
+    }
+  ],
+  "shared_logged_training_observations": 403,
+  "cuda_initialized_by_audit": false,
+  "limitations": "Boundary verification only. Full numerical/native/analytic/102MP GFX evaluation and manual review remain. One training seed and original nondeterministic CUDA policy; no convergence, DINO benefit, speed or promotion claim."
+}
