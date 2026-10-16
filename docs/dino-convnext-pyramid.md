@@ -92,7 +92,32 @@ in FP32. Two discarded batch-one FP32 updates per arm use the same observations;
 all three gates receive gradients immediately and all four lateral projections
 receive them on update two. Encoder tensors stay byte-identical. Learned gate
 norms are .001665/.002278/.003092, and native-256px FP32 portable reload is exact.
-No full-size CPU BF16 training or full optimizer/EMA/RNG restart claim is made.
+That initial preflight did not test full-size CPU BF16 training or a complete
+optimizer/EMA/RNG restart.
+
+The later [genuine-weight actual-trainer restart audit](results/dino-convnext-pyramid-cpu-restart.json)
+now verifies a four-update CPU FP32 prefix against an interruption after two
+updates followed by two resumed updates. It retains seed 48 and the original
+10,000-update/100-warmup LR schedule, all frozen manifests and domain proportions,
+while using batch one, native 64px patches and zero data workers. Both Commons
+updates precede the interruption; native RAW and paired RAW follow it.
+
+All 91 portable model tensors, 91 EMA tensors, 89 AdamW parameter states,
+model configuration, best-validation scalar, Python/Torch RNG and empty CPU-only
+CUDA RNG states match exactly. All four logged observations and numerical
+training metrics match; only elapsed time is excluded. Genuine Gaussian and
+ConvNeXt identities are checked, and the learned gates are nonzero. This closes
+the CPU complete-state restart item in the earlier receipt. It does not prove
+production batch-16/native-256px CUDA or BF16 continuation equivalence.
+
+Reproduce the discarded audit independently with a new output directory:
+
+```bash
+source scripts/env.sh
+CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=2 HF_HUB_OFFLINE=1 \
+  uv run --no-sync python scripts/audit_dino_pyramid_restart.py \
+  --output /mnt/external/demosaic/benchmarks/dino-convnext-pyramid-restart-cpu-new
+```
 
 The first preflight used
 the project's precision helper, which intentionally leaves CPU work in FP32;
@@ -111,8 +136,24 @@ comparison. It includes no
 weak-source, input-adapter, expanded-paired or new ADC-policy intervention.
 
 Before launch, finish and review the running long comparison, verify its owner's
-exit, and run full genuine-weight CUDA/FP16/native-256px batch-16 gradient,
-initial-equality, portable-state and restart checks. Batch 16 is the established
+exit, run the complete CUDA-enabled test suite and the genuine-weight
+CUDA/FP16/native-256px batch-16 checks. The
+[prepared CUDA preflight](../scripts/preflight_dino_pyramid_cuda.py) checks initial
+FP32/BF16/FP16 equality against no-context, two discarded Commons updates,
+frozen-encoder identity, portable EMA FP16 predictions, exact model/EMA/AdamW/RNG
+restoration before continuation, and a third native-RAW update. Its constant
+preflight LR is 1e-4; this is not scheduled V58 training. It does not assert
+bitwise equal CUDA optimization after continuation. Its peak allocation includes
+both the original and restored models and is not a batch-size benchmark.
+
+Only this script's live-owner rejection has executed: controller 164667 was
+confirmed live, so the attempt stopped before CUDA initialization or output
+creation. The model/gradient/state path is still unexecuted. It requires the
+preceding controller/status files and the completed published review's path and
+SHA256; its review must cover the original 10,000-update workflow. That prevents
+preflight from overlapping the owned comparison or bypassing its review.
+
+Batch 16 is the established
 current-trunk setting; it is not a measured ConvNeXt throughput optimum. A
 1,000-update first gate would retain the 10,000-step LR schedule. Require matched
 logged observations and numerical development/full-427 results, analytic weak

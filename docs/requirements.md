@@ -225,7 +225,9 @@ broad superiority or full-frame quality on those three captures.
 
 The optional [DINOv3 ConvNeXt pyramid](dino-convnext-pyramid.md) adds finer frozen
 feature grids and fusion at three CNN resolutions. Genuine pinned weights are
-cached; CPU engineering is tracked separately from CUDA validation and trained
-quality. The prepared fresh V58 recipe changes backbone and fusion together.
+cached; [complete-state CPU restart](results/dino-convnext-pyramid-cpu-restart.json)
+matches four uninterrupted updates with a 2+2 restart through Commons/native/
+paired domains. CUDA validation and trained quality remain. The prepared fresh
+V58 recipe changes backbone and fusion together.
 It does not change the running original no-context/S/B comparison or establish
 a foundation-model benefit, convergence or SOTA.

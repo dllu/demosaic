@@ -206,6 +206,9 @@ DINOv3 license. Official Transformers code and our rectangular CPU probe expose
 four spatial feature maps at 1/4, 1/8, 1/16 and 1/32 input resolution. That motivates
 an [optional top-down fusion branch](dino-convnext-pyramid.md) at three CNN
 resolutions, rather than claiming that a denser feature grid guarantees more
-faithful image detail. Backbone and fusion capacity change together. Only CPU
-engineering is being prepared while the original longer GPU comparison runs;
-full CUDA checks, matched training, native triplets and real-camera review remain.
+faithful image detail. Backbone and fusion capacity change together. Genuine
+CPU engineering and a four-update actual-trainer complete-state restart now
+pass, including Commons/native/paired domains. A CUDA preflight is prepared,
+but only its live-owner rejection has run while the original longer comparison
+continues. Full CUDA checks, matched training, native triplets and real-camera
+review remain.
