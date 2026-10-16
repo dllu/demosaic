@@ -19,7 +19,7 @@ with66,934 training sources, SHA01cb4185...cf78894.
 
 Started matching4× preparation for only those14,398 new sources, reusing the
 52,536-source4× training base. Controller580845 (creation1792185684.87), two
-CPU workers/nice5, estimated66.8GB and512GiB free reserve; package/operator/driver
+CPU workers/nice5, estimated65.3GB and512GiB free reserve; package/operator/driver
 are frozen. Full new-cache hashes and exact final membership must pass before
 the combined4× freeze. Current model manifests remain unchanged.
 

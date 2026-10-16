@@ -92,7 +92,7 @@ of this preview review. The standing GFX scene/siblings remain excluded.
 CPU-only4× preparation now processes just the14,398 new training sources,
 reusing the existing52,536-source training base and its held-out cache paths.
 It uses two workers at nice5, a frozen package/operator/driver and an estimated
-66.8 GB payload checked against a512 GiB reserve. All new cache SHA256s must
+65.3 GB payload checked against a512 GiB reserve. All new cache SHA256s must
 verify before the combined4× manifest freezes. The final active counts must be
 66,934 train/2,303 val/2,255 test; new reserved/excluded sources stay outside it.
 The original8× validation manifest remains the evaluation input for future
