@@ -71,7 +71,10 @@ class RgbRestorationTrunk(nn.Module):
         self.m_body = nn.Sequential(*(ResidualBlock(512) for _ in range(4)))
         self.m_tail = nn.Conv2d(64, 3, 3, padding=1, bias=False)
 
-    def forward(self, rgb, noise, *, head_offset=None, middle_offset=None, return_features=False):
+    def forward(
+        self, rgb, noise, *, head_offset=None, middle_offset=None,
+        encoder_offsets=None, return_features=False,
+    ):
         # Preserve weak native RGB variations through the first skip even when
         # deep features use BF16/FP16. Absolute RGB is projected in IEEE FP32.
         with torch.autocast(rgb.device.type, enabled=False), ieee_fp32():
@@ -84,7 +87,13 @@ class RgbRestorationTrunk(nn.Module):
             # hidden encoder branch follows the active CNN autocast dtype.
             hidden = hidden.to(torch.get_autocast_dtype(x1.device.type))
         x2 = self.m_down1(hidden)
+        if encoder_offsets is not None:
+            # Keep the same hidden/skip dtype as the no-context control. In
+            # particular, zero feature gates must not introduce FP32 promotion.
+            x2 = x2 + encoder_offsets[0].to(x2.dtype)
         x3 = self.m_down2(x2)
+        if encoder_offsets is not None:
+            x3 = x3 + encoder_offsets[1].to(x3.dtype)
         x4 = self.m_down3(x3)
         if self.middle_skip_fp32:
             # Match the FP32 promotion supplied by a DINO offset, even when
@@ -496,14 +505,18 @@ class PretrainedRgbDemosaic(nn.Module):
             )
             with torch.autocast(packed.device.type, enabled=False), ieee_fp32():
                 head_offset = self.project_measurements(condition)
-            middle_offset = None
+            middle_offset, encoder_kwargs = None, {}
             if context is not None:
                 middle_offset = context(
                     render(rgb if preview is None else preview, wb, matrix),
                     (normalized.shape[-2] // 8, normalized.shape[-1] // 8),
                 )
+                if isinstance(middle_offset, tuple):
+                    encoder_kwargs = {"encoder_offsets": middle_offset[:2]}
+                    middle_offset = middle_offset[2]
             prediction = self.network(
-                normalized, noise, head_offset=head_offset, middle_offset=middle_offset
+                normalized, noise, head_offset=head_offset, middle_offset=middle_offset,
+                **encoder_kwargs,
             )[..., :h, :w]
         with torch.autocast(packed.device.type, enabled=False), ieee_fp32():
             output = prediction.float() * span + offset

@@ -1,0 +1,399 @@
+{
+  "status": "cpu-engineering-validated-not-trained-cuda-validation-pending",
+  "actual_preflight": {
+    "path": "/mnt/external/demosaic/benchmarks/dino-convnext-pyramid-cpu-v3/receipt.json",
+    "sha256": "99094c005a8d79ad0b86c2dd2ac906846983b2fb8f5d6b9ce2f9614cbb56b994",
+    "exit_code": 0
+  },
+  "cpu_suite": {
+    "command": "source scripts/env.sh; CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=2 HF_HUB_OFFLINE=1 uv run --no-sync pytest -q",
+    "passed": 488,
+    "skipped_cuda": 8,
+    "seconds": 96.74,
+    "exit_code": 0,
+    "log": "/mnt/external/demosaic/benchmarks/dino-convnext-pyramid-cpu-v3/validation/dino-pyramid-cpu-suite-v2.log",
+    "sha256": "4000b50616c34b6293da3d4ae780c2c7f7a6fc70f887ca41bfa8b537546e1f95"
+  },
+  "preflight_command": "source scripts/env.sh; CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=2 HF_HUB_OFFLINE=1 uv run --no-sync python scripts/preflight_dino_pyramid.py --output /mnt/external/demosaic/benchmarks/dino-convnext-pyramid-cpu-v3",
+  "source_files": {
+    "src/demosaic/paired_admission.py": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825",
+    "src/demosaic/prior.py": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a",
+    "src/demosaic/metrics.py": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31",
+    "src/demosaic/inference.py": "911e71e8dcbeb1872ed591bc5234ed2b79bae063a859b4704516537d94a1df0b",
+    "src/demosaic/train.py": "e8a82a3cbf2fed7059490db6ca347ab8b5ef7e345f4289c2ec1d36b8c1163c2b",
+    "src/demosaic/dino_adaptation.py": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861",
+    "src/demosaic/paired_training.py": "71a2481213bba174bd3d6b3de9ae9b89f88333635810e15d0958352d9d8d053d",
+    "src/demosaic/reference.py": "54ed094d58e245a56993ea3ce3ef9e21d2164e902d41d03bba9132bacd22891f",
+    "src/demosaic/prepare.py": "e4c0733bb260c289b3ce8aaf5f393abc5919d8d81cdcf462b70032d790429712",
+    "src/demosaic/realdata.py": "ed24db2b066531281a196e6fa074130cb0ee78a640eae5ccaaace234f5ad5421",
+    "src/demosaic/cfa.py": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252",
+    "src/demosaic/paired.py": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d",
+    "src/demosaic/audit.py": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d",
+    "src/demosaic/losses.py": "548b1481a035ad937d4a046754a74e70684864a9842296765c62079a002e5120",
+    "src/demosaic/gaussian.py": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72",
+    "src/demosaic/real_suite.py": "2d8cd262a22b8c11d12159e7a90f96022219915ecf0dada36665467fd0f7ccee",
+    "src/demosaic/raw_clean.py": "a143ce351ac4e1b2425d4d561000d3e8934477fe9172c88f90ce76d9b32a7a6c",
+    "src/demosaic/raw_admission.py": "1948afbbf05129190273ab77466f26d9d27dc942716beaab16f077c8c3330803",
+    "src/demosaic/vst.py": "355124a374177f1c08271834149c5979ab3477fdf255c60aa7cee0d47792a76b",
+    "src/demosaic/io.py": "0a1599ffe7f6d935e92fc71e6b086430c6f82678a74952c3b8f31155a0bea83b",
+    "src/demosaic/data.py": "b3277bca23d8c17b365ee364e175ea8a850d45a79cf02686628db606341e7be3",
+    "src/demosaic/__init__.py": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d",
+    "src/demosaic/calibration.py": "e86f4c602a6cd7fd855d0bcfeb790cf17ed87611f19d97926f9db174909b2d26",
+    "src/demosaic/noise.py": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce",
+    "src/demosaic/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+    "src/demosaic/precision.py": "9aa850fb5ee0e9abc3e9adc4847ce3518c1acb37c93f6bc54ff9206bb0c94c3a",
+    "src/demosaic/cli.py": "ae48ac49a52fcb9fa72521b1194e71fe8603a2ac301cf94be4a172a29a4d9003",
+    "src/demosaic/reporting.py": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d",
+    "src/demosaic/model.py": "c37f530b3c4265e23af8d04b81e65e19b8ee585538874445e4a95bc337f23a71",
+    "src/demosaic/color.py": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+    "src/demosaic/dino_pyramid.py": "246944874671ceb4449b0487fcb347a00f8b82d713d5b4c9fee5a7c8a68aa95f",
+    "src/demosaic/textures.py": "b4bc304a50de272cf7fcba272e67b828c163466ffc23ea3337a6a66f076dc664",
+    "src/demosaic/safety.py": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7",
+    "src/demosaic/pretrained_rgb.py": "10ea25fc01bf561a3ea9087002566eb319717c338f44f54d2da46fc6ee0d7026",
+    "src/demosaic/registration.py": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202",
+    "src/demosaic/suite.py": "a474ff659df10dd4ec11d577082034a6e6dcba1a2a2b29c39065056cff5527b4",
+    "/home/dllu/proj/demosaic/scripts/preflight_dino_pyramid.py": "67ed28b40db516281af0f6df77b9bef99f47ed899eb37ff74e5ec27c42bbede4",
+    "scripts/preflight_paired_extension.py": "b549bb7c43bec03045854fe6bc683031620a0b47264b248868e53eb707bb2ff7",
+    "configs/control-anchored-native-fresh-b16-v45.yaml": "0dec82a55635d217137d40d35b12788fd2d533b2c1213847ffe27ca59dfc61d7",
+    "docs/results/dino-convnext-tiny-availability-v1.json": "bd25b6304476aa2159509df2b357c0a52977fd92da54efa6e0eceff0af2dfb07"
+  },
+  "archived_validation_files": {
+    "/mnt/external/demosaic/benchmarks/dino-convnext-pyramid-cpu-v3/validation/dino-pyramid-cpu-suite-v2.log": "4000b50616c34b6293da3d4ae780c2c7f7a6fc70f887ca41bfa8b537546e1f95",
+    "/mnt/external/demosaic/benchmarks/dino-convnext-pyramid-cpu-v3/validation/test_dino_pyramid.py": "13aa1f91d0405a4955a3e26d5d635c9ed862d6906d2409b5bc99e22107a09ce7",
+    "/mnt/external/demosaic/benchmarks/dino-convnext-pyramid-cpu-v3/validation/publish_dino_pyramid_cpu.py": "da83bf528b3156b20929f814088393c65b4df767447caca83393e84e3225c422"
+  },
+  "precision_protocol": {
+    "all_cfa_rectangular_fixture": "FP32, 4 native34x50 images; mixed shot/read including zero",
+    "explicit_cpu_bfloat16_fixture": "1 native32x32 GBRG image; shot0.00256/read2.62144e-5; initial forward only",
+    "native256_initial_and_updates_and_reload": "FP32, batch1; two discarded updates per arm",
+    "observed_trunk_output_dtypes_asserted": true
+  },
+  "arms": [
+    {
+      "pyramid": false,
+      "model_config": {
+        "restoration_backbone": "pretrained-rgb",
+        "width": 64,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": false,
+        "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+        "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+        "dino_lora_rank": 0,
+        "dino_input_adapter": false,
+        "dino_feature_fusion": "bottleneck",
+        "camera_conditioning": true,
+        "noise_modulation": false,
+        "physical_fp32": true,
+        "baseline": "bilinear",
+        "prior_window": 7,
+        "standardized_noise": false,
+        "noise_refinement": false,
+        "refinement_width": 24,
+        "refinement_blocks": 4,
+        "refinement_window": 63,
+        "coarse_refinement_factor": 0,
+        "coarse_refinement_width": 24,
+        "coarse_refinement_blocks": 4,
+        "coarse_refinement_window": 31,
+        "pyramid_refinement": false,
+        "pyramid_measurements": true,
+        "pyramid_width": 24,
+        "pyramid_blocks": 2,
+        "variance_stabilization": true,
+        "physical_anchors": true,
+        "rgb_processing_scale": 1,
+        "packed_detail_prior": false,
+        "rgb_hidden_autocast": false,
+        "rgb_center_camera_matrix": false,
+        "rgb_middle_skip_fp32": true,
+        "adc_cfa_projection": false
+      },
+      "trainable_parameters": 32642368,
+      "frozen_encoder_parameters": 0,
+      "context_trainable_parameters": 0,
+      "common_initial_sha256": "3a5438a87bc041fb0efd92315f04400e68b865bd0799dc88dd7558515131144c",
+      "initial_predictions": {
+        "float32": "9e7d7161bdbbd0938bdcf5a4b5b4a191ee9e2462cd41cd562075c119ba7b68ed",
+        "bfloat16": "82c7a7474233ac43b5a5edfe22baae921b89b0b784dbbfef054635b61e22003e",
+        "native256_float32": "7d21ba75d1c5c34f942bafea4c372a12fa7badc2be97438fe32ebf7608dbb99b"
+      },
+      "gaussian_initialization": {
+        "type": "verified RGB Gaussian restoration pretraining",
+        "path": "/home/dllu/proj/demosaic/docs/results/gaussian-color-source-and-weights.json",
+        "sha256": "8d907542c3344e8a980854e067fd79a3e61b920f5c23a0f61d69c52ed9a54129",
+        "prior": {
+          "label": "DRUNet-RGB:GAT-table:HQS4",
+          "weights_sha256": "479abe3c5327dfd10ff54a80ec7d4098ca80752a5c9492cdff31cee430bec4b4",
+          "sha256": "479abe3c5327dfd10ff54a80ec7d4098ca80752a5c9492cdff31cee430bec4b4",
+          "source_sha256": "bd44add95919f0b0baca45ce8760ff634fd1fb4b0d670606ce38ce1a7f0bc772",
+          "snapshot": "/mnt/external/demosaic/benchmarks/dino-convnext-pyramid-cpu-v3/gaussian-reference/weights-479abe3c5327dfd10ff54a80ec7d4098ca80752a5c9492cdff31cee430bec4b4.pth",
+          "inverse": "table",
+          "compute_precision": "IEEE float32",
+          "conditioning": "Explicit shot/read priors; no input fitting or target gain",
+          "source_receipt": "docs/results/gaussian-color-source-and-weights.json",
+          "physical_compute_precision": "float64 transform/inverse; float32 RGB and neural prior",
+          "joint_sigmas": [
+            8.0,
+            4.0,
+            2.0,
+            1.0
+          ],
+          "joint_weight": 0.23
+        },
+        "new_adapters": "Zero measurement/camera projection and zero DINO fusion gate",
+        "rgb_processing_scale": 1,
+        "physical_representation": "Centered GAT / expectation inverse with explicit shot/read; unit-noise CFA"
+      },
+      "updates": [
+        {
+          "step": 1,
+          "loss": 0.005341551266610622,
+          "gradient_norm": 3.291734457015991,
+          "context_gradient_norms": {},
+          "observation_sha256": "21fc6a95278f7c80e993ab17892c30e2778ffd5e031624f776fbc8198609b4cf"
+        },
+        {
+          "step": 2,
+          "loss": 0.009331759065389633,
+          "gradient_norm": 2.0895519256591797,
+          "context_gradient_norms": {},
+          "observation_sha256": "537730e2b1cd390c379185babdd5388f06e75107acd793b3aaf1afee7a2adfad"
+        }
+      ],
+      "frozen_backbone_initial_and_final_sha256": null,
+      "portable_float32_reload_exact": true,
+      "trunk_output_dtypes_verified": [
+        "torch.float32",
+        "torch.bfloat16",
+        "torch.float32",
+        "torch.float32",
+        "torch.float32",
+        "torch.float32"
+      ],
+      "discarded_checkpoint": {
+        "path": "/mnt/external/demosaic/benchmarks/dino-convnext-pyramid-cpu-v3/discarded-0.pt",
+        "sha256": "213c69417aeaf2e402e015ede5e5dee51d70ca4a7ed7da5fa93c630d659e025e"
+      }
+    },
+    {
+      "pyramid": true,
+      "model_config": {
+        "restoration_backbone": "pretrained-rgb",
+        "width": 64,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "dino_lora_rank": 0,
+        "dino_input_adapter": false,
+        "dino_feature_fusion": "convnext-pyramid",
+        "camera_conditioning": true,
+        "noise_modulation": false,
+        "physical_fp32": true,
+        "baseline": "bilinear",
+        "prior_window": 7,
+        "standardized_noise": false,
+        "noise_refinement": false,
+        "refinement_width": 24,
+        "refinement_blocks": 4,
+        "refinement_window": 63,
+        "coarse_refinement_factor": 0,
+        "coarse_refinement_width": 24,
+        "coarse_refinement_blocks": 4,
+        "coarse_refinement_window": 31,
+        "pyramid_refinement": false,
+        "pyramid_measurements": true,
+        "pyramid_width": 24,
+        "pyramid_blocks": 2,
+        "variance_stabilization": true,
+        "physical_anchors": true,
+        "rgb_processing_scale": 1,
+        "packed_detail_prior": false,
+        "rgb_hidden_autocast": false,
+        "rgb_center_camera_matrix": false,
+        "rgb_middle_skip_fp32": true,
+        "adc_cfa_projection": false
+      },
+      "trainable_parameters": 32904704,
+      "frozen_encoder_parameters": 27820128,
+      "context_trainable_parameters": 262336,
+      "common_initial_sha256": "3a5438a87bc041fb0efd92315f04400e68b865bd0799dc88dd7558515131144c",
+      "initial_predictions": {
+        "float32": "9e7d7161bdbbd0938bdcf5a4b5b4a191ee9e2462cd41cd562075c119ba7b68ed",
+        "bfloat16": "82c7a7474233ac43b5a5edfe22baae921b89b0b784dbbfef054635b61e22003e",
+        "native256_float32": "7d21ba75d1c5c34f942bafea4c372a12fa7badc2be97438fe32ebf7608dbb99b"
+      },
+      "gaussian_initialization": {
+        "type": "verified RGB Gaussian restoration pretraining",
+        "path": "/home/dllu/proj/demosaic/docs/results/gaussian-color-source-and-weights.json",
+        "sha256": "8d907542c3344e8a980854e067fd79a3e61b920f5c23a0f61d69c52ed9a54129",
+        "prior": {
+          "label": "DRUNet-RGB:GAT-table:HQS4",
+          "weights_sha256": "479abe3c5327dfd10ff54a80ec7d4098ca80752a5c9492cdff31cee430bec4b4",
+          "sha256": "479abe3c5327dfd10ff54a80ec7d4098ca80752a5c9492cdff31cee430bec4b4",
+          "source_sha256": "bd44add95919f0b0baca45ce8760ff634fd1fb4b0d670606ce38ce1a7f0bc772",
+          "snapshot": "/mnt/external/demosaic/benchmarks/dino-convnext-pyramid-cpu-v3/gaussian-reference/weights-479abe3c5327dfd10ff54a80ec7d4098ca80752a5c9492cdff31cee430bec4b4.pth",
+          "inverse": "table",
+          "compute_precision": "IEEE float32",
+          "conditioning": "Explicit shot/read priors; no input fitting or target gain",
+          "source_receipt": "docs/results/gaussian-color-source-and-weights.json",
+          "physical_compute_precision": "float64 transform/inverse; float32 RGB and neural prior",
+          "joint_sigmas": [
+            8.0,
+            4.0,
+            2.0,
+            1.0
+          ],
+          "joint_weight": 0.23
+        },
+        "new_adapters": "Zero measurement/camera projection and zero DINO fusion gate",
+        "rgb_processing_scale": 1,
+        "physical_representation": "Centered GAT / expectation inverse with explicit shot/read; unit-noise CFA"
+      },
+      "updates": [
+        {
+          "step": 1,
+          "loss": 0.005341551266610622,
+          "gradient_norm": 3.2978086471557617,
+          "context_gradient_norms": {
+            "laterals.0.weight": 0.0,
+            "laterals.0.bias": 0.0,
+            "laterals.1.weight": 0.0,
+            "laterals.1.bias": 0.0,
+            "laterals.2.weight": 0.0,
+            "laterals.2.bias": 0.0,
+            "laterals.3.weight": 0.0,
+            "laterals.3.bias": 0.0,
+            "smooth.0.weight": 0.0,
+            "smooth.0.bias": 0.0,
+            "smooth.1.weight": 0.0,
+            "smooth.1.bias": 0.0,
+            "smooth.2.weight": 0.0,
+            "smooth.2.bias": 0.0,
+            "projections.0.weight": 0.0,
+            "projections.0.bias": 0.0,
+            "projections.1.weight": 0.0,
+            "projections.1.bias": 0.0,
+            "projections.2.weight": 0.0,
+            "projections.2.bias": 0.0,
+            "gates.0": 0.05891161784529686,
+            "gates.1": 0.013374854810535908,
+            "gates.2": 0.005561147816479206
+          },
+          "observation_sha256": "21fc6a95278f7c80e993ab17892c30e2778ffd5e031624f776fbc8198609b4cf"
+        },
+        {
+          "step": 2,
+          "loss": 0.009362561628222466,
+          "gradient_norm": 2.1013081073760986,
+          "context_gradient_norms": {
+            "laterals.0.weight": 2.2603323941439157e-06,
+            "laterals.0.bias": 1.4657521205663215e-06,
+            "laterals.1.weight": 5.1918236749770585e-06,
+            "laterals.1.bias": 1.8984037524205633e-06,
+            "laterals.2.weight": 0.00013992871390655637,
+            "laterals.2.bias": 2.0340210085123545e-06,
+            "laterals.3.weight": 8.949888069764711e-06,
+            "laterals.3.bias": 2.0340210085123545e-06,
+            "smooth.0.weight": 0.00012129289825679734,
+            "smooth.0.bias": 2.588439429018763e-06,
+            "smooth.1.weight": 0.00010672280041035265,
+            "smooth.1.bias": 2.2831700334791094e-06,
+            "smooth.2.weight": 7.988674769876525e-05,
+            "smooth.2.bias": 1.7470686088927323e-06,
+            "projections.0.weight": 3.9005146390991285e-05,
+            "projections.0.bias": 4.3091877159895375e-06,
+            "projections.1.weight": 3.449686482781544e-05,
+            "projections.1.bias": 3.739257863344392e-06,
+            "projections.2.weight": 1.8888802514993586e-05,
+            "projections.2.bias": 2.921801524280454e-06,
+            "gates.0": 0.02473757602274418,
+            "gates.1": 0.02204986847937107,
+            "gates.2": 0.012899860739707947
+          },
+          "observation_sha256": "537730e2b1cd390c379185babdd5388f06e75107acd793b3aaf1afee7a2adfad"
+        }
+      ],
+      "frozen_backbone_initial_and_final_sha256": "f038a89bb9613e062b524b160cf654823816bdab56e7200168289835060c4515",
+      "portable_float32_reload_exact": true,
+      "trunk_output_dtypes_verified": [
+        "torch.float32",
+        "torch.bfloat16",
+        "torch.float32",
+        "torch.float32",
+        "torch.float32",
+        "torch.float32"
+      ],
+      "discarded_checkpoint": {
+        "path": "/mnt/external/demosaic/benchmarks/dino-convnext-pyramid-cpu-v3/discarded-1.pt",
+        "sha256": "8decb70effd75de0bebd627ba5f0842d283acc58caf9e36e70c23d5c500c845d"
+      }
+    }
+  ],
+  "trained_preflight_gate_norms": [
+    0.0016647097654640675,
+    0.0022782799787819386,
+    0.003091777442023158
+  ],
+  "prepared_experiment": {
+    "path": "configs/dino-convnext-pyramid-fresh-b16-v58.yaml",
+    "sha256": "7b154f116cb121ac59a8c8f4d9295857630a6bfaf414c4b9f1ba4f0038e5d46b",
+    "matches_fresh_v44_except": [
+      "run/notes",
+      "backbone model and revision",
+      "feature fusion"
+    ],
+    "manifests": {
+      "manifest": {
+        "path": "/mnt/external/demosaic/audits/commons-bin4-frozen44732-v1/manifest.jsonl",
+        "sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3"
+      },
+      "validation_manifest": {
+        "path": "/mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl",
+        "sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a"
+      },
+      "paired_manifest": {
+        "path": "/mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json",
+        "sha256": "b3b36d3ec28b0e2d339cb28f3bc810cc17b31102f4ce6a3454fdfec9a4a4b5e3"
+      },
+      "raw_clean_manifest": {
+        "path": "/mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json",
+        "sha256": "0dde4a0ca1ad68332d8a1c9d61fdc561db6501cd262d534647b979de82e3cf80"
+      }
+    },
+    "launched": false
+  },
+  "superseded_attempts": [
+    {
+      "path": "/mnt/external/demosaic/benchmarks/dino-convnext-pyramid-cpu-v1/correction.json",
+      "reason": "CPU precision helper left mislabeled BF16 work in FP32; not BF16 evidence"
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/dino-convnext-pyramid-cpu-v2/correction.json",
+      "reason": "Owned CPU-only full-size BF16 preflight terminated before completion because of host cost; not validation evidence"
+    }
+  ],
+  "limitations": "Two discarded batch1 CPU FP32 updates per arm and a small genuine BF16 initial-forward fixture; engineering only. No quality, throughput, CUDA/FP16, BF16-training or convergence evidence; full GPU validation and matched training remain. New pyramid full optimizer/EMA/RNG restart validation remains before real training. Backbone and fusion/parameter capacity change together. Existing default output and running experiments are not promoted or changed."
+}

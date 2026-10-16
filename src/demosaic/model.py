@@ -25,6 +25,7 @@ class ModelConfig:
     dino_revision: str = "main"
     dino_lora_rank: int = 0
     dino_input_adapter: bool = False
+    dino_feature_fusion: str = "bottleneck"
     camera_conditioning: bool = False
     noise_modulation: bool = False
     physical_fp32: bool = True
@@ -310,6 +311,8 @@ class DinoContext(nn.Module):
 
         # No random fallback: access failures are actionable errors.
         self.backbone = AutoModel.from_pretrained(config.dino_model, revision=config.dino_revision)
+        if getattr(self.backbone.config, "model_type", None) == "dinov3_convnext":
+            raise ValueError("DINOv3 ConvNeXt requires dino_feature_fusion: convnext-pyramid")
         # Frozen weights are loaded separately; pin the exact upstream revision.
         config.dino_revision = (
             getattr(self.backbone.config, "_commit_hash", None) or config.dino_revision
@@ -390,6 +393,18 @@ class JointDemosaic(nn.Module):
             raise ValueError("DINO input adapter must be a boolean")
         if cfg.dino_input_adapter and not cfg.dino:
             raise ValueError("DINO input adapter requires DINO context")
+        if cfg.dino_feature_fusion not in ("bottleneck", "convnext-pyramid"):
+            raise ValueError("Unknown DINO feature fusion")
+        if cfg.dino_feature_fusion == "convnext-pyramid" and (
+            not cfg.dino
+            or cfg.restoration_backbone != "pretrained-rgb"
+            or cfg.rgb_processing_scale != 1
+            or cfg.dino_lora_rank
+            or cfg.dino_input_adapter
+        ):
+            raise ValueError(
+                "ConvNeXt pyramid requires native pretrained RGB, DINO, and no input/LoRA adapter"
+            )
         if cfg.rgb_processing_scale not in (1, 2):
             raise ValueError("RGB processing scale must be 1 or 2")
         if cfg.packed_detail_prior and cfg.rgb_processing_scale != 2:
@@ -433,7 +448,15 @@ class JointDemosaic(nn.Module):
                 middle_skip_fp32=cfg.rgb_middle_skip_fp32,
                 adc_projection=cfg.adc_cfa_projection,
             )
-            self.context = DinoContext(cfg, 512) if cfg.dino else None
+            if cfg.dino and cfg.dino_feature_fusion == "convnext-pyramid":
+                from .dino_pyramid import DinoPyramidContext
+
+                # Preserve common initialization/global RNG when adding this
+                # independent, initially zero feature branch.
+                with torch.random.fork_rng(devices=[]):
+                    self.context = DinoPyramidContext(cfg)
+            else:
+                self.context = DinoContext(cfg, 512) if cfg.dino else None
             self.refiner = self.coarse_refiner = self.pyramid_refiner = None
             return
         if len(cfg.encoder_blocks) != len(cfg.decoder_blocks) or cfg.width < 4:

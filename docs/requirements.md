@@ -222,3 +222,10 @@ in the old comparison helper, and verifies12 native triplets plus18 float32
 context outputs from actual V43 GPU execution. These are512-context development
 comparisons without clean references or pixelwise scores; they do not establish
 broad superiority or full-frame quality on those three captures.
+
+The optional [DINOv3 ConvNeXt pyramid](dino-convnext-pyramid.md) adds finer frozen
+feature grids and fusion at three CNN resolutions. Genuine pinned weights are
+cached; CPU engineering is tracked separately from CUDA validation and trained
+quality. The prepared fresh V58 recipe changes backbone and fusion together.
+It does not change the running original no-context/S/B comparison or establish
+a foundation-model benefit, convergence or SOTA.

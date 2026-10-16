@@ -194,4 +194,18 @@ and the 483-test CUDA-enabled suite pass. The [matched first gate](dino-input-v5
 then loses natural-photo and known-camera means, with no clear native detail
 advantage. The option stays default-off. One seed/1,000 updates is not convergence
 or a universal rejection of input adaptation. A same-source control replay is
-the next check on procedural repeatability before interpreting small mean changes.
+now complete in the [unchanged-control replay](control-replay-v57-review.md).
+The original fresh schedules are [continuing to 10,000 updates](fresh-dino-capacity-10k.md).
+
+## DINOv3 convolutional feature pyramid
+
+The [official ConvNeXt-Tiny model](https://huggingface.co/facebook/dinov3-convnext-tiny-pretrain-lvd1689m)
+is accessible at pinned revision `10d30274b4d445111e2d5bf75ac93bbd94db274b`.
+Its genuine pretrained weights match their Hub LFS SHA256 and use the existing
+DINOv3 license. Official Transformers code and our rectangular CPU probe expose
+four spatial feature maps at 1/4, 1/8, 1/16 and 1/32 input resolution. That motivates
+an [optional top-down fusion branch](dino-convnext-pyramid.md) at three CNN
+resolutions, rather than claiming that a denser feature grid guarantees more
+faithful image detail. Backbone and fusion capacity change together. Only CPU
+engineering is being prepared while the original longer GPU comparison runs;
+full CUDA checks, matched training, native triplets and real-camera review remain.
