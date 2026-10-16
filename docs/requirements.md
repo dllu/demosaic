@@ -5,14 +5,14 @@ not just software that executes. This checklist records the evidence required.
 
 | Requirement | Evidence needed | Current state |
 | --- | --- | --- |
-| Modern method and DINOv3 recommendation | Primary-source research, architecture rationale, licensed pretrained backbone and ablation | Official pinned weights; matched 20k-step ablation complete; small positive gain on 427 photos, not SOTA evidence |
+| Modern method and DINOv3 recommendation | Primary-source research, architecture rationale, licensed pretrained backbone and ablation | Official pinned weights; an earlier architecture's matched 20k-step ablation has a small positive gain on 427 photos. A trained ablation of the current pretrained-RGB architecture remains; SOTA is unproven |
 | Free, broad training data | Source attribution manifest, content-grouped held-out split, real corpus training | Active frozen corpus: 40,170 train / 2,303 val / 2,255 untouched test / 4 excluded. A separately audited extension adds 1,808 train sources and reserves 196 new holdout sources. A separate reviewed native extension adds six CC0 outdoor captures, giving59 captures/37 scenes; V37/V38 remain on53/31. Near-duplicate screening is not complete scene recognition |
 | 8×8 binning with additional precision | Linear-light float averaging and >8-bit cache, numerical tests | Implemented and tested; all 44732 eligible licensed sources prepared |
 | Geometry, optical blur, exposure, synthetic fine detail | Executable data augmentation and inspected samples | Implemented. Complete 4×→geometry/PSF→2× Commons/native targets improve full-photo PSNR by .50990 dB in the matched V34 trial; original 8× validation remains fixed |
 | Physical Bayer noise across cameras and ISO | Electron-domain Poisson/read noise, metadata and tests | Moment-tested simulation, conservative single-image estimates on three cameras; dedicated calibration still missing |
 | 16-bit photos and personal cameras | Native RAW metadata/CFA handling, 16-bit output, read-only photo source, real-camera examples | All four cameras loaded; GFX100S 102 MP RGB16 outputs and other-camera crops verified; final quality pending |
 | State-of-the-art quality, substantially better than RawNIND | Reproducible held-out numerical results and qualitative comparisons, including clipping boundaries, texture and shadows | Unmet. V34 first1000 full427 synthetic PSNR/SSIM is 34.46662/.954201, +.50990 dB versus its matched old-order control. Expanded V36 has a similar photo mean but weaker procedural/unseen means. Real primary changes are small and uncertain; channel-calibrated RawNIND leads unseen auxiliary RGB/SSIM. GFX foliage remains soft and colored points remain despite more legible wire mesh. [Matched metrics and native crops](geometry-corpus-v34-v36-review.md). Protected-final remains unscored; matched DINO ablation of this architecture remains |
-| 100 MP possible, target <10 s on GB10 | Actual 100 MP run, memory and timing; quality takes priority if speed misses | V32/V35/V34/V36 and both RawNIND calibrations have full 102 MP RGB16/ICC-sRGB16 outputs; all twelve files verified. V34 restoration took 37.03 s, tile512/overlap64/batch4, shared machine, excluding decode/load/render/encoding. The 10-second target remains unmet. A packed-resolution architecture prototype is under throughput/quality testing |
+| 100 MP possible, target <10 s on GB10 | Actual 100 MP run, memory and timing; quality takes priority if speed misses | Full 102 MP RGB16/ICC outputs are independently verified for retained models and rejected packed variants. V42 is an unchanged-tensor V37 inference export with explicit hidden autocast; its complete quality/native-crop and repeated full-frame timing evidence is in the [review](hidden-autocast-v42-review.md). The 10-second target remains unmet. Packed V38/V40/V41 fail the quality gate |
 | Python/PyTorch/uv and shared-machine care | Locked environment, bounded memory, resumable training, measured GB10 operation | Implemented and verified; CPU restart equivalence and GB10 runs pass |
 | Diary, concise README, detailed docs | Current reproducible commands, experiment records and limitations | Present and being updated; comparator reports include native exact-GT synthetic triplets and independently labeled real references, matched foliage/fence, source/checkpoint hashes and noise/display settings |
 | Commit and push meaningful progress | Git commits and successful remote pushes | Meaningful progress is committed and pushed regularly; see the Git history and diary |
@@ -48,7 +48,7 @@ V34/V36 first1000 and full427/full102MP reviews are complete and stopped.
 [Nine public RAW samples](public-raw-pilot.md) retain their original quarantine.
 Six reviewed sources have a separate opt-in native extension; the chart and two
 clipped sources are excluded. Current architecture trials remain unchanged.
-All **304 tests pass**; Ruff passes. Trained quality, protected-final evaluation
+All **329 tests pass**; Ruff passes. Trained quality, protected-final evaluation
 and the 10-second speed gate remain outstanding.
 
 
@@ -63,3 +63,14 @@ model remains the working reference. V39's
 [completed six-source native review](native-v39-1k-review.md) retains V37's
 initialization, seed, batch and schedule and finds small, uncertain real mean
 gains with mixed synthetic results. No decisive overall gain is established.
+
+The [V40/V41 detail-prior review](packed-detail-v40-v41-review.md) is complete:
+much of V38's noise loss is repaired, but the full-photo deficit versus V37 is
+still about 2.8 dB. A 10× phase-head LR does not close the gap. Neither is
+promoted. The subsequent [V42 precision review](hidden-autocast-v42-review.md)
+changes only the first hidden encoder's autocast policy, retaining V37's learned
+tensors and FP32 native skip. Known/unseen primary and full-photo mean changes
+are tiny; ten native triplets, actual-trained CUDA weak-detail checks and two
+new full RGB16 outputs are verified. This is a compute-policy improvement,
+not a new quality gain. Current-architecture trained DINO ablation and protected
+final assessment still require a selected stronger model.

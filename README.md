@@ -61,3 +61,5 @@ See [training pipeline work](docs/training-pipeline.md) for augmentation before
 the last reduction, selected-domain loading and the batch-size sweep.
 The [packed detail review](docs/packed-detail-v40-v41-review.md) retains the
 full-resolution model after testing two native-detail variants.
+See the [V37 inference precision and timing review](docs/hidden-autocast-v42-review.md)
+for an opt-in export with unchanged learned weights.

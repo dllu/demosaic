@@ -12,8 +12,11 @@ FP32 residual activations and recasts in this first encoder stage. A process-
 local prototype with unchanged V37 EMA weights reduced resident four-tile time
 from 179.84 to 165.22 ms (eight alternating blocks of ten forwards after warmup).
 Output RMS difference was 3.91e-6 camera RGB, maximum 2.75e-4. This is not proof
-of preserved image quality or a full-frame speed claim. The full matched quality
-and timing review is pending.
+of preserved image quality or a full-frame speed claim. The
+[complete matched quality/timing review](hidden-autocast-v42-review.md) now
+finds tiny metric changes, native previews differing by at most one display
+code, and separately measured full-frame timing. It does not establish a
+10-second result or a quality gain.
 
 An inference-only export makes the numerical policy explicit:
 
@@ -41,6 +44,6 @@ The export receipt is in the same external run directory.
 All 329 tests pass (28.09 s). New checks cover encoder/tail dtypes, identical
 explicit FP32 behavior, unchanged state-dict keys, zero-noise native ADC ramps
 for every CFA under BF16 and odd dimensions, and serialized policy roundtrip.
-The original full/packed compatibility tests also pass. Quality review still
-requires known/unseen real, full 427-photo/procedural and full 102 MP GFX results
-with native crops. The production default remains unchanged during review.
+The original full/packed compatibility tests also pass. Known/unseen real,
+full 427-photo/procedural and full 102 MP GFX review with native crops is complete.
+The production default remains unchanged; this is an explicit inference export.

@@ -39,10 +39,11 @@ physical head: each residual adds its FP16 convolution output to an FP32 skip.
 Consequently, subsequent convolutions recast large native feature maps. The
 trace also shows substantial elementwise and copy work. This suggests a
 specific experiment: retain the original FP32 head for the final native skip,
-but evaluate FP16 hidden activations in the first encoder stage. That changes
-numeric behavior and is **not implemented or adopted** by this profile. It needs
-ADC/weak-detail checks, a matched full evaluation and native crops before use.
-The profile does not show that this experiment will meet the 10-second target.
+but evaluate FP16 hidden activations in the first encoder stage. The subsequent
+[V42 implementation and complete review](hidden-autocast-v42-review.md) now
+cover ADC/weak-detail checks, full matched evaluation, native crops and repeated
+full-frame timing. This numerical change is explicit and opt-in; the profile
+alone does not establish quality preservation or the 10-second target.
 
 The 12 MB Chrome trace, operator table, raw JSON and executed script are in
 `/mnt/external/demosaic/benchmarks/full-rgb-inference-profile-v1/`. All current
