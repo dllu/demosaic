@@ -714,3 +714,22 @@ geometry/PSF before final2× reduction, with V36 queued next. Source modules/ini
 are byte-identical to the original controls; all12 logged paired observations
 through step625 match. New public RAWs remain quarantine and do not change these
 trials. Tests279 pass; the overall quality/speed goal remains open.
+
+The [completed original V53/V54 4,000-step review](paired-expansion-v53-v54-4k-review.md)
+does not sustain the expanded corpus's early photo advantage: expanded minus
+control is −0.00049 dB, with uncertain real-camera differences. All 126 logged
+nonpaired observations match. Forty native triplets and eight full GFX RGB16
+outputs verify; no corpus preference or model promotion follows.
+
+The [V55 weak-texture first gate](weak-texture-v55-review.md) stops at 1,000
+updates without promotion. Against matched V54 at the same step, replacing half
+of the existing Commons procedural quota with continuous weak fields loses
+0.07101 dB on 427 photos and 0.06509 dB on known-camera primary. Weak-carrier
+gains are mixed, flat residual noise slightly lower, and native crops show no
+clear advantage. All 28 logged unchanged batches match; 13 replacement batches
+differ. Both networks and baselines are recomputed, with 62,020 baseline and
+12,404 V54 neural metric cases replaying exactly. The report includes 46 native
+triplets, separate texture/flat measurements, and eight verified full RGB16
+files. Complete state is retained on the original planned 4,000-step schedule;
+this first gate does not establish convergence or reject weak augmentation in
+general. V43 step 2,000 remains the README reference; quality/speed goals remain.

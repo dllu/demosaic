@@ -5,7 +5,7 @@ not just software that executes. This checklist records the evidence required.
 
 | Requirement | Evidence needed | Current state |
 | --- | --- | --- |
-| Modern method and DINOv3 recommendation | Primary-source research, architecture rationale, licensed pretrained backbone and ablation | Official pinned weights; an earlier architecture's matched 20k-step ablation has a small positive gain on 427 photos. The current architecture’s matched fresh no-context/S/B first1000 comparison finds no context gain; the whole-state continuation to3000 is live. Mature attribution and SOTA remain unproven |
+| Modern method and DINOv3 recommendation | Primary-source research, architecture rationale, licensed pretrained backbone and ablation | Official pinned weights; an earlier architecture's matched 20k-step ablation has a small positive gain on 427 photos. The current architecture’s [completed fresh no-context/S/B comparison through 3,000 updates](fresh-dino-capacity-3k-review.md) finds no context gain. Mature attribution and SOTA remain unproven |
 | Free, broad training data | Source attribution manifest, content-grouped held-out split, real corpus training | Active frozen Commons: 40,170 train / 2,303 val / 2,255 untouched test / 4 excluded; a separate reviewed4× extension reaches52,536 train while preserving active holdouts and is now used only by the V50 data-only trial. The [larger native extension](public-raw-expansion-v2.md) freezes 128 captures/106 declared scene groups, adding 69 reviewed CC0 photos to the prior six. V43 is its matched trial; V37/V38 remain on53/31 and V39 on59/37. Finite screening/manual review is not complete scene recognition |
 | 8×8 binning with additional precision | Linear-light float averaging and >8-bit cache, numerical tests | Implemented and tested; all 44732 eligible licensed sources prepared |
 | Geometry, optical blur, exposure, synthetic fine detail | Executable data augmentation and inspected samples | Implemented. Complete 4×→geometry/PSF→2× Commons/native targets improve full-photo PSNR by .50990 dB in the matched V34 trial; original 8× validation remains fixed |
@@ -185,3 +185,13 @@ comes solely from ADC-only data; all10,632 positive-noise synthetic cases/162
 paired metrics and full GFX RGB16 pixels remain exact. Procedural SSIM falls
 slightly. This optional policy supplies no real-noise improvement; original
 aliases remain fixed. New training quality and the broad goal are still open.
+
+The [complete V53/V54 4,000-step review](paired-expansion-v53-v54-4k-review.md)
+does not sustain the expanded paired corpus's early photographic advantage.
+The corpus stays opt-in. After 472 frozen-source CUDA tests and a genuine-parent
+preflight, [V55's weak-texture first gate](weak-texture-v55-review.md) loses photo
+and known-camera primary means, with mixed carrier response and no clear native
+advantage. It stops at 1,000 without promotion. All 46 native triplets, eight
+full GFX RGB16 files, 62,020 baseline and 12,404 matched-control replay cases
+verify. V43 step 2,000 and its README crops remain the experimental reference.
+These finite schedules do not establish convergence or a universal data effect.

@@ -75,15 +75,23 @@ The [actual validation](results/weak-texture-v55-gpu-validation.json) then passe
 472 CUDA tests in55.03s plus two discarded BF16 updates per arm with genuine
 unchanged DINO, equal initialization/common FP16 output and exact portable reload.
 
-[V55 training is live](results/weak-texture-v55-launch.json) after both prior
-owners exit and the4000 native review completes. The first unchanged batch
-matches the control hash exactly. This first gate stops at1000 updates on the
-original4000 schedule, recomputes both neural models and all baselines, and adds
-the [texture/flat evaluator](../scripts/evaluate_texture_candidates.py).
-It uses384 CPU-seeded carriers and64 flats, with native triplets and separate
-false spatial/band/peak energy measurements. Two exact-metric tests and a complete
-896-case CPU engineering smoke with an untrained tiny local model pass; that
-smoke supplies execution evidence only. V55 quality is not established yet.
+The [V55 first 1,000-step review](weak-texture-v55-review.md) is complete after
+the [recorded launch](results/weak-texture-v55-launch.json). All 28 logged
+unchanged observations match the control; all 13 replacement batches differ.
+Natural-photo PSNR falls 0.07101 dB and known-camera primary falls 0.06509 dB.
+The weak-carrier gain is mixed, flat noise slightly lower, and native crops show
+no clear V55 advantage. Stop at this gate without promotion or continuation;
+complete state remains on the original planned 4,000-step schedule. This does
+not establish convergence or reject weak-source augmentation in general.
+
+The [texture/flat evaluator](../scripts/evaluate_texture_candidates.py) uses
+384 CPU-seeded carriers and 64 flats, with native triplets and separate spatial/
+band/peak noise measurements. The actual matched GPU evaluation completes all
+1,344 method cases and six analytic native triplets. The full review publishes
+46 native PNGs and verifies eight complete GFX RGB16 files. Earlier exact-metric
+tests and the 896-case CPU smoke with an untrained tiny local model remain
+execution evidence only. All 62,020 classical/RawNIND and 12,404 V54 neural
+full-suite metrics replay exactly from the original V54 first gate.
 
 [Hybrid texture-acutance training research](https://arxiv.org/html/2404.07212v1)
 motivates separate texture checks; this code does not reproduce its dead-leaves
