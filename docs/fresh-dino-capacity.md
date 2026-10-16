@@ -91,3 +91,12 @@ then evaluate paired/full427/full102MP GFX with both direct RawNIND variants.
 The first launch exited before imports because uv selected an empty worktree
 venv; the retry explicitly uses the shared installed environment and frozen
 package via PYTHONPATH. No training occurred in the failed attempt.
+
+The [matched3000 review](fresh-dino-capacity-3k-review.md) is complete. All122
+logged observations match; all50 native triplets and ten full RGB16 files verify.
+No-context retains higher known/unseen primary and photo means than S/B; B
+improves photo/procedural over S. No arm replaces the stronger V43 photographic/
+unseen reference. All62,020 classical/RawNIND metric cases replay exactly from
+the first gate. Source-seed uncertainty, convergence and broad superiority remain
+unproven. Original schedules/whole-state snapshots are preserved at3000; the
+next experiment tests paired-data diversity from the retained V43 parent.

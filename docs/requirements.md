@@ -164,3 +164,10 @@ frozen source; the actual two-scene identity/alignment pilot verifies36 crops.
 Both references are screened against cached protected scenes and Commons
 val/test. Screen/preparation successes retain quarantine; content, motion,
 reference sharpness and a reviewed admission contract remain before training.
+
+The [fresh matched3000 review](fresh-dino-capacity-3k-review.md) completes with
+all122 logged observations equal,50 native triplets and ten full RGB16 files.
+No-context leads photo and known/unseen primary; B improves photo/procedural over
+S but no branch replaces V43. Classical/RawNIND baselines replay62,020 metric
+cases exactly across gates. One seed/3000 updates does not establish convergence
+or a universal foundation effect. Protected-final scoring remains closed.
