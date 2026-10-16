@@ -146,9 +146,10 @@ preflight LR is 1e-4; this is not scheduled V58 training. It does not assert
 bitwise equal CUDA optimization after continuation. Its peak allocation includes
 both the original and restored models and is not a batch-size benchmark.
 
-Only this script's live-owner rejection has executed: controller 164667 was
-confirmed live, so the attempt stopped before CUDA initialization or output
-creation. The model/gradient/state path is still unexecuted. It requires the
+The first invocation exercised its live-owner rejection: controller 164667 was
+confirmed live, so that attempt stopped before CUDA initialization or output
+creation. The model/gradient/state path has since passed the CUDA validation
+below. The script requires the
 preceding controller/status files and the completed published review's path and
 SHA256; its review must cover the original 10,000-update workflow. That prevents
 preflight from overlapping the owned comparison or bypassing its review.
@@ -185,8 +186,8 @@ access, decoding or permission change is needed for this setup.
 An actual masked-CPU invocation from this checkout verifies that the model and
 preflight imports resolve inside it. The CUDA preflight rejects still-live
 controller 164667 before creating its proposed output or initializing CUDA.
-The candidate's training run directory has not been created. This establishes
-source/import readiness only; the GPU model/gradient/state path remains untested.
+That initial check established source/import readiness only. The GPU
+model/gradient/state path has since passed the separate validation below.
 
 Use the shared existing environment with an explicit import path for later
 validation, after the original comparison and manual review finish:
@@ -202,3 +203,32 @@ cd .cache/dino-convnext-v58-worktree
 The complete CUDA-enabled tests and genuine CUDA preflight must run against
 this checkout before a source/config/data/weight/review-pinned training launch.
 No GPU work or training is queued automatically by freezing this source.
+
+## Completed CUDA validation
+
+The [original 10,000-update comparison and manual review](fresh-dino-capacity-10k-review.md)
+are complete, its actual owner has exited, and the review is pinned by SHA256.
+The frozen candidate checkout then passed **496 tests in 87.25s**, including
+the CUDA checks. [Complete genuine-weight CUDA receipt](results/dino-convnext-pyramid-cuda-v1.json).
+
+Against the matched no-context arm, genuine ConvNeXt pyramid initialization
+produces exact outputs for all four CFAs under FP32/BF16/FP16, including the
+batch-16/native-256px FP16 fixture. Both arms perform two discarded Commons
+BF16 updates with finite losses/gradients. All three context gates receive
+gradients on the first update; lateral/projection weights receive gradients on
+the second. The frozen encoder stays unchanged.
+
+Portable EMA FP16 predictions reload exactly. Model, EMA, AdamW and Python/
+Torch/CUDA RNG restore exactly before the third, native-RAW update; that update
+also has finite gradients and an unchanged encoder. Initial common CNN hashes
+and all three observation hashes match between arms. This checks state
+restoration before continuation, not bitwise CUDA optimization against an
+uninterrupted prefix. Peak allocation is 7.14/7.91 GB for no-context/pyramid,
+including original and restored models; this is not a throughput sweep.
+
+The prepared first 1,000-update quality trial retains the original 10,000-step
+schedule and fresh Gaussian initialization. It compares all three immutable
+original step1000 controls with the new pyramid on identical logged inputs.
+It will recompute paired/full427, weak/flat, full GFX and three locally cached
+additional-camera comparisons. A numerical first gate does not replace manual
+native-crop review or establish convergence. No model is promoted here.
