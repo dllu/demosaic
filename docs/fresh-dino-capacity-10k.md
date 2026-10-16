@@ -38,3 +38,9 @@ preserves the original compute policy and one training seed; it does not remove
 that limitation. A finite completed schedule alone still does not establish
 convergence, a DINO benefit, SOTA or the10-second speed target. V43 step2,000
 remains the README reference until a complete review supports a change.
+
+The [actual launch receipt](results/fresh-dino-capacity-10k-launch.json) records
+controller164667 and the frozen source/plan identities. The no-context arm has
+resumed at step3,001 with LR8.22411e-5 and finite updates beyond3,000; S/B follow
+sequentially. All122 historical logged observations through3,000 remain matched.
+Final10,000 quality/native results are pending.

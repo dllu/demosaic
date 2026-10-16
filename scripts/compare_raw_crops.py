@@ -3,9 +3,12 @@
 Selection JSON: [{"source": "/read-only/photo.raf", "x": 0.2, "y": 0.3,
                   "size": 512, "display_exposure": 2.0}]
 x/y give fractional top-left sensor coordinates; crops are snapped to even phase.
+Optional regions name native xywh ROIs inside each context. With RawNIND,
+native triplets compare methods on the same noisy capture; no panel is GT.
 """
 
 import argparse
+import hashlib
 import json
 from dataclasses import asdict
 from pathlib import Path
@@ -14,7 +17,9 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
 import torch
+from report_raw_pair import rawnind_comparators
 
 from demosaic.cfa import bilinear, color_indices, malvar, pack
 from demosaic.color import render
@@ -23,7 +28,8 @@ from demosaic.io import read_raw
 from demosaic.noise import Sensor
 from demosaic.precision import COMPUTE_DTYPES, amp_context
 from demosaic.prior import wiener_packed
-from demosaic.reference import RawNind, load_rawnind, publisher_input_scale
+from demosaic.reference import RawNind, publisher_input_scale
+from demosaic.reporting import center_crop, display_crop, save_triplet
 from demosaic.safety import writable_path
 from demosaic.suite import freeze_checkpoint
 
@@ -34,11 +40,25 @@ def main():
     parser.add_argument("selection", type=Path)
     parser.add_argument("checkpoint", nargs="+", type=Path)
     parser.add_argument("--rawnind", type=Path)
+    parser.add_argument(
+        "--rawnind-gain-modes", nargs="+", choices=("cfa-ls", "cfa-channel"), default=["cfa-ls"]
+    )
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--precision", choices=COMPUTE_DTYPES, default="bfloat16")
     args = parser.parse_args()
     output = writable_path(args.output)
     output.mkdir(parents=True, exist_ok=True)
+    if (output / "selection-and-metadata.json").exists():
+        raise ValueError("Comparison already exists; choose a new output directory")
+    archive = output / "source"
+    archive.mkdir(exist_ok=True)
+    for path in [
+        Path(__file__),
+        Path(__file__).with_name("report_raw_pair.py"),
+        *sorted(Path("src/demosaic").glob("*.py")),
+    ]:
+        (archive / path.name).write_bytes(path.read_bytes())
+    (archive / "selection.json").write_bytes(args.selection.read_bytes())
     torch.set_num_threads(4)
     models, weights = [], []
     for path in args.checkpoint:
@@ -47,7 +67,7 @@ def main():
         model.eval().to(memory_format=torch.channels_last)
         run_name = Path(state.get("config", {}).get("run", path.parent)).name
         label = f"{run_name}, step {state['step']}"
-        models.append((label, model, True))
+        models.append((label, model, args.precision))
         weights.append(
             {
                 "label": label,
@@ -56,18 +76,14 @@ def main():
                 "snapshot": str(frozen),
                 "compute_precision": args.precision,
                 "memory_format": "channels_last",
+                "model_config": model.config.to_dict(),
             }
         )
         del state
     if args.rawnind:
-        models.insert(
-            0,
-            (
-                "RawNIND CFA-LS",
-                load_rawnind(args.rawnind, gain_mode="cfa-ls", device="cuda"),
-                False,
-            ),
-        )
+        references, receipts = rawnind_comparators(args.rawnind, args.rawnind_gain_modes)
+        models = references + models
+        weights += receipts
     selections = json.loads(args.selection.read_text())
     figure, axes = plt.subplots(
         len(selections),
@@ -75,11 +91,20 @@ def main():
         figsize=(4 * (len(models) + 3), 4 * len(selections)),
         squeeze=False,
     )
-    records = []
+    records, crops, float_contexts = [], [], []
     for row, selection in enumerate(selections):
+        source = Path(selection["source"])
+        with source.open("rb") as reader:
+            source_sha = hashlib.file_digest(reader, "sha256").hexdigest()
+        if selection.get("source_sha256", source_sha) != source_sha:
+            raise ValueError("Qualitative source hash differs from the fixed selection")
         raw, metadata = read_raw(selection["source"])
+        if selection.get("camera", metadata.camera) != metadata.camera:
+            raise ValueError("Qualitative camera differs from the fixed selection")
         h, w = raw.shape
         size = selection.get("size", 512)
+        if size < 32 or size % 2 or size > min(h, w):
+            raise ValueError("RAW context must be even, at least32 and fit the capture")
         y = min(h - size, int(h * selection["y"])) // 2 * 2
         x = min(w - size, int(w * selection["x"])) // 2 * 2
         crop = torch.from_numpy(raw[y : y + size, x : x + size].copy()).to("cuda")
@@ -99,7 +124,7 @@ def main():
             ("Malvar 2004, WB", malvar(packed, colors, wb)),
             ("Variance prior + Malvar", malvar(wiener_packed(packed, variance), colors, wb)),
         ]
-        for label, model, amp in models:
+        for label, model, precision in models:
             if isinstance(model, RawNind):
                 model.input_scale = torch.tensor(
                     publisher_input_scale(
@@ -108,9 +133,96 @@ def main():
                     device="cuda",
                     dtype=torch.float32,
                 )
-            with amp_context("cuda", amp, dtype=args.precision):
-                images.append((label, model(packed, variance, colors, wb, matrix)))
+            if hasattr(model, "set_noise"):
+                model.set_noise(shot, read)
+            with amp_context("cuda", dtype=precision):
+                prediction = model(packed, variance, colors, wb, matrix)
+            if not torch.isfinite(prediction).all():
+                raise ValueError(f"Nonfinite qualitative prediction: {label}")
+            images.append((label, prediction))
+        rendered = dict(images)
+        regions = selection.get(
+            "regions", [{"name": "center", "xywh": center_crop((size, size), size=160)}]
+        )
+        for region in regions:
+            roi = region["xywh"]
+            rx, ry, rw, rh = roi
+            if min(rx, ry) < 0 or min(rw, rh) < 1 or rx + rw > size or ry + rh > size:
+                raise ValueError("Native ROI must fit its fixed RAW context")
+            for label, model, precision in models:
+                if isinstance(model, RawNind):
+                    continue
+                model_receipt = next(r for r in weights if r["label"] == label)
+                for baseline, reference, _ in models:
+                    if not isinstance(reference, RawNind):
+                        continue
+                    reference_receipt = next(r for r in weights if r["label"] == baseline)
+                    caption = f"{metadata.camera} / {selection.get('purpose', row)} / {region['name']} / {label} / {baseline}"
+                    panels = [
+                        ("Noisy (Malvar)", rendered["Malvar 2004, WB"]),
+                        ("Restored", rendered[label]),
+                        ("RawNIND (not GT)", rendered[baseline]),
+                    ]
+                    crops.append(
+                        save_triplet(
+                            output,
+                            f"{row}:{region['name']}:{label}:{baseline}",
+                            [
+                                (
+                                    name,
+                                    display_crop(
+                                        rgb,
+                                        wb,
+                                        matrix,
+                                        roi,
+                                        exposure=selection.get("display_exposure", 1),
+                                    ),
+                                )
+                                for name, rgb in panels
+                            ],
+                            caption=caption,
+                            metadata={
+                                "source": str(source),
+                                "source_sha256": source_sha,
+                                "raw_metadata": asdict(metadata),
+                                "context_xywh": [x, y, size, size],
+                                "sensor_roi_xywh": [x + rx, y + ry, rw, rh],
+                                "context_roi_xywh": roi,
+                                "region": region["name"],
+                                "model_label": label,
+                                "checkpoint_sha256": model_receipt["sha256"],
+                                "compute_precision": precision,
+                                "baseline": reference_receipt,
+                                "conditioning": {
+                                    "shot": shot,
+                                    "read": read,
+                                    "source": selection.get("noise_source", "declared prior"),
+                                },
+                                "white_balance": metadata.white_balance,
+                                "camera_to_srgb": metadata.camera_to_srgb,
+                                "display_exposure": selection.get("display_exposure", 1),
+                                "reference": "RawNIND on the same noisy capture; comparator, not GT; no pixelwise score",
+                            },
+                        )
+                    )
         for col, (label, rgb) in enumerate(images):
+            path = output / f"capture-{row}-method-{col}-linear-f32.npy"
+            values = rgb.float().cpu().numpy()
+            np.save(path, values, allow_pickle=False)
+            with path.open("rb") as reader:
+                digest = hashlib.file_digest(reader, "sha256").hexdigest()
+            float_contexts.append(
+                {
+                    "image": path.name,
+                    "source": str(source),
+                    "model": label,
+                    "context_xywh": [x, y, size, size],
+                    "shape": list(values.shape),
+                    "dtype": "float32",
+                    "sha256": digest,
+                    "encoding": "Unquantized linear camera RGB before display exposure/clipping",
+                }
+            )
             display = render(rgb * selection.get("display_exposure", 1), wb, matrix)
             axes[row, col].imshow(display[0].permute(1, 2, 0).cpu().numpy())
             axes[row, col].set_title(metadata.camera + " / " + label)
@@ -121,6 +233,7 @@ def main():
                 "crop_xywh": [x, y, size, size],
                 "shot_prior": shot,
                 "read_prior": read,
+                "source_sha256": source_sha,
                 **selection,
             }
         )
@@ -129,6 +242,30 @@ def main():
     plt.close(figure)
     (output / "selection-and-metadata.json").write_text(json.dumps(records, indent=2) + "\n")
     (output / "checkpoints.json").write_text(json.dumps(weights, indent=2) + "\n")
+    result = {
+        "scope": "Single-capture qualitative comparisons; no clean reference or pixelwise quality score.",
+        "selection": records,
+        "models": weights,
+        "native_crops": crops,
+        "float_contexts": float_contexts,
+        "source_files": {
+            p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in archive.glob("*.py")
+        },
+    }
+    (output / "report.json").write_text(json.dumps(result, indent=2) + "\n")
+    lines = [
+        "# Cross-camera qualitative comparison",
+        "",
+        "Single noisy captures; no clean reference or quality scores.",
+        "When present, RawNIND is a comparator, **not GT**.",
+        "Native panels use identical coordinates/WB/matrix/exposure with no resizing.",
+        "The separate [overview](comparison.png) is resized and is not a 100% view.",
+        "",
+    ]
+    for crop in crops:
+        lines += [crop["caption"], "", f"![Native method comparison]({crop['image']})", ""]
+    lines += ["[Complete source, checkpoint, noise and ROI records](report.json).", ""]
+    (output / "report.md").write_text("\n".join(lines))
 
 
 if __name__ == "__main__":

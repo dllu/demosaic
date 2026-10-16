@@ -14,6 +14,11 @@ There is no convergence or universal architectural failure claim. A same-seed
 replay of the original control is the next check on procedural repeatability;
 evaluation-source intervals do not estimate optimization or training-seed variance.
 
+The subsequent [unchanged-source control replay](control-replay-v57-review.md)
+also changes photo/known means without an intervention. Its descriptive
+V56−replay differences are−0.08233dB photo/−0.01077dB known primary; these are
+not a new matched training trial or a causal correction. V56 stays unpromoted.
+
 ## Controlled change and engineering evidence
 
 V56 adds only the identity-initialized 6,531-parameter RGB input adapter before

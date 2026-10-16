@@ -208,3 +208,17 @@ verifies intact original no-context/S/B step 3,000 states and their unfinished
 10,000-step schedules. A same-source V54 replay takes priority after V56 review,
 to measure procedural repeatability without treating source intervals as
 training-seed uncertainty. Broad quality/SOTA and speed requirements remain open.
+
+The [completed V57 replay](control-replay-v57-review.md) demonstrates observed
+procedural variation even with matching source/configuration,41 logged inputs
+and final RNG states: photo−0.04346dB and known primary−0.05946dB. One replay
+does not estimate seed variance or isolate the cause. The original fresh
+no-context/S/B schedules now [resume toward10,000](fresh-dino-capacity-10k.md)
+with complete state and unchanged original source/data/compute policy.
+
+The [additional personal-camera check](cross-camera-qualitative.md) caches Q2,
+Sony a7RII and GFX50R originals locally, fixes missing explicit noise conditioning
+in the old comparison helper, and verifies12 native triplets plus18 float32
+context outputs from actual V43 GPU execution. These are512-context development
+comparisons without clean references or pixelwise scores; they do not establish
+broad superiority or full-frame quality on those three captures.

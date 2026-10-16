@@ -42,3 +42,34 @@ original paired32, with no reset. Newer paired83/weak/input policies do not
 enter it. Native/full/analytic/102MP review follows original10000 completion.
 The goal remains active; broad quality/SOTA, protected-final and speed evidence
 are incomplete. Other users' GPU jobs remain untouched.
+
+After the replay's actual exit/full native review, a separate short GPU camera
+check completes on three locally cached originals.229,301,760 source bytes
+match filenameSHA1/copiedSHA256; original accesses are read-only. Current
+512-context helper now calls set_noise explicitly, supports both shared-weight
+RawNIND gain adapters and writes native triplets plus unquantized float outputs.
+The old Matplotlib overview is explicitly resized rather than a100% view.
+
+CPU input-only preparation decodes all three and fits reliable single-image
+noise priors. Q2 ISO100/GBRG, Sony ISO400/RGGB, GFX50R ISO100/RGGB. Fixed legacy
+contexts/two160 ROIs per camera precede model review. Sony display changes×2→×1
+because its noisy input preview clips much of the white fuselage; all methods
+share it and originalv1 is archived. Q2/GFX50R remain×2. Actual v2 GPU run uses
+retained V43 EMA and both IEEEFP32 RawNIND modes, with no GT/quality scores.
+
+All12 native PNGs were inspected, hashes/geometry/shared noisy+restored pixels
+verify. Eighteen float32 arrays verify hashes/shape/finiteness; CPU rerender
+agrees within one8-bit code. Q2 remains soft, Sony windows soft; V43's GFX50R
+concrete seams/visible variation look sharper than RawNIND, without proving all
+variation is true detail. No broad superiority claim. Publication in
+docs/cross-camera-qualitative.md includes metadata and six channel-mode examples;
+all12 variants/float artifacts are in its receipt. No private RAWs are published
+or admitted to training; the standing3879/3880 test/README reference remains.
+
+Actual original-schedule launch: controller164667 created1792170467.85,
+frozen8580a4e, log.cache/fresh-dino-capacity-worktree/.cache/fresh-dino-capacity-to10k-workflow.log.
+The no-context arm resumes at3001/LR8.22411e-5 and finite updates pass3900.
+All122 historical observations still match across arms. S/B are serialized next.
+The pinned V57 review JSON SHA2655b7cc… must not change while this owner runs.
+Main-worktree camera-helper changes do not enter the frozen training package.
+The full planned10,000 checkpoint/numerical/native review remains pending.

@@ -11,6 +11,12 @@ This is one seed and a first 1,000-step checkpoint on an unchanged planned 4,000
 schedule, not a convergence result or a universal rejection of weak textures.
 No continuation is launched; complete model/EMA/AdamW/RNG state is retained.
 
+The subsequent [unchanged-source control replay](control-replay-v57-review.md)
+itself loses0.04346dB on photos relative to the original V54 trajectory. This
+reinforces the single-trajectory limitation: source intervals do not measure
+training uncertainty. V55 stays unpromoted; these results do not isolate the
+entire observed difference as a weak-data effect.
+
 ## Matched change and replay
 
 V55 changes only `weak_texture_fraction: 0 → .1`, replacing half of the existing

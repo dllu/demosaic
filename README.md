@@ -32,6 +32,8 @@ with shared +2 EV display, cropped from the full 102 MP output.
 This closer pair is now the standing test. Framing is nearly identical, 3m38s
 apart; aperture and moving subjects differ, so the last panel is a qualitative
 reference, **not GT**. [All four regions and matched comparisons](docs/native-corpus-2k-review.md).
+Additional [Q2, a7R II and GFX50R native comparisons](docs/cross-camera-qualitative.md)
+use locally cached captures and explicitly labeled RawNIND comparators.
 
 ![GFX foliage: noisy, denoised and separate low-ISO reference](docs/images/native-2k-v43-gfx-full-foliage.png)
 
