@@ -1,0 +1,96 @@
+{
+  "recorded_utc": "2026-10-16T10:21:25.280502+00:00",
+  "status": "First1000 data-only trial is training; quality unproven",
+  "controller_pid": 1214400,
+  "controller_created": 1792145678.64,
+  "source_checkout": "/home/dllu/proj/demosaic/.cache/commons-v50-worktree",
+  "source_commit": "4b2f148",
+  "queue": {
+    "config": "/home/dllu/proj/demosaic/.cache/commons-v50-worktree/configs/dino-commons-expanded-b16-v50.yaml",
+    "config_sha256": "5c5065ca66fe9e1c140fcaefccabbd42fbee14eeb530c2eb1419223a3ea93637",
+    "source_sha256": "bc4c1569be539e86902e9c20b5c9a0edd811b733b751363debf119c01807504c",
+    "control_checkpoint_sha256": "ebfe1cc8af4a2dbfd83105b82da81b782c46007282a4de50a0be0215ab5238c4",
+    "parent": "/mnt/external/demosaic/evaluation/paired-known-native-diverse-v43-1k-newonly/weights/weights-8ee3e960acdf95d88ba06eab30ac9abbab8bab28b0dc63d79b304a960eb535c5.pt",
+    "parent_sha256": "8ee3e960acdf95d88ba06eab30ac9abbab8bab28b0dc63d79b304a960eb535c5",
+    "prerequisites": [
+      {
+        "pid": 1171220,
+        "created": 1792144095.88
+      },
+      {
+        "pid": 1198571,
+        "created": 1792144415.62
+      }
+    ],
+    "script_sha256": "aaa6b4cc758871be6778d7a896506bddeeb4e9eb09b115d1bbe6cdb7bb9046e5",
+    "code_commit": "4b2f1482fa6144c1f98cf89e6f8deb3ed28066ee",
+    "purpose": "Data-only model trial, rank0/original full resolution and precision; wait for completed reviewed4x cache/hash freeze. Existing eval identities unchanged."
+  },
+  "plan": {
+    "config": "/home/dllu/proj/demosaic/.cache/commons-v50-worktree/configs/dino-commons-expanded-b16-v50.yaml",
+    "config_sha256": "5c5065ca66fe9e1c140fcaefccabbd42fbee14eeb530c2eb1419223a3ea93637",
+    "source_sha256": "bc4c1569be539e86902e9c20b5c9a0edd811b733b751363debf119c01807504c",
+    "control_checkpoint_sha256": "ebfe1cc8af4a2dbfd83105b82da81b782c46007282a4de50a0be0215ab5238c4",
+    "parent": "/mnt/external/demosaic/evaluation/paired-known-native-diverse-v43-1k-newonly/weights/weights-8ee3e960acdf95d88ba06eab30ac9abbab8bab28b0dc63d79b304a960eb535c5.pt",
+    "parent_sha256": "8ee3e960acdf95d88ba06eab30ac9abbab8bab28b0dc63d79b304a960eb535c5",
+    "prerequisites": [
+      {
+        "pid": 1171220,
+        "created": 1792144095.88
+      },
+      {
+        "pid": 1198571,
+        "created": 1792144415.62
+      }
+    ],
+    "script_sha256": "aaa6b4cc758871be6778d7a896506bddeeb4e9eb09b115d1bbe6cdb7bb9046e5",
+    "code_commit": "4b2f1482fa6144c1f98cf89e6f8deb3ed28066ee",
+    "purpose": "Data-only model trial, rank0/original full resolution and precision; wait for completed reviewed4x cache/hash freeze. Existing eval identities unchanged.",
+    "manifest": "/mnt/external/demosaic/commons-incoming-20261016-v2-quarantine/extension4/audit/manifest.jsonl",
+    "manifest_sha256": "13e86c3b5aaec353fb2797487a6f67e1227a3fec19e804f71eca80ce2383b280",
+    "audit_sha256": "3225d2b07688124a3728401ca66a7d6c4c13a456f44dc7d8b0d358ff34720f1d",
+    "old_active_rows_exact": 44728,
+    "counts": {
+      "train": 52536,
+      "val": 2303,
+      "test": 2255
+    },
+    "new_training_vs_current": 12366
+  },
+  "workflow_at_publication": {
+    "updated_utc": "2026-10-16T10:18:52.786450+00:00",
+    "status": "training-first1000",
+    "plan": "/mnt/external/demosaic/runs/commons-expanded-v50-plan.json"
+  },
+  "training_start": {
+    "event": "start",
+    "parameters": 54829760,
+    "trainable_parameters": 33233216,
+    "train_sources": 52536,
+    "validation_sources": 2303,
+    "start_step": 0,
+    "steps": 3000,
+    "dino": true,
+    "paired_train_scenes": 32,
+    "paired_fraction": 0.25,
+    "raw_clean_train_scenes": 106,
+    "raw_clean_fraction": 0.25,
+    "compute_precision": "bfloat16"
+  },
+  "observed_shared_paired_native_steps": [
+    1,
+    25,
+    50,
+    175,
+    200,
+    225
+  ],
+  "observed_changed_commons_steps": [
+    75,
+    100,
+    125,
+    150
+  ],
+  "last_observed_step": 225,
+  "decision": "No promotion before complete review; V43 step2000 remains reference."
+}

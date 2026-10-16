@@ -56,3 +56,20 @@ images, reusing the previous46,536 active4× caches. All new cache SHA256s will
 verify before the separate4× freeze. Its status is `rebin4-workflow.json` under
 the quarantine root. The data are for a future matched trial; V49 and current
 models keep the original data. The finite screening limitations still apply.
+
+## Completed4× freeze
+
+All10,558 new4× training caches are complete and their full SHA256s verify.
+The final active manifest has52,536 train/2,303 val/2,255 test sources, SHA256
+`13e86c3b5aaec353fb2797487a6f67e1227a3fec19e804f71eca80ce2383b280`.
+Existing46,536 extension caches are reused, with all44,728 original active
+records exactly preserved. A fixed seed20261016 sample of32 new training images
+shows architecture, vehicles, foliage, night lights, interiors, people and other
+subjects without obvious format corruption; this resized contact-sheet review
+is not a model comparison or complete scene-overlap proof.
+[Full4× completion and content-review receipt](results/commons-incoming-v2-complete4.json).
+
+The [V50 data-only trial](commons-v50-trial.md) has started from the same parent
+and recipe as V47. The admitted sources have not established a quality gain;
+that requires the complete matched model review. All old model aliases and
+README crops remain fixed.

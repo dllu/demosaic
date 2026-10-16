@@ -6,7 +6,7 @@ not just software that executes. This checklist records the evidence required.
 | Requirement | Evidence needed | Current state |
 | --- | --- | --- |
 | Modern method and DINOv3 recommendation | Primary-source research, architecture rationale, licensed pretrained backbone and ablation | Official pinned weights; an earlier architecture's matched 20k-step ablation has a small positive gain on 427 photos. A trained ablation of the current pretrained-RGB architecture remains; SOTA is unproven |
-| Free, broad training data | Source attribution manifest, content-grouped held-out split, real corpus training | Active frozen Commons: 40,170 train / 2,303 val / 2,255 untouched test / 4 excluded; a separate reviewed future extension reaches52,536 train while preserving active holdouts; matching4× caches are preparing. The [larger native extension](public-raw-expansion-v2.md) freezes 128 captures/106 declared scene groups, adding 69 reviewed CC0 photos to the prior six. V43 is its matched trial; V37/V38 remain on53/31 and V39 on59/37. Finite screening/manual review is not complete scene recognition |
+| Free, broad training data | Source attribution manifest, content-grouped held-out split, real corpus training | Active frozen Commons: 40,170 train / 2,303 val / 2,255 untouched test / 4 excluded; a separate reviewed4× extension reaches52,536 train while preserving active holdouts and is now used only by the V50 data-only trial. The [larger native extension](public-raw-expansion-v2.md) freezes 128 captures/106 declared scene groups, adding 69 reviewed CC0 photos to the prior six. V43 is its matched trial; V37/V38 remain on53/31 and V39 on59/37. Finite screening/manual review is not complete scene recognition |
 | 8×8 binning with additional precision | Linear-light float averaging and >8-bit cache, numerical tests | Implemented and tested; all 44732 eligible licensed sources prepared |
 | Geometry, optical blur, exposure, synthetic fine detail | Executable data augmentation and inspected samples | Implemented. Complete 4×→geometry/PSF→2× Commons/native targets improve full-photo PSNR by .50990 dB in the matched V34 trial; original 8× validation remains fixed |
 | Physical Bayer noise across cameras and ISO | Electron-domain Poisson/read noise, metadata and tests | Moment-tested simulation, conservative single-image estimates on three cameras; dedicated calibration still missing |
@@ -129,8 +129,8 @@ The optional DINO low-rank adapters complete their first
 [matched training gate](dino-lora-v49-review.md), reusing V47 after source and
 shared observation checks. They regress and stop at1000. The independent
 [Commons extension](commons-incoming-v2.md) has10,558 newly reviewed training
-sources; matching4× caches are preparing. Neither changes the current V49
-data recipe or establishes a quality gain.
+sources; matching4× caches are now complete. V49 retained its old data;
+V50 is the new data-only trial. Neither corpus size alone establishes a gain.
 
 The [V49 rank4 review](dino-lora-v49-review.md) finishes with all41 shared
 observations exact. Unseen primary/photo PSNR fall, so V49 stops at1000.

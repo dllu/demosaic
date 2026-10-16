@@ -27,3 +27,14 @@ training membership40,170→52,536, retaining original frozen DINO/rank0 and all
 other V47 settings. Its guarded queue will require the completed reviewed4×
 freeze,10,558 new checksum verifications and actual V49 exit. Paired/native
 observations must remain exact; Commons changes are expected. No gain is claimed.
+
+Completion/launch update: all10,558 new4× cache checksums pass and the separately
+frozen active manifest is13e86c3b5aaec353fb2797487a6f67e1227a3fec19e804f71eca80ce2383b280.
+V50 is live in4b2f148, with52,536 training sources. Initial shared paired/native
+hashes match V47 and Commons batches change, with unchanged model parameter
+counts. No reference/README/model alias changes or quality claims.
+
+Separately checked the official larger DINOv3 ViT-B repository with approved
+access. Cached genuine config/weights at5931719e67bbdb9737e363e781fb0c67687896bc,
+including weights LFS SHA256 verification. No ViT-B model construction, GPU use
+or training; a future frozen-capacity comparison remains. V50 retains ViT-S.

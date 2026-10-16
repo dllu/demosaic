@@ -28,3 +28,15 @@ full102MP GFX sky/building/foliage/fence with verified RGB16 files. Reuse the
 cached V47 evaluator only after exact source/protocol/classical-case checks.
 More data alone does not establish a gain. V43 step2000 remains the current
 photographic experimental reference until a complete comparison supports a change.
+
+The reviewed4× corpus is now complete: all10,558 new checksums verify and
+the active manifest SHA256 is
+`13e86c3b5aaec353fb2797487a6f67e1227a3fec19e804f71eca80ce2383b280`.
+V50 has started in frozen source `4b2f148`; the queue verified all44,728
+original active records and bound the manifest/audit hashes in its training plan.
+
+[Launch and initial-observation receipt](results/commons-v50-launch.json):
+training reports52,536 Commons sources and the unchanged54,829,760 total /
+33,233,216 trainable parameters. Initial logged paired/native observations match
+V47 exactly, while Commons observations change as intended. The controller
+requires all first-gate shared observations to match before scoring.

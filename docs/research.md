@@ -134,3 +134,16 @@ CPU gradient/checkpoint/restart checks and a genuine-weight fixture pass; no
 trained RAW quality or speed claim follows. The separate
 [fresh matched DINO control](fresh-dino-ablation.md) is prepared to test the
 current foundation branch without inherited JDD training history.
+
+## Larger frozen DINO capacity candidate
+
+After the negative V49 adaptation gate, the official
+[ViT-B/16 model card](https://huggingface.co/facebook/dinov3-vitb16-pretrain-lvd1689m)
+provides a separate frozen-capacity candidate. Its published dense-task scores
+exceed ViT-S on the listed benchmarks; that is not RAW restoration evidence.
+The authorized account can fetch genuine config/weights at revision
+`5931719e67bbdb9737e363e781fb0c67687896bc`. Both are cached with hashes, including
+the weights' LFS SHA256 verification. [Availability receipt](results/dino-vitb-availability-v1.json).
+No model has been constructed, benchmarked or trained with those weights here.
+A future matched trial must compare fresh initialization, quality, memory and
+latency. V50 retains ViT-S and tests data membership alone.
