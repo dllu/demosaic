@@ -165,3 +165,40 @@ One seed and source-bootstrap intervals cannot quantify training variability;
 the [unchanged-control replay](control-replay-v57-review.md) demonstrates that
 limitation. No inference-speed, convergence, SOTA or model-promotion claim is
 made by preparing this branch.
+
+## Isolated source for the next validation
+
+The candidate now has a clean detached checkout at
+`.cache/dino-convnext-v58-worktree`, commit
+`797cfc852d2010c30f877cff1277e6c96103ccfc`.
+[Actual source/import/input/guard receipt](results/dino-convnext-pyramid-frozen-source.json).
+The sparse checkout retains code, configs, tests, licenses and result receipts,
+without copying the report-image collection. Its production files match the
+completed CPU restart audit exactly. Frozen manifests, genuine ConvNeXt files
+and the Gaussian initializer verify their pinned hashes.
+
+Two local directory aliases bind the standing GFX pair and three additional
+camera captures to the existing main-repository cache. All five files verify
+their source hashes and share the same cached inodes. No RAW copy, source-disk
+access, decoding or permission change is needed for this setup.
+
+An actual masked-CPU invocation from this checkout verifies that the model and
+preflight imports resolve inside it. The CUDA preflight rejects still-live
+controller 164667 before creating its proposed output or initializing CUDA.
+The candidate's training run directory has not been created. This establishes
+source/import readiness only; the GPU model/gradient/state path remains untested.
+
+Use the shared existing environment with an explicit import path for later
+validation, after the original comparison and manual review finish:
+
+```bash
+# Begin in the main repository so cache variables use its existing caches.
+source scripts/env.sh
+export UV_PROJECT_ENVIRONMENT="$PWD/.venv"
+export PYTHONPATH="$PWD/.cache/dino-convnext-v58-worktree/src"
+cd .cache/dino-convnext-v58-worktree
+```
+
+The complete CUDA-enabled tests and genuine CUDA preflight must run against
+this checkout before a source/config/data/weight/review-pinned training launch.
+No GPU work or training is queued automatically by freezing this source.

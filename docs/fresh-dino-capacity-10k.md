@@ -75,3 +75,36 @@ the completed results. It has actually rebuilt the historical 3,000-step panel:
 100,528 case rows and 336 paired comparisons match the published arithmetic to
 within 1.5e-14. The 10,000-step mode rejects the still-incomplete workflow before
 writing a result; final 10,000 statistics have not been checked yet.
+
+The saved fixed-eight-photo **training monitor** also needs attention in the
+final review. Under the original CUDA BF16 EMA monitor policy, no-context's
+PSNR changes 36.13900→35.18483 from 3,000 to 10,000, while SSIM changes
+.962412→.964747. S changes 35.74417→35.38885 and .962205→.965376.
+[Complete log snapshot and condition breakdown](results/fresh-original10k-monitor-snapshot.json).
+
+| Monitor condition | No-context PSNR change, 3k→10k | S PSNR change, 3k→10k |
+| --- | ---: | ---: |
+| ADC-only | −0.5292 | −0.0606 |
+| ISO100 prior | −2.0860 | −0.7896 |
+| ISO1600 prior | −2.0913 | −1.2660 |
+| ISO12800 prior | −1.4822 | −0.5134 |
+| Legacy noise | −2.2666 | −1.7207 |
+| Highlights | +1.3937 | +1.4179 |
+| Shadows | +0.3824 | +0.4451 |
+
+These are seven conditions/four CFA patterns on eight fixed monitor images,
+not the pending full427/FP16 evaluation, real RAW primary scores or convergence
+evidence. B's latest saved monitor in this snapshot is only 7,000 updates. Chroma
+MAE also rises in the ISO100/ISO12800 monitor cases while gradient MAE falls;
+that observation does not identify a cause. No
+training policy or model selection changes here. Prioritize ordinary-noise,
+highlight/shadow groups and native color/detail in the complete review before
+choosing another experiment. The [CPU native examples](fresh-none-S10k-cpu-review.md)
+use different precision/noise and are not images for these monitor scores.
+
+The existing monitor-best states remain available for possible later review:
+no-context 3k and S 1k match their already retained snapshots exactly in model
+and EMA tensors. B's existing 4k best was copied from one opened checkpoint inode
+to a private immutable diagnostic snapshot. This preserves evidence without
+changing the trainer or creating the controller's expected final 10k paths.
+The small monitor does not establish that these are broader quality optima.

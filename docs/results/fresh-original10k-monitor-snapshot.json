@@ -1,0 +1,269 @@
+{
+  "execution_receipt": "/mnt/external/demosaic/benchmarks/fresh-original10k-monitor-snapshot-v1/receipt.json",
+  "execution_receipt_sha256": "bc1db87404acdadd6c46f048cd298275cea2507805121711d5fba1bc283a629c",
+  "scope": "Training-only fixed8-photo/7-condition/4-CFA EMA monitor, original BF16 CUDA policy; not full427 FP16 quality or convergence evidence. Snapshot logs stop at complete lines; B remains partial.",
+  "models": {
+    "none": {
+      "source_log": "/mnt/external/demosaic/runs/control-anchored-native-fresh-b16-v45/metrics.jsonl",
+      "saved_log": "/mnt/external/demosaic/benchmarks/fresh-original10k-monitor-snapshot-v1/none-metrics.jsonl",
+      "saved_log_sha256": "cf39990cd09a9303a31d41439571c294d9470d84890d0b4e0a284f800289dffd",
+      "latest_step": 10000,
+      "training_complete": true,
+      "monitor_at3000": {
+        "panel_images": 8,
+        "panel_srgb_psnr": 36.13899969203131,
+        "panel_srgb_ssim": 0.9624117341424737
+      },
+      "latest_monitor": {
+        "panel_images": 8,
+        "panel_srgb_psnr": 35.184828179223196,
+        "panel_srgb_ssim": 0.9647473961647067
+      },
+      "latest_minus3000_by_condition": {
+        "adc-only": {
+          "srgb_psnr": -0.5291663408279419,
+          "srgb_ssim": 0.0038197506219148636,
+          "chroma_mae": 0.0016688171672285534,
+          "gradient_mae": -0.0008457382791675627
+        },
+        "highlights": {
+          "srgb_psnr": 1.3936507105827332,
+          "srgb_ssim": 0.0053675249218940735,
+          "chroma_mae": -0.0017961975536309183,
+          "gradient_mae": -0.000601163410465233
+        },
+        "iso100-prior": {
+          "srgb_psnr": -2.0860249996185303,
+          "srgb_ssim": 0.0019282009452581406,
+          "chroma_mae": 0.006309760945441667,
+          "gradient_mae": -0.0006791425475967117
+        },
+        "iso12800-prior": {
+          "srgb_psnr": -1.4821940064430237,
+          "srgb_ssim": 0.0023894235491752625,
+          "chroma_mae": 0.003513334049785044,
+          "gradient_mae": -0.00030062471341807395
+        },
+        "iso1600-prior": {
+          "srgb_psnr": -2.091285824775696,
+          "srgb_ssim": 0.0013823509216308594,
+          "chroma_mae": 0.006458846590248868,
+          "gradient_mae": -0.0004949886788381264
+        },
+        "legacy-noise": {
+          "srgb_psnr": -2.266593635082245,
+          "srgb_ssim": -0.0005347058176994324,
+          "chroma_mae": 0.007770705320581328,
+          "gradient_mae": -0.0002842693793354556
+        },
+        "shadows": {
+          "srgb_psnr": 0.38241350650787354,
+          "srgb_ssim": 0.0019970890134572983,
+          "chroma_mae": -0.00024464911984978244,
+          "gradient_mae": -0.0001325351040577516
+        }
+      },
+      "immutable_step3000_checkpoint": {
+        "name": "control-anchored-native-fresh-b16-v45",
+        "path": "/mnt/external/demosaic/models/control-anchored-native-fresh-b16-v45-step3000.pt",
+        "checkpoint_sha256": "6f9948c361cda74a294ad0cc9db4718dfb3fe0a9cc5a4c1cc867e986e0a7eedf",
+        "source_sha256": "2f1a2251d8141d335e99266343b46b61b8da3cb13012fc63d79ea5c3968ad01c"
+      },
+      "step10000_boundary_receipt": "docs/results/fresh-dino-capacity-no-context-10k-boundary.json",
+      "step10000_checkpoint_sha256": "0df4ff404c38b8f4b42f6451486e91c97631544b1c817c126f371195942f3af4"
+    },
+    "S": {
+      "source_log": "/mnt/external/demosaic/runs/dino-anchored-native-fresh-b16-v44/metrics.jsonl",
+      "saved_log": "/mnt/external/demosaic/benchmarks/fresh-original10k-monitor-snapshot-v1/S-metrics.jsonl",
+      "saved_log_sha256": "f9b83345214c734a91906d982a4b1bb842e6545fbaf9bb58ff45ba839e71331c",
+      "latest_step": 10000,
+      "training_complete": true,
+      "monitor_at3000": {
+        "panel_images": 8,
+        "panel_srgb_psnr": 35.744165011814665,
+        "panel_srgb_ssim": 0.9622046715979066
+      },
+      "latest_monitor": {
+        "panel_images": 8,
+        "panel_srgb_psnr": 35.38884607383183,
+        "panel_srgb_ssim": 0.9653759614697525
+      },
+      "latest_minus3000_by_condition": {
+        "adc-only": {
+          "srgb_psnr": -0.06057238578796387,
+          "srgb_ssim": 0.004623882472515106,
+          "chroma_mae": 0.0013105343095958233,
+          "gradient_mae": -0.0008952429343480617
+        },
+        "highlights": {
+          "srgb_psnr": 1.417948067188263,
+          "srgb_ssim": 0.005316156893968582,
+          "chroma_mae": -0.0019585040863603354,
+          "gradient_mae": -0.000691865716362372
+        },
+        "iso100-prior": {
+          "srgb_psnr": -0.7896095514297485,
+          "srgb_ssim": 0.002648448571562767,
+          "chroma_mae": 0.005074748711194843,
+          "gradient_mae": -0.0007648669634363614
+        },
+        "iso12800-prior": {
+          "srgb_psnr": -0.5134229063987732,
+          "srgb_ssim": 0.003139195963740349,
+          "chroma_mae": 0.0007840633625164628,
+          "gradient_mae": -0.0004364257911220193
+        },
+        "iso1600-prior": {
+          "srgb_psnr": -1.2659602165222168,
+          "srgb_ssim": 0.0025940369814634323,
+          "chroma_mae": 0.004126396015635692,
+          "gradient_mae": -0.0006226225523278117
+        },
+        "legacy-noise": {
+          "srgb_psnr": -1.7206857204437256,
+          "srgb_ssim": 0.001934349536895752,
+          "chroma_mae": 0.005556702431931626,
+          "gradient_mae": -0.000496644846862182
+        },
+        "shadows": {
+          "srgb_psnr": 0.44507014751434326,
+          "srgb_ssim": 0.0019429586827754974,
+          "chroma_mae": -0.00024346728969248943,
+          "gradient_mae": -0.00015568104936392047
+        }
+      },
+      "immutable_step3000_checkpoint": {
+        "name": "dino-anchored-native-fresh-b16-v44",
+        "path": "/mnt/external/demosaic/models/dino-anchored-native-fresh-b16-v44-step3000.pt",
+        "checkpoint_sha256": "b6adac140926920d7faad223acf545f32904c41d6883ab982a1ac9d5bdce3312",
+        "source_sha256": "2f1a2251d8141d335e99266343b46b61b8da3cb13012fc63d79ea5c3968ad01c"
+      },
+      "step10000_boundary_receipt": "docs/results/fresh-dino-capacity-S10k-boundary.json",
+      "step10000_checkpoint_sha256": "ae74bc17012c85d5253f24da4dbaaec4486ed430aa143d852442754288d56bad"
+    },
+    "B": {
+      "source_log": "/mnt/external/demosaic/runs/dino-base-anchored-native-fresh-b16-v51/metrics.jsonl",
+      "saved_log": "/mnt/external/demosaic/benchmarks/fresh-original10k-monitor-snapshot-v1/B-metrics.jsonl",
+      "saved_log_sha256": "7ae18779b0a46c975aa1480c59711d5e7d652c8f388613c8a27689801b0ee044",
+      "latest_step": 7000,
+      "training_complete": false,
+      "monitor_at3000": {
+        "panel_images": 8,
+        "panel_srgb_psnr": 36.10441204479763,
+        "panel_srgb_ssim": 0.9628864111644881
+      },
+      "latest_monitor": {
+        "panel_images": 8,
+        "panel_srgb_psnr": 35.967184151921956,
+        "panel_srgb_ssim": 0.9650454670190811
+      },
+      "latest_minus3000_by_condition": {
+        "adc-only": {
+          "srgb_psnr": -0.6216980218887329,
+          "srgb_ssim": 0.00302736833691597,
+          "chroma_mae": 0.001423187270120252,
+          "gradient_mae": -0.0007576559146400541
+        },
+        "highlights": {
+          "srgb_psnr": 1.5902450680732727,
+          "srgb_ssim": 0.003926144912838936,
+          "chroma_mae": -0.0029900580702815205,
+          "gradient_mae": -0.0005386903649196029
+        },
+        "iso100-prior": {
+          "srgb_psnr": -1.372446358203888,
+          "srgb_ssim": 0.0017391201108694077,
+          "chroma_mae": 0.002316376252565533,
+          "gradient_mae": -0.0005804723987239413
+        },
+        "iso12800-prior": {
+          "srgb_psnr": 0.14601415395736694,
+          "srgb_ssim": 0.0017484351992607117,
+          "chroma_mae": -0.00019514460291247815,
+          "gradient_mae": -0.0003198439662810415
+        },
+        "iso1600-prior": {
+          "srgb_psnr": -0.5465019941329956,
+          "srgb_ssim": 0.0018932614475488663,
+          "chroma_mae": 0.0007045517631922849,
+          "gradient_mae": -0.0004913130251225084
+        },
+        "legacy-noise": {
+          "srgb_psnr": -0.4064965844154358,
+          "srgb_ssim": 0.0017076507210731506,
+          "chroma_mae": 0.0004671709320973605,
+          "gradient_mae": -0.0004095918557140976
+        },
+        "shadows": {
+          "srgb_psnr": 0.2502884864807129,
+          "srgb_ssim": 0.0010714102536439896,
+          "chroma_mae": -0.00017884547196445055,
+          "gradient_mae": -0.00010616568397381343
+        }
+      },
+      "immutable_step3000_checkpoint": {
+        "name": "dino-base-anchored-native-fresh-b16-v51",
+        "path": "/mnt/external/demosaic/models/dino-base-anchored-native-fresh-b16-v51-step3000.pt",
+        "checkpoint_sha256": "84e58b6035f6e260ecb0ae3fb9b976352d4931db36a563d5eb1c039aa9b1f919",
+        "source_sha256": "2f1a2251d8141d335e99266343b46b61b8da3cb13012fc63d79ea5c3968ad01c"
+      },
+      "latest_step7000_checkpoint_snapshotted_by_this_diagnostic": false
+    }
+  },
+  "review_priority": "Compare final full427 ordinary-noise/highlight/shadow groups and native detail/color before any new model selection. Do not change the running schedules based on this small monitor.",
+  "limits": "No training-seed uncertainty, no per-source monitor records or paired CIs. Legacy random-validation scalars are not used. CPU qualitative examples use different precision/noise and are not images for these monitor scores.",
+  "verified_monitor_policy": {
+    "precision": "bfloat16",
+    "validation_images": 8,
+    "validation_manifest": "/mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl",
+    "validation_protocol": "configs/evaluation.yaml",
+    "patch_size": 256,
+    "batch_size": 16
+  },
+  "monitor_source": {
+    "worktree": "/home/dllu/proj/demosaic/.cache/fresh-dino-capacity-worktree",
+    "source_commit": "8580a4e0908c76ead6f9619ce635f8e4e9eef0ec",
+    "suite_py_sha256": "a474ff659df10dd4ec11d577082034a6e6dcba1a2a2b29c39065056cff5527b4",
+    "evaluate_panel_AST_matches_current_inspected_source": true
+  },
+  "monitor_best_preservation": {
+    "receipt": "/mnt/external/demosaic/benchmarks/fresh-original10k-monitor-snapshot-v1/best-checkpoint-evidence.json",
+    "sha256": "0201f22e69b371755615138f0c62fc958ced422c76a0d44dd8d30fb4d45983dc",
+    "scope": "Preserve existing small-panel monitor-best states for possible later review, not quality selection or convergence evidence.",
+    "models": [
+      {
+        "name": "dino-base-anchored-native-fresh-b16-v51",
+        "step": 4000,
+        "monitor_srgb_psnr": 36.24293401411602,
+        "selection": "Existing trainer monitor-best policy; no broad-quality selection by this diagnostic",
+        "retained_checkpoint": "/mnt/external/demosaic/benchmarks/fresh-original10k-monitor-snapshot-v1/weights/weights-1210b883f72f766b3efd06797a238109245e453ce69ac9ffaa253937f8b0b05a.pt",
+        "sha256": "1210b883f72f766b3efd06797a238109245e453ce69ac9ffaa253937f8b0b05a",
+        "new_checkpoint_copy": true
+      },
+      {
+        "name": "control-anchored-native-fresh-b16-v45",
+        "step": 3000,
+        "monitor_srgb_psnr": 36.13899969203131,
+        "selection": "Existing trainer monitor-best policy; no broad-quality selection by this diagnostic",
+        "retained_checkpoint": "/mnt/external/demosaic/models/control-anchored-native-fresh-b16-v45-step3000.pt",
+        "sha256": "6f9948c361cda74a294ad0cc9db4718dfb3fe0a9cc5a4c1cc867e986e0a7eedf",
+        "model_and_EMA_match_live_best_exactly": true,
+        "new_checkpoint_copy": false
+      },
+      {
+        "name": "dino-anchored-native-fresh-b16-v44",
+        "step": 1000,
+        "monitor_srgb_psnr": 35.89934379713876,
+        "selection": "Existing trainer monitor-best policy; no broad-quality selection by this diagnostic",
+        "retained_checkpoint": "/mnt/external/demosaic/models/dino-anchored-native-fresh-b16-v44-step1000.pt",
+        "sha256": "9e8733f1a151f5c6abf2a2356e7237e2fb7e1972cb960dbeae6d3f3587e26977",
+        "model_and_EMA_match_live_best_exactly": true,
+        "new_checkpoint_copy": false
+      }
+    ],
+    "cuda_initialized": false,
+    "driver_sha256": "350d4c0da55c58c2d7f489325464a054737dced7295784a90532a4e3f81db7f4",
+    "current_training_untouched": true,
+    "controller_expected_step10000_paths_created": false
+  }
+}
