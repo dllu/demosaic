@@ -67,26 +67,35 @@ def test_domain_with_no_selected_steps_never_starts_its_loader():
 
 
 @pytest.mark.parametrize(
-    "warm_start,legacy_metadata,new_recipe,spawn_workers",
+    "warm_start,legacy_metadata,new_recipe,spawn_workers,weak_recipe",
     [
-        (False, False, False, False),
-        (True, False, False, False),
-        (True, True, False, False),
-        (True, False, True, False),
-        (False, False, True, True),
+        (False, False, False, False, False),
+        (True, False, False, False, False),
+        (True, True, False, False, False),
+        (True, False, True, False, False),
+        (False, False, True, True, False),
+        (False, False, True, True, True),
     ],
 )
 def test_checkpoint_resume_matches_uninterrupted_training(
-    tmp_path, warm_start, legacy_metadata, new_recipe, spawn_workers
+    tmp_path, warm_start, legacy_metadata, new_recipe, spawn_workers, weak_recipe
 ):
     """RNG, augmentation, draw position, optimizer, LR and EMA survive a restart."""
     source = tmp_path / "clean.npy"
     rng = np.random.default_rng(7)
-    np.save(source, rng.integers(0, 65536, (40, 40, 3), dtype=np.uint16))
+    side = 80 if weak_recipe else 40
+    np.save(source, rng.integers(0, 65536, (side, side, 3), dtype=np.uint16))
     manifest = tmp_path / "manifest.jsonl"
     manifest.write_text(
         "\n".join(
-            json.dumps({"id": split, "cache": source.name, "split": split})
+            json.dumps(
+                {
+                    "id": split,
+                    "cache": source.name,
+                    "split": split,
+                    **({"bin_factor": 4} if weak_recipe else {}),
+                }
+            )
             for split in ("train", "val")
         )
     )
@@ -116,6 +125,8 @@ def test_checkpoint_resume_matches_uninterrupted_training(
         config.update(broad_camera=True, normalized_sensor_weight=0.02)
     if spawn_workers:
         config.update(workers=1, worker_start_method="spawn")
+    if weak_recipe:
+        config.update(augmentation_downsample=2, synthetic_fraction=1, weak_texture_fraction=1)
     path = tmp_path / "config.yaml"
     path.write_text(yaml.safe_dump(config))
     initialize = None
@@ -258,6 +269,16 @@ def test_pre_downsample_training_keeps_frozen_validation_and_resume_recipe(tmp_p
         == hashlib.sha256(manifests["val"].read_bytes()).hexdigest()
     )
     train(path, resume=checkpoint)
+    for key, value, error in [
+        ("weak_texture_fraction", 0.1, "weak texture fraction"),
+        ("synthetic_fraction", 0.3, "synthetic fraction"),
+        ("flat_fraction", 0.1, "flat fraction"),
+    ]:
+        config[key] = value
+        path.write_text(yaml.safe_dump(config))
+        with pytest.raises(ValueError, match=error):
+            train(path, resume=checkpoint)
+        config.pop(key)
     config["augmentation_downsample"] = 1
     path.write_text(yaml.safe_dump(config))
     with pytest.raises(ValueError, match="augmentation downsample"):

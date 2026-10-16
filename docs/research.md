@@ -146,9 +146,33 @@ The authorized account can fetch genuine config/weights at revision
 the weights' LFS SHA256 verification. [Availability receipt](results/dino-vitb-availability-v1.json).
 The [matched current-architecture capacity trial](fresh-dino-capacity.md) has
 now passed genuine CPU/GPU initialization, gradient and portability preflights
-and completed the [first1000 trained review](fresh-dino-capacity-1k-review.md).
-No-context leads photo/unseen primary at that gate; B improves photo versus S
-without surpassing no-context. Fifty native comparisons and ten full RGB16
-files verify. A whole-state continuation to3000 on the original10000 schedule
-is live; convergence and a restoration benefit from larger context remain
-unproven. V50 separately retained ViT-S and tested data membership alone.
+and completed the [first1000 trained review](fresh-dino-capacity-1k-review.md)
+and [whole-state continuation to3000](fresh-dino-capacity-3k-review.md).
+No-context still leads photo/unseen primary at3000; B improves photo versus S
+without surpassing no-context. All three improve from1000, but none establish
+convergence on the original10000 schedule or a benefit from larger context.
+Fifty native comparisons and ten full RGB16 files verify at each gate. V50
+separately retained ViT-S and tested data membership alone. The subsequent
+[paired-data-only trial](paired-expansion-v53-v54-review.md) is now finishing
+both original4000-step schedules after a mixed first1000 real-camera review.
+
+## Texture retention and training scale follow-up
+
+[Achddou, Gousseau and Ladjal (2024)](https://arxiv.org/html/2404.07212v1)
+study mixed natural/synthetic training and texture-acutance supervision for
+RGB and RAW denoising. Their analysis motivates checking recovered texture
+separately from noise power; aggregate acutance can hide frequency overboost.
+This older methodological work is context, not a recent architecture or a
+reproduced result here. The new exact sinusoid diagnostic fits signed carrier
+response, quadrature leakage and unrelated residual energy separately.
+
+The [AIM2025 real-world RAW denoising report](https://arxiv.org/html/2510.06601v1)
+describes substantial attention to data/noise synthesis and progressive patch
+sizes among entrants. Our256px training/512px serving geometry warrants a
+future controlled context check; the report does not prove this project's
+detail loss comes from patch size. Its RAW-to-RAW benchmarks, additional data
+and compute budgets differ from our commercially usable joint reconstruction.
+
+[Experimental weak-texture source and actual CPU preparation](weak-texture-source.md)
+remain separate from active recipes. Any change needs matched trained quality,
+flat-region false-detail checks and the standing full/native/GFX review.

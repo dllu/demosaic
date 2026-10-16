@@ -14,6 +14,7 @@ from torch.utils.data import Dataset
 from .cfa import PATTERNS, color_indices, mosaic
 from .noise import add_noise, sample_coefficients, variance_map
 from .precision import ieee_fp32
+from .textures import weak_texture
 
 
 def synthetic(size: int, rng: random.Random) -> torch.Tensor:
@@ -80,6 +81,7 @@ class CleanDataset(Dataset):
         native_crop=False,
         flat_fraction=0.0,
         augmentation_downsample=1,
+        weak_texture_fraction=0.0,
     ):
         self.manifest = Path(manifest)
         if records is None:
@@ -94,6 +96,11 @@ class CleanDataset(Dataset):
             raise ValueError("Procedural sample fractions must be nonnegative and sum to <=1")
         self.synthetic_fraction = synthetic_fraction if split == "train" else 0
         self.flat_fraction = flat_fraction if split == "train" else 0
+        if not 0 <= weak_texture_fraction <= synthetic_fraction:
+            raise ValueError("Weak texture fraction must be within the existing synthetic fraction")
+        self.weak_texture_fraction = weak_texture_fraction if split == "train" else 0
+        if self.weak_texture_fraction and augmentation_downsample != 2:
+            raise ValueError("Weak texture training requires augmentation before final downsample2")
         self.native_crop = native_crop
         if augmentation_downsample not in (1, 2) or (
             augmentation_downsample != 1 and split != "train"
@@ -116,7 +123,10 @@ class CleanDataset(Dataset):
         if draw < self.flat_fraction:
             rgb = smooth_scene(size, rng)
         elif draw < self.flat_fraction + self.synthetic_fraction:
-            rgb = synthetic(size, rng)
+            if draw < self.flat_fraction + self.weak_texture_fraction:
+                rgb, _ = weak_texture(size, rng, pixel_scale=self.augmentation_downsample)
+            else:
+                rgb = synthetic(size, rng)
         else:
             record = self.rows[
                 rng.randrange(len(self.rows)) if self.split == "train" else index % len(self.rows)
