@@ -46,9 +46,10 @@ class RgbRestorationTrunk(nn.Module):
     vary spatially. Optional offsets start at zero in the joint model.
     """
 
-    def __init__(self, *, hidden_autocast=False):
+    def __init__(self, *, hidden_autocast=False, middle_skip_fp32=False):
         super().__init__()
         self.hidden_autocast = hidden_autocast
+        self.middle_skip_fp32 = middle_skip_fp32
         self.m_head = nn.Conv2d(4, 64, 3, padding=1, bias=False)
         for level, (a, b) in enumerate(zip((64, 128, 256), (128, 256, 512)), 1):
             setattr(
@@ -85,6 +86,10 @@ class RgbRestorationTrunk(nn.Module):
         x2 = self.m_down1(hidden)
         x3 = self.m_down2(x2)
         x4 = self.m_down3(x3)
+        if self.middle_skip_fp32:
+            # Match the FP32 promotion supplied by a DINO offset, even when
+            # that branch is absent. Convolutions still follow the outer AMP.
+            x4 = x4.float()
         if middle_offset is not None:
             x4 = x4 + middle_offset
         x = self.m_up3(self.m_body(x4) + x4)
@@ -228,6 +233,7 @@ class PretrainedRgbDemosaic(nn.Module):
     def __init__(
         self, *, stabilized=False, physical_anchors=False, processing_scale=1,
         detail_prior=False, hidden_autocast=False, center_camera_matrix=False,
+        middle_skip_fp32=False,
     ):
         super().__init__()
         if physical_anchors and not stabilized:
@@ -236,7 +242,9 @@ class PretrainedRgbDemosaic(nn.Module):
             raise ValueError("Packed processing requires variance stabilization and scale 2")
         if detail_prior and processing_scale != 2:
             raise ValueError("The detail prior requires packed processing")
-        self.network = RgbRestorationTrunk(hidden_autocast=hidden_autocast)
+        self.network = RgbRestorationTrunk(
+            hidden_autocast=hidden_autocast, middle_skip_fp32=middle_skip_fp32
+        )
         self.measurement_adapter = nn.Conv2d(21, 64, 1)
         nn.init.zeros_(self.measurement_adapter.weight)
         nn.init.zeros_(self.measurement_adapter.bias)

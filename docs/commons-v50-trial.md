@@ -1,5 +1,9 @@
 # Test the larger Commons corpus with the retained architecture
 
+**Completed at1000: [the full review](commons-expanded-v50-review.md)
+stops this checkpoint after known-primary/photo losses.** The frozen extension
+remains available; source count alone is not a quality result.
+
 [V50](../configs/dino-commons-expanded-b16-v50.yaml) changes only photographic
 Commons membership versus completed V47:40,170→52,536 training sources. This
 includes the preceding1,808-image extension plus10,558 newly reviewed sources.

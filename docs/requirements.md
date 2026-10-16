@@ -48,8 +48,8 @@ V34/V36 first1000 and full427/full102MP reviews are complete and stopped.
 [Nine public RAW samples](public-raw-pilot.md) retain their original quarantine.
 Six reviewed sources have a separate opt-in native extension; the chart and two
 clipped sources are excluded. Current architecture trials remain unchanged.
-The last complete CUDA suite passed **358 tests in 27.81 s**;15 newly added
-CPU identity-screen/diagnostic tests pass separately. The optional DINO
+The complete CUDA-enabled suite now passes **379 tests in40.18s**, including
+the explicit middle-skip precision control and prior identity/diagnostic checks. The optional DINO
 adapters pass genuine full-model BF16/FP16 initial-output equality, backward,
 original-weight preservation and full-state training-resume checks.
 [GPU receipt](results/dino-lora-gpu-preflight-v1.json). The
@@ -137,3 +137,12 @@ observations exact. Unseen primary/photo PSNR fall, so V49 stops at1000.
 Twenty native comparisons, two full102MP RGB16 files and actual-trained
 weak-signal CUDA checks verify. The larger Commons membership is the next
 data-only trial; original frozen DINO remains.
+
+The [V50 corpus first gate](commons-expanded-v50-review.md) loses known-primary/
+photo PSNR and stops at1000 without promoting the new data recipe. Its20 native
+comparisons and two full RGB16 outputs verify. Fresh Gaussian-initialized
+S/B/no-context trials now have [genuine CPU/GPU preflights](fresh-dino-capacity.md).
+They explicitly match middle-skip precision: a zero DINO offset had promoted
+BF16 features toFP32, an arithmetic confound for an otherwise absent branch.
+Legacy defaults/current checkpoints are preserved. Trained quality and the
+current-architecture DINO/capacity attribution remain outstanding.

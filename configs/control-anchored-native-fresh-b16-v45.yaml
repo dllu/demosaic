@@ -14,7 +14,10 @@ experiment_notes: 'Matched fresh current-architecture DINO ablation V44/V45: ver
   and original8 validation, physical anchors/GAT, 4x->geometry/PSF->2x, original precision.
   Only DINO context presence changes; all logged input/target hashes must match. This
   config is prepared, not permission to overlap the owned native-corpus continuation/review.
-  First gate does not establish convergence or SOTA.'
+  First gate does not establish convergence or SOTA. Explicit FP32 middle skip in
+  all arms matches the promotion already present with a DINO offset; AMP convolutions
+  remain unchanged. Prepared fresh recipes updated before any training; older CPU-only
+  receipts remain historical.'
 flat_fraction: 0.1
 gaussian_initialization: docs/results/gaussian-color-source-and-weights.json
 log_every: 25
@@ -32,6 +35,7 @@ model:
   width: 64
   rgb_processing_scale: 1
   rgb_hidden_autocast: false
+  rgb_middle_skip_fp32: true
 noise_free_fraction: 0.1
 paired_fraction: 0.25
 paired_manifest: /mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json

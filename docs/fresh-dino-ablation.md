@@ -3,7 +3,9 @@
 V44 and V45 are prepared recipes for a matched training comparison of DINOv3
 context in the current full-resolution pretrained RGB architecture. **Training
 has not started.** The V37/V39/V43 corpus continuation and its complete review
-finish first. Earlier DINO ablations used a different restoration architecture;
+finished; V50 is also complete. The [expanded CPU/GPU preflight](fresh-dino-capacity.md)
+adds a genuine frozen ViT-B candidate and corrects a mixed-precision confound
+before any of these fresh arms train. Earlier DINO ablations used a different restoration architecture;
 turning context off only at inference also changes the input distribution of
 an already trained network.
 
@@ -24,7 +26,14 @@ source scripts/env.sh
 uv run --no-sync python scripts/preflight_fresh_dino_ablation.py
 ```
 
-The recipes differ only in run destination and `model.dino`:
+The two original recipes share explicit FP32 middle skips after the
+[precision diagnosis](results/fresh-dino-middle-precision-diagnosis-v1.json).
+A zero DINO offset otherwise promotes a BF16 skip to FP32. Matching this
+policy keeps the original DINO arithmetic and prevents the no-context control
+from changing numerical precision. Earlier CPU-FP32-only receipts remain
+historical; the new preflight records the updated recipe/source hashes.
+
+The two recipes differ only in run destination and `model.dino`:
 
 - [V44 with DINO](../configs/dino-anchored-native-fresh-b16-v44.yaml)
 - [V45 without DINO](../configs/control-anchored-native-fresh-b16-v45.yaml)

@@ -48,6 +48,7 @@ class ModelConfig:
     packed_detail_prior: bool = False
     rgb_hidden_autocast: bool = False
     rgb_center_camera_matrix: bool = False
+    rgb_middle_skip_fp32: bool = False
 
     def to_dict(self):
         return asdict(self)
@@ -362,6 +363,8 @@ class JointDemosaic(nn.Module):
         cfg = self.config
         if cfg.rgb_center_camera_matrix and cfg.restoration_backbone != "pretrained-rgb":
             raise ValueError("Centered camera matrices require the pretrained RGB backbone")
+        if cfg.rgb_middle_skip_fp32 and cfg.restoration_backbone != "pretrained-rgb":
+            raise ValueError("FP32 middle skips require the pretrained RGB backbone")
         if type(cfg.dino_lora_rank) is not int or cfg.dino_lora_rank < 0:
             raise ValueError("DINO adapter rank must be a nonnegative integer")
         if cfg.dino_lora_rank and not cfg.dino:
@@ -406,6 +409,7 @@ class JointDemosaic(nn.Module):
                 detail_prior=cfg.packed_detail_prior,
                 hidden_autocast=cfg.rgb_hidden_autocast,
                 center_camera_matrix=cfg.rgb_center_camera_matrix,
+                middle_skip_fp32=cfg.rgb_middle_skip_fp32,
             )
             self.context = DinoContext(cfg, 512) if cfg.dino else None
             self.refiner = self.coarse_refiner = self.pyramid_refiner = None
