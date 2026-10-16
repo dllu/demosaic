@@ -1,8 +1,10 @@
 # Reviewed paired-data admission
 
 New paired scenes require an exact, hash-pinned review before the training
-loader can accept them. The registry is currently empty: **no new paired data
-is admitted yet**. The original32-scene route keeps its sampling behavior.
+loader can accept them. The registry now pins the [completed51-scene review](paired-extension-quarantine.md).
+Its [separate opt-in extension](results/paired-train83-reviewed.json) contains83
+publisher scene IDs/71 sampling groups. Existing recipes keep their original
+32-scene manifest and sampling behavior.
 
 The embedded review payload records acquisition, protected/Commons screening,
 prepared-target and manual-review SHA256s; protected scene names; and every
@@ -30,5 +32,12 @@ frozen loader and the new loader. Source versions and the driver are archived;
 CUDA was not initialized. This is routing/sampling compatibility evidence,
 not restoration quality or a new data admission.
 
-The [expanded quarantine](paired-extension-quarantine.md) is still undergoing
-native target/alignment review before a review hash can be registered.
+Related reviewed views/exposures can share an explicit `scene_group`, including
+an existing legacy group. The full case equality check binds that alias too;
+changing it outside the receipt fails. Legacy cases keep their original groups.
+
+The final CPU suite passes443 tests/eight CUDA skips in48.81s, including source
+license checks, grouped sampling and the separate extension builder. The earlier
+427 count above records the initial closed contract. Actual final-source train32
+parity remains exact for ten samples; the new dataset also passes seven native256
+sampling/determinism checks. GPU training preflight is a separate queued step.

@@ -62,7 +62,12 @@ class PairedDataset(Dataset):
                     digest = hashlib.file_digest(handle, "sha256").hexdigest()
                 if digest != crop["sha256"]:
                     raise ValueError(f"Paired training crop checksum mismatch: {path}")
-            self.scenes.setdefault(case["scene"], []).append(case)
+            group = (
+                reviewed.get("scene_group", case["scene"])
+                if reviewed is not None
+                else case["scene"]
+            )
+            self.scenes.setdefault(group, []).append(case)
         if seen_extensions != set(approved):
             raise ValueError("Paired training manifest omits reviewed extension cases")
         self.names = sorted(self.scenes)

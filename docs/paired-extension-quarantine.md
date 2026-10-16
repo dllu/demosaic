@@ -136,3 +136,40 @@ The [measured-residual diagnostic](paired-target-residuals.md) now checks the
 original training set and two-scene pilot. Most supported pairs have low lag
 correlation, but selected cases show structure requiring closer native review.
 It does not alter targets or automatically admit/reject sources.
+
+## Reviewed opt-in training extension
+
+The full preparation completes104 pairs/934 crops with no scene-level failure.
+All104 native noisy/AHD-reference pairs were inspected on seven pages, alongside
+the six source-contact pages, residual descriptors and original target masks.
+The active-display `steamdeck1603` series remains held because temporal/PWM/content
+changes cannot be ruled out at pixel scale. The other51 scene IDs retain102 pairs/
+916 crops. Original target values/masks/source files remain unchanged.
+[Review, hashes and the separate training dataset](results/paired-train83-reviewed.json).
+
+Repeated framing/lighting variants share group weight: the five Leslie artworks,
+hole-in-wall variants, big-bookshelf views, sign brightness variants, wood-chip
+views and logpile/closeup. Three new IDs share existing groups: Iain02→Iain01,
+in_piano_dark→in_piano_lit and mjbookshelf1→mjbookshelf2. These were compared with
+cached legacy RAW renders, not inferred from filenames alone:
+
+![Legacy source views for grouping, resized](images/paired-existing-group-review.jpg)
+
+The separate extension preserves all64 original paired cases and every crop
+hash, then adds exactly the reviewed cases. It contains**83 publisher scene IDs,
+71 balanced sampling groups,166 pairs and1492 crops**. Its manifest SHA256 is
+`0a740eb55280a6b6d7d45d4eed9454a6fdd8692f30e4371dbbb7e346933595fb`.
+Canonical review hash
+`5609f2bcf17fa165828120dd25452a236a7631b89bab632fb18037161203b70e`
+is explicitly pinned by the loader. Quarantine and base manifests stay untouched;
+the extension is opt-in. Seven actual native256 samples verify determinism and
+valid measured-reference coverage. No model gain follows from this admission.
+
+Prepared [V53/V54 recipes](results/paired-expansion-v53-v54-prepared.json) compare
+the original paired dataset with this extension. Same retained V43 step2000 EMA,
+fresh optimizer/EMA, seed52, batch16, LR3e-5/planned4000, fixed Commons/native data,
+25/25/50 mix and original8× validation; first review1000 updates. Only the paired
+manifest differs. All logged nonpaired observations must match. Fresh-source
+CUDA checks and actual B16/native256 paired updates/reload precede training;
+the owned ADC-policy workflow must first exit successfully. No alias promotion
+or protected-final scoring is authorized by an early recipe alone.
