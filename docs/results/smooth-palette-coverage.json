@@ -1,0 +1,60 @@
+{
+  "scope": "Post-hoc analytic coverage diagnosis of four chosen colors, not a training-cause or generalization proof. No training or sampling-default change.",
+  "direct_smooth_scene_source_sha256": "b3277bca23d8c17b365ee364e175ea8a850d45a79cf02686628db606341e7be3",
+  "tint_definition": "50% neutral; otherwise three independent uniform[0.3,1.5] tints, common scalar intensity and ramp, then clipping. Direct input linear-sRGB channel ratio cannot exceed5. Geometry/positive common PSFs do not enlarge that cone. This is a statement about the procedural smooth branch, not all photo/native/paired/shapes training.",
+  "finite_sample_check": {
+    "seed": 20261016,
+    "samples": 1000,
+    "size": 16,
+    "neutral_samples": 511,
+    "largest_observed_channel_ratio": 4.782190885783561
+  },
+  "diagnostic_palettes": [
+    {
+      "palette": "neutral",
+      "unclipped_linear_sRGB": [
+        0.18,
+        0.18000000000000002,
+        0.18
+      ],
+      "max_to_min_linear_sRGB_channel_ratio": 1.0000000000000002,
+      "within_direct_smooth_tint_ratio_bound_5": true
+    },
+    {
+      "palette": "fabric-mean",
+      "unclipped_linear_sRGB": [
+        0.9637255994181284,
+        0.4111107611892348,
+        0.08513432283832836
+      ],
+      "max_to_min_linear_sRGB_channel_ratio": 11.320059492905829,
+      "within_direct_smooth_tint_ratio_bound_5": false
+    },
+    {
+      "palette": "fabric-cyclic-gbr",
+      "unclipped_linear_sRGB": [
+        0.8992229083559217,
+        0.019250096641930017,
+        0.6924448000150413
+      ],
+      "max_to_min_linear_sRGB_channel_ratio": 46.7126438418631,
+      "within_direct_smooth_tint_ratio_bound_5": false
+    },
+    {
+      "palette": "fabric-cyclic-brg",
+      "unclipped_linear_sRGB": [
+        0.15310442835757906,
+        0.4498876072648674,
+        0.6705715777604612
+      ],
+      "max_to_min_linear_sRGB_channel_ratio": 4.379831367087078,
+      "within_direct_smooth_tint_ratio_bound_5": true
+    }
+  ],
+  "limitation": "Palette chosen after the fabric failure; only4 colors, fixed camera transform. Other training domains can contain these hues, and camera transformation/reconstruction has separate behavior. This correlation does not identify why the late checkpoint errs. A future color-coverage treatment needs matched trained controls, color/flat/detail and full photographic/real review.",
+  "original_fresh_training_source_confirmation": {
+    "commit": "8580a4e0908c76ead6f9619ce635f8e4e9eef0ec",
+    "original_data_py_sha256": "379c2ba5cfbc2d2760785896ffe9dc030284851621975ff15c90b51ad42b714a",
+    "smooth_scene_AST_identical_to_current": true
+  }
+}

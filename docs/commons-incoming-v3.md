@@ -67,7 +67,7 @@ The final executed launcher passes Ruff; the reused preparation/screening/audit
 operators retain their existing validation. This job does not create a new
 model, performance score or README reference.
 
-## Completed 8× review and matching 4× preparation
+## Reviewed 8× and completed matching 4×
 
 The producer completed 16,230 caches, totaling18.45 GB, with one ICC-transform
 failure explicitly excluded. An independent read-only pass verified every
@@ -89,19 +89,42 @@ This is a content spot-check, not native-quality verification of every source
 or a complete scene-overlap proof. All protected flags stay excluded regardless
 of this preview review. The standing GFX scene/siblings remain excluded.
 
-CPU-only4× preparation now processes just the14,398 new training sources,
-reusing the existing52,536-source training base and its held-out cache paths.
-It uses two workers at nice5, a frozen package/operator/driver and an estimated
-65.3 GB payload checked against a512 GiB reserve. All new cache SHA256s must
-verify before the combined4× manifest freezes. The final active counts must be
-66,934 train/2,303 val/2,255 test; new reserved/excluded sources stay outside it.
+CPU-only4× preparation completed all 14,398 new training sources, totaling
+65.250711758 GB, while reusing the existing52,536-source training base and its
+held-out cache paths. It used two workers at nice5, a frozen package/operator/
+driver and a 512 GiB reserve. The producer finished and exited; its full checksum
+verification and merge froze66,934 train/2,303 val/2,255 test. New reserved and
+excluded sources remain outside this separate corpus.
 The original8× validation manifest remains the evaluation input for future
 augmentation trials.
 
-Rebin controller580845, creation1792185684.87, owns
-`rebin4-workflow.json` and `rebin4-controller.json` under the quarantine root.
-Its log is `.cache/rebin-commons-incoming-v3.log`. The process archives its exact
-operator/driver under `rebin4-source/` and imports the already frozen package
-from `source/`. It cannot silently absorb later downloads or change the running
-ConvNeXt trial's40,170-source training manifest. No quality gain follows from
-preparing more images; a sufficiently trained comparison remains necessary.
+[Complete producer, independent audit and content-review receipt](results/commons-incoming-v3-rebin4-complete.json).
+The frozen4× manifest is
+`/mnt/external/demosaic/commons-incoming-20261016-v3-quarantine/extension4/audit/manifest.jsonl`,
+SHA256 `7ed635903e4dd698081475a3667c8a14bb3b9f5f628a0917a5e336406faaecde`.
+
+An independent read-only pass rehashed **every new 4× and matching 8× cache**,
+verified uint16/HWC/shape/minimum-size metadata, and compared rounded2× area
+means from the4× caches to their reviewed8× pixels. Across 8,148,865,503 channel
+samples, differences are bounded by **one uint16 code**; 6,987,813,188 match
+exactly. This checks the content and expected quantization relationship, without
+interpolation or source-image rewriting. All 57,094 reused base rows, including
+4,558 validation/test cache paths, remain exact. Every active source/attribution
+field matches the reviewed8× membership; reserved/excluded sources stay omitted.
+
+Three new resized contact sheets covering 48 evenly spaced training IDs were
+actually viewed. They include architecture, night scenes, skies, foliage,
+wildlife, art, products, vehicles/sports and a diagram. No obvious broken decode
+appears in these previews. This remains a content spot check, rather than native
+visual verification of every cache or a complete scene-identity proof. The
+existing protected-screen flags and standing-GFX camera/date/identifier
+exclusions remain in force.
+
+The completed rebin controller was580845, creation1792185684.87. Its exact
+operator/driver remain in `rebin4-source/`, the package in `source/`, and the log
+in `.cache/rebin-commons-incoming-v3.log`. The independent audit and per-cache
+records are in
+`/mnt/external/demosaic/benchmarks/commons-v3-4x-complete-integrity-v1/`.
+Neither the current40,170-source training manifest nor original validation
+changed. The new corpus is ready for a separate data comparison; preparing more
+images does not establish a trained quality gain.

@@ -118,3 +118,34 @@ weak texture, full photographs and real captures. Existing optional pooled
 sensor losses and prior camera-conditioning trials already have mixed results;
 this finding alone is not evidence to promote one. The current V58 schedule,
 V43 README reference and protected-final scoring policy remain unchanged.
+
+## A testable smooth-color coverage gap
+
+The procedural smooth branch already includes colored fields: half are neutral,
+and half draw three tints uniformly from[.3,1.5], with common intensity/ramps.
+Its direct linear-sRGB inputs therefore have a maximum-to-minimum channel ratio
+of at most 5. Shared positive geometry/PSF averaging preserves that bound. This
+describes the smooth branch before camera conversion, rather than every training
+image or reconstructed highlight. The original fresh-training source 8580a4e
+has the identical `smooth_scene` syntax tree.
+
+The fixed diagnostic's camera colors convert to these linear-sRGB ratios:
+
+| Palette | Maximum/minimum channel ratio | Within the direct smooth ratio bound? |
+| --- | ---: | --- |
+| Neutral | 1.00 | Yes |
+| Warm fabric mean | 11.32 | No |
+| Cyclic GBR | 46.71 | No |
+| Cyclic BRG | 4.38 | Yes |
+
+In this chosen four-color grid, the two large late errors occur outside that
+bound. A deterministic check of 1,000 current smooth draws finds 511 neutral
+samples and a largest ratio 4.78219, consistent with the analytic bound.
+[Source confirmation, exact RGB values and finite-sample receipt](results/smooth-palette-coverage.json).
+
+The palette was chosen after the fabric failure. Natural photos, shapes and
+native/paired domains may contain these hues, and camera conversion has its own
+behavior. This association does not identify the training cause or prove that
+wider smooth tints improve quality. It supplies a concrete rationale for a
+matched wider-palette experiment after the mature review, with color fidelity,
+neutral false detail and photographic/real quality checked together.
