@@ -10,6 +10,11 @@ reruns both models and RawNIND, adds direct learned comparisons and two exact-GT
 synthetic examples. It finds no clear new real-capture winner; V43 remains the
 reference while the complete long comparison continues.
 
+The [matched fresh no-context/S10k CPU review](fresh-none-S10k-cpu-review.md#three-additional-camera-contexts)
+now adds the completed S arm on these same fixed inputs. It recovers the noisy
+CFA from retained float arrays, repeats no RAW decoding or no-context/RawNIND
+inference, and finds no clear new S advantage across the six ROIs.
+
 Each row is **noisy Malvar → V43 → RawNIND comparator (not GT)**. There is no
 clean reference or pixelwise quality score. Both RawNIND global/channel CFA
 calibrations use the same publisher weights and observed noisy CFA, without

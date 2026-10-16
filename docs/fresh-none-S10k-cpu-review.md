@@ -2,7 +2,7 @@
 
 Both original schedules are complete. The two models remain visually close on
 the fixed GFX crops, and both still lose fine fabric cords in the exact-GT
-example. These six examples do not establish a broad DINO benefit or justify
+example. These fixed examples do not establish a broad DINO benefit or justify
 replacing V43 in the README. [All ten new native PNGs, hashes and provenance](results/fresh-none-S10k-cpu-review.json).
 
 This is a small **CPU FP32 qualitative check** while DINO-B continues training.
@@ -124,7 +124,77 @@ binning, cropping, camera/noise simulation and restoration. Derived photographs
 retain that license. GFX photographs belong to the project owner and are used
 with permission.
 
-## Execution checks
+## Three additional camera contexts
+
+A separate cached replay checks the same completed models on the fixed
+Leica Q2, Sony a7R II and GFX 50R selections. They remain visually close;
+these crops do not establish a new DINO-S advantage.
+[All 18 additional native PNGs, six float arrays and provenance](results/fresh-none-S10k-cross-camera-cpu.json).
+The two exact-GT S triplets above are reused unchanged, with the same
+checkpoint hash and CPU FP32 execution.
+
+No RAW file is read in this replay. The earlier comparison retained unquantized
+bilinear camera RGB, whose observed CFA sites preserve the noisy measurements
+exactly. Sampling those sites recovers the packed observations. Recomputing
+both the complete bilinear and Malvar float arrays is bit-exact against their
+earlier saved outputs for all three cameras. Only three new S context forwards
+run; the no-context and two RawNIND outputs are reused.
+
+| Camera / ISO / CFA | Context xywh | Shot / read variance | Display |
+| --- | --- | --- | --- |
+| Q2 / 100 / GBRG | [250,4054,512,512] | 4.372832896e-5 / 1.604877784e-7 | ×2 (+1 EV) |
+| a7R II / 400 / RGGB | [3984,2978,512,512] | 8.198338439e-5 / 1.206198755e-7 | ×1 |
+| GFX 50R / 100 / RGGB | [1656,1552,512,512] | 1.941424139e-5 / 1.641306284e-7 | ×2 (+1 EV) |
+
+Each context has predeclared ROIs [64,64,160,160] and [256,256,160,160]. All
+methods share the original noise estimates, WB, matrix and display exposure;
+the receipt records full values. Noise estimates use input-only Haar/flat-patch
+fitting, rather than dedicated sensor calibration. These are development
+examples without a strict unseen-domain claim. This replay admits no photos to
+training and accesses no original source directory. Photographs by the project
+owner, used with permission.
+
+The direct rows read **noisy → no-context 10k → DINO-S 10k**. Every displayed
+panel is a native 160×160 crop; neither learned output is GT.
+
+Q2 shadow texture remains soft and the learned outputs remain close:
+
+![Q2 upper-left: noisy, no-context and DINO-S](images/fresh-none-S10k-cpu-q2-upper-left-direct.png)
+
+![Q2 lower-right: noisy, no-context and DINO-S](images/fresh-none-S10k-cpu-q2-lower-right-direct.png)
+
+Sony window/fuselage detail is already soft in the noisy capture and remains
+soft after restoration, with no clear new winner:
+
+![Sony upper-left: noisy, no-context and DINO-S](images/fresh-none-S10k-cpu-a7rii-upper-left-direct.png)
+
+![Sony lower-right: noisy, no-context and DINO-S](images/fresh-none-S10k-cpu-a7rii-lower-right-direct.png)
+
+Both learned methods retain sharper concrete seams and more surface variation
+than RawNIND on the GFX 50R example. Without a clean reference, not all variation
+can be identified as true detail. A new S benefit is not established:
+
+![GFX50R upper-left: noisy, no-context and DINO-S](images/fresh-none-S10k-cpu-gfx50r-upper-left-direct.png)
+
+![GFX50R lower-right: noisy, no-context and DINO-S](images/fresh-none-S10k-cpu-gfx50r-lower-right-direct.png)
+
+These comparator rows read **noisy → DINO-S 10k → RawNIND channel calibration**.
+RawNIND is explicitly **not GT**, and receives no pixelwise quality score. All
+twelve S/RawNIND global-or-channel primary triplets are in the receipt.
+
+![GFX50R upper-left: noisy, DINO-S and RawNIND comparator, not GT](images/fresh-none-S10k-cpu-gfx50r-upper-left-S-cfa-channel.png)
+
+![GFX50R lower-right: noisy, DINO-S and RawNIND comparator, not GT](images/fresh-none-S10k-cpu-gfx50r-lower-right-S-cfa-channel.png)
+
+All 18 new PNGs were visually inspected and pass hash/RGB/native-geometry checks.
+The six new float arrays pass hash/dtype/shape/finite checks. Every primary
+panel rerenders byte-exactly from saved floats. Shared noisy/RawNIND panels and
+direct pixels match their parents exactly. The execution, audit and publication
+drivers are archived; Ruff passes for their final executed versions. No CUDA
+context, new full-frame output or speed result is produced. Production code
+and the running workflow's frozen package/evaluation files remain unchanged.
+
+## Initial GFX and exact-GT execution checks
 
 All ten new PNGs and the two reused no-context exact-GT triplets were visually
 inspected. Ten PNGs pass hash, RGB/geometry and native-panel checks; all four
