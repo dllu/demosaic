@@ -27,14 +27,14 @@ and [real GFX100S crops](docs/gfx-qualitative.md).
 
 Real GFX100S foliage and chain-link-fence crops at native 160×160 sensor resolution:
 DSCF3879 noisy ISO6400 → experimental V30 step1000 → DSCF3880 ISO100 f/5.6,
-with shared +2 EV display and 512px context.
+with shared +2 EV display, cropped from the full 102 MP output.
 This closer pair is now the standing test. Framing is nearly identical, 3m38s
 apart; aperture and moving subjects differ, so the last panel is a qualitative
 reference, **not GT**. [All four regions and matched comparisons](docs/anchored-stabilized-rgb-v30-review.md).
 
-![GFX foliage: noisy, denoised and separate low-ISO reference](docs/images/v30-1k-gfx-v30-foliage.png)
+![GFX foliage: noisy, denoised and separate low-ISO reference](docs/images/v30-full-v30-foliage.png)
 
-![GFX fence: noisy, denoised and separate low-ISO reference](docs/images/v30-1k-gfx-v30-chain-link-fence.png)
+![GFX fence: noisy, denoised and separate low-ISO reference](docs/images/v30-full-v30-chain-link-fence.png)
 
 ```bash
 source scripts/env.sh

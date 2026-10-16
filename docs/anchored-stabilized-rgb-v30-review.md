@@ -78,8 +78,34 @@ lead over the fixed eight-step prior. All four regions and matched V29/prior
 images are retained. Matching noisy/reference panel bytes, crop coordinates,
 conditioning and display metadata were checked across methods.
 
-The experiment stopped at step1000. Full 102 MP RGB16 output is queued after
-the separate [training throughput sweep](training-pipeline.md); no new timing
-or final-quality claim is made here. The completed V30 quality evaluation used
-the original input pipeline; the new augmentation and loading changes were
-implemented separately afterward.
+## Full 102 MP output
+
+The subsequent full-frame run completed using the same fixed source/noise/WB,
+FP16 deep features, FP32 physical/neural boundaries, 512px tiles,64px overlap
+and batch4. Restoring the 101.996 MP photo took V28 step5000 **33.26s**, V29
+step1000 **34.77s**, V30 step1000 **33.70s**, and RawNIND **18.00s** in one
+successive shared-machine run. This is not an idle benchmark or the10s target.
+V30 peak CUDA allocation was2.28GB, not total system memory. File encoding and
+I/O are outside these restoration timings.
+
+All eight linear/sRGB TIFFs were independently rehashed and verified:
+8746×11662×3,uint16,16bits/channel, sRGB ICC tags, and more than256 distinct
+sampled codes. [Full report, file receipts and native-crop verification](results/gfx-anchored-v30-full.json).
+
+Native foliage/fence crops from the blended full-frame prediction:
+
+![Full102MP V30 foliage: noisy, restored, independent ISO100 reference](images/v30-full-v30-foliage.png)
+
+![Full102MP V30 fence: noisy, restored, independent ISO100 reference](images/v30-full-v30-chain-link-fence.png)
+
+The full output retains the context review's visible mesh and softened foliage;
+wire thickness/irregularity and missing fine detail remain. These are native
+sensor crops, shared +2EV with the separate ISO100 exposure, **not exact GT**.
+No full-photo scoring is performed on that aperture/time-mismatched reference.
+Matched V28/V29/RawNIND and sky/building crops are retained in the receipt.
+
+The experiment stopped at step1000. The next trial continues at batch16 based
+on the completed [training throughput sweep](training-pipeline.md), with LR
+unchanged and a separate quality review. V30's completed quality evaluation
+used the original input pipeline; augmentation/loading changes were implemented
+separately afterward. The 4× cache is preparing before an augmentation trial.

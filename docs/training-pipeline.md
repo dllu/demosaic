@@ -53,8 +53,8 @@ uv run --no-sync demosaic prepare --source /mnt/external/qi \
 ```
 
 The first 256 sources are prepared and checked (237 train/13 val/6 test).
-Full preparation is queued after the batch sweep and full-frame review to avoid
-competing with throughput measurements. Excluded sources remain excluded; only
+Full preparation is running after the completed batch sweep and full-frame review,
+which avoided competing with throughput measurements. Excluded sources remain excluded; only
 training rows enter the training loader. Use `manifest` for the new 4× training
 selection and explicitly retain the original 8× audited `validation_manifest`
 in a new experiment configuration. Validation source hashes and source snapshots
@@ -89,11 +89,39 @@ uv run --no-sync python scripts/benchmark_training.py \
   --output /mnt/external/demosaic/benchmarks/mixed-training-batch-sweep-v1
 ```
 
-The sweep is running on the existing 8× data path so only batch size varies.
+The completed sweep used the existing 8× data path so only batch size varies.
 Larger batches change samples per optimizer update and are not a convergence
 comparison. A new batch size must be evaluated for image quality; throughput
 alone does not justify scaling LR or claiming a better model. The 4×→2× path
 also needs its own throughput check before choosing its production settings.
+
+| Batch | Mean images/s | Two-run range | Peak CUDA GB |
+| ---: | ---: | ---: | ---: |
+| 4 | 22.52 | 22.40–22.64 | 2.23 |
+| 8 | 24.56 | 24.38–24.74 | 3.72 |
+| **16** | **26.14** | **25.19–27.09** | **6.94** |
+| 32 | 26.42 | 25.67–27.18 | 13.39 |
+| 64 | 26.27 | 25.53–27.01 | 26.28 |
+
+Choose **batch16** for the next quality trial: approximately16% more images/s
+than batch4, within1.1% of batch32's mean, with about half its CUDA allocation.
+The largest batch provides no measured benefit here. Ranges reflect two shared
+machine runs, not confidence intervals; no claim of a unique hardware optimum.
+Keep LR unchanged and review image quality before extending training. Peak CUDA
+allocation is not total system RAM usage. All10 cases share the same archived
+source hash. [Complete measurements and reproduction receipt](results/training-batch-sweep-v1.json).
+
+[V31's recipe](../configs/dino-anchored-stabilized-rgb-b16-v31.yaml) continues
+frozen V30 step1000 with batch16, retaining model/AdamW/EMA/RNG state and the
+existing8× dataset. It stops after1,000 additional updates (step2000) for paired,
+synthetic and GFX review. This processes16,000 additional examples and changes
+global sample indices to the batch16 recipe. It is not an equal-image or
+batch-only quality ablation. The complete4× selection prepares separately;
+current training does not silently switch to its partial output.
+
+A genuine DINO BF16 backward smoke on the actual 4×→2× Commons batch also passed:
+finite FP32 output and nonzero measurement-adapter gradients. This verifies
+execution, not the quality of a model trained with the new augmentation path.
 
 Validation: **248 tests passed in 20.53s**, including sampling precision,
 projective/constant-color behavior, frozen source splits, live WAL ingestion,

@@ -1,0 +1,53 @@
+{
+  "status": "Training first batch16 continuation through step2000; no quality result yet",
+  "source_commit": "6c0d910",
+  "parent": {
+    "checkpoint": "/mnt/external/demosaic/evaluation/paired-known-anchored-stabilized-rgb-v30-1k/weights/weights-3a529117f127b2b48c203d6d23d154aeea0924f1aeb7ca649b1778ac8c0686c6.pt",
+    "sha256": "3a529117f127b2b48c203d6d23d154aeea0924f1aeb7ca649b1778ac8c0686c6",
+    "step": 1000
+  },
+  "model_optimizer_ema_rng_resumed": true,
+  "batch_size_history": [
+    {
+      "through_step": 1000,
+      "batch_size": 4
+    },
+    {
+      "from_step": 1001,
+      "batch_size": 16
+    }
+  ],
+  "source_sha256": "d033150df2d90c7771b8f5fe8c2aceaa7d62411eda4473c568034100c5f5993e",
+  "manifest_sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a",
+  "model_config": {
+    "restoration_backbone": "pretrained-rgb",
+    "width": 64,
+    "dino": true,
+    "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+    "camera_conditioning": true,
+    "physical_fp32": true,
+    "variance_stabilization": true,
+    "physical_anchors": true
+  },
+  "lr_schedule_unchanged": true,
+  "first_training_row": {
+    "event": "train",
+    "step": 1001,
+    "loss": 0.043395426124334335,
+    "lr": 9.269821754538812e-05,
+    "grad_norm": 0.9973840117454529,
+    "seconds_per_step": 12.738433734048158,
+    "cuda_gb": 7.213114368,
+    "domain": "synthetic",
+    "linear": 0.02792270854115486,
+    "rendered": 0.01746169477701187,
+    "gradient": 0.00860941968858242,
+    "highlight": 0.03472386300563812,
+    "sensor": 0.02408541925251484,
+    "batch_sha256": "8caff3911948eda6fed15cb679e52021a515a8ef1a65c11d62136d2c2bd2ea39"
+  },
+  "workflow": "/mnt/external/demosaic/runs/dino-anchored-stabilized-rgb-b16-v31/workflow.json",
+  "training_log": ".cache/train-anchored-rgb-b16-v31.log",
+  "first_review_step": 2000,
+  "caveat": "16000additional examples at batch16; not an equal-image or batch-only quality ablation. Existing8x training path; full4x preparation separate."
+}

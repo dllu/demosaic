@@ -300,7 +300,7 @@
     "no_originals_modified": true
   },
   "batch_sweep": {
-    "status": "running",
+    "status": "complete",
     "summary": "/mnt/external/demosaic/benchmarks/mixed-training-batch-sweep-v1/summary.json",
     "log": ".cache/training-batch-sweep-v1.log",
     "cases": 10,
@@ -314,6 +314,33 @@
     "warmup_steps": 15,
     "measured_steps": 45,
     "repeats": 2,
-    "source_sha256": "5c3f8128dc5cf76bb6e6828e6db9a677ff1a20e13e4d0b0f993ba34730d40a96"
+    "source_sha256": "5c3f8128dc5cf76bb6e6828e6db9a677ff1a20e13e4d0b0f993ba34730d40a96",
+    "completed_receipt": "docs/results/training-batch-sweep-v1.json"
+  },
+  "four_stage_cuda_smoke": {
+    "manifest": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/manifest.jsonl",
+    "manifest_sha256": "161786908a7dd2de12504844bb65862fa5b2db853ffdfc8cd5e3dcacbd4afffd",
+    "indices": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "batch": 4,
+    "augmentation_downsample": 2,
+    "precision": "bfloat16",
+    "output_dtype": "torch.float32",
+    "shape": [
+      4,
+      3,
+      256,
+      256
+    ],
+    "finite_loss": 0.01675458811223507,
+    "adapter_gradient_max": 0.21490781009197235
+  },
+  "four_stage_preparation": {
+    "status": "Full frozen selection preparing after first256 verified; no current training switch to partial corpus.",
+    "log": ".cache/prepare-commons-bin4-full.log"
   }
 }

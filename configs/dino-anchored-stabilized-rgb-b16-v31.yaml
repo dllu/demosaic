@@ -1,0 +1,61 @@
+manifest: /mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl
+run: /mnt/external/demosaic/runs/dino-anchored-stabilized-rgb-b16-v31
+device: cuda
+seed: 45
+steps: 5000
+batch_size: 16
+patch_size: 256
+workers: 4
+worker_start_method: spawn
+cpu_threads: 4
+synthetic_fraction: 0.2
+flat_fraction: 0.1
+noise_free_fraction: 0.1
+reconstruct_highlights: true
+preserve_negative_read_noise: true
+broad_camera: true
+lr: 0.0001
+warmup_steps: 100
+checkpoint_every: 1000
+val_batches: 4
+log_every: 25
+amp: true
+precision: bfloat16
+channels_last: true
+min_available_gb: 12
+trace_observations: true
+data_seed_per_step: true
+gaussian_initialization: docs/results/gaussian-color-source-and-weights.json
+model:
+  restoration_backbone: pretrained-rgb
+  width: 64
+  dino: true
+  dino_revision: 114c1379950215c8b35dfcd4e90a5c251dde0d32
+  camera_conditioning: true
+  physical_fp32: true
+  variance_stabilization: true
+  physical_anchors: true
+validation_protocol: configs/evaluation.yaml
+validation_images: 8
+paired_manifest: /mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json
+paired_fraction: 0.25
+paired_workers: 2
+raw_clean_manifest: /mnt/external/demosaic/raw-clean-train32-bin8-v1/manifest.json
+raw_clean_fraction: 0.25
+raw_clean_workers: 2
+experiment_notes: Continue frozen V30 step1000 with model, AdamW, EMA and RNG retained,
+  deliberately changing batch4 to batch16 based on completed two-repeat throughput
+  sweep. LR/schedule, original8x cache, mixtures and model unchanged. Global example
+  indices now follow step*16; observation sequence intentionally changes. First review
+  at step2000 (1000additionalupdates,16000examples); not an equal-image or batch-only
+  quality ablation. The new4x->augmentation->2x cache prepares separately; no validation/final/GFX
+  training or fitting.
+batch_size_history:
+- through_step: 1000
+  batch_size: 4
+- from_step: 1001
+  batch_size: 16
+resume_parent:
+  checkpoint: /mnt/external/demosaic/evaluation/paired-known-anchored-stabilized-rgb-v30-1k/weights/weights-3a529117f127b2b48c203d6d23d154aeea0924f1aeb7ca649b1778ac8c0686c6.pt
+  sha256: 3a529117f127b2b48c203d6d23d154aeea0924f1aeb7ca649b1778ac8c0686c6
+  step: 1000
