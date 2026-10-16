@@ -113,7 +113,9 @@ procedural PSNR gains but known-camera accuracy loss, so it is not promoted.
 The [camera-matrix centering experiment](camera-matrix-centering.md) instead
 retains all metadata and preserves the parent's exact initial forward while
 changing matrix optimization coordinates. All358 CUDA tests and genuine
-all-CFA/noise/precision/checkpoint checks pass; matched trained quality is pending.
+all-CFA/noise/precision/checkpoint checks pass. Its
+[completed matched review](camera-centering-v47-v48-review.md) lowers known/unseen
+primary and photo/procedural sRGB PSNR, so both arms stop at1000 updates.
 The [completed V43 first-gate review](native-v43-1k-review.md) now finds modest
 positive unseen-primary/photo gains versus both matched controls. All33 logged
 shared Commons/paired hashes match; ten native triplets and both full RGB16 files

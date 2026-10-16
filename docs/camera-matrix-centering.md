@@ -5,7 +5,8 @@ large low-noise color bias. [V46's complete review](camera-projection-v46-review
 shows why simply deleting the camera inputs is insufficient: photographic and
 procedural PSNR improve, but known-camera accuracy falls. This experiment keeps
 all camera information and changes its optimization coordinates instead.
-**Implementation tests pass; trained quality remains unproven.**
+**The [matched quality review](camera-centering-v47-v48-review.md) rejects
+centering at the first gate.**
 
 Camera matrices are expressed relative to identity. With matrix weights W,
 trainable bias b and fixed parent diagonal reference R, the first projection is:
@@ -51,8 +52,9 @@ separate from quality evidence.
 ## Matched training gate
 
 The [guarded workflow is launched](results/camera-centering-v47-v48-launch.json)
-in frozen source7cd1f12; quality results are pending. It trains the two arms
-sequentially, checks all logged observations, then runs the complete review.
+in frozen source7cd1f12 and is now complete. All41 shared logged observations
+match. V48 lowers all four review-set PSNR means versus V47; both arms stop
+at1000 updates. V43 step2000 remains the photographic experimental reference.
 
 [V47 control](../configs/dino-camera-control-b16-v47.yaml) and
 [V48 centered](../configs/dino-camera-centered-b16-v48.yaml) share immutable V43
