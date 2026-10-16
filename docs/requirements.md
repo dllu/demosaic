@@ -6,7 +6,7 @@ not just software that executes. This checklist records the evidence required.
 | Requirement | Evidence needed | Current state |
 | --- | --- | --- |
 | Modern method and DINOv3 recommendation | Primary-source research, architecture rationale, licensed pretrained backbone and ablation | Official pinned weights; an earlier architecture's matched 20k-step ablation has a small positive gain on 427 photos. A trained ablation of the current pretrained-RGB architecture remains; SOTA is unproven |
-| Free, broad training data | Source attribution manifest, content-grouped held-out split, real corpus training | Active frozen corpus: 40,170 train / 2,303 val / 2,255 untouched test / 4 excluded. A separately audited extension adds 1,808 train sources and reserves 196 new holdout sources. A separate reviewed native extension adds six CC0 outdoor captures, giving59 captures/37 scenes; V37/V38 remain on53/31. Near-duplicate screening is not complete scene recognition |
+| Free, broad training data | Source attribution manifest, content-grouped held-out split, real corpus training | Active frozen Commons: 40,170 train / 2,303 val / 2,255 untouched test / 4 excluded; a separate extension adds 1,808 train and reserves 196 holdouts. The [larger native extension](public-raw-expansion-v2.md) freezes 128 captures/106 declared scene groups, adding 69 reviewed CC0 photos to the prior six. V43 is its matched trial; V37/V38 remain on53/31 and V39 on59/37. Finite screening/manual review is not complete scene recognition |
 | 8×8 binning with additional precision | Linear-light float averaging and >8-bit cache, numerical tests | Implemented and tested; all 44732 eligible licensed sources prepared |
 | Geometry, optical blur, exposure, synthetic fine detail | Executable data augmentation and inspected samples | Implemented. Complete 4×→geometry/PSF→2× Commons/native targets improve full-photo PSNR by .50990 dB in the matched V34 trial; original 8× validation remains fixed |
 | Physical Bayer noise across cameras and ISO | Electron-domain Poisson/read noise, metadata and tests | Moment-tested simulation, conservative single-image estimates on three cameras; dedicated calibration still missing |
@@ -48,7 +48,7 @@ V34/V36 first1000 and full427/full102MP reviews are complete and stopped.
 [Nine public RAW samples](public-raw-pilot.md) retain their original quarantine.
 Six reviewed sources have a separate opt-in native extension; the chart and two
 clipped sources are excluded. Current architecture trials remain unchanged.
-All **329 tests pass**; Ruff passes. Trained quality, protected-final evaluation
+All **343 tests pass**; Ruff passes. Trained quality, protected-final evaluation
 and the 10-second speed gate remain outstanding.
 
 
@@ -74,3 +74,12 @@ are tiny; ten native triplets, actual-trained CUDA weak-detail checks and two
 new full RGB16 outputs are verified. This is a compute-policy improvement,
 not a new quality gain. Current-architecture trained DINO ablation and protected
 final assessment still require a selected stronger model.
+
+The [second native source review](public-raw-expansion-v2.md) verifies all 138
+downloaded RAWs, decodes 131, retains 69 new photographic captures after clipping,
+content and overlap review, and preserves the prior 53+6 targets. Both 4×/8×
+datasets are frozen separately with exact source/cache/admission identities.
+The [V43 recipe](../configs/dino-anchored-native-diverse-b16-v43.yaml) changes
+only this native dataset against V37/V39; it retains full-resolution/precision
+policy and other data. First1000 training/full-review workflow is active;
+data admission and training loss do not establish a quality gain.
