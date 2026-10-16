@@ -307,14 +307,23 @@ def audit_real(root, scenes, pairs, crops, expected_methods=8):
 
 def main(steps, output, trial="fresh"):
     if trial == "convnext-v58":
-        require(steps == 1000, "The ConvNeXt trial currently defines only the first1000 gate")
-        workflow = BASE / "runs/dino-convnext-pyramid-v58-workflow.json"
-        expected_status = "completed-first1000-and-evaluation-awaiting-manual-review"
+        require(steps in [1000, 10000], "ConvNeXt audits support the evaluated1000/10000 gates")
+        suffix = "1k" if steps == 1000 else "10k"
+        workflow = BASE / (
+            "runs/dino-convnext-pyramid-v58-workflow.json"
+            if steps == 1000
+            else "runs/dino-convnext-pyramid-v58-10k-workflow.json"
+        )
+        expected_status = (
+            "completed-first1000-and-evaluation-awaiting-manual-review"
+            if steps == 1000
+            else "completed-to10000-and-evaluation-awaiting-manual-review"
+        )
         expected_methods = 9
         directories = [
-            ("photo", "synthetic-convnext-v58-fresh-1k-full427"),
-            ("known", "paired-known-convnext-v58-fresh-1k"),
-            ("unseen", "paired-unseen-convnext-v58-fresh-1k"),
+            ("photo", f"synthetic-convnext-v58-fresh-{suffix}-full427"),
+            ("known", f"paired-known-convnext-v58-fresh-{suffix}"),
+            ("unseen", f"paired-unseen-convnext-v58-fresh-{suffix}"),
         ]
     else:
         require(steps in [3000, 10000], "Original fresh audits support3000/10000")

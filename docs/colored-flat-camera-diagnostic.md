@@ -149,3 +149,9 @@ behavior. This association does not identify the training cause or prove that
 wider smooth tints improve quality. It supplies a concrete rationale for a
 matched wider-palette experiment after the mature review, with color fidelity,
 neutral false detail and photographic/real quality checked together.
+
+The [five-checkpoint mature color review](mature-color-flat-review.md) confirms
+that the selected saturated-field error also occurs in the completed ViT-S,
+ViT-B and ConvNeXt schedules. ConvNeXt1k and retained V43 provide useful earlier
+comparisons; neutral fields remain close. No architecture is promoted by that
+small diagnostic.

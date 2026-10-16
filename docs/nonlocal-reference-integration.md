@@ -56,24 +56,29 @@ suite passed 500 tests with eight CUDA skips. After adding the CUDA stream
 restriction, all 12 targeted CPU contract tests pass with one CUDA test skipped.
 The final callable again reproduces both earlier full 256px predictions exactly.
 
-Actual GPU numerics remain pending while V58 owns the GPU. The unchanged native
-sources compile for GB10, but the pinned CUDA sampling kernels launch on stream 0;
-the wrapper rejects nondefault caller streams. Build success and CPU agreement
-do not prove CUDA agreement or speed.
+The [completed actual CUDA preflight](results/nonlocal-reference-cuda-preflight.json)
+now verifies the genuine native operator and author network on GB10 after the
+V58 owner's successful exit. All 509 CUDA-enabled tests pass without skips in
+82.18 seconds. Three operator neighborhoods have exact CPU/CUDA forward values;
+maximum input/offset gradient differences are 3.34e-6 / 9.54e-7. The two saved
+native 256px photo predictions differ from the genuine CPU network by at most
+1.26e-6, within the predeclared atol/rtol 1e-4. Independent saved-array checks
+rebuild both maximum differences exactly. Enclosing FP16 and BF16 autocast
+predictions are bit-exact to the wrapper's FP32 output. This is engineering
+validation on two observations, not representative quality or speed evidence.
 
-The [CUDA preflight](../scripts/preflight_nonlocal_reference.py) checks native
-operator forward/gradients, actual author-network CPU/GPU agreement and enclosing
-autocast behavior. Its live-owner rejection was exercised successfully before
-any CUDA initialization or output creation. It has not yet run GPU numerics.
+The pinned CUDA sampling kernels launch on stream 0; the wrapper's nondefault
+stream rejection is actually exercised. The
+[preflight driver](../scripts/preflight_nonlocal_reference.py) had also exercised
+live-owner rejection before CUDA initialization or output creation.
 
 The [source-pinned full workflow](results/nonlocal-reference-full-launch.json)
-is now queued in detached `06e6133`. Controller1016386
-(creation1792191000.07) waits for V58 controller601329's actual exit and its
-successful terminal evaluation status. It then requires all509 CUDA tests and
-the numerical preflight before full427+16 procedural, known4/unseen5, analytic,
-full102MP GFX and three cached personal-camera comparisons. The queue process
-and preceding owner were both confirmed live; no reference GPU child or output
-exists yet. Its final status will still require manual/statistical/native review.
+is running in detached `06e6133`. Controller 1016386
+(creation 1792191000.07) verified V58 controller 601329's actual successful exit,
+completed all tests and the numerical preflight, and started the full427+
+16-procedural panel. Known4/unseen5, analytic, full102MP GFX and three cached
+personal-camera comparisons follow. Its final status still requires
+manual/statistical/native review.
 No training, current recipe or protected-final scoring changes.
 
 The same two high-noise synthetic observations retain exact simulated GT.

@@ -1,0 +1,210 @@
+{
+  "status": "Completed actual genuine-native CUDA numerical preflight; full quality workflow is running.",
+  "preflight": {
+    "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-gpu-preflight-v1/receipt.json",
+    "sha256": "77fd2119353a32954df12b7ccfc2598a9030fe7f8d8b9677599cc915c51e466f",
+    "result": {
+      "status": "completed-genuine-reference-default-stream-CPU-CUDA-numerical-preflight-only",
+      "preceding_controller": {
+        "pid": 601329,
+        "created": 1792187058.5,
+        "worktree": "/home/dllu/proj/demosaic/.cache/dino-convnext-v58-worktree",
+        "source_commit": "797cfc852d2010c30f877cff1277e6c96103ccfc",
+        "driver_sha256": "7d73ed25cb87e9958fa0984cc1237da1e0cb2ac8df6351de9ec8435f6e444bce"
+      },
+      "preceding_workflow_sha256": "2e02d194ccf31bf13e0cc186b659bb9b4078b6f630a71fc87d489227bd92ede3",
+      "model": {
+        "label": "NonlocalMatchFilter2026+Malvar:authors-RAW",
+        "directory": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1",
+        "source_revision": "6df6a79ce128a7741af88ff0f3e9794f9b5e03d4",
+        "sha256": "b31bc8e21022389b0b209a9d1e6649485ed4dacc552b7ea04612df5f7515fcf2",
+        "source_checkpoint_sha256": "b31bc8e21022389b0b209a9d1e6649485ed4dacc552b7ea04612df5f7515fcf2",
+        "weights_only_export": {
+          "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/inspection-cpu-v1/authors-network-weights-only.pt",
+          "sha256": "971f1b87d7a7040cf8d71627b174d09503487cffc420e8842d5632549ae1c07f",
+          "all_tensor_values_preserved": true
+        },
+        "native_operator": {
+          "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/native-cuda-build-v1/build/nonlocal_deform_native_cuda_v1.so",
+          "sha256": "826d502cedc3434dc389d80e988fb30fbb9834858b066f7b1a65ef32bf43b0a8",
+          "with_cuda": true,
+          "TORCH_CUDA_ARCH_LIST": "12.1",
+          "MAX_JOBS": 1,
+          "flags": [
+            "-O3"
+          ]
+        },
+        "patchmatch_import_dependency": {
+          "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/patchmatch-native-build-v1/build/nonlocal_patchmatch_native_v1.so",
+          "sha256": "341298f14feef42a5028b81feffad0a7074d4f2565779131447e8859ca9fd4c4",
+          "with_cuda": true,
+          "TORCH_CUDA_ARCH_LIST": "12.1",
+          "MAX_JOBS": 1
+        },
+        "parameters": 15282866,
+        "compute_precision": "IEEE float32",
+        "native_network_batch_size": 1,
+        "input": "Sensor-normalized RAW clipped[0,1], R/G-on-red-row/B/G-on-blue-row packing plus sqrt(max(shot*clipped_noisy+read,0)); input-only noise coefficients.",
+        "output": "Authors' clipped packed RAW, inverse phase permutation, independent WB-aware Malvar. This is a cascade, not a joint RGB network. No fitted gain or target-dependent transform.",
+        "source_receipts": {
+          "receipt.json": "fd74c12c590df0a9a396dce76d106249f54c351178ad375cb8ec21a8be9d87e0",
+          "inspection-cpu-v1/receipt.json": "b4088371739691f7fa84c7f217ba99a98c1b5854c22a502c102facbf7ae0611f",
+          "native-cuda-build-v1/receipt.json": "2feb31700a47ebf0fec7a082d499b84ae4e6f570c613f7b7a6e2dd261bcb2763",
+          "patchmatch-dependency-v1/receipt.json": "7bd44ce3ba6610a2d81943dd8b626f2cc719cf212a4a1552daa5c1b49a366b5e",
+          "patchmatch-native-build-v1/receipt.json": "a7b6fe81b9071c63a9687683d3dd319a3024e5ae2ff82bf91e96f3ccc5a253ce",
+          "deform-dependency-v1/receipt.json": "35dc5ff216f2c0667fc92c98a9b519dcaa7a995d2b462aa21e96c5c8773338a1"
+        }
+      },
+      "operator_checks": [
+        {
+          "neighborhood": [
+            3,
+            3
+          ],
+          "forward_max_abs_CPU_CUDA": 0.0,
+          "input_and_offset_gradient_max_abs_CPU_CUDA": [
+            1.430511474609375e-06,
+            9.5367431640625e-07
+          ]
+        },
+        {
+          "neighborhood": [
+            3,
+            5
+          ],
+          "forward_max_abs_CPU_CUDA": 0.0,
+          "input_and_offset_gradient_max_abs_CPU_CUDA": [
+            2.384185791015625e-06,
+            9.5367431640625e-07
+          ]
+        },
+        {
+          "neighborhood": [
+            5,
+            5
+          ],
+          "forward_max_abs_CPU_CUDA": 0.0,
+          "input_and_offset_gradient_max_abs_CPU_CUDA": [
+            3.337860107421875e-06,
+            9.5367431640625e-07
+          ]
+        }
+      ],
+      "actual_author_network_checks": [
+        {
+          "input": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "input_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+          "expected": "/mnt/external/demosaic/evaluation/nonlocal-matchfilter-two-photos-cpu-v1/source0-RGB-camera-Malvar-f32.npy",
+          "expected_sha256": "8a297379d912818831d3a89db18a85aabb40caebb9ada5400da3a7ae0e50257b",
+          "condition": {
+            "exposure": 1.0,
+            "name": "iso12800-prior",
+            "read": 2.62144e-05,
+            "shot": 0.00256
+          },
+          "label": "photo-0",
+          "CUDA_prediction": "/mnt/external/demosaic/evaluation/nonlocal-reference-gpu-preflight-v1/photo-0-CUDA-camera-RGB-f32.npy",
+          "CUDA_prediction_sha256": "2fefc5c2162b6288c179d646ba2ecf006fb5576af75c13847bb8b8d56280b45e",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "max_abs_CPU_CUDA": 1.0728836059570312e-06,
+          "outer_FP16_BF16_predictions_bit_exact_to_FP32": true
+        },
+        {
+          "input": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "input_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+          "expected": "/mnt/external/demosaic/evaluation/nonlocal-matchfilter-two-photos-cpu-v1/source1-RGB-camera-Malvar-f32.npy",
+          "expected_sha256": "1f127677d89b83ae47f62e9d4f0608cd121b70483a0fcade6214c5dad983fa14",
+          "condition": {
+            "exposure": 1.0,
+            "name": "iso12800-prior",
+            "read": 2.62144e-05,
+            "shot": 0.00256
+          },
+          "label": "photo-1",
+          "CUDA_prediction": "/mnt/external/demosaic/evaluation/nonlocal-reference-gpu-preflight-v1/photo-1-CUDA-camera-RGB-f32.npy",
+          "CUDA_prediction_sha256": "12016f0bfa054f88ddbd933938a5650a6fa96f8b711f781dbd3f8e7a958e7927",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "max_abs_CPU_CUDA": 1.2516975402832031e-06,
+          "outer_FP16_BF16_predictions_bit_exact_to_FP32": true
+        }
+      ],
+      "nondefault_stream_rejected_before_native_call": true,
+      "network_tolerances": {
+        "rtol": 0.0001,
+        "atol": 0.0001
+      },
+      "torch": "2.14.1+cu130",
+      "hardware": "NVIDIA GB10",
+      "max_allocated_bytes": 374079488,
+      "source_files": {
+        "paired_admission.py": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825",
+        "prior.py": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a",
+        "metrics.py": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31",
+        "inference.py": "911e71e8dcbeb1872ed591bc5234ed2b79bae063a859b4704516537d94a1df0b",
+        "train.py": "e8a82a3cbf2fed7059490db6ca347ab8b5ef7e345f4289c2ec1d36b8c1163c2b",
+        "dino_adaptation.py": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861",
+        "paired_training.py": "71a2481213bba174bd3d6b3de9ae9b89f88333635810e15d0958352d9d8d053d",
+        "reference.py": "54ed094d58e245a56993ea3ce3ef9e21d2164e902d41d03bba9132bacd22891f",
+        "prepare.py": "e4c0733bb260c289b3ce8aaf5f393abc5919d8d81cdcf462b70032d790429712",
+        "realdata.py": "ed24db2b066531281a196e6fa074130cb0ee78a640eae5ccaaace234f5ad5421",
+        "cfa.py": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252",
+        "paired.py": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d",
+        "audit.py": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d",
+        "losses.py": "548b1481a035ad937d4a046754a74e70684864a9842296765c62079a002e5120",
+        "gaussian.py": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72",
+        "real_suite.py": "69d3d403d36b1230e35083cc55e2c1a485f82cd5058f6be83fb3d5c0c18a6825",
+        "raw_clean.py": "a143ce351ac4e1b2425d4d561000d3e8934477fe9172c88f90ce76d9b32a7a6c",
+        "raw_admission.py": "1948afbbf05129190273ab77466f26d9d27dc942716beaab16f077c8c3330803",
+        "vst.py": "355124a374177f1c08271834149c5979ab3477fdf255c60aa7cee0d47792a76b",
+        "io.py": "0a1599ffe7f6d935e92fc71e6b086430c6f82678a74952c3b8f31155a0bea83b",
+        "data.py": "b3277bca23d8c17b365ee364e175ea8a850d45a79cf02686628db606341e7be3",
+        "__init__.py": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d",
+        "calibration.py": "e86f4c602a6cd7fd855d0bcfeb790cf17ed87611f19d97926f9db174909b2d26",
+        "noise.py": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce",
+        "__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+        "precision.py": "9aa850fb5ee0e9abc3e9adc4847ce3518c1acb37c93f6bc54ff9206bb0c94c3a",
+        "cli.py": "a34d98b1eab4479f67ba5a51b6c8a428db4d8ccf5ee097cd1369bd0cd1ead542",
+        "reporting.py": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d",
+        "model.py": "c37f530b3c4265e23af8d04b81e65e19b8ee585538874445e4a95bc337f23a71",
+        "color.py": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+        "dino_pyramid.py": "246944874671ceb4449b0487fcb347a00f8b82d713d5b4c9fee5a7c8a68aa95f",
+        "textures.py": "b4bc304a50de272cf7fcba272e67b828c163466ffc23ea3337a6a66f076dc664",
+        "nonlocal_reference.py": "7e4a00e9d90a61b772da9c1a7414bf499f84b9c9bb0239fd250fb8263dfb3f88",
+        "safety.py": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7",
+        "pretrained_rgb.py": "10ea25fc01bf561a3ea9087002566eb319717c338f44f54d2da46fc6ee0d7026",
+        "registration.py": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202",
+        "suite.py": "1a094262e1772f5df8a54cb176c2f3da189d78f48ead3f8002f24e84802059a4"
+      },
+      "driver_sha256": "0ead448eaf33e2b75f97129b6b9ca97842a22e5b6eb75b02b963877e0ca2b316",
+      "limitations": "Numerical engineering checks only, fixed batch1/defaultstream FP32. No complete quality panel, new trained model, GB10 speed benchmark, 102MP result or promotion."
+    }
+  },
+  "complete_CUDA_tests": {
+    "log": "/mnt/external/demosaic/benchmarks/nonlocal-reference-full-workflow-v1/CUDA-tests.log",
+    "sha256": "714d489e31f4a4e8f6f7d87e483ba4611b88396ea3e25c94edd9c8b48be98207",
+    "passed": 509,
+    "skipped": 0,
+    "seconds": 82.18
+  },
+  "independent_saved_array_reconstruction": [
+    {
+      "label": "photo-0",
+      "max_absolute_difference_rebuilt": 1.0728836059570312e-06
+    },
+    {
+      "label": "photo-1",
+      "max_absolute_difference_rebuilt": 1.2516975402832031e-06
+    }
+  ],
+  "scope": "Engineering validation only: two native256 photographic predictions and three operator neighborhoods. No representative full427/paired-real/fullframe quality or speed claim."
+}

@@ -2,9 +2,10 @@
 
 An optional reconstruction branch uses genuine frozen DINOv3 ConvNeXt-Tiny
 features at multiple CNN resolutions. Its
-[completed first 1,000-update review](dino-convnext-pyramid-v58-1k-review.md)
-finds mixed early results and no model promotion. It will finish its original
-10,000-update schedule with the same frozen data and source. The original
+[completed 10,000-update review](dino-convnext-pyramid-v58-10k-review.md)
+ties no-context on the photographic mean and finds mixed real-camera results,
+lost fine detail and selected saturated-color errors. No model is promoted.
+The original
 [no-context/ViT-S/ViT-B comparison is complete](fresh-dino-capacity-10k-review.md).
 The implementation, preflights and staged launch records below retain their
 historical scope.
