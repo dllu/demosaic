@@ -1,5 +1,5 @@
 {
-  "status": "V32 lower-LR control training; V33 paired50 queued sequentially. No new quality result yet.",
+  "status": "V32 first1000 training complete; V33 paired50 training. Matched development evaluation follows both. No quality result yet.",
   "workflow": "/mnt/external/demosaic/runs/paired-fraction-v32-v33-workflow.json",
   "log": ".cache/v32-v33-workflow.log",
   "parent": {
@@ -32,5 +32,27 @@
     }
   },
   "shared_observation_check": "After both arms, all logged intersections selecting the same domain must hash identically before evaluating.",
-  "datasets": "Original8x; protected memberships unchanged. GFX/final never train or transform fit."
+  "datasets": "Original8x; protected memberships unchanged. GFX/final never train or transform fit.",
+  "both_runtime_source_and_initializer_equal": true,
+  "current_shared_logged_prefix": {
+    "steps": [
+      1,
+      25,
+      75,
+      100,
+      175,
+      200,
+      225,
+      250,
+      275,
+      300,
+      325,
+      350,
+      375,
+      400
+    ],
+    "count": 14,
+    "hashes_equal": true,
+    "scope": "Current V33 prefix only; complete intersection is checked again after both arms finish."
+  }
 }
