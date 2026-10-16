@@ -5,8 +5,8 @@ DINOv3-B/16 in the current full-resolution RGB architecture. All start from
 the same verified Gaussian restoration weights, with zero measurement/camera
 projection and zero context gate. There is no inherited JDD/DINO restoration
 history. This addresses both the missing current-architecture DINO ablation and
-whether larger frozen features help. **Preflights pass; trained quality remains
-unproven.**
+whether larger frozen features help. **The [first1000 review](fresh-dino-capacity-1k-review.md) is complete;
+no model is promoted and convergence remains unproven.**
 
 | Recipe | Frozen foundation parameters | Trainable parameters | Context feature width |
 | --- | ---: | ---: | ---: |
@@ -73,8 +73,12 @@ RawNIND calibration variants as direct comparators. An early gate is not
 convergence or SOTA. Current V43/README aliases stay fixed until the complete
 trained comparison supports a selection; protected-final scoring remains closed.
 
-The [sequential workflow is now live](results/fresh-dino-capacity-launch.json)
-in frozen `8580a4e`: no-context first, S next, B last. The first arm reports
-finite losses with verified Gaussian-only lineage and the explicit precision
-policy. RawNIND source/weight hashes and fixed manifest hashes are bound in the
-plan. Trained results and cross-arm data equality are still pending.
+The [first1000 workflow](results/fresh-dino-capacity-launch.json) completed
+in frozen `8580a4e`, with all41 logged observations exact across all three
+arms. [Paired, full427 and full102MP GFX results](fresh-dino-capacity-1k-review.md)
+include50 verified native triplets, direct RawNIND comparisons and ten verified
+RGB16 files. No-context leads photo and unseen primary at this early gate;
+ViT-B narrows the photo deficit versus S. Fine texture remains deficient.
+All three merit a coupled continuation to3000 on the original10000 schedule;
+immutable first1000 copies preserve this review. No promotion or convergence
+claim follows from this first gate.

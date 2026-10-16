@@ -144,5 +144,9 @@ comparisons and two full RGB16 outputs verify. Fresh Gaussian-initialized
 S/B/no-context trials now have [genuine CPU/GPU preflights](fresh-dino-capacity.md).
 They explicitly match middle-skip precision: a zero DINO offset had promoted
 BF16 features toFP32, an arithmetic confound for an otherwise absent branch.
-Legacy defaults/current checkpoints are preserved. Trained quality and the
-current-architecture DINO/capacity attribution remain outstanding.
+Legacy defaults/current checkpoints are preserved. The
+[first1000 trained comparison](fresh-dino-capacity-1k-review.md) is complete:
+all41 logged observations match,50 native triplets and ten full RGB16 files
+verify. No-context leads unseen primary/photo; B improves photo versus S but
+neither beats no context. No promotion; continue the matched arms before a
+convergence decision. Current-architecture capacity benefit remains unproven.
