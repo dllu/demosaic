@@ -745,3 +745,14 @@ The full-suite 62,020 baseline/12,404 V54 neural cases replay exactly; analytic
 V54 FP16 has tiny cross-run differences recorded separately. A same-source,
 same-seed control replay checks procedural repeatability next. One seed and this
 finite gate do not establish convergence or a universal architecture effect.
+
+The [completed original fresh 10,000-update comparison](fresh-dino-capacity-10k-review.md)
+verifies all three schedules and 403 shared logged observations. No-context/S/B
+reach 35.55039/35.40609/35.48886 dB on 427 synthetic-noise photos, about 0.75 dB
+above their own step3000 means. No-context leads photo/unseen primary, S has a
+small uncertain known-camera advantage, and B leads procedural mean. All 59
+native PNGs were inspected, with independently rebuilt aggregate statistics
+and ten verified full GFX RGB16 outputs. Fabric color regression and weak-detail
+loss prevent promotion; V43 remains the README working reference. Source
+intervals do not quantify training repeatability. Protected-final scoring and
+the broader quality/speed goals remain open.

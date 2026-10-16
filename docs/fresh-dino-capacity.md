@@ -1,5 +1,12 @@
 # Fresh DINO capacity comparison with matched arithmetic
 
+The [original 10,000-update comparison is complete](fresh-dino-capacity-10k-review.md).
+All three schedules and 403 logged shared observations verify. The review
+includes 59 inspected native triplets, analytic weak-texture/flat diagnostics
+and ten verified full GFX RGB16 files. No-context leads photo/unseen means,
+but color regression and lost fine texture prevent promotion. V43 stays the
+README reference. The staged setup and earlier reviews below are historical.
+
 The next quality experiment compares no context, frozen DINOv3-S/16 and frozen
 DINOv3-B/16 in the current full-resolution RGB architecture. All start from
 the same verified Gaussian restoration weights, with zero measurement/camera
