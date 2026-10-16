@@ -40,4 +40,8 @@ The final CPU suite passes443 tests/eight CUDA skips in48.81s, including source
 license checks, grouped sampling and the separate extension builder. The earlier
 427 count above records the initial closed contract. Actual final-source train32
 parity remains exact for ten samples; the new dataset also passes seven native256
-sampling/determinism checks. GPU training preflight is a separate queued step.
+sampling/determinism checks. [Frozen-source GPU validation](results/paired-expansion-v53-v54-launch.json)
+subsequently passes451 tests in45.09s. Both actual datasets complete two
+discarded BF16 updates at B16/native256 with genuine unchanged pinned DINO;
+common initialization and portable FP16 reloads match exactly. The matched
+quality trial is now running; execution does not establish better restoration.

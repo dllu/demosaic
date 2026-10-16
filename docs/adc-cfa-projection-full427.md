@@ -103,3 +103,9 @@ preflight before quality evaluation. It will require exact metric parity on
 all positive-noise synthetic cases and paired crops, plus identical parent/export
 full GFX RGB16 pixels. Live status:
 `/mnt/external/demosaic/runs/adc-projection-v52-workflow.json`.
+
+The [complete actual-export review](adc-projection-v52-review.md) now finishes:
+seven-condition photo+.075545dB, procedural+.203922dB with SSIM−.000731;
+10,632 positive-noise synthetic cases and162 real paired metrics are exact.
+Both full GFX linear16/sRGB16 parent/export arrays match at every pixel. The
+conditional policy remains opt-in, with no new real-noise gain or alias change.

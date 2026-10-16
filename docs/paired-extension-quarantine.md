@@ -173,3 +173,11 @@ manifest differs. All logged nonpaired observations must match. Fresh-source
 CUDA checks and actual B16/native256 paired updates/reload precede training;
 the owned ADC-policy workflow must first exit successfully. No alias promotion
 or protected-final scoring is authorized by an early recipe alone.
+
+The [matched workflow is now live](results/paired-expansion-v53-v54-launch.json)
+in frozen `b62c996`, after actual ADC-controller exit and terminal success.
+451 CUDA-enabled tests pass (45.09s), and actual control/expanded paired
+preflights verify common weights/FP16 outputs, finite BF16 B16 updates, unchanged
+foundation weights and exact portable reload. Control V53 trains first, V54 next;
+then matched known/unseen/full427/full102MP GFX review. Live status:
+`/mnt/external/demosaic/runs/paired-expansion-v53-v54-workflow.json`.

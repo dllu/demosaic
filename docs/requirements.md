@@ -171,3 +171,17 @@ No-context leads photo and known/unseen primary; B improves photo/procedural ove
 S but no branch replaces V43. Classical/RawNIND baselines replay62,020 metric
 cases exactly across gates. One seed/3000 updates does not establish convergence
 or a universal foundation effect. Protected-final scoring remains closed.
+
+The reviewed [paired-data extension](paired-extension-quarantine.md) preserves
+all64 legacy pairs and adds102 from51 new publisher IDs, grouping repeated
+views:83 scene IDs/71 groups/166 pairs/1492 crops. The active-display series and
+seven identity flags remain quarantined. V53/V54 now train a matched data-only
+comparison from retained V43 after451 CUDA tests and genuine B16 paired preflight.
+No expanded-data model is promoted before the complete quality/native review.
+
+The [V52 actual-export review](adc-projection-v52-review.md) completes86,828
+synthetic cases, real known/unseen and full GFX. Seven-condition photo+.075545dB
+comes solely from ADC-only data; all10,632 positive-noise synthetic cases/162
+paired metrics and full GFX RGB16 pixels remain exact. Procedural SSIM falls
+slightly. This optional policy supplies no real-noise improvement; original
+aliases remain fixed. New training quality and the broad goal are still open.

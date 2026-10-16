@@ -98,7 +98,7 @@ def main(parent, expected, manifests, output):
                 {
                     "sample_first": first,
                     "batch_size": 16,
-                    "loss": float(loss),
+                    "loss": float(loss.detach()),
                     "gradient_norm": float(norm),
                 }
             )
