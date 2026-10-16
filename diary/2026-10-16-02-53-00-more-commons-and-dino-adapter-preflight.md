@@ -30,3 +30,8 @@ parameters frozen and hash-exact. There are73,728 new parameters. V47 reuse
 requires exact source bytes and all41 logged input/target observations. The
 guarded first1000/full quality/native-GT/GFX review is the next action; no gain
 or promotion is claimed. V43 step2000 remains the photographic reference.
+
+Launch update: the guarded V49 controller is live in frozen `d3cc159`; its first
+logged step1/25 input/target hashes match V47 exactly. Full1000-step paired,
+photo, procedural and GFX review is queued after training. No current model
+alias or README checkpoint changes.

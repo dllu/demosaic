@@ -122,3 +122,10 @@ shared Commons/paired hashes match; ten native triplets and both full RGB16 file
 verify. The larger native corpus becomes the next data recipe and V43 the current
 experimental reference, with the parent-primary tradeoff and single-seed limits
 explicit. The stable first-gate model alias and README crops are updated.
+
+The optional DINO low-rank adapters now enter their first
+[matched training gate](dino-lora-v49-trial.md), reusing V47 only after source and
+shared observation checks. The independent
+[Commons extension](commons-incoming-v2.md) has10,558 newly reviewed training
+sources; matching4× caches are preparing. Neither changes the current V49
+data recipe or establishes a quality gain.

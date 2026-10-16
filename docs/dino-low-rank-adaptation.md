@@ -78,3 +78,7 @@ references before selecting it. Extra backward activations and effective-weight
 construction have unmeasured costs. The separate
 [fresh DINO presence/absence comparison](fresh-dino-ablation.md) remains useful
 for attributing the foundation branch's contribution itself.
+
+The first [matched quality trial, V49](dino-lora-v49-trial.md), is now running
+against the completed V47 control with exact source/initial tensors and shared
+seed50 observations. No trained-quality result or promotion is available yet.

@@ -1,0 +1,81 @@
+{
+  "recorded_utc": "2026-10-16T09:55:01.568029+00:00",
+  "status": "Launched first1000 trained rank4 arm; no new quality claim",
+  "controller_pid": 1198571,
+  "controller_created": 1792144415.62,
+  "source_checkout": "/home/dllu/proj/demosaic/.cache/dino-lora-v49-worktree",
+  "source_commit": "d3cc159",
+  "plan": {
+    "name": "dino-qv-lora-b16-v49",
+    "config": "/home/dllu/proj/demosaic/.cache/dino-lora-v49-worktree/configs/dino-qv-lora-b16-v49.yaml",
+    "config_sha256": "1c2e7b6faa6a147ab51cade50cd82a626d12e9e3296ceacf724fd87824ae416a",
+    "parent": "/mnt/external/demosaic/evaluation/paired-known-native-diverse-v43-1k-newonly/weights/weights-8ee3e960acdf95d88ba06eab30ac9abbab8bab28b0dc63d79b304a960eb535c5.pt",
+    "parent_sha256": "8ee3e960acdf95d88ba06eab30ac9abbab8bab28b0dc63d79b304a960eb535c5",
+    "control_run": "/mnt/external/demosaic/runs/dino-camera-control-b16-v47",
+    "control_checkpoint_sha256": "ebfe1cc8af4a2dbfd83105b82da81b782c46007282a4de50a0be0215ab5238c4",
+    "source_sha256": "bc4c1569be539e86902e9c20b5c9a0edd811b733b751363debf119c01807504c",
+    "preflight_sha256": "d52696c4935403bfe02de3066df1e04391a2f390612a140377f518f756368c15",
+    "script_sha256": "34f34deb463c626d0561cf14903fc714dc0d0d467990f1c01f5d43f5a6bc3be7",
+    "code_commit": "d3cc15983f6f754b140a7f20c53ad92fa678a850",
+    "fixed_data_manifests": {
+      "manifest": {
+        "path": "/mnt/external/demosaic/audits/commons-bin4-frozen44732-v1/manifest.jsonl",
+        "sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3"
+      },
+      "raw_clean_manifest": {
+        "path": "/mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json",
+        "sha256": "0dde4a0ca1ad68332d8a1c9d61fdc561db6501cd262d534647b979de82e3cf80"
+      },
+      "paired_manifest": {
+        "path": "/mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json",
+        "sha256": "b3b36d3ec28b0e2d339cb28f3bc810cc17b31102f4ce6a3454fdfec9a4a4b5e3"
+      },
+      "validation_manifest": {
+        "path": "/mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl",
+        "sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a"
+      }
+    }
+  },
+  "workflow_at_publication": {
+    "updated_utc": "2026-10-16T09:53:38.646932+00:00",
+    "status": "training-first1000",
+    "plan": "/mnt/external/demosaic/runs/dino-lora-v49-plan.json"
+  },
+  "observed_training": [
+    {
+      "step": 1,
+      "domain": "native-RAW-synthetic",
+      "batch_sha256": "1a550f5d2d360f4439613bcd02a9ce4c066375012a6922cd5452ac6f10e22538",
+      "loss": 0.011228282935917377,
+      "cuda_gb": 7.547385856
+    },
+    {
+      "step": 25,
+      "domain": "paired-RAW",
+      "batch_sha256": "542ab83daa28f393878a40d16d47c3b0a446674422f2abe8362bbdcb176e31ec",
+      "loss": 0.0025150892324745655,
+      "cuda_gb": 7.547385856
+    },
+    {
+      "step": 50,
+      "domain": "paired-RAW",
+      "batch_sha256": "21a4b52b1033d91ded668da27d85938a06c6ac9e12c7c7538c546aea370f290c",
+      "loss": 0.003659632755443454,
+      "cuda_gb": 7.547385856
+    },
+    {
+      "step": 75,
+      "domain": "synthetic",
+      "batch_sha256": "63bfc4e47401b3e99125070253fde40f13f876dc76bc89a22743dd1791c9692f",
+      "loss": 0.018734294921159744,
+      "cuda_gb": 7.547385856
+    }
+  ],
+  "observed_logged_batches_exact_to_v47": 4,
+  "full_gate_requirement": "All41 shared observations exact before full quality review; cached evaluator parity required before comparison reuse. Current V43 step2000 remains photographic reference.",
+  "parallel_cpu_rebin_status": {
+    "updated_utc": "2026-10-16T09:48:17.558751+00:00",
+    "status": "preparing-reviewed-extension4",
+    "plan": "/mnt/external/demosaic/commons-incoming-20261016-v2-quarantine/rebin4-plan.json"
+  }
+}

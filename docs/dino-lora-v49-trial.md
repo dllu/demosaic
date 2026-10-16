@@ -27,3 +27,10 @@ all427 photographs/16 procedural sources and the full102MP standing GFX scene,
 with two exact synthetic-GT crops plus paired/GFX native references and verified
 RGB16 outputs. Model selection waits for that complete review. V43 step2000
 remains the experimental photographic reference; no new quality gain is claimed.
+
+The [guarded workflow is now running](results/dino-lora-v49-launch.json) in
+frozen checkout `d3cc159`. Its first logged observations match V47 exactly.
+The archive driver and plan are under `/mnt/external/demosaic/runs/`; live status
+is `dino-lora-v49-workflow.json`. Training stops after1000 updates before any
+model selection. This is the first quality trial of the adapters; it is not
+the still-needed fresh DINO presence/absence attribution experiment.
