@@ -1,0 +1,322 @@
+{
+  "source": "/mnt/external/demosaic/benchmarks/full-rgb-inference-profile-v1/summary.json",
+  "source_sha256": "ade9e9299c7e381119870ec2799d686ab4cadb500ca8283caea7333e7f6e230a",
+  "trace": "/mnt/external/demosaic/benchmarks/full-rgb-inference-profile-v1/trace.json",
+  "table": "/mnt/external/demosaic/benchmarks/full-rgb-inference-profile-v1/table.txt",
+  "workflow_sha256": "49c28418a4a260a7ceffc1c3d946f7d8610d3e63c1d0d749d043cd8705620cae",
+  "scope": "Four resident native512 tiles, forward only. Three warmups/five timed iterations, then three instrumented iterations. Excludes RAW decoding/loading, packing/H2D, output transfer, full-frame blending/render/encoding. No full-frame speed claim; shared machine.",
+  "checkpoint_sha256": "2e79285ba72003417eb681cae2bc304106548c8a8d3235dd20a4ea7218ec332a",
+  "median_cuda_ms": 187.89369201660156,
+  "cuda_ms_range": [
+    186.8919677734375,
+    188.46202087402344
+  ],
+  "cpu_annotation_ranges": [
+    {
+      "name": "MALVAR",
+      "calls": 15,
+      "cpu_total_us": 336189.589,
+      "device_total_us": 6161.173000000302
+    },
+    {
+      "name": "GAT_FORWARD",
+      "calls": 24,
+      "cpu_total_us": 2699.5310000000977,
+      "device_total_us": 1218.9489999998432
+    },
+    {
+      "name": "PHYSICAL_FEATURES",
+      "calls": 3,
+      "cpu_total_us": 4739.839999999995,
+      "device_total_us": 10507.234000000139
+    },
+    {
+      "name": "DINO_RENDER",
+      "calls": 3,
+      "cpu_total_us": 1633.733000000002,
+      "device_total_us": 2674.7289999999957
+    },
+    {
+      "name": "DINO_CONTEXT",
+      "calls": 3,
+      "cpu_total_us": 37860.97099999998,
+      "device_total_us": 52650.571999999884
+    },
+    {
+      "name": "RGB_CNN",
+      "calls": 3,
+      "cpu_total_us": 10343.858000000004,
+      "device_total_us": 440049.90399999986
+    },
+    {
+      "name": "GAT_INVERSE",
+      "calls": 12,
+      "cpu_total_us": 7147.59100000004,
+      "device_total_us": 25183.441000002116
+    }
+  ],
+  "range_interpretation": "Select CPU annotation ranges once; profiler also exposes corresponding device annotation rows. Do not sum duplicated annotations or nested operator/kernel rows. CPU range wall time can include waiting for previous asynchronous work.",
+  "instrumentation_exact_output": true,
+  "raw": {
+    "scope": "Four resident native512 tiles, forward only. Three warmups/five timed iterations, then three instrumented iterations. Excludes RAW decoding/loading, packing/H2D, output transfer, full-frame blending/render/encoding. No full-frame speed claim; shared machine.",
+    "checkpoint": "/mnt/external/demosaic/evaluation/synthetic-packed-v37-v38-1k-full427/weights/weights-2e79285ba72003417eb681cae2bc304106548c8a8d3235dd20a4ea7218ec332a.pt",
+    "checkpoint_sha256": "2e79285ba72003417eb681cae2bc304106548c8a8d3235dd20a4ea7218ec332a",
+    "model_config": {
+      "restoration_backbone": "pretrained-rgb",
+      "width": 64,
+      "encoder_blocks": [
+        2,
+        2,
+        4
+      ],
+      "middle_blocks": 6,
+      "decoder_blocks": [
+        2,
+        2,
+        2
+      ],
+      "attention": true,
+      "dino": true,
+      "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+      "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+      "camera_conditioning": true,
+      "noise_modulation": false,
+      "physical_fp32": true,
+      "baseline": "bilinear",
+      "prior_window": 7,
+      "standardized_noise": false,
+      "noise_refinement": false,
+      "refinement_width": 24,
+      "refinement_blocks": 4,
+      "refinement_window": 63,
+      "coarse_refinement_factor": 0,
+      "coarse_refinement_width": 24,
+      "coarse_refinement_blocks": 4,
+      "coarse_refinement_window": 31,
+      "pyramid_refinement": false,
+      "pyramid_measurements": true,
+      "pyramid_width": 24,
+      "pyramid_blocks": 2,
+      "variance_stabilization": true,
+      "physical_anchors": true,
+      "rgb_processing_scale": 1,
+      "packed_detail_prior": false
+    },
+    "source": {
+      "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+      "camera": "GFX100S",
+      "pattern": "RGGB",
+      "black_levels": [
+        4101.0,
+        4098.0,
+        4104.0,
+        4106.0
+      ],
+      "white_levels": [
+        65535.0,
+        65535.0,
+        65535.0,
+        65535.0
+      ],
+      "white_balance": [
+        1.5132450331125828,
+        1.0,
+        2.2152317880794703
+      ],
+      "camera_to_srgb": [
+        [
+          1.0725188393098881,
+          0.17123593128834644,
+          -0.24375477059823436
+        ],
+        [
+          -0.1267191317089774,
+          1.4310509369654432,
+          -0.3043318052564657
+        ],
+        [
+          -0.009697676902906037,
+          -0.29348063283422965,
+          1.3031783097371357
+        ]
+      ],
+      "flip": 0,
+      "iso": 6400,
+      "adc_white_level": 65535.0
+    },
+    "tile_origins_yx": [
+      [
+        1200,
+        5600
+      ],
+      [
+        2400,
+        5600
+      ],
+      [
+        5400,
+        8600
+      ],
+      [
+        5800,
+        2000
+      ]
+    ],
+    "noise": {
+      "shot": 0.0014635775921166604,
+      "read": 1.0715704128646712e-06
+    },
+    "samples": [
+      {
+        "cuda_ms": 187.89369201660156,
+        "wall_ms": 187.95582791790366
+      },
+      {
+        "cuda_ms": 186.8919677734375,
+        "wall_ms": 186.92064099013805
+      },
+      {
+        "cuda_ms": 188.46202087402344,
+        "wall_ms": 188.48914094269276
+      },
+      {
+        "cuda_ms": 188.19801330566406,
+        "wall_ms": 188.2232208736241
+      },
+      {
+        "cuda_ms": 187.37686157226562,
+        "wall_ms": 187.40379391238093
+      }
+    ],
+    "ranges": [
+      {
+        "name": "MALVAR",
+        "calls": 15,
+        "cpu_total_us": 336189.589,
+        "device_total_us": 6161.173000000302
+      },
+      {
+        "name": "MALVAR",
+        "calls": 15,
+        "cpu_total_us": 0,
+        "device_total_us": 9502.428
+      },
+      {
+        "name": "GAT_FORWARD",
+        "calls": 24,
+        "cpu_total_us": 2699.5310000000977,
+        "device_total_us": 1218.9489999998432
+      },
+      {
+        "name": "GAT_FORWARD",
+        "calls": 24,
+        "cpu_total_us": 0,
+        "device_total_us": 1358.2139999998953
+      },
+      {
+        "name": "PHYSICAL_FEATURES",
+        "calls": 3,
+        "cpu_total_us": 4739.839999999995,
+        "device_total_us": 10507.234000000139
+      },
+      {
+        "name": "PHYSICAL_FEATURES",
+        "calls": 3,
+        "cpu_total_us": 0,
+        "device_total_us": 10749.153999999982
+      },
+      {
+        "name": "DINO_RENDER",
+        "calls": 3,
+        "cpu_total_us": 1633.733000000002,
+        "device_total_us": 2674.7289999999957
+      },
+      {
+        "name": "DINO_CONTEXT",
+        "calls": 3,
+        "cpu_total_us": 37860.97099999998,
+        "device_total_us": 52650.571999999884
+      },
+      {
+        "name": "DINO_RENDER",
+        "calls": 3,
+        "cpu_total_us": 0,
+        "device_total_us": 2682.8889999999774
+      },
+      {
+        "name": "DINO_CONTEXT",
+        "calls": 3,
+        "cpu_total_us": 0,
+        "device_total_us": 53146.57399999995
+      },
+      {
+        "name": "RGB_CNN",
+        "calls": 3,
+        "cpu_total_us": 10343.858000000004,
+        "device_total_us": 440049.90399999986
+      },
+      {
+        "name": "GAT_INVERSE",
+        "calls": 12,
+        "cpu_total_us": 7147.59100000004,
+        "device_total_us": 25183.441000002116
+      },
+      {
+        "name": "RGB_CNN",
+        "calls": 3,
+        "cpu_total_us": 0,
+        "device_total_us": 440252.2100000001
+      },
+      {
+        "name": "GAT_INVERSE",
+        "calls": 12,
+        "cpu_total_us": 0,
+        "device_total_us": 25361.522999999957
+      }
+    ],
+    "precision": "FP16 CNN/DINO, IEEE FP32 physical path",
+    "instrumentation_exact_output": true,
+    "output_shape": [
+      4,
+      3,
+      512,
+      512
+    ],
+    "output_dtype": "torch.float32",
+    "source_sha256": {
+      "__init__.py": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d",
+      "__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+      "audit.py": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d",
+      "calibration.py": "e86f4c602a6cd7fd855d0bcfeb790cf17ed87611f19d97926f9db174909b2d26",
+      "cfa.py": "a2f5e4a1db5e5dc3cfbe53167447001d98da5c857bb44ce677c5177063d4d70f",
+      "cli.py": "ae48ac49a52fcb9fa72521b1194e71fe8603a2ac301cf94be4a172a29a4d9003",
+      "color.py": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+      "data.py": "379c2ba5cfbc2d2760785896ffe9dc030284851621975ff15c90b51ad42b714a",
+      "gaussian.py": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72",
+      "inference.py": "911e71e8dcbeb1872ed591bc5234ed2b79bae063a859b4704516537d94a1df0b",
+      "io.py": "0a1599ffe7f6d935e92fc71e6b086430c6f82678a74952c3b8f31155a0bea83b",
+      "losses.py": "548b1481a035ad937d4a046754a74e70684864a9842296765c62079a002e5120",
+      "metrics.py": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31",
+      "model.py": "39f234671db6e8319e1e02b16973222236db6202eb2fbf85e4af02c3f00679d7",
+      "noise.py": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce",
+      "paired.py": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d",
+      "paired_training.py": "b05f6a7c1364f13afd417d5d2c080d93b140d53d9cb36199ea2151a9cea909e3",
+      "precision.py": "9aa850fb5ee0e9abc3e9adc4847ce3518c1acb37c93f6bc54ff9206bb0c94c3a",
+      "prepare.py": "e4c0733bb260c289b3ce8aaf5f393abc5919d8d81cdcf462b70032d790429712",
+      "pretrained_rgb.py": "9373e53f3ae1234dd860af72e75c1c2bd4434a44a23f8a17bc67c4b1c7a26dd5",
+      "prior.py": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a",
+      "raw_admission.py": "c972dd2fdbf3ed040feaf5ddc77f8ea6389cdcfc6a5f1f9e2e6f1e2a56b3a980",
+      "raw_clean.py": "a143ce351ac4e1b2425d4d561000d3e8934477fe9172c88f90ce76d9b32a7a6c",
+      "real_suite.py": "2d8cd262a22b8c11d12159e7a90f96022219915ecf0dada36665467fd0f7ccee",
+      "realdata.py": "ed24db2b066531281a196e6fa074130cb0ee78a640eae5ccaaace234f5ad5421",
+      "reference.py": "54ed094d58e245a56993ea3ce3ef9e21d2164e902d41d03bba9132bacd22891f",
+      "registration.py": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202",
+      "reporting.py": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d",
+      "safety.py": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7",
+      "suite.py": "a474ff659df10dd4ec11d577082034a6e6dcba1a2a2b29c39065056cff5527b4",
+      "train.py": "3956819ffbb6af9e853965f8e7beea719e76bcfbfa20c861a825d50e1d9f7cc4",
+      "vst.py": "355124a374177f1c08271834149c5979ab3477fdf255c60aa7cee0d47792a76b"
+    },
+    "torch": "2.14.1+cu130"
+  }
+}

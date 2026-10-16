@@ -235,3 +235,11 @@ training recipe; its original 8× scoring protocol remains fixed. All 16 logged
 paired hashes match across V32/V34/V36, and all 11 logged native hashes match
 between the two 4× arms. Both stop at the review gate. Fine texture is still
 too soft; the full-frame GFX review is documented with the same fixed regions.
+
+The subsequent [packed detail review](packed-detail-v40-v41-review.md) uses this
+same geometry, batch 16 and selected-domain loading. Its physical detail prior
+recovers much of the first packed model's real-camera noise loss, but remains
+below the full-resolution control. A 10× phase-head LR does not close the gap.
+All 41 logged V38/V40/V41 observation hashes match, and the full 427-photo and
+102 MP GFX checks are complete. The final source passes 321 tests; the stronger
+augmentation order remains adopted independently of these architecture trials.

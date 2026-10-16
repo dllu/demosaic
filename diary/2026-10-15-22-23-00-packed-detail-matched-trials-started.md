@@ -32,3 +32,8 @@ their10× LR ratio. Both implementation commits are pushed.
 The Commons download remains active under the existing lock/PID3989567;
 no second downloader was launched. Frozen experiments do not automatically
 admit newly downloaded data.
+
+The complete final-source test run also passed: 321 tests in 41.82 s. Ruff
+passed for source, tests and scripts. These are engineering checks, not image
+quality evidence. V40 finished its first1000 updates and V41 began at
+2026-10-16 05:23:16 UTC.

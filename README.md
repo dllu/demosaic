@@ -3,7 +3,7 @@
 Joint Bayer demosaicing and denoising in linear camera RGB, with 16-bit TIFF
 output, physical noise conditioning, tiled inference, and an optional DINOv3
 feature branch. Experimental: training and quality validation are in progress.
-The [latest matched review](docs/geometry-corpus-v34-v36-review.md) finds a
+The [matched augmentation review](docs/geometry-corpus-v34-v36-review.md) finds a
 0.51 dB gain across 427 synthetic-noise photographs by augmenting before the
 final downsampling, with smaller real-camera changes and remaining detail deficits.
 Quality work continues;
@@ -59,3 +59,5 @@ The [Commons archive download](docs/commons-download.md) is running separately;
 active experiments retain frozen manifests.
 See [training pipeline work](docs/training-pipeline.md) for augmentation before
 the last reduction, selected-domain loading and the batch-size sweep.
+The [packed detail review](docs/packed-detail-v40-v41-review.md) retains the
+full-resolution model after testing two native-detail variants.
