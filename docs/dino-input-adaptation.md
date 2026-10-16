@@ -1,7 +1,9 @@
 # Experimental adaptation before the frozen DINO encoder
 
 An optional 6,531-parameter RGB input adapter now precedes the frozen DINOv3
-encoder. It passes engineering checks; trained quality is still unproven.
+encoder. It passes engineering checks, but its [first trained gate](dino-input-v56-review.md)
+loses natural-photo and known-camera means without a clear native advantage.
+The option remains default-off; V56 stops at 1,000 without promotion.
 [Genuine-parent GPU preflight and complete test receipt](results/dino-input-v56-gpu-validation.json).
 
 The existing branch projects three intermediate token grids into the CNN's
@@ -69,9 +71,12 @@ the control before numerical, analytic/flat, native and full GFX review.
 
 The [actual launch receipt](results/dino-input-v56-launch.json) records frozen
 source `4bf85a2`, controller identity, first update and matching observations
-through step 125. Training is live; the receipt is a launch observation, not
-a trained-quality result. The controller recomputes both models and baselines
-and verifies full RGB16 outputs after the first gate.
+through step 125. It is historical launch evidence. The [completed review](dino-input-v56-review.md)
+verifies all 41 logged input hashes and final Python/Torch/CUDA RNG states,
+46 native triplets and eight complete RGB16 files. Photo PSNR falls 0.12579 dB
+and known primary 0.07023 dB. Weak response is mixed; learned input weights are
+nonzero. V56 stops while the original 4,000-step schedule/state is retained.
+This does not establish convergence or a universal input-adapter failure.
 
 The recent [structural-guidance JDD paper](https://arxiv.org/abs/2608.09995)
 uses frozen DINOv3 and adaptation after patch tokens; it does not supply this

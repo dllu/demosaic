@@ -733,3 +733,15 @@ triplets, separate texture/flat measurements, and eight verified full RGB16
 files. Complete state is retained on the original planned 4,000-step schedule;
 this first gate does not establish convergence or reject weak augmentation in
 general. V43 step 2,000 remains the README reference; quality/speed goals remain.
+
+The [V56 input-adapter review](dino-input-v56-review.md) stops the optional
+6,531-parameter pre-DINO adapter at 1,000 without promotion. Versus matched
+V54, photo PSNR falls 0.12579 dB and known primary 0.07023 dB; unseen primary
+is +0.02012 dB with an interval crossing zero. Procedural PSNR falls while SSIM
+rises, weak-carrier gains are mixed, and native foliage/fence show no clear
+advantage. All 41 logged inputs and final Python/Torch/CUDA RNG match. Learned
+input weights are nonzero. All 46 native triplets/eight full RGB16 outputs verify.
+The full-suite 62,020 baseline/12,404 V54 neural cases replay exactly; analytic
+V54 FP16 has tiny cross-run differences recorded separately. A same-source,
+same-seed control replay checks procedural repeatability next. One seed and this
+finite gate do not establish convergence or a universal architecture effect.

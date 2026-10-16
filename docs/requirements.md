@@ -48,7 +48,7 @@ V34/V36 first1000 and full427/full102MP reviews are complete and stopped.
 [Nine public RAW samples](public-raw-pilot.md) retain their original quarantine.
 Six reviewed sources have a separate opt-in native extension; the chart and two
 clipped sources are excluded. Current architecture trials remain unchanged.
-The complete CUDA-enabled suite now passes **379 tests in40.18s**, including
+The earlier precision/adapter source passed **379 tests in40.18s**, including
 the explicit middle-skip precision control and prior identity/diagnostic checks. The optional DINO
 adapters pass genuine full-model BF16/FP16 initial-output equality, backward,
 original-weight preservation and full-state training-resume checks.
@@ -195,3 +195,16 @@ advantage. It stops at 1,000 without promotion. All 46 native triplets, eight
 full GFX RGB16 files, 62,020 baseline and 12,404 matched-control replay cases
 verify. V43 step 2,000 and its README crops remain the experimental reference.
 These finite schedules do not establish convergence or a universal data effect.
+
+The [optional DINO input adapter](dino-input-adaptation.md) passes the complete
+current CUDA-enabled suite (**483 tests in 47.39 s**) and genuine-parent identity,
+gradient and portable-load checks. The [matched V56 first gate](dino-input-v56-review.md)
+finishes from the same initializer/data as V54 but loses photo/known primary
+without a clear native advantage. It stops without promotion. All 41 logged
+inputs/final RNG states match; 46 native triplets and eight RGB16 files verify.
+Engineering validation remains separate from quality evidence.
+A [CPU-only resume audit](results/fresh-dino-capacity-10k-resume-audit.json) also
+verifies intact original no-context/S/B step 3,000 states and their unfinished
+10,000-step schedules. A same-source V54 replay takes priority after V56 review,
+to measure procedural repeatability without treating source intervals as
+training-seed uncertainty. Broad quality/SOTA and speed requirements remain open.

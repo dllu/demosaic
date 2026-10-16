@@ -153,8 +153,9 @@ without surpassing no-context. All three improve from1000, but none establish
 convergence on the original10000 schedule or a benefit from larger context.
 Fifty native comparisons and ten full RGB16 files verify at each gate. V50
 separately retained ViT-S and tested data membership alone. The subsequent
-[paired-data-only trial](paired-expansion-v53-v54-review.md) is now finishing
-both original4000-step schedules after a mixed first1000 real-camera review.
+[paired-data-only trial](paired-expansion-v53-v54-4k-review.md) completes both
+original 4,000-step schedules without sustaining its early photographic gain.
+The reviewed corpus remains opt-in.
 
 ## Texture retention and training scale follow-up
 
@@ -174,8 +175,9 @@ detail loss comes from patch size. Its RAW-to-RAW benchmarks, additional data
 and compute budgets differ from our commercially usable joint reconstruction.
 
 [Experimental weak-texture source and actual CPU preparation](weak-texture-source.md)
-remain separate from active recipes. Any change needs matched trained quality,
-flat-region false-detail checks and the standing full/native/GFX review.
+remain default-off after the [negative/mixed V55 first gate](weak-texture-v55-review.md).
+Any further change needs matched trained quality, flat-region false-detail
+checks and the standing full/native/GFX review.
 
 ## Learned input adaptation candidate
 
@@ -188,4 +190,8 @@ exactly and differentiating through frozen pretrained weights. The motivation
 is the measured noisy-preview feature gap and negative current-branch ablation,
 not a claimed reproduction or an inference that feature similarity guarantees
 restoration quality. Actual parent-weight identity/gradient/portability checks
-and the 483-test CUDA-enabled suite pass; matched trained quality remains pending.
+and the 483-test CUDA-enabled suite pass. The [matched first gate](dino-input-v56-review.md)
+then loses natural-photo and known-camera means, with no clear native detail
+advantage. The option stays default-off. One seed/1,000 updates is not convergence
+or a universal rejection of input adaptation. A same-source control replay is
+the next check on procedural repeatability before interpreting small mean changes.
