@@ -198,9 +198,13 @@ def main(
     )
 
 
-def check_joint_lineage(state, checkpoint_sha256, parent_sha256, expected_step):
+def check_joint_lineage(state, checkpoint_sha256, parent_sha256, expected_step, *, fresh=False):
     """Recognize the verified parent by content, independently of display labels."""
-    if checkpoint_sha256 != parent_sha256:
+    if fresh:
+        assert checkpoint_sha256 != parent_sha256
+        assert state["config"].get("initialized_from") is None
+        assert state["step"] == expected_step
+    elif checkpoint_sha256 != parent_sha256:
         assert state["config"]["initialized_from"]["sha256"] == parent_sha256
         assert state["step"] == expected_step
 
@@ -291,7 +295,14 @@ def evaluate_records(
                 compute_precision="float16, physicalFP32",
                 memory_format="channels_last",
             )
-            check_joint_lineage(state, record["sha256"], parent_sha256, expected_step)
+            assert record.get("initialization") in (None, "fresh")
+            check_joint_lineage(
+                state,
+                record["sha256"],
+                parent_sha256,
+                expected_step,
+                fresh=record.get("initialization") == "fresh",
+            )
             del state
         else:
             model = load_nonlocal_reference(record["path"], device="cuda", archive=output)

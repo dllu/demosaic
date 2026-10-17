@@ -129,41 +129,94 @@ uv run --no-sync python scripts/preflight_packed_isotropic.py \
   --output /mnt/external/demosaic/benchmarks/packed-isotropic-CUDA-preflight-NEW
 ```
 
-## Prospective quality comparison
+## Fresh matched quality comparison
 
-[V70 with DINO](../configs/dino-packed-isotropic-b16-v70.yaml) and
-[V71 without DINO](../configs/no-dino-packed-isotropic-b16-v71.yaml) are prepared,
-not yet quality-trained. Both start fresh with the same restoration seed51,
-original40000-update schedule, LR2e-4, warmup500 and B16/native256. First review
-is at2000 updates using an explicit stop; neither recipe automatically extends
-or promotes a reviewed boundary. The previous pretrained RGB models are
-external quality references, not matched fresh-initialization/convergence
-controls. Changes to feature coordinates, trunk and reconstruction are jointly
-tested; a comparison against the old architecture does not isolate any one.
+The completed [actual training batch sweep](results/packed-isotropic-training-batch-sweep-v1.json)
+selects **batch4** for this new architecture. All eight cases verify the same
+initializer, source bundle, manifests, model, LR, mixed-domain schedule and
+workers. Each excludes15 warmup updates and measures45, including selected-domain
+loading/augmentation, physical work, DINO, backward, AdamW and EMA.
 
-The two new arms keep the same40170 Commons sources, native128 captures/
-106 groups, paired32 sources, seed, fractions, wide8 palette, noise/ADC model,
-geometry/PSF order, loss and original8× validation manifest. No newly downloaded
-images, GFX scene/siblings, or protected-final scenes are admitted. Compare
-logged observation hashes as well as actual updates and report different
-compute cost. No throughput result alone changes the batch or LR.
+| Batch | Mean patches/s | Two-run range | Peak CUDA GB |
+| ---: | ---: | ---: | ---: |
+| **4** | **23.95** | 23.73–24.18 | 3.25 |
+| 8 | 22.90 | 22.15–23.65 | 6.11 |
+| 16 | 20.42 | 20.36–20.47 | 11.83 |
+| 32 | 19.84 | 19.63–20.05 | 23.27 |
 
-The inference check justifies testing block compilation further. A new actual
-mixed-training batch sweep is running at
-`/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1`:
-B4/8/16/32, two shuffled repeats,15 excluded warmup and45 measured updates per
-case. It uses the discarded12-update EMA as a common timing initializer,
-fresh optimizer state and the benchmark's common planned5000 schedule.
-These weights remain in benchmark directories and never initialize a quality
-run. Timing includes selected-domain data work, physical/noise operations,
-DINO, backward, AdamW and EMA. The batch selection is pending; keep the
-prepared quality recipes at16 until the sweep is reviewed.
+Batch4's mean is17.3% above16 with less allocation. These are two repeats on a
+shared machine, not confidence intervals or a unique hardware optimum. Other
+work varied during the sweep. This choice applies to the new RAW-native body;
+the earlier RGB pipeline retains its own measured batch16 setting. No batch-only
+quality/convergence claim or direct timing comparison between architectures is
+made. The rule chooses the highest mean; within2% of it, prefer less allocation.
 
-Before a quality launch, finish that batch review. After training, review known/unseen camera
-data, frozen427 photos with predeclared source sensitivities, procedural and
-weak-texture/color stress cases, and cached GFX/three-camera native crops.
+An independent CPU reader reconstructed all480 logged updates, all360 measured
+updates/domain counts and all eight timings from saved logs. It checked every
+runtime configuration and source snapshot, the shared discarded12-update EMA,
+manifest hashes, actual step60 checkpoints, finite model/EMA/863 Adam states,
+and unchanged planned5000 timing schedule. It initialized no CUDA. The exact
+operator is archived as `independent-auditor.py` in
+`/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/`.
+Benchmark weights never initialize quality runs.
+
+The [genuine-weight CPU initialization check](results/packed-isotropic-genuine-matched-initialization-CPU-v1.json)
+compared all852 RAW-restoration tensors, global Torch/Python random states and
+all four CFA patterns' initial odd-rectangle outputs with and without the real
+pinned27,820,128-parameter DINO backbone. They match exactly. Tiny-encoder unit
+tests and production-size genuine-DINO GPU checks remain separate evidence.
+
+The actual recipes are now
+[V70 DINO at batch4](../configs/dino-packed-isotropic-b4-v70.yaml) and
+[V71 no-DINO at batch4](../configs/no-dino-packed-isotropic-b4-v71.yaml).
+The old batch16 templates were used for engineering and were never quality
+trained. Before either fresh quality run, we fixed the same example-count
+budgets as those templates:640,000 planned examples,32,000 before the first
+review and8,000 during warmup. At batch4 these become160,000 planned updates,
+8,000 before review and2,000 warmup updates. **LR stays2e-4**, with no scaling.
+Both arms start fresh with seed51 and the original cosine horizon for these
+new recipes. This is a prospective schedule choice, not a retiming/resume of
+trained weights; equal image counts do not imply batch convergence equivalence.
+
+[Launch evidence](results/packed-isotropic-first-review-launch-v1.json) records
+actual live controller/child identities and the no-DINO arm's real training
+prefix through step250. Its actual constructor records RAW weights and global
+RNG before data work; the second arm must match them. Both arms use fresh
+AdamW/EMA, with no Gaussian, parent or benchmark initialization. They run
+serially, each stopping after8,000 updates. The controller verifies actual
+model/EMA/Adam state, source/data/recipe and original LR schedule, genuine
+frozen-DINO preservation, and every logged domain/observation fingerprint
+before declaring the matched boundary complete. No quality result or promotion
+is implied by finite training losses.
+
+The frozen source bundle matches the GPU preflight:
+`50dc11ec5c906fbbc4d3c5b1b530b95acb3b40a5f725d3a622891b2471c21d16`.
+The launch plan SHA is
+`e60dcbe9a207029f26d1141f52c1fde4a868399bddb2f51e47c9b4a6d58bb5c9`.
+It pins161 frozen source/tool/config files and immutable input receipts/manifests.
+The controller and plan live in
+`/mnt/external/demosaic/benchmarks/packed-isotropic-first-review-workflow-v1/`;
+current status is
+`/mnt/external/demosaic/runs/packed-isotropic-first-review-workflow-v1.json`.
+A failed run stops without automatic restart. Source hard drives are not used;
+future qualitative evaluation has links to the existing hot RAW caches.
+
+Both arms retain Commons40170 sources, native128 captures/106 groups, paired32
+sources, fractions.25/.25, wide8 palette, physical noise/ADC, geometry/PSF order,
+loss and original8× validation manifest. No newly downloaded images, GFX scene
+or siblings, or protected-final scenes are admitted. Only DINO presence/fusion
+differs. Earlier pretrained RGB models remain external quality references,
+not matched fresh-training/convergence controls. Feature coordinates, trunk
+and reconstruction jointly change against those references.
+
+After training, review known/unseen camera data, frozen427 photos with the
+existing predeclared source sensitivities, procedural/weak-texture/color stress
+cases, and cached GFX/three-camera native crops. The color-grid evaluator now
+accepts explicitly declared fresh checkpoints only at their exact boundary,
+rejecting parent-initialized or timing-initialized candidates; its existing
+parent/continuation checks remain strict. Ten focused lineage tests passed.
 Any performance report must include at least two native100% noisy/denoised/GT
 triplets with exact source/ROI, checkpoint SHA, noise and display metadata.
 GFX DSCF3879/DSCF3880 remains a qualitative pair, not exact GT. Include foliage
-and fence along with sky/building detail. Any continuation requires an explicit
-assessment of the actual boundary; a poor2k result is not proof of convergence.
+and fence alongside sky/building detail. Assess the actual boundary before any
+continuation. A weak early result alone does not prove convergence.

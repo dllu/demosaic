@@ -22,7 +22,9 @@ keeps RAW/targets fixed and leaves the geometry order intact. Its
 [completed original4k GPU review](normalization-v68-v69-original4k-review.md)
 found a small matched photo gain; texture/color limitations prevented promotion.
 The [experimental RAW-native backbone](packed-isotropic.md) retains the same
-geometry and selected-domain loading, with its own batch sweep in progress.
+geometry and selected-domain loading. Its completed sweep selects batch4 for
+that architecture; the older RGB model retains batch16. Fresh matched quality
+trials are running.
 
 For seed45's first 1,000 steps, 514 select Commons/procedural, 230 paired RAW and
 256 native-RAW synthetic. Batch4 formerly consumed 4,000 Commons examples

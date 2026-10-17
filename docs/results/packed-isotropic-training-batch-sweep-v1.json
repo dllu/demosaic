@@ -1,0 +1,286 @@
+{
+  "status": "completed-independent-runtime-audit-of-packed-isotropic-batch-sweep",
+  "producer_summary": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/summary.json",
+    "sha256": "5a6428e76db2c3424868d00e43adc7785a91943ea4f54586073bfcebff1fddb6"
+  },
+  "producer_owner": {
+    "pid": 931411,
+    "created": 1792267645.96,
+    "command": [
+      "/home/dllu/proj/demosaic/.venv/bin/python3",
+      "scripts/benchmark_training.py",
+      "configs/dino-packed-isotropic-b16-v70.yaml",
+      "--initialize",
+      "/mnt/external/demosaic/benchmarks/packed-isotropic-CUDA-preflight-v1/run/last.pt",
+      "--output",
+      "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1",
+      "--batch-sizes",
+      "4",
+      "8",
+      "16",
+      "32",
+      "--warmup",
+      "15",
+      "--measure",
+      "45",
+      "--repeats",
+      "2"
+    ],
+    "summary": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/summary.json"
+  },
+  "producer_exited": true,
+  "cases": [
+    {
+      "batch": 16,
+      "repeat": 1,
+      "runtime_config": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/batch16-repeat1/run/config.yaml",
+        "sha256": "73f5ece10cc8578f1df478ce7420473a420ca365c6c1cb8c74ce870eb2501d4f"
+      },
+      "metrics": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/batch16-repeat1/run/metrics.jsonl",
+        "sha256": "6c7eecd65b8968348bf0135e96b314e8b9617d265420d7ea9894a4046a6936df"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/batch16-repeat1/run/last.pt",
+        "sha256": "67f35535e130b9ef045e42d2be13298d4daf4df768442fab77d6c9404657f223"
+      },
+      "source_bundle_sha256": "67bb11f5c6eb03309dc8961e5bd368c8a53dcd677119a4a1486ab4c8a5e5240f",
+      "finite_model_EMA_863Adam_steps60": true,
+      "recomputed_domain_counts": {
+        "native-RAW-synthetic": 15,
+        "synthetic": 19,
+        "paired-RAW": 11
+      },
+      "seconds_per_step": 0.7858335767562191,
+      "images_per_second": 20.360545124637138,
+      "peak_cuda_GB": 11.826407936
+    },
+    {
+      "batch": 16,
+      "repeat": 0,
+      "runtime_config": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/batch16-repeat0/run/config.yaml",
+        "sha256": "6d7f6724d4f0a6b80c34d15f8b979012509ef119cfde942a80b6996aba0f4a7c"
+      },
+      "metrics": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/batch16-repeat0/run/metrics.jsonl",
+        "sha256": "d6fec9345022a0ca6b92944324eac02edcc9282747f84ee6caf96781f9fac702"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/batch16-repeat0/run/last.pt",
+        "sha256": "c80596aaf1ea6fc4360b3a1dc7f58b19aa4ca0e102cd74173333573d484deba8"
+      },
+      "source_bundle_sha256": "67bb11f5c6eb03309dc8961e5bd368c8a53dcd677119a4a1486ab4c8a5e5240f",
+      "finite_model_EMA_863Adam_steps60": true,
+      "recomputed_domain_counts": {
+        "native-RAW-synthetic": 15,
+        "synthetic": 19,
+        "paired-RAW": 11
+      },
+      "seconds_per_step": 0.7815236925095733,
+      "images_per_second": 20.472827827678437,
+      "peak_cuda_GB": 11.826407936
+    },
+    {
+      "batch": 4,
+      "repeat": 1,
+      "runtime_config": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/batch4-repeat1/run/config.yaml",
+        "sha256": "1dec728a6b3960f82dd946abf3a2baa61fdcc85a66160e56309a471c4c232059"
+      },
+      "metrics": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/batch4-repeat1/run/metrics.jsonl",
+        "sha256": "f3443aef774de58a72421e963088db5d9cdebf469aa63c6e538b77e71ec3a6ca"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/batch4-repeat1/run/last.pt",
+        "sha256": "953b589f25a966dca1f978ff29ba7e92561d56f32b25001f64819f4395e53921"
+      },
+      "source_bundle_sha256": "67bb11f5c6eb03309dc8961e5bd368c8a53dcd677119a4a1486ab4c8a5e5240f",
+      "finite_model_EMA_863Adam_steps60": true,
+      "recomputed_domain_counts": {
+        "native-RAW-synthetic": 15,
+        "synthetic": 19,
+        "paired-RAW": 11
+      },
+      "seconds_per_step": 0.16542346557705767,
+      "images_per_second": 24.180366346736445,
+      "peak_cuda_GB": 3.247613952
+    },
+    {
+      "batch": 4,
+      "repeat": 0,
+      "runtime_config": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/batch4-repeat0/run/config.yaml",
+        "sha256": "3f3467655a3ea866455241f950ecad70230d42fc798bbc4d822287d344475a27"
+      },
+      "metrics": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/batch4-repeat0/run/metrics.jsonl",
+        "sha256": "0c45b7b8ef6196cb73286378a099b38d35525bb7a5e4a191014c734cca6bce5d"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/batch4-repeat0/run/last.pt",
+        "sha256": "c6e346256a67adc687f7fa655e702ee6f86f7efbc7eb6b168b32395d56bd074b"
+      },
+      "source_bundle_sha256": "67bb11f5c6eb03309dc8961e5bd368c8a53dcd677119a4a1486ab4c8a5e5240f",
+      "finite_model_EMA_863Adam_steps60": true,
+      "recomputed_domain_counts": {
+        "native-RAW-synthetic": 15,
+        "synthetic": 19,
+        "paired-RAW": 11
+      },
+      "seconds_per_step": 0.16857105615134868,
+      "images_per_second": 23.72886598283318,
+      "peak_cuda_GB": 3.247613952
+    },
+    {
+      "batch": 8,
+      "repeat": 1,
+      "runtime_config": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/batch8-repeat1/run/config.yaml",
+        "sha256": "cd17ea9d52b8efc04d5a4a55eefb01e2abf4e73c245eb2f15838ba25fcb37b28"
+      },
+      "metrics": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/batch8-repeat1/run/metrics.jsonl",
+        "sha256": "2b67f6854af2c8b1d50f35cf604eae4f90d9a40a028cf35256cd8105a497d2ab"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/batch8-repeat1/run/last.pt",
+        "sha256": "ff16171378b72d8a39194af8f40c55af9f6a1963836fe30da70ec4685044b7e4"
+      },
+      "source_bundle_sha256": "67bb11f5c6eb03309dc8961e5bd368c8a53dcd677119a4a1486ab4c8a5e5240f",
+      "finite_model_EMA_863Adam_steps60": true,
+      "recomputed_domain_counts": {
+        "native-RAW-synthetic": 15,
+        "synthetic": 19,
+        "paired-RAW": 11
+      },
+      "seconds_per_step": 0.36111384097279775,
+      "images_per_second": 22.153678680520667,
+      "peak_cuda_GB": 6.108288512
+    },
+    {
+      "batch": 32,
+      "repeat": 1,
+      "runtime_config": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/batch32-repeat1/run/config.yaml",
+        "sha256": "7e5cf94ba2dda96c05dcfa5519affdf79cb4617ec0dace00b3d2f69078e4bfe6"
+      },
+      "metrics": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/batch32-repeat1/run/metrics.jsonl",
+        "sha256": "2ebfe63f41eee5c7cf8e1d283a5fbbe7f6c597865da6bc091b8e948f51782c30"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/batch32-repeat1/run/last.pt",
+        "sha256": "965b5d7fccec1fc1984b14f9aa4cb9e724f45234052468168b4ef84dbdc527bc"
+      },
+      "source_bundle_sha256": "67bb11f5c6eb03309dc8961e5bd368c8a53dcd677119a4a1486ab4c8a5e5240f",
+      "finite_model_EMA_863Adam_steps60": true,
+      "recomputed_domain_counts": {
+        "native-RAW-synthetic": 15,
+        "synthetic": 19,
+        "paired-RAW": 11
+      },
+      "seconds_per_step": 1.6297461682464927,
+      "images_per_second": 19.63495949460034,
+      "peak_cuda_GB": 23.265848832
+    },
+    {
+      "batch": 8,
+      "repeat": 0,
+      "runtime_config": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/batch8-repeat0/run/config.yaml",
+        "sha256": "763e6da406c59e4e25481fd64562555c5e39900d0cf5cda39ce117baa5646587"
+      },
+      "metrics": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/batch8-repeat0/run/metrics.jsonl",
+        "sha256": "887dca722aabf81f38fa25275820585d57739bbcc054705132470a7dc693c838"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/batch8-repeat0/run/last.pt",
+        "sha256": "67e34ff1e86b42e43210b79d802047813a8a4f4aea768e0e18227b19ed841778"
+      },
+      "source_bundle_sha256": "67bb11f5c6eb03309dc8961e5bd368c8a53dcd677119a4a1486ab4c8a5e5240f",
+      "finite_model_EMA_863Adam_steps60": true,
+      "recomputed_domain_counts": {
+        "native-RAW-synthetic": 15,
+        "synthetic": 19,
+        "paired-RAW": 11
+      },
+      "seconds_per_step": 0.3383345707371417,
+      "images_per_second": 23.64523371812142,
+      "peak_cuda_GB": 6.107764224
+    },
+    {
+      "batch": 32,
+      "repeat": 0,
+      "runtime_config": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/batch32-repeat0/run/config.yaml",
+        "sha256": "a3fbbe98b409210211947bd73a2489e654c8b6dc787f616d46d84dea50e0ae0c"
+      },
+      "metrics": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/batch32-repeat0/run/metrics.jsonl",
+        "sha256": "7f38061e338321d3544acea70b70dfa22f6c57b24d5b4a6cec7c1d9e4b8ab9a7"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-training-batch-sweep-v1/batch32-repeat0/run/last.pt",
+        "sha256": "89a031f6a7d814791bef3df398d310b5c457784e3843a748ee6005a6a290ba00"
+      },
+      "source_bundle_sha256": "67bb11f5c6eb03309dc8961e5bd368c8a53dcd677119a4a1486ab4c8a5e5240f",
+      "finite_model_EMA_863Adam_steps60": true,
+      "recomputed_domain_counts": {
+        "native-RAW-synthetic": 15,
+        "synthetic": 19,
+        "paired-RAW": 11
+      },
+      "seconds_per_step": 1.5957792334206817,
+      "images_per_second": 20.05289912903893,
+      "peak_cuda_GB": 23.265848832
+    }
+  ],
+  "groups": [
+    {
+      "batch": 4,
+      "mean_patches_per_second": 23.954616164784813,
+      "range_patches_per_second": [
+        23.72886598283318,
+        24.180366346736445
+      ],
+      "peak_cuda_GB": 3.247613952
+    },
+    {
+      "batch": 8,
+      "mean_patches_per_second": 22.899456199321044,
+      "range_patches_per_second": [
+        22.153678680520667,
+        23.64523371812142
+      ],
+      "peak_cuda_GB": 6.108288512
+    },
+    {
+      "batch": 16,
+      "mean_patches_per_second": 20.416686476157786,
+      "range_patches_per_second": [
+        20.360545124637138,
+        20.472827827678437
+      ],
+      "peak_cuda_GB": 11.826407936
+    },
+    {
+      "batch": 32,
+      "mean_patches_per_second": 19.843929311819636,
+      "range_patches_per_second": [
+        19.63495949460034,
+        20.05289912903893
+      ],
+      "peak_cuda_GB": 23.265848832
+    }
+  ],
+  "selected_batch": 4,
+  "selection_rule": "Highest mean throughput; among batches within2% of the best mean, choose lowest CUDA allocation. Two shared-machine repeats, not confidence intervals or a unique hardware optimum.",
+  "scope": "Difference of cumulative training wall times; includes selected-domain loading/degradation, DINO, forward/backward, AdamW and EMA. Excludes startup/warmup, validation and checkpoint serialization. All updates discarded. Shared12-update EMA used only for timings; fresh quality runs never initialize from benchmark weights. No quality, batch convergence, learning-rate optimum or controlled cross-architecture comparison.",
+  "independent_auditor_sha256": "eb1d4d27892337d7d8e3ac4a3565be5a34b6d3d0b02dd80a074e9f0efd990ec8",
+  "CUDA_initialized": false
+}

@@ -52,3 +52,20 @@ def test_library_entry_point_disables_gradients_and_restores_caller(monkeypatch)
             module.evaluate_records("unused", "unused", "unused", [], "parent")
         assert torch.is_grad_enabled()
         assert not torch.is_inference_mode_enabled()
+
+
+@pytest.mark.parametrize("step", [2000, 8000])
+def test_explicit_fresh_candidate_requires_absent_initializer_and_exact_boundary(step):
+    module = script()
+    module.check_joint_lineage({"step": step, "config": {}}, "fresh", "parent", step, fresh=True)
+    for state in [
+        {"step": step - 1, "config": {}},
+        {"step": step, "config": {"initialized_from": {"sha256": "parent"}}},
+        {"step": step, "config": {"initialized_from": {"sha256": "timing-only-checkpoint"}}},
+    ]:
+        with pytest.raises(AssertionError):
+            module.check_joint_lineage(state, "fresh", "parent", step, fresh=True)
+    with pytest.raises(AssertionError):
+        module.check_joint_lineage(
+            {"step": step, "config": {}}, "parent", "parent", step, fresh=True
+        )

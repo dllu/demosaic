@@ -1,0 +1,66 @@
+amp: true
+augmentation_downsample: 2
+batch_size: 4
+broad_camera: true
+channels_last: true
+checkpoint_every: 8000
+cpu_threads: 4
+data_seed_per_step: true
+device: cuda
+experiment_notes: Fresh matched RAW-native dino quality arm after completed actual
+  batch sweep selects B4. Original quality horizon640000 examples=160000 updates,
+  first native quality review32000 examples=8000 updates via explicit --stop-after
+  8000, warmup8000 examples=2000 updates. All chosen before any quality training;
+  earlier B16 templates never quality-trained. Keep LR2e-4 unscaled, same restoration
+  seed51 and frozen40170 Commons/native128 captures106 groups/paired32, fractions.25/.25,
+  native256/BF16, workers4/2/2, wide8 palette, geometry4x-to-PSF-to-area2, noise/ADC,
+  loss and original8x validation. Only DINO presence/fusion differs between V70/V71.
+  Fresh AdamW/EMA, no checkpoint or Gaussian initialization; benchmark weights never
+  enter quality runs. Serial owners, finite-state/source/data/actual-construction
+  checks and full quality/native review required. No protected-final scoring, automatic
+  extension, promotion, output correction or training-source admission. Same-image-count
+  horizon vs original B16 plan does not establish batch convergence equivalence or
+  isolate architecture changes against old RGB models.
+flat_fraction: 0.1
+log_every: 25
+lr: 0.0002
+manifest: /mnt/external/demosaic/audits/commons-bin4-frozen44732-v1/manifest.jsonl
+min_available_gb: 12
+model:
+  restoration_backbone: packed-isotropic
+  width: 96
+  isotropic_groups: 6
+  isotropic_blocks: 8
+  isotropic_local_width: 32
+  camera_conditioning: true
+  physical_fp32: true
+  dino: true
+  dino_feature_fusion: packed-convnext
+  dino_model: facebook/dinov3-convnext-tiny-pretrain-lvd1689m
+  dino_revision: 10d30274b4d445111e2d5bf75ac93bbd94db274b
+noise_free_fraction: 0.1
+paired_fraction: 0.25
+paired_manifest: /mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json
+paired_workers: 2
+patch_size: 256
+precision: bfloat16
+preserve_negative_read_noise: true
+raw_clean_augmentation_downsample: 2
+raw_clean_fraction: 0.25
+raw_clean_manifest: /mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json
+raw_clean_workers: 2
+reconstruct_highlights: true
+run: /mnt/external/demosaic/runs/dino-packed-isotropic-b4-v70
+seed: 51
+steps: 160000
+synthetic_fraction: 0.2
+trace_observations: true
+val_batches: 4
+validation_images: 8
+validation_manifest: /mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl
+validation_protocol: configs/evaluation.yaml
+warmup_steps: 2000
+worker_start_method: spawn
+workers: 4
+flat_chroma_stops: 8
+multiscale_sensor_weight: 0

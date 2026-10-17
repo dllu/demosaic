@@ -32,7 +32,7 @@ The [completed4k normalization review](docs/normalization-v68-v69-original4k-rev
 finds a small +0.020dB matched photo gain; own1k progress is uncertain and
 texture/color failures keep V43 as the working reference.
 An [experimental RAW-native backbone](docs/packed-isotropic.md) passes mixed-data
-and checkpoint checks; image quality and batch selection remain under study.
+and checkpoint checks; its batch sweep is complete and matched quality trials are running.
 
 Native 160×160 validation crops: noisy → denoised → GT, using V43 step 2000
 (FP16, ISO12800 synthetic noise prior). These are 100% crops at the 8×8-binned
