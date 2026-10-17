@@ -117,6 +117,14 @@ experiment, not a new quality result. Full quality/native review remains require
 Private status:
 `/mnt/external/demosaic/runs/packed-isotropic-quarter-workflow-v1.json`.
 
+The retained no-DINO24k checkpoint passes an independent
+[CPU state/source/recipe audit](results/packed-isotropic-no-dino24k-state-CPU-v1.json).
+All852 model and EMA tensors have changed since8k; all852 Adam states are finite,
+with correct counters, shapes and nonnegative second moments. The reconstructed
+source bundle, four manifests and962 logged training rows retain the original
+recipe and LR schedule. This verifies state integrity, without inference or a
+quality claim. DINO remains at8k until its serial continuation starts.
+
 ## Frozen quarter-horizon review queue
 
 The [queued protocol and CPU checks](results/packed-isotropic-quarter-review-queue-v1.json)
