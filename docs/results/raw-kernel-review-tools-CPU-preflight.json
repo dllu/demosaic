@@ -1,0 +1,55 @@
+{
+  "receipt": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-review-tools-CPU-preflight-v2/receipt.json",
+    "sha256": "f8149baed69343e221f370d8a822cc3e7f3c029d6107295356a32d10c7f69cbe"
+  },
+  "result": {
+    "status": "completed-genuine-historical-single-arm-CPU-statistics-replay-and-pending-owner-rejection",
+    "historical_reviews": [
+      {
+        "path": "/home/dllu/proj/demosaic/docs/results/sensor-mean-v62-first1k-review.json",
+        "sha256": "bb59963ba04138f5479fe529891a5131d73e8304b56d3a1a29d5c428d4287e35"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/docs/results/long-commons-v63-v64-first4k-review.json",
+        "sha256": "0aa271bab1d4e57256394a007c3a61a57c812f55c917d0d8bc97f454b2f4b8ca"
+      }
+    ],
+    "cases": 113094,
+    "computed_comparisons": 72,
+    "directly_compared_published_comparisons": 60,
+    "witnesses": 18,
+    "compared_scalar_fields": 240,
+    "maximum_published_comparison_difference": 0.0,
+    "pending_rejections": [
+      {
+        "operator": "review_raw_kernel_results.py",
+        "actual_pending_workflow_rejected_before_output": true
+      },
+      {
+        "operator": "evaluate_raw_kernel_grid.py",
+        "actual_pending_workflow_rejected_before_output": true
+      }
+    ],
+    "frozen_script_sources": {
+      "/home/dllu/proj/demosaic/scripts/review_raw_kernel_results.py": "f18855869ddb27941cace2c85c667d63543850a27595e160a8dae8415f54852d",
+      "/home/dllu/proj/demosaic/scripts/evaluate_raw_kernel_grid.py": "89ab67171564d9ae6354c20fc7dc553a5c70d1ecdbe32b5e56aa9c71525fd439",
+      "/home/dllu/proj/demosaic/scripts/compare_long_commons_scores.py": "8a55fcf130fb6cd5cbdd6486508e8185d9bdac0402af0bbcbb884701518a8c67"
+    },
+    "CUDA_initialized": false,
+    "driver_sha256": "65ba995f2c04b13b727eef42792cad6d2de28c9b1963ff41c5a99e0bc85c7afa",
+    "scope": "Actual completed V62 four-method and V63 five-method panels.60 direct published comparisons verified;12 additional V62-minus-V60full4k comparisons have no old publication and are not claimed as a replay. No V65 result or new inference; real pending owners rejected before output. The grid uses the existing generic engine; new wrapper has not run CUDA."
+  },
+  "first_attempt": {
+    "log": {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-review-tools-CPU-preflight-v1-driver.log",
+      "sha256": "7f9b18c619a947958c91f9573e253e34cef462d29e3fef3a5b2e3d9b53f27e01"
+    },
+    "source": {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-review-tools-CPU-preflight-v1/first-attempt-source.py",
+      "sha256": "1e749cb81ff1e2603ed999bb7ff99d48de4365b6a955e07f3f715571f37d459b"
+    },
+    "reason": "V62 publication retained V60first1k, not V60full4k. Correct replay directly compares its24 matching historical comparisons plus all36 V63 comparisons;12 newly computed V62-minus-V60full4k comparisons are not claimed as old replays. Production scoring code/checks unchanged."
+  },
+  "field_count_clarification": "The original receipt calls240 field checks scalar fields: these comprise180 scalar checks and60 two-endpoint interval checks,300 scalar values total."
+}

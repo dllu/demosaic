@@ -1,5 +1,13 @@
 # Experiment evidence
 
+The [V65 completed RAW-head warmup review](raw-kernel-warmup-v65-first1k-review.md)
+finishes its original1,000-update budget without promotion or a joint stage.
+Photo27.83246dB and known/unseen CFA44.22499/41.44299 trail V60 substantially.
+Mean color bias falls but residual noise stays high. All26 native triplets, full
+101.996MP RGB16 outputs and independent state/statistical audits verify. A
+discarded analytic learnability probe motivates testing direct CFA/native-phase
+conditioning separately; it is not photographic quality evidence.
+
 The [V63/V64 completed first4k data comparison](long-commons-v63-v64-first4k-review.md)
 tests40,170 versus66,934 Commons sources under matched original20k schedules.
 Expanded gains .01495dB photo sRGB PSNR with a source interval spanning zero,

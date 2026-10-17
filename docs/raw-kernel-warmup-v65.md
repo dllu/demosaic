@@ -1,12 +1,12 @@
 # Bounded RAW-kernel head warmup
 
-V65 trains a new reconstruction head for **1,000 updates**, then stops for
-development and native-image review. It starts from V60 full4k EMA and freezes
+V65 completed its original **1,000-update** warmup and full quality review.
+The [completed report](raw-kernel-warmup-v65-first1k-review.md) finds poor denoising;
+there is no promotion or joint continuation. The launch history follows. It starts from V60 full4k EMA and freezes
 all 91 existing restoration tensors, including DINO projections/gates, while
 learning 22,032 coefficient parameters. Actual DINO stays frozen. The new head
 starts at bilinear quality: this is a new stage with fresh AdamW/EMA, rather
-than a continuation preserving parent-quality output. **No new quality result
-is established.** V43 remains the working reference.
+than a continuation preserving parent-quality output. V43 remains the working reference.
 
 [Recipe](../configs/dino-convnext-raw-kernel-warmup-b16-v65.yaml).
 [Actual launch, archived source/config/data and startup](results/raw-kernel-warmup-v65-launch.json).
@@ -41,7 +41,7 @@ Logs/plan:
 `/mnt/external/demosaic/benchmarks/raw-kernel-warmup-v65-workflow-v1/`.
 Inspect actual PID/creation and child state before acting; never duplicate it.
 
-Primary review is queued behind that exact owner's successful exit,
+Primary review completed after that exact owner's successful exit,
 PID2134771/creation1792213912.51. It checks the complete step1000 state and
 frozen parent tensors, then evaluates original known/unseen, 427-photo/procedural,
 analytic, full GFX, three cached cameras and selected CPU colors. The working
@@ -49,8 +49,8 @@ directory contains the actual archived model code, preventing provenance from
 capturing later root edits. Warm RAW-cache links avoid cold originals. Status:
 `/mnt/external/demosaic/runs/raw-kernel-warmup-v65-review-workflow-v1.json`.
 
-Independent statistics, full fixed hue grid, artifact/state checks and actual
-native views remain required. The performance report must include at least two
+Independent statistics, the full fixed hue grid, artifact/state checks and all
+26 native views have completed; see the performance report above. The performance report must include at least two
 native noisy/denoised/exact-GT photo triplets and all four DSCF3879/3880 regions,
 including foliage/fence, with accurate non-GT labels. There is no automatic joint
 stage or promotion. A later joint stage must initialize a new run from warmup

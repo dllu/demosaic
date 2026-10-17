@@ -132,23 +132,25 @@ def preview_difference(expected, actual):
     return {"changed_channel_values": changed, "maximum_8bit_code_difference": maximum}
 
 
-def audit_panels(outputs, checkpoints, *, replay_extra_models=False):
+def audit_panels(outputs, checkpoints, *, replay_extra_models=False, old_registry=OLD_REGISTRY):
     """Inspect actual selected artifacts; replay can retain extra historical models."""
     selected = {c["sha256"]: c["arm"] for c in checkpoints}
-    assert len(selected) == 2
-    old_runs = historical_runs(OLD_REGISTRY, OLD_REGISTRY_SHA)
+    methods = len(selected)
+    assert methods == len(checkpoints) and methods >= 1
+    old_runs = historical_runs(old_registry, OLD_REGISTRY_SHA)
     images, floats, files, runs, display_checks, tif_crops = [], [], [], {}, [], []
-    for panel, count in PANELS.items():
+    for panel, two_method_count in PANELS.items():
+        count = two_method_count // 2 * methods
         root = Path(outputs[panel])
         report = root / ("report.json" if panel in {"gfx", "three-camera"} else "summary.json")
         data = read(report)
         allowed = set(selected) | ({RAWNIND} if panel == "three-camera" else set())
         if not replay_extra_models:
-            assert len(data["models"]) == (3 if panel == "three-camera" else 2)
+            assert len(data["models"]) == methods + (panel == "three-camera")
             assert {m.get("sha256", m.get("weight_sha256")) for m in data["models"]} == allowed
             assert len(data["native_crops"]) == count
         candidate_labels = {m["label"] for m in data["models"] if m.get("sha256") in selected}
-        assert len(candidate_labels) == 2
+        assert len(candidate_labels) == methods
         crops = [
             c
             for c in data["native_crops"]
@@ -187,14 +189,16 @@ def audit_panels(outputs, checkpoints, *, replay_extra_models=False):
                 assert key not in float_lookup
                 float_lookup[key] = (item, value)
         if panel == "three-camera":
-            assert len(float_lookup) == 18
+            assert len(float_lookup) == 3 * (methods + 4)
             sources = {key[0] for key in float_lookup}
             assert len(sources) == 3
-            assert all(sum(key[0] == source for key in float_lookup) == 6 for source in sources)
+            assert all(
+                sum(key[0] == source for key in float_lookup) == methods + 4 for source in sources
+            )
         gfx_frames = {}
         if panel == "gfx":
             frames = [f for f in data["full_frames"] if f["model_label"] in candidate_labels]
-            assert len(frames) == 2
+            assert len(frames) == methods
             for frame in frames:
                 assert len(frame["files"]) == 2 and frame["display_exposure"] == 4.0
                 for item in frame["files"]:
@@ -302,8 +306,8 @@ def audit_panels(outputs, checkpoints, *, replay_extra_models=False):
                     "saved_V60_control": str(previous_report.parent / old["image"]),
                 }
             )
-        first, second = per_arm.values()
-        assert len(first) == len(second) == count // 2 and first == second
+        first = next(iter(per_arm.values()))
+        assert all(len(keys) == count // methods and keys == first for keys in per_arm.values())
         if panel == "gfx":
             assert {c["region"]["name"] for c in crops} == {
                 "overcast-sky",
@@ -316,8 +320,9 @@ def audit_panels(outputs, checkpoints, *, replay_extra_models=False):
             "report_sha256": sha(report),
             "selected_native_PNGs": len(crops),
         }
-    assert len(images) == 38 and len(floats) == 26 and len(files) == 4
-    assert len(display_checks) == 36 and len(tif_crops) == 8
+    assert len(images) == 19 * methods and len(floats) == 8 + 3 * (methods + 4)
+    assert len(files) == 2 * methods
+    assert len(display_checks) == 18 * methods and len(tif_crops) == 4 * methods
     return {
         "runs": runs,
         "images": images,

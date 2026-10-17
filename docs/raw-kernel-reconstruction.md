@@ -6,7 +6,8 @@ features and kernel coefficients the network predicts.** CPU tests verify this
 to floating-point precision. This is an architectural constraint, not evidence
 of better denoising. The option is default-off; V63/V64 retain their unchanged
 frozen model source and recipes. A separate [bounded head warmup](raw-kernel-warmup-v65.md)
-is now training after completed CPU/CUDA engineering checks.
+has completed its first review after CPU/CUDA engineering checks. Its poor
+noise removal prevents promotion; the numerical invariant alone is insufficient.
 
 [Executed CPU checks, frozen candidate source and actual-parent state receipts](results/raw-kernel-CPU-preflight.json).
 [Implementation](../src/demosaic/raw_kernel.py).
