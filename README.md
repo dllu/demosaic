@@ -22,6 +22,9 @@ finds small photo gains and better highly saturated colors; bright-color errors,
 fine-detail loss and paired-real tradeoffs still prevent promotion.
 The [expanded-data comparison](docs/long-commons-v63-v64-first4k-review.md)
 finds a small mixed effect at 4,000 updates; native crops still show soft detail.
+Its [completed original20k review](docs/long-commons-v63-v64-original20k-review.md)
+finds a small positive data effect (+0.026dB), with persistent texture/color
+limitations and 36–37s restoration times for102MP. Neither endpoint is promoted.
 The [completed original10k RAW-kernel review](docs/raw-kernel-phase-joint-v67-full10k-review.md)
 gains1.37dB over its2k boundary but still trails mature V60 by1.96dB;
 weak-detail and bright-color regressions prevent promotion.

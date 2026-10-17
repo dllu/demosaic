@@ -144,13 +144,15 @@ means with zero discrepancy. Scalar bootstrap/manual quantiles check540 statisti
 fields with maximum error2.22e−16. All15 focused tests and Ruff pass.
 The historical replay is a pipeline check, not new model-performance evidence.
 
-## Pending original 20k application
+## Completed original 20k application
 
 The future statistics file is
 `/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-final-review-workflow-v1/primary-saved-comparisons.json`.
-It is absent at capture. After the actual original workflow closes, apply the
-same source-sensitivity operator/auditor to that completed file and its actual
-hash. That path has not executed yet; no 20k scores are inferred from this 4k
-check. Original 427, additional418/416 comparisons, all 56 new native views and
-the full quality decision remain required. SOTA, decisive real-photo superiority
-and 100MP within 10 seconds remain unmet/unproven.
+It was absent at this historical capture. The
+[actual completed20k application](results/commons-source-sensitivity-original20k-v1.json)
+now reproduces27 original statistics exactly and independently audits81
+original/subset comparisons. The data effect is+.02598/+.02585/+.02600dB on
+427/418/416 photos, with positive source intervals. This later evidence is not
+inferred from the4k replay above. The [full20k review and all58 native views](long-commons-v63-v64-original20k-review.md)
+retain the original results and no-promotion decision. SOTA, decisive real-photo
+superiority and100MP within10s remain unmet/unproven.

@@ -1,11 +1,12 @@
-# Original matched Commons schedules: training complete, review running
+# Original matched Commons schedules: completed review
 
 V63 and V64 both completed their **original20,000-update schedules**. The actual
 trainers and training controller exited; both audited immutable checkpoints
-verify. The primary two-arm evaluation is running, and the final statistics/hue/
-artifact review remains queued. Training completion does not establish improved
-quality, convergence or a beneficial extra-data effect. V43 remains the working
-reference until the full evidence and native views are reviewed.
+verify. The primary evaluation, statistics/hue/artifact work and all58 native views are
+complete after a source-audit working-directory recovery. The
+[full performance review](long-commons-v63-v64-original20k-review.md) finds a
+small positive photo data effect, with persistent texture/color failures.
+Neither endpoint is promoted; V43 remains the working reference.
 
 [Actual training completion, checkpoint hashes and logged cross-arm checks](results/long-commons-v63-v64-original20k-training-completion.json).
 The continuation returned to the stronger RGB+DINO path after the negative V67
@@ -21,7 +22,7 @@ schedule preserves that matched comparison without adding training budget.
 | --- | --- | --- |
 | Commons train membership | 40,170 | 66,934 |
 | Whole-state resume | Step4,000 | Step4,000 |
-| Remaining original updates | 16,000 | 16,000 |
+| Resumed original updates | 16,000 | 16,000 |
 | Original endpoint | 20,000 | 20,000 |
 | Seed/LR/warmup | 49 /1e-5 /200 | Same |
 | Batch/native patch/precision | 16 /256 /BF16 | Same |
@@ -69,104 +70,63 @@ import Torch before model/training. That log is preserved. Actual fixtures use
 the existing locked repository interpreter and repository cache environment;
 no model state or training run was restarted.
 
-## Completed execution and required final review
+## Completed execution and quality review
 
-Controller PID3228279/creation1792233978.99 ran V63 first, child3228295/
-1792233981.29 at launch, then audited/froze its original20k boundary before
-starting V64, child169989/creation1792243965.62. These are historical identities;
-both training arms and the training controller have exited. Terminal status:
-`/mnt/external/demosaic/runs/long-commons-v63-v64-full20k-workflow-v1.json`.
-Plan, frozen package, fixtures, drivers and logs:
-`/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/`.
-Check actual PID/creation/status before acting; an observation timeout is not a
-training failure. No automatic retry is installed.
+The training controller ran the control then expanded arm and exited after both
+original20k boundary gates passed. The immutable checkpoint hashes are:
 
-Both final state gates passed91/91/89, complete RNG, source/data/recipe/lineage,
-all802 training rows including161 original and641 resumed, first-resumed input
-witnesses and the original LR schedule through1e-6. Direct log checks reproduce
-all1,604 logged learning rates exactly and verify every paired step/domain/LR
-field across802 rows. All375 logged paired/native input hashes match. This does
-not claim that unlogged observations were separately hashed. Both original4k
-checkpoint hashes and their original performance-review JSON remain unchanged.
+- V63: `ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5`.
+- V64: `69d08a3bacf8ea436d807512c7a5fd61cb7f119d1f869bd5eab555c2473efe6d`.
 
-Immutable20k checkpoint SHA256:
+Each gate checks91/91/89, complete RNG, exact source/data/recipe/lineage,
+normalization buffers,802 logged training rows and the original LR schedule.
+Direct log checks reproduce all1,604 LRs exactly, all802 paired step/domain/LR
+fields match, and all375 logged native/paired observation hashes match. Both
+original4k checkpoints and their original report remain unchanged. This does
+not claim separately hashed unlogged observations.
 
-- V63 control: `ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5`.
-- V64 expanded: `69d08a3bacf8ea436d807512c7a5fd61cb7f119d1f869bd5eab555c2473efe6d`.
+The [interim control CPU diagnosis](long-commons-v63-control-original20k-CPU-review.md)
+remains preserved. The completed primary review subsequently evaluates known360,
+unseen450, full42762,020 and analytic1,344 cases, two full GFX outputs,12 other
+camera crops and64 selected CPU-color predictions with independent checks.
+It used warm local RAW caches and the frozen producer package; no cold original
+reads or active membership changes occurred.
 
-An
-[interim CPU native comparison against control4k](long-commons-v63-control-original20k-CPU-review.md)
-executes eight fixed observations at both endpoints, with independent array
-checks and sixteen actual native views. The fabric photograph regresses,
-building improves slightly, and two selected colors improve; GFX detail stays
-soft. This does not promote the control. The full two-arm quality review remains
-pending; completed training is not a substitute for that comparison.
+The [final-review operator](../scripts/review_original_long_schedules.py) preserves
+108 comparisons including24 own4k-progress comparisons,27 classical witnesses,
+1,000 paired source-bootstrap draws/seed42, shared observations and the original
+numerical bounds. Its hue stage performs2,352 new predictions and reuses2,352
+verified V60/nonlocal arrays; independent checks rebuild28,224 case fields and
+864 group scalars. The final state/artifact audit covers38 primary PNGs,26 F32
+arrays and four RGB16 files. All1,483 frozen file guards still pass.
 
-Primary-review owner PID3231021/creation1792234172.79 observed the exact
-training controller finish and exit, passed its gate, and began evaluation. Its status is
-`/mnt/external/demosaic/runs/long-commons-v63-v64-full20k-review-workflow-v1.json`.
-At launch the actual running-controller gate rejected before output; that
-historical check is preserved in the launch receipt. The review separately
-audits both20k states and evaluates only the two new models:
-known360/unseen450/full42762,020 cases, analytic1,344 cases, two full GFX outputs
-with eight native crops, twelve other-camera crops, and64 CPU-color predictions
-with an independent audit. Immutable previously executed panel tools are reused.
+The final workflow stopped at the supplementary GFX source check because that
+auditor resolved relative paths from the current checkout while the producer
+ran in its frozen checkout. The original failed status and log are preserved.
+Running the unchanged auditor from the producer directory verifies all37 source
+hashes and four supplementary triplets, without inference, altered outputs or
+relaxed bounds. The separate
+[completed review receipt](results/long-commons-v63-v64-original20k-review.json)
+records this recovery; it does not overwrite the original controller's failure.
 
-The [final statistics/hue/artifact follower is now queued](results/long-commons-v63-v64-full20k-final-review-queue.json)
-under PID3269508/creation1792234878.14. It waits for the exact live primary owner
-to succeed and exit, with no child or output at launch. Status:
-`/mnt/external/demosaic/runs/long-commons-v63-v64-full20k-final-review-workflow-v1.json`.
-Calling its gate against that actual pending primary rejects before inference.
-Its frozen operators and1,483 file guards are archived in the corresponding
-benchmark directory. Verify actual PID/creation/status before acting.
+Actual native views total58:38 primary +12 hue +4 supplementary +4 selected
+CPU-color previews. This corrects earlier planning prose estimating56. The
+[complete gallery](long-commons-v63-v64-original20k-native-gallery.md) preserves
+all original pixels; the performance report includes two exact-target photo
+triplets per endpoint and standing GFX foliage/fence crops. ISO100/AHD and
+RawNIND references remain accurately labeled as qualitative, never exact GT.
 
-The [final-review operator](../scripts/review_original_long_schedules.py) retains
-the previously executed measurement and artifact kernels. It adds24 comparisons
-against each arm's own4k checkpoint to the existing84 comparisons versus the
-matched arm/V60/V58/V43:108 comparisons and27 classical witnesses over62,830
-primary cases. It preserves1,000 paired source bootstrap draws/seed42, metadata/
-observation identity and the original numerical bounds. Progress along an
-original trajectory does not isolate architecture/seed effects or prove convergence.
+The [completed content audit](commons-content-overlap.md) froze418/416-source
+sensitivities before the20k panels. Their
+[actual application](results/commons-source-sensitivity-original20k-v1.json)
+reproduces27 full-photo statistics exactly and independently audits81 total
+comparisons. Original/subset V64-minus-V63 sRGB gains are+.02598/+.02585/+.02600dB,
+with positive source intervals. These are known-source-family sensitivities,
+not certified scene independence or evidence about training-seed uncertainty.
 
-CPU execution on the actual completed4k panels reproduces all84 published
-comparisons and coverage/arithmetic exactly. Twenty-four self-progress
-comparisons and their intervals are exactly zero. At launch the actual pending
-20k owners were rejected. The hue selector independently verifies all2,352 retained V60/
-reference array hashes and correctly identifies the genuine4k arms as absent
-from that baseline grid. No inference or fabricated20k data is used in these
-checks. The future completed20k path remains unexecuted.
-
-After primary completion, the follower measures only the2,352 new hue predictions
-and separately reuses2,352 audited V60/reference arrays with unchanged source/
-observations/precision. Independent checks rebuild28,224 fields and864 group
-scalars. It then checks both original20k states and38 native PNGs/26 F32 arrays/
-four full RGB16 files. Four supplementary CPU neon/platform predictions and
-their independent audit follow. All56 new native views and an explicit quality
-decision remain manual; none is replaced by an integrity receipt.
-
-The isolated work directory now links its relative GFX and three-camera paths
-to existing warm repository caches. Both RAF hashes and all three other camera
-RAW hashes verify locally. No originals were recopied or read, and the frozen
-selection/config/model source did not change.
-
-Final actual native views and an explicit quality
-decision remain required. Reports must include at least two unresized noisy/
-denoised/exact-GT photo triplets per improved model and accurately labeled GFX
-sky/building/foliage/fence references. The independent ISO100 exposure is not GT.
-Protected-final model scores remain unused. V43 remains the working reference;
-SOTA, broad real-photo superiority and the10-second target remain unmet/unproven.
-
-The [completed Commons content audit](commons-content-overlap.md) freezes
-additional418/416-source sensitivity subsets before either20k full427 panel
-runs. After the original queued panels/statistics close, derive those additional
-photo comparisons from their actual saved case logs and fixed source IDs.
-Keep the original427 results, paired protocol, all56 native views and quality
-decision. These are known-series/site sensitivities, not certified scene-clean
-subsets. No queued operator, active membership or original schedule changes.
-
-The [source-sensitivity operator and independent auditor](commons-source-sensitivity-first4k.md)
-now execute on the genuine completed4k logs:21 original comparisons reproduce
-exactly and all63 original/subset comparisons pass independent arithmetic.
-The actual20k path remains unexecuted. Once
-`primary-saved-comparisons.json` closes under the final-review workflow, run the
-same two operators against that file's actual hash and the frozen cohort hash.
+The no-promotion decision follows both the measured means and actual native
+views. Weak dark texture, coarse saturated colors, soft real detail and36–37s
+restoration times for102MP leave the full SOTA/real-quality/10s objective unmet
+or unproven. The next controlled quality question is the separately prepared
+[normalization augmentation](normalization-augmentation.md), which still lacks
+trained-quality evidence.

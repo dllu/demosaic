@@ -3,19 +3,19 @@
 The objective is the complete project in `PROMPT.md`, including trained quality,
 not just software that executes. This checklist records the evidence required.
 
-Latest: the [original V67 joint10000 review](raw-kernel-phase-joint-v67-full10k-review.md)
-is complete and not promoted. The stronger matched RGB+DINO V63/V64 models are
-[finishing their original20000 schedules](long-commons-v63-v64-full20k.md) after
-genuine full-state resume checks. The control has completed20k; its
-[interim eight-context CPU comparison](long-commons-v63-control-original20k-CPU-review.md)
-has mixed photo/color progress and persistent soft detail. Expanded20k and
-the complete two-arm quality review remain pending. The separate
+Latest: the [original V63/V64 full20000 review](long-commons-v63-v64-original20k-review.md)
+is complete after genuine full-state continuation and a preserved source-audit
+working-directory recovery. Own4k-to20k photo gains are.165/.176dB; the20k
+expanded-data effect is+.026dB with a positive source interval. All58 native
+views still show texture/color limitations; neither endpoint is promoted.
+Four verified102MP RGB16 outputs take36–37s to restore, missing10s. The separate
 [85,048-file matching4×/8× parent corpus](commons-incoming-v5.md) is cache-audited.
 The [completed content audit](commons-content-overlap.md) finds related capture
 series across development/training. Separate future manifests retain84,867
 training files after181 reviewed-series/site exclusions, with every original
 nontraining line preserved. Additional418/416-source sensitivity cohorts are
-frozen before the full20k panels; complete scene independence remains unproven.
+frozen before the full20k panels and now independently applied to81 comparisons;
+complete scene independence remains unproven.
 SOTA, decisive real-photo superiority and the10-second target remain unmet/unproven.
 
 The [normalization-coordinate diagnosis and opt-in training augmentation](normalization-augmentation.md)
