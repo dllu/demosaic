@@ -276,6 +276,12 @@ not establish physical calibration: residual texture, correlated noise and
 clipping can bias a single-image estimate. Dedicated flat/dark captures are
 stronger evidence. Shot/read priors alone do not establish final quality.
 
+The [synthetic fit-support check](noise-calibration-fit-support.md) evaluates240
+known-noise cases: all192 accepted fits stay within1dB at tested in-range levels,
+but55 exceed1dB somewhere across a wider probe range, with worst errors at.001.
+The internal `reliable` flag does not validate deep-shadow extrapolation. Current
+estimation, inference conditioning and frozen benchmark inputs are unchanged.
+
 Relevant primary research: [Foi et al., 2008](https://pubmed.ncbi.nlm.nih.gov/18784024/)
 on single-image Poisson-Gaussian fitting, and a [2021 noise-parameter estimation study](https://pmc.ncbi.nlm.nih.gov/articles/PMC8705815/)
 on weak-texture selection. This implementation is a separately written

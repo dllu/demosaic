@@ -1,0 +1,1246 @@
+{
+  "status": "completed-synthetic-noise-fit-stress-and-retained-GFX-support-description",
+  "restoration_quality_evidence": false,
+  "production_changed": false,
+  "synthetic_result": {
+    "path": "/mnt/external/demosaic/benchmarks/noise-calibration-synthetic-stress-v1/result.json",
+    "sha256": "94a3b40dee35b3667bb130e5ed6d49204baa2cae17f7030b037f9181febf9e0e",
+    "result": {
+      "status": "completed-current-noise-estimator-synthetic-stress-awaiting-independent-summary",
+      "plan": "/mnt/external/demosaic/benchmarks/noise-calibration-synthetic-stress-v1/plan.json",
+      "plan_sha256": "2d88d2725e9bbf40bedc7d9688eed716c06d50202e4095ca1823cb0863aefd90",
+      "cases": "/mnt/external/demosaic/benchmarks/noise-calibration-synthetic-stress-v1/cases.jsonl",
+      "cases_sha256": "e51d0a8ab1d0a9c0a2361e120bf0e9221a2ddcfc42358a1bfb4c1b7510e58f2c",
+      "case_count": 240,
+      "clean_arrays": 40,
+      "noisy_arrays": 240,
+      "CUDA_initialized": false,
+      "scope": "Synthetic stress of current estimator, no method changes. Six known PG profiles x five scene conditions x eight draws. Reliable is an internal fit flag, not proof of physical calibration. Compare variance functions, not poorly identifiable individual read coefficients. Full low-intensity probe range includes extrapolation outside accepted fitting intensities. No camera calibration, learned restoration, real quality score or production conditioning change."
+    }
+  },
+  "synthetic_plan": {
+    "path": "/mnt/external/demosaic/benchmarks/noise-calibration-synthetic-stress-v1/plan.json",
+    "sha256": "2d88d2725e9bbf40bedc7d9688eed716c06d50202e4095ca1823cb0863aefd90",
+    "result": {
+      "profiles": [
+        {
+          "name": "iso100-prior",
+          "shot": 2e-05,
+          "read": 1.6e-09
+        },
+        {
+          "name": "iso1600-prior",
+          "shot": 0.00032,
+          "read": 4.096e-07
+        },
+        {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        {
+          "name": "read-dominated",
+          "shot": 1e-05,
+          "read": 2.5e-05
+        },
+        {
+          "name": "mixed",
+          "shot": 0.0008,
+          "read": 1e-05
+        },
+        {
+          "name": "shot-dominated",
+          "shot": 0.00128,
+          "read": 1e-09
+        }
+      ],
+      "scenes": [
+        "broad-flat-fields",
+        "affine-shading",
+        "sparse-fine-texture",
+        "clipped-and-dark",
+        "narrow-span-gray"
+      ],
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "cases": 240,
+      "shape": [
+        1024,
+        1024
+      ],
+      "pattern": "RGGB",
+      "variance_probe_levels": [
+        0.001,
+        0.005,
+        0.02,
+        0.08,
+        0.2,
+        0.6
+      ],
+      "ADC_bits": 16,
+      "ADC_black": 0.03,
+      "estimate_patch": 32,
+      "estimate_max_patches": 4096,
+      "estimate_bootstrap_seed": 42,
+      "flag_threshold_absolute_variance_dB": 1.0,
+      "source_files": {
+        "src/demosaic/paired_admission.py": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825",
+        "src/demosaic/prior.py": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a",
+        "src/demosaic/metrics.py": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31",
+        "src/demosaic/inference.py": "911e71e8dcbeb1872ed591bc5234ed2b79bae063a859b4704516537d94a1df0b",
+        "src/demosaic/train.py": "005e262dd7390c12177b2e1b32ed7c1b041aa1d616a3c5b0cbaca8de4c0182c8",
+        "src/demosaic/dino_adaptation.py": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861",
+        "src/demosaic/paired_training.py": "71a2481213bba174bd3d6b3de9ae9b89f88333635810e15d0958352d9d8d053d",
+        "src/demosaic/reference.py": "54ed094d58e245a56993ea3ce3ef9e21d2164e902d41d03bba9132bacd22891f",
+        "src/demosaic/prepare.py": "e4c0733bb260c289b3ce8aaf5f393abc5919d8d81cdcf462b70032d790429712",
+        "src/demosaic/realdata.py": "ed24db2b066531281a196e6fa074130cb0ee78a640eae5ccaaace234f5ad5421",
+        "src/demosaic/cfa.py": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252",
+        "src/demosaic/paired.py": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d",
+        "src/demosaic/audit.py": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d",
+        "src/demosaic/losses.py": "548b1481a035ad937d4a046754a74e70684864a9842296765c62079a002e5120",
+        "src/demosaic/gaussian.py": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72",
+        "src/demosaic/real_suite.py": "69d3d403d36b1230e35083cc55e2c1a485f82cd5058f6be83fb3d5c0c18a6825",
+        "src/demosaic/raw_clean.py": "a143ce351ac4e1b2425d4d561000d3e8934477fe9172c88f90ce76d9b32a7a6c",
+        "src/demosaic/raw_admission.py": "1948afbbf05129190273ab77466f26d9d27dc942716beaab16f077c8c3330803",
+        "src/demosaic/vst.py": "355124a374177f1c08271834149c5979ab3477fdf255c60aa7cee0d47792a76b",
+        "src/demosaic/io.py": "0a1599ffe7f6d935e92fc71e6b086430c6f82678a74952c3b8f31155a0bea83b",
+        "src/demosaic/data.py": "3c8855fe9d6e24d5368f356528ed217a544f185d84f58356eebfb2048cd92197",
+        "src/demosaic/__init__.py": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d",
+        "src/demosaic/calibration.py": "e86f4c602a6cd7fd855d0bcfeb790cf17ed87611f19d97926f9db174909b2d26",
+        "src/demosaic/noise.py": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce",
+        "src/demosaic/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+        "src/demosaic/precision.py": "9aa850fb5ee0e9abc3e9adc4847ce3518c1acb37c93f6bc54ff9206bb0c94c3a",
+        "src/demosaic/cli.py": "a34d98b1eab4479f67ba5a51b6c8a428db4d8ccf5ee097cd1369bd0cd1ead542",
+        "src/demosaic/reporting.py": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d",
+        "src/demosaic/model.py": "dfc11c242e168559668433fd1d1d919b29820c1d0fc3a55c706694f4ff4b4f19",
+        "src/demosaic/color.py": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+        "src/demosaic/dino_pyramid.py": "246944874671ceb4449b0487fcb347a00f8b82d713d5b4c9fee5a7c8a68aa95f",
+        "src/demosaic/textures.py": "b4bc304a50de272cf7fcba272e67b828c163466ffc23ea3337a6a66f076dc664",
+        "src/demosaic/nonlocal_reference.py": "7e4a00e9d90a61b772da9c1a7414bf499f84b9c9bb0239fd250fb8263dfb3f88",
+        "src/demosaic/safety.py": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7",
+        "src/demosaic/raw_kernel.py": "32ba3747479f0e328fe87a84fb227dd456ae0d08b242a4d1411756dfbf9fb498",
+        "src/demosaic/pretrained_rgb.py": "64e149dd202f7473bddc9031ef5af06e9cfa94ea0c192ae6a17680350798a846",
+        "src/demosaic/registration.py": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202",
+        "src/demosaic/suite.py": "1a094262e1772f5df8a54cb176c2f3da189d78f48ead3f8002f24e84802059a4"
+      },
+      "driver_sha256": "6fb2b11542525462ded9f261b181dd816ba1983f0c0fbec1ecd3d0166fabe37e",
+      "scope": "Synthetic stress of current estimator, no method changes. Six known PG profiles x five scene conditions x eight draws. Reliable is an internal fit flag, not proof of physical calibration. Compare variance functions, not poorly identifiable individual read coefficients. Full low-intensity probe range includes extrapolation outside accepted fitting intensities. No camera calibration, learned restoration, real quality score or production conditioning change."
+    }
+  },
+  "independent_audit": {
+    "path": "/mnt/external/demosaic/benchmarks/noise-calibration-synthetic-stress-v1/independent-audit/audit.json",
+    "sha256": "187db9ae402952085a8883d7e0275ffc2c850074c3914b8ec5abb2852f6923d9",
+    "arrays_checked": 280,
+    "independent_metric_fields": 1632,
+    "maximum_arithmetic_difference": 8.737455203799982e-14,
+    "groups": [
+      {
+        "scene": "broad-flat-fields",
+        "profile": "iso100-prior",
+        "cases": 8,
+        "reliable": 8,
+        "reasons": {
+          "fit": 8
+        },
+        "full_probe": {
+          "cases": 8,
+          "median_worst_absolute_dB": 1.4045047838663858,
+          "maximum_absolute_dB": 7.042466427120617,
+          "cases_above_1dB": 5
+        },
+        "within_bin_means": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.06403344679524706,
+          "maximum_absolute_dB": 0.12690118464118463,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "broad-flat-fields",
+        "profile": "iso1600-prior",
+        "cases": 8,
+        "reliable": 8,
+        "reasons": {
+          "fit": 8
+        },
+        "full_probe": {
+          "cases": 8,
+          "median_worst_absolute_dB": 2.096092160395441,
+          "maximum_absolute_dB": 3.5940562659886046,
+          "cases_above_1dB": 6
+        },
+        "within_bin_means": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.07514391653924457,
+          "maximum_absolute_dB": 0.2883500296953051,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "broad-flat-fields",
+        "profile": "iso12800-prior",
+        "cases": 8,
+        "reliable": 8,
+        "reasons": {
+          "fit": 8
+        },
+        "full_probe": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.5247724184287342,
+          "maximum_absolute_dB": 1.027271430598303,
+          "cases_above_1dB": 1
+        },
+        "within_bin_means": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.058397282878122805,
+          "maximum_absolute_dB": 0.09220554199025069,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "broad-flat-fields",
+        "profile": "read-dominated",
+        "cases": 8,
+        "reliable": 8,
+        "reasons": {
+          "fit": 8
+        },
+        "full_probe": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.04635622732687239,
+          "maximum_absolute_dB": 0.07128667136924956,
+          "cases_above_1dB": 0
+        },
+        "within_bin_means": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.0457154751678534,
+          "maximum_absolute_dB": 0.07128667136924956,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "broad-flat-fields",
+        "profile": "mixed",
+        "cases": 8,
+        "reliable": 8,
+        "reasons": {
+          "fit": 8
+        },
+        "full_probe": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.5200778932966368,
+          "maximum_absolute_dB": 1.3669449941587473,
+          "cases_above_1dB": 1
+        },
+        "within_bin_means": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.11048540132978214,
+          "maximum_absolute_dB": 0.1514475297886574,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "broad-flat-fields",
+        "profile": "shot-dominated",
+        "cases": 8,
+        "reliable": 8,
+        "reasons": {
+          "fit": 8
+        },
+        "full_probe": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.5090087652018772,
+          "maximum_absolute_dB": 6.366844701089236,
+          "cases_above_1dB": 3
+        },
+        "within_bin_means": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.07763087631879137,
+          "maximum_absolute_dB": 0.1685172746509803,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "affine-shading",
+        "profile": "iso100-prior",
+        "cases": 8,
+        "reliable": 8,
+        "reasons": {
+          "fit": 8
+        },
+        "full_probe": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.63310794330471,
+          "maximum_absolute_dB": 2.9903808240917136,
+          "cases_above_1dB": 2
+        },
+        "within_bin_means": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.059887855696620265,
+          "maximum_absolute_dB": 0.1705432854556349,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "affine-shading",
+        "profile": "iso1600-prior",
+        "cases": 8,
+        "reliable": 8,
+        "reasons": {
+          "fit": 8
+        },
+        "full_probe": {
+          "cases": 8,
+          "median_worst_absolute_dB": 1.351734241780942,
+          "maximum_absolute_dB": 3.6054465822703423,
+          "cases_above_1dB": 4
+        },
+        "within_bin_means": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.07162490663086385,
+          "maximum_absolute_dB": 0.14007225951641866,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "affine-shading",
+        "profile": "iso12800-prior",
+        "cases": 8,
+        "reliable": 8,
+        "reasons": {
+          "fit": 8
+        },
+        "full_probe": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.19902266147066933,
+          "maximum_absolute_dB": 0.6300329861822079,
+          "cases_above_1dB": 0
+        },
+        "within_bin_means": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.0676404939274104,
+          "maximum_absolute_dB": 0.09024438928370859,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "affine-shading",
+        "profile": "read-dominated",
+        "cases": 8,
+        "reliable": 8,
+        "reasons": {
+          "fit": 8
+        },
+        "full_probe": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.05460753901036855,
+          "maximum_absolute_dB": 0.08888134072984526,
+          "cases_above_1dB": 0
+        },
+        "within_bin_means": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.051593925518026426,
+          "maximum_absolute_dB": 0.07664734841063425,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "affine-shading",
+        "profile": "mixed",
+        "cases": 8,
+        "reliable": 8,
+        "reasons": {
+          "fit": 8
+        },
+        "full_probe": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.27286243184496833,
+          "maximum_absolute_dB": 1.3162713482723307,
+          "cases_above_1dB": 2
+        },
+        "within_bin_means": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.0698675031883228,
+          "maximum_absolute_dB": 0.1607744713429732,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "affine-shading",
+        "profile": "shot-dominated",
+        "cases": 8,
+        "reliable": 8,
+        "reasons": {
+          "fit": 8
+        },
+        "full_probe": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.08927524882901788,
+          "maximum_absolute_dB": 5.733788946821294,
+          "cases_above_1dB": 2
+        },
+        "within_bin_means": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.06860310333691495,
+          "maximum_absolute_dB": 0.09714240338430383,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "sparse-fine-texture",
+        "profile": "iso100-prior",
+        "cases": 8,
+        "reliable": 8,
+        "reasons": {
+          "fit": 8
+        },
+        "full_probe": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.38615219002571677,
+          "maximum_absolute_dB": 4.132125919716029,
+          "cases_above_1dB": 3
+        },
+        "within_bin_means": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.04858864650731236,
+          "maximum_absolute_dB": 0.08452241362758359,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "sparse-fine-texture",
+        "profile": "iso1600-prior",
+        "cases": 8,
+        "reliable": 8,
+        "reasons": {
+          "fit": 8
+        },
+        "full_probe": {
+          "cases": 8,
+          "median_worst_absolute_dB": 3.221941856451039,
+          "maximum_absolute_dB": 3.7265593220546482,
+          "cases_above_1dB": 5
+        },
+        "within_bin_means": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.21697666330846882,
+          "maximum_absolute_dB": 0.3388127947592981,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "sparse-fine-texture",
+        "profile": "iso12800-prior",
+        "cases": 8,
+        "reliable": 8,
+        "reasons": {
+          "fit": 8
+        },
+        "full_probe": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.8862554074399496,
+          "maximum_absolute_dB": 1.7239030832850042,
+          "cases_above_1dB": 4
+        },
+        "within_bin_means": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.2176823663282335,
+          "maximum_absolute_dB": 0.25782762332445597,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "sparse-fine-texture",
+        "profile": "read-dominated",
+        "cases": 8,
+        "reliable": 8,
+        "reasons": {
+          "fit": 8
+        },
+        "full_probe": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.08163311176689607,
+          "maximum_absolute_dB": 0.17526351920233368,
+          "cases_above_1dB": 0
+        },
+        "within_bin_means": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.07460546422080976,
+          "maximum_absolute_dB": 0.1449468079272332,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "sparse-fine-texture",
+        "profile": "mixed",
+        "cases": 8,
+        "reliable": 8,
+        "reasons": {
+          "fit": 8
+        },
+        "full_probe": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.5484380771817172,
+          "maximum_absolute_dB": 2.4206929122678296,
+          "cases_above_1dB": 2
+        },
+        "within_bin_means": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.26827393448902037,
+          "maximum_absolute_dB": 0.4404950919183843,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "sparse-fine-texture",
+        "profile": "shot-dominated",
+        "cases": 8,
+        "reliable": 8,
+        "reasons": {
+          "fit": 8
+        },
+        "full_probe": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.22300582328717708,
+          "maximum_absolute_dB": 4.232043376829663,
+          "cases_above_1dB": 1
+        },
+        "within_bin_means": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.22300582328717708,
+          "maximum_absolute_dB": 0.33796246694345666,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "clipped-and-dark",
+        "profile": "iso100-prior",
+        "cases": 8,
+        "reliable": 8,
+        "reasons": {
+          "fit": 8
+        },
+        "full_probe": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.4133915337023951,
+          "maximum_absolute_dB": 3.107577448540557,
+          "cases_above_1dB": 2
+        },
+        "within_bin_means": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.07093283907959477,
+          "maximum_absolute_dB": 0.189556350190821,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "clipped-and-dark",
+        "profile": "iso1600-prior",
+        "cases": 8,
+        "reliable": 8,
+        "reasons": {
+          "fit": 8
+        },
+        "full_probe": {
+          "cases": 8,
+          "median_worst_absolute_dB": 1.361043075258022,
+          "maximum_absolute_dB": 3.6327120677994937,
+          "cases_above_1dB": 5
+        },
+        "within_bin_means": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.07360850693595607,
+          "maximum_absolute_dB": 0.14719422733797835,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "clipped-and-dark",
+        "profile": "iso12800-prior",
+        "cases": 8,
+        "reliable": 8,
+        "reasons": {
+          "fit": 8
+        },
+        "full_probe": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.535711767314023,
+          "maximum_absolute_dB": 1.5845840157467728,
+          "cases_above_1dB": 1
+        },
+        "within_bin_means": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.0839785661249394,
+          "maximum_absolute_dB": 0.14112973823462302,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "clipped-and-dark",
+        "profile": "read-dominated",
+        "cases": 8,
+        "reliable": 8,
+        "reasons": {
+          "fit": 8
+        },
+        "full_probe": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.04516066688678573,
+          "maximum_absolute_dB": 0.07689030596567797,
+          "cases_above_1dB": 0
+        },
+        "within_bin_means": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.0433462944089059,
+          "maximum_absolute_dB": 0.07689030596567797,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "clipped-and-dark",
+        "profile": "mixed",
+        "cases": 8,
+        "reliable": 8,
+        "reasons": {
+          "fit": 8
+        },
+        "full_probe": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.3589494143607026,
+          "maximum_absolute_dB": 2.6662783706056326,
+          "cases_above_1dB": 2
+        },
+        "within_bin_means": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.06388530833448987,
+          "maximum_absolute_dB": 0.24377429736642486,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "clipped-and-dark",
+        "profile": "shot-dominated",
+        "cases": 8,
+        "reliable": 8,
+        "reasons": {
+          "fit": 8
+        },
+        "full_probe": {
+          "cases": 8,
+          "median_worst_absolute_dB": 1.0953691255791964,
+          "maximum_absolute_dB": 5.9023000351481505,
+          "cases_above_1dB": 4
+        },
+        "within_bin_means": {
+          "cases": 8,
+          "median_worst_absolute_dB": 0.056976862753466584,
+          "maximum_absolute_dB": 0.3251303014735525,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "narrow-span-gray",
+        "profile": "iso100-prior",
+        "cases": 8,
+        "reliable": 0,
+        "reasons": {
+          "insufficient_intensity_span": 8
+        },
+        "full_probe": {
+          "cases": 0,
+          "median_worst_absolute_dB": null,
+          "maximum_absolute_dB": null,
+          "cases_above_1dB": 0
+        },
+        "within_bin_means": {
+          "cases": 0,
+          "median_worst_absolute_dB": null,
+          "maximum_absolute_dB": null,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "narrow-span-gray",
+        "profile": "iso1600-prior",
+        "cases": 8,
+        "reliable": 0,
+        "reasons": {
+          "insufficient_intensity_span": 8
+        },
+        "full_probe": {
+          "cases": 0,
+          "median_worst_absolute_dB": null,
+          "maximum_absolute_dB": null,
+          "cases_above_1dB": 0
+        },
+        "within_bin_means": {
+          "cases": 0,
+          "median_worst_absolute_dB": null,
+          "maximum_absolute_dB": null,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "narrow-span-gray",
+        "profile": "iso12800-prior",
+        "cases": 8,
+        "reliable": 0,
+        "reasons": {
+          "insufficient_intensity_span": 8
+        },
+        "full_probe": {
+          "cases": 0,
+          "median_worst_absolute_dB": null,
+          "maximum_absolute_dB": null,
+          "cases_above_1dB": 0
+        },
+        "within_bin_means": {
+          "cases": 0,
+          "median_worst_absolute_dB": null,
+          "maximum_absolute_dB": null,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "narrow-span-gray",
+        "profile": "read-dominated",
+        "cases": 8,
+        "reliable": 0,
+        "reasons": {
+          "insufficient_intensity_span": 8
+        },
+        "full_probe": {
+          "cases": 0,
+          "median_worst_absolute_dB": null,
+          "maximum_absolute_dB": null,
+          "cases_above_1dB": 0
+        },
+        "within_bin_means": {
+          "cases": 0,
+          "median_worst_absolute_dB": null,
+          "maximum_absolute_dB": null,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "narrow-span-gray",
+        "profile": "mixed",
+        "cases": 8,
+        "reliable": 0,
+        "reasons": {
+          "insufficient_intensity_span": 8
+        },
+        "full_probe": {
+          "cases": 0,
+          "median_worst_absolute_dB": null,
+          "maximum_absolute_dB": null,
+          "cases_above_1dB": 0
+        },
+        "within_bin_means": {
+          "cases": 0,
+          "median_worst_absolute_dB": null,
+          "maximum_absolute_dB": null,
+          "cases_above_1dB": 0
+        }
+      },
+      {
+        "scene": "narrow-span-gray",
+        "profile": "shot-dominated",
+        "cases": 8,
+        "reliable": 0,
+        "reasons": {
+          "insufficient_intensity_span": 8
+        },
+        "full_probe": {
+          "cases": 0,
+          "median_worst_absolute_dB": null,
+          "maximum_absolute_dB": null,
+          "cases_above_1dB": 0
+        },
+        "within_bin_means": {
+          "cases": 0,
+          "median_worst_absolute_dB": null,
+          "maximum_absolute_dB": null,
+          "cases_above_1dB": 0
+        }
+      }
+    ],
+    "reliable_cases": 192,
+    "reliable_above1dB_full_probe": 55,
+    "reliable_above1dB_within_bin_means": 0,
+    "maximum_in_span_dB": 0.4404950919183843,
+    "worst_full_probe_case": {
+      "scene": "broad-flat-fields",
+      "seed": 5,
+      "profile": "iso100-prior",
+      "reliable": true,
+      "reason": "fit",
+      "maximum_absolute_variance_dB_full_probe": 7.042466427120617,
+      "maximum_absolute_variance_dB_within_bin_means": 0.11094572579030332,
+      "accepted_bin_mean_range": [
+        0.03364301472902298,
+        0.7937597036361694
+      ],
+      "signed_variance_dB": [
+        7.042466427120617,
+        2.6428076992020415,
+        0.7466627408270727,
+        0.09714082800083176,
+        -0.04581196388837251,
+        -0.11094572579030332
+      ]
+    },
+    "scope": "All saved synthetic arrays and scalar arithmetic checked independently, moments in Torch64 and variance ratios with Python math. No rerun/reproduction of estimator selection or bootstrap. Full probe includes extrapolation; within-bin checks use accepted mean range, not a guaranteed calibration interval. Eight draws/group and artificial fields do not establish real-camera calibration, general uncertainty coverage or restored quality."
+  },
+  "retained_GFX_support": {
+    "path": "/mnt/external/demosaic/benchmarks/noise-calibration-synthetic-stress-v1/retained-GFX-fit-support.json",
+    "sha256": "e933ff4cd813e4aba30565965f856374096ba80391d62986b96712caf73bd9af",
+    "report": "/mnt/external/demosaic/evaluation/raw-kernel-phase-joint-v67-first2k-gfx-v1/report.json",
+    "report_sha256": "73ab68ac8d0f085c3ee9ea2bb2edb2ff60a9eac82362e2406412b13ce756b784",
+    "accepted_bin_mean_range": [
+      0.0073381210677325726,
+      0.08589096739888191
+    ],
+    "estimate": {
+      "shot": 0.0014635775921166604,
+      "read": 1.0715704128646712e-06,
+      "reliable": true,
+      "reason": "fit",
+      "candidate_patches": 4096,
+      "accepted_patches": 645,
+      "intensity_span": 0.058098717592656515,
+      "reference_intensity": 0.013063262216746807,
+      "reference_variance": 2.0586847313097678e-05,
+      "shot_interval": [
+        0.0013873977272578202,
+        0.0015542473214514446
+      ],
+      "read_interval": [
+        1.8621814355963164e-08,
+        2.19451244875327e-06
+      ],
+      "bins": [
+        {
+          "mean": 0.0073381210677325726,
+          "variance": 1.0893240869336296e-05,
+          "patches": 41
+        },
+        {
+          "mean": 0.008090663701295853,
+          "variance": 1.3062794096185826e-05,
+          "patches": 41
+        },
+        {
+          "mean": 0.008793020620942116,
+          "variance": 1.3721637515118346e-05,
+          "patches": 41
+        },
+        {
+          "mean": 0.009301926009356976,
+          "variance": 1.4725441360496916e-05,
+          "patches": 41
+        },
+        {
+          "mean": 0.009990067221224308,
+          "variance": 1.5952460671542212e-05,
+          "patches": 41
+        },
+        {
+          "mean": 0.010706164874136448,
+          "variance": 1.6955834325926844e-05,
+          "patches": 40
+        },
+        {
+          "mean": 0.011773624923080206,
+          "variance": 1.8662036382011138e-05,
+          "patches": 40
+        },
+        {
+          "mean": 0.012733590323477983,
+          "variance": 2.0284909624024294e-05,
+          "patches": 40
+        },
+        {
+          "mean": 0.013618120923638344,
+          "variance": 2.1752697648480535e-05,
+          "patches": 40
+        },
+        {
+          "mean": 0.01464441604912281,
+          "variance": 2.326590310985921e-05,
+          "patches": 40
+        },
+        {
+          "mean": 0.0159450089558959,
+          "variance": 2.489935650373809e-05,
+          "patches": 40
+        },
+        {
+          "mean": 0.01751871034502983,
+          "variance": 2.7330595003149938e-05,
+          "patches": 40
+        },
+        {
+          "mean": 0.019594436511397362,
+          "variance": 2.9680180887226015e-05,
+          "patches": 40
+        },
+        {
+          "mean": 0.0239607160910964,
+          "variance": 3.561083212844096e-05,
+          "patches": 40
+        },
+        {
+          "mean": 0.03781210631132126,
+          "variance": 5.6878670875448734e-05,
+          "patches": 40
+        },
+        {
+          "mean": 0.08589096739888191,
+          "variance": 0.00011813548917416483,
+          "patches": 40
+        }
+      ]
+    },
+    "conditioning": {
+      "shot": 0.0014635775921166604,
+      "read": 1.0715704128646712e-06,
+      "source": "input Haar fit"
+    },
+    "regions": [
+      {
+        "region": {
+          "name": "overcast-sky",
+          "noisy_xy": [
+            5800,
+            1400
+          ],
+          "reference_xy": [
+            5800,
+            1400
+          ],
+          "size": 160,
+          "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+          "context_green_correlation": null
+        },
+        "context_xywh": [
+          5624,
+          1224,
+          512,
+          512
+        ],
+        "input": "/mnt/external/demosaic/evaluation/raw-kernel-phase-joint-v67-first2k-gfx-v1/overcast-sky-noisy-packed-f32.npy",
+        "input_sha256": "f875de8e6dcc3441800ee23c96b348dcb6d48fe26789c04f79f583568a53bd4d",
+        "phase_counts": [
+          {
+            "phase": 0,
+            "color": "R",
+            "patches": 64,
+            "below_accepted_bin_mean_range": 0,
+            "above_accepted_bin_mean_range": 0,
+            "minimum_observed_mean": 0.012320020905292495,
+            "median_observed_mean": 0.013244579234040543,
+            "maximum_observed_mean": 0.01430503352919743
+          },
+          {
+            "phase": 1,
+            "color": "G1",
+            "patches": 64,
+            "below_accepted_bin_mean_range": 0,
+            "above_accepted_bin_mean_range": 0,
+            "minimum_observed_mean": 0.01944479521125686,
+            "median_observed_mean": 0.021534516893098044,
+            "maximum_observed_mean": 0.023608549867958573
+          },
+          {
+            "phase": 2,
+            "color": "G2",
+            "patches": 64,
+            "below_accepted_bin_mean_range": 0,
+            "above_accepted_bin_mean_range": 0,
+            "minimum_observed_mean": 0.019855944182836538,
+            "median_observed_mean": 0.021604213792215887,
+            "maximum_observed_mean": 0.023650009713037434
+          },
+          {
+            "phase": 3,
+            "color": "B",
+            "patches": 64,
+            "below_accepted_bin_mean_range": 0,
+            "above_accepted_bin_mean_range": 0,
+            "minimum_observed_mean": 0.009733496316943757,
+            "median_observed_mean": 0.01066435374142749,
+            "maximum_observed_mean": 0.012060941939125769
+          }
+        ],
+        "total_patches": 256,
+        "below": 0,
+        "above": 0
+      },
+      {
+        "region": {
+          "name": "building-detail",
+          "noisy_xy": [
+            5790,
+            2690
+          ],
+          "reference_xy": [
+            5791,
+            2690
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.6824449896812439
+        },
+        "context_xywh": [
+          5614,
+          2514,
+          512,
+          512
+        ],
+        "input": "/mnt/external/demosaic/evaluation/raw-kernel-phase-joint-v67-first2k-gfx-v1/building-detail-noisy-packed-f32.npy",
+        "input_sha256": "d4e189e0cd48f85c05fd041001770728a6e2c5af496849516fb0f43ed98b2666",
+        "phase_counts": [
+          {
+            "phase": 0,
+            "color": "R",
+            "patches": 64,
+            "below_accepted_bin_mean_range": 2,
+            "above_accepted_bin_mean_range": 1,
+            "minimum_observed_mean": 0.004818083477641011,
+            "median_observed_mean": 0.019713983896622267,
+            "maximum_observed_mean": 0.1114815703888894
+          },
+          {
+            "phase": 1,
+            "color": "G1",
+            "patches": 64,
+            "below_accepted_bin_mean_range": 0,
+            "above_accepted_bin_mean_range": 3,
+            "minimum_observed_mean": 0.007659300637419264,
+            "median_observed_mean": 0.026139168763052112,
+            "maximum_observed_mean": 0.1515113574039333
+          },
+          {
+            "phase": 2,
+            "color": "G2",
+            "patches": 64,
+            "below_accepted_bin_mean_range": 0,
+            "above_accepted_bin_mean_range": 3,
+            "minimum_observed_mean": 0.008032656178059483,
+            "median_observed_mean": 0.02660861373760781,
+            "maximum_observed_mean": 0.15288597751113642
+          },
+          {
+            "phase": 3,
+            "color": "B",
+            "patches": 64,
+            "below_accepted_bin_mean_range": 4,
+            "above_accepted_bin_mean_range": 1,
+            "minimum_observed_mean": 0.003712380981832908,
+            "median_observed_mean": 0.012619958739918502,
+            "maximum_observed_mean": 0.09548714382268031
+          }
+        ],
+        "total_patches": 256,
+        "below": 6,
+        "above": 8
+      },
+      {
+        "region": {
+          "name": "foliage",
+          "noisy_xy": [
+            8890,
+            5570
+          ],
+          "reference_xy": [
+            8890,
+            5570
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9597686529159546
+        },
+        "context_xywh": [
+          8714,
+          5394,
+          512,
+          512
+        ],
+        "input": "/mnt/external/demosaic/evaluation/raw-kernel-phase-joint-v67-first2k-gfx-v1/foliage-noisy-packed-f32.npy",
+        "input_sha256": "a67eec1789664a3e3ea1aaa43e7cb8ece9c8cb9001a8f3b2d7717053d802f278",
+        "phase_counts": [
+          {
+            "phase": 0,
+            "color": "R",
+            "patches": 64,
+            "below_accepted_bin_mean_range": 28,
+            "above_accepted_bin_mean_range": 0,
+            "minimum_observed_mean": 0.0020420002317571573,
+            "median_observed_mean": 0.009196058919002326,
+            "maximum_observed_mean": 0.024039009326827454
+          },
+          {
+            "phase": 1,
+            "color": "G1",
+            "patches": 64,
+            "below_accepted_bin_mean_range": 17,
+            "above_accepted_bin_mean_range": 0,
+            "minimum_observed_mean": 0.003618242192882093,
+            "median_observed_mean": 0.01738238971087558,
+            "maximum_observed_mean": 0.04545338363888618
+          },
+          {
+            "phase": 2,
+            "color": "G2",
+            "patches": 64,
+            "below_accepted_bin_mean_range": 17,
+            "above_accepted_bin_mean_range": 0,
+            "minimum_observed_mean": 0.003585084914890402,
+            "median_observed_mean": 0.017665224121622636,
+            "maximum_observed_mean": 0.04537803653184369
+          },
+          {
+            "phase": 3,
+            "color": "B",
+            "patches": 64,
+            "below_accepted_bin_mean_range": 42,
+            "above_accepted_bin_mean_range": 0,
+            "minimum_observed_mean": 0.0015305716234088607,
+            "median_observed_mean": 0.005427752153436494,
+            "maximum_observed_mean": 0.015709908096319225
+          }
+        ],
+        "total_patches": 256,
+        "below": 104,
+        "above": 0
+      },
+      {
+        "region": {
+          "name": "chain-link-fence",
+          "noisy_xy": [
+            2240,
+            6000
+          ],
+          "reference_xy": [
+            2241,
+            6000
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9550720453262329
+        },
+        "context_xywh": [
+          2064,
+          5824,
+          512,
+          512
+        ],
+        "input": "/mnt/external/demosaic/evaluation/raw-kernel-phase-joint-v67-first2k-gfx-v1/chain-link-fence-noisy-packed-f32.npy",
+        "input_sha256": "b145f28630c1abce870c99bc24160fa0276ef31bcff14e5a72d577c964c9d495",
+        "phase_counts": [
+          {
+            "phase": 0,
+            "color": "R",
+            "patches": 64,
+            "below_accepted_bin_mean_range": 2,
+            "above_accepted_bin_mean_range": 0,
+            "minimum_observed_mean": 0.00477915387223149,
+            "median_observed_mean": 0.0119975680192006,
+            "maximum_observed_mean": 0.026670930674594473
+          },
+          {
+            "phase": 1,
+            "color": "G1",
+            "patches": 64,
+            "below_accepted_bin_mean_range": 0,
+            "above_accepted_bin_mean_range": 0,
+            "minimum_observed_mean": 0.008793052239344235,
+            "median_observed_mean": 0.021381722874743048,
+            "maximum_observed_mean": 0.048380639281674576
+          },
+          {
+            "phase": 2,
+            "color": "G2",
+            "patches": 64,
+            "below_accepted_bin_mean_range": 0,
+            "above_accepted_bin_mean_range": 0,
+            "minimum_observed_mean": 0.008560544544650384,
+            "median_observed_mean": 0.021096482677705808,
+            "maximum_observed_mean": 0.04817609763750852
+          },
+          {
+            "phase": 3,
+            "color": "B",
+            "patches": 64,
+            "below_accepted_bin_mean_range": 28,
+            "above_accepted_bin_mean_range": 0,
+            "minimum_observed_mean": 0.0032700035372403846,
+            "median_observed_mean": 0.007712274723283841,
+            "maximum_observed_mean": 0.02016339492048047
+          }
+        ],
+        "total_patches": 256,
+        "below": 30,
+        "above": 0
+      }
+    ],
+    "scope": "Observed disjoint32x32 CFA-phase patch means versus accepted fit-bin mean range. Different filters/sampling from the fit; means are noisy and spatially dependent. Within-range does not certify calibration; outside-range does not establish an incorrect variance model. No reference, RAW decode, refit, noise/profile selection, restoration inference, output fitting or production change."
+  },
+  "independent_support_check": {
+    "path": "/mnt/external/demosaic/benchmarks/noise-calibration-synthetic-stress-v1/GFX-support-independent-arithmetic.json",
+    "sha256": "6a01571e0934dc69eb24150772f48230908c50b1185caf6b85fb35ec8239de05",
+    "result": {
+      "status": "completed-independent-retained-GFX-support-mean-and-count-check",
+      "means_recomputed_with_math_fsum": 1024,
+      "maximum_mean_difference": 0,
+      "all_phase_and_context_counts_exact": true,
+      "producer_current_vs_executed_AST_exact_except_clarified_module_docstring": true,
+      "scope": "Descriptive noisy patch means only; no real clean variance, refit, model or conditioning change."
+    }
+  },
+  "current_and_executed_producer": {
+    "current_path": "/home/dllu/proj/demosaic/scripts/probe_noise_calibration.py",
+    "current_sha256": "6942bbaab2e9212056efd49cce4305dd0e1fdcf2cac012b868ad347d860b2a3e",
+    "executed_path": "/mnt/external/demosaic/benchmarks/noise-calibration-synthetic-stress-v1/source/probe_noise_calibration.py",
+    "executed_sha256": "6fb2b11542525462ded9f261b181dd816ba1983f0c0fbec1ecd3d0166fabe37e",
+    "AST_exact_except_clarified_module_docstring": true,
+    "clarification": "Moment mask uses clean signal in(.03,.85), retaining ADC behavior. Legacy uncensored_interior_samples is a field name, not proof every observed pixel escaped clipping. No executed numerical code changed."
+  },
+  "chart_actual_view": {
+    "path": "/mnt/external/demosaic/benchmarks/noise-calibration-synthetic-stress-v1/independent-audit/variance-fit-scope.png",
+    "sha256": "9247bbaeb6c924490d4602c8856c92a6b383481a49a78b182b22b6f166d66b40",
+    "viewed": true,
+    "method": "view_image; scientific plot, not native photographic crops"
+  },
+  "artifacts": [
+    {
+      "path": "docs/images/noise-calibration-fit-support.png",
+      "sha256": "9247bbaeb6c924490d4602c8856c92a6b383481a49a78b182b22b6f166d66b40"
+    },
+    {
+      "path": "docs/figures/noise-calibration-fit-support.svg",
+      "sha256": "fa553030997bc8d07a8f8796618b1e4cce77965a4d1d36ce114a6d9e6b9e2b8a"
+    },
+    {
+      "path": "docs/results/noise-calibration-synthetic-group-summary.csv",
+      "sha256": "b3120fd2041e215715214dd3a604f9e9c5db06f3d10869222c3ae14a378e0b07"
+    }
+  ],
+  "SG_source_availability": {
+    "url": "https://api.github.com/repos/Calista-pedi/SG-for-JDD",
+    "status": 404,
+    "reason": "Not Found",
+    "recorded_UTC": "2026-10-17T08:34:24.301563+00:00"
+  },
+  "research_primary_source": "https://arxiv.org/abs/2607.24291",
+  "decision": "Keep current fit and all frozen model conditioning unchanged. Internal reliable flag describes fitted statistics, not demonstrated deep-shadow calibration. Investigate calibration support/conditioning sensitivity or measured flats/darks before altering low-light noise defaults. This is not a reproduction of RPG-VST or a restoration improvement."
+}

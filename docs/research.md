@@ -289,3 +289,20 @@ without original x86/GPU parity. A two-thread exact repeat fails by small floati
 differences; the separately rerun serial probe passes its repeat and full array/
 metric/native checks. Native crops lose cords/fence contrast despite noise
 removal, so no full benchmark, quality upgrade or GPU-speed claim follows.
+
+## Noise-fit support follow-up
+
+[RPG-VST, July 2026](https://arxiv.org/abs/2607.24291) motivates checking robust
+single-image noise fitting and stabilized variance reliability. The new
+[current-estimator stress study](noise-calibration-fit-support.md) finds accurate
+tested in-range variance but significant deep-shadow extrapolation in some
+synthetic cases. This is our own known-noise diagnostic, without an RPG-VST
+implementation, camera calibration or changed conditioning. The standing GFX
+foliage context contains observed phase-patch means below its fit's support;
+that is descriptive, without real variance truth or a claimed cause of detail loss.
+
+The structural-guidance paper's stated public
+[repository](https://github.com/Calista-pedi/SG-for-JDD) was checked again on
+2026-10-17 at08:34UTC; GitHub's repository API returns404. This records public
+availability at that time and does not establish that no private/supplementary
+code exists. The active model experiment continues independently.

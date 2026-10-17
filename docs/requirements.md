@@ -344,3 +344,10 @@ identities. Actual startup cache/license/attribution checks pass; protected and
 duplicate screening, complete cache/content review and matching 4× preparation
 remain pending. Active model and evaluation manifests stay fixed. More prepared
 data alone does not establish a trained quality gain.
+
+The [240-case noise-fit support study](noise-calibration-fit-support.md) verifies
+accurate tested in-range variance for192 accepted synthetic fits, while55 have
+over1dB error somewhere across the wider probe range, with worst errors at.001.
+The standing GFX foliage/fence contexts contain observed means below their fit's
+support. This does not establish their true noise or change any conditioning;
+dedicated camera calibration and real-photo quality remain unproven.
