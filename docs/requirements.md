@@ -48,6 +48,12 @@ the corrected coordinates; selected photo PSNR does not improve. Active frozen
 reviews retain their old geometry. Corrected-grid CUDA/full-frame validation
 and the model-quality goals remain open.
 
+The [corrected-grid CUDA supplement](packed-isotropic-corrected-grid-queue.md)
+is queued behind the original review/compilation owners. It adds actual40k
+fixed-photo checks, repeated full102MP corrected restores and affected-edge
+crops, with legacy exports reused rather than rerun. Its CPU execution checks
+are complete; CUDA/full-frame results and native review remain pending.
+
 | Requirement | Evidence needed | Current state |
 | --- | --- | --- |
 | Modern method and DINOv3 recommendation | Primary-source research, architecture rationale, licensed pretrained backbone and ablation | Official pinned weights; an earlier architecture's matched 20k-step ablation has a small positive gain on 427 photos. The earlier RGB architecture’s [completed fresh no-context/S/B comparison through 10,000 updates](fresh-dino-capacity-10k-review.md) finds no photographic context gain. The [completed ConvNeXt10k review](dino-convnext-pyramid-v58-10k-review.md) ties no-context on photo mean with mixed paired-real scores. No consistent mature context advantage or SOTA is established. The [new RAW-native first32000-example review](packed-isotropic-first32000-review.md) finds a small DINO gain but weak restoration close to bilinear; both endpoints remain unpromoted |

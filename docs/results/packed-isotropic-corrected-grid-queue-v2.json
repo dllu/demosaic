@@ -1,0 +1,699 @@
+{
+  "status": "queued-corrected-grid-CUDA-validation-after-exact-existing-owners",
+  "observed_UTC": "2026-10-17T23:48:24.846397+00:00",
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-corrected-grid-workflow-v2/plan.json",
+    "sha256": "d597a535a36bd6b72e31d7b44677bf3683fae9a88e6dd29d3ad2c0205ed52a16"
+  },
+  "launch_handle": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-corrected-grid-workflow-v2/launch-handle.json",
+    "sha256": "4479b3b7665d395f6fdd1c11ac682dc1f7005c4fe542a1f6363915325af9c83e"
+  },
+  "observed_queue_status": {
+    "controller": {
+      "pid": 1949709,
+      "created": 1792280689.52,
+      "driver_sha256": "e0d3bfaa78b303560d2a5f27852057eff26ccd22006aeb55f35a5ad7b69a8a77"
+    },
+    "plan": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-corrected-grid-workflow-v2/plan.json",
+      "sha256": "d597a535a36bd6b72e31d7b44677bf3683fae9a88e6dd29d3ad2c0205ed52a16"
+    },
+    "after_compilation_owner": {
+      "pid": 1892187,
+      "created": 1792277635.47,
+      "driver_sha256": "71e3d0d635c29782b1d49c90e784bec4eef25915e84908f358eb06a1162f813d"
+    },
+    "status": "waiting-for-exact-compilation-owner-exit-no-GPU",
+    "updated_unix": 1792280689.886857
+  },
+  "verified_live_with_no_children": true,
+  "guards": 161,
+  "inputs": 29,
+  "fixture": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-grid-fixtures-v2/inputs.json",
+    "sha256": "d2928cb74103067260ed9ce251f37f47c254d2e5f43d04eb56080b64104ae537"
+  },
+  "fixture_files": 22,
+  "active_training_rejected_before_inference": true,
+  "training_source_bundle_sha256": "50dc11ec5c906fbbc4d3c5b1b530b95acb3b40a5f725d3a622891b2471c21d16",
+  "physical_model_modules_match_legacy_except_tiling": true,
+  "required_review_terminal": "completed-quarter-RAW-panels-statistics-artifacts-hue-and-sensitivities-awaiting-native-quality-review",
+  "accepted_compilation_terminals": [
+    "completed-compilation-engineering-awaiting-native-visual-review",
+    "completed-study-rejected-photo-accuracy-no-production-change",
+    "completed-study-rejected-serving-accuracy-no-production-change",
+    "failed-no-automatic-restart"
+  ],
+  "predecessor_policy": "Require original40k training/full review successful and exited, independent completed-state checks, exact compilation owner and last child exited. Compilation rejection/failure may precede this separate eager-only study; this never retries or adopts compilation. Guarded data/code/state are revalidated.",
+  "CPU_photo_preflights": [
+    {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-grid-no-dino40k-photos-CPU-v2/receipt.json",
+      "sha256": "22f9fbff35e479300cc2f7e8faf72b1ab304e67acd340827e5d188603d88533a"
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-grid-dino8k-photos-CPU-v2/receipt.json",
+      "sha256": "d210d881f9727ac42e0c11c4c97d6fd278510b41175f2a4553af90446531f930"
+    }
+  ],
+  "frozen_CPU_no_dino40k_execution": {
+    "receipt": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-corrected-grid-workflow-v2/CPU-frozen-no-dino40k/receipt.json",
+      "sha256": "281fae74847eb456c6a50ac42fcd8d649a257dfa3e9ba489798b030c0e843da0"
+    },
+    "checkpoint": {
+      "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-b4-v71-step40000.pt",
+      "sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+      "step": 40000,
+      "weights": "EMA",
+      "model_config": {
+        "restoration_backbone": "packed-isotropic",
+        "width": 96,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": false,
+        "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "dino_lora_rank": 0,
+        "dino_input_adapter": false,
+        "dino_feature_fusion": "bottleneck",
+        "camera_conditioning": true,
+        "noise_modulation": false,
+        "physical_fp32": true,
+        "baseline": "bilinear",
+        "prior_window": 7,
+        "standardized_noise": false,
+        "noise_refinement": false,
+        "refinement_width": 24,
+        "refinement_blocks": 4,
+        "refinement_window": 63,
+        "coarse_refinement_factor": 0,
+        "coarse_refinement_width": 24,
+        "coarse_refinement_blocks": 4,
+        "coarse_refinement_window": 31,
+        "pyramid_refinement": false,
+        "pyramid_measurements": true,
+        "pyramid_width": 24,
+        "pyramid_blocks": 2,
+        "variance_stabilization": false,
+        "physical_anchors": false,
+        "rgb_processing_scale": 1,
+        "packed_detail_prior": false,
+        "rgb_hidden_autocast": false,
+        "rgb_center_camera_matrix": false,
+        "rgb_middle_skip_fp32": false,
+        "adc_cfa_projection": false,
+        "raw_kernel_reconstruction": false,
+        "raw_kernel_windows": [
+          1,
+          5,
+          17
+        ],
+        "raw_kernel_phase_conditioning": false,
+        "isotropic_groups": 6,
+        "isotropic_blocks": 8,
+        "isotropic_local_width": 32
+      }
+    },
+    "six_full_arrays_match_root_execution_bitwise": true,
+    "all_tensor_bytes_parameter_identities_and_keys_unchanged": true,
+    "CUDA_initialized": false,
+    "scope": "Actual noDINO40k and retained DINO8k preflights are different-budget engineering executions, not a matched quality result or CUDA evidence."
+  },
+  "existing_RGB16_identity_preflight": {
+    "receipt": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-grid-export-identity-CPU-v1/receipt.json",
+      "sha256": "3768a7fd390a2ec384ab32f7aeec97f24619808fe7e81c5709cbd95c407a7891"
+    },
+    "result": {
+      "status": "completed-existing102MP-RGB16-identity-comparison-CPU",
+      "source_report": {
+        "path": "/mnt/external/demosaic/evaluation/packed-isotropic-first32000-gfx-v2/report.json",
+        "sha256": "768250ac556cd9f2ec980d757d44a52a7ed57648f6b53919107c9e96b4619410"
+      },
+      "source_RGB16": {
+        "path": "/mnt/external/demosaic/evaluation/packed-isotropic-first32000-gfx-v2/restored-0-linear16.tiff",
+        "sha256": "1435a799102babbd97efd5b8ac04c951632a8bae8881b829fb2490f8150a37ed"
+      },
+      "checkpoint": {
+        "sha256": "abd7345c080cb227d77385647c74614c0416d9316ad2f28c81c31cdd1f1697a2",
+        "step": 8000
+      },
+      "all_pixels": {
+        "RGB_values": 305987556,
+        "pixels": 101995852,
+        "changed_values": 0,
+        "changed_pixels": 0,
+        "max_abs_DN16": 0,
+        "RMS_DN16": 0.0,
+        "mean_signed_DN16_RGB": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scope": "Differences of clipped/rounded RGB16 exports, not unquantized RGB or GT errors"
+      },
+      "CUDA_initialized": false,
+      "operators": {
+        "evaluate_packed_grid.py": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-grid-export-identity-CPU-v1/evaluate_packed_grid.py",
+          "sha256": "9ac8ef1bf934b5c9d2e6eb9cc895de9034940103e928b40c892d7701a66f6d1d"
+        },
+        "review_packed_grid.py": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-grid-export-identity-CPU-v1/review_packed_grid.py",
+          "sha256": "06372bc5c2dccea1c0571ef4460bf41f41c3cf01eca0f8c4d1e739d5ccce46da"
+        },
+        "benchmark_packed_compilation.py": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-grid-export-identity-CPU-v1/benchmark_packed_compilation.py",
+          "sha256": "d1e689f020b5d026a8614f152714d2e1f676436bc441f79a76c7f01d9203be5b"
+        }
+      },
+      "scope": "Engineering identity comparison across all existing8k export pixels, including final partial chunk. No new model/grid inference, GPU execution, changed output,40k result or quality gain."
+    }
+  },
+  "DINO_actual_resume": {
+    "restoration": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-workflow-v1/dino-actual-restoration.json",
+      "sha256": "f9d8a7699f8587b6d41f11c0bd5652ecf5c6024cd69352dc773ef9f4b7566ef7"
+    },
+    "checks": {
+      "model_optimizer_and_global_RNG_restored_before_first_update": true,
+      "initial_RAW_sha256": "d5c12087dff80ac000d4fe1c22b1de9d547e3c30103277cd7fed0c1e5aaa4003",
+      "restored_Adam_tensors": 863,
+      "EMA_restored_before_first_update": true
+    },
+    "DINO_first16": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-workflow-v1/dino-first16-observations.json",
+      "sha256": "b0a51e478c72219983cd0d1304ff81392f0e5d15078b1c6170960f8f9265b564"
+    },
+    "noDINO_first16": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-workflow-v1/no-dino-first16-observations.json",
+      "sha256": "b0a51e478c72219983cd0d1304ff81392f0e5d15078b1c6170960f8f9265b564"
+    },
+    "all16_actual_observations_match": true
+  },
+  "planned_native_triplets": {
+    "synthetic_GT": 12,
+    "GFX_reference_not_GT": 24
+  },
+  "GFX_regions": [
+    {
+      "name": "overcast-sky",
+      "noisy_xy": [
+        5800,
+        1400
+      ],
+      "reference_xy": [
+        5800,
+        1400
+      ],
+      "size": 160,
+      "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+      "context_green_correlation": null
+    },
+    {
+      "name": "building-detail",
+      "noisy_xy": [
+        5790,
+        2690
+      ],
+      "reference_xy": [
+        5791,
+        2690
+      ],
+      "size": 160,
+      "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+      "context_green_correlation": 0.6824449896812439
+    },
+    {
+      "name": "foliage",
+      "noisy_xy": [
+        8890,
+        5570
+      ],
+      "reference_xy": [
+        8890,
+        5570
+      ],
+      "size": 160,
+      "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+      "context_green_correlation": 0.9597686529159546
+    },
+    {
+      "name": "chain-link-fence",
+      "noisy_xy": [
+        2240,
+        6000
+      ],
+      "reference_xy": [
+        2241,
+        6000
+      ],
+      "size": 160,
+      "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+      "context_green_correlation": 0.9550720453262329
+    },
+    {
+      "name": "right-edge-grid",
+      "noisy_xy": [
+        11300,
+        3600
+      ],
+      "reference_xy": [
+        11300,
+        3600
+      ],
+      "size": 160,
+      "selection_method": "Predetermined intersection with the final tile column; same sensor coordinates, input/reference-only inspection"
+    },
+    {
+      "name": "bottom-edge-grid",
+      "noisy_xy": [
+        7200,
+        8400
+      ],
+      "reference_xy": [
+        7200,
+        8400
+      ],
+      "size": 160,
+      "selection_method": "Predetermined intersection with the final tile row; same sensor coordinates, input/reference-only inspection"
+    }
+  ],
+  "edge_reference_calibration": {
+    "rgb_to_sensor_gains": [
+      1.0000624759971717,
+      1.0000575400374918,
+      1.000083683987943
+    ],
+    "samples": [
+      922554,
+      2316454,
+      693995
+    ]
+  },
+  "all_four_existing_reference_crops_bitwise_reproduced": true,
+  "full_case_order": [
+    "no-dino",
+    "dino"
+  ],
+  "full_protocol": {
+    "shape": [
+      8746,
+      11662
+    ],
+    "megapixels": 101.995852,
+    "tile": 512,
+    "overlap": 64,
+    "batch": 4,
+    "warmup_full_frames_excluded": 1,
+    "timed_repeats_per_model": 3,
+    "compute": "eager FP16 internal, physical IEEE FP32",
+    "new_full_restores_total": 8,
+    "reuse": "Actual40k legacy RGB16 exports, bound by weight/method/precision/source/conditioning; no legacy network rerun",
+    "comparison": "All RGB16 values with signed integer subtraction; not unquantized-F32 or GT equivalence",
+    "display": "Both denoised method panels decode RGB16 with shared WB/matrix/exposure4; ISO100 refs are independent captures, not GT"
+  },
+  "GT_metric_replay_absolute_tolerance": 0.0001,
+  "native_CPU_no_dino40k_previews": [
+    {
+      "image": "crop-80100f118f91307e.png",
+      "caption": "039a221ab23b6e79f59111752337744617f857f8 / Corrected",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Corrected",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "9c95e082aeff41072074db4cdd6267fae62922f9dd4f97bb0d7c626173e967c2",
+      "source": {
+        "title": "File:20180925 UCI Road World Championships Innsbruck Women Elite ITT Elisa Longo Borghini 850 8800.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:20180925_UCI_Road_World_Championships_Innsbruck_Women_Elite_ITT_Elisa_Longo_Borghini_850_8800.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/5/56/20180925_UCI_Road_World_Championships_Innsbruck_Women_Elite_ITT_Elisa_Longo_Borghini_850_8800.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Granada",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "attribution": null,
+        "credit": "Own work",
+        "sha1": "039a221ab23b6e79f59111752337744617f857f8",
+        "sha1_hex": "039a221ab23b6e79f59111752337744617f857f8",
+        "download_path": "images/03/9a/039a221ab23b6e79f59111752337744617f857f8.jpg",
+        "width": 8256,
+        "height": 5504,
+        "id": "039a221ab23b6e79f59111752337744617f857f8",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/03/039a221ab23b6e79f59111752337744617f857f8.npy",
+        "shape": [
+          688,
+          1032,
+          3
+        ],
+        "cache_sha256": "c29108d17459dfcb72501128fd0b769bd32397aed2832c0e88a16c0b7694be84"
+      },
+      "source_context_xywh": [
+        261,
+        89,
+        510,
+        510
+      ],
+      "evaluation_tile_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "conditioning": {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      "white_balance": [
+        2.0,
+        1.0,
+        1.5
+      ],
+      "camera_to_srgb": [
+        [
+          1.1176470518112183,
+          -0.05882352963089943,
+          -0.05882352963089943
+        ],
+        [
+          -0.05882352963089943,
+          1.1176470518112183,
+          -0.05882352963089943
+        ],
+        [
+          -0.05882352963089943,
+          -0.05882352963089943,
+          1.1176470518112183
+        ]
+      ],
+      "display_exposure": 1,
+      "pattern": "RGGB",
+      "noise_draw": "CPU generated, source/case keyed seed42, new native510 observation; not the official256px GPU panel",
+      "reference": "Exact synthetic target",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-b4-v71-step40000.pt",
+        "sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+        "step": 40000,
+        "weights": "EMA",
+        "model_config": {
+          "restoration_backbone": "packed-isotropic",
+          "width": 96,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": false,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "bottleneck",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": false,
+          "physical_anchors": false,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": false,
+          "adc_cfa_projection": false,
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32
+        }
+      },
+      "precision": "float32",
+      "device": "cpu",
+      "policy": "Corrected",
+      "observation": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-24k-photo-tiling-CPU-v1/observation0.npz",
+        "sha256": "f3d0cb1e3c7a9f2fb92eecfa572e471080c1d33ce88dc52130629d40fce5c749"
+      },
+      "public_image": "images/packed-grid-no-dino40k-CPU-cyclist.png",
+      "viewed_at_native_resolution": true
+    },
+    {
+      "image": "crop-35d86ec96c5d775d.png",
+      "caption": "059947d9a94d2e5c6d21c270bd5d9204bd91b580 / Corrected",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Corrected",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "b7e5467470cc4cfc68a21c86af9baf0901cc851fb4885d1cf70b65e6456bc9e4",
+      "source": {
+        "title": "File:Emamzadeh Esmaeil roof.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Emamzadeh_Esmaeil_roof.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Emamzadeh_Esmaeil_roof.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "\u0645\u0627\u0646\u0641\u06cc",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "attribution": null,
+        "credit": "Own work",
+        "sha1": "059947d9a94d2e5c6d21c270bd5d9204bd91b580",
+        "sha1_hex": "059947d9a94d2e5c6d21c270bd5d9204bd91b580",
+        "download_path": "images/05/99/059947d9a94d2e5c6d21c270bd5d9204bd91b580.jpg",
+        "width": 4243,
+        "height": 4269,
+        "id": "059947d9a94d2e5c6d21c270bd5d9204bd91b580",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/05/059947d9a94d2e5c6d21c270bd5d9204bd91b580.npy",
+        "shape": [
+          533,
+          530,
+          3
+        ],
+        "cache_sha256": "b0c8bc879c7f2a98b0f3c1b4041c5a2f897ad075ab1ea569ae0cd3e0136f4962"
+      },
+      "source_context_xywh": [
+        10,
+        11,
+        510,
+        510
+      ],
+      "evaluation_tile_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "conditioning": {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      "white_balance": [
+        2.0,
+        1.0,
+        1.5
+      ],
+      "camera_to_srgb": [
+        [
+          1.1176470518112183,
+          -0.05882352963089943,
+          -0.05882352963089943
+        ],
+        [
+          -0.05882352963089943,
+          1.1176470518112183,
+          -0.05882352963089943
+        ],
+        [
+          -0.05882352963089943,
+          -0.05882352963089943,
+          1.1176470518112183
+        ]
+      ],
+      "display_exposure": 1,
+      "pattern": "RGGB",
+      "noise_draw": "CPU generated, source/case keyed seed42, new native510 observation; not the official256px GPU panel",
+      "reference": "Exact synthetic target",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-b4-v71-step40000.pt",
+        "sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+        "step": 40000,
+        "weights": "EMA",
+        "model_config": {
+          "restoration_backbone": "packed-isotropic",
+          "width": 96,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": false,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "bottleneck",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": false,
+          "physical_anchors": false,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": false,
+          "adc_cfa_projection": false,
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32
+        }
+      },
+      "precision": "float32",
+      "device": "cpu",
+      "policy": "Corrected",
+      "observation": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-24k-photo-tiling-CPU-v1/observation1.npz",
+        "sha256": "c43dacbb758d022ab3360c400cbc672f68378897bcf8e59e1611df7c9396706b"
+      },
+      "public_image": "images/packed-grid-no-dino40k-CPU-roof.png",
+      "viewed_at_native_resolution": true
+    }
+  ],
+  "focused_tests": {
+    "passed": 22,
+    "seconds": 2.39,
+    "CUDA_hidden": true,
+    "ruff": "passed",
+    "scope": "RGB16 overflow/last chunk/pixel-vs-value counts, wrong/ambiguous legacy controls, float whole-RGB comparison and original quarter-review gates."
+  },
+  "scope": "Supplement after exact original40k training, full review and compilation owners/children exit. Original quality review must succeed and both40k states pass independent lineage/EMA/Adam/RNG/source/data/log checks. A rejected or failed compilation study may precede this separate eager-only grid validation after its child exits; it is not a retry/adoption of compilation. Same physical model modules, trained weights, FP16 internal/FP32 physical computation and fixed observations; corrected4/32 grid only. Two native510 photo comparisons against old grid and whole forward per40k model; exact syntheticGT metrics independently replayed. Two full102MP eager runs, each one excluded warmup plus3 timed restores. Every corrected F32-to-RGB16 export pixel and all legacy/corrected RGB16 differences checked. Both displayed methods decode RGB16 with shared WB/matrix/exposure; independent ISO100 ref is not GT. No training, source admission, protected-final scoring, output correction, compilation or promotion. Manual native visual review remains required.",
+  "limitations": "No corrected-grid CUDA result, full-frame speed or new quality promotion is established. CPU previews still show residual noise and soft detail. The official direct-patch quality panels retain their frozen protocol; this supplements full-image inference. Prepared workflowv1 was never launched and is marked superseded by v2 to include edge ROIs."
+}

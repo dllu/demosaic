@@ -145,3 +145,7 @@ comparisons under that recorded protocol. Their full-frame results will not
 validate the corrected geometry. Before promoting either packed endpoint,
 review the corrected grid on CUDA and full frames too. This correction does
 not promote a model or satisfy the remaining quality/speed goals.
+
+The [corrected-grid CUDA/full-frame supplement](packed-isotropic-corrected-grid-queue.md)
+is now queued behind those jobs. It also includes predetermined right/bottom
+edge crops, since the four standing regions do not intersect the final tiles.
