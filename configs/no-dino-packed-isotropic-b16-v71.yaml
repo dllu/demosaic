@@ -1,0 +1,60 @@
+amp: true
+augmentation_downsample: 2
+batch_size: 16
+broad_camera: true
+channels_last: true
+checkpoint_every: 2000
+cpu_threads: 4
+data_seed_per_step: true
+device: cuda
+experiment_notes: Matched no-DINO control for fresh packed-isotropic V70. Same seed51,
+  common restoration initialization/RNG, B16/native256, frozen40170 Commons/native128/paired32,
+  all domain/noise/augmentation/loss settings and original40000 schedule/LR2e-4/warmup500.
+  DINO context is the only architecture difference. First quality review2000 via explicit
+  --stop-after 2000; no automatic continuation or promotion. Compare V70/V71 on equal
+  updates and logged observation hashes, and report unequal compute cost. Previous
+  pretrained RGB checkpoints are external quality references, not matched convergence
+  controls.
+flat_fraction: 0.1
+log_every: 25
+lr: 0.0002
+manifest: /mnt/external/demosaic/audits/commons-bin4-frozen44732-v1/manifest.jsonl
+min_available_gb: 12
+model:
+  restoration_backbone: packed-isotropic
+  width: 96
+  isotropic_groups: 6
+  isotropic_blocks: 8
+  isotropic_local_width: 32
+  camera_conditioning: true
+  physical_fp32: true
+  dino: false
+  dino_feature_fusion: bottleneck
+  dino_model: facebook/dinov3-convnext-tiny-pretrain-lvd1689m
+  dino_revision: 10d30274b4d445111e2d5bf75ac93bbd94db274b
+noise_free_fraction: 0.1
+paired_fraction: 0.25
+paired_manifest: /mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json
+paired_workers: 2
+patch_size: 256
+precision: bfloat16
+preserve_negative_read_noise: true
+raw_clean_augmentation_downsample: 2
+raw_clean_fraction: 0.25
+raw_clean_manifest: /mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json
+raw_clean_workers: 2
+reconstruct_highlights: true
+run: /mnt/external/demosaic/runs/no-dino-packed-isotropic-b16-v71
+seed: 51
+steps: 40000
+synthetic_fraction: 0.2
+trace_observations: true
+val_batches: 4
+validation_images: 8
+validation_manifest: /mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl
+validation_protocol: configs/evaluation.yaml
+warmup_steps: 500
+worker_start_method: spawn
+workers: 4
+flat_chroma_stops: 8
+multiscale_sensor_weight: 0

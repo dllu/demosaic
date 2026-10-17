@@ -38,6 +38,12 @@ project matches its performance.
   has no checked-in weights or root model license in the inspected tree at
   `47489cbe3eba746e13ad8be8898956d7895f1835`; the camera-pipeline subcomponent has
   a separate license. No upstream model code has been incorporated here.
+  The independent [RAW-native isotropic prototype](packed-isotropic.md) now
+  rearranges packed CFA samples into quarter-resolution features, keeps a
+  half-resolution phase-detail path and fuses genuine frozen DINOv3 ConvNeXt
+  features. Production-size mixed-data/checkpoint checks passed; quality is
+  unreviewed. Separate small-block compilation reduced synthetic forward time,
+  with no full-frame speedup or trained-model precision claim.
 * [FFNet, April 2026](https://doi.org/10.3390/math14071175)
   studies frequency-domain features for JDD. The
   [authors' repository](https://github.com/Donghui-Zhang2005/Demosaicing-and-Denoising)

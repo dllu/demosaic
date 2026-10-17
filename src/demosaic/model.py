@@ -55,6 +55,9 @@ class ModelConfig:
     raw_kernel_reconstruction: bool = False
     raw_kernel_windows: tuple[int, ...] = (1, 5, 17)
     raw_kernel_phase_conditioning: bool = False
+    isotropic_groups: int = 6
+    isotropic_blocks: int = 8
+    isotropic_local_width: int = 32
 
     def to_dict(self):
         return asdict(self)
@@ -400,8 +403,15 @@ class JointDemosaic(nn.Module):
             raise ValueError("DINO input adapter must be a boolean")
         if cfg.dino_input_adapter and not cfg.dino:
             raise ValueError("DINO input adapter requires DINO context")
-        if cfg.dino_feature_fusion not in ("bottleneck", "convnext-pyramid"):
+        if cfg.dino_feature_fusion not in ("bottleneck", "convnext-pyramid", "packed-convnext"):
             raise ValueError("Unknown DINO feature fusion")
+        if cfg.dino_feature_fusion == "packed-convnext" and (
+            not cfg.dino
+            or cfg.restoration_backbone != "packed-isotropic"
+            or cfg.dino_lora_rank
+            or cfg.dino_input_adapter
+        ):
+            raise ValueError("Packed ConvNeXt fusion requires packed-isotropic and frozen DINO")
         if cfg.dino_feature_fusion == "convnext-pyramid" and (
             not cfg.dino
             or cfg.restoration_backbone != "pretrained-rgb"
@@ -426,12 +436,41 @@ class JointDemosaic(nn.Module):
             raise ValueError("Packed RGB processing requires the stabilized pretrained backbone")
         if cfg.physical_anchors and not cfg.variance_stabilization:
             raise ValueError("Physical anchors require variance stabilization")
-        if cfg.restoration_backbone not in ("local", "pretrained-rgb"):
+        if cfg.restoration_backbone not in ("local", "pretrained-rgb", "packed-isotropic"):
             raise ValueError("Unknown restoration backbone")
         if cfg.rgb_hidden_autocast and cfg.restoration_backbone != "pretrained-rgb":
             raise ValueError("RGB hidden autocast requires the pretrained RGB backbone")
         if cfg.variance_stabilization and cfg.restoration_backbone != "pretrained-rgb":
             raise ValueError("Variance stabilization requires the pretrained RGB backbone")
+        if cfg.restoration_backbone == "packed-isotropic":
+            if (
+                not cfg.physical_fp32
+                or not cfg.camera_conditioning
+                or cfg.baseline != "bilinear"
+                or cfg.noise_modulation
+                or cfg.standardized_noise
+                or cfg.noise_refinement
+                or cfg.coarse_refinement_factor
+                or cfg.pyramid_refinement
+                or (cfg.dino and cfg.dino_feature_fusion != "packed-convnext")
+            ):
+                raise ValueError(
+                    "Packed isotropic requires FP32 camera features, bilinear baseline, "
+                    "no legacy refiners, and packed-convnext fusion when DINO is enabled"
+                )
+            from .packed_isotropic import PackedIsotropic
+
+            self.packed_isotropic = PackedIsotropic(
+                cfg.width, cfg.isotropic_groups, cfg.isotropic_blocks, cfg.isotropic_local_width
+            )
+            self.context = None
+            if cfg.dino:
+                from .dino_pyramid import DinoPackedContext
+
+                with torch.random.fork_rng(devices=[]):
+                    self.context = DinoPackedContext(cfg)
+            self.refiner = self.coarse_refiner = self.pyramid_refiner = None
+            return
         if cfg.restoration_backbone == "pretrained-rgb":
             from .pretrained_rgb import PretrainedRgbDemosaic
 
@@ -575,6 +614,11 @@ class JointDemosaic(nn.Module):
             raise ValueError("Expected four packed phases and matching variance maps")
         if colors.ndim == 1:
             colors = colors[None].expand(batch, -1)
+        if self.config.restoration_backbone == "packed-isotropic":
+            if normalization_mask is not None:
+                raise ValueError("Normalization augmentation requires the pretrained RGB backbone")
+            prediction = self.packed_isotropic(packed, variance, colors, wb, matrix, self.context)
+            return (prediction, mosaic(prediction, colors)) if auxiliary else prediction
         if self.config.restoration_backbone == "pretrained-rgb":
             prediction = self.pretrained_rgb(
                 packed,

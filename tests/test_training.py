@@ -77,8 +77,9 @@ def test_domain_with_no_selected_steps_never_starts_its_loader():
         (False, False, True, True, True),
     ],
 )
+@pytest.mark.parametrize("backbone", ["local", "packed-isotropic"])
 def test_checkpoint_resume_matches_uninterrupted_training(
-    tmp_path, warm_start, legacy_metadata, new_recipe, spawn_workers, weak_recipe
+    tmp_path, warm_start, legacy_metadata, new_recipe, spawn_workers, weak_recipe, backbone
 ):
     """RNG, augmentation, draw position, optimizer, LR and EMA survive a restart."""
     source = tmp_path / "clean.npy"
@@ -121,6 +122,15 @@ def test_checkpoint_resume_matches_uninterrupted_training(
             "attention": False,
         },
     }
+    if backbone == "packed-isotropic":
+        config["model"] = {
+            "restoration_backbone": backbone,
+            "width": 4,
+            "camera_conditioning": True,
+            "isotropic_groups": 1,
+            "isotropic_blocks": 1,
+            "isotropic_local_width": 4,
+        }
     if new_recipe:
         config.update(broad_camera=True, normalized_sensor_weight=0.02)
     if spawn_workers:

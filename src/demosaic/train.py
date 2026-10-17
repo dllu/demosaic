@@ -198,6 +198,11 @@ def selected_batches(loaders, first, last, seed, paired_fraction, raw_clean_frac
 def expand_stem(weights, source_config, model):
     """Preserve channel roles while adding zero-weight conditioning features."""
     source, target = ModelConfig.from_checkpoint(source_config), model.config
+    if (
+        "packed-isotropic" in (source.restoration_backbone, target.restoration_backbone)
+        and source.restoration_backbone != target.restoration_backbone
+    ):
+        raise ValueError("Packed isotropic must start fresh or from the same backbone")
     if source.camera_conditioning and not target.camera_conditioning:
         raise ValueError("Initialization cannot discard camera conditioning")
     if source.standardized_noise and not target.standardized_noise:
@@ -730,7 +735,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             or model.refiner is not None
             or model.coarse_refiner is not None
             or model.pyramid_refiner is not None
-            or model.config.restoration_backbone == "pretrained-rgb"
+            or model.config.restoration_backbone in ("pretrained-rgb", "packed-isotropic")
             else nullcontext()
         ):
             loss.backward()
