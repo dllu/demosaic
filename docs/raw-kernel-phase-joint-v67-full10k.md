@@ -3,8 +3,12 @@
 V67 has completed its **original 10,000-update schedule**. The controller and
 separate primary state audit agree on finite 94 model/94 EMA/92 AdamW states,
 all 402 log rows, the unchanged original source/data/recipe and the exact 2k
-resume boundary. Final LR is 1e-5. Full quality evaluation and native review are
-in progress; V43 remains the working reference and no promotion is made.
+resume boundary. Final LR is 1e-5. Full quality evaluation and all28 actual native
+views are complete. The [final performance review](raw-kernel-phase-joint-v67-full10k-review.md)
+finds photo+1.36945dB over first2k but −1.95519dB versus V60, with weak-detail and
+bright-color regressions. V43 remains the working reference; V67 is not promoted.
+The sections below retain the earlier resume/queue protocol and observations;
+the linked final review supersedes their pending quality status.
 
 [Actual completed training/state audit receipt](results/raw-kernel-phase-joint-v67-full10k-training-completed.json).
 Frozen final checkpoint SHA256:

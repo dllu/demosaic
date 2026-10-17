@@ -22,8 +22,9 @@ finds small photo gains and better highly saturated colors; bright-color errors,
 fine-detail loss and paired-real tradeoffs still prevent promotion.
 The [expanded-data comparison](docs/long-commons-v63-v64-first4k-review.md)
 finds a small mixed effect at 4,000 updates; native crops still show soft detail.
-The [joint RAW-kernel review at2k](docs/raw-kernel-phase-joint-v67-first2k-review.md)
-improves denoising over its initializer but still trails mature V60; it is not promoted.
+The [completed original10k RAW-kernel review](docs/raw-kernel-phase-joint-v67-full10k-review.md)
+gains1.37dB over its2k boundary but still trails mature V60 by1.96dB;
+weak-detail and bright-color regressions prevent promotion.
 
 Native 160×160 validation crops: noisy → denoised → GT, using V43 step 2000
 (FP16, ISO12800 synthetic noise prior). These are 100% crops at the 8×8-binned
