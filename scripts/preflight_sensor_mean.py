@@ -54,7 +54,7 @@ def preceding_review(review_path, expected_sha256):
     return {"path": str(review_path), "sha256": expected_sha256, "actual_exits": records}
 
 
-def main(config_path, control_path, output, device, review_path, review_sha256):
+def main(config_path, control_path, output, device, review_path, review_sha256, weight=0.01):
     assert not torch.cuda.is_initialized()
     preceding = preceding_review(review_path, review_sha256)
     if device == "cpu":
@@ -68,8 +68,10 @@ def main(config_path, control_path, output, device, review_path, review_sha256):
     assert {k: v for k, v in cfg.items() if k not in excluded} == {
         k: v for k, v in control.items() if k not in excluded
     }
+    assert 0 < weight <= 0.01
     assert (
-        cfg["multiscale_sensor_weight"] == 0.01 and control.get("multiscale_sensor_weight", 0) == 0
+        cfg["multiscale_sensor_weight"] == weight
+        and control.get("multiscale_sensor_weight", 0) == 0
     )
     assert cfg["flat_chroma_stops"] == 8 and cfg["steps"] == 4000
     assert cfg["batch_size"] == 16 and cfg["patch_size"] == 256 and cfg["seed"] == 48
@@ -126,13 +128,13 @@ def main(config_path, control_path, output, device, review_path, review_sha256):
     }
     if device == "cpu":
         template.update(batch_size=1, patch_size=64, amp=False, precision="float32")
-    configs = [("control", 0, False), ("loss-resumed", 0.01, True)]
+    configs = [("control", 0, False), ("loss-resumed", weight, True)]
     if device == "cpu":
-        configs.insert(1, ("loss-full", 0.01, False))
+        configs.insert(1, ("loss-full", weight, False))
     runs, checkpoints, portable = {}, {}, None
     path = output / "fixture-config.yaml"
-    for label, weight, resume in configs:
-        run_config = {**template, "run": str(output / label), "multiscale_sensor_weight": weight}
+    for label, arm_weight, resume in configs:
+        run_config = {**template, "run": str(output / label), "multiscale_sensor_weight": arm_weight}
         path.write_text(yaml.safe_dump(run_config, sort_keys=False))
         checkpoint = train(path, initialize=PARENT, stop_after=2 if resume else 4)
         if resume:
@@ -148,7 +150,7 @@ def main(config_path, control_path, output, device, review_path, review_sha256):
         state = torch.load(checkpoint, map_location="cpu", weights_only=True, mmap=True)
         assert state["step"] == 4 and state["config"]["steps"] == 4000
         assert state["config"]["initialized_from"]["sha256"] == PARENT_SHA
-        assert state["config"]["multiscale_sensor_weight"] == weight
+        assert state["config"]["multiscale_sensor_weight"] == arm_weight
         assert (
             len(state["model"]) == len(state["ema"]) == 91
             and len(state["optimizer"]["state"]) == 89
@@ -175,7 +177,7 @@ def main(config_path, control_path, output, device, review_path, review_sha256):
             "paired-RAW",
         ]
         assert all(math.isfinite(r["loss"]) and math.isfinite(r["grad_norm"]) for r in runs[label])
-        if weight:
+        if arm_weight:
             assert any(r["multiscale_sensor"] > 0 for r in runs[label])
             assert all(
                 math.isfinite(r["multiscale_sensor"]) and r["multiscale_sensor"] >= 0
@@ -220,6 +222,7 @@ def main(config_path, control_path, output, device, review_path, review_sha256):
     result = {
         "status": "completed-actual-trainer-sensor-mean-engineering-only",
         "device": device,
+        "loss_weight": weight,
         "preceding": preceding,
         "parent": {"path": str(PARENT), "sha256": PARENT_SHA},
         "source_files": source,
@@ -262,5 +265,14 @@ if __name__ == "__main__":
     parser.add_argument("--device", choices=["cpu", "cuda"], required=True)
     parser.add_argument("--review", type=Path, required=True)
     parser.add_argument("--review-sha256", required=True)
+    parser.add_argument("--weight", type=float, default=0.01)
     args = parser.parse_args()
-    main(args.config, args.control, args.output, args.device, args.review, args.review_sha256)
+    main(
+        args.config,
+        args.control,
+        args.output,
+        args.device,
+        args.review,
+        args.review_sha256,
+        args.weight,
+    )

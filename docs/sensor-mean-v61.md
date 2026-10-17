@@ -9,7 +9,8 @@ without sacrificing photographic detail or paired-real accuracy. The
 [completed V60 comparison](wide-flat-palette-full4k-review.md) improves bright
 high-saturation fields, but retains moderate-saturation errors and lower paired
 primary means than V43. A separate experiment will test .001 from the same
-initializer against the completed V60 control.
+initializer against the completed V60 control; that
+[V62 trial is now running](sensor-mean-v62.md).
 
 [Actual launch, frozen source/config/data hashes and logged-input matches](results/sensor-mean-v61-first1k-launch.json).
 [Complete CPU/CUDA engineering evidence](results/sensor-mean-v61-preparation.json).
@@ -98,7 +99,10 @@ Actual wrong-review and live-owner invocations reject before output creation
 or CUDA initialization. The executed operators are frozen separately from the
 unchanged model worktree. [Preflight driver](../scripts/preflight_sensor_mean.py).
 
-## Required quality review
+## Quality review protocol
+
+The [completed review](sensor-mean-v61-first1k-review.md) follows this protocol
+and rejects continuation of the .01 recipe.
 
 Review against V60 at the same boundary using full 427-photo and procedural
 scores, known/unseen measured-CFA development panels, the fixed 1,176-observation

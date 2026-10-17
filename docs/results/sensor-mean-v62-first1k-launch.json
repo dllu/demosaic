@@ -1,0 +1,1020 @@
+{
+  "status": "ActualV62trainingverifiedlive; no quality result",
+  "workflow": {
+    "path": "/mnt/external/demosaic/runs/sensor-mean-v62-first1k-workflow-v1.json",
+    "sha256": "e1240c3fb78f007a7a222867785387a2474520397ce40826411eaf16e6f04ea8",
+    "result": {
+      "updated_utc": "2026-10-17T03:04:20.428915+00:00",
+      "status": "training-to-first1000-under-original4000-plan",
+      "controller": {
+        "pid": 1943479,
+        "created": 1792206257.22,
+        "driver_sha256": "2b8d872148c52ddd0a88458c09c9371646c0fb9eab2fa083af7d57aedb1db9b5",
+        "model_worktree": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree",
+        "model_source_commit": "0d7d2bb69270e13bec837f889b111a5e63af1cfe"
+      },
+      "plan": "/mnt/external/demosaic/benchmarks/sensor-mean-v62-first1k-workflow-v1/plan.json",
+      "run": "/mnt/external/demosaic/runs/dino-convnext-palette-sensor-mean-small-b16-v62",
+      "planned_updates": 4000,
+      "review_boundary": 1000,
+      "checkpoint": null,
+      "child_pid": 1943524
+    }
+  },
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/sensor-mean-v62-first1k-workflow-v1/plan.json",
+    "sha256": "eb6566694f4d5e450fbc76f3ca850edb14dacb6bcfd3c76b4f3ab9e730dbff33",
+    "result": {
+      "controller": {
+        "pid": 1943479,
+        "created": 1792206257.22,
+        "driver_sha256": "2b8d872148c52ddd0a88458c09c9371646c0fb9eab2fa083af7d57aedb1db9b5",
+        "model_worktree": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree",
+        "model_source_commit": "0d7d2bb69270e13bec837f889b111a5e63af1cfe"
+      },
+      "source_files": {
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/paired_admission.py": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/prior.py": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/metrics.py": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/inference.py": "911e71e8dcbeb1872ed591bc5234ed2b79bae063a859b4704516537d94a1df0b",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/train.py": "d9c7bcf8dcdd6a0ccac6f83cfdbfd9079582cade46648fee0163d2d0dccb0616",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/dino_adaptation.py": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/paired_training.py": "71a2481213bba174bd3d6b3de9ae9b89f88333635810e15d0958352d9d8d053d",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/reference.py": "54ed094d58e245a56993ea3ce3ef9e21d2164e902d41d03bba9132bacd22891f",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/prepare.py": "e4c0733bb260c289b3ce8aaf5f393abc5919d8d81cdcf462b70032d790429712",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/realdata.py": "ed24db2b066531281a196e6fa074130cb0ee78a640eae5ccaaace234f5ad5421",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/cfa.py": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/paired.py": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/audit.py": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/losses.py": "548b1481a035ad937d4a046754a74e70684864a9842296765c62079a002e5120",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/gaussian.py": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/real_suite.py": "69d3d403d36b1230e35083cc55e2c1a485f82cd5058f6be83fb3d5c0c18a6825",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/raw_clean.py": "a143ce351ac4e1b2425d4d561000d3e8934477fe9172c88f90ce76d9b32a7a6c",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/raw_admission.py": "1948afbbf05129190273ab77466f26d9d27dc942716beaab16f077c8c3330803",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/vst.py": "355124a374177f1c08271834149c5979ab3477fdf255c60aa7cee0d47792a76b",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/io.py": "0a1599ffe7f6d935e92fc71e6b086430c6f82678a74952c3b8f31155a0bea83b",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/data.py": "3c8855fe9d6e24d5368f356528ed217a544f185d84f58356eebfb2048cd92197",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/__init__.py": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/calibration.py": "e86f4c602a6cd7fd855d0bcfeb790cf17ed87611f19d97926f9db174909b2d26",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/noise.py": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/precision.py": "9aa850fb5ee0e9abc3e9adc4847ce3518c1acb37c93f6bc54ff9206bb0c94c3a",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/cli.py": "a34d98b1eab4479f67ba5a51b6c8a428db4d8ccf5ee097cd1369bd0cd1ead542",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/reporting.py": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/model.py": "c37f530b3c4265e23af8d04b81e65e19b8ee585538874445e4a95bc337f23a71",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/color.py": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/dino_pyramid.py": "246944874671ceb4449b0487fcb347a00f8b82d713d5b4c9fee5a7c8a68aa95f",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/textures.py": "b4bc304a50de272cf7fcba272e67b828c163466ffc23ea3337a6a66f076dc664",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/nonlocal_reference.py": "7e4a00e9d90a61b772da9c1a7414bf499f84b9c9bb0239fd250fb8263dfb3f88",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/safety.py": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/pretrained_rgb.py": "10ea25fc01bf561a3ea9087002566eb319717c338f44f54d2da46fc6ee0d7026",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/registration.py": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/suite.py": "1a094262e1772f5df8a54cb176c2f3da189d78f48ead3f8002f24e84802059a4"
+      },
+      "inputs": {
+        "/home/dllu/proj/demosaic/docs/results/wide-flat-palette-full4k-review.json": "b65ab9cfa235f0684959861432a4093d4e99f397baf9117ecc22523c54d0d1c2",
+        "/home/dllu/proj/demosaic/docs/results/sensor-mean-v61-first1k-review.json": "f095e3467b11aedc4c7c12713e1274975adae69eec2f51a881e6864457d42d59",
+        "/mnt/external/demosaic/benchmarks/sensor-mean-v62-CPU-preflight-v1/receipt.json": "419ef98ecfcf71a792446b0584c5ec5d4ad10cddcd5941f65ca3728169d727cd",
+        "/mnt/external/demosaic/benchmarks/sensor-mean-v62-CUDA-preflight-v1/receipt.json": "78126fabed8193f701d71f79830c19336e04e3f72ca28951d8353400fb26c4b4",
+        "/mnt/external/demosaic/benchmarks/sensor-mean-v61-negative-preflight-v1/receipt.json": "901756345052a2e2207a6519b0a8f214b2303db86471a33c939c2829c6f754a8",
+        "/mnt/external/demosaic/models/dino-convnext-pyramid-fresh-b16-v58-step10000.pt": "cc1fb5e6d3e0d042c95495dd7bf1bd07c900cb6f7e3b61541f78c9e08098fea3",
+        "/mnt/external/demosaic/models/dino-convnext-palette-wide-b16-v60-step1000.pt": "dde398a05fc5df33167d73967d6b5f62ccf3b165f27f8c745b1fdeb45a87f19a",
+        "/mnt/external/demosaic/evaluation/wide-flat-palette-first1k-complete-audit-v1/frozen-training-logs/wide-first1000-metrics.jsonl": "d1872234d9d22484de4782bb5e48562803a727ee6848883503c253945ac68880",
+        "/home/dllu/proj/demosaic/configs/dino-convnext-palette-sensor-mean-small-b16-v62.yaml": "9b1c55200eceb734748e785d2f0bf9e902c82fe4ef28076cf8e0681c06a5bc87",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/configs/dino-convnext-palette-wide-b16-v60.yaml": "cf2dd23ffcabc8194d073a0a44d0f9eee918085a9f12d5d10b7b579b9bc02ca1",
+        "/home/dllu/proj/demosaic/.cache/sensor-mean-v62-tools-v1/manifest.json": "8d95460d42887e4613063ec7a44e9c00a9a4780737e26ca89d413e550ce2cc9b",
+        "/mnt/external/demosaic/audits/commons-bin4-frozen44732-v1/manifest.jsonl": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+        "/mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a",
+        "/mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json": "b3b36d3ec28b0e2d339cb28f3bc810cc17b31102f4ce6a3454fdfec9a4a4b5e3",
+        "/mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json": "0dde4a0ca1ad68332d8a1c9d61fdc561db6501cd262d534647b979de82e3cf80",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/configs/evaluation.yaml": "74b0df74b9734a714e04a0a1cf1e82ed0ba211b1d5b5fd745b9502ca5af2174c"
+      },
+      "preflight_tools": {
+        "/home/dllu/proj/demosaic/.cache/sensor-mean-v62-tools-v1/preflight_dino_pyramid_cuda.py": "30d32512ed9228397c623dcb39e9336660f82a7b1bdb9601bced471173fca05a",
+        "/home/dllu/proj/demosaic/.cache/sensor-mean-v62-tools-v1/preflight_paired_extension.py": "b549bb7c43bec03045854fe6bc683031620a0b47264b248868e53eb707bb2ff7",
+        "/home/dllu/proj/demosaic/.cache/sensor-mean-v62-tools-v1/preflight_flat_palette_cuda.py": "c8bf68565e523139ccf1a1f40ebc735ba0816dd03d38f038fd60001e7191b1c4",
+        "/home/dllu/proj/demosaic/.cache/sensor-mean-v62-tools-v1/preflight_sensor_mean.py": "e65d9a6a26aa4a625ac358954d746ebb9de57df0e3503aeec566e03ceea88545",
+        "/home/dllu/proj/demosaic/.cache/sensor-mean-v62-tools-v1/audit_flat_palette.py": "6d74628937985798f29958f8b48f01cb27680d026ddf9dda0ec6b80d643fb129"
+      },
+      "config": "/mnt/external/demosaic/benchmarks/sensor-mean-v62-first1k-workflow-v1/dino-convnext-palette-sensor-mean-small-b16-v62.yaml",
+      "config_sha256": "9b1c55200eceb734748e785d2f0bf9e902c82fe4ef28076cf8e0681c06a5bc87",
+      "parent": {
+        "path": "/mnt/external/demosaic/models/dino-convnext-pyramid-fresh-b16-v58-step10000.pt",
+        "sha256": "cc1fb5e6d3e0d042c95495dd7bf1bd07c900cb6f7e3b61541f78c9e08098fea3"
+      },
+      "matched_control": {
+        "name": "V60",
+        "checkpoint": "/mnt/external/demosaic/models/dino-convnext-palette-wide-b16-v60-step1000.pt",
+        "sha256": "dde398a05fc5df33167d73967d6b5f62ccf3b165f27f8c745b1fdeb45a87f19a",
+        "frozen_training_log": "/mnt/external/demosaic/evaluation/wide-flat-palette-first1k-complete-audit-v1/frozen-training-logs/wide-first1000-metrics.jsonl"
+      },
+      "planned_updates": 4000,
+      "first_review_boundary": 1000,
+      "only_training_change": "multiscale_sensor_weight:0 ->0.001",
+      "scope": "V62 tenfold smaller coefficient after completed V61 negative tradeoff review. Full restoration network/frozen DINO, original wide8 palette and40170/native128/paired32. Initialize same V58 EMA/fresh optimizer/EMA/seed48/LR/schedule/precision. Reuse completed V60 control. Freeze whole state at1000 and compare41 logged inputs/domains/LRs exactly. Complete quality/native review required before any continuation; no automatic promotion, schedule retiming, new corpus, output correction or protected-final scoring."
+    }
+  },
+  "preflights": {
+    "CPU": {
+      "path": "/mnt/external/demosaic/benchmarks/sensor-mean-v62-CPU-preflight-v1/receipt.json",
+      "sha256": "419ef98ecfcf71a792446b0584c5ec5d4ad10cddcd5941f65ca3728169d727cd",
+      "result": {
+        "status": "completed-actual-trainer-sensor-mean-engineering-only",
+        "device": "cpu",
+        "loss_weight": 0.001,
+        "preceding": {
+          "path": "/home/dllu/proj/demosaic/docs/results/wide-flat-palette-full4k-review.json",
+          "sha256": "b65ab9cfa235f0684959861432a4093d4e99f397baf9117ecc22523c54d0d1c2",
+          "actual_exits": [
+            {
+              "path": "/mnt/external/demosaic/runs/wide-flat-palette-full4k-workflow-v1.json",
+              "sha256": "3a525181362f1a1da4c81a34342a587fbf6c23faa2638d24527975ee42269210",
+              "controller": {
+                "pid": 1748140,
+                "created": 1792198827.52,
+                "worktree": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree",
+                "source_commit": "0d7d2bb69270e13bec837f889b111a5e63af1cfe",
+                "driver_sha256": "f3914a5ad63fcd0ccecac9ef9c5ff4919acba6e6144e8dfdbc37f6687cb88d0b"
+              },
+              "status": "completed-original4000-and-evaluation-awaiting-manual-review"
+            },
+            {
+              "path": "/mnt/external/demosaic/runs/palette-final-review-workflow-v1.json",
+              "sha256": "48b25b103039f8368a1b0a197277a85bdfa8804bbf0415dc47a2e376fef28f62",
+              "controller": {
+                "pid": 1753053,
+                "created": 1792199436.97,
+                "worktree": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree",
+                "source_commit": "0d7d2bb69270e13bec837f889b111a5e63af1cfe",
+                "driver_sha256": "2028e75197698a35b5036ddaa6d6c4a88e2c46abe2e3e77cb050b13f536d70dc"
+              },
+              "status": "completed-final4k-review-artifacts-awaiting-native-review"
+            },
+            {
+              "path": "/mnt/external/demosaic/runs/rawforge-original-GPU-workflow-v1.json",
+              "sha256": "e407f1bc96c991efc106b5a37d19565f5e567b5723ed748b9a29876b27f3b5c9",
+              "controller": {
+                "pid": 1784864,
+                "created": 1792200897.58,
+                "driver_sha256": "efbc9efbf21ddfb3c9efdeb77405bf2f9c0058b4f3573f9b380a61cb2b35ccb3",
+                "source_commit": "0d7d2bb69270e13bec837f889b111a5e63af1cfe",
+                "worktree": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree"
+              },
+              "status": "completed-original-exports-awaiting-numerical-and-native-review"
+            },
+            {
+              "path": "/mnt/external/demosaic/runs/rawforge-original-GPU-render-workflow-v1.json",
+              "sha256": "d6a348d327478e44d866bc182dc92ee30c439dcbb99dd267f5acd0316275b439",
+              "controller": {
+                "pid": 1837014,
+                "created": 1792202948.95,
+                "driver_sha256": "be85a9b62be728abd642f9fe09fd1fa113f7a5e111dc8eef2e8e67f30913aee0",
+                "worktree": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree"
+              },
+              "status": "completed-original-GPU-native-rendering-awaiting-visual-review"
+            }
+          ]
+        },
+        "parent": {
+          "path": "/mnt/external/demosaic/models/dino-convnext-pyramid-fresh-b16-v58-step10000.pt",
+          "sha256": "cc1fb5e6d3e0d042c95495dd7bf1bd07c900cb6f7e3b61541f78c9e08098fea3"
+        },
+        "source_files": {
+          "src/demosaic/paired_admission.py": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825",
+          "src/demosaic/prior.py": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a",
+          "src/demosaic/metrics.py": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31",
+          "src/demosaic/inference.py": "911e71e8dcbeb1872ed591bc5234ed2b79bae063a859b4704516537d94a1df0b",
+          "src/demosaic/train.py": "d9c7bcf8dcdd6a0ccac6f83cfdbfd9079582cade46648fee0163d2d0dccb0616",
+          "src/demosaic/dino_adaptation.py": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861",
+          "src/demosaic/paired_training.py": "71a2481213bba174bd3d6b3de9ae9b89f88333635810e15d0958352d9d8d053d",
+          "src/demosaic/reference.py": "54ed094d58e245a56993ea3ce3ef9e21d2164e902d41d03bba9132bacd22891f",
+          "src/demosaic/prepare.py": "e4c0733bb260c289b3ce8aaf5f393abc5919d8d81cdcf462b70032d790429712",
+          "src/demosaic/realdata.py": "ed24db2b066531281a196e6fa074130cb0ee78a640eae5ccaaace234f5ad5421",
+          "src/demosaic/cfa.py": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252",
+          "src/demosaic/paired.py": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d",
+          "src/demosaic/audit.py": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d",
+          "src/demosaic/losses.py": "548b1481a035ad937d4a046754a74e70684864a9842296765c62079a002e5120",
+          "src/demosaic/gaussian.py": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72",
+          "src/demosaic/real_suite.py": "69d3d403d36b1230e35083cc55e2c1a485f82cd5058f6be83fb3d5c0c18a6825",
+          "src/demosaic/raw_clean.py": "a143ce351ac4e1b2425d4d561000d3e8934477fe9172c88f90ce76d9b32a7a6c",
+          "src/demosaic/raw_admission.py": "1948afbbf05129190273ab77466f26d9d27dc942716beaab16f077c8c3330803",
+          "src/demosaic/vst.py": "355124a374177f1c08271834149c5979ab3477fdf255c60aa7cee0d47792a76b",
+          "src/demosaic/io.py": "0a1599ffe7f6d935e92fc71e6b086430c6f82678a74952c3b8f31155a0bea83b",
+          "src/demosaic/data.py": "3c8855fe9d6e24d5368f356528ed217a544f185d84f58356eebfb2048cd92197",
+          "src/demosaic/__init__.py": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d",
+          "src/demosaic/calibration.py": "e86f4c602a6cd7fd855d0bcfeb790cf17ed87611f19d97926f9db174909b2d26",
+          "src/demosaic/noise.py": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce",
+          "src/demosaic/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+          "src/demosaic/precision.py": "9aa850fb5ee0e9abc3e9adc4847ce3518c1acb37c93f6bc54ff9206bb0c94c3a",
+          "src/demosaic/cli.py": "a34d98b1eab4479f67ba5a51b6c8a428db4d8ccf5ee097cd1369bd0cd1ead542",
+          "src/demosaic/reporting.py": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d",
+          "src/demosaic/model.py": "c37f530b3c4265e23af8d04b81e65e19b8ee585538874445e4a95bc337f23a71",
+          "src/demosaic/color.py": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+          "src/demosaic/dino_pyramid.py": "246944874671ceb4449b0487fcb347a00f8b82d713d5b4c9fee5a7c8a68aa95f",
+          "src/demosaic/textures.py": "b4bc304a50de272cf7fcba272e67b828c163466ffc23ea3337a6a66f076dc664",
+          "src/demosaic/nonlocal_reference.py": "7e4a00e9d90a61b772da9c1a7414bf499f84b9c9bb0239fd250fb8263dfb3f88",
+          "src/demosaic/safety.py": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7",
+          "src/demosaic/pretrained_rgb.py": "10ea25fc01bf561a3ea9087002566eb319717c338f44f54d2da46fc6ee0d7026",
+          "src/demosaic/registration.py": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202",
+          "src/demosaic/suite.py": "1a094262e1772f5df8a54cb176c2f3da189d78f48ead3f8002f24e84802059a4"
+        },
+        "driver_sha256": "e65d9a6a26aa4a625ac358954d746ebb9de57df0e3503aeec566e03ceea88545",
+        "helper_source_files": {
+          "/home/dllu/proj/demosaic/.cache/sensor-mean-v62-tools-v1/audit_flat_palette.py": "6d74628937985798f29958f8b48f01cb27680d026ddf9dda0ec6b80d643fb129",
+          "/home/dllu/proj/demosaic/.cache/sensor-mean-v62-tools-v1/preflight_flat_palette_cuda.py": "c8bf68565e523139ccf1a1f40ebc735ba0816dd03d38f038fd60001e7191b1c4",
+          "/home/dllu/proj/demosaic/.cache/sensor-mean-v62-tools-v1/preflight_dino_pyramid_cuda.py": "30d32512ed9228397c623dcb39e9336660f82a7b1bdb9601bced471173fca05a",
+          "/home/dllu/proj/demosaic/.cache/sensor-mean-v62-tools-v1/preflight_paired_extension.py": "b549bb7c43bec03045854fe6bc683031620a0b47264b248868e53eb707bb2ff7"
+        },
+        "manifests": {
+          "manifest": {
+            "path": "/mnt/external/demosaic/audits/commons-bin4-frozen44732-v1/manifest.jsonl",
+            "sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3"
+          },
+          "validation_manifest": {
+            "path": "/mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl",
+            "sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a"
+          },
+          "paired_manifest": {
+            "path": "/mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json",
+            "sha256": "b3b36d3ec28b0e2d339cb28f3bc810cc17b31102f4ce6a3454fdfec9a4a4b5e3"
+          },
+          "raw_clean_manifest": {
+            "path": "/mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json",
+            "sha256": "0dde4a0ca1ad68332d8a1c9d61fdc561db6501cd262d534647b979de82e3cf80"
+          }
+        },
+        "configs": [
+          {
+            "path": "/home/dllu/proj/demosaic/configs/dino-convnext-palette-sensor-mean-small-b16-v62.yaml",
+            "sha256": "9b1c55200eceb734748e785d2f0bf9e902c82fe4ef28076cf8e0681c06a5bc87"
+          },
+          {
+            "path": "configs/dino-convnext-palette-wide-b16-v60.yaml",
+            "sha256": "cf2dd23ffcabc8194d073a0a44d0f9eee918085a9f12d5d10b7b579b9bc02ca1"
+          }
+        ],
+        "batch_size": 1,
+        "native_patch": 64,
+        "planned_steps": 4000,
+        "three_domains": true,
+        "all_observation_hashes_match_control": true,
+        "CPU_uninterrupted_vs_resumed_exact_fields": [
+          "model_config",
+          "model",
+          "ema",
+          "optimizer",
+          "python_rng",
+          "torch_rng",
+          "cuda_rng",
+          "best",
+          "step"
+        ],
+        "CUDA_step2_state_restoration_and_portable_EMA": null,
+        "observations": {
+          "control": [
+            {
+              "event": "train",
+              "step": 1,
+              "loss": 0.0017033109907060862,
+              "lr": 2.0000000000000002e-07,
+              "grad_norm": 0.004293519537895918,
+              "seconds_per_step": 0.5341283660382032,
+              "cuda_gb": 0,
+              "domain": "synthetic",
+              "linear": 0.001000016462057829,
+              "rendered": 0.0010064345551654696,
+              "gradient": 0.001000753603875637,
+              "highlight": 0.0,
+              "sensor": 0.0010000183247029781,
+              "batch_sha256": "658aadb3162feb710aee7d05d70ef859e5023ddd14c3545f20a3b8e22ead1c1e"
+            },
+            {
+              "event": "train",
+              "step": 2,
+              "loss": 0.0019272100180387497,
+              "lr": 4.0000000000000003e-07,
+              "grad_norm": 0.12286024540662766,
+              "seconds_per_step": 0.4748997420538217,
+              "cuda_gb": 0,
+              "domain": "synthetic",
+              "linear": 0.0010008241515606642,
+              "rendered": 0.001432757475413382,
+              "gradient": 0.0010989764705300331,
+              "highlight": 0.0,
+              "sensor": 0.0010010949335992336,
+              "batch_sha256": "31b833c303ea19f4f667fecb647d04a25f873d1668762edd5e6a90b669e1200c"
+            },
+            {
+              "event": "train",
+              "step": 3,
+              "loss": 0.010342010296881199,
+              "lr": 6.000000000000001e-07,
+              "grad_norm": 0.27177199721336365,
+              "seconds_per_step": 0.45489666300515336,
+              "cuda_gb": 0,
+              "domain": "native-RAW-synthetic",
+              "linear": 0.0035354793071746826,
+              "rendered": 0.010583954863250256,
+              "gradient": 0.013399113900959492,
+              "highlight": 0.0,
+              "sensor": 0.0017464134143665433,
+              "batch_sha256": "e08b4e04080e1df75e71c22bc52d525ee4b0c4599a47d431ee703788a84d5b98"
+            },
+            {
+              "event": "train",
+              "step": 4,
+              "loss": 0.0009106139186769724,
+              "lr": 8.000000000000001e-07,
+              "grad_norm": 0.3796900808811188,
+              "seconds_per_step": 0.44701289874501526,
+              "cuda_gb": 0,
+              "domain": "paired-RAW",
+              "paired_sensor": 0.00033022649586200714,
+              "paired_coarse_rendered": 0.0010947295231744647,
+              "paired_auxiliary": 0.00033022649586200714,
+              "batch_sha256": "79802bace1dafb6b854dc6bc4657ef033d711fd7321a13c280ce50f9823d9217"
+            }
+          ],
+          "loss-full": [
+            {
+              "event": "train",
+              "step": 1,
+              "loss": 0.002430051565170288,
+              "lr": 2.0000000000000002e-07,
+              "grad_norm": 1.1810860633850098,
+              "seconds_per_step": 0.4246908409986645,
+              "cuda_gb": 0,
+              "domain": "synthetic",
+              "linear": 0.001000016462057829,
+              "rendered": 0.0010064345551654696,
+              "gradient": 0.001000753603875637,
+              "highlight": 0.0,
+              "sensor": 0.0010000183247029781,
+              "multiscale_sensor": 0.7267405986785889,
+              "batch_sha256": "658aadb3162feb710aee7d05d70ef859e5023ddd14c3545f20a3b8e22ead1c1e"
+            },
+            {
+              "event": "train",
+              "step": 2,
+              "loss": 0.0024180307518690825,
+              "lr": 4.0000000000000003e-07,
+              "grad_norm": 1.2658140659332275,
+              "seconds_per_step": 0.4273496544919908,
+              "cuda_gb": 0,
+              "domain": "synthetic",
+              "linear": 0.001000815536826849,
+              "rendered": 0.0014323635259643197,
+              "gradient": 0.0010990548180416226,
+              "highlight": 0.0,
+              "sensor": 0.001001081196591258,
+              "multiscale_sensor": 0.4910198450088501,
+              "batch_sha256": "31b833c303ea19f4f667fecb647d04a25f873d1668762edd5e6a90b669e1200c"
+            },
+            {
+              "event": "train",
+              "step": 3,
+              "loss": 0.010341746732592583,
+              "lr": 6.000000000000001e-07,
+              "grad_norm": 0.2720271944999695,
+              "seconds_per_step": 0.42912405263632536,
+              "cuda_gb": 0,
+              "domain": "native-RAW-synthetic",
+              "linear": 0.0035350609105080366,
+              "rendered": 0.01058417558670044,
+              "gradient": 0.01340004988014698,
+              "highlight": 0.0,
+              "sensor": 0.0017459334339946508,
+              "multiscale_sensor": 0.0,
+              "batch_sha256": "e08b4e04080e1df75e71c22bc52d525ee4b0c4599a47d431ee703788a84d5b98"
+            },
+            {
+              "event": "train",
+              "step": 4,
+              "loss": 0.001665634335950017,
+              "lr": 8.000000000000001e-07,
+              "grad_norm": 1.2096821069717407,
+              "seconds_per_step": 0.43219289497938007,
+              "cuda_gb": 0,
+              "domain": "paired-RAW",
+              "paired_sensor": 0.0003308236482553184,
+              "paired_coarse_rendered": 0.001095824409276247,
+              "paired_auxiliary": 0.0003308236482553184,
+              "multiscale_sensor": 0.7538161277770996,
+              "batch_sha256": "79802bace1dafb6b854dc6bc4657ef033d711fd7321a13c280ce50f9823d9217"
+            }
+          ],
+          "loss-resumed": [
+            {
+              "event": "train",
+              "step": 1,
+              "loss": 0.002430051565170288,
+              "lr": 2.0000000000000002e-07,
+              "grad_norm": 1.1810860633850098,
+              "seconds_per_step": 0.4909974168986082,
+              "cuda_gb": 0,
+              "domain": "synthetic",
+              "linear": 0.001000016462057829,
+              "rendered": 0.0010064345551654696,
+              "gradient": 0.001000753603875637,
+              "highlight": 0.0,
+              "sensor": 0.0010000183247029781,
+              "multiscale_sensor": 0.7267405986785889,
+              "batch_sha256": "658aadb3162feb710aee7d05d70ef859e5023ddd14c3545f20a3b8e22ead1c1e"
+            },
+            {
+              "event": "train",
+              "step": 2,
+              "loss": 0.0024180307518690825,
+              "lr": 4.0000000000000003e-07,
+              "grad_norm": 1.2658140659332275,
+              "seconds_per_step": 0.4579438865184784,
+              "cuda_gb": 0,
+              "domain": "synthetic",
+              "linear": 0.001000815536826849,
+              "rendered": 0.0014323635259643197,
+              "gradient": 0.0010990548180416226,
+              "highlight": 0.0,
+              "sensor": 0.001001081196591258,
+              "multiscale_sensor": 0.4910198450088501,
+              "batch_sha256": "31b833c303ea19f4f667fecb647d04a25f873d1668762edd5e6a90b669e1200c"
+            },
+            {
+              "event": "train",
+              "step": 3,
+              "loss": 0.010341746732592583,
+              "lr": 6.000000000000001e-07,
+              "grad_norm": 0.2720271944999695,
+              "seconds_per_step": 0.4340675291605294,
+              "cuda_gb": 0,
+              "domain": "native-RAW-synthetic",
+              "linear": 0.0035350609105080366,
+              "rendered": 0.01058417558670044,
+              "gradient": 0.01340004988014698,
+              "highlight": 0.0,
+              "sensor": 0.0017459334339946508,
+              "multiscale_sensor": 0.0,
+              "batch_sha256": "e08b4e04080e1df75e71c22bc52d525ee4b0c4599a47d431ee703788a84d5b98"
+            },
+            {
+              "event": "train",
+              "step": 4,
+              "loss": 0.001665634335950017,
+              "lr": 8.000000000000001e-07,
+              "grad_norm": 1.2096821069717407,
+              "seconds_per_step": 0.42979286704212427,
+              "cuda_gb": 0,
+              "domain": "paired-RAW",
+              "paired_sensor": 0.0003308236482553184,
+              "paired_coarse_rendered": 0.001095824409276247,
+              "paired_auxiliary": 0.0003308236482553184,
+              "multiscale_sensor": 0.7538161277770996,
+              "batch_sha256": "79802bace1dafb6b854dc6bc4657ef033d711fd7321a13c280ce50f9823d9217"
+            }
+          ]
+        },
+        "checkpoints": {
+          "control": {
+            "path": "/mnt/external/demosaic/benchmarks/sensor-mean-v62-CPU-preflight-v1/control/last.pt",
+            "sha256": "6964a04e10fc8cecfae242c67c7185e095c8122e850cb62e46e18c0361e3d3d5"
+          },
+          "loss-full": {
+            "path": "/mnt/external/demosaic/benchmarks/sensor-mean-v62-CPU-preflight-v1/loss-full/last.pt",
+            "sha256": "fd0bf2c662a3858ae33d104a326fd2f238eca975cecb18a5e1c8c286c739a3fd"
+          },
+          "loss-resumed": {
+            "path": "/mnt/external/demosaic/benchmarks/sensor-mean-v62-CPU-preflight-v1/loss-resumed/last.pt",
+            "sha256": "e7ae5d6a2101f5c527cdd1caea457eb694475184a0474bdbd2498910c697d11a"
+          }
+        },
+        "peak_cuda_allocated_bytes": null,
+        "limitations": "Four discarded updates per arm, forced smooth Commons/workers0. CPU exact restart is separate from CUDA saved-state/portable checks; no deterministic CUDA optimization claim. Full restoration network trains with frozen DINO backbone. No quality, throughput, general color repair or model promotion claim."
+      }
+    },
+    "CUDA": {
+      "path": "/mnt/external/demosaic/benchmarks/sensor-mean-v62-CUDA-preflight-v1/receipt.json",
+      "sha256": "78126fabed8193f701d71f79830c19336e04e3f72ca28951d8353400fb26c4b4",
+      "result": {
+        "status": "completed-actual-trainer-sensor-mean-engineering-only",
+        "device": "cuda",
+        "loss_weight": 0.001,
+        "preceding": {
+          "path": "/home/dllu/proj/demosaic/docs/results/wide-flat-palette-full4k-review.json",
+          "sha256": "b65ab9cfa235f0684959861432a4093d4e99f397baf9117ecc22523c54d0d1c2",
+          "actual_exits": [
+            {
+              "path": "/mnt/external/demosaic/runs/wide-flat-palette-full4k-workflow-v1.json",
+              "sha256": "3a525181362f1a1da4c81a34342a587fbf6c23faa2638d24527975ee42269210",
+              "controller": {
+                "pid": 1748140,
+                "created": 1792198827.52,
+                "worktree": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree",
+                "source_commit": "0d7d2bb69270e13bec837f889b111a5e63af1cfe",
+                "driver_sha256": "f3914a5ad63fcd0ccecac9ef9c5ff4919acba6e6144e8dfdbc37f6687cb88d0b"
+              },
+              "status": "completed-original4000-and-evaluation-awaiting-manual-review"
+            },
+            {
+              "path": "/mnt/external/demosaic/runs/palette-final-review-workflow-v1.json",
+              "sha256": "48b25b103039f8368a1b0a197277a85bdfa8804bbf0415dc47a2e376fef28f62",
+              "controller": {
+                "pid": 1753053,
+                "created": 1792199436.97,
+                "worktree": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree",
+                "source_commit": "0d7d2bb69270e13bec837f889b111a5e63af1cfe",
+                "driver_sha256": "2028e75197698a35b5036ddaa6d6c4a88e2c46abe2e3e77cb050b13f536d70dc"
+              },
+              "status": "completed-final4k-review-artifacts-awaiting-native-review"
+            },
+            {
+              "path": "/mnt/external/demosaic/runs/rawforge-original-GPU-workflow-v1.json",
+              "sha256": "e407f1bc96c991efc106b5a37d19565f5e567b5723ed748b9a29876b27f3b5c9",
+              "controller": {
+                "pid": 1784864,
+                "created": 1792200897.58,
+                "driver_sha256": "efbc9efbf21ddfb3c9efdeb77405bf2f9c0058b4f3573f9b380a61cb2b35ccb3",
+                "source_commit": "0d7d2bb69270e13bec837f889b111a5e63af1cfe",
+                "worktree": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree"
+              },
+              "status": "completed-original-exports-awaiting-numerical-and-native-review"
+            },
+            {
+              "path": "/mnt/external/demosaic/runs/rawforge-original-GPU-render-workflow-v1.json",
+              "sha256": "d6a348d327478e44d866bc182dc92ee30c439dcbb99dd267f5acd0316275b439",
+              "controller": {
+                "pid": 1837014,
+                "created": 1792202948.95,
+                "driver_sha256": "be85a9b62be728abd642f9fe09fd1fa113f7a5e111dc8eef2e8e67f30913aee0",
+                "worktree": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree"
+              },
+              "status": "completed-original-GPU-native-rendering-awaiting-visual-review"
+            }
+          ]
+        },
+        "parent": {
+          "path": "/mnt/external/demosaic/models/dino-convnext-pyramid-fresh-b16-v58-step10000.pt",
+          "sha256": "cc1fb5e6d3e0d042c95495dd7bf1bd07c900cb6f7e3b61541f78c9e08098fea3"
+        },
+        "source_files": {
+          "src/demosaic/paired_admission.py": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825",
+          "src/demosaic/prior.py": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a",
+          "src/demosaic/metrics.py": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31",
+          "src/demosaic/inference.py": "911e71e8dcbeb1872ed591bc5234ed2b79bae063a859b4704516537d94a1df0b",
+          "src/demosaic/train.py": "d9c7bcf8dcdd6a0ccac6f83cfdbfd9079582cade46648fee0163d2d0dccb0616",
+          "src/demosaic/dino_adaptation.py": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861",
+          "src/demosaic/paired_training.py": "71a2481213bba174bd3d6b3de9ae9b89f88333635810e15d0958352d9d8d053d",
+          "src/demosaic/reference.py": "54ed094d58e245a56993ea3ce3ef9e21d2164e902d41d03bba9132bacd22891f",
+          "src/demosaic/prepare.py": "e4c0733bb260c289b3ce8aaf5f393abc5919d8d81cdcf462b70032d790429712",
+          "src/demosaic/realdata.py": "ed24db2b066531281a196e6fa074130cb0ee78a640eae5ccaaace234f5ad5421",
+          "src/demosaic/cfa.py": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252",
+          "src/demosaic/paired.py": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d",
+          "src/demosaic/audit.py": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d",
+          "src/demosaic/losses.py": "548b1481a035ad937d4a046754a74e70684864a9842296765c62079a002e5120",
+          "src/demosaic/gaussian.py": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72",
+          "src/demosaic/real_suite.py": "69d3d403d36b1230e35083cc55e2c1a485f82cd5058f6be83fb3d5c0c18a6825",
+          "src/demosaic/raw_clean.py": "a143ce351ac4e1b2425d4d561000d3e8934477fe9172c88f90ce76d9b32a7a6c",
+          "src/demosaic/raw_admission.py": "1948afbbf05129190273ab77466f26d9d27dc942716beaab16f077c8c3330803",
+          "src/demosaic/vst.py": "355124a374177f1c08271834149c5979ab3477fdf255c60aa7cee0d47792a76b",
+          "src/demosaic/io.py": "0a1599ffe7f6d935e92fc71e6b086430c6f82678a74952c3b8f31155a0bea83b",
+          "src/demosaic/data.py": "3c8855fe9d6e24d5368f356528ed217a544f185d84f58356eebfb2048cd92197",
+          "src/demosaic/__init__.py": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d",
+          "src/demosaic/calibration.py": "e86f4c602a6cd7fd855d0bcfeb790cf17ed87611f19d97926f9db174909b2d26",
+          "src/demosaic/noise.py": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce",
+          "src/demosaic/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+          "src/demosaic/precision.py": "9aa850fb5ee0e9abc3e9adc4847ce3518c1acb37c93f6bc54ff9206bb0c94c3a",
+          "src/demosaic/cli.py": "a34d98b1eab4479f67ba5a51b6c8a428db4d8ccf5ee097cd1369bd0cd1ead542",
+          "src/demosaic/reporting.py": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d",
+          "src/demosaic/model.py": "c37f530b3c4265e23af8d04b81e65e19b8ee585538874445e4a95bc337f23a71",
+          "src/demosaic/color.py": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+          "src/demosaic/dino_pyramid.py": "246944874671ceb4449b0487fcb347a00f8b82d713d5b4c9fee5a7c8a68aa95f",
+          "src/demosaic/textures.py": "b4bc304a50de272cf7fcba272e67b828c163466ffc23ea3337a6a66f076dc664",
+          "src/demosaic/nonlocal_reference.py": "7e4a00e9d90a61b772da9c1a7414bf499f84b9c9bb0239fd250fb8263dfb3f88",
+          "src/demosaic/safety.py": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7",
+          "src/demosaic/pretrained_rgb.py": "10ea25fc01bf561a3ea9087002566eb319717c338f44f54d2da46fc6ee0d7026",
+          "src/demosaic/registration.py": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202",
+          "src/demosaic/suite.py": "1a094262e1772f5df8a54cb176c2f3da189d78f48ead3f8002f24e84802059a4"
+        },
+        "driver_sha256": "e65d9a6a26aa4a625ac358954d746ebb9de57df0e3503aeec566e03ceea88545",
+        "helper_source_files": {
+          "/home/dllu/proj/demosaic/.cache/sensor-mean-v62-tools-v1/audit_flat_palette.py": "6d74628937985798f29958f8b48f01cb27680d026ddf9dda0ec6b80d643fb129",
+          "/home/dllu/proj/demosaic/.cache/sensor-mean-v62-tools-v1/preflight_flat_palette_cuda.py": "c8bf68565e523139ccf1a1f40ebc735ba0816dd03d38f038fd60001e7191b1c4",
+          "/home/dllu/proj/demosaic/.cache/sensor-mean-v62-tools-v1/preflight_dino_pyramid_cuda.py": "30d32512ed9228397c623dcb39e9336660f82a7b1bdb9601bced471173fca05a",
+          "/home/dllu/proj/demosaic/.cache/sensor-mean-v62-tools-v1/preflight_paired_extension.py": "b549bb7c43bec03045854fe6bc683031620a0b47264b248868e53eb707bb2ff7"
+        },
+        "manifests": {
+          "manifest": {
+            "path": "/mnt/external/demosaic/audits/commons-bin4-frozen44732-v1/manifest.jsonl",
+            "sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3"
+          },
+          "validation_manifest": {
+            "path": "/mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl",
+            "sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a"
+          },
+          "paired_manifest": {
+            "path": "/mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json",
+            "sha256": "b3b36d3ec28b0e2d339cb28f3bc810cc17b31102f4ce6a3454fdfec9a4a4b5e3"
+          },
+          "raw_clean_manifest": {
+            "path": "/mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json",
+            "sha256": "0dde4a0ca1ad68332d8a1c9d61fdc561db6501cd262d534647b979de82e3cf80"
+          }
+        },
+        "configs": [
+          {
+            "path": "/home/dllu/proj/demosaic/configs/dino-convnext-palette-sensor-mean-small-b16-v62.yaml",
+            "sha256": "9b1c55200eceb734748e785d2f0bf9e902c82fe4ef28076cf8e0681c06a5bc87"
+          },
+          {
+            "path": "configs/dino-convnext-palette-wide-b16-v60.yaml",
+            "sha256": "cf2dd23ffcabc8194d073a0a44d0f9eee918085a9f12d5d10b7b579b9bc02ca1"
+          }
+        ],
+        "batch_size": 16,
+        "native_patch": 256,
+        "planned_steps": 4000,
+        "three_domains": true,
+        "all_observation_hashes_match_control": true,
+        "CPU_uninterrupted_vs_resumed_exact_fields": [],
+        "CUDA_step2_state_restoration_and_portable_EMA": [
+          {
+            "input": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+            "input_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+            "shape": [
+              1,
+              3,
+              256,
+              256
+            ],
+            "FP16_portable_EMA_exact": true
+          },
+          {
+            "input": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+            "input_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+            "shape": [
+              1,
+              3,
+              256,
+              256
+            ],
+            "FP16_portable_EMA_exact": true
+          }
+        ],
+        "observations": {
+          "control": [
+            {
+              "event": "train",
+              "step": 1,
+              "loss": 0.002148536266759038,
+              "lr": 2.0000000000000002e-07,
+              "grad_norm": 0.46509650349617004,
+              "seconds_per_step": 11.983485223958269,
+              "cuda_gb": 7.200379392,
+              "domain": "synthetic",
+              "linear": 0.00102146714925766,
+              "rendered": 0.0018297235947102308,
+              "gradient": 0.0010985786793753505,
+              "highlight": 0.0,
+              "sensor": 0.0010234948713332415,
+              "batch_sha256": "eb144c0eaa6199ed243c2a7494224b1f737da5c2867a0f2ad129241c97f137dd"
+            },
+            {
+              "event": "train",
+              "step": 2,
+              "loss": 0.02372259646654129,
+              "lr": 4.0000000000000003e-07,
+              "grad_norm": 0.5269097089767456,
+              "seconds_per_step": 6.331911799963564,
+              "cuda_gb": 7.200379392,
+              "domain": "synthetic",
+              "linear": 0.009026913903653622,
+              "rendered": 0.008256953209638596,
+              "gradient": 0.0010660068364813924,
+              "highlight": 0.0966716930270195,
+              "sensor": 0.007934341207146645,
+              "batch_sha256": "3e2c454bf2bda01f3808f3830a625c8896944dfe4ffdd3848a19d5fd61eea528"
+            },
+            {
+              "event": "train",
+              "step": 3,
+              "loss": 0.007074101362377405,
+              "lr": 6.000000000000001e-07,
+              "grad_norm": 0.05110966041684151,
+              "seconds_per_step": 4.433130972941096,
+              "cuda_gb": 7.200379392,
+              "domain": "native-RAW-synthetic",
+              "linear": 0.002225299132987857,
+              "rendered": 0.006333863362669945,
+              "gradient": 0.006746063008904457,
+              "highlight": 0.00798379722982645,
+              "sensor": 0.002088844310492277,
+              "batch_sha256": "04d6355eb1e8c075a9a5c02619db18df40890e6614c8e883c5801175562148ef"
+            },
+            {
+              "event": "train",
+              "step": 4,
+              "loss": 0.002435134956613183,
+              "lr": 8.000000000000001e-07,
+              "grad_norm": 0.09318628162145615,
+              "seconds_per_step": 3.49036343221087,
+              "cuda_gb": 7.200379392,
+              "domain": "paired-RAW",
+              "paired_sensor": 0.0008834998006932437,
+              "paired_coarse_rendered": 0.0029294751584529877,
+              "paired_auxiliary": 0.000868976057972759,
+              "batch_sha256": "e4274dd30238cb5309010c45844643d53d02d0005eb3acf8ee5e663835a4ea9f"
+            }
+          ],
+          "loss-resumed": [
+            {
+              "event": "train",
+              "step": 1,
+              "loss": 0.002730929758399725,
+              "lr": 2.0000000000000002e-07,
+              "grad_norm": 0.7070981860160828,
+              "seconds_per_step": 0.5958465901203454,
+              "cuda_gb": 7.200379392,
+              "domain": "synthetic",
+              "linear": 0.00102146714925766,
+              "rendered": 0.0018297235947102308,
+              "gradient": 0.0010985786793753505,
+              "highlight": 0.0,
+              "sensor": 0.0010234948713332415,
+              "multiscale_sensor": 0.5823934078216553,
+              "batch_sha256": "eb144c0eaa6199ed243c2a7494224b1f737da5c2867a0f2ad129241c97f137dd"
+            },
+            {
+              "event": "train",
+              "step": 2,
+              "loss": 0.024351883679628372,
+              "lr": 4.0000000000000003e-07,
+              "grad_norm": 0.7028946280479431,
+              "seconds_per_step": 0.5871602350380272,
+              "cuda_gb": 7.200379392,
+              "domain": "synthetic",
+              "linear": 0.009026119485497475,
+              "rendered": 0.008256742730736732,
+              "gradient": 0.0010660106781870127,
+              "highlight": 0.096660315990448,
+              "sensor": 0.007933557033538818,
+              "multiscale_sensor": 0.6314033269882202,
+              "batch_sha256": "3e2c454bf2bda01f3808f3830a625c8896944dfe4ffdd3848a19d5fd61eea528"
+            },
+            {
+              "event": "train",
+              "step": 3,
+              "loss": 0.008179276250302792,
+              "lr": 6.000000000000001e-07,
+              "grad_norm": 1.2662080526351929,
+              "seconds_per_step": 0.6760092268232256,
+              "cuda_gb": 7.200379392,
+              "domain": "native-RAW-synthetic",
+              "linear": 0.002225327305495739,
+              "rendered": 0.006333921104669571,
+              "gradient": 0.006746013183146715,
+              "highlight": 0.00798550620675087,
+              "sensor": 0.002088867826387286,
+              "multiscale_sensor": 1.1049498319625854,
+              "batch_sha256": "04d6355eb1e8c075a9a5c02619db18df40890e6614c8e883c5801175562148ef"
+            },
+            {
+              "event": "train",
+              "step": 4,
+              "loss": 0.003859526477754116,
+              "lr": 8.000000000000001e-07,
+              "grad_norm": 0.330124169588089,
+              "seconds_per_step": 0.644935937016271,
+              "cuda_gb": 7.200379392,
+              "domain": "paired-RAW",
+              "paired_sensor": 0.0008836828637868166,
+              "paired_coarse_rendered": 0.0029292211402207613,
+              "paired_auxiliary": 0.0008691344410181046,
+              "multiscale_sensor": 1.4243196249008179,
+              "batch_sha256": "e4274dd30238cb5309010c45844643d53d02d0005eb3acf8ee5e663835a4ea9f"
+            }
+          ]
+        },
+        "checkpoints": {
+          "control": {
+            "path": "/mnt/external/demosaic/benchmarks/sensor-mean-v62-CUDA-preflight-v1/control/last.pt",
+            "sha256": "55f2d00b5eff79a1dc1d682274b21f7d76b8f5c528a3fbf79bde8c0141ddf496"
+          },
+          "loss-resumed": {
+            "path": "/mnt/external/demosaic/benchmarks/sensor-mean-v62-CUDA-preflight-v1/loss-resumed/last.pt",
+            "sha256": "d2aac75d5b0037ede9c6fbc024dd05164e31cfed878e0fe2a4c777168bc5ddb6"
+          }
+        },
+        "peak_cuda_allocated_bytes": 7200379392,
+        "limitations": "Four discarded updates per arm, forced smooth Commons/workers0. CPU exact restart is separate from CUDA saved-state/portable checks; no deterministic CUDA optimization claim. Full restoration network trains with frozen DINO backbone. No quality, throughput, general color repair or model promotion claim."
+      }
+    }
+  },
+  "tests": {
+    "path": "/home/dllu/proj/demosaic/.cache/sensor-mean-v62-physical-reporting-tests.log",
+    "sha256": "9b85c2cd213537eb2708cae5e3aba150c0d59e4f03e619ded49b015b3649ae00",
+    "result": ".s.............                                                          [100%]\n14 passed, 1 skipped in 3.03s\n"
+  },
+  "startup_logged_rows": [
+    {
+      "event": "train",
+      "step": 1,
+      "loss": 0.011055086739361286,
+      "lr": 2.0000000000000002e-07,
+      "grad_norm": 3.5999300479888916,
+      "seconds_per_step": 13.670025362167507,
+      "cuda_gb": 7.200379904,
+      "domain": "synthetic",
+      "linear": 0.0036438466049730778,
+      "rendered": 0.007315370719879866,
+      "gradient": 0.006908993702381849,
+      "highlight": 0.012804771773517132,
+      "sensor": 0.003173172939568758,
+      "multiscale_sensor": 1.4648607969284058,
+      "batch_sha256": "3b667124aae6d2020f8221b28793979171760ea4732b6c3d638ffa9b1130d219"
+    },
+    {
+      "event": "train",
+      "step": 25,
+      "loss": 0.004144648090004921,
+      "lr": 5e-06,
+      "grad_norm": 0.6800006031990051,
+      "seconds_per_step": 1.330440448001027,
+      "cuda_gb": 7.200379904,
+      "domain": "paired-RAW",
+      "paired_sensor": 0.00102556764613837,
+      "paired_coarse_rendered": 0.002868082607164979,
+      "paired_auxiliary": 0.0009042600286193192,
+      "multiscale_sensor": 1.5946128368377686,
+      "batch_sha256": "e4a2f083d436dd984f56ba1df721e0d9ac2fb814571e3e8c4fd9bf2ef9797e97"
+    },
+    {
+      "event": "train",
+      "step": 50,
+      "loss": 0.021268948912620544,
+      "lr": 1e-05,
+      "grad_norm": 3.8596251010894775,
+      "seconds_per_step": 0.9363335677795113,
+      "cuda_gb": 7.200379904,
+      "domain": "synthetic",
+      "linear": 0.010034573264420033,
+      "rendered": 0.011106598190963268,
+      "gradient": 0.01041629258543253,
+      "highlight": 0.014949583448469639,
+      "sensor": 0.00803791731595993,
+      "multiscale_sensor": 2.3406989574432373,
+      "batch_sha256": "cc1eab3c4aa88167edba8d9a95c10e5bfb908a3212f1acbedb7b789134b22353"
+    },
+    {
+      "event": "train",
+      "step": 75,
+      "loss": 0.009535902179777622,
+      "lr": 1.5000000000000002e-05,
+      "grad_norm": 3.0350003242492676,
+      "seconds_per_step": 0.808121921333174,
+      "cuda_gb": 7.200379904,
+      "domain": "native-RAW-synthetic",
+      "linear": 0.001992872916162014,
+      "rendered": 0.006738245487213135,
+      "gradient": 0.005776505917310715,
+      "highlight": 0.01985129714012146,
+      "sensor": 0.0018627531826496124,
+      "multiscale_sensor": 1.4248507022857666,
+      "batch_sha256": "c412d8d7cbc3871f14eeb9afc8db4f04a2a0fcfbd8dfc59d7eef0921916efef3"
+    },
+    {
+      "event": "train",
+      "step": 100,
+      "loss": 0.005772995762526989,
+      "lr": 2e-05,
+      "grad_norm": 0.448991596698761,
+      "seconds_per_step": 0.7428925467096269,
+      "cuda_gb": 7.200379904,
+      "domain": "paired-RAW",
+      "paired_sensor": 0.0017540686530992389,
+      "paired_coarse_rendered": 0.00432970467954874,
+      "paired_auxiliary": 0.0018676191102713346,
+      "multiscale_sensor": 1.6673126220703125,
+      "batch_sha256": "08755ce6517bdc49532987030b53c8105e5b07b4559364f7a0e1931539e718c4"
+    }
+  ],
+  "all_startup_logged_input_domain_LR_hashes_match_completed_V60": true,
+  "actual_controller_live": true,
+  "review_queue": {
+    "path": "/mnt/external/demosaic/runs/sensor-mean-v62-first1k-review-workflow-v1.json",
+    "sha256": "1ac59f8b1e3b72ea358aa31bf22714a9785e14c1b34f9519397e36b54e917861",
+    "result": {
+      "updated_utc": "2026-10-17T03:04:59.496349+00:00",
+      "status": "waiting-for-actual-V62-trainer-exit-no-GPU-evaluation-started",
+      "controller": {
+        "pid": 1944140,
+        "created": 1792206299.38,
+        "driver_sha256": "2edf4dcb7d548938ca4f5d35617fe53f92b8ff7ff3918eccb2fd28ae44f0c13b",
+        "worktree": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree"
+      },
+      "previous_owner": {
+        "pid": 1943479,
+        "created": 1792206257.22,
+        "driver_sha256": "2b8d872148c52ddd0a88458c09c9371646c0fb9eab2fa083af7d57aedb1db9b5",
+        "model_worktree": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree",
+        "model_source_commit": "0d7d2bb69270e13bec837f889b111a5e63af1cfe"
+      },
+      "plan": "/mnt/external/demosaic/benchmarks/sensor-mean-v62-first1k-review-workflow-v1/plan.json",
+      "outputs": {
+        "known": "/mnt/external/demosaic/evaluation/sensor-mean-v62-first1k-known-v1",
+        "unseen": "/mnt/external/demosaic/evaluation/sensor-mean-v62-first1k-unseen-v1",
+        "full427": "/mnt/external/demosaic/evaluation/sensor-mean-v62-first1k-full427-v1",
+        "analytic": "/mnt/external/demosaic/evaluation/sensor-mean-v62-first1k-analytic-v1",
+        "gfx": "/mnt/external/demosaic/evaluation/sensor-mean-v62-first1k-gfx-v1",
+        "three-camera": "/mnt/external/demosaic/evaluation/sensor-mean-v62-first1k-three-camera-v1",
+        "colored-CPU": "/mnt/external/demosaic/evaluation/sensor-mean-v62-first1k-colored-CPU-v1"
+      }
+    }
+  },
+  "queue_plan": {
+    "path": "/mnt/external/demosaic/benchmarks/sensor-mean-v62-first1k-review-workflow-v1/plan.json",
+    "sha256": "8909f17e4a1936ed54f5e7e7a5b0cd1380b60a5141ebe7b734b369a28de008b4",
+    "result": {
+      "controller": {
+        "pid": 1944140,
+        "created": 1792206299.38,
+        "driver_sha256": "2edf4dcb7d548938ca4f5d35617fe53f92b8ff7ff3918eccb2fd28ae44f0c13b",
+        "worktree": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree"
+      },
+      "previous_owner": {
+        "pid": 1943479,
+        "created": 1792206257.22,
+        "driver_sha256": "2b8d872148c52ddd0a88458c09c9371646c0fb9eab2fa083af7d57aedb1db9b5",
+        "model_worktree": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree",
+        "model_source_commit": "0d7d2bb69270e13bec837f889b111a5e63af1cfe"
+      },
+      "source_files": {
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/paired_admission.py": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/prior.py": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/metrics.py": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/inference.py": "911e71e8dcbeb1872ed591bc5234ed2b79bae063a859b4704516537d94a1df0b",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/train.py": "d9c7bcf8dcdd6a0ccac6f83cfdbfd9079582cade46648fee0163d2d0dccb0616",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/dino_adaptation.py": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/paired_training.py": "71a2481213bba174bd3d6b3de9ae9b89f88333635810e15d0958352d9d8d053d",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/reference.py": "54ed094d58e245a56993ea3ce3ef9e21d2164e902d41d03bba9132bacd22891f",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/prepare.py": "e4c0733bb260c289b3ce8aaf5f393abc5919d8d81cdcf462b70032d790429712",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/realdata.py": "ed24db2b066531281a196e6fa074130cb0ee78a640eae5ccaaace234f5ad5421",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/cfa.py": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/paired.py": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/audit.py": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/losses.py": "548b1481a035ad937d4a046754a74e70684864a9842296765c62079a002e5120",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/gaussian.py": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/real_suite.py": "69d3d403d36b1230e35083cc55e2c1a485f82cd5058f6be83fb3d5c0c18a6825",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/raw_clean.py": "a143ce351ac4e1b2425d4d561000d3e8934477fe9172c88f90ce76d9b32a7a6c",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/raw_admission.py": "1948afbbf05129190273ab77466f26d9d27dc942716beaab16f077c8c3330803",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/vst.py": "355124a374177f1c08271834149c5979ab3477fdf255c60aa7cee0d47792a76b",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/io.py": "0a1599ffe7f6d935e92fc71e6b086430c6f82678a74952c3b8f31155a0bea83b",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/data.py": "3c8855fe9d6e24d5368f356528ed217a544f185d84f58356eebfb2048cd92197",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/__init__.py": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/calibration.py": "e86f4c602a6cd7fd855d0bcfeb790cf17ed87611f19d97926f9db174909b2d26",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/noise.py": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/precision.py": "9aa850fb5ee0e9abc3e9adc4847ce3518c1acb37c93f6bc54ff9206bb0c94c3a",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/cli.py": "a34d98b1eab4479f67ba5a51b6c8a428db4d8ccf5ee097cd1369bd0cd1ead542",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/reporting.py": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/model.py": "c37f530b3c4265e23af8d04b81e65e19b8ee585538874445e4a95bc337f23a71",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/color.py": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/dino_pyramid.py": "246944874671ceb4449b0487fcb347a00f8b82d713d5b4c9fee5a7c8a68aa95f",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/textures.py": "b4bc304a50de272cf7fcba272e67b828c163466ffc23ea3337a6a66f076dc664",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/nonlocal_reference.py": "7e4a00e9d90a61b772da9c1a7414bf499f84b9c9bb0239fd250fb8263dfb3f88",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/safety.py": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/pretrained_rgb.py": "10ea25fc01bf561a3ea9087002566eb319717c338f44f54d2da46fc6ee0d7026",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/registration.py": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/suite.py": "1a094262e1772f5df8a54cb176c2f3da189d78f48ead3f8002f24e84802059a4"
+      },
+      "tools": {
+        "/home/dllu/proj/demosaic/.cache/sensor-mean-v61-review-tools-v1/audit_colored_flats.py": "873f8caec1fe11f38940ca965aa216aa0d253fd6257edc0005bcc16460c996ac",
+        "/home/dllu/proj/demosaic/.cache/sensor-mean-v61-review-tools-v1/audit_saved_color_flats.py": "b89f2fc8f933721b176af354e62a75c4316f89271cdd15da65d18d2918425ec6",
+        "/home/dllu/proj/demosaic/.cache/sensor-mean-v61-review-tools-v1/compare_raw_crops.py": "7dcb3b921990fb99d25cf1baf4f7feb7691edac8d641b43ffcc0a55c5ad4ef44",
+        "/home/dllu/proj/demosaic/.cache/sensor-mean-v61-review-tools-v1/diagnose_texture_response.py": "69497daa64825fb3ededc824b2bee3b9c574b74ffa8ab74ab934442d080c3b79",
+        "/home/dllu/proj/demosaic/.cache/sensor-mean-v61-review-tools-v1/evaluate_saved_color_flats.py": "cb7d98e844e7ec1e1e496dac84d6d1f3f6a274e52aee3150ed0eee3432e71aae",
+        "/home/dllu/proj/demosaic/.cache/sensor-mean-v61-review-tools-v1/evaluate_texture_candidates.py": "450ad63dab126f2d78c4dddbc4a8327aecfeabb68f8cf73b6888e1c3cff58e85",
+        "/home/dllu/proj/demosaic/.cache/sensor-mean-v61-review-tools-v1/prepare_color_grid.py": "bbeb513059fe6d505e7f18b7bcd512753a876faf3f9495682e05d3246b1caccb",
+        "/home/dllu/proj/demosaic/.cache/sensor-mean-v61-review-tools-v1/report_raw_pair.py": "ccb66feb0289e1ee886c8a9c0c65ce5c95ba8c10f981bf15eea1e11b237aaaab"
+      },
+      "inputs": {
+        "/mnt/external/demosaic/benchmarks/sensor-mean-v62-first1k-workflow-v1/plan.json": "eb6566694f4d5e450fbc76f3ca850edb14dacb6bcfd3c76b4f3ab9e730dbff33",
+        "/home/dllu/proj/demosaic/docs/results/wide-flat-palette-first1k-review.json": "684cee1a98aa18a5bf60f61394b94a06da959b96f15fe4f5e507007c05c78b61",
+        "/home/dllu/proj/demosaic/docs/results/sensor-mean-v61-first1k-review.json": "f095e3467b11aedc4c7c12713e1274975adae69eec2f51a881e6864457d42d59",
+        "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/plan.json": "3abc7cb9559df2f1715ded58a00ae0976f923fcbe80971ab302fbfdc524b481e",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/configs/evaluation.yaml": "74b0df74b9734a714e04a0a1cf1e82ed0ba211b1d5b5fd745b9502ca5af2174c",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/configs/gfx-qualitative-20231231.json": "23efd86ccf2b39ec8b37af21d7d7908c19b868a890544a454c88bdb6a056399a",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/configs/real-camera-qualitative.json": "67fcdceff358843c17083de1a4110c64b85b2989d526b7ded0845dba28d1d2b0"
+      },
+      "outputs": {
+        "known": "/mnt/external/demosaic/evaluation/sensor-mean-v62-first1k-known-v1",
+        "unseen": "/mnt/external/demosaic/evaluation/sensor-mean-v62-first1k-unseen-v1",
+        "full427": "/mnt/external/demosaic/evaluation/sensor-mean-v62-first1k-full427-v1",
+        "analytic": "/mnt/external/demosaic/evaluation/sensor-mean-v62-first1k-analytic-v1",
+        "gfx": "/mnt/external/demosaic/evaluation/sensor-mean-v62-first1k-gfx-v1",
+        "three-camera": "/mnt/external/demosaic/evaluation/sensor-mean-v62-first1k-three-camera-v1",
+        "colored-CPU": "/mnt/external/demosaic/evaluation/sensor-mean-v62-first1k-colored-CPU-v1"
+      },
+      "scope": "Analytic count corrected from V61 wrapper failure:448observations x(candidate+Malvar)=896. Reuse immutable V61 operator bundle. Only new V62 CNN prediction. Retained V60 panel/CPU results supply control later. Three classical methods serve fresh fixed-observation witnesses; one RawNIND channel comparator supplies six native other-camera views. No rerun of old V60/reference bulk neural panels. Prospective hue grid, independent statistics/native review and quality decision remain separate; no automatic continuation or promotion."
+    }
+  },
+  "actual_queue_controller_live_and_all_output_directories_absent": true,
+  "scope": "Onlylossweight.001 differs from completed V60; freshsameV58initialization/AdamW/EMA/seed48/original4000schedule, stop1000. No V61 resume/new corpus/qualityclaim/protectedfinal score. Frozen preflight operator manifests identify the actual archived source; later public local-loop variable rename does not alter model/loss code."
+}
