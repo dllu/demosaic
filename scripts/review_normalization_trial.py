@@ -1,4 +1,4 @@
-"""Review the completed matched normalization first1k gate with frozen operators."""
+"""Review completed matched normalization boundaries with frozen operators."""
 
 import argparse
 import copy
@@ -31,7 +31,62 @@ def ref(path):
     return {"path": str(Path(path).resolve()), "sha256": sha(path)}
 
 
-def completed(training_workflow):
+def completed_original4000(training_workflow):
+    training = read(training_workflow)
+    if (
+        training["status"]
+        != "completed-both-original4000-schedules-awaiting-full-quality-and-native-review"
+    ):
+        raise RuntimeError("Matched normalization original4000 training is incomplete")
+    exited(training)
+    exited({"controller": training["child"]})
+    assert training["resumed_from_step"] == 1000
+    assert training["original_planned_updates"] == 4000
+    assert training["all162_logged_observation_domain_LR_fields_match"] is True
+    plan = read(training["plan"])
+    for path, digest in plan["guards"].items():
+        assert sha(path) == digest, path
+    review = plan["first1k_quality_review"]
+    assert sha(review["path"]) == review["sha256"]
+    previous = read(review["path"])
+    assert previous["review_complete"] and previous["step"] == 1000
+    assert previous["decision"]["continue_original4000"] is True
+    checkpoints = []
+    for arm in plan["arms"]:
+        boundary = training["completed"][arm["arm"]]
+        assert boundary["actual_step"] == boundary["original_planned_updates"] == 4000
+        assert boundary["finite91model91EMA89Adam"]
+        assert boundary["original162_logged_LRs_and_masks_verified"]
+        assert boundary["first1k_log_prefix_exact"]
+        assert boundary["source_recipe_data_parent_and_model_config_verified"]
+        assert boundary["checkpoint"] == ref(arm["target"])
+        for key in ["metrics", "actual_restoration_receipt"]:
+            assert boundary[key] == ref(boundary[key]["path"])
+        records = rows(boundary["metrics"]["path"])
+        assert [r["step"] for r in records if r.get("event") == "train"] == [
+            1,
+            *range(25, 1001, 25),
+            1001,
+            *range(1025, 4001, 25),
+        ]
+        checkpoints.append(
+            {
+                **boundary["checkpoint"],
+                "arm": arm["arm"],
+                "step": 4000,
+                "first1k_sha256": arm["resume"]["sha256"],
+                "label": f"V{arm['version']}-normalization-{arm['arm']}-original4k",
+            }
+        )
+    assert [c["arm"] for c in checkpoints] == ["control", "augmented"]
+    return training, plan, checkpoints
+
+
+def completed(training_workflow, expected_step=1000):
+    if expected_step == 4000:
+        return completed_original4000(training_workflow)
+    if expected_step != 1000:
+        raise ValueError("Expected normalization boundary1000 or4000")
     training = read(training_workflow)
     if training["status"] != "completed-matched-first1000-awaiting-full-quality-and-native-review":
         raise RuntimeError("Matched normalization first1000 training is incomplete")
@@ -61,7 +116,14 @@ def completed(training_workflow):
 
 
 def saved_comparisons(
-    outputs, checkpoints, parent_review, parent, *, expected_methods=5, parent_in_current=False
+    outputs,
+    checkpoints,
+    parent_review,
+    parent,
+    *,
+    expected_methods=5,
+    parent_in_current=False,
+    progress_review=None,
 ):
     """Actual saved source means; this pure reader also supports historical replay."""
     statistics, sources, witnesses, comparisons = {}, [], [], []
@@ -111,16 +173,44 @@ def saved_comparisons(
                 rows(retained["cases"]),
             )
         )
-        for first, second in [
+        pairs = [
             (current[1], current[0]),
             (current[0], baseline),
             (current[1], baseline),
-        ]:
+        ]
+        if progress_review is not None:
+            for checkpoint, endpoint in zip(checkpoints, current, strict=True):
+                old = [
+                    pair[role]
+                    for pair in progress_review["primary_statistics"]["sources"]
+                    for role in ["first", "second"]
+                    if pair["panel"] == panel
+                    and pair[role]["checkpoint_sha256"] == checkpoint["first1k_sha256"]
+                ]
+                assert old and all(item == old[0] for item in old)
+                previous = old[0]
+                assert sha(previous["report"]) == previous["report_sha256"]
+                assert sha(previous["cases"]) == previous["cases_sha256"]
+                pairs.append(
+                    (
+                        endpoint,
+                        descriptor(
+                            previous["label"],
+                            previous["checkpoint_sha256"],
+                            previous["report"],
+                            previous["cases"],
+                            read(previous["report"]),
+                            rows(previous["cases"]),
+                        ),
+                    )
+                )
+        for first, second in pairs:
             result, source, witness = compare_pair(panel, first, second)
             comparisons.extend(result)
             sources.append(source)
             witnesses.append(witness)
-    assert len(comparisons) == 36 and len(sources) == len(witnesses) == 9
+    assert len(comparisons) == (60 if progress_review is not None else 36)
+    assert len(sources) == len(witnesses) == (15 if progress_review is not None else 9)
     return {
         "statistics": statistics,
         "sources": sources,
@@ -129,14 +219,14 @@ def saved_comparisons(
     }
 
 
-def audit_states(plan, checkpoints):
+def audit_states(plan, checkpoints, expected_step=1000):
     parent = torch.load(plan["parent"]["path"], map_location="cpu", weights_only=True, mmap=True)
     result = {}
     for checkpoint in checkpoints:
         arm = next(a for a in plan["arms"] if a["arm"] == checkpoint["arm"])
         cfg = yaml.safe_load(Path(arm["config"]).read_text())
         state = torch.load(checkpoint["path"], map_location="cpu", weights_only=True, mmap=True)
-        assert state["step"] == 1000 and state["config"]["steps"] == 4000
+        assert state["step"] == expected_step and state["config"]["steps"] == 4000
         for key, value in cfg.items():
             if key != "validation_protocol":
                 assert state["config"][key] == value, key
@@ -154,7 +244,7 @@ def audit_states(plan, checkpoints):
                 k for k, v in state[field].items() if torch.equal(v, parent["ema"][k])
             ) == ["context.mean", "context.std"]
         for item in state["optimizer"]["state"].values():
-            assert int(item["step"]) == 1000
+            assert int(item["step"]) == expected_step
             assert all(
                 torch.isfinite(v).all() for v in item.values() if isinstance(v, torch.Tensor)
             )
@@ -171,7 +261,7 @@ def audit_states(plan, checkpoints):
             assert state["config"][key + "_sha256"] == sha(cfg[key])
         result[checkpoint["arm"]] = {
             "checkpoint": checkpoint,
-            "step": 1000,
+            "step": expected_step,
             "planned_updates": 4000,
             "finite_state_counts": [91, 91, 89],
             "source_recipe_parent_data_and_context_buffers_verified": True,
@@ -182,7 +272,7 @@ def audit_states(plan, checkpoints):
 
 def main(args):
     torch.set_num_threads(2)
-    training, train_plan, checkpoints = completed(args.training_workflow)
+    training, train_plan, checkpoints = completed(args.training_workflow, args.expected_step)
     plan, workflow = read(args.review_plan), read(args.review_workflow)
     assert plan["previous_owner"] == training["controller"]
     assert workflow["primary_complete"] is True
@@ -192,7 +282,7 @@ def main(args):
         "training_workflow": ref(args.training_workflow),
         "review_plan": ref(args.review_plan),
         "operator": ref(__file__),
-        "step": 1000,
+        "step": args.expected_step,
         "planned_updates": 4000,
     }
     if args.action == "hue":
@@ -210,19 +300,37 @@ def main(args):
             for c in checkpoints
         ]
         records.append(copy.deepcopy(reference[0]))
+        reuse = {}
+        if "hue_reuse_report" in plan:
+            for field in ["hue_reuse_report", "hue_reuse_audit"]:
+                assert plan[field] == ref(plan[field]["path"])
+            reuse = {
+                "reuse_report": plan["hue_reuse_report"]["path"],
+                "reuse_audit": plan["hue_reuse_audit"]["path"],
+            }
         evaluate_records(
             Path(plan["grid_inputs"]),
             args.review_workflow,
             args.output,
             records,
             train_plan["parent"]["sha256"],
-            1000,
+            args.expected_step,
+            **reuse,
         )
         return
     assert not torch.cuda.is_initialized()
     if args.action == "scores":
+        progress = None
+        if args.expected_step == 4000:
+            previous = train_plan["first1k_quality_review"]
+            assert previous == ref(previous["path"])
+            progress = read(previous["path"])
         result = {
-            "status": "completed-normalization-trial-statistics-and-parent-comparisons",
+            "status": (
+                "completed-normalization-trial-statistics-and-parent-comparisons"
+                if progress is None
+                else "completed-normalization-original4000-statistics-and-first1k-progress"
+            ),
             **common,
             **saved_comparisons(
                 plan["outputs"],
@@ -231,6 +339,7 @@ def main(args):
                 train_plan["parent"],
                 expected_methods=6,
                 parent_in_current=True,
+                progress_review=progress,
             ),
             "scope": "One seed. Matched policy comparison plus parent progress after a fresh optimizer. Same numerical/observation witnesses and source bootstrap; no quality selection, new inference or convergence claim.",
         }
@@ -247,9 +356,13 @@ def main(args):
         assert len(artifacts["images"]) == 57 and len(artifacts["float_arrays"]) == 29
         assert len(artifacts["full_RGB16_files"]) == 6
         result = {
-            "status": "completed-normalization-first1k-state-and-artifact-audit",
+            "status": (
+                "completed-normalization-first1k-state-and-artifact-audit"
+                if args.expected_step == 1000
+                else "completed-normalization-original4000-state-and-artifact-audit"
+            ),
             **common,
-            "boundary": audit_states(train_plan, checkpoints),
+            "boundary": audit_states(train_plan, checkpoints, args.expected_step),
             **artifacts,
             "CUDA_initialized": False,
         }
@@ -261,6 +374,7 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", choices=["scores", "hue", "artifacts"])
+    parser.add_argument("--expected-step", type=int, choices=[1000, 4000], default=1000)
     for name in ["training-workflow", "review-plan", "review-workflow", "output"]:
         parser.add_argument("--" + name, type=Path, required=True)
     main(parser.parse_args())

@@ -24,13 +24,15 @@ def test_verified_parent_can_have_its_actual_original20k_step():
 
 
 @pytest.mark.parametrize("initializer,step", [("parent", 1000), ("other", 1000), ("parent", 999)])
-def test_candidate_requires_the_declared_initializer_and_boundary(initializer, step):
+@pytest.mark.parametrize("expected_step", [1000, 4000])
+def test_candidate_requires_the_declared_initializer_and_boundary(initializer, step, expected_step):
+    step += expected_step - 1000
     state = {"step": step, "config": {"initialized_from": {"sha256": initializer}}}
-    if initializer == "parent" and step == 1000:
-        script().check_joint_lineage(state, "candidate", "parent", 1000)
+    if initializer == "parent" and step == expected_step:
+        script().check_joint_lineage(state, "candidate", "parent", expected_step)
     else:
         with pytest.raises(AssertionError):
-            script().check_joint_lineage(state, "candidate", "parent", 1000)
+            script().check_joint_lineage(state, "candidate", "parent", expected_step)
 
 
 def test_library_entry_point_disables_gradients_and_restores_caller(monkeypatch):

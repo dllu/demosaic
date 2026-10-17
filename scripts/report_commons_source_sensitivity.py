@@ -44,6 +44,7 @@ def statistics_payload(container):
         in {
             "completed-original20k-long-data-statistics-and-4k-progress",
             "completed-normalization-trial-statistics-and-parent-comparisons",
+            "completed-normalization-original4000-statistics-and-first1k-progress",
         },
         "Model comparison statistics are incomplete",
     )
@@ -131,12 +132,10 @@ def run(statistics_path, statistics_sha256, cohort_path, cohort_sha256, output):
         )
         cohorts[name] = ids
     pairs = [p for p in stats["sources"] if p["panel"] == "full427"]
-    expected_pairs = (
-        [3]
-        if container.get("status")
-        == "completed-normalization-trial-statistics-and-parent-comparisons"
-        else [7, 9]
-    )
+    expected_pairs = {
+        "completed-normalization-trial-statistics-and-parent-comparisons": [3],
+        "completed-normalization-original4000-statistics-and-first1k-progress": [5],
+    }.get(container.get("status"), [7, 9])
     require(len(pairs) in expected_pairs, "Unexpected original photo comparison coverage")
     expected = {
         (r["first"], r["second"], r["metric"]): r

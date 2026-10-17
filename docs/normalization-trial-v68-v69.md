@@ -174,6 +174,50 @@ current status and creation times before acting. Operational status:
 Frozen plan/controller/production wrapper and logs:
 `/mnt/external/demosaic/benchmarks/normalization-v68-v69-original4k-continuation-v2/`.
 The183 frozen guards also bind the preserved first1k inputs and completed review.
-At this capture the full4k quality review is not yet queued. Both4k boundaries,
+The launch receipt predates the full4k review queue below. Both4k boundaries,
 matched new input/LR checks and the next full/native quality review remain work.
 There is no automatic post4k continuation or promotion.
+
+## Queued full4k review
+
+[Actual waiting controller, frozen plan and verified components](results/normalization-original4k-review-queue.json).
+The review is queued behind the exact live continuation owner and starts only
+after both original4k boundaries pass and that owner exits successfully. The
+completed-boundary reader verifies the actual4k checkpoint hashes,162-row logs,
+restoration receipts, frozen training guards and reviewed first1k decision.
+Live, partial, failed and wrong-step states cannot release inference.
+
+Parent/control/augmentation get the same fresh primary evaluation:432 known,
+540 unseen and74,424 full427 cases,1,792 analytic cases, three full GFX outputs/
+six RGB16 TIFFs,18 other-camera crops and96 selected CPU-color predictions.
+The60 statistics/fifteen classical witnesses include each candidate versus its
+own1k checkpoint, in addition to matched policy and parent comparisons. The
+frozen427/418/416 source cohorts yield45 photographic sensitivity comparisons.
+
+The hue grid needs2,352 new candidate predictions and reuses2,352 independently
+audited parent/nonlocal-reference arrays. Source, observation, precision and
+checkpoint gates are unchanged; each reused array's hash is checked when read.
+These parent/reference arrays share the exact frozen producer source with this
+continuation, as verified by the actual compatibility check. The source mismatch
+that required fully fresh hue inference at1k does not apply to this4k run.
+
+An engineering replay on actual completed1k six-method panels reproduces all36
+existing nonself statistics exactly; all24 same-weight progress statistics are
+zero, with15 witnesses total and no new inference/CUDA. It is not a4k result.
+The actual live4k gate rejects execution. Thirty focused tests and Ruff pass.
+Imports and wrapper signatures are also checked against the actual frozen
+package on CPU, avoiding the previous wrong-import wrapper failure.
+
+Actual queued review owner:638004/1792261092.43. It was verified live with no
+child processes at publication. Its115 frozen file guards bind the operators,
+wrappers and inputs. Operational status:
+`/mnt/external/demosaic/runs/normalization-v68-v69-original4k-review-workflow-v1.json`.
+Frozen plan/controller/tools/logs:
+`/mnt/external/demosaic/benchmarks/normalization-v68-v69-original4k-review-workflow-v1/`.
+The status is mutable; the public receipt includes an immutable capture.
+
+All81 future native views remain manual:57 primary,12 hue, six supplementary
+GFX and six selected CPU-color triplets. At least two exact-GT photo triplets
+per model and the standing GFX sky/building/foliage/fence references are required
+in the final report. These counts and evaluations are planned, not completed
+quality evidence. No automatic promotion or training beyond4k is queued.

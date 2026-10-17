@@ -101,6 +101,15 @@ def test_completed_normalization_payload_preserves_three_declared_pairs():
     assert script().statistics_payload(payload) is payload
 
 
+def test_completed_normalization4k_payload_preserves_matched_parent_and_progress_pairs():
+    payload = {
+        "status": "completed-normalization-original4000-statistics-and-first1k-progress",
+        "sources": list(range(5)),
+        "comparisons": list(range(15)),
+    }
+    assert script().statistics_payload(payload) is payload
+
+
 @pytest.mark.parametrize(
     "container", [{}, {"status": "waiting"}, {"review_complete": True, "status": "waiting"}]
 )
