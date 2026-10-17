@@ -64,6 +64,10 @@ All90 palette and24 GPU published image references pass full SHA checks; local
 links/source archives pass. First1k public JSON remains immutable at684cee1a….
 README and status/research/requirements docs now link completed evidence.
 Actual originalGPU end-to-end execution complements the CPU helper checks.
+The staged diff check also found trailing whitespace from the Matplotlib SVG
+exporter. Removed it from 1,362 lines, retained the original SVG and cleanup
+receipt, and verified before/after raster pixels are identical. Updated the
+published figure hash; numerical results and native crop pixels are unchanged.
 
 Commons producer1826191 remains live, two workers/nice5/CUDA hidden. Latest
 observation4,500 prepared with one recorded failure, not admitted. Downloader
