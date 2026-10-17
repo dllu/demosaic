@@ -116,3 +116,34 @@ experiment, not a new quality result. Full quality/native review remains require
 
 Private status:
 `/mnt/external/demosaic/runs/packed-isotropic-quarter-workflow-v1.json`.
+
+## Frozen quarter-horizon review queue
+
+The [queued protocol and CPU checks](results/packed-isotropic-quarter-review-queue-v1.json)
+wait for the exact training controller and final child to exit successfully.
+Both actual40k states must pass independent model/EMA/Adam/RNG/source/data and
+full-history checks before inference. Active or incomplete training is rejected.
+No GPU review overlaps the owned training.
+
+The fixed panels retain648 known,810 unseen,111,636 full-photo/procedural and
+2,240 analytic cases, full GFX RGB16 exports, three cached cameras, selected
+colors and the same4,704-case hue grid. The9 primary model pairs are joined by
+two own8k progress pairs:132 metric comparisons,33 classical witnesses and99
+source sensitivities. Own progress reuses saved8k scores only after observation
+metadata and all three classical controls match. This avoids rerunning the8k
+networks and keeps longer-training progress separate from the DINO gap.
+
+The hue stage makes2,352 new predictions for the two40k models and reuses2,352
+unchanged V63/Nonlocal reference arrays. Actual CPU reuse verifies source,
+weights, observations, precision, arrays, regenerated native previews and
+descriptive groups, without CUDA or new inference. A separate historical-score
+replay checks all132/99 statistics. Its history aliases are arithmetic fixtures,
+not actual RAW ancestors or new40k quality results. Thirty-eight focused tests
+pass, including incomplete/live-owner rejection and the special resumed log row.
+
+The queue leaves visual inspection, performance-report crops, quality decisions
+and any later continuation to explicit follow-up. It does not score protected
+final scenes or promote a model automatically. The original8k report stays intact.
+
+Private review status:
+`/mnt/external/demosaic/runs/packed-isotropic-quarter-review-workflow-v1.json`.

@@ -54,7 +54,7 @@ def test_library_entry_point_disables_gradients_and_restores_caller(monkeypatch)
         assert not torch.is_inference_mode_enabled()
 
 
-@pytest.mark.parametrize("step", [2000, 8000])
+@pytest.mark.parametrize("step", [2000, 8000, 40000])
 def test_explicit_fresh_candidate_requires_absent_initializer_and_exact_boundary(step):
     module = script()
     module.check_joint_lineage({"step": step, "config": {}}, "fresh", "parent", step, fresh=True)

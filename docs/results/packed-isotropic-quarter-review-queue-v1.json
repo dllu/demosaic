@@ -1,0 +1,220 @@
+{
+  "status": "queued-frozen-quarter-review-waiting-for-exact-live-training-owner",
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-review-workflow-v1/plan.json",
+    "sha256": "90548b69bdabc3ad9b02ef11cf5d1e6acb2bfa4024c10f6916713d79ec19413c"
+  },
+  "controller_process": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-review-workflow-v1/controller-process.json",
+    "sha256": "4d851f7afc3d703f83f6bf88b4ee154a83d9730fdc044b81df8e15834bc34bb0"
+  },
+  "observed_queue_status": {
+    "status": "waiting-for-exact-fresh-training-owner-exit-no-inference",
+    "updated_UTC": "2026-10-17T22:20:55.288917+00:00",
+    "controller": {
+      "pid": 1784241,
+      "created": 1792275654.03,
+      "driver_sha256": "9f5290e940d6aa15ed760404a6759b2e6cc50d83389f3c961a2c9538845471f6"
+    },
+    "plan": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-review-workflow-v1/plan.json",
+    "previous_owner": {
+      "pid": 1745457,
+      "created": 1792274479.6,
+      "driver_sha256": "781820ef18a23498539e32efd11a93551f734bb148f81f506e373fdaa62e7fee"
+    },
+    "outputs": {
+      "known": "/mnt/external/demosaic/evaluation/packed-isotropic-quarter-known-v1",
+      "unseen": "/mnt/external/demosaic/evaluation/packed-isotropic-quarter-unseen-v1",
+      "full427": "/mnt/external/demosaic/evaluation/packed-isotropic-quarter-full427-v1",
+      "analytic": "/mnt/external/demosaic/evaluation/packed-isotropic-quarter-analytic-v1",
+      "gfx": "/mnt/external/demosaic/evaluation/packed-isotropic-quarter-gfx-v1",
+      "three-camera": "/mnt/external/demosaic/evaluation/packed-isotropic-quarter-three-camera-v1",
+      "colored-CPU": "/mnt/external/demosaic/evaluation/packed-isotropic-quarter-colored-CPU-v1"
+    },
+    "primary_complete": false
+  },
+  "observed_training_status": {
+    "controller": {
+      "pid": 1745457,
+      "created": 1792274479.6,
+      "driver_sha256": "781820ef18a23498539e32efd11a93551f734bb148f81f506e373fdaa62e7fee"
+    },
+    "plan": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-workflow-v1/plan.json",
+      "sha256": "eb7dd31878e6fb5147025805a85c26b6e5ce27ff9b2ef4b47ea9de2add217d70"
+    },
+    "review_step": 40000,
+    "original_horizon": 160000,
+    "status": "training-original-recipe-to-quarter-review",
+    "updated_unix": 1792274481.3356524,
+    "arm": "no-dino",
+    "child": {
+      "pid": 1745464,
+      "created": 1792274481.29
+    }
+  },
+  "training_and_queue_owners_verified_live": true,
+  "guards": 167,
+  "inputs": 48,
+  "physical_source_bundle_sha256": "50dc11ec5c906fbbc4d3c5b1b530b95acb3b40a5f725d3a622891b2471c21d16",
+  "first_checkpoints": [
+    {
+      "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-b4-v71-step8000.pt",
+      "sha256": "abd7345c080cb227d77385647c74614c0416d9316ad2f28c81c31cdd1f1697a2",
+      "arm": "no-dino",
+      "step": 8000,
+      "initialization": "fresh",
+      "kind": "joint-checkpoint",
+      "label": "V71-no-dino-first32000examples"
+    },
+    {
+      "path": "/mnt/external/demosaic/models/dino-packed-isotropic-b4-v70-step8000.pt",
+      "sha256": "5fc021488d34df6ddf85cac8b0fc5cb0b0117713c87865c010e7e246979a2c14",
+      "arm": "dino",
+      "step": 8000,
+      "initialization": "fresh",
+      "kind": "joint-checkpoint",
+      "label": "V70-dino-first32000examples"
+    }
+  ],
+  "primary_planned_cases": {
+    "known": 648,
+    "unseen": 810,
+    "full427": 111636,
+    "analytic": 2240,
+    "selected_CPU_colors": 128,
+    "hue": 4704
+  },
+  "planned_statistics": {
+    "metric_comparisons": 132,
+    "classical_control_witnesses": 33,
+    "source_sensitivity_comparisons": 99,
+    "pairs_per_panel": 11,
+    "own8k_progress_pairs_per_panel": 2
+  },
+  "planned_hue_work": {
+    "new_inference": 2352,
+    "reused_verified_arrays": 2352
+  },
+  "CPU_preflight": {
+    "receipt": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-review-workflow-v1/CPU-preflight.json",
+      "sha256": "784661295a1680f5e7c543b911cd17c199b335d32959a93c21fab9e73240882a"
+    },
+    "result": {
+      "status": "completed-queued-quarter-review-CPU-preflight-with-reference-reuse",
+      "plan": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-review-workflow-v1/plan.json",
+      "plan_sha256": "90548b69bdabc3ad9b02ef11cf5d1e6acb2bfa4024c10f6916713d79ec19413c",
+      "guards": 167,
+      "inputs": 48,
+      "original8k_fresh_lineage_and_states_verified": true,
+      "active_quarter_training_rejected_before_inference": true,
+      "V63_and_Nonlocal_reuse_source_weights_observations_and_precision_matched": true,
+      "CUDA_initialized": false
+    }
+  },
+  "statistics_engineering_replay": {
+    "receipt": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-statistics-CPU-replay-v1/replay.json",
+      "sha256": "55ba9e4c23a5118af24f354340c23a22592eb72ec05b86bf1c87aced5bf68ad0"
+    },
+    "result": {
+      "status": "completed-historical-score-CPU-replay-only-no-quarter-quality-result",
+      "scope": "CPU arithmetic replay on actual closed8k RAW and mature V43/V63 scores. History roles are synthetic aliases of retained external methods, not real ancestry. No40k checkpoint, inference, new observations, training, quality/promotion or progress result. All actual weight hashes/model labels remain unmodified.",
+      "fixture_checkpoints": [
+        {
+          "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-b4-v71-step8000.pt",
+          "sha256": "abd7345c080cb227d77385647c74614c0416d9316ad2f28c81c31cdd1f1697a2",
+          "arm": "no-dino",
+          "step": 8000,
+          "initialization": "fresh",
+          "kind": "joint-checkpoint",
+          "label": "V71-no-dino-first32000examples"
+        },
+        {
+          "path": "/mnt/external/demosaic/models/dino-packed-isotropic-b4-v70-step8000.pt",
+          "sha256": "5fc021488d34df6ddf85cac8b0fc5cb0b0117713c87865c010e7e246979a2c14",
+          "arm": "dino",
+          "step": 8000,
+          "initialization": "fresh",
+          "kind": "joint-checkpoint",
+          "label": "V70-dino-first32000examples"
+        },
+        {
+          "label": "V43-working-engineering-history-fixture",
+          "path": "/mnt/external/demosaic/evaluation/paired-known-native-corpus-v37-v39-v43-2k/weights/weights-0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5.pt",
+          "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+          "arm": "no-dino"
+        },
+        {
+          "label": "V63-original20k-engineering-history-fixture",
+          "path": "/mnt/external/demosaic/models/dino-convnext-wide-long-control-b16-v63-step20000.pt",
+          "sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+          "arm": "dino"
+        }
+      ],
+      "statistics": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-statistics-CPU-replay-v1/operator-statistics.json",
+        "sha256": "81c550ad93e6fe1db9d293b5279fdfc6a8e9de7f6a01d849ac8954d921439bf4"
+      },
+      "comparison_count": 132,
+      "classical_control_witnesses": 33,
+      "extra_alias_metric_fields_exact": 24,
+      "source_sensitivity": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-statistics-CPU-replay-v1/source-sensitivity/result.json",
+        "sha256": "be6e05197e4f56b6635f76c62190b68fad0b3802a4d62cc1ff231d68db5f39db"
+      },
+      "sensitivity_comparisons": 99,
+      "independent_source_audit": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-statistics-CPU-replay-v1/source-sensitivity/independent-audit.json",
+        "sha256": "bcf4ed17208c4b5f988e26959f78958e7b6384e959b8a4b0485cc09b1015f6ed"
+      },
+      "CUDA_initialized": false,
+      "operator_sources": {
+        "review_packed_isotropic_quarter.py": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-statistics-CPU-replay-v1/review_packed_isotropic_quarter.py",
+          "sha256": "2d63e8565ad33b24598661ea6cb91b3ef00e8cf61c996e41f1c978dbeb7ef961"
+        },
+        "report_commons_source_sensitivity.py": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-statistics-CPU-replay-v1/report_commons_source_sensitivity.py",
+          "sha256": "9f5aebd847c0069ff548598ba9c1696c6af864086b9592b53495cb45b42183c3"
+        }
+      }
+    }
+  },
+  "reference_reuse_proof": {
+    "receipt": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-hue-reuse-CPU-v1/receipt.json",
+      "sha256": "af29753048b99349e0e446d7fcf93a62accb8a2e7c13c3bdd390731a771c8713"
+    },
+    "result": {
+      "status": "completed-CPU-reference-reuse-with-independent-cases-and-group-audit",
+      "report": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-hue-reuse-CPU-v1/reused-reference-grid/report.json",
+        "sha256": "96d36d23ded98e574e70aaabb25f7d20b37747a49e8f80ae5dc0e8bc900d6bf7"
+      },
+      "case_audit": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-hue-reuse-CPU-v1/independent-audit/audit.json",
+        "sha256": "6a07cd667dfccb5735f46a21caa762508135dc170ba0a9ff9227857cc0c3f7b0"
+      },
+      "group_audit": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-hue-reuse-CPU-v1/group-summary-audit.json",
+        "sha256": "2431d57a0e3597098a7b4430db3a371abae57165cb60d11372315f8855ad5835"
+      },
+      "prediction_work": {
+        "new_inference": 0,
+        "reused_verified_arrays": 2352
+      },
+      "native_triplets": 6,
+      "CUDA_initialized": false,
+      "scope": "Reuses actual V63 and Nonlocal RAW F32 arrays under identical source/weights/observations and declared precision. No GPU or new inference; no40k result. Six preview triplets are regenerated at native resolution and audited."
+    }
+  },
+  "focused_tests": {
+    "passed": 38,
+    "seconds": 2.4,
+    "CUDA_hidden": true,
+    "scope": "Completed/pending/live training gates, resumed-step/validation filtering, same-arm history pairing, shared RawNIND adapter identity, source statistics and fresh40k color-grid lineage."
+  },
+  "scope": "This is a queue/engineering receipt, not actual40k model quality. Historical replay aliases are arithmetic fixtures, not claimed RAW ancestry. Only known immutable reference arrays are reused after matching source/weights/observations/precision and independent audits. Both new checkpoints require fresh predictions and completed full-state provenance. No GPU review before training controller/final-child exit. Native qualitative inspection and performance report with exact-GT and GFX foliage/fence crops remain required. No protected-final scoring, training, output correction, automatic continuation or promotion."
+}

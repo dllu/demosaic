@@ -37,6 +37,10 @@ more; fresh moments and a fixed RAW parameter rescaling offer no broad fix.
 The original recipes now resume with complete state to a40k-update review,
 preserving the original160k horizon and immutable8k evidence. This continuation
 is running; it is not a quality or completion result.
+Its [full review queue and CPU verification](results/packed-isotropic-quarter-review-queue-v1.json)
+require successful/exited training owners and independently checked40k states.
+They include own8k progress, fixed native crops and source sensitivities; no
+new40k model quality or automatic promotion is claimed by the queue.
 
 | Requirement | Evidence needed | Current state |
 | --- | --- | --- |

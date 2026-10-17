@@ -130,6 +130,15 @@ def test_fresh_raw_statistics_and_shared_weight_adapter_identity():
         module.source_model({"models": [second, second]}, source)
 
 
+def test_quarter_statistics_retain_own_progress_as_well_as_primary_pairs():
+    payload = {
+        "status": "completed-packed-isotropic-quarter-statistics-and-first8k-progress",
+        "sources": list(range(11)),
+        "comparisons": list(range(33)),
+    }
+    assert script().statistics_payload(payload) is payload
+
+
 @pytest.mark.parametrize(
     "container", [{}, {"status": "waiting"}, {"review_complete": True, "status": "waiting"}]
 )

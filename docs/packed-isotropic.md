@@ -375,3 +375,11 @@ discarded. The unchanged original pair now resumes with full state in new branch
 run directories to an explicit40k-update review, a quarter of its original
 160k horizon. Actual no-DINO restore/RNG/EMA and first16 observation checks pass;
 DINO starts serially afterward. No new quality result or promotion is claimed.
+
+The [full quarter-horizon review is queued](packed-isotropic-production-learning.md#frozen-quarter-horizon-review-queue)
+behind the exact training owner. It adds each arm's own8k progress to the fixed
+primary comparisons, with132 metric comparisons and99 source sensitivities.
+Unchanged color-grid reference arrays are independently verified for reuse;
+both new models still receive fresh predictions. CPU historical-score/reuse
+checks validate the operators, not future40k quality. Native visual review and
+the required photographic/GFX crop report remain pending after inference.
