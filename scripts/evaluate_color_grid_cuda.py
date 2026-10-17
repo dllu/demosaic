@@ -5,6 +5,7 @@ reference stays FP32. This grid is diagnostic, not photographic/SOTA evidence.
 """
 
 import argparse
+import copy
 import gc
 import json
 from collections import defaultdict
@@ -28,9 +29,15 @@ def read(path):
     return json.loads(Path(path).read_text())
 
 
-def completed(workflow):
+TERMINALS = {
+    1000: "completed-first1000-and-evaluation-awaiting-manual-review",
+    4000: "completed-original4000-and-evaluation-awaiting-manual-review",
+}
+
+
+def completed(workflow, expected_step=1000):
     status = read(workflow)
-    if status["status"] != "completed-first1000-and-evaluation-awaiting-manual-review":
+    if status["status"] != TERMINALS[expected_step]:
         raise RuntimeError("Preceding palette evaluation incomplete; do not overlap or restart it")
     owner = status["controller"]
     try:
@@ -40,6 +47,62 @@ def completed(workflow):
     except psutil.NoSuchProcess:
         pass
     return status
+
+
+def reuse_manifest(report_path, audit_path, inputs, source):
+    """Require audited identical observations and model code before reusing arrays."""
+    if report_path is None:
+        if audit_path is not None:
+            raise ValueError("Reuse audit requires a reuse report")
+        return None
+    if audit_path is None:
+        raise ValueError("A completed independent case-array audit is required for reuse")
+    report, audit = read(report_path), read(audit_path)
+    assert audit["input_report_sha256"] == sha(report_path)
+    assert audit["observations"] == 1176 and not audit["CUDA_initialized"]
+    assert len(audit["native_panel_triplets"]) == len(report["native_crops"])
+    old = read(report["plan"])
+    assert sha(report["plan"]) == report["plan_sha256"]
+    assert old["input_plan_sha256"] == sha(inputs)
+    assert old["cases"] == read(inputs)["cases"]
+    assert old["source_files"] == source
+    count = len(report["checkpoints"])
+    assert audit["float_predictions"] == len(report["float_predictions"]) == 1176 * count
+    assert audit["metric_fields"] == 1176 * count * 6
+    arrays = {(r["model_index"], r["case"]): r for r in report["float_predictions"]}
+    assert len(arrays) == 1176 * count and arrays.keys() == {
+        (m, c) for m in range(count) for c in range(1176)
+    }
+    return {
+        "report": str(report_path),
+        "report_sha256": sha(report_path),
+        "case_audit": str(audit_path),
+        "case_audit_sha256": sha(audit_path),
+        "checkpoints": report["checkpoints"],
+        "arrays": arrays,
+        "native_crops": report["native_crops"],
+    }
+
+
+def reuse_match(record, reuse):
+    if reuse is None:
+        return None
+    matches = [
+        i
+        for i, c in enumerate(reuse["checkpoints"])
+        if (c["kind"], c["sha256"], c["path"]) == (record["kind"], record["sha256"], record["path"])
+    ]
+    assert len(matches) <= 1
+    if not matches:
+        return None
+    old = reuse["checkpoints"][matches[0]]
+    if record["kind"] == "joint-checkpoint":
+        assert old["compute_precision"] == "float16, physicalFP32"
+        assert old["memory_format"] == "channels_last"
+    else:
+        assert old["compute_precision"] == "IEEE float32"
+        assert old["memory_format"] == "contiguous, as loaded by the verified reference wrapper"
+    return matches[0]
 
 
 def summarize(rows):
@@ -79,41 +142,39 @@ def summarize(rows):
 
 
 @torch.inference_mode()
-def main(inputs, workflow, output, nonlocal_reference):
-    status = completed(workflow)
+def main(
+    inputs,
+    workflow,
+    output,
+    nonlocal_reference,
+    expected_step=1000,
+    reuse_report=None,
+    reuse_audit=None,
+    reuse_only=False,
+):
+    status = completed(workflow, expected_step)
     plan = read(inputs)
     validate(plan)
     output = writable_path(output)
     if output.exists():
         raise ValueError("Grid output exists; inspect it or choose a new directory")
-    assert torch.cuda.is_available() and psutil.virtual_memory().available / 1e9 > 24
-    torch.set_num_threads(4)
-    cached = []
-    for c in plan["cases"]:
-        assert sha(c["arrays"]) == c["sha256"]
-        with np.load(c["arrays"], allow_pickle=False) as values:
-            arrays = {k: v.copy() for k, v in values.items()}
-        cpu = {k: torch.from_numpy(v) for k, v in arrays.items()}
-        assert all(torch.isfinite(v).all() for v in cpu.values())
-        cached.append((arrays, cpu))
-    output.mkdir(parents=True, exist_ok=False)
     parent = read(status["plan"])["parent"]
     assert sha(parent["path"]) == parent["sha256"]
     records = [{**parent, "kind": "joint-checkpoint", "arm": "parent10k"}]
     for c in status["checkpoints"]:
-        assert c["step"] == 1000 and sha(c["path"]) == c["sha256"]
+        assert c["step"] == expected_step and sha(c["path"]) == c["sha256"]
         records.append(
             {
                 "path": c["path"],
                 "sha256": c["sha256"],
                 "kind": "joint-checkpoint",
-                "arm": c["arm"] + "-additional1k",
+                "arm": c["arm"] + f"-additional{expected_step // 1000}k",
             }
         )
     assert len(records) == 3 and {r["arm"] for r in records} == {
         "parent10k",
-        "control-additional1k",
-        "wide-additional1k",
+        f"control-additional{expected_step // 1000}k",
+        f"wide-additional{expected_step // 1000}k",
     }
     if nonlocal_reference is not None:
         records.append(
@@ -125,6 +186,23 @@ def main(inputs, workflow, output, nonlocal_reference):
             }
         )
     source = {str(p): sha(p) for p in Path("src/demosaic").glob("*.py")}
+    reuse = reuse_manifest(reuse_report, reuse_audit, inputs, source)
+    matches = [reuse_match(r, reuse) for r in records]
+    if reuse_only and any(m is None for m in matches):
+        raise RuntimeError("Reuse-only execution requires every exact model in the audited report")
+    needs_cuda = any(m is None for m in matches)
+    if needs_cuda:
+        assert torch.cuda.is_available() and psutil.virtual_memory().available / 1e9 > 24
+    torch.set_num_threads(2 if reuse_only else 4)
+    cached = []
+    for c in plan["cases"]:
+        assert sha(c["arrays"]) == c["sha256"]
+        with np.load(c["arrays"], allow_pickle=False) as values:
+            arrays = {k: v.copy() for k, v in values.items()}
+        cpu = {k: torch.from_numpy(v) for k, v in arrays.items()}
+        assert all(torch.isfinite(v).all() for v in cpu.values())
+        cached.append((arrays, cpu))
+    output.mkdir(parents=True, exist_ok=False)
     archive = output / "source"
     archive.mkdir()
     helper_files = [
@@ -145,16 +223,26 @@ def main(inputs, workflow, output, nonlocal_reference):
         "driver_sha256": sha(__file__),
         "workflow": str(workflow),
         "workflow_sha256": sha(workflow),
+        "expected_checkpoint_step": expected_step,
+        "reuse": None
+        if reuse is None
+        else {k: reuse[k] for k in ["report", "report_sha256", "case_audit", "case_audit_sha256"]},
+        "reused_model_index_in_previous_report": matches,
         "scope": plan["scope"],
-        "runtime": "CUDA native256/B1, joint-network FP16/physicalFP32; optional authors RAW IEEEFP32. Saved nativeF32 predictions; no new observations, output correction or training.",
+        "runtime": "New inference: CUDA native256/B1, jointFP16/physicalFP32, authorsRAW IEEEFP32. Reused exact-weight/source/observation F32 arrays keep their previous precision. Reuse-only uses CPU and no inference. No new observations, output correction or training.",
         "input_loading": "Verify/read each observation once into CPU memory; reuse it across methods and leave clean targets on CPU.",
     }
     (output / "plan.json").write_text(json.dumps(execution, indent=2) + "\n")
     results = []
     predictions = []
     crops = []
+    new_count, reused_count = 0, 0
     for model_index, record in enumerate(records):
-        if record["kind"] == "joint-checkpoint":
+        previous_index = matches[model_index]
+        model = None
+        if previous_index is not None:
+            record.update(copy.deepcopy(reuse["checkpoints"][previous_index]))
+        elif record["kind"] == "joint-checkpoint":
             assert sha(record["path"]) == record["sha256"]
             model, state = load_checkpoint(record["path"], "cuda")
             record.update(
@@ -175,28 +263,37 @@ def main(inputs, workflow, output, nonlocal_reference):
                 compute_precision="IEEE float32",
                 memory_format="contiguous, as loaded by the verified reference wrapper",
             )
-        model.eval()
-        if record["kind"] == "joint-checkpoint":
-            model.to(memory_format=torch.channels_last)
+        if model is not None:
+            model.eval()
+            if record["kind"] == "joint-checkpoint":
+                model.to(memory_format=torch.channels_last)
         for case_index, c in enumerate(plan["cases"]):
             arrays, cpu = cached[case_index]
-            batch = {k: cpu[k].to("cuda") for k in ["packed", "variance", "colors", "wb", "matrix"]}
             condition = c["condition"]
-            model.set_noise(condition["shot"], condition["read"])
-            with amp_context("cuda", dtype="float16"):
-                p = model(
-                    batch["packed"],
-                    batch["variance"],
-                    batch["colors"],
-                    batch["wb"],
-                    batch["matrix"],
-                )
-            assert (
-                p.shape == (1, 3, 256, 256) and p.dtype == torch.float32 and torch.isfinite(p).all()
-            )
-            v = p.cpu().numpy()
-            path = output / f"model{model_index}-case{case_index}-RGB-f32.npy"
-            np.save(path, v, allow_pickle=False)
+            if previous_index is not None:
+                saved = reuse["arrays"][previous_index, case_index]
+                path = Path(saved["path"])
+                assert sha(path) == saved["sha256"]
+                v = np.load(path, allow_pickle=False)
+                reused_count += 1
+            else:
+                batch = {
+                    k: cpu[k].to("cuda") for k in ["packed", "variance", "colors", "wb", "matrix"]
+                }
+                model.set_noise(condition["shot"], condition["read"])
+                with amp_context("cuda", dtype="float16"):
+                    p = model(
+                        batch["packed"],
+                        batch["variance"],
+                        batch["colors"],
+                        batch["wb"],
+                        batch["matrix"],
+                    )
+                v = p.cpu().numpy()
+                path = output / f"model{model_index}-case{case_index}-RGB-f32.npy"
+                np.save(path, v, allow_pickle=False)
+                new_count += 1
+            assert v.shape == (1, 3, 256, 256) and v.dtype == np.float32 and np.isfinite(v).all()
             predictions.append(
                 {
                     "path": str(path),
@@ -260,7 +357,8 @@ def main(inputs, workflow, output, nonlocal_reference):
             assert sha(record["path"]) == record["sha256"]
         del model
         gc.collect()
-        torch.cuda.empty_cache()
+        if needs_cuda:
+            torch.cuda.empty_cache()
     assert len(results) == len(predictions) == 1176 * len(records) and len(crops) == 3 * len(
         records
     )
@@ -279,7 +377,8 @@ def main(inputs, workflow, output, nonlocal_reference):
         "native_crops": crops,
         "group_summary": summarize(results),
         "scope": plan["scope"],
-        "CUDA_initialized": True,
+        "CUDA_initialized": torch.cuda.is_initialized(),
+        "prediction_work": {"new_inference": new_count, "reused_verified_arrays": reused_count},
         "limitations": "One observation per grid cell, one WB/camera, three brightnesses/two saturations; scene-linear HSV, not perceptually uniform. Clean targets stay below white; noisy ADC can clip. Descriptive quantiles are not confidence intervals. Not training-repeat uncertainty, real-photo quality, convergence, cause or SOTA evidence.",
     }
     (output / "report.json").write_text(json.dumps(report, indent=2, allow_nan=False) + "\n")
@@ -301,5 +400,18 @@ if __name__ == "__main__":
     p.add_argument("--workflow", required=True, type=Path)
     p.add_argument("--output", required=True, type=Path)
     p.add_argument("--nonlocal-reference", type=Path)
+    p.add_argument("--expected-step", type=int, choices=[1000, 4000], default=1000)
+    p.add_argument("--reuse-report", type=Path)
+    p.add_argument("--reuse-audit", type=Path)
+    p.add_argument("--reuse-only", action="store_true")
     a = p.parse_args()
-    main(a.inputs, a.workflow, a.output, a.nonlocal_reference)
+    main(
+        a.inputs,
+        a.workflow,
+        a.output,
+        a.nonlocal_reference,
+        a.expected_step,
+        a.reuse_report,
+        a.reuse_audit,
+        a.reuse_only,
+    )

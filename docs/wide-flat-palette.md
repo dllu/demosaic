@@ -11,6 +11,8 @@ color changes and no convincing detail gain. Its prospective hue sweep still
 has large bright-field errors. The [whole-state continuation is running](results/wide-flat-palette-full4k-launch.json):
 control, then wider palette, then full evaluation under the original
 additional4k schedules. Neither first1k model is promoted.
+The [serialized final review](palette-final-review-preparation.md) is queued
+behind that owner's actual exit, with unchanged reference predictions reused.
 [Original launch receipt](results/wide-flat-palette-first1k-launch.json).
 [Complete CPU receipt, tests, source checks and prepared configurations](results/wide-flat-palette-preparation.json).
 

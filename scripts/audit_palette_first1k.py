@@ -1,4 +1,4 @@
-"""Independent first1k palette state, scores, control replay and artifact audit."""
+"""Independent first1k or final4k palette state, score and artifact audit."""
 
 import argparse
 import json
@@ -40,9 +40,13 @@ def crop_label(c):
     return c.get("model_label", c.get("model", {}).get("label", ""))
 
 
-def completed():
-    s = read(STATUS)
-    if s["status"] != "completed-first1000-and-evaluation-awaiting-manual-review":
+def completed(workflow=STATUS, expected_step=1000):
+    s = read(workflow)
+    terminal = {
+        1000: "completed-first1000-and-evaluation-awaiting-manual-review",
+        4000: "completed-original4000-and-evaluation-awaiting-manual-review",
+    }
+    if s["status"] != terminal[expected_step]:
         raise RuntimeError("Palette workflow incomplete; inspect/wait without restarting")
     try:
         p = psutil.Process(s["controller"]["pid"])
@@ -56,8 +60,8 @@ def completed():
     return s
 
 
-def main(output):
-    status = completed()
+def main(output, workflow=STATUS, expected_step=1000):
+    status = completed(workflow, expected_step)
     torch.set_num_threads(2)
     assert not torch.cuda.is_initialized()
     output = writable_path(output)
@@ -69,15 +73,18 @@ def main(output):
     weights = {}
     boundaries = {}
     logs = {}
+    log_copies = {}
     for c in status["checkpoints"]:
         assert (
-            sha(c["path"]) == c["sha256"] and c["step"] == 1000 and c["parent_sha256"] == PARENT_SHA
+            sha(c["path"]) == c["sha256"]
+            and c["step"] == expected_step
+            and c["parent_sha256"] == PARENT_SHA
         )
         weights[c["arm"]] = c["sha256"]
         state = torch.load(c["path"], map_location="cpu", weights_only=True, mmap=True)
         cfg = state["config"]
         assert (
-            state["step"] == 1000
+            state["step"] == expected_step
             and cfg["steps"] == 4000
             and cfg["initialized_from"]["sha256"] == PARENT_SHA
         )
@@ -86,7 +93,7 @@ def main(output):
             len(state["model"]) == len(state["ema"]) == 91
             and len(state["optimizer"]["state"]) == 89
         )
-        assert {int(v["step"]) for v in state["optimizer"]["state"].values()} == {1000}
+        assert {int(v["step"]) for v in state["optimizer"]["state"].values()} == {expected_step}
         assert all(torch.isfinite(v).all() for key in ["model", "ema"] for v in state[key].values())
         assert all(
             torch.isfinite(v).all()
@@ -107,18 +114,30 @@ def main(output):
         for key in ["manifest", "validation_manifest", "raw_clean_manifest", "paired_manifest"]:
             assert cfg[key + "_sha256"] == plan["inputs"][cfg[key]]
         path = Path(cfg["run"]) / "metrics.jsonl"
+        # Continuation appends the live run logs. Prefer the original immutable
+        # first1k copies when reviewing that historical boundary again.
+        frozen_root = BASE / "evaluation/wide-flat-palette-first1k-complete-audit-v1"
+        frozen = frozen_root / "frozen-training-logs" / (c["arm"] + "-first1000-metrics.jsonl")
+        if expected_step == 1000 and frozen.exists():
+            previous = read(frozen_root / "complete-audit.json")
+            assert sha(frozen) == previous["boundary"][c["arm"]]["log_sha256"]
+            path = frozen
         rows = [
             r
             for line in path.read_text().splitlines()
-            if (r := json.loads(line)).get("event") == "train" and r["step"] <= 1000
+            if (r := json.loads(line)).get("event") == "train" and r["step"] <= expected_step
         ]
-        assert [r["step"] for r in rows] == [1, *range(25, 1001, 25)] and all(
+        log_steps = [1, *range(25, 1001, 25)]
+        if expected_step == 4000:
+            log_steps += [1001, *range(1025, 4001, 25)]
+        assert [r["step"] for r in rows] == log_steps and all(
             math.isfinite(v) for r in rows for v in r.values() if isinstance(v, (float, int))
         )
         logs[c["arm"]] = rows
+        log_copies[c["arm"]] = path.read_bytes()
         boundaries[c["arm"]] = {
             "checkpoint": c,
-            "step": 1000,
+            "step": expected_step,
             "planned_steps": 4000,
             "source_bundle_sha256": cfg["source_sha256"],
             "model_EMA_tensors": 91,
@@ -127,6 +146,9 @@ def main(output):
             "complete_RNG_present": True,
             "log_path": str(path),
             "log_sha256": sha(path),
+            "immutable_log_copy": str(
+                output / "frozen-training-logs" / (c["arm"] + "-metrics.jsonl")
+            ),
             "gate_norms": {
                 k: float(v.norm())
                 for k, v in state["ema"].items()
@@ -339,9 +361,9 @@ def main(output):
             {**item, "independent_full_SHA_dimensions_dtype_tags_and_sampled_codes_verified": True}
         )
     result = {
-        "scope": "Completed palette first1k state/data/numerical/native/RGB16 integrity audit; quality and visual selection remain separate.",
-        "workflow": str(STATUS),
-        "workflow_sha256": sha(STATUS),
+        "scope": f"Completed palette step{expected_step} state/data/numerical/native/RGB16 integrity audit; quality and visual selection remain separate.",
+        "workflow": str(workflow),
+        "workflow_sha256": sha(workflow),
         "actual_owner_exit_confirmed": True,
         "plan_sha256": sha(status["plan"]),
         "boundary": boundaries,
@@ -365,6 +387,11 @@ def main(output):
         "CUDA_initialized": False,
     }
     output.mkdir(parents=True, exist_ok=False)
+    (output / "frozen-training-logs").mkdir()
+    for arm, payload in log_copies.items():
+        p = Path(boundaries[arm]["immutable_log_copy"])
+        p.write_bytes(payload)
+        assert sha(p) == boundaries[arm]["log_sha256"]
     (output / "complete-audit.json").write_text(json.dumps(result, indent=2) + "\n")
     print(
         json.dumps(
@@ -384,4 +411,7 @@ def main(output):
 if __name__ == "__main__":
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--output", type=Path, required=True)
-    main(p.parse_args().output)
+    p.add_argument("--workflow", type=Path, default=STATUS)
+    p.add_argument("--expected-step", type=int, choices=[1000, 4000], default=1000)
+    a = p.parse_args()
+    main(a.output, a.workflow, a.expected_step)

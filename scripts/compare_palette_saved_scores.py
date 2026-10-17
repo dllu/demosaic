@@ -1,4 +1,4 @@
-"""Compare audited first1k palette scores with saved parent and working V43."""
+"""Compare an audited palette checkpoint pair with saved parent and working V43."""
 
 import argparse
 import json
@@ -35,8 +35,8 @@ def rows(path):
     return [json.loads(line) for line in Path(path).read_text().splitlines()]
 
 
-def main(output):
-    audit = read(AUDIT)
+def main(output, audit_path=AUDIT):
+    audit = read(audit_path)
     assert (
         audit["actual_owner_exit_confirmed"]
         and audit["common_noisy_reference_pixels_coordinates_transforms_exact"]
@@ -187,9 +187,9 @@ def main(output):
                         )
     assert len(comparisons) == 48 and len(sources) == len(witnesses) == 6
     result = {
-        "status": "completed-saved-parent-and-V43-first1k-palette-comparisons",
-        "audit": str(AUDIT),
-        "audit_sha256": sha(AUDIT),
+        "status": "completed-saved-parent-and-V43-palette-comparisons",
+        "audit": str(audit_path),
+        "audit_sha256": sha(audit_path),
         "sources": sources,
         "witnesses": witnesses,
         "comparisons": comparisons,
@@ -205,4 +205,6 @@ def main(output):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
-    main(parser.parse_args().output)
+    parser.add_argument("--audit", type=Path, default=AUDIT)
+    a = parser.parse_args()
+    main(a.output, a.audit)

@@ -6,6 +6,8 @@ trial's separate evaluation outputs: **147 colors and grays, 1,176 saved native
 fabric failure. The preparation receipt records the state before inference.
 The [completed first1k review](wide-flat-palette-first1k-review.md) now includes
 all four models, independent numerical checks and the twelve viewed previews.
+The [physical preprocessing check](physical-frontend-color-check.md) finds that
+the affine round trip does not reproduce the large learned bright-field bias.
 [Complete definition, observation hashes, input audit and queue launch](results/prospective-color-grid-preparation.json).
 
 The parent model's failures motivated this grid, so it is not a blind benchmark.

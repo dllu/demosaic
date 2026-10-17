@@ -1,0 +1,967 @@
+{
+  "status": "Verified CPU-only review tooling and physical diagnostic; final4k quality results remain pending",
+  "checked_utc": "2026-10-17T01:13:40.832866+00:00",
+  "final_queue": {
+    "status_snapshot": {
+      "updated_utc": "2026-10-17T01:10:37.108287+00:00",
+      "status": "waiting-for-actual-full4k-owner-exit-no-GPU-started",
+      "controller": {
+        "pid": 1753053,
+        "created": 1792199436.97,
+        "worktree": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree",
+        "source_commit": "0d7d2bb69270e13bec837f889b111a5e63af1cfe",
+        "driver_sha256": "2028e75197698a35b5036ddaa6d6c4a88e2c46abe2e3e77cb050b13f536d70dc"
+      },
+      "previous_owner": {
+        "pid": 1748140,
+        "created": 1792198827.52,
+        "worktree": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree",
+        "source_commit": "0d7d2bb69270e13bec837f889b111a5e63af1cfe",
+        "driver_sha256": "f3914a5ad63fcd0ccecac9ef9c5ff4919acba6e6144e8dfdbc37f6687cb88d0b"
+      },
+      "plan": "/mnt/external/demosaic/benchmarks/palette-final-review-workflow-v1/plan.json",
+      "output": "/mnt/external/demosaic/evaluation/prospective-color-grid-parent-v59-v60-full4k-NL-v1",
+      "complete_palette_audit": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-complete-audit-v1",
+      "saved_parent_comparisons": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-saved-parent-comparisons-v1.json"
+    },
+    "plan": {
+      "path": "/mnt/external/demosaic/benchmarks/palette-final-review-workflow-v1/plan.json",
+      "sha256": "011ee30107797b30b646079eb88657a5319e432442f514e2300e95a950604ca2"
+    },
+    "definition": {
+      "controller": {
+        "pid": 1753053,
+        "created": 1792199436.97,
+        "worktree": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree",
+        "source_commit": "0d7d2bb69270e13bec837f889b111a5e63af1cfe",
+        "driver_sha256": "2028e75197698a35b5036ddaa6d6c4a88e2c46abe2e3e77cb050b13f536d70dc"
+      },
+      "previous_owner": {
+        "pid": 1748140,
+        "created": 1792198827.52,
+        "worktree": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree",
+        "source_commit": "0d7d2bb69270e13bec837f889b111a5e63af1cfe",
+        "driver_sha256": "f3914a5ad63fcd0ccecac9ef9c5ff4919acba6e6144e8dfdbc37f6687cb88d0b"
+      },
+      "previous_status": "/mnt/external/demosaic/runs/wide-flat-palette-full4k-workflow-v1.json",
+      "inputs": {
+        "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/plan.json": "93aad6a67b9f4a9a59d76aae8371018a6aa16a8861c4b28c902f243879fdd18a",
+        "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/independent-input-audit.json": "946b410078458bd5aa32966963e14600b0a2f7621eeaf364f5d48ea7cf42eaf0",
+        "/mnt/external/demosaic/evaluation/prospective-color-grid-parent-v59-v60-NL-v1/report.json": "156b26d05e81bf88b732254e725b55e20f6cef95cb66bb02130e494ca9b545ed",
+        "/mnt/external/demosaic/evaluation/prospective-color-grid-parent-v59-v60-NL-v1/independent-audit/audit.json": "3e3235a0b5e9fc78f91f2a739eef0837e8aa52b84fb1adfd18f05d80bd51190b",
+        "/home/dllu/proj/demosaic/docs/results/wide-flat-palette-first1k-review.json": "684cee1a98aa18a5bf60f61394b94a06da959b96f15fe4f5e507007c05c78b61",
+        "/home/dllu/proj/demosaic/.cache/palette-final-review-tools-v1/manifest.json": "da2ce81adda8ccff6d841f359a8f8ae95104cb5a921cd9403126999ea494c513",
+        "/mnt/external/demosaic/benchmarks/wide-flat-palette-full4k-workflow-v1/plan.json": "22f388752455394edc4ab30e7a79d918cd6b333be513e10638e94e0e04903835",
+        "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/receipt.json": "fd74c12c590df0a9a396dce76d106249f54c351178ad375cb8ec21a8be9d87e0",
+        "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/inspection-cpu-v1/receipt.json": "b4088371739691f7fa84c7f217ba99a98c1b5854c22a502c102facbf7ae0611f",
+        "/home/dllu/proj/demosaic/docs/results/native-corpus-2k-review.json": "73e7d0b1d44e121fc962e114cfe4d840ffa82130bcd71e21d78345136141a645",
+        "/home/dllu/proj/demosaic/docs/results/dino-convnext-pyramid-v58-10k-review.json": "15fb953c63f646df52ef0bf95d28479569b193c80d7073b0131b20f11fefff1b"
+      },
+      "source_files": {
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/paired_admission.py": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/prior.py": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/metrics.py": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/inference.py": "911e71e8dcbeb1872ed591bc5234ed2b79bae063a859b4704516537d94a1df0b",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/train.py": "d9c7bcf8dcdd6a0ccac6f83cfdbfd9079582cade46648fee0163d2d0dccb0616",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/dino_adaptation.py": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/paired_training.py": "71a2481213bba174bd3d6b3de9ae9b89f88333635810e15d0958352d9d8d053d",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/reference.py": "54ed094d58e245a56993ea3ce3ef9e21d2164e902d41d03bba9132bacd22891f",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/prepare.py": "e4c0733bb260c289b3ce8aaf5f393abc5919d8d81cdcf462b70032d790429712",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/realdata.py": "ed24db2b066531281a196e6fa074130cb0ee78a640eae5ccaaace234f5ad5421",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/cfa.py": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/paired.py": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/audit.py": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/losses.py": "548b1481a035ad937d4a046754a74e70684864a9842296765c62079a002e5120",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/gaussian.py": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/real_suite.py": "69d3d403d36b1230e35083cc55e2c1a485f82cd5058f6be83fb3d5c0c18a6825",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/raw_clean.py": "a143ce351ac4e1b2425d4d561000d3e8934477fe9172c88f90ce76d9b32a7a6c",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/raw_admission.py": "1948afbbf05129190273ab77466f26d9d27dc942716beaab16f077c8c3330803",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/vst.py": "355124a374177f1c08271834149c5979ab3477fdf255c60aa7cee0d47792a76b",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/io.py": "0a1599ffe7f6d935e92fc71e6b086430c6f82678a74952c3b8f31155a0bea83b",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/data.py": "3c8855fe9d6e24d5368f356528ed217a544f185d84f58356eebfb2048cd92197",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/__init__.py": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/calibration.py": "e86f4c602a6cd7fd855d0bcfeb790cf17ed87611f19d97926f9db174909b2d26",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/noise.py": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/precision.py": "9aa850fb5ee0e9abc3e9adc4847ce3518c1acb37c93f6bc54ff9206bb0c94c3a",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/cli.py": "a34d98b1eab4479f67ba5a51b6c8a428db4d8ccf5ee097cd1369bd0cd1ead542",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/reporting.py": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/model.py": "c37f530b3c4265e23af8d04b81e65e19b8ee585538874445e4a95bc337f23a71",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/color.py": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/dino_pyramid.py": "246944874671ceb4449b0487fcb347a00f8b82d713d5b4c9fee5a7c8a68aa95f",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/textures.py": "b4bc304a50de272cf7fcba272e67b828c163466ffc23ea3337a6a66f076dc664",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/nonlocal_reference.py": "7e4a00e9d90a61b772da9c1a7414bf499f84b9c9bb0239fd250fb8263dfb3f88",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/safety.py": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/pretrained_rgb.py": "10ea25fc01bf561a3ea9087002566eb319717c338f44f54d2da46fc6ee0d7026",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/registration.py": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/suite.py": "1a094262e1772f5df8a54cb176c2f3da189d78f48ead3f8002f24e84802059a4"
+      },
+      "tools": {
+        "/home/dllu/proj/demosaic/.cache/palette-final-review-tools-v1/evaluate_color_grid_cuda.py": "bc450b38380aaf6e3f7daa4bf4234b35f96a60cbfa3fc94f5fbb0bca0e5b2a6c",
+        "/home/dllu/proj/demosaic/.cache/palette-final-review-tools-v1/prepare_color_grid.py": "bbeb513059fe6d505e7f18b7bcd512753a876faf3f9495682e05d3246b1caccb",
+        "/home/dllu/proj/demosaic/.cache/palette-final-review-tools-v1/audit_color_grid_inputs.py": "c49ebf21307330927ee016d635d93696509aa7adb7d824cfdbd99c249d418225",
+        "/home/dllu/proj/demosaic/.cache/palette-final-review-tools-v1/audit_saved_color_flats.py": "3cfaac4b946ee4ddd56a621ebce5b01fd2612e19f3fcec77135fc5dc01f7dfcd",
+        "/home/dllu/proj/demosaic/.cache/palette-final-review-tools-v1/audit_colored_flats.py": "873f8caec1fe11f38940ca965aa216aa0d253fd6257edc0005bcc16460c996ac",
+        "/home/dllu/proj/demosaic/.cache/palette-final-review-tools-v1/audit_color_grid_summary.py": "ce4c1a49f5588d63985ff5603d14bc994945f252eacb17ea8daea6b6160fa3d8",
+        "/home/dllu/proj/demosaic/.cache/palette-final-review-tools-v1/audit_palette_first1k.py": "b6e44e3a2ef22eec0048411cf22761bcc408f1d563b8298d077f3b5e34b13e38",
+        "/home/dllu/proj/demosaic/.cache/palette-final-review-tools-v1/audit_fresh_dino_statistics.py": "ad67062816f6a01bd2029953ebc6b232d63cfbf8e7216a472b59e85168e5a2e0",
+        "/home/dllu/proj/demosaic/.cache/palette-final-review-tools-v1/audit_nonlocal_reference_review.py": "173da2cfefb711e427fa725d9d64340f3a13b2fd8029a47bc4e036495b9f4d97",
+        "/home/dllu/proj/demosaic/.cache/palette-final-review-tools-v1/compare_palette_saved_scores.py": "3f79253fb617b674a41fb67660db0efd5aa9e6232e20699c1d9898a191c31db2",
+        "/home/dllu/proj/demosaic/.cache/palette-final-review-tools-v1/compare_saved_reference_scores.py": "7e952e48642a2357384da2a6e0b6cbfc96e19c3d65c696ce586082881caf1d39"
+      },
+      "output": "/mnt/external/demosaic/evaluation/prospective-color-grid-parent-v59-v60-full4k-NL-v1",
+      "complete_palette_audit": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-complete-audit-v1",
+      "saved_parent_comparisons": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-saved-parent-comparisons-v1.json",
+      "scope": "Actual successful final4k owner exit required. Same frozen1176inputs/previews. Reuse2352 verified parent/released RAW CUDA predictions and infer2352 new control/wide predictions. All4704 arrays independently audited. Complete87962case/252CI/70PNG/29F32/8RGB16 audit and48 saved-parent/V43 comparisons. No new training examples, RAW decoding, output fitting or protected-final scoring. Native manual review and model decision remain separate."
+    },
+    "live_birth_and_no_children_verified": true
+  },
+  "reuse_only_CPU_execution": {
+    "report": {
+      "path": "/mnt/external/demosaic/evaluation/prospective-color-grid-reuse-only-CPU-verification-v1/report.json",
+      "sha256": "65181fa2967f05e016d2213107753031d9fe6037c4d8060f6907c7132ccc2d56"
+    },
+    "audited_previous_report": {
+      "path": "/mnt/external/demosaic/evaluation/prospective-color-grid-parent-v59-v60-NL-v1/report.json",
+      "sha256": "156b26d05e81bf88b732254e725b55e20f6cef95cb66bb02130e494ca9b545ed"
+    },
+    "case_audit": {
+      "receipt": {
+        "path": "/mnt/external/demosaic/evaluation/prospective-color-grid-reuse-only-CPU-verification-v1/independent-audit/audit.json",
+        "sha256": "cad5062e047bff8e504562e79c14e98b53ad0737937e136834b098ec75c30945"
+      },
+      "result": {
+        "status": "completed-independent-saved-flat-Torch64-audit-and-native-rendering",
+        "input_report": "/mnt/external/demosaic/evaluation/prospective-color-grid-reuse-only-CPU-verification-v1/report.json",
+        "input_report_sha256": "65181fa2967f05e016d2213107753031d9fe6037c4d8060f6907c7132ccc2d56",
+        "observations": 1176,
+        "float_predictions": 4704,
+        "metric_fields": 28224,
+        "maximum_Torch64_vs_saved_NumPy64_metric_difference": 4.440892098500626e-16,
+        "native_panel_triplets": [
+          {
+            "path": "/mnt/external/demosaic/evaluation/prospective-color-grid-reuse-only-CPU-verification-v1/crop-c32d2506d0e69bdc.png",
+            "sha256": "169703daeb0cd61ebe81fde452175bb9923b9ebfd661c77d717742f342ea6e68",
+            "all_three_native_panels_rerender_exact": true
+          },
+          {
+            "path": "/mnt/external/demosaic/evaluation/prospective-color-grid-reuse-only-CPU-verification-v1/crop-d7fec618031c27ef.png",
+            "sha256": "4870d4b93fb10c3929c8a3c1a23d6ffecaf1ed6b3c677fe4c4e21348db3fc69c",
+            "all_three_native_panels_rerender_exact": true
+          },
+          {
+            "path": "/mnt/external/demosaic/evaluation/prospective-color-grid-reuse-only-CPU-verification-v1/crop-8d42c82b161e2c18.png",
+            "sha256": "c9723095053b184e20649154fac567d6d68194701637ac979dce212f3dd24d92",
+            "all_three_native_panels_rerender_exact": true
+          },
+          {
+            "path": "/mnt/external/demosaic/evaluation/prospective-color-grid-reuse-only-CPU-verification-v1/crop-8d10143e2a492485.png",
+            "sha256": "978bcf116b3b58391d07075585a3a650c3df084cc9d1e6499ef0a6dbda3cf483",
+            "all_three_native_panels_rerender_exact": true
+          },
+          {
+            "path": "/mnt/external/demosaic/evaluation/prospective-color-grid-reuse-only-CPU-verification-v1/crop-50b91d134fc7fd85.png",
+            "sha256": "f3da67e32ebb9e0fee1935dbcdda4a04bc6bd2dea0ced1ba6c34d106de028973",
+            "all_three_native_panels_rerender_exact": true
+          },
+          {
+            "path": "/mnt/external/demosaic/evaluation/prospective-color-grid-reuse-only-CPU-verification-v1/crop-e3b6ea289caaa10d.png",
+            "sha256": "301618ec2bec53e303a622b7ef174765340f1756f76e83884e04c5a2f8227adc",
+            "all_three_native_panels_rerender_exact": true
+          },
+          {
+            "path": "/mnt/external/demosaic/evaluation/prospective-color-grid-reuse-only-CPU-verification-v1/crop-00f9f6429c6cd6b2.png",
+            "sha256": "80f961d97ef886d6406d09697729602650fe711fb7168a21cdbdf7c6fb172dda",
+            "all_three_native_panels_rerender_exact": true
+          },
+          {
+            "path": "/mnt/external/demosaic/evaluation/prospective-color-grid-reuse-only-CPU-verification-v1/crop-a4310209deff110a.png",
+            "sha256": "db7c3a57ef658229d2ed26e0573baaca7e973e29ba1996af97e671098e952443",
+            "all_three_native_panels_rerender_exact": true
+          },
+          {
+            "path": "/mnt/external/demosaic/evaluation/prospective-color-grid-reuse-only-CPU-verification-v1/crop-f4f4ebd2fa2684d7.png",
+            "sha256": "7dfd784233ce0a25ed4f7998a6cc5eeef866f8fd4d5897394995118355fd0834",
+            "all_three_native_panels_rerender_exact": true
+          },
+          {
+            "path": "/mnt/external/demosaic/evaluation/prospective-color-grid-reuse-only-CPU-verification-v1/crop-05bf7c01adc41866.png",
+            "sha256": "5599cc0891f4f405c38700100831ed86c3f59660be8534bdc4490a790d9f6475",
+            "all_three_native_panels_rerender_exact": true
+          },
+          {
+            "path": "/mnt/external/demosaic/evaluation/prospective-color-grid-reuse-only-CPU-verification-v1/crop-7a3f8aab167cc706.png",
+            "sha256": "faf035f1c210e82e59550562440b40974342413dbab8ebfbe01225f1b7cdc25c",
+            "all_three_native_panels_rerender_exact": true
+          },
+          {
+            "path": "/mnt/external/demosaic/evaluation/prospective-color-grid-reuse-only-CPU-verification-v1/crop-51e261f2a25325e7.png",
+            "sha256": "5fefb7dec62e0fbd42b9e1b2a0942a7af52f85b16ca16609fdfc5a31eed56e10",
+            "all_three_native_panels_rerender_exact": true
+          }
+        ],
+        "additional_native_crops": [],
+        "CUDA_initialized": false,
+        "driver_sha256": "3cfaac4b946ee4ddd56a621ebce5b01fd2612e19f3fcec77135fc5dc01f7dfcd",
+        "scope": "Saved observations/predictions only, no model inference or new draws. Native pixel reconstruction does not claim visual inspection; additional triplets still require viewing. The supplied finite color grid/one draw per case is not a broad photographic quality benchmark."
+      }
+    },
+    "group_audit": {
+      "receipt": {
+        "path": "/mnt/external/demosaic/evaluation/prospective-color-grid-reuse-only-CPU-verification-v1/group-summary-audit.json",
+        "sha256": "69fe52823325d3fae8d9cdb4eab1af866e909828a44652cfe71b6356d7aa441c"
+      },
+      "result": {
+        "status": "completed-independent-descriptive-color-grid-summary-audit",
+        "report": "/mnt/external/demosaic/evaluation/prospective-color-grid-reuse-only-CPU-verification-v1/report.json",
+        "report_sha256": "65181fa2967f05e016d2213107753031d9fe6037c4d8060f6907c7132ccc2d56",
+        "case_audit": "/mnt/external/demosaic/evaluation/prospective-color-grid-reuse-only-CPU-verification-v1/independent-audit/audit.json",
+        "case_audit_sha256": "cad5062e047bff8e504562e79c14e98b53ad0737937e136834b098ec75c30945",
+        "all_source_case_labels_and_model_coverage_exact": true,
+        "groups": 72,
+        "descriptive_scalar_fields": 864,
+        "maximum_independent_scalar_difference": 6.938893903907228e-18,
+        "driver_sha256": "ce4c1a49f5588d63985ff5603d14bc994945f252eacb17ea8daea6b6160fa3d8",
+        "scope": "Math.fsum and explicit sorted linear percentiles, separate from NumPy aggregation. Case prediction arithmetic supplied by the pinned preceding audit. These quantiles describe the fixed grid, not confidence intervals or real-photo quality."
+      }
+    },
+    "checkpoints_rows_array_metadata_groups_and12_native_PNG_files_exact_to_previous": true,
+    "new_inference": 0,
+    "new_prediction_files": 0,
+    "reused_float_predictions": 4704,
+    "CUDA_initialized": false,
+    "additional_precision_guard_check": "All4 genuine model policies accepted; all4 modified compute-precision policies rejected. Guard added after full replay; original executed evaluator is archived with its SHA in replay source/."
+  },
+  "parameterized_palette_audit_recheck": {
+    "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-first1k-parameterized-audit-recheck-v1/complete-audit.json",
+    "sha256": "96cf5f8349d82d75a7db5f29eb87dda5359ce09f34cb82cb8fc16bf4e5b1c1cd"
+  },
+  "parameterized_saved_score_bridge_recheck": {
+    "path": "/mnt/external/demosaic/evaluation/palette-parameterized-saved-score-bridge-recheck-v1.json",
+    "sha256": "d763c34b73ed4ff9cf2cd03bcd99e36cbb1b2a60e6ea8be41587888695e3f12f"
+  },
+  "actual_rechecks": "87962rows/252CIs/70PNG/29F32/8RGB16 with archived first1k logs; all48 saved-parent comparisons and6 control witnesses identical; both final4k incomplete-workflow invocations rejected before output/CUDA",
+  "physical_frontend": {
+    "report": {
+      "path": "/mnt/external/demosaic/evaluation/prospective-color-grid-physical-frontend-CPU-v1/report.json",
+      "sha256": "3775c0464201ac3b330ec5be3fe6232bf63a791736539e515edf00563a3f261d"
+    },
+    "scope": "All fixed1176 uniform fields, no neural model loaded/inferred, new random draws or source photographs. Rebuild production GAT/Malvar/normalization; invert the spatial mean under an explicit uniform-scene assumption. Direct CFA mean is another constant-scene estimator. No target fitting, learned-output correction or proposed photographic denoiser. Independent NumPy forward/scalar interpolation uses the same numerical expectation table, not an independent derivation of that table. Finite numerical checks cannot identify why the trained CNN shifts color or establish photo quality.",
+    "source_files": {
+      "/home/dllu/proj/demosaic/src/demosaic/pretrained_rgb.py": "10ea25fc01bf561a3ea9087002566eb319717c338f44f54d2da46fc6ee0d7026",
+      "/home/dllu/proj/demosaic/src/demosaic/vst.py": "355124a374177f1c08271834149c5979ab3477fdf255c60aa7cee0d47792a76b",
+      "/home/dllu/proj/demosaic/src/demosaic/cfa.py": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252",
+      "/home/dllu/proj/demosaic/src/demosaic/prior.py": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a",
+      "/home/dllu/proj/demosaic/src/demosaic/color.py": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+      "/home/dllu/proj/demosaic/src/demosaic/precision.py": "9aa850fb5ee0e9abc3e9adc4847ce3518c1acb37c93f6bc54ff9206bb0c94c3a"
+    },
+    "driver_sha256": "cd0d0b028736e47560f93f215c344a36a7a7dafe6383405e8e6d2554e2c0e700",
+    "summaries": [
+      {
+        "condition": "adc-only",
+        "cases": 588,
+        "maximum_uniform_GAT_MHC_mean_error": 7.927417755126953e-06,
+        "maximum_direct_CFA_mean_error": 7.867813110351562e-06,
+        "maximum_normalization_roundtrip_transformed_error": 5.960464477539063e-08
+      },
+      {
+        "condition": "iso12800-prior",
+        "cases": 588,
+        "maximum_uniform_GAT_MHC_mean_error": 0.001055598258972168,
+        "maximum_direct_CFA_mean_error": 0.00108282526489345,
+        "maximum_normalization_roundtrip_transformed_error": 3.814697265625e-06
+      }
+    ],
+    "groups": [
+      {
+        "condition": "adc-only",
+        "saturation": 0.0,
+        "peak": 0.02,
+        "cases": 4,
+        "uniform_GAT_MHC_mean_max_abs_channel_error": {
+          "mean": 6.750226020812988e-06,
+          "p95": 6.750226020812988e-06,
+          "maximum": 6.750226020812988e-06
+        },
+        "direct_CFA_mean_max_abs_channel_error": {
+          "mean": 6.750226020812988e-06,
+          "p95": 6.750226020812988e-06,
+          "maximum": 6.750226020812988e-06
+        },
+        "saved_model_max_abs_channel_mean_error": {
+          "parent10k": {
+            "mean": 1.7983653533519826e-05,
+            "p95": 1.9968093785792005e-05,
+            "maximum": 2.042857297055889e-05
+          },
+          "control-additional1k": {
+            "mean": 1.4111839427641825e-05,
+            "p95": 1.5423270744577167e-05,
+            "maximum": 1.5613056857546325e-05
+          },
+          "wide-additional1k": {
+            "mean": 1.0005809153881275e-05,
+            "p95": 1.1297032713628141e-05,
+            "maximum": 1.1412618623580784e-05
+          },
+          "NonlocalMatchFilter2026+Malvar:authors-RAW": {
+            "mean": 6.808178412939014e-05,
+            "p95": 6.810987735843809e-05,
+            "maximum": 6.81134955084417e-05
+          }
+        }
+      },
+      {
+        "condition": "adc-only",
+        "saturation": 0.0,
+        "peak": 0.18,
+        "cases": 4,
+        "uniform_GAT_MHC_mean_max_abs_channel_error": {
+          "mean": 7.271766662597656e-06,
+          "p95": 7.271766662597656e-06,
+          "maximum": 7.271766662597656e-06
+        },
+        "direct_CFA_mean_max_abs_channel_error": {
+          "mean": 7.271766662597656e-06,
+          "p95": 7.271766662597656e-06,
+          "maximum": 7.271766662597656e-06
+        },
+        "saved_model_max_abs_channel_mean_error": {
+          "parent10k": {
+            "mean": 0.00023427824198734014,
+            "p95": 0.00025079068347986323,
+            "maximum": 0.0002547411638079211
+          },
+          "control-additional1k": {
+            "mean": 0.0001379931654810207,
+            "p95": 0.0001487918053899193,
+            "maximum": 0.00015000847168266773
+          },
+          "wide-additional1k": {
+            "mean": 8.343036148289684e-05,
+            "p95": 9.698133022175169e-05,
+            "maximum": 9.986018034396693e-05
+          },
+          "NonlocalMatchFilter2026+Malvar:authors-RAW": {
+            "mean": 0.0005695173250569496,
+            "p95": 0.0005695563191839028,
+            "maximum": 0.0005695631128037348
+          }
+        }
+      },
+      {
+        "condition": "adc-only",
+        "saturation": 0.0,
+        "peak": 0.9,
+        "cases": 4,
+        "uniform_GAT_MHC_mean_max_abs_channel_error": {
+          "mean": 6.616115570068359e-06,
+          "p95": 6.616115570068359e-06,
+          "maximum": 6.616115570068359e-06
+        },
+        "direct_CFA_mean_max_abs_channel_error": {
+          "mean": 6.616115570068359e-06,
+          "p95": 6.616115570068359e-06,
+          "maximum": 6.616115570068359e-06
+        },
+        "saved_model_max_abs_channel_mean_error": {
+          "parent10k": {
+            "mean": 0.0024208938475931063,
+            "p95": 0.0026449285466223953,
+            "maximum": 0.0026638810033909974
+          },
+          "control-additional1k": {
+            "mean": 0.003986493544653058,
+            "p95": 0.004255597676266916,
+            "maximum": 0.004285507204476744
+          },
+          "wide-additional1k": {
+            "mean": 0.0016091741080163046,
+            "p95": 0.0016263949531130492,
+            "maximum": 0.0016284678829833865
+          },
+          "NonlocalMatchFilter2026+Malvar:authors-RAW": {
+            "mean": 0.0002781846243306063,
+            "p95": 0.00027829598425887527,
+            "maximum": 0.0002783076581545174
+          }
+        }
+      },
+      {
+        "condition": "adc-only",
+        "saturation": 0.5,
+        "peak": 0.02,
+        "cases": 96,
+        "uniform_GAT_MHC_mean_max_abs_channel_error": {
+          "mean": 6.157245176533858e-06,
+          "p95": 7.489696145057678e-06,
+          "maximum": 7.490627467632294e-06
+        },
+        "direct_CFA_mean_max_abs_channel_error": {
+          "mean": 6.157264579087496e-06,
+          "p95": 7.489696145057678e-06,
+          "maximum": 7.490627467632294e-06
+        },
+        "saved_model_max_abs_channel_mean_error": {
+          "parent10k": {
+            "mean": 1.6486542999321804e-05,
+            "p95": 3.8132364852572206e-05,
+            "maximum": 3.976109461291344e-05
+          },
+          "control-additional1k": {
+            "mean": 1.897626394793406e-05,
+            "p95": 3.391065423329564e-05,
+            "maximum": 3.575577578885714e-05
+          },
+          "wide-additional1k": {
+            "mean": 1.5464904193057314e-05,
+            "p95": 2.457195904753462e-05,
+            "maximum": 2.8104569573770276e-05
+          },
+          "NonlocalMatchFilter2026+Malvar:authors-RAW": {
+            "mean": 7.509903466560294e-05,
+            "p95": 0.0001220529795591574,
+            "maximum": 0.00012325893596425885
+          }
+        }
+      },
+      {
+        "condition": "adc-only",
+        "saturation": 0.5,
+        "peak": 0.18,
+        "cases": 96,
+        "uniform_GAT_MHC_mean_max_abs_channel_error": {
+          "mean": 5.767215043306351e-06,
+          "p95": 7.368624210357666e-06,
+          "maximum": 7.368624210357666e-06
+        },
+        "direct_CFA_mean_max_abs_channel_error": {
+          "mean": 5.766438941160838e-06,
+          "p95": 7.368624210357666e-06,
+          "maximum": 7.368624210357666e-06
+        },
+        "saved_model_max_abs_channel_mean_error": {
+          "parent10k": {
+            "mean": 0.00017161249564499786,
+            "p95": 0.00034701621338172116,
+            "maximum": 0.000927960385743063
+          },
+          "control-additional1k": {
+            "mean": 0.0002253898948993083,
+            "p95": 0.000655353941838257,
+            "maximum": 0.001115638806077186
+          },
+          "wide-additional1k": {
+            "mean": 0.00010862302925791785,
+            "p95": 0.00018795572243107016,
+            "maximum": 0.00021695746254408733
+          },
+          "NonlocalMatchFilter2026+Malvar:authors-RAW": {
+            "mean": 0.00044980393766612305,
+            "p95": 0.0007935863952297951,
+            "maximum": 0.000868895314342808
+          }
+        }
+      },
+      {
+        "condition": "adc-only",
+        "saturation": 0.5,
+        "peak": 0.9,
+        "cases": 96,
+        "uniform_GAT_MHC_mean_max_abs_channel_error": {
+          "mean": 5.875403682390849e-06,
+          "p95": 7.808208465576172e-06,
+          "maximum": 7.927417755126953e-06
+        },
+        "direct_CFA_mean_max_abs_channel_error": {
+          "mean": 5.867953101793925e-06,
+          "p95": 7.808208465576172e-06,
+          "maximum": 7.867813110351562e-06
+        },
+        "saved_model_max_abs_channel_mean_error": {
+          "parent10k": {
+            "mean": 0.02123104512638141,
+            "p95": 0.0827620799044962,
+            "maximum": 0.08552385529736056
+          },
+          "control-additional1k": {
+            "mean": 0.021276751513408576,
+            "p95": 0.07660927804099629,
+            "maximum": 0.08051768736797385
+          },
+          "wide-additional1k": {
+            "mean": 0.015454337335819824,
+            "p95": 0.06172131600033026,
+            "maximum": 0.0709920453117229
+          },
+          "NonlocalMatchFilter2026+Malvar:authors-RAW": {
+            "mean": 0.0014185852473019625,
+            "p95": 0.002227324162959121,
+            "maximum": 0.002358194035477936
+          }
+        }
+      },
+      {
+        "condition": "adc-only",
+        "saturation": 0.98,
+        "peak": 0.02,
+        "cases": 96,
+        "uniform_GAT_MHC_mean_max_abs_channel_error": {
+          "mean": 6.104824327242871e-06,
+          "p95": 7.839873433113098e-06,
+          "maximum": 7.839873433113098e-06
+        },
+        "direct_CFA_mean_max_abs_channel_error": {
+          "mean": 6.104785522135596e-06,
+          "p95": 7.839640602469444e-06,
+          "maximum": 7.839640602469444e-06
+        },
+        "saved_model_max_abs_channel_mean_error": {
+          "parent10k": {
+            "mean": 5.806827714044023e-05,
+            "p95": 0.00013396380474659964,
+            "maximum": 0.00015151271865761372
+          },
+          "control-additional1k": {
+            "mean": 5.953728389300751e-05,
+            "p95": 0.0001338015079363686,
+            "maximum": 0.00015292149906599663
+          },
+          "wide-additional1k": {
+            "mean": 4.1511864741039526e-05,
+            "p95": 0.00010835149952981738,
+            "maximum": 0.00013001172945223516
+          },
+          "NonlocalMatchFilter2026+Malvar:authors-RAW": {
+            "mean": 0.00012764363374711727,
+            "p95": 0.00027597346086622566,
+            "maximum": 0.00029945506963258595
+          }
+        }
+      },
+      {
+        "condition": "adc-only",
+        "saturation": 0.98,
+        "peak": 0.18,
+        "cases": 96,
+        "uniform_GAT_MHC_mean_max_abs_channel_error": {
+          "mean": 6.162910722196102e-06,
+          "p95": 7.793307304382324e-06,
+          "maximum": 7.800757884979248e-06
+        },
+        "direct_CFA_mean_max_abs_channel_error": {
+          "mean": 6.161707763870557e-06,
+          "p95": 7.793307304382324e-06,
+          "maximum": 7.793307304382324e-06
+        },
+        "saved_model_max_abs_channel_mean_error": {
+          "parent10k": {
+            "mean": 0.0003394696543129309,
+            "p95": 0.0006450677143584471,
+            "maximum": 0.0007402490710956045
+          },
+          "control-additional1k": {
+            "mean": 0.0003694319891837949,
+            "p95": 0.0008218304085312411,
+            "maximum": 0.001075435719685629
+          },
+          "wide-additional1k": {
+            "mean": 0.00027646589476148625,
+            "p95": 0.0005755592526111286,
+            "maximum": 0.0009584074941813014
+          },
+          "NonlocalMatchFilter2026+Malvar:authors-RAW": {
+            "mean": 0.0026706617859383643,
+            "p95": 0.009181062520838168,
+            "maximum": 0.010382459310421836
+          }
+        }
+      },
+      {
+        "condition": "adc-only",
+        "saturation": 0.98,
+        "peak": 0.9,
+        "cases": 96,
+        "uniform_GAT_MHC_mean_max_abs_channel_error": {
+          "mean": 5.9693120419979095e-06,
+          "p95": 7.860362529754639e-06,
+          "maximum": 7.88271427154541e-06
+        },
+        "direct_CFA_mean_max_abs_channel_error": {
+          "mean": 5.969622482856114e-06,
+          "p95": 7.867813110351562e-06,
+          "maximum": 7.867813110351562e-06
+        },
+        "saved_model_max_abs_channel_mean_error": {
+          "parent10k": {
+            "mean": 0.014580722096435845,
+            "p95": 0.07225547536945669,
+            "maximum": 0.07448789517511614
+          },
+          "control-additional1k": {
+            "mean": 0.014497038766300345,
+            "p95": 0.03291567134700017,
+            "maximum": 0.08586396112572402
+          },
+          "wide-additional1k": {
+            "mean": 0.017241713479922205,
+            "p95": 0.05452862101286883,
+            "maximum": 0.062457364376168695
+          },
+          "NonlocalMatchFilter2026+Malvar:authors-RAW": {
+            "mean": 0.015389809048169811,
+            "p95": 0.05423946732742479,
+            "maximum": 0.05592036307964008
+          }
+        }
+      },
+      {
+        "condition": "iso12800-prior",
+        "saturation": 0.0,
+        "peak": 0.02,
+        "cases": 4,
+        "uniform_GAT_MHC_mean_max_abs_channel_error": {
+          "mean": 0.00011762510985136032,
+          "p95": 0.00017836866900324818,
+          "maximum": 0.00019219517707824707
+        },
+        "direct_CFA_mean_max_abs_channel_error": {
+          "mean": 0.00011548708455877497,
+          "p95": 0.00017869901388730867,
+          "maximum": 0.00019233945344922232
+        },
+        "saved_model_max_abs_channel_mean_error": {
+          "parent10k": {
+            "mean": 0.0001100591218619229,
+            "p95": 0.0001366633483849,
+            "maximum": 0.0001422769638884347
+          },
+          "control-additional1k": {
+            "mean": 8.482998185172618e-05,
+            "p95": 0.00010218399552286427,
+            "maximum": 0.00010487084451597183
+          },
+          "wide-additional1k": {
+            "mean": 8.748577814003511e-05,
+            "p95": 0.00010452732338126225,
+            "maximum": 0.0001050065940944478
+          },
+          "NonlocalMatchFilter2026+Malvar:authors-RAW": {
+            "mean": 8.633864526927937e-05,
+            "p95": 0.00012896883987014007,
+            "maximum": 0.00013549823437642773
+          }
+        }
+      },
+      {
+        "condition": "iso12800-prior",
+        "saturation": 0.0,
+        "peak": 0.18,
+        "cases": 4,
+        "uniform_GAT_MHC_mean_max_abs_channel_error": {
+          "mean": 0.00025445595383644104,
+          "p95": 0.0003062494099140167,
+          "maximum": 0.0003077089786529541
+        },
+        "direct_CFA_mean_max_abs_channel_error": {
+          "mean": 0.00025598836873541586,
+          "p95": 0.0003030720251554167,
+          "maximum": 0.00030369825137313566
+        },
+        "saved_model_max_abs_channel_mean_error": {
+          "parent10k": {
+            "mean": 0.0005487964332132833,
+            "p95": 0.0005875431212043622,
+            "maximum": 0.0005885790806496516
+          },
+          "control-additional1k": {
+            "mean": 0.0006609700611443259,
+            "p95": 0.0007068519996537362,
+            "maximum": 0.0007075504958629609
+          },
+          "wide-additional1k": {
+            "mean": 0.0007429573393892497,
+            "p95": 0.0007900098862592131,
+            "maximum": 0.0007907246871036478
+          },
+          "NonlocalMatchFilter2026+Malvar:authors-RAW": {
+            "mean": 0.00018328451216802934,
+            "p95": 0.0002864534846448805,
+            "maximum": 0.0003072520485147834
+          }
+        }
+      },
+      {
+        "condition": "iso12800-prior",
+        "saturation": 0.0,
+        "peak": 0.9,
+        "cases": 4,
+        "uniform_GAT_MHC_mean_max_abs_channel_error": {
+          "mean": 0.0005449652671813965,
+          "p95": 0.0008205145597457885,
+          "maximum": 0.0008545517921447754
+        },
+        "direct_CFA_mean_max_abs_channel_error": {
+          "mean": 0.000551632705610261,
+          "p95": 0.0008335518112872086,
+          "maximum": 0.0008661313587799979
+        },
+        "saved_model_max_abs_channel_mean_error": {
+          "parent10k": {
+            "mean": 0.00197245440853294,
+            "p95": 0.0023200727094663306,
+            "maximum": 0.0023476188979111613
+          },
+          "control-additional1k": {
+            "mean": 0.003958137886947952,
+            "p95": 0.004278864378225989,
+            "maximum": 0.004309868633281439
+          },
+          "wide-additional1k": {
+            "mean": 0.006368542278651148,
+            "p95": 0.0070181090133264665,
+            "maximum": 0.007051210899371654
+          },
+          "NonlocalMatchFilter2026+Malvar:authors-RAW": {
+            "mean": 0.0005691054370254279,
+            "p95": 0.0007023842146736569,
+            "maximum": 0.0007255548588000238
+          }
+        }
+      },
+      {
+        "condition": "iso12800-prior",
+        "saturation": 0.5,
+        "peak": 0.02,
+        "cases": 96,
+        "uniform_GAT_MHC_mean_max_abs_channel_error": {
+          "mean": 0.0001082395853397126,
+          "p95": 0.00020274869166314602,
+          "maximum": 0.00023674219846725464
+        },
+        "direct_CFA_mean_max_abs_channel_error": {
+          "mean": 0.00010512171424436386,
+          "p95": 0.00018799455210829455,
+          "maximum": 0.00024225681293076583
+        },
+        "saved_model_max_abs_channel_mean_error": {
+          "parent10k": {
+            "mean": 0.00011061451330476756,
+            "p95": 0.00018656532848581263,
+            "maximum": 0.00028085966121579983
+          },
+          "control-additional1k": {
+            "mean": 0.00011461606493071485,
+            "p95": 0.0001934246236078252,
+            "maximum": 0.00029534606261222507
+          },
+          "wide-additional1k": {
+            "mean": 0.00011684015560907332,
+            "p95": 0.00020225387312166276,
+            "maximum": 0.0003122386922404985
+          },
+          "NonlocalMatchFilter2026+Malvar:authors-RAW": {
+            "mean": 7.767614250838051e-05,
+            "p95": 0.0001544361645119352,
+            "maximum": 0.00021214704764133786
+          }
+        }
+      },
+      {
+        "condition": "iso12800-prior",
+        "saturation": 0.5,
+        "peak": 0.18,
+        "cases": 96,
+        "uniform_GAT_MHC_mean_max_abs_channel_error": {
+          "mean": 0.00023867026902735233,
+          "p95": 0.00045733246952295303,
+          "maximum": 0.0007353201508522034
+        },
+        "direct_CFA_mean_max_abs_channel_error": {
+          "mean": 0.00023739157945361976,
+          "p95": 0.00044928787698154254,
+          "maximum": 0.0007199203787604386
+        },
+        "saved_model_max_abs_channel_mean_error": {
+          "parent10k": {
+            "mean": 0.00035621660504906084,
+            "p95": 0.0007992646934144432,
+            "maximum": 0.0011749368914752267
+          },
+          "control-additional1k": {
+            "mean": 0.0004282883707355722,
+            "p95": 0.0009730913980456534,
+            "maximum": 0.0013446547600324266
+          },
+          "wide-additional1k": {
+            "mean": 0.0004217531400384663,
+            "p95": 0.0009299853385891766,
+            "maximum": 0.0013168141996720807
+          },
+          "NonlocalMatchFilter2026+Malvar:authors-RAW": {
+            "mean": 0.00018787927150697216,
+            "p95": 0.00030383027267816943,
+            "maximum": 0.0005150449610664509
+          }
+        }
+      },
+      {
+        "condition": "iso12800-prior",
+        "saturation": 0.5,
+        "peak": 0.9,
+        "cases": 96,
+        "uniform_GAT_MHC_mean_max_abs_channel_error": {
+          "mean": 0.0005464629891018072,
+          "p95": 0.0009232610464096069,
+          "maximum": 0.001055598258972168
+        },
+        "direct_CFA_mean_max_abs_channel_error": {
+          "mean": 0.0005490323940466665,
+          "p95": 0.0009207089582923822,
+          "maximum": 0.00108282526489345
+        },
+        "saved_model_max_abs_channel_mean_error": {
+          "parent10k": {
+            "mean": 0.02811542418294266,
+            "p95": 0.08672143992560451,
+            "maximum": 0.0880232525349129
+          },
+          "control-additional1k": {
+            "mean": 0.03725912185693839,
+            "p95": 0.10628170909039909,
+            "maximum": 0.120114335201215
+          },
+          "wide-additional1k": {
+            "mean": 0.029992807461409633,
+            "p95": 0.09612285923241871,
+            "maximum": 0.10049689774517902
+          },
+          "NonlocalMatchFilter2026+Malvar:authors-RAW": {
+            "mean": 0.0012597545298376645,
+            "p95": 0.0036495005132746883,
+            "maximum": 0.004496587624307722
+          }
+        }
+      },
+      {
+        "condition": "iso12800-prior",
+        "saturation": 0.98,
+        "peak": 0.02,
+        "cases": 96,
+        "uniform_GAT_MHC_mean_max_abs_channel_error": {
+          "mean": 0.00010798846839558489,
+          "p95": 0.0001894629094749689,
+          "maximum": 0.00025936122983694077
+        },
+        "direct_CFA_mean_max_abs_channel_error": {
+          "mean": 0.00010365739134868657,
+          "p95": 0.00018745349253762762,
+          "maximum": 0.00025942324436046584
+        },
+        "saved_model_max_abs_channel_mean_error": {
+          "parent10k": {
+            "mean": 0.00011600733833886897,
+            "p95": 0.0002118515963235268,
+            "maximum": 0.00030665294983919013
+          },
+          "control-additional1k": {
+            "mean": 0.00014028109218132317,
+            "p95": 0.0002747700704276213,
+            "maximum": 0.0003195769563535578
+          },
+          "wide-additional1k": {
+            "mean": 0.00013083169807811027,
+            "p95": 0.00025738326282407796,
+            "maximum": 0.0002942450077171088
+          },
+          "NonlocalMatchFilter2026+Malvar:authors-RAW": {
+            "mean": 0.0003877315218673517,
+            "p95": 0.0006080595203184203,
+            "maximum": 0.0008806172940967372
+          }
+        }
+      },
+      {
+        "condition": "iso12800-prior",
+        "saturation": 0.98,
+        "peak": 0.18,
+        "cases": 96,
+        "uniform_GAT_MHC_mean_max_abs_channel_error": {
+          "mean": 0.00021736829269987842,
+          "p95": 0.0004432797431945801,
+          "maximum": 0.0005763918161392212
+        },
+        "direct_CFA_mean_max_abs_channel_error": {
+          "mean": 0.000218718426190339,
+          "p95": 0.00044853495928691076,
+          "maximum": 0.0005903176002902966
+        },
+        "saved_model_max_abs_channel_mean_error": {
+          "parent10k": {
+            "mean": 0.0007349844208670221,
+            "p95": 0.0016165478409675416,
+            "maximum": 0.002048291272949427
+          },
+          "control-additional1k": {
+            "mean": 0.0007236110486750627,
+            "p95": 0.0014321878644113894,
+            "maximum": 0.0016284212915343233
+          },
+          "wide-additional1k": {
+            "mean": 0.0007071570943865406,
+            "p95": 0.0013823887151374948,
+            "maximum": 0.001599228011618834
+          },
+          "NonlocalMatchFilter2026+Malvar:authors-RAW": {
+            "mean": 0.0026346489970062712,
+            "p95": 0.009994600942936815,
+            "maximum": 0.01152777773073467
+          }
+        }
+      },
+      {
+        "condition": "iso12800-prior",
+        "saturation": 0.98,
+        "peak": 0.9,
+        "cases": 96,
+        "uniform_GAT_MHC_mean_max_abs_channel_error": {
+          "mean": 0.00042493858685096103,
+          "p95": 0.0008156299591064453,
+          "maximum": 0.0010166764259338379
+        },
+        "direct_CFA_mean_max_abs_channel_error": {
+          "mean": 0.00042475948724170096,
+          "p95": 0.0008322300738654864,
+          "maximum": 0.0010289735021069557
+        },
+        "saved_model_max_abs_channel_mean_error": {
+          "parent10k": {
+            "mean": 0.023666842447225157,
+            "p95": 0.09884566338849254,
+            "maximum": 0.12095301284338347
+          },
+          "control-additional1k": {
+            "mean": 0.03251489248445523,
+            "p95": 0.10894488128862576,
+            "maximum": 0.12124762494349853
+          },
+          "wide-additional1k": {
+            "mean": 0.03288629953750539,
+            "p95": 0.11464055951364571,
+            "maximum": 0.12135358265251853
+          },
+          "NonlocalMatchFilter2026+Malvar:authors-RAW": {
+            "mean": 0.01628320007869055,
+            "p95": 0.06151899980002781,
+            "maximum": 0.07105253214424011
+          }
+        }
+      }
+    ],
+    "maximum_NumPy64_GAT_difference": 0.0,
+    "maximum_NumPy64_inverse_of_mean_difference": 0.0,
+    "CUDA_initialized": false,
+    "finding": "The identity normalization round trip and explicit uniform-field physical mean do not reproduce the large learned bright-field bias on this finite grid. This does not identify a training cause or validate a general photographic correction."
+  },
+  "limits": "No new training result or promotion. Await full4k training/main evaluation and actual owner exit, then queued checks and actual native review. Preserve frozen original sources/manifests/whole states. Parent/reference reuse preserves original execution precision, not a new inference replay."
+}

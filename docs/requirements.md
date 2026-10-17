@@ -270,3 +270,10 @@ queue. All4,704 predictions/28,224 metric fields and12 native triplets now pass
 independent checks; all12 previews were viewed. Bright-field biases remain.
 It is a finite color-consistency diagnostic, not evidence of a trained
 quality gain, independent natural-scene generalization or completed SOTA.
+
+The [final4k review queue](palette-final-review-preparation.md) now waits for
+actual training/evaluation-owner exit. Complete first1k rechecks and a zero-CUDA
+4,704-array reuse run verify its tooling, while final4k quality remains pending.
+The [physical preprocessing diagnostic](physical-frontend-color-check.md)
+finds much smaller uniform-field errors before the CNN than the learned bias;
+it does not establish a training cause or a photographic correction.
