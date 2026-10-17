@@ -151,7 +151,8 @@ The completed4k endpoints need a new full review before any promotion.
 ## Actual original4k continuation
 
 [Restored production state and actual launch](results/normalization-original4k-continuation-launch.json).
-V68 control has resumed from step1,000 and passed step1,025. The actual model,
+At the launch capture, V68 control had resumed from step1,000 and passed
+step1,025. The actual model,
 all89 Adam states and Python/Torch/CUDA RNG families match the saved checkpoint
 before the first data fetch. EMA matches before its first update; frozen DINO
 has its expected hash and stays gradient-free. These read-only checks execute
@@ -177,6 +178,29 @@ The183 frozen guards also bind the preserved first1k inputs and completed review
 The launch receipt predates the full4k review queue below. Both4k boundaries,
 matched new input/LR checks and the next full/native quality review remain work.
 There is no automatic post4k continuation or promotion.
+
+### Control completed, augmented arm resumed
+
+[Actual4k control boundary and augmented handoff](results/normalization-original4k-control-complete-handoff.json).
+V68 has completed its original4,000 updates and exited. Its controller audit
+passes91 model/91 EMA/89 Adam finite state, complete RNG, original162 logged
+steps/LRs, source/data/recipe/parent identity and exact1k log prefix. All89 model
+and EMA parameter tensors changed since1k; the two context buffers remain exact.
+Frozen checkpoint SHA256:
+`5bcb45adb6ace6aed3cd2071ad56f36bd019645ec4c117c4d6f65beda220b737`.
+
+V69 is now training from its genuine1k state. Production checks verify exact
+model/all89 Adam/RNG restoration before first fetch and EMA before its first
+update. Frozen DINO has the expected unchanged hash. All52 available logged
+observation/domain/LR rows, including the original1k prefix and through step1,250,
+match control exactly. Augmented masks are independently recomputed. This is a
+partial matched-input check; the complete162-row proof still needs V69's finish.
+The183 frozen guards and the actual control checkpoint/log/receipt hashes are
+revalidated. These are training-state milestones, not a performance report.
+
+Actual augmented trainer at handoff:658410/1792262498.98 under the same
+controller622973/1792260581.40. The full review remains waiting behind both arms;
+there is no quality promotion or change to data, LR horizon, source or policy.
 
 ## Queued full4k review
 
