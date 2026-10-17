@@ -1,7 +1,7 @@
 # Longer matched Commons-data comparison
 
-V63 is training the control arm; V64's expanded-data arm follows on the same
-GPU after it exits. This tests more scene diversity with a longer training
+V63 has frozen its control arm at 4,000 updates; V64's expanded-data arm is now
+training on the same GPU. This tests more scene diversity with a longer training
 schedule after [V61](sensor-mean-v61-first1k-review.md) and
 [V62](sensor-mean-v62-first1k-review.md) failed to improve the overall color/detail
 tradeoff. **No new quality gain is established yet.** V43 remains the working
@@ -32,8 +32,9 @@ frozen. Both retain the 8-stop palette, loss weight 0, 128 native captures from
 manifest SHA256 is
 `7ed635903e4dd698081475a3667c8a14bb3b9f5f628a0917a5e336406faaecde`.
 Its full 4×/8× cache and membership checks are in the
-[completed corpus review](commons-incoming-v3.md). The new 75,806-source v4
-membership stays separate while its 4× caches are prepared.
+[completed corpus review](commons-incoming-v3.md). The new 75,806-source v4 corpus
+has completed its [separate integrity and content review](commons-incoming-v4.md);
+neither arm substitutes that larger corpus.
 
 The actual parent/source/data CUDA fixture executes seven discarded updates per
 arm using production seed 49, batch 16/native 256/BF16 and the 20,000-step
@@ -74,6 +75,44 @@ triplets and 64 selected CPU-color predictions. Historical V60/reference bulk
 neural panels are retained. Independent statistics/state/hue/native review and
 a quality decision remain required after primary evaluation; nothing is promoted
 or continued automatically.
+
+V63's frozen step4000 checkpoint is
+`/mnt/external/demosaic/models/dino-convnext-wide-long-control-b16-v63-step4000.pt`,
+SHA256 `5f29bd7efb94b72491cff22575c0565995326644823bcb802444214c8f2c6bd6`.
+This is a training boundary, with the original 20,000-update schedule preserved;
+it is not a quality result or a model promotion.
+An [independent CPU state check](results/long-commons-v63-first4k-state-check.json)
+verifies the full checkpoint hash, finite 91 model/91 EMA tensors and 89 AdamW
+states, all optimizer steps at 4000, complete RNG, archived model source, all four
+manifest hashes and the 161 frozen training-log rows. This does not evaluate
+V63's restoration quality or assert that V64 has completed.
+
+The [statistics and hue follow-up is also queued](results/long-commons-v63-v64-first4k-statistics-hue-queue.json),
+controller PID 2055575, creation 1792210364.08. It waits for actual primary-owner
+2036802 to exit. Its frozen operators audit the five-method primary panels and
+produce 84 comparisons: V64 minus V63, plus each arm against retained V60 full4k,
+V58 and V43 scores. Observation metadata, coverage and nullable support must
+match. Historical classical drift is fully recorded under the existing four-F32-
+ULP bound. Source bootstrap intervals do not measure training/selection uncertainty.
+
+The hue stage uses the original 1,176 observations for V60, V63, V64 and the
+released RAW reference. It reuses 2,352 audited parent/reference arrays and runs
+only 2,352 new predictions. Independent Torch64 checks cover all 4,704 arrays/
+28,224 metric fields; a separate arithmetic audit checks 72 groups/864 descriptive
+scalars. Twelve native grid triplets remain subject to visual review. Whole-state
+and primary-native artifact review is still required afterward; this queue cannot
+promote or continue a model.
+
+[Executed CPU operator checks](results/long-commons-review-tools-CPU-preflight.json):
+the new score tool audited 87,962 genuine historical cases and reproduced 84
+published, reversed or self comparisons, maximum scalar/interval error 3.13e-17.
+This replay used seven historical methods, while the new panel expects five.
+The grid wrapper reused 2,352 actual audited arrays without inference and rendered
+six PNGs with exactly matching pixels/hashes and display metadata. Both reject the
+actual pending primary workflow before writing an apparent result. The first grid
+attempt incorrectly treated the released-reference directory as a file; corrected
+checkpoint/export/receipt verification passes, and the failed log/source remain.
+These are engineering checks on old outputs, not new V63/V64 quality evidence.
 
 Reports must include at least two native noisy/denoised/exact-GT photographic
 triplets and DSCF3879/3880 sky/building/foliage/fence crops, with accurate non-GT

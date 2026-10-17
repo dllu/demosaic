@@ -5,8 +5,10 @@ The 8× caches and membership review are complete. The CPU job prepared
 separate 8× linear-light uint16 cache; two failed. Its identity screen quarantined
 126 and cleared 9,896. After preserving held-out assignments, **8,872** are new
 training sources in a separate reviewed future corpus. Combined training count
-is **75,806**; matching 4× preparation is running. Active model inputs remain fixed.
+is **75,806**; matching 4× preparation, complete independent pixel checks and
+48-thumbnail content review are now complete. Active model inputs remain fixed.
 [Reviewed 8× freeze](results/commons-incoming-v4-reviewed8.json),
+[reviewed 4× corpus and independent receipts](results/commons-incoming-v4-reviewed4.json),
 [actual 4× launch and startup checks](results/commons-incoming-v4-rebin4-launch.json),
 [original producer completion](results/commons-incoming-v4-preparation-complete.json).
 The downloader continues in parallel. Existing
@@ -73,19 +75,35 @@ and reuses the complete 66,934-source 4× base. It runs two CPU workers at nice 
 CUDA hidden, a frozen package/operator/driver and a 512 GiB reserve. The first
 12 4× caches pass SHA/header/recipe/source checks and a rounded area2 comparison
 to the reviewed 8× pixels, within one uint16 code. This is a startup sample;
-full 4× verification and the later consistency/content review remain pending.
-Original validation paths and all current 40,170-source model inputs stay fixed.
+the complete check is recorded below. Original validation paths and both current
+model inputs stay fixed.
 Rebin controller PID 1953180, creation 1792206647.0; status
 `rebin4-workflow.json`, plan `rebin4-plan.json`, log
 `.cache/rebin-commons-incoming-v4.log`.
 
-The [independent full 4× audit is queued](results/commons-incoming-v4-independent4-queue.json):
-controller PID 2032560, creation 1792209281.47. It waits for that exact producer
-to exit, then rehashes all 8,872 new 4×/matching 8× files, checks all active
-membership/old rows, compares every rounded area2 sample, and creates 48 content
-thumbnails. It stops for actual contact review. Its frozen source/status are in
-`independent4-source/` and `independent4-workflow.json` under this corpus; no
-active model manifest is substituted and no new restoration score is computed.
+The [previously queued independent full 4× audit](results/commons-incoming-v4-independent4-queue.json)
+is now complete, with its actual controller and producer exited. It rehashed
+every one of the 8,872 new 4× and matching 8× files, checked uint16/HWC headers,
+minimum size, source metadata and full membership, and retained all 71,492 base
+rows and all 4,558 old held-out paths exactly. New 4× cache payload is 42.066 GB.
+Across **5,253,613,515 channel samples**, rounded area2 reduction differs from
+the corresponding 8× cache by at most one uint16 code (4,502,554,330 exact;
+751,059,185 differ by one). All reserved/excluded rows remain absent.
+
+Three 4× contact sheets covering 48 deterministic new training identities were
+actually viewed: foliage/flowers, stone and stained glass, day/night buildings,
+trains/platform fencing, people, vehicles, birds, coast/water, mountain, specimen
+shells and interior detail. No obvious broken decoding or gross orientation/
+channel corruption appears in these thumbnails; architecture is common in this
+sample. Resized previews do not validate every image or native sharpness/noise.
+The audit source, per-cache receipts, contacts, attribution and manual review are
+retained. The separate `reviewed4.json` descriptor points to the checked manifest:
+
+`extension4/audit/manifest.jsonl`, SHA256
+`88f49cfc3a8a0a9fc74182a7f3fcd07b999f9153ae3dc8da54d72c6541890005`.
+
+This future-stage corpus has 75,806 train/2,303 val/2,255 test rows. No active
+model manifest is substituted and no new restoration score is computed.
 
 Operational files:
 
@@ -96,7 +114,8 @@ Operational files:
 - Executed source: `source/`; independent startup auditor: `startup-audit-source.py`.
 
 Inspect the current status and process before acting; do not launch a duplicate.
-This preparation provides no restoration-quality result. The previous
-[66,934-image 4× corpus](commons-incoming-v3.md) is already ready for a separate
-matched data trial; the current experiment keeps its original 40,170 Commons
-training images, 128 native captures and 32 paired sources.
+This preparation provides no restoration-quality result. The current
+[matched data trial](longer-commons-data-stage.md) uses 40,170 Commons training
+images for V63 and the prior [66,934-image 4× corpus](commons-incoming-v3.md) for
+V64, with the same 128 native captures and 32 paired sources. That experiment's
+frozen membership remains unchanged by this new corpus.
