@@ -324,3 +324,10 @@ The [serial final-review queue](results/raw-kernel-phase-joint-v67-full10k-revie
 is now waiting behind successful training completion, with primary panels,
 statistics/hue and CPU artifact stages. Actual native viewing and a quality
 decision remain pending; no new model is promoted.
+
+The [supplementary GFX sign/platform review](gfx-highlight-qualitative.md) now
+covers colored lighting and a bright railing boundary with eight native CPU
+comparisons. Input/source/float/display audits and all native views pass, but
+grain/detail tradeoffs remain. The ISO100 sign content and optics differ, so it
+is not exact GT and receives no scores. A small final-10k CPU follower is queued;
+the requested broad real-photo superiority remains unproven.

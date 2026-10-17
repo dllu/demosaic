@@ -94,3 +94,9 @@ GFX regions (sky/building/foliage/fence) remain required before a quality decisi
 The 2k-to-10k comparison is progress along one original training trajectory;
 it does not isolate architecture, unfreezing or seed effects. No protected-final
 model score, new training budget or automatic promotion is introduced.
+
+The [supplementary neon/platform check](gfx-highlight-qualitative.md) freezes two
+additional input-only regions. A CPU follower waits behind successful final
+artifact-owner exit, then evaluates only the genuine completed-10,000 checkpoint
+and independently audits two native triplets. Their actual visual review remains
+required. The original four standing regions and primary review queue are unchanged.

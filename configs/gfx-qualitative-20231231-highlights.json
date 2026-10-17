@@ -1,0 +1,36 @@
+{
+  "noisy": ".cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+  "reference": ".cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+  "display_exposure": 4.0,
+  "notes": "GFX100S / 55mm. Noisy DSCF3879: ISO6400, f/1.7, 1/240s, 17:13:27. Reference DSCF3880: ISO100, f/5.6, 3s, 17:17:05. Captured 3m38s apart with nearly identical framing. Aperture, depth of field, clouds, lights and moving subjects still differ. Native sensor crops with input/reference-only integer coordinate matching; no resizing or warping, no per-panel brightness adjustment. Qualitative reference, not exact ground truth; evaluation-only, never training. Supplementary sign/platform regions selected without any learned output. Lights can vary between captures; no pixelwise reference scores. The original four standing regions remain unchanged.",
+  "regions": [
+    {
+      "name": "colored-neon-sign",
+      "noisy_xy": [
+        9060,
+        2050
+      ],
+      "reference_xy": [
+        9060,
+        2050
+      ],
+      "size": 160,
+      "selection_method": "Input-only locator selection, then maximum normalized green correlation in512px input/reference contexts; integer offsets within+/-8 only, no output-dependent selection or warp",
+      "context_green_correlation": 0.9116097356755666
+    },
+    {
+      "name": "illuminated-platform-boundary",
+      "noisy_xy": [
+        10320,
+        4520
+      ],
+      "reference_xy": [
+        10321,
+        4520
+      ],
+      "size": 160,
+      "selection_method": "Input-only locator selection, then maximum normalized green correlation in512px input/reference contexts; integer offsets within+/-8 only, no output-dependent selection or warp",
+      "context_green_correlation": 0.9831606311368877
+    }
+  ]
+}

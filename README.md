@@ -48,6 +48,8 @@ apart; aperture and moving subjects differ, so the last panel is a qualitative
 reference, **not GT**. [All four regions and matched comparisons](docs/native-corpus-2k-review.md).
 Additional [Q2, a7R II and GFX50R native comparisons](docs/cross-camera-qualitative.md)
 use locally cached captures and explicitly labeled RawNIND comparators.
+Supplementary [neon-sign and platform crops](docs/gfx-highlight-qualitative.md)
+cover colored lighting and bright boundaries from the same cached GFX pair.
 
 ![GFX foliage: noisy, denoised and separate low-ISO reference](docs/images/native-2k-v43-gfx-full-foliage.png)
 
