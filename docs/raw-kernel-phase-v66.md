@@ -1,9 +1,9 @@
 # Direct CFA/native-phase conditioning: matched V66 trial
 
-V66 is training a separate **1,000-update** head warmup after the
+V66 completed its separate **1,000-update** head warmup after the
 [failed V65 review](raw-kernel-warmup-v65-first1k-review.md). It tests one change:
 give the reconstruction coefficients direct knowledge of the CFA pattern and
-the output pixel's position in its 2×2 Bayer cell. **No new quality result yet.**
+the output pixel's position in its 2×2 Bayer cell. The [completed review](raw-kernel-phase-v66-first1k-review.md) finds +1.69dB photo PSNR over V65, but substantial grain and a 6.14dB deficit versus V60: no promotion.
 V43 remains the working reference.
 
 [Recipe](../configs/dino-convnext-raw-kernel-phase-warmup-b16-v66.yaml).
@@ -75,9 +75,9 @@ not total RAM or throughput. An independent CPU read checks the saved GPU state,
 source and all 7 control observation hashes. These are engineering checks, not
 quality, convergence or deterministic CUDA optimization after restart.
 
-## Live work and required review
+## Executed workflow and review
 
-The production trainer reports 27,216 trainable parameters. Controller PID2517880,
+The completed production trainer reported 27,216 trainable parameters. Controller PID2517880,
 creation1792216430.60; status:
 `/mnt/external/demosaic/runs/raw-kernel-phase-warmup-v66-workflow-v1.json`.
 Plan/logs:
@@ -92,7 +92,7 @@ links avoid the originals. Status:
 `/mnt/external/demosaic/runs/raw-kernel-phase-warmup-v66-review-workflow-v1.json`.
 
 The [matched statistics/hue stage](results/raw-kernel-phase-v66-statistics-hue-queue.json)
-is queued behind actual primary-owner exit, controller PID2527850,
+ran after actual primary-owner exit, controller PID2527850,
 creation1792216972.84. It includes V65 alongside retained V60/V58/V43, yielding
 48 comparisons/twelve classical witnesses. The new-checkpoint grid uses the
 original 1,176 observations, then 7,056 independent Torch64 fields and 216 group
@@ -105,7 +105,7 @@ It checks the 94/94/three-state boundary, frozen 91 parent tensors, recipe/sourc
 data/RNG/logs and primary 19 PNGs/23 F32 arrays/two full RGB16 files. Four full-TIFF/
 native-ROI comparisons must be exact; eighteen three-camera rerenders use the
 unchanged historical preview-only bound. Actual native views and the quality
-decision remain required afterward; neither queue promotes or continues a model.
+decision were completed afterward; neither queue promotes or continues a model.
 
 [Executed CPU wiring checks](results/raw-kernel-phase-review-tools-CPU-preflight.json)
 verify the actual completed V65 gate and published boundary unchanged, plus both
@@ -117,7 +117,7 @@ primary and actual live statistics-owner gates reject before output. Model code
 remains unchanged from the 543-test fc0 package.
 
 Matched V66−V65 statistics, full hue/state/artifact results and actual native
-inspection remain pending. The former 93/two-state gate is not used as proof
+inspection are complete in the [performance review](raw-kernel-phase-v66-first1k-review.md). All four owners exited; PID records above are historical. The former 93/two-state gate is not used as proof
 for this variant.
 Reports need two native exact-GT photo triplets and all four standing GFX regions,
 including foliage/fence, with non-GT real-reference labels. No automatic joint
