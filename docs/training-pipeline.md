@@ -18,8 +18,11 @@ the [later RAW-head sweep](raw-kernel-training-batch-sweep.md) also retained 16.
 
 A separate [normalization study and opt-in training augmentation](normalization-augmentation.md)
 addresses sensitivity to the region used for neural feature coordinates. It
-keeps RAW/targets fixed and leaves the geometry order intact. It has CPU
-engineering evidence, with no GPU quality trial or change to active recipes.
+keeps RAW/targets fixed and leaves the geometry order intact. Its
+[completed original4k GPU review](normalization-v68-v69-original4k-review.md)
+found a small matched photo gain; texture/color limitations prevented promotion.
+The [experimental RAW-native backbone](packed-isotropic.md) retains the same
+geometry and selected-domain loading, with its own batch sweep in progress.
 
 For seed45's first 1,000 steps, 514 select Commons/procedural, 230 paired RAW and
 256 native-RAW synthetic. Batch4 formerly consumed 4,000 Commons examples
