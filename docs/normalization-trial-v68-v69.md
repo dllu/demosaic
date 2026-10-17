@@ -1,4 +1,4 @@
-# Matched normalization trial: CUDA preflight passed, first1k training running
+# Matched normalization trial: first1k training complete, full review running
 
 V68 control and V69 augmentation start from the same genuine V63 original20k
 EMA. They test whether training with varied physical feature coordinates reduces
@@ -6,6 +6,7 @@ the color/coarse failures found in the [completed20k review](long-commons-v63-v6
 **Trained quality is unknown.** The working reference remains V43.
 
 [Executed CUDA checks, independent artifact audit and actual launch](results/normalization-augmentation-CUDA-and-launch.json).
+[Completed training boundaries and actual review/recovery](results/normalization-first1k-review-queue.json).
 [Coordinate diagnosis, implementation and earlier CPU checks](normalization-augmentation.md).
 
 V63 is the initializer because its photo mean is close to V64 and its checked
@@ -85,8 +86,15 @@ child is497625/1792256808.06. These are launch identities; check actual processe
 before acting. The first production input fingerprint/domain/LR match the
 discarded genuine control fixture. Loss/gradient arithmetic is not claimed
 bitwise deterministic. The package, recipes and inputs have157 frozen file
-guards. Both arms stop at1,000 of their planned4,000 updates; there is no
-automatic continuation or promotion.
+guards. Both arms have now stopped and passed their1,000-update boundaries;
+the controller has exited. Their full planned horizons remain4,000. All41
+logged observation/domain/LR fields match across arms. There is no automatic
+continuation or promotion.
+
+Immutable first1k checkpoint SHA256:
+
+- V68 control: `456a5fb245bc807d91470cbb067e137ea48ace8eb5796a3d6ad9218573d9ad0c`.
+- V69 augmented: `6f34be8b2cc4fbba1116b4ed17bbafe41d5526da928238d194b6355b9b8b665c`.
 
 Operational files:
 
@@ -101,9 +109,51 @@ logged augmentation masks. Across both arms, all41 logged input/domain/LR rows
 must agree. Older parent model-config fields are compared with their explicit
 default values; the newly added RAW-kernel defaults stay disabled.
 
-Full quality evaluation is not yet queued at this launch capture. It must compare
-both new arms against each other and their parent on the fixed427 panel plus
-the frozen418/416 sensitivities, paired domains, analytic/color diagnostics and
-native real crops. Reports need at least two native photographic triplets per
-model and accurately labeled standing GFX sky/building/foliage/fence references.
-Neither selected training loss nor this preflight permits a quality promotion.
+## Actual full first1k review
+
+Full quality evaluation was not queued at the original launch capture above.
+It is now running after the exact training owner completed and exited. Parent,
+control and augmentation receive fresh evaluation under the same frozen
+inference source:432 known/540 unseen/74,424 full427 cases,1,792 analytic cases,
+three full GFX outputs/six RGB16 files,18 other-camera crops and96 selected
+CPU-color predictions. The two matched arms isolate policy; parent comparisons
+also reflect their new fine-tuning updates/fresh optimizer.
+
+The [review operator](../scripts/review_normalization_trial.py) computes36
+comparisons/nine classical witnesses, then the fixed427/418/416 source
+sensitivities give27 photographic comparisons. Its actual historical component
+replay reproduces36 comparisons/nine witnesses exactly, without new inference
+or invented normalization results. The actual live-training gate rejected
+execution before the first1k boundary. Twenty focused tests and Ruff pass.
+
+Hue predictions are freshly computed for the parent, both candidates and the
+released nonlocal comparator:4,704 predictions total. The old-source arrays
+are not reused under a changed source identity; the reuse gate remains strict.
+The verified parent is recognized by checkpoint SHA rather than an old display
+label that assumed a10k parent. Candidates still require the declared initializer
+and step. Case/group audits and57-primary-PNG/29-F32/six-RGB16 checks follow.
+Six supplementary GFX triplets and their exact-source audit run from the same
+working directory as the producer, followed by source-sensitivity verification.
+
+The initial review completed known/unseen panels, then stopped before full-photo
+inference because its wrapper named nonexistent`demosaic.quality` instead of
+`demosaic.suite`. The original failed status, wrapper and log are preserved.
+The corrected import is verified against the actual frozen package. Recovery
+reuses the two closed panels byte-for-byte and starts at full427, with117 frozen
+file guards. No training, measurement kernel, model, data or numerical bound
+changes. The producer-source audit working-directory issue from the previous
+20k review is also avoided by running these stages in the producer directory.
+
+Actual review owner: PID538984/creation1792258561.81. Status:
+`/mnt/external/demosaic/runs/normalization-v68-v69-first1k-review-workflow-v2.json`.
+Plan/controller/logs:
+`/mnt/external/demosaic/benchmarks/normalization-v68-v69-first1k-review-workflow-v2/`.
+The v1 review directory/status retain the original failure and closed panels.
+Revalidate actual identity before acting; observation expiry is not job failure.
+
+All81 actual native views remain manual:57 primary +12 hue +6 supplementary
++6 selected CPU-color previews. Reports require at least two native photographic
+triplets per model and accurately labeled GFX sky/building/foliage/fence
+references. Full statistics, hue/artifact/source audits and those actual views
+remain pending. Neither training loss nor the engineering preflight permits a
+quality promotion. V43 remains the working reference.

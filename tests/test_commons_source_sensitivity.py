@@ -92,6 +92,15 @@ def test_completed_historical_and_flat_payloads_preserve_all_nine_pairs():
     assert module.statistics_payload(flat) is flat
 
 
+def test_completed_normalization_payload_preserves_three_declared_pairs():
+    payload = {
+        "status": "completed-normalization-trial-statistics-and-parent-comparisons",
+        "sources": list(range(3)),
+        "comparisons": list(range(9)),
+    }
+    assert script().statistics_payload(payload) is payload
+
+
 @pytest.mark.parametrize(
     "container", [{}, {"status": "waiting"}, {"review_complete": True, "status": "waiting"}]
 )

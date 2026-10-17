@@ -199,6 +199,13 @@ def main(
 
 
 @torch.inference_mode()
+def check_joint_lineage(state, checkpoint_sha256, parent_sha256, expected_step):
+    """Recognize the verified parent by content, independently of display labels."""
+    if checkpoint_sha256 != parent_sha256:
+        assert state["config"]["initialized_from"]["sha256"] == parent_sha256
+        assert state["step"] == expected_step
+
+
 def evaluate_records(
     inputs,
     workflow,
@@ -284,9 +291,7 @@ def evaluate_records(
                 compute_precision="float16, physicalFP32",
                 memory_format="channels_last",
             )
-            if record["arm"] != "parent10k":
-                assert state["config"]["initialized_from"]["sha256"] == parent_sha256
-                assert state["step"] == expected_step
+            check_joint_lineage(state, record["sha256"], parent_sha256, expected_step)
             del state
         else:
             model = load_nonlocal_reference(record["path"], device="cuda", archive=output)

@@ -23,8 +23,10 @@ retain the earlier579-test CPU result and native photographic/GFX views.
 The [genuine V63-parent CUDA preflight](normalization-trial-v68-v69.md) now passes
 18 discarded B16/native256/BF16 updates, exact interruption-boundary restoration,
 frozen DINO, input/mask checks and ordinary EMA portability, with an independent
-artifact audit. The matched V68/V69 first1k trial is running; trained quality is
-unknown and the original long-schedule comparison remains preserved.
+artifact audit. Both matched V68/V69 first1k training arms have completed with
+matching logged inputs; the full shared-source parent/candidate review is
+running. Trained quality is unknown and the original long-schedule comparison
+remains preserved.
 
 | Requirement | Evidence needed | Current state |
 | --- | --- | --- |

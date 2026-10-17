@@ -1,0 +1,199 @@
+{
+  "status": "completed-both-matched-first1000-training-arms-full-quality-review-running",
+  "created_UTC": "2026-10-17T17:42:59.974897+00:00",
+  "training_terminal": {
+    "receipt": {
+      "path": "/mnt/external/demosaic/runs/normalization-v68-v69-first1k-workflow-v1.json",
+      "sha256": "c8687a3c30920725d58a5c5ebdd8dba124e5c558b9e08414fb32940b89ab439b"
+    },
+    "result": {
+      "status": "completed-matched-first1000-awaiting-full-quality-and-native-review",
+      "updated_UTC": "2026-10-17T17:28:40.631968+00:00",
+      "controller": {
+        "pid": 497608,
+        "created": 1792256805.99,
+        "driver_sha256": "a1f7482724556b2caa05a019d0c6670b0b8ab8214fba68b2ac472758398447b0"
+      },
+      "plan": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-first1k-workflow-v1/plan.json",
+      "planned_updates_per_arm": 4000,
+      "first_gate_updates": 1000,
+      "arm": "augmented",
+      "child": {
+        "pid": 518324,
+        "created": 1792257469.03
+      },
+      "completed": {
+        "control": {
+          "arm": "control",
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/dino-convnext-normalization-control-b16-v68-step1000.pt",
+            "sha256": "456a5fb245bc807d91470cbb067e137ea48ace8eb5796a3d6ad9218573d9ad0c"
+          },
+          "step": 1000,
+          "planned_updates": 4000,
+          "finite91model91EMA89Adam": true,
+          "changed_model_and_EMA_tensors": 89,
+          "two_context_buffers_exact": true,
+          "source_recipe_parent_and_data_verified": true,
+          "complete_saved_RNG": true,
+          "original4000_LR_schedule_verified": true,
+          "normalization_policy_and_masks_verified": true,
+          "metrics": {
+            "path": "/mnt/external/demosaic/runs/dino-convnext-normalization-control-b16-v68/metrics.jsonl",
+            "sha256": "dd7d73bf3935ed0746fdf08e3418a4e45303f4ab0e4f7f729ff3d3c3828daf15"
+          },
+          "logged_rows": 41
+        },
+        "augmented": {
+          "arm": "augmented",
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/dino-convnext-normalization-augmented-b16-v69-step1000.pt",
+            "sha256": "6f34be8b2cc4fbba1116b4ed17bbafe41d5526da928238d194b6355b9b8b665c"
+          },
+          "step": 1000,
+          "planned_updates": 4000,
+          "finite91model91EMA89Adam": true,
+          "changed_model_and_EMA_tensors": 89,
+          "two_context_buffers_exact": true,
+          "source_recipe_parent_and_data_verified": true,
+          "complete_saved_RNG": true,
+          "original4000_LR_schedule_verified": true,
+          "normalization_policy_and_masks_verified": true,
+          "metrics": {
+            "path": "/mnt/external/demosaic/runs/dino-convnext-normalization-augmented-b16-v69/metrics.jsonl",
+            "sha256": "723c0c9fd874082db8b6e7d804e2a9afd8bca7da7dad665d72179a3b37ae7eca"
+          },
+          "logged_rows": 41
+        }
+      },
+      "all41_logged_observation_domain_LR_fields_match": true,
+      "automatic_continuation_or_promotion": false
+    }
+  },
+  "training_boundaries": {
+    "control": {
+      "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-first1k-workflow-v1/control-boundary.json",
+      "sha256": "2d008ffddc64ae607bfcf0bcccec3a37a9d31b388b7c0e75015bec8f9dd8c9cb"
+    },
+    "augmented": {
+      "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-first1k-workflow-v1/augmented-boundary.json",
+      "sha256": "718ff697134b3e160e5a3e6f8592239272d4fa4ede39ed035110507418ca4913"
+    }
+  },
+  "actual_review_controller_at_capture": {
+    "pid": 538984,
+    "created": 1792258561.81,
+    "driver_sha256": "48d79fe799f03e071f3ef3c449b4c586a24411ecd4fd886d3ba00f62d677754b"
+  },
+  "actual_review_child_at_capture": {
+    "pid": 539006,
+    "created": 1792258565.26
+  },
+  "review_status_snapshot": {
+    "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-first1k-review-workflow-v2/status-at-publication.json",
+    "sha256": "81e25b31e77927e14ffd0bfe43609ed9b352c5599731825ba9c03fbb7700b450"
+  },
+  "review_plan": {
+    "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-first1k-review-workflow-v2/plan.json",
+    "sha256": "dd079e2c62ca044940840f8d5c01590d9dacdb9f223cbf6cd75b3b555f1373de"
+  },
+  "original_review_failure_and_recovery": {
+    "terminal": {
+      "path": "/mnt/external/demosaic/runs/normalization-v68-v69-first1k-review-workflow-v1.json",
+      "sha256": "0a9490bc4ecdcaf598ce56c82a79ee2b45819ebd3243ff1807c83ec8a145469f"
+    },
+    "plan": {
+      "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-first1k-review-workflow-v1/plan.json",
+      "sha256": "707d6cb6c21f8c562030d9a62097c8471146d55f238dd0a5f524eec17ba0a2ad"
+    },
+    "failed_stage": {
+      "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-first1k-review-workflow-v1/stage-full427.py",
+      "sha256": "4307d551df384c00fffd3daa93d3d5b236c4993e744926d5139cabe1faf48a0e"
+    },
+    "failed_log": {
+      "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-first1k-review-workflow-v1/evaluating-full427.log",
+      "sha256": "9c8c48d8e6e56e7dd3e5fe6d6df693755705f36acabd4c65f1f0f3c44bd457cf"
+    },
+    "reason": "Correct one stage import from nonexistent demosaic.quality to existing demosaic.suite; retain completed known/unseen panels. No model/source/data/measurement kernel or numerical bound changes."
+  },
+  "retained_closed_known_unseen_panels": {
+    "known": {
+      "cases": 432,
+      "files": {
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-known-v1/crop-fcaee3a7eb042ef3.json": "39350627844dd9baf92cad40b4abe9f16814b3131f51f8d7f556bc58e3daa661",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-known-v1/crop-ffdcbc3ac9e94b92.json": "871fbebd9fb771f4f003720bcf1d6bf7a8afcd8607daa83481bd9a897c04a404",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-known-v1/crop-a0850c7e9889632f.json": "151cfc3678c2902ba4e83643149f02586dcd859c5b74bcb4a3d5c5e8db8de09d",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-known-v1/per-crop.jsonl": "d577ff0a15774d5588a90750aef82352d24898679b0da7a45a3fb428e10ee355",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-known-v1/summary.json": "18720e1c362fdb937b18ef4cec372413fccd953d363f2ca8a44fac375a254fb1",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-known-v1/crop-5ebec406b6ccee35.json": "a52d865899e1fff620036c87d5b590e6307043c62dfc381e0eec8da408462339",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-known-v1/crop-ffdcbc3ac9e94b92.png": "afdee32e24f72c21ec97dfa3842ff98eb51557f68a2d7873450fb8cf3dc9798f",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-known-v1/crop-1fb97aeff9e6a4f3.png": "5b062680b91a26cfce3ff1b7a0f193f6548eb4d07f809dc261678ef919779d4b",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-known-v1/crop-1fb97aeff9e6a4f3.json": "f042b067442a3fa9de8d3c3cedb6e1f5830e6a93f7f427abfef8cc8ea4974ffe",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-known-v1/report.md": "b9b38956c3e67e0009545373d95a88f7ba2f2676a8ec1cdccecf9cb8a8d13d7a",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-known-v1/crop-fcaee3a7eb042ef3.png": "fde22be25f4745044c552b9795092ce84e656b123f767d21750944d06e522043",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-known-v1/crop-60d37b3ffcef8323.json": "fcbb7b5c7ff927805055d22a44baafa35863ef1d83470f95fe90aee94dd07d35",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-known-v1/crop-5ebec406b6ccee35.png": "4ea085cd9c99aed1dad5ef37e6c8e3231b22d03a8df39594677ebcc776e2e368",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-known-v1/crop-a0850c7e9889632f.png": "1610b4e0743a9074da5992a0d84639edb354048f335c28fef8ad2191c9a8946d",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-known-v1/crop-60d37b3ffcef8323.png": "5ca6a47af9d6ed20a9dff444bfffde50d9b819b9c5bb789b32634edfe717aa14"
+      }
+    },
+    "unseen": {
+      "cases": 540,
+      "files": {
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-unseen-v1/crop-253aa1f1b9bc6e44.png": "5054e295090a5d55a7293b36812abe96720298d4f00e687ce83ab5e2137947c4",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-unseen-v1/crop-b09a05d99730a511.png": "9ffb95d10f989400e94db84ee0f2aa53c6c4e77d3a26c06eb8a248c6499088db",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-unseen-v1/crop-a90f586775537c39.json": "590ac81d27e64a0819c56883620d80084727400ad233e47c9501b9f9b3b6d4c8",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-unseen-v1/crop-84c3de102d70fa70.json": "4f899e35b849a766c61505a5599d6a220a8404bb650002af2a7ad90e8983485c",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-unseen-v1/per-crop.jsonl": "dec24589d2c9074eb06c67a3679499c8f1a9293f3973ca9be8909cd25fadfc96",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-unseen-v1/crop-b75e264f4e552fec.json": "e99113b5c0d807802058d1775b2405ca8f925e0643d3da801f5c0934a1c3f871",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-unseen-v1/summary.json": "54f344e74213a476fef69e3a28749b8e0a1a515def07fe862621dc297ffd9e75",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-unseen-v1/crop-a90f586775537c39.png": "93db70dc392d4fd2d01215cc18f1ec65932e8cdcffb6636ed555100e6a029a3d",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-unseen-v1/report.md": "6c22077f3e9c0d0340fd808272e07c4b8768f5a88e92985b914be7118cbd81e8",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-unseen-v1/crop-3c53f80bd565e45f.png": "bd2f605485e07c2b62cfa036fde8bffe03f7003550e9f073b3da83c15010e942",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-unseen-v1/crop-b75e264f4e552fec.png": "e95d96acd80cc14f15291a4c400385b7092bc5b20f9511e842a8766684cb65b7",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-unseen-v1/crop-b09a05d99730a511.json": "221ab074961aaf26099662921bc676d57be6671a74ff34f254895082b68e5f8c",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-unseen-v1/crop-3c53f80bd565e45f.json": "0fc6367a6902bef059a7358e9d112be701bd8032945f221c4d514b3627bd4ceb",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-unseen-v1/crop-253aa1f1b9bc6e44.json": "5f5c847cbb47b4f38d27a5f82b9cf3fc6e07e15cc80d92980a8607ebcc7c3cba",
+        "/mnt/external/demosaic/evaluation/normalization-v68-v69-first1k-unseen-v1/crop-84c3de102d70fa70.png": "376dfacbd7c7a41e5197e00813c4ea110df4d459f2e329f5708c6c35610c4458"
+      }
+    }
+  },
+  "component_replay": {
+    "path": "/mnt/external/demosaic/benchmarks/normalization-first1k-review-components-v1/historical-shared-parent-replay.json",
+    "sha256": "40b90d35e27e1eb479a51ced501ae0e7829f8d2d77aacd5ce10c5abcd161b6e1"
+  },
+  "planned_case_counts": {
+    "known": 432,
+    "unseen": 540,
+    "full427": 74424,
+    "analytic": 1792,
+    "selected_CPU_color_predictions": 96,
+    "fresh_hue_predictions": 4704
+  },
+  "planned_statistics": {
+    "comparisons": 36,
+    "classical_witnesses": 9,
+    "fixed_source_sensitivities": 27
+  },
+  "planned_artifacts": {
+    "primary_native_PNGs": 57,
+    "F32_arrays": 29,
+    "full_RGB16_files": 6,
+    "hue_native_PNGs": 12,
+    "supplementary_native_PNGs": 6,
+    "selected_CPU_color_native_PNGs": 6,
+    "total_actual_native_views_required": 81
+  },
+  "model_source_policy": "Fresh shared-source parent plus both new models. Fresh4704 hue predictions; source identity/reuse gates remain strict. Same frozen model package, data/observations, metrics and numerical bounds; ordinary inference has no training mask.",
+  "tests": {
+    "passed": 20,
+    "files": [
+      "tests/test_commons_source_sensitivity.py",
+      "tests/test_color_grid_lineage.py"
+    ],
+    "ruff": "pass"
+  },
+  "quality_result_or_promotion": false,
+  "automatic_training_continuation": false,
+  "scope": "First1000 of a new4000 horizon. Model/data/state gates passed, actual current inference confirmed. Full scores/hue/artifacts,81 original native views and manual quality decision are still pending. V43 and original20k results preserved."
+}
