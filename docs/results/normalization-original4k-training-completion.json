@@ -1,0 +1,183 @@
+{
+  "status": "completed-both-original4000-normalization-training-boundaries-quality-review-pending",
+  "created_UTC": "2026-10-17T19:14:38.898221+00:00",
+  "original_planned_updates": 4000,
+  "resumed_from": 1000,
+  "training_status_snapshot": {
+    "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-original4k-continuation-v2/both-completed4000-training-status.json",
+    "sha256": "431f7d2dee327bee74f5a1550c639f2de4cd17dc5acdeb30258a58d47356c310"
+  },
+  "actual_completed_training_controller": {
+    "pid": 622973,
+    "created": 1792260581.4,
+    "driver_sha256": "b9b76cbf7868f0d6807413a611d6a32953b605677c73ffb0c5a6b1e8dc40287c"
+  },
+  "training_plan": {
+    "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-original4k-continuation-v2/plan.json",
+    "sha256": "0e87e86f935ee9ff484668f9722bc71f1a03428d80c0be9ae352c849ce8a9d47"
+  },
+  "source_bundle_sha256": "db5fb3ba42827e9db043dbc85f069bb1e5568cdafa872f7340d872852bc6a771",
+  "checkpoints": [
+    {
+      "path": "/mnt/external/demosaic/models/dino-convnext-normalization-control-b16-v68-step4000.pt",
+      "sha256": "5bcb45adb6ace6aed3cd2071ad56f36bd019645ec4c117c4d6f65beda220b737",
+      "arm": "control",
+      "step": 4000,
+      "first1k_sha256": "456a5fb245bc807d91470cbb067e137ea48ace8eb5796a3d6ad9218573d9ad0c",
+      "label": "V68-normalization-control-original4k"
+    },
+    {
+      "path": "/mnt/external/demosaic/models/dino-convnext-normalization-augmented-b16-v69-step4000.pt",
+      "sha256": "8162020f954426a9fb5f657eb3e7d74ec7cde65c5c58f1f369ee556d0d535e59",
+      "arm": "augmented",
+      "step": 4000,
+      "first1k_sha256": "6f34be8b2cc4fbba1116b4ed17bbafe41d5526da928238d194b6355b9b8b665c",
+      "label": "V69-normalization-augmented-original4k"
+    }
+  ],
+  "producer_boundaries": {
+    "control": {
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-convnext-normalization-control-b16-v68-step4000.pt",
+        "sha256": "5bcb45adb6ace6aed3cd2071ad56f36bd019645ec4c117c4d6f65beda220b737"
+      },
+      "arm": "control",
+      "actual_step": 4000,
+      "original_planned_updates": 4000,
+      "finite91model91EMA89Adam": true,
+      "changed_since_step1000": {
+        "model": 89,
+        "ema": 89
+      },
+      "complete_RNG_present": true,
+      "original162_logged_LRs_and_masks_verified": true,
+      "first1k_log_prefix_exact": true,
+      "source_recipe_data_parent_and_model_config_verified": true,
+      "actual_restoration_receipt": {
+        "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-original4k-continuation-v2/control-resume-restoration-completed.json",
+        "sha256": "96db6b0a792c6a3b4d7d5a9db41a381c4332f15e35ce25b1f0a5117fa2673028"
+      },
+      "metrics": {
+        "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-original4k-continuation-v2/control-completed4000-metrics.jsonl",
+        "sha256": "1dde024d1b45402713dba690b35ee7ffbf0cdcae337cbc82ec67ef48649666d7"
+      }
+    },
+    "augmented": {
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-convnext-normalization-augmented-b16-v69-step4000.pt",
+        "sha256": "8162020f954426a9fb5f657eb3e7d74ec7cde65c5c58f1f369ee556d0d535e59"
+      },
+      "arm": "augmented",
+      "actual_step": 4000,
+      "original_planned_updates": 4000,
+      "finite91model91EMA89Adam": true,
+      "changed_since_step1000": {
+        "model": 89,
+        "ema": 89
+      },
+      "complete_RNG_present": true,
+      "original162_logged_LRs_and_masks_verified": true,
+      "first1k_log_prefix_exact": true,
+      "source_recipe_data_parent_and_model_config_verified": true,
+      "actual_restoration_receipt": {
+        "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-original4k-continuation-v2/augmented-resume-restoration-completed.json",
+        "sha256": "8a091c44a656e851fb0e036960afcea2b8bba7cfc2426204906d73007c4956fb"
+      },
+      "metrics": {
+        "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-original4k-continuation-v2/augmented-completed4000-metrics.jsonl",
+        "sha256": "6dfeffc278cc0d03e951739c08a7fe4c6babf3b533dafe8994fd0b5696eca503"
+      }
+    }
+  },
+  "actual_production_resume_checks": {
+    "control": {
+      "receipt": {
+        "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-original4k-continuation-v2/control-resume-restoration-completed.json",
+        "sha256": "96db6b0a792c6a3b4d7d5a9db41a381c4332f15e35ce25b1f0a5117fa2673028"
+      },
+      "result": {
+        "arm": "control",
+        "resume_checkpoint": {
+          "path": "/mnt/external/demosaic/models/dino-convnext-normalization-control-b16-v68-step1000.pt",
+          "sha256": "456a5fb245bc807d91470cbb067e137ea48ace8eb5796a3d6ad9218573d9ad0c"
+        },
+        "actual_start_step": 1000,
+        "original_horizon": 4000,
+        "instrumentation": "One-time read-only state checks; no new model, gradient/EMA/data/RNG changes.",
+        "model_and_all89_Adam_states_exact": true,
+        "all_three_RNG_families_exact_before_fetch": true,
+        "DINO_hash_before": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd",
+        "EMA_exact_before_first_update": true,
+        "DINO_hash_after": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd",
+        "DINO_hash_exact_and_gradient_free": true,
+        "completed_actual_step": 4000
+      }
+    },
+    "augmented": {
+      "receipt": {
+        "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-original4k-continuation-v2/augmented-resume-restoration-completed.json",
+        "sha256": "8a091c44a656e851fb0e036960afcea2b8bba7cfc2426204906d73007c4956fb"
+      },
+      "result": {
+        "arm": "augmented",
+        "resume_checkpoint": {
+          "path": "/mnt/external/demosaic/models/dino-convnext-normalization-augmented-b16-v69-step1000.pt",
+          "sha256": "6f34be8b2cc4fbba1116b4ed17bbafe41d5526da928238d194b6355b9b8b665c"
+        },
+        "actual_start_step": 1000,
+        "original_horizon": 4000,
+        "instrumentation": "One-time read-only state checks; no new model, gradient/EMA/data/RNG changes.",
+        "model_and_all89_Adam_states_exact": true,
+        "all_three_RNG_families_exact_before_fetch": true,
+        "DINO_hash_before": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd",
+        "EMA_exact_before_first_update": true,
+        "DINO_hash_after": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd",
+        "DINO_hash_exact_and_gradient_free": true,
+        "completed_actual_step": 4000
+      }
+    }
+  },
+  "independent_saved_log_read": {
+    "logged_rows_per_arm": 162,
+    "step_domain_LR_and_batch_sha256_match_all162": true,
+    "original4000_LR_curve_exact": true,
+    "augmented_all162_masks_recomputed_exact": true,
+    "loss_and_grad_norm_finite": true,
+    "original_first1k_log_prefixes_exact": true,
+    "validation_steps": {
+      "control": [
+        1000,
+        2000,
+        3000,
+        4000
+      ],
+      "augmented": [
+        1000,
+        2000,
+        3000,
+        4000
+      ]
+    },
+    "scope": "Independent read of actual saved production logs/receipts and checkpoint file hashes; model/EMA/Adam finite-state checks here are the frozen producer boundary audits. The full review includes an additional independent state/artifact audit."
+  },
+  "frozen_training_guard_count": 183,
+  "first1k_quality_review": {
+    "path": "/home/dllu/proj/demosaic/docs/results/normalization-v68-v69-first1k-review.json",
+    "sha256": "9d7bae9e61a8f9d32bf241c7645023ac19544e9e965cd06de5f014cfd18dedb0"
+  },
+  "operational_review_status_path": "/mnt/external/demosaic/runs/normalization-v68-v69-original4k-review-workflow-v1.json",
+  "review_status_at_capture": "evaluating-unseen",
+  "review_controller": {
+    "pid": 638004,
+    "created": 1792261092.43,
+    "driver_sha256": "71c469a78cf38facc031db092c381e295245da688d40e49e444ccf6a859357cc"
+  },
+  "actual_native4k_views_at_capture": 0,
+  "quality_promoted": false,
+  "new_neural_forwards_in_publication": 0,
+  "scope": "Original schedules completed, no new horizon/data/source/seed/LR/policy. Trained state completion only; full4k performance/hue/artifact/source review and81 actual native views remain required. Protected-final scenes stay unscored; V43 working reference. SOTA/decisive real-photo quality/100MP10s remains unmet/unproven.",
+  "publication_operator": {
+    "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-original4k-continuation-v2/training-closure-publication-source.py",
+    "sha256": "87c0db9e5cbc6e0ddc842a7f92a920ec747e3fc9341bb58cf857ff61ea27c25b"
+  }
+}

@@ -1,4 +1,4 @@
-# Matched normalization trial: first1k reviewed, original4k continuation selected
+# Matched normalization trial: original4k training complete, full review running
 
 V68 control and V69 augmentation start from the same genuine V63 original20k
 EMA. They test whether training with varied physical feature coordinates reduces
@@ -189,7 +189,7 @@ and EMA parameter tensors changed since1k; the two context buffers remain exact.
 Frozen checkpoint SHA256:
 `5bcb45adb6ace6aed3cd2071ad56f36bd019645ec4c117c4d6f65beda220b737`.
 
-V69 is now training from its genuine1k state. Production checks verify exact
+At the handoff capture, V69 was training from its genuine1k state. Production checks verify exact
 model/all89 Adam/RNG restoration before first fetch and EMA before its first
 update. Frozen DINO has the expected unchanged hash. All52 available logged
 observation/domain/LR rows, including the original1k prefix and through step1,250,
@@ -202,11 +202,37 @@ Actual augmented trainer at handoff:658410/1792262498.98 under the same
 controller622973/1792260581.40. The full review remains waiting behind both arms;
 there is no quality promotion or change to data, LR horizon, source or policy.
 
-## Queued full4k review
+## Both original4k schedules completed
+
+[Completed original4k boundaries, actual checkpoint hashes and independent log read](results/normalization-original4k-training-completion.json).
+Both models have finished their originally planned4,000 updates and both
+trainers and the continuation controller have exited. Their frozen boundary
+audits pass91 model/91 EMA/89 Adam finite state, complete RNG, source/data/
+recipe/parent identity,89 changed model/EMA tensors since1k and unchanged context
+buffers. The independent saved-log read confirms all162 step/domain/LR/input
+fingerprints match across arms, all augmented masks match SHAKE256, loss/gradient
+norms are finite, and validation occurred at1k/2k/3k/4k. Original1k log prefixes
+remain exact. The4k LR curve, seed, data, frozen source and policies are unchanged.
+
+Immutable original4k checkpoint SHA256:
+
+- V68 control: `5bcb45adb6ace6aed3cd2071ad56f36bd019645ec4c117c4d6f65beda220b737`.
+- V69 augmented: `8162020f954426a9fb5f657eb3e7d74ec7cde65c5c58f1f369ee556d0d535e59`.
+
+The review started after actual training exit. Known/unseen panels are complete;
+the photographic panel is running. Twelve new native paired-camera originals
+have been actually viewed, separate from the earlier1k review. They look similar
+across parent/control/augmentation, with fine surface marks and texture still
+soft. AHD is approximate, not exact RGB GT. Full statistics, photo/analytic/color/
+GFX/native review and the additional independent state/artifact audit are still
+pending. This records completed training, not improved-model performance or a
+quality promotion. V43 remains the working reference.
+
+## Full4k review running
 
 [Actual waiting controller, frozen plan and verified components](results/normalization-original4k-review-queue.json).
-The review is queued behind the exact live continuation owner and starts only
-after both original4k boundaries pass and that owner exits successfully. The
+The review was queued behind the exact continuation owner and started only
+after both original4k boundaries passed and that owner exited successfully. The
 completed-boundary reader verifies the actual4k checkpoint hashes,162-row logs,
 restoration receipts, frozen training guards and reviewed first1k decision.
 Live, partial, failed and wrong-step states cannot release inference.
@@ -240,8 +266,9 @@ Frozen plan/controller/tools/logs:
 `/mnt/external/demosaic/benchmarks/normalization-v68-v69-original4k-review-workflow-v1/`.
 The status is mutable; the public receipt includes an immutable capture.
 
-All81 future native views remain manual:57 primary,12 hue, six supplementary
-GFX and six selected CPU-color triplets. At least two exact-GT photo triplets
+The81 planned native views comprise57 primary,12 hue, six supplementary
+GFX and six selected CPU-color triplets. Twelve paired-camera originals are
+actually viewed;69 remain. At least two exact-GT photo triplets
 per model and the standing GFX sky/building/foliage/fence references are required
 in the final report. These counts and evaluations are planned, not completed
 quality evidence. No automatic promotion or training beyond4k is queued.
