@@ -110,6 +110,26 @@ def test_completed_normalization4k_payload_preserves_matched_parent_and_progress
     assert script().statistics_payload(payload) is payload
 
 
+def test_fresh_raw_statistics_and_shared_weight_adapter_identity():
+    module = script()
+    payload = {
+        "status": "completed-packed-isotropic-first32000-example-statistics",
+        "sources": list(range(9)),
+        "comparisons": list(range(27)),
+    }
+    assert module.statistics_payload(payload) is payload
+    first = {"weight_sha256": "shared", "label": "RawNIND:CFA-LS"}
+    second = {"weight_sha256": "shared", "label": "RawNIND:CFA-channel"}
+    summary = {"models": [first, second]}
+    source = {"checkpoint_sha256": "shared", "model_label": second["label"]}
+    assert module.source_model(summary, source) is second
+    for bad in [{**source, "checkpoint_sha256": "different"}, {**source, "model_label": "unknown"}]:
+        with pytest.raises(ValueError):
+            module.source_model(summary, bad)
+    with pytest.raises(ValueError):
+        module.source_model({"models": [second, second]}, source)
+
+
 @pytest.mark.parametrize(
     "container", [{}, {"status": "waiting"}, {"review_complete": True, "status": "waiting"}]
 )

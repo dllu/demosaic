@@ -220,3 +220,69 @@ triplets with exact source/ROI, checkpoint SHA, noise and display metadata.
 GFX DSCF3879/DSCF3880 remains a qualitative pair, not exact GT. Include foliage
 and fence alongside sky/building detail. Assess the actual boundary before any
 continuation. A weak early result alone does not prove convergence.
+
+## Queued full review
+
+[The frozen review queue](results/packed-isotropic-first32000-review-queue-v1.json)
+is live and waits for the exact successful training controller/final child exit.
+It then independently checks both actual8000-update states, all321 logged
+observation/domain/LR matches, actual common fresh tensors/RNG and genuine frozen
+DINO preservation. It never starts GPU evaluation while that owner is live.
+
+All four neural models (the fresh pair plus V43 and mature V63) run on the same
+known/unseen RAW and full427 photographic observations. Both publisher RawNIND
+CFA gain adapters run too, using the observed noisy CFA rather than any clean
+reference to fit gains. Together with the three classical controls, this is
+648 known,810 unseen and111636 full-panel cases. The panel uses the unchanged
+427 photos,16 procedural sources, seven conditions and four Bayer patterns.
+Each RawNIND gain adapter is bound by both its shared weight hash and method
+label; it cannot silently collapse into the other adapter's statistics.
+
+The remaining fixed stages cover2240 analytic cases,128 selected CPU color
+cases,4704 fresh color-grid cases (the fresh pair, V63 and released Nonlocal
+RAW reference), six full GFX restores with12 RGB16 TIFFs, three other cached
+cameras, and supplementary neon/platform crops. Primary statistics compare
+nine model pairs across three panels (108 metrics and27 classical-control
+witnesses), followed by81 comparisons on the existing427/418/416 source cohorts.
+The statistics are source-balanced, not certified scene-independent estimates
+or training-repeat uncertainty. Different prior training budgets remain explicit.
+
+The CPU engineering replay exercised those exact numeric operators on the
+closed historical four-model/nine-method ConvNeXt10k panels:108 comparisons
+and18 shared-weight label bindings passed, reproducing the historical
+ConvNeXt-minus-no-context photo difference of−.000858dB. This replay performed
+no V70/V71 inference and supplies no new quality result. Thirty-two focused
+review/lineage/sensitivity tests passed. The frozen CPU preflight additionally
+verified165 source/tool/config guards and36 inputs, parsed all stage programs,
+and confirmed that the actual pending training state rejects a review.
+
+The review plan SHA is
+`dc8c4f5af9b4c7bc3218476cd7f7836157e6d18478cbb995609d966fc87ed246`,
+under `/mnt/external/demosaic/benchmarks/packed-isotropic-first32000-review-workflow-v1/`.
+Current status is
+`/mnt/external/demosaic/runs/packed-isotropic-first32000-review-workflow-v1.json`.
+All private RAW inputs resolve to existing hot local/SSD caches. Known-camera
+publisher ADC headers are read only from already-local public RAWs. Original
+photo directories and the protected-final scenes are untouched.
+
+The queue produces artifacts and integrity/statistics checks. Actual native
+visual inspection, an explicit quality decision and any continuation remain
+separate work after it finishes. No model promotion or README crop replacement
+is automatic; the requested qualitative/SOTA and10s targets remain unproven.
+
+The no-DINO arm has since completed its actual8000-update boundary. Its model,
+EMA,852 Adam states, original LR/source/data recipe and321 logged rows passed
+the training controller's checks. Checkpoint SHA:
+`abd7345c080cb227d77385647c74614c0416d9316ad2f28c81c31cdd1f1697a2`.
+The DINO arm is now training. Its actual fresh RAW tensors and global RNG match
+the completed control's construction ledger, and its first seven logged
+observations/domain/LR fields match through step150. This is an early prefix,
+not the complete matched boundary or a quality result.
+
+A further CPU replay of the new artifact reader passed on genuine closed
+historical files:76 native PNGs,32 F32 arrays, eight neural RGB16 TIFFs and four
+additional RawNIND RGB16 TIFFs. It checked exact common noisy/reference pixels,
+metadata and declared display bounds without new inference or visual-quality
+claims. Receipt:
+`/mnt/external/demosaic/benchmarks/packed-isotropic-review-artifacts-CPU-replay-v1/replay.json`,
+SHA `152d358c80f7482f8ea557140f2b2b0f1c853b03a60d3d887d63c6bae0cec03d`.

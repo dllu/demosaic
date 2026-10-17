@@ -1,0 +1,78 @@
+{
+  "status": "queued-frozen-packed-isotropic-first32000-example-full-review",
+  "review_complete": false,
+  "quality_results_available": false,
+  "promote": false,
+  "working_reference": "V43 step2000",
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-first32000-review-workflow-v1/plan.json",
+    "sha256": "dc8c4f5af9b4c7bc3218476cd7f7836157e6d18478cbb995609d966fc87ed246"
+  },
+  "scope": "Wait for exact fresh matched training controller and final child successful completion/exit. Actual first32000 examples (8000updates) from the original640000-example horizon, same-source fresh DINO/no-DINO plus V43/V63 and two observed-CFA RawNIND gain adapters. Known648/unseen810/full111636 cases,2240 analytic,6 full GFX/12RGB16,three cached cameras,128 selected CPU color cases,4704 fresh hue predictions including the released Nonlocal RAW reference. Nine pairs across three panels:108 metrics/27classical witnesses;81 source-sensitivity comparisons. Shared noise/GT/transforms and native crops independently checked. Actual visual review, quality decision and any continuation remain manual; no protected-final scoring, output fitting, training, automatic extension or promotion.",
+  "observed_review_status": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-first32000-review-queue-publication-v1/observed-review-status.json",
+    "sha256": "cfd5e42a4ede3b909b83d870eb1fe7b66db4a5f8bf74ced3bd3aab44f48527b7"
+  },
+  "observed_training_status": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-first32000-review-queue-publication-v1/observed-training-status.json",
+    "sha256": "5b7191dea2058a340ecc907633ee7c82ad8fbf1e28e8dff6c92274a116ecc4cf"
+  },
+  "verified_live_review_owner": {
+    "pid": 982831,
+    "created": 1792269396.89,
+    "driver_sha256": "55f06e45de3aac2b931921eb3e4b6ff78e7458ee9d65e071dc2a92c22b1f2796"
+  },
+  "verified_live_training_owner": {
+    "pid": 959314,
+    "created": 1792268410.37,
+    "driver_sha256": "7dc836e534f75fad914f32e8655bd60d8bc69f23e5df4f1a6dc8879c290247d6"
+  },
+  "verified_live_training_child": {
+    "pid": 959390,
+    "created": 1792268412.0
+  },
+  "exact_release_condition": "Both actual fresh8000-update boundaries, all321 logged observation/domain/LR fields and actual fresh construction/RNG equal; exact successful training controller/final child exit. No inference while training owner is live.",
+  "frozen_guards": 165,
+  "frozen_inputs": 36,
+  "CPU_preflight": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-first32000-review-workflow-v1/CPU-preflight.json",
+    "sha256": "74f26e05d092138d0d05e2b99adf5a5a27ab0d558871e61f88b180c59fc45925"
+  },
+  "historical_statistics_engineering_replay": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-review-statistics-CPU-replay-v1/replay.json",
+    "sha256": "d8f22c55655431fc7dbb0564d53d30033c0a63b5e8820672cf348586916afc46"
+  },
+  "references": [
+    {
+      "label": "V43-working",
+      "path": "/mnt/external/demosaic/evaluation/paired-known-native-corpus-v37-v39-v43-2k/weights/weights-0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5.pt",
+      "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5"
+    },
+    {
+      "label": "V63-original20k",
+      "path": "/mnt/external/demosaic/models/dino-convnext-wide-long-control-b16-v63-step20000.pt",
+      "sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5"
+    }
+  ],
+  "RawNIND_publisher_weights": {
+    "path": "/mnt/external/demosaic/references/rawnind/utnet2-bayer.pt",
+    "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+  },
+  "pending_new_checkpoints": [
+    "/mnt/external/demosaic/models/no-dino-packed-isotropic-b4-v71-step8000.pt",
+    "/mnt/external/demosaic/models/dino-packed-isotropic-b4-v70-step8000.pt"
+  ],
+  "expected_primary_cases": {
+    "known": 648,
+    "unseen": 810,
+    "full427": 111636,
+    "analytic": 2240
+  },
+  "expected_selected_CPU_color_cases": 128,
+  "expected_hue_cases": 4704,
+  "expected_primary_comparisons": 108,
+  "expected_source_sensitivities": 81,
+  "expected_full_GFX_RGB16_files": 12,
+  "required_visual_review": "Native noisy/denoised/exact-GT synthetic triplets and correctly labeled real-reference crops, including cached DSCF3879/3880 foliage/fence/sky/building, three other cameras and neon/platform. Artifact checks do not constitute visual review or a quality/promotion decision.",
+  "limits": "No new observations, protected-final scoring, output fit, training continuation, source admission or automatic promotion. V43/V63 have different training histories from fresh candidates. Source-bootstrap uncertainty does not certify scene independence or SOTA."
+}

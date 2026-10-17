@@ -45,10 +45,23 @@ def statistics_payload(container):
             "completed-original20k-long-data-statistics-and-4k-progress",
             "completed-normalization-trial-statistics-and-parent-comparisons",
             "completed-normalization-original4000-statistics-and-first1k-progress",
+            "completed-packed-isotropic-first32000-example-statistics",
         },
         "Model comparison statistics are incomplete",
     )
     return container
+
+
+def source_model(summary, source):
+    """Bind the method label as well as shared weights (e.g. gain adapters)."""
+    models = [
+        model
+        for model in summary["models"]
+        if model.get("sha256", model.get("weight_sha256")) == source["checkpoint_sha256"]
+        and model["label"] == source["model_label"]
+    ]
+    require(len(models) == 1, "Checkpoint/model label binding differs")
+    return models[0]
 
 
 def photo_scores(records, label, source_ids, conditions, patterns):
@@ -135,6 +148,7 @@ def run(statistics_path, statistics_sha256, cohort_path, cohort_sha256, output):
     expected_pairs = {
         "completed-normalization-trial-statistics-and-parent-comparisons": [3],
         "completed-normalization-original4000-statistics-and-first1k-progress": [5],
+        "completed-packed-isotropic-first32000-example-statistics": [9],
     }.get(container.get("status"), [7, 9])
     require(len(pairs) in expected_pairs, "Unexpected original photo comparison coverage")
     expected = {
@@ -165,15 +179,7 @@ def run(statistics_path, statistics_sha256, cohort_path, cohort_sha256, output):
             return descriptors[key]
         summary = records(source["report"], source["report_sha256"])
         cases = records(source["cases"], source["cases_sha256"])
-        models = [
-            m
-            for m in summary["models"]
-            if m.get("sha256", m.get("weight_sha256")) == source["checkpoint_sha256"]
-        ]
-        require(
-            len(models) == 1 and models[0]["label"] == source["model_label"],
-            "Checkpoint/model label binding differs",
-        )
+        model = source_model(summary, source)
         protocol = summary["protocol"]
         conditions, patterns = [r["name"] for r in protocol["conditions"]], protocol["patterns"]
         require(
@@ -197,7 +203,7 @@ def run(statistics_path, statistics_sha256, cohort_path, cohort_sha256, output):
             "source": source,
             "summary": summary,
             "scores": scores,
-            "native_model_metadata": models[0],
+            "native_model_metadata": model,
         }
         descriptors[key] = value
         return value
