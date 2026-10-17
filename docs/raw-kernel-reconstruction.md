@@ -93,7 +93,7 @@ in the receipt.
 The genuine-parent CPU check uses completed V60 step4000 EMA, SHA256
 `1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e`.
 It compares the actual frozen legacy package with the archived candidate package
-with the option disabled on two native256 photo observations and one odd-sized
+with the option disabled on two native 256 photo observations and one odd-sized
 126×158 variant. All three full FP32 predictions match bit for bit.
 
 With the option enabled, every existing EMA tensor loads exactly and the only
@@ -104,7 +104,7 @@ match two plus two resumed updates exactly in all nine whole-state fields,
 numeric logs and input hashes. All 93 model/93 EMA tensors and 91 AdamW states
 are finite. Commons, native-RAW and paired-RAW domains are exercised.
 
-Those fixtures use batch1/native64/FP32, zero workers, forced smooth Commons
+Those fixtures use batch1/native 64/FP32, zero workers, forced smooth Commons
 and two validation images. Their short losses and validation values are not
 restoration-quality evidence. The executed package, operator, inputs, logs and
 full states are archived. This CPU fixture started no new GPU inference or training while
@@ -128,18 +128,18 @@ not the later head-only option. All 127 archived files and 11 inputs verify.
 Original [preparation/queue evidence](results/raw-kernel-CUDA-preflight-queue.json)
 remains historical evidence rather than the execution result.
 
-The genuine V60 full4k EMA loads every old tensor exactly, actual DINO stays
+The genuine V60 full 4k EMA loads every old tensor exactly, actual DINO stays
 frozen, and initial GPU BF16 output equals bilinear exactly. Seven discarded
-B16/native256/BF16 updates cover Commons, paired and native data with seed49,
-LR1e-5/warmup200 and planned20k. The fixture forces real Commons, uses workers0
+B16/native 256/BF16 updates cover Commons, paired and native data with seed49,
+LR1e-5/warmup200 and planned 20k. The fixture forces real Commons, uses workers0
 and two validation images; it does not alter either completed data arm.
 
 All 93 model/93 EMA tensors and 91 AdamW states are finite. Model/optimizer/EMA/
 Python/Torch/CUDA RNG reconstruction succeeds. Portable/manual EMA predictions
-match exactly on two full native256 photos under FP16 and BF16, including every
-saved tensor and actual DINO. A native256/B1/BF16 probe gives finite nonzero
+match exactly on two full native 256 photos under FP16 and BF16, including every
+saved tensor and actual DINO. A native 256/B1/BF16 probe gives finite nonzero
 trunk/tail/head gradient norms 5.79e-6/3.15e-7/.06128; DINO has no gradients.
-Sixty-four clean native64 constant fields (four colors/four CFAs/two conditioning
+Sixty-four clean native 64 constant fields (four colors/four CFAs/two conditioning
 profiles/two precisions) have maximum RGB error 5.96e-8. No noise is added to those
 fields. Peak CUDA allocation is 21.328 GB, not total unified RAM or throughput.
 A separate CPU audit verifies the saved checkpoint, source/config/data, all seven
@@ -169,7 +169,7 @@ training after warmup must initialize a new run from the warmup EMA, with a fres
 optimizer/EMA and separately declared budget; it is not an implicit resume.
 
 [Executed CPU evidence](results/raw-kernel-warmup-CPU-preflight.json) covers the
-genuine V60 full4k EMA, discarded batch1/native64/FP32 updates, zero workers,
+genuine V60 full 4k EMA, discarded batch1/native 64/FP32 updates, zero workers,
 forced smooth Commons and two validation images. All three training domains are
 exercised. Every one of the 91 existing model tensors and its EMA stays exactly
 equal to the parent; only the two new head tensors change. All 93 model/93 EMA
@@ -191,6 +191,21 @@ provide separate execution evidence; trained quality remains pending.
 The completed default-route CUDA fixture retains its independent archived 411d
 source and has not silently switched to this option.
 
+## Optional direct phase conditioning
+
+The [matched V66 trial](raw-kernel-phase-v66.md) adds a default-off categorical
+coefficient bank for four CFA patterns and four native pixel positions, motivated
+by the completed V65/standalone-head diagnostics. Its5,184 additional parameters
+with the default three supports offset kernel logits, never output RGB. Clean
+constant-color invariance remains. The default route retains legacy numerical
+behavior, with a newly recorded defaultFalse model_config field.
+
+The actual [CPU/CUDA checks](results/raw-kernel-phase-preflight.json) pass before
+the bounded1,000-update trial starts. Full CPU tests pass 543/9 CUDA-related skips;
+genuine-parent CPU restart/legacy parity and B16 CUDA finite 94/94/three-state,
+frozen-parent, portable EMA, clean-constant and matched-input checks pass. These
+do not establish a photographic improvement. No joint stage or promotion follows.
+
 ## Limits and required next evidence
 
 The invariant is about **clean constant samples**, not unbiased restoration of
@@ -206,7 +221,7 @@ training-only head warmup, and must account for that difference from a mature
 RGB decoder. Existing field diagnostics motivated the design; they are not blind
 quality evidence.
 
-The genuine CUDA/B16/native256 gradient/state/portable EMA and memory checks have
+The genuine CUDA/B16/native 256 gradient/state/portable EMA and memory checks have
 passed. The bounded head-only trial must next complete full photo and measured-CFA
 development panels, weak carriers, fixed hue grid, false-detail tests and native
 real-camera review before any joint stage. Reports must include two native noisy/denoised/exact-GT photographic

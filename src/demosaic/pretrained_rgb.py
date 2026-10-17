@@ -243,7 +243,7 @@ class PretrainedRgbDemosaic(nn.Module):
         self, *, stabilized=False, physical_anchors=False, processing_scale=1,
         detail_prior=False, hidden_autocast=False, center_camera_matrix=False,
         middle_skip_fp32=False, adc_projection=False,
-        raw_kernel=False, raw_kernel_windows=(1, 5, 17),
+        raw_kernel=False, raw_kernel_windows=(1, 5, 17), raw_kernel_phase_conditioning=False,
     ):
         super().__init__()
         if physical_anchors and not stabilized:
@@ -256,6 +256,8 @@ class PretrainedRgbDemosaic(nn.Module):
             raise ValueError("The detail prior requires packed processing")
         if raw_kernel and (processing_scale != 1 or adc_projection):
             raise ValueError("RAW kernel reconstruction requires native processing and no ADC projection")
+        if raw_kernel_phase_conditioning and not raw_kernel:
+            raise ValueError("RAW kernel phase conditioning requires RAW kernel reconstruction")
         self.network = RgbRestorationTrunk(
             hidden_autocast=hidden_autocast, middle_skip_fp32=middle_skip_fp32
         )
@@ -296,7 +298,9 @@ class PretrainedRgbDemosaic(nn.Module):
 
             # Keep the existing RGB tail in the trainable feature path. Its
             # free RGB prediction conditions kernels, never enters output RGB.
-            self.raw_kernel = AdaptiveRawKernel(67, raw_kernel_windows)
+            self.raw_kernel = AdaptiveRawKernel(
+                67, raw_kernel_windows, phase_conditioning=raw_kernel_phase_conditioning
+            )
 
     @torch.no_grad()
     def initialize_camera_matrix_reference(self):

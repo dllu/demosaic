@@ -1,0 +1,370 @@
+{
+  "status": "completed-CPU-and-CUDA-direct-phase-conditioning-engineering-checks",
+  "CPU": {
+    "status": "completed-CPU-phase-conditioning-preflight",
+    "parent": {
+      "path": "/mnt/external/demosaic/models/dino-convnext-palette-wide-b16-v60-step4000.pt",
+      "sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e"
+    },
+    "source_files": {
+      "/home/dllu/proj/demosaic/src/demosaic/paired_admission.py": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825",
+      "/home/dllu/proj/demosaic/src/demosaic/prior.py": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a",
+      "/home/dllu/proj/demosaic/src/demosaic/metrics.py": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31",
+      "/home/dllu/proj/demosaic/src/demosaic/inference.py": "911e71e8dcbeb1872ed591bc5234ed2b79bae063a859b4704516537d94a1df0b",
+      "/home/dllu/proj/demosaic/src/demosaic/train.py": "005e262dd7390c12177b2e1b32ed7c1b041aa1d616a3c5b0cbaca8de4c0182c8",
+      "/home/dllu/proj/demosaic/src/demosaic/dino_adaptation.py": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861",
+      "/home/dllu/proj/demosaic/src/demosaic/paired_training.py": "71a2481213bba174bd3d6b3de9ae9b89f88333635810e15d0958352d9d8d053d",
+      "/home/dllu/proj/demosaic/src/demosaic/reference.py": "54ed094d58e245a56993ea3ce3ef9e21d2164e902d41d03bba9132bacd22891f",
+      "/home/dllu/proj/demosaic/src/demosaic/prepare.py": "e4c0733bb260c289b3ce8aaf5f393abc5919d8d81cdcf462b70032d790429712",
+      "/home/dllu/proj/demosaic/src/demosaic/realdata.py": "ed24db2b066531281a196e6fa074130cb0ee78a640eae5ccaaace234f5ad5421",
+      "/home/dllu/proj/demosaic/src/demosaic/cfa.py": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252",
+      "/home/dllu/proj/demosaic/src/demosaic/paired.py": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d",
+      "/home/dllu/proj/demosaic/src/demosaic/audit.py": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d",
+      "/home/dllu/proj/demosaic/src/demosaic/losses.py": "548b1481a035ad937d4a046754a74e70684864a9842296765c62079a002e5120",
+      "/home/dllu/proj/demosaic/src/demosaic/gaussian.py": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72",
+      "/home/dllu/proj/demosaic/src/demosaic/real_suite.py": "69d3d403d36b1230e35083cc55e2c1a485f82cd5058f6be83fb3d5c0c18a6825",
+      "/home/dllu/proj/demosaic/src/demosaic/raw_clean.py": "a143ce351ac4e1b2425d4d561000d3e8934477fe9172c88f90ce76d9b32a7a6c",
+      "/home/dllu/proj/demosaic/src/demosaic/raw_admission.py": "1948afbbf05129190273ab77466f26d9d27dc942716beaab16f077c8c3330803",
+      "/home/dllu/proj/demosaic/src/demosaic/vst.py": "355124a374177f1c08271834149c5979ab3477fdf255c60aa7cee0d47792a76b",
+      "/home/dllu/proj/demosaic/src/demosaic/io.py": "0a1599ffe7f6d935e92fc71e6b086430c6f82678a74952c3b8f31155a0bea83b",
+      "/home/dllu/proj/demosaic/src/demosaic/data.py": "3c8855fe9d6e24d5368f356528ed217a544f185d84f58356eebfb2048cd92197",
+      "/home/dllu/proj/demosaic/src/demosaic/__init__.py": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d",
+      "/home/dllu/proj/demosaic/src/demosaic/calibration.py": "e86f4c602a6cd7fd855d0bcfeb790cf17ed87611f19d97926f9db174909b2d26",
+      "/home/dllu/proj/demosaic/src/demosaic/noise.py": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce",
+      "/home/dllu/proj/demosaic/src/demosaic/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+      "/home/dllu/proj/demosaic/src/demosaic/precision.py": "9aa850fb5ee0e9abc3e9adc4847ce3518c1acb37c93f6bc54ff9206bb0c94c3a",
+      "/home/dllu/proj/demosaic/src/demosaic/cli.py": "a34d98b1eab4479f67ba5a51b6c8a428db4d8ccf5ee097cd1369bd0cd1ead542",
+      "/home/dllu/proj/demosaic/src/demosaic/reporting.py": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d",
+      "/home/dllu/proj/demosaic/src/demosaic/model.py": "dfc11c242e168559668433fd1d1d919b29820c1d0fc3a55c706694f4ff4b4f19",
+      "/home/dllu/proj/demosaic/src/demosaic/color.py": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+      "/home/dllu/proj/demosaic/src/demosaic/dino_pyramid.py": "246944874671ceb4449b0487fcb347a00f8b82d713d5b4c9fee5a7c8a68aa95f",
+      "/home/dllu/proj/demosaic/src/demosaic/textures.py": "b4bc304a50de272cf7fcba272e67b828c163466ffc23ea3337a6a66f076dc664",
+      "/home/dllu/proj/demosaic/src/demosaic/nonlocal_reference.py": "7e4a00e9d90a61b772da9c1a7414bf499f84b9c9bb0239fd250fb8263dfb3f88",
+      "/home/dllu/proj/demosaic/src/demosaic/safety.py": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7",
+      "/home/dllu/proj/demosaic/src/demosaic/raw_kernel.py": "32ba3747479f0e328fe87a84fb227dd456ae0d08b242a4d1411756dfbf9fb498",
+      "/home/dllu/proj/demosaic/src/demosaic/pretrained_rgb.py": "64e149dd202f7473bddc9031ef5af06e9cfa94ea0c192ae6a17680350798a846",
+      "/home/dllu/proj/demosaic/src/demosaic/registration.py": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202",
+      "/home/dllu/proj/demosaic/src/demosaic/suite.py": "1a094262e1772f5df8a54cb176c2f3da189d78f48ead3f8002f24e84802059a4"
+    },
+    "worker": {
+      "status": "completed-genuine-parent-CPU-phase-conditioning-compatibility-and-restart-checks",
+      "source_bundle_sha256": "fc0297db08d659523fdcefe1ef0e7a4da12ae97f648e95b1579db65de93d268a",
+      "legacy_default_eight_state_fields_and_logs_exact": true,
+      "legacy_model_config_semantically_equal_with_added_default_False": true,
+      "legacy_V65_two_full_photos": [
+        {
+          "input": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "input_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+          "old_prediction": "/mnt/external/demosaic/benchmarks/raw-kernel-warmup-v65-coefficient-diagnostic-v1/photo-0-CPU-FP32-RGB.npy",
+          "old_prediction_sha256": "084321c7a6c0017efd3ef7dd59d950c23cb52d42083f719dea9cb5bb425dac10",
+          "new_default_output_bitwise_exact": true
+        },
+        {
+          "input": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "input_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+          "old_prediction": "/mnt/external/demosaic/benchmarks/raw-kernel-warmup-v65-coefficient-diagnostic-v1/photo-1-CPU-FP32-RGB.npy",
+          "old_prediction_sha256": "d3c0c8cd1529df1a9c9e264f1149ff198e877394e0e08d35714ead544c703d7b",
+          "new_default_output_bitwise_exact": true
+        }
+      ],
+      "phase_seven_vs_three_plus_four_all_nine_state_fields_and_logs_exact": true,
+      "all_seven_matched_control_phase_input_hashes_domains_LRs_exact": true,
+      "all91_existing_model_and_EMA_tensors_bitwise_parent": true,
+      "finite94model94EMA3Adam": true,
+      "head_tensors": [
+        "pretrained_rgb.raw_kernel.coefficients.bias",
+        "pretrained_rgb.raw_kernel.coefficients.weight",
+        "pretrained_rgb.raw_kernel.phase_coefficients"
+      ],
+      "trainable_parameters": 27216,
+      "optimizer_reconstruction_exact": true,
+      "all_manual_portable_tensors_including_DINO_exact": true,
+      "phase_two_full_photos": [
+        {
+          "input": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "input_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+          "prediction": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-CPU-preflight-v1/phase-portable-photo-0-CPU-FP32.npy",
+          "prediction_sha256": "0699ae3cbcca40df1feab65b82342359c059ac2ffb202ef5537a8344ba50f863",
+          "manual_portable_bitwise_exact": true
+        },
+        {
+          "input": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "input_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+          "prediction": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-CPU-preflight-v1/phase-portable-photo-1-CPU-FP32.npy",
+          "prediction_sha256": "90a30b583abc60da26098774ecf1a9e4ca94dfced057166ff46b358aa5623805",
+          "manual_portable_bitwise_exact": true
+        }
+      ],
+      "checkpoints": {
+        "matched-control": {
+          "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-CPU-preflight-v1/matched-control/last.pt",
+          "sha256": "9f8f8213a5a61395f443800d9cfbeb00bf790f4d665c935ced18d4d43a62cb61"
+        },
+        "phase-full": {
+          "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-CPU-preflight-v1/phase-full/last.pt",
+          "sha256": "f7a7640d3251f53288395d751b61b4d89e7dc9e39a83bb8043734778a1637268"
+        },
+        "phase-resumed": {
+          "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-CPU-preflight-v1/phase-resumed/last.pt",
+          "sha256": "62444003d47f67bd53b5af0739f1fe469b92316c3ef45e2146be35730fa9c8f7"
+        }
+      },
+      "CUDA_initialized": false,
+      "scope": "Discarded CPU B1/native64/FP32/forced smooth Commons/workers0/val2. Actual V60 EMA and DINO. Default-off numerical route unchanged; normalized model_config adds only defaultFalse. Seven new-stage updates match3+4 resume, not production quality or CUDA repeatability."
+    },
+    "driver_sha256": "19a7a798044c3c3fa3998397a6fd717833cb88638a9e18a8a3aa34e012c2d749",
+    "CUDA_initialized": false
+  },
+  "CUDA": {
+    "status": "completed-discarded-B16-native256-CUDA-phase-conditioned-head-checks",
+    "plan": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-CUDA-preflight-v1/plan.json",
+    "plan_sha256": "87671e10ae7aff6fcb3d523f3384cf2b8181f88906ceea5de05cce16765081a5",
+    "checkpoint": {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-CUDA-preflight-v1/actual-B16/last.pt",
+      "sha256": "23f0d82a2ffafce0c747779653b5815d9525e450171430c7c294fe722456aaa6"
+    },
+    "source_bundle_sha256": "fc0297db08d659523fdcefe1ef0e7a4da12ae97f648e95b1579db65de93d268a",
+    "all91_parent_EMA_tensors_loaded_exact_and_initial_GPU_BF16_output_bilinear": true,
+    "all91_existing_model_and_EMA_tensors_unchanged_after_updates": true,
+    "finite94model94EMA3Adam": true,
+    "all7_V65_control_input_hashes_domains_LRs_exact": true,
+    "training_observations": [
+      {
+        "event": "train",
+        "step": 1,
+        "loss": 0.06812064349651337,
+        "lr": 4.000000000000001e-06,
+        "grad_norm": 0.11578372865915298,
+        "seconds_per_step": 74.30867250799201,
+        "cuda_gb": 16.708956672,
+        "domain": "synthetic",
+        "linear": 0.035071246325969696,
+        "rendered": 0.03955616056919098,
+        "gradient": 0.037000518292188644,
+        "highlight": 0.07242687046527863,
+        "sensor": 0.023285778239369392,
+        "batch_sha256": "382199c1857e88ce4f72f291a03ff0af2274ba1a813e725e0e346c68338bdc53"
+      },
+      {
+        "event": "train",
+        "step": 2,
+        "loss": 0.02881511300802231,
+        "lr": 8.000000000000001e-06,
+        "grad_norm": 0.1088934987783432,
+        "seconds_per_step": 37.84762786945794,
+        "cuda_gb": 16.708956672,
+        "domain": "synthetic",
+        "linear": 0.009373694658279419,
+        "rendered": 0.02479223534464836,
+        "gradient": 0.02658509463071823,
+        "highlight": 0.03752589970827103,
+        "sensor": 0.006342031992971897,
+        "batch_sha256": "66e247864be75a3ded322b6cd62fcff6507167d1a6ccefb8c3ca03d5bd32e028"
+      },
+      {
+        "event": "train",
+        "step": 3,
+        "loss": 0.0617888867855072,
+        "lr": 1.2e-05,
+        "grad_norm": 0.1647624969482422,
+        "seconds_per_step": 25.52031270166238,
+        "cuda_gb": 16.708956672,
+        "domain": "synthetic",
+        "linear": 0.030278531834483147,
+        "rendered": 0.0372396782040596,
+        "gradient": 0.02991615980863571,
+        "highlight": 0.0765073299407959,
+        "sensor": 0.02248167246580124,
+        "batch_sha256": "b2d52e42f854a0ce8a1c5dffa2464424839c058d4b0e362caaa3a8a79ad0289b"
+      },
+      {
+        "event": "train",
+        "step": 4,
+        "loss": 0.008251765742897987,
+        "lr": 1.6000000000000003e-05,
+        "grad_norm": 0.02015570178627968,
+        "seconds_per_step": 19.387977556267288,
+        "cuda_gb": 16.708956672,
+        "domain": "paired-RAW",
+        "paired_sensor": 0.0034162176307290792,
+        "paired_coarse_rendered": 0.008915668353438377,
+        "paired_auxiliary": 0.003777138190343976,
+        "batch_sha256": "1bee4bcd9c2c45cc7d31020abb5efd1f964bf37789abf77fdece3814e1526950"
+      },
+      {
+        "event": "train",
+        "step": 5,
+        "loss": 0.009545695967972279,
+        "lr": 2e-05,
+        "grad_norm": 0.02718563936650753,
+        "seconds_per_step": 15.710071315802633,
+        "cuda_gb": 16.708956672,
+        "domain": "paired-RAW",
+        "paired_sensor": 0.004324914887547493,
+        "paired_coarse_rendered": 0.009534372016787529,
+        "paired_auxiliary": 0.004535946995019913,
+        "batch_sha256": "93d8e61203ae1079681ae47c750b8c9db42c4321947886b7970a46b9850f0e64"
+      },
+      {
+        "event": "train",
+        "step": 6,
+        "loss": 0.06231538578867912,
+        "lr": 2.4e-05,
+        "grad_norm": 0.13808085024356842,
+        "seconds_per_step": 13.246361657162197,
+        "cuda_gb": 16.708956672,
+        "domain": "synthetic",
+        "linear": 0.03149711340665817,
+        "rendered": 0.039052315056324005,
+        "gradient": 0.03303452208638191,
+        "highlight": 0.058027446269989014,
+        "sensor": 0.021859196946024895,
+        "batch_sha256": "62d75da96e6f5f22ce995df4d15a3e6ed4229bf8d0d81d24af23ff9c9bd11fd0"
+      },
+      {
+        "event": "train",
+        "step": 7,
+        "loss": 0.026430768892169,
+        "lr": 2.8000000000000003e-05,
+        "grad_norm": 0.04821878671646118,
+        "seconds_per_step": 11.491969969123602,
+        "cuda_gb": 16.708956672,
+        "domain": "native-RAW-synthetic",
+        "linear": 0.005372765474021435,
+        "rendered": 0.02841467224061489,
+        "gradient": 0.027921635657548904,
+        "highlight": 0.03609776124358177,
+        "sensor": 0.004487283993512392,
+        "batch_sha256": "8a7e961087f479ece5094623b720ae91e75f19e88e794bda5a7458385ef1ca73"
+      }
+    ],
+    "FP16_portable_and_optimizer_RNG_reconstruction": [
+      {
+        "input": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+        "input_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+        "shape": [
+          1,
+          3,
+          256,
+          256
+        ],
+        "FP16_portable_EMA_exact": true
+      },
+      {
+        "input": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+        "input_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+        "shape": [
+          1,
+          3,
+          256,
+          256
+        ],
+        "FP16_portable_EMA_exact": true
+      }
+    ],
+    "BF16_two_photos_manual_portable_bitwise_exact": true,
+    "all_manual_portable_tensors_including_actual_DINO_exact": true,
+    "clean_constant_cases": [
+      {
+        "shot": 0.0,
+        "read": 0.0,
+        "precision": "float32",
+        "clean_fields": 16,
+        "max_absolute_RGB_error": 5.960464477539063e-08
+      },
+      {
+        "shot": 0.0,
+        "read": 0.0,
+        "precision": "bfloat16",
+        "clean_fields": 16,
+        "max_absolute_RGB_error": 5.960464477539063e-08
+      },
+      {
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "precision": "float32",
+        "clean_fields": 16,
+        "max_absolute_RGB_error": 5.960464477539063e-08
+      },
+      {
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "precision": "bfloat16",
+        "clean_fields": 16,
+        "max_absolute_RGB_error": 5.960464477539063e-08
+      }
+    ],
+    "total_clean_constant_cases": 64,
+    "head_B1_native256_BF16_gradient_norms": {
+      "pretrained_rgb.raw_kernel.phase_coefficients": 0.018281439319252968,
+      "pretrained_rgb.raw_kernel.coefficients.weight": 0.061484552919864655,
+      "pretrained_rgb.raw_kernel.coefficients.bias": 0.03634948655962944
+    },
+    "all_other_parameters_frozen_and_gradient_free": true,
+    "trainable_parameters": 27216,
+    "peak_cuda_allocated_bytes": 16708956672,
+    "driver_sha256": "9d59de5a9906e297674ef4e69821cb3db0803b9c1d091bc93b282aa21582e8fd",
+    "scope": "Seven discarded B16/native256/BF16 updates, workers0/forced real Commons/val2, original1000 phase-stage recipe. New and V65 actual CUDA fixtures share all7observations/domains/LRs. CPU restart exactness separate; no deterministic CUDA optimization, convergence, production throughput, noisy-field unbiasedness or photographic-quality claim."
+  },
+  "independent_CUDA_state_audit": {
+    "status": "completed-independent-phase-CUDA-saved-state-and-input-identity-audit",
+    "receipt": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-CUDA-preflight-v1/receipt.json",
+    "receipt_sha256": "3703b4a1c014025227d798033f274aae47d598c4aa802c596c8bbc7ee357feb1",
+    "checkpoint": {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-CUDA-preflight-v1/actual-B16/last.pt",
+      "sha256": "23f0d82a2ffafce0c747779653b5815d9525e450171430c7c294fe722456aaa6"
+    },
+    "finite94model94EMA3Adam": true,
+    "all91_existing_model_and_EMA_tensors_bitwise_parent": true,
+    "source_bundle_sha256": "fc0297db08d659523fdcefe1ef0e7a4da12ae97f648e95b1579db65de93d268a",
+    "all7_V65_fixture_input_hashes_domains_LRs_exact": true,
+    "complete_RNG_present": true,
+    "all_guarded_files_and_archived_model_source_exact": true,
+    "CUDA_initialized": false,
+    "scope": "Read-only CPU inspection of discarded actual seven-update phase GPU state. Executed gradients, clean fields and portable EMA checks are pinned original receipt evidence, not rerun here. No production quality or deterministic CUDA optimization claim."
+  },
+  "tests": {
+    "targeted": {
+      "passed": 35,
+      "log": {
+        "path": "/home/dllu/proj/demosaic/.cache/raw-kernel-phase-targeted-tests-v1.log",
+        "sha256": "354ee8373e70f7a1ae1cebcf6b63a9cdda290108e54562267a2e2130425d57dd"
+      }
+    },
+    "complete_CPU_suite": {
+      "passed": 543,
+      "CUDA_related_skips": 9,
+      "log": {
+        "path": "/home/dllu/proj/demosaic/.cache/raw-kernel-phase-full-CPU-suite-v1.log",
+        "sha256": "219741a39dff02f11a653b0d40b33760ee448b3e1033fc169ae68b2d7e0d1f08"
+      }
+    }
+  },
+  "receipts": [
+    {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-CPU-preflight-v1/receipt.json",
+      "sha256": "83b4dd0b94d9c5d71566da2a3e3dcb1b491488b235febcb6215a34a3179fe4de"
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-CPU-preflight-v1/worker.log",
+      "sha256": "99ad1fc066b898389e5b3887ecf206b2cdea6af880d0433a056fba976499b832"
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-CUDA-preflight-v1/plan.json",
+      "sha256": "87671e10ae7aff6fcb3d523f3384cf2b8181f88906ceea5de05cce16765081a5"
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-CUDA-preflight-v1/receipt.json",
+      "sha256": "3703b4a1c014025227d798033f274aae47d598c4aa802c596c8bbc7ee357feb1"
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-CUDA-preflight-v1/independent-saved-state-audit.json",
+      "sha256": "012aafe1d0f42a177dacecf1e430c98e8142f3b47be0fe2a70b6bf20f899f13e"
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-CUDA-preflight-v1/CUDA-execution.log",
+      "sha256": "3f55a1edb0d8a78cdce5e12a035bc68e550b1a37a1eceb07f0642a0d29d39b35"
+    }
+  ],
+  "limits": "Discarded B1/native64/FP32 CPU and B16/native256/BF16 CUDA fixtures. Default-off numeric compatibility and CPU deterministic restart are proved; no deterministic CUDA optimization, photographic quality/convergence, unbiased noisy fields or production throughput claim."
+}

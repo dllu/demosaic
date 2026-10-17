@@ -54,6 +54,7 @@ class ModelConfig:
     adc_cfa_projection: bool = False
     raw_kernel_reconstruction: bool = False
     raw_kernel_windows: tuple[int, ...] = (1, 5, 17)
+    raw_kernel_phase_conditioning: bool = False
 
     def to_dict(self):
         return asdict(self)
@@ -413,6 +414,10 @@ class JointDemosaic(nn.Module):
             )
         if cfg.rgb_processing_scale not in (1, 2):
             raise ValueError("RGB processing scale must be 1 or 2")
+        if type(cfg.raw_kernel_phase_conditioning) is not bool:
+            raise ValueError("RAW kernel phase conditioning must be a boolean")
+        if cfg.raw_kernel_phase_conditioning and not cfg.raw_kernel_reconstruction:
+            raise ValueError("RAW kernel phase conditioning requires RAW kernel reconstruction")
         if cfg.packed_detail_prior and cfg.rgb_processing_scale != 2:
             raise ValueError("The packed detail prior requires RGB processing scale 2")
         if cfg.rgb_processing_scale == 2 and (
@@ -455,6 +460,7 @@ class JointDemosaic(nn.Module):
                 adc_projection=cfg.adc_cfa_projection,
                 raw_kernel=cfg.raw_kernel_reconstruction,
                 raw_kernel_windows=cfg.raw_kernel_windows,
+                raw_kernel_phase_conditioning=cfg.raw_kernel_phase_conditioning,
             )
             if cfg.dino and cfg.dino_feature_fusion == "convnext-pyramid":
                 from .dino_pyramid import DinoPyramidContext

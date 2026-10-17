@@ -10,7 +10,7 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
-from .cfa import bilinear
+from .cfa import PATTERNS, bilinear
 from .precision import ieee_fp32
 
 
@@ -52,7 +52,7 @@ class AdaptiveRawKernel(nn.Module):
     resulting filter need not be positive or noise-unbiased.
     """
 
-    def __init__(self, feature_channels, windows=(1, 5, 17)):
+    def __init__(self, feature_channels, windows=(1, 5, 17), *, phase_conditioning=False):
         super().__init__()
         windows = tuple(windows)
         if (
@@ -68,6 +68,20 @@ class AdaptiveRawKernel(nn.Module):
         self.coefficients = nn.Conv2d(feature_channels, 3 * len(windows) * 4 * 9, 1)
         nn.init.zeros_(self.coefficients.weight)
         nn.init.zeros_(self.coefficients.bias)
+        if type(phase_conditioning) is not bool:
+            raise ValueError("RAW kernel phase conditioning must be a boolean")
+        if phase_conditioning:
+            # A categorical offset to kernel logits, never an RGB offset.
+            # Zeros preserve output and global RNG at initialization. Four
+            # CFA patterns x four native positions add 5,184 parameters.
+            self.phase_coefficients = nn.Parameter(
+                torch.zeros(4, 4, self.coefficients.out_channels)
+            )
+            self.register_buffer(
+                "phase_patterns", torch.tensor(list(PATTERNS.values())), persistent=False
+            )
+        else:
+            self.register_parameter("phase_coefficients", None)
 
     def forward(self, packed, colors, features):
         if packed.ndim != 4 or packed.shape[1] != 4:
@@ -89,10 +103,14 @@ class AdaptiveRawKernel(nn.Module):
             reference = raw.gather(1, phase[..., None, None].expand(-1, -1, height, width))
             reference = reference.gather(1, colors[..., None, None].expand(-1, -1, height, width))
             reference = reference.repeat_interleave(2, -2).repeat_interleave(2, -1)
-            coefficients = (
-                self.coefficients(features.float())
-                .tanh()
-                .reshape(batch, 3, len(self.windows), 4, 9, height * 2, width * 2)
+            logits = self.coefficients(features.float())
+            if self.phase_coefficients is not None:
+                matches = (colors[:, None] == self.phase_patterns[None]).all(-1).float()
+                offsets = torch.einsum("bp,pqc->bcq", matches, self.phase_coefficients.float())
+                offsets = offsets.reshape(batch, -1, 1, 1).expand(-1, -1, height, width)
+                logits = logits + F.pixel_shuffle(offsets, 2)
+            coefficients = logits.tanh().reshape(
+                batch, 3, len(self.windows), 4, 9, height * 2, width * 2
             )
             prediction = bilinear(raw, colors)
             for index, window in enumerate(self.windows):

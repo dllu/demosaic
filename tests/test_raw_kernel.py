@@ -29,11 +29,14 @@ def test_stable_box_is_the_same_local_average_with_replicated_borders(window):
 
 
 @pytest.mark.parametrize("pattern", PATTERNS)
-def test_arbitrary_kernel_features_cannot_shift_clean_constant_rgb(pattern):
-    head = AdaptiveRawKernel(8)
+@pytest.mark.parametrize("phase_conditioning", [False, True])
+def test_arbitrary_kernel_features_cannot_shift_clean_constant_rgb(pattern, phase_conditioning):
+    head = AdaptiveRawKernel(8, phase_conditioning=phase_conditioning)
     with torch.no_grad():
         head.coefficients.weight.normal_(std=3)
         head.coefficients.bias.normal_(std=3)
+        if head.phase_coefficients is not None:
+            head.phase_coefficients.normal_(std=3)
     colors = color_indices(pattern)
     rgb = torch.tensor([[0.02, 0.18, 0.9], [1.4, -0.02, 0.00001], [0.0, 0.0, 0.0]])
     target = rgb[..., None, None].expand(-1, -1, 14, 18)
@@ -76,13 +79,15 @@ def test_fixed_kernels_respect_independent_per_color_offsets_and_have_gradients(
         )
 
 
-def test_native_trunk_tail_and_kernel_head_train_and_roundtrip(tmp_path):
+@pytest.mark.parametrize("phase_conditioning", [False, True])
+def test_native_trunk_tail_and_kernel_head_train_and_roundtrip(tmp_path, phase_conditioning):
     cfg = ModelConfig(
         restoration_backbone="pretrained-rgb",
         width=64,
         camera_conditioning=True,
         raw_kernel_reconstruction=True,
         raw_kernel_windows=(1, 3, 7),
+        raw_kernel_phase_conditioning=phase_conditioning,
     )
     model = JointDemosaic(cfg)
     with torch.no_grad():
@@ -104,6 +109,7 @@ def test_native_trunk_tail_and_kernel_head_train_and_roundtrip(tmp_path):
     torch.save({"model_config": cfg.to_dict(), "model": model.restoration_state_dict()}, path)
     restored, _ = load_checkpoint(path)
     assert restored.config.raw_kernel_reconstruction
+    assert restored.config.raw_kernel_phase_conditioning == phase_conditioning
     with torch.no_grad():
         torch.testing.assert_close(
             restored(raw, torch.ones_like(raw) * 1e-5, colors), prediction, atol=0, rtol=0
@@ -141,13 +147,15 @@ def test_incompatible_model_paths_are_rejected(options):
         )
 
 
-def test_raw_kernel_warmup_updates_only_coefficients_and_keeps_frozen_EMA_exact():
+@pytest.mark.parametrize("phase_conditioning", [False, True])
+def test_raw_kernel_warmup_updates_only_coefficients_and_keeps_frozen_EMA_exact(phase_conditioning):
     model = JointDemosaic(
         ModelConfig(
             restoration_backbone="pretrained-rgb",
             width=64,
             camera_conditioning=True,
             raw_kernel_reconstruction=True,
+            raw_kernel_phase_conditioning=phase_conditioning,
         )
     )
     before = {k: v.clone() for k, v in model.restoration_state_dict().items()}
@@ -157,8 +165,12 @@ def test_raw_kernel_warmup_updates_only_coefficients_and_keeps_frozen_EMA_exact(
         "pretrained_rgb.raw_kernel.coefficients.weight",
         "pretrained_rgb.raw_kernel.coefficients.bias",
     }
+    if phase_conditioning:
+        expected.add("pretrained_rgb.raw_kernel.phase_coefficients")
     assert {n for n, p in model.named_parameters() if p.requires_grad} == expected
-    assert sum(p.numel() for p in model.parameters() if p.requires_grad) == 22032
+    assert sum(p.numel() for p in model.parameters() if p.requires_grad) == (
+        27216 if phase_conditioning else 22032
+    )
     raw = torch.rand(1, 4, 7, 9) * 0.2
     prediction = model(raw, torch.ones_like(raw) * 1e-5, color_indices("RGGB"))
     prediction.square().mean().backward()
@@ -170,7 +182,7 @@ def test_raw_kernel_warmup_updates_only_coefficients_and_keeps_frozen_EMA_exact(
     )
     optimizer.step()
     update_ema(model, ema, 0.9)
-    assert len(optimizer.state) == 2
+    assert len(optimizer.state) == len(expected)
     after = model.restoration_state_dict()
     for name, value in before.items():
         if name in expected:
@@ -182,7 +194,58 @@ def test_raw_kernel_warmup_updates_only_coefficients_and_keeps_frozen_EMA_exact(
     restored = JointDemosaic(model.config)
     restored_optimizer = make_optimizer(restored, {"raw_kernel_only": True, "lr": 1e-4})
     restored_optimizer.load_state_dict(optimizer.state_dict())
-    assert len(restored_optimizer.state) == 2
+    assert len(restored_optimizer.state) == len(expected)
+
+
+def test_phase_coefficients_address_each_CFA_and_native_position_without_mixing():
+    head = AdaptiveRawKernel(8, (1,), phase_conditioning=True)
+    colors = torch.stack([color_indices(p) for p in PATTERNS])
+    # Input phase0's left neighbor differs from its same-cell reference by
+    # exactly -1. The selected coefficient modifies only output red. Sixteen
+    # distinct magnitudes independently identify CFA and 2x2 native position.
+    raw = torch.arange(64).reshape(1, 1, 8, 8).float().expand(4, 4, -1, -1)
+    values = torch.arange(1, 17).reshape(4, 4).float() * 0.05
+    with torch.no_grad():
+        head.phase_coefficients[:, :, 3] = values.atanh()
+        result = head(raw, colors, torch.zeros(4, 8, 16, 16))
+    expected = torch.empty(4, 16, 16)
+    for pattern in range(4):
+        for row in range(2):
+            for col in range(2):
+                expected[pattern, row::2, col::2] = -values[pattern, row * 2 + col]
+    difference = result - bilinear(raw, colors)
+    torch.testing.assert_close(difference[:, 0, :, 2:], expected[..., 2:], atol=5e-6, rtol=0)
+    torch.testing.assert_close(
+        difference[:, 1:], torch.zeros_like(difference[:, 1:]), atol=0, rtol=0
+    )
+
+
+def test_zero_phase_coefficients_preserve_legacy_output_state_keys_and_global_RNG():
+    torch.manual_seed(281)
+    legacy = AdaptiveRawKernel(8)
+    legacy_rng = torch.get_rng_state()
+    torch.manual_seed(281)
+    conditioned = AdaptiveRawKernel(8, phase_conditioning=True)
+    assert torch.equal(torch.get_rng_state(), legacy_rng)
+    assert set(legacy.state_dict()) == {"coefficients.weight", "coefficients.bias"}
+    assert set(conditioned.state_dict()) == set(legacy.state_dict()) | {"phase_coefficients"}
+    with torch.no_grad():
+        legacy.coefficients.weight.normal_(std=0.01)
+        legacy.coefficients.bias.normal_(std=0.01)
+    missing = conditioned.load_state_dict(legacy.state_dict(), strict=False)
+    assert missing.missing_keys == ["phase_coefficients"] and not missing.unexpected_keys
+    raw = torch.rand(4, 4, 7, 9)
+    colors = torch.stack([color_indices(p) for p in PATTERNS])
+    features = torch.randn(4, 8, 14, 18)
+    with torch.no_grad():
+        torch.testing.assert_close(
+            conditioned(raw, colors, features), legacy(raw, colors, features), atol=0, rtol=0
+        )
+
+
+def test_phase_conditioning_requires_the_RAW_head():
+    with pytest.raises(ValueError, match="phase conditioning requires RAW kernel"):
+        JointDemosaic(ModelConfig(raw_kernel_phase_conditioning=True))
 
 
 @pytest.mark.parametrize(
