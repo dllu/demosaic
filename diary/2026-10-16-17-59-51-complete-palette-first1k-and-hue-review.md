@@ -49,3 +49,14 @@ No timing repeat or10-second claim. Foreign sriv GPU jobs left untouched;
 74GiB memory available and >1TiB external disk free at prelaunch check. Commons
 downloader3989567 remains active with512GiB reserve. Goal remains active:
 quality/SOTA/broad real superiority, protected-final and speed goals unmet.
+
+Committed/pushed complete review asaa6066e. Launched actual serial continuation
+owner1748140 creation1792198827.52, frozen source0d7d2bb. Driver SHA
+f3914a5ad63fcd0ccecac9ef9c5ff4919acba6e6144e8dfdbc37f6687cb88d0b,
+archived at/mnt/external/demosaic/benchmarks/wide-flat-palette-full4k-workflow-v1/.
+Live control child uses--resume immutable c80e9565... step1000 whole state.
+Actual start_step1000/steps4000 and resumedstep1001 finite:
+loss.0307270847, LR1.7731787022396306e-5, gradnorm1.21764064. No warmup reset.
+All declared source/input hashes verified after start. Published distinct
+launch receipt; first1k public JSON remains pinned684cee1a98aa18a5bf60f61394b94a06da959b96f15fe4f5e507007c05c78b61.
+Wide and full evaluation are pending serial stages, not completed claims.

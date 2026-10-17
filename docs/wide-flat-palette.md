@@ -8,8 +8,9 @@ ConvNeXt parent. The [genuine CUDA checks](results/wide-flat-palette-cuda-valida
 also pass. **Trained quality gains remain unproven.**
 The [completed first1k review](wide-flat-palette-first1k-review.md) finds mixed
 color changes and no convincing detail gain. Its prospective hue sweep still
-has large bright-field errors. Both arms will continue their original
-additional4k schedules; neither first1k model is promoted.
+has large bright-field errors. The [whole-state continuation is running](results/wide-flat-palette-full4k-launch.json):
+control, then wider palette, then full evaluation under the original
+additional4k schedules. Neither first1k model is promoted.
 [Original launch receipt](results/wide-flat-palette-first1k-launch.json).
 [Complete CPU receipt, tests, source checks and prepared configurations](results/wide-flat-palette-preparation.json).
 

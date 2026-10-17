@@ -238,7 +238,7 @@ all 12 triplets rerender exactly; 72 groups / 864 descriptive values independent
 agree to 6.94e-18. Full arrays/logs remain on the external SSD.
 
 Single full-frame passes: control 35.41 s, wide 34.93 s, RawNIND global 18.00 s and
-channel 18.48 s for 101.996 MP, tile 512 / overlap 64 / batch 4. These are isolated measured
+channel 18.48 s for 101.996 MP, tile 512 / overlap 64 / batch 4. These are single measured
 passes including tile blending, excluding RAW decode/TIFF encoding; not a
 repeated speed comparison. The 100 MP / 10 s objective remains unmet.
 
@@ -246,7 +246,9 @@ Immutable copies of both first1k training logs preserve the audited boundaries
 before the live run logs are appended during continuation.
 
 Continue both audited whole states to their original 4,000-update schedules
-with frozen source/data. Do not promote either first1k model. Protected-final
+with frozen source/data. The [actual continuation launch](results/wide-flat-palette-full4k-launch.json)
+records a finite resumed step 1,001 for control; the wider arm follows serially.
+Do not promote either first1k model. Protected-final
 16-scene scoring remains closed. One training seed, tiny real panels and
 selected qualitative crops cannot establish SOTA or broad real superiority.
 
