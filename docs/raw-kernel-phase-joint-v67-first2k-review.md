@@ -158,3 +158,7 @@ checkpoint/run/log/source and all review files by using an isolated destination.
 The continuation is not launched by this report; its resume/log protocol must be
 verified first. Full final development/color/analytic/native/GFX/artifact review
 is required before any promotion. The original quality goal remains unmet.
+
+After this review, the [verified isolated continuation](raw-kernel-phase-joint-v67-full10k.md)
+launched from the exact2k state to finish the remaining original budget. The
+original2k run/log/source and this review remain intact; no model is promoted.

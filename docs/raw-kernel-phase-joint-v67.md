@@ -127,3 +127,7 @@ The original10k budget has8,000 updates remaining. Verify an isolated continuati
 from complete step2000 state, preserving this stopped run/log/source and its
 immutable review, before further training. That continuation is not launched by
 the first2k report; full final review remains required before promotion.
+
+The [isolated continuation to the original10k endpoint](raw-kernel-phase-joint-v67-full10k.md)
+subsequently passed actual full-size resume checks and launched. Its output
+directory preserves all original2k evidence.

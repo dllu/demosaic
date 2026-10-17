@@ -315,3 +315,8 @@ increases versus V66. Independent state94/94/92,50,264 primary cases/48 comparis
 pass. Shared-machine52.042s misses10s. No promotion or convergence claim;8,000
 original updates remain, requiring a verified isolated continuation before final
 full review. SOTA and the requested large real-photo advantage remain unmet.
+
+The [verified isolated continuation](raw-kernel-phase-joint-v67-full10k.md) now
+finishes the original V67 budget with all2k evidence preserved. Actual full-size
+resume checks restore model/EMA/92Adam/best/RNG exactly; original2001/2025 input
+hashes/domains/LRs match production. Final10k quality/native review remains.

@@ -1,0 +1,153 @@
+{
+  "status": "launched-verified-isolated-continuation-of-original-V67-10000-schedule",
+  "recorded_UTC": "2026-10-17T07:39:13.915726+00:00",
+  "original_completed2000_review": {
+    "path": "/home/dllu/proj/demosaic/docs/results/raw-kernel-phase-joint-v67-first2k-review.json",
+    "sha256": "7fd672fc87f5fee695638ee37d6bb636fd5e1ff55984af562a99a00cc1b35e5c"
+  },
+  "recipe": {
+    "path": "/home/dllu/proj/demosaic/configs/dino-convnext-raw-kernel-phase-joint-full10k-b16-v67.yaml",
+    "sha256": "e1d89687be01e2c8b9a448e20cb236f6e90a850902a239e0554d3a1887d7a69d"
+  },
+  "immutable_plan": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-workflow-v1/plan.json",
+    "sha256": "45c5c2795df148c5405060ed6b6a93659357128bd27fdc2098cf72231c37fd93"
+  },
+  "live_status_path": "/mnt/external/demosaic/runs/raw-kernel-phase-joint-v67-full10k-workflow-v1.json",
+  "status_snapshot": {
+    "controller": {
+      "pid": 2949308,
+      "created": 1792222522.64,
+      "driver_sha256": "a0b6bf27b5488ba658af5281322984216c9c8ca7568b7d75277208bc95468065"
+    },
+    "plan": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-workflow-v1/plan.json",
+    "scope": "Resume exact2k model/EMA/Adam/RNG into isolated output and finish original10000 updates. Preserve original2k run/review. No automatic promotion or new schedule.",
+    "status": "training-original-V67-schedule-from2000-to10000",
+    "updated_UTC": "2026-10-17T07:35:23.522853+00:00",
+    "plan_sha256": "45c5c2795df148c5405060ed6b6a93659357128bd27fdc2098cf72231c37fd93",
+    "child": {
+      "pid": 2949312,
+      "created": 1792222523.48
+    }
+  },
+  "controller_and_child_identity_verified_live": true,
+  "original_2000_run_and_all_plan_guards_unchanged_at_publication": true,
+  "CUDA_resume_fixture": {
+    "receipt": {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-isolated-resume-CUDA-preflight-v1/receipt.json",
+      "sha256": "f4520367a069b8bbb5da691bfa6e03e613215e3cbcf9cf056591fca88f25fc15"
+    },
+    "result": {
+      "status": "completed-genuine-V67-B16-CUDA-isolated-resume25-checks",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-isolated-resume-CUDA-preflight-v1/isolated-run/last.pt",
+        "sha256": "f899768899896cb28f04e4648e6cc8c80053d2817130fde4d4930a4ffa7c5fff"
+      },
+      "plan": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-isolated-resume-CUDA-preflight-v1/plan.json",
+      "plan_sha256": "2837a457a6b9d50f3094277fe1eadd0538a6647c1ad1471e149cbfe7a3b59a6b",
+      "source_bundle_sha256": "fc0297db08d659523fdcefe1ef0e7a4da12ae97f648e95b1579db65de93d268a",
+      "original_step2000_model_not_EMA_and_all92_Adam_states_restored_exact": true,
+      "initial_EMA_restored_exact": true,
+      "all_three_RNG_families_exact_before_first_data_fetch": true,
+      "actual_DINO_hash_before_after_exact": "1d679a021c6c26b5a610281aff421afe8ec33ff0e18dc029c8da736eade9cc36",
+      "actual_DINO_frozen_and_gradient_free": true,
+      "best_and_original_V66_initialization_lineage_preserved": true,
+      "finite94model94EMA92Adam_steps2025": true,
+      "original2000_log_prefix_exact": true,
+      "new_logged_observations": [
+        {
+          "event": "train",
+          "step": 2001,
+          "loss": 0.040439851582050323,
+          "lr": 9.205734670231343e-05,
+          "grad_norm": 0.4253862202167511,
+          "seconds_per_step": 72.36737092304975,
+          "cuda_gb": 11.082894848,
+          "domain": "synthetic",
+          "linear": 0.022880177944898605,
+          "rendered": 0.021898796781897545,
+          "gradient": 0.01950330287218094,
+          "highlight": 0.028260579332709312,
+          "sensor": 0.018338853493332863,
+          "batch_sha256": "1ca511bab1a72df55c667ada9722e4d25177059228ad712dd5a5b2880deb8e4c"
+        },
+        {
+          "event": "train",
+          "step": 2025,
+          "loss": 0.024731658399105072,
+          "lr": 9.186184199300464e-05,
+          "grad_norm": 0.23611678183078766,
+          "seconds_per_step": 4.092697885883972,
+          "cuda_gb": 11.082894848,
+          "domain": "synthetic",
+          "linear": 0.010892125777900219,
+          "rendered": 0.014925489202141762,
+          "gradient": 0.01104053482413292,
+          "highlight": 0.04275435954332352,
+          "sensor": 0.009972984902560711,
+          "batch_sha256": "fede82e98f1fa858e3e8e0263f8e2e989e9a217a0123f51a36072546d3c08453"
+        }
+      ],
+      "remaining_original10000_schedule_preserved": true,
+      "original_run_checkpoint_log_source_and_review_guards_unchanged": true,
+      "peak_cuda_allocated_bytes": 11082894848,
+      "driver_sha256": "f65ebecdcb90d97eb51ed8cf6292bfb64080b5356ff1d3d31a28b42575771214",
+      "scope": "Discarded25 actual B16/native256/BF16 updates from real V67step2000, same workers4+2+2/data/seed/precision/10000schedule; only output run/notes differ. Exact original model/EMA/optimizer/RNG restoration is checked before first update/data fetch; no deterministic CUDA optimization/restart, convergence, quality, promotion or full production continuation claim."
+    }
+  },
+  "independent_resume_protocol": {
+    "receipt": {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-isolated-resume-CUDA-preflight-v1/independent-resume-protocol-receipt.json",
+      "sha256": "7fa74ec88e8d1671ba41d8c535298ae9eb8f91503923f537749169083a68760a"
+    },
+    "result": {
+      "status": "completed-independent-genuine-isolated-V67-resume-state-and-log-protocol-checks",
+      "positive_audit": {
+        "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-isolated-resume-CUDA-preflight-v1/independent-resume-state-audit.json",
+        "sha256": "a94ba26565e22141e1eda1cff446d713734f1a716f897d2156700a5ee9ce6afb"
+      },
+      "negative_controls": [
+        {
+          "case": "changed-prefix",
+          "rejected": true
+        },
+        {
+          "case": "omitted2001",
+          "rejected": true
+        },
+        {
+          "case": "duplicate2001",
+          "rejected": true
+        },
+        {
+          "case": "wrong2001-LR",
+          "rejected": true
+        }
+      ],
+      "original_published2000_boundary_replayed_unchanged": true,
+      "source": {
+        "path": "/home/dllu/proj/demosaic/scripts/audit_raw_kernel_joint_state.py",
+        "sha256": "14d5ce067eb1cee4633c7b6b650dec0ad42a2bb2e47e875564e5dfb1d289ef0f"
+      },
+      "scope": "Actual resumed2025 state,83logs including original81prefix+2001/2025. Four corrupted log copies rejected; no original files changed. Same production recipe except output/notes, original10000 schedule,94/94/92 preserved. No new quality or CUDA-optimization determinism claim."
+    },
+    "state_audit": {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-isolated-resume-CUDA-preflight-v1/independent-resume-state-audit.json",
+      "sha256": "a94ba26565e22141e1eda1cff446d713734f1a716f897d2156700a5ee9ce6afb"
+    },
+    "executed_auditor": {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-isolated-resume-CUDA-preflight-v1/independent-resume-auditor-executed-source.py",
+      "sha256": "14d5ce067eb1cee4633c7b6b650dec0ad42a2bb2e47e875564e5dfb1d289ef0f"
+    }
+  },
+  "all2_fixture_input_hashes_domains_and_LRs_match_actual_production": true,
+  "latest_logged_resumed_step": 2125,
+  "prefix_train_rows": 81,
+  "expected_final_train_rows_including2001": 402,
+  "original_planned_updates": 10000,
+  "remaining_updates_at_resume": 8000,
+  "training_model_source_unchanged": "fc0297db08d659523fdcefe1ef0e7a4da12ae97f648e95b1579db65de93d268a",
+  "final_quality_result_available": false,
+  "final_review_queue_launched": false,
+  "next_required_work": "Prepare owner-gated original10000 final development/analytic/hue/GFX/three-camera/CPU-color/artifact evaluation, with same data and frozen model source; then actual native views and full quality decision. Do not treat launch/engineering checks as quality or promotion."
+}

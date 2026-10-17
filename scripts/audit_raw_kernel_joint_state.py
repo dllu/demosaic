@@ -6,6 +6,7 @@ import math
 from pathlib import Path
 
 import torch
+import yaml
 from audit_fresh_dino_statistics import sha
 
 from demosaic.model import ModelConfig
@@ -103,14 +104,70 @@ def audit_joint_state(checkpoint, recipe, plan, log_path, steps):
     assert sha(snapshot / "manifest.jsonl") == sha(cfg["manifest"])
     for key in ["manifest", "validation_manifest", "raw_clean_manifest", "paired_manifest"]:
         assert cfg[key + "_sha256"] == sha(cfg[key])
+    log_payload = Path(log_path).read_bytes()
     records = [
-        r
-        for line in Path(log_path).read_text().splitlines()
-        if (r := json.loads(line)).get("event") == "train"
+        r for line in log_payload.splitlines() if (r := json.loads(line)).get("event") == "train"
     ]
-    assert [r["step"] for r in records] == sorted(
-        {1, *range(cfg["log_every"], steps + 1, cfg["log_every"])}
-    )
+    resume_step = plan.get("resume_from_step")
+    resume_log = None
+    if resume_step is not None:
+        assert resume_step == 2000 < steps
+        reviewed = plan["resume_review"]
+        assert sha(reviewed["path"]) == reviewed["sha256"]
+        review = json.loads(Path(reviewed["path"]).read_text())
+        assert review["review_complete"] and review["boundary"]["step"] == resume_step
+        assert review["boundary"]["original_planned_updates"] == 10000
+        resume_checkpoint = plan["resume_checkpoint"]
+        assert sha(resume_checkpoint["path"]) == resume_checkpoint["sha256"]
+        assert resume_checkpoint["sha256"] == review["checkpoint"]["sha256"]
+        prefix = plan["resume_prefix_log"]
+        assert (
+            sha(prefix["path"]) == prefix["sha256"] == review["boundary"]["training_log"]["sha256"]
+        )
+        original_payload = Path(prefix["path"]).read_bytes()
+        assert log_payload.startswith(original_payload)
+        previous = review["workflow_records"]["raw-kernel-phase-joint-v67"]["result"]
+        assert sha(previous["plan"]) == previous["plan_sha256"]
+        old_plan = json.loads(Path(previous["plan"]).read_text())
+        old_recipe = yaml.safe_load(Path(old_plan["recipe"]).read_text())
+        skip = {"run", "experiment_notes"}
+        assert {k: v for k, v in recipe.items() if k not in skip} == {
+            k: v for k, v in old_recipe.items() if k not in skip
+        }
+        old_steps = sorted(
+            {1, *range(old_recipe["log_every"], resume_step + 1, old_recipe["log_every"])}
+        )
+        prefix_steps = [
+            r["step"]
+            for line in original_payload.splitlines()
+            if (r := json.loads(line)).get("event") == "train"
+        ]
+        assert prefix_steps == old_steps
+        new_steps = sorted(
+            {
+                resume_step + 1,
+                *(
+                    s
+                    for s in range(cfg["log_every"], steps + 1, cfg["log_every"])
+                    if s > resume_step
+                ),
+            }
+        )
+        assert [r["step"] for r in records] == old_steps + new_steps
+        resume_log = {
+            "from_step": resume_step,
+            "checkpoint": resume_checkpoint,
+            "review": reviewed,
+            "prefix": prefix,
+            "prefix_rows": len(old_steps),
+            "resumed_rows": len(new_steps),
+            "first_resumed_step_logged": resume_step + 1,
+            "only_run_and_notes_differ_from_original_recipe": True,
+        }
+    else:
+        assert [r["step"] for r in records] == sorted(
+            {1, *range(cfg["log_every"], steps + 1, cfg["log_every"])}
+        )
     assert {r["domain"] for r in records} == {"synthetic", "paired-RAW", "native-RAW-synthetic"}
     for record in records:
         assert all(math.isfinite(v) for v in record.values() if isinstance(v, (int, float)))
@@ -124,7 +181,7 @@ def audit_joint_state(checkpoint, recipe, plan, log_path, steps):
         )
         assert record["lr"] == expected
     assert optimizer["param_groups"][0]["lr"] == records[-1]["lr"]
-    return {
+    result = {
         "checkpoint": checkpoint,
         "step": steps,
         "original_planned_updates": cfg["steps"],
@@ -149,3 +206,6 @@ def audit_joint_state(checkpoint, recipe, plan, log_path, steps):
         "learning_rates": [g["lr"] for g in optimizer["param_groups"]],
         "scope": "Saved restoration/optimizer/source/data audit. DINO weights are deliberately absent from restoration checkpoints; actual frozen-backbone training checks are separate preflight evidence.",
     }
+    if resume_log is not None:
+        result["isolated_resume"] = resume_log
+    return result
