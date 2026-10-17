@@ -129,6 +129,9 @@ execution metadata and individual ROI/conditioning records are linked in the
 machine-readable receipt. The warm target reuses only the earlier fabric ROI's
 three channel means, not its photographic pixels.
 
-The [optional wider-palette intervention](wide-flat-palette.md) now passes CPU
-legacy-data and genuine-parent restart checks. Its matched V59/V60 recipes are
-prepared; CUDA numerics and trained quality remain unproven.
+The [optional wider-palette intervention](wide-flat-palette.md) passes CPU/CUDA
+numerical and restart checks. Both matched V59/V60 recipes have completed
+their original 4,000 updates. The [selected CPU diagnosis](wide-flat-palette-full4k-selected-colors.md)
+finds uneven color changes. The [complete final4k review](wide-flat-palette-full4k-review.md)
+finds a small photo gain and stronger high-saturation groups, with persistent
+moderate-saturation and paired-real limitations.

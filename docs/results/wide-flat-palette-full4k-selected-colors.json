@@ -1,0 +1,2847 @@
+{
+  "status": "Completed selected final4k CPU color diagnosis; complete model review remains pending",
+  "decision": "The wider palette improves some selected colors versus control but does not generally repair color fidelity. No promotion or further schedule extension from these fields.",
+  "execution_report": {
+    "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-colored-CPU-v1/report.json",
+    "sha256": "87245b6516dc4e1ae41e01c6d29c6edb0d64a1341f429ee85ded8a7710e7a081"
+  },
+  "execution_plan": {
+    "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-colored-CPU-v1/plan.json",
+    "sha256": "18f16964a237e1284fe417fd504393ebfecc401b633dcf70f43becbd8268d0f7"
+  },
+  "independent_audit": {
+    "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-selected-color-independent-v3/audit.json",
+    "sha256": "f35cffb30831449f072e53176ab87da8033e1fbba608147528d6234e364dc032",
+    "result": {
+      "status": "completed-independent-saved-flat-Torch64-audit-and-native-rendering",
+      "input_report": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-colored-CPU-v1/report.json",
+      "input_report_sha256": "87245b6516dc4e1ae41e01c6d29c6edb0d64a1341f429ee85ded8a7710e7a081",
+      "observations": 32,
+      "float_predictions": 64,
+      "metric_fields": 384,
+      "maximum_Torch64_vs_saved_NumPy64_metric_difference": 2.220446049250313e-16,
+      "native_panel_triplets": [
+        {
+          "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-colored-CPU-v1/crop-4618f5a15157cf9f.png",
+          "sha256": "5fcb52a803cf39d5471d5a9f41de625026ded3d757890c0b65ca8bff95f56611",
+          "all_three_native_panels_rerender_exact": true
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-colored-CPU-v1/crop-004cd41c04770f0a.png",
+          "sha256": "b46466608ca41d9d44a639677aeb61a08e9221c096eeb984ec394fa47cbd9fe9",
+          "all_three_native_panels_rerender_exact": true
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-colored-CPU-v1/crop-0b4330bc0421d781.png",
+          "sha256": "18b9659df4de638de5e9121e5237efcb503e8b03a55a480cdd2d70cbb0f556ee",
+          "all_three_native_panels_rerender_exact": true
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-colored-CPU-v1/crop-8030263e7c7bb354.png",
+          "sha256": "f3132b25756effdb38b57642a5403b4b1b53962e23d45b6921ac07bd47dd4fd3",
+          "all_three_native_panels_rerender_exact": true
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-selected-color-independent-v3/crop-305a1ff116d96a16.png",
+          "sha256": "32367b82807609a06e67852a1a301976b7e70cc6475e07a15a874c34fc3a3bf8",
+          "all_three_native_panels_rerender_exact": true
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-selected-color-independent-v3/crop-af9b5948bed1edac.png",
+          "sha256": "6839c6dbcfee4ebd256617e4c285ce21e0aeb311ff881d6be15a77de383d9583",
+          "all_three_native_panels_rerender_exact": true
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-selected-color-independent-v3/crop-71bd7071f2ec597f.png",
+          "sha256": "d5b98f3a89ce47daa82ee37c3f001ccc22ed6b62cc7c7fc6a60f11bb8915b680",
+          "all_three_native_panels_rerender_exact": true
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-selected-color-independent-v3/crop-f445c7e6b8dde4b4.png",
+          "sha256": "cb8602a63971e5d9753421678a042a8028ee839c03646e69ae08538016355dc2",
+          "all_three_native_panels_rerender_exact": true
+        }
+      ],
+      "additional_native_crops": [
+        {
+          "image": "crop-305a1ff116d96a16.png",
+          "caption": "dino-convnext-palette-control-b16-v59:step4000 / fabric-cyclic-gbr / saved arrays",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (analytic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "32367b82807609a06e67852a1a301976b7e70cc6475e07a15a874c34fc3a3bf8",
+          "case": {
+            "id": "color-flat-fabric-cyclic-gbr",
+            "palette": "fabric-cyclic-gbr",
+            "condition": {
+              "name": "iso12800-prior",
+              "shot": 0.00256,
+              "read": 2.62144e-05,
+              "exposure": 1.0
+            },
+            "pattern": "RGGB",
+            "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-cyclic-gbr-iso12800-prior-RGGB-observation.npz",
+            "sha256": "f9f0bc3ddfb1a62251e94d929083061861ed99e70d1fb197c822484042b8f68a",
+            "target_camera_RGB": [
+              0.4224426811812077,
+              0.09690847238308323,
+              0.4460826468449295
+            ],
+            "draws_per_pattern": 1
+          },
+          "model": {
+            "path": "/mnt/external/demosaic/models/dino-convnext-palette-control-b16-v59-step4000.pt",
+            "sha256": "a6e494a121b99e311c6be4d24794929f625c3690448588f7d3d1c1af3273dadc",
+            "step": 4000,
+            "label": "dino-convnext-palette-control-b16-v59:step4000",
+            "model_config": {
+              "restoration_backbone": "pretrained-rgb",
+              "width": 64,
+              "encoder_blocks": [
+                2,
+                2,
+                4
+              ],
+              "middle_blocks": 6,
+              "decoder_blocks": [
+                2,
+                2,
+                2
+              ],
+              "attention": true,
+              "dino": true,
+              "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+              "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+              "dino_lora_rank": 0,
+              "dino_input_adapter": false,
+              "dino_feature_fusion": "convnext-pyramid",
+              "camera_conditioning": true,
+              "noise_modulation": false,
+              "physical_fp32": true,
+              "baseline": "bilinear",
+              "prior_window": 7,
+              "standardized_noise": false,
+              "noise_refinement": false,
+              "refinement_width": 24,
+              "refinement_blocks": 4,
+              "refinement_window": 63,
+              "coarse_refinement_factor": 0,
+              "coarse_refinement_width": 24,
+              "coarse_refinement_blocks": 4,
+              "coarse_refinement_window": 31,
+              "pyramid_refinement": false,
+              "pyramid_measurements": true,
+              "pyramid_width": 24,
+              "pyramid_blocks": 2,
+              "variance_stabilization": true,
+              "physical_anchors": true,
+              "rgb_processing_scale": 1,
+              "packed_detail_prior": false,
+              "rgb_hidden_autocast": false,
+              "rgb_center_camera_matrix": false,
+              "rgb_middle_skip_fp32": true,
+              "adc_cfa_projection": false
+            }
+          },
+          "ROI_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "white_balance": [
+            [
+              2.0,
+              1.0,
+              1.5
+            ]
+          ],
+          "camera_to_srgb": [
+            [
+              [
+                1.1176470518112183,
+                -0.05882352963089943,
+                -0.05882352963089943
+              ],
+              [
+                -0.05882352963089943,
+                1.1176470518112183,
+                -0.05882352963089943
+              ],
+              [
+                -0.05882352963089943,
+                -0.05882352963089943,
+                1.1176470518112183
+              ]
+            ]
+          ],
+          "conditioning": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "display_exposure": 1.0,
+          "reference": "Exact uniform analytic target, not a real photograph."
+        },
+        {
+          "image": "crop-af9b5948bed1edac.png",
+          "caption": "dino-convnext-palette-control-b16-v59:step4000 / fabric-cyclic-brg / saved arrays",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (analytic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "6839c6dbcfee4ebd256617e4c285ce21e0aeb311ff881d6be15a77de383d9583",
+          "case": {
+            "id": "color-flat-fabric-cyclic-brg",
+            "palette": "fabric-cyclic-brg",
+            "condition": {
+              "name": "iso12800-prior",
+              "shot": 0.00256,
+              "read": 2.62144e-05,
+              "exposure": 1.0
+            },
+            "pattern": "RGGB",
+            "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-cyclic-brg-iso12800-prior-RGGB-observation.npz",
+            "sha256": "d88558737afb8d01dec4945c4d32dcd676da36fa4fe9f770d9bdf04941b4ab0b",
+            "target_camera_RGB": [
+              0.09690847238308323,
+              0.4460826468449295,
+              0.4224426811812077
+            ],
+            "draws_per_pattern": 1
+          },
+          "model": {
+            "path": "/mnt/external/demosaic/models/dino-convnext-palette-control-b16-v59-step4000.pt",
+            "sha256": "a6e494a121b99e311c6be4d24794929f625c3690448588f7d3d1c1af3273dadc",
+            "step": 4000,
+            "label": "dino-convnext-palette-control-b16-v59:step4000",
+            "model_config": {
+              "restoration_backbone": "pretrained-rgb",
+              "width": 64,
+              "encoder_blocks": [
+                2,
+                2,
+                4
+              ],
+              "middle_blocks": 6,
+              "decoder_blocks": [
+                2,
+                2,
+                2
+              ],
+              "attention": true,
+              "dino": true,
+              "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+              "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+              "dino_lora_rank": 0,
+              "dino_input_adapter": false,
+              "dino_feature_fusion": "convnext-pyramid",
+              "camera_conditioning": true,
+              "noise_modulation": false,
+              "physical_fp32": true,
+              "baseline": "bilinear",
+              "prior_window": 7,
+              "standardized_noise": false,
+              "noise_refinement": false,
+              "refinement_width": 24,
+              "refinement_blocks": 4,
+              "refinement_window": 63,
+              "coarse_refinement_factor": 0,
+              "coarse_refinement_width": 24,
+              "coarse_refinement_blocks": 4,
+              "coarse_refinement_window": 31,
+              "pyramid_refinement": false,
+              "pyramid_measurements": true,
+              "pyramid_width": 24,
+              "pyramid_blocks": 2,
+              "variance_stabilization": true,
+              "physical_anchors": true,
+              "rgb_processing_scale": 1,
+              "packed_detail_prior": false,
+              "rgb_hidden_autocast": false,
+              "rgb_center_camera_matrix": false,
+              "rgb_middle_skip_fp32": true,
+              "adc_cfa_projection": false
+            }
+          },
+          "ROI_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "white_balance": [
+            [
+              2.0,
+              1.0,
+              1.5
+            ]
+          ],
+          "camera_to_srgb": [
+            [
+              [
+                1.1176470518112183,
+                -0.05882352963089943,
+                -0.05882352963089943
+              ],
+              [
+                -0.05882352963089943,
+                1.1176470518112183,
+                -0.05882352963089943
+              ],
+              [
+                -0.05882352963089943,
+                -0.05882352963089943,
+                1.1176470518112183
+              ]
+            ]
+          ],
+          "conditioning": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "display_exposure": 1.0,
+          "reference": "Exact uniform analytic target, not a real photograph."
+        },
+        {
+          "image": "crop-71bd7071f2ec597f.png",
+          "caption": "dino-convnext-palette-wide-b16-v60:step4000 / fabric-cyclic-gbr / saved arrays",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (analytic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "d5b98f3a89ce47daa82ee37c3f001ccc22ed6b62cc7c7fc6a60f11bb8915b680",
+          "case": {
+            "id": "color-flat-fabric-cyclic-gbr",
+            "palette": "fabric-cyclic-gbr",
+            "condition": {
+              "name": "iso12800-prior",
+              "shot": 0.00256,
+              "read": 2.62144e-05,
+              "exposure": 1.0
+            },
+            "pattern": "RGGB",
+            "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-cyclic-gbr-iso12800-prior-RGGB-observation.npz",
+            "sha256": "f9f0bc3ddfb1a62251e94d929083061861ed99e70d1fb197c822484042b8f68a",
+            "target_camera_RGB": [
+              0.4224426811812077,
+              0.09690847238308323,
+              0.4460826468449295
+            ],
+            "draws_per_pattern": 1
+          },
+          "model": {
+            "path": "/mnt/external/demosaic/models/dino-convnext-palette-wide-b16-v60-step4000.pt",
+            "sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+            "step": 4000,
+            "label": "dino-convnext-palette-wide-b16-v60:step4000",
+            "model_config": {
+              "restoration_backbone": "pretrained-rgb",
+              "width": 64,
+              "encoder_blocks": [
+                2,
+                2,
+                4
+              ],
+              "middle_blocks": 6,
+              "decoder_blocks": [
+                2,
+                2,
+                2
+              ],
+              "attention": true,
+              "dino": true,
+              "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+              "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+              "dino_lora_rank": 0,
+              "dino_input_adapter": false,
+              "dino_feature_fusion": "convnext-pyramid",
+              "camera_conditioning": true,
+              "noise_modulation": false,
+              "physical_fp32": true,
+              "baseline": "bilinear",
+              "prior_window": 7,
+              "standardized_noise": false,
+              "noise_refinement": false,
+              "refinement_width": 24,
+              "refinement_blocks": 4,
+              "refinement_window": 63,
+              "coarse_refinement_factor": 0,
+              "coarse_refinement_width": 24,
+              "coarse_refinement_blocks": 4,
+              "coarse_refinement_window": 31,
+              "pyramid_refinement": false,
+              "pyramid_measurements": true,
+              "pyramid_width": 24,
+              "pyramid_blocks": 2,
+              "variance_stabilization": true,
+              "physical_anchors": true,
+              "rgb_processing_scale": 1,
+              "packed_detail_prior": false,
+              "rgb_hidden_autocast": false,
+              "rgb_center_camera_matrix": false,
+              "rgb_middle_skip_fp32": true,
+              "adc_cfa_projection": false
+            }
+          },
+          "ROI_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "white_balance": [
+            [
+              2.0,
+              1.0,
+              1.5
+            ]
+          ],
+          "camera_to_srgb": [
+            [
+              [
+                1.1176470518112183,
+                -0.05882352963089943,
+                -0.05882352963089943
+              ],
+              [
+                -0.05882352963089943,
+                1.1176470518112183,
+                -0.05882352963089943
+              ],
+              [
+                -0.05882352963089943,
+                -0.05882352963089943,
+                1.1176470518112183
+              ]
+            ]
+          ],
+          "conditioning": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "display_exposure": 1.0,
+          "reference": "Exact uniform analytic target, not a real photograph."
+        },
+        {
+          "image": "crop-f445c7e6b8dde4b4.png",
+          "caption": "dino-convnext-palette-wide-b16-v60:step4000 / fabric-cyclic-brg / saved arrays",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (analytic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "cb8602a63971e5d9753421678a042a8028ee839c03646e69ae08538016355dc2",
+          "case": {
+            "id": "color-flat-fabric-cyclic-brg",
+            "palette": "fabric-cyclic-brg",
+            "condition": {
+              "name": "iso12800-prior",
+              "shot": 0.00256,
+              "read": 2.62144e-05,
+              "exposure": 1.0
+            },
+            "pattern": "RGGB",
+            "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-cyclic-brg-iso12800-prior-RGGB-observation.npz",
+            "sha256": "d88558737afb8d01dec4945c4d32dcd676da36fa4fe9f770d9bdf04941b4ab0b",
+            "target_camera_RGB": [
+              0.09690847238308323,
+              0.4460826468449295,
+              0.4224426811812077
+            ],
+            "draws_per_pattern": 1
+          },
+          "model": {
+            "path": "/mnt/external/demosaic/models/dino-convnext-palette-wide-b16-v60-step4000.pt",
+            "sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+            "step": 4000,
+            "label": "dino-convnext-palette-wide-b16-v60:step4000",
+            "model_config": {
+              "restoration_backbone": "pretrained-rgb",
+              "width": 64,
+              "encoder_blocks": [
+                2,
+                2,
+                4
+              ],
+              "middle_blocks": 6,
+              "decoder_blocks": [
+                2,
+                2,
+                2
+              ],
+              "attention": true,
+              "dino": true,
+              "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+              "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+              "dino_lora_rank": 0,
+              "dino_input_adapter": false,
+              "dino_feature_fusion": "convnext-pyramid",
+              "camera_conditioning": true,
+              "noise_modulation": false,
+              "physical_fp32": true,
+              "baseline": "bilinear",
+              "prior_window": 7,
+              "standardized_noise": false,
+              "noise_refinement": false,
+              "refinement_width": 24,
+              "refinement_blocks": 4,
+              "refinement_window": 63,
+              "coarse_refinement_factor": 0,
+              "coarse_refinement_width": 24,
+              "coarse_refinement_blocks": 4,
+              "coarse_refinement_window": 31,
+              "pyramid_refinement": false,
+              "pyramid_measurements": true,
+              "pyramid_width": 24,
+              "pyramid_blocks": 2,
+              "variance_stabilization": true,
+              "physical_anchors": true,
+              "rgb_processing_scale": 1,
+              "packed_detail_prior": false,
+              "rgb_hidden_autocast": false,
+              "rgb_center_camera_matrix": false,
+              "rgb_middle_skip_fp32": true,
+              "adc_cfa_projection": false
+            }
+          },
+          "ROI_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "white_balance": [
+            [
+              2.0,
+              1.0,
+              1.5
+            ]
+          ],
+          "camera_to_srgb": [
+            [
+              [
+                1.1176470518112183,
+                -0.05882352963089943,
+                -0.05882352963089943
+              ],
+              [
+                -0.05882352963089943,
+                1.1176470518112183,
+                -0.05882352963089943
+              ],
+              [
+                -0.05882352963089943,
+                -0.05882352963089943,
+                1.1176470518112183
+              ]
+            ]
+          ],
+          "conditioning": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "display_exposure": 1.0,
+          "reference": "Exact uniform analytic target, not a real photograph."
+        }
+      ],
+      "CUDA_initialized": false,
+      "driver_sha256": "b89f2fc8f933721b176af354e62a75c4316f89271cdd15da65d18d2918425ec6",
+      "scope": "Saved observations/predictions only, no model inference or new draws. Native pixel reconstruction does not claim visual inspection; additional triplets still require viewing. The supplied finite color grid/one draw per case is not a broad photographic quality benchmark."
+    }
+  },
+  "same_observations_as_prior_reviews": true,
+  "prior_audited_reviews": [
+    {
+      "path": "/home/dllu/proj/demosaic/docs/results/mature-color-flat-review.json",
+      "sha256": "0adaf0f7c8fa488fd5286f52598ac636393b91d26bd2462262135042e125d81a"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/results/wide-flat-palette-first1k-review.json",
+      "sha256": "684cee1a98aa18a5bf60f61394b94a06da959b96f15fe4f5e507007c05c78b61"
+    }
+  ],
+  "four_CFA_summaries": [
+    {
+      "label": "V43 retained2k",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v43-step2000.pt",
+        "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+        "step": 2000,
+        "label": "dino-anchored-native-diverse-b16-v43:step2000",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "bottleneck",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": false,
+          "adc_cfa_projection": false
+        }
+      },
+      "condition": "adc-only",
+      "palettes": {
+        "neutral": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.000157428671955131,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.00015049284564156552
+        },
+        "fabric-mean": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.007938753885391635,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.007474591952704941
+        },
+        "fabric-cyclic-gbr": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.0061157158625428564,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.00607375058978505
+        },
+        "fabric-cyclic-brg": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.0015501662553288043,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.0013591453793924302
+        }
+      }
+    },
+    {
+      "label": "V43 retained2k",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v43-step2000.pt",
+        "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+        "step": 2000,
+        "label": "dino-anchored-native-diverse-b16-v43:step2000",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+          "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "bottleneck",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": false,
+          "adc_cfa_projection": false
+        }
+      },
+      "condition": "iso12800-prior",
+      "palettes": {
+        "neutral": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.0006299180944915861,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.00037834160488273486
+        },
+        "fabric-mean": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.001536648432374932,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.0014569454295269679
+        },
+        "fabric-cyclic-gbr": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.002076560271671042,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.001795281581871677
+        },
+        "fabric-cyclic-brg": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.0005597408581525088,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.00047009396745124833
+        }
+      }
+    },
+    {
+      "label": "ConvNeXt parent10k",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-convnext-pyramid-fresh-b16-v58-step10000.pt",
+        "sha256": "cc1fb5e6d3e0d042c95495dd7bf1bd07c900cb6f7e3b61541f78c9e08098fea3",
+        "step": 10000,
+        "label": "dino-convnext-pyramid-fresh-b16-v58:step10000",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false
+        }
+      },
+      "condition": "adc-only",
+      "palettes": {
+        "neutral": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.0002510052549769171,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.00023224994671181776
+        },
+        "fabric-mean": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.03346491224365309,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.03140476702013984
+        },
+        "fabric-cyclic-gbr": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.07730058898334391,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.07533866259153
+        },
+        "fabric-cyclic-brg": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.0013292972976341843,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.0012599783565383404
+        }
+      }
+    },
+    {
+      "label": "ConvNeXt parent10k",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-convnext-pyramid-fresh-b16-v58-step10000.pt",
+        "sha256": "cc1fb5e6d3e0d042c95495dd7bf1bd07c900cb6f7e3b61541f78c9e08098fea3",
+        "step": 10000,
+        "label": "dino-convnext-pyramid-fresh-b16-v58:step10000",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false
+        }
+      },
+      "condition": "iso12800-prior",
+      "palettes": {
+        "neutral": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.0007143237008131109,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.0004901512935612118
+        },
+        "fabric-mean": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.09245774073526264,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.08795545881235739
+        },
+        "fabric-cyclic-gbr": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.12055459639523178,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.11832982566673308
+        },
+        "fabric-cyclic-brg": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.0023961408747709355,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.002105106118688127
+        }
+      }
+    },
+    {
+      "label": "Control +1k",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-convnext-palette-control-b16-v59-step1000.pt",
+        "sha256": "c80e956530aa96eacac477f06e3dd2af1ef8d7ed7e4addd96668191d6e46f77c",
+        "step": 1000,
+        "label": "dino-convnext-palette-control-b16-v59:step1000",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false
+        }
+      },
+      "condition": "adc-only",
+      "palettes": {
+        "neutral": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.00014805832761339844,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.00013733092688198668
+        },
+        "fabric-mean": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.033865761028137056,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.031243681087798902
+        },
+        "fabric-cyclic-gbr": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.025264414198463783,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.02218338188715279
+        },
+        "fabric-cyclic-brg": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.0025214353459887206,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.0023167346155969423
+        }
+      }
+    },
+    {
+      "label": "Control +1k",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-convnext-palette-control-b16-v59-step1000.pt",
+        "sha256": "c80e956530aa96eacac477f06e3dd2af1ef8d7ed7e4addd96668191d6e46f77c",
+        "step": 1000,
+        "label": "dino-convnext-palette-control-b16-v59:step1000",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false
+        }
+      },
+      "condition": "iso12800-prior",
+      "palettes": {
+        "neutral": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.0008210338055505417,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.0005676620366284623
+        },
+        "fabric-mean": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.042190297071356325,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.03402539069909835
+        },
+        "fabric-cyclic-gbr": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.09567425497574732,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.09341250931523973
+        },
+        "fabric-cyclic-brg": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.007582706104731187,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.007106663844606374
+        }
+      }
+    },
+    {
+      "label": "Wide +1k",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-convnext-palette-wide-b16-v60-step1000.pt",
+        "sha256": "dde398a05fc5df33167d73967d6b5f62ccf3b165f27f8c745b1fdeb45a87f19a",
+        "step": 1000,
+        "label": "dino-convnext-palette-wide-b16-v60:step1000",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false
+        }
+      },
+      "condition": "adc-only",
+      "palettes": {
+        "neutral": {
+          "max_abs_channel_mean_error_over_four_CFAs": 9.703208546852692e-05,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 8.182188495993614e-05
+        },
+        "fabric-mean": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.013886976906796918,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.013504825567943045
+        },
+        "fabric-cyclic-gbr": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.049290202534757556,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.04848028896813048
+        },
+        "fabric-cyclic-brg": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.0007825061329640448,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.0007367525924928486
+        }
+      }
+    },
+    {
+      "label": "Wide +1k",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-convnext-palette-wide-b16-v60-step1000.pt",
+        "sha256": "dde398a05fc5df33167d73967d6b5f62ccf3b165f27f8c745b1fdeb45a87f19a",
+        "step": 1000,
+        "label": "dino-convnext-palette-wide-b16-v60:step1000",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false
+        }
+      },
+      "condition": "iso12800-prior",
+      "palettes": {
+        "neutral": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.0008567846464575268,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.0006307132209622068
+        },
+        "fabric-mean": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.02854768797522411,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.024776608583342748
+        },
+        "fabric-cyclic-gbr": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.10793694102903828,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.10682963681814726
+        },
+        "fabric-cyclic-brg": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.0017817164061125369,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.0014349346015660558
+        }
+      }
+    },
+    {
+      "label": "Control +4k",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-convnext-palette-control-b16-v59-step4000.pt",
+        "sha256": "a6e494a121b99e311c6be4d24794929f625c3690448588f7d3d1c1af3273dadc",
+        "step": 4000,
+        "label": "dino-convnext-palette-control-b16-v59:step4000",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false
+        }
+      },
+      "condition": "adc-only",
+      "palettes": {
+        "neutral": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.0001695011483388953,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.0001544661362277111
+        },
+        "fabric-mean": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.03774912315304391,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.034203391109476795
+        },
+        "fabric-cyclic-gbr": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.029495386966736988,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.026159617568482646
+        },
+        "fabric-cyclic-brg": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.0007858663285151124,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.0007005001587094739
+        }
+      }
+    },
+    {
+      "label": "Control +4k",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-convnext-palette-control-b16-v59-step4000.pt",
+        "sha256": "a6e494a121b99e311c6be4d24794929f625c3690448588f7d3d1c1af3273dadc",
+        "step": 4000,
+        "label": "dino-convnext-palette-control-b16-v59:step4000",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false
+        }
+      },
+      "condition": "iso12800-prior",
+      "palettes": {
+        "neutral": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.0008069076610263437,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.0005411826194904279
+        },
+        "fabric-mean": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.11283698717714287,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.10697593202174176
+        },
+        "fabric-cyclic-gbr": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.11874638590496034,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.11728172838367755
+        },
+        "fabric-cyclic-brg": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.003091877846745774,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.002503860701981466
+        }
+      }
+    },
+    {
+      "label": "Wide +4k",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-convnext-palette-wide-b16-v60-step4000.pt",
+        "sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "step": 4000,
+        "label": "dino-convnext-palette-wide-b16-v60:step4000",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false
+        }
+      },
+      "condition": "adc-only",
+      "palettes": {
+        "neutral": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.00010877597727812827,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.00010049259828520007
+        },
+        "fabric-mean": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.006590872328961268,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.005994140767725184
+        },
+        "fabric-cyclic-gbr": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.01254261109395884,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.01194877356494544
+        },
+        "fabric-cyclic-brg": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.0007285400992259383,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.0006730661942856386
+        }
+      }
+    },
+    {
+      "label": "Wide +4k",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-convnext-palette-wide-b16-v60-step4000.pt",
+        "sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "step": 4000,
+        "label": "dino-convnext-palette-wide-b16-v60:step4000",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false
+        }
+      },
+      "condition": "iso12800-prior",
+      "palettes": {
+        "neutral": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.0008263432251987979,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.0005497320437279996
+        },
+        "fabric-mean": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.0696617988520302,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.058828469192667404
+        },
+        "fabric-cyclic-gbr": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.030989582162583247,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.029149519390193744
+        },
+        "fabric-cyclic-brg": {
+          "max_abs_channel_mean_error_over_four_CFAs": 0.0028467273150454275,
+          "mean_max_abs_channel_mean_error_over_four_CFAs": 0.002543562252903939
+        }
+      }
+    }
+  ],
+  "native_images": [
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/palette-full4k-selected-CPU-control-neutral.png",
+      "sha256": "5fcb52a803cf39d5471d5a9f41de625026ded3d757890c0b65ca8bff95f56611",
+      "source": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-colored-CPU-v1/crop-4618f5a15157cf9f.png",
+      "model": "control",
+      "crop_receipt": {
+        "image": "crop-4618f5a15157cf9f.png",
+        "caption": "color-flat-neutral / dino-convnext-palette-control-b16-v59:step4000 / CPU FP32",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Restored / step4000",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "5fcb52a803cf39d5471d5a9f41de625026ded3d757890c0b65ca8bff95f56611",
+        "case": {
+          "id": "color-flat-neutral",
+          "palette": "neutral",
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/neutral-iso12800-prior-RGGB-observation.npz",
+          "sha256": "89c2c1c29cabdb9364b776bb6dd5ef4d217df98d41b94313baf260b1a0aa70a7",
+          "target_camera_RGB": [
+            0.09,
+            0.18,
+            0.12
+          ],
+          "draws_per_pattern": 1
+        },
+        "model": {
+          "path": "/mnt/external/demosaic/models/dino-convnext-palette-control-b16-v59-step4000.pt",
+          "sha256": "a6e494a121b99e311c6be4d24794929f625c3690448588f7d3d1c1af3273dadc",
+          "step": 4000,
+          "label": "dino-convnext-palette-control-b16-v59:step4000",
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "convnext-pyramid",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false
+          }
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470588,
+            -0.0588235294,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            1.1176470588,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            -0.0588235294,
+            1.1176470588
+          ]
+        ],
+        "conditioning": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "display_exposure": 1.0,
+        "reference": "Exact uniform analytic target, not a real photograph or a newly sampled degradation."
+      },
+      "actually_viewed": true,
+      "visual_review_evidence": "Original four main triplets viewed; four additional v2 triplets viewed, with all v3 whole-file PNG hashes identical"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/palette-full4k-selected-CPU-control-fabric-mean.png",
+      "sha256": "b46466608ca41d9d44a639677aeb61a08e9221c096eeb984ec394fa47cbd9fe9",
+      "source": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-colored-CPU-v1/crop-004cd41c04770f0a.png",
+      "model": "control",
+      "crop_receipt": {
+        "image": "crop-004cd41c04770f0a.png",
+        "caption": "color-flat-fabric-mean / dino-convnext-palette-control-b16-v59:step4000 / CPU FP32",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Restored / step4000",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "b46466608ca41d9d44a639677aeb61a08e9221c096eeb984ec394fa47cbd9fe9",
+        "case": {
+          "id": "color-flat-fabric-mean",
+          "palette": "fabric-mean",
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-mean-iso12800-prior-RGGB-observation.npz",
+          "sha256": "7c2e2575b08152593e1678b2a58d763f79c53eb61a7fe8de43d4f33e25680438",
+          "target_camera_RGB": [
+            0.4460826468449295,
+            0.4224426811812077,
+            0.09690847238308323
+          ],
+          "draws_per_pattern": 1
+        },
+        "model": {
+          "path": "/mnt/external/demosaic/models/dino-convnext-palette-control-b16-v59-step4000.pt",
+          "sha256": "a6e494a121b99e311c6be4d24794929f625c3690448588f7d3d1c1af3273dadc",
+          "step": 4000,
+          "label": "dino-convnext-palette-control-b16-v59:step4000",
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "convnext-pyramid",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false
+          }
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470588,
+            -0.0588235294,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            1.1176470588,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            -0.0588235294,
+            1.1176470588
+          ]
+        ],
+        "conditioning": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "display_exposure": 1.0,
+        "reference": "Exact uniform analytic target, not a real photograph or a newly sampled degradation."
+      },
+      "actually_viewed": true,
+      "visual_review_evidence": "Original four main triplets viewed; four additional v2 triplets viewed, with all v3 whole-file PNG hashes identical"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/palette-full4k-selected-CPU-wide-neutral.png",
+      "sha256": "18b9659df4de638de5e9121e5237efcb503e8b03a55a480cdd2d70cbb0f556ee",
+      "source": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-colored-CPU-v1/crop-0b4330bc0421d781.png",
+      "model": "wide",
+      "crop_receipt": {
+        "image": "crop-0b4330bc0421d781.png",
+        "caption": "color-flat-neutral / dino-convnext-palette-wide-b16-v60:step4000 / CPU FP32",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Restored / step4000",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "18b9659df4de638de5e9121e5237efcb503e8b03a55a480cdd2d70cbb0f556ee",
+        "case": {
+          "id": "color-flat-neutral",
+          "palette": "neutral",
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/neutral-iso12800-prior-RGGB-observation.npz",
+          "sha256": "89c2c1c29cabdb9364b776bb6dd5ef4d217df98d41b94313baf260b1a0aa70a7",
+          "target_camera_RGB": [
+            0.09,
+            0.18,
+            0.12
+          ],
+          "draws_per_pattern": 1
+        },
+        "model": {
+          "path": "/mnt/external/demosaic/models/dino-convnext-palette-wide-b16-v60-step4000.pt",
+          "sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+          "step": 4000,
+          "label": "dino-convnext-palette-wide-b16-v60:step4000",
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "convnext-pyramid",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false
+          }
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470588,
+            -0.0588235294,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            1.1176470588,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            -0.0588235294,
+            1.1176470588
+          ]
+        ],
+        "conditioning": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "display_exposure": 1.0,
+        "reference": "Exact uniform analytic target, not a real photograph or a newly sampled degradation."
+      },
+      "actually_viewed": true,
+      "visual_review_evidence": "Original four main triplets viewed; four additional v2 triplets viewed, with all v3 whole-file PNG hashes identical"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/palette-full4k-selected-CPU-wide-fabric-mean.png",
+      "sha256": "f3132b25756effdb38b57642a5403b4b1b53962e23d45b6921ac07bd47dd4fd3",
+      "source": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-colored-CPU-v1/crop-8030263e7c7bb354.png",
+      "model": "wide",
+      "crop_receipt": {
+        "image": "crop-8030263e7c7bb354.png",
+        "caption": "color-flat-fabric-mean / dino-convnext-palette-wide-b16-v60:step4000 / CPU FP32",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Restored / step4000",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "f3132b25756effdb38b57642a5403b4b1b53962e23d45b6921ac07bd47dd4fd3",
+        "case": {
+          "id": "color-flat-fabric-mean",
+          "palette": "fabric-mean",
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-mean-iso12800-prior-RGGB-observation.npz",
+          "sha256": "7c2e2575b08152593e1678b2a58d763f79c53eb61a7fe8de43d4f33e25680438",
+          "target_camera_RGB": [
+            0.4460826468449295,
+            0.4224426811812077,
+            0.09690847238308323
+          ],
+          "draws_per_pattern": 1
+        },
+        "model": {
+          "path": "/mnt/external/demosaic/models/dino-convnext-palette-wide-b16-v60-step4000.pt",
+          "sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+          "step": 4000,
+          "label": "dino-convnext-palette-wide-b16-v60:step4000",
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "convnext-pyramid",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false
+          }
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470588,
+            -0.0588235294,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            1.1176470588,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            -0.0588235294,
+            1.1176470588
+          ]
+        ],
+        "conditioning": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "display_exposure": 1.0,
+        "reference": "Exact uniform analytic target, not a real photograph or a newly sampled degradation."
+      },
+      "actually_viewed": true,
+      "visual_review_evidence": "Original four main triplets viewed; four additional v2 triplets viewed, with all v3 whole-file PNG hashes identical"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/palette-full4k-selected-CPU-control-fabric-cyclic-gbr.png",
+      "sha256": "32367b82807609a06e67852a1a301976b7e70cc6475e07a15a874c34fc3a3bf8",
+      "source": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-selected-color-independent-v3/crop-305a1ff116d96a16.png",
+      "model": "control",
+      "crop_receipt": {
+        "image": "crop-305a1ff116d96a16.png",
+        "caption": "dino-convnext-palette-control-b16-v59:step4000 / fabric-cyclic-gbr / saved arrays",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "32367b82807609a06e67852a1a301976b7e70cc6475e07a15a874c34fc3a3bf8",
+        "case": {
+          "id": "color-flat-fabric-cyclic-gbr",
+          "palette": "fabric-cyclic-gbr",
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-cyclic-gbr-iso12800-prior-RGGB-observation.npz",
+          "sha256": "f9f0bc3ddfb1a62251e94d929083061861ed99e70d1fb197c822484042b8f68a",
+          "target_camera_RGB": [
+            0.4224426811812077,
+            0.09690847238308323,
+            0.4460826468449295
+          ],
+          "draws_per_pattern": 1
+        },
+        "model": {
+          "path": "/mnt/external/demosaic/models/dino-convnext-palette-control-b16-v59-step4000.pt",
+          "sha256": "a6e494a121b99e311c6be4d24794929f625c3690448588f7d3d1c1af3273dadc",
+          "step": 4000,
+          "label": "dino-convnext-palette-control-b16-v59:step4000",
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "convnext-pyramid",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false
+          }
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "conditioning": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "display_exposure": 1.0,
+        "reference": "Exact uniform analytic target, not a real photograph."
+      },
+      "actually_viewed": true,
+      "visual_review_evidence": "Original four main triplets viewed; four additional v2 triplets viewed, with all v3 whole-file PNG hashes identical"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/palette-full4k-selected-CPU-control-fabric-cyclic-brg.png",
+      "sha256": "6839c6dbcfee4ebd256617e4c285ce21e0aeb311ff881d6be15a77de383d9583",
+      "source": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-selected-color-independent-v3/crop-af9b5948bed1edac.png",
+      "model": "control",
+      "crop_receipt": {
+        "image": "crop-af9b5948bed1edac.png",
+        "caption": "dino-convnext-palette-control-b16-v59:step4000 / fabric-cyclic-brg / saved arrays",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "6839c6dbcfee4ebd256617e4c285ce21e0aeb311ff881d6be15a77de383d9583",
+        "case": {
+          "id": "color-flat-fabric-cyclic-brg",
+          "palette": "fabric-cyclic-brg",
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-cyclic-brg-iso12800-prior-RGGB-observation.npz",
+          "sha256": "d88558737afb8d01dec4945c4d32dcd676da36fa4fe9f770d9bdf04941b4ab0b",
+          "target_camera_RGB": [
+            0.09690847238308323,
+            0.4460826468449295,
+            0.4224426811812077
+          ],
+          "draws_per_pattern": 1
+        },
+        "model": {
+          "path": "/mnt/external/demosaic/models/dino-convnext-palette-control-b16-v59-step4000.pt",
+          "sha256": "a6e494a121b99e311c6be4d24794929f625c3690448588f7d3d1c1af3273dadc",
+          "step": 4000,
+          "label": "dino-convnext-palette-control-b16-v59:step4000",
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "convnext-pyramid",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false
+          }
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "conditioning": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "display_exposure": 1.0,
+        "reference": "Exact uniform analytic target, not a real photograph."
+      },
+      "actually_viewed": true,
+      "visual_review_evidence": "Original four main triplets viewed; four additional v2 triplets viewed, with all v3 whole-file PNG hashes identical"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/palette-full4k-selected-CPU-wide-fabric-cyclic-gbr.png",
+      "sha256": "d5b98f3a89ce47daa82ee37c3f001ccc22ed6b62cc7c7fc6a60f11bb8915b680",
+      "source": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-selected-color-independent-v3/crop-71bd7071f2ec597f.png",
+      "model": "wide",
+      "crop_receipt": {
+        "image": "crop-71bd7071f2ec597f.png",
+        "caption": "dino-convnext-palette-wide-b16-v60:step4000 / fabric-cyclic-gbr / saved arrays",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "d5b98f3a89ce47daa82ee37c3f001ccc22ed6b62cc7c7fc6a60f11bb8915b680",
+        "case": {
+          "id": "color-flat-fabric-cyclic-gbr",
+          "palette": "fabric-cyclic-gbr",
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-cyclic-gbr-iso12800-prior-RGGB-observation.npz",
+          "sha256": "f9f0bc3ddfb1a62251e94d929083061861ed99e70d1fb197c822484042b8f68a",
+          "target_camera_RGB": [
+            0.4224426811812077,
+            0.09690847238308323,
+            0.4460826468449295
+          ],
+          "draws_per_pattern": 1
+        },
+        "model": {
+          "path": "/mnt/external/demosaic/models/dino-convnext-palette-wide-b16-v60-step4000.pt",
+          "sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+          "step": 4000,
+          "label": "dino-convnext-palette-wide-b16-v60:step4000",
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "convnext-pyramid",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false
+          }
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "conditioning": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "display_exposure": 1.0,
+        "reference": "Exact uniform analytic target, not a real photograph."
+      },
+      "actually_viewed": true,
+      "visual_review_evidence": "Original four main triplets viewed; four additional v2 triplets viewed, with all v3 whole-file PNG hashes identical"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/palette-full4k-selected-CPU-wide-fabric-cyclic-brg.png",
+      "sha256": "cb8602a63971e5d9753421678a042a8028ee839c03646e69ae08538016355dc2",
+      "source": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-selected-color-independent-v3/crop-f445c7e6b8dde4b4.png",
+      "model": "wide",
+      "crop_receipt": {
+        "image": "crop-f445c7e6b8dde4b4.png",
+        "caption": "dino-convnext-palette-wide-b16-v60:step4000 / fabric-cyclic-brg / saved arrays",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "cb8602a63971e5d9753421678a042a8028ee839c03646e69ae08538016355dc2",
+        "case": {
+          "id": "color-flat-fabric-cyclic-brg",
+          "palette": "fabric-cyclic-brg",
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-cyclic-brg-iso12800-prior-RGGB-observation.npz",
+          "sha256": "d88558737afb8d01dec4945c4d32dcd676da36fa4fe9f770d9bdf04941b4ab0b",
+          "target_camera_RGB": [
+            0.09690847238308323,
+            0.4460826468449295,
+            0.4224426811812077
+          ],
+          "draws_per_pattern": 1
+        },
+        "model": {
+          "path": "/mnt/external/demosaic/models/dino-convnext-palette-wide-b16-v60-step4000.pt",
+          "sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+          "step": 4000,
+          "label": "dino-convnext-palette-wide-b16-v60:step4000",
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "convnext-pyramid",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false
+          }
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "conditioning": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "display_exposure": 1.0,
+        "reference": "Exact uniform analytic target, not a real photograph."
+      },
+      "actually_viewed": true,
+      "visual_review_evidence": "Original four main triplets viewed; four additional v2 triplets viewed, with all v3 whole-file PNG hashes identical"
+    }
+  ],
+  "scope": "Four selected colors/two conditions/four CFAs, one draw per case, same old32 CPU observations. Not the prospective147-color CUDA grid or photographic/real evidence. V43 has a different initialization/training history. No inference, new random draws, output fitting or RAW decoding in this review.",
+  "auditor_error_and_recovery": "The first invocation used an invalid additional-palette name and failed with StopIteration after creating an empty v1 directory. Correct-name v2 completed. The current auditor now rejects invalid names before array work or output/CUDA creation; actual negative check passed. Full v3 positive replay preserves all384 audited fields and8 whole native PNG hashes. Frozen queued tools are unchanged.",
+  "source_archive": {
+    "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-selected-color-independent-v3/executed-review-source/audit_saved_color_flats.py": "b89f2fc8f933721b176af354e62a75c4316f89271cdd15da65d18d2918425ec6",
+    "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-selected-color-independent-v3/executed-review-source/publish_palette_full4k_selected_colors.py": "c6ca509cfb3fb4798841ed2038f27bbd0c8618d51ab6719301f1632f3cadf390",
+    "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-selected-color-independent-v3/executed-review-source/prepare_color_grid.py": "bbeb513059fe6d505e7f18b7bcd512753a876faf3f9495682e05d3246b1caccb",
+    "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-selected-color-independent-v3/executed-review-source/audit_colored_flats.py": "873f8caec1fe11f38940ca965aa216aa0d253fd6257edc0005bcc16460c996ac"
+  },
+  "publication_driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/publish_palette_full4k_selected_colors.py",
+    "sha256": "c6ca509cfb3fb4798841ed2038f27bbd0c8618d51ab6719301f1632f3cadf390"
+  }
+}

@@ -17,8 +17,9 @@ The [completed ConvNeXt pyramid review](docs/dino-convnext-pyramid-v58-10k-revie
 ties that photo mean and retains color/detail limitations.
 The [released RAW reference comparison](docs/nonlocal-reference-full-review.md)
 adds a recent comparator with mixed real/synthetic results.
-The [matched palette review at 1,000 updates](docs/wide-flat-palette-first1k-review.md)
-finds uneven color changes across a broader hue grid; neither arm is promoted.
+The [completed 4,000-update palette review](docs/wide-flat-palette-full4k-review.md)
+finds small photo gains and better highly saturated colors; bright-color errors,
+fine-detail loss and paired-real tradeoffs still prevent promotion.
 
 Native 160×160 validation crops: noisy → denoised → GT, using V43 step 2000
 (FP16, ISO12800 synthetic noise prior). These are 100% crops at the 8×8-binned

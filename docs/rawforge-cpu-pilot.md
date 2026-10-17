@@ -5,10 +5,16 @@ small CPU pilot does not justify replacing V43. Both remove noise and lose
 fine parachute cords. The JDD variant retains more fence/foliage structure than
 JDD256, with more residual grain; neither resolves every GFX detail. Their two
 synthetic-photo scores are below saved V43 on the same observations and ROI.
-**Keep V43. Original-export GPU checks are queued; CPU-port quality is not an
-author-reproduced GPU benchmark.**
+**Keep V43. The [original-export GPU follow-up](rawforge-original-gpu-review.md)
+now passes the fixed no-autocast parity bound and reviews all 24 new triplets.**
 
 [Complete source, weights, input, crop and audit receipts](results/rawforge-cpu-pilot.json).
+The [CPU renderer preparation](results/rawforge-original-gpu-render-queue.json)
+preceded the completed original GPU checker and 24 native triplets: both models, both
+precision modes, two fixed photos and all four GFX regions. Its unit conversion
+already matches all twelve saved CPU predictions bit for bit and reconstructs
+their 36 native panels exactly. Genuine GPU rendering and visual review are
+now complete; those later results establish the selected numerical comparison.
 
 ## Released files and explicit CPU adaptation
 
@@ -35,7 +41,9 @@ shared Device constant, leaves all other graph text intact, and preserves all
 164 state tensors exactly through save/reload. We retain the publisher's F16
 input rounding, then expand to F32 for CPU computation. Finite rectangular
 64×80 forwards and repeated execution pass. This is an identified device port,
-not an unmodified author CPU pipeline. Original CUDA parity remains pending.
+not an unmodified author CPU pipeline. The later
+[original CUDA check](rawforge-original-gpu-review.md) now passes the fixed
+selected no-autocast comparison bound.
 
 ## Input units and checks
 
@@ -177,10 +185,10 @@ mesh crossings are weaker and grainier. Fine foliage stays soft in both.
 All twelve primary triplets, both saved V43 photo rows and both direct GFX rows
 were actually viewed.
 
-## Original GPU check queued
+## Completed original GPU follow-up
 
-Controller 1784864 (creation 1792200897.58) is waiting without a GPU child for
-the existing palette-review owner 1753053 to exit successfully. It will run the
+Controller 1784864 (creation 1792200897.58) waited for the existing palette-review
+owner 1753053 to exit successfully, then ran the
 **original signed exports without graph modification** on all twelve saved
 inputs, first without enclosing autocast and then with publisher FP16 autocast.
 Captured convolution TF32 flags remain part of the export; no IEEE-FP32 claim
@@ -190,9 +198,12 @@ tolerance; FP16 differences are descriptive, with no equality assumption or
 automatic model promotion. The actual premature invocation rejected incomplete
 preceding work before creating outputs or a CUDA context.
 
-This adds a recent comparator while the original matched palette trial remains
-frozen. Its final training/native review, original-export GPU parity, broader
-real-photo quality, SOTA and the 100MP/10s objective remain unresolved.
+The [completed GPU/native review](rawforge-original-gpu-review.md) preserves all
+24 outputs and verifies the selected no-autocast parity bound. Its renderer
+and all controllers have exited; all 24 new triplets were actually viewed.
+The [complete palette review](wide-flat-palette-full4k-review.md) also retains
+the original frozen comparison. Broad real-photo superiority, SOTA and the
+100MP/10s objective remain unresolved.
 
 ## Complete primary gallery
 

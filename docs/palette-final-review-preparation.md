@@ -1,11 +1,11 @@
 # Final palette review: serialized checks prepared
 
-The original 4,000-update comparison is still training. A separately owned
-controller waits for its **actual successful process exit** before any further
-GPU work. It will independently audit both complete checkpoints and the main
-photo/paired/analytic/GFX/three-camera reports, evaluate the same frozen hue
-grid, and compare source-balanced scores with saved V43 and parent results.
-Native visual review and the model decision remain separate pending work.
+The original 4,000-update comparison and its serialized review are now complete.
+The separate controller waited for the producer's **actual successful process
+exit**, independently audited the complete checkpoints and photo/paired/
+analytic/GFX/three-camera reports, replayed the frozen hue grid and compared
+source-balanced scores with saved V43 and parent results. Both controllers have
+exited. [Completed quantitative and native review](wide-flat-palette-full4k-review.md).
 
 [Actual queue, frozen tools and verification receipts](results/palette-final-review-preparation.json).
 [First1k quality review](wide-flat-palette-first1k-review.md).
@@ -37,7 +37,7 @@ The complete first1k audit still passes 87,962 rows / 252 intervals / all
 artifacts, and all 48 saved-parent comparisons remain identical. Actual
 premature final4k audit/evaluator invocations refuse to create outputs.
 
-The queued eleven-script toolset and model package are frozen independently.
-It leaves the running training, original manifests and standing GFX captures
-untouched. The separate [physical preprocessing check](physical-frontend-color-check.md)
+The executed eleven-script toolset and model package remain frozen independently.
+Original manifests and standing GFX captures remain unchanged.
+The separate [physical preprocessing check](physical-frontend-color-check.md)
 does not introduce a model change or imply that final quality has improved.

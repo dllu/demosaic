@@ -243,7 +243,9 @@ The [RawForge publisher registry](https://github.com/rymuelle/RawForge/blob/79f1
 offers blind six-channel joint models with registered256/768px serving tiles.
 The [new CPU comparison](rawforge-cpu-pilot.md) verifies publisher signatures and
 all tensors, explicitly ports one CUDA device constant, and reviews fixed
-photo/GFX crops. Original-export GPU checks are queued behind existing work.
+photo/GFX crops. The [completed original-export GPU follow-up](rawforge-original-gpu-review.md)
+passes its fixed no-autocast CPU comparison bound and reviews all 24 native
+triplets; no model is promoted from those six selected observations.
 Training geometry/membership and separate weight-license terms are unverified;
 no new default or SOTA claim follows.
 

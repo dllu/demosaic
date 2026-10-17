@@ -53,6 +53,20 @@ def main(report_path, output, extra_palettes):
         assert len(original["cases"]) == 32
     assert plan["cases"] == original["cases"]
     assert plan["ROI_xywh"] == original["roi_xywh"] == [48, 48, 160, 160]
+    extra_indices = []
+    for palette in extra_palettes:
+        indices = [
+            i
+            for i, case in enumerate(plan["cases"])
+            if case["palette"] == palette
+            and case["pattern"] == "RGGB"
+            and case["condition"]["name"] == "iso12800-prior"
+        ]
+        if len(indices) != 1:
+            raise ValueError(
+                f"Additional palette {palette!r} requires exactly one RGGB iso12800-prior case"
+            )
+        extra_indices.append(indices[0])
     output = writable_path(output)
     if output.exists():
         raise ValueError("Audit output exists; choose a new directory")
@@ -101,14 +115,7 @@ def main(report_path, output, extra_palettes):
     output.mkdir(parents=True, exist_ok=False)
     extra = []
     for model_index, model in enumerate(report["checkpoints"]):
-        for palette in extra_palettes:
-            index = next(
-                i
-                for i, c in enumerate(plan["cases"])
-                if c["palette"] == palette
-                and c["pattern"] == "RGGB"
-                and c["condition"]["name"] == "iso12800-prior"
-            )
+        for palette, index in zip(extra_palettes, extra_indices, strict=True):
             batch = arrays[index]
             noisy = malvar(batch["packed"], batch["colors"], batch["wb"])
             p = predictions[model_index, index]

@@ -1,18 +1,22 @@
 # Wider smooth-color palette: matched trial
 
-The running training comparison targets the saturated flat-field failures
+The matched training comparison targets the saturated flat-field failures
 in the [mature model review](mature-color-flat-review.md). The optional
 `flat_chroma_stops` data setting is implemented with a default of zero. CPU
 engineering passes, including a complete restart from the genuine mature
 ConvNeXt parent. The [genuine CUDA checks](results/wide-flat-palette-cuda-validation.json)
-also pass. **Trained quality gains remain unproven.**
+also pass. The [completed original4k review](wide-flat-palette-full4k-review.md)
+finds a small photo gain and substantial bright high-saturation improvements
+from the wider palette, with unresolved color/detail and real-camera tradeoffs.
 The [completed first1k review](wide-flat-palette-first1k-review.md) finds mixed
 color changes and no convincing detail gain. Its prospective hue sweep still
-has large bright-field errors. The [whole-state continuation is running](results/wide-flat-palette-full4k-launch.json):
-control, then wider palette, then full evaluation under the original
-additional4k schedules. Neither first1k model is promoted.
-The [serialized final review](palette-final-review-preparation.md) is queued
-behind that owner's actual exit, with unchanged reference predictions reused.
+has large bright-field errors. Both [whole-state continuations](results/wide-flat-palette-full4k-launch.json)
+have finished their original additional 4,000 updates and complete review.
+The [separate selected-color CPU diagnosis](wide-flat-palette-full4k-selected-colors.md)
+finds smaller magenta bias in the wider arm, but warm errors remain substantial.
+Neither model is promoted.
+The [serialized final review](palette-final-review-preparation.md) completed
+after that owner's actual exit, reusing unchanged reference predictions.
 [Original launch receipt](results/wide-flat-palette-first1k-launch.json).
 [Complete CPU receipt, tests, source checks and prepared configurations](results/wide-flat-palette-preparation.json).
 
@@ -136,18 +140,19 @@ exactly. Peak CUDA allocation is 7.200GB in this fixture.
 
 These checks do not claim identical CUDA optimization after a restart, production
 throughput, convergence or quality. The CPU four-vs2+2 equivalence is separate.
-The running first1k workflow now uses production fractions and workers. Its
-quality evaluation and subsequent native/statistical review remain pending.
+The first1k workflow used production fractions and workers; its
+[native/statistical review](wide-flat-palette-first1k-review.md) is complete.
 
-After those checks, evaluate the first1k gate under the original4k schedule,
+The first1k gate was evaluated under the original4k schedule,
 with full427 photos, known4/unseen5, colored and neutral fields, weak carriers,
 full102MP GFX including foliage/fence, and the three cached personal cameras.
-Use native exact-GT triplets and accurately labeled real references. Source
+with native exact-GT triplets and accurately labeled real references. Source
 bootstrap intervals do not quantify training-repeat uncertainty. Any further
-updates retain the planned schedule; no early-gate convergence or SOTA claim.
+updates retained the planned schedule; no early-gate convergence or SOTA claim.
 
 A [prospective 147-color grid](prospective-color-grid.md) was frozen before the
-separate trial-score outputs. Its1,176 audited observations will check broader
-hue consistency after the owned workflow exits, alongside the original four
-post-hoc colors and all photographic/real comparisons. No grid quality result
-is available yet.
+separate trial-score outputs. Its 1,176 audited observations exposed uneven hue
+behavior at the [completed first1k gate](wide-flat-palette-first1k-review.md).
+The [completed final4k replay](wide-flat-palette-full4k-review.md) substantially
+improves bright highly saturated groups but retains moderate-saturation errors.
+The selected CPU colors above do not replace that broader grid.
