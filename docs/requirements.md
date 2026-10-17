@@ -6,7 +6,10 @@ not just software that executes. This checklist records the evidence required.
 Latest: the [original V67 joint10000 review](raw-kernel-phase-joint-v67-full10k-review.md)
 is complete and not promoted. The stronger matched RGB+DINO V63/V64 models are
 [finishing their original20000 schedules](long-commons-v63-v64-full20k.md) after
-genuine full-state resume checks; their final quality is pending. The separate
+genuine full-state resume checks. The control has completed20k; its
+[interim eight-context CPU comparison](long-commons-v63-control-original20k-CPU-review.md)
+has mixed photo/color progress and persistent soft detail. Expanded20k and
+the complete two-arm quality review remain pending. The separate
 [85,048-source matching4×/8× corpus](commons-incoming-v5.md) is completely audited
 and content spot-checked, with unchanged old holdouts. SOTA, decisive real-photo
 superiority and the10-second speed target remain unmet/unproven.

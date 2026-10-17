@@ -78,8 +78,18 @@ training failure. No automatic retry is installed.
 The final state gate checks91/91/89, complete RNG, source/data/recipe/lineage,
 all802 training rows including161 original and641 resumed, first-resumed input
 witnesses and the original LR schedule through1e-6. Both arms must share every
-logged step/domain/LR and all unchanged native/paired hashes. No completed20k
-state or quality is claimed yet.
+logged step/domain/LR and all unchanged native/paired hashes.
+
+The control has now completed and passed this boundary gate. Its immutable20k
+checkpoint hash is
+`ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5`.
+The expanded arm then started as child169989/creation1792243965.62. An
+[interim CPU native comparison against control4k](long-commons-v63-control-original20k-CPU-review.md)
+executes eight fixed observations at both endpoints, with independent array
+checks and sixteen actual native views. The fabric photograph regresses,
+building improves slightly, and two selected colors improve; GFX detail stays
+soft. This does not promote the control. Expanded20k and the full two-arm review
+remain pending; these launch identities should be checked against live processes.
 
 Primary-review owner PID3231021/creation1792234172.79 waits for the exact
 training controller to finish and exit. Its status is

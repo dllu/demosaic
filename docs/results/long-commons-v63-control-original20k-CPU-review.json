@@ -1,0 +1,4704 @@
+{
+  "status": "completed-actual-control-original20k-CPU-array-and-native-comparison",
+  "created_UTC": "2026-10-17T13:36:46.945905+00:00",
+  "checkpoint_endpoints": [
+    {
+      "path": "/mnt/external/demosaic/models/dino-convnext-wide-long-control-b16-v63-step4000.pt",
+      "sha256": "5f29bd7efb94b72491cff22575c0565995326644823bcb802444214c8f2c6bd6"
+    },
+    {
+      "path": "/mnt/external/demosaic/models/dino-convnext-wide-long-control-b16-v63-step20000.pt",
+      "sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5"
+    }
+  ],
+  "closed_original20k_boundary": {
+    "receipt": {
+      "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/control-boundary-check.json",
+      "sha256": "627a8519b9eca1aa744a148aa74e444e60850d5c83283c189f74383c1bf0e8ae"
+    },
+    "result": {
+      "arm": "control",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/runs/dino-convnext-wide-long-control-b16-v63-full20k/last.pt",
+        "sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5"
+      },
+      "step": 20000,
+      "original_planned_updates": 20000,
+      "source_bundle_sha256": "c9058d90d7d77e61ad7ec53293b805d8ea72da173318e38d1329e138215544c8",
+      "finite91model91EMA89Adam": true,
+      "complete_RNG_present": true,
+      "original_recipe_source_data_and_initialization_lineage_exact": true,
+      "normalization_buffers_bitwise_parent": true,
+      "original4000_checkpoint_log_review_preserved": true,
+      "training_log": {
+        "path": "/mnt/external/demosaic/runs/dino-convnext-wide-long-control-b16-v63-full20k/metrics.jsonl",
+        "sha256": "06637b6db3f4c92da1a5dd14e792f495226f043b2b0840f1084fe273884bc1a7",
+        "train_rows": 802,
+        "prefix_rows": 161,
+        "resumed_rows": 641
+      },
+      "every_logged_LR_matches_original20000_schedule": true,
+      "both_first_resumed_observation_hashes_domains_LRs_match_discarded_fixture": true,
+      "changed_parameter_counts": {
+        "model": 89,
+        "ema": 89
+      },
+      "final_LR": 1.0000000000000002e-06,
+      "frozen_checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-convnext-wide-long-control-b16-v63-step20000.pt",
+        "sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5"
+      }
+    }
+  },
+  "executions": {
+    "first4k": {
+      "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/first4k/result.json",
+      "sha256": "76c80b974838f22d5736f9fd75dcf2c8f601c72f5f64d6946a74b1b05afef148"
+    },
+    "final20k": {
+      "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/final20k/result.json",
+      "sha256": "8fbfb04e8bc2d7ae6f35b2a4aa804ac2f3f0966841526f5559ff3e85ba988d49"
+    }
+  },
+  "plans": {
+    "first4k": {
+      "receipt": {
+        "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/first4k/plan.json",
+        "sha256": "7a087e0e8e7d1e716c2def8003950f7357c2a3c410f30e4328a9c91f2fb5526f"
+      },
+      "result": {
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/models/dino-convnext-wide-long-control-b16-v63-step4000.pt",
+          "sha256": "5f29bd7efb94b72491cff22575c0565995326644823bcb802444214c8f2c6bd6"
+        },
+        "step": 4000,
+        "boundary": null,
+        "observations": {
+          "path": "/mnt/external/demosaic/benchmarks/affine-context-dependence-CPU-v1/plan.json",
+          "sha256": "cd07279397ea138304940e106beb0c1385f71407fa258f21437e68867b3f85a2"
+        },
+        "driver": {
+          "path": "/home/dllu/proj/demosaic/.cache/review_control_checkpoint_cpu.py",
+          "sha256": "d5065c494f3ca60dac2b485895625139094292bb19ebcec409bf450855911a31"
+        },
+        "source_files": {
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/paired.py": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/__init__.py": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/suite.py": "1a094262e1772f5df8a54cb176c2f3da189d78f48ead3f8002f24e84802059a4",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/dino_pyramid.py": "246944874671ceb4449b0487fcb347a00f8b82d713d5b4c9fee5a7c8a68aa95f",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/metrics.py": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/nonlocal_reference.py": "7e4a00e9d90a61b772da9c1a7414bf499f84b9c9bb0239fd250fb8263dfb3f88",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/losses.py": "548b1481a035ad937d4a046754a74e70684864a9842296765c62079a002e5120",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/audit.py": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/inference.py": "911e71e8dcbeb1872ed591bc5234ed2b79bae063a859b4704516537d94a1df0b",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/noise.py": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/data.py": "3c8855fe9d6e24d5368f356528ed217a544f185d84f58356eebfb2048cd92197",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/color.py": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/prepare.py": "e4c0733bb260c289b3ce8aaf5f393abc5919d8d81cdcf462b70032d790429712",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/textures.py": "b4bc304a50de272cf7fcba272e67b828c163466ffc23ea3337a6a66f076dc664",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/paired_training.py": "71a2481213bba174bd3d6b3de9ae9b89f88333635810e15d0958352d9d8d053d",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/reporting.py": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/cli.py": "a34d98b1eab4479f67ba5a51b6c8a428db4d8ccf5ee097cd1369bd0cd1ead542",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/io.py": "0a1599ffe7f6d935e92fc71e6b086430c6f82678a74952c3b8f31155a0bea83b",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/gaussian.py": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/dino_adaptation.py": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/paired_admission.py": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/raw_admission.py": "1948afbbf05129190273ab77466f26d9d27dc942716beaab16f077c8c3330803",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/model.py": "c37f530b3c4265e23af8d04b81e65e19b8ee585538874445e4a95bc337f23a71",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/cfa.py": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/prior.py": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/safety.py": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/calibration.py": "e86f4c602a6cd7fd855d0bcfeb790cf17ed87611f19d97926f9db174909b2d26",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/precision.py": "9aa850fb5ee0e9abc3e9adc4847ce3518c1acb37c93f6bc54ff9206bb0c94c3a",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/train.py": "d9c7bcf8dcdd6a0ccac6f83cfdbfd9079582cade46648fee0163d2d0dccb0616",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/registration.py": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/pretrained_rgb.py": "10ea25fc01bf561a3ea9087002566eb319717c338f44f54d2da46fc6ee0d7026",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/reference.py": "54ed094d58e245a56993ea3ce3ef9e21d2164e902d41d03bba9132bacd22891f",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/real_suite.py": "69d3d403d36b1230e35083cc55e2c1a485f82cd5058f6be83fb3d5c0c18a6825",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/vst.py": "355124a374177f1c08271834149c5979ab3477fdf255c60aa7cee0d47792a76b",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/raw_clean.py": "a143ce351ac4e1b2425d4d561000d3e8934477fe9172c88f90ce76d9b32a7a6c",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/realdata.py": "ed24db2b066531281a196e6fa074130cb0ee78a640eae5ccaaace234f5ad5421"
+        },
+        "runtime": "CPU FP32/contiguous/B1/two threads; ordinary EMA inference, no alternate normalization",
+        "scope": "Eight fixed saved observations: two exact-target photos, two selected colors and four standing GFX contexts. Same CPU draws for both trajectory endpoints, separate from historical CUDA/full427. GFX ISO100 AHD is independent, not GT. No new noise, reference fit, training, GPU or cold RAW decode."
+      }
+    },
+    "final20k": {
+      "receipt": {
+        "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/final20k/plan.json",
+        "sha256": "8ebe8cada819c5b67df0bd300085b8c7a8c98ffcd98487dd926fad0cd368c2de"
+      },
+      "result": {
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/models/dino-convnext-wide-long-control-b16-v63-step20000.pt",
+          "sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5"
+        },
+        "step": 20000,
+        "boundary": {
+          "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/control-boundary-check.json",
+          "sha256": "627a8519b9eca1aa744a148aa74e444e60850d5c83283c189f74383c1bf0e8ae"
+        },
+        "observations": {
+          "path": "/mnt/external/demosaic/benchmarks/affine-context-dependence-CPU-v1/plan.json",
+          "sha256": "cd07279397ea138304940e106beb0c1385f71407fa258f21437e68867b3f85a2"
+        },
+        "driver": {
+          "path": "/home/dllu/proj/demosaic/.cache/review_control_checkpoint_cpu.py",
+          "sha256": "d5065c494f3ca60dac2b485895625139094292bb19ebcec409bf450855911a31"
+        },
+        "source_files": {
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/paired.py": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/__init__.py": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/suite.py": "1a094262e1772f5df8a54cb176c2f3da189d78f48ead3f8002f24e84802059a4",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/dino_pyramid.py": "246944874671ceb4449b0487fcb347a00f8b82d713d5b4c9fee5a7c8a68aa95f",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/metrics.py": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/nonlocal_reference.py": "7e4a00e9d90a61b772da9c1a7414bf499f84b9c9bb0239fd250fb8263dfb3f88",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/losses.py": "548b1481a035ad937d4a046754a74e70684864a9842296765c62079a002e5120",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/audit.py": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/inference.py": "911e71e8dcbeb1872ed591bc5234ed2b79bae063a859b4704516537d94a1df0b",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/noise.py": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/data.py": "3c8855fe9d6e24d5368f356528ed217a544f185d84f58356eebfb2048cd92197",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/color.py": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/prepare.py": "e4c0733bb260c289b3ce8aaf5f393abc5919d8d81cdcf462b70032d790429712",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/textures.py": "b4bc304a50de272cf7fcba272e67b828c163466ffc23ea3337a6a66f076dc664",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/paired_training.py": "71a2481213bba174bd3d6b3de9ae9b89f88333635810e15d0958352d9d8d053d",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/reporting.py": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/cli.py": "a34d98b1eab4479f67ba5a51b6c8a428db4d8ccf5ee097cd1369bd0cd1ead542",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/io.py": "0a1599ffe7f6d935e92fc71e6b086430c6f82678a74952c3b8f31155a0bea83b",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/gaussian.py": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/dino_adaptation.py": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/paired_admission.py": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/raw_admission.py": "1948afbbf05129190273ab77466f26d9d27dc942716beaab16f077c8c3330803",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/model.py": "c37f530b3c4265e23af8d04b81e65e19b8ee585538874445e4a95bc337f23a71",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/cfa.py": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/prior.py": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/safety.py": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/calibration.py": "e86f4c602a6cd7fd855d0bcfeb790cf17ed87611f19d97926f9db174909b2d26",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/precision.py": "9aa850fb5ee0e9abc3e9adc4847ce3518c1acb37c93f6bc54ff9206bb0c94c3a",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/train.py": "d9c7bcf8dcdd6a0ccac6f83cfdbfd9079582cade46648fee0163d2d0dccb0616",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/registration.py": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/pretrained_rgb.py": "10ea25fc01bf561a3ea9087002566eb319717c338f44f54d2da46fc6ee0d7026",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/reference.py": "54ed094d58e245a56993ea3ce3ef9e21d2164e902d41d03bba9132bacd22891f",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/real_suite.py": "69d3d403d36b1230e35083cc55e2c1a485f82cd5058f6be83fb3d5c0c18a6825",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/vst.py": "355124a374177f1c08271834149c5979ab3477fdf255c60aa7cee0d47792a76b",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/raw_clean.py": "a143ce351ac4e1b2425d4d561000d3e8934477fe9172c88f90ce76d9b32a7a6c",
+          "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work/src/demosaic/realdata.py": "ed24db2b066531281a196e6fa074130cb0ee78a640eae5ccaaace234f5ad5421"
+        },
+        "runtime": "CPU FP32/contiguous/B1/two threads; ordinary EMA inference, no alternate normalization",
+        "scope": "Eight fixed saved observations: two exact-target photos, two selected colors and four standing GFX contexts. Same CPU draws for both trajectory endpoints, separate from historical CUDA/full427. GFX ISO100 AHD is independent, not GT. No new noise, reference fit, training, GPU or cold RAW decode."
+      }
+    }
+  },
+  "independent_array_audits": {
+    "first4k": {
+      "receipt": {
+        "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/first4k/independent-audit.json",
+        "sha256": "226705f9d4b9472d422f2d8d5e9186c5ad172584d2d87d60ef7784006b8b07f4"
+      },
+      "result": {
+        "status": "completed-independent-eight-context-CPU-endpoint-array-audit",
+        "auditor": {
+          "path": "/home/dllu/proj/demosaic/.cache/audit_control_checkpoint_cpu.py",
+          "sha256": "86d715985388f4d5d1ba1c03d38cae0e45458ca9843d91bb57c8e8ff3905bec6"
+        },
+        "actual_execution": {
+          "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/first4k/result.json",
+          "sha256": "76c80b974838f22d5736f9fd75dcf2c8f601c72f5f64d6946a74b1b05afef148"
+        },
+        "camera_metric_scalars": 16,
+        "camera_max_difference": 1.3877787807814457e-17,
+        "PSNR_scalars": 8,
+        "PSNR_max_difference_dB": 1.8847961996470985e-05,
+        "records": [
+          {
+            "case": "exact-photo-0",
+            "independent_camera_ROI": {
+              "ROI_camera_RGB_RMSE": 0.016645203079310354,
+              "ROI_signed_channel_mean_error": [
+                -0.02104703787636936,
+                -0.004993830378203299,
+                -0.000704167896904453
+              ]
+            },
+            "independent_border8_PSNR": {
+              "linear_psnr": 36.37681641174971,
+              "srgb_psnr": 35.63443077168775
+            },
+            "whole_context_CFA_mean_diagnostics": [
+              {
+                "color": 0,
+                "samples": 16384,
+                "observed_mean": 0.4224484363773794,
+                "prediction_CFA_mean": 0.4048350930091731,
+                "observed_minus_prediction_CFA_mean": 0.017613343368206295,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.012019231915473938,
+                "target_CFA_mean": 0.4227816676932026,
+                "observed_minus_target_CFA_mean": -0.00033323131582319726,
+                "prediction_minus_target_CFA_mean": -0.017946574684029493,
+                "iid_unclipped_preADC_mean_std_proxy": 0.00026011465852016666
+              },
+              {
+                "color": 1,
+                "samples": 32768,
+                "observed_mean": 0.3933095247868996,
+                "prediction_CFA_mean": 0.38930821012358463,
+                "observed_minus_prediction_CFA_mean": 0.004001314663315006,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.01980604976415634,
+                "target_CFA_mean": 0.39332795968272927,
+                "observed_minus_target_CFA_mean": -1.8434895829651243e-05,
+                "prediction_minus_target_CFA_mean": -0.004019749559144657,
+                "iid_unclipped_preADC_mean_std_proxy": 0.00017756336010059403
+              },
+              {
+                "color": 2,
+                "samples": 16384,
+                "observed_mean": 0.0962399986487885,
+                "prediction_CFA_mean": 0.09542785019546028,
+                "observed_minus_prediction_CFA_mean": 0.0008121484533282208,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.01927119866013527,
+                "target_CFA_mean": 0.0962635294163472,
+                "observed_minus_target_CFA_mean": -2.353076755869099e-05,
+                "prediction_minus_target_CFA_mean": -0.0008356792208869118,
+                "iid_unclipped_preADC_mean_std_proxy": 0.00012900068399548993
+              }
+            ]
+          },
+          {
+            "case": "exact-photo-1",
+            "independent_camera_ROI": {
+              "ROI_camera_RGB_RMSE": 0.009372747229559539,
+              "ROI_signed_channel_mean_error": [
+                -0.00013728588533906517,
+                0.00017562592182039262,
+                -0.0005633382139534149
+              ]
+            },
+            "independent_border8_PSNR": {
+              "linear_psnr": 40.05745306579331,
+              "srgb_psnr": 35.70298364875132
+            },
+            "whole_context_CFA_mean_diagnostics": [
+              {
+                "color": 0,
+                "samples": 16384,
+                "observed_mean": 0.1151570166924768,
+                "prediction_CFA_mean": 0.11505973009455993,
+                "observed_minus_prediction_CFA_mean": 9.728659791686124e-05,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.01996336132287979,
+                "target_CFA_mean": 0.11544952592697698,
+                "observed_minus_target_CFA_mean": -0.000292509234500183,
+                "prediction_minus_target_CFA_mean": -0.0003897958324170442,
+                "iid_unclipped_preADC_mean_std_proxy": 0.00014013917520126252
+              },
+              {
+                "color": 1,
+                "samples": 32768,
+                "observed_mean": 0.2814758791647488,
+                "prediction_CFA_mean": 0.2815970507379104,
+                "observed_minus_prediction_CFA_mean": -0.0001211715731616117,
+                "sensor_white_sample_count": 7,
+                "minimum_observed": -0.011720342561602592,
+                "target_CFA_mean": 0.28167382024500404,
+                "observed_minus_target_CFA_mean": -0.00019794108025524698,
+                "prediction_minus_target_CFA_mean": -7.676950709363528e-05,
+                "iid_unclipped_preADC_mean_std_proxy": 0.00015101578462743868
+              },
+              {
+                "color": 2,
+                "samples": 16384,
+                "observed_mean": 0.234553448438531,
+                "prediction_CFA_mean": 0.23429908136259414,
+                "observed_minus_prediction_CFA_mean": 0.0002543670759368455,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.017178984358906746,
+                "target_CFA_mean": 0.2346802897681628,
+                "observed_minus_target_CFA_mean": -0.0001268413296318105,
+                "prediction_minus_target_CFA_mean": -0.000381208405568656,
+                "iid_unclipped_preADC_mean_std_proxy": 0.00019562411731756247
+              }
+            ]
+          },
+          {
+            "case": "fabric-mean",
+            "independent_camera_ROI": {
+              "ROI_camera_RGB_RMSE": 0.011924743232437817,
+              "ROI_signed_channel_mean_error": [
+                -0.019294862801907585,
+                -0.003606298577506095,
+                -0.001954392611223739
+              ]
+            },
+            "independent_border8_PSNR": {
+              "linear_psnr": 36.09650337983974,
+              "srgb_psnr": 36.0940973629755
+            },
+            "whole_context_CFA_mean_diagnostics": [
+              {
+                "color": 0,
+                "samples": 16384,
+                "observed_mean": 0.4460164421925583,
+                "prediction_CFA_mean": 0.41970417695119977,
+                "observed_minus_prediction_CFA_mean": 0.026312265241358546,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": 0.3154204785823822,
+                "target_CFA_mean": 0.4460826516151428,
+                "observed_minus_target_CFA_mean": -6.620942258450668e-05,
+                "prediction_minus_target_CFA_mean": -0.026378474663943052,
+                "iid_unclipped_preADC_mean_std_proxy": 0.0002670213742659304
+              },
+              {
+                "color": 1,
+                "samples": 32768,
+                "observed_mean": 0.422690270840576,
+                "prediction_CFA_mean": 0.4170998611389223,
+                "observed_minus_prediction_CFA_mean": 0.005590409701653698,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": 0.29286232590675354,
+                "target_CFA_mean": 0.4224427044391632,
+                "observed_minus_target_CFA_mean": 0.00024756640141276876,
+                "prediction_minus_target_CFA_mean": -0.005342843300240929,
+                "iid_unclipped_preADC_mean_std_proxy": 0.00018385683638176095
+              },
+              {
+                "color": 2,
+                "samples": 16384,
+                "observed_mean": 0.0967591006560724,
+                "prediction_CFA_mean": 0.094589691215333,
+                "observed_minus_prediction_CFA_mean": 0.0021694094407394005,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": 0.03592870384454727,
+                "target_CFA_mean": 0.09690847247838974,
+                "observed_minus_target_CFA_mean": -0.0001493718223173346,
+                "prediction_minus_target_CFA_mean": -0.002318781263056735,
+                "iid_unclipped_preADC_mean_std_proxy": 0.000129390682913216
+              }
+            ]
+          },
+          {
+            "case": "fabric-cyclic-gbr",
+            "independent_camera_ROI": {
+              "ROI_camera_RGB_RMSE": 0.06893221324238097,
+              "ROI_signed_channel_mean_error": [
+                -0.10053332656738348,
+                -0.015146730763080995,
+                -0.06241104490240104
+              ]
+            },
+            "independent_border8_PSNR": {
+              "linear_psnr": 23.180210052333145,
+              "srgb_psnr": 22.95583389975109
+            },
+            "whole_context_CFA_mean_diagnostics": [
+              {
+                "color": 0,
+                "samples": 16384,
+                "observed_mean": 0.4227908182238025,
+                "prediction_CFA_mean": 0.3219009096028458,
+                "observed_minus_prediction_CFA_mean": 0.1008899086209567,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": 0.2954421937465668,
+                "target_CFA_mean": 0.4224427044391632,
+                "observed_minus_target_CFA_mean": 0.0003481137846392812,
+                "prediction_minus_target_CFA_mean": -0.10054179483631742,
+                "iid_unclipped_preADC_mean_std_proxy": 0.0002600128315460974
+              },
+              {
+                "color": 1,
+                "samples": 32768,
+                "observed_mean": 0.09694844138277858,
+                "prediction_CFA_mean": 0.08038444222711405,
+                "observed_minus_prediction_CFA_mean": 0.016563999155664533,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": 0.030957724899053574,
+                "target_CFA_mean": 0.09690847247838974,
+                "observed_minus_target_CFA_mean": 3.996890438884293e-05,
+                "prediction_minus_target_CFA_mean": -0.01652403025127569,
+                "iid_unclipped_preADC_mean_std_proxy": 9.149302931029338e-05
+              },
+              {
+                "color": 2,
+                "samples": 16384,
+                "observed_mean": 0.44626516366952274,
+                "prediction_CFA_mean": 0.3819067134263605,
+                "observed_minus_prediction_CFA_mean": 0.06435845024316222,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": 0.3160969018936157,
+                "target_CFA_mean": 0.4460827112197876,
+                "observed_minus_target_CFA_mean": 0.00018245244973513763,
+                "prediction_minus_target_CFA_mean": -0.06417599779342709,
+                "iid_unclipped_preADC_mean_std_proxy": 0.0002670213917050314
+              }
+            ]
+          },
+          {
+            "case": "GFX-overcast-sky",
+            "independent_camera_ROI": null,
+            "independent_border8_PSNR": null,
+            "whole_context_CFA_mean_diagnostics": [
+              {
+                "color": 0,
+                "samples": 65536,
+                "observed_mean": 0.01320356127145944,
+                "prediction_CFA_mean": 0.013162242883495878,
+                "observed_minus_prediction_CFA_mean": 4.1318387963562575e-05,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.0206074807792902
+              },
+              {
+                "color": 1,
+                "samples": 131072,
+                "observed_mean": 0.02168499450614575,
+                "prediction_CFA_mean": 0.021624321929976986,
+                "observed_minus_prediction_CFA_mean": 6.0672576168763204e-05,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.016504712402820587
+              },
+              {
+                "color": 2,
+                "samples": 65536,
+                "observed_mean": 0.010725732184365983,
+                "prediction_CFA_mean": 0.01068198665257114,
+                "observed_minus_prediction_CFA_mean": 4.3745531794842085e-05,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.01691383495926857
+              }
+            ]
+          },
+          {
+            "case": "GFX-building-detail",
+            "independent_camera_ROI": null,
+            "independent_border8_PSNR": null,
+            "whole_context_CFA_mean_diagnostics": [
+              {
+                "color": 0,
+                "samples": 65536,
+                "observed_mean": 0.02769039877433188,
+                "prediction_CFA_mean": 0.02743049436349665,
+                "observed_minus_prediction_CFA_mean": 0.0002599044108352322,
+                "sensor_white_sample_count": 34,
+                "minimum_observed": -0.01831233501434326
+              },
+              {
+                "color": 1,
+                "samples": 131072,
+                "observed_mean": 0.04247587666281025,
+                "prediction_CFA_mean": 0.04243543519958237,
+                "observed_minus_prediction_CFA_mean": 4.0441463227874896e-05,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.018604423850774765
+              },
+              {
+                "color": 2,
+                "samples": 65536,
+                "observed_mean": 0.020319517541313975,
+                "prediction_CFA_mean": 0.01993464439089898,
+                "observed_minus_prediction_CFA_mean": 0.0003848731504149938,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.020934738218784332
+              }
+            ]
+          },
+          {
+            "case": "GFX-foliage",
+            "independent_camera_ROI": null,
+            "independent_border8_PSNR": null,
+            "whole_context_CFA_mean_diagnostics": [
+              {
+                "color": 0,
+                "samples": 65536,
+                "observed_mean": 0.009776595313581937,
+                "prediction_CFA_mean": 0.009857790117643983,
+                "observed_minus_prediction_CFA_mean": -8.119480406204582e-05,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.02729758806526661
+              },
+              {
+                "color": 1,
+                "samples": 131072,
+                "observed_mean": 0.017794913409652044,
+                "prediction_CFA_mean": 0.01769893000950118,
+                "observed_minus_prediction_CFA_mean": 9.59834001508647e-05,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.027035824954509735
+              },
+              {
+                "color": 2,
+                "samples": 65536,
+                "observed_mean": 0.005843543904570175,
+                "prediction_CFA_mean": 0.0058534400648637686,
+                "observed_minus_prediction_CFA_mean": -9.896160293593192e-06,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.02679516188800335
+              }
+            ]
+          },
+          {
+            "case": "GFX-chain-link-fence",
+            "independent_camera_ROI": null,
+            "independent_border8_PSNR": null,
+            "whole_context_CFA_mean_diagnostics": [
+              {
+                "color": 0,
+                "samples": 65536,
+                "observed_mean": 0.01274451671847393,
+                "prediction_CFA_mean": 0.012639807938498393,
+                "observed_minus_prediction_CFA_mean": 0.00010470877997553751,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.020542370155453682
+              },
+              {
+                "color": 1,
+                "samples": 131072,
+                "observed_mean": 0.022467291585587662,
+                "prediction_CFA_mean": 0.022335111849873357,
+                "observed_minus_prediction_CFA_mean": 0.00013217973571430508,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.021045949310064316
+              },
+              {
+                "color": 2,
+                "samples": 65536,
+                "observed_mean": 0.00842761483006782,
+                "prediction_CFA_mean": 0.008431236022365951,
+                "observed_minus_prediction_CFA_mean": -3.6211922981310707e-06,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.023327743634581566
+              }
+            ]
+          }
+        ],
+        "actual_new_neural_forwards": 0,
+        "CUDA_initialized": false,
+        "limits": "Independent NumPy64 camera/PSNR arithmetic; SSIM is not independently recomputed. CFA-mean innovations are input-consistency diagnostics, not a denoiser or real-reference quality score. The standard-error proxy assumes independent unclipped pre-ADC PG noise; clipping, quantization, spatial covariance and fitted real priors limit that interpretation. No output correction or parameter fitting is applied."
+      }
+    },
+    "final20k": {
+      "receipt": {
+        "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/final20k/independent-audit.json",
+        "sha256": "caecf7de6fec1d7cd56775ee91f021eb7b0bbc5eec6e4a36732d4cdd43ee58f9"
+      },
+      "result": {
+        "status": "completed-independent-eight-context-CPU-endpoint-array-audit",
+        "auditor": {
+          "path": "/home/dllu/proj/demosaic/.cache/audit_control_checkpoint_cpu.py",
+          "sha256": "86d715985388f4d5d1ba1c03d38cae0e45458ca9843d91bb57c8e8ff3905bec6"
+        },
+        "actual_execution": {
+          "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/final20k/result.json",
+          "sha256": "8fbfb04e8bc2d7ae6f35b2a4aa804ac2f3f0966841526f5559ff3e85ba988d49"
+        },
+        "camera_metric_scalars": 16,
+        "camera_max_difference": 0.0,
+        "PSNR_scalars": 8,
+        "PSNR_max_difference_dB": 2.4072949749154304e-05,
+        "records": [
+          {
+            "case": "exact-photo-0",
+            "independent_camera_ROI": {
+              "ROI_camera_RGB_RMSE": 0.02125372640940474,
+              "ROI_signed_channel_mean_error": [
+                -0.030042609456045283,
+                -0.007227348529928434,
+                -0.0011887851630235824
+              ]
+            },
+            "independent_border8_PSNR": {
+              "linear_psnr": 34.241242888433696,
+              "srgb_psnr": 33.69029971435869
+            },
+            "whole_context_CFA_mean_diagnostics": [
+              {
+                "color": 0,
+                "samples": 16384,
+                "observed_mean": 0.4224484363773794,
+                "prediction_CFA_mean": 0.3972021526076208,
+                "observed_minus_prediction_CFA_mean": 0.025246283769758564,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.012019231915473938,
+                "target_CFA_mean": 0.4227816676932026,
+                "observed_minus_target_CFA_mean": -0.00033323131582319726,
+                "prediction_minus_target_CFA_mean": -0.02557951508558176,
+                "iid_unclipped_preADC_mean_std_proxy": 0.00026011465852016666
+              },
+              {
+                "color": 1,
+                "samples": 32768,
+                "observed_mean": 0.3933095247868996,
+                "prediction_CFA_mean": 0.38740142997345284,
+                "observed_minus_prediction_CFA_mean": 0.005908094813446733,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.01980604976415634,
+                "target_CFA_mean": 0.39332795968272927,
+                "observed_minus_target_CFA_mean": -1.8434895829651243e-05,
+                "prediction_minus_target_CFA_mean": -0.005926529709276384,
+                "iid_unclipped_preADC_mean_std_proxy": 0.00017756336010059403
+              },
+              {
+                "color": 2,
+                "samples": 16384,
+                "observed_mean": 0.0962399986487885,
+                "prediction_CFA_mean": 0.09501674329904367,
+                "observed_minus_prediction_CFA_mean": 0.0012232553497448367,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.01927119866013527,
+                "target_CFA_mean": 0.0962635294163472,
+                "observed_minus_target_CFA_mean": -2.353076755869099e-05,
+                "prediction_minus_target_CFA_mean": -0.0012467861173035277,
+                "iid_unclipped_preADC_mean_std_proxy": 0.00012900068399548993
+              }
+            ]
+          },
+          {
+            "case": "exact-photo-1",
+            "independent_camera_ROI": {
+              "ROI_camera_RGB_RMSE": 0.009318419076595683,
+              "ROI_signed_channel_mean_error": [
+                -0.00015807076720842028,
+                0.00016743721888333064,
+                -0.0003772903412178863
+              ]
+            },
+            "independent_border8_PSNR": {
+              "linear_psnr": 40.0981093798515,
+              "srgb_psnr": 35.76605677659368
+            },
+            "whole_context_CFA_mean_diagnostics": [
+              {
+                "color": 0,
+                "samples": 16384,
+                "observed_mean": 0.1151570166924768,
+                "prediction_CFA_mean": 0.1150458165692807,
+                "observed_minus_prediction_CFA_mean": 0.00011120012319608408,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.01996336132287979,
+                "target_CFA_mean": 0.11544952592697698,
+                "observed_minus_target_CFA_mean": -0.000292509234500183,
+                "prediction_minus_target_CFA_mean": -0.00040370935769626706,
+                "iid_unclipped_preADC_mean_std_proxy": 0.00014013917520126252
+              },
+              {
+                "color": 1,
+                "samples": 32768,
+                "observed_mean": 0.2814758791647488,
+                "prediction_CFA_mean": 0.28150935423338574,
+                "observed_minus_prediction_CFA_mean": -3.347506863694144e-05,
+                "sensor_white_sample_count": 7,
+                "minimum_observed": -0.011720342561602592,
+                "target_CFA_mean": 0.28167382024500404,
+                "observed_minus_target_CFA_mean": -0.00019794108025524698,
+                "prediction_minus_target_CFA_mean": -0.00016446601161830554,
+                "iid_unclipped_preADC_mean_std_proxy": 0.00015101578462743868
+              },
+              {
+                "color": 2,
+                "samples": 16384,
+                "observed_mean": 0.234553448438531,
+                "prediction_CFA_mean": 0.23449308192751095,
+                "observed_minus_prediction_CFA_mean": 6.036651102003798e-05,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.017178984358906746,
+                "target_CFA_mean": 0.2346802897681628,
+                "observed_minus_target_CFA_mean": -0.0001268413296318105,
+                "prediction_minus_target_CFA_mean": -0.00018720784065184848,
+                "iid_unclipped_preADC_mean_std_proxy": 0.00019562411731756247
+              }
+            ]
+          },
+          {
+            "case": "fabric-mean",
+            "independent_camera_ROI": {
+              "ROI_camera_RGB_RMSE": 0.007152655492437898,
+              "ROI_signed_channel_mean_error": [
+                -0.01129977433825843,
+                0.0015284395590424537,
+                -0.0006571959424763918
+              ]
+            },
+            "independent_border8_PSNR": {
+              "linear_psnr": 38.925907771205935,
+              "srgb_psnr": 38.793371923144
+            },
+            "whole_context_CFA_mean_diagnostics": [
+              {
+                "color": 0,
+                "samples": 16384,
+                "observed_mean": 0.4460164421925583,
+                "prediction_CFA_mean": 0.4275118975820078,
+                "observed_minus_prediction_CFA_mean": 0.01850454461055051,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": 0.3154204785823822,
+                "target_CFA_mean": 0.4460826516151428,
+                "observed_minus_target_CFA_mean": -6.620942258450668e-05,
+                "prediction_minus_target_CFA_mean": -0.018570754033135017,
+                "iid_unclipped_preADC_mean_std_proxy": 0.0002670213742659304
+              },
+              {
+                "color": 1,
+                "samples": 32768,
+                "observed_mean": 0.422690270840576,
+                "prediction_CFA_mean": 0.4217494439681104,
+                "observed_minus_prediction_CFA_mean": 0.00094082687246555,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": 0.29286232590675354,
+                "target_CFA_mean": 0.4224427044391632,
+                "observed_minus_target_CFA_mean": 0.00024756640141276876,
+                "prediction_minus_target_CFA_mean": -0.0006932604710527812,
+                "iid_unclipped_preADC_mean_std_proxy": 0.00018385683638176095
+              },
+              {
+                "color": 2,
+                "samples": 16384,
+                "observed_mean": 0.0967591006560724,
+                "prediction_CFA_mean": 0.09568364315009603,
+                "observed_minus_prediction_CFA_mean": 0.0010754575059763738,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": 0.03592870384454727,
+                "target_CFA_mean": 0.09690847247838974,
+                "observed_minus_target_CFA_mean": -0.0001493718223173346,
+                "prediction_minus_target_CFA_mean": -0.0012248293282937084,
+                "iid_unclipped_preADC_mean_std_proxy": 0.000129390682913216
+              }
+            ]
+          },
+          {
+            "case": "fabric-cyclic-gbr",
+            "independent_camera_ROI": {
+              "ROI_camera_RGB_RMSE": 0.029130884656547073,
+              "ROI_signed_channel_mean_error": [
+                -0.04405340084224008,
+                -0.005978754730313085,
+                -0.022321519054239614
+              ]
+            },
+            "independent_border8_PSNR": {
+              "linear_psnr": 29.40936817246293,
+              "srgb_psnr": 29.277944551201614
+            },
+            "whole_context_CFA_mean_diagnostics": [
+              {
+                "color": 0,
+                "samples": 16384,
+                "observed_mean": 0.4227908182238025,
+                "prediction_CFA_mean": 0.36996161614843004,
+                "observed_minus_prediction_CFA_mean": 0.05282920207537245,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": 0.2954421937465668,
+                "target_CFA_mean": 0.4224427044391632,
+                "observed_minus_target_CFA_mean": 0.0003481137846392812,
+                "prediction_minus_target_CFA_mean": -0.05248108829073317,
+                "iid_unclipped_preADC_mean_std_proxy": 0.0002600128315460974
+              },
+              {
+                "color": 1,
+                "samples": 32768,
+                "observed_mean": 0.09694844138277858,
+                "prediction_CFA_mean": 0.08905696801639351,
+                "observed_minus_prediction_CFA_mean": 0.007891473366385071,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": 0.030957724899053574,
+                "target_CFA_mean": 0.09690847247838974,
+                "observed_minus_target_CFA_mean": 3.996890438884293e-05,
+                "prediction_minus_target_CFA_mean": -0.007851504461996228,
+                "iid_unclipped_preADC_mean_std_proxy": 9.149302931029338e-05
+              },
+              {
+                "color": 2,
+                "samples": 16384,
+                "observed_mean": 0.44626516366952274,
+                "prediction_CFA_mean": 0.41873188118552207,
+                "observed_minus_prediction_CFA_mean": 0.027533282484000665,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": 0.3160969018936157,
+                "target_CFA_mean": 0.4460827112197876,
+                "observed_minus_target_CFA_mean": 0.00018245244973513763,
+                "prediction_minus_target_CFA_mean": -0.027350830034265528,
+                "iid_unclipped_preADC_mean_std_proxy": 0.0002670213917050314
+              }
+            ]
+          },
+          {
+            "case": "GFX-overcast-sky",
+            "independent_camera_ROI": null,
+            "independent_border8_PSNR": null,
+            "whole_context_CFA_mean_diagnostics": [
+              {
+                "color": 0,
+                "samples": 65536,
+                "observed_mean": 0.01320356127145944,
+                "prediction_CFA_mean": 0.013183473728972217,
+                "observed_minus_prediction_CFA_mean": 2.0087542487223775e-05,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.0206074807792902
+              },
+              {
+                "color": 1,
+                "samples": 131072,
+                "observed_mean": 0.02168499450614575,
+                "prediction_CFA_mean": 0.02161515569459027,
+                "observed_minus_prediction_CFA_mean": 6.983881155547822e-05,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.016504712402820587
+              },
+              {
+                "color": 2,
+                "samples": 65536,
+                "observed_mean": 0.010725732184365983,
+                "prediction_CFA_mean": 0.010710610241673635,
+                "observed_minus_prediction_CFA_mean": 1.5121942692347679e-05,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.01691383495926857
+              }
+            ]
+          },
+          {
+            "case": "GFX-building-detail",
+            "independent_camera_ROI": null,
+            "independent_border8_PSNR": null,
+            "whole_context_CFA_mean_diagnostics": [
+              {
+                "color": 0,
+                "samples": 65536,
+                "observed_mean": 0.02769039877433188,
+                "prediction_CFA_mean": 0.02739439097191365,
+                "observed_minus_prediction_CFA_mean": 0.00029600780241823,
+                "sensor_white_sample_count": 34,
+                "minimum_observed": -0.01831233501434326
+              },
+              {
+                "color": 1,
+                "samples": 131072,
+                "observed_mean": 0.04247587666281025,
+                "prediction_CFA_mean": 0.04244652903205015,
+                "observed_minus_prediction_CFA_mean": 2.9347630760095944e-05,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.018604423850774765
+              },
+              {
+                "color": 2,
+                "samples": 65536,
+                "observed_mean": 0.020319517541313975,
+                "prediction_CFA_mean": 0.019928170383462174,
+                "observed_minus_prediction_CFA_mean": 0.0003913471578518013,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.020934738218784332
+              }
+            ]
+          },
+          {
+            "case": "GFX-foliage",
+            "independent_camera_ROI": null,
+            "independent_border8_PSNR": null,
+            "whole_context_CFA_mean_diagnostics": [
+              {
+                "color": 0,
+                "samples": 65536,
+                "observed_mean": 0.009776595313581937,
+                "prediction_CFA_mean": 0.00983709276341993,
+                "observed_minus_prediction_CFA_mean": -6.049744983799288e-05,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.02729758806526661
+              },
+              {
+                "color": 1,
+                "samples": 131072,
+                "observed_mean": 0.017794913409652044,
+                "prediction_CFA_mean": 0.017718680910264073,
+                "observed_minus_prediction_CFA_mean": 7.623249938797094e-05,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.027035824954509735
+              },
+              {
+                "color": 2,
+                "samples": 65536,
+                "observed_mean": 0.005843543904570175,
+                "prediction_CFA_mean": 0.005858817564833363,
+                "observed_minus_prediction_CFA_mean": -1.527366026318755e-05,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.02679516188800335
+              }
+            ]
+          },
+          {
+            "case": "GFX-chain-link-fence",
+            "independent_camera_ROI": null,
+            "independent_border8_PSNR": null,
+            "whole_context_CFA_mean_diagnostics": [
+              {
+                "color": 0,
+                "samples": 65536,
+                "observed_mean": 0.01274451671847393,
+                "prediction_CFA_mean": 0.012642877755192572,
+                "observed_minus_prediction_CFA_mean": 0.00010163896328135857,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.020542370155453682
+              },
+              {
+                "color": 1,
+                "samples": 131072,
+                "observed_mean": 0.022467291585587662,
+                "prediction_CFA_mean": 0.02233427354008377,
+                "observed_minus_prediction_CFA_mean": 0.00013301804550389096,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.021045949310064316
+              },
+              {
+                "color": 2,
+                "samples": 65536,
+                "observed_mean": 0.00842761483006782,
+                "prediction_CFA_mean": 0.008447199496174562,
+                "observed_minus_prediction_CFA_mean": -1.9584666106742254e-05,
+                "sensor_white_sample_count": 0,
+                "minimum_observed": -0.023327743634581566
+              }
+            ]
+          }
+        ],
+        "actual_new_neural_forwards": 0,
+        "CUDA_initialized": false,
+        "limits": "Independent NumPy64 camera/PSNR arithmetic; SSIM is not independently recomputed. CFA-mean innovations are input-consistency diagnostics, not a denoiser or real-reference quality score. The standard-error proxy assumes independent unclipped pre-ADC PG noise; clipping, quantization, spatial covariance and fitted real priors limit that interpretation. No output correction or parameter fitting is applied."
+      }
+    }
+  },
+  "native_reviews": {
+    "first4k": {
+      "receipt": {
+        "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/first4k/native-review.json",
+        "sha256": "061913b64a1cffe60ea389f721cdfd9e1b9b497333bfd5565002d3d706137bfa"
+      },
+      "result": {
+        "status": "actual-first4k-eight-native-views-completed",
+        "recorded_UTC": "2026-10-17T13:22:32.710110+00:00",
+        "basis": "All eight originals were opened through view_image in two groups of four during this goal turn before context compaction; this receipt binds the retained observation log to their file hashes.",
+        "views": [
+          {
+            "case": "exact-photo-0",
+            "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/first4k/crop-16593990c7d54c44.png",
+            "sha256": "b02cf7d59a959f3c05485201c34ca5e06fe1819b8ee18052f8de6d4a31371d50",
+            "viewed_at_original_resolution": true
+          },
+          {
+            "case": "exact-photo-1",
+            "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/first4k/crop-df4b3292c7b13cb3.png",
+            "sha256": "6ddf03f4eb88300b5c58188c73443c2502e0eb69eb45e28f11c86a654ccc8676",
+            "viewed_at_original_resolution": true
+          },
+          {
+            "case": "fabric-mean",
+            "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/first4k/crop-23298098c1d9c0b7.png",
+            "sha256": "229151347cb8ee744675901ed273ebd6061f0deef2ba20821d52c87d1d14fc80",
+            "viewed_at_original_resolution": true
+          },
+          {
+            "case": "fabric-cyclic-gbr",
+            "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/first4k/crop-738084d95bc48d15.png",
+            "sha256": "ffea1c2f8eff3814eb5369f6adb54242acd00095dd6010ebd16351e0a79f4910",
+            "viewed_at_original_resolution": true
+          },
+          {
+            "case": "GFX-overcast-sky",
+            "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/first4k/crop-651dbaccb402764f.png",
+            "sha256": "081c844159c27bdd8da995df2988ae2c0d8adacd13e53e8bc365634e9b3a0b1f",
+            "viewed_at_original_resolution": true
+          },
+          {
+            "case": "GFX-building-detail",
+            "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/first4k/crop-669e970da0dde864.png",
+            "sha256": "afdc3e972a7eee4e4d534b0f5a0e5e58766d7f46032fef328908983f74168361",
+            "viewed_at_original_resolution": true
+          },
+          {
+            "case": "GFX-foliage",
+            "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/first4k/crop-1fb383cb5a728b14.png",
+            "sha256": "b10763d6e7f655ade70034c8a4abf0b8cd4b67186adec70ea3e42037edf089cf",
+            "viewed_at_original_resolution": true
+          },
+          {
+            "case": "GFX-chain-link-fence",
+            "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/first4k/crop-3cc560395c173af9.png",
+            "sha256": "ca5da1ee88dc876541adbe32c9bbf6e1e8993c8cd4b387209b9ffd4fad63503f",
+            "viewed_at_original_resolution": true
+          }
+        ],
+        "observations": [
+          "The photo crops retain missing fine cords and soft small detail.",
+          "The orange field is relatively close in mean but retains variation; the selected magenta field is markedly darkened/desaturated with coarse variation.",
+          "GFX sky is clean while building lattice, foliage and fence remain soft compared with the independently demosaiced f/5.6 ISO100 reference."
+        ],
+        "limits": "Selected eight CPU observations only; ISO100 GFX is an independent reference, not exact GT. No general ranking or promotion, and no final20k native view is claimed."
+      }
+    },
+    "final20k": {
+      "receipt": {
+        "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/final20k/native-review.json",
+        "sha256": "1fcbf10bc7679a462567153b2a36d50acc059d919ef8ce945ad0e71bbfccf707"
+      },
+      "result": {
+        "status": "actual-final20k-eight-native-views-completed",
+        "recorded_UTC": "2026-10-17T13:36:46.792928+00:00",
+        "basis": "All eight originals were opened with view_image(detail=original) in two groups of four after actual inference; no resized view substituted.",
+        "views": [
+          {
+            "case": "exact-photo-0",
+            "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/final20k/crop-daa6fb36961f0274.png",
+            "sha256": "ea622e44c862569a9b54a3b986489a74ccac760a84fa010de1da745342e7d86c",
+            "viewed_at_original_resolution": true
+          },
+          {
+            "case": "exact-photo-1",
+            "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/final20k/crop-f5f0460ab98a35f4.png",
+            "sha256": "aaf01bea90bb8a25d50b00aa76e813b52a431cb704db175f0d377314d208e2a7",
+            "viewed_at_original_resolution": true
+          },
+          {
+            "case": "fabric-mean",
+            "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/final20k/crop-eb30d0773227ac2d.png",
+            "sha256": "27200f0ef194eca039de3cbdb81ea3628528360543e9558456cdf7e7413e0d64",
+            "viewed_at_original_resolution": true
+          },
+          {
+            "case": "fabric-cyclic-gbr",
+            "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/final20k/crop-f7cf2354ed88487a.png",
+            "sha256": "29c988680c7fd69a465d946a4b0fa048421eae44f884a07960d5392fa05e4de8",
+            "viewed_at_original_resolution": true
+          },
+          {
+            "case": "GFX-overcast-sky",
+            "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/final20k/crop-1328c17efbbd6a39.png",
+            "sha256": "c04ca5455d744a78eb75046c1cf537508ab45854a81a5113564bb95a2972d28f",
+            "viewed_at_original_resolution": true
+          },
+          {
+            "case": "GFX-building-detail",
+            "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/final20k/crop-b73efcaca642639a.png",
+            "sha256": "cf545eb6df8b505e55f991521bc9ca14ad379777d3c52c8a1353978b4a613bfe",
+            "viewed_at_original_resolution": true
+          },
+          {
+            "case": "GFX-foliage",
+            "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/final20k/crop-6f2f92b39bae1201.png",
+            "sha256": "2dd573eb2b305e941f353c10740adc8e2c83eff6c07a3a65d64db739fc8f0282",
+            "viewed_at_original_resolution": true
+          },
+          {
+            "case": "GFX-chain-link-fence",
+            "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-control20k-CPU-v1/final20k/crop-64fc8fff7577a2b5.png",
+            "sha256": "8019b4e9f8e7071d1d786e0e9a0224bbe59686aa5b72b6b412c484a71bc0839a",
+            "viewed_at_original_resolution": true
+          }
+        ],
+        "observations": [
+          "Fine fabric cords visible in exact GT remain erased; the photo color also shifts.",
+          "Building-photo fine structure remains soft, with only a small numerical gain.",
+          "Both selected uniform fields improve, while magenta retains visible coarse variation and mean bias.",
+          "GFX sky is smooth; building lattice, foliage and chain-link fence remain soft relative to the sharper independent f/5.6 reference."
+        ],
+        "limits": "Selected CPU contexts only. GFX ISO100 AHD is an independent qualitative reference, not exact GT. No general model promotion."
+      }
+    }
+  },
+  "photo_source_metadata": {
+    "source": {
+      "path": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/summary.json",
+      "sha256": "f7af271aff9fe3434ea3ad7ee949eceffa634f0c2b3f90e6caa76e2fa8667982"
+    },
+    "by_validation_index": {
+      "0": {
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "source": {
+          "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Roy Egloff",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": null,
+          "credit": "Own work",
+          "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+          "width": 3888,
+          "height": 2592,
+          "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+          "shape": [
+            324,
+            486,
+            3
+          ],
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+        },
+        "validation_index": 0,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "exposure": 1.0,
+          "name": "iso12800-prior",
+          "read": 2.62144e-05,
+          "shot": 0.00256
+        },
+        "pattern": "RGGB"
+      },
+      "1": {
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "source": {
+          "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Vancouver_%28BC%2C_Canada%29%2C_Coal_Harbour_Seaside_Park%2C_Blick_in_den_Himmel_--_2022_--_2158.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Dietmar Rabich",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "Dietmar Rabich",
+          "credit": "Own work",
+          "sha1": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "sha1_hex": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "download_path": "images/00/2f/002fc6eeadf637e81d5a327f117b79abb86becd9.jpg",
+          "width": 3809,
+          "height": 2857,
+          "id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/002fc6eeadf637e81d5a327f117b79abb86becd9.npy",
+          "shape": [
+            357,
+            476,
+            3
+          ],
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf"
+        },
+        "validation_index": 1,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "exposure": 1.0,
+          "name": "iso12800-prior",
+          "read": 2.62144e-05,
+          "shot": 0.00256
+        },
+        "pattern": "RGGB"
+      }
+    }
+  },
+  "pairs": [
+    {
+      "case": "exact-photo-0",
+      "kind": "photo",
+      "first4k": {
+        "case": "exact-photo-0",
+        "kind": "photo",
+        "exact_target_border8_scores": {
+          "linear_psnr": 36.37681579589844,
+          "srgb_psnr": 35.634429931640625,
+          "srgb_ssim": 0.9679154753684998,
+          "chroma_mae": 0.009368863888084888,
+          "gradient_mae": 0.004129564389586449,
+          "highlight_boundary_chroma_mae": 0.011422445066273212,
+          "highlight_boundary_rgb_mae": 0.014498093165457249,
+          "shadow_linear_psnr": 51.57738494873047
+        },
+        "exact_target_camera_ROI": {
+          "ROI_camera_RGB_RMSE": 0.016645203079310354,
+          "ROI_signed_channel_mean_error": [
+            -0.02104703787636936,
+            -0.004993830378203299,
+            -0.000704167896904453
+          ]
+        }
+      },
+      "final20k": {
+        "case": "exact-photo-0",
+        "kind": "photo",
+        "exact_target_border8_scores": {
+          "linear_psnr": 34.241241455078125,
+          "srgb_psnr": 33.69029998779297,
+          "srgb_ssim": 0.9679976105690002,
+          "chroma_mae": 0.012884954921901226,
+          "gradient_mae": 0.004126880783587694,
+          "highlight_boundary_chroma_mae": 0.015402759425342083,
+          "highlight_boundary_rgb_mae": 0.017697006464004517,
+          "shadow_linear_psnr": 51.5880241394043
+        },
+        "exact_target_camera_ROI": {
+          "ROI_camera_RGB_RMSE": 0.02125372640940474,
+          "ROI_signed_channel_mean_error": [
+            -0.030042609456045283,
+            -0.007227348529928434,
+            -0.0011887851630235824
+          ]
+        }
+      },
+      "delta_exact_target_border8_scores": {
+        "linear_psnr": -2.1355743408203125,
+        "srgb_psnr": -1.9441299438476562,
+        "srgb_ssim": 8.213520050048828e-05,
+        "chroma_mae": 0.0035160910338163376,
+        "gradient_mae": -2.6836059987545013e-06,
+        "highlight_boundary_chroma_mae": 0.0039803143590688705,
+        "highlight_boundary_rgb_mae": 0.003198913298547268,
+        "shadow_linear_psnr": 0.010639190673828125
+      },
+      "ROI_output_RMS_change": 0.0061287049310060765,
+      "ROI_output_signed_channel_mean_change": [
+        -0.008995571579675924,
+        -0.002233518151725136,
+        -0.00048461726611912946
+      ],
+      "noisy_and_reference_native_panels_bitwise_equal": true
+    },
+    {
+      "case": "exact-photo-1",
+      "kind": "photo",
+      "first4k": {
+        "case": "exact-photo-1",
+        "kind": "photo",
+        "exact_target_border8_scores": {
+          "linear_psnr": 40.05745315551758,
+          "srgb_psnr": 35.70298385620117,
+          "srgb_ssim": 0.969750702381134,
+          "chroma_mae": 0.0055315312929451466,
+          "gradient_mae": 0.009238358587026596,
+          "highlight_boundary_chroma_mae": 0.008022175170481205,
+          "highlight_boundary_rgb_mae": 0.015379056334495544,
+          "shadow_linear_psnr": 48.829795837402344
+        },
+        "exact_target_camera_ROI": {
+          "ROI_camera_RGB_RMSE": 0.009372747229559539,
+          "ROI_signed_channel_mean_error": [
+            -0.00013728588533906517,
+            0.00017562592182039262,
+            -0.0005633382139534149
+          ]
+        }
+      },
+      "final20k": {
+        "case": "exact-photo-1",
+        "kind": "photo",
+        "exact_target_border8_scores": {
+          "linear_psnr": 40.09811019897461,
+          "srgb_psnr": 35.76605987548828,
+          "srgb_ssim": 0.9701405167579651,
+          "chroma_mae": 0.005483421962708235,
+          "gradient_mae": 0.009191898629069328,
+          "highlight_boundary_chroma_mae": 0.007589355576783419,
+          "highlight_boundary_rgb_mae": 0.015002621337771416,
+          "shadow_linear_psnr": 48.97053146362305
+        },
+        "exact_target_camera_ROI": {
+          "ROI_camera_RGB_RMSE": 0.009318419076595683,
+          "ROI_signed_channel_mean_error": [
+            -0.00015807076720842028,
+            0.00016743721888333064,
+            -0.0003772903412178863
+          ]
+        }
+      },
+      "delta_exact_target_border8_scores": {
+        "linear_psnr": 0.04065704345703125,
+        "srgb_psnr": 0.06307601928710938,
+        "srgb_ssim": 0.0003898143768310547,
+        "chroma_mae": -4.8109330236911774e-05,
+        "gradient_mae": -4.645995795726776e-05,
+        "highlight_boundary_chroma_mae": -0.00043281959369778633,
+        "highlight_boundary_rgb_mae": -0.0003764349967241287,
+        "shadow_linear_psnr": 0.14073562622070312
+      },
+      "ROI_output_RMS_change": 0.0010201023533165196,
+      "ROI_output_signed_channel_mean_change": [
+        -2.078488186935512e-05,
+        -8.188702937061976e-06,
+        0.0001860478727355286
+      ],
+      "noisy_and_reference_native_panels_bitwise_equal": true
+    },
+    {
+      "case": "fabric-mean",
+      "kind": "analytic",
+      "first4k": {
+        "case": "fabric-mean",
+        "kind": "analytic",
+        "exact_target_border8_scores": {
+          "linear_psnr": 36.09650421142578,
+          "srgb_psnr": 36.0941162109375,
+          "srgb_ssim": 0.9977371096611023,
+          "chroma_mae": 0.010563656687736511,
+          "gradient_mae": 0.0007849971298128366,
+          "highlight_boundary_chroma_mae": null,
+          "highlight_boundary_rgb_mae": null,
+          "shadow_linear_psnr": null
+        },
+        "exact_target_camera_ROI": {
+          "ROI_camera_RGB_RMSE": 0.011924743232437817,
+          "ROI_signed_channel_mean_error": [
+            -0.019294862801907585,
+            -0.003606298577506095,
+            -0.001954392611223739
+          ]
+        }
+      },
+      "final20k": {
+        "case": "fabric-mean",
+        "kind": "analytic",
+        "exact_target_border8_scores": {
+          "linear_psnr": 38.925907135009766,
+          "srgb_psnr": 38.79339599609375,
+          "srgb_ssim": 0.998475968837738,
+          "chroma_mae": 0.00806945376098156,
+          "gradient_mae": 0.0006263654213398695,
+          "highlight_boundary_chroma_mae": null,
+          "highlight_boundary_rgb_mae": null,
+          "shadow_linear_psnr": null
+        },
+        "exact_target_camera_ROI": {
+          "ROI_camera_RGB_RMSE": 0.007152655492437898,
+          "ROI_signed_channel_mean_error": [
+            -0.01129977433825843,
+            0.0015284395590424537,
+            -0.0006571959424763918
+          ]
+        }
+      },
+      "delta_exact_target_border8_scores": {
+        "linear_psnr": 2.8294029235839844,
+        "srgb_psnr": 2.69927978515625,
+        "srgb_ssim": 0.0007388591766357422,
+        "chroma_mae": -0.0024942029267549515,
+        "gradient_mae": -0.00015863170847296715,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": null
+      },
+      "ROI_output_RMS_change": 0.005904007802961994,
+      "ROI_output_signed_channel_mean_change": [
+        0.007995088463649153,
+        0.005134738136548549,
+        0.0012971966687473468
+      ],
+      "noisy_and_reference_native_panels_bitwise_equal": true
+    },
+    {
+      "case": "fabric-cyclic-gbr",
+      "kind": "analytic",
+      "first4k": {
+        "case": "fabric-cyclic-gbr",
+        "kind": "analytic",
+        "exact_target_border8_scores": {
+          "linear_psnr": 23.18021011352539,
+          "srgb_psnr": 22.955829620361328,
+          "srgb_ssim": 0.985622227191925,
+          "chroma_mae": 0.03721533343195915,
+          "gradient_mae": 0.0016892054118216038,
+          "highlight_boundary_chroma_mae": null,
+          "highlight_boundary_rgb_mae": null,
+          "shadow_linear_psnr": null
+        },
+        "exact_target_camera_ROI": {
+          "ROI_camera_RGB_RMSE": 0.06893221324238098,
+          "ROI_signed_channel_mean_error": [
+            -0.10053332656738348,
+            -0.015146730763080995,
+            -0.06241104490240104
+          ]
+        }
+      },
+      "final20k": {
+        "case": "fabric-cyclic-gbr",
+        "kind": "analytic",
+        "exact_target_border8_scores": {
+          "linear_psnr": 29.40936851501465,
+          "srgb_psnr": 29.277938842773438,
+          "srgb_ssim": 0.9920368790626526,
+          "chroma_mae": 0.01972108706831932,
+          "gradient_mae": 0.001397320767864585,
+          "highlight_boundary_chroma_mae": null,
+          "highlight_boundary_rgb_mae": null,
+          "shadow_linear_psnr": null
+        },
+        "exact_target_camera_ROI": {
+          "ROI_camera_RGB_RMSE": 0.029130884656547073,
+          "ROI_signed_channel_mean_error": [
+            -0.04405340084224008,
+            -0.005978754730313085,
+            -0.022321519054239614
+          ]
+        }
+      },
+      "delta_exact_target_border8_scores": {
+        "linear_psnr": 6.229158401489258,
+        "srgb_psnr": 6.322109222412109,
+        "srgb_ssim": 0.006414651870727539,
+        "chroma_mae": -0.01749424636363983,
+        "gradient_mae": -0.00029188464395701885,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": null
+      },
+      "ROI_output_RMS_change": 0.040624961272280616,
+      "ROI_output_signed_channel_mean_change": [
+        0.056479925725143404,
+        0.009167976032767911,
+        0.04008952584816143
+      ],
+      "noisy_and_reference_native_panels_bitwise_equal": true
+    },
+    {
+      "case": "GFX-overcast-sky",
+      "kind": "real",
+      "first4k": {
+        "case": "GFX-overcast-sky",
+        "kind": "real",
+        "exact_target_border8_scores": null,
+        "exact_target_camera_ROI": null
+      },
+      "final20k": {
+        "case": "GFX-overcast-sky",
+        "kind": "real",
+        "exact_target_border8_scores": null,
+        "exact_target_camera_ROI": null
+      },
+      "delta_exact_target_border8_scores": null,
+      "ROI_output_RMS_change": 8.908283575985771e-05,
+      "ROI_output_signed_channel_mean_change": [
+        -3.841120087599848e-06,
+        -6.319007843558211e-05,
+        -4.46120528067695e-06
+      ],
+      "noisy_and_reference_native_panels_bitwise_equal": true
+    },
+    {
+      "case": "GFX-building-detail",
+      "kind": "real",
+      "first4k": {
+        "case": "GFX-building-detail",
+        "kind": "real",
+        "exact_target_border8_scores": null,
+        "exact_target_camera_ROI": null
+      },
+      "final20k": {
+        "case": "GFX-building-detail",
+        "kind": "real",
+        "exact_target_border8_scores": null,
+        "exact_target_camera_ROI": null
+      },
+      "delta_exact_target_border8_scores": null,
+      "ROI_output_RMS_change": 0.0001591390472806031,
+      "ROI_output_signed_channel_mean_change": [
+        -3.7701345117966415e-05,
+        2.0460954274312826e-05,
+        2.7509427491168026e-06
+      ],
+      "noisy_and_reference_native_panels_bitwise_equal": true
+    },
+    {
+      "case": "GFX-foliage",
+      "kind": "real",
+      "first4k": {
+        "case": "GFX-foliage",
+        "kind": "real",
+        "exact_target_border8_scores": null,
+        "exact_target_camera_ROI": null
+      },
+      "final20k": {
+        "case": "GFX-foliage",
+        "kind": "real",
+        "exact_target_border8_scores": null,
+        "exact_target_camera_ROI": null
+      },
+      "delta_exact_target_border8_scores": null,
+      "ROI_output_RMS_change": 0.00014603728719589623,
+      "ROI_output_signed_channel_mean_change": [
+        -1.1969643828706467e-05,
+        4.9261982248935964e-05,
+        6.233541569145018e-06
+      ],
+      "noisy_and_reference_native_panels_bitwise_equal": true
+    },
+    {
+      "case": "GFX-chain-link-fence",
+      "kind": "real",
+      "first4k": {
+        "case": "GFX-chain-link-fence",
+        "kind": "real",
+        "exact_target_border8_scores": null,
+        "exact_target_camera_ROI": null
+      },
+      "final20k": {
+        "case": "GFX-chain-link-fence",
+        "kind": "real",
+        "exact_target_border8_scores": null,
+        "exact_target_camera_ROI": null
+      },
+      "delta_exact_target_border8_scores": null,
+      "ROI_output_RMS_change": 0.00021489115975849245,
+      "ROI_output_signed_channel_mean_change": [
+        4.693029696227313e-05,
+        -7.703350329393288e-06,
+        5.456932281049376e-06
+      ],
+      "noisy_and_reference_native_panels_bitwise_equal": true
+    }
+  ],
+  "native_crops": [
+    {
+      "stage": "first4k",
+      "case": "exact-photo-0",
+      "repo_image": "images/control-original20k-CPU-crop-16593990c7d54c44.png",
+      "image": "crop-16593990c7d54c44.png",
+      "caption": "exact-photo-0/V63 4k CPU",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V63 4k CPU",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (exact saved)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "b02cf7d59a959f3c05485201c34ca5e06fe1819b8ee18052f8de6d4a31371d50",
+      "checkpoint_sha256": "5f29bd7efb94b72491cff22575c0565995326644823bcb802444214c8f2c6bd6",
+      "step": 4000,
+      "source": {
+        "id": "exact-photo-0",
+        "kind": "photo",
+        "case": {
+          "id": "exact-photo-0",
+          "kind": "photo",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "arrays": {
+          "path": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e"
+        },
+        "noise": [
+          0.00256,
+          2.62144e-05
+        ],
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 1
+      },
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "conditioning": {
+        "shot": 0.00256,
+        "read": 2.62144e-05
+      },
+      "CFA_colors": [
+        [
+          0,
+          1,
+          1,
+          2
+        ]
+      ],
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "display_exposure": 1,
+      "reference": "GT (exact saved)",
+      "runtime": "CPU FP32/contiguous/B1/two threads; ordinary EMA inference, no alternate normalization"
+    },
+    {
+      "stage": "final20k",
+      "case": "exact-photo-0",
+      "repo_image": "images/control-original20k-CPU-crop-daa6fb36961f0274.png",
+      "image": "crop-daa6fb36961f0274.png",
+      "caption": "exact-photo-0/V63 20k CPU",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V63 20k CPU",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (exact saved)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "ea622e44c862569a9b54a3b986489a74ccac760a84fa010de1da745342e7d86c",
+      "checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+      "step": 20000,
+      "source": {
+        "id": "exact-photo-0",
+        "kind": "photo",
+        "case": {
+          "id": "exact-photo-0",
+          "kind": "photo",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "arrays": {
+          "path": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e"
+        },
+        "noise": [
+          0.00256,
+          2.62144e-05
+        ],
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 1
+      },
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "conditioning": {
+        "shot": 0.00256,
+        "read": 2.62144e-05
+      },
+      "CFA_colors": [
+        [
+          0,
+          1,
+          1,
+          2
+        ]
+      ],
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "display_exposure": 1,
+      "reference": "GT (exact saved)",
+      "runtime": "CPU FP32/contiguous/B1/two threads; ordinary EMA inference, no alternate normalization"
+    },
+    {
+      "stage": "first4k",
+      "case": "exact-photo-1",
+      "repo_image": "images/control-original20k-CPU-crop-df4b3292c7b13cb3.png",
+      "image": "crop-df4b3292c7b13cb3.png",
+      "caption": "exact-photo-1/V63 4k CPU",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V63 4k CPU",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (exact saved)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "6ddf03f4eb88300b5c58188c73443c2502e0eb69eb45e28f11c86a654ccc8676",
+      "checkpoint_sha256": "5f29bd7efb94b72491cff22575c0565995326644823bcb802444214c8f2c6bd6",
+      "step": 4000,
+      "source": {
+        "id": "exact-photo-1",
+        "kind": "photo",
+        "case": {
+          "id": "exact-photo-1",
+          "kind": "photo",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "arrays": {
+          "path": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949"
+        },
+        "noise": [
+          0.00256,
+          2.62144e-05
+        ],
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 1
+      },
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "conditioning": {
+        "shot": 0.00256,
+        "read": 2.62144e-05
+      },
+      "CFA_colors": [
+        [
+          0,
+          1,
+          1,
+          2
+        ]
+      ],
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "display_exposure": 1,
+      "reference": "GT (exact saved)",
+      "runtime": "CPU FP32/contiguous/B1/two threads; ordinary EMA inference, no alternate normalization"
+    },
+    {
+      "stage": "final20k",
+      "case": "exact-photo-1",
+      "repo_image": "images/control-original20k-CPU-crop-f5f0460ab98a35f4.png",
+      "image": "crop-f5f0460ab98a35f4.png",
+      "caption": "exact-photo-1/V63 20k CPU",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V63 20k CPU",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (exact saved)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "aaf01bea90bb8a25d50b00aa76e813b52a431cb704db175f0d377314d208e2a7",
+      "checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+      "step": 20000,
+      "source": {
+        "id": "exact-photo-1",
+        "kind": "photo",
+        "case": {
+          "id": "exact-photo-1",
+          "kind": "photo",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "arrays": {
+          "path": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949"
+        },
+        "noise": [
+          0.00256,
+          2.62144e-05
+        ],
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 1
+      },
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "conditioning": {
+        "shot": 0.00256,
+        "read": 2.62144e-05
+      },
+      "CFA_colors": [
+        [
+          0,
+          1,
+          1,
+          2
+        ]
+      ],
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "display_exposure": 1,
+      "reference": "GT (exact saved)",
+      "runtime": "CPU FP32/contiguous/B1/two threads; ordinary EMA inference, no alternate normalization"
+    },
+    {
+      "stage": "first4k",
+      "case": "fabric-mean",
+      "repo_image": "images/control-original20k-CPU-crop-23298098c1d9c0b7.png",
+      "image": "crop-23298098c1d9c0b7.png",
+      "caption": "fabric-mean/V63 4k CPU",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V63 4k CPU",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (exact saved)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "229151347cb8ee744675901ed273ebd6061f0deef2ba20821d52c87d1d14fc80",
+      "checkpoint_sha256": "5f29bd7efb94b72491cff22575c0565995326644823bcb802444214c8f2c6bd6",
+      "step": 4000,
+      "source": {
+        "id": "fabric-mean",
+        "kind": "analytic",
+        "case": {
+          "id": "fabric-mean",
+          "palette": "fabric-mean",
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-mean-iso12800-prior-RGGB-observation.npz",
+          "sha256": "7c2e2575b08152593e1678b2a58d763f79c53eb61a7fe8de43d4f33e25680438",
+          "target_camera_RGB": [
+            0.4460826468449295,
+            0.4224426811812077,
+            0.09690847238308323
+          ],
+          "draws_per_pattern": 1,
+          "kind": "analytic",
+          "original_case_index": 12,
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "arrays": {
+          "path": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-mean-iso12800-prior-RGGB-observation.npz",
+          "sha256": "7c2e2575b08152593e1678b2a58d763f79c53eb61a7fe8de43d4f33e25680438"
+        },
+        "noise": [
+          0.00256,
+          2.62144e-05
+        ],
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 1
+      },
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "conditioning": {
+        "shot": 0.00256,
+        "read": 2.62144e-05
+      },
+      "CFA_colors": [
+        [
+          0,
+          1,
+          1,
+          2
+        ]
+      ],
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "display_exposure": 1,
+      "reference": "GT (exact saved)",
+      "runtime": "CPU FP32/contiguous/B1/two threads; ordinary EMA inference, no alternate normalization"
+    },
+    {
+      "stage": "final20k",
+      "case": "fabric-mean",
+      "repo_image": "images/control-original20k-CPU-crop-eb30d0773227ac2d.png",
+      "image": "crop-eb30d0773227ac2d.png",
+      "caption": "fabric-mean/V63 20k CPU",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V63 20k CPU",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (exact saved)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "27200f0ef194eca039de3cbdb81ea3628528360543e9558456cdf7e7413e0d64",
+      "checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+      "step": 20000,
+      "source": {
+        "id": "fabric-mean",
+        "kind": "analytic",
+        "case": {
+          "id": "fabric-mean",
+          "palette": "fabric-mean",
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-mean-iso12800-prior-RGGB-observation.npz",
+          "sha256": "7c2e2575b08152593e1678b2a58d763f79c53eb61a7fe8de43d4f33e25680438",
+          "target_camera_RGB": [
+            0.4460826468449295,
+            0.4224426811812077,
+            0.09690847238308323
+          ],
+          "draws_per_pattern": 1,
+          "kind": "analytic",
+          "original_case_index": 12,
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "arrays": {
+          "path": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-mean-iso12800-prior-RGGB-observation.npz",
+          "sha256": "7c2e2575b08152593e1678b2a58d763f79c53eb61a7fe8de43d4f33e25680438"
+        },
+        "noise": [
+          0.00256,
+          2.62144e-05
+        ],
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 1
+      },
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "conditioning": {
+        "shot": 0.00256,
+        "read": 2.62144e-05
+      },
+      "CFA_colors": [
+        [
+          0,
+          1,
+          1,
+          2
+        ]
+      ],
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "display_exposure": 1,
+      "reference": "GT (exact saved)",
+      "runtime": "CPU FP32/contiguous/B1/two threads; ordinary EMA inference, no alternate normalization"
+    },
+    {
+      "stage": "first4k",
+      "case": "fabric-cyclic-gbr",
+      "repo_image": "images/control-original20k-CPU-crop-738084d95bc48d15.png",
+      "image": "crop-738084d95bc48d15.png",
+      "caption": "fabric-cyclic-gbr/V63 4k CPU",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V63 4k CPU",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (exact saved)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "ffea1c2f8eff3814eb5369f6adb54242acd00095dd6010ebd16351e0a79f4910",
+      "checkpoint_sha256": "5f29bd7efb94b72491cff22575c0565995326644823bcb802444214c8f2c6bd6",
+      "step": 4000,
+      "source": {
+        "id": "fabric-cyclic-gbr",
+        "kind": "analytic",
+        "case": {
+          "id": "fabric-cyclic-gbr",
+          "palette": "fabric-cyclic-gbr",
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-cyclic-gbr-iso12800-prior-RGGB-observation.npz",
+          "sha256": "f9f0bc3ddfb1a62251e94d929083061861ed99e70d1fb197c822484042b8f68a",
+          "target_camera_RGB": [
+            0.4224426811812077,
+            0.09690847238308323,
+            0.4460826468449295
+          ],
+          "draws_per_pattern": 1,
+          "kind": "analytic",
+          "original_case_index": 20,
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "arrays": {
+          "path": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-cyclic-gbr-iso12800-prior-RGGB-observation.npz",
+          "sha256": "f9f0bc3ddfb1a62251e94d929083061861ed99e70d1fb197c822484042b8f68a"
+        },
+        "noise": [
+          0.00256,
+          2.62144e-05
+        ],
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 1
+      },
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "conditioning": {
+        "shot": 0.00256,
+        "read": 2.62144e-05
+      },
+      "CFA_colors": [
+        [
+          0,
+          1,
+          1,
+          2
+        ]
+      ],
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "display_exposure": 1,
+      "reference": "GT (exact saved)",
+      "runtime": "CPU FP32/contiguous/B1/two threads; ordinary EMA inference, no alternate normalization"
+    },
+    {
+      "stage": "final20k",
+      "case": "fabric-cyclic-gbr",
+      "repo_image": "images/control-original20k-CPU-crop-f7cf2354ed88487a.png",
+      "image": "crop-f7cf2354ed88487a.png",
+      "caption": "fabric-cyclic-gbr/V63 20k CPU",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V63 20k CPU",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (exact saved)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "29c988680c7fd69a465d946a4b0fa048421eae44f884a07960d5392fa05e4de8",
+      "checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+      "step": 20000,
+      "source": {
+        "id": "fabric-cyclic-gbr",
+        "kind": "analytic",
+        "case": {
+          "id": "fabric-cyclic-gbr",
+          "palette": "fabric-cyclic-gbr",
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-cyclic-gbr-iso12800-prior-RGGB-observation.npz",
+          "sha256": "f9f0bc3ddfb1a62251e94d929083061861ed99e70d1fb197c822484042b8f68a",
+          "target_camera_RGB": [
+            0.4224426811812077,
+            0.09690847238308323,
+            0.4460826468449295
+          ],
+          "draws_per_pattern": 1,
+          "kind": "analytic",
+          "original_case_index": 20,
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "arrays": {
+          "path": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-cyclic-gbr-iso12800-prior-RGGB-observation.npz",
+          "sha256": "f9f0bc3ddfb1a62251e94d929083061861ed99e70d1fb197c822484042b8f68a"
+        },
+        "noise": [
+          0.00256,
+          2.62144e-05
+        ],
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 1
+      },
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "conditioning": {
+        "shot": 0.00256,
+        "read": 2.62144e-05
+      },
+      "CFA_colors": [
+        [
+          0,
+          1,
+          1,
+          2
+        ]
+      ],
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "display_exposure": 1,
+      "reference": "GT (exact saved)",
+      "runtime": "CPU FP32/contiguous/B1/two threads; ordinary EMA inference, no alternate normalization"
+    },
+    {
+      "stage": "first4k",
+      "case": "GFX-overcast-sky",
+      "repo_image": "images/control-original20k-CPU-crop-651dbaccb402764f.png",
+      "image": "crop-651dbaccb402764f.png",
+      "caption": "GFX-overcast-sky/V63 4k CPU",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V63 4k CPU",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 AHD / not GT",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "081c844159c27bdd8da995df2988ae2c0d8adacd13e53e8bc365634e9b3a0b1f",
+      "checkpoint_sha256": "5f29bd7efb94b72491cff22575c0565995326644823bcb802444214c8f2c6bd6",
+      "step": 4000,
+      "source": {
+        "id": "GFX-overcast-sky",
+        "kind": "real",
+        "raw": {
+          "image": "overcast-sky-noisy-packed-f32.npy",
+          "sha256": "f875de8e6dcc3441800ee23c96b348dcb6d48fe26789c04f79f583568a53bd4d",
+          "shape": [
+            1,
+            4,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "role": "noisy-packed",
+          "region": {
+            "name": "overcast-sky",
+            "noisy_xy": [
+              5800,
+              1400
+            ],
+            "reference_xy": [
+              5800,
+              1400
+            ],
+            "size": 160,
+            "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+            "context_green_correlation": null
+          },
+          "context_xywh": [
+            5624,
+            1224,
+            512,
+            512
+          ],
+          "pattern": "RGGB",
+          "encoding": "Four packed CFA phases, black-subtracted/white-normalized sensor units",
+          "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-gfx-v1/overcast-sky-noisy-packed-f32.npy"
+        },
+        "reference": {
+          "image": "overcast-sky-reference-rgb-f32.npy",
+          "sha256": "a566b9ebfa173e706b820988dd1f47302f9d2e6521de7873dddd18f5a0ee6c49",
+          "shape": [
+            1,
+            3,
+            160,
+            160
+          ],
+          "dtype": "float32",
+          "role": "reference-rgb",
+          "region": {
+            "name": "overcast-sky",
+            "noisy_xy": [
+              5800,
+              1400
+            ],
+            "reference_xy": [
+              5800,
+              1400
+            ],
+            "size": 160,
+            "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+            "context_green_correlation": null
+          },
+          "source_roi_xywh": [
+            5800,
+            1400,
+            160,
+            160
+          ],
+          "encoding": "Independent LibRaw AHD camera RGB calibrated against its own CFA; not GT",
+          "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-gfx-v1/overcast-sky-reference-rgb-f32.npy"
+        },
+        "sources": [
+          {
+            "role": "noisy",
+            "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+            "metadata": {
+              "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+              "camera": "GFX100S",
+              "pattern": "RGGB",
+              "black_levels": [
+                4101.0,
+                4098.0,
+                4104.0,
+                4106.0
+              ],
+              "white_levels": [
+                65535.0,
+                65535.0,
+                65535.0,
+                65535.0
+              ],
+              "white_balance": [
+                1.5132450331125828,
+                1.0,
+                2.2152317880794703
+              ],
+              "camera_to_srgb": [
+                [
+                  1.0725188393098881,
+                  0.17123593128834644,
+                  -0.24375477059823436
+                ],
+                [
+                  -0.1267191317089774,
+                  1.4310509369654432,
+                  -0.3043318052564657
+                ],
+                [
+                  -0.009697676902906037,
+                  -0.29348063283422965,
+                  1.3031783097371357
+                ]
+              ],
+              "flip": 0,
+              "iso": 6400,
+              "adc_white_level": 65535.0
+            }
+          },
+          {
+            "role": "reference",
+            "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+            "metadata": {
+              "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+              "camera": "GFX100S",
+              "pattern": "RGGB",
+              "black_levels": [
+                256.0,
+                255.0,
+                256.0,
+                256.0
+              ],
+              "white_levels": [
+                65535.0,
+                65535.0,
+                65535.0,
+                65535.0
+              ],
+              "white_balance": [
+                1.5132450331125828,
+                1.0,
+                2.2152317880794703
+              ],
+              "camera_to_srgb": [
+                [
+                  1.0725188393098881,
+                  0.17123593128834644,
+                  -0.24375477059823436
+                ],
+                [
+                  -0.1267191317089774,
+                  1.4310509369654432,
+                  -0.3043318052564657
+                ],
+                [
+                  -0.009697676902906037,
+                  -0.29348063283422965,
+                  1.3031783097371357
+                ]
+              ],
+              "flip": 0,
+              "iso": 100,
+              "adc_white_level": 65535.0
+            }
+          }
+        ],
+        "noise": [
+          0.0014635775921166604,
+          1.0715704128646712e-06
+        ],
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "display_exposure": 4
+      },
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "conditioning": {
+        "shot": 0.0014635775921166604,
+        "read": 1.0715704128646712e-06
+      },
+      "CFA_colors": [
+        [
+          0,
+          1,
+          1,
+          2
+        ]
+      ],
+      "white_balance": [
+        [
+          1.5132449865341187,
+          1.0,
+          2.2152318954467773
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.0725188255310059,
+            0.17123593389987946,
+            -0.2437547743320465
+          ],
+          [
+            -0.126719132065773,
+            1.4310508966445923,
+            -0.30433180928230286
+          ],
+          [
+            -0.00969767663627863,
+            -0.29348063468933105,
+            1.303178310394287
+          ]
+        ]
+      ],
+      "display_exposure": 4,
+      "reference": "ISO100 AHD / not GT",
+      "runtime": "CPU FP32/contiguous/B1/two threads; ordinary EMA inference, no alternate normalization"
+    },
+    {
+      "stage": "final20k",
+      "case": "GFX-overcast-sky",
+      "repo_image": "images/control-original20k-CPU-crop-1328c17efbbd6a39.png",
+      "image": "crop-1328c17efbbd6a39.png",
+      "caption": "GFX-overcast-sky/V63 20k CPU",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V63 20k CPU",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 AHD / not GT",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "c04ca5455d744a78eb75046c1cf537508ab45854a81a5113564bb95a2972d28f",
+      "checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+      "step": 20000,
+      "source": {
+        "id": "GFX-overcast-sky",
+        "kind": "real",
+        "raw": {
+          "image": "overcast-sky-noisy-packed-f32.npy",
+          "sha256": "f875de8e6dcc3441800ee23c96b348dcb6d48fe26789c04f79f583568a53bd4d",
+          "shape": [
+            1,
+            4,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "role": "noisy-packed",
+          "region": {
+            "name": "overcast-sky",
+            "noisy_xy": [
+              5800,
+              1400
+            ],
+            "reference_xy": [
+              5800,
+              1400
+            ],
+            "size": 160,
+            "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+            "context_green_correlation": null
+          },
+          "context_xywh": [
+            5624,
+            1224,
+            512,
+            512
+          ],
+          "pattern": "RGGB",
+          "encoding": "Four packed CFA phases, black-subtracted/white-normalized sensor units",
+          "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-gfx-v1/overcast-sky-noisy-packed-f32.npy"
+        },
+        "reference": {
+          "image": "overcast-sky-reference-rgb-f32.npy",
+          "sha256": "a566b9ebfa173e706b820988dd1f47302f9d2e6521de7873dddd18f5a0ee6c49",
+          "shape": [
+            1,
+            3,
+            160,
+            160
+          ],
+          "dtype": "float32",
+          "role": "reference-rgb",
+          "region": {
+            "name": "overcast-sky",
+            "noisy_xy": [
+              5800,
+              1400
+            ],
+            "reference_xy": [
+              5800,
+              1400
+            ],
+            "size": 160,
+            "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+            "context_green_correlation": null
+          },
+          "source_roi_xywh": [
+            5800,
+            1400,
+            160,
+            160
+          ],
+          "encoding": "Independent LibRaw AHD camera RGB calibrated against its own CFA; not GT",
+          "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-gfx-v1/overcast-sky-reference-rgb-f32.npy"
+        },
+        "sources": [
+          {
+            "role": "noisy",
+            "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+            "metadata": {
+              "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+              "camera": "GFX100S",
+              "pattern": "RGGB",
+              "black_levels": [
+                4101.0,
+                4098.0,
+                4104.0,
+                4106.0
+              ],
+              "white_levels": [
+                65535.0,
+                65535.0,
+                65535.0,
+                65535.0
+              ],
+              "white_balance": [
+                1.5132450331125828,
+                1.0,
+                2.2152317880794703
+              ],
+              "camera_to_srgb": [
+                [
+                  1.0725188393098881,
+                  0.17123593128834644,
+                  -0.24375477059823436
+                ],
+                [
+                  -0.1267191317089774,
+                  1.4310509369654432,
+                  -0.3043318052564657
+                ],
+                [
+                  -0.009697676902906037,
+                  -0.29348063283422965,
+                  1.3031783097371357
+                ]
+              ],
+              "flip": 0,
+              "iso": 6400,
+              "adc_white_level": 65535.0
+            }
+          },
+          {
+            "role": "reference",
+            "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+            "metadata": {
+              "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+              "camera": "GFX100S",
+              "pattern": "RGGB",
+              "black_levels": [
+                256.0,
+                255.0,
+                256.0,
+                256.0
+              ],
+              "white_levels": [
+                65535.0,
+                65535.0,
+                65535.0,
+                65535.0
+              ],
+              "white_balance": [
+                1.5132450331125828,
+                1.0,
+                2.2152317880794703
+              ],
+              "camera_to_srgb": [
+                [
+                  1.0725188393098881,
+                  0.17123593128834644,
+                  -0.24375477059823436
+                ],
+                [
+                  -0.1267191317089774,
+                  1.4310509369654432,
+                  -0.3043318052564657
+                ],
+                [
+                  -0.009697676902906037,
+                  -0.29348063283422965,
+                  1.3031783097371357
+                ]
+              ],
+              "flip": 0,
+              "iso": 100,
+              "adc_white_level": 65535.0
+            }
+          }
+        ],
+        "noise": [
+          0.0014635775921166604,
+          1.0715704128646712e-06
+        ],
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "display_exposure": 4
+      },
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "conditioning": {
+        "shot": 0.0014635775921166604,
+        "read": 1.0715704128646712e-06
+      },
+      "CFA_colors": [
+        [
+          0,
+          1,
+          1,
+          2
+        ]
+      ],
+      "white_balance": [
+        [
+          1.5132449865341187,
+          1.0,
+          2.2152318954467773
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.0725188255310059,
+            0.17123593389987946,
+            -0.2437547743320465
+          ],
+          [
+            -0.126719132065773,
+            1.4310508966445923,
+            -0.30433180928230286
+          ],
+          [
+            -0.00969767663627863,
+            -0.29348063468933105,
+            1.303178310394287
+          ]
+        ]
+      ],
+      "display_exposure": 4,
+      "reference": "ISO100 AHD / not GT",
+      "runtime": "CPU FP32/contiguous/B1/two threads; ordinary EMA inference, no alternate normalization"
+    },
+    {
+      "stage": "first4k",
+      "case": "GFX-building-detail",
+      "repo_image": "images/control-original20k-CPU-crop-669e970da0dde864.png",
+      "image": "crop-669e970da0dde864.png",
+      "caption": "GFX-building-detail/V63 4k CPU",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V63 4k CPU",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 AHD / not GT",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "afdc3e972a7eee4e4d534b0f5a0e5e58766d7f46032fef328908983f74168361",
+      "checkpoint_sha256": "5f29bd7efb94b72491cff22575c0565995326644823bcb802444214c8f2c6bd6",
+      "step": 4000,
+      "source": {
+        "id": "GFX-building-detail",
+        "kind": "real",
+        "raw": {
+          "image": "building-detail-noisy-packed-f32.npy",
+          "sha256": "d4e189e0cd48f85c05fd041001770728a6e2c5af496849516fb0f43ed98b2666",
+          "shape": [
+            1,
+            4,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "role": "noisy-packed",
+          "region": {
+            "name": "building-detail",
+            "noisy_xy": [
+              5790,
+              2690
+            ],
+            "reference_xy": [
+              5791,
+              2690
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.6824449896812439
+          },
+          "context_xywh": [
+            5614,
+            2514,
+            512,
+            512
+          ],
+          "pattern": "RGGB",
+          "encoding": "Four packed CFA phases, black-subtracted/white-normalized sensor units",
+          "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-gfx-v1/building-detail-noisy-packed-f32.npy"
+        },
+        "reference": {
+          "image": "building-detail-reference-rgb-f32.npy",
+          "sha256": "d4ce7ad0a632979efcb19e8153e0585167771a846923ea71c8c0e75ab7ad216c",
+          "shape": [
+            1,
+            3,
+            160,
+            160
+          ],
+          "dtype": "float32",
+          "role": "reference-rgb",
+          "region": {
+            "name": "building-detail",
+            "noisy_xy": [
+              5790,
+              2690
+            ],
+            "reference_xy": [
+              5791,
+              2690
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.6824449896812439
+          },
+          "source_roi_xywh": [
+            5791,
+            2690,
+            160,
+            160
+          ],
+          "encoding": "Independent LibRaw AHD camera RGB calibrated against its own CFA; not GT",
+          "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-gfx-v1/building-detail-reference-rgb-f32.npy"
+        },
+        "sources": [
+          {
+            "role": "noisy",
+            "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+            "metadata": {
+              "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+              "camera": "GFX100S",
+              "pattern": "RGGB",
+              "black_levels": [
+                4101.0,
+                4098.0,
+                4104.0,
+                4106.0
+              ],
+              "white_levels": [
+                65535.0,
+                65535.0,
+                65535.0,
+                65535.0
+              ],
+              "white_balance": [
+                1.5132450331125828,
+                1.0,
+                2.2152317880794703
+              ],
+              "camera_to_srgb": [
+                [
+                  1.0725188393098881,
+                  0.17123593128834644,
+                  -0.24375477059823436
+                ],
+                [
+                  -0.1267191317089774,
+                  1.4310509369654432,
+                  -0.3043318052564657
+                ],
+                [
+                  -0.009697676902906037,
+                  -0.29348063283422965,
+                  1.3031783097371357
+                ]
+              ],
+              "flip": 0,
+              "iso": 6400,
+              "adc_white_level": 65535.0
+            }
+          },
+          {
+            "role": "reference",
+            "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+            "metadata": {
+              "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+              "camera": "GFX100S",
+              "pattern": "RGGB",
+              "black_levels": [
+                256.0,
+                255.0,
+                256.0,
+                256.0
+              ],
+              "white_levels": [
+                65535.0,
+                65535.0,
+                65535.0,
+                65535.0
+              ],
+              "white_balance": [
+                1.5132450331125828,
+                1.0,
+                2.2152317880794703
+              ],
+              "camera_to_srgb": [
+                [
+                  1.0725188393098881,
+                  0.17123593128834644,
+                  -0.24375477059823436
+                ],
+                [
+                  -0.1267191317089774,
+                  1.4310509369654432,
+                  -0.3043318052564657
+                ],
+                [
+                  -0.009697676902906037,
+                  -0.29348063283422965,
+                  1.3031783097371357
+                ]
+              ],
+              "flip": 0,
+              "iso": 100,
+              "adc_white_level": 65535.0
+            }
+          }
+        ],
+        "noise": [
+          0.0014635775921166604,
+          1.0715704128646712e-06
+        ],
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "display_exposure": 4
+      },
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "conditioning": {
+        "shot": 0.0014635775921166604,
+        "read": 1.0715704128646712e-06
+      },
+      "CFA_colors": [
+        [
+          0,
+          1,
+          1,
+          2
+        ]
+      ],
+      "white_balance": [
+        [
+          1.5132449865341187,
+          1.0,
+          2.2152318954467773
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.0725188255310059,
+            0.17123593389987946,
+            -0.2437547743320465
+          ],
+          [
+            -0.126719132065773,
+            1.4310508966445923,
+            -0.30433180928230286
+          ],
+          [
+            -0.00969767663627863,
+            -0.29348063468933105,
+            1.303178310394287
+          ]
+        ]
+      ],
+      "display_exposure": 4,
+      "reference": "ISO100 AHD / not GT",
+      "runtime": "CPU FP32/contiguous/B1/two threads; ordinary EMA inference, no alternate normalization"
+    },
+    {
+      "stage": "final20k",
+      "case": "GFX-building-detail",
+      "repo_image": "images/control-original20k-CPU-crop-b73efcaca642639a.png",
+      "image": "crop-b73efcaca642639a.png",
+      "caption": "GFX-building-detail/V63 20k CPU",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V63 20k CPU",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 AHD / not GT",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "cf545eb6df8b505e55f991521bc9ca14ad379777d3c52c8a1353978b4a613bfe",
+      "checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+      "step": 20000,
+      "source": {
+        "id": "GFX-building-detail",
+        "kind": "real",
+        "raw": {
+          "image": "building-detail-noisy-packed-f32.npy",
+          "sha256": "d4e189e0cd48f85c05fd041001770728a6e2c5af496849516fb0f43ed98b2666",
+          "shape": [
+            1,
+            4,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "role": "noisy-packed",
+          "region": {
+            "name": "building-detail",
+            "noisy_xy": [
+              5790,
+              2690
+            ],
+            "reference_xy": [
+              5791,
+              2690
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.6824449896812439
+          },
+          "context_xywh": [
+            5614,
+            2514,
+            512,
+            512
+          ],
+          "pattern": "RGGB",
+          "encoding": "Four packed CFA phases, black-subtracted/white-normalized sensor units",
+          "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-gfx-v1/building-detail-noisy-packed-f32.npy"
+        },
+        "reference": {
+          "image": "building-detail-reference-rgb-f32.npy",
+          "sha256": "d4ce7ad0a632979efcb19e8153e0585167771a846923ea71c8c0e75ab7ad216c",
+          "shape": [
+            1,
+            3,
+            160,
+            160
+          ],
+          "dtype": "float32",
+          "role": "reference-rgb",
+          "region": {
+            "name": "building-detail",
+            "noisy_xy": [
+              5790,
+              2690
+            ],
+            "reference_xy": [
+              5791,
+              2690
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.6824449896812439
+          },
+          "source_roi_xywh": [
+            5791,
+            2690,
+            160,
+            160
+          ],
+          "encoding": "Independent LibRaw AHD camera RGB calibrated against its own CFA; not GT",
+          "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-gfx-v1/building-detail-reference-rgb-f32.npy"
+        },
+        "sources": [
+          {
+            "role": "noisy",
+            "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+            "metadata": {
+              "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+              "camera": "GFX100S",
+              "pattern": "RGGB",
+              "black_levels": [
+                4101.0,
+                4098.0,
+                4104.0,
+                4106.0
+              ],
+              "white_levels": [
+                65535.0,
+                65535.0,
+                65535.0,
+                65535.0
+              ],
+              "white_balance": [
+                1.5132450331125828,
+                1.0,
+                2.2152317880794703
+              ],
+              "camera_to_srgb": [
+                [
+                  1.0725188393098881,
+                  0.17123593128834644,
+                  -0.24375477059823436
+                ],
+                [
+                  -0.1267191317089774,
+                  1.4310509369654432,
+                  -0.3043318052564657
+                ],
+                [
+                  -0.009697676902906037,
+                  -0.29348063283422965,
+                  1.3031783097371357
+                ]
+              ],
+              "flip": 0,
+              "iso": 6400,
+              "adc_white_level": 65535.0
+            }
+          },
+          {
+            "role": "reference",
+            "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+            "metadata": {
+              "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+              "camera": "GFX100S",
+              "pattern": "RGGB",
+              "black_levels": [
+                256.0,
+                255.0,
+                256.0,
+                256.0
+              ],
+              "white_levels": [
+                65535.0,
+                65535.0,
+                65535.0,
+                65535.0
+              ],
+              "white_balance": [
+                1.5132450331125828,
+                1.0,
+                2.2152317880794703
+              ],
+              "camera_to_srgb": [
+                [
+                  1.0725188393098881,
+                  0.17123593128834644,
+                  -0.24375477059823436
+                ],
+                [
+                  -0.1267191317089774,
+                  1.4310509369654432,
+                  -0.3043318052564657
+                ],
+                [
+                  -0.009697676902906037,
+                  -0.29348063283422965,
+                  1.3031783097371357
+                ]
+              ],
+              "flip": 0,
+              "iso": 100,
+              "adc_white_level": 65535.0
+            }
+          }
+        ],
+        "noise": [
+          0.0014635775921166604,
+          1.0715704128646712e-06
+        ],
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "display_exposure": 4
+      },
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "conditioning": {
+        "shot": 0.0014635775921166604,
+        "read": 1.0715704128646712e-06
+      },
+      "CFA_colors": [
+        [
+          0,
+          1,
+          1,
+          2
+        ]
+      ],
+      "white_balance": [
+        [
+          1.5132449865341187,
+          1.0,
+          2.2152318954467773
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.0725188255310059,
+            0.17123593389987946,
+            -0.2437547743320465
+          ],
+          [
+            -0.126719132065773,
+            1.4310508966445923,
+            -0.30433180928230286
+          ],
+          [
+            -0.00969767663627863,
+            -0.29348063468933105,
+            1.303178310394287
+          ]
+        ]
+      ],
+      "display_exposure": 4,
+      "reference": "ISO100 AHD / not GT",
+      "runtime": "CPU FP32/contiguous/B1/two threads; ordinary EMA inference, no alternate normalization"
+    },
+    {
+      "stage": "first4k",
+      "case": "GFX-foliage",
+      "repo_image": "images/control-original20k-CPU-crop-1fb383cb5a728b14.png",
+      "image": "crop-1fb383cb5a728b14.png",
+      "caption": "GFX-foliage/V63 4k CPU",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V63 4k CPU",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 AHD / not GT",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "b10763d6e7f655ade70034c8a4abf0b8cd4b67186adec70ea3e42037edf089cf",
+      "checkpoint_sha256": "5f29bd7efb94b72491cff22575c0565995326644823bcb802444214c8f2c6bd6",
+      "step": 4000,
+      "source": {
+        "id": "GFX-foliage",
+        "kind": "real",
+        "raw": {
+          "image": "foliage-noisy-packed-f32.npy",
+          "sha256": "a67eec1789664a3e3ea1aaa43e7cb8ece9c8cb9001a8f3b2d7717053d802f278",
+          "shape": [
+            1,
+            4,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "role": "noisy-packed",
+          "region": {
+            "name": "foliage",
+            "noisy_xy": [
+              8890,
+              5570
+            ],
+            "reference_xy": [
+              8890,
+              5570
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9597686529159546
+          },
+          "context_xywh": [
+            8714,
+            5394,
+            512,
+            512
+          ],
+          "pattern": "RGGB",
+          "encoding": "Four packed CFA phases, black-subtracted/white-normalized sensor units",
+          "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-gfx-v1/foliage-noisy-packed-f32.npy"
+        },
+        "reference": {
+          "image": "foliage-reference-rgb-f32.npy",
+          "sha256": "35a77f7035e67561ffde8d214a0275b3f174a2859e6981f968a49a63d535670a",
+          "shape": [
+            1,
+            3,
+            160,
+            160
+          ],
+          "dtype": "float32",
+          "role": "reference-rgb",
+          "region": {
+            "name": "foliage",
+            "noisy_xy": [
+              8890,
+              5570
+            ],
+            "reference_xy": [
+              8890,
+              5570
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9597686529159546
+          },
+          "source_roi_xywh": [
+            8890,
+            5570,
+            160,
+            160
+          ],
+          "encoding": "Independent LibRaw AHD camera RGB calibrated against its own CFA; not GT",
+          "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-gfx-v1/foliage-reference-rgb-f32.npy"
+        },
+        "sources": [
+          {
+            "role": "noisy",
+            "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+            "metadata": {
+              "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+              "camera": "GFX100S",
+              "pattern": "RGGB",
+              "black_levels": [
+                4101.0,
+                4098.0,
+                4104.0,
+                4106.0
+              ],
+              "white_levels": [
+                65535.0,
+                65535.0,
+                65535.0,
+                65535.0
+              ],
+              "white_balance": [
+                1.5132450331125828,
+                1.0,
+                2.2152317880794703
+              ],
+              "camera_to_srgb": [
+                [
+                  1.0725188393098881,
+                  0.17123593128834644,
+                  -0.24375477059823436
+                ],
+                [
+                  -0.1267191317089774,
+                  1.4310509369654432,
+                  -0.3043318052564657
+                ],
+                [
+                  -0.009697676902906037,
+                  -0.29348063283422965,
+                  1.3031783097371357
+                ]
+              ],
+              "flip": 0,
+              "iso": 6400,
+              "adc_white_level": 65535.0
+            }
+          },
+          {
+            "role": "reference",
+            "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+            "metadata": {
+              "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+              "camera": "GFX100S",
+              "pattern": "RGGB",
+              "black_levels": [
+                256.0,
+                255.0,
+                256.0,
+                256.0
+              ],
+              "white_levels": [
+                65535.0,
+                65535.0,
+                65535.0,
+                65535.0
+              ],
+              "white_balance": [
+                1.5132450331125828,
+                1.0,
+                2.2152317880794703
+              ],
+              "camera_to_srgb": [
+                [
+                  1.0725188393098881,
+                  0.17123593128834644,
+                  -0.24375477059823436
+                ],
+                [
+                  -0.1267191317089774,
+                  1.4310509369654432,
+                  -0.3043318052564657
+                ],
+                [
+                  -0.009697676902906037,
+                  -0.29348063283422965,
+                  1.3031783097371357
+                ]
+              ],
+              "flip": 0,
+              "iso": 100,
+              "adc_white_level": 65535.0
+            }
+          }
+        ],
+        "noise": [
+          0.0014635775921166604,
+          1.0715704128646712e-06
+        ],
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "display_exposure": 4
+      },
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "conditioning": {
+        "shot": 0.0014635775921166604,
+        "read": 1.0715704128646712e-06
+      },
+      "CFA_colors": [
+        [
+          0,
+          1,
+          1,
+          2
+        ]
+      ],
+      "white_balance": [
+        [
+          1.5132449865341187,
+          1.0,
+          2.2152318954467773
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.0725188255310059,
+            0.17123593389987946,
+            -0.2437547743320465
+          ],
+          [
+            -0.126719132065773,
+            1.4310508966445923,
+            -0.30433180928230286
+          ],
+          [
+            -0.00969767663627863,
+            -0.29348063468933105,
+            1.303178310394287
+          ]
+        ]
+      ],
+      "display_exposure": 4,
+      "reference": "ISO100 AHD / not GT",
+      "runtime": "CPU FP32/contiguous/B1/two threads; ordinary EMA inference, no alternate normalization"
+    },
+    {
+      "stage": "final20k",
+      "case": "GFX-foliage",
+      "repo_image": "images/control-original20k-CPU-crop-6f2f92b39bae1201.png",
+      "image": "crop-6f2f92b39bae1201.png",
+      "caption": "GFX-foliage/V63 20k CPU",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V63 20k CPU",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 AHD / not GT",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "2dd573eb2b305e941f353c10740adc8e2c83eff6c07a3a65d64db739fc8f0282",
+      "checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+      "step": 20000,
+      "source": {
+        "id": "GFX-foliage",
+        "kind": "real",
+        "raw": {
+          "image": "foliage-noisy-packed-f32.npy",
+          "sha256": "a67eec1789664a3e3ea1aaa43e7cb8ece9c8cb9001a8f3b2d7717053d802f278",
+          "shape": [
+            1,
+            4,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "role": "noisy-packed",
+          "region": {
+            "name": "foliage",
+            "noisy_xy": [
+              8890,
+              5570
+            ],
+            "reference_xy": [
+              8890,
+              5570
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9597686529159546
+          },
+          "context_xywh": [
+            8714,
+            5394,
+            512,
+            512
+          ],
+          "pattern": "RGGB",
+          "encoding": "Four packed CFA phases, black-subtracted/white-normalized sensor units",
+          "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-gfx-v1/foliage-noisy-packed-f32.npy"
+        },
+        "reference": {
+          "image": "foliage-reference-rgb-f32.npy",
+          "sha256": "35a77f7035e67561ffde8d214a0275b3f174a2859e6981f968a49a63d535670a",
+          "shape": [
+            1,
+            3,
+            160,
+            160
+          ],
+          "dtype": "float32",
+          "role": "reference-rgb",
+          "region": {
+            "name": "foliage",
+            "noisy_xy": [
+              8890,
+              5570
+            ],
+            "reference_xy": [
+              8890,
+              5570
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9597686529159546
+          },
+          "source_roi_xywh": [
+            8890,
+            5570,
+            160,
+            160
+          ],
+          "encoding": "Independent LibRaw AHD camera RGB calibrated against its own CFA; not GT",
+          "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-gfx-v1/foliage-reference-rgb-f32.npy"
+        },
+        "sources": [
+          {
+            "role": "noisy",
+            "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+            "metadata": {
+              "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+              "camera": "GFX100S",
+              "pattern": "RGGB",
+              "black_levels": [
+                4101.0,
+                4098.0,
+                4104.0,
+                4106.0
+              ],
+              "white_levels": [
+                65535.0,
+                65535.0,
+                65535.0,
+                65535.0
+              ],
+              "white_balance": [
+                1.5132450331125828,
+                1.0,
+                2.2152317880794703
+              ],
+              "camera_to_srgb": [
+                [
+                  1.0725188393098881,
+                  0.17123593128834644,
+                  -0.24375477059823436
+                ],
+                [
+                  -0.1267191317089774,
+                  1.4310509369654432,
+                  -0.3043318052564657
+                ],
+                [
+                  -0.009697676902906037,
+                  -0.29348063283422965,
+                  1.3031783097371357
+                ]
+              ],
+              "flip": 0,
+              "iso": 6400,
+              "adc_white_level": 65535.0
+            }
+          },
+          {
+            "role": "reference",
+            "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+            "metadata": {
+              "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+              "camera": "GFX100S",
+              "pattern": "RGGB",
+              "black_levels": [
+                256.0,
+                255.0,
+                256.0,
+                256.0
+              ],
+              "white_levels": [
+                65535.0,
+                65535.0,
+                65535.0,
+                65535.0
+              ],
+              "white_balance": [
+                1.5132450331125828,
+                1.0,
+                2.2152317880794703
+              ],
+              "camera_to_srgb": [
+                [
+                  1.0725188393098881,
+                  0.17123593128834644,
+                  -0.24375477059823436
+                ],
+                [
+                  -0.1267191317089774,
+                  1.4310509369654432,
+                  -0.3043318052564657
+                ],
+                [
+                  -0.009697676902906037,
+                  -0.29348063283422965,
+                  1.3031783097371357
+                ]
+              ],
+              "flip": 0,
+              "iso": 100,
+              "adc_white_level": 65535.0
+            }
+          }
+        ],
+        "noise": [
+          0.0014635775921166604,
+          1.0715704128646712e-06
+        ],
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "display_exposure": 4
+      },
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "conditioning": {
+        "shot": 0.0014635775921166604,
+        "read": 1.0715704128646712e-06
+      },
+      "CFA_colors": [
+        [
+          0,
+          1,
+          1,
+          2
+        ]
+      ],
+      "white_balance": [
+        [
+          1.5132449865341187,
+          1.0,
+          2.2152318954467773
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.0725188255310059,
+            0.17123593389987946,
+            -0.2437547743320465
+          ],
+          [
+            -0.126719132065773,
+            1.4310508966445923,
+            -0.30433180928230286
+          ],
+          [
+            -0.00969767663627863,
+            -0.29348063468933105,
+            1.303178310394287
+          ]
+        ]
+      ],
+      "display_exposure": 4,
+      "reference": "ISO100 AHD / not GT",
+      "runtime": "CPU FP32/contiguous/B1/two threads; ordinary EMA inference, no alternate normalization"
+    },
+    {
+      "stage": "first4k",
+      "case": "GFX-chain-link-fence",
+      "repo_image": "images/control-original20k-CPU-crop-3cc560395c173af9.png",
+      "image": "crop-3cc560395c173af9.png",
+      "caption": "GFX-chain-link-fence/V63 4k CPU",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V63 4k CPU",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 AHD / not GT",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "ca5da1ee88dc876541adbe32c9bbf6e1e8993c8cd4b387209b9ffd4fad63503f",
+      "checkpoint_sha256": "5f29bd7efb94b72491cff22575c0565995326644823bcb802444214c8f2c6bd6",
+      "step": 4000,
+      "source": {
+        "id": "GFX-chain-link-fence",
+        "kind": "real",
+        "raw": {
+          "image": "chain-link-fence-noisy-packed-f32.npy",
+          "sha256": "b145f28630c1abce870c99bc24160fa0276ef31bcff14e5a72d577c964c9d495",
+          "shape": [
+            1,
+            4,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "role": "noisy-packed",
+          "region": {
+            "name": "chain-link-fence",
+            "noisy_xy": [
+              2240,
+              6000
+            ],
+            "reference_xy": [
+              2241,
+              6000
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9550720453262329
+          },
+          "context_xywh": [
+            2064,
+            5824,
+            512,
+            512
+          ],
+          "pattern": "RGGB",
+          "encoding": "Four packed CFA phases, black-subtracted/white-normalized sensor units",
+          "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-gfx-v1/chain-link-fence-noisy-packed-f32.npy"
+        },
+        "reference": {
+          "image": "chain-link-fence-reference-rgb-f32.npy",
+          "sha256": "07b02153c74b8d92052f0fc15ce417f64e54f551433ab87a6006eee44eeafe6a",
+          "shape": [
+            1,
+            3,
+            160,
+            160
+          ],
+          "dtype": "float32",
+          "role": "reference-rgb",
+          "region": {
+            "name": "chain-link-fence",
+            "noisy_xy": [
+              2240,
+              6000
+            ],
+            "reference_xy": [
+              2241,
+              6000
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9550720453262329
+          },
+          "source_roi_xywh": [
+            2241,
+            6000,
+            160,
+            160
+          ],
+          "encoding": "Independent LibRaw AHD camera RGB calibrated against its own CFA; not GT",
+          "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-gfx-v1/chain-link-fence-reference-rgb-f32.npy"
+        },
+        "sources": [
+          {
+            "role": "noisy",
+            "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+            "metadata": {
+              "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+              "camera": "GFX100S",
+              "pattern": "RGGB",
+              "black_levels": [
+                4101.0,
+                4098.0,
+                4104.0,
+                4106.0
+              ],
+              "white_levels": [
+                65535.0,
+                65535.0,
+                65535.0,
+                65535.0
+              ],
+              "white_balance": [
+                1.5132450331125828,
+                1.0,
+                2.2152317880794703
+              ],
+              "camera_to_srgb": [
+                [
+                  1.0725188393098881,
+                  0.17123593128834644,
+                  -0.24375477059823436
+                ],
+                [
+                  -0.1267191317089774,
+                  1.4310509369654432,
+                  -0.3043318052564657
+                ],
+                [
+                  -0.009697676902906037,
+                  -0.29348063283422965,
+                  1.3031783097371357
+                ]
+              ],
+              "flip": 0,
+              "iso": 6400,
+              "adc_white_level": 65535.0
+            }
+          },
+          {
+            "role": "reference",
+            "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+            "metadata": {
+              "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+              "camera": "GFX100S",
+              "pattern": "RGGB",
+              "black_levels": [
+                256.0,
+                255.0,
+                256.0,
+                256.0
+              ],
+              "white_levels": [
+                65535.0,
+                65535.0,
+                65535.0,
+                65535.0
+              ],
+              "white_balance": [
+                1.5132450331125828,
+                1.0,
+                2.2152317880794703
+              ],
+              "camera_to_srgb": [
+                [
+                  1.0725188393098881,
+                  0.17123593128834644,
+                  -0.24375477059823436
+                ],
+                [
+                  -0.1267191317089774,
+                  1.4310509369654432,
+                  -0.3043318052564657
+                ],
+                [
+                  -0.009697676902906037,
+                  -0.29348063283422965,
+                  1.3031783097371357
+                ]
+              ],
+              "flip": 0,
+              "iso": 100,
+              "adc_white_level": 65535.0
+            }
+          }
+        ],
+        "noise": [
+          0.0014635775921166604,
+          1.0715704128646712e-06
+        ],
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "display_exposure": 4
+      },
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "conditioning": {
+        "shot": 0.0014635775921166604,
+        "read": 1.0715704128646712e-06
+      },
+      "CFA_colors": [
+        [
+          0,
+          1,
+          1,
+          2
+        ]
+      ],
+      "white_balance": [
+        [
+          1.5132449865341187,
+          1.0,
+          2.2152318954467773
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.0725188255310059,
+            0.17123593389987946,
+            -0.2437547743320465
+          ],
+          [
+            -0.126719132065773,
+            1.4310508966445923,
+            -0.30433180928230286
+          ],
+          [
+            -0.00969767663627863,
+            -0.29348063468933105,
+            1.303178310394287
+          ]
+        ]
+      ],
+      "display_exposure": 4,
+      "reference": "ISO100 AHD / not GT",
+      "runtime": "CPU FP32/contiguous/B1/two threads; ordinary EMA inference, no alternate normalization"
+    },
+    {
+      "stage": "final20k",
+      "case": "GFX-chain-link-fence",
+      "repo_image": "images/control-original20k-CPU-crop-64fc8fff7577a2b5.png",
+      "image": "crop-64fc8fff7577a2b5.png",
+      "caption": "GFX-chain-link-fence/V63 20k CPU",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V63 20k CPU",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 AHD / not GT",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "8019b4e9f8e7071d1d786e0e9a0224bbe59686aa5b72b6b412c484a71bc0839a",
+      "checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+      "step": 20000,
+      "source": {
+        "id": "GFX-chain-link-fence",
+        "kind": "real",
+        "raw": {
+          "image": "chain-link-fence-noisy-packed-f32.npy",
+          "sha256": "b145f28630c1abce870c99bc24160fa0276ef31bcff14e5a72d577c964c9d495",
+          "shape": [
+            1,
+            4,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "role": "noisy-packed",
+          "region": {
+            "name": "chain-link-fence",
+            "noisy_xy": [
+              2240,
+              6000
+            ],
+            "reference_xy": [
+              2241,
+              6000
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9550720453262329
+          },
+          "context_xywh": [
+            2064,
+            5824,
+            512,
+            512
+          ],
+          "pattern": "RGGB",
+          "encoding": "Four packed CFA phases, black-subtracted/white-normalized sensor units",
+          "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-gfx-v1/chain-link-fence-noisy-packed-f32.npy"
+        },
+        "reference": {
+          "image": "chain-link-fence-reference-rgb-f32.npy",
+          "sha256": "07b02153c74b8d92052f0fc15ce417f64e54f551433ab87a6006eee44eeafe6a",
+          "shape": [
+            1,
+            3,
+            160,
+            160
+          ],
+          "dtype": "float32",
+          "role": "reference-rgb",
+          "region": {
+            "name": "chain-link-fence",
+            "noisy_xy": [
+              2240,
+              6000
+            ],
+            "reference_xy": [
+              2241,
+              6000
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9550720453262329
+          },
+          "source_roi_xywh": [
+            2241,
+            6000,
+            160,
+            160
+          ],
+          "encoding": "Independent LibRaw AHD camera RGB calibrated against its own CFA; not GT",
+          "path": "/mnt/external/demosaic/evaluation/wide-flat-palette-full4k-gfx-v1/chain-link-fence-reference-rgb-f32.npy"
+        },
+        "sources": [
+          {
+            "role": "noisy",
+            "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+            "metadata": {
+              "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+              "camera": "GFX100S",
+              "pattern": "RGGB",
+              "black_levels": [
+                4101.0,
+                4098.0,
+                4104.0,
+                4106.0
+              ],
+              "white_levels": [
+                65535.0,
+                65535.0,
+                65535.0,
+                65535.0
+              ],
+              "white_balance": [
+                1.5132450331125828,
+                1.0,
+                2.2152317880794703
+              ],
+              "camera_to_srgb": [
+                [
+                  1.0725188393098881,
+                  0.17123593128834644,
+                  -0.24375477059823436
+                ],
+                [
+                  -0.1267191317089774,
+                  1.4310509369654432,
+                  -0.3043318052564657
+                ],
+                [
+                  -0.009697676902906037,
+                  -0.29348063283422965,
+                  1.3031783097371357
+                ]
+              ],
+              "flip": 0,
+              "iso": 6400,
+              "adc_white_level": 65535.0
+            }
+          },
+          {
+            "role": "reference",
+            "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+            "metadata": {
+              "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+              "camera": "GFX100S",
+              "pattern": "RGGB",
+              "black_levels": [
+                256.0,
+                255.0,
+                256.0,
+                256.0
+              ],
+              "white_levels": [
+                65535.0,
+                65535.0,
+                65535.0,
+                65535.0
+              ],
+              "white_balance": [
+                1.5132450331125828,
+                1.0,
+                2.2152317880794703
+              ],
+              "camera_to_srgb": [
+                [
+                  1.0725188393098881,
+                  0.17123593128834644,
+                  -0.24375477059823436
+                ],
+                [
+                  -0.1267191317089774,
+                  1.4310509369654432,
+                  -0.3043318052564657
+                ],
+                [
+                  -0.009697676902906037,
+                  -0.29348063283422965,
+                  1.3031783097371357
+                ]
+              ],
+              "flip": 0,
+              "iso": 100,
+              "adc_white_level": 65535.0
+            }
+          }
+        ],
+        "noise": [
+          0.0014635775921166604,
+          1.0715704128646712e-06
+        ],
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "display_exposure": 4
+      },
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "conditioning": {
+        "shot": 0.0014635775921166604,
+        "read": 1.0715704128646712e-06
+      },
+      "CFA_colors": [
+        [
+          0,
+          1,
+          1,
+          2
+        ]
+      ],
+      "white_balance": [
+        [
+          1.5132449865341187,
+          1.0,
+          2.2152318954467773
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.0725188255310059,
+            0.17123593389987946,
+            -0.2437547743320465
+          ],
+          [
+            -0.126719132065773,
+            1.4310508966445923,
+            -0.30433180928230286
+          ],
+          [
+            -0.00969767663627863,
+            -0.29348063468933105,
+            1.303178310394287
+          ]
+        ]
+      ],
+      "display_exposure": 4,
+      "reference": "ISO100 AHD / not GT",
+      "runtime": "CPU FP32/contiguous/B1/two threads; ordinary EMA inference, no alternate normalization"
+    }
+  ],
+  "actual_neural_forwards": 16,
+  "paired_operator": {
+    "path": "/home/dllu/proj/demosaic/.cache/compare_control_endpoints_cpu.py",
+    "sha256": "a1810244e79f0da66ac9a2492d5593de8666377dcb790146c6901ccbe7771f6a"
+  },
+  "new_forwards_in_comparison_or_audits": 0,
+  "pair_checks": "Same archived model source, operator, observations, noise, CFA, WB, matrix, ROI and display exposure; every paired noisy/reference 160px panel matches bitwise.",
+  "decision": "Mixed selected-case progress; do not promote. Retain working reference and await expanded20k plus the full two-arm primary/hue/real-camera review.",
+  "limits": "Eight fixed CPU FP32/B1/two-thread contexts, not a broad or blind benchmark. Exact-target metrics use border8 of native256; displayed panels use native160 ROIs. GFX uses native512 contexts and an independently demosaiced ISO100 f/5.6 reference, never scored as exact GT. SSIM is production-only, not independently recomputed. CFA means are input consistency diagnostics, not corrections or real-reference quality scores. No new noise, GPU work, training, cold originals or speed measurement."
+}
