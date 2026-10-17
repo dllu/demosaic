@@ -1,0 +1,183 @@
+{
+  "status": "actual-reviewed-original4000-continuation-control-resumed-augmentation-serially-pending",
+  "created_UTC": "2026-10-17T18:11:10.437719+00:00",
+  "original_horizon": 4000,
+  "resumed_from": 1000,
+  "new_training_budget": false,
+  "first1k_quality_review": {
+    "path": "/home/dllu/proj/demosaic/docs/results/normalization-v68-v69-first1k-review.json",
+    "sha256": "9d7bae9e61a8f9d32bf241c7645023ac19544e9e965cd06de5f014cfd18dedb0"
+  },
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-original4k-continuation-v2/plan.json",
+    "sha256": "0e87e86f935ee9ff484668f9722bc71f1a03428d80c0be9ae352c849ce8a9d47"
+  },
+  "driver": {
+    "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-original4k-continuation-v2/controller.py",
+    "sha256": "b9b76cbf7868f0d6807413a611d6a32953b605677c73ffb0c5a6b1e8dc40287c"
+  },
+  "production_wrapper": {
+    "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-original4k-continuation-v2/resume-production.py",
+    "sha256": "fb0dcaf22252bebe598c5eaa8a44585c6c3c3dee42032bad914d0da5e14ee80e"
+  },
+  "status_snapshot": {
+    "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-original4k-continuation-v2/launch-at-publication.json",
+    "sha256": "c0b63c6549f36d109d8ad83c8a9e45b96110a9f11ed99befbe10f0227b95a9bc"
+  },
+  "operational_status_path": "/mnt/external/demosaic/runs/normalization-v68-v69-original4k-continuation-v2.json",
+  "actual_live_controller": {
+    "pid": 622973,
+    "created": 1792260581.4,
+    "driver_sha256": "b9b76cbf7868f0d6807413a611d6a32953b605677c73ffb0c5a6b1e8dc40287c"
+  },
+  "actual_live_child": {
+    "pid": 623004,
+    "created": 1792260584.48
+  },
+  "frozen_guard_count": 183,
+  "arms": [
+    {
+      "arm": "control",
+      "recipe": {
+        "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-original4k-continuation-v2/control.yaml",
+        "sha256": "9b3e165f324a1d61bbe6073eb186395f538930f2709a39082256a895359f4277"
+      },
+      "resume": {
+        "path": "/mnt/external/demosaic/models/dino-convnext-normalization-control-b16-v68-step1000.pt",
+        "sha256": "456a5fb245bc807d91470cbb067e137ea48ace8eb5796a3d6ad9218573d9ad0c"
+      },
+      "run": "/mnt/external/demosaic/runs/dino-convnext-normalization-control-b16-v68-original4k-v2",
+      "only_config_change_from_first1k": "run",
+      "original_first1k_log": {
+        "path": "/mnt/external/demosaic/runs/dino-convnext-normalization-control-b16-v68/metrics.jsonl",
+        "sha256": "dd7d73bf3935ed0746fdf08e3418a4e45303f4ab0e4f7f729ff3d3c3828daf15"
+      },
+      "final_checkpoint_path": "/mnt/external/demosaic/models/dino-convnext-normalization-control-b16-v68-step4000.pt"
+    },
+    {
+      "arm": "augmented",
+      "recipe": {
+        "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-original4k-continuation-v2/augmented.yaml",
+        "sha256": "b2709a6fd9ad9d5ccf100cf4e50ad1aa7f565357ebc4e3692a1f43a82548d060"
+      },
+      "resume": {
+        "path": "/mnt/external/demosaic/models/dino-convnext-normalization-augmented-b16-v69-step1000.pt",
+        "sha256": "6f34be8b2cc4fbba1116b4ed17bbafe41d5526da928238d194b6355b9b8b665c"
+      },
+      "run": "/mnt/external/demosaic/runs/dino-convnext-normalization-augmented-b16-v69-original4k-v2",
+      "only_config_change_from_first1k": "run",
+      "original_first1k_log": {
+        "path": "/mnt/external/demosaic/runs/dino-convnext-normalization-augmented-b16-v69/metrics.jsonl",
+        "sha256": "723c0c9fd874082db8b6e7d804e2a9afd8bca7da7dad665d72179a3b37ae7eca"
+      },
+      "final_checkpoint_path": "/mnt/external/demosaic/models/dino-convnext-normalization-augmented-b16-v69-step4000.pt"
+    }
+  ],
+  "actual_control_resume_checks": {
+    "receipt": {
+      "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-original4k-continuation-v2/control-resume-restoration.json",
+      "sha256": "3cd28a19530e4320ad25a6733051f434b9e9e9218e663834b5148cc1004f9a56"
+    },
+    "result": {
+      "arm": "control",
+      "resume_checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-convnext-normalization-control-b16-v68-step1000.pt",
+        "sha256": "456a5fb245bc807d91470cbb067e137ea48ace8eb5796a3d6ad9218573d9ad0c"
+      },
+      "actual_start_step": 1000,
+      "original_horizon": 4000,
+      "instrumentation": "One-time read-only state checks; no new model, gradient/EMA/data/RNG changes.",
+      "model_and_all89_Adam_states_exact": true,
+      "all_three_RNG_families_exact_before_fetch": true,
+      "DINO_hash_before": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd",
+      "EMA_exact_before_first_update": true
+    },
+    "EMA_check_timing": "Before the first EMA update, after the first optimizer step; all model/Adam/RNG checks occur before the first data fetch."
+  },
+  "control_new_training_rows_at_capture": [
+    {
+      "event": "train",
+      "step": 1001,
+      "loss": 0.003374384483322501,
+      "lr": 2.659768053359446e-06,
+      "grad_norm": 0.18119613826274872,
+      "seconds_per_step": 9.829229082912207,
+      "cuda_gb": 7.486035456,
+      "domain": "paired-RAW",
+      "paired_sensor": 0.0014717670856043696,
+      "paired_coarse_rendered": 0.0035214521922171116,
+      "paired_auxiliary": 0.001418913365341723,
+      "batch_sha256": "7bdec4b7f85baa046c2caa89099171077449a0aac06c7180c216550622c5eb71"
+    },
+    {
+      "event": "train",
+      "step": 1025,
+      "loss": 0.015902381390333176,
+      "lr": 2.6422576080550436e-06,
+      "grad_norm": 2.2897300720214844,
+      "seconds_per_step": 1.4454273466765881,
+      "cuda_gb": 7.486035456,
+      "domain": "synthetic",
+      "linear": 0.008246652781963348,
+      "rendered": 0.009002967737615108,
+      "gradient": 0.007859408855438232,
+      "highlight": 0.01647058315575123,
+      "sensor": 0.00721244141459465,
+      "batch_sha256": "a7681252c805270bd54a903db9f3490e9ba2ab182315a2d61dfe463b9f09497c"
+    },
+    {
+      "event": "train",
+      "step": 1050,
+      "loss": 0.011230507865548134,
+      "lr": 2.62362330391415e-06,
+      "grad_norm": 0.2100866436958313,
+      "seconds_per_step": 1.0241167457168923,
+      "cuda_gb": 7.486035456,
+      "domain": "native-RAW-synthetic",
+      "linear": 0.003976586274802685,
+      "rendered": 0.009458284825086594,
+      "gradient": 0.009607300162315369,
+      "highlight": 0.012038890272378922,
+      "sensor": 0.003601598087698221,
+      "batch_sha256": "60d4a9fa01b1acf60342909d62ad314b857fa76831c2e592304595bb43dbabbc"
+    },
+    {
+      "event": "train",
+      "step": 1075,
+      "loss": 0.01454357523471117,
+      "lr": 2.604594154601839e-06,
+      "grad_norm": 1.202818751335144,
+      "seconds_per_step": 0.8856595876005788,
+      "cuda_gb": 7.486035456,
+      "domain": "synthetic",
+      "linear": 0.006944058462977409,
+      "rendered": 0.009013598784804344,
+      "gradient": 0.007508830167353153,
+      "highlight": 0.016994157806038857,
+      "sensor": 0.006424176041036844,
+      "batch_sha256": "061e416e4335532a2061dd1286480d6de4bd2fb2adcb4b20528513d23d37f612"
+    }
+  ],
+  "augmented_new_training_rows_at_capture": [],
+  "all_first1k_logs_checkpoints_and_review_unchanged": true,
+  "failed_attempt": {
+    "status": {
+      "path": "/mnt/external/demosaic/runs/normalization-v68-v69-original4k-continuation-v1.json",
+      "sha256": "8e8457686608050b076c64dca15d1f0391d312d3951ad45267f531004af49ab0"
+    },
+    "log": {
+      "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-original4k-continuation-v1/control-production.log",
+      "sha256": "f2acd052392bd752107a659973424b672c5cd612002f478971c397084fbfc7ea"
+    },
+    "zero_updates_and_no_new_checkpoint": true,
+    "cause": "Production wrapper lacked __main__ guard for spawn workers. Explicitly stopped only exact owned failed trainer process group622244/1792260453.59 after observed worker traceback/stall. Original controller recorded failure.",
+    "correction": "Fresh v2 root/run dirs; main guard wraps runtime. Actual frozen wrapper imported under __mp_main__ on CPU without starting training/writing outputs/initializing CUDA."
+  },
+  "quality_review_queued": false,
+  "next_required_work": "Complete both original4k schedules and their boundary/input audits, then full4k quality/native review; no post4000 continuation or promotion.",
+  "scope": "Actual control start only. Matched augmented continuation and future4k quality are pending. No new corpus, seed, LR horizon, source, loss or inference policy. Restoration checks are read-only instrumentation, not discarded training. Full PROMPT objective unmet/unproven.",
+  "publication_operator": {
+    "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-original4k-continuation-v2/publication-source.py",
+    "sha256": "794845bfcdad889903cdc1b7d78b18bd9a81c0c5813b31c3df1873d13062d226"
+  }
+}

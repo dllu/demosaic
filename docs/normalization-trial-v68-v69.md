@@ -147,3 +147,33 @@ promotion. The explicit quality decision is to finish the originally planned
 run directories to preserve first1k artifacts. Data, seed, LR horizon, frozen
 source and policy remain fixed. No new training budget or corpus is introduced.
 The completed4k endpoints need a new full review before any promotion.
+
+## Actual original4k continuation
+
+[Restored production state and actual launch](results/normalization-original4k-continuation-launch.json).
+V68 control has resumed from step1,000 and passed step1,025. The actual model,
+all89 Adam states and Python/Torch/CUDA RNG families match the saved checkpoint
+before the first data fetch. EMA matches before its first update; frozen DINO
+has its expected hash and stays gradient-free. These read-only checks execute
+inside the production run, without discarded training updates. V69 follows
+serially after control completes. All1k checkpoints/logs/review stay unchanged;
+the only recipe change is a separate output run directory. The original4k LR
+curve, source bundle, data, seed and normalization policies remain fixed.
+
+The first continuation wrapper missed the spawn-worker main guard and made
+zero updates. Only its exact owned failed trainer process group was stopped;
+the failed status/log/run directories remain intact. The corrected frozen
+wrapper passes a CPU import under`__mp_main__` without training/file writes/
+CUDA initialization, then resumes in fresh v2 directories. No original checkpoint,
+data, model or numerical bound was changed to recover.
+
+Actual launch identities: controller622973/1792260581.40 and control
+trainer623004/1792260584.48. These are historical launch identities; verify
+current status and creation times before acting. Operational status:
+`/mnt/external/demosaic/runs/normalization-v68-v69-original4k-continuation-v2.json`.
+Frozen plan/controller/production wrapper and logs:
+`/mnt/external/demosaic/benchmarks/normalization-v68-v69-original4k-continuation-v2/`.
+The183 frozen guards also bind the preserved first1k inputs and completed review.
+At this capture the full4k quality review is not yet queued. Both4k boundaries,
+matched new input/LR checks and the next full/native quality review remain work.
+There is no automatic post4k continuation or promotion.
