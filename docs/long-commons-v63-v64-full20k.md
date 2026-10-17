@@ -1,12 +1,17 @@
-# Finish the original matched Commons schedules
+# Original matched Commons schedules: training complete, review running
 
-V63 and V64 are deliberately continuing from their reviewed4,000-update whole
-states to the **original20,000 endpoint**. The first4k comparison improved photo
-means over V60, but found a small mixed data effect and soft native detail.
-The later completed V67 RAW-only reconstruction experiment loses primary quality
-and weak detail. Return to the stronger RGB+DINO path and complete the original
-longer-data comparison before drawing conclusions about its budget. This is a
-research decision after both reviews, not automatic continuation or promotion.
+V63 and V64 both completed their **original20,000-update schedules**. The actual
+trainers and training controller exited; both audited immutable checkpoints
+verify. The primary two-arm evaluation is running, and the final statistics/hue/
+artifact review remains queued. Training completion does not establish improved
+quality, convergence or a beneficial extra-data effect. V43 remains the working
+reference until the full evidence and native views are reviewed.
+
+[Actual training completion, checkpoint hashes and logged cross-arm checks](results/long-commons-v63-v64-original20k-training-completion.json).
+The continuation returned to the stronger RGB+DINO path after the negative V67
+RAW-head review. Its first4k photo means improved over V60, but the data effect
+was small and mixed and native detail stayed soft. Completing the original
+schedule preserves that matched comparison without adding training budget.
 
 [Actual launch, source/state/data guards, genuine CUDA resume fixtures and startup](results/long-commons-v63-v64-full20k-resume-launch.json).
 [First4k quality review](long-commons-v63-v64-first4k-review.md).
@@ -64,39 +69,45 @@ import Torch before model/training. That log is preserved. Actual fixtures use
 the existing locked repository interpreter and repository cache environment;
 no model state or training run was restarted.
 
-## Live execution and required final review
+## Completed execution and required final review
 
-Controller PID3228279/creation1792233978.99 runs V63 first, child3228295/
-1792233981.29 at launch. It then audits/freezes the original20k boundary before
-starting V64. Status:
+Controller PID3228279/creation1792233978.99 ran V63 first, child3228295/
+1792233981.29 at launch, then audited/froze its original20k boundary before
+starting V64, child169989/creation1792243965.62. These are historical identities;
+both training arms and the training controller have exited. Terminal status:
 `/mnt/external/demosaic/runs/long-commons-v63-v64-full20k-workflow-v1.json`.
 Plan, frozen package, fixtures, drivers and logs:
 `/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/`.
 Check actual PID/creation/status before acting; an observation timeout is not a
 training failure. No automatic retry is installed.
 
-The final state gate checks91/91/89, complete RNG, source/data/recipe/lineage,
+Both final state gates passed91/91/89, complete RNG, source/data/recipe/lineage,
 all802 training rows including161 original and641 resumed, first-resumed input
-witnesses and the original LR schedule through1e-6. Both arms must share every
-logged step/domain/LR and all unchanged native/paired hashes.
+witnesses and the original LR schedule through1e-6. Direct log checks reproduce
+all1,604 logged learning rates exactly and verify every paired step/domain/LR
+field across802 rows. All375 logged paired/native input hashes match. This does
+not claim that unlogged observations were separately hashed. Both original4k
+checkpoint hashes and their original performance-review JSON remain unchanged.
 
-The control has now completed and passed this boundary gate. Its immutable20k
-checkpoint hash is
-`ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5`.
-The expanded arm then started as child169989/creation1792243965.62. An
+Immutable20k checkpoint SHA256:
+
+- V63 control: `ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5`.
+- V64 expanded: `69d08a3bacf8ea436d807512c7a5fd61cb7f119d1f869bd5eab555c2473efe6d`.
+
+An
 [interim CPU native comparison against control4k](long-commons-v63-control-original20k-CPU-review.md)
 executes eight fixed observations at both endpoints, with independent array
 checks and sixteen actual native views. The fabric photograph regresses,
 building improves slightly, and two selected colors improve; GFX detail stays
-soft. This does not promote the control. Expanded20k and the full two-arm review
-remain pending; these launch identities should be checked against live processes.
+soft. This does not promote the control. The full two-arm quality review remains
+pending; completed training is not a substitute for that comparison.
 
-Primary-review owner PID3231021/creation1792234172.79 waits for the exact
-training controller to finish and exit. Its status is
+Primary-review owner PID3231021/creation1792234172.79 observed the exact
+training controller finish and exit, passed its gate, and began evaluation. Its status is
 `/mnt/external/demosaic/runs/long-commons-v63-v64-full20k-review-workflow-v1.json`.
-At capture it is live and child-free, with all seven panel outputs absent.
-Calling its gate against the actual running controller rejects before output.
-It will separately audit both20k states and evaluate only the two new models:
+At launch the actual running-controller gate rejected before output; that
+historical check is preserved in the launch receipt. The review separately
+audits both20k states and evaluates only the two new models:
 known360/unseen450/full42762,020 cases, analytic1,344 cases, two full GFX outputs
 with eight native crops, twelve other-camera crops, and64 CPU-color predictions
 with an independent audit. Immutable previously executed panel tools are reused.
@@ -119,8 +130,8 @@ original trajectory does not isolate architecture/seed effects or prove converge
 
 CPU execution on the actual completed4k panels reproduces all84 published
 comparisons and coverage/arithmetic exactly. Twenty-four self-progress
-comparisons and their intervals are exactly zero. The actual pending20k owners
-are rejected. The hue selector independently verifies all2,352 retained V60/
+comparisons and their intervals are exactly zero. At launch the actual pending
+20k owners were rejected. The hue selector independently verifies all2,352 retained V60/
 reference array hashes and correctly identifies the genuine4k arms as absent
 from that baseline grid. No inference or fabricated20k data is used in these
 checks. The future completed20k path remains unexecuted.
