@@ -1,7 +1,9 @@
 # Experimental RAW-native isotropic backbone
 
-`packed-isotropic` is implemented and passes engineering checks. It has **no
-reviewed quality result and is not promoted**. V43 remains the working reference.
+`packed-isotropic` is implemented and passes engineering checks. Its
+[first32,000-example quality review](packed-isotropic-first32000-review.md)
+finds weak restoration close to bilinear, substantial residual noise and51–54s
+full GFX timings. **Neither fresh endpoint is promoted**; V43 remains the working reference.
 The three requested pipeline improvements are already measured separately in
 [the pipeline report](training-pipeline.md); this experiment retains that data
 path and does not change the existing model recipes.
@@ -274,10 +276,9 @@ The no-DINO arm has since completed its actual8000-update boundary. Its model,
 EMA,852 Adam states, original LR/source/data recipe and321 logged rows passed
 the training controller's checks. Checkpoint SHA:
 `abd7345c080cb227d77385647c74614c0416d9316ad2f28c81c31cdd1f1697a2`.
-The DINO arm is now training. Its actual fresh RAW tensors and global RNG match
-the completed control's construction ledger, and its first seven logged
-observations/domain/LR fields match through step150. This is an early prefix,
-not the complete matched boundary or a quality result.
+At that handoff the DINO arm had started: its actual fresh RAW tensors/global
+RNG and first seven logged observations matched control. Both completed
+boundaries and all321 logged matches are now verified below.
 
 A further CPU replay of the new artifact reader passed on genuine closed
 historical files:76 native PNGs,32 F32 arrays, eight neural RGB16 TIFFs and four
@@ -342,19 +343,26 @@ steps. Thirty-three focused tests passed, followed by an actual completed-state
 CPU preflight. The original failed controller, source, plan and logs remain
 unchanged. Neither training nor its schedule/data/weights were rerun or altered.
 
-A separate **v2** review is now evaluating the original frozen protocol. Its plan
+A separate **v2** review completed the original frozen protocol. Its plan
 SHA is `d91bb847e546d8929e13cd774752b48baba8ced020865daade161ddd48d58396`,
 with166 frozen guards and36 inputs; all output directories are new. Current
 status is `/mnt/external/demosaic/runs/packed-isotropic-first32000-review-workflow-v2.json`.
-The completed known648 and unseen810 cases are followed by the active full427
-panel; the rest of the native/color/GFX/statistics review remains pending.
+The known648, unseen810 and full111636-case panels, analytic/color/hue/GFX
+stages, statistics, export integrity and source sensitivities all completed.
+Its controller and final child exited successfully.
 The earlier v1 queue receipt describes its retained observation, not current
 execution. Use v2 for current progress.
 
-Four actual full-panel native triplets have been inspected so far: both new
-models on the two fixed photographic examples. Both leave substantial noise
-in building/sky and orange fabric, and the fine target cords are not recovered.
-These are initial observations, not a completed quality/convergence assessment;
-neither model is promoted. The actual viewed512×192 originals and metadata are
-bound in `/mnt/external/demosaic/benchmarks/packed-isotropic-first32000-initial-native-views-v1/observations.json`.
-No crop was resized, no output was corrected, and V43 stays the README reference.
+The [completed review](packed-isotropic-first32000-review.md) publishes14 unchanged
+native triplets and records six additional viewed hue originals. Both fresh
+models leave substantial noise in photos, real GFX foliage/fence and CPU FP32
+uniform fields. The DINO photo mean gains+.09428dB over control, but remains
+close to bilinear and far below V43/V63. Actual full GFX times are51.03/53.64s
+without/with DINO. Neither endpoint is promoted or automatically continued;
+this is only5% of the original training horizon, not a convergence verdict.
+
+An isolated, serialized GPU check after review-owner exit verifies that actual
+V71 EMA can learn the same easy synthetic fixture in FP32 and BF16, reducing
+MSE by about86% after128 updates. Its learned weights are discarded. This does
+not explain weak varied-photo learning or justify a production precision change.
+V43 stays the working and README reference; protected-final scenes remain unscored.
