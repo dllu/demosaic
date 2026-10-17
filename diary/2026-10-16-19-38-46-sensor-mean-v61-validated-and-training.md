@@ -61,3 +61,18 @@ verified V60 controls and reporting at least two exact-target native triplets
 plus accurately labeled GFX foliage/fence and other regions. Further updates
 need that quality decision. General color repair, fine detail, real superiority,
 SOTA, protected-final evidence and100MP/10s remain unmet; goal stays active.
+
+Before closing this turn, training completed and the actual controller exited.
+Frozen first1000 checkpoint is
+f4b503c7b511c2d935ffd5dfb2f8f138c75945dfd29a83bc4fd5b2bb8a9ccf72.
+All41 logged control observations/domains/LRs match exactly; complete91/91/89
+states are finite under original4000 schedule, parent/source and loss.01.
+Queued primary-review owner1863875 creation1792204969.26 waited for the trainer's
+actual exit, then started known/unseen/full427 evaluation. New CNN only, three
+classical observation witnesses; old V60 neural results will be reused.
+Analytic, fullGFX four regions, three cached cameras with one RawNIND channel
+comparator and selectedCPU32 fields/audit are serialized behind it. Eight
+actual review scripts frozen by AST-discovered local imports. Prospective hue
+grid, independent statistics/native review and quality decision remain pending.
+Public queue/freeze receipts and current model status are added. No inference
+quality is inferred from the successful training boundary.

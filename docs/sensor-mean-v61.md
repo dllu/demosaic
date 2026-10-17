@@ -1,6 +1,6 @@
 # Full-restoration multiscale sensor-loss trial
 
-V61 is training to its first 1,000-update review boundary. It tests whether
+V61 has completed its first 1,000 updates and is being evaluated. It tests whether
 coarse measured-CFA supervision reduces remaining color/low-frequency errors
 without sacrificing photographic detail or paired-real accuracy. The
 [completed V60 comparison](wide-flat-palette-full4k-review.md) improves bright
@@ -10,6 +10,18 @@ primary means than V43. No V61 quality gain is established by its preparation.
 [Actual launch, frozen source/config/data hashes and logged-input matches](results/sensor-mean-v61-first1k-launch.json).
 [Complete CPU/CUDA engineering evidence](results/sensor-mean-v61-preparation.json).
 [Configuration](../configs/dino-convnext-palette-sensor-mean-b16-v61.yaml).
+[Frozen whole-state checkpoint and all 41 matched logged observations](results/sensor-mean-v61-first1k-freeze.json).
+The [serialized primary-panel evaluation](results/sensor-mean-v61-first1k-review-queue.json)
+waits for the actual trainer exit, then evaluates the new checkpoint on the
+photo/paired/analytic/GFX/other-camera panels and selected CPU colors. Old V60
+neural panels are retained for comparison. The broader hue-grid, independent
+score checks and native visual review remain separate required work.
+
+First1k checkpoint SHA256:
+`f4b503c7b511c2d935ffd5dfb2f8f138c75945dfd29a83bc4fd5b2bb8a9ccf72`.
+The trainer exited successfully. All 41 logged domain/LR/input hashes match the
+completed V60 control, and the producer verified finite complete model/EMA/AdamW
+state. This boundary does not establish a trained quality improvement.
 
 The completed V60 run supplies the matched control; it is not trained again.
 Both begin from the same mature V58 step10000 EMA, SHA256
