@@ -127,6 +127,12 @@ have not run. Neither subset is certified scene-independent; protected-final
 camera scoring remains untouched. No content result proves trained quality,
 SOTA, broad RawNIND superiority or the 10-second target.
 
+The [historical 4k source-sensitivity reanalysis](commons-source-sensitivity-first4k.md)
+now reproduces the original full-panel statistics and checks both restricted
+sets. The rendered-photo extra-data effect remains small with intervals crossing
+zero. Original20k application remains pending; all inference and training inputs
+stay fixed.
+
 ## Reviewed data-audit previews and credits
 
 These are resized 192px center-scene thumbnails for source review, **not native

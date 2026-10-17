@@ -152,3 +152,10 @@ photo comparisons from their actual saved case logs and fixed source IDs.
 Keep the original427 results, paired protocol, all56 native views and quality
 decision. These are known-series/site sensitivities, not certified scene-clean
 subsets. No queued operator, active membership or original schedule changes.
+
+The [source-sensitivity operator and independent auditor](commons-source-sensitivity-first4k.md)
+now execute on the genuine completed4k logs:21 original comparisons reproduce
+exactly and all63 original/subset comparisons pass independent arithmetic.
+The actual20k path remains unexecuted. Once
+`primary-saved-comparisons.json` closes under the final-review workflow, run the
+same two operators against that file's actual hash and the frozen cohort hash.
