@@ -286,3 +286,38 @@ metadata and declared display bounds without new inference or visual-quality
 claims. Receipt:
 `/mnt/external/demosaic/benchmarks/packed-isotropic-review-artifacts-CPU-replay-v1/replay.json`,
 SHA `152d358c80f7482f8ea557140f2b2b0f1c853b03a60d3d887d63c6bae0cec03d`.
+
+## Internal in-place compilation helper
+
+`demosaic.inference.compile_restoration_blocks` now prepares only the six
+isotropic groups, local blocks and decoder with
+[PyTorch Module.compile](https://docs.pytorch.org/docs/2.14/generated/torch.nn.Module.html#torch.nn.Module.compile).
+The installed2.14.1+cu130 implementation was inspected directly: it compiles
+the module call without adding an `OptimizedModule` wrapper to the registered
+module tree. The helper requires evaluation mode, is idempotent for a chosen
+backend, and rejects a backend change or an unsupported backbone. Physical
+stems/tail, DINO and all default inference/training paths stay eager.
+It is an internal opt-in, with no CLI flag or active-recipe change.
+
+[Actual checkpoint CPU proof](results/packed-isotropic-inplace-compilation-CPU-v1.json)
+uses the completed no-DINO8000 checkpoint, two fixed photo observations and
+Dynamo's **eager backend**. All852 state tensors/parameter identities and
+keys remain exact, with no `_orig_mod` prefixes. Both FP32 predictions are
+bitwise identical. Portable state reload has ordinary uncompiled modules and
+matches every tensor/output. The helper modifies no weights or conditioning.
+The eight compiled call implementations are retained on repeated preparation.
+
+Forty-one targeted CPU tests passed, with two CUDA-only tests skipped. Tests
+also exercise nonzero output-head weights, all four CFA patterns, odd rectangular
+shapes, portable reload and unchanged physical components. This proves capture
+and state compatibility, **not Inductor/CUDA accuracy or performance**. The
+prior148ms result used a separate wrapped-module experiment and a12-update
+engineering checkpoint; it is not a timing result for this helper or a trained
+quality candidate. Genuine GPU precision/native comparisons and actual full-frame
+timing must precede any compute-policy adoption.
+
+The CPU operator is `scripts/preflight_block_compilation_cpu.py`; private receipt
+`/mnt/external/demosaic/benchmarks/packed-isotropic-inplace-compilation-CPU-v1/receipt.json`,
+SHA `fda8270f203d9b5da2d73dc07e37f61d6de443f937ad6889ed2e6ef117dc2e6f`.
+The active training and queued quality review execute their earlier frozen code;
+this root-worktree addition does not alter either comparison.

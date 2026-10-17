@@ -11,6 +11,34 @@ from .cfa import pack
 from .precision import COMPUTE_DTYPES, amp_context
 
 
+def compile_restoration_blocks(model, *, backend="inductor"):
+    """Compile packed-isotropic spatial blocks in place for inference.
+
+    Keep physical IEEE FP32 operations, DINO, parameters and state-dict names
+    intact. Compilation is lazy and specializes on the actual input layout,
+    shape and precision. This internal opt-in does not change model config,
+    checkpoint loading, tiled inference defaults or the CLI.
+    """
+    if model.config.restoration_backbone != "packed-isotropic":
+        raise ValueError("Block compilation requires the packed-isotropic backbone")
+    if model.training:
+        raise ValueError("Set evaluation mode before preparing inference compilation")
+    if not isinstance(backend, str) or not backend:
+        raise ValueError("Choose a named torch.compile backend")
+    previous = getattr(model, "_restoration_compilation_backend", None)
+    if previous is not None:
+        if previous != backend:
+            raise ValueError("Restoration blocks already use a different compilation backend")
+        return model
+    restoration = model.packed_isotropic
+    for block in [restoration.local_blocks, *restoration.groups, restoration.decoder]:
+        # Module.compile changes its call implementation, without registering
+        # a wrapper that adds _orig_mod prefixes to portable checkpoint keys.
+        block.compile(backend=backend, fullgraph=True)
+    model._restoration_compilation_backend = backend
+    return model
+
+
 def positions(length, tile, stride):
     if length <= tile:
         return [0]
