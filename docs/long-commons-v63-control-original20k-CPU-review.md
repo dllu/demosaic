@@ -11,6 +11,11 @@ review remains pending. V43 remains the working reference.
 [Executed comparisons, arrays, independent audits, native views and full metadata](results/long-commons-v63-control-original20k-CPU-review.json).
 [Original matched schedules and queued full review](long-commons-v63-v64-full20k.md).
 
+[Saved-error decomposition](control-original20k-error-decomposition.md) attributes
+88.36% of the selected fabric example's added camera-RGB MSE to channel-mean
+bias; its finest two Haar error bands improve slightly. This is a post hoc
+diagnosis of these outputs, without a new forward or an inference correction.
+
 The closed control boundary verifies 91 finite model tensors, 91 EMA tensors and
 89 finite Adam states,
 complete RNG, original source/data/recipe/initialization lineage, unchanged

@@ -1,5 +1,11 @@
 # Normalization dependence and an opt-in training augmentation
 
+The [original20k control error decomposition](control-original20k-error-decomposition.md)
+adds a concrete follow-up target: mean color bias accounts for88.36% of the
+selected fabric example's added camera-RGB MSE, and coarse spatial error accounts
+for another10.53%. This does not establish normalization as its cause or show that
+the opt-in augmentation improves quality. Its GPU quality comparison remains pending.
+
 Selected mature V60 predictions depend strongly on the region used to calculate
 their affine feature coordinates. With identical RAW, dimensions, noise profile,
 CFA, WB/matrix, DINO preview and weights, using central-half statistics shifts the
