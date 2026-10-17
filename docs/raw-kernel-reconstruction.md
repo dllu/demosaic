@@ -147,7 +147,9 @@ all-domain logs, finite state and saved prediction hashes/shapes.
 
 These are engineering results from discarded updates. They do not establish
 restoration quality, noisy-field unbiasedness, convergence or deterministic CUDA
-optimization after restart. No production joint RAW-head trial has launched.
+optimization after restart. Those prototype checks did not launch a production
+joint trial; the later [V67 stage](raw-kernel-phase-joint-v67.md) follows completed
+V65/V66 quality reviews and its own genuine-parent CPU/CUDA checks.
 
 ## Optional head-only warmup
 
@@ -204,7 +206,12 @@ The actual [CPU/CUDA checks](results/raw-kernel-phase-preflight.json) pass befor
 the bounded1,000-update trial starts. Full CPU tests pass 543/9 CUDA-related skips;
 genuine-parent CPU restart/legacy parity and B16 CUDA finite 94/94/three-state,
 frozen-parent, portable EMA, clean-constant and matched-input checks pass. These
-do not establish a photographic improvement. No joint stage or promotion follows.
+do not establish a photographic improvement. The
+[completed matched review](raw-kernel-phase-v66-first1k-review.md) subsequently
+finds +1.69373dB photo PSNR over V65, with a .97537dB procedural regression and
+substantial remaining grain. V66 is not promoted. Its full native/color/artifact
+review precedes the separately declared
+[V67 joint restoration stage](raw-kernel-phase-joint-v67.md).
 
 ## Limits and required next evidence
 
@@ -222,9 +229,13 @@ RGB decoder. Existing field diagnostics motivated the design; they are not blind
 quality evidence.
 
 The genuine CUDA/B16/native 256 gradient/state/portable EMA and memory checks have
-passed. The bounded head-only trial must next complete full photo and measured-CFA
-development panels, weak carriers, fixed hue grid, false-detail tests and native
-real-camera review before any joint stage. Reports must include two native noisy/denoised/exact-GT photographic
+passed. Both bounded head-only trials completed full photo and measured-CFA
+development panels, weak carriers, fixed hue grid and native real-camera review.
+The separately initialized V67 stage now trains restoration features and head
+together while keeping the DINO backbone frozen. It stops at2,000 on its original
+10,000-update schedule for complete quality/native review before any further
+continuation. This is not evidence of better joint-stage quality yet.
+Reports must include two native noisy/denoised/exact-GT photographic
 triplets and all four standing DSCF3879/3880 regions with accurate non-GT labels.
 Do not alter the currently frozen data comparison or score protected-final data.
 General color repair, trained detail gain, CUDA speed and SOTA remain unproven.

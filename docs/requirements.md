@@ -284,3 +284,23 @@ publisher-input, tensor, scalar and native-panel checks pass, but its explicit
 CPU device port still needs the queued original-export GPU comparison. These
 selected examples and uncertain external training membership do not establish
 SOTA, broad real superiority or completion of the quality requirement.
+
+The [completed V65 RAW-head review](raw-kernel-warmup-v65-first1k-review.md)
+and [matched phase-conditioned V66 review](raw-kernel-phase-v66-first1k-review.md)
+verify the clean constant-color reconstruction invariant but show poor noise
+removal. V66 reaches29.52620/.872886 on427 photos: +1.69373dB over V65, still
+6.13809dB below mature V60. Procedural PSNR regresses. All26 V66 native previews
+were viewed, including two exact-GT photo triplets and all four standing GFX
+regions; grain remains prominent. Both full101.996MP RGB16 files and exact native
+ROI checks verify, but shared-machine restoration/blending51.352s misses10s.
+Neither model is promoted. Numerical invariance and low mean color bias do not
+establish useful denoising or the requested real-photo superiority.
+
+The [separate V67 joint stage](raw-kernel-phase-joint-v67.md) passed genuine
+seven-update CPU restart and production-size CUDA checks before launch from
+completed V66 EMA. All92 restoration tensors/32,931,920 parameters train; actual
+DINO remains frozen. Original10,000-update schedule, stopped at2,000 for full
+review. Phase head-only features stayed frozen; joint training is a hypothesis,
+not evidence of a quality gain or convergence. Complete development/color/native/
+GFX/artifact jobs are serialized behind verified actual owners. Protected-final
+model scores remain unused. The original quality and speed goals remain open.

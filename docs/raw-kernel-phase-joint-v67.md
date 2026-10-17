@@ -76,6 +76,13 @@ Model source is unchanged from the previous543-passed/9-skipped CPU suite; that
 suite is not claimed as rerun. The real joint CPU/CUDA checks above are new. Ruff
 and diff whitespace checks pass for the review-tool changes.
 
+The [first actual production checkpoint at500](results/raw-kernel-phase-joint-v67-first500-state.json)
+also passes independent CPU inspection while the trainer continues: finite94
+model/94 EMA/92 AdamW states, all92 restoration tensors changed, normalization
+buffers exact, and original10k recipe/source/data/RNG/21 logged LRs verified.
+Last LR is9.963796657738579e-5. This intermediate state audit performs no
+inference and supplies no quality result; the first full review remains at2000.
+
 ## Running training and serialized review
 
 Training controller PID2848434/creation1792218667.87, child2848444/
