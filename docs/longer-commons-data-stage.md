@@ -1,7 +1,8 @@
 # Longer matched Commons-data comparison
 
-V63 has frozen its control arm at 4,000 updates; V64's expanded-data arm is now
-training on the same GPU. This tests more scene diversity with a longer training
+V63 and V64 have both frozen at 4,000 updates and the trainer has exited. Their
+controlled quality evaluation is running. This tests more scene diversity with a
+longer training
 schedule after [V61](sensor-mean-v61-first1k-review.md) and
 [V62](sensor-mean-v62-first1k-review.md) failed to improve the overall color/detail
 tradeoff. **No new quality gain is established yet.** V43 remains the working
@@ -81,11 +82,20 @@ V63's frozen step4000 checkpoint is
 SHA256 `5f29bd7efb94b72491cff22575c0565995326644823bcb802444214c8f2c6bd6`.
 This is a training boundary, with the original 20,000-update schedule preserved;
 it is not a quality result or a model promotion.
+V64's corresponding frozen checkpoint is
+`/mnt/external/demosaic/models/dino-convnext-wide-long-expanded-b16-v64-step4000.pt`,
+SHA256 `c0a00177b676caddea39b225f2fba1bcdc0b57d6fd543500363c8c908d83df81`.
+The [independent two-arm boundary check](results/long-commons-v63-v64-first4k-trained-boundary.json)
+verifies both whole states, original recipes/source/data/RNG and all 161 matched
+domain/LR choices. All logged native/paired input hashes match; 79 logged Commons/
+procedural-domain batches differ as allowed by the data experiment. Both original
+20,000-update schedules are preserved. Paired panels have completed and the full
+427-photo panel is running; these are not complete quality-review results.
 An [independent CPU state check](results/long-commons-v63-first4k-state-check.json)
 verifies the full checkpoint hash, finite 91 model/91 EMA tensors and 89 AdamW
 states, all optimizer steps at 4000, complete RNG, archived model source, all four
-manifest hashes and the 161 frozen training-log rows. This does not evaluate
-V63's restoration quality or assert that V64 has completed.
+manifest hashes and the 161 frozen training-log rows. That earlier receipt
+covers V63 only and reports no restoration-quality result.
 
 The [statistics and hue follow-up is also queued](results/long-commons-v63-v64-first4k-statistics-hue-queue.json),
 controller PID 2055575, creation 1792210364.08. It waits for actual primary-owner

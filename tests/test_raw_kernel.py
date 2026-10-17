@@ -6,6 +6,7 @@ from demosaic.cfa import PATTERNS, bilinear, color_indices, mosaic
 from demosaic.inference import load_checkpoint
 from demosaic.model import JointDemosaic, ModelConfig
 from demosaic.raw_kernel import AdaptiveRawKernel, constant_preserving_box_mean
+from demosaic.train import make_optimizer, update_ema
 
 
 @pytest.mark.parametrize("window", [1, 3, 5, 17])
@@ -138,3 +139,68 @@ def test_incompatible_model_paths_are_rejected(options):
                 width=64, camera_conditioning=True, raw_kernel_reconstruction=True, **options
             )
         )
+
+
+def test_raw_kernel_warmup_updates_only_coefficients_and_keeps_frozen_EMA_exact():
+    model = JointDemosaic(
+        ModelConfig(
+            restoration_backbone="pretrained-rgb",
+            width=64,
+            camera_conditioning=True,
+            raw_kernel_reconstruction=True,
+        )
+    )
+    before = {k: v.clone() for k, v in model.restoration_state_dict().items()}
+    ema = {k: v.clone() for k, v in before.items()}
+    optimizer = make_optimizer(model, {"raw_kernel_only": True, "lr": 1e-4})
+    expected = {
+        "pretrained_rgb.raw_kernel.coefficients.weight",
+        "pretrained_rgb.raw_kernel.coefficients.bias",
+    }
+    assert {n for n, p in model.named_parameters() if p.requires_grad} == expected
+    assert sum(p.numel() for p in model.parameters() if p.requires_grad) == 22032
+    raw = torch.rand(1, 4, 7, 9) * 0.2
+    prediction = model(raw, torch.ones_like(raw) * 1e-5, color_indices("RGGB"))
+    prediction.square().mean().backward()
+    assert all(p.grad is None for n, p in model.named_parameters() if n not in expected)
+    assert all(
+        p.grad is not None and torch.isfinite(p.grad).all() and p.grad.abs().sum() > 0
+        for n, p in model.named_parameters()
+        if n in expected
+    )
+    optimizer.step()
+    update_ema(model, ema, 0.9)
+    assert len(optimizer.state) == 2
+    after = model.restoration_state_dict()
+    for name, value in before.items():
+        if name in expected:
+            assert not torch.equal(value, after[name]) and not torch.equal(value, ema[name])
+        else:
+            torch.testing.assert_close(value, after[name], atol=0, rtol=0)
+            torch.testing.assert_close(value, ema[name], atol=0, rtol=0)
+    # Reconstructing the optimizer from a portable model applies the same scope.
+    restored = JointDemosaic(model.config)
+    restored_optimizer = make_optimizer(restored, {"raw_kernel_only": True, "lr": 1e-4})
+    restored_optimizer.load_state_dict(optimizer.state_dict())
+    assert len(restored_optimizer.state) == 2
+
+
+@pytest.mark.parametrize(
+    "options",
+    [
+        {"raw_kernel_only": "yes"},
+        {"raw_kernel_only": True, "refiner_only": True},
+        {"raw_kernel_only": True, "coarse_refiner_only": True},
+        {"raw_kernel_only": True, "pyramid_refiner_only": True},
+    ],
+)
+def test_invalid_raw_kernel_warmup_scopes_fail(options):
+    model = JointDemosaic(ModelConfig())
+    with pytest.raises(ValueError, match="RAW kernel-only"):
+        make_optimizer(model, options)
+
+
+def test_raw_kernel_warmup_requires_the_optional_head():
+    model = JointDemosaic(ModelConfig())
+    with pytest.raises(ValueError, match="requires RAW kernel reconstruction"):
+        make_optimizer(model, {"raw_kernel_only": True})

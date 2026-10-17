@@ -76,7 +76,20 @@ def update_ema(model, ema, decay):
 
 
 def make_optimizer(model, config):
-    """Optionally train new packed phase modules faster than pretrained weights."""
+    """Select optional RAW-head warmup or packed-phase learning-rate groups."""
+    raw_kernel_only = config.get("raw_kernel_only", False)
+    if type(raw_kernel_only) is not bool:
+        raise ValueError("RAW kernel-only training must be a boolean")
+    if raw_kernel_only:
+        if any(
+            config.get(key, False)
+            for key in ["refiner_only", "coarse_refiner_only", "pyramid_refiner_only"]
+        ):
+            raise ValueError("RAW kernel-only training cannot combine with another refiner-only mode")
+        if not model.config.raw_kernel_reconstruction:
+            raise ValueError("RAW kernel-only training requires RAW kernel reconstruction")
+        model.requires_grad_(False)
+        model.pretrained_rgb.raw_kernel.requires_grad_(True)
     multiplier = float(config.get("phase_lr_multiplier", 1))
     if not math.isfinite(multiplier) or multiplier <= 0:
         raise ValueError("Phase learning-rate multiplier must be finite and positive")
@@ -476,6 +489,8 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         if state["config"].get("pyramid_refiner_only", False) != config.get(
             "pyramid_refiner_only", False
         ):
+            raise ValueError("Resume trainable-parameter selection differs; initialize a new run")
+        if state["config"].get("raw_kernel_only", False) != config.get("raw_kernel_only", False):
             raise ValueError("Resume trainable-parameter selection differs; initialize a new run")
         if ModelConfig.from_checkpoint(state["model_config"]).to_dict() != model.config.to_dict():
             raise ValueError("Resume model configuration differs from checkpoint")

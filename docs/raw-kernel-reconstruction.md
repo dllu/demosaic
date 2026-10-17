@@ -155,6 +155,46 @@ above-white numerical values, with no noise added. Peak CUDA allocation is
 recorded separately from total unified RAM or throughput. These remain pending
 checks: preparation alone proves none of their GPU results.
 
+## Optional head-only warmup
+
+The trainer now accepts **`raw_kernel_only: true`** when the model enables
+`raw_kernel_reconstruction`. It freezes every existing restoration parameter,
+including the native RGB trunk/tail and DINO projection/gates, and trains only
+the coefficient convolution's weight/bias: 22,032 parameters in two AdamW states.
+The actual DINO backbone remains frozen. The original training targets and losses
+supervise the coefficients; no teacher output, fitted calibration or extra RGB
+offset is used. All restoration tensors remain in the checkpoint and EMA.
+
+This provides a declared way to learn the new reconstruction head before joint
+training. It does not preserve parent-quality output at initialization: zero
+coefficients still produce bilinear. The option defaults off. It cannot combine
+with another refiner-only mode or be enabled without the optional RAW head.
+Optimizer reconstruction from the saved config applies the same parameter scope.
+Changing the scope during resume is rejected before an optimizer update. Joint
+training after warmup must initialize a new run from the warmup EMA, with a fresh
+optimizer/EMA and separately declared budget; it is not an implicit resume.
+
+[Executed CPU evidence](results/raw-kernel-warmup-CPU-preflight.json) covers the
+genuine V60 full4k EMA, discarded batch1/native64/FP32 updates, zero workers,
+forced smooth Commons and two validation images. All three training domains are
+exercised. Every one of the 91 existing model tensors and its EMA stays exactly
+equal to the parent; only the two new head tensors change. All 93 model/93 EMA
+tensors and two AdamW states are finite. Four uninterrupted updates equal two
+plus two resumed updates in all nine saved state fields, numeric logs and input
+hashes. Reconstructing the two-state optimizer succeeds, and all manual/portable
+EMA tensors, including actual DINO, and two full photo predictions match exactly.
+The scope-change resume attempt fails before any update.
+
+With the option disabled, four actual CPU updates exactly reproduce the earlier
+411d-source checkpoint's model/config/EMA/optimizer/RNG/step/best fields and all
+numeric logs/input hashes. The new source bundle is
+`32a330278824bb0b06b27a7b00439d10a3d853966ee3864ceb96a99ff08ae1c0`.
+The complete CPU suite passes **534 tests, with 9 CUDA-related skips**; targeted
+RAW-head/trainer tests pass 37. These are numerical/engineering checks, not
+warmup convergence, GPU memory/throughput or model-quality evidence. No production
+warmup has launched. The already queued default-route CUDA fixture retains its
+independent archived 411d source and has not silently switched to this option.
+
 ## Limits and required next evidence
 
 The invariant is about **clean constant samples**, not unbiased restoration of
