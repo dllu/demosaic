@@ -185,6 +185,38 @@ def main(
                 "arm": "released-RAW-reference",
             }
         )
+    evaluate_records(
+        inputs,
+        workflow,
+        output,
+        records,
+        parent["sha256"],
+        expected_step,
+        reuse_report,
+        reuse_audit,
+        reuse_only,
+    )
+
+
+@torch.inference_mode()
+def evaluate_records(
+    inputs,
+    workflow,
+    output,
+    records,
+    parent_sha256,
+    expected_step=1000,
+    reuse_report=None,
+    reuse_audit=None,
+    reuse_only=False,
+):
+    """Evaluate explicitly validated records; callers validate their actual owner."""
+    plan = read(inputs)
+    validate(plan)
+    output = writable_path(output)
+    if output.exists():
+        raise ValueError("Grid output exists; inspect it or choose a new directory")
+    assert records and len({r["sha256"] for r in records}) == len(records)
     source = {str(p): sha(p) for p in Path("src/demosaic").glob("*.py")}
     reuse = reuse_manifest(reuse_report, reuse_audit, inputs, source)
     matches = [reuse_match(r, reuse) for r in records]
@@ -253,7 +285,8 @@ def main(
                 memory_format="channels_last",
             )
             if record["arm"] != "parent10k":
-                assert state["config"]["initialized_from"]["sha256"] == parent["sha256"]
+                assert state["config"]["initialized_from"]["sha256"] == parent_sha256
+                assert state["step"] == expected_step
             del state
         else:
             model = load_nonlocal_reference(record["path"], device="cuda", archive=output)

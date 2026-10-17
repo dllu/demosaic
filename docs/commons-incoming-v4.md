@@ -1,7 +1,12 @@
 # Next Commons snapshot
 
-A CPU job is preparing **10,024 additional downloaded images** into a separate
-8× linear-light uint16 cache. The downloader continues in parallel. Existing
+The CPU job has prepared **10,022 of 10,024 additional downloaded images** into a
+separate 8× linear-light uint16 cache; two failed. Its identity screen quarantined
+126 and cleared 9,896. After preserving held-out assignments, **8,872** are new
+training candidates. The candidate combined training count is 75,806, pending
+independent full-cache/content review and matching 4× preparation. No new image
+has been admitted to training. [Producer completion](results/commons-incoming-v4-preparation-complete.json).
+The downloader continues in parallel. Existing
 training and evaluation manifests remain frozen, including the current batch16
 model comparison. [Launch, frozen inputs and actual startup checks](results/commons-incoming-v4-launch.json).
 

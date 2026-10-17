@@ -1,11 +1,15 @@
 # Full-restoration multiscale sensor-loss trial
 
-V61 has completed its first 1,000 updates and is being evaluated. It tests whether
+V61 has completed its first 1,000 updates and its
+[quality review](sensor-mean-v61-first1k-review.md). Stop this .01 recipe:
+bright saturated-field bias improves, but photo/paired-real scores and weak
+detail regress. V43 remains the working reference. The experiment tests whether
 coarse measured-CFA supervision reduces remaining color/low-frequency errors
 without sacrificing photographic detail or paired-real accuracy. The
 [completed V60 comparison](wide-flat-palette-full4k-review.md) improves bright
 high-saturation fields, but retains moderate-saturation errors and lower paired
-primary means than V43. No V61 quality gain is established by its preparation.
+primary means than V43. A separate experiment will test .001 from the same
+initializer against the completed V60 control.
 
 [Actual launch, frozen source/config/data hashes and logged-input matches](results/sensor-mean-v61-first1k-launch.json).
 [Complete CPU/CUDA engineering evidence](results/sensor-mean-v61-preparation.json).
@@ -15,7 +19,9 @@ The [serialized primary-panel evaluation](results/sensor-mean-v61-first1k-review
 waits for the actual trainer exit, then evaluates the new checkpoint on the
 photo/paired/analytic/GFX/other-camera panels and selected CPU colors. Old V60
 neural panels are retained for comparison. The broader hue-grid, independent
-score checks and native visual review remain separate required work.
+score checks and native visual review are now complete in the linked report.
+The original wrapper's analytic-count failure and limited recovery are
+preserved there; the historical launch receipt remains unchanged.
 
 First1k checkpoint SHA256:
 `f4b503c7b511c2d935ffd5dfb2f8f138c75945dfd29a83bc4fd5b2bb8a9ccf72`.

@@ -215,7 +215,7 @@ def audit_photo(root, expected_methods=8):
     }
 
 
-def audit_real(root, scenes, pairs, crops, expected_methods=8):
+def audit_real(root, scenes, pairs, crops, expected_methods=8, *, require_rawnind=True):
     summary = json.loads((root / "summary.json").read_text())
     require(
         sha(summary["prepared_manifest"]) == summary["prepared_sha256"], "Prepared manifest changed"
@@ -226,11 +226,16 @@ def audit_real(root, scenes, pairs, crops, expected_methods=8):
     )
     # Real reports retain one publisher-weight receipt for two gain adapters.
     labels = {row["label"] for row in summary["models"]}
-    require("RawNIND" in labels, "Missing RawNIND publisher receipt")
+    if require_rawnind:
+        require("RawNIND" in labels, "Missing RawNIND publisher receipt")
     methods = (
         CLASSICAL
         | (labels - {"RawNIND"})
-        | {"RawNIND:cfa-ls:publisher", "RawNIND:cfa-channel:publisher"}
+        | (
+            {"RawNIND:cfa-ls:publisher", "RawNIND:cfa-channel:publisher"}
+            if "RawNIND" in labels
+            else set()
+        )
     )
     require(len(methods) == expected_methods, f"Expected {expected_methods} real methods")
     expected = {
