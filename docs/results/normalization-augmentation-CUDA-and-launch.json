@@ -1,0 +1,826 @@
+{
+  "status": "launched-matched-normalization-trial-after-genuine-CUDA-and-independent-preflights",
+  "created_UTC": "2026-10-17T17:09:47.820929+00:00",
+  "CUDA_receipt": {
+    "receipt": {
+      "path": "/mnt/external/demosaic/benchmarks/normalization-augmentation-CUDA-v1/receipt.json",
+      "sha256": "57b25b9e44e38a619977e3ed45ca323b1e4ecd6fbe84737b1d08a736c8f39dbe"
+    },
+    "result": {
+      "status": "completed-genuine-V63-parent-B16-native256-BF16-normalization-preflight",
+      "plan": {
+        "path": "/mnt/external/demosaic/benchmarks/normalization-augmentation-CUDA-v1/plan.json",
+        "sha256": "737bb6b4e632d11aa636d24ef65ee8edcf8f125552abb886461a6a5d49c2820e"
+      },
+      "physical_GPU_check": {
+        "all4_CFAs_mixed_mask_CPU_oracle_max_abs_difference": 0.0,
+        "CPU_oracle_atol_rtol": [
+          3e-06,
+          3e-06
+        ],
+        "CUDA_noop_bitwise_exact": true,
+        "CUDA_RNG_RAW_and_canvas_unchanged": true
+      },
+      "prefetch_restoration_checks": [
+        {
+          "leg": "control-initial",
+          "prefetch_model_optimizer_exact": true,
+          "resume_RNG_exact": false,
+          "DINO_hash": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+        },
+        {
+          "leg": "augmented-initial",
+          "prefetch_model_optimizer_exact": true,
+          "resume_RNG_exact": false,
+          "DINO_hash": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+        },
+        {
+          "leg": "augmented-resumed-initial",
+          "prefetch_model_optimizer_exact": true,
+          "resume_RNG_exact": false,
+          "DINO_hash": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+        },
+        {
+          "leg": "augmented-resumed-resume",
+          "prefetch_model_optimizer_exact": true,
+          "resume_RNG_exact": true,
+          "DINO_hash": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+        }
+      ],
+      "per_update_gradient_checks": [
+        {
+          "leg": "control-initial",
+          "finite_gradient_tensors": 89
+        },
+        {
+          "leg": "control-initial",
+          "finite_gradient_tensors": 89
+        },
+        {
+          "leg": "control-initial",
+          "finite_gradient_tensors": 89
+        },
+        {
+          "leg": "control-initial",
+          "finite_gradient_tensors": 89
+        },
+        {
+          "leg": "control-initial",
+          "finite_gradient_tensors": 89
+        },
+        {
+          "leg": "control-initial",
+          "finite_gradient_tensors": 89
+        },
+        {
+          "leg": "augmented-initial",
+          "finite_gradient_tensors": 89
+        },
+        {
+          "leg": "augmented-initial",
+          "finite_gradient_tensors": 89
+        },
+        {
+          "leg": "augmented-initial",
+          "finite_gradient_tensors": 89
+        },
+        {
+          "leg": "augmented-initial",
+          "finite_gradient_tensors": 89
+        },
+        {
+          "leg": "augmented-initial",
+          "finite_gradient_tensors": 89
+        },
+        {
+          "leg": "augmented-initial",
+          "finite_gradient_tensors": 89
+        },
+        {
+          "leg": "augmented-resumed-initial",
+          "finite_gradient_tensors": 89
+        },
+        {
+          "leg": "augmented-resumed-initial",
+          "finite_gradient_tensors": 89
+        },
+        {
+          "leg": "augmented-resumed-initial",
+          "finite_gradient_tensors": 89
+        },
+        {
+          "leg": "augmented-resumed-resume",
+          "finite_gradient_tensors": 89
+        },
+        {
+          "leg": "augmented-resumed-resume",
+          "finite_gradient_tensors": 89
+        },
+        {
+          "leg": "augmented-resumed-resume",
+          "finite_gradient_tensors": 89
+        }
+      ],
+      "finite_state_counts_each_arm": {
+        "model": 91,
+        "EMA": 91,
+        "AdamW": 89
+      },
+      "changed_tensors": {
+        "control": {
+          "model": 89,
+          "ema": 89
+        },
+        "augmented": {
+          "model": 89,
+          "ema": 89
+        },
+        "augmented-resumed": {
+          "model": 89,
+          "ema": 89
+        }
+      },
+      "training_rows": {
+        "control": [
+          {
+            "event": "train",
+            "step": 1,
+            "loss": 0.009456734172999859,
+            "lr": 3.0000000000000004e-08,
+            "grad_norm": 0.4597676396369934,
+            "seconds_per_step": 10.016690568067133,
+            "cuda_gb": 7.212962304,
+            "domain": "native-RAW-synthetic",
+            "linear": 0.0027464982122182846,
+            "rendered": 0.009219391271471977,
+            "gradient": 0.008647087030112743,
+            "highlight": 0.009862194769084454,
+            "sensor": 0.002496125176548958,
+            "batch_sha256": "1a550f5d2d360f4439613bcd02a9ce4c066375012a6922cd5452ac6f10e22538"
+          },
+          {
+            "event": "train",
+            "step": 2,
+            "loss": 0.015231137163937092,
+            "lr": 6.000000000000001e-08,
+            "grad_norm": 0.782457172870636,
+            "seconds_per_step": 9.407205898547545,
+            "cuda_gb": 7.212962304,
+            "domain": "synthetic",
+            "linear": 0.0077925487421453,
+            "rendered": 0.008401657454669476,
+            "gradient": 0.00748736597597599,
+            "highlight": 0.017998164519667625,
+            "sensor": 0.006892067845910788,
+            "batch_sha256": "e4e8e6e86b02eca75e7e16d8180e794839e963cbd3a45d87db57bcbb0c0162de"
+          },
+          {
+            "event": "train",
+            "step": 3,
+            "loss": 0.013708097860217094,
+            "lr": 9e-08,
+            "grad_norm": 2.123749017715454,
+            "seconds_per_step": 6.46456237967747,
+            "cuda_gb": 7.212962304,
+            "domain": "synthetic",
+            "linear": 0.005997619591653347,
+            "rendered": 0.008808939717710018,
+            "gradient": 0.006233911495655775,
+            "highlight": 0.021234452724456787,
+            "sensor": 0.00559172872453928,
+            "batch_sha256": "fbaec2e7a77fd2d08911694efbf66c09c6c7f880a876248e1420899de696b74c"
+          },
+          {
+            "event": "train",
+            "step": 4,
+            "loss": 0.013430202379822731,
+            "lr": 1.2000000000000002e-07,
+            "grad_norm": 1.1601802110671997,
+            "seconds_per_step": 5.002994435490109,
+            "cuda_gb": 7.212962304,
+            "domain": "synthetic",
+            "linear": 0.006018035113811493,
+            "rendered": 0.008385606110095978,
+            "gradient": 0.0072680748999118805,
+            "highlight": 0.02005062997341156,
+            "sensor": 0.004874930251389742,
+            "batch_sha256": "e6e7b2d41f8cad85f8a18b8d6ba0486a380d4dc0a4ffba0cfcfe5478649d6c56"
+          },
+          {
+            "event": "train",
+            "step": 5,
+            "loss": 0.003779772436246276,
+            "lr": 1.5000000000000002e-07,
+            "grad_norm": 0.0706707164645195,
+            "seconds_per_step": 4.796749280998483,
+            "cuda_gb": 7.212962304,
+            "domain": "paired-RAW",
+            "paired_sensor": 0.0015902729937806726,
+            "paired_coarse_rendered": 0.004072166979312897,
+            "paired_auxiliary": 0.0015341605758294463,
+            "batch_sha256": "3beb21575d3300385807f65441464dd14248b3b1a90c69846903c110728ed3b6"
+          },
+          {
+            "event": "train",
+            "step": 6,
+            "loss": 0.01071328204125166,
+            "lr": 1.8e-07,
+            "grad_norm": 1.2159230709075928,
+            "seconds_per_step": 4.100514285693255,
+            "cuda_gb": 7.212962304,
+            "domain": "synthetic",
+            "linear": 0.004503253381699324,
+            "rendered": 0.008442717604339123,
+            "gradient": 0.007025565020740032,
+            "highlight": 0.008999161422252655,
+            "sensor": 0.0038619718980044127,
+            "batch_sha256": "ed1581d520fb4eea21c8e93c90e2da944480c7e2ec5895ef6496b0567fe2abda"
+          }
+        ],
+        "augmented": [
+          {
+            "event": "train",
+            "step": 1,
+            "loss": 0.00964135117828846,
+            "lr": 3.0000000000000004e-08,
+            "grad_norm": 0.6312761902809143,
+            "seconds_per_step": 4.315175075083971,
+            "cuda_gb": 7.212962304,
+            "domain": "native-RAW-synthetic",
+            "linear": 0.002724614692851901,
+            "rendered": 0.009244582615792751,
+            "gradient": 0.008629575371742249,
+            "highlight": 0.011819952167570591,
+            "sensor": 0.002494920277968049,
+            "batch_sha256": "1a550f5d2d360f4439613bcd02a9ce4c066375012a6922cd5452ac6f10e22538",
+            "normalization_mask": [
+              false,
+              true,
+              true,
+              true,
+              true,
+              true,
+              false,
+              false,
+              true,
+              true,
+              true,
+              true,
+              false,
+              true,
+              true,
+              true
+            ]
+          },
+          {
+            "event": "train",
+            "step": 2,
+            "loss": 0.015291022136807442,
+            "lr": 6.000000000000001e-08,
+            "grad_norm": 0.8003669381141663,
+            "seconds_per_step": 6.466379701043479,
+            "cuda_gb": 7.212962304,
+            "domain": "synthetic",
+            "linear": 0.007840273901820183,
+            "rendered": 0.008419346064329147,
+            "gradient": 0.007480931933969259,
+            "highlight": 0.017992770299315453,
+            "sensor": 0.006937047932296991,
+            "batch_sha256": "e4e8e6e86b02eca75e7e16d8180e794839e963cbd3a45d87db57bcbb0c0162de",
+            "normalization_mask": [
+              true,
+              true,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              false,
+              true,
+              true,
+              false
+            ]
+          },
+          {
+            "event": "train",
+            "step": 3,
+            "loss": 0.013794825412333012,
+            "lr": 9e-08,
+            "grad_norm": 2.1211793422698975,
+            "seconds_per_step": 4.519022601346175,
+            "cuda_gb": 7.212962304,
+            "domain": "synthetic",
+            "linear": 0.006025814916938543,
+            "rendered": 0.00888587161898613,
+            "gradient": 0.006230466067790985,
+            "highlight": 0.021418940275907516,
+            "sensor": 0.005611337721347809,
+            "batch_sha256": "fbaec2e7a77fd2d08911694efbf66c09c6c7f880a876248e1420899de696b74c",
+            "normalization_mask": [
+              false,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              true,
+              false,
+              false,
+              true,
+              false,
+              true
+            ]
+          },
+          {
+            "event": "train",
+            "step": 4,
+            "loss": 0.013445306569337845,
+            "lr": 1.2000000000000002e-07,
+            "grad_norm": 1.120591640472412,
+            "seconds_per_step": 3.5450280307559296,
+            "cuda_gb": 7.212962304,
+            "domain": "synthetic",
+            "linear": 0.006001308094710112,
+            "rendered": 0.008437225595116615,
+            "gradient": 0.00727418065071106,
+            "highlight": 0.020105434581637383,
+            "sensor": 0.004874241538345814,
+            "batch_sha256": "e6e7b2d41f8cad85f8a18b8d6ba0486a380d4dc0a4ffba0cfcfe5478649d6c56",
+            "normalization_mask": [
+              false,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              false
+            ]
+          },
+          {
+            "event": "train",
+            "step": 5,
+            "loss": 0.003797492478042841,
+            "lr": 1.5000000000000002e-07,
+            "grad_norm": 0.07769416272640228,
+            "seconds_per_step": 3.625043379003182,
+            "cuda_gb": 7.212962304,
+            "domain": "paired-RAW",
+            "paired_sensor": 0.0015954136615619063,
+            "paired_coarse_rendered": 0.004096087068319321,
+            "paired_auxiliary": 0.0015403522411361337,
+            "batch_sha256": "3beb21575d3300385807f65441464dd14248b3b1a90c69846903c110728ed3b6",
+            "normalization_mask": [
+              true,
+              true,
+              false,
+              false,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              false,
+              true,
+              true,
+              true,
+              true
+            ]
+          },
+          {
+            "event": "train",
+            "step": 6,
+            "loss": 0.010851881466805935,
+            "lr": 1.8e-07,
+            "grad_norm": 1.224074125289917,
+            "seconds_per_step": 3.1256745221714177,
+            "cuda_gb": 7.212962304,
+            "domain": "synthetic",
+            "linear": 0.004581799264997244,
+            "rendered": 0.00848418939858675,
+            "gradient": 0.007021303288638592,
+            "highlight": 0.009337852708995342,
+            "sensor": 0.003920720890164375,
+            "batch_sha256": "ed1581d520fb4eea21c8e93c90e2da944480c7e2ec5895ef6496b0567fe2abda",
+            "normalization_mask": [
+              true,
+              false,
+              false,
+              true,
+              true,
+              true,
+              true,
+              true,
+              false,
+              false,
+              false,
+              true,
+              false,
+              false,
+              true,
+              false
+            ]
+          }
+        ],
+        "augmented-resumed": [
+          {
+            "event": "train",
+            "step": 1,
+            "loss": 0.00964135117828846,
+            "lr": 3.0000000000000004e-08,
+            "grad_norm": 0.6312761902809143,
+            "seconds_per_step": 4.259817905956879,
+            "cuda_gb": 7.212962304,
+            "domain": "native-RAW-synthetic",
+            "linear": 0.002724614692851901,
+            "rendered": 0.009244582615792751,
+            "gradient": 0.008629575371742249,
+            "highlight": 0.011819952167570591,
+            "sensor": 0.002494920277968049,
+            "batch_sha256": "1a550f5d2d360f4439613bcd02a9ce4c066375012a6922cd5452ac6f10e22538",
+            "normalization_mask": [
+              false,
+              true,
+              true,
+              true,
+              true,
+              true,
+              false,
+              false,
+              true,
+              true,
+              true,
+              true,
+              false,
+              true,
+              true,
+              true
+            ]
+          },
+          {
+            "event": "train",
+            "step": 2,
+            "loss": 0.015291022136807442,
+            "lr": 6.000000000000001e-08,
+            "grad_norm": 0.8003669381141663,
+            "seconds_per_step": 6.550453672418371,
+            "cuda_gb": 7.212962304,
+            "domain": "synthetic",
+            "linear": 0.007840273901820183,
+            "rendered": 0.008419346064329147,
+            "gradient": 0.007480931933969259,
+            "highlight": 0.017992770299315453,
+            "sensor": 0.006937047932296991,
+            "batch_sha256": "e4e8e6e86b02eca75e7e16d8180e794839e963cbd3a45d87db57bcbb0c0162de",
+            "normalization_mask": [
+              true,
+              true,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              false,
+              true,
+              true,
+              false
+            ]
+          },
+          {
+            "event": "train",
+            "step": 3,
+            "loss": 0.013794825412333012,
+            "lr": 9e-08,
+            "grad_norm": 2.1211793422698975,
+            "seconds_per_step": 4.5915072219601525,
+            "cuda_gb": 7.212962304,
+            "domain": "synthetic",
+            "linear": 0.006025814916938543,
+            "rendered": 0.00888587161898613,
+            "gradient": 0.006230466067790985,
+            "highlight": 0.021418940275907516,
+            "sensor": 0.005611337721347809,
+            "batch_sha256": "fbaec2e7a77fd2d08911694efbf66c09c6c7f880a876248e1420899de696b74c",
+            "normalization_mask": [
+              false,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              true,
+              false,
+              false,
+              true,
+              false,
+              true
+            ]
+          },
+          {
+            "event": "train",
+            "step": 4,
+            "loss": 0.013445306569337845,
+            "lr": 1.2000000000000002e-07,
+            "grad_norm": 1.1205602884292603,
+            "seconds_per_step": 10.29649101709947,
+            "cuda_gb": 7.212962304,
+            "domain": "synthetic",
+            "linear": 0.006001308094710112,
+            "rendered": 0.008437225595116615,
+            "gradient": 0.00727418065071106,
+            "highlight": 0.020105434581637383,
+            "sensor": 0.004874241538345814,
+            "batch_sha256": "e6e7b2d41f8cad85f8a18b8d6ba0486a380d4dc0a4ffba0cfcfe5478649d6c56",
+            "normalization_mask": [
+              false,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              false
+            ]
+          },
+          {
+            "event": "train",
+            "step": 5,
+            "loss": 0.0037974079605191946,
+            "lr": 1.5000000000000002e-07,
+            "grad_norm": 0.07769733667373657,
+            "seconds_per_step": 7.15922428749036,
+            "cuda_gb": 7.212962304,
+            "domain": "paired-RAW",
+            "paired_sensor": 0.0015954009722918272,
+            "paired_coarse_rendered": 0.004095947369933128,
+            "paired_auxiliary": 0.001540333149023354,
+            "batch_sha256": "3beb21575d3300385807f65441464dd14248b3b1a90c69846903c110728ed3b6",
+            "normalization_mask": [
+              true,
+              true,
+              false,
+              false,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              false,
+              true,
+              true,
+              true,
+              true
+            ]
+          },
+          {
+            "event": "train",
+            "step": 6,
+            "loss": 0.010851876810193062,
+            "lr": 1.8e-07,
+            "grad_norm": 1.2246031761169434,
+            "seconds_per_step": 4.978548772710686,
+            "cuda_gb": 7.212962304,
+            "domain": "synthetic",
+            "linear": 0.004581700079143047,
+            "rendered": 0.008484181948006153,
+            "gradient": 0.007021354511380196,
+            "highlight": 0.009338832460343838,
+            "sensor": 0.003920658491551876,
+            "batch_sha256": "ed1581d520fb4eea21c8e93c90e2da944480c7e2ec5895ef6496b0567fe2abda",
+            "normalization_mask": [
+              true,
+              false,
+              false,
+              true,
+              true,
+              true,
+              true,
+              true,
+              false,
+              false,
+              false,
+              true,
+              false,
+              false,
+              true,
+              false
+            ]
+          }
+        ]
+      },
+      "checkpoints": {
+        "control": {
+          "path": "/mnt/external/demosaic/benchmarks/normalization-augmentation-CUDA-v1/control/last.pt",
+          "sha256": "24f9ef112474b81157d9046907e0ae0ded0f4949e7f91e2e2c183758c77762fe"
+        },
+        "augmented": {
+          "path": "/mnt/external/demosaic/benchmarks/normalization-augmentation-CUDA-v1/augmented/last.pt",
+          "sha256": "50b527567b99a8290bd4d516c749aea60351ad6db7f462b737c3a1d93ad6c851"
+        },
+        "augmented-resumed": {
+          "path": "/mnt/external/demosaic/benchmarks/normalization-augmentation-CUDA-v1/augmented-resumed/last.pt",
+          "sha256": "e5fae82e638f7a0c9902b04b356fa9becc83069ce76aa525b1454ca8a12bbcae"
+        }
+      },
+      "all6_observation_hashes_match_across_control_augmentation_and_resume": true,
+      "portable_ordinary_FP16_EMA_predictions": {
+        "augmented": [
+          {
+            "input": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+            "input_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+            "shape": [
+              1,
+              3,
+              256,
+              256
+            ],
+            "FP16_portable_EMA_exact": true
+          },
+          {
+            "input": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+            "input_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+            "shape": [
+              1,
+              3,
+              256,
+              256
+            ],
+            "FP16_portable_EMA_exact": true
+          }
+        ],
+        "augmented-resumed": [
+          {
+            "input": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+            "input_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+            "shape": [
+              1,
+              3,
+              256,
+              256
+            ],
+            "FP16_portable_EMA_exact": true
+          },
+          {
+            "input": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+            "input_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+            "shape": [
+              1,
+              3,
+              256,
+              256
+            ],
+            "FP16_portable_EMA_exact": true
+          }
+        ]
+      },
+      "peak_cuda_allocated_bytes": 7212962304,
+      "production_training_started": false,
+      "limits": "Six discarded updates each in control/augmented/3+3 resumed arms. Genuine V63original20k EMA, fresh AdamW, B16/native256/BF16/workers4+2+2 and actual data. Exact pre-fetch model/optimizer/RNG and pre-update EMA restoration. No quality, throughput or deterministic CUDA optimization claim."
+    }
+  },
+  "independent_artifact_audit": {
+    "receipt": {
+      "path": "/mnt/external/demosaic/benchmarks/normalization-augmentation-CUDA-v1/independent-audit.json",
+      "sha256": "721398e48568e6fb7e9f67c960b3088028b6c2954fd60bdfb727757f5af43bdc"
+    },
+    "result": {
+      "status": "completed-independent-CPU-audit-of-actual-normalization-CUDA-fixtures",
+      "producer_receipt": {
+        "path": "/mnt/external/demosaic/benchmarks/normalization-augmentation-CUDA-v1/receipt.json",
+        "sha256": "57b25b9e44e38a619977e3ed45ca323b1e4ecd6fbe84737b1d08a736c8f39dbe"
+      },
+      "plan": {
+        "path": "/mnt/external/demosaic/benchmarks/normalization-augmentation-CUDA-v1/plan.json",
+        "sha256": "737bb6b4e632d11aa636d24ef65ee8edcf8f125552abb886461a6a5d49c2820e"
+      },
+      "auditor": {
+        "path": "/home/dllu/proj/demosaic/.cache/audit_normalization_cuda_preflight.py",
+        "sha256": "a68923a6b50fdfb0bdf0bb7186360a7a7ed36921f719a8a047a22582da23b1c5"
+      },
+      "logs": {
+        "control": {
+          "path": "/mnt/external/demosaic/benchmarks/normalization-augmentation-CUDA-v1/control/metrics.jsonl",
+          "sha256": "11ceff0500b8bfba15a62f5e7bb7042fdf46ad0ef89dddf338ec7f35b3a97b6a"
+        },
+        "augmented": {
+          "path": "/mnt/external/demosaic/benchmarks/normalization-augmentation-CUDA-v1/augmented/metrics.jsonl",
+          "sha256": "846551210d63b3d1d7d6dfe970f3279036c5326957b87079828ff1e7458c9408"
+        },
+        "augmented-resumed": {
+          "path": "/mnt/external/demosaic/benchmarks/normalization-augmentation-CUDA-v1/augmented-resumed/metrics.jsonl",
+          "sha256": "bf9b6e209bd92fe872b77ae2510dda6165305a7c292d819416bc647dce98c086"
+        }
+      },
+      "finite_state_each_arm": [
+        91,
+        91,
+        89
+      ],
+      "all89_model_and_EMA_parameter_tensors_changed_each_arm": true,
+      "only_two_context_normalization_buffers_exact_to_parent": true,
+      "all18_observation_rows_have_matching_hashes_and_independent_masks": true,
+      "full_and_resumed_saved_RNG_and_model_config_exact": true,
+      "full_vs_resumed_max_abs_difference_observed_only": {
+        "model": 2.384185791015625e-07,
+        "ema": 1.6391277313232422e-07
+      },
+      "source_snapshot_bundles_independently_rebuilt": true,
+      "actual_new_neural_forwards": 0,
+      "CUDA_initialized": false,
+      "limits": "Independent saved-state/source/log arithmetic. Online model/optimizer/RNG/EMA restoration and DINO/gradient/portable-output assertions are recorded by the frozen actual CUDA producer. Small full-versus-resumed optimization differences are observations, not a deterministic-CUDA or quality pass criterion."
+    }
+  },
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-first1k-workflow-v1/plan.json",
+    "sha256": "a2ab0b292cb34c51f3803a4abf2ada104b6529c5f172d7d2e32363bdb0a44b7d"
+  },
+  "controller_at_capture": {
+    "pid": 497608,
+    "created": 1792256805.99,
+    "driver_sha256": "a1f7482724556b2caa05a019d0c6670b0b8ab8214fba68b2ac472758398447b0"
+  },
+  "child_at_capture": {
+    "pid": 497625,
+    "created": 1792256808.06
+  },
+  "status_snapshot": {
+    "path": "/mnt/external/demosaic/benchmarks/normalization-v68-v69-first1k-workflow-v1/launch-status-at-capture.json",
+    "sha256": "a182c68a8f528161bc974744aa59a027a262a5decf6b61b1451e23255450f8eb"
+  },
+  "live_first_step": {
+    "event": "train",
+    "step": 1,
+    "loss": 0.009456507861614227,
+    "lr": 3.0000000000000004e-08,
+    "grad_norm": 0.4613703489303589,
+    "seconds_per_step": 11.407970902975649,
+    "cuda_gb": 7.212962304,
+    "domain": "native-RAW-synthetic",
+    "linear": 0.0027464244049042463,
+    "rendered": 0.009219294413924217,
+    "gradient": 0.008646935224533081,
+    "highlight": 0.009861370548605919,
+    "sensor": 0.0024960488080978394,
+    "batch_sha256": "1a550f5d2d360f4439613bcd02a9ce4c066375012a6922cd5452ac6f10e22538"
+  },
+  "live_first_step_observation_domain_and_LR_match_discarded_fixture": true,
+  "planned_updates_per_arm": 4000,
+  "first_quality_gate_updates": 1000,
+  "same_source_bundle": "db5fb3ba42827e9db043dbc85f069bb1e5568cdafa872f7340d872852bc6a771",
+  "production_configs": [
+    {
+      "path": "/home/dllu/proj/demosaic/configs/dino-convnext-normalization-control-b16-v68.yaml",
+      "sha256": "f5c6d704e9c2b5058fd766899998efe9f473a24aaa7299e7e867c1621337e543"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/configs/dino-convnext-normalization-augmented-b16-v69.yaml",
+      "sha256": "d221b8205b3f69f359bfa9504d542bc91d04f4c9842d3db65ed28acca2400776"
+    }
+  ],
+  "tests": {
+    "command": "CUDA_VISIBLE_DEVICES='' uv run --no-sync pytest -q tests/test_normalization_augmentation.py",
+    "passed": 10,
+    "ruff": "pass"
+  },
+  "quality_evaluation_queued": false,
+  "quality_result_or_promotion": false,
+  "limits": "Actual18 discarded BF16 optimizer updates and portable ordinary EMA checks; one live first production update witnessed. Not trained restoration quality, convergence, production throughput or deterministic CUDA optimization. First1000 review before continuation; original20k outputs and V43 working reference preserved."
+}

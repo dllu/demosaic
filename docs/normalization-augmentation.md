@@ -18,9 +18,11 @@ learned-coordinate dependency; it does not establish the cause of all soft detai
 
 The new `normalization_augmentation: center-half-mix-v1` training option exposes
 the model to both coordinate choices while retaining the original observation
-and target. It is implemented and checked on CPU with genuine V60/DINO weights.
-Trained quality and BF16/CUDA operation are pending. The original V63/V64 20k
-runs use their frozen source and recipes; no new GPU training is queued here.
+and target. CPU checks use genuine V60/DINO weights; the
+[completed production-size CUDA preflight and matched V68/V69 trial](normalization-trial-v68-v69.md)
+use the genuine V63 original20k EMA. Trained quality is pending. The original
+V63/V64 schedules/reports remain preserved; the new trial changes only training
+normalization within its matched arms.
 
 ## Isolated diagnostic
 
@@ -158,6 +160,6 @@ CUDA_VISIBLE_DEVICES='' HF_HUB_OFFLINE=1 uv run --no-sync python \
   --output /mnt/external/demosaic/benchmarks/CHOOSE-NEW-NORMALIZATION-CHECK
 ```
 
-Any future quality trial must retain a matched control and review exact-target
-photos, colors, paired data and native real crops. GPU/BF16 checks and a full
-performance review remain before any production use or promotion.
+The matched quality trial retains a control and must review exact-target
+photos, colors, paired data and native real crops. GPU/BF16 engineering checks
+have now passed; a full trained-quality review remains before promotion.

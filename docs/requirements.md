@@ -19,10 +19,12 @@ complete scene independence remains unproven.
 SOTA, decisive real-photo superiority and the10-second target remain unmet/unproven.
 
 The [normalization-coordinate diagnosis and opt-in training augmentation](normalization-augmentation.md)
-now have 579 passing CPU tests, genuine-parent restart/input-identity checks and
-native photographic/GFX views. Selected fabric/color predictions are sensitive
-to feature coordinates. The augmentation has no trained-quality or CUDA result;
-the original long-schedule comparison remains unchanged.
+retain the earlier579-test CPU result and native photographic/GFX views.
+The [genuine V63-parent CUDA preflight](normalization-trial-v68-v69.md) now passes
+18 discarded B16/native256/BF16 updates, exact interruption-boundary restoration,
+frozen DINO, input/mask checks and ordinary EMA portability, with an independent
+artifact audit. The matched V68/V69 first1k trial is running; trained quality is
+unknown and the original long-schedule comparison remains preserved.
 
 | Requirement | Evidence needed | Current state |
 | --- | --- | --- |
