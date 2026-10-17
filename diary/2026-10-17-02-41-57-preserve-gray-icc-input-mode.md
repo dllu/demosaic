@@ -29,5 +29,5 @@ repository src guard depends on current prepare.py. Those jobs import their
 immutable archived source. This edit affects future ingestion only. No current
 training data, checkpoint, source snapshot, original image, controller, quality
 result or performance setting changes. V5 independent full-cache audit has
-completed; three48-image content sheets were actually viewed and will support
+completed; three content sheets (48 images total) were actually viewed and will support
 a separate reviewed freeze/matching4x preparation.

@@ -1,77 +1,94 @@
-# Next Commons arrivals: separate fifth snapshot
+# Fifth Commons snapshot: 85,048 future training sources
 
-A CPU-only job is preparing **10,368 newly downloaded eligible images** in a
-separate staging corpus. It uses the same linear-light 8× binning, protected-scene
-screen and duplicate audit as the completed fourth snapshot. Current training,
-validation and test inputs remain fixed. No model uses these new candidates.
+The reviewed fifth snapshot adds **9,242 training sources**, increasing the
+separate future corpus from 75,806 to **85,048**. Matching 4× preparation is
+running for those new training members only. The active V67 run retains its
+original 40,170-source Commons manifest; no model uses this new snapshot.
 
-[Actual launch and independent startup checks](results/commons-incoming-v5-launch.json).
-[Queued complete cache/membership audit](results/commons-incoming-v5-independent8-queue.json).
-[Completed 75,806-source future corpus used as the base](commons-incoming-v4.md).
+[Reviewed 8× freeze](results/commons-incoming-v5-reviewed8.json),
+[actual 4× launch and startup checks](results/commons-incoming-v5-rebin4-launch.json),
+[original preparation launch](results/commons-incoming-v5-launch.json), and
+[full cache-audit launch](results/commons-incoming-v5-independent8-queue.json).
 
-The frozen selection contains committed completed downloads absent from all
-**84,959 prior candidate/failure identities**, including earlier quarantines and
-decode failures. Its download timestamps range from 2026-10-17 01:56:17 to
-08:17:00 UTC. There is no date cutoff; later arrivals cannot change the selected
-membership. The read-only SQLite connection closes after materializing metadata,
-before image decoding starts. The existing downloader continues independently;
-no duplicate downloader was started.
+| Bucket | Previous | Fifth snapshot | Added |
+| --- | ---: | ---: | ---: |
+| Train | 75,806 | 85,048 | 9,242 |
+| Validation | 2,303 | 2,303 | 0 |
+| Test | 2,255 | 2,255 | 0 |
+| Reserved | 4,005 | 4,998 | 993 |
+| Excluded | 27 | 32 | 5 |
 
-Selection requires accepted CC BY, CC BY-SA, CC0 or public-domain metadata,
-at least 2048 pixels per side and at most 120 MP. Full source URLs, author,
-license, credit and attribution remain in the frozen manifest. Originals on
-the external SSD are read-only; no personal RAW or cold hard-drive path is opened.
+Preparation completed **10,367 caches from 10,368 selected sources**, with one
+ICC-transform failure. The protected-scene screen cleared 10,240 and quarantined
+127; every flag stays out. The duplicate audit additionally excludes five new
+members and reserves 993 new holdout members. All old rows and held-out
+assignments remain exact. The original 2,303 validation and 2,255 test sources
+are unchanged. Reserved arrivals do not enter active evaluation.
 
-Preparation uses two CPU workers at nice 5 with CUDA hidden. Estimated 8× cache
-payload is **12.663 GB / 11.793 GiB**. Preparing every candidate at 4× would add
-about 47.182 GiB; actual 4× preparation will select only the reviewed new training
-members. Both estimates fit within the existing 512 GiB free-space reserve at
-launch, with about 900 GiB free. The producer checks headroom before decoding and
-before screening/auditing; this does not reserve space against unrelated writers.
-Matching 4× preparation is still pending and is required before this data can
-support augmentation before the final reduction.
+The separate complete audit checks every prepared cache SHA/header/uint16 HWC
+shape/minimum dimensions, source/license metadata, selected/prepared/failed
+identity partition, protected flags and base membership. All checks pass.
+All **48 deterministic content thumbnails on three sheets** were actually
+viewed: architecture, foliage, water/coasts, mountains/clouds, wildlife/macros,
+vehicles, interiors, performance lighting, portraits and monochrome subjects.
+No obvious corrupt render or implausible color appeared in this sample. This
+spot check does not establish native sharpness/noise quality or inspect every
+image. Finite metadata and perceptual fingerprints cannot prove arbitrary
+semantic scene disjointness. No model performance gain is claimed.
 
-The actual package, operators, standing GFX config and driver are copied into
-the output before work begins. Preparation imports that archive. Independent
-startup checks verify every selection identity, its accepted license/dimensions,
-all exclusions and source hashes. Twelve actual published caches pass complete
-SHA256, uint16/HWC, minimum-size, binning-recipe and exact attribution checks.
-The actual producer is live at nice 5, CUDA hidden, with its preparation lock held.
-The startup receipt records 100 prepared images and no failure. This is a startup
-sample; complete verification and content review remain pending.
+The failed source is a valid grayscale JPEG with a gray ICC profile; its
+[future-ingestion correction](gray-ICC-ingestion.md) has separate tests and
+isolated diagnostic caches. Those repaired caches are not admitted here. This
+snapshot and matching 4× work retain the actual archived original operator and
+its one-error exclusion, preserving their frozen recipe.
 
-After preparation, the controller checks the 42 cached protected identity
-references, including the standing DSCF3879/DSCF3880 scene and sibling metadata.
-It runs the existing seven-view/eight-orientation screen and keeps every flag
-quarantined. The subsequent near-duplicate audit uses the reviewed fourth
-snapshot's 8× base. All old rows and held-out assignments remain anchored; new
-holdout buckets are reserved outside active evaluation. Finite fingerprint and
-metadata screening cannot establish arbitrary semantic scene disjointness.
+Frozen 8× membership:
+`/mnt/external/demosaic/commons-incoming-20261017-v5-quarantine/reviewed8/manifest.jsonl`.
+SHA256: `c4db19459384a8f8c118017cac43c592cc0a17a6d74ac1bdd9bdb6613346fdbe`.
 
-The producer stops at `audited-quarantine8-awaiting-reviewed-freeze`. A second
-owned CPU job waits for that exact successful producer exit, then independently
-checks **every** new cache, attribution record, selection/failure identity and
-old split assignment. It also creates 48 deterministic content thumbnails for
-actual viewing. The new owner is live and child-free at launch with no audit
-output. Both its actual live-owner gate and the underlying auditor reject
-incomplete preparation before output. The future completed path remains pending.
+The selection contains committed completed downloads absent from all 84,959
+prior candidate/failure identities, including earlier quarantines. Download
+timestamps span 2026-10-17 01:56:17–08:17:00 UTC, with no date cutoff; later
+arrivals do not change membership. Read-only SQLite metadata closes before
+decoding. Sources require accepted CC BY/CC BY-SA/CC0/public-domain metadata,
+at least 2048 pixels per side and at most 120 MP. URLs, author, license, credit
+and attribution remain in the manifests. Only Commons files on the SSD were
+read; no personal or cold-drive RAW was decoded. The downloader continues
+independently. The 42 cached protected references and standing GFX scene/sibling
+metadata remain anchored; the screen uses seven views and eight orientations.
 
-Actual thumbnail review, a separately reviewed 8× freeze, matching 4× preparation
-and complete 4× pixel checks remain required. No training admission, performance
-gain or model promotion follows from this preparation. The running V67 original
-10,000-update schedule retains its original 40,170-source Commons manifest.
+The 4× producer selects exactly 9,242 new reviewed training sources, with
+estimated 45.001 GB of new caches. It reuses the completed fourth snapshot's
+4× base, including all 4,558 old held-out rows, instead of redecoding old sources.
+Reserved/excluded/quarantined/failed sources are omitted. Two workers at nice 5,
+CUDA hidden, retain a 512 GiB reserve plus estimated payload and 10 GiB startup
+margin. About 872.93 GiB was free at startup. All selection identities/metadata
+and the first 12 published cache SHAs/dtypes/shapes/minimum 512px dimensions pass
+independent startup checks; 282 rows were observed then.
 
-Operational files:
+After the exact producer exits successfully, a waiting CPU auditor checks every
+new 4× cache and its matching 8× cache, all old rows/heldouts and source metadata,
+and rounded area2 against 8× across every new channel sample, with a maximum
+one-uint16-code tolerance. It creates another 48 resized content thumbnails for
+actual viewing. That complete path and final 4× content review are pending; no
+partial 4× output is a training input.
 
-- Producer PID 3023649 / creation 1792225018.76.
-- Output `/mnt/external/demosaic/commons-incoming-20261017-v5-quarantine/`.
-- Producer state `workflow.json`, identity `controller.json`, frozen
-  `selection.jsonl`, `selection-recipe.json` and `source/` under that output.
-- Producer log `.cache/prepare-commons-incoming-v5.log`.
-- Independent-audit waiter PID 3025414 / creation 1792225177.38;
-  `independent8-workflow.json`, `independent8-plan.json` and `independent8-source/`.
-- Future audit output
+Operational files under
+`/mnt/external/demosaic/commons-incoming-20261017-v5-quarantine/`:
+
+- Original producer 3023649 and complete 8× auditor 3025414 exited successfully.
+- Frozen selection/recipe/source, protected screen, audit and `reviewed8/`.
+- Complete8 integrity/content receipt:
   `/mnt/external/demosaic/benchmarks/commons-v5-8x-complete-integrity-v1/`.
+- Live 4× producer PID 3113673 / creation 1792230336.69;
+  `rebin4-controller.json`, `rebin4-plan.json`, `rebin4-workflow.json`,
+  `rebin4-source/`, `extension4/`; log `.cache/rebin-commons-incoming-v5.log`.
+- Independent 4× waiter PID 3114258 / creation 1792230466.84;
+  `independent4-source/` and `independent4-workflow.json`; future output
+  `/mnt/external/demosaic/benchmarks/commons-v5-4x-complete-integrity-v1/`.
 
-Verify actual PID, creation time and process state before acting. Existing
-controllers own these paths; do not start duplicate preparation or audits.
+Verify actual PID/creation/state before acting. The first launcher observation
+expired during metadata loading; rechecking the same producer confirmed it live
+and preparing caches. No restart or duplicate job was launched. Full 4× checks
+and actual content review remain required before a future training recipe uses
+this corpus. Current training, evaluation, checkpoints and reports remain fixed.
