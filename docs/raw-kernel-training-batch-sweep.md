@@ -1,8 +1,15 @@
 # Current RAW-head training batch sweep
 
-A throughput sweep is queued for the current joint RAW-kernel model. There are
-**no GPU measurements from this sweep yet**. Batch 16 remains unchanged in
-production. The [earlier sweep](current-pipeline-batch-sweep.md) measured the RGB
+The current RAW-kernel throughput sweep is **running** in an isolated v2
+directory after successful final10000 CUDA profiling. The original v1 owner
+refused work when its profiler predecessor failed on observational tensor
+hashing; no v1 training fixture ran. The bug is fixed and the actual profiler
+completed. [Failure, executed correction and v2 launch](results/raw-kernel-inference-profile-recovery-v2.json).
+The v2 sweep owner is PID3171937/creation1792232391.49, status
+`/mnt/external/demosaic/runs/raw-kernel-phase-joint-v67-full10k-training-sweep-workflow-v2.json`.
+Verify actual owner/status before acting. Partial cases are not a batch decision;
+the two-repeat comparison and independent arithmetic remain pending. Batch16
+stays unchanged in production. The [earlier sweep](current-pipeline-batch-sweep.md) measured the RGB
 restoration architecture; its numbers do not establish the best batch for this
 RAW head. [Frozen plan, CPU checks and launch receipt](results/raw-kernel-training-batch-sweep-queue.json).
 

@@ -1,7 +1,18 @@
 # Conditional neural-block compilation trial
 
-An isolated CUDA trial is queued after the exact current-model batch-sweep
-owner exits. **No CUDA compilation or new timing has executed yet.** The
+An isolated v2 CUDA trial is queued after the exact running RAW batch-sweep
+owner exits. The [actual final10000 CUDA profile](results/raw-kernel-inference-profile-recovery-v2.json)
+now supports the prespecified triage: trunk/unhooked median ratio.49142,
+add/ReLU/copy fraction.51154, all1,209 device activities independently mapped.
+**No CUDA compilation or compiled timing has executed yet.** The original v1
+chain exited after an observational hash-layout failure before profiling;
+its artifacts remain intact. The v2 follower is PID3174750/creation1792232630.49,
+status `/mnt/external/demosaic/runs/raw-kernel-phase-joint-v67-full10k-compiled-probe-workflow-v2.json`.
+It waits for the exact v2 batch owner PID3171937/1792232391.49 and reads the
+successful v2 profiler. Verify actual owners/status before acting. The
+compiled runner and existing CPU switching fixture are unchanged; only its
+observational helper now hashes channels-last singleton strides correctly,
+with separate actual full-model hash/output identity checks. The earlier
 [launch receipt and frozen plan](results/raw-kernel-compiled-CUDA-trial-queue.json)
 include the executed CPU checks. The [six-input CPU experiment](raw-kernel-inference-profile.md#neural-block-compilation-candidate)
 established local numerical agreement with the real reviewed step2000 weights.

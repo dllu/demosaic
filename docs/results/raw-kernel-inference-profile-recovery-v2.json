@@ -1,0 +1,167 @@
+{
+  "status": "completed-real-V67-final10000-CUDA-profile-after-observed-layout-hash-fix",
+  "reviewed_UTC": "2026-10-17T10:24:35.630401+00:00",
+  "checkpoint": {
+    "path": "/mnt/external/demosaic/models/dino-convnext-raw-kernel-phase-joint-b16-v67-step10000.pt",
+    "sha256": "a37e6c84597de540440bbf29c93eb79c9ddbf74024b39843a2941143fe6470fc",
+    "step": 10000
+  },
+  "old_failed_workflows": [
+    {
+      "workflow": {
+        "path": "/mnt/external/demosaic/runs/raw-kernel-phase-joint-v67-full10k-inference-profile-workflow-v1.json",
+        "sha256": "06e4459aa8f059a71c35bb2ddb67a1f4389c01789ed92b326164addeafce2bb2"
+      },
+      "error": "AssertionError()",
+      "owner_exited": true
+    },
+    {
+      "workflow": {
+        "path": "/mnt/external/demosaic/runs/raw-kernel-phase-joint-v67-full10k-training-sweep-workflow-v1.json",
+        "sha256": "96aa8ed82daf153c0d91ea213322cd84997165a61f804ad27cdd9f802e0b7d37"
+      },
+      "error": "RuntimeError('Actual inference-profile owner has not completed and exited')",
+      "owner_exited": true
+    },
+    {
+      "workflow": {
+        "path": "/mnt/external/demosaic/runs/raw-kernel-phase-joint-v67-full10k-compiled-probe-workflow-v1.json",
+        "sha256": "54c37af1289c83fe92c294cd5e894bb50f3e2d0558cf14eb20fc405dbcb2108c"
+      },
+      "error": "RuntimeError('Actual RAW training-sweep owner has not completed and exited')",
+      "owner_exited": true
+    }
+  ],
+  "failure_reason": "The observational state hash used a dtype byte view on channels-last 1x1 weights. Singleton dimensions can report contiguous while their final stride is21/67/etc. The first profiler failed before any warmup or measurement; downstream owners correctly refused work.",
+  "fix": "Hash original dtype/shape plus exact logical values copied to a canonical one-dimensional tensor. Preserves FP32/BF16/integer bits, scalars and existing CPU hashes. No model numerical computation changes.",
+  "regression_tests": {
+    "path": "tests/test_inference_profile_hash.py",
+    "passed": 11
+  },
+  "CPU_layout_and_output_receipt": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-inference-profiler-CPU-preflight-v3/independent-receipt.json",
+    "sha256": "b47facf5191d991ad2faf76673f55db14283981a61c1f74facdd0838bb192167"
+  },
+  "actual_current_CUDA_result": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-inference-profile-workflow-v2/bounded-CUDA-profile/result.json",
+    "sha256": "133e03974489def4fc2416c82cbb86830b9eae9325e0c5da547b6bec55fe0c50"
+  },
+  "actual_current_CUDA_trace": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-inference-profile-workflow-v2/bounded-CUDA-profile/operator-trace.json",
+    "sha256": "e6ec3ec072461daa140e824a15f614479fd45263ca06856393a15c367fae3dee"
+  },
+  "independent_trace_analysis": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-inference-profile-workflow-v2/independent-current-trace-analysis.json",
+    "sha256": "ead1df461d7ed0c701a63ede2d5f819108944094e0c41701eeb61d77c8f6957d"
+  },
+  "actual_fixed_GFX_reference": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-inference-profile-workflow-v2/bounded-CUDA-profile/unchanged-reference-f32.npy",
+    "sha256": "68a4d3738ad12e16ecded1cefe32672371929aca92361c0ca46bad41dce395ca"
+  },
+  "batch_size": 4,
+  "native_size": 512,
+  "neural_precision": "float16",
+  "physical_precision": "float32",
+  "warmup": 3,
+  "samples": 5,
+  "unhooked_synchronized_wall_ms": [
+    370.98617712035775,
+    363.22569311596453,
+    358.4185920190066,
+    366.46371707320213,
+    371.9325470738113
+  ],
+  "unhooked_median_ms": 366.46371707320213,
+  "inclusive_CUDA_branches_do_not_sum_nested": {
+    "DINO-context-inclusive": {
+      "samples": [
+        30.048288345336914,
+        29.50547218322754,
+        27.519935607910156,
+        30.336896896362305,
+        30.148576736450195
+      ],
+      "median_ms": 30.048288345336914
+    },
+    "DINO-backbone-nested": {
+      "samples": [
+        23.052288055419922,
+        23.00102424621582,
+        21.673952102661133,
+        22.519712448120117,
+        23.727136611938477
+      ],
+      "median_ms": 23.00102424621582
+    },
+    "restoration-trunk": {
+      "samples": [
+        181.69448852539062,
+        174.44873046875,
+        179.99072265625,
+        180.08802795410156,
+        183.41494750976562
+      ],
+      "median_ms": 180.08802795410156
+    },
+    "RAW-head-inclusive": {
+      "samples": [
+        138.79586791992188,
+        139.66517639160156,
+        138.93212890625,
+        137.53219604492188,
+        140.12701416015625
+      ],
+      "median_ms": 138.93212890625
+    },
+    "RAW-coefficients-nested": {
+      "samples": [
+        31.477855682373047,
+        30.998592376708984,
+        30.830591201782227,
+        30.394271850585938,
+        30.32268714904785
+      ],
+      "median_ms": 30.830591201782227
+    }
+  },
+  "trace_GPU_activities_independently_mapped": 1209,
+  "trunk_exclusive_GPU_activity_ms": 181.054967,
+  "trunk_add_relu_copy_GPU_activity_ms": 92.617297,
+  "trunk_add_relu_copy_fraction": 0.5115424256767283,
+  "model_and_actual_DINO_state_unchanged": "20e5dc1cc2ad55a792021e769cfa931a75f09773ad5516b7b41dadc17fc4702d",
+  "all_hooked_unhooked_profiled_outputs_bitwise_reference": true,
+  "CPU_and_CUDA_RNG_unchanged": true,
+  "peak_CUDA_allocation_GB": 5.632116224,
+  "profile_launch": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-timing-hash-recovery-v2-launch.json",
+    "sha256": "dea49d7c9fc186b8d615885d3bcb341ed4364407654f96756deba9df219cc754"
+  },
+  "batch_sweep_status_at_capture": {
+    "controller": {
+      "pid": 3171937,
+      "created": 1792232391.49,
+      "driver_sha256": "59c821b58ac85c10e3f07f5d9dae52ab69661c857f39da736191e237c23712cb"
+    },
+    "plan": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-training-sweep-workflow-v2/plan.json",
+    "previous_owner": {
+      "pid": 3171923,
+      "created": 1792232390.18,
+      "driver_sha256": "830d5bab25a0dc0bf336fe25daada319566c62710b10a1b2d361dd91db4087e7"
+    },
+    "status": "running-discarded-current-RAW-batch-sweep",
+    "updated_UTC": "2026-10-17T10:20:12.396253+00:00",
+    "checkpoint": {
+      "path": "/mnt/external/demosaic/models/dino-convnext-raw-kernel-phase-joint-b16-v67-step10000.pt",
+      "sha256": "a37e6c84597de540440bbf29c93eb79c9ddbf74024b39843a2941143fe6470fc"
+    },
+    "child": {
+      "pid": 3172347,
+      "created": 1792232412.35
+    }
+  },
+  "compiled_recovery_launch": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-compiled-trial-hash-recovery-v2-launch.json",
+    "sha256": "60650d2150dec3c0ce898b77e3ceedb2e3002ebde4cc7ac9bf1749e1d5a251e7"
+  },
+  "scope": "Shared-machine fixed resident inputs; event branches inclusive/nested and trace instrumented. Excludes transfers/tiling/blending/decode/encode. No new full-frame speed or quality result; no production batch/LR/model/precision change. Old failed directories are preserved; v2 isolation is a diagnosed-code recovery, not an automatic retry."
+}

@@ -1,5 +1,40 @@
 # Attribute the current RAW-kernel inference cost
 
+The genuine final V67 step10000 CUDA profile is **complete**. Median unhooked
+forward time is366.464ms for the fixed four native512 GFX contexts. Inclusive
+CUDA medians are180.088ms restoration trunk,138.932ms RAW head and30.048ms DINO
+context; nested coefficient/backbone medians are30.831/23.001ms. Do not sum
+parents and children. All hooked/unhooked/traced predictions match exactly;
+model/DINO state and CPU/CUDA RNG remain unchanged.
+
+[Executed profile, diagnosed failure/fix and new owned queues](results/raw-kernel-inference-profile-recovery-v2.json).
+All1,209 kernel/copy/memset activities independently match both CPU external-ID
+and runtime correlation associations. The instrumented trunk accounts for
+181.055ms summed activity, with92.617ms (51.15%) in add/ReLU/copy. This supports
+the bounded compiled-block experiment; it does not predict its speedup.
+
+The first CUDA profiler failed **before warmup/timing**: its observational tensor
+hash reinterpreted channels-last1×1 weights as bytes, but singleton dimensions
+can report contiguous while retaining last stride21/67/etc. Hashing now copies
+logical values to a canonical vector, preserving exact dtype bits and shape.
+Eleven focused regression tests pass. An actual full-model CPU check reproduces
+14 offending tensors, preserves the previous canonical hash across NCHW and
+channels-last, and keeps the real256px prediction bitwise identical. No model
+numerical computation changed. Failed v1 sources/logs/status remain intact;
+the diagnosed recovery uses separate v2 directories and new exact owners.
+
+The v2 profiler and child have exited successfully. The RAW batch sweep is now
+running under PID3171937/creation1792232391.49; the conditional compiled follower
+is PID3174750/1792232630.49. Their status paths use suffixes
+`training-sweep-workflow-v2.json` and `compiled-probe-workflow-v2.json` under
+`/mnt/external/demosaic/runs/raw-kernel-phase-joint-v67-full10k-`.
+Verify actual PID/creation/status before acting. The
+[completed quality review](raw-kernel-phase-joint-v67-full10k-review.md) does not
+promote V67 and records52.704s full-frame restoration/blending. These resident
+input profile samples exclude transfers/tiling/blending/decode/encode and are
+not a new full-frame timing result. The sections below preserve earlier
+preparation and CPU evidence; their v1 waiting status is historical.
+
 The retained V67 step-2,000 full-frame measurement takes **52.042 seconds** for
 101.996 MP: compute/transfer accounts for 51.694 seconds and CPU blending for
 0.245 seconds. This is the existing shared-machine measurement, excluding RAW

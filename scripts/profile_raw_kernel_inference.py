@@ -48,7 +48,12 @@ def model_hash(model):
     for name, value in model.state_dict().items():
         value = value.detach().cpu().contiguous()
         digest.update(name.encode() + str(value.dtype).encode() + str(tuple(value.shape)).encode())
-        digest.update(value.view(torch.uint8).numpy().tobytes())
+        # Singleton dimensions can be "contiguous" yet retain a non-unit last
+        # stride (notably channels-last 1x1 weights). Byte reinterpretation
+        # requires unit stride. Copy the logical values to a canonical vector;
+        # this also supports scalars and BF16 without converting their values.
+        flat = value.reshape(-1).clone(memory_format=torch.contiguous_format)
+        digest.update(flat.view(torch.uint8).numpy().tobytes())
     return digest.hexdigest()
 
 
