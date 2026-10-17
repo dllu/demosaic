@@ -306,3 +306,15 @@ The structural-guidance paper's stated public
 2026-10-17 at08:34UTC; GitHub's repository API returns404. This records public
 availability at that time and does not establish that no private/supplementary
 code exists. The active model experiment continues independently.
+
+## vkdt compact JDD reference and CPU precision
+
+The [publisher's JDD module](https://github.com/hanatos/vkdt/blob/ec070207e8fb22cc9d01cb7293ce382ef06c53c1/src/pipe/modules/jddcnn/readme.md)
+deploys an OIDN-derived compact Bayer/X-Trans U-Net through a2026 Vulkan
+compiler/scheduler. Its [genuine noisy-Bayer ONNX CPU probe](vkdt-jddcnn-native-CPU-probe.md)
+strictly matches all42 learned tensors and reviews eight fixed native contexts.
+Selected flat colors are closer than our control20k, but photo/detail results
+are mixed. An exact-weight FP32 graph agrees with the upstream operator while
+native CPU FP16 execution differs materially; no Vulkan quality/speed or general
+model ranking follows. The older compact architecture is not a new2026 design.
+Weights/runtime stay isolated; separate weight-license terms remain unverified.
