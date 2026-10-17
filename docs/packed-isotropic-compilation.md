@@ -2,8 +2,13 @@
 
 The [frozen benchmark queue](results/packed-isotropic-compilation-queue-v1.json)
 is waiting behind the actual40k training and automatic quality review. There
-is no trained-checkpoint CUDA compilation result yet. Production inference,
-training and their precision settings are unchanged.
+is no trained-checkpoint CUDA compilation result yet. The queued protocol
+retains its original weights, physical model math and precision settings.
+
+This queue predates the [tile-grid correction](packed-isotropic-tile-grid.md)
+and retains its frozen2-pixel tiling geometry. Its eventual full-frame results
+apply to that archived profile; the corrected root tiler needs separate CUDA
+and full-frame validation before a packed model or compute policy is promoted.
 
 The earlier discarded12-update block benchmark suggested a possible speedup,
 but did not establish trained-model accuracy or full-frame latency. This study

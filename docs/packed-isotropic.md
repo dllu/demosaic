@@ -8,6 +8,12 @@ The three requested pipeline improvements are already measured separately in
 [the pipeline report](training-pipeline.md); this experiment retains that data
 path and does not change the existing model recipes.
 
+The [tile-grid correction and trained CPU checks](packed-isotropic-tile-grid.md)
+now preserve the RAW4-pixel and DINO32-pixel grids across final tiles. This fixes
+coordinate consistency without a restoration-quality gain. Active40k trials
+and queued reviews retain their immutable previous geometry; corrected-grid
+CUDA/full-frame validation remains before promotion.
+
 The [completed normalization study](normalization-v68-v69-original4k-review.md)
 left missing fine detail, bright-color bias and roughly36s/102MP restoration
 unresolved. The earlier packed RGB variants averaged interpolated RGB before a

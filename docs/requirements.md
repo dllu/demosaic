@@ -42,6 +42,12 @@ require successful/exited training owners and independently checked40k states.
 They include own8k progress, fixed native crops and source sensitivities; no
 new40k model quality or automatic promotion is claimed by the queue.
 
+The [packed tile-grid correction](packed-isotropic-tile-grid.md) preserves the
+RAW4-pixel/DINO32-pixel grids at final tiles. Actual trained CPU checks confirm
+the corrected coordinates; selected photo PSNR does not improve. Active frozen
+reviews retain their old geometry. Corrected-grid CUDA/full-frame validation
+and the model-quality goals remain open.
+
 | Requirement | Evidence needed | Current state |
 | --- | --- | --- |
 | Modern method and DINOv3 recommendation | Primary-source research, architecture rationale, licensed pretrained backbone and ablation | Official pinned weights; an earlier architecture's matched 20k-step ablation has a small positive gain on 427 photos. The earlier RGB architecture’s [completed fresh no-context/S/B comparison through 10,000 updates](fresh-dino-capacity-10k-review.md) finds no photographic context gain. The [completed ConvNeXt10k review](dino-convnext-pyramid-v58-10k-review.md) ties no-context on photo mean with mixed paired-real scores. No consistent mature context advantage or SOTA is established. The [new RAW-native first32000-example review](packed-isotropic-first32000-review.md) finds a small DINO gain but weak restoration close to bilinear; both endpoints remain unpromoted |

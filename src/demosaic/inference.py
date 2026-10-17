@@ -71,11 +71,24 @@ def restore_tiled(
     Only the raw image and float32 RGB accumulators persist on the CPU. Tile
     feature maps live on CUDA. No full-image CUDA copy, duplicated CPU/CUDA
     outputs or full-resolution feature tensors are retained on UMA systems.
-    Even tile coordinates preserve the original CFA phase for every pattern.
+    Tile coordinates preserve the CFA phase and the packed trunk's4-pixel grid
+    (32 pixels with its ConvNeXt context). Round stride down if necessary so
+    the actual overlap is at least the requested overlap.
     """
     full_started = time.perf_counter()
     if tile < 32 or tile % 16 or overlap < 0 or overlap % 2 or overlap >= tile:
         raise ValueError("Tile must be >=32 and divisible by 16; overlap must be even and <tile")
+    config = getattr(model, "config", None)
+    alignment = (
+        (32 if config.dino else 4)
+        if getattr(config, "restoration_backbone", None) == "packed-isotropic"
+        else 2
+    )
+    if tile % alignment:
+        raise ValueError(f"Tile must be divisible by this model's {alignment}-pixel grid")
+    stride = (tile - overlap) // alignment * alignment
+    if stride < alignment:
+        raise ValueError(f"Overlap must leave at least one {alignment}-pixel grid step")
     if batch_size < 1 or min(shot, read) < 0:
         raise ValueError("Invalid batch size or noise coefficients")
     if precision not in COMPUTE_DTYPES:
@@ -91,8 +104,8 @@ def restore_tiled(
     if raw.ndim != 2 or min(raw.shape) < 2 or not np.isfinite(raw.numpy()).all():
         raise ValueError("Raw must be a finite H×W normalized mosaic")
     original_h, original_w = raw.shape
-    h = max(tile, original_h + original_h % 2)
-    w = max(tile, original_w + original_w % 2)
+    h = max(tile, (original_h + alignment - 1) // alignment * alignment)
+    w = max(tile, (original_w + alignment - 1) // alignment * alignment)
     # Extend CFA values by whole 2×2 cells; replication of individual edge
     # pixels would assign a red measurement to a green phase on odd borders.
     if (h, w) != (original_h, original_w):
@@ -100,7 +113,6 @@ def restore_tiled(
         rows = torch.where(rows < original_h, rows, 2 * ((original_h - 2) // 2) + rows % 2)
         cols = torch.where(cols < original_w, cols, 2 * ((original_w - 2) // 2) + cols % 2)
         raw = raw.index_select(0, rows).index_select(1, cols)
-    stride = tile - overlap
     coords = [(y, x) for y in positions(h, tile, stride) for x in positions(w, tile, stride)]
     # Positive weights avoid division by zero at the exterior image boundaries.
     edge = torch.hann_window(tile, periodic=False).clamp_min(0.02)
@@ -169,6 +181,8 @@ def restore_tiled(
         "tiles": len(coords),
         "tile": tile,
         "overlap": overlap,
+        "tile_grid_alignment": alignment,
+        "tile_stride": stride,
         "batch_size": batch_size,
         "compute_precision": precision if amp and device.type == "cuda" else "float32",
         "refinement_compute_precision": getattr(model, "refinement_precision", "float32")

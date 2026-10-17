@@ -1,0 +1,1978 @@
+{
+  "status": "corrected-packed-tile-grid-with-trained-CPU-evidence",
+  "old_inference": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/inference.py",
+    "sha256": "8085ccb43beea0f50e635e209a6c461836de70b27b76a286a162aa34c4bba3ac"
+  },
+  "corrected_inference": {
+    "path": "/home/dllu/proj/demosaic/src/demosaic/inference.py",
+    "sha256": "0dfe6d0e8f9fbac820f9cabb41055e0dfd82e0b798148c2395f069b352c25165"
+  },
+  "physical_model_modules_identical_to_frozen_old_source": true,
+  "geometry": {
+    "no_dino_packed_alignment": 4,
+    "dino_packed_alignment": 32,
+    "other_models_alignment": 2,
+    "stride": "floor((tile-requested_overlap)/alignment)*alignment",
+    "minimum_overlap_preserved": true,
+    "CFA_phase_preserving_padding_and_native_output_crop": true,
+    "timing_fields": [
+      "tile_grid_alignment",
+      "tile_stride"
+    ]
+  },
+  "checkpoints": [
+    {
+      "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-b4-v71-step24000.pt",
+      "sha256": "5cc735e14c155c46d24a3499fec6f4ce3a6352846602170ffa828c2515bcaf91",
+      "step": 24000,
+      "weights": "EMA"
+    },
+    {
+      "path": "/mnt/external/demosaic/models/dino-packed-isotropic-b4-v70-step8000.pt",
+      "sha256": "5fc021488d34df6ddf85cac8b0fc5cb0b0117713c87865c010e7e246979a2c14",
+      "step": 8000,
+      "weights": "EMA"
+    }
+  ],
+  "old_observation_operators": [
+    {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-24k-tiling-CPU-v1/probe.py",
+      "sha256": "ea7750de8389b807d92e4e6f85cc5e0df2f35618cb07dfaa5846d68d7a7f51cd"
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-dino8k-tiling-CPU-v1/probe.py",
+      "sha256": "a30c30c7b23526ad508251827d0f4810f98214ee970567a41be688eee8b638f3"
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-24k-photo-tiling-CPU-v1/probe.py",
+      "sha256": "8d576b8d5f2316c5960b21c30f8010cceab12a27ff05609479cf946676749cc8"
+    }
+  ],
+  "CPU_integration": {
+    "receipt": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-grid-fix-integration-CPU-v1/receipt.json",
+      "sha256": "d8d2acf4f02cf74c142c257e65d76214420a297edd94ddf8900ed5db157bace3"
+    },
+    "driver": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-grid-fix-integration-CPU-v1/verify.py",
+      "sha256": "43945b708d9f1c9f164074bf2f1505f61a4709a13d94be6387cf2ecfb1db7103"
+    },
+    "cases": [
+      {
+        "kind": "realGFX",
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-b4-v71-step24000.pt",
+          "sha256": "5cc735e14c155c46d24a3499fec6f4ce3a6352846602170ffa828c2515bcaf91",
+          "step": 24000,
+          "weights": "EMA"
+        },
+        "region": "foliage",
+        "reference_report": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-24k-tiling-CPU-v1/receipt.json",
+          "sha256": "420de9e4f90f3d3f7fe21573925076dbeef3d5d756426e7daf279504075c9e4a"
+        },
+        "independently_phase_aligned_old_prediction": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-24k-tiling-CPU-v1/foliage-aligned64-RGB-f32.npy",
+          "sha256": "2206570a863316425f7b4c3949ba3fbcab90d505493335c11e5c5bed3f5c107d"
+        },
+        "corrected_tiler_vs_independently_aligned_old": {
+          "elements": 2787876,
+          "max_abs": 0.0,
+          "RMS": 0.0,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0,
+          "passes_predeclared_bound": true
+        },
+        "timing_engineering_only": {
+          "seconds": 8.974208520026878,
+          "tile_seconds": 8.970242781797424,
+          "compute_transfer_seconds": 8.961808153195307,
+          "blend_seconds": 0.0075819226913154125,
+          "megapixels": 0.929292,
+          "tiles": 9,
+          "tile": 512,
+          "overlap": 64,
+          "tile_grid_alignment": 4,
+          "tile_stride": 448,
+          "batch_size": 1,
+          "compute_precision": "float32",
+          "refinement_compute_precision": "float32",
+          "memory_format": "contiguous",
+          "peak_cuda_gb": 0
+        }
+      },
+      {
+        "kind": "realGFX",
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-b4-v71-step24000.pt",
+          "sha256": "5cc735e14c155c46d24a3499fec6f4ce3a6352846602170ffa828c2515bcaf91",
+          "step": 24000,
+          "weights": "EMA"
+        },
+        "region": "chain-link-fence",
+        "reference_report": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-24k-tiling-CPU-v1/receipt.json",
+          "sha256": "420de9e4f90f3d3f7fe21573925076dbeef3d5d756426e7daf279504075c9e4a"
+        },
+        "independently_phase_aligned_old_prediction": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-24k-tiling-CPU-v1/chain-link-fence-aligned64-RGB-f32.npy",
+          "sha256": "22f6ef4e991884e8b3ac9dab8490ea6a0a59bae8c4c718facabc1c76c964e70e"
+        },
+        "corrected_tiler_vs_independently_aligned_old": {
+          "elements": 2787876,
+          "max_abs": 0.0,
+          "RMS": 0.0,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0,
+          "passes_predeclared_bound": true
+        },
+        "timing_engineering_only": {
+          "seconds": 9.211111413082108,
+          "tile_seconds": 9.207207562867552,
+          "compute_transfer_seconds": 9.19823755742982,
+          "blend_seconds": 0.007810034789144993,
+          "megapixels": 0.929292,
+          "tiles": 9,
+          "tile": 512,
+          "overlap": 64,
+          "tile_grid_alignment": 4,
+          "tile_stride": 448,
+          "batch_size": 1,
+          "compute_precision": "float32",
+          "refinement_compute_precision": "float32",
+          "memory_format": "contiguous",
+          "peak_cuda_gb": 0
+        }
+      },
+      {
+        "kind": "synthetic-photo",
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-b4-v71-step24000.pt",
+          "sha256": "5cc735e14c155c46d24a3499fec6f4ce3a6352846602170ffa828c2515bcaf91",
+          "step": 24000,
+          "weights": "EMA"
+        },
+        "source_id": "039a221ab23b6e79f59111752337744617f857f8",
+        "reference_report": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-24k-photo-tiling-CPU-v1/receipt.json",
+          "sha256": "ab18ffe751fadb108dc793b7530b788b4cdeef4e3c54274a3c2ded17d34f8b4c"
+        },
+        "independently_phase_aligned_old_prediction": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-24k-photo-tiling-CPU-v1/photo0-aligned64-RGB-f32.npy",
+          "sha256": "9688bc77b628e10eeb9e1603b7831f9132e45eb6f226faaa101e1a47465b4b97"
+        },
+        "corrected_tiler_vs_independently_aligned_old": {
+          "elements": 780300,
+          "max_abs": 0.0,
+          "RMS": 0.0,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0,
+          "passes_predeclared_bound": true
+        },
+        "timing_engineering_only": {
+          "seconds": 1.9139250868465751,
+          "tile_seconds": 1.9111500240396708,
+          "compute_transfer_seconds": 1.9091719868592918,
+          "blend_seconds": 0.0016906771343201399,
+          "megapixels": 0.2601,
+          "tiles": 9,
+          "tile": 256,
+          "overlap": 64,
+          "tile_grid_alignment": 4,
+          "tile_stride": 192,
+          "batch_size": 1,
+          "compute_precision": "float32",
+          "refinement_compute_precision": "float32",
+          "memory_format": "contiguous",
+          "peak_cuda_gb": 0
+        }
+      },
+      {
+        "kind": "synthetic-photo",
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-b4-v71-step24000.pt",
+          "sha256": "5cc735e14c155c46d24a3499fec6f4ce3a6352846602170ffa828c2515bcaf91",
+          "step": 24000,
+          "weights": "EMA"
+        },
+        "source_id": "059947d9a94d2e5c6d21c270bd5d9204bd91b580",
+        "reference_report": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-24k-photo-tiling-CPU-v1/receipt.json",
+          "sha256": "ab18ffe751fadb108dc793b7530b788b4cdeef4e3c54274a3c2ded17d34f8b4c"
+        },
+        "independently_phase_aligned_old_prediction": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-24k-photo-tiling-CPU-v1/photo1-aligned64-RGB-f32.npy",
+          "sha256": "52bad2b408f48f73c5e41bb768cd1b0cc59e9694089b359932d92b10123585e3"
+        },
+        "corrected_tiler_vs_independently_aligned_old": {
+          "elements": 780300,
+          "max_abs": 0.0,
+          "RMS": 0.0,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0,
+          "passes_predeclared_bound": true
+        },
+        "timing_engineering_only": {
+          "seconds": 1.908690241863951,
+          "tile_seconds": 1.906600683927536,
+          "compute_transfer_seconds": 1.904516023118049,
+          "blend_seconds": 0.0017729320097714663,
+          "megapixels": 0.2601,
+          "tiles": 9,
+          "tile": 256,
+          "overlap": 64,
+          "tile_grid_alignment": 4,
+          "tile_stride": 192,
+          "batch_size": 1,
+          "compute_precision": "float32",
+          "refinement_compute_precision": "float32",
+          "memory_format": "contiguous",
+          "peak_cuda_gb": 0
+        }
+      },
+      {
+        "kind": "realGFX",
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/models/dino-packed-isotropic-b4-v70-step8000.pt",
+          "sha256": "5fc021488d34df6ddf85cac8b0fc5cb0b0117713c87865c010e7e246979a2c14",
+          "step": 8000,
+          "weights": "EMA"
+        },
+        "region": "foliage",
+        "reference_report": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-dino8k-tiling-CPU-v1/receipt.json",
+          "sha256": "6de44cf1fd50fb1dc00eaf5b3a5e10bebbbf8302353e0dc0fd3efd4576be5243"
+        },
+        "independently_phase_aligned_old_prediction": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-dino8k-tiling-CPU-v1/foliage-aligned32-64-RGB-f32.npy",
+          "sha256": "77985082815bf53e5ca21991d146de84341b0ad52089e1c6c1183bfcd73228fe"
+        },
+        "corrected_tiler_vs_independently_aligned_old": {
+          "elements": 2787876,
+          "max_abs": 0.0,
+          "RMS": 0.0,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0,
+          "passes_predeclared_bound": true
+        },
+        "timing_engineering_only": {
+          "seconds": 12.169606793904677,
+          "tile_seconds": 12.165618943981826,
+          "compute_transfer_seconds": 12.159060783451423,
+          "blend_seconds": 0.005701165879145265,
+          "megapixels": 0.929292,
+          "tiles": 9,
+          "tile": 512,
+          "overlap": 64,
+          "tile_grid_alignment": 32,
+          "tile_stride": 448,
+          "batch_size": 1,
+          "compute_precision": "float32",
+          "refinement_compute_precision": "float32",
+          "memory_format": "contiguous",
+          "peak_cuda_gb": 0
+        }
+      },
+      {
+        "kind": "realGFX",
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/models/dino-packed-isotropic-b4-v70-step8000.pt",
+          "sha256": "5fc021488d34df6ddf85cac8b0fc5cb0b0117713c87865c010e7e246979a2c14",
+          "step": 8000,
+          "weights": "EMA"
+        },
+        "region": "chain-link-fence",
+        "reference_report": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-dino8k-tiling-CPU-v1/receipt.json",
+          "sha256": "6de44cf1fd50fb1dc00eaf5b3a5e10bebbbf8302353e0dc0fd3efd4576be5243"
+        },
+        "independently_phase_aligned_old_prediction": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-dino8k-tiling-CPU-v1/chain-link-fence-aligned32-64-RGB-f32.npy",
+          "sha256": "a06fd067300d3e057ee2ed8218f7d9ca132d0dbf7ce18577538e9f8310646a3c"
+        },
+        "corrected_tiler_vs_independently_aligned_old": {
+          "elements": 2787876,
+          "max_abs": 0.0,
+          "RMS": 0.0,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0,
+          "passes_predeclared_bound": true
+        },
+        "timing_engineering_only": {
+          "seconds": 12.282130724051967,
+          "tile_seconds": 12.277770424028859,
+          "compute_transfer_seconds": 12.270334565779194,
+          "blend_seconds": 0.00654943916015327,
+          "megapixels": 0.929292,
+          "tiles": 9,
+          "tile": 512,
+          "overlap": 64,
+          "tile_grid_alignment": 32,
+          "tile_stride": 448,
+          "batch_size": 1,
+          "compute_precision": "float32",
+          "refinement_compute_precision": "float32",
+          "memory_format": "contiguous",
+          "peak_cuda_gb": 0
+        }
+      }
+    ],
+    "models": [
+      {
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-b4-v71-step24000.pt",
+          "sha256": "5cc735e14c155c46d24a3499fec6f4ce3a6352846602170ffa828c2515bcaf91",
+          "step": 24000,
+          "weights": "EMA"
+        },
+        "full_model_state_sha256": "77484a3dd638c2cbb7020476d73eea02c2fa1ead8b1d72c3fb55570e97b50bca",
+        "all_tensor_bytes_and_parameter_identities_unchanged": true
+      },
+      {
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/models/dino-packed-isotropic-b4-v70-step8000.pt",
+          "sha256": "5fc021488d34df6ddf85cac8b0fc5cb0b0117713c87865c010e7e246979a2c14",
+          "step": 8000,
+          "weights": "EMA"
+        },
+        "full_model_state_sha256": "7e89b971eb7ebf5858503102282d5789aba8f253aca18ca55611bdd5d6715e4b",
+        "all_tensor_bytes_and_parameter_identities_unchanged": true
+      }
+    ],
+    "all_six_bitwise_equal_to_independent_manual_alignment": true,
+    "CUDA_initialized": false
+  },
+  "regression": {
+    "receipt": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-grid-fix-integration-CPU-v1/regression.json",
+      "sha256": "6be3f14860accda2288343279edb8931122e3088abe0cabd73805ae14a451a2d"
+    },
+    "status": "completed-expected-pre-fix-failure-and-post-fix-CPU-suite",
+    "old_inference": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/inference.py",
+      "sha256": "8085ccb43beea0f50e635e209a6c461836de70b27b76a286a162aa34c4bba3ac"
+    },
+    "current_inference": {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/inference.py",
+      "sha256": "0dfe6d0e8f9fbac820f9cabb41055e0dfd82e0b798148c2395f069b352c25165"
+    },
+    "regression_tests": {
+      "path": "/home/dllu/proj/demosaic/tests/test_inference_alignment.py",
+      "sha256": "d2a64ff4c40ac8c1174b05cb38e5a75bb3eccbf63bffe5efd378eedae948e868"
+    },
+    "before_expected_failure": {
+      "returncode": 1,
+      "log": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-grid-fix-integration-CPU-v1/regression-before.log",
+        "sha256": "5ee47d0b54950d0de774eb1c9e4b46efea7961a829e7c3f0ffc68e5319f50afd"
+      }
+    },
+    "after": {
+      "returncode": 0,
+      "log": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-grid-fix-integration-CPU-v1/regression-after.log",
+        "sha256": "ae61dbab144b36143b68cf0c1cafb614b76a06c527506ef2c139e187a8d323b0"
+      }
+    },
+    "CUDA_hidden": true,
+    "focused_tests": {
+      "passed": 56,
+      "CUDA_only_skips": 2,
+      "seconds": 7.32
+    }
+  },
+  "GFX_common": {
+    "sources": [
+      {
+        "role": "noisy",
+        "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+        "metadata": {
+          "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "camera": "GFX100S",
+          "pattern": "RGGB",
+          "black_levels": [
+            4101.0,
+            4098.0,
+            4104.0,
+            4106.0
+          ],
+          "white_levels": [
+            65535.0,
+            65535.0,
+            65535.0,
+            65535.0
+          ],
+          "white_balance": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "camera_to_srgb": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "flip": 0,
+          "iso": 6400,
+          "adc_white_level": 65535.0
+        }
+      },
+      {
+        "role": "reference",
+        "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+        "metadata": {
+          "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+          "camera": "GFX100S",
+          "pattern": "RGGB",
+          "black_levels": [
+            256.0,
+            255.0,
+            256.0,
+            256.0
+          ],
+          "white_levels": [
+            65535.0,
+            65535.0,
+            65535.0,
+            65535.0
+          ],
+          "white_balance": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "camera_to_srgb": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "flip": 0,
+          "iso": 100,
+          "adc_white_level": 65535.0
+        }
+      }
+    ],
+    "conditioning": {
+      "shot": 0.0014635775921166604,
+      "read": 1.0715704128646712e-06,
+      "source": "input Haar fit"
+    },
+    "white_balance": [
+      1.5132450331125828,
+      1.0,
+      2.2152317880794703
+    ],
+    "camera_to_srgb": [
+      [
+        1.0725188393098881,
+        0.17123593128834644,
+        -0.24375477059823436
+      ],
+      [
+        -0.1267191317089774,
+        1.4310509369654432,
+        -0.3043318052564657
+      ],
+      [
+        -0.009697676902906037,
+        -0.29348063283422965,
+        1.3031783097371357
+      ]
+    ],
+    "display_exposure": 4,
+    "pattern": "RGGB",
+    "input_context_wh": [
+      966,
+      962
+    ],
+    "numerical_reference": "Whole-network FP32 output on grid-padded context; not GT",
+    "numerical_interior_excludes_native_pixels_per_side": 224,
+    "qualitative_reference": "Separate DSCF3880 ISO100 f/5.6 independently demosaiced capture, not GT"
+  },
+  "GFX_cases": [
+    {
+      "arm": "no-dino24k",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-b4-v71-step24000.pt",
+        "sha256": "5cc735e14c155c46d24a3499fec6f4ce3a6352846602170ffa828c2515bcaf91",
+        "step": 24000,
+        "weights": "EMA"
+      },
+      "region": {
+        "name": "foliage",
+        "noisy_xy": [
+          8890,
+          5570
+        ],
+        "reference_xy": [
+          8890,
+          5570
+        ],
+        "size": 160,
+        "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+        "context_green_correlation": 0.9597686529159546
+      },
+      "context_xywh": [
+        8504,
+        5184,
+        966,
+        962
+      ],
+      "runs": {
+        "current64": {
+          "timing_engineering_only": {
+            "seconds": 8.857131156139076,
+            "tile_seconds": 8.853835067944601,
+            "compute_transfer_seconds": 8.833177205873653,
+            "blend_seconds": 0.009844392770901322,
+            "megapixels": 0.929292,
+            "tiles": 9,
+            "tile": 512,
+            "overlap": 64,
+            "batch_size": 1,
+            "compute_precision": "float32",
+            "refinement_compute_precision": "float32",
+            "memory_format": "contiguous",
+            "peak_cuda_gb": 0
+          },
+          "y_starts": [
+            0,
+            448,
+            450
+          ],
+          "x_starts": [
+            0,
+            448,
+            454
+          ]
+        },
+        "aligned64": {
+          "timing_engineering_only": {
+            "seconds": 8.947953349910676,
+            "tile_seconds": 8.945662239799276,
+            "compute_transfer_seconds": 8.93852113489993,
+            "blend_seconds": 0.00634761480614543,
+            "megapixels": 0.933152,
+            "tiles": 9,
+            "tile": 512,
+            "overlap": 64,
+            "batch_size": 1,
+            "compute_precision": "float32",
+            "refinement_compute_precision": "float32",
+            "memory_format": "contiguous",
+            "peak_cuda_gb": 0
+          },
+          "y_starts": [
+            0,
+            448,
+            452
+          ],
+          "x_starts": [
+            0,
+            448,
+            456
+          ]
+        },
+        "aligned224": {
+          "timing_engineering_only": {
+            "seconds": 9.202365349046886,
+            "tile_seconds": 9.200075455009937,
+            "compute_transfer_seconds": 9.189722466748208,
+            "blend_seconds": 0.00949464994482696,
+            "megapixels": 0.933152,
+            "tiles": 9,
+            "tile": 512,
+            "overlap": 224,
+            "batch_size": 1,
+            "compute_precision": "float32",
+            "refinement_compute_precision": "float32",
+            "memory_format": "contiguous",
+            "peak_cuda_gb": 0
+          },
+          "y_starts": [
+            0,
+            288,
+            452
+          ],
+          "x_starts": [
+            0,
+            288,
+            456
+          ]
+        }
+      },
+      "errors_relative_whole": {
+        "current64": {
+          "all_pixels": {
+            "elements": 2787876,
+            "max_abs": 0.010002212598919868,
+            "RMS": 0.00031504876094171194,
+            "max_abs_DN16": 655.4950026702136,
+            "RMS_DN16": 20.64672054831509,
+            "passes_predeclared_bound": false
+          },
+          "interior_exclude224": {
+            "elements": 798756,
+            "max_abs": 0.002630472183227539,
+            "RMS": 0.0002880665978956798,
+            "max_abs_DN16": 172.38799452781677,
+            "RMS_DN16": 18.878444493093376,
+            "passes_predeclared_bound": false
+          }
+        },
+        "aligned64": {
+          "all_pixels": {
+            "elements": 2787876,
+            "max_abs": 0.005332174710929394,
+            "RMS": 6.741190972988204e-05,
+            "max_abs_DN16": 349.4440696807578,
+            "RMS_DN16": 4.417839504147819,
+            "passes_predeclared_bound": false
+          },
+          "interior_exclude224": {
+            "elements": 798756,
+            "max_abs": 0.002526095137000084,
+            "RMS": 4.020625372388291e-05,
+            "max_abs_DN16": 165.5476448033005,
+            "RMS_DN16": 2.6349168377946666,
+            "passes_predeclared_bound": false
+          }
+        },
+        "aligned224": {
+          "all_pixels": {
+            "elements": 2787876,
+            "max_abs": 0.000458473339676857,
+            "RMS": 6.313123468414585e-06,
+            "max_abs_DN16": 30.046050315722823,
+            "RMS_DN16": 0.4137305465025498,
+            "passes_predeclared_bound": false
+          },
+          "interior_exclude224": {
+            "elements": 798756,
+            "max_abs": 0.000458473339676857,
+            "RMS": 7.022850623713864e-06,
+            "max_abs_DN16": 30.046050315722823,
+            "RMS_DN16": 0.4602425156250881,
+            "passes_predeclared_bound": false
+          }
+        }
+      },
+      "native_triplets": [
+        {
+          "caption": "foliage / current64",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "current64",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "36836ff490553166c07b4fb14a4591b35e77ef33e58d5a5efe5bc098234c3800",
+          "policy": "current64",
+          "image": "images/packed-grid-no-dino24k-foliage-current64.png",
+          "original_metadata": {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-24k-tiling-CPU-v1/crop-c158491114b4371a.json",
+            "sha256": "2bb5351e1ea43d86d6fa23275a056aac63bc5d7ff4afb2c851dd937d9665ce30"
+          },
+          "viewed_at_native_resolution": true
+        },
+        {
+          "caption": "foliage / aligned64",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "aligned64",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "ba783afe8bb269e5c91b016dce35d5e4a4bef6289b2327e4421f29a45566ffa6",
+          "policy": "aligned64",
+          "image": "images/packed-grid-no-dino24k-foliage-aligned64.png",
+          "original_metadata": {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-24k-tiling-CPU-v1/crop-70753f25e881bece.json",
+            "sha256": "c6a598f4cce916a6f5e649265ce0c193d0808aa15497f0ff58aa5bc51d14cb7e"
+          },
+          "viewed_at_native_resolution": true
+        }
+      ]
+    },
+    {
+      "arm": "no-dino24k",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-b4-v71-step24000.pt",
+        "sha256": "5cc735e14c155c46d24a3499fec6f4ce3a6352846602170ffa828c2515bcaf91",
+        "step": 24000,
+        "weights": "EMA"
+      },
+      "region": {
+        "name": "chain-link-fence",
+        "noisy_xy": [
+          2240,
+          6000
+        ],
+        "reference_xy": [
+          2241,
+          6000
+        ],
+        "size": 160,
+        "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+        "context_green_correlation": 0.9550720453262329
+      },
+      "context_xywh": [
+        1856,
+        5616,
+        966,
+        962
+      ],
+      "runs": {
+        "current64": {
+          "timing_engineering_only": {
+            "seconds": 8.907836496131495,
+            "tile_seconds": 8.904919479973614,
+            "compute_transfer_seconds": 8.896590978140011,
+            "blend_seconds": 0.0076760356314480305,
+            "megapixels": 0.929292,
+            "tiles": 9,
+            "tile": 512,
+            "overlap": 64,
+            "batch_size": 1,
+            "compute_precision": "float32",
+            "refinement_compute_precision": "float32",
+            "memory_format": "contiguous",
+            "peak_cuda_gb": 0
+          },
+          "y_starts": [
+            0,
+            448,
+            450
+          ],
+          "x_starts": [
+            0,
+            448,
+            454
+          ]
+        },
+        "aligned64": {
+          "timing_engineering_only": {
+            "seconds": 8.976231318898499,
+            "tile_seconds": 8.973426864016801,
+            "compute_transfer_seconds": 8.965073082130402,
+            "blend_seconds": 0.007444372167810798,
+            "megapixels": 0.933152,
+            "tiles": 9,
+            "tile": 512,
+            "overlap": 64,
+            "batch_size": 1,
+            "compute_precision": "float32",
+            "refinement_compute_precision": "float32",
+            "memory_format": "contiguous",
+            "peak_cuda_gb": 0
+          },
+          "y_starts": [
+            0,
+            448,
+            452
+          ],
+          "x_starts": [
+            0,
+            448,
+            456
+          ]
+        },
+        "aligned224": {
+          "timing_engineering_only": {
+            "seconds": 9.14088345086202,
+            "tile_seconds": 9.138819221872836,
+            "compute_transfer_seconds": 9.128504796186462,
+            "blend_seconds": 0.009269607486203313,
+            "megapixels": 0.933152,
+            "tiles": 9,
+            "tile": 512,
+            "overlap": 224,
+            "batch_size": 1,
+            "compute_precision": "float32",
+            "refinement_compute_precision": "float32",
+            "memory_format": "contiguous",
+            "peak_cuda_gb": 0
+          },
+          "y_starts": [
+            0,
+            288,
+            452
+          ],
+          "x_starts": [
+            0,
+            288,
+            456
+          ]
+        }
+      },
+      "errors_relative_whole": {
+        "current64": {
+          "all_pixels": {
+            "elements": 2787876,
+            "max_abs": 0.015266694128513336,
+            "RMS": 0.0003376061462144854,
+            "max_abs_DN16": 1000.5027997121215,
+            "RMS_DN16": 22.1250187921663,
+            "passes_predeclared_bound": false
+          },
+          "interior_exclude224": {
+            "elements": 798756,
+            "max_abs": 0.005417311564087868,
+            "RMS": 0.0002946985933599708,
+            "max_abs_DN16": 355.0235133524984,
+            "RMS_DN16": 19.313072315845684,
+            "passes_predeclared_bound": false
+          }
+        },
+        "aligned64": {
+          "all_pixels": {
+            "elements": 2787876,
+            "max_abs": 0.01308247447013855,
+            "RMS": 9.521783234167312e-05,
+            "max_abs_DN16": 857.3599644005299,
+            "RMS_DN16": 6.240100642511548,
+            "passes_predeclared_bound": false
+          },
+          "interior_exclude224": {
+            "elements": 798756,
+            "max_abs": 0.002814836800098419,
+            "RMS": 4.028243442484027e-05,
+            "max_abs_DN16": 184.4703296944499,
+            "RMS_DN16": 2.639909340031907,
+            "passes_predeclared_bound": false
+          }
+        },
+        "aligned224": {
+          "all_pixels": {
+            "elements": 2787876,
+            "max_abs": 0.0009368620812892914,
+            "RMS": 8.227099513136015e-06,
+            "max_abs_DN16": 61.39725649729371,
+            "RMS_DN16": 0.5391629665933688,
+            "passes_predeclared_bound": false
+          },
+          "interior_exclude224": {
+            "elements": 798756,
+            "max_abs": 0.000803530216217041,
+            "RMS": 8.883265274684775e-06,
+            "max_abs_DN16": 52.65935271978378,
+            "RMS_DN16": 0.5821647897764667,
+            "passes_predeclared_bound": false
+          }
+        }
+      },
+      "native_triplets": [
+        {
+          "caption": "chain-link-fence / current64",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "current64",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "3f09c17f2e02791188360503415dcb5a90ae4353d16f28ef977567366cca41dc",
+          "policy": "current64",
+          "image": "images/packed-grid-no-dino24k-chain-link-fence-current64.png",
+          "original_metadata": {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-24k-tiling-CPU-v1/crop-bf061fad44cf441e.json",
+            "sha256": "7256c89a4953011990f9ff816f8b868f629de41c7bc38714dd74aea30ba8905e"
+          },
+          "viewed_at_native_resolution": true
+        },
+        {
+          "caption": "chain-link-fence / aligned64",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "aligned64",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "d879ad65ddaeb5170fec14102bddc2240374c6220f79ddfaa30995eb1e8b9ea0",
+          "policy": "aligned64",
+          "image": "images/packed-grid-no-dino24k-chain-link-fence-aligned64.png",
+          "original_metadata": {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-24k-tiling-CPU-v1/crop-b2c99b574cf78c8d.json",
+            "sha256": "fcfbe62d716c1669d7187bee6b8f949e541daa9ef1ab0052bf9751e3e33649d4"
+          },
+          "viewed_at_native_resolution": true
+        }
+      ]
+    },
+    {
+      "arm": "dino8k",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-packed-isotropic-b4-v70-step8000.pt",
+        "sha256": "5fc021488d34df6ddf85cac8b0fc5cb0b0117713c87865c010e7e246979a2c14",
+        "step": 8000,
+        "weights": "EMA"
+      },
+      "region": {
+        "name": "foliage",
+        "noisy_xy": [
+          8890,
+          5570
+        ],
+        "reference_xy": [
+          8890,
+          5570
+        ],
+        "size": 160,
+        "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+        "context_green_correlation": 0.9597686529159546
+      },
+      "context_xywh": [
+        8480,
+        5184,
+        966,
+        962
+      ],
+      "runs": {
+        "current64": {
+          "timing_engineering_only": {
+            "seconds": 12.65853181714192,
+            "tile_seconds": 12.654254110064358,
+            "compute_transfer_seconds": 12.646852010395378,
+            "blend_seconds": 0.0068332653027027845,
+            "megapixels": 0.929292,
+            "tiles": 9,
+            "tile": 512,
+            "overlap": 64,
+            "batch_size": 1,
+            "compute_precision": "float32",
+            "refinement_compute_precision": "float32",
+            "memory_format": "contiguous",
+            "peak_cuda_gb": 0
+          },
+          "y_starts": [
+            0,
+            448,
+            450
+          ],
+          "x_starts": [
+            0,
+            448,
+            454
+          ]
+        },
+        "aligned4-64": {
+          "timing_engineering_only": {
+            "seconds": 12.689680811017752,
+            "tile_seconds": 12.68683347501792,
+            "compute_transfer_seconds": 12.675779910059646,
+            "blend_seconds": 0.009904761798679829,
+            "megapixels": 0.933152,
+            "tiles": 9,
+            "tile": 512,
+            "overlap": 64,
+            "batch_size": 1,
+            "compute_precision": "float32",
+            "refinement_compute_precision": "float32",
+            "memory_format": "contiguous",
+            "peak_cuda_gb": 0
+          },
+          "y_starts": [
+            0,
+            448,
+            452
+          ],
+          "x_starts": [
+            0,
+            448,
+            456
+          ]
+        },
+        "aligned32-64": {
+          "timing_engineering_only": {
+            "seconds": 12.930743548087776,
+            "tile_seconds": 12.927759156096727,
+            "compute_transfer_seconds": 12.91851954930462,
+            "blend_seconds": 0.008544373093172908,
+            "megapixels": 0.984064,
+            "tiles": 9,
+            "tile": 512,
+            "overlap": 64,
+            "batch_size": 1,
+            "compute_precision": "float32",
+            "refinement_compute_precision": "float32",
+            "memory_format": "contiguous",
+            "peak_cuda_gb": 0
+          },
+          "y_starts": [
+            0,
+            448,
+            480
+          ],
+          "x_starts": [
+            0,
+            448,
+            480
+          ]
+        }
+      },
+      "errors_relative_whole": {
+        "current64": {
+          "all_pixels": {
+            "elements": 2787876,
+            "max_abs": 0.007592150010168552,
+            "RMS": 0.0002999300918298336,
+            "max_abs_DN16": 497.5515509163961,
+            "RMS_DN16": 19.655918568068145,
+            "passes_predeclared_bound": false
+          },
+          "interior_exclude224": {
+            "elements": 798756,
+            "max_abs": 0.0029163043946027756,
+            "RMS": 0.00029101991631756257,
+            "max_abs_DN16": 191.1200085002929,
+            "RMS_DN16": 19.071990215871462,
+            "passes_predeclared_bound": false
+          }
+        },
+        "aligned4-64": {
+          "all_pixels": {
+            "elements": 2787876,
+            "max_abs": 0.0072624655440449715,
+            "RMS": 0.00010431762370260543,
+            "max_abs_DN16": 475.9456794289872,
+            "RMS_DN16": 6.836455469350247,
+            "passes_predeclared_bound": false
+          },
+          "interior_exclude224": {
+            "elements": 798756,
+            "max_abs": 0.002111244946718216,
+            "RMS": 9.704826548255281e-05,
+            "max_abs_DN16": 138.36043758317828,
+            "RMS_DN16": 6.360058078399098,
+            "passes_predeclared_bound": false
+          }
+        },
+        "aligned32-64": {
+          "all_pixels": {
+            "elements": 2787876,
+            "max_abs": 0.004972618073225021,
+            "RMS": 8.015517794383537e-05,
+            "max_abs_DN16": 325.8805254288018,
+            "RMS_DN16": 5.252969586549251,
+            "passes_predeclared_bound": false
+          },
+          "interior_exclude224": {
+            "elements": 798756,
+            "max_abs": 0.002830393612384796,
+            "RMS": 0.00010049000733294832,
+            "max_abs_DN16": 185.48984538763762,
+            "RMS_DN16": 6.585612630564768,
+            "passes_predeclared_bound": false
+          }
+        }
+      },
+      "native_triplets": [
+        {
+          "caption": "foliage / current64",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "current64",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "e2623f7d89b42eedee581c092a681dbb8396da964cdf45dd266173b07de8f62e",
+          "policy": "current64",
+          "image": "images/packed-grid-dino8k-foliage-current64.png",
+          "original_metadata": {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-dino8k-tiling-CPU-v1/crop-c158491114b4371a.json",
+            "sha256": "31244b94a566a20d96f423a7f4d05de07944e6160d92737fbb1fa9666feccb43"
+          },
+          "viewed_at_native_resolution": true
+        },
+        {
+          "caption": "foliage / aligned32-64",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "aligned32-64",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "1e2f47347ebf9e29ce75ca7fc65bb20351fd2359709042516905dcae12861165",
+          "policy": "aligned32-64",
+          "image": "images/packed-grid-dino8k-foliage-aligned32-64.png",
+          "original_metadata": {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-dino8k-tiling-CPU-v1/crop-661a884d1ebd2b59.json",
+            "sha256": "7044ad9b70bb34256001359b0dba765a813d33c5720b6c4f26c66ed82f8a7df4"
+          },
+          "viewed_at_native_resolution": true
+        }
+      ]
+    },
+    {
+      "arm": "dino8k",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-packed-isotropic-b4-v70-step8000.pt",
+        "sha256": "5fc021488d34df6ddf85cac8b0fc5cb0b0117713c87865c010e7e246979a2c14",
+        "step": 8000,
+        "weights": "EMA"
+      },
+      "region": {
+        "name": "chain-link-fence",
+        "noisy_xy": [
+          2240,
+          6000
+        ],
+        "reference_xy": [
+          2241,
+          6000
+        ],
+        "size": 160,
+        "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+        "context_green_correlation": 0.9550720453262329
+      },
+      "context_xywh": [
+        1856,
+        5600,
+        966,
+        962
+      ],
+      "runs": {
+        "current64": {
+          "timing_engineering_only": {
+            "seconds": 13.190657573984936,
+            "tile_seconds": 13.186463420046493,
+            "compute_transfer_seconds": 13.17553523206152,
+            "blend_seconds": 0.010118090081959963,
+            "megapixels": 0.929292,
+            "tiles": 9,
+            "tile": 512,
+            "overlap": 64,
+            "batch_size": 1,
+            "compute_precision": "float32",
+            "refinement_compute_precision": "float32",
+            "memory_format": "contiguous",
+            "peak_cuda_gb": 0
+          },
+          "y_starts": [
+            0,
+            448,
+            450
+          ],
+          "x_starts": [
+            0,
+            448,
+            454
+          ]
+        },
+        "aligned4-64": {
+          "timing_engineering_only": {
+            "seconds": 12.772500621853396,
+            "tile_seconds": 12.768779844976962,
+            "compute_transfer_seconds": 12.75721695041284,
+            "blend_seconds": 0.0105050855781883,
+            "megapixels": 0.933152,
+            "tiles": 9,
+            "tile": 512,
+            "overlap": 64,
+            "batch_size": 1,
+            "compute_precision": "float32",
+            "refinement_compute_precision": "float32",
+            "memory_format": "contiguous",
+            "peak_cuda_gb": 0
+          },
+          "y_starts": [
+            0,
+            448,
+            452
+          ],
+          "x_starts": [
+            0,
+            448,
+            456
+          ]
+        },
+        "aligned32-64": {
+          "timing_engineering_only": {
+            "seconds": 12.686297042993829,
+            "tile_seconds": 12.683237866964191,
+            "compute_transfer_seconds": 12.675609222846106,
+            "blend_seconds": 0.006507857237011194,
+            "megapixels": 0.984064,
+            "tiles": 9,
+            "tile": 512,
+            "overlap": 64,
+            "batch_size": 1,
+            "compute_precision": "float32",
+            "refinement_compute_precision": "float32",
+            "memory_format": "contiguous",
+            "peak_cuda_gb": 0
+          },
+          "y_starts": [
+            0,
+            448,
+            480
+          ],
+          "x_starts": [
+            0,
+            448,
+            480
+          ]
+        }
+      },
+      "errors_relative_whole": {
+        "current64": {
+          "all_pixels": {
+            "elements": 2787876,
+            "max_abs": 0.012646012008190155,
+            "RMS": 0.000345917172433083,
+            "max_abs_DN16": 828.7563969567418,
+            "RMS_DN16": 22.669681895402096,
+            "passes_predeclared_bound": false
+          },
+          "interior_exclude224": {
+            "elements": 798756,
+            "max_abs": 0.0033082012087106705,
+            "RMS": 0.00037326642362262496,
+            "max_abs_DN16": 216.8029662128538,
+            "RMS_DN16": 24.462015072108727,
+            "passes_predeclared_bound": false
+          }
+        },
+        "aligned4-64": {
+          "all_pixels": {
+            "elements": 2787876,
+            "max_abs": 0.012438386678695679,
+            "RMS": 0.00010579130802911531,
+            "max_abs_DN16": 815.1496709883213,
+            "RMS_DN16": 6.933033371688071,
+            "passes_predeclared_bound": false
+          },
+          "interior_exclude224": {
+            "elements": 798756,
+            "max_abs": 0.002544887363910675,
+            "RMS": 0.00011010719497318397,
+            "max_abs_DN16": 166.7791933938861,
+            "RMS_DN16": 7.215875022567611,
+            "passes_predeclared_bound": false
+          }
+        },
+        "aligned32-64": {
+          "all_pixels": {
+            "elements": 2787876,
+            "max_abs": 0.008333660662174225,
+            "RMS": 7.76191993804852e-05,
+            "max_abs_DN16": 546.1464514955878,
+            "RMS_DN16": 5.086774231400097,
+            "passes_predeclared_bound": false
+          },
+          "interior_exclude224": {
+            "elements": 798756,
+            "max_abs": 0.003831036388874054,
+            "RMS": 0.0001082686691631164,
+            "max_abs_DN16": 251.06696974486113,
+            "RMS_DN16": 7.095387233604833,
+            "passes_predeclared_bound": false
+          }
+        }
+      },
+      "native_triplets": [
+        {
+          "caption": "chain-link-fence / current64",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "current64",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "1b63962bd196443c4f21cf9f1afddda28a7a9ee3f5b97f77e7b1286b4e98123b",
+          "policy": "current64",
+          "image": "images/packed-grid-dino8k-chain-link-fence-current64.png",
+          "original_metadata": {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-dino8k-tiling-CPU-v1/crop-bf061fad44cf441e.json",
+            "sha256": "2eb8124b17a0b75ab5ff014a9876ad09ccee002d7794f7828c683c1bbd0431a9"
+          },
+          "viewed_at_native_resolution": true
+        },
+        {
+          "caption": "chain-link-fence / aligned32-64",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "aligned32-64",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "374a4bd36a75872183e5d0faf4d8089fa19275dd5c293f68295ad0b9618132d4",
+          "policy": "aligned32-64",
+          "image": "images/packed-grid-dino8k-chain-link-fence-aligned32-64.png",
+          "original_metadata": {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-dino8k-tiling-CPU-v1/crop-068e1329e2231f0e.json",
+            "sha256": "75575ec292d06991ba362ec0b9c6aeb8d71d611117653a3aac322ca3b54b8a52"
+          },
+          "viewed_at_native_resolution": true
+        }
+      ]
+    }
+  ],
+  "synthetic_photo_cases": [
+    {
+      "source": {
+        "title": "File:20180925 UCI Road World Championships Innsbruck Women Elite ITT Elisa Longo Borghini 850 8800.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:20180925_UCI_Road_World_Championships_Innsbruck_Women_Elite_ITT_Elisa_Longo_Borghini_850_8800.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/5/56/20180925_UCI_Road_World_Championships_Innsbruck_Women_Elite_ITT_Elisa_Longo_Borghini_850_8800.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Granada",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "attribution": null,
+        "credit": "Own work",
+        "sha1": "039a221ab23b6e79f59111752337744617f857f8",
+        "sha1_hex": "039a221ab23b6e79f59111752337744617f857f8",
+        "download_path": "images/03/9a/039a221ab23b6e79f59111752337744617f857f8.jpg",
+        "width": 8256,
+        "height": 5504,
+        "id": "039a221ab23b6e79f59111752337744617f857f8",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/03/039a221ab23b6e79f59111752337744617f857f8.npy",
+        "shape": [
+          688,
+          1032,
+          3
+        ],
+        "cache_sha256": "c29108d17459dfcb72501128fd0b769bd32397aed2832c0e88a16c0b7694be84"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-b4-v71-step24000.pt",
+        "sha256": "5cc735e14c155c46d24a3499fec6f4ce3a6352846602170ffa828c2515bcaf91",
+        "step": 24000,
+        "weights": "EMA"
+      },
+      "source_context_xywh": [
+        261,
+        89,
+        510,
+        510
+      ],
+      "evaluation_tile_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "conditioning": {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      "white_balance": [
+        2.0,
+        1.0,
+        1.5
+      ],
+      "camera_to_srgb": [
+        [
+          1.1176470518112183,
+          -0.05882352963089943,
+          -0.05882352963089943
+        ],
+        [
+          -0.05882352963089943,
+          1.1176470518112183,
+          -0.05882352963089943
+        ],
+        [
+          -0.05882352963089943,
+          -0.05882352963089943,
+          1.1176470518112183
+        ]
+      ],
+      "display_exposure": 1,
+      "pattern": "RGGB",
+      "noise_draw": "CPU generated, source/case keyed seed42, new native510 observation; not the official256px GPU panel",
+      "precision": "IEEE FP32 CPU",
+      "reference": "Exact synthetic target",
+      "observation": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-24k-photo-tiling-CPU-v1/observation0.npz",
+        "sha256": "f3d0cb1e3c7a9f2fb92eecfa572e471080c1d33ce88dc52130629d40fce5c749"
+      },
+      "exact_synthetic_GT_metrics_border8": {
+        "whole": {
+          "linear_psnr": 29.847389221191406,
+          "srgb_psnr": 24.457223892211914,
+          "srgb_ssim": 0.7362242341041565,
+          "chroma_mae": 0.03024379536509514,
+          "gradient_mae": 0.04076983779668808,
+          "highlight_boundary_chroma_mae": 0.045618779957294464,
+          "highlight_boundary_rgb_mae": 0.05355204641819,
+          "shadow_linear_psnr": 35.94178771972656
+        },
+        "current64": {
+          "linear_psnr": 29.850290298461914,
+          "srgb_psnr": 24.463157653808594,
+          "srgb_ssim": 0.736636221408844,
+          "chroma_mae": 0.03020479530096054,
+          "gradient_mae": 0.040719173848629,
+          "highlight_boundary_chroma_mae": 0.04558950290083885,
+          "highlight_boundary_rgb_mae": 0.05350581929087639,
+          "shadow_linear_psnr": 35.945011138916016
+        },
+        "aligned64": {
+          "linear_psnr": 29.846906661987305,
+          "srgb_psnr": 24.457412719726562,
+          "srgb_ssim": 0.7362474799156189,
+          "chroma_mae": 0.030241195112466812,
+          "gradient_mae": 0.04076671600341797,
+          "highlight_boundary_chroma_mae": 0.045617882162332535,
+          "highlight_boundary_rgb_mae": 0.053549814969301224,
+          "shadow_linear_psnr": 35.94070816040039
+        }
+      },
+      "interior_exclude128_errors_against_whole": {
+        "current64": {
+          "elements": 193548,
+          "max_abs": 0.014191687107086182,
+          "RMS": 0.0008875719177616954,
+          "max_abs_DN16": 930.0522145628929,
+          "RMS_DN16": 58.167025630512704,
+          "passes_predeclared_bound": false
+        },
+        "aligned64": {
+          "elements": 193548,
+          "max_abs": 0.014191687107086182,
+          "RMS": 0.00021800977236233456,
+          "max_abs_DN16": 930.0522145628929,
+          "RMS_DN16": 14.287270431765595,
+          "passes_predeclared_bound": false
+        }
+      },
+      "native_triplets": [
+        {
+          "caption": "039a221ab23b6e79f59111752337744617f857f8 / current64",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "current64",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "59b87b5411b3631ca32654dde46a2cd33f742c708d5c6dff17c67a4790d911e8",
+          "policy": "current64",
+          "image": "images/packed-grid-photo0-current64.png",
+          "original_metadata": {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-24k-photo-tiling-CPU-v1/crop-9c6366e2ad08436a.json",
+            "sha256": "213b6065e95b5db2d648b03ca165349288fc5bfe4bcd6e37d6e9050793977788"
+          },
+          "viewed_at_native_resolution": true
+        },
+        {
+          "caption": "039a221ab23b6e79f59111752337744617f857f8 / aligned64",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "aligned64",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "780a06e795685c38e44019a61b641e3e509df2c6fb7c90f4c265a8e38b3bd7fc",
+          "policy": "aligned64",
+          "image": "images/packed-grid-photo0-aligned64.png",
+          "original_metadata": {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-24k-photo-tiling-CPU-v1/crop-6737424b260fe2f7.json",
+            "sha256": "428116bb0015abba7d5a9b524588317264571eacbcab65048245d3aa51075b5a"
+          },
+          "viewed_at_native_resolution": true
+        }
+      ]
+    },
+    {
+      "source": {
+        "title": "File:Emamzadeh Esmaeil roof.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Emamzadeh_Esmaeil_roof.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Emamzadeh_Esmaeil_roof.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "\u0645\u0627\u0646\u0641\u06cc",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "attribution": null,
+        "credit": "Own work",
+        "sha1": "059947d9a94d2e5c6d21c270bd5d9204bd91b580",
+        "sha1_hex": "059947d9a94d2e5c6d21c270bd5d9204bd91b580",
+        "download_path": "images/05/99/059947d9a94d2e5c6d21c270bd5d9204bd91b580.jpg",
+        "width": 4243,
+        "height": 4269,
+        "id": "059947d9a94d2e5c6d21c270bd5d9204bd91b580",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/05/059947d9a94d2e5c6d21c270bd5d9204bd91b580.npy",
+        "shape": [
+          533,
+          530,
+          3
+        ],
+        "cache_sha256": "b0c8bc879c7f2a98b0f3c1b4041c5a2f897ad075ab1ea569ae0cd3e0136f4962"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-b4-v71-step24000.pt",
+        "sha256": "5cc735e14c155c46d24a3499fec6f4ce3a6352846602170ffa828c2515bcaf91",
+        "step": 24000,
+        "weights": "EMA"
+      },
+      "source_context_xywh": [
+        10,
+        11,
+        510,
+        510
+      ],
+      "evaluation_tile_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "conditioning": {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      "white_balance": [
+        2.0,
+        1.0,
+        1.5
+      ],
+      "camera_to_srgb": [
+        [
+          1.1176470518112183,
+          -0.05882352963089943,
+          -0.05882352963089943
+        ],
+        [
+          -0.05882352963089943,
+          1.1176470518112183,
+          -0.05882352963089943
+        ],
+        [
+          -0.05882352963089943,
+          -0.05882352963089943,
+          1.1176470518112183
+        ]
+      ],
+      "display_exposure": 1,
+      "pattern": "RGGB",
+      "noise_draw": "CPU generated, source/case keyed seed42, new native510 observation; not the official256px GPU panel",
+      "precision": "IEEE FP32 CPU",
+      "reference": "Exact synthetic target",
+      "observation": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-24k-photo-tiling-CPU-v1/observation1.npz",
+        "sha256": "c43dacbb758d022ab3360c400cbc672f68378897bcf8e59e1611df7c9396706b"
+      },
+      "exact_synthetic_GT_metrics_border8": {
+        "whole": {
+          "linear_psnr": 31.571475982666016,
+          "srgb_psnr": 24.091739654541016,
+          "srgb_ssim": 0.7416080832481384,
+          "chroma_mae": 0.03539137542247772,
+          "gradient_mae": 0.047111496329307556,
+          "highlight_boundary_chroma_mae": 0.05801801010966301,
+          "highlight_boundary_rgb_mae": 0.06646328419446945,
+          "shadow_linear_psnr": 40.393341064453125
+        },
+        "current64": {
+          "linear_psnr": 31.574234008789062,
+          "srgb_psnr": 24.09716796875,
+          "srgb_ssim": 0.7420175671577454,
+          "chroma_mae": 0.03533993661403656,
+          "gradient_mae": 0.0470561608672142,
+          "highlight_boundary_chroma_mae": 0.058094579726457596,
+          "highlight_boundary_rgb_mae": 0.06656217575073242,
+          "shadow_linear_psnr": 40.400726318359375
+        },
+        "aligned64": {
+          "linear_psnr": 31.571409225463867,
+          "srgb_psnr": 24.091970443725586,
+          "srgb_ssim": 0.7416213154792786,
+          "chroma_mae": 0.03538986295461655,
+          "gradient_mae": 0.04710977524518967,
+          "highlight_boundary_chroma_mae": 0.05800813436508179,
+          "highlight_boundary_rgb_mae": 0.06645257025957108,
+          "shadow_linear_psnr": 40.39304733276367
+        }
+      },
+      "interior_exclude128_errors_against_whole": {
+        "current64": {
+          "elements": 193548,
+          "max_abs": 0.010616779327392578,
+          "RMS": 0.0008626423301543349,
+          "max_abs_DN16": 695.7706332206726,
+          "RMS_DN16": 56.53326510666434,
+          "passes_predeclared_bound": false
+        },
+        "aligned64": {
+          "elements": 193548,
+          "max_abs": 0.00882810354232788,
+          "RMS": 0.00013543184423015468,
+          "max_abs_DN16": 578.5497656464577,
+          "RMS_DN16": 8.875525911623187,
+          "passes_predeclared_bound": false
+        }
+      },
+      "native_triplets": [
+        {
+          "caption": "059947d9a94d2e5c6d21c270bd5d9204bd91b580 / current64",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "current64",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "3b43776d5bd090d0e322d9807af91c928b96dbd708513db0a78e078a85611053",
+          "policy": "current64",
+          "image": "images/packed-grid-photo1-current64.png",
+          "original_metadata": {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-24k-photo-tiling-CPU-v1/crop-d222e8723b826292.json",
+            "sha256": "1654d526f8efd1f9f4991a0c4469ecf4f8978b57b59a8b3e440c73ef590f5aae"
+          },
+          "viewed_at_native_resolution": true
+        },
+        {
+          "caption": "059947d9a94d2e5c6d21c270bd5d9204bd91b580 / aligned64",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "aligned64",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "70128a436d246ae5cd84d51a60e48a916f51063904b9decd776dbcb7c153f8a3",
+          "policy": "aligned64",
+          "image": "images/packed-grid-photo1-aligned64.png",
+          "original_metadata": {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-24k-photo-tiling-CPU-v1/crop-d272216ffcb10916.json",
+            "sha256": "c56010715c5790e2e3da96ab798d39ef01edb1af90b968db95c0f575e8d90a21"
+          },
+          "viewed_at_native_resolution": true
+        }
+      ]
+    }
+  ],
+  "scope": "Coordinate-grid bug fix and selected CPU evidence. No training, loss, weights, physical module math or precision changes. Fresh different-budget noDINO24k and DINO8k states are separate geometry tests, not a matched DINO comparison. Two photo PSNRs fall slightly after alignment; no restoration-quality promotion or SOTA claim. Remaining finite-context errors are not solved. No CUDA/full102MP corrected-grid timing is measured. Active training/review/compilation use immutable pre-fix source and retain their original geometry; their results need that label. Working V43 geometry remains unchanged."
+}
