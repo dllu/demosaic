@@ -1,0 +1,132 @@
+{
+  "receipt": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-review-tools-CPU-preflight-v1/receipt.json",
+    "sha256": "82c54ea1777df39532ff9ef351b84375cea58bfea294543c209a4e77d11403a7"
+  },
+  "result": {
+    "status": "completed-genuine-phase-and-legacy-review-CPU-preflight",
+    "legacy_V65_completed_owner_gate_and_published_boundary_exact": true,
+    "phase_CPU_and_CUDA_seven_update_state_audits": [
+      {
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-CPU-preflight-v1/phase-full/last.pt",
+          "sha256": "f7a7640d3251f53288395d751b61b4d89e7dc9e39a83bb8043734778a1637268"
+        },
+        "step": 7,
+        "original_planned_updates": 1000,
+        "source_bundle_sha256": "fc0297db08d659523fdcefe1ef0e7a4da12ae97f648e95b1579db65de93d268a",
+        "source_bundle_independently_reconstructed": true,
+        "all91_existing_model_and_EMA_tensors_bitwise_parent": true,
+        "new_head_tensors": [
+          "pretrained_rgb.raw_kernel.coefficients.bias",
+          "pretrained_rgb.raw_kernel.coefficients.weight",
+          "pretrained_rgb.raw_kernel.phase_coefficients"
+        ],
+        "model_tensors": 94,
+        "EMA_tensors": 94,
+        "AdamW_states": 3,
+        "all_state_finite": true,
+        "all_original_recipe_fields_exact_except_resolved_protocol": true,
+        "four_manifest_hashes_and_snapshot_contents_exact": true,
+        "complete_RNG_present": true,
+        "training_log": {
+          "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-CPU-preflight-v1/phase-full/metrics.jsonl",
+          "sha256": "59e553daff48a51a4e17f433ac8697609ee5f0a4ca7dc65f0c88d264cd6dce56",
+          "train_rows": 7
+        },
+        "learning_rates": [
+          2.8000000000000003e-05
+        ]
+      },
+      {
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-CUDA-preflight-v1/actual-B16/last.pt",
+          "sha256": "23f0d82a2ffafce0c747779653b5815d9525e450171430c7c294fe722456aaa6"
+        },
+        "step": 7,
+        "original_planned_updates": 1000,
+        "source_bundle_sha256": "fc0297db08d659523fdcefe1ef0e7a4da12ae97f648e95b1579db65de93d268a",
+        "source_bundle_independently_reconstructed": true,
+        "all91_existing_model_and_EMA_tensors_bitwise_parent": true,
+        "new_head_tensors": [
+          "pretrained_rgb.raw_kernel.coefficients.bias",
+          "pretrained_rgb.raw_kernel.coefficients.weight",
+          "pretrained_rgb.raw_kernel.phase_coefficients"
+        ],
+        "model_tensors": 94,
+        "EMA_tensors": 94,
+        "AdamW_states": 3,
+        "all_state_finite": true,
+        "all_original_recipe_fields_exact_except_resolved_protocol": true,
+        "four_manifest_hashes_and_snapshot_contents_exact": true,
+        "complete_RNG_present": true,
+        "training_log": {
+          "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-CUDA-preflight-v1/actual-B16/metrics.jsonl",
+          "sha256": "833eef3cdeb0816d0d829aad642fb48933eed92ade0da9a21116f2ea32f0abde",
+          "train_rows": 7
+        },
+        "learning_rates": [
+          2.8000000000000003e-05
+        ]
+      }
+    ],
+    "primary_cases": 50264,
+    "legacy_published_comparisons_verified": 36,
+    "additional_V65_self_comparisons_exact_zero": 12,
+    "witnesses": 12,
+    "maximum_published_comparison_difference": 0.0,
+    "pending_rejections": [
+      {
+        "operator": "review_raw_kernel_results.py",
+        "pending_status_rejected_before_output": true,
+        "artifact_wrong_role_input": false
+      },
+      {
+        "operator": "evaluate_raw_kernel_grid.py",
+        "pending_status_rejected_before_output": true,
+        "artifact_wrong_role_input": false
+      },
+      {
+        "operator": "audit_raw_kernel_artifacts.py",
+        "pending_status_rejected_before_output": true,
+        "artifact_wrong_role_input": true
+      }
+    ],
+    "source_files": {
+      "/home/dllu/proj/demosaic/scripts/review_raw_kernel_results.py": "eb01d97295aff330ffef4de5d807cbdb9d44bb5dde97992b19a134771c46faba",
+      "/home/dllu/proj/demosaic/scripts/evaluate_raw_kernel_grid.py": "30f7d52f098daf28cae15bc65183d638c2a970871ae2656d7c80e954b795f788",
+      "/home/dllu/proj/demosaic/scripts/audit_raw_kernel_artifacts.py": "277597673d009c1d8d1dba000d7e41284af4c47258ba86e4dfc78ca9fbbef3ca",
+      "/home/dllu/proj/demosaic/scripts/audit_long_commons_artifacts.py": "3f0ce93fb739d6c6bd4413ba42fc6d8754cc7009967119add8053e57bb59329c",
+      "/home/dllu/proj/demosaic/scripts/compare_long_commons_scores.py": "8a55fcf130fb6cd5cbdd6486508e8185d9bdac0402af0bbcbb884701518a8c67"
+    },
+    "CUDA_initialized": false,
+    "driver_sha256": "4a0162ea3e262d22008e2a60550a2d2649a0d645dc38baf4adb3c2064db26c19",
+    "scope": "Actual V65 completed workflow/state/50264cases,36historical comparison replays and12new zero self-comparisons; genuine phase CPU/GPU discarded7-update94/94/3 states and full snapshot reconstruction. No V66 quality/inference; pending primary/status-role gates reject before output."
+  },
+  "actual_statistics_owner_rejection": {
+    "receipt": {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-artifact-pending-CPU-preflight-v1.json",
+      "sha256": "929a56c46b65e6a2e192c97868c337e2ff949f37deb55a6fa4f0ba14d859425c"
+    },
+    "result": {
+      "status": "completed-actual-live-phase-statistics-owner-rejection",
+      "owner": {
+        "pid": 2527850,
+        "created": 1792216972.84,
+        "driver_sha256": "5be6a3d4e644c05b04819cb33c5897025f857f91114edd512a7c2be75dd545b4"
+      },
+      "rejected_before_output": true,
+      "pending_status": "waiting-for-exact-primary-owner-exit-no-GPU-or-statistical-work",
+      "operator": {
+        "path": "/home/dllu/proj/demosaic/scripts/audit_raw_kernel_artifacts.py",
+        "sha256": "277597673d009c1d8d1dba000d7e41284af4c47258ba86e4dfc78ca9fbbef3ca"
+      },
+      "log": {
+        "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-artifact-pending-CPU-preflight-v1.log",
+        "sha256": "63908b6e4d2f9d0adb62ef344e562a8038502205ad73298008c844043531b61a"
+      },
+      "scope": "Actual live statistics/hue owner pending. CUDA hidden; operator asserts CUDA uninitialized then rejects incomplete status before output/model state audit. Not a V66 quality result."
+    }
+  },
+  "limits": "Historical numeric/source/state replay and pending gate checks. No V66 quality or new inference; model code unchanged from the543-test fc0 package."
+}

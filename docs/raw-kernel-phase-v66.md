@@ -91,10 +91,34 @@ analytic, full GFX, three cached cameras and selected CPU colors. Warm RAW-cache
 links avoid the originals. Status:
 `/mnt/external/demosaic/runs/raw-kernel-phase-warmup-v66-review-workflow-v1.json`.
 
-Matched V66−V65 statistics, the full fixed hue grid, state/artifact checks and
-actual native inspection remain required after primary panels. Adapt review
-tools for 94/94/three-state boundaries and include the completed V65 control;
-the old93/two-state gate must not be treated as proof for this variant.
+The [matched statistics/hue stage](results/raw-kernel-phase-v66-statistics-hue-queue.json)
+is queued behind actual primary-owner exit, controller PID2527850,
+creation1792216972.84. It includes V65 alongside retained V60/V58/V43, yielding
+48 comparisons/twelve classical witnesses. The new-checkpoint grid uses the
+original 1,176 observations, then 7,056 independent Torch64 fields and 216 group
+scalars. Old reference networks are not rerun; legacy arrays are not merged into
+the changed-source report.
+
+The [artifact stage](results/raw-kernel-phase-v66-artifact-queue.json), controller
+PID2528282/creation1792217056.81, waits for that exact statistics/hue owner to exit.
+It checks the 94/94/three-state boundary, frozen 91 parent tensors, recipe/source/
+data/RNG/logs and primary 19 PNGs/23 F32 arrays/two full RGB16 files. Four full-TIFF/
+native-ROI comparisons must be exact; eighteen three-camera rerenders use the
+unchanged historical preview-only bound. Actual native views and the quality
+decision remain required afterward; neither queue promotes or continues a model.
+
+[Executed CPU wiring checks](results/raw-kernel-phase-review-tools-CPU-preflight.json)
+verify the actual completed V65 gate and published boundary unchanged, plus both
+genuine seven-update phase CPU/GPU states and their full source snapshots.
+All 50,264 V65 primary cases are checked; 36 published comparisons replay exactly,
+and twelve additional V65 self-comparisons have zero differences and intervals.
+These self-comparisons are engineering checks, not new quality scores. Pending
+primary and actual live statistics-owner gates reject before output. Model code
+remains unchanged from the 543-test fc0 package.
+
+Matched V66−V65 statistics, full hue/state/artifact results and actual native
+inspection remain pending. The former 93/two-state gate is not used as proof
+for this variant.
 Reports need two native exact-GT photo triplets and all four standing GFX regions,
 including foliage/fence, with non-GT real-reference labels. No automatic joint
 stage, promotion, source/data substitution, fitted output or protected-final score.

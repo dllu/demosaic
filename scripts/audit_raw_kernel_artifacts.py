@@ -34,9 +34,22 @@ def audit_head_state(checkpoint, recipe, plan, log_path, steps):
         == sha(recipe["validation_protocol"])
         == cfg["validation_protocol_sha256"]
     )
-    assert len(state["model"]) == len(state["ema"]) == 93 and len(parent["ema"]) == 91
+    phase = state["model_config"].get("raw_kernel_phase_conditioning", False)
+    assert type(phase) is bool and phase == recipe["model"].get(
+        "raw_kernel_phase_conditioning", False
+    )
+    head_names = [
+        "pretrained_rgb.raw_kernel.coefficients.bias",
+        "pretrained_rgb.raw_kernel.coefficients.weight",
+    ]
+    if phase:
+        head_names.append("pretrained_rgb.raw_kernel.phase_coefficients")
+        channels = 3 * len(recipe["model"].get("raw_kernel_windows", [1, 5, 17])) * 4 * 9
+        assert state["model"][head_names[-1]].shape == (4, 4, channels)
+    assert len(state["model"]) == len(state["ema"]) == 91 + len(head_names)
+    assert len(parent["ema"]) == 91
     assert state["model"].keys() == state["ema"].keys()
-    assert len(state["optimizer"]["state"]) == 2
+    assert len(state["optimizer"]["state"]) == len(head_names)
     assert {int(v["step"]) for v in state["optimizer"]["state"].values()} == {steps}
     assert all(torch.isfinite(v).all() for k in ["model", "ema"] for v in state[k].values())
     assert all(
@@ -50,13 +63,11 @@ def audit_head_state(checkpoint, recipe, plan, log_path, steps):
             state["ema"][name], value
         ), name
     new = sorted(set(state["model"]) - set(parent["ema"]))
-    assert new == [
-        "pretrained_rgb.raw_kernel.coefficients.bias",
-        "pretrained_rgb.raw_kernel.coefficients.weight",
-    ]
+    assert new == head_names
     assert all(torch.count_nonzero(state["model"][name]) > 0 for name in new)
     assert all(key in state for key in ["python_rng", "torch_rng", "cuda_rng"])
-    assert len(state["cuda_rng"]) == 1 and math.isfinite(state["best"])
+    expected_cuda_states = 1 if torch.device(cfg["device"]).type == "cuda" else 0
+    assert len(state["cuda_rng"]) == expected_cuda_states and math.isfinite(state["best"])
     snapshot = Path(cfg["source_snapshot"])
     package = Path(plan["package"]) / "demosaic"
     project = package.parents[1]
@@ -102,9 +113,9 @@ def audit_head_state(checkpoint, recipe, plan, log_path, steps):
         "source_bundle_independently_reconstructed": True,
         "all91_existing_model_and_EMA_tensors_bitwise_parent": True,
         "new_head_tensors": new,
-        "model_tensors": 93,
-        "EMA_tensors": 93,
-        "AdamW_states": 2,
+        "model_tensors": len(state["model"]),
+        "EMA_tensors": len(state["ema"]),
+        "AdamW_states": len(state["optimizer"]["state"]),
         "all_state_finite": True,
         "all_original_recipe_fields_exact_except_resolved_protocol": True,
         "four_manifest_hashes_and_snapshot_contents_exact": True,

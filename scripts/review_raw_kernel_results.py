@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 
 import torch
+import yaml
 from audit_fresh_dino_statistics import audit_photo, audit_real, sha
 from audit_sensor_mean_artifacts import exited
 from compare_long_commons_scores import (
@@ -33,11 +34,36 @@ def completed_primary(workflow, training_workflow):
     exited(status)
     exited(training)
     primary_plan, training_plan = read(status["plan"]), read(training["plan"])
+    assert status["controller"]["driver_sha256"] == primary_plan["driver_sha256"]
+    assert training["controller"]["driver_sha256"] == training_plan["driver_sha256"]
     assert primary_plan["previous_owner"] == training["controller"]
     assert status["checkpoint"] == training["checkpoint"]
     assert training["completed_updates"] == training["planned_updates"] == 1000
     assert training["all91_existing_model_and_EMA_tensors_bitwise_parent"]
-    assert training["finite_93model_93EMA_2Adam"]
+    recipe = yaml.safe_load(Path(training_plan["recipe"]).read_text())
+    phase = recipe["model"].get("raw_kernel_phase_conditioning", False)
+    assert type(phase) is bool
+    if phase:
+        assert training["finite94model94EMA3Adam"]
+        assert training["all41_V65_control_observations_domains_LRs_exact"]
+        control_path = Path(training_plan["matched_control_review"])
+        assert sha(control_path) == training_plan["matched_control_review_sha256"]
+        control = read(control_path)
+        assert control["review_complete"] is True
+        control_workflow = control["workflow_records"]["raw-kernel-warmup-v65"]["result"]
+        control_plan = read(control_workflow["plan"])
+        assert control_plan["parent_sha256"] == training_plan["parent_sha256"]
+        old_recipe = yaml.safe_load(Path(control_plan["recipe"]).read_text())
+        skip = {"run", "experiment_notes", "model"}
+        assert {k: v for k, v in recipe.items() if k not in skip} == {
+            k: v for k, v in old_recipe.items() if k not in skip
+        }
+        assert old_recipe["model"].get("raw_kernel_phase_conditioning", False) is False
+        assert {
+            k: v for k, v in recipe["model"].items() if k != "raw_kernel_phase_conditioning"
+        } == {k: v for k, v in old_recipe["model"].items() if k != "raw_kernel_phase_conditioning"}
+    else:
+        assert training["finite_93model_93EMA_2Adam"]
     for plan in [primary_plan, training_plan]:
         for path, digest in plan["guards"].items():
             assert sha(path) == digest, path
@@ -46,12 +72,28 @@ def completed_primary(workflow, training_workflow):
     return status, training, primary_plan, training_plan
 
 
-def compare_one(outputs, checkpoint, expected_methods=4):
+def compare_one(outputs, checkpoint, expected_methods=4, additional_registry=None):
     """The caller may replay genuine completed historical panels for verification."""
     histories = [
         (label, REPO / path, sha(REPO / path), digest, historical_runs(REPO / path, expected))
         for label, path, expected, digest in REGISTRIES
     ]
+    if additional_registry is not None:
+        path = Path(additional_registry["path"])
+        assert sha(path) == additional_registry["sha256"]
+        control = read(path)
+        assert control["review_complete"] is True
+        digest = control["checkpoint"]["sha256"]
+        assert sha(control["checkpoint"]["path"]) == digest
+        histories.append(
+            (
+                additional_registry["label"],
+                path,
+                sha(path),
+                digest,
+                control["artifact_integrity"]["runs"],
+            )
+        )
     statistics, sources, witnesses, comparisons = {}, [], [], []
     for panel, filename in [
         ("full427", "per-image.jsonl"),
@@ -89,7 +131,8 @@ def compare_one(outputs, checkpoint, expected_methods=4):
             comparisons.extend(result)
             sources.append(source)
             witnesses.append(witness)
-    assert len(comparisons) == 36 and len(sources) == len(witnesses) == 9
+    assert len(comparisons) == 12 * len(histories)
+    assert len(sources) == len(witnesses) == 3 * len(histories)
     return {
         "statistics": statistics,
         "comparisons": comparisons,
@@ -105,18 +148,36 @@ def compare_one(outputs, checkpoint, expected_methods=4):
 
 def main(workflow, training_workflow, output):
     assert not torch.cuda.is_initialized()
-    status, training, _, _ = completed_primary(workflow, training_workflow)
-    checkpoint = {**status["checkpoint"], "label": "RAW-head-warmup1000"}
+    status, training, _, plan = completed_primary(workflow, training_workflow)
+    matched = plan.get("matched_control_review")
+    additional = (
+        None
+        if matched is None
+        else {
+            "path": matched,
+            "sha256": plan["matched_control_review_sha256"],
+            "label": "V65-matched-phase-control",
+        }
+    )
+    checkpoint = {
+        **status["checkpoint"],
+        "label": ("RAW-phase-head-warmup1000" if matched else "RAW-head-warmup1000"),
+    }
     result = {
         "status": "completed-independent-RAW-head-primary-statistics-and-saved-comparisons",
         "workflow": str(workflow),
         "workflow_sha256": sha(workflow),
         "training_workflow": str(training_workflow),
         "training_workflow_sha256": sha(training_workflow),
-        **compare_one(status["outputs"], checkpoint),
+        **compare_one(status["outputs"], checkpoint, additional_registry=additional),
         "driver_sha256": sha(__file__),
         "CUDA_initialized": False,
-        "scope": "One exploratory new-head warmup, not a matched architecture control. Retained V60/V58/V43 differ in initialization/training history; V43 real batch differs. Source intervals do not measure training/selection uncertainty. No inference, output fitting, protected-final score, continuation or promotion.",
+        "scope": (
+            "Matched direct-phase-conditioning comparison against V65; additional phase capacity is part of the intervention. "
+            if matched
+            else "One exploratory new-head warmup, not a matched architecture control. "
+        )
+        + "Retained V60/V58/V43 differ in initialization/training history; V43 real batch differs. Source intervals do not measure training/selection uncertainty. No inference, output fitting, protected-final score, continuation or promotion.",
     }
     assert training["checkpoint"] == status["checkpoint"]
     output = writable_path(output)
@@ -124,7 +185,13 @@ def main(workflow, training_workflow, output):
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, indent=2, allow_nan=False) + "\n")
     print(
-        json.dumps({"output": str(output), "comparisons": 36, "CUDA_initialized": False}),
+        json.dumps(
+            {
+                "output": str(output),
+                "comparisons": len(result["comparisons"]),
+                "CUDA_initialized": False,
+            }
+        ),
         flush=True,
     )
 

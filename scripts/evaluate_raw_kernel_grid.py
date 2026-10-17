@@ -9,12 +9,15 @@ from review_raw_kernel_results import completed_primary
 
 def main(inputs, workflow, training_workflow, output):
     status, _, _, training_plan = completed_primary(workflow, training_workflow)
+    phase = "matched_control_review" in training_plan
     records = [
         {
             **status["checkpoint"],
             "kind": "joint-checkpoint",
-            "arm": "RAW-head-warmup1000",
-            "comparison_role": "exploratory-new-head-warmup",
+            "arm": "RAW-phase-head-warmup1000" if phase else "RAW-head-warmup1000",
+            "comparison_role": "matched-phase-conditioning"
+            if phase
+            else "exploratory-new-head-warmup",
         }
     ]
     # No legacy arrays are inserted into this report. Their immutable reports
