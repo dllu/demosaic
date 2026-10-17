@@ -1,11 +1,14 @@
 # Next Commons snapshot
 
-The CPU job has prepared **10,022 of 10,024 additional downloaded images** into a
+The 8× caches and membership review are complete. The CPU job prepared
+**10,022 of 10,024 additional downloaded images** into a
 separate 8× linear-light uint16 cache; two failed. Its identity screen quarantined
 126 and cleared 9,896. After preserving held-out assignments, **8,872** are new
-training candidates. The candidate combined training count is 75,806, pending
-independent full-cache/content review and matching 4× preparation. No new image
-has been admitted to training. [Producer completion](results/commons-incoming-v4-preparation-complete.json).
+training sources in a separate reviewed future corpus. Combined training count
+is **75,806**; matching 4× preparation is running. Active model inputs remain fixed.
+[Reviewed 8× freeze](results/commons-incoming-v4-reviewed8.json),
+[actual 4× launch and startup checks](results/commons-incoming-v4-rebin4-launch.json),
+[original producer completion](results/commons-incoming-v4-preparation-complete.json).
 The downloader continues in parallel. Existing
 training and evaluation manifests remain frozen, including the current batch16
 model comparison. [Launch, frozen inputs and actual startup checks](results/commons-incoming-v4-launch.json).
@@ -47,6 +50,34 @@ buckets. It stops at `audited-quarantine8-awaiting-reviewed-freeze`.
 Complete cache verification and content review precede any reviewed freeze;
 matching 4× preparation is also required for augmentation before final downsampling.
 Finite identity screening cannot establish arbitrary scene disjointness.
+
+The completion review independently verified every one of the **10,022** caches,
+totaling **11.863 GB**, including full SHA256, uint16/HWC headers, minimum size,
+binning recipe and exact source attribution against the frozen selection. Each
+selected identity is prepared exactly once or recorded as one of two truncated
+source-image failures. Every old row and held-out assignment is exact. All 126
+protected flags remain absent; the near-duplicate audit excludes six new sources
+and reserves 1,018 new holdouts. The separate reviewed 8× manifest SHA256 is
+`05d152ef10a8f2aff7931756af54bae12c737eaad37f81c0f121eae0c5da008a`.
+
+Three contact sheets covering 48 deterministically sampled new training sources
+were actually viewed. They include architecture/interiors, foliage, sky/fog,
+water/glacier, public portraits/sports, vehicles/trains, fireworks, electronics,
+art and stone detail, without obvious broken decoding in the thumbnails. These
+resized content previews do not verify native sharpness/noise or every scene.
+Source identities, author/license/attribution and the manual review are retained
+in the independent receipt. No protected RAW was opened or scored.
+
+Matching 4× preparation selects only the **8,872** newly admitted training sources
+and reuses the complete 66,934-source 4× base. It runs two CPU workers at nice 5,
+CUDA hidden, a frozen package/operator/driver and a 512 GiB reserve. The first
+12 4× caches pass SHA/header/recipe/source checks and a rounded area2 comparison
+to the reviewed 8× pixels, within one uint16 code. This is a startup sample;
+full 4× verification and the later consistency/content review remain pending.
+Original validation paths and all current 40,170-source model inputs stay fixed.
+Rebin controller PID 1953180, creation 1792206647.0; status
+`rebin4-workflow.json`, plan `rebin4-plan.json`, log
+`.cache/rebin-commons-incoming-v4.log`.
 
 Operational files:
 

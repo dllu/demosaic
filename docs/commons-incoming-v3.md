@@ -6,7 +6,8 @@ newly admitted images. Both complete caches are ready for a separate data
 comparison; current model manifests remain fixed.
 [Reviewed freeze](results/commons-incoming-v3-reviewed8.json),
 [completed 4× verification](results/commons-incoming-v3-rebin4-complete.json).
-The [next 10,024-source snapshot](commons-incoming-v4.md) is preparing separately.
+The [next 10,024-source snapshot](commons-incoming-v4.md) has a reviewed 8× freeze;
+its matching 4× preparation runs separately.
 
 The background downloader remains live. This completed CPU job froze **16,231**
 additional downloaded candidates for preparation and identity screening.
