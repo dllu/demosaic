@@ -32,6 +32,20 @@ def ref(path):
     return {"path": str(Path(path).resolve()), "sha256": sha(path)}
 
 
+def statistics_payload(container):
+    if container.get("review_complete") is True:
+        require(
+            container["status"] == "completed-controlled-first4000-long-data-review-no-promotion",
+            "Unsupported historical review",
+        )
+        return container["primary_statistics"]
+    require(
+        container.get("status") == "completed-original20k-long-data-statistics-and-4k-progress",
+        "Original20k statistics are incomplete",
+    )
+    return container
+
+
 def photo_scores(records, label, source_ids, conditions, patterns):
     chosen = [r for r in records if r["model"] == label and r["kind"] == "photo"]
     keys = [(r["id"], r["condition"], r["pattern"]) for r in chosen]
@@ -85,18 +99,7 @@ def run(statistics_path, statistics_sha256, cohort_path, cohort_sha256, output):
         "Statistics/cohort input hash differs",
     )
     container, frozen = read(statistics_path), read(cohort_path)
-    if container.get("review_complete") is True:
-        stats = container["primary_statistics"]
-        require(
-            container["status"] == "completed-controlled-first4000-long-data-review-no-promotion",
-            "Unsupported historical review",
-        )
-    else:
-        require(
-            container.get("status") == "completed-original20k-long-data-statistics-and-4k-progress",
-            "Original20k statistics are incomplete",
-        )
-        stats = container
+    stats = statistics_payload(container)
     query_ref = frozen["query_manifest"]
     require(ref(query_ref["path"]) == query_ref, "Frozen query manifest changed")
     query_rows = [json.loads(s) for s in Path(query_ref["path"]).read_text().splitlines()]

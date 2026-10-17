@@ -47,6 +47,25 @@ def quantile(sorted_values, probability):
     return sorted_values[lower] * (1 - fraction) + sorted_values[upper] * fraction
 
 
+def native_aliases(sources):
+    """Keep display aliases while requiring one exact native-model binding."""
+    wanted = defaultdict(list)
+    identities = set()
+    for source in sources:
+        key = (source["label"], source["checkpoint_sha256"])
+        require(key not in identities, "Duplicate source descriptor")
+        identities.add(key)
+        aliases = wanted[source["model_label"]]
+        if aliases:
+            require(
+                {k: v for k, v in source.items() if k != "label"}
+                == {k: v for k, v in aliases[0].items() if k != "label"},
+                "Conflicting native model alias binding",
+            )
+        aliases.append(source)
+    return wanted
+
+
 def audit(folder):
     folder = Path(folder)
     result = read(folder / "result.json")
@@ -107,8 +126,7 @@ def audit(folder):
         grouped[source["cases"]].append(source)
     means, scalar_values = {}, 0
     for path, sources in grouped.items():
-        wanted = {s["model_label"]: s for s in sources}
-        require(len(wanted) == len(sources), "Duplicate native model descriptor")
+        wanted = native_aliases(sources)
         cells = defaultdict(set)
         sums = defaultdict(lambda: {m: Decimal(0) for m in METRICS})
         counts = defaultdict(int)
@@ -119,17 +137,17 @@ def audit(folder):
                     r = json.loads(line)
                     if r["model"] not in wanted or r["kind"] != "photo":
                         continue
-                    source = wanted[r["model"]]
-                    key = (source["label"], source["checkpoint_sha256"], r["id"])
-                    cell = (r["condition"], r["pattern"])
-                    require(cell not in cells[key], "Duplicate case")
-                    cells[key].add(cell)
-                    counts[key] += 1
-                    for metric in METRICS:
-                        value = r["metrics"][metric]
-                        require(value is not None and math.isfinite(value), "Invalid metric")
-                        sums[key][metric] += Decimal.from_float(float(value))
-                        scalar_values += 1
+                    for source in wanted[r["model"]]:
+                        key = (source["label"], source["checkpoint_sha256"], r["id"])
+                        cell = (r["condition"], r["pattern"])
+                        require(cell not in cells[key], "Duplicate case")
+                        cells[key].add(cell)
+                        counts[key] += 1
+                        for metric in METRICS:
+                            value = r["metrics"][metric]
+                            require(value is not None and math.isfinite(value), "Invalid metric")
+                            sums[key][metric] += Decimal.from_float(float(value))
+                            scalar_values += 1
             for source in sources:
                 protocol = read(source["report"])["protocol"]
                 expected = {

@@ -120,6 +120,30 @@ analytic/hue and standing GFX results are unchanged; see the original review.
 GFX ISO100 AHD remains an independent reference, never exact GT. This source
 sensitivity neither replaces those panels nor promotes a model.
 
+## Nine-pair historical replay before the original20k application
+
+[Executed replay and independent receipt](results/commons-source-sensitivity-nine-pair-historical-replay.json).
+The downstream arithmetic now also runs on nine full-photo comparison pairs:
+the seven original pairs plus two genuine4k self-comparisons from the existing
+final-review component replay. These use five native checkpoints and seven
+display labels; no20k scores or new inference are created. Both completed report
+formats and rejection of incomplete statuses have separate unit coverage.
+
+The independent auditor previously rejected aliases pointing to the same native
+model record. It now keeps both display labels while requiring every native
+binding field, including checkpoint/report/case hashes, to agree exactly.
+Duplicate descriptors and conflicting bindings still fail. The arithmetic,
+coverage requirements and2e−10 numerical tolerance are unchanged.
+
+The replay reproduces27 original full-panel metric comparisons exactly and
+computes81 total source sensitivities. Its first63 comparisons match this
+report's original results exactly; all18 added self-comparison deltas and
+intervals are exactly zero. Decimal60 accumulation checks251,076 metric values
+including alias repetitions,2,989 source-label rows and8,967 source-label metric
+means with zero discrepancy. Scalar bootstrap/manual quantiles check540 statistic
+fields with maximum error2.22e−16. All15 focused tests and Ruff pass.
+The historical replay is a pipeline check, not new model-performance evidence.
+
 ## Pending original 20k application
 
 The future statistics file is

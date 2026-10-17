@@ -77,3 +77,64 @@ def test_exhaustive_two_source_bootstrap_has_known_interval_and_direction():
     )
     same = module.compare_values([1.0, 4.0], [1.0, 4.0], indices)
     assert same["source_bootstrap_95_interval"] == [0.0, 0.0]
+
+
+def test_completed_historical_and_flat_payloads_preserve_all_nine_pairs():
+    module = script()
+    payload = {"sources": list(range(9)), "comparisons": list(range(27))}
+    historical = {
+        "review_complete": True,
+        "status": "completed-controlled-first4000-long-data-review-no-promotion",
+        "primary_statistics": payload,
+    }
+    flat = {"status": "completed-original20k-long-data-statistics-and-4k-progress", **payload}
+    assert module.statistics_payload(historical) is payload
+    assert module.statistics_payload(flat) is flat
+
+
+@pytest.mark.parametrize(
+    "container", [{}, {"status": "waiting"}, {"review_complete": True, "status": "waiting"}]
+)
+def test_unfinished_statistics_cannot_be_treated_as_complete(container):
+    with pytest.raises(ValueError):
+        script().statistics_payload(container)
+
+
+def auditor():
+    path = Path("scripts/audit_commons_source_sensitivity.py")
+    spec = importlib.util.spec_from_file_location("source_sensitivity_auditor", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def alias_sources():
+    source = {
+        "label": "first4k",
+        "model_label": "native-step4000",
+        "checkpoint_sha256": "abc",
+        "cases": "cases.jsonl",
+        "cases_sha256": "def",
+        "report": "summary.json",
+        "report_sha256": "ghi",
+    }
+    return [source, {**source, "label": "self-replay"}]
+
+
+def test_report_aliases_keep_the_same_native_identity_and_both_display_labels():
+    sources = alias_sources()
+    assert auditor().native_aliases(sources) == {"native-step4000": sources}
+
+
+@pytest.mark.parametrize("field", ["checkpoint_sha256", "cases_sha256", "report_sha256"])
+def test_aliases_cannot_hide_changed_native_model_or_artifacts(field):
+    sources = alias_sources()
+    sources[1][field] = "changed"
+    with pytest.raises(ValueError, match="Conflicting native model"):
+        auditor().native_aliases(sources)
+
+
+def test_duplicate_source_descriptor_is_rejected():
+    sources = alias_sources()
+    with pytest.raises(ValueError, match="Duplicate source"):
+        auditor().native_aliases([sources[0], sources[0]])
