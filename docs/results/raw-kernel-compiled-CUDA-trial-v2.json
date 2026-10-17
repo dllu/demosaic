@@ -1,0 +1,41 @@
+{
+  "status": "completed-independent-actual-CUDA-compiled-output-and-timing-checks",
+  "reviewed_UTC": "2026-10-17T10:32:50.965122+00:00",
+  "workflow": {
+    "path": "/mnt/external/demosaic/runs/raw-kernel-phase-joint-v67-full10k-compiled-probe-workflow-v2.json",
+    "sha256": "980cb9a1d01b4e50898b3cb99e9478fd30614ba4cc10649632d31f2030092b56"
+  },
+  "execution": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-compiled-probe-workflow-v2/trial/result.json",
+    "sha256": "e7648bd8391a26315887a1935f4cbb85ba3e53b0045e5c6e8e8a1a71e36894fc"
+  },
+  "auditor": {
+    "path": "/home/dllu/proj/demosaic/.cache/audit_compiled_raw_kernel_v2.py",
+    "sha256": "e8ad908756f7fee3c1abea82f520e0cedf0a9759b9e236d5bbdc0e022bbeee50"
+  },
+  "checkpoint": {
+    "path": "/mnt/external/demosaic/models/dino-convnext-raw-kernel-phase-joint-b16-v67-step10000.pt",
+    "sha256": "a37e6c84597de540440bbf29c93eb79c9ddbf74024b39843a2941143fe6470fc",
+    "step": 10000
+  },
+  "actual_unique_graphs": 7,
+  "all_3145728_F32_values_bitwise_eager_compiled_prior_profile": true,
+  "prediction_file_sha256": "68a4d3738ad12e16ecded1cefe32672371929aca92361c0ca46bad41dce395ca",
+  "all_four_per_image_max_and_RMS_differences": 0,
+  "ABBA_BAAB_eight_timing_blocks_independently_replayed": true,
+  "median_synchronized_wall_ms": {
+    "eager": 371.3285829173401,
+    "compiled-neural-blocks": 362.3556813923642
+  },
+  "compiled_forward_time_reduction_fraction": 0.024164316828185983,
+  "eager_over_compiled_wall_ratio": 1.024762690322661,
+  "execution_preserves_model_DINO_and_measured_RNG": true,
+  "actual_CUDA_initialization_in_execution": true,
+  "auditor_runs_inference_or_initializes_CUDA": false,
+  "decision": "Park this process-local trial; no production compile option or default change. Exact agreement holds on these four native512 GFX contexts. Roughly2.4% resident-forward time reduction is small and does not resolve the52.7s full-frame result or V67 quality rejection. No broad numerical/native quality/full-frame speed claim.",
+  "scope": "Isolated process-local seven neural blocks compiled with Inductor/fullgraph/static, original model/weights/FP16-neural physicalFP32 precision/inputs/defaults preserved. Exact eager equality to actual profile reference, per-image numerical gate before timing, excluded initial/compile and switch warmups, ABBA/BAAB block timing. Both timing policies retain compiled-cache allocations. Sum or median is not full-frame throughput or idle hardware performance; shared machine. Numerical acceptance is an engineering bound, not preserved image quality or promotion. CPU fixture uses original real2k B1/native256/FP32 and AB only; no CUDA timing or equivalence claim. No training/export/source/config/production batch or precision change. Full quality/native/full-frame checks remain necessary.",
+  "archived_auditor": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-compiled-probe-workflow-v2/audit_compiled_raw_kernel_v2.py",
+    "sha256": "e8ad908756f7fee3c1abea82f520e0cedf0a9759b9e236d5bbdc0e022bbeee50"
+  }
+}

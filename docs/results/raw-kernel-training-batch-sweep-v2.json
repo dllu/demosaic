@@ -1,0 +1,399 @@
+{
+  "status": "completed-independent-final10000-RAW-batch-sweep-audit",
+  "reviewed_UTC": "2026-10-17T10:31:35.599870+00:00",
+  "workflow": {
+    "path": "/mnt/external/demosaic/runs/raw-kernel-phase-joint-v67-full10k-training-sweep-workflow-v2.json",
+    "sha256": "d016bc441964251c278b4f585c4c1a34d7eb0812a261986b8dbd6a71b27ebcb0"
+  },
+  "summary": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-training-sweep-workflow-v2/sweep/summary.json",
+    "sha256": "1a2b1494c76c8885821eeabeedf8997503350a790e3c28a441244cbb2e12df9b"
+  },
+  "checkpoint": {
+    "path": "/mnt/external/demosaic/models/dino-convnext-raw-kernel-phase-joint-b16-v67-step10000.pt",
+    "sha256": "a37e6c84597de540440bbf29c93eb79c9ddbf74024b39843a2941143fe6470fc"
+  },
+  "original10000_warm100_schedule_retained": true,
+  "driver": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-training-sweep-workflow-v2/tools/benchmark_raw_kernel_training.py",
+    "sha256": "1b77d8401a917d310de41f07bfcf582890ef0e43da5cbef18f641b1d32bdaa05"
+  },
+  "auditor": {
+    "path": "/home/dllu/proj/demosaic/.cache/audit_raw_kernel_training_sweep_v2.py",
+    "sha256": "6f0b00e6cecf68824f23bcfe41541d1b9d31a2e6091ef60f4b5903e455cd6432"
+  },
+  "source_sha256_without_validation_monitor": "67fc69e36f931c8ba83e780f6b524c57a9112b2642e5998979fdf9dff3c964b0",
+  "completed_cases": [
+    {
+      "batch": 4,
+      "repeat": 1,
+      "status": "completed-discarded-throughput-fixture",
+      "patches_per_second": 14.711230612498982,
+      "measured_seconds": 12.235550154931843,
+      "seconds_per_update": 0.271901114554041,
+      "peak_CUDA_GB": 14.30632704,
+      "measured_domains": {
+        "paired-RAW": 15,
+        "native-RAW-synthetic": 15,
+        "synthetic": 15
+      },
+      "source_sha256": "67fc69e36f931c8ba83e780f6b524c57a9112b2642e5998979fdf9dff3c964b0",
+      "runtime_config_sha256": "0969332a706fa230a4857082bd6a3d1ca91013bddd619f6cf81a0bbf92293b47",
+      "metrics_sha256": "17eba8fdb57b99502f52cfa1ef7906a8fcd06b85cbba743e580202b8b0bd048f",
+      "case": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-training-sweep-workflow-v2/sweep/batch4-repeat1",
+      "before": {
+        "available_GB": 77.39441152,
+        "load_average": [
+          5.0712890625,
+          5.5556640625,
+          6.08935546875
+        ]
+      },
+      "available_GB_after": 77.564186624,
+      "whole_process_seconds": 61.87291056313552,
+      "memory_policy": {
+        "device": "cuda",
+        "available_GB": 76.156854272,
+        "allocator_cap_GB": 53.394411520000006,
+        "fraction": 0.4086487068379088,
+        "CUDA_visible_total_GB": 130.660909056
+      },
+      "state_checks": {
+        "DINO_sha256": "1d679a021c6c26b5a610281aff421afe8ec33ff0e18dc029c8da736eade9cc36",
+        "all94_initial_restoration_tensors_equal_frozen_EMA": true,
+        "trainable_tensors": 92,
+        "trainable_parameters": 32931920,
+        "DINO_unchanged_frozen_and_gradient_free": true,
+        "finite94model94EMA92Adam": true,
+        "fresh_Adam_steps": 60,
+        "normalization_buffers_unchanged": true,
+        "CUDA_initialized": true,
+        "checkpoint_sha256": "42605c3c02ae28d55c6b548d43aefd990349a60f39e2615f0c105cde9c338162"
+      }
+    },
+    {
+      "batch": 16,
+      "repeat": 1,
+      "status": "completed-discarded-throughput-fixture",
+      "patches_per_second": 15.72031746557474,
+      "measured_seconds": 45.80060177389532,
+      "seconds_per_update": 1.017791150531007,
+      "peak_CUDA_GB": 21.338857472,
+      "measured_domains": {
+        "paired-RAW": 15,
+        "native-RAW-synthetic": 15,
+        "synthetic": 15
+      },
+      "source_sha256": "67fc69e36f931c8ba83e780f6b524c57a9112b2642e5998979fdf9dff3c964b0",
+      "runtime_config_sha256": "0ab890822cc7729d7b0e8ac8a49a4717a5d407d1d43079fe571f7d62677c0c16",
+      "metrics_sha256": "b74126f12e0d1c998902b98790031b8d7274fb394ffb873ef60f54e89f14f783",
+      "case": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-training-sweep-workflow-v2/sweep/batch16-repeat1",
+      "before": {
+        "available_GB": 77.564186624,
+        "load_average": [
+          5.84228515625,
+          5.6953125,
+          6.103515625
+        ]
+      },
+      "available_GB_after": 64.780607488,
+      "whole_process_seconds": 160.61977548501454,
+      "memory_policy": {
+        "device": "cuda",
+        "available_GB": 77.496295424,
+        "allocator_cap_GB": 53.564186624,
+        "fraction": 0.40994806335721196,
+        "CUDA_visible_total_GB": 130.660909056
+      },
+      "state_checks": {
+        "DINO_sha256": "1d679a021c6c26b5a610281aff421afe8ec33ff0e18dc029c8da736eade9cc36",
+        "all94_initial_restoration_tensors_equal_frozen_EMA": true,
+        "trainable_tensors": 92,
+        "trainable_parameters": 32931920,
+        "DINO_unchanged_frozen_and_gradient_free": true,
+        "finite94model94EMA92Adam": true,
+        "fresh_Adam_steps": 60,
+        "normalization_buffers_unchanged": true,
+        "CUDA_initialized": true,
+        "checkpoint_sha256": "ca8ba603f7b217a7ff505877f6b47902094adbe54e7e3be9ba5f948713f64ef7"
+      }
+    },
+    {
+      "batch": 8,
+      "repeat": 0,
+      "status": "completed-discarded-throughput-fixture",
+      "patches_per_second": 15.722864145302468,
+      "measured_seconds": 22.896591656142846,
+      "seconds_per_update": 0.5088131479142854,
+      "peak_CUDA_GB": 16.647847424,
+      "measured_domains": {
+        "paired-RAW": 15,
+        "native-RAW-synthetic": 15,
+        "synthetic": 15
+      },
+      "source_sha256": "67fc69e36f931c8ba83e780f6b524c57a9112b2642e5998979fdf9dff3c964b0",
+      "runtime_config_sha256": "4601243908550067dcc671313b3fc42fec05627705374108624b2d5d84b16bca",
+      "metrics_sha256": "68970b94454f3698518a928c669438b3f367a407c20cea41757339815c809811",
+      "case": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-training-sweep-workflow-v2/sweep/batch8-repeat0",
+      "before": {
+        "available_GB": 64.780603392,
+        "load_average": [
+          8.83984375,
+          6.43798828125,
+          6.2822265625
+        ]
+      },
+      "available_GB_after": 66.178863104,
+      "whole_process_seconds": 91.06641238112934,
+      "memory_policy": {
+        "device": "cuda",
+        "available_GB": 64.510005248,
+        "allocator_cap_GB": 40.780603392,
+        "fraction": 0.31211020715095306,
+        "CUDA_visible_total_GB": 130.660909056
+      },
+      "state_checks": {
+        "DINO_sha256": "1d679a021c6c26b5a610281aff421afe8ec33ff0e18dc029c8da736eade9cc36",
+        "all94_initial_restoration_tensors_equal_frozen_EMA": true,
+        "trainable_tensors": 92,
+        "trainable_parameters": 32931920,
+        "DINO_unchanged_frozen_and_gradient_free": true,
+        "finite94model94EMA92Adam": true,
+        "fresh_Adam_steps": 60,
+        "normalization_buffers_unchanged": true,
+        "CUDA_initialized": true,
+        "checkpoint_sha256": "fa211026f622094de641a1bafbcb4e65faf4a5cc68ceae03565213a2b0dd8c40"
+      }
+    },
+    {
+      "batch": 16,
+      "repeat": 0,
+      "status": "completed-discarded-throughput-fixture",
+      "patches_per_second": 15.900252218795176,
+      "measured_seconds": 45.28230056306347,
+      "seconds_per_update": 1.006273345845855,
+      "peak_CUDA_GB": 21.338857472,
+      "measured_domains": {
+        "paired-RAW": 15,
+        "native-RAW-synthetic": 15,
+        "synthetic": 15
+      },
+      "source_sha256": "67fc69e36f931c8ba83e780f6b524c57a9112b2642e5998979fdf9dff3c964b0",
+      "runtime_config_sha256": "7ec4122e68ae7618358edd34f1ac72d8df09ec1e689623a02863c74425c385b9",
+      "metrics_sha256": "a8ad8089021e852b4f8c114c5ed53f0c285a1473a05be78c1a85035c0e616931",
+      "case": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-training-sweep-workflow-v2/sweep/batch16-repeat0",
+      "before": {
+        "available_GB": 66.178863104,
+        "load_average": [
+          8.146484375,
+          7.01416015625,
+          6.51806640625
+        ]
+      },
+      "available_GB_after": 63.9614976,
+      "whole_process_seconds": 153.5541144029703,
+      "memory_policy": {
+        "device": "cuda",
+        "available_GB": 65.976856576,
+        "allocator_cap_GB": 42.178863104,
+        "fraction": 0.32281164587583383,
+        "CUDA_visible_total_GB": 130.660909056
+      },
+      "state_checks": {
+        "DINO_sha256": "1d679a021c6c26b5a610281aff421afe8ec33ff0e18dc029c8da736eade9cc36",
+        "all94_initial_restoration_tensors_equal_frozen_EMA": true,
+        "trainable_tensors": 92,
+        "trainable_parameters": 32931920,
+        "DINO_unchanged_frozen_and_gradient_free": true,
+        "finite94model94EMA92Adam": true,
+        "fresh_Adam_steps": 60,
+        "normalization_buffers_unchanged": true,
+        "CUDA_initialized": true,
+        "checkpoint_sha256": "7def9d73bd46004ebd204a99a74c9d55e0794acf1ab89bbc0428fd02f2c53f98"
+      }
+    },
+    {
+      "batch": 8,
+      "repeat": 1,
+      "status": "completed-discarded-throughput-fixture",
+      "patches_per_second": 15.721120325745707,
+      "measured_seconds": 22.89913139399141,
+      "seconds_per_update": 0.5088695865331425,
+      "peak_CUDA_GB": 16.647847424,
+      "measured_domains": {
+        "paired-RAW": 15,
+        "native-RAW-synthetic": 15,
+        "synthetic": 15
+      },
+      "source_sha256": "67fc69e36f931c8ba83e780f6b524c57a9112b2642e5998979fdf9dff3c964b0",
+      "runtime_config_sha256": "fa368f87d3e70086de4b8a3b82c67a11ff036634c31070931f3625e12ab3d6ab",
+      "metrics_sha256": "558c491263a7e5f98cefc04f69bfb9302f6eeb67f985a9fec6a3d781087c8c7f",
+      "case": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-training-sweep-workflow-v2/sweep/batch8-repeat1",
+      "before": {
+        "available_GB": 63.9614976,
+        "load_average": [
+          5.45751953125,
+          6.31689453125,
+          6.32666015625
+        ]
+      },
+      "available_GB_after": 62.492229632,
+      "whole_process_seconds": 90.31088835000992,
+      "memory_policy": {
+        "device": "cuda",
+        "available_GB": 63.569391616,
+        "allocator_cap_GB": 39.9614976,
+        "fraction": 0.30584126414483226,
+        "CUDA_visible_total_GB": 130.660909056
+      },
+      "state_checks": {
+        "DINO_sha256": "1d679a021c6c26b5a610281aff421afe8ec33ff0e18dc029c8da736eade9cc36",
+        "all94_initial_restoration_tensors_equal_frozen_EMA": true,
+        "trainable_tensors": 92,
+        "trainable_parameters": 32931920,
+        "DINO_unchanged_frozen_and_gradient_free": true,
+        "finite94model94EMA92Adam": true,
+        "fresh_Adam_steps": 60,
+        "normalization_buffers_unchanged": true,
+        "CUDA_initialized": true,
+        "checkpoint_sha256": "299c46407b89e4a18ae8baf481a456245ace30a8fdb7fc0e437b96ee78a6747f"
+      }
+    },
+    {
+      "batch": 4,
+      "repeat": 0,
+      "status": "completed-discarded-throughput-fixture",
+      "patches_per_second": 14.529218491825963,
+      "measured_seconds": 12.388828766066581,
+      "seconds_per_update": 0.27530730591259067,
+      "peak_CUDA_GB": 14.30632704,
+      "measured_domains": {
+        "paired-RAW": 15,
+        "native-RAW-synthetic": 15,
+        "synthetic": 15
+      },
+      "source_sha256": "67fc69e36f931c8ba83e780f6b524c57a9112b2642e5998979fdf9dff3c964b0",
+      "runtime_config_sha256": "5b93554b346be284e431232855f19990246ae7fbad04eb7d623b5af87cb9a502",
+      "metrics_sha256": "38ab3db67679ec18bd07c7cd82267e797588e16c2aec8f37ed7ff2089ee21586",
+      "case": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-training-sweep-workflow-v2/sweep/batch4-repeat0",
+      "before": {
+        "available_GB": 62.492229632,
+        "load_average": [
+          6.0830078125,
+          6.26806640625,
+          6.306640625
+        ]
+      },
+      "available_GB_after": 61.497278464,
+      "whole_process_seconds": 60.68673644494265,
+      "memory_policy": {
+        "device": "cuda",
+        "available_GB": 62.247591936,
+        "allocator_cap_GB": 38.492229632,
+        "fraction": 0.2945963709429161,
+        "CUDA_visible_total_GB": 130.660909056
+      },
+      "state_checks": {
+        "DINO_sha256": "1d679a021c6c26b5a610281aff421afe8ec33ff0e18dc029c8da736eade9cc36",
+        "all94_initial_restoration_tensors_equal_frozen_EMA": true,
+        "trainable_tensors": 92,
+        "trainable_parameters": 32931920,
+        "DINO_unchanged_frozen_and_gradient_free": true,
+        "finite94model94EMA92Adam": true,
+        "fresh_Adam_steps": 60,
+        "normalization_buffers_unchanged": true,
+        "CUDA_initialized": true,
+        "checkpoint_sha256": "9281433a8c0b3de480fa3d8b6f588a288f0bad4cf0c565df9f7441a7a6ee1e35"
+      }
+    }
+  ],
+  "skipped_cases": [
+    {
+      "batch": 32,
+      "repeat": 1,
+      "status": "skipped-insufficient-predicted-headroom",
+      "available_GB": 77.39441152,
+      "predicted_peak_GB": 55.216,
+      "reserve_GB": 24
+    },
+    {
+      "batch": 48,
+      "repeat": 1,
+      "status": "skipped-insufficient-predicted-headroom",
+      "available_GB": 77.39441152,
+      "predicted_peak_GB": 80.824,
+      "reserve_GB": 24
+    },
+    {
+      "batch": 64,
+      "repeat": 0,
+      "status": "skipped-insufficient-predicted-headroom",
+      "available_GB": 64.780603392,
+      "predicted_peak_GB": 106.432,
+      "reserve_GB": 24
+    },
+    {
+      "batch": 64,
+      "repeat": 1,
+      "status": "skipped-insufficient-predicted-headroom",
+      "available_GB": 64.780603392,
+      "predicted_peak_GB": 106.432,
+      "reserve_GB": 24
+    },
+    {
+      "batch": 32,
+      "repeat": 0,
+      "status": "skipped-insufficient-predicted-headroom",
+      "available_GB": 64.780603392,
+      "predicted_peak_GB": 55.216,
+      "reserve_GB": 24
+    },
+    {
+      "batch": 48,
+      "repeat": 0,
+      "status": "skipped-insufficient-predicted-headroom",
+      "available_GB": 61.497278464,
+      "predicted_peak_GB": 80.824,
+      "reserve_GB": 24
+    }
+  ],
+  "groups": [
+    {
+      "batch": 4,
+      "patches_per_second_mean": 14.620224552162473,
+      "two_run_range": [
+        14.529218491825963,
+        14.711230612498982
+      ],
+      "peak_CUDA_GB": 14.30632704
+    },
+    {
+      "batch": 8,
+      "patches_per_second_mean": 15.721992235524088,
+      "two_run_range": [
+        15.721120325745707,
+        15.722864145302468
+      ],
+      "peak_CUDA_GB": 16.647847424
+    },
+    {
+      "batch": 16,
+      "patches_per_second_mean": 15.810284842184958,
+      "two_run_range": [
+        15.72031746557474,
+        15.900252218795176
+      ],
+      "peak_CUDA_GB": 21.338857472
+    }
+  ],
+  "six_independent_60step_checkpoints_finite94model94EMA92Adam": true,
+  "all_original_data_and_frozen_source_hashes_verify": true,
+  "all_Decimal_timings_and_domain_counts_verify": true,
+  "CUDA_initialized_in_auditor": false,
+  "decision": "Retain production B16 and LR. B8 is a lower-memory near-tie candidate; this short two-repeat sweep establishes neither convergence nor a unique hardware optimum. B32/48/64 were memory-screened out, not measured. A future recipe needs its own quality comparison; no automatic batch/LR change.",
+  "scope": "Discarded60-update fixtures initialized from actual completed10000 EMA, not production continuation. Fifteen warmup/45 measured including selected-domain loading/augmentation/degradation/DINO/backward/AdamW/EMA; excludes startup/validation/checkpoint/audit. Shared hardware, whole-case CUDA allocation, two repeats not confidence intervals.",
+  "archived_auditor": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-training-sweep-workflow-v2/audit_raw_kernel_training_sweep_v2.py",
+    "sha256": "6f0b00e6cecf68824f23bcfe41541d1b9d31a2e6091ef60f4b5903e455cd6432"
+  }
+}

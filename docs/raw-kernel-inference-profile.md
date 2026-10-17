@@ -23,9 +23,13 @@ channels-last, and keeps the real256px prediction bitwise identical. No model
 numerical computation changed. Failed v1 sources/logs/status remain intact;
 the diagnosed recovery uses separate v2 directories and new exact owners.
 
-The v2 profiler and child have exited successfully. The RAW batch sweep is now
-running under PID3171937/creation1792232391.49; the conditional compiled follower
-is PID3174750/1792232630.49. Their status paths use suffixes
+The v2 profiler, [RAW batch sweep](raw-kernel-training-batch-sweep.md) and
+[compiled trial](raw-kernel-compiled-CUDA-trial.md) have completed and exited.
+The sweep finds only.56% more throughput at B16 than B8; production B16/LR stay
+unchanged. Compiled blocks exactly preserve these four outputs and reduce
+resident forward time by2.42%; the trial is parked without a production option.
+The closed sweep/compiled owners are PID3171937/creation1792232391.49 and
+PID3174750/1792232630.49. Their status paths use suffixes
 `training-sweep-workflow-v2.json` and `compiled-probe-workflow-v2.json` under
 `/mnt/external/demosaic/runs/raw-kernel-phase-joint-v67-full10k-`.
 Verify actual PID/creation/status before acting. The

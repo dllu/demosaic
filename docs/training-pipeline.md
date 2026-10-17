@@ -85,8 +85,10 @@ selection rebinning reads its supplied manifest instead of the changing index.
 ## Batch-size sweep
 
 The current joint RAW-kernel model has its own
-[queued batch sweep](raw-kernel-training-batch-sweep.md), preserving the
-production model/data/schedule with memory skips and discarded timing updates.
+[completed batch sweep](raw-kernel-training-batch-sweep.md): B4/B8/B16 average
+14.62/15.72/15.81patches/s including selected-domain loading and augmentation.
+B16 is only.56% above B8. B32/48/64 are memory skips, not measurements. The
+production model/data/schedule/LR remain unchanged; all timing updates are discarded.
 The earlier RGB-model measurements below do not settle its batch choice.
 
 `scripts/benchmark_training.py` runs fresh processes for batches 4/8/16/32/64,

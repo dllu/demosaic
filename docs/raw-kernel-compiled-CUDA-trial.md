@@ -1,18 +1,30 @@
 # Conditional neural-block compilation trial
 
-An isolated v2 CUDA trial is queued after the exact running RAW batch-sweep
-owner exits. The [actual final10000 CUDA profile](results/raw-kernel-inference-profile-recovery-v2.json)
-now supports the prespecified triage: trunk/unhooked median ratio.49142,
+The isolated final10000 CUDA trial is **complete** after the exact RAW batch
+sweep exited. Eager/compiled medians are371.329/362.356ms: **2.42% less resident
+forward time**, a small result that does not resolve the52.704s full-frame
+measurement or V67's quality rejection. Park the trial; add no production compile
+option/default. [Actual numerical/timing audit](results/raw-kernel-compiled-CUDA-trial-v2.json).
+
+All3,145,728 saved FP32 values, whole array-file hashes and all four per-image
+max/RMS differences match eager and the prior profiler reference **exactly**.
+Seven graphs/121 generated kernels execute; weights/config/model/DINO hash and
+measured RNG remain unchanged. Independent replay verifies eight ABBA/BAAB timing
+blocks, five forwards each, excluded switch warmups and both policy medians.
+Both policies retain the compiled cache; initial compilation/warmups12.33s are
+excluded. These shared-machine fixed-input samples are not full-frame timing,
+new image-quality results or broad numerical equivalence evidence.
+
+The [actual final10000 CUDA profile](results/raw-kernel-inference-profile-recovery-v2.json)
+meets the prespecified triage: trunk/unhooked median ratio.49142,
 add/ReLU/copy fraction.51154, all1,209 device activities independently mapped.
-**No CUDA compilation or compiled timing has executed yet.** The original v1
-chain exited after an observational hash-layout failure before profiling;
-its artifacts remain intact. The v2 follower is PID3174750/creation1792232630.49,
-status `/mnt/external/demosaic/runs/raw-kernel-phase-joint-v67-full10k-compiled-probe-workflow-v2.json`.
-It waits for the exact v2 batch owner PID3171937/1792232391.49 and reads the
-successful v2 profiler. Verify actual owners/status before acting. The
-compiled runner and existing CPU switching fixture are unchanged; only its
-observational helper now hashes channels-last singleton strides correctly,
-with separate actual full-model hash/output identity checks. The earlier
+The v2 controller PID3174750/creation1792232630.49 and child3219706/1792233051.44
+have exited successfully, status
+`/mnt/external/demosaic/runs/raw-kernel-phase-joint-v67-full10k-compiled-probe-workflow-v2.json`.
+The original v1 chain stopped on the observational hash-layout failure before
+profiling; its files remain intact. The fixed helper preserves canonical hashes;
+no model numerical computation changed. Sections below retain the protocol and
+earlier CPU preparation. The earlier
 [launch receipt and frozen plan](results/raw-kernel-compiled-CUDA-trial-queue.json)
 include the executed CPU checks. The [six-input CPU experiment](raw-kernel-inference-profile.md#neural-block-compilation-candidate)
 established local numerical agreement with the real reviewed step2000 weights.

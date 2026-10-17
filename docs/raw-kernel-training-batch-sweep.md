@@ -1,15 +1,40 @@
 # Current RAW-head training batch sweep
 
-The current RAW-kernel throughput sweep is **running** in an isolated v2
-directory after successful final10000 CUDA profiling. The original v1 owner
+The current RAW-kernel throughput sweep is **complete**: six actual GPU cases,
+two repeats each for batches4/8/16. Batches32/48/64 were explicitly skipped for
+insufficient predicted shared-memory headroom. **Retain production B16 and LR**;
+B8 is a lower-memory near-tie candidate, not an established quality improvement.
+[Measurements and independent source/log/checkpoint/Decimal timing audit](results/raw-kernel-training-batch-sweep-v2.json).
+
+| Batch | Mean patches/s | Two-run range | Peak CUDA GB |
+| ---: | ---: | --- | ---: |
+| 4 | 14.6202 | 14.5292–14.7112 | 14.3063 |
+| 8 | 15.7220 | 15.7211–15.7229 | 16.6478 |
+| 16 | 15.8103 | 15.7203–15.9003 | 21.3389 |
+
+B16 is8.14% above B4, but only.56% above B8; B8 uses22.0% less peak CUDA
+allocation than B16. The two-run ranges overlap. These shared-machine results
+do not establish a unique optimum or larger-batch quality/convergence. The old
+2GB figure described an earlier RGB model. These are whole-case CUDA peaks,
+not total unified system memory. B32/48/64 have no timing result.
+
+Every measured45-update window contains15 Commons/procedural,15 native-RAW
+synthetic and15 paired-RAW steps. All six fresh60-update checkpoints independently
+verify finite94 model/94 EMA/92 AdamW states, optimizer step60 and unchanged
+normalization buffers. Source/four manifest/initializer/config/log hashes,
+all warmup LRs and Decimal timing arithmetic verify. Actual-worker instrumentation
+also verifies exact initial EMA and frozen, gradient-free actual DINO tensors.
+No production continuation or quality evaluation is performed by this sweep.
+
+The isolated v2 directory follows successful final10000 CUDA profiling.
+The original v1 owner
 refused work when its profiler predecessor failed on observational tensor
 hashing; no v1 training fixture ran. The bug is fixed and the actual profiler
 completed. [Failure, executed correction and v2 launch](results/raw-kernel-inference-profile-recovery-v2.json).
-The v2 sweep owner is PID3171937/creation1792232391.49, status
+The v2 sweep owner PID3171937/creation1792232391.49 and its child have exited
+successfully; status
 `/mnt/external/demosaic/runs/raw-kernel-phase-joint-v67-full10k-training-sweep-workflow-v2.json`.
-Verify actual owner/status before acting. Partial cases are not a batch decision;
-the two-repeat comparison and independent arithmetic remain pending. Batch16
-stays unchanged in production. The [earlier sweep](current-pipeline-batch-sweep.md) measured the RGB
+Verify actual owner/status before acting. The [earlier sweep](current-pipeline-batch-sweep.md) measured the RGB
 restoration architecture; its numbers do not establish the best batch for this
 RAW head. [Frozen plan, CPU checks and launch receipt](results/raw-kernel-training-batch-sweep-queue.json).
 
