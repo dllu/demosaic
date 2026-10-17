@@ -1,0 +1,228 @@
+{
+  "status": "completed-actual-CUDA-head-only-engineering-review",
+  "execution": {
+    "status": "completed-discarded-B16-native256-CUDA-head-only-warmup-checks",
+    "plan": "/mnt/external/demosaic/benchmarks/raw-kernel-warmup-CUDA-preflight-v1/plan.json",
+    "plan_sha256": "763c546236efdf9f7a4569fa8f375114307e73d708794bdbf53e29508459652e",
+    "checkpoint": {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-warmup-CUDA-preflight-v1/actual-B16/last.pt",
+      "sha256": "432f2c1537a6577ffbb1f1d3641e0b4d091839621bca499a40b6bffa144982d3"
+    },
+    "source_bundle_sha256": "32a330278824bb0b06b27a7b00439d10a3d853966ee3864ceb96a99ff08ae1c0",
+    "initialization": {
+      "all_existing_parent_EMA_tensors_exact": true,
+      "only_new_tensors": [
+        "pretrained_rgb.raw_kernel.coefficients.bias",
+        "pretrained_rgb.raw_kernel.coefficients.weight"
+      ],
+      "actual_DINO_backbone_frozen": true,
+      "initial_GPU_BF16_output_exact_bilinear_not_parent_quality": true
+    },
+    "all91_existing_model_and_EMA_tensors_exact_to_parent": true,
+    "finite_model_tensors": 93,
+    "finite_EMA_tensors": 93,
+    "finite_AdamW_states": 2,
+    "training_observations": [
+      {
+        "event": "train",
+        "step": 1,
+        "loss": 0.06812064349651337,
+        "lr": 4.000000000000001e-06,
+        "grad_norm": 0.08230342715978622,
+        "seconds_per_step": 59.55609999992885,
+        "cuda_gb": 16.708914176,
+        "domain": "synthetic",
+        "linear": 0.035071246325969696,
+        "rendered": 0.03955616056919098,
+        "gradient": 0.037000518292188644,
+        "highlight": 0.07242687046527863,
+        "sensor": 0.023285778239369392,
+        "batch_sha256": "382199c1857e88ce4f72f291a03ff0af2274ba1a813e725e0e346c68338bdc53"
+      },
+      {
+        "event": "train",
+        "step": 2,
+        "loss": 0.028827553614974022,
+        "lr": 8.000000000000001e-06,
+        "grad_norm": 0.09165612608194351,
+        "seconds_per_step": 30.16740229050629,
+        "cuda_gb": 16.708914176,
+        "domain": "synthetic",
+        "linear": 0.009375407360494137,
+        "rendered": 0.02480544149875641,
+        "gradient": 0.026607301086187363,
+        "highlight": 0.037544135004282,
+        "sensor": 0.006342811044305563,
+        "batch_sha256": "66e247864be75a3ded322b6cd62fcff6507167d1a6ccefb8c3ca03d5bd32e028"
+      },
+      {
+        "event": "train",
+        "step": 3,
+        "loss": 0.0618213452398777,
+        "lr": 1.2e-05,
+        "grad_norm": 0.14781470596790314,
+        "seconds_per_step": 20.36519707568611,
+        "cuda_gb": 16.708914176,
+        "domain": "synthetic",
+        "linear": 0.03028404712677002,
+        "rendered": 0.0372728630900383,
+        "gradient": 0.029977085068821907,
+        "highlight": 0.07654289901256561,
+        "sensor": 0.022488698363304138,
+        "batch_sha256": "b2d52e42f854a0ce8a1c5dffa2464424839c058d4b0e362caaa3a8a79ad0289b"
+      },
+      {
+        "event": "train",
+        "step": 4,
+        "loss": 0.008254303596913815,
+        "lr": 1.6000000000000003e-05,
+        "grad_norm": 0.01861491985619068,
+        "seconds_per_step": 15.483749943494331,
+        "cuda_gb": 16.708914176,
+        "domain": "paired-RAW",
+        "paired_sensor": 0.0034173952881246805,
+        "paired_coarse_rendered": 0.008917969651520252,
+        "paired_auxiliary": 0.003779230173677206,
+        "batch_sha256": "1bee4bcd9c2c45cc7d31020abb5efd1f964bf37789abf77fdece3814e1526950"
+      },
+      {
+        "event": "train",
+        "step": 5,
+        "loss": 0.009550979360938072,
+        "lr": 2e-05,
+        "grad_norm": 0.025540141388773918,
+        "seconds_per_step": 12.540171455219388,
+        "cuda_gb": 16.708914176,
+        "domain": "paired-RAW",
+        "paired_sensor": 0.004327262286096811,
+        "paired_coarse_rendered": 0.009539532475173473,
+        "paired_auxiliary": 0.004539511166512966,
+        "batch_sha256": "93d8e61203ae1079681ae47c750b8c9db42c4321947886b7970a46b9850f0e64"
+      },
+      {
+        "event": "train",
+        "step": 6,
+        "loss": 0.062442347407341,
+        "lr": 2.4e-05,
+        "grad_norm": 0.12357845902442932,
+        "seconds_per_step": 10.583834074165983,
+        "cuda_gb": 16.708914176,
+        "domain": "synthetic",
+        "linear": 0.031531885266304016,
+        "rendered": 0.0391709990799427,
+        "gradient": 0.033260904252529144,
+        "highlight": 0.05810900777578354,
+        "sensor": 0.021879715844988823,
+        "batch_sha256": "62d75da96e6f5f22ce995df4d15a3e6ed4229bf8d0d81d24af23ff9c9bd11fd0"
+      },
+      {
+        "event": "train",
+        "step": 7,
+        "loss": 0.026530148461461067,
+        "lr": 2.8000000000000003e-05,
+        "grad_norm": 0.0348055437207222,
+        "seconds_per_step": 9.181269425699222,
+        "cuda_gb": 16.708914176,
+        "domain": "native-RAW-synthetic",
+        "linear": 0.005386186297982931,
+        "rendered": 0.028503723442554474,
+        "gradient": 0.028068386018276215,
+        "highlight": 0.03635545074939728,
+        "sensor": 0.004497166723012924,
+        "batch_sha256": "8a7e961087f479ece5094623b720ae91e75f19e88e794bda5a7458385ef1ca73"
+      }
+    ],
+    "portable_FP16_photos_and_optimizer_RNG_restore": [
+      {
+        "input": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+        "input_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+        "shape": [
+          1,
+          3,
+          256,
+          256
+        ],
+        "FP16_portable_EMA_exact": true
+      },
+      {
+        "input": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+        "input_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+        "shape": [
+          1,
+          3,
+          256,
+          256
+        ],
+        "FP16_portable_EMA_exact": true
+      }
+    ],
+    "B1_native256_BF16_head_gradient_norms": {
+      "pretrained_rgb.raw_kernel.coefficients.weight": 0.061411671340465546,
+      "pretrained_rgb.raw_kernel.coefficients.bias": 0.036289457231760025
+    },
+    "all_other_parameters_frozen_and_gradient_free": true,
+    "peak_cuda_allocated_bytes": 16708914176,
+    "driver_sha256": "4bb0b3db115c93dde8e7ca570d548e3cedd9458ef77b3ad3725227f6421625c2",
+    "scope": "Discarded seven-update engineering fixture only. Actual head-only optimizer/scope/EMA/gradient and physical FP32 head under BF16. No convergence, noisy-field unbiasedness, production throughput, deterministic CUDA restart or restoration-quality claim."
+  },
+  "independent_saved_state_audit": {
+    "status": "completed-independent-head-only-CUDA-state-audit",
+    "receipt": "/mnt/external/demosaic/benchmarks/raw-kernel-warmup-CUDA-preflight-v1/receipt.json",
+    "receipt_sha256": "5f06e8dbde02bf5a45517b5bdce2ff6ca9bcc3130f91abed1cc98f14746665bb",
+    "checkpoint": {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-warmup-CUDA-preflight-v1/actual-B16/last.pt",
+      "sha256": "432f2c1537a6577ffbb1f1d3641e0b4d091839621bca499a40b6bffa144982d3"
+    },
+    "archived_files_verified": 128,
+    "inputs_verified": 10,
+    "source_bundle_sha256": "32a330278824bb0b06b27a7b00439d10a3d853966ee3864ceb96a99ff08ae1c0",
+    "all91_existing_model_and_EMA_tensors_bitwise_parent": true,
+    "only_two_new_head_tensors_changed": true,
+    "finite_93model_93EMA_2Adam": true,
+    "all_recipe_source_and_seven_logs_exact": true,
+    "CUDA_initialized": false,
+    "driver_sha256": "f1cfe958ce688692c8a48ce0e72b70868c1b45dd7de0da6b8e1b15e18c339059",
+    "scope": "Read-only CPU check of discarded actual warmup GPU state. CUDA gradients/portable reconstruction are pinned executed receipt evidence, not rerun here. No quality or CUDA optimization repeatability claim."
+  },
+  "source_receipts": [
+    {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-warmup-CUDA-preflight-v1/plan.json",
+      "sha256": "763c546236efdf9f7a4569fa8f375114307e73d708794bdbf53e29508459652e"
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-warmup-CUDA-preflight-v1/receipt.json",
+      "sha256": "5f06e8dbde02bf5a45517b5bdce2ff6ca9bcc3130f91abed1cc98f14746665bb"
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-warmup-CUDA-preflight-v1/independent-saved-state-audit.json",
+      "sha256": "75b68fb7d3fe099ba3dba310c14e99a42d82c5db0a974343bd4b7d2e75df54e3"
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-warmup-CUDA-preflight-v1/CUDA-execution-v2.log",
+      "sha256": "cc124b968bf3828041fc1c4bacfbbe0d04e0bb932bebdf7ba59c180eed4effb8"
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-warmup-CUDA-preflight-v1/launch.json",
+      "sha256": "f18d6383c02fb588ab7b7631c9e53639b18f64d566ed4f9b5a73f037cd6fc1c1"
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-warmup-CUDA-preflight-v1/launch-v2.json",
+      "sha256": "f9aadf861868bc30540ca1008ea912a771a3485739a06cd929e50601ce4ba19a"
+    }
+  ],
+  "original_failed_attempt": {
+    "log": {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-warmup-CUDA-preflight-v1/CUDA-execution.log",
+      "sha256": "422b7f9c2a9acd1404c8640accbe6b9399c9739de4d33facb3c4c8919fa77013"
+    },
+    "reason": "Resolving the virtualenv Python symlink selected system Python without torch; import failed before CUDA/training. Corrected absolute venv invocation passed with the same frozen operator/source/fixture."
+  },
+  "independent_audit_first_attempt": {
+    "source": {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-warmup-CUDA-preflight-v1/independent-audit-first-attempt.py",
+      "sha256": "20f0c4515a80c1f4514ac45f86ef6310e655a863d958af7f5fc1f8a01473e310"
+    },
+    "reason": "A local comprehension variable shadowed the receipt dictionary during log comparison; corrected variable name passes without changing checks or rerunning training."
+  },
+  "limits": "Seven discarded actual B16/native256/BF16 updates, forced real Commons/workers0/val2. CPU deterministic restart is separately proven, not deterministic CUDA optimization. No quality or production throughput claim."
+}

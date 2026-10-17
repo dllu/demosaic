@@ -4,8 +4,9 @@ An optional reconstruction head now makes one useful physical property explicit:
 **a clean constant-color Bayer field retains its calibrated camera RGB, whatever
 features and kernel coefficients the network predicts.** CPU tests verify this
 to floating-point precision. This is an architectural constraint, not evidence
-of better denoising. The option is default-off; V63/V64 continue using their
-unchanged frozen model source and recipes.
+of better denoising. The option is default-off; V63/V64 retain their unchanged
+frozen model source and recipes. A separate [bounded head warmup](raw-kernel-warmup-v65.md)
+is now training after completed CPU/CUDA engineering checks.
 
 [Executed CPU checks, frozen candidate source and actual-parent state receipts](results/raw-kernel-CPU-preflight.json).
 [Implementation](../src/demosaic/raw_kernel.py).
@@ -183,8 +184,10 @@ numeric logs/input hashes. The new source bundle is
 `32a330278824bb0b06b27a7b00439d10a3d853966ee3864ceb96a99ff08ae1c0`.
 The complete CPU suite passes **534 tests, with 9 CUDA-related skips**; targeted
 RAW-head/trainer tests pass 37. These are numerical/engineering checks, not
-warmup convergence, GPU memory/throughput or model-quality evidence. No production
-warmup has launched. The completed default-route CUDA fixture retains its independent archived 411d
+warmup convergence, GPU memory/throughput or model-quality evidence. The
+[head-only CUDA fixture and bounded V65 launch](raw-kernel-warmup-v65.md) now
+provide separate execution evidence; trained quality remains pending.
+The completed default-route CUDA fixture retains its independent archived 411d
 source and has not silently switched to this option.
 
 ## Limits and required next evidence
@@ -202,10 +205,10 @@ training-only head warmup, and must account for that difference from a mature
 RGB decoder. Existing field diagnostics motivated the design; they are not blind
 quality evidence.
 
-Before any production trial: genuine CUDA/B16/native256 gradient/state/portable
-EMA and memory checks, followed by the full photo and measured-CFA development
-panels, weak carriers, fixed hue grid, false-detail tests and native real-camera
-review. Reports must include two native noisy/denoised/exact-GT photographic
+The genuine CUDA/B16/native256 gradient/state/portable EMA and memory checks have
+passed. The bounded head-only trial must next complete full photo and measured-CFA
+development panels, weak carriers, fixed hue grid, false-detail tests and native
+real-camera review before any joint stage. Reports must include two native noisy/denoised/exact-GT photographic
 triplets and all four standing DSCF3879/3880 regions with accurate non-GT labels.
 Do not alter the currently frozen data comparison or score protected-final data.
 General color repair, trained detail gain, CUDA speed and SOTA remain unproven.
