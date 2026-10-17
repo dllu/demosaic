@@ -337,3 +337,10 @@ queued after all final review jobs. A real-model CPU preflight verifies exact
 hooked/unhooked/traced outputs and unchanged model/DINO state; CUDA attribution
 remains pending. Existing full-frame timing records 51.694 seconds in compute/
 transfer and 0.245 seconds in blending. No optimization or sub-10-second result is claimed.
+
+The [fifth Commons snapshot](commons-incoming-v5.md) prepares 10,368 further
+downloaded candidates separately, excluding all 84,959 previous candidate/failure
+identities. Actual startup cache/license/attribution checks pass; protected and
+duplicate screening, complete cache/content review and matching 4× preparation
+remain pending. Active model and evaluation manifests stay fixed. More prepared
+data alone does not establish a trained quality gain.

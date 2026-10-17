@@ -1,5 +1,9 @@
 # Next Commons snapshot
 
+The [fifth snapshot](commons-incoming-v5.md) now prepares the next 10,368 arrivals
+separately. The completed fourth snapshot below remains unchanged and no active
+training manifest switches to incoming data.
+
 The 8× caches and membership review are complete. The CPU job prepared
 **10,022 of 10,024 additional downloaded images** into a
 separate 8× linear-light uint16 cache; two failed. Its identity screen quarantined
