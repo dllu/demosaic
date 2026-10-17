@@ -41,8 +41,10 @@ project matches its performance.
   The independent [RAW-native isotropic prototype](packed-isotropic.md) now
   rearranges packed CFA samples into quarter-resolution features, keeps a
   half-resolution phase-detail path and fuses genuine frozen DINOv3 ConvNeXt
-  features. Production-size mixed-data/checkpoint checks passed; quality is
-  unreviewed. Separate small-block compilation reduced synthetic forward time,
+  features. Production-size mixed-data/checkpoint checks passed. The
+  [first32,000-example review](packed-isotropic-first32000-review.md) finds weak
+  restoration close to bilinear; neither fresh endpoint is promoted. This is
+  only5% of the original training horizon. Separate small-block compilation reduced synthetic forward time,
   with no full-frame speedup or trained-model precision claim.
 * [FFNet, April 2026](https://doi.org/10.3390/math14071175)
   studies frequency-domain features for JDD. The

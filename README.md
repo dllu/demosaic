@@ -34,6 +34,8 @@ texture/color failures keep V43 as the working reference.
 The [fresh RAW-native models at32,000 examples](docs/packed-isotropic-first32000-review.md)
 remain close to bilinear, with substantial residual noise and51–54s full-frame times.
 Their original long training horizon is incomplete; neither replaces V43.
+[Full-state continuation](docs/packed-isotropic-production-learning.md#original-quality-trials-resume-with-full-state)
+now targets a review at one quarter of that original horizon.
 
 Native 160×160 validation crops: noisy → denoised → GT, using V43 step 2000
 (FP16, ISO12800 synthetic noise prior). These are 100% crops at the 8×8-binned

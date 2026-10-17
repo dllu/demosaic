@@ -25,7 +25,9 @@ The [experimental RAW-native backbone](packed-isotropic.md) retains the same
 geometry and selected-domain loading. Its completed sweep selects batch4 for
 that architecture; the older RGB model retains batch16. Both fresh models have
 completed their first32,000 examples; [primary quality results and native crops](packed-isotropic-first32000-review.md)
-show weak restoration. Neither is promoted, and no longer training run is active.
+show weak restoration. Neither is promoted. A
+[full-state continuation to a quarter of the original horizon](packed-isotropic-production-learning.md#original-quality-trials-resume-with-full-state)
+is running after separate training-only optimization checks; the recipe and data stay fixed.
 
 For seed45's first 1,000 steps, 514 select Commons/procedural, 230 paired RAW and
 256 native-RAW synthetic. Batch4 formerly consumed 4,000 Commons examples

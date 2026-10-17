@@ -1,0 +1,891 @@
+{
+  "status": "completed-discarded-production-learning-diagnostics-original-recipe-continuation-launched",
+  "receipt": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/receipt.json",
+    "sha256": "7a71e1091ddd94b37271b6ecfc11f3a9abc5845962fd41ce8e6b84c3358f7d22"
+  },
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/plan.json",
+    "sha256": "2a6ff1c014545f2573be502447a43067265416db8d6866b9a8bd62d1a35610dc"
+  },
+  "fixtures": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/fixtures.json",
+    "sha256": "628f5012ffda63e365bf31f74bb159ba30913d7cc3ced4e694527107c517c100"
+  },
+  "initial_feature_scales": {
+    "receipt": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-feature-scales-CPU-v1/receipt.json",
+      "sha256": "1eb468ce7678f351cfb6687b467bb2f84d20cfc1d880c350af29c817c2324102"
+    },
+    "summary": {
+      "paired": {
+        "median_raw_to_metadata_contribution_RMS_ratio": 0.22006992090640212,
+        "median_contribution_RMS": {
+          "raw": 0.06286395341157913,
+          "noise": 0.017546920105814934,
+          "metadata": 0.27485814690589905
+        }
+      },
+      "native": {
+        "median_raw_to_metadata_contribution_RMS_ratio": 0.3817392000567135,
+        "median_contribution_RMS": {
+          "raw": 0.10989100113511086,
+          "noise": 0.0195378502830863,
+          "metadata": 0.28740212321281433
+        }
+      },
+      "commons": {
+        "median_raw_to_metadata_contribution_RMS_ratio": 0.9296792707988515,
+        "median_contribution_RMS": {
+          "raw": 0.3365548849105835,
+          "noise": 0.023441992700099945,
+          "metadata": 0.31105750799179077
+        }
+      }
+    }
+  },
+  "checkpoint": {
+    "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-b4-v71-step8000.pt",
+    "sha256": "abd7345c080cb227d77385647c74614c0416d9316ad2f28c81c31cdd1f1697a2"
+  },
+  "production_steps": [
+    8001,
+    8002,
+    8003,
+    8004,
+    8005,
+    8006,
+    8007,
+    8008,
+    8009,
+    8010,
+    8011,
+    8012,
+    8013,
+    8014,
+    8015,
+    8016
+  ],
+  "examples": 64,
+  "domain_batches": {
+    "paired": 5,
+    "native": 4,
+    "commons": 7
+  },
+  "summary": [
+    {
+      "precision": "bfloat16",
+      "domain": "paired",
+      "initial": {
+        "loss": 0.009560427721589803,
+        "MSE": 3.858611435134662e-05,
+        "baseline_MSE": 3.859131811623229e-05,
+        "paired_sensor": 0.004186132550239563,
+        "paired_coarse_rendered": 0.009819472767412662,
+        "paired_auxiliary": 0.004645589645951987
+      },
+      "final": {
+        "loss": 0.009898019768297673,
+        "MSE": 3.955236497859005e-05,
+        "baseline_MSE": 3.859131811623229e-05,
+        "paired_sensor": 0.0042656744364649056,
+        "paired_coarse_rendered": 0.010320811159908771,
+        "paired_auxiliary": 0.0047193963546305895
+      },
+      "loss_ratio": 1.0353113957386555,
+      "MSE_ratio": 1.0250414078610044
+    },
+    {
+      "precision": "bfloat16",
+      "domain": "native",
+      "initial": {
+        "loss": 0.025145093444734812,
+        "MSE": 0.0005341610353752912,
+        "baseline_MSE": 0.0005350634660317155,
+        "linear": 0.006169988657347858,
+        "rendered": 0.020596026442945004,
+        "gradient": 0.020334390457719564,
+        "highlight": 0.06048971880227327,
+        "sensor": 0.005946803139522672
+      },
+      "final": {
+        "loss": 0.025735704228281975,
+        "MSE": 0.0005293941067066044,
+        "baseline_MSE": 0.0005350634660317155,
+        "linear": 0.006211749045178294,
+        "rendered": 0.021617409773170948,
+        "gradient": 0.0221116472966969,
+        "highlight": 0.0590676749125123,
+        "sensor": 0.0059731812216341496
+      },
+      "loss_ratio": 1.023488112495793,
+      "MSE_ratio": 0.9910758584902439
+    },
+    {
+      "precision": "bfloat16",
+      "domain": "commons",
+      "initial": {
+        "loss": 0.047468049983893125,
+        "MSE": 0.0030319055575611337,
+        "baseline_MSE": 0.0035076798397182885,
+        "linear": 0.021725687397910014,
+        "rendered": 0.03229720065636294,
+        "gradient": 0.03103849371629102,
+        "highlight": 0.048504699021577835,
+        "sensor": 0.016394427445318018
+      },
+      "final": {
+        "loss": 0.04453854928059237,
+        "MSE": 0.002589595356507094,
+        "baseline_MSE": 0.0035076798397182885,
+        "linear": 0.019205888700006262,
+        "rendered": 0.03212621621787548,
+        "gradient": 0.03275176856134619,
+        "highlight": 0.04547672798591001,
+        "sensor": 0.014467023911752872
+      },
+      "loss_ratio": 0.9382847893626388,
+      "MSE_ratio": 0.8541147827144608
+    },
+    {
+      "precision": "float32",
+      "domain": "paired",
+      "initial": {
+        "loss": 0.00955028012394905,
+        "MSE": 3.858851923723705e-05,
+        "baseline_MSE": 3.859131811623229e-05,
+        "paired_sensor": 0.004186259023845196,
+        "paired_coarse_rendered": 0.009798880014568568,
+        "paired_auxiliary": 0.004645808879286051
+      },
+      "final": {
+        "loss": 0.009928819630295039,
+        "MSE": 3.9455535443266854e-05,
+        "baseline_MSE": 3.859131811623229e-05,
+        "paired_sensor": 0.004293180210515857,
+        "paired_coarse_rendered": 0.010326587408781052,
+        "paired_auxiliary": 0.004723455896601081
+      },
+      "loss_ratio": 1.0396364820123687,
+      "MSE_ratio": 1.022468242450546
+    },
+    {
+      "precision": "float32",
+      "domain": "native",
+      "initial": {
+        "loss": 0.025141789577901363,
+        "MSE": 0.0005342563790691202,
+        "baseline_MSE": 0.0005350634660317155,
+        "linear": 0.006171277607791126,
+        "rendered": 0.020586879923939705,
+        "gradient": 0.02033001510426402,
+        "highlight": 0.060492717660963535,
+        "sensor": 0.005947988422121853
+      },
+      "final": {
+        "loss": 0.025791367515921593,
+        "MSE": 0.0005311287272888876,
+        "baseline_MSE": 0.0005350634660317155,
+        "linear": 0.006262264563702047,
+        "rendered": 0.021726717706769705,
+        "gradient": 0.021952970419079065,
+        "highlight": 0.058610230684280396,
+        "sensor": 0.006094236625358462
+      },
+      "loss_ratio": 1.025836583191802,
+      "MSE_ratio": 0.9941457848651576
+    },
+    {
+      "precision": "float32",
+      "domain": "commons",
+      "initial": {
+        "loss": 0.04745261770273958,
+        "MSE": 0.0030332645058349173,
+        "baseline_MSE": 0.0035076798397182885,
+        "linear": 0.021728823061234186,
+        "rendered": 0.03226474938648088,
+        "gradient": 0.03104116421725069,
+        "highlight": 0.048476463449852805,
+        "sensor": 0.01639657174902303
+      },
+      "final": {
+        "loss": 0.04556196369230747,
+        "MSE": 0.0026341382737362956,
+        "baseline_MSE": 0.0035076798397182885,
+        "linear": 0.019672691489436796,
+        "rendered": 0.03307137984250273,
+        "gradient": 0.03296405369681971,
+        "highlight": 0.04562488570809364,
+        "sensor": 0.014946876692452602
+      },
+      "loss_ratio": 0.9601570134175559,
+      "MSE_ratio": 0.8684169378137497
+    }
+  ],
+  "curves": {
+    "bfloat16": [
+      {
+        "step": 0,
+        "elapsed_seconds": 1.7403600211255252,
+        "domains": {
+          "paired": {
+            "loss": 0.009560427721589803,
+            "MSE": 3.858611435134662e-05,
+            "baseline_MSE": 3.859131811623229e-05,
+            "paired_sensor": 0.004186132550239563,
+            "paired_coarse_rendered": 0.009819472767412662,
+            "paired_auxiliary": 0.004645589645951987
+          },
+          "native": {
+            "loss": 0.025145093444734812,
+            "MSE": 0.0005341610353752912,
+            "baseline_MSE": 0.0005350634660317155,
+            "linear": 0.006169988657347858,
+            "rendered": 0.020596026442945004,
+            "gradient": 0.020334390457719564,
+            "highlight": 0.06048971880227327,
+            "sensor": 0.005946803139522672
+          },
+          "commons": {
+            "loss": 0.047468049983893125,
+            "MSE": 0.0030319055575611337,
+            "baseline_MSE": 0.0035076798397182885,
+            "linear": 0.021725687397910014,
+            "rendered": 0.03229720065636294,
+            "gradient": 0.03103849371629102,
+            "highlight": 0.048504699021577835,
+            "sensor": 0.016394427445318018
+          }
+        }
+      },
+      {
+        "step": 16,
+        "elapsed_seconds": 7.036912385141477,
+        "domains": {
+          "paired": {
+            "loss": 0.009618181083351374,
+            "MSE": 3.8877853512531146e-05,
+            "baseline_MSE": 3.859131811623229e-05,
+            "paired_sensor": 0.004213255783542991,
+            "paired_coarse_rendered": 0.00987588819116354,
+            "paired_auxiliary": 0.0046698106452822685
+          },
+          "native": {
+            "loss": 0.02533472701907158,
+            "MSE": 0.0005366172158574045,
+            "baseline_MSE": 0.0005350634660317155,
+            "linear": 0.0062309144996106625,
+            "rendered": 0.020831535570323467,
+            "gradient": 0.020437002182006836,
+            "highlight": 0.060443548951298,
+            "sensor": 0.005999905872158706
+          },
+          "commons": {
+            "loss": 0.047273525702101846,
+            "MSE": 0.0030440429649648388,
+            "baseline_MSE": 0.0035076798397182885,
+            "linear": 0.02171042105848236,
+            "rendered": 0.032152945707951276,
+            "gradient": 0.0312492379120418,
+            "highlight": 0.047208162556801526,
+            "sensor": 0.016408920554178103
+          }
+        }
+      },
+      {
+        "step": 64,
+        "elapsed_seconds": 14.582997847115621,
+        "domains": {
+          "paired": {
+            "loss": 0.010372533835470677,
+            "MSE": 3.885761216224637e-05,
+            "baseline_MSE": 3.859131811623229e-05,
+            "paired_sensor": 0.004224594496190548,
+            "paired_coarse_rendered": 0.011362528707832099,
+            "paired_auxiliary": 0.0046667458023875955
+          },
+          "native": {
+            "loss": 0.026579133234918118,
+            "MSE": 0.0005303282305249013,
+            "baseline_MSE": 0.0005350634660317155,
+            "linear": 0.00627382134553045,
+            "rendered": 0.022774918004870415,
+            "gradient": 0.02253842819482088,
+            "highlight": 0.06065558036789298,
+            "sensor": 0.005984536954201758
+          },
+          "commons": {
+            "loss": 0.04874793280448232,
+            "MSE": 0.002791109573861052,
+            "baseline_MSE": 0.0035076798397182885,
+            "linear": 0.020786080908562456,
+            "rendered": 0.03625291718968323,
+            "gradient": 0.03405401509787355,
+            "highlight": 0.04876009454684598,
+            "sensor": 0.015539819773818766
+          }
+        }
+      },
+      {
+        "step": 128,
+        "elapsed_seconds": 24.509624139172956,
+        "domains": {
+          "paired": {
+            "loss": 0.009730145800858736,
+            "MSE": 3.9073033985914665e-05,
+            "baseline_MSE": 3.859131811623229e-05,
+            "paired_sensor": 0.004234115872532129,
+            "paired_coarse_rendered": 0.010052961390465498,
+            "paired_auxiliary": 0.004695494798943401
+          },
+          "native": {
+            "loss": 0.026155779603868723,
+            "MSE": 0.0005250137173788971,
+            "baseline_MSE": 0.0005350634660317155,
+            "linear": 0.006261842441745102,
+            "rendered": 0.021922056563198566,
+            "gradient": 0.022651848383247852,
+            "highlight": 0.0606812727637589,
+            "sensor": 0.005995958868879825
+          },
+          "commons": {
+            "loss": 0.045713696628808975,
+            "MSE": 0.0027305597229444955,
+            "baseline_MSE": 0.0035076798397182885,
+            "linear": 0.01989843706334276,
+            "rendered": 0.032910886885864396,
+            "gradient": 0.032316570303269794,
+            "highlight": 0.046361399814486504,
+            "sensor": 0.014920202250193273
+          }
+        }
+      },
+      {
+        "step": 256,
+        "elapsed_seconds": 43.81215210608207,
+        "domains": {
+          "paired": {
+            "loss": 0.009727945644408464,
+            "MSE": 3.911553940270096e-05,
+            "baseline_MSE": 3.859131811623229e-05,
+            "paired_sensor": 0.004262930108234286,
+            "paired_coarse_rendered": 0.009991792868822813,
+            "paired_auxiliary": 0.004691190458834172
+          },
+          "native": {
+            "loss": 0.025621884502470493,
+            "MSE": 0.0005342321555872331,
+            "baseline_MSE": 0.0005350634660317155,
+            "linear": 0.006252703606151044,
+            "rendered": 0.021319543942809105,
+            "gradient": 0.021465560887008905,
+            "highlight": 0.0596161256544292,
+            "sensor": 0.006012403988279402
+          },
+          "commons": {
+            "loss": 0.04675377107092312,
+            "MSE": 0.002765769601994959,
+            "baseline_MSE": 0.0035076798397182885,
+            "linear": 0.020504948949175223,
+            "rendered": 0.03357281961611339,
+            "gradient": 0.03326444407658918,
+            "highlight": 0.045874140092304776,
+            "sensor": 0.015485548480812992
+          }
+        }
+      },
+      {
+        "step": 512,
+        "elapsed_seconds": 81.80532174115069,
+        "domains": {
+          "paired": {
+            "loss": 0.009898019768297673,
+            "MSE": 3.955236497859005e-05,
+            "baseline_MSE": 3.859131811623229e-05,
+            "paired_sensor": 0.0042656744364649056,
+            "paired_coarse_rendered": 0.010320811159908771,
+            "paired_auxiliary": 0.0047193963546305895
+          },
+          "native": {
+            "loss": 0.025735704228281975,
+            "MSE": 0.0005293941067066044,
+            "baseline_MSE": 0.0005350634660317155,
+            "linear": 0.006211749045178294,
+            "rendered": 0.021617409773170948,
+            "gradient": 0.0221116472966969,
+            "highlight": 0.0590676749125123,
+            "sensor": 0.0059731812216341496
+          },
+          "commons": {
+            "loss": 0.04453854928059237,
+            "MSE": 0.002589595356507094,
+            "baseline_MSE": 0.0035076798397182885,
+            "linear": 0.019205888700006262,
+            "rendered": 0.03212621621787548,
+            "gradient": 0.03275176856134619,
+            "highlight": 0.04547672798591001,
+            "sensor": 0.014467023911752872
+          }
+        }
+      }
+    ],
+    "float32": [
+      {
+        "step": 0,
+        "elapsed_seconds": 1.7500766809098423,
+        "domains": {
+          "paired": {
+            "loss": 0.00955028012394905,
+            "MSE": 3.858851923723705e-05,
+            "baseline_MSE": 3.859131811623229e-05,
+            "paired_sensor": 0.004186259023845196,
+            "paired_coarse_rendered": 0.009798880014568568,
+            "paired_auxiliary": 0.004645808879286051
+          },
+          "native": {
+            "loss": 0.025141789577901363,
+            "MSE": 0.0005342563790691202,
+            "baseline_MSE": 0.0005350634660317155,
+            "linear": 0.006171277607791126,
+            "rendered": 0.020586879923939705,
+            "gradient": 0.02033001510426402,
+            "highlight": 0.060492717660963535,
+            "sensor": 0.005947988422121853
+          },
+          "commons": {
+            "loss": 0.04745261770273958,
+            "MSE": 0.0030332645058349173,
+            "baseline_MSE": 0.0035076798397182885,
+            "linear": 0.021728823061234186,
+            "rendered": 0.03226474938648088,
+            "gradient": 0.03104116421725069,
+            "highlight": 0.048476463449852805,
+            "sensor": 0.01639657174902303
+          }
+        }
+      },
+      {
+        "step": 16,
+        "elapsed_seconds": 8.488912574015558,
+        "domains": {
+          "paired": {
+            "loss": 0.009618776012212038,
+            "MSE": 3.888745504809776e-05,
+            "baseline_MSE": 3.859131811623229e-05,
+            "paired_sensor": 0.004214200237765908,
+            "paired_coarse_rendered": 0.009875018149614334,
+            "paired_auxiliary": 0.004670667555183172
+          },
+          "native": {
+            "loss": 0.025345216039568186,
+            "MSE": 0.0005364918229133764,
+            "baseline_MSE": 0.0005350634660317155,
+            "linear": 0.0062306184554472566,
+            "rendered": 0.02084409072995186,
+            "gradient": 0.020479403901845217,
+            "highlight": 0.06044557923451066,
+            "sensor": 0.006000541092362255
+          },
+          "commons": {
+            "loss": 0.04728644713759422,
+            "MSE": 0.003044075636093372,
+            "baseline_MSE": 0.0035076798397182885,
+            "linear": 0.021712151755179678,
+            "rendered": 0.032158216195447106,
+            "gradient": 0.03132284911615508,
+            "highlight": 0.04721386464578765,
+            "sensor": 0.016415161280227557
+          }
+        }
+      },
+      {
+        "step": 64,
+        "elapsed_seconds": 22.532365350984037,
+        "domains": {
+          "paired": {
+            "loss": 0.009920222871005534,
+            "MSE": 3.873104960803175e-05,
+            "baseline_MSE": 3.859131811623229e-05,
+            "paired_sensor": 0.004206904140301049,
+            "paired_coarse_rendered": 0.010493829008191824,
+            "paired_auxiliary": 0.004664041148498654
+          },
+          "native": {
+            "loss": 0.0259117279201746,
+            "MSE": 0.0005308799272825127,
+            "baseline_MSE": 0.0005350634660317155,
+            "linear": 0.006206036312505603,
+            "rendered": 0.021802967879921198,
+            "gradient": 0.021279707551002502,
+            "highlight": 0.06081406772136688,
+            "sensor": 0.005948297795839608
+          },
+          "commons": {
+            "loss": 0.047263333573937416,
+            "MSE": 0.002783228265928171,
+            "baseline_MSE": 0.0035076798397182885,
+            "linear": 0.02065815803195749,
+            "rendered": 0.03402155211993626,
+            "gradient": 0.03135230392217636,
+            "highlight": 0.04911355301737785,
+            "sensor": 0.015478130363460098
+          }
+        }
+      },
+      {
+        "step": 128,
+        "elapsed_seconds": 40.898830534890294,
+        "domains": {
+          "paired": {
+            "loss": 0.010243481770157815,
+            "MSE": 3.8707261592207945e-05,
+            "baseline_MSE": 3.859131811623229e-05,
+            "paired_sensor": 0.00421164040453732,
+            "paired_coarse_rendered": 0.011131370533257723,
+            "paired_auxiliary": 0.00466156261973083
+          },
+          "native": {
+            "loss": 0.02615596540272236,
+            "MSE": 0.0005158654407750873,
+            "baseline_MSE": 0.0005350634660317155,
+            "linear": 0.006194907880853862,
+            "rendered": 0.022362888790667057,
+            "gradient": 0.02093338267877698,
+            "highlight": 0.06092441501095891,
+            "sensor": 0.005938335321843624
+          },
+          "commons": {
+            "loss": 0.04602745547890663,
+            "MSE": 0.0027369477601106545,
+            "baseline_MSE": 0.0035076798397182885,
+            "linear": 0.0199362890395735,
+            "rendered": 0.0337233381079776,
+            "gradient": 0.030802962503262928,
+            "highlight": 0.04653723165392876,
+            "sensor": 0.014954780128651432
+          }
+        }
+      },
+      {
+        "step": 256,
+        "elapsed_seconds": 76.1535661208909,
+        "domains": {
+          "paired": {
+            "loss": 0.01035119043663144,
+            "MSE": 3.9385124000546054e-05,
+            "baseline_MSE": 3.859131811623229e-05,
+            "paired_sensor": 0.004273894755169749,
+            "paired_coarse_rendered": 0.011210740357637406,
+            "paired_auxiliary": 0.00471925144083798
+          },
+          "native": {
+            "loss": 0.026115982327610254,
+            "MSE": 0.0005315995895216474,
+            "baseline_MSE": 0.0005350634660317155,
+            "linear": 0.0062594183254987,
+            "rendered": 0.022085433825850487,
+            "gradient": 0.02214131411164999,
+            "highlight": 0.06001240434125066,
+            "sensor": 0.005984763382002711
+          },
+          "commons": {
+            "loss": 0.04634259694388935,
+            "MSE": 0.0026838259904512335,
+            "baseline_MSE": 0.0035076798397182885,
+            "linear": 0.019915479834058454,
+            "rendered": 0.034284074125545363,
+            "gradient": 0.03251471130975655,
+            "highlight": 0.04536112131817,
+            "sensor": 0.014974973131237286
+          }
+        }
+      },
+      {
+        "step": 512,
+        "elapsed_seconds": 145.546064842958,
+        "domains": {
+          "paired": {
+            "loss": 0.009928819630295039,
+            "MSE": 3.9455535443266854e-05,
+            "baseline_MSE": 3.859131811623229e-05,
+            "paired_sensor": 0.004293180210515857,
+            "paired_coarse_rendered": 0.010326587408781052,
+            "paired_auxiliary": 0.004723455896601081
+          },
+          "native": {
+            "loss": 0.025791367515921593,
+            "MSE": 0.0005311287272888876,
+            "baseline_MSE": 0.0005350634660317155,
+            "linear": 0.006262264563702047,
+            "rendered": 0.021726717706769705,
+            "gradient": 0.021952970419079065,
+            "highlight": 0.058610230684280396,
+            "sensor": 0.006094236625358462
+          },
+          "commons": {
+            "loss": 0.04556196369230747,
+            "MSE": 0.0026341382737362956,
+            "baseline_MSE": 0.0035076798397182885,
+            "linear": 0.019672691489436796,
+            "rendered": 0.03307137984250273,
+            "gradient": 0.03296405369681971,
+            "highlight": 0.04562488570809364,
+            "sensor": 0.014946876692452602
+          }
+        }
+      }
+    ]
+  },
+  "scope": "Training-only optimization diagnosis. Same prepared train splits, original256px/B4/seed51/fractions/geometry/noise/WB/matrix/degradation/loss. Freeze actual CUDA-degraded observations once, then replay identical arrays across independent original-state precision arms.64 training examples, repeated noise draws: can memorize/overfit; not unseen-photo quality or production continuation. No held-out/private input, no saved learned weights, no promotion, no original checkpoint mutation.",
+  "learned_weights_discarded_not_saved": true,
+  "checkpoint_unchanged": true,
+  "next_isolation_plan": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-optimization-isolation-v1/plan.json",
+    "sha256": "78beb7ed358f0ee95b23d4232708ecad01a003930a237df9568f29d478542bec"
+  },
+  "optimization_isolation": {
+    "receipt": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-optimization-isolation-v1/receipt.json",
+      "sha256": "7214461116ec00ec0c878772a70afc6b6b6b586fd877926d81511b62a7fff8d5"
+    },
+    "plan": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-optimization-isolation-v1/plan.json",
+      "sha256": "78beb7ed358f0ee95b23d4232708ecad01a003930a237df9568f29d478542bec"
+    },
+    "summary": [
+      {
+        "arm": "single-commons-original-Adam",
+        "domain": "commons",
+        "optimized_batches": 1,
+        "initial_loss": 0.016390414908528328,
+        "final_loss": 0.012166907079517841,
+        "loss_ratio": 0.7423184310719985,
+        "initial_MSE": 4.419498145580292e-05,
+        "final_MSE": 3.108064993284643e-05,
+        "MSE_ratio": 0.7032619747544991
+      },
+      {
+        "arm": "single-paired-original-Adam",
+        "domain": "paired",
+        "optimized_batches": 1,
+        "initial_loss": 0.010632822290062904,
+        "final_loss": 0.008110148832201958,
+        "loss_ratio": 0.7627465795023626,
+        "initial_MSE": 5.205862544244155e-05,
+        "final_MSE": 3.919860682799481e-05,
+        "MSE_ratio": 0.7529704538844311
+      },
+      {
+        "arm": "all16-fresh-Adam",
+        "domain": "commons",
+        "optimized_batches": 7,
+        "initial_loss": 0.04746805051607745,
+        "final_loss": 0.045773311385086606,
+        "loss_ratio": 0.9642972670550934,
+        "initial_MSE": 0.0030319055575611337,
+        "final_MSE": 0.0026486061189124094,
+        "MSE_ratio": 0.8735780414753254
+      },
+      {
+        "arm": "all16-fresh-Adam",
+        "domain": "native",
+        "optimized_batches": 4,
+        "initial_loss": 0.025145093444734812,
+        "final_loss": 0.027054240461438894,
+        "loss_ratio": 1.0759252305385185,
+        "initial_MSE": 0.0005341610353752912,
+        "final_MSE": 0.0005283118071019999,
+        "MSE_ratio": 0.9890496912243294
+      },
+      {
+        "arm": "all16-fresh-Adam",
+        "domain": "paired",
+        "optimized_batches": 5,
+        "initial_loss": 0.009560427721589803,
+        "final_loss": 0.010335897654294967,
+        "loss_ratio": 1.0811124727143704,
+        "initial_MSE": 3.858611435134662e-05,
+        "final_MSE": 3.894179426424671e-05,
+        "MSE_ratio": 1.0092178214593321
+      },
+      {
+        "arm": "all16-raw-gain4-original-Adam",
+        "domain": "commons",
+        "optimized_batches": 7,
+        "initial_loss": 0.04746805051607745,
+        "final_loss": 0.045229817873665264,
+        "loss_ratio": 0.9528475971084152,
+        "initial_MSE": 0.0030319055575611337,
+        "final_MSE": 0.0026764812636039487,
+        "MSE_ratio": 0.882771977157795
+      },
+      {
+        "arm": "all16-raw-gain4-original-Adam",
+        "domain": "native",
+        "optimized_batches": 4,
+        "initial_loss": 0.025145093444734812,
+        "final_loss": 0.02628398034721613,
+        "loss_ratio": 1.0452926096689368,
+        "initial_MSE": 0.0005341610353752912,
+        "final_MSE": 0.0005238319399722968,
+        "MSE_ratio": 0.9806629560770238
+      },
+      {
+        "arm": "all16-raw-gain4-original-Adam",
+        "domain": "paired",
+        "optimized_batches": 5,
+        "initial_loss": 0.009560427721589803,
+        "final_loss": 0.010323286522179842,
+        "loss_ratio": 1.079793375652777,
+        "initial_MSE": 3.858611435134662e-05,
+        "final_MSE": 4.012573008367326e-05,
+        "MSE_ratio": 1.039900771513494
+      }
+    ],
+    "initial_gain_transformation": [
+      {
+        "arm": "all16-raw-gain4-original-Adam",
+        "max_initial_FP32_output_difference": 0.0,
+        "cases": 16
+      }
+    ],
+    "learned_weights_discarded_not_saved": true,
+    "checkpoint_unchanged": true
+  },
+  "quarter_continuation": {
+    "plan": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-workflow-v1/plan.json",
+      "sha256": "eb7dd31878e6fb5147025805a85c26b6e5ce27ff9b2ef4b47ea9de2add217d70"
+    },
+    "CPU_preflight": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-workflow-v1/CPU-preflight.json",
+      "sha256": "85bbc200b5326a5e9cc9c8f02c7e2eb5d576714da46de8f7491a6942e27126d5"
+    },
+    "launch_process": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-workflow-v1/controller-process.json",
+      "sha256": "0a06118c09a8a2932977e18f026a76eb5331c472cac5db35716ecc8bd91ee5ec"
+    },
+    "observed_status": {
+      "controller": {
+        "pid": 1745457,
+        "created": 1792274479.6,
+        "driver_sha256": "781820ef18a23498539e32efd11a93551f734bb148f81f506e373fdaa62e7fee"
+      },
+      "plan": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-workflow-v1/plan.json",
+        "sha256": "eb7dd31878e6fb5147025805a85c26b6e5ce27ff9b2ef4b47ea9de2add217d70"
+      },
+      "review_step": 40000,
+      "original_horizon": 160000,
+      "status": "training-original-recipe-to-quarter-review",
+      "updated_unix": 1792274481.3356524,
+      "arm": "no-dino",
+      "child": {
+        "pid": 1745464,
+        "created": 1792274481.29
+      }
+    },
+    "no_dino_actual_restore": {
+      "receipt": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-workflow-v1/no-dino-actual-restoration.json",
+        "sha256": "05c2490550fd606afe878bb2af53311b1438a1e1ed9671e22419fd3fd680b6f6"
+      },
+      "result": {
+        "model_optimizer_and_global_RNG_restored_before_first_update": true,
+        "initial_RAW_sha256": "daed54cfb66796ebe3f3a09ea1ffc5d72486442c2b97991b883d4b5e4167a774",
+        "restored_Adam_tensors": 852,
+        "EMA_restored_before_first_update": true
+      }
+    },
+    "scope": "Live continuation observation, not completed40k training or a quality result. DINO continuation starts only after no-DINO finishes and passes its boundary audit.",
+    "no_dino_first16_actual_observations": {
+      "receipt": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-workflow-v1/no-dino-first16-observations.json",
+        "sha256": "b0a51e478c72219983cd0d1304ff81392f0e5d15078b1c6170960f8f9265b564"
+      },
+      "result": [
+        {
+          "step": 8001,
+          "domain": "paired",
+          "batch_sha256": "c7974512b35bdb99cc3a0263d44ab7ff8aef5731c0fdd0454238760c7156ef8e"
+        },
+        {
+          "step": 8002,
+          "domain": "paired",
+          "batch_sha256": "c8a443f52c2356910ccddcefea78dc4839d00f6d4b8c35c2ec37a5afc5cc9247"
+        },
+        {
+          "step": 8003,
+          "domain": "native",
+          "batch_sha256": "74e5bbd0baef0c744b0272a75b66e1dcdfb07236692ac0e5d1749f48c6574449"
+        },
+        {
+          "step": 8004,
+          "domain": "native",
+          "batch_sha256": "de20e7b847f2a84bf653308fc137d83efece68dcc434eda863c25893042dc4e7"
+        },
+        {
+          "step": 8005,
+          "domain": "commons",
+          "batch_sha256": "fcc13823cd7d8318b9335a9b0ed17d202df41e4680088be417fa70e2935f0900"
+        },
+        {
+          "step": 8006,
+          "domain": "native",
+          "batch_sha256": "c2fc5e4a8591b2025797e815248320615c48e8c3f4b67a5d0fc6180f233f240c"
+        },
+        {
+          "step": 8007,
+          "domain": "commons",
+          "batch_sha256": "e3a87b141c424875e453ba70ab5e3e2df1dfffba554e10561a167a7b6c570c8c"
+        },
+        {
+          "step": 8008,
+          "domain": "native",
+          "batch_sha256": "8826fa50625f0d9008f07df028fb9818745a26fd842ce3327d16ff9af2a15c66"
+        },
+        {
+          "step": 8009,
+          "domain": "paired",
+          "batch_sha256": "9755fbf75c7a4690c4b30816f4fc18a7d28098b51bc029721142489a2ebc35d3"
+        },
+        {
+          "step": 8010,
+          "domain": "paired",
+          "batch_sha256": "f6f655cccf3815f4f2f6630272884ed01c4bc60548df8271d64bd59c1d11a448"
+        },
+        {
+          "step": 8011,
+          "domain": "commons",
+          "batch_sha256": "bd0d861b38c42eaf7c573c20f54c1cab93b10d07e86b49b873e4f2bb4e9a6d5a"
+        },
+        {
+          "step": 8012,
+          "domain": "commons",
+          "batch_sha256": "9853f596280b8cc380dcbdbed67bceb77aad57c42df00e62ea7d1e0fe24b6a94"
+        },
+        {
+          "step": 8013,
+          "domain": "commons",
+          "batch_sha256": "06afb99136310fadac1314ba1f82467fad47365d02de0bbc1b07b8aebfe1d5cc"
+        },
+        {
+          "step": 8014,
+          "domain": "paired",
+          "batch_sha256": "d5aab93d3871b77fb369f59e149d30342e0619e56c5f982bd9ca6f28c549fb0d"
+        },
+        {
+          "step": 8015,
+          "domain": "commons",
+          "batch_sha256": "a51bbef617d6d8fdfda9bb41c2a3fabda104d259cc9b8836fe7ffe33e0d6b37c"
+        },
+        {
+          "step": 8016,
+          "domain": "commons",
+          "batch_sha256": "ec06599a463669039537ebb02dd2146f2bddb7a3672d7141012b6881b2e3ae2e"
+        }
+      ]
+    },
+    "owner_and_child_verified_live_at_collection": true
+  }
+}

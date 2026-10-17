@@ -366,3 +366,12 @@ V71 EMA can learn the same easy synthetic fixture in FP32 and BF16, reducing
 MSE by about86% after128 updates. Its learned weights are discarded. This does
 not explain weak varied-photo learning or justify a production precision change.
 V43 stays the working and README reference; protected-final scenes remain unscored.
+
+The [production-training learning diagnosis](packed-isotropic-production-learning.md)
+then replays64 actual training examples. BF16 and FP32 are both weak on the mixed
+set; isolated batches learn more. Fresh Adam moments and a function-preserving
+RAW parameter rescaling do not produce a broad fix. All diagnostic weights are
+discarded. The unchanged original pair now resumes with full state in new branch
+run directories to an explicit40k-update review, a quarter of its original
+160k horizon. Actual no-DINO restore/RNG/EMA and first16 observation checks pass;
+DINO starts serially afterward. No new quality result or promotion is claimed.
