@@ -279,3 +279,13 @@ GFX captures. No fabricated camera-specific dark-noise model is added.
 The [official darktable5.6 release](https://www.darktable.org/2026/06/darktable-5.6.0-released/)
 names RawNIND UtNet2 as its default RAW AI model, already covered by our existing
 reference. That integration is not a separate independent restoration method.
+
+The [July2026 GALOSH paper](https://arxiv.org/abs/2607.03768) separates local
+Walsh–Hadamard luminance shrinkage from guided chroma filtering. Its
+[Apache-2.0 publisher implementation](https://github.com/luxgrain/GALOSH)
+has a [completed small CPU-port comparison](galosh-cpu-pilot.md) here. Two unused
+SSE helpers/headers need AArch64 guards; canonical processing remains unchanged,
+without original x86/GPU parity. A two-thread exact repeat fails by small floating
+differences; the separately rerun serial probe passes its repeat and full array/
+metric/native checks. Native crops lose cords/fence contrast despite noise
+removal, so no full benchmark, quality upgrade or GPU-speed claim follows.
