@@ -44,8 +44,8 @@ must be reviewed on its own merits before changing those comparisons. The
 including its low-noise procedural regression. This benchmark does not repair
 that failure or establish better restoration quality.
 
-The later joint RAW-kernel head changes compute and memory use. A
-[current-model sweep](raw-kernel-training-batch-sweep.md) is queued after its
-original10,000-update run and complete serial evaluations. The measurements
-above apply to the earlier RGB model; no new GPU result or batch change is
-claimed while that queue waits.
+The later joint RAW-kernel head changes compute and memory use. Its
+[completed sweep](raw-kernel-training-batch-sweep.md) measures B4/B8/B16 at
+14.62/15.72/15.81 patches/s; B32/48/64 were skipped for insufficient predicted
+memory headroom. B16 remains fixed. The table above applies to the earlier RGB
+model, so compare batches within each architecture rather than across tables.

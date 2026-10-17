@@ -7,6 +7,15 @@ selected global steps, starts workers on first use, and stops prefetch at the
 requested training endpoint. This removes discarded Commons augmentation while
 preserving original sample indices, domain decisions and physical noise draws.
 
+The three requested changes have now been measured: augmentation runs between
+the 4× and final 2× reductions, selected-domain loading removes discarded Commons
+batches, and batch16 remains the controlled setting after repeat throughput
+sweeps. The matched [augmentation quality comparison](geometry-corpus-v34-v36-review.md)
+improved full427-photo PSNR by .50990dB versus8×-then-geometry, with unchanged
+validation targets. The [RGB-pipeline sweep](current-pipeline-batch-sweep.md)
+found batch 32 only 1.3% faster than 16 while using roughly twice the CUDA allocation;
+the [later RAW-head sweep](raw-kernel-training-batch-sweep.md) also retained 16.
+
 For seed45's first 1,000 steps, 514 select Commons/procedural, 230 paired RAW and
 256 native-RAW synthetic. Batch4 formerly consumed 4,000 Commons examples
 (plus possible unused prefetched work);

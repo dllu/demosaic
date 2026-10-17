@@ -1,0 +1,5458 @@
+{
+  "status": "completed-pilot-all1176-hue-and-four-GFX-diagnostics-broad-screen-pending",
+  "reviewed_UTC": "2026-10-17T11:32:59.698631+00:00",
+  "decision": "Do not integrate or promote this fixed gate: bright-color mean improvement trades against increased spatial variation and five flat-grid group regressions. No meaningful detail gain in reviewed photos/GFX. Finish the already-running predeclared CPU screen; do not tune thresholds/windows on these observations.",
+  "checkpoint": {
+    "path": "/mnt/external/demosaic/models/dino-convnext-palette-wide-b16-v60-step4000.pt",
+    "sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e"
+  },
+  "operator": {
+    "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/source.py",
+    "sha256": "ede405608a182716c68a02523d8b80d5686ba875b7314b048ea5e65421bfce0f"
+  },
+  "actual_executions": {
+    "flat-moment-correction-CPU-v1": {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/result.json",
+      "sha256": "28597fadef811fcadd2ecc8958fc714cc5d63f081a2f2dfe4fa24cb527963199"
+    },
+    "flat-moment-saved-hue-grid-CPU-v1": {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-saved-hue-grid-CPU-v1/result.json",
+      "sha256": "954768adbb6de49aeaccb111d0826f6da65fe82ac496f64cd7e41c9876135e63"
+    },
+    "flat-moment-GFX-CPU-v1": {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-GFX-CPU-v1/result.json",
+      "sha256": "8e363337e1063f1d9463265934bc11c682a8e7067a048c9765cc006d045eb856"
+    }
+  },
+  "plans": {
+    "flat-moment-correction-CPU-v1": {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/plan.json",
+      "sha256": "5d01017561af5b0d6f8d19363a20b32175aa614401d2e7e33956c4b7c066947a"
+    },
+    "flat-moment-saved-hue-grid-CPU-v1": {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-saved-hue-grid-CPU-v1/plan.json",
+      "sha256": "d27c2586ec91f73572e830f6abe1375d5795524c814690b74db670f624f72d74"
+    },
+    "flat-moment-GFX-CPU-v1": {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-GFX-CPU-v1/plan.json",
+      "sha256": "70caac2703e4571351d22c12e9b3057fb2043d2817d406849c813345739a1d4d"
+    }
+  },
+  "fixed_policy": {
+    "created_UTC": "2026-10-17T11:12:16.083742+00:00",
+    "prior_result": {
+      "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/result.json",
+      "sha256": "e805aab45d2c33481f9fc58a4d739ce94e9051c589022620c948eeb5fabc91d5"
+    },
+    "checkpoint": {
+      "path": "/mnt/external/demosaic/models/dino-convnext-palette-wide-b16-v60-step4000.pt",
+      "sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e"
+    },
+    "packed_window": 33,
+    "sensor_support": "66 native pixels; actual in-bounds per-color counts, both greens pooled",
+    "flatness_threshold_std": 3,
+    "shared_gate": "minimum across all RGB flatness gates; zero if any window sensor sample clips white",
+    "correction": "Input-minus-predicted observed-CFA mean, multiplied by input-only flatness gate and smoothly expanded to native grid",
+    "acceptance_before_scores": "Neither fixed photo nor any of four selected uniform fields may worsen cameraRGB RMSE. Failure rejects this fixed pilot without parameter tuning or model integration.",
+    "scope": "Motivated small diagnostic; existing exact saved V60 CPU predictions, no new neural inference/training/GPU/RAW decode, no target-dependent method or blind-quality claim. Exact unclipped-PG moment variance is not a confidence guarantee or unbiased-restoration theorem."
+  },
+  "pilot_records": [
+    {
+      "case": {
+        "id": "exact-photo-0",
+        "kind": "photo",
+        "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+        "sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+        "noise": [
+          0.00256,
+          2.62144e-05
+        ],
+        "display_exposure": 1
+      },
+      "eager": {
+        "camera_RGB_RMSE": 0.024072195440469877,
+        "max_abs_channel_mean_bias": 0.03237464007054314
+      },
+      "corrected": {
+        "camera_RGB_RMSE": 0.024072195440469877,
+        "max_abs_channel_mean_bias": 0.03237464007054314
+      },
+      "mean_shared_gate": 0.004779472481459379,
+      "phase_statistics": [
+        {
+          "color": 0,
+          "mean_gate": 0.2946592824248758,
+          "zero_gate_fraction": 0.6046142578125,
+          "min_sample_count": 289,
+          "max_sample_count": 1089
+        },
+        {
+          "color": 1,
+          "mean_gate": 0.006755755573495512,
+          "zero_gate_fraction": 0.98443603515625,
+          "min_sample_count": 578,
+          "max_sample_count": 2178
+        },
+        {
+          "color": 2,
+          "mean_gate": 0.044735637661097505,
+          "zero_gate_fraction": 0.91265869140625,
+          "min_sample_count": 289,
+          "max_sample_count": 1089
+        }
+      ],
+      "output": {
+        "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/exact-photo-0-corrected-f32.npy",
+        "sha256": "6a1b2e4382eaa86d80104ba1fb84fc080b0d0f8f58a7c3133b25fad0b3e9fe51"
+      },
+      "gate": {
+        "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/exact-photo-0-gate-f32.npy",
+        "sha256": "449efddda79d4ba22f23fb77e89775b1474404a0476b42239229fdb1351d4b00"
+      }
+    },
+    {
+      "case": {
+        "id": "exact-photo-1",
+        "kind": "photo",
+        "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+        "sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+        "noise": [
+          0.00256,
+          2.62144e-05
+        ],
+        "display_exposure": 1
+      },
+      "eager": {
+        "camera_RGB_RMSE": 0.009392510296173037,
+        "max_abs_channel_mean_bias": 0.000525653177663763
+      },
+      "corrected": {
+        "camera_RGB_RMSE": 0.009392500425179518,
+        "max_abs_channel_mean_bias": 0.0005247347684587211
+      },
+      "mean_shared_gate": 0.021386992186307907,
+      "phase_statistics": [
+        {
+          "color": 0,
+          "mean_gate": 0.05091049253637089,
+          "zero_gate_fraction": 0.91412353515625,
+          "min_sample_count": 289,
+          "max_sample_count": 1089
+        },
+        {
+          "color": 1,
+          "mean_gate": 0.044506623475895714,
+          "zero_gate_fraction": 0.94000244140625,
+          "min_sample_count": 578,
+          "max_sample_count": 2178
+        },
+        {
+          "color": 2,
+          "mean_gate": 0.084381438165534,
+          "zero_gate_fraction": 0.8367919921875,
+          "min_sample_count": 289,
+          "max_sample_count": 1089
+        }
+      ],
+      "output": {
+        "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/exact-photo-1-corrected-f32.npy",
+        "sha256": "c3a1d788f1d68e345735432204d14a68dccbb2549bb1383e9939e934287707d1"
+      },
+      "gate": {
+        "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/exact-photo-1-gate-f32.npy",
+        "sha256": "d87e5cfc7301ce234920b08154259a9ccfbfe74fa67939f64cdd945a5afb8f81"
+      }
+    },
+    {
+      "case": {
+        "id": "neutral",
+        "palette": "neutral",
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/neutral-iso12800-prior-RGGB-observation.npz",
+        "sha256": "89c2c1c29cabdb9364b776bb6dd5ef4d217df98d41b94313baf260b1a0aa70a7",
+        "target_camera_RGB": [
+          0.09,
+          0.18,
+          0.12
+        ],
+        "draws_per_pattern": 1,
+        "kind": "analytic",
+        "original_case_index": 4,
+        "noise": [
+          0.00256,
+          2.62144e-05
+        ],
+        "display_exposure": 1
+      },
+      "eager": {
+        "camera_RGB_RMSE": 0.0007348794160431936,
+        "max_abs_channel_mean_bias": 0.0008263432251987979
+      },
+      "corrected": {
+        "camera_RGB_RMSE": 0.0007196628752017076,
+        "max_abs_channel_mean_bias": 0.0005364580891910009
+      },
+      "mean_shared_gate": 0.7416220307350159,
+      "phase_statistics": [
+        {
+          "color": 0,
+          "mean_gate": 0.8919632574029035,
+          "zero_gate_fraction": 0.0,
+          "min_sample_count": 289,
+          "max_sample_count": 1089
+        },
+        {
+          "color": 1,
+          "mean_gate": 0.9456660830868797,
+          "zero_gate_fraction": 0.0,
+          "min_sample_count": 578,
+          "max_sample_count": 2178
+        },
+        {
+          "color": 2,
+          "mean_gate": 0.8442466929546399,
+          "zero_gate_fraction": 6.103515625e-05,
+          "min_sample_count": 289,
+          "max_sample_count": 1089
+        }
+      ],
+      "output": {
+        "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/neutral-corrected-f32.npy",
+        "sha256": "b6054a9fcb833052698242fbe6d092c9ff05c90fe1de9a4d95ee139a5c1efbc0"
+      },
+      "gate": {
+        "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/neutral-gate-f32.npy",
+        "sha256": "5453f5d623b054960c6dbd1fa5d04fedab362385d2aa7c5b8eb6453af9d0d08e"
+      }
+    },
+    {
+      "case": {
+        "id": "fabric-mean",
+        "palette": "fabric-mean",
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-mean-iso12800-prior-RGGB-observation.npz",
+        "sha256": "7c2e2575b08152593e1678b2a58d763f79c53eb61a7fe8de43d4f33e25680438",
+        "target_camera_RGB": [
+          0.4460826468449295,
+          0.4224426811812077,
+          0.09690847238308323
+        ],
+        "draws_per_pattern": 1,
+        "kind": "analytic",
+        "original_case_index": 12,
+        "noise": [
+          0.00256,
+          2.62144e-05
+        ],
+        "display_exposure": 1
+      },
+      "eager": {
+        "camera_RGB_RMSE": 0.03663288696137318,
+        "max_abs_channel_mean_bias": 0.06033804877661168
+      },
+      "corrected": {
+        "camera_RGB_RMSE": 0.012186394315552632,
+        "max_abs_channel_mean_bias": 0.014778084391728043
+      },
+      "mean_shared_gate": 0.7583820223808289,
+      "phase_statistics": [
+        {
+          "color": 0,
+          "mean_gate": 0.8684057677105679,
+          "zero_gate_fraction": 0.0,
+          "min_sample_count": 289,
+          "max_sample_count": 1089
+        },
+        {
+          "color": 1,
+          "mean_gate": 0.8860736631527664,
+          "zero_gate_fraction": 0.00030517578125,
+          "min_sample_count": 578,
+          "max_sample_count": 2178
+        },
+        {
+          "color": 2,
+          "mean_gate": 0.891915360640471,
+          "zero_gate_fraction": 0.0,
+          "min_sample_count": 289,
+          "max_sample_count": 1089
+        }
+      ],
+      "output": {
+        "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/fabric-mean-corrected-f32.npy",
+        "sha256": "015b6b72c2880fba7083acf7bb695095e224bc41206a7774d570569397282e1c"
+      },
+      "gate": {
+        "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/fabric-mean-gate-f32.npy",
+        "sha256": "e224a9f3a1db869702e960317ddc752ab6c9fb1ffb0d8c765fb62fe89f94ef6f"
+      }
+    },
+    {
+      "case": {
+        "id": "fabric-cyclic-gbr",
+        "palette": "fabric-cyclic-gbr",
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-cyclic-gbr-iso12800-prior-RGGB-observation.npz",
+        "sha256": "f9f0bc3ddfb1a62251e94d929083061861ed99e70d1fb197c822484042b8f68a",
+        "target_camera_RGB": [
+          0.4224426811812077,
+          0.09690847238308323,
+          0.4460826468449295
+        ],
+        "draws_per_pattern": 1,
+        "kind": "analytic",
+        "original_case_index": 20,
+        "noise": [
+          0.00256,
+          2.62144e-05
+        ],
+        "display_exposure": 1
+      },
+      "eager": {
+        "camera_RGB_RMSE": 0.020477079480528956,
+        "max_abs_channel_mean_bias": 0.030989582162583247
+      },
+      "corrected": {
+        "camera_RGB_RMSE": 0.007389723065688205,
+        "max_abs_channel_mean_bias": 0.008463601232506335
+      },
+      "mean_shared_gate": 0.7086961269378662,
+      "phase_statistics": [
+        {
+          "color": 0,
+          "mean_gate": 0.9144198118163818,
+          "zero_gate_fraction": 0.0,
+          "min_sample_count": 289,
+          "max_sample_count": 1089
+        },
+        {
+          "color": 1,
+          "mean_gate": 0.8221345823587525,
+          "zero_gate_fraction": 0.00335693359375,
+          "min_sample_count": 578,
+          "max_sample_count": 2178
+        },
+        {
+          "color": 2,
+          "mean_gate": 0.9017457726457987,
+          "zero_gate_fraction": 0.0,
+          "min_sample_count": 289,
+          "max_sample_count": 1089
+        }
+      ],
+      "output": {
+        "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/fabric-cyclic-gbr-corrected-f32.npy",
+        "sha256": "f1b07948c551981b25386c3cb551fca5aef1b7a85087f7837fb00169a5756e24"
+      },
+      "gate": {
+        "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/fabric-cyclic-gbr-gate-f32.npy",
+        "sha256": "fd57a43ecf6d545b328745d8dafe43896090d2096e544f7095efe1d070bf5ea4"
+      }
+    },
+    {
+      "case": {
+        "id": "fabric-cyclic-brg",
+        "palette": "fabric-cyclic-brg",
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-cyclic-brg-iso12800-prior-RGGB-observation.npz",
+        "sha256": "d88558737afb8d01dec4945c4d32dcd676da36fa4fe9f770d9bdf04941b4ab0b",
+        "target_camera_RGB": [
+          0.09690847238308323,
+          0.4460826468449295,
+          0.4224426811812077
+        ],
+        "draws_per_pattern": 1,
+        "kind": "analytic",
+        "original_case_index": 28,
+        "noise": [
+          0.00256,
+          2.62144e-05
+        ],
+        "display_exposure": 1
+      },
+      "eager": {
+        "camera_RGB_RMSE": 0.0027855693301210645,
+        "max_abs_channel_mean_bias": 0.0028467273150454275
+      },
+      "corrected": {
+        "camera_RGB_RMSE": 0.0021046545420734665,
+        "max_abs_channel_mean_bias": 0.0009758228206192143
+      },
+      "mean_shared_gate": 0.7630593776702881,
+      "phase_statistics": [
+        {
+          "color": 0,
+          "mean_gate": 0.9403112163352753,
+          "zero_gate_fraction": 0.0,
+          "min_sample_count": 289,
+          "max_sample_count": 1089
+        },
+        {
+          "color": 1,
+          "mean_gate": 0.8768375252368379,
+          "zero_gate_fraction": 0.0,
+          "min_sample_count": 578,
+          "max_sample_count": 2178
+        },
+        {
+          "color": 2,
+          "mean_gate": 0.866879381591263,
+          "zero_gate_fraction": 0.0042724609375,
+          "min_sample_count": 289,
+          "max_sample_count": 1089
+        }
+      ],
+      "output": {
+        "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/fabric-cyclic-brg-corrected-f32.npy",
+        "sha256": "160cfed75b35ddacc6a06dd3958e02f75f209ad5deb63e3406b0b5eab69261bd"
+      },
+      "gate": {
+        "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/fabric-cyclic-brg-gate-f32.npy",
+        "sha256": "a373787adf8ac65c4843a57245f743c614264411e3e0127ab22e57dac254ef7e"
+      }
+    }
+  ],
+  "pilot_acceptance_rule_passed": true,
+  "independent_pilot_camera_metric_scalars": 24,
+  "independent_pilot_metric_replay": [
+    {
+      "case": "exact-photo-0",
+      "method": "eager",
+      "metrics": {
+        "camera_RGB_RMSE": 0.024072195440469877,
+        "max_abs_channel_mean_bias": 0.03237464007054314
+      }
+    },
+    {
+      "case": "exact-photo-0",
+      "method": "corrected",
+      "metrics": {
+        "camera_RGB_RMSE": 0.024072195440469877,
+        "max_abs_channel_mean_bias": 0.03237464007054314
+      }
+    },
+    {
+      "case": "exact-photo-1",
+      "method": "eager",
+      "metrics": {
+        "camera_RGB_RMSE": 0.009392510296173037,
+        "max_abs_channel_mean_bias": 0.000525653177663763
+      }
+    },
+    {
+      "case": "exact-photo-1",
+      "method": "corrected",
+      "metrics": {
+        "camera_RGB_RMSE": 0.009392500425179516,
+        "max_abs_channel_mean_bias": 0.0005247347684587211
+      }
+    },
+    {
+      "case": "neutral",
+      "method": "eager",
+      "metrics": {
+        "camera_RGB_RMSE": 0.0007348794160431936,
+        "max_abs_channel_mean_bias": 0.0008263432251987979
+      }
+    },
+    {
+      "case": "neutral",
+      "method": "corrected",
+      "metrics": {
+        "camera_RGB_RMSE": 0.0007196628752017076,
+        "max_abs_channel_mean_bias": 0.0005364580891910009
+      }
+    },
+    {
+      "case": "fabric-mean",
+      "method": "eager",
+      "metrics": {
+        "camera_RGB_RMSE": 0.03663288696137318,
+        "max_abs_channel_mean_bias": 0.06033804877661168
+      }
+    },
+    {
+      "case": "fabric-mean",
+      "method": "corrected",
+      "metrics": {
+        "camera_RGB_RMSE": 0.012186394315552632,
+        "max_abs_channel_mean_bias": 0.014778084391728043
+      }
+    },
+    {
+      "case": "fabric-cyclic-gbr",
+      "method": "eager",
+      "metrics": {
+        "camera_RGB_RMSE": 0.020477079480528956,
+        "max_abs_channel_mean_bias": 0.030989582162583247
+      }
+    },
+    {
+      "case": "fabric-cyclic-gbr",
+      "method": "corrected",
+      "metrics": {
+        "camera_RGB_RMSE": 0.007389723065688205,
+        "max_abs_channel_mean_bias": 0.008463601232506335
+      }
+    },
+    {
+      "case": "fabric-cyclic-brg",
+      "method": "eager",
+      "metrics": {
+        "camera_RGB_RMSE": 0.0027855693301210645,
+        "max_abs_channel_mean_bias": 0.0028467273150454275
+      }
+    },
+    {
+      "case": "fabric-cyclic-brg",
+      "method": "corrected",
+      "metrics": {
+        "camera_RGB_RMSE": 0.0021046545420734665,
+        "max_abs_channel_mean_bias": 0.0009758228206192143
+      }
+    }
+  ],
+  "independent_math": {
+    "receipt": {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/independent-math-audit.json",
+      "sha256": "e9275f55054b53811da61c387746673d5207fbc060647b9e001c9b4ad6fa679a"
+    },
+    "result": {
+      "status": "completed-independent-flat-moment-CPU-arithmetic-and-limiting-case-audit",
+      "operator_sha256": "ede405608a182716c68a02523d8b80d5686ba875b7314b048ea5e65421bfce0f",
+      "auditor_sha256": "5430321134fc12bc99110435f492a5dae7af62a79f27572831434d120ee4d5ab",
+      "cases": [
+        {
+          "pattern": "RGGB",
+          "three_explicit_Numpy64_window_and_interpolation_oracles_pass": true,
+          "clean_constant_bias_recovery_max_error": 0.0,
+          "white_clipping_identity_exact": true,
+          "strong_texture_identity_exact": true
+        },
+        {
+          "pattern": "BGGR",
+          "three_explicit_Numpy64_window_and_interpolation_oracles_pass": true,
+          "clean_constant_bias_recovery_max_error": 0.0,
+          "white_clipping_identity_exact": true,
+          "strong_texture_identity_exact": true
+        },
+        {
+          "pattern": "GRBG",
+          "three_explicit_Numpy64_window_and_interpolation_oracles_pass": true,
+          "clean_constant_bias_recovery_max_error": 0.0,
+          "white_clipping_identity_exact": true,
+          "strong_texture_identity_exact": true
+        },
+        {
+          "pattern": "GBRG",
+          "three_explicit_Numpy64_window_and_interpolation_oracles_pass": true,
+          "clean_constant_bias_recovery_max_error": 0.0,
+          "white_clipping_identity_exact": true,
+          "strong_texture_identity_exact": true
+        }
+      ],
+      "max_absolute_window_and_interpolation_error": 0.0,
+      "moment_experiment": {
+        "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/moment-checks.json",
+        "sha256": "d2f4bdc3658b0eb75bbc16a7277aac99c5f49a20d0aa5b0d8d6ce10891de19d7",
+        "groups": 16,
+        "draws_per_group": 4096
+      },
+      "CUDA_initialized": false,
+      "scope": "Arithmetic/oracle/limiting cases only; no neural inference, trained quality, exact statistical tail coverage or unbiased noisy restoration claim."
+    }
+  },
+  "moment_checks": {
+    "artifact": {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/moment-checks.json",
+      "sha256": "d2f4bdc3658b0eb75bbc16a7277aac99c5f49a20d0aa5b0d8d6ce10891de19d7"
+    },
+    "results": [
+      {
+        "samples": 64,
+        "draws": 4096,
+        "shot": 0.0002,
+        "read": 0.0,
+        "mean": 0.005,
+        "empirical_over_exact_variance": 1.0041124056058162,
+        "mean_D_over_exact_std": -0.0027321524296822705
+      },
+      {
+        "samples": 64,
+        "draws": 4096,
+        "shot": 0.0002,
+        "read": 0.0,
+        "mean": 0.18,
+        "empirical_over_exact_variance": 1.0098306642021075,
+        "mean_D_over_exact_std": 0.005143281193103628
+      },
+      {
+        "samples": 64,
+        "draws": 4096,
+        "shot": 0.0002,
+        "read": 2.62144e-05,
+        "mean": 0.005,
+        "empirical_over_exact_variance": 0.9614260728402063,
+        "mean_D_over_exact_std": -0.025035066832346506
+      },
+      {
+        "samples": 64,
+        "draws": 4096,
+        "shot": 0.0002,
+        "read": 2.62144e-05,
+        "mean": 0.18,
+        "empirical_over_exact_variance": 0.9800079110396521,
+        "mean_D_over_exact_std": -0.002870197989930764
+      },
+      {
+        "samples": 64,
+        "draws": 4096,
+        "shot": 0.00256,
+        "read": 0.0,
+        "mean": 0.005,
+        "empirical_over_exact_variance": 0.9371535789579579,
+        "mean_D_over_exact_std": -0.03221924750320527
+      },
+      {
+        "samples": 64,
+        "draws": 4096,
+        "shot": 0.00256,
+        "read": 0.0,
+        "mean": 0.18,
+        "empirical_over_exact_variance": 0.9728775286358056,
+        "mean_D_over_exact_std": -0.017822471741988703
+      },
+      {
+        "samples": 64,
+        "draws": 4096,
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "mean": 0.005,
+        "empirical_over_exact_variance": 0.9858405272288738,
+        "mean_D_over_exact_std": -0.028012134586299874
+      },
+      {
+        "samples": 64,
+        "draws": 4096,
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "mean": 0.18,
+        "empirical_over_exact_variance": 1.031631968132968,
+        "mean_D_over_exact_std": 0.016990105419638676
+      },
+      {
+        "samples": 1089,
+        "draws": 4096,
+        "shot": 0.0002,
+        "read": 0.0,
+        "mean": 0.005,
+        "empirical_over_exact_variance": 0.9989959206801907,
+        "mean_D_over_exact_std": 0.0107102599345597
+      },
+      {
+        "samples": 1089,
+        "draws": 4096,
+        "shot": 0.0002,
+        "read": 0.0,
+        "mean": 0.18,
+        "empirical_over_exact_variance": 1.0063011344711972,
+        "mean_D_over_exact_std": 0.01237302466260368
+      },
+      {
+        "samples": 1089,
+        "draws": 4096,
+        "shot": 0.0002,
+        "read": 2.62144e-05,
+        "mean": 0.005,
+        "empirical_over_exact_variance": 0.9830089926207659,
+        "mean_D_over_exact_std": -0.0031068079095975722
+      },
+      {
+        "samples": 1089,
+        "draws": 4096,
+        "shot": 0.0002,
+        "read": 2.62144e-05,
+        "mean": 0.18,
+        "empirical_over_exact_variance": 1.0536118637957848,
+        "mean_D_over_exact_std": 0.01384091863024161
+      },
+      {
+        "samples": 1089,
+        "draws": 4096,
+        "shot": 0.00256,
+        "read": 0.0,
+        "mean": 0.005,
+        "empirical_over_exact_variance": 0.9919893735918229,
+        "mean_D_over_exact_std": 0.00033993610164610906
+      },
+      {
+        "samples": 1089,
+        "draws": 4096,
+        "shot": 0.00256,
+        "read": 0.0,
+        "mean": 0.18,
+        "empirical_over_exact_variance": 1.032060862041263,
+        "mean_D_over_exact_std": -0.034032061900183416
+      },
+      {
+        "samples": 1089,
+        "draws": 4096,
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "mean": 0.005,
+        "empirical_over_exact_variance": 1.0413643401695087,
+        "mean_D_over_exact_std": -0.01574405785582597
+      },
+      {
+        "samples": 1089,
+        "draws": 4096,
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "mean": 0.18,
+        "empirical_over_exact_variance": 0.9740481304606151,
+        "mean_D_over_exact_std": 0.005284712361138566
+      }
+    ]
+  },
+  "all1176_hue": {
+    "cases": 1176,
+    "actual_new_neural_forwards": 0,
+    "original_array_runtime": "Retained original CUDA neural FP16/physical FP32 outputs",
+    "postprocess_runtime": "CPU FP64 moments, FP32 additive output; no CUDA",
+    "checked_metric_fields": 14112,
+    "max_independent_metric_difference": 2.220446049250313e-16,
+    "group_comparisons": [
+      {
+        "condition": "adc-only",
+        "saturation": 0.0,
+        "peak": 0.02,
+        "original": {
+          "max_abs_channel_mean_error": {
+            "mean": 7.085215665938449e-06,
+            "median": 7.4927587047568525e-06,
+            "p95": 8.094137821899493e-06,
+            "maximum": 8.154603419825434e-06
+          },
+          "camera_RGB_RMSE": {
+            "mean": 7.617197183577875e-06,
+            "median": 7.721674922364425e-06,
+            "p95": 8.27270494526705e-06,
+            "maximum": 8.361465320700212e-06
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 5.278786566262616e-06,
+            "median": 5.210112120537302e-06,
+            "p95": 5.518089232415305e-06,
+            "maximum": 5.563226505748179e-06
+          }
+        },
+        "corrected": {
+          "max_abs_channel_mean_error": {
+            "mean": 7.716389791312394e-06,
+            "median": 7.871202997193905e-06,
+            "p95": 8.472610315948258e-06,
+            "maximum": 8.574894418416078e-06
+          },
+          "camera_RGB_RMSE": {
+            "mean": 7.963446322585459e-06,
+            "median": 8.03082778254835e-06,
+            "p95": 8.61297363341968e-06,
+            "maximum": 8.684303974981903e-06
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 5.174842258438746e-06,
+            "median": 5.113010296014955e-06,
+            "p95": 5.410973744734107e-06,
+            "maximum": 5.454242580014406e-06
+          }
+        }
+      },
+      {
+        "condition": "adc-only",
+        "saturation": 0.0,
+        "peak": 0.18,
+        "original": {
+          "max_abs_channel_mean_error": {
+            "mean": 9.782674358575605e-05,
+            "median": 9.91151767084375e-05,
+            "p95": 0.00010583987014251761,
+            "maximum": 0.00010641892091371118
+          },
+          "camera_RGB_RMSE": {
+            "mean": 7.34305252634775e-05,
+            "median": 7.484089983587707e-05,
+            "p95": 7.70238252629769e-05,
+            "maximum": 7.733119848677807e-05
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 3.3340223257116966e-05,
+            "median": 3.266747262431965e-05,
+            "p95": 3.539312156672792e-05,
+            "maximum": 3.581232400110498e-05
+          }
+        },
+        "corrected": {
+          "max_abs_channel_mean_error": {
+            "mean": 2.2179229999892415e-05,
+            "median": 2.219183079432696e-05,
+            "p95": 2.8536467885714953e-05,
+            "maximum": 2.8949627303518355e-05
+          },
+          "camera_RGB_RMSE": {
+            "mean": 3.6059496825846605e-05,
+            "median": 3.5269716805525056e-05,
+            "p95": 3.910099320435539e-05,
+            "maximum": 3.974505691140872e-05
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 3.257281535385124e-05,
+            "median": 3.19084468255673e-05,
+            "p95": 3.461692763924752e-05,
+            "maximum": 3.5033318089285856e-05
+          }
+        }
+      },
+      {
+        "condition": "adc-only",
+        "saturation": 0.0,
+        "peak": 0.9,
+        "original": {
+          "max_abs_channel_mean_error": {
+            "mean": 0.0011986254423391077,
+            "median": 0.0011898294801358134,
+            "p95": 0.001239238579524681,
+            "maximum": 0.001245711345691234
+          },
+          "camera_RGB_RMSE": {
+            "mean": 0.0007737850688222855,
+            "median": 0.0007698649523943176,
+            "p95": 0.0007889874733626629,
+            "maximum": 0.0007914826031665364
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 0.00012078215399998885,
+            "median": 0.00011829675698386161,
+            "p95": 0.00013135722934956806,
+            "maximum": 0.0001331916827650512
+          }
+        },
+        "corrected": {
+          "max_abs_channel_mean_error": {
+            "mean": 8.495722606312484e-05,
+            "median": 7.533380819950253e-05,
+            "p95": 0.00013246118451934306,
+            "maximum": 0.00014141013496555389
+          },
+          "camera_RGB_RMSE": {
+            "mean": 0.0001318064538008921,
+            "median": 0.00012726062624338215,
+            "p95": 0.00015375448133345417,
+            "maximum": 0.00015829337699221994
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 0.00011838463326577779,
+            "median": 0.00011599513441123003,
+            "p95": 0.00012908233790447294,
+            "maximum": 0.0001309622335731945
+          }
+        }
+      },
+      {
+        "condition": "adc-only",
+        "saturation": 0.5,
+        "peak": 0.02,
+        "original": {
+          "max_abs_channel_mean_error": {
+            "mean": 1.2632743581661998e-05,
+            "median": 1.1022845374100143e-05,
+            "p95": 2.569993177530705e-05,
+            "maximum": 2.8263171516300644e-05
+          },
+          "camera_RGB_RMSE": {
+            "mean": 9.773380728980428e-06,
+            "median": 9.002798066920884e-06,
+            "p95": 1.7537590787773308e-05,
+            "maximum": 2.1446213909569946e-05
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 4.080003351890627e-06,
+            "median": 4.17073067858013e-06,
+            "p95": 7.5755699359584015e-06,
+            "maximum": 8.10762703363893e-06
+          }
+        },
+        "corrected": {
+          "max_abs_channel_mean_error": {
+            "mean": 6.729927028269836e-06,
+            "median": 6.578844695468433e-06,
+            "p95": 9.95635456092714e-06,
+            "maximum": 1.2117438636778388e-05
+          },
+          "camera_RGB_RMSE": {
+            "mean": 6.574501586876178e-06,
+            "median": 6.217145370537842e-06,
+            "p95": 9.463031944745772e-06,
+            "maximum": 1.0751516085118618e-05
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 4.0448642758373125e-06,
+            "median": 4.136376243455486e-06,
+            "p95": 7.532416538207802e-06,
+            "maximum": 8.071146317988498e-06
+          }
+        }
+      },
+      {
+        "condition": "adc-only",
+        "saturation": 0.5,
+        "peak": 0.18,
+        "original": {
+          "max_abs_channel_mean_error": {
+            "mean": 8.60338491505293e-05,
+            "median": 7.083752920152619e-05,
+            "p95": 0.0002054722288448829,
+            "maximum": 0.00022610397019889205
+          },
+          "camera_RGB_RMSE": {
+            "mean": 6.84138385882686e-05,
+            "median": 6.311207962269935e-05,
+            "p95": 0.00014075402327846332,
+            "maximum": 0.00014773245813403746
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 2.7957341572121933e-05,
+            "median": 2.6763029390069142e-05,
+            "p95": 5.03774029087758e-05,
+            "maximum": 5.637582860595007e-05
+          }
+        },
+        "corrected": {
+          "max_abs_channel_mean_error": {
+            "mean": 1.8744368542987407e-05,
+            "median": 1.404226291924715e-05,
+            "p95": 4.367890738649294e-05,
+            "maximum": 6.497712340205908e-05
+          },
+          "camera_RGB_RMSE": {
+            "mean": 3.1234274208350903e-05,
+            "median": 2.9484093841887363e-05,
+            "p95": 5.625551190048105e-05,
+            "maximum": 6.629174356061975e-05
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 2.7660674757074006e-05,
+            "median": 2.6580741197851406e-05,
+            "p95": 4.958343978820823e-05,
+            "maximum": 5.5004347082433246e-05
+          }
+        }
+      },
+      {
+        "condition": "adc-only",
+        "saturation": 0.5,
+        "peak": 0.9,
+        "original": {
+          "max_abs_channel_mean_error": {
+            "mean": 0.01645606618923921,
+            "median": 0.0012834333686623724,
+            "p95": 0.07812788523558993,
+            "maximum": 0.08746777932159602
+          },
+          "camera_RGB_RMSE": {
+            "mean": 0.010557916067729151,
+            "median": 0.0009263564689180316,
+            "p95": 0.04935789741594468,
+            "maximum": 0.055930006276037336
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 0.0003754322701776723,
+            "median": 0.00019342418296685975,
+            "p95": 0.0012470092469991812,
+            "maximum": 0.0018993362862561407
+          }
+        },
+        "corrected": {
+          "max_abs_channel_mean_error": {
+            "mean": 0.0001429956550540131,
+            "median": 0.00010079398110974581,
+            "p95": 0.00045066247024806217,
+            "maximum": 0.0005980853876098991
+          },
+          "camera_RGB_RMSE": {
+            "mean": 0.00030502939058298556,
+            "median": 0.00019618518405760643,
+            "p95": 0.0009317055064729128,
+            "maximum": 0.001007150743674162
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 0.0002832037327842472,
+            "median": 0.00019116665197005807,
+            "p95": 0.0009050830743040416,
+            "maximum": 0.0009676437454737194
+          }
+        }
+      },
+      {
+        "condition": "adc-only",
+        "saturation": 0.98,
+        "peak": 0.02,
+        "original": {
+          "max_abs_channel_mean_error": {
+            "mean": 4.654236131910257e-05,
+            "median": 2.49241408528178e-05,
+            "p95": 0.00013501996691957173,
+            "maximum": 0.00015501010220759782
+          },
+          "camera_RGB_RMSE": {
+            "mean": 3.3953464800150305e-05,
+            "median": 1.8962368321051358e-05,
+            "p95": 9.315776033661812e-05,
+            "maximum": 0.00010796496091271763
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 8.751513814301109e-06,
+            "median": 7.440932903705544e-06,
+            "p95": 1.7353151288430983e-05,
+            "maximum": 1.9564538736833008e-05
+          }
+        },
+        "corrected": {
+          "max_abs_channel_mean_error": {
+            "mean": 8.682831694860247e-06,
+            "median": 8.241035857281531e-06,
+            "p95": 1.7888682340299055e-05,
+            "maximum": 2.2741216380381957e-05
+          },
+          "camera_RGB_RMSE": {
+            "mean": 1.071740967960384e-05,
+            "median": 9.240476567958595e-06,
+            "p95": 2.052823380344105e-05,
+            "maximum": 2.2819221514825034e-05
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 8.630115755886327e-06,
+            "median": 7.3547984007686625e-06,
+            "p95": 1.7267619213826267e-05,
+            "maximum": 1.9427753646006196e-05
+          }
+        }
+      },
+      {
+        "condition": "adc-only",
+        "saturation": 0.98,
+        "peak": 0.18,
+        "original": {
+          "max_abs_channel_mean_error": {
+            "mean": 0.0003041655189743627,
+            "median": 0.0002684692837647162,
+            "p95": 0.0006763479731307598,
+            "maximum": 0.0009171102385153063
+          },
+          "camera_RGB_RMSE": {
+            "mean": 0.0002201533024476952,
+            "median": 0.0001810894763024892,
+            "p95": 0.00044958287204656893,
+            "maximum": 0.0005427770540793011
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 6.233807463160673e-05,
+            "median": 5.520016144083265e-05,
+            "p95": 0.00010220322304691141,
+            "maximum": 0.00011310813504901388
+          }
+        },
+        "corrected": {
+          "max_abs_channel_mean_error": {
+            "mean": 4.1129923147877896e-05,
+            "median": 3.4741314830171175e-05,
+            "p95": 8.955772267654538e-05,
+            "maximum": 0.0001338216129806824
+          },
+          "camera_RGB_RMSE": {
+            "mean": 6.785824322039745e-05,
+            "median": 5.846173854538137e-05,
+            "p95": 0.00011588639605744126,
+            "maximum": 0.00013727706652949285
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 6.115641063757678e-05,
+            "median": 5.440102884969967e-05,
+            "p95": 0.00010141110814485944,
+            "maximum": 0.00011163988839149639
+          }
+        }
+      },
+      {
+        "condition": "adc-only",
+        "saturation": 0.98,
+        "peak": 0.9,
+        "original": {
+          "max_abs_channel_mean_error": {
+            "mean": 0.003926909395786425,
+            "median": 0.0026313975102675614,
+            "p95": 0.011064556221244857,
+            "maximum": 0.01330454262555577
+          },
+          "camera_RGB_RMSE": {
+            "mean": 0.0025792096334349007,
+            "median": 0.0019299584599760447,
+            "p95": 0.006785522183371604,
+            "maximum": 0.00907925203610799
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 0.0003157555747384562,
+            "median": 0.0002803485416037426,
+            "p95": 0.0005679701081711252,
+            "maximum": 0.0006104298743663476
+          }
+        },
+        "corrected": {
+          "max_abs_channel_mean_error": {
+            "mean": 0.0002152522642321249,
+            "median": 0.00018754388511297294,
+            "p95": 0.00044634725840296595,
+            "maximum": 0.0006569677242077887
+          },
+          "camera_RGB_RMSE": {
+            "mean": 0.00032327948378180465,
+            "median": 0.00031581297909032905,
+            "p95": 0.0004807558611124096,
+            "maximum": 0.0005085870853124175
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 0.00028396711137760423,
+            "median": 0.0002759435386617236,
+            "p95": 0.00041208163961776377,
+            "maximum": 0.00045146504626366604
+          }
+        }
+      },
+      {
+        "condition": "iso12800-prior",
+        "saturation": 0.0,
+        "peak": 0.02,
+        "original": {
+          "max_abs_channel_mean_error": {
+            "mean": 0.0001533092897989263,
+            "median": 0.00015320949351007584,
+            "p95": 0.00020063410245893464,
+            "maximum": 0.00020363675470434826
+          },
+          "camera_RGB_RMSE": {
+            "mean": 0.00021880739520515924,
+            "median": 0.00021063556841861733,
+            "p95": 0.00025289888436425705,
+            "maximum": 0.0002582264156214098
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 0.00018793342794868175,
+            "median": 0.00018111604231130522,
+            "p95": 0.0002151623440245331,
+            "maximum": 0.00022044086176715755
+          }
+        },
+        "corrected": {
+          "max_abs_channel_mean_error": {
+            "mean": 0.00010701139633965795,
+            "median": 9.813711845708894e-05,
+            "p95": 0.00015814511185453738,
+            "maximum": 0.00016377297397411893
+          },
+          "camera_RGB_RMSE": {
+            "mean": 0.000238728847044535,
+            "median": 0.0002288227139210546,
+            "p95": 0.0002675623107584292,
+            "maximum": 0.0002735252864294346
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 0.0002252974973276316,
+            "median": 0.00021762667339569514,
+            "p95": 0.00025430558643742935,
+            "maximum": 0.000260656752294508
+          }
+        }
+      },
+      {
+        "condition": "iso12800-prior",
+        "saturation": 0.0,
+        "peak": 0.18,
+        "original": {
+          "max_abs_channel_mean_error": {
+            "mean": 0.0006507207146205473,
+            "median": 0.000680984405480558,
+            "p95": 0.0007077354572975309,
+            "maximum": 0.0007097114555654116
+          },
+          "camera_RGB_RMSE": {
+            "mean": 0.000713910477305018,
+            "median": 0.0007258911802746521,
+            "p95": 0.0007663324163092693,
+            "maximum": 0.0007707712667218558
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 0.0004903211150875126,
+            "median": 0.0004844217135035714,
+            "p95": 0.0005183362341810936,
+            "maximum": 0.0005225794358818853
+          }
+        },
+        "corrected": {
+          "max_abs_channel_mean_error": {
+            "mean": 0.00033693779609166084,
+            "median": 0.0003649544611107558,
+            "p95": 0.0004211390476411907,
+            "maximum": 0.0004271449672523886
+          },
+          "camera_RGB_RMSE": {
+            "mean": 0.0006440072425412974,
+            "median": 0.0006346918038860228,
+            "p95": 0.0006740390258821735,
+            "maximum": 0.0006806645133631068
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 0.0005812320201619945,
+            "median": 0.0005790455311426666,
+            "p95": 0.0005990084491947818,
+            "maximum": 0.0006014033855630369
+          }
+        }
+      },
+      {
+        "condition": "iso12800-prior",
+        "saturation": 0.0,
+        "peak": 0.9,
+        "original": {
+          "max_abs_channel_mean_error": {
+            "mean": 0.007228397613507695,
+            "median": 0.007168632290558889,
+            "p95": 0.008530702718649991,
+            "maximum": 0.008603386364411563
+          },
+          "camera_RGB_RMSE": {
+            "mean": 0.00559588963335344,
+            "median": 0.005596119514307836,
+            "p95": 0.0063861904696831725,
+            "maximum": 0.006469022317299428
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 0.002472081067493505,
+            "median": 0.0024141312840182446,
+            "p95": 0.0027455076204054153,
+            "maximum": 0.002799224467111885
+          }
+        },
+        "corrected": {
+          "max_abs_channel_mean_error": {
+            "mean": 0.007228397613507695,
+            "median": 0.007168632290558889,
+            "p95": 0.008530702718649991,
+            "maximum": 0.008603386364411563
+          },
+          "camera_RGB_RMSE": {
+            "mean": 0.00559588963335344,
+            "median": 0.005596119514307836,
+            "p95": 0.0063861904696831725,
+            "maximum": 0.006469022317299428
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 0.002472081067493505,
+            "median": 0.0024141312840182446,
+            "p95": 0.0027455076204054153,
+            "maximum": 0.002799224467111885
+          }
+        }
+      },
+      {
+        "condition": "iso12800-prior",
+        "saturation": 0.5,
+        "peak": 0.02,
+        "original": {
+          "max_abs_channel_mean_error": {
+            "mean": 0.00013318037871651238,
+            "median": 0.00011513537538121454,
+            "p95": 0.0002915863902671845,
+            "maximum": 0.0004236426118768577
+          },
+          "camera_RGB_RMSE": {
+            "mean": 0.00020232519143819784,
+            "median": 0.00018875038196610215,
+            "p95": 0.00031436970924596523,
+            "maximum": 0.00039627884454941176
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 0.0001704635600158707,
+            "median": 0.00016932172520443058,
+            "p95": 0.00020083263282449186,
+            "maximum": 0.00021448714034526673
+          }
+        },
+        "corrected": {
+          "max_abs_channel_mean_error": {
+            "mean": 9.953284509814845e-05,
+            "median": 9.5223351399909e-05,
+            "p95": 0.0001878886094891641,
+            "maximum": 0.00021276175015373156
+          },
+          "camera_RGB_RMSE": {
+            "mean": 0.0002218301957172847,
+            "median": 0.00022073684669621175,
+            "p95": 0.00025927052538679606,
+            "maximum": 0.0002873669254936915
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 0.00020888447689522784,
+            "median": 0.00020916085209770062,
+            "p95": 0.00024623009944333476,
+            "maximum": 0.0002633801570045247
+          }
+        }
+      },
+      {
+        "condition": "iso12800-prior",
+        "saturation": 0.5,
+        "peak": 0.18,
+        "original": {
+          "max_abs_channel_mean_error": {
+            "mean": 0.0003504541526854155,
+            "median": 0.00029429244343191384,
+            "p95": 0.0008106516807310981,
+            "maximum": 0.0010950269701424987
+          },
+          "camera_RGB_RMSE": {
+            "mean": 0.0005190503226245862,
+            "median": 0.0005006525806773199,
+            "p95": 0.0007165346516119417,
+            "maximum": 0.0008104706474210219
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 0.00045003903968066,
+            "median": 0.00045391362356529284,
+            "p95": 0.000531506307018051,
+            "maximum": 0.0005445086466033377
+          }
+        },
+        "corrected": {
+          "max_abs_channel_mean_error": {
+            "mean": 0.00022857353014084464,
+            "median": 0.00019905683533579576,
+            "p95": 0.00046561144379666077,
+            "maximum": 0.0007275013340404257
+          },
+          "camera_RGB_RMSE": {
+            "mean": 0.0005498010850450518,
+            "median": 0.0005455012703371812,
+            "p95": 0.0006606442869738094,
+            "maximum": 0.0006815982576153143
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 0.0005220545477965798,
+            "median": 0.0005201895492314754,
+            "p95": 0.0005999000401894284,
+            "maximum": 0.0006482487016511949
+          }
+        }
+      },
+      {
+        "condition": "iso12800-prior",
+        "saturation": 0.5,
+        "peak": 0.9,
+        "original": {
+          "max_abs_channel_mean_error": {
+            "mean": 0.024435159400575987,
+            "median": 0.005666647483594716,
+            "p95": 0.09032191614503973,
+            "maximum": 0.09704826428904198
+          },
+          "camera_RGB_RMSE": {
+            "mean": 0.016412818090202196,
+            "median": 0.004416492793152408,
+            "p95": 0.05822427299887373,
+            "maximum": 0.07156077415882894
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 0.002953169253889224,
+            "median": 0.0023142120946845904,
+            "p95": 0.006009113454712948,
+            "maximum": 0.007616425881792674
+          }
+        },
+        "corrected": {
+          "max_abs_channel_mean_error": {
+            "mean": 0.008028536038424744,
+            "median": 0.0027326028584502638,
+            "p95": 0.025886685948062222,
+            "maximum": 0.042244784280192106
+          },
+          "camera_RGB_RMSE": {
+            "mean": 0.007045396011485281,
+            "median": 0.003140007034545063,
+            "p95": 0.020709661573315413,
+            "maximum": 0.035368874668629084
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 0.004487697530589945,
+            "median": 0.0024303643701176223,
+            "p95": 0.012037812256073172,
+            "maximum": 0.0169855213534753
+          }
+        }
+      },
+      {
+        "condition": "iso12800-prior",
+        "saturation": 0.98,
+        "peak": 0.02,
+        "original": {
+          "max_abs_channel_mean_error": {
+            "mean": 0.00013296639545257467,
+            "median": 0.00012545399362352328,
+            "p95": 0.00024833033802678983,
+            "maximum": 0.00032243228601146255
+          },
+          "camera_RGB_RMSE": {
+            "mean": 0.000206986329811541,
+            "median": 0.00020648029106346878,
+            "p95": 0.0002552477767271308,
+            "maximum": 0.0002862777256929012
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 0.0001811891423547944,
+            "median": 0.00017950320585767131,
+            "p95": 0.00020882845640631995,
+            "maximum": 0.00021763485078279542
+          }
+        },
+        "corrected": {
+          "max_abs_channel_mean_error": {
+            "mean": 9.740180869513299e-05,
+            "median": 8.68667779622001e-05,
+            "p95": 0.0001806273603142472,
+            "maximum": 0.0002223883685655892
+          },
+          "camera_RGB_RMSE": {
+            "mean": 0.00022676181559670076,
+            "median": 0.0002262020563000574,
+            "p95": 0.0002611562218577777,
+            "maximum": 0.00029139068012083225
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 0.00021462257119893725,
+            "median": 0.00021281819401402211,
+            "p95": 0.000251422146547053,
+            "maximum": 0.00027257613688619125
+          }
+        }
+      },
+      {
+        "condition": "iso12800-prior",
+        "saturation": 0.98,
+        "peak": 0.18,
+        "original": {
+          "max_abs_channel_mean_error": {
+            "mean": 0.0006492836071396368,
+            "median": 0.0005465316271147458,
+            "p95": 0.0014909885380620836,
+            "maximum": 0.0018214340379927307
+          },
+          "camera_RGB_RMSE": {
+            "mean": 0.0007410143511012048,
+            "median": 0.0006669024696707333,
+            "p95": 0.0012114913192321892,
+            "maximum": 0.001485847929355037
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 0.0005690399329439903,
+            "median": 0.0005656179740454719,
+            "p95": 0.0007311831952671847,
+            "maximum": 0.0008316856361497913
+          }
+        },
+        "corrected": {
+          "max_abs_channel_mean_error": {
+            "mean": 0.00029090862594633414,
+            "median": 0.0002470609881856944,
+            "p95": 0.000656786167746759,
+            "maximum": 0.0010159300777013414
+          },
+          "camera_RGB_RMSE": {
+            "mean": 0.0006488875782741525,
+            "median": 0.0006431351354621391,
+            "p95": 0.0008338289073059295,
+            "maximum": 0.0009812638050478596
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 0.0006110003755100817,
+            "median": 0.0006000186281267363,
+            "p95": 0.0007960108603310187,
+            "maximum": 0.0008987092518904094
+          }
+        }
+      },
+      {
+        "condition": "iso12800-prior",
+        "saturation": 0.98,
+        "peak": 0.9,
+        "original": {
+          "max_abs_channel_mean_error": {
+            "mean": 0.0076568490149399315,
+            "median": 0.003572561015607789,
+            "p95": 0.027675724282162265,
+            "maximum": 0.050253169052302836
+          },
+          "camera_RGB_RMSE": {
+            "mean": 0.005654189625244867,
+            "median": 0.0030193463242937854,
+            "p95": 0.018042820174730634,
+            "maximum": 0.03038320330330763
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 0.002030406998294282,
+            "median": 0.0018672297095967605,
+            "p95": 0.003046025569569006,
+            "maximum": 0.003712609916206425
+          }
+        },
+        "corrected": {
+          "max_abs_channel_mean_error": {
+            "mean": 0.002615767879121904,
+            "median": 0.001465302917640656,
+            "p95": 0.009663873955432792,
+            "maximum": 0.016633621567161753
+          },
+          "camera_RGB_RMSE": {
+            "mean": 0.0030655870272475096,
+            "median": 0.002246708913263301,
+            "p95": 0.008175549176132165,
+            "maximum": 0.013059523460850812
+          },
+          "centered_camera_RGB_RMS": {
+            "mean": 0.002429951701946502,
+            "median": 0.0020324712588623605,
+            "p95": 0.005117228237597064,
+            "maximum": 0.008358181908506188
+          }
+        }
+      }
+    ],
+    "RMSE_regressing_groups": 5,
+    "native_crops": [
+      {
+        "image": "crop-d93f522ba83846dc.png",
+        "caption": "gray-l0.18 / V60 retained CUDA prediction",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V60",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "5b7a7dcb1008deb49e7cddd1aa8cb015a63e20ca1c4999a27f8b5622bb72c758",
+        "method_index": 0,
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "postprocess_sha256": null,
+        "source": {
+          "id": "gray-l0.18",
+          "palette": "gray-l0.18",
+          "source": {
+            "id": "gray-l0.18",
+            "hue_degrees": null,
+            "saturation": 0.0,
+            "peak": 0.18,
+            "linear_srgb": [
+              0.18,
+              0.18,
+              0.18
+            ]
+          },
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/gray-l0.18-iso12800-prior-RGGB.npz",
+          "sha256": "70ebe5561edc947acc75da2f64acb6a4ad185add551b48f675e58a8d0cdcb2e3",
+          "target_camera_RGB": [
+            0.09000001102685928,
+            0.18000002205371857,
+            0.12000000476837158
+          ],
+          "draws_per_pattern": 1
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "display_exposure": 1,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact analytic uniform field; not a real capture."
+      },
+      {
+        "image": "crop-9801cbd41e4be3f1.png",
+        "caption": "gray-l0.18 / V60 plus fixed flat-moment CPU correction",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Flat-moment correction",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "8a5875e3fd0630007d9362f6aab1baa3ed81410d048c4d4a9ed3c39884d9121c",
+        "method_index": 1,
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "postprocess_sha256": "ede405608a182716c68a02523d8b80d5686ba875b7314b048ea5e65421bfce0f",
+        "source": {
+          "id": "gray-l0.18",
+          "palette": "gray-l0.18",
+          "source": {
+            "id": "gray-l0.18",
+            "hue_degrees": null,
+            "saturation": 0.0,
+            "peak": 0.18,
+            "linear_srgb": [
+              0.18,
+              0.18,
+              0.18
+            ]
+          },
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/gray-l0.18-iso12800-prior-RGGB.npz",
+          "sha256": "70ebe5561edc947acc75da2f64acb6a4ad185add551b48f675e58a8d0cdcb2e3",
+          "target_camera_RGB": [
+            0.09000001102685928,
+            0.18000002205371857,
+            0.12000000476837158
+          ],
+          "draws_per_pattern": 1
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "display_exposure": 1,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact analytic uniform field; not a real capture."
+      },
+      {
+        "image": "crop-e16c56dc57b4c2c3.png",
+        "caption": "h030-s0.98-l0.90 / V60 retained CUDA prediction",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V60",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "da83ea3a1e3a5ee4b97b1d7c0a553eb84305ae3732916763e0d95485c0b6d54d",
+        "method_index": 0,
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "postprocess_sha256": null,
+        "source": {
+          "id": "h030-s0.98-l0.90",
+          "palette": "h030-s0.98-l0.90",
+          "source": {
+            "id": "h030-s0.98-l0.90",
+            "hue_degrees": 30,
+            "saturation": 0.98,
+            "peak": 0.9,
+            "linear_srgb": [
+              0.9,
+              0.459,
+              0.018000000000000016
+            ]
+          },
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h030-s0.98-l0.90-iso12800-prior-RGGB.npz",
+          "sha256": "1b763d74f2ec1eede3711b13c2feab8e86e55bddcecf5005d3d9d206c196c008",
+          "target_camera_RGB": [
+            0.41692498326301575,
+            0.45900002121925354,
+            0.05609999969601631
+          ],
+          "draws_per_pattern": 1
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "display_exposure": 1,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact analytic uniform field; not a real capture."
+      },
+      {
+        "image": "crop-9d69bd5c29287924.png",
+        "caption": "h030-s0.98-l0.90 / V60 plus fixed flat-moment CPU correction",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Flat-moment correction",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "6e72ca55e6179a4b1749eec22fabaf6791a2ae91d9e61dbf79278a44d0d4f569",
+        "method_index": 1,
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "postprocess_sha256": "ede405608a182716c68a02523d8b80d5686ba875b7314b048ea5e65421bfce0f",
+        "source": {
+          "id": "h030-s0.98-l0.90",
+          "palette": "h030-s0.98-l0.90",
+          "source": {
+            "id": "h030-s0.98-l0.90",
+            "hue_degrees": 30,
+            "saturation": 0.98,
+            "peak": 0.9,
+            "linear_srgb": [
+              0.9,
+              0.459,
+              0.018000000000000016
+            ]
+          },
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h030-s0.98-l0.90-iso12800-prior-RGGB.npz",
+          "sha256": "1b763d74f2ec1eede3711b13c2feab8e86e55bddcecf5005d3d9d206c196c008",
+          "target_camera_RGB": [
+            0.41692498326301575,
+            0.45900002121925354,
+            0.05609999969601631
+          ],
+          "draws_per_pattern": 1
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "display_exposure": 1,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact analytic uniform field; not a real capture."
+      },
+      {
+        "image": "crop-22e29117b6e71473.png",
+        "caption": "h315-s0.98-l0.90 / V60 retained CUDA prediction",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V60",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "efe76d2d77def0d1c1ab950b96dc73696f850d7f3c28c20255e2d0f70a7d229f",
+        "method_index": 0,
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "postprocess_sha256": null,
+        "source": {
+          "id": "h315-s0.98-l0.90",
+          "palette": "h315-s0.98-l0.90",
+          "source": {
+            "id": "h315-s0.98-l0.90",
+            "hue_degrees": 315,
+            "saturation": 0.98,
+            "peak": 0.9,
+            "linear_srgb": [
+              0.9,
+              0.018000000000000016,
+              0.6795
+            ]
+          },
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h315-s0.98-l0.90-iso12800-prior-RGGB.npz",
+          "sha256": "6f08684e792ad7c9830d86de8813335b5440d747a802f1b1a932026710116a83",
+          "target_camera_RGB": [
+            0.42243748903274536,
+            0.09517499804496765,
+            0.4383000135421753
+          ],
+          "draws_per_pattern": 1
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "display_exposure": 1,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact analytic uniform field; not a real capture."
+      },
+      {
+        "image": "crop-7327e33fcab73d36.png",
+        "caption": "h315-s0.98-l0.90 / V60 plus fixed flat-moment CPU correction",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Flat-moment correction",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "afddc86397d9fc3ff3377a566c4be36e368d2c488d0dcf6888c8720d911276a1",
+        "method_index": 1,
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "postprocess_sha256": "ede405608a182716c68a02523d8b80d5686ba875b7314b048ea5e65421bfce0f",
+        "source": {
+          "id": "h315-s0.98-l0.90",
+          "palette": "h315-s0.98-l0.90",
+          "source": {
+            "id": "h315-s0.98-l0.90",
+            "hue_degrees": 315,
+            "saturation": 0.98,
+            "peak": 0.9,
+            "linear_srgb": [
+              0.9,
+              0.018000000000000016,
+              0.6795
+            ]
+          },
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h315-s0.98-l0.90-iso12800-prior-RGGB.npz",
+          "sha256": "6f08684e792ad7c9830d86de8813335b5440d747a802f1b1a932026710116a83",
+          "target_camera_RGB": [
+            0.42243748903274536,
+            0.09517499804496765,
+            0.4383000135421753
+          ],
+          "draws_per_pattern": 1
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "display_exposure": 1,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact analytic uniform field; not a real capture."
+      }
+    ]
+  },
+  "GFX": {
+    "actual_new_neural_forwards": 4,
+    "result": {
+      "status": "completed-four-GFX-CPU-context-comparisons-awaiting-native-review",
+      "plan": "/mnt/external/demosaic/benchmarks/flat-moment-GFX-CPU-v1/plan.json",
+      "plan_sha256": "70caac2703e4571351d22c12e9b3057fb2043d2817d406849c813345739a1d4d",
+      "records": [
+        {
+          "region": "overcast-sky",
+          "mean_gate_in_ROI": 0.3655990660190582,
+          "nonzero_gate_fraction_in_ROI": 0.8723437786102295,
+          "max_absolute_camera_change_in_ROI": 0.00030392780900001526,
+          "diagnostics": [
+            {
+              "color": 0,
+              "mean_gate": 0.46159058420551924,
+              "zero_gate_fraction": 0.1446990966796875,
+              "min_sample_count": 289,
+              "max_sample_count": 1089
+            },
+            {
+              "color": 1,
+              "mean_gate": 0.7300278652977871,
+              "zero_gate_fraction": 0.02703857421875,
+              "min_sample_count": 578,
+              "max_sample_count": 2178
+            },
+            {
+              "color": 2,
+              "mean_gate": 0.7930706284364739,
+              "zero_gate_fraction": 0.02984619140625,
+              "min_sample_count": 289,
+              "max_sample_count": 1089
+            }
+          ]
+        },
+        {
+          "region": "building-detail",
+          "mean_gate_in_ROI": 0.015124780125916004,
+          "nonzero_gate_fraction_in_ROI": 0.03843750059604645,
+          "max_absolute_camera_change_in_ROI": 0.0001552468165755272,
+          "diagnostics": [
+            {
+              "color": 0,
+              "mean_gate": 0.061555078429694335,
+              "zero_gate_fraction": 0.87432861328125,
+              "min_sample_count": 289,
+              "max_sample_count": 1089
+            },
+            {
+              "color": 1,
+              "mean_gate": 0.08457436634378876,
+              "zero_gate_fraction": 0.87835693359375,
+              "min_sample_count": 578,
+              "max_sample_count": 2178
+            },
+            {
+              "color": 2,
+              "mean_gate": 0.09049963846661446,
+              "zero_gate_fraction": 0.8573455810546875,
+              "min_sample_count": 289,
+              "max_sample_count": 1089
+            }
+          ]
+        },
+        {
+          "region": "foliage",
+          "mean_gate_in_ROI": 0.0,
+          "nonzero_gate_fraction_in_ROI": 0.0,
+          "max_absolute_camera_change_in_ROI": 0.0,
+          "diagnostics": [
+            {
+              "color": 0,
+              "mean_gate": 1.6346515658305066e-05,
+              "zero_gate_fraction": 0.9998016357421875,
+              "min_sample_count": 289,
+              "max_sample_count": 1089
+            },
+            {
+              "color": 1,
+              "mean_gate": 2.9876889969249375e-05,
+              "zero_gate_fraction": 0.99969482421875,
+              "min_sample_count": 578,
+              "max_sample_count": 2178
+            },
+            {
+              "color": 2,
+              "mean_gate": 0.012434488302828759,
+              "zero_gate_fraction": 0.98052978515625,
+              "min_sample_count": 289,
+              "max_sample_count": 1089
+            }
+          ]
+        },
+        {
+          "region": "chain-link-fence",
+          "mean_gate_in_ROI": 0.0,
+          "nonzero_gate_fraction_in_ROI": 0.0,
+          "max_absolute_camera_change_in_ROI": 0.0,
+          "diagnostics": [
+            {
+              "color": 0,
+              "mean_gate": 0.0,
+              "zero_gate_fraction": 1.0,
+              "min_sample_count": 289,
+              "max_sample_count": 1089
+            },
+            {
+              "color": 1,
+              "mean_gate": 0.0,
+              "zero_gate_fraction": 1.0,
+              "min_sample_count": 578,
+              "max_sample_count": 2178
+            },
+            {
+              "color": 2,
+              "mean_gate": 0.0,
+              "zero_gate_fraction": 1.0,
+              "min_sample_count": 289,
+              "max_sample_count": 1089
+            }
+          ]
+        }
+      ],
+      "native_crops": [
+        {
+          "image": "crop-cee416d6725f348a.png",
+          "caption": "overcast-sky / V60 CPU FP32",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V60 CPU FP32",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 AHD / not GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "77bc323a6b6769b766da13e598b5d426d332a4f55af85c5d772a5ff430174840",
+          "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+          "postprocess_sha256": null,
+          "source": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              }
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              }
+            }
+          ],
+          "region": {
+            "name": "overcast-sky",
+            "noisy_xy": [
+              5800,
+              1400
+            ],
+            "reference_xy": [
+              5800,
+              1400
+            ],
+            "size": 160,
+            "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+            "context_green_correlation": null
+          },
+          "context_xywh": [
+            5624,
+            1224,
+            512,
+            512
+          ],
+          "ROI_xywh": [
+            176,
+            176,
+            160,
+            160
+          ],
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06,
+            "source": "input Haar fit"
+          },
+          "display_exposure": 4,
+          "white_balance": [
+            [
+              1.5132449865341187,
+              1.0,
+              2.2152318954467773
+            ]
+          ],
+          "camera_to_srgb": [
+            [
+              [
+                1.0725188255310059,
+                0.17123593389987946,
+                -0.2437547743320465
+              ],
+              [
+                -0.126719132065773,
+                1.4310508966445923,
+                -0.30433180928230286
+              ],
+              [
+                -0.00969767663627863,
+                -0.29348063468933105,
+                1.303178310394287
+              ]
+            ]
+          ],
+          "reference": "Independent DSCF3880 ISO100 f/5.6 AHD exposure; not GT; aperture/time/motion differ. No reference fit or pixelwise score.",
+          "runtime": "CPU FP32/contiguous/B1/native512/two threads; one actual neural forward per context shared by original and corrected"
+        },
+        {
+          "image": "crop-99373e49ce39c5ad.png",
+          "caption": "overcast-sky / Flat-moment correction",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Flat-moment correction",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 AHD / not GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "bc9dce6a79a630d15b71ef2008142b5fcefa2de44245e0f30ec088a5c5edfa64",
+          "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+          "postprocess_sha256": "ede405608a182716c68a02523d8b80d5686ba875b7314b048ea5e65421bfce0f",
+          "source": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              }
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              }
+            }
+          ],
+          "region": {
+            "name": "overcast-sky",
+            "noisy_xy": [
+              5800,
+              1400
+            ],
+            "reference_xy": [
+              5800,
+              1400
+            ],
+            "size": 160,
+            "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+            "context_green_correlation": null
+          },
+          "context_xywh": [
+            5624,
+            1224,
+            512,
+            512
+          ],
+          "ROI_xywh": [
+            176,
+            176,
+            160,
+            160
+          ],
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06,
+            "source": "input Haar fit"
+          },
+          "display_exposure": 4,
+          "white_balance": [
+            [
+              1.5132449865341187,
+              1.0,
+              2.2152318954467773
+            ]
+          ],
+          "camera_to_srgb": [
+            [
+              [
+                1.0725188255310059,
+                0.17123593389987946,
+                -0.2437547743320465
+              ],
+              [
+                -0.126719132065773,
+                1.4310508966445923,
+                -0.30433180928230286
+              ],
+              [
+                -0.00969767663627863,
+                -0.29348063468933105,
+                1.303178310394287
+              ]
+            ]
+          ],
+          "reference": "Independent DSCF3880 ISO100 f/5.6 AHD exposure; not GT; aperture/time/motion differ. No reference fit or pixelwise score.",
+          "runtime": "CPU FP32/contiguous/B1/native512/two threads; one actual neural forward per context shared by original and corrected"
+        },
+        {
+          "image": "crop-74e74a2cb61d9ff2.png",
+          "caption": "building-detail / V60 CPU FP32",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V60 CPU FP32",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 AHD / not GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "3ae3334f7b042b5dda7eec259e71905be1c53ce85d0ed83824d324ac8a8d7cd0",
+          "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+          "postprocess_sha256": null,
+          "source": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              }
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              }
+            }
+          ],
+          "region": {
+            "name": "building-detail",
+            "noisy_xy": [
+              5790,
+              2690
+            ],
+            "reference_xy": [
+              5791,
+              2690
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.6824449896812439
+          },
+          "context_xywh": [
+            5614,
+            2514,
+            512,
+            512
+          ],
+          "ROI_xywh": [
+            176,
+            176,
+            160,
+            160
+          ],
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06,
+            "source": "input Haar fit"
+          },
+          "display_exposure": 4,
+          "white_balance": [
+            [
+              1.5132449865341187,
+              1.0,
+              2.2152318954467773
+            ]
+          ],
+          "camera_to_srgb": [
+            [
+              [
+                1.0725188255310059,
+                0.17123593389987946,
+                -0.2437547743320465
+              ],
+              [
+                -0.126719132065773,
+                1.4310508966445923,
+                -0.30433180928230286
+              ],
+              [
+                -0.00969767663627863,
+                -0.29348063468933105,
+                1.303178310394287
+              ]
+            ]
+          ],
+          "reference": "Independent DSCF3880 ISO100 f/5.6 AHD exposure; not GT; aperture/time/motion differ. No reference fit or pixelwise score.",
+          "runtime": "CPU FP32/contiguous/B1/native512/two threads; one actual neural forward per context shared by original and corrected"
+        },
+        {
+          "image": "crop-290d478e61831c9f.png",
+          "caption": "building-detail / Flat-moment correction",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Flat-moment correction",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 AHD / not GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "436252c63f4bd43c9db069c47dd8ef2dc09a5c438f7ec7a6693965c474d6bb1d",
+          "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+          "postprocess_sha256": "ede405608a182716c68a02523d8b80d5686ba875b7314b048ea5e65421bfce0f",
+          "source": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              }
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              }
+            }
+          ],
+          "region": {
+            "name": "building-detail",
+            "noisy_xy": [
+              5790,
+              2690
+            ],
+            "reference_xy": [
+              5791,
+              2690
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.6824449896812439
+          },
+          "context_xywh": [
+            5614,
+            2514,
+            512,
+            512
+          ],
+          "ROI_xywh": [
+            176,
+            176,
+            160,
+            160
+          ],
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06,
+            "source": "input Haar fit"
+          },
+          "display_exposure": 4,
+          "white_balance": [
+            [
+              1.5132449865341187,
+              1.0,
+              2.2152318954467773
+            ]
+          ],
+          "camera_to_srgb": [
+            [
+              [
+                1.0725188255310059,
+                0.17123593389987946,
+                -0.2437547743320465
+              ],
+              [
+                -0.126719132065773,
+                1.4310508966445923,
+                -0.30433180928230286
+              ],
+              [
+                -0.00969767663627863,
+                -0.29348063468933105,
+                1.303178310394287
+              ]
+            ]
+          ],
+          "reference": "Independent DSCF3880 ISO100 f/5.6 AHD exposure; not GT; aperture/time/motion differ. No reference fit or pixelwise score.",
+          "runtime": "CPU FP32/contiguous/B1/native512/two threads; one actual neural forward per context shared by original and corrected"
+        },
+        {
+          "image": "crop-b36fa786f1978d38.png",
+          "caption": "foliage / V60 CPU FP32",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V60 CPU FP32",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 AHD / not GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "18aca152655fcce172b04bf3ba08e65085681ecf185a66cf46017094fa4e041d",
+          "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+          "postprocess_sha256": null,
+          "source": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              }
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              }
+            }
+          ],
+          "region": {
+            "name": "foliage",
+            "noisy_xy": [
+              8890,
+              5570
+            ],
+            "reference_xy": [
+              8890,
+              5570
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9597686529159546
+          },
+          "context_xywh": [
+            8714,
+            5394,
+            512,
+            512
+          ],
+          "ROI_xywh": [
+            176,
+            176,
+            160,
+            160
+          ],
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06,
+            "source": "input Haar fit"
+          },
+          "display_exposure": 4,
+          "white_balance": [
+            [
+              1.5132449865341187,
+              1.0,
+              2.2152318954467773
+            ]
+          ],
+          "camera_to_srgb": [
+            [
+              [
+                1.0725188255310059,
+                0.17123593389987946,
+                -0.2437547743320465
+              ],
+              [
+                -0.126719132065773,
+                1.4310508966445923,
+                -0.30433180928230286
+              ],
+              [
+                -0.00969767663627863,
+                -0.29348063468933105,
+                1.303178310394287
+              ]
+            ]
+          ],
+          "reference": "Independent DSCF3880 ISO100 f/5.6 AHD exposure; not GT; aperture/time/motion differ. No reference fit or pixelwise score.",
+          "runtime": "CPU FP32/contiguous/B1/native512/two threads; one actual neural forward per context shared by original and corrected"
+        },
+        {
+          "image": "crop-ffe636f7e8bb713b.png",
+          "caption": "foliage / Flat-moment correction",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Flat-moment correction",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 AHD / not GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "3ac147feb6c99fc3bd13a4c39470ea31751471af5df3d42b76777f72a7773e1d",
+          "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+          "postprocess_sha256": "ede405608a182716c68a02523d8b80d5686ba875b7314b048ea5e65421bfce0f",
+          "source": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              }
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              }
+            }
+          ],
+          "region": {
+            "name": "foliage",
+            "noisy_xy": [
+              8890,
+              5570
+            ],
+            "reference_xy": [
+              8890,
+              5570
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9597686529159546
+          },
+          "context_xywh": [
+            8714,
+            5394,
+            512,
+            512
+          ],
+          "ROI_xywh": [
+            176,
+            176,
+            160,
+            160
+          ],
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06,
+            "source": "input Haar fit"
+          },
+          "display_exposure": 4,
+          "white_balance": [
+            [
+              1.5132449865341187,
+              1.0,
+              2.2152318954467773
+            ]
+          ],
+          "camera_to_srgb": [
+            [
+              [
+                1.0725188255310059,
+                0.17123593389987946,
+                -0.2437547743320465
+              ],
+              [
+                -0.126719132065773,
+                1.4310508966445923,
+                -0.30433180928230286
+              ],
+              [
+                -0.00969767663627863,
+                -0.29348063468933105,
+                1.303178310394287
+              ]
+            ]
+          ],
+          "reference": "Independent DSCF3880 ISO100 f/5.6 AHD exposure; not GT; aperture/time/motion differ. No reference fit or pixelwise score.",
+          "runtime": "CPU FP32/contiguous/B1/native512/two threads; one actual neural forward per context shared by original and corrected"
+        },
+        {
+          "image": "crop-b540d826158d5369.png",
+          "caption": "chain-link-fence / V60 CPU FP32",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V60 CPU FP32",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 AHD / not GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "ab14798468185a99d08065c2b7444c0a2ba9176b30f5d9efc6026b6380dbf1b1",
+          "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+          "postprocess_sha256": null,
+          "source": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              }
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              }
+            }
+          ],
+          "region": {
+            "name": "chain-link-fence",
+            "noisy_xy": [
+              2240,
+              6000
+            ],
+            "reference_xy": [
+              2241,
+              6000
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9550720453262329
+          },
+          "context_xywh": [
+            2064,
+            5824,
+            512,
+            512
+          ],
+          "ROI_xywh": [
+            176,
+            176,
+            160,
+            160
+          ],
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06,
+            "source": "input Haar fit"
+          },
+          "display_exposure": 4,
+          "white_balance": [
+            [
+              1.5132449865341187,
+              1.0,
+              2.2152318954467773
+            ]
+          ],
+          "camera_to_srgb": [
+            [
+              [
+                1.0725188255310059,
+                0.17123593389987946,
+                -0.2437547743320465
+              ],
+              [
+                -0.126719132065773,
+                1.4310508966445923,
+                -0.30433180928230286
+              ],
+              [
+                -0.00969767663627863,
+                -0.29348063468933105,
+                1.303178310394287
+              ]
+            ]
+          ],
+          "reference": "Independent DSCF3880 ISO100 f/5.6 AHD exposure; not GT; aperture/time/motion differ. No reference fit or pixelwise score.",
+          "runtime": "CPU FP32/contiguous/B1/native512/two threads; one actual neural forward per context shared by original and corrected"
+        },
+        {
+          "image": "crop-b1791961528f88ab.png",
+          "caption": "chain-link-fence / Flat-moment correction",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Flat-moment correction",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 AHD / not GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "b4ee24acd6b49452deedf4489c40f29d67a224f59f6311b47a78c2754db9f103",
+          "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+          "postprocess_sha256": "ede405608a182716c68a02523d8b80d5686ba875b7314b048ea5e65421bfce0f",
+          "source": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              }
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              }
+            }
+          ],
+          "region": {
+            "name": "chain-link-fence",
+            "noisy_xy": [
+              2240,
+              6000
+            ],
+            "reference_xy": [
+              2241,
+              6000
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9550720453262329
+          },
+          "context_xywh": [
+            2064,
+            5824,
+            512,
+            512
+          ],
+          "ROI_xywh": [
+            176,
+            176,
+            160,
+            160
+          ],
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06,
+            "source": "input Haar fit"
+          },
+          "display_exposure": 4,
+          "white_balance": [
+            [
+              1.5132449865341187,
+              1.0,
+              2.2152318954467773
+            ]
+          ],
+          "camera_to_srgb": [
+            [
+              [
+                1.0725188255310059,
+                0.17123593389987946,
+                -0.2437547743320465
+              ],
+              [
+                -0.126719132065773,
+                1.4310508966445923,
+                -0.30433180928230286
+              ],
+              [
+                -0.00969767663627863,
+                -0.29348063468933105,
+                1.303178310394287
+              ]
+            ]
+          ],
+          "reference": "Independent DSCF3880 ISO100 f/5.6 AHD exposure; not GT; aperture/time/motion differ. No reference fit or pixelwise score.",
+          "runtime": "CPU FP32/contiguous/B1/native512/two threads; one actual neural forward per context shared by original and corrected"
+        }
+      ],
+      "float_predictions": [
+        {
+          "path": "/mnt/external/demosaic/benchmarks/flat-moment-GFX-CPU-v1/overcast-sky-original-f32.npy",
+          "sha256": "69f4cffaf6960e862eb9ee48001abbd94e720081382b749505460380c4500c3c",
+          "region": "overcast-sky",
+          "method": "V60 CPU FP32"
+        },
+        {
+          "path": "/mnt/external/demosaic/benchmarks/flat-moment-GFX-CPU-v1/overcast-sky-corrected-f32.npy",
+          "sha256": "faeadd2e1c88d3706bf21f33499af3616e8367b70f034a05e441dd36b117182c",
+          "region": "overcast-sky",
+          "method": "Flat-moment correction"
+        },
+        {
+          "path": "/mnt/external/demosaic/benchmarks/flat-moment-GFX-CPU-v1/building-detail-original-f32.npy",
+          "sha256": "4d6c8fa0f05960e9e28a7bb3fe77dfae2295378c8bea54ae903fc3a34681e781",
+          "region": "building-detail",
+          "method": "V60 CPU FP32"
+        },
+        {
+          "path": "/mnt/external/demosaic/benchmarks/flat-moment-GFX-CPU-v1/building-detail-corrected-f32.npy",
+          "sha256": "285b15b01537c2efb500a3be72ea0949489974106c49473b53a9902345f0bb19",
+          "region": "building-detail",
+          "method": "Flat-moment correction"
+        },
+        {
+          "path": "/mnt/external/demosaic/benchmarks/flat-moment-GFX-CPU-v1/foliage-original-f32.npy",
+          "sha256": "7d0822aaf578d988e35419c329b2cc66ed7ef8d525e0b0d96ef0c832ec20bb67",
+          "region": "foliage",
+          "method": "V60 CPU FP32"
+        },
+        {
+          "path": "/mnt/external/demosaic/benchmarks/flat-moment-GFX-CPU-v1/foliage-corrected-f32.npy",
+          "sha256": "7d0822aaf578d988e35419c329b2cc66ed7ef8d525e0b0d96ef0c832ec20bb67",
+          "region": "foliage",
+          "method": "Flat-moment correction"
+        },
+        {
+          "path": "/mnt/external/demosaic/benchmarks/flat-moment-GFX-CPU-v1/chain-link-fence-original-f32.npy",
+          "sha256": "281e7251ef975f8e28898fffed2841e47d4ea93c62f6295d032529f50afb86ff",
+          "region": "chain-link-fence",
+          "method": "V60 CPU FP32"
+        },
+        {
+          "path": "/mnt/external/demosaic/benchmarks/flat-moment-GFX-CPU-v1/chain-link-fence-corrected-f32.npy",
+          "sha256": "281e7251ef975f8e28898fffed2841e47d4ea93c62f6295d032529f50afb86ff",
+          "region": "chain-link-fence",
+          "method": "Flat-moment correction"
+        }
+      ],
+      "actual_neural_forwards": 4,
+      "actual_model_and_DINO_state_unchanged": "85308cb12463d17b97409e8bc2bb59382de0af559de707732e39ca9c7bb5ce85",
+      "CPU_RNG_unchanged": true,
+      "CUDA_initialized": false,
+      "quality_scores": null,
+      "production_integrated": false,
+      "scope": "Four standing GFX contexts from cached saved RAW arrays; no original decode, new noise draw or reference fitting. ISO100 AHD is not GT. Context baseline is newly computed in CPU FP32, separate from the older fullframe CUDA output and timing."
+    },
+    "scores": null,
+    "reference_is_exact_GT": false
+  },
+  "pilot_actual_new_neural_forwards": 0,
+  "actual_native_views": [
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/crop-a859058a9aa7b083.png",
+      "sha256": "882758d750b3bf868b253cee07b740957b363cf68d3aef8c366d64e229e61162",
+      "caption": "exact-photo-0 / V60 saved eager",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Photo crops essentially unchanged; missing cords remain missing. Orange/magenta mean moves toward GT, but coarse variation remains. No texture-recovery claim."
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/crop-a600ea243fb10ca8.png",
+      "sha256": "07d234fc3dc99246cf29f4afa3c422869383995b9084c624dd9dab887f872120",
+      "caption": "exact-photo-0 / flat-moment correction",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Photo crops essentially unchanged; missing cords remain missing. Orange/magenta mean moves toward GT, but coarse variation remains. No texture-recovery claim."
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/crop-b751704002efa596.png",
+      "sha256": "a23df268ea5beba55fc6f95d1a5d8ab6d0b430e89367c317a92b4b0c70637c3f",
+      "caption": "exact-photo-1 / V60 saved eager",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Photo crops essentially unchanged; missing cords remain missing. Orange/magenta mean moves toward GT, but coarse variation remains. No texture-recovery claim."
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/crop-3b21945219b49a71.png",
+      "sha256": "09721a56ac4ef18921007c051be5fb1a945df8724a3765d2b70ca76251afe125",
+      "caption": "exact-photo-1 / flat-moment correction",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Photo crops essentially unchanged; missing cords remain missing. Orange/magenta mean moves toward GT, but coarse variation remains. No texture-recovery claim."
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/crop-ea2978d6cf522fe5.png",
+      "sha256": "c36d5e023944d2b5a4d8b04d9c8e8b26b5b515c3dfffba07ee0636fc550e1105",
+      "caption": "neutral / V60 saved eager",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Photo crops essentially unchanged; missing cords remain missing. Orange/magenta mean moves toward GT, but coarse variation remains. No texture-recovery claim."
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/crop-37fad305d103cbea.png",
+      "sha256": "fc7eb9f7e2c5ae8db104b7deaf6240b48b209515770069e6e9dabbd0d126bcf6",
+      "caption": "neutral / flat-moment correction",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Photo crops essentially unchanged; missing cords remain missing. Orange/magenta mean moves toward GT, but coarse variation remains. No texture-recovery claim."
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/crop-611396f4f8140d03.png",
+      "sha256": "adbbd5f1408448d9af3a73e1fa11c82d6781a32a7c7e5abb359c693caf058325",
+      "caption": "fabric-mean / V60 saved eager",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Photo crops essentially unchanged; missing cords remain missing. Orange/magenta mean moves toward GT, but coarse variation remains. No texture-recovery claim."
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/crop-b70f3fe232549fe9.png",
+      "sha256": "075242ddd49c8eaddbd4f575582b858f358f04aa287bb4a790b75411e163bdcf",
+      "caption": "fabric-mean / flat-moment correction",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Photo crops essentially unchanged; missing cords remain missing. Orange/magenta mean moves toward GT, but coarse variation remains. No texture-recovery claim."
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/crop-b6b2134125d9fc60.png",
+      "sha256": "b31c597d7f60c89607b81b9d32b71bc2355db0962c93a0f0a1328975feb654de",
+      "caption": "fabric-cyclic-gbr / V60 saved eager",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Photo crops essentially unchanged; missing cords remain missing. Orange/magenta mean moves toward GT, but coarse variation remains. No texture-recovery claim."
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/crop-5192b94ff13619af.png",
+      "sha256": "e4becf663730db5940d658a745ac6cb292b092c1ea2a69811c09d78270e70082",
+      "caption": "fabric-cyclic-gbr / flat-moment correction",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Photo crops essentially unchanged; missing cords remain missing. Orange/magenta mean moves toward GT, but coarse variation remains. No texture-recovery claim."
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/crop-cc33404f9a21f9c9.png",
+      "sha256": "177dafd53119cb4ac5edda952a84886f2cf20c40f5dc76cb0d6fbfeaa2ed9c18",
+      "caption": "fabric-cyclic-brg / V60 saved eager",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Photo crops essentially unchanged; missing cords remain missing. Orange/magenta mean moves toward GT, but coarse variation remains. No texture-recovery claim."
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/crop-159a8f801ad4309b.png",
+      "sha256": "7c45ff734817777b5cd09349d456973a95ae59e370b390293cae37b20dd9aa07",
+      "caption": "fabric-cyclic-brg / flat-moment correction",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Photo crops essentially unchanged; missing cords remain missing. Orange/magenta mean moves toward GT, but coarse variation remains. No texture-recovery claim."
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-saved-hue-grid-CPU-v1/crop-d93f522ba83846dc.png",
+      "sha256": "5b7a7dcb1008deb49e7cddd1aa8cb015a63e20ca1c4999a27f8b5622bb72c758",
+      "caption": "gray-l0.18 / V60 retained CUDA prediction",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Gray looks nearly unchanged. Orange/magenta DC improves subtly; magenta still has coarse spatial variation. No uniform quality gain."
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-saved-hue-grid-CPU-v1/crop-9801cbd41e4be3f1.png",
+      "sha256": "8a5875e3fd0630007d9362f6aab1baa3ed81410d048c4d4a9ed3c39884d9121c",
+      "caption": "gray-l0.18 / V60 plus fixed flat-moment CPU correction",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Gray looks nearly unchanged. Orange/magenta DC improves subtly; magenta still has coarse spatial variation. No uniform quality gain."
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-saved-hue-grid-CPU-v1/crop-e16c56dc57b4c2c3.png",
+      "sha256": "da83ea3a1e3a5ee4b97b1d7c0a553eb84305ae3732916763e0d95485c0b6d54d",
+      "caption": "h030-s0.98-l0.90 / V60 retained CUDA prediction",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Gray looks nearly unchanged. Orange/magenta DC improves subtly; magenta still has coarse spatial variation. No uniform quality gain."
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-saved-hue-grid-CPU-v1/crop-9d69bd5c29287924.png",
+      "sha256": "6e72ca55e6179a4b1749eec22fabaf6791a2ae91d9e61dbf79278a44d0d4f569",
+      "caption": "h030-s0.98-l0.90 / V60 plus fixed flat-moment CPU correction",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Gray looks nearly unchanged. Orange/magenta DC improves subtly; magenta still has coarse spatial variation. No uniform quality gain."
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-saved-hue-grid-CPU-v1/crop-22e29117b6e71473.png",
+      "sha256": "efe76d2d77def0d1c1ab950b96dc73696f850d7f3c28c20255e2d0f70a7d229f",
+      "caption": "h315-s0.98-l0.90 / V60 retained CUDA prediction",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Gray looks nearly unchanged. Orange/magenta DC improves subtly; magenta still has coarse spatial variation. No uniform quality gain."
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-saved-hue-grid-CPU-v1/crop-7327e33fcab73d36.png",
+      "sha256": "afddc86397d9fc3ff3377a566c4be36e368d2c488d0dcf6888c8720d911276a1",
+      "caption": "h315-s0.98-l0.90 / V60 plus fixed flat-moment CPU correction",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Gray looks nearly unchanged. Orange/magenta DC improves subtly; magenta still has coarse spatial variation. No uniform quality gain."
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-GFX-CPU-v1/crop-cee416d6725f348a.png",
+      "sha256": "77bc323a6b6769b766da13e598b5d426d332a4f55af85c5d772a5ff430174840",
+      "caption": "overcast-sky / V60 CPU FP32",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Sky looks nearly unchanged. Building detail remains soft. Foliage and chain-link fence are visibly unchanged; the added correction is numerically zero over those native ROIs. ISO100 aperture/time/motion differ, so it is not exact GT."
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-GFX-CPU-v1/crop-99373e49ce39c5ad.png",
+      "sha256": "bc9dce6a79a630d15b71ef2008142b5fcefa2de44245e0f30ec088a5c5edfa64",
+      "caption": "overcast-sky / Flat-moment correction",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Sky looks nearly unchanged. Building detail remains soft. Foliage and chain-link fence are visibly unchanged; the added correction is numerically zero over those native ROIs. ISO100 aperture/time/motion differ, so it is not exact GT."
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-GFX-CPU-v1/crop-74e74a2cb61d9ff2.png",
+      "sha256": "3ae3334f7b042b5dda7eec259e71905be1c53ce85d0ed83824d324ac8a8d7cd0",
+      "caption": "building-detail / V60 CPU FP32",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Sky looks nearly unchanged. Building detail remains soft. Foliage and chain-link fence are visibly unchanged; the added correction is numerically zero over those native ROIs. ISO100 aperture/time/motion differ, so it is not exact GT."
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-GFX-CPU-v1/crop-290d478e61831c9f.png",
+      "sha256": "436252c63f4bd43c9db069c47dd8ef2dc09a5c438f7ec7a6693965c474d6bb1d",
+      "caption": "building-detail / Flat-moment correction",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Sky looks nearly unchanged. Building detail remains soft. Foliage and chain-link fence are visibly unchanged; the added correction is numerically zero over those native ROIs. ISO100 aperture/time/motion differ, so it is not exact GT."
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-GFX-CPU-v1/crop-b36fa786f1978d38.png",
+      "sha256": "18aca152655fcce172b04bf3ba08e65085681ecf185a66cf46017094fa4e041d",
+      "caption": "foliage / V60 CPU FP32",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Sky looks nearly unchanged. Building detail remains soft. Foliage and chain-link fence are visibly unchanged; the added correction is numerically zero over those native ROIs. ISO100 aperture/time/motion differ, so it is not exact GT."
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-GFX-CPU-v1/crop-ffe636f7e8bb713b.png",
+      "sha256": "3ac147feb6c99fc3bd13a4c39470ea31751471af5df3d42b76777f72a7773e1d",
+      "caption": "foliage / Flat-moment correction",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Sky looks nearly unchanged. Building detail remains soft. Foliage and chain-link fence are visibly unchanged; the added correction is numerically zero over those native ROIs. ISO100 aperture/time/motion differ, so it is not exact GT."
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-GFX-CPU-v1/crop-b540d826158d5369.png",
+      "sha256": "ab14798468185a99d08065c2b7444c0a2ba9176b30f5d9efc6026b6380dbf1b1",
+      "caption": "chain-link-fence / V60 CPU FP32",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Sky looks nearly unchanged. Building detail remains soft. Foliage and chain-link fence are visibly unchanged; the added correction is numerically zero over those native ROIs. ISO100 aperture/time/motion differ, so it is not exact GT."
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-GFX-CPU-v1/crop-b1791961528f88ab.png",
+      "sha256": "b4ee24acd6b49452deedf4489c40f29d67a224f59f6311b47a78c2754db9f103",
+      "caption": "chain-link-fence / Flat-moment correction",
+      "actually_viewed": true,
+      "resolution": [
+        512,
+        192
+      ],
+      "native_panel_size": [
+        160,
+        160
+      ],
+      "notes": "Sky looks nearly unchanged. Building detail remains soft. Foliage and chain-link fence are visibly unchanged; the added correction is numerically zero over those native ROIs. ISO100 aperture/time/motion differ, so it is not exact GT."
+    }
+  ],
+  "identical_panel_checks": [
+    {
+      "first": "882758d750b3bf868b253cee07b740957b363cf68d3aef8c366d64e229e61162",
+      "second": "07d234fc3dc99246cf29f4afa3c422869383995b9084c624dd9dab887f872120",
+      "noisy_and_reference_pixels_identical": true,
+      "ROI_display_WB_matrix_checkpoint_identical": true
+    },
+    {
+      "first": "a23df268ea5beba55fc6f95d1a5d8ab6d0b430e89367c317a92b4b0c70637c3f",
+      "second": "09721a56ac4ef18921007c051be5fb1a945df8724a3765d2b70ca76251afe125",
+      "noisy_and_reference_pixels_identical": true,
+      "ROI_display_WB_matrix_checkpoint_identical": true
+    },
+    {
+      "first": "c36d5e023944d2b5a4d8b04d9c8e8b26b5b515c3dfffba07ee0636fc550e1105",
+      "second": "fc7eb9f7e2c5ae8db104b7deaf6240b48b209515770069e6e9dabbd0d126bcf6",
+      "noisy_and_reference_pixels_identical": true,
+      "ROI_display_WB_matrix_checkpoint_identical": true
+    },
+    {
+      "first": "adbbd5f1408448d9af3a73e1fa11c82d6781a32a7c7e5abb359c693caf058325",
+      "second": "075242ddd49c8eaddbd4f575582b858f358f04aa287bb4a790b75411e163bdcf",
+      "noisy_and_reference_pixels_identical": true,
+      "ROI_display_WB_matrix_checkpoint_identical": true
+    },
+    {
+      "first": "b31c597d7f60c89607b81b9d32b71bc2355db0962c93a0f0a1328975feb654de",
+      "second": "e4becf663730db5940d658a745ac6cb292b092c1ea2a69811c09d78270e70082",
+      "noisy_and_reference_pixels_identical": true,
+      "ROI_display_WB_matrix_checkpoint_identical": true
+    },
+    {
+      "first": "177dafd53119cb4ac5edda952a84886f2cf20c40f5dc76cb0d6fbfeaa2ed9c18",
+      "second": "7c45ff734817777b5cd09349d456973a95ae59e370b390293cae37b20dd9aa07",
+      "noisy_and_reference_pixels_identical": true,
+      "ROI_display_WB_matrix_checkpoint_identical": true
+    },
+    {
+      "first": "5b7a7dcb1008deb49e7cddd1aa8cb015a63e20ca1c4999a27f8b5622bb72c758",
+      "second": "8a5875e3fd0630007d9362f6aab1baa3ed81410d048c4d4a9ed3c39884d9121c",
+      "noisy_and_reference_pixels_identical": true,
+      "ROI_display_WB_matrix_checkpoint_identical": true
+    },
+    {
+      "first": "da83ea3a1e3a5ee4b97b1d7c0a553eb84305ae3732916763e0d95485c0b6d54d",
+      "second": "6e72ca55e6179a4b1749eec22fabaf6791a2ae91d9e61dbf79278a44d0d4f569",
+      "noisy_and_reference_pixels_identical": true,
+      "ROI_display_WB_matrix_checkpoint_identical": true
+    },
+    {
+      "first": "efe76d2d77def0d1c1ab950b96dc73696f850d7f3c28c20255e2d0f70a7d229f",
+      "second": "afddc86397d9fc3ff3377a566c4be36e368d2c488d0dcf6888c8720d911276a1",
+      "noisy_and_reference_pixels_identical": true,
+      "ROI_display_WB_matrix_checkpoint_identical": true
+    },
+    {
+      "first": "77bc323a6b6769b766da13e598b5d426d332a4f55af85c5d772a5ff430174840",
+      "second": "bc9dce6a79a630d15b71ef2008142b5fcefa2de44245e0f30ec088a5c5edfa64",
+      "noisy_and_reference_pixels_identical": true,
+      "ROI_display_WB_matrix_checkpoint_identical": true
+    },
+    {
+      "first": "3ae3334f7b042b5dda7eec259e71905be1c53ce85d0ed83824d324ac8a8d7cd0",
+      "second": "436252c63f4bd43c9db069c47dd8ef2dc09a5c438f7ec7a6693965c474d6bb1d",
+      "noisy_and_reference_pixels_identical": true,
+      "ROI_display_WB_matrix_checkpoint_identical": true
+    },
+    {
+      "first": "18aca152655fcce172b04bf3ba08e65085681ecf185a66cf46017094fa4e041d",
+      "second": "3ac147feb6c99fc3bd13a4c39470ea31751471af5df3d42b76777f72a7773e1d",
+      "noisy_and_reference_pixels_identical": true,
+      "ROI_display_WB_matrix_checkpoint_identical": true
+    },
+    {
+      "first": "ab14798468185a99d08065c2b7444c0a2ba9176b30f5d9efc6026b6380dbf1b1",
+      "second": "b4ee24acd6b49452deedf4489c40f29d67a224f59f6311b47a78c2754db9f103",
+      "noisy_and_reference_pixels_identical": true,
+      "ROI_display_WB_matrix_checkpoint_identical": true
+    }
+  ],
+  "repository_images": [
+    {
+      "repository_image": "docs/images/flat-moment-CPU-v1-crop-a859058a9aa7b083.png",
+      "source": {
+        "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/crop-a859058a9aa7b083.png",
+        "sha256": "882758d750b3bf868b253cee07b740957b363cf68d3aef8c366d64e229e61162"
+      },
+      "metadata": {
+        "image": "crop-a859058a9aa7b083.png",
+        "caption": "exact-photo-0 / V60 saved eager",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V60 saved eager",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (exact saved)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "882758d750b3bf868b253cee07b740957b363cf68d3aef8c366d64e229e61162",
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "source": {
+          "id": "exact-photo-0",
+          "kind": "photo",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact saved synthetic/analytic target; not a real paired exposure."
+      }
+    },
+    {
+      "repository_image": "docs/images/flat-moment-CPU-v1-crop-a600ea243fb10ca8.png",
+      "source": {
+        "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/crop-a600ea243fb10ca8.png",
+        "sha256": "07d234fc3dc99246cf29f4afa3c422869383995b9084c624dd9dab887f872120"
+      },
+      "metadata": {
+        "image": "crop-a600ea243fb10ca8.png",
+        "caption": "exact-photo-0 / flat-moment correction",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "flat-moment correction",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (exact saved)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "07d234fc3dc99246cf29f4afa3c422869383995b9084c624dd9dab887f872120",
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "source": {
+          "id": "exact-photo-0",
+          "kind": "photo",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact saved synthetic/analytic target; not a real paired exposure."
+      }
+    },
+    {
+      "repository_image": "docs/images/flat-moment-CPU-v1-crop-b751704002efa596.png",
+      "source": {
+        "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/crop-b751704002efa596.png",
+        "sha256": "a23df268ea5beba55fc6f95d1a5d8ab6d0b430e89367c317a92b4b0c70637c3f"
+      },
+      "metadata": {
+        "image": "crop-b751704002efa596.png",
+        "caption": "exact-photo-1 / V60 saved eager",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V60 saved eager",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (exact saved)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "a23df268ea5beba55fc6f95d1a5d8ab6d0b430e89367c317a92b4b0c70637c3f",
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "source": {
+          "id": "exact-photo-1",
+          "kind": "photo",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact saved synthetic/analytic target; not a real paired exposure."
+      }
+    },
+    {
+      "repository_image": "docs/images/flat-moment-CPU-v1-crop-3b21945219b49a71.png",
+      "source": {
+        "path": "/mnt/external/demosaic/benchmarks/flat-moment-correction-CPU-v1/crop-3b21945219b49a71.png",
+        "sha256": "09721a56ac4ef18921007c051be5fb1a945df8724a3765d2b70ca76251afe125"
+      },
+      "metadata": {
+        "image": "crop-3b21945219b49a71.png",
+        "caption": "exact-photo-1 / flat-moment correction",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "flat-moment correction",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (exact saved)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "09721a56ac4ef18921007c051be5fb1a945df8724a3765d2b70ca76251afe125",
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "source": {
+          "id": "exact-photo-1",
+          "kind": "photo",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact saved synthetic/analytic target; not a real paired exposure."
+      }
+    },
+    {
+      "repository_image": "docs/images/flat-moment-CPU-v1-crop-22e29117b6e71473.png",
+      "source": {
+        "path": "/mnt/external/demosaic/benchmarks/flat-moment-saved-hue-grid-CPU-v1/crop-22e29117b6e71473.png",
+        "sha256": "efe76d2d77def0d1c1ab950b96dc73696f850d7f3c28c20255e2d0f70a7d229f"
+      },
+      "metadata": {
+        "image": "crop-22e29117b6e71473.png",
+        "caption": "h315-s0.98-l0.90 / V60 retained CUDA prediction",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V60",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "efe76d2d77def0d1c1ab950b96dc73696f850d7f3c28c20255e2d0f70a7d229f",
+        "method_index": 0,
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "postprocess_sha256": null,
+        "source": {
+          "id": "h315-s0.98-l0.90",
+          "palette": "h315-s0.98-l0.90",
+          "source": {
+            "id": "h315-s0.98-l0.90",
+            "hue_degrees": 315,
+            "saturation": 0.98,
+            "peak": 0.9,
+            "linear_srgb": [
+              0.9,
+              0.018000000000000016,
+              0.6795
+            ]
+          },
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h315-s0.98-l0.90-iso12800-prior-RGGB.npz",
+          "sha256": "6f08684e792ad7c9830d86de8813335b5440d747a802f1b1a932026710116a83",
+          "target_camera_RGB": [
+            0.42243748903274536,
+            0.09517499804496765,
+            0.4383000135421753
+          ],
+          "draws_per_pattern": 1
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "display_exposure": 1,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact analytic uniform field; not a real capture."
+      }
+    },
+    {
+      "repository_image": "docs/images/flat-moment-CPU-v1-crop-7327e33fcab73d36.png",
+      "source": {
+        "path": "/mnt/external/demosaic/benchmarks/flat-moment-saved-hue-grid-CPU-v1/crop-7327e33fcab73d36.png",
+        "sha256": "afddc86397d9fc3ff3377a566c4be36e368d2c488d0dcf6888c8720d911276a1"
+      },
+      "metadata": {
+        "image": "crop-7327e33fcab73d36.png",
+        "caption": "h315-s0.98-l0.90 / V60 plus fixed flat-moment CPU correction",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Flat-moment correction",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "afddc86397d9fc3ff3377a566c4be36e368d2c488d0dcf6888c8720d911276a1",
+        "method_index": 1,
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "postprocess_sha256": "ede405608a182716c68a02523d8b80d5686ba875b7314b048ea5e65421bfce0f",
+        "source": {
+          "id": "h315-s0.98-l0.90",
+          "palette": "h315-s0.98-l0.90",
+          "source": {
+            "id": "h315-s0.98-l0.90",
+            "hue_degrees": 315,
+            "saturation": 0.98,
+            "peak": 0.9,
+            "linear_srgb": [
+              0.9,
+              0.018000000000000016,
+              0.6795
+            ]
+          },
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h315-s0.98-l0.90-iso12800-prior-RGGB.npz",
+          "sha256": "6f08684e792ad7c9830d86de8813335b5440d747a802f1b1a932026710116a83",
+          "target_camera_RGB": [
+            0.42243748903274536,
+            0.09517499804496765,
+            0.4383000135421753
+          ],
+          "draws_per_pattern": 1
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "display_exposure": 1,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact analytic uniform field; not a real capture."
+      }
+    },
+    {
+      "repository_image": "docs/images/flat-moment-CPU-v1-crop-ffe636f7e8bb713b.png",
+      "source": {
+        "path": "/mnt/external/demosaic/benchmarks/flat-moment-GFX-CPU-v1/crop-ffe636f7e8bb713b.png",
+        "sha256": "3ac147feb6c99fc3bd13a4c39470ea31751471af5df3d42b76777f72a7773e1d"
+      },
+      "metadata": {
+        "image": "crop-ffe636f7e8bb713b.png",
+        "caption": "foliage / Flat-moment correction",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Flat-moment correction",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 AHD / not GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "3ac147feb6c99fc3bd13a4c39470ea31751471af5df3d42b76777f72a7773e1d",
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "postprocess_sha256": "ede405608a182716c68a02523d8b80d5686ba875b7314b048ea5e65421bfce0f",
+        "source": [
+          {
+            "role": "noisy",
+            "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+            "metadata": {
+              "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+              "camera": "GFX100S",
+              "pattern": "RGGB",
+              "black_levels": [
+                4101.0,
+                4098.0,
+                4104.0,
+                4106.0
+              ],
+              "white_levels": [
+                65535.0,
+                65535.0,
+                65535.0,
+                65535.0
+              ],
+              "white_balance": [
+                1.5132450331125828,
+                1.0,
+                2.2152317880794703
+              ],
+              "camera_to_srgb": [
+                [
+                  1.0725188393098881,
+                  0.17123593128834644,
+                  -0.24375477059823436
+                ],
+                [
+                  -0.1267191317089774,
+                  1.4310509369654432,
+                  -0.3043318052564657
+                ],
+                [
+                  -0.009697676902906037,
+                  -0.29348063283422965,
+                  1.3031783097371357
+                ]
+              ],
+              "flip": 0,
+              "iso": 6400,
+              "adc_white_level": 65535.0
+            }
+          },
+          {
+            "role": "reference",
+            "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+            "metadata": {
+              "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+              "camera": "GFX100S",
+              "pattern": "RGGB",
+              "black_levels": [
+                256.0,
+                255.0,
+                256.0,
+                256.0
+              ],
+              "white_levels": [
+                65535.0,
+                65535.0,
+                65535.0,
+                65535.0
+              ],
+              "white_balance": [
+                1.5132450331125828,
+                1.0,
+                2.2152317880794703
+              ],
+              "camera_to_srgb": [
+                [
+                  1.0725188393098881,
+                  0.17123593128834644,
+                  -0.24375477059823436
+                ],
+                [
+                  -0.1267191317089774,
+                  1.4310509369654432,
+                  -0.3043318052564657
+                ],
+                [
+                  -0.009697676902906037,
+                  -0.29348063283422965,
+                  1.3031783097371357
+                ]
+              ],
+              "flip": 0,
+              "iso": 100,
+              "adc_white_level": 65535.0
+            }
+          }
+        ],
+        "region": {
+          "name": "foliage",
+          "noisy_xy": [
+            8890,
+            5570
+          ],
+          "reference_xy": [
+            8890,
+            5570
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9597686529159546
+        },
+        "context_xywh": [
+          8714,
+          5394,
+          512,
+          512
+        ],
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06,
+          "source": "input Haar fit"
+        },
+        "display_exposure": 4,
+        "white_balance": [
+          [
+            1.5132449865341187,
+            1.0,
+            2.2152318954467773
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.0725188255310059,
+              0.17123593389987946,
+              -0.2437547743320465
+            ],
+            [
+              -0.126719132065773,
+              1.4310508966445923,
+              -0.30433180928230286
+            ],
+            [
+              -0.00969767663627863,
+              -0.29348063468933105,
+              1.303178310394287
+            ]
+          ]
+        ],
+        "reference": "Independent DSCF3880 ISO100 f/5.6 AHD exposure; not GT; aperture/time/motion differ. No reference fit or pixelwise score.",
+        "runtime": "CPU FP32/contiguous/B1/native512/two threads; one actual neural forward per context shared by original and corrected"
+      }
+    },
+    {
+      "repository_image": "docs/images/flat-moment-CPU-v1-crop-b1791961528f88ab.png",
+      "source": {
+        "path": "/mnt/external/demosaic/benchmarks/flat-moment-GFX-CPU-v1/crop-b1791961528f88ab.png",
+        "sha256": "b4ee24acd6b49452deedf4489c40f29d67a224f59f6311b47a78c2754db9f103"
+      },
+      "metadata": {
+        "image": "crop-b1791961528f88ab.png",
+        "caption": "chain-link-fence / Flat-moment correction",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Flat-moment correction",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 AHD / not GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "b4ee24acd6b49452deedf4489c40f29d67a224f59f6311b47a78c2754db9f103",
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "postprocess_sha256": "ede405608a182716c68a02523d8b80d5686ba875b7314b048ea5e65421bfce0f",
+        "source": [
+          {
+            "role": "noisy",
+            "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+            "metadata": {
+              "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+              "camera": "GFX100S",
+              "pattern": "RGGB",
+              "black_levels": [
+                4101.0,
+                4098.0,
+                4104.0,
+                4106.0
+              ],
+              "white_levels": [
+                65535.0,
+                65535.0,
+                65535.0,
+                65535.0
+              ],
+              "white_balance": [
+                1.5132450331125828,
+                1.0,
+                2.2152317880794703
+              ],
+              "camera_to_srgb": [
+                [
+                  1.0725188393098881,
+                  0.17123593128834644,
+                  -0.24375477059823436
+                ],
+                [
+                  -0.1267191317089774,
+                  1.4310509369654432,
+                  -0.3043318052564657
+                ],
+                [
+                  -0.009697676902906037,
+                  -0.29348063283422965,
+                  1.3031783097371357
+                ]
+              ],
+              "flip": 0,
+              "iso": 6400,
+              "adc_white_level": 65535.0
+            }
+          },
+          {
+            "role": "reference",
+            "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+            "metadata": {
+              "source": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+              "camera": "GFX100S",
+              "pattern": "RGGB",
+              "black_levels": [
+                256.0,
+                255.0,
+                256.0,
+                256.0
+              ],
+              "white_levels": [
+                65535.0,
+                65535.0,
+                65535.0,
+                65535.0
+              ],
+              "white_balance": [
+                1.5132450331125828,
+                1.0,
+                2.2152317880794703
+              ],
+              "camera_to_srgb": [
+                [
+                  1.0725188393098881,
+                  0.17123593128834644,
+                  -0.24375477059823436
+                ],
+                [
+                  -0.1267191317089774,
+                  1.4310509369654432,
+                  -0.3043318052564657
+                ],
+                [
+                  -0.009697676902906037,
+                  -0.29348063283422965,
+                  1.3031783097371357
+                ]
+              ],
+              "flip": 0,
+              "iso": 100,
+              "adc_white_level": 65535.0
+            }
+          }
+        ],
+        "region": {
+          "name": "chain-link-fence",
+          "noisy_xy": [
+            2240,
+            6000
+          ],
+          "reference_xy": [
+            2241,
+            6000
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9550720453262329
+        },
+        "context_xywh": [
+          2064,
+          5824,
+          512,
+          512
+        ],
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06,
+          "source": "input Haar fit"
+        },
+        "display_exposure": 4,
+        "white_balance": [
+          [
+            1.5132449865341187,
+            1.0,
+            2.2152318954467773
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.0725188255310059,
+              0.17123593389987946,
+              -0.2437547743320465
+            ],
+            [
+              -0.126719132065773,
+              1.4310508966445923,
+              -0.30433180928230286
+            ],
+            [
+              -0.00969767663627863,
+              -0.29348063468933105,
+              1.303178310394287
+            ]
+          ]
+        ],
+        "reference": "Independent DSCF3880 ISO100 f/5.6 AHD exposure; not GT; aperture/time/motion differ. No reference fit or pixelwise score.",
+        "runtime": "CPU FP32/contiguous/B1/native512/two threads; one actual neural forward per context shared by original and corrected"
+      }
+    }
+  ],
+  "broad_CPU_screen": {
+    "plan": {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-broad-CPU-v1/plan.json",
+      "sha256": "1ca52059f627ded09d75837ed37217f22efb2019274010b5d0e26e04b98c21ef"
+    },
+    "driver": {
+      "path": "/mnt/external/demosaic/benchmarks/flat-moment-broad-CPU-v1/source.py",
+      "sha256": "f0b6f545f56b7579de6172f469b11e64c601358ce77e13d46f279efce86efbb0"
+    },
+    "status_at_capture": {
+      "owner": {
+        "pid": 3303654,
+        "created": 1792236330.75
+      },
+      "operator_sha256": "ede405608a182716c68a02523d8b80d5686ba875b7314b048ea5e65421bfce0f",
+      "driver_sha256": "f0b6f545f56b7579de6172f469b11e64c601358ce77e13d46f279efce86efbb0",
+      "status": "running-fixed-CPU-screen-no-GPU",
+      "updated_UTC": "2026-10-17T11:32:16.137678+00:00",
+      "neural_batch_forwards": 140,
+      "method_case_rows": 504,
+      "latest_batch_ids": [
+        "2f22672c99fcdc5d4a3ad4641f4b0e44e78f3a40",
+        "synthetic-0"
+      ]
+    },
+    "actual_owner_at_capture": {
+      "identity_matches": true,
+      "status": "running",
+      "command": [
+        "/home/dllu/proj/demosaic/.venv/bin/python3",
+        ".cache/probe_flat_moment_broad_cpu.py"
+      ]
+    },
+    "result_exists_at_capture": false,
+    "reviewed_or_claimed_complete": false,
+    "scope": "Eight fixed protocol photos and all16 procedural sources; seven conditions/four CFAs,1344 method-case rows when complete. CPU FP32/two threads/B2, one neural forward shared by both methods. Keyed CPU noise differs from older CUDA scores. No parameter tuning, GPU use or production integration. Native crops/results need review."
+  },
+  "production_integrated": false,
+  "new_training": false,
+  "limits": "Motivated development diagnostics, not a blind test, trained-model quality result, full427 replacement, fullframe throughput or SOTA. Moment identity assumes iid unclipped Poisson+Gaussian samples; plug-in gates do not prove confidence coverage or unbiased restoration. Current original20k training/review queues stay unchanged."
+}
