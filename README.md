@@ -28,9 +28,9 @@ limitations and 36–37s restoration times for102MP. Neither endpoint is promote
 The [completed original10k RAW-kernel review](docs/raw-kernel-phase-joint-v67-full10k-review.md)
 gains1.37dB over its2k boundary but still trails mature V60 by1.96dB;
 weak-detail and bright-color regressions prevent promotion.
-The [normalization first1k review](docs/normalization-v68-v69-first1k-review.md)
-finds a small +0.006dB matched photo gain, with unresolved texture/color failures;
-the original4k schedules will be completed before another quality decision.
+The [completed4k normalization review](docs/normalization-v68-v69-original4k-review.md)
+finds a small +0.020dB matched photo gain; own1k progress is uncertain and
+texture/color failures keep V43 as the working reference.
 
 Native 160×160 validation crops: noisy → denoised → GT, using V43 step 2000
 (FP16, ISO12800 synthetic noise prior). These are 100% crops at the 8×8-binned
