@@ -1,0 +1,70 @@
+{
+  "receipt": {
+    "path": "/mnt/external/demosaic/benchmarks/analytic-summary-audit-CPU-preflight-v1/receipt.json",
+    "sha256": "2e93edec580c1081928c324e527fd8c7207de76393c2027ace2c9935ce2efa1f"
+  },
+  "result": {
+    "status": "completed-genuine-analytic-summary-CPU-preflight",
+    "replays": [
+      {
+        "source": "/mnt/external/demosaic/evaluation/raw-kernel-warmup-v65-first1k-analytic-v1",
+        "published_audit": "/mnt/external/demosaic/evaluation/raw-kernel-warmup-v65-first1k-analytic-v1/independent-statistics-audit-v2.json",
+        "result": {
+          "cases": 896,
+          "distinct_observations_per_model": 448,
+          "methods": 2,
+          "groups": 56,
+          "scalar_fields": 1504,
+          "maximum_arithmetic_error": 2.220446049250313e-16,
+          "arithmetic_bound": 1e-12
+        },
+        "published_counts_and_maximum_error_exact": true
+      },
+      {
+        "source": "/mnt/external/demosaic/evaluation/raw-kernel-phase-warmup-v66-first1k-analytic-v1",
+        "published_audit": "/mnt/external/demosaic/evaluation/raw-kernel-phase-warmup-v66-first1k-analytic-v1/independent-statistics-audit.json",
+        "result": {
+          "cases": 896,
+          "distinct_observations_per_model": 448,
+          "methods": 2,
+          "groups": 56,
+          "scalar_fields": 1504,
+          "maximum_arithmetic_error": 2.220446049250313e-16,
+          "arithmetic_bound": 1e-12
+        },
+        "published_counts_and_maximum_error_exact": true
+      }
+    ],
+    "negative_controls": [
+      {
+        "corruption": "duplicate-case",
+        "rejected": true
+      },
+      {
+        "corruption": "omitted-case",
+        "rejected": true
+      },
+      {
+        "corruption": "nonfinite-case",
+        "rejected": true
+      },
+      {
+        "corruption": "missing-case-metric",
+        "rejected": true
+      },
+      {
+        "corruption": "wrong-summary-mean",
+        "rejected": true
+      },
+      {
+        "corruption": "duplicate-model-label",
+        "rejected": true
+      }
+    ],
+    "driver_source": {
+      "path": "/home/dllu/proj/demosaic/scripts/audit_analytic_summary.py",
+      "sha256": "db133a81575c79b93ce28ade8efb4925ecc928f640d13ab840ed7eef4c456510"
+    },
+    "scope": "Retained actual V65/V66 scalar coverage/summary arithmetic matches their published audits, including2methods/896cases/56groups/1504fields. Six in-memory corruptions are rejected. No original files changed, no inference or new quality evidence."
+  }
+}
