@@ -370,6 +370,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 else ()
             )
             + (("pretrained_rgb.camera_matrix_reference",) if new_camera_reference else ())
+            + (("pretrained_rgb.raw_kernel.",) if model.config.raw_kernel_reconstruction else ())
         )
         if incompatible.unexpected_keys or any(
             not k.startswith(allowed_prefixes) for k in incompatible.missing_keys

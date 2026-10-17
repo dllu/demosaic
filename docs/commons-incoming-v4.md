@@ -79,6 +79,14 @@ Rebin controller PID 1953180, creation 1792206647.0; status
 `rebin4-workflow.json`, plan `rebin4-plan.json`, log
 `.cache/rebin-commons-incoming-v4.log`.
 
+The [independent full 4× audit is queued](results/commons-incoming-v4-independent4-queue.json):
+controller PID 2032560, creation 1792209281.47. It waits for that exact producer
+to exit, then rehashes all 8,872 new 4×/matching 8× files, checks all active
+membership/old rows, compares every rounded area2 sample, and creates 48 content
+thumbnails. It stops for actual contact review. Its frozen source/status are in
+`independent4-source/` and `independent4-workflow.json` under this corpus; no
+active model manifest is substituted and no new restoration score is computed.
+
 Operational files:
 
 - Output: `/mnt/external/demosaic/commons-incoming-20261017-v4-quarantine/`.

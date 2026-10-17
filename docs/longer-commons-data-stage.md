@@ -65,6 +65,16 @@ Plan and archived controller/configs:
 Log: `.cache/train-long-commons-v63-v64-first4k-v1.log`.
 Inspect actual PID/creation and child status before acting; do not start duplicates.
 
+The [primary-panel review is queued](results/long-commons-v63-v64-first4k-review-queue.json)
+behind that exact controller's exit. Owner PID 2036802, creation 1792209597.41,
+uses the immutable panel operators and old model worktree. It evaluates both
+new 4,000-step models: 62,020 photo/procedural/classical rows, known360/unseen450,
+1,344 analytic rows, eight full-frame GFX crop triplets, twelve other-camera
+triplets and 64 selected CPU-color predictions. Historical V60/reference bulk
+neural panels are retained. Independent statistics/state/hue/native review and
+a quality decision remain required after primary evaluation; nothing is promoted
+or continued automatically.
+
 Reports must include at least two native noisy/denoised/exact-GT photographic
 triplets and DSCF3879/3880 sky/building/foliage/fence crops, with accurate non-GT
 labels for independent real references. No protected-final model score is used.

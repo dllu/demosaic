@@ -243,6 +243,7 @@ class PretrainedRgbDemosaic(nn.Module):
         self, *, stabilized=False, physical_anchors=False, processing_scale=1,
         detail_prior=False, hidden_autocast=False, center_camera_matrix=False,
         middle_skip_fp32=False, adc_projection=False,
+        raw_kernel=False, raw_kernel_windows=(1, 5, 17),
     ):
         super().__init__()
         if physical_anchors and not stabilized:
@@ -253,6 +254,8 @@ class PretrainedRgbDemosaic(nn.Module):
             raise ValueError("Packed processing requires variance stabilization and scale 2")
         if detail_prior and processing_scale != 2:
             raise ValueError("The detail prior requires packed processing")
+        if raw_kernel and (processing_scale != 1 or adc_projection):
+            raise ValueError("RAW kernel reconstruction requires native processing and no ADC projection")
         self.network = RgbRestorationTrunk(
             hidden_autocast=hidden_autocast, middle_skip_fp32=middle_skip_fp32
         )
@@ -287,6 +290,13 @@ class PretrainedRgbDemosaic(nn.Module):
                 self.register_buffer("detail_energy", detail_malvar_energy().clone(), persistent=False)
         self._noise_key = None
         self._noise_profiles = None
+        self.raw_kernel = None
+        if raw_kernel:
+            from .raw_kernel import AdaptiveRawKernel
+
+            # Keep the existing RGB tail in the trainable feature path. Its
+            # free RGB prediction conditions kernels, never enters output RGB.
+            self.raw_kernel = AdaptiveRawKernel(67, raw_kernel_windows)
 
     @torch.no_grad()
     def initialize_camera_matrix_reference(self):
@@ -514,6 +524,15 @@ class PretrainedRgbDemosaic(nn.Module):
                 if isinstance(middle_offset, tuple):
                     encoder_kwargs = {"encoder_offsets": middle_offset[:2]}
                     middle_offset = middle_offset[2]
+            if self.raw_kernel is not None:
+                prediction, features = self.network(
+                    normalized, noise, head_offset=head_offset, middle_offset=middle_offset,
+                    return_features=True, **encoder_kwargs,
+                )
+                return self.raw_kernel(
+                    original_packed, colors,
+                    torch.cat((features.float(), prediction.float()), 1)[..., :h, :w],
+                )
             prediction = self.network(
                 normalized, noise, head_offset=head_offset, middle_offset=middle_offset,
                 **encoder_kwargs,

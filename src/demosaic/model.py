@@ -52,6 +52,8 @@ class ModelConfig:
     rgb_center_camera_matrix: bool = False
     rgb_middle_skip_fp32: bool = False
     adc_cfa_projection: bool = False
+    raw_kernel_reconstruction: bool = False
+    raw_kernel_windows: tuple[int, ...] = (1, 5, 17)
 
     def to_dict(self):
         return asdict(self)
@@ -377,6 +379,10 @@ class JointDemosaic(nn.Module):
         self.config = config or ModelConfig()
         self.refinement_precision = "float32"
         cfg = self.config
+        if type(cfg.raw_kernel_reconstruction) is not bool:
+            raise ValueError("RAW kernel reconstruction must be a boolean")
+        if cfg.raw_kernel_reconstruction and cfg.restoration_backbone != "pretrained-rgb":
+            raise ValueError("RAW kernel reconstruction requires the pretrained RGB backbone")
         if cfg.adc_cfa_projection and (
             cfg.restoration_backbone != "pretrained-rgb" or not cfg.variance_stabilization
         ):
@@ -447,6 +453,8 @@ class JointDemosaic(nn.Module):
                 center_camera_matrix=cfg.rgb_center_camera_matrix,
                 middle_skip_fp32=cfg.rgb_middle_skip_fp32,
                 adc_projection=cfg.adc_cfa_projection,
+                raw_kernel=cfg.raw_kernel_reconstruction,
+                raw_kernel_windows=cfg.raw_kernel_windows,
             )
             if cfg.dino and cfg.dino_feature_fusion == "convnext-pyramid":
                 from .dino_pyramid import DinoPyramidContext

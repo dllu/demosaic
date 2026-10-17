@@ -199,6 +199,17 @@ or a universal rejection of input adaptation. A same-source control replay is
 now complete in the [unchanged-control replay](control-replay-v57-review.md).
 The original fresh schedules now have a [complete 10,000-update review](fresh-dino-capacity-10k-review.md).
 
+## Centered RAW reconstruction candidate
+
+The independent [centered-RAW reconstruction prototype](raw-kernel-reconstruction.md)
+now constrains the output head to preserve clean constant camera RGB rather than
+adding another color-mean loss. It conditions sample-difference coefficients on
+the existing DINOv3/RGB features. Actual legacy/default-off CPU predictions match
+exactly, and genuine-parent CPU restart/gradient checks pass. It remains
+default-off: noisy-field unbiasedness, CUDA behavior, trained detail and speed
+have not been established. It is not an implementation or quality reproduction
+of the 2026 continuous-kernel method referenced in that note.
+
 ## Recent RAW denoising comparator
 
 [Sánchez-Beeckman and Buades (April 2026)](https://arxiv.org/abs/2604.17453)
