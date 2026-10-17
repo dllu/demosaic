@@ -117,6 +117,44 @@ negative/above-white numerical range tests. CPU BF16 autocast changes deep
 features while the reconstruction stays FP32. No noise was added to those
 constant fields; they do not establish unbiased restoration of noisy fields.
 
+## Prepared CUDA engineering check
+
+The [actual CUDA fixture is prepared and queued](results/raw-kernel-CUDA-preflight-queue.json),
+not yet executed. Its public [operator](../scripts/preflight_raw_kernel_cuda.py)
+separates CPU preparation from gated execution. Candidate source, dependencies,
+operators, fixture, parent, data and input hashes are archived in
+`/mnt/external/demosaic/benchmarks/raw-kernel-CUDA-preflight-v1/`.
+The CPU preparation audit imports the real frozen candidate, verifies all 127
+archived files and inputs, and independently reconstructs expected trainer source
+bundle `411d1669b050b8074d7a9d030b3c42ef1af6764c6f20efbd08ecf5466dc632d8`.
+It rejects actual live artifact owner 2060575 before initializing CUDA, creating
+a training run, constructing a network or fetching any training batch.
+
+Queue controller PID 2069973, creation 1792211664.76, waits for that exact artifact
+owner to complete and exit. This serializes the check after the V63/V64 training,
+primary evaluation, statistics/hue and CPU artifact work. It imports the archived
+candidate package while the data experiment keeps its original model worktree.
+The queue stops for independent review after engineering checks; it launches no
+production trial and makes no quality decision.
+
+The pending fixture starts from V60 full4k EMA with the option enabled and checks
+that all old EMA tensors load exactly, actual DINO stays frozen and initial GPU
+BF16 output is exactly bilinear. It then runs **seven discarded batch16/native256/
+BF16 updates**, seed49, LR1e-5/warmup200 and the original 20,000-update schedule.
+The seven domains are Commons, Commons, Commons, paired, paired, Commons, native.
+It uses original reviewed 40,170-source Commons/native128/paired32 data, workers0,
+forced real Commons and two validation images. These fixture overrides do not
+change either active production arm.
+
+Intended checks cover finite 93 model/93 EMA tensors and 91 AdamW states, saved
+optimizer/RNG reconstruction, exact portable EMA predictions on two natural photos
+under FP16 and BF16, and a BF16 gradient probe through the native RGB trunk/tail
+and new coefficient head. Sixty-four clean native64 constant cases cover four
+colors/four CFAs/two conditioning profiles/FP32 and BF16, including negative and
+above-white numerical values, with no noise added. Peak CUDA allocation is
+recorded separately from total unified RAM or throughput. These remain pending
+checks: preparation alone proves none of their GPU results.
+
 ## Limits and required next evidence
 
 The invariant is about **clean constant samples**, not unbiased restoration of

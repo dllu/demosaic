@@ -1,0 +1,89 @@
+{
+  "status": "prepared-and-CPU-validated-actual-queued-owner-live-CUDA-not-yet-executed",
+  "prepared_plan": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-CUDA-preflight-v1/plan.json",
+    "sha256": "fdeca864373cef31117bd2fec84802d7a1054cab71055a36eff7ef2c5e181a57"
+  },
+  "CPU_preparation_audit": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-CUDA-preflight-v1/CPU-preparation-audit.json",
+    "sha256": "c323d69bd1115009e2b8a8633c05f17ff0c724cd8468897c15cd8f6767a02746",
+    "result": {
+      "status": "completed-CPU-preparation-integrity-and-actual-live-owner-rejection",
+      "plan": {
+        "path": "/mnt/external/demosaic/benchmarks/raw-kernel-CUDA-preflight-v1/plan.json",
+        "sha256": "fdeca864373cef31117bd2fec84802d7a1054cab71055a36eff7ef2c5e181a57"
+      },
+      "model_package_imported_from_actual_archived_candidate": "/mnt/external/demosaic/benchmarks/raw-kernel-CUDA-preflight-v1/candidate/src/demosaic/model.py",
+      "predicted_actual_train_source_bundle_sha256": "411d1669b050b8074d7a9d030b3c42ef1af6764c6f20efbd08ecf5466dc632d8",
+      "all_archived_and_input_hashes_verified": true,
+      "archived_files": 127,
+      "domains": [
+        "commons",
+        "commons",
+        "commons",
+        "paired",
+        "paired",
+        "commons",
+        "native"
+      ],
+      "actual_live_preceding_owner_rejected_before_CUDA_or_run": true,
+      "no_training_batches_loaded_no_network_instantiated": true,
+      "driver_sha256": "e00b801441c0d0f5ded1b663138c8c7d09178f7af974b834a8d5f88c1033601c",
+      "CUDA_initialized": false,
+      "scope": "Real preparation and refusal checks only, not executed CUDA/gradient/memory/EMA evidence. Future fixture keeps seven discarded B16/native256/BF16 updates and original20k schedule; actual model quality remains untested."
+    }
+  },
+  "workflow_at_publication": {
+    "path": "/mnt/external/demosaic/runs/raw-kernel-CUDA-preflight-workflow-v1.json",
+    "sha256": "2568abbda205d893a2a49eb037d1bec849c15088ed9374660e190b12d7a37be4",
+    "result": {
+      "updated_utc": "2026-10-17T04:34:25.328219+00:00",
+      "status": "waiting-for-actual-artifact-owner-exit-no-CUDA-check-started",
+      "controller": {
+        "pid": 2069973,
+        "created": 1792211664.76,
+        "driver_sha256": "38f9b7cf23751f478080b21e67d5b50ff19cbc119e03cfd5e487ef3e98a16eb9"
+      },
+      "previous_owner": {
+        "pid": 2060575,
+        "created": 1792211119.29,
+        "driver_sha256": "77d89774b96288633dcca30fe153940e3df0467aaf6ad01f4c94c32d0cc4d0c7"
+      },
+      "plan": "/mnt/external/demosaic/benchmarks/raw-kernel-CUDA-preflight-v1/CUDA-workflow-plan.json",
+      "prepared_plan": "/mnt/external/demosaic/benchmarks/raw-kernel-CUDA-preflight-v1/plan.json",
+      "output": "/mnt/external/demosaic/benchmarks/raw-kernel-CUDA-preflight-v1/receipt.json"
+    }
+  },
+  "queue_plan": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-CUDA-preflight-v1/CUDA-workflow-plan.json",
+    "sha256": "039acf47d9c22e0d731000a0acc86153e585738e93ad6aedeb0d55523a8fa9f5"
+  },
+  "prepared_fixture": {
+    "parent": "/mnt/external/demosaic/models/dino-convnext-palette-wide-b16-v60-step4000.pt",
+    "parent_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+    "expected_source_bundle_sha256": "411d1669b050b8074d7a9d030b3c42ef1af6764c6f20efbd08ecf5466dc632d8",
+    "package": "/mnt/external/demosaic/benchmarks/raw-kernel-CUDA-preflight-v1/candidate/src",
+    "operator": "/mnt/external/demosaic/benchmarks/raw-kernel-CUDA-preflight-v1/tools/preflight_raw_kernel_cuda.py",
+    "fixture": "/mnt/external/demosaic/benchmarks/raw-kernel-CUDA-preflight-v1/fixture.yaml",
+    "fixture_updates": 7,
+    "domains": [
+      "commons",
+      "commons",
+      "commons",
+      "paired",
+      "paired",
+      "commons",
+      "native"
+    ],
+    "after_workflow": "/mnt/external/demosaic/runs/long-commons-v63-v64-first4k-artifact-workflow-v1.json",
+    "after_owner": {
+      "pid": 2060575,
+      "created": 1792211119.29,
+      "driver_sha256": "77d89774b96288633dcca30fe153940e3df0467aaf6ad01f4c94c32d0cc4d0c7"
+    },
+    "scope": "Prepared engineering fixture only. Actual B16/native256/BF16, seed49/20k, original reviewed40170Commons/native128/paired32, forced real Commons/workers0/val2. Intended saved-state/RNG/optimizer/EMA, gradient,64clean native64 constant cases and peak allocation checks. No CUDA execution, quality trial, throughput or automatic model promotion."
+  },
+  "archived_files": 127,
+  "actual_queued_owner_verified_live": true,
+  "scope": "Prepared fixture and actual CPU/source/metadata/refusal evidence only. No CUDA/memory/gradient/EMA/quality result is established by this queue receipt. Execution is serialized after the unchanged matched-data reviews; no production trial or protected-final scoring."
+}
