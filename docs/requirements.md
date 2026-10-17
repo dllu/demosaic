@@ -251,8 +251,9 @@ GPU review is still pending.
 The [wider smooth-palette trial](wide-flat-palette.md) is prepared to target
 selected mature saturated-field failures. Legacy/default data is exact in CPU
 checks and the genuine-parent complete-state restart passes. Genuine native256/batch16 CUDA
-validation and all517 tests now pass; the matched first1k trial is running.
-Trained photo/real gains remain pending; this is not a model promotion or
+validation and all517 tests pass. The [completed first1k review](wide-flat-palette-first1k-review.md)
+finds tied photo PSNR, mixed real/color results and persistent native detail loss.
+Both original4k schedules will continue; this is not a model promotion or
 completion of the quality requirement.
 
 The [completed genuine Nonlocal Match-Filter reference review](nonlocal-reference-full-review.md)
@@ -265,5 +266,7 @@ superiority for our model.
 
 The [prospective hue grid](prospective-color-grid.md) adds1,176 completely
 audited uniform-field observations, with fixed previews and a serialized GPU
-queue. It is a finite color-consistency diagnostic, not evidence of a trained
+queue. All4,704 predictions/28,224 metric fields and12 native triplets now pass
+independent checks; all12 previews were viewed. Bright-field biases remain.
+It is a finite color-consistency diagnostic, not evidence of a trained
 quality gain, independent natural-scene generalization or completed SOTA.

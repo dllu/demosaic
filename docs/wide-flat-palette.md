@@ -1,4 +1,4 @@
-# Wider smooth-color palette: matched trial running
+# Wider smooth-color palette: matched trial
 
 The running training comparison targets the saturated flat-field failures
 in the [mature model review](mature-color-flat-review.md). The optional
@@ -6,8 +6,11 @@ in the [mature model review](mature-color-flat-review.md). The optional
 engineering passes, including a complete restart from the genuine mature
 ConvNeXt parent. The [genuine CUDA checks](results/wide-flat-palette-cuda-validation.json)
 also pass. **Trained quality gains remain unproven.**
-The [first1k workflow is running](results/wide-flat-palette-first1k-launch.json):
-control then wider palette, each under its original additional4k schedule.
+The [completed first1k review](wide-flat-palette-first1k-review.md) finds mixed
+color changes and no convincing detail gain. Its prospective hue sweep still
+has large bright-field errors. Both arms will continue their original
+additional4k schedules; neither first1k model is promoted.
+[Original launch receipt](results/wide-flat-palette-first1k-launch.json).
 [Complete CPU receipt, tests, source checks and prepared configurations](results/wide-flat-palette-preparation.json).
 
 The current smooth generator already includes colored fields: half neutral,

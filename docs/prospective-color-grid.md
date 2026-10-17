@@ -4,6 +4,8 @@ A larger uniform-field diagnostic is frozen before inspecting the palette
 trial's separate evaluation outputs: **147 colors and grays, 1,176 saved native
 256px observations**. It supplements the four colors chosen after the original
 fabric failure. The preparation receipt records the state before inference.
+The [completed first1k review](wide-flat-palette-first1k-review.md) now includes
+all four models, independent numerical checks and the twelve viewed previews.
 [Complete definition, observation hashes, input audit and queue launch](results/prospective-color-grid-preparation.json).
 
 The parent model's failures motivated this grid, so it is not a blind benchmark.
@@ -75,8 +77,8 @@ The five-script toolset and model package are frozen separately. Controller
 actual successful exit, with no GPU child. It confirmed that exit on October 17
 at 00:50 UTC and started the frozen grid. It retains
 all 4,704 full F32 predictions and runs an independent CPU audit of 28,224 metric
-fields and all native panel pixels. Twelve native triplets still require
-actual visual inspection after inference. A first waiting controller was
+fields and all native panel pixels. All twelve native triplets have now been
+visually inspected; results are in the review above. A first waiting controller was
 superseded before any GPU work to correct an unintended layout conversion;
 observations and preview cases never changed.
 
