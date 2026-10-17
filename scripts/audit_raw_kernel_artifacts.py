@@ -149,7 +149,7 @@ def main(workflow, training_workflow, after_workflow, output):
         assert sha(path) == digest
     recipe = yaml.safe_load(Path(plan["recipe"]).read_text())
     joint = recipe.get("raw_kernel_only", False) is False
-    steps = 2000 if joint else 1000
+    steps = plan["review_updates"] if joint else 1000
     cp = {
         **status["checkpoint"],
         "step": steps,

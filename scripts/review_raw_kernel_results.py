@@ -27,6 +27,9 @@ TRAINING_TERMINAL = "completed-head-only1000-awaiting-full-quality-and-native-re
 JOINT_TRAINING_TERMINAL = (
     "completed-joint2000-of-original10000-awaiting-full-quality-and-native-review"
 )
+FULL_JOINT_TRAINING_TERMINAL = (
+    "completed-original-joint10000-awaiting-full-quality-and-native-review"
+)
 
 
 def completed_primary(workflow, training_workflow):
@@ -35,6 +38,7 @@ def completed_primary(workflow, training_workflow):
     if status["status"] != PRIMARY_TERMINAL or training["status"] not in (
         TRAINING_TERMINAL,
         JOINT_TRAINING_TERMINAL,
+        FULL_JOINT_TRAINING_TERMINAL,
     ):
         raise RuntimeError("RAW-head primary/training workflow has not completed")
     exited(status)
@@ -47,8 +51,6 @@ def completed_primary(workflow, training_workflow):
     recipe = yaml.safe_load(Path(training_plan["recipe"]).read_text())
     joint = recipe.get("raw_kernel_only", False) is False
     if joint:
-        assert training["status"] == JOINT_TRAINING_TERMINAL
-        assert training["completed_updates"] == training_plan["review_updates"] == 2000
         assert training["planned_updates"] == recipe["steps"] == 10000
         assert training["finite94model94EMA92Adam"]
         assert training["normalization_buffers_bitwise_parent"]
@@ -56,7 +58,24 @@ def completed_primary(workflow, training_workflow):
         assert sha(parent_review) == training_plan["quality_review_sha256"]
         review = read(parent_review)
         assert review["review_complete"] is True
-        assert review["checkpoint"]["sha256"] == training_plan["parent_sha256"]
+        if training["status"] == FULL_JOINT_TRAINING_TERMINAL:
+            assert training["completed_updates"] == training_plan["review_updates"] == 10000
+            assert training["resumed_from_step"] == training_plan["resume_from_step"] == 2000
+            assert training["original2000_run_and_review_unchanged"] is True
+            assert training["all2_fixture_traced_input_hashes_domains_LRs_exact"] is True
+            assert sha(training["plan"]) == training["plan_sha256"]
+            assert training_plan["resume_review"] == {
+                "path": str(parent_review),
+                "sha256": training_plan["quality_review_sha256"],
+            }
+            assert review["boundary"]["step"] == 2000
+            assert {
+                k: review["checkpoint"][k] for k in ("path", "sha256")
+            } == training_plan["resume_checkpoint"]
+        else:
+            assert training["status"] == JOINT_TRAINING_TERMINAL
+            assert training["completed_updates"] == training_plan["review_updates"] == 2000
+            assert review["checkpoint"]["sha256"] == training_plan["parent_sha256"]
         assert recipe["model"]["raw_kernel_phase_conditioning"] is True
     else:
         assert recipe["raw_kernel_only"] is True
@@ -172,7 +191,8 @@ def main(workflow, training_workflow, output):
     assert not torch.cuda.is_initialized()
     status, training, _, plan = completed_primary(workflow, training_workflow)
     matched = plan.get("matched_control_review")
-    joint = training["status"] == JOINT_TRAINING_TERMINAL
+    full_joint = training["status"] == FULL_JOINT_TRAINING_TERMINAL
+    joint = training["status"] in (JOINT_TRAINING_TERMINAL, FULL_JOINT_TRAINING_TERMINAL)
     additional = (
         None
         if matched is None
@@ -186,12 +206,12 @@ def main(workflow, training_workflow, output):
         additional = {
             "path": plan["quality_review"],
             "sha256": plan["quality_review_sha256"],
-            "label": "V66-head-warmup-parent",
+            "label": "V67-first2k-same-schedule" if full_joint else "V66-head-warmup-parent",
         }
     checkpoint = {
         **status["checkpoint"],
         "label": (
-            "RAW-phase-joint2000"
+            f"RAW-phase-joint{plan['review_updates']}"
             if joint
             else ("RAW-phase-head-warmup1000" if matched else "RAW-head-warmup1000")
         ),
@@ -206,7 +226,9 @@ def main(workflow, training_workflow, output):
         "driver_sha256": sha(__file__),
         "CUDA_initialized": False,
         "scope": (
-            "Separately initialized joint restoration stage from V66 EMA; initialization/scope/seed/LR/budget differ, so this does not isolate unfreezing. "
+            "One original V67 schedule, resumed with model/EMA/AdamW/RNG at2000 and completed at10000; the2k comparison measures progress along this single training trajectory, not architecture, unfreezing or seed effects. "
+            if full_joint
+            else "Separately initialized joint restoration stage from V66 EMA; initialization/scope/seed/LR/budget differ, so this does not isolate unfreezing. "
             if joint
             else "Matched direct-phase-conditioning comparison against V65; additional phase capacity is part of the intervention. "
             if matched

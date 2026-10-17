@@ -320,3 +320,7 @@ The [verified isolated continuation](raw-kernel-phase-joint-v67-full10k.md) now
 finishes the original V67 budget with all2k evidence preserved. Actual full-size
 resume checks restore model/EMA/92Adam/best/RNG exactly; original2001/2025 input
 hashes/domains/LRs match production. Final10k quality/native review remains.
+The [serial final-review queue](results/raw-kernel-phase-joint-v67-full10k-review-queue.json)
+is now waiting behind successful training completion, with primary panels,
+statistics/hue and CPU artifact stages. Actual native viewing and a quality
+decision remain pending; no new model is promoted.

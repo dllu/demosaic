@@ -57,9 +57,40 @@ Verify actual PID/creation/state before acting; do not duplicate the run.
 
 The controller finishes at10000, independently verifies94/94/92 and the exact
 log/schedule/prefix protocol, preserves original2k guards, then freezes a new
-checkpoint. Final evaluation still needs its owner-gated queue: original full427/
-procedural/known/unseen panels, analytic carriers/flats, fixed hue grid, full GFX,
-three cached cameras, selected CPU colors and artifact checks. Actual native views,
-two exact-GT photo triplets and all four accurately labeled GFX regions remain
-required before promotion. No protected-final model score or new training budget
-is introduced by this continuation.
+checkpoint. The three-stage final review is now queued behind that exact owner's
+successful exit. [Launch and executed CPU checks](results/raw-kernel-phase-joint-v67-full10k-review-queue.json).
+
+1. Primary panels: an independent state audit at 10,000; 288 known-CFA cases,
+   360 unseen-CFA cases and 49,616 full-photo/procedural cases; 896 analytic
+   cases with an independent 1,504-field summary audit; full GFX with four native
+   crops and two full RGB16 TIFFs; six crops from the three other cached cameras;
+   and 32 selected CPU-color predictions with 192 audited fields.
+2. Statistics and hue: 48 saved comparisons and 12 classical witnesses against
+   the reviewed V67 first-2k checkpoint and retained V60/V58/V43 results; one new
+   fixed hue grid with 1,176 predictions, 7,056 independently recomputed fields and 216
+   summary scalars. Previous model predictions are retained, without bulk reruns.
+3. CPU artifact audit: state/source/data/recipe/original log prefix and schedule,
+   19 native PNGs, 23 float arrays and two full RGB16 TIFFs, with unchanged noisy and
+   reference pixels and display transforms.
+
+The waiting primary/statistics/artifact owners are respectively PID 2969247,
+2969624 and 2969626 (creation times and hashes in the launch record). At launch
+all three are live, child-free and have produced no review output. Status files
+under `/mnt/external/demosaic/runs/` use the common prefix
+`raw-kernel-phase-joint-v67-full10k-` with suffixes `review-workflow-v1.json`,
+`statistics-hue-workflow-v1.json` and `artifact-workflow-v1.json`. Verify actual
+PID/creation/state before acting; do not duplicate them.
+
+The new review gates replay actual completed V65/V66/V67 gates and entire saved
+state boundaries exactly, including the genuine isolated 2,025-update resume boundary.
+All 36 retained V67 comparisons reproduce; 12 self comparisons are exactly zero.
+Actual pending training, primary and statistics owners reject downstream work
+before output. All archived Python sources parse. The future completed-10,000 gate
+has not executed; these checks establish review protocol, without new performance
+evidence. Queued tools and earlier source/data are archived and hash-guarded.
+
+Actual native views, two exact-GT photo triplets and all four accurately labeled
+GFX regions (sky/building/foliage/fence) remain required before a quality decision.
+The 2k-to-10k comparison is progress along one original training trajectory;
+it does not isolate architecture, unfreezing or seed effects. No protected-final
+model score, new training budget or automatic promotion is introduced.

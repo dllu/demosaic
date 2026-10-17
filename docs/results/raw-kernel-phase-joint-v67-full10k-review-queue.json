@@ -1,0 +1,204 @@
+{
+  "status": "queued-original-V67-full10k-review-awaiting-training-not-performance-evidence",
+  "recorded_UTC": "2026-10-17T07:49:43.751324+00:00",
+  "training": {
+    "workflow": "/mnt/external/demosaic/runs/raw-kernel-phase-joint-v67-full10k-workflow-v1.json",
+    "launch_status": {
+      "controller": {
+        "pid": 2949308,
+        "created": 1792222522.64,
+        "driver_sha256": "a0b6bf27b5488ba658af5281322984216c9c8ca7568b7d75277208bc95468065"
+      },
+      "plan": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-workflow-v1/plan.json",
+      "scope": "Resume exact2k model/EMA/Adam/RNG into isolated output and finish original10000 updates. Preserve original2k run/review. No automatic promotion or new schedule.",
+      "status": "training-original-V67-schedule-from2000-to10000",
+      "updated_UTC": "2026-10-17T07:35:23.522853+00:00",
+      "plan_sha256": "45c5c2795df148c5405060ed6b6a93659357128bd27fdc2098cf72231c37fd93",
+      "child": {
+        "pid": 2949312,
+        "created": 1792222523.48
+      }
+    },
+    "latest_logged_update_at_recording": 2750,
+    "original_planned_updates": 10000,
+    "source_bundle_sha256": "fc0297db08d659523fdcefe1ef0e7a4da12ae97f648e95b1579db65de93d268a"
+  },
+  "workflows": {
+    "primary": {
+      "workflow": "/mnt/external/demosaic/runs/raw-kernel-phase-joint-v67-full10k-review-workflow-v1.json",
+      "launch_status": {
+        "controller": {
+          "pid": 2969247,
+          "created": 1792223265.61,
+          "driver_sha256": "2583f1cc95c91701a43107e43640c9c11241c39a5aef379b5f5e5a3336c86a34"
+        },
+        "previous_owner": {
+          "pid": 2949308,
+          "created": 1792222522.64,
+          "driver_sha256": "a0b6bf27b5488ba658af5281322984216c9c8ca7568b7d75277208bc95468065"
+        },
+        "plan": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-review-workflow-v1/plan.json",
+        "outputs": {
+          "known": "/mnt/external/demosaic/evaluation/raw-kernel-phase-joint-v67-full10k-known-v1",
+          "unseen": "/mnt/external/demosaic/evaluation/raw-kernel-phase-joint-v67-full10k-unseen-v1",
+          "full427": "/mnt/external/demosaic/evaluation/raw-kernel-phase-joint-v67-full10k-full427-v1",
+          "analytic": "/mnt/external/demosaic/evaluation/raw-kernel-phase-joint-v67-full10k-analytic-v1",
+          "gfx": "/mnt/external/demosaic/evaluation/raw-kernel-phase-joint-v67-full10k-gfx-v1",
+          "three-camera": "/mnt/external/demosaic/evaluation/raw-kernel-phase-joint-v67-full10k-three-camera-v1",
+          "colored-CPU": "/mnt/external/demosaic/evaluation/raw-kernel-phase-joint-v67-full10k-colored-CPU-v1"
+        },
+        "status": "waiting-for-original10000-owner-exit-no-GPU-evaluation",
+        "updated_UTC": "2026-10-17T07:47:45.719128+00:00"
+      },
+      "plan_sha256": "8ca3d1fe340e02bfad8e0d45258d39fa8abce4679a5e783c7e1da2ec0502777e",
+      "guards_verified": 326
+    },
+    "statistics_hue": {
+      "workflow": "/mnt/external/demosaic/runs/raw-kernel-phase-joint-v67-full10k-statistics-hue-workflow-v1.json",
+      "launch_status": {
+        "controller": {
+          "pid": 2969624,
+          "created": 1792223304.6,
+          "driver_sha256": "fde124b21ef4ab02e7b0daa501715f4e9ad381a579ff17f676586b30c64a9ebd"
+        },
+        "previous_owner": {
+          "pid": 2969247,
+          "created": 1792223265.61,
+          "driver_sha256": "2583f1cc95c91701a43107e43640c9c11241c39a5aef379b5f5e5a3336c86a34"
+        },
+        "plan": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-statistics-hue-workflow-v1/plan.json",
+        "grid": "/mnt/external/demosaic/evaluation/prospective-color-grid-raw-kernel-phase-joint-v67-full10k-v1",
+        "status": "waiting-for-exact-primary-owner-exit-no-GPU-or-statistical-work",
+        "updated_UTC": "2026-10-17T07:48:24.703982+00:00"
+      },
+      "plan_sha256": "c91c68cbfaf54056224c5cdf1cdb5884ee969fa3ab51294a7deeac0ab5411509",
+      "guards_verified": 330
+    },
+    "artifact": {
+      "workflow": "/mnt/external/demosaic/runs/raw-kernel-phase-joint-v67-full10k-artifact-workflow-v1.json",
+      "launch_status": {
+        "controller": {
+          "pid": 2969626,
+          "created": 1792223304.72,
+          "driver_sha256": "a9da80c166ec0a89e7803a20501563ff62f8c719c688d5b6b2f4953b5ae8ede8"
+        },
+        "previous_owner": {
+          "pid": 2969624,
+          "created": 1792223304.6,
+          "driver_sha256": "fde124b21ef4ab02e7b0daa501715f4e9ad381a579ff17f676586b30c64a9ebd"
+        },
+        "plan": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-artifact-workflow-v1/plan.json",
+        "output": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-artifact-workflow-v1/artifact-audit",
+        "status": "waiting-for-exact-statistics-hue-owner-exit-CPU-only",
+        "updated_UTC": "2026-10-17T07:48:24.822525+00:00"
+      },
+      "plan_sha256": "6395938efd3c9e8860920c3a68ac827a7cd9a1f149b454f82f8f636d35f63482",
+      "guards_verified": 333
+    }
+  },
+  "CPU_preflight": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full-review-CPU-preflight-v1/receipt.json",
+    "sha256": "b0753f0cb8d59dce37ea57695c0f6bc3174218bd333fecbc519bc368a0a7fee5",
+    "result": {
+      "status": "completed-genuine-V67-full-review-and-legacy-CPU-preflight",
+      "completed_gates_and_boundaries": [
+        {
+          "stage": "raw-kernel-warmup-v65",
+          "completed_owner_gate_passed": true,
+          "entire_published_boundary_exact": true
+        },
+        {
+          "stage": "raw-kernel-phase-warmup-v66",
+          "completed_owner_gate_passed": true,
+          "entire_published_boundary_exact": true
+        },
+        {
+          "stage": "raw-kernel-phase-joint-v67",
+          "completed_owner_gate_passed": true,
+          "entire_published_boundary_exact": true
+        }
+      ],
+      "actual2025_isolated_resume_boundary_exact": true,
+      "legacy_V67_comparisons_verified": 36,
+      "additional_V67_self_comparisons_exact_zero": 12,
+      "primary_cases_checked": 50264,
+      "actual_pending_full_training_owner": {
+        "pid": 2949308,
+        "created": 1792222522.64,
+        "driver_sha256": "a0b6bf27b5488ba658af5281322984216c9c8ca7568b7d75277208bc95468065"
+      },
+      "pending_training_rejections": [
+        {
+          "stage": "statistics",
+          "error": "RAW-head primary/training workflow has not completed",
+          "rejected_before_output": true
+        },
+        {
+          "stage": "hue-grid",
+          "error": "RAW-head primary/training workflow has not completed",
+          "rejected_before_output": true
+        }
+      ],
+      "changed_sources": {
+        "/home/dllu/proj/demosaic/scripts/review_raw_kernel_results.py": "56a620f274b21dfd367dc0a42e9c9f8a6aee69f48f8d579bbc0717dce776bc8a",
+        "/home/dllu/proj/demosaic/scripts/evaluate_raw_kernel_grid.py": "1db7e741ff7930647892e94d9526b00b6ee9f95f410472de4ce3e239fb0d1e8c",
+        "/home/dllu/proj/demosaic/scripts/audit_raw_kernel_artifacts.py": "ba26396bfdf5df46de3b730ef821e19f689b5357107a2f0b531f31d44350dc82",
+        "/home/dllu/proj/demosaic/scripts/audit_raw_kernel_joint_state.py": "14d5ce067eb1cee4633c7b6b650dec0ad42a2bb2e47e875564e5dfb1d289ef0f"
+      },
+      "driver_sha256": "e2aeb9f546c806b501f7d912770390826ef5b5f25a7f6a2fbdce0ffdafea4bb4",
+      "CUDA_initialized": false,
+      "scope": "Genuine completed V65/V66/V67 gates and whole boundaries replay unchanged; genuine2025 resume audit exact. Published36 V67-vs-V60/V58/V43 comparisons replay and12 V67 self comparisons zero. Actual pending full owner rejected before statistics/grid output. Future10000 completed gate remains unexecuted until genuine production completion; no inference or quality claim."
+    }
+  },
+  "pending_primary_rejections": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-review-workflow-v1/pending-primary-rejections.json",
+    "sha256": "adacd5b4c089aa655e8c11904fa01a0a1bed094dfd89d3340d7f78f5b6af262c",
+    "result": {
+      "owner": {
+        "pid": 2969247,
+        "created": 1792223265.61,
+        "driver_sha256": "2583f1cc95c91701a43107e43640c9c11241c39a5aef379b5f5e5a3336c86a34"
+      },
+      "statistics": {
+        "error": "RAW-head primary/training workflow has not completed",
+        "rejected_before_output": true
+      },
+      "grid": {
+        "error": "RAW-head primary/training workflow has not completed",
+        "rejected_before_output": true
+      },
+      "CUDA_initialized": false
+    }
+  },
+  "pending_statistics_hue_rejection": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-artifact-workflow-v1/pending-statistics-hue-rejection.json",
+    "sha256": "36a9a57a89c25d7c6315596a8605d12eb0d21d0a259865832897c4fd4283b686",
+    "result": {
+      "owner": {
+        "pid": 2969624,
+        "created": 1792223304.6,
+        "driver_sha256": "fde124b21ef4ab02e7b0daa501715f4e9ad381a579ff17f676586b30c64a9ebd"
+      },
+      "error": "RAW-head statistics/hue workflow has not completed",
+      "rejected_before_output": true,
+      "CUDA_initialized": false
+    }
+  },
+  "queued_review_tools": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-review-workflow-v1/review-tools",
+    "sources": {
+      "audit_raw_kernel_artifacts.py": "ba26396bfdf5df46de3b730ef821e19f689b5357107a2f0b531f31d44350dc82",
+      "evaluate_raw_kernel_grid.py": "1db7e741ff7930647892e94d9526b00b6ee9f95f410472de4ce3e239fb0d1e8c",
+      "review_raw_kernel_results.py": "56a620f274b21dfd367dc0a42e9c9f8a6aee69f48f8d579bbc0717dce776bc8a",
+      "audit_analytic_summary.py": "db133a81575c79b93ce28ade8efb4925ecc928f640d13ab840ed7eef4c456510",
+      "audit_raw_kernel_joint_state.py": "14d5ce067eb1cee4633c7b6b650dec0ad42a2bb2e47e875564e5dfb1d289ef0f"
+    },
+    "all_archived_Python_sources_parse": true
+  },
+  "all_review_owners_live_child_free": true,
+  "all_review_outputs_absent": true,
+  "completed10000_gate_executed": false,
+  "performance_review_complete": false,
+  "working_reference": "V43-step2000; unchanged",
+  "scope": "Owned serial queue only. Original10000 completion and exact94/94/92 state/prefix/source/data/recipe/schedule gates remain pending. Genuine completed legacy/state/saved-statistic replays and actual pending-owner negatives passed without inference. Original full427/procedural/known/unseen, analytic/hue, fullGFX and cachedcamera/CPU panels; actual native viewing with exact-GT photographic triplets and accurately labeled qualitative references required before quality decision. No extra training budget, protected-final score or automatic promotion."
+}
