@@ -210,9 +210,12 @@ photographic observations followed by independent Malvar. Fine cords and cloud
 detail remain soft. This is a small cascade comparison, with different training
 data and budget; no full-suite, real-camera, CUDA, SOTA or speed result follows.
 The [optional evaluator and standing GFX contexts](nonlocal-reference-integration.md)
-now pass genuine CPU replay and native review. The fence has a different
-grain/regularity tradeoff from V43; this one scene does not establish broad real
-superiority. Actual CUDA numerical checks remain pending.
+pass genuine CPU replay and native review. The [completed CUDA/full-suite
+comparison](nonlocal-reference-full-review.md) now includes genuine native
+operators, full427/paired panels, full102MP GFX output and three cameras. Its
+synthetic-photo scores are lower; small paired-real differences are uncertain.
+The reference remains optional and establishes neither SOTA nor broad real
+superiority for this project.
 
 ## DINOv3 convolutional feature pyramid
 
@@ -228,6 +231,38 @@ CPU engineering and a four-update actual-trainer complete-state restart pass,
 including Commons/native/paired domains. Genuine CUDA preflight and the complete
 496-test CUDA suite pass. Its [first1000 trained review](dino-convnext-pyramid-v58-1k-review.md)
 includes120 inspected native comparisons and full GFX/three-camera evidence,
-without a clear overall winner. The original10k schedule now
-[continues with full optimizer/EMA/RNG state](results/dino-convnext-pyramid-v58-10k-launch.json);
-its mature review remains pending.
+without a clear overall winner. The original10k schedule has a
+[completed mature review](dino-convnext-pyramid-v58-10k-review.md): the photo
+mean ties the fresh no-context model, with persistent color/detail limitations.
+The [matched wider-palette trial](wide-flat-palette.md) is an intervention under
+review, not a promotion.
+
+## October 17 follow-up: recent reconstruction and noise methods
+
+The [RawForge publisher registry](https://github.com/rymuelle/RawForge/blob/79f17700c29765b28a4cf5bd1b6d90bc7e3eb7f2/RawForge/application/MODEL_REGISTRY.py)
+offers blind six-channel joint models with registered256/768px serving tiles.
+The [new CPU comparison](rawforge-cpu-pilot.md) verifies publisher signatures and
+all tensors, explicitly ports one CUDA device constant, and reviews fixed
+photo/GFX crops. Original-export GPU checks are queued behind existing work.
+Training geometry/membership and separate weight-license terms are unverified;
+no new default or SOTA claim follows.
+
+[Biscarrat et al., CVPR Findings2026](https://people.csail.mit.edu/cjbisc/burst/burst_paper.pdf)
+predict continuous reconstruction weights from sample offsets, color identity
+and encoded local information. This is relevant to sample-preserving RAW
+reconstruction, but its burst/aberration setup is different. Equation1 permits
+signed cross-color weights and divides by their absolute sum. Our inference:
+that formula does not by itself guarantee preservation of every constant RGB
+color. A constrained filtering variant would be a new experiment, not a
+reproduction or an established fix for our learned color shifts. No code or
+weights from this paper are incorporated.
+
+[Lu et al., 2-Shots in the Dark](https://arxiv.org/abs/2512.03245)
+use one noisy image and one dark frame per ISO to synthesize shot noise and
+signal-independent noise with spectral/histogram constraints. This motivates
+checking real sensor correlations; it does not supply a calibration for our
+GFX captures. No fabricated camera-specific dark-noise model is added.
+
+The [official darktable5.6 release](https://www.darktable.org/2026/06/darktable-5.6.0-released/)
+names RawNIND UtNet2 as its default RAW AI model, already covered by our existing
+reference. That integration is not a separate independent restoration method.

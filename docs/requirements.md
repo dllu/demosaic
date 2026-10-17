@@ -277,3 +277,10 @@ actual training/evaluation-owner exit. Complete first1k rechecks and a zero-CUDA
 The [physical preprocessing diagnostic](physical-frontend-color-check.md)
 finds much smaller uniform-field errors before the CNN than the learned bias;
 it does not establish a training cause or a photographic correction.
+
+The [signed RawForge JDD CPU pilot](rawforge-cpu-pilot.md) adds a recent joint
+reference on two fixed photos and all four standing GFX contexts. Actual
+publisher-input, tensor, scalar and native-panel checks pass, but its explicit
+CPU device port still needs the queued original-export GPU comparison. These
+selected examples and uncertain external training membership do not establish
+SOTA, broad real superiority or completion of the quality requirement.

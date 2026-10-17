@@ -1,0 +1,71 @@
+{
+  "image": "crop-a6e97b6e006adeba.png",
+  "caption": "CPU direct / foliage",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "V43 (not GT)",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "RawForge (not GT)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "f38867346fde464e218c9632babc951d50b6c6edc1fda8b8d0a47fef7e122a9b",
+  "source_originals": [
+    {
+      "path": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/crop-a7415758dd5136b2.png",
+      "sha256": "fd8d809540748c79fa7f59f346275514023800dcc594b575ab66ec6070f66b3e"
+    },
+    {
+      "path": "/mnt/external/demosaic/evaluation/rawforge-CPU-photo-GFX-pilot-v1/crop-e405f1fa49fbedee.png",
+      "sha256": "e2466ce2ce0d474a8c9f0aff83a868ebfcd81c8dad976183e7fb22f7aad9c1c1"
+    }
+  ],
+  "reference": "Direct methods comparison; neither restored panel is GT. Exact copies of native preview pixels, no resizing.",
+  "ROI": {
+    "name": "foliage",
+    "noisy_xy": [
+      8890,
+      5570
+    ],
+    "reference_xy": [
+      8890,
+      5570
+    ],
+    "size": 160,
+    "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+    "context_green_correlation": 0.9597686529159546
+  },
+  "context_xywh": [
+    8714,
+    5394,
+    512,
+    512
+  ],
+  "display_exposure": 4,
+  "V43_checkpoint_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+  "RawForge_checkpoint_sha256": "77b9e403b4feb4579cf1eb677c7d8098cf2725dd6e433414ea8fc333e426d7dc",
+  "CPU_port_sha256": "a4495f994b7b012f7728f8bbb07fccedfd2e8a7dd5b2bae5986bed576194da46"
+}
