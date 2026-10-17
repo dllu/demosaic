@@ -198,7 +198,6 @@ def main(
     )
 
 
-@torch.inference_mode()
 def check_joint_lineage(state, checkpoint_sha256, parent_sha256, expected_step):
     """Recognize the verified parent by content, independently of display labels."""
     if checkpoint_sha256 != parent_sha256:
@@ -206,6 +205,7 @@ def check_joint_lineage(state, checkpoint_sha256, parent_sha256, expected_step):
         assert state["step"] == expected_step
 
 
+@torch.inference_mode()
 def evaluate_records(
     inputs,
     workflow,

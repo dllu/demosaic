@@ -1,9 +1,11 @@
-# Matched normalization trial: first1k training complete, full review running
+# Matched normalization trial: first1k reviewed, original4k continuation selected
 
 V68 control and V69 augmentation start from the same genuine V63 original20k
 EMA. They test whether training with varied physical feature coordinates reduces
 the color/coarse failures found in the [completed20k review](long-commons-v63-v64-original20k-review.md).
-**Trained quality is unknown.** The working reference remains V43.
+The [completed first1k review](normalization-v68-v69-first1k-review.md) finds a
+small +.00621dB matched photo gain with unresolved texture/color failures.
+Neither endpoint is promoted. The working reference remains V43.
 
 [Executed CUDA checks, independent artifact audit and actual launch](results/normalization-augmentation-CUDA-and-launch.json).
 [Completed training boundaries and actual review/recovery](results/normalization-first1k-review-queue.json).
@@ -109,51 +111,39 @@ logged augmentation masks. Across both arms, all41 logged input/domain/LR rows
 must agree. Older parent model-config fields are compared with their explicit
 default values; the newly added RAW-kernel defaults stay disabled.
 
-## Actual full first1k review
+## Completed full first1k review
 
-Full quality evaluation was not queued at the original launch capture above.
-It is now running after the exact training owner completed and exited. Parent,
-control and augmentation receive fresh evaluation under the same frozen
-inference source:432 known/540 unseen/74,424 full427 cases,1,792 analytic cases,
-three full GFX outputs/six RGB16 files,18 other-camera crops and96 selected
-CPU-color predictions. The two matched arms isolate policy; parent comparisons
-also reflect their new fine-tuning updates/fresh optimizer.
+[Performance report and decision](normalization-v68-v69-first1k-review.md).
+[All81 actual native views](normalization-v68-v69-first1k-native-gallery.md).
+[Statistics, artifacts, hashes and preserved recovery records](results/normalization-v68-v69-first1k-review.json).
 
-The [review operator](../scripts/review_normalization_trial.py) computes36
-comparisons/nine classical witnesses, then the fixed427/418/416 source
-sensitivities give27 photographic comparisons. Its actual historical component
-replay reproduces36 comparisons/nine witnesses exactly, without new inference
-or invented normalization results. The actual live-training gate rejected
-execution before the first1k boundary. Twenty focused tests and Ruff pass.
+The shared-source review covers432 known/540 unseen/74,424 full427 cases,
+1,792 analytic cases, three full GFX outputs/six RGB16 files,18 other-camera
+crops and96 selected CPU-color predictions. All36 comparisons/nine classical
+witnesses and27 frozen source-sensitivity comparisons pass their audits.
+The fresh hue grid has4,704 predictions,28,224 audited case fields and864
+independently checked group scalars. No old-source hue arrays are reused.
+All81 native originals were actually viewed, with matching noisy/reference
+pixels across26 observation groups. Reports include two native photographic
+triplets per model and GFX foliage/fence alongside sky/building detail.
 
-Hue predictions are freshly computed for the parent, both candidates and the
-released nonlocal comparator:4,704 predictions total. The old-source arrays
-are not reused under a changed source identity; the reuse gate remains strict.
-The verified parent is recognized by checkpoint SHA rather than an old display
-label that assumed a10k parent. Candidates still require the declared initializer
-and step. Case/group audits and57-primary-PNG/29-F32/six-RGB16 checks follow.
-Six supplementary GFX triplets and their exact-source audit run from the same
-working directory as the producer, followed by source-sensitivity verification.
+The v1 wrapper import failure, v2 hue inference-mode failure and v3 recovery
+path rejection remain preserved. V4 successfully reuses closed panels and
+statistics byte-for-byte, computes hue in a new output directory and completes
+all artifact/source audits. Numerical bounds, model/data/kernel and completed
+outputs remain unchanged. Direct library inference mode is now covered by a
+regression test; the pure lineage helper identifies the verified parent by SHA.
 
-The initial review completed known/unseen panels, then stopped before full-photo
-inference because its wrapper named nonexistent`demosaic.quality` instead of
-`demosaic.suite`. The original failed status, wrapper and log are preserved.
-The corrected import is verified against the actual frozen package. Recovery
-reuses the two closed panels byte-for-byte and starts at full427, with117 frozen
-file guards. No training, measurement kernel, model, data or numerical bound
-changes. The producer-source audit working-directory issue from the previous
-20k review is also avoided by running these stages in the producer directory.
-
-Actual review owner: PID538984/creation1792258561.81. Status:
-`/mnt/external/demosaic/runs/normalization-v68-v69-first1k-review-workflow-v2.json`.
+Completed review status:
+`/mnt/external/demosaic/runs/normalization-v68-v69-first1k-review-workflow-v4.json`.
 Plan/controller/logs:
-`/mnt/external/demosaic/benchmarks/normalization-v68-v69-first1k-review-workflow-v2/`.
-The v1 review directory/status retain the original failure and closed panels.
-Revalidate actual identity before acting; observation expiry is not job failure.
+`/mnt/external/demosaic/benchmarks/normalization-v68-v69-first1k-review-workflow-v4/`.
+Previous failed directories/statuses remain historical evidence.
 
-All81 actual native views remain manual:57 primary +12 hue +6 supplementary
-+6 selected CPU-color previews. Reports require at least two native photographic
-triplets per model and accurately labeled GFX sky/building/foliage/fence
-references. Full statistics, hue/artifact/source audits and those actual views
-remain pending. Neither training loss nor the engineering preflight permits a
-quality promotion. V43 remains the working reference.
+The first1k policy effect is small and mixed: photo/procedural means increase,
+but real-camera differences, lost texture and bright hue failures prevent
+promotion. The explicit quality decision is to finish the originally planned
+4,000 updates from complete model/EMA/Adam/RNG state, using separate continuation
+run directories to preserve first1k artifacts. Data, seed, LR horizon, frozen
+source and policy remain fixed. No new training budget or corpus is introduced.
+The completed4k endpoints need a new full review before any promotion.

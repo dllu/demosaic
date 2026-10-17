@@ -3,6 +3,7 @@ import sys
 from pathlib import Path
 
 import pytest
+import torch
 
 
 def script():
@@ -30,3 +31,22 @@ def test_candidate_requires_the_declared_initializer_and_boundary(initializer, s
     else:
         with pytest.raises(AssertionError):
             script().check_joint_lineage(state, "candidate", "parent", 1000)
+
+
+def test_library_entry_point_disables_gradients_and_restores_caller(monkeypatch):
+    module = script()
+
+    class StopBeforeInputLoading(Exception):
+        pass
+
+    def read_plan(path):
+        assert torch.is_inference_mode_enabled()
+        assert not torch.is_grad_enabled()
+        raise StopBeforeInputLoading
+
+    monkeypatch.setattr(module, "read", read_plan)
+    with torch.enable_grad():
+        with pytest.raises(StopBeforeInputLoading):
+            module.evaluate_records("unused", "unused", "unused", [], "parent")
+        assert torch.is_grad_enabled()
+        assert not torch.is_inference_mode_enabled()
