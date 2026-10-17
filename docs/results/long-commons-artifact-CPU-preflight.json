@@ -1,0 +1,64 @@
+{
+  "status": "completed-CPU-engineering-checks-with-actual-V63-state-and-historical-artifacts",
+  "preflight": {
+    "path": "/mnt/external/demosaic/benchmarks/long-commons-artifact-CPU-preflight-v2/receipt.json",
+    "sha256": "cb3e7b34bb11a1afb5506d1bccc2ae849dbf6ee7b3decadf3daee968eb1791cd",
+    "result": {
+      "status": "completed-actual-V63-state-and-historical-artifact-CPU-preflight",
+      "actual_V63_state": {
+        "checkpoint": {
+          "arm": "control",
+          "path": "/mnt/external/demosaic/models/dino-convnext-wide-long-control-b16-v63-step4000.pt",
+          "sha256": "5f29bd7efb94b72491cff22575c0565995326644823bcb802444214c8f2c6bd6",
+          "step": 4000
+        },
+        "step": 4000,
+        "original_planned_updates": 20000,
+        "source_bundle_sha256": "c9058d90d7d77e61ad7ec53293b805d8ea72da173318e38d1329e138215544c8",
+        "seed": 49,
+        "model_tensors": 91,
+        "EMA_tensors": 91,
+        "AdamW_states": 89,
+        "all_state_finite": true,
+        "complete_RNG_present": true,
+        "all_original_recipe_fields_exact_except_resolved_validation_protocol_path": true,
+        "four_manifest_and_validation_protocol_hashes_verified": true,
+        "source_snapshot_files_exact": true,
+        "training_log": {
+          "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-first4k-workflow-v1/control-first4000-metrics.jsonl",
+          "sha256": "f610a01ab6759bd119afa6bee8b90853496f49a3c0616944cb93653796c60219",
+          "train_rows": 161
+        },
+        "learning_rates": [
+          9.206544616434249e-06
+        ]
+      },
+      "historical_artifact_report": {
+        "path": "/mnt/external/demosaic/benchmarks/long-commons-artifact-CPU-preflight-v2/historical-artifact-replay.json",
+        "sha256": "7f743ddc68165e8822892af4be9dc6a871577f498c042a64e083d51a18329ecd"
+      },
+      "selected_historical_PNG": 38,
+      "selected_historical_F32": 26,
+      "selected_historical_RGB16": 4,
+      "all_selected_files_match_existing_complete_historical_audit": true,
+      "eight_full_sRGB16_native_ROIs_match_PNG_exactly": true,
+      "three_camera_render_checks": 36,
+      "three_camera_total_changed_channel_values": 6,
+      "three_camera_maximum_changed_channel_values_per_panel": 1,
+      "three_camera_maximum_8bit_code_difference": 1,
+      "pending_actual_primary_workflow_rejected_before_output": true,
+      "driver_sha256": "5aa803620b0fa9b17fd59ee394860f51d43dec6d3523232263dfc7a2eed9b1fc",
+      "CUDA_initialized": false,
+      "scope": "Actual completed V63 whole-state integrity plus genuine older V59/V60 panels. Historical extra methods are explicitly filtered, without fabricating a new trial report. No V64 state, new inference, RAW decode, metric/quality/visual-review claim. Display rounding bounds fixed before V63/V64 artifacts."
+    }
+  },
+  "original_driver_failure": {
+    "log": "/home/dllu/proj/demosaic/.cache/long-commons-artifact-CPU-preflight-v1.log",
+    "log_sha256": "911a8751919cdf2f9abbc0b777826461766688da38e914ede03204eb6149118a",
+    "frozen_operator": "/mnt/external/demosaic/benchmarks/long-commons-artifact-CPU-preflight-v1/tools/audit_long_commons_artifacts.py",
+    "operator_sha256": "94a4195cc65104ff92813e997459781b39b56893bbe0bac8b72264ab45cf983a",
+    "reason": "Historical RGB16 cross-reference used the relative path key instead of the existing absolute_path. Corrected the preflight driver lookup; public artifact checker unchanged. Actual native/state checks had already passed before that final driver lookup. Original failed source/log retained."
+  },
+  "artifact_checker_unchanged_between_preflight_attempts": true,
+  "scope": "Whole-state check of actual finished V63 plus historical selected38PNG/26F32/fourRGB16 integrity. V64/primary still running; no new inference, quality or actual visual-inspection claim."
+}

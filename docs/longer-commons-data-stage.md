@@ -114,6 +114,38 @@ attempt incorrectly treated the released-reference directory as a file; correcte
 checkpoint/export/receipt verification passes, and the failed log/source remain.
 These are engineering checks on old outputs, not new V63/V64 quality evidence.
 
+The [remaining state/native/RGB16 audit is queued](results/long-commons-v63-v64-first4k-artifact-queue.json)
+after actual statistics/hue owner 2055575 exits. Controller PID 2060575,
+creation 1792211119.29, runs only the tested CPU artifact checker. It checks both
+whole states against every original recipe field (with the resolved validation
+protocol checked by hash), complete RNG/source/data and all 161 matched logs.
+Then it verifies 38 native triplets, 26 saved float arrays and four full RGB16
+files. Noisy/reference pixels and transform metadata must match retained V60
+exactly. Both models must include two distinct exact-target photographic crops
+and all sky/building/foliage/fence GFX regions, with real references labeled non-GT.
+
+The checker also ties each of the eight GFX denoised PNG panels to the identical
+native ROI in its full sRGB16 TIFF, requiring exact 8-bit codes. Three-camera
+panels are independently rerendered from saved F32 data, WB/matrix/exposure and
+native coordinates. CPU/GPU FP32 rounding can differ at an 8-bit boundary; a
+preview-only bound of at most one code in at most 16 channel values per 160×160
+panel is defined from historical artifacts before V63/V64 output review. Every
+difference is recorded. This does not relax source/reference pixel equality or
+any restoration-score/color check.
+
+[Executed CPU preflight](results/long-commons-artifact-CPU-preflight.json) verifies
+the actual completed V63 state and replays genuine historical artifacts for the
+two older arms, explicitly selecting the relevant methods from that larger
+report. All 38 PNGs/26 F32 arrays/four RGB16 files match the existing complete
+audit; all eight full-TIFF crop comparisons are exact. Across 36 three-camera
+rerenders, six channel values differ by one code, at most one per panel. The
+first test driver used relative instead of absolute paths in its final historical
+file lookup; the corrected driver passes with the artifact checker unchanged.
+Both attempts and source hashes are retained. The actual pending primary workflow
+is rejected before output. No GPU, inference or RAW decoding occurs in this check.
+Actual visual inspection, statistical interpretation and the quality decision
+remain required after the queued integrity work; no model is promoted or continued.
+
 Reports must include at least two native noisy/denoised/exact-GT photographic
 triplets and DSCF3879/3880 sky/building/foliage/fence crops, with accurate non-GT
 labels for independent real references. No protected-final model score is used.
