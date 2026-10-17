@@ -146,14 +146,24 @@ def detail_malvar_energy():
 
 
 def physical_rgb_features(
-    packed, variance, colors, wb=None, matrix=None, *, rgb=None, stabilized=False
+    packed,
+    variance,
+    colors,
+    wb=None,
+    matrix=None,
+    *,
+    rgb=None,
+    stabilized=False,
+    normalization_mask=None,
 ):
     """Build normalized camera RGB and actual CFA/camera metadata in IEEE FP32.
 
     No input fitting, reference or learned denoiser is used here. The spatial
     noise map is a marginal measurement-noise proxy, not an assertion that
     demosaiced RGB noise is independent. Affine scales are per image so batches
-    cannot change an image's normalization.
+    cannot change an image's normalization. An explicit training mask chooses
+    central-half statistics for selected images, with the same raw measurements
+    and feature canvas. Physical anchors use the resulting coordinates.
     """
     with torch.autocast(packed.device.type, enabled=False), ieee_fp32():
         packed, variance = packed.float(), variance.float()
@@ -174,6 +184,34 @@ def physical_rgb_features(
         if stabilized:
             flat_span = torch.maximum(flat_span, 8 * sigma.amax((1, 2, 3), keepdim=True))
         span = torch.where(image_range <= 1e-6, flat_span, span.clamp_min(1e-4))
+        if normalization_mask is not None:
+            if (
+                not isinstance(normalization_mask, torch.Tensor)
+                or normalization_mask.dtype != torch.bool
+                or normalization_mask.shape != (batch,)
+                or normalization_mask.device != packed.device
+            ):
+                raise ValueError("Normalization mask must be one device-local boolean per image")
+            height, width = rgb.shape[-2:]
+            y, x = height // 4, width // 4
+            center_rgb = rgb[..., y : height - y, x : width - x]
+            center_sigma = sigma[..., y : height - y, x : width - x]
+            center_offset = center_rgb.amin((1, 2, 3), keepdim=True)
+            center_range = center_rgb.amax((1, 2, 3), keepdim=True) - center_offset
+            center_floor = 8 * center_sigma.amax((1, 2, 3), keepdim=True)
+            center_flat = (
+                torch.maximum(torch.ones_like(center_floor), center_floor)
+                if stabilized
+                else torch.ones_like(center_floor)
+            )
+            center_span = torch.where(
+                center_range <= 1e-6,
+                center_flat,
+                torch.maximum(center_range, center_floor).clamp_min(1e-4),
+            )
+            select = normalization_mask[:, None, None, None]
+            offset = torch.where(select, center_offset, offset)
+            span = torch.where(select, center_span, span)
         normalized = (rgb - offset) / span
         noise = sigma / span
         phase_masks = F.one_hot(colors, 3).transpose(1, 2)[..., None, None].float()
@@ -466,7 +504,27 @@ class PretrainedRgbDemosaic(nn.Module):
                 prediction = prediction + (self.filter_detail(detail, native_variance) - detail)
             return prediction
 
-    def forward(self, packed, variance, colors, wb=None, matrix=None, context=None):
+    def forward(
+        self,
+        packed,
+        variance,
+        colors,
+        wb=None,
+        matrix=None,
+        context=None,
+        *,
+        normalization_mask=None,
+    ):
+        if normalization_mask is not None and (
+            not self.training
+            or not self.stabilized
+            or not self.physical_anchors
+            or self.processing_scale != 1
+            or self.raw_kernel is not None
+        ):
+            raise ValueError(
+                "Normalization augmentation requires full-resolution anchored RGB training"
+            )
         original_packed = packed
         profiles, preview, base_rgb = None, None, None
         if self.stabilized:
@@ -499,7 +557,14 @@ class PretrainedRgbDemosaic(nn.Module):
             packed, variance = torch.cat(transformed), torch.cat(proxies)
             base_rgb = torch.cat(interpolated)
         rgb, normalized, noise, condition, offset, span = physical_rgb_features(
-            packed, variance, colors, wb, matrix, rgb=base_rgb, stabilized=self.stabilized
+            packed,
+            variance,
+            colors,
+            wb,
+            matrix,
+            rgb=base_rgb,
+            stabilized=self.stabilized,
+            normalization_mask=normalization_mask,
         )
         if self.physical_anchors:
             anchors = stabilized_photometry(profiles, offset, span)
@@ -508,8 +573,18 @@ class PretrainedRgbDemosaic(nn.Module):
             )
         if self.processing_scale == 2:
             prediction = self.forward_packed(
-                normalized, noise, condition, packed, colors, wb, matrix, profiles,
-                offset, span, rgb if preview is None else preview, context,
+                normalized,
+                noise,
+                condition,
+                packed,
+                colors,
+                wb,
+                matrix,
+                profiles,
+                offset,
+                span,
+                rgb if preview is None else preview,
+                context,
             )
         else:
             h, w = rgb.shape[-2:]
@@ -530,15 +605,23 @@ class PretrainedRgbDemosaic(nn.Module):
                     middle_offset = middle_offset[2]
             if self.raw_kernel is not None:
                 prediction, features = self.network(
-                    normalized, noise, head_offset=head_offset, middle_offset=middle_offset,
-                    return_features=True, **encoder_kwargs,
+                    normalized,
+                    noise,
+                    head_offset=head_offset,
+                    middle_offset=middle_offset,
+                    return_features=True,
+                    **encoder_kwargs,
                 )
                 return self.raw_kernel(
-                    original_packed, colors,
+                    original_packed,
+                    colors,
                     torch.cat((features.float(), prediction.float()), 1)[..., :h, :w],
                 )
             prediction = self.network(
-                normalized, noise, head_offset=head_offset, middle_offset=middle_offset,
+                normalized,
+                noise,
+                head_offset=head_offset,
+                middle_offset=middle_offset,
                 **encoder_kwargs,
             )[..., :h, :w]
         with torch.autocast(packed.device.type, enabled=False), ieee_fp32():
@@ -562,7 +645,9 @@ class PretrainedRgbDemosaic(nn.Module):
                     else:
                         indices = torch.tensor(selected, device=output.device)
                         balance = (
-                            None if wb is None else wb.reshape(-1, 3).expand(len(output), -1)[indices]
+                            None
+                            if wb is None
+                            else wb.reshape(-1, 3).expand(len(output), -1)[indices]
                         )
                         corrected = adc_cfa_projection(
                             output[indices], original_packed[indices], colors[indices], balance

@@ -85,7 +85,9 @@ def make_optimizer(model, config):
             config.get(key, False)
             for key in ["refiner_only", "coarse_refiner_only", "pyramid_refiner_only"]
         ):
-            raise ValueError("RAW kernel-only training cannot combine with another refiner-only mode")
+            raise ValueError(
+                "RAW kernel-only training cannot combine with another refiner-only mode"
+            )
         if not model.config.raw_kernel_reconstruction:
             raise ValueError("RAW kernel-only training requires RAW kernel reconstruction")
         model.requires_grad_(False)
@@ -165,6 +167,17 @@ def training_domain(step, seed, paired_fraction, raw_clean_fraction):
     return "commons"
 
 
+def normalization_augmentation_mask(seed, step, batch_size, device):
+    """Stateless half-probability per-image choices without changing data/model RNG."""
+    if step < 1 or batch_size < 1:
+        raise ValueError("Normalization augmentation requires a positive step and batch size")
+    payload = hashlib.shake_256(f"normalization-center-half-v1:{seed}:{step}".encode()).digest(
+        (batch_size + 7) // 8
+    )
+    values = [bool((payload[index // 8] >> (index % 8)) & 1) for index in range(batch_size)]
+    return torch.tensor(values, dtype=torch.bool, device=device)
+
+
 def domain_indices(domain, first, last, batch_size, seed, paired_fraction, raw_clean_fraction):
     """Keep global sample indices, omitting batches that another domain replaces."""
     for step in range(first + 1, last + 1):
@@ -231,6 +244,22 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     if resume and initialize:
         raise ValueError("Choose resume or initialize, not both")
     config = yaml.safe_load(Path(config_path).read_text())
+    normalization_policy = config.get("normalization_augmentation", "none")
+    if normalization_policy not in ("none", "center-half-mix-v1"):
+        raise ValueError("Unknown normalization augmentation policy")
+    if normalization_policy != "none":
+        options = config.get("model", {})
+        if (
+            options.get("restoration_backbone") != "pretrained-rgb"
+            or not options.get("variance_stabilization", False)
+            or not options.get("physical_anchors", False)
+            or options.get("rgb_processing_scale", 1) != 1
+            or options.get("raw_kernel_reconstruction", False)
+        ):
+            raise ValueError(
+                "Normalization augmentation requires full-resolution anchored RGB training"
+            )
+    config["normalization_augmentation"] = normalization_policy
     config["flat_chroma_stops"] = validate_flat_chroma_stops(config.get("flat_chroma_stops", 0.0))
     multiscale_weight = float(config.get("multiscale_sensor_weight", 0.0))
     if not math.isfinite(multiscale_weight) or multiscale_weight < 0:
@@ -470,6 +499,8 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             raise ValueError("Resume native RAW augmentation differs; initialize a new run")
         if state["config"].get("multiscale_sensor_weight", 0.0) != multiscale_weight:
             raise ValueError("Resume multiscale loss differs; initialize a new run")
+        if state["config"].get("normalization_augmentation", "none") != normalization_policy:
+            raise ValueError("Resume normalization augmentation differs; initialize a new run")
         if state["config"].get("data_seed_per_step", False) != config.get(
             "data_seed_per_step", False
         ):
@@ -662,6 +693,13 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         )
         optimizer.zero_grad(set_to_none=True)
         model.set_noise(batch["shot"], batch["read"])
+        forward_options = {"auxiliary": True}
+        normalization_mask = None
+        if normalization_policy != "none":
+            normalization_mask = normalization_augmentation_mask(
+                seed, step, len(batch["packed"]), device
+            )
+            forward_options["normalization_mask"] = normalization_mask
         with amp_context(device, amp or precision == "float32", dtype=precision):
             prediction, auxiliary = model(
                 batch["packed"],
@@ -669,7 +707,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 batch["colors"],
                 batch["wb"],
                 batch["matrix"],
-                auxiliary=True,
+                **forward_options,
             )
             if use_pair:
                 loss, terms = paired_reconstruction_loss(
@@ -719,6 +757,8 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             }
             if fingerprint is not None:
                 metrics["batch_sha256"] = fingerprint
+            if normalization_mask is not None:
+                metrics["normalization_mask"] = normalization_mask.tolist()
             with (run / "metrics.jsonl").open("a") as log:
                 log.write(json.dumps(metrics) + "\n")
             print(json.dumps(metrics), flush=True)

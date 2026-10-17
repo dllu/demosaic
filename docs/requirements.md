@@ -11,6 +11,12 @@ genuine full-state resume checks; their final quality is pending. The separate
 and content spot-checked, with unchanged old holdouts. SOTA, decisive real-photo
 superiority and the10-second speed target remain unmet/unproven.
 
+The [normalization-coordinate diagnosis and opt-in training augmentation](normalization-augmentation.md)
+now have 579 passing CPU tests, genuine-parent restart/input-identity checks and
+native photographic/GFX views. Selected fabric/color predictions are sensitive
+to feature coordinates. The augmentation has no trained-quality or CUDA result;
+the original long-schedule comparison remains unchanged.
+
 | Requirement | Evidence needed | Current state |
 | --- | --- | --- |
 | Modern method and DINOv3 recommendation | Primary-source research, architecture rationale, licensed pretrained backbone and ablation | Official pinned weights; an earlier architecture's matched 20k-step ablation has a small positive gain on 427 photos. The current architecture’s [completed fresh no-context/S/B comparison through 10,000 updates](fresh-dino-capacity-10k-review.md) finds no photographic context gain. The [completed ConvNeXt10k review](dino-convnext-pyramid-v58-10k-review.md) ties no-context on photo mean with mixed paired-real scores. No consistent mature context advantage or SOTA is established |

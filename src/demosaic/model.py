@@ -559,15 +559,35 @@ class JointDemosaic(nn.Module):
         self.refinement_precision = precision
         return self
 
-    def forward(self, packed, variance, colors, wb=None, matrix=None, *, auxiliary=False):
+    def forward(
+        self,
+        packed,
+        variance,
+        colors,
+        wb=None,
+        matrix=None,
+        *,
+        auxiliary=False,
+        normalization_mask=None,
+    ):
         batch, phases, height, width = packed.shape
         if phases != 4 or variance.shape != packed.shape:
             raise ValueError("Expected four packed phases and matching variance maps")
         if colors.ndim == 1:
             colors = colors[None].expand(batch, -1)
         if self.config.restoration_backbone == "pretrained-rgb":
-            prediction = self.pretrained_rgb(packed, variance, colors, wb, matrix, self.context)
+            prediction = self.pretrained_rgb(
+                packed,
+                variance,
+                colors,
+                wb,
+                matrix,
+                self.context,
+                normalization_mask=normalization_mask,
+            )
             return (prediction, mosaic(prediction, colors)) if auxiliary else prediction
+        if normalization_mask is not None:
+            raise ValueError("Normalization augmentation requires the pretrained RGB backbone")
         auxiliary_base = packed
         if self.config.baseline == "wiener-malvar":
             auxiliary_base = wiener_packed(packed, variance, self.config.prior_window)

@@ -1,0 +1,488 @@
+{
+  "status": "implemented-opt-in-normalization-augmentation-CPU-verified-quality-pending",
+  "reviewed_UTC": "2026-10-17T12:19:15.689276+00:00",
+  "diagnosis": {
+    "path": "/home/dllu/proj/demosaic/docs/results/affine-context-CPU-v1.json",
+    "sha256": "363ffd2ed35d9d5fda8fdbcf64095e304fe94fe1f8367fafb27b9c6b0cb78d87"
+  },
+  "default_policy": "none",
+  "opt_in_policy": "center-half-mix-v1",
+  "actual_preflight": {
+    "path": "/mnt/external/demosaic/benchmarks/normalization-augmentation-CPU-v1/receipt.json",
+    "sha256": "a1cf6276ed60102b92d295eed000e8a708a11239ea66017be119ee97634900e9"
+  },
+  "preflight_result": {
+    "status": "completed-genuine-parent-CPU-normalization-augmentation-preflight",
+    "plan": {
+      "path": "/mnt/external/demosaic/benchmarks/normalization-augmentation-CPU-v1/plan.json",
+      "sha256": "7538fcc5282e188ea7e5475e49dea9a4117daddf978a9ed373c3753fbb6a6ba9"
+    },
+    "compatibility": {
+      "observation": {
+        "path": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+        "sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e"
+      },
+      "retained_prediction": {
+        "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/exact-photo-0-eager-f32.npy",
+        "sha256": "4dd06bffc541cdf437893ec18393450b3e7154edb1ec6f534b0fedcaf6bf9e25"
+      },
+      "default_and_zero_mask_and_retained_predictions_bitwise_equal": true
+    },
+    "initial_weight_and_DINO_checks": [
+      {
+        "leg": "control-initial",
+        "initial_weights_exact": true,
+        "DINO_hash": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      },
+      {
+        "leg": "augmented-full-initial",
+        "initial_weights_exact": true,
+        "DINO_hash": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      },
+      {
+        "leg": "augmented-resumed-initial",
+        "initial_weights_exact": true,
+        "DINO_hash": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      },
+      {
+        "leg": "augmented-resumed-resume-model",
+        "initial_weights_exact": true,
+        "DINO_hash": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      }
+    ],
+    "exact_resume_fields": [
+      "model_config",
+      "model",
+      "ema",
+      "optimizer",
+      "python_rng",
+      "torch_rng",
+      "cuda_rng",
+      "best",
+      "step"
+    ],
+    "all_four_observation_hashes_match_control": true,
+    "finite_state_counts": {
+      "model": 91,
+      "EMA": 91,
+      "AdamW": 89
+    },
+    "observations": {
+      "control": [
+        {
+          "event": "train",
+          "step": 1,
+          "loss": 0.008359222672879696,
+          "lr": 1.0000000000000001e-07,
+          "grad_norm": 1.0164494514465332,
+          "seconds_per_step": 0.8503825219813734,
+          "cuda_gb": 0,
+          "domain": "synthetic",
+          "linear": 0.0037889007944613695,
+          "rendered": 0.005858923774212599,
+          "gradient": 0.0051431371830403805,
+          "highlight": 0.008220705203711987,
+          "sensor": 0.0030447598546743393,
+          "batch_sha256": "8ad67569d6c33063227019d22d2099bf54741e59ffe7644344451d28159c3e1b"
+        },
+        {
+          "event": "train",
+          "step": 2,
+          "loss": 0.0020054406486451626,
+          "lr": 2.0000000000000002e-07,
+          "grad_norm": 0.6005855202674866,
+          "seconds_per_step": 0.756596454535611,
+          "cuda_gb": 0,
+          "domain": "synthetic",
+          "linear": 0.0010009724646806717,
+          "rendered": 0.0015886235050857067,
+          "gradient": 0.001100254012271762,
+          "highlight": 0.0,
+          "sensor": 0.001001311233267188,
+          "batch_sha256": "31b833c303ea19f4f667fecb647d04a25f873d1668762edd5e6a90b669e1200c"
+        },
+        {
+          "event": "train",
+          "step": 3,
+          "loss": 0.010182246565818787,
+          "lr": 3.0000000000000004e-07,
+          "grad_norm": 0.24180063605308533,
+          "seconds_per_step": 0.716904068676134,
+          "cuda_gb": 0,
+          "domain": "native-RAW-synthetic",
+          "linear": 0.0034822009038180113,
+          "rendered": 0.010412712581455708,
+          "gradient": 0.013253048062324524,
+          "highlight": 0.0,
+          "sensor": 0.0016838479787111282,
+          "batch_sha256": "e08b4e04080e1df75e71c22bc52d525ee4b0c4599a47d431ee703788a84d5b98"
+        },
+        {
+          "event": "train",
+          "step": 4,
+          "loss": 0.0008967443718574941,
+          "lr": 4.0000000000000003e-07,
+          "grad_norm": 0.4056847393512726,
+          "seconds_per_step": 0.7124737910344265,
+          "cuda_gb": 0,
+          "domain": "paired-RAW",
+          "paired_sensor": 0.00032754798303358257,
+          "paired_coarse_rendered": 0.0010728832567110658,
+          "paired_auxiliary": 0.000327548012137413,
+          "batch_sha256": "79802bace1dafb6b854dc6bc4657ef033d711fd7321a13c280ce50f9823d9217"
+        }
+      ],
+      "augmented-full": [
+        {
+          "event": "train",
+          "step": 1,
+          "loss": 0.008330799639225006,
+          "lr": 1.0000000000000001e-07,
+          "grad_norm": 1.009829044342041,
+          "seconds_per_step": 0.8483178711030632,
+          "cuda_gb": 0,
+          "domain": "synthetic",
+          "linear": 0.003772646887227893,
+          "rendered": 0.005854643881320953,
+          "gradient": 0.0051459926180541515,
+          "highlight": 0.008130798116326332,
+          "sensor": 0.003031509928405285,
+          "batch_sha256": "8ad67569d6c33063227019d22d2099bf54741e59ffe7644344451d28159c3e1b",
+          "normalization_mask": [
+            true
+          ]
+        },
+        {
+          "event": "train",
+          "step": 2,
+          "loss": 0.0020055046770721674,
+          "lr": 2.0000000000000002e-07,
+          "grad_norm": 0.6006464958190918,
+          "seconds_per_step": 0.7476814035326242,
+          "cuda_gb": 0,
+          "domain": "synthetic",
+          "linear": 0.0010009726975113153,
+          "rendered": 0.0015887502813711762,
+          "gradient": 0.001100257970392704,
+          "highlight": 0.0,
+          "sensor": 0.0010013114660978317,
+          "batch_sha256": "31b833c303ea19f4f667fecb647d04a25f873d1668762edd5e6a90b669e1200c",
+          "normalization_mask": [
+            false
+          ]
+        },
+        {
+          "event": "train",
+          "step": 3,
+          "loss": 0.010244770906865597,
+          "lr": 3.0000000000000004e-07,
+          "grad_norm": 0.22543805837631226,
+          "seconds_per_step": 0.7205107033563157,
+          "cuda_gb": 0,
+          "domain": "native-RAW-synthetic",
+          "linear": 0.003499905811622739,
+          "rendered": 0.010487576015293598,
+          "gradient": 0.013314031064510345,
+          "highlight": 0.0,
+          "sensor": 0.0016967365518212318,
+          "batch_sha256": "e08b4e04080e1df75e71c22bc52d525ee4b0c4599a47d431ee703788a84d5b98",
+          "normalization_mask": [
+            true
+          ]
+        },
+        {
+          "event": "train",
+          "step": 4,
+          "loss": 0.0009113855776377022,
+          "lr": 4.0000000000000003e-07,
+          "grad_norm": 0.4022711217403412,
+          "seconds_per_step": 0.710724936274346,
+          "cuda_gb": 0,
+          "domain": "paired-RAW",
+          "paired_sensor": 0.00032948562875390053,
+          "paired_coarse_rendered": 0.0010979027720168233,
+          "paired_auxiliary": 0.0003294855705462396,
+          "batch_sha256": "79802bace1dafb6b854dc6bc4657ef033d711fd7321a13c280ce50f9823d9217",
+          "normalization_mask": [
+            true
+          ]
+        }
+      ],
+      "augmented-resumed": [
+        {
+          "event": "train",
+          "step": 1,
+          "loss": 0.008330799639225006,
+          "lr": 1.0000000000000001e-07,
+          "grad_norm": 1.009829044342041,
+          "seconds_per_step": 0.8890992039814591,
+          "cuda_gb": 0,
+          "domain": "synthetic",
+          "linear": 0.003772646887227893,
+          "rendered": 0.005854643881320953,
+          "gradient": 0.0051459926180541515,
+          "highlight": 0.008130798116326332,
+          "sensor": 0.003031509928405285,
+          "batch_sha256": "8ad67569d6c33063227019d22d2099bf54741e59ffe7644344451d28159c3e1b",
+          "normalization_mask": [
+            true
+          ]
+        },
+        {
+          "event": "train",
+          "step": 2,
+          "loss": 0.0020055046770721674,
+          "lr": 2.0000000000000002e-07,
+          "grad_norm": 0.6006464958190918,
+          "seconds_per_step": 0.7903152635553852,
+          "cuda_gb": 0,
+          "domain": "synthetic",
+          "linear": 0.0010009726975113153,
+          "rendered": 0.0015887502813711762,
+          "gradient": 0.001100257970392704,
+          "highlight": 0.0,
+          "sensor": 0.0010013114660978317,
+          "batch_sha256": "31b833c303ea19f4f667fecb647d04a25f873d1668762edd5e6a90b669e1200c",
+          "normalization_mask": [
+            false
+          ]
+        },
+        {
+          "event": "train",
+          "step": 3,
+          "loss": 0.010244770906865597,
+          "lr": 3.0000000000000004e-07,
+          "grad_norm": 0.22543805837631226,
+          "seconds_per_step": 0.8869078389834613,
+          "cuda_gb": 0,
+          "domain": "native-RAW-synthetic",
+          "linear": 0.003499905811622739,
+          "rendered": 0.010487576015293598,
+          "gradient": 0.013314031064510345,
+          "highlight": 0.0,
+          "sensor": 0.0016967365518212318,
+          "batch_sha256": "e08b4e04080e1df75e71c22bc52d525ee4b0c4599a47d431ee703788a84d5b98",
+          "normalization_mask": [
+            true
+          ]
+        },
+        {
+          "event": "train",
+          "step": 4,
+          "loss": 0.0009113855776377022,
+          "lr": 4.0000000000000003e-07,
+          "grad_norm": 0.4022711217403412,
+          "seconds_per_step": 0.7785172809381038,
+          "cuda_gb": 0,
+          "domain": "paired-RAW",
+          "paired_sensor": 0.00032948562875390053,
+          "paired_coarse_rendered": 0.0010979027720168233,
+          "paired_auxiliary": 0.0003294855705462396,
+          "batch_sha256": "79802bace1dafb6b854dc6bc4657ef033d711fd7321a13c280ce50f9823d9217",
+          "normalization_mask": [
+            true
+          ]
+        }
+      ]
+    },
+    "checkpoints": {
+      "control": {
+        "path": "/mnt/external/demosaic/benchmarks/normalization-augmentation-CPU-v1/control/last.pt",
+        "sha256": "ca002983a2419106155087e5667f4661f2903d0ad1e87b956134b3f0c9a0d651"
+      },
+      "augmented-full": {
+        "path": "/mnt/external/demosaic/benchmarks/normalization-augmentation-CPU-v1/augmented-full/last.pt",
+        "sha256": "198f052aa3e3a21e7df0e9e80a7a4240ce8c01075ebe81898ff3ae9371274ed6"
+      },
+      "augmented-resumed": {
+        "path": "/mnt/external/demosaic/benchmarks/normalization-augmentation-CPU-v1/augmented-resumed/last.pt",
+        "sha256": "22faf995f399c583dbe169fe99ad43c43e4027b20a3870f5085f503f8e411132"
+      }
+    },
+    "CUDA_initialized": false,
+    "production_training_started": false,
+    "limits": "Four discarded updates per arm/B1/native64/CPU FP32/workers0. Real parent, frozen genuine DINO, actual Commons/native/paired data. Uninterrupted vs2+2 resume and matched policy-off observation hashes. No GPU, production launch, convergence, timing or quality claim."
+  },
+  "independent_state_audit": {
+    "receipt": {
+      "path": "/mnt/external/demosaic/benchmarks/normalization-augmentation-CPU-v1/independent-audit.json",
+      "sha256": "376d132a6479a5f7a2d3cc493d3a96edc78d8b457cbae8903713dd74e200192e"
+    },
+    "result": {
+      "status": "completed-independent-normalization-augmentation-CPU-state-and-loader-audit",
+      "auditor": {
+        "path": "/home/dllu/proj/demosaic/.cache/audit_normalization_augmentation_cpu.py",
+        "sha256": "bcaf1036cec3c9179bc4ee76619b4f49aa3b0c0c6a615ec8d1bb289c9afbef33"
+      },
+      "executed_preflight": {
+        "path": "/mnt/external/demosaic/benchmarks/normalization-augmentation-CPU-v1/receipt.json",
+        "sha256": "a1cf6276ed60102b92d295eed000e8a708a11239ea66017be119ee97634900e9"
+      },
+      "source_files": {
+        "src/demosaic/paired_admission.py": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825",
+        "src/demosaic/prior.py": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a",
+        "src/demosaic/metrics.py": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31",
+        "src/demosaic/inference.py": "911e71e8dcbeb1872ed591bc5234ed2b79bae063a859b4704516537d94a1df0b",
+        "src/demosaic/train.py": "434c8c0c0098d61df23eac19e0618677fe5af1b756e0ca24ded89d2814e5fd70",
+        "src/demosaic/dino_adaptation.py": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861",
+        "src/demosaic/paired_training.py": "71a2481213bba174bd3d6b3de9ae9b89f88333635810e15d0958352d9d8d053d",
+        "src/demosaic/reference.py": "54ed094d58e245a56993ea3ce3ef9e21d2164e902d41d03bba9132bacd22891f",
+        "src/demosaic/prepare.py": "0573132bed2b21ba5be6fd0464daca4f506640a5f03b0311abbeec9b23a875f1",
+        "src/demosaic/realdata.py": "ed24db2b066531281a196e6fa074130cb0ee78a640eae5ccaaace234f5ad5421",
+        "src/demosaic/cfa.py": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252",
+        "src/demosaic/paired.py": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d",
+        "src/demosaic/audit.py": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d",
+        "src/demosaic/losses.py": "548b1481a035ad937d4a046754a74e70684864a9842296765c62079a002e5120",
+        "src/demosaic/gaussian.py": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72",
+        "src/demosaic/real_suite.py": "69d3d403d36b1230e35083cc55e2c1a485f82cd5058f6be83fb3d5c0c18a6825",
+        "src/demosaic/raw_clean.py": "a143ce351ac4e1b2425d4d561000d3e8934477fe9172c88f90ce76d9b32a7a6c",
+        "src/demosaic/raw_admission.py": "1948afbbf05129190273ab77466f26d9d27dc942716beaab16f077c8c3330803",
+        "src/demosaic/vst.py": "355124a374177f1c08271834149c5979ab3477fdf255c60aa7cee0d47792a76b",
+        "src/demosaic/io.py": "0a1599ffe7f6d935e92fc71e6b086430c6f82678a74952c3b8f31155a0bea83b",
+        "src/demosaic/data.py": "3c8855fe9d6e24d5368f356528ed217a544f185d84f58356eebfb2048cd92197",
+        "src/demosaic/__init__.py": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d",
+        "src/demosaic/calibration.py": "e86f4c602a6cd7fd855d0bcfeb790cf17ed87611f19d97926f9db174909b2d26",
+        "src/demosaic/noise.py": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce",
+        "src/demosaic/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+        "src/demosaic/precision.py": "9aa850fb5ee0e9abc3e9adc4847ce3518c1acb37c93f6bc54ff9206bb0c94c3a",
+        "src/demosaic/cli.py": "a34d98b1eab4479f67ba5a51b6c8a428db4d8ccf5ee097cd1369bd0cd1ead542",
+        "src/demosaic/reporting.py": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d",
+        "src/demosaic/model.py": "ff129c54cb8b254ede6877c63e55c34af54f64aa3ebc126dc484c98efbd67ef9",
+        "src/demosaic/color.py": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+        "src/demosaic/dino_pyramid.py": "246944874671ceb4449b0487fcb347a00f8b82d713d5b4c9fee5a7c8a68aa95f",
+        "src/demosaic/textures.py": "b4bc304a50de272cf7fcba272e67b828c163466ffc23ea3337a6a66f076dc664",
+        "src/demosaic/nonlocal_reference.py": "7e4a00e9d90a61b772da9c1a7414bf499f84b9c9bb0239fd250fb8263dfb3f88",
+        "src/demosaic/safety.py": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7",
+        "src/demosaic/raw_kernel.py": "32ba3747479f0e328fe87a84fb227dd456ae0d08b242a4d1411756dfbf9fb498",
+        "src/demosaic/pretrained_rgb.py": "ed428ff1ec2fe7bbe02d941074fc4e23c3edc55e36b5c219fb34c186e08affb4",
+        "src/demosaic/registration.py": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202",
+        "src/demosaic/suite.py": "1a094262e1772f5df8a54cb176c2f3da189d78f48ead3f8002f24e84802059a4"
+      },
+      "checkpoints": [
+        {
+          "label": "control",
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/benchmarks/normalization-augmentation-CPU-v1/control/last.pt",
+            "sha256": "ca002983a2419106155087e5667f4661f2903d0ad1e87b956134b3f0c9a0d651"
+          },
+          "source_bundle_sha256": "db5fb3ba42827e9db043dbc85f069bb1e5568cdafa872f7340d872852bc6a771",
+          "changed_model_tensors": 89,
+          "changed_EMA_tensors": 89,
+          "unchanged_model_keys": [
+            "context.mean",
+            "context.std"
+          ],
+          "manifest_hashes": {
+            "paired_manifest_sha256": "b3b36d3ec28b0e2d339cb28f3bc810cc17b31102f4ce6a3454fdfec9a4a4b5e3",
+            "raw_clean_manifest_sha256": "0dde4a0ca1ad68332d8a1c9d61fdc561db6501cd262d534647b979de82e3cf80",
+            "manifest_sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+            "validation_manifest_sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a"
+          }
+        },
+        {
+          "label": "augmented-full",
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/benchmarks/normalization-augmentation-CPU-v1/augmented-full/last.pt",
+            "sha256": "198f052aa3e3a21e7df0e9e80a7a4240ce8c01075ebe81898ff3ae9371274ed6"
+          },
+          "source_bundle_sha256": "db5fb3ba42827e9db043dbc85f069bb1e5568cdafa872f7340d872852bc6a771",
+          "changed_model_tensors": 89,
+          "changed_EMA_tensors": 89,
+          "unchanged_model_keys": [
+            "context.mean",
+            "context.std"
+          ],
+          "manifest_hashes": {
+            "paired_manifest_sha256": "b3b36d3ec28b0e2d339cb28f3bc810cc17b31102f4ce6a3454fdfec9a4a4b5e3",
+            "raw_clean_manifest_sha256": "0dde4a0ca1ad68332d8a1c9d61fdc561db6501cd262d534647b979de82e3cf80",
+            "manifest_sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+            "validation_manifest_sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a"
+          }
+        },
+        {
+          "label": "augmented-resumed",
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/benchmarks/normalization-augmentation-CPU-v1/augmented-resumed/last.pt",
+            "sha256": "22faf995f399c583dbe169fe99ad43c43e4027b20a3870f5085f503f8e411132"
+          },
+          "source_bundle_sha256": "db5fb3ba42827e9db043dbc85f069bb1e5568cdafa872f7340d872852bc6a771",
+          "changed_model_tensors": 89,
+          "changed_EMA_tensors": 89,
+          "unchanged_model_keys": [
+            "context.mean",
+            "context.std"
+          ],
+          "manifest_hashes": {
+            "paired_manifest_sha256": "b3b36d3ec28b0e2d339cb28f3bc810cc17b31102f4ce6a3454fdfec9a4a4b5e3",
+            "raw_clean_manifest_sha256": "0dde4a0ca1ad68332d8a1c9d61fdc561db6501cd262d534647b979de82e3cf80",
+            "manifest_sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+            "validation_manifest_sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a"
+          }
+        }
+      ],
+      "uninterrupted_vs_resumed_exact_fields": [
+        "model_config",
+        "model",
+        "ema",
+        "optimizer",
+        "python_rng",
+        "torch_rng",
+        "cuda_rng",
+        "best",
+        "step"
+      ],
+      "control_vs_augmented_Torch_Python_CUDA_RNG_exact": true,
+      "all_four_observation_hashes_match_control": true,
+      "portable_EMA": {
+        "state_matches_augmented_final_EMA_exactly": true,
+        "finite_native256_FP32_prediction": {
+          "path": "/mnt/external/demosaic/benchmarks/normalization-augmentation-CPU-v1/portable-EMA-photo0-f32.npy",
+          "sha256": "1046a23b11a5e2548b0681591b172f0002449e2b06880e2bd44c83088dc562da"
+        },
+        "actual_new_neural_forwards": 1,
+        "inference_uses_original_normalization": true
+      },
+      "CUDA_initialized": false,
+      "limits": "CPU saved-state/log/source/recipe replay and one ordinary EMA-loader forward only. No new optimization, GPU/BF16, production continuation or learned-quality claim. Earlier independent affine diagnosis uses unmodified V60; these tiny states are discarded fixtures."
+    }
+  },
+  "full_CPU_tests": {
+    "log": {
+      "path": "/home/dllu/proj/demosaic/.cache/tests-normalization-augmentation-full-CPU-v1.log",
+      "sha256": "7d6f95e1e14db3762a108b9025f267f450b06dbfe486962c0f978743933fb8ac"
+    },
+    "passed": 579,
+    "skipped": 9,
+    "seconds": 95.83
+  },
+  "focused_initial_failure": "Restart fixture initially omitted the existing required RGB initializer;40 other focused tests passed. The fixture now uses an explicit small initializer; corrected restart test and complete579-test CPU suite pass. No production code guard was relaxed.",
+  "no_current_GPU_training_or_review_queue_changed": true,
+  "production_enabled": false,
+  "new_quality_model_trained": false,
+  "next_gate": "Actual BF16/CUDA preflight and a separately declared matched quality trial after original V63/V64 20k review; no automatic launch.",
+  "supporting_helpers_verified_and_archived_after_execution": [
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/audit_flat_palette.py",
+      "sha256": "6d74628937985798f29958f8b48f01cb27680d026ddf9dda0ec6b80d643fb129",
+      "archived": "/mnt/external/demosaic/benchmarks/normalization-augmentation-CPU-v1/helper-sources/audit_flat_palette.py",
+      "unchanged_from_git_tree": "7f7ea17"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/profile_raw_kernel_inference.py",
+      "sha256": "e358991eb464e7f5899f3a848c3fa47f2c146b0b9b0eb9d0ff41967e407c26b6",
+      "archived": "/mnt/external/demosaic/benchmarks/normalization-augmentation-CPU-v1/helper-sources/profile_raw_kernel_inference.py",
+      "unchanged_from_git_tree": "7f7ea17"
+    }
+  ],
+  "independent_audit_first_attempt": {
+    "log": {
+      "path": "/home/dllu/proj/demosaic/.cache/audit-normalization-augmentation-CPU-v1.log",
+      "sha256": "869f7385fd5878f173ad2f15590d5994c18dbf4a0a7520647f616c565c446fa3"
+    },
+    "reason": "Auditor assumed load_checkpoint returns eval mode; the existing API returns the model in training mode. Explicitly call eval in the auditor before ordinary inference. Production loader and training source unchanged.",
+    "corrected_log": {
+      "path": "/home/dllu/proj/demosaic/.cache/audit-normalization-augmentation-CPU-v1-corrected-loader-mode.log",
+      "sha256": "e900e91f24a40c6d03f931f29452aa814a574b8309762eaaa161b392cfae9172"
+    }
+  }
+}

@@ -327,6 +327,15 @@ and ADC-only inputs; physical arithmetic stays IEEE FP32. See
 is a training objective, not a posterior-noise calibration or an established
 quality improvement.
 
+`normalization_augmentation: center-half-mix-v1` enables the optional
+[normalization-coordinate training augmentation](normalization-augmentation.md)
+for stabilized, anchored, full-resolution RGB models. Its default is `none`.
+It changes only selected images' feature-coordinate statistics, preserving RAW,
+targets and DINO inputs without extra neural forwards or RNG consumption. The
+policy is logged and cannot change on resume. Ordinary inference retains full
+context normalization. CPU engineering checks pass; trained quality and CUDA
+validation remain pending.
+
 Optional `--gaussian-reference /path/to/verified-receipt.json` on `quality`,
 `scripts/evaluate_paired_raw.py` and `scripts/report_raw_pair.py` evaluates a
 frozen Gaussian denoising prior with physical variance stabilization. The
