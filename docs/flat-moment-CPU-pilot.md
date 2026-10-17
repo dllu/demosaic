@@ -3,8 +3,10 @@
 **Keep this fixed correction out of production.** It reduces bright uniform-color
 bias, but five of eighteen aggregate flat-field groups regress in camera-RGB
 RMSE. High-noise spatial variation usually increases. Reviewed photographs show
-no useful detail gain. A predeclared broader CPU screen is still running; its
-results and native crops have not been reviewed.
+no useful detail gain. The predeclared
+[broader CPU screen is now complete and rejected](flat-moment-CPU-screen.md):
+negligible photo change and a small procedural SSIM decrease. The original
+receipt below preserves its earlier pending-at-capture state.
 [Execution hashes, complete group summaries, independent checks and 26 actual native views](results/flat-moment-CPU-v1.json).
 
 This is a separate hypothesis from the rejected
@@ -95,8 +97,8 @@ WB/matrix and exposure metadata are in the receipt. No real-photo pixel score.
 
 ![Fence unchanged: noisy, correction, independent reference](images/flat-moment-CPU-v1-crop-b1791961528f88ab.png)
 
-The running screen covers eight fixed protocol photos and all sixteen
+The completed screen covers eight fixed protocol photos and all sixteen
 procedural sources, seven conditions and four CFAs. Its CPU noise draws differ
-from historical CUDA draws. Passing that development screen would only permit
-further review. There is no threshold/window search, new training budget,
-full427 replacement, SOTA claim or change to the original 20k training queues.
+from historical CUDA draws. It fails the predeclared procedural SSIM rule; no
+threshold/window search, integration, full427 extension or new training follows.
+The original 20k training queues remain unchanged.
