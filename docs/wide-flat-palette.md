@@ -139,3 +139,9 @@ full102MP GFX including foliage/fence, and the three cached personal cameras.
 Use native exact-GT triplets and accurately labeled real references. Source
 bootstrap intervals do not quantify training-repeat uncertainty. Any further
 updates retain the planned schedule; no early-gate convergence or SOTA claim.
+
+A [prospective 147-color grid](prospective-color-grid.md) was frozen before the
+separate trial-score outputs. Its1,176 audited observations will check broader
+hue consistency after the owned workflow exits, alongside the original four
+post-hoc colors and all photographic/real comparisons. No grid quality result
+is available yet.

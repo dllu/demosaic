@@ -262,3 +262,8 @@ and a selected magenta flat-grid failure. All64 native sets,29 F32 contexts and
 8 full RGB16 files pass integrity checks; source overlap for the external model
 remains unproven. This comparator does not establish SOTA or broad real-photo
 superiority for our model.
+
+The [prospective hue grid](prospective-color-grid.md) adds1,176 completely
+audited uniform-field observations, with fixed previews and a serialized GPU
+queue. It is a finite color-consistency diagnostic, not evidence of a trained
+quality gain, independent natural-scene generalization or completed SOTA.

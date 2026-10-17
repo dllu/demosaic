@@ -8,6 +8,7 @@ import numpy as np
 import torch
 from audit_colored_flats import sha
 from PIL import Image
+from prepare_color_grid import SUITE, validate
 
 from demosaic.cfa import malvar, mosaic
 from demosaic.reporting import display_crop, save_triplet
@@ -46,6 +47,11 @@ def main(report_path, output, extra_palettes):
     assert sha(report["plan"]) == report["plan_sha256"]
     original = read(plan["inputs"])
     assert sha(plan["inputs"]) == plan["input_plan_sha256"]
+    if original.get("suite") == SUITE:
+        validate(original)
+    else:
+        assert len(original["cases"]) == 32
+    assert plan["cases"] == original["cases"]
     assert plan["ROI_xywh"] == original["roi_xywh"] == [48, 48, 160, 160]
     output = writable_path(output)
     if output.exists():
@@ -66,7 +72,7 @@ def main(report_path, output, extra_palettes):
         )
         assert all(torch.isfinite(v).all() for v in batch.values())
         arrays[i] = batch
-    assert len(arrays) == 32
+    assert len(arrays) == len(original["cases"])
     for r in report["checkpoints"]:
         if r.get("kind", "joint-checkpoint") == "joint-checkpoint":
             assert sha(r["path"]) == r["sha256"]
@@ -91,7 +97,7 @@ def main(report_path, output, extra_palettes):
             assert delta < 2e-14, (key, name, delta)
             errors.append(delta)
             fields += 1
-    assert len(predictions) == len(report["results"]) == 32 * len(report["checkpoints"])
+    assert len(predictions) == len(report["results"]) == len(arrays) * len(report["checkpoints"])
     output.mkdir(parents=True, exist_ok=False)
     extra = []
     for model_index, model in enumerate(report["checkpoints"]):
@@ -165,7 +171,7 @@ def main(report_path, output, extra_palettes):
         "status": "completed-independent-saved-flat-Torch64-audit-and-native-rendering",
         "input_report": str(report_path),
         "input_report_sha256": sha(report_path),
-        "observations": 32,
+        "observations": len(arrays),
         "float_predictions": len(predictions),
         "metric_fields": fields,
         "maximum_Torch64_vs_saved_NumPy64_metric_difference": max(errors),
@@ -173,7 +179,7 @@ def main(report_path, output, extra_palettes):
         "additional_native_crops": extra,
         "CUDA_initialized": False,
         "driver_sha256": sha(__file__),
-        "scope": "Saved observations/predictions only, no model inference or new draws. Native pixel reconstruction does not claim visual inspection; additional triplets still require viewing. Four post-hoc colors/one draw are not a broad quality benchmark.",
+        "scope": "Saved observations/predictions only, no model inference or new draws. Native pixel reconstruction does not claim visual inspection; additional triplets still require viewing. The supplied finite color grid/one draw per case is not a broad photographic quality benchmark.",
     }
     (output / "audit.json").write_text(json.dumps(result, indent=2) + "\n")
     print(
