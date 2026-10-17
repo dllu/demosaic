@@ -1,0 +1,116 @@
+{
+  "status": "completed-fresh-matched-first32000-training-and-started-full-review-v2",
+  "review_complete": false,
+  "promote": false,
+  "working_reference": "V43 step2000",
+  "training_workflow": {
+    "path": "/mnt/external/demosaic/runs/packed-isotropic-first-review-workflow-v1.json",
+    "sha256": "3900d34e00b8510787774a25b145ecc5db442310a02117896e4d241dbb4c8c5f"
+  },
+  "retained_training_status": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-first32000-completion-and-review-recovery-v1/training-completed.json",
+    "sha256": "3900d34e00b8510787774a25b145ecc5db442310a02117896e4d241dbb4c8c5f"
+  },
+  "actual_boundaries": {
+    "no-dino": {
+      "arm": "no-dino",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-b4-v71-step8000.pt",
+        "sha256": "abd7345c080cb227d77385647c74614c0416d9316ad2f28c81c31cdd1f1697a2"
+      },
+      "step": 8000,
+      "planned_updates": 160000,
+      "finite_model_EMA_Adam": true,
+      "fresh_initialization": true,
+      "original_schedule_verified": true,
+      "source_recipe_manifests_verified": true,
+      "metrics": {
+        "path": "/mnt/external/demosaic/runs/no-dino-packed-isotropic-b4-v71/metrics.jsonl",
+        "sha256": "c95db5e1e2fce6d5a20d68fe65480070caf4652fc8161d935998ae4d2a371b30"
+      },
+      "logged_rows": 321,
+      "actual_training": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-first-review-workflow-v1/no-dino-actual-training.json",
+        "sha256": "4142706df9ec2486627918d51e710d28cd516b4a1030b909f053856692e87018"
+      }
+    },
+    "dino": {
+      "arm": "dino",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-packed-isotropic-b4-v70-step8000.pt",
+        "sha256": "5fc021488d34df6ddf85cac8b0fc5cb0b0117713c87865c010e7e246979a2c14"
+      },
+      "step": 8000,
+      "planned_updates": 160000,
+      "finite_model_EMA_Adam": true,
+      "fresh_initialization": true,
+      "original_schedule_verified": true,
+      "source_recipe_manifests_verified": true,
+      "metrics": {
+        "path": "/mnt/external/demosaic/runs/dino-packed-isotropic-b4-v70/metrics.jsonl",
+        "sha256": "6997fb8bab942ef240e0322d3bebb0f37fe74c0804604fbcea1126ad435ffa81"
+      },
+      "logged_rows": 321,
+      "actual_training": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-first-review-workflow-v1/dino-actual-training.json",
+        "sha256": "e5bde80290798a357115bfa309bb31d55fbb18799bdd2a55993d98470d284cf8"
+      }
+    }
+  },
+  "all321_logged_observation_domain_LR_match": true,
+  "actual_fresh_RAW_and_global_RNG_match": true,
+  "original_planned_updates": 160000,
+  "actual_updates_per_arm": 8000,
+  "actual_examples_per_arm": 32000,
+  "failure_preserved": {
+    "workflow": {
+      "path": "/mnt/external/demosaic/runs/packed-isotropic-first32000-review-workflow-v1.json",
+      "sha256": "151085940967918b09a6501af66f47e009f5461594f8b0b1bec77cac8626b63b"
+    },
+    "operator": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-first32000-review-workflow-v1/tools/review_packed_isotropic_trial.py",
+      "sha256": "9343337f23a431b0730b66518edbe3b7ad3a73003a66da8d69f3a1f41993d37d"
+    },
+    "cause": "Startup checker counted the final validation event among321 training rows. Failed before any inference. Training/checkpoints were successful and unchanged."
+  },
+  "recovery": {
+    "plan": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-first32000-review-workflow-v2/plan.json",
+      "sha256": "d91bb847e546d8929e13cd774752b48baba8ced020865daade161ddd48d58396"
+    },
+    "CPU_actual_completed_boundary_preflight": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-first32000-review-workflow-v2/CPU-preflight.json",
+      "sha256": "dedb3d44d0430d59430c949f712195b6e91d7762da384f85470cc67ddbb5cc5e"
+    },
+    "independent_actual_training_audit": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-first32000-review-workflow-v2/training-audit.json",
+      "sha256": "da0a7e110e295ca3b2d5c4f51de36111b3d62543629dc87328b07e799abfb193"
+    },
+    "observed_status": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-first32000-completion-and-review-recovery-v1/observed-review-status.json",
+      "sha256": "f105f3935d09ea7b6f9824be6e78994983b1770df2dfa673bba5678541bc2023"
+    },
+    "verified_live_owner": {
+      "pid": 1100129,
+      "created": 1792271282.32,
+      "driver_sha256": "ff037e6e163612b50def5e4235129e61e760523321e4ed54c9fb6086b639bda3"
+    },
+    "verified_live_child": {
+      "pid": 1102666,
+      "created": 1792271388.08
+    },
+    "permanent_fix": "Filter event=train explicitly; reject missing/duplicate steps.33 focused tests and actual completed checkpoint/log checks passed."
+  },
+  "complete_primary_panels": {
+    "known": {
+      "path": "/mnt/external/demosaic/evaluation/packed-isotropic-first32000-known-v2/summary.json",
+      "sha256": "49ab47eed0d92431d23f6d27e0c789f44566650ee21924428d0a998266654ebc"
+    },
+    "unseen": {
+      "path": "/mnt/external/demosaic/evaluation/packed-isotropic-first32000-unseen-v2/summary.json",
+      "sha256": "8ab66b4758f60583012b681cf8b5911b8f2391d6d1405de737de41d7d741de40"
+    }
+  },
+  "full427_status": "Actively evaluating; no aggregate quality decision.",
+  "scope": "Both actual original-horizon first32000-example boundaries are complete and unpromoted. This is training/completion and review recovery, not a full quality report. Frozen source/data/precision/cohorts/model weights unchanged; no training rerun, retiming, output fitting, protected-final scoring or new data admission."
+}

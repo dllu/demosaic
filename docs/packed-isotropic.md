@@ -321,3 +321,40 @@ The CPU operator is `scripts/preflight_block_compilation_cpu.py`; private receip
 SHA `fda8270f203d9b5da2d73dc07e37f61d6de443f937ad6889ed2e6ef117dc2e6f`.
 The active training and queued quality review execute their earlier frozen code;
 this root-worktree addition does not alter either comparison.
+
+## Completed training and review handoff
+
+[Both actual first32000-example boundaries are complete](results/packed-isotropic-first32000-training-completion-v1.json).
+V70 DINO checkpoint SHA is
+`5fc021488d34df6ddf85cac8b0fc5cb0b0117713c87865c010e7e246979a2c14`;
+V71 no-DINO remains
+`abd7345c080cb227d77385647c74614c0416d9316ad2f28c81c31cdd1f1697a2`.
+Each has8000 actual updates under its original160000-update horizon, finite
+model/EMA/Adam, correct source/recipe, common fresh initialization/global RNG,
+and all321 logged observation/domain/LR matches. Genuine DINO remained frozen
+and gradient-free. Training owners have exited; no continuation is running.
+
+The first review controller stopped before inference because its startup reader
+included the final validation record when checking321 training records. That
+was a review-reader bug, not a failed training run or bad checkpoint. The fix
+filters `event=train` explicitly and still rejects missing/duplicate training
+steps. Thirty-three focused tests passed, followed by an actual completed-state
+CPU preflight. The original failed controller, source, plan and logs remain
+unchanged. Neither training nor its schedule/data/weights were rerun or altered.
+
+A separate **v2** review is now evaluating the original frozen protocol. Its plan
+SHA is `d91bb847e546d8929e13cd774752b48baba8ced020865daade161ddd48d58396`,
+with166 frozen guards and36 inputs; all output directories are new. Current
+status is `/mnt/external/demosaic/runs/packed-isotropic-first32000-review-workflow-v2.json`.
+The completed known648 and unseen810 cases are followed by the active full427
+panel; the rest of the native/color/GFX/statistics review remains pending.
+The earlier v1 queue receipt describes its retained observation, not current
+execution. Use v2 for current progress.
+
+Four actual full-panel native triplets have been inspected so far: both new
+models on the two fixed photographic examples. Both leave substantial noise
+in building/sky and orange fabric, and the fine target cords are not recovered.
+These are initial observations, not a completed quality/convergence assessment;
+neither model is promoted. The actual viewed512×192 originals and metadata are
+bound in `/mnt/external/demosaic/benchmarks/packed-isotropic-first32000-initial-native-views-v1/observations.json`.
+No crop was resized, no output was corrected, and V43 stays the README reference.

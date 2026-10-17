@@ -80,3 +80,16 @@ def test_pending_or_live_training_cannot_release_a_quality_review(tmp_path):
     with pytest.raises(AssertionError):
         module.completed(path)
     assert not torch.cuda.is_initialized()
+
+
+def test_final_validation_record_is_not_a_training_observation(tmp_path):
+    module = script()
+    train = [{"event": "train", "step": step} for step in [1, *range(25, 8001, 25)]]
+    validation = {"event": "validation", "step": 8000, "panel_images": 8}
+    path = tmp_path / "metrics.jsonl"
+    path.write_text("\n".join(json.dumps(row) for row in [*train, validation]) + "\n")
+    assert module.training_observations(path) == train
+    for broken in [train[:-1], [*train, train[-1]]]:
+        path.write_text("\n".join(json.dumps(row) for row in [*broken, validation]) + "\n")
+        with pytest.raises(AssertionError):
+            module.training_observations(path)

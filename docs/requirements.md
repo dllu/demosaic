@@ -23,14 +23,14 @@ finds a small+.02032dB matched photo gain, with soft detail and bright-color
 limitations. Neither arm is promoted. The new
 [RAW-native isotropic DINO backbone](packed-isotropic.md) passes actual mixed-data,
 checkpoint and genuine-weight initialization checks; its own batch sweep selects4.
-The no-DINO arm has completed32000 examples; its matched DINO arm is training, and
-[the full review is queued behind their exact owner](results/packed-isotropic-first32000-review-queue-v1.json).
-Their quality is unreviewed. Finite training, complete software or a queued
+Both fresh arms have completed32000 examples with matched logged inputs.
+[The full review is running after a corrected startup-record filter](results/packed-isotropic-first32000-training-completion-v1.json).
+Their full quality review is incomplete; initial native crops still show substantial noise. Finite training, complete software or a queued
 review do not establish the model-quality or speed requirements below.
 
 | Requirement | Evidence needed | Current state |
 | --- | --- | --- |
-| Modern method and DINOv3 recommendation | Primary-source research, architecture rationale, licensed pretrained backbone and ablation | Official pinned weights; an earlier architecture's matched 20k-step ablation has a small positive gain on 427 photos. The earlier RGB architecture’s [completed fresh no-context/S/B comparison through 10,000 updates](fresh-dino-capacity-10k-review.md) finds no photographic context gain. The [completed ConvNeXt10k review](dino-convnext-pyramid-v58-10k-review.md) ties no-context on photo mean with mixed paired-real scores. No consistent mature context advantage or SOTA is established. The new RAW-native matched ablation is still training |
+| Modern method and DINOv3 recommendation | Primary-source research, architecture rationale, licensed pretrained backbone and ablation | Official pinned weights; an earlier architecture's matched 20k-step ablation has a small positive gain on 427 photos. The earlier RGB architecture’s [completed fresh no-context/S/B comparison through 10,000 updates](fresh-dino-capacity-10k-review.md) finds no photographic context gain. The [completed ConvNeXt10k review](dino-convnext-pyramid-v58-10k-review.md) ties no-context on photo mean with mixed paired-real scores. No consistent mature context advantage or SOTA is established. The new RAW-native matched ablation has completed its first32000-example boundary; full quality review is running |
 | Free, broad training data | Source attribution manifest, content-grouped held-out split, real corpus training | Active frozen Commons: 40,170 train / 2,303 val / 2,255 untouched test / 4 excluded. The reviewed4× extension has52,536 train; its V50 first gate was not promoted. The [completed next extension](commons-incoming-v3.md) reaches66,934 train at8× and4×, adding14,398 sources with full hash/metadata/area-consistency checks and unchanged holdouts. It stays separate from the active model. The [larger native extension](public-raw-expansion-v2.md) freezes128 captures/106 declared scene groups. Finite identity screening and spot checks do not establish complete scene recognition or a trained gain |
 | 8×8 binning with additional precision | Linear-light float averaging and >8-bit cache, numerical tests | Implemented and tested; all 44732 eligible licensed sources prepared |
 | Geometry, optical blur, exposure, synthetic fine detail | Executable data augmentation and inspected samples | Implemented. Complete 4×→geometry/PSF→2× Commons/native targets improve full-photo PSNR by .50990 dB in the matched V34 trial; original 8× validation remains fixed |

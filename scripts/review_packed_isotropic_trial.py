@@ -39,6 +39,12 @@ def ref(path):
     return {"path": str(Path(path).resolve()), "sha256": sha(path)}
 
 
+def training_observations(path):
+    records = [record for record in rows(path) if record.get("event") == "train"]
+    assert [record["step"] for record in records] == [1, *range(25, 8001, 25)]
+    return records
+
+
 def completed(workflow):
     training = read(workflow)
     if training["status"] != TERMINAL:
@@ -84,7 +90,7 @@ def completed(workflow):
         for item in state["optimizer"]["state"].values():
             assert int(item["step"]) == 8000
             assert all(torch.isfinite(v).all() for v in item.values())
-        observations.append(rows(boundary["metrics"]["path"]))
+        observations.append(training_observations(boundary["metrics"]["path"]))
         constructions.append(
             read(Path(training["plan"]).parent / (arm["arm"] + "-fresh-construction.json"))
         )
