@@ -38,11 +38,12 @@ process; it records completed work and finishes active writes.
 
 Downloading does **not** change an active training or evaluation manifest.
 
-A later [16,231-source quarantine preparation](commons-incoming-v3.md) now
-processes arrivals beyond the earlier incoming selection with two CPU workers.
-It excludes every previously seen candidate, queues cached protected-scene and
-duplicate screening, and stops before training admission. Current model/data
-memberships remain fixed.
+The [completed 16,231-source extension](commons-incoming-v3.md) provides a
+separate reviewed corpus of 66,934 training images at both 8× and 4×. Current
+models retain their original manifests. The [next 10,024-source snapshot](commons-incoming-v4.md)
+is preparing with two CPU workers. It excludes all previous candidates and
+recorded failures, then runs protected-scene and duplicate screening before
+review. Neither downloads nor this preprocessing change training membership.
 
 V32/V33 and the V34 augmentation recipe retain the frozen 44,732-source selection.
 Existing validation/test membership and the excluded GFX scene/siblings remain
@@ -80,8 +81,10 @@ title/model/date metadata sanity check found no matching capture identifiers;
 metadata can be missing and this is not visual scene recognition. No GFX pixels
 are used to fit training transforms or select new training sources.
 
-To prepare another separately versioned extension, pass the previous frozen
-manifest as the base, the download start time and a new output directory:
+The original extension used this CLI with the previous frozen manifest, download
+start time and a new output directory. For subsequent arrivals, follow the
+[current selection procedure](commons-incoming-v4.md), which additionally excludes
+all previous candidate/error sets and screens cached protected scenes:
 
 ```bash
 source scripts/env.sh

@@ -1,16 +1,19 @@
 # Preparing the next Commons arrivals separately
 
-The 8× preparation and audits are now complete. A separate reviewed future
-corpus contains **66,934 training sources**, including **14,398** newly admitted
-images. Matching 4× preparation is running; all current model manifests remain
-fixed. [Reviewed freeze](results/commons-incoming-v3-reviewed8.json),
-[actual 4× launch](results/commons-incoming-v3-rebin4-launch.json).
+The 8× preparation, audits and matching 4× preparation are complete. A separate
+reviewed future corpus contains **66,934 training sources**, including **14,398**
+newly admitted images. Both complete caches are ready for a separate data
+comparison; current model manifests remain fixed.
+[Reviewed freeze](results/commons-incoming-v3-reviewed8.json),
+[completed 4× verification](results/commons-incoming-v3-rebin4-complete.json).
+The [next 10,024-source snapshot](commons-incoming-v4.md) is preparing separately.
 
-The background downloader remains live. A new CPU job has frozen **16,231**
+The background downloader remains live. This completed CPU job froze **16,231**
 additional downloaded candidates for preparation and identity screening.
 [Actual launch, exact selection/operator hashes and startup checks](results/commons-incoming-v3-launch.json).
 These data are not admitted to any model. The original no-context/S/B trial
-keeps its fixed Commons 40,170/native 128/original paired 32 recipe.
+used Commons 40,170/native 128/original paired 32; the current palette comparison
+retains that fixed data recipe.
 
 The selection excludes **all 58,690 identities** from the original extension
 and the previous incoming selection, including earlier quarantines and
@@ -61,8 +64,9 @@ Operational files:
 - Log `.cache/prepare-commons-incoming-v3.log`.
 - Frozen `selection.jsonl`, `selection-recipe.json` and `source/` under the output.
 
-Inspect the live process/status/log; do not launch a duplicate. All original
-training/evaluation manifest hashes still match, and no CUDA work was started.
+The completed producer and rebin controllers have exited; do not restart them.
+All original training/evaluation manifest hashes still match, and no CUDA work
+was started by this preparation.
 The final executed launcher passes Ruff; the reused preparation/screening/audit
 operators retain their existing validation. This job does not create a new
 model, performance score or README reference.
