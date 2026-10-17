@@ -10,20 +10,28 @@ from review_raw_kernel_results import completed_primary
 def main(inputs, workflow, training_workflow, output):
     status, _, _, training_plan = completed_primary(workflow, training_workflow)
     phase = "matched_control_review" in training_plan
+    joint = "review_updates" in training_plan
     records = [
         {
             **status["checkpoint"],
             "kind": "joint-checkpoint",
-            "arm": "RAW-phase-head-warmup1000" if phase else "RAW-head-warmup1000",
-            "comparison_role": "matched-phase-conditioning"
-            if phase
-            else "exploratory-new-head-warmup",
+            "arm": "RAW-phase-joint2000"
+            if joint
+            else ("RAW-phase-head-warmup1000" if phase else "RAW-head-warmup1000"),
+            "comparison_role": "separately-initialized-joint-stage"
+            if joint
+            else ("matched-phase-conditioning" if phase else "exploratory-new-head-warmup"),
         }
     ]
     # No legacy arrays are inserted into this report. Their immutable reports
     # keep their own original model code and can be compared as retained results.
     evaluate_records(
-        inputs, workflow, output, records, training_plan["parent_sha256"], expected_step=1000
+        inputs,
+        workflow,
+        output,
+        records,
+        training_plan["parent_sha256"],
+        expected_step=2000 if joint else 1000,
     )
     (output / "source" / Path(__file__).name).write_bytes(Path(__file__).read_bytes())
 

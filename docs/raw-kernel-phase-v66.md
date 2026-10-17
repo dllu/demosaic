@@ -122,3 +122,7 @@ for this variant.
 Reports need two native exact-GT photo triplets and all four standing GFX regions,
 including foliage/fence, with non-GT real-reference labels. No automatic joint
 stage, promotion, source/data substitution, fitted output or protected-final score.
+
+After that completed review, a [separately declared V67 joint stage](raw-kernel-phase-joint-v67.md)
+passed genuine CPU/CUDA checks and launched from V66 EMA. It has its own original
+10k schedule and stops at2k for full review; this is not a V66 resume.

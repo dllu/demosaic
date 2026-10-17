@@ -24,12 +24,18 @@ PRIMARY_TERMINAL = (
     "completed-primary-panels-awaiting-full-statistics-hue-artifact-and-native-review"
 )
 TRAINING_TERMINAL = "completed-head-only1000-awaiting-full-quality-and-native-review"
+JOINT_TRAINING_TERMINAL = (
+    "completed-joint2000-of-original10000-awaiting-full-quality-and-native-review"
+)
 
 
 def completed_primary(workflow, training_workflow):
     """Require successful exact owners, unchanged code/data and frozen whole state."""
     status, training = read(workflow), read(training_workflow)
-    if status["status"] != PRIMARY_TERMINAL or training["status"] != TRAINING_TERMINAL:
+    if status["status"] != PRIMARY_TERMINAL or training["status"] not in (
+        TRAINING_TERMINAL,
+        JOINT_TRAINING_TERMINAL,
+    ):
         raise RuntimeError("RAW-head primary/training workflow has not completed")
     exited(status)
     exited(training)
@@ -38,12 +44,28 @@ def completed_primary(workflow, training_workflow):
     assert training["controller"]["driver_sha256"] == training_plan["driver_sha256"]
     assert primary_plan["previous_owner"] == training["controller"]
     assert status["checkpoint"] == training["checkpoint"]
-    assert training["completed_updates"] == training["planned_updates"] == 1000
-    assert training["all91_existing_model_and_EMA_tensors_bitwise_parent"]
     recipe = yaml.safe_load(Path(training_plan["recipe"]).read_text())
+    joint = recipe.get("raw_kernel_only", False) is False
+    if joint:
+        assert training["status"] == JOINT_TRAINING_TERMINAL
+        assert training["completed_updates"] == training_plan["review_updates"] == 2000
+        assert training["planned_updates"] == recipe["steps"] == 10000
+        assert training["finite94model94EMA92Adam"]
+        assert training["normalization_buffers_bitwise_parent"]
+        parent_review = Path(training_plan["quality_review"])
+        assert sha(parent_review) == training_plan["quality_review_sha256"]
+        review = read(parent_review)
+        assert review["review_complete"] is True
+        assert review["checkpoint"]["sha256"] == training_plan["parent_sha256"]
+        assert recipe["model"]["raw_kernel_phase_conditioning"] is True
+    else:
+        assert recipe["raw_kernel_only"] is True
+        assert training["status"] == TRAINING_TERMINAL
+        assert training["completed_updates"] == training["planned_updates"] == 1000
+        assert training["all91_existing_model_and_EMA_tensors_bitwise_parent"]
     phase = recipe["model"].get("raw_kernel_phase_conditioning", False)
     assert type(phase) is bool
-    if phase:
+    if phase and not joint:
         assert training["finite94model94EMA3Adam"]
         assert training["all41_V65_control_observations_domains_LRs_exact"]
         control_path = Path(training_plan["matched_control_review"])
@@ -62,7 +84,7 @@ def completed_primary(workflow, training_workflow):
         assert {
             k: v for k, v in recipe["model"].items() if k != "raw_kernel_phase_conditioning"
         } == {k: v for k, v in old_recipe["model"].items() if k != "raw_kernel_phase_conditioning"}
-    else:
+    elif not joint:
         assert training["finite_93model_93EMA_2Adam"]
     for plan in [primary_plan, training_plan]:
         for path, digest in plan["guards"].items():
@@ -150,6 +172,7 @@ def main(workflow, training_workflow, output):
     assert not torch.cuda.is_initialized()
     status, training, _, plan = completed_primary(workflow, training_workflow)
     matched = plan.get("matched_control_review")
+    joint = training["status"] == JOINT_TRAINING_TERMINAL
     additional = (
         None
         if matched is None
@@ -159,9 +182,19 @@ def main(workflow, training_workflow, output):
             "label": "V65-matched-phase-control",
         }
     )
+    if joint:
+        additional = {
+            "path": plan["quality_review"],
+            "sha256": plan["quality_review_sha256"],
+            "label": "V66-head-warmup-parent",
+        }
     checkpoint = {
         **status["checkpoint"],
-        "label": ("RAW-phase-head-warmup1000" if matched else "RAW-head-warmup1000"),
+        "label": (
+            "RAW-phase-joint2000"
+            if joint
+            else ("RAW-phase-head-warmup1000" if matched else "RAW-head-warmup1000")
+        ),
     }
     result = {
         "status": "completed-independent-RAW-head-primary-statistics-and-saved-comparisons",
@@ -173,7 +206,9 @@ def main(workflow, training_workflow, output):
         "driver_sha256": sha(__file__),
         "CUDA_initialized": False,
         "scope": (
-            "Matched direct-phase-conditioning comparison against V65; additional phase capacity is part of the intervention. "
+            "Separately initialized joint restoration stage from V66 EMA; initialization/scope/seed/LR/budget differ, so this does not isolate unfreezing. "
+            if joint
+            else "Matched direct-phase-conditioning comparison against V65; additional phase capacity is part of the intervention. "
             if matched
             else "One exploratory new-head warmup, not a matched architecture control. "
         )

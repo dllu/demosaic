@@ -10,6 +10,7 @@ import torch
 import yaml
 from audit_fresh_dino_statistics import sha
 from audit_long_commons_artifacts import audit_panels
+from audit_raw_kernel_joint_state import audit_joint_state
 from audit_sensor_mean_artifacts import exited
 from review_raw_kernel_results import REPO, completed_primary, read
 
@@ -146,8 +147,14 @@ def main(workflow, training_workflow, after_workflow, output):
     assert after_plan["previous_owner"] == status["controller"]
     for path, digest in after_plan["guards"].items():
         assert sha(path) == digest
-    cp = {**status["checkpoint"], "step": 1000, "arm": "head-only-warmup"}
     recipe = yaml.safe_load(Path(plan["recipe"]).read_text())
+    joint = recipe.get("raw_kernel_only", False) is False
+    steps = 2000 if joint else 1000
+    cp = {
+        **status["checkpoint"],
+        "step": steps,
+        "arm": "phase-joint-restoration" if joint else "head-only-warmup",
+    }
     result = {
         "status": "completed-independent-RAW-head-state-native-and-RGB16-integrity-audit",
         "workflow": str(workflow),
@@ -156,7 +163,9 @@ def main(workflow, training_workflow, after_workflow, output):
         "training_workflow_sha256": sha(training_workflow),
         "after_workflow": str(after_workflow),
         "after_workflow_sha256": sha(after_workflow),
-        "boundary": audit_head_state(cp, recipe, plan, Path(plan["run"]) / "metrics.jsonl", 1000),
+        "boundary": (audit_joint_state if joint else audit_head_state)(
+            cp, recipe, plan, Path(plan["run"]) / "metrics.jsonl", steps
+        ),
         **audit_panels(
             status["outputs"],
             [cp],
