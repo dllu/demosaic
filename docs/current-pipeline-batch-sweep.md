@@ -43,3 +43,9 @@ must be reviewed on its own merits before changing those comparisons. The
 [step2000 corpus review](native-corpus-2k-review.md) is separate quality evidence,
 including its low-noise procedural regression. This benchmark does not repair
 that failure or establish better restoration quality.
+
+The later joint RAW-kernel head changes compute and memory use. A
+[current-model sweep](raw-kernel-training-batch-sweep.md) is queued after its
+original10,000-update run and complete serial evaluations. The measurements
+above apply to the earlier RGB model; no new GPU result or batch change is
+claimed while that queue waits.

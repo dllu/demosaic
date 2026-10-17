@@ -84,6 +84,11 @@ selection rebinning reads its supplied manifest instead of the changing index.
 
 ## Batch-size sweep
 
+The current joint RAW-kernel model has its own
+[queued batch sweep](raw-kernel-training-batch-sweep.md), preserving the
+production model/data/schedule with memory skips and discarded timing updates.
+The earlier RGB-model measurements below do not settle its batch choice.
+
 `scripts/benchmark_training.py` runs fresh processes for batches 4/8/16/32/64,
 two repeats in a deterministic shuffled order, using the same initializer,
 model, frozen manifests, mixed-domain schedule, LR and data-worker counts.
