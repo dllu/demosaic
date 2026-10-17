@@ -1,6 +1,7 @@
 # Smaller multiscale measured-CFA loss
 
-V62 is training a separate **0.001** coefficient trial after the completed
+V62 completed its first **1,000 updates** of the separate **0.001** coefficient
+trial and is being evaluated after the completed
 [V61 review](sensor-mean-v61-first1k-review.md). V61's .01 loss reduces bright
 saturated-field bias but worsens photographic/paired-real accuracy and weak
 detail. V62 tests whether less optimization pressure preserves more of the
@@ -8,6 +9,17 @@ original objective. No V62 quality gain is established yet.
 
 [Actual launch, source/config/data hashes, CPU/CUDA receipts and logged-input matches](results/sensor-mean-v62-first1k-launch.json).
 [Configuration](../configs/dino-convnext-palette-sensor-mean-small-b16-v62.yaml).
+[Frozen whole-state checkpoint and all 41 matched logged observations](results/sensor-mean-v62-first1k-freeze.json).
+[Serialized independent primary/state/native/hue review](results/sensor-mean-v62-first1k-final-review-queue.json).
+
+The trainer exited successfully. Checkpoint SHA256:
+`714aeb4abe26e03da8fc6e92c068be7b2070da74ece540e0612c2bd2e0215999`.
+The final review reuses audited parent/V60/V61/nonlocal arrays and computes only
+1,176 new V62 hue predictions. The shared score/artifact audit reproduces all
+original V61 numeric and integrity fields exactly. A CPU-only replay of the
+generalized grid wrapper reproduces 4,704 case/array/model records, 72 groups and
+all 12 whole native PNG hashes, without inference. No quality decision follows
+from these engineering checks.
 
 The completed V60 first1k run is the control. Both initialize from the same
 mature V58 step10000 EMA, SHA256

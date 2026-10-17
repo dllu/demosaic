@@ -40,8 +40,11 @@ def rows(path):
     return [json.loads(line) for line in Path(path).read_text().splitlines()]
 
 
-def main(workflow, output):
+def main(workflow, output, candidate_label="V61-first1k", extra_reference=()):
     status = read(workflow)
+    candidate = status["checkpoint"]["sha256"]
+    assert sha(status["checkpoint"]["path"]) == candidate
+    registries = [*REGISTRIES, *extra_reference]
     output = writable_path(output)
     if output.exists():
         raise ValueError("Score audit exists; choose a new output")
@@ -66,9 +69,9 @@ def main(workflow, output):
         )
         current_path, current_cases = root / "summary.json", root / filename
         current, case_rows = read(current_path), rows(current_cases)
-        label = next(m["label"] for m in current["models"] if m.get("sha256") == CANDIDATE)
+        label = next(m["label"] for m in current["models"] if m.get("sha256") == candidate)
         current_scores = selected_scores(case_rows, label, panel)
-        for family, registry_path, checkpoint in REGISTRIES:
+        for family, registry_path, checkpoint in registries:
             registry = read(registry_path)
             record = registry["runs"][panel]
             old_path = Path(record.get("report", record.get("source")))
@@ -168,9 +171,9 @@ def main(workflow, output):
                             "panel": panel,
                             "kind": kind,
                             "metric": metric,
-                            "first": "V61-first1k",
+                            "first": candidate_label,
                             "second": family,
-                            "first_checkpoint_sha256": CANDIDATE,
+                            "first_checkpoint_sha256": candidate,
                             "second_checkpoint_sha256": checkpoint,
                             "sources": len(ids),
                             "first_source_balanced_mean": average(x.tolist()),
@@ -181,9 +184,11 @@ def main(workflow, output):
                             ).tolist(),
                         }
                     )
-    assert len(comparisons) == 36 and len(witnesses) == len(sources) == 9
+    assert len(comparisons) == 12 * len(registries)
+    assert len(witnesses) == len(sources) == 3 * len(registries)
     result = {
-        "status": "completed-independent-V61-primary-statistics-and-saved-control-comparisons",
+        "status": "completed-independent-primary-statistics-and-saved-control-comparisons",
+        "candidate_label": candidate_label,
         "workflow": str(workflow),
         "workflow_sha256_at_audit": sha(workflow),
         "statistics": statistics,
@@ -214,5 +219,13 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--workflow", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--candidate-label", default="V61-first1k")
+    parser.add_argument(
+        "--extra-reference",
+        nargs=3,
+        action="append",
+        default=[],
+        metavar=("LABEL", "REGISTRY", "CHECKPOINT_SHA256"),
+    )
     args = parser.parse_args()
-    main(args.workflow, args.output)
+    main(args.workflow, args.output, args.candidate_label, args.extra_reference)

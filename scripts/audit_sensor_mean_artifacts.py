@@ -10,7 +10,6 @@ import psutil
 import tifffile
 import torch
 from audit_fresh_dino_statistics import sha
-from compare_sensor_mean_scores import CANDIDATE
 from PIL import Image
 
 from demosaic.safety import writable_path
@@ -55,7 +54,7 @@ def identity(panel, crop):
     return crop.get("scene", crop.get("source_id", crop.get("region", {}).get("name")))
 
 
-def main(workflow, output):
+def main(workflow, output, training_workflow=None, weight=0.01):
     torch.set_num_threads(2)
     assert not torch.cuda.is_initialized()
     output = writable_path(output)
@@ -64,13 +63,17 @@ def main(workflow, output):
     assert status["status"] == "completed-primary-panels-awaiting-hue-statistical-and-native-review"
     exited(status)
     plan = read(status["plan"])
-    original = read(plan["previous_failed_workflow"])
-    assert original["status"] == "failed"
-    exited(original)
-    training = read(BASE / "runs/sensor-mean-v61-first1k-workflow-v1.json")
+    original = None
+    guards = [plan]
+    if "previous_failed_workflow" in plan:
+        original = read(plan["previous_failed_workflow"])
+        assert original["status"] == "failed"
+        exited(original)
+        guards.append(read(original["plan"]))
+    training = read(training_workflow or BASE / "runs/sensor-mean-v61-first1k-workflow-v1.json")
     exited(training)
     training_plan = read(training["plan"])
-    for guard in [plan, read(original["plan"]), training_plan]:
+    for guard in [*guards, training_plan]:
         for path, digest in {
             **guard["inputs"],
             **guard["source_files"],
@@ -78,11 +81,12 @@ def main(workflow, output):
         }.items():
             assert sha(path) == digest, path
     checkpoint = status["checkpoint"]
-    assert sha(checkpoint["path"]) == checkpoint["sha256"] == CANDIDATE
+    candidate = checkpoint["sha256"]
+    assert sha(checkpoint["path"]) == candidate and checkpoint == training["checkpoint"]
     state = torch.load(checkpoint["path"], map_location="cpu", weights_only=True, mmap=True)
     cfg = state["config"]
     assert state["step"] == 1000 and cfg["steps"] == 4000
-    assert cfg["multiscale_sensor_weight"] == 0.01 and cfg["flat_chroma_stops"] == 8
+    assert cfg["multiscale_sensor_weight"] == weight and cfg["flat_chroma_stops"] == 8
     assert cfg["initialized_from"]["sha256"] == training_plan["parent"]["sha256"]
     assert (
         cfg["source_sha256"] == "c9058d90d7d77e61ad7ec53293b805d8ea72da173318e38d1329e138215544c8"
@@ -142,7 +146,7 @@ def main(workflow, output):
         old = read(old_path)
         assert len(report["native_crops"]) == count
         for crop in report["native_crops"]:
-            assert crop.get("checkpoint_sha256", crop.get("model", {}).get("sha256")) == CANDIDATE
+            assert crop.get("checkpoint_sha256", crop.get("model", {}).get("sha256")) == candidate
             matches = [
                 c
                 for c in old["native_crops"]
@@ -210,7 +214,8 @@ def main(workflow, output):
         assert v.dtype == np.uint16 and codes > 256
         files.append({**item, "absolute_path": str(path), "sampled_unique_codes": codes})
     result = {
-        "status": "completed-independent-V61-state-primary-native-and-RGB16-integrity-audit",
+        "status": "completed-independent-state-primary-native-and-RGB16-integrity-audit",
+        "loss_weight": weight,
         "workflow": str(workflow),
         "workflow_sha256": sha(workflow),
         "original_failure_retained": original,
@@ -246,4 +251,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--workflow", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--training-workflow", type=Path)
+    parser.add_argument("--weight", type=float, default=0.01)
     main(**vars(parser.parse_args()))
