@@ -15,6 +15,8 @@ improves average synthetic-photo scores but finds no consistent DINO advantage;
 fabric color shifts and lost fine texture keep V43 as the working reference below.
 The [completed ConvNeXt pyramid review](docs/dino-convnext-pyramid-v58-10k-review.md)
 ties that photo mean and retains color/detail limitations.
+The [released RAW reference comparison](docs/nonlocal-reference-full-review.md)
+adds a recent comparator with mixed real/synthetic results.
 
 Native 160×160 validation crops: noisy → denoised → GT, using V43 step 2000
 (FP16, ISO12800 synthetic noise prior). These are 100% crops at the 8×8-binned

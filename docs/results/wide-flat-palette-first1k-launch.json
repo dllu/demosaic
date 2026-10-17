@@ -1,0 +1,130 @@
+{
+  "status": "Launched matched control/wide first1000 workflow; original additional4000 schedule retained. Quality pending.",
+  "workflow_status_path": "/mnt/external/demosaic/runs/wide-flat-palette-first1k-workflow-v1.json",
+  "launch_status_snapshot": {
+    "updated_utc": "2026-10-17T00:17:03.061946+00:00",
+    "status": "training-control-to1000",
+    "controller": {
+      "pid": 1648057,
+      "created": 1792196220.48,
+      "worktree": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree",
+      "source_commit": "0d7d2bb69270e13bec837f889b111a5e63af1cfe",
+      "driver_sha256": "c5655c518e3391d1a587b05bcdfffe81e7ca3783d145807c508e3841bb2d36ff"
+    },
+    "plan": "/mnt/external/demosaic/benchmarks/wide-flat-palette-first1k-workflow-v1/plan.json",
+    "outputs": {
+      "known": "/mnt/external/demosaic/evaluation/wide-flat-palette-first1k-known-v1",
+      "unseen": "/mnt/external/demosaic/evaluation/wide-flat-palette-first1k-unseen-v1",
+      "full427": "/mnt/external/demosaic/evaluation/wide-flat-palette-first1k-full427-v1",
+      "analytic": "/mnt/external/demosaic/evaluation/wide-flat-palette-first1k-analytic-v1",
+      "gfx": "/mnt/external/demosaic/evaluation/wide-flat-palette-first1k-gfx-v1",
+      "three-camera": "/mnt/external/demosaic/evaluation/wide-flat-palette-first1k-three-camera-v1",
+      "colored-CPU": "/mnt/external/demosaic/evaluation/wide-flat-palette-first1k-colored-CPU-v1"
+    },
+    "checkpoints": []
+  },
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/wide-flat-palette-first1k-workflow-v1/plan.json",
+    "sha256": "99a242543fc03640932986c3afc1e64c941486c76cb33ab9e2914c72c241a3dd",
+    "value": {
+      "controller": {
+        "pid": 1648057,
+        "created": 1792196220.48,
+        "worktree": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree",
+        "source_commit": "0d7d2bb69270e13bec837f889b111a5e63af1cfe",
+        "driver_sha256": "c5655c518e3391d1a587b05bcdfffe81e7ca3783d145807c508e3841bb2d36ff"
+      },
+      "source_files": {
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/paired_admission.py": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/prior.py": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/metrics.py": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/inference.py": "911e71e8dcbeb1872ed591bc5234ed2b79bae063a859b4704516537d94a1df0b",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/train.py": "d9c7bcf8dcdd6a0ccac6f83cfdbfd9079582cade46648fee0163d2d0dccb0616",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/dino_adaptation.py": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/paired_training.py": "71a2481213bba174bd3d6b3de9ae9b89f88333635810e15d0958352d9d8d053d",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/reference.py": "54ed094d58e245a56993ea3ce3ef9e21d2164e902d41d03bba9132bacd22891f",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/prepare.py": "e4c0733bb260c289b3ce8aaf5f393abc5919d8d81cdcf462b70032d790429712",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/realdata.py": "ed24db2b066531281a196e6fa074130cb0ee78a640eae5ccaaace234f5ad5421",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/cfa.py": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/paired.py": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/audit.py": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/losses.py": "548b1481a035ad937d4a046754a74e70684864a9842296765c62079a002e5120",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/gaussian.py": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/real_suite.py": "69d3d403d36b1230e35083cc55e2c1a485f82cd5058f6be83fb3d5c0c18a6825",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/raw_clean.py": "a143ce351ac4e1b2425d4d561000d3e8934477fe9172c88f90ce76d9b32a7a6c",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/raw_admission.py": "1948afbbf05129190273ab77466f26d9d27dc942716beaab16f077c8c3330803",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/vst.py": "355124a374177f1c08271834149c5979ab3477fdf255c60aa7cee0d47792a76b",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/io.py": "0a1599ffe7f6d935e92fc71e6b086430c6f82678a74952c3b8f31155a0bea83b",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/data.py": "3c8855fe9d6e24d5368f356528ed217a544f185d84f58356eebfb2048cd92197",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/__init__.py": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/calibration.py": "e86f4c602a6cd7fd855d0bcfeb790cf17ed87611f19d97926f9db174909b2d26",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/noise.py": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/precision.py": "9aa850fb5ee0e9abc3e9adc4847ce3518c1acb37c93f6bc54ff9206bb0c94c3a",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/cli.py": "a34d98b1eab4479f67ba5a51b6c8a428db4d8ccf5ee097cd1369bd0cd1ead542",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/reporting.py": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/model.py": "c37f530b3c4265e23af8d04b81e65e19b8ee585538874445e4a95bc337f23a71",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/color.py": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/dino_pyramid.py": "246944874671ceb4449b0487fcb347a00f8b82d713d5b4c9fee5a7c8a68aa95f",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/textures.py": "b4bc304a50de272cf7fcba272e67b828c163466ffc23ea3337a6a66f076dc664",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/nonlocal_reference.py": "7e4a00e9d90a61b772da9c1a7414bf499f84b9c9bb0239fd250fb8263dfb3f88",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/safety.py": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/pretrained_rgb.py": "10ea25fc01bf561a3ea9087002566eb319717c338f44f54d2da46fc6ee0d7026",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/registration.py": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/suite.py": "1a094262e1772f5df8a54cb176c2f3da189d78f48ead3f8002f24e84802059a4"
+      },
+      "inputs": {
+        "/mnt/external/demosaic/runs/wide-flat-palette-cuda-validation-v1.json": "db17d79a743359e95dfbdadafd6ce1875cf5e8629508cf5d5ad39330a477ac87",
+        "/home/dllu/proj/demosaic/docs/results/wide-flat-palette-cuda-validation.json": "c8726a7aa592eebec1be6314ab426b27409d2d4c45192f0a734814785fbaa90a",
+        "/home/dllu/proj/demosaic/docs/results/nonlocal-reference-full-review.json": "ed9f3c6fc7649125a8c93bc4fca27faf78d7579c5dc78795b77897fdc1065f79",
+        "/mnt/external/demosaic/models/dino-convnext-pyramid-fresh-b16-v58-step10000.pt": "cc1fb5e6d3e0d042c95495dd7bf1bd07c900cb6f7e3b61541f78c9e08098fea3",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/configs/dino-convnext-palette-control-b16-v59.yaml": "3d136acf3aa8febfed9b5249119a4e0280b6864b463fa5f301a4a61c73e33b9c",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/configs/dino-convnext-palette-wide-b16-v60.yaml": "cf2dd23ffcabc8194d073a0a44d0f9eee918085a9f12d5d10b7b579b9bc02ca1",
+        "/mnt/external/demosaic/audits/commons-bin4-frozen44732-v1/manifest.jsonl": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+        "/mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a",
+        "/mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json": "b3b36d3ec28b0e2d339cb28f3bc810cc17b31102f4ce6a3454fdfec9a4a4b5e3",
+        "/mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json": "0dde4a0ca1ad68332d8a1c9d61fdc561db6501cd262d534647b979de82e3cf80",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/configs/evaluation.yaml": "74b0df74b9734a714e04a0a1cf1e82ed0ba211b1d5b5fd745b9502ca5af2174c",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/configs/gfx-qualitative-20231231.json": "23efd86ccf2b39ec8b37af21d7d7908c19b868a890544a454c88bdb6a056399a",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/configs/real-camera-qualitative.json": "67fcdceff358843c17083de1a4110c64b85b2989d526b7ded0845dba28d1d2b0",
+        "/mnt/external/demosaic/references/rawnind/utnet2-bayer.pt": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/plan.json": "3abc7cb9559df2f1715ded58a00ae0976f923fcbe80971ab302fbfdc524b481e"
+      },
+      "configs": [
+        {
+          "path": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/configs/dino-convnext-palette-control-b16-v59.yaml",
+          "sha256": "3d136acf3aa8febfed9b5249119a4e0280b6864b463fa5f301a4a61c73e33b9c"
+        },
+        {
+          "path": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/configs/dino-convnext-palette-wide-b16-v60.yaml",
+          "sha256": "cf2dd23ffcabc8194d073a0a44d0f9eee918085a9f12d5d10b7b579b9bc02ca1"
+        }
+      ],
+      "parent": {
+        "path": "/mnt/external/demosaic/models/dino-convnext-pyramid-fresh-b16-v58-step10000.pt",
+        "sha256": "cc1fb5e6d3e0d042c95495dd7bf1bd07c900cb6f7e3b61541f78c9e08098fea3"
+      },
+      "outputs": {
+        "known": "/mnt/external/demosaic/evaluation/wide-flat-palette-first1k-known-v1",
+        "unseen": "/mnt/external/demosaic/evaluation/wide-flat-palette-first1k-unseen-v1",
+        "full427": "/mnt/external/demosaic/evaluation/wide-flat-palette-first1k-full427-v1",
+        "analytic": "/mnt/external/demosaic/evaluation/wide-flat-palette-first1k-analytic-v1",
+        "gfx": "/mnt/external/demosaic/evaluation/wide-flat-palette-first1k-gfx-v1",
+        "three-camera": "/mnt/external/demosaic/evaluation/wide-flat-palette-first1k-three-camera-v1",
+        "colored-CPU": "/mnt/external/demosaic/evaluation/wide-flat-palette-first1k-colored-CPU-v1"
+      },
+      "planned_additional_updates": 4000,
+      "first_gate_updates": 1000,
+      "scope": "Matched mature-parent fresh-AdamW/EMA fine-tuning; only flat_chroma_stops differs0vs8. Same original40170/native128/paired32, physical/precision/augmentation/fractions. First1000 retains original4000 LR schedule. Fullphoto/paired/analytic/savedcoloredfields/full102MPGFX/3hotcameras. No new66934corpus, output correction or protected-final scoring; no early convergence/SOTA/promotion."
+    }
+  },
+  "preceding_reference_review": {
+    "path": "docs/results/nonlocal-reference-full-review.json",
+    "sha256": "ed9f3c6fc7649125a8c93bc4fca27faf78d7579c5dc78795b77897fdc1065f79"
+  },
+  "CUDA_engineering_review": {
+    "path": "docs/results/wide-flat-palette-cuda-validation.json",
+    "sha256": "c8726a7aa592eebec1be6314ab426b27409d2d4c45192f0a734814785fbaa90a"
+  },
+  "scope": "Control and wide train sequentially to1000, fresh AdamW/EMA from same mature V58; no newly expanded corpus. Source hashes, losses/gradients/checkpoints and unchanged logged observations checked before all planned quality panels. Actual full427/paired/analytic/color/fullGFX/three-camera manual/statistical review still required; no convergence/SOTA/promotion."
+}

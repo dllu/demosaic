@@ -1,0 +1,2391 @@
+{
+  "status": "Completed saved32-field CPU-FP32 reference diagnostic, independent arithmetic and3 native PNGs actually viewed.",
+  "execution": {
+    "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/report.json",
+    "sha256": "632b9911a5c3b2d337e32d3dc4c9b0bf196c71639a1c9a96773cad40d40c458c",
+    "report": {
+      "status": "completed-saved-color-flat-CPU-inference-awaiting-audit-and-native-review",
+      "plan": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/plan.json",
+      "plan_sha256": "3434ae41eb180d0d38fce46b5ac36be84c0b9f15577c230ee037dc961dcc961c",
+      "checkpoints": [
+        {
+          "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1",
+          "sha256": "b31bc8e21022389b0b209a9d1e6649485ed4dacc552b7ea04612df5f7515fcf2",
+          "kind": "authors-RAW-reference-plus-Malvar",
+          "label": "NonlocalMatchFilter2026+Malvar:authors-RAW",
+          "reference_receipt": {
+            "label": "NonlocalMatchFilter2026+Malvar:authors-RAW",
+            "directory": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1",
+            "source_revision": "6df6a79ce128a7741af88ff0f3e9794f9b5e03d4",
+            "sha256": "b31bc8e21022389b0b209a9d1e6649485ed4dacc552b7ea04612df5f7515fcf2",
+            "source_checkpoint_sha256": "b31bc8e21022389b0b209a9d1e6649485ed4dacc552b7ea04612df5f7515fcf2",
+            "weights_only_export": {
+              "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/inspection-cpu-v1/authors-network-weights-only.pt",
+              "sha256": "971f1b87d7a7040cf8d71627b174d09503487cffc420e8842d5632549ae1c07f",
+              "all_tensor_values_preserved": true
+            },
+            "native_operator": {
+              "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/native-cuda-build-v1/build/nonlocal_deform_native_cuda_v1.so",
+              "sha256": "826d502cedc3434dc389d80e988fb30fbb9834858b066f7b1a65ef32bf43b0a8",
+              "with_cuda": true,
+              "TORCH_CUDA_ARCH_LIST": "12.1",
+              "MAX_JOBS": 1,
+              "flags": [
+                "-O3"
+              ]
+            },
+            "patchmatch_import_dependency": {
+              "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/patchmatch-native-build-v1/build/nonlocal_patchmatch_native_v1.so",
+              "sha256": "341298f14feef42a5028b81feffad0a7074d4f2565779131447e8859ca9fd4c4",
+              "with_cuda": true,
+              "TORCH_CUDA_ARCH_LIST": "12.1",
+              "MAX_JOBS": 1
+            },
+            "parameters": 15282866,
+            "compute_precision": "IEEE float32",
+            "native_network_batch_size": 1,
+            "input": "Sensor-normalized RAW clipped[0,1], R/G-on-red-row/B/G-on-blue-row packing plus sqrt(max(shot*clipped_noisy+read,0)); input-only noise coefficients.",
+            "output": "Authors' clipped packed RAW, inverse phase permutation, independent WB-aware Malvar. This is a cascade, not a joint RGB network. No fitted gain or target-dependent transform.",
+            "source_receipts": {
+              "receipt.json": "fd74c12c590df0a9a396dce76d106249f54c351178ad375cb8ec21a8be9d87e0",
+              "inspection-cpu-v1/receipt.json": "b4088371739691f7fa84c7f217ba99a98c1b5854c22a502c102facbf7ae0611f",
+              "native-cuda-build-v1/receipt.json": "2feb31700a47ebf0fec7a082d499b84ae4e6f570c613f7b7a6e2dd261bcb2763",
+              "patchmatch-dependency-v1/receipt.json": "7bd44ce3ba6610a2d81943dd8b626f2cc719cf212a4a1552daa5c1b49a366b5e",
+              "patchmatch-native-build-v1/receipt.json": "a7b6fe81b9071c63a9687683d3dd319a3024e5ae2ff82bf91e96f3ccc5a253ce",
+              "deform-dependency-v1/receipt.json": "35dc5ff216f2c0667fc92c98a9b519dcaa7a995d2b462aa21e96c5c8773338a1"
+            }
+          }
+        }
+      ],
+      "results": [
+        {
+          "model_index": 0,
+          "case": 0,
+          "palette": "neutral",
+          "condition": "adc-only",
+          "pattern": "RGGB",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              -0.0002930525553529151,
+              -0.0005695036170072854,
+              6.452603993238882e-05
+            ],
+            "camera_RGB_MSE": 2.616795984874574e-07,
+            "camera_RGB_mean_component_fraction": 0.5278436966526605,
+            "spatially_centered_camera_RGB_RMS": 0.00035150202258771426,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.00029308462282642725,
+              -0.0007676713936962187,
+              -0.0003713312349282205,
+              6.450604414567351e-05
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -4.045665264129639e-06,
+              -7.271766662597656e-06,
+              -7.271766662597656e-06,
+              -5.103647708892822e-06
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 1,
+          "palette": "neutral",
+          "condition": "adc-only",
+          "pattern": "BGGR",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              -0.000293090840568766,
+              -0.0005695046193432063,
+              6.44609532901086e-05
+            ],
+            "camera_RGB_MSE": 2.6141351477395364e-07,
+            "camera_RGB_mean_component_fraction": 0.5284003355577012,
+            "spatially_centered_camera_RGB_RMS": 0.00035111611448077746,
+            "predicted_minus_GT_CFA_phase_mean": [
+              6.450604414567351e-05,
+              -0.0003713312349282205,
+              -0.0007676713936962187,
+              -0.00029308462282642725
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -5.103647708892822e-06,
+              -7.271766662597656e-06,
+              -7.271766662597656e-06,
+              -4.045665264129639e-06
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 2,
+          "palette": "neutral",
+          "condition": "adc-only",
+          "pattern": "GRBG",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              -0.0002930078987265006,
+              -0.0005695497925626114,
+              6.451153167290613e-05
+            ],
+            "camera_RGB_MSE": 2.616736458898506e-07,
+            "camera_RGB_mean_component_fraction": 0.5278869807896214,
+            "spatially_centered_camera_RGB_RMS": 0.00035148191277624066,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.0007676713936962187,
+              -0.00029308462282642725,
+              6.450604414567351e-05,
+              -0.0003713312349282205
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -7.271766662597656e-06,
+              -4.045665264129639e-06,
+              -5.103647708892822e-06,
+              -7.271766662597656e-06
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 3,
+          "palette": "neutral",
+          "condition": "adc-only",
+          "pattern": "GBRG",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              -0.0002931355044711381,
+              -0.0005694583058357238,
+              6.447540479712188e-05
+            ],
+            "camera_RGB_MSE": 2.6144519177140887e-07,
+            "camera_RGB_mean_component_fraction": 0.5283048186671715,
+            "spatially_centered_camera_RGB_RMS": 0.00035117294477395435,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.0003713312349282205,
+              6.450604414567351e-05,
+              -0.00029308462282642725,
+              -0.0007676713936962187
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -7.271766662597656e-06,
+              -5.103647708892822e-06,
+              -4.045665264129639e-06,
+              -7.271766662597656e-06
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 4,
+          "palette": "neutral",
+          "condition": "iso12800-prior",
+          "pattern": "RGGB",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              -0.00035795818286715075,
+              4.830136778764427e-05,
+              0.00015298072714358568
+            ],
+            "camera_RGB_MSE": 1.370384898785235e-07,
+            "camera_RGB_mean_component_fraction": 0.3742748620612278,
+            "spatially_centered_camera_RGB_RMS": 0.0002928283251022007,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.00035911429906263946,
+              -0.00012051565805450082,
+              0.000216305423527956,
+              0.00015345811145380138
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -0.0005059252126375214,
+              -0.0002257195278070867,
+              0.00014449601992964746,
+              0.00030895482341293247
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 5,
+          "palette": "neutral",
+          "condition": "iso12800-prior",
+          "pattern": "BGGR",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              3.982328984420747e-05,
+              0.00019969438668340444,
+              -0.0005653818135033362
+            ],
+            "camera_RGB_MSE": 2.0118102088369473e-07,
+            "camera_RGB_mean_component_fraction": 0.5983340044386629,
+            "spatially_centered_camera_RGB_RMS": 0.0002842667322099007,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.0005657152738422156,
+              0.00040033625671640036,
+              -3.4002400934696198e-06,
+              4.007443320006132e-05
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -0.00046826475474517795,
+              0.00033058353466913103,
+              3.890204592607916e-05,
+              0.0002102950488915667
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 6,
+          "palette": "neutral",
+          "condition": "iso12800-prior",
+          "pattern": "GRBG",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              -7.252020935993641e-05,
+              -5.805760389193893e-05,
+              -0.00022266879939706997
+            ],
+            "camera_RGB_MSE": 7.936678961285613e-08,
+            "camera_RGB_mean_component_fraction": 0.24448202513991904,
+            "spatially_centered_camera_RGB_RMS": 0.00024487351053033724,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.00015330572612583636,
+              -7.261276594363153e-05,
+              -0.0002225229481700808,
+              3.729886142536998e-05
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -0.00028764541377313436,
+              -0.00020989822573028505,
+              -0.00021467192680574954,
+              0.0002698398835491389
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 7,
+          "palette": "neutral",
+          "condition": "iso12800-prior",
+          "pattern": "GBRG",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              -0.00014084968162933364,
+              0.00024563449202105405,
+              -1.90522798220627e-05
+            ],
+            "camera_RGB_MSE": 1.0760028379829153e-07,
+            "camera_RGB_mean_component_fraction": 0.24949725350452676,
+            "spatially_centered_camera_RGB_RMS": 0.00028417302566272924,
+            "predicted_minus_GT_CFA_phase_mean": [
+              0.00029836694011464715,
+              -1.8293027533218265e-05,
+              -0.00013955588336102663,
+              0.0001939245220273733
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              0.00022327372571453452,
+              7.086427649483085e-05,
+              -0.0003326586016919464,
+              0.0004866761714220047
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 8,
+          "palette": "fabric-mean",
+          "condition": "adc-only",
+          "pattern": "RGGB",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              -0.000662953588180244,
+              -0.00034297389443963764,
+              -0.00022337765636621043
+            ],
+            "camera_RGB_MSE": 3.398118145754834e-07,
+            "camera_RGB_mean_component_fraction": 0.5954630412817998,
+            "spatially_centered_camera_RGB_RMS": 0.0003707646666079159,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.0006631357222795487,
+              -0.0006671040505170822,
+              -1.86232291162014e-05,
+              -0.00022345355129800736
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -8.940696716308594e-07,
+              -4.559755325317383e-06,
+              -4.559755325317383e-06,
+              -6.6086649894714355e-06
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 9,
+          "palette": "fabric-mean",
+          "condition": "adc-only",
+          "pattern": "BGGR",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              -0.0006631242879666388,
+              -0.00034285897738300263,
+              -0.0002236125894705765
+            ],
+            "camera_RGB_MSE": 3.395150399241148e-07,
+            "camera_RGB_mean_component_fraction": 0.5962315051579179,
+            "spatially_centered_camera_RGB_RMS": 0.000370250559278996,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.00022345355129800736,
+              -1.86232291162014e-05,
+              -0.0006671040505170822,
+              -0.0006631357222795487
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -6.6086649894714355e-06,
+              -4.559755325317383e-06,
+              -4.559755325317383e-06,
+              -8.940696716308594e-07
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 10,
+          "palette": "fabric-mean",
+          "condition": "adc-only",
+          "pattern": "GRBG",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              -0.000662947251694277,
+              -0.0003429573425091803,
+              -0.0002235257113352418
+            ],
+            "camera_RGB_MSE": 3.4028957919272445e-07,
+            "camera_RGB_mean_component_fraction": 0.5946724770689655,
+            "spatially_centered_camera_RGB_RMS": 0.00037138757681622997,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.0006671040505170822,
+              -0.0006631357222795487,
+              -0.00022345355129800736,
+              -1.86232291162014e-05
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -4.559755325317383e-06,
+              -8.940696716308594e-07,
+              -6.6086649894714355e-06,
+              -4.559755325317383e-06
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 11,
+          "palette": "fabric-mean",
+          "condition": "adc-only",
+          "pattern": "GBRG",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              -0.0006631302938330918,
+              -0.0003428755851928145,
+              -0.000223464519076515
+            ],
+            "camera_RGB_MSE": 3.390673193346797e-07,
+            "camera_RGB_mean_component_fraction": 0.5969727447223067,
+            "spatially_centered_camera_RGB_RMS": 0.0003696665674169374,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -1.86232291162014e-05,
+              -0.00022345355129800736,
+              -0.0006631357222795487,
+              -0.0006671040505170822
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -4.559755325317383e-06,
+              -6.6086649894714355e-06,
+              -8.940696716308594e-07,
+              -4.559755325317383e-06
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 12,
+          "palette": "fabric-mean",
+          "condition": "iso12800-prior",
+          "pattern": "RGGB",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              0.0003047531540505588,
+              0.00017206763848662377,
+              -0.00017886727204313501
+            ],
+            "camera_RGB_MSE": 6.877641282345619e-07,
+            "camera_RGB_mean_component_fraction": 0.07486833144516478,
+            "spatially_centered_camera_RGB_RMS": 0.000797666832409247,
+            "predicted_minus_GT_CFA_phase_mean": [
+              0.0003096174541860819,
+              0.0003050981229171157,
+              3.8555562496185304e-05,
+              -0.00017824721755459904
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              0.00028955888003110884,
+              0.00011777788866311312,
+              0.0004207311710342765,
+              -3.764513123314828e-05
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 13,
+          "palette": "fabric-mean",
+          "condition": "iso12800-prior",
+          "pattern": "BGGR",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              7.174639031291009e-05,
+              8.779332740232348e-05,
+              6.874119542771951e-05
+            ],
+            "camera_RGB_MSE": 7.391799774006456e-07,
+            "camera_RGB_mean_component_fraction": 0.007927958614336681,
+            "spatially_centered_camera_RGB_RMS": 0.0008563409304309043,
+            "predicted_minus_GT_CFA_phase_mean": [
+              7.037417031824589e-05,
+              -7.123250514268876e-05,
+              0.0002474040864035487,
+              6.732550915330648e-05
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              0.00010354498866945506,
+              0.0002116080606356263,
+              0.00012061457615345716,
+              -4.194917157292366e-05
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 14,
+          "palette": "fabric-mean",
+          "condition": "iso12800-prior",
+          "pattern": "GRBG",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              0.0011545692046638577,
+              -0.00023638946586288512,
+              8.265887619927525e-05
+            ],
+            "camera_RGB_MSE": 9.136365941692874e-07,
+            "camera_RGB_mean_component_fraction": 0.5092259973863612,
+            "spatially_centered_camera_RGB_RMS": 0.0006696186140294742,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.00013172050938010216,
+              0.0011515768431127071,
+              8.390361326746643e-05,
+              -0.000340311243198812
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -0.0006466231774538755,
+              0.0004965067934244871,
+              0.00025254170468542726,
+              8.772687055170536e-05
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 15,
+          "palette": "fabric-mean",
+          "condition": "iso12800-prior",
+          "pattern": "GBRG",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              0.0006059554952662439,
+              2.7055596001446246e-05,
+              0.0001686060897191055
+            ],
+            "camera_RGB_MSE": 6.356386575650633e-07,
+            "camera_RGB_mean_component_fraction": 0.20784454411409584,
+            "spatially_centered_camera_RGB_RMS": 0.0007095946945701869,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.00012738570570945738,
+              0.00016702689928933977,
+              0.0006107539450749755,
+              0.0001827982347458601
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              0.0001314218156039715,
+              0.00011623312544543296,
+              0.00038674425333738325,
+              0.00011408586520701647
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 16,
+          "palette": "fabric-cyclic-gbr",
+          "condition": "adc-only",
+          "pattern": "RGGB",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              -0.037150478260591625,
+              0.054119322540936994,
+              -0.03206479945918545
+            ],
+            "camera_RGB_MSE": 0.0017847506516184915,
+            "camera_RGB_mean_component_fraction": 0.9968172055852585,
+            "spatially_centered_camera_RGB_RMS": 0.0023833787793126216,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.0371664172783494,
+              0.054429068113677204,
+              0.05379830824444071,
+              -0.03205684209242463
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -4.559755325317383e-06,
+              -6.6086649894714355e-06,
+              -6.6086649894714355e-06,
+              -9.5367431640625e-07
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 17,
+          "palette": "fabric-cyclic-gbr",
+          "condition": "adc-only",
+          "pattern": "BGGR",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              -0.03718912217300385,
+              0.05412023324111942,
+              -0.032060284104663876
+            ],
+            "camera_RGB_MSE": 0.0017854569580534314,
+            "camera_RGB_mean_component_fraction": 0.99692355073913,
+            "spatially_centered_camera_RGB_RMS": 0.002343686783450174,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.03205684209242463,
+              0.05379830824444071,
+              0.054429068113677204,
+              -0.0371664172783494
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -9.5367431640625e-07,
+              -6.6086649894714355e-06,
+              -6.6086649894714355e-06,
+              -4.559755325317383e-06
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 18,
+          "palette": "fabric-cyclic-gbr",
+          "condition": "adc-only",
+          "pattern": "GRBG",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              -0.037163724581478166,
+              0.05411997081362643,
+              -0.03206087924540043
+            ],
+            "camera_RGB_MSE": 0.0017849862811778906,
+            "camera_RGB_mean_component_fraction": 0.9968356059486346,
+            "spatially_centered_camera_RGB_RMS": 0.0023766362721139487,
+            "predicted_minus_GT_CFA_phase_mean": [
+              0.054429068113677204,
+              -0.0371664172783494,
+              -0.03205684209242463,
+              0.05379830824444071
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -6.6086649894714355e-06,
+              -4.559755325317383e-06,
+              -9.5367431640625e-07,
+              -6.6086649894714355e-06
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 19,
+          "palette": "fabric-cyclic-gbr",
+          "condition": "adc-only",
+          "pattern": "GBRG",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              -0.03717570051550865,
+              0.054119584786822085,
+              -0.032064161922317
+            ],
+            "camera_RGB_MSE": 0.0017852150085324015,
+            "camera_RGB_mean_component_fraction": 0.9969056239872844,
+            "spatially_centered_camera_RGB_RMS": 0.0023503460383402443,
+            "predicted_minus_GT_CFA_phase_mean": [
+              0.05379830824444071,
+              -0.03205684209242463,
+              -0.0371664172783494,
+              0.054429068113677204
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -6.6086649894714355e-06,
+              -9.5367431640625e-07,
+              -4.559755325317383e-06,
+              -6.6086649894714355e-06
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 20,
+          "palette": "fabric-cyclic-gbr",
+          "condition": "iso12800-prior",
+          "pattern": "RGGB",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              -0.05707643507863395,
+              0.07087483957642689,
+              -0.03093079386977479
+            ],
+            "camera_RGB_MSE": 0.003235284936505113,
+            "camera_RGB_mean_component_fraction": 0.95176329308243,
+            "spatially_centered_camera_RGB_RMS": 0.012492377326875217,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.05710863955784589,
+              0.0690569219714962,
+              0.0726987185003236,
+              -0.03092231834307313
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              0.0004482408566400409,
+              0.00020255170820746571,
+              -0.00013116319372784345,
+              0.0005262080486863851
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 21,
+          "palette": "fabric-cyclic-gbr",
+          "condition": "iso12800-prior",
+          "pattern": "BGGR",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              -0.05727123016142286,
+              0.07056253240618389,
+              -0.03170998421148397
+            ],
+            "camera_RGB_MSE": 0.003241787082913807,
+            "camera_RGB_mean_component_fraction": 0.9526214652096273,
+            "spatially_centered_camera_RGB_RMS": 0.012393188536079496,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.03173233376350254,
+              0.07247436709003523,
+              0.06871982960961759,
+              -0.05730022537522018
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -4.969700239598751e-05,
+              5.9055869351141154e-05,
+              -4.56065044272691e-05,
+              -0.000244874507188797
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 22,
+          "palette": "fabric-cyclic-gbr",
+          "condition": "iso12800-prior",
+          "pattern": "GRBG",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              -0.057090490836417304,
+              0.0707259344047634,
+              -0.03170813657459803
+            ],
+            "camera_RGB_MSE": 0.003246364613473893,
+            "camera_RGB_mean_component_fraction": 0.9515143829851496,
+            "spatially_centered_camera_RGB_RMS": 0.012545995031860114,
+            "predicted_minus_GT_CFA_phase_mean": [
+              0.06903754545608536,
+              -0.05714759649708867,
+              -0.03173419844359159,
+              0.07248454266227781
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -0.00011314391042105854,
+              0.00013720784336328505,
+              -0.00024007347878068685,
+              0.00011731204576790333
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 23,
+          "palette": "fabric-cyclic-gbr",
+          "condition": "iso12800-prior",
+          "pattern": "GBRG",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              -0.058203734491253274,
+              0.07035990767995827,
+              -0.03126130726421252
+            ],
+            "camera_RGB_MSE": 0.0032615967952764036,
+            "camera_RGB_mean_component_fraction": 0.9520347684523878,
+            "spatially_centered_camera_RGB_RMS": 0.012507727431487389,
+            "predicted_minus_GT_CFA_phase_mean": [
+              0.07208086429629475,
+              -0.03126313493587077,
+              -0.05821063736919314,
+              0.06865586939966306
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -0.00022693516802974045,
+              0.0007199891423806548,
+              -0.00015190226025879383,
+              -0.0004977139650145546
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 24,
+          "palette": "fabric-cyclic-brg",
+          "condition": "adc-only",
+          "pattern": "RGGB",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              0.00031228858046233654,
+              -0.00020002065226435662,
+              -9.807044989429414e-05
+            ],
+            "camera_RGB_MSE": 4.3391316757683134e-07,
+            "camera_RGB_mean_component_fraction": 0.11304122802853474,
+            "spatially_centered_camera_RGB_RMS": 0.0006203733474740795,
+            "predicted_minus_GT_CFA_phase_mean": [
+              0.0003121585585176945,
+              -0.0006955468095839023,
+              0.00029568883590400216,
+              -9.815239813178778e-05
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -6.6086649894714355e-06,
+              -8.940696716308594e-07,
+              -8.940696716308594e-07,
+              -4.5299530029296875e-06
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 25,
+          "palette": "fabric-cyclic-brg",
+          "condition": "adc-only",
+          "pattern": "BGGR",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              0.0003121521201683208,
+              -0.00019998986157588662,
+              -9.814599412493408e-05
+            ],
+            "camera_RGB_MSE": 4.3433691251670183e-07,
+            "camera_RGB_mean_component_fraction": 0.1128674712980532,
+            "spatially_centered_camera_RGB_RMS": 0.0006207369841644188,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -9.815239813178778e-05,
+              0.00029568883590400216,
+              -0.0006955468095839023,
+              0.0003121585585176945
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -4.5299530029296875e-06,
+              -8.940696716308594e-07,
+              -8.940696716308594e-07,
+              -6.6086649894714355e-06
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 26,
+          "palette": "fabric-cyclic-brg",
+          "condition": "adc-only",
+          "pattern": "GRBG",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              0.00031224403413943947,
+              -0.00019999500480480492,
+              -9.821619838476181e-05
+            ],
+            "camera_RGB_MSE": 4.341487423106819e-07,
+            "camera_RGB_mean_component_fraction": 0.11297261828175058,
+            "spatially_centered_camera_RGB_RMS": 0.000620565727516526,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.0006955468095839023,
+              0.0003121585585176945,
+              -9.815239813178778e-05,
+              0.00029568883590400216
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -8.940696716308594e-07,
+              -6.6086649894714355e-06,
+              -4.5299530029296875e-06,
+              -8.940696716308594e-07
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 27,
+          "palette": "fabric-cyclic-brg",
+          "condition": "adc-only",
+          "pattern": "GBRG",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              0.00031219705793773757,
+              -0.00020001540426164865,
+              -9.800040163099766e-05
+            ],
+            "camera_RGB_MSE": 4.341206453409318e-07,
+            "camera_RGB_mean_component_fraction": 0.11293115959448032,
+            "spatially_centered_camera_RGB_RMS": 0.000620560148139305,
+            "predicted_minus_GT_CFA_phase_mean": [
+              0.00029568883590400216,
+              -9.815239813178778e-05,
+              0.0003121585585176945,
+              -0.0006955468095839023
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -8.940696716308594e-07,
+              -4.5299530029296875e-06,
+              -6.6086649894714355e-06,
+              -8.940696716308594e-07
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 28,
+          "palette": "fabric-cyclic-brg",
+          "condition": "iso12800-prior",
+          "pattern": "RGGB",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              -0.0003304671955993399,
+              -0.0002810756000690162,
+              -0.0006800520955584943
+            ],
+            "camera_RGB_MSE": 1.3389908425249875e-06,
+            "camera_RGB_mean_component_fraction": 0.1619834112701202,
+            "spatially_centered_camera_RGB_RMS": 0.0010592905825095103,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.0003310259664431214,
+              -0.0007870322884991765,
+              0.00022351243998855352,
+              -0.0006760639091953635
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -0.00031382404966279865,
+              -0.0016185467969626187,
+              0.0004719223501160741,
+              -0.00031023894902318714
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 29,
+          "palette": "fabric-cyclic-brg",
+          "condition": "iso12800-prior",
+          "pattern": "BGGR",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              -4.3276910437271e-05,
+              0.00022872681729495524,
+              -0.0005012634571176022
+            ],
+            "camera_RGB_MSE": 1.0154816122821558e-06,
+            "camera_RGB_mean_component_fraction": 0.10026569254559578,
+            "spatially_centered_camera_RGB_RMS": 0.0009558575443858606,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.0004960735514760018,
+              0.0002439836086705327,
+              0.00021321155596524478,
+              -4.245591582730412e-05
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -0.00043604474049061535,
+              1.9448106177151202e-05,
+              0.00017583352513611316,
+              5.23800088558346e-05
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 30,
+          "palette": "fabric-cyclic-brg",
+          "condition": "iso12800-prior",
+          "pattern": "GRBG",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              4.600121319526806e-05,
+              -2.0399802597239614e-05,
+              -0.000652566981734708
+            ],
+            "camera_RGB_MSE": 1.0294868055271348e-06,
+            "camera_RGB_mean_component_fraction": 0.13870209471098094,
+            "spatially_centered_camera_RGB_RMS": 0.0009416447467719475,
+            "predicted_minus_GT_CFA_phase_mean": [
+              -0.0001105317659676075,
+              4.564029979519546e-05,
+              -0.0006506225606426597,
+              7.155658211559057e-05
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              -0.00014815747737884522,
+              0.0001293192181037739,
+              -0.00045817644335329535,
+              -0.0002691579796373844
+            ]
+          }
+        },
+        {
+          "model_index": 0,
+          "case": 31,
+          "palette": "fabric-cyclic-brg",
+          "condition": "iso12800-prior",
+          "pattern": "GBRG",
+          "metrics": {
+            "camera_RGB_mean_error": [
+              -2.8015277348458765e-06,
+              0.00021518582594580947,
+              -0.0007616410648915916
+            ],
+            "camera_RGB_MSE": 1.0351937172246052e-06,
+            "camera_RGB_mean_component_fraction": 0.2017045665147764,
+            "spatially_centered_camera_RGB_RMS": 0.0009090601835043684,
+            "predicted_minus_GT_CFA_phase_mean": [
+              0.0005931405257433653,
+              -0.0007643273286521435,
+              4.733738023787737e-07,
+              -0.00016400757245719434
+            ],
+            "observed_minus_GT_CFA_phase_mean": [
+              0.0006789190322160721,
+              -0.0005483957612887025,
+              0.00020442224573343992,
+              -0.000853880112990737
+            ]
+          }
+        }
+      ],
+      "float_predictions": [
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case0-RGB-f32.npy",
+          "sha256": "7e693a1c49b5c6f52db8939bc8e6a5003beb419c5e53445d35f6ad4e61094d44",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 0
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case1-RGB-f32.npy",
+          "sha256": "7825c588f9f78177a8d0268c95fe3ef63c9a1e0b39f645552d1e6b2e570ff2b3",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 1
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case2-RGB-f32.npy",
+          "sha256": "26edcb45c282216df40d6fac166b417327b4ac51b10571e7b7fd6dc919cfd532",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 2
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case3-RGB-f32.npy",
+          "sha256": "3a29b018db90bf978dcb46c3a61e4a8d71cb2acf21383aa358ebaed2ba3a1071",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 3
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case4-RGB-f32.npy",
+          "sha256": "833cd108e55ff6441cc9f0a0fee98e90108c0c468df8689721e42ad99540c7db",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 4
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case5-RGB-f32.npy",
+          "sha256": "a8c2b2847bce619fbd82277bc4cb8577786ff931ea163de7465b34a58f49a311",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 5
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case6-RGB-f32.npy",
+          "sha256": "b7f9f80dfd833d2cd5317789aa7426d43f5b5907b5c40c1de340b29ca8688e86",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 6
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case7-RGB-f32.npy",
+          "sha256": "816fe2f287028a6afd6ce3f347c973420723aa1750d30c0803ae3fab13dd3a23",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 7
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case8-RGB-f32.npy",
+          "sha256": "3a01001ac12ec5f26d9cf2445cdd36e739567c7dc70f8d9ac8a32088cf4ccc51",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 8
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case9-RGB-f32.npy",
+          "sha256": "f66c507cd0c4d3d67c0dbbebcaf5391b7fb06cce31189c85cf4fee479a194a29",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 9
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case10-RGB-f32.npy",
+          "sha256": "5bf7745e444f7df89ea9c590866e4ed3fbdc9ef27ab7f570267ce6a970503442",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 10
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case11-RGB-f32.npy",
+          "sha256": "6eb70be152c7315c4446f019e78ae30bf5a5b9d058c00126ddd09fc9faa0939d",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 11
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case12-RGB-f32.npy",
+          "sha256": "b228cfb244eaa87c70e4a40db9194bd65b288eefc1e7b3b09e5b28a3f87f11c9",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 12
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case13-RGB-f32.npy",
+          "sha256": "7de8f8e0c2b3a1b57b9ceadf31fc6eb2dae73e1c5d2533d3cdc1ac72e4fc36ea",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 13
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case14-RGB-f32.npy",
+          "sha256": "2fa8f8b854f58804d025074c923c5dceef8812939b23b4615ee93761087340fb",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 14
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case15-RGB-f32.npy",
+          "sha256": "bc40ccc6fb541fa1139f776be9e853b12634bac31aeba59f2697a1aeb6c819be",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 15
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case16-RGB-f32.npy",
+          "sha256": "b8fc2e273217d778c7456db0538d98bb1ddad8bc58a50774550404da8cbd0294",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 16
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case17-RGB-f32.npy",
+          "sha256": "c6568b0d0e5e972a191a12d90f02cbe5112c0abfeeb1848394967cd42eb0ae86",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 17
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case18-RGB-f32.npy",
+          "sha256": "efbda5dae25dbc47d9b58169383262d85e8254847704bd12f326f2b82ac9f76b",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 18
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case19-RGB-f32.npy",
+          "sha256": "476e81d94972f5cf4e652b983a9ad7eac0414c0aa6555f22b58b8f9f5e93a9d5",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 19
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case20-RGB-f32.npy",
+          "sha256": "9f0c7ea85dfbf1388c581905683fbe3831b436a0d76b82df5cdd93bb348d5da0",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 20
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case21-RGB-f32.npy",
+          "sha256": "ec5e439bbed31753f5d11f15b90b0c4d74174fe3d1292520e7c0aa22a5e5106c",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 21
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case22-RGB-f32.npy",
+          "sha256": "f0a07e857c8fe761a1c6d0dbf1ed4f9da9f2e8afb3a7e8b13fdc415d4e66af1d",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 22
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case23-RGB-f32.npy",
+          "sha256": "cce11547a5d47fb3de6fa46832fb2ab6c2a2362e3460f808e48d1b4ffde91aad",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 23
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case24-RGB-f32.npy",
+          "sha256": "10998477bc4e210d08fa5eea846e5fd7fe2a9e506b1cd65cc62952cc0550f6e8",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 24
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case25-RGB-f32.npy",
+          "sha256": "36a3d16e77956f3f805b95c9038e79a8cbe0f8d353e4a4cfec2e63646103ef8f",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 25
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case26-RGB-f32.npy",
+          "sha256": "bcbc236d137bade31961ca56454db234ec030ec1c7fee2e82196b11be2c42026",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 26
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case27-RGB-f32.npy",
+          "sha256": "5c4ba7cb613b82374bbeef790dbdcd4ce70041bb1fc1eb1931d4008b0031b983",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 27
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case28-RGB-f32.npy",
+          "sha256": "130b1bc056a5137726b459f7b6fb9aa1c8b3abf7b794871ae5d120187a4b0be5",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 28
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case29-RGB-f32.npy",
+          "sha256": "c8aa5bd05e693798f68a67ed1ba0baa9b841d1ef8d26d64d3e22c95e2e397794",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 29
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case30-RGB-f32.npy",
+          "sha256": "ef128bb9da03ddc8d678f271b8452652a278a1bf580a39ed2b01cfe6d9061d06",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 30
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/model0-case31-RGB-f32.npy",
+          "sha256": "c825d6c5d8da6fc9840309504471dd2c3fdf68fdc76439ed9582c3c269847fd7",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "model_index": 0,
+          "case": 31
+        }
+      ],
+      "native_crops": [
+        {
+          "image": "crop-4618f5a15157cf9f.png",
+          "caption": "color-flat-neutral / NonlocalMatchFilter2026+Malvar:authors-RAW / CPU FP32",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Restored / authors RAW",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (analytic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "29cb0c546d4872b9fc03e4a082a8479ede8b1e0f2f4dfa3e006538744c536625",
+          "case": {
+            "id": "color-flat-neutral",
+            "palette": "neutral",
+            "condition": {
+              "name": "iso12800-prior",
+              "shot": 0.00256,
+              "read": 2.62144e-05,
+              "exposure": 1.0
+            },
+            "pattern": "RGGB",
+            "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/neutral-iso12800-prior-RGGB-observation.npz",
+            "sha256": "89c2c1c29cabdb9364b776bb6dd5ef4d217df98d41b94313baf260b1a0aa70a7",
+            "target_camera_RGB": [
+              0.09,
+              0.18,
+              0.12
+            ],
+            "draws_per_pattern": 1
+          },
+          "model": {
+            "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1",
+            "sha256": "b31bc8e21022389b0b209a9d1e6649485ed4dacc552b7ea04612df5f7515fcf2",
+            "kind": "authors-RAW-reference-plus-Malvar",
+            "label": "NonlocalMatchFilter2026+Malvar:authors-RAW",
+            "reference_receipt": {
+              "label": "NonlocalMatchFilter2026+Malvar:authors-RAW",
+              "directory": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1",
+              "source_revision": "6df6a79ce128a7741af88ff0f3e9794f9b5e03d4",
+              "sha256": "b31bc8e21022389b0b209a9d1e6649485ed4dacc552b7ea04612df5f7515fcf2",
+              "source_checkpoint_sha256": "b31bc8e21022389b0b209a9d1e6649485ed4dacc552b7ea04612df5f7515fcf2",
+              "weights_only_export": {
+                "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/inspection-cpu-v1/authors-network-weights-only.pt",
+                "sha256": "971f1b87d7a7040cf8d71627b174d09503487cffc420e8842d5632549ae1c07f",
+                "all_tensor_values_preserved": true
+              },
+              "native_operator": {
+                "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/native-cuda-build-v1/build/nonlocal_deform_native_cuda_v1.so",
+                "sha256": "826d502cedc3434dc389d80e988fb30fbb9834858b066f7b1a65ef32bf43b0a8",
+                "with_cuda": true,
+                "TORCH_CUDA_ARCH_LIST": "12.1",
+                "MAX_JOBS": 1,
+                "flags": [
+                  "-O3"
+                ]
+              },
+              "patchmatch_import_dependency": {
+                "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/patchmatch-native-build-v1/build/nonlocal_patchmatch_native_v1.so",
+                "sha256": "341298f14feef42a5028b81feffad0a7074d4f2565779131447e8859ca9fd4c4",
+                "with_cuda": true,
+                "TORCH_CUDA_ARCH_LIST": "12.1",
+                "MAX_JOBS": 1
+              },
+              "parameters": 15282866,
+              "compute_precision": "IEEE float32",
+              "native_network_batch_size": 1,
+              "input": "Sensor-normalized RAW clipped[0,1], R/G-on-red-row/B/G-on-blue-row packing plus sqrt(max(shot*clipped_noisy+read,0)); input-only noise coefficients.",
+              "output": "Authors' clipped packed RAW, inverse phase permutation, independent WB-aware Malvar. This is a cascade, not a joint RGB network. No fitted gain or target-dependent transform.",
+              "source_receipts": {
+                "receipt.json": "fd74c12c590df0a9a396dce76d106249f54c351178ad375cb8ec21a8be9d87e0",
+                "inspection-cpu-v1/receipt.json": "b4088371739691f7fa84c7f217ba99a98c1b5854c22a502c102facbf7ae0611f",
+                "native-cuda-build-v1/receipt.json": "2feb31700a47ebf0fec7a082d499b84ae4e6f570c613f7b7a6e2dd261bcb2763",
+                "patchmatch-dependency-v1/receipt.json": "7bd44ce3ba6610a2d81943dd8b626f2cc719cf212a4a1552daa5c1b49a366b5e",
+                "patchmatch-native-build-v1/receipt.json": "a7b6fe81b9071c63a9687683d3dd319a3024e5ae2ff82bf91e96f3ccc5a253ce",
+                "deform-dependency-v1/receipt.json": "35dc5ff216f2c0667fc92c98a9b519dcaa7a995d2b462aa21e96c5c8773338a1"
+              }
+            }
+          },
+          "ROI_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "white_balance": [
+            2.0,
+            1.0,
+            1.5
+          ],
+          "camera_to_srgb": [
+            [
+              1.1176470588,
+              -0.0588235294,
+              -0.0588235294
+            ],
+            [
+              -0.0588235294,
+              1.1176470588,
+              -0.0588235294
+            ],
+            [
+              -0.0588235294,
+              -0.0588235294,
+              1.1176470588
+            ]
+          ],
+          "conditioning": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "display_exposure": 1.0,
+          "reference": "Exact uniform analytic target, not a real photograph or a newly sampled degradation.",
+          "repository_image": "docs/images/nonlocal-color-flat-neutral.png",
+          "actually_viewed": true
+        },
+        {
+          "image": "crop-004cd41c04770f0a.png",
+          "caption": "color-flat-fabric-mean / NonlocalMatchFilter2026+Malvar:authors-RAW / CPU FP32",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Restored / authors RAW",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (analytic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "d55f8dbf670b81d6d86bff8bcb58e61da5bbb33cd9591434e635450911fbc94c",
+          "case": {
+            "id": "color-flat-fabric-mean",
+            "palette": "fabric-mean",
+            "condition": {
+              "name": "iso12800-prior",
+              "shot": 0.00256,
+              "read": 2.62144e-05,
+              "exposure": 1.0
+            },
+            "pattern": "RGGB",
+            "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-mean-iso12800-prior-RGGB-observation.npz",
+            "sha256": "7c2e2575b08152593e1678b2a58d763f79c53eb61a7fe8de43d4f33e25680438",
+            "target_camera_RGB": [
+              0.4460826468449295,
+              0.4224426811812077,
+              0.09690847238308323
+            ],
+            "draws_per_pattern": 1
+          },
+          "model": {
+            "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1",
+            "sha256": "b31bc8e21022389b0b209a9d1e6649485ed4dacc552b7ea04612df5f7515fcf2",
+            "kind": "authors-RAW-reference-plus-Malvar",
+            "label": "NonlocalMatchFilter2026+Malvar:authors-RAW",
+            "reference_receipt": {
+              "label": "NonlocalMatchFilter2026+Malvar:authors-RAW",
+              "directory": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1",
+              "source_revision": "6df6a79ce128a7741af88ff0f3e9794f9b5e03d4",
+              "sha256": "b31bc8e21022389b0b209a9d1e6649485ed4dacc552b7ea04612df5f7515fcf2",
+              "source_checkpoint_sha256": "b31bc8e21022389b0b209a9d1e6649485ed4dacc552b7ea04612df5f7515fcf2",
+              "weights_only_export": {
+                "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/inspection-cpu-v1/authors-network-weights-only.pt",
+                "sha256": "971f1b87d7a7040cf8d71627b174d09503487cffc420e8842d5632549ae1c07f",
+                "all_tensor_values_preserved": true
+              },
+              "native_operator": {
+                "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/native-cuda-build-v1/build/nonlocal_deform_native_cuda_v1.so",
+                "sha256": "826d502cedc3434dc389d80e988fb30fbb9834858b066f7b1a65ef32bf43b0a8",
+                "with_cuda": true,
+                "TORCH_CUDA_ARCH_LIST": "12.1",
+                "MAX_JOBS": 1,
+                "flags": [
+                  "-O3"
+                ]
+              },
+              "patchmatch_import_dependency": {
+                "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/patchmatch-native-build-v1/build/nonlocal_patchmatch_native_v1.so",
+                "sha256": "341298f14feef42a5028b81feffad0a7074d4f2565779131447e8859ca9fd4c4",
+                "with_cuda": true,
+                "TORCH_CUDA_ARCH_LIST": "12.1",
+                "MAX_JOBS": 1
+              },
+              "parameters": 15282866,
+              "compute_precision": "IEEE float32",
+              "native_network_batch_size": 1,
+              "input": "Sensor-normalized RAW clipped[0,1], R/G-on-red-row/B/G-on-blue-row packing plus sqrt(max(shot*clipped_noisy+read,0)); input-only noise coefficients.",
+              "output": "Authors' clipped packed RAW, inverse phase permutation, independent WB-aware Malvar. This is a cascade, not a joint RGB network. No fitted gain or target-dependent transform.",
+              "source_receipts": {
+                "receipt.json": "fd74c12c590df0a9a396dce76d106249f54c351178ad375cb8ec21a8be9d87e0",
+                "inspection-cpu-v1/receipt.json": "b4088371739691f7fa84c7f217ba99a98c1b5854c22a502c102facbf7ae0611f",
+                "native-cuda-build-v1/receipt.json": "2feb31700a47ebf0fec7a082d499b84ae4e6f570c613f7b7a6e2dd261bcb2763",
+                "patchmatch-dependency-v1/receipt.json": "7bd44ce3ba6610a2d81943dd8b626f2cc719cf212a4a1552daa5c1b49a366b5e",
+                "patchmatch-native-build-v1/receipt.json": "a7b6fe81b9071c63a9687683d3dd319a3024e5ae2ff82bf91e96f3ccc5a253ce",
+                "deform-dependency-v1/receipt.json": "35dc5ff216f2c0667fc92c98a9b519dcaa7a995d2b462aa21e96c5c8773338a1"
+              }
+            }
+          },
+          "ROI_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "white_balance": [
+            2.0,
+            1.0,
+            1.5
+          ],
+          "camera_to_srgb": [
+            [
+              1.1176470588,
+              -0.0588235294,
+              -0.0588235294
+            ],
+            [
+              -0.0588235294,
+              1.1176470588,
+              -0.0588235294
+            ],
+            [
+              -0.0588235294,
+              -0.0588235294,
+              1.1176470588
+            ]
+          ],
+          "conditioning": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "display_exposure": 1.0,
+          "reference": "Exact uniform analytic target, not a real photograph or a newly sampled degradation.",
+          "repository_image": "docs/images/nonlocal-color-flat-fabric-mean.png",
+          "actually_viewed": true
+        }
+      ],
+      "CUDA_initialized": false,
+      "scope": "Four chosen uniform colors, two conditions and four CFAs; one draw per case. Palette is post-hoc diagnostic, not an independent quality benchmark. V43 has different training history; no broad or causal model ranking.",
+      "limitations": "One observation per color/condition/CFA. No new training, output correction, target fit, photographic score, convergence or real-camera quality conclusion."
+    }
+  },
+  "audit": {
+    "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/independent-audit-v1/audit.json",
+    "sha256": "7555199b17c6f7a238e2a35ea37878b99c8ef08f058140602936e73ce890c1a8",
+    "result": {
+      "status": "completed-independent-saved-flat-Torch64-audit-and-native-rendering",
+      "input_report": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/report.json",
+      "input_report_sha256": "632b9911a5c3b2d337e32d3dc4c9b0bf196c71639a1c9a96773cad40d40c458c",
+      "observations": 32,
+      "float_predictions": 32,
+      "metric_fields": 192,
+      "maximum_Torch64_vs_saved_NumPy64_metric_difference": 2.220446049250313e-16,
+      "native_panel_triplets": [
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/crop-4618f5a15157cf9f.png",
+          "sha256": "29cb0c546d4872b9fc03e4a082a8479ede8b1e0f2f4dfa3e006538744c536625",
+          "all_three_native_panels_rerender_exact": true
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/crop-004cd41c04770f0a.png",
+          "sha256": "d55f8dbf670b81d6d86bff8bcb58e61da5bbb33cd9591434e635450911fbc94c",
+          "all_three_native_panels_rerender_exact": true
+        },
+        {
+          "path": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/independent-audit-v1/crop-305a1ff116d96a16.png",
+          "sha256": "2c6f0371e14831d08411a3e02464ce2753a73e273a4cd96959a8326002642f07",
+          "all_three_native_panels_rerender_exact": true
+        }
+      ],
+      "additional_native_crops": [
+        {
+          "image": "crop-305a1ff116d96a16.png",
+          "caption": "NonlocalMatchFilter2026+Malvar:authors-RAW / fabric-cyclic-gbr / saved arrays",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (analytic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "2c6f0371e14831d08411a3e02464ce2753a73e273a4cd96959a8326002642f07",
+          "case": {
+            "id": "color-flat-fabric-cyclic-gbr",
+            "palette": "fabric-cyclic-gbr",
+            "condition": {
+              "name": "iso12800-prior",
+              "shot": 0.00256,
+              "read": 2.62144e-05,
+              "exposure": 1.0
+            },
+            "pattern": "RGGB",
+            "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-cyclic-gbr-iso12800-prior-RGGB-observation.npz",
+            "sha256": "f9f0bc3ddfb1a62251e94d929083061861ed99e70d1fb197c822484042b8f68a",
+            "target_camera_RGB": [
+              0.4224426811812077,
+              0.09690847238308323,
+              0.4460826468449295
+            ],
+            "draws_per_pattern": 1
+          },
+          "model": {
+            "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1",
+            "sha256": "b31bc8e21022389b0b209a9d1e6649485ed4dacc552b7ea04612df5f7515fcf2",
+            "kind": "authors-RAW-reference-plus-Malvar",
+            "label": "NonlocalMatchFilter2026+Malvar:authors-RAW",
+            "reference_receipt": {
+              "label": "NonlocalMatchFilter2026+Malvar:authors-RAW",
+              "directory": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1",
+              "source_revision": "6df6a79ce128a7741af88ff0f3e9794f9b5e03d4",
+              "sha256": "b31bc8e21022389b0b209a9d1e6649485ed4dacc552b7ea04612df5f7515fcf2",
+              "source_checkpoint_sha256": "b31bc8e21022389b0b209a9d1e6649485ed4dacc552b7ea04612df5f7515fcf2",
+              "weights_only_export": {
+                "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/inspection-cpu-v1/authors-network-weights-only.pt",
+                "sha256": "971f1b87d7a7040cf8d71627b174d09503487cffc420e8842d5632549ae1c07f",
+                "all_tensor_values_preserved": true
+              },
+              "native_operator": {
+                "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/native-cuda-build-v1/build/nonlocal_deform_native_cuda_v1.so",
+                "sha256": "826d502cedc3434dc389d80e988fb30fbb9834858b066f7b1a65ef32bf43b0a8",
+                "with_cuda": true,
+                "TORCH_CUDA_ARCH_LIST": "12.1",
+                "MAX_JOBS": 1,
+                "flags": [
+                  "-O3"
+                ]
+              },
+              "patchmatch_import_dependency": {
+                "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/patchmatch-native-build-v1/build/nonlocal_patchmatch_native_v1.so",
+                "sha256": "341298f14feef42a5028b81feffad0a7074d4f2565779131447e8859ca9fd4c4",
+                "with_cuda": true,
+                "TORCH_CUDA_ARCH_LIST": "12.1",
+                "MAX_JOBS": 1
+              },
+              "parameters": 15282866,
+              "compute_precision": "IEEE float32",
+              "native_network_batch_size": 1,
+              "input": "Sensor-normalized RAW clipped[0,1], R/G-on-red-row/B/G-on-blue-row packing plus sqrt(max(shot*clipped_noisy+read,0)); input-only noise coefficients.",
+              "output": "Authors' clipped packed RAW, inverse phase permutation, independent WB-aware Malvar. This is a cascade, not a joint RGB network. No fitted gain or target-dependent transform.",
+              "source_receipts": {
+                "receipt.json": "fd74c12c590df0a9a396dce76d106249f54c351178ad375cb8ec21a8be9d87e0",
+                "inspection-cpu-v1/receipt.json": "b4088371739691f7fa84c7f217ba99a98c1b5854c22a502c102facbf7ae0611f",
+                "native-cuda-build-v1/receipt.json": "2feb31700a47ebf0fec7a082d499b84ae4e6f570c613f7b7a6e2dd261bcb2763",
+                "patchmatch-dependency-v1/receipt.json": "7bd44ce3ba6610a2d81943dd8b626f2cc719cf212a4a1552daa5c1b49a366b5e",
+                "patchmatch-native-build-v1/receipt.json": "a7b6fe81b9071c63a9687683d3dd319a3024e5ae2ff82bf91e96f3ccc5a253ce",
+                "deform-dependency-v1/receipt.json": "35dc5ff216f2c0667fc92c98a9b519dcaa7a995d2b462aa21e96c5c8773338a1"
+              }
+            }
+          },
+          "ROI_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "white_balance": [
+            [
+              2.0,
+              1.0,
+              1.5
+            ]
+          ],
+          "camera_to_srgb": [
+            [
+              [
+                1.1176470518112183,
+                -0.05882352963089943,
+                -0.05882352963089943
+              ],
+              [
+                -0.05882352963089943,
+                1.1176470518112183,
+                -0.05882352963089943
+              ],
+              [
+                -0.05882352963089943,
+                -0.05882352963089943,
+                1.1176470518112183
+              ]
+            ]
+          ],
+          "conditioning": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "display_exposure": 1.0,
+          "reference": "Exact uniform analytic target, not a real photograph.",
+          "repository_image": "docs/images/nonlocal-color-flat-fabric-cyclic-gbr.png",
+          "actually_viewed": true
+        }
+      ],
+      "CUDA_initialized": false,
+      "driver_sha256": "40278b1fa530f1ed7dcda7b832c79502055023aaeca41d047e7328c460472ab6",
+      "scope": "Saved observations/predictions only, no model inference or new draws. Native pixel reconstruction does not claim visual inspection; additional triplets still require viewing. Four post-hoc colors/one draw are not a broad quality benchmark."
+    },
+    "executed_driver": "/mnt/external/demosaic/evaluation/nonlocal-reference-colored-flats-cpu-v1/independent-audit-v1/executed-audit-source.py",
+    "executed_driver_sha256": "40278b1fa530f1ed7dcda7b832c79502055023aaeca41d047e7328c460472ab6"
+  },
+  "summaries": [
+    {
+      "condition": "adc-only",
+      "palette": "neutral",
+      "max_absolute_channel_mean_error_over_four_CFAs": 0.0005695497925626114,
+      "mean_RGB_error_over_four_CFAs": [
+        -0.00029307169977982995,
+        -0.0005695040836872067,
+        6.449348242313136e-05
+      ]
+    },
+    {
+      "condition": "adc-only",
+      "palette": "fabric-mean",
+      "max_absolute_channel_mean_error_over_four_CFAs": 0.0006631302938330918,
+      "mean_RGB_error_over_four_CFAs": [
+        -0.0006630388554185629,
+        -0.00034291644988115877,
+        -0.00022349511906213592
+      ]
+    },
+    {
+      "condition": "adc-only",
+      "palette": "fabric-cyclic-gbr",
+      "max_absolute_channel_mean_error_over_four_CFAs": 0.05412023324111942,
+      "mean_RGB_error_over_four_CFAs": [
+        -0.03716975638264557,
+        0.05411977784562623,
+        -0.03206253118289169
+      ]
+    },
+    {
+      "condition": "adc-only",
+      "palette": "fabric-cyclic-brg",
+      "max_absolute_channel_mean_error_over_four_CFAs": 0.00031228858046233654,
+      "mean_RGB_error_over_four_CFAs": [
+        0.0003122204481769586,
+        -0.0002000052307266742,
+        -9.810826100874693e-05
+      ]
+    },
+    {
+      "condition": "iso12800-prior",
+      "palette": "neutral",
+      "max_absolute_channel_mean_error_over_four_CFAs": 0.0005653818135033362,
+      "mean_RGB_error_over_four_CFAs": [
+        -0.00013287619600305334,
+        0.00010889316065004096,
+        -0.0001635305413947208
+      ]
+    },
+    {
+      "condition": "iso12800-prior",
+      "palette": "fabric-mean",
+      "max_absolute_channel_mean_error_over_four_CFAs": 0.0011545692046638577,
+      "mean_RGB_error_over_four_CFAs": [
+        0.0005342560610733926,
+        1.2631774006877091e-05,
+        3.528472232574132e-05
+      ]
+    },
+    {
+      "condition": "iso12800-prior",
+      "palette": "fabric-cyclic-gbr",
+      "max_absolute_channel_mean_error_over_four_CFAs": 0.07087483957642689,
+      "mean_RGB_error_over_four_CFAs": [
+        -0.057410472641931845,
+        0.07063080351683311,
+        -0.03140255548001733
+      ]
+    },
+    {
+      "condition": "iso12800-prior",
+      "palette": "fabric-cyclic-brg",
+      "max_absolute_channel_mean_error_over_four_CFAs": 0.0007616410648915916,
+      "mean_RGB_error_over_four_CFAs": [
+        -8.263610514404718e-05,
+        3.560931014362722e-05,
+        -0.000648880899825599
+      ]
+    }
+  ],
+  "native_crops": [
+    {
+      "image": "crop-4618f5a15157cf9f.png",
+      "caption": "color-flat-neutral / NonlocalMatchFilter2026+Malvar:authors-RAW / CPU FP32",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored / authors RAW",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (analytic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "29cb0c546d4872b9fc03e4a082a8479ede8b1e0f2f4dfa3e006538744c536625",
+      "case": {
+        "id": "color-flat-neutral",
+        "palette": "neutral",
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/neutral-iso12800-prior-RGGB-observation.npz",
+        "sha256": "89c2c1c29cabdb9364b776bb6dd5ef4d217df98d41b94313baf260b1a0aa70a7",
+        "target_camera_RGB": [
+          0.09,
+          0.18,
+          0.12
+        ],
+        "draws_per_pattern": 1
+      },
+      "model": {
+        "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1",
+        "sha256": "b31bc8e21022389b0b209a9d1e6649485ed4dacc552b7ea04612df5f7515fcf2",
+        "kind": "authors-RAW-reference-plus-Malvar",
+        "label": "NonlocalMatchFilter2026+Malvar:authors-RAW",
+        "reference_receipt": {
+          "label": "NonlocalMatchFilter2026+Malvar:authors-RAW",
+          "directory": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1",
+          "source_revision": "6df6a79ce128a7741af88ff0f3e9794f9b5e03d4",
+          "sha256": "b31bc8e21022389b0b209a9d1e6649485ed4dacc552b7ea04612df5f7515fcf2",
+          "source_checkpoint_sha256": "b31bc8e21022389b0b209a9d1e6649485ed4dacc552b7ea04612df5f7515fcf2",
+          "weights_only_export": {
+            "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/inspection-cpu-v1/authors-network-weights-only.pt",
+            "sha256": "971f1b87d7a7040cf8d71627b174d09503487cffc420e8842d5632549ae1c07f",
+            "all_tensor_values_preserved": true
+          },
+          "native_operator": {
+            "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/native-cuda-build-v1/build/nonlocal_deform_native_cuda_v1.so",
+            "sha256": "826d502cedc3434dc389d80e988fb30fbb9834858b066f7b1a65ef32bf43b0a8",
+            "with_cuda": true,
+            "TORCH_CUDA_ARCH_LIST": "12.1",
+            "MAX_JOBS": 1,
+            "flags": [
+              "-O3"
+            ]
+          },
+          "patchmatch_import_dependency": {
+            "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/patchmatch-native-build-v1/build/nonlocal_patchmatch_native_v1.so",
+            "sha256": "341298f14feef42a5028b81feffad0a7074d4f2565779131447e8859ca9fd4c4",
+            "with_cuda": true,
+            "TORCH_CUDA_ARCH_LIST": "12.1",
+            "MAX_JOBS": 1
+          },
+          "parameters": 15282866,
+          "compute_precision": "IEEE float32",
+          "native_network_batch_size": 1,
+          "input": "Sensor-normalized RAW clipped[0,1], R/G-on-red-row/B/G-on-blue-row packing plus sqrt(max(shot*clipped_noisy+read,0)); input-only noise coefficients.",
+          "output": "Authors' clipped packed RAW, inverse phase permutation, independent WB-aware Malvar. This is a cascade, not a joint RGB network. No fitted gain or target-dependent transform.",
+          "source_receipts": {
+            "receipt.json": "fd74c12c590df0a9a396dce76d106249f54c351178ad375cb8ec21a8be9d87e0",
+            "inspection-cpu-v1/receipt.json": "b4088371739691f7fa84c7f217ba99a98c1b5854c22a502c102facbf7ae0611f",
+            "native-cuda-build-v1/receipt.json": "2feb31700a47ebf0fec7a082d499b84ae4e6f570c613f7b7a6e2dd261bcb2763",
+            "patchmatch-dependency-v1/receipt.json": "7bd44ce3ba6610a2d81943dd8b626f2cc719cf212a4a1552daa5c1b49a366b5e",
+            "patchmatch-native-build-v1/receipt.json": "a7b6fe81b9071c63a9687683d3dd319a3024e5ae2ff82bf91e96f3ccc5a253ce",
+            "deform-dependency-v1/receipt.json": "35dc5ff216f2c0667fc92c98a9b519dcaa7a995d2b462aa21e96c5c8773338a1"
+          }
+        }
+      },
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "white_balance": [
+        2.0,
+        1.0,
+        1.5
+      ],
+      "camera_to_srgb": [
+        [
+          1.1176470588,
+          -0.0588235294,
+          -0.0588235294
+        ],
+        [
+          -0.0588235294,
+          1.1176470588,
+          -0.0588235294
+        ],
+        [
+          -0.0588235294,
+          -0.0588235294,
+          1.1176470588
+        ]
+      ],
+      "conditioning": {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      "display_exposure": 1.0,
+      "reference": "Exact uniform analytic target, not a real photograph or a newly sampled degradation.",
+      "repository_image": "docs/images/nonlocal-color-flat-neutral.png",
+      "actually_viewed": true
+    },
+    {
+      "image": "crop-004cd41c04770f0a.png",
+      "caption": "color-flat-fabric-mean / NonlocalMatchFilter2026+Malvar:authors-RAW / CPU FP32",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored / authors RAW",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (analytic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "d55f8dbf670b81d6d86bff8bcb58e61da5bbb33cd9591434e635450911fbc94c",
+      "case": {
+        "id": "color-flat-fabric-mean",
+        "palette": "fabric-mean",
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-mean-iso12800-prior-RGGB-observation.npz",
+        "sha256": "7c2e2575b08152593e1678b2a58d763f79c53eb61a7fe8de43d4f33e25680438",
+        "target_camera_RGB": [
+          0.4460826468449295,
+          0.4224426811812077,
+          0.09690847238308323
+        ],
+        "draws_per_pattern": 1
+      },
+      "model": {
+        "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1",
+        "sha256": "b31bc8e21022389b0b209a9d1e6649485ed4dacc552b7ea04612df5f7515fcf2",
+        "kind": "authors-RAW-reference-plus-Malvar",
+        "label": "NonlocalMatchFilter2026+Malvar:authors-RAW",
+        "reference_receipt": {
+          "label": "NonlocalMatchFilter2026+Malvar:authors-RAW",
+          "directory": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1",
+          "source_revision": "6df6a79ce128a7741af88ff0f3e9794f9b5e03d4",
+          "sha256": "b31bc8e21022389b0b209a9d1e6649485ed4dacc552b7ea04612df5f7515fcf2",
+          "source_checkpoint_sha256": "b31bc8e21022389b0b209a9d1e6649485ed4dacc552b7ea04612df5f7515fcf2",
+          "weights_only_export": {
+            "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/inspection-cpu-v1/authors-network-weights-only.pt",
+            "sha256": "971f1b87d7a7040cf8d71627b174d09503487cffc420e8842d5632549ae1c07f",
+            "all_tensor_values_preserved": true
+          },
+          "native_operator": {
+            "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/native-cuda-build-v1/build/nonlocal_deform_native_cuda_v1.so",
+            "sha256": "826d502cedc3434dc389d80e988fb30fbb9834858b066f7b1a65ef32bf43b0a8",
+            "with_cuda": true,
+            "TORCH_CUDA_ARCH_LIST": "12.1",
+            "MAX_JOBS": 1,
+            "flags": [
+              "-O3"
+            ]
+          },
+          "patchmatch_import_dependency": {
+            "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/patchmatch-native-build-v1/build/nonlocal_patchmatch_native_v1.so",
+            "sha256": "341298f14feef42a5028b81feffad0a7074d4f2565779131447e8859ca9fd4c4",
+            "with_cuda": true,
+            "TORCH_CUDA_ARCH_LIST": "12.1",
+            "MAX_JOBS": 1
+          },
+          "parameters": 15282866,
+          "compute_precision": "IEEE float32",
+          "native_network_batch_size": 1,
+          "input": "Sensor-normalized RAW clipped[0,1], R/G-on-red-row/B/G-on-blue-row packing plus sqrt(max(shot*clipped_noisy+read,0)); input-only noise coefficients.",
+          "output": "Authors' clipped packed RAW, inverse phase permutation, independent WB-aware Malvar. This is a cascade, not a joint RGB network. No fitted gain or target-dependent transform.",
+          "source_receipts": {
+            "receipt.json": "fd74c12c590df0a9a396dce76d106249f54c351178ad375cb8ec21a8be9d87e0",
+            "inspection-cpu-v1/receipt.json": "b4088371739691f7fa84c7f217ba99a98c1b5854c22a502c102facbf7ae0611f",
+            "native-cuda-build-v1/receipt.json": "2feb31700a47ebf0fec7a082d499b84ae4e6f570c613f7b7a6e2dd261bcb2763",
+            "patchmatch-dependency-v1/receipt.json": "7bd44ce3ba6610a2d81943dd8b626f2cc719cf212a4a1552daa5c1b49a366b5e",
+            "patchmatch-native-build-v1/receipt.json": "a7b6fe81b9071c63a9687683d3dd319a3024e5ae2ff82bf91e96f3ccc5a253ce",
+            "deform-dependency-v1/receipt.json": "35dc5ff216f2c0667fc92c98a9b519dcaa7a995d2b462aa21e96c5c8773338a1"
+          }
+        }
+      },
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "white_balance": [
+        2.0,
+        1.0,
+        1.5
+      ],
+      "camera_to_srgb": [
+        [
+          1.1176470588,
+          -0.0588235294,
+          -0.0588235294
+        ],
+        [
+          -0.0588235294,
+          1.1176470588,
+          -0.0588235294
+        ],
+        [
+          -0.0588235294,
+          -0.0588235294,
+          1.1176470588
+        ]
+      ],
+      "conditioning": {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      "display_exposure": 1.0,
+      "reference": "Exact uniform analytic target, not a real photograph or a newly sampled degradation.",
+      "repository_image": "docs/images/nonlocal-color-flat-fabric-mean.png",
+      "actually_viewed": true
+    },
+    {
+      "image": "crop-305a1ff116d96a16.png",
+      "caption": "NonlocalMatchFilter2026+Malvar:authors-RAW / fabric-cyclic-gbr / saved arrays",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (analytic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "2c6f0371e14831d08411a3e02464ce2753a73e273a4cd96959a8326002642f07",
+      "case": {
+        "id": "color-flat-fabric-cyclic-gbr",
+        "palette": "fabric-cyclic-gbr",
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-cyclic-gbr-iso12800-prior-RGGB-observation.npz",
+        "sha256": "f9f0bc3ddfb1a62251e94d929083061861ed99e70d1fb197c822484042b8f68a",
+        "target_camera_RGB": [
+          0.4224426811812077,
+          0.09690847238308323,
+          0.4460826468449295
+        ],
+        "draws_per_pattern": 1
+      },
+      "model": {
+        "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1",
+        "sha256": "b31bc8e21022389b0b209a9d1e6649485ed4dacc552b7ea04612df5f7515fcf2",
+        "kind": "authors-RAW-reference-plus-Malvar",
+        "label": "NonlocalMatchFilter2026+Malvar:authors-RAW",
+        "reference_receipt": {
+          "label": "NonlocalMatchFilter2026+Malvar:authors-RAW",
+          "directory": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1",
+          "source_revision": "6df6a79ce128a7741af88ff0f3e9794f9b5e03d4",
+          "sha256": "b31bc8e21022389b0b209a9d1e6649485ed4dacc552b7ea04612df5f7515fcf2",
+          "source_checkpoint_sha256": "b31bc8e21022389b0b209a9d1e6649485ed4dacc552b7ea04612df5f7515fcf2",
+          "weights_only_export": {
+            "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/inspection-cpu-v1/authors-network-weights-only.pt",
+            "sha256": "971f1b87d7a7040cf8d71627b174d09503487cffc420e8842d5632549ae1c07f",
+            "all_tensor_values_preserved": true
+          },
+          "native_operator": {
+            "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/native-cuda-build-v1/build/nonlocal_deform_native_cuda_v1.so",
+            "sha256": "826d502cedc3434dc389d80e988fb30fbb9834858b066f7b1a65ef32bf43b0a8",
+            "with_cuda": true,
+            "TORCH_CUDA_ARCH_LIST": "12.1",
+            "MAX_JOBS": 1,
+            "flags": [
+              "-O3"
+            ]
+          },
+          "patchmatch_import_dependency": {
+            "path": "/mnt/external/demosaic/references/nonlocal-matchfilter/availability-20261016-v1/patchmatch-native-build-v1/build/nonlocal_patchmatch_native_v1.so",
+            "sha256": "341298f14feef42a5028b81feffad0a7074d4f2565779131447e8859ca9fd4c4",
+            "with_cuda": true,
+            "TORCH_CUDA_ARCH_LIST": "12.1",
+            "MAX_JOBS": 1
+          },
+          "parameters": 15282866,
+          "compute_precision": "IEEE float32",
+          "native_network_batch_size": 1,
+          "input": "Sensor-normalized RAW clipped[0,1], R/G-on-red-row/B/G-on-blue-row packing plus sqrt(max(shot*clipped_noisy+read,0)); input-only noise coefficients.",
+          "output": "Authors' clipped packed RAW, inverse phase permutation, independent WB-aware Malvar. This is a cascade, not a joint RGB network. No fitted gain or target-dependent transform.",
+          "source_receipts": {
+            "receipt.json": "fd74c12c590df0a9a396dce76d106249f54c351178ad375cb8ec21a8be9d87e0",
+            "inspection-cpu-v1/receipt.json": "b4088371739691f7fa84c7f217ba99a98c1b5854c22a502c102facbf7ae0611f",
+            "native-cuda-build-v1/receipt.json": "2feb31700a47ebf0fec7a082d499b84ae4e6f570c613f7b7a6e2dd261bcb2763",
+            "patchmatch-dependency-v1/receipt.json": "7bd44ce3ba6610a2d81943dd8b626f2cc719cf212a4a1552daa5c1b49a366b5e",
+            "patchmatch-native-build-v1/receipt.json": "a7b6fe81b9071c63a9687683d3dd319a3024e5ae2ff82bf91e96f3ccc5a253ce",
+            "deform-dependency-v1/receipt.json": "35dc5ff216f2c0667fc92c98a9b519dcaa7a995d2b462aa21e96c5c8773338a1"
+          }
+        }
+      },
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "conditioning": {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      "display_exposure": 1.0,
+      "reference": "Exact uniform analytic target, not a real photograph.",
+      "repository_image": "docs/images/nonlocal-color-flat-fabric-cyclic-gbr.png",
+      "actually_viewed": true
+    }
+  ],
+  "finding": "Neutral and warm fields remain close. Cyclic-GBR magenta has large channel-mean errors and a visible repeated grid on an exact uniform target. This is CPU evidence on selected colors; no CUDA-color, representative photographic, training-cause or general quality conclusion."
+}

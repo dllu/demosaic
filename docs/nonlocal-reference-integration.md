@@ -73,12 +73,14 @@ stream rejection is actually exercised. The
 live-owner rejection before CUDA initialization or output creation.
 
 The [source-pinned full workflow](results/nonlocal-reference-full-launch.json)
-is running in detached `06e6133`. Controller 1016386
-(creation 1792191000.07) verified V58 controller 601329's actual successful exit,
-completed all tests and the numerical preflight, and started the full427+
-16-procedural panel. Known4/unseen5, analytic, full102MP GFX and three cached
-personal-camera comparisons follow. Its final status still requires
-manual/statistical/native review.
+has completed in detached `06e6133`. Controller 1016386 verified V58's actual
+exit, passed all tests/preflight, completed every planned panel and exited
+successfully. The [complete reference review](nonlocal-reference-full-review.md)
+now includes independent score/control checks, all selected native comparisons
+and full RGB16 integrity. Paired-real means are slightly higher but uncertain;
+synthetic-photo scores are lower, detail remains soft, and the
+[colored-field CPU diagnostic](nonlocal-reference-colored-flats.md) exposes a
+magenta grid/color failure. V43 stays the working model.
 No training, current recipe or protected-final scoring changes.
 
 The same two high-noise synthetic observations retain exact simulated GT.

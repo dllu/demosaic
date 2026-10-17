@@ -13,6 +13,7 @@ from audit_colored_flats import metrics
 
 from demosaic.cfa import malvar
 from demosaic.inference import load_checkpoint
+from demosaic.nonlocal_reference import CHECKPOINT_SHA256, load_nonlocal_reference
 from demosaic.reporting import display_crop, save_triplet
 from demosaic.safety import writable_path
 
@@ -27,7 +28,9 @@ def read(path):
 
 
 @torch.inference_mode()
-def main(checkpoints, inputs, output):
+def main(checkpoints, inputs, output, nonlocal_reference=None):
+    if not checkpoints and nonlocal_reference is None:
+        raise ValueError("Choose at least one checkpoint or the optional RAW reference")
     os.nice(5)
     torch.set_num_threads(2)
     assert not torch.cuda.is_initialized()
@@ -47,7 +50,15 @@ def main(checkpoints, inputs, output):
     provenance = []
     for checkpoint in checkpoints:
         path = Path(checkpoint)
-        provenance.append({"path": str(path), "sha256": sha(path)})
+        provenance.append({"path": str(path), "sha256": sha(path), "kind": "joint-checkpoint"})
+    if nonlocal_reference is not None:
+        provenance.append(
+            {
+                "path": str(nonlocal_reference),
+                "sha256": CHECKPOINT_SHA256,
+                "kind": "authors-RAW-reference-plus-Malvar",
+            }
+        )
     execution = {
         "inputs": str(inputs),
         "input_plan_sha256": sha(inputs),
@@ -62,14 +73,21 @@ def main(checkpoints, inputs, output):
     (output / "plan.json").write_text(json.dumps(execution, indent=2) + "\n")
     results, predictions, crops = [], [], []
     for model_index, record in enumerate(provenance):
-        assert sha(record["path"]) == record["sha256"]
-        model, state = load_checkpoint(record["path"], "cpu")
-        record.update(
-            step=state["step"],
-            label=f"{Path(state['config']['run']).name}:step{state['step']}",
-            model_config=model.config.to_dict(),
-        )
-        del state
+        if record["kind"] == "joint-checkpoint":
+            assert sha(record["path"]) == record["sha256"]
+            model, state = load_checkpoint(record["path"], "cpu")
+            record.update(
+                step=state["step"],
+                label=f"{Path(state['config']['run']).name}:step{state['step']}",
+                model_config=model.config.to_dict(),
+            )
+            del state
+            restored_label = f"Restored / step{record['step']}"
+        else:
+            model = load_nonlocal_reference(record["path"], device="cpu", archive=output)
+            record.update(label=model.receipt["label"], reference_receipt=model.receipt)
+            assert record["sha256"] == model.receipt["sha256"]
+            restored_label = "Restored / authors RAW"
         model.eval().to(memory_format=torch.contiguous_format)
         for case_index, case in enumerate(plan["cases"]):
             assert sha(case["arrays"]) == case["sha256"]
@@ -126,7 +144,7 @@ def main(checkpoints, inputs, output):
                             )
                             for label, rgb in [
                                 ("Noisy (Malvar)", noisy),
-                                (f"Restored / step{record['step']}", prediction),
+                                (restored_label, prediction),
                                 ("GT (analytic)", batch["target"]),
                             ]
                         ],
@@ -149,8 +167,8 @@ def main(checkpoints, inputs, output):
         )
         del model
         gc.collect()
-    assert len(results) == len(predictions) == 32 * len(checkpoints) and len(crops) == 2 * len(
-        checkpoints
+    assert len(results) == len(predictions) == 32 * len(provenance) and len(crops) == 2 * len(
+        provenance
     )
     assert not torch.cuda.is_initialized()
     assert all(sha(Path("src/demosaic") / name) == digest for name, digest in sources.items())
@@ -182,8 +200,9 @@ def main(checkpoints, inputs, output):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("checkpoint", type=Path, nargs="+")
+    parser.add_argument("checkpoint", type=Path, nargs="*")
+    parser.add_argument("--nonlocal-reference", type=Path)
     parser.add_argument("--inputs", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
-    main(args.checkpoint, args.inputs, args.output)
+    main(args.checkpoint, args.inputs, args.output, args.nonlocal_reference)

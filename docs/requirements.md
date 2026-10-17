@@ -250,6 +250,15 @@ GPU review is still pending.
 
 The [wider smooth-palette trial](wide-flat-palette.md) is prepared to target
 selected mature saturated-field failures. Legacy/default data is exact in CPU
-checks and the genuine-parent complete-state restart passes. Production CUDA
-validation and trained photo/real gains remain pending; this is not a model
-promotion or completion of the quality requirement.
+checks and the genuine-parent complete-state restart passes. Genuine native256/batch16 CUDA
+validation and all517 tests now pass; the matched first1k trial is running.
+Trained photo/real gains remain pending; this is not a model promotion or
+completion of the quality requirement.
+
+The [completed genuine Nonlocal Match-Filter reference review](nonlocal-reference-full-review.md)
+adds full427, known4/our-unseen5, analytic, full102MP GFX and three-camera
+comparisons. It has higher but uncertain paired means, lower synthetic scores
+and a selected magenta flat-grid failure. All64 native sets,29 F32 contexts and
+8 full RGB16 files pass integrity checks; source overlap for the external model
+remains unproven. This comparator does not establish SOTA or broad real-photo
+superiority for our model.

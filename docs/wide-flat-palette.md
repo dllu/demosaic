@@ -1,11 +1,13 @@
-# Wider smooth-color palette: matched trial prepared
+# Wider smooth-color palette: matched trial running
 
-The next proposed training comparison targets the saturated flat-field failures
+The running training comparison targets the saturated flat-field failures
 in the [mature model review](mature-color-flat-review.md). The optional
 `flat_chroma_stops` data setting is implemented with a default of zero. CPU
 engineering passes, including a complete restart from the genuine mature
-ConvNeXt parent. **Production training and CUDA numerics have not run for this
-option, and no quality improvement is established.**
+ConvNeXt parent. The [genuine CUDA checks](results/wide-flat-palette-cuda-validation.json)
+also pass. **Trained quality gains remain unproven.**
+The [first1k workflow is running](results/wide-flat-palette-first1k-launch.json):
+control then wider palette, each under its original additional4k schedule.
 [Complete CPU receipt, tests, source checks and prepared configurations](results/wide-flat-palette-preparation.json).
 
 The current smooth generator already includes colored fields: half neutral,
@@ -80,7 +82,7 @@ on the first colored Commons update; the neutral Commons, native and paired
 updates match. These four discarded updates verify engineering, not model
 quality or production speed. No CUDA context or cold RAW decode was used.
 
-## Prepared matched fine-tuning comparison
+## Matched fine-tuning comparison
 
 Both arms initialize from mature V58 step10000 EMA, checkpoint SHA256
 `cc1fb5e6d3e0d042c95495dd7bf1bd07c900cb6f7e3b61541f78c9e08098fea3`.
@@ -111,12 +113,25 @@ examples (2.47% of all 64,000 patches), 1,650 neutral fields, 6,265 strong
 synthetic examples and 22,139 photographs. Wider colors do not increase the
 smooth sampling fraction or replace more real photographs.
 
-The [prepared CUDA preflight](../scripts/preflight_flat_palette_cuda.py) requires
-the running reference workflow's actual successful exit and completed review.
-Its live-owner rejection has been exercised: PID1016386 was confirmed live,
-and the attempt stopped before output creation or CUDA work. CUDA tests,
-native256/batch16/BF16 actual-trainer updates across all three domains, exact
-saved-state restoration and portable EMA FP16 predictions remain to run.
+The [CUDA preflight](../scripts/preflight_flat_palette_cuda.py) required the
+reference workflow's actual successful exit and
+[completed review](nonlocal-reference-full-review.md). Its earlier live-owner
+rejection stopped before output creation or CUDA work. In frozen source
+`0d7d2bb`, all **517 CUDA-enabled tests pass without skips in 76.95s**.
+
+Both arms then complete four discarded actual-trainer updates at native256 /
+batch16 / BF16 with fresh AdamW from the genuine parent. The fixture forces
+Commons smooth fraction1 and uses workers0; native and paired domains retain
+their production fractions. All losses, gradients, model/EMA/AdamW states are
+finite. The two Commons batch hashes differ; native/paired hashes match exactly.
+Complete step2 model/EMA/AdamW/Python/Torch/CUDA RNG restoration is exact before
+continuing. Two saved 256px photo predictions match portable EMA FP16 loading
+exactly. Peak CUDA allocation is 7.200GB in this fixture.
+
+These checks do not claim identical CUDA optimization after a restart, production
+throughput, convergence or quality. The CPU four-vs2+2 equivalence is separate.
+The running first1k workflow now uses production fractions and workers. Its
+quality evaluation and subsequent native/statistical review remain pending.
 
 After those checks, evaluate the first1k gate under the original4k schedule,
 with full427 photos, known4/unseen5, colored and neutral fields, weak carriers,
