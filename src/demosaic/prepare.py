@@ -202,11 +202,20 @@ def prepare_one(record, source, destination, factor, min_size, max_pixels):
                     raise ValueError("Image exceeds pixel budget")
                 image = ImageOps.exif_transpose(image)
                 icc = image.info.get("icc_profile")
-                image = image.convert("RGB")
-                if icc:
+                profile = ImageCms.ImageCmsProfile(io.BytesIO(icc)) if icc else None
+                # Gray profiles describe gray samples, not three RGB channels.
+                # Preserve that interpretation until the ICC transform outputs
+                # sRGB. Other inputs retain the existing RGB conversion path.
+                gray = (
+                    profile is not None
+                    and image.mode in ("1", "L", "LA")
+                    and profile.profile.xcolor_space.strip() == "GRAY"
+                )
+                image = image.convert("L" if gray else "RGB")
+                if profile is not None:
                     image = ImageCms.profileToProfile(
                         image,
-                        ImageCms.ImageCmsProfile(io.BytesIO(icc)),
+                        profile,
                         ImageCms.createProfile("sRGB"),
                         outputMode="RGB",
                     )
