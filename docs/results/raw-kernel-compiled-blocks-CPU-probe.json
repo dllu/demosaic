@@ -1,0 +1,54 @@
+{
+  "status": "completed-independent-CPU-compiled-neural-block-output-checks",
+  "recorded_UTC": "2026-10-17T09:15:10.917751+00:00",
+  "probe": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-compiled-blocks-CPU-probe-v1/result.json",
+    "sha256": "8936af7dbbfb913a78477905fdeb409ce55e2207dcbc4a46642d99213f4dff38"
+  },
+  "driver": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-compiled-blocks-CPU-probe-v1/probe_compiled_rgb_blocks_cpu.py",
+    "sha256": "26656aff70fe52b09ce4620a92a26bfcba846a6b6fde3c510508a7ba6444e0f5"
+  },
+  "actual_compiled_CPU_kernels": 128,
+  "actual_unique_compiled_graphs": 7,
+  "seven_compiled_pure_neural_blocks": [
+    "m_down1",
+    "m_down2",
+    "m_down3",
+    "m_body",
+    "m_up3",
+    "m_up2",
+    "m_up1"
+  ],
+  "six_real_outputs_array_and_file_bitwise_eager": true,
+  "scalar_values_checked": 1179648,
+  "independent_Python64_maximum_and_RMS_difference": 0.0,
+  "model_actual_DINO_state_and_RNG_unchanged": true,
+  "model_state_hash_matches_prior_independent_profiler_load": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-inference-profiler-CPU-preflight-v2/result.json",
+    "sha256": "401577caec452f279f744bfe7da4ac7e961898359bd96da04160cce65d46ad35"
+  },
+  "sky_array_matches_prior_independent_profiler_forward": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-compiled-blocks-CPU-probe-v1/overcast-sky-top-left256-compiled-f32.npy",
+    "sha256": "948530fab443ecf2090667c2aecb8e8ffed2e5cddf32aa0899172d5ee96e5d92"
+  },
+  "CUDA_initialized": false,
+  "legacy_GPU_trace_analysis": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-inference-trace-analysis-v1/legacy-V37-CUDA.json",
+    "sha256": "3cd02cbd0671a6131b6b348f28876b1a69e23759c175795061ed7abb7b6382ca"
+  },
+  "current_first2k_CPU_trace_analysis": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-inference-trace-analysis-v1/V67-first2k-CPU.json",
+    "sha256": "6a34a241b12b364436692753cf666589d9f069651dd292c44b27f2f4b80bf76e"
+  },
+  "trace_mapping_independent_checks": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-inference-trace-analysis-v1/independent-checks.json",
+    "sha256": "883a2a1bc35fd010d4abbc89bd3552436adc4cd2b72c7bfa39222330c6995e8a"
+  },
+  "trace_parser": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-inference-trace-analysis-v1/summarize_inference_trace.py",
+    "sha256": "fd9cae55a248e29cc2882376910ffb73a7002baa04ec66436f71345dc8aa5385"
+  },
+  "GPU_candidate_queued_or_executed": false,
+  "scope": "Actual reviewed V67first2k CPU B1/native256/FP32/contiguous, seven pure neural blocks compiled fullgraph/static with Inductor, two saved photographic inputs plus four top-left GFX subcontexts. All1,179,648 output scalars and12 files bitwise equal, with actual compiled kernels and graph counts. No trained improvement, GPU performance/equivalence, full-frame timing or model/source/config/default/precision change. Candidate for a separate bounded current10000 CUDA trial only after actual queued attribution and existing owned GPU jobs finish."
+}

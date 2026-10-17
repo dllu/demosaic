@@ -72,3 +72,42 @@ These samples exclude input/output transfers, tiling/blending, decoding and
 encoding. They cannot establish a new 100 MP speed, quality improvement or
 promotion. Full final native quality review remains required before selecting a
 model; any later optimization needs its own numerical and quality checks.
+
+## Neural block compilation candidate
+
+A saved-trace reader now joins GPU activity to CPU operators by `External id`,
+and independently cross-checks runtime `correlation` and launch/kernel flow
+coordinates. This follows [Kineto's linked-activity serialization](https://github.com/pytorch/kineto/blob/main/libkineto/src/output_json.cpp).
+All 4,155 activities in the retained V37 GPU trace match both associations.
+Its RGB CNN accounts for 440.049904 ms across three instrumented forwards;
+adds, ReLU and copies account for 220.857583 ms, or 50.19% of that range.
+These are historical V37 trace sums, not the current RAW-model bottleneck,
+critical-path timings or a new full-frame result. Inclusive nested annotations
+are kept separate from the exclusive totals, avoiding duplicate attribution.
+The actual V67 CPU trace has no GPU activity and supplies only operator counts.
+
+This motivates a process-local experiment using
+[Module.compile](https://docs.pytorch.org/docs/2.14/generated/torch.nn.Module.html#torch.nn.Module.compile)
+on seven pure neural blocks: `m_down1/2/3`, `m_body`, and `m_up3/2/1`.
+The actual reviewed V67 step2000 checkpoint ran through Inductor with
+`fullgraph=True`, `dynamic=False`, CPU/native256/B1/FP32 and two threads.
+Seven graphs and 128 generated CPU kernels executed. The physical head, final
+skip, normalization, GAT, RAW reconstruction and DINO remain eager at their
+original precision. No source, weight, configuration or production default
+changes.
+
+[Executed probe and independent array checks](results/raw-kernel-compiled-blocks-CPU-probe.json)
+verify all six outputs are bitwise equal to eager: two fixed synthetic-photo
+inputs and the top-left256 subcontext of each of four saved GFX observations.
+All 1,179,648 FP32 scalars and twelve array files match. The complete model/DINO
+state hash and Torch RNG remain unchanged; the sky array also matches the
+separately retained profiler forward. These subcontexts are engineering inputs,
+not replacements for the four standing native GFX review crops. No camera RAW
+was decoded for this experiment.
+
+CPU compilation and numerical agreement do not establish CUDA speed or
+numerical equivalence. Read the queued actual 10,000 CUDA attribution first.
+If it supports this candidate, run a separate bounded CUDA comparison after
+the existing owned batch sweep exits, retaining the original weights, precision,
+inputs and physical path. Any promising change still needs numerical, native
+quality and full-frame validation before it becomes an inference option.
