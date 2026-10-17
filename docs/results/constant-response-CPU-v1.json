@@ -1,0 +1,1629 @@
+{
+  "status": "rejected-fixed-input-constant-response-subtraction-CPU-pilot",
+  "reviewed_UTC": "2026-10-17T10:29:52.671533+00:00",
+  "decision": "Do not integrate, train, tune or extend this correction. The fixed method fails its prespecified photographic/flat-field rule. Existing model/production output unchanged.",
+  "actual_execution": {
+    "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/result.json",
+    "sha256": "e805aab45d2c33481f9fc58a4d739ce94e9051c589022620c948eeb5fabc91d5"
+  },
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/plan.json",
+    "sha256": "36335876e9da7a095b5edba9e49ba85d143a46a854f3a70f53bcaf13b5b229e8"
+  },
+  "operator": {
+    "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/source.py",
+    "sha256": "8cc62a274c54913c54eff028cfec23764a9423029ac02d38a3c28a37a0944e11"
+  },
+  "checkpoint": {
+    "path": "/mnt/external/demosaic/models/dino-convnext-palette-wide-b16-v60-step4000.pt",
+    "sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e"
+  },
+  "result": {
+    "status": "completed-fixed-CPU-constant-response-hypothesis",
+    "plan": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/plan.json",
+    "plan_sha256": "36335876e9da7a095b5edba9e49ba85d143a46a854f3a70f53bcaf13b5b229e8",
+    "records": [
+      {
+        "case": {
+          "id": "exact-photo-0",
+          "kind": "photo",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "methods": {
+          "eager": {
+            "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/exact-photo-0-eager-f32.npy",
+            "sha256": "4dd06bffc541cdf437893ec18393450b3e7154edb1ec6f534b0fedcaf6bf9e25",
+            "camera_RGB_RMSE": 0.024072195440469877,
+            "max_abs_channel_mean_bias": 0.03237464007054314,
+            "srgb_PSNR": 32.048148376998114
+          },
+          "constant-response": {
+            "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/exact-photo-0-constant-response-f32.npy",
+            "sha256": "0c14717e4d4cf9ee382fb215dd45bbc2c02e21630c65a5869c2c553d61116c60",
+            "camera_RGB_RMSE": 0.017364285069326905,
+            "max_abs_channel_mean_bias": 0.016524247113752607,
+            "srgb_PSNR": 32.82470037668206
+          }
+        },
+        "input_only_mean_camera_RGB": [
+          0.42244842648506165,
+          0.3933095335960388,
+          0.09623999893665314
+        ]
+      },
+      {
+        "case": {
+          "id": "exact-photo-1",
+          "kind": "photo",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "methods": {
+          "eager": {
+            "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/exact-photo-1-eager-f32.npy",
+            "sha256": "eb988b80f461c410b9f34b3a202dc213bf1482b9fd0fa3becbd2878f892a1628",
+            "camera_RGB_RMSE": 0.009392510296173037,
+            "max_abs_channel_mean_bias": 0.000525653177663763,
+            "srgb_PSNR": 35.25808447905614
+          },
+          "constant-response": {
+            "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/exact-photo-1-constant-response-f32.npy",
+            "sha256": "1c569635b4f74072bd873ee6668b5a7b61b956c326d5cb5db8c7b4857800e018",
+            "camera_RGB_RMSE": 0.00945564662125453,
+            "max_abs_channel_mean_bias": 0.0015239976826197932,
+            "srgb_PSNR": 34.781968000182516
+          }
+        },
+        "input_only_mean_camera_RGB": [
+          0.11515701562166214,
+          0.28147587180137634,
+          0.23455344140529633
+        ]
+      },
+      {
+        "case": {
+          "id": "neutral",
+          "palette": "neutral",
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/neutral-iso12800-prior-RGGB-observation.npz",
+          "sha256": "89c2c1c29cabdb9364b776bb6dd5ef4d217df98d41b94313baf260b1a0aa70a7",
+          "target_camera_RGB": [
+            0.09,
+            0.18,
+            0.12
+          ],
+          "draws_per_pattern": 1,
+          "kind": "analytic",
+          "original_case_index": 4,
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "methods": {
+          "eager": {
+            "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/neutral-eager-f32.npy",
+            "sha256": "ca5a384f5c3b28f6ba866b03bf904d2d87e186f1be066de6ee7420a7ee83419e",
+            "camera_RGB_RMSE": 0.0007348794160431936,
+            "max_abs_channel_mean_bias": 0.0008263432251987979,
+            "srgb_PSNR": 57.21618906187929
+          },
+          "constant-response": {
+            "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/neutral-constant-response-f32.npy",
+            "sha256": "bba58549ed06a1998627da9b451351f6f8d809dba52e29c00727d3ef30d7de7c",
+            "camera_RGB_RMSE": 0.0026313809077514734,
+            "max_abs_channel_mean_bias": 0.003299218512547668,
+            "srgb_PSNR": 45.344597194096295
+          }
+        },
+        "input_only_mean_camera_RGB": [
+          0.08964800834655762,
+          0.18006068468093872,
+          0.12016282975673676
+        ]
+      },
+      {
+        "case": {
+          "id": "fabric-mean",
+          "palette": "fabric-mean",
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-mean-iso12800-prior-RGGB-observation.npz",
+          "sha256": "7c2e2575b08152593e1678b2a58d763f79c53eb61a7fe8de43d4f33e25680438",
+          "target_camera_RGB": [
+            0.4460826468449295,
+            0.4224426811812077,
+            0.09690847238308323
+          ],
+          "draws_per_pattern": 1,
+          "kind": "analytic",
+          "original_case_index": 12,
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "methods": {
+          "eager": {
+            "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/fabric-mean-eager-f32.npy",
+            "sha256": "ab8a5f077e1018fbebafe900a01d523b02973c29340d7ae0853b603397bffcac",
+            "camera_RGB_RMSE": 0.03663288696137318,
+            "max_abs_channel_mean_bias": 0.06033804877661168,
+            "srgb_PSNR": 28.637147974771366
+          },
+          "constant-response": {
+            "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/fabric-mean-constant-response-f32.npy",
+            "sha256": "22c0b4134523099610dbaaa12d8a92c24b7ac50d250bd49c061f12e494bd7e8e",
+            "camera_RGB_RMSE": 0.02787362686964876,
+            "max_abs_channel_mean_bias": 0.04551726984791458,
+            "srgb_PSNR": 31.069302331659358
+          }
+        },
+        "input_only_mean_camera_RGB": [
+          0.44601643085479736,
+          0.4226902723312378,
+          0.09675910323858261
+        ]
+      },
+      {
+        "case": {
+          "id": "fabric-cyclic-gbr",
+          "palette": "fabric-cyclic-gbr",
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-cyclic-gbr-iso12800-prior-RGGB-observation.npz",
+          "sha256": "f9f0bc3ddfb1a62251e94d929083061861ed99e70d1fb197c822484042b8f68a",
+          "target_camera_RGB": [
+            0.4224426811812077,
+            0.09690847238308323,
+            0.4460826468449295
+          ],
+          "draws_per_pattern": 1,
+          "kind": "analytic",
+          "original_case_index": 20,
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "methods": {
+          "eager": {
+            "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/fabric-cyclic-gbr-eager-f32.npy",
+            "sha256": "ff0be1fefc5b43bc8ac54c1f807553d55c388493aa350914e3b3f75694c61e89",
+            "camera_RGB_RMSE": 0.020477079480528956,
+            "max_abs_channel_mean_bias": 0.030989582162583247,
+            "srgb_PSNR": 33.569479012751856
+          },
+          "constant-response": {
+            "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/fabric-cyclic-gbr-constant-response-f32.npy",
+            "sha256": "85ac00914bd2f16c536f0f8a09532a416c4373f64eaa1005f1800115e0735514",
+            "camera_RGB_RMSE": 0.0035357976612579696,
+            "max_abs_channel_mean_bias": 0.0018261013319715858,
+            "srgb_PSNR": 44.83320395899642
+          }
+        },
+        "input_only_mean_camera_RGB": [
+          0.4227908253669739,
+          0.09694844484329224,
+          0.44626516103744507
+        ]
+      },
+      {
+        "case": {
+          "id": "fabric-cyclic-brg",
+          "palette": "fabric-cyclic-brg",
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-cyclic-brg-iso12800-prior-RGGB-observation.npz",
+          "sha256": "d88558737afb8d01dec4945c4d32dcd676da36fa4fe9f770d9bdf04941b4ab0b",
+          "target_camera_RGB": [
+            0.09690847238308323,
+            0.4460826468449295,
+            0.4224426811812077
+          ],
+          "draws_per_pattern": 1,
+          "kind": "analytic",
+          "original_case_index": 28,
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "methods": {
+          "eager": {
+            "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/fabric-cyclic-brg-eager-f32.npy",
+            "sha256": "5886f030da996827fd39f3b2084e77374ecb1f971576a3dab6431920f77fb4e2",
+            "camera_RGB_RMSE": 0.0027855693301210645,
+            "max_abs_channel_mean_bias": 0.0028467273150454275,
+            "srgb_PSNR": 45.17953044383557
+          },
+          "constant-response": {
+            "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/fabric-cyclic-brg-constant-response-f32.npy",
+            "sha256": "23045ebc87e67591c4db85db590e3941361e690ddfed681a74499f1e0325e63b",
+            "camera_RGB_RMSE": 0.036835078621317636,
+            "max_abs_channel_mean_bias": 0.06021011483389884,
+            "srgb_PSNR": 30.03498301126632
+          }
+        },
+        "input_only_mean_camera_RGB": [
+          0.09688292443752289,
+          0.44568827748298645,
+          0.4222289025783539
+        ]
+      }
+    ],
+    "native_crops": [
+      {
+        "image": "crop-2e703294956ce74b.png",
+        "caption": "exact-photo-0 / eager",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "eager",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (exact saved target)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "9b24bb9637215f6449324377045653ce2932fc7a931a15da16414cea52734549",
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "source": {
+          "id": "exact-photo-0",
+          "kind": "photo",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact saved analytic or synthetic photographic target, not a real paired capture."
+      },
+      {
+        "image": "crop-07a71dda2a5ef7ca.png",
+        "caption": "exact-photo-0 / constant-response",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "constant-response",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (exact saved target)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "07e24fe50fa5ca5d411bbc109f8f4f8a8c386526c65ad2f4433aa840f1e2b6f3",
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "source": {
+          "id": "exact-photo-0",
+          "kind": "photo",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact saved analytic or synthetic photographic target, not a real paired capture."
+      },
+      {
+        "image": "crop-6f12caf0b56653e1.png",
+        "caption": "exact-photo-1 / eager",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "eager",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (exact saved target)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "70f9b5840d6f0809e9f0780af26eafd8c9d14f7c39ccc6b9cbf6d0d52b0240ca",
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "source": {
+          "id": "exact-photo-1",
+          "kind": "photo",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact saved analytic or synthetic photographic target, not a real paired capture."
+      },
+      {
+        "image": "crop-5f01ac2a1dbe59d9.png",
+        "caption": "exact-photo-1 / constant-response",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "constant-response",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (exact saved target)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "0ccec1cae64685b963a90ec46781c581816f5431279bfd4ec82aa8221ae276bf",
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "source": {
+          "id": "exact-photo-1",
+          "kind": "photo",
+          "arrays": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact saved analytic or synthetic photographic target, not a real paired capture."
+      },
+      {
+        "image": "crop-0e0c9427067f3309.png",
+        "caption": "neutral / eager",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "eager",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (exact saved target)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "9dfe56390e1969a275e1377fc0e61322eeeb3a5f14880603a922ddc855f96843",
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "source": {
+          "id": "neutral",
+          "palette": "neutral",
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/neutral-iso12800-prior-RGGB-observation.npz",
+          "sha256": "89c2c1c29cabdb9364b776bb6dd5ef4d217df98d41b94313baf260b1a0aa70a7",
+          "target_camera_RGB": [
+            0.09,
+            0.18,
+            0.12
+          ],
+          "draws_per_pattern": 1,
+          "kind": "analytic",
+          "original_case_index": 4,
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact saved analytic or synthetic photographic target, not a real paired capture."
+      },
+      {
+        "image": "crop-8cbc079cdc7fddcf.png",
+        "caption": "neutral / constant-response",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "constant-response",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (exact saved target)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "5c042cc527e9bc80a29bae8378d5864fd91352a12ea12d703c2d2263901d7fe5",
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "source": {
+          "id": "neutral",
+          "palette": "neutral",
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/neutral-iso12800-prior-RGGB-observation.npz",
+          "sha256": "89c2c1c29cabdb9364b776bb6dd5ef4d217df98d41b94313baf260b1a0aa70a7",
+          "target_camera_RGB": [
+            0.09,
+            0.18,
+            0.12
+          ],
+          "draws_per_pattern": 1,
+          "kind": "analytic",
+          "original_case_index": 4,
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact saved analytic or synthetic photographic target, not a real paired capture."
+      },
+      {
+        "image": "crop-b3cfee47a85558ec.png",
+        "caption": "fabric-mean / eager",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "eager",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (exact saved target)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "f8510c9e8c2b9cfef5e2417448127148b4c436c2d9e2994e75677b02aa631b0d",
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "source": {
+          "id": "fabric-mean",
+          "palette": "fabric-mean",
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-mean-iso12800-prior-RGGB-observation.npz",
+          "sha256": "7c2e2575b08152593e1678b2a58d763f79c53eb61a7fe8de43d4f33e25680438",
+          "target_camera_RGB": [
+            0.4460826468449295,
+            0.4224426811812077,
+            0.09690847238308323
+          ],
+          "draws_per_pattern": 1,
+          "kind": "analytic",
+          "original_case_index": 12,
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact saved analytic or synthetic photographic target, not a real paired capture."
+      },
+      {
+        "image": "crop-ba4384ae32d74620.png",
+        "caption": "fabric-mean / constant-response",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "constant-response",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (exact saved target)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "da006afd944fb66db5b7599609ac1f8e3f92d8b667af274a619f0b5370f8f76d",
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "source": {
+          "id": "fabric-mean",
+          "palette": "fabric-mean",
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-mean-iso12800-prior-RGGB-observation.npz",
+          "sha256": "7c2e2575b08152593e1678b2a58d763f79c53eb61a7fe8de43d4f33e25680438",
+          "target_camera_RGB": [
+            0.4460826468449295,
+            0.4224426811812077,
+            0.09690847238308323
+          ],
+          "draws_per_pattern": 1,
+          "kind": "analytic",
+          "original_case_index": 12,
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact saved analytic or synthetic photographic target, not a real paired capture."
+      },
+      {
+        "image": "crop-5de1eceba7bcb2a5.png",
+        "caption": "fabric-cyclic-gbr / eager",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "eager",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (exact saved target)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "34e73443125699bac4ec85162a6f76152c3d5975058d3e3c197f8ec36fb65671",
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "source": {
+          "id": "fabric-cyclic-gbr",
+          "palette": "fabric-cyclic-gbr",
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-cyclic-gbr-iso12800-prior-RGGB-observation.npz",
+          "sha256": "f9f0bc3ddfb1a62251e94d929083061861ed99e70d1fb197c822484042b8f68a",
+          "target_camera_RGB": [
+            0.4224426811812077,
+            0.09690847238308323,
+            0.4460826468449295
+          ],
+          "draws_per_pattern": 1,
+          "kind": "analytic",
+          "original_case_index": 20,
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact saved analytic or synthetic photographic target, not a real paired capture."
+      },
+      {
+        "image": "crop-c2a86ab87dc2db26.png",
+        "caption": "fabric-cyclic-gbr / constant-response",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "constant-response",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (exact saved target)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "100a3592b3646074ba8034d9004a6b588d6cf4e8dea871cfe83192bbb25d39b8",
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "source": {
+          "id": "fabric-cyclic-gbr",
+          "palette": "fabric-cyclic-gbr",
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-cyclic-gbr-iso12800-prior-RGGB-observation.npz",
+          "sha256": "f9f0bc3ddfb1a62251e94d929083061861ed99e70d1fb197c822484042b8f68a",
+          "target_camera_RGB": [
+            0.4224426811812077,
+            0.09690847238308323,
+            0.4460826468449295
+          ],
+          "draws_per_pattern": 1,
+          "kind": "analytic",
+          "original_case_index": 20,
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact saved analytic or synthetic photographic target, not a real paired capture."
+      },
+      {
+        "image": "crop-ae690480c70a498e.png",
+        "caption": "fabric-cyclic-brg / eager",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "eager",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (exact saved target)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "18f8147e557df873897520447565f757f8e4ce50f7e344ba5382f9b0baddd793",
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "source": {
+          "id": "fabric-cyclic-brg",
+          "palette": "fabric-cyclic-brg",
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-cyclic-brg-iso12800-prior-RGGB-observation.npz",
+          "sha256": "d88558737afb8d01dec4945c4d32dcd676da36fa4fe9f770d9bdf04941b4ab0b",
+          "target_camera_RGB": [
+            0.09690847238308323,
+            0.4460826468449295,
+            0.4224426811812077
+          ],
+          "draws_per_pattern": 1,
+          "kind": "analytic",
+          "original_case_index": 28,
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact saved analytic or synthetic photographic target, not a real paired capture."
+      },
+      {
+        "image": "crop-086b6159f476c369.png",
+        "caption": "fabric-cyclic-brg / constant-response",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "constant-response",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (exact saved target)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "c1f14641d88362ab6e2a9b115b88d3a2dceb6b68b8c18e92931343b0a774191d",
+        "checkpoint_sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "source": {
+          "id": "fabric-cyclic-brg",
+          "palette": "fabric-cyclic-brg",
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "arrays": "/mnt/external/demosaic/evaluation/fresh-none-colored-flats-cpu-v1/fabric-cyclic-brg-iso12800-prior-RGGB-observation.npz",
+          "sha256": "d88558737afb8d01dec4945c4d32dcd676da36fa4fe9f770d9bdf04941b4ab0b",
+          "target_camera_RGB": [
+            0.09690847238308323,
+            0.4460826468449295,
+            0.4224426811812077
+          ],
+          "draws_per_pattern": 1,
+          "kind": "analytic",
+          "original_case_index": 28,
+          "noise": [
+            0.00256,
+            2.62144e-05
+          ],
+          "display_exposure": 1
+        },
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "conditioning": {
+          "shot": 0.00256,
+          "read": 2.62144e-05
+        },
+        "display_exposure": 1,
+        "white_balance": [
+          [
+            2.0,
+            1.0,
+            1.5
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              1.1176470518112183,
+              -0.05882352963089943,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              1.1176470518112183,
+              -0.05882352963089943
+            ],
+            [
+              -0.05882352963089943,
+              -0.05882352963089943,
+              1.1176470518112183
+            ]
+          ]
+        ],
+        "reference": "Exact saved analytic or synthetic photographic target, not a real paired capture."
+      }
+    ],
+    "clean_constant_checks": [
+      {
+        "pattern": "RGGB",
+        "max_abs_error": 0.0
+      },
+      {
+        "pattern": "BGGR",
+        "max_abs_error": 0.0
+      },
+      {
+        "pattern": "GRBG",
+        "max_abs_error": 0.0
+      },
+      {
+        "pattern": "GBRG",
+        "max_abs_error": 0.0
+      }
+    ],
+    "prespecified_acceptance_pass": false,
+    "all_model_and_actual_DINO_state_unchanged": "85308cb12463d17b97409e8bc2bb59382de0af559de707732e39ca9c7bb5ce85",
+    "CPU_RNG_unchanged": true,
+    "CUDA_initialized": false,
+    "actual_native_views_required": 12,
+    "no_integration_or_promotion": true
+  },
+  "independent_numpy64_camera_metric_fields": 24,
+  "all_six_noisy_and_reference_PNG_panels_bitwise_between_methods": true,
+  "actual_native_views": [
+    {
+      "image": {
+        "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/crop-2e703294956ce74b.png",
+        "sha256": "9b24bb9637215f6449324377045653ce2932fc7a931a15da16414cea52734549"
+      },
+      "metadata": {
+        "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/crop-2e703294956ce74b.json",
+        "sha256": "5c1919559d32f21b2557d958459716190c1285cb934a1f4e40b56b46ad8a1ade"
+      },
+      "caption": "exact-photo-0 / eager",
+      "actually_viewed_native": true,
+      "repository_image": "docs/images/constant-response-CPU-v1-crop-2e703294956ce74b.png"
+    },
+    {
+      "image": {
+        "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/crop-07a71dda2a5ef7ca.png",
+        "sha256": "07e24fe50fa5ca5d411bbc109f8f4f8a8c386526c65ad2f4433aa840f1e2b6f3"
+      },
+      "metadata": {
+        "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/crop-07a71dda2a5ef7ca.json",
+        "sha256": "e1175e7668cf487fafe3ec097dc49c8e0b9909c49baea32052aecdc49e906b7c"
+      },
+      "caption": "exact-photo-0 / constant-response",
+      "actually_viewed_native": true,
+      "repository_image": "docs/images/constant-response-CPU-v1-crop-07a71dda2a5ef7ca.png"
+    },
+    {
+      "image": {
+        "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/crop-6f12caf0b56653e1.png",
+        "sha256": "70f9b5840d6f0809e9f0780af26eafd8c9d14f7c39ccc6b9cbf6d0d52b0240ca"
+      },
+      "metadata": {
+        "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/crop-6f12caf0b56653e1.json",
+        "sha256": "6a66cd160e10e2eb574abe29fbd60a127f8aad9e268d3da066c00ec53e38a2ba"
+      },
+      "caption": "exact-photo-1 / eager",
+      "actually_viewed_native": true,
+      "repository_image": "docs/images/constant-response-CPU-v1-crop-6f12caf0b56653e1.png"
+    },
+    {
+      "image": {
+        "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/crop-5f01ac2a1dbe59d9.png",
+        "sha256": "0ccec1cae64685b963a90ec46781c581816f5431279bfd4ec82aa8221ae276bf"
+      },
+      "metadata": {
+        "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/crop-5f01ac2a1dbe59d9.json",
+        "sha256": "6ed460a430233f2cb9031955b572346575a3f9c815337cdd581a3177aebd10d4"
+      },
+      "caption": "exact-photo-1 / constant-response",
+      "actually_viewed_native": true,
+      "repository_image": "docs/images/constant-response-CPU-v1-crop-5f01ac2a1dbe59d9.png"
+    },
+    {
+      "image": {
+        "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/crop-0e0c9427067f3309.png",
+        "sha256": "9dfe56390e1969a275e1377fc0e61322eeeb3a5f14880603a922ddc855f96843"
+      },
+      "metadata": {
+        "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/crop-0e0c9427067f3309.json",
+        "sha256": "7fcb44fc6b23bfe65b6493f34e5355d96446e8d3eb07a925772f014577ca764e"
+      },
+      "caption": "neutral / eager",
+      "actually_viewed_native": true
+    },
+    {
+      "image": {
+        "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/crop-8cbc079cdc7fddcf.png",
+        "sha256": "5c042cc527e9bc80a29bae8378d5864fd91352a12ea12d703c2d2263901d7fe5"
+      },
+      "metadata": {
+        "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/crop-8cbc079cdc7fddcf.json",
+        "sha256": "9c50fbb251058b8895a66e5fdb485026cfcbeb7472817306d1dfb0d6c2014511"
+      },
+      "caption": "neutral / constant-response",
+      "actually_viewed_native": true
+    },
+    {
+      "image": {
+        "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/crop-b3cfee47a85558ec.png",
+        "sha256": "f8510c9e8c2b9cfef5e2417448127148b4c436c2d9e2994e75677b02aa631b0d"
+      },
+      "metadata": {
+        "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/crop-b3cfee47a85558ec.json",
+        "sha256": "de818b5a5bed05b5aea3a4ce6554a1f6f83db2c35c880302c7f4732460e76840"
+      },
+      "caption": "fabric-mean / eager",
+      "actually_viewed_native": true
+    },
+    {
+      "image": {
+        "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/crop-ba4384ae32d74620.png",
+        "sha256": "da006afd944fb66db5b7599609ac1f8e3f92d8b667af274a619f0b5370f8f76d"
+      },
+      "metadata": {
+        "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/crop-ba4384ae32d74620.json",
+        "sha256": "dcdd4bb94c761c053ec9c57ea4f29658ae89073bc9bf770c78142e567cabf818"
+      },
+      "caption": "fabric-mean / constant-response",
+      "actually_viewed_native": true
+    },
+    {
+      "image": {
+        "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/crop-5de1eceba7bcb2a5.png",
+        "sha256": "34e73443125699bac4ec85162a6f76152c3d5975058d3e3c197f8ec36fb65671"
+      },
+      "metadata": {
+        "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/crop-5de1eceba7bcb2a5.json",
+        "sha256": "d4597913c72d10bab7f75b693be72577e157c5ea847986bca255c0e844bb9c05"
+      },
+      "caption": "fabric-cyclic-gbr / eager",
+      "actually_viewed_native": true
+    },
+    {
+      "image": {
+        "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/crop-c2a86ab87dc2db26.png",
+        "sha256": "100a3592b3646074ba8034d9004a6b588d6cf4e8dea871cfe83192bbb25d39b8"
+      },
+      "metadata": {
+        "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/crop-c2a86ab87dc2db26.json",
+        "sha256": "44cdd72cd379df3450a47578ee296dd02df5a305cfc2c24e72110e913b4b0728"
+      },
+      "caption": "fabric-cyclic-gbr / constant-response",
+      "actually_viewed_native": true
+    },
+    {
+      "image": {
+        "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/crop-ae690480c70a498e.png",
+        "sha256": "18f8147e557df873897520447565f757f8e4ce50f7e344ba5382f9b0baddd793"
+      },
+      "metadata": {
+        "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/crop-ae690480c70a498e.json",
+        "sha256": "7024250929f4ae4612e4ed09ce0785705fe3450f65ec389b866406ecf8194237"
+      },
+      "caption": "fabric-cyclic-brg / eager",
+      "actually_viewed_native": true
+    },
+    {
+      "image": {
+        "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/crop-086b6159f476c369.png",
+        "sha256": "c1f14641d88362ab6e2a9b115b88d3a2dceb6b68b8c18e92931343b0a774191d"
+      },
+      "metadata": {
+        "path": "/mnt/external/demosaic/benchmarks/constant-response-subtraction-CPU-v1/crop-086b6159f476c369.json",
+        "sha256": "50e4aea3c5a6c77c674c9b308d22c770c0bc777f911afaea7e2bf77eda74f03a"
+      },
+      "caption": "fabric-cyclic-brg / constant-response",
+      "actually_viewed_native": true
+    }
+  ],
+  "native_notes": "All12 original triplets actually inspected. Photo0 gets a different orange tone but still lacks cords; photo1 changes tone slightly without clearer seams/cloud edges. Orange/magenta improve in places while coarse variation remains. Blue becomes brighter despite a uniform target; neutral shifts slightly. These are not consistent color/detail gains.",
+  "limitations": [
+    "Six motivated saved inputs and one realization each; not a blind benchmark, statistical quality estimate or trained-model result.",
+    "Two CPU FP32 forwards per observation; no CUDA or full-frame speed.",
+    "Four clean constant tests preserve exactly at native64/allCFAs but do not establish unbiased restoration of noisy fields.",
+    "The two CPU photo draws differ from full427 CUDA draws. Do not interpret their PSNR as full427 model scores."
+  ]
+}
