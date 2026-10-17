@@ -7,7 +7,8 @@ regress. Bright saturated-field bias improves but remains large. It follows the
 [negative .01 trial](sensor-mean-v61-first1k-review.md); reducing optimization
 pressure recovers accuracy but does not establish an improved general model.
 The next separate comparison will isolate more reviewed Commons data and longer
-training, without this loss.
+training, without this loss; the
+[longer matched data stage](longer-commons-data-stage.md) is now running.
 
 [Actual launch, source/config/data hashes, CPU/CUDA receipts and logged-input matches](results/sensor-mean-v62-first1k-launch.json).
 [Configuration](../configs/dino-convnext-palette-sensor-mean-small-b16-v62.yaml).

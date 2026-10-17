@@ -1,0 +1,567 @@
+{
+  "status": "Matched longerdata stage actuallytraining control; expandedqueued afterward",
+  "workflow_at_publication": {
+    "path": "/mnt/external/demosaic/runs/long-commons-v63-v64-first4k-workflow-v1.json",
+    "sha256": "6f4cefa48a8a719e8321ad48cac25fdc3762898fe4046c59213d3e76fcd47103",
+    "result": {
+      "updated_utc": "2026-10-17T03:30:29.375260+00:00",
+      "status": "training-control-to4000-under-original20000-stage",
+      "controller": {
+        "pid": 1988162,
+        "created": 1792207826.66,
+        "driver_sha256": "4bbe37817ab6c70a41b30206adf5c6cb231864485b689735aeb4ffcbe81b15d3",
+        "model_worktree": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree",
+        "model_source_commit": "0d7d2bb69270e13bec837f889b111a5e63af1cfe"
+      },
+      "plan": "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-first4k-workflow-v1/plan.json",
+      "planned_updates": 20000,
+      "review_boundary": 4000,
+      "checkpoints": [],
+      "arm": "control",
+      "child_pid": 1988212
+    }
+  },
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-first4k-workflow-v1/plan.json",
+    "sha256": "d9a83e96fc012684e333cc90be2f08206cef9d9591d1fe3c6f78215c455face7",
+    "result": {
+      "controller": {
+        "pid": 1988162,
+        "created": 1792207826.66,
+        "driver_sha256": "4bbe37817ab6c70a41b30206adf5c6cb231864485b689735aeb4ffcbe81b15d3",
+        "model_worktree": "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree",
+        "model_source_commit": "0d7d2bb69270e13bec837f889b111a5e63af1cfe"
+      },
+      "source_files": {
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/paired_admission.py": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/prior.py": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/metrics.py": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/inference.py": "911e71e8dcbeb1872ed591bc5234ed2b79bae063a859b4704516537d94a1df0b",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/train.py": "d9c7bcf8dcdd6a0ccac6f83cfdbfd9079582cade46648fee0163d2d0dccb0616",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/dino_adaptation.py": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/paired_training.py": "71a2481213bba174bd3d6b3de9ae9b89f88333635810e15d0958352d9d8d053d",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/reference.py": "54ed094d58e245a56993ea3ce3ef9e21d2164e902d41d03bba9132bacd22891f",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/prepare.py": "e4c0733bb260c289b3ce8aaf5f393abc5919d8d81cdcf462b70032d790429712",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/realdata.py": "ed24db2b066531281a196e6fa074130cb0ee78a640eae5ccaaace234f5ad5421",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/cfa.py": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/paired.py": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/audit.py": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/losses.py": "548b1481a035ad937d4a046754a74e70684864a9842296765c62079a002e5120",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/gaussian.py": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/real_suite.py": "69d3d403d36b1230e35083cc55e2c1a485f82cd5058f6be83fb3d5c0c18a6825",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/raw_clean.py": "a143ce351ac4e1b2425d4d561000d3e8934477fe9172c88f90ce76d9b32a7a6c",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/raw_admission.py": "1948afbbf05129190273ab77466f26d9d27dc942716beaab16f077c8c3330803",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/vst.py": "355124a374177f1c08271834149c5979ab3477fdf255c60aa7cee0d47792a76b",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/io.py": "0a1599ffe7f6d935e92fc71e6b086430c6f82678a74952c3b8f31155a0bea83b",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/data.py": "3c8855fe9d6e24d5368f356528ed217a544f185d84f58356eebfb2048cd92197",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/__init__.py": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/calibration.py": "e86f4c602a6cd7fd855d0bcfeb790cf17ed87611f19d97926f9db174909b2d26",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/noise.py": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/precision.py": "9aa850fb5ee0e9abc3e9adc4847ce3518c1acb37c93f6bc54ff9206bb0c94c3a",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/cli.py": "a34d98b1eab4479f67ba5a51b6c8a428db4d8ccf5ee097cd1369bd0cd1ead542",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/reporting.py": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/model.py": "c37f530b3c4265e23af8d04b81e65e19b8ee585538874445e4a95bc337f23a71",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/color.py": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/dino_pyramid.py": "246944874671ceb4449b0487fcb347a00f8b82d713d5b4c9fee5a7c8a68aa95f",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/textures.py": "b4bc304a50de272cf7fcba272e67b828c163466ffc23ea3337a6a66f076dc664",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/nonlocal_reference.py": "7e4a00e9d90a61b772da9c1a7414bf499f84b9c9bb0239fd250fb8263dfb3f88",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/safety.py": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/pretrained_rgb.py": "10ea25fc01bf561a3ea9087002566eb319717c338f44f54d2da46fc6ee0d7026",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/registration.py": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/src/demosaic/suite.py": "1a094262e1772f5df8a54cb176c2f3da189d78f48ead3f8002f24e84802059a4"
+      },
+      "inputs": {
+        "/home/dllu/proj/demosaic/docs/results/sensor-mean-v62-first1k-review.json": "bb59963ba04138f5479fe529891a5131d73e8304b56d3a1a29d5c428d4287e35",
+        "/mnt/external/demosaic/models/dino-convnext-palette-wide-b16-v60-step4000.pt": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "/home/dllu/proj/demosaic/configs/dino-convnext-wide-long-control-b16-v63.yaml": "164e80c5d32060344d7dfb46dd599b0e632f5da7d01900a356776dc079a9dc47",
+        "/home/dllu/proj/demosaic/configs/dino-convnext-wide-long-expanded-b16-v64.yaml": "f7f38c009231673ab450bd0f0dc30bf0274a17572b8d795a2ee74c37050632fa",
+        "/mnt/external/demosaic/audits/commons-bin4-frozen44732-v1/manifest.jsonl": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+        "/mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a",
+        "/mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json": "0dde4a0ca1ad68332d8a1c9d61fdc561db6501cd262d534647b979de82e3cf80",
+        "/mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json": "b3b36d3ec28b0e2d339cb28f3bc810cc17b31102f4ce6a3454fdfec9a4a4b5e3",
+        "/mnt/external/demosaic/commons-incoming-20261016-v3-quarantine/extension4/audit/manifest.jsonl": "7ed635903e4dd698081475a3667c8a14bb3b9f5f628a0917a5e336406faaecde",
+        "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-CUDA-preflight-v1/receipt.json": "1b0fba21433328f40653a01aeabcbab9cbe7e7f895b13134a52d853417842a91",
+        "/home/dllu/proj/demosaic/.cache/long-commons-v63-v64-tools-v1/manifest.json": "4e5c2add182f4999e14124550f9da86770c2f8ec0140bbdddd32b4dfb0b963b6",
+        "/home/dllu/proj/demosaic/docs/results/wide-flat-palette-full4k-review.json": "b65ab9cfa235f0684959861432a4093d4e99f397baf9117ecc22523c54d0d1c2",
+        "/home/dllu/proj/demosaic/docs/results/commons-incoming-v3-rebin4-complete.json": "444b722ef19d4e6dfb4cddd3b2ca07b2f63d609c47a1dd910601a65316dc6dcf",
+        "/home/dllu/proj/demosaic/.cache/wide-flat-palette-worktree/configs/evaluation.yaml": "74b0df74b9734a714e04a0a1cf1e82ed0ba211b1d5b5fd745b9502ca5af2174c"
+      },
+      "preflight_tools": {
+        "/home/dllu/proj/demosaic/.cache/long-commons-v63-v64-tools-v1/preflight_dino_pyramid_cuda.py": "30d32512ed9228397c623dcb39e9336660f82a7b1bdb9601bced471173fca05a",
+        "/home/dllu/proj/demosaic/.cache/long-commons-v63-v64-tools-v1/preflight_paired_extension.py": "b549bb7c43bec03045854fe6bc683031620a0b47264b248868e53eb707bb2ff7",
+        "/home/dllu/proj/demosaic/.cache/long-commons-v63-v64-tools-v1/preflight_flat_palette_cuda.py": "c8bf68565e523139ccf1a1f40ebc735ba0816dd03d38f038fd60001e7191b1c4",
+        "/home/dllu/proj/demosaic/.cache/long-commons-v63-v64-tools-v1/preflight_long_commons_stage.py": "5d1401df02c06df2c961baf25b0e358b6cdc3b1c21d398fe6ff0d82d2c14acb2",
+        "/home/dllu/proj/demosaic/.cache/long-commons-v63-v64-tools-v1/audit_flat_palette.py": "6d74628937985798f29958f8b48f01cb27680d026ddf9dda0ec6b80d643fb129"
+      },
+      "parent": {
+        "path": "/mnt/external/demosaic/models/dino-convnext-palette-wide-b16-v60-step4000.pt",
+        "sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "historical_step": 4000
+      },
+      "configs": [
+        {
+          "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-first4k-workflow-v1/dino-convnext-wide-long-control-b16-v63.yaml",
+          "sha256": "164e80c5d32060344d7dfb46dd599b0e632f5da7d01900a356776dc079a9dc47"
+        },
+        {
+          "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-first4k-workflow-v1/dino-convnext-wide-long-expanded-b16-v64.yaml",
+          "sha256": "f7f38c009231673ab450bd0f0dc30bf0274a17572b8d795a2ee74c37050632fa"
+        }
+      ],
+      "arms": {
+        "control": 40170,
+        "expanded": 66934
+      },
+      "planned_updates": 20000,
+      "first_review_boundary": 4000,
+      "scope": "Only Commons membership differs between new matched arms. Same V60full4k EMA/fresh AdamW+EMA/seed49/B16/native256/BF16/LR1e-5/warm200/loss0/wide8/native128/paired32/geometry/noise/old8x validation. Deliberate newstage, not V60/V62 resume or schedule retiming. Control then expanded serialized; freeze whole states and compare161logged domain/LR/unchanged-domain observations. No auto continuation/promotion, unreviewedv4, protected-final or output correction."
+    }
+  },
+  "actual_owner_live": true,
+  "runtime_configuration_path": "/mnt/external/demosaic/runs/dino-convnext-wide-long-control-b16-v63/config.yaml",
+  "runtime_configuration_sha256": "4f7b2608ae29e2e8dc52c43987719917447cd4080f2ef72fdd6be4df255df14f",
+  "production_fractions_workers_schedule_parent_source_verified": true,
+  "startup_train_rows": [
+    {
+      "event": "train",
+      "step": 1,
+      "loss": 0.018469562754034996,
+      "lr": 5.0000000000000004e-08,
+      "grad_norm": 0.6514343619346619,
+      "seconds_per_step": 14.013146976940334,
+      "cuda_gb": 7.200467456,
+      "domain": "synthetic",
+      "linear": 0.009088465012609959,
+      "rendered": 0.010958779603242874,
+      "gradient": 0.009190156124532223,
+      "highlight": 0.021703874692320824,
+      "sensor": 0.008123055100440979,
+      "batch_sha256": "f5b565307aa64e8cd057736281b96cff11104905dd6b12c991998ec4ee8dde37"
+    },
+    {
+      "event": "train",
+      "step": 25,
+      "loss": 0.026218481361865997,
+      "lr": 1.25e-06,
+      "grad_norm": 1.1815708875656128,
+      "seconds_per_step": 1.3654906278755516,
+      "cuda_gb": 7.200467456,
+      "domain": "synthetic",
+      "linear": 0.013655799441039562,
+      "rendered": 0.014535410329699516,
+      "gradient": 0.011296167969703674,
+      "highlight": 0.030765406787395477,
+      "sensor": 0.010888202115893364,
+      "batch_sha256": "530041a6d0099a79ed0554f8819f1f36ea76df46e49c1d35ca4987a7a646a99a"
+    },
+    {
+      "event": "train",
+      "step": 50,
+      "loss": 0.010017244145274162,
+      "lr": 2.5e-06,
+      "grad_norm": 0.10041680186986923,
+      "seconds_per_step": 0.9535307048773393,
+      "cuda_gb": 7.200467456,
+      "domain": "native-RAW-synthetic",
+      "linear": 0.002726467791944742,
+      "rendered": 0.0107013750821352,
+      "gradient": 0.00945998728275299,
+      "highlight": 0.0071218120865523815,
+      "sensor": 0.0028190896846354008,
+      "batch_sha256": "1edf991b290bc75758f2ac9188764d6cad4077042657e49e4de41d673b6069ef"
+    },
+    {
+      "event": "train",
+      "step": 75,
+      "loss": 0.012643354013562202,
+      "lr": 3.7500000000000005e-06,
+      "grad_norm": 0.9371967911720276,
+      "seconds_per_step": 0.8171230704275271,
+      "cuda_gb": 7.200467456,
+      "domain": "synthetic",
+      "linear": 0.006299852393567562,
+      "rendered": 0.007929375395178795,
+      "gradient": 0.006964981555938721,
+      "highlight": 0.011122751981019974,
+      "sensor": 0.005700410343706608,
+      "batch_sha256": "1f3c04446a2935d68bbf31f45721d4c3df6c3c0709d2accfba69d74e15382a19"
+    },
+    {
+      "event": "train",
+      "step": 100,
+      "loss": 0.012721996754407883,
+      "lr": 5e-06,
+      "grad_norm": 1.8834620714187622,
+      "seconds_per_step": 0.7496743137808517,
+      "cuda_gb": 7.200467456,
+      "domain": "synthetic",
+      "linear": 0.0058009750209748745,
+      "rendered": 0.008457405492663383,
+      "gradient": 0.007528744172304869,
+      "highlight": 0.01457300130277872,
+      "sensor": 0.004821444861590862,
+      "batch_sha256": "11343a2d46dbeba348298ce43e999568f339b6e007cc2ae98222ab1da8d1ce9e"
+    }
+  ],
+  "CUDA_preflight": {
+    "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-CUDA-preflight-v1/receipt.json",
+    "sha256": "1b0fba21433328f40653a01aeabcbab9cbe7e7f895b13134a52d853417842a91",
+    "result": {
+      "status": "completed-actual-B16-native256-all-domain-data-only-stage-preflight",
+      "parent": {
+        "path": "/mnt/external/demosaic/models/dino-convnext-palette-wide-b16-v60-step4000.pt",
+        "sha256": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e"
+      },
+      "inputs": {
+        "/home/dllu/proj/demosaic/docs/results/sensor-mean-v62-first1k-review.json": "bb59963ba04138f5479fe529891a5131d73e8304b56d3a1a29d5c428d4287e35",
+        "/mnt/external/demosaic/models/dino-convnext-palette-wide-b16-v60-step4000.pt": "1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e",
+        "/home/dllu/proj/demosaic/configs/dino-convnext-wide-long-control-b16-v63.yaml": "164e80c5d32060344d7dfb46dd599b0e632f5da7d01900a356776dc079a9dc47",
+        "/home/dllu/proj/demosaic/configs/dino-convnext-wide-long-expanded-b16-v64.yaml": "f7f38c009231673ab450bd0f0dc30bf0274a17572b8d795a2ee74c37050632fa",
+        "/mnt/external/demosaic/audits/commons-bin4-frozen44732-v1/manifest.jsonl": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+        "/mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a",
+        "/mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json": "0dde4a0ca1ad68332d8a1c9d61fdc561db6501cd262d534647b979de82e3cf80",
+        "/mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json": "b3b36d3ec28b0e2d339cb28f3bc810cc17b31102f4ce6a3454fdfec9a4a4b5e3",
+        "/mnt/external/demosaic/commons-incoming-20261016-v3-quarantine/extension4/audit/manifest.jsonl": "7ed635903e4dd698081475a3667c8a14bb3b9f5f628a0917a5e336406faaecde"
+      },
+      "source_files": {
+        "src/demosaic/paired_admission.py": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825",
+        "src/demosaic/prior.py": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a",
+        "src/demosaic/metrics.py": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31",
+        "src/demosaic/inference.py": "911e71e8dcbeb1872ed591bc5234ed2b79bae063a859b4704516537d94a1df0b",
+        "src/demosaic/train.py": "d9c7bcf8dcdd6a0ccac6f83cfdbfd9079582cade46648fee0163d2d0dccb0616",
+        "src/demosaic/dino_adaptation.py": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861",
+        "src/demosaic/paired_training.py": "71a2481213bba174bd3d6b3de9ae9b89f88333635810e15d0958352d9d8d053d",
+        "src/demosaic/reference.py": "54ed094d58e245a56993ea3ce3ef9e21d2164e902d41d03bba9132bacd22891f",
+        "src/demosaic/prepare.py": "e4c0733bb260c289b3ce8aaf5f393abc5919d8d81cdcf462b70032d790429712",
+        "src/demosaic/realdata.py": "ed24db2b066531281a196e6fa074130cb0ee78a640eae5ccaaace234f5ad5421",
+        "src/demosaic/cfa.py": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252",
+        "src/demosaic/paired.py": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d",
+        "src/demosaic/audit.py": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d",
+        "src/demosaic/losses.py": "548b1481a035ad937d4a046754a74e70684864a9842296765c62079a002e5120",
+        "src/demosaic/gaussian.py": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72",
+        "src/demosaic/real_suite.py": "69d3d403d36b1230e35083cc55e2c1a485f82cd5058f6be83fb3d5c0c18a6825",
+        "src/demosaic/raw_clean.py": "a143ce351ac4e1b2425d4d561000d3e8934477fe9172c88f90ce76d9b32a7a6c",
+        "src/demosaic/raw_admission.py": "1948afbbf05129190273ab77466f26d9d27dc942716beaab16f077c8c3330803",
+        "src/demosaic/vst.py": "355124a374177f1c08271834149c5979ab3477fdf255c60aa7cee0d47792a76b",
+        "src/demosaic/io.py": "0a1599ffe7f6d935e92fc71e6b086430c6f82678a74952c3b8f31155a0bea83b",
+        "src/demosaic/data.py": "3c8855fe9d6e24d5368f356528ed217a544f185d84f58356eebfb2048cd92197",
+        "src/demosaic/__init__.py": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d",
+        "src/demosaic/calibration.py": "e86f4c602a6cd7fd855d0bcfeb790cf17ed87611f19d97926f9db174909b2d26",
+        "src/demosaic/noise.py": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce",
+        "src/demosaic/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+        "src/demosaic/precision.py": "9aa850fb5ee0e9abc3e9adc4847ce3518c1acb37c93f6bc54ff9206bb0c94c3a",
+        "src/demosaic/cli.py": "a34d98b1eab4479f67ba5a51b6c8a428db4d8ccf5ee097cd1369bd0cd1ead542",
+        "src/demosaic/reporting.py": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d",
+        "src/demosaic/model.py": "c37f530b3c4265e23af8d04b81e65e19b8ee585538874445e4a95bc337f23a71",
+        "src/demosaic/color.py": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+        "src/demosaic/dino_pyramid.py": "246944874671ceb4449b0487fcb347a00f8b82d713d5b4c9fee5a7c8a68aa95f",
+        "src/demosaic/textures.py": "b4bc304a50de272cf7fcba272e67b828c163466ffc23ea3337a6a66f076dc664",
+        "src/demosaic/nonlocal_reference.py": "7e4a00e9d90a61b772da9c1a7414bf499f84b9c9bb0239fd250fb8263dfb3f88",
+        "src/demosaic/safety.py": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7",
+        "src/demosaic/pretrained_rgb.py": "10ea25fc01bf561a3ea9087002566eb319717c338f44f54d2da46fc6ee0d7026",
+        "src/demosaic/registration.py": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202",
+        "src/demosaic/suite.py": "1a094262e1772f5df8a54cb176c2f3da189d78f48ead3f8002f24e84802059a4"
+      },
+      "fixture_steps": 7,
+      "fixture_overrides": "workers0,force-real-Commons(no procedural/smooth),val1/two images; production keeps original fractions/workers/validation",
+      "observations": {
+        "control": [
+          {
+            "event": "train",
+            "step": 1,
+            "loss": 0.02032005786895752,
+            "lr": 5.0000000000000004e-08,
+            "grad_norm": 1.104763150215149,
+            "seconds_per_step": 7.537322398042306,
+            "cuda_gb": 7.200467456,
+            "domain": "synthetic",
+            "linear": 0.010216867551207542,
+            "rendered": 0.012226004153490067,
+            "gradient": 0.01060599833726883,
+            "highlight": 0.020266197621822357,
+            "sensor": 0.009029697626829147,
+            "batch_sha256": "382199c1857e88ce4f72f291a03ff0af2274ba1a813e725e0e346c68338bdc53"
+          },
+          {
+            "event": "train",
+            "step": 2,
+            "loss": 0.009494851343333721,
+            "lr": 1.0000000000000001e-07,
+            "grad_norm": 0.3418978452682495,
+            "seconds_per_step": 4.167884440510534,
+            "cuda_gb": 7.200467456,
+            "domain": "synthetic",
+            "linear": 0.0036297179758548737,
+            "rendered": 0.00769274216145277,
+            "gradient": 0.006987781263887882,
+            "highlight": 0.009924478828907013,
+            "sensor": 0.003275360679253936,
+            "batch_sha256": "66e247864be75a3ded322b6cd62fcff6507167d1a6ccefb8c3ca03d5bd32e028"
+          },
+          {
+            "event": "train",
+            "step": 3,
+            "loss": 0.020630324259400368,
+            "lr": 1.5000000000000002e-07,
+            "grad_norm": 4.467100620269775,
+            "seconds_per_step": 3.013735884645333,
+            "cuda_gb": 7.200467456,
+            "domain": "synthetic",
+            "linear": 0.00917153712362051,
+            "rendered": 0.013677472248673439,
+            "gradient": 0.007696576416492462,
+            "highlight": 0.029873808845877647,
+            "sensor": 0.008630113676190376,
+            "batch_sha256": "b2d52e42f854a0ce8a1c5dffa2464424839c058d4b0e362caaa3a8a79ad0289b"
+          },
+          {
+            "event": "train",
+            "step": 4,
+            "loss": 0.0025977471377700567,
+            "lr": 2.0000000000000002e-07,
+            "grad_norm": 0.07899823784828186,
+            "seconds_per_step": 2.44488173146965,
+            "cuda_gb": 7.200467456,
+            "domain": "paired-RAW",
+            "paired_sensor": 0.0009130933322012424,
+            "paired_coarse_rendered": 0.003187372349202633,
+            "paired_auxiliary": 0.0009096774156205356,
+            "batch_sha256": "1bee4bcd9c2c45cc7d31020abb5efd1f964bf37789abf77fdece3814e1526950"
+          },
+          {
+            "event": "train",
+            "step": 5,
+            "loss": 0.0037837098352611065,
+            "lr": 2.5000000000000004e-07,
+            "grad_norm": 0.1081472784280777,
+            "seconds_per_step": 2.099914196366444,
+            "cuda_gb": 7.200467456,
+            "domain": "paired-RAW",
+            "paired_sensor": 0.0015563613269478083,
+            "paired_coarse_rendered": 0.004148674663156271,
+            "paired_auxiliary": 0.0015301118837669492,
+            "batch_sha256": "93d8e61203ae1079681ae47c750b8c9db42c4321947886b7970a46b9850f0e64"
+          },
+          {
+            "event": "train",
+            "step": 6,
+            "loss": 0.017901794984936714,
+            "lr": 3.0000000000000004e-07,
+            "grad_norm": 1.215293288230896,
+            "seconds_per_step": 1.8839842518403505,
+            "cuda_gb": 7.200467456,
+            "domain": "synthetic",
+            "linear": 0.009509597904980183,
+            "rendered": 0.011177337728440762,
+            "gradient": 0.009557262063026428,
+            "highlight": 0.010494641028344631,
+            "sensor": 0.00798336323350668,
+            "batch_sha256": "62d75da96e6f5f22ce995df4d15a3e6ed4229bf8d0d81d24af23ff9c9bd11fd0"
+          },
+          {
+            "event": "train",
+            "step": 7,
+            "loss": 0.008731268346309662,
+            "lr": 3.5000000000000004e-07,
+            "grad_norm": 0.11307800561189651,
+            "seconds_per_step": 1.709589310555852,
+            "cuda_gb": 7.200467456,
+            "domain": "native-RAW-synthetic",
+            "linear": 0.0025146990083158016,
+            "rendered": 0.008131898939609528,
+            "gradient": 0.007081727962940931,
+            "highlight": 0.012198131531476974,
+            "sensor": 0.0022263480350375175,
+            "batch_sha256": "8a7e961087f479ece5094623b720ae91e75f19e88e794bda5a7458385ef1ca73"
+          }
+        ],
+        "expanded": [
+          {
+            "event": "train",
+            "step": 1,
+            "loss": 0.011611909605562687,
+            "lr": 5.0000000000000004e-08,
+            "grad_norm": 0.7229561805725098,
+            "seconds_per_step": 0.8235107748769224,
+            "cuda_gb": 7.200467456,
+            "domain": "synthetic",
+            "linear": 0.005843158811330795,
+            "rendered": 0.0073212021961808205,
+            "gradient": 0.006940888240933418,
+            "highlight": 0.00907762348651886,
+            "sensor": 0.005062995012849569,
+            "batch_sha256": "38f16ab397369f83ed28226adc0d68b4c4a0f073f859a53c24a90ff82892dd70"
+          },
+          {
+            "event": "train",
+            "step": 2,
+            "loss": 0.011165203526616096,
+            "lr": 1.0000000000000001e-07,
+            "grad_norm": 0.36579445004463196,
+            "seconds_per_step": 0.7571790720103309,
+            "cuda_gb": 7.200467456,
+            "domain": "synthetic",
+            "linear": 0.004483618773519993,
+            "rendered": 0.008889470249414444,
+            "gradient": 0.008537406101822853,
+            "highlight": 0.009895259514451027,
+            "sensor": 0.003935838583856821,
+            "batch_sha256": "d977b9dc8840992fbadbe0cfb7ff8169d624ee0dfa072175dd96e7a983b2ab88"
+          },
+          {
+            "event": "train",
+            "step": 3,
+            "loss": 0.017325857654213905,
+            "lr": 1.5000000000000002e-07,
+            "grad_norm": 0.9693014025688171,
+            "seconds_per_step": 0.7409142820009341,
+            "cuda_gb": 7.200467456,
+            "domain": "synthetic",
+            "linear": 0.00746906315907836,
+            "rendered": 0.011699579656124115,
+            "gradient": 0.010357233695685863,
+            "highlight": 0.023250188678503036,
+            "sensor": 0.006462616380304098,
+            "batch_sha256": "1884304a78b58434f8607ff87f2804045bb2c3f0f6fed9d9e58cfd2b0e2a1daf"
+          },
+          {
+            "event": "train",
+            "step": 4,
+            "loss": 0.0025975860189646482,
+            "lr": 2.0000000000000002e-07,
+            "grad_norm": 0.07452086359262466,
+            "seconds_per_step": 0.7178589190007187,
+            "cuda_gb": 7.200467456,
+            "domain": "paired-RAW",
+            "paired_sensor": 0.0009130456601269543,
+            "paired_coarse_rendered": 0.0031871513929218054,
+            "paired_auxiliary": 0.000909645517822355,
+            "batch_sha256": "1bee4bcd9c2c45cc7d31020abb5efd1f964bf37789abf77fdece3814e1526950"
+          },
+          {
+            "event": "train",
+            "step": 5,
+            "loss": 0.0037829861976206303,
+            "lr": 2.5000000000000004e-07,
+            "grad_norm": 0.09917765855789185,
+            "seconds_per_step": 0.7026250026188791,
+            "cuda_gb": 7.200467456,
+            "domain": "paired-RAW",
+            "paired_sensor": 0.001556219533085823,
+            "paired_coarse_rendered": 0.004147547297179699,
+            "paired_auxiliary": 0.0015299299266189337,
+            "batch_sha256": "93d8e61203ae1079681ae47c750b8c9db42c4321947886b7970a46b9850f0e64"
+          },
+          {
+            "event": "train",
+            "step": 6,
+            "loss": 0.0178421251475811,
+            "lr": 3.0000000000000004e-07,
+            "grad_norm": 0.6021841168403625,
+            "seconds_per_step": 0.7083040090122571,
+            "cuda_gb": 7.200467456,
+            "domain": "synthetic",
+            "linear": 0.008729184977710247,
+            "rendered": 0.011185793206095695,
+            "gradient": 0.008654543198645115,
+            "highlight": 0.019178401678800583,
+            "sensor": 0.007367486134171486,
+            "batch_sha256": "b389d1822b334f39fff57dafb4f5858d19b50b3a3b0be057cb6d531d0205dd40"
+          },
+          {
+            "event": "train",
+            "step": 7,
+            "loss": 0.008733358234167099,
+            "lr": 3.5000000000000004e-07,
+            "grad_norm": 0.15831750631332397,
+            "seconds_per_step": 0.7016302157259945,
+            "cuda_gb": 7.200467456,
+            "domain": "native-RAW-synthetic",
+            "linear": 0.002514585852622986,
+            "rendered": 0.00813380442559719,
+            "gradient": 0.007081383839249611,
+            "highlight": 0.012210345827043056,
+            "sensor": 0.0022269650362432003,
+            "batch_sha256": "8a7e961087f479ece5094623b720ae91e75f19e88e794bda5a7458385ef1ca73"
+          }
+        ]
+      },
+      "matched_domain_LR_and_nonnative_hashes": [
+        {
+          "step": 1,
+          "domain": "synthetic",
+          "input_hash_equal": false
+        },
+        {
+          "step": 2,
+          "domain": "synthetic",
+          "input_hash_equal": false
+        },
+        {
+          "step": 3,
+          "domain": "synthetic",
+          "input_hash_equal": false
+        },
+        {
+          "step": 4,
+          "domain": "paired-RAW",
+          "input_hash_equal": true
+        },
+        {
+          "step": 5,
+          "domain": "paired-RAW",
+          "input_hash_equal": true
+        },
+        {
+          "step": 6,
+          "domain": "synthetic",
+          "input_hash_equal": false
+        },
+        {
+          "step": 7,
+          "domain": "native-RAW-synthetic",
+          "input_hash_equal": true
+        }
+      ],
+      "checkpoints": {
+        "control": {
+          "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-CUDA-preflight-v1/control/last.pt",
+          "sha256": "90c7bbe67fad74f507ebd983827112036d2f4a3d81075d21a70ae36b016bb17c"
+        },
+        "expanded": {
+          "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-CUDA-preflight-v1/expanded/last.pt",
+          "sha256": "0af09b257e74a08bb87f3a719e048ad8b149e835d7082e1989d24822b96db437"
+        }
+      },
+      "expanded_saved_state_and_portable_EMA": [
+        {
+          "input": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "input_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "FP16_portable_EMA_exact": true
+        },
+        {
+          "input": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "input_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "FP16_portable_EMA_exact": true
+        }
+      ],
+      "peak_cuda_allocated_bytes": 7200467456,
+      "driver_sha256": "5d1401df02c06df2c961baf25b0e358b6cdc3b1c21d398fe6ff0d82d2c14acb2",
+      "scope": "Discarded updates only; no quality/throughput/continuation claim. Actual production seed49/B16/native256/BF16/parent/20k schedule and both data manifests; unchanged training/optimizer/EMA code already has CPU restart evidence. Data-only matched arms share all settings except Commons membership."
+    }
+  },
+  "scope": "V63control40170 then V64expanded66934, each first4000 under original20000stage. Same V60full4k EMA/fresh AdamW+EMA/seed49/LR1e-5/warm200/native256/B16/BF16/loss0/wide8/native128/paired32/noise/augmentation/old8x validation. No V60 resume or schedule change, qualityclaim, auto continuation/promotion, unreviewedv4 or protectedfinal."
+}

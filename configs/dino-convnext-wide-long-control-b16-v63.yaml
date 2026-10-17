@@ -1,0 +1,65 @@
+amp: true
+augmentation_downsample: 2
+batch_size: 16
+broad_camera: true
+channels_last: true
+checkpoint_every: 1000
+cpu_threads: 4
+data_seed_per_step: true
+device: cuda
+experiment_notes: Matched longer data-only stage after V61/V62 loss-only tradeoffs.
+  Initialize both arms from completed V60wide step4000 EMA 1e9812afcfaa5322593c9d2c2314fa0d8ae5458c4e116be0f516c992c880b47e
+  with fresh AdamW/EMA, seed49, LR1e-5/warmup200 and original20000-update schedule.
+  First review4000, no automatic continuation/promotion. Only Commons training manifest
+  differs between V63control40170 and V64expanded66934; use complete reviewed4x caches
+  and original8x validation. Shared wide8 palette/loss0/native128/paired32/fractions/B16/native256/BF16/augmentation/noise/source.
+  No V60 resume or schedule retiming, output correction, unreviewed v4 corpus or protected-final
+  scoring. Additional updates and optimizer reset affect parent comparisons; matched
+  arms isolate data. Require actual preceding owner exits, completed V62 review, source/data
+  guards and genuine production-B16 all-domain data-fixture finite-state/portable-EMA
+  check before launch.
+flat_fraction: 0.1
+log_every: 25
+lr: 1.0e-05
+manifest: /mnt/external/demosaic/audits/commons-bin4-frozen44732-v1/manifest.jsonl
+min_available_gb: 12
+model:
+  camera_conditioning: true
+  dino: true
+  dino_feature_fusion: convnext-pyramid
+  dino_model: facebook/dinov3-convnext-tiny-pretrain-lvd1689m
+  dino_revision: 10d30274b4d445111e2d5bf75ac93bbd94db274b
+  physical_anchors: true
+  physical_fp32: true
+  restoration_backbone: pretrained-rgb
+  rgb_hidden_autocast: false
+  rgb_middle_skip_fp32: true
+  rgb_processing_scale: 1
+  variance_stabilization: true
+  width: 64
+noise_free_fraction: 0.1
+paired_fraction: 0.25
+paired_manifest: /mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json
+paired_workers: 2
+patch_size: 256
+precision: bfloat16
+preserve_negative_read_noise: true
+raw_clean_augmentation_downsample: 2
+raw_clean_fraction: 0.25
+raw_clean_manifest: /mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json
+raw_clean_workers: 2
+reconstruct_highlights: true
+run: /mnt/external/demosaic/runs/dino-convnext-wide-long-control-b16-v63
+seed: 49
+steps: 20000
+synthetic_fraction: 0.2
+trace_observations: true
+val_batches: 4
+validation_images: 8
+validation_manifest: /mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl
+validation_protocol: configs/evaluation.yaml
+warmup_steps: 200
+worker_start_method: spawn
+workers: 4
+flat_chroma_stops: 8
+multiscale_sensor_weight: 0
