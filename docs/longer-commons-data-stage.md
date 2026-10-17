@@ -3,7 +3,10 @@
 V63 and V64 have completed their first4,000-update review. The
 [performance report](long-commons-v63-v64-first4k-review.md) finds a small mixed
 data effect and no clear native detail gain. Neither is promoted or automatically
-continued; whole states and original20,000 schedules remain frozen. This tests
+continued by that review; its whole states and evidence remain frozen. After the
+completed RAW-head rejection, a [deliberate stateful continuation](long-commons-v63-v64-full20k.md)
+now finishes both original20,000 schedules in isolated outputs. Genuine25-update
+resume checks pass; final quality remains pending. This tests
 more scene diversity with a longer training
 schedule after [V61](sensor-mean-v61-first1k-review.md) and
 [V62](sensor-mean-v62-first1k-review.md) failed to improve the overall color/detail

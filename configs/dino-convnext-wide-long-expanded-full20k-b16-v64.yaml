@@ -1,0 +1,60 @@
+amp: true
+augmentation_downsample: 2
+batch_size: 16
+broad_camera: true
+channels_last: true
+checkpoint_every: 1000
+cpu_threads: 4
+data_seed_per_step: true
+device: cuda
+experiment_notes: Deliberate completion after full V67 RAW-head rejection. Resume
+  genuine V64 first4000 model/EMA/all89 AdamW/Python/Torch/CUDA RNG in isolated destination
+  and finish original20000 schedule. No retiming, restart, new data, source/seed/LR/precision/batch/fractions/palette
+  change or automatic promotion. Preserve original4k run/log/checkpoint/review. Matched
+  control40170 vs expanded66934 remains data-only; newV5 not substituted. Final full
+  development/analytic/color/native/GFX review required.
+flat_fraction: 0.1
+log_every: 25
+lr: 1.0e-05
+manifest: /mnt/external/demosaic/commons-incoming-20261016-v3-quarantine/extension4/audit/manifest.jsonl
+min_available_gb: 12
+model:
+  camera_conditioning: true
+  dino: true
+  dino_feature_fusion: convnext-pyramid
+  dino_model: facebook/dinov3-convnext-tiny-pretrain-lvd1689m
+  dino_revision: 10d30274b4d445111e2d5bf75ac93bbd94db274b
+  physical_anchors: true
+  physical_fp32: true
+  restoration_backbone: pretrained-rgb
+  rgb_hidden_autocast: false
+  rgb_middle_skip_fp32: true
+  rgb_processing_scale: 1
+  variance_stabilization: true
+  width: 64
+noise_free_fraction: 0.1
+paired_fraction: 0.25
+paired_manifest: /mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json
+paired_workers: 2
+patch_size: 256
+precision: bfloat16
+preserve_negative_read_noise: true
+raw_clean_augmentation_downsample: 2
+raw_clean_fraction: 0.25
+raw_clean_manifest: /mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json
+raw_clean_workers: 2
+reconstruct_highlights: true
+run: /mnt/external/demosaic/runs/dino-convnext-wide-long-expanded-b16-v64-full20k
+seed: 49
+steps: 20000
+synthetic_fraction: 0.2
+trace_observations: true
+val_batches: 4
+validation_images: 8
+validation_manifest: /mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl
+validation_protocol: configs/evaluation.yaml
+warmup_steps: 200
+worker_start_method: spawn
+workers: 4
+flat_chroma_stops: 8
+multiscale_sensor_weight: 0

@@ -3,6 +3,14 @@
 The objective is the complete project in `PROMPT.md`, including trained quality,
 not just software that executes. This checklist records the evidence required.
 
+Latest: the [original V67 joint10000 review](raw-kernel-phase-joint-v67-full10k-review.md)
+is complete and not promoted. The stronger matched RGB+DINO V63/V64 models are
+[finishing their original20000 schedules](long-commons-v63-v64-full20k.md) after
+genuine full-state resume checks; their final quality is pending. The separate
+[85,048-source matching4×/8× corpus](commons-incoming-v5.md) is completely audited
+and content spot-checked, with unchanged old holdouts. SOTA, decisive real-photo
+superiority and the10-second speed target remain unmet/unproven.
+
 | Requirement | Evidence needed | Current state |
 | --- | --- | --- |
 | Modern method and DINOv3 recommendation | Primary-source research, architecture rationale, licensed pretrained backbone and ablation | Official pinned weights; an earlier architecture's matched 20k-step ablation has a small positive gain on 427 photos. The current architecture’s [completed fresh no-context/S/B comparison through 10,000 updates](fresh-dino-capacity-10k-review.md) finds no photographic context gain. The [completed ConvNeXt10k review](dino-convnext-pyramid-v58-10k-review.md) ties no-context on photo mean with mixed paired-real scores. No consistent mature context advantage or SOTA is established |

@@ -1,0 +1,131 @@
+{
+  "status": "launched-original-V63-V64-full20000-schedules-after-genuine-resume-fixtures",
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/plan.json",
+    "sha256": "ae184b3fbbbc411b0b6b3344401d5d4835735be57e20915e370753d284746a24"
+  },
+  "source_bundle_sha256": "c9058d90d7d77e61ad7ec53293b805d8ea72da173318e38d1329e138215544c8",
+  "decision": "The mature RGB+DINO comparison improved photo means vs its parent at4000, while the data-only effect remained uncertain. Complete original schedules after the structurally constrained V67 full10000 result loses primary quality and weak detail. No claim that more updates or data will solve the problem; retain matched membership-only comparison and require final quality review.",
+  "original_planned_updates_per_arm": 20000,
+  "resume_from_step": 4000,
+  "remaining_original_updates_per_arm": 16000,
+  "only_run_and_experiment_notes_change": true,
+  "original4k_run_checkpoint_source_logs_and_review_unchanged": true,
+  "both_discarded25update_CUDA_resume_fixtures": [
+    {
+      "arm": "control",
+      "receipt": {
+        "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/fixture-control/receipt.json",
+        "sha256": "ebe10639e6dc3e6809941f76bfa6d64bd36b3df34c4bbbe6e2527ec59cdee98d"
+      },
+      "final_discarded_checkpoint": {
+        "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/fixture-control/run/last.pt",
+        "sha256": "97af2ad7ae0f668f053533e586cd7cb78c5a9bb940477c4e7004fbead035cc8c"
+      }
+    },
+    {
+      "arm": "expanded",
+      "receipt": {
+        "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/fixture-expanded/receipt.json",
+        "sha256": "14eb7437d47cfbe754067957402eb45687e957fa20fac4cd494685648c8491da"
+      },
+      "final_discarded_checkpoint": {
+        "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/fixture-expanded/run/last.pt",
+        "sha256": "3b7c5604d280264db764a0d156501a193b249eee8dc74bed68b9ebf8c61064fa"
+      }
+    }
+  ],
+  "independent_fixture_audit": {
+    "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/independent-fixtures.json",
+    "sha256": "28c8b91720a339fcb3a5c3998cfdfb3907865db3080100c6d6a869aab827eb84"
+  },
+  "training_owner_at_capture": {
+    "controller": {
+      "pid": 3228279,
+      "created": 1792233978.99,
+      "driver_sha256": "06e3dbce4b472741d0058ec76c062bacd4b3081cb65bfb52db21853ab5b3d291"
+    },
+    "plan": "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/plan.json",
+    "planned_updates_per_arm": 20000,
+    "resumed_from_step": 4000,
+    "no_new_training_budget_or_data": true,
+    "status": "training-original-schedule-from4000-to20000",
+    "updated_UTC": "2026-10-17T10:46:21.339418+00:00",
+    "arm": "control",
+    "child": {
+      "pid": 3228295,
+      "created": 1792233981.29
+    }
+  },
+  "primary_review_owner_at_capture": {
+    "updated_utc": "2026-10-17T10:49:32.922959+00:00",
+    "status": "waiting-for-actual-long-data-trainer-exit-no-GPU-evaluation-started",
+    "controller": {
+      "pid": 3231021,
+      "created": 1792234172.79,
+      "driver_sha256": "00edd0cccc2a9074abc1f42ede7bd2475bad85c24e0f713fcb13370193c5453f",
+      "worktree": "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/work"
+    },
+    "previous_owner": {
+      "pid": 3228279,
+      "created": 1792233978.99,
+      "driver_sha256": "06e3dbce4b472741d0058ec76c062bacd4b3081cb65bfb52db21853ab5b3d291"
+    },
+    "plan": "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-review-workflow-v1/plan.json",
+    "outputs": {
+      "known": "/mnt/external/demosaic/evaluation/long-commons-v63-v64-full20k-known-v1",
+      "unseen": "/mnt/external/demosaic/evaluation/long-commons-v63-v64-full20k-unseen-v1",
+      "full427": "/mnt/external/demosaic/evaluation/long-commons-v63-v64-full20k-full427-v1",
+      "analytic": "/mnt/external/demosaic/evaluation/long-commons-v63-v64-full20k-analytic-v1",
+      "gfx": "/mnt/external/demosaic/evaluation/long-commons-v63-v64-full20k-gfx-v1",
+      "three-camera": "/mnt/external/demosaic/evaluation/long-commons-v63-v64-full20k-three-camera-v1",
+      "colored-CPU": "/mnt/external/demosaic/evaluation/long-commons-v63-v64-full20k-colored-CPU-v1"
+    }
+  },
+  "primary_actual_pending_training_gate_rejected_before_output": true,
+  "primary_child_and_all_panel_outputs_absent_at_capture": true,
+  "all171_plan_guards_verified": true,
+  "actual_control_logged_startup": [
+    {
+      "event": "train",
+      "step": 4001,
+      "loss": 0.012663270346820354,
+      "lr": 9.206139689983816e-06,
+      "grad_norm": 2.022029161453247,
+      "seconds_per_step": 15.431289764121175,
+      "cuda_gb": 7.469083136,
+      "domain": "synthetic",
+      "linear": 0.006799798458814621,
+      "rendered": 0.007395271211862564,
+      "gradient": 0.007159348577260971,
+      "highlight": 0.008973322808742523,
+      "sensor": 0.005525694228708744,
+      "batch_sha256": "86c877afc4f18582759338c590a99fb14a046f56b801ac893fc5148659af9441"
+    },
+    {
+      "event": "train",
+      "step": 4025,
+      "loss": 0.01781587302684784,
+      "lr": 9.196393488042213e-06,
+      "grad_norm": 1.1042594909667969,
+      "seconds_per_step": 1.4733408667612822,
+      "cuda_gb": 7.469083136,
+      "domain": "synthetic",
+      "linear": 0.009014918468892574,
+      "rendered": 0.011222617700695992,
+      "gradient": 0.008041290566325188,
+      "highlight": 0.015324474312365055,
+      "sensor": 0.008530682884156704,
+      "batch_sha256": "d176b99cf9be393a52aa3b4080372db093d61fb630b5b48fa78677de2c5ea31b"
+    }
+  ],
+  "first4001_and4025_input_hash_domain_LR_match_fixture": true,
+  "launcher_environment_failure": {
+    "log": {
+      "path": "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-full20k-workflow-v1/fixture-control.log",
+      "sha256": "b11f7e948f21b7d6ee75e9d82409c0731a0fe2e4e883972beddb589fb21f2999"
+    },
+    "scope": "Initial invocation of uv from archived work directory created an empty environment and failed to import torch before any model/training. Actual fixtures use the existing locked repository interpreter and repository cache environment. No training restart or second fixture state exists."
+  },
+  "scope": "Training is incomplete and no quality result/promotion is claimed. Both source/data/seed49/LR1e-5/warmup200/B16/native256/BF16/workers4+2+2/fractions/palette/noise/geometry/original20000 schedules are retained. Matched Commons40170vs66934; reviewedV5 remains separate. Exact state/RNG restore does not imply deterministic CUDA optimization. Full final development/analytic/color/GFX/native/statistical/artifact review remains required; protected-final models unscored."
+}
