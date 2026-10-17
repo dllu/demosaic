@@ -91,7 +91,44 @@ known360/unseen450/full42762,020 cases, analytic1,344 cases, two full GFX output
 with eight native crops, twelve other-camera crops, and64 CPU-color predictions
 with an independent audit. Immutable previously executed panel tools are reused.
 
-Final statistics/hue/artifact checks, actual native views and an explicit quality
+The [final statistics/hue/artifact follower is now queued](results/long-commons-v63-v64-full20k-final-review-queue.json)
+under PID3269508/creation1792234878.14. It waits for the exact live primary owner
+to succeed and exit, with no child or output at launch. Status:
+`/mnt/external/demosaic/runs/long-commons-v63-v64-full20k-final-review-workflow-v1.json`.
+Calling its gate against that actual pending primary rejects before inference.
+Its frozen operators and1,483 file guards are archived in the corresponding
+benchmark directory. Verify actual PID/creation/status before acting.
+
+The [final-review operator](../scripts/review_original_long_schedules.py) retains
+the previously executed measurement and artifact kernels. It adds24 comparisons
+against each arm's own4k checkpoint to the existing84 comparisons versus the
+matched arm/V60/V58/V43:108 comparisons and27 classical witnesses over62,830
+primary cases. It preserves1,000 paired source bootstrap draws/seed42, metadata/
+observation identity and the original numerical bounds. Progress along an
+original trajectory does not isolate architecture/seed effects or prove convergence.
+
+CPU execution on the actual completed4k panels reproduces all84 published
+comparisons and coverage/arithmetic exactly. Twenty-four self-progress
+comparisons and their intervals are exactly zero. The actual pending20k owners
+are rejected. The hue selector independently verifies all2,352 retained V60/
+reference array hashes and correctly identifies the genuine4k arms as absent
+from that baseline grid. No inference or fabricated20k data is used in these
+checks. The future completed20k path remains unexecuted.
+
+After primary completion, the follower measures only the2,352 new hue predictions
+and separately reuses2,352 audited V60/reference arrays with unchanged source/
+observations/precision. Independent checks rebuild28,224 fields and864 group
+scalars. It then checks both original20k states and38 native PNGs/26 F32 arrays/
+four full RGB16 files. Four supplementary CPU neon/platform predictions and
+their independent audit follow. All56 new native views and an explicit quality
+decision remain manual; none is replaced by an integrity receipt.
+
+The isolated work directory now links its relative GFX and three-camera paths
+to existing warm repository caches. Both RAF hashes and all three other camera
+RAW hashes verify locally. No originals were recopied or read, and the frozen
+selection/config/model source did not change.
+
+Final actual native views and an explicit quality
 decision remain required. Reports must include at least two unresized noisy/
 denoised/exact-GT photo triplets per improved model and accurately labeled GFX
 sky/building/foliage/fence references. The independent ISO100 exposure is not GT.
