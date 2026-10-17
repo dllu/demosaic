@@ -107,7 +107,9 @@ was decoded for this experiment.
 
 CPU compilation and numerical agreement do not establish CUDA speed or
 numerical equivalence. Read the queued actual 10,000 CUDA attribution first.
-If it supports this candidate, run a separate bounded CUDA comparison after
-the existing owned batch sweep exits, retaining the original weights, precision,
-inputs and physical path. Any promising change still needs numerical, native
-quality and full-frame validation before it becomes an inference option.
+A [conditional bounded CUDA comparison](raw-kernel-compiled-CUDA-trial.md) now
+waits after the existing owned batch sweep. It reads the actual current trace
+before deciding whether to run, retaining the original weights, precision,
+inputs and physical path. Its real-runner CPU switching/reference check passes;
+CUDA remains unexecuted. Any promising change still needs numerical, native
+quality and full-frame validation before becoming an inference option.
