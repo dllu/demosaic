@@ -1,11 +1,13 @@
 # Smaller multiscale measured-CFA loss
 
-V62 completed its first **1,000 updates** of the separate **0.001** coefficient
-trial and is being evaluated after the completed
-[V61 review](sensor-mean-v61-first1k-review.md). V61's .01 loss reduces bright
-saturated-field bias but worsens photographic/paired-real accuracy and weak
-detail. V62 tests whether less optimization pressure preserves more of the
-original objective. No V62 quality gain is established yet.
+V62 completed its first **1,000 updates** and its
+[quality review](sensor-mean-v62-first1k-review.md). Stop this **0.001** recipe:
+photo PSNR ties the control, while SSIM, unseen-camera RAW and weak carriers
+regress. Bright saturated-field bias improves but remains large. It follows the
+[negative .01 trial](sensor-mean-v61-first1k-review.md); reducing optimization
+pressure recovers accuracy but does not establish an improved general model.
+The next separate comparison will isolate more reviewed Commons data and longer
+training, without this loss.
 
 [Actual launch, source/config/data hashes, CPU/CUDA receipts and logged-input matches](results/sensor-mean-v62-first1k-launch.json).
 [Configuration](../configs/dino-convnext-palette-sensor-mean-small-b16-v62.yaml).
