@@ -304,3 +304,14 @@ review. Phase head-only features stayed frozen; joint training is a hypothesis,
 not evidence of a quality gain or convergence. Complete development/color/native/
 GFX/artifact jobs are serialized behind verified actual owners. Protected-final
 model scores remain unused. The original quality and speed goals remain open.
+
+The [completed V67 first2k review](raw-kernel-phase-joint-v67-first2k-review.md)
+finds photo32.33964/.927021, +2.81345dB over initialized V66 but3.32464dB below
+mature V60. Known/unseen CFA improve6.07209/7.01233dB; all primary means remain
+below V60. All26 native panels were viewed: less grain, but lost cords/soft detail
+and strong weak-carrier attenuation persist. Hue RMSE improves while mean bias
+increases versus V66. Independent state94/94/92,50,264 primary cases/48 comparisons,
+896 analytic cases,1,176 hue predictions and full101.996MP RGB16/native checks
+pass. Shared-machine52.042s misses10s. No promotion or convergence claim;8,000
+original updates remain, requiring a verified isolated continuation before final
+full review. SOTA and the requested large real-photo advantage remain unmet.

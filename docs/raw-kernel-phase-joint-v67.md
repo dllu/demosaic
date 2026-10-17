@@ -5,7 +5,7 @@ V67 is a separately initialized joint restoration-training stage, following the
 matched head warmup but remains grainy and far below mature V60. Both head
 warmups froze the existing restoration features. This motivates testing joint
 optimization, without claiming those frozen features caused the quality deficit.
-**No V67 quality result yet; V43 remains the working reference.**
+The [completed2k review](raw-kernel-phase-joint-v67-first2k-review.md) finds photo+2.81345dB over V66, still3.32464dB below mature V60, with remaining grain/weak-detail loss. **No promotion; V43 remains the working reference.**
 
 [Recipe](../configs/dino-convnext-raw-kernel-phase-joint-b16-v67.yaml).
 [Executed preflights](results/raw-kernel-phase-joint-v67-preflight.json).
@@ -83,7 +83,7 @@ buffers exact, and original10k recipe/source/data/RNG/21 logged LRs verified.
 Last LR is9.963796657738579e-5. This intermediate state audit performs no
 inference and supplies no quality result; the first full review remains at2000.
 
-## Running training and serialized review
+## Executed training and serialized review
 
 Training controller PID2848434/creation1792218667.87, child2848444/
 1792218668.09, reports32,931,920 trainable parameters. At launch publication the
@@ -117,8 +117,13 @@ Status:
 Verify current PID/creation/status before acting; do not duplicate or infer
 completion from this launch snapshot. All owners and immutable plan guards were
 independently verified at publication. Actual native viewing and quality decisions
-remain required. The report must include two native exact-GT photo triplets plus
+are complete in the [first2k review](raw-kernel-phase-joint-v67-first2k-review.md). All four owners exited; PID records here are historical launch identities. The report must include two native exact-GT photo triplets plus
 sky/building/foliage/fence GFX regions with accurate non-GT reference labels. Warm
 RAF caches avoid the source drives; those scenes/siblings remain out of training.
 Protected-final model scores remain unused. No promotion or continuation is
 authorized by a queue result alone; assess full scores and native quality first.
+
+The original10k budget has8,000 updates remaining. Verify an isolated continuation
+from complete step2000 state, preserving this stopped run/log/source and its
+immutable review, before further training. That continuation is not launched by
+the first2k report; full final review remains required before promotion.
