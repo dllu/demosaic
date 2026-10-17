@@ -1,0 +1,116 @@
+{
+  "status": "completed-original10000-training-state-and-resume-audits-awaiting-final-quality",
+  "recorded_UTC": "2026-10-17T10:00:04.648261+00:00",
+  "checkpoint": {
+    "path": "/mnt/external/demosaic/models/dino-convnext-raw-kernel-phase-joint-b16-v67-step10000.pt",
+    "sha256": "a37e6c84597de540440bbf29c93eb79c9ddbf74024b39843a2941143fe6470fc",
+    "step": 10000
+  },
+  "training_workflow": {
+    "receipt": {
+      "path": "/mnt/external/demosaic/runs/raw-kernel-phase-joint-v67-full10k-workflow-v1.json",
+      "sha256": "21fa000202fda6bef2265a5b80ac0ffe85c4d202cebc5c2c4778b6fdd0fd2c47"
+    },
+    "record": {
+      "controller": {
+        "pid": 2949308,
+        "created": 1792222522.64,
+        "driver_sha256": "a0b6bf27b5488ba658af5281322984216c9c8ca7568b7d75277208bc95468065"
+      },
+      "plan": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-workflow-v1/plan.json",
+      "scope": "Resume exact2k model/EMA/Adam/RNG into isolated output and finish original10000 updates. Preserve original2k run/review. No automatic promotion or new schedule.",
+      "status": "completed-original-joint10000-awaiting-full-quality-and-native-review",
+      "updated_UTC": "2026-10-17T09:53:02.088510+00:00",
+      "plan_sha256": "45c5c2795df148c5405060ed6b6a93659357128bd27fdc2098cf72231c37fd93",
+      "child": {
+        "pid": 2949312,
+        "created": 1792222523.48
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-convnext-raw-kernel-phase-joint-b16-v67-step10000.pt",
+        "sha256": "a37e6c84597de540440bbf29c93eb79c9ddbf74024b39843a2941143fe6470fc"
+      },
+      "finite94model94EMA92Adam": true,
+      "normalization_buffers_bitwise_parent": true,
+      "completed_updates": 10000,
+      "planned_updates": 10000,
+      "resumed_from_step": 2000,
+      "original2000_run_and_review_unchanged": true,
+      "all2_fixture_traced_input_hashes_domains_LRs_exact": true,
+      "boundary_check": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-workflow-v1/boundary-check.json",
+      "boundary_check_sha256": "67c035a8e5ac6e8c1e4a286acf1d212ad6e7b042765648488e4ee8b3963f5b19",
+      "training_log_sha256": "f5e1c9e79e373858da6ce537f16f777da244b9c3a808d906cc70b2c951fe9412"
+    }
+  },
+  "controller_whole_state_audit": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-workflow-v1/boundary-check.json",
+    "sha256": "67c035a8e5ac6e8c1e4a286acf1d212ad6e7b042765648488e4ee8b3963f5b19"
+  },
+  "independent_primary_whole_state_audit": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-review-workflow-v1/independent10000-state.json",
+    "sha256": "2aabaf9e7b1cf9d9ec2339bf354fc728982a754d087a49b89da7c2080f1fced9"
+  },
+  "all_selected_controller_and_independent_audit_fields_exact": {
+    "step": 10000,
+    "original_planned_updates": 10000,
+    "source_bundle_sha256": "fc0297db08d659523fdcefe1ef0e7a4da12ae97f648e95b1579db65de93d268a",
+    "model_tensors": 94,
+    "EMA_tensors": 94,
+    "AdamW_states": 92,
+    "trainable_parameters": 32931920,
+    "all_state_finite": true,
+    "normalization_buffers_bitwise_parent": true,
+    "all_original_recipe_fields_exact_except_resolved_protocol": true,
+    "four_manifest_hashes_and_snapshot_contents_exact": true,
+    "complete_RNG_present": true,
+    "all_logged_LRs_match_original10000_schedule": true,
+    "training_log": {
+      "path": "/mnt/external/demosaic/runs/dino-convnext-raw-kernel-phase-joint-b16-v67-full10k/metrics.jsonl",
+      "sha256": "f5e1c9e79e373858da6ce537f16f777da244b9c3a808d906cc70b2c951fe9412",
+      "train_rows": 402
+    },
+    "learning_rates": [
+      1e-05
+    ],
+    "isolated_resume": {
+      "from_step": 2000,
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-convnext-raw-kernel-phase-joint-b16-v67-step2000.pt",
+        "sha256": "25d3bb57ff0588a804d161c957f28ebdcfc32e666bac37b52c35fd0b92de9b17"
+      },
+      "review": {
+        "path": "/home/dllu/proj/demosaic/docs/results/raw-kernel-phase-joint-v67-first2k-review.json",
+        "sha256": "7fd672fc87f5fee695638ee37d6bb636fd5e1ff55984af562a99a00cc1b35e5c"
+      },
+      "prefix": {
+        "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-workflow-v1/original2000-metrics.jsonl",
+        "sha256": "b4d36652ebbdd53794d71f23abbda9ebfaf830f72eba51f9516ffd5fb8c3cdf9"
+      },
+      "prefix_rows": 81,
+      "resumed_rows": 321,
+      "first_resumed_step_logged": 2001,
+      "only_run_and_notes_differ_from_original_recipe": true
+    }
+  },
+  "changed_parent_parameter_tensor_counts": {
+    "model": 92,
+    "ema": 92
+  },
+  "training_controller_and_trainer_actual_exit_confirmed": true,
+  "primary_owner_live_at_capture": {
+    "pid": 2969247,
+    "created": 1792223265.61,
+    "driver_sha256": "2583f1cc95c91701a43107e43640c9c11241c39a5aef379b5f5e5a3336c86a34"
+  },
+  "primary_status_at_capture": "evaluating-full-GFX",
+  "early_native_review": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-v67-full10k-early-native-review-v1.json",
+    "sha256": "5c7eb1c021a0c6c3a283944c14be6def4a9bc098fe0ceba65bad263a34aaf94f"
+  },
+  "new_native_views_completed": 6,
+  "new_native_views_required_total": 28,
+  "quality_review_complete": false,
+  "promoted": false,
+  "working_reference": "V43 step2000 unchanged",
+  "scope": "Completion of the declared original10000 joint schedule, with exact2k model/EMA/AdamW/RNG state restoration into an isolated run and original402-row log/prefix/LR/recipe/source/data audited. No training-quality/convergence, architecture/unfreezing causal, SOTA, broad real-photo superiority or speed claim. Saved restoration checkpoints omit frozen DINO weights; actual DINO state/gradient checks are separate preflight evidence. Six new actual native views begin final review; full statistics/analytic/hue/GFX/artifact/28view decision remains pending."
+}

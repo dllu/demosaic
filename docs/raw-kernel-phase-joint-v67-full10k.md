@@ -1,10 +1,14 @@
 # Finishing the original V67 joint schedule
 
-V67 is continuing from its fully reviewed step2,000 checkpoint toward the
-original10,000 updates. It restores the training model, EMA, all92 AdamW states,
-best value and Python/Torch/CUDA RNG. **This is the remaining8,000 updates of the
-original schedule.** V43 remains the working reference; no final quality result
-or promotion follows from the resume checks.
+V67 has completed its **original 10,000-update schedule**. The controller and
+separate primary state audit agree on finite 94 model/94 EMA/92 AdamW states,
+all 402 log rows, the unchanged original source/data/recipe and the exact 2k
+resume boundary. Final LR is 1e-5. Full quality evaluation and native review are
+in progress; V43 remains the working reference and no promotion is made.
+
+[Actual completed training/state audit receipt](results/raw-kernel-phase-joint-v67-full10k-training-completed.json).
+Frozen final checkpoint SHA256:
+`a37e6c84597de540440bbf29c93eb79c9ddbf74024b39843a2941143fe6470fc`.
 
 [Completed2k performance/native review](raw-kernel-phase-joint-v67-first2k-review.md).
 [Continuation recipe](../configs/dino-convnext-raw-kernel-phase-joint-full10k-b16-v67.yaml).
@@ -46,19 +50,20 @@ boundary. Actual production rows2001 and2025 match the fixture's input hashes,
 domains and learning rates. These checks establish state restoration and input protocol,
 not deterministic CUDA optimization, convergence or trained quality.
 
-## Live training and final review work
+## Completed training and live final review
 
-Controller PID2949308/creation1792222522.64, trainer2949312/1792222523.48.
+Training controller PID2949308/creation1792222522.64 and trainer2949312/1792222523.48
+have both exited successfully.
 Status:
 `/mnt/external/demosaic/runs/raw-kernel-phase-joint-v67-full10k-workflow-v1.json`.
 Immutable plan, source guards and logs:
 `/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-workflow-v1/`.
 Verify actual PID/creation/state before acting; do not duplicate the run.
 
-The controller finishes at10000, independently verifies94/94/92 and the exact
-log/schedule/prefix protocol, preserves original2k guards, then freezes a new
-checkpoint. The three-stage final review is now queued behind that exact owner's
-successful exit. [Launch and executed CPU checks](results/raw-kernel-phase-joint-v67-full10k-review-queue.json).
+The controller completed at 10000, independently verified 94/94/92 and the exact
+log/schedule/prefix protocol, preserved original2k guards, then froze the final
+checkpoint. The primary review has passed its separate original10000 state
+audit and is running quality panels. Later stages retain their serial order. [Launch and executed CPU checks](results/raw-kernel-phase-joint-v67-full10k-review-queue.json).
 
 1. Primary panels: an independent state audit at 10,000; 288 known-CFA cases,
    360 unseen-CFA cases and 49,616 full-photo/procedural cases; 896 analytic
@@ -73,7 +78,7 @@ successful exit. [Launch and executed CPU checks](results/raw-kernel-phase-joint
    19 native PNGs, 23 float arrays and two full RGB16 TIFFs, with unchanged noisy and
    reference pixels and display transforms.
 
-The waiting primary/statistics/artifact owners are respectively PID 2969247,
+The primary/statistics/artifact owners are respectively PID 2969247,
 2969624 and 2969626 (creation times and hashes in the launch record). At launch
 all three are live, child-free and have produced no review output. Status files
 under `/mnt/external/demosaic/runs/` use the common prefix
@@ -85,9 +90,9 @@ The new review gates replay actual completed V65/V66/V67 gates and entire saved
 state boundaries exactly, including the genuine isolated 2,025-update resume boundary.
 All 36 retained V67 comparisons reproduce; 12 self comparisons are exactly zero.
 Actual pending training, primary and statistics owners reject downstream work
-before output. All archived Python sources parse. The future completed-10,000 gate
-has not executed; these checks establish review protocol, without new performance
-evidence. Queued tools and earlier source/data are archived and hash-guarded.
+before output. All archived Python sources parse. The actual completed-training gate and separate 10,000 state audit now pass.
+The earlier preflights establish review protocol; completed quality evidence
+still requires the running downstream panels/audits. Queued tools and earlier source/data are archived and hash-guarded.
 
 Actual native views, two exact-GT photo triplets and all four accurately labeled
 GFX regions (sky/building/foliage/fence) remain required before a quality decision.
@@ -118,3 +123,12 @@ The eventual positive publication path still requires all five final owners to
 succeed and exit, the exact 402-row resume boundary, all audits, 28 new actual
 native views, fresh visual notes and an explicit quality decision. The earlier
 images exercise the assembly code only; they do not replace final-model crops.
+
+Six new native panels have now been actually viewed, alongside their six
+retained first2k counterparts: two exact-GT photographs, two known real pairs
+and two unseen real pairs. All PNG/checkpoint/metadata hashes verify, and all
+noisy/reference panel pixels match the first2k views bitwise. The real-pair AHD
+panels remain auxiliary references, not exact RGB GT. The private actual-view
+receipt contains six of the required 28 new images; GFX, analytic, three-camera,
+CPU color and hue/highlight views and final audits remain required. These early
+views do not complete the performance report or make a quality decision.
