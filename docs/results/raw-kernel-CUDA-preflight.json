@@ -1,0 +1,284 @@
+{
+  "status": "completed-RAW-head-CUDA-engineering-review-no-quality-trial",
+  "execution": {
+    "status": "completed-discarded-B16-native256-CUDA-RAW-kernel-engineering-checks",
+    "plan": "/mnt/external/demosaic/benchmarks/raw-kernel-CUDA-preflight-v1/plan.json",
+    "plan_sha256": "fdeca864373cef31117bd2fec84802d7a1054cab71055a36eff7ef2c5e181a57",
+    "preceding_completed_workflow": {
+      "path": "/mnt/external/demosaic/runs/long-commons-v63-v64-first4k-artifact-workflow-v1.json",
+      "sha256": "9c21e9ab3f16f7004f7887e49f78131a4c3d5878efaa280f5b2382e6cbdefc7c",
+      "result": {
+        "updated_utc": "2026-10-17T04:58:04.164421+00:00",
+        "status": "completed-independent-artifact-integrity-awaiting-actual-native-review-and-quality-decision",
+        "controller": {
+          "pid": 2060575,
+          "created": 1792211119.29,
+          "driver_sha256": "77d89774b96288633dcca30fe153940e3df0467aaf6ad01f4c94c32d0cc4d0c7"
+        },
+        "previous_owner": {
+          "pid": 2055575,
+          "created": 1792210364.08,
+          "driver_sha256": "2e8d266f631db869ee87557aacb357ee3bd4654554216352243c8bfa83211685"
+        },
+        "plan": "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-first4k-artifact-workflow-v1/plan.json",
+        "output": "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-first4k-artifact-workflow-v1/artifact-audit",
+        "child_pid": 2119405,
+        "audit": "/mnt/external/demosaic/benchmarks/long-commons-v63-v64-first4k-artifact-workflow-v1/artifact-audit/audit.json",
+        "audit_sha256": "c915bf8e73765f0205b5054c69593cde197eb22cdc744b0ecc0e208c888febdf"
+      }
+    },
+    "initialization": {
+      "all_existing_parent_EMA_tensors_exact": true,
+      "only_new_tensors": [
+        "pretrained_rgb.raw_kernel.coefficients.bias",
+        "pretrained_rgb.raw_kernel.coefficients.weight"
+      ],
+      "actual_DINO_backbone_frozen": true,
+      "initial_GPU_BF16_output_exact_bilinear_not_parent_quality": true
+    },
+    "checkpoint": {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-CUDA-preflight-v1/actual-B16/last.pt",
+      "sha256": "e82fa51f5ba11b58423e16caccd8205f90254a485095b5f0622bbb4f9271b165"
+    },
+    "all93_model93_EMA91_AdamW_finite": true,
+    "original_planned_updates": 20000,
+    "training_observations": [
+      {
+        "event": "train",
+        "step": 1,
+        "loss": 0.06812064349651337,
+        "lr": 5.0000000000000004e-08,
+        "grad_norm": 0.08230362087488174,
+        "seconds_per_step": 58.000317031983286,
+        "cuda_gb": 21.328155136,
+        "domain": "synthetic",
+        "linear": 0.035071246325969696,
+        "rendered": 0.03955616056919098,
+        "gradient": 0.037000518292188644,
+        "highlight": 0.07242687046527863,
+        "sensor": 0.023285778239369392,
+        "batch_sha256": "382199c1857e88ce4f72f291a03ff0af2274ba1a813e725e0e346c68338bdc53"
+      },
+      {
+        "event": "train",
+        "step": 2,
+        "loss": 0.02884165570139885,
+        "lr": 1.0000000000000001e-07,
+        "grad_norm": 0.09965567290782928,
+        "seconds_per_step": 29.48094085440971,
+        "cuda_gb": 21.328155136,
+        "domain": "synthetic",
+        "linear": 0.009378264658153057,
+        "rendered": 0.024824244901537895,
+        "gradient": 0.02662060223519802,
+        "highlight": 0.03754975274205208,
+        "sensor": 0.006342334672808647,
+        "batch_sha256": "66e247864be75a3ded322b6cd62fcff6507167d1a6ccefb8c3ca03d5bd32e028"
+      },
+      {
+        "event": "train",
+        "step": 3,
+        "loss": 0.06183439493179321,
+        "lr": 1.5000000000000002e-07,
+        "grad_norm": 0.09109556674957275,
+        "seconds_per_step": 19.985627981989335,
+        "cuda_gb": 21.328155136,
+        "domain": "synthetic",
+        "linear": 0.030280813574790955,
+        "rendered": 0.037303321063518524,
+        "gradient": 0.030011899769306183,
+        "highlight": 0.07654000073671341,
+        "sensor": 0.02246728166937828,
+        "batch_sha256": "b2d52e42f854a0ce8a1c5dffa2464424839c058d4b0e362caaa3a8a79ad0289b"
+      },
+      {
+        "event": "train",
+        "step": 4,
+        "loss": 0.008250202052295208,
+        "lr": 2.0000000000000002e-07,
+        "grad_norm": 0.01856125332415104,
+        "seconds_per_step": 15.264182724466082,
+        "cuda_gb": 21.328155136,
+        "domain": "paired-RAW",
+        "paired_sensor": 0.0034139701165258884,
+        "paired_coarse_rendered": 0.008917294442653656,
+        "paired_auxiliary": 0.0037758497055619955,
+        "batch_sha256": "1bee4bcd9c2c45cc7d31020abb5efd1f964bf37789abf77fdece3814e1526950"
+      },
+      {
+        "event": "train",
+        "step": 5,
+        "loss": 0.00955001451075077,
+        "lr": 2.5000000000000004e-07,
+        "grad_norm": 0.025652630254626274,
+        "seconds_per_step": 12.413648360362277,
+        "cuda_gb": 21.328155136,
+        "domain": "paired-RAW",
+        "paired_sensor": 0.0043214596807956696,
+        "paired_coarse_rendered": 0.009550582617521286,
+        "paired_auxiliary": 0.004532633349299431,
+        "batch_sha256": "93d8e61203ae1079681ae47c750b8c9db42c4321947886b7970a46b9850f0e64"
+      },
+      {
+        "event": "train",
+        "step": 6,
+        "loss": 0.06250117719173431,
+        "lr": 3.0000000000000004e-07,
+        "grad_norm": 0.12723679840564728,
+        "seconds_per_step": 10.507237763997788,
+        "cuda_gb": 21.328155136,
+        "domain": "synthetic",
+        "linear": 0.03156702220439911,
+        "rendered": 0.03922225534915924,
+        "gradient": 0.03331538289785385,
+        "highlight": 0.05809742212295532,
+        "sensor": 0.021817466244101524,
+        "batch_sha256": "62d75da96e6f5f22ce995df4d15a3e6ed4229bf8d0d81d24af23ff9c9bd11fd0"
+      },
+      {
+        "event": "train",
+        "step": 7,
+        "loss": 0.02658182941377163,
+        "lr": 3.5000000000000004e-07,
+        "grad_norm": 0.05349200591444969,
+        "seconds_per_step": 9.14697611511552,
+        "cuda_gb": 21.328155136,
+        "domain": "native-RAW-synthetic",
+        "linear": 0.005393489729613066,
+        "rendered": 0.028529947623610497,
+        "gradient": 0.02809569053351879,
+        "highlight": 0.036659639328718185,
+        "sensor": 0.004478333052247763,
+        "batch_sha256": "8a7e961087f479ece5094623b720ae91e75f19e88e794bda5a7458385ef1ca73"
+      }
+    ],
+    "FP16_portable_predictions_and_saved_state_RNG_restoration": [
+      {
+        "input": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+        "input_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+        "shape": [
+          1,
+          3,
+          256,
+          256
+        ],
+        "FP16_portable_EMA_exact": true
+      },
+      {
+        "input": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+        "input_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+        "shape": [
+          1,
+          3,
+          256,
+          256
+        ],
+        "FP16_portable_EMA_exact": true
+      }
+    ],
+    "extra_saved_checks": {
+      "all_manual_and_portable_EMA_tensors_including_DINO_exact": true,
+      "BF16_photos": [
+        {
+          "input": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "input_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+          "prediction": "/mnt/external/demosaic/benchmarks/raw-kernel-CUDA-preflight-v1/portable-photo-0-BF16-f32.npy",
+          "prediction_sha256": "0c14aa3aa891f2836dc7a0e72dddaf2f0e716357aeeec49195df130a129f5886",
+          "BF16_portable_EMA_exact": true
+        },
+        {
+          "input": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "input_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+          "prediction": "/mnt/external/demosaic/benchmarks/raw-kernel-CUDA-preflight-v1/portable-photo-1-BF16-f32.npy",
+          "prediction_sha256": "07eeb2d37f52e437db30895fe7306aea9e414df41567a49a046913846abebc37",
+          "BF16_portable_EMA_exact": true
+        }
+      ],
+      "clean_constant_cases": [
+        {
+          "shot": 0.0,
+          "read": 0.0,
+          "precision": "float32",
+          "clean_native64_fields": 16,
+          "maximum_RGB_error": 5.960464477539063e-08
+        },
+        {
+          "shot": 0.0,
+          "read": 0.0,
+          "precision": "bfloat16",
+          "clean_native64_fields": 16,
+          "maximum_RGB_error": 5.960464477539063e-08
+        },
+        {
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "precision": "float32",
+          "clean_native64_fields": 16,
+          "maximum_RGB_error": 5.960464477539063e-08
+        },
+        {
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "precision": "bfloat16",
+          "clean_native64_fields": 16,
+          "maximum_RGB_error": 5.960464477539063e-08
+        }
+      ],
+      "total_clean_constant_fields": 64,
+      "native256_B1_BF16_gradient_norms": {
+        "pretrained_rgb.network.m_head.weight": 5.789631359220948e-06,
+        "pretrained_rgb.network.m_tail.weight": 3.147852396523376e-07,
+        "pretrained_rgb.raw_kernel.coefficients.weight": 0.06127990409731865
+      },
+      "frozen_DINO_has_no_gradients": true,
+      "scope": "Engineering checks of discarded seven-update state. Clean fields contain no added noise. Not noisy-field unbiasedness or restoration-quality evidence."
+    },
+    "peak_cuda_allocated_bytes": 21328155136,
+    "device": "NVIDIA GB10",
+    "compute_capability": [
+      12,
+      1
+    ],
+    "driver_sha256": "59b817a60f42d6e3b7905b4bfa60bc3e45a46c40dcf0adf07ba1a25b245397cc",
+    "scope": "Seven discarded B16/native256/BF16 updates; zero workers, forced real Commons, val2. State/optimizer/RNG restoration checks do not establish deterministic CUDA optimization after restart. Constants are clean native64 fields, with no added noise. Peak CUDA allocation is not total unified RAM or throughput. No quality trial, production continuation, source/data substitution, model promotion or protected-final scores."
+  },
+  "independent_saved_state_audit": {
+    "status": "completed-independent-saved-CUDA-fixture-state-and-artifact-audit",
+    "receipt": "/mnt/external/demosaic/benchmarks/raw-kernel-CUDA-preflight-v1/receipt.json",
+    "receipt_sha256": "0b42a2e1ee1768c52c42cf2465ab8d5c16c84391b9feb7ce8c61594ad64e4015",
+    "checkpoint": {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-CUDA-preflight-v1/actual-B16/last.pt",
+      "sha256": "e82fa51f5ba11b58423e16caccd8205f90254a485095b5f0622bbb4f9271b165"
+    },
+    "verified_archived_files": 127,
+    "verified_inputs": 11,
+    "model_tensors": 93,
+    "EMA_tensors": 93,
+    "finite_AdamW_states": 91,
+    "all_original_recipe_fields_except_resolved_protocol_exact": true,
+    "complete_RNG_and_seven_all_domain_logs": true,
+    "source_bundle_sha256": "411d1669b050b8074d7a9d030b3c42ef1af6764c6f20efbd08ecf5466dc632d8",
+    "CUDA_initialized": false,
+    "driver_sha256": "2cdde0541eee9c05d8ac25f1646844ad29abc782c79009265c0a69eee6db0c39",
+    "scope": "Independent CPU inspection of actual discarded seven-update GPU state and saved artifacts. It does not rerun CUDA gradients or constant tests; those are executed evidence in the pinned original receipt. No quality or deterministic CUDA optimization claim."
+  },
+  "source_receipts": [
+    {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-CUDA-preflight-v1/receipt.json",
+      "sha256": "0b42a2e1ee1768c52c42cf2465ab8d5c16c84391b9feb7ce8c61594ad64e4015"
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-CUDA-preflight-v1/independent-saved-state-audit.json",
+      "sha256": "a05186c5594bab78dc81593df765f2edeffde5a677a49ecdb62fcb02576577cd"
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-CUDA-preflight-v1/plan.json",
+      "sha256": "fdeca864373cef31117bd2fec84802d7a1054cab71055a36eff7ef2c5e181a57"
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-CUDA-preflight-v1/CUDA-execution.log",
+      "sha256": "11b327eb3badc0932b3c909303080523d807ca93d5cf9adcfe08372d85f4a55c"
+    }
+  ],
+  "limits": "Seven discarded joint-training updates from V60 EMA, frozen411d source. Not the newer head-only option, a production quality trial, convergence or deterministic CUDA restart proof."
+}

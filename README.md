@@ -20,6 +20,8 @@ adds a recent comparator with mixed real/synthetic results.
 The [completed 4,000-update palette review](docs/wide-flat-palette-full4k-review.md)
 finds small photo gains and better highly saturated colors; bright-color errors,
 fine-detail loss and paired-real tradeoffs still prevent promotion.
+The [expanded-data comparison](docs/long-commons-v63-v64-first4k-review.md)
+finds a small mixed effect at 4,000 updates; native crops still show soft detail.
 
 Native 160×160 validation crops: noisy → denoised → GT, using V43 step 2000
 (FP16, ISO12800 synthetic noise prior). These are 100% crops at the 8×8-binned

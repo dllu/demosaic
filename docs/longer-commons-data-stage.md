@@ -1,12 +1,19 @@
 # Longer matched Commons-data comparison
 
-V63 and V64 have both frozen at 4,000 updates and the trainer has exited. Their
-controlled quality evaluation is running. This tests more scene diversity with a
-longer training
+V63 and V64 have completed their first4,000-update review. The
+[performance report](long-commons-v63-v64-first4k-review.md) finds a small mixed
+data effect and no clear native detail gain. Neither is promoted or automatically
+continued; whole states and original20,000 schedules remain frozen. This tests
+more scene diversity with a longer training
 schedule after [V61](sensor-mean-v61-first1k-review.md) and
 [V62](sensor-mean-v62-first1k-review.md) failed to improve the overall color/detail
-tradeoff. **No new quality gain is established yet.** V43 remains the working
+tradeoff. V43 remains the working
 reference, with the standing real-camera tests and protected-final boundary intact.
+
+The preparation/launch/queue notes below retain the original workflow history.
+All primary, statistics/hue and artifact stages have now completed and their
+owners exited. The completed report supersedes their historical pending-status
+statements and records the actual quality decision.
 
 [Actual launch, frozen plans/configs/source, production startup and CUDA checks](results/long-commons-v63-v64-first4k-launch.json).
 [Control recipe](../configs/dino-convnext-wide-long-control-b16-v63.yaml).

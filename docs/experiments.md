@@ -1,5 +1,16 @@
 # Experiment evidence
 
+The [V63/V64 completed first4k data comparison](long-commons-v63-v64-first4k-review.md)
+tests40,170 versus66,934 Commons sources under matched original20k schedules.
+Expanded gains .01495dB photo sRGB PSNR with a source interval spanning zero,
+and loses .01989/.01278dB on known/unseen measured-CFA means. Highly saturated
+bright color bias improves versus control but remains worse than the parent.
+All58 native triplets have verified view receipts (52 new, six identical reused),
+with four full101.996MP RGB16 outputs and independent state/statistics audits.
+Neither arm is promoted or automatically continued; V43 remains the working
+reference. This boundary does not establish convergence or rule out more-data
+benefits with another budget or architecture.
+
 All numbers below are local observations on the NVIDIA GB10, not reproduced
 paper results. The project has not passed its final quality gate.
 

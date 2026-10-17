@@ -105,8 +105,8 @@ are finite. Commons, native-RAW and paired-RAW domains are exercised.
 Those fixtures use batch1/native64/FP32, zero workers, forced smooth Commons
 and two validation images. Their short losses and validation values are not
 restoration-quality evidence. The executed package, operator, inputs, logs and
-full states are archived. No new GPU inference or training was started while
-the owned V63/V64 workflow runs.
+full states are archived. This CPU fixture started no new GPU inference or training while
+the owned V63/V64 workflow ran.
 
 A separate read-only check of that saved experimental EMA reconstructs every
 tensor, including the actual DINOv3 backbone, exactly through the portable loader.
@@ -117,43 +117,35 @@ negative/above-white numerical range tests. CPU BF16 autocast changes deep
 features while the reconstruction stays FP32. No noise was added to those
 constant fields; they do not establish unbiased restoration of noisy fields.
 
-## Prepared CUDA engineering check
+## Completed CUDA engineering check
 
-The [actual CUDA fixture is prepared and queued](results/raw-kernel-CUDA-preflight-queue.json),
-not yet executed. Its public [operator](../scripts/preflight_raw_kernel_cuda.py)
-separates CPU preparation from gated execution. Candidate source, dependencies,
-operators, fixture, parent, data and input hashes are archived in
-`/mnt/external/demosaic/benchmarks/raw-kernel-CUDA-preflight-v1/`.
-The CPU preparation audit imports the real frozen candidate, verifies all 127
-archived files and inputs, and independently reconstructs expected trainer source
-bundle `411d1669b050b8074d7a9d030b3c42ef1af6764c6f20efbd08ecf5466dc632d8`.
-It rejects actual live artifact owner 2060575 before initializing CUDA, creating
-a training run, constructing a network or fetching any training batch.
+The [actual CUDA execution and independent saved-state audit](results/raw-kernel-CUDA-preflight.json)
+have completed after the V63/V64 workflow owners exited. The archived
+[operator](../scripts/preflight_raw_kernel_cuda.py) executes the frozen 411d source,
+not the later head-only option. All 127 archived files and 11 inputs verify.
+Original [preparation/queue evidence](results/raw-kernel-CUDA-preflight-queue.json)
+remains historical evidence rather than the execution result.
 
-Queue controller PID 2069973, creation 1792211664.76, waits for that exact artifact
-owner to complete and exit. This serializes the check after the V63/V64 training,
-primary evaluation, statistics/hue and CPU artifact work. It imports the archived
-candidate package while the data experiment keeps its original model worktree.
-The queue stops for independent review after engineering checks; it launches no
-production trial and makes no quality decision.
+The genuine V60 full4k EMA loads every old tensor exactly, actual DINO stays
+frozen, and initial GPU BF16 output equals bilinear exactly. Seven discarded
+B16/native256/BF16 updates cover Commons, paired and native data with seed49,
+LR1e-5/warmup200 and planned20k. The fixture forces real Commons, uses workers0
+and two validation images; it does not alter either completed data arm.
 
-The pending fixture starts from V60 full4k EMA with the option enabled and checks
-that all old EMA tensors load exactly, actual DINO stays frozen and initial GPU
-BF16 output is exactly bilinear. It then runs **seven discarded batch16/native256/
-BF16 updates**, seed49, LR1e-5/warmup200 and the original 20,000-update schedule.
-The seven domains are Commons, Commons, Commons, paired, paired, Commons, native.
-It uses original reviewed 40,170-source Commons/native128/paired32 data, workers0,
-forced real Commons and two validation images. These fixture overrides do not
-change either active production arm.
+All 93 model/93 EMA tensors and 91 AdamW states are finite. Model/optimizer/EMA/
+Python/Torch/CUDA RNG reconstruction succeeds. Portable/manual EMA predictions
+match exactly on two full native256 photos under FP16 and BF16, including every
+saved tensor and actual DINO. A native256/B1/BF16 probe gives finite nonzero
+trunk/tail/head gradient norms 5.79e-6/3.15e-7/.06128; DINO has no gradients.
+Sixty-four clean native64 constant fields (four colors/four CFAs/two conditioning
+profiles/two precisions) have maximum RGB error 5.96e-8. No noise is added to those
+fields. Peak CUDA allocation is 21.328 GB, not total unified RAM or throughput.
+A separate CPU audit verifies the saved checkpoint, source/config/data, all seven
+all-domain logs, finite state and saved prediction hashes/shapes.
 
-Intended checks cover finite 93 model/93 EMA tensors and 91 AdamW states, saved
-optimizer/RNG reconstruction, exact portable EMA predictions on two natural photos
-under FP16 and BF16, and a BF16 gradient probe through the native RGB trunk/tail
-and new coefficient head. Sixty-four clean native64 constant cases cover four
-colors/four CFAs/two conditioning profiles/FP32 and BF16, including negative and
-above-white numerical values, with no noise added. Peak CUDA allocation is
-recorded separately from total unified RAM or throughput. These remain pending
-checks: preparation alone proves none of their GPU results.
+These are engineering results from discarded updates. They do not establish
+restoration quality, noisy-field unbiasedness, convergence or deterministic CUDA
+optimization after restart. No production joint RAW-head trial has launched.
 
 ## Optional head-only warmup
 
@@ -192,8 +184,8 @@ numeric logs/input hashes. The new source bundle is
 The complete CPU suite passes **534 tests, with 9 CUDA-related skips**; targeted
 RAW-head/trainer tests pass 37. These are numerical/engineering checks, not
 warmup convergence, GPU memory/throughput or model-quality evidence. No production
-warmup has launched. The already queued default-route CUDA fixture retains its
-independent archived 411d source and has not silently switched to this option.
+warmup has launched. The completed default-route CUDA fixture retains its independent archived 411d
+source and has not silently switched to this option.
 
 ## Limits and required next evidence
 
