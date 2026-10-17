@@ -111,6 +111,12 @@ Its exact operator is archived at
 `/mnt/external/demosaic/benchmarks/packed-isotropic-block-compilation-v1/operator.py`;
 the published receipt binds its SHA. No compiled checkpoint was saved.
 
+The [trained-checkpoint compilation study](packed-isotropic-compilation.md) is
+now queued after the40k quality review. It adds full-RGB accuracy gates, saved
+native photo/GFX crops, and repeated actual102MP eager/Inductor timings. Its
+completed16k CPU eager-backend preflight is bitwise equal; CUDA trained-model
+accuracy and full-frame speed remain unmeasured.
+
 The focused CPU suite passed117 tests, including both backbones' deterministic
 interrupted-training restart tests and legacy RGB/RAW-kernel tests. DINO unit
 tests use a deliberately tiny random encoder; the CUDA receipt separately
