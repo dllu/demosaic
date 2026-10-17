@@ -331,3 +331,9 @@ comparisons. Input/source/float/display audits and all native views pass, but
 grain/detail tradeoffs remain. The ISO100 sign content and optics differ, so it
 is not exact GT and receives no scores. A small final-10k CPU follower is queued;
 the requested broad real-photo superiority remains unproven.
+
+The [current RAW-kernel inference profile](raw-kernel-inference-profile.md) is
+queued after all final review jobs. A real-model CPU preflight verifies exact
+hooked/unhooked/traced outputs and unchanged model/DINO state; CUDA attribution
+remains pending. Existing full-frame timing records 51.694 seconds in compute/
+transfer and 0.245 seconds in blending. No optimization or sub-10-second result is claimed.

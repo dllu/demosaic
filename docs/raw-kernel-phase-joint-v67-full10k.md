@@ -100,3 +100,9 @@ additional input-only regions. A CPU follower waits behind successful final
 artifact-owner exit, then evaluates only the genuine completed-10,000 checkpoint
 and independently audits two native triplets. Their actual visual review remains
 required. The original four standing regions and primary review queue are unchanged.
+
+A [bounded inference profile](raw-kernel-inference-profile.md) waits behind the
+supplementary CPU owner. Its real-model CPU hook/output check passes; genuine
+CUDA attribution remains pending. It preserves the final checkpoint and all
+inference settings, adds no training, and does not establish a new full-frame
+speed or quality result.

@@ -1,0 +1,93 @@
+{
+  "status": "queued-bounded-V67-inference-profile-after-final-reviews",
+  "workflow": "/mnt/external/demosaic/runs/raw-kernel-phase-joint-v67-full10k-inference-profile-workflow-v1.json",
+  "launch_status": {
+    "controller": {
+      "pid": 3021201,
+      "created": 1792224684.54,
+      "driver_sha256": "c56bd800f946dcef7b46aa829c56eb377e1529151f928db498f5497454507bae"
+    },
+    "plan": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-inference-profile-workflow-v1/plan.json",
+    "previous_owner": {
+      "pid": 3008664,
+      "created": 1792224033.99,
+      "driver_sha256": "f8d25fa742e375de3794ac2039ae4c484b5dbc49273f3e493e5aecda99578dc0"
+    },
+    "status": "waiting-for-exact-supplementary-CPU-owner-exit-no-GPU-work",
+    "updated_UTC": "2026-10-17T08:11:24.648469+00:00"
+  },
+  "plan_sha256": "ce281a861d6a5f62772405795a2f5bec4fc86676a1460f5ec36a5ccb3f47024c",
+  "guards_verified": 50,
+  "actual_predecessor_and_new_owners_live_child_free": true,
+  "output_absent": true,
+  "pending_owner_rejection": {
+    "owner": {
+      "pid": 3008664,
+      "created": 1792224033.99,
+      "driver_sha256": "f8d25fa742e375de3794ac2039ae4c484b5dbc49273f3e493e5aecda99578dc0"
+    },
+    "error": "Actual supplementary CPU owner has not completed and exited",
+    "rejected_before_output": true,
+    "future_completed_gate_executed": false
+  },
+  "CPU_preflight": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-inference-profiler-CPU-preflight-v2/result.json",
+    "sha256": "401577caec452f279f744bfe7da4ac7e961898359bd96da04160cce65d46ad35",
+    "driver_sha256": "67a36df5c3b4e7f7d9d8a7980eed2240118921dbfaf35ae98430b39cdda4a598",
+    "checkpoint": {
+      "path": "/mnt/external/demosaic/models/dino-convnext-raw-kernel-phase-joint-b16-v67-step2000.pt",
+      "sha256": "25d3bb57ff0588a804d161c957f28ebdcfc32e666bac37b52c35fd0b92de9b17",
+      "step": 2000
+    },
+    "device": "cpu",
+    "batch_size": 1,
+    "native_size": 256,
+    "all5_sampled_hook_counts": {
+      "DINO-context-inclusive": 2,
+      "DINO-backbone-nested": 2,
+      "restoration-trunk": 2,
+      "RAW-head-inclusive": 2,
+      "RAW-coefficients-nested": 2
+    },
+    "all5_traced_hook_counts": {
+      "DINO-context-inclusive": 1,
+      "DINO-backbone-nested": 1,
+      "restoration-trunk": 1,
+      "RAW-head-inclusive": 1,
+      "RAW-coefficients-nested": 1
+    },
+    "model_and_actual_DINO_state_unchanged": true,
+    "all_hooked_unhooked_profiled_outputs_bitwise_reference": true,
+    "CPU_RNG_unchanged": true,
+    "CUDA_initialized": false,
+    "genuine_CUDA_trace_events": 0,
+    "trace": {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-inference-profiler-CPU-preflight-v2/operator-trace.json",
+      "sha256": "2955caeefe98846a502951a89707042e3f11f3898a1713525f72debdf66b50c9"
+    },
+    "saved_reference_shape_dtype_finite_checked": true,
+    "actual_named_trace_ranges_verified": true
+  },
+  "prior_fullframe_timing": {
+    "report": "/mnt/external/demosaic/evaluation/raw-kernel-phase-joint-v67-first2k-gfx-v1/report.json",
+    "report_sha256": "73ab68ac8d0f085c3ee9ea2bb2edb2ff60a9eac82362e2406412b13ce756b784",
+    "checkpoint_sha256": "25d3bb57ff0588a804d161c957f28ebdcfc32e666bac37b52c35fd0b92de9b17",
+    "result": {
+      "seconds": 52.04187079006806,
+      "tile_seconds": 51.99851194792427,
+      "compute_transfer_seconds": 51.694126579212025,
+      "blend_seconds": 0.24478373839519918,
+      "megapixels": 101.995852,
+      "tiles": 520,
+      "tile": 512,
+      "overlap": 64,
+      "batch_size": 4,
+      "compute_precision": "float16",
+      "refinement_compute_precision": "float32",
+      "memory_format": "channels_last",
+      "peak_cuda_gb": 5.614074368
+    },
+    "scope": "Retained original2k shared-machine full-frame measurement, not a new result or attribution to any branch."
+  },
+  "scope": "One bounded native512/B4/FP16-neural physicalFP32 attribution probe after all final training/review/supplementary owners succeed and exit. Unchanged actual10000 checkpoint and four frozen GFX observations;3warmups/5unhooked+5hooked/1operatortrace. Five inclusive nested branch event ranges, actual CUDA trace required, exact output/state/RNG identity.300second owned-child limit. No optimization, altered precision, compiler, bulk inference, new training, reference score, full-frame speed claim or promotion. CPU preflight is actual2k/B1/native256 engineering evidence, not GPU timing."
+}
