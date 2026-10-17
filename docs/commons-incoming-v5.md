@@ -6,6 +6,11 @@ independent complete cache/area audit and48-thumbnail actual content review
 are complete. No model uses this snapshot: V67 has finished, and the resumed
 matched V63/V64 schedules retain their original40,170/66,934 manifests.
 
+A separate [CPU content-neighbor audit](commons-content-overlap.md) is now
+screening all 85,048 future training files against the existing 427 development
+photos, with active memberships tracked separately. Its full results and manual
+content review are pending; it changes no frozen manifest or running recipe.
+
 [Reviewed 8× freeze](results/commons-incoming-v5-reviewed8.json),
 [completed reviewed4× freeze](results/commons-incoming-v5-reviewed4.json),
 [actual 4× launch and startup checks](results/commons-incoming-v5-rebin4-launch.json),
