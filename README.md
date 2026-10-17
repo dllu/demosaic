@@ -79,6 +79,8 @@ See [experiment results](docs/experiments.md), [quality and noise diagnostics](d
 and the [completion evidence checklist](docs/requirements.md).
 The [Commons archive download](docs/commons-download.md) is running separately;
 active experiments retain frozen manifests.
+The [completed content audit](docs/commons-content-overlap.md) supplies future
+84,867-file training manifests with identified capture series quarantined.
 See [training pipeline work](docs/training-pipeline.md) for augmentation before
 the last reduction, selected-domain loading and the batch-size sweep.
 The [packed detail review](docs/packed-detail-v40-v41-review.md) retains the

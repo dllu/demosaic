@@ -10,9 +10,13 @@ genuine full-state resume checks. The control has completed20k; its
 [interim eight-context CPU comparison](long-commons-v63-control-original20k-CPU-review.md)
 has mixed photo/color progress and persistent soft detail. Expanded20k and
 the complete two-arm quality review remain pending. The separate
-[85,048-source matching4×/8× corpus](commons-incoming-v5.md) is completely audited
-and content spot-checked, with unchanged old holdouts. SOTA, decisive real-photo
-superiority and the10-second speed target remain unmet/unproven.
+[85,048-file matching4×/8× parent corpus](commons-incoming-v5.md) is cache-audited.
+The [completed content audit](commons-content-overlap.md) finds related capture
+series across development/training. Separate future manifests retain84,867
+training files after181 reviewed-series/site exclusions, with every original
+nontraining line preserved. Additional418/416-source sensitivity cohorts are
+frozen before the full20k panels; complete scene independence remains unproven.
+SOTA, decisive real-photo superiority and the10-second target remain unmet/unproven.
 
 The [normalization-coordinate diagnosis and opt-in training augmentation](normalization-augmentation.md)
 now have 579 passing CPU tests, genuine-parent restart/input-identity checks and

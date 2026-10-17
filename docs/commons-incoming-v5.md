@@ -114,3 +114,10 @@ expired during metadata loading; rechecking the same producer confirmed it live
 and preparing caches. No restart or duplicate job was launched. Full4× checks
 and actual content review now pass; this frozen corpus is available for a future
 declared recipe. Current training, evaluation, checkpoints and reports remain fixed.
+
+The [full DINO content screen and manual review](commons-content-overlap.md)
+now identify related named capture/event series and shared sites across the
+development split. A separate future known-series quarantine retains84,867
+training files after181 exclusions. Its matching4×/8× manifests reuse the exact
+parent cache records and preserve every old nontraining line. The parent V5
+manifests remain frozen; neither version proves complete scene independence.

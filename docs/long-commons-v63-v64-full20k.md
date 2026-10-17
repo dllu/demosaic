@@ -144,3 +144,11 @@ denoised/exact-GT photo triplets per improved model and accurately labeled GFX
 sky/building/foliage/fence references. The independent ISO100 exposure is not GT.
 Protected-final model scores remain unused. V43 remains the working reference;
 SOTA, broad real-photo superiority and the10-second target remain unmet/unproven.
+
+The [completed Commons content audit](commons-content-overlap.md) freezes
+additional418/416-source sensitivity subsets before either20k full427 panel
+runs. After the original queued panels/statistics close, derive those additional
+photo comparisons from their actual saved case logs and fixed source IDs.
+Keep the original427 results, paired protocol, all56 native views and quality
+decision. These are known-series/site sensitivities, not certified scene-clean
+subsets. No queued operator, active membership or original schedule changes.
