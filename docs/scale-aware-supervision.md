@@ -3,8 +3,11 @@
 The V17 and V24/V25 reviews found little reduction of 32/64-pixel residual
 error, despite extra correction capacity and context. V26/V27 test a different
 hypothesis: the original objective gives insufficient pressure to reduce these
-small absolute errors. Its first controlled review is complete and does not establish a gain. V16 remains
-the reviewed model until quality evidence justifies promotion.
+small absolute errors. Its first controlled review is complete and does not
+establish a gain. V16 remained the reviewed model at this historical gate.
+The later [V61 trial](sensor-mean-v61.md) applies the same optional coefficient
+to the entire restoration network, using the completed wider-palette V60 run
+as control. The frozen-branch result below remains negative evidence.
 
 Both arms start from frozen V16 step5000 and append the same factor 8 pooled
 RGB correction used in V17, with 27,696 trainable parameters. The restoration

@@ -7,6 +7,8 @@ foliage and fence detail remain soft. Known/unseen paired-real changes versus
 control are uncertain; both arms trail the older working reference on those
 primary means. **Keep V43 as the working reference.** V60 is the stronger next
 research candidate; both runs stop at their original 4,000-update boundary.
+The [V61 sensor-loss trial](sensor-mean-v61.md) now tests a separate loss change
+against the completed V60 control, with the same initializer, data and schedule.
 
 [Complete scores, checkpoint/source hashes, audits and 90 native crop receipts](results/wide-flat-palette-full4k-review.json).
 [Matched intervention](wide-flat-palette.md); [intermediate first1k review](wide-flat-palette-first1k-review.md).
