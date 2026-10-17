@@ -106,3 +106,15 @@ supplementary CPU owner. Its real-model CPU hook/output check passes; genuine
 CUDA attribution remains pending. It preserves the final checkpoint and all
 inference settings, adds no training, and does not establish a new full-frame
 speed or quality result.
+
+The [final report assembly check](results/raw-kernel-v67-final-report-preparation.json)
+replays the four actual completed first-2k workflow records and validates its
+26 reviewed core PNGs plus two already-reviewed neon/platform PNGs. It rejects
+missing views, changed hashes, duplicate images and resized panel metadata.
+Invoking the final publisher against the actual live 10,000-step run rejects
+publication before any final report or image is written. Its source is archived
+in `/mnt/external/demosaic/benchmarks/raw-kernel-v67-full10k-report-preparation-v1/`.
+The eventual positive publication path still requires all five final owners to
+succeed and exit, the exact 402-row resume boundary, all audits, 28 new actual
+native views, fresh visual notes and an explicit quality decision. The earlier
+images exercise the assembly code only; they do not replace final-model crops.
