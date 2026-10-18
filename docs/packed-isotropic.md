@@ -10,6 +10,9 @@ The [experimental fixed-unit options](packed-isotropic-units.md) record RAW
 input gain and learned residual scale in checkpoints. Defaults preserve existing
 models; a full-data quality gain remains untested. The completed batch-learning
 diagnostic motivates testing a mixed-domain effective batch16.
+The [fresh V72/V73 mixed16 trial](packed-isotropic-mixed16-trial.md) is now
+training on the full data mixture, with checked prefixes and full-state resume.
+Its first32,000-example quality gate remains pending.
 The three requested pipeline improvements are already measured separately in
 [the pipeline report](training-pipeline.md); this experiment retains that data
 path and does not change the existing model recipes.
