@@ -57,3 +57,28 @@ This report verifies training completion and handoff. It contains no final
 restoration-quality score, new full-frame output or speed result. The queued
 primary/color/analytic/GFX and independent/native/publication checks remain
 required after V79's original 4,000 updates.
+
+## Trained EMA portability and actual interval routing
+
+A CPU check now verifies the trained V78 EMA through the public inference
+loader. All 99 restoration tensors, including the eight trained directional
+tensors, load exactly from the saved EMA. An EMA-only inference copy produces
+bitwise identical FP32 outputs to the full training checkpoint on four generated
+64×64 sensor fixtures, one per Bayer pattern. The fixtures include signed black
+samples and ADC-white patches; they contain no photographs, GT or quality
+scores. Registered parameters/buffers and Torch CPU RNG remain unchanged during
+forward, and both models use the same pinned cached official DINO weights.
+CUDA stays uninitialized. This is an inference-portability check rather than a
+full-frame, speed or 16-bit-export result.
+
+V79's step 1,000 checkpoint also passes its 99/99/97 state audit. All 25,800 new
+scalar parameters have nonzero optimizer moments. The first 56 sampled
+observations and 41 logged step/domain/LR/full-batch hashes match V78 exactly.
+Among those 41 logs, the 18 Commons/procedural and 12 native synthetic rows
+include the interval term; all 11 paired rows omit it. Rebuilding the total loss
+with independent NumPy FP32 operations exactly reproduces all 60 nonpaired
+logged losses across the two arms' first 1,000 updates. These checks verify
+training behavior without inspecting evaluation scores or changing the recipe.
+
+[Inputs, outputs, source snapshots and first1k receipts](results/directional-portable-and-V79-first1k-v1.json).
+Final restoration quality remains pending.
