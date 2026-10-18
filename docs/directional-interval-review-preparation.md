@@ -74,3 +74,7 @@ pixels, coordinates, WB/matrix, noise, display exposure or reference transform
 are fitted or altered by composition. The original quality gates, complete
 training budget and inference protocol stay fixed. No full-frame speed/16-bit
 output or SOTA claim follows from this preparation.
+
+The [fixed numerical checker](directional-interval-numerical-criteria.md) now
+has threshold/refusal tests and a historical replay. The retained V78 step 2,000
+state also passes its engineering audit. Final model quality remains pending.
