@@ -14,6 +14,7 @@ KINDS = {
     "analytic": ("GT (analytic)", ("source_id", "evaluation_tile_xywh", "condition", "source")),
     "camera": ("AHD reference", ("scene", "prepared_crop", "conditioning", "evaluation_tile_xywh")),
     "gfx": ("ISO100 ref (not GT)", ("region", "context_xywh", "full_frame", "conditioning")),
+    "gfx-window": ("ISO100 ref (not GT)", ("region", "conditioning", "source")),
     "three-camera": (
         "RawNIND (not GT)",
         ("source_sha256", "region", "sensor_roi_xywh", "context_roi_xywh", "conditioning"),

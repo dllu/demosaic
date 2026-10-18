@@ -19,11 +19,15 @@ All67 native triplets/111 cells and full numerical/color/source-sensitivity
 checks are complete. Small camera gains have an unseen interval crossing zero;
 missing fine detail and color/highlight tradeoffs remain. An isolated benefit
 from the shared84,867-source corpus is unproven.
-A [saved-parent input-CFA gain diagnostic](mature-input-cfa-gain.md) passes its
-fixed color-grid screen and actual14-triplet native review. A shared-forward
-full427 photo test is running. Its separate global-frame GFX policy is rejected
-for a visible purple sky/building shift and loss of green foliage. No trained
-or default change or photographic gain follows from uniform-field results.
+The [completed input-CFA gain study](mature-input-cfa-gain.md) loses1.10760dB
+on all427 photographs and introduces purple sky/building in the global GFX
+policy. All26 triplets/52 cells, score coverage and fixed source sensitivities
+are reviewed. Both policies are rejected without changing defaults or launching
+camera continuation. Uniform-field gains do not establish photographic quality.
+The [unchanged-model input-window check](mature-context-window.md) finds similar
+256/512/full-frame GFX detail in all12 triplets/20 cells. This does not establish
+larger-patch training performance, and only1.54% of the corpus supports512px
+without altering the4×→geometry→2× recipe. No model or data-default changes.
 All final quality/speed requirements below remain outstanding.
 
 Latest: the [completed RAW-native 40k review](packed-isotropic-quarter-review.md)

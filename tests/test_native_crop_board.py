@@ -79,6 +79,40 @@ def test_complete_board_preserves_every_native_pixel_and_actual_model_labels(wor
     )
 
 
+def test_context_window_comparison_keeps_common_sensor_ROIs_and_method_specific_extents(
+    worker, report
+):
+    path, crops = report
+    for crop in crops:
+        crop["region"] = {
+            "name": crop.pop("source_id"),
+            "noisy_xy": [100, 200],
+            "reference_xy": [101, 200],
+            "size": 160,
+        }
+        crop["conditioning"] = crop.pop("condition")
+        crop.pop("evaluation_tile_xywh")
+        crop["panels"][2]["label"] = "ISO100 ref (not GT)"
+        crop["reference"] = "Separate ISO100 exposure, not GT"
+        crop["checkpoint_sha256"] = "c" * 64
+        size = 256 if crop["model_label"].startswith("A") else 512
+        crop["model"] = {
+            "label": crop["model_label"],
+            "sha256": "c" * 64,
+            "input_sensor_xywh": [0, 0, size, size],
+        }
+    path.write_text(json.dumps({"native_crops": crops}))
+    result = worker.build([path], path.parent / "window-board.png", "gfx-window")
+    assert result["native_cells_exact"] == 8
+    assert len(result["models"]) == 2 and len(result["source_triplets"]) == 4
+    actual = np.asarray(Image.open(path.parent / "window-board.png"))
+    for cell in result["cells"]:
+        x, y, w, h = cell["board_xywh"]
+        a, b, c, d = cell["source_xywh"]
+        source = np.asarray(Image.open(cell["image"]["path"]))
+        np.testing.assert_array_equal(actual[y : y + h, x : x + w], source[b : b + d, a : a + c])
+
+
 @pytest.mark.parametrize(
     "problem",
     [

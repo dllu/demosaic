@@ -1,17 +1,18 @@
-# Mature-parent input-CFA gain: flat colors improve, global GFX policy fails
+# Input-CFA channel gain is rejected on photographs and the standing GFX scene
 
-A fixed input-only per-channel least-squares gain reduces the mature V63
-parent's bright flat-field mean color bias by88.2% at saturation.50 and66.5%
-at.98. Both worst-case errors also decrease. The entire1,176-observation saved
-grid passes independent numerical checks, and all14 native triplets/28 cells
-were actually viewed. A subsequent whole-frame GFX fit gives a conspicuous
-purple sky/building shift and loses green foliage. **That global policy is
-rejected.** The fresh full427-photo test remains a smaller-patch diagnostic,
-not a promoted model or proof of photographic quality.
+The completed full427 test loses **1.10760dB** photo sRGB PSNR,95% source
+interval **[−1.16876,−1.03704]**, and.005190 SSIM against the unchanged V63
+parent. Both fixed source-exclusion subsets confirm the loss. A global GFX fit
+also turns sky/building purple and removes green foliage. **Reject both the
+native256 correction and the global-frame policy; do not integrate either.**
+V43 remains the working reference and inference defaults stay unchanged.
 
-[Grid results, fixed plan, independent gain oracle and native evidence](results/mature-input-cfa-gain-grid-v1.json).
+[Complete photo statistics, independent audits, source sensitivities and all52
+actually viewed native cells](results/mature-input-CFA-gain-complete-v1.json).
+The earlier flat-field screen improved selected color errors, which did not
+transfer to the complete photographic protocol or standing real capture.
 The [completed objective trial](reconstruction-objective-first1k-review.md)
-remains stopped at1k after failing its original continuation threshold.
+remains stopped at1k after failing its separate original continuation threshold.
 
 ## Fixed algorithm and scope
 
@@ -34,7 +35,52 @@ No checkpoint was loaded, CUDA initialized, neural forward executed or new
 noise drawn in the CPU grid test. The primary objective-trial source/audit
 bindings establish the reused predictions and fixed observations.
 
-## Complete grid result
+## Complete photographic result
+
+Both variants share one fresh unchanged-model IEEE-FP32 network forward and
+exactly the same observation. All62,020 records cover427 photographs plus16
+procedural targets, seven conditions/four CFAs and three fresh classical
+controls. Results balance source images; no historical neural scores are reused.
+
+| Variant | Photo sRGB PSNR | SSIM | Linear PSNR | Procedural sRGB PSNR | SSIM |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| V63 parent, fresh FP32 |35.93298|.963290|41.35986|35.07531|.976318|
+| Input-CFA channel gain |34.82537|.958100|39.26660|34.36306|.970362|
+
+Photo linear PSNR loses2.09325dB,[−2.17686,−1.99418]. The procedural sRGB
+loss is.71225dB,[−.84098,−.59254]. Photo chroma MAE rises.0071313→.0101846;
+highlight-boundary chroma MAE.0141803→.0240458 and RGB MAE.0179701→.0292733.
+These adverse changes accompany the primary failure.
+
+The fixed418/416-source sRGB effects are−1.10452dB,[−1.16121,−1.04075],
+and−1.10548dB,[−1.16215,−1.03862]. Ancestor exposure to related series remains
+a limitation; these subsets do not establish complete scene independence.
+Intervals describe source variation, not training-repeat uncertainty.
+
+The full predeclared condition breakdown is descriptive:
+
+| Condition | Corrected − parent sRGB PSNR, dB |
+| --- | ---: |
+| ADC-only |+.04620|
+| ISO100 prior |+.13343|
+| ISO1600 prior |+.09816|
+| ISO12800 prior |+.03699|
+| Shadows |−.01257|
+| Highlights |−8.14730|
+| Legacy noise |+.09187|
+
+The highlight loss dominates. The existing simulator's reference-white target
+clips exposed linear sRGB before returning camera RGB, while the noisy sensor
+observation comes from the exposed scene. Fitting to all sensor samples can
+therefore conflict with that target around highlights. The condition pattern
+is consistent with that issue; it does not isolate every source of the loss or
+establish a corrected fitting policy. The rejected formula remains unchanged.
+
+The predeclared.05dB/positive-interval photo gate and.0001 SSIM limit all fail.
+Known/unseen camera tests were not launched after the photographic and standing
+real failures; no new camera score or full-frame promotion is claimed.
+
+## Uniform-field diagnostic
 
 Normalized camera-RGB bias means the maximum absolute channel-mean error of
 one native160 ROI. These bright groups contain96 cases each at ISO12800 prior
@@ -129,22 +175,26 @@ Eight focused tests check all CFA layouts, edge chunks, read-only inputs,
 energy-weighted global fitting and invalid data. No full-frame promotion or
 new end-to-end speed claim follows from this CPU diagnostic.
 
-## Fresh photographic test, not a continuation of V74/V75
+## Completed execution and native photographic views
 
 The standalone evaluator uses genuine unchanged V63 original20k EMA on all427
 development photos and16 procedural targets, seven conditions/four CFAs,
 native256/B4/channels-last/IEEE FP32. The original and corrected predictions
 share one network forward per batch and exactly the same observation. Three
-fresh classical controls accompany the pair. The full grid requires3,108
-network forwards, not one per variant. Existing source-balanced metrics,
+fresh classical controls accompany the pair. The completed grid uses3,108
+network forwards, shared between variants. Existing source-balanced metrics,
 noise seed20261014, validation crop seed42 and fixed native photographic ROIs
 remain unchanged. The worker retains original/corrected native GT triplets and
-all input-only gains, then independently audits coverage and summary arithmetic.
-A queued CPU closure waits for the exact producer PID/creation-time exit before
-checking all427/418/416 source cohorts with an independent Decimal/scalar replay
-and revalidating early native PNG/metadata. It records the global real-policy
-rejection and launches no camera/GPU continuation.
-[Closure plan, tests and dated live-owner evidence](results/mature-input-gain-closure-queue-v1.json).
+all input-only gains. Both the inference and CPU-closure owners exited
+successfully. Complete coverage/summary arithmetic checks all62,020 records,
+280 groups,10 overall rows and60 paired comparisons, maximum7.11e−15.
+The independent Decimal/scalar source audit rebuilds71,736 raw metrics,2,562
+source scalars and60 comparison fields across9 cohort comparisons; source
+difference0 and comparison maximum4.44e−16. All early native PNG/metadata/board
+hashes were revalidated after successful producer exit. No camera/GPU
+continuation or alternative formula was launched by the closure.
+[The earlier queue snapshot](results/mature-input-gain-closure-queue-v1.json)
+remains dated evidence; the complete registry supplies terminal closure.
 
 The plan sets24GiB CUDA allocator and two-hour limits, with successful producer
 exit, actual native inspection and statistical review required before a decision.
@@ -155,11 +205,12 @@ sensitivities and complete real/detail/color/highlight review. There is no
 automatic model/default promotion.
 
 The [dated execution snapshot and first native photo views](results/mature-input-cfa-gain-photo-progress-v1.json)
-verify a live owner after real network forwards. The first two fixed source/ROI
+record the then-live owner after real network forwards. The first two fixed source/ROI
 triplets were viewed as eight unique native cells. The canopy broad color
 moves slightly toward GT while fine cords remain absent; building/cloud detail
-looks nearly unchanged. Original producer PNG/metadata must be rechecked after
-successful full-test exit before final closure.
+looks nearly unchanged. Original producer PNG/metadata and the viewed board
+now pass the required post-exit recheck. These selected views do not substitute
+for the adverse complete-population result.
 
 Corrected output: noisy → restored → exact synthetic GT, native160 without
 resizing. The cache contexts are[189,3,256,256] and[195,89,256,256], with
@@ -179,9 +230,11 @@ and [Dietmar Rabich](https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Cana
 binning, crop, synthetic noise, restoration, input-CFA gain and common rendering.
 These are exact simulation targets rather than clean RAW measurements.
 
-A per-tile fit may vary with image content and introduce full-frame seams. Any
-full-frame method needs a separately validated whole-frame gain, common
-transforms, RGB16 exports and timing. Ancestor scene-series exposure is not
+Across this complete study,26 native triplets/52 unique cells were actually
+viewed: color grid14/28, fixed photographs4/8 and global GFX8/16.
+The fixed formula is not pursued further.39 focused source/global/closure tests
+pass, with the original seven input-fit/shared-forward checks retained.
+No new corrected full-frame RGB16 export or end-to-end timing is claimed. Ancestor scene-series exposure is not
 undone by new source exclusions. One seed and development data do not establish
 SOTA or decisive real-photo superiority. V43 remains the working reference;
 the protected-final scenes remain closed.

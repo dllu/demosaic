@@ -10,14 +10,16 @@ source sensitivities and independent color/analytic audits are complete. The
 84,867-source corpus is shared between arms; its isolated benefit is unproven.
 V43 remains the working reference.
 
-A [new input-CFA gain diagnostic](mature-input-cfa-gain.md) on saved V63 parent
-predictions reduces bright-field mean color bias by88%/67% across the fixed
-1,176-observation grid. All14 native triplets/28 cells and an independent
-phase-wise fit are reviewed. A fresh full427 paired FP32 test shares one network
-forward between original and corrected variants. The separate saved-full-frame
-GFX policy is rejected: one global fit creates purple sky/building and loses
-green foliage. No default or model promotion; small-patch photo scores remain
-pending.
+The [completed input-CFA gain study](mature-input-cfa-gain.md) is rejected.
+Despite lower uniform-field color bias, it loses1.10760dB on all427 photos,
+95% source interval[−1.16876,−1.03704], with lower SSIM and matching418/416
+source sensitivities. Highlights lose8.14730dB. A global-frame GFX fit turns
+sky/building purple and loses green foliage. All26 native triplets/52 cells
+and independent score/sensitivity checks are complete; no camera continuation,
+default change or promotion. The [completed context-size diagnostic](mature-context-window.md) finds similar
+256/512/full-frame native appearance and no clear broad detail repair. All12
+triplets/20 cells were viewed. Only1,305 of84,867 Commons files can support512px
+under the exact4×→geometry→2× path; larger-patch training remains untested.
 
 The [completed mature FP32 full-frame and CLI validation](mature-cudnn-fullframe.md)
 adds opt-in `infer --cudnn-benchmark`. Warmed V43/V63 restores fall from206.88/209.35s
