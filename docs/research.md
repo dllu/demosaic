@@ -56,6 +56,19 @@ project matches its performance.
   examines single, quad and nona Bayer. Our initial scope is ordinary Bayer,
   matching the named GFX, Leica Q2 and Sony a7R II cameras. Reject unsupported
   arrays explicitly instead of silently treating them as Bayer.
+  The [October 18 compatibility inspection](results/unified-demosaicing-CPU-preparation-v1.json)
+  pins `d17aa7ebba5730c6259d256da028a84c521007c7` and verifies four published
+  ISO400/800/1600/3200 checkpoints against their Git blob hashes. Each strictly
+  loads all 336 state tensors into the original 3,203,107-parameter model.
+  Artificial native48 CPU inputs give finite, exact repeated outputs with
+  state/input/RNG unchanged. Its input is a mosaic plus three color masks,
+  normalized by the publisher's 13,496-code range into −1..1; its three-pattern
+  interface returns separate RGB tensors. This establishes compatibility only.
+  The [repository license](https://github.com/SamsungLabs/unified-demosaicing/blob/d17aa7ebba5730c6259d256da028a84c521007c7/LICENSE.MD)
+  says CC BY-NC-SA 4.0, while the main model header says CC BY-NC 4.0.
+  Publisher code/weights stay in an isolated reference cache, outside the
+  production implementation and training. Photo quality, transfer of the fixed
+  ISO profiles to our cameras and separate weight terms remain unverified.
 * [RawNIND authors' code and weights](https://github.com/trougnouf/rawnind_jddc)
   and [paper](https://arxiv.org/abs/2501.08924) are comparison targets. Record
   calibration, color/gain alignment, and source license before comparing.

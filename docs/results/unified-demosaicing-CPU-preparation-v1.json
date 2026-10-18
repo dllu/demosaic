@@ -1,0 +1,59 @@
+{
+  "status": "completed-pinned-external-reference-CPU-compatibility-no-quality-or-production-adoption",
+  "repository": "https://github.com/SamsungLabs/unified-demosaicing",
+  "paper": "https://arxiv.org/abs/2504.07145v2",
+  "authors": [
+    "SaiKiran Tedla",
+    "Abhijith Punnappurath",
+    "Luxi Zhao",
+    "Michael S. Brown"
+  ],
+  "commit": "d17aa7ebba5730c6259d256da028a84c521007c7",
+  "metadata_inspection": {
+    "path": "/mnt/external/demosaic/references/unified-demosaicing/inspection-20261018-v1/result.json",
+    "sha256": "0166b04a2910dd5fa30c28e29cae3e0f1330d962d1dc747977aac480ddc6891d"
+  },
+  "CPU_compatibility": {
+    "path": "/mnt/external/demosaic/references/unified-demosaicing/native-CPU-preparation-v1/CPU-preflight.json",
+    "sha256": "e21a7dc3272e30d09ee4cea83d9b83c952f9b3dfc785b87b614fa70a8a0a206c"
+  },
+  "execution_driver": {
+    "path": "/mnt/external/demosaic/references/unified-demosaicing/native-CPU-preparation-v1/preflight.py",
+    "sha256": "ca2d7ddd16169c257e949e6a2ed3254751439bea303568d6b90123f2b0b01bdb"
+  },
+  "publication_driver": {
+    "path": "/mnt/external/demosaic/references/unified-demosaicing/native-CPU-preparation-v1/publish.py",
+    "sha256": "f406993a33eb4543c2d20cd784947b9ffcb45ee1cbc283980e9c475e60fc1738"
+  },
+  "published_repository_license": {
+    "path": "/mnt/external/demosaic/references/unified-demosaicing/native-CPU-preparation-v1/LICENSE.MD",
+    "sha256": "1349a4b6148492b44f629e64eed676612e234fe9a839e4f3b277c1482c8849f1"
+  },
+  "license_observations": "Main model header says CC BY-NC4.0; repository license says CC BY-NC-SA4.0. Both are noncommercial; separate commercial permission is unverified.",
+  "input_contract": {
+    "native_size": 48,
+    "seed": 20261018,
+    "source": "Local artificial RGB integer codes only; no photograph or held-out data",
+    "codes_range": [
+      0,
+      13496
+    ],
+    "CFA": "RGGB",
+    "input4": "[mosaic, R-mask*13496, G-mask*13496, B-mask*13496]",
+    "normalization": "(codes/13496 - .5)/.5",
+    "published_forward_input": "Repeat the same4 channels across all3 slots of native12-channel interface; inspect only shapes/repeatability",
+    "output_contract": "Publisher returns3 RGB tensors in normalized units; test helper denormalizes, clips to0..13496, truncates uint16"
+  },
+  "ISO_labels": [
+    400,
+    800,
+    1600,
+    3200
+  ],
+  "actual_model_state_tensors_exactly_loaded_per_checkpoint": 336,
+  "actual_model_parameters": 3203107,
+  "outputs": "Three native48 RGB tensors per artificial input; exact repeat, finite values, unchanged parameters/input/RNG",
+  "CUDA_initialized": false,
+  "photo_quality_evaluated": false,
+  "scope": "Genuine four ISO400/800/1600/3200 checkpoints match pinned Git blob hashes and every float32 parameter. Original isolated model source executes on CPU with strict state keys and exact repeats. No model code/weights incorporated in production, no initialization/training use, no real/synthetic benchmark score, current-model comparison, tile speed, promotion or commercial-license claim. An external qualitative comparison would need declared CFA/unit/noise/display handling, native triplets and separate weight-license interpretation."
+}
