@@ -1,14 +1,45 @@
 # Trained-checkpoint compilation benchmark
 
-The [frozen benchmark queue](results/packed-isotropic-compilation-queue-v1.json)
-is waiting behind the actual40k training and automatic quality review. There
-is no trained-checkpoint CUDA compilation result yet. The queued protocol
-retains its original weights, physical model math and precision settings.
+The [completed trained study](results/packed-isotropic-compilation-result-v1.json)
+rejects compilation at its first photo accuracy gate with the actual no-DINO40k
+weights. The original [frozen protocol](results/packed-isotropic-compilation-queue-v1.json)
+is retained. Production compilation stays disabled.
+
+| Fixed photo | Compiled/eager max DN16 | RMS DN16 |
+| --- | ---: | ---: |
+| Swiss Riviera | 23.1481 | 4.8057 |
+| Vancouver | 20.7724 | 4.3343 |
+
+Both exceed the predeclared maximum1/RMS.25 bounds. Independent NumPy64
+reductions of all393,216 saved unclamped F32 values reproduce the runtime
+metrics exactly. Model state bytes, keys and parameter identities remain
+unchanged. The original eager/IEEE-FP32 diagnostics are recorded separately;
+they are not the compilation comparison.
+
+No DINO, serving-shape or full-frame compilation case ran after this rejection.
+There is no trained full-frame compilation speedup result. The separate eager
+corrected-grid study continues under its own fixed protocol.
+
+The following compiled-output triplets were inspected alongside eager output
+at native resolution. They use the two fixed CPU-generated observations,
+RGGB, shot.00256/read2.62144e−5, ROI `[48,48,160,160]` in native256, exposure1
+and the same recorded WB/matrix. Each panel is160×160 unchanged pixels;
+8-bit previews do not replace the all-F32 numerical comparison. Checkpoint SHA:
+`5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc`.
+
+![Compiled Swiss Riviera: noisy, restored, exact synthetic GT](images/packed-compile-rejected-photo-0.png)
+
+![Compiled Vancouver: noisy, restored, exact synthetic GT](images/packed-compile-rejected-photo-1.png)
+
+Sources: [Roy Egloff](https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg)
+and [Dietmar Rabich](https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg),
+[CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/). Modified by
+binning, crop, synthetic camera/noise simulation, restoration and color rendering.
 
 This queue predates the [tile-grid correction](packed-isotropic-tile-grid.md)
-and retains its frozen2-pixel tiling geometry. Its eventual full-frame results
-apply to that archived profile; the corrected root tiler needs separate CUDA
-and full-frame validation before a packed model or compute policy is promoted.
+and retains its frozen2-pixel tiling geometry. Its planned full-frame cases
+were skipped after photo rejection; the corrected root tiler has a separate
+CUDA/full-frame validation study and native review.
 
 The earlier discarded12-update block benchmark suggested a possible speedup,
 but did not establish trained-model accuracy or full-frame latency. This study
@@ -30,7 +61,7 @@ to unclamped camera RGB; it is an engineering criterion, not proof of identical
 perceptual quality. Eager-versus-IEEE-FP32 differences are also recorded on the
 two photos, separately from compilation differences.
 
-The full-frame cases use the cached DSCF3879 RAW,8746×11662 pixels
+The unexecuted full-frame protocol uses the cached DSCF3879 RAW,8746×11662 pixels
 (101.995852MP), tiles512/overlap64/batch4. Four fresh workers cover both models
 and policies in a fixed shuffled order. Each excludes one complete warmup and
 records three complete restores. The timer includes raw validation, allocations,

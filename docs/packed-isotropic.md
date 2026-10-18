@@ -1,9 +1,11 @@
 # Experimental RAW-native isotropic backbone
 
 `packed-isotropic` is implemented and passes engineering checks. Its
-[first32,000-example quality review](packed-isotropic-first32000-review.md)
-finds weak restoration close to bilinear, substantial residual noise and51–54s
-full GFX timings. **Neither fresh endpoint is promoted**; V43 remains the working reference.
+[completed 40k review](packed-isotropic-quarter-review.md) finds clear progress
+over the [8k boundary](packed-isotropic-first32000-review.md), but photo scores
+29.73/29.95 dB still trail mature controls and native views retain substantial
+grain. Full GFX restores take50.70/53.74s. **Neither endpoint is promoted**;
+V43 remains the working reference.
 The three requested pipeline improvements are already measured separately in
 [the pipeline report](training-pipeline.md); this experiment retains that data
 path and does not change the existing model recipes.

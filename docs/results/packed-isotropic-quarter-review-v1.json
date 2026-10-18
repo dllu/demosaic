@@ -1,0 +1,3285 @@
+{
+  "status": "completed-original40k-quality-and-selected-native-review-neither-model-promoted",
+  "workflow": {
+    "path": "/mnt/external/demosaic/runs/packed-isotropic-quarter-review-workflow-v1.json",
+    "sha256": "080aa30ddb64c7fcbe683b534fd0396731d87c45fb2f727022e56da6434888f9"
+  },
+  "training_boundary": {
+    "path": "/home/dllu/proj/demosaic/docs/results/packed-isotropic-quarter-training-boundary-v1.json",
+    "sha256": "82373853afa1e44060eeda9193439e9c8293eca120cbb3d6c17860fb2281ac15"
+  },
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-review-workflow-v1/plan.json",
+    "sha256": "90548b69bdabc3ad9b02ef11cf5d1e6acb2bfa4024c10f6916713d79ec19413c"
+  },
+  "publisher": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-native-inspection-v1/publish_review.py",
+    "sha256": "43cf00d2f7aa09be57d9000bc889c52be6b5a653e8feee791db8a6810da9afda"
+  },
+  "manual_native_review": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-native-inspection-v1/manual-review.json",
+    "sha256": "34a0a57ca3f923ee0e8e644c8df4ad4c627077fefe43ea78140f80314c744784"
+  },
+  "decision": {
+    "no_dino40k": "retain boundary, not promoted",
+    "dino40k": "retain boundary, not promoted",
+    "working_reference": "V43 step2000 unchanged",
+    "original_horizon": "160000 updates preserved; no extension started",
+    "reasons": [
+      "Own8k progress is substantial, but camera panels still trail Wiener and mature controls.",
+      "Full427 photo scores are about5-6dB below mature controls.",
+      "Native photo/GFX/camera/analytic/color/hue views retain noise and/or detail/color limitations.",
+      "Full GFX inference remains50.7/53.7s, well above10s; corrected-grid supplement pending."
+    ]
+  },
+  "models": [
+    {
+      "label": "0:no-dino-packed-isotropic-b4-v71-quarter:step-40000",
+      "sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+      "step": 40000,
+      "source": "/mnt/external/demosaic/models/no-dino-packed-isotropic-b4-v71-step40000.pt",
+      "compute_precision": "float16",
+      "refinement_compute_precision": "float32"
+    },
+    {
+      "label": "1:dino-packed-isotropic-b4-v70-quarter:step-40000",
+      "sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337",
+      "step": 40000,
+      "source": "/mnt/external/demosaic/models/dino-packed-isotropic-b4-v70-step40000.pt",
+      "compute_precision": "float16",
+      "refinement_compute_precision": "float32"
+    },
+    {
+      "label": "2:dino-anchored-native-diverse-b16-v43:step-2000",
+      "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+      "step": 2000,
+      "source": "/mnt/external/demosaic/evaluation/paired-known-native-corpus-v37-v39-v43-2k/weights/weights-0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5.pt",
+      "compute_precision": "float16",
+      "refinement_compute_precision": "float32"
+    },
+    {
+      "label": "3:dino-convnext-wide-long-control-b16-v63-full20k:step-20000",
+      "sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+      "step": 20000,
+      "source": "/mnt/external/demosaic/models/dino-convnext-wide-long-control-b16-v63-step20000.pt",
+      "compute_precision": "float16",
+      "refinement_compute_precision": "float32"
+    },
+    {
+      "label": "RawNIND:CFA-LS"
+    },
+    {
+      "label": "RawNIND:CFA-channel"
+    }
+  ],
+  "cases": {
+    "known": 648,
+    "unseen": 810,
+    "full_photo_procedural": 111636,
+    "analytic": 2240,
+    "hue": 4704,
+    "hue_new_forward_cases": 2352,
+    "hue_verified_reused_cases": 2352,
+    "selected_color_F32_arrays": 128
+  },
+  "reports": {
+    "known": {
+      "path": "/mnt/external/demosaic/evaluation/packed-isotropic-quarter-known-v1/summary.json",
+      "sha256": "cb85440da96b36b6a5a1bfca8c092ad2ddf642cfbf60c7ef843047184d907c80"
+    },
+    "unseen": {
+      "path": "/mnt/external/demosaic/evaluation/packed-isotropic-quarter-unseen-v1/summary.json",
+      "sha256": "0b5c31f1f1e0fcbabad074ae151efb017a0a0aabc4fa0701f80e3627181db552"
+    },
+    "full427": {
+      "path": "/mnt/external/demosaic/evaluation/packed-isotropic-quarter-full427-v1/summary.json",
+      "sha256": "214803e0e7bfeb44c8ef841b907f76f66989f4e2dd0aba3ea34245eae078db0b"
+    },
+    "analytic": {
+      "path": "/mnt/external/demosaic/evaluation/packed-isotropic-quarter-analytic-v1/summary.json",
+      "sha256": "4accc901a2b800206ff8d51f994f670e01058f6f5b5cfa1d96d1aa7964d10e5a"
+    },
+    "gfx": {
+      "path": "/mnt/external/demosaic/evaluation/packed-isotropic-quarter-gfx-v1/report.json",
+      "sha256": "6cab64f8c28ed9a8344774e1625b7ae5623cfdedb0502fc5f78a2193667bcc90"
+    },
+    "three-camera": {
+      "path": "/mnt/external/demosaic/evaluation/packed-isotropic-quarter-three-camera-v1/report.json",
+      "sha256": "53fc7c84c6027b0a0f6a0c99590be9eb511aee5ed52e128edf7ecba9a4787b0d"
+    },
+    "colored-CPU": {
+      "path": "/mnt/external/demosaic/evaluation/packed-isotropic-quarter-colored-CPU-v1/report.json",
+      "sha256": "180f70538da9391ecdd4ce7c101cc0d68a12a2c09ab37f4ff430d07bbe167ac7"
+    }
+  },
+  "photo_and_procedural_means": [
+    {
+      "model": "0:no-dino-packed-isotropic-b4-v71-quarter:step-40000",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 35.05550716744094,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 29.73206730517467,
+          "count": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.8832399935881284,
+          "count": 427
+        },
+        "chroma_mae": {
+          "mean": 0.014863454206960695,
+          "count": 427
+        },
+        "gradient_mae": {
+          "mean": 0.023129823023744722,
+          "count": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03033065216436608,
+          "count": 425
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.036027823915618346,
+          "count": 425
+        },
+        "shadow_linear_psnr": {
+          "mean": 41.15836400461229,
+          "count": 426
+        }
+      }
+    },
+    {
+      "model": "0:no-dino-packed-isotropic-b4-v71-quarter:step-40000",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 32.21238511375019,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 29.50995065484728,
+          "count": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.8908287781689848,
+          "count": 16
+        },
+        "chroma_mae": {
+          "mean": 0.017099197894172642,
+          "count": 16
+        },
+        "gradient_mae": {
+          "mean": 0.01943885665241396,
+          "count": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03183906974251537,
+          "count": 16
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03192581552042005,
+          "count": 16
+        },
+        "shadow_linear_psnr": {
+          "mean": 45.120891502925325,
+          "count": 14
+        }
+      }
+    },
+    {
+      "model": "1:dino-packed-isotropic-b4-v70-quarter:step-40000",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 35.2399665450284,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 29.953265049737524,
+          "count": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.8867865140998831,
+          "count": 427
+        },
+        "chroma_mae": {
+          "mean": 0.014130618077813899,
+          "count": 427
+        },
+        "gradient_mae": {
+          "mean": 0.023166902882050054,
+          "count": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.028301577619128573,
+          "count": 425
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03557846159746131,
+          "count": 425
+        },
+        "shadow_linear_psnr": {
+          "mean": 41.4930861603886,
+          "count": 426
+        }
+      }
+    },
+    {
+      "model": "1:dino-packed-isotropic-b4-v70-quarter:step-40000",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 32.44562562235764,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 29.56380454131535,
+          "count": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.8906315449359161,
+          "count": 16
+        },
+        "chroma_mae": {
+          "mean": 0.017142528513691753,
+          "count": 16
+        },
+        "gradient_mae": {
+          "mean": 0.01942129065563287,
+          "count": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03300040496396832,
+          "count": 16
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.033587396609558104,
+          "count": 16
+        },
+        "shadow_linear_psnr": {
+          "mean": 45.33420249394008,
+          "count": 14
+        }
+      }
+    },
+    {
+      "model": "2:dino-anchored-native-diverse-b16-v43:step-2000",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 39.631028077641474,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 34.89934326247174,
+          "count": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.9571264360901423,
+          "count": 427
+        },
+        "chroma_mae": {
+          "mean": 0.008157131723473824,
+          "count": 427
+        },
+        "gradient_mae": {
+          "mean": 0.01276809837716978,
+          "count": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.015875614815809326,
+          "count": 425
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.020612762924820165,
+          "count": 425
+        },
+        "shadow_linear_psnr": {
+          "mean": 50.90255003001581,
+          "count": 426
+        }
+      }
+    },
+    {
+      "model": "2:dino-anchored-native-diverse-b16-v43:step-2000",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 36.13752015786511,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 33.28537464141846,
+          "count": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.9666042776246155,
+          "count": 16
+        },
+        "chroma_mae": {
+          "mean": 0.011505073200688847,
+          "count": 16
+        },
+        "gradient_mae": {
+          "mean": 0.009512528139436784,
+          "count": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.020508821187831927,
+          "count": 16
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.022370466895517895,
+          "count": 16
+        },
+        "shadow_linear_psnr": {
+          "mean": 52.37477976935251,
+          "count": 14
+        }
+      }
+    },
+    {
+      "model": "3:dino-convnext-wide-long-control-b16-v63-full20k:step-20000",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 41.35983259058111,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 35.93308706002796,
+          "count": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.9632904151284444,
+          "count": 427
+        },
+        "chroma_mae": {
+          "mean": 0.0071309511382142655,
+          "count": 427
+        },
+        "gradient_mae": {
+          "mean": 0.011384969813843538,
+          "count": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.01417938245712624,
+          "count": 425
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.017969109741057837,
+          "count": 425
+        },
+        "shadow_linear_psnr": {
+          "mean": 52.52124054725608,
+          "count": 426
+        }
+      }
+    },
+    {
+      "model": "3:dino-convnext-wide-long-control-b16-v63-full20k:step-20000",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 38.765202262571876,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 35.07652770195689,
+          "count": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.9763222405953067,
+          "count": 16
+        },
+        "chroma_mae": {
+          "mean": 0.008304575158295587,
+          "count": 16
+        },
+        "gradient_mae": {
+          "mean": 0.007827325411978694,
+          "count": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.018312508396290166,
+          "count": 16
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.020275703213216426,
+          "count": 16
+        },
+        "shadow_linear_psnr": {
+          "mean": 53.35169914790562,
+          "count": 14
+        }
+      }
+    },
+    {
+      "model": "Bilinear",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 32.331662122762175,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 27.554808647906192,
+          "count": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.8117023668722112,
+          "count": 427
+        },
+        "chroma_mae": {
+          "mean": 0.021580360618503644,
+          "count": 427
+        },
+        "gradient_mae": {
+          "mean": 0.028889606232246554,
+          "count": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03780230296916082,
+          "count": 425
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.042343216852237034,
+          "count": 425
+        },
+        "shadow_linear_psnr": {
+          "mean": 38.53799434766763,
+          "count": 426
+        }
+      }
+    },
+    {
+      "model": "Bilinear",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 30.73424094702516,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 28.94629625763212,
+          "count": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.8488764680389846,
+          "count": 16
+        },
+        "chroma_mae": {
+          "mean": 0.020149018640430377,
+          "count": 16
+        },
+        "gradient_mae": {
+          "mean": 0.023735803505977468,
+          "count": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03039698658782678,
+          "count": 16
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.03008237991598435,
+          "count": 16
+        },
+        "shadow_linear_psnr": {
+          "mean": 44.00048637390137,
+          "count": 14
+        }
+      }
+    },
+    {
+      "model": "Malvar2004:WB",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 34.19429575284216,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 28.538646320867553,
+          "count": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.8395195344731575,
+          "count": 427
+        },
+        "chroma_mae": {
+          "mean": 0.018675396990551506,
+          "count": 427
+        },
+        "gradient_mae": {
+          "mean": 0.02758123905438163,
+          "count": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03286145581360495,
+          "count": 425
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.0358086475524047,
+          "count": 425
+        },
+        "shadow_linear_psnr": {
+          "mean": 43.07007689375273,
+          "count": 426
+        }
+      }
+    },
+    {
+      "model": "Malvar2004:WB",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 29.52271143027714,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 27.338598008666718,
+          "count": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.8075417628777879,
+          "count": 16
+        },
+        "chroma_mae": {
+          "mean": 0.020920330565526717,
+          "count": 16
+        },
+        "gradient_mae": {
+          "mean": 0.02994750354576224,
+          "count": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03903245562784528,
+          "count": 16
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.04086002269759774,
+          "count": 16
+        },
+        "shadow_linear_psnr": {
+          "mean": 44.19787904194423,
+          "count": 14
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 31.219858951176157,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 26.69578090955199,
+          "count": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.7900278346594978,
+          "count": 427
+        },
+        "chroma_mae": {
+          "mean": 0.015574188553669741,
+          "count": 427
+        },
+        "gradient_mae": {
+          "mean": 0.02955579169804009,
+          "count": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03242370754229271,
+          "count": 425
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.062170805104085985,
+          "count": 425
+        },
+        "shadow_linear_psnr": {
+          "mean": 36.213573788999575,
+          "count": 426
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 27.499735749193597,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 24.974264783518656,
+          "count": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.7204112862236798,
+          "count": 16
+        },
+        "chroma_mae": {
+          "mean": 0.028688859266237286,
+          "count": 16
+        },
+        "gradient_mae": {
+          "mean": 0.028516341323016343,
+          "count": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.062062345759477465,
+          "count": 16
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.0701000613218639,
+          "count": 16
+        },
+        "shadow_linear_psnr": {
+          "mean": 40.939438172749114,
+          "count": 14
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-channel",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 31.210055857129063,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 26.683572688681817,
+          "count": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.7898987557037334,
+          "count": 427
+        },
+        "chroma_mae": {
+          "mean": 0.01571742883748725,
+          "count": 427
+        },
+        "gradient_mae": {
+          "mean": 0.029560406678979106,
+          "count": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03282302056555636,
+          "count": 425
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.06239724106652954,
+          "count": 425
+        },
+        "shadow_linear_psnr": {
+          "mean": 36.196063687996975,
+          "count": 426
+        }
+      }
+    },
+    {
+      "model": "RawNIND:CFA-channel",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 27.510318653924124,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 24.985678327935084,
+          "count": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.7204998645798437,
+          "count": 16
+        },
+        "chroma_mae": {
+          "mean": 0.028720084922887117,
+          "count": 16
+        },
+        "gradient_mae": {
+          "mean": 0.028507901730336016,
+          "count": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.06247638459317387,
+          "count": 16
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.07023170734173619,
+          "count": 16
+        },
+        "shadow_linear_psnr": {
+          "mean": 40.928960527692524,
+          "count": 14
+        }
+      }
+    },
+    {
+      "model": "Wiener7+Malvar2004:WB",
+      "kind": "photo",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 35.05460269270074,
+          "count": 427
+        },
+        "srgb_psnr": {
+          "mean": 29.296971703500965,
+          "count": 427
+        },
+        "srgb_ssim": {
+          "mean": 0.888097709100276,
+          "count": 427
+        },
+        "chroma_mae": {
+          "mean": 0.016795739527802372,
+          "count": 427
+        },
+        "gradient_mae": {
+          "mean": 0.02434521617197139,
+          "count": 427
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.03250578046559502,
+          "count": 425
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.035349363911572805,
+          "count": 425
+        },
+        "shadow_linear_psnr": {
+          "mean": 43.530589481607905,
+          "count": 426
+        }
+      }
+    },
+    {
+      "model": "Wiener7+Malvar2004:WB",
+      "kind": "synthetic",
+      "metrics": {
+        "linear_psnr": {
+          "mean": 30.20364396912711,
+          "count": 16
+        },
+        "srgb_psnr": {
+          "mean": 27.95118518812316,
+          "count": 16
+        },
+        "srgb_ssim": {
+          "mean": 0.8604902871219176,
+          "count": 16
+        },
+        "chroma_mae": {
+          "mean": 0.019115856275415614,
+          "count": 16
+        },
+        "gradient_mae": {
+          "mean": 0.026109456112213332,
+          "count": 16
+        },
+        "highlight_boundary_chroma_mae": {
+          "mean": 0.038968854465444264,
+          "count": 16
+        },
+        "highlight_boundary_rgb_mae": {
+          "mean": 0.04045931040406382,
+          "count": 16
+        },
+        "shadow_linear_psnr": {
+          "mean": 44.78598778588431,
+          "count": 14
+        }
+      }
+    }
+  ],
+  "known_camera_means": [
+    {
+      "model": "0:no-dino-packed-isotropic-b4-v71-quarter:step-40000",
+      "kind": "real",
+      "metrics": {
+        "sensor_psnr": {
+          "mean": 48.28178993860881,
+          "count": 4
+        },
+        "reference_samples": {
+          "mean": 200661.7361111111,
+          "count": 4
+        },
+        "ahd_srgb_psnr": {
+          "mean": 35.17917998631795,
+          "count": 4
+        },
+        "ahd_srgb_ssim": {
+          "mean": 0.8048101469046539,
+          "count": 4
+        },
+        "ahd_chroma_mae": {
+          "mean": 0.010593454098044377,
+          "count": 4
+        },
+        "ahd_gradient_mae": {
+          "mean": 0.013501602257343214,
+          "count": 4
+        }
+      }
+    },
+    {
+      "model": "1:dino-packed-isotropic-b4-v70-quarter:step-40000",
+      "kind": "real",
+      "metrics": {
+        "sensor_psnr": {
+          "mean": 48.36667198605008,
+          "count": 4
+        },
+        "reference_samples": {
+          "mean": 200661.7361111111,
+          "count": 4
+        },
+        "ahd_srgb_psnr": {
+          "mean": 35.0757331053416,
+          "count": 4
+        },
+        "ahd_srgb_ssim": {
+          "mean": 0.7935844278997846,
+          "count": 4
+        },
+        "ahd_chroma_mae": {
+          "mean": 0.011441972345993336,
+          "count": 4
+        },
+        "ahd_gradient_mae": {
+          "mean": 0.014329071376576193,
+          "count": 4
+        }
+      }
+    },
+    {
+      "model": "2:dino-anchored-native-diverse-b16-v43:step-2000",
+      "kind": "real",
+      "metrics": {
+        "sensor_psnr": {
+          "mean": 54.233322090572784,
+          "count": 4
+        },
+        "reference_samples": {
+          "mean": 200661.7361111111,
+          "count": 4
+        },
+        "ahd_srgb_psnr": {
+          "mean": 40.051053841908775,
+          "count": 4
+        },
+        "ahd_srgb_ssim": {
+          "mean": 0.9308483733071221,
+          "count": 4
+        },
+        "ahd_chroma_mae": {
+          "mean": 0.00599839779897593,
+          "count": 4
+        },
+        "ahd_gradient_mae": {
+          "mean": 0.0064192761912838445,
+          "count": 4
+        }
+      }
+    },
+    {
+      "model": "3:dino-convnext-wide-long-control-b16-v63-full20k:step-20000",
+      "kind": "real",
+      "metrics": {
+        "sensor_psnr": {
+          "mean": 54.20365964041816,
+          "count": 4
+        },
+        "reference_samples": {
+          "mean": 200661.7361111111,
+          "count": 4
+        },
+        "ahd_srgb_psnr": {
+          "mean": 40.05336983998616,
+          "count": 4
+        },
+        "ahd_srgb_ssim": {
+          "mean": 0.9319335851404402,
+          "count": 4
+        },
+        "ahd_chroma_mae": {
+          "mean": 0.00600127897632774,
+          "count": 4
+        },
+        "ahd_gradient_mae": {
+          "mean": 0.006364201712939473,
+          "count": 4
+        }
+      }
+    },
+    {
+      "model": "Bilinear",
+      "kind": "real",
+      "metrics": {
+        "sensor_psnr": {
+          "mean": 44.10599215825399,
+          "count": 4
+        },
+        "reference_samples": {
+          "mean": 200661.7361111111,
+          "count": 4
+        },
+        "ahd_srgb_psnr": {
+          "mean": 29.836332321166992,
+          "count": 4
+        },
+        "ahd_srgb_ssim": {
+          "mean": 0.5878955717715952,
+          "count": 4
+        },
+        "ahd_chroma_mae": {
+          "mean": 0.02503708149823878,
+          "count": 4
+        },
+        "ahd_gradient_mae": {
+          "mean": 0.02472208865866479,
+          "count": 4
+        }
+      }
+    },
+    {
+      "model": "Malvar2004:WB",
+      "kind": "real",
+      "metrics": {
+        "sensor_psnr": {
+          "mean": 43.80425209469266,
+          "count": 4
+        },
+        "reference_samples": {
+          "mean": 200661.7361111111,
+          "count": 4
+        },
+        "ahd_srgb_psnr": {
+          "mean": 30.016488790512085,
+          "count": 4
+        },
+        "ahd_srgb_ssim": {
+          "mean": 0.5982528728329473,
+          "count": 4
+        },
+        "ahd_chroma_mae": {
+          "mean": 0.020380146206460066,
+          "count": 4
+        },
+        "ahd_gradient_mae": {
+          "mean": 0.025714163138117228,
+          "count": 4
+        }
+      }
+    },
+    {
+      "model": "RawNIND:cfa-channel:publisher",
+      "kind": "real",
+      "metrics": {
+        "sensor_psnr": {
+          "mean": 54.08474085066054,
+          "count": 4
+        },
+        "reference_samples": {
+          "mean": 200661.7361111111,
+          "count": 4
+        },
+        "ahd_srgb_psnr": {
+          "mean": 39.7171000374688,
+          "count": 4
+        },
+        "ahd_srgb_ssim": {
+          "mean": 0.9288313032852279,
+          "count": 4
+        },
+        "ahd_chroma_mae": {
+          "mean": 0.0061995219681800036,
+          "count": 4
+        },
+        "ahd_gradient_mae": {
+          "mean": 0.0065557970147993826,
+          "count": 4
+        }
+      }
+    },
+    {
+      "model": "RawNIND:cfa-ls:publisher",
+      "kind": "real",
+      "metrics": {
+        "sensor_psnr": {
+          "mean": 54.06859636306763,
+          "count": 4
+        },
+        "reference_samples": {
+          "mean": 200661.7361111111,
+          "count": 4
+        },
+        "ahd_srgb_psnr": {
+          "mean": 39.678047551049126,
+          "count": 4
+        },
+        "ahd_srgb_ssim": {
+          "mean": 0.928810535205735,
+          "count": 4
+        },
+        "ahd_chroma_mae": {
+          "mean": 0.006295617572808018,
+          "count": 4
+        },
+        "ahd_gradient_mae": {
+          "mean": 0.006555553548322577,
+          "count": 4
+        }
+      }
+    },
+    {
+      "model": "Wiener7+Malvar2004:WB",
+      "kind": "real",
+      "metrics": {
+        "sensor_psnr": {
+          "mean": 50.071689976586235,
+          "count": 4
+        },
+        "reference_samples": {
+          "mean": 200661.7361111111,
+          "count": 4
+        },
+        "ahd_srgb_psnr": {
+          "mean": 35.86313165558709,
+          "count": 4
+        },
+        "ahd_srgb_ssim": {
+          "mean": 0.8550734726919068,
+          "count": 4
+        },
+        "ahd_chroma_mae": {
+          "mean": 0.01000751066668373,
+          "count": 4
+        },
+        "ahd_gradient_mae": {
+          "mean": 0.010634852324276127,
+          "count": 4
+        }
+      }
+    }
+  ],
+  "unseen_camera_means": [
+    {
+      "model": "0:no-dino-packed-isotropic-b4-v71-quarter:step-40000",
+      "kind": "real",
+      "metrics": {
+        "sensor_psnr": {
+          "mean": 46.14578386942546,
+          "count": 5
+        },
+        "reference_samples": {
+          "mean": 220744.8111111111,
+          "count": 5
+        },
+        "ahd_srgb_psnr": {
+          "mean": 31.587642076280382,
+          "count": 5
+        },
+        "ahd_srgb_ssim": {
+          "mean": 0.6796318958202999,
+          "count": 5
+        },
+        "ahd_chroma_mae": {
+          "mean": 0.01806462297423018,
+          "count": 5
+        },
+        "ahd_gradient_mae": {
+          "mean": 0.019467065431591535,
+          "count": 5
+        }
+      }
+    },
+    {
+      "model": "1:dino-packed-isotropic-b4-v70-quarter:step-40000",
+      "kind": "real",
+      "metrics": {
+        "sensor_psnr": {
+          "mean": 46.01028743320042,
+          "count": 5
+        },
+        "reference_samples": {
+          "mean": 220744.8111111111,
+          "count": 5
+        },
+        "ahd_srgb_psnr": {
+          "mean": 31.56887787712945,
+          "count": 5
+        },
+        "ahd_srgb_ssim": {
+          "mean": 0.6583963261710273,
+          "count": 5
+        },
+        "ahd_chroma_mae": {
+          "mean": 0.019049670888731877,
+          "count": 5
+        },
+        "ahd_gradient_mae": {
+          "mean": 0.02084241815739208,
+          "count": 5
+        }
+      }
+    },
+    {
+      "model": "2:dino-anchored-native-diverse-b16-v43:step-2000",
+      "kind": "real",
+      "metrics": {
+        "sensor_psnr": {
+          "mean": 53.80605854458279,
+          "count": 5
+        },
+        "reference_samples": {
+          "mean": 220744.8111111111,
+          "count": 5
+        },
+        "ahd_srgb_psnr": {
+          "mean": 38.590781699286566,
+          "count": 5
+        },
+        "ahd_srgb_ssim": {
+          "mean": 0.9215792609585656,
+          "count": 5
+        },
+        "ahd_chroma_mae": {
+          "mean": 0.00712115519369642,
+          "count": 5
+        },
+        "ahd_gradient_mae": {
+          "mean": 0.006393157044011685,
+          "count": 5
+        }
+      }
+    },
+    {
+      "model": "3:dino-convnext-wide-long-control-b16-v63-full20k:step-20000",
+      "kind": "real",
+      "metrics": {
+        "sensor_psnr": {
+          "mean": 53.84297676086426,
+          "count": 5
+        },
+        "reference_samples": {
+          "mean": 220744.8111111111,
+          "count": 5
+        },
+        "ahd_srgb_psnr": {
+          "mean": 38.80517251756456,
+          "count": 5
+        },
+        "ahd_srgb_ssim": {
+          "mean": 0.9238477832741208,
+          "count": 5
+        },
+        "ahd_chroma_mae": {
+          "mean": 0.006884704100795919,
+          "count": 5
+        },
+        "ahd_gradient_mae": {
+          "mean": 0.006397365452721715,
+          "count": 5
+        }
+      }
+    },
+    {
+      "model": "Bilinear",
+      "kind": "real",
+      "metrics": {
+        "sensor_psnr": {
+          "mean": 41.41325357225206,
+          "count": 5
+        },
+        "reference_samples": {
+          "mean": 220744.8111111111,
+          "count": 5
+        },
+        "ahd_srgb_psnr": {
+          "mean": 25.49506827460395,
+          "count": 5
+        },
+        "ahd_srgb_ssim": {
+          "mean": 0.37466897865136467,
+          "count": 5
+        },
+        "ahd_chroma_mae": {
+          "mean": 0.042432663072314525,
+          "count": 5
+        },
+        "ahd_gradient_mae": {
+          "mean": 0.03895158672498332,
+          "count": 5
+        }
+      }
+    },
+    {
+      "model": "Malvar2004:WB",
+      "kind": "real",
+      "metrics": {
+        "sensor_psnr": {
+          "mean": 40.937970352172854,
+          "count": 5
+        },
+        "reference_samples": {
+          "mean": 220744.8111111111,
+          "count": 5
+        },
+        "ahd_srgb_psnr": {
+          "mean": 25.86025329165988,
+          "count": 5
+        },
+        "ahd_srgb_ssim": {
+          "mean": 0.4032435259057416,
+          "count": 5
+        },
+        "ahd_chroma_mae": {
+          "mean": 0.03489497504714463,
+          "count": 5
+        },
+        "ahd_gradient_mae": {
+          "mean": 0.03896706760343579,
+          "count": 5
+        }
+      }
+    },
+    {
+      "model": "RawNIND:cfa-channel:publisher",
+      "kind": "real",
+      "metrics": {
+        "sensor_psnr": {
+          "mean": 53.76821780734592,
+          "count": 5
+        },
+        "reference_samples": {
+          "mean": 220744.8111111111,
+          "count": 5
+        },
+        "ahd_srgb_psnr": {
+          "mean": 38.56191194322374,
+          "count": 5
+        },
+        "ahd_srgb_ssim": {
+          "mean": 0.9221266448497772,
+          "count": 5
+        },
+        "ahd_chroma_mae": {
+          "mean": 0.0071724309792949095,
+          "count": 5
+        },
+        "ahd_gradient_mae": {
+          "mean": 0.006613127592330177,
+          "count": 5
+        }
+      }
+    },
+    {
+      "model": "RawNIND:cfa-ls:publisher",
+      "kind": "real",
+      "metrics": {
+        "sensor_psnr": {
+          "mean": 53.56220122443305,
+          "count": 5
+        },
+        "reference_samples": {
+          "mean": 220744.8111111111,
+          "count": 5
+        },
+        "ahd_srgb_psnr": {
+          "mean": 38.144836574130586,
+          "count": 5
+        },
+        "ahd_srgb_ssim": {
+          "mean": 0.9183798478709327,
+          "count": 5
+        },
+        "ahd_chroma_mae": {
+          "mean": 0.00781363517873817,
+          "count": 5
+        },
+        "ahd_gradient_mae": {
+          "mean": 0.006614771273194088,
+          "count": 5
+        }
+      }
+    },
+    {
+      "model": "Wiener7+Malvar2004:WB",
+      "kind": "real",
+      "metrics": {
+        "sensor_psnr": {
+          "mean": 49.59129096137152,
+          "count": 5
+        },
+        "reference_samples": {
+          "mean": 220744.8111111111,
+          "count": 5
+        },
+        "ahd_srgb_psnr": {
+          "mean": 33.028770722283255,
+          "count": 5
+        },
+        "ahd_srgb_ssim": {
+          "mean": 0.7922076225280761,
+          "count": 5
+        },
+        "ahd_chroma_mae": {
+          "mean": 0.014855502649313873,
+          "count": 5
+        },
+        "ahd_gradient_mae": {
+          "mean": 0.012288579556884038,
+          "count": 5
+        }
+      }
+    }
+  ],
+  "statistics": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-review-workflow-v1/primary-scores.json",
+    "sha256": "0dfc5941ee1341f8c4e74cfe4be760b8435983326e4d0122072c1237704a4c12"
+  },
+  "comparison_count": 132,
+  "classical_witness_count": 33,
+  "photo_comparisons": [
+    {
+      "panel": "full427",
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "first": "V70-dino-quarter160000examples",
+      "second": "V71-no-dino-quarter160000examples",
+      "first_checkpoint_sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337",
+      "second_checkpoint_sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+      "sources": 427,
+      "first_source_balanced_mean": 29.953265049737524,
+      "second_source_balanced_mean": 29.732067305174667,
+      "mean_first_minus_second": 0.2211977445628582,
+      "source_bootstrap_95_interval": [
+        0.19897824567709957,
+        0.2446188836601837
+      ]
+    },
+    {
+      "panel": "full427",
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "first": "V71-no-dino-quarter160000examples",
+      "second": "V43-working",
+      "first_checkpoint_sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+      "second_checkpoint_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+      "sources": 427,
+      "first_source_balanced_mean": 29.732067305174667,
+      "second_source_balanced_mean": 34.89934326247174,
+      "mean_first_minus_second": -5.167275957297067,
+      "source_bootstrap_95_interval": [
+        -5.296072595970572,
+        -5.044461307724251
+      ]
+    },
+    {
+      "panel": "full427",
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "first": "V71-no-dino-quarter160000examples",
+      "second": "V63-original20k",
+      "first_checkpoint_sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+      "second_checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+      "sources": 427,
+      "first_source_balanced_mean": 29.732067305174667,
+      "second_source_balanced_mean": 35.93308706002795,
+      "mean_first_minus_second": -6.201019754853286,
+      "source_bootstrap_95_interval": [
+        -6.360307134737257,
+        -6.05095592582453
+      ]
+    },
+    {
+      "panel": "full427",
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "first": "V71-no-dino-quarter160000examples",
+      "second": "RawNIND-global-CFA",
+      "first_checkpoint_sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+      "second_checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+      "sources": 427,
+      "first_source_balanced_mean": 29.732067305174667,
+      "second_source_balanced_mean": 26.69578090955199,
+      "mean_first_minus_second": 3.03628639562268,
+      "source_bootstrap_95_interval": [
+        2.9484707487770123,
+        3.120033812375322
+      ]
+    },
+    {
+      "panel": "full427",
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "first": "V71-no-dino-quarter160000examples",
+      "second": "RawNIND-channel-CFA",
+      "first_checkpoint_sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+      "second_checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+      "sources": 427,
+      "first_source_balanced_mean": 29.732067305174667,
+      "second_source_balanced_mean": 26.683572688681817,
+      "mean_first_minus_second": 3.04849461649285,
+      "source_bootstrap_95_interval": [
+        2.9569405654634107,
+        3.132208250970017
+      ]
+    },
+    {
+      "panel": "full427",
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "first": "V70-dino-quarter160000examples",
+      "second": "V43-working",
+      "first_checkpoint_sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337",
+      "second_checkpoint_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+      "sources": 427,
+      "first_source_balanced_mean": 29.953265049737524,
+      "second_source_balanced_mean": 34.89934326247174,
+      "mean_first_minus_second": -4.946078212734209,
+      "source_bootstrap_95_interval": [
+        -5.073181050890224,
+        -4.822502297085238
+      ]
+    },
+    {
+      "panel": "full427",
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "first": "V70-dino-quarter160000examples",
+      "second": "V63-original20k",
+      "first_checkpoint_sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337",
+      "second_checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+      "sources": 427,
+      "first_source_balanced_mean": 29.953265049737524,
+      "second_source_balanced_mean": 35.93308706002795,
+      "mean_first_minus_second": -5.979822010290428,
+      "source_bootstrap_95_interval": [
+        -6.134516568696789,
+        -5.826774576496782
+      ]
+    },
+    {
+      "panel": "full427",
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "first": "V70-dino-quarter160000examples",
+      "second": "RawNIND-global-CFA",
+      "first_checkpoint_sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337",
+      "second_checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+      "sources": 427,
+      "first_source_balanced_mean": 29.953265049737524,
+      "second_source_balanced_mean": 26.69578090955199,
+      "mean_first_minus_second": 3.257484140185538,
+      "source_bootstrap_95_interval": [
+        3.1707685508908297,
+        3.3409598708790895
+      ]
+    },
+    {
+      "panel": "full427",
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "first": "V70-dino-quarter160000examples",
+      "second": "RawNIND-channel-CFA",
+      "first_checkpoint_sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337",
+      "second_checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+      "sources": 427,
+      "first_source_balanced_mean": 29.953265049737524,
+      "second_source_balanced_mean": 26.683572688681817,
+      "mean_first_minus_second": 3.269692361055708,
+      "source_bootstrap_95_interval": [
+        3.182403229448699,
+        3.356055095196568
+      ]
+    },
+    {
+      "panel": "full427",
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "first": "V71-no-dino-quarter160000examples",
+      "second": "V71-no-dino-first32000examples",
+      "first_checkpoint_sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+      "second_checkpoint_sha256": "abd7345c080cb227d77385647c74614c0416d9316ad2f28c81c31cdd1f1697a2",
+      "sources": 427,
+      "first_source_balanced_mean": 29.732067305174667,
+      "second_source_balanced_mean": 27.670870330111164,
+      "mean_first_minus_second": 2.061196975063504,
+      "source_bootstrap_95_interval": [
+        2.0161793353646127,
+        2.106168555116606
+      ]
+    },
+    {
+      "panel": "full427",
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "first": "V70-dino-quarter160000examples",
+      "second": "V70-dino-first32000examples",
+      "first_checkpoint_sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337",
+      "second_checkpoint_sha256": "5fc021488d34df6ddf85cac8b0fc5cb0b0117713c87865c010e7e246979a2c14",
+      "sources": 427,
+      "first_source_balanced_mean": 29.953265049737524,
+      "second_source_balanced_mean": 27.76515122614963,
+      "mean_first_minus_second": 2.188113823587897,
+      "source_bootstrap_95_interval": [
+        2.13569590577556,
+        2.2343382314161615
+      ]
+    }
+  ],
+  "source_sensitivity": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-source-sensitivity-v1/result.json",
+    "sha256": "7990fa8a25a3b609013ae339db7615f4b8c5cef1f2bb05d8afda3ebd393c9ab1"
+  },
+  "source_sensitivity_comparisons": 99,
+  "selected_sensitivity": [
+    {
+      "cohort": "original427",
+      "sources": 427,
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "first": "V70-dino-quarter160000examples",
+      "second": "V71-no-dino-quarter160000examples",
+      "first_checkpoint_sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337",
+      "second_checkpoint_sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+      "first_source_balanced_mean": 29.953265049737524,
+      "second_source_balanced_mean": 29.732067305174667,
+      "mean_first_minus_second": 0.2211977445628582,
+      "source_bootstrap_95_interval": [
+        0.19897824567709957,
+        0.2446188836601837
+      ],
+      "change_from_original_mean_delta": 0.0,
+      "excluded_source_count": 0,
+      "excluded_source_mean_delta_descriptive_only": null
+    },
+    {
+      "cohort": "known-capture-series-excluded",
+      "sources": 418,
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "first": "V70-dino-quarter160000examples",
+      "second": "V71-no-dino-quarter160000examples",
+      "first_checkpoint_sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337",
+      "second_checkpoint_sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+      "first_source_balanced_mean": 29.93923726753266,
+      "second_source_balanced_mean": 29.718138536197717,
+      "mean_first_minus_second": 0.22109873133494465,
+      "source_bootstrap_95_interval": [
+        0.1976740457183765,
+        0.24461978599785628
+      ],
+      "change_from_original_mean_delta": -9.901322791355804e-05,
+      "excluded_source_count": 9,
+      "excluded_source_mean_delta_descriptive_only": 0.225796358925955
+    },
+    {
+      "cohort": "known-capture-series-and-sites-excluded",
+      "sources": 416,
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "first": "V70-dino-quarter160000examples",
+      "second": "V71-no-dino-quarter160000examples",
+      "first_checkpoint_sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337",
+      "second_checkpoint_sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+      "first_source_balanced_mean": 29.958474085389916,
+      "second_source_balanced_mean": 29.737798613015112,
+      "mean_first_minus_second": 0.220675472374801,
+      "source_bootstrap_95_interval": [
+        0.19603602012598936,
+        0.24624104439639127
+      ],
+      "change_from_original_mean_delta": -0.000522272188057199,
+      "excluded_source_count": 11,
+      "excluded_source_mean_delta_descriptive_only": 0.24094912912938457
+    },
+    {
+      "cohort": "original427",
+      "sources": 427,
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "first": "V71-no-dino-quarter160000examples",
+      "second": "V71-no-dino-first32000examples",
+      "first_checkpoint_sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+      "second_checkpoint_sha256": "abd7345c080cb227d77385647c74614c0416d9316ad2f28c81c31cdd1f1697a2",
+      "first_source_balanced_mean": 29.732067305174667,
+      "second_source_balanced_mean": 27.670870330111164,
+      "mean_first_minus_second": 2.061196975063504,
+      "source_bootstrap_95_interval": [
+        2.0161793353646127,
+        2.106168555116606
+      ],
+      "change_from_original_mean_delta": 0.0,
+      "excluded_source_count": 0,
+      "excluded_source_mean_delta_descriptive_only": null
+    },
+    {
+      "cohort": "known-capture-series-excluded",
+      "sources": 418,
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "first": "V71-no-dino-quarter160000examples",
+      "second": "V71-no-dino-first32000examples",
+      "first_checkpoint_sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+      "second_checkpoint_sha256": "abd7345c080cb227d77385647c74614c0416d9316ad2f28c81c31cdd1f1697a2",
+      "first_source_balanced_mean": 29.718138536197717,
+      "second_source_balanced_mean": 27.65162554263091,
+      "mean_first_minus_second": 2.066512993566809,
+      "source_bootstrap_95_interval": [
+        2.0197835614847466,
+        2.1077831693365403
+      ],
+      "change_from_original_mean_delta": 0.005316018503305209,
+      "excluded_source_count": 9,
+      "excluded_source_mean_delta_descriptive_only": 1.8142974490211126
+    },
+    {
+      "cohort": "known-capture-series-and-sites-excluded",
+      "sources": 416,
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "first": "V71-no-dino-quarter160000examples",
+      "second": "V71-no-dino-first32000examples",
+      "first_checkpoint_sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+      "second_checkpoint_sha256": "abd7345c080cb227d77385647c74614c0416d9316ad2f28c81c31cdd1f1697a2",
+      "first_source_balanced_mean": 29.737798613015112,
+      "second_source_balanced_mean": 27.67109267822989,
+      "mean_first_minus_second": 2.0667059347852246,
+      "source_bootstrap_95_interval": [
+        2.021387699401968,
+        2.109987653726405
+      ],
+      "change_from_original_mean_delta": 0.005508959721720608,
+      "excluded_source_count": 11,
+      "excluded_source_mean_delta_descriptive_only": 1.852858134678432
+    },
+    {
+      "cohort": "original427",
+      "sources": 427,
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "first": "V70-dino-quarter160000examples",
+      "second": "V70-dino-first32000examples",
+      "first_checkpoint_sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337",
+      "second_checkpoint_sha256": "5fc021488d34df6ddf85cac8b0fc5cb0b0117713c87865c010e7e246979a2c14",
+      "first_source_balanced_mean": 29.953265049737524,
+      "second_source_balanced_mean": 27.76515122614963,
+      "mean_first_minus_second": 2.188113823587897,
+      "source_bootstrap_95_interval": [
+        2.13569590577556,
+        2.2343382314161615
+      ],
+      "change_from_original_mean_delta": 0.0,
+      "excluded_source_count": 0,
+      "excluded_source_mean_delta_descriptive_only": null
+    },
+    {
+      "cohort": "known-capture-series-excluded",
+      "sources": 418,
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "first": "V70-dino-quarter160000examples",
+      "second": "V70-dino-first32000examples",
+      "first_checkpoint_sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337",
+      "second_checkpoint_sha256": "5fc021488d34df6ddf85cac8b0fc5cb0b0117713c87865c010e7e246979a2c14",
+      "first_source_balanced_mean": 29.93923726753266,
+      "second_source_balanced_mean": 27.745853989073776,
+      "mean_first_minus_second": 2.193383278458883,
+      "source_bootstrap_95_interval": [
+        2.1443407202206974,
+        2.2370903879261475
+      ],
+      "change_from_original_mean_delta": 0.005269454870985957,
+      "excluded_source_count": 9,
+      "excluded_source_mean_delta_descriptive_only": 1.943376919579884
+    },
+    {
+      "cohort": "known-capture-series-and-sites-excluded",
+      "sources": 416,
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "first": "V70-dino-quarter160000examples",
+      "second": "V70-dino-first32000examples",
+      "first_checkpoint_sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337",
+      "second_checkpoint_sha256": "5fc021488d34df6ddf85cac8b0fc5cb0b0117713c87865c010e7e246979a2c14",
+      "first_source_balanced_mean": 29.958474085389916,
+      "second_source_balanced_mean": 27.765514048082487,
+      "mean_first_minus_second": 2.192960037307425,
+      "source_bootstrap_95_interval": [
+        2.1418506085217652,
+        2.244626197501362
+      ],
+      "change_from_original_mean_delta": 0.004846213719527981,
+      "excluded_source_count": 11,
+      "excluded_source_mean_delta_descriptive_only": 2.0048388320130184
+    }
+  ],
+  "full_GFX_timings": [
+    {
+      "model": "0:no-dino-packed-isotropic-b4-v71-quarter:step-40000",
+      "timing": {
+        "seconds": 50.69507984095253,
+        "tile_seconds": 50.65100168902427,
+        "compute_transfer_seconds": 50.349113014293835,
+        "blend_seconds": 0.2570386976003647,
+        "megapixels": 101.995852,
+        "tiles": 520,
+        "tile": 512,
+        "overlap": 64,
+        "batch_size": 4,
+        "compute_precision": "float16",
+        "refinement_compute_precision": "float32",
+        "memory_format": "channels_last",
+        "peak_cuda_gb": 7.683521024
+      },
+      "display_exposure": 4.0,
+      "crop_source": "Blended FP32 full frame before RGB16 encoding"
+    },
+    {
+      "model": "1:dino-packed-isotropic-b4-v70-quarter:step-40000",
+      "timing": {
+        "seconds": 53.73657486704178,
+        "tile_seconds": 53.69173887302168,
+        "compute_transfer_seconds": 53.47586434613913,
+        "blend_seconds": 0.17936839652247727,
+        "megapixels": 101.995852,
+        "tiles": 520,
+        "tile": 512,
+        "overlap": 64,
+        "batch_size": 4,
+        "compute_precision": "float16",
+        "refinement_compute_precision": "float32",
+        "memory_format": "channels_last",
+        "peak_cuda_gb": 7.683521024
+      },
+      "display_exposure": 4.0,
+      "crop_source": "Blended FP32 full frame before RGB16 encoding"
+    },
+    {
+      "model": "2:dino-anchored-native-diverse-b16-v43:step-2000",
+      "timing": {
+        "seconds": 30.46156756207347,
+        "tile_seconds": 30.409983868943527,
+        "compute_transfer_seconds": 29.972680832259357,
+        "blend_seconds": 0.3808788200840354,
+        "megapixels": 101.995852,
+        "tiles": 520,
+        "tile": 512,
+        "overlap": 64,
+        "batch_size": 4,
+        "compute_precision": "float16",
+        "refinement_compute_precision": "float32",
+        "memory_format": "channels_last",
+        "peak_cuda_gb": 2.22380288
+      },
+      "display_exposure": 4.0,
+      "crop_source": "Blended FP32 full frame before RGB16 encoding"
+    },
+    {
+      "model": "3:dino-convnext-wide-long-control-b16-v63-full20k:step-20000",
+      "timing": {
+        "seconds": 32.37574863107875,
+        "tile_seconds": 32.332508992170915,
+        "compute_transfer_seconds": 31.928321135696024,
+        "blend_seconds": 0.3686797076370567,
+        "megapixels": 101.995852,
+        "tiles": 520,
+        "tile": 512,
+        "overlap": 64,
+        "batch_size": 4,
+        "compute_precision": "float16",
+        "refinement_compute_precision": "float32",
+        "memory_format": "channels_last",
+        "peak_cuda_gb": 2.425173504
+      },
+      "display_exposure": 4.0,
+      "crop_source": "Blended FP32 full frame before RGB16 encoding"
+    },
+    {
+      "model": "RawNIND:CFA-LS",
+      "timing": {
+        "seconds": 15.698150427779183,
+        "tile_seconds": 15.640607262961566,
+        "compute_transfer_seconds": 15.382566574960947,
+        "blend_seconds": 0.2111455355770886,
+        "megapixels": 101.995852,
+        "tiles": 520,
+        "tile": 512,
+        "overlap": 64,
+        "batch_size": 4,
+        "compute_precision": "float32",
+        "refinement_compute_precision": "float32",
+        "memory_format": "channels_last",
+        "peak_cuda_gb": 1.878472192
+      },
+      "display_exposure": 4.0,
+      "crop_source": "Blended FP32 full frame before RGB16 encoding"
+    },
+    {
+      "model": "RawNIND:CFA-channel",
+      "timing": {
+        "seconds": 16.307057759957388,
+        "tile_seconds": 16.257125896168873,
+        "compute_transfer_seconds": 15.999993959674612,
+        "blend_seconds": 0.21331267897039652,
+        "megapixels": 101.995852,
+        "tiles": 520,
+        "tile": 512,
+        "overlap": 64,
+        "batch_size": 4,
+        "compute_precision": "float32",
+        "refinement_compute_precision": "float32",
+        "memory_format": "channels_last",
+        "peak_cuda_gb": 1.878474752
+      },
+      "display_exposure": 4.0,
+      "crop_source": "Blended FP32 full frame before RGB16 encoding"
+    }
+  ],
+  "timing_scope": "One full102MP restore per model,512/64/B4; frozen legacy2 tiling. Validation/allocations/transfers/network/blending included, decode/export excluded. Not repeated medians, compilation or corrected-grid timings.",
+  "artifact_audit": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-review-workflow-v1/artifact-audit.json",
+    "sha256": "481e1937cbca5abbe5a07d9fb512e38f25bcd58aa973968d8fab38e0910d65ab"
+  },
+  "artifact_counts": {
+    "PNG_images": 76,
+    "F32_arrays": 32,
+    "NN_RGB16_files": 8,
+    "additional_RawNIND_RGB16_files": 4
+  },
+  "supplementary_highlights": {
+    "path": "/mnt/external/demosaic/evaluation/packed-isotropic-quarter-GFX-highlights-v1/report.json",
+    "sha256": "aa8310f578616445865d6ef572df36fece26ae2c188ad986d3695d054e8a8ca8"
+  },
+  "hue": {
+    "path": "/mnt/external/demosaic/evaluation/packed-isotropic-quarter-hue-v1/report.json",
+    "sha256": "be192d573900a914d49049d9ee0eda4b9c6243da21223515a95f5a1cdd1fe66e"
+  },
+  "native_source_triplets_represented": {
+    "camera_development": 24,
+    "photographic": 12,
+    "GFX": 24,
+    "three_camera_color_hue_highlight": 54,
+    "analytic": 12,
+    "total": 126
+  },
+  "native_assets": [
+    {
+      "public_path": "docs/images/packed-quarter-no-dino-photo-0014aa4e.png",
+      "path": "/home/dllu/proj/demosaic/docs/images/packed-quarter-no-dino-photo-0014aa4e.png",
+      "sha256": "088eaf36e6d5551c1ba1307613809b2d319e7fed72a24601d703323562698ec7",
+      "role": "exact-GT-photo-triplet",
+      "metadata": {
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "validation_index": 0,
+        "validation_seed": 42,
+        "display_exposure": 1.0,
+        "reference": "Exact synthetic clean target",
+        "model": {
+          "label": "0:no-dino-packed-isotropic-b4-v71-quarter:step-40000",
+          "sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+          "step": 40000
+        },
+        "source": {
+          "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+          "author": "Roy Egloff",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8",
+          "bin_factor": 8
+        },
+        "cache_context_xywh": [
+          189,
+          3,
+          256,
+          256
+        ],
+        "cache_ROI_xywh": [
+          237,
+          51,
+          160,
+          160
+        ],
+        "WB": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470588,
+            -0.0588235294,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            1.1176470588,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            -0.0588235294,
+            1.1176470588
+          ]
+        ],
+        "degradation_seed": 20261014
+      }
+    },
+    {
+      "public_path": "docs/images/packed-quarter-no-dino-photo-002fc6ee.png",
+      "path": "/home/dllu/proj/demosaic/docs/images/packed-quarter-no-dino-photo-002fc6ee.png",
+      "sha256": "2a185ac164eb8d1c31041f5dc051a55e11752c6035833fb0896642cc3c304e03",
+      "role": "exact-GT-photo-triplet",
+      "metadata": {
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "validation_index": 1,
+        "validation_seed": 42,
+        "display_exposure": 1.0,
+        "reference": "Exact synthetic clean target",
+        "model": {
+          "label": "0:no-dino-packed-isotropic-b4-v71-quarter:step-40000",
+          "sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+          "step": 40000
+        },
+        "source": {
+          "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+          "author": "Dietmar Rabich",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf",
+          "bin_factor": 8
+        },
+        "cache_context_xywh": [
+          195,
+          89,
+          256,
+          256
+        ],
+        "cache_ROI_xywh": [
+          243,
+          137,
+          160,
+          160
+        ],
+        "WB": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470588,
+            -0.0588235294,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            1.1176470588,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            -0.0588235294,
+            1.1176470588
+          ]
+        ],
+        "degradation_seed": 20261014
+      }
+    },
+    {
+      "public_path": "docs/images/packed-quarter-dino-photo-0014aa4e.png",
+      "path": "/home/dllu/proj/demosaic/docs/images/packed-quarter-dino-photo-0014aa4e.png",
+      "sha256": "866868c6eba547515b60da3f07206c09eafb80b872d1a793f1c4fb8b1c027453",
+      "role": "exact-GT-photo-triplet",
+      "metadata": {
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "validation_index": 0,
+        "validation_seed": 42,
+        "display_exposure": 1.0,
+        "reference": "Exact synthetic clean target",
+        "model": {
+          "label": "1:dino-packed-isotropic-b4-v70-quarter:step-40000",
+          "sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337",
+          "step": 40000
+        },
+        "source": {
+          "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+          "author": "Roy Egloff",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8",
+          "bin_factor": 8
+        },
+        "cache_context_xywh": [
+          189,
+          3,
+          256,
+          256
+        ],
+        "cache_ROI_xywh": [
+          237,
+          51,
+          160,
+          160
+        ],
+        "WB": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470588,
+            -0.0588235294,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            1.1176470588,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            -0.0588235294,
+            1.1176470588
+          ]
+        ],
+        "degradation_seed": 20261014
+      }
+    },
+    {
+      "public_path": "docs/images/packed-quarter-dino-photo-002fc6ee.png",
+      "path": "/home/dllu/proj/demosaic/docs/images/packed-quarter-dino-photo-002fc6ee.png",
+      "sha256": "5e61f2c8b46811bb1963100303896d9dceba49281fb3b6411dd6ad10d220b695",
+      "role": "exact-GT-photo-triplet",
+      "metadata": {
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "validation_index": 1,
+        "validation_seed": 42,
+        "display_exposure": 1.0,
+        "reference": "Exact synthetic clean target",
+        "model": {
+          "label": "1:dino-packed-isotropic-b4-v70-quarter:step-40000",
+          "sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337",
+          "step": 40000
+        },
+        "source": {
+          "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+          "author": "Dietmar Rabich",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf",
+          "bin_factor": 8
+        },
+        "cache_context_xywh": [
+          195,
+          89,
+          256,
+          256
+        ],
+        "cache_ROI_xywh": [
+          243,
+          137,
+          160,
+          160
+        ],
+        "WB": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470588,
+            -0.0588235294,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            1.1176470588,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            -0.0588235294,
+            1.1176470588
+          ]
+        ],
+        "degradation_seed": 20261014
+      }
+    },
+    {
+      "public_path": "docs/images/packed-quarter-no-dino-GFX-foliage.png",
+      "path": "/home/dllu/proj/demosaic/docs/images/packed-quarter-no-dino-GFX-foliage.png",
+      "sha256": "538e89f3b700ecab9e8089073a0b44469e1566661ca7b7c59ffae469b807bcfd",
+      "role": "independent-reference-GFX-triplet",
+      "metadata": {
+        "region": {
+          "name": "foliage",
+          "noisy_xy": [
+            8890,
+            5570
+          ],
+          "reference_xy": [
+            8890,
+            5570
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9597686529159546
+        },
+        "model_label": "0:no-dino-packed-isotropic-b4-v71-quarter:step-40000",
+        "checkpoint_sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "full_frame": true,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping"
+      }
+    },
+    {
+      "public_path": "docs/images/packed-quarter-no-dino-GFX-chain-link-fence.png",
+      "path": "/home/dllu/proj/demosaic/docs/images/packed-quarter-no-dino-GFX-chain-link-fence.png",
+      "sha256": "5dc2583e22a33d10435c160963944d5894f06c8ecee2bb123001220fdea13738",
+      "role": "independent-reference-GFX-triplet",
+      "metadata": {
+        "region": {
+          "name": "chain-link-fence",
+          "noisy_xy": [
+            2240,
+            6000
+          ],
+          "reference_xy": [
+            2241,
+            6000
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9550720453262329
+        },
+        "model_label": "0:no-dino-packed-isotropic-b4-v71-quarter:step-40000",
+        "checkpoint_sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "full_frame": true,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping"
+      }
+    },
+    {
+      "public_path": "docs/images/packed-quarter-dino-GFX-foliage.png",
+      "path": "/home/dllu/proj/demosaic/docs/images/packed-quarter-dino-GFX-foliage.png",
+      "sha256": "c44000b4c5e22a82a8b36c8dba988335ca42cbbd422290b39e46d66e6abc3563",
+      "role": "independent-reference-GFX-triplet",
+      "metadata": {
+        "region": {
+          "name": "foliage",
+          "noisy_xy": [
+            8890,
+            5570
+          ],
+          "reference_xy": [
+            8890,
+            5570
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9597686529159546
+        },
+        "model_label": "1:dino-packed-isotropic-b4-v70-quarter:step-40000",
+        "checkpoint_sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "full_frame": true,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping"
+      }
+    },
+    {
+      "public_path": "docs/images/packed-quarter-dino-GFX-chain-link-fence.png",
+      "path": "/home/dllu/proj/demosaic/docs/images/packed-quarter-dino-GFX-chain-link-fence.png",
+      "sha256": "87845197febea3494652dd1451b920bb6105f486dbd3b119542daa9819a806bc",
+      "role": "independent-reference-GFX-triplet",
+      "metadata": {
+        "region": {
+          "name": "chain-link-fence",
+          "noisy_xy": [
+            2240,
+            6000
+          ],
+          "reference_xy": [
+            2241,
+            6000
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9550720453262329
+        },
+        "model_label": "1:dino-packed-isotropic-b4-v70-quarter:step-40000",
+        "checkpoint_sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "full_frame": true,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping"
+      }
+    },
+    {
+      "public_path": "docs/images/packed-quarter-photo-progress-0.png",
+      "path": "/home/dllu/proj/demosaic/docs/images/packed-quarter-photo-progress-0.png",
+      "sha256": "24fcfc1012d58fa46cff739fa9a6658756e51f6ad3bf937afd2056500c9ddd13",
+      "role": "native-progress-grid",
+      "metadata": {
+        "kind": "photo",
+        "source_receipt": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-native-inspection-v1/photo-grids.json",
+          "sha256": "ac63357bbaba045ecf83ca94899695a43a56fc445f15ab1270b5cb1dad4da9de"
+        },
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "NoD 8k",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "NoD 40k",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "DINO 8k",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "DINO 40k",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V43",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V63",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "RawNIND CFA-LS",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "RawNIND CFA-ch",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact synthetic GT",
+            "png_xywh": [
+              1520,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "public_path": "docs/images/packed-quarter-photo-progress-1.png",
+      "path": "/home/dllu/proj/demosaic/docs/images/packed-quarter-photo-progress-1.png",
+      "sha256": "2694265f7a3ab6fbaf9699d90cf0631d7a06e579701472e5cebd1d72dec5fcc3",
+      "role": "native-progress-grid",
+      "metadata": {
+        "kind": "photo",
+        "source_receipt": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-native-inspection-v1/photo-grids.json",
+          "sha256": "ac63357bbaba045ecf83ca94899695a43a56fc445f15ab1270b5cb1dad4da9de"
+        },
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "NoD 8k",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "NoD 40k",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "DINO 8k",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "DINO 40k",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V43",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V63",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "RawNIND CFA-LS",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "RawNIND CFA-ch",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact synthetic GT",
+            "png_xywh": [
+              1520,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "public_path": "docs/images/packed-quarter-GFX-progress-0.png",
+      "path": "/home/dllu/proj/demosaic/docs/images/packed-quarter-GFX-progress-0.png",
+      "sha256": "1e699d7ea668b1e624639619321caf3cea3f7f2dacae3e740f3bab4ba91944b3",
+      "role": "native-progress-grid",
+      "metadata": {
+        "kind": "GFX",
+        "source_receipt": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-native-inspection-v1/gfx-grids.json",
+          "sha256": "9bcf3474e5d66250c8b8207c246de1ce993fe228782d874613b5b4d1f5f67d2d"
+        },
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "NoD 8k",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "NoD 40k",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "DINO 8k",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "DINO 40k",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V43",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V63",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "RawNIND CFA-LS",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "RawNIND CFA-ch",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref, not GT",
+            "png_xywh": [
+              1520,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "public_path": "docs/images/packed-quarter-GFX-progress-1.png",
+      "path": "/home/dllu/proj/demosaic/docs/images/packed-quarter-GFX-progress-1.png",
+      "sha256": "299ee61f90bc7a89b3edb9e71b0b8d0aff44c753d56a4fb5856953124d6da939",
+      "role": "native-progress-grid",
+      "metadata": {
+        "kind": "GFX",
+        "source_receipt": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-native-inspection-v1/gfx-grids.json",
+          "sha256": "9bcf3474e5d66250c8b8207c246de1ce993fe228782d874613b5b4d1f5f67d2d"
+        },
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "NoD 8k",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "NoD 40k",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "DINO 8k",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "DINO 40k",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V43",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V63",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "RawNIND CFA-LS",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "RawNIND CFA-ch",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref, not GT",
+            "png_xywh": [
+              1520,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "public_path": "docs/images/packed-quarter-GFX-progress-2.png",
+      "path": "/home/dllu/proj/demosaic/docs/images/packed-quarter-GFX-progress-2.png",
+      "sha256": "af34b5144d1c6b12a81dbcb1a059b74704daae1da101228058835360eab2b487",
+      "role": "native-progress-grid",
+      "metadata": {
+        "kind": "GFX",
+        "source_receipt": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-native-inspection-v1/gfx-grids.json",
+          "sha256": "9bcf3474e5d66250c8b8207c246de1ce993fe228782d874613b5b4d1f5f67d2d"
+        },
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "NoD 8k",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "NoD 40k",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "DINO 8k",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "DINO 40k",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V43",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V63",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "RawNIND CFA-LS",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "RawNIND CFA-ch",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref, not GT",
+            "png_xywh": [
+              1520,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "public_path": "docs/images/packed-quarter-GFX-progress-3.png",
+      "path": "/home/dllu/proj/demosaic/docs/images/packed-quarter-GFX-progress-3.png",
+      "sha256": "1d5e34a44f72ccc6d8d9dc7af1ddefa432d8cd0b1e08f665297998c30fabcfed",
+      "role": "native-progress-grid",
+      "metadata": {
+        "kind": "GFX",
+        "source_receipt": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-native-inspection-v1/gfx-grids.json",
+          "sha256": "9bcf3474e5d66250c8b8207c246de1ce993fe228782d874613b5b4d1f5f67d2d"
+        },
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "NoD 8k",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "NoD 40k",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "DINO 8k",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "DINO 40k",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V43",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V63",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "RawNIND CFA-LS",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "RawNIND CFA-ch",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref, not GT",
+            "png_xywh": [
+              1520,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "public_path": "docs/images/packed-quarter-three-camera-native-inspection.png",
+      "path": "/home/dllu/proj/demosaic/docs/images/packed-quarter-three-camera-native-inspection.png",
+      "sha256": "8b0c75d78a12a4f534e5f918f7739fd32f7c1bfd6fdd0264c50c385f163c5e9b",
+      "role": "auxiliary-native-board",
+      "metadata": {
+        "source": {
+          "path": "/mnt/external/demosaic/evaluation/packed-isotropic-quarter-three-camera-v1/report.json",
+          "sha256": "53fc7c84c6027b0a0f6a0c99590be9eb511aee5ed52e128edf7ecba9a4787b0d"
+        },
+        "source_receipt": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-native-inspection-v1/auxiliary-grids.json",
+          "sha256": "6ddf1feb95a222f63375112d083d4c361e930edd47200e465d8f2589a71f5580"
+        }
+      }
+    },
+    {
+      "public_path": "docs/images/packed-quarter-colors-native-inspection.png",
+      "path": "/home/dllu/proj/demosaic/docs/images/packed-quarter-colors-native-inspection.png",
+      "sha256": "5184b9ae653003d1c339d2f08e4c7f0f57dace2ec44cbf413fb803aedb9b2afa",
+      "role": "auxiliary-native-board",
+      "metadata": {
+        "source": {
+          "path": "/mnt/external/demosaic/evaluation/packed-isotropic-quarter-colored-CPU-v1/report.json",
+          "sha256": "180f70538da9391ecdd4ce7c101cc0d68a12a2c09ab37f4ff430d07bbe167ac7"
+        },
+        "source_receipt": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-native-inspection-v1/auxiliary-grids.json",
+          "sha256": "6ddf1feb95a222f63375112d083d4c361e930edd47200e465d8f2589a71f5580"
+        }
+      }
+    },
+    {
+      "public_path": "docs/images/packed-quarter-hue-native-inspection.png",
+      "path": "/home/dllu/proj/demosaic/docs/images/packed-quarter-hue-native-inspection.png",
+      "sha256": "8d37cb726743db548efd0c6cd00b3d8603547c6c4739c56c1b484a4ee8d992bf",
+      "role": "auxiliary-native-board",
+      "metadata": {
+        "source": {
+          "path": "/mnt/external/demosaic/evaluation/packed-isotropic-quarter-hue-v1/report.json",
+          "sha256": "be192d573900a914d49049d9ee0eda4b9c6243da21223515a95f5a1cdd1fe66e"
+        },
+        "source_receipt": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-native-inspection-v1/auxiliary-grids.json",
+          "sha256": "6ddf1feb95a222f63375112d083d4c361e930edd47200e465d8f2589a71f5580"
+        }
+      }
+    },
+    {
+      "public_path": "docs/images/packed-quarter-highlights-native-inspection.png",
+      "path": "/home/dllu/proj/demosaic/docs/images/packed-quarter-highlights-native-inspection.png",
+      "sha256": "66e070a9cbec86273ddce4ae73617794e06df5ddc926c186e0eaf78894f5701b",
+      "role": "auxiliary-native-board",
+      "metadata": {
+        "source": {
+          "path": "/mnt/external/demosaic/evaluation/packed-isotropic-quarter-GFX-highlights-v1/report.json",
+          "sha256": "aa8310f578616445865d6ef572df36fece26ae2c188ad986d3695d054e8a8ca8"
+        },
+        "source_receipt": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-native-inspection-v1/auxiliary-grids.json",
+          "sha256": "6ddf1feb95a222f63375112d083d4c361e930edd47200e465d8f2589a71f5580"
+        }
+      }
+    },
+    {
+      "public_path": "docs/images/packed-quarter-analytic-native-inspection.png",
+      "path": "/home/dllu/proj/demosaic/docs/images/packed-quarter-analytic-native-inspection.png",
+      "sha256": "ffd97c7bbed9c691f217f625c3b6a486570f537f1a68c6c8d69dc6f69b1bbdbd",
+      "role": "analytic-native-board",
+      "metadata": {
+        "source": {
+          "path": "/mnt/external/demosaic/evaluation/packed-isotropic-quarter-analytic-v1/summary.json",
+          "sha256": "4accc901a2b800206ff8d51f994f670e01058f6f5b5cfa1d96d1aa7964d10e5a"
+        },
+        "source_receipt": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-native-inspection-v1/analytic-grid.json",
+          "sha256": "7bc8f81afa0bf57b88b57166a65888516ff16246b76f935644c42f0df215f84c"
+        }
+      }
+    }
+  ],
+  "GFX_sources": [
+    {
+      "role": "noisy",
+      "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+      "metadata": {
+        "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+        "camera": "GFX100S",
+        "pattern": "RGGB",
+        "black_levels": [
+          4101.0,
+          4098.0,
+          4104.0,
+          4106.0
+        ],
+        "white_levels": [
+          65535.0,
+          65535.0,
+          65535.0,
+          65535.0
+        ],
+        "white_balance": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "camera_to_srgb": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "flip": 0,
+        "iso": 6400,
+        "adc_white_level": 65535.0
+      }
+    },
+    {
+      "role": "reference",
+      "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+      "metadata": {
+        "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+        "camera": "GFX100S",
+        "pattern": "RGGB",
+        "black_levels": [
+          256.0,
+          255.0,
+          256.0,
+          256.0
+        ],
+        "white_levels": [
+          65535.0,
+          65535.0,
+          65535.0,
+          65535.0
+        ],
+        "white_balance": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "camera_to_srgb": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "flip": 0,
+        "iso": 100,
+        "adc_white_level": 65535.0
+      }
+    }
+  ],
+  "GFX_selection": {
+    "noisy": ".cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+    "reference": ".cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+    "display_exposure": 4.0,
+    "notes": "GFX100S / 55mm. Noisy DSCF3879: ISO6400, f/1.7, 1/240s, 17:13:27. Reference DSCF3880: ISO100, f/5.6, 3s, 17:17:05. Captured 3m38s apart with nearly identical framing. Aperture, depth of field, clouds, lights and moving subjects still differ. Native sensor crops with input/reference-only integer coordinate matching; no resizing or warping, no per-panel brightness adjustment. Qualitative reference, not exact ground truth; evaluation-only, never training.",
+    "regions": [
+      {
+        "name": "overcast-sky",
+        "noisy_xy": [
+          5800,
+          1400
+        ],
+        "reference_xy": [
+          5800,
+          1400
+        ],
+        "size": 160,
+        "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+        "context_green_correlation": null
+      },
+      {
+        "name": "building-detail",
+        "noisy_xy": [
+          5790,
+          2690
+        ],
+        "reference_xy": [
+          5791,
+          2690
+        ],
+        "size": 160,
+        "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+        "context_green_correlation": 0.6824449896812439
+      },
+      {
+        "name": "foliage",
+        "noisy_xy": [
+          8890,
+          5570
+        ],
+        "reference_xy": [
+          8890,
+          5570
+        ],
+        "size": 160,
+        "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+        "context_green_correlation": 0.9597686529159546
+      },
+      {
+        "name": "chain-link-fence",
+        "noisy_xy": [
+          2240,
+          6000
+        ],
+        "reference_xy": [
+          2241,
+          6000
+        ],
+        "size": 160,
+        "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+        "context_green_correlation": 0.9550720453262329
+      }
+    ]
+  },
+  "GFX_reference_calibration": {
+    "rgb_to_sensor_gains": [
+      1.0000624759971717,
+      1.0000575400374918,
+      1.000083683987943
+    ],
+    "samples": [
+      922554,
+      2316454,
+      693995
+    ]
+  },
+  "GFX_conditioning": {
+    "shot": 0.0014635775921166604,
+    "read": 1.0715704128646712e-06,
+    "source": "input Haar fit"
+  },
+  "camera_interim_report": {
+    "path": "/home/dllu/proj/demosaic/docs/results/packed-isotropic-quarter-camera-interim-v1.json",
+    "sha256": "94ff1c1d9ff202e4d4069b43f543e6d74c2489d3f862444d7e41907573d3cecd"
+  },
+  "limits": [
+    "Scene/source bootstrap intervals do not cover training-repeat uncertainty; full scene independence and prior pretraining exposure remain unproven.",
+    "Real RAW/AHD/ISO100 references and RawNIND comparators are not exactRGB GT; synthetic exactGT belongs only to that synthetic observation.",
+    "The frozen review uses legacy2 tiling. The separate corrected-grid numerical workflow has completed; its manual native review/report is pending and is not included here.",
+    "No model promotion, automatic schedule extension, protected-final score, SOTA, decisive real superiority or100MP/10s claim."
+  ]
+}

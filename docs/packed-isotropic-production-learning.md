@@ -8,10 +8,12 @@ or attributing the weak restoration to inference precision.
 [Curves, hashes, recipe and exact numeric summary](results/packed-isotropic-production-learning.json).
 [Actual held-out quality and native crops](packed-isotropic-first32000-review.md).
 
-The [interim completed 40k camera panels](packed-isotropic-quarter-camera-interim.md)
-now show 4.0–4.7 dB measured-CFA gains over each model's own8k boundary, with
-less grain in the native crops. Both still trail Wiener and V43/V63 here.
-The broader quality/statistical/full-frame review is running; no model is promoted.
+The [completed 40k review](packed-isotropic-quarter-review.md) now confirms
+actual longer learning: photo gains of2.061/2.188dB and camera gains of4.0–4.7dB
+over the own8k boundaries. Both models still trail mature controls and retain
+substantial grain. The complete numerical, artifact and selected-native review
+is finished; neither model is promoted. The earlier short replays below do not
+prove the architecture cannot learn.
 
 This is an optimization diagnosis, not an improved quality model. All learned
 weights are discarded. No held-out image, private photo or protected-final scene
@@ -119,8 +121,9 @@ source, ancestry and observation audit has passed. The actual1602 logged
 training observations per arm match in step/domain/LR/batch hash. Actual startup
 checks verify model/optimizer/global RNG before the first update and EMA before
 its first update; the first16 observations also match this replay fixture.
-The GPU quality review is now running. No new40k quality gain or promotion is
-established by completed training. Full quality/native review remains required.
+The quality workflow and selected-native review have now completed. Their
+results establish own8k progress but not a promoted model; see the full review
+above. Completed training alone was not treated as quality evidence.
 
 Private status:
 `/mnt/external/demosaic/runs/packed-isotropic-quarter-workflow-v1.json`.
@@ -170,5 +173,5 @@ now tests internal RAW feature scaling from identical fresh weights and a common
 initial bilinear prediction. It reuses the same16 training observations and
 discards all learned states. Its [64-update interim comparison](results/packed-isotropic-fresh-coordinate-CPU-interim64-v1.json)
 finds no broad coordinate-map improvement; final results remain pending.
-It now yields CPU computation to the owned reviews/timing after
-the original training owner exits and does not change the matched trials.
+It yields CPU computation during owned reviews/timing and continues separately
+after those owners exit; it does not change the matched trials.

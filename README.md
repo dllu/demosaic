@@ -3,39 +3,12 @@
 Joint Bayer demosaicing and denoising in linear camera RGB, with 16-bit TIFF
 output, physical noise conditioning, tiled inference, and an optional DINOv3
 feature branch. Experimental: training and quality validation are in progress.
-The [latest native-data review](docs/native-corpus-2k-review.md) finds a
-0.09 dB gain on 427 synthetic-noise photos versus the matched control at step 2000.
-The [augmentation change](docs/geometry-corpus-v34-v36-review.md) previously
-gained 0.51 dB. Low-noise pattern regression, real-camera tradeoffs and fine-detail
-deficits remain.
-Quality work continues;
-state-of-the-art performance is not established.
-The [completed 10,000-step fresh DINO comparison](docs/fresh-dino-capacity-10k-review.md)
-improves average synthetic-photo scores but finds no consistent DINO advantage;
-fabric color shifts and lost fine texture keep V43 as the working reference below.
-The [completed ConvNeXt pyramid review](docs/dino-convnext-pyramid-v58-10k-review.md)
-ties that photo mean and retains color/detail limitations.
-The [released RAW reference comparison](docs/nonlocal-reference-full-review.md)
-adds a recent comparator with mixed real/synthetic results.
-The [completed 4,000-update palette review](docs/wide-flat-palette-full4k-review.md)
-finds small photo gains and better highly saturated colors; bright-color errors,
-fine-detail loss and paired-real tradeoffs still prevent promotion.
-The [expanded-data comparison](docs/long-commons-v63-v64-first4k-review.md)
-finds a small mixed effect at 4,000 updates; native crops still show soft detail.
-Its [completed original20k review](docs/long-commons-v63-v64-original20k-review.md)
-finds a small positive data effect (+0.026dB), with persistent texture/color
-limitations and 36–37s restoration times for102MP. Neither endpoint is promoted.
-The [completed original10k RAW-kernel review](docs/raw-kernel-phase-joint-v67-full10k-review.md)
-gains1.37dB over its2k boundary but still trails mature V60 by1.96dB;
-weak-detail and bright-color regressions prevent promotion.
-The [completed4k normalization review](docs/normalization-v68-v69-original4k-review.md)
-finds a small +0.020dB matched photo gain; own1k progress is uncertain and
-texture/color failures keep V43 as the working reference.
-The [fresh RAW-native models at32,000 examples](docs/packed-isotropic-first32000-review.md)
-remain close to bilinear, with substantial residual noise and51–54s full-frame times.
-Their original long training horizon is incomplete; neither replaces V43.
-[Full-state continuation](docs/packed-isotropic-production-learning.md#original-quality-trials-resume-with-full-state)
-now targets a review at one quarter of that original horizon.
+V43 step2000 remains the working experimental reference below. The
+[completed RAW-native 40k review](docs/packed-isotropic-quarter-review.md)
+finds clear progress over 8k, but residual grain, detail/color limitations and
+51–54s full-photo times prevent promotion. State-of-the-art quality, decisive
+real-photo superiority and 100MP within 10 seconds remain unmet/unproven.
+Detailed comparisons and earlier trials are in [experiment results](docs/experiments.md).
 
 Native 160×160 validation crops: noisy → denoised → GT, using V43 step 2000
 (FP16, ISO12800 synthetic noise prior). These are 100% crops at the 8×8-binned

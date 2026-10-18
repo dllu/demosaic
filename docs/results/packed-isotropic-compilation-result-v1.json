@@ -1,0 +1,604 @@
+{
+  "status": "completed-study-rejected-photo-accuracy-no-production-change",
+  "workflow": {
+    "path": "/mnt/external/demosaic/runs/packed-isotropic-compilation-workflow-v1.json",
+    "sha256": "3a2e0c8a57ac3a28a68c908c33a5d9cfc7d14b74238a06d30aac70ee76ff3bf4"
+  },
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/plan.json",
+    "sha256": "dd4dd08056978df8e0498dd4aa10fd8baa02a46d0e39921c5b684253da525a63"
+  },
+  "tested_checkpoint": {
+    "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-b4-v71-step40000.pt",
+    "sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+    "step": 40000,
+    "weights": "EMA",
+    "model_config": {
+      "restoration_backbone": "packed-isotropic",
+      "width": 96,
+      "encoder_blocks": [
+        2,
+        2,
+        4
+      ],
+      "middle_blocks": 6,
+      "decoder_blocks": [
+        2,
+        2,
+        2
+      ],
+      "attention": true,
+      "dino": false,
+      "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+      "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+      "dino_lora_rank": 0,
+      "dino_input_adapter": false,
+      "dino_feature_fusion": "bottleneck",
+      "camera_conditioning": true,
+      "noise_modulation": false,
+      "physical_fp32": true,
+      "baseline": "bilinear",
+      "prior_window": 7,
+      "standardized_noise": false,
+      "noise_refinement": false,
+      "refinement_width": 24,
+      "refinement_blocks": 4,
+      "refinement_window": 63,
+      "coarse_refinement_factor": 0,
+      "coarse_refinement_width": 24,
+      "coarse_refinement_blocks": 4,
+      "coarse_refinement_window": 31,
+      "pyramid_refinement": false,
+      "pyramid_measurements": true,
+      "pyramid_width": 24,
+      "pyramid_blocks": 2,
+      "variance_stabilization": false,
+      "physical_anchors": false,
+      "rgb_processing_scale": 1,
+      "packed_detail_prior": false,
+      "rgb_hidden_autocast": false,
+      "rgb_center_camera_matrix": false,
+      "rgb_middle_skip_fp32": false,
+      "adc_cfa_projection": false,
+      "raw_kernel_reconstruction": false,
+      "raw_kernel_windows": [
+        1,
+        5,
+        17
+      ],
+      "raw_kernel_phase_conditioning": false,
+      "isotropic_groups": 6,
+      "isotropic_blocks": 8,
+      "isotropic_local_width": 32
+    }
+  },
+  "case": "no-dino-photos256",
+  "accuracy_bounds_DN16": {
+    "max_abs": 1.0,
+    "RMS": 0.25
+  },
+  "comparisons": [
+    {
+      "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+      "observation": {
+        "path": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+        "sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e"
+      },
+      "compiled_vs_eager": {
+        "elements": 196608,
+        "max_abs": 0.00035321712493896484,
+        "RMS": 7.332980956605548e-05,
+        "max_abs_DN16": 23.14808428287506,
+        "RMS_DN16": 4.805669069911446,
+        "passes_predeclared_bound": false
+      },
+      "eager_vs_IEEE_FP32": {
+        "elements": 196608,
+        "max_abs": 0.0004189684987068176,
+        "RMS": 7.613633469388076e-05,
+        "max_abs_DN16": 27.457100562751293,
+        "RMS_DN16": 4.9895946941634755,
+        "passes_predeclared_bound": false
+      }
+    },
+    {
+      "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+      "observation": {
+        "path": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+        "sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949"
+      },
+      "compiled_vs_eager": {
+        "elements": 196608,
+        "max_abs": 0.00031696632504463196,
+        "RMS": 6.613762177794611e-05,
+        "max_abs_DN16": 20.772388111799955,
+        "RMS_DN16": 4.334329043217698,
+        "passes_predeclared_bound": false
+      },
+      "eager_vs_IEEE_FP32": {
+        "elements": 196608,
+        "max_abs": 0.0003524627536535263,
+        "RMS": 6.621148982788128e-05,
+        "max_abs_DN16": 23.098646560683846,
+        "RMS_DN16": 4.3391699858702,
+        "passes_predeclared_bound": false
+      }
+    }
+  ],
+  "parameters_keys_and_tensor_bytes_unchanged": true,
+  "full_model_state_sha256": "784f1449950d51e99e656043427d630d2ae309438459c080d639c5a34f0fc800",
+  "compiled_components": 8,
+  "backend": "inductor",
+  "runtime": {
+    "device": "cuda",
+    "GPU_name": "NVIDIA GB10",
+    "CUDA_version": "13.0",
+    "torch": "2.14.1+cu130"
+  },
+  "fixture": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-inputs-v1/inputs.json",
+    "sha256": "11655660520041c0b9255f197758c6c313ef50834605dc78350c1e5c6f3d8784"
+  },
+  "source_files": {
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/paired.py": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/__init__.py": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/suite.py": "1a094262e1772f5df8a54cb176c2f3da189d78f48ead3f8002f24e84802059a4",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/dino_pyramid.py": "478c618f1804664a36c68bde43f68bbe8e4424ccb2d2f0bff822ac38873ea4cd",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/metrics.py": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/nonlocal_reference.py": "7e4a00e9d90a61b772da9c1a7414bf499f84b9c9bb0239fd250fb8263dfb3f88",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/losses.py": "548b1481a035ad937d4a046754a74e70684864a9842296765c62079a002e5120",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/audit.py": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/inference.py": "8085ccb43beea0f50e635e209a6c461836de70b27b76a286a162aa34c4bba3ac",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/noise.py": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/data.py": "3c8855fe9d6e24d5368f356528ed217a544f185d84f58356eebfb2048cd92197",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/color.py": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/prepare.py": "0573132bed2b21ba5be6fd0464daca4f506640a5f03b0311abbeec9b23a875f1",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/textures.py": "b4bc304a50de272cf7fcba272e67b828c163466ffc23ea3337a6a66f076dc664",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/paired_training.py": "71a2481213bba174bd3d6b3de9ae9b89f88333635810e15d0958352d9d8d053d",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/reporting.py": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/packed_isotropic.py": "49382567bb75233228f3f8dc4cf0eee0b45e8d09b2f91d638dda847ec768b7ab",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/cli.py": "a34d98b1eab4479f67ba5a51b6c8a428db4d8ccf5ee097cd1369bd0cd1ead542",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/raw_kernel.py": "32ba3747479f0e328fe87a84fb227dd456ae0d08b242a4d1411756dfbf9fb498",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/io.py": "0a1599ffe7f6d935e92fc71e6b086430c6f82678a74952c3b8f31155a0bea83b",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/gaussian.py": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/dino_adaptation.py": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/paired_admission.py": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/raw_admission.py": "1948afbbf05129190273ab77466f26d9d27dc942716beaab16f077c8c3330803",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/model.py": "09a8a0cdc8e26731f50262d07bca788fa2b8720be7db402a19d3c7143f0ba3dc",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/cfa.py": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/prior.py": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/safety.py": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/calibration.py": "e86f4c602a6cd7fd855d0bcfeb790cf17ed87611f19d97926f9db174909b2d26",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/precision.py": "9aa850fb5ee0e9abc3e9adc4847ce3518c1acb37c93f6bc54ff9206bb0c94c3a",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/train.py": "4cabb0d9889b2d0fcb86e13558cdcdbfb23291b564006dd681fc71b0dfc08d6c",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/registration.py": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/pretrained_rgb.py": "ed428ff1ec2fe7bbe02d941074fc4e23c3edc55e36b5c219fb34c186e08affb4",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/reference.py": "54ed094d58e245a56993ea3ce3ef9e21d2164e902d41d03bba9132bacd22891f",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/real_suite.py": "69d3d403d36b1230e35083cc55e2c1a485f82cd5058f6be83fb3d5c0c18a6825",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/vst.py": "355124a374177f1c08271834149c5979ab3477fdf255c60aa7cee0d47792a76b",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/raw_clean.py": "a143ce351ac4e1b2425d4d561000d3e8934477fe9172c88f90ce76d9b32a7a6c",
+    "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/work/src/demosaic/realdata.py": "ed24db2b066531281a196e6fa074130cb0ee78a640eae5ccaaace234f5ad5421"
+  },
+  "driver": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/tools/benchmark_packed_compilation.py",
+    "sha256": "d1e689f020b5d026a8614f152714d2e1f676436bc441f79a76c7f01d9203be5b"
+  },
+  "native_assets": [
+    {
+      "public_path": "docs/images/packed-compile-rejected-photo-0.png",
+      "path": "docs/images/packed-compile-rejected-photo-0.png",
+      "sha256": "21003f8dbd0ea42c166974968dd92c4daf67db1f505c266dd64c75db4ce62e3d",
+      "crop": {
+        "image": "crop-e1eac1c0fea76682.png",
+        "caption": "0014aa4e075b1827f91ef8a02069e1e318f040ba / Compiled",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Compiled",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "21003f8dbd0ea42c166974968dd92c4daf67db1f505c266dd64c75db4ce62e3d",
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "source": {
+          "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Roy Egloff",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": null,
+          "credit": "Own work",
+          "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+          "width": 3888,
+          "height": 2592,
+          "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+          "shape": [
+            324,
+            486,
+            3
+          ],
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+        },
+        "validation_index": 0,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "exposure": 1.0,
+          "name": "iso12800-prior",
+          "read": 2.62144e-05,
+          "shot": 0.00256
+        },
+        "pattern": "RGGB",
+        "display_exposure": 1.0,
+        "reference": "Exact synthetic clean target",
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ],
+        "noise_draw": "Existing fixed CPU-generated Poisson/read/ADC observation; unchanged across policies",
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-b4-v71-step40000.pt",
+          "sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+          "step": 40000,
+          "weights": "EMA",
+          "model_config": {
+            "restoration_backbone": "packed-isotropic",
+            "width": 96,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": false,
+            "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "bottleneck",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": false,
+            "physical_anchors": false,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": false,
+            "adc_cfa_projection": false,
+            "raw_kernel_reconstruction": false,
+            "raw_kernel_windows": [
+              1,
+              5,
+              17
+            ],
+            "raw_kernel_phase_conditioning": false,
+            "isotropic_groups": 6,
+            "isotropic_blocks": 8,
+            "isotropic_local_width": 32
+          }
+        },
+        "precision": "float16",
+        "backend": "inductor",
+        "policy": "Compiled",
+        "observation": {
+          "path": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e"
+        }
+      }
+    },
+    {
+      "public_path": "docs/images/packed-compile-rejected-photo-1.png",
+      "path": "docs/images/packed-compile-rejected-photo-1.png",
+      "sha256": "e6b9eac864cbc267d9bfa9439e53f2e20321f21fd23d012a08afd2346e1e9014",
+      "crop": {
+        "image": "crop-95ab94fc0f06766f.png",
+        "caption": "002fc6eeadf637e81d5a327f117b79abb86becd9 / Compiled",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Compiled",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "e6b9eac864cbc267d9bfa9439e53f2e20321f21fd23d012a08afd2346e1e9014",
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "source": {
+          "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Vancouver_%28BC%2C_Canada%29%2C_Coal_Harbour_Seaside_Park%2C_Blick_in_den_Himmel_--_2022_--_2158.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Dietmar Rabich",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "Dietmar Rabich",
+          "credit": "Own work",
+          "sha1": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "sha1_hex": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "download_path": "images/00/2f/002fc6eeadf637e81d5a327f117b79abb86becd9.jpg",
+          "width": 3809,
+          "height": 2857,
+          "id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/002fc6eeadf637e81d5a327f117b79abb86becd9.npy",
+          "shape": [
+            357,
+            476,
+            3
+          ],
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf"
+        },
+        "validation_index": 1,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "exposure": 1.0,
+          "name": "iso12800-prior",
+          "read": 2.62144e-05,
+          "shot": 0.00256
+        },
+        "pattern": "RGGB",
+        "display_exposure": 1.0,
+        "reference": "Exact synthetic clean target",
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ],
+        "noise_draw": "Existing fixed CPU-generated Poisson/read/ADC observation; unchanged across policies",
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-b4-v71-step40000.pt",
+          "sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+          "step": 40000,
+          "weights": "EMA",
+          "model_config": {
+            "restoration_backbone": "packed-isotropic",
+            "width": 96,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": false,
+            "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "bottleneck",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": false,
+            "physical_anchors": false,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": false,
+            "adc_cfa_projection": false,
+            "raw_kernel_reconstruction": false,
+            "raw_kernel_windows": [
+              1,
+              5,
+              17
+            ],
+            "raw_kernel_phase_conditioning": false,
+            "isotropic_groups": 6,
+            "isotropic_blocks": 8,
+            "isotropic_local_width": 32
+          }
+        },
+        "precision": "float16",
+        "backend": "inductor",
+        "policy": "Compiled",
+        "observation": {
+          "path": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949"
+        }
+      }
+    }
+  ],
+  "native_comparison": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/rejected-photo-native-comparison.png",
+    "sha256": "125e05cc8cad3708c7c24b50120d70baefa7dd051ae0900cf94e05b4066d664d"
+  },
+  "scope": "Original fixed max1DN16/RMS.25 gate fails on both photos with actual no-DINO40k weights, independently reproduced from all saved F32 values. No DINO/serving/full compilation cases or full-frame timing were run. Eager production defaults stay unchanged. Eager-versus-IEEE-FP32 diagnostics are original producer results.",
+  "independent_accuracy_audit": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/no-dino-photos256/independent-accuracy-audit.json",
+    "sha256": "327cef19013fedb12d903ae4e4f9a98c03c7c53f364a5b54fab98f75ed7c9665"
+  },
+  "independent_accuracy": {
+    "status": "independent-all393216-saved-photo-values-confirm-predeclared-compilation-rejection",
+    "arrays": [
+      {
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "eager": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/no-dino-photos256/photo0-eager-RGB-f32.npy",
+          "sha256": "50112816fcbcf8bec3c434dc5d203c9e7c7335b6e18e4c5a36e0aec664cb619c"
+        },
+        "compiled": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/no-dino-photos256/photo0-compiled-RGB-f32.npy",
+          "sha256": "f12ae4ae50b84e44b449e4188e9d6e6d72177a61f653611ede966b9b8ec5b1e2"
+        },
+        "metrics": {
+          "elements": 196608,
+          "max_abs": 0.00035321712493896484,
+          "RMS": 7.332980956605548e-05,
+          "max_abs_DN16": 23.14808428287506,
+          "RMS_DN16": 4.805669069911446
+        },
+        "max_reduction_difference": 0
+      },
+      {
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "eager": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/no-dino-photos256/photo1-eager-RGB-f32.npy",
+          "sha256": "ffb224f40bd7265a04de8ca30a45110b314f08f8ba70ca1e54ad7b1362de6382"
+        },
+        "compiled": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-workflow-v1/no-dino-photos256/photo1-compiled-RGB-f32.npy",
+          "sha256": "eeca59d6cdb254d989ca3ca5f6c463a36905cc11aae156a338ae5d49f7cf2679"
+        },
+        "metrics": {
+          "elements": 196608,
+          "max_abs": 0.00031696632504463196,
+          "RMS": 6.613762177794611e-05,
+          "max_abs_DN16": 20.772388111799955,
+          "RMS_DN16": 4.334329043217698
+        },
+        "max_reduction_difference": 0
+      }
+    ],
+    "NumPy": "2.5.4",
+    "neural_forwards": 0,
+    "scope": "Independent NumPy64 differences on all saved unclamped compiled/eager RGB; original eager-versus-IEEE-FP32 diagnostics are retained as producer results and not recomputed here."
+  }
+}

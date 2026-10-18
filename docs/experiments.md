@@ -1,5 +1,13 @@
 # Experiment evidence
 
+The [completed RAW-native 40k review](packed-isotropic-quarter-review.md)
+finds 2.061/2.188dB photo gains over the original8k models, with a small positive
+DINO photo gap and no consistent real-camera advantage. Both retain grain and
+trail mature controls; full GFX restores take50.70/53.74s. Neither is promoted.
+The separate [trained compilation study](packed-isotropic-compilation.md)
+rejects the first photo-accuracy gate. Native crops, exact-GT/real-reference
+labels, state/input audits and source sensitivities accompany the reports.
+
 The [V65 completed RAW-head warmup review](raw-kernel-warmup-v65-first1k-review.md)
 finishes its original1,000-update budget without promotion or a joint stage.
 Photo27.83246dB and known/unseen CFA44.22499/41.44299 trail V60 substantially.

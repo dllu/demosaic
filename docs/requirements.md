@@ -3,7 +3,14 @@
 The objective is the complete project in `PROMPT.md`, including trained quality,
 not just software that executes. This checklist records the evidence required.
 
-Latest: the [original V63/V64 full20000 review](long-commons-v63-v64-original20k-review.md)
+Latest: the [completed RAW-native 40k review](packed-isotropic-quarter-review.md)
+confirms own8k progress, but 29.73/29.95dB photo scores, residual native grain
+and50.70/53.74s full GFX restores do not meet the quality/speed goals. Neither
+endpoint is promoted. The trained compiler's photo gate is rejected; the
+separate corrected-grid workflow awaits native review/reporting. V43 remains
+the working reference, and protected-final scenes remain closed.
+
+Earlier, the [original V63/V64 full20000 review](long-commons-v63-v64-original20k-review.md)
 is complete after genuine full-state continuation and a preserved source-audit
 working-directory recovery. Own4k-to20k photo gains are.165/.176dB; the20k
 expanded-data effect is+.026dB with a positive source interval. All58 native
@@ -37,8 +44,11 @@ more; fresh moments and a fixed RAW parameter rescaling offer no broad fix.
 Both original recipes have completed the40k-update boundary with full-state
 continuation, preserving the original160k horizon and immutable8k evidence.
 The [independent boundary audit and handoff](results/packed-isotropic-quarter-training-boundary-v1.json)
-verify exited training owners and matched logged inputs; the GPU quality review
-is running. Completed training is not a quality or project-completion result.
+verify exited training owners and matched logged inputs. The
+[completed 40k quality/native review](packed-isotropic-quarter-review.md)
+finds 2.061/2.188dB own8k photo gains, but 29.73/29.95dB still trails mature
+controls and full GFX inference takes50.70/53.74s. Neither endpoint is promoted.
+Completed training is not a project-completion result.
 Its [full review queue and CPU verification](results/packed-isotropic-quarter-review-queue-v1.json)
 require successful/exited training owners and independently checked40k states.
 They include own8k progress, fixed native crops and source sensitivities; no
@@ -51,10 +61,16 @@ reviews retain their old geometry. Corrected-grid CUDA/full-frame validation
 and the model-quality goals remain open.
 
 The [corrected-grid CUDA supplement](packed-isotropic-corrected-grid-queue.md)
-is queued behind the original review/compilation owners. It adds actual40k
+has completed its numerical workflow after the original review/compilation owners.
+It adds actual40k
 fixed-photo checks, repeated full102MP corrected restores and affected-edge
 crops, with legacy exports reused rather than rerun. Its CPU execution checks
-are complete; CUDA/full-frame results and native review remain pending.
+are complete; the supplementary native review/report remains pending.
+
+The [trained compilation comparison](packed-isotropic-compilation.md) rejects
+its first no-DINO photo gate (max20.77–23.15DN16 versus the fixed1DN16 bound).
+Independent saved-F32 differences reproduce it exactly. No full-frame compiler
+timing or production adoption follows.
 
 | Requirement | Evidence needed | Current state |
 | --- | --- | --- |
