@@ -1,10 +1,13 @@
 # Fresh mixed16 RAW quality trial
 
 The [frozen V72/V73 trial](results/packed-isotropic-mixed16-trial-launch-v1.json)
-is running on the full original Commons/native/paired training mixture. Both
-genuine12-update prefixes passed model/EMA/Adam, common initial state/RNG,
-actual source/noise and FP32 portable-reload checks. The no-DINO continuation
-has resumed beyond its prefix; DINO follows serially. Photographic quality and
+uses the full original Commons/native/paired training mixture. Both genuine
+12-update prefixes passed model/EMA/Adam, common initial state/RNG, actual
+source/noise and FP32 portable-reload checks. V72 no-DINO has completed its
+2,000-update/32,000-example gate and passed final-state checks; V73 DINO is
+continuing serially. The [selected V72 CPU crop review](packed-isotropic-mixed16-V72-CPU-preview.md)
+finds modest improvement over originalRAW8k on two fixed observations but
+substantial residual grain. Complete matched photographic quality and
 full-frame performance remain unmeasured for these candidates.
 
 The [execution sweep](mixed-optimizer-batches.md) chose four B4 forwards for an
