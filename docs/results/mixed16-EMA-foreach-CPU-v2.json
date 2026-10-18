@@ -1,0 +1,76 @@
+{
+  "status": "completed-exact-CPU-EMA-grouping-probe-no-GPU-speed-result",
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-EMA-foreach-CPU-v2/plan.json",
+    "sha256": "230795489e0c3cd620cc616c9589a24899ce3aa572607f04397efc64ef75321d"
+  },
+  "result": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-EMA-foreach-CPU-v2/result.json",
+    "sha256": "d9f8befdb7e4d26030ebe0deac6b8ab9f37ff6781938707d6b5470b26940417d"
+  },
+  "driver": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-EMA-foreach-CPU-v2/probe.py",
+    "sha256": "42da4bb7a6e7317dab704744d44a4a1353039fd9695d8481f6e3ca24b0eb82b8"
+  },
+  "independent_replay": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-EMA-foreach-CPU-v2/audit.json",
+    "sha256": "2832623ab50a3afa663b37104dedbff139ea01aaeb8a2e3521e4b3b6260cef8a"
+  },
+  "replay_driver": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-EMA-foreach-CPU-v2/audit.py",
+    "sha256": "18346acb433bc8bdf0ab63aea73de9604d821a54d86714fde4b032ecf2cc3281"
+  },
+  "predecessor_stopped_inventory_guard": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-EMA-foreach-CPU-v1/failure.json",
+    "sha256": "92eb0b14ce8f98eb844283d721c65aeb13079134c650db922f27d83a4ff85702"
+  },
+  "protocol": "Frozen scalar update_ema versus one _foreach_lerp_ on the actual FP32 restoration/EMA tensors of no-DINO8k and DINO2k. Eight fixed original adaptive/capped decay values, five consecutive updates each. Strict byte-identical values and identical strides are required before considering a later GPU probe. No timing inference, GPU work, network inference, backward, optimizer update, training-data access or adoption. CPU profiler counts operator calls only.",
+  "checkpoints": {
+    "no-dino8k": {
+      "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-mixed16-v72-step8000.pt",
+      "sha256": "50bbbca812186035fd5d0914219eb77c419eefa69f70dbf937fab74dbec976d2"
+    },
+    "dino2k": {
+      "path": "/mnt/external/demosaic/models/dino-packed-isotropic-mixed16-v73-step2000.pt",
+      "sha256": "43c10f2a0af38761f9418f19c725edc4129284e76b5b2da89f66c184d1f643e1"
+    }
+  },
+  "case_count": 16,
+  "EMA_update_count": 80,
+  "individual_tensor_updates": 68680,
+  "model_EMA_state_counts": {
+    "no-dino8k": 852,
+    "dino2k": 865
+  },
+  "strict_CPU_equivalence_passed": true,
+  "maximum_absolute_difference": 0.0,
+  "exact_source_input_bytes_unchanged": true,
+  "EMA_strides_preserved": true,
+  "reversed_dictionary_insertion_order_replay_passed": true,
+  "CPU_operator_counts": {
+    "no-dino8k:scalar": {
+      "aten::detach": 852,
+      "detach": 852,
+      "aten::lerp_": 852
+    },
+    "no-dino8k:grouped": {
+      "aten::_foreach_lerp_": 1,
+      "aten::lerp_": 852
+    },
+    "dino2k:scalar": {
+      "aten::detach": 865,
+      "detach": 865,
+      "aten::lerp_": 865
+    },
+    "dino2k:grouped": {
+      "aten::_foreach_lerp_": 1,
+      "aten::lerp_": 865
+    }
+  },
+  "CPU_rng_unchanged": true,
+  "CUDA_initialized": false,
+  "source_checkpoint_bytes_unchanged": true,
+  "production_changed": false,
+  "next_required_evidence": "A bounded CUDA state-equivalence and timing comparison after current owned training/review/profile jobs exit; then actual whole-step timing before adopting an EMA change. The queued profiler measures inference and does not quantify training EMA cost.",
+  "scope": "Actual state arithmetic and CPU operator counts only. No GPU speed, GPU equivalence, end-to-end training gain or model-quality claim. No production source/config/checkpoint or active frozen workflow changed."
+}
