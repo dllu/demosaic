@@ -62,3 +62,7 @@ still pending.
 and exited successfully; V79 is running. The first sampled observations match,
 with a small first-step base-loss difference across independent GPU processes.
 Full quality review still waits for both final checkpoints.
+
+[Both original training budgets are now complete](directional-interval-original4k-training.md).
+The independent final boundary passes, all sampled inputs/final RNG match, and
+the fixed quality review is running. Final model eligibility remains pending.

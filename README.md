@@ -74,7 +74,8 @@ The [completed objective comparison](docs/reconstruction-objective-first1k-revie
 misses its continuation gate. The [completed camera-supervision review](docs/camera-supervision-first1k-review.md)
 finds photo/color gains with mixed camera results; its continuation gate also fails.
 The [directional RAW residual and interval-loss study](docs/directional-interval-v78-v79.md)
-has passed execution/restart checks and is training; image quality is pending.
+has [completed both original training budgets](docs/directional-interval-original4k-training.md);
+its full image-quality review is running.
 See [training pipeline work](docs/training-pipeline.md) for augmentation before
 the last reduction, selected-domain loading and the batch-size sweep.
 The [packed detail review](docs/packed-detail-v40-v41-review.md) retains the

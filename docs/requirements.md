@@ -3,13 +3,16 @@
 The objective is the complete project in `PROMPT.md`, including trained quality,
 not just software that executes. This checklist records the evidence required.
 
-The [directional/interval study](directional-interval-v78-v79.md) is training
-its complete original4k arms from genuine V63 EMA. Its
+The [directional/interval study](directional-interval-v78-v79.md) has
+[completed both original 4k budgets](directional-interval-original4k-training.md)
+from genuine V63 EMA. Its
 [actual first1k state audit and review preparation](directional-interval-review-preparation.md)
 verify finite99/99/97 states and nonzero optimizer moments in all25,800 new
 parameters. Full primary/color/GFX/native review, including fresh V63 and
 matched retained V43/RawNIND references, is queued. No new model-quality,
 full-frame16-bit or speed result exists yet, and no model is promoted.
+The independent final boundary has passed and primary quality evaluation is
+running; all 176 sampled observations and final RNG states match across arms.
 The [completed V78 training boundary and V79 handoff](directional-v78-original4k-training-handoff.md)
 now retain all four control snapshots and verify finite final states. First-step
 base-loss variation across GPU processes remains part of the interpretation;
