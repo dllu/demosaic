@@ -10,9 +10,13 @@ The [experimental fixed-unit options](packed-isotropic-units.md) record RAW
 input gain and learned residual scale in checkpoints. Defaults preserve existing
 models; a full-data quality gain remains untested. The completed batch-learning
 diagnostic motivates testing a mixed-domain effective batch16.
-The [fresh V72/V73 mixed16 trial](packed-isotropic-mixed16-trial.md) is now
-training on the full data mixture, with checked prefixes and full-state resume.
-Its first32,000-example quality gate remains pending.
+The [fresh V72/V73 mixed16 trial](packed-isotropic-mixed16-trial.md) has completed
+both32,000-example gates with checked prefixes and full-state resume.
+Its [matched camera/native-crop interim review](packed-isotropic-mixed16-matched-camera-interim.md)
+finds only small DINO gains and substantial residual grain. Full photographic,
+full-frame and color checks remain in progress. A selected
+[current-versus-EMA CPU check](mixed16-current-EMA-CPU.md) does not find a large
+quality gap hidden by averaging; no inference policy changes.
 The three requested pipeline improvements are already measured separately in
 [the pipeline report](training-pipeline.md); this experiment retains that data
 path and does not change the existing model recipes.
@@ -128,11 +132,11 @@ Its exact operator is archived at
 `/mnt/external/demosaic/benchmarks/packed-isotropic-block-compilation-v1/operator.py`;
 the published receipt binds its SHA. No compiled checkpoint was saved.
 
-The [trained-checkpoint compilation study](packed-isotropic-compilation.md) is
-now queued after the40k quality review. It adds full-RGB accuracy gates, saved
-native photo/GFX crops, and repeated actual102MP eager/Inductor timings. Its
-completed16k CPU eager-backend preflight is bitwise equal; CUDA trained-model
-accuracy and full-frame speed remain unmeasured.
+The [trained-checkpoint compilation study](packed-isotropic-compilation.md)
+rejects its first trained FP16 photo-accuracy gate: maximum20.77–23.15DN16
+versus the fixed1DN16 bound. Its completed16k CPU eager-backend preflight was
+bitwise equal, but did not predict CUDA Inductor accuracy. No full-frame compiled
+timing or production adoption follows.
 
 The focused CPU suite passed117 tests, including both backbones' deterministic
 interrupted-training restart tests and legacy RGB/RAW-kernel tests. DINO unit

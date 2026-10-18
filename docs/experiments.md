@@ -13,6 +13,12 @@ both arms still far below mature controls. It includes two exact-GT triplets
 per new model and matched GFX foliage/fence contexts. Full photographic,
 full-frame and color review remains pending; V43 remains the working reference.
 
+The [current-versus-EMA selected CPU check](mixed16-current-EMA-CPU.md)
+replays all12 original EMA F32 predictions exactly, then compares the same
+checkpoint's current weights. Photo gains are only0.03–0.17dB; both retain
+heavy grain and no clear new GFX foliage/fence advantage. No averaging policy,
+checkpoint or training change follows.
+
 The [completed RAW-native 40k review](packed-isotropic-quarter-review.md)
 finds 2.061/2.188dB photo gains over the original8k models, with a small positive
 DINO photo gap and no consistent real-camera advantage. Both retain grain and

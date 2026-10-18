@@ -3,6 +3,15 @@
 The objective is the complete project in `PROMPT.md`, including trained quality,
 not just software that executes. This checklist records the evidence required.
 
+The current [fresh mixed16 V72/V73 trial](packed-isotropic-mixed16-trial.md)
+has completed both32,000-example boundaries. The
+[matched camera/native-crop interim review](packed-isotropic-mixed16-matched-camera-interim.md)
+finds small DINO CFA gains and substantial residual grain, far below mature
+controls. A [current-versus-EMA check](mixed16-current-EMA-CPU.md) finds only
+small selected-photo differences; it changes no inference policy. Full427,
+full-frame and color review is still running. These results do not meet the
+quality/speed requirements below, and no model is promoted.
+
 Latest: the [completed RAW-native 40k review](packed-isotropic-quarter-review.md)
 confirms own8k progress, but 29.73/29.95dB photo scores, residual native grain
 and50.70/53.74s full GFX restores do not meet the quality/speed goals. Neither
@@ -104,8 +113,8 @@ the last reduction and avoids discarded Commons batches. A batch sweep selects
 adds about 11% measured batch-16 throughput with bitwise-identical tables.
 Full 4× Commons preparation passed its complete-membership gate before V34
 trained; native 4× targets retain the same 53 captures / 31 scenes.
-[More Commons originals](commons-download.md) continue downloading with a 512 GiB
-reserve. Their first separately frozen extension adds 1,808 training sources;
+[More Commons originals](commons-download.md) stopped normally at their512GiB
+reserve after adding95,347 files this run. Their first separately frozen extension adds 1,808 training sources;
 active experiments and all existing validation/test assignments stay fixed.
 The [matched corpus/augmentation pilot](training-pipeline.md#matched-corpus-and-augmentation-pilot)
 tests the 1,808-source extension separately from the geometry change.

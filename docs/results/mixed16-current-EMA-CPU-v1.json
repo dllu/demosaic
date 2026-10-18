@@ -1,0 +1,2089 @@
+{
+  "status": "completed-selected-current-versus-EMA-CPU-check-no-policy-change",
+  "result": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-current-EMA-CPU-v1/result.json",
+    "sha256": "ba14cc12773ac6ff75039c4c884049ac7f5a1dc8c9aad745d55b7723c4cb859e"
+  },
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-current-EMA-CPU-v1/plan.json",
+    "sha256": "a1ca38691adaf0aedba88c74c2ab14f586b3514d575183d98043b4e881a3e201"
+  },
+  "driver": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-current-EMA-CPU-v1/driver.py",
+    "sha256": "07ad1414fd94fbf4a1b3cb0f005c334664f6c7b497eb127aefe667cc1f8dfd13"
+  },
+  "readback": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-current-EMA-CPU-v1/readback.json",
+    "sha256": "f08ee32d9f7f2d446a1771737ff58cb84b79d0a5cddc69d4e39a81a677c02599"
+  },
+  "state_witnesses": [
+    {
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-mixed16-v72-step2000.pt",
+        "sha256": "8d67375e2169adb88f7dcdafd253e23642eb0d87b1dc2d79416cb0f22320416a"
+      },
+      "restoration_tensors": 852,
+      "EMA_tensors": 852,
+      "tensors_with_current_EMA_difference": 852,
+      "current_load_exact": true
+    },
+    {
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-packed-isotropic-mixed16-v73-step2000.pt",
+        "sha256": "43c10f2a0af38761f9418f19c725edc4129284e76b5b2da89f66c184d1f643e1"
+      },
+      "restoration_tensors": 865,
+      "EMA_tensors": 865,
+      "tensors_with_current_EMA_difference": 863,
+      "current_load_exact": true
+    }
+  ],
+  "exact_existing_EMA_F32_replays": 12,
+  "photo_metrics": [
+    {
+      "arm": "no-dino",
+      "case": "photo-0",
+      "policy": "ema",
+      "camera_mse": 0.0004486470330256289,
+      "camera_psnr": 33.48095199962166,
+      "srgb_mse": 0.00131833928670548,
+      "srgb_psnr": 28.799728056893798
+    },
+    {
+      "arm": "no-dino",
+      "case": "photo-1",
+      "policy": "ema",
+      "camera_mse": 0.000687818611895109,
+      "camera_psnr": 31.625260766472103,
+      "srgb_mse": 0.0025113049629962698,
+      "srgb_psnr": 26.00100545071062
+    },
+    {
+      "arm": "no-dino",
+      "case": "photo-0",
+      "policy": "model",
+      "camera_mse": 0.00044637634915823993,
+      "camera_psnr": 33.502988241559954,
+      "srgb_mse": 0.0012721669255647545,
+      "srgb_psnr": 28.954558996189732
+    },
+    {
+      "arm": "no-dino",
+      "case": "photo-1",
+      "policy": "model",
+      "camera_mse": 0.0006723060363878319,
+      "camera_psnr": 31.72432989357865,
+      "srgb_mse": 0.0024929286461838444,
+      "srgb_psnr": 26.032901519062147
+    },
+    {
+      "arm": "dino",
+      "case": "photo-0",
+      "policy": "ema",
+      "camera_mse": 0.0004471809140457053,
+      "camera_psnr": 33.495167406795886,
+      "srgb_mse": 0.001320326032180282,
+      "srgb_psnr": 28.79318813875013
+    },
+    {
+      "arm": "dino",
+      "case": "photo-1",
+      "policy": "ema",
+      "camera_mse": 0.0006844965454099351,
+      "camera_psnr": 31.646287393681042,
+      "srgb_mse": 0.002504942432701153,
+      "srgb_psnr": 26.012022504145026
+    },
+    {
+      "arm": "dino",
+      "case": "photo-0",
+      "policy": "model",
+      "camera_mse": 0.00044505366203851277,
+      "camera_psnr": 33.51587621104108,
+      "srgb_mse": 0.0012693807960752557,
+      "srgb_psnr": 28.964080762297467
+    },
+    {
+      "arm": "dino",
+      "case": "photo-1",
+      "policy": "model",
+      "camera_mse": 0.000670291770310809,
+      "camera_psnr": 31.737361127419508,
+      "srgb_mse": 0.002484391034688945,
+      "srgb_psnr": 26.047800466427745
+    }
+  ],
+  "readback_summary": {
+    "predictions_and_PNGs": 24,
+    "exact_denoised_display_replays": 24,
+    "shared_noisy_reference_panels": 12,
+    "exact_native_board_cells": 36,
+    "metric_fields_checked": 32,
+    "all37_inputs263_guards_unchanged": true
+  },
+  "published_artifacts": [
+    {
+      "repo_path": "docs/images/mixed16-current-V72-photo-0.png",
+      "image_ref": {
+        "path": "/home/dllu/proj/demosaic/docs/images/mixed16-current-V72-photo-0.png",
+        "sha256": "6eccabad499475a6c2bb84a499702ab7a88da95bff72860af223ac6d5f238034"
+      },
+      "origin_image_ref": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-current-EMA-CPU-v1/crop-ad3e2ca9f8c96e39.png",
+        "sha256": "6eccabad499475a6c2bb84a499702ab7a88da95bff72860af223ac6d5f238034"
+      },
+      "crop_metadata": {
+        "image": "crop-ad3e2ca9f8c96e39.png",
+        "caption": "V72 current2k / photo-0",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V72 current2k",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "6eccabad499475a6c2bb84a499702ab7a88da95bff72860af223ac6d5f238034",
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "source": {
+          "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Roy Egloff",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": null,
+          "credit": "Own work",
+          "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+          "width": 3888,
+          "height": 2592,
+          "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+          "shape": [
+            324,
+            486,
+            3
+          ],
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+        },
+        "validation_index": 0,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "exposure": 1.0,
+          "name": "iso12800-prior",
+          "read": 2.62144e-05,
+          "shot": 0.00256
+        },
+        "pattern": "RGGB",
+        "display_exposure": 1.0,
+        "reference": "Exact synthetic clean target",
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ],
+        "noise_draw": "Existing fixed CPU-generated Poisson/read/ADC observation; unchanged across policies",
+        "case": "photo-0",
+        "checkpoint_sha256": "8d67375e2169adb88f7dcdafd253e23642eb0d87b1dc2d79416cb0f22320416a",
+        "model": {
+          "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-mixed16-v72-step2000.pt",
+          "sha256": "8d67375e2169adb88f7dcdafd253e23642eb0d87b1dc2d79416cb0f22320416a",
+          "label": "V72 no-dino new2k/32kex",
+          "step": 2000,
+          "model_config": {
+            "restoration_backbone": "packed-isotropic",
+            "width": 96,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": false,
+            "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "bottleneck",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": false,
+            "physical_anchors": false,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": false,
+            "adc_cfa_projection": false,
+            "raw_kernel_reconstruction": false,
+            "raw_kernel_windows": [
+              1,
+              5,
+              17
+            ],
+            "raw_kernel_phase_conditioning": false,
+            "isotropic_groups": 6,
+            "isotropic_blocks": 8,
+            "isotropic_local_width": 32,
+            "isotropic_raw_gain": 32,
+            "isotropic_residual_scale": 0.03125
+          },
+          "training_config": {
+            "amp": true,
+            "augmentation_downsample": 2,
+            "batch_size": 4,
+            "broad_camera": true,
+            "channels_last": true,
+            "checkpoint_every": 2000,
+            "cpu_threads": 4,
+            "data_seed_per_step": true,
+            "device": "cuda",
+            "experiment_notes": "Fresh mixed-domain effective B16 pilot motivated by completed training-only batch/coordinate tests. Four consecutive original B4 source groups use identical per-data-step domain schedule, global source indices, original group losses and degradation RNG. Accumulate four B4 forwards then clip/Adam/EMA once, chosen by actual IEEE FP32 channels_last no-DINO/DINO execution sweep. Gain32 neural RAW inputs/residual1/32, IEEE FP32/no AMP or TF32, original seed51/core capacity and frozen40170 Commons/native128/paired32 sources; no new data or Gaussian/checkpoint initialization. Full640000-example horizon=40000 optimizer updates/160000 B4 source steps, warmup8000 examples=500 updates; first quality gate32000 examples=2000 updates via stop-after. EMA cap .999**4 matches the prior cap in example units approximately; original adaptive warmup retained. Initial12 optimizer updates are a checked genuine prefix, then full-state resume to2000 with unchanged recipe/schedule/source. Only DINO presence/fusion differs between this matched pair. Compared with old V70/V71 this exploratory candidate changes units, precision and mixed optimizer batching; it is not a single-factor ablation against those models. No held-out/GFX/protected-final optimization, automatic continuation/promotion or convergence claim. Full quality/native160px triplet and real GFX foliage/fence review required.",
+            "flat_fraction": 0.1,
+            "log_every": 25,
+            "lr": 0.0002,
+            "manifest": "/mnt/external/demosaic/audits/commons-bin4-frozen44732-v1/manifest.jsonl",
+            "min_available_gb": 12,
+            "model": {
+              "restoration_backbone": "packed-isotropic",
+              "width": 96,
+              "isotropic_groups": 6,
+              "isotropic_blocks": 8,
+              "isotropic_local_width": 32,
+              "camera_conditioning": true,
+              "physical_fp32": true,
+              "dino": false,
+              "dino_feature_fusion": "bottleneck",
+              "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+              "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+              "isotropic_raw_gain": 32,
+              "isotropic_residual_scale": 0.03125
+            },
+            "noise_free_fraction": 0.1,
+            "paired_fraction": 0.25,
+            "paired_manifest": "/mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json",
+            "paired_workers": 2,
+            "patch_size": 256,
+            "precision": "float32",
+            "preserve_negative_read_noise": true,
+            "raw_clean_augmentation_downsample": 2,
+            "raw_clean_fraction": 0.25,
+            "raw_clean_manifest": "/mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json",
+            "raw_clean_workers": 2,
+            "reconstruct_highlights": true,
+            "run": "/mnt/external/demosaic/runs/no-dino-packed-isotropic-mixed16-v72",
+            "seed": 51,
+            "steps": 40000,
+            "synthetic_fraction": 0.2,
+            "trace_observations": true,
+            "val_batches": 4,
+            "validation_images": 8,
+            "validation_manifest": "/mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl",
+            "validation_protocol": "/mnt/external/demosaic/runs/no-dino-packed-isotropic-mixed16-v72/source/fabd0b781938e156a6dcf89fb429a0a0c7c727e9c1acdb38c434dd201a81ebae/validation_protocol.yaml",
+            "warmup_steps": 500,
+            "worker_start_method": "spawn",
+            "workers": 4,
+            "flat_chroma_stops": 8.0,
+            "multiscale_sensor_weight": 0.0,
+            "optimizer_batch_groups": 4,
+            "optimizer_forward_groups": 1,
+            "ema_decay": 0.996005996001,
+            "normalization_augmentation": "none",
+            "paired_manifest_sha256": "b3b36d3ec28b0e2d339cb28f3bc810cc17b31102f4ce6a3454fdfec9a4a4b5e3",
+            "raw_clean_manifest_sha256": "0dde4a0ca1ad68332d8a1c9d61fdc561db6501cd262d534647b979de82e3cf80",
+            "manifest_sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+            "validation_manifest_sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a",
+            "validation_protocol_sha256": "74b0df74b9734a714e04a0a1cf1e82ed0ba211b1d5b5fd745b9502ca5af2174c",
+            "source_sha256": "fabd0b781938e156a6dcf89fb429a0a0c7c727e9c1acdb38c434dd201a81ebae",
+            "source_snapshot": "/mnt/external/demosaic/runs/no-dino-packed-isotropic-mixed16-v72/source/fabd0b781938e156a6dcf89fb429a0a0c7c727e9c1acdb38c434dd201a81ebae"
+          },
+          "compute_precision": "IEEE float32"
+        },
+        "observation": {
+          "path": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e"
+        },
+        "conditioning": {
+          "exposure": 1.0,
+          "name": "iso12800-prior",
+          "read": 2.62144e-05,
+          "shot": 0.00256
+        },
+        "context_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "reference_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "compute_precision": "IEEE float32, CPU",
+        "method": "V72 current2k",
+        "prediction": {
+          "path": "/mnt/external/demosaic/benchmarks/mixed16-current-EMA-CPU-v1/no-dino-photo-0-current-RGB-f32.npy",
+          "sha256": "944d42d064bd3ee7ce611c8ab670cd66cb9f6e1833b6be7a041cc37004b5eda2",
+          "case": "photo-0",
+          "arm": "no-dino",
+          "policy": "model",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32"
+        },
+        "selected_checkpoint_state": "model (current restoration parameters, no EMA)",
+        "comparison": "Same immutable checkpoint and fixed observation as EMA; no model weights saved or changed."
+      }
+    },
+    {
+      "repo_path": "docs/images/mixed16-current-V72-photo-1.png",
+      "image_ref": {
+        "path": "/home/dllu/proj/demosaic/docs/images/mixed16-current-V72-photo-1.png",
+        "sha256": "bca0ed3503b07a45f6772eec0c10d066c5fc6939a603ae09bec2e4668b7e73ac"
+      },
+      "origin_image_ref": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-current-EMA-CPU-v1/crop-6f8b91d59c9c8200.png",
+        "sha256": "bca0ed3503b07a45f6772eec0c10d066c5fc6939a603ae09bec2e4668b7e73ac"
+      },
+      "crop_metadata": {
+        "image": "crop-6f8b91d59c9c8200.png",
+        "caption": "V72 current2k / photo-1",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V72 current2k",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "bca0ed3503b07a45f6772eec0c10d066c5fc6939a603ae09bec2e4668b7e73ac",
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "source": {
+          "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Vancouver_%28BC%2C_Canada%29%2C_Coal_Harbour_Seaside_Park%2C_Blick_in_den_Himmel_--_2022_--_2158.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Dietmar Rabich",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "Dietmar Rabich",
+          "credit": "Own work",
+          "sha1": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "sha1_hex": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "download_path": "images/00/2f/002fc6eeadf637e81d5a327f117b79abb86becd9.jpg",
+          "width": 3809,
+          "height": 2857,
+          "id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/002fc6eeadf637e81d5a327f117b79abb86becd9.npy",
+          "shape": [
+            357,
+            476,
+            3
+          ],
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf"
+        },
+        "validation_index": 1,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "exposure": 1.0,
+          "name": "iso12800-prior",
+          "read": 2.62144e-05,
+          "shot": 0.00256
+        },
+        "pattern": "RGGB",
+        "display_exposure": 1.0,
+        "reference": "Exact synthetic clean target",
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ],
+        "noise_draw": "Existing fixed CPU-generated Poisson/read/ADC observation; unchanged across policies",
+        "case": "photo-1",
+        "checkpoint_sha256": "8d67375e2169adb88f7dcdafd253e23642eb0d87b1dc2d79416cb0f22320416a",
+        "model": {
+          "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-mixed16-v72-step2000.pt",
+          "sha256": "8d67375e2169adb88f7dcdafd253e23642eb0d87b1dc2d79416cb0f22320416a",
+          "label": "V72 no-dino new2k/32kex",
+          "step": 2000,
+          "model_config": {
+            "restoration_backbone": "packed-isotropic",
+            "width": 96,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": false,
+            "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "bottleneck",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": false,
+            "physical_anchors": false,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": false,
+            "adc_cfa_projection": false,
+            "raw_kernel_reconstruction": false,
+            "raw_kernel_windows": [
+              1,
+              5,
+              17
+            ],
+            "raw_kernel_phase_conditioning": false,
+            "isotropic_groups": 6,
+            "isotropic_blocks": 8,
+            "isotropic_local_width": 32,
+            "isotropic_raw_gain": 32,
+            "isotropic_residual_scale": 0.03125
+          },
+          "training_config": {
+            "amp": true,
+            "augmentation_downsample": 2,
+            "batch_size": 4,
+            "broad_camera": true,
+            "channels_last": true,
+            "checkpoint_every": 2000,
+            "cpu_threads": 4,
+            "data_seed_per_step": true,
+            "device": "cuda",
+            "experiment_notes": "Fresh mixed-domain effective B16 pilot motivated by completed training-only batch/coordinate tests. Four consecutive original B4 source groups use identical per-data-step domain schedule, global source indices, original group losses and degradation RNG. Accumulate four B4 forwards then clip/Adam/EMA once, chosen by actual IEEE FP32 channels_last no-DINO/DINO execution sweep. Gain32 neural RAW inputs/residual1/32, IEEE FP32/no AMP or TF32, original seed51/core capacity and frozen40170 Commons/native128/paired32 sources; no new data or Gaussian/checkpoint initialization. Full640000-example horizon=40000 optimizer updates/160000 B4 source steps, warmup8000 examples=500 updates; first quality gate32000 examples=2000 updates via stop-after. EMA cap .999**4 matches the prior cap in example units approximately; original adaptive warmup retained. Initial12 optimizer updates are a checked genuine prefix, then full-state resume to2000 with unchanged recipe/schedule/source. Only DINO presence/fusion differs between this matched pair. Compared with old V70/V71 this exploratory candidate changes units, precision and mixed optimizer batching; it is not a single-factor ablation against those models. No held-out/GFX/protected-final optimization, automatic continuation/promotion or convergence claim. Full quality/native160px triplet and real GFX foliage/fence review required.",
+            "flat_fraction": 0.1,
+            "log_every": 25,
+            "lr": 0.0002,
+            "manifest": "/mnt/external/demosaic/audits/commons-bin4-frozen44732-v1/manifest.jsonl",
+            "min_available_gb": 12,
+            "model": {
+              "restoration_backbone": "packed-isotropic",
+              "width": 96,
+              "isotropic_groups": 6,
+              "isotropic_blocks": 8,
+              "isotropic_local_width": 32,
+              "camera_conditioning": true,
+              "physical_fp32": true,
+              "dino": false,
+              "dino_feature_fusion": "bottleneck",
+              "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+              "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+              "isotropic_raw_gain": 32,
+              "isotropic_residual_scale": 0.03125
+            },
+            "noise_free_fraction": 0.1,
+            "paired_fraction": 0.25,
+            "paired_manifest": "/mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json",
+            "paired_workers": 2,
+            "patch_size": 256,
+            "precision": "float32",
+            "preserve_negative_read_noise": true,
+            "raw_clean_augmentation_downsample": 2,
+            "raw_clean_fraction": 0.25,
+            "raw_clean_manifest": "/mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json",
+            "raw_clean_workers": 2,
+            "reconstruct_highlights": true,
+            "run": "/mnt/external/demosaic/runs/no-dino-packed-isotropic-mixed16-v72",
+            "seed": 51,
+            "steps": 40000,
+            "synthetic_fraction": 0.2,
+            "trace_observations": true,
+            "val_batches": 4,
+            "validation_images": 8,
+            "validation_manifest": "/mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl",
+            "validation_protocol": "/mnt/external/demosaic/runs/no-dino-packed-isotropic-mixed16-v72/source/fabd0b781938e156a6dcf89fb429a0a0c7c727e9c1acdb38c434dd201a81ebae/validation_protocol.yaml",
+            "warmup_steps": 500,
+            "worker_start_method": "spawn",
+            "workers": 4,
+            "flat_chroma_stops": 8.0,
+            "multiscale_sensor_weight": 0.0,
+            "optimizer_batch_groups": 4,
+            "optimizer_forward_groups": 1,
+            "ema_decay": 0.996005996001,
+            "normalization_augmentation": "none",
+            "paired_manifest_sha256": "b3b36d3ec28b0e2d339cb28f3bc810cc17b31102f4ce6a3454fdfec9a4a4b5e3",
+            "raw_clean_manifest_sha256": "0dde4a0ca1ad68332d8a1c9d61fdc561db6501cd262d534647b979de82e3cf80",
+            "manifest_sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+            "validation_manifest_sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a",
+            "validation_protocol_sha256": "74b0df74b9734a714e04a0a1cf1e82ed0ba211b1d5b5fd745b9502ca5af2174c",
+            "source_sha256": "fabd0b781938e156a6dcf89fb429a0a0c7c727e9c1acdb38c434dd201a81ebae",
+            "source_snapshot": "/mnt/external/demosaic/runs/no-dino-packed-isotropic-mixed16-v72/source/fabd0b781938e156a6dcf89fb429a0a0c7c727e9c1acdb38c434dd201a81ebae"
+          },
+          "compute_precision": "IEEE float32"
+        },
+        "observation": {
+          "path": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949"
+        },
+        "conditioning": {
+          "exposure": 1.0,
+          "name": "iso12800-prior",
+          "read": 2.62144e-05,
+          "shot": 0.00256
+        },
+        "context_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "reference_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "compute_precision": "IEEE float32, CPU",
+        "method": "V72 current2k",
+        "prediction": {
+          "path": "/mnt/external/demosaic/benchmarks/mixed16-current-EMA-CPU-v1/no-dino-photo-1-current-RGB-f32.npy",
+          "sha256": "1f50d970f82165286c3276f0e9b0247d8d829fecc34c2b002f3270ae0fbf7e1c",
+          "case": "photo-1",
+          "arm": "no-dino",
+          "policy": "model",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32"
+        },
+        "selected_checkpoint_state": "model (current restoration parameters, no EMA)",
+        "comparison": "Same immutable checkpoint and fixed observation as EMA; no model weights saved or changed."
+      }
+    },
+    {
+      "repo_path": "docs/images/mixed16-current-V73-photo-0.png",
+      "image_ref": {
+        "path": "/home/dllu/proj/demosaic/docs/images/mixed16-current-V73-photo-0.png",
+        "sha256": "1f1cb961600d41584aab84031093bc45a0c8c3881201e0078cb9527262a07664"
+      },
+      "origin_image_ref": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-current-EMA-CPU-v1/crop-c5e1825a404a9adc.png",
+        "sha256": "1f1cb961600d41584aab84031093bc45a0c8c3881201e0078cb9527262a07664"
+      },
+      "crop_metadata": {
+        "image": "crop-c5e1825a404a9adc.png",
+        "caption": "V73 current2k / photo-0",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V73 current2k",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "1f1cb961600d41584aab84031093bc45a0c8c3881201e0078cb9527262a07664",
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "source": {
+          "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Roy Egloff",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": null,
+          "credit": "Own work",
+          "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+          "width": 3888,
+          "height": 2592,
+          "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+          "shape": [
+            324,
+            486,
+            3
+          ],
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+        },
+        "validation_index": 0,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "exposure": 1.0,
+          "name": "iso12800-prior",
+          "read": 2.62144e-05,
+          "shot": 0.00256
+        },
+        "pattern": "RGGB",
+        "display_exposure": 1.0,
+        "reference": "Exact synthetic clean target",
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ],
+        "noise_draw": "Existing fixed CPU-generated Poisson/read/ADC observation; unchanged across policies",
+        "case": "photo-0",
+        "checkpoint_sha256": "43c10f2a0af38761f9418f19c725edc4129284e76b5b2da89f66c184d1f643e1",
+        "model": {
+          "path": "/mnt/external/demosaic/models/dino-packed-isotropic-mixed16-v73-step2000.pt",
+          "sha256": "43c10f2a0af38761f9418f19c725edc4129284e76b5b2da89f66c184d1f643e1",
+          "label": "V73 dino new2k/32kex",
+          "step": 2000,
+          "model_config": {
+            "restoration_backbone": "packed-isotropic",
+            "width": 96,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "packed-convnext",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": false,
+            "physical_anchors": false,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": false,
+            "adc_cfa_projection": false,
+            "raw_kernel_reconstruction": false,
+            "raw_kernel_windows": [
+              1,
+              5,
+              17
+            ],
+            "raw_kernel_phase_conditioning": false,
+            "isotropic_groups": 6,
+            "isotropic_blocks": 8,
+            "isotropic_local_width": 32,
+            "isotropic_raw_gain": 32,
+            "isotropic_residual_scale": 0.03125
+          },
+          "training_config": {
+            "amp": true,
+            "augmentation_downsample": 2,
+            "batch_size": 4,
+            "broad_camera": true,
+            "channels_last": true,
+            "checkpoint_every": 2000,
+            "cpu_threads": 4,
+            "data_seed_per_step": true,
+            "device": "cuda",
+            "experiment_notes": "Fresh mixed-domain effective B16 pilot motivated by completed training-only batch/coordinate tests. Four consecutive original B4 source groups use identical per-data-step domain schedule, global source indices, original group losses and degradation RNG. Accumulate four B4 forwards then clip/Adam/EMA once, chosen by actual IEEE FP32 channels_last no-DINO/DINO execution sweep. Gain32 neural RAW inputs/residual1/32, IEEE FP32/no AMP or TF32, original seed51/core capacity and frozen40170 Commons/native128/paired32 sources; no new data or Gaussian/checkpoint initialization. Full640000-example horizon=40000 optimizer updates/160000 B4 source steps, warmup8000 examples=500 updates; first quality gate32000 examples=2000 updates via stop-after. EMA cap .999**4 matches the prior cap in example units approximately; original adaptive warmup retained. Initial12 optimizer updates are a checked genuine prefix, then full-state resume to2000 with unchanged recipe/schedule/source. Only DINO presence/fusion differs between this matched pair. Compared with old V70/V71 this exploratory candidate changes units, precision and mixed optimizer batching; it is not a single-factor ablation against those models. No held-out/GFX/protected-final optimization, automatic continuation/promotion or convergence claim. Full quality/native160px triplet and real GFX foliage/fence review required.",
+            "flat_fraction": 0.1,
+            "log_every": 25,
+            "lr": 0.0002,
+            "manifest": "/mnt/external/demosaic/audits/commons-bin4-frozen44732-v1/manifest.jsonl",
+            "min_available_gb": 12,
+            "model": {
+              "restoration_backbone": "packed-isotropic",
+              "width": 96,
+              "isotropic_groups": 6,
+              "isotropic_blocks": 8,
+              "isotropic_local_width": 32,
+              "camera_conditioning": true,
+              "physical_fp32": true,
+              "dino": true,
+              "dino_feature_fusion": "packed-convnext",
+              "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+              "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+              "isotropic_raw_gain": 32,
+              "isotropic_residual_scale": 0.03125
+            },
+            "noise_free_fraction": 0.1,
+            "paired_fraction": 0.25,
+            "paired_manifest": "/mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json",
+            "paired_workers": 2,
+            "patch_size": 256,
+            "precision": "float32",
+            "preserve_negative_read_noise": true,
+            "raw_clean_augmentation_downsample": 2,
+            "raw_clean_fraction": 0.25,
+            "raw_clean_manifest": "/mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json",
+            "raw_clean_workers": 2,
+            "reconstruct_highlights": true,
+            "run": "/mnt/external/demosaic/runs/dino-packed-isotropic-mixed16-v73",
+            "seed": 51,
+            "steps": 40000,
+            "synthetic_fraction": 0.2,
+            "trace_observations": true,
+            "val_batches": 4,
+            "validation_images": 8,
+            "validation_manifest": "/mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl",
+            "validation_protocol": "/mnt/external/demosaic/runs/dino-packed-isotropic-mixed16-v73/source/fabd0b781938e156a6dcf89fb429a0a0c7c727e9c1acdb38c434dd201a81ebae/validation_protocol.yaml",
+            "warmup_steps": 500,
+            "worker_start_method": "spawn",
+            "workers": 4,
+            "flat_chroma_stops": 8.0,
+            "multiscale_sensor_weight": 0.0,
+            "optimizer_batch_groups": 4,
+            "optimizer_forward_groups": 1,
+            "ema_decay": 0.996005996001,
+            "normalization_augmentation": "none",
+            "paired_manifest_sha256": "b3b36d3ec28b0e2d339cb28f3bc810cc17b31102f4ce6a3454fdfec9a4a4b5e3",
+            "raw_clean_manifest_sha256": "0dde4a0ca1ad68332d8a1c9d61fdc561db6501cd262d534647b979de82e3cf80",
+            "manifest_sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+            "validation_manifest_sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a",
+            "validation_protocol_sha256": "74b0df74b9734a714e04a0a1cf1e82ed0ba211b1d5b5fd745b9502ca5af2174c",
+            "source_sha256": "fabd0b781938e156a6dcf89fb429a0a0c7c727e9c1acdb38c434dd201a81ebae",
+            "source_snapshot": "/mnt/external/demosaic/runs/dino-packed-isotropic-mixed16-v73/source/fabd0b781938e156a6dcf89fb429a0a0c7c727e9c1acdb38c434dd201a81ebae"
+          },
+          "compute_precision": "IEEE float32"
+        },
+        "observation": {
+          "path": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e"
+        },
+        "conditioning": {
+          "exposure": 1.0,
+          "name": "iso12800-prior",
+          "read": 2.62144e-05,
+          "shot": 0.00256
+        },
+        "context_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "reference_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "compute_precision": "IEEE float32, CPU",
+        "method": "V73 current2k",
+        "prediction": {
+          "path": "/mnt/external/demosaic/benchmarks/mixed16-current-EMA-CPU-v1/dino-photo-0-current-RGB-f32.npy",
+          "sha256": "12d26761138142df98c5a08a77c8af94905b7940d59f1dc515e0f8cf38af1a9e",
+          "case": "photo-0",
+          "arm": "dino",
+          "policy": "model",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32"
+        },
+        "selected_checkpoint_state": "model (current restoration parameters, no EMA)",
+        "comparison": "Same immutable checkpoint and fixed observation as EMA; no model weights saved or changed."
+      }
+    },
+    {
+      "repo_path": "docs/images/mixed16-current-V73-photo-1.png",
+      "image_ref": {
+        "path": "/home/dllu/proj/demosaic/docs/images/mixed16-current-V73-photo-1.png",
+        "sha256": "893a24db6b664b6ec1898144f639da7042a07811dd66dce9fd9461ff839e8530"
+      },
+      "origin_image_ref": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-current-EMA-CPU-v1/crop-a4ba6b16aa4b2b40.png",
+        "sha256": "893a24db6b664b6ec1898144f639da7042a07811dd66dce9fd9461ff839e8530"
+      },
+      "crop_metadata": {
+        "image": "crop-a4ba6b16aa4b2b40.png",
+        "caption": "V73 current2k / photo-1",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V73 current2k",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "893a24db6b664b6ec1898144f639da7042a07811dd66dce9fd9461ff839e8530",
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "source": {
+          "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Vancouver_%28BC%2C_Canada%29%2C_Coal_Harbour_Seaside_Park%2C_Blick_in_den_Himmel_--_2022_--_2158.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Dietmar Rabich",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "Dietmar Rabich",
+          "credit": "Own work",
+          "sha1": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "sha1_hex": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "download_path": "images/00/2f/002fc6eeadf637e81d5a327f117b79abb86becd9.jpg",
+          "width": 3809,
+          "height": 2857,
+          "id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/002fc6eeadf637e81d5a327f117b79abb86becd9.npy",
+          "shape": [
+            357,
+            476,
+            3
+          ],
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf"
+        },
+        "validation_index": 1,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "exposure": 1.0,
+          "name": "iso12800-prior",
+          "read": 2.62144e-05,
+          "shot": 0.00256
+        },
+        "pattern": "RGGB",
+        "display_exposure": 1.0,
+        "reference": "Exact synthetic clean target",
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ],
+        "noise_draw": "Existing fixed CPU-generated Poisson/read/ADC observation; unchanged across policies",
+        "case": "photo-1",
+        "checkpoint_sha256": "43c10f2a0af38761f9418f19c725edc4129284e76b5b2da89f66c184d1f643e1",
+        "model": {
+          "path": "/mnt/external/demosaic/models/dino-packed-isotropic-mixed16-v73-step2000.pt",
+          "sha256": "43c10f2a0af38761f9418f19c725edc4129284e76b5b2da89f66c184d1f643e1",
+          "label": "V73 dino new2k/32kex",
+          "step": 2000,
+          "model_config": {
+            "restoration_backbone": "packed-isotropic",
+            "width": 96,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "packed-convnext",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": false,
+            "physical_anchors": false,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": false,
+            "adc_cfa_projection": false,
+            "raw_kernel_reconstruction": false,
+            "raw_kernel_windows": [
+              1,
+              5,
+              17
+            ],
+            "raw_kernel_phase_conditioning": false,
+            "isotropic_groups": 6,
+            "isotropic_blocks": 8,
+            "isotropic_local_width": 32,
+            "isotropic_raw_gain": 32,
+            "isotropic_residual_scale": 0.03125
+          },
+          "training_config": {
+            "amp": true,
+            "augmentation_downsample": 2,
+            "batch_size": 4,
+            "broad_camera": true,
+            "channels_last": true,
+            "checkpoint_every": 2000,
+            "cpu_threads": 4,
+            "data_seed_per_step": true,
+            "device": "cuda",
+            "experiment_notes": "Fresh mixed-domain effective B16 pilot motivated by completed training-only batch/coordinate tests. Four consecutive original B4 source groups use identical per-data-step domain schedule, global source indices, original group losses and degradation RNG. Accumulate four B4 forwards then clip/Adam/EMA once, chosen by actual IEEE FP32 channels_last no-DINO/DINO execution sweep. Gain32 neural RAW inputs/residual1/32, IEEE FP32/no AMP or TF32, original seed51/core capacity and frozen40170 Commons/native128/paired32 sources; no new data or Gaussian/checkpoint initialization. Full640000-example horizon=40000 optimizer updates/160000 B4 source steps, warmup8000 examples=500 updates; first quality gate32000 examples=2000 updates via stop-after. EMA cap .999**4 matches the prior cap in example units approximately; original adaptive warmup retained. Initial12 optimizer updates are a checked genuine prefix, then full-state resume to2000 with unchanged recipe/schedule/source. Only DINO presence/fusion differs between this matched pair. Compared with old V70/V71 this exploratory candidate changes units, precision and mixed optimizer batching; it is not a single-factor ablation against those models. No held-out/GFX/protected-final optimization, automatic continuation/promotion or convergence claim. Full quality/native160px triplet and real GFX foliage/fence review required.",
+            "flat_fraction": 0.1,
+            "log_every": 25,
+            "lr": 0.0002,
+            "manifest": "/mnt/external/demosaic/audits/commons-bin4-frozen44732-v1/manifest.jsonl",
+            "min_available_gb": 12,
+            "model": {
+              "restoration_backbone": "packed-isotropic",
+              "width": 96,
+              "isotropic_groups": 6,
+              "isotropic_blocks": 8,
+              "isotropic_local_width": 32,
+              "camera_conditioning": true,
+              "physical_fp32": true,
+              "dino": true,
+              "dino_feature_fusion": "packed-convnext",
+              "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+              "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+              "isotropic_raw_gain": 32,
+              "isotropic_residual_scale": 0.03125
+            },
+            "noise_free_fraction": 0.1,
+            "paired_fraction": 0.25,
+            "paired_manifest": "/mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json",
+            "paired_workers": 2,
+            "patch_size": 256,
+            "precision": "float32",
+            "preserve_negative_read_noise": true,
+            "raw_clean_augmentation_downsample": 2,
+            "raw_clean_fraction": 0.25,
+            "raw_clean_manifest": "/mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json",
+            "raw_clean_workers": 2,
+            "reconstruct_highlights": true,
+            "run": "/mnt/external/demosaic/runs/dino-packed-isotropic-mixed16-v73",
+            "seed": 51,
+            "steps": 40000,
+            "synthetic_fraction": 0.2,
+            "trace_observations": true,
+            "val_batches": 4,
+            "validation_images": 8,
+            "validation_manifest": "/mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl",
+            "validation_protocol": "/mnt/external/demosaic/runs/dino-packed-isotropic-mixed16-v73/source/fabd0b781938e156a6dcf89fb429a0a0c7c727e9c1acdb38c434dd201a81ebae/validation_protocol.yaml",
+            "warmup_steps": 500,
+            "worker_start_method": "spawn",
+            "workers": 4,
+            "flat_chroma_stops": 8.0,
+            "multiscale_sensor_weight": 0.0,
+            "optimizer_batch_groups": 4,
+            "optimizer_forward_groups": 1,
+            "ema_decay": 0.996005996001,
+            "normalization_augmentation": "none",
+            "paired_manifest_sha256": "b3b36d3ec28b0e2d339cb28f3bc810cc17b31102f4ce6a3454fdfec9a4a4b5e3",
+            "raw_clean_manifest_sha256": "0dde4a0ca1ad68332d8a1c9d61fdc561db6501cd262d534647b979de82e3cf80",
+            "manifest_sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+            "validation_manifest_sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a",
+            "validation_protocol_sha256": "74b0df74b9734a714e04a0a1cf1e82ed0ba211b1d5b5fd745b9502ca5af2174c",
+            "source_sha256": "fabd0b781938e156a6dcf89fb429a0a0c7c727e9c1acdb38c434dd201a81ebae",
+            "source_snapshot": "/mnt/external/demosaic/runs/dino-packed-isotropic-mixed16-v73/source/fabd0b781938e156a6dcf89fb429a0a0c7c727e9c1acdb38c434dd201a81ebae"
+          },
+          "compute_precision": "IEEE float32"
+        },
+        "observation": {
+          "path": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949"
+        },
+        "conditioning": {
+          "exposure": 1.0,
+          "name": "iso12800-prior",
+          "read": 2.62144e-05,
+          "shot": 0.00256
+        },
+        "context_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "reference_roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "compute_precision": "IEEE float32, CPU",
+        "method": "V73 current2k",
+        "prediction": {
+          "path": "/mnt/external/demosaic/benchmarks/mixed16-current-EMA-CPU-v1/dino-photo-1-current-RGB-f32.npy",
+          "sha256": "7d3867a32a41c2b3c04da644fb1a3280ac5b4708fa743dda3defb6c079e80f88",
+          "case": "photo-1",
+          "arm": "dino",
+          "policy": "model",
+          "shape": [
+            1,
+            3,
+            256,
+            256
+          ],
+          "dtype": "float32"
+        },
+        "selected_checkpoint_state": "model (current restoration parameters, no EMA)",
+        "comparison": "Same immutable checkpoint and fixed observation as EMA; no model weights saved or changed."
+      }
+    },
+    {
+      "repo_path": "docs/images/mixed16-current-V73-foliage.png",
+      "image_ref": {
+        "path": "/home/dllu/proj/demosaic/docs/images/mixed16-current-V73-foliage.png",
+        "sha256": "79cacdc523988f160470a0f184b54d539a7137ec3199821b984f4c7d25e61a75"
+      },
+      "origin_image_ref": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-current-EMA-CPU-v1/crop-070e359d4a6c0898.png",
+        "sha256": "79cacdc523988f160470a0f184b54d539a7137ec3199821b984f4c7d25e61a75"
+      },
+      "crop_metadata": {
+        "image": "crop-070e359d4a6c0898.png",
+        "caption": "V73 current2k / foliage",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V73 current2k",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref, not GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "79cacdc523988f160470a0f184b54d539a7137ec3199821b984f4c7d25e61a75",
+        "region": {
+          "name": "foliage",
+          "noisy_xy": [
+            8890,
+            5570
+          ],
+          "reference_xy": [
+            8890,
+            5570
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9597686529159546
+        },
+        "context_xywh": [
+          8704,
+          5376,
+          512,
+          512
+        ],
+        "noisy_packed": {
+          "path": "/mnt/external/demosaic/evaluation/packed-isotropic-first32000-gfx-v2/foliage-noisy-packed-f32.npy",
+          "sha256": "a67eec1789664a3e3ea1aaa43e7cb8ece9c8cb9001a8f3b2d7717053d802f278"
+        },
+        "reference_RGB": {
+          "path": "/mnt/external/demosaic/evaluation/packed-isotropic-first32000-gfx-v2/foliage-reference-rgb-f32.npy",
+          "sha256": "35a77f7035e67561ffde8d214a0275b3f174a2859e6981f968a49a63d535670a"
+        },
+        "reference": "Separate ISO100 f/5.6 capture and independently demosaiced reference, not GT",
+        "fixture_context_xywh": [
+          8714,
+          5394,
+          512,
+          512
+        ],
+        "context_alignment_sensor_pixels": 32,
+        "raw_selection": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-inputs-v1/DSCF3879-normalized-camera-RAW-f32.npy",
+          "sha256": "0bdb8ae025d0ea763339e01176f6fcb3194ba9282b1d53b495d7259337906b52"
+        },
+        "source": [
+          {
+            "role": "noisy",
+            "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+            "metadata": {
+              "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+              "camera": "GFX100S",
+              "pattern": "RGGB",
+              "black_levels": [
+                4101.0,
+                4098.0,
+                4104.0,
+                4106.0
+              ],
+              "white_levels": [
+                65535.0,
+                65535.0,
+                65535.0,
+                65535.0
+              ],
+              "white_balance": [
+                1.5132450331125828,
+                1.0,
+                2.2152317880794703
+              ],
+              "camera_to_srgb": [
+                [
+                  1.0725188393098881,
+                  0.17123593128834644,
+                  -0.24375477059823436
+                ],
+                [
+                  -0.1267191317089774,
+                  1.4310509369654432,
+                  -0.3043318052564657
+                ],
+                [
+                  -0.009697676902906037,
+                  -0.29348063283422965,
+                  1.3031783097371357
+                ]
+              ],
+              "flip": 0,
+              "iso": 6400,
+              "adc_white_level": 65535.0
+            }
+          },
+          {
+            "role": "reference",
+            "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+            "metadata": {
+              "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+              "camera": "GFX100S",
+              "pattern": "RGGB",
+              "black_levels": [
+                256.0,
+                255.0,
+                256.0,
+                256.0
+              ],
+              "white_levels": [
+                65535.0,
+                65535.0,
+                65535.0,
+                65535.0
+              ],
+              "white_balance": [
+                1.5132450331125828,
+                1.0,
+                2.2152317880794703
+              ],
+              "camera_to_srgb": [
+                [
+                  1.0725188393098881,
+                  0.17123593128834644,
+                  -0.24375477059823436
+                ],
+                [
+                  -0.1267191317089774,
+                  1.4310509369654432,
+                  -0.3043318052564657
+                ],
+                [
+                  -0.009697676902906037,
+                  -0.29348063283422965,
+                  1.3031783097371357
+                ]
+              ],
+              "flip": 0,
+              "iso": 100,
+              "adc_white_level": 65535.0
+            }
+          }
+        ],
+        "full_frame": false,
+        "case": "foliage",
+        "checkpoint_sha256": "43c10f2a0af38761f9418f19c725edc4129284e76b5b2da89f66c184d1f643e1",
+        "model": {
+          "path": "/mnt/external/demosaic/models/dino-packed-isotropic-mixed16-v73-step2000.pt",
+          "sha256": "43c10f2a0af38761f9418f19c725edc4129284e76b5b2da89f66c184d1f643e1",
+          "label": "V73 dino new2k/32kex",
+          "step": 2000,
+          "model_config": {
+            "restoration_backbone": "packed-isotropic",
+            "width": 96,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "packed-convnext",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": false,
+            "physical_anchors": false,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": false,
+            "adc_cfa_projection": false,
+            "raw_kernel_reconstruction": false,
+            "raw_kernel_windows": [
+              1,
+              5,
+              17
+            ],
+            "raw_kernel_phase_conditioning": false,
+            "isotropic_groups": 6,
+            "isotropic_blocks": 8,
+            "isotropic_local_width": 32,
+            "isotropic_raw_gain": 32,
+            "isotropic_residual_scale": 0.03125
+          },
+          "training_config": {
+            "amp": true,
+            "augmentation_downsample": 2,
+            "batch_size": 4,
+            "broad_camera": true,
+            "channels_last": true,
+            "checkpoint_every": 2000,
+            "cpu_threads": 4,
+            "data_seed_per_step": true,
+            "device": "cuda",
+            "experiment_notes": "Fresh mixed-domain effective B16 pilot motivated by completed training-only batch/coordinate tests. Four consecutive original B4 source groups use identical per-data-step domain schedule, global source indices, original group losses and degradation RNG. Accumulate four B4 forwards then clip/Adam/EMA once, chosen by actual IEEE FP32 channels_last no-DINO/DINO execution sweep. Gain32 neural RAW inputs/residual1/32, IEEE FP32/no AMP or TF32, original seed51/core capacity and frozen40170 Commons/native128/paired32 sources; no new data or Gaussian/checkpoint initialization. Full640000-example horizon=40000 optimizer updates/160000 B4 source steps, warmup8000 examples=500 updates; first quality gate32000 examples=2000 updates via stop-after. EMA cap .999**4 matches the prior cap in example units approximately; original adaptive warmup retained. Initial12 optimizer updates are a checked genuine prefix, then full-state resume to2000 with unchanged recipe/schedule/source. Only DINO presence/fusion differs between this matched pair. Compared with old V70/V71 this exploratory candidate changes units, precision and mixed optimizer batching; it is not a single-factor ablation against those models. No held-out/GFX/protected-final optimization, automatic continuation/promotion or convergence claim. Full quality/native160px triplet and real GFX foliage/fence review required.",
+            "flat_fraction": 0.1,
+            "log_every": 25,
+            "lr": 0.0002,
+            "manifest": "/mnt/external/demosaic/audits/commons-bin4-frozen44732-v1/manifest.jsonl",
+            "min_available_gb": 12,
+            "model": {
+              "restoration_backbone": "packed-isotropic",
+              "width": 96,
+              "isotropic_groups": 6,
+              "isotropic_blocks": 8,
+              "isotropic_local_width": 32,
+              "camera_conditioning": true,
+              "physical_fp32": true,
+              "dino": true,
+              "dino_feature_fusion": "packed-convnext",
+              "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+              "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+              "isotropic_raw_gain": 32,
+              "isotropic_residual_scale": 0.03125
+            },
+            "noise_free_fraction": 0.1,
+            "paired_fraction": 0.25,
+            "paired_manifest": "/mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json",
+            "paired_workers": 2,
+            "patch_size": 256,
+            "precision": "float32",
+            "preserve_negative_read_noise": true,
+            "raw_clean_augmentation_downsample": 2,
+            "raw_clean_fraction": 0.25,
+            "raw_clean_manifest": "/mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json",
+            "raw_clean_workers": 2,
+            "reconstruct_highlights": true,
+            "run": "/mnt/external/demosaic/runs/dino-packed-isotropic-mixed16-v73",
+            "seed": 51,
+            "steps": 40000,
+            "synthetic_fraction": 0.2,
+            "trace_observations": true,
+            "val_batches": 4,
+            "validation_images": 8,
+            "validation_manifest": "/mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl",
+            "validation_protocol": "/mnt/external/demosaic/runs/dino-packed-isotropic-mixed16-v73/source/fabd0b781938e156a6dcf89fb429a0a0c7c727e9c1acdb38c434dd201a81ebae/validation_protocol.yaml",
+            "warmup_steps": 500,
+            "worker_start_method": "spawn",
+            "workers": 4,
+            "flat_chroma_stops": 8.0,
+            "multiscale_sensor_weight": 0.0,
+            "optimizer_batch_groups": 4,
+            "optimizer_forward_groups": 1,
+            "ema_decay": 0.996005996001,
+            "normalization_augmentation": "none",
+            "paired_manifest_sha256": "b3b36d3ec28b0e2d339cb28f3bc810cc17b31102f4ce6a3454fdfec9a4a4b5e3",
+            "raw_clean_manifest_sha256": "0dde4a0ca1ad68332d8a1c9d61fdc561db6501cd262d534647b979de82e3cf80",
+            "manifest_sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+            "validation_manifest_sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a",
+            "validation_protocol_sha256": "74b0df74b9734a714e04a0a1cf1e82ed0ba211b1d5b5fd745b9502ca5af2174c",
+            "source_sha256": "fabd0b781938e156a6dcf89fb429a0a0c7c727e9c1acdb38c434dd201a81ebae",
+            "source_snapshot": "/mnt/external/demosaic/runs/dino-packed-isotropic-mixed16-v73/source/fabd0b781938e156a6dcf89fb429a0a0c7c727e9c1acdb38c434dd201a81ebae"
+          },
+          "compute_precision": "IEEE float32"
+        },
+        "observation": {
+          "path": "/mnt/external/demosaic/evaluation/packed-isotropic-mixed16-dino-first32000-CPU-preview-v1/GFX-common32-grid-native512.npz",
+          "sha256": "0104842e46643ee6ae2f852b179cb7c26a2f2456bb138a6957af8c7fb80fe81f",
+          "sample_index": 2
+        },
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06,
+          "source": "input Haar fit"
+        },
+        "display_exposure": 4,
+        "context_roi_xywh": [
+          186,
+          194,
+          160,
+          160
+        ],
+        "reference_roi_xywh": [
+          0,
+          0,
+          160,
+          160
+        ],
+        "white_balance": [
+          1.5132449865341187,
+          1.0,
+          2.2152318954467773
+        ],
+        "camera_to_srgb": [
+          [
+            1.0725188255310059,
+            0.17123593389987946,
+            -0.2437547743320465
+          ],
+          [
+            -0.126719132065773,
+            1.4310508966445923,
+            -0.30433180928230286
+          ],
+          [
+            -0.00969767663627863,
+            -0.29348063468933105,
+            1.303178310394287
+          ]
+        ],
+        "compute_precision": "IEEE float32, CPU",
+        "method": "V73 current2k",
+        "prediction": {
+          "path": "/mnt/external/demosaic/benchmarks/mixed16-current-EMA-CPU-v1/dino-foliage-current-RGB-f32.npy",
+          "sha256": "81dc86a18e1dde2a49882c950734688ff356dd894c7fbf6519a9fb667013e08b",
+          "case": "foliage",
+          "arm": "dino",
+          "policy": "model",
+          "shape": [
+            1,
+            3,
+            512,
+            512
+          ],
+          "dtype": "float32"
+        },
+        "selected_checkpoint_state": "model (current restoration parameters, no EMA)",
+        "comparison": "Same immutable checkpoint and fixed observation as EMA; no model weights saved or changed."
+      }
+    },
+    {
+      "repo_path": "docs/images/mixed16-current-V73-chain-link-fence.png",
+      "image_ref": {
+        "path": "/home/dllu/proj/demosaic/docs/images/mixed16-current-V73-chain-link-fence.png",
+        "sha256": "8f9dcb24d0b1fc033d4296159da75ec38cb36726863283df0986a21557fcf513"
+      },
+      "origin_image_ref": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-current-EMA-CPU-v1/crop-b763640d293a258f.png",
+        "sha256": "8f9dcb24d0b1fc033d4296159da75ec38cb36726863283df0986a21557fcf513"
+      },
+      "crop_metadata": {
+        "image": "crop-b763640d293a258f.png",
+        "caption": "V73 current2k / chain-link-fence",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V73 current2k",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref, not GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "8f9dcb24d0b1fc033d4296159da75ec38cb36726863283df0986a21557fcf513",
+        "region": {
+          "name": "chain-link-fence",
+          "noisy_xy": [
+            2240,
+            6000
+          ],
+          "reference_xy": [
+            2241,
+            6000
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9550720453262329
+        },
+        "context_xywh": [
+          2048,
+          5824,
+          512,
+          512
+        ],
+        "noisy_packed": {
+          "path": "/mnt/external/demosaic/evaluation/packed-isotropic-first32000-gfx-v2/chain-link-fence-noisy-packed-f32.npy",
+          "sha256": "b145f28630c1abce870c99bc24160fa0276ef31bcff14e5a72d577c964c9d495"
+        },
+        "reference_RGB": {
+          "path": "/mnt/external/demosaic/evaluation/packed-isotropic-first32000-gfx-v2/chain-link-fence-reference-rgb-f32.npy",
+          "sha256": "07b02153c74b8d92052f0fc15ce417f64e54f551433ab87a6006eee44eeafe6a"
+        },
+        "reference": "Separate ISO100 f/5.6 capture and independently demosaiced reference, not GT",
+        "fixture_context_xywh": [
+          2064,
+          5824,
+          512,
+          512
+        ],
+        "context_alignment_sensor_pixels": 32,
+        "raw_selection": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-inputs-v1/DSCF3879-normalized-camera-RAW-f32.npy",
+          "sha256": "0bdb8ae025d0ea763339e01176f6fcb3194ba9282b1d53b495d7259337906b52"
+        },
+        "source": [
+          {
+            "role": "noisy",
+            "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+            "metadata": {
+              "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+              "camera": "GFX100S",
+              "pattern": "RGGB",
+              "black_levels": [
+                4101.0,
+                4098.0,
+                4104.0,
+                4106.0
+              ],
+              "white_levels": [
+                65535.0,
+                65535.0,
+                65535.0,
+                65535.0
+              ],
+              "white_balance": [
+                1.5132450331125828,
+                1.0,
+                2.2152317880794703
+              ],
+              "camera_to_srgb": [
+                [
+                  1.0725188393098881,
+                  0.17123593128834644,
+                  -0.24375477059823436
+                ],
+                [
+                  -0.1267191317089774,
+                  1.4310509369654432,
+                  -0.3043318052564657
+                ],
+                [
+                  -0.009697676902906037,
+                  -0.29348063283422965,
+                  1.3031783097371357
+                ]
+              ],
+              "flip": 0,
+              "iso": 6400,
+              "adc_white_level": 65535.0
+            }
+          },
+          {
+            "role": "reference",
+            "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+            "metadata": {
+              "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+              "camera": "GFX100S",
+              "pattern": "RGGB",
+              "black_levels": [
+                256.0,
+                255.0,
+                256.0,
+                256.0
+              ],
+              "white_levels": [
+                65535.0,
+                65535.0,
+                65535.0,
+                65535.0
+              ],
+              "white_balance": [
+                1.5132450331125828,
+                1.0,
+                2.2152317880794703
+              ],
+              "camera_to_srgb": [
+                [
+                  1.0725188393098881,
+                  0.17123593128834644,
+                  -0.24375477059823436
+                ],
+                [
+                  -0.1267191317089774,
+                  1.4310509369654432,
+                  -0.3043318052564657
+                ],
+                [
+                  -0.009697676902906037,
+                  -0.29348063283422965,
+                  1.3031783097371357
+                ]
+              ],
+              "flip": 0,
+              "iso": 100,
+              "adc_white_level": 65535.0
+            }
+          }
+        ],
+        "full_frame": false,
+        "case": "chain-link-fence",
+        "checkpoint_sha256": "43c10f2a0af38761f9418f19c725edc4129284e76b5b2da89f66c184d1f643e1",
+        "model": {
+          "path": "/mnt/external/demosaic/models/dino-packed-isotropic-mixed16-v73-step2000.pt",
+          "sha256": "43c10f2a0af38761f9418f19c725edc4129284e76b5b2da89f66c184d1f643e1",
+          "label": "V73 dino new2k/32kex",
+          "step": 2000,
+          "model_config": {
+            "restoration_backbone": "packed-isotropic",
+            "width": 96,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "packed-convnext",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": false,
+            "physical_anchors": false,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": false,
+            "adc_cfa_projection": false,
+            "raw_kernel_reconstruction": false,
+            "raw_kernel_windows": [
+              1,
+              5,
+              17
+            ],
+            "raw_kernel_phase_conditioning": false,
+            "isotropic_groups": 6,
+            "isotropic_blocks": 8,
+            "isotropic_local_width": 32,
+            "isotropic_raw_gain": 32,
+            "isotropic_residual_scale": 0.03125
+          },
+          "training_config": {
+            "amp": true,
+            "augmentation_downsample": 2,
+            "batch_size": 4,
+            "broad_camera": true,
+            "channels_last": true,
+            "checkpoint_every": 2000,
+            "cpu_threads": 4,
+            "data_seed_per_step": true,
+            "device": "cuda",
+            "experiment_notes": "Fresh mixed-domain effective B16 pilot motivated by completed training-only batch/coordinate tests. Four consecutive original B4 source groups use identical per-data-step domain schedule, global source indices, original group losses and degradation RNG. Accumulate four B4 forwards then clip/Adam/EMA once, chosen by actual IEEE FP32 channels_last no-DINO/DINO execution sweep. Gain32 neural RAW inputs/residual1/32, IEEE FP32/no AMP or TF32, original seed51/core capacity and frozen40170 Commons/native128/paired32 sources; no new data or Gaussian/checkpoint initialization. Full640000-example horizon=40000 optimizer updates/160000 B4 source steps, warmup8000 examples=500 updates; first quality gate32000 examples=2000 updates via stop-after. EMA cap .999**4 matches the prior cap in example units approximately; original adaptive warmup retained. Initial12 optimizer updates are a checked genuine prefix, then full-state resume to2000 with unchanged recipe/schedule/source. Only DINO presence/fusion differs between this matched pair. Compared with old V70/V71 this exploratory candidate changes units, precision and mixed optimizer batching; it is not a single-factor ablation against those models. No held-out/GFX/protected-final optimization, automatic continuation/promotion or convergence claim. Full quality/native160px triplet and real GFX foliage/fence review required.",
+            "flat_fraction": 0.1,
+            "log_every": 25,
+            "lr": 0.0002,
+            "manifest": "/mnt/external/demosaic/audits/commons-bin4-frozen44732-v1/manifest.jsonl",
+            "min_available_gb": 12,
+            "model": {
+              "restoration_backbone": "packed-isotropic",
+              "width": 96,
+              "isotropic_groups": 6,
+              "isotropic_blocks": 8,
+              "isotropic_local_width": 32,
+              "camera_conditioning": true,
+              "physical_fp32": true,
+              "dino": true,
+              "dino_feature_fusion": "packed-convnext",
+              "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+              "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+              "isotropic_raw_gain": 32,
+              "isotropic_residual_scale": 0.03125
+            },
+            "noise_free_fraction": 0.1,
+            "paired_fraction": 0.25,
+            "paired_manifest": "/mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json",
+            "paired_workers": 2,
+            "patch_size": 256,
+            "precision": "float32",
+            "preserve_negative_read_noise": true,
+            "raw_clean_augmentation_downsample": 2,
+            "raw_clean_fraction": 0.25,
+            "raw_clean_manifest": "/mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json",
+            "raw_clean_workers": 2,
+            "reconstruct_highlights": true,
+            "run": "/mnt/external/demosaic/runs/dino-packed-isotropic-mixed16-v73",
+            "seed": 51,
+            "steps": 40000,
+            "synthetic_fraction": 0.2,
+            "trace_observations": true,
+            "val_batches": 4,
+            "validation_images": 8,
+            "validation_manifest": "/mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl",
+            "validation_protocol": "/mnt/external/demosaic/runs/dino-packed-isotropic-mixed16-v73/source/fabd0b781938e156a6dcf89fb429a0a0c7c727e9c1acdb38c434dd201a81ebae/validation_protocol.yaml",
+            "warmup_steps": 500,
+            "worker_start_method": "spawn",
+            "workers": 4,
+            "flat_chroma_stops": 8.0,
+            "multiscale_sensor_weight": 0.0,
+            "optimizer_batch_groups": 4,
+            "optimizer_forward_groups": 1,
+            "ema_decay": 0.996005996001,
+            "normalization_augmentation": "none",
+            "paired_manifest_sha256": "b3b36d3ec28b0e2d339cb28f3bc810cc17b31102f4ce6a3454fdfec9a4a4b5e3",
+            "raw_clean_manifest_sha256": "0dde4a0ca1ad68332d8a1c9d61fdc561db6501cd262d534647b979de82e3cf80",
+            "manifest_sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+            "validation_manifest_sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a",
+            "validation_protocol_sha256": "74b0df74b9734a714e04a0a1cf1e82ed0ba211b1d5b5fd745b9502ca5af2174c",
+            "source_sha256": "fabd0b781938e156a6dcf89fb429a0a0c7c727e9c1acdb38c434dd201a81ebae",
+            "source_snapshot": "/mnt/external/demosaic/runs/dino-packed-isotropic-mixed16-v73/source/fabd0b781938e156a6dcf89fb429a0a0c7c727e9c1acdb38c434dd201a81ebae"
+          },
+          "compute_precision": "IEEE float32"
+        },
+        "observation": {
+          "path": "/mnt/external/demosaic/evaluation/packed-isotropic-mixed16-dino-first32000-CPU-preview-v1/GFX-common32-grid-native512.npz",
+          "sha256": "0104842e46643ee6ae2f852b179cb7c26a2f2456bb138a6957af8c7fb80fe81f",
+          "sample_index": 3
+        },
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06,
+          "source": "input Haar fit"
+        },
+        "display_exposure": 4,
+        "context_roi_xywh": [
+          192,
+          176,
+          160,
+          160
+        ],
+        "reference_roi_xywh": [
+          0,
+          0,
+          160,
+          160
+        ],
+        "white_balance": [
+          1.5132449865341187,
+          1.0,
+          2.2152318954467773
+        ],
+        "camera_to_srgb": [
+          [
+            1.0725188255310059,
+            0.17123593389987946,
+            -0.2437547743320465
+          ],
+          [
+            -0.126719132065773,
+            1.4310508966445923,
+            -0.30433180928230286
+          ],
+          [
+            -0.00969767663627863,
+            -0.29348063468933105,
+            1.303178310394287
+          ]
+        ],
+        "compute_precision": "IEEE float32, CPU",
+        "method": "V73 current2k",
+        "prediction": {
+          "path": "/mnt/external/demosaic/benchmarks/mixed16-current-EMA-CPU-v1/dino-chain-link-fence-current-RGB-f32.npy",
+          "sha256": "29e2376b5c56670c22d649f04a38463b8955d379282429bd25ad5124c7c54972",
+          "case": "chain-link-fence",
+          "arm": "dino",
+          "policy": "model",
+          "shape": [
+            1,
+            3,
+            512,
+            512
+          ],
+          "dtype": "float32"
+        },
+        "selected_checkpoint_state": "model (current restoration parameters, no EMA)",
+        "comparison": "Same immutable checkpoint and fixed observation as EMA; no model weights saved or changed."
+      }
+    },
+    {
+      "repo_path": "docs/images/mixed16-current-EMA-photos-native.png",
+      "image_ref": {
+        "path": "/home/dllu/proj/demosaic/docs/images/mixed16-current-EMA-photos-native.png",
+        "sha256": "a67b2e5c1e7bb0852764fa2fd0542906118f5d2184c5f3ae3c833dc7b9a2273a"
+      },
+      "origin_image_ref": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-current-EMA-CPU-v1/photos-current-EMA-native.png",
+        "sha256": "a67b2e5c1e7bb0852764fa2fd0542906118f5d2184c5f3ae3c833dc7b9a2273a"
+      }
+    },
+    {
+      "repo_path": "docs/images/mixed16-current-EMA-GFX-native.png",
+      "image_ref": {
+        "path": "/home/dllu/proj/demosaic/docs/images/mixed16-current-EMA-GFX-native.png",
+        "sha256": "bce9bd0b0aacd9847d8921f72a9bbb23455690686fbfe7565628c52c109fd567"
+      },
+      "origin_image_ref": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-current-EMA-CPU-v1/GFX-current-EMA-native.png",
+        "sha256": "bce9bd0b0aacd9847d8921f72a9bbb23455690686fbfe7565628c52c109fd567"
+      }
+    }
+  ],
+  "manual_view": "Both direct current/EMA native boards viewed at original resolution. Current-weight differences are small; both arms remain strongly grainy and no clear new foliage/fence detail advantage appears. GFX ISO100 reference is independent, not exact GT.",
+  "scope": "For each immutable 2k/32000-example checkpoint, first replay its existing CPU EMA predictions bitwise, then replace only restoration parameters with the same checkpoint's current model state. Same six preselected observations, IEEE FP32 NCHW, native coordinates/display/noise. Save all12 current predictions/triplets and direct current/EMA native boards. Photo error uses the fixed240x240 interior after border8, float64 accumulation; no real-reference scores. No optimization, diagnostic-weight archive, policy selection, training, GPU use, promotion or source admission. Selected examples cannot establish population performance, convergence or EMA's optimal decay.",
+  "decision": "No EMA-decay change, current-weight selection, model promotion or continuation based on these selected cases. Full matched GPU review retains the original EMA inference policy."
+}

@@ -15,6 +15,12 @@ finds only small DINO gains (+0.01779/+0.03839dB measured-CFA known/unseen),
 with both new arms still substantially behind mature models and RawNIND.
 Complete matched photographic quality and full-frame performance remain pending.
 
+The [current-versus-EMA CPU check](mixed16-current-EMA-CPU.md) finds only
+0.03–0.17dB current-weight gains on the same two fixed photos, with strong grain
+in both policies and no clear new GFX foliage/fence advantage. The review keeps
+its original EMA policy; this selected diagnostic does not explain the large
+gap to mature models or establish convergence.
+
 The [complete V72 development-camera CPU check](packed-isotropic-mixed16-V72-camera-CPU.md)
 now improves known/unseen measured-CFA PSNR by2.8302/2.1418dB over original
 V71 at equal32,000 examples, with all nine scene gains positive. It still
