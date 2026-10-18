@@ -26,9 +26,15 @@ hashes. Its replay used earlier completed reports and adds no10k quality result.
 Known/unseen-camera, full427-photo and analytic panels have now closed. The
 [final photo crop match](results/mixed16-quarter-photo-crops-final-match-v1.json)
 verifies that all16 previously inspected triplets exactly match the completed
-full-photo report, including unchanged PNG/metadata bytes. Full GFX, remaining
-camera/color checks, independent statistics and the final quality decision are
-still in progress.
+full-photo report, including unchanged PNG/metadata bytes. Full GFX has also
+closed; the [native inspection receipt](results/mixed16-quarter-GFX-native-view-v1.json)
+records all24 triplets/32 unresized board cells at the standing sky, building,
+foliage and fence coordinates. Both new arms remain grainier than mature
+controls, with weak fine foliage/fence structure. The separate ISO100 image
+is a qualitative reference, not GT. The [three-camera native inspection](results/mixed16-quarter-three-camera-native-view-v1.json)
+adds24 triplets/36 cells from six cached Q2/a7RII/GFX50R contexts; its RawNIND
+row is also not GT. Remaining color checks, independent statistics, RGB16
+artifact checks and the final quality decision are in progress.
 
 [Observed startup, plan/checkpoint hashes, exact owners and checks](results/packed-isotropic-mixed16-quarter-launch-v1.json).
 The live status is

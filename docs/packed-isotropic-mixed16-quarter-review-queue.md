@@ -3,8 +3,14 @@
 The complete review has started after both
 [continuations finished](packed-isotropic-mixed16-quarter-training.md) at10k /
 160,000 examples and their exact owners exited. The independent full-state,
-source and schedule boundary gate passed; the first stage is known-camera
-evaluation. Quality review remains incomplete and neither checkpoint is promoted.
+source and schedule boundary gate passed; the first stage was known-camera
+evaluation. Known/unseen, full427, analytic and full-frame GFX reports have now
+closed. The [GFX native inspection](results/mixed16-quarter-GFX-native-view-v1.json)
+adds24 actually viewed triplets at the four standing regions. The
+[three-camera native inspection](results/mixed16-quarter-three-camera-native-view-v1.json)
+adds another24 triplets from six cached contexts. Remaining color/statistics
+and artifact checks are running. Quality review remains
+incomplete and neither checkpoint is promoted.
 The requirements below describe the preserved execution plan.
 
 [Frozen plan, exact owners, executed sources and CPU preflight](results/packed-isotropic-mixed16-quarter-review-queue-v1.json).
