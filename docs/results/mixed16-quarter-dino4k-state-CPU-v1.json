@@ -1,0 +1,131 @@
+{
+  "status": "verified-DINO4k-saved-state-and-context-optimizer-moments-on-CPU",
+  "source": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-quarter-dino4k-state-CPU-v1/check.py",
+    "sha256": "3ee3f527a4a5f897bef5c86b910e6efa0d1adddef3d3f51b450af2e466aa6a61"
+  },
+  "checkpoint": {
+    "path": "/mnt/external/demosaic/models/dino-packed-isotropic-mixed16-v73-step4000.pt",
+    "sha256": "1e46c039dddabc5ed08df83dd85cf4f5af6fdc7faa9668fb962d902c88b02dc8"
+  },
+  "parent": {
+    "path": "/mnt/external/demosaic/models/dino-packed-isotropic-mixed16-v73-step2000.pt",
+    "sha256": "43c10f2a0af38761f9418f19c725edc4129284e76b5b2da89f66c184d1f643e1"
+  },
+  "counters": {
+    "optimizer": 4000,
+    "data_groups": 16000,
+    "examples": 64000
+  },
+  "finite_model_and_EMA_state_tensors_each": 865,
+  "finite_Adam_states_at4000": 863,
+  "named_context_trainable_states": [
+    {
+      "name": "context.gate",
+      "elements": 96,
+      "model_changed_from2k": true,
+      "EMA_changed_from2k": true,
+      "first_moment_max_abs": 0.0001724939065752551,
+      "second_moment_max": 1.5403509678435512e-05,
+      "parameter_RMS_change_from2k": 0.03527006073803819
+    },
+    {
+      "name": "context.laterals.0.weight",
+      "elements": 9216,
+      "model_changed_from2k": true,
+      "EMA_changed_from2k": true,
+      "first_moment_max_abs": 3.4734753171505872e-06,
+      "second_moment_max": 3.1911351339175553e-10,
+      "parameter_RMS_change_from2k": 0.07569131347982717
+    },
+    {
+      "name": "context.laterals.0.bias",
+      "elements": 96,
+      "model_changed_from2k": true,
+      "EMA_changed_from2k": true,
+      "first_moment_max_abs": 3.871481112582842e-06,
+      "second_moment_max": 5.301720729100623e-10,
+      "parameter_RMS_change_from2k": 0.007910971080891753
+    },
+    {
+      "name": "context.laterals.1.weight",
+      "elements": 18432,
+      "model_changed_from2k": true,
+      "EMA_changed_from2k": true,
+      "first_moment_max_abs": 1.101285215554526e-05,
+      "second_moment_max": 2.6154756138652147e-09,
+      "parameter_RMS_change_from2k": 0.0469118166014085
+    },
+    {
+      "name": "context.laterals.1.bias",
+      "elements": 96,
+      "model_changed_from2k": true,
+      "EMA_changed_from2k": true,
+      "first_moment_max_abs": 3.871480657835491e-06,
+      "second_moment_max": 5.301720173989111e-10,
+      "parameter_RMS_change_from2k": 0.007940815313171893
+    },
+    {
+      "name": "context.laterals.2.weight",
+      "elements": 36864,
+      "model_changed_from2k": true,
+      "EMA_changed_from2k": true,
+      "first_moment_max_abs": 0.000389734108466655,
+      "second_moment_max": 1.9045530734729255e-06,
+      "parameter_RMS_change_from2k": 0.027516816268459216
+    },
+    {
+      "name": "context.laterals.2.bias",
+      "elements": 96,
+      "model_changed_from2k": true,
+      "EMA_changed_from2k": true,
+      "first_moment_max_abs": 3.871480657835491e-06,
+      "second_moment_max": 5.301720173989111e-10,
+      "parameter_RMS_change_from2k": 0.007922610979448505
+    },
+    {
+      "name": "context.laterals.3.weight",
+      "elements": 73728,
+      "model_changed_from2k": true,
+      "EMA_changed_from2k": true,
+      "first_moment_max_abs": 7.07836125002359e-06,
+      "second_moment_max": 8.88176199254076e-10,
+      "parameter_RMS_change_from2k": 0.020431457875451323
+    },
+    {
+      "name": "context.laterals.3.bias",
+      "elements": 96,
+      "model_changed_from2k": true,
+      "EMA_changed_from2k": true,
+      "first_moment_max_abs": 3.871481112582842e-06,
+      "second_moment_max": 5.301720729100623e-10,
+      "parameter_RMS_change_from2k": 0.007919707953419931
+    },
+    {
+      "name": "context.projection.weight",
+      "elements": 82944,
+      "model_changed_from2k": true,
+      "EMA_changed_from2k": true,
+      "first_moment_max_abs": 2.8782883418898564e-06,
+      "second_moment_max": 2.59807036995241e-10,
+      "parameter_RMS_change_from2k": 0.025288059884149554
+    },
+    {
+      "name": "context.projection.bias",
+      "elements": 96,
+      "model_changed_from2k": true,
+      "EMA_changed_from2k": true,
+      "first_moment_max_abs": 2.9713144158449722e-06,
+      "second_moment_max": 1.8304513460520866e-10,
+      "parameter_RMS_change_from2k": 0.005243781995320758
+    }
+  ],
+  "context_preprocessing_buffers_unchanged": 2,
+  "reconstructed_CPU_backbone_frozen_and_eval": true,
+  "actual_training_owner_live_before_after": {
+    "pid": 2884352,
+    "created": 1792313905.76
+  },
+  "CUDA_initialized": false,
+  "scope": "Saved state, parameter-name/Adam-shape mapping, and CPU checkpoint construction only. Nonzero optimizer moments do not prove useful feature contribution or model quality. No model forward, backward, optimizer step, new training, source/recipe/queue change or GPU work. Actual10k DINO and the full matched numerical/native review remain pending."
+}

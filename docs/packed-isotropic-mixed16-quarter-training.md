@@ -4,7 +4,7 @@ The isolated continuation is running after the
 [complete32k-example quality review](packed-isotropic-mixed16-first32000-review.md).
 V72 no-DINO has completed10,000 updates/160,000 examples; V73 DINO has resumed
 serially and passed its actual restoration/input checks. Neither is promoted;
-there is no new quality result. The
+the complete matched quality review remains pending. The
 [first endpoint and actual handoff CPU audit](results/mixed16-quarter-first10k-handoff-CPU-v2.json)
 records immutable receipt snapshots and the preserved checkpoint.
 
@@ -68,6 +68,15 @@ observations. Both current and EMA tensor sets have changed since 2k. All
 checks saved state and portable EMA loading. The newer first10k audit above
 does not replace that historical record. DINO completion and the complete
 quality review remain pending.
+
+The [DINO 4k saved-state CPU audit](results/mixed16-quarter-dino4k-state-CPU-v1.json)
+finds finite865 model/EMA tensors and863 Adam states, all at4,000 updates /
+64,000 examples. All11 trainable context tensors changed in both model and EMA
+since2k and have nonzero first/second optimizer moments. The two preprocessing
+buffers are unchanged; the reconstructed CPU backbone is frozen and in eval mode.
+The original40k horizon, FP32 recipe and manifest hashes are retained. This
+inspection ran no model forward or CUDA work. Active optimizer state does not
+establish a useful DINO quality contribution; that requires the matched review.
 
 The continuation driver and existing production mixed-loop integration checks
 pass26 targeted tests; Ruff passes. The separate
