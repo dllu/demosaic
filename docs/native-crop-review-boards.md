@@ -40,6 +40,14 @@ replay rejected RawNIND's `weight_sha256` schema; support now retains that recor
 field with unchanged hash equality. Its first checker/source/failure remain saved
 privately. No new inference, score or quality finding was produced.
 
+The [selected-color audit adapter replay](results/native-selected-color-bridge-CPU-v1.json)
+also passes:16 earlier triplets,24 native cells and48 original panel blocks.
+Those records use the existing `hue` analytic schema. A private adapter wraps
+the audit's `additional_native_crops` collection and copies its eight PNGs into
+the review cache; original metadata/pixels and all18 source files are unchanged.
+The board reader and frozen workers are unchanged. This prepares the selected
+neutral/fabric/cyclic-palette inspection without repeating inference.
+
 Boards supplement the original noisy/denoised/GT triplets. Continue embedding at
 least two original native triplets in model performance reports, with their
 source/ROI, checkpoint hash, noise conditioning and display exposure. Manual
