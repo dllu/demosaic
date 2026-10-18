@@ -9,8 +9,11 @@ The separate [camera-target audit and V76/V77 trial](camera-supervision-v76-v77.
 find an exact constant-field conflict between canonical reference-white targets
 and a physical RAW head. A default-off sensor-valid training mode passes64
 tests, archived default replay and genuine-parent CPU/GPU checks. Fresh matched
-arms stop at1k under predeclared camera/photo/native gates; trained quality
-remains pending. Geometry, selected-domain loading and batch16 stay fixed.
+arms have both completed1k. Their
+[camera interim](camera-supervision-first1k-camera-interim.md) finds−.02714/+.08098dB
+known/unseen CFA effects; known4 fails the original continuation gate. No
+extension/promotion; full427/color/GFX/native closure remains running. Geometry,
+selected-domain loading and batch16 stay fixed.
 
 The [completed mature-parent objective comparison](reconstruction-objective-first1k-review.md)
 finds+.02026dB photo PSNR for V75 log-MSE over V74 control,95% source interval

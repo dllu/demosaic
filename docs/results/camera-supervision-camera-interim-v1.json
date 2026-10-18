@@ -1,0 +1,2417 @@
+{
+  "status": "completed-first1000-and-known-unseen-camera-interim-known-continuation-screen-fails",
+  "recorded_UTC": "2026-10-18T18:24:21.434148+00:00",
+  "training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-v2/plan.json",
+    "sha256": "b02907e0047cd4174cd8f02c227440269688fdb72ec66aa63c374fe02944bd35"
+  },
+  "training_terminal": {
+    "file": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-v2/status.json",
+      "sha256": "23765bf7f64396dddbe7e0a5f7b777613e4f869eda7b793faeeaf2ffba3911ab"
+    },
+    "data": {
+      "controller": {
+        "pid": 3922980,
+        "created": 1792346139.12
+      },
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-v2/plan.json",
+        "sha256": "b02907e0047cd4174cd8f02c227440269688fdb72ec66aa63c374fe02944bd35"
+      },
+      "completed": {
+        "control": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-v2/control-result.json",
+          "sha256": "c9aa136c950b05b1acc0beee2a78e8ad21e828c52b8a674e02e22131bc5b428a"
+        },
+        "sensorvalid": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-v2/sensorvalid-result.json",
+          "sha256": "a0a03b3e459f2832a3ae7e81ee5ff502ef9f1f06c4853837a367631f43cf0ff7"
+        }
+      },
+      "status": "completed-matched-camera-supervision-first1000-awaiting-full-quality-and-native-review",
+      "updated_unix": 1792347453.5642257,
+      "arm": "sensorvalid",
+      "child": {
+        "pid": 3933581,
+        "created": 1792346787.85
+      },
+      "all56_sampled_legacy_and_input_observations_match": true,
+      "all41_logged_domains_and_LRs_match": true
+    }
+  },
+  "independent_boundary": {
+    "file": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/training-boundary.json",
+      "sha256": "6bcdc924f20f8e13f49dd62ac1a25c881d976f3b7ee1806a2dc9d40ff79e9520"
+    },
+    "data": {
+      "status": "independently-verified-both-camera-supervision-first1000-boundaries",
+      "training_status": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-v2/status.json",
+        "sha256": "23765bf7f64396dddbe7e0a5f7b777613e4f869eda7b793faeeaf2ffba3911ab"
+      },
+      "checkpoints": [
+        {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-v2/work/runs/dino-convnext-camera-control-v76/last.pt",
+          "sha256": "10f179cb9134fe537806add4b8470ca3961e3ef0b6ad7a9732b68b589fa0800a",
+          "arm": "control",
+          "step": 1000,
+          "kind": "joint-checkpoint",
+          "label": "V76-first1000"
+        },
+        {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-v2/work/runs/dino-convnext-camera-sensor-valid-v77/last.pt",
+          "sha256": "785cf617158ff3232b7cd165f3bfd1bea557caa77775764ce0f0644cff8df15c",
+          "arm": "sensorvalid",
+          "step": 1000,
+          "kind": "joint-checkpoint",
+          "label": "V77-first1000"
+        }
+      ],
+      "evidence": [
+        {
+          "arm": "control",
+          "source_sha256": "ad845382567de51f91a6ee902183d0a7f9421dbeb0f7682712fb2d64da04221a",
+          "finite_states": [
+            91,
+            91,
+            89
+          ],
+          "all89_model_and_EMA_tensors_changed": true,
+          "result": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-v2/control-result.json",
+            "sha256": "c9aa136c950b05b1acc0beee2a78e8ad21e828c52b8a674e02e22131bc5b428a"
+          },
+          "initialization": {
+            "initial_EMA_exact": true,
+            "DINO_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+          }
+        },
+        {
+          "arm": "sensorvalid",
+          "source_sha256": "ad845382567de51f91a6ee902183d0a7f9421dbeb0f7682712fb2d64da04221a",
+          "finite_states": [
+            91,
+            91,
+            89
+          ],
+          "all89_model_and_EMA_tensors_changed": true,
+          "result": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-v2/sensorvalid-result.json",
+            "sha256": "a0a03b3e459f2832a3ae7e81ee5ff502ef9f1f06c4853837a367631f43cf0ff7"
+          },
+          "initialization": {
+            "initial_EMA_exact": true,
+            "DINO_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+          }
+        }
+      ],
+      "all56_sampled_legacy_and_input_observations_match": true,
+      "all41_logged_domains_and_LRs_match": true,
+      "scope": "Full-state engineering boundary only; no quality claim or continuation."
+    }
+  },
+  "known": {
+    "file": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-known-numerical.json",
+      "sha256": "ec38f2fbcdc4b3733ab94c3c68b1767f97360bd2d5b50321795632c940bfdaff"
+    },
+    "data": {
+      "status": "completed-known-development-early-numerical-audit-full-review-pending",
+      "summary": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/work/outputs/known/summary.json",
+        "sha256": "450c4e4f393cd00d21be5b30768e99ed0bfc8e15cb10cb3b0fdc757fd4d84d18"
+      },
+      "scores": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/work/outputs/known/per-crop.jsonl",
+        "sha256": "f9d931e366299cfbdd96cf270aeaba0c40b15265f8b4f56319f1bfcedf0967d2"
+      },
+      "audit": {
+        "cases": 360,
+        "scenes": 4,
+        "pairs": 8,
+        "crops_per_method": 72,
+        "methods": 5,
+        "group_rows": 40,
+        "overall_rows": 5,
+        "paired_comparisons": 30,
+        "max_absolute_arithmetic_difference": 5.551115123125783e-17
+      },
+      "comparisons": [
+        {
+          "panel": "known",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "first": "V77-first1000",
+          "second": "V76-first1000",
+          "first_checkpoint_sha256": "785cf617158ff3232b7cd165f3bfd1bea557caa77775764ce0f0644cff8df15c",
+          "second_checkpoint_sha256": "10f179cb9134fe537806add4b8470ca3961e3ef0b6ad7a9732b68b589fa0800a",
+          "sources": 4,
+          "first_source_balanced_mean": 54.17785570356581,
+          "second_source_balanced_mean": 54.20499478446113,
+          "mean_first_minus_second": -0.027139080895318912,
+          "source_bootstrap_95_interval": [
+            -0.05156517028808416,
+            0.01487286885579131
+          ]
+        },
+        {
+          "panel": "known",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "first": "V77-first1000",
+          "second": "V76-first1000",
+          "first_checkpoint_sha256": "785cf617158ff3232b7cd165f3bfd1bea557caa77775764ce0f0644cff8df15c",
+          "second_checkpoint_sha256": "10f179cb9134fe537806add4b8470ca3961e3ef0b6ad7a9732b68b589fa0800a",
+          "sources": 4,
+          "first_source_balanced_mean": 40.039766258663605,
+          "second_source_balanced_mean": 40.04983430438571,
+          "mean_first_minus_second": -0.010068045722112728,
+          "source_bootstrap_95_interval": [
+            -0.04456223381890112,
+            0.025882032182483528
+          ]
+        },
+        {
+          "panel": "known",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "first": "V77-first1000",
+          "second": "V76-first1000",
+          "first_checkpoint_sha256": "785cf617158ff3232b7cd165f3bfd1bea557caa77775764ce0f0644cff8df15c",
+          "second_checkpoint_sha256": "10f179cb9134fe537806add4b8470ca3961e3ef0b6ad7a9732b68b589fa0800a",
+          "sources": 4,
+          "first_source_balanced_mean": 0.9318709580434693,
+          "second_source_balanced_mean": 0.9319570627477434,
+          "mean_first_minus_second": -8.610470427408701e-05,
+          "source_bootstrap_95_interval": [
+            -0.00021617611249286073,
+            4.7509041097376636e-05
+          ]
+        }
+      ],
+      "sources": {
+        "panel": "known",
+        "metadata_fields_exact": [
+          "prepared_sha256",
+          "border",
+          "scenes",
+          "pairs",
+          "split",
+          "protocol",
+          "reference",
+          "precision"
+        ],
+        "first": {
+          "label": "V77-first1000",
+          "checkpoint_sha256": "785cf617158ff3232b7cd165f3bfd1bea557caa77775764ce0f0644cff8df15c",
+          "report": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/work/outputs/known/summary.json",
+          "cases": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/work/outputs/known/per-crop.jsonl",
+          "model_label": "1:dino-convnext-camera-sensor-valid-v77:step-1000",
+          "report_sha256": "450c4e4f393cd00d21be5b30768e99ed0bfc8e15cb10cb3b0fdc757fd4d84d18",
+          "cases_sha256": "f9d931e366299cfbdd96cf270aeaba0c40b15265f8b4f56319f1bfcedf0967d2",
+          "batch_size": 4
+        },
+        "second": {
+          "label": "V76-first1000",
+          "checkpoint_sha256": "10f179cb9134fe537806add4b8470ca3961e3ef0b6ad7a9732b68b589fa0800a",
+          "report": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/work/outputs/known/summary.json",
+          "cases": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/work/outputs/known/per-crop.jsonl",
+          "model_label": "0:dino-convnext-camera-control-v76:step-1000",
+          "report_sha256": "450c4e4f393cd00d21be5b30768e99ed0bfc8e15cb10cb3b0fdc757fd4d84d18",
+          "cases_sha256": "f9d931e366299cfbdd96cf270aeaba0c40b15265f8b4f56319f1bfcedf0967d2",
+          "batch_size": 4
+        }
+      },
+      "witness": {
+        "panel": "known",
+        "first": "V77-first1000",
+        "second": "V76-first1000",
+        "cases": 216,
+        "all_metric_cases_exact": 216,
+        "keys_and_nullable_support_exact": true,
+        "differences": [],
+        "maximum_float32_ULPs": 0,
+        "bound_is_posthoc": true,
+        "bound": "At most4 float32 ULPs per saved scalar metric; not exact replay."
+      },
+      "scope": "Completed known4 stage only, source-balanced matched V77-minus-V76 with scene-bootstrap CI. Fixed gates unchanged. Unseen/full427/color/native/manual review still required; no continuation/promotion."
+    }
+  },
+  "unseen": {
+    "file": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-unseen-numerical.json",
+      "sha256": "4bea892caad011f9c246a9ba1b5654c77d609a24c5fe6803cfb8f144ff2bd8f2"
+    },
+    "data": {
+      "status": "completed-unseen-development-early-numerical-audit-full-review-pending",
+      "summary": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/work/outputs/unseen/summary.json",
+        "sha256": "20fddb8524eeb7d5dcd1f98e311478a68f44058cad95fb66948c7125e9dd5f87"
+      },
+      "scores": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/work/outputs/unseen/per-crop.jsonl",
+        "sha256": "7c13528b665b047e169e30be39fc4a8f71f45450e3be61cf472e39eddd352eb7"
+      },
+      "audit": {
+        "cases": 450,
+        "scenes": 5,
+        "pairs": 10,
+        "crops_per_method": 90,
+        "methods": 5,
+        "group_rows": 50,
+        "overall_rows": 5,
+        "paired_comparisons": 30,
+        "max_absolute_arithmetic_difference": 7.105427357601002e-15
+      },
+      "comparisons": [
+        {
+          "panel": "unseen",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "first": "V77-first1000",
+          "second": "V76-first1000",
+          "first_checkpoint_sha256": "785cf617158ff3232b7cd165f3bfd1bea557caa77775764ce0f0644cff8df15c",
+          "second_checkpoint_sha256": "10f179cb9134fe537806add4b8470ca3961e3ef0b6ad7a9732b68b589fa0800a",
+          "sources": 5,
+          "first_source_balanced_mean": 53.92456309000651,
+          "second_source_balanced_mean": 53.84358037312826,
+          "mean_first_minus_second": 0.08098271687825616,
+          "source_bootstrap_95_interval": [
+            0.04736798604329806,
+            0.10824118190341478
+          ]
+        },
+        {
+          "panel": "unseen",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "first": "V77-first1000",
+          "second": "V76-first1000",
+          "first_checkpoint_sha256": "785cf617158ff3232b7cd165f3bfd1bea557caa77775764ce0f0644cff8df15c",
+          "second_checkpoint_sha256": "10f179cb9134fe537806add4b8470ca3961e3ef0b6ad7a9732b68b589fa0800a",
+          "sources": 5,
+          "first_source_balanced_mean": 38.785632620917426,
+          "second_source_balanced_mean": 38.8232246822781,
+          "mean_first_minus_second": -0.03759206136067519,
+          "source_bootstrap_95_interval": [
+            -0.05588726467556171,
+            -0.013905755148990211
+          ]
+        },
+        {
+          "panel": "unseen",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "first": "V77-first1000",
+          "second": "V76-first1000",
+          "first_checkpoint_sha256": "785cf617158ff3232b7cd165f3bfd1bea557caa77775764ce0f0644cff8df15c",
+          "second_checkpoint_sha256": "10f179cb9134fe537806add4b8470ca3961e3ef0b6ad7a9732b68b589fa0800a",
+          "sources": 5,
+          "first_source_balanced_mean": 0.9237956311967638,
+          "second_source_balanced_mean": 0.9240087078677284,
+          "mean_first_minus_second": -0.00021307667096455153,
+          "source_bootstrap_95_interval": [
+            -0.00041717562410565007,
+            2.238618002989856e-05
+          ]
+        }
+      ],
+      "sources": {
+        "panel": "unseen",
+        "metadata_fields_exact": [
+          "prepared_sha256",
+          "border",
+          "scenes",
+          "pairs",
+          "split",
+          "protocol",
+          "reference",
+          "precision"
+        ],
+        "first": {
+          "label": "V77-first1000",
+          "checkpoint_sha256": "785cf617158ff3232b7cd165f3bfd1bea557caa77775764ce0f0644cff8df15c",
+          "report": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/work/outputs/unseen/summary.json",
+          "cases": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/work/outputs/unseen/per-crop.jsonl",
+          "model_label": "1:dino-convnext-camera-sensor-valid-v77:step-1000",
+          "report_sha256": "20fddb8524eeb7d5dcd1f98e311478a68f44058cad95fb66948c7125e9dd5f87",
+          "cases_sha256": "7c13528b665b047e169e30be39fc4a8f71f45450e3be61cf472e39eddd352eb7",
+          "batch_size": 4
+        },
+        "second": {
+          "label": "V76-first1000",
+          "checkpoint_sha256": "10f179cb9134fe537806add4b8470ca3961e3ef0b6ad7a9732b68b589fa0800a",
+          "report": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/work/outputs/unseen/summary.json",
+          "cases": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/work/outputs/unseen/per-crop.jsonl",
+          "model_label": "0:dino-convnext-camera-control-v76:step-1000",
+          "report_sha256": "20fddb8524eeb7d5dcd1f98e311478a68f44058cad95fb66948c7125e9dd5f87",
+          "cases_sha256": "7c13528b665b047e169e30be39fc4a8f71f45450e3be61cf472e39eddd352eb7",
+          "batch_size": 4
+        }
+      },
+      "witness": {
+        "panel": "unseen",
+        "first": "V77-first1000",
+        "second": "V76-first1000",
+        "cases": 270,
+        "all_metric_cases_exact": 270,
+        "keys_and_nullable_support_exact": true,
+        "differences": [],
+        "maximum_float32_ULPs": 0,
+        "bound_is_posthoc": true,
+        "bound": "At most4 float32 ULPs per saved scalar metric; not exact replay."
+      },
+      "scope": "Completed unseen5 stage only; source-balanced matched V77-minus-V76 and scene-bootstrap CI. Fixed gates unchanged. Full427/color/native/manual review pending; no continuation/promotion."
+    }
+  },
+  "native_view": {
+    "file": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-native/manual-view.json",
+      "sha256": "8ab45438f2eaabbed9b604e926be6f8a7a4189432c06d210dd7001629cf74cfa"
+    },
+    "data": {
+      "status": "actually-viewed-early-native-camera-and-two-GT-photos-full-review-pending",
+      "recorded_UTC": "2026-10-18T18:24:21.434148+00:00",
+      "tool": "Three separate view_image detail=original calls; all displayed native cells inspected",
+      "panels": [
+        {
+          "panel": "known",
+          "board": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-native/known/board.png",
+            "sha256": "1da4e7bc883404011417f62ce075ec08cb343804c04c6af4c09b60a190bc957b"
+          },
+          "receipt": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-native/known/board.json",
+            "sha256": "e42f55eb058a467feef1c67d94cd45ebbd9c2810d2001a02612cd595cbbbe7a1"
+          },
+          "source_report": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-native/known/sources/report.json",
+            "sha256": "ef46d360880347bdc65e2f49daef110f1286fc753e6b62a0ea12e288f95a04e0"
+          },
+          "triplets": 8,
+          "native_cells": 12,
+          "observations": "C76/C77/parent are visually close: smooth plate surfaces and thin curved line; all lose some reference detail. RawNIND-channel has a softer curved line and more colored edge residue on the geometric patch. No decisive new C77 detail improvement. AHD RGB reference is independently demosaiced and visibly grainy, not exact GT."
+        },
+        {
+          "panel": "unseen",
+          "board": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-native/unseen/board.png",
+            "sha256": "2aaa34805b25ef782fcfaf94e3512444f7054e7b1e3eaa58c12cd3cc7895f3f1"
+          },
+          "receipt": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-native/unseen/board.json",
+            "sha256": "8b763d327df9541477df9d5f59646d2fe5296d3884eda061e23d03d17ddbc64a"
+          },
+          "source_report": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-native/unseen/sources/report.json",
+            "sha256": "01f60dceb4d0f7cb6f78b4d587f0e7cc0249a03790d043ed56faba6b131cdae3"
+          },
+          "triplets": 8,
+          "native_cells": 12,
+          "observations": "Brown apple/surface and patterned material are strongly smoothed in C76/C77/parent, with similarly weak fine detail. RawNIND remains smooth as well. C77 does not visibly repair that loss. AHD reference is not exact RGB GT."
+        },
+        {
+          "panel": "full427",
+          "board": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-native/full427/board.png",
+            "sha256": "63f37a289a9fe62be9ae7ddc8d6d7aecd2065c72ad83cf005862758ee7b0f31b"
+          },
+          "receipt": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-native/full427/board.json",
+            "sha256": "fa02aaa67d5eaa9f77cfa0f28830a02b959226c3bfc76686f85d9119281cf848"
+          },
+          "source_report": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-native/full427/sources/report.json",
+            "sha256": "d2688f2a2871a2b11df6f7633e776b88e7c8eee41a02b580c0ecf679e7151331"
+          },
+          "triplets": 6,
+          "native_cells": 10,
+          "observations": "C77 shifts the selected canopy toward the GT orange while C76/parent are yellower; none recover the fine cords. Building crops are close between new arms, with smoother cloud/window/railing detail than GT. These two selected sources do not establish population quality."
+        }
+      ],
+      "triplets_actually_viewed": 22,
+      "native_cells_actually_viewed": 34,
+      "limits": "Saved pixels only. Camera AHD references are not exact RGB GT. Includes exact retained parent and RawNIND-channel panels; no completed full427/color/GFX/manual closure or model promotion claim. Revalidate sources and board hashes after successful producer exit."
+    }
+  },
+  "camera_native_source_metadata": {
+    "known": [
+      {
+        "scene": "2pilesofplates",
+        "prepared_crop": {
+          "id": "2pilesofplates:c8ed38ce03b5fe6df0ece5615d148c2e524bb9adbcab535773db71b0f85fbdbe:1756:2756",
+          "path": "crop-1a2b558160c55a70a0fcdec4.npz",
+          "sha256": "ce5be43933be44a44ceb04a984d40f2c90bc4caf6cb8ce085afdf85644af64a2",
+          "xywh": [
+            2756,
+            1756,
+            512,
+            512
+          ],
+          "valid_fraction": 0.9999008178710938
+        },
+        "conditioning": {
+          "shot": 0.001425164014313677,
+          "read": 1.570807341075873e-06,
+          "method": "input-only-Haar-fit",
+          "estimate": {
+            "shot": 0.001425164014313677,
+            "read": 1.570807341075873e-06,
+            "reliable": true,
+            "reason": "fit",
+            "candidate_patches": 4096,
+            "accepted_patches": 3066,
+            "intensity_span": 0.11289423820562661,
+            "reference_intensity": 0.04300604201853275,
+            "reference_variance": 6.10495189903304e-05,
+            "shot_interval": [
+              0.001401216475477223,
+              0.001451191419994426
+            ],
+            "read_interval": [
+              7.1832378857234e-07,
+              2.0128426680637594e-06
+            ],
+            "bins": [
+              {
+                "mean": 0.009904302656650543,
+                "variance": 1.575388159835711e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.015269115101546049,
+                "variance": 2.3452917957911268e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.019404741004109383,
+                "variance": 2.85378464468522e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.024549812078475952,
+                "variance": 3.709991869982332e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.02950599230825901,
+                "variance": 4.5091836000210606e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.033303260803222656,
+                "variance": 4.973154682375025e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.037457238882780075,
+                "variance": 5.3862695494899526e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.04108747839927673,
+                "variance": 5.9306823459337465e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.04504532553255558,
+                "variance": 6.301554094534367e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.05010216683149338,
+                "variance": 7.077066402416676e-05,
+                "patches": 192
+              },
+              {
+                "mean": 0.061802107840776443,
+                "variance": 9.140941256191581e-05,
+                "patches": 191
+              },
+              {
+                "mean": 0.07137370854616165,
+                "variance": 0.00010577607463346794,
+                "patches": 191
+              },
+              {
+                "mean": 0.079582080245018,
+                "variance": 0.00011791579163400456,
+                "patches": 191
+              },
+              {
+                "mean": 0.08843494206666946,
+                "variance": 0.00012957565195392817,
+                "patches": 191
+              },
+              {
+                "mean": 0.09782949090003967,
+                "variance": 0.00014059861132409424,
+                "patches": 191
+              },
+              {
+                "mean": 0.15633051097393036,
+                "variance": 0.00022209645248949528,
+                "patches": 191
+              }
+            ]
+          }
+        },
+        "white_balance": [
+          2.40625,
+          1.0,
+          1.69140625
+        ],
+        "camera_to_srgb": [
+          [
+            1.6353747641867242,
+            -0.42196120206077053,
+            -0.21341356212595397
+          ],
+          [
+            -0.13106821045315706,
+            1.5426731789357453,
+            -0.411604968482588
+          ],
+          [
+            0.011429855280569487,
+            -0.4196218028471881,
+            1.4081919475666185
+          ]
+        ],
+        "noisy_sha256": "c8ed38ce03b5fe6df0ece5615d148c2e524bb9adbcab535773db71b0f85fbdbe",
+        "evaluation_tile_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "display_exposure": 1.0,
+        "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA",
+        "prepared_crop_file": {
+          "path": "/mnt/external/demosaic/evaluation/paired-raw-development-prepared-v1/crop-1a2b558160c55a70a0fcdec4.npz",
+          "sha256": "ce5be43933be44a44ceb04a984d40f2c90bc4caf6cb8ce085afdf85644af64a2"
+        }
+      },
+      {
+        "scene": "7D-1",
+        "prepared_crop": {
+          "id": "7D-1:ceb7d71d6a184aa2e7cf47f22b84c61fe4545746f9be72397d6fa03dbd4751ad:1476:2344",
+          "path": "crop-a3ba859368f3f95bd70632ea.npz",
+          "sha256": "57bc05d205ddff3c74c42082faea8cecaf27bbb5f4befcee9c73b9fb92835e09",
+          "xywh": [
+            2344,
+            1476,
+            512,
+            512
+          ],
+          "valid_fraction": 0.9965286254882812
+        },
+        "conditioning": {
+          "shot": 0.004811973071234885,
+          "read": 6.621451009845082e-05,
+          "method": "input-only-Haar-fit",
+          "estimate": {
+            "shot": 0.004811973071234885,
+            "read": 6.621451009845082e-05,
+            "reliable": true,
+            "reason": "fit",
+            "candidate_patches": 4096,
+            "accepted_patches": 1453,
+            "intensity_span": 0.27435737997293463,
+            "reference_intensity": 0.12920920550823212,
+            "reference_variance": 0.0006928789662197232,
+            "shot_interval": [
+              0.0044978704529584825,
+              0.005009805981911022
+            ],
+            "read_interval": [
+              4.824885318210063e-05,
+              0.00011607347588089777
+            ],
+            "bins": [
+              {
+                "mean": 0.0434560552239418,
+                "variance": 0.00025572895538061857,
+                "patches": 91
+              },
+              {
+                "mean": 0.05798434466123581,
+                "variance": 0.0003326775331515819,
+                "patches": 91
+              },
+              {
+                "mean": 0.06499770283699036,
+                "variance": 0.0003967982775066048,
+                "patches": 91
+              },
+              {
+                "mean": 0.0739697515964508,
+                "variance": 0.0004433743597473949,
+                "patches": 91
+              },
+              {
+                "mean": 0.0837249606847763,
+                "variance": 0.0004850530531257391,
+                "patches": 91
+              },
+              {
+                "mean": 0.0951637476682663,
+                "variance": 0.0005445044371299446,
+                "patches": 91
+              },
+              {
+                "mean": 0.10861015319824219,
+                "variance": 0.00060031667817384,
+                "patches": 91
+              },
+              {
+                "mean": 0.12333296239376068,
+                "variance": 0.0006808409816585481,
+                "patches": 91
+              },
+              {
+                "mean": 0.13387498259544373,
+                "variance": 0.0007385513745248318,
+                "patches": 91
+              },
+              {
+                "mean": 0.14330899715423584,
+                "variance": 0.0007729700300842524,
+                "patches": 91
+              },
+              {
+                "mean": 0.15605947375297546,
+                "variance": 0.0008342682849615812,
+                "patches": 91
+              },
+              {
+                "mean": 0.16992981731891632,
+                "variance": 0.0008656613063067198,
+                "patches": 91
+              },
+              {
+                "mean": 0.19597478210926056,
+                "variance": 0.000990415341220796,
+                "patches": 91
+              },
+              {
+                "mean": 0.2349516674876213,
+                "variance": 0.0011563157313503325,
+                "patches": 90
+              },
+              {
+                "mean": 0.2859645336866379,
+                "variance": 0.0013906416133977473,
+                "patches": 90
+              },
+              {
+                "mean": 0.3511311560869217,
+                "variance": 0.001681389519944787,
+                "patches": 90
+              }
+            ]
+          }
+        },
+        "white_balance": [
+          2.0732421875,
+          1.0,
+          1.662109375
+        ],
+        "camera_to_srgb": [
+          [
+            1.9204999025301575,
+            -1.0413495812710656,
+            0.12084967874090806
+          ],
+          [
+            -0.24696281331132816,
+            1.7593124803218942,
+            -0.5123496670105661
+          ],
+          [
+            -0.006956121305943532,
+            -0.4895846857258788,
+            1.4965408070318222
+          ]
+        ],
+        "noisy_sha256": "ceb7d71d6a184aa2e7cf47f22b84c61fe4545746f9be72397d6fa03dbd4751ad",
+        "evaluation_tile_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "display_exposure": 1.0,
+        "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA",
+        "prepared_crop_file": {
+          "path": "/mnt/external/demosaic/evaluation/paired-raw-development-prepared-v1/crop-a3ba859368f3f95bd70632ea.npz",
+          "sha256": "57bc05d205ddff3c74c42082faea8cecaf27bbb5f4befcee9c73b9fb92835e09"
+        }
+      }
+    ],
+    "unseen": [
+      {
+        "scene": "LucieB_3apples",
+        "prepared_crop": {
+          "id": "LucieB_3apples:43c4b5592f33763de8ecc303986932cd30c0f07330e1987380f7e8c526c23614:1754:2756",
+          "path": "crop-37aeb608babd2ebd25d92520.npz",
+          "sha256": "3c8aabdb22bb0543be9810496a2c0e34d336f7d4164e7462c97106e781feb08a",
+          "xywh": [
+            2756,
+            1754,
+            512,
+            512
+          ],
+          "valid_fraction": 0.99993896484375
+        },
+        "conditioning": {
+          "shot": 0.0023020145669588325,
+          "read": 5.020910101285205e-05,
+          "method": "input-only-Haar-fit",
+          "estimate": {
+            "shot": 0.0023020145669588325,
+            "read": 5.020910101285205e-05,
+            "reliable": true,
+            "reason": "fit",
+            "candidate_patches": 4096,
+            "accepted_patches": 2179,
+            "intensity_span": 0.26184514854103325,
+            "reference_intensity": 0.06364081054925919,
+            "reference_variance": 0.00020263275655452162,
+            "shot_interval": [
+              0.0021055881961980273,
+              0.002529057494860391
+            ],
+            "read_interval": [
+              3.950000272599639e-05,
+              6.403357839379571e-05
+            ],
+            "bins": [
+              {
+                "mean": 0.024905603379011154,
+                "variance": 9.725704148877412e-05,
+                "patches": 137
+              },
+              {
+                "mean": 0.028337951749563217,
+                "variance": 0.00011527248716447502,
+                "patches": 137
+              },
+              {
+                "mean": 0.03277125954627991,
+                "variance": 0.0001205114385811612,
+                "patches": 137
+              },
+              {
+                "mean": 0.037343623116612434,
+                "variance": 0.00013657450472237542,
+                "patches": 136
+              },
+              {
+                "mean": 0.042015191167593,
+                "variance": 0.00015514064580202103,
+                "patches": 136
+              },
+              {
+                "mean": 0.048172976821660995,
+                "variance": 0.0001670044002821669,
+                "patches": 136
+              },
+              {
+                "mean": 0.05408396199345589,
+                "variance": 0.00017970892076846212,
+                "patches": 136
+              },
+              {
+                "mean": 0.06046304479241371,
+                "variance": 0.00019921286730095744,
+                "patches": 136
+              },
+              {
+                "mean": 0.06593036651611328,
+                "variance": 0.00020608177146641538,
+                "patches": 136
+              },
+              {
+                "mean": 0.07145505398511887,
+                "variance": 0.00022196234203875065,
+                "patches": 136
+              },
+              {
+                "mean": 0.07783377543091774,
+                "variance": 0.00023936464276630431,
+                "patches": 136
+              },
+              {
+                "mean": 0.08975507318973541,
+                "variance": 0.000266207498498261,
+                "patches": 136
+              },
+              {
+                "mean": 0.10335686802864075,
+                "variance": 0.0002986309555126354,
+                "patches": 136
+              },
+              {
+                "mean": 0.1205376461148262,
+                "variance": 0.0003312686749268323,
+                "patches": 136
+              },
+              {
+                "mean": 0.23012421280145645,
+                "variance": 0.0005683678318746388,
+                "patches": 136
+              },
+              {
+                "mean": 0.31927336752414703,
+                "variance": 0.0006947826768737286,
+                "patches": 136
+              }
+            ]
+          }
+        },
+        "white_balance": [
+          0.9794921875,
+          1.0,
+          2.162109375
+        ],
+        "camera_to_srgb": [
+          [
+            2.0060677171962595,
+            -1.2336652639354324,
+            0.22759754673917293
+          ],
+          [
+            -0.23706710137989376,
+            1.8006883583827236,
+            -0.5636212570028296
+          ],
+          [
+            -0.015706646354080415,
+            -0.555168390672119,
+            1.5708750370261992
+          ]
+        ],
+        "noisy_sha256": "43c4b5592f33763de8ecc303986932cd30c0f07330e1987380f7e8c526c23614",
+        "evaluation_tile_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "display_exposure": 1.0,
+        "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA",
+        "prepared_crop_file": {
+          "path": "/mnt/external/demosaic/evaluation/paired-unseen-development-prepared-v1/crop-37aeb608babd2ebd25d92520.npz",
+          "sha256": "3c8aabdb22bb0543be9810496a2c0e34d336f7d4164e7462c97106e781feb08a"
+        }
+      },
+      {
+        "scene": "LucieB_Coulicoco",
+        "prepared_crop": {
+          "id": "LucieB_Coulicoco:f1807182ee7fbe2975c478d8228882dc06d69d1624898f28d05f289c8f3ae14f:1754:2756",
+          "path": "crop-3f2c548379b685589c712dab.npz",
+          "sha256": "c505657aeee878dc737558f09981d364631aa2512354cce6557135a5fb7d368f",
+          "xywh": [
+            2756,
+            1754,
+            512,
+            512
+          ],
+          "valid_fraction": 1.0
+        },
+        "conditioning": {
+          "shot": 0.0023482592096665538,
+          "read": 0.00017038157420448983,
+          "method": "input-only-Haar-fit",
+          "estimate": {
+            "shot": 0.0023482592096665538,
+            "read": 0.00017038157420448983,
+            "reliable": true,
+            "reason": "fit",
+            "candidate_patches": 4096,
+            "accepted_patches": 1199,
+            "intensity_span": 0.06260512955486772,
+            "reference_intensity": 0.06184215098619461,
+            "reference_variance": 0.0003241711820010096,
+            "shot_interval": [
+              0.0017713892032946148,
+              0.003107752589990377
+            ],
+            "read_interval": [
+              0.000130196057114057,
+              0.00021017072927938582
+            ],
+            "bins": [
+              {
+                "mean": 0.037331704050302505,
+                "variance": 0.00024029890482779592,
+                "patches": 75
+              },
+              {
+                "mean": 0.0426618754863739,
+                "variance": 0.0002583925670478493,
+                "patches": 75
+              },
+              {
+                "mean": 0.04648628085851669,
+                "variance": 0.00027513832901604474,
+                "patches": 75
+              },
+              {
+                "mean": 0.049039408564567566,
+                "variance": 0.00028016348369419575,
+                "patches": 75
+              },
+              {
+                "mean": 0.05116194486618042,
+                "variance": 0.0002882984990719706,
+                "patches": 75
+              },
+              {
+                "mean": 0.05317879468202591,
+                "variance": 0.0003091453108936548,
+                "patches": 75
+              },
+              {
+                "mean": 0.0560268759727478,
+                "variance": 0.000310206669382751,
+                "patches": 75
+              },
+              {
+                "mean": 0.06038716062903404,
+                "variance": 0.0003285295970272273,
+                "patches": 75
+              },
+              {
+                "mean": 0.06320273876190186,
+                "variance": 0.00033291729050688446,
+                "patches": 75
+              },
+              {
+                "mean": 0.06547649204730988,
+                "variance": 0.00033622721093706787,
+                "patches": 75
+              },
+              {
+                "mean": 0.06830255687236786,
+                "variance": 0.00034963031066581607,
+                "patches": 75
+              },
+              {
+                "mean": 0.07187666743993759,
+                "variance": 0.0003632954030763358,
+                "patches": 75
+              },
+              {
+                "mean": 0.07532474398612976,
+                "variance": 0.0003655982727650553,
+                "patches": 75
+              },
+              {
+                "mean": 0.081906259059906,
+                "variance": 0.0003507589572109282,
+                "patches": 75
+              },
+              {
+                "mean": 0.09307220578193665,
+                "variance": 0.00036906631430611014,
+                "patches": 75
+              },
+              {
+                "mean": 0.10986495018005371,
+                "variance": 0.00039619908784516156,
+                "patches": 74
+              }
+            ]
+          }
+        },
+        "white_balance": [
+          1.00390625,
+          1.0,
+          2.080078125
+        ],
+        "camera_to_srgb": [
+          [
+            2.0060677171962595,
+            -1.2336652639354324,
+            0.22759754673917293
+          ],
+          [
+            -0.23706710137989376,
+            1.8006883583827236,
+            -0.5636212570028296
+          ],
+          [
+            -0.015706646354080415,
+            -0.555168390672119,
+            1.5708750370261992
+          ]
+        ],
+        "noisy_sha256": "f1807182ee7fbe2975c478d8228882dc06d69d1624898f28d05f289c8f3ae14f",
+        "evaluation_tile_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "display_exposure": 1.0,
+        "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA",
+        "prepared_crop_file": {
+          "path": "/mnt/external/demosaic/evaluation/paired-unseen-development-prepared-v1/crop-3f2c548379b685589c712dab.npz",
+          "sha256": "c505657aeee878dc737558f09981d364631aa2512354cce6557135a5fb7d368f"
+        }
+      }
+    ]
+  },
+  "published_images": [
+    {
+      "file": {
+        "path": "/home/dllu/proj/demosaic/docs/images/camera-supervision-first1k-known-native.png",
+        "sha256": "1da4e7bc883404011417f62ce075ec08cb343804c04c6af4c09b60a190bc957b"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-native/known/board.png",
+        "sha256": "1da4e7bc883404011417f62ce075ec08cb343804c04c6af4c09b60a190bc957b"
+      },
+      "role": "native-board",
+      "panel": "known"
+    },
+    {
+      "file": {
+        "path": "/home/dllu/proj/demosaic/docs/images/camera-supervision-first1k-unseen-native.png",
+        "sha256": "2aaa34805b25ef782fcfaf94e3512444f7054e7b1e3eaa58c12cd3cc7895f3f1"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-native/unseen/board.png",
+        "sha256": "2aaa34805b25ef782fcfaf94e3512444f7054e7b1e3eaa58c12cd3cc7895f3f1"
+      },
+      "role": "native-board",
+      "panel": "unseen"
+    },
+    {
+      "file": {
+        "path": "/home/dllu/proj/demosaic/docs/images/camera-supervision-first1k-full427-native.png",
+        "sha256": "63f37a289a9fe62be9ae7ddc8d6d7aecd2065c72ad83cf005862758ee7b0f31b"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-native/full427/board.png",
+        "sha256": "63f37a289a9fe62be9ae7ddc8d6d7aecd2065c72ad83cf005862758ee7b0f31b"
+      },
+      "role": "native-board",
+      "panel": "full427"
+    },
+    {
+      "file": {
+        "path": "/home/dllu/proj/demosaic/docs/images/camera-supervision-first1k-v76-002fc6ee.png",
+        "sha256": "7f2d9d02d664de33a53bb9227da6e4d3f31a9c1911e85748485d2150a740f3f1"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-native/full427/sources/native-7f2d9d02d664de33a53bb9227da6e4d3f31a9c1911e85748485d2150a740f3f1.png",
+        "sha256": "7f2d9d02d664de33a53bb9227da6e4d3f31a9c1911e85748485d2150a740f3f1"
+      },
+      "role": "synthetic-GT-triplet",
+      "native_crop": {
+        "image": "native-7f2d9d02d664de33a53bb9227da6e4d3f31a9c1911e85748485d2150a740f3f1.png",
+        "caption": "002fc6eeadf637e81d5a327f117b79abb86becd9 / iso12800-prior / RGGB / 0:dino-convnext-camera-control-v76:step-1000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "7f2d9d02d664de33a53bb9227da6e4d3f31a9c1911e85748485d2150a740f3f1",
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "source": {
+          "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Vancouver_%28BC%2C_Canada%29%2C_Coal_Harbour_Seaside_Park%2C_Blick_in_den_Himmel_--_2022_--_2158.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Dietmar Rabich",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "Dietmar Rabich",
+          "credit": "Own work",
+          "sha1": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "sha1_hex": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "download_path": "images/00/2f/002fc6eeadf637e81d5a327f117b79abb86becd9.jpg",
+          "width": 3809,
+          "height": 2857,
+          "id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/002fc6eeadf637e81d5a327f117b79abb86becd9.npy",
+          "shape": [
+            357,
+            476,
+            3
+          ],
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf"
+        },
+        "validation_index": 1,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "model": {
+          "label": "0:dino-convnext-camera-control-v76:step-1000",
+          "source": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-v2/work/runs/dino-convnext-camera-control-v76/last.pt",
+          "training_run": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-v2/work/runs/dino-convnext-camera-control-v76",
+          "snapshot": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/work/outputs/full427/weights/weights-10f179cb9134fe537806add4b8470ca3961e3ef0b6ad7a9732b68b589fa0800a.pt",
+          "sha256": "10f179cb9134fe537806add4b8470ca3961e3ef0b6ad7a9732b68b589fa0800a",
+          "step": 1000,
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "convnext-pyramid",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false,
+            "raw_kernel_reconstruction": false,
+            "raw_kernel_windows": [
+              1,
+              5,
+              17
+            ],
+            "raw_kernel_phase_conditioning": false,
+            "isotropic_groups": 6,
+            "isotropic_blocks": 8,
+            "isotropic_local_width": 32,
+            "isotropic_raw_gain": 1.0,
+            "isotropic_residual_scale": 1.0
+          },
+          "effective_model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "convnext-pyramid",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false,
+            "raw_kernel_reconstruction": false,
+            "raw_kernel_windows": [
+              1,
+              5,
+              17
+            ],
+            "raw_kernel_phase_conditioning": false,
+            "isotropic_groups": 6,
+            "isotropic_blocks": 8,
+            "isotropic_local_width": 32,
+            "isotropic_raw_gain": 1.0,
+            "isotropic_residual_scale": 1.0
+          },
+          "training_manifest_sha256": "952977c6af9a1b0d7428c25e2b9cf4f1338d90e3295de33b552cbeb8153be502",
+          "compute_precision": "float32",
+          "refinement_compute_precision": "float32",
+          "memory_format": "channels_last",
+          "native_source_png": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/work/outputs/full427/crop-83c07ce4efd11a92.png",
+            "sha256": "7f2d9d02d664de33a53bb9227da6e4d3f31a9c1911e85748485d2150a740f3f1"
+          },
+          "native_source_metadata": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/work/outputs/full427/crop-83c07ce4efd11a92.json",
+            "sha256": "e05d57372ebc2daf69782b998cbfbbc44f6af197c0a0fad3fa55db1e7503b198"
+          },
+          "native_source_report": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-native/full427/raw/report.json",
+            "sha256": "58383b863796618b19e2b0cf7ad5cb55ade90aabe30b8a3883227c44fb51970d"
+          },
+          "native_source_PNG": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-native/full427/raw/crop-83c07ce4efd11a92.png",
+            "sha256": "7f2d9d02d664de33a53bb9227da6e4d3f31a9c1911e85748485d2150a740f3f1"
+          },
+          "retained_baseline": false
+        },
+        "display_exposure": 1.0,
+        "reference": "Exact synthetic clean target",
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470588,
+            -0.0588235294,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            1.1176470588,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            -0.0588235294,
+            1.1176470588
+          ]
+        ],
+        "cache_context_xywh": [
+          195,
+          89,
+          256,
+          256
+        ],
+        "displayed_cache_ROI_xywh": [
+          243,
+          137,
+          160,
+          160
+        ]
+      }
+    },
+    {
+      "file": {
+        "path": "/home/dllu/proj/demosaic/docs/images/camera-supervision-first1k-v76-0014aa4e.png",
+        "sha256": "c5dd085a0d30f4e83909205c71ce3f26952b894fb3fa5ba45c189bf21ff75225"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-native/full427/sources/native-c5dd085a0d30f4e83909205c71ce3f26952b894fb3fa5ba45c189bf21ff75225.png",
+        "sha256": "c5dd085a0d30f4e83909205c71ce3f26952b894fb3fa5ba45c189bf21ff75225"
+      },
+      "role": "synthetic-GT-triplet",
+      "native_crop": {
+        "image": "native-c5dd085a0d30f4e83909205c71ce3f26952b894fb3fa5ba45c189bf21ff75225.png",
+        "caption": "0014aa4e075b1827f91ef8a02069e1e318f040ba / iso12800-prior / RGGB / 0:dino-convnext-camera-control-v76:step-1000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "c5dd085a0d30f4e83909205c71ce3f26952b894fb3fa5ba45c189bf21ff75225",
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "source": {
+          "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Roy Egloff",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": null,
+          "credit": "Own work",
+          "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+          "width": 3888,
+          "height": 2592,
+          "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+          "shape": [
+            324,
+            486,
+            3
+          ],
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+        },
+        "validation_index": 0,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "model": {
+          "label": "0:dino-convnext-camera-control-v76:step-1000",
+          "source": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-v2/work/runs/dino-convnext-camera-control-v76/last.pt",
+          "training_run": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-v2/work/runs/dino-convnext-camera-control-v76",
+          "snapshot": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/work/outputs/full427/weights/weights-10f179cb9134fe537806add4b8470ca3961e3ef0b6ad7a9732b68b589fa0800a.pt",
+          "sha256": "10f179cb9134fe537806add4b8470ca3961e3ef0b6ad7a9732b68b589fa0800a",
+          "step": 1000,
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "convnext-pyramid",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false,
+            "raw_kernel_reconstruction": false,
+            "raw_kernel_windows": [
+              1,
+              5,
+              17
+            ],
+            "raw_kernel_phase_conditioning": false,
+            "isotropic_groups": 6,
+            "isotropic_blocks": 8,
+            "isotropic_local_width": 32,
+            "isotropic_raw_gain": 1.0,
+            "isotropic_residual_scale": 1.0
+          },
+          "effective_model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "convnext-pyramid",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false,
+            "raw_kernel_reconstruction": false,
+            "raw_kernel_windows": [
+              1,
+              5,
+              17
+            ],
+            "raw_kernel_phase_conditioning": false,
+            "isotropic_groups": 6,
+            "isotropic_blocks": 8,
+            "isotropic_local_width": 32,
+            "isotropic_raw_gain": 1.0,
+            "isotropic_residual_scale": 1.0
+          },
+          "training_manifest_sha256": "952977c6af9a1b0d7428c25e2b9cf4f1338d90e3295de33b552cbeb8153be502",
+          "compute_precision": "float32",
+          "refinement_compute_precision": "float32",
+          "memory_format": "channels_last",
+          "native_source_png": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/work/outputs/full427/crop-934577fe3037aaf8.png",
+            "sha256": "c5dd085a0d30f4e83909205c71ce3f26952b894fb3fa5ba45c189bf21ff75225"
+          },
+          "native_source_metadata": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/work/outputs/full427/crop-934577fe3037aaf8.json",
+            "sha256": "245affefff2b42a4630574451c22f1c86cf3a574ca70f0e0c757f824602d98ff"
+          },
+          "native_source_report": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-native/full427/raw/report.json",
+            "sha256": "58383b863796618b19e2b0cf7ad5cb55ade90aabe30b8a3883227c44fb51970d"
+          },
+          "native_source_PNG": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-native/full427/raw/crop-934577fe3037aaf8.png",
+            "sha256": "c5dd085a0d30f4e83909205c71ce3f26952b894fb3fa5ba45c189bf21ff75225"
+          },
+          "retained_baseline": false
+        },
+        "display_exposure": 1.0,
+        "reference": "Exact synthetic clean target",
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470588,
+            -0.0588235294,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            1.1176470588,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            -0.0588235294,
+            1.1176470588
+          ]
+        ],
+        "cache_context_xywh": [
+          189,
+          3,
+          256,
+          256
+        ],
+        "displayed_cache_ROI_xywh": [
+          237,
+          51,
+          160,
+          160
+        ]
+      }
+    },
+    {
+      "file": {
+        "path": "/home/dllu/proj/demosaic/docs/images/camera-supervision-first1k-v77-0014aa4e.png",
+        "sha256": "1225c3a9c8d20bc08c1f8948c059eecbff5cda42fd2d3da6d449bcad2ce9ff6c"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-native/full427/sources/native-1225c3a9c8d20bc08c1f8948c059eecbff5cda42fd2d3da6d449bcad2ce9ff6c.png",
+        "sha256": "1225c3a9c8d20bc08c1f8948c059eecbff5cda42fd2d3da6d449bcad2ce9ff6c"
+      },
+      "role": "synthetic-GT-triplet",
+      "native_crop": {
+        "image": "native-1225c3a9c8d20bc08c1f8948c059eecbff5cda42fd2d3da6d449bcad2ce9ff6c.png",
+        "caption": "0014aa4e075b1827f91ef8a02069e1e318f040ba / iso12800-prior / RGGB / 1:dino-convnext-camera-sensor-valid-v77:step-1000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "1225c3a9c8d20bc08c1f8948c059eecbff5cda42fd2d3da6d449bcad2ce9ff6c",
+        "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+        "source": {
+          "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Roy Egloff",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": null,
+          "credit": "Own work",
+          "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+          "width": 3888,
+          "height": 2592,
+          "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+          "shape": [
+            324,
+            486,
+            3
+          ],
+          "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+        },
+        "validation_index": 0,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "model": {
+          "label": "1:dino-convnext-camera-sensor-valid-v77:step-1000",
+          "source": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-v2/work/runs/dino-convnext-camera-sensor-valid-v77/last.pt",
+          "training_run": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-v2/work/runs/dino-convnext-camera-sensor-valid-v77",
+          "snapshot": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/work/outputs/full427/weights/weights-785cf617158ff3232b7cd165f3bfd1bea557caa77775764ce0f0644cff8df15c.pt",
+          "sha256": "785cf617158ff3232b7cd165f3bfd1bea557caa77775764ce0f0644cff8df15c",
+          "step": 1000,
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "convnext-pyramid",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false,
+            "raw_kernel_reconstruction": false,
+            "raw_kernel_windows": [
+              1,
+              5,
+              17
+            ],
+            "raw_kernel_phase_conditioning": false,
+            "isotropic_groups": 6,
+            "isotropic_blocks": 8,
+            "isotropic_local_width": 32,
+            "isotropic_raw_gain": 1.0,
+            "isotropic_residual_scale": 1.0
+          },
+          "effective_model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "convnext-pyramid",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false,
+            "raw_kernel_reconstruction": false,
+            "raw_kernel_windows": [
+              1,
+              5,
+              17
+            ],
+            "raw_kernel_phase_conditioning": false,
+            "isotropic_groups": 6,
+            "isotropic_blocks": 8,
+            "isotropic_local_width": 32,
+            "isotropic_raw_gain": 1.0,
+            "isotropic_residual_scale": 1.0
+          },
+          "training_manifest_sha256": "952977c6af9a1b0d7428c25e2b9cf4f1338d90e3295de33b552cbeb8153be502",
+          "compute_precision": "float32",
+          "refinement_compute_precision": "float32",
+          "memory_format": "channels_last",
+          "native_source_png": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/work/outputs/full427/crop-a905bb95ce2e1ed3.png",
+            "sha256": "1225c3a9c8d20bc08c1f8948c059eecbff5cda42fd2d3da6d449bcad2ce9ff6c"
+          },
+          "native_source_metadata": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/work/outputs/full427/crop-a905bb95ce2e1ed3.json",
+            "sha256": "3e73761ce0a6a275ad5a5e362330bf281d29a47346788557a1a77f26f9aeb850"
+          },
+          "native_source_report": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-native/full427/raw/report.json",
+            "sha256": "58383b863796618b19e2b0cf7ad5cb55ade90aabe30b8a3883227c44fb51970d"
+          },
+          "native_source_PNG": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-native/full427/raw/crop-a905bb95ce2e1ed3.png",
+            "sha256": "1225c3a9c8d20bc08c1f8948c059eecbff5cda42fd2d3da6d449bcad2ce9ff6c"
+          },
+          "retained_baseline": false
+        },
+        "display_exposure": 1.0,
+        "reference": "Exact synthetic clean target",
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470588,
+            -0.0588235294,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            1.1176470588,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            -0.0588235294,
+            1.1176470588
+          ]
+        ],
+        "cache_context_xywh": [
+          189,
+          3,
+          256,
+          256
+        ],
+        "displayed_cache_ROI_xywh": [
+          237,
+          51,
+          160,
+          160
+        ]
+      }
+    },
+    {
+      "file": {
+        "path": "/home/dllu/proj/demosaic/docs/images/camera-supervision-first1k-v77-002fc6ee.png",
+        "sha256": "67e87520c51b7b8e4e604ac51c983a7ebfd5ebabf2357453bc117c6cf842d7a7"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-native/full427/sources/native-67e87520c51b7b8e4e604ac51c983a7ebfd5ebabf2357453bc117c6cf842d7a7.png",
+        "sha256": "67e87520c51b7b8e4e604ac51c983a7ebfd5ebabf2357453bc117c6cf842d7a7"
+      },
+      "role": "synthetic-GT-triplet",
+      "native_crop": {
+        "image": "native-67e87520c51b7b8e4e604ac51c983a7ebfd5ebabf2357453bc117c6cf842d7a7.png",
+        "caption": "002fc6eeadf637e81d5a327f117b79abb86becd9 / iso12800-prior / RGGB / 1:dino-convnext-camera-sensor-valid-v77:step-1000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "67e87520c51b7b8e4e604ac51c983a7ebfd5ebabf2357453bc117c6cf842d7a7",
+        "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+        "source": {
+          "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Vancouver_%28BC%2C_Canada%29%2C_Coal_Harbour_Seaside_Park%2C_Blick_in_den_Himmel_--_2022_--_2158.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Dietmar Rabich",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "Dietmar Rabich",
+          "credit": "Own work",
+          "sha1": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "sha1_hex": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "download_path": "images/00/2f/002fc6eeadf637e81d5a327f117b79abb86becd9.jpg",
+          "width": 3809,
+          "height": 2857,
+          "id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/00/002fc6eeadf637e81d5a327f117b79abb86becd9.npy",
+          "shape": [
+            357,
+            476,
+            3
+          ],
+          "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf"
+        },
+        "validation_index": 1,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "model": {
+          "label": "1:dino-convnext-camera-sensor-valid-v77:step-1000",
+          "source": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-v2/work/runs/dino-convnext-camera-sensor-valid-v77/last.pt",
+          "training_run": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-v2/work/runs/dino-convnext-camera-sensor-valid-v77",
+          "snapshot": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/work/outputs/full427/weights/weights-785cf617158ff3232b7cd165f3bfd1bea557caa77775764ce0f0644cff8df15c.pt",
+          "sha256": "785cf617158ff3232b7cd165f3bfd1bea557caa77775764ce0f0644cff8df15c",
+          "step": 1000,
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "convnext-pyramid",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false,
+            "raw_kernel_reconstruction": false,
+            "raw_kernel_windows": [
+              1,
+              5,
+              17
+            ],
+            "raw_kernel_phase_conditioning": false,
+            "isotropic_groups": 6,
+            "isotropic_blocks": 8,
+            "isotropic_local_width": 32,
+            "isotropic_raw_gain": 1.0,
+            "isotropic_residual_scale": 1.0
+          },
+          "effective_model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "convnext-pyramid",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false,
+            "raw_kernel_reconstruction": false,
+            "raw_kernel_windows": [
+              1,
+              5,
+              17
+            ],
+            "raw_kernel_phase_conditioning": false,
+            "isotropic_groups": 6,
+            "isotropic_blocks": 8,
+            "isotropic_local_width": 32,
+            "isotropic_raw_gain": 1.0,
+            "isotropic_residual_scale": 1.0
+          },
+          "training_manifest_sha256": "952977c6af9a1b0d7428c25e2b9cf4f1338d90e3295de33b552cbeb8153be502",
+          "compute_precision": "float32",
+          "refinement_compute_precision": "float32",
+          "memory_format": "channels_last",
+          "native_source_png": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/work/outputs/full427/crop-aa472abc540f502c.png",
+            "sha256": "67e87520c51b7b8e4e604ac51c983a7ebfd5ebabf2357453bc117c6cf842d7a7"
+          },
+          "native_source_metadata": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/work/outputs/full427/crop-aa472abc540f502c.json",
+            "sha256": "892b97db10a4414ab30ac461f6add6376756bc3f4a3ebf22d333d00a0ae137c8"
+          },
+          "native_source_report": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-native/full427/raw/report.json",
+            "sha256": "58383b863796618b19e2b0cf7ad5cb55ade90aabe30b8a3883227c44fb51970d"
+          },
+          "native_source_PNG": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/early-native/full427/raw/crop-aa472abc540f502c.png",
+            "sha256": "67e87520c51b7b8e4e604ac51c983a7ebfd5ebabf2357453bc117c6cf842d7a7"
+          },
+          "retained_baseline": false
+        },
+        "display_exposure": 1.0,
+        "reference": "Exact synthetic clean target",
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470588,
+            -0.0588235294,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            1.1176470588,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            -0.0588235294,
+            1.1176470588
+          ]
+        ],
+        "cache_context_xywh": [
+          195,
+          89,
+          256,
+          256
+        ],
+        "displayed_cache_ROI_xywh": [
+          243,
+          137,
+          160,
+          160
+        ]
+      }
+    }
+  ],
+  "prior_control_comparison": {
+    "boundary": {
+      "file": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-v2/control-independent-boundary.json",
+        "sha256": "76cbd93959d4e65212e6f52235f469851e584e5e515687f919a2ef6e1347ad71"
+      },
+      "data": {
+        "status": "completed-independent-V76-boundary-and-prior-control-trajectory-check",
+        "new_control": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-v2/work/runs/dino-convnext-camera-control-v76/last.pt",
+          "sha256": "10f179cb9134fe537806add4b8470ca3961e3ef0b6ad7a9732b68b589fa0800a"
+        },
+        "prior_V74_control": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/reconstruction-objective-v74-v75-first1k-v2/work/runs/dino-convnext-v6-control-v74/last.pt",
+          "sha256": "be6fd22593420656fc9c4eb93845a80b8731808ee2e20f2655a015c4c0641cee"
+        },
+        "exact_fields_vs_prior_V74": {
+          "model_config": true,
+          "model": false,
+          "ema": false,
+          "optimizer": false,
+          "python_rng": true,
+          "torch_rng": true,
+          "cuda_rng": true,
+          "best": false,
+          "step": true
+        },
+        "finite_states": {
+          "model": 91,
+          "EMA": 91,
+          "AdamW": 89
+        },
+        "candidate_shared_steps_at_snapshot": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150
+        ],
+        "all_shared_legacy_and_input_observations_match": true,
+        "actual_initial_EMA_exact": true,
+        "actual_frozen_DINO_hash": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd",
+        "scope": "Actual completed V76 first1000 and partial candidate observations only. Exact old-control comparison scoped to this specific seeded B16/BF16 run; no general CUDA determinism or V77 quality claim, no reused/substituted fresh evaluation."
+      }
+    },
+    "numerical_difference": {
+      "file": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-v2/prior-control-differences.json",
+        "sha256": "2e230c6316d690862d564887f61fb7739a98aa66be67e557ab353cfce08c9197"
+      },
+      "data": {
+        "status": "completed-prior-control-numerical-difference-quantification",
+        "all41_logged_observations_domains_and_LRs_exact": true,
+        "all16_early_observations_exact": true,
+        "state_differences": {
+          "model": {
+            "elements": 32904710,
+            "exact_equal_elements": 128019,
+            "changed_tensors": 89,
+            "max_absolute_difference": 0.00046700239181518555,
+            "RMS_difference": 2.5484732629224745e-05
+          },
+          "ema": {
+            "elements": 32904710,
+            "exact_equal_elements": 131448,
+            "changed_tensors": 89,
+            "max_absolute_difference": 0.0004112757742404938,
+            "RMS_difference": 2.184609632106073e-05
+          }
+        },
+        "first_logged_difference": {
+          "loss": {
+            "step": 1,
+            "V76": 0.014923745766282082,
+            "V74": 0.014924298971891403
+          },
+          "grad_norm": {
+            "step": 1,
+            "V76": 1.0650970935821533,
+            "V74": 1.0653536319732666
+          }
+        },
+        "scope": "Despite exact sampled batches/RNG and the independent default CPU loss/gradient replay, the two separate GPU training trajectories are not bitwise identical. These data do not isolate the cause or quantify training-seed uncertainty. Retain planned fresh V76 evaluation; no reuse of V74 predictions as V76, no threshold or candidate-policy change."
+      }
+    }
+  },
+  "full_CPU_tests": {
+    "file": {
+      "path": "/home/dllu/proj/demosaic/.cache/camera-supervision-full-CPU-suite-v1.log",
+      "sha256": "61ac5c9bceb6ae44cea7b5c0b38fd429da4b63724c93017eabf7a4d322125e5b"
+    },
+    "passed": 1021,
+    "skipped": 9,
+    "elapsed_seconds": 110.76,
+    "CUDA_hidden": true
+  },
+  "closure_queue": {
+    "plan": {
+      "file": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/closure-plan.json",
+        "sha256": "2d57347706cff3df05c7e0c71a42932ecec24d1137b32310383f0103377d496b"
+      },
+      "data": {
+        "root": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2",
+        "worker": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/closure-worker.py",
+          "sha256": "139d22a0a14b42e8c9fae7ca5fba3c9b3d6744395e173fc9cfed675e42e969fd"
+        },
+        "review_plan": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/plan.json",
+          "sha256": "d05868fd11375d2a404d9e477dd84fd9b260f018256bd5d4c5898c6369b3053c"
+        },
+        "review_owner": {
+          "pid": 3924569,
+          "created": 1792346395.17
+        },
+        "extra_palettes": [
+          "h030-s0.50-l0.90",
+          "h315-s0.50-l0.90",
+          "h030-s0.98-l0.18",
+          "h315-s0.98-l0.18"
+        ],
+        "retained_native_reports": {
+          "full427": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/reconstruction-objective-v74-v75-first1k-review-v1/early-photo-native/report.json",
+            "sha256": "06a743623774ebc02503df561bb9012ba3f96613f2860e946c423fb386e8e657"
+          },
+          "known": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/reconstruction-objective-v74-v75-first1k-review-v1/camera-native/known/report.json",
+            "sha256": "87d2f6a30eace71578f5ad6365db13fbfda34e8a59cc00bb086c009dbbe776e3"
+          },
+          "unseen": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/reconstruction-objective-v74-v75-first1k-review-v1/camera-native/unseen/report.json",
+            "sha256": "43b8d00106d73e4b3fd6d05211deaf5a449180af8c209111e3ee1755e4d48a34"
+          }
+        },
+        "retained_parent_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+        "retained_RawNIND_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "composition_preflight": {
+          "path": "/home/dllu/proj/demosaic/.cache/benchmarks/camera-closure-board-preflight-v2/receipt.json",
+          "sha256": "9c164754fa7668cc647b0eac21cce30a3037bf09cc182e6f5f73b8b78430a444"
+        },
+        "scope": "Owned CPU-only arithmetic/native-board preparation after exact successful review owner/child exit and all10 stages. Four unchanged additional palettes fixed before this trial hue outputs. Fresh2 GT triplets/model and known/unseen references compared with exact retained parent and RawNIND-channel PNGs. All native pixels, metadata and source hashes checked; no new NN/noise, performance finding, manual-view or promotion claim. All boards require actual view afterward. Failed review/closure stops without automatic retry."
+      }
+    },
+    "launch": {
+      "file": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/closure-launch.json",
+        "sha256": "95fc86d92a7d807c51a1ea0cf0862954d03b8a4c188184676129ceeeda72bf58"
+      },
+      "data": {
+        "pid": 3941383,
+        "created": 1792347215.59
+      }
+    },
+    "observed_status_snapshot": {
+      "controller": {
+        "pid": 3941383,
+        "created": 1792347215.59
+      },
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/closure-plan.json",
+        "sha256": "2d57347706cff3df05c7e0c71a42932ecec24d1137b32310383f0103377d496b"
+      },
+      "completed": [],
+      "status": "waiting-for-exact-camera-supervision-review-owner-exit",
+      "updated_unix": 1792347215.7036762
+    }
+  },
+  "review_observed_status_snapshot": {
+    "controller": {
+      "pid": 3924569,
+      "created": 1792346395.17
+    },
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/camera-supervision-v76-v77-first1k-review-v2/plan.json",
+      "sha256": "d05868fd11375d2a404d9e477dd84fd9b260f018256bd5d4c5898c6369b3053c"
+    },
+    "completed": [
+      "boundary",
+      "known",
+      "unseen"
+    ],
+    "status": "running-camera-supervision-quality-review",
+    "updated_unix": 1792347606.6181502,
+    "stage": "full427",
+    "child": {
+      "pid": 3944292,
+      "created": 1792347606.57
+    }
+  },
+  "decision": "Known4 gain is negative and fails the predeclared >=+.05dB with positive95% CI requirement. Unseen5 passes its local requirement. Do not extend either arm or promote. Finish the already frozen full427/fixed418/416/color/analytic/GFX/native review without changing gates.",
+  "limits": "Camera-only numerical interim, not completed photographic/global/real-photo superiority review. Native GT crops use original full427 CUDA observation, not earlier CPU fixture. All22 triplets/34 unique cells actually viewed. No new full102MP restore/export/timing; workingV43 unchanged."
+}

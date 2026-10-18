@@ -5,6 +5,12 @@ canonical highlight target and a constant-preserving RAW head. This motivates
 a default-off training mode, `camera_supervision: sensor-valid-v1`, and a fresh
 matched control. It is not evidence that a newly trained model is better.
 
+Both arms have now completed1,000 updates. The
+[camera interim and native GT crops](camera-supervision-first1k-camera-interim.md)
+find−.02714dB on known4 and+.08098dB on unseen5. Known4 fails the original
+continuation screen, so neither arm extends or promotes. Full427/color/GFX
+and remaining native/numerical review are running under the frozen plan.
+
 ## Concrete conflict
 
 The [executed audit](results/camera-target-convention-audit-v1.json) uses the
