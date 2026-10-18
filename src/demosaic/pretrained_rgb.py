@@ -298,8 +298,11 @@ class PretrainedRgbDemosaic(nn.Module):
         raw_kernel_windows=(1, 5, 17),
         raw_kernel_phase_conditioning=False,
         raw_directional_residual=False,
+        raw_directional_bank_context=False,
     ):
         super().__init__()
+        if raw_directional_bank_context and not raw_directional_residual:
+            raise ValueError("Directional bank context requires the directional branch")
         if physical_anchors and not stabilized:
             raise ValueError("Physical anchors require variance stabilization")
         if adc_projection and not stabilized:
@@ -367,7 +370,7 @@ class PretrainedRgbDemosaic(nn.Module):
         if raw_directional_residual:
             from .raw_directional import RawDirectionalResidual
 
-            self.raw_directional = RawDirectionalResidual()
+            self.raw_directional = RawDirectionalResidual(bank_context=raw_directional_bank_context)
         if raw_kernel:
             from .raw_kernel import AdaptiveRawKernel
 

@@ -42,8 +42,10 @@ class RawDirectionalResidual(nn.Module):
     Data-dependent filters are not claimed to be statistically unbiased.
     """
 
-    def __init__(self):
+    def __init__(self, *, bank_context=False):
         super().__init__()
+        if type(bank_context) is not bool:
+            raise ValueError("Directional bank context must be a boolean")
         with torch.random.fork_rng(devices=[]):
             self.local = nn.Sequential(
                 nn.Conv2d(20, 32, 3, padding=1, padding_mode="replicate"),
@@ -58,6 +60,21 @@ class RawDirectionalResidual(nn.Module):
         self.mix_bias = nn.Parameter(torch.zeros(3 * len(DIRECTIONS)))
         self.censored_weight = nn.Parameter(torch.zeros(3, channels, 1, 1))
         self.censored_bias = nn.Parameter(torch.zeros(3))
+        self.bank = None
+        if bank_context:
+            # A separate zero logit correction preserves trained directional
+            # heads too. The same measured candidate bank is reused below.
+            with torch.random.fork_rng(devices=[]):
+                self.bank = nn.Sequential(
+                    nn.Conv2d(4 * len(DIRECTIONS), 32, 3, padding=1, padding_mode="replicate"),
+                    nn.GELU(),
+                    nn.Conv2d(32, 64, 3, padding=1, padding_mode="replicate"),
+                    nn.GELU(),
+                    nn.PixelShuffle(2),
+                    nn.Conv2d(16, 3 * len(DIRECTIONS), 1),
+                )
+            nn.init.zeros_(self.bank[-1].weight)
+            nn.init.zeros_(self.bank[-1].bias)
 
     def forward(self, base, packed, variance, colors, features):
         batch, phases, height, width = packed.shape
@@ -69,9 +86,9 @@ class RawDirectionalResidual(nn.Module):
             colors = colors[None].expand(batch, -1)
         with torch.autocast(packed.device.type, enabled=False), ieee_fp32():
             base, packed, variance = base.float(), packed.float(), variance.float()
-            innovation = ((packed - mosaic(base, colors)) / variance.clamp_min(1e-8).sqrt()).clamp(
-                -8, 8
-            )
+            measured_base = mosaic(base, colors)
+            sample_std = variance.clamp_min(1e-8).sqrt()
+            innovation = ((packed - measured_base) / sample_std).clamp(-8, 8)
             noise = (variance.clamp_min(1e-8).log() + 12) / 6
             labels = (
                 F.one_hot(colors, 3)
@@ -81,11 +98,31 @@ class RawDirectionalResidual(nn.Module):
             )
             local = self.local(torch.cat((innovation, noise, labels), 1))
             context = torch.cat((features.float(), local), 1)
-            weights = F.conv2d(context, self.mix_weight, self.mix_bias).tanh()
-            weights = weights.reshape(batch, len(DIRECTIONS), 3, height * 2, width * 2) / math.sqrt(
-                len(DIRECTIONS)
-            )
+            logits = F.conv2d(context, self.mix_weight, self.mix_bias)
+            # Keep the legacy path's operation order when the option is off.
+            if self.bank is None:
+                weights = logits.tanh().reshape(
+                    batch, len(DIRECTIONS), 3, height * 2, width * 2
+                ) / math.sqrt(len(DIRECTIONS))
             candidates = torch.cat([line_mean(packed, direction) for direction in DIRECTIONS], 0)
+            if self.bank is not None:
+                # Scale by the original measured-sample noise, not a claimed
+                # calibrated error variance for the correlated candidate/base.
+                bank_input = (
+                    (
+                        (
+                            candidates.reshape(len(DIRECTIONS), batch, 4, height, width)
+                            - measured_base[None]
+                        )
+                        / sample_std[None]
+                    )
+                    .clamp(-8, 8)
+                    .permute(1, 0, 2, 3, 4)
+                    .reshape(batch, 4 * len(DIRECTIONS), height, width)
+                )
+                weights = (logits + self.bank(bank_input)).tanh().reshape(
+                    batch, len(DIRECTIONS), 3, height * 2, width * 2
+                ) / math.sqrt(len(DIRECTIONS))
             candidates = bilinear(candidates, colors.repeat(len(DIRECTIONS), 1))
             candidates = candidates.reshape(
                 len(DIRECTIONS), batch, 3, height * 2, width * 2

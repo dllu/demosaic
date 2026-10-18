@@ -29,6 +29,12 @@ existing rows and32 exact legacy crop comparisons. Active recipes retain128
 captures; a matched trained data-benefit test remains outstanding. No private
 source pixels/capture metadata are published.
 
+The [new candidate-bank context experiment](directional-bank-engineering.md)
+passes genuine CPU/CUDA mixed updates and exact disabled-default replay, with
+1,130 CPU tests passing. Fresh strict V80/V81 arms now run fixed original4k
+budgets with native128 held unchanged. This is an architecture experiment;
+trained quality, fixed eligibility and native crop review remain pending.
+
 The [guarded photometry pilot](guarded-input-cfa-gain.md) fails its fixed
 high-saturation screen and is closed without full427 continuation. All30 native
 triplets/60 cells were actually reviewed. The separate
