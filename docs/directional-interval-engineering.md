@@ -57,3 +57,8 @@ The [first1k state audit and independent review preparation](directional-interva
 now confirm nonzero optimizer moments for every new branch parameter and add
 matched V43/RawNIND native comparisons to the queued final review. Quality is
 still pending.
+
+[V78 has completed its original 4,000 updates](directional-v78-original4k-training-handoff.md)
+and exited successfully; V79 is running. The first sampled observations match,
+with a small first-step base-loss difference across independent GPU processes.
+Full quality review still waits for both final checkpoints.

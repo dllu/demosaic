@@ -10,6 +10,10 @@ verify finite99/99/97 states and nonzero optimizer moments in all25,800 new
 parameters. Full primary/color/GFX/native review, including fresh V63 and
 matched retained V43/RawNIND references, is queued. No new model-quality,
 full-frame16-bit or speed result exists yet, and no model is promoted.
+The [completed V78 training boundary and V79 handoff](directional-v78-original4k-training-handoff.md)
+now retain all four control snapshots and verify finite final states. First-step
+base-loss variation across GPU processes remains part of the interpretation;
+the full two-arm quality review is still pending.
 
 The [guarded photometry pilot](guarded-input-cfa-gain.md) fails its fixed
 high-saturation screen and is closed without full427 continuation. All30 native
