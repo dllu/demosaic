@@ -50,3 +50,37 @@ Read the actual trace before choosing a speed change. Any later optimization
 still needs its own numerical, native visual and full-frame validation. The
 [separate FP16 compilation rejection](packed-isotropic-compilation.md) remains
 unchanged. Manual quality review and model promotion remain pending.
+
+The saved-trace reader is now available as
+[`scripts/summarize_inference_trace.py`](../scripts/summarize_inference_trace.py).
+[Read-only replay evidence](results/mixed16-trace-reader-CPU-v1.json)
+reproduces all previous numeric attributions for4,155 V37 and1,209 V67 GPU
+activities. Additional checks confirm each unique runtime launch shares its
+matched CPU operator's thread and lies inside that operator. Decimal arithmetic
+independently verifies the activity-duration sums. These historical traces
+describe other models and precision policies; they do not identify the current
+packed models' GPU bottleneck.
+
+Both current CPU traces yield the expected13/15 ranges and270 learned-branch
+`conv2d`/104 `layer_norm` calls per model, excluding physical and DINO ranges.
+The reader imports no Torch and executes no model. Twenty-three focused tests
+cover asynchronous launches, nested ranges, different threads, whole-operator
+containment, valid zero IDs, missing/ambiguous mappings and invalid durations.
+`--require-cuda` rejects CPU-only traces and incomplete launch associations.
+
+After the exact queued profile owners complete and their trace hashes match
+the final result receipts, analyze each saved GPU trace on CPU:
+
+```bash
+source scripts/env.sh
+CUDA_VISIBLE_DEVICES='' uv run --no-sync python -P \
+  scripts/summarize_inference_trace.py \
+  /mnt/external/demosaic/benchmarks/mixed16-quarter-FP32-profile-no-dino-v1/operator-trace.json \
+  /mnt/external/demosaic/benchmarks/mixed16-quarter-FP32-profile-no-dino-v1/trace-analysis.json \
+  --range-prefix demosaic:: --require-cuda
+```
+
+Use the corresponding DINO directory for the other endpoint. Exclusive totals
+assign each kernel/copy/memset activity once to its innermost containing CPU
+range. Inclusive totals overlap, and summed device activity is distinct from
+unhooked elapsed time. No current10k GPU trace has been analyzed yet.

@@ -1,0 +1,93 @@
+{
+  "status": "completed-read-only-trace-reader-replay-and-current-CPU-coverage-preflight",
+  "driver": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-trace-reader-CPU-v1/preflight.py",
+    "sha256": "c9cb76aad2789a145a01087c8248a90bea77caec3dd81fb5e67a4c61744ec6ca"
+  },
+  "reader": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-trace-reader-CPU-v1/summarize_inference_trace.py",
+    "sha256": "0128dbf6025d0c88f8f5d569ac24a9b6899942641add785919917bf822f14791"
+  },
+  "original_reader": {
+    "path": "/mnt/external/demosaic/benchmarks/raw-kernel-inference-trace-analysis-v1/summarize_inference_trace.py",
+    "sha256": "fd9cae55a248e29cc2882376910ffb73a7002baa04ec66436f71345dc8aa5385"
+  },
+  "inputs": [
+    {
+      "path": "/mnt/external/demosaic/benchmarks/full-rgb-inference-profile-v1/trace.json",
+      "sha256": "1af33b0a756e9626dd7709664058d817cb7d9f568d4161c07cec605bb983f5ea"
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-inference-trace-analysis-v1/legacy-V37-CUDA.json",
+      "sha256": "3cd02cbd0671a6131b6b348f28876b1a69e23759c175795061ed7abb7b6382ca"
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-inference-profile-workflow-v2/bounded-CUDA-profile/operator-trace.json",
+      "sha256": "e6ec3ec072461daa140e824a15f614479fd45263ca06856393a15c367fae3dee"
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/raw-kernel-phase-joint-v67-full10k-inference-profile-workflow-v2/independent-current-trace-analysis.json",
+      "sha256": "ead1df461d7ed0c701a63ede2d5f819108944094e0c41701eeb61d77c8f6957d"
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/mixed16-packed-profile-CPU-v1/no-dino/operator-trace.json",
+      "sha256": "2a8096c1506629df67a205fc830d79333d35b2996093918cfd9a7920a5ceb361"
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/mixed16-packed-profile-CPU-v1/dino/operator-trace.json",
+      "sha256": "1577b982966b847134260a759f9b53bdb7f5d62d7f326efad8356b94f158cb71"
+    }
+  ],
+  "results": [
+    {
+      "name": "historical-V37-GPU",
+      "analysis": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-trace-reader-CPU-v1/historical-V37-GPU.json",
+        "sha256": "f7195b6eb42626efe285c84bade1915babbc36217bce4b0fb0ee51fd7b8f9f8d"
+      },
+      "activities": 4155,
+      "historical_attribution_and_numeric_tables_unchanged": true,
+      "new_runtime_thread_and_containment_checks_passed": 4155,
+      "Decimal_duration_sum_error_us": 0.0
+    },
+    {
+      "name": "historical-V67-GPU",
+      "analysis": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-trace-reader-CPU-v1/historical-V67-GPU.json",
+        "sha256": "8cb90d4468b8dfa8095e9a28979adb354cea4a30781ba6472c34c2744da11699"
+      },
+      "activities": 1209,
+      "historical_attribution_and_numeric_tables_unchanged": true,
+      "new_runtime_thread_and_containment_checks_passed": 1209,
+      "Decimal_duration_sum_error_us": 0.0
+    },
+    {
+      "name": "no-dino-CPU",
+      "analysis": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-trace-reader-CPU-v1/no-dino-CPU.json",
+        "sha256": "505e2cb27ca4d02762938f32942269394b0175cff0b07533e69193d52d41d9f2"
+      },
+      "named_ranges": 13,
+      "CPU_trace_rejected_as_GPU_evidence": true,
+      "RAW_learned_conv2d_calls": 270,
+      "RAW_layer_norm_calls": 104
+    },
+    {
+      "name": "dino-CPU",
+      "analysis": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-trace-reader-CPU-v1/dino-CPU.json",
+        "sha256": "815c73466eb2bd4492c9d1cc0be171e24ff0eb2ef38ca10503bedb420eab8cd2"
+      },
+      "named_ranges": 15,
+      "CPU_trace_rejected_as_GPU_evidence": true,
+      "RAW_learned_conv2d_calls": 270,
+      "RAW_layer_norm_calls": 104
+    }
+  ],
+  "historical_GPU_activities_verified": 5364,
+  "current_CPU_trace_ranges_verified": 28,
+  "focused_tests_passed": 23,
+  "no_torch_import_or_model_execution": true,
+  "all_inputs_unchanged": true,
+  "scope": "Read-only CPU analysis of saved historical GPU traces and current2k CPU traces. All legacy numeric attributions reproduce exactly independent of keyed-table row ordering; additional runtime-thread/whole-operator containment checks pass all5364 activities. Decimal independently verifies summed duration arithmetic. Current13/15 ranges and270 learned-branch conv2d/104 layer_norm CPU calls per model verify, with physical/DINO branches separate. Current CPU traces are rejected as GPU evidence. No new model execution, GPU performance, optimization or quality result. Future10k GPU profiles remain pending."
+}
