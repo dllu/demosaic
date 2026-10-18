@@ -1,0 +1,59 @@
+{
+  "status": "completed-private-personal-RAW-preparation-and-source-review-loader-integration-pending",
+  "producer": {
+    "path": "/home/dllu/proj/demosaic/scripts/prepare_personal_raw_quarantine.py",
+    "sha256": "0badb863f54bff1d08bbda2471fea650722244b2b33df2fcb2719f3c5c1169b7"
+  },
+  "tests": {
+    "path": "/home/dllu/proj/demosaic/tests/test_personal_raw_quarantine.py",
+    "sha256": "8138364d2d4bdb07b6edfed73d16526c9109c5369f1c55448bce9338b5853bdc"
+  },
+  "frozen_producer_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/personal-native-survey-v1/producer-plan.json",
+    "sha256": "a779d2a641dd8b0fdb8d22b944afa08e025d54ff2b2cce296f5f23ba46bc24e6"
+  },
+  "private_quarantine": {
+    "path": "/home/dllu/proj/demosaic/.cache/personal-native-quarantine-v1/manifest.json",
+    "sha256": "bbc245f7869339fac8e9183a13846f3f31f2ac4f01595ec030d41286291901f4"
+  },
+  "private_overlap_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/personal-native-overlap-v1/audit.json",
+    "sha256": "a2c1f9e56320a81b93d6a04e17f29bbd87e278c675c7246218623ab851b2f16d"
+  },
+  "private_source_review": {
+    "path": "/home/dllu/proj/demosaic/.cache/personal-native-overlap-v1/source-review.json",
+    "sha256": "07fab096f6d46533b610f970d57e2b73451e3514ea064fea9f840f72e4775398"
+  },
+  "counts": {
+    "local_RAW_inventory": 5015,
+    "processed_with_sidecars": 139,
+    "low_ISO_max200": 88,
+    "low_ISO_recorded_aperture_f4_or_slower": 50,
+    "source_inspected_for_preparation": 31,
+    "phase_binned_caches": 62,
+    "copied_RAW_bytes": 3253399184,
+    "source_clipping_pass": 22,
+    "source_clipping_reject": 9,
+    "source_groups_before_family_resolution": 17,
+    "source_groups_after_family_resolution": 15,
+    "existing_native_family_shared": 1,
+    "new_family_labels": 14,
+    "protected_references_screened": 45,
+    "Commons_records_screened": 94455,
+    "existing_native_captures_screened": 128,
+    "protected_or_Commons_flags": 0,
+    "FP64_independent_RGB_codes": 72,
+    "FP64_scalar_filter_max_DN16_error": 0
+  },
+  "current_loader_refuses_quarantine": "Native RAW targets require a train manifest",
+  "current_active_native_dataset": {
+    "captures": 128,
+    "groups": 106,
+    "unchanged": true
+  },
+  "originals_read_only": true,
+  "archive_hard_drives_read": false,
+  "private_source_images_or_capture_metadata_published": false,
+  "tests_passed": 5,
+  "scope": "Real user-permitted local RAW data preparation and source-only review. Cached camera-linear uint16 low-noise estimates, not exact noiseless GT; no demosaicer/WB/matrix/gamma/8bit stage in targets. Actual cached source hashes/metadata,155 source/cache/screen/preview bindings and72 scalar FP64 target codes checked. All new data remain quarantine; no training/model/active-dataset/default change. Pinned loader integration and a matched trained study still required; finite source screening does not prove complete scene independence."
+}

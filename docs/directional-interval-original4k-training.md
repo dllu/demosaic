@@ -56,3 +56,8 @@ No automatic extension or promotion follows these finite training results. The
 fixed numerical criteria and native color/detail/highlight review still apply;
 only an eligible candidate gets a separate full-frame FP32/16-bit/timing review.
 No final restoration-quality, speed or SOTA result is claimed by this report.
+
+Subsequent [complete quality review](directional-interval-original4k-review.md)
+finds photo gains but failed camera criteria, weak fine detail and no promotion.
+All81 native triplets/125 cells and independent primary/color/source audits
+are complete. This training-boundary record retains its engineering scope.

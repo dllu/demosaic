@@ -51,5 +51,8 @@ V78's retained step 2,000 checkpoint is independently audited: all 99 model,
 nonzero optimizer moments. SHA256:
 `3205312b282152e56727e3a8300190a6a9038cd623bf8ca77be2597ecfdfc714`.
 This is an execution milestone on the original schedule, not a quality gate.
-Both final runs and the complete review remain pending; V43 stays the working
-reference.
+Both final4k runs and the [complete review](directional-interval-original4k-review.md)
+have now finished. The original checker rejects both arms' camera criteria and
+the matched interval photo-benefit criterion. Full81-triplet/125-cell review
+also retains texture/highlight limitations. No extension/promotion; V43 stays
+the working reference.

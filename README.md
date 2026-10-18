@@ -73,11 +73,9 @@ The [completed content audit](docs/commons-content-overlap.md) supplies
 The [completed objective comparison](docs/reconstruction-objective-first1k-review.md)
 misses its continuation gate. The [completed camera-supervision review](docs/camera-supervision-first1k-review.md)
 finds photo/color gains with mixed camera results; its continuation gate also fails.
-The [directional RAW residual and interval-loss study](docs/directional-interval-v78-v79.md)
-has [completed both original training budgets](docs/directional-interval-original4k-training.md);
-its full image-quality review is running. A
-[partial native review](docs/directional-interval-native-interim.md) includes two
-exact-GT triplets per final checkpoint; fine detail remains weak in those crops.
+The [completed directional/interval review](docs/directional-interval-original4k-review.md)
+finds+.278/.276dB photo gains but failed camera criteria and weak fine detail.
+All81 native triplets/125 cells are reviewed; neither model replaces V43.
 See [training pipeline work](docs/training-pipeline.md) for augmentation before
 the last reduction, selected-domain loading and the batch-size sweep.
 The [packed detail review](docs/packed-detail-v40-v41-review.md) retains the

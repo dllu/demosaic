@@ -1,0 +1,2362 @@
+{
+  "status": "completed-directional-primary-numerical-review-and68-native-cells-color-closure-pending",
+  "recorded_UTC": "2026-10-18T22:36:22.911073+00:00",
+  "review_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/plan.json",
+    "sha256": "124eac6a7bb3e1cc78d053f131fc72d5e7c6ec508ae1b1443679880e488f17f2"
+  },
+  "training_boundary": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/training-boundary.json",
+    "sha256": "c581a03f4edd7c8f0e4b9773404f43390115c4d5e9f4da7ddd054003b42799c5"
+  },
+  "primary_statistics": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/primary-statistics.json",
+    "sha256": "069683ffb0a1808f07c0caff1348ec0702fbbee2bcdf26b7efce093682bd3690"
+  },
+  "fixed_numerical_eligibility": {
+    "source": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/work/outputs/numerical-eligibility.json",
+      "sha256": "9a504f5bceae4f9147bade1232f1c94927c96fbcf95e1d66c478eb0d5ab1340a"
+    },
+    "result": {
+      "status": "applied-predeclared-directional-numerical-criteria-manual-review-pending",
+      "arms": [
+        {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-v1/work/runs/dino-convnext-directional-control-v78/last.pt",
+            "sha256": "26e43921d2f4f46b39d9385c8399699f9fe1f0294f34efa4e6da0d4ad9baa7c4",
+            "arm": "control",
+            "step": 4000,
+            "kind": "joint-checkpoint",
+            "label": "V78-original4000"
+          },
+          "comparisons": {
+            "known_CFA": {
+              "panel": "known",
+              "kind": "real",
+              "metric": "sensor_psnr",
+              "first": "V78-original4000",
+              "second": "V63-parent",
+              "first_checkpoint_sha256": "26e43921d2f4f46b39d9385c8399699f9fe1f0294f34efa4e6da0d4ad9baa7c4",
+              "second_checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+              "sources": 4,
+              "first_source_balanced_mean": 54.19246869617038,
+              "second_source_balanced_mean": 54.20367664761014,
+              "mean_first_minus_second": -0.011207951439754282,
+              "source_bootstrap_95_interval": [
+                -0.07107702891032375,
+                0.04866112603081518
+              ]
+            },
+            "unseen_CFA": {
+              "panel": "unseen",
+              "kind": "real",
+              "metric": "sensor_psnr",
+              "first": "V78-original4000",
+              "second": "V63-parent",
+              "first_checkpoint_sha256": "26e43921d2f4f46b39d9385c8399699f9fe1f0294f34efa4e6da0d4ad9baa7c4",
+              "second_checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+              "sources": 5,
+              "first_source_balanced_mean": 53.83874931335449,
+              "second_source_balanced_mean": 53.84318347507053,
+              "mean_first_minus_second": -0.004434161716034168,
+              "source_bootstrap_95_interval": [
+                -0.02538341946071796,
+                0.013476647271050978
+              ]
+            },
+            "photo_PSNR": {
+              "panel": "full427",
+              "kind": "photo",
+              "metric": "srgb_psnr",
+              "first": "V78-original4000",
+              "second": "V63-parent",
+              "first_checkpoint_sha256": "26e43921d2f4f46b39d9385c8399699f9fe1f0294f34efa4e6da0d4ad9baa7c4",
+              "second_checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+              "sources": 427,
+              "first_source_balanced_mean": 36.2109895275763,
+              "second_source_balanced_mean": 35.93297502929928,
+              "mean_first_minus_second": 0.2780144982770279,
+              "source_bootstrap_95_interval": [
+                0.1998651843838327,
+                0.3836713564240363
+              ]
+            },
+            "photo_SSIM": {
+              "panel": "full427",
+              "kind": "photo",
+              "metric": "srgb_ssim",
+              "first": "V78-original4000",
+              "second": "V63-parent",
+              "first_checkpoint_sha256": "26e43921d2f4f46b39d9385c8399699f9fe1f0294f34efa4e6da0d4ad9baa7c4",
+              "second_checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+              "sources": 427,
+              "first_source_balanced_mean": 0.9640928960317111,
+              "second_source_balanced_mean": 0.9632898244212885,
+              "mean_first_minus_second": 0.0008030716104226723,
+              "source_bootstrap_95_interval": [
+                0.0007008745923623445,
+                0.0009073418706864922
+              ]
+            },
+            "canonical_camera_linear_PSNR": {
+              "panel": "full427",
+              "kind": "photo",
+              "metric": "linear_psnr",
+              "first": "V78-original4000",
+              "second": "V63-parent",
+              "first_checkpoint_sha256": "26e43921d2f4f46b39d9385c8399699f9fe1f0294f34efa4e6da0d4ad9baa7c4",
+              "second_checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+              "sources": 427,
+              "first_source_balanced_mean": 39.28529685865321,
+              "second_source_balanced_mean": 41.35985682185337,
+              "mean_first_minus_second": -2.0745599632001555,
+              "source_bootstrap_95_interval": [
+                -2.1900608306726355,
+                -1.943892117015651
+              ]
+            }
+          },
+          "gates": {
+            "known_CFA_mean_at_least_.05dB": false,
+            "known_CFA_positive_95pct_lower_bound": false,
+            "unseen_CFA_mean_at_least_.05dB": false,
+            "unseen_CFA_positive_95pct_lower_bound": false,
+            "photo_PSNR_mean_at_least_.05dB": true,
+            "photo_PSNR_positive_95pct_lower_bound": true,
+            "photo_SSIM_loss_at_most_.0001": true
+          },
+          "all_numerical_criteria_pass": false
+        },
+        {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-v1/work/runs/dino-convnext-directional-interval-v79/last.pt",
+            "sha256": "2f3e567e4bca7bf308f79d5e613d791d612e7d950c0cd64c9c21ac548aa1f11f",
+            "arm": "interval",
+            "step": 4000,
+            "kind": "joint-checkpoint",
+            "label": "V79-original4000"
+          },
+          "comparisons": {
+            "known_CFA": {
+              "panel": "known",
+              "kind": "real",
+              "metric": "sensor_psnr",
+              "first": "V79-original4000",
+              "second": "V63-parent",
+              "first_checkpoint_sha256": "2f3e567e4bca7bf308f79d5e613d791d612e7d950c0cd64c9c21ac548aa1f11f",
+              "second_checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+              "sources": 4,
+              "first_source_balanced_mean": 54.186538749270966,
+              "second_source_balanced_mean": 54.20367664761014,
+              "mean_first_minus_second": -0.01713789833916657,
+              "source_bootstrap_95_interval": [
+                -0.0792250103420713,
+                0.04494921366373816
+              ]
+            },
+            "unseen_CFA": {
+              "panel": "unseen",
+              "kind": "real",
+              "metric": "sensor_psnr",
+              "first": "V79-original4000",
+              "second": "V63-parent",
+              "first_checkpoint_sha256": "2f3e567e4bca7bf308f79d5e613d791d612e7d950c0cd64c9c21ac548aa1f11f",
+              "second_checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+              "sources": 5,
+              "first_source_balanced_mean": 53.8387461344401,
+              "second_source_balanced_mean": 53.84318347507053,
+              "mean_first_minus_second": -0.004437340630423137,
+              "source_bootstrap_95_interval": [
+                -0.02455122205945486,
+                0.017155749003091348
+              ]
+            },
+            "photo_PSNR": {
+              "panel": "full427",
+              "kind": "photo",
+              "metric": "srgb_psnr",
+              "first": "V79-original4000",
+              "second": "V63-parent",
+              "first_checkpoint_sha256": "2f3e567e4bca7bf308f79d5e613d791d612e7d950c0cd64c9c21ac548aa1f11f",
+              "second_checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+              "sources": 427,
+              "first_source_balanced_mean": 36.20937508362597,
+              "second_source_balanced_mean": 35.93297502929928,
+              "mean_first_minus_second": 0.2764000543267003,
+              "source_bootstrap_95_interval": [
+                0.19831033158198616,
+                0.3811514134628792
+              ]
+            },
+            "photo_SSIM": {
+              "panel": "full427",
+              "kind": "photo",
+              "metric": "srgb_ssim",
+              "first": "V79-original4000",
+              "second": "V63-parent",
+              "first_checkpoint_sha256": "2f3e567e4bca7bf308f79d5e613d791d612e7d950c0cd64c9c21ac548aa1f11f",
+              "second_checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+              "sources": 427,
+              "first_source_balanced_mean": 0.9640767187847267,
+              "second_source_balanced_mean": 0.9632898244212885,
+              "mean_first_minus_second": 0.0007868943634381001,
+              "source_bootstrap_95_interval": [
+                0.0006838748411625371,
+                0.0008917304685020893
+              ]
+            },
+            "canonical_camera_linear_PSNR": {
+              "panel": "full427",
+              "kind": "photo",
+              "metric": "linear_psnr",
+              "first": "V79-original4000",
+              "second": "V63-parent",
+              "first_checkpoint_sha256": "2f3e567e4bca7bf308f79d5e613d791d612e7d950c0cd64c9c21ac548aa1f11f",
+              "second_checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+              "sources": 427,
+              "first_source_balanced_mean": 39.28769878632809,
+              "second_source_balanced_mean": 41.35985682185337,
+              "mean_first_minus_second": -2.072158035525274,
+              "source_bootstrap_95_interval": [
+                -2.1877830345601135,
+                -1.9409032274385327
+              ]
+            }
+          },
+          "gates": {
+            "known_CFA_mean_at_least_.05dB": false,
+            "known_CFA_positive_95pct_lower_bound": false,
+            "unseen_CFA_mean_at_least_.05dB": false,
+            "unseen_CFA_positive_95pct_lower_bound": false,
+            "photo_PSNR_mean_at_least_.05dB": true,
+            "photo_PSNR_positive_95pct_lower_bound": true,
+            "photo_SSIM_loss_at_most_.0001": true
+          },
+          "all_numerical_criteria_pass": false
+        }
+      ],
+      "matched_interval_effect": {
+        "comparisons": {
+          "known_CFA": {
+            "panel": "known",
+            "kind": "real",
+            "metric": "sensor_psnr",
+            "first": "V79-original4000",
+            "second": "V78-original4000",
+            "first_checkpoint_sha256": "2f3e567e4bca7bf308f79d5e613d791d612e7d950c0cd64c9c21ac548aa1f11f",
+            "second_checkpoint_sha256": "26e43921d2f4f46b39d9385c8399699f9fe1f0294f34efa4e6da0d4ad9baa7c4",
+            "sources": 4,
+            "first_source_balanced_mean": 54.186538749270966,
+            "second_source_balanced_mean": 54.19246869617038,
+            "mean_first_minus_second": -0.005929946899412286,
+            "source_bootstrap_95_interval": [
+              -0.015866703457302123,
+              0.0053711467319104145
+            ]
+          },
+          "unseen_CFA": {
+            "panel": "unseen",
+            "kind": "real",
+            "metric": "sensor_psnr",
+            "first": "V79-original4000",
+            "second": "V78-original4000",
+            "first_checkpoint_sha256": "2f3e567e4bca7bf308f79d5e613d791d612e7d950c0cd64c9c21ac548aa1f11f",
+            "second_checkpoint_sha256": "26e43921d2f4f46b39d9385c8399699f9fe1f0294f34efa4e6da0d4ad9baa7c4",
+            "sources": 5,
+            "first_source_balanced_mean": 53.8387461344401,
+            "second_source_balanced_mean": 53.83874931335449,
+            "mean_first_minus_second": -3.1789143889682237e-06,
+            "source_bootstrap_95_interval": [
+              -0.020802010430227825,
+              0.017245059543182607
+            ]
+          },
+          "photo_PSNR": {
+            "panel": "full427",
+            "kind": "photo",
+            "metric": "srgb_psnr",
+            "first": "V79-original4000",
+            "second": "V78-original4000",
+            "first_checkpoint_sha256": "2f3e567e4bca7bf308f79d5e613d791d612e7d950c0cd64c9c21ac548aa1f11f",
+            "second_checkpoint_sha256": "26e43921d2f4f46b39d9385c8399699f9fe1f0294f34efa4e6da0d4ad9baa7c4",
+            "sources": 427,
+            "first_source_balanced_mean": 36.20937508362597,
+            "second_source_balanced_mean": 36.2109895275763,
+            "mean_first_minus_second": -0.0016144439503276123,
+            "source_bootstrap_95_interval": [
+              -0.0031572093928528546,
+              -0.0005068503163177839
+            ]
+          },
+          "photo_SSIM": {
+            "panel": "full427",
+            "kind": "photo",
+            "metric": "srgb_ssim",
+            "first": "V79-original4000",
+            "second": "V78-original4000",
+            "first_checkpoint_sha256": "2f3e567e4bca7bf308f79d5e613d791d612e7d950c0cd64c9c21ac548aa1f11f",
+            "second_checkpoint_sha256": "26e43921d2f4f46b39d9385c8399699f9fe1f0294f34efa4e6da0d4ad9baa7c4",
+            "sources": 427,
+            "first_source_balanced_mean": 0.9640767187847267,
+            "second_source_balanced_mean": 0.9640928960317111,
+            "mean_first_minus_second": -1.6177246984572132e-05,
+            "source_bootstrap_95_interval": [
+              -2.9112206065923377e-05,
+              -1.3433207373660729e-06
+            ]
+          },
+          "canonical_camera_linear_PSNR": {
+            "panel": "full427",
+            "kind": "photo",
+            "metric": "linear_psnr",
+            "first": "V79-original4000",
+            "second": "V78-original4000",
+            "first_checkpoint_sha256": "2f3e567e4bca7bf308f79d5e613d791d612e7d950c0cd64c9c21ac548aa1f11f",
+            "second_checkpoint_sha256": "26e43921d2f4f46b39d9385c8399699f9fe1f0294f34efa4e6da0d4ad9baa7c4",
+            "sources": 427,
+            "first_source_balanced_mean": 39.28769878632809,
+            "second_source_balanced_mean": 39.28529685865321,
+            "mean_first_minus_second": 0.00240192767488151,
+            "source_bootstrap_95_interval": [
+              0.0016826999969169272,
+              0.002989134045897923
+            ]
+          }
+        },
+        "gates": {
+          "positive_photo_PSNR_95pct_lower_bound": false,
+          "known_CFA_loss_at_most_.03dB": true,
+          "unseen_CFA_loss_at_most_.03dB": true
+        },
+        "all_numerical_criteria_pass": false
+      },
+      "manual_native_color_detail_highlight_review": "required; not evaluated by this tool",
+      "eligible_for_automatic_extension_or_promotion": false,
+      "limits": "Threshold application only, using the separate primary coverage/arithmetic review. Does not recompute predictions, metrics or bootstrap intervals. Source/scene intervals do not estimate training-seed uncertainty. Canonical camera-linear scores retain the original target convention. Numerical passes alone cannot authorize full-frame integration, promotion or establish SOTA/100MP10s.",
+      "inputs": {
+        "review_plan": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/plan.json",
+          "sha256": "124eac6a7bb3e1cc78d053f131fc72d5e7c6ec508ae1b1443679880e488f17f2"
+        },
+        "boundaries": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/training-boundary.json",
+          "sha256": "c581a03f4edd7c8f0e4b9773404f43390115c4d5e9f4da7ddd054003b42799c5"
+        },
+        "primary_statistics": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/primary-statistics.json",
+          "sha256": "069683ffb0a1808f07c0caff1348ec0702fbbee2bcdf26b7efce093682bd3690"
+        },
+        "frozen_criteria": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-v1/work/docs/directional-interval-v78-v79.md",
+          "sha256": "21f128f78710ba48f37ee4bfd04535e8320a102a4a197845c61521d7fc1b9745"
+        },
+        "driver": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/eligibility-worker.py",
+          "sha256": "c9b3519f8fa09cd20fa4fb28ecb58cd4fa7279f0a0b3f8cacd1518bdfdeee16e"
+        }
+      }
+    }
+  },
+  "sensitivity_result": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/work/outputs/sensitivity/result.json",
+    "sha256": "16e5467305829892937edff6145319a7dea2c2b8c2ffe6e2b8f94ec0c72050ea"
+  },
+  "sensitivity_independent_audit": {
+    "source": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/work/outputs/sensitivity/independent-audit.json",
+      "sha256": "385f9f4f32169f1ab70bfb223d422540e78a828107c184293ca28dec56af09a3"
+    },
+    "result": {
+      "status": "completed-independent-Decimal-source-and-scalar-bootstrap-audit",
+      "producer_result": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/work/outputs/sensitivity/result.json",
+        "sha256": "16e5467305829892937edff6145319a7dea2c2b8c2ffe6e2b8f94ec0c72050ea"
+      },
+      "auditor": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/work/scripts/audit_commons_source_sensitivity.py",
+        "sha256": "ab4f943cdd093e3ac919318f5f7e6274323a47cfa279fdd844a4d554c195fe71"
+      },
+      "source_rows": 2562,
+      "raw_case_metric_values_reaggregated": 215208,
+      "source_metric_scalars": 7686,
+      "source_max_difference": 0.0,
+      "comparisons": 81,
+      "comparison_statistic_scalars": 540,
+      "comparison_max_difference": 3.552713678800501e-15,
+      "actual_new_neural_forwards": 0,
+      "limits": "Independent arithmetic and coverage from existing score logs only; metrics/prediction pixels and classical witness definitions are not recomputed. Same specified NumPy PCG64 draws, separately reconstructed and byte-bound; scalar summation and manual quantile replace production vectorized bootstrap. Does not measure training/selection or unknown scene-family uncertainty or promote a model."
+    }
+  },
+  "descriptive_condition_effects": [
+    {
+      "kind": "photo",
+      "condition": "adc-only",
+      "metric": "linear_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 42.31596867876254,
+      "second_source_balanced_mean": 41.96092165270231,
+      "mean_first_minus_second": 0.355047026060225,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "adc-only",
+      "metric": "linear_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 42.319807771776546,
+      "second_source_balanced_mean": 41.96092165270231,
+      "mean_first_minus_second": 0.3588861190742296,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "adc-only",
+      "metric": "srgb_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 36.26336821236711,
+      "second_source_balanced_mean": 36.02426349809633,
+      "mean_first_minus_second": 0.23910471427077712,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "adc-only",
+      "metric": "srgb_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 36.25113300528962,
+      "second_source_balanced_mean": 36.02426349809633,
+      "mean_first_minus_second": 0.2268695071932862,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "adc-only",
+      "metric": "srgb_ssim",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 0.9730694370052017,
+      "second_source_balanced_mean": 0.9720197099084318,
+      "mean_first_minus_second": 0.001049727096769793,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "adc-only",
+      "metric": "srgb_ssim",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 0.9730961890564032,
+      "second_source_balanced_mean": 0.9720197099084318,
+      "mean_first_minus_second": 0.0010764791479713743,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "iso100-prior",
+      "metric": "linear_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 42.828069454613,
+      "second_source_balanced_mean": 42.00107138050803,
+      "mean_first_minus_second": 0.8269980741049702,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "iso100-prior",
+      "metric": "linear_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 42.83110248288729,
+      "second_source_balanced_mean": 42.00107138050803,
+      "mean_first_minus_second": 0.8300311023792561,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "iso100-prior",
+      "metric": "srgb_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 38.09532986982645,
+      "second_source_balanced_mean": 37.627289993143194,
+      "mean_first_minus_second": 0.46803987668325525,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "iso100-prior",
+      "metric": "srgb_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 38.09364012197812,
+      "second_source_balanced_mean": 37.627289993143194,
+      "mean_first_minus_second": 0.4663501288349232,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "iso100-prior",
+      "metric": "srgb_ssim",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 0.9810619533620338,
+      "second_source_balanced_mean": 0.9804641416675871,
+      "mean_first_minus_second": 0.0005978116944467156,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "iso100-prior",
+      "metric": "srgb_ssim",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 0.9810535597159098,
+      "second_source_balanced_mean": 0.9804641416675871,
+      "mean_first_minus_second": 0.0005894180483226195,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "iso1600-prior",
+      "metric": "linear_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 41.39696113845503,
+      "second_source_balanced_mean": 40.76044856301515,
+      "mean_first_minus_second": 0.6365125754398819,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "iso1600-prior",
+      "metric": "linear_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 41.39733489391676,
+      "second_source_balanced_mean": 40.76044856301515,
+      "mean_first_minus_second": 0.6368863309015993,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "iso1600-prior",
+      "metric": "srgb_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 36.811948221237934,
+      "second_source_balanced_mean": 36.46161596668967,
+      "mean_first_minus_second": 0.35033225454826267,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "iso1600-prior",
+      "metric": "srgb_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 36.809603110409455,
+      "second_source_balanced_mean": 36.46161596668967,
+      "mean_first_minus_second": 0.3479871437197826,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "iso1600-prior",
+      "metric": "srgb_ssim",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 0.9713217197662215,
+      "second_source_balanced_mean": 0.9707640650261202,
+      "mean_first_minus_second": 0.0005576547401012805,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "iso1600-prior",
+      "metric": "srgb_ssim",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 0.9712992954030808,
+      "second_source_balanced_mean": 0.9707640650261202,
+      "mean_first_minus_second": 0.0005352303769605221,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "iso12800-prior",
+      "metric": "linear_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 38.04863256257926,
+      "second_source_balanced_mean": 37.718082749592334,
+      "mean_first_minus_second": 0.3305498129869233,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "iso12800-prior",
+      "metric": "linear_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 38.050040243939435,
+      "second_source_balanced_mean": 37.718082749592334,
+      "mean_first_minus_second": 0.3319574943471011,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "iso12800-prior",
+      "metric": "srgb_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 33.51359596073767,
+      "second_source_balanced_mean": 33.341911006588006,
+      "mean_first_minus_second": 0.17168495414966164,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "iso12800-prior",
+      "metric": "srgb_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 33.512263848574996,
+      "second_source_balanced_mean": 33.341911006588006,
+      "mean_first_minus_second": 0.1703528419869845,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "iso12800-prior",
+      "metric": "srgb_ssim",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 0.9352834291703808,
+      "second_source_balanced_mean": 0.9348877337205047,
+      "mean_first_minus_second": 0.0003956954498760036,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "iso12800-prior",
+      "metric": "srgb_ssim",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 0.9352262734110517,
+      "second_source_balanced_mean": 0.9348877337205047,
+      "mean_first_minus_second": 0.00033853969054702294,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "shadows",
+      "metric": "linear_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 54.6674157797034,
+      "second_source_balanced_mean": 54.658336998986414,
+      "mean_first_minus_second": 0.009078780716978693,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "shadows",
+      "metric": "linear_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 54.666240156115634,
+      "second_source_balanced_mean": 54.658336998986414,
+      "mean_first_minus_second": 0.007903157129220717,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "shadows",
+      "metric": "srgb_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 39.933425706778536,
+      "second_source_balanced_mean": 39.9137843844483,
+      "mean_first_minus_second": 0.019641322330233642,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "shadows",
+      "metric": "srgb_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 39.931413947558795,
+      "second_source_balanced_mean": 39.9137843844483,
+      "mean_first_minus_second": 0.017629563110494503,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "shadows",
+      "metric": "srgb_ssim",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 0.9594179070456524,
+      "second_source_balanced_mean": 0.959266900771954,
+      "mean_first_minus_second": 0.00015100627369847176,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "shadows",
+      "metric": "srgb_ssim",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 0.9593933750580848,
+      "second_source_balanced_mean": 0.959266900771954,
+      "mean_first_minus_second": 0.0001264742861307756,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "highlights",
+      "metric": "linear_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 15.875439215599792,
+      "second_source_balanced_mean": 33.17473425965677,
+      "mean_first_minus_second": -17.299295044056983,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "highlights",
+      "metric": "linear_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 15.884056823315051,
+      "second_source_balanced_mean": 33.17473425965677,
+      "mean_first_minus_second": -17.290677436341724,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "highlights",
+      "metric": "srgb_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 33.400985139315246,
+      "second_source_balanced_mean": 33.034610102829944,
+      "mean_first_minus_second": 0.36637503648530123,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "highlights",
+      "metric": "srgb_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 33.410714716766144,
+      "second_source_balanced_mean": 33.034610102829944,
+      "mean_first_minus_second": 0.3761046139361987,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "highlights",
+      "metric": "srgb_ssim",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 0.9693614185484567,
+      "second_source_balanced_mean": 0.967079542978586,
+      "mean_first_minus_second": 0.0022818755698706564,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "highlights",
+      "metric": "srgb_ssim",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 0.9693614890410693,
+      "second_source_balanced_mean": 0.967079542978586,
+      "mean_first_minus_second": 0.0022819460624833297,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "legacy-noise",
+      "metric": "linear_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 39.86459118085946,
+      "second_source_balanced_mean": 39.24540214851255,
+      "mean_first_minus_second": 0.6191890323469176,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "legacy-noise",
+      "metric": "linear_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 39.86530913234594,
+      "second_source_balanced_mean": 39.24540214851255,
+      "mean_first_minus_second": 0.6199069838334024,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "legacy-noise",
+      "metric": "srgb_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 35.45827358277118,
+      "second_source_balanced_mean": 35.127350253299475,
+      "mean_first_minus_second": 0.3309233294717043,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "legacy-noise",
+      "metric": "srgb_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 35.456856834804704,
+      "second_source_balanced_mean": 35.127350253299475,
+      "mean_first_minus_second": 0.3295065815052327,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "legacy-noise",
+      "metric": "srgb_ssim",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 0.9591344073240315,
+      "second_source_balanced_mean": 0.9585466768758358,
+      "mean_first_minus_second": 0.00058773044819575,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "photo",
+      "condition": "legacy-noise",
+      "metric": "srgb_ssim",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 427,
+      "first_source_balanced_mean": 0.9591068498074868,
+      "second_source_balanced_mean": 0.9585466768758358,
+      "mean_first_minus_second": 0.0005601729316510417,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "adc-only",
+      "metric": "linear_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 38.16317129135132,
+      "second_source_balanced_mean": 37.74427169561386,
+      "mean_first_minus_second": 0.4188995957374573,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "adc-only",
+      "metric": "linear_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 38.18745583295822,
+      "second_source_balanced_mean": 37.74427169561386,
+      "mean_first_minus_second": 0.44318413734436035,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "adc-only",
+      "metric": "srgb_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 34.466744780540466,
+      "second_source_balanced_mean": 34.02884650230408,
+      "mean_first_minus_second": 0.43789827823638916,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "adc-only",
+      "metric": "srgb_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 34.47418940067291,
+      "second_source_balanced_mean": 34.02884650230408,
+      "mean_first_minus_second": 0.44534289836883545,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "adc-only",
+      "metric": "srgb_ssim",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 0.9724580524489284,
+      "second_source_balanced_mean": 0.9681155411526561,
+      "mean_first_minus_second": 0.004342511296272278,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "adc-only",
+      "metric": "srgb_ssim",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 0.972678093239665,
+      "second_source_balanced_mean": 0.9681155411526561,
+      "mean_first_minus_second": 0.004562552087008953,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "iso100-prior",
+      "metric": "linear_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 39.88078582286835,
+      "second_source_balanced_mean": 37.58241385221481,
+      "mean_first_minus_second": 2.298371970653534,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "iso100-prior",
+      "metric": "linear_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 39.906395971775055,
+      "second_source_balanced_mean": 37.58241385221481,
+      "mean_first_minus_second": 2.3239821195602417,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "iso100-prior",
+      "metric": "srgb_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 36.66604048013687,
+      "second_source_balanced_mean": 35.16087472438812,
+      "mean_first_minus_second": 1.5051657557487488,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "iso100-prior",
+      "metric": "srgb_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 36.684712052345276,
+      "second_source_balanced_mean": 35.16087472438812,
+      "mean_first_minus_second": 1.5238373279571533,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "iso100-prior",
+      "metric": "srgb_ssim",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 0.9871820192784071,
+      "second_source_balanced_mean": 0.985256184823811,
+      "mean_first_minus_second": 0.0019258344545960426,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "iso100-prior",
+      "metric": "srgb_ssim",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 0.98722904920578,
+      "second_source_balanced_mean": 0.985256184823811,
+      "mean_first_minus_second": 0.001972864381968975,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "iso1600-prior",
+      "metric": "linear_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 39.706510841846466,
+      "second_source_balanced_mean": 37.70070123672485,
+      "mean_first_minus_second": 2.0058096051216125,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "iso1600-prior",
+      "metric": "linear_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 39.72107404470444,
+      "second_source_balanced_mean": 37.70070123672485,
+      "mean_first_minus_second": 2.0203728079795837,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "iso1600-prior",
+      "metric": "srgb_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 36.5785166323185,
+      "second_source_balanced_mean": 35.275972962379456,
+      "mean_first_minus_second": 1.3025436699390411,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "iso1600-prior",
+      "metric": "srgb_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 36.58979606628418,
+      "second_source_balanced_mean": 35.275972962379456,
+      "mean_first_minus_second": 1.3138231039047241,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "iso1600-prior",
+      "metric": "srgb_ssim",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 0.9866904290392995,
+      "second_source_balanced_mean": 0.984932092949748,
+      "mean_first_minus_second": 0.0017583360895514488,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "iso1600-prior",
+      "metric": "srgb_ssim",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 0.9867242546752095,
+      "second_source_balanced_mean": 0.984932092949748,
+      "mean_first_minus_second": 0.001792161725461483,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "iso12800-prior",
+      "metric": "linear_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 38.30440962314606,
+      "second_source_balanced_mean": 37.15583425760269,
+      "mean_first_minus_second": 1.1485753655433655,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "iso12800-prior",
+      "metric": "linear_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 38.30690532922745,
+      "second_source_balanced_mean": 37.15583425760269,
+      "mean_first_minus_second": 1.1510710716247559,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "iso12800-prior",
+      "metric": "srgb_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 35.518301010131836,
+      "second_source_balanced_mean": 34.75341281294823,
+      "mean_first_minus_second": 0.764888197183609,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "iso12800-prior",
+      "metric": "srgb_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 35.52300900220871,
+      "second_source_balanced_mean": 34.75341281294823,
+      "mean_first_minus_second": 0.7695961892604828,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "iso12800-prior",
+      "metric": "srgb_ssim",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 0.9820670308545232,
+      "second_source_balanced_mean": 0.980520699173212,
+      "mean_first_minus_second": 0.0015463316813111305,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "iso12800-prior",
+      "metric": "srgb_ssim",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 0.9821140244603157,
+      "second_source_balanced_mean": 0.980520699173212,
+      "mean_first_minus_second": 0.001593325287103653,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "shadows",
+      "metric": "linear_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 55.478069722652435,
+      "second_source_balanced_mean": 55.44098079204559,
+      "mean_first_minus_second": 0.03708893060684204,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "shadows",
+      "metric": "linear_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 55.47612124681473,
+      "second_source_balanced_mean": 55.44098079204559,
+      "mean_first_minus_second": 0.03514045476913452,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "shadows",
+      "metric": "srgb_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 42.37529516220093,
+      "second_source_balanced_mean": 42.286876916885376,
+      "mean_first_minus_second": 0.08841824531555176,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "shadows",
+      "metric": "srgb_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 42.38009113073349,
+      "second_source_balanced_mean": 42.286876916885376,
+      "mean_first_minus_second": 0.09321421384811401,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "shadows",
+      "metric": "srgb_ssim",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 0.9870205949991941,
+      "second_source_balanced_mean": 0.9869811059907079,
+      "mean_first_minus_second": 3.9489008486270905e-05,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "shadows",
+      "metric": "srgb_ssim",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 0.9870576849207282,
+      "second_source_balanced_mean": 0.9869811059907079,
+      "mean_first_minus_second": 7.657893002033234e-05,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "highlights",
+      "metric": "linear_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 11.133426740765572,
+      "second_source_balanced_mean": 28.932796090841293,
+      "mean_first_minus_second": -17.79936935007572,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "highlights",
+      "metric": "linear_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 11.140094056725502,
+      "second_source_balanced_mean": 28.932796090841293,
+      "mean_first_minus_second": -17.79270203411579,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "highlights",
+      "metric": "srgb_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 29.432702392339706,
+      "second_source_balanced_mean": 29.394408524036407,
+      "mean_first_minus_second": 0.03829386830329895,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "highlights",
+      "metric": "srgb_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 29.434115439653397,
+      "second_source_balanced_mean": 29.394408524036407,
+      "mean_first_minus_second": 0.039706915616989136,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "highlights",
+      "metric": "srgb_ssim",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 0.9628337230533361,
+      "second_source_balanced_mean": 0.9455400072038174,
+      "mean_first_minus_second": 0.017293715849518776,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "highlights",
+      "metric": "srgb_ssim",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 0.9629539763554931,
+      "second_source_balanced_mean": 0.9455400072038174,
+      "mean_first_minus_second": 0.0174139691516757,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "legacy-noise",
+      "metric": "linear_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 39.20857608318329,
+      "second_source_balanced_mean": 36.78914028406143,
+      "mean_first_minus_second": 2.4194357991218567,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "legacy-noise",
+      "metric": "linear_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 39.21675992012024,
+      "second_source_balanced_mean": 36.78914028406143,
+      "mean_first_minus_second": 2.4276196360588074,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "legacy-noise",
+      "metric": "srgb_psnr",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 36.23086333274841,
+      "second_source_balanced_mean": 34.62677800655365,
+      "mean_first_minus_second": 1.6040853261947632,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "legacy-noise",
+      "metric": "srgb_psnr",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 36.2384797334671,
+      "second_source_balanced_mean": 34.62677800655365,
+      "mean_first_minus_second": 1.6117017269134521,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "legacy-noise",
+      "metric": "srgb_ssim",
+      "first": "V78-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 0.9852749742567539,
+      "second_source_balanced_mean": 0.9828810980543494,
+      "mean_first_minus_second": 0.002393876202404499,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    },
+    {
+      "kind": "synthetic",
+      "condition": "legacy-noise",
+      "metric": "srgb_ssim",
+      "first": "V79-original4000",
+      "second": "V63-parent",
+      "sources": 16,
+      "first_source_balanced_mean": 0.985305524431169,
+      "second_source_balanced_mean": 0.9828810980543494,
+      "mean_first_minus_second": 0.0024244263768196106,
+      "scope": "Descriptive fixed-condition source means; no condition-specific confidence interval."
+    }
+  ],
+  "camera_early18_comparisons_exactly_match_complete_statistics": true,
+  "photo_early6_native_triplets_exactly_match_complete_summary": true,
+  "prior_native_review": {
+    "path": "/home/dllu/proj/demosaic/docs/results/directional-interval-native-interim-v1.json",
+    "sha256": "def4c2e7bbdeaaa2d1359e852a8dac2073b126506ab5652589372032366894dc"
+  },
+  "GFX_actual_view": {
+    "source": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/early-native-review-v1/gfx/manual-view.json",
+      "sha256": "45f021496999edcd7d39be8b88c6a8bdd26981d48cea41197de1fcaa57bb511c"
+    },
+    "result": {
+      "status": "actually-viewed-all28-native-GFX-cells-partial-full-study-review",
+      "recorded_UTC": "2026-10-18T22:36:22.654057+00:00",
+      "board": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/early-native-review-v1/gfx/final/board.png",
+        "sha256": "8517f239d3e04e3ca795b3c0de0ee91c713d9f1e584f6e784d5dc81095b28ed8"
+      },
+      "receipt": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/early-native-review-v1/gfx/final/board.json",
+        "sha256": "59835fb8caf80575a035cf8e14dab468ee922886796e8398efd84abaac228995"
+      },
+      "triplets": 20,
+      "native_cells": 28,
+      "all_source_pixels_reopened_after_view": true,
+      "actually_viewed_original_resolution": true,
+      "observation": "Sky/building/foliage/fence remain visually close to genuine parent/V43. Fence lines are coherent, foliage stays soft, and an isolated bright fence point persists. RawNIND shows more structured mesh and residual grain/color artifacts. No clear broad new detail advantage between final arms and parent. Independent ISO100/f5.6 is not exact GT; source aperture/time/motion differ. B4/native512 contexts, not a new full102MP restore.",
+      "prior40_cells": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/early-native-review-v1/manual-view.json",
+        "sha256": "9887c748403377d0b88d82eda788de9191d83924f175d63a31d3095e37ae30e7"
+      }
+    }
+  },
+  "native_review_so_far": {
+    "source_triplets": 48,
+    "native_cells": 68,
+    "remaining_expected_triplets": 33,
+    "remaining_expected_cells": 57,
+    "full_color_analytic_highlight_native_review_complete": false
+  },
+  "published_new_PNG_copies": [
+    {
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/directional-interval-interim-gfx-native.png",
+        "sha256": "8517f239d3e04e3ca795b3c0de0ee91c713d9f1e584f6e784d5dc81095b28ed8"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/early-native-review-v1/gfx/final/board.png",
+        "sha256": "8517f239d3e04e3ca795b3c0de0ee91c713d9f1e584f6e784d5dc81095b28ed8"
+      }
+    },
+    {
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/directional-interval-interim-v78-foliage.png",
+        "sha256": "fed8f0e14131d22d1fde4ffccf7d2fdcc38fe951c302069574328f93fb4ce531"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/early-native-review-v1/gfx/final/native-fed8f0e14131d22d1fde4ffccf7d2fdcc38fe951c302069574328f93fb4ce531.png",
+        "sha256": "fed8f0e14131d22d1fde4ffccf7d2fdcc38fe951c302069574328f93fb4ce531"
+      },
+      "crop": {
+        "image": "native-fed8f0e14131d22d1fde4ffccf7d2fdcc38fe951c302069574328f93fb4ce531.png",
+        "caption": "foliage / V78-original4000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "fed8f0e14131d22d1fde4ffccf7d2fdcc38fe951c302069574328f93fb4ce531",
+        "region": {
+          "name": "foliage",
+          "noisy_xy": [
+            8890,
+            5570
+          ],
+          "reference_xy": [
+            8890,
+            5570
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9597686529159546
+        },
+        "context_xywh": [
+          8714,
+          5394,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "display_exposure": 4,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "compute_precision": "float32",
+        "device": "cuda",
+        "source": {
+          "fixture": {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-inputs-v1/inputs.json",
+            "sha256": "11655660520041c0b9255f197758c6c313ef50834605dc78350c1e5c6f3d8784"
+          },
+          "observation": {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-inputs-v1/GFX-four-contexts-native512.npz",
+            "sha256": "2975a90f272b201a81954e6d1e1c41d58ff18c6249c22274b17f8dea0471cbd2"
+          },
+          "GFX_sources": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              }
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              }
+            }
+          ]
+        },
+        "model_label": "V78-original4000",
+        "checkpoint_sha256": "26e43921d2f4f46b39d9385c8399699f9fe1f0294f34efa4e6da0d4ad9baa7c4",
+        "model": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-v1/work/runs/dino-convnext-directional-control-v78/last.pt",
+          "sha256": "26e43921d2f4f46b39d9385c8399699f9fe1f0294f34efa4e6da0d4ad9baa7c4",
+          "arm": "control",
+          "step": 4000,
+          "kind": "joint-checkpoint",
+          "label": "V78-original4000",
+          "compute_policy": {
+            "benchmark": false
+          },
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/work/outputs/gfx/control-four-context-RGB-f32.npy",
+            "sha256": "99934a67e3f1375b16c7d4696f7fa5c56ebc90868983f0ee974fce69fdb3ea5e"
+          },
+          "native_source_report": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/work/outputs/gfx/report.json",
+            "sha256": "90a487d0f9a334b744271da6fff8761af358db715ce7a028e5bd15936bc50951"
+          },
+          "native_source_PNG": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/work/outputs/gfx/crop-e06811d5385f0792.png",
+            "sha256": "fed8f0e14131d22d1fde4ffccf7d2fdcc38fe951c302069574328f93fb4ce531"
+          },
+          "retained_baseline": false
+        }
+      }
+    },
+    {
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/directional-interval-interim-v78-chain-link-fence.png",
+        "sha256": "250f317df29831589909ad06ab13096554553460c0c039981559d3031028a823"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/early-native-review-v1/gfx/final/native-250f317df29831589909ad06ab13096554553460c0c039981559d3031028a823.png",
+        "sha256": "250f317df29831589909ad06ab13096554553460c0c039981559d3031028a823"
+      },
+      "crop": {
+        "image": "native-250f317df29831589909ad06ab13096554553460c0c039981559d3031028a823.png",
+        "caption": "chain-link-fence / V78-original4000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "250f317df29831589909ad06ab13096554553460c0c039981559d3031028a823",
+        "region": {
+          "name": "chain-link-fence",
+          "noisy_xy": [
+            2240,
+            6000
+          ],
+          "reference_xy": [
+            2241,
+            6000
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9550720453262329
+        },
+        "context_xywh": [
+          2064,
+          5824,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "display_exposure": 4,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "compute_precision": "float32",
+        "device": "cuda",
+        "source": {
+          "fixture": {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-inputs-v1/inputs.json",
+            "sha256": "11655660520041c0b9255f197758c6c313ef50834605dc78350c1e5c6f3d8784"
+          },
+          "observation": {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-inputs-v1/GFX-four-contexts-native512.npz",
+            "sha256": "2975a90f272b201a81954e6d1e1c41d58ff18c6249c22274b17f8dea0471cbd2"
+          },
+          "GFX_sources": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              }
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              }
+            }
+          ]
+        },
+        "model_label": "V78-original4000",
+        "checkpoint_sha256": "26e43921d2f4f46b39d9385c8399699f9fe1f0294f34efa4e6da0d4ad9baa7c4",
+        "model": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-v1/work/runs/dino-convnext-directional-control-v78/last.pt",
+          "sha256": "26e43921d2f4f46b39d9385c8399699f9fe1f0294f34efa4e6da0d4ad9baa7c4",
+          "arm": "control",
+          "step": 4000,
+          "kind": "joint-checkpoint",
+          "label": "V78-original4000",
+          "compute_policy": {
+            "benchmark": false
+          },
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/work/outputs/gfx/control-four-context-RGB-f32.npy",
+            "sha256": "99934a67e3f1375b16c7d4696f7fa5c56ebc90868983f0ee974fce69fdb3ea5e"
+          },
+          "native_source_report": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/work/outputs/gfx/report.json",
+            "sha256": "90a487d0f9a334b744271da6fff8761af358db715ce7a028e5bd15936bc50951"
+          },
+          "native_source_PNG": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/work/outputs/gfx/crop-d0aca10f097614e4.png",
+            "sha256": "250f317df29831589909ad06ab13096554553460c0c039981559d3031028a823"
+          },
+          "retained_baseline": false
+        }
+      }
+    },
+    {
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/directional-interval-interim-v79-foliage.png",
+        "sha256": "f87f29cffcf943cd8c6d0b1b8932f2434abc6c0bfbdbdf9eec9a86724406591a"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/early-native-review-v1/gfx/final/native-f87f29cffcf943cd8c6d0b1b8932f2434abc6c0bfbdbdf9eec9a86724406591a.png",
+        "sha256": "f87f29cffcf943cd8c6d0b1b8932f2434abc6c0bfbdbdf9eec9a86724406591a"
+      },
+      "crop": {
+        "image": "native-f87f29cffcf943cd8c6d0b1b8932f2434abc6c0bfbdbdf9eec9a86724406591a.png",
+        "caption": "foliage / V79-original4000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "f87f29cffcf943cd8c6d0b1b8932f2434abc6c0bfbdbdf9eec9a86724406591a",
+        "region": {
+          "name": "foliage",
+          "noisy_xy": [
+            8890,
+            5570
+          ],
+          "reference_xy": [
+            8890,
+            5570
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9597686529159546
+        },
+        "context_xywh": [
+          8714,
+          5394,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "display_exposure": 4,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "compute_precision": "float32",
+        "device": "cuda",
+        "source": {
+          "fixture": {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-inputs-v1/inputs.json",
+            "sha256": "11655660520041c0b9255f197758c6c313ef50834605dc78350c1e5c6f3d8784"
+          },
+          "observation": {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-inputs-v1/GFX-four-contexts-native512.npz",
+            "sha256": "2975a90f272b201a81954e6d1e1c41d58ff18c6249c22274b17f8dea0471cbd2"
+          },
+          "GFX_sources": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              }
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              }
+            }
+          ]
+        },
+        "model_label": "V79-original4000",
+        "checkpoint_sha256": "2f3e567e4bca7bf308f79d5e613d791d612e7d950c0cd64c9c21ac548aa1f11f",
+        "model": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-v1/work/runs/dino-convnext-directional-interval-v79/last.pt",
+          "sha256": "2f3e567e4bca7bf308f79d5e613d791d612e7d950c0cd64c9c21ac548aa1f11f",
+          "arm": "interval",
+          "step": 4000,
+          "kind": "joint-checkpoint",
+          "label": "V79-original4000",
+          "compute_policy": {
+            "benchmark": false
+          },
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/work/outputs/gfx/interval-four-context-RGB-f32.npy",
+            "sha256": "ef5c17fea31e0a88666e8ffe600ef0cd0f6b7e3691a067819c710d9a1877657a"
+          },
+          "native_source_report": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/work/outputs/gfx/report.json",
+            "sha256": "90a487d0f9a334b744271da6fff8761af358db715ce7a028e5bd15936bc50951"
+          },
+          "native_source_PNG": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/work/outputs/gfx/crop-f497326e248684ed.png",
+            "sha256": "f87f29cffcf943cd8c6d0b1b8932f2434abc6c0bfbdbdf9eec9a86724406591a"
+          },
+          "retained_baseline": false
+        }
+      }
+    },
+    {
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/directional-interval-interim-v79-chain-link-fence.png",
+        "sha256": "0ed9b045c8d22f57f873c50e1810108b79602fd3f9cf3de0534486fb6aac7fae"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/early-native-review-v1/gfx/final/native-0ed9b045c8d22f57f873c50e1810108b79602fd3f9cf3de0534486fb6aac7fae.png",
+        "sha256": "0ed9b045c8d22f57f873c50e1810108b79602fd3f9cf3de0534486fb6aac7fae"
+      },
+      "crop": {
+        "image": "native-0ed9b045c8d22f57f873c50e1810108b79602fd3f9cf3de0534486fb6aac7fae.png",
+        "caption": "chain-link-fence / V79-original4000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "0ed9b045c8d22f57f873c50e1810108b79602fd3f9cf3de0534486fb6aac7fae",
+        "region": {
+          "name": "chain-link-fence",
+          "noisy_xy": [
+            2240,
+            6000
+          ],
+          "reference_xy": [
+            2241,
+            6000
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9550720453262329
+        },
+        "context_xywh": [
+          2064,
+          5824,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "display_exposure": 4,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "compute_precision": "float32",
+        "device": "cuda",
+        "source": {
+          "fixture": {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-inputs-v1/inputs.json",
+            "sha256": "11655660520041c0b9255f197758c6c313ef50834605dc78350c1e5c6f3d8784"
+          },
+          "observation": {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-inputs-v1/GFX-four-contexts-native512.npz",
+            "sha256": "2975a90f272b201a81954e6d1e1c41d58ff18c6249c22274b17f8dea0471cbd2"
+          },
+          "GFX_sources": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              }
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              }
+            }
+          ]
+        },
+        "model_label": "V79-original4000",
+        "checkpoint_sha256": "2f3e567e4bca7bf308f79d5e613d791d612e7d950c0cd64c9c21ac548aa1f11f",
+        "model": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-v1/work/runs/dino-convnext-directional-interval-v79/last.pt",
+          "sha256": "2f3e567e4bca7bf308f79d5e613d791d612e7d950c0cd64c9c21ac548aa1f11f",
+          "arm": "interval",
+          "step": 4000,
+          "kind": "joint-checkpoint",
+          "label": "V79-original4000",
+          "compute_policy": {
+            "benchmark": false
+          },
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/work/outputs/gfx/interval-four-context-RGB-f32.npy",
+            "sha256": "ef5c17fea31e0a88666e8ffe600ef0cd0f6b7e3691a067819c710d9a1877657a"
+          },
+          "native_source_report": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/work/outputs/gfx/report.json",
+            "sha256": "90a487d0f9a334b744271da6fff8761af358db715ce7a028e5bd15936bc50951"
+          },
+          "native_source_PNG": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/work/outputs/gfx/crop-2647b82648eca531.png",
+            "sha256": "0ed9b045c8d22f57f873c50e1810108b79602fd3f9cf3de0534486fb6aac7fae"
+          },
+          "retained_baseline": false
+        }
+      }
+    }
+  ],
+  "scope": "Complete fresh primary score coverage and original fixed numerical gates, plus partial actual native viewing. Both arms fail camera requirements; interval-benefit criterion also fails on photo PSNR. Source/scene intervals do not estimate training-seed/process variability. Parent comparisons jointly change architecture, sensor-valid supervision, optimizer/horizon and corpus history; no isolated directional-architecture claim. Canonical camera-linear negatives/target convention retained. No promotion, extension, new full-frame/export/timing or SOTA claim; remaining color/analytic/highlight manual closure is mandatory."
+}

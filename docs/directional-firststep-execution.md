@@ -1,15 +1,17 @@
-# One-batch execution replay preparation
+# First-training-batch execution replay
 
-The observed first-step base-loss difference in V78/V79 remains unexplained.
-A new diagnostic captures the genuine initial model and first selected clean
-training input, then compares execution profiles without updating weights.
-The CPU harness has passed; GPU replays are queued after the current review's
-exact successful owner/child exit and all ten completed stages.
+The strict profile produces identical predictions, auxiliary output and all97
+clipped gradient tensors both within and across two fresh GPU processes.
+Disabling convolution benchmarking alone fixes the cross-process predictions
+in this fixture but leaves14 clipped-gradient tensors different. The original
+benchmarking profile changes both predictions and gradients.
+[Complete results and saved-tensor differences](results/directional-firststep-execution-complete-v1.json).
 [Source, CPU results, original failure and frozen queue](results/directional-firststep-execution-preparation-v1.json).
 
-This addresses reproducibility of future experiments. It does not change the
-completed directional training, its failed camera criteria, the ongoing fixed
-review, a model default or the working V43 reference.
+All six GPU processes completed after the exact successful reviewer exit and
+all10 original stages. No weights, AdamW or EMA were updated. This addresses
+future experiment execution; it does not change the completed directional
+training/review, failed camera criteria, a default or the working V43 reference.
 
 ## Actual CPU evidence
 
@@ -36,12 +38,11 @@ checks pass. No training or inference implementation was changed to recover.
 
 ## Fixed GPU comparison
 
-After successful evaluator exit, generate the noisy CUDA observation once from
-the captured clean batch. Its complete tensor hash must equal the actual
-original first-training-batch hash
+The noisy CUDA observation generated from the captured clean batch matches the
+actual original first-training-batch hash exactly:
 `b0ac985abbfa82a415e731e5094cb4f5ff31452e7ed7fbb4a7c39e870babcc7f`.
-Any mismatch stops the probe. Replays then load that same saved input and
-restore its recorded RNG states; original tensor strides are checked too.
+All replays load that same saved input, restore its recorded RNG states and
+check original tensor strides, genuine initial-model and frozen-DINO identities.
 
 Three profiles each get two fresh processes, with two unchanged forward/
 backward passes per process at actual B16/native256/BF16:
@@ -55,15 +56,38 @@ The third profile is a bundle of settings, not an isolated test of one flag.
 PyTorch distinguishes benchmark selection from deterministic operations and
 does not guarantee reproducibility across releases/platforms.
 [Official2.14 reproducibility guidance](https://docs.pytorch.org/docs/2.14/notes/randomness.html).
-Strict mode may reject operations such as differentiable bilinear interpolation;
-the probe records that refusal instead of silently relaxing enforcement.
+Strict mode can reject unsupported operations in other paths; this actual
+configuration completed both forwards/backwards without any downgrade.
 [Official2.14 deterministic-operation coverage](https://docs.pytorch.org/docs/2.14/generated/torch.use_deterministic_algorithms.html).
 
-Each successful pass retains output and gradient identities; first-pass tensors
-support independent per-tensor maximum/RMS comparisons across fresh processes.
-Weights remain unchanged. Cold search time is recorded but is not a steady
-throughput or batch-size benchmark. A passing one-batch replay cannot establish
-long-run training determinism, isolate the historical difference's cause or
-prove model quality. No new quality trial or execution default follows
-automatically. Only owned serial children run, under24GiB CUDA allocation and
-40GiB available-RAM/128GiB root-space checks.
+## Observed differences
+
+The99 saved tensors here are prediction, auxiliary mosaic and97 clipped
+gradients, separate from the99 restoration state entries. First-pass tensors
+are compared independently in FP64 across the two fresh processes:
+
+| Profile | Prediction maximum / RMS difference | Different clipped gradients | All99 tensors exact within both processes? |
+| --- | --- | ---: | --- |
+| Benchmark enabled |.00419557 / .000165869|93|no|
+| Benchmark disabled |0 / 0|14|no|
+| Strict bundle |0 / 0|0|yes|
+
+The maximum clipped-gradient difference is6.57421e-5 with benchmarking,
+5.12431e-7 without it and0 under strict execution. Fresh-process loss changes
+are6.05360e-7,0 and0, respectively. Equal scalar loss alone therefore cannot
+establish equal gradients. Benchmark process0 exactly reproduces the original
+V78 first loss. Full model and frozen DINO stay unchanged in every process.
+
+This demonstrates execution-profile variation with the actual original input
+and initialization. It does not identify a specific historical kernel or prove
+the cause of V79's original difference, whose initial predictions were not saved.
+The strict settings are a bundle; this is not an isolated test of each flag.
+Cold search time is recorded but is not steady throughput or a batch-size sweep.
+All exact owners/children have exited.
+
+Actual mixed-domain optimizer/EMA/RNG replay and throughput checks remain needed
+before adopting a future training policy. One batch cannot establish long-run
+determinism, model quality or portability across software/hardware versions. No
+new quality trial or execution default follows automatically. Only owned serial
+children ran under24GiB CUDA allocation and40GiB available-RAM/128GiB root-space
+checks. The original single-trajectory quality caveat remains in force.

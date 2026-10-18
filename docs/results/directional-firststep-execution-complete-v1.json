@@ -1,0 +1,87 @@
+{
+  "status": "completed-original-input-first-step-execution-replay-no-model-updates",
+  "recorded_UTC": "2026-10-18T22:46:35.378010+00:00",
+  "result": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/directional-firststep-execution-v2/result.json",
+    "sha256": "f78df2608e384bb2f5c63104f7ca3f088fe339aac4da486b3be06a3016e61645"
+  },
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/directional-firststep-execution-v2/plan.json",
+    "sha256": "d318005db9d0bbcc9e9a4f1e5d6107cc9a4ba60992d4c6f9270fea444bfb52d8"
+  },
+  "queue": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/directional-firststep-execution-v2/queue.json",
+    "sha256": "05439a10763a563f681b2a94ae75053e4895e9cf564efa37e0bf7d8e54545359"
+  },
+  "frozen_worker": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/directional-firststep-execution-v2/worker.py",
+    "sha256": "5ced1a9dec9de476ac32f5e0129bec57bfab8a3187b486aa9154cf598c4e1228"
+  },
+  "controller_source": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/directional-firststep-execution-v2/controller.py",
+    "sha256": "568d6eb510245693416093636a7ea66450201f6e419b731ef0f765598b7889a4"
+  },
+  "terminal": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/directional-firststep-execution-v2/status.json",
+    "sha256": "79242c48a4b3e4fb366d7ae2926897114f98fbae7da7bbb8994d65dd33da8011"
+  },
+  "original_batch": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/work/.cache/firststep-execution-v2/gpu-input.json",
+    "sha256": "75fdd16e12f718cea55a45084210cd4a20385d2c67084c8be67abf5af4a9268a"
+  },
+  "preparation": {
+    "path": "/home/dllu/proj/demosaic/docs/results/directional-firststep-execution-preparation-v1.json",
+    "sha256": "24a3777938a047e0c8ed459ae56c7f87f8f00cd28fb71c3d57ded57e6ca0f473"
+  },
+  "profiles": [
+    {
+      "policy": "benchmark",
+      "both_backward_complete": true,
+      "prediction_exact_across_fresh_processes": false,
+      "prediction_max_abs_difference": 0.004195570945739746,
+      "prediction_RMS_difference": 0.0001658687643133025,
+      "loss_second_minus_first": 6.05359673500061e-07,
+      "different_clipped_gradient_tensors": 93,
+      "maximum_clipped_gradient_abs_difference": 6.574206054210663e-05,
+      "all99_tensors_exact": false,
+      "within_process_all99_tensor_hashes_exact": [
+        false,
+        false
+      ]
+    },
+    {
+      "policy": "no-benchmark",
+      "both_backward_complete": true,
+      "prediction_exact_across_fresh_processes": true,
+      "prediction_max_abs_difference": 0.0,
+      "prediction_RMS_difference": 0.0,
+      "loss_second_minus_first": 0.0,
+      "different_clipped_gradient_tensors": 14,
+      "maximum_clipped_gradient_abs_difference": 5.124311428517103e-07,
+      "all99_tensors_exact": false,
+      "within_process_all99_tensor_hashes_exact": [
+        false,
+        false
+      ]
+    },
+    {
+      "policy": "strict",
+      "both_backward_complete": true,
+      "prediction_exact_across_fresh_processes": true,
+      "prediction_max_abs_difference": 0.0,
+      "prediction_RMS_difference": 0.0,
+      "loss_second_minus_first": 0.0,
+      "different_clipped_gradient_tensors": 0,
+      "maximum_clipped_gradient_abs_difference": 0.0,
+      "all99_tensors_exact": true,
+      "within_process_all99_tensor_hashes_exact": [
+        true,
+        true
+      ]
+    }
+  ],
+  "original_control_first_loss_exactly_reproduced_by_benchmark_process0": true,
+  "all_models_inputs_unchanged": true,
+  "all_owners_children_exited": true,
+  "scope": "Actual original B16/native256/BF16 first training observation, exact original full-batch hash, genuine identical initialization/frozen DINO and restored RNG. Two fresh processes/profile and two unchanged forward/backward passes/process; no AdamW/EMA update. Strict profile supported this actual path and all99 saved output/auxiliary/clipped-gradient tensors match exactly within/across processes. Benchmark-only disabling still leaves14 differing clipped gradients. This one-batch result neither establishes long-run training determinism nor isolates the historical V78/V79 difference cause. No performance, model-quality/default or promotion change; verify actual mixed-domain optimizer updates before adopting a future training policy."
+}

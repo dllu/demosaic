@@ -1,13 +1,16 @@
 # Experiment evidence
 
-The [V78/V79 directional study](directional-interval-v78-v79.md) has completed
-both original4k training budgets. Its [partial native review](directional-interval-native-interim.md)
-actually views28 triplets/40 cells, including two exact-GT triplets per final
-checkpoint. Fine cords remain missing and selected camera differences are
-modest. Both completed camera panels fail the original criteria relative to the
-fresh parent. Full427/color/analytic/highlight/GFX review is still running; no promotion.
-An [execution-only first-step replay](directional-firststep-execution.md) passes
-its genuine CPU harness check; GPU profiles wait for successful reviewer exit.
+The [completed V78/V79 original4k review](directional-interval-original4k-review.md)
+finds+.27801/+.27640dB photo PSNR over fresh V63, but failed camera criteria,
+weak texture and suppressed sign detail. All81 native triplets/125 cells and
+full numerical/color/source audits are complete. Matched interval photo PSNR
+changes−.00161dB with a negative source interval. No extension/promotion.
+The [actual first-step execution replay](directional-firststep-execution.md)
+matches all99 output/auxiliary/gradient tensors under strict execution; other
+profiles retain differences. Actual mixed-update replay remains required.
+A [private31-source RAW preparation](personal-native-quarantine.md) adds22
+source-quality-passing candidates after overlap/family review. All remain
+quarantine; active manifests and models are unchanged.
 
 The [guarded input-CFA gain pilot](guarded-input-cfa-gain.md) fails its fixed
 high-saturation screen: mean bias grows18.05% and worst bias increases. All30

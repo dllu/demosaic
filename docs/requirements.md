@@ -3,23 +3,26 @@
 The objective is the complete project in `PROMPT.md`, including trained quality,
 not just software that executes. This checklist records the evidence required.
 
-The [directional/interval study](directional-interval-v78-v79.md) has
-[completed both original 4k budgets](directional-interval-original4k-training.md)
-from genuine V63 EMA. Its
-[actual first1k state audit and review preparation](directional-interval-review-preparation.md)
-verify finite99/99/97 states and nonzero optimizer moments in all25,800 new
-parameters. Full primary/color/GFX/native review, including fresh V63 and
-matched retained V43/RawNIND references, is running. The
-[partial native review](directional-interval-native-interim.md) actually views
-28 triplets/40 cells and retains weak fine detail. Both complete camera panels
-fail the fixed improvement criteria. Remaining numerical/model-quality,
-full-frame16-bit and speed results remain pending; no model is promoted.
-The independent final boundary has passed and primary quality evaluation is
-running; all 176 sampled observations and final RNG states match across arms.
-The [completed V78 training boundary and V79 handoff](directional-v78-original4k-training-handoff.md)
-now retain all four control snapshots and verify finite final states. First-step
-base-loss variation across GPU processes remains part of the interpretation;
-the full two-arm quality review is still pending.
+The [completed original4k directional/interval review](directional-interval-original4k-review.md)
+finds+.27801/+.27640dB photo PSNR over fresh V63, but both arms fail the fixed
+known/unseen camera requirements. The matched interval photo effect is−.00161dB
+with a negative source interval. All81 triplets/125 native cells and full primary,
+source-sensitivity/color/analytic/highlight audits are complete. Fine cords and
+weak carriers remain missing; blue-sign detail is suppressed relative to the
+parent. No extension/promotion or new full-frame16-bit/timing follows. V43 stays
+the working reference. Both original budgets, finite99/99/97 states, all176
+sampled observations and final RNG identities are verified separately.
+
+The [actual first-batch execution replay](directional-firststep-execution.md)
+matches all99 output/auxiliary/clipped-gradient tensors within/across two fresh
+processes under strict execution. Disabling benchmarking alone leaves14 gradient
+tensors different. This does not establish mixed-update/long-run determinism or
+identify the historical difference's cause; no training default changes.
+The [new private RAW preparation](personal-native-quarantine.md) caches31 local
+sources and62 phase-binned targets.22 pass source clipping; source/overlap/scene
+review and72 independent FP64 code checks complete. All remain quarantine,
+outside the active128-capture dataset, pending pinned loader integration and a
+matched trained test. No private source pixels/capture metadata are published.
 
 The [guarded photometry pilot](guarded-input-cfa-gain.md) fails its fixed
 high-saturation screen and is closed without full427 continuation. All30 native
@@ -134,13 +137,13 @@ timing or production adoption follows.
 
 | Requirement | Evidence needed | Current state |
 | --- | --- | --- |
-| Modern method and DINOv3 recommendation | Primary-source research, architecture rationale, licensed pretrained backbone and ablation | Approved pinned DINOv3 weights and licenses, ViT/ConvNeXt implementations and matched ablations are recorded in [research](research.md). Mature context gains are inconsistent; the [completed RAW-native mixed16 review](packed-isotropic-mixed16-quarter-review.md) still trails older controls. The [current directional/interval study](directional-interval-v78-v79.md) retains genuine frozen ConvNeXt features and the mature RGB predictor; its final quality remains pending. SOTA is unproven |
+| Modern method and DINOv3 recommendation | Primary-source research, architecture rationale, licensed pretrained backbone and ablation | Approved pinned DINOv3 weights and licenses, ViT/ConvNeXt implementations and matched ablations are recorded in [research](research.md). Mature context gains are inconsistent; the [completed RAW-native mixed16 review](packed-isotropic-mixed16-quarter-review.md) still trails older controls. The [completed directional/interval study](directional-interval-original4k-review.md) retains genuine frozen ConvNeXt features and the mature RGB predictor; photo/color gains coexist with failed camera criteria and weak detail. SOTA is unproven |
 | Free, broad training data | Source attribution manifest, content-grouped held-out split, real corpus training | Current trial: **84,867 train / 2,303 val / 2,255 test** Commons sources in the frozen [known-series quarantine](commons-content-overlap.md), with original holdouts preserved. Native targets retain [128 captures / 106 scene groups](public-raw-expansion-v2.md); the active paired manifest has 64 paired cases across 32 training scenes. Known series are excluded, but unknown aliases and ancestral exposure remain; complete scene independence or a data-only trained gain is unproven |
 | 8×8 binning with additional precision | Linear-light float averaging and >8-bit cache, numerical tests | Linear-light averaging and uint16 caches are implemented and tested. Current Commons/native training uses 4× caches, geometry/PSF and final area2, with original 8× validation. Matching parent 4×/8× caches and the exact quarantined source subsets are audited; see [pipeline](training-pipeline.md), [cache preparation](commons-incoming-v5.md) and [content audit](commons-content-overlap.md) |
 | Geometry, optical blur, exposure, synthetic fine detail | Executable data augmentation and inspected samples | Implemented. Complete 4×→geometry/PSF→2× Commons/native targets improve full-photo PSNR by .50990 dB in the matched V34 trial; original 8× validation remains fixed |
 | Physical Bayer noise across cameras and ISO | Electron-domain Poisson/read noise, metadata and tests | Poisson/read/ADC simulation is moment-tested and signed black samples are retained. Single-capture estimates remain provisional; the [fit-support study](noise-calibration-fit-support.md) documents limits. Dedicated sensor calibration remains missing |
-| 16-bit photos and personal cameras | Native RAW metadata/CFA handling, 16-bit output, read-only photo source, real-camera examples | All four named cameras load. Mature GFX100S full-frame linear/sRGB16 and ICC/quantizer checks pass; [other-camera crops](cross-camera-qualitative.md) retain explicit comparator/reference labels. [Trained V78 EMA portability](directional-v78-original4k-training-handoff.md) passes on generated inputs; its full-frame and final quality review remains pending |
-| State-of-the-art quality, substantially better than RawNIND | Reproducible held-out numerical results and qualitative comparisons, including clipping boundaries, texture and shadows | **Unmet/unproven.** V43 step2000 remains the README reference. Later [original20k](long-commons-v63-v64-original20k-review.md), [normalization](normalization-v68-v69-original4k-review.md) and [RAW-native mixed16](packed-isotropic-mixed16-quarter-review.md) reviews show tradeoffs without promotion. The [completed V76/V77 review](camera-supervision-first1k-review.md) improves photo/color means but misses its known-camera gate and retains weak fine detail. V78/V79 final quality is pending; broad real superiority and protected-final scoring remain outstanding |
+| 16-bit photos and personal cameras | Native RAW metadata/CFA handling, 16-bit output, read-only photo source, real-camera examples | All four named cameras load. Mature GFX100S full-frame linear/sRGB16 and ICC/quantizer checks pass; [other-camera crops](cross-camera-qualitative.md) retain explicit comparator/reference labels. [Trained V78 EMA portability](directional-v78-original4k-training-handoff.md) passes on generated inputs. Final quality review is complete but fails eligibility; no new full-frame/export follows |
+| State-of-the-art quality, substantially better than RawNIND | Reproducible held-out numerical results and qualitative comparisons, including clipping boundaries, texture and shadows | **Unmet/unproven.** V43 step2000 remains the README reference. Later [original20k](long-commons-v63-v64-original20k-review.md), [normalization](normalization-v68-v69-original4k-review.md) and [RAW-native mixed16](packed-isotropic-mixed16-quarter-review.md) reviews show tradeoffs without promotion. The [completed V76/V77 review](camera-supervision-first1k-review.md) improves photo/color means but misses its known-camera gate and retains weak fine detail. The [complete V78/V79 review](directional-interval-original4k-review.md) finds+.278/.276dB photo gains but failed camera criteria and missing weak/sign detail. Broad real superiority and protected-final scoring remain outstanding |
 | 100 MP possible, target <10 s on GB10 | Actual 100 MP run, memory and timing; quality takes priority if speed misses | Full 101.996 MP restoration and mature RGB16/ICC outputs are independently verified. [IEEE FP32 measurements](mature-cudnn-fullframe.md) record warmed V43/V63 restores of 118.22/120.48 s and a separate fresh V43 restore of 166.67 s including search; these scopes differ. **The 10-second target remains unmet.** Faster rejected variants are not quality promotions; any eligible new model still needs its own full-frame/timing review |
 | Python/PyTorch/uv and shared-machine care | Locked environment, bounded memory, resumable training, measured GB10 operation | Implemented and verified; CPU restart equivalence and GB10 runs pass |
 | Diary, concise README, detailed docs | Current reproducible commands, experiment records and limitations | Present and being updated; comparator reports include native exact-GT synthetic triplets and independently labeled real references, matched foliage/fence, source/checkpoint hashes and noise/display settings |

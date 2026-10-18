@@ -1,5 +1,9 @@
 # Final4k directional study: partial native review
 
+This page retains the earlier camera/native interim. The
+[completed full4k review](directional-interval-original4k-review.md) now includes
+all primary/color/analytic/highlight/GFX results and all81 triplets/125 cells.
+
 Both final arms still lose the canopy's fine cords in the two fixed photographic
 examples. Building detail looks close to the genuine parent and V43. Both
 completed camera panels now fail the original numerical criteria. The
