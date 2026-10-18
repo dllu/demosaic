@@ -122,12 +122,25 @@ def orient(array, flip):
 
 
 def write_rgb16(path, rgb, *, metadata=None, color_space="linear-camera-RGB", flip=0):
-    """Round once to unsigned 16-bit, tag transfer/color space, no 8-bit stage."""
+    """Round once to tagged 16-bit TIFF, with bounded strip-sized temporaries."""
     path = writable_path(path)
-    if not np.isfinite(rgb).all() or rgb.ndim != 3 or rgb.shape[-1] != 3:
+    if rgb.ndim != 3 or rgb.shape[-1] != 3 or not all(rgb.shape):
         raise ValueError("Expected finite H×W×3 RGB")
+    rows_per_strip = 128
+    # Validate before opening the temporary file, without a full-frame bool array.
+    for start in range(0, rgb.shape[0], rows_per_strip):
+        if not np.isfinite(rgb[start : start + rows_per_strip]).all():
+            raise ValueError("Expected finite H×W×3 RGB")
     path.parent.mkdir(parents=True, exist_ok=True)
-    array = orient(np.rint(np.clip(rgb, 0, 1) * 65535).astype(np.uint16), flip)
+    array = orient(rgb, flip)
+
+    def strips():
+        for start in range(0, array.shape[0], rows_per_strip):
+            block = array[start : start + rows_per_strip]
+            # Keep the original arithmetic/dtype and round-to-even behavior.
+            # tifffile accepts byte strips; ndarray iterators mean whole pages.
+            yield np.rint(np.clip(block, 0, 1) * 65535).astype(np.uint16).tobytes()
+
     description = {
         "color_space": color_space,
         "bits_per_sample": 16,
@@ -140,12 +153,18 @@ def write_rgb16(path, rgb, *, metadata=None, color_space="linear-camera-RGB", fl
         profile = ImageCms.ImageCmsProfile(ImageCms.createProfile("sRGB")).tobytes()
         tags.append((34675, "B", len(profile), profile, False))
     temporary = path.with_suffix(path.suffix + ".tmp")
-    tifffile.imwrite(
-        temporary,
-        array,
-        photometric="rgb",
-        metadata=None,
-        description=json.dumps(description),
-        extratags=tags,
-    )
-    temporary.replace(path)
+    try:
+        tifffile.imwrite(
+            temporary,
+            strips(),
+            shape=array.shape,
+            dtype=np.uint16,
+            rowsperstrip=rows_per_strip,
+            photometric="rgb",
+            metadata=None,
+            description=json.dumps(description),
+            extratags=tags,
+        )
+        temporary.replace(path)
+    finally:
+        temporary.unlink(missing_ok=True)

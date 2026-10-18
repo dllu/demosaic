@@ -1,0 +1,254 @@
+{
+  "study": "RGB16 strip export engineering on a full-sized derived precision fixture; not restored output or quality evidence",
+  "status": "completed-CPU-export-pixel-and-memory-check",
+  "created": "2026-10-17T17:31:40.365430-07:00",
+  "receipt": {
+    "path": "/mnt/external/demosaic/benchmarks/rgb16-strip-export-CPU-v1/receipt.json",
+    "sha256": "bcec84a3db03b9ec461a0a6c58f4eddd3b659d9cfeee1ca2b43aa836f982b98b"
+  },
+  "driver": {
+    "path": "/mnt/external/demosaic/benchmarks/rgb16-strip-export-CPU-v1/trial.py",
+    "sha256": "1f9275057cbfed925e3e2cb0dfb86138d36b3dec0408537c2166b4fca251d469"
+  },
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/rgb16-strip-export-CPU-v1/plan.json",
+    "sha256": "da2eb93d44ab5869dbe391f51e448c7e59f71d53069e61a5b263af3d20188aad"
+  },
+  "previous_git_commit": "e4116a39997b73de1d338d0f8b9dbb06d6bf5533",
+  "retained_sources": [
+    {
+      "path": "/mnt/external/demosaic/benchmarks/rgb16-strip-export-CPU-v1/previous_io.py",
+      "sha256": "0a1599ffe7f6d935e92fc71e6b086430c6f82678a74952c3b8f31155a0bea83b"
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/rgb16-strip-export-CPU-v1/io.py",
+      "sha256": "2094984091e5e12d10fde9061c49aec6809da8a99fcba131f53255deca39807e"
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/rgb16-strip-export-CPU-v1/test_rgb16_streaming.py",
+      "sha256": "3721529ff0830793dc60337e832e0d5d3eef68d961e96354d21281b26c1bbf2f"
+    }
+  ],
+  "input": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-inputs-v1/DSCF3879-normalized-camera-RAW-f32.npy",
+    "sha256": "0bdb8ae025d0ea763339e01176f6fcb3194ba9282b1d53b495d7259337906b52"
+  },
+  "fixture": "[raw, raw*.71+.03, raw*1.2-.01]; not restored RGB",
+  "shape": [
+    8746,
+    11662,
+    3
+  ],
+  "pixels": 101995852,
+  "timing_scope": "write_rgb16 call including validation, quantization, TIFF write, atomic replace; OS page-cache write, no explicit fsync; no RAW decode/inference/input preparation/audit",
+  "memory_scope": "fresh-worker peak ru_maxrss includes common input preparation; baseline RSS is recorded separately; their difference is not an isolated export-buffer measurement",
+  "CUDA_used": false,
+  "versions": {
+    "numpy": "2.5.4",
+    "tifffile": "2026.9.20"
+  },
+  "all_pixels_equal_original_rounding": true,
+  "all_inputs_unchanged": true,
+  "full_tiffs_deleted_after_all_pixel_and_tag_audit": true,
+  "summary": {
+    "previous": {
+      "seconds": {
+        "median": 1.6585670029744506,
+        "min": 1.0064935190603137,
+        "max": 3.766672276891768
+      },
+      "peak_RSS_bytes": {
+        "median": 3726405632,
+        "min": 3725537280,
+        "max": 3726458880
+      },
+      "peak_minus_baseline_RSS_bytes": {
+        "median": 2447855616,
+        "min": 2446983168,
+        "max": 2447904768
+      }
+    },
+    "strips": {
+      "seconds": {
+        "median": 1.251089682104066,
+        "min": 1.1244994387961924,
+        "max": 1.2841988049913198
+      },
+      "peak_RSS_bytes": {
+        "median": 1668034560,
+        "min": 1667895296,
+        "max": 1668165632
+      },
+      "peak_minus_baseline_RSS_bytes": {
+        "median": 389488640,
+        "min": 389341184,
+        "max": 389615616
+      }
+    }
+  },
+  "trials": [
+    {
+      "policy": "strips",
+      "index": 0,
+      "seconds": 1.1244994387961924,
+      "baseline_RSS_bytes": 1278545920,
+      "peak_RSS_bytes": 1668034560,
+      "peak_minus_baseline_RSS_bytes": 389488640,
+      "decoded_elements_checked": 305987556,
+      "decoded_RGB16_sha256": "fb5890c3e5177e07fcc5ff2ccd5be661ff3e44f91f65ec123fbd13283d4c0593",
+      "source_RGB_f32_sha256": "0ee768df27b110ea4e539fa66d47f74466179e6a53c010b08b7d6a5809bb7c26",
+      "source_unchanged": true,
+      "TIFF_sha256": "4f75efd0e7b3ae35968e7f753353a9d89f3ca23bbdb21e43c3407cce131543e3",
+      "TIFF_bytes": 611976632,
+      "strips": 69,
+      "description": {
+        "color_space": "sRGB",
+        "bits_per_sample": 16,
+        "metadata": {
+          "source": "derived normalized RAW export fixture; not restored RGB"
+        }
+      },
+      "sRGB_ICC_profile_description": "sRGB built-in",
+      "full_TIFF_audited_then_deleted": true
+    },
+    {
+      "policy": "previous",
+      "index": 1,
+      "seconds": 1.6585670029744506,
+      "baseline_RSS_bytes": 1278554112,
+      "peak_RSS_bytes": 3725537280,
+      "peak_minus_baseline_RSS_bytes": 2446983168,
+      "decoded_elements_checked": 305987556,
+      "decoded_RGB16_sha256": "fb5890c3e5177e07fcc5ff2ccd5be661ff3e44f91f65ec123fbd13283d4c0593",
+      "source_RGB_f32_sha256": "0ee768df27b110ea4e539fa66d47f74466179e6a53c010b08b7d6a5809bb7c26",
+      "source_unchanged": true,
+      "TIFF_sha256": "a71a1ece8b0e2532a3f009b29407d7b4d02f42e95f652d8e1281710296dcdbcd",
+      "TIFF_bytes": 611976072,
+      "strips": 1,
+      "description": {
+        "color_space": "sRGB",
+        "bits_per_sample": 16,
+        "metadata": {
+          "source": "derived normalized RAW export fixture; not restored RGB"
+        }
+      },
+      "sRGB_ICC_profile_description": "sRGB built-in",
+      "full_TIFF_audited_then_deleted": true
+    },
+    {
+      "policy": "previous",
+      "index": 2,
+      "seconds": 1.0064935190603137,
+      "baseline_RSS_bytes": 1278550016,
+      "peak_RSS_bytes": 3726405632,
+      "peak_minus_baseline_RSS_bytes": 2447855616,
+      "decoded_elements_checked": 305987556,
+      "decoded_RGB16_sha256": "fb5890c3e5177e07fcc5ff2ccd5be661ff3e44f91f65ec123fbd13283d4c0593",
+      "source_RGB_f32_sha256": "0ee768df27b110ea4e539fa66d47f74466179e6a53c010b08b7d6a5809bb7c26",
+      "source_unchanged": true,
+      "TIFF_sha256": "85378ed58d1a71ff357f1ae355aa26c5683a984bab00a37e13ec720abd3d326f",
+      "TIFF_bytes": 611976072,
+      "strips": 1,
+      "description": {
+        "color_space": "sRGB",
+        "bits_per_sample": 16,
+        "metadata": {
+          "source": "derived normalized RAW export fixture; not restored RGB"
+        }
+      },
+      "sRGB_ICC_profile_description": "sRGB built-in",
+      "full_TIFF_audited_then_deleted": true
+    },
+    {
+      "policy": "strips",
+      "index": 3,
+      "seconds": 1.2841988049913198,
+      "baseline_RSS_bytes": 1278550016,
+      "peak_RSS_bytes": 1668165632,
+      "peak_minus_baseline_RSS_bytes": 389615616,
+      "decoded_elements_checked": 305987556,
+      "decoded_RGB16_sha256": "fb5890c3e5177e07fcc5ff2ccd5be661ff3e44f91f65ec123fbd13283d4c0593",
+      "source_RGB_f32_sha256": "0ee768df27b110ea4e539fa66d47f74466179e6a53c010b08b7d6a5809bb7c26",
+      "source_unchanged": true,
+      "TIFF_sha256": "117fc54be97d48a0d8461737ad7f9a86fb595ab02d399771581310223ba53a61",
+      "TIFF_bytes": 611976632,
+      "strips": 69,
+      "description": {
+        "color_space": "sRGB",
+        "bits_per_sample": 16,
+        "metadata": {
+          "source": "derived normalized RAW export fixture; not restored RGB"
+        }
+      },
+      "sRGB_ICC_profile_description": "sRGB built-in",
+      "full_TIFF_audited_then_deleted": true
+    },
+    {
+      "policy": "previous",
+      "index": 4,
+      "seconds": 3.766672276891768,
+      "baseline_RSS_bytes": 1278554112,
+      "peak_RSS_bytes": 3726458880,
+      "peak_minus_baseline_RSS_bytes": 2447904768,
+      "decoded_elements_checked": 305987556,
+      "decoded_RGB16_sha256": "fb5890c3e5177e07fcc5ff2ccd5be661ff3e44f91f65ec123fbd13283d4c0593",
+      "source_RGB_f32_sha256": "0ee768df27b110ea4e539fa66d47f74466179e6a53c010b08b7d6a5809bb7c26",
+      "source_unchanged": true,
+      "TIFF_sha256": "c7171be3bf2dfb217c10decffa3609ce4aada6a4c89db5cc46893ce1b26edcd5",
+      "TIFF_bytes": 611976072,
+      "strips": 1,
+      "description": {
+        "color_space": "sRGB",
+        "bits_per_sample": 16,
+        "metadata": {
+          "source": "derived normalized RAW export fixture; not restored RGB"
+        }
+      },
+      "sRGB_ICC_profile_description": "sRGB built-in",
+      "full_TIFF_audited_then_deleted": true
+    },
+    {
+      "policy": "strips",
+      "index": 5,
+      "seconds": 1.251089682104066,
+      "baseline_RSS_bytes": 1278554112,
+      "peak_RSS_bytes": 1667895296,
+      "peak_minus_baseline_RSS_bytes": 389341184,
+      "decoded_elements_checked": 305987556,
+      "decoded_RGB16_sha256": "fb5890c3e5177e07fcc5ff2ccd5be661ff3e44f91f65ec123fbd13283d4c0593",
+      "source_RGB_f32_sha256": "0ee768df27b110ea4e539fa66d47f74466179e6a53c010b08b7d6a5809bb7c26",
+      "source_unchanged": true,
+      "TIFF_sha256": "a9c7aa32aa86f6a2e69943c363e0c88afca092ff0d4d4ba9a1d3d48f967c6896",
+      "TIFF_bytes": 611976632,
+      "strips": 69,
+      "description": {
+        "color_space": "sRGB",
+        "bits_per_sample": 16,
+        "metadata": {
+          "source": "derived normalized RAW export fixture; not restored RGB"
+        }
+      },
+      "sRGB_ICC_profile_description": "sRGB built-in",
+      "full_TIFF_audited_then_deleted": true
+    }
+  ],
+  "tests": {
+    "passed": 76,
+    "skipped": 2,
+    "skip_reason": "CUDA-only; CUDA hidden",
+    "files": [
+      "tests/test_rgb16_streaming.py",
+      "tests/test_restoration.py",
+      "tests/test_rgb16_export_difference.py",
+      "tests/test_inference_alignment.py",
+      "tests/test_inference_profile_hash.py"
+    ],
+    "Ruff": "passed"
+  },
+  "limits": [
+    "One machine while owned training and CPU diagnostic were active.",
+    "Page-cache write timings without fsync, with overlapping ranges; no reliable speedup claim.",
+    "Derived RGB precision fixture; no restoration, DINO, visual quality, or end-to-end inference conclusion.",
+    "Running frozen studies retain their original export implementation."
+  ]
+}
