@@ -1,12 +1,14 @@
 # Experiment evidence
 
-The [new mature-parent objective comparison](reconstruction-objective-v74-v75.md)
-has completed both first1k arms and its independent full-state/source audit.
-Both arms use the reviewed84,867-source corpus and genuine V63 EMA; only
-the reconstruction objective differs. One hundred focused tests pass in total,
-with one CUDA test skipped. The [first fixed GT views and running review](reconstruction-objective-first1k-review.md)
-retain missing fine detail. Full trained quality/native review is pending;
-neither the new loss nor the larger corpus has a demonstrated gain yet.
+The [completed mature-parent objective comparison](reconstruction-objective-first1k-review.md)
+finds+.02026dB photo PSNR for V75 log-MSE over V74 control,95% source interval
+[+.00651,+.03618], below the predeclared.03dB continuation minimum. Both stop
+at1k without promotion or extension. Camera gains are+.06518/+.03418dB;
+the unseen interval crosses zero. SSIM/chroma/highlight tradeoffs and missing
+fine detail remain. All67 native triplets/111 cells, full427/camera panels,
+source sensitivities and independent color/analytic audits are complete. The
+84,867-source corpus is shared between arms; its isolated benefit is unproven.
+V43 remains the working reference.
 
 The [completed mature FP32 full-frame and CLI validation](mature-cudnn-fullframe.md)
 adds opt-in `infer --cudnn-benchmark`. Warmed V43/V63 restores fall from206.88/209.35s

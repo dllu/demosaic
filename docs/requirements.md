@@ -12,12 +12,14 @@ adds optional autotuning, with118.22/120.48s warmed V43/V63 restores and a166.67
 fresh V43 CLI restore including search. All full unquantized values and four
 RGB16 exports pass the original gates; sub10s remains unmet.
 
-The [new mature-parent objective trial](reconstruction-objective-v74-v75.md)
-has completed both1k boundaries on the cleaned84,867-source corpus. Its
-[source/state audit and first fixed GT views](reconstruction-objective-first1k-review.md)
-are complete, with full quality/native review running. Missing fine detail
-remains in the selected views. Engineering success does not establish a loss/data quality benefit;
-all final quality/speed requirements below remain outstanding.
+The [completed mature-parent objective trial](reconstruction-objective-first1k-review.md)
+finds+.02026dB matched log-MSE photo PSNR, below its predeclared.03dB
+continuation threshold. Both arms stop at1k without promotion or extension.
+All67 native triplets/111 cells and full numerical/color/source-sensitivity
+checks are complete. Small camera gains have an unseen interval crossing zero;
+missing fine detail and color/highlight tradeoffs remain. An isolated benefit
+from the shared84,867-source corpus is unproven.
+All final quality/speed requirements below remain outstanding.
 
 Latest: the [completed RAW-native 40k review](packed-isotropic-quarter-review.md)
 confirms own8k progress, but 29.73/29.95dB photo scores, residual native grain

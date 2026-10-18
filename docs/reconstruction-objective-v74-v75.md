@@ -9,7 +9,8 @@ quality/native review. No automatic continuation follows.
 
 Both1k boundaries are now complete. The [independent boundary and first native
 views](reconstruction-objective-first1k-review.md) are published while the full
-FP32 review runs; they do not yet establish a trained-quality gain.
+FP32 review runs. Camera means improve slightly with log-MSE; the unseen scene
+interval crosses zero. A broad quality gain and a continuation remain unproven.
 
 [Frozen plan, exact source/data/checkpoint hashes, actual CPU/CUDA engineering
 results and verified-live launch snapshot](results/reconstruction-objective-preparation-v1.json).
@@ -152,3 +153,13 @@ There is no automatic continuation or model promotion. An eligible improved
 candidate additionally needs full102MP FP32/RGB16 output and timing validation,
 with cold and warmed scopes separate. Project SOTA, decisive real-photo
 superiority and sub10s inference remain unproven.
+
+## Completed first1k decision
+
+The [complete quality/native review](reconstruction-objective-first1k-review.md)
+finds+.02026dB photo PSNR for log-MSE over control, with a positive source
+interval but below the original.03dB minimum. Both source-exclusion cohorts
+remain below that minimum. Small camera gains, slightly worse photo SSIM and
+highlight/color tradeoffs do not establish broad improvement. All67 native
+triplets/111 cells and independent audits are complete. Both stop at1k; neither
+is promoted or extended to4k. The original threshold remains unchanged.
