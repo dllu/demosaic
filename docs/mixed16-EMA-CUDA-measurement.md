@@ -1,8 +1,12 @@
-# Queued CUDA EMA measurement
+# CUDA EMA measurement
 
-A bounded EMA comparison now waits after the existing inference profiler.
-The waiting controller is live without children. There is no GPU EMA result
-yet, and production training retains the original scalar loop.
+The bounded comparison completed after the inference profiler and its exact
+owner exited. Both actual10k checkpoints pass byte-identical CUDA updates at
+all eight schedule positions. Isolated scalar/grouped medians are3.282/.400ms
+for no-DINO and3.371/.393ms for DINO; two grouped kernels replace852/865
+scalar kernels. The [completed execution analysis](mixed16-quarter-execution-profile.md)
+records the traces, limits and next measurement. Production training retains
+the scalar loop; no whole-step speedup has been measured.
 
 [Frozen sources, plan, owners and executed CPU checks](results/mixed16-EMA-CUDA-queue-v1.json).
 Live status:
@@ -10,8 +14,8 @@ Live status:
 
 The [CPU study](mixed16-EMA-grouping.md) established exact arithmetic on actual
 restoration states, while retaining per-tensor CPU operations. It did not
-establish GPU equivalence or a training-speed benefit. The new harness measures
-the eventual actual10k/160k-example no-DINO and DINO checkpoints serially.
+establish GPU equivalence or a training-speed benefit. The harness subsequently
+measured the actual10k/160k-example no-DINO and DINO checkpoints serially.
 
 Both the controller and CUDA worker require the exact inference-profile owner
 and its final child to exit successfully. The controller verifies the two

@@ -1,9 +1,11 @@
-# Grouped EMA: CPU consistency check
+# Grouped EMA: consistency checks
 
 One grouped EMA call reproduces the frozen production scalar loop exactly on
 the actual no-DINO8k and DINO2k restoration states. This is a CPU arithmetic
-check; GPU equivalence and a training-speed benefit remain unmeasured. Production
-training and all queued jobs retain their frozen code.
+check; the [subsequent CUDA measurement](mixed16-quarter-execution-profile.md)
+also passes exact state checks on both10k endpoints, with about3ms isolated
+savings per update. A whole-step training benefit remains unmeasured.
+Production training retains its original scalar loop.
 
 [Complete source/checkpoint hashes, protocol, operator counts and independent replay](results/mixed16-EMA-foreach-CPU-v2.json).
 
@@ -42,6 +44,6 @@ The corrected attempt includes all 865 tensors and keeps the strict byte-equalit
 gate. Both probe and independent replay pass Ruff. No held-out image, protected
 scene, training recipe, model checkpoint or production source changed.
 
-A [bounded CUDA comparison](mixed16-EMA-CUDA-measurement.md) is now queued after
-the existing inference profiler. Its exact worker passes CPU preflights against
-these saved hashes; GPU equivalence and isolated update latency remain pending.
+A [bounded CUDA comparison](mixed16-EMA-CUDA-measurement.md) subsequently
+completed after the inference profiler. Its exact worker passed the CPU
+preflights against these saved hashes before the completed GPU measurements.

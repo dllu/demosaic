@@ -1,0 +1,432 @@
+{
+  "status": "completed-matched-quarter-CUDA-inference-and-EMA-trace-analysis-no-adoption",
+  "UTC": "2026-10-18T13:16:54.535375+00:00",
+  "exact_prior_owners": [
+    {
+      "workflow": {
+        "path": "/mnt/external/demosaic/runs/packed-isotropic-mixed16-quarter-review-workflow-v1.json",
+        "sha256": "6d27ddf4fa9aff21579582f63feeda3181dc6e3376ce10608a5321be618a04e3"
+      },
+      "status": "completed-mixed16-quarter-panels-statistics-artifacts-hue-sensitivities-and-parent-progress-awaiting-native-quality-review",
+      "controller": {
+        "pid": 2667688,
+        "created": 1792305841.61,
+        "driver_sha256": "1e8c4c4813ee0b884483426005978b25b029885e25a5b4a38b17238fe54dbf7f"
+      },
+      "child": {
+        "pid": 3253969,
+        "created": 1792328867.81
+      },
+      "observed_exited": true
+    },
+    {
+      "workflow": {
+        "path": "/mnt/external/demosaic/runs/mixed16-packed-profile-after-quarter-v1.json",
+        "sha256": "ebb09555f5625d497116a1d73ecd610e40c458a05007f38b921373450afa0e9e"
+      },
+      "status": "completed-bounded-mixed16-quarter-FP32-CUDA-profiles-awaiting-trace-analysis",
+      "controller": {
+        "pid": 2714232,
+        "created": 1792306477.92
+      },
+      "child": {
+        "pid": 3254170,
+        "created": 1792328899.45
+      },
+      "observed_exited": true
+    },
+    {
+      "workflow": {
+        "path": "/mnt/external/demosaic/runs/mixed16-EMA-after-profile-v1.json",
+        "sha256": "fec089cdf51de969a053813451c5a888e0e6e4cca78b8e008b651d5e39c24b15"
+      },
+      "status": "completed-bounded-CUDA-EMA-comparisons-awaiting-analysis",
+      "controller": {
+        "pid": 2881904,
+        "created": 1792313473.11
+      },
+      "child": {
+        "pid": 3254521,
+        "created": 1792328949.89
+      },
+      "observed_exited": true
+    }
+  ],
+  "arms": [
+    {
+      "arm": "no-dino",
+      "profile": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-quarter-FP32-profile-no-dino-v1/result.json",
+        "sha256": "aa0c732839a6508a0f75c168879e62f9275e7f5d9f16881150e958de2311c1e8"
+      },
+      "operator_analysis": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-quarter-CUDA-trace-analysis-v1/no-dino.json",
+        "sha256": "42d19cd6718a94a956f4b6d5cfa9a7291be03ed0b1abca4a8040d226215ead19"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-mixed16-v72-step10000.pt",
+        "sha256": "d6e3bc6d98b1ffc294ac651c731636ef4072bef284925f357b690b78cc7fa9c1",
+        "step": 10000,
+        "weights": "EMA"
+      },
+      "unhooked_samples_ms": [
+        1122.0197980292141,
+        1110.249905148521,
+        1111.7766441311687,
+        1121.1914070881903,
+        1120.0383941177279
+      ],
+      "unhooked_median_ms": 1120.0383941177279,
+      "traced_GPU_activity_ms": 1125.518466,
+      "mapped_positive_GPU_events": 1093,
+      "cuDNN_convolution_GPU_ms": 851.3432510000001,
+      "cuDNN_convolution_activity_percent": 75.6400962505399,
+      "six_RAW_groups_exclusive_GPU_ms": 941.241252,
+      "six_RAW_groups_activity_percent": 83.62734867825795,
+      "exclusive_GPU_ranges": [
+        {
+          "name": "demosaic::RAW-group5-nested",
+          "events": 158,
+          "summed_GPU_activity_ms": 157.86759899999998
+        },
+        {
+          "name": "demosaic::RAW-group0-nested",
+          "events": 158,
+          "summed_GPU_activity_ms": 157.206763
+        },
+        {
+          "name": "demosaic::RAW-group2-nested",
+          "events": 158,
+          "summed_GPU_activity_ms": 157.089452
+        },
+        {
+          "name": "demosaic::RAW-group1-nested",
+          "events": 158,
+          "summed_GPU_activity_ms": 157.085579
+        },
+        {
+          "name": "demosaic::RAW-group4-nested",
+          "events": 158,
+          "summed_GPU_activity_ms": 156.196713
+        },
+        {
+          "name": "demosaic::RAW-group3-nested",
+          "events": 158,
+          "summed_GPU_activity_ms": 155.79514600000002
+        },
+        {
+          "name": "demosaic::RAW-quarter-stem-nested",
+          "events": 15,
+          "summed_GPU_activity_ms": 124.314285
+        },
+        {
+          "name": "demosaic::RAW-decoder-nested",
+          "events": 36,
+          "summed_GPU_activity_ms": 24.285830999999998
+        },
+        {
+          "name": "demosaic::RAW-local-blocks-nested",
+          "events": 36,
+          "summed_GPU_activity_ms": 23.704517
+        },
+        {
+          "name": "demosaic::RAW-core-inclusive",
+          "events": 50,
+          "summed_GPU_activity_ms": 6.783575
+        },
+        {
+          "name": "demosaic::RAW-local-stem-nested",
+          "events": 3,
+          "summed_GPU_activity_ms": 2.150342
+        },
+        {
+          "name": "demosaic::RAW-head-nested",
+          "events": 2,
+          "summed_GPU_activity_ms": 1.537156
+        },
+        {
+          "name": "demosaic::RAW-upsample-nested",
+          "events": 3,
+          "summed_GPU_activity_ms": 1.501508
+        }
+      ],
+      "top_GPU_operators": [
+        {
+          "operator": "aten::cudnn_convolution",
+          "GPU_ms": 851.3432510000001
+        },
+        {
+          "operator": "aten::add_",
+          "GPU_ms": 108.56346300000001
+        },
+        {
+          "operator": "aten::mul",
+          "GPU_ms": 70.045998
+        },
+        {
+          "operator": "aten::add",
+          "GPU_ms": 46.03988300000001
+        },
+        {
+          "operator": "aten::native_layer_norm",
+          "GPU_ms": 45.216451000000006
+        },
+        {
+          "operator": "aten::copy_",
+          "GPU_ms": 2.764935
+        },
+        {
+          "operator": "aten::cat",
+          "GPU_ms": 0.48397
+        },
+        {
+          "operator": "aten::replication_pad2d",
+          "GPU_ms": 0.473089
+        },
+        {
+          "operator": "aten::_conv_depthwise2d",
+          "GPU_ms": 0.182273
+        },
+        {
+          "operator": "aten::where",
+          "GPU_ms": 0.15219300000000002
+        }
+      ],
+      "EMA": {
+        "result": {
+          "path": "/mnt/external/demosaic/benchmarks/mixed16-quarter-EMA-CUDA-no-dino-v1/result.json",
+          "sha256": "368dc1d51b29da9132c84e47d9f4a792af260b462e0917ba987895f6fe7333b3"
+        },
+        "producer_strict_state_cases": 8,
+        "producer_equal_updates_per_case": 5,
+        "state_tensors": 852,
+        "synchronized_wall_median_ms": {
+          "scalar": 3.2824419904500246,
+          "grouped": 0.4001130582764745
+        },
+        "CUDA_event_median_ms": {
+          "scalar": 3.2575039863586426,
+          "grouped": 0.3723199963569641
+        },
+        "kernel_launches": {
+          "scalar": 852,
+          "grouped": 2
+        },
+        "trace_analysis": {
+          "scalar": {
+            "analysis": {
+              "path": "/mnt/external/demosaic/benchmarks/mixed16-quarter-CUDA-trace-analysis-v1/EMA-no-dino-scalar.json",
+              "sha256": "1b14ea9d020c78e056663872b5aac5be0f5b6efda10dc0f94b46613a791ffbde"
+            },
+            "positive_CUDA_activity_events": 852,
+            "summed_GPU_activity_ms": 1.27024
+          },
+          "grouped": {
+            "analysis": {
+              "path": "/mnt/external/demosaic/benchmarks/mixed16-quarter-CUDA-trace-analysis-v1/EMA-no-dino-grouped.json",
+              "sha256": "3a3224fa561e0160a24d273fb3f35ff479bca670337e82f8e1d41fc4fa2d3510"
+            },
+            "positive_CUDA_activity_events": 2,
+            "summed_GPU_activity_ms": 0.154245
+          }
+        }
+      }
+    },
+    {
+      "arm": "dino",
+      "profile": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-quarter-FP32-profile-dino-v1/result.json",
+        "sha256": "097188b7491e0a10b0782f42bc8993f0c5025d23bdcb7e7fda33e936552ba142"
+      },
+      "operator_analysis": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-quarter-CUDA-trace-analysis-v1/dino.json",
+        "sha256": "b2b09724a6681977d93d8025eb7995bd8ebe5b9cd1690c224e36f50df534fa5e"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-packed-isotropic-mixed16-v73-step10000.pt",
+        "sha256": "64c5649a41669aa7e5276094278f3debb96b55174871c493ca380bf68ee3759f",
+        "step": 10000,
+        "weights": "EMA"
+      },
+      "unhooked_samples_ms": [
+        1254.862556932494,
+        1256.8687200546265,
+        1260.723769897595,
+        1264.7983878850937,
+        1247.0764140598476
+      ],
+      "unhooked_median_ms": 1256.8687200546265,
+      "traced_GPU_activity_ms": 1276.878362,
+      "mapped_positive_GPU_events": 1315,
+      "cuDNN_convolution_GPU_ms": 958.9638140000001,
+      "cuDNN_convolution_activity_percent": 75.10220570250372,
+      "six_RAW_groups_exclusive_GPU_ms": 951.7427379999999,
+      "six_RAW_groups_activity_percent": 74.53667994727911,
+      "exclusive_GPU_ranges": [
+        {
+          "name": "demosaic::RAW-group5-nested",
+          "events": 158,
+          "summed_GPU_activity_ms": 161.274943
+        },
+        {
+          "name": "demosaic::RAW-group3-nested",
+          "events": 158,
+          "summed_GPU_activity_ms": 160.970718
+        },
+        {
+          "name": "demosaic::RAW-group0-nested",
+          "events": 158,
+          "summed_GPU_activity_ms": 158.522265
+        },
+        {
+          "name": "demosaic::RAW-group1-nested",
+          "events": 158,
+          "summed_GPU_activity_ms": 157.78776399999998
+        },
+        {
+          "name": "demosaic::RAW-group2-nested",
+          "events": 158,
+          "summed_GPU_activity_ms": 156.96085399999998
+        },
+        {
+          "name": "demosaic::RAW-group4-nested",
+          "events": 158,
+          "summed_GPU_activity_ms": 156.226194
+        },
+        {
+          "name": "demosaic::RAW-quarter-stem-nested",
+          "events": 15,
+          "summed_GPU_activity_ms": 122.359724
+        },
+        {
+          "name": "demosaic::DINO-context-nested",
+          "events": 38,
+          "summed_GPU_activity_ms": 98.271075
+        },
+        {
+          "name": "demosaic::DINO-backbone-nested",
+          "events": 172,
+          "summed_GPU_activity_ms": 39.948153
+        },
+        {
+          "name": "demosaic::RAW-decoder-nested",
+          "events": 36,
+          "summed_GPU_activity_ms": 24.492425
+        },
+        {
+          "name": "demosaic::RAW-local-blocks-nested",
+          "events": 36,
+          "summed_GPU_activity_ms": 23.805509999999998
+        },
+        {
+          "name": "demosaic::RAW-core-inclusive",
+          "events": 62,
+          "summed_GPU_activity_ms": 11.219714
+        },
+        {
+          "name": "demosaic::RAW-local-stem-nested",
+          "events": 3,
+          "summed_GPU_activity_ms": 2.2460229999999997
+        },
+        {
+          "name": "demosaic::RAW-head-nested",
+          "events": 2,
+          "summed_GPU_activity_ms": 1.5092839999999998
+        },
+        {
+          "name": "demosaic::RAW-upsample-nested",
+          "events": 3,
+          "summed_GPU_activity_ms": 1.2837159999999999
+        }
+      ],
+      "top_GPU_operators": [
+        {
+          "operator": "aten::cudnn_convolution",
+          "GPU_ms": 958.9638140000001
+        },
+        {
+          "operator": "aten::add_",
+          "GPU_ms": 110.71030799999998
+        },
+        {
+          "operator": "aten::mul",
+          "GPU_ms": 71.21948199999999
+        },
+        {
+          "operator": "aten::add",
+          "GPU_ms": 52.841243999999996
+        },
+        {
+          "operator": "aten::native_layer_norm",
+          "GPU_ms": 50.321209999999994
+        },
+        {
+          "operator": "aten::addmm",
+          "GPU_ms": 20.566746
+        },
+        {
+          "operator": "aten::gelu",
+          "GPU_ms": 7.608055
+        },
+        {
+          "operator": "aten::copy_",
+          "GPU_ms": 2.0303750000000003
+        },
+        {
+          "operator": "aten::replication_pad2d",
+          "GPU_ms": 0.577441
+        },
+        {
+          "operator": "aten::cat",
+          "GPU_ms": 0.49331299999999995
+        }
+      ],
+      "EMA": {
+        "result": {
+          "path": "/mnt/external/demosaic/benchmarks/mixed16-quarter-EMA-CUDA-dino-v1/result.json",
+          "sha256": "c414f7e2b7ecda7536bc13782c5f96a1909813bff843373c9d229f548451edac"
+        },
+        "producer_strict_state_cases": 8,
+        "producer_equal_updates_per_case": 5,
+        "state_tensors": 865,
+        "synchronized_wall_median_ms": {
+          "scalar": 3.37112951092422,
+          "grouped": 0.39282499346882105
+        },
+        "CUDA_event_median_ms": {
+          "scalar": 3.3595200777053833,
+          "grouped": 0.3742240071296692
+        },
+        "kernel_launches": {
+          "scalar": 865,
+          "grouped": 2
+        },
+        "trace_analysis": {
+          "scalar": {
+            "analysis": {
+              "path": "/mnt/external/demosaic/benchmarks/mixed16-quarter-CUDA-trace-analysis-v1/EMA-dino-scalar.json",
+              "sha256": "6ec60003e5503d44f606894a5fc48a13ea5c8e181a5324ea72fe1a2add905fd5"
+            },
+            "positive_CUDA_activity_events": 865,
+            "summed_GPU_activity_ms": 1.28218
+          },
+          "grouped": {
+            "analysis": {
+              "path": "/mnt/external/demosaic/benchmarks/mixed16-quarter-CUDA-trace-analysis-v1/EMA-dino-grouped.json",
+              "sha256": "de35da3021bb048c3b290078d63a11348683cc9e6d5b5f92fdc205934c087330"
+            },
+            "positive_CUDA_activity_events": 2,
+            "summed_GPU_activity_ms": 0.167011
+          }
+        }
+      }
+    }
+  ],
+  "reader": {
+    "path": "/home/dllu/proj/demosaic/scripts/summarize_inference_trace.py",
+    "sha256": "0128dbf6025d0c88f8f5d569ac24a9b6899942641add785919917bf822f14791"
+  },
+  "production_changed": false,
+  "next_measurement": "Test bounded cuDNN algorithm autotuning under the existing IEEE FP32 policy and unchanged1DN16 max/.25DN16 RMS output gate; do not infer gain before executing it. Training already enables cudnn.benchmark, so an inference change is not itself a training optimization.",
+  "scope": "Read-only analysis of completed GPU measurements, no fresh CUDA or model inference. Kernel/CPU-launch association is independently cross-checked via external IDs, unique runtime correlations and thread containment. GPU activity sums are not elapsed wall time; exclusive ranges avoid summing nested ranges. EMA state equivalence is established by the original CUDA producer; this reader checks its receipts/hashes, not tensor arithmetic. Isolated EMA latency excludes model state traversal, data/network/optimizer and cannot establish whole-step throughput. Shared-machine samples are not repeat-run confidence intervals."
+}
