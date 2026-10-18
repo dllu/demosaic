@@ -1,0 +1,84 @@
+{
+  "status": "prepared-and-waiting-behind-exact-inference-profile-owner",
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-EMA-after-profile-v1/plan.json",
+    "sha256": "1610f94c3ce380a1064e450c26af31196025a09f87b389e707cf7d489937208f"
+  },
+  "queued_owner": {
+    "pid": 2881904,
+    "created": 1792313473.11
+  },
+  "live_status_path": "/mnt/external/demosaic/runs/mixed16-EMA-after-profile-v1.json",
+  "previous_profile_owner": {
+    "pid": 2714232,
+    "created": 1792306477.92
+  },
+  "profile_plan": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-packed-profile-after-quarter-v1/plan.json",
+    "sha256": "16b7cd94dfafecff170a823103c98f8dbed6b745df0824e33b5378ef18f195aa"
+  },
+  "frozen_worker": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-EMA-after-profile-v1/tools/benchmark_ema_updates.py",
+    "sha256": "fb97ddf2f84ba8c2f774007ba0b1a2c16a26035637d269b3796657b146b9bacf"
+  },
+  "frozen_controller": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-EMA-after-profile-v1/controller.py",
+    "sha256": "8a368fb746188ad2d8c2e40162c44a63b8a0eaa37659b4c0bc3aa3fad085c493"
+  },
+  "original_train_reference": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-EMA-after-profile-v1/original-train.py",
+    "sha256": "28e8de146eec122a7b7fa087102d0644837a434810e52019f06329ff1909626b"
+  },
+  "CPU_preflights": [
+    {
+      "path": "/mnt/external/demosaic/benchmarks/mixed16-EMA-benchmark-CPU-v1/no-dino8k/result.json",
+      "sha256": "3b8df9e7d4ca33d7e98fb4fb774bf5d9b4115b72282fed38fe6fa30cc8b5f8f4"
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/mixed16-EMA-benchmark-CPU-v1/dino2k/result.json",
+      "sha256": "655e444ff32432c9e59daa5c291869c229bbdbd0e26aed76c9693b789198ba9b"
+    }
+  ],
+  "CPU_preflight_audit": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-EMA-benchmark-CPU-v1/audit.json",
+    "sha256": "5c2f6503b9aba23c0ca6ed23ebeeda68da7781434e77c86899b81172b92ae717"
+  },
+  "CPU_audit_driver": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-EMA-benchmark-CPU-v1/audit.py",
+    "sha256": "4e4dc345b0fc05397abe2fb4ecab4d1732df2277ded5f1b03379bb8a099f1c30"
+  },
+  "inputs": 11,
+  "guards": 5,
+  "all_four_workflow_unique_input_and_source_checks": 387,
+  "checkpoints_to_measure": [
+    "/mnt/external/demosaic/models/no-dino-packed-isotropic-mixed16-v72-step10000.pt",
+    "/mnt/external/demosaic/models/dino-packed-isotropic-mixed16-v73-step10000.pt"
+  ],
+  "outputs": [
+    "/mnt/external/demosaic/benchmarks/mixed16-quarter-EMA-CUDA-no-dino-v1",
+    "/mnt/external/demosaic/benchmarks/mixed16-quarter-EMA-CUDA-dino-v1"
+  ],
+  "warmup": 3,
+  "samples_per_method": 10,
+  "per_case_updates": 5,
+  "schedule_positions": [
+    1,
+    12,
+    13,
+    2000,
+    2001,
+    8000,
+    10000,
+    40000
+  ],
+  "per_child_timeout_seconds": 300,
+  "minimum_available_RAM_GiB": 32,
+  "minimum_free_disk_GiB": 500,
+  "focused_tests": {
+    "passed": 40,
+    "seconds": 1.96
+  },
+  "GPU_measurements_available": false,
+  "production_changed": false,
+  "scope": "After exact complete inference-profile owner/child exit and independent completed10k training revalidation: two serial actual10k FP32 EMA comparisons. Eight original decay positions/five updates each, strict byte equality before timings. Three warmups/ten balanced synchronized samples per method and two genuine CUDA traces per arm.300s own-child limit;32GiB RAM/500GiB disk reserves. Source/EMA input and RNG unchanged. No network inference, backward, optimizer update, learned checkpoint, production change or automatic adoption. An arithmetic mismatch is retained as a rejection without timings. Isolated EMA latency does not establish whole-step training throughput."
+}

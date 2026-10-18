@@ -41,3 +41,7 @@ expected 863 model/EMA tensors. Its source, plan and failure receipt are retaine
 The corrected attempt includes all 865 tensors and keeps the strict byte-equality
 gate. Both probe and independent replay pass Ruff. No held-out image, protected
 scene, training recipe, model checkpoint or production source changed.
+
+A [bounded CUDA comparison](mixed16-EMA-CUDA-measurement.md) is now queued after
+the existing inference profiler. Its exact worker passes CPU preflights against
+these saved hashes; GPU equivalence and isolated update latency remain pending.
