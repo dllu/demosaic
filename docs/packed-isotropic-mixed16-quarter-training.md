@@ -2,8 +2,11 @@
 
 The isolated continuation is running after the
 [complete32k-example quality review](packed-isotropic-mixed16-first32000-review.md).
-V72 no-DINO runs first; V73 DINO follows serially after successful completion.
-Neither model is promoted. This is a launch record, with no new quality result.
+V72 no-DINO has completed10,000 updates/160,000 examples; V73 DINO has resumed
+serially and passed its actual restoration/input checks. Neither is promoted;
+there is no new quality result. The
+[first endpoint and actual handoff CPU audit](results/mixed16-quarter-first10k-handoff-CPU-v2.json)
+records immutable receipt snapshots and the preserved checkpoint.
 
 The [complete review queue](packed-isotropic-mixed16-quarter-review-queue.md)
 now waits for the exact training owner to exit and both boundaries to pass.
@@ -29,14 +32,25 @@ Actual CUDA startup checks verify all restored model tensors, Adam tensors
 and parameter groups, and CPU/Python/CUDA global RNG before the first update.
 EMA is compared with its parent before the first resumed EMA update. The next
 16 actual256px training batches match the frozen source/noise fixtures exactly.
-The first no-DINO arm passed all these checks. DINO must pass independently
-when it starts; its startup has not yet been observed in this record.
+Both arms passed these actual startup checks. DINO child2884352/1792313905.76
+is observed live after no-DINO child2645905/1792305192.6 exited. Their first16
+source/noise witnesses match each other and all16 independently rehashed
+original fixtures. All99 available DINO macro rows through2,400 updates match
+the corresponding no-DINO source/noise/LR/example records at the audit snapshot.
 
-The controller archives4k/6k/8k/10k states, checks finite final states and exact
-portable FP32 EMA reload, and compares403 logged source/noise/LR/example rows
-across the pair, including403 older RAW observations per arm. These completion
-checks remain pending. An exited owner or elapsed time alone never authorizes
-a restart. The controller stops on failure and does not extend beyond10k.
+The controller archives4k/6k/8k/10k states. No-DINO's endpoint SHA256 is
+`d6e3bc6d98b1ffc294ac651c731636ef4072bef284925f357b690b78cc7fa9c1`.
+The independent CPU check finds finite852 model/EMA/Adam states, every Adam
+counter at10k, byte-identical portable loading of all852 EMA tensors, original
+40k horizon and403 exact logged schedule/source/noise checks against older RAW
+observations. The producer separately records exact portable FP32 output reload.
+The DINO10k endpoint, complete403-row pair comparison and full quality review
+remain pending. The controller stops on failure and does not extend beyond10k.
+
+The first CPU checker reassociated the learning-rate formula, creating nine
+one-ULP discrepancies. All403 recorded rates match the frozen trainer's actual
+operation order exactly. The corrected checker uses that order with unchanged
+exact equality; its failed predecessor and receipts remain preserved privately.
 
 The [first no-DINO 4k archive CPU audit](results/mixed16-quarter-no-dino4k-state-CPU-v1.json)
 passes at 64,000 examples while training continues. All 852 model tensors,
@@ -46,8 +60,9 @@ loading reproduces every EMA tensor exactly. All 163 logged macro rows through
 4k have the expected example counts/LRs and 163 matching older source/noise
 observations. Both current and EMA tensor sets have changed since 2k. All
 22 inputs/56 guards and the preserved 2k archive remain unchanged. This audit
-checks saved state and portable EMA loading. The 10k boundaries, DINO
-continuation and complete quality review remain pending.
+checks saved state and portable EMA loading. The newer first10k audit above
+does not replace that historical record. DINO completion and the complete
+quality review remain pending.
 
 The continuation driver and existing production mixed-loop integration checks
 pass26 targeted tests; Ruff passes. The separate
