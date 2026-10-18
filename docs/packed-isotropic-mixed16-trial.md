@@ -21,6 +21,12 @@ in both policies and no clear new GFX foliage/fence advantage. The review keeps
 its original EMA policy; this selected diagnostic does not explain the large
 gap to mature models or establish convergence.
 
+A [genuine trained-state CPU restart preflight](mixed16-trained-state-restart-CPU.md)
+now matches four updates against2+2 exactly for both2k parents, including
+Adam/EMA/counters/CPU RNG. It uses cropped64px training-only fixtures and
+does not exercise CUDA or decide on a continuation. All learned test weights
+are discarded; the production training gate and quality review remain unchanged.
+
 The [complete V72 development-camera CPU check](packed-isotropic-mixed16-V72-camera-CPU.md)
 now improves known/unseen measured-CFA PSNR by2.8302/2.1418dB over original
 V71 at equal32,000 examples, with all nine scene gains positive. It still
