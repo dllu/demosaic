@@ -1,0 +1,2176 @@
+{
+  "status": "verified-completed-discarded-local-contrast-CUDA-diagnostic",
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-local-contrast-CUDA-v1/plan.json",
+    "sha256": "ae8f6be1d1b9c7bb1566bdc4435e81538f4e22ad4075b483708a0e760f7dfdf0"
+  },
+  "receipt": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-local-contrast-CUDA-v1/receipt.json",
+    "sha256": "59dfcc0f143a6b28c1728eb52e51da8d71720483c9d90e273537bc93f3bd5bc1"
+  },
+  "inputs_verified": 33,
+  "guards_verified": 46,
+  "ordered_finite_training_rows": 1024,
+  "independent_domain_mean_reductions": 96,
+  "common_initial_case_metrics_identical": true,
+  "exact_owner_exited": true,
+  "method": {
+    "feature_modes": {
+      "raw": "original four physical RAW features",
+      "gain32-residual32": "RAW *32",
+      "local7-residual32": "32*(RAW - fixed reflected7x7 mean per CFA phase)",
+      "local31-residual32": "32*(RAW - fixed reflected31x31 mean per CFA phase)"
+    },
+    "common_output_residual_multiplier": 0.03125,
+    "model_config": {
+      "restoration_backbone": "packed-isotropic",
+      "width": 96,
+      "isotropic_groups": 6,
+      "isotropic_blocks": 8,
+      "isotropic_local_width": 32,
+      "camera_conditioning": true,
+      "physical_fp32": true,
+      "dino": false,
+      "dino_feature_fusion": "bottleneck",
+      "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+      "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b"
+    },
+    "seed": 51,
+    "lr": 0.0002,
+    "decay": 0.01,
+    "gradient_clip": 1,
+    "updates_per_arm": 256,
+    "dtype": "CUDA IEEE FP32, contiguous NCHW, no AMP or TF32",
+    "fixtures": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/fixtures.json",
+      "sha256": "628f5012ffda63e365bf31f74bb159ba30913d7cc3ced4e694527107c517c100"
+    },
+    "initial_model_SHA256": {
+      "raw": "ed1fdca69f4568ffc4c687db6f6677703c8f1b8203353975dd56476f74cc378d",
+      "gain32-residual32": "ed1fdca69f4568ffc4c687db6f6677703c8f1b8203353975dd56476f74cc378d",
+      "local7-residual32": "ed1fdca69f4568ffc4c687db6f6677703c8f1b8203353975dd56476f74cc378d",
+      "local31-residual32": "ed1fdca69f4568ffc4c687db6f6677703c8f1b8203353975dd56476f74cc378d"
+    },
+    "all16_initial_outputs_equal_bilinear_producer_assertion": true
+  },
+  "states": {
+    "raw": {
+      "final_model_SHA256": "5e02499dd28b010ba4497c1000ad3bb265072dba47ad56df72ec7a63084cca0a",
+      "all852_Adam_states_finite_and_at256": true,
+      "learned_weights_discarded": true
+    },
+    "gain32-residual32": {
+      "final_model_SHA256": "c0ebf4590c190a84cf90fde48da8f77115e78fa26427db32847152624a51fedc",
+      "all852_Adam_states_finite_and_at256": true,
+      "learned_weights_discarded": true
+    },
+    "local7-residual32": {
+      "final_model_SHA256": "e84447f5c48b7776c56b9ae2a6db0952881eeb4ce033af3f6d45e351de492931",
+      "all852_Adam_states_finite_and_at256": true,
+      "learned_weights_discarded": true
+    },
+    "local31-residual32": {
+      "final_model_SHA256": "e3b1a4001307616583b7e2771210753e2fc23f6daeaba89b6a1c9afa74e708cd",
+      "all852_Adam_states_finite_and_at256": true,
+      "learned_weights_discarded": true
+    }
+  },
+  "ratios_to_each_common_initial_value": [
+    {
+      "update": 0,
+      "arms": {
+        "raw": {
+          "commons": {
+            "loss": 1.0,
+            "MSE": 1.0
+          },
+          "native": {
+            "loss": 1.0,
+            "MSE": 1.0
+          },
+          "paired": {
+            "loss": 1.0,
+            "MSE": 1.0
+          }
+        },
+        "gain32-residual32": {
+          "commons": {
+            "loss": 1.0,
+            "MSE": 1.0
+          },
+          "native": {
+            "loss": 1.0,
+            "MSE": 1.0
+          },
+          "paired": {
+            "loss": 1.0,
+            "MSE": 1.0
+          }
+        },
+        "local7-residual32": {
+          "commons": {
+            "loss": 1.0,
+            "MSE": 1.0
+          },
+          "native": {
+            "loss": 1.0,
+            "MSE": 1.0
+          },
+          "paired": {
+            "loss": 1.0,
+            "MSE": 1.0
+          }
+        },
+        "local31-residual32": {
+          "commons": {
+            "loss": 1.0,
+            "MSE": 1.0
+          },
+          "native": {
+            "loss": 1.0,
+            "MSE": 1.0
+          },
+          "paired": {
+            "loss": 1.0,
+            "MSE": 1.0
+          }
+        }
+      }
+    },
+    {
+      "update": 64,
+      "arms": {
+        "raw": {
+          "commons": {
+            "loss": 1.0038402163650109,
+            "MSE": 0.9986651716636554
+          },
+          "native": {
+            "loss": 1.002256456350981,
+            "MSE": 0.9998170815149828
+          },
+          "paired": {
+            "loss": 0.996264759485334,
+            "MSE": 0.9992813281176297
+          }
+        },
+        "gain32-residual32": {
+          "commons": {
+            "loss": 0.9929616608520192,
+            "MSE": 0.9592765736716505
+          },
+          "native": {
+            "loss": 1.0125430351364124,
+            "MSE": 0.9886701365496583
+          },
+          "paired": {
+            "loss": 1.031762814062697,
+            "MSE": 1.0165759280883166
+          }
+        },
+        "local7-residual32": {
+          "commons": {
+            "loss": 1.0015329730483065,
+            "MSE": 0.9993290955366276
+          },
+          "native": {
+            "loss": 0.9948561010836886,
+            "MSE": 1.0003621203825794
+          },
+          "paired": {
+            "loss": 0.9959098542195213,
+            "MSE": 0.9961622519893958
+          }
+        },
+        "local31-residual32": {
+          "commons": {
+            "loss": 1.006023409659804,
+            "MSE": 0.999308820502634
+          },
+          "native": {
+            "loss": 0.9988412402334926,
+            "MSE": 1.0004525678260106
+          },
+          "paired": {
+            "loss": 0.9971568810045829,
+            "MSE": 0.9976173985225116
+          }
+        }
+      }
+    },
+    {
+      "update": 128,
+      "arms": {
+        "raw": {
+          "commons": {
+            "loss": 1.0123062357300632,
+            "MSE": 0.9917355106516152
+          },
+          "native": {
+            "loss": 1.0063761524521209,
+            "MSE": 0.996852116717453
+          },
+          "paired": {
+            "loss": 0.9973265013807934,
+            "MSE": 1.0012775383480093
+          }
+        },
+        "gain32-residual32": {
+          "commons": {
+            "loss": 0.9845621788923133,
+            "MSE": 0.9434286680696532
+          },
+          "native": {
+            "loss": 1.0098399272827268,
+            "MSE": 0.9815105459911316
+          },
+          "paired": {
+            "loss": 1.017053649505767,
+            "MSE": 1.0097182187531308
+          }
+        },
+        "local7-residual32": {
+          "commons": {
+            "loss": 0.9992808636794713,
+            "MSE": 0.9963402461302896
+          },
+          "native": {
+            "loss": 0.9881131816607132,
+            "MSE": 1.0000922041747986
+          },
+          "paired": {
+            "loss": 0.996366058634904,
+            "MSE": 0.9952382425900808
+          }
+        },
+        "local31-residual32": {
+          "commons": {
+            "loss": 1.0075282414789188,
+            "MSE": 0.9976338557353098
+          },
+          "native": {
+            "loss": 0.9999962689767783,
+            "MSE": 0.9993188505719413
+          },
+          "paired": {
+            "loss": 0.9938443566097533,
+            "MSE": 0.9972642183704443
+          }
+        }
+      }
+    },
+    {
+      "update": 256,
+      "arms": {
+        "raw": {
+          "commons": {
+            "loss": 1.0007466189252074,
+            "MSE": 0.9889910328776462
+          },
+          "native": {
+            "loss": 1.0050624813402662,
+            "MSE": 0.9977893384262282
+          },
+          "paired": {
+            "loss": 1.0021866227725278,
+            "MSE": 1.0022152309447276
+          }
+        },
+        "gain32-residual32": {
+          "commons": {
+            "loss": 0.9761553486425866,
+            "MSE": 0.9347398496789819
+          },
+          "native": {
+            "loss": 0.9993673329781596,
+            "MSE": 0.9957540423274777
+          },
+          "paired": {
+            "loss": 0.9958151408396791,
+            "MSE": 1.0010915637573248
+          }
+        },
+        "local7-residual32": {
+          "commons": {
+            "loss": 0.994978679371958,
+            "MSE": 0.9900322265918052
+          },
+          "native": {
+            "loss": 0.9771433638654169,
+            "MSE": 0.998455627453727
+          },
+          "paired": {
+            "loss": 0.9928615458024483,
+            "MSE": 0.9969256169746875
+          }
+        },
+        "local31-residual32": {
+          "commons": {
+            "loss": 0.9953539211626785,
+            "MSE": 0.9928690031680519
+          },
+          "native": {
+            "loss": 0.9831435510815129,
+            "MSE": 0.9978390988833278
+          },
+          "paired": {
+            "loss": 0.9936338867944854,
+            "MSE": 0.9951090982822404
+          }
+        }
+      }
+    }
+  ],
+  "curves": [
+    {
+      "update": 0,
+      "arms": {
+        "raw": {
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.010640270076692104,
+              "MSE": 5.258042074274272e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014343843795359135,
+              "MSE": 6.358617974910885e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.022745542228221893,
+              "MSE": 2.7572981707635336e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.020938152447342873,
+              "MSE": 6.02929612796288e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.015940016135573387,
+              "MSE": 4.485502722673118e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.020513707771897316,
+              "MSE": 0.00012825278099626303
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.06288104504346848,
+              "MSE": 0.005554647650569677
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.036647405475378036,
+              "MSE": 0.0019241351401433349
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.005484080873429775,
+              "MSE": 7.93048366176663e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.010351923294365406,
+              "MSE": 4.998772783437744e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.03193873167037964,
+              "MSE": 0.0010704145533964038
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.08015227317810059,
+              "MSE": 0.005113042891025543
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.05182785540819168,
+              "MSE": 0.0024680548813194036
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.006624408066272736,
+              "MSE": 1.88717785931658e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.04702071473002434,
+              "MSE": 0.005080654285848141
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.052437473088502884,
+              "MSE": 0.00522208958864212
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.048885444179177284,
+              "MSE": 0.0035076798397182885
+            },
+            "native": {
+              "loss": 0.02521120198071003,
+              "MSE": 0.0005350634660317155
+            },
+            "paired": {
+              "loss": 0.009488905221223832,
+              "MSE": 3.859131811623229e-05
+            }
+          }
+        },
+        "gain32-residual32": {
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.010640270076692104,
+              "MSE": 5.258042074274272e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014343843795359135,
+              "MSE": 6.358617974910885e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.022745542228221893,
+              "MSE": 2.7572981707635336e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.020938152447342873,
+              "MSE": 6.02929612796288e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.015940016135573387,
+              "MSE": 4.485502722673118e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.020513707771897316,
+              "MSE": 0.00012825278099626303
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.06288104504346848,
+              "MSE": 0.005554647650569677
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.036647405475378036,
+              "MSE": 0.0019241351401433349
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.005484080873429775,
+              "MSE": 7.93048366176663e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.010351923294365406,
+              "MSE": 4.998772783437744e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.03193873167037964,
+              "MSE": 0.0010704145533964038
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.08015227317810059,
+              "MSE": 0.005113042891025543
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.05182785540819168,
+              "MSE": 0.0024680548813194036
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.006624408066272736,
+              "MSE": 1.88717785931658e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.04702071473002434,
+              "MSE": 0.005080654285848141
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.052437473088502884,
+              "MSE": 0.00522208958864212
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.048885444179177284,
+              "MSE": 0.0035076798397182885
+            },
+            "native": {
+              "loss": 0.02521120198071003,
+              "MSE": 0.0005350634660317155
+            },
+            "paired": {
+              "loss": 0.009488905221223832,
+              "MSE": 3.859131811623229e-05
+            }
+          }
+        },
+        "local7-residual32": {
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.010640270076692104,
+              "MSE": 5.258042074274272e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014343843795359135,
+              "MSE": 6.358617974910885e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.022745542228221893,
+              "MSE": 2.7572981707635336e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.020938152447342873,
+              "MSE": 6.02929612796288e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.015940016135573387,
+              "MSE": 4.485502722673118e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.020513707771897316,
+              "MSE": 0.00012825278099626303
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.06288104504346848,
+              "MSE": 0.005554647650569677
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.036647405475378036,
+              "MSE": 0.0019241351401433349
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.005484080873429775,
+              "MSE": 7.93048366176663e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.010351923294365406,
+              "MSE": 4.998772783437744e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.03193873167037964,
+              "MSE": 0.0010704145533964038
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.08015227317810059,
+              "MSE": 0.005113042891025543
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.05182785540819168,
+              "MSE": 0.0024680548813194036
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.006624408066272736,
+              "MSE": 1.88717785931658e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.04702071473002434,
+              "MSE": 0.005080654285848141
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.052437473088502884,
+              "MSE": 0.00522208958864212
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.048885444179177284,
+              "MSE": 0.0035076798397182885
+            },
+            "native": {
+              "loss": 0.02521120198071003,
+              "MSE": 0.0005350634660317155
+            },
+            "paired": {
+              "loss": 0.009488905221223832,
+              "MSE": 3.859131811623229e-05
+            }
+          }
+        },
+        "local31-residual32": {
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.010640270076692104,
+              "MSE": 5.258042074274272e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014343843795359135,
+              "MSE": 6.358617974910885e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.022745542228221893,
+              "MSE": 2.7572981707635336e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.020938152447342873,
+              "MSE": 6.02929612796288e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.015940016135573387,
+              "MSE": 4.485502722673118e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.020513707771897316,
+              "MSE": 0.00012825278099626303
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.06288104504346848,
+              "MSE": 0.005554647650569677
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.036647405475378036,
+              "MSE": 0.0019241351401433349
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.005484080873429775,
+              "MSE": 7.93048366176663e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.010351923294365406,
+              "MSE": 4.998772783437744e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.03193873167037964,
+              "MSE": 0.0010704145533964038
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.08015227317810059,
+              "MSE": 0.005113042891025543
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.05182785540819168,
+              "MSE": 0.0024680548813194036
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.006624408066272736,
+              "MSE": 1.88717785931658e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.04702071473002434,
+              "MSE": 0.005080654285848141
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.052437473088502884,
+              "MSE": 0.00522208958864212
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.048885444179177284,
+              "MSE": 0.0035076798397182885
+            },
+            "native": {
+              "loss": 0.02521120198071003,
+              "MSE": 0.0005350634660317155
+            },
+            "paired": {
+              "loss": 0.009488905221223832,
+              "MSE": 3.859131811623229e-05
+            }
+          }
+        }
+      }
+    },
+    {
+      "update": 64,
+      "arms": {
+        "raw": {
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.0106092793866992,
+              "MSE": 5.244016938377172e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.01428187359124422,
+              "MSE": 6.356919038807973e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.0227760449051857,
+              "MSE": 2.763047450571321e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.02114785462617874,
+              "MSE": 6.034491161699407e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.016437934711575508,
+              "MSE": 4.490711580729112e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.020513787865638733,
+              "MSE": 0.0001283152960240841
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.06285589933395386,
+              "MSE": 0.00554793793708086
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.036634672433137894,
+              "MSE": 0.0019235716899856925
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.0054021310061216354,
+              "MSE": 7.958237802085932e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.010373367927968502,
+              "MSE": 4.998982331017032e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.032436445355415344,
+              "MSE": 0.001070044469088316
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.08008593320846558,
+              "MSE": 0.005100652109831572
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.05179401487112045,
+              "MSE": 0.00246530887670815
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.006600657477974892,
+              "MSE": 1.886049722088501e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.04737100377678871,
+              "MSE": 0.005082499235868454
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.05253099277615547,
+              "MSE": 0.005209634080529213
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.04907317486192499,
+              "MSE": 0.0035029976892734078
+            },
+            "native": {
+              "loss": 0.025268089957535267,
+              "MSE": 0.000534965593033121
+            },
+            "paired": {
+              "loss": 0.00945346187800169,
+              "MSE": 3.8563583620998544e-05
+            }
+          }
+        },
+        "gain32-residual32": {
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.010978786274790764,
+              "MSE": 5.4654054110869765e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.01446252129971981,
+              "MSE": 6.37321500107646e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.02329058200120926,
+              "MSE": 2.9685606932616793e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.021234180778265,
+              "MSE": 6.038945139152929e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.016620788723230362,
+              "MSE": 4.4801719923270866e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.02068961039185524,
+              "MSE": 0.00012812581553589553
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.06261038035154343,
+              "MSE": 0.005415077321231365
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.03689533472061157,
+              "MSE": 0.001897804206237197
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.005675032269209623,
+              "MSE": 7.91028742241906e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.010872513987123966,
+              "MSE": 5.0687223847489804e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.03278888389468193,
+              "MSE": 0.001042245188727975
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.07867215573787689,
+              "MSE": 0.004817933775484562
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.05140670761466026,
+              "MSE": 0.002384750172495842
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.006962643936276436,
+              "MSE": 1.9171309759258293e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.047735728323459625,
+              "MSE": 0.005073035601526499
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.04995495826005936,
+              "MSE": 0.004776001907885075
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.04854137184364455,
+              "MSE": 0.003364835098182084
+            },
+            "native": {
+              "loss": 0.025527426972985268,
+              "MSE": 0.0005290012700243096
+            },
+            "paired": {
+              "loss": 0.00979029955342412,
+              "MSE": 3.923100503016031e-05
+            }
+          }
+        },
+        "local7-residual32": {
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.010576218366622925,
+              "MSE": 5.223411790211685e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014309396035969257,
+              "MSE": 6.346717418637127e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.022440696135163307,
+              "MSE": 2.750512066995725e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.02093520574271679,
+              "MSE": 6.021438093739562e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.016071045771241188,
+              "MSE": 4.470928251976147e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.02037164941430092,
+              "MSE": 0.00012745281856041402
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.06285657733678818,
+              "MSE": 0.005542821250855923
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.03657852113246918,
+              "MSE": 0.0019258565735071898
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.00543208047747612,
+              "MSE": 7.894141162978485e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.010328496806323528,
+              "MSE": 4.980970697943121e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.03217480331659317,
+              "MSE": 0.0010717491386458278
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.08006513863801956,
+              "MSE": 0.005105307325720787
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.05159018933773041,
+              "MSE": 0.0024716609623283148
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.006604279391467571,
+              "MSE": 1.8810931578627788e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.04729016497731209,
+              "MSE": 0.005068854428827763
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.05267477035522461,
+              "MSE": 0.005232183262705803
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.048960384247558456,
+              "MSE": 0.00350532652165774
+            },
+            "native": {
+              "loss": 0.025081518106162548,
+              "MSE": 0.0005352572234187392
+            },
+            "paired": {
+              "loss": 0.00945009421557188,
+              "MSE": 3.844321436190512e-05
+            }
+          }
+        },
+        "local31-residual32": {
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.010610329918563366,
+              "MSE": 5.2301846153568476e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014310870319604874,
+              "MSE": 6.356808444252238e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.022677380591630936,
+              "MSE": 2.7548598154680803e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.02103884518146515,
+              "MSE": 6.026155824656598e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.01610148884356022,
+              "MSE": 4.473928129300475e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.020420223474502563,
+              "MSE": 0.00012757378863170743
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.06315827369689941,
+              "MSE": 0.005541834980249405
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.03659150376915932,
+              "MSE": 0.0019258385291323066
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.0054441955871880054,
+              "MSE": 7.945230208861176e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.010340373031795025,
+              "MSE": 4.983184771845117e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.03260285034775734,
+              "MSE": 0.0010730590438470244
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.08007791638374329,
+              "MSE": 0.005105381831526756
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.05167362466454506,
+              "MSE": 0.002474617213010788
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.006603866815567017,
+              "MSE": 1.884984339994844e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.047748565673828125,
+              "MSE": 0.0050666737370193005
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.052896589040756226,
+              "MSE": 0.0052304817363619804
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.049179901235869954,
+              "MSE": 0.003505255403329751
+            },
+            "native": {
+              "loss": 0.02518198825418949,
+              "MSE": 0.0005353056185413152
+            },
+            "paired": {
+              "loss": 0.009461927134543658,
+              "MSE": 3.849937038467033e-05
+            }
+          }
+        }
+      }
+    },
+    {
+      "update": 128,
+      "arms": {
+        "raw": {
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.01059859711676836,
+              "MSE": 5.268150562187657e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014283589087426662,
+              "MSE": 6.364892760757357e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.02286621555685997,
+              "MSE": 2.769779530353844e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.021230563521385193,
+              "MSE": 6.039353320375085e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.01811610534787178,
+              "MSE": 4.504253956838511e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.02075381763279438,
+              "MSE": 0.00012838482507504523
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.06276655942201614,
+              "MSE": 0.005519948899745941
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.036637213081121445,
+              "MSE": 0.001917040441185236
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.005519617814570665,
+              "MSE": 7.987252502061892e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.010297109372913837,
+              "MSE": 5.001021781936288e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.03367214649915695,
+              "MSE": 0.0010649794712662697
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.0798039585351944,
+              "MSE": 0.005048677325248718
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.05167580395936966,
+              "MSE": 0.0024472447112202644
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.0066187698394060135,
+              "MSE": 1.8875196474255063e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.048258449882268906,
+              "MSE": 0.005085999611765146
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.05211625620722771,
+              "MSE": 0.005138942040503025
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.04948703997901508,
+              "MSE": 0.003478690657045393
+            },
+            "native": {
+              "loss": 0.025371952448040247,
+              "MSE": 0.0005333791486918926
+            },
+            "paired": {
+              "loss": 0.009463536646217107,
+              "MSE": 3.8640620005025994e-05
+            }
+          }
+        },
+        "gain32-residual32": {
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.01077048759907484,
+              "MSE": 5.364651951822452e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014455622993409634,
+              "MSE": 6.37575431028381e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.023257795721292496,
+              "MSE": 3.0502995286951773e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.0211054477840662,
+              "MSE": 6.030459189787507e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.01636780984699726,
+              "MSE": 4.469835403142497e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.020561015233397484,
+              "MSE": 0.00012747308937832713
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.062368448823690414,
+              "MSE": 0.005363135598599911
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.03691285476088524,
+              "MSE": 0.0018824010621756315
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.005451548844575882,
+              "MSE": 7.838826604711358e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.010546702891588211,
+              "MSE": 5.03712726640515e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.032454218715429306,
+              "MSE": 0.0010286855977028608
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.07810211926698685,
+              "MSE": 0.004707058425992727
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.051132410764694214,
+              "MSE": 0.0023364266380667686
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.007029266096651554,
+              "MSE": 1.9217623048461974e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.04762757569551468,
+              "MSE": 0.005108708515763283
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.04886273294687271,
+              "MSE": 0.004576006904244423
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.048130759437169345,
+              "MSE": 0.0033092457192001996
+            },
+            "native": {
+              "loss": 0.025459278374910355,
+              "MSE": 0.0005251704346846964
+            },
+            "paired": {
+              "loss": 0.009650725685060025,
+              "MSE": 3.896635698765749e-05
+            }
+          }
+        },
+        "local7-residual32": {
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.010594773106276989,
+              "MSE": 5.21455003763549e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014290859922766685,
+              "MSE": 6.34888419881463e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.021855846047401428,
+              "MSE": 2.7370715542929247e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.020962171256542206,
+              "MSE": 6.013639358570799e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.016289129853248596,
+              "MSE": 4.4414668082026765e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.020325522869825363,
+              "MSE": 0.00012636376777663827
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.06260786205530167,
+              "MSE": 0.005517908371984959
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.036502543836832047,
+              "MSE": 0.0019265803275629878
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.005377009976655245,
+              "MSE": 7.885413651820272e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.010424950160086155,
+              "MSE": 4.973991235601716e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.032766278833150864,
+              "MSE": 0.0010700528509914875
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.07989353686571121,
+              "MSE": 0.005084896460175514
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.05107908695936203,
+              "MSE": 0.002465561730787158
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.0065845223143696785,
+              "MSE": 1.8778109733830206e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.04686419665813446,
+              "MSE": 0.005052081309258938
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.052451930940151215,
+              "MSE": 0.005228982772678137
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.04885028888072286,
+              "MSE": 0.003494842594851174
+            },
+            "native": {
+              "loss": 0.02491152100265026,
+              "MSE": 0.0005351128011170658
+            },
+            "paired": {
+              "loss": 0.00945442309603095,
+              "MSE": 3.840755562123377e-05
+            }
+          }
+        },
+        "local31-residual32": {
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.010572602041065693,
+              "MSE": 5.233959745964967e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014308019541203976,
+              "MSE": 6.362848216667771e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.022401701658964157,
+              "MSE": 2.7482839868753217e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.02143147587776184,
+              "MSE": 6.02532054472249e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.01656457968056202,
+              "MSE": 4.457391332834959e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.020427804440259933,
+              "MSE": 0.0001269546482944861
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.06282181292772293,
+              "MSE": 0.005527890287339687
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.03658344969153404,
+              "MSE": 0.0019241053378209472
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.005393031984567642,
+              "MSE": 7.900852324382868e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.0102933244779706,
+              "MSE": 4.975730553269386e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.033595964312553406,
+              "MSE": 0.0010696211829781532
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.08000373840332031,
+              "MSE": 0.005095926579087973
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.0513845793902874,
+              "MSE": 0.0024669156409800053
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.006585496477782726,
+              "MSE": 1.8802466001943685e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.04767175018787384,
+              "MSE": 0.005060219205915928
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.05273183435201645,
+              "MSE": 0.005230514332652092
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.04925346560776234,
+              "MSE": 0.0034993801631831695
+            },
+            "native": {
+              "loss": 0.025211107917129993,
+              "MSE": 0.0005346990078578528
+            },
+            "paired": {
+              "loss": 0.009430494904518128,
+              "MSE": 3.848574069706956e-05
+            }
+          }
+        }
+      }
+    },
+    {
+      "update": 256,
+      "arms": {
+        "raw": {
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.010660690255463123,
+              "MSE": 5.294843504088931e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014298856258392334,
+              "MSE": 6.355780351441354e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.0227928776293993,
+              "MSE": 2.775071880023461e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.0213945135474205,
+              "MSE": 6.034389662090689e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.016899099573493004,
+              "MSE": 4.4973268813919276e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.02055923454463482,
+              "MSE": 0.0001283352612517774
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.06266988813877106,
+              "MSE": 0.0055060479789972305
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.036608707159757614,
+              "MSE": 0.0019190926104784012
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.005502185318619013,
+              "MSE": 7.916540198493749e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.0104162422940135,
+              "MSE": 5.0075032049790025e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.032659370452165604,
+              "MSE": 0.0010621583787724376
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.07971169799566269,
+              "MSE": 0.005021312739700079
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.05173434317111969,
+              "MSE": 0.0024428791366517544
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.006670295260846615,
+              "MSE": 1.8886223188019358e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.04676816985011101,
+              "MSE": 0.005075073800981045
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.05201103165745735,
+              "MSE": 0.005131002049893141
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.04892194297696863,
+              "MSE": 0.0034690639076870866
+            },
+            "native": {
+              "loss": 0.02533883322030306,
+              "MSE": 0.00053388062178783
+            },
+            "paired": {
+              "loss": 0.009509653877466917,
+              "MSE": 3.867680679832119e-05
+            }
+          }
+        },
+        "gain32-residual32": {
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.010564588010311127,
+              "MSE": 5.273491478874348e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014264451339840889,
+              "MSE": 6.365175067912787e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.022550811991095543,
+              "MSE": 2.9512089895433746e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.020985594019293785,
+              "MSE": 6.036217382643372e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.016469962894916534,
+              "MSE": 4.438942050910555e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.020327502861618996,
+              "MSE": 0.000126026599900797
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.06211302429437637,
+              "MSE": 0.005338465794920921
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.03691709786653519,
+              "MSE": 0.0019152655731886625
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.005474720150232315,
+              "MSE": 7.934976565593388e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.010309790261089802,
+              "MSE": 4.991596142644994e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.0321967639029026,
+              "MSE": 0.0010275018867105246
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.07757212221622467,
+              "MSE": 0.0046350667253136635
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.05054990574717522,
+              "MSE": 0.0023334629368036985
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.0066324276849627495,
+              "MSE": 1.8929611542262137e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.04683397337794304,
+              "MSE": 0.0050829569809138775
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.04830276221036911,
+              "MSE": 0.004489533137530088
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.04771978780627251,
+              "MSE": 0.0032787681261002683
+            },
+            "native": {
+              "loss": 0.025195251684635878,
+              "MSE": 0.0005327916092028318
+            },
+            "paired": {
+              "loss": 0.009449195489287377,
+              "MSE": 3.863344300043536e-05
+            }
+          }
+        },
+        "local7-residual32": {
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.010577480308711529,
+              "MSE": 5.229061935096979e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014296596869826317,
+              "MSE": 6.362076237564906e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.02125176601111889,
+              "MSE": 2.7052188670495525e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.020819587633013725,
+              "MSE": 5.994142702547833e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.016441984102129936,
+              "MSE": 4.370370879769325e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.020047353580594063,
+              "MSE": 0.0001234806259162724
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.062373947352170944,
+              "MSE": 0.005472059827297926
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.03642112761735916,
+              "MSE": 0.0019264742732048035
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.005373040679842234,
+              "MSE": 7.89140904089436e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.010290149599313736,
+              "MSE": 4.97280852869153e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.0330640971660614,
+              "MSE": 0.0010607480071485043
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.07951471954584122,
+              "MSE": 0.005034435540437698
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.04967471584677696,
+              "MSE": 0.0024436237290501595
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.0065685780718922615,
+              "MSE": 1.8832492060028017e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.04697507619857788,
+              "MSE": 0.005029000341892242
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.05243528261780739,
+              "MSE": 0.0052254414185881615
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.04863997468990939,
+              "MSE": 0.0034727160818874836
+            },
+            "native": {
+              "loss": 0.02463495871052146,
+              "MSE": 0.0005342371287042624
+            },
+            "paired": {
+              "loss": 0.009421169105917216,
+              "MSE": 3.847267362289131e-05
+            }
+          }
+        },
+        "local31-residual32": {
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.010583613999187946,
+              "MSE": 5.227865403867327e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014301160350441933,
+              "MSE": 6.342648703139275e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.021586673334240913,
+              "MSE": 2.7185174985788763e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.020941060036420822,
+              "MSE": 6.000915163895115e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.016295021399855614,
+              "MSE": 4.4070446165278554e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.020175278186798096,
+              "MSE": 0.00012507473002187908
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.06245804578065872,
+              "MSE": 0.005493390839546919
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.03644191101193428,
+              "MSE": 0.0019233599305152893
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.005375235807150602,
+              "MSE": 7.871231900935527e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.010303291492164135,
+              "MSE": 4.9643509555608034e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.03217006474733353,
+              "MSE": 0.0010620414977893233
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.07970983535051346,
+              "MSE": 0.00506081897765398
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.05053999647498131,
+              "MSE": 0.0024529427755624056
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.006579187233000994,
+              "MSE": 1.8792976334225386e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.04695167765021324,
+              "MSE": 0.005043370649218559
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.052483588457107544,
+              "MSE": 0.00522203091531992
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.04865831855152335,
+              "MSE": 0.0034826665858937694
+            },
+            "native": {
+              "loss": 0.024786230642348528,
+              "MSE": 0.0005339072467904771
+            },
+            "paired": {
+              "loss": 0.009428497776389122,
+              "MSE": 3.8402571772166996e-05
+            }
+          }
+        }
+      }
+    }
+  ],
+  "scope": "Separate discarded four-arm fresh-model optimization test. All arms share learned FP32 residual multiplier1/32, unchanged physical bilinear skip/output/loss units and capacity. Same seed51/zero-head initial weights and all16 exact initial bilinear outputs; original852 tensors. Replace only four input RAW features with original RAW, gain32, or fixed local7/31 same-CFA-phase reflected highpass times32. Other28 variance/CFA/WB/matrix features unchanged. No image-derived scaling/min-max/statistical normalization, learned inverse, per-crop global statistic, interpolation or new parameters. Local mean filtering deliberately removes DC from those four neural features; the physical signal skip remains, and local padding adds context dependence. Same16 frozen training-only B4 batches, 64 observations/noise/order,256 constant-LR2e-4 fresh AdamW updates, clip1 and original domain losses. CUDA IEEE FP32 NCHW, no AMP/TF32. No GFX/holdout/protected-final optimization, pretrained initializer, new training-source admission, learned-weight export, production change, quality promotion, speed or convergence claim. Previous CUDA test is complete and process-exited; isolated CPU test continues unchanged. No automatic restart.",
+  "decision": "No production adoption or trained-model quality claim. Local7/31 filtering slightly improves native/paired original loss versus input gain32 at common1/32 residual units, but is worse on Commons loss/MSE and native MSE. Local-filter MSE gains over initialization are small; no single arm is best across all domain losses/MSE. All learned weights are discarded. This256-update repeated-fixture experiment is neither a convergence verdict nor generalization evidence.",
+  "independent_audit": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-local-contrast-CUDA-v1/independent-audit.json",
+    "sha256": "cadb98f0107ab173017e8d27aa5125527db4a3463b0c5242187f3df31b2c1ef6"
+  }
+}

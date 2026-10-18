@@ -1,0 +1,65 @@
+{
+  "status": "launched-no-final-quality-result",
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-batch-learning-CUDA-v1/plan.json",
+    "sha256": "d35c990ca9fd5e082e289a81bb39ce9b36ce03419dec7fdff92c837cde090bd0"
+  },
+  "owner": {
+    "pid": 2248503,
+    "created": 1792289878.48
+  },
+  "inputs": 40,
+  "guards": 46,
+  "arms": {
+    "raw-B4": {
+      "coordinates": "raw",
+      "batch": 4
+    },
+    "raw-B16": {
+      "coordinates": "raw",
+      "batch": 16
+    },
+    "gain32-residual32-B4": {
+      "coordinates": "gain32-residual32",
+      "batch": 4
+    },
+    "gain32-residual32-B16": {
+      "coordinates": "gain32-residual32",
+      "batch": 16
+    }
+  },
+  "model_config": {
+    "restoration_backbone": "packed-isotropic",
+    "width": 96,
+    "isotropic_groups": 6,
+    "isotropic_blocks": 8,
+    "isotropic_local_width": 32,
+    "camera_conditioning": true,
+    "physical_fp32": true,
+    "dino": false,
+    "dino_feature_fusion": "bottleneck",
+    "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+    "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b"
+  },
+  "common_initial_model_SHA256": "ed1fdca69f4568ffc4c687db6f6677703c8f1b8203353975dd56476f74cc378d",
+  "rounds": 256,
+  "example_draws_per_arm": 4096,
+  "evaluation_rounds": [
+    64,
+    128,
+    256
+  ],
+  "fixture_manifest": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/fixtures.json",
+    "sha256": "628f5012ffda63e365bf31f74bb159ba30913d7cc3ced4e694527107c517c100"
+  },
+  "lr": 0.0002,
+  "weight_decay": 0.01,
+  "gradient_clip": 1,
+  "dtype": "CUDA IEEE FP32, contiguous NCHW, no AMP or TF32",
+  "scope": "Discarded equal-example four-arm training-only batch comparison, not a throughput benchmark or improved photographic model. Original raw and gain32 with learned residual divided by32 each compare real CUDA batch4 and batch16. Same seed51/common initial weights and bilinear outputs, model capacity, physical RAW skip/output/loss units, same16 frozen training-only production B4 fixtures8001-8016/64 fixed observations/noise/order. Each round consumes four successive B4 fixture groups/16 examples per arm; batch16 concatenates their physical inputs in one forward and averages their four unchanged original-domain losses. Batch4 makes four separate optimizer updates.256 rounds=4096 example draws/arm,1024 B4 or256 B16 optimizer updates. Evaluate at1024/2048/4096 example draws. Fixed LR2e-4/AdamW decay.01/clip1 per optimizer step, no batch-specific LR tuning or schedule; update/decay counts differ by design. This compares equal-example behavior for this fixed recipe, not the best batch16 recipe. Original paired masks/coarse loss reductions remain per4 group; equal group sizes and original domain sample proportions stay fixed. No batch-statistical normalization, cross-example conditioning, fresh augmentation/noise or source admissions. CUDA IEEE FP32 NCHW; no AMP/TF32, pretrained state, EMA, learned-weight export, GFX/holdout/protected-final optimization, quality promotion, speed or convergence claim. Previous CUDA owners must have completed and exited. Isolated CPU coordinate diagnostic continues unchanged; no automatic restart.",
+  "implementation": "scripts/probe_raw_batch_learning.py",
+  "tests": "tests/test_raw_batch_learning.py",
+  "four_focused_tests_passed": true,
+  "state_at_publication": "running-equal-example-CUDA-batch-learning"
+}

@@ -181,3 +181,10 @@ adds a fixed1/32 scale on the learned residual to the input gain32 arm. This
 reduces early original-loss overshoot, but native/paired improvements over the
 bilinear start are tiny and paired MSE remains above its start. All weights are
 discarded, no production setting is adopted, and the CPU study continues.
+
+The [completed fixed-local-contrast test](packed-isotropic-local-contrast.md)
+finds modest native/paired loss gains with weaker Commons performance; no
+single representation wins across the training metrics. A separate
+[equal-example batch4/batch16 comparison](packed-isotropic-batch-learning.md)
+is now running with raw and gain32/residual÷32 coordinates. This tests learning
+at a fixed per-update recipe, rather than repeating the throughput sweep.
