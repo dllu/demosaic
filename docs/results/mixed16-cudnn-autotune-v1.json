@@ -1,0 +1,153 @@
+{
+  "status": "completed-bounded-FP32-cuDNN-autotuning-with-independent-16bit-output-audit-no-adoption",
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-cudnn-autotune-v1/plan.json",
+    "sha256": "219c98e7ad3b64a9173674b6aa99499c1addf80d3beef7dba3936b97560e1918"
+  },
+  "worker": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-cudnn-autotune-v1/run.py",
+    "sha256": "a3ec1cf55312825b7f9128fab7220ac95bafbcf4e553e9264df927a324dbf8f7"
+  },
+  "comparison_helper": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-cudnn-autotune-v1/tools/benchmark_packed_compilation.py",
+    "sha256": "d1e689f020b5d026a8614f152714d2e1f676436bc441f79a76c7f01d9203be5b"
+  },
+  "accuracy_bounds_DN16": {
+    "max_abs": 1.0,
+    "RMS": 0.25
+  },
+  "arms": [
+    {
+      "arm": "no-dino",
+      "result": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-cudnn-autotune-v1/no-dino-result.json",
+        "sha256": "9ba6f578f05dd625ea3c791c3380c9d384716dfab8cb0cd8471c9d9266b95ba4"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-quarter-FP32-profile-no-dino-v1/result.json",
+        "sha256": "aa0c732839a6508a0f75c168879e62f9275e7f5d9f16881150e958de2311c1e8"
+      },
+      "candidate_profile": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-cudnn-autotune-v1/no-dino-profile/result.json",
+        "sha256": "1fb7c2c61b19571900abd734de08d1fe03cdf39b757d95f9ab757c0d65d8af83"
+      },
+      "owner_observed_exited": {
+        "pid": 3272972,
+        "created": 1792329607.25
+      },
+      "baseline_median_ms": 1120.0383941177279,
+      "candidate_median_ms": 422.3476161714643,
+      "observed_median_ratio": 2.6519349257153513,
+      "independent_output_checks": [
+        {
+          "context": 0,
+          "elements": 786432,
+          "max_abs_DN16": 0.002685505896806717,
+          "RMS_DN16": 0.00036726127381087357,
+          "passed_original_bounds": true
+        },
+        {
+          "context": 1,
+          "elements": 786432,
+          "max_abs_DN16": 0.011718571186065674,
+          "RMS_DN16": 0.0004267602553704783,
+          "passed_original_bounds": true
+        },
+        {
+          "context": 2,
+          "elements": 786432,
+          "max_abs_DN16": 0.0019530951976776123,
+          "RMS_DN16": 0.0002147715145358799,
+          "passed_original_bounds": true
+        },
+        {
+          "context": 3,
+          "elements": 786432,
+          "max_abs_DN16": 0.002197232097387314,
+          "RMS_DN16": 0.00021570868799805846,
+          "passed_original_bounds": true
+        }
+      ],
+      "maximum_DN16": 0.011718571186065674,
+      "RMS_DN16": 0.00032002429608505537,
+      "bitwise_identical_to_baseline": false,
+      "trace_analysis": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-cudnn-autotune-v1/no-dino-operator-analysis.json",
+        "sha256": "5c6f72ed0ee995d33c2c78f6b3139f7ec771ec6b804cdb296602e58591905946"
+      },
+      "mapped_positive_GPU_activities": 1009,
+      "traced_GPU_activity_ms": 429.06888299999997,
+      "convolution_GPU_activity_ms": 147.557472,
+      "six_RAW_groups_GPU_activity_ms": 369.247771,
+      "peak_CUDA_allocation_GB": 0.420921856
+    },
+    {
+      "arm": "dino",
+      "result": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-cudnn-autotune-v1/dino-result.json",
+        "sha256": "109d479ac8dd96b13aa3c8e0554591754864ff01f68d5cd06bf479c4aa79a56a"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-quarter-FP32-profile-dino-v1/result.json",
+        "sha256": "097188b7491e0a10b0782f42bc8993f0c5025d23bdcb7e7fda33e936552ba142"
+      },
+      "candidate_profile": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-cudnn-autotune-v1/dino-profile/result.json",
+        "sha256": "478b8ba9e69f636a623aa12fe56e4b8bf51563564189ac61697e036079f43a29"
+      },
+      "owner_observed_exited": {
+        "pid": 3273279,
+        "created": 1792329645.64
+      },
+      "baseline_median_ms": 1256.8687200546265,
+      "candidate_median_ms": 464.8971550632268,
+      "observed_median_ratio": 2.7035414314025865,
+      "independent_output_checks": [
+        {
+          "context": 0,
+          "elements": 786432,
+          "max_abs_DN16": 0.004150327295064926,
+          "RMS_DN16": 0.0006050102275045513,
+          "passed_original_bounds": true
+        },
+        {
+          "context": 1,
+          "elements": 786432,
+          "max_abs_DN16": 0.015624761581420898,
+          "RMS_DN16": 0.0007519550587646733,
+          "passed_original_bounds": true
+        },
+        {
+          "context": 2,
+          "elements": 786432,
+          "max_abs_DN16": 0.003662053495645523,
+          "RMS_DN16": 0.00043329958751964524,
+          "passed_original_bounds": true
+        },
+        {
+          "context": 3,
+          "elements": 786432,
+          "max_abs_DN16": 0.0039061903953552246,
+          "RMS_DN16": 0.0004603377605865373,
+          "passed_original_bounds": true
+        }
+      ],
+      "maximum_DN16": 0.015624761581420898,
+      "RMS_DN16": 0.0005768737236504656,
+      "bitwise_identical_to_baseline": false,
+      "trace_analysis": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-cudnn-autotune-v1/dino-operator-analysis.json",
+        "sha256": "56e16d7b045cae744597e62aa2ffc0b0d533f2d66048a99843fe5d4e2a0b2e99"
+      },
+      "mapped_positive_GPU_activities": 1217,
+      "traced_GPU_activity_ms": 473.238939,
+      "convolution_GPU_activity_ms": 148.987485,
+      "six_RAW_groups_GPU_activity_ms": 365.61747,
+      "peak_CUDA_allocation_GB": 0.567341568
+    }
+  ],
+  "all_RGB_values_compared": 6291456,
+  "production_changed": false,
+  "next_measurement": "Full-frame restoration with serial original/autotuned FP32 outputs, full-output1DN16 max/.25DN16 RMS gate and explicit initial-search versus steady-state timing before inference adoption.",
+  "scope": "Two serial shared-machine inference probes on actual10k checkpoints and unchanged four512px GFX contexts. No AMP/TF32, compilation, training, source admission or promotion. Per-context maximum error independently exact and RMS independently replayed with float64 math.fsum within1e-15 DN arithmetic agreement; original1/.25 DN acceptance bounds unchanged. Repeated/hooked/traced equality and state/RNG identity checked by the frozen profiler. Baseline/candidate medians are from separate runs, not balanced repeated throughput trials. A roughly2.7x four-context ratio is not a full-frame speed claim and cannot imply a training gain; training already enables autotuning."
+}

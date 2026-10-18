@@ -41,6 +41,10 @@ binds these views and the completed hue/highlight boards to final reports and
 unchanged original pixels. All twelve RGB16 exports pass artifact checks. The
 decision preserves both10k states and selects analysis of the queued CUDA
 profiles/EMA measurements before the next training budget; no extension was launched.
+That [execution analysis](mixed16-quarter-execution-profile.md) is now complete.
+Its [inference autotuning probe](mixed16-cudnn-autotune.md) passes the original
+16-bit output bounds on four contexts per model; full-frame validation precedes
+any adoption. Production training and the preserved schedules remain unchanged.
 
 [Observed startup, plan/checkpoint hashes, exact owners and checks](results/packed-isotropic-mixed16-quarter-launch-v1.json).
 The live status is

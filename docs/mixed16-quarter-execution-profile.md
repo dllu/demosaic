@@ -39,10 +39,10 @@ attribution. The source trace did not record per-operator input shapes; module
 hook shapes and named ranges are retained separately.
 
 The inference profiler does not enable cuDNN algorithm benchmarking; training
-already enables it. The next bounded test will compare explicit inference
-autotuning against these saved FP32 outputs, preserving the existing1DN16 max /
-.25DN16 RMS gate. No gain is assumed before running that test. It would be an
-inference experiment; it cannot be presented as a new training optimization.
+already enables it. The [subsequent bounded autotuning probe](mixed16-cudnn-autotune.md)
+passes the existing1DN16 max/.25DN16 RMS output gate, with observed medians
+of422.348/464.897ms. Full-frame validation remains required before adoption.
+This is an inference experiment; it cannot be presented as a new training optimization.
 
 ## EMA
 
