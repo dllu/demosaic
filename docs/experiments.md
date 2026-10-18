@@ -10,6 +10,13 @@ source sensitivities and independent color/analytic audits are complete. The
 84,867-source corpus is shared between arms; its isolated benefit is unproven.
 V43 remains the working reference.
 
+A [new input-CFA gain diagnostic](mature-input-cfa-gain.md) on saved V63 parent
+predictions reduces bright-field mean color bias by88%/67% across the fixed
+1,176-observation grid. All14 native triplets/28 cells and an independent
+phase-wise fit are reviewed. A fresh full427 paired FP32 test shares one network
+forward between original and corrected variants; photographic/real superiority
+and full-frame consistency remain unproven. No default or model promotion.
+
 The [completed mature FP32 full-frame and CLI validation](mature-cudnn-fullframe.md)
 adds opt-in `infer --cudnn-benchmark`. Warmed V43/V63 restores fall from206.88/209.35s
 to118.22/120.48s; the actual fresh V43 CLI takes166.67s including search.

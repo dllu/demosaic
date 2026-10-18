@@ -19,6 +19,10 @@ All67 native triplets/111 cells and full numerical/color/source-sensitivity
 checks are complete. Small camera gains have an unseen interval crossing zero;
 missing fine detail and color/highlight tradeoffs remain. An isolated benefit
 from the shared84,867-source corpus is unproven.
+A [saved-parent input-CFA gain diagnostic](mature-input-cfa-gain.md) passes its
+fixed color-grid screen and actual14-triplet native review. A shared-forward
+full427 photo test is running; no trained/default change, photographic gain or
+full-frame consistency is established by uniform-field results.
 All final quality/speed requirements below remain outstanding.
 
 Latest: the [completed RAW-native 40k review](packed-isotropic-quarter-review.md)
