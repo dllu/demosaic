@@ -1,0 +1,141 @@
+{
+  "status": "completed-executed-operator-census-with-independent-core-formula-no-speedup",
+  "execution": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-operator-census-CPU-v1/result.json",
+    "sha256": "abe23c09f18f9a450e275ae38db2f51fec9f627b3e120f17d6b250888a6c370c"
+  },
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/scripts/count_packed_inference_operators_cpu.py",
+    "sha256": "041c16f931676365f382003339469498f4ab9c315b63641ed8504f0616882cfd"
+  },
+  "inputs": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-inputs-v1/inputs.json",
+    "sha256": "11655660520041c0b9255f197758c6c313ef50834605dc78350c1e5c6f3d8784"
+  },
+  "results": [
+    {
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-mixed16-v72-step2000.pt",
+        "sha256": "8d67375e2169adb88f7dcdafd253e23642eb0d87b1dc2d79416cb0f22320416a"
+      },
+      "step": 2000,
+      "dino": false,
+      "case": "fixed-photo-native256",
+      "operator_calls": {
+        "Conv2d": 270,
+        "LayerNorm": 104
+      },
+      "counted_MACs": 14401142784,
+      "independent_core_formula_components": {
+        "local_stem": 150994944,
+        "quarter_stem": 452984832,
+        "four_local_gated_blocks": 440401920,
+        "quarter_gated_blocks": 11211374592,
+        "group_trailing_convolutions": 2038431744,
+        "upsampling_projection": 50331648,
+        "physical_RGB_head": 56623104
+      },
+      "core_MACs": 14401142784,
+      "context_MACs": 0,
+      "constant_metadata_MACs": 452984832,
+      "constant_metadata_fraction": 0.03145478374836173,
+      "hooked_RGB_bitwise_equal": true,
+      "state_RNG_unchanged": true
+    },
+    {
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-mixed16-v72-step2000.pt",
+        "sha256": "8d67375e2169adb88f7dcdafd253e23642eb0d87b1dc2d79416cb0f22320416a"
+      },
+      "step": 2000,
+      "dino": false,
+      "case": "four-GFX-contexts-native512",
+      "operator_calls": {
+        "Conv2d": 270,
+        "LayerNorm": 104
+      },
+      "counted_MACs": 230418284544,
+      "independent_core_formula_components": {
+        "local_stem": 2415919104,
+        "quarter_stem": 7247757312,
+        "four_local_gated_blocks": 7046430720,
+        "quarter_gated_blocks": 179381993472,
+        "group_trailing_convolutions": 32614907904,
+        "upsampling_projection": 805306368,
+        "physical_RGB_head": 905969664
+      },
+      "core_MACs": 230418284544,
+      "context_MACs": 0,
+      "constant_metadata_MACs": 7247757312,
+      "constant_metadata_fraction": 0.03145478374836173,
+      "hooked_RGB_bitwise_equal": true,
+      "state_RNG_unchanged": true
+    },
+    {
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-packed-isotropic-b4-v70-step40000.pt",
+        "sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337"
+      },
+      "step": 40000,
+      "dino": true,
+      "case": "fixed-photo-native256",
+      "operator_calls": {
+        "Conv2d": 297,
+        "LayerNorm": 105,
+        "DINOv3ConvNextLayerNorm": 22,
+        "Linear": 36
+      },
+      "counted_MACs": 20630126592,
+      "independent_core_formula_components": {
+        "local_stem": 150994944,
+        "quarter_stem": 452984832,
+        "four_local_gated_blocks": 440401920,
+        "quarter_gated_blocks": 11211374592,
+        "group_trailing_convolutions": 2038431744,
+        "upsampling_projection": 50331648,
+        "physical_RGB_head": 56623104
+      },
+      "core_MACs": 14401142784,
+      "context_MACs": 6228983808,
+      "constant_metadata_MACs": 452984832,
+      "constant_metadata_fraction": 0.02195744315866969,
+      "hooked_RGB_bitwise_equal": true,
+      "state_RNG_unchanged": true
+    },
+    {
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-packed-isotropic-b4-v70-step40000.pt",
+        "sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337"
+      },
+      "step": 40000,
+      "dino": true,
+      "case": "four-GFX-contexts-native512",
+      "operator_calls": {
+        "Conv2d": 297,
+        "LayerNorm": 105,
+        "DINOv3ConvNextLayerNorm": 22,
+        "Linear": 36
+      },
+      "counted_MACs": 330082025472,
+      "independent_core_formula_components": {
+        "local_stem": 2415919104,
+        "quarter_stem": 7247757312,
+        "four_local_gated_blocks": 7046430720,
+        "quarter_gated_blocks": 179381993472,
+        "group_trailing_convolutions": 32614907904,
+        "upsampling_projection": 805306368,
+        "physical_RGB_head": 905969664
+      },
+      "core_MACs": 230418284544,
+      "context_MACs": 99663740928,
+      "constant_metadata_MACs": 7247757312,
+      "constant_metadata_fraction": 0.02195744315866969,
+      "hooked_RGB_bitwise_equal": true,
+      "state_RNG_unchanged": true
+    }
+  ],
+  "all_four_core_closed_form_counts_match_executed_hooks": true,
+  "CUDA_initialized": false,
+  "scope": "Actual completed checkpoint forwards on pre-existing frozen native256/B1 and native512/B4 inputs. Counts are learned Conv2d/Linear multiply-accumulates, not FLOPs, GPU attribution, wall time, traffic or peak memory. LayerNorm executed shapes/output sizes also retained. Functional physical filters/render, elementwise gates/residuals, data movement and allocation are excluded; output tensor bytes are not unique allocation counts. Potential75% stem MAC removal assumes constant metadata can be folded with exact padding/numerical behavior, which is not implemented or verified here. No training, source/recipe change, output correction, GPU work or optimization adoption.",
+  "decision": "No metadata folding implementation is adopted from these counts. Profile actual trained GPU execution after the serial quality review before choosing speed changes. Nominal MAC fractions are not elapsed-time fractions or bounds on achievable speedup."
+}
