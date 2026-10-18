@@ -13,9 +13,10 @@ fresh V43 CLI restore including search. All full unquantized values and four
 RGB16 exports pass the original gates; sub10s remains unmet.
 
 The [new mature-parent objective trial](reconstruction-objective-v74-v75.md)
-has passed genuine CPU/CUDA preflights and started training on the cleaned
-84,867-source corpus. It stops each matched arm at1k for full quality/native
-review. Engineering success does not establish a loss/data quality benefit;
+has completed both1k boundaries on the cleaned84,867-source corpus. Its
+[source/state audit and first fixed GT views](reconstruction-objective-first1k-review.md)
+are complete, with full quality/native review running. Missing fine detail
+remains in the selected views. Engineering success does not establish a loss/data quality benefit;
 all final quality/speed requirements below remain outstanding.
 
 Latest: the [completed RAW-native 40k review](packed-isotropic-quarter-review.md)

@@ -1,10 +1,11 @@
 # Experiment evidence
 
 The [new mature-parent objective comparison](reconstruction-objective-v74-v75.md)
-has passed genuine CPU/CUDA engineering checks and started its first1k control
-arm. Both arms use the reviewed84,867-source corpus and genuine V63 EMA; only
+has completed both first1k arms and its independent full-state/source audit.
+Both arms use the reviewed84,867-source corpus and genuine V63 EMA; only
 the reconstruction objective differs. One hundred focused tests pass in total,
-with one CUDA test skipped. Full trained quality/native review is pending;
+with one CUDA test skipped. The [first fixed GT views and running review](reconstruction-objective-first1k-review.md)
+retain missing fine detail. Full trained quality/native review is pending;
 neither the new loss nor the larger corpus has a demonstrated gain yet.
 
 The [completed mature FP32 full-frame and CLI validation](mature-cudnn-fullframe.md)

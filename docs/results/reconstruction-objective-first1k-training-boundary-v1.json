@@ -1,0 +1,157 @@
+{
+  "status": "completed-matched-objective-first1000-training-and-independent-source-boundary-audit",
+  "recorded_UTC": "2026-10-18T15:33:39.549521+00:00",
+  "training_terminal": {
+    "file": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/reconstruction-objective-v74-v75-first1k-v2/status.json",
+      "sha256": "5039528c4d71626dfde1ec57891be335245bd5ac1bb63252c1e0f5c3e536b62c"
+    },
+    "data": {
+      "controller": {
+        "pid": 3651598,
+        "created": 1792336209.54
+      },
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/reconstruction-objective-v74-v75-first1k-v2/plan.json",
+        "sha256": "27da40cd2bc49be9037af4abeaa168efc02d7e07e856a5e3b3c42d297afaa883"
+      },
+      "completed": {
+        "control": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/reconstruction-objective-v74-v75-first1k-v2/control-result.json",
+          "sha256": "3412f9b139ba6e17d401097451cb973d4eaff613c7794d40c3bcca77b5d01a7a"
+        },
+        "logmse": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/reconstruction-objective-v74-v75-first1k-v2/logmse-result.json",
+          "sha256": "624f7d916c45906f276420d43161da99f6fba06a2f6e9fad7bfa2a76dfc368dd"
+        }
+      },
+      "status": "completed-matched-objective-first1000-awaiting-full-quality-and-native-review",
+      "updated_unix": 1792337524.1962867,
+      "arm": "logmse",
+      "child": {
+        "pid": 3655209,
+        "created": 1792336859.5
+      },
+      "all41_logged_observations_and_first16_match": true
+    }
+  },
+  "boundary": {
+    "file": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/reconstruction-objective-v74-v75-first1k-review-v1/training-boundary.json",
+      "sha256": "094c2cb4e0c17a4d1832d6f4c669bd3da98420b09a010df9f3867ea1549289a3"
+    },
+    "data": {
+      "status": "independently-verified-both-objective-first1000-boundaries",
+      "training_status": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/reconstruction-objective-v74-v75-first1k-v2/status.json",
+        "sha256": "5039528c4d71626dfde1ec57891be335245bd5ac1bb63252c1e0f5c3e536b62c"
+      },
+      "checkpoints": [
+        {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/reconstruction-objective-v74-v75-first1k-v2/work/runs/dino-convnext-v6-control-v74/last.pt",
+          "sha256": "be6fd22593420656fc9c4eb93845a80b8731808ee2e20f2655a015c4c0641cee",
+          "arm": "control",
+          "step": 1000,
+          "kind": "joint-checkpoint",
+          "label": "V74-first1000"
+        },
+        {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/reconstruction-objective-v74-v75-first1k-v2/work/runs/dino-convnext-v6-logmse-v75/last.pt",
+          "sha256": "f052ebbbe6bc377653a7f29813cda57132a70b0393ea788e77520c11c1d8d6ea",
+          "arm": "logmse",
+          "step": 1000,
+          "kind": "joint-checkpoint",
+          "label": "V75-first1000"
+        }
+      ],
+      "evidence": [
+        {
+          "arm": "control",
+          "source_sha256": "a14f3fa23637518c3223a1857af41e9b9e89cb0316469b541583e569f3de3e6d",
+          "finite_states": [
+            91,
+            91,
+            89
+          ],
+          "all89_model_and_EMA_tensors_changed": true,
+          "result": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/reconstruction-objective-v74-v75-first1k-v2/control-result.json",
+            "sha256": "3412f9b139ba6e17d401097451cb973d4eaff613c7794d40c3bcca77b5d01a7a"
+          },
+          "initialization": {
+            "initial_EMA_exact": true,
+            "DINO_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+          }
+        },
+        {
+          "arm": "logmse",
+          "source_sha256": "a14f3fa23637518c3223a1857af41e9b9e89cb0316469b541583e569f3de3e6d",
+          "finite_states": [
+            91,
+            91,
+            89
+          ],
+          "all89_model_and_EMA_tensors_changed": true,
+          "result": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/reconstruction-objective-v74-v75-first1k-v2/logmse-result.json",
+            "sha256": "624f7d916c45906f276420d43161da99f6fba06a2f6e9fad7bfa2a76dfc368dd"
+          },
+          "initialization": {
+            "initial_EMA_exact": true,
+            "DINO_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+          }
+        }
+      ],
+      "all41_observations_match": true,
+      "scope": "Full-state engineering boundary only; no quality claim or continuation."
+    }
+  },
+  "independent_source_checks": [
+    {
+      "arm": "control",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/reconstruction-objective-v74-v75-first1k-v2/work/runs/dino-convnext-v6-control-v74/last.pt",
+        "sha256": "be6fd22593420656fc9c4eb93845a80b8731808ee2e20f2655a015c4c0641cee"
+      },
+      "source_bundle_sha256": "a14f3fa23637518c3223a1857af41e9b9e89cb0316469b541583e569f3de3e6d",
+      "source_snapshot_code_and_manifest_hashes_match": true,
+      "step": 1000,
+      "planned_steps": 4000,
+      "optimizer_states": 89
+    },
+    {
+      "arm": "logmse",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/reconstruction-objective-v74-v75-first1k-v2/work/runs/dino-convnext-v6-logmse-v75/last.pt",
+        "sha256": "f052ebbbe6bc377653a7f29813cda57132a70b0393ea788e77520c11c1d8d6ea"
+      },
+      "source_bundle_sha256": "a14f3fa23637518c3223a1857af41e9b9e89cb0316469b541583e569f3de3e6d",
+      "source_snapshot_code_and_manifest_hashes_match": true,
+      "step": 1000,
+      "planned_steps": 4000,
+      "optimizer_states": 89
+    }
+  ],
+  "actual_review_status_snapshot": {
+    "controller": {
+      "pid": 3674819,
+      "created": 1792337422.79
+    },
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/reconstruction-objective-v74-v75-first1k-review-v1/plan.json",
+      "sha256": "9da41bcea0e62226c76fa260ac2ad3c402f84bd567e3fd42c602dd9b8ee2b8a8"
+    },
+    "completed": [
+      "boundary",
+      "known"
+    ],
+    "status": "running-objective-quality-review",
+    "updated_unix": 1792337599.8506072,
+    "stage": "unseen",
+    "child": {
+      "pid": 3676119,
+      "created": 1792337599.8
+    }
+  },
+  "scope": "Both exact training owners exited and first1000/4000 states/source snapshots verified. Actual review PIDs live only at recorded UTC. No completed trained-quality/native review, automatic continuation, final scoring or promotion."
+}

@@ -7,6 +7,10 @@ paired scenes. Only the reconstruction objective differs between the arms.
 Both stop at1,000 updates of an original4,000-update schedule for complete
 quality/native review. No automatic continuation follows.
 
+Both1k boundaries are now complete. The [independent boundary and first native
+views](reconstruction-objective-first1k-review.md) are published while the full
+FP32 review runs; they do not yet establish a trained-quality gain.
+
 [Frozen plan, exact source/data/checkpoint hashes, actual CPU/CUDA engineering
 results and verified-live launch snapshot](results/reconstruction-objective-preparation-v1.json).
 The snapshot is dated; inspect its actual controller/child PIDs and creation times

@@ -148,6 +148,15 @@ def test_quarter_statistics_retain_own_progress_as_well_as_primary_pairs():
     assert script().statistics_payload(payload) is payload
 
 
+def test_completed_objective_statistics_keep_primary_pairs_before_native_closure():
+    payload = {
+        "status": "completed-objective-primary-numerical-review-awaiting-native-and-color-review",
+        "sources": list(range(27)),
+        "comparisons": list(range(108)),
+    }
+    assert script().statistics_payload(payload) is payload
+
+
 @pytest.mark.parametrize(
     "container", [{}, {"status": "waiting"}, {"review_complete": True, "status": "waiting"}]
 )

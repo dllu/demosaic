@@ -49,6 +49,7 @@ def statistics_payload(container):
             "completed-packed-isotropic-quarter-statistics-and-first8k-progress",
             "completed-packed-isotropic-mixed16-first32000-example-statistics",
             "completed-packed-isotropic-mixed16-quarter160000-example-statistics",
+            "completed-objective-primary-numerical-review-awaiting-native-and-color-review",
         },
         "Model comparison statistics are incomplete",
     )
