@@ -41,7 +41,8 @@ hook shapes and named ranges are retained separately.
 The inference profiler does not enable cuDNN algorithm benchmarking; training
 already enables it. The [subsequent bounded autotuning probe](mixed16-cudnn-autotune.md)
 passes the existing1DN16 max/.25DN16 RMS output gate, with observed medians
-of422.348/464.897ms. Full-frame validation remains required before adoption.
+of422.348/464.897ms. The [full-frame validation](mixed16-cudnn-fullframe.md)
+also passes; mature-reference testing precedes any default change.
 This is an inference experiment; it cannot be presented as a new training optimization.
 
 ## EMA

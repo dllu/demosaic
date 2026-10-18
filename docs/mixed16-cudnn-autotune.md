@@ -3,7 +3,10 @@
 Explicit inference autotuning reduces observed four-context forward medians
 from1120.04→422.35ms for V72 and1256.87→464.90ms for V73. Both pass the
 original1DN16 maximum/.25DN16 RMS output gate. This is a promising engineering
-result; full-frame validation remains required before adoption.
+result. The [subsequent full-frame comparison](mixed16-cudnn-fullframe.md)
+now passes all output/export/native checks with observed159.53→62.65s and
+171.64→65.56s restores. Production defaults remain unchanged while mature
+references are tested.
 
 [Frozen plan, worker/source/checkpoint/reference hashes, independent output audit and actual CUDA traces](results/mixed16-cudnn-autotune-v1.json).
 The [completed quality report](packed-isotropic-mixed16-quarter-review.md)
@@ -49,7 +52,7 @@ total unified RAM or cached/reserved allocator memory. Both workers exited
 successfully within their300-second limits; launch required48GiB available
 RAM and500GiB free SSD space. Original sources and prior outputs remain intact.
 
-Production defaults are unchanged. Next compare complete serial original and
-autotuned FP32 restores with full-output1DN16 max/.25DN16 RMS checks, and
-measure initial search separately from steady restoration/blending. The
-original failed FP16 result and its strict precision gate remain preserved.
+Production defaults are unchanged. Complete serial original/autotuned FP32
+restores have now passed full-output1DN16 max/.25DN16 RMS checks, with
+initial forwards timed separately from restoration/blending. The original
+failed FP16 result and its strict precision gate remain preserved.
