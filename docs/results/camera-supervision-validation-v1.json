@@ -1,0 +1,100 @@
+{
+  "status": "completed-camera-supervision-tests-and-publication-validation",
+  "recorded_UTC": "2026-10-18T18:05:34.087759+00:00",
+  "tests": [
+    {
+      "file": {
+        "path": "/home/dllu/proj/demosaic/.cache/camera-supervision-focused-tests-v1.log",
+        "sha256": "a430d3b31220df903e3ad8f498e89a5d314119271f19cba1e33d8bd79306abd4"
+      },
+      "passed": 64,
+      "elapsed_seconds": 6.62
+    },
+    {
+      "file": {
+        "path": "/home/dllu/proj/demosaic/.cache/camera-supervision-publication-tests-v1.log",
+        "sha256": "ac8b19d75be5235bc47ac5cd3145bba46ad654a09158c6972ab9032161db45a9"
+      },
+      "passed": 41,
+      "elapsed_seconds": 2.58
+    }
+  ],
+  "Ruff": "All18 changed/new Python files passed; git diff --check passed",
+  "publication": {
+    "file": {
+      "path": "/home/dllu/proj/demosaic/.cache/camera-supervision-publication-audit-v1.json",
+      "sha256": "97c24852c3269879f096eb7c52f965f2b5c501549129160e5f260042e31b8d5d"
+    },
+    "data": {
+      "status": "completed-source-hash-native-image-and-local-link-publication-audit",
+      "recorded_UTC": "2026-10-18T18:02:59.092829+00:00",
+      "registries": [
+        "guarded-CFA-gain-pilot-v1.json",
+        "camera-target-convention-audit-v1.json",
+        "camera-supervision-engineering-v1.json",
+        "camera-supervision-v76-v77-launch-v1.json",
+        "camera-supervision-review-queue-v1.json"
+      ],
+      "unique_path_SHA256_bindings": 825,
+      "source_maps_checked": 6,
+      "current_plans_checked": [
+        "guarded-input-CFA-gain-pilot-v1",
+        "camera-supervision-CPU-preflight-v1",
+        "camera-supervision-CUDA-preflight-v1",
+        "camera-supervision-v76-v77-first1k-v2",
+        "camera-supervision-v76-v77-first1k-review-v2"
+      ],
+      "explicit_historical_source_resolutions": 1,
+      "triplets_actually_viewed": 30,
+      "native_cells_actually_viewed": 60,
+      "published_PNGs_byte_identical": 7,
+      "local_links_checked": 180,
+      "no_reads_outside_authorized_local_storage": true,
+      "scope": "Current publication/plan/frozen-source integrity and existing actual-view receipt verification; no new model quality/inference. Historical plan documents verified by file SHA, not interpreted as current-tree source claims. Analytical audit pre-change data.py resolved by its preserved executed snapshot. Mutable live progress recorded only as dated snapshots."
+    }
+  },
+  "README_local_links_checked": 26,
+  "historical_sensitivity_reader_replay": {
+    "input": {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/camera-sensitivity-reader-v1/historical-replay-input.json",
+      "sha256": "cd9869d243f5a6449c64439dc8a0792c05cfc79cdd57949953f4d6dcffe346fe"
+    },
+    "source": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/reconstruction-objective-v74-v75-first1k-review-v1/work/outputs/sensitivity/result.json",
+      "sha256": "f83f2077ff77d87b43fcb08e585a3e926f001a38ae44642b6bc3d8506db9c742"
+    },
+    "output": {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/camera-sensitivity-reader-v1/output/result.json",
+      "sha256": "cdacb2b3670785fe7d0d379e00f4d038fb630b935d1055ab54ac662be5e5eba6"
+    },
+    "independent_audit": {
+      "file": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/camera-sensitivity-reader-v1/independent-audit.json",
+        "sha256": "163e2b301e036ca0db0fc388ebd1dceeba3b879c25947a3ad6e8acd4e43955c0"
+      },
+      "data": {
+        "status": "completed-independent-Decimal-source-and-scalar-bootstrap-audit",
+        "producer_result": {
+          "path": "/home/dllu/proj/demosaic/.cache/benchmarks/camera-sensitivity-reader-v1/output/result.json",
+          "sha256": "cdacb2b3670785fe7d0d379e00f4d038fb630b935d1055ab54ac662be5e5eba6"
+        },
+        "auditor": {
+          "path": "/home/dllu/proj/demosaic/scripts/audit_commons_source_sensitivity.py",
+          "sha256": "ab4f943cdd093e3ac919318f5f7e6274323a47cfa279fdd844a4d554c195fe71"
+        },
+        "source_rows": 2562,
+        "raw_case_metric_values_reaggregated": 215208,
+        "source_metric_scalars": 7686,
+        "source_max_difference": 0.0,
+        "comparisons": 81,
+        "comparison_statistic_scalars": 540,
+        "comparison_max_difference": 3.552713678800501e-15,
+        "actual_new_neural_forwards": 0,
+        "limits": "Independent arithmetic and coverage from existing score logs only; metrics/prediction pixels and classical witness definitions are not recomputed. Same specified NumPy PCG64 draws, separately reconstructed and byte-bound; scalar summation and manual quantile replace production vectorized bootstrap. Does not measure training/selection or unknown scene-family uncertainty or promote a model."
+      }
+    },
+    "all81_comparisons_and_cohorts_exact_to_original": true,
+    "limits": "Replays existing V74/V75 statistics under the new accepted status contract. No V76/V77 quality data, new noisy draw or model forward."
+  },
+  "limits": "Validation only; actual V76/V77 training and owned review remain live/pending. No promotion or completed quality claim."
+}

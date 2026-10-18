@@ -3,6 +3,16 @@
 The objective is the complete project in `PROMPT.md`, including trained quality,
 not just software that executes. This checklist records the evidence required.
 
+The [guarded photometry pilot](guarded-input-cfa-gain.md) fails its fixed
+high-saturation screen and is closed without full427 continuation. All30 native
+triplets/60 cells were actually reviewed. The separate
+[camera-target convention audit and matched trial](camera-supervision-v76-v77.md)
+identify a physical/canonical target conflict on a constant-preserving RAW head.
+An optional sensor-valid training mode passes64 focused tests, independent
+archived-default replay, exact genuine-parent CPU restart and actual B16 GPU
+engineering checks. Fresh V76/V77 first1k training has its own fixed criteria;
+quality is not established. No default, evaluation-target or inference change.
+
 The [completed mixed16 V72/V73 160k-example review](packed-isotropic-mixed16-quarter-review.md)
 finds own-parent progress but losses against older equal-example controls and
 substantial grain, far below mature V43/V63. All146 native triplets/202 cells

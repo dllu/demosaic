@@ -17,7 +17,12 @@ from torch.utils.data import DataLoader
 from .cfa import bilinear
 from .color import render
 from .data import CleanDataset, degrade, validate_flat_chroma_stops
-from .losses import psnr, reconstruction_loss, validate_reconstruction_objective
+from .losses import (
+    psnr,
+    reconstruction_loss,
+    validate_camera_supervision,
+    validate_reconstruction_objective,
+)
 from .model import JointDemosaic, ModelConfig
 from .optimizer_batches import backward_groups, batch_layout, optimizer_batches
 from .paired_training import PairedDataset, paired_reconstruction_loss, paired_step
@@ -200,6 +205,10 @@ def selected_batches(loaders, first, last, seed, paired_fraction, raw_clean_frac
 def prepare_training_batch(data_step, domain, clean, *, model, device, config, seed):
     """Preserve the original source-step noise stream before any batch grouping."""
     with data_random_context(device, seed, data_step, config.get("data_seed_per_step", False)):
+        retain_sensor_target = (
+            validate_camera_supervision(config.get("camera_supervision", "reference-white-v1"))
+            == "sensor-valid-v1"
+        )
         if domain == "paired":
             return {key: value.to(device) for key, value in clean.items()}
         if domain == "native":
@@ -208,6 +217,7 @@ def prepare_training_batch(data_step, domain, clean, *, model, device, config, s
                 reconstruct_highlights=config.get("reconstruct_highlights", False),
                 preserve_negative_read_noise=config.get("preserve_negative_read_noise", False),
                 noise_free_fraction=config.get("noise_free_fraction", 0.0),
+                retain_sensor_target=retain_sensor_target,
             )
         if domain != "commons":
             raise ValueError("Unknown training domain")
@@ -218,6 +228,7 @@ def prepare_training_batch(data_step, domain, clean, *, model, device, config, s
             physical_fp32=model.config.physical_fp32,
             noise_free_fraction=config.get("noise_free_fraction", 0.0),
             broad_camera=config.get("broad_camera", False),
+            retain_sensor_target=retain_sensor_target,
         )
 
 
@@ -283,6 +294,12 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         config.get("reconstruction_objective", "charbonnier-v1")
     )
     config["reconstruction_objective"] = objective
+    camera_supervision = validate_camera_supervision(
+        config.get("camera_supervision", "reference-white-v1")
+    )
+    config["camera_supervision"] = camera_supervision
+    if camera_supervision == "sensor-valid-v1" and not config.get("reconstruct_highlights", False):
+        raise ValueError("Sensor-valid camera supervision requires reference-white display targets")
     groups, forward_groups = batch_layout(config)
     normalization_policy = config.get("normalization_augmentation", "none")
     if normalization_policy not in ("none", "center-half-mix-v1"):
@@ -554,6 +571,8 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             raise ValueError("Resume multiscale loss differs; initialize a new run")
         if state["config"].get("reconstruction_objective", "charbonnier-v1") != objective:
             raise ValueError("Resume reconstruction objective differs; initialize a new run")
+        if state["config"].get("camera_supervision", "reference-white-v1") != camera_supervision:
+            raise ValueError("Resume camera supervision differs; initialize a new run")
         if state["config"].get("normalization_augmentation", "none") != normalization_policy:
             raise ValueError("Resume normalization augmentation differs; initialize a new run")
         if state["config"].get("data_seed_per_step", False) != config.get(
@@ -780,6 +799,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                         normalized_sensor_weight=config.get("normalized_sensor_weight", 0.0),
                         multiscale_sensor_weight=multiscale_weight,
                         objective=objective,
+                        camera_supervision=camera_supervision,
                     )
             if not torch.isfinite(loss):
                 raise RuntimeError(f"Nonfinite loss at step {step}; last checkpoint retained")

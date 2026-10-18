@@ -302,6 +302,7 @@ def degrade(
     physical_fp32=True,
     noise_free_fraction=0.0,
     broad_camera=False,
+    retain_sensor_target=False,
 ):
     """Convert clean linear sRGB to randomized camera RGB, then mosaic/noise.
 
@@ -312,6 +313,8 @@ def degrade(
     device = rgb.device
     if not 0 <= noise_free_fraction <= 1:
         raise ValueError("Noise-free fraction must be in [0,1]")
+    if type(retain_sensor_target) is not bool:
+        raise ValueError("Sensor target retention must be a boolean")
     if training:
         if broad_camera:
             wb, inverse = sample_broad_cameras(batch, device)
@@ -351,7 +354,7 @@ def degrade(
         else 0.0
     )
     observed = add_noise(mosaic(clean, colors), shot, read, black_level=black, generator=generator)
-    return {
+    result = {
         "packed": observed,
         "variance": variance_map(observed, shot, read),
         "colors": colors,
@@ -361,3 +364,6 @@ def degrade(
         "shot": shot,
         "read": read,
     }
+    if retain_sensor_target:
+        result["sensor_target"] = clean
+    return result

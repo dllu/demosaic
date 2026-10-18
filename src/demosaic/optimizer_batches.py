@@ -102,6 +102,7 @@ def backward_groups(model, selected, prepare, config, *, fingerprint=None):
                         normalized_sensor_weight=config.get("normalized_sensor_weight", 0.0),
                         multiscale_sensor_weight=multiscale,
                         objective=config.get("reconstruction_objective", "charbonnier-v1"),
+                        camera_supervision=config.get("camera_supervision", "reference-white-v1"),
                     )
                 if not torch.isfinite(value):
                     raise RuntimeError("Nonfinite group loss; last checkpoint retained")

@@ -297,10 +297,13 @@ def degrade_raw_clean(
     reconstruct_highlights=False,
     noise_free_fraction=0.0,
     preserve_negative_read_noise=False,
+    retain_sensor_target=False,
 ):
     """Apply fresh Poisson/read/ADC noise directly to true camera-linear targets."""
     if not 0 <= noise_free_fraction <= 1:
         raise ValueError("Noise-free fraction must be in [0,1]")
+    if type(retain_sensor_target) is not bool:
+        raise ValueError("Sensor target retention must be a boolean")
     rgb = batch["camera_rgb"]
     device = rgb.device
     count = len(rgb)
@@ -328,7 +331,7 @@ def degrade_raw_clean(
             else 0.0
         )
         observed = add_noise(mosaic(clean, labels), shot, read, black_level=black)
-        return {
+        result = {
             "packed": observed,
             "variance": variance_map(observed, shot, read),
             "colors": labels,
@@ -338,3 +341,6 @@ def degrade_raw_clean(
             "shot": shot,
             "read": read,
         }
+        if retain_sensor_target:
+            result["sensor_target"] = clean
+        return result

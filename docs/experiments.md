@@ -1,5 +1,17 @@
 # Experiment evidence
 
+The [guarded input-CFA gain pilot](guarded-input-cfa-gain.md) fails its fixed
+high-saturation screen: mean bias grows18.05% and worst bias increases. All30
+native triplets/60 cells were viewed. It preserves a perfect-target oracle and
+avoids the prior purple GFX cast, but neither rescues this policy. No full427
+test, inference change or promotion follows.
+The separate [camera-target audit and V76/V77 trial](camera-supervision-v76-v77.md)
+find an exact constant-field conflict between canonical reference-white targets
+and a physical RAW head. A default-off sensor-valid training mode passes64
+tests, archived default replay and genuine-parent CPU/GPU checks. Fresh matched
+arms stop at1k under predeclared camera/photo/native gates; trained quality
+remains pending. Geometry, selected-domain loading and batch16 stay fixed.
+
 The [completed mature-parent objective comparison](reconstruction-objective-first1k-review.md)
 finds+.02026dB photo PSNR for V75 log-MSE over V74 control,95% source interval
 [+.00651,+.03618], below the predeclared.03dB continuation minimum. Both stop
