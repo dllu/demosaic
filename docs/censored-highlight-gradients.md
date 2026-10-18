@@ -11,7 +11,7 @@ The [executed source,48 cases,64 independent replays and plot receipt](results/c
 record actual CPU FP32/NumPy FP64 arithmetic. No optimizer, pretrained restoration
 model, DINO backbone, photograph or CUDA operation is used. The actual randomly
 initialized phase-aware RAW head executes48 forwards and its state stays unchanged.
-The [ongoing V76/V77 review](camera-supervision-first1k-camera-interim.md), failed
+The [completed V76/V77 review](camera-supervision-first1k-review.md), failed
 continuation gate and production implementation remain unchanged.
 
 ## Concrete stationary error

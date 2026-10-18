@@ -10,11 +10,12 @@ triplets/60 cells were actually reviewed. The separate
 identify a physical/canonical target conflict on a constant-preserving RAW head.
 An optional sensor-valid training mode passes64 focused tests, independent
 archived-default replay, exact genuine-parent CPU restart and actual B16 GPU
-engineering checks. Both V76/V77 first1k arms are complete; their
-[camera interim](camera-supervision-first1k-camera-interim.md) finds−.02714/+.08098dB
-known/unseen CFA effects. Known4 fails the original continuation minimum. All22
-early triplets/34 native cells were viewed; full427/color/GFX closure remains
-pending. No extension/promotion, default, evaluation-target or inference change.
+engineering checks. The [completed V76/V77 review](camera-supervision-first1k-review.md)
+finds+.16011dB photo PSNR and lower bright-color bias, with−.02714/+.08098dB
+known/unseen CFA effects. Known4 fails the original continuation minimum. All67
+triplets/111 native cells and full primary/color/GFX/analytic/source audits are
+complete; fine detail remains weak. No extension/promotion, default, evaluation-target
+or inference change.
 
 The [completed mixed16 V72/V73 160k-example review](packed-isotropic-mixed16-quarter-review.md)
 finds own-parent progress but losses against older equal-example controls and

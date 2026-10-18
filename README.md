@@ -71,8 +71,8 @@ neither replaces V43.
 The [completed content audit](docs/commons-content-overlap.md) supplies
 84,867-file training manifests with identified capture series quarantined.
 The [completed objective comparison](docs/reconstruction-objective-first1k-review.md)
-misses its continuation gate. The [camera-supervision trial](docs/camera-supervision-first1k-camera-interim.md)
-has mixed camera results and fails its continuation gate; full review continues.
+misses its continuation gate. The [completed camera-supervision review](docs/camera-supervision-first1k-review.md)
+finds photo/color gains with mixed camera results; its continuation gate also fails.
 See [training pipeline work](docs/training-pipeline.md) for augmentation before
 the last reduction, selected-domain loading and the batch-size sweep.
 The [packed detail review](docs/packed-detail-v40-v41-review.md) retains the

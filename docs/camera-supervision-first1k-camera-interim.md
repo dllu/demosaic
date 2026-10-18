@@ -1,5 +1,8 @@
 # V76/V77 first1000: completed camera interim, full review running
 
+The later [completed full review](camera-supervision-first1k-review.md) supersedes
+this dated interim. Its original results and scope are retained below.
+
 Both fresh arms completed their original first1,000-update boundary. Sensor-valid
 V77 gains on unseen cameras but loses on known cameras, failing the
 [predeclared continuation requirement](camera-supervision-v76-v77.md). Neither

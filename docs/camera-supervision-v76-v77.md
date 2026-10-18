@@ -5,11 +5,11 @@ canonical highlight target and a constant-preserving RAW head. This motivates
 a default-off training mode, `camera_supervision: sensor-valid-v1`, and a fresh
 matched control. It is not evidence that a newly trained model is better.
 
-Both arms have now completed1,000 updates. The
-[camera interim and native GT crops](camera-supervision-first1k-camera-interim.md)
-find−.02714dB on known4 and+.08098dB on unseen5. Known4 fails the original
-continuation screen, so neither arm extends or promotes. Full427/color/GFX
-and remaining native/numerical review are running under the frozen plan.
+The [completed full review and native GT crops](camera-supervision-first1k-review.md)
+find+.16011dB rendered photo PSNR,−.02714dB known4 and+.08098dB unseen5 at1k.
+Known4 fails the original continuation screen, so neither arm extends or promotes.
+All67 native triplets/111 cells, full427/color/GFX/analytic/source-sensitivity
+and independent numerical reviews are complete. Weak texture remains missing.
 
 ## Concrete conflict
 

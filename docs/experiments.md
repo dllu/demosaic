@@ -10,10 +10,11 @@ find an exact constant-field conflict between canonical reference-white targets
 and a physical RAW head. A default-off sensor-valid training mode passes64
 tests, archived default replay and genuine-parent CPU/GPU checks. Fresh matched
 arms have both completed1k. Their
-[camera interim](camera-supervision-first1k-camera-interim.md) finds−.02714/+.08098dB
-known/unseen CFA effects; known4 fails the original continuation gate. No
-extension/promotion; full427/color/GFX/native closure remains running. Geometry,
-selected-domain loading and batch16 stay fixed.
+[completed full review](camera-supervision-first1k-review.md) finds+.16011dB
+rendered photo PSNR, lower color bias and−.02714/+.08098dB known/unseen CFA effects.
+Known4 fails the original continuation gate. All67 triplets/111 native cells and
+independent primary/color/analytic/source checks are complete; weak detail remains
+missing. No extension/promotion. Geometry, selected-domain loading and batch16 stay fixed.
 
 The [completed mature-parent objective comparison](reconstruction-objective-first1k-review.md)
 finds+.02026dB photo PSNR for V75 log-MSE over V74 control,95% source interval
