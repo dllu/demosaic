@@ -63,8 +63,9 @@ See [experiment results](docs/experiments.md), [quality and noise diagnostics](d
 and the [completion evidence checklist](docs/requirements.md).
 The [Commons archive download](docs/commons-download.md) stopped cleanly at its
 512GiB free-space reserve after adding95,347 files; active experiments retain
-frozen manifests. The [matched V72/V73 camera and crop interim review](docs/packed-isotropic-mixed16-matched-camera-interim.md)
-is available while their full photographic review runs; neither replaces V43.
+frozen manifests. The [completed matched V72/V73 review](docs/packed-isotropic-mixed16-first32000-review.md)
+finds gains over older equal-example models but substantial residual noise;
+neither replaces V43.
 The [completed content audit](docs/commons-content-overlap.md) supplies future
 84,867-file training manifests with identified capture series quarantined.
 See [training pipeline work](docs/training-pipeline.md) for augmentation before

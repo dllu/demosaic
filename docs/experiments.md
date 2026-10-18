@@ -1,8 +1,15 @@
 # Experiment evidence
 
-The [fresh mixed16 V72/V73 trial](packed-isotropic-mixed16-trial.md) has completed
-both32,000-example training gates and passed its independent boundary audit;
-the full matched FP32 review is now running. The
+The [completed mixed16 V72/V73 review](packed-isotropic-mixed16-first32000-review.md)
+finds +0.50510/+0.41568dB on427 photos over older equal-example models, but
+strong grain, weak detail and151.54/169.39s FP32 full-frame restores prevent
+promotion. All146 native views, twelve RGB16 exports,4,704 fresh FP32 hue
+predictions, primary/analytic/color arithmetic and source sensitivities pass
+their checks. The tiny DINO photo gain is+.00493dB. An isolated continuation
+to10k original-schedule updates/160k examples is selected, preserving the2k
+evidence; the report does not launch it. V43 remains the working reference.
+
+The earlier
 [full development-camera CPU check](packed-isotropic-mixed16-V72-camera-CPU.md)
 improves known/unseen measured-CFA PSNR by2.8302/2.1418dB over original V71
 at the same example budget, with all nine scene gains positive. It still
@@ -11,7 +18,7 @@ strong grain. The completed [matched GPU camera and native-crop interim review](
 finds only +0.01779/+0.03839dB DINO CFA gains on known/unseen scenes, with
 both arms still far below mature controls. It includes two exact-GT triplets
 per new model and matched GFX foliage/fence contexts. Full photographic,
-full-frame and color review remains pending; V43 remains the working reference.
+full-frame and color results are in the completed report above.
 
 The [current-versus-EMA selected CPU check](mixed16-current-EMA-CPU.md)
 replays all12 original EMA F32 predictions exactly, then compares the same

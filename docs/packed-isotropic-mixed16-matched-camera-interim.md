@@ -4,8 +4,8 @@ At the matched 32,000-example gate, DINO V73 exceeds no-DINO V72 by only
 0.01779/0.03839 dB on known/unseen-camera measured-CFA PSNR. Both remain
 substantially behind mature models and RawNIND, and retain strong grain in the
 native crops. Neither is promoted. The full photographic, analytic, full-frame
-GFX and color review is still running; this is a completed camera panel and
-selected CPU crop check, rather than that full review.
+GFX and color review is now [complete](packed-isotropic-mixed16-first32000-review.md).
+This historical interim covers the camera panel and selected CPU crop check.
 
 [Complete statistics, checkpoint/source/ROI/noise/display metadata and artifact hashes](results/packed-isotropic-mixed16-matched-camera-interim-v1.json).
 [Training-boundary audit](results/packed-isotropic-mixed16-first32000-training-boundary-v1.json)
@@ -156,5 +156,5 @@ noisy/reference panels and48 copied matched photo/GFX board cells. All32
 camera board cells are also exact copies from their hashed native PNGs. This
 reuses the rendering operator; it does not independently validate its metric
 definitions. The V73 photo/GFX boards and all three matched boards were viewed
-at native scale. Full quality, full-frame output integrity and performance
-remain pending; V43 remains the README working reference.
+at native scale. The subsequent full quality/output/performance results are in
+the completed report linked above; V43 remains the README working reference.

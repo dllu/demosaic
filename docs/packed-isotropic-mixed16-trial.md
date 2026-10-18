@@ -6,25 +6,29 @@ uses the full original Commons/native/paired training mixture. Both genuine
 source/noise and FP32 portable-reload checks. Both V72 no-DINO and V73 DINO
 have completed their2,000-update/32,000-example gates. The
 [independent final-boundary audit and actual handoff](results/packed-isotropic-mixed16-first32000-training-boundary-v1.json)
-pass; both training workers/controller have exited and the full FP32 review
-is running. The [selected V72 CPU crop review](packed-isotropic-mixed16-V72-CPU-preview.md)
-finds modest improvement over originalRAW8k on two fixed observations but
-substantial residual grain. The completed
+pass; both training workers/controller have exited. The
+[completed full FP32 review](packed-isotropic-mixed16-first32000-review.md)
+finds +0.50510/+0.41568dB photo gains over older equal-example controls, but
+strong residual grain and151.54/169.39s FP32 full-frame restores prevent
+promotion. V43 remains the working reference. The earlier
 [matched camera and native-crop interim review](packed-isotropic-mixed16-matched-camera-interim.md)
 finds only small DINO gains (+0.01779/+0.03839dB measured-CFA known/unseen),
-with both new arms still substantially behind mature models and RawNIND.
-Complete matched photographic quality and full-frame performance remain pending.
+with both new arms substantially behind mature models and RawNIND.
+All automated audits and146 native-triplet views are now complete; the review
+owners have exited. The quality decision selects an isolated continuation to
+10,000 original-schedule optimizer updates/160,000 examples, preserving all2k
+evidence. That next run is not launched by the report.
 
 The [current-versus-EMA CPU check](mixed16-current-EMA-CPU.md) finds only
 0.03–0.17dB current-weight gains on the same two fixed photos, with strong grain
-in both policies and no clear new GFX foliage/fence advantage. The review keeps
+in both policies and no clear new GFX foliage/fence advantage. The review kept
 its original EMA policy; this selected diagnostic does not explain the large
 gap to mature models or establish convergence.
 
 A [genuine trained-state CPU restart preflight](mixed16-trained-state-restart-CPU.md)
 now matches four updates against2+2 exactly for both2k parents, including
 Adam/EMA/counters/CPU RNG. It uses cropped64px training-only fixtures and
-does not exercise CUDA or decide on a continuation. All learned test weights
+does not exercise CUDA or itself decide on a continuation. All learned test weights
 are discarded; the production training gate and quality review remain unchanged.
 
 The [complete V72 development-camera CPU check](packed-isotropic-mixed16-V72-camera-CPU.md)
@@ -78,12 +82,12 @@ hashes match across arms. The startup audit also compares available logged sourc
 steps with V71's original log and finds identical domains and observation hashes.
 
 The immutable prefix archive references are authoritative: producer `last.pt`
-references describe their source-time files and will be replaced at the quality
+references describe their source-time files and were replaced at the quality
 gate. The launch receipt records the active controller/child identity and a
 snapshot of progress; it is not a live progress counter.
 
-Training stops at the32,000-example gate. The full first-gate performance report
-must include full held-out/camera/analytic/color checks, at least two native100%
+Training stopped at the32,000-example gate. The completed first-gate report
+includes full held-out/camera/analytic/color checks, at least two native100%
 noisy/denoised/exact-synthetic-GT crop triplets per model, and standing GFX
 foliage/fence comparisons with the ISO100 capture labeled an independent
 qualitative reference. There is no automatic extension, protected-final scoring
@@ -95,7 +99,8 @@ Its independent preflight rechecked both immutable prefix states and their
 source bundles, verified38 input files and181 frozen files, and refused to
 release inference while training remained live. The implementation has59
 focused passing CPU tests. Both exits and the independent final audit subsequently
-released the review. Known/unseen panels are complete; full427 is running.
+released the review. All panels, statistical/artifact audits and native views
+are complete, without promotion.
 
 Primary panels will recompute six checkpoint models in IEEE FP32: V72/V73,
 working V43, mature V63, and original V71/V70 at8,000 B4 updates. The latter
@@ -118,8 +123,8 @@ repeat uncertainty or certify scene independence.
 The queue saves native160-pixel triplets and checks source/ROI, noise,
 checkpoint hashes, exposure, unchanged noisy/reference panels and RGB16
 exports. Full-frame timings will be single shared-machine observations.
-Actual visual inspection and the quality decision remain subsequent work;
-successful automation alone cannot promote these models.
+Actual visual inspection is now complete and the decision keeps both models
+unpromoted. Successful automation alone cannot promote these models.
 
 The first gate is also a much shorter training run than the related published
 synthetic Bayer experiment. [JD3Net §4.4](https://arxiv.org/html/2601.00703v2#S4.SS4)

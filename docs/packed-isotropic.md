@@ -8,13 +8,15 @@ grain. Full GFX restores take50.70/53.74s. **Neither endpoint is promoted**;
 V43 remains the working reference.
 The [experimental fixed-unit options](packed-isotropic-units.md) record RAW
 input gain and learned residual scale in checkpoints. Defaults preserve existing
-models; a full-data quality gain remains untested. The completed batch-learning
+models; their isolated effect on full-data quality remains unmeasured. The completed batch-learning
 diagnostic motivates testing a mixed-domain effective batch16.
 The [fresh V72/V73 mixed16 trial](packed-isotropic-mixed16-trial.md) has completed
 both32,000-example gates with checked prefixes and full-state resume.
 Its [matched camera/native-crop interim review](packed-isotropic-mixed16-matched-camera-interim.md)
-finds only small DINO gains and substantial residual grain. Full photographic,
-full-frame and color checks remain in progress. A selected
+finds only small DINO gains and substantial residual grain. Its
+[completed full review](packed-isotropic-mixed16-first32000-review.md)
+confirms modest own-control gains but weak restoration and151–169s FP32
+full-frame restores. Neither is promoted. A selected
 [current-versus-EMA CPU check](mixed16-current-EMA-CPU.md) does not find a large
 quality gap hidden by averaging; no inference policy changes.
 The three requested pipeline improvements are already measured separately in

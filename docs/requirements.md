@@ -7,10 +7,13 @@ The current [fresh mixed16 V72/V73 trial](packed-isotropic-mixed16-trial.md)
 has completed both32,000-example boundaries. The
 [matched camera/native-crop interim review](packed-isotropic-mixed16-matched-camera-interim.md)
 finds small DINO CFA gains and substantial residual grain, far below mature
-controls. A [current-versus-EMA check](mixed16-current-EMA-CPU.md) finds only
-small selected-photo differences; it changes no inference policy. Full427,
-full-frame and color review is still running. These results do not meet the
-quality/speed requirements below, and no model is promoted.
+controls. Its [completed full review](packed-isotropic-mixed16-first32000-review.md)
+confirms +0.50510/+0.41568dB photo gains over older equal-example models but
+weak quality and151.54/169.39s FP32 restores. All146 native views and numerical/
+artifact/sensitivity checks are complete. A [current-versus-EMA check](mixed16-current-EMA-CPU.md)
+finds only small selected-photo differences and changes no inference policy.
+More original-schedule training is selected for a separate budget check.
+These results do not meet the quality/speed requirements below; no model is promoted.
 
 Latest: the [completed RAW-native 40k review](packed-isotropic-quarter-review.md)
 confirms own8k progress, but 29.73/29.95dB photo scores, residual native grain
