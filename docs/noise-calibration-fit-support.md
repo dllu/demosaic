@@ -105,6 +105,12 @@ if final real-photo quality remains poor. It does not change the current V67
 original-10k comparison, add training or select different noise settings from
 the standing reference. The requested quality and speed goals remain open.
 
+The separate [completed V43/V63 conditioning-sensitivity check](gfx-noise-conditioning-sensitivity.md)
+now compares ¼×/1×/4× variance on four cached GFX contexts. Higher conditioning
+softens foliage, fence and building detail without much visible benefit in the
+already-clean nominal sky. The input-only profile stays unchanged; these
+qualitative comparisons supply neither camera calibration truth nor exact-GT scores.
+
 ```bash
 source scripts/env.sh
 CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 \
