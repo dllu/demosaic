@@ -3,9 +3,11 @@
 The [CPU diagnostic](results/packed-isotropic-fresh-coordinate-CPU-launch-v1.json)
 is running on the same 16 frozen training batches used by the earlier
 [production-learning checks](packed-isotropic-production-learning.md).
-All three arms have completed their first 16 optimizer updates. Their starting
+All three arms have completed their first 64 optimizer updates. Their starting
 parameter bytes and Torch RNG match, and every initial prediction equals the
-same bilinear baseline on all 16 batches. Final learning comparisons are pending.
+same bilinear baseline on all 16 batches. The first full-fixture comparison
+finds no broad improvement from either alternative coordinate map. The planned
+128/256-update comparisons remain pending; final results are not available.
 
 The question is whether weak RAW features relative to the conditioning features
 make learning difficult. The earlier gain 4 experiment scaled RAW inputs and
@@ -49,6 +51,37 @@ reference-CFA samples; independently demosaiced RGB contributes only its
 existing coarse loss. A low-ISO reference retains noise and is not exact RGB GT.
 Whole-fixture losses/MSE are measured at 0, 64, 128 and 256 updates, with descriptive
 batch means per domain. These training errors do not measure generalization.
+
+## Interim 64-update comparison
+
+The [independently audited interim receipt](results/packed-isotropic-fresh-coordinate-CPU-interim64-v1.json)
+retains immutable copies of the evaluation curves and first 192 update records.
+The table reports **64-update / initial MSE**, so values below one indicate
+lower error against the same fixed training observations and targets.
+
+| Input coordinates | Commons/procedural | Native RAW synthetic | Paired measured CFA |
+| --- | ---: | ---: | ---: |
+| Original RAW | 0.94225 | 0.98892 | 1.16459 |
+| RAW ×32 | 0.93168 | 0.91761 | 1.26103 |
+| Noise companding | 0.98316 | 1.00556 | 1.15152 |
+
+Gain32 lowers native synthetic MSE more, but worsens paired MSE. Companding
+does not offer a broad reduction. All nine domain/arm loss ratios exceed one
+at this point. This is a short fixed-LR fresh-model diagnostic with repeated
+samples; it does not show convergence or establish a final ranking.
+
+Gradient clipping occurs on 55/64 original-RAW updates, 64/64 gain32 updates
+and 57/64 companded updates. These are observed global pre-clip norms, not a
+controlled clipping ablation or proof of a failure mechanism. The independent
+auditor rechecks all 61 source/input hashes, the exact live process identity,
+all update/mode/observation ordering and finite losses/norms, and recomputes all
+36 domain means with `math.fsum`. They agree exactly with the saved reductions.
+Initial case losses/MSE are identical across arms; the original worker's actual
+all-batch bilinear equality checks and common model/RNG digests remain recorded.
+
+The planned diagnostic continues unchanged to 256 updates, subject to yielding
+to the queued owned reviews. This interim result supports no production
+coordinate-map change or new quality model.
 
 ## Execution checks and scheduling
 
