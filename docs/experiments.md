@@ -1,15 +1,24 @@
 # Experiment evidence
 
-The [completed mixed16 V72/V73 review](packed-isotropic-mixed16-first32000-review.md)
-finds +0.50510/+0.41568dB on427 photos over older equal-example models, but
-strong grain, weak detail and151.54/169.39s FP32 full-frame restores prevent
-promotion. All146 native views, twelve RGB16 exports,4,704 fresh FP32 hue
-predictions, primary/analytic/color arithmetic and source sensitivities pass
-their checks. The tiny DINO photo gain is+.00493dB. An isolated continuation
-to10k original-schedule updates/160k examples is selected, preserving the2k
-evidence. That [continuation is now running](packed-isotropic-mixed16-quarter-training.md),
-with its [complete review queued](packed-isotropic-mixed16-quarter-review-queue.md)
-behind the exact owner. V43 remains the working reference.
+The [completed mature FP32 full-frame and CLI validation](mature-cudnn-fullframe.md)
+adds opt-in `infer --cudnn-benchmark`. Warmed V43/V63 restores fall from206.88/209.35s
+to118.22/120.48s; the actual fresh V43 CLI takes166.67s including search.
+All complete unquantized outputs pass the original1DN16 max/.25DN16 RMS limits,
+all four RGB16 exports match their declared quantizers, and24 GFX/12 exact-GT
+native cells were actually viewed. Twenty targeted CPU tests pass. Startup and
+warm timing scopes remain separate; this changes execution, not trained quality.
+
+The [completed mixed16 V72/V73 160k-example review](packed-isotropic-mixed16-quarter-review.md)
+finds +.53338/+.87718dB on427 photos over their own2k parents, but
+−1.02266/−.89509dB against older equal-example models. The DINO arm gains
+.34873dB over its matched no-DINO arm; both retain strong grain and weak detail,
+with substantial gaps to mature V43/V63. All146 native triplets/202 cells,
+twelve RGB16 exports and primary/analytic/color checks are complete. Neither is
+promoted or automatically extended beyond10k; V43 remains the working reference.
+
+The earlier [first32k-example review](packed-isotropic-mixed16-first32000-review.md)
+preserves its original +.50510/+.41568dB gains over the then equal-example
+controls. Those comparisons do not describe the later160k boundary.
 
 The earlier
 [full development-camera CPU check](packed-isotropic-mixed16-V72-camera-CPU.md)

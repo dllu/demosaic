@@ -70,6 +70,11 @@ def parser():
     infer.add_argument("--overlap", type=int, default=64)
     infer.add_argument("--batch-size", type=int, default=4)
     infer.add_argument("--device", default="cuda")
+    infer.add_argument(
+        "--cudnn-benchmark",
+        action="store_true",
+        help="Autotune CUDA FP32 tiles (adds startup time;16GiB allocator cap)",
+    )
     benchmark = commands.add_parser(
         "benchmark", help="Measure actual tiled large-image restoration"
     )
@@ -200,10 +205,20 @@ def main(argv=None):
         )
     elif args.command == "infer":
         end_to_end_started = time.perf_counter()
+        if args.cudnn_benchmark and (
+            torch.device(args.device).type != "cuda"
+            or args.precision != "float32"
+            or args.refinement_precision != "float32"
+        ):
+            raise ValueError(
+                "--cudnn-benchmark requires --device cuda and --precision float32 "
+                "(including --refinement-precision float32)"
+            )
         from .cfa import color_indices
         from .color import render
         from .inference import load_checkpoint, restore_tiled
         from .io import read_raw, write_rgb16
+        from .precision import cudnn_autotune
 
         # Validate all destinations before performing expensive inference.
         output = writable_path(args.output)
@@ -257,24 +272,33 @@ def main(argv=None):
                 identity = profile["raw_metadata"]
                 if identity["camera"] != metadata.camera or identity.get("iso") != metadata.iso:
                     raise ValueError("Noise profile camera/ISO differs from this RAW")
-        model, checkpoint = load_checkpoint(
-            args.checkpoint, args.device, refinement_precision=args.refinement_precision
-        )
-        rgb, stats = restore_tiled(
-            model,
-            raw,
-            color_indices(pattern),
-            shot=args.shot,
-            read=args.read,
-            tile=args.tile,
-            overlap=args.overlap,
-            batch_size=args.batch_size,
-            device=args.device,
-            wb=wb,
-            matrix=matrix,
-            precision=args.precision,
-            refinement_precision=args.refinement_precision,
-        )
+        with cudnn_autotune(
+            args.device, enabled=args.cudnn_benchmark, precision=args.precision
+        ) as backend_policy:
+            model, checkpoint = load_checkpoint(
+                args.checkpoint, args.device, refinement_precision=args.refinement_precision
+            )
+            if args.cudnn_benchmark and model.config.rgb_hidden_autocast:
+                raise ValueError(
+                    "Checkpoint forces hidden half precision; choose an FP32 checkpoint "
+                    "for --cudnn-benchmark"
+                )
+            rgb, stats = restore_tiled(
+                model,
+                raw,
+                color_indices(pattern),
+                shot=args.shot,
+                read=args.read,
+                tile=args.tile,
+                overlap=args.overlap,
+                batch_size=args.batch_size,
+                device=args.device,
+                wb=wb,
+                matrix=matrix,
+                precision=args.precision,
+                refinement_precision=args.refinement_precision,
+            )
+        stats["cudnn_autotune"] = backend_policy
         write_rgb16(output, rgb.permute(1, 2, 0).numpy(), metadata=metadata, flip=flip)
         if args.preview:
             preview = render(

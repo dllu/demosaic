@@ -290,6 +290,20 @@ compute precision. New checkpoints keep physical interpolation, the variance
 prior, color conversion and overlap accumulation in FP32. Explicit `float32`
 also disables TF32; CPU inference uses FP32. Training defaults to BF16.
 The output sidecar records the effective compute precision and memory layout.
+
+For CUDA FP32 inference, optional `infer --cudnn-benchmark --precision float32`
+searches convolution algorithms with a limit of 10 and a 16GiB PyTorch CUDA
+allocator cap, retaining any stricter existing quota. Refinement must also stay
+FP32; checkpoints forcing hidden half precision are rejected. The helper restores
+prior backend settings, precision and quota on exit/error. The flag defaults off;
+the sidecar records its effective settings. It does not change training or the
+separate `benchmark` command, clear algorithm caches, or cap all unified RAM.
+
+On the cached 102MP GFX scene, the actual fresh V43 CLI restore takes166.67s
+including search. A separate warmed comparison takes206.88→118.22s with every
+unquantized value within the original1DN16 max/.25DN16 RMS limits. These timings
+have different startup scopes; see [the full report, RGB16 checks and native crops](mature-cudnn-fullframe.md).
+
 FP16 gives a small measured quality gain for V6: a matched 427-photo comparison
 finds +0.0218 dB and +0.000723 SSIM over BF16. The 16-photo FP32 reference is
 close to FP16. Use the explicit flag when reproducing those results; final-model

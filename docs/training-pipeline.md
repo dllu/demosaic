@@ -23,11 +23,13 @@ keeps RAW/targets fixed and leaves the geometry order intact. Its
 found a small matched photo gain; texture/color limitations prevented promotion.
 The [experimental RAW-native backbone](packed-isotropic.md) retains the same
 geometry and selected-domain loading. Its completed sweep selects batch4 for
-that architecture; the older RGB model retains batch16. Both fresh models have
-completed their first32,000 examples; [primary quality results and native crops](packed-isotropic-first32000-review.md)
-show weak restoration. Neither is promoted. A
-[full-state continuation to a quarter of the original horizon](packed-isotropic-production-learning.md#original-quality-trials-resume-with-full-state)
-is running after separate training-only optimization checks; the recipe and data stay fixed.
+that architecture; the older RGB model retains batch16. The later
+[mixed optimizer-batch comparison](mixed-optimizer-batches.md) finds four B4
+source groups faster than a joined B16 for the RAW-native model. Its
+[completed160k-example quality review](packed-isotropic-mixed16-quarter-review.md)
+finds gains over its own parents but losses against older equal-example models.
+Neither new arm is promoted or automatically extended. These model comparisons
+change additional training factors and do not establish a batch-only quality gain.
 
 For seed45's first 1,000 steps, 514 select Commons/procedural, 230 paired RAW and
 256 native-RAW synthetic. Batch4 formerly consumed 4,000 Commons examples
