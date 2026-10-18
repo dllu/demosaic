@@ -48,3 +48,11 @@ optimizer1125/18,000 examples. Main training/review sources, manifests and guard
 remain unchanged; protected-final scoring remains closed. Full matched quality,
 SOTA, large real-photo superiority and100MP/10s remain unproven/unmet. Goal stays
 active; this turn is progress, not completion.
+
+A final receipt check caught a companion-field collision: flattening Commons
+source-credit metadata had replaced the original image-reference field. Added
+separate `image`/`original_image` references while keeping `source` credits.
+All five new camera images and both exact-GT companion image hashes now verify;
+source credits, local report links, private result/driver hashes and all live
+training/review guards pass. Scores and crop pixels are unchanged. DINO remains
+live at optimizer1325/21,200 examples, with the review still waiting correctly.
