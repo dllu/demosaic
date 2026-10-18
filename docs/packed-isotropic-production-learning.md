@@ -175,3 +175,9 @@ discards all learned states. Its [64-update interim comparison](results/packed-i
 finds no broad coordinate-map improvement; final results remain pending.
 It yields CPU computation during owned reviews/timing and continues separately
 after those owners exit; it does not change the matched trials.
+
+The [completed four-arm CUDA residual-unit diagnostic](packed-isotropic-residual-units.md)
+adds a fixed1/32 scale on the learned residual to the input gain32 arm. This
+reduces early original-loss overshoot, but native/paired improvements over the
+bilinear start are tiny and paired MSE remains above its start. All weights are
+discarded, no production setting is adopted, and the CPU study continues.

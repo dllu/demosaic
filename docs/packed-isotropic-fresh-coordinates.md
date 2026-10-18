@@ -7,7 +7,9 @@ All three arms have completed their first 64 optimizer updates. Their starting
 parameter bytes and Torch RNG match, and every initial prediction equals the
 same bilinear baseline on all 16 batches. The first full-fixture comparison
 finds no broad improvement from either alternative coordinate map. The planned
-128/256-update comparisons remain pending; final results are not available.
+final256-update comparison remains pending; final results are not available.
+The separate [completed CUDA residual-unit diagnostic](packed-isotropic-residual-units.md)
+uses four actual GPU controls and does not replace this CPU experiment.
 
 The question is whether weak RAW features relative to the conditioning features
 make learning difficult. The earlier gain 4 experiment scaled RAW inputs and
