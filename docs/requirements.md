@@ -3,6 +3,14 @@
 The objective is the complete project in `PROMPT.md`, including trained quality,
 not just software that executes. This checklist records the evidence required.
 
+The [directional/interval study](directional-interval-v78-v79.md) is training
+its complete original4k arms from genuine V63 EMA. Its
+[actual first1k state audit and review preparation](directional-interval-review-preparation.md)
+verify finite99/99/97 states and nonzero optimizer moments in all25,800 new
+parameters. Full primary/color/GFX/native review, including fresh V63 and
+matched retained V43/RawNIND references, is queued. No new model-quality,
+full-frame16-bit or speed result exists yet, and no model is promoted.
+
 The [guarded photometry pilot](guarded-input-cfa-gain.md) fails its fixed
 high-saturation screen and is closed without full427 continuation. All30 native
 triplets/60 cells were actually reviewed. The separate
@@ -44,7 +52,7 @@ larger-patch training performance, and only1.54% of the corpus supports512px
 without altering the4×→geometry→2× recipe. No model or data-default changes.
 All final quality/speed requirements below remain outstanding.
 
-Latest: the [completed RAW-native 40k review](packed-isotropic-quarter-review.md)
+The [completed RAW-native 40k review](packed-isotropic-quarter-review.md)
 confirms own8k progress, but 29.73/29.95dB photo scores, residual native grain
 and50.70/53.74s full GFX restores do not meet the quality/speed goals. Neither
 endpoint is promoted. The trained compiler's photo gate is rejected; the

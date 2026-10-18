@@ -1,0 +1,249 @@
+{
+  "status": "verified-directional-first1k-engineering-and-queued-full-native-review",
+  "created_unix": 1792354448.127122,
+  "tests": {
+    "focused_native_selection_board_and_gate": {
+      "passed": 34,
+      "seconds": 0.5
+    },
+    "ruff": "passed",
+    "full_CPU_suite": "Prior implementation run1059passed/9skipped; no production module change in this preparation."
+  },
+  "historical_three_model_statistics": {
+    "receipt": {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/directional-three-model-statistics-preflight-v1/receipt.json",
+      "sha256": "f9ef0a5832aa73c96f977ddb30ae1074c3461e99183948625f7c3dc9c2f3f6cc"
+    },
+    "case_counts": {
+      "known": 432,
+      "unseen": 540,
+      "full427": 74424
+    },
+    "audits": {
+      "known": {
+        "cases": 432,
+        "scenes": 4,
+        "pairs": 8,
+        "crops_per_method": 72,
+        "methods": 6,
+        "group_rows": 48,
+        "overall_rows": 6,
+        "paired_comparisons": 45,
+        "max_absolute_arithmetic_difference": 7.105427357601002e-15
+      },
+      "unseen": {
+        "cases": 540,
+        "scenes": 5,
+        "pairs": 10,
+        "crops_per_method": 90,
+        "methods": 6,
+        "group_rows": 60,
+        "overall_rows": 6,
+        "paired_comparisons": 45,
+        "max_absolute_arithmetic_difference": 7.105427357601002e-15
+      },
+      "full427": {
+        "cases": 74424,
+        "sources": 443,
+        "methods": 6,
+        "nullable_metric_cases": {
+          "highlight_boundary_chroma_mae": 27216,
+          "highlight_boundary_rgb_mae": 27216,
+          "shadow_linear_psnr": 3600
+        },
+        "group_rows": 336,
+        "overall_rows": 12,
+        "paired_comparisons": 90,
+        "max_absolute_arithmetic_difference": 1.4210854715202004e-14
+      }
+    },
+    "comparison_rows_exactly_match_historical": 108,
+    "parent_sources_all_use_three_model_fixture": true,
+    "CUDA_initialized": false
+  },
+  "historical_native_composition": {
+    "receipt": {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/directional-closure-board-preflight-v1/receipt.json",
+      "sha256": "d4e45154bd6616f060d1e6798aeb04d79564b79c54aef0782b02d60b32c58f7e"
+    },
+    "triplets": [
+      6,
+      8,
+      8
+    ],
+    "native_cells": [
+      10,
+      12,
+      12
+    ],
+    "composition_boards_actually_viewed": 3
+  },
+  "historical_working_reference_composition": {
+    "receipt": {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/directional-reference-board-preflight-v1/receipt.json",
+      "sha256": "6e32d7dac64157a3e9bd4322bf5dc34fb9fc23ad103086cf6af4d061d1dfdffd"
+    },
+    "views": {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/directional-reference-board-preflight-v1/views.json",
+      "sha256": "1dab775322b1a41a0417d5df04976cea77ca98d099eebec5b0fd8e8befde331a"
+    },
+    "triplets": [
+      8,
+      10,
+      10,
+      20
+    ],
+    "native_cells": [
+      12,
+      14,
+      14,
+      28
+    ],
+    "GFX_inputs": "All4 packed-context arrays exactly match the frozen observation; independent reference NPY hashes and both cached RAF identity/metadata lists match; no RAF decoding or source-drive access."
+  },
+  "actual_V78_step1000": {
+    "receipt": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-v1/boundaries/control-step1000.json",
+      "sha256": "059df6ac657801494f561a1eb57ae4ce7323277fc7106e5b215fc51bb92f0cb4"
+    },
+    "step": 1000,
+    "arm": "control",
+    "checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-v1/boundaries/control-step1000.pt",
+      "sha256": "94846d18471241d820238e4046796848108805212f1f838e34cfef6d5dd52893"
+    },
+    "source_sha256": "3eb9e74eb8f0c1b13c3513a376064e4ed9e9d20a0d5ef891aa7a46ffef5a83a0",
+    "finite_states": {
+      "model": 99,
+      "EMA": 99,
+      "AdamW": 97
+    },
+    "directional_parameters": [
+      {
+        "name": "pretrained_rgb.raw_directional.mix_weight",
+        "parameters": 1245,
+        "parameter_nonzero": 1245,
+        "first_moment_nonzero": 1245,
+        "second_moment_nonzero": 1245
+      },
+      {
+        "name": "pretrained_rgb.raw_directional.mix_bias",
+        "parameters": 15,
+        "parameter_nonzero": 15,
+        "first_moment_nonzero": 15,
+        "second_moment_nonzero": 15
+      },
+      {
+        "name": "pretrained_rgb.raw_directional.censored_weight",
+        "parameters": 249,
+        "parameter_nonzero": 249,
+        "first_moment_nonzero": 249,
+        "second_moment_nonzero": 249
+      },
+      {
+        "name": "pretrained_rgb.raw_directional.censored_bias",
+        "parameters": 3,
+        "parameter_nonzero": 3,
+        "first_moment_nonzero": 3,
+        "second_moment_nonzero": 3
+      },
+      {
+        "name": "pretrained_rgb.raw_directional.local.0.weight",
+        "parameters": 5760,
+        "parameter_nonzero": 5760,
+        "first_moment_nonzero": 5760,
+        "second_moment_nonzero": 5760
+      },
+      {
+        "name": "pretrained_rgb.raw_directional.local.0.bias",
+        "parameters": 32,
+        "parameter_nonzero": 32,
+        "first_moment_nonzero": 32,
+        "second_moment_nonzero": 32
+      },
+      {
+        "name": "pretrained_rgb.raw_directional.local.2.weight",
+        "parameters": 18432,
+        "parameter_nonzero": 18432,
+        "first_moment_nonzero": 18432,
+        "second_moment_nonzero": 18432
+      },
+      {
+        "name": "pretrained_rgb.raw_directional.local.2.bias",
+        "parameters": 64,
+        "parameter_nonzero": 64,
+        "first_moment_nonzero": 64,
+        "second_moment_nonzero": 64
+      }
+    ],
+    "all_eight_directional_moments_nonzero": true,
+    "scope": "State/optimizer engineering audit only; no forward, validation-score review or quality decision."
+  },
+  "queues": {
+    "training": {
+      "launch": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-v1/launch.json",
+        "sha256": "9b5eb4d96c47e0ed0aa73ab370c62f309b921e9221c0f57be1db1cb96c18e096"
+      },
+      "owner": {
+        "pid": 404904,
+        "created": 1792353195.14
+      },
+      "verified_live_at_receipt": true
+    },
+    "review": {
+      "launch": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/launch.json",
+        "sha256": "6fad1745670d2c7a00685c866d4fa5122aeabb231263c65bc9459d4814a2ef49"
+      },
+      "owner": {
+        "pid": 405679,
+        "created": 1792353257.72
+      },
+      "verified_live_at_receipt": true
+    },
+    "closure": {
+      "launch": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/closure-launch.json",
+        "sha256": "3e142fc0118a3fbbeafa665adeacfca1919812c57bf3c699687ef798dfdc0667"
+      },
+      "owner": {
+        "pid": 408788,
+        "created": 1792353755.79
+      },
+      "verified_live_at_receipt": true
+    },
+    "reference_supplement": {
+      "launch": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/reference-launch.json",
+        "sha256": "39b347f39c3dc3bf3e0643b4abf60d4ae6ad6080188180bd65534bba62644d79"
+      },
+      "owner": {
+        "pid": 412911,
+        "created": 1792354238.49
+      },
+      "verified_live_at_receipt": true
+    },
+    "boundary_watcher": {
+      "launch": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-v1/boundary-launch.json",
+        "sha256": "c8315bbe218740c89625f1aa7ecc5fa6dd64e1c24bce400b7c53925658d6069d"
+      },
+      "owner": {
+        "pid": 419786,
+        "created": 1792354313.66
+      },
+      "verified_live_at_receipt": true
+    }
+  },
+  "closure_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/closure-plan.json",
+    "sha256": "63e90d1091ed67ad2ccd7e8d72bd8eae0839fcb8372af844b3a591cc71caa664"
+  },
+  "reference_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/reference-plan.json",
+    "sha256": "404504a4840a7ddf6b72eddd6625416f7dff73489ab25965c0d0200660df1498"
+  },
+  "model_quality": "Pending final original4000 review. No validation score or trained-model crop was used to change recipes. All new preflight figures/statistics reuse historical models only. Gate/schedule/data/optimizer unchanged; V43 remains working reference; no automatic extension or promotion.",
+  "required_remaining": "Both4000 boundaries, all10 review stages, CPU saved-array closure, final supplemented81triplets/125semanticcells actual manual review and independent publication/source audits; any eligible full-frame16-bit/timing review. SOTA, decisive real superiority and100MP/10s remain unmet/unproven."
+}

@@ -52,3 +52,8 @@ The requested augmentation order, selected-domain loading and measured B16
 choice remain in use; their completed results are in
 [training pipeline work](training-pipeline.md). The Commons downloader remains
 stopped at its storage reserve, and all training manifests stay frozen.
+
+The [first1k state audit and independent review preparation](directional-interval-review-preparation.md)
+now confirm nonzero optimizer moments for every new branch parameter and add
+matched V43/RawNIND native comparisons to the queued final review. Quality is
+still pending.
