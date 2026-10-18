@@ -8,6 +8,11 @@ or attributing the weak restoration to inference precision.
 [Curves, hashes, recipe and exact numeric summary](results/packed-isotropic-production-learning.json).
 [Actual held-out quality and native crops](packed-isotropic-first32000-review.md).
 
+The [interim completed 40k camera panels](packed-isotropic-quarter-camera-interim.md)
+now show 4.0–4.7 dB measured-CFA gains over each model's own8k boundary, with
+less grain in the native crops. Both still trail Wiener and V43/V63 here.
+The broader quality/statistical/full-frame review is running; no model is promoted.
+
 This is an optimization diagnosis, not an improved quality model. All learned
 weights are discarded. No held-out image, private photo or protected-final scene
 is optimized, and no diagnostic state enters a quality run.

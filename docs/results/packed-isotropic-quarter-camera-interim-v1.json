@@ -1,0 +1,1324 @@
+{
+  "status": "interim-completed-camera-panels-native-progress-awaiting-full-review",
+  "auditor": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-camera-progress-v1/audit.py",
+    "sha256": "ba70738e8c9feb770aaceadd639b4743202f13ef375f4b33c061d0363519196a"
+  },
+  "review_plan": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-review-workflow-v1/plan.json",
+    "sha256": "90548b69bdabc3ad9b02ef11cf5d1e6acb2bfa4024c10f6916713d79ec19413c"
+  },
+  "completed_boundary": {
+    "path": "/home/dllu/proj/demosaic/docs/results/packed-isotropic-quarter-training-boundary-v1.json",
+    "sha256": "82373853afa1e44060eeda9193439e9c8293eca120cbb3d6c17860fb2281ac15"
+  },
+  "sources": [
+    {
+      "path": "/mnt/external/demosaic/evaluation/packed-isotropic-first32000-known-v2/summary.json",
+      "sha256": "49ab47eed0d92431d23f6d27e0c789f44566650ee21924428d0a998266654ebc"
+    },
+    {
+      "path": "/mnt/external/demosaic/evaluation/packed-isotropic-first32000-known-v2/per-crop.jsonl",
+      "sha256": "e4ea6dfbffacdaf9b51132ddf9e05c04bbf11cc30e466c1acadb8360f09fae8f"
+    },
+    {
+      "path": "/mnt/external/demosaic/evaluation/packed-isotropic-quarter-known-v1/summary.json",
+      "sha256": "cb85440da96b36b6a5a1bfca8c092ad2ddf642cfbf60c7ef843047184d907c80"
+    },
+    {
+      "path": "/mnt/external/demosaic/evaluation/packed-isotropic-quarter-known-v1/per-crop.jsonl",
+      "sha256": "63a0312e527f723b799b653a93e2996c6641c9812ee4a95496d59f54b4785e61"
+    },
+    {
+      "path": "/mnt/external/demosaic/evaluation/packed-isotropic-first32000-unseen-v2/summary.json",
+      "sha256": "8ab66b4758f60583012b681cf8b5911b8f2391d6d1405de737de41d7d741de40"
+    },
+    {
+      "path": "/mnt/external/demosaic/evaluation/packed-isotropic-first32000-unseen-v2/per-crop.jsonl",
+      "sha256": "34ca59b7be3e31c63ab766f617fbb1d41c825e6ae3ee8147d8118776b9e5dfdb"
+    },
+    {
+      "path": "/mnt/external/demosaic/evaluation/packed-isotropic-quarter-unseen-v1/summary.json",
+      "sha256": "0b5c31f1f1e0fcbabad074ae151efb017a0a0aabc4fa0701f80e3627181db552"
+    },
+    {
+      "path": "/mnt/external/demosaic/evaluation/packed-isotropic-quarter-unseen-v1/per-crop.jsonl",
+      "sha256": "b250b72ac700ef7a9f241188a9bf8cefb639c767fd68c8bf57987abc829caba3"
+    }
+  ],
+  "camera_panels": {
+    "known": {
+      "scenes": 4,
+      "pairs": 8,
+      "rows": 648,
+      "progress": [
+        {
+          "arm": "no-dino",
+          "8k": {
+            "ahd_chroma_mae": 0.024766506782422464,
+            "ahd_gradient_mae": 0.024447212332031794,
+            "ahd_srgb_psnr": 29.92757733662923,
+            "ahd_srgb_ssim": 0.5922275183515416,
+            "reference_samples": 200661.7361111111,
+            "sensor_psnr": 44.18254023128086
+          },
+          "40k": {
+            "ahd_chroma_mae": 0.010593454098044377,
+            "ahd_gradient_mae": 0.013501602257343216,
+            "ahd_srgb_psnr": 35.17917998631795,
+            "ahd_srgb_ssim": 0.804810146904654,
+            "reference_samples": 200661.7361111111,
+            "sensor_psnr": 48.2817899386088
+          },
+          "delta_sensor_psnr": 4.099249707327942
+        },
+        {
+          "arm": "dino",
+          "8k": {
+            "ahd_chroma_mae": 0.022972561289659806,
+            "ahd_gradient_mae": 0.024040373042225838,
+            "ahd_srgb_psnr": 30.600680324766373,
+            "ahd_srgb_ssim": 0.6107963015221887,
+            "reference_samples": 200661.7361111111,
+            "sensor_psnr": 44.353257497151695
+          },
+          "40k": {
+            "ahd_chroma_mae": 0.011441972345993336,
+            "ahd_gradient_mae": 0.014329071376576193,
+            "ahd_srgb_psnr": 35.07573310534159,
+            "ahd_srgb_ssim": 0.7935844278997846,
+            "reference_samples": 200661.7361111111,
+            "sensor_psnr": 48.36667198605008
+          },
+          "delta_sensor_psnr": 4.013414488898384
+        }
+      ],
+      "overall": {
+        "Bilinear": {
+          "ahd_chroma_mae": 0.025037081498238776,
+          "ahd_gradient_mae": 0.02472208865866479,
+          "ahd_srgb_psnr": 29.836332321166992,
+          "ahd_srgb_ssim": 0.5878955717715952,
+          "reference_samples": 200661.7361111111,
+          "sensor_psnr": 44.10599215825399
+        },
+        "Malvar2004:WB": {
+          "ahd_chroma_mae": 0.020380146206460066,
+          "ahd_gradient_mae": 0.025714163138117228,
+          "ahd_srgb_psnr": 30.016488790512085,
+          "ahd_srgb_ssim": 0.5982528728329473,
+          "reference_samples": 200661.7361111111,
+          "sensor_psnr": 43.80425209469266
+        },
+        "Wiener7+Malvar2004:WB": {
+          "ahd_chroma_mae": 0.01000751066668373,
+          "ahd_gradient_mae": 0.010634852324276127,
+          "ahd_srgb_psnr": 35.86313165558709,
+          "ahd_srgb_ssim": 0.8550734726919068,
+          "reference_samples": 200661.7361111111,
+          "sensor_psnr": 50.071689976586235
+        },
+        "0:no-dino-packed-isotropic-b4-v71-quarter:step-40000": {
+          "ahd_chroma_mae": 0.010593454098044377,
+          "ahd_gradient_mae": 0.013501602257343216,
+          "ahd_srgb_psnr": 35.17917998631795,
+          "ahd_srgb_ssim": 0.804810146904654,
+          "reference_samples": 200661.7361111111,
+          "sensor_psnr": 48.2817899386088
+        },
+        "1:dino-packed-isotropic-b4-v70-quarter:step-40000": {
+          "ahd_chroma_mae": 0.011441972345993336,
+          "ahd_gradient_mae": 0.014329071376576193,
+          "ahd_srgb_psnr": 35.07573310534159,
+          "ahd_srgb_ssim": 0.7935844278997846,
+          "reference_samples": 200661.7361111111,
+          "sensor_psnr": 48.36667198605008
+        },
+        "2:dino-anchored-native-diverse-b16-v43:step-2000": {
+          "ahd_chroma_mae": 0.00599839779897593,
+          "ahd_gradient_mae": 0.006419276191283845,
+          "ahd_srgb_psnr": 40.05105384190877,
+          "ahd_srgb_ssim": 0.9308483733071221,
+          "reference_samples": 200661.7361111111,
+          "sensor_psnr": 54.23332209057278
+        },
+        "3:dino-convnext-wide-long-control-b16-v63-full20k:step-20000": {
+          "ahd_chroma_mae": 0.00600127897632774,
+          "ahd_gradient_mae": 0.006364201712939474,
+          "ahd_srgb_psnr": 40.05336983998616,
+          "ahd_srgb_ssim": 0.9319335851404402,
+          "reference_samples": 200661.7361111111,
+          "sensor_psnr": 54.20365964041816
+        },
+        "RawNIND:cfa-ls:publisher": {
+          "ahd_chroma_mae": 0.006295617572808017,
+          "ahd_gradient_mae": 0.006555553548322577,
+          "ahd_srgb_psnr": 39.678047551049126,
+          "ahd_srgb_ssim": 0.928810535205735,
+          "reference_samples": 200661.7361111111,
+          "sensor_psnr": 54.06859636306763
+        },
+        "RawNIND:cfa-channel:publisher": {
+          "ahd_chroma_mae": 0.0061995219681800036,
+          "ahd_gradient_mae": 0.006555797014799383,
+          "ahd_srgb_psnr": 39.7171000374688,
+          "ahd_srgb_ssim": 0.9288313032852279,
+          "reference_samples": 200661.7361111111,
+          "sensor_psnr": 54.08474085066054
+        }
+      }
+    },
+    "unseen": {
+      "scenes": 5,
+      "pairs": 10,
+      "rows": 810,
+      "progress": [
+        {
+          "arm": "no-dino",
+          "8k": {
+            "ahd_chroma_mae": 0.04207835592743423,
+            "ahd_gradient_mae": 0.03843585999889506,
+            "ahd_srgb_psnr": 25.56039112938775,
+            "ahd_srgb_ssim": 0.37927707201904715,
+            "reference_samples": 220744.8111111111,
+            "sensor_psnr": 41.43792915344238
+          },
+          "40k": {
+            "ahd_chroma_mae": 0.01806462297423018,
+            "ahd_gradient_mae": 0.019467065431591535,
+            "ahd_srgb_psnr": 31.587642076280382,
+            "ahd_srgb_ssim": 0.6796318958202998,
+            "reference_samples": 220744.8111111111,
+            "sensor_psnr": 46.14578386942546
+          },
+          "delta_sensor_psnr": 4.707854715983075
+        },
+        {
+          "arm": "dino",
+          "8k": {
+            "ahd_chroma_mae": 0.03975065342254109,
+            "ahd_gradient_mae": 0.038202981485260856,
+            "ahd_srgb_psnr": 26.0540650261773,
+            "ahd_srgb_ssim": 0.39497653361823826,
+            "reference_samples": 220744.8111111111,
+            "sensor_psnr": 41.640151511298285
+          },
+          "40k": {
+            "ahd_chroma_mae": 0.019049670888731877,
+            "ahd_gradient_mae": 0.02084241815739208,
+            "ahd_srgb_psnr": 31.56887787712945,
+            "ahd_srgb_ssim": 0.6583963261710273,
+            "reference_samples": 220744.8111111111,
+            "sensor_psnr": 46.01028743320042
+          },
+          "delta_sensor_psnr": 4.370135921902133
+        }
+      ],
+      "overall": {
+        "Bilinear": {
+          "ahd_chroma_mae": 0.042432663072314525,
+          "ahd_gradient_mae": 0.03895158672498332,
+          "ahd_srgb_psnr": 25.49506827460395,
+          "ahd_srgb_ssim": 0.37466897865136467,
+          "reference_samples": 220744.8111111111,
+          "sensor_psnr": 41.41325357225206
+        },
+        "Malvar2004:WB": {
+          "ahd_chroma_mae": 0.03489497504714462,
+          "ahd_gradient_mae": 0.03896706760343578,
+          "ahd_srgb_psnr": 25.86025329165988,
+          "ahd_srgb_ssim": 0.4032435259057416,
+          "reference_samples": 220744.8111111111,
+          "sensor_psnr": 40.937970352172854
+        },
+        "Wiener7+Malvar2004:WB": {
+          "ahd_chroma_mae": 0.014855502649313873,
+          "ahd_gradient_mae": 0.012288579556884036,
+          "ahd_srgb_psnr": 33.028770722283255,
+          "ahd_srgb_ssim": 0.7922076225280762,
+          "reference_samples": 220744.8111111111,
+          "sensor_psnr": 49.59129096137153
+        },
+        "0:no-dino-packed-isotropic-b4-v71-quarter:step-40000": {
+          "ahd_chroma_mae": 0.01806462297423018,
+          "ahd_gradient_mae": 0.019467065431591535,
+          "ahd_srgb_psnr": 31.587642076280382,
+          "ahd_srgb_ssim": 0.6796318958202998,
+          "reference_samples": 220744.8111111111,
+          "sensor_psnr": 46.14578386942546
+        },
+        "1:dino-packed-isotropic-b4-v70-quarter:step-40000": {
+          "ahd_chroma_mae": 0.019049670888731877,
+          "ahd_gradient_mae": 0.02084241815739208,
+          "ahd_srgb_psnr": 31.56887787712945,
+          "ahd_srgb_ssim": 0.6583963261710273,
+          "reference_samples": 220744.8111111111,
+          "sensor_psnr": 46.01028743320042
+        },
+        "2:dino-anchored-native-diverse-b16-v43:step-2000": {
+          "ahd_chroma_mae": 0.007121155193696419,
+          "ahd_gradient_mae": 0.006393157044011685,
+          "ahd_srgb_psnr": 38.590781699286566,
+          "ahd_srgb_ssim": 0.9215792609585656,
+          "reference_samples": 220744.8111111111,
+          "sensor_psnr": 53.80605854458279
+        },
+        "3:dino-convnext-wide-long-control-b16-v63-full20k:step-20000": {
+          "ahd_chroma_mae": 0.006884704100795919,
+          "ahd_gradient_mae": 0.006397365452721715,
+          "ahd_srgb_psnr": 38.805172517564564,
+          "ahd_srgb_ssim": 0.9238477832741208,
+          "reference_samples": 220744.8111111111,
+          "sensor_psnr": 53.84297676086426
+        },
+        "RawNIND:cfa-ls:publisher": {
+          "ahd_chroma_mae": 0.00781363517873817,
+          "ahd_gradient_mae": 0.006614771273194088,
+          "ahd_srgb_psnr": 38.144836574130586,
+          "ahd_srgb_ssim": 0.9183798478709327,
+          "reference_samples": 220744.8111111111,
+          "sensor_psnr": 53.56220122443305
+        },
+        "RawNIND:cfa-channel:publisher": {
+          "ahd_chroma_mae": 0.0071724309792949095,
+          "ahd_gradient_mae": 0.006613127592330177,
+          "ahd_srgb_psnr": 38.56191194322374,
+          "ahd_srgb_ssim": 0.9221266448497772,
+          "reference_samples": 220744.8111111111,
+          "sensor_psnr": 53.76821780734592
+        }
+      }
+    }
+  },
+  "classical_case_metrics_exactly_equal": 486,
+  "max_independent_hierarchical_reduction_error": 7.105427357601002e-15,
+  "source_ROIs_noise_display_WB_matrix_and_noisy_reference_pixels_identical": true,
+  "GPU_work": false,
+  "scope": "Interim camera development panels only; point means over4/5 scenes, no new confidence intervals, complete scene independence unproven; primary measured-CFA scores, AHD RGB reference not exactGT; full synthetic/analytic/GFX/three-camera/color/hue/statistical and native reviews pending. No model promotion or schedule change.",
+  "private_receipt": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-camera-progress-v1/receipt.json",
+    "sha256": "349cb9e0a7d430ca1b70bbcfb4386fbeb181125a548628b4780cb433e5141547"
+  },
+  "visual_review": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-camera-progress-v1/visual-review.json",
+    "sha256": "bd46303724b8207757f6ee63ba5b3433a1bb039a88f9c5e5d3e90a7b62a58fcc"
+  },
+  "native_grids": [
+    {
+      "panel": "known",
+      "scene": "2pilesofplates",
+      "public_path": "docs/images/packed-quarter-camera-known-2pilesofplates.png",
+      "path": "/home/dllu/proj/demosaic/docs/images/packed-quarter-camera-known-2pilesofplates.png",
+      "sha256": "e33f27dd3a90c50f6ffae46cfd4fab50c19f13bd7ddb57abd12d3616423dae54",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "NoD 8k",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "NoD 40k",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "DINO 8k",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "DINO 40k",
+          "png_xywh": [
+            680,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V43",
+          "png_xywh": [
+            848,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V63",
+          "png_xywh": [
+            1016,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "RawNIND CFA-LS",
+          "png_xywh": [
+            1184,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "RawNIND CFA-ch",
+          "png_xywh": [
+            1352,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "AHD ref, not GT",
+          "png_xywh": [
+            1520,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "common_metadata": {
+        "scene": "2pilesofplates",
+        "noisy_sha256": "c8ed38ce03b5fe6df0ece5615d148c2e524bb9adbcab535773db71b0f85fbdbe",
+        "prepared_crop": {
+          "id": "2pilesofplates:c8ed38ce03b5fe6df0ece5615d148c2e524bb9adbcab535773db71b0f85fbdbe:1756:2756",
+          "path": "crop-1a2b558160c55a70a0fcdec4.npz",
+          "sha256": "ce5be43933be44a44ceb04a984d40f2c90bc4caf6cb8ce085afdf85644af64a2",
+          "xywh": [
+            2756,
+            1756,
+            512,
+            512
+          ],
+          "valid_fraction": 0.9999008178710938
+        },
+        "evaluation_tile_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "display_exposure": 1.0,
+        "white_balance": [
+          2.40625,
+          1.0,
+          1.69140625
+        ],
+        "camera_to_srgb": [
+          [
+            1.6353747641867242,
+            -0.42196120206077053,
+            -0.21341356212595397
+          ],
+          [
+            -0.13106821045315706,
+            1.5426731789357453,
+            -0.411604968482588
+          ],
+          [
+            0.011429855280569487,
+            -0.4196218028471881,
+            1.4081919475666185
+          ]
+        ],
+        "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA",
+        "conditioning": {
+          "shot": 0.001425164014313677,
+          "read": 1.570807341075873e-06,
+          "method": "input-only-Haar-fit"
+        }
+      },
+      "methods": [
+        {
+          "model_label": "0:no-dino-packed-isotropic-b4-v71:step-8000",
+          "checkpoint_sha256": "abd7345c080cb227d77385647c74614c0416d9316ad2f28c81c31cdd1f1697a2",
+          "image": "crop-24b84632872d4ba0.png",
+          "png_sha256": "3f5e0c7df19585aeee3948e98c783ade8069c0c8f4a8318c816c9e26baba0815"
+        },
+        {
+          "model_label": "0:no-dino-packed-isotropic-b4-v71-quarter:step-40000",
+          "checkpoint_sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+          "image": "crop-2b668ea4ed9150d8.png",
+          "png_sha256": "b37f99293e53de6314e53a7218a5e268ed13af12dc70a95d1b9d2b70e5928c41"
+        },
+        {
+          "model_label": "1:dino-packed-isotropic-b4-v70:step-8000",
+          "checkpoint_sha256": "5fc021488d34df6ddf85cac8b0fc5cb0b0117713c87865c010e7e246979a2c14",
+          "image": "crop-e547bd8917d3e471.png",
+          "png_sha256": "44088f10dc0c7fcd5632d90d952a60a08dd28749b07bdb526fb6c4d71b2331a3"
+        },
+        {
+          "model_label": "1:dino-packed-isotropic-b4-v70-quarter:step-40000",
+          "checkpoint_sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337",
+          "image": "crop-5a00118cea860e16.png",
+          "png_sha256": "aa655a2dd0265af59235147ef6c412b4dc023653369e013bd1efcb7eb6137314"
+        },
+        {
+          "model_label": "2:dino-anchored-native-diverse-b16-v43:step-2000",
+          "checkpoint_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+          "image": "crop-57b897057135f278.png",
+          "png_sha256": "474b55709b8a2488a85697bb2fcaf176a8020edfd33a65ec29e1500aa4f11382"
+        },
+        {
+          "model_label": "3:dino-convnext-wide-long-control-b16-v63-full20k:step-20000",
+          "checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+          "image": "crop-59a9eae90b946339.png",
+          "png_sha256": "5ca6a47af9d6ed20a9dff444bfffde50d9b819b9c5bb789b32634edfe717aa14"
+        },
+        {
+          "model_label": "RawNIND:cfa-ls:publisher",
+          "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "image": "crop-ec064f05af183504.png",
+          "png_sha256": "93012b7ca5471a08fc66a480cdbb129f00c001b61af8ccdb63be93692bbc096d"
+        },
+        {
+          "model_label": "RawNIND:cfa-channel:publisher",
+          "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "image": "crop-e7d0f796d23dc988.png",
+          "png_sha256": "bcea716a8344dee98664201e841fde527bbde2c39466762988713ad70c38a9f2"
+        }
+      ]
+    },
+    {
+      "panel": "known",
+      "scene": "7D-1",
+      "public_path": "docs/images/packed-quarter-camera-known-7D-1.png",
+      "path": "/home/dllu/proj/demosaic/docs/images/packed-quarter-camera-known-7D-1.png",
+      "sha256": "aeac11b88300ed2f41d88b6568da2fd5b42bbb9ac1498a06e4ea2b803fa9ecab",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "NoD 8k",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "NoD 40k",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "DINO 8k",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "DINO 40k",
+          "png_xywh": [
+            680,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V43",
+          "png_xywh": [
+            848,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V63",
+          "png_xywh": [
+            1016,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "RawNIND CFA-LS",
+          "png_xywh": [
+            1184,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "RawNIND CFA-ch",
+          "png_xywh": [
+            1352,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "AHD ref, not GT",
+          "png_xywh": [
+            1520,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "common_metadata": {
+        "scene": "7D-1",
+        "noisy_sha256": "ceb7d71d6a184aa2e7cf47f22b84c61fe4545746f9be72397d6fa03dbd4751ad",
+        "prepared_crop": {
+          "id": "7D-1:ceb7d71d6a184aa2e7cf47f22b84c61fe4545746f9be72397d6fa03dbd4751ad:1476:2344",
+          "path": "crop-a3ba859368f3f95bd70632ea.npz",
+          "sha256": "57bc05d205ddff3c74c42082faea8cecaf27bbb5f4befcee9c73b9fb92835e09",
+          "xywh": [
+            2344,
+            1476,
+            512,
+            512
+          ],
+          "valid_fraction": 0.9965286254882812
+        },
+        "evaluation_tile_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "display_exposure": 1.0,
+        "white_balance": [
+          2.0732421875,
+          1.0,
+          1.662109375
+        ],
+        "camera_to_srgb": [
+          [
+            1.9204999025301575,
+            -1.0413495812710656,
+            0.12084967874090806
+          ],
+          [
+            -0.24696281331132816,
+            1.7593124803218942,
+            -0.5123496670105661
+          ],
+          [
+            -0.006956121305943532,
+            -0.4895846857258788,
+            1.4965408070318222
+          ]
+        ],
+        "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA",
+        "conditioning": {
+          "shot": 0.004811973071234885,
+          "read": 6.621451009845082e-05,
+          "method": "input-only-Haar-fit"
+        }
+      },
+      "methods": [
+        {
+          "model_label": "0:no-dino-packed-isotropic-b4-v71:step-8000",
+          "checkpoint_sha256": "abd7345c080cb227d77385647c74614c0416d9316ad2f28c81c31cdd1f1697a2",
+          "image": "crop-13f652f0ce225c19.png",
+          "png_sha256": "ba1ef37a0706c85d34427028247214b780d261c62e646e199dc0331f3005a6cd"
+        },
+        {
+          "model_label": "0:no-dino-packed-isotropic-b4-v71-quarter:step-40000",
+          "checkpoint_sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+          "image": "crop-42ba50406fac3f5c.png",
+          "png_sha256": "69c7ead294707fa4a76d0a90b1abd39077690ec54d7a91d730e5998aef8aa953"
+        },
+        {
+          "model_label": "1:dino-packed-isotropic-b4-v70:step-8000",
+          "checkpoint_sha256": "5fc021488d34df6ddf85cac8b0fc5cb0b0117713c87865c010e7e246979a2c14",
+          "image": "crop-dd1565bff2c7ef78.png",
+          "png_sha256": "a795a1567a655cd75271902362770b8628e76965ef14cbc07cb2d76235c681b7"
+        },
+        {
+          "model_label": "1:dino-packed-isotropic-b4-v70-quarter:step-40000",
+          "checkpoint_sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337",
+          "image": "crop-06465ab818b4b72a.png",
+          "png_sha256": "4752b7b425ec2a53794f9832b765ef4109d180c9de07032eb553eac891651eb7"
+        },
+        {
+          "model_label": "2:dino-anchored-native-diverse-b16-v43:step-2000",
+          "checkpoint_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+          "image": "crop-0c542d38614f06c1.png",
+          "png_sha256": "7f360562a5a6f6cd4789e3bff7069bd06c607c950383bfdd1431c22c6471dd9f"
+        },
+        {
+          "model_label": "3:dino-convnext-wide-long-control-b16-v63-full20k:step-20000",
+          "checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+          "image": "crop-ec9187b33c56dfff.png",
+          "png_sha256": "1610b4e0743a9074da5992a0d84639edb354048f335c28fef8ad2191c9a8946d"
+        },
+        {
+          "model_label": "RawNIND:cfa-ls:publisher",
+          "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "image": "crop-32b9a6635214c93c.png",
+          "png_sha256": "b6d0c92e17c0ebb7275d8a765e2556a48ede5abd5aa187ab6daa97570e327a77"
+        },
+        {
+          "model_label": "RawNIND:cfa-channel:publisher",
+          "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "image": "crop-12c160f6ce4481f7.png",
+          "png_sha256": "fe10c1cda6c24ccbb837e2053871e806fd7fcd7ad83bb64d7e94a69580b7858e"
+        }
+      ]
+    },
+    {
+      "panel": "unseen",
+      "scene": "LucieB_3apples",
+      "public_path": "docs/images/packed-quarter-camera-unseen-LucieB_3apples.png",
+      "path": "/home/dllu/proj/demosaic/docs/images/packed-quarter-camera-unseen-LucieB_3apples.png",
+      "sha256": "0cb5b1bd18dc1a612c46d34f67e8432e602c15b6c7d93689007ffff8a0ef69cc",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "NoD 8k",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "NoD 40k",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "DINO 8k",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "DINO 40k",
+          "png_xywh": [
+            680,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V43",
+          "png_xywh": [
+            848,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V63",
+          "png_xywh": [
+            1016,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "RawNIND CFA-LS",
+          "png_xywh": [
+            1184,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "RawNIND CFA-ch",
+          "png_xywh": [
+            1352,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "AHD ref, not GT",
+          "png_xywh": [
+            1520,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "common_metadata": {
+        "scene": "LucieB_3apples",
+        "noisy_sha256": "43c4b5592f33763de8ecc303986932cd30c0f07330e1987380f7e8c526c23614",
+        "prepared_crop": {
+          "id": "LucieB_3apples:43c4b5592f33763de8ecc303986932cd30c0f07330e1987380f7e8c526c23614:1754:2756",
+          "path": "crop-37aeb608babd2ebd25d92520.npz",
+          "sha256": "3c8aabdb22bb0543be9810496a2c0e34d336f7d4164e7462c97106e781feb08a",
+          "xywh": [
+            2756,
+            1754,
+            512,
+            512
+          ],
+          "valid_fraction": 0.99993896484375
+        },
+        "evaluation_tile_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "display_exposure": 1.0,
+        "white_balance": [
+          0.9794921875,
+          1.0,
+          2.162109375
+        ],
+        "camera_to_srgb": [
+          [
+            2.0060677171962595,
+            -1.2336652639354324,
+            0.22759754673917293
+          ],
+          [
+            -0.23706710137989376,
+            1.8006883583827236,
+            -0.5636212570028296
+          ],
+          [
+            -0.015706646354080415,
+            -0.555168390672119,
+            1.5708750370261992
+          ]
+        ],
+        "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA",
+        "conditioning": {
+          "shot": 0.0023020145669588325,
+          "read": 5.020910101285205e-05,
+          "method": "input-only-Haar-fit"
+        }
+      },
+      "methods": [
+        {
+          "model_label": "0:no-dino-packed-isotropic-b4-v71:step-8000",
+          "checkpoint_sha256": "abd7345c080cb227d77385647c74614c0416d9316ad2f28c81c31cdd1f1697a2",
+          "image": "crop-43acb7a687ddc0c3.png",
+          "png_sha256": "682f15091307ea21defec6729a7f680981c309670fe72c58734f1f517a125100"
+        },
+        {
+          "model_label": "0:no-dino-packed-isotropic-b4-v71-quarter:step-40000",
+          "checkpoint_sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+          "image": "crop-89410de107d53c61.png",
+          "png_sha256": "ad38a8cd5f45893e66f272bf68151d3c3ad3aebf9c2cb7273d9b49f012e06115"
+        },
+        {
+          "model_label": "1:dino-packed-isotropic-b4-v70:step-8000",
+          "checkpoint_sha256": "5fc021488d34df6ddf85cac8b0fc5cb0b0117713c87865c010e7e246979a2c14",
+          "image": "crop-3b9da71ba5f9ddf5.png",
+          "png_sha256": "b1a22ba658c39d4320e3ed1db29b860bb68ad1a57f33db229f542e72e6e86f93"
+        },
+        {
+          "model_label": "1:dino-packed-isotropic-b4-v70-quarter:step-40000",
+          "checkpoint_sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337",
+          "image": "crop-21e0d4d251e9b6fe.png",
+          "png_sha256": "8e65f63cdf85a7398df69052d1b27b172057fa4a3fff90b7f89eabed8a3bcaba"
+        },
+        {
+          "model_label": "2:dino-anchored-native-diverse-b16-v43:step-2000",
+          "checkpoint_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+          "image": "crop-0ee8b70d6c40c40b.png",
+          "png_sha256": "20d3b0a31f9e40349c6875157ab9452878d6232947a6d493697af7ee654cb4f6"
+        },
+        {
+          "model_label": "3:dino-convnext-wide-long-control-b16-v63-full20k:step-20000",
+          "checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+          "image": "crop-543db556a222a9b0.png",
+          "png_sha256": "5054e295090a5d55a7293b36812abe96720298d4f00e687ce83ab5e2137947c4"
+        },
+        {
+          "model_label": "RawNIND:cfa-ls:publisher",
+          "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "image": "crop-6ec081c00909bcb3.png",
+          "png_sha256": "bc020c137807a40e377dbbfaac5e16919ed0378c8ccd2e1d8371d8e2ad5bc382"
+        },
+        {
+          "model_label": "RawNIND:cfa-channel:publisher",
+          "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "image": "crop-2c4fb2f0c36337ce.png",
+          "png_sha256": "eb4d52ca1282b54b2e47de8ece4618f8f8de7855ce4fff9b3703ef4dad7abd5d"
+        }
+      ]
+    },
+    {
+      "panel": "unseen",
+      "scene": "LucieB_Coulicoco",
+      "public_path": "docs/images/packed-quarter-camera-unseen-LucieB_Coulicoco.png",
+      "path": "/home/dllu/proj/demosaic/docs/images/packed-quarter-camera-unseen-LucieB_Coulicoco.png",
+      "sha256": "d434d4991aa267e556da79bca6a3475c7a54f6e7400f6a5142d84cfd4e9a8c5c",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "NoD 8k",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "NoD 40k",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "DINO 8k",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "DINO 40k",
+          "png_xywh": [
+            680,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V43",
+          "png_xywh": [
+            848,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V63",
+          "png_xywh": [
+            1016,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "RawNIND CFA-LS",
+          "png_xywh": [
+            1184,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "RawNIND CFA-ch",
+          "png_xywh": [
+            1352,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "AHD ref, not GT",
+          "png_xywh": [
+            1520,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "common_metadata": {
+        "scene": "LucieB_Coulicoco",
+        "noisy_sha256": "f1807182ee7fbe2975c478d8228882dc06d69d1624898f28d05f289c8f3ae14f",
+        "prepared_crop": {
+          "id": "LucieB_Coulicoco:f1807182ee7fbe2975c478d8228882dc06d69d1624898f28d05f289c8f3ae14f:1754:2756",
+          "path": "crop-3f2c548379b685589c712dab.npz",
+          "sha256": "c505657aeee878dc737558f09981d364631aa2512354cce6557135a5fb7d368f",
+          "xywh": [
+            2756,
+            1754,
+            512,
+            512
+          ],
+          "valid_fraction": 1.0
+        },
+        "evaluation_tile_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "display_exposure": 1.0,
+        "white_balance": [
+          1.00390625,
+          1.0,
+          2.080078125
+        ],
+        "camera_to_srgb": [
+          [
+            2.0060677171962595,
+            -1.2336652639354324,
+            0.22759754673917293
+          ],
+          [
+            -0.23706710137989376,
+            1.8006883583827236,
+            -0.5636212570028296
+          ],
+          [
+            -0.015706646354080415,
+            -0.555168390672119,
+            1.5708750370261992
+          ]
+        ],
+        "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA",
+        "conditioning": {
+          "shot": 0.0023482592096665538,
+          "read": 0.00017038157420448983,
+          "method": "input-only-Haar-fit"
+        }
+      },
+      "methods": [
+        {
+          "model_label": "0:no-dino-packed-isotropic-b4-v71:step-8000",
+          "checkpoint_sha256": "abd7345c080cb227d77385647c74614c0416d9316ad2f28c81c31cdd1f1697a2",
+          "image": "crop-6804a421b1e9b4f4.png",
+          "png_sha256": "d4112faa35bd6d883258e5340477197500b2cb24135e41268f8be2329acbce77"
+        },
+        {
+          "model_label": "0:no-dino-packed-isotropic-b4-v71-quarter:step-40000",
+          "checkpoint_sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+          "image": "crop-1c1a18a1c507ad94.png",
+          "png_sha256": "5c9ed15175d7b7b923b71e7f9018406786c075e352b6427017b5bbf7d56f6ccd"
+        },
+        {
+          "model_label": "1:dino-packed-isotropic-b4-v70:step-8000",
+          "checkpoint_sha256": "5fc021488d34df6ddf85cac8b0fc5cb0b0117713c87865c010e7e246979a2c14",
+          "image": "crop-22ee332cd9aff354.png",
+          "png_sha256": "0b797476982610e3f14a35eeede51268d29eb8953ab6c1ce4f05ca8aae0c68a5"
+        },
+        {
+          "model_label": "1:dino-packed-isotropic-b4-v70-quarter:step-40000",
+          "checkpoint_sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337",
+          "image": "crop-b093a152e70c5ec5.png",
+          "png_sha256": "326da5aace38b5067508249fd26955aaca5e78239dc337ed4a8e1b69b8e605b4"
+        },
+        {
+          "model_label": "2:dino-anchored-native-diverse-b16-v43:step-2000",
+          "checkpoint_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+          "image": "crop-481df13dfc810eab.png",
+          "png_sha256": "eb982a66e0fcd67f077414d33b6afa0fc4323b335e09cda56276d4dc3b69a421"
+        },
+        {
+          "model_label": "3:dino-convnext-wide-long-control-b16-v63-full20k:step-20000",
+          "checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+          "image": "crop-1a4058d131aee4a6.png",
+          "png_sha256": "93db70dc392d4fd2d01215cc18f1ec65932e8cdcffb6636ed555100e6a029a3d"
+        },
+        {
+          "model_label": "RawNIND:cfa-ls:publisher",
+          "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "image": "crop-a96db01761c01a81.png",
+          "png_sha256": "ae120fcdcc6e01f635eb3cd3035d39dd5ba1db5b5a97a87fd308e55610113136"
+        },
+        {
+          "model_label": "RawNIND:cfa-channel:publisher",
+          "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "image": "crop-e259c5d02c42c0b4.png",
+          "png_sha256": "7f86c082455b33a74fb31f9eea47b145289793c52bc68a2474d4376ba2bdcf5f"
+        }
+      ]
+    }
+  ],
+  "representative_triplets": [
+    {
+      "public_path": "docs/images/packed-quarter-camera-triplet-2pilesofplates.png",
+      "path": "/home/dllu/proj/demosaic/docs/images/packed-quarter-camera-triplet-2pilesofplates.png",
+      "sha256": "b37f99293e53de6314e53a7218a5e268ed13af12dc70a95d1b9d2b70e5928c41",
+      "metadata": {
+        "image": "crop-2b668ea4ed9150d8.png",
+        "caption": "2pilesofplates / ISO 12800 / 0:no-dino-packed-isotropic-b4-v71-quarter:step-40000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "AHD reference",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "b37f99293e53de6314e53a7218a5e268ed13af12dc70a95d1b9d2b70e5928c41",
+        "scene": "2pilesofplates",
+        "white_balance": [
+          2.40625,
+          1.0,
+          1.69140625
+        ],
+        "camera_to_srgb": [
+          [
+            1.6353747641867242,
+            -0.42196120206077053,
+            -0.21341356212595397
+          ],
+          [
+            -0.13106821045315706,
+            1.5426731789357453,
+            -0.411604968482588
+          ],
+          [
+            0.011429855280569487,
+            -0.4196218028471881,
+            1.4081919475666185
+          ]
+        ],
+        "checkpoint_sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+        "noisy_sha256": "c8ed38ce03b5fe6df0ece5615d148c2e524bb9adbcab535773db71b0f85fbdbe",
+        "prepared_crop": {
+          "id": "2pilesofplates:c8ed38ce03b5fe6df0ece5615d148c2e524bb9adbcab535773db71b0f85fbdbe:1756:2756",
+          "path": "crop-1a2b558160c55a70a0fcdec4.npz",
+          "sha256": "ce5be43933be44a44ceb04a984d40f2c90bc4caf6cb8ce085afdf85644af64a2",
+          "xywh": [
+            2756,
+            1756,
+            512,
+            512
+          ],
+          "valid_fraction": 0.9999008178710938
+        },
+        "evaluation_tile_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "model_label": "0:no-dino-packed-isotropic-b4-v71-quarter:step-40000",
+        "display_exposure": 1.0,
+        "variance_multiplier": 1.0,
+        "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA"
+      },
+      "conditioning": {
+        "shot": 0.001425164014313677,
+        "read": 1.570807341075873e-06,
+        "method": "input-only-Haar-fit"
+      }
+    },
+    {
+      "public_path": "docs/images/packed-quarter-camera-triplet-LucieB_3apples.png",
+      "path": "/home/dllu/proj/demosaic/docs/images/packed-quarter-camera-triplet-LucieB_3apples.png",
+      "sha256": "8e65f63cdf85a7398df69052d1b27b172057fa4a3fff90b7f89eabed8a3bcaba",
+      "metadata": {
+        "image": "crop-21e0d4d251e9b6fe.png",
+        "caption": "LucieB_3apples / ISO 6400 / 1:dino-packed-isotropic-b4-v70-quarter:step-40000",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "AHD reference",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "8e65f63cdf85a7398df69052d1b27b172057fa4a3fff90b7f89eabed8a3bcaba",
+        "scene": "LucieB_3apples",
+        "white_balance": [
+          0.9794921875,
+          1.0,
+          2.162109375
+        ],
+        "camera_to_srgb": [
+          [
+            2.0060677171962595,
+            -1.2336652639354324,
+            0.22759754673917293
+          ],
+          [
+            -0.23706710137989376,
+            1.8006883583827236,
+            -0.5636212570028296
+          ],
+          [
+            -0.015706646354080415,
+            -0.555168390672119,
+            1.5708750370261992
+          ]
+        ],
+        "checkpoint_sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337",
+        "noisy_sha256": "43c4b5592f33763de8ecc303986932cd30c0f07330e1987380f7e8c526c23614",
+        "prepared_crop": {
+          "id": "LucieB_3apples:43c4b5592f33763de8ecc303986932cd30c0f07330e1987380f7e8c526c23614:1754:2756",
+          "path": "crop-37aeb608babd2ebd25d92520.npz",
+          "sha256": "3c8aabdb22bb0543be9810496a2c0e34d336f7d4164e7462c97106e781feb08a",
+          "xywh": [
+            2756,
+            1754,
+            512,
+            512
+          ],
+          "valid_fraction": 0.99993896484375
+        },
+        "evaluation_tile_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "model_label": "1:dino-packed-isotropic-b4-v70-quarter:step-40000",
+        "display_exposure": 1.0,
+        "variance_multiplier": 1.0,
+        "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA"
+      },
+      "conditioning": {
+        "shot": 0.0023020145669588325,
+        "read": 5.020910101285205e-05,
+        "method": "input-only-Haar-fit"
+      }
+    }
+  ],
+  "models": {
+    "0:no-dino-packed-isotropic-b4-v71:step-8000": "abd7345c080cb227d77385647c74614c0416d9316ad2f28c81c31cdd1f1697a2",
+    "0:no-dino-packed-isotropic-b4-v71-quarter:step-40000": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+    "1:dino-packed-isotropic-b4-v70:step-8000": "5fc021488d34df6ddf85cac8b0fc5cb0b0117713c87865c010e7e246979a2c14",
+    "1:dino-packed-isotropic-b4-v70-quarter:step-40000": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337",
+    "2:dino-anchored-native-diverse-b16-v43:step-2000": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+    "3:dino-convnext-wide-long-control-b16-v63-full20k:step-20000": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+    "RawNIND:cfa-ls:publisher": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+    "RawNIND:cfa-channel:publisher": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+  },
+  "created": "2026-10-17T18:11:17.345690-07:00",
+  "manual_native_review": {
+    "status": "all4 complete native grids viewed at original resolution",
+    "notes": {
+      "known-2pilesofplates": "40k reduces grain relative to8k, but dark surfaces retain much more noise than V43/V63.",
+      "known-7D-1": "40k reduces colored grain in flat regions; substantial noise remains around the green/dark frame.",
+      "unseen-LucieB_3apples": "40k reduces color speckles, while fine grain remains clearly visible compared with the mature controls.",
+      "unseen-LucieB_Coulicoco": "40k reduces grain, without approaching the smooth flat regions of the mature controls."
+    },
+    "decision": "Record interim progress; neither40k model is promoted or extended before the complete quality/native/statistical/compiled/corrected-grid reviews."
+  },
+  "dataset_license": {
+    "SPDX": "CC-BY-SA-4.0",
+    "uri": "https://creativecommons.org/licenses/by-sa/4.0/"
+  },
+  "attribution": "Benoit Brummer and Christophe De Vleeschouwer, Raw Natural Image Noise Dataset (2025). See permissions.txt for individual scene credits and CC0 grants.",
+  "publisher": "https://doi.org/10.14428/DVN/DEQCIM",
+  "image_modifications": "registered RAW crops, demosaicing, model restoration, color rendering and panel layout"
+}
