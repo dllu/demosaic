@@ -17,7 +17,9 @@ with both new arms substantially behind mature models and RawNIND.
 All automated audits and146 native-triplet views are now complete; the review
 owners have exited. The quality decision selects an isolated continuation to
 10,000 original-schedule optimizer updates/160,000 examples, preserving all2k
-evidence. That next run is not launched by the report.
+evidence. The [isolated continuation is now running](packed-isotropic-mixed16-quarter-training.md),
+with its [complete review queued](packed-isotropic-mixed16-quarter-review-queue.md)
+behind the exact training owner.
 
 The [current-versus-EMA CPU check](mixed16-current-EMA-CPU.md) finds only
 0.03–0.17dB current-weight gains on the same two fixed photos, with strong grain

@@ -12,7 +12,8 @@ confirms +0.50510/+0.41568dB photo gains over older equal-example models but
 weak quality and151.54/169.39s FP32 restores. All146 native views and numerical/
 artifact/sensitivity checks are complete. A [current-versus-EMA check](mixed16-current-EMA-CPU.md)
 finds only small selected-photo differences and changes no inference policy.
-More original-schedule training is selected for a separate budget check.
+An isolated [original-schedule continuation](packed-isotropic-mixed16-quarter-training.md)
+is running to160,000 examples, with its complete quality/native review queued.
 These results do not meet the quality/speed requirements below; no model is promoted.
 
 Latest: the [completed RAW-native 40k review](packed-isotropic-quarter-review.md)

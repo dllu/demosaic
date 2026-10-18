@@ -1,0 +1,89 @@
+{
+  "status": "queued-mixed16-quarter-complete-quality-review-waiting-without-inference",
+  "observed_unix": 1792305916.2729495,
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-mixed16-quarter-review-workflow-v1/plan.json",
+    "sha256": "8c17a756216294836a8b4e8f69512bb4f347fcf4b441716cbc15d4ab4bde8d24"
+  },
+  "driver": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-mixed16-quarter-review-workflow-v1/controller.py",
+    "sha256": "6fdd48986e3cf09e1900df60296dbe7a0f27dac2d1f197623300ee159876e03b"
+  },
+  "legacy_serial_runner": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-mixed16-quarter-review-workflow-v1/legacy_review_controller.py",
+    "sha256": "1e8c4c4813ee0b884483426005978b25b029885e25a5b4a38b17238fe54dbf7f"
+  },
+  "boundary_and_statistics_operator": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-mixed16-quarter-review-workflow-v1/tools/review_mixed_packed_trial.py",
+    "sha256": "c4deed03fcb416bd4d28ca1576078b5e895fb7c68828be6c3d2ce936f385a53a"
+  },
+  "CPU_preflight": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-mixed16-quarter-review-workflow-v1/CPU-preflight.json",
+    "sha256": "79f6bee853872e10f457b2c563d51889ee3b21e7607f34303caecdd0f8c5020f"
+  },
+  "publication_driver": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-mixed16-quarter-review-workflow-v1/publish_queue.py",
+    "sha256": "200da29c0223c669f7f544f299f458d3548bf1ba9378614a06e36582036df383"
+  },
+  "queue_status_path": "/mnt/external/demosaic/runs/packed-isotropic-mixed16-quarter-review-workflow-v1.json",
+  "queue_status_observed": {
+    "controller": {
+      "pid": 2667688,
+      "created": 1792305841.61,
+      "driver_sha256": "1e8c4c4813ee0b884483426005978b25b029885e25a5b4a38b17238fe54dbf7f"
+    },
+    "plan": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-mixed16-quarter-review-workflow-v1/plan.json",
+      "sha256": "8c17a756216294836a8b4e8f69512bb4f347fcf4b441716cbc15d4ab4bde8d24"
+    },
+    "previous_owner": {
+      "pid": 2645898,
+      "created": 1792305192.32
+    },
+    "outputs": {
+      "known": "/mnt/external/demosaic/evaluation/packed-isotropic-mixed16-quarter-known-v1",
+      "unseen": "/mnt/external/demosaic/evaluation/packed-isotropic-mixed16-quarter-unseen-v1",
+      "full427": "/mnt/external/demosaic/evaluation/packed-isotropic-mixed16-quarter-full427-v1",
+      "analytic": "/mnt/external/demosaic/evaluation/packed-isotropic-mixed16-quarter-analytic-v1",
+      "gfx": "/mnt/external/demosaic/evaluation/packed-isotropic-mixed16-quarter-gfx-v1",
+      "three-camera": "/mnt/external/demosaic/evaluation/packed-isotropic-mixed16-quarter-three-camera-v1",
+      "colored-CPU": "/mnt/external/demosaic/evaluation/packed-isotropic-mixed16-quarter-colored-CPU-v1"
+    },
+    "primary_complete": false,
+    "status": "waiting-for-exact-mixed16-training-owner-exit-no-inference",
+    "updated_unix": 1792305844.3137581
+  },
+  "review_owner_observed_alive_with_zero_children": {
+    "pid": 2667688,
+    "created": 1792305841.61,
+    "driver_sha256": "1e8c4c4813ee0b884483426005978b25b029885e25a5b4a38b17238fe54dbf7f"
+  },
+  "training_owner_observed_alive": {
+    "pid": 2645898,
+    "created": 1792305192.32
+  },
+  "inputs_unchanged": 50,
+  "guards_unchanged": 190,
+  "validation": {
+    "targeted_tests_passed": 63,
+    "ruff_passed": true
+  },
+  "expected_work": {
+    "new_primary_FP32_methods": 11,
+    "known_cases": 792,
+    "unseen_cases": 990,
+    "full443_source_cases": 136444,
+    "analytic_cases": 2240,
+    "primary_metric_comparisons": 156,
+    "primary_classical_witnesses": 39,
+    "own_parent_metric_comparisons": 24,
+    "own_parent_classical_witnesses": 6,
+    "full_GFX_RGB16_files": 12,
+    "fresh_FP32_hue_predictions": 4704,
+    "source_sensitivities": 117
+  },
+  "scope": "Wait for exact2k->10k mixed16 controller and final child exit; require both finite full-state160k-example endpoints, actual CUDA model/Adam/RNG/EMA and next16 input restoration, unchanged source/schedule and403 logged pair/original observation matches. Eleven freshly FP32 primary methods on known792/unseen990/full136444 cases, mature and old equal160k-example controls, fullGFX12RGB16, foliage/fence/sky/building, three cached cameras, selected colors, fresh FP32 hue, supplementary highlights, independent audits and fixed-cohort sensitivities. Reuse existing2k parent scores only for separate24-metric progress comparisons after exact protocol/coverage/classical witnesses. Full native visual review/quality decision remain manual; no training, promotion, protected-final scores or automatic extension. Single shared-machine times are descriptive.",
+  "quality_review_complete": false,
+  "native_views_pending": true,
+  "promoted": false
+}

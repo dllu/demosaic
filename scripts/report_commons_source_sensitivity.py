@@ -48,6 +48,7 @@ def statistics_payload(container):
             "completed-packed-isotropic-first32000-example-statistics",
             "completed-packed-isotropic-quarter-statistics-and-first8k-progress",
             "completed-packed-isotropic-mixed16-first32000-example-statistics",
+            "completed-packed-isotropic-mixed16-quarter160000-example-statistics",
         },
         "Model comparison statistics are incomplete",
     )
@@ -153,6 +154,7 @@ def run(statistics_path, statistics_sha256, cohort_path, cohort_sha256, output):
         "completed-packed-isotropic-first32000-example-statistics": [9],
         "completed-packed-isotropic-quarter-statistics-and-first8k-progress": [11],
         "completed-packed-isotropic-mixed16-first32000-example-statistics": [13],
+        "completed-packed-isotropic-mixed16-quarter160000-example-statistics": [13],
     }.get(container.get("status"), [7, 9])
     require(len(pairs) in expected_pairs, "Unexpected original photo comparison coverage")
     expected = {

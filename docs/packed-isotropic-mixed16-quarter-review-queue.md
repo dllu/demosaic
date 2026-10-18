@@ -1,0 +1,49 @@
+# Queued mixed16 review at160,000 examples
+
+The complete review is queued behind the exact
+[running continuation](packed-isotropic-mixed16-quarter-training.md).
+It currently waits without inference or child processes. Training and the
+future review remain incomplete; neither checkpoint is promoted.
+
+[Frozen plan, exact owners, executed sources and CPU preflight](results/packed-isotropic-mixed16-quarter-review-queue-v1.json).
+Live status:
+`/mnt/external/demosaic/runs/packed-isotropic-mixed16-quarter-review-workflow-v1.json`.
+
+After the training controller exits, the reviewer requires both successful
+10k optimizer /40k data-step /160k-example endpoints and final child exit.
+It independently checks finite model/EMA/Adam states, original source bundle,
+data/precision/units/LR/horizon, actual CUDA restoration receipts and the next
+16 original input batches. All403 logged source/noise/LR/example records must
+match across the pair and403 overlapping older RAW observations per arm.
+An incomplete or failed training status stops the review before inference.
+
+The fixed review includes:
+
+- Fresh FP32 known/unseen-camera and full427-photo/16-procedural panels:
+  six neural methods, two RawNIND adapters and three classical methods.
+  V72/V73 are compared with mature V43/V63 and older V71/V70 at the same
+  160,000-example budget. Those older models differ in units, precision,
+  optimizer grouping and EMA; this comparison cannot isolate the batch effect.
+- Separate progress comparisons against each preserved32k-example parent.
+  Existing parent scores are reused after matching protocol, observation
+  coverage and classical-control witnesses. This avoids repeating parent
+  inference. Six comparisons produce24 source-balanced metric differences.
+- Analytic detail, three cached cameras, selected colors,4,704 fresh FP32
+  hue predictions, supplementary GFX sign/platform contexts, independent
+  arithmetic/artifact checks and117 fixed-cohort sensitivities.
+- Full GFX restores with twelve RGB16 exports and native sky, building,
+  foliage and fence triplets. Display coordinates/transforms stay fixed;
+  the separate ISO100 image is a qualitative reference, never exact GT.
+
+The CPU integration preflight rejects the actual running training job. It then
+aliases the completed parent reports against themselves: all24 differences and
+bootstrap intervals are exactly zero, with six matched classical witnesses.
+It performs no inference and initializes no CUDA context. Targeted review,
+boundary and source-sensitivity checks pass63 tests; Ruff passes.
+
+The queue reuses the frozen serial review runner with the new boundary operator.
+It adds an independent analytic summary audit and separate parent progression
+before its final terminal status. It stops on failure without an automatic
+restart, training extension or promotion. Actual unresized crop inspection and
+the final quality decision remain manual. Shared-machine full-frame times will
+be descriptive observations. Protected-final scenes remain closed.

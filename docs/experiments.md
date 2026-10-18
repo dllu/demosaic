@@ -7,7 +7,9 @@ promotion. All146 native views, twelve RGB16 exports,4,704 fresh FP32 hue
 predictions, primary/analytic/color arithmetic and source sensitivities pass
 their checks. The tiny DINO photo gain is+.00493dB. An isolated continuation
 to10k original-schedule updates/160k examples is selected, preserving the2k
-evidence; the report does not launch it. V43 remains the working reference.
+evidence. That [continuation is now running](packed-isotropic-mixed16-quarter-training.md),
+with its [complete review queued](packed-isotropic-mixed16-quarter-review-queue.md)
+behind the exact owner. V43 remains the working reference.
 
 The earlier
 [full development-camera CPU check](packed-isotropic-mixed16-V72-camera-CPU.md)

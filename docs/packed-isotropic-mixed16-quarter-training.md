@@ -5,6 +5,9 @@ The isolated continuation is running after the
 V72 no-DINO runs first; V73 DINO follows serially after successful completion.
 Neither model is promoted. This is a launch record, with no new quality result.
 
+The [complete review queue](packed-isotropic-mixed16-quarter-review-queue.md)
+now waits for the exact training owner to exit and both boundaries to pass.
+
 [Observed startup, plan/checkpoint hashes, exact owners and checks](results/packed-isotropic-mixed16-quarter-launch-v1.json).
 The live status is
 `/mnt/external/demosaic/runs/packed-isotropic-mixed16-quarter-workflow-v1.json`.
