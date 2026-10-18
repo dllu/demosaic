@@ -68,7 +68,12 @@ project matches its performance.
   says CC BY-NC-SA 4.0, while the main model header says CC BY-NC 4.0.
   Publisher code/weights stay in an isolated reference cache, outside the
   production implementation and training. Photo quality, transfer of the fixed
-  ISO profiles to our cameras and separate weight terms remain unverified.
+  ISO profiles to our cameras and separate weight terms were unverified at that
+  compatibility boundary. The subsequent
+  [fixed-default CPU pilot](unified-ISO3200-CPU-pilot.md) completes six saved
+  observations and 30 native comparison cells. It retains grain and structured
+  texture under the explicit integer-range/profile transfer; no promotion or
+  general architecture ranking follows.
 * [RawNIND authors' code and weights](https://github.com/trougnouf/rawnind_jddc)
   and [paper](https://arxiv.org/abs/2501.08924) are comparison targets. Record
   calibration, color/gain alignment, and source license before comparing.

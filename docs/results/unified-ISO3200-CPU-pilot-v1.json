@@ -1,0 +1,1905 @@
+{
+  "status": "completed-publisher-default-six-case-CPU-comparison-no-promotion",
+  "publisher": {
+    "repository": "https://github.com/SamsungLabs/unified-demosaicing",
+    "commit": "d17aa7ebba5730c6259d256da028a84c521007c7",
+    "paper": "https://arxiv.org/abs/2504.07145v2",
+    "authors": [
+      "SaiKiran Tedla",
+      "Abhijith Punnappurath",
+      "Luxi Zhao",
+      "Michael S. Brown"
+    ],
+    "repository_license": "CC BY-NC-SA4.0; main model header says CC BY-NC4.0",
+    "implementation": "Unchanged publisher model/source and genuine default ISO3200 checkpoint, isolated from production/training"
+  },
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/unified-ISO3200-CPU-pilot-v1/plan.json",
+    "sha256": "8981ec60fdd038520fa6c30abccd75495d2ca5d759c56f8ca76a6e9fe46b237a"
+  },
+  "executed_source": {
+    "path": "/mnt/external/demosaic/benchmarks/unified-ISO3200-CPU-pilot-v1/driver.py",
+    "sha256": "a4c4ec6b9f2a7d67bc90fc9b533e3ed47d5ad4d562a7f3797733448e34999f56"
+  },
+  "unlaunched_lint_fix": {
+    "path": "/mnt/external/demosaic/benchmarks/unified-ISO3200-CPU-pilot-v1/unlaunched-lint-fix.json",
+    "sha256": "8086ff98a6408bde71ca5e3842d2ec79246ab5ce68ab13393a5629272224bbc3"
+  },
+  "original_producer_report": {
+    "path": "/mnt/external/demosaic/evaluation/unified-ISO3200-native-CPU-pilot-v1/report.json",
+    "sha256": "700658d98b4ea580da3b91b3c89018c33c979dda28540f2fd50570bc67a5bced"
+  },
+  "clarified_report": {
+    "path": "/mnt/external/demosaic/evaluation/unified-ISO3200-native-CPU-pilot-v1/report-clarified.json",
+    "sha256": "a976c6ef98676b4195d6a897b7d9e3079ad6ffc4b288898d11246c987579ee15"
+  },
+  "independent_audit": {
+    "path": "/mnt/external/demosaic/evaluation/unified-ISO3200-native-CPU-pilot-v1/independent-audit.json",
+    "sha256": "50136c65dccdb6fe96d1b9cd9a84c4df367c4f862c276763d85702cbcbdc6405"
+  },
+  "native_board_receipt": {
+    "path": "/mnt/external/demosaic/benchmarks/unified-ISO3200-CPU-pilot-v1/native-board.json",
+    "sha256": "37ee82c4ae2dcc2004605ea8c8912975654c45b6dc072c4ea2b4c5a44808fb6e"
+  },
+  "actual_native_view": {
+    "path": "/mnt/external/demosaic/benchmarks/unified-ISO3200-CPU-pilot-v1/manual_view.json",
+    "sha256": "2c3811ba2ae3ed353cba412fc6a09a320c0c494e28b1b18d9375ca0786e4c9b2"
+  },
+  "publication_driver": {
+    "path": "/mnt/external/demosaic/benchmarks/unified-ISO3200-CPU-pilot-v1/publish.py",
+    "sha256": "c8435c7ea62dd973df8e008378e7f05e76d307335025a79af20d544c159bf8f2"
+  },
+  "checkpoint": {
+    "path": "/mnt/external/demosaic/references/unified-demosaicing/native-CPU-preparation-v1/PyTorch/models/iso3200.pth",
+    "sha256": "fef899dc7c08c492d82e0c27a99fd9a2f067ef927088ec61348384b6078a8919",
+    "git_blob_sha1": "06a45e0a0b6088002e1a8f64576f9d38de2394a2",
+    "bytes": 38811013,
+    "URL": "https://raw.githubusercontent.com/SamsungLabs/unified-demosaicing/d17aa7ebba5730c6259d256da028a84c521007c7/PyTorch/models/iso3200.pth"
+  },
+  "results": [
+    {
+      "case": "photo-0",
+      "scores": {
+        "native160": {
+          "linear_psnr": 35.95211410522461,
+          "srgb_psnr": 33.080020904541016,
+          "srgb_ssim": 0.7819904088973999,
+          "chroma_mae": 0.009740042500197887,
+          "gradient_mae": 0.01668158918619156,
+          "highlight_boundary_chroma_mae": 0.01119985431432724,
+          "highlight_boundary_rgb_mae": 0.017231043428182602,
+          "shadow_linear_psnr": 44.0306396484375
+        },
+        "border8-context240": {
+          "linear_psnr": 36.10662841796875,
+          "srgb_psnr": 32.64515686035156,
+          "srgb_ssim": 0.7754160165786743,
+          "chroma_mae": 0.010104845277965069,
+          "gradient_mae": 0.01694495975971222,
+          "highlight_boundary_chroma_mae": 0.012757479213178158,
+          "highlight_boundary_rgb_mae": 0.018708594143390656,
+          "shadow_linear_psnr": 45.324825286865234
+        }
+      },
+      "input_transfer_statistics": {
+        "below_zero_samples_clipped": 1176,
+        "above_one_samples_clipped": 0,
+        "input_code_range": [
+          0,
+          10326
+        ]
+      }
+    },
+    {
+      "case": "photo-1",
+      "scores": {
+        "native160": {
+          "linear_psnr": 35.45362854003906,
+          "srgb_psnr": 31.701915740966797,
+          "srgb_ssim": 0.8442994356155396,
+          "chroma_mae": 0.008696518838405609,
+          "gradient_mae": 0.02176455780863762,
+          "highlight_boundary_chroma_mae": 0.014001870527863503,
+          "highlight_boundary_rgb_mae": 0.022459449246525764,
+          "shadow_linear_psnr": 46.842002868652344
+        },
+        "border8-context240": {
+          "linear_psnr": 35.08143997192383,
+          "srgb_psnr": 31.798851013183594,
+          "srgb_ssim": 0.8414780497550964,
+          "chroma_mae": 0.008817847818136215,
+          "gradient_mae": 0.02146121859550476,
+          "highlight_boundary_chroma_mae": 0.014001870527863503,
+          "highlight_boundary_rgb_mae": 0.022459449246525764,
+          "shadow_linear_psnr": 46.32243728637695
+        }
+      },
+      "input_transfer_statistics": {
+        "below_zero_samples_clipped": 786,
+        "above_one_samples_clipped": 0,
+        "input_code_range": [
+          0,
+          13496
+        ]
+      }
+    },
+    {
+      "case": "gfx-overcast-sky",
+      "scores": {},
+      "input_transfer_statistics": {
+        "below_zero_samples_clipped": 273,
+        "above_one_samples_clipped": 0,
+        "input_code_range": [
+          0,
+          1077
+        ]
+      }
+    },
+    {
+      "case": "gfx-building-detail",
+      "scores": {},
+      "input_transfer_statistics": {
+        "below_zero_samples_clipped": 1666,
+        "above_one_samples_clipped": 0,
+        "input_code_range": [
+          0,
+          13496
+        ]
+      }
+    },
+    {
+      "case": "gfx-foliage",
+      "scores": {},
+      "input_transfer_statistics": {
+        "below_zero_samples_clipped": 12230,
+        "above_one_samples_clipped": 0,
+        "input_code_range": [
+          0,
+          4409
+        ]
+      }
+    },
+    {
+      "case": "gfx-chain-link-fence",
+      "scores": {},
+      "input_transfer_statistics": {
+        "below_zero_samples_clipped": 3445,
+        "above_one_samples_clipped": 0,
+        "input_code_range": [
+          0,
+          13337
+        ]
+      }
+    }
+  ],
+  "native_triplets": [
+    {
+      "image": "crop-3fdfa2fd820289d1.png",
+      "caption": "Publisher default ISO3200 / photo-0",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; scores use publisher13496-code RGB normalized to float32",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Publisher ISO3200",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "4243a9fd40d313d0316566128d4ff3fb628becc6cd54eb259fda73a3178c7b6c",
+      "case": {
+        "id": "photo-0",
+        "kind": "synthetic-photo",
+        "source": {
+          "path": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+          "sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+          "source_crop": {
+            "image": "crop-09daca8a7d6943a8.png",
+            "caption": "0014aa4e075b1827f91ef8a02069e1e318f040ba / iso12800-prior / RGGB / 0:dino-anchored-native-diverse-b16-v43:step-2000",
+            "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+            "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+            "panels": [
+              {
+                "label": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Denoised",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "GT (synthetic)",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ],
+            "png_sha256": "e62e06127576b1f08d17a245ee0d1692db5140e57d94ee12593780147297f9c3",
+            "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+            "source": {
+              "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+              "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+              "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "author": "Roy Egloff",
+              "license": "CC BY-SA 4.0",
+              "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+              "attribution": null,
+              "credit": "Own work",
+              "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+              "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+              "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+              "width": 3888,
+              "height": 2592,
+              "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+              "split": "val",
+              "bin_factor": 8,
+              "color_space": "linear-sRGB",
+              "dtype": "uint16",
+              "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+              "shape": [
+                324,
+                486,
+                3
+              ],
+              "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+            },
+            "validation_index": 0,
+            "validation_seed": 42,
+            "evaluation_tile_xywh": [
+              48,
+              48,
+              160,
+              160
+            ],
+            "condition": {
+              "exposure": 1.0,
+              "name": "iso12800-prior",
+              "read": 2.62144e-05,
+              "shot": 0.00256
+            },
+            "pattern": "RGGB",
+            "model": {
+              "label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+              "source": "/mnt/external/demosaic/models/v43-step2000.pt",
+              "training_run": "/mnt/external/demosaic/runs/dino-anchored-native-diverse-b16-v43",
+              "snapshot": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/weights/weights-0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5.pt",
+              "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+              "step": 2000,
+              "model_config": {
+                "restoration_backbone": "pretrained-rgb",
+                "width": 64,
+                "encoder_blocks": [
+                  2,
+                  2,
+                  4
+                ],
+                "middle_blocks": 6,
+                "decoder_blocks": [
+                  2,
+                  2,
+                  2
+                ],
+                "attention": true,
+                "dino": true,
+                "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+                "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+                "camera_conditioning": true,
+                "noise_modulation": false,
+                "physical_fp32": true,
+                "baseline": "bilinear",
+                "prior_window": 7,
+                "standardized_noise": false,
+                "noise_refinement": false,
+                "refinement_width": 24,
+                "refinement_blocks": 4,
+                "refinement_window": 63,
+                "coarse_refinement_factor": 0,
+                "coarse_refinement_width": 24,
+                "coarse_refinement_blocks": 4,
+                "coarse_refinement_window": 31,
+                "pyramid_refinement": false,
+                "pyramid_measurements": true,
+                "pyramid_width": 24,
+                "pyramid_blocks": 2,
+                "variance_stabilization": true,
+                "physical_anchors": true,
+                "rgb_processing_scale": 1,
+                "packed_detail_prior": false,
+                "rgb_hidden_autocast": false
+              },
+              "effective_model_config": {
+                "restoration_backbone": "pretrained-rgb",
+                "width": 64,
+                "encoder_blocks": [
+                  2,
+                  2,
+                  4
+                ],
+                "middle_blocks": 6,
+                "decoder_blocks": [
+                  2,
+                  2,
+                  2
+                ],
+                "attention": true,
+                "dino": true,
+                "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+                "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+                "dino_lora_rank": 0,
+                "dino_input_adapter": false,
+                "dino_feature_fusion": "bottleneck",
+                "camera_conditioning": true,
+                "noise_modulation": false,
+                "physical_fp32": true,
+                "baseline": "bilinear",
+                "prior_window": 7,
+                "standardized_noise": false,
+                "noise_refinement": false,
+                "refinement_width": 24,
+                "refinement_blocks": 4,
+                "refinement_window": 63,
+                "coarse_refinement_factor": 0,
+                "coarse_refinement_width": 24,
+                "coarse_refinement_blocks": 4,
+                "coarse_refinement_window": 31,
+                "pyramid_refinement": false,
+                "pyramid_measurements": true,
+                "pyramid_width": 24,
+                "pyramid_blocks": 2,
+                "variance_stabilization": true,
+                "physical_anchors": true,
+                "rgb_processing_scale": 1,
+                "packed_detail_prior": false,
+                "rgb_hidden_autocast": false,
+                "rgb_center_camera_matrix": false,
+                "rgb_middle_skip_fp32": false,
+                "adc_cfa_projection": false
+              },
+              "training_manifest_sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+              "compute_precision": "float32",
+              "refinement_compute_precision": "float32",
+              "memory_format": "contiguous"
+            },
+            "display_exposure": 1.0,
+            "reference": "Exact synthetic clean target"
+          }
+        },
+        "observation": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-0-cpu.npz",
+        "observation_sha256": "d384322ffb34d45c335202dd7c8078ed41c153e96dee942bed529fadc72d0e6e",
+        "pattern": "RGGB",
+        "roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "black": [
+          1966.05,
+          1966.05,
+          1966.05,
+          1966.05
+        ],
+        "white": [
+          65535.0,
+          65535.0,
+          65535.0,
+          65535.0
+        ],
+        "adc_white": 65535.0,
+        "display_exposure": 1.0,
+        "reference": "Exact simulated clean target from a binned Commons photo. CPU-generated observation, distinct from full427 CUDA draws.",
+        "unchanged_V43_triplet": {
+          "path": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/crop-09daca8a7d6943a8.png",
+          "sha256": "e62e06127576b1f08d17a245ee0d1692db5140e57d94ee12593780147297f9c3"
+        }
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/references/unified-demosaicing/native-CPU-preparation-v1/PyTorch/models/iso3200.pth",
+        "sha256": "fef899dc7c08c492d82e0c27a99fd9a2f067ef927088ec61348384b6078a8919",
+        "git_blob_sha1": "06a45e0a0b6088002e1a8f64576f9d38de2394a2",
+        "bytes": 38811013,
+        "URL": "https://raw.githubusercontent.com/SamsungLabs/unified-demosaicing/d17aa7ebba5730c6259d256da028a84c521007c7/PyTorch/models/iso3200.pth"
+      },
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "display_exposure": 1.0,
+      "reference": "Exact simulated clean target from a binned Commons photo. CPU-generated observation, distinct from full427 CUDA draws.",
+      "conditioning": "Fixed publisher ISO3200 checkpoint; no supplied noise map/ISO/shot/read input. Test observation metadata retained separately.",
+      "compute_precision": "Original CPU float32 model; publisher integer13496-code input/output transfer",
+      "input_transfer_statistics": {
+        "below_zero_samples_clipped": 1176,
+        "above_one_samples_clipped": 0,
+        "input_code_range": [
+          0,
+          10326
+        ]
+      },
+      "source_image": {
+        "path": "/mnt/external/demosaic/evaluation/unified-ISO3200-native-CPU-pilot-v1/crop-3fdfa2fd820289d1.png",
+        "sha256": "4243a9fd40d313d0316566128d4ff3fb628becc6cd54eb259fda73a3178c7b6c"
+      },
+      "published_image": "docs/images/unified-ISO3200-CPU-photo-0.png"
+    },
+    {
+      "image": "crop-6c8e64314c4a8980.png",
+      "caption": "Publisher default ISO3200 / photo-1",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; scores use publisher13496-code RGB normalized to float32",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Publisher ISO3200",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "90ae739e30f70a8e07d9a7f2445647bc328ddacb6aeb27d496fc3336babbde5d",
+      "case": {
+        "id": "photo-1",
+        "kind": "synthetic-photo",
+        "source": {
+          "path": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+          "sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+          "source_crop": {
+            "image": "crop-085432538346e7c9.png",
+            "caption": "002fc6eeadf637e81d5a327f117b79abb86becd9 / iso12800-prior / RGGB / 0:dino-anchored-native-diverse-b16-v43:step-2000",
+            "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+            "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+            "panels": [
+              {
+                "label": "Noisy (Malvar)",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Denoised",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "GT (synthetic)",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ],
+            "png_sha256": "bae60debf1312de2ab1e34eb991153280c0ba99a43c017a181464bc4919278be",
+            "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+            "source": {
+              "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+              "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+              "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Vancouver_%28BC%2C_Canada%29%2C_Coal_Harbour_Seaside_Park%2C_Blick_in_den_Himmel_--_2022_--_2158.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+              "author": "Dietmar Rabich",
+              "license": "CC BY-SA 4.0",
+              "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+              "attribution": "Dietmar Rabich",
+              "credit": "Own work",
+              "sha1": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+              "sha1_hex": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+              "download_path": "images/00/2f/002fc6eeadf637e81d5a327f117b79abb86becd9.jpg",
+              "width": 3809,
+              "height": 2857,
+              "id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+              "split": "val",
+              "bin_factor": 8,
+              "color_space": "linear-sRGB",
+              "dtype": "uint16",
+              "cache": "/mnt/external/demosaic/commons-v1/images/00/002fc6eeadf637e81d5a327f117b79abb86becd9.npy",
+              "shape": [
+                357,
+                476,
+                3
+              ],
+              "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf"
+            },
+            "validation_index": 1,
+            "validation_seed": 42,
+            "evaluation_tile_xywh": [
+              48,
+              48,
+              160,
+              160
+            ],
+            "condition": {
+              "exposure": 1.0,
+              "name": "iso12800-prior",
+              "read": 2.62144e-05,
+              "shot": 0.00256
+            },
+            "pattern": "RGGB",
+            "model": {
+              "label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+              "source": "/mnt/external/demosaic/models/v43-step2000.pt",
+              "training_run": "/mnt/external/demosaic/runs/dino-anchored-native-diverse-b16-v43",
+              "snapshot": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/weights/weights-0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5.pt",
+              "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+              "step": 2000,
+              "model_config": {
+                "restoration_backbone": "pretrained-rgb",
+                "width": 64,
+                "encoder_blocks": [
+                  2,
+                  2,
+                  4
+                ],
+                "middle_blocks": 6,
+                "decoder_blocks": [
+                  2,
+                  2,
+                  2
+                ],
+                "attention": true,
+                "dino": true,
+                "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+                "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+                "camera_conditioning": true,
+                "noise_modulation": false,
+                "physical_fp32": true,
+                "baseline": "bilinear",
+                "prior_window": 7,
+                "standardized_noise": false,
+                "noise_refinement": false,
+                "refinement_width": 24,
+                "refinement_blocks": 4,
+                "refinement_window": 63,
+                "coarse_refinement_factor": 0,
+                "coarse_refinement_width": 24,
+                "coarse_refinement_blocks": 4,
+                "coarse_refinement_window": 31,
+                "pyramid_refinement": false,
+                "pyramid_measurements": true,
+                "pyramid_width": 24,
+                "pyramid_blocks": 2,
+                "variance_stabilization": true,
+                "physical_anchors": true,
+                "rgb_processing_scale": 1,
+                "packed_detail_prior": false,
+                "rgb_hidden_autocast": false
+              },
+              "effective_model_config": {
+                "restoration_backbone": "pretrained-rgb",
+                "width": 64,
+                "encoder_blocks": [
+                  2,
+                  2,
+                  4
+                ],
+                "middle_blocks": 6,
+                "decoder_blocks": [
+                  2,
+                  2,
+                  2
+                ],
+                "attention": true,
+                "dino": true,
+                "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+                "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+                "dino_lora_rank": 0,
+                "dino_input_adapter": false,
+                "dino_feature_fusion": "bottleneck",
+                "camera_conditioning": true,
+                "noise_modulation": false,
+                "physical_fp32": true,
+                "baseline": "bilinear",
+                "prior_window": 7,
+                "standardized_noise": false,
+                "noise_refinement": false,
+                "refinement_width": 24,
+                "refinement_blocks": 4,
+                "refinement_window": 63,
+                "coarse_refinement_factor": 0,
+                "coarse_refinement_width": 24,
+                "coarse_refinement_blocks": 4,
+                "coarse_refinement_window": 31,
+                "pyramid_refinement": false,
+                "pyramid_measurements": true,
+                "pyramid_width": 24,
+                "pyramid_blocks": 2,
+                "variance_stabilization": true,
+                "physical_anchors": true,
+                "rgb_processing_scale": 1,
+                "packed_detail_prior": false,
+                "rgb_hidden_autocast": false,
+                "rgb_center_camera_matrix": false,
+                "rgb_middle_skip_fp32": false,
+                "adc_cfa_projection": false
+              },
+              "training_manifest_sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+              "compute_precision": "float32",
+              "refinement_compute_precision": "float32",
+              "memory_format": "contiguous"
+            },
+            "display_exposure": 1.0,
+            "reference": "Exact synthetic clean target"
+          }
+        },
+        "observation": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/observation-1-cpu.npz",
+        "observation_sha256": "e115c95a9933772c1c09abfa1d68ab346943411b58f0682495fbcc2144e8b949",
+        "pattern": "RGGB",
+        "roi_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "black": [
+          1966.05,
+          1966.05,
+          1966.05,
+          1966.05
+        ],
+        "white": [
+          65535.0,
+          65535.0,
+          65535.0,
+          65535.0
+        ],
+        "adc_white": 65535.0,
+        "display_exposure": 1.0,
+        "reference": "Exact simulated clean target from a binned Commons photo. CPU-generated observation, distinct from full427 CUDA draws.",
+        "unchanged_V43_triplet": {
+          "path": "/mnt/external/demosaic/evaluation/two-fixed-examples-v43-none10k-cpu-v1/crop-085432538346e7c9.png",
+          "sha256": "bae60debf1312de2ab1e34eb991153280c0ba99a43c017a181464bc4919278be"
+        }
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/references/unified-demosaicing/native-CPU-preparation-v1/PyTorch/models/iso3200.pth",
+        "sha256": "fef899dc7c08c492d82e0c27a99fd9a2f067ef927088ec61348384b6078a8919",
+        "git_blob_sha1": "06a45e0a0b6088002e1a8f64576f9d38de2394a2",
+        "bytes": 38811013,
+        "URL": "https://raw.githubusercontent.com/SamsungLabs/unified-demosaicing/d17aa7ebba5730c6259d256da028a84c521007c7/PyTorch/models/iso3200.pth"
+      },
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "display_exposure": 1.0,
+      "reference": "Exact simulated clean target from a binned Commons photo. CPU-generated observation, distinct from full427 CUDA draws.",
+      "conditioning": "Fixed publisher ISO3200 checkpoint; no supplied noise map/ISO/shot/read input. Test observation metadata retained separately.",
+      "compute_precision": "Original CPU float32 model; publisher integer13496-code input/output transfer",
+      "input_transfer_statistics": {
+        "below_zero_samples_clipped": 786,
+        "above_one_samples_clipped": 0,
+        "input_code_range": [
+          0,
+          13496
+        ]
+      },
+      "source_image": {
+        "path": "/mnt/external/demosaic/evaluation/unified-ISO3200-native-CPU-pilot-v1/crop-6c8e64314c4a8980.png",
+        "sha256": "90ae739e30f70a8e07d9a7f2445647bc328ddacb6aeb27d496fc3336babbde5d"
+      },
+      "published_image": "docs/images/unified-ISO3200-CPU-photo-1.png"
+    },
+    {
+      "image": "crop-eb51eb7854df0c72.png",
+      "caption": "Publisher default ISO3200 / gfx-overcast-sky",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; scores use publisher13496-code RGB normalized to float32",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Publisher ISO3200",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 ref (not GT)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "ffac270b08067238095e5c569d4d84426d5df989f513227f573152235d8e64e7",
+      "case": {
+        "id": "gfx-overcast-sky",
+        "kind": "real-GFX-context",
+        "source": {
+          "image": "overcast-sky-noisy-packed-f32.npy",
+          "sha256": "f875de8e6dcc3441800ee23c96b348dcb6d48fe26789c04f79f583568a53bd4d",
+          "shape": [
+            1,
+            4,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "role": "noisy-packed",
+          "region": {
+            "name": "overcast-sky",
+            "noisy_xy": [
+              5800,
+              1400
+            ],
+            "reference_xy": [
+              5800,
+              1400
+            ],
+            "size": 160,
+            "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+            "context_green_correlation": null
+          },
+          "context_xywh": [
+            5624,
+            1224,
+            512,
+            512
+          ],
+          "pattern": "RGGB",
+          "encoding": "Four packed CFA phases, black-subtracted/white-normalized sensor units"
+        },
+        "observation": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/overcast-sky-noisy-packed-f32.npy",
+        "observation_sha256": "f875de8e6dcc3441800ee23c96b348dcb6d48fe26789c04f79f583568a53bd4d",
+        "pattern": "RGGB",
+        "roi_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "black": [
+          4101.0,
+          4098.0,
+          4104.0,
+          4106.0
+        ],
+        "white": [
+          65535.0,
+          65535.0,
+          65535.0,
+          65535.0
+        ],
+        "adc_white": 65535.0,
+        "display_exposure": 4.0,
+        "reference": "DSCF3880 ISO100 f/5.6, independently AHD demosaiced; not GT, no pixelwise score.",
+        "reference_array": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/overcast-sky-reference-rgb-f32.npy",
+        "reference_array_sha256": "a566b9ebfa173e706b820988dd1f47302f9d2e6521de7873dddd18f5a0ee6c49",
+        "wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "original_crop_receipt": {
+          "image": "crop-7695cb844cf53615.png",
+          "caption": "overcast-sky / 0:dino-anchored-native-diverse-b16-v43:step-2000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "db21d2a4b407ba12b94fd75a68caacd0ce00f2b5712da6806ba1dd7e9fdee0c2",
+          "region": {
+            "name": "overcast-sky",
+            "noisy_xy": [
+              5800,
+              1400
+            ],
+            "reference_xy": [
+              5800,
+              1400
+            ],
+            "size": 160,
+            "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+            "context_green_correlation": null
+          },
+          "model_label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+          "checkpoint_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            5624,
+            1224,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping"
+        },
+        "unchanged_V43_triplet": {
+          "path": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/crop-7695cb844cf53615.png",
+          "sha256": "db21d2a4b407ba12b94fd75a68caacd0ce00f2b5712da6806ba1dd7e9fdee0c2"
+        }
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/references/unified-demosaicing/native-CPU-preparation-v1/PyTorch/models/iso3200.pth",
+        "sha256": "fef899dc7c08c492d82e0c27a99fd9a2f067ef927088ec61348384b6078a8919",
+        "git_blob_sha1": "06a45e0a0b6088002e1a8f64576f9d38de2394a2",
+        "bytes": 38811013,
+        "URL": "https://raw.githubusercontent.com/SamsungLabs/unified-demosaicing/d17aa7ebba5730c6259d256da028a84c521007c7/PyTorch/models/iso3200.pth"
+      },
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "white_balance": [
+        [
+          1.5132449865341187,
+          1.0,
+          2.2152318954467773
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.0725188255310059,
+            0.17123593389987946,
+            -0.2437547743320465
+          ],
+          [
+            -0.126719132065773,
+            1.4310508966445923,
+            -0.30433180928230286
+          ],
+          [
+            -0.00969767663627863,
+            -0.29348063468933105,
+            1.303178310394287
+          ]
+        ]
+      ],
+      "display_exposure": 4.0,
+      "reference": "DSCF3880 ISO100 f/5.6, independently AHD demosaiced; not GT, no pixelwise score.",
+      "conditioning": "Fixed publisher ISO3200 checkpoint; no supplied noise map/ISO/shot/read input. Test observation metadata retained separately.",
+      "compute_precision": "Original CPU float32 model; publisher integer13496-code input/output transfer",
+      "input_transfer_statistics": {
+        "below_zero_samples_clipped": 273,
+        "above_one_samples_clipped": 0,
+        "input_code_range": [
+          0,
+          1077
+        ]
+      },
+      "source_image": {
+        "path": "/mnt/external/demosaic/evaluation/unified-ISO3200-native-CPU-pilot-v1/crop-eb51eb7854df0c72.png",
+        "sha256": "ffac270b08067238095e5c569d4d84426d5df989f513227f573152235d8e64e7"
+      },
+      "published_image": "docs/images/unified-ISO3200-CPU-gfx-overcast-sky.png"
+    },
+    {
+      "image": "crop-7d87187221b3a53b.png",
+      "caption": "Publisher default ISO3200 / gfx-building-detail",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; scores use publisher13496-code RGB normalized to float32",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Publisher ISO3200",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 ref (not GT)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "07677b81de581f68d6c59c0e477d9631786a12f3b99bf20dd3dae515b89482b9",
+      "case": {
+        "id": "gfx-building-detail",
+        "kind": "real-GFX-context",
+        "source": {
+          "image": "building-detail-noisy-packed-f32.npy",
+          "sha256": "d4e189e0cd48f85c05fd041001770728a6e2c5af496849516fb0f43ed98b2666",
+          "shape": [
+            1,
+            4,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "role": "noisy-packed",
+          "region": {
+            "name": "building-detail",
+            "noisy_xy": [
+              5790,
+              2690
+            ],
+            "reference_xy": [
+              5791,
+              2690
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.6824449896812439
+          },
+          "context_xywh": [
+            5614,
+            2514,
+            512,
+            512
+          ],
+          "pattern": "RGGB",
+          "encoding": "Four packed CFA phases, black-subtracted/white-normalized sensor units"
+        },
+        "observation": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/building-detail-noisy-packed-f32.npy",
+        "observation_sha256": "d4e189e0cd48f85c05fd041001770728a6e2c5af496849516fb0f43ed98b2666",
+        "pattern": "RGGB",
+        "roi_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "black": [
+          4101.0,
+          4098.0,
+          4104.0,
+          4106.0
+        ],
+        "white": [
+          65535.0,
+          65535.0,
+          65535.0,
+          65535.0
+        ],
+        "adc_white": 65535.0,
+        "display_exposure": 4.0,
+        "reference": "DSCF3880 ISO100 f/5.6, independently AHD demosaiced; not GT, no pixelwise score.",
+        "reference_array": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/building-detail-reference-rgb-f32.npy",
+        "reference_array_sha256": "d4ce7ad0a632979efcb19e8153e0585167771a846923ea71c8c0e75ab7ad216c",
+        "wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "original_crop_receipt": {
+          "image": "crop-d862a19f3f5860b0.png",
+          "caption": "building-detail / 0:dino-anchored-native-diverse-b16-v43:step-2000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "8551309cf78eeb873bbf751f98b5e9de3803fddbffcf3615f8a5bf5e613480b2",
+          "region": {
+            "name": "building-detail",
+            "noisy_xy": [
+              5790,
+              2690
+            ],
+            "reference_xy": [
+              5791,
+              2690
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.6824449896812439
+          },
+          "model_label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+          "checkpoint_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            5614,
+            2514,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping"
+        },
+        "unchanged_V43_triplet": {
+          "path": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/crop-d862a19f3f5860b0.png",
+          "sha256": "8551309cf78eeb873bbf751f98b5e9de3803fddbffcf3615f8a5bf5e613480b2"
+        }
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/references/unified-demosaicing/native-CPU-preparation-v1/PyTorch/models/iso3200.pth",
+        "sha256": "fef899dc7c08c492d82e0c27a99fd9a2f067ef927088ec61348384b6078a8919",
+        "git_blob_sha1": "06a45e0a0b6088002e1a8f64576f9d38de2394a2",
+        "bytes": 38811013,
+        "URL": "https://raw.githubusercontent.com/SamsungLabs/unified-demosaicing/d17aa7ebba5730c6259d256da028a84c521007c7/PyTorch/models/iso3200.pth"
+      },
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "white_balance": [
+        [
+          1.5132449865341187,
+          1.0,
+          2.2152318954467773
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.0725188255310059,
+            0.17123593389987946,
+            -0.2437547743320465
+          ],
+          [
+            -0.126719132065773,
+            1.4310508966445923,
+            -0.30433180928230286
+          ],
+          [
+            -0.00969767663627863,
+            -0.29348063468933105,
+            1.303178310394287
+          ]
+        ]
+      ],
+      "display_exposure": 4.0,
+      "reference": "DSCF3880 ISO100 f/5.6, independently AHD demosaiced; not GT, no pixelwise score.",
+      "conditioning": "Fixed publisher ISO3200 checkpoint; no supplied noise map/ISO/shot/read input. Test observation metadata retained separately.",
+      "compute_precision": "Original CPU float32 model; publisher integer13496-code input/output transfer",
+      "input_transfer_statistics": {
+        "below_zero_samples_clipped": 1666,
+        "above_one_samples_clipped": 0,
+        "input_code_range": [
+          0,
+          13496
+        ]
+      },
+      "source_image": {
+        "path": "/mnt/external/demosaic/evaluation/unified-ISO3200-native-CPU-pilot-v1/crop-7d87187221b3a53b.png",
+        "sha256": "07677b81de581f68d6c59c0e477d9631786a12f3b99bf20dd3dae515b89482b9"
+      },
+      "published_image": "docs/images/unified-ISO3200-CPU-gfx-building-detail.png"
+    },
+    {
+      "image": "crop-6c015973bb36d1a7.png",
+      "caption": "Publisher default ISO3200 / gfx-foliage",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; scores use publisher13496-code RGB normalized to float32",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Publisher ISO3200",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 ref (not GT)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "53b94e900dbea9eb7b7454767906f67b8e82d0bd2573741d4431fee044b1abc3",
+      "case": {
+        "id": "gfx-foliage",
+        "kind": "real-GFX-context",
+        "source": {
+          "image": "foliage-noisy-packed-f32.npy",
+          "sha256": "a67eec1789664a3e3ea1aaa43e7cb8ece9c8cb9001a8f3b2d7717053d802f278",
+          "shape": [
+            1,
+            4,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "role": "noisy-packed",
+          "region": {
+            "name": "foliage",
+            "noisy_xy": [
+              8890,
+              5570
+            ],
+            "reference_xy": [
+              8890,
+              5570
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9597686529159546
+          },
+          "context_xywh": [
+            8714,
+            5394,
+            512,
+            512
+          ],
+          "pattern": "RGGB",
+          "encoding": "Four packed CFA phases, black-subtracted/white-normalized sensor units"
+        },
+        "observation": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/foliage-noisy-packed-f32.npy",
+        "observation_sha256": "a67eec1789664a3e3ea1aaa43e7cb8ece9c8cb9001a8f3b2d7717053d802f278",
+        "pattern": "RGGB",
+        "roi_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "black": [
+          4101.0,
+          4098.0,
+          4104.0,
+          4106.0
+        ],
+        "white": [
+          65535.0,
+          65535.0,
+          65535.0,
+          65535.0
+        ],
+        "adc_white": 65535.0,
+        "display_exposure": 4.0,
+        "reference": "DSCF3880 ISO100 f/5.6, independently AHD demosaiced; not GT, no pixelwise score.",
+        "reference_array": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/foliage-reference-rgb-f32.npy",
+        "reference_array_sha256": "35a77f7035e67561ffde8d214a0275b3f174a2859e6981f968a49a63d535670a",
+        "wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "original_crop_receipt": {
+          "image": "crop-a7415758dd5136b2.png",
+          "caption": "foliage / 0:dino-anchored-native-diverse-b16-v43:step-2000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "fd8d809540748c79fa7f59f346275514023800dcc594b575ab66ec6070f66b3e",
+          "region": {
+            "name": "foliage",
+            "noisy_xy": [
+              8890,
+              5570
+            ],
+            "reference_xy": [
+              8890,
+              5570
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9597686529159546
+          },
+          "model_label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+          "checkpoint_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            8714,
+            5394,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping"
+        },
+        "unchanged_V43_triplet": {
+          "path": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/crop-a7415758dd5136b2.png",
+          "sha256": "fd8d809540748c79fa7f59f346275514023800dcc594b575ab66ec6070f66b3e"
+        }
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/references/unified-demosaicing/native-CPU-preparation-v1/PyTorch/models/iso3200.pth",
+        "sha256": "fef899dc7c08c492d82e0c27a99fd9a2f067ef927088ec61348384b6078a8919",
+        "git_blob_sha1": "06a45e0a0b6088002e1a8f64576f9d38de2394a2",
+        "bytes": 38811013,
+        "URL": "https://raw.githubusercontent.com/SamsungLabs/unified-demosaicing/d17aa7ebba5730c6259d256da028a84c521007c7/PyTorch/models/iso3200.pth"
+      },
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "white_balance": [
+        [
+          1.5132449865341187,
+          1.0,
+          2.2152318954467773
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.0725188255310059,
+            0.17123593389987946,
+            -0.2437547743320465
+          ],
+          [
+            -0.126719132065773,
+            1.4310508966445923,
+            -0.30433180928230286
+          ],
+          [
+            -0.00969767663627863,
+            -0.29348063468933105,
+            1.303178310394287
+          ]
+        ]
+      ],
+      "display_exposure": 4.0,
+      "reference": "DSCF3880 ISO100 f/5.6, independently AHD demosaiced; not GT, no pixelwise score.",
+      "conditioning": "Fixed publisher ISO3200 checkpoint; no supplied noise map/ISO/shot/read input. Test observation metadata retained separately.",
+      "compute_precision": "Original CPU float32 model; publisher integer13496-code input/output transfer",
+      "input_transfer_statistics": {
+        "below_zero_samples_clipped": 12230,
+        "above_one_samples_clipped": 0,
+        "input_code_range": [
+          0,
+          4409
+        ]
+      },
+      "source_image": {
+        "path": "/mnt/external/demosaic/evaluation/unified-ISO3200-native-CPU-pilot-v1/crop-6c015973bb36d1a7.png",
+        "sha256": "53b94e900dbea9eb7b7454767906f67b8e82d0bd2573741d4431fee044b1abc3"
+      },
+      "published_image": "docs/images/unified-ISO3200-CPU-gfx-foliage.png"
+    },
+    {
+      "image": "crop-21909daae728a645.png",
+      "caption": "Publisher default ISO3200 / gfx-chain-link-fence",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; scores use publisher13496-code RGB normalized to float32",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Publisher ISO3200",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 ref (not GT)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "7517f2b3b9290cdbd85e03fea2d91861832d8967c1def4eb37f85e390aa1c5d0",
+      "case": {
+        "id": "gfx-chain-link-fence",
+        "kind": "real-GFX-context",
+        "source": {
+          "image": "chain-link-fence-noisy-packed-f32.npy",
+          "sha256": "b145f28630c1abce870c99bc24160fa0276ef31bcff14e5a72d577c964c9d495",
+          "shape": [
+            1,
+            4,
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "role": "noisy-packed",
+          "region": {
+            "name": "chain-link-fence",
+            "noisy_xy": [
+              2240,
+              6000
+            ],
+            "reference_xy": [
+              2241,
+              6000
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9550720453262329
+          },
+          "context_xywh": [
+            2064,
+            5824,
+            512,
+            512
+          ],
+          "pattern": "RGGB",
+          "encoding": "Four packed CFA phases, black-subtracted/white-normalized sensor units"
+        },
+        "observation": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/chain-link-fence-noisy-packed-f32.npy",
+        "observation_sha256": "b145f28630c1abce870c99bc24160fa0276ef31bcff14e5a72d577c964c9d495",
+        "pattern": "RGGB",
+        "roi_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "black": [
+          4101.0,
+          4098.0,
+          4104.0,
+          4106.0
+        ],
+        "white": [
+          65535.0,
+          65535.0,
+          65535.0,
+          65535.0
+        ],
+        "adc_white": 65535.0,
+        "display_exposure": 4.0,
+        "reference": "DSCF3880 ISO100 f/5.6, independently AHD demosaiced; not GT, no pixelwise score.",
+        "reference_array": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/chain-link-fence-reference-rgb-f32.npy",
+        "reference_array_sha256": "07b02153c74b8d92052f0fc15ce417f64e54f551433ab87a6006eee44eeafe6a",
+        "wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "original_crop_receipt": {
+          "image": "crop-4919d32109aa8e9b.png",
+          "caption": "chain-link-fence / 0:dino-anchored-native-diverse-b16-v43:step-2000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "5ea587410582c2189b3d0dc0ed2da3c5a811717b5973bddc52637832a79db706",
+          "region": {
+            "name": "chain-link-fence",
+            "noisy_xy": [
+              2240,
+              6000
+            ],
+            "reference_xy": [
+              2241,
+              6000
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9550720453262329
+          },
+          "model_label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+          "checkpoint_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            2064,
+            5824,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping"
+        },
+        "unchanged_V43_triplet": {
+          "path": "/mnt/external/demosaic/evaluation/gfx-3879-3880-v43-none10k-cpu-contexts-v1/crop-4919d32109aa8e9b.png",
+          "sha256": "5ea587410582c2189b3d0dc0ed2da3c5a811717b5973bddc52637832a79db706"
+        }
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/references/unified-demosaicing/native-CPU-preparation-v1/PyTorch/models/iso3200.pth",
+        "sha256": "fef899dc7c08c492d82e0c27a99fd9a2f067ef927088ec61348384b6078a8919",
+        "git_blob_sha1": "06a45e0a0b6088002e1a8f64576f9d38de2394a2",
+        "bytes": 38811013,
+        "URL": "https://raw.githubusercontent.com/SamsungLabs/unified-demosaicing/d17aa7ebba5730c6259d256da028a84c521007c7/PyTorch/models/iso3200.pth"
+      },
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "white_balance": [
+        [
+          1.5132449865341187,
+          1.0,
+          2.2152318954467773
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.0725188255310059,
+            0.17123593389987946,
+            -0.2437547743320465
+          ],
+          [
+            -0.126719132065773,
+            1.4310508966445923,
+            -0.30433180928230286
+          ],
+          [
+            -0.00969767663627863,
+            -0.29348063468933105,
+            1.303178310394287
+          ]
+        ]
+      ],
+      "display_exposure": 4.0,
+      "reference": "DSCF3880 ISO100 f/5.6, independently AHD demosaiced; not GT, no pixelwise score.",
+      "conditioning": "Fixed publisher ISO3200 checkpoint; no supplied noise map/ISO/shot/read input. Test observation metadata retained separately.",
+      "compute_precision": "Original CPU float32 model; publisher integer13496-code input/output transfer",
+      "input_transfer_statistics": {
+        "below_zero_samples_clipped": 3445,
+        "above_one_samples_clipped": 0,
+        "input_code_range": [
+          0,
+          13337
+        ]
+      },
+      "source_image": {
+        "path": "/mnt/external/demosaic/evaluation/unified-ISO3200-native-CPU-pilot-v1/crop-21909daae728a645.png",
+        "sha256": "7517f2b3b9290cdbd85e03fea2d91861832d8967c1def4eb37f85e390aa1c5d0"
+      },
+      "published_image": "docs/images/unified-ISO3200-CPU-gfx-chain-link-fence.png"
+    }
+  ],
+  "native_board": {
+    "path": "/mnt/external/demosaic/benchmarks/unified-ISO3200-CPU-pilot-v1/native-board.png",
+    "sha256": "c5367f57288bb38f4877ab39cc01734a48d197dc3d68247014bebff1efd4caa3",
+    "published_image": "docs/images/unified-ISO3200-CPU-native-board.png"
+  },
+  "native_cells_verified_and_viewed": 30,
+  "metric_fields_checked": 32,
+  "metric_reload_max_ULPs": 0.0,
+  "independent_PSNR_max_error_dB": 2.454014101260782e-06,
+  "findings": [
+    "Publisher ISO3200 retains substantial grain in both synthetic photographs; thin parachute cords are not clearly recovered against the exact target.",
+    "GFX sky retains textured noise and colored flecks where V43 and RawNIND show cleaner fields.",
+    "Building, foliage and fence retain fine texture and structured waviness; the ISO100 reference differs in aperture and moving content and is not GT.",
+    "V43 is cleaner in these selected views but also smooths fine cords, leaves and fence wires; RawNIND has visibly soft/wavy building and fence structure.",
+    "No consistent overall qualitative advantage for the transferred publisher default is established. Retain V43; no promotion, input-profile fitting or expanded benchmark follows."
+  ],
+  "scope": "Fixed publisher-default ISO3200 checkpoint, chosen by official test YAML before any photo outputs. Original full12-channel/three-output forward, retaining RGGB output; other slots repeat the same input. All six observations are RGGB, no geometry or CFA permutation. Nominal black-subtracted RAW0..1 maps to clipped/truncated integer0..13496, then original mosaic+RGB-mask normalization; original output clipping/uint16 truncation and divide13496 return nominal linear RGB. Fixed publisher ISO profile has no per-input shot/read conditioning; its calibration need not match synthetic ISO12800/GFX ISO6400. CPU FP32/two threads/low priority, no GPU/speed/broad ranking or production/training incorporation. Source remains under its published noncommercial terms in isolated reference cache. Native160px triplets, fixed display exposure1/4 and WB/matrix; real ISO100 independently demosaiced reference is not GT/no pixelwise score. Two photo scores separately on160 and240px ROIs; no source bootstrap or model selection. Numerical/native review required before a quality conclusion.",
+  "source_ROI_checkpoint_noise_display_metadata_complete": true,
+  "original_predictions_and_PNG_pixels_unchanged": true,
+  "unchanged_inputs": 20,
+  "unchanged_source_guards": 50,
+  "decision": "Keep V43 working reference; do not promote this transferred fixed-profile reference or change active matched training."
+}
