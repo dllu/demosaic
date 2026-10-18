@@ -1,0 +1,140 @@
+{
+  "status": "completed-CPU-harness-preflight-GPU-profiles-queued-after-exact-review-exit",
+  "source": {
+    "path": "/home/dllu/proj/demosaic/scripts/probe_directional_reproducibility.py",
+    "sha256": "5ced1a9dec9de476ac32f5e0129bec57bfab8a3187b486aa9154cf598c4e1228"
+  },
+  "frozen_worker": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/directional-firststep-execution-v2/worker.py",
+    "sha256": "5ced1a9dec9de476ac32f5e0129bec57bfab8a3187b486aa9154cf598c4e1228"
+  },
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/directional-firststep-execution-v2/plan.json",
+    "sha256": "d318005db9d0bbcc9e9a4f1e5d6107cc9a4ba60992d4c6f9270fea444bfb52d8"
+  },
+  "queue": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/directional-firststep-execution-v2/queue.json",
+    "sha256": "05439a10763a563f681b2a94ae75053e4895e9cf564efa37e0bf7d8e54545359"
+  },
+  "controller": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/directional-firststep-execution-v2/controller.py",
+    "sha256": "568d6eb510245693416093636a7ea66450201f6e419b731ef0f765598b7889a4"
+  },
+  "launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/directional-firststep-execution-v2/launch.json",
+    "sha256": "2f46b3dc3ea6bc5c6b401e7a3b2d88499790db35fe92e888b2188adfd4ff54bc"
+  },
+  "CPU_preflight": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/directional-firststep-execution-v2/CPU-preflight.json",
+    "sha256": "9ab24eb76b89aa0b503e59fa163c8d7196d2214d02d39944f841b0f1599c6e55"
+  },
+  "capture": {
+    "source": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/work/.cache/firststep-execution-v2/capture.json",
+      "sha256": "c7afd3a15ad0ecd2672b87db2be56c5a7aecbcfbf95b3175f636a11e2424a00d"
+    },
+    "result": {
+      "status": "captured-genuine-initial-state-and-first-clean-training-batch-CPU-only",
+      "driver": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/directional-firststep-execution-v2/worker.py",
+        "sha256": "5ced1a9dec9de476ac32f5e0129bec57bfab8a3187b486aa9154cf598c4e1228"
+      },
+      "payload": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/work/.cache/firststep-execution-v2/initial-and-clean.pt",
+        "sha256": "4d7744f3f730c8166d82620ae4b0bf1f9d98322d2028d3fe34fc5e7c236271e3"
+      },
+      "initial_model_sha256": "0f2b6cd2f0f1986ee7da25a8f7554f3e309f842226951f3d161c8e86a7aabcd7",
+      "restoration_tensors": 99,
+      "shape": [
+        16,
+        3,
+        256,
+        256
+      ],
+      "CUDA_initialized": false,
+      "scope": "Actual trainer initialization and selected clean input. CPU placement and zero loader workers only; no noisy input, inference, loss, gradient, update or evaluation. CUDA degradation hash must match the original full training record before GPU replay."
+    }
+  },
+  "CPU_check": {
+    "source": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/work/.cache/firststep-execution-v2/cpu-check/result.json",
+      "sha256": "3f72ec799e5e58505c58b2d29b01ef7e95668c6ad33764e6d0c3a39ee51c8d9d"
+    },
+    "result": {
+      "status": "completed-execution-replay-no-optimizer-updates",
+      "driver": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/directional-firststep-execution-v2/worker.py",
+        "sha256": "5ced1a9dec9de476ac32f5e0129bec57bfab8a3187b486aa9154cf598c4e1228"
+      },
+      "policy": "strict",
+      "settings": {
+        "benchmark": false,
+        "cudnn_deterministic": true,
+        "strict_algorithms": true,
+        "CUBLAS_WORKSPACE_CONFIG": null
+      },
+      "cpu_check": true,
+      "input_shape": [
+        1,
+        4,
+        32,
+        32
+      ],
+      "input_sha256": "08cd56ddb07c050291019a037da09afd2676321dfe704759deb1fc2eaf7dfb80",
+      "initial_model_sha256": "0f2b6cd2f0f1986ee7da25a8f7554f3e309f842226951f3d161c8e86a7aabcd7",
+      "DINO_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd",
+      "model_state_unchanged": true,
+      "attempts": [
+        {
+          "repeat": 0,
+          "loss": 0.009852723218500614,
+          "terms": {
+            "linear": 0.003327710321173072,
+            "rendered": 0.01053136121481657,
+            "gradient": 0.009292956441640854,
+            "highlight": 0.0,
+            "sensor": 0.003300361568108201
+          },
+          "preclip_gradient_norm": 1.4287296533584595,
+          "tensor_sha256": "d54344f309bc7b3927b7fb68cc099c9e896b3ce64ad65a64edff05e1563757a8",
+          "seconds_including_first_search_if_enabled": 0.6046456259209663,
+          "saved_tensors": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/work/.cache/firststep-execution-v2/cpu-check/tensors.pt",
+            "sha256": "3591823cc48e84dc1df11550b05c838a9281bb0ce95091964be62cb50725a117"
+          }
+        },
+        {
+          "repeat": 1,
+          "loss": 0.009852723218500614,
+          "terms": {
+            "linear": 0.003327710321173072,
+            "rendered": 0.01053136121481657,
+            "gradient": 0.009292956441640854,
+            "highlight": 0.0,
+            "sensor": 0.003300361568108201
+          },
+          "preclip_gradient_norm": 1.4287296533584595,
+          "tensor_sha256": "d54344f309bc7b3927b7fb68cc099c9e896b3ce64ad65a64edff05e1563757a8",
+          "seconds_including_first_search_if_enabled": 0.5207680340390652
+        }
+      ],
+      "scope": "Same unmodified genuine initialization/input; forward, loss and clipped gradients only, with no optimizer/EMA updates. CPU harness check uses B1/native64/FP32 and CPU noise, not the original CUDA observation. GPU uses actual B16/native256/BF16 first training batch, not held-out evaluation. Timing includes cold algorithm search and is not steady throughput. No quality, convergence, long-run reproducibility, numerical cause assignment or promotion claim."
+    }
+  },
+  "original_import_failure": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/directional-firststep-execution-v1/failure.json",
+    "sha256": "507e06b25fe85a891dd068a983342db86bcac68a8ece18b462ee122095b9850d"
+  },
+  "GPU_profiles_have_started": false,
+  "scope": "One real initial state and first selected clean B16/native256 batch captured on CPU. Two B1/native64/FP32 forwards/backwards on CPU-noised generated training input are exact,97 finite gradient tensors/model unchanged. No optimizer/EMA updates, CUDA inference, quality or long-run repeatability claim. GPU stages are queued behind exact successful all10-stage reviewer exit, then must reproduce original full CUDA batch hash before six fresh processes. Public/current and frozen worker bytes match; no production model/training default changed.",
+  "primary_sources": [
+    {
+      "title": "PyTorch2.14 reproducibility",
+      "url": "https://docs.pytorch.org/docs/2.14/notes/randomness.html"
+    },
+    {
+      "title": "PyTorch2.14 deterministic algorithms",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.use_deterministic_algorithms.html"
+    }
+  ]
+}

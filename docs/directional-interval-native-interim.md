@@ -1,9 +1,10 @@
 # Final4k directional study: partial native review
 
 Both final arms still lose the canopy's fine cords in the two fixed photographic
-examples. Building detail looks close to the genuine parent and V43. The
+examples. Building detail looks close to the genuine parent and V43. Both
+completed camera panels now fail the original numerical criteria. The
 selected known/unseen camera crops also show modest differences, without an
-obvious broad detail recovery. This is a partial visual review: full427 scores,
+obvious broad detail recovery. This is a partial review: full427 scores,
 color/analytic/highlight and standing GFX review remain pending. **V43 stays the
 working reference; neither new model is promoted.**
 
@@ -62,6 +63,25 @@ edges remain similar; these two selected examples cannot establish an aggregate
 gain or rule out failures elsewhere.
 
 ## Registered camera references
+
+Both complete fresh six-method panels pass independent coverage, observation,
+protocol, nullable-support and summary-arithmetic checks:432 known and540 unseen
+rows. [Camera statistics and source receipts](results/directional-camera-interim-statistics-v1.json).
+The scene-balanced measured-CFA PSNR changes relative to fresh V63 are:
+
+| Model | Known4 change [95% interval], dB | Unseen5 change [95% interval], dB |
+| --- | --- | --- |
+| V78 original4000 | −.01121 [−.07108,+.04866] | −.00443 [−.02538,+.01348] |
+| V79 original4000 | −.01714 [−.07923,+.04495] | −.00444 [−.02455,+.01716] |
+
+The fixed requirement is at least+.05dB with a positive scene-bootstrap lower
+bound on **each** panel. Both arms fail both panel criteria. This already rules
+out full-frame eligibility under that protocol, while the remaining photo/color/
+native review still must finish. No threshold is changed and no budget extended.
+Matched V79−V78 is−.00593dB known and−.00000318dB unseen; both scene intervals
+cross zero. These1,000-resample intervals use seed42 and describe evaluation
+scene variation, not training-seed or GPU-process uncertainty. The full primary
+statistics will be reconciled with these18 camera comparison rows when ready.
 
 The [known-camera board](images/directional-interval-interim-known-native.png)
 and [unseen-camera board](images/directional-interval-interim-unseen-native.png)

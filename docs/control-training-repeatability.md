@@ -47,3 +47,9 @@ source bundle and final RNG states match, but restoration weights differ.
 This observed spread makes small single-trajectory claims less decisive; it
 does not estimate seed variance or prove the cause of any earlier difference.
 All 46 native triplets and eight full RGB16 outputs verify. No model promotion.
+
+The separate [directional first-step execution diagnostic](directional-firststep-execution.md)
+now captures a genuine initial model and first clean batch and passes an exact
+CPU two-pass forward/backward check. Three CUDA profiles are queued after the
+current reviewer exits. This does not explain the historical variation or
+establish long-run GPU repeatability.

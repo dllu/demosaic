@@ -4,7 +4,10 @@ The [V78/V79 directional study](directional-interval-v78-v79.md) has completed
 both original4k training budgets. Its [partial native review](directional-interval-native-interim.md)
 actually views28 triplets/40 cells, including two exact-GT triplets per final
 checkpoint. Fine cords remain missing and selected camera differences are
-modest. Full427/color/analytic/highlight/GFX review is still running; no promotion.
+modest. Both completed camera panels fail the original criteria relative to the
+fresh parent. Full427/color/analytic/highlight/GFX review is still running; no promotion.
+An [execution-only first-step replay](directional-firststep-execution.md) passes
+its genuine CPU harness check; GPU profiles wait for successful reviewer exit.
 
 The [guarded input-CFA gain pilot](guarded-input-cfa-gain.md) fails its fixed
 high-saturation screen: mean bias grows18.05% and worst bias increases. All30
