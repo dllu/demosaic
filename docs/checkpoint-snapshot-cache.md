@@ -41,3 +41,15 @@ The 12 cache tests cover concurrent requests, atomic source replacement,
 in-place source mutation, corrupt snapshots/cache, unsafe aliases, repeat reuse,
 and cross-filesystem fallback. Together with existing suite/reporting/real-suite
 tests, 22 tests pass. Ruff and whitespace checks pass.
+
+The [completed-copy storage record](results/completed-evaluation-snapshot-storage-v1.json)
+also covers older evaluations that retain their frozen implementations. Its
+fourth operation shares 46 byte-identical copies across 11 checkpoints from six
+completed reviews, recovering another 11.22 GiB. Original archives remain
+separate. The [independent audit](results/completed-evaluation-snapshot-storage-v4-audit.json)
+checks all 61 snapshot paths, 11 original archives, 886 report/metric/native-PNG
+hashes and 372 current workflow input/source hashes. The preceding review used
+16.40 GiB when every output path is counted independently. After consolidation,
+530.62 GiB is free; allowing 24 GiB for review and 1 GiB for remaining checkpoint
+growth leaves an estimated 5.62 GiB above the 500 GiB queue reserve. This estimate
+cannot guarantee future space on the shared filesystem. The downloader remains stopped.
