@@ -15,6 +15,9 @@ and remains grainy. It does not replace the queued full matched review.
 
 The [complete review queue](packed-isotropic-mixed16-quarter-review-queue.md)
 now waits for the exact training owner to exit and both boundaries to pass.
+The [saved-PNG native board reader](native-crop-review-boards.md) is ready to
+assemble the completed reports with their actual method labels and checkpoint
+hashes. Its replay used earlier completed reports and adds no10k quality result.
 
 [Observed startup, plan/checkpoint hashes, exact owners and checks](results/packed-isotropic-mixed16-quarter-launch-v1.json).
 The live status is
