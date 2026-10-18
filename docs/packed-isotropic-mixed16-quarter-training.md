@@ -8,6 +8,11 @@ there is no new quality result. The
 [first endpoint and actual handoff CPU audit](results/mixed16-quarter-first10k-handoff-CPU-v2.json)
 records immutable receipt snapshots and the preserved checkpoint.
 
+The [selected no-DINO10k CPU preview](mixed16-no-dino10k-CPU-preview.md) now
+includes two exact-GT photo triplets and all four standing GFX regions. It
+improves over2k on those photos but trails the older equal-example RAW control
+and remains grainy. It does not replace the queued full matched review.
+
 The [complete review queue](packed-isotropic-mixed16-quarter-review-queue.md)
 now waits for the exact training owner to exit and both boundaries to pass.
 
