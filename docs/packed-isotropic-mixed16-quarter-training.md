@@ -3,8 +3,9 @@
 Both isolated continuations have completed after the
 [complete32k-example quality review](packed-isotropic-mixed16-first32000-review.md).
 V72 no-DINO and V73 DINO each stopped at10,000 updates/160,000 examples.
-Their training workers and controller have exited. Neither is promoted;
-the full matched quality review is running. The
+Their training workers and controller have exited. The
+[complete matched quality review](packed-isotropic-mixed16-quarter-review.md)
+is finished; neither is promoted and V43 remains the working reference. The
 [completed-pair receipts and log check](results/mixed16-quarter-completed-training-CPU-v1.json)
 and [independent full-state boundary audit](results/mixed16-quarter-training-boundary-v1.json)
 record both endpoints and the actual handoff. The earlier
@@ -14,14 +15,14 @@ retains its historical receipt snapshots and preserved no-DINO checkpoint.
 The [selected no-DINO10k CPU preview](mixed16-no-dino10k-CPU-preview.md) now
 includes two exact-GT photo triplets and all four standing GFX regions. It
 improves over2k on those photos but trails the older equal-example RAW control
-and remains grainy. It does not replace the queued full matched review.
+and remains grainy. The completed matched CUDA review is authoritative for
+the full protocol.
 
-The [complete review](packed-isotropic-mixed16-quarter-review-queue.md)
-passed its independent boundary gate and started known-camera evaluation after
-the exact training owner and final child exited.
-The [saved-PNG native board reader](native-crop-review-boards.md) is ready to
-assemble the completed reports with their actual method labels and checkpoint
-hashes. Its replay used earlier completed reports and adds no10k quality result.
+The [frozen review](packed-isotropic-mixed16-quarter-review-queue.md)
+passed its independent boundary gate after the exact training owner and final
+child exited. All numerical, color, source-sensitivity, parent-progress and
+artifact stages subsequently passed, followed by actual inspection of all146
+native triplets/202 cells. The review owner has exited successfully.
 
 Known/unseen-camera, full427-photo and analytic panels have now closed. The
 [final photo crop match](results/mixed16-quarter-photo-crops-final-match-v1.json)
@@ -34,9 +35,12 @@ controls, with weak fine foliage/fence structure. The separate ISO100 image
 is a qualitative reference, not GT. The [three-camera native inspection](results/mixed16-quarter-three-camera-native-view-v1.json)
 adds24 triplets/36 cells from six cached Q2/a7RII/GFX50R contexts; its RawNIND
 row is also not GT. The [selected-color inspection](results/mixed16-quarter-selected-colors-native-view-v1.json)
-covers16 original/additional analytic triplets without new inference. Primary
-statistics have closed; the fresh FP32 hue grid, remaining audits, RGB16 artifact
-checks and final quality decision are in progress.
+covers16 original/additional analytic triplets without new inference. The
+[complete result registry](results/packed-isotropic-mixed16-quarter-review-v1.json)
+binds these views and the completed hue/highlight boards to final reports and
+unchanged original pixels. All twelve RGB16 exports pass artifact checks. The
+decision preserves both10k states and selects analysis of the queued CUDA
+profiles/EMA measurements before the next training budget; no extension was launched.
 
 [Observed startup, plan/checkpoint hashes, exact owners and checks](results/packed-isotropic-mixed16-quarter-launch-v1.json).
 The live status is
@@ -78,8 +82,8 @@ Both endpoints passed the reviewer's full-state/source/schedule boundary checks.
 The DINO producer additionally records863 finite Adam states at10k, an unchanged
 gradient-free official backbone and a bitwise-exact portable FP32 output reload.
 The separate publication checker verifies these producer receipts; it does not
-repeat tensor loading or inference. Full quality review remains pending; training
-has not extended beyond10k.
+repeat tensor loading or inference. Full quality review is complete without
+promotion; training has not extended beyond10k.
 
 The first CPU checker reassociated the learning-rate formula, creating nine
 one-ULP discrepancies. All403 recorded rates match the frozen trainer's actual
@@ -95,8 +99,7 @@ loading reproduces every EMA tensor exactly. All 163 logged macro rows through
 observations. Both current and EMA tensor sets have changed since 2k. All
 22 inputs/56 guards and the preserved 2k archive remain unchanged. This audit
 checks saved state and portable EMA loading. The newer first10k audit above
-does not replace that historical record. Both arms have now completed; the full
-quality review remains pending.
+does not replace that historical record or add another quality result.
 
 The [DINO 4k saved-state CPU audit](results/mixed16-quarter-dino4k-state-CPU-v1.json)
 finds finite865 model/EMA tensors and863 Adam states, all at4,000 updates /
@@ -110,6 +113,6 @@ establish a useful DINO quality contribution; that requires the matched review.
 The continuation driver and existing production mixed-loop integration checks
 pass26 targeted tests; Ruff passes. The separate
 [genuine-parent CPU restart preflight](mixed16-trained-state-restart-CPU.md)
-also passes. A complete numerical and native visual review remains required,
-including exact synthetic noisy/denoised/GT triplets and the cached GFX
-sky/building/foliage/fence views with an accurately labeled ISO100 reference.
+also passes. The completed numerical/native review includes exact synthetic
+noisy/denoised/GT triplets and cached GFX sky/building/foliage/fence views with
+the separate ISO100 capture accurately labeled a qualitative reference.

@@ -1,6 +1,6 @@
 # Queued mixed16 review at160,000 examples
 
-The complete review has started after both
+The [complete review](packed-isotropic-mixed16-quarter-review.md) finished after both
 [continuations finished](packed-isotropic-mixed16-quarter-training.md) at10k /
 160,000 examples and their exact owners exited. The independent full-state,
 source and schedule boundary gate passed; the first stage was known-camera
@@ -10,9 +10,12 @@ adds24 actually viewed triplets at the four standing regions. The
 [three-camera native inspection](results/mixed16-quarter-three-camera-native-view-v1.json)
 adds another24 triplets from six cached contexts. The
 [selected-color inspection](results/mixed16-quarter-selected-colors-native-view-v1.json)
-covers16 original/additional analytic triplets; primary statistics have closed.
-The fresh FP32 hue grid and remaining audits are running. Quality review remains
-incomplete and neither checkpoint is promoted.
+covers16 original/additional analytic triplets. All4,704 fresh FP32 hue
+predictions, supplementary highlights, statistical/artifact checks and parent
+progress comparisons have completed. All146 triplets/202 native cells were
+actually inspected and matched to final reports; the owner exited successfully.
+Neither checkpoint is promoted. The decision keeps V43 as the working reference
+and selects CUDA profile/EMA analysis before the next training budget.
 The requirements below describe the preserved execution plan.
 
 [Frozen plan, exact owners, executed sources and CPU preflight](results/packed-isotropic-mixed16-quarter-review-queue-v1.json).
@@ -55,5 +58,5 @@ The queue reuses the frozen serial review runner with the new boundary operator.
 It adds an independent analytic summary audit and separate parent progression
 before its final terminal status. It stops on failure without an automatic
 restart, training extension or promotion. Actual unresized crop inspection and
-the final quality decision remain manual. Shared-machine full-frame times will
-be descriptive observations. Protected-final scenes remain closed.
+the final quality decision were completed separately. Shared-machine full-frame
+times are descriptive observations. Protected-final scenes remain closed.
