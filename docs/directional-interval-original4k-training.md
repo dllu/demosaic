@@ -47,6 +47,11 @@ source sensitivities, hue/highlights, analytic and cached GFX panels follow the
 and the native boards with retained V43/RawNIND comparisons follow successful
 evaluation exit. Actual viewing and publication/source checks remain required.
 
+The [partial native review](directional-interval-native-interim.md) now covers
+the already saved fixed photo/known/unseen crops:28 triplets/40 cells actually
+viewed, with two exact-GT triplets per final checkpoint. Fine detail remains weak
+in these examples. Full numerical/color/analytic/highlight/GFX review is pending.
+
 No automatic extension or promotion follows these finite training results. The
 fixed numerical criteria and native color/detail/highlight review still apply;
 only an eligible candidate gets a separate full-frame FP32/16-bit/timing review.

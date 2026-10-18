@@ -9,8 +9,10 @@ from genuine V63 EMA. Its
 [actual first1k state audit and review preparation](directional-interval-review-preparation.md)
 verify finite99/99/97 states and nonzero optimizer moments in all25,800 new
 parameters. Full primary/color/GFX/native review, including fresh V63 and
-matched retained V43/RawNIND references, is queued. No new model-quality,
-full-frame16-bit or speed result exists yet, and no model is promoted.
+matched retained V43/RawNIND references, is running. The
+[partial native review](directional-interval-native-interim.md) actually views
+28 triplets/40 cells and retains weak fine detail. Final numerical/model-quality,
+full-frame16-bit and speed results remain pending; no model is promoted.
 The independent final boundary has passed and primary quality evaluation is
 running; all 176 sampled observations and final RNG states match across arms.
 The [completed V78 training boundary and V79 handoff](directional-v78-original4k-training-handoff.md)

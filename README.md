@@ -75,7 +75,9 @@ misses its continuation gate. The [completed camera-supervision review](docs/cam
 finds photo/color gains with mixed camera results; its continuation gate also fails.
 The [directional RAW residual and interval-loss study](docs/directional-interval-v78-v79.md)
 has [completed both original training budgets](docs/directional-interval-original4k-training.md);
-its full image-quality review is running.
+its full image-quality review is running. A
+[partial native review](docs/directional-interval-native-interim.md) includes two
+exact-GT triplets per final checkpoint; fine detail remains weak in those crops.
 See [training pipeline work](docs/training-pipeline.md) for augmentation before
 the last reduction, selected-domain loading and the batch-size sweep.
 The [packed detail review](docs/packed-detail-v40-v41-review.md) retains the
