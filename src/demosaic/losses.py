@@ -34,6 +34,26 @@ def masked_reconstruction(error, valid, objective):
     return (error.square() + 1e-6).sqrt().masked_fill(~valid, 0).sum() / valid.sum().clamp_min(1)
 
 
+def reference_white_interval_loss(prediction, batch):
+    """Keep training gradients before display clipping without fitting latent white.
+
+    Interior linear-sRGB reference values are exact; clipped black/white encode
+    upper/lower bounds. The ordinary preview/display transform stays unchanged.
+    """
+    with torch.autocast(prediction.device.type, enabled=False), ieee_fp32():
+        wb, matrix = batch["wb"].float(), batch["matrix"].float()
+        value = torch.einsum("bij,bjhw->bihw", matrix, prediction.float() * wb[..., None, None])
+        reference = torch.einsum(
+            "bij,bjhw->bihw", matrix, batch["target"].float() * wb[..., None, None]
+        )
+        error = torch.where(
+            reference >= 1 - 1e-6,
+            (value - 1).clamp_max(0),
+            torch.where(reference <= 1e-6, value.clamp_min(0), value - reference),
+        )
+        return charbonnier(error)
+
+
 def image_log_mse(error, valid=None):
     """Mean negative PSNR, with a fixed 100dB floor and per-image mask counts.
 
@@ -121,9 +141,14 @@ def reconstruction_loss(
     multiscale_sensor_weight=0.0,
     objective="charbonnier-v1",
     camera_supervision="reference-white-v1",
+    reference_interval_weight=0.0,
 ):
     validate_reconstruction_objective(objective)
     validate_camera_supervision(camera_supervision)
+    if not math.isfinite(reference_interval_weight) or reference_interval_weight < 0:
+        raise ValueError("Reference interval weight must be finite and nonnegative")
+    if reference_interval_weight and camera_supervision != "sensor-valid-v1":
+        raise ValueError("Reference interval supervision requires sensor-valid camera targets")
     if normalized_sensor_weight < 0:
         raise ValueError("Normalized sensor loss weight must be nonnegative")
     if not math.isfinite(multiscale_sensor_weight) or multiscale_sensor_weight < 0:
@@ -180,6 +205,10 @@ def reconstruction_loss(
         multiscale = multiscale_sensor_loss(prediction, sensor_batch, truth)
         loss = loss + multiscale_sensor_weight * multiscale
         terms["multiscale_sensor"] = multiscale
+    if reference_interval_weight:
+        interval = reference_white_interval_loss(prediction, batch)
+        loss = loss + reference_interval_weight * interval
+        terms["reference_interval"] = interval
     return loss, terms
 
 

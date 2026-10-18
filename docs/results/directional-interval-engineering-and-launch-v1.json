@@ -1,0 +1,207 @@
+{
+  "status": "completed-genuine-parent-directional-engineering-launched-original4k-quality-pending",
+  "created_unix": 1792353292.5778072,
+  "implementation": {
+    "opt_in_model": "raw_directional_residual",
+    "default": false,
+    "new_parameters": 25800,
+    "new_state_tensors": 8,
+    "interval_weight_default": 0,
+    "interval_arms": [
+      0,
+      0.1
+    ],
+    "branch_lr_multiplier": 20,
+    "actual_total_parameters": 60750632,
+    "actual_trainable_parameters": 32930504
+  },
+  "tests": {
+    "full_CPU_suite": {
+      "passed": 1059,
+      "skipped": 9,
+      "seconds": 104.36,
+      "note": "Full run before adding four constant-scene invariants; focused run below includes them."
+    },
+    "focused_directional_and_interval": {
+      "passed": 30,
+      "seconds": 5.49
+    },
+    "source_sensitivity_compatibility": {
+      "passed": 22,
+      "seconds": 1.47
+    },
+    "ruff": "passed",
+    "git_diff_check": "passed",
+    "ruff_format": "passed after formatting two helper/test files; frozen actual preflight source.py copies remain retained"
+  },
+  "CPU": {
+    "receipt": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-CPU-preflight-v1/receipt.json",
+      "sha256": "01ada4725c23372ad2e69ba5d8c28b88be22a33922774197d4dc58a0a08ab848"
+    },
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-CPU-preflight-v1/plan.json",
+      "sha256": "d5694380c9f8a9887f6ea17e94ff4a7399b6ed21a2fcb1011066fa897d66096a"
+    },
+    "initializations": [
+      {
+        "case": "control",
+        "resume": false,
+        "actual_common_weights_exact": true,
+        "initial_output_exact_parent": true,
+        "branch_sha256": "43f18f0dfdabf1c4deef87e192f2578b3c42a59b60101bbbc187fe523c0b1ede",
+        "DINO_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      },
+      {
+        "case": "interval",
+        "resume": false,
+        "actual_common_weights_exact": true,
+        "initial_output_exact_parent": true,
+        "branch_sha256": "43f18f0dfdabf1c4deef87e192f2578b3c42a59b60101bbbc187fe523c0b1ede",
+        "DINO_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      },
+      {
+        "case": "resumed",
+        "resume": false,
+        "actual_common_weights_exact": true,
+        "initial_output_exact_parent": true,
+        "branch_sha256": "43f18f0dfdabf1c4deef87e192f2578b3c42a59b60101bbbc187fe523c0b1ede",
+        "DINO_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      },
+      {
+        "case": "resumed",
+        "resume": true,
+        "actual_common_weights_exact": true,
+        "initial_output_exact_parent": false,
+        "branch_sha256": "14b0449907a53d11e8ca1a390a6b4da5b7563664b610ae154c825dfec5bbea22",
+        "DINO_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      }
+    ],
+    "exact_resume_fields": [
+      "model_config",
+      "model",
+      "ema",
+      "optimizer",
+      "python_rng",
+      "torch_rng",
+      "cuda_rng",
+      "best",
+      "step"
+    ],
+    "finite_states": {
+      "model": 99,
+      "EMA": 99,
+      "AdamW": 97
+    },
+    "matched_steps_per_case": 4
+  },
+  "CUDA": {
+    "receipt": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-CUDA-preflight-v1/receipt.json",
+      "sha256": "21988e0247f2a8bfb14a95a72d221ed52689188ad11945ff853bd22d7cb59c9c"
+    },
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-CUDA-preflight-v1/plan.json",
+      "sha256": "d2ff6111d39727d59d8ea47e461322330fd616f720a8d8cfb8a9ff838f2c40d6"
+    },
+    "initializations": [
+      {
+        "case": "control",
+        "resume": false,
+        "actual_common_weights_exact": true,
+        "initial_output_exact_parent": true,
+        "branch_sha256": "20cc08a84e15128e36d1a55c3bc42b658bc4f01f267eb40171224c550c4e44fa",
+        "DINO_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      },
+      {
+        "case": "interval",
+        "resume": false,
+        "actual_common_weights_exact": true,
+        "initial_output_exact_parent": true,
+        "branch_sha256": "20cc08a84e15128e36d1a55c3bc42b658bc4f01f267eb40171224c550c4e44fa",
+        "DINO_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      }
+    ],
+    "finite_gradient_checks": 12,
+    "finite_states": {
+      "model": 99,
+      "EMA": 99,
+      "AdamW": 97
+    },
+    "matched_steps_per_arm": 6,
+    "peak_CUDA_bytes": {
+      "control": 9257002496,
+      "interval": 8161591296
+    }
+  },
+  "training": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-v1/plan.json",
+      "sha256": "85ca5b72a717cd73b7a14d93004a72247b19165c9a7968162919028a192033b8"
+    },
+    "launch": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-v1/launch.json",
+      "sha256": "9b5eb4d96c47e0ed0aa73ab370c62f309b921e9221c0f57be1db1cb96c18e096"
+    },
+    "owner": {
+      "pid": 404904,
+      "created": 1792353195.14
+    },
+    "state_at_receipt": "running-directional-interval-original4000",
+    "updates_per_arm": 4000,
+    "frozen_files": 217
+  },
+  "review": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/plan.json",
+      "sha256": "124eac6a7bb3e1cc78d053f131fc72d5e7c6ec508ae1b1443679880e488f17f2"
+    },
+    "launch": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-review-v1/launch.json",
+      "sha256": "6fad1745670d2c7a00685c866d4fa5122aeabb231263c65bc9459d4814a2ef49"
+    },
+    "owner": {
+      "pid": 405679,
+      "created": 1792353257.72
+    },
+    "state_at_receipt": "waiting-for-exact-directional-interval-training-owner-exit",
+    "frozen_files": 217,
+    "note": "Separate frozen review checkout has identical package bytes and final4000 lineage checks. Waits for exact successful trainer/controller exit; all manual native/statistical closure remains required."
+  },
+  "quality_criteria": {
+    "predeclared_snapshot": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-v1/work/docs/directional-interval-v78-v79.md",
+      "sha256": "21f128f78710ba48f37ee4bfd04535e8320a102a4a197845c61521d7fc1b9745"
+    },
+    "primary": "Each arm eligible only if known4/unseen5 CFA gains >=.05dB vs fresh genuine V63, each with positive scene95% bounds; full427 rendered PSNR gain>=.05dB/positive source95% bounds; SSIM loss<=.0001.",
+    "interval_effect": "V79-minus-V78 positive full427 PSNR interval, known/unseen mean losses<=.03dB each, and no new visible failure required for an interval-benefit claim.",
+    "additional": "All fixed conditions/CFAs, procedural16,418/416 sensitivities,hue/highlight/analytic groups,>=2 native100% GT triplets per checkpoint,cached GFX sky/building/foliage/fence/highlights with independent ISO100 labels; compare working V43/RawNIND too. No visible new failure.",
+    "action": "Full original4000 budget, no automatic extension or promotion. Only eligible candidates get separate full101.996MP FP32/export16/native/timing review. Protected-final scenes closed; old studies stay closed."
+  },
+  "limits": "Only engineering checks and launch. No improved quality, stable speed, convergence, SOTA or full-frame result. Tiny preflight validation discarded. Old V76/V77 and other failed studies stay closed. V43 remains working reference; no README image replacement.",
+  "genuine_checkpoint_resume_guards": {
+    "receipt": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-resume-guards-v1/receipt.json",
+      "sha256": "70f1be38b526774ee5985e100e0112bd9ce43771f4eb7085eb22b67006d42a1f"
+    },
+    "status": "completed-genuine-directional-checkpoint-resume-option-guards",
+    "checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-CPU-preflight-v1/interval/last.pt",
+      "sha256": "557345a4a5f6105434b3929f2c15b5cfbc89c469045b90a6a9435692013ee796"
+    },
+    "checks": [
+      {
+        "changed_option": "reference_interval_weight",
+        "value": 0.2,
+        "error": "Resume reference interval weight differs; initialize a new run"
+      },
+      {
+        "changed_option": "raw_directional_lr_multiplier",
+        "value": 10,
+        "error": "Resume directional learning rate differs; initialize a new run"
+      }
+    ],
+    "checkpoint_unchanged": true,
+    "CUDA_initialized": false
+  }
+}

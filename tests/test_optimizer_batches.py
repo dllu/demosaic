@@ -115,7 +115,8 @@ def test_optional_objective_reaches_both_domains_with_matching_accumulated_gradi
 
 
 @pytest.mark.parametrize("forward", [1, 4])
-def test_sensor_camera_targets_reach_only_synthetic_groups_with_matching_gradients(forward):
+@pytest.mark.parametrize("interval_weight", [0.0, 0.1])
+def test_sensor_camera_targets_reach_only_synthetic_groups_with_matching_gradients(forward, interval_weight):
     model,batches=physical_fixture();domains=['paired','native','commons','paired']
     losses=[]
     for domain,batch in zip(domains,batches,strict=True):
@@ -123,14 +124,15 @@ def test_sensor_camera_targets_reach_only_synthetic_groups_with_matching_gradien
         if domain=='paired':value,_=training.paired_reconstruction_loss(prediction,batch,auxiliary)
         else:
             batch['sensor_target']=batch['target']*1.2
-            value,_=training.reconstruction_loss(prediction,batch,auxiliary,camera_supervision='sensor-valid-v1')
+            value,_=training.reconstruction_loss(prediction,batch,auxiliary,camera_supervision='sensor-valid-v1',
+                reference_interval_weight=interval_weight)
         losses.append(value)
     expected=torch.stack(losses).mean();expected.backward()
     norm=torch.nn.utils.clip_grad_norm_(model.parameters(),1)
     gradients=[p.grad.clone() for p in model.parameters()];model.zero_grad(set_to_none=True)
     selected=[(i+1,d,b) for i,(d,b) in enumerate(zip(domains,batches,strict=True))]
     value,_,actual_norm,_=backward_groups(model,selected,lambda step,domain,batch:batch,
-        {**options(forward),'camera_supervision':'sensor-valid-v1'})
+        {**options(forward),'camera_supervision':'sensor-valid-v1', 'reference_interval_weight': interval_weight})
     torch.testing.assert_close(value,expected);torch.testing.assert_close(actual_norm,norm)
     for p,gradient in zip(model.parameters(),gradients,strict=True):
         torch.testing.assert_close(p.grad,gradient,rtol=1e-4,atol=1e-6)
@@ -172,9 +174,10 @@ def manifests(tmp_path):
 
 
 @pytest.mark.parametrize("forward", [1, 2, 4])
-@pytest.mark.parametrize("camera_supervision", ["reference-white-v1", "sensor-valid-v1"])
+@pytest.mark.parametrize("camera_supervision,interval_weight", [
+    ("reference-white-v1", 0.0), ("sensor-valid-v1", 0.0), ("sensor-valid-v1", 0.1)])
 def test_actual_mixed_training_resumes_with_original_source_noise_and_moments(
-    tmp_path, forward, camera_supervision,
+    tmp_path, forward, camera_supervision, interval_weight,
 ):
     commons, native, pairs = manifests(tmp_path)
     recipe = {
@@ -201,6 +204,7 @@ def test_actual_mixed_training_resumes_with_original_source_noise_and_moments(
         "val_batches": 1,
         "trace_observations": True,
         "camera_supervision": camera_supervision,
+        "reference_interval_weight": interval_weight,
         "reconstruct_highlights": camera_supervision == "sensor-valid-v1",
         "model": {
             "restoration_backbone": "packed-isotropic",
@@ -281,7 +285,12 @@ def test_actual_mixed_training_resumes_with_original_source_noise_and_moments(
         with pytest.raises(ValueError, match="Resume"):
             training.train(path, resume=resumed)
     if camera_supervision == "sensor-valid-v1":
+        changed = {**recipe, "reference_interval_weight": 0.2}
+        path.write_text(yaml.safe_dump(changed))
+        with pytest.raises(ValueError, match="Resume reference interval weight differs"):
+            training.train(path, resume=resumed)
         changed = {**recipe, "camera_supervision": "reference-white-v1"}
+        changed["reference_interval_weight"] = 0.0
         path.write_text(yaml.safe_dump(changed))
         with pytest.raises(ValueError, match="Resume camera supervision differs"):
             training.train(path, resume=resumed)

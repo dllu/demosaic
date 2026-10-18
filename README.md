@@ -73,6 +73,8 @@ The [completed content audit](docs/commons-content-overlap.md) supplies
 The [completed objective comparison](docs/reconstruction-objective-first1k-review.md)
 misses its continuation gate. The [completed camera-supervision review](docs/camera-supervision-first1k-review.md)
 finds photo/color gains with mixed camera results; its continuation gate also fails.
+The [directional RAW residual and interval-loss study](docs/directional-interval-v78-v79.md)
+has passed execution/restart checks and is training; image quality is pending.
 See [training pipeline work](docs/training-pipeline.md) for augmentation before
 the last reduction, selected-domain loading and the batch-size sweep.
 The [packed detail review](docs/packed-detail-v40-v41-review.md) retains the

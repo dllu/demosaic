@@ -56,6 +56,7 @@ class ModelConfig:
     raw_kernel_reconstruction: bool = False
     raw_kernel_windows: tuple[int, ...] = (1, 5, 17)
     raw_kernel_phase_conditioning: bool = False
+    raw_directional_residual: bool = False
     isotropic_groups: int = 6
     isotropic_blocks: int = 8
     isotropic_local_width: int = 32
@@ -398,6 +399,19 @@ class JointDemosaic(nn.Module):
             raise ValueError("RAW kernel reconstruction must be a boolean")
         if cfg.raw_kernel_reconstruction and cfg.restoration_backbone != "pretrained-rgb":
             raise ValueError("RAW kernel reconstruction requires the pretrained RGB backbone")
+        if type(cfg.raw_directional_residual) is not bool:
+            raise ValueError("RAW directional residual must be a boolean")
+        if cfg.raw_directional_residual and (
+            cfg.restoration_backbone != "pretrained-rgb"
+            or not cfg.variance_stabilization
+            or not cfg.physical_anchors
+            or cfg.rgb_processing_scale != 1
+            or cfg.raw_kernel_reconstruction
+            or cfg.adc_cfa_projection
+        ):
+            raise ValueError(
+                "RAW directional residual requires native stabilized anchored RGB without other RAW heads"
+            )
         if cfg.adc_cfa_projection and (
             cfg.restoration_backbone != "pretrained-rgb" or not cfg.variance_stabilization
         ):
@@ -518,6 +532,7 @@ class JointDemosaic(nn.Module):
                 raw_kernel=cfg.raw_kernel_reconstruction,
                 raw_kernel_windows=cfg.raw_kernel_windows,
                 raw_kernel_phase_conditioning=cfg.raw_kernel_phase_conditioning,
+                raw_directional_residual=cfg.raw_directional_residual,
             )
             if cfg.dino and cfg.dino_feature_fusion == "convnext-pyramid":
                 from .dino_pyramid import DinoPyramidContext

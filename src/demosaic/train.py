@@ -102,6 +102,13 @@ def make_optimizer(model, config):
     multiplier = float(config.get("phase_lr_multiplier", 1))
     if not math.isfinite(multiplier) or multiplier <= 0:
         raise ValueError("Phase learning-rate multiplier must be finite and positive")
+    directional_multiplier = float(config.get("raw_directional_lr_multiplier", 1))
+    if not math.isfinite(directional_multiplier) or directional_multiplier <= 0:
+        raise ValueError("Directional learning-rate multiplier must be finite and positive")
+    if directional_multiplier != 1 and not model.config.raw_directional_residual:
+        raise ValueError("Directional learning-rate multiplier requires the directional branch")
+    if directional_multiplier != 1 and multiplier != 1:
+        raise ValueError("Directional and packed-phase learning-rate groups cannot combine")
     parameters = [p for p in model.parameters() if p.requires_grad]
     if multiplier != 1:
         phase = [
@@ -121,6 +128,25 @@ def make_optimizer(model, config):
                 "params": phase,
                 "lr_multiplier": multiplier,
                 "lr": config.get("lr", 2e-4) * multiplier,
+            },
+        ]
+    if directional_multiplier != 1:
+        directional = [
+            p
+            for name, p in model.named_parameters()
+            if p.requires_grad and name.startswith("pretrained_rgb.raw_directional.")
+        ]
+        if not directional:
+            raise ValueError(
+                "Directional learning-rate multiplier needs trainable branch parameters"
+            )
+        ids = {id(p) for p in directional}
+        parameters = [
+            {"params": [p for p in parameters if id(p) not in ids], "lr_multiplier": 1.0},
+            {
+                "params": directional,
+                "lr_multiplier": directional_multiplier,
+                "lr": config.get("lr", 2e-4) * directional_multiplier,
             },
         ]
     return torch.optim.AdamW(parameters, lr=config.get("lr", 2e-4), weight_decay=0.01)
@@ -298,6 +324,12 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         config.get("camera_supervision", "reference-white-v1")
     )
     config["camera_supervision"] = camera_supervision
+    interval_weight = float(config.get("reference_interval_weight", 0.0))
+    if not math.isfinite(interval_weight) or interval_weight < 0:
+        raise ValueError("Reference interval weight must be finite and nonnegative")
+    if interval_weight and camera_supervision != "sensor-valid-v1":
+        raise ValueError("Reference interval supervision requires sensor-valid camera targets")
+    config["reference_interval_weight"] = interval_weight
     if camera_supervision == "sensor-valid-v1" and not config.get("reconstruct_highlights", False):
         raise ValueError("Sensor-valid camera supervision requires reference-white display targets")
     groups, forward_groups = batch_layout(config)
@@ -312,6 +344,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             or not options.get("physical_anchors", False)
             or options.get("rgb_processing_scale", 1) != 1
             or options.get("raw_kernel_reconstruction", False)
+            or options.get("raw_directional_residual", False)
         ):
             raise ValueError(
                 "Normalization augmentation requires full-resolution anchored RGB training"
@@ -470,6 +503,11 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             )
             + (("pretrained_rgb.camera_matrix_reference",) if new_camera_reference else ())
             + (("pretrained_rgb.raw_kernel.",) if model.config.raw_kernel_reconstruction else ())
+            + (
+                ("pretrained_rgb.raw_directional.",)
+                if model.config.raw_directional_residual
+                else ()
+            )
         )
         if incompatible.unexpected_keys or any(
             not k.startswith(allowed_prefixes) for k in incompatible.missing_keys
@@ -573,6 +611,12 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             raise ValueError("Resume reconstruction objective differs; initialize a new run")
         if state["config"].get("camera_supervision", "reference-white-v1") != camera_supervision:
             raise ValueError("Resume camera supervision differs; initialize a new run")
+        if float(state["config"].get("reference_interval_weight", 0.0)) != interval_weight:
+            raise ValueError("Resume reference interval weight differs; initialize a new run")
+        if float(state["config"].get("raw_directional_lr_multiplier", 1)) != float(
+            config.get("raw_directional_lr_multiplier", 1)
+        ):
+            raise ValueError("Resume directional learning rate differs; initialize a new run")
         if state["config"].get("normalization_augmentation", "none") != normalization_policy:
             raise ValueError("Resume normalization augmentation differs; initialize a new run")
         if state["config"].get("data_seed_per_step", False) != config.get(
@@ -787,7 +831,10 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 )
                 if use_pair:
                     loss, terms = paired_reconstruction_loss(
-                        prediction, batch, auxiliary, multiscale_sensor_weight=multiscale_weight,
+                        prediction,
+                        batch,
+                        auxiliary,
+                        multiscale_sensor_weight=multiscale_weight,
                         objective=objective,
                     )
                 else:
@@ -800,6 +847,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                         multiscale_sensor_weight=multiscale_weight,
                         objective=objective,
                         camera_supervision=camera_supervision,
+                        reference_interval_weight=interval_weight,
                     )
             if not torch.isfinite(loss):
                 raise RuntimeError(f"Nonfinite loss at step {step}; last checkpoint retained")

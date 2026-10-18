@@ -72,8 +72,14 @@ class RgbRestorationTrunk(nn.Module):
         self.m_tail = nn.Conv2d(64, 3, 3, padding=1, bias=False)
 
     def forward(
-        self, rgb, noise, *, head_offset=None, middle_offset=None,
-        encoder_offsets=None, return_features=False,
+        self,
+        rgb,
+        noise,
+        *,
+        head_offset=None,
+        middle_offset=None,
+        encoder_offsets=None,
+        return_features=False,
     ):
         # Preserve weak native RGB variations through the first skip even when
         # deep features use BF16/FP16. Absolute RGB is projected in IEEE FP32.
@@ -278,24 +284,48 @@ class PretrainedRgbDemosaic(nn.Module):
     """One trainable RGB pass with CFA/noise/camera input and frozen DINO context."""
 
     def __init__(
-        self, *, stabilized=False, physical_anchors=False, processing_scale=1,
-        detail_prior=False, hidden_autocast=False, center_camera_matrix=False,
-        middle_skip_fp32=False, adc_projection=False,
-        raw_kernel=False, raw_kernel_windows=(1, 5, 17), raw_kernel_phase_conditioning=False,
+        self,
+        *,
+        stabilized=False,
+        physical_anchors=False,
+        processing_scale=1,
+        detail_prior=False,
+        hidden_autocast=False,
+        center_camera_matrix=False,
+        middle_skip_fp32=False,
+        adc_projection=False,
+        raw_kernel=False,
+        raw_kernel_windows=(1, 5, 17),
+        raw_kernel_phase_conditioning=False,
+        raw_directional_residual=False,
     ):
         super().__init__()
         if physical_anchors and not stabilized:
             raise ValueError("Physical anchors require variance stabilization")
         if adc_projection and not stabilized:
-            raise ValueError("ADC CFA projection requires explicit stabilized RGB noise conditioning")
+            raise ValueError(
+                "ADC CFA projection requires explicit stabilized RGB noise conditioning"
+            )
         if processing_scale not in (1, 2) or processing_scale == 2 and not stabilized:
             raise ValueError("Packed processing requires variance stabilization and scale 2")
         if detail_prior and processing_scale != 2:
             raise ValueError("The detail prior requires packed processing")
         if raw_kernel and (processing_scale != 1 or adc_projection):
-            raise ValueError("RAW kernel reconstruction requires native processing and no ADC projection")
+            raise ValueError(
+                "RAW kernel reconstruction requires native processing and no ADC projection"
+            )
         if raw_kernel_phase_conditioning and not raw_kernel:
             raise ValueError("RAW kernel phase conditioning requires RAW kernel reconstruction")
+        if raw_directional_residual and (
+            not stabilized
+            or not physical_anchors
+            or processing_scale != 1
+            or raw_kernel
+            or adc_projection
+        ):
+            raise ValueError(
+                "Directional residual requires native stabilized anchored RGB without other RAW heads"
+            )
         self.network = RgbRestorationTrunk(
             hidden_autocast=hidden_autocast, middle_skip_fp32=middle_skip_fp32
         )
@@ -327,10 +357,17 @@ class PretrainedRgbDemosaic(nn.Module):
                 "phase_patterns", torch.tensor(list(PATTERNS.values())), persistent=False
             )
             if detail_prior:
-                self.register_buffer("detail_energy", detail_malvar_energy().clone(), persistent=False)
+                self.register_buffer(
+                    "detail_energy", detail_malvar_energy().clone(), persistent=False
+                )
         self._noise_key = None
         self._noise_profiles = None
         self.raw_kernel = None
+        self.raw_directional = None
+        if raw_directional_residual:
+            from .raw_directional import RawDirectionalResidual
+
+            self.raw_directional = RawDirectionalResidual()
         if raw_kernel:
             from .raw_kernel import AdaptiveRawKernel
 
@@ -350,9 +387,7 @@ class PretrainedRgbDemosaic(nn.Module):
         """
         if not self.center_camera_matrix:
             raise ValueError("Camera matrix centering is disabled")
-        self.camera_matrix_reference.copy_(
-            self.measurement_adapter.weight[:, [12, 16, 20], 0, 0]
-        )
+        self.camera_matrix_reference.copy_(self.measurement_adapter.weight[:, [12, 16, 20], 0, 0])
 
     def project_measurements(self, condition):
         if not self.center_camera_matrix:
@@ -413,9 +448,7 @@ class PretrainedRgbDemosaic(nn.Module):
             indices = self._phase_indices(colors)
         kernel = self.pooled_kernels[indices].reshape(-1, 3, 4, 3, 3)
         balance = balance.float().clamp_min(1e-6)
-        ratio = balance.gather(1, colors)[:, None, :, None, None] / balance[
-            :, :, None, None, None
-        ]
+        ratio = balance.gather(1, colors)[:, None, :, None, None] / balance[:, :, None, None, None]
         return ((kernel * ratio).square().sum((1, 2, 3, 4)) / 3).sqrt()[:, None, None, None]
 
     def detail_noise_variance(self, colors, balance, *, indices=None):
@@ -441,8 +474,19 @@ class PretrainedRgbDemosaic(nn.Module):
         return detail * gain
 
     def forward_packed(
-        self, normalized, noise, condition, packed, colors, wb, matrix, profiles,
-        offset, span, preview, context,
+        self,
+        normalized,
+        noise,
+        condition,
+        packed,
+        colors,
+        wb,
+        matrix,
+        profiles,
+        offset,
+        span,
+        preview,
+        context,
     ):
         """Run the pretrained CNN on packed resolution; predict every output phase.
 
@@ -486,7 +530,10 @@ class PretrainedRgbDemosaic(nn.Module):
                 render(preview, wb, matrix), (low_rgb.shape[-2] // 8, low_rgb.shape[-1] // 8)
             )
         coarse, features = self.network(
-            low_rgb, low_noise, head_offset=head_offset, middle_offset=middle_offset,
+            low_rgb,
+            low_noise,
+            head_offset=head_offset,
+            middle_offset=middle_offset,
             return_features=True,
         )
         with torch.autocast(packed.device.type, enabled=False), ieee_fp32():
@@ -521,11 +568,14 @@ class PretrainedRgbDemosaic(nn.Module):
             or not self.physical_anchors
             or self.processing_scale != 1
             or self.raw_kernel is not None
+            or self.raw_directional is not None
         ):
             raise ValueError(
                 "Normalization augmentation requires full-resolution anchored RGB training"
             )
         original_packed = packed
+        original_variance = variance
+        directional_features = None
         profiles, preview, base_rgb = None, None, None
         if self.stabilized:
             if self._noise_profiles is None:
@@ -603,7 +653,7 @@ class PretrainedRgbDemosaic(nn.Module):
                 if isinstance(middle_offset, tuple):
                     encoder_kwargs = {"encoder_offsets": middle_offset[:2]}
                     middle_offset = middle_offset[2]
-            if self.raw_kernel is not None:
+            if self.raw_kernel is not None or self.raw_directional is not None:
                 prediction, features = self.network(
                     normalized,
                     noise,
@@ -612,18 +662,20 @@ class PretrainedRgbDemosaic(nn.Module):
                     return_features=True,
                     **encoder_kwargs,
                 )
-                return self.raw_kernel(
-                    original_packed,
-                    colors,
-                    torch.cat((features.float(), prediction.float()), 1)[..., :h, :w],
-                )
-            prediction = self.network(
-                normalized,
-                noise,
-                head_offset=head_offset,
-                middle_offset=middle_offset,
-                **encoder_kwargs,
-            )[..., :h, :w]
+                directional_features = torch.cat((features.float(), prediction.float()), 1)[
+                    ..., :h, :w
+                ]
+                if self.raw_kernel is not None:
+                    return self.raw_kernel(original_packed, colors, directional_features)
+                prediction = prediction[..., :h, :w]
+            else:
+                prediction = self.network(
+                    normalized,
+                    noise,
+                    head_offset=head_offset,
+                    middle_offset=middle_offset,
+                    **encoder_kwargs,
+                )[..., :h, :w]
         with torch.autocast(packed.device.type, enabled=False), ieee_fp32():
             output = prediction.float() * span + offset
             if profiles is not None:
@@ -653,6 +705,10 @@ class PretrainedRgbDemosaic(nn.Module):
                             output[indices], original_packed[indices], colors[indices], balance
                         )
                         output = output.index_copy(0, indices, corrected)
+            if self.raw_directional is not None:
+                output = self.raw_directional(
+                    output, original_packed, original_variance, colors, directional_features
+                )
             return output
 
 
