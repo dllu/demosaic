@@ -8,8 +8,10 @@ evaluation. Known/unseen, full427, analytic and full-frame GFX reports have now
 closed. The [GFX native inspection](results/mixed16-quarter-GFX-native-view-v1.json)
 adds24 actually viewed triplets at the four standing regions. The
 [three-camera native inspection](results/mixed16-quarter-three-camera-native-view-v1.json)
-adds another24 triplets from six cached contexts. Remaining color/statistics
-and artifact checks are running. Quality review remains
+adds another24 triplets from six cached contexts. The
+[selected-color inspection](results/mixed16-quarter-selected-colors-native-view-v1.json)
+covers16 original/additional analytic triplets; primary statistics have closed.
+The fresh FP32 hue grid and remaining audits are running. Quality review remains
 incomplete and neither checkpoint is promoted.
 The requirements below describe the preserved execution plan.
 

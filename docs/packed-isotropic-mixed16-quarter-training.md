@@ -33,8 +33,10 @@ foliage and fence coordinates. Both new arms remain grainier than mature
 controls, with weak fine foliage/fence structure. The separate ISO100 image
 is a qualitative reference, not GT. The [three-camera native inspection](results/mixed16-quarter-three-camera-native-view-v1.json)
 adds24 triplets/36 cells from six cached Q2/a7RII/GFX50R contexts; its RawNIND
-row is also not GT. Remaining color checks, independent statistics, RGB16
-artifact checks and the final quality decision are in progress.
+row is also not GT. The [selected-color inspection](results/mixed16-quarter-selected-colors-native-view-v1.json)
+covers16 original/additional analytic triplets without new inference. Primary
+statistics have closed; the fresh FP32 hue grid, remaining audits, RGB16 artifact
+checks and final quality decision are in progress.
 
 [Observed startup, plan/checkpoint hashes, exact owners and checks](results/packed-isotropic-mixed16-quarter-launch-v1.json).
 The live status is
