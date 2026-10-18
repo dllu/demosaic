@@ -10,6 +10,12 @@ finds modest improvement over originalRAW8k on two fixed observations but
 substantial residual grain. Complete matched photographic quality and
 full-frame performance remain unmeasured for these candidates.
 
+The [complete V72 development-camera CPU check](packed-isotropic-mixed16-V72-camera-CPU.md)
+now improves known/unseen measured-CFA PSNR by2.8302/2.1418dB over original
+V71 at equal32,000 examples, with all nine scene gains positive. It still
+trails Wiener7+Malvar and RawNIND substantially. CPU results do not replace
+the pending full matched CUDA panels or establish competitive final quality.
+
 The [execution sweep](mixed-optimizer-batches.md) chose four B4 forwards for an
 effective16-example update. Gain32 applies to neural RAW features and1/32 to
 the learned residual; physical output/loss units remain unchanged. Both arms
@@ -83,3 +89,17 @@ checkpoint hashes, exposure, unchanged noisy/reference panels and RGB16
 exports. Full-frame timings will be single shared-machine observations.
 Actual visual inspection and the quality decision remain subsequent work;
 successful automation alone cannot promote these models.
+
+The first gate is also a much shorter training run than the related published
+synthetic Bayer experiment. [JD3Net §4.4](https://arxiv.org/html/2601.00703v2#S4.SS4)
+reports one million updates with batch20 and128-pixel patches for its larger
+model. Its [pinned author configuration](https://github.com/cory-fan/jd3net/blob/47489cbe3eba746e13ad8be8898956d7895f1835/demosaic/options/train/Demosaic/Isotropic64_imagenet.yml)
+specifies AdamW LR`.001`, betas`.9/.9`, no weight decay and PSNR loss. That
+configuration implies20 million patch draws; our first gate has32,000 and
+the planned full horizon640,000, at256-pixel patches with other losses,
+noise, data and architecture. These counts do not establish comparable compute
+or recommend transferring that optimizer. The paper's smaller-model patch/
+batch settings also differ from its checked-in small configuration. See the
+[primary-source inspection receipt](results/jd3net-training-budget-context-v1.json).
+The present schedule stays fixed, and the early gate cannot establish convergence
+or rule out later improvements from training.

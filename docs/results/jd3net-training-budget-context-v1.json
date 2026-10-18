@@ -1,0 +1,102 @@
+{
+  "status": "primary-source-training-budget-context-no-reproduction-or-recipe-change",
+  "upstream_commit": "47489cbe3eba746e13ad8be8898956d7895f1835",
+  "tree": {
+    "path": "/mnt/external/demosaic/benchmarks/jd3net-budget-reference-20261017-v1/tree.json",
+    "sha256": "e6b7dd08b12fdcd2cab1f72c33f564f4a9405cc93f9ec447feecd8638ee34420",
+    "truncated": false
+  },
+  "paper": "https://arxiv.org/html/2601.00703v2#S4.SS4",
+  "official_repository": "https://github.com/cory-fan/jd3net",
+  "root_files": [
+    "README.md"
+  ],
+  "checked_in_weight_paths": [],
+  "license_paths": [
+    "unidem/PyTorch/simple_camera_pipeline/LICENSE"
+  ],
+  "configs": [
+    {
+      "path": "/mnt/external/demosaic/benchmarks/jd3net-budget-reference-20261017-v1/Isotropic64_imagenet.yml",
+      "sha256": "e571ff5826fef3e79537a9eee273a587085054690d3b3c26e72a7593512c98cb",
+      "upstream_path": "demosaic/options/train/Demosaic/Isotropic64_imagenet.yml",
+      "url": "https://raw.githubusercontent.com/cory-fan/jd3net/47489cbe3eba746e13ad8be8898956d7895f1835/demosaic/options/train/Demosaic/Isotropic64_imagenet.yml",
+      "num_gpu": 1,
+      "train_patch_size": 128,
+      "batch_size_per_gpu": 20,
+      "total_iter": 1000000,
+      "optimizer": {
+        "type": "AdamW",
+        "lr": 0.001,
+        "weight_decay": 0.0,
+        "betas": [
+          0.9,
+          0.9
+        ]
+      },
+      "loss": {
+        "type": "PSNRLoss",
+        "loss_weight": 1,
+        "reduction": "mean"
+      },
+      "network": {
+        "type": "IsotropicNet",
+        "width": 128,
+        "downsample": 4,
+        "img_channel": 3,
+        "depth": 152,
+        "stochastic_depth": 0,
+        "start_kernel_size": 3
+      },
+      "nominal_example_draws": 20000000
+    },
+    {
+      "path": "/mnt/external/demosaic/benchmarks/jd3net-budget-reference-20261017-v1/IsotropicS_imagenet.yml",
+      "sha256": "419cf68ea3d67d0d0ebcc2faab97f7c1d0fbca49635b90973c3b89c7ab5cbcf2",
+      "upstream_path": "demosaic/options/train/Demosaic/IsotropicS_imagenet.yml",
+      "url": "https://raw.githubusercontent.com/cory-fan/jd3net/47489cbe3eba746e13ad8be8898956d7895f1835/demosaic/options/train/Demosaic/IsotropicS_imagenet.yml",
+      "num_gpu": 1,
+      "train_patch_size": 128,
+      "batch_size_per_gpu": 20,
+      "total_iter": 1000000,
+      "optimizer": {
+        "type": "AdamW",
+        "lr": 0.001,
+        "weight_decay": 0.0,
+        "betas": [
+          0.9,
+          0.9
+        ]
+      },
+      "loss": {
+        "type": "PSNRLoss",
+        "loss_weight": 1,
+        "reduction": "mean"
+      },
+      "network": {
+        "type": "IsotropicPosNet",
+        "width": 64,
+        "downsample": 3,
+        "img_channel": 3,
+        "depth": 64,
+        "start_kernel_size": 3
+      },
+      "nominal_example_draws": 20000000
+    }
+  ],
+  "paper_vs_small_config_difference": "Paper section4.4 gives small-model patch129/batch32; checked-in IsotropicS_imagenet.yml declares patch128/batch20. No trained reproduction or assumption that this config exactly recreates paper scores.",
+  "local_recipe": {
+    "path": "/home/dllu/proj/demosaic/configs/no-dino-packed-isotropic-mixed16-v72.yaml",
+    "sha256": "b1df9f7f16e37127d62375d5e297227837bb45f2b1975d49620d64fc21d2fbca",
+    "optimizer_updates_at_first_gate": 2000,
+    "planned_optimizer_updates": 40000,
+    "original_source_group_batch": 4,
+    "source_groups_per_optimizer_update": 4,
+    "first_gate_example_draws": 32000,
+    "planned_example_draws": 640000,
+    "native_patch_size": 256,
+    "LR": 0.0002,
+    "source_mixture": "Commons/native-clean/paired real-RAW, with noise/metadata and composite losses; different task/supervision from synthetic noise-free Bayer paper branch."
+  },
+  "scope": "Counts describe different experiments; no inference of comparable compute, convergence, architecture quality, appropriate LR/betas or required final budget. Current V72/V73 source/schedule/optimizer/evaluation queue remain frozen. No upstream model code/weights incorporated; files archived only for primary-source inspection. Current first gate is not a converged reproduction or SOTA evidence."
+}
