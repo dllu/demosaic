@@ -1,12 +1,13 @@
 # Experiment evidence
 
-The [fresh mixed16 V72/V73 trial](packed-isotropic-mixed16-trial.md) is running.
-V72 has completed its32,000-example gate: the
+The [fresh mixed16 V72/V73 trial](packed-isotropic-mixed16-trial.md) has completed
+both32,000-example training gates and passed its independent boundary audit;
+the full matched FP32 review is now running. The
 [full development-camera CPU check](packed-isotropic-mixed16-V72-camera-CPU.md)
 improves known/unseen measured-CFA PSNR by2.8302/2.1418dB over original V71
 at the same example budget, with all nine scene gains positive. It still
 trails Wiener7+Malvar and RawNIND substantially; selected native crops retain
-strong grain. DINO training and the complete matched FP32 review remain pending.
+strong grain. Complete matched quality/native review remains pending.
 V43 remains the working reference.
 
 The [completed RAW-native 40k review](packed-isotropic-quarter-review.md)

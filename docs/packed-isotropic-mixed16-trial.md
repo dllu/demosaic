@@ -3,9 +3,11 @@
 The [frozen V72/V73 trial](results/packed-isotropic-mixed16-trial-launch-v1.json)
 uses the full original Commons/native/paired training mixture. Both genuine
 12-update prefixes passed model/EMA/Adam, common initial state/RNG, actual
-source/noise and FP32 portable-reload checks. V72 no-DINO has completed its
-2,000-update/32,000-example gate and passed final-state checks; V73 DINO is
-continuing serially. The [selected V72 CPU crop review](packed-isotropic-mixed16-V72-CPU-preview.md)
+source/noise and FP32 portable-reload checks. Both V72 no-DINO and V73 DINO
+have completed their2,000-update/32,000-example gates. The
+[independent final-boundary audit and actual handoff](results/packed-isotropic-mixed16-first32000-training-boundary-v1.json)
+pass; both training workers/controller have exited and the full FP32 review
+is running. The [selected V72 CPU crop review](packed-isotropic-mixed16-V72-CPU-preview.md)
 finds modest improvement over originalRAW8k on two fixed observations but
 substantial residual grain. Complete matched photographic quality and
 full-frame performance remain unmeasured for these candidates.
@@ -29,6 +31,20 @@ it is not a single-factor comparison against those older models.
 | Optimizer updates | 12 | 2,000 | 40,000 |
 | Original B4 source steps | 48 | 8,000 | 160,000 |
 | Example draws | 192 | 32,000 | 640,000 |
+
+| Completed first-gate arm | Checkpoint SHA256 |
+| --- | --- |
+| V72 no-DINO | `8d67375e2169adb88f7dcdafd253e23642eb0d87b1dc2d79416cb0f22320416a` |
+| V73 DINO | `43c10f2a0af38761f9418f19c725edc4129284e76b5b2da89f66c184d1f643e1` |
+
+Both final checkpoints retain finite model/EMA and852/863 Adam states at2,000,
+complete RNG and original40,000-update schedules. Genuine prefix-to-final
+restore and portable FP32 reload checks pass. All82 logged mixed groups,
+noise fingerprints, LRs and example counters match across arms; each also
+matches82 overlapping original V71 source/noise observations. The common
+source bundle remains`fabd0b781938e156a6dcf89fb429a0a0c7c727e9c1acdb38c434dd201a81ebae`;
+official frozen DINO remains unchanged and gradient-free. This establishes the
+training boundary and review release, with quality and continuation decisions pending.
 
 Warmup is500 updates/8,000 example draws. EMA cap is`.999**4`, with the
 existing adaptive startup retained. Each original B4 group uses its own
