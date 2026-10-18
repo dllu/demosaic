@@ -1,16 +1,101 @@
-# Queued CUDA validation of the corrected tile grid
+# Corrected tile grid: completed 40k CUDA review
 
-The [frozen supplement](results/packed-isotropic-corrected-grid-queue-v2.json)
-is queued after the original 40k training, full quality review and compilation
-study. It starts no GPU work while those exact owners are alive. The no-DINO
-arm has completed 40,000 updates; DINO is continuing from its own 8k state.
-Corrected-grid CUDA accuracy, native full-frame appearance and speed are still
-unmeasured. No model or compute policy is promoted.
+The [completed supplement](results/packed-isotropic-corrected-grid-review-v2.json)
+checks both actual 40k EMA checkpoints. Correct alignment reduces disagreement
+with whole-context predictions, but does not improve the selected GT scores or
+establish a visible quality gain. Both full 102MP restores take about54 seconds.
+Neither model is promoted. The [original plan](results/packed-isotropic-corrected-grid-queue-v2.json)
+remains unchanged; all required preceding owners and children exited before CUDA
+work began. The original full quality review retains its frozen observations.
 
 The original direct-patch quality panels and their source sensitivities retain
 their frozen protocol. The [grid correction](packed-isotropic-tile-grid.md)
 changes full-image tiling, without changing the physical model modules. This
 supplement checks that corrected path on the actual completed 40k checkpoints.
+
+## Completed results
+
+Every saved F32 array and GT metric passed independent CPU replay within the
+declared1e−4 absolute metric tolerance. Whole-context predictions are numerical
+comparators, not GT. RMS excludes128 native pixels at the context boundary;
+GT metrics exclude8. These use tile256/overlap64/batch1 and the precision below.
+
+| Model / photograph | Legacy RMS vs whole, DN16 | Corrected RMS vs whole, DN16 | Legacy / corrected / whole sRGB PSNR |
+| --- | ---: | ---: | --- |
+| No-DINO / cyclist | 83.164 | 14.504 | 25.9331 / 25.9134 / 25.9127 |
+| No-DINO / roof | 79.286 | 9.529 | 24.5390 / 24.5250 / 24.5246 |
+| DINO / cyclist | 136.155 | 77.729 | 26.0679 / 26.0395 / 26.0311 |
+| DINO / roof | 128.858 | 69.537 | 24.4645 / 24.4364 / 24.4252 |
+
+Remaining context differences exceed the strict numerical-equivalence bounds.
+Closer agreement with the whole network is not improved reconstruction accuracy.
+For full101.995852MP DSCF3879, corrected tile512/overlap64/batch4 gives:
+
+| Model | Median seconds | Three-run range seconds |
+| --- | ---: | --- |
+| No-DINO 40k | 54.436 | 54.034–54.585 |
+| DINO 40k | 53.749 | 52.945–53.766 |
+
+One full warmup is excluded, and repeat outputs are bitwise equal. Historical
+legacy timings are separate single observations, without a concurrent speed
+control. These shared-machine measurements do not establish a speedup.
+
+Every corrected RGB16 channel reproduces its clipped/rounded saved F32 output.
+Signed comparisons cover all305,987,556 old/new RGB16 channel values per model:
+no-DINO changes26,295,683 values, RMS14.355DN and maximum8265DN;
+DINO changes25,681,894, RMS16.181DN and maximum7367DN. These are export
+differences, not unclipped F32 equivalence or real-image GT errors.
+
+All36 preselected triplets were reviewed at original resolution in six boards.
+The cyclist remains grainy with inaccurate fine fabric detail; roof ornament is
+soft relative to exact GT. Legacy, corrected and whole-context views look very
+similar. Sky/building retain grain, foliage stays soft and mesh remains uneven.
+Neither selected edge shows an obvious visual regression or improvement, while
+the bottom shadow remains noisy. This does not establish that all full-frame
+differences are invisible.
+
+## Actual CUDA native crops
+
+The four photographic triplets use the same source contexts, ROI, noise,
+WB/matrix and exposure as the CPU preflight documented below, but actual CUDA
+FP16 internals / IEEE FP32 physical computation. Every panel stays160×160.
+These are fixed CPU-generated seed42 observations, distinct from the official
+256px GPU panel. Left to right: noisy Malvar, corrected model, exact synthetic GT.
+
+No-DINO40k EMA SHA256:
+`5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc`.
+DINO40k EMA SHA256:
+`4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337`.
+
+![No-DINO40k cyclist, CUDA](images/packed-grid40k-no-dino-photo0.png)
+
+![DINO40k cyclist, CUDA](images/packed-grid40k-dino-photo0.png)
+
+![No-DINO40k roof, CUDA](images/packed-grid40k-no-dino-photo1.png)
+
+![DINO40k roof, CUDA](images/packed-grid40k-dino-photo1.png)
+
+Real triplets below use cached DSCF3879/DSCF3880, exposure4 (+2EV), common
+input WB/matrix and shot.0014635775921166604/read1.0715704128646712e−6
+from the input Haar fit. Foliage ROI is`[8890,5570,160,160]`; fence is
+`[2240,6000,160,160]`, reference fence x2241. The result JSON records full
+source hashes, camera matrix and reference calibration. The separate ISO100
+f/5.6 capture differs in aperture, exposure and motion: **not exact GT**.
+
+![No-DINO40k foliage: noisy / corrected / independent ISO100 reference](images/packed-grid40k-no-dino-foliage.png)
+
+![DINO40k foliage: noisy / corrected / independent ISO100 reference](images/packed-grid40k-dino-foliage.png)
+
+![No-DINO40k fence: noisy / corrected / independent ISO100 reference](images/packed-grid40k-no-dino-chain-link-fence.png)
+
+![DINO40k fence: noisy / corrected / independent ISO100 reference](images/packed-grid40k-dino-chain-link-fence.png)
+
+The boards include fence, right edge and bottom edge as rows. Columns are noisy
+Malvar, legacy RGB16, corrected RGB16 and independent ISO100 reference, all160px.
+
+![No-DINO40k fence and affected edges](images/packed-grid40k-no-dino-edges-native.png)
+
+![DINO40k fence and affected edges](images/packed-grid40k-dino-edges-native.png)
 
 ## Fixed observations and full-frame work
 
@@ -58,7 +143,7 @@ The output contains 12 exact-synthetic-GT photo triplets and 24 full-frame GFX
 triplets: sky, building, foliage, fence and both edges, before/after for each
 model. Each panel remains 160×160 native pixels. The independent ISO100 f/5.6
 capture differs in aperture, exposure and motion and is labeled **not GT**.
-Visual inspection is required after the queue finishes.
+All36 native triplets have now been inspected, as recorded above.
 
 ## Completed CPU execution checks
 

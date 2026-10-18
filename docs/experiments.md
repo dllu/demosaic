@@ -8,6 +8,12 @@ The separate [trained compilation study](packed-isotropic-compilation.md)
 rejects the first photo-accuracy gate. Native crops, exact-GT/real-reference
 labels, state/input audits and source sensitivities accompany the reports.
 
+The [completed corrected-grid CUDA supplement](packed-isotropic-corrected-grid-queue.md)
+reduces disagreement with whole-context predictions, without improving selected
+GT scores or establishing a visible restoration gain across36 native triplets.
+Actual40k full102MP medians are54.436s without DINO and53.749s with DINO,
+three repeats after an excluded full warmup. Neither checkpoint is promoted.
+
 The [V65 completed RAW-head warmup review](raw-kernel-warmup-v65-first1k-review.md)
 finishes its original1,000-update budget without promotion or a joint stage.
 Photo27.83246dB and known/unseen CFA44.22499/41.44299 trail V60 substantially.

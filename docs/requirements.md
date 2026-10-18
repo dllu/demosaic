@@ -7,7 +7,8 @@ Latest: the [completed RAW-native 40k review](packed-isotropic-quarter-review.md
 confirms own8k progress, but 29.73/29.95dB photo scores, residual native grain
 and50.70/53.74s full GFX restores do not meet the quality/speed goals. Neither
 endpoint is promoted. The trained compiler's photo gate is rejected; the
-separate corrected-grid workflow awaits native review/reporting. V43 remains
+separate corrected-grid review is complete, with similar native appearance and
+53.75–54.44s repeat-median restores. V43 remains
 the working reference, and protected-final scenes remain closed.
 
 Earlier, the [original V63/V64 full20000 review](long-commons-v63-v64-original20k-review.md)
@@ -56,16 +57,16 @@ new40k model quality or automatic promotion is claimed by the queue.
 
 The [packed tile-grid correction](packed-isotropic-tile-grid.md) preserves the
 RAW4-pixel/DINO32-pixel grids at final tiles. Actual trained CPU checks confirm
-the corrected coordinates; selected photo PSNR does not improve. Active frozen
-reviews retain their old geometry. Corrected-grid CUDA/full-frame validation
-and the model-quality goals remain open.
+the corrected coordinates; selected photo PSNR does not improve. The original
+frozen review retains its old geometry. Corrected-grid CUDA/full-frame validation
+is complete; the model-quality goals remain open.
 
 The [corrected-grid CUDA supplement](packed-isotropic-corrected-grid-queue.md)
-has completed its numerical workflow after the original review/compilation owners.
-It adds actual40k
+has completed its numerical workflow and all36 selected native triplets after
+the original review/compilation owners. It adds actual40k
 fixed-photo checks, repeated full102MP corrected restores and affected-edge
-crops, with legacy exports reused rather than rerun. Its CPU execution checks
-are complete; the supplementary native review/report remains pending.
+crops, with legacy exports reused rather than rerun. Whole-context error falls,
+but the selected GT scores do not improve and both models remain unpromoted.
 
 The [trained compilation comparison](packed-isotropic-compilation.md) rejects
 its first no-DINO photo gate (max20.77–23.15DN16 versus the fixed1DN16 bound).

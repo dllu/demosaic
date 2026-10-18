@@ -12,9 +12,11 @@ path and does not change the existing model recipes.
 
 The [tile-grid correction and trained CPU checks](packed-isotropic-tile-grid.md)
 now preserve the RAW4-pixel and DINO32-pixel grids across final tiles. This fixes
-coordinate consistency without a restoration-quality gain. Active40k trials
-and queued reviews retain their immutable previous geometry; corrected-grid
-CUDA/full-frame validation remains before promotion.
+coordinate consistency without a restoration-quality gain. The original40k
+review retains its immutable previous geometry. The [completed CUDA supplement](packed-isotropic-corrected-grid-queue.md)
+reduces whole-context disagreement, but its36 native triplets show similar
+appearance and repeated full-frame medians are53.75–54.44s. Neither model is
+promoted.
 
 The [completed normalization study](normalization-v68-v69-original4k-review.md)
 left missing fine detail, bright-color bias and roughly36s/102MP restoration
