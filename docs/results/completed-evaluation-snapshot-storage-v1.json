@@ -1,0 +1,37 @@
+{
+  "status": "completed-owned-immutable-evaluation-copy-deduplication",
+  "operations": [
+    {
+      "result": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-completed-snapshot-dedup-v1/result.json",
+        "sha256": "e32956cc9dbe7862660fb4325155a5f37f28c674838aa4a2e956decd6f465406"
+      },
+      "driver": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-completed-snapshot-dedup-v1/deduplicate.py",
+        "sha256": "6f60e4aeeb4c7e0b0fa20f32251b8268831af1f8df04bc8f0b806d40324feac6"
+      },
+      "status": "completed-owned-camera-snapshot-deduplication-byte-preserving",
+      "replacements": 6,
+      "reclaimed_allocated_bytes": 1291628544,
+      "free_bytes_after": 551045595136,
+      "scope": "Only byte-identical, content-addressed checkpoint copies owned by completed known/unseen panels are hard-linked. Original model archives/photos and current full427 files are untouched. Separate paths, hashes, sizes, scores and crop pixels remain unchanged. Rollback links protect each atomic replacement until its post-check succeeds. Physical file storage is shared among immutable owned snapshots; no algorithm or evaluation setting changes."
+    },
+    {
+      "result": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-completed-snapshot-dedup-v2/result.json",
+        "sha256": "ab2a42cb0d9008ee2fe453d44cc4c241840bc83621def3c1b31c5a6d6d95c738"
+      },
+      "driver": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-completed-snapshot-dedup-v2/deduplicate.py",
+        "sha256": "a1dbceb226a63f171fa5b18a046a85ac4d8f37217e09b5dd84f4da169fca4a07"
+      },
+      "status": "completed-older-owned-immutable-V43-V63-snapshot-dedup-byte-preserving",
+      "replacements": 12,
+      "reclaimed_allocated_bytes": 6350733312,
+      "free_bytes_after": 557373620224,
+      "scope": "Only V43/V63 copies in six previously completed owned primary evaluation panels are replaced with links to completed current-known evaluation copies. All snapshots remain physically distinct from original archive inodes. Paths, bytes, hashes, reports, case scores and pixels are unchanged. Current full427 and any other active files are untouched; no model archive, photograph, recipe, inference source, download or training admission changes. Each replacement retains a rollback link until hash/inode checks succeed."
+    }
+  ],
+  "total_reclaimed_allocated_bytes": 7642361856,
+  "scope": "Only byte-identical owned checkpoint copies in completed evaluation panels share file storage. Original model archives/photos, active evaluation files and all checkpoint bytes/paths/hashes remain unchanged. Current review source/input guards pass after each operation. No running process was signaled, no downloader restarted and no training membership or inference setting changed."
+}

@@ -6,8 +6,10 @@ All nine scene means improve. It still trails Wiener7+Malvar and both RawNIND
 adapters substantially, with strong visible grain; V72 is not promoted.
 
 [Complete scores, checkpoint/source hashes, conditioning, crop ROIs and artifact receipts](results/packed-isotropic-mixed16-V72-camera-CPU-v1.json).
-The [matched DINO/full photographic review](packed-isotropic-mixed16-trial.md)
-remains queued behind V73 training. This CPU result does not replace that review.
+Both training gates have since completed. The
+[matched GPU camera and native-crop interim review](packed-isotropic-mixed16-matched-camera-interim.md)
+is available while the [full photographic review](packed-isotropic-mixed16-trial.md)
+runs. This CPU result does not replace that full review.
 
 V72 completed2,000 effective16 optimizer updates; V71 completed8,000 B4
 updates. Both saw32,000 examples from the same frozen source mixture. Their

@@ -9,14 +9,17 @@ have completed their2,000-update/32,000-example gates. The
 pass; both training workers/controller have exited and the full FP32 review
 is running. The [selected V72 CPU crop review](packed-isotropic-mixed16-V72-CPU-preview.md)
 finds modest improvement over originalRAW8k on two fixed observations but
-substantial residual grain. Complete matched photographic quality and
-full-frame performance remain unmeasured for these candidates.
+substantial residual grain. The completed
+[matched camera and native-crop interim review](packed-isotropic-mixed16-matched-camera-interim.md)
+finds only small DINO gains (+0.01779/+0.03839dB measured-CFA known/unseen),
+with both new arms still substantially behind mature models and RawNIND.
+Complete matched photographic quality and full-frame performance remain pending.
 
 The [complete V72 development-camera CPU check](packed-isotropic-mixed16-V72-camera-CPU.md)
 now improves known/unseen measured-CFA PSNR by2.8302/2.1418dB over original
 V71 at equal32,000 examples, with all nine scene gains positive. It still
-trails Wiener7+Malvar and RawNIND substantially. CPU results do not replace
-the pending full matched CUDA panels or establish competitive final quality.
+trails Wiener7+Malvar and RawNIND substantially. The matched CUDA camera panels
+now confirm that ordering; competitive final quality is not established.
 
 The [execution sweep](mixed-optimizer-batches.md) chose four B4 forwards for an
 effective16-example update. Gain32 applies to neural RAW features and1/32 to
@@ -67,7 +70,7 @@ references describe their source-time files and will be replaced at the quality
 gate. The launch receipt records the active controller/child identity and a
 snapshot of progress; it is not a live progress counter.
 
-Training stops at the32,000-example gate. The first public performance report
+Training stops at the32,000-example gate. The full first-gate performance report
 must include full held-out/camera/analytic/color checks, at least two native100%
 noisy/denoised/exact-synthetic-GT crop triplets per model, and standing GFX
 foliage/fence comparisons with the ISO100 capture labeled an independent
@@ -75,12 +78,12 @@ qualitative reference. There is no automatic extension, protected-final scoring
 or promotion. Existing V43 README examples remain the working reference.
 
 The [frozen quality-review queue](results/packed-isotropic-mixed16-review-queue-v1.json)
-now waits for the exact training controller and final child to exit successfully.
+waited for the exact training controller and final child to exit successfully.
 Its independent preflight rechecked both immutable prefix states and their
 source bundles, verified38 input files and181 frozen files, and refused to
 release inference while training remained live. The implementation has59
-focused passing CPU tests. This is preparation evidence, with no new quality
-result yet.
+focused passing CPU tests. Both exits and the independent final audit subsequently
+released the review. Known/unseen panels are complete; full427 is running.
 
 Primary panels will recompute six checkpoint models in IEEE FP32: V72/V73,
 working V43, mature V63, and original V71/V70 at8,000 B4 updates. The latter

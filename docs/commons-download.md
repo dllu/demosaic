@@ -5,6 +5,20 @@ The existing Quality Images archive at `/mnt/external/qi` resumed on
 (195.2 GiB), with 380,719 pending files (4.23 TiB). Discovery and attribution
 enrichment were already complete, so this job runs only the download phase.
 
+It stopped normally at2026-10-18 04:49:19UTC (Oct17 21:49:19Pacific) when
+available space reached its512GiB reserve. The actual downloader process has
+exited. This run added **95,347 files /512.5GiB** at an average2.7MiB/s.
+The archive now contains **172,372 downloaded originals /707.7GiB**, with
+285,298 pending,2,477 excluded and76 failed entries. It remains a partial
+download. Keep the reserve available for current evaluation exports before
+resuming; download completion does not admit sources into an active experiment.
+
+After that normal stop, [owned completed-evaluation checkpoint copies](results/completed-evaluation-snapshot-storage-v1.json)
+were deduplicated without changing any bytes/paths/hashes, reclaiming7.12GiB
+and leaving about519GiB free for pending review exports. Originals, model
+archives and active evaluation files were untouched. The downloader remains
+stopped rather than immediately consuming that export headroom.
+
 The detached job uses the existing `pupphoto/download_quality_images.py`,
 three workers, at most 0.5 request starts/second, and a **512 GiB free-space
 reserve**. The downloader accounts for in-flight files before admitting work,
@@ -25,7 +39,7 @@ Inspect progress without starting another job:
 ```bash
 tail -20 /mnt/external/demosaic/downloads/commons-qi-resume.log
 source scripts/env.sh
-uv run --no-sync python ../pupphoto/download_quality_images.py status \
+PYTHONPATH="$PWD/../pupphoto" uv run --no-sync python -P ../pupphoto/download_quality_images.py status \
   --root /mnt/external/qi
 ```
 

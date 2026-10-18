@@ -4,8 +4,9 @@ V72 has completed2,000 optimizer updates /8,000 original B4 source steps /
 32,000 example draws. On the two fixed synthetic observations it improves
 about0.50dB over the original RAW model at the same example budget, but remains
 visibly grainy and substantially behind the mature controls. This selected
-CPU check does not promote V72. DINO V73 is still training; the complete
-[matched FP32 review](packed-isotropic-mixed16-trial.md) remains queued.
+CPU check does not promote V72. Both training gates have since completed;
+the [matched camera and native-crop interim review](packed-isotropic-mixed16-matched-camera-interim.md)
+is available while the complete [FP32 review](packed-isotropic-mixed16-trial.md) runs.
 
 [Checkpoint, source/ROI/noise/display metadata and complete artifact receipts](results/packed-isotropic-mixed16-V72-CPU-preview-v1.json).
 

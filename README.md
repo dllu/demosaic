@@ -61,8 +61,10 @@ DINOv3 additionally requires approved Hugging Face access via `HF_TOKEN`.
 See [experiment results](docs/experiments.md), [quality and noise diagnostics](docs/evaluation.md),
 [usage and data conventions](docs/usage.md), [research](docs/research.md),
 and the [completion evidence checklist](docs/requirements.md).
-The [Commons archive download](docs/commons-download.md) is running separately;
-active experiments retain frozen manifests.
+The [Commons archive download](docs/commons-download.md) stopped cleanly at its
+512GiB free-space reserve after adding95,347 files; active experiments retain
+frozen manifests. The [matched V72/V73 camera and crop interim review](docs/packed-isotropic-mixed16-matched-camera-interim.md)
+is available while their full photographic review runs; neither replaces V43.
 The [completed content audit](docs/commons-content-overlap.md) supplies future
 84,867-file training manifests with identified capture series quarantined.
 See [training pipeline work](docs/training-pipeline.md) for augmentation before

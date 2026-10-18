@@ -7,8 +7,11 @@ the full matched FP32 review is now running. The
 improves known/unseen measured-CFA PSNR by2.8302/2.1418dB over original V71
 at the same example budget, with all nine scene gains positive. It still
 trails Wiener7+Malvar and RawNIND substantially; selected native crops retain
-strong grain. Complete matched quality/native review remains pending.
-V43 remains the working reference.
+strong grain. The completed [matched GPU camera and native-crop interim review](packed-isotropic-mixed16-matched-camera-interim.md)
+finds only +0.01779/+0.03839dB DINO CFA gains on known/unseen scenes, with
+both arms still far below mature controls. It includes two exact-GT triplets
+per new model and matched GFX foliage/fence contexts. Full photographic,
+full-frame and color review remains pending; V43 remains the working reference.
 
 The [completed RAW-native 40k review](packed-isotropic-quarter-review.md)
 finds 2.061/2.188dB photo gains over the original8k models, with a small positive
