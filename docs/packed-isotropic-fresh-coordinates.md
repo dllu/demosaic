@@ -1,13 +1,13 @@
 # RAW feature coordinates from a fresh start
 
-The [CPU diagnostic](results/packed-isotropic-fresh-coordinate-CPU-launch-v1.json)
-is running on the same 16 frozen training batches used by the earlier
+The [completed CPU diagnostic](results/packed-isotropic-fresh-coordinate-CPU-v1.json)
+uses the same16 frozen training batches as the earlier
 [production-learning checks](packed-isotropic-production-learning.md).
-All three arms have completed their first 64 optimizer updates. Their starting
-parameter bytes and Torch RNG match, and every initial prediction equals the
-same bilinear baseline on all 16 batches. The first full-fixture comparison
-finds no broad improvement from either alternative coordinate map. The planned
-final256-update comparison remains pending; final results are not available.
+All three arms completed256 updates and discarded learned weights. Starting
+parameter bytes and Torch RNG match, and initial predictions equal the same
+bilinear baseline on all16 batches. Neither alternative input map gives a broad
+improvement: every final original-domain loss exceeds initialization, and all
+three arms worsen paired measured-CFA MSE.
 The separate [completed CUDA residual-unit diagnostic](packed-isotropic-residual-units.md)
 uses four actual GPU controls and does not replace this CPU experiment.
 
@@ -30,8 +30,10 @@ crop normalization statistics. It changes the signal features entering the neura
 the physical RAW skip and camera-RGB prediction/loss units remain fixed. The
 four variance features and 24 CFA/WB/matrix features retain their original values.
 There is no inverse transform at the output. The implementation is isolated in
-[the diagnostic script](../scripts/probe_raw_feature_coordinates.py); production
-model modules and recipes are unchanged.
+[the diagnostic script](../scripts/probe_raw_feature_coordinates.py). This
+experiment retained frozen model modules and changed no production recipe.
+The subsequent [checkpointed unit options](packed-isotropic-units.md) keep
+defaults1 and do not change this diagnostic or its source.
 
 ## Actual samples and optimization
 
@@ -44,7 +46,7 @@ training split and no held-out/GFX/protected-final optimization.
 Each no-DINO model is constructed fresh with seed 51 and the original width 96,
 six groups/eight blocks/local width 32. The three models begin with identical capacity
 and parameter bytes. Each uses fresh AdamW, LR 2e−4, weight decay .01 and gradient
-clip 1, with 256 planned updates. Those repeat the same 16 batches 16 times; no
+clip 1, with256 completed updates. Those repeat the same16 batches16 times; no
 production warmup, schedule, continuation or convergence claim follows.
 
 The original domain losses remain in physical units. Synthetic reconstruction
@@ -54,7 +56,32 @@ existing coarse loss. A low-ISO reference retains noise and is not exact RGB GT.
 Whole-fixture losses/MSE are measured at 0, 64, 128 and 256 updates, with descriptive
 batch means per domain. These training errors do not measure generalization.
 
-## Interim 64-update comparison
+## Completed256-update result
+
+Each cell is **original-domain loss / MSE**, divided by the common initial
+full-fixture value. Lower is better; these are training errors.
+
+| Input coordinates | Commons/procedural | Native RAW synthetic | Paired measured CFA |
+| --- | --- | --- | --- |
+| Original RAW | 1.05540 / .94112 | 1.13319 / .98223 | 1.13536 / 1.10534 |
+| RAW ×32 | 1.07844 / .90006 | 1.16763 / 1.02082 | 1.24715 / 1.10929 |
+| Noise companding | 1.06916 / .97295 | 1.11437 / .99089 | 1.22940 / 1.09693 |
+
+Gain32 lowers Commons MSE more, but worsens native and paired MSE against the
+initial prediction. Companding offers no broad loss/MSE advantage. These fixed
+observations, constant LR and short horizon do not establish convergence or
+generalization, and no input-only map is adopted from this result.
+
+Independent replay verifies768 ordered finite training records, all72 domain
+mean reductions with `math.fsum`,19 inputs and42 guards. All852 Adam states
+per arm are finite at256, original batch fingerprints are unchanged, CUDA was
+never initialized, and the exact CPU owner exited. Common initial model SHA256
+is`ed1fdca69f4568ffc4c687db6f6677703c8f1b8203353975dd56476f74cc378d`;
+Torch RNG SHA256 is`9e2d4112a0b8384c304c4c7a38b5b2c11ddadd7b1d88a68b1920c4c6abed80c0`.
+The [launch plan](results/packed-isotropic-fresh-coordinate-CPU-launch-v1.json)
+and interim64 evidence remain unchanged.
+
+## Archived interim64 comparison
 
 The [independently audited interim receipt](results/packed-isotropic-fresh-coordinate-CPU-interim64-v1.json)
 retains immutable copies of the evaluation curves and first 192 update records.
@@ -81,9 +108,9 @@ all update/mode/observation ordering and finite losses/norms, and recomputes all
 Initial case losses/MSE are identical across arms; the original worker's actual
 all-batch bilinear equality checks and common model/RNG digests remain recorded.
 
-The planned diagnostic continues unchanged to 256 updates, subject to yielding
-to the queued owned reviews. This interim result supports no production
-coordinate-map change or new quality model.
+The diagnostic subsequently completed its original256 updates, yielding to
+owned review/timing jobs as planned. Neither the interim nor the final result
+supports a production input-coordinate change or a new quality model.
 
 ## Execution checks and scheduling
 

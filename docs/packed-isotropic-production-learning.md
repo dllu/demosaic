@@ -168,13 +168,12 @@ final scenes or promote a model automatically. The original8k report stays intac
 Private review status:
 `/mnt/external/demosaic/runs/packed-isotropic-quarter-review-workflow-v1.json`.
 
-A separate [fresh input-coordinate CPU diagnostic](packed-isotropic-fresh-coordinates.md)
-now tests internal RAW feature scaling from identical fresh weights and a common
-initial bilinear prediction. It reuses the same16 training observations and
-discards all learned states. Its [64-update interim comparison](results/packed-isotropic-fresh-coordinate-CPU-interim64-v1.json)
-finds no broad coordinate-map improvement; final results remain pending.
-It yields CPU computation during owned reviews/timing and continues separately
-after those owners exit; it does not change the matched trials.
+The [completed fresh input-coordinate CPU diagnostic](packed-isotropic-fresh-coordinates.md)
+tests256 updates from identical fresh weights and a common initial bilinear
+prediction on the same16 training observations. Every final original-domain
+loss exceeds initialization and paired MSE worsens for all three maps. It
+discards learned states, preserves its interim64 evidence, and changes no
+matched quality trial. No input-only map is adopted.
 
 The [completed four-arm CUDA residual-unit diagnostic](packed-isotropic-residual-units.md)
 adds a fixed1/32 scale on the learned residual to the input gain32 arm. This
