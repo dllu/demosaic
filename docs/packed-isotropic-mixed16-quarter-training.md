@@ -38,6 +38,17 @@ across the pair, including403 older RAW observations per arm. These completion
 checks remain pending. An exited owner or elapsed time alone never authorizes
 a restart. The controller stops on failure and does not extend beyond10k.
 
+The [first no-DINO 4k archive CPU audit](results/mixed16-quarter-no-dino4k-state-CPU-v1.json)
+passes at 64,000 examples while training continues. All 852 model tensors,
+852 EMA tensors and 852 Adam states are finite. Every Adam counter is 4,000,
+and LR is the original schedule's `0.00019653544138946785`. Portable CPU
+loading reproduces every EMA tensor exactly. All 163 logged macro rows through
+4k have the expected example counts/LRs and 163 matching older source/noise
+observations. Both current and EMA tensor sets have changed since 2k. All
+22 inputs/56 guards and the preserved 2k archive remain unchanged. This audit
+checks saved state and portable EMA loading. The 10k boundaries, DINO
+continuation and complete quality review remain pending.
+
 The continuation driver and existing production mixed-loop integration checks
 pass26 targeted tests; Ruff passes. The separate
 [genuine-parent CPU restart preflight](mixed16-trained-state-restart-CPU.md)
