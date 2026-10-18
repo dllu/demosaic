@@ -23,6 +23,13 @@ The [saved-PNG native board reader](native-crop-review-boards.md) is ready to
 assemble the completed reports with their actual method labels and checkpoint
 hashes. Its replay used earlier completed reports and adds no10k quality result.
 
+Known/unseen-camera, full427-photo and analytic panels have now closed. The
+[final photo crop match](results/mixed16-quarter-photo-crops-final-match-v1.json)
+verifies that all16 previously inspected triplets exactly match the completed
+full-photo report, including unchanged PNG/metadata bytes. Full GFX, remaining
+camera/color checks, independent statistics and the final quality decision are
+still in progress.
+
 [Observed startup, plan/checkpoint hashes, exact owners and checks](results/packed-isotropic-mixed16-quarter-launch-v1.json).
 The live status is
 `/mnt/external/demosaic/runs/packed-isotropic-mixed16-quarter-workflow-v1.json`.
