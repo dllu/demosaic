@@ -59,7 +59,6 @@ def model_hash(model):
 
 @contextmanager
 def instrument(model, device):
-    """Attach observational hooks; never return replacements or retain tensors."""
     modules = {
         "DINO-context-inclusive": model.context,
         "DINO-backbone-nested": model.context.backbone,
@@ -67,6 +66,14 @@ def instrument(model, device):
         "RAW-head-inclusive": model.pretrained_rgb.raw_kernel,
         "RAW-coefficients-nested": model.pretrained_rgb.raw_kernel.coefficients,
     }
+    with instrument_modules(modules, device) as records:
+        yield records
+
+
+@contextmanager
+def instrument_modules(modules, device):
+    """Attach observational hooks; never return replacements or retain tensors."""
+    assert modules and all(isinstance(module, torch.nn.Module) for module in modules.values())
     records, stacks, handles = {name: [] for name in modules}, {name: [] for name in modules}, []
 
     def begin(name):

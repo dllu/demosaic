@@ -47,6 +47,9 @@ The [current trained-quality results](packed-isotropic-mixed16-V72-camera-CPU.md
 remain separate: residual grain and a substantial gap to RawNIND persist.
 The active matched training/review recipe stays unchanged. GPU profiling follows
 the serial quality review, rather than competing with its owned GPU work.
+The [bounded current FP32 profiler](mixed16-packed-inference-profile.md)
+is now queued behind the complete quarter review; both actual2k CPU
+instrumentation preflights and independent array/trace checks pass.
 
 Reproduce on a fresh output path:
 

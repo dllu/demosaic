@@ -1,0 +1,225 @@
+{
+  "status": "queued-bounded-mixed16-quarter-FP32-GPU-profiling-after-complete-quality-workflow",
+  "observed_unix": 1792306478.1143162,
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-packed-profile-after-quarter-v1/plan.json",
+    "sha256": "16b7cd94dfafecff170a823103c98f8dbed6b745df0824e33b5378ef18f195aa"
+  },
+  "controller": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-packed-profile-after-quarter-v1/controller.py",
+    "sha256": "c1b18b57f443c478a044491e6d766696cee256dac9caed0a580431244516db37"
+  },
+  "profiler": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-packed-profile-after-quarter-v1/tools/profile_packed_inference.py",
+    "sha256": "5aa45045d09efde27d8f016f0c8c74ef20a3de5639151743c13d23b4df5e395f"
+  },
+  "shared_instrumentation": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-packed-profile-after-quarter-v1/tools/profile_raw_kernel_inference.py",
+    "sha256": "731a415340d80b1e4868ee9a4e6671a205baa2ccbf5b5bc504fa35b0b05936f3"
+  },
+  "publication_driver": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-packed-profile-after-quarter-v1/publish.py",
+    "sha256": "2d63738be4f691050c7f8bbab5acaccb095c356323dda14f88def5aea9485261"
+  },
+  "live_status_path": "/mnt/external/demosaic/runs/mixed16-packed-profile-after-quarter-v1.json",
+  "status_observed": {
+    "controller": {
+      "pid": 2714232,
+      "created": 1792306477.92
+    },
+    "plan": {
+      "path": "/mnt/external/demosaic/benchmarks/mixed16-packed-profile-after-quarter-v1/plan.json",
+      "sha256": "16b7cd94dfafecff170a823103c98f8dbed6b745df0824e33b5378ef18f195aa"
+    },
+    "previous_owner": {
+      "pid": 2667688,
+      "created": 1792305841.61,
+      "driver_sha256": "1e8c4c4813ee0b884483426005978b25b029885e25a5b4a38b17238fe54dbf7f"
+    },
+    "completed": [],
+    "status": "waiting-for-exact-quarter-quality-owner-exit-no-GPU-profiling",
+    "updated_unix": 1792306478.032696
+  },
+  "review_predecessor_observed_alive": {
+    "pid": 2667688,
+    "created": 1792305841.61,
+    "driver_sha256": "1e8c4c4813ee0b884483426005978b25b029885e25a5b4a38b17238fe54dbf7f"
+  },
+  "profile_owner_observed_alive_with_zero_children": {
+    "pid": 2714232,
+    "created": 1792306477.92
+  },
+  "CPU_preflights": [
+    {
+      "arm": "no-dino",
+      "report": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-packed-profile-CPU-v1/no-dino/result.json",
+        "sha256": "6bef69a06efc564632b8b7d22fbf9058fd778b964eef1ed17f6d456437e883cb"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-mixed16-v72-step2000.pt",
+        "sha256": "8d67375e2169adb88f7dcdafd253e23642eb0d87b1dc2d79416cb0f22320416a",
+        "step": 2000,
+        "model_config": {
+          "restoration_backbone": "packed-isotropic",
+          "width": 96,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": false,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "bottleneck",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": false,
+          "physical_anchors": false,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": false,
+          "adc_cfa_projection": false,
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 32,
+          "isotropic_residual_scale": 0.03125
+        },
+        "weights": "EMA"
+      },
+      "named_branches": 13,
+      "hooked_unhooked_traced_RGB_bitwise_equal": true,
+      "model_and_actual_DINO_state_unchanged": true,
+      "CPU_and_CUDA_RNG_unchanged": true,
+      "CUDA_initialized": false,
+      "genuine_CUDA_trace_events": 0
+    },
+    {
+      "arm": "dino",
+      "report": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-packed-profile-CPU-v1/dino/result.json",
+        "sha256": "dc9e17291cc983cdde1385048e934434320dc539445adb482a83c082999d1e9d"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-packed-isotropic-mixed16-v73-step2000.pt",
+        "sha256": "43c10f2a0af38761f9418f19c725edc4129284e76b5b2da89f66c184d1f643e1",
+        "step": 2000,
+        "model_config": {
+          "restoration_backbone": "packed-isotropic",
+          "width": 96,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "packed-convnext",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": false,
+          "physical_anchors": false,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": false,
+          "adc_cfa_projection": false,
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 32,
+          "isotropic_residual_scale": 0.03125
+        },
+        "weights": "EMA"
+      },
+      "named_branches": 15,
+      "hooked_unhooked_traced_RGB_bitwise_equal": true,
+      "model_and_actual_DINO_state_unchanged": true,
+      "CPU_and_CUDA_RNG_unchanged": true,
+      "CUDA_initialized": false,
+      "genuine_CUDA_trace_events": 0
+    }
+  ],
+  "independent_CPU_audit": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-packed-profile-CPU-v1/audit.json",
+    "sha256": "8786f3b672cc3a7686c323d5a42c0f74ee789ff559a6523e54cfde4785f42517"
+  },
+  "unchanged_input_files": 5,
+  "unchanged_source_guards": 52,
+  "validation": {
+    "focused_tests_passed": 20,
+    "ruff_passed": true
+  },
+  "GPU_profile_complete": false,
+  "optimization_adopted": false,
+  "scope": "Two unchanged actual10k/160k-example endpoints, serial IEEE FP32/native512/B4/channels-last. Three warmups, five synchronized unhooked samples, five hooked samples and one operator trace. Wait for exact complete numerical-quality controller/final child exit and independent completed training-boundary validator. CPU preflights verify instrumentation only. No optimization, compilation, new quality inference, training, production change or promotion; native manual review remains required. Inclusive ranges overlap; transfer/tiling/blending/decode/encode excluded. Never infer a GPU bottleneck from CPU timings or MAC counts."
+}
