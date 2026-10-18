@@ -1,0 +1,141 @@
+{
+  "status": "verified-completed-mixed16-pair-receipts-403-logged-observations-and-live-quality-handoff",
+  "checker": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-quarter-completed-training-CPU-v1/check.py",
+    "sha256": "070d5e74cdcf9f5ceededbd0376283e0f00280fad8726a9d90b71d63a4dd62c7"
+  },
+  "training": {
+    "path": "/mnt/external/demosaic/runs/packed-isotropic-mixed16-quarter-workflow-v1.json",
+    "sha256": "990c943d58af8572b48fd7c305a08e28b336955d67d724cf52fd758d80c8a708"
+  },
+  "independent_boundary": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-mixed16-quarter-review-workflow-v1/training-audit.json",
+    "sha256": "2356c8f713a6b1e66c4f7827068c0a8f6e809ef2d9e1d641af0ce5e2ab91caff"
+  },
+  "checkpoints": [
+    {
+      "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-mixed16-v72-step10000.pt",
+      "sha256": "d6e3bc6d98b1ffc294ac651c731636ef4072bef284925f357b690b78cc7fa9c1",
+      "arm": "no-dino",
+      "step": 10000,
+      "data_steps": 40000,
+      "example_draws": 160000,
+      "initialization": "fresh",
+      "continuation": "full-state-from-reviewed2k-on-original-schedule",
+      "kind": "joint-checkpoint",
+      "label": "V72-no-dino-mixed16-quarter160000examples"
+    },
+    {
+      "path": "/mnt/external/demosaic/models/dino-packed-isotropic-mixed16-v73-step10000.pt",
+      "sha256": "64c5649a41669aa7e5276094278f3debb96b55174871c493ca380bf68ee3759f",
+      "arm": "dino",
+      "step": 10000,
+      "data_steps": 40000,
+      "example_draws": 160000,
+      "initialization": "fresh",
+      "continuation": "full-state-from-reviewed2k-on-original-schedule",
+      "kind": "joint-checkpoint",
+      "label": "V73-dino-mixed16-quarter160000examples"
+    }
+  ],
+  "producer_receipts": [
+    {
+      "arm": "no-dino",
+      "receipt": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-mixed16-quarter-workflow-v1/finish-no-dino-result.json",
+        "sha256": "30853355e4bb0bbf5aee94ec60909f4347f87a51feaa11e57656741ca2a1b3ce"
+      },
+      "details": {
+        "owner": {
+          "pid": 2645905,
+          "created": 1792305192.6
+        },
+        "phase": "finish",
+        "arm": "no-dino",
+        "start_optimizer_step": 2000,
+        "end_optimizer_step": 10000,
+        "fresh": false,
+        "resume": {
+          "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-mixed16-v72-step2000.pt",
+          "sha256": "8d67375e2169adb88f7dcdafd253e23642eb0d87b1dc2d79416cb0f22320416a"
+        },
+        "initial_RAW_state_SHA256": "ed1fdca69f4568ffc4c687db6f6677703c8f1b8203353975dd56476f74cc378d",
+        "initial_Torch_RNG_SHA256": "9e2d4112a0b8384c304c4c7a38b5b2c11ddadd7b1d88a68b1920c4c6abed80c0",
+        "initial_Python_RNG_SHA256": "81ec39c2ac17521eff56925c632ca236922a13c353c876a7cf81a5d61d3ef411",
+        "actual_full_state_restore_verified_before_first_backward": true,
+        "first_physical_forward_batch": 4,
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/runs/no-dino-packed-isotropic-mixed16-v72-quarter/last.pt",
+          "sha256": "d6e3bc6d98b1ffc294ac651c731636ef4072bef284925f357b690b78cc7fa9c1"
+        },
+        "source_bundle_SHA256": "fabd0b781938e156a6dcf89fb429a0a0c7c727e9c1acdb38c434dd201a81ebae",
+        "finite_model_EMA_Adam_states": 852,
+        "all_Adam_steps": 10000,
+        "data_steps": 40000,
+        "example_draws": 160000,
+        "actual_prepared_source_groups": 32000,
+        "portable_FP32_max_abs": 0.0,
+        "portable_FP32_bitwise_equal": true,
+        "portable_checkpoint_hash": "d6e3bc6d98b1ffc294ac651c731636ef4072bef284925f357b690b78cc7fa9c1"
+      }
+    },
+    {
+      "arm": "dino",
+      "receipt": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-mixed16-quarter-workflow-v1/finish-dino-result.json",
+        "sha256": "798335f7993f17de0ec8957bc693c3d535acd4494e292306cc283d15eebe6652"
+      },
+      "details": {
+        "owner": {
+          "pid": 2884352,
+          "created": 1792313905.76
+        },
+        "phase": "finish",
+        "arm": "dino",
+        "start_optimizer_step": 2000,
+        "end_optimizer_step": 10000,
+        "fresh": false,
+        "resume": {
+          "path": "/mnt/external/demosaic/models/dino-packed-isotropic-mixed16-v73-step2000.pt",
+          "sha256": "43c10f2a0af38761f9418f19c725edc4129284e76b5b2da89f66c184d1f643e1"
+        },
+        "initial_RAW_state_SHA256": "ed1fdca69f4568ffc4c687db6f6677703c8f1b8203353975dd56476f74cc378d",
+        "initial_Torch_RNG_SHA256": "9e2d4112a0b8384c304c4c7a38b5b2c11ddadd7b1d88a68b1920c4c6abed80c0",
+        "initial_Python_RNG_SHA256": "81ec39c2ac17521eff56925c632ca236922a13c353c876a7cf81a5d61d3ef411",
+        "DINO_SHA256": "1d679a021c6c26b5a610281aff421afe8ec33ff0e18dc029c8da736eade9cc36",
+        "actual_full_state_restore_verified_before_first_backward": true,
+        "first_physical_forward_batch": 4,
+        "genuine_DINO_unchanged_and_gradient_free": true,
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/runs/dino-packed-isotropic-mixed16-v73-quarter/last.pt",
+          "sha256": "64c5649a41669aa7e5276094278f3debb96b55174871c493ca380bf68ee3759f"
+        },
+        "source_bundle_SHA256": "fabd0b781938e156a6dcf89fb429a0a0c7c727e9c1acdb38c434dd201a81ebae",
+        "finite_model_EMA_Adam_states": 863,
+        "all_Adam_steps": 10000,
+        "data_steps": 40000,
+        "example_draws": 160000,
+        "actual_prepared_source_groups": 32000,
+        "portable_FP32_max_abs": 0.0,
+        "portable_FP32_bitwise_equal": true,
+        "portable_checkpoint_hash": "64c5649a41669aa7e5276094278f3debb96b55174871c493ca380bf68ee3759f"
+      }
+    }
+  ],
+  "logged_pair_rows_equal": 403,
+  "older_source_noise_overlaps_per_arm": [
+    403,
+    403
+  ],
+  "first16_resumed_pair_inputs_equal": true,
+  "quality_before": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-quarter-completed-training-CPU-v1/quality-observed-before.json",
+    "sha256": "2bc64da7dc7954d3b5e2f1e43a58e39841e5033be06e4754239a0ba6c0a2da35"
+  },
+  "quality_after": {
+    "path": "/mnt/external/demosaic/benchmarks/mixed16-quarter-completed-training-CPU-v1/quality-observed-after.json",
+    "sha256": "2bc64da7dc7954d3b5e2f1e43a58e39841e5033be06e4754239a0ba6c0a2da35"
+  },
+  "torch_imported": false,
+  "scope": "This checker independently rehashes completion artifacts and compares all403 logged pair/source witnesses. Saved tensor finiteness/restoration and portable output claims are from the verified producer and separate frozen review boundary receipts, not recomputed here. No new model inference, CUDA, training, quality score or promotion. Full numerical/native quality review is running."
+}

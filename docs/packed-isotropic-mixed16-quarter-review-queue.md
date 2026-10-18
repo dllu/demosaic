@@ -1,9 +1,11 @@
 # Queued mixed16 review at160,000 examples
 
-The complete review is queued behind the exact
-[running continuation](packed-isotropic-mixed16-quarter-training.md).
-It currently waits without inference or child processes. Training and the
-future review remain incomplete; neither checkpoint is promoted.
+The complete review has started after both
+[continuations finished](packed-isotropic-mixed16-quarter-training.md) at10k /
+160,000 examples and their exact owners exited. The independent full-state,
+source and schedule boundary gate passed; the first stage is known-camera
+evaluation. Quality review remains incomplete and neither checkpoint is promoted.
+The requirements below describe the preserved execution plan.
 
 [Frozen plan, exact owners, executed sources and CPU preflight](results/packed-isotropic-mixed16-quarter-review-queue-v1.json).
 Live status:

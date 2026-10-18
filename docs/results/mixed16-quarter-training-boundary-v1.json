@@ -1,0 +1,98 @@
+{
+  "status": "completed-independent-mixed16-quarter-full-state-source-schedule-boundary-audit",
+  "training": {
+    "path": "/mnt/external/demosaic/runs/packed-isotropic-mixed16-quarter-workflow-v1.json",
+    "sha256": "990c943d58af8572b48fd7c305a08e28b336955d67d724cf52fd758d80c8a708"
+  },
+  "checkpoints": [
+    {
+      "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-mixed16-v72-step10000.pt",
+      "sha256": "d6e3bc6d98b1ffc294ac651c731636ef4072bef284925f357b690b78cc7fa9c1",
+      "arm": "no-dino",
+      "step": 10000,
+      "data_steps": 40000,
+      "example_draws": 160000,
+      "initialization": "fresh",
+      "continuation": "full-state-from-reviewed2k-on-original-schedule",
+      "kind": "joint-checkpoint",
+      "label": "V72-no-dino-mixed16-quarter160000examples"
+    },
+    {
+      "path": "/mnt/external/demosaic/models/dino-packed-isotropic-mixed16-v73-step10000.pt",
+      "sha256": "64c5649a41669aa7e5276094278f3debb96b55174871c493ca380bf68ee3759f",
+      "arm": "dino",
+      "step": 10000,
+      "data_steps": 40000,
+      "example_draws": 160000,
+      "initialization": "fresh",
+      "continuation": "full-state-from-reviewed2k-on-original-schedule",
+      "kind": "joint-checkpoint",
+      "label": "V73-dino-mixed16-quarter160000examples"
+    }
+  ],
+  "evidence": [
+    {
+      "arm": "no-dino",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-mixed16-v72-step10000.pt",
+        "sha256": "d6e3bc6d98b1ffc294ac651c731636ef4072bef284925f357b690b78cc7fa9c1"
+      },
+      "result": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-mixed16-quarter-workflow-v1/finish-no-dino-result.json",
+        "sha256": "30853355e4bb0bbf5aee94ec60909f4347f87a51feaa11e57656741ca2a1b3ce"
+      },
+      "actual_restoration": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-mixed16-quarter-workflow-v1/no-dino-actual-restoration.json",
+        "sha256": "b5d81cc5c24e6bd67da32ecfac0589e0ad1208b6aae3db5a0a1425ed93f3255c"
+      },
+      "parent": {
+        "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-mixed16-v72-step2000.pt",
+        "sha256": "8d67375e2169adb88f7dcdafd253e23642eb0d87b1dc2d79416cb0f22320416a",
+        "arm": "no-dino",
+        "step": 2000,
+        "data_steps": 8000,
+        "example_draws": 32000,
+        "initialization": "fresh",
+        "kind": "joint-checkpoint",
+        "label": "V72-no-dino-mixed16-first32000examples"
+      },
+      "metrics": {
+        "path": "/mnt/external/demosaic/runs/no-dino-packed-isotropic-mixed16-v72-quarter/metrics.jsonl",
+        "sha256": "487ec5926864e0dbfb88d4a2235846934d4536e34e9158276a38b7ec4da43e26"
+      }
+    },
+    {
+      "arm": "dino",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-packed-isotropic-mixed16-v73-step10000.pt",
+        "sha256": "64c5649a41669aa7e5276094278f3debb96b55174871c493ca380bf68ee3759f"
+      },
+      "result": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-mixed16-quarter-workflow-v1/finish-dino-result.json",
+        "sha256": "798335f7993f17de0ec8957bc693c3d535acd4494e292306cc283d15eebe6652"
+      },
+      "actual_restoration": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-mixed16-quarter-workflow-v1/dino-actual-restoration.json",
+        "sha256": "7345a551e40e004dcaf5bf8402a237c23606ac83a857d3bd835cb012ed732eff"
+      },
+      "parent": {
+        "path": "/mnt/external/demosaic/models/dino-packed-isotropic-mixed16-v73-step2000.pt",
+        "sha256": "43c10f2a0af38761f9418f19c725edc4129284e76b5b2da89f66c184d1f643e1",
+        "arm": "dino",
+        "step": 2000,
+        "data_steps": 8000,
+        "example_draws": 32000,
+        "initialization": "fresh",
+        "kind": "joint-checkpoint",
+        "label": "V73-dino-mixed16-first32000examples"
+      },
+      "metrics": {
+        "path": "/mnt/external/demosaic/runs/dino-packed-isotropic-mixed16-v73-quarter/metrics.jsonl",
+        "sha256": "3093ea5de26b461f6a2a36da0278df2b50bc9b21e6b83afc8f4cac1011e9ee80"
+      }
+    }
+  ],
+  "actual_model_Adam_global_RNG_and_EMA_restoration_verified": true,
+  "all403_logged_mixed_groups_LR_examples_equal": true,
+  "first16_resumed_original_inputs_equal": true
+}
