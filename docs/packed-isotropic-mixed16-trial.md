@@ -48,3 +48,35 @@ noisy/denoised/exact-synthetic-GT crop triplets per model, and standing GFX
 foliage/fence comparisons with the ISO100 capture labeled an independent
 qualitative reference. There is no automatic extension, protected-final scoring
 or promotion. Existing V43 README examples remain the working reference.
+
+The [frozen quality-review queue](results/packed-isotropic-mixed16-review-queue-v1.json)
+now waits for the exact training controller and final child to exit successfully.
+Its independent preflight rechecked both immutable prefix states and their
+source bundles, verified38 input files and181 frozen files, and refused to
+release inference while training remained live. The implementation has59
+focused passing CPU tests. This is preparation evidence, with no new quality
+result yet.
+
+Primary panels will recompute six checkpoint models in IEEE FP32: V72/V73,
+working V43, mature V63, and original V71/V70 at8,000 B4 updates. The latter
+controls saw the same32,000 examples as the new2,000 effective16 updates;
+the candidate changes units, precision and optimizer grouping together.
+Two observed-CFA RawNIND adapters and three classical methods complete the
+11-method panels:792 known-camera,990 unseen-camera and136,444
+photographic/procedural observation records. The final boundary audit also
+checks82 logged original V71 observation hashes/domains against the new data
+steps, rather than equating optimizer-step numbers across batch sizes.
+
+Auxiliary panels retain V72/V73 and V43/V63:2,240 analytic records, six full
+GFX restorations including RawNIND with12 RGB16 exports, three cached cameras,
+128 selected CPU color predictions and4,704 fresh hue-grid predictions. The
+FP32 hue run does not reuse earlier FP16 predictions. The statistics include
+13 model comparisons per primary panel,156 metric comparisons and117 fixed
+source-cohort sensitivities. These source bootstraps do not measure training
+repeat uncertainty or certify scene independence.
+
+The queue saves native160-pixel triplets and checks source/ROI, noise,
+checkpoint hashes, exposure, unchanged noisy/reference panels and RGB16
+exports. Full-frame timings will be single shared-machine observations.
+Actual visual inspection and the quality decision remain subsequent work;
+successful automation alone cannot promote these models.

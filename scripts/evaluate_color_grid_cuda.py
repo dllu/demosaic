@@ -220,8 +220,15 @@ def evaluate_records(
     reuse_report=None,
     reuse_audit=None,
     reuse_only=False,
+    precision="float16",
 ):
     """Evaluate explicitly validated records; callers validate their actual owner."""
+    if precision not in ("float16", "float32"):
+        raise ValueError("Color-grid precision must be float16 or float32")
+    if precision != "float16" and (
+        reuse_report is not None or reuse_audit is not None or reuse_only
+    ):
+        raise ValueError("Verified array reuse currently requires float16 joint computation")
     plan = read(inputs)
     validate(plan)
     output = writable_path(output)
@@ -272,7 +279,7 @@ def evaluate_records(
         else {k: reuse[k] for k in ["report", "report_sha256", "case_audit", "case_audit_sha256"]},
         "reused_model_index_in_previous_report": matches,
         "scope": plan["scope"],
-        "runtime": "New inference: CUDA native256/B1, jointFP16/physicalFP32, authorsRAW IEEEFP32. Reused exact-weight/source/observation F32 arrays keep their previous precision. Reuse-only uses CPU and no inference. No new observations, output correction or training.",
+        "runtime": f"New inference: CUDA native256/B1, joint{precision}/physicalFP32, authorsRAW IEEEFP32. Reused exact-weight/source/observation F32 arrays keep their previous precision. Reuse-only uses CPU and no inference. No new observations, output correction or training.",
         "input_loading": "Verify/read each observation once into CPU memory; reuse it across methods and leave clean targets on CPU.",
     }
     (output / "plan.json").write_text(json.dumps(execution, indent=2) + "\n")
@@ -292,7 +299,7 @@ def evaluate_records(
                 step=state["step"],
                 label=record["arm"],
                 model_config=model.config.to_dict(),
-                compute_precision="float16, physicalFP32",
+                compute_precision=f"{precision}, physicalFP32",
                 memory_format="channels_last",
             )
             assert record.get("initialization") in (None, "fresh")
@@ -330,7 +337,7 @@ def evaluate_records(
                     k: cpu[k].to("cuda") for k in ["packed", "variance", "colors", "wb", "matrix"]
                 }
                 model.set_noise(condition["shot"], condition["read"])
-                with amp_context("cuda", dtype="float16"):
+                with amp_context("cuda", dtype=precision):
                     p = model(
                         batch["packed"],
                         batch["variance"],

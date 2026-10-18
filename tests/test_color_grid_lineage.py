@@ -69,3 +69,26 @@ def test_explicit_fresh_candidate_requires_absent_initializer_and_exact_boundary
         module.check_joint_lineage(
             {"step": step, "config": {}}, "parent", "parent", step, fresh=True
         )
+
+
+def test_fp32_color_grid_cannot_silently_reuse_half_precision_predictions():
+    module = script()
+    for options in [{"reuse_report": "old"}, {"reuse_audit": "old"}, {"reuse_only": True}]:
+        with pytest.raises(ValueError, match="requires float16"):
+            module.evaluate_records(
+                "unused", "unused", "unused", [], "parent", precision="float32", **options
+            )
+
+
+def test_explicit_fp32_grid_preserves_inference_scope_before_input_loading(monkeypatch):
+    module = script()
+
+    def stop(path):
+        assert torch.is_inference_mode_enabled() and not torch.is_grad_enabled()
+        raise RuntimeError("input boundary")
+
+    monkeypatch.setattr(module, "read", stop)
+    with torch.enable_grad():
+        with pytest.raises(RuntimeError, match="input boundary"):
+            module.evaluate_records("unused", "unused", "unused", [], "parent", precision="float32")
+        assert torch.is_grad_enabled() and not torch.is_inference_mode_enabled()

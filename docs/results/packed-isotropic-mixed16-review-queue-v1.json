@@ -1,0 +1,93 @@
+{
+  "status": "queued-mixed16-quality-review-awaiting-training-exit-no-new-quality-results",
+  "recorded_UTC": "2026-10-18T03:45:02.522870+00:00",
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-mixed16-first32000-review-workflow-v1/plan.json",
+    "sha256": "77435a0e0f3b255a52751c4caaaecc4c9cef2e969730af1c12288d9874a1841d"
+  },
+  "controller": {
+    "pid": 2362748,
+    "created": 1792295060.93,
+    "driver_sha256": "1e8c4c4813ee0b884483426005978b25b029885e25a5b4a38b17238fe54dbf7f"
+  },
+  "workflow": {
+    "path": "/mnt/external/demosaic/runs/packed-isotropic-mixed16-first32000-review-workflow-v1.json",
+    "sha256": "6fe43d4c9d4c48104d1146b57e1250c97e842b9076bf911b1247a6809180bb7e"
+  },
+  "previous_training_owner": {
+    "pid": 2339549,
+    "created": 1792293324.95
+  },
+  "training_plan": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-mixed16-first32000-workflow-v1/plan.json",
+    "sha256": "f0a7ee3e9073033409b52e6775c61ab4474e68f81f5d7fe93c31c8f866cd8e1d"
+  },
+  "training_snapshot": {
+    "status": "running-mixed16-finish",
+    "arm": "no-dino",
+    "last_logged_no_dino_optimizer_step": 1550,
+    "example_draws": 24800
+  },
+  "independent_preflight": {
+    "review_inputs_verified": 38,
+    "review_frozen_files_verified": 181,
+    "training_inputs_verified": 11,
+    "training_frozen_files_verified": 53,
+    "prefix_checks": [
+      {
+        "arm": "no-dino",
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-mixed16-v72-step12.pt",
+          "sha256": "a5e00b02c24e383c41c0ef2e6e3ac41e0c51a5872edc85d319cb4e0ba4731d30"
+        },
+        "result": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-mixed16-first32000-workflow-v1/prefix-no-dino-result.json",
+          "sha256": "d355c1f1bdd04aded50cc61d8a7c1da0fad6a02d62dd5cdea17d1cc429a36b9b"
+        },
+        "source_bundle_sha256": "fabd0b781938e156a6dcf89fb429a0a0c7c727e9c1acdb38c434dd201a81ebae",
+        "finite_model_EMA_Adam_states": 852,
+        "actual_source_groups": 48,
+        "portable_FP32_bitwise_equal": true,
+        "independent_recipe_state_and_owner_exit_checks_passed": true
+      },
+      {
+        "arm": "dino",
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/models/dino-packed-isotropic-mixed16-v73-step12.pt",
+          "sha256": "b9cb5736a40fb8660122a8667642c9cada987b11a878ad5e16834048b9ca6958"
+        },
+        "result": {
+          "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-mixed16-first32000-workflow-v1/prefix-dino-result.json",
+          "sha256": "1c65de178a09047ccf901b3774e09ad53580b1f8dbe883caf95af36fcee59f36"
+        },
+        "source_bundle_sha256": "fabd0b781938e156a6dcf89fb429a0a0c7c727e9c1acdb38c434dd201a81ebae",
+        "finite_model_EMA_Adam_states": 863,
+        "actual_source_groups": 48,
+        "portable_FP32_bitwise_equal": true,
+        "independent_recipe_state_and_owner_exit_checks_passed": true
+      }
+    ],
+    "live_training_refusal": "Both mixed16 training boundaries must complete before review",
+    "all_generated_primary_calls_FP32": true,
+    "no_quality_output_directories_yet": true,
+    "CUDA_initialized": false,
+    "focused_tests_passed": 59
+  },
+  "planned_coverage": {
+    "primary_methods": 11,
+    "primary_checkpoints": 6,
+    "known_records": 792,
+    "unseen_records": 990,
+    "full427_plus16procedural_records": 136444,
+    "analytic_records": 2240,
+    "GFX_full_frames": 6,
+    "GFX_RGB16_exports": 12,
+    "selected_CPU_color_predictions": 128,
+    "fresh_hue_predictions": 4704,
+    "hue_reused_FP16_arrays": 0,
+    "model_comparison_metrics": 156,
+    "classical_control_witnesses": 39,
+    "fixed_source_sensitivity_metrics": 117
+  },
+  "scope": "Preparation/launch receipt only. No photographic quality, convergence, full-frame speed result or promotion. Evaluation waits for successful matched2k optimizer/32k example training completion and exact controller/final-child exit, then independently validates actual prefix/resume/final state/source/schedule lineage. Original RAW8k controls are recomputed atFP32 at same example budget; candidate changes multiple factors versus those controls. Source bootstrap is not training-repeat uncertainty or certified scene independence. Native100% triplets and manual GFX foliage/fence/sky/building review remain required. Protected-final remains closed."
+}
