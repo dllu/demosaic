@@ -6,6 +6,7 @@ import math
 import random
 import time
 from contextlib import contextmanager, nullcontext
+from functools import partial
 from pathlib import Path
 
 import psutil
@@ -18,6 +19,7 @@ from .color import render
 from .data import CleanDataset, degrade, validate_flat_chroma_stops
 from .losses import psnr, reconstruction_loss
 from .model import JointDemosaic, ModelConfig
+from .optimizer_batches import backward_groups, batch_layout, optimizer_batches
 from .paired_training import PairedDataset, paired_reconstruction_loss, paired_step
 from .precision import amp_context, ieee_fp32
 from .raw_clean import RawCleanDataset, degrade_raw_clean, raw_clean_step
@@ -195,6 +197,30 @@ def selected_batches(loaders, first, last, seed, paired_fraction, raw_clean_frac
         yield step, domain, next(iterators[domain])
 
 
+def prepare_training_batch(data_step, domain, clean, *, model, device, config, seed):
+    """Preserve the original source-step noise stream before any batch grouping."""
+    with data_random_context(device, seed, data_step, config.get("data_seed_per_step", False)):
+        if domain == "paired":
+            return {key: value.to(device) for key, value in clean.items()}
+        if domain == "native":
+            return degrade_raw_clean(
+                {key: value.to(device) for key, value in clean.items()},
+                reconstruct_highlights=config.get("reconstruct_highlights", False),
+                preserve_negative_read_noise=config.get("preserve_negative_read_noise", False),
+                noise_free_fraction=config.get("noise_free_fraction", 0.0),
+            )
+        if domain != "commons":
+            raise ValueError("Unknown training domain")
+        return degrade(
+            clean["rgb"].to(device),
+            reconstruct_highlights=config.get("reconstruct_highlights", False),
+            preserve_negative_read_noise=config.get("preserve_negative_read_noise", False),
+            physical_fp32=model.config.physical_fp32,
+            noise_free_fraction=config.get("noise_free_fraction", 0.0),
+            broad_camera=config.get("broad_camera", False),
+        )
+
+
 def expand_stem(weights, source_config, model):
     """Preserve channel roles while adding zero-weight conditioning features."""
     source, target = ModelConfig.from_checkpoint(source_config), model.config
@@ -239,6 +265,10 @@ def save_checkpoint(path, model, optimizer, ema, step, config, best):
         "cuda_rng": torch.cuda.get_rng_state_all() if torch.cuda.is_available() else [],
         "torch_version": str(torch.__version__),
     }
+    groups = config.get("optimizer_batch_groups", 1)
+    if groups > 1:
+        state["data_step"] = step * groups
+        state["example_draws"] = step * groups * config.get("batch_size", 4)
     path = writable_path(path)
     temporary = path.with_suffix(".tmp")
     torch.save(state, temporary)
@@ -249,6 +279,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     if resume and initialize:
         raise ValueError("Choose resume or initialize, not both")
     config = yaml.safe_load(Path(config_path).read_text())
+    groups, forward_groups = batch_layout(config)
     normalization_policy = config.get("normalization_augmentation", "none")
     if normalization_policy not in ("none", "center-half-mix-v1"):
         raise ValueError("Unknown normalization augmentation policy")
@@ -464,6 +495,19 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     first, best = 0, -math.inf
     if resume:
         state = resume_state
+        for key in ("optimizer_batch_groups", "optimizer_forward_groups"):
+            if state["config"].get(key, 1) != config.get(key, 1):
+                raise ValueError("Resume optimizer batch layout differs from checkpoint")
+        if groups > 1 and state.get("data_step") != state["step"] * groups:
+            raise ValueError("Resume source data-step counter differs from optimizer step")
+        if state["config"].get("batch_size", 4) != config.get("batch_size", 4):
+            raise ValueError("Resume source batch size differs from checkpoint")
+        if groups > 1 and state.get("example_draws") != (
+            state["step"] * groups * config.get("batch_size", 4)
+        ):
+            raise ValueError("Resume example-draw counter differs from optimizer step")
+        if state["config"].get("ema_decay", 0.999) != config.get("ema_decay", 0.999):
+            raise ValueError("Resume EMA decay differs from checkpoint")
         if state["config"].get("validation_protocol_sha256") != config.get(
             "validation_protocol_sha256"
         ):
@@ -561,12 +605,13 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         raise ValueError("Unknown data-worker start method")
     worker_options = {"multiprocessing_context": worker_start_method} if worker_start_method else {}
     last_step = min(steps, first + stop_after) if stop_after else steps
+    first_data, last_data = first * groups, last_step * groups
     loaders = {}
     loaders["commons"] = DataLoader(
         data,
         batch_size=batch_size,
         sampler=domain_indices(
-            "commons", first, last_step, batch_size, seed, paired_fraction, raw_clean_fraction
+            "commons", first_data, last_data, batch_size, seed, paired_fraction, raw_clean_fraction
         ),
         num_workers=workers,
         # Pinning duplicates memory on UMA; enable only if profiling justifies it.
@@ -582,8 +627,8 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             batch_size=batch_size,
             sampler=domain_indices(
                 "paired",
-                first,
-                last_step,
+                first_data,
+                last_data,
                 batch_size,
                 seed,
                 paired_fraction,
@@ -602,8 +647,8 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             batch_size=batch_size,
             sampler=domain_indices(
                 "native",
-                first,
-                last_step,
+                first_data,
+                last_data,
                 batch_size,
                 seed,
                 paired_fraction,
@@ -652,9 +697,12 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     started = time.perf_counter()
     checkpoint_interval = config.get("checkpoint_every", 500)
     amp = config.get("amp", True)
-    for step, domain, clean in selected_batches(
-        loaders, first, last_step, seed, paired_fraction, raw_clean_fraction
-    ):
+    prepare = partial(prepare_training_batch, model=model, device=device, config=config, seed=seed)
+    selected = selected_batches(
+        loaders, first_data, last_data, seed, paired_fraction, raw_clean_fraction
+    )
+    for step, selection in optimizer_batches(selected, groups):
+        data_step, domain, clean = selection[0]
         if step == first + 1 or step % 50 == 0:
             available_gb = psutil.virtual_memory().available / 1e9
             if available_gb < config.get("min_available_gb", 12):
@@ -669,79 +717,77 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         lr = config.get("lr", 2e-4) * warmup * (0.1 + 0.9 * (1 + math.cos(math.pi * progress)) / 2)
         set_learning_rate(optimizer, lr)
         model.train()
-        use_pair, use_native = domain == "paired", domain == "native"
-        with data_random_context(device, seed, step, config.get("data_seed_per_step", False)):
-            if use_pair:
-                batch = {k: v.to(device) for k, v in clean.items()}
-            elif use_native:
-                native = {k: v.to(device) for k, v in clean.items()}
-                batch = degrade_raw_clean(
-                    native,
-                    reconstruct_highlights=config.get("reconstruct_highlights", False),
-                    preserve_negative_read_noise=config.get("preserve_negative_read_noise", False),
-                    noise_free_fraction=config.get("noise_free_fraction", 0.0),
-                )
-            else:
-                batch = degrade(
-                    clean["rgb"].to(device),
-                    reconstruct_highlights=config.get("reconstruct_highlights", False),
-                    preserve_negative_read_noise=config.get("preserve_negative_read_noise", False),
-                    physical_fp32=model.config.physical_fp32,
-                    noise_free_fraction=config.get("noise_free_fraction", 0.0),
-                    broad_camera=config.get("broad_camera", False),
-                )
-        log_step = step == first + 1 or step % config.get("log_every", 25) == 0
-        fingerprint = (
-            batch_fingerprint(batch)
-            if log_step and config.get("trace_observations", False)
-            else None
-        )
         optimizer.zero_grad(set_to_none=True)
-        model.set_noise(batch["shot"], batch["read"])
-        forward_options = {"auxiliary": True}
+        log_step = step == first + 1 or step % config.get("log_every", 25) == 0
         normalization_mask = None
-        if normalization_policy != "none":
-            normalization_mask = normalization_augmentation_mask(
-                seed, step, len(batch["packed"]), device
+        if groups > 1:
+            loss, terms, grad_norm, observations = backward_groups(
+                model,
+                selection,
+                prepare,
+                config,
+                fingerprint=batch_fingerprint
+                if log_step and config.get("trace_observations", False)
+                else None,
             )
-            forward_options["normalization_mask"] = normalization_mask
-        with amp_context(device, amp or precision == "float32", dtype=precision):
-            prediction, auxiliary = model(
-                batch["packed"],
-                batch["variance"],
-                batch["colors"],
-                batch["wb"],
-                batch["matrix"],
-                **forward_options,
+            fingerprint = (
+                hashlib.sha256(json.dumps(observations, sort_keys=True).encode()).hexdigest()
+                if log_step and config.get("trace_observations", False)
+                else None
             )
-            if use_pair:
-                loss, terms = paired_reconstruction_loss(
-                    prediction, batch, auxiliary, multiscale_sensor_weight=multiscale_weight
+        else:
+            use_pair, use_native = domain == "paired", domain == "native"
+            batch = prepare(data_step, domain, clean)
+            fingerprint = (
+                batch_fingerprint(batch)
+                if log_step and config.get("trace_observations", False)
+                else None
+            )
+            model.set_noise(batch["shot"], batch["read"])
+            forward_options = {"auxiliary": True}
+            normalization_mask = None
+            if normalization_policy != "none":
+                normalization_mask = normalization_augmentation_mask(
+                    seed, step, len(batch["packed"]), device
                 )
-            else:
-                loss, terms = reconstruction_loss(
-                    prediction,
-                    batch,
-                    auxiliary,
-                    physical_fp32=model.config.physical_fp32,
-                    normalized_sensor_weight=config.get("normalized_sensor_weight", 0.0),
-                    multiscale_sensor_weight=multiscale_weight,
+                forward_options["normalization_mask"] = normalization_mask
+            with amp_context(device, amp or precision == "float32", dtype=precision):
+                prediction, auxiliary = model(
+                    batch["packed"],
+                    batch["variance"],
+                    batch["colors"],
+                    batch["wb"],
+                    batch["matrix"],
+                    **forward_options,
                 )
-        if not torch.isfinite(loss):
-            raise RuntimeError(f"Nonfinite loss at step {step}; last checkpoint retained")
-        with (
-            ieee_fp32()
-            if precision == "float32"
-            or model.refiner is not None
-            or model.coarse_refiner is not None
-            or model.pyramid_refiner is not None
-            or model.config.restoration_backbone in ("pretrained-rgb", "packed-isotropic")
-            else nullcontext()
-        ):
-            loss.backward()
-            grad_norm = torch.nn.utils.clip_grad_norm_(
-                model.parameters(), 1, error_if_nonfinite=True
-            )
+                if use_pair:
+                    loss, terms = paired_reconstruction_loss(
+                        prediction, batch, auxiliary, multiscale_sensor_weight=multiscale_weight
+                    )
+                else:
+                    loss, terms = reconstruction_loss(
+                        prediction,
+                        batch,
+                        auxiliary,
+                        physical_fp32=model.config.physical_fp32,
+                        normalized_sensor_weight=config.get("normalized_sensor_weight", 0.0),
+                        multiscale_sensor_weight=multiscale_weight,
+                    )
+            if not torch.isfinite(loss):
+                raise RuntimeError(f"Nonfinite loss at step {step}; last checkpoint retained")
+            with (
+                ieee_fp32()
+                if precision == "float32"
+                or model.refiner is not None
+                or model.coarse_refiner is not None
+                or model.pyramid_refiner is not None
+                or model.config.restoration_backbone in ("pretrained-rgb", "packed-isotropic")
+                else nullcontext()
+            ):
+                loss.backward()
+                grad_norm = torch.nn.utils.clip_grad_norm_(
+                    model.parameters(), 1, error_if_nonfinite=True
+                )
         optimizer.step()
         update_ema(model, ema, min(config.get("ema_decay", 0.999), (1 + step) / (10 + step)))
         if log_step:
@@ -753,13 +799,27 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 "grad_norm": float(grad_norm),
                 "seconds_per_step": (time.perf_counter() - started) / (step - first),
                 "cuda_gb": torch.cuda.max_memory_allocated() / 1e9 if device.type == "cuda" else 0,
-                "domain": "paired-RAW"
-                if use_pair
-                else "native-RAW-synthetic"
-                if use_native
-                else "synthetic",
+                "domain": "mixed"
+                if groups > 1
+                else (
+                    "paired-RAW"
+                    if use_pair
+                    else "native-RAW-synthetic"
+                    if use_native
+                    else "synthetic"
+                ),
                 **{key: value.item() for key, value in terms.items()},
             }
+            if groups > 1:
+                metrics.update(
+                    data_step_start=selection[0][0],
+                    data_step_end=selection[-1][0],
+                    example_draws=step * groups * batch_size,
+                    effective_batch_size=groups * batch_size,
+                    optimizer_batch_groups=groups,
+                    optimizer_forward_groups=forward_groups,
+                    source_groups=observations,
+                )
             if fingerprint is not None:
                 metrics["batch_sha256"] = fingerprint
             if normalization_mask is not None:

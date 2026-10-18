@@ -48,13 +48,12 @@ meaningful MSE reduction from initialization. The midpoint also favored B4 on
 Commons, so a short intermediate curve would have given a different ranking.
 This is one seed and64 fixed observations, without a held-out quality estimate.
 
-The production trainer currently chooses one domain per optimizer batch. The
-successful B16 probe joins four originally scheduled B4 groups, which can have
-different domains. A faithful full-data trial therefore needs mixed optimizer
-batches with the same source indices, per-group losses and degradation RNG.
-Its forward batch size or gradient accumulation should be timed separately;
-this probe supplies no throughput evidence. No ordinary B16 recipe is switched
-on the strength of this result.
+The successful B16 probe joins four originally scheduled B4 groups, which can
+have different domains. The [subsequent production implementation and execution
+sweep](mixed-optimizer-batches.md) preserve those indices, per-group losses and
+degradation RNG. B4 gradient accumulation is fastest for the same effective16.
+This learning probe itself supplies no throughput evidence, and no ordinary
+single-domain B16 recipe is switched on its strength.
 
 Four focused tests verify actual batch16 losses and nonzero trunk/head gradients
 against four accumulated batch4 calculations across synthetic/native/paired

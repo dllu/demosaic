@@ -1,0 +1,74 @@
+amp: true
+augmentation_downsample: 2
+batch_size: 4
+broad_camera: true
+channels_last: true
+checkpoint_every: 2000
+cpu_threads: 4
+data_seed_per_step: true
+device: cuda
+experiment_notes: Fresh mixed-domain effective B16 pilot motivated by completed training-only
+  batch/coordinate tests. Four consecutive original B4 source groups use identical
+  per-data-step domain schedule, global source indices, original group losses and
+  degradation RNG. Accumulate four B4 forwards then clip/Adam/EMA once, chosen by
+  actual IEEE FP32 channels_last no-DINO/DINO execution sweep. Gain32 neural RAW inputs/residual1/32,
+  IEEE FP32/no AMP or TF32, original seed51/core capacity and frozen40170 Commons/native128/paired32
+  sources; no new data or Gaussian/checkpoint initialization. Full640000-example horizon=40000
+  optimizer updates/160000 B4 source steps, warmup8000 examples=500 updates; first
+  quality gate32000 examples=2000 updates via stop-after. EMA cap .999**4 matches
+  the prior cap in example units approximately; original adaptive warmup retained.
+  Initial12 optimizer updates are a checked genuine prefix, then full-state resume
+  to2000 with unchanged recipe/schedule/source. Only DINO presence/fusion differs
+  between this matched pair. Compared with old V70/V71 this exploratory candidate
+  changes units, precision and mixed optimizer batching; it is not a single-factor
+  ablation against those models. No held-out/GFX/protected-final optimization, automatic
+  continuation/promotion or convergence claim. Full quality/native160px triplet and
+  real GFX foliage/fence review required.
+flat_fraction: 0.1
+log_every: 25
+lr: 0.0002
+manifest: /mnt/external/demosaic/audits/commons-bin4-frozen44732-v1/manifest.jsonl
+min_available_gb: 12
+model:
+  restoration_backbone: packed-isotropic
+  width: 96
+  isotropic_groups: 6
+  isotropic_blocks: 8
+  isotropic_local_width: 32
+  camera_conditioning: true
+  physical_fp32: true
+  dino: false
+  dino_feature_fusion: bottleneck
+  dino_model: facebook/dinov3-convnext-tiny-pretrain-lvd1689m
+  dino_revision: 10d30274b4d445111e2d5bf75ac93bbd94db274b
+  isotropic_raw_gain: 32
+  isotropic_residual_scale: 0.03125
+noise_free_fraction: 0.1
+paired_fraction: 0.25
+paired_manifest: /mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json
+paired_workers: 2
+patch_size: 256
+precision: float32
+preserve_negative_read_noise: true
+raw_clean_augmentation_downsample: 2
+raw_clean_fraction: 0.25
+raw_clean_manifest: /mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json
+raw_clean_workers: 2
+reconstruct_highlights: true
+run: /mnt/external/demosaic/runs/no-dino-packed-isotropic-mixed16-v72
+seed: 51
+steps: 40000
+synthetic_fraction: 0.2
+trace_observations: true
+val_batches: 4
+validation_images: 8
+validation_manifest: /mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl
+validation_protocol: configs/evaluation.yaml
+warmup_steps: 500
+worker_start_method: spawn
+workers: 4
+flat_chroma_stops: 8
+multiscale_sensor_weight: 0
+optimizer_batch_groups: 4
+optimizer_forward_groups: 1
+ema_decay: 0.996005996001
