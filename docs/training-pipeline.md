@@ -16,6 +16,11 @@ validation targets. The [RGB-pipeline sweep](current-pipeline-batch-sweep.md)
 found batch 32 only 1.3% faster than 16 while using roughly twice the CUDA allocation;
 the [later RAW-head sweep](raw-kernel-training-batch-sweep.md) also retained 16.
 
+An [opt-in deterministic execution policy](training-execution.md) now passes
+two fresh six-update CUDA replays across all three domains, including exact
+model/EMA/optimizer/RNG states. The throughput policy remains the default;
+execution settings and dataset additions need their own controlled measurements.
+
 A separate [normalization study and opt-in training augmentation](normalization-augmentation.md)
 addresses sensitivity to the region used for neural feature coordinates. It
 keeps RAW/targets fixed and leaves the geometry order intact. Its

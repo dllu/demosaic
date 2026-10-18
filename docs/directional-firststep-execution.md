@@ -85,8 +85,10 @@ The strict settings are a bundle; this is not an isolated test of each flag.
 Cold search time is recorded but is not steady throughput or a batch-size sweep.
 All exact owners/children have exited.
 
-Actual mixed-domain optimizer/EMA/RNG replay and throughput checks remain needed
-before adopting a future training policy. One batch cannot establish long-run
+The later [optional execution policy and mixed-domain checks](training-execution.md)
+complete exact six-update replays, matching strict 60-update states, CPU resume
+and warmed timing. Strict throughput is41.5% lower in that B16 fixture; the
+throughput policy stays default. This original one-batch check cannot establish long-run
 determinism, model quality or portability across software/hardware versions. No
 new quality trial or execution default follows automatically. Only owned serial
 children ran under24GiB CUDA allocation and40GiB available-RAM/128GiB root-space

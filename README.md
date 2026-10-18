@@ -78,6 +78,8 @@ finds+.278/.276dB photo gains but failed camera criteria and weak fine detail.
 All81 native triplets/125 cells are reviewed; neither model replaces V43.
 See [training pipeline work](docs/training-pipeline.md) for augmentation before
 the last reduction, selected-domain loading and the batch-size sweep.
+The [optional execution policy](docs/training-execution.md) adds verified mixed-domain
+replay and guards against changing execution settings on resume.
 The [packed detail review](docs/packed-detail-v40-v41-review.md) retains the
 full-resolution model after testing two native-detail variants.
 See the [V37 inference precision and timing review](docs/hidden-autocast-v42-review.md)

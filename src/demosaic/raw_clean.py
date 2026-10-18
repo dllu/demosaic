@@ -222,14 +222,31 @@ class RawCleanDataset(Dataset):
         self.seed = seed
         self.augmentation_downsample = augmentation_downsample
         self.scenes = {}
+        from .personal_admission import approved_personal_rows
         from .raw_admission import approved_public_rows
 
         public_rows = approved_public_rows(data)
+        personal_rows = approved_personal_rows(data)
         for row in data["rows"]:
             public = public_rows.get((row.get("id"), row.get("bin_factor")))
+            personal = personal_rows.get((row.get("id"), row.get("bin_factor")))
             valid_source = (
-                row.get("source_family") is None and row["scene"] in TRAINING_SCENES
-            ) or row == public
+                (
+                    row.get("source_family") is None
+                    and row["scene"] in TRAINING_SCENES
+                    and not any(
+                        key in row
+                        for key in (
+                            "permission",
+                            "personal_admission_sha256",
+                            "public_admission_sha256",
+                        )
+                    )
+                    and "original_path" not in row.get("source", {})
+                )
+                or row == public
+                or row == personal
+            )
             if (
                 row["split"] != "train"
                 or not valid_source

@@ -17,6 +17,7 @@ from torch.utils.data import DataLoader
 from .cfa import bilinear
 from .color import render
 from .data import CleanDataset, degrade, validate_flat_chroma_stops
+from .execution import require_resume_execution, training_execution, validate_training_execution
 from .losses import (
     psnr,
     reconstruction_loss,
@@ -316,6 +317,14 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     if resume and initialize:
         raise ValueError("Choose resume or initialize, not both")
     config = yaml.safe_load(Path(config_path).read_text())
+    policy = validate_training_execution(config.get("training_execution", "throughput-v1"))
+    config["training_execution"] = policy
+    with training_execution(policy, config.get("device", "cuda")) as runtime:
+        config["training_execution_runtime"] = runtime
+        return _train(config, resume=resume, initialize=initialize, stop_after=stop_after)
+
+
+def _train(config, *, resume=None, initialize=None, stop_after=None):
     objective = validate_reconstruction_objective(
         config.get("reconstruction_objective", "charbonnier-v1")
     )
@@ -442,12 +451,16 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
         )
     device = torch.device(config.get("device", "cuda"))
     torch.set_num_threads(config.get("cpu_threads", 4))
-    torch.set_float32_matmul_precision("high")
-    torch.backends.cudnn.benchmark = True
     seed = config.get("seed", 42)
     random.seed(seed)
     torch.manual_seed(seed)
     resume_state = torch.load(resume, map_location="cpu", weights_only=True) if resume else None
+    if resume_state:
+        require_resume_execution(
+            resume_state["config"],
+            config["training_execution"],
+            config["training_execution_runtime"],
+        )
     lineage_path = run / "initialization.json"
     if resume_state:
         lineage = resume_state["config"].get("initialized_from")
@@ -759,6 +772,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 "raw_clean_train_scenes": len(raw_clean_data) if raw_clean_data is not None else 0,
                 "raw_clean_fraction": raw_clean_fraction,
                 "compute_precision": precision,
+                "training_execution": config["training_execution"],
             }
         ),
         flush=True,

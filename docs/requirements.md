@@ -16,13 +16,18 @@ sampled observations and final RNG identities are verified separately.
 The [actual first-batch execution replay](directional-firststep-execution.md)
 matches all99 output/auxiliary/clipped-gradient tensors within/across two fresh
 processes under strict execution. Disabling benchmarking alone leaves14 gradient
-tensors different. This does not establish mixed-update/long-run determinism or
-identify the historical difference's cause; no training default changes.
+tensors different. The [optional training policy](training-execution.md) now
+passes exact mixed-domain six-update replay and CPU resume; both strict
+60-update final states and logged losses also match. Warmed B16 throughput is
+12.62 versus21.58 patches/s, so throughput stays the default. These checks do
+not establish long-run/platform determinism or explain the historical difference.
 The [new private RAW preparation](personal-native-quarantine.md) caches31 local
 sources and62 phase-binned targets.22 pass source clipping; source/overlap/scene
-review and72 independent FP64 code checks complete. All remain quarantine,
-outside the active128-capture dataset, pending pinned loader integration and a
-matched trained test. No private source pixels/capture metadata are published.
+review and72 independent FP64 code checks complete. Pinned loader integration
+now provides separate private150-capture/120-group extensions, preserving all128
+existing rows and32 exact legacy crop comparisons. Active recipes retain128
+captures; a matched trained data-benefit test remains outstanding. No private
+source pixels/capture metadata are published.
 
 The [guarded photometry pilot](guarded-input-cfa-gain.md) fails its fixed
 high-saturation screen and is closed without full427 continuation. All30 native

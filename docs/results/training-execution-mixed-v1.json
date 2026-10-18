@@ -1,0 +1,227 @@
+{
+  "status": "completed-optional-training-execution-and-mixed-domain-replay-and-throughput",
+  "default_policy": "throughput-v1",
+  "opt_in_policy": "deterministic-v1",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/training-execution-mixed-v1/plan.json",
+    "sha256": "2fe27448d4080c61766a63882d8f2b570893f438a167c7c58781ceff3f92ba0e"
+  },
+  "CPU_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/training-execution-mixed-v1/cpu-audit.json",
+    "sha256": "a072ae4234b5d5a53971f67297bf60727aef6a7bb55c0b0e753db922b8d49fb1"
+  },
+  "CUDA_six_update_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/training-execution-mixed-v1/cuda-audit.json",
+    "sha256": "660f7780dabb2680684377bee0b6698ad712643e337001ea88edb5acdd8f8b85"
+  },
+  "CUDA_strict60_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/training-execution-mixed-v1/strict60-audit.json",
+    "sha256": "d2f08a4a3de34d73baf8074f34f5fbbd837543c2b356b2e03ac75b1ad6dd4003"
+  },
+  "timing_summary": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/training-execution-mixed-v1/work/execution-throughput-v1/summary.json",
+    "sha256": "cf57d7718f6b6e6a2433ce19d730002d4d97b5db77cc043e3542a52cf2d72ca3"
+  },
+  "timing_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/training-execution-mixed-v1/work/execution-throughput-v1/plan.json",
+    "sha256": "90a60888994ce2ecf63a736923daecbbc34a51098726ab5743506151f34043cb"
+  },
+  "frozen_preflight_driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/training-execution-mixed-v1/work/scripts/preflight_training_execution.py",
+    "sha256": "90ac681fab6f0f3db3ed6206018de4cac0c8f25e3f60a805435ed92f0949c307"
+  },
+  "frozen_timing_driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/training-execution-mixed-v1/work/execution-throughput-v1/benchmark_execution_policies.py",
+    "sha256": "9e928df4bd2aaa1fb48c73415ea3a56555296a81a2d57963e6c300ff7eaaca92"
+  },
+  "frozen_implementation": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/training-execution-mixed-v1/work/src/demosaic/execution.py",
+      "sha256": "ddabc53dd01ff8792196aed5787c1dc0224940eeeefbde85188e093df50059fd"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/training-execution-mixed-v1/work/src/demosaic/train.py",
+      "sha256": "76511fb56c2b453c5c183e38bc99efc9705cf8a76deaf615df015a715b216458"
+    }
+  ],
+  "original_V78_first_six_observation_file": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/directional-interval-v78-v79-original4k-v1/control-sampled-observations.json",
+    "sha256": "df71de2442d8e1eb60099c0453ef2004a83c17e1fe30322e12d115950fa2684a"
+  },
+  "all_six_legacy_observations_equal_original": true,
+  "frozen_file_count": 228,
+  "actual_replays": {
+    "CPU": [
+      "four default updates exactly equal archived state",
+      "four strict updates exactly equal2+2 resume"
+    ],
+    "CUDA": [
+      "two fresh six-update actual mixed-domain processes with all input hashes exact",
+      "two fresh60-update strict final states and logged losses exact"
+    ]
+  },
+  "finite_states": {
+    "model": 99,
+    "EMA": 99,
+    "AdamW": 97
+  },
+  "strict_six_peak_CUDA_GiB": 7.334275245666504,
+  "timing": {
+    "batch_size": 16,
+    "warmup_updates_excluded_per_case": 15,
+    "measured_updates_per_case": 45,
+    "means_patches_per_second": {
+      "throughput-v1": 21.58034906346986,
+      "deterministic-v1": 12.624883175790348
+    },
+    "strict_fraction_of_throughput": 0.5850175610533159,
+    "results": [
+      {
+        "name": "throughput-0",
+        "policy": "throughput-v1",
+        "measured_seconds": 33.54485447402113,
+        "patches_per_second": 21.463798585193008,
+        "peak_CUDA_bytes": 9257002496,
+        "domains": {
+          "native-RAW-synthetic": 15,
+          "synthetic": 19,
+          "paired-RAW": 11
+        },
+        "whole_process_seconds": 81.70227951393463,
+        "before": {
+          "available_GiB": 65.15542984008789,
+          "load_average": [
+            5.677734375,
+            4.9609375,
+            4.03125
+          ]
+        },
+        "available_GiB_after": 66.24002075195312,
+        "config": {
+          "path": "/home/dllu/proj/demosaic/.cache/benchmarks/training-execution-mixed-v1/work/execution-throughput-v1/throughput-0/config.yaml",
+          "sha256": "d4e4fb228c9855809214f45fd15f369d96831a1845d055e72b56e21917c2d5c9"
+        },
+        "metrics": {
+          "path": "/home/dllu/proj/demosaic/.cache/benchmarks/training-execution-mixed-v1/work/execution-throughput-v1/throughput-0/run/metrics.jsonl",
+          "sha256": "9023f0ca47ed3ce7eefd2bbedd8d894192dfc6e23e3935fe9da3893ed4b73fbd"
+        },
+        "worker_result": {
+          "path": "/home/dllu/proj/demosaic/.cache/benchmarks/training-execution-mixed-v1/work/execution-throughput-v1/throughput-0/worker-result.json",
+          "sha256": "903ac093f653ea0edfa20d922f030d2d97701b235fb5fea4b3a0241d8660cc67"
+        }
+      },
+      {
+        "name": "strict-0",
+        "policy": "deterministic-v1",
+        "measured_seconds": 56.9148269740399,
+        "patches_per_second": 12.650482102465283,
+        "peak_CUDA_bytes": 7877894144,
+        "domains": {
+          "native-RAW-synthetic": 15,
+          "synthetic": 19,
+          "paired-RAW": 11
+        },
+        "whole_process_seconds": 98.99164485302754,
+        "before": {
+          "available_GiB": 66.23865127563477,
+          "load_average": [
+            6.7158203125,
+            5.470703125,
+            4.287109375
+          ]
+        },
+        "available_GiB_after": 67.26401901245117,
+        "config": {
+          "path": "/home/dllu/proj/demosaic/.cache/benchmarks/training-execution-mixed-v1/work/execution-throughput-v1/strict-0/config.yaml",
+          "sha256": "c85f35c4b0a23159b70120c05ed445e54f36a073642cfb67dc2bee5355d01b42"
+        },
+        "metrics": {
+          "path": "/home/dllu/proj/demosaic/.cache/benchmarks/training-execution-mixed-v1/work/execution-throughput-v1/strict-0/run/metrics.jsonl",
+          "sha256": "62b37640355e6901b2086214f4337c6a06527ceb0158f47bc7a9f3ff368f9808"
+        },
+        "worker_result": {
+          "path": "/home/dllu/proj/demosaic/.cache/benchmarks/training-execution-mixed-v1/work/execution-throughput-v1/strict-0/worker-result.json",
+          "sha256": "f953dbaa7564803046f5bfd9e76b964564dc6c7759c1ec429b74be8ab969b6e5"
+        }
+      },
+      {
+        "name": "strict-1",
+        "policy": "deterministic-v1",
+        "measured_seconds": 57.146103363018476,
+        "patches_per_second": 12.599284249115412,
+        "peak_CUDA_bytes": 7877894144,
+        "domains": {
+          "native-RAW-synthetic": 15,
+          "synthetic": 19,
+          "paired-RAW": 11
+        },
+        "whole_process_seconds": 98.83274284587242,
+        "before": {
+          "available_GiB": 67.26354217529297,
+          "load_average": [
+            5.14697265625,
+            5.29833984375,
+            4.3505859375
+          ]
+        },
+        "available_GiB_after": 67.62136459350586,
+        "config": {
+          "path": "/home/dllu/proj/demosaic/.cache/benchmarks/training-execution-mixed-v1/work/execution-throughput-v1/strict-1/config.yaml",
+          "sha256": "33c565559ff0b07094253db770ab122d14e841aa0cd1387815ec1cfd0802fa2c"
+        },
+        "metrics": {
+          "path": "/home/dllu/proj/demosaic/.cache/benchmarks/training-execution-mixed-v1/work/execution-throughput-v1/strict-1/run/metrics.jsonl",
+          "sha256": "4e9d7d99d459d1134225214450568a6ecd70ebb6de689b287f4e33e50e1cc25f"
+        },
+        "worker_result": {
+          "path": "/home/dllu/proj/demosaic/.cache/benchmarks/training-execution-mixed-v1/work/execution-throughput-v1/strict-1/worker-result.json",
+          "sha256": "cf3ef71076aa476bb16f3d4dad195eed398b8809dac15e9bb827ecbd54e2e8b8"
+        }
+      },
+      {
+        "name": "throughput-1",
+        "policy": "throughput-v1",
+        "measured_seconds": 33.18446484091692,
+        "patches_per_second": 21.69689954174671,
+        "peak_CUDA_bytes": 9257002496,
+        "domains": {
+          "native-RAW-synthetic": 15,
+          "synthetic": 19,
+          "paired-RAW": 11
+        },
+        "whole_process_seconds": 80.086196471937,
+        "before": {
+          "available_GiB": 67.62289428710938,
+          "load_average": [
+            4.4970703125,
+            5.1357421875,
+            4.39794921875
+          ]
+        },
+        "available_GiB_after": 67.90553665161133,
+        "config": {
+          "path": "/home/dllu/proj/demosaic/.cache/benchmarks/training-execution-mixed-v1/work/execution-throughput-v1/throughput-1/config.yaml",
+          "sha256": "b12d6345786a70bfdbcc4347dac03ed52d1ac8857e459b7446bec4a3a19f6e33"
+        },
+        "metrics": {
+          "path": "/home/dllu/proj/demosaic/.cache/benchmarks/training-execution-mixed-v1/work/execution-throughput-v1/throughput-1/run/metrics.jsonl",
+          "sha256": "2075466feb1fb06963eff32b974cfd215028430768fd0e2657301674ec55bb0d"
+        },
+        "worker_result": {
+          "path": "/home/dllu/proj/demosaic/.cache/benchmarks/training-execution-mixed-v1/work/execution-throughput-v1/throughput-1/worker-result.json",
+          "sha256": "74cd107c519389ca4431ca53dd2d90b7ed48ecfda829c21a937e57b3b9dc770a"
+        }
+      }
+    ]
+  },
+  "tests": {
+    "focused_training_pass": 34,
+    "CPU_before_private_loader_pass": 1109,
+    "CPU_before_private_loader_skip": 9,
+    "final_CPU_pass": 1120,
+    "final_CPU_skip": 9,
+    "final_CPU_seconds": 93.06
+  },
+  "quality_or_default_promotion": false,
+  "scope": "Discarded engineering updates, original4000 LR horizon and genuine V63/DINO initialization. Exact input identities only in six-update traced runs, not60-update timing. CPU archived-default compatibility and2+2 strict resume checked. Finite local execution does not prove long-run/cross-platform determinism; runtime settings are not a complete hardware/driver fingerprint. Strict B16 throughput41.5% lower; batch size/default unchanged."
+}
