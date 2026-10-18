@@ -4,6 +4,13 @@ Research started 2026-10-14. Sources below are primary implementations, papers,
 and vendor documentation. A recent publication is not itself evidence that this
 project matches its performance.
 
+The [CPU censored-highlight counterexamples](censored-highlight-gradients.md)
+isolate two constraints in the current implementation: a constant-preserving
+RAW head has no censored-channel offset, while hard display clipping can hide
+a remaining color error even after adding that freedom. A pre-clipping interval
+term supplies a gradient in the fixed fixture. This motivates a separate
+prototype; it is not a trained-model result or a cause assigned to V77.
+
 * [DINOv3, Meta, August 2025](https://github.com/facebookresearch/dinov3)
   provides high-resolution self-supervised dense features and ViT-S/16 through
   Transformers. Use a frozen pretrained feature branch alongside a spatial
