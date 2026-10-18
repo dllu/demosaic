@@ -139,6 +139,19 @@ def test_fresh_raw_statistics_and_shared_weight_adapter_identity():
         module.source_model({"models": [second, second]}, source)
 
 
+def test_completed_input_gain_keeps_one_pair_with_shared_checkpoint_and_distinct_methods():
+    module = script()
+    payload = {
+        "status": "completed-parent-input-gain-photo-statistics-awaiting-native-review",
+        "sources": [{"first": "gain", "second": "original"}],
+        "comparisons": list(range(3)),
+    }
+    assert module.statistics_payload(payload) is payload
+    methods = [{"sha256": "shared", "label": name} for name in ["original", "gain"]]
+    source = {"checkpoint_sha256": "shared", "model_label": "gain"}
+    assert module.source_model({"models": methods}, source) is methods[1]
+
+
 def test_quarter_statistics_retain_own_progress_as_well_as_primary_pairs():
     payload = {
         "status": "completed-packed-isotropic-quarter-statistics-and-first8k-progress",

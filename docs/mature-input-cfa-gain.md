@@ -1,11 +1,13 @@
-# Mature-parent input-CFA gain: color screen passes, photo review running
+# Mature-parent input-CFA gain: flat colors improve, global GFX policy fails
 
 A fixed input-only per-channel least-squares gain reduces the mature V63
 parent's bright flat-field mean color bias by88.2% at saturation.50 and66.5%
 at.98. Both worst-case errors also decrease. The entire1,176-observation saved
 grid passes independent numerical checks, and all14 native triplets/28 cells
-were actually viewed. **This is a color diagnostic, not photographic quality
-or a promoted model.** A fresh full427-photo paired FP32 test is running.
+were actually viewed. A subsequent whole-frame GFX fit gives a conspicuous
+purple sky/building shift and loses green foliage. **That global policy is
+rejected.** The fresh full427-photo test remains a smaller-patch diagnostic,
+not a promoted model or proof of photographic quality.
 
 [Grid results, fixed plan, independent gain oracle and native evidence](results/mature-input-cfa-gain-grid-v1.json).
 The [completed objective trial](reconstruction-objective-first1k-review.md)
@@ -80,6 +82,53 @@ colors and neutral gray. Every native cell was opened at original resolution.
 Board metadata places method-specific gains inside the model record; source PNG
 pixels, noise, targets and display remain unchanged.
 
+## Global full-frame GFX policy is rejected
+
+[Complete saved-frame fit, source/ROI/display identities, all-pixel checks and
+actual native views](results/mature-global-CFA-gain-gfx-v1.json).
+A single gain triplet was fitted to all101,995,852 measured CFA samples of the
+existing mature V63 original FP32 DSCF3879 restore. Numerator/denominator sums
+use35 even256-row chunks and divide once after aggregation; this is not an
+average of tile gains. RGB gains are**[1.166430,1.007698,1.399052]**.
+Independent NumPy phase-slice/dot sums agree within5.04e−14. All305,987,556
+virtual corrected RGB values are finite. No new neural forward, RAW decode,
+corrected full-frame array or RGB16 export was created.
+
+The [complete native board](images/mature-global-CFA-gain-gfx-native.png) contains
+all four standing regions before/after,8 triplets/16 unique cells, all viewed
+at original resolution. The corrected sky and building turn conspicuously
+purple, and foliage/fence lose green appearance. Fine detail is not recovered.
+**Reject this unmasked global least-squares policy; do not integrate it.**
+All four original panels rerender byte-exact from the saved RGB with the same
+WB/matrix/exposure, verifying the display path. Its flat-field success does not
+establish real-photo color fidelity. A global
+fit removes differences between tile gains by construction, but does not
+repair the underlying model's spatially varying color/detail errors.
+
+There is also a simple analytical reason to avoid treating noisy-input gain
+matching as a universal correction. With independent zero-mean Gaussian signal
+varianceτ² and noise varianceσ², the scalar posterior mean is`p=k*y`, where
+`k=τ²/(τ²+σ²)`. The fitted gain becomes`1/k`, so it returns the noisy observation
+and undoes optimal shrinkage. A fixed CPU fixture withτ=.1/σ=.2 gives gain5,
+measured-CFA MSE.007956→.039863. This counterexample establishes a limitation
+of the fitting principle; it does not identify the cause of the nonlinear
+GFX model's particular color regression.
+
+Noisy → globally corrected saved output → separate ISO100 reference, **not GT**:
+
+![Rejected global gain foliage](images/mature-global-CFA-gain-gfx-foliage.png)
+
+![Rejected global gain fence](images/mature-global-CFA-gain-gfx-chain-link-fence.png)
+
+DSCF3879/3880 are the standing ISO6400/f1.7 versus ISO100/f5.6 pair, with
+separate timing/motion/framing. ROIs remain foliage[8890,5570] and
+fence[2240,6000] (reference fence x2241), native160 pixels. WB/matrix,
+shot=.0014635775921166604/read variance=1.0715704128646712e−6 and display×4/+2EV
+are shared across methods. Full source/checkpoint hashes accompany each PNG.
+Eight focused tests check all CFA layouts, edge chunks, read-only inputs,
+energy-weighted global fitting and invalid data. No full-frame promotion or
+new end-to-end speed claim follows from this CPU diagnostic.
+
 ## Fresh photographic test, not a continuation of V74/V75
 
 The standalone evaluator uses genuine unchanged V63 original20k EMA on all427
@@ -91,6 +140,11 @@ network forwards, not one per variant. Existing source-balanced metrics,
 noise seed20261014, validation crop seed42 and fixed native photographic ROIs
 remain unchanged. The worker retains original/corrected native GT triplets and
 all input-only gains, then independently audits coverage and summary arithmetic.
+A queued CPU closure waits for the exact producer PID/creation-time exit before
+checking all427/418/416 source cohorts with an independent Decimal/scalar replay
+and revalidating early native PNG/metadata. It records the global real-policy
+rejection and launches no camera/GPU continuation.
+[Closure plan, tests and dated live-owner evidence](results/mature-input-gain-closure-queue-v1.json).
 
 The plan sets24GiB CUDA allocator and two-hour limits, with successful producer
 exit, actual native inspection and statistical review required before a decision.

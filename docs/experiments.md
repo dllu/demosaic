@@ -14,8 +14,10 @@ A [new input-CFA gain diagnostic](mature-input-cfa-gain.md) on saved V63 parent
 predictions reduces bright-field mean color bias by88%/67% across the fixed
 1,176-observation grid. All14 native triplets/28 cells and an independent
 phase-wise fit are reviewed. A fresh full427 paired FP32 test shares one network
-forward between original and corrected variants; photographic/real superiority
-and full-frame consistency remain unproven. No default or model promotion.
+forward between original and corrected variants. The separate saved-full-frame
+GFX policy is rejected: one global fit creates purple sky/building and loses
+green foliage. No default or model promotion; small-patch photo scores remain
+pending.
 
 The [completed mature FP32 full-frame and CLI validation](mature-cudnn-fullframe.md)
 adds opt-in `infer --cudnn-benchmark`. Warmed V43/V63 restores fall from206.88/209.35s

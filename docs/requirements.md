@@ -21,8 +21,9 @@ missing fine detail and color/highlight tradeoffs remain. An isolated benefit
 from the shared84,867-source corpus is unproven.
 A [saved-parent input-CFA gain diagnostic](mature-input-cfa-gain.md) passes its
 fixed color-grid screen and actual14-triplet native review. A shared-forward
-full427 photo test is running; no trained/default change, photographic gain or
-full-frame consistency is established by uniform-field results.
+full427 photo test is running. Its separate global-frame GFX policy is rejected
+for a visible purple sky/building shift and loss of green foliage. No trained
+or default change or photographic gain follows from uniform-field results.
 All final quality/speed requirements below remain outstanding.
 
 Latest: the [completed RAW-native 40k review](packed-isotropic-quarter-review.md)
