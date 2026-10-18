@@ -1,0 +1,2203 @@
+{
+  "status": "verified-completed-discarded-equal-example-CUDA-batch-learning",
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-batch-learning-CUDA-v1/plan.json",
+    "sha256": "d35c990ca9fd5e082e289a81bb39ce9b36ce03419dec7fdff92c837cde090bd0"
+  },
+  "receipt": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-batch-learning-CUDA-v1/receipt.json",
+    "sha256": "1e25a4d08df9090e095594dbca8f862849249e56191ea81ebd48272ffcffd155"
+  },
+  "inputs_verified": 40,
+  "guards_verified": 46,
+  "ordered_finite_training_records": 2560,
+  "independent_domain_mean_reductions": 96,
+  "example_draws_per_arm": 4096,
+  "per_arm_domain_example_counts": {
+    "raw-B4": {
+      "commons": 1792,
+      "native": 1024,
+      "paired": 1280
+    },
+    "raw-B16": {
+      "commons": 1792,
+      "native": 1024,
+      "paired": 1280
+    },
+    "gain32-residual32-B4": {
+      "commons": 1792,
+      "native": 1024,
+      "paired": 1280
+    },
+    "gain32-residual32-B16": {
+      "commons": 1792,
+      "native": 1024,
+      "paired": 1280
+    }
+  },
+  "common_initial_case_metrics_identical": true,
+  "common_initial_model_SHA256": "ed1fdca69f4568ffc4c687db6f6677703c8f1b8203353975dd56476f74cc378d",
+  "all16_initial_outputs_equal_bilinear_producer_assertion": true,
+  "exact_owner_exited": true,
+  "states": {
+    "raw-B4": {
+      "final_model_SHA256": "05be443f18e54f13fcb3db778231018ef3d27a143ac7243d0f2af68c5301a1d1",
+      "all852_Adam_states_finite_at_update": 1024,
+      "learned_weights_discarded": true
+    },
+    "raw-B16": {
+      "final_model_SHA256": "fa95e12322c8f3a859517a7c6eb52e73419b372e5a50644568454ab0331160a8",
+      "all852_Adam_states_finite_at_update": 256,
+      "learned_weights_discarded": true
+    },
+    "gain32-residual32-B4": {
+      "final_model_SHA256": "a7734a153af6ad4495a8eab4e6e23a30591c1787d250d7dc0215030976ebd529",
+      "all852_Adam_states_finite_at_update": 1024,
+      "learned_weights_discarded": true
+    },
+    "gain32-residual32-B16": {
+      "final_model_SHA256": "1cb366f173cd296d61dd7bef622dc3bf0cc4b087c0e3f72cb03537bb915aa69b",
+      "all852_Adam_states_finite_at_update": 256,
+      "learned_weights_discarded": true
+    }
+  },
+  "ratios_to_each_common_initial_value": [
+    {
+      "round": 0,
+      "example_draws_per_arm": 0,
+      "arms": {
+        "raw-B4": {
+          "commons": {
+            "loss": 1.0,
+            "MSE": 1.0
+          },
+          "native": {
+            "loss": 1.0,
+            "MSE": 1.0
+          },
+          "paired": {
+            "loss": 1.0,
+            "MSE": 1.0
+          }
+        },
+        "raw-B16": {
+          "commons": {
+            "loss": 1.0,
+            "MSE": 1.0
+          },
+          "native": {
+            "loss": 1.0,
+            "MSE": 1.0
+          },
+          "paired": {
+            "loss": 1.0,
+            "MSE": 1.0
+          }
+        },
+        "gain32-residual32-B4": {
+          "commons": {
+            "loss": 1.0,
+            "MSE": 1.0
+          },
+          "native": {
+            "loss": 1.0,
+            "MSE": 1.0
+          },
+          "paired": {
+            "loss": 1.0,
+            "MSE": 1.0
+          }
+        },
+        "gain32-residual32-B16": {
+          "commons": {
+            "loss": 1.0,
+            "MSE": 1.0
+          },
+          "native": {
+            "loss": 1.0,
+            "MSE": 1.0
+          },
+          "paired": {
+            "loss": 1.0,
+            "MSE": 1.0
+          }
+        }
+      }
+    },
+    {
+      "round": 64,
+      "example_draws_per_arm": 1024,
+      "arms": {
+        "raw-B4": {
+          "commons": {
+            "loss": 1.0509097806289942,
+            "MSE": 0.9361067568166807
+          },
+          "native": {
+            "loss": 1.1404579709099878,
+            "MSE": 0.971694982429733
+          },
+          "paired": {
+            "loss": 1.0720262766519526,
+            "MSE": 1.0698861836541975
+          }
+        },
+        "raw-B16": {
+          "commons": {
+            "loss": 1.0141556261466769,
+            "MSE": 0.9661370347697267
+          },
+          "native": {
+            "loss": 1.0305451298288952,
+            "MSE": 0.9873657052916722
+          },
+          "paired": {
+            "loss": 1.0157493432093312,
+            "MSE": 1.0161174867704148
+          }
+        },
+        "gain32-residual32-B4": {
+          "commons": {
+            "loss": 0.9761573571751923,
+            "MSE": 0.9347434294651318
+          },
+          "native": {
+            "loss": 0.9993647101796572,
+            "MSE": 0.9957542080568519
+          },
+          "paired": {
+            "loss": 0.9958146599116364,
+            "MSE": 1.0010911112644036
+          }
+        },
+        "gain32-residual32-B16": {
+          "commons": {
+            "loss": 0.9716912352388979,
+            "MSE": 0.9259640472705609
+          },
+          "native": {
+            "loss": 1.0058932989419187,
+            "MSE": 0.9928322870023454
+          },
+          "paired": {
+            "loss": 1.0061213993506333,
+            "MSE": 1.0051727953808391
+          }
+        }
+      }
+    },
+    {
+      "round": 128,
+      "example_draws_per_arm": 2048,
+      "arms": {
+        "raw-B4": {
+          "commons": {
+            "loss": 1.0192137480997798,
+            "MSE": 0.8681518113114596
+          },
+          "native": {
+            "loss": 1.088200262265074,
+            "MSE": 0.9721992127761233
+          },
+          "paired": {
+            "loss": 1.1479367146592285,
+            "MSE": 1.0860646485592353
+          }
+        },
+        "raw-B16": {
+          "commons": {
+            "loss": 1.006994575998522,
+            "MSE": 0.9495199593448898
+          },
+          "native": {
+            "loss": 1.0194845853699117,
+            "MSE": 0.9903618875540559
+          },
+          "paired": {
+            "loss": 1.0345912892899563,
+            "MSE": 1.014147120484701
+          }
+        },
+        "gain32-residual32-B4": {
+          "commons": {
+            "loss": 0.9342553989424482,
+            "MSE": 0.7754421751970817
+          },
+          "native": {
+            "loss": 0.9849921807357888,
+            "MSE": 0.9704803399471521
+          },
+          "paired": {
+            "loss": 1.0067670010811263,
+            "MSE": 0.9974341530297595
+          }
+        },
+        "gain32-residual32-B16": {
+          "commons": {
+            "loss": 0.9472012516086563,
+            "MSE": 0.8512976053166565
+          },
+          "native": {
+            "loss": 0.9930246489125619,
+            "MSE": 0.9692406272846618
+          },
+          "paired": {
+            "loss": 0.9921622469837568,
+            "MSE": 0.9999066167733517
+          }
+        }
+      }
+    },
+    {
+      "round": 256,
+      "example_draws_per_arm": 4096,
+      "arms": {
+        "raw-B4": {
+          "commons": {
+            "loss": 0.969820268065511,
+            "MSE": 0.772510406496566
+          },
+          "native": {
+            "loss": 1.0742613811538704,
+            "MSE": 0.9979427077887592
+          },
+          "paired": {
+            "loss": 1.0843150874075922,
+            "MSE": 1.0406304093672822
+          }
+        },
+        "raw-B16": {
+          "commons": {
+            "loss": 0.972802155167461,
+            "MSE": 0.817255038269643
+          },
+          "native": {
+            "loss": 1.0710437430334223,
+            "MSE": 0.9906045782501673
+          },
+          "paired": {
+            "loss": 1.2411171020132001,
+            "MSE": 1.0471002851341724
+          }
+        },
+        "gain32-residual32-B4": {
+          "commons": {
+            "loss": 0.902744989662344,
+            "MSE": 0.7472777928785689
+          },
+          "native": {
+            "loss": 0.9667749611548766,
+            "MSE": 0.9886247691958183
+          },
+          "paired": {
+            "loss": 0.9920613011690752,
+            "MSE": 0.9991095457788857
+          }
+        },
+        "gain32-residual32-B16": {
+          "commons": {
+            "loss": 0.8991153208575589,
+            "MSE": 0.7366360506827953
+          },
+          "native": {
+            "loss": 0.9684999498713018,
+            "MSE": 0.9491227011460709
+          },
+          "paired": {
+            "loss": 0.9886860794612475,
+            "MSE": 0.9996225926227675
+          }
+        }
+      }
+    }
+  ],
+  "curves": [
+    {
+      "round": 0,
+      "example_draws_per_arm": 0,
+      "arms": {
+        "raw-B4": {
+          "optimizer_updates": 0,
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.010640270076692104,
+              "MSE": 5.258042074274272e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014343843795359135,
+              "MSE": 6.358617974910885e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.022745542228221893,
+              "MSE": 2.7572981707635336e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.020938152447342873,
+              "MSE": 6.02929612796288e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.015940016135573387,
+              "MSE": 4.485502722673118e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.020513707771897316,
+              "MSE": 0.00012825278099626303
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.06288104504346848,
+              "MSE": 0.005554647650569677
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.036647405475378036,
+              "MSE": 0.0019241351401433349
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.005484080873429775,
+              "MSE": 7.93048366176663e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.010351923294365406,
+              "MSE": 4.998772783437744e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.03193873167037964,
+              "MSE": 0.0010704145533964038
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.08015227317810059,
+              "MSE": 0.005113042891025543
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.05182785540819168,
+              "MSE": 0.0024680548813194036
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.006624408066272736,
+              "MSE": 1.88717785931658e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.04702071473002434,
+              "MSE": 0.005080654285848141
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.052437473088502884,
+              "MSE": 0.00522208958864212
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.048885444179177284,
+              "MSE": 0.0035076798397182885
+            },
+            "native": {
+              "loss": 0.02521120198071003,
+              "MSE": 0.0005350634660317155
+            },
+            "paired": {
+              "loss": 0.009488905221223832,
+              "MSE": 3.859131811623229e-05
+            }
+          }
+        },
+        "raw-B16": {
+          "optimizer_updates": 0,
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.010640270076692104,
+              "MSE": 5.258042074274272e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014343843795359135,
+              "MSE": 6.358617974910885e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.022745542228221893,
+              "MSE": 2.7572981707635336e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.020938152447342873,
+              "MSE": 6.02929612796288e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.015940016135573387,
+              "MSE": 4.485502722673118e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.020513707771897316,
+              "MSE": 0.00012825278099626303
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.06288104504346848,
+              "MSE": 0.005554647650569677
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.036647405475378036,
+              "MSE": 0.0019241351401433349
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.005484080873429775,
+              "MSE": 7.93048366176663e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.010351923294365406,
+              "MSE": 4.998772783437744e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.03193873167037964,
+              "MSE": 0.0010704145533964038
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.08015227317810059,
+              "MSE": 0.005113042891025543
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.05182785540819168,
+              "MSE": 0.0024680548813194036
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.006624408066272736,
+              "MSE": 1.88717785931658e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.04702071473002434,
+              "MSE": 0.005080654285848141
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.052437473088502884,
+              "MSE": 0.00522208958864212
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.048885444179177284,
+              "MSE": 0.0035076798397182885
+            },
+            "native": {
+              "loss": 0.02521120198071003,
+              "MSE": 0.0005350634660317155
+            },
+            "paired": {
+              "loss": 0.009488905221223832,
+              "MSE": 3.859131811623229e-05
+            }
+          }
+        },
+        "gain32-residual32-B4": {
+          "optimizer_updates": 0,
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.010640270076692104,
+              "MSE": 5.258042074274272e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014343843795359135,
+              "MSE": 6.358617974910885e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.022745542228221893,
+              "MSE": 2.7572981707635336e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.020938152447342873,
+              "MSE": 6.02929612796288e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.015940016135573387,
+              "MSE": 4.485502722673118e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.020513707771897316,
+              "MSE": 0.00012825278099626303
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.06288104504346848,
+              "MSE": 0.005554647650569677
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.036647405475378036,
+              "MSE": 0.0019241351401433349
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.005484080873429775,
+              "MSE": 7.93048366176663e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.010351923294365406,
+              "MSE": 4.998772783437744e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.03193873167037964,
+              "MSE": 0.0010704145533964038
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.08015227317810059,
+              "MSE": 0.005113042891025543
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.05182785540819168,
+              "MSE": 0.0024680548813194036
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.006624408066272736,
+              "MSE": 1.88717785931658e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.04702071473002434,
+              "MSE": 0.005080654285848141
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.052437473088502884,
+              "MSE": 0.00522208958864212
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.048885444179177284,
+              "MSE": 0.0035076798397182885
+            },
+            "native": {
+              "loss": 0.02521120198071003,
+              "MSE": 0.0005350634660317155
+            },
+            "paired": {
+              "loss": 0.009488905221223832,
+              "MSE": 3.859131811623229e-05
+            }
+          }
+        },
+        "gain32-residual32-B16": {
+          "optimizer_updates": 0,
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.010640270076692104,
+              "MSE": 5.258042074274272e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014343843795359135,
+              "MSE": 6.358617974910885e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.022745542228221893,
+              "MSE": 2.7572981707635336e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.020938152447342873,
+              "MSE": 6.02929612796288e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.015940016135573387,
+              "MSE": 4.485502722673118e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.020513707771897316,
+              "MSE": 0.00012825278099626303
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.06288104504346848,
+              "MSE": 0.005554647650569677
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.036647405475378036,
+              "MSE": 0.0019241351401433349
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.005484080873429775,
+              "MSE": 7.93048366176663e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.010351923294365406,
+              "MSE": 4.998772783437744e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.03193873167037964,
+              "MSE": 0.0010704145533964038
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.08015227317810059,
+              "MSE": 0.005113042891025543
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.05182785540819168,
+              "MSE": 0.0024680548813194036
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.006624408066272736,
+              "MSE": 1.88717785931658e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.04702071473002434,
+              "MSE": 0.005080654285848141
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.052437473088502884,
+              "MSE": 0.00522208958864212
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.048885444179177284,
+              "MSE": 0.0035076798397182885
+            },
+            "native": {
+              "loss": 0.02521120198071003,
+              "MSE": 0.0005350634660317155
+            },
+            "paired": {
+              "loss": 0.009488905221223832,
+              "MSE": 3.859131811623229e-05
+            }
+          }
+        }
+      }
+    },
+    {
+      "round": 64,
+      "example_draws_per_arm": 1024,
+      "arms": {
+        "raw-B4": {
+          "optimizer_updates": 256,
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.01125016063451767,
+              "MSE": 5.678796878783032e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014676941558718681,
+              "MSE": 6.579120235983282e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.02540920488536358,
+              "MSE": 3.1046940421219915e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.027292534708976746,
+              "MSE": 6.283920811256394e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.02364555560052395,
+              "MSE": 5.048439925303683e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.024029441177845,
+              "MSE": 0.00013153432519175112
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.06407386809587479,
+              "MSE": 0.005368005484342575
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.03827808424830437,
+              "MSE": 0.0018542534671723843
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.006552987731993198,
+              "MSE": 9.822760148381349e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.011275972239673138,
+              "MSE": 5.3170035243965685e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.03780779242515564,
+              "MSE": 0.0010286511387676
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.07844241708517075,
+              "MSE": 0.004613016732037067
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.05198139324784279,
+              "MSE": 0.002277278807014227
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.0071057165041565895,
+              "MSE": 2.086962376779411e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.052956342697143555,
+              "MSE": 0.005213644355535507
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.050711970776319504,
+              "MSE": 0.004433858674019575
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.05137419141829014,
+              "MSE": 0.0032835627987099414
+            },
+            "native": {
+              "loss": 0.028752316255122423,
+              "MSE": 0.0005199184852244798
+            },
+            "paired": {
+              "loss": 0.010172355733811856,
+              "MSE": 4.1288318061560855e-05
+            }
+          }
+        },
+        "raw-B16": {
+          "optimizer_updates": 64,
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.010789523832499981,
+              "MSE": 5.425729614216834e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014377274550497532,
+              "MSE": 6.38663987047039e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.023332374170422554,
+              "MSE": 2.8521024432848208e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.02252688817679882,
+              "MSE": 6.067821232136339e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.018079767003655434,
+              "MSE": 4.55773260910064e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.021075522527098656,
+              "MSE": 0.00012871391663793474
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.06270477920770645,
+              "MSE": 0.005434909835457802
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.036990340799093246,
+              "MSE": 0.0018953001126646996
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.005860861390829086,
+              "MSE": 8.217203685489949e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.01044455450028181,
+              "MSE": 5.0599974201759323e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.034290656447410583,
+              "MSE": 0.0010406117653474212
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.07888851314783096,
+              "MSE": 0.004831336438655853
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.05151371285319328,
+              "MSE": 0.0023763547651469707
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.006719531957060099,
+              "MSE": 1.912569314299617e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.05024036020040512,
+              "MSE": 0.005128554068505764
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.05132434889674187,
+              "MSE": 0.004864951595664024
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.04957744825099196,
+              "MSE": 0.0033888993992669775
+            },
+            "native": {
+              "loss": 0.02598128141835332,
+              "MSE": 0.0005283033165142115
+            },
+            "paired": {
+              "loss": 0.009638349246233701,
+              "MSE": 3.9213313175423534e-05
+            }
+          }
+        },
+        "gain32-residual32-B4": {
+          "optimizer_updates": 256,
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.010564608499407768,
+              "MSE": 5.273487840895541e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014264455065131187,
+              "MSE": 6.36517652310431e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.022550754249095917,
+              "MSE": 2.9511793400160968e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.020985666662454605,
+              "MSE": 6.036217018845491e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.016469961032271385,
+              "MSE": 4.4389424147084355e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.020327473059296608,
+              "MSE": 0.00012602655624505132
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.06211300566792488,
+              "MSE": 0.005338476970791817
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.03691684827208519,
+              "MSE": 0.0019152662716805935
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.00547467777505517,
+              "MSE": 7.934963832667563e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.010309798642992973,
+              "MSE": 4.991593232261948e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.03219697251915932,
+              "MSE": 0.0010275066597387195
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.07757225632667542,
+              "MSE": 0.004635099321603775
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.05054987967014313,
+              "MSE": 0.002333470620214939
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.006632414646446705,
+              "MSE": 1.892958789539989e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.04683429375290871,
+              "MSE": 0.0050829495303332806
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.04830283299088478,
+              "MSE": 0.004489572253078222
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.047719885994281085,
+              "MSE": 0.003278780682843977
+            },
+            "native": {
+              "loss": 0.02519518556073308,
+              "MSE": 0.0005327916978785652
+            },
+            "paired": {
+              "loss": 0.00944919092580676,
+              "MSE": 3.863342553813709e-05
+            }
+          }
+        },
+        "gain32-residual32-B16": {
+          "optimizer_updates": 64,
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.010595206171274185,
+              "MSE": 5.309445987222716e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014290020801126957,
+              "MSE": 6.367557216435671e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.02352932281792164,
+              "MSE": 3.324875433463603e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.020848684012889862,
+              "MSE": 6.025988841429353e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.0160202719271183,
+              "MSE": 4.463156801648438e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.020444806665182114,
+              "MSE": 0.00012716554920189083
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.0621374249458313,
+              "MSE": 0.005313141271471977
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.03661630302667618,
+              "MSE": 0.001904238946735859
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.005376309622079134,
+              "MSE": 7.869160072004888e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.01049688458442688,
+              "MSE": 5.022727054893039e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.03200308233499527,
+              "MSE": 0.0010170082096010447
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.07759489119052887,
+              "MSE": 0.004578723572194576
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.05074753239750862,
+              "MSE": 0.0023078755475580692
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.006976531818509102,
+              "MSE": 1.9088252884102985e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.046409934759140015,
+              "MSE": 0.0050966208800673485
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.04759776592254639,
+              "MSE": 0.004377896897494793
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.047501557639666965,
+              "MSE": 0.003247985420914899
+            },
+            "native": {
+              "loss": 0.025359779130667448,
+              "MSE": 0.0005312282846716698
+            },
+            "paired": {
+              "loss": 0.009546990599483251,
+              "MSE": 3.879094310832443e-05
+            }
+          }
+        }
+      }
+    },
+    {
+      "round": 128,
+      "example_draws_per_arm": 2048,
+      "arms": {
+        "raw-B4": {
+          "optimizer_updates": 512,
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.011333610862493515,
+              "MSE": 5.707539457944222e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.015766046941280365,
+              "MSE": 6.726847641402856e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.024940747767686844,
+              "MSE": 3.0262290238169953e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.023694952949881554,
+              "MSE": 6.213394226506352e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.0213545560836792,
+              "MSE": 4.7654139052610844e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.022535309195518494,
+              "MSE": 0.0001303508906858042
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.06351303309202194,
+              "MSE": 0.005180903244763613
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.03856833651661873,
+              "MSE": 0.0018580059986561537
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.008137919940054417,
+              "MSE": 1.0504389138077386e-05
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.01146333385258913,
+              "MSE": 5.2743114792974666e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.03675234317779541,
+              "MSE": 0.0009988495148718357
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.07541406154632568,
+              "MSE": 0.004047984257340431
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.05103282257914543,
+              "MSE": 0.002137867733836174
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.007762401830404997,
+              "MSE": 2.197195681219455e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.05423126742243767,
+              "MSE": 0.005349317099899054
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.04647493362426758,
+              "MSE": 0.0035538142547011375
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.04982471678938184,
+              "MSE": 0.0030451986063521224
+            },
+            "native": {
+              "loss": 0.027434836607426405,
+              "MSE": 0.0005201882804612978
+            },
+            "paired": {
+              "loss": 0.010892662685364485,
+              "MSE": 4.1912666347343475e-05
+            }
+          }
+        },
+        "raw-B16": {
+          "optimizer_updates": 128,
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.010959679260849953,
+              "MSE": 5.416728527052328e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014279864728450775,
+              "MSE": 6.360634142765775e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.023288296535611153,
+              "MSE": 2.8968843253096566e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.02196720987558365,
+              "MSE": 6.053518154658377e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.01762208715081215,
+              "MSE": 4.576725768856704e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.020794561132788658,
+              "MSE": 0.00012848337064497173
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.06293009221553802,
+              "MSE": 0.005380952265113592
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.03675965964794159,
+              "MSE": 0.0019016384612768888
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.006316259037703276,
+              "MSE": 8.316694220411591e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.010795616544783115,
+              "MSE": 5.063140270067379e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.034632157534360886,
+              "MSE": 0.0010268124751746655
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.07818623632192612,
+              "MSE": 0.0046666874550282955
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.05158116668462753,
+              "MSE": 0.0023581681307405233
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.006734273862093687,
+              "MSE": 1.8964647097163834e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.0489833690226078,
+              "MSE": 0.005123262293636799
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.050656531006097794,
+              "MSE": 0.00471263425424695
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.049227377133710046,
+              "MSE": 0.003330612018804199
+            },
+            "native": {
+              "loss": 0.025702431797981262,
+              "MSE": 0.0005299064641803852
+            },
+            "paired": {
+              "loss": 0.009817138686776162,
+              "MSE": 3.913727414328605e-05
+            }
+          }
+        },
+        "gain32-residual32-B4": {
+          "optimizer_updates": 512,
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.010782345198094845,
+              "MSE": 5.213901386014186e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014311752282083035,
+              "MSE": 6.373786891344935e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.021613461896777153,
+              "MSE": 2.7214364308747463e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.02108893170952797,
+              "MSE": 6.027001654729247e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.016854923218488693,
+              "MSE": 4.408032327773981e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.02023322507739067,
+              "MSE": 0.00012346418225206435
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.05949002504348755,
+              "MSE": 0.004861266817897558
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.03639572858810425,
+              "MSE": 0.0018661257345229387
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.005811321083456278,
+              "MSE": 7.906946848379448e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.010286521166563034,
+              "MSE": 4.970627196598798e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.0324043333530426,
+              "MSE": 0.0008682197658345103
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.07308431714773178,
+              "MSE": 0.0036906274035573006
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.04807069152593613,
+              "MSE": 0.0018281908705830574
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.006573643535375595,
+              "MSE": 1.8971391909872182e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.050259966403245926,
+              "MSE": 0.005847933702170849
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.03953617438673973,
+              "MSE": 0.0018997013103216887
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.04567149015409606,
+              "MSE": 0.0027200028848061004
+            },
+            "native": {
+              "loss": 0.02483283681795001,
+              "MSE": 0.0005192685744077608
+            },
+            "paired": {
+              "loss": 0.009553116653114558,
+              "MSE": 3.849229869956616e-05
+            }
+          }
+        },
+        "gain32-residual32-B16": {
+          "optimizer_updates": 128,
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.010501064360141754,
+              "MSE": 5.22830305271782e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014287995174527168,
+              "MSE": 6.377168756444007e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.02248188480734825,
+              "MSE": 2.967059481306933e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.020818257704377174,
+              "MSE": 6.026062692399137e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.015882166102528572,
+              "MSE": 4.426366649568081e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.020350975915789604,
+              "MSE": 0.00012516828428488225
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.06093284860253334,
+              "MSE": 0.005116758868098259
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.03649026155471802,
+              "MSE": 0.001859321491792798
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.0053797196596860886,
+              "MSE": 7.920226380520035e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.010306160897016525,
+              "MSE": 4.9934154958464205e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.03205832093954086,
+              "MSE": 0.0009500542655587196
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.07491777837276459,
+              "MSE": 0.004076279699802399
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.04951756075024605,
+              "MSE": 0.0020959042012691498
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.006597727537155151,
+              "MSE": 1.90294722415274e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.047074656933546066,
+              "MSE": 0.005304212681949139
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.04374714568257332,
+              "MSE": 0.0033150827512145042
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.046304353911961825,
+              "MSE": 0.002986079447769693
+            },
+            "native": {
+              "loss": 0.025035344995558262,
+              "MSE": 0.0005186052494536852
+            },
+            "paired": {
+              "loss": 0.009414533525705338,
+              "MSE": 3.8587714334425983e-05
+            }
+          }
+        }
+      }
+    },
+    {
+      "round": 256,
+      "example_draws_per_arm": 4096,
+      "arms": {
+        "raw-B4": {
+          "optimizer_updates": 1024,
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.011190640740096569,
+              "MSE": 5.475548096001148e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014691566117107868,
+              "MSE": 6.4828411268536e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.0246700681746006,
+              "MSE": 2.8982351068407297e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.024278156459331512,
+              "MSE": 6.130679685156792e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.0212083887308836,
+              "MSE": 4.674308729590848e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.021951476112008095,
+              "MSE": 0.00012878727284260094
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.060507334768772125,
+              "MSE": 0.004924398846924305
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.03743398189544678,
+              "MSE": 0.0019167743157595396
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.007848645560443401,
+              "MSE": 9.635123205953278e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.01066125649958849,
+              "MSE": 5.119760680827312e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.03551813215017319,
+              "MSE": 0.000901326013263315
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.07380804419517517,
+              "MSE": 0.003777857404202223
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.0483449250459671,
+              "MSE": 0.001788722351193428
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.007052706554532051,
+              "MSE": 2.0379873603815213e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.0524936281144619,
+              "MSE": 0.0057730600237846375
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.03999020904302597,
+              "MSE": 0.001755926525220275
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.04741009457835129,
+              "MSE": 0.0027097191788405845
+            },
+            "native": {
+              "loss": 0.027083420660346746,
+              "MSE": 0.0005339626841305289
+            },
+            "paired": {
+              "loss": 0.010288963094353676,
+              "MSE": 4.015929916931782e-05
+            }
+          }
+        },
+        "raw-B16": {
+          "optimizer_updates": 256,
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.012019917368888855,
+              "MSE": 5.448066440294497e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.016261734068393707,
+              "MSE": 6.584345828741789e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.025254813954234123,
+              "MSE": 2.963303995784372e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.023304635658860207,
+              "MSE": 6.19804923189804e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.017369519919157028,
+              "MSE": 4.591650213114917e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.02200036123394966,
+              "MSE": 0.0001292371889576316
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.06172627583146095,
+              "MSE": 0.005023610312491655
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.037449389696121216,
+              "MSE": 0.0018992945551872253
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.010956335812807083,
+              "MSE": 9.903789759846404e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.01204071007668972,
+              "MSE": 5.152180892764591e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.03563906252384186,
+              "MSE": 0.0009162886999547482
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.07384570688009262,
+              "MSE": 0.003734234254807234
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.05000600218772888,
+              "MSE": 0.0020358231849968433
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.007605515420436859,
+              "MSE": 2.0295179638196714e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.050881560891866684,
+              "MSE": 0.005583927035331726
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.04342292994260788,
+              "MSE": 0.0027268831618130207
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.047555865453822274,
+              "MSE": 0.002866669021646625
+            },
+            "native": {
+              "loss": 0.0270023001357913,
+              "MSE": 0.0005300363191054203
+            },
+            "paired": {
+              "loss": 0.011776842549443245,
+              "MSE": 4.040898020321038e-05
+            }
+          }
+        },
+        "gain32-residual32-B4": {
+          "optimizer_updates": 1024,
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.010627557523548603,
+              "MSE": 5.24050192325376e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014289194718003273,
+              "MSE": 6.384035805240273e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.020860889926552773,
+              "MSE": 2.7191321350983344e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.02073557674884796,
+              "MSE": 6.0256788856349885e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.015882104635238647,
+              "MSE": 4.32114175055176e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.019592639058828354,
+              "MSE": 0.00011956244998145849
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.05875832214951515,
+              "MSE": 0.0047410535626113415
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.036305129528045654,
+              "MSE": 0.0019088974222540855
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.005333942826837301,
+              "MSE": 7.94114384916611e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.0102431895211339,
+              "MSE": 4.9658658099360764e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.03111235611140728,
+              "MSE": 0.0008664842462167144
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.07226703315973282,
+              "MSE": 0.0036706607788801193
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.04602533206343651,
+              "MSE": 0.0018156905425712466
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.0065739937126636505,
+              "MSE": 1.8939592337119393e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.047853246331214905,
+              "MSE": 0.005749606993049383
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.03701923415064812,
+              "MSE": 0.0014617712004110217
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.04413108980017049,
+              "MSE": 0.002621211248749335
+            },
+            "native": {
+              "loss": 0.024373558815568686,
+              "MSE": 0.0005289769956107193
+            },
+            "paired": {
+              "loss": 0.009413575660437346,
+              "MSE": 3.855695431411732e-05
+            }
+          }
+        },
+        "gain32-residual32-B16": {
+          "optimizer_updates": 256,
+          "cases": [
+            {
+              "production_step": 8001,
+              "domain": "paired",
+              "loss": 0.01051129586994648,
+              "MSE": 5.2342053095344454e-05
+            },
+            {
+              "production_step": 8002,
+              "domain": "paired",
+              "loss": 0.014301382936537266,
+              "MSE": 6.389489135472104e-05
+            },
+            {
+              "production_step": 8003,
+              "domain": "native",
+              "loss": 0.021096698939800262,
+              "MSE": 2.7083311579190195e-05
+            },
+            {
+              "production_step": 8004,
+              "domain": "native",
+              "loss": 0.02076796256005764,
+              "MSE": 6.02653126406949e-05
+            },
+            {
+              "production_step": 8005,
+              "domain": "commons",
+              "loss": 0.015780730172991753,
+              "MSE": 4.373365663923323e-05
+            },
+            {
+              "production_step": 8006,
+              "domain": "native",
+              "loss": 0.01973387598991394,
+              "MSE": 0.00012148368114139885
+            },
+            {
+              "production_step": 8007,
+              "domain": "commons",
+              "loss": 0.059095606207847595,
+              "MSE": 0.004778770729899406
+            },
+            {
+              "production_step": 8008,
+              "domain": "native",
+              "loss": 0.03606965392827988,
+              "MSE": 0.0018225312232971191
+            },
+            {
+              "production_step": 8009,
+              "domain": "paired",
+              "loss": 0.0052990661934018135,
+              "MSE": 7.93080198491225e-06
+            },
+            {
+              "production_step": 8010,
+              "domain": "paired",
+              "loss": 0.010236290283501148,
+              "MSE": 4.9820224376162514e-05
+            },
+            {
+              "production_step": 8011,
+              "domain": "commons",
+              "loss": 0.030684063211083412,
+              "MSE": 0.000822070986032486
+            },
+            {
+              "production_step": 8012,
+              "domain": "commons",
+              "loss": 0.0751541256904602,
+              "MSE": 0.004050751216709614
+            },
+            {
+              "production_step": 8013,
+              "domain": "commons",
+              "loss": 0.04705166444182396,
+              "MSE": 0.0018334630876779556
+            },
+            {
+              "production_step": 8014,
+              "domain": "paired",
+              "loss": 0.006559707224369049,
+              "MSE": 1.889579652925022e-05
+            },
+            {
+              "production_step": 8015,
+              "domain": "commons",
+              "loss": 0.047251734882593155,
+              "MSE": 0.005538965575397015
+            },
+            {
+              "production_step": 8016,
+              "domain": "commons",
+              "loss": 0.03265763819217682,
+              "MSE": 0.0010194287169724703
+            }
+          ],
+          "domain_means": {
+            "commons": {
+              "loss": 0.04395365182842527,
+              "MSE": 0.00258388342418974
+            },
+            "native": {
+              "loss": 0.02441704785451293,
+              "MSE": 0.0005078408821646008
+            },
+            "paired": {
+              "loss": 0.009381548501551151,
+              "MSE": 3.8576753468078095e-05
+            }
+          }
+        }
+      }
+    }
+  ],
+  "arms": {
+    "raw-B4": {
+      "coordinates": "raw",
+      "batch": 4
+    },
+    "raw-B16": {
+      "coordinates": "raw",
+      "batch": 16
+    },
+    "gain32-residual32-B4": {
+      "coordinates": "gain32-residual32",
+      "batch": 4
+    },
+    "gain32-residual32-B16": {
+      "coordinates": "gain32-residual32",
+      "batch": 16
+    }
+  },
+  "scope": "Discarded equal-example four-arm training-only batch comparison, not a throughput benchmark or improved photographic model. Original raw and gain32 with learned residual divided by32 each compare real CUDA batch4 and batch16. Same seed51/common initial weights and bilinear outputs, model capacity, physical RAW skip/output/loss units, same16 frozen training-only production B4 fixtures8001-8016/64 fixed observations/noise/order. Each round consumes four successive B4 fixture groups/16 examples per arm; batch16 concatenates their physical inputs in one forward and averages their four unchanged original-domain losses. Batch4 makes four separate optimizer updates.256 rounds=4096 example draws/arm,1024 B4 or256 B16 optimizer updates. Evaluate at1024/2048/4096 example draws. Fixed LR2e-4/AdamW decay.01/clip1 per optimizer step, no batch-specific LR tuning or schedule; update/decay counts differ by design. This compares equal-example behavior for this fixed recipe, not the best batch16 recipe. Original paired masks/coarse loss reductions remain per4 group; equal group sizes and original domain sample proportions stay fixed. No batch-statistical normalization, cross-example conditioning, fresh augmentation/noise or source admissions. CUDA IEEE FP32 NCHW; no AMP/TF32, pretrained state, EMA, learned-weight export, GFX/holdout/protected-final optimization, quality promotion, speed or convergence claim. Previous CUDA owners must have completed and exited. Isolated CPU coordinate diagnostic continues unchanged; no automatic restart.",
+  "independent_audit": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-batch-learning-CUDA-v1/independent-audit.json",
+    "sha256": "4ddf4a2ad76a20a543a08019ae086f49f11a567944dfa8bb84bb02ac7619d955"
+  }
+}

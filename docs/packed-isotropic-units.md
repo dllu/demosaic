@@ -41,6 +41,6 @@ source/test/checkpoint/fixture/output hashes and exited CPU owners. This is CPU
 FP32 compatibility at recorded contexts, without a full-frame CUDA or quality
 claim.68 unique focused cases are covered across the targeted runs; Ruff passes.
 
-The live [batch-learning study](packed-isotropic-batch-learning.md) and original
+The completed [batch-learning study](packed-isotropic-batch-learning.md) and original
 CPU coordinate study retain frozen code. Existing recipes/checkpoints stay
 unchanged; no new quality model is promoted.

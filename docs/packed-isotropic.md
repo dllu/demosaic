@@ -8,8 +8,8 @@ grain. Full GFX restores take50.70/53.74s. **Neither endpoint is promoted**;
 V43 remains the working reference.
 The [experimental fixed-unit options](packed-isotropic-units.md) record RAW
 input gain and learned residual scale in checkpoints. Defaults preserve existing
-models; a full-data quality gain remains untested. The separate batch-learning
-diagnostic continues on its frozen implementation.
+models; a full-data quality gain remains untested. The completed batch-learning
+diagnostic motivates testing a mixed-domain effective batch16.
 The three requested pipeline improvements are already measured separately in
 [the pipeline report](training-pipeline.md); this experiment retains that data
 path and does not change the existing model recipes.

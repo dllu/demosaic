@@ -179,11 +179,14 @@ The [completed four-arm CUDA residual-unit diagnostic](packed-isotropic-residual
 adds a fixed1/32 scale on the learned residual to the input gain32 arm. This
 reduces early original-loss overshoot, but native/paired improvements over the
 bilinear start are tiny and paired MSE remains above its start. All weights are
-discarded, no production setting is adopted, and the CPU study continues.
+discarded and no production setting is adopted. The original CPU study is also
+complete.
 
 The [completed fixed-local-contrast test](packed-isotropic-local-contrast.md)
 finds modest native/paired loss gains with weaker Commons performance; no
-single representation wins across the training metrics. A separate
+single representation wins across the training metrics. The completed
 [equal-example batch4/batch16 comparison](packed-isotropic-batch-learning.md)
-is now running with raw and gain32/residual÷32 coordinates. This tests learning
-at a fixed per-update recipe, rather than repeating the throughput sweep.
+finds1.4%/4.0% lower final Commons/native MSE for scaled B16 than scaled B4,
+with nearly unchanged paired MSE. It motivates a full-data mixed-domain batch
+trial; ordinary single-domain B16 training does not reproduce the probe.
+No quality model or throughput gain follows from these fixed-training-set errors.
