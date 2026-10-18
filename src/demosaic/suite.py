@@ -11,6 +11,7 @@ import torch
 import yaml
 
 from .cfa import PATTERNS, bilinear, color_indices, malvar, mosaic
+from .checkpoint_cache import freeze_checkpoint
 from .data import CleanDataset, camera_pair, synthetic
 from .gaussian import load_gaussian_prior
 from .inference import load_checkpoint
@@ -22,21 +23,6 @@ from .prior import wiener_packed
 from .reference import RawNind, load_rawnind
 from .reporting import center_crop, display_crop, save_triplet, write_report
 from .safety import writable_path
-
-
-def freeze_checkpoint(source, destination):
-    """Copy one opened inode, so an atomic training update cannot mix versions."""
-    source, destination = Path(source), writable_path(destination)
-    destination.mkdir(parents=True, exist_ok=True)
-    temporary = destination / "checkpoint.tmp"
-    digest = hashlib.sha256()
-    with source.open("rb") as reader, temporary.open("wb") as writer:
-        while chunk := reader.read(1 << 20):
-            digest.update(chunk)
-            writer.write(chunk)
-    frozen = destination / f"weights-{digest.hexdigest()}.pt"
-    temporary.replace(frozen)
-    return frozen, digest.hexdigest()
 
 
 def observation(rgb, identities, condition, pattern, wb, matrix, seed):
