@@ -34,9 +34,11 @@ speed requirements below.
 The [production-training diagnosis and quarter-horizon continuation](packed-isotropic-production-learning.md)
 find similarly weak mixed-replay learning in FP32/BF16. Isolated batches learn
 more; fresh moments and a fixed RAW parameter rescaling offer no broad fix.
-The original recipes now resume with complete state to a40k-update review,
-preserving the original160k horizon and immutable8k evidence. This continuation
-is running; it is not a quality or completion result.
+Both original recipes have completed the40k-update boundary with full-state
+continuation, preserving the original160k horizon and immutable8k evidence.
+The [independent boundary audit and handoff](results/packed-isotropic-quarter-training-boundary-v1.json)
+verify exited training owners and matched logged inputs; the GPU quality review
+is running. Completed training is not a quality or project-completion result.
 Its [full review queue and CPU verification](results/packed-isotropic-quarter-review-queue-v1.json)
 require successful/exited training owners and independently checked40k states.
 They include own8k progress, fixed native crops and source sensitivities; no

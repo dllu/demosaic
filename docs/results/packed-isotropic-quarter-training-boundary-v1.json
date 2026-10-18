@@ -1,0 +1,140 @@
+{
+  "status": "both40k-training-boundaries-independent-audit-passed-quality-review-running",
+  "observed_unix": 1792285396.0324032,
+  "training_workflow": {
+    "path": "/mnt/external/demosaic/runs/packed-isotropic-quarter-workflow-v1.json",
+    "sha256": "ea8dc6001dcb4a224ef860214b408a487d5ce5ac594d1b7cdb40f2716ef676f0"
+  },
+  "training_controller_and_final_child_exited": true,
+  "independent_audit": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-review-workflow-v1/training-audit.json",
+    "sha256": "2b2ee8d92820c511b08aac0bd75a033335b7d21bdadc2f7aae57d5152fc41c12"
+  },
+  "independent_audit_operator": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-review-workflow-v1/tools/review_packed_isotropic_quarter.py",
+    "sha256": "1e723fde9151cf3118c41347a2618678c0333cb8e69c88da9a1234d928b0d8ca"
+  },
+  "checkpoints": [
+    {
+      "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-b4-v71-step40000.pt",
+      "sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc",
+      "arm": "no-dino",
+      "step": 40000,
+      "initialization": "fresh",
+      "kind": "joint-checkpoint",
+      "label": "V71-no-dino-quarter160000examples"
+    },
+    {
+      "path": "/mnt/external/demosaic/models/dino-packed-isotropic-b4-v70-step40000.pt",
+      "sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337",
+      "arm": "dino",
+      "step": 40000,
+      "initialization": "fresh",
+      "kind": "joint-checkpoint",
+      "label": "V70-dino-quarter160000examples"
+    }
+  ],
+  "completed": {
+    "no-dino": {
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-b4-v71-step40000.pt",
+        "sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc"
+      },
+      "actual_training": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-workflow-v1/no-dino-actual-training.json",
+        "sha256": "77a7221278c5934388a02ab8f60c50106f00de8042fcd06878cf6d4d0c9f1dd0"
+      },
+      "step": 40000,
+      "original_horizon": 160000,
+      "finite_model_EMA_Adam": true,
+      "metrics": {
+        "path": "/mnt/external/demosaic/runs/no-dino-packed-isotropic-b4-v71-quarter/metrics.jsonl",
+        "sha256": "ea5922e3c1290c69f6786739d73eb8bcbef6b078be481f13e32805963c50cd0f"
+      },
+      "logged_training_rows": 1602
+    },
+    "dino": {
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-packed-isotropic-b4-v70-step40000.pt",
+        "sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337"
+      },
+      "actual_training": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-workflow-v1/dino-actual-training.json",
+        "sha256": "ef2bae2e02d47dac19a063b82e8b37e8872dd149d8b36702147392cd204c4d2e"
+      },
+      "step": 40000,
+      "original_horizon": 160000,
+      "finite_model_EMA_Adam": true,
+      "metrics": {
+        "path": "/mnt/external/demosaic/runs/dino-packed-isotropic-b4-v70-quarter/metrics.jsonl",
+        "sha256": "b0ff4e33c18aa72978549499bca326caa6112e656b84958b4dd0f242366d1a6f"
+      },
+      "logged_training_rows": 1602
+    }
+  },
+  "actual_full_state_continuation": {
+    "no-dino": {
+      "model_optimizer_and_global_RNG_restored_before_first_update": true,
+      "initial_RAW_sha256": "daed54cfb66796ebe3f3a09ea1ffc5d72486442c2b97991b883d4b5e4167a774",
+      "restored_Adam_tensors": 852,
+      "EMA_restored_before_first_update": true,
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/runs/no-dino-packed-isotropic-b4-v71-quarter/last.pt",
+        "sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc"
+      },
+      "first16_training_observations_match_discarded_fixture": true,
+      "DINO_unchanged_and_gradient_free": false,
+      "DINO_sha256": null
+    },
+    "dino": {
+      "model_optimizer_and_global_RNG_restored_before_first_update": true,
+      "initial_RAW_sha256": "d5c12087dff80ac000d4fe1c22b1de9d547e3c30103277cd7fed0c1e5aaa4003",
+      "restored_Adam_tensors": 863,
+      "EMA_restored_before_first_update": true,
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/runs/dino-packed-isotropic-b4-v70-quarter/last.pt",
+        "sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337"
+      },
+      "first16_training_observations_match_discarded_fixture": true,
+      "DINO_unchanged_and_gradient_free": true,
+      "DINO_sha256": "1d679a021c6c26b5a610281aff421afe8ec33ff0e18dc029c8da736eade9cc36"
+    }
+  },
+  "all_logged_observation_domain_LR_matches": true,
+  "training_plan": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-quarter-workflow-v1/plan.json",
+    "sha256": "eb7dd31878e6fb5147025805a85c26b6e5ce27ff9b2ef4b47ea9de2add217d70"
+  },
+  "source_bundle_sha256": "50dc11ec5c906fbbc4d3c5b1b530b95acb3b40a5f725d3a622891b2471c21d16",
+  "review_step": 40000,
+  "original_horizon": 160000,
+  "batch": 4,
+  "example_draws_per_arm_at_boundary": 160000,
+  "original_example_draw_horizon": 640000,
+  "precision": "bfloat16 internal; IEEE FP32 physical operators",
+  "review_observation": {
+    "workflow": "/mnt/external/demosaic/runs/packed-isotropic-quarter-review-workflow-v1.json",
+    "controller": {
+      "pid": 1784241,
+      "created": 1792275654.03,
+      "driver_sha256": "9f5290e940d6aa15ed760404a6759b2e6cc50d83389f3c961a2c9538845471f6"
+    },
+    "child": {
+      "pid": 2099149,
+      "created": 1792285394.04
+    },
+    "observed_stage": "evaluating-full427",
+    "both_exact_processes_live": true
+  },
+  "CPU_diagnostic_observation": {
+    "controller": {
+      "pid": 2012360,
+      "created": 1792282156.8
+    },
+    "status": "waiting-for-owned-review-and-timing-owners-no-CPU-compute",
+    "completed_updates_per_arm": 116,
+    "exact_owner_live": true
+  },
+  "quality_status": "Full known/unseen/photo/analytic/camera/GFX/color/hue/statistics and native visual review are pending; no40k quality gain or promotion is established. Compilation and corrected-grid validation remain queued. No automatic continuation beyond40k.",
+  "scope": "State/provenance/completed-training and review-handoff evidence, not a performance report or completed project claim."
+}

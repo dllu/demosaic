@@ -93,26 +93,29 @@ mechanism. Neither fresh moments nor RAW parameter rescaling offers a broad
 improvement. No production loss, optimizer, feature-gain setting or architecture
 is changed. All four sets of learned weights are discarded.
 
-## Original quality trials resume with full state
+## Original quality trials completed the 40k boundary
 
 The original8k boundary is only5% of its planned160k-update horizon. With no
 identified finite-state/target/precision fault or supported simple replacement,
-both original arms now continue to an explicit **step40,000 review**:160,000
+both original arms have completed the explicit **step40,000 review boundary**:160,000
 examples, a quarter of the original640,000-example horizon. This is a decision
-to measure actual longer learning, not a claim that the weak model will converge.
+to measure actual longer learning, not a claim of convergence or stronger quality.
 
-Each restores its own actual8k raw model, EMA, Adam moments, Torch/Python/CUDA RNG
+Each restored its own actual8k raw model, EMA, Adam moments, Torch/Python/CUDA RNG
 and best-score state. The original160k cosine horizon, warmup2k, LR2e−4,
 batch4/BF16, source bundle and frozen manifests remain fixed. New branch run
 directories preserve the original8k logs, checkpoints and reports byte for byte.
 No diagnostic weight is used. Intermediate16k/24k/32k checkpoints are retained;
 there is no automatic promotion or continuation beyond40k.
 
-The no-DINO arm is running; DINO starts serially after it passes its boundary
-checks. Actual startup checks verify model/optimizer/global RNG before the first
-update and EMA before its first update. The controller also checks the first16
-actual observations against this replay fixture. This is a running training
-experiment, not a new quality result. Full quality/native review remains required.
+The [completed boundary and handoff receipt](results/packed-isotropic-quarter-training-boundary-v1.json)
+verifies that both training owners have exited and the independent full-state,
+source, ancestry and observation audit has passed. The actual1602 logged
+training observations per arm match in step/domain/LR/batch hash. Actual startup
+checks verify model/optimizer/global RNG before the first update and EMA before
+its first update; the first16 observations also match this replay fixture.
+The GPU quality review is now running. No new40k quality gain or promotion is
+established by completed training. Full quality/native review remains required.
 
 Private status:
 `/mnt/external/demosaic/runs/packed-isotropic-quarter-workflow-v1.json`.
@@ -123,7 +126,8 @@ All852 model and EMA tensors have changed since8k; all852 Adam states are finite
 with correct counters, shapes and nonnegative second moments. The reconstructed
 source bundle, four manifests and962 logged training rows retain the original
 recipe and LR schedule. This verifies state integrity, without inference or a
-quality claim. DINO remains at8k until its serial continuation starts.
+quality claim. That audit preceded DINO's serial continuation; both arms have
+since completed40k.
 
 ## Frozen quarter-horizon review queue
 
@@ -159,6 +163,7 @@ Private review status:
 A separate [fresh input-coordinate CPU diagnostic](packed-isotropic-fresh-coordinates.md)
 now tests internal RAW feature scaling from identical fresh weights and a common
 initial bilinear prediction. It reuses the same16 training observations and
-discards all learned states. Its first16 updates/arm are verified; final results
-remain pending. It yields CPU computation to the owned reviews/timing after
+discards all learned states. Its [64-update interim comparison](results/packed-isotropic-fresh-coordinate-CPU-interim64-v1.json)
+finds no broad coordinate-map improvement; final results remain pending.
+It now yields CPU computation to the owned reviews/timing after
 the original training owner exits and does not change the matched trials.
