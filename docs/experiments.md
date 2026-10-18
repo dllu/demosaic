@@ -1,5 +1,12 @@
 # Experiment evidence
 
+The [new mature-parent objective comparison](reconstruction-objective-v74-v75.md)
+has passed genuine CPU/CUDA engineering checks and started its first1k control
+arm. Both arms use the reviewed84,867-source corpus and genuine V63 EMA; only
+the reconstruction objective differs. One hundred focused tests pass in total,
+with one CUDA test skipped. Full trained quality/native review is pending;
+neither the new loss nor the larger corpus has a demonstrated gain yet.
+
 The [completed mature FP32 full-frame and CLI validation](mature-cudnn-fullframe.md)
 adds opt-in `infer --cudnn-benchmark`. Warmed V43/V63 restores fall from206.88/209.35s
 to118.22/120.48s; the actual fresh V43 CLI takes166.67s including search.

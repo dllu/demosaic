@@ -17,7 +17,7 @@ from torch.utils.data import DataLoader
 from .cfa import bilinear
 from .color import render
 from .data import CleanDataset, degrade, validate_flat_chroma_stops
-from .losses import psnr, reconstruction_loss
+from .losses import psnr, reconstruction_loss, validate_reconstruction_objective
 from .model import JointDemosaic, ModelConfig
 from .optimizer_batches import backward_groups, batch_layout, optimizer_batches
 from .paired_training import PairedDataset, paired_reconstruction_loss, paired_step
@@ -279,6 +279,10 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
     if resume and initialize:
         raise ValueError("Choose resume or initialize, not both")
     config = yaml.safe_load(Path(config_path).read_text())
+    objective = validate_reconstruction_objective(
+        config.get("reconstruction_objective", "charbonnier-v1")
+    )
+    config["reconstruction_objective"] = objective
     groups, forward_groups = batch_layout(config)
     normalization_policy = config.get("normalization_augmentation", "none")
     if normalization_policy not in ("none", "center-half-mix-v1"):
@@ -548,6 +552,8 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
             raise ValueError("Resume native RAW augmentation differs; initialize a new run")
         if state["config"].get("multiscale_sensor_weight", 0.0) != multiscale_weight:
             raise ValueError("Resume multiscale loss differs; initialize a new run")
+        if state["config"].get("reconstruction_objective", "charbonnier-v1") != objective:
+            raise ValueError("Resume reconstruction objective differs; initialize a new run")
         if state["config"].get("normalization_augmentation", "none") != normalization_policy:
             raise ValueError("Resume normalization augmentation differs; initialize a new run")
         if state["config"].get("data_seed_per_step", False) != config.get(
@@ -762,7 +768,8 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                 )
                 if use_pair:
                     loss, terms = paired_reconstruction_loss(
-                        prediction, batch, auxiliary, multiscale_sensor_weight=multiscale_weight
+                        prediction, batch, auxiliary, multiscale_sensor_weight=multiscale_weight,
+                        objective=objective,
                     )
                 else:
                     loss, terms = reconstruction_loss(
@@ -772,6 +779,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
                         physical_fp32=model.config.physical_fp32,
                         normalized_sensor_weight=config.get("normalized_sensor_weight", 0.0),
                         multiscale_sensor_weight=multiscale_weight,
+                        objective=objective,
                     )
             if not torch.isfinite(loss):
                 raise RuntimeError(f"Nonfinite loss at step {step}; last checkpoint retained")

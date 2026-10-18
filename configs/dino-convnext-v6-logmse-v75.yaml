@@ -1,0 +1,64 @@
+amp: true
+augmentation_downsample: 2
+batch_size: 16
+broad_camera: true
+channels_last: true
+checkpoint_every: 1000
+cpu_threads: 4
+data_seed_per_step: true
+device: cuda
+experiment_notes: Matched objective trial from genuine V63 original20k EMA, fresh
+  AdamW/EMA/RNG, same cleaned84867-source4x corpus and original native128/paired32
+  manifests. Only reconstruction_objective differs between arms. New primary terms
+  use per-image logMSE for synthetic camera/rendered RGB and paired measured-CFA/coarse-display;
+  auxiliary/gradient/highlight terms retain original penalties/coefficients. Original4k
+  schedule, first1000 boundary only; no automatic continuation/promotion. Parent comparisons
+  also change data and training horizon, not loss-only. Ancestor training includes
+  reviewed related-series sources; report fixed sensitivity cohorts and no scene-independence
+  claim. Root hot-cache run destination preserves external500GiB reserve.
+flat_fraction: 0.1
+log_every: 25
+lr: 1.0e-05
+manifest: /mnt/external/demosaic/commons-known-series-quarantine-20261017-v6/manifest4.jsonl
+min_available_gb: 12
+model:
+  camera_conditioning: true
+  dino: true
+  dino_feature_fusion: convnext-pyramid
+  dino_model: facebook/dinov3-convnext-tiny-pretrain-lvd1689m
+  dino_revision: 10d30274b4d445111e2d5bf75ac93bbd94db274b
+  physical_anchors: true
+  physical_fp32: true
+  restoration_backbone: pretrained-rgb
+  rgb_hidden_autocast: false
+  rgb_middle_skip_fp32: true
+  rgb_processing_scale: 1
+  variance_stabilization: true
+  width: 64
+noise_free_fraction: 0.1
+paired_fraction: 0.25
+paired_manifest: /mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json
+paired_workers: 2
+patch_size: 256
+precision: bfloat16
+preserve_negative_read_noise: true
+raw_clean_augmentation_downsample: 2
+raw_clean_fraction: 0.25
+raw_clean_manifest: /mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json
+raw_clean_workers: 2
+reconstruct_highlights: true
+run: /home/dllu/proj/demosaic/.cache/runs/dino-convnext-v6-logmse-v75
+seed: 51
+steps: 4000
+synthetic_fraction: 0.2
+trace_observations: true
+val_batches: 4
+validation_images: 8
+validation_manifest: /mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl
+validation_protocol: configs/evaluation.yaml
+warmup_steps: 100
+worker_start_method: spawn
+workers: 4
+flat_chroma_stops: 8
+multiscale_sensor_weight: 0
+reconstruction_objective: image-log-mse-v1

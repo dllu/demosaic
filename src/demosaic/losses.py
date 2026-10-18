@@ -14,6 +14,29 @@ def charbonnier(error):
     return (error.square() + 1e-6).sqrt().mean()
 
 
+def validate_reconstruction_objective(value):
+    if value not in ("charbonnier-v1", "image-log-mse-v1"):
+        raise ValueError("Unknown reconstruction objective")
+    return value
+
+
+def image_log_mse(error, valid=None):
+    """Mean negative PSNR, with a fixed 100dB floor and per-image mask counts.
+
+    Images with no valid samples contribute neither value nor gradient. The
+    mask is observation/reference validity, never derived from prediction error.
+    """
+    with torch.autocast(device_type=error.device.type, enabled=False), ieee_fp32():
+        if valid is None:
+            mse = error.float().square().flatten(1).mean(1)
+            return (10 * mse.clamp_min(1e-10).log10()).mean()
+        valid = valid.expand_as(error)
+        count = valid.flatten(1).sum(1)
+        mse = error.float().masked_fill(~valid, 0).square().flatten(1).sum(1) / count.clamp_min(1)
+        values = 10 * mse.clamp_min(1e-10).log10()
+        return values.masked_fill(count == 0, 0).sum() / (count > 0).sum().clamp_min(1)
+
+
 def noise_normalized_sensor_loss(prediction, batch, rendered_reference):
     """Measure observed-CFA error in units of the *clean* sensor standard deviation.
 
@@ -82,16 +105,19 @@ def reconstruction_loss(
     physical_fp32=True,
     normalized_sensor_weight=0.0,
     multiscale_sensor_weight=0.0,
+    objective="charbonnier-v1",
 ):
+    validate_reconstruction_objective(objective)
     if normalized_sensor_weight < 0:
         raise ValueError("Normalized sensor loss weight must be nonnegative")
     if not math.isfinite(multiscale_sensor_weight) or multiscale_sensor_weight < 0:
         raise ValueError("Multiscale sensor loss weight must be finite and nonnegative")
     target = batch["target"]
-    linear = charbonnier(prediction - target)
+    penalty = image_log_mse if objective == "image-log-mse-v1" else charbonnier
+    linear = penalty(prediction - target)
     display = render(prediction, batch["wb"], batch["matrix"], fp32=physical_fp32)
     truth = render(target, batch["wb"], batch["matrix"], fp32=physical_fp32)
-    rendered = charbonnier(display - truth)
+    rendered = penalty(display - truth)
     gradient = (
         sum(charbonnier(torch.diff(display, dim=d) - torch.diff(truth, dim=d)) for d in (-1, -2))
         / 2

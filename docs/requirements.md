@@ -3,18 +3,20 @@
 The objective is the complete project in `PROMPT.md`, including trained quality,
 not just software that executes. This checklist records the evidence required.
 
-The current [fresh mixed16 V72/V73 trial](packed-isotropic-mixed16-trial.md)
-has completed both32,000-example boundaries. The
-[matched camera/native-crop interim review](packed-isotropic-mixed16-matched-camera-interim.md)
-finds small DINO CFA gains and substantial residual grain, far below mature
-controls. Its [completed full review](packed-isotropic-mixed16-first32000-review.md)
-confirms +0.50510/+0.41568dB photo gains over older equal-example models but
-weak quality and151.54/169.39s FP32 restores. All146 native views and numerical/
-artifact/sensitivity checks are complete. A [current-versus-EMA check](mixed16-current-EMA-CPU.md)
-finds only small selected-photo differences and changes no inference policy.
-An isolated [original-schedule continuation](packed-isotropic-mixed16-quarter-training.md)
-is running to160,000 examples, with its complete quality/native review queued.
-These results do not meet the quality/speed requirements below; no model is promoted.
+The [completed mixed16 V72/V73 160k-example review](packed-isotropic-mixed16-quarter-review.md)
+finds own-parent progress but losses against older equal-example controls and
+substantial grain, far below mature V43/V63. All146 native triplets/202 cells
+and numerical/artifact/sensitivity checks are complete. Neither is promoted or
+automatically extended. The [completed mature FP32 execution validation](mature-cudnn-fullframe.md)
+adds optional autotuning, with118.22/120.48s warmed V43/V63 restores and a166.67s
+fresh V43 CLI restore including search. All full unquantized values and four
+RGB16 exports pass the original gates; sub10s remains unmet.
+
+The [new mature-parent objective trial](reconstruction-objective-v74-v75.md)
+has passed genuine CPU/CUDA preflights and started training on the cleaned
+84,867-source corpus. It stops each matched arm at1k for full quality/native
+review. Engineering success does not establish a loss/data quality benefit;
+all final quality/speed requirements below remain outstanding.
 
 Latest: the [completed RAW-native 40k review](packed-isotropic-quarter-review.md)
 confirms own8k progress, but 29.73/29.95dB photo scores, residual native grain

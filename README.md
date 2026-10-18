@@ -68,8 +68,10 @@ The [Commons archive download](docs/commons-download.md) stopped cleanly at its
 frozen manifests. The [completed matched V72/V73 review](docs/packed-isotropic-mixed16-quarter-review.md)
 finds gains over their own parents but losses against older equal-example models;
 neither replaces V43.
-The [completed content audit](docs/commons-content-overlap.md) supplies future
+The [completed content audit](docs/commons-content-overlap.md) supplies
 84,867-file training manifests with identified capture series quarantined.
+The [new matched objective trial](docs/reconstruction-objective-v74-v75.md) now
+uses that corpus; trained quality remains pending.
 See [training pipeline work](docs/training-pipeline.md) for augmentation before
 the last reduction, selected-domain loading and the batch-size sweep.
 The [packed detail review](docs/packed-detail-v40-v41-review.md) retains the

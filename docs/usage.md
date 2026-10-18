@@ -98,6 +98,14 @@ Losses combine linear and sRGB reconstruction, rendered gradients,
 highlight-region chroma error and clean-mosaic reconstruction. Rendered training
 loss does not make the inference output an sRGB image.
 
+Optional `reconstruction_objective: image-log-mse-v1` replaces the primary
+synthetic linear/rendered and paired measured-CFA/coarse-rendered penalties
+with per-image negative PSNR, using the existing validity masks. Auxiliary,
+gradient and highlight penalties retain their definitions and coefficients;
+relative gradient scales change. The default is `charbonnier-v1`. Resume rejects
+a changed objective. This training-only option has engineering checks but no
+demonstrated quality gain; see [the bounded matched trial](reconstruction-objective-v74-v75.md).
+
 Training writes JSONL metrics, resolved config, `last.pt` and validation-selected
 `best.pt`, with optimizer, EMA and RNG states. Resume with
 `demosaic train configs/base.yaml --resume /path/to/last.pt`. The optional

@@ -85,6 +85,35 @@ def test_clipping_uses_accumulated_gradient_not_individual_groups():
         torch.testing.assert_close(actual.grad, expected, rtol=1e-4, atol=1e-6)
 
 
+@pytest.mark.parametrize("forward", [1, 4])
+def test_optional_objective_reaches_both_domains_with_matching_accumulated_gradients(forward):
+    model, batches = physical_fixture()
+    domains = ["paired", "native", "commons", "paired"]
+    losses = []
+    for domain, batch in zip(domains, batches, strict=True):
+        prediction, auxiliary = model(
+            *(batch[k] for k in ["packed", "variance", "colors", "wb", "matrix"]), auxiliary=True
+        )
+        function = (training.paired_reconstruction_loss if domain == "paired"
+                    else training.reconstruction_loss)
+        value, _ = function(prediction, batch, auxiliary, objective="image-log-mse-v1")
+        losses.append(value)
+    expected = torch.stack(losses).mean()
+    expected.backward()
+    norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 1)
+    gradients = [p.grad.clone() for p in model.parameters()]
+    model.zero_grad(set_to_none=True)
+    selected = [(i + 1, d, b) for i, (d, b) in enumerate(zip(domains, batches, strict=True))]
+    value, _, actual_norm, _ = backward_groups(
+        model, selected, lambda step, domain, batch: batch,
+        {**options(forward), "reconstruction_objective": "image-log-mse-v1"},
+    )
+    torch.testing.assert_close(value, expected)
+    torch.testing.assert_close(actual_norm, norm)
+    for p, gradient in zip(model.parameters(), gradients, strict=True):
+        torch.testing.assert_close(p.grad, gradient, rtol=1e-4, atol=1e-6)
+
+
 def manifests(tmp_path):
     source = tmp_path / "clean.npy"
     np.save(source, np.random.default_rng(7).integers(0, 65536, (64, 64, 3), dtype=np.uint16))

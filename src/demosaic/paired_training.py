@@ -13,7 +13,7 @@ from torch.utils.data import Dataset
 
 from .cfa import color_indices, mosaic, pack
 from .color import render
-from .losses import multiscale_sensor_loss
+from .losses import image_log_mse, multiscale_sensor_loss, validate_reconstruction_objective
 from .noise import variance_map
 from .paired import TRAINING_SCENES
 from .paired_admission import approved_extension_cases, case_key
@@ -136,23 +136,28 @@ def masked_charbonnier(error, mask):
     ).sum() / mask.sum().clamp_min(1)
 
 
-def paired_reconstruction_loss(prediction, batch, auxiliary=None, *, multiscale_sensor_weight=0.0):
+def paired_reconstruction_loss(
+    prediction, batch, auxiliary=None, *, multiscale_sensor_weight=0.0,
+    objective="charbonnier-v1",
+):
     """Measured samples determine detail; AHD supplies only coarse RGB color.
 
     The 4x4 spatial means avoid supervising the network with AHD's fine-scale
     interpolation artifacts. Reference saturation masks apply to both losses.
     Independent low-ISO reference noise remains a limitation of real pairs.
     """
+    validate_reconstruction_objective(objective)
     if not math.isfinite(multiscale_sensor_weight) or multiscale_sensor_weight < 0:
         raise ValueError("Multiscale sensor loss weight must be finite and nonnegative")
     reference, valid = batch["sensor_reference"], batch["sensor_mask"].bool()
-    sensor = masked_charbonnier(prediction - reference, valid)
+    penalty = image_log_mse if objective == "image-log-mse-v1" else masked_charbonnier
+    sensor = penalty(prediction - reference, valid)
     coarse_valid = F.avg_pool2d(valid.any(1, keepdim=True).float(), 4, 4) >= 0.999
     coarse_prediction = F.avg_pool2d(prediction.float(), 4, 4)
     coarse_reference = F.avg_pool2d(batch["target"].float(), 4, 4)
     display = render(coarse_prediction, batch["wb"], batch["matrix"])
     truth = render(coarse_reference, batch["wb"], batch["matrix"])
-    coarse = masked_charbonnier(display - truth, coarse_valid.expand_as(display))
+    coarse = penalty(display - truth, coarse_valid.expand_as(display))
     auxiliary_loss = prediction.new_zeros(())
     if auxiliary is not None:
         auxiliary_loss = masked_charbonnier(

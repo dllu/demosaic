@@ -67,19 +67,21 @@ def test_domain_with_no_selected_steps_never_starts_its_loader():
 
 
 @pytest.mark.parametrize(
-    "warm_start,legacy_metadata,new_recipe,spawn_workers,weak_recipe",
+    "warm_start,legacy_metadata,new_recipe,spawn_workers,weak_recipe,objective",
     [
-        (False, False, False, False, False),
-        (True, False, False, False, False),
-        (True, True, False, False, False),
-        (True, False, True, False, False),
-        (False, False, True, True, False),
-        (False, False, True, True, True),
+        (False, False, False, False, False, "charbonnier-v1"),
+        (True, False, False, False, False, "charbonnier-v1"),
+        (True, True, False, False, False, "charbonnier-v1"),
+        (True, False, True, False, False, "charbonnier-v1"),
+        (False, False, True, True, False, "charbonnier-v1"),
+        (False, False, True, True, True, "charbonnier-v1"),
+        (True, False, True, False, False, "image-log-mse-v1"),
     ],
 )
 @pytest.mark.parametrize("backbone", ["local", "packed-isotropic"])
 def test_checkpoint_resume_matches_uninterrupted_training(
-    tmp_path, warm_start, legacy_metadata, new_recipe, spawn_workers, weak_recipe, backbone
+    tmp_path, warm_start, legacy_metadata, new_recipe, spawn_workers, weak_recipe, objective,
+    backbone,
 ):
     """RNG, augmentation, draw position, optimizer, LR and EMA survive a restart."""
     source = tmp_path / "clean.npy"
@@ -133,6 +135,8 @@ def test_checkpoint_resume_matches_uninterrupted_training(
         }
     if new_recipe:
         config.update(broad_camera=True, normalized_sensor_weight=0.02)
+    if objective != "charbonnier-v1":
+        config["reconstruction_objective"] = objective
     if spawn_workers:
         config.update(workers=1, worker_start_method="spawn")
     if weak_recipe:
@@ -155,6 +159,7 @@ def test_checkpoint_resume_matches_uninterrupted_training(
         state = torch.load(interrupted, weights_only=True)
         del state["config"]["initialized_from"]
         del state["config"]["flat_chroma_stops"]
+        del state["config"]["reconstruction_objective"]
         torch.save(state, interrupted)
     resumed = train(path, resume=interrupted)
     expected = torch.load(full, weights_only=True)
@@ -164,6 +169,12 @@ def test_checkpoint_resume_matches_uninterrupted_training(
     for group in ("model", "ema"):
         for name, value in expected[group].items():
             assert torch.equal(actual[group][name], value), name
+    config["reconstruction_objective"] = (
+        "charbonnier-v1" if objective == "image-log-mse-v1" else "image-log-mse-v1"
+    )
+    path.write_text(yaml.safe_dump(config))
+    with pytest.raises(ValueError, match="Resume reconstruction objective differs"):
+        train(path, resume=resumed)
 
 
 def test_explicit_fp32_guards_forward_and_backward_and_refuses_precision_change(
