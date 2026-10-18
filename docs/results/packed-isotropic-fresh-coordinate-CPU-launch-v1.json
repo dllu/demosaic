@@ -1,0 +1,124 @@
+{
+  "status": "running-discarded-fresh-CPU-feature-coordinate-study",
+  "observed_UTC": "2026-10-18T00:18:44.686160+00:00",
+  "plan": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-fresh-coordinate-CPU-v1/plan.json",
+    "sha256": "ca3fc1f8bc18bd567b189f642b25e376fcb03695869fcec743438726000254ca"
+  },
+  "worker": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-fresh-coordinate-CPU-v1/trial.py",
+    "sha256": "02f51e26642acef6f0bc0c5bd6f685bb8e59163ca732e61ad6f0834355a4bb3b"
+  },
+  "launch_handle": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-fresh-coordinate-CPU-v1/launch-handle.json",
+    "sha256": "d585248e2d9879cba08d9ee2b91b6fa5ac61b0b43b5abaa5688372bd30d1387b"
+  },
+  "prefix_proof": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-fresh-coordinate-CPU-v1/prefix-proof.json",
+    "sha256": "fd6d82b846c44ebd36afe0277a76aa7657e5939c5c4f675d492ac935e7b9fe1e"
+  },
+  "actual_prefix": {
+    "status": "verified-fresh-three-arm-CPU-initialization-and-first16-updates",
+    "worker": {
+      "pid": 2012360,
+      "created": 1792282156.8
+    },
+    "plan": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-fresh-coordinate-CPU-v1/plan.json",
+      "sha256": "ca3fc1f8bc18bd567b189f642b25e376fcb03695869fcec743438726000254ca"
+    },
+    "initial_model_SHA256": {
+      "raw": "ed1fdca69f4568ffc4c687db6f6677703c8f1b8203353975dd56476f74cc378d",
+      "gain32": "ed1fdca69f4568ffc4c687db6f6677703c8f1b8203353975dd56476f74cc378d",
+      "noise-compand": "ed1fdca69f4568ffc4c687db6f6677703c8f1b8203353975dd56476f74cc378d"
+    },
+    "initial_torch_RNG_sha256": "9e2d4112a0b8384c304c4c7a38b5b2c11ddadd7b1d88a68b1920c4c6abed80c0",
+    "all16_initial_outputs_equal_bilinear": true,
+    "initial_curves": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-fresh-coordinate-CPU-v1/initial-curves.json",
+      "sha256": "acb91c8d3169f67e862482b7ff0cb881ed1106c989f7233046d6bec7c9be68d7"
+    },
+    "first16_updates_all_three_arms": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-fresh-coordinate-CPU-v1/first16-training-prefix.jsonl",
+      "sha256": "8dccfeac41d7259f85c808545276dce070dd0c03ba6ae3af6d69052b9381ecb5"
+    },
+    "training_rows_verified": 48,
+    "CUDA_initialized": false,
+    "scope": "Actual initialization and first16 optimizer updates/arm, not completed256 updates, generalization, convergence, new quality or promotion."
+  },
+  "modes": [
+    "raw",
+    "gain32",
+    "noise-compand"
+  ],
+  "seed": 51,
+  "updates_per_arm_planned": 256,
+  "evaluation_updates": [
+    0,
+    64,
+    128,
+    256
+  ],
+  "fixed_training_batches": 16,
+  "domain_batches": {
+    "commons": 7,
+    "native": 4,
+    "paired": 5
+  },
+  "optimizer": {
+    "initialization": "fresh AdamW",
+    "lr": 0.0002,
+    "weight_decay": 0.01,
+    "gradient_clip": 1,
+    "schedule": "constant diagnostic LR, no warmup or production continuation claim"
+  },
+  "dtype": "float32 CPU only",
+  "CPU_compute_threads": 2,
+  "automatic_yield_to_owned_GPU_review_and_timing": true,
+  "watched_owners": [
+    {
+      "workflow": "/mnt/external/demosaic/runs/packed-isotropic-quarter-workflow-v1.json",
+      "owner": {
+        "pid": 1745457,
+        "created": 1792274479.6,
+        "driver_sha256": "781820ef18a23498539e32efd11a93551f734bb148f81f506e373fdaa62e7fee"
+      }
+    },
+    {
+      "workflow": "/mnt/external/demosaic/runs/packed-isotropic-quarter-review-workflow-v1.json",
+      "owner": {
+        "pid": 1784241,
+        "created": 1792275654.03,
+        "driver_sha256": "9f5290e940d6aa15ed760404a6759b2e6cc50d83389f3c961a2c9538845471f6"
+      }
+    },
+    {
+      "workflow": "/mnt/external/demosaic/runs/packed-isotropic-compilation-workflow-v1.json",
+      "owner": {
+        "pid": 1892187,
+        "created": 1792277635.47,
+        "driver_sha256": "71e3d0d635c29782b1d49c90e784bec4eef25915e84908f358eb06a1162f813d"
+      }
+    },
+    {
+      "workflow": "/mnt/external/demosaic/runs/packed-isotropic-corrected-grid-workflow-v2.json",
+      "owner": {
+        "pid": 1949709,
+        "created": 1792280689.52,
+        "driver_sha256": "e0d3bfaa78b303560d2a5f27852057eff26ccd22006aeb55f35a5ad7b69a8a77"
+      }
+    }
+  ],
+  "guards": 42,
+  "inputs": 19,
+  "tests": {
+    "passed": 7,
+    "seconds": 3.75,
+    "CUDA_hidden": true,
+    "ruff": "passed",
+    "scope": "Signed/monotonic/16-bit samples, fixed endpoints, zero-shot identity, crop/per-example independence, positive/smooth gradients, outer AMP FP32 and actual all-CFA initial-signal preservation with hook restoration."
+  },
+  "scope": "Discarded optimization diagnosis, not an improved model or quality initializer. Same16 actual frozen training-only production batches8001-8016,64 examples/identical noise, B4/native256 and original domain losses.256 updates repeat these same16 observations16 times, with constant LR2e-4 and no warmup/schedule claim. Compare raw, uncompensated fresh featuregain32 and fixed known-shot/read pointwise input companding (linear negative continuation). All metadata, physical raw signal skip and output units stay fixed. This changes internal feature initialization, unlike the prior isofunction RAW gain4 parameterization. No image-derived normalization, interpolation, inverse VST output, training-source admission, heldout/private GFX/protected-final optimization, GPU use, learned-weight export or quality promotion. Training errors are not generalization or a convergence verdict. Defer CPU compute once training exits until the exact owned review/timing controllers and last children exit.",
+  "limitations": "This is a fixed small repeated training-set experiment from fresh states, different from the earlier actual8k/moment replays. No source/module/default change in production, no new GPU job, no learned-weight export or quality candidate. Diagnostic completion and any useful mechanism result remain pending. The64 examples are fixed sample indices, not64 independent source scenes.",
+  "fixed_training_examples": 64
+}

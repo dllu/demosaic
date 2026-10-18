@@ -155,3 +155,10 @@ final scenes or promote a model automatically. The original8k report stays intac
 
 Private review status:
 `/mnt/external/demosaic/runs/packed-isotropic-quarter-review-workflow-v1.json`.
+
+A separate [fresh input-coordinate CPU diagnostic](packed-isotropic-fresh-coordinates.md)
+now tests internal RAW feature scaling from identical fresh weights and a common
+initial bilinear prediction. It reuses the same16 training observations and
+discards all learned states. Its first16 updates/arm are verified; final results
+remain pending. It yields CPU computation to the owned reviews/timing after
+the original training owner exits and does not change the matched trials.
