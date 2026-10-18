@@ -48,3 +48,8 @@ parameter/state identity, hook cleanup and invalid-input rejection. Independentl
 replaying1024 ordered finite training rows,96 domain mean reductions,27 inputs
 and45 frozen guards passes; the exact GPU process has exited. Production model
 modules, recipes and checkpoints remain unchanged.
+
+The [subsequent checkpointed experimental implementation](packed-isotropic-units.md)
+adds opt-in constants and verifies exact equivalence to this isolated prototype.
+Existing recipes retain defaults1; this completed diagnostic and its frozen
+source remain unchanged.

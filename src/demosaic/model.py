@@ -1,5 +1,6 @@
 """Sensor-conditioned local restoration with optional frozen DINOv3 context."""
 
+import math
 from dataclasses import asdict, dataclass
 
 import torch
@@ -58,6 +59,8 @@ class ModelConfig:
     isotropic_groups: int = 6
     isotropic_blocks: int = 8
     isotropic_local_width: int = 32
+    isotropic_raw_gain: float = 1.0
+    isotropic_residual_scale: float = 1.0
 
     def to_dict(self):
         return asdict(self)
@@ -383,6 +386,14 @@ class JointDemosaic(nn.Module):
         self.config = config or ModelConfig()
         self.refinement_precision = "float32"
         cfg = self.config
+        units = (cfg.isotropic_raw_gain, cfg.isotropic_residual_scale)
+        if any(
+            type(value) not in (int, float) or not math.isfinite(value) or value <= 0
+            for value in units
+        ):
+            raise ValueError("Isotropic RAW gain and residual scale must be finite and positive")
+        if units != (1, 1) and cfg.restoration_backbone != "packed-isotropic":
+            raise ValueError("Isotropic RAW/residual units require the packed-isotropic backbone")
         if type(cfg.raw_kernel_reconstruction) is not bool:
             raise ValueError("RAW kernel reconstruction must be a boolean")
         if cfg.raw_kernel_reconstruction and cfg.restoration_backbone != "pretrained-rgb":
@@ -390,7 +401,9 @@ class JointDemosaic(nn.Module):
         if cfg.adc_cfa_projection and (
             cfg.restoration_backbone != "pretrained-rgb" or not cfg.variance_stabilization
         ):
-            raise ValueError("ADC CFA projection requires explicit stabilized RGB noise conditioning")
+            raise ValueError(
+                "ADC CFA projection requires explicit stabilized RGB noise conditioning"
+            )
         if cfg.rgb_center_camera_matrix and cfg.restoration_backbone != "pretrained-rgb":
             raise ValueError("Centered camera matrices require the pretrained RGB backbone")
         if cfg.rgb_middle_skip_fp32 and cfg.restoration_backbone != "pretrained-rgb":
@@ -461,7 +474,12 @@ class JointDemosaic(nn.Module):
             from .packed_isotropic import PackedIsotropic
 
             self.packed_isotropic = PackedIsotropic(
-                cfg.width, cfg.isotropic_groups, cfg.isotropic_blocks, cfg.isotropic_local_width
+                cfg.width,
+                cfg.isotropic_groups,
+                cfg.isotropic_blocks,
+                cfg.isotropic_local_width,
+                raw_gain=cfg.isotropic_raw_gain,
+                residual_scale=cfg.isotropic_residual_scale,
             )
             self.context = None
             if cfg.dino:

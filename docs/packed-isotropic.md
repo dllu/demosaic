@@ -6,6 +6,10 @@ over the [8k boundary](packed-isotropic-first32000-review.md), but photo scores
 29.73/29.95 dB still trail mature controls and native views retain substantial
 grain. Full GFX restores take50.70/53.74s. **Neither endpoint is promoted**;
 V43 remains the working reference.
+The [experimental fixed-unit options](packed-isotropic-units.md) record RAW
+input gain and learned residual scale in checkpoints. Defaults preserve existing
+models; a full-data quality gain remains untested. The separate batch-learning
+diagnostic continues on its frozen implementation.
 The three requested pipeline improvements are already measured separately in
 [the pipeline report](training-pipeline.md); this experiment retains that data
 path and does not change the existing model recipes.

@@ -97,12 +97,19 @@ def test_trainable_path_and_portable_reload(tmp_path):
         load_checkpoint(path)
 
 
-def test_zero_context_preserves_common_weights_rng_and_output(tiny_convnext):
+@pytest.mark.parametrize(
+    "units", [{}, {"isotropic_raw_gain": 32, "isotropic_residual_scale": 1 / 32}]
+)
+def test_zero_context_preserves_common_weights_rng_and_output(tiny_convnext, units):
     nets, rng = [], []
     for enabled in (False, True):
         torch.manual_seed(5)
         net = JointDemosaic(
-            config(dino=enabled, dino_feature_fusion="packed-convnext" if enabled else "bottleneck")
+            config(
+                dino=enabled,
+                dino_feature_fusion="packed-convnext" if enabled else "bottleneck",
+                **units,
+            )
         )
         # Open the output head to test the entire context path at initialization.
         with torch.no_grad():
@@ -149,8 +156,11 @@ def test_dino_learns_all_scales_without_backbone_updates_and_preserves_extent(ti
         net(preview, (8, 12))
 
 
-def test_nonzero_dino_context_survives_portable_checkpoint(tiny_convnext, tmp_path):
-    net = JointDemosaic(config(dino=True, dino_feature_fusion="packed-convnext"))
+@pytest.mark.parametrize(
+    "units", [{}, {"isotropic_raw_gain": 32, "isotropic_residual_scale": 1 / 32}]
+)
+def test_nonzero_dino_context_survives_portable_checkpoint(tiny_convnext, tmp_path, units):
+    net = JointDemosaic(config(dino=True, dino_feature_fusion="packed-convnext", **units))
     with torch.no_grad():
         net.context.gate.fill_(0.1)
         net.packed_isotropic.head.weight.fill_(0.001)

@@ -6,6 +6,8 @@ This is an independent design using this project's existing gated blocks,
 informed by Fan & Zhang's JD3Net (WACVW 2026), not an upstream reproduction.
 """
 
+import math
+
 import torch
 from torch import nn
 from torch.nn import functional as F
@@ -45,12 +47,21 @@ def physical_features(packed, variance, colors, wb=None, matrix=None):
 class PackedIsotropic(nn.Module):
     """Predict a camera-RGB residual; never construct native dense kernels."""
 
-    def __init__(self, width=96, groups=6, blocks=8, local_width=32):
+    def __init__(
+        self, width=96, groups=6, blocks=8, local_width=32, *, raw_gain=1.0, residual_scale=1.0
+    ):
         super().__init__()
         if any(type(x) is not int or x < 1 for x in (width, groups, blocks, local_width)):
             raise ValueError("Packed isotropic widths/groups/blocks must be positive integers")
         if min(width, local_width) < 4:
             raise ValueError("Packed isotropic widths must be at least four")
+        if any(
+            type(value) not in (int, float) or not math.isfinite(value) or value <= 0
+            for value in (raw_gain, residual_scale)
+        ):
+            raise ValueError("Isotropic RAW gain and residual scale must be finite and positive")
+        self.raw_gain = float(raw_gain)
+        self.residual_scale = float(residual_scale)
         self.local_stem = nn.Conv2d(32, local_width, 3, padding=1)
         self.local_blocks = nn.Sequential(*(GatedBlock(local_width) for _ in range(2)))
         self.stem = nn.Conv2d(128, width, 3, padding=1)
@@ -72,6 +83,8 @@ class PackedIsotropic(nn.Module):
         with torch.autocast(packed.device.type, enabled=False), ieee_fp32():
             baseline = bilinear(packed, colors)
             inputs = physical_features(packed, variance, colors, wb, matrix)
+            if self.raw_gain != 1:
+                inputs = torch.cat((inputs[:, :4] * self.raw_gain, inputs[:, 4:]), 1)
             # Extend whole packed cells; native CFA phase remains unchanged.
             inputs = F.pad(inputs, (0, -width % 2, 0, -height % 2), mode="replicate")
             local = self.local_stem(inputs)
@@ -85,4 +98,7 @@ class PackedIsotropic(nn.Module):
         # The measured signal skip and final residual arithmetic preserve FP32
         # precision even when the internal spatial blocks run in BF16/FP16.
         with torch.autocast(packed.device.type, enabled=False), ieee_fp32():
-            return baseline + F.pixel_shuffle(self.head(x.float()), 2)
+            residual = self.head(x.float())
+            if self.residual_scale != 1:
+                residual = residual * self.residual_scale
+            return baseline + F.pixel_shuffle(residual, 2)

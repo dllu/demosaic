@@ -1,0 +1,837 @@
+{
+  "status": "completed-default-unit-compatibility-CPU-v1",
+  "checks": [
+    {
+      "receipt": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-unit-default-CPU-v1/receipt.json",
+        "sha256": "d0ef463d188be3eea6f5bd2b5f34ec443db5f00eaf0f3639aee67a62522887d7"
+      },
+      "nonvacuous_trained_weights": {
+        "head_weight_nonzero_count": 3456
+      },
+      "result": {
+        "status": "completed-actual40k-default-units-bitwise-legacy-CPU-check",
+        "owner": {
+          "pid": 2257593,
+          "created": 1792290665.68
+        },
+        "inputs": [
+          {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-fresh-coordinate-CPU-v1/work/src/demosaic/packed_isotropic.py",
+            "sha256": "49382567bb75233228f3f8dc4cf0eee0b45e8d09b2f91d638dda847ec768b7ab"
+          },
+          {
+            "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-b4-v71-step40000.pt",
+            "sha256": "5708fdc19542ca1ef1aaafec25038dc049e4f5027782809846cf6d888ebed2cc"
+          },
+          {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/fixtures.json",
+            "sha256": "628f5012ffda63e365bf31f74bb159ba30913d7cc3ced4e694527107c517c100"
+          },
+          {
+            "path": "/home/dllu/proj/demosaic/src/demosaic/model.py",
+            "sha256": "335691122e628c086888594ea48a852612b2afbd809e09e60e542cf0de060807"
+          },
+          {
+            "path": "/home/dllu/proj/demosaic/src/demosaic/packed_isotropic.py",
+            "sha256": "c88568c931e3da224d0f27bd74cca4f23da25cea1e543d488b3defcfb9485dba"
+          },
+          {
+            "path": "/home/dllu/proj/demosaic/tests/test_isotropic_units.py",
+            "sha256": "e37a103a2823ef6af220a2ed80a83d4b7eb365630c7ab0ae9aaee8c60e3ee78d"
+          },
+          {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-unit-default-CPU-v1/check.py",
+            "sha256": "610dc44f0f1c5a5e9c19e8b7ea37a29d1b27f75cca3d13556a06e1463cd2ffc5"
+          }
+        ],
+        "cases": [
+          {
+            "production_step": 8001,
+            "domain": "paired",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8001-paired.npz",
+              "sha256": "f4c4bd660bde04d00b9e66c57950b537731b84c9110a79ec865f95654281f362"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "88565a7fc9bfad2d1505b3b1d337e404f9e2f43f495d3aec27ce30643985d598"
+          },
+          {
+            "production_step": 8002,
+            "domain": "paired",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8002-paired.npz",
+              "sha256": "e59d8931b9ad84fc9b15d5db2882b9b4bce3280ea559eea0cf47b2dbe4f5052c"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "da5b622d9e3868d9b6ca285f25a5e1d5b131683300ed5434c9f253f023eab17b"
+          },
+          {
+            "production_step": 8003,
+            "domain": "native",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8003-native.npz",
+              "sha256": "d13491c9b7b738f13901430e0dc56c5f098b424dfcf20757552db1ac1cec1425"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "2caf581d38919826e4720630b010637aa4541f7858b97683906b579eb279f666"
+          },
+          {
+            "production_step": 8004,
+            "domain": "native",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8004-native.npz",
+              "sha256": "add5cffbbda9fd4d4285a998683c7088678ad9f7553dc0acdbf9111fa7efed9f"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "d1ea9d2550ffa65d9bda6bac7de5f0447e9323bb907f2a742d45ad8b790d7605"
+          },
+          {
+            "production_step": 8005,
+            "domain": "commons",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8005-commons.npz",
+              "sha256": "c0fc6fd73cef1dda9177286b95cce1c01ff1c612b8818c0bb329acc8035524f1"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "a31f835bef67b012a73703e90153bcebf3893c3098ce4d02179699c2615e9d3a"
+          },
+          {
+            "production_step": 8006,
+            "domain": "native",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8006-native.npz",
+              "sha256": "6b5e2d6506ff6eec12a59b61daca2fb1c996b83d3722cf802394ba5b72f93e86"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "562342cab351e364f0af81578531d894f607f072c76adb2e54b441d06672f58f"
+          },
+          {
+            "production_step": 8007,
+            "domain": "commons",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8007-commons.npz",
+              "sha256": "69d4251daeb87209d0d8f0c5adedb90efff6a1534d316c9eebde1957f1b65368"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "1f573f12bb7555f2fbc5fb91e87762e453eb169240355daa65d9c612bae57b30"
+          },
+          {
+            "production_step": 8008,
+            "domain": "native",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8008-native.npz",
+              "sha256": "5294b5bfacb9d4f99b4a8ea7bb43a96a74704cb722bb97aa8c6265400454b324"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "d067849158a700dfdd3d5adf8f6df2fb06657108c14634581c532f802d4229b9"
+          },
+          {
+            "production_step": 8009,
+            "domain": "paired",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8009-paired.npz",
+              "sha256": "9c07197910ba63602718eece872873ab17c38ca602fe7f1f5b2b93c2d3ff4392"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "31c9b6623f5b7349cd9729550aff514ab8b188ddecf9591bbad8eb081d168fdb"
+          },
+          {
+            "production_step": 8010,
+            "domain": "paired",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8010-paired.npz",
+              "sha256": "7a224b3941ce1f3942d1d91833f6c7e526ad294c1036ead1ae2a14cd301ba1ee"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "17d7099b67befd4d3bd6dab69940367822f2eb298717abd6de88d3d1d9c00939"
+          },
+          {
+            "production_step": 8011,
+            "domain": "commons",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8011-commons.npz",
+              "sha256": "6407e2ba0ba08c1f4865c818ea5099bbfeed1bc86a1b16d079bb7ed2a8294407"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "0bf357f3ce23f01082ff8ba6a69f1ed2dbaa718061653619fe681e708006ea29"
+          },
+          {
+            "production_step": 8012,
+            "domain": "commons",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8012-commons.npz",
+              "sha256": "4175109af167796ed2457ca9ecabca3c317d2c0567f8d0e5421516568873eb18"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "faf4c1dbc8c6fe91ca61fa2056bb04eaf2175a062e230e23c56d3bbeccba1b1b"
+          },
+          {
+            "production_step": 8013,
+            "domain": "commons",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8013-commons.npz",
+              "sha256": "57369d2b2a66dfc151379e6646c841f493a319ca871c83c8b2c2d2f375639d16"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "ef2d988ca1c0c65a158e642ab3f9e1cb838c3cba094e49cd0cd1d01397bf18df"
+          },
+          {
+            "production_step": 8014,
+            "domain": "paired",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8014-paired.npz",
+              "sha256": "65b2a2710c6a4dffe6b085e500345d4c1bf35c5c7b6784a2b8915315332d38e5"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "3fc8e2a84f01bf042debf4b8cb92cc493664a81d7dce7f21230712e703039c3d"
+          },
+          {
+            "production_step": 8015,
+            "domain": "commons",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8015-commons.npz",
+              "sha256": "f13a6b551874fc79628be59dc24ddb2e7cd20a8823c9e60a3aeb4c70c10a7902"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "98b957932559097065542eb826847df4bd7a5a9e8aa1f116d9b7a18d1a11fea7"
+          },
+          {
+            "production_step": 8016,
+            "domain": "commons",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8016-commons.npz",
+              "sha256": "5c2215a117c43c982a30211efcd69f0c58c188b72c84089a24555b54b267a680"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "328a4cd738880d09faca69c6caa53a5b072fc111ac64cfb88d9307aa9270b602"
+          }
+        ],
+        "observations": 64,
+        "compared_RGB_values": 326400,
+        "all_pixels_bitwise_equal": true,
+        "all852_state_tensors_unchanged": true,
+        "CPU_threads": 2,
+        "CUDA_initialized": false,
+        "torch": "2.14.1+cu130",
+        "scope": "Actual trained no-DINO40k EMA compared against archived old PackedIsotropic implementation on64 frozen training observations cropped to native34x50. New absent config fields default1. Both paths use identical weights, physical input values/CFA/WB/matrix and CPU FP32. Exact operator compatibility at these selected contexts, not photographic quality/generalization, full-frame CUDA equivalence or a new checkpoint."
+      }
+    },
+    {
+      "receipt": {
+        "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-unit-default-DINO-CPU-v1/receipt.json",
+        "sha256": "5064ce7aa003ff2c6bf8ccfb9cfa6d277a3a1927fbd646779e9f0523425d179d"
+      },
+      "nonvacuous_trained_weights": {
+        "head_weight_nonzero_count": 3456,
+        "DINO_gate_nonzero_count": 96,
+        "DINO_gate_max_abs": 0.3321704864501953
+      },
+      "result": {
+        "status": "completed-actualDINO40k-default-units-bitwise-legacy-CPU-check",
+        "owner": {
+          "pid": 2257592,
+          "created": 1792290665.68
+        },
+        "inputs": [
+          {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-fresh-coordinate-CPU-v1/work/src/demosaic/packed_isotropic.py",
+            "sha256": "49382567bb75233228f3f8dc4cf0eee0b45e8d09b2f91d638dda847ec768b7ab"
+          },
+          {
+            "path": "/mnt/external/demosaic/models/dino-packed-isotropic-b4-v70-step40000.pt",
+            "sha256": "4c2926e77dc5dea8580879eff9ebb69550fa891a295fa329a5800189c7fa8337"
+          },
+          {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/fixtures.json",
+            "sha256": "628f5012ffda63e365bf31f74bb159ba30913d7cc3ced4e694527107c517c100"
+          },
+          {
+            "path": "/home/dllu/proj/demosaic/src/demosaic/model.py",
+            "sha256": "335691122e628c086888594ea48a852612b2afbd809e09e60e542cf0de060807"
+          },
+          {
+            "path": "/home/dllu/proj/demosaic/src/demosaic/packed_isotropic.py",
+            "sha256": "c88568c931e3da224d0f27bd74cca4f23da25cea1e543d488b3defcfb9485dba"
+          },
+          {
+            "path": "/home/dllu/proj/demosaic/tests/test_isotropic_units.py",
+            "sha256": "e37a103a2823ef6af220a2ed80a83d4b7eb365630c7ab0ae9aaee8c60e3ee78d"
+          },
+          {
+            "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-unit-default-DINO-CPU-v1/check.py",
+            "sha256": "c53cd50e30a4c38b402b7153e96e2390f7b535cbcb08dd4ff9dd621501628aca"
+          }
+        ],
+        "cases": [
+          {
+            "production_step": 8001,
+            "domain": "paired",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8001-paired.npz",
+              "sha256": "f4c4bd660bde04d00b9e66c57950b537731b84c9110a79ec865f95654281f362"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "3736d4f7fc748ca3beec35151cb440f9a5237a8f3f3a22e89585ae39dd684f2b"
+          },
+          {
+            "production_step": 8002,
+            "domain": "paired",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8002-paired.npz",
+              "sha256": "e59d8931b9ad84fc9b15d5db2882b9b4bce3280ea559eea0cf47b2dbe4f5052c"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "bd50d4323df22f943804e8ca9249cc706a6801405b773c4f7984088a84c2ee94"
+          },
+          {
+            "production_step": 8003,
+            "domain": "native",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8003-native.npz",
+              "sha256": "d13491c9b7b738f13901430e0dc56c5f098b424dfcf20757552db1ac1cec1425"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "d3ee06e0dc025a8f2f481e6e8b4a99e4427249cba6c45decd214ee10129da502"
+          },
+          {
+            "production_step": 8004,
+            "domain": "native",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8004-native.npz",
+              "sha256": "add5cffbbda9fd4d4285a998683c7088678ad9f7553dc0acdbf9111fa7efed9f"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "88e9e71a441b3cb895531f4f148f057aef33ca907dce144f5079ccc4d998d8a0"
+          },
+          {
+            "production_step": 8005,
+            "domain": "commons",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8005-commons.npz",
+              "sha256": "c0fc6fd73cef1dda9177286b95cce1c01ff1c612b8818c0bb329acc8035524f1"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "356ee83ce91d26f03857bae8975592d3bbda0688351698bc070052965c28ba44"
+          },
+          {
+            "production_step": 8006,
+            "domain": "native",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8006-native.npz",
+              "sha256": "6b5e2d6506ff6eec12a59b61daca2fb1c996b83d3722cf802394ba5b72f93e86"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "91a03874442d68f2326f6f381aa5e43251dd236659386dbb41606fabd5c6309f"
+          },
+          {
+            "production_step": 8007,
+            "domain": "commons",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8007-commons.npz",
+              "sha256": "69d4251daeb87209d0d8f0c5adedb90efff6a1534d316c9eebde1957f1b65368"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "1c684973e95f8d66808b37a49fe53b48e3cab5c4ae51049c4f5b293685bdc172"
+          },
+          {
+            "production_step": 8008,
+            "domain": "native",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8008-native.npz",
+              "sha256": "5294b5bfacb9d4f99b4a8ea7bb43a96a74704cb722bb97aa8c6265400454b324"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "d4c85618fe71768bd75708fca7ffd1ed51f5369ed4accdef2011a1bd59081a09"
+          },
+          {
+            "production_step": 8009,
+            "domain": "paired",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8009-paired.npz",
+              "sha256": "9c07197910ba63602718eece872873ab17c38ca602fe7f1f5b2b93c2d3ff4392"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "0ba37fb998448fd80ce35a535dd51b1231e43d61c6ad72e6489830f43d9e7ea5"
+          },
+          {
+            "production_step": 8010,
+            "domain": "paired",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8010-paired.npz",
+              "sha256": "7a224b3941ce1f3942d1d91833f6c7e526ad294c1036ead1ae2a14cd301ba1ee"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "a5ae884dcb67f760df6ebaf39143499d6b8c9ea22b87a57c57dc1a650367ccf6"
+          },
+          {
+            "production_step": 8011,
+            "domain": "commons",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8011-commons.npz",
+              "sha256": "6407e2ba0ba08c1f4865c818ea5099bbfeed1bc86a1b16d079bb7ed2a8294407"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "93b23c2328e6964ed5404dce0e4633126033cfab8b1f643c933be2f254a32fe6"
+          },
+          {
+            "production_step": 8012,
+            "domain": "commons",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8012-commons.npz",
+              "sha256": "4175109af167796ed2457ca9ecabca3c317d2c0567f8d0e5421516568873eb18"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "3e1db6becdf3b55f56ff5b74f0de00459b0aa8edeb39f882fe72119ef14d04ac"
+          },
+          {
+            "production_step": 8013,
+            "domain": "commons",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8013-commons.npz",
+              "sha256": "57369d2b2a66dfc151379e6646c841f493a319ca871c83c8b2c2d2f375639d16"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "b833aa223431be38796abb60672ada40dc98c8d4d1f40a68087a2a21aa182230"
+          },
+          {
+            "production_step": 8014,
+            "domain": "paired",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8014-paired.npz",
+              "sha256": "65b2a2710c6a4dffe6b085e500345d4c1bf35c5c7b6784a2b8915315332d38e5"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "b286d4cfb98f02cd7989bb4f7e514b6d4930581fdcacd02004a9157cba611af3"
+          },
+          {
+            "production_step": 8015,
+            "domain": "commons",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8015-commons.npz",
+              "sha256": "f13a6b551874fc79628be59dc24ddb2e7cd20a8823c9e60a3aeb4c70c10a7902"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "88d9da55d6a3e9080e6825b50af86dea8a72ad411de318bfad860c0a533d20a0"
+          },
+          {
+            "production_step": 8016,
+            "domain": "commons",
+            "fixture": {
+              "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-production-replay-v1/training-step8016-commons.npz",
+              "sha256": "5c2215a117c43c982a30211efcd69f0c58c188b72c84089a24555b54b267a680"
+            },
+            "packed_input_ROI_xywh": [
+              0,
+              0,
+              25,
+              17
+            ],
+            "native_output_shape": [
+              4,
+              3,
+              34,
+              50
+            ],
+            "all_pixels_bitwise_equal": true,
+            "output_SHA256": "cd34acacc5658e652b5bfe9e64c708464ceb5ad000e571c3b012d048159c2cc2"
+          }
+        ],
+        "observations": 64,
+        "compared_RGB_values": 326400,
+        "all_pixels_bitwise_equal": true,
+        "all_restoration_and_frozen_backbone_state_tensors_unchanged": true,
+        "state_tensor_count": 1045,
+        "CPU_threads": 2,
+        "CUDA_initialized": false,
+        "torch": "2.14.1+cu130",
+        "scope": "Actual trained DINO40k EMA (same pinned cached official ConvNeXt backbone for both paths) compared against archived old PackedIsotropic implementation on64 frozen training observations cropped to native34x50. New absent config fields default1. Both paths use identical weights, physical input values/CFA/WB/matrix and CPU FP32. Exact operator compatibility at these selected contexts, not photographic quality/generalization, full-frame CUDA equivalence or a new checkpoint."
+      }
+    }
+  ],
+  "compared_RGB_values": 652800,
+  "observations_per_checkpoint": 64,
+  "initial_default_fields": [
+    1.0,
+    1.0
+  ],
+  "tests": {
+    "initial_targeted_suite": 65,
+    "DINO_default_and_scaled_variants": 4,
+    "actual_scaled_training_resume": 1,
+    "unique_cases_covered": 68
+  },
+  "scope": "Experimental checkpointed RAW/residual-unit options. Existing absent fields map to1 and all existing recipes remain unchanged. Actual40k EMA models with nonzero heads and nonzero DINO gate match archived pre-option PackedIsotropic code on64 frozen training observations per model, CPU FP32/native34x50 contexts. All model/restoration/frozen backbone values unchanged. Numerical operator/default compatibility, not photographic quality, full-frame CUDA equivalence, speed, generalization or new trained-model evidence."
+}
