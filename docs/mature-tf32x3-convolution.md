@@ -1,17 +1,23 @@
 # Three-product convolution: CPU feasibility and offline compilation
 
+The [completed actual CUDA follow-up](mature-tf32x3-cuda-review.md) passes all
+six saved-array numerical gates, but its resident medians are 9–10% slower
+than IEEE FP32. It stays experimental. The preparation below records the
+earlier CPU/offline phase and its original bounded GPU plan.
+
 The CPU operand proxy keeps the four tested mature-model outputs within
 **0.063 maximum / 0.0077 RMS DN16** of their IEEE FP32 originals. All seven
 hidden convolution shapes compile to SM121 Tensor Core instructions without
-initializing CUDA or loading a kernel. **Actual GPU accuracy and speed remain
-unverified.** Production inference/training, weights and defaults are unchanged.
+initializing CUDA or loading a kernel. **Those preparatory checks alone do not
+verify actual GPU accuracy or speed.** Production inference/training, weights
+and defaults are unchanged.
 [Plans, hashes, complete numerical checks and native crop records](results/mature-TF32x3-CPU-and-AOT-v1.json).
 
 This targets the expensive hidden RGB convolutions while retaining the current
 model's FP32 physical operations, first/final projections, native skips,
 transposed convolutions and DINO path. It is an execution experiment, without
-another learned branch or training change. The current original 20k V84/V85
-data study keeps its fixed inputs and takes priority over GPU testing.
+another learned branch or training change. The original 20k V84/V85 data study
+kept its fixed inputs and finished before GPU testing.
 
 ## Numerical feasibility
 
@@ -100,13 +106,13 @@ Ruff passes.
 The CUDA plan is frozen at
 `.cache/benchmarks/mature-TF32x3-CUDA-v1/plan.json`, with 47 frozen files / 57 bound
 inputs. A subsequent [bounded waiting controller](results/mature-TF32x3-CUDA-queue-v1.json)
-now queues it behind the exact quality-work owners. At launch it is childless,
-uses about18MiB RAM and maps no Torch/CUDA library; no GPU output exists.
+queued it behind the exact quality-work owners. At launch it was childless,
+used about18MiB RAM and mapped no Torch/CUDA library; no GPU output existed.
 The original CPU/AOT receipt preserves the earlier prepared-only observation.
 Its actual GPU worker also refuses live owners before CUDA or output creation.
 After successful original 20k training, numerical review, CPU closure and
 retained-reference preparation have all finished and exited, the frozen worker
-will check five CPU-FP64-known operators and both mature models on the two
+was configured to check five CPU-FP64-known operators and both mature models on the two
 photos and four standing GFX512 contexts. Each full RGB array must stay within
 the unchanged 1 maximum / .25 RMS DN16 bounds; any failure stops before timing.
 
