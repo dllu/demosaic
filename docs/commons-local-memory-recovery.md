@@ -69,3 +69,19 @@ receipt. Failed guards preserve the new run too. Sources remain quarantined or
 reserved. Independent duplicate/content/known-series review, matching scale
 membership, holdout handling and a separate frozen data recipe remain required.
 The standing GFX scene and siblings stay out of training.
+
+A separate candidate-only near-duplicate audit has completed on the1,179
+screen-clear sources against the94,455-row frozen existing8× corpus. It uses the existing
+dihedral dHash256/correlation operator (Hamming≤8 and correlation≥.99), with a
+read-only SQLite backup of the shared fingerprint cache and a separate owned
+writable copy. Forty-four package files match the running model's source. It
+waited for48GiB available RAM and passed its24GiB guard/30-minute active bound.
+No running training manifests or downloads change. The existing10 reviewed
+title-series rules match none of the arrivals; that finite check does not prove
+scene independence. All94,455 old rows/splits remain exact; the candidate adds
+1,075 training-split sources and104 reserved sources, with no new duplicate
+exclusions. The sole union edge is an existing training/already-excluded pair.
+The operator reused94,455 fingerprints and computed1,179 new ones. Independent
+metadata review checks every old/new row and actual controller/child exit.
+New title-series/content review and coupled4×/8× admission remain pending.
+[Completed audit and frozen plan](results/commons-local1188-duplicate-audit-v1.json).
