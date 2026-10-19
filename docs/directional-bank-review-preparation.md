@@ -74,6 +74,15 @@ single kernel or source change. The queued review evaluates both new final EMAs
 freshly, using the new control for the bank comparison. Old neural scores are
 not substituted for the new control's results.
 
+The bank arm has retained its1k checkpoint and continued training. Its105 model/
+105 EMA/103 AdamW states are finite, every optimizer step is1000, and all six
+new bank-context tensors (24,543 parameters) have nonzero model/EMA values and
+first/second optimizer moments. All14 directional tensors have active moments.
+The44-module source snapshot matches the frozen package, and all56 sampled
+observations through1k match the current completed control. This confirms that
+the intended new branch is active, without establishing a quality benefit or
+selecting an interim checkpoint. The original4000 bank budget continues.
+
 Trained V80/V81 quality and full native inspection remain pending. Reports will
 include at least two small100% noisy/restored/exact-GT triplets per checkpoint,
 plus cached DSCF3879/3880 sky/building/foliage/fence/lights with independent ISO100
