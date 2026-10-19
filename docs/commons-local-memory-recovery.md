@@ -1,11 +1,16 @@
 # Commons cache recovery after the memory guard
 
-The local download completed all 1,188 originals. Its preparer stopped at the
-memory guard, retaining **771 manifest-recorded 4× arrays**. A new frozen worker
-has passed the exact GPU-review/CPU-closure exit and stable-memory gates and is
-now preparing the external caches. All 1,188 4× caches completed without recorded
-errors; 8× preparation is running. Full cross-scale audit and screening remain
-pending. A fresh archive handoff waits for successful preparation.
+The recovered worker has completed **all1,188 originals at both4× and8×**,
+without preparation errors. Protected screening leaves1,179 heuristic-clear
+sources and9 flagged sources quarantined. Candidate membership is1,075
+quarantined training-split sources and104 reserved validation/test sources;
+none is admitted to training. Archive reconciliation completed and the bounded
+downloader is running, with another266 completed files at the dated audit.
+[Completion and independent checks](results/commons-local-memory-recovery-complete-v1.json).
+
+The original preparer stopped at the memory guard, retaining **771
+manifest-recorded4× arrays**. The recovered worker passed the exact
+GPU-review/CPU-closure exit and stable-memory gates before preparing the caches.
 [Verified waiters, source bindings and actual fixture](results/commons-local-memory-recovery-queue-v1.json).
 
 The recovery preserves the failed plan, logs, partial manifests and arrays.
@@ -34,9 +39,26 @@ protected-scene checks completed. The actual waiter created no outputs and
 loaded no Torch/CUDA libraries before its controlled predecessor exited.
 This is ingestion engineering evidence, without a corpus or quality conclusion.
 
-At the published observation both production waiters are live and childless,
-without Torch/CUDA mappings. No production cache copy, reconciliation or broader
-download has begun; the archive index matches the old handoff snapshot.
+The producer checked every original/cache identity and1,260,570,690 area
+scalar samples, with maximum difference one uint16 code. An independent pass
+checks all2,376 manifest rows and array headers, original attribution and
+deterministic splits, cross-scale membership and the exact screening partitions.
+A bounded32-source sample includes all9 screening flags:64 cache SHA-256 and
+64 local/archive-original SHA-1 checks pass, and6,144 independently averaged
+FP64 area codes differ by at most one. This sample is not an independent full
+byte/pixel reread. The full byte/pixel result is the producer's check.
+
+Reconciliation copied all1,188 originals (17,175,771,412 bytes) into the archive.
+Independent before/after comparisons preserve every immutable source/attribution
+field; only declared operational fields changed. All1,188 selected live-index
+rows still match the reconciliation snapshot. The broader downloader changes
+other rows, so its global index no longer matches the earlier wait snapshot.
+One unavailable original returned HTTP404 during the new download; its error is
+recorded separately from the successful1,188-source local preparation.
+
+The earlier queue observation showed both waiters childless and without
+Torch/CUDA mappings, before any cache copy, reconciliation or broader download.
+That dated receipt is preserved; it is not the current completion state.
 
 - Preparation: `/mnt/external/demosaic/commons-qi-local-preparation-memory-recovery-20261019-v1/`.
 - Handoff: `.cache/commons-archive-handoff-memory-recovery-20261019-v1/`.

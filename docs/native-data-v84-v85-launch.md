@@ -50,6 +50,10 @@ adapter binds V84/V85 original20000 labels, genuine completed training owners,
 91/91/89 states and the original20k hue lineage. The queued CPU closure uses
 the new data-study scorer while retaining the existing saved-array, native-pixel
 and V43/RawNIND reference checks. Actual native viewing remains required.
+[Actual queued owners and source bindings](results/native-data-v84-v85-review-queue-v1.json).
+All three waiters are verified childless, without Torch/CUDA mappings and with
+no model outputs created while training is live. Review uses257 frozen files;
+all44 package files match the actual training runtime exactly.
 
 The separate Commons recovery has completed both cache scales and protected
 screening. Reconciliation has finished and the bounded archive downloader is
