@@ -364,3 +364,16 @@ at the tested Haar offsets. Textured contexts remain structure-confounded.
 Known row/column controls and an independent numerical audit pass. This is a
 limited input-only diagnostic, without noise-truth, quality or calibration claims;
 no upstream data/code/weights or noise-model changes follow.
+
+## Mature FP32 execution candidate
+
+The current [Triton dot API](https://triton-lang.org/main/python-api/generated/triton.language.dot.html)
+supports a three-product Tensor Core precision mode. Its
+[pinned3.8 compiler pass](https://raw.githubusercontent.com/triton-lang/triton/v3.8.0/lib/Dialect/TritonGPU/Transforms/F32DotTC.cpp)
+motivates an inference-only hidden-convolution candidate. The
+[genuine mature-model CPU proxy and offline SM121 compilation](mature-tf32x3-convolution.md)
+find small tested output differences and compiler acceptance. CPU arithmetic
+is not Tensor Core parity; actual CUDA error gates, native review and timing
+remain outstanding. No production code path, learned weights or training
+recipe changes. This is execution research, without a new architecture or
+quality claim, and follows the existing priority on verified quality.

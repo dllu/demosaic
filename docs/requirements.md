@@ -3,6 +3,15 @@
 The objective is the complete project in `PROMPT.md`, including trained quality,
 not just software that executes. This checklist records the evidence required.
 
+The fixed [V84/V85 native-data comparison](native-data-v84-v85-launch.md) is
+running original20k schedules on128 versus150 captures. New
+[reviewed public RAW146/private168 extensions](public-raw-expansion-v3.md) and
+the [890-source Commons extension](commons-local1188-reviewed.md) are separate
+future inputs; they do not yet establish a trained data benefit. The
+[CPU three-product convolution candidate](mature-tf32x3-convolution.md) checks
+unchanged mature models and offline compilation only. Actual GPU accuracy,
+speed, broad real-photo superiority and SOTA remain unmet/unproven.
+
 The [completed original4k directional/interval review](directional-interval-original4k-review.md)
 finds+.27801/+.27640dB photo PSNR over fresh V63, but both arms fail the fixed
 known/unseen camera requirements. The matched interval photo effect is−.00161dB
