@@ -34,6 +34,10 @@ passes genuine CPU/CUDA mixed updates and exact disabled-default replay, with
 1,130 CPU tests passing. Fresh strict V80/V81 arms now run fixed original4k
 budgets with native128 held unchanged. This is an architecture experiment;
 trained quality, fixed eligibility and native crop review remain pending.
+The [validated evaluation and crop queue](directional-bank-review-preparation.md)
+now waits for exact training completion, with independent arithmetic, fixed
+weak-carrier/noise checks and matched V43/RawNIND native references. Its historical
+preflight is engineering evidence, not a V80/V81 quality result.
 
 The [guarded photometry pilot](guarded-input-cfa-gain.md) fails its fixed
 high-saturation screen and is closed without full427 continuation. All30 native

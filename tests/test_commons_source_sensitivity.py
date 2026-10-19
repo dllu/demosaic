@@ -170,6 +170,15 @@ def test_completed_objective_statistics_keep_primary_pairs_before_native_closure
     assert script().statistics_payload(payload) is payload
 
 
+def test_completed_bank_context_statistics_keep_all_fixed_primary_pairs():
+    payload = {
+        "status": "completed-directional-bank-primary-numerical-review-awaiting-native-and-color-review",
+        "sources": list(range(27)),
+        "comparisons": list(range(108)),
+    }
+    assert script().statistics_payload(payload) is payload
+
+
 @pytest.mark.parametrize(
     "container", [{}, {"status": "waiting"}, {"review_complete": True, "status": "waiting"}]
 )

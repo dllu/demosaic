@@ -52,6 +52,7 @@ def statistics_payload(container):
             "completed-objective-primary-numerical-review-awaiting-native-and-color-review",
             "completed-camera-supervision-primary-numerical-review-awaiting-native-and-color-review",
             "completed-directional-interval-primary-numerical-review-awaiting-native-and-color-review",
+            "completed-directional-bank-primary-numerical-review-awaiting-native-and-color-review",
             "completed-parent-input-gain-photo-statistics-awaiting-native-review",
         },
         "Model comparison statistics are incomplete",
@@ -159,8 +160,13 @@ def run(statistics_path, statistics_sha256, cohort_path, cohort_sha256, output):
         "completed-packed-isotropic-quarter-statistics-and-first8k-progress": [11],
         "completed-packed-isotropic-mixed16-first32000-example-statistics": [13],
         "completed-packed-isotropic-mixed16-quarter160000-example-statistics": [13],
-        "completed-camera-supervision-primary-numerical-review-awaiting-native-and-color-review": [9],
-        "completed-directional-interval-primary-numerical-review-awaiting-native-and-color-review": [9],
+        "completed-camera-supervision-primary-numerical-review-awaiting-native-and-color-review": [
+            9
+        ],
+        "completed-directional-interval-primary-numerical-review-awaiting-native-and-color-review": [
+            9
+        ],
+        "completed-directional-bank-primary-numerical-review-awaiting-native-and-color-review": [9],
         "completed-parent-input-gain-photo-statistics-awaiting-native-review": [1],
     }.get(container.get("status"), [7, 9])
     require(len(pairs) in expected_pairs, "Unexpected original photo comparison coverage")
