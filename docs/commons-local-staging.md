@@ -3,8 +3,10 @@
 A separate background download stages **1,188 new originals**, with a16GiB
 original-content budget and224GiB local free-space reserve, under
 `.cache/commons-qi-local-20261018-v1/`. It uses two workers and at most.25 request
-starts/second. This uses local headroom while the external archive is below its
-512GiB download reserve. The active V82/V83 corpora and schedules remain frozen.
+starts/second. It began using local headroom while the external archive was below
+its512GiB download reserve. Subsequent [snapshot consolidation](evaluation-snapshot-storage.md)
+has restored external capacity; this local selection remains frozen. The active
+V82/V83 corpora and schedules remain frozen.
 [Selection, attribution/budget audit, verified downloads and live-owner receipt](results/commons-local-stage-download-v1.json).
 
 The selection reads the original `/mnt/external/qi` index read-only. All1188
