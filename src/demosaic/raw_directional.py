@@ -42,10 +42,15 @@ class RawDirectionalResidual(nn.Module):
     Data-dependent filters are not claimed to be statistically unbiased.
     """
 
-    def __init__(self, *, bank_context=False):
+    def __init__(self, *, bank_context=False, bank_detach_input=False):
         super().__init__()
         if type(bank_context) is not bool:
             raise ValueError("Directional bank context must be a boolean")
+        if type(bank_detach_input) is not bool:
+            raise ValueError("Directional bank input detachment must be a boolean")
+        if bank_detach_input and not bank_context:
+            raise ValueError("Directional bank input detachment requires bank context")
+        self.bank_detach_input = bank_detach_input
         with torch.random.fork_rng(devices=[]):
             self.local = nn.Sequential(
                 nn.Conv2d(20, 32, 3, padding=1, padding_mode="replicate"),
@@ -120,6 +125,11 @@ class RawDirectionalResidual(nn.Module):
                     .permute(1, 0, 2, 3, 4)
                     .reshape(batch, 4 * len(DIRECTIONS), height, width)
                 )
+                if self.bank_detach_input:
+                    # Conditioning values and trainable bank gradients stay
+                    # intact; stop only this descriptor's gradient to the RGB
+                    # base (and to RAW inputs, if they require gradients).
+                    bank_input = bank_input.detach()
                 weights = (logits + self.bank(bank_input)).tanh().reshape(
                     batch, len(DIRECTIONS), 3, height * 2, width * 2
                 ) / math.sqrt(len(DIRECTIONS))

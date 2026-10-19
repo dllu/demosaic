@@ -139,11 +139,72 @@ def test_bank_learns_after_the_zero_head_opens_and_input_tensors_stay_unchanged(
     assert all(torch.equal(a, b) for a, b in zip(values, copies, strict=True))
 
 
+@pytest.mark.parametrize("amp", [False, True])
+def test_detached_bank_matches_hook_gradients_and_preserves_values_and_head_learning(amp):
+    torch.manual_seed(27)
+    connected = directional.RawDirectionalResidual(bank_context=True)
+    with torch.no_grad():
+        for parameter in connected.parameters():
+            parameter.normal_(std=0.04)
+    detached, hook_model = copy.deepcopy(connected), copy.deepcopy(connected)
+    detached.bank_detach_input = True
+    handle = hook_model.bank.register_forward_pre_hook(lambda _, args: (args[0].detach(),))
+    original = [
+        torch.rand(1, 3, 24, 32) * 0.1,
+        torch.rand(1, 4, 12, 16) * 0.1,
+        torch.full((1, 4, 12, 16), 0.001),
+        color_indices("GRBG"),
+        torch.randn(1, 67, 24, 32),
+    ]
+    results = []
+    for model in (connected, detached, hook_model):
+        values = [v.clone() for v in original]
+        values[0].requires_grad_()
+        values[4].requires_grad_()
+        with torch.autocast("cpu", dtype=torch.bfloat16, enabled=amp):
+            prediction = model(*values)
+            loss = (prediction - 0.06).square().mean()
+        loss.backward()
+        results.append((prediction.detach(), values[0].grad, values[4].grad))
+    handle.remove()
+    assert torch.equal(results[0][0], results[1][0])
+    assert torch.equal(results[1][0], results[2][0])
+    assert not torch.equal(results[0][1], results[1][1])
+    assert torch.equal(results[1][1], results[2][1])
+    assert all(torch.equal(results[0][2], r[2]) for r in results[1:])
+    for name, parameter in connected.named_parameters():
+        for model in (detached, hook_model):
+            other = dict(model.named_parameters())[name]
+            assert torch.equal(parameter.grad, other.grad), name
+    assert detached.bank[-1].weight.grad.count_nonzero()
+    assert detached.bank[0].weight.grad.count_nonzero()
+
+
+def test_detached_bank_configuration_roundtrip_and_legacy_default(tmp_path):
+    options = configuration(
+        raw_directional_bank_context=True, raw_directional_bank_detach_input=True
+    )
+    model = JointDemosaic(options)
+    assert model.pretrained_rgb.raw_directional.bank_detach_input
+    path = tmp_path / "detached.pt"
+    torch.save({"model_config": options.to_dict(), "model": model.restoration_state_dict()}, path)
+    restored, _ = load_checkpoint(path)
+    assert restored.config == options and restored.pretrained_rgb.raw_directional.bank_detach_input
+    old = options.to_dict()
+    old.pop("raw_directional_bank_detach_input")
+    assert ModelConfig.from_checkpoint(old).raw_directional_bank_detach_input is False
+    connected = JointDemosaic(ModelConfig.from_checkpoint(old))
+    assert not connected.pretrained_rgb.raw_directional.bank_detach_input
+    assert model.restoration_state_dict().keys() == connected.restoration_state_dict().keys()
+
+
 @pytest.mark.parametrize(
     "kwargs",
     [
         {"raw_directional_residual": False, "raw_directional_bank_context": True},
         {"raw_directional_bank_context": 1},
+        {"raw_directional_bank_detach_input": True},
+        {"raw_directional_bank_context": True, "raw_directional_bank_detach_input": 1},
     ],
 )
 def test_invalid_bank_configuration_is_rejected(kwargs):
@@ -151,3 +212,11 @@ def test_invalid_bank_configuration_is_rejected(kwargs):
     options.update(kwargs)
     with pytest.raises(ValueError, match="directional bank"):
         JointDemosaic(ModelConfig(**options))
+
+
+@pytest.mark.parametrize(
+    "options", [{"bank_detach_input": True}, {"bank_context": True, "bank_detach_input": 1}]
+)
+def test_invalid_direct_bank_detachment_is_rejected(options):
+    with pytest.raises(ValueError, match="bank input detachment"):
+        directional.RawDirectionalResidual(**options)
