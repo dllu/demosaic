@@ -5,6 +5,26 @@ extension against the existing native corpus, starting both arms freshly from
 the genuine V63 original20k EMA. Only native membership and output paths differ.
 No architecture, loss, Commons selection or augmentation changes accompany it.
 
+Both arms completed their original 20,000 updates by 2026-10-19 19:50 UTC,
+and both trainer owners and the training controller exited successfully. The
+queued review independently loaded the genuine final states: finite
+91-model/91-EMA/89-AdamW states, every optimizer counter 20000, and matching final
+Python/CPU/CUDA RNG states. All 595 recorded Commons/paired input pairs match;
+all 221 recorded native pairs change. Each arm has 801 finite logged training
+rows with the declared original-horizon LRs. Closed `last.pt` and retained final
+checkpoint bytes match within each arm. Unrecorded inputs are not independently
+replayed. [Final training receipt](results/native-data-original20000-completion-v1.json).
+
+The expanded final SHA256 is
+`44d46580d1026f8581e4a9404dbd7c3eed9721459cf19edd1efecdc266594c57`;
+the control final SHA256 remains
+`134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10`.
+The queued quality review has passed its training-boundary check and started
+the known/unseen panels. Full quality statistics and actual native crop viewing
+remain pending. This completion establishes training integrity without a
+quality or promotion claim. The earlier progress checks below retain their
+original scope; the README remains on V43.
+
 Both discarded engineering checks passed 16 actual updates per arm, using the
 original20k schedule. CPU used B1/native64/FP32; CUDA used the intended
 B16/native256/BF16. An independent checkpoint read verified finite91-model,
@@ -36,9 +56,9 @@ The retained final copy and closed `last.pt` have identical bytes.
 The expanded arm started serially after the successful control exit and stable
 memory gate, with actual owner 3666689 / creation 1792421187.78. Its first 17
 recorded observations through step 25 include 16 exactly matching Commons/paired
-batches and one changed native batch. This checks the intended input treatment;
-the full 20k matched comparison, final RNG equality and quality review remain
-pending. [Endpoint and actual handoff audit](results/native-control20000-expanded-start-v1.json).
+batches and one changed native batch. That handoff checked the intended input
+treatment before the final checks above.
+[Endpoint and actual handoff audit](results/native-control20000-expanded-start-v1.json).
 
 The same receipt now includes a closed retained 4k follow-up, after the expanded
 trainer passed step 4025. Both arms have finite 91-model/91-EMA/89-AdamW states,
@@ -46,7 +66,8 @@ all optimizer counters at 4000 and identical optimizer groups and Python/CPU/CUD
 RNG states at that boundary. LR 9.206544616434249e-6 matches the original 20k
 schedule and 10% floor. All 130 logged shared-domain pairs match; all 46 logged
 native pairs differ. Source archives differ only in the native manifest. This
-is an engineering check; final 20k endpoints and quality review remain required.
+was an engineering check; it did not substitute for the final endpoints or
+quality review.
 
 The closed retained 10k pair also passes. Both have finite 91-model/91-EMA/
 89-AdamW states, counters at 10000, identical optimizer groups and Python/CPU/CUDA
@@ -77,8 +98,9 @@ with its 10% floor. All 416 recorded domain choices match the declared selector;
 401 logged training rows match their observation hashes/LRs and have finite
 loss/gradient norm. All 44 archived package files and 253 frozen runtime files
 remain exact; the original data/protocol and source-snapshot digest match.
-This checks state and recipe integrity without inference or interim quality
-selection. Both original 20k endpoints and the complete final review remain required.
+This checked state and recipe integrity without inference or interim quality
+selection. It did not substitute for the original 20k endpoints or the complete
+final review.
 
 The full review adapter has independently checked both genuine16-update
 CPU/CUDA checkpoint pairs, including91/91/89 states, original20k schedules,
@@ -86,7 +108,7 @@ source-manifest-only archive differences and shared/RNG equality. It rejects
 live production and refuses engineering boundaries as quality results. An
 unchanged historical primary-score replay reproduces the original per-arm and
 matched thresholds; the new names describe generic scorer positions in that
-replay. No V84/V85 held-out predictions have been made. The analytic reviewer
+replay. At review-preflight time, no V84/V85 held-out predictions had been made. The analytic reviewer
 keeps all192 individual ADC layout/draw contrasts and12 group means, alongside
 the two existing weak-carrier/flat requirements. A loss in one case cannot be
 hidden by averaging. [Review preflight](results/native-data-review-preflight-v1.json).
@@ -98,8 +120,8 @@ adapter binds V84/V85 original20000 labels, genuine completed training owners,
 the new data-study scorer while retaining the existing saved-array, native-pixel
 and V43/RawNIND reference checks. Actual native viewing remains required.
 [Actual queued owners and source bindings](results/native-data-v84-v85-review-queue-v1.json).
-All three waiters are verified childless, without Torch/CUDA mappings and with
-no model outputs created while training is live. Review uses257 frozen files;
+At launch, all three waiters were verified childless, without Torch/CUDA mappings,
+with no model outputs created while training was live. Review uses257 frozen files;
 all44 package files match the actual training runtime exactly.
 
 The separate Commons recovery has completed both cache scales and protected
