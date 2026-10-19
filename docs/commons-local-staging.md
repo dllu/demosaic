@@ -1,6 +1,6 @@
 # Bounded additional Commons originals on the local SSD
 
-A separate background download stages **1,188 new originals**, with a16GiB
+A separate background download completed **1,188 new originals**, with a16GiB
 original-content budget and224GiB local free-space reserve, under
 `.cache/commons-qi-local-20261018-v1/`. It uses two workers and at most.25 request
 starts/second. It began using local headroom while the external archive was below
@@ -36,12 +36,18 @@ frozen data recipe are required before training admission. Standing GFX and
 siblings remain excluded. Retain the local selection/index when reconciling the
 main archive later so these originals are not downloaded twice.
 
-A separate [4×/8× preparation worker](commons-local-preparation.md) is now queued
-behind the exact downloader's exit. Production preparation is pending; the
-completed two-source fixture is engineering validation, not corpus admission.
+A separate [4×/8× preparation worker](commons-local-preparation.md) is now preparing
+the completed batch after the exact downloader's exit. Full preparation and
+screening are pending; the completed two-source fixture is engineering validation,
+not corpus admission.
+
+All1,188 originals have now downloaded. A separate [archive handoff](commons-archive-handoff.md)
+waits for preparation, then reconciles these identities before a bounded broader
+resume. The recovered external capacity is reserved conservatively for both
+new originals and future cache/model work. Current model data remains frozen.
 
 Inspect the local `download.log`, `launch.json` and SQLite status without
-starting another download. A stopped local job resumes with:
+starting another download. An incomplete, stopped local job resumes with:
 
 ```bash
 source scripts/env.sh

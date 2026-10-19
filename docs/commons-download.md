@@ -1,13 +1,18 @@
 # Expanding the Commons archive
 
-A [separate bounded local stage](commons-local-staging.md) now downloads1,188
+A [separate bounded local stage](commons-local-staging.md) has downloaded1,188
 additional checksum-disjoint originals with a16GiB payload cap and224GiB local
 reserve. It preserves the external archive and active experiment manifests.
 
 The later [verified evaluation-snapshot consolidation](evaluation-snapshot-storage.md)
-reclaimed168.82GiB, restoring about670.93GiB external free space. The local
-batch continues; its identities must be reconciled before a broader archive
+reclaimed168.82GiB, restoring about670.93GiB external free space. Local cache
+preparation continues; its identities must be reconciled before a broader archive
 resume. No competing downloader has started.
+
+The [local-original reconciliation and bounded-resume queue](commons-archive-handoff.md)
+now waits for successful local preparation. It will preserve the1,188 completed
+identities in the main archive before launching the unchanged download-only CLI,
+with two workers/.25 starts per second, a608GiB reserve and10,000-file limit.
 
 The existing Quality Images archive at `/mnt/external/qi` resumed on
 2026-10-15 at 23:44:50 UTC. At startup it contained 77,025 verified originals

@@ -1,7 +1,8 @@
-# Queued local Commons cache preparation
+# Local Commons cache preparation
 
-An isolated CPU worker waits for the [bounded local download](commons-local-staging.md)
-to finish, then prepares both **4× and8× linear uint16 caches**. The full selected
+The [bounded local download](commons-local-staging.md) completed all1,188 originals.
+Its isolated CPU worker is now preparing both **4× and8× linear uint16 caches**.
+The full selected
 batch needs approximately9.40GiB and2.35GiB respectively, excluding small headers
 and manifests. This supports the existing4× → geometry/PSF → area2 training
 path while retaining a direct8× comparison. The running V82/V83 recipe remains
@@ -61,3 +62,8 @@ Operational files:
 The worker stops on failed guards and preserves its output for inspection.
 Do not start a duplicate while its exact owner is live or treat partial caches
 as a reviewed corpus. No model-quality gain is claimed.
+
+An [archive handoff](commons-archive-handoff.md) waits for this exact owner's
+successful exit. It then preserves the completed local identities before a
+bounded external download resumes. Preparation's inputs and membership remain
+frozen; the subsequent archive phase does not admit training sources.

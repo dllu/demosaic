@@ -1,0 +1,78 @@
+{
+  "status": "queued-verified-local-original-reconciliation-and-bounded-archive-resume",
+  "observed_utc": "2026-10-19T07:08:17.653674+00:00",
+  "owner": {
+    "pid": 3126300,
+    "created": 1792393569.12
+  },
+  "actual_live": true,
+  "waiting_status": "waiting-for-exact-local-download-and-preparation-exits",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/commons-archive-handoff-20261019-v1/plan.json",
+    "sha256": "5a5ee8af4067213adbd8432c35c37a598f1def5ba3295956562f81819d8ad5be"
+  },
+  "worker": {
+    "path": "/home/dllu/proj/demosaic/.cache/commons-archive-handoff-20261019-v1/source/handoff_commons_local.py",
+    "sha256": "0a1d9c1560b73c88fe7bdb4a0406121c70aceb1645e418b0d4dd67f1f3a6db79"
+  },
+  "immutable_inputs_checked": 6,
+  "frozen_sources_checked": 3,
+  "archive_index_before": [
+    {
+      "path": "/mnt/external/qi/quality_images.sqlite3",
+      "sha256": "9592893edb1555d6dda767397b57f73c881a666f5f55c70ce29c21b20796d494"
+    },
+    {
+      "path": "/mnt/external/qi/quality_images.sqlite3-wal",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "archive_still_matches_original_local_selection_snapshot": true,
+  "waiting_process": {
+    "torch_loaded": false,
+    "cuda_loaded": false,
+    "children": 0,
+    "nice": 10,
+    "io_priority": "idle"
+  },
+  "predecessors": {
+    "download": {
+      "pid": 3014422,
+      "created": 1792388876.49
+    },
+    "preparation": {
+      "pid": 3057802,
+      "created": 1792390034.78
+    }
+  },
+  "archive_reserve_GiB": 608,
+  "download_limit": 10000,
+  "workers": 2,
+  "requests_per_second": 0.25,
+  "tests": {
+    "passed": 8,
+    "seconds": 2.87,
+    "full_frozen_real_two_source_fixture": {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/commons-archive-handoff-preflight-v1/receipt.json",
+      "sha256": "80e2538a4c6c54902485160c7e36a1c183902c0df67a5fa9f60a0ceba3708bb9"
+    },
+    "actual_no_pending_downloader_exit_code": 0
+  },
+  "current_local_download_snapshot": [
+    [
+      "downloaded",
+      1188,
+      17175771412
+    ]
+  ],
+  "current_detached_training_step": 2025,
+  "original_training_steps": 4000,
+  "training_and_review_sources_unchanged": true,
+  "PROMPT_README_criteria_and_general_archive_write_guard_unchanged": true,
+  "main_archive_updates_started": false,
+  "broader_download_started": false,
+  "training_admission": false,
+  "root_free_GiB": 234.10750198364258,
+  "external_free_GiB": 670.9155197143555,
+  "scope": "After exact local downloader/preparer exits and successful preparation, reconcile originals and resume the unchanged download-only CLI with a608GiB reserve/10,000-file limit. No source-photo modification, network duplication or active training admission."
+}
