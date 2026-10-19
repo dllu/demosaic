@@ -225,3 +225,44 @@ engineering evidence disguised as production, prior test promotion, preliminary
 title reports, changed source inventory, a protected-screen bypass and weakened
 duplicate thresholds. The actual context trainer stays live throughout. Full
 new-source viewing and the production duplicate/content results remain pending.
+
+## Complete 4× source viewing
+
+All4,337 images have now completed4× preparation with an empty error file:
+3,905 train,221 test and211 validation source-hash buckets. The new holdout
+buckets still become reserved sources rather than active evaluation additions.
+The same worker continues8× preparation. This is not yet a complete paired
+corpus. [Dated source-viewing evidence](results/commons-post4557-all-source-viewing-v1.json).
+
+All44 contact sheets were actually viewed, covering every source once through
+index4,336; the last page contains37 images. Independent coverage checks bind
+every PNG hash, exact contiguous index coverage, complete4× source records,
+selected original identities and the zero-error summary. These are resized
+source thumbnails, with no denoising output, noise conditioning or model score.
+Coarse viewing found diverse outdoor/urban/interior, wildlife/macro, transport,
+portrait/action, studio/product and art/detail subjects, without an obvious
+broken thumbnail. It does not establish full-resolution image quality or
+scene independence.
+
+Four ambiguous source types were also actually viewed at larger512px identity
+previews: a spread-wing insect specimen, an Apollo engraving reproduction,
+a pencil-sharpener mechanism and a mouse product image. Read-only original
+EXIF supports camera captures for the latter two: Canon EOS600D ISO100 f/32
+and Sony ILCE-9M2 ISO200 f/11. Both originals were read from the existing SSD
+archive, checked against publisher SHA1 before/after and left unchanged.
+No source HDD or personal original was opened. The larger views corrected
+the small-thumbnail impression of technical/digital rendering.
+
+Observed repeated portraits/events, framed artwork and banknote-series images
+all belong to new train buckets in the inspected examples. They remain under
+the complete existing-heldout/new-heldout title, pixel and DINO screens; the
+observations do not release any risk flag. Exact manifest fields determine
+the buckets, since the sheet's single `T` letter abbreviates both train/test.
+Artwork, specimen/product composites and monochrome images are recorded as
+source types, without inventing a photographic-only admission rule for this
+free-image pipeline. No extra source is released by these classifications.
+
+Full8×/area/protected results, the duplicate audit, all DINO pair viewing, final
+candidate title retrieval and explicit family/eligibility decisions still
+remain before coupled admission. The current model comparison, existing
+evaluation membership and representative README crops stay fixed.
