@@ -1,9 +1,15 @@
 # V80/V81 review queue and independent checks
 
-The complete review queue is live while the fixed V80/V81 training continues.
-It waits for the exact training controller and child to exit successfully before
-starting GPU evaluation. The source package contains 44 modules, byte-identical
-to the actual frozen training package. The separate reviewer freezes 235 files.
+Both V80/V81 arms have completed their fixed4000 updates, and the serial quality
+review is running. It began after the exact training controller and both workers
+exited successfully. Its independent final boundary audit passed:99/99/97 finite
+model/EMA/AdamW states for control and105/105/103 for bank, every optimizer step
+4000, original schedules and manifests, genuine parent and frozen DINO identity.
+All176 sampled inputs and161 logged domains/LRs match between arms; complete
+final Python/CPU/CUDA RNG states match exactly. All89 common trainable model and
+EMA tensors changed from the parent in each arm. These are engineering checks,
+not trained-quality evidence. The source package contains44 modules, identical
+to the frozen training package; the separate reviewer freezes235 files.
 [Source, ownership, preflight and test receipts](results/directional-bank-review-preparation-v1.json).
 
 The ten stages cover the full training boundary, known/unseen measured-CFA
@@ -51,7 +57,7 @@ stages, existing photo gates and native reference selection. Frozen review,
 closure, score, reference, color and highlight entry points import on CPU without
 initializing CUDA. Source hashes and the live queue owners are verified.
 
-The active control has retained its1k,2k and3k checkpoints correctly. Each has
+The control retained its1k,2k and3k checkpoints correctly. Each has
 99 model/99 EMA/97 AdamW finite states, and the3k audit verifies every optimizer
 step is3000 with the original4000 horizon. All eight directional tensors have
 nonzero first/second optimizer moments. Its44-module source snapshot matches
@@ -61,9 +67,9 @@ All136 sampled observations through3k exactly match the original control stream.
 These are read-only engineering checks. No interim checkpoint selection or
 change to either original4k budget follows; final quality review remains pending.
 
-The control has now completed all4000 updates, passed its final99/99/97 finite
-state checks, and exited successfully. The controller has launched the bank arm
-with its own original4000 budget. All176 sampled control batches match the closed
+The control completed all4000 updates, passed its final99/99/97 finite-state
+checks, and exited successfully before the bank arm started its own original4000
+budget. All176 sampled control batches match the closed
 V78 control stream; final Python/CPU/CUDA RNG states also match that old run.
 The final weights, optimizer and logged numerics do **not** match it exactly.
 The old trainer enabled cuDNN benchmarking, whereas this fresh matched pair uses
@@ -74,14 +80,15 @@ single kernel or source change. The queued review evaluates both new final EMAs
 freshly, using the new control for the bank comparison. Old neural scores are
 not substituted for the new control's results.
 
-The bank arm has retained its1k checkpoint and continued training. Its105 model/
-105 EMA/103 AdamW states are finite, every optimizer step is1000, and all six
+The bank arm's retained1k checkpoint verified105 model/105 EMA/103 AdamW finite
+states, every optimizer step1000, and all six
 new bank-context tensors (24,543 parameters) have nonzero model/EMA values and
 first/second optimizer moments. All14 directional tensors have active moments.
 The44-module source snapshot matches the frozen package, and all56 sampled
 observations through1k match the current completed control. This confirms that
-the intended new branch is active, without establishing a quality benefit or
-selecting an interim checkpoint. The original4000 bank budget continues.
+the intended new branch was active, without establishing a quality benefit or
+selecting an interim checkpoint. The bank arm subsequently completed its full
+original4000 budget and passed the final boundary audit described above.
 
 Trained V80/V81 quality and full native inspection remain pending. Reports will
 include at least two small100% noisy/restored/exact-GT triplets per checkpoint,
