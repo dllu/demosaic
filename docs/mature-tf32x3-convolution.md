@@ -97,10 +97,13 @@ its log remains preserved. The corrected attempt uses a fresh v2 output root.
 All 20 targeted rounding/geometry/owner/dependency/restoration tests pass in 5.47s;
 Ruff passes.
 
-The CUDA plan is prepared at
+The CUDA plan is frozen at
 `.cache/benchmarks/mature-TF32x3-CUDA-v1/plan.json`, with 47 frozen files / 57 bound
-inputs. **No waiter or GPU job is launched.** Its actual worker refuses the
-current exact live owners before CUDA initialization or output creation.
+inputs. A subsequent [bounded waiting controller](results/mature-TF32x3-CUDA-queue-v1.json)
+now queues it behind the exact quality-work owners. At launch it is childless,
+uses about18MiB RAM and maps no Torch/CUDA library; no GPU output exists.
+The original CPU/AOT receipt preserves the earlier prepared-only observation.
+Its actual GPU worker also refuses live owners before CUDA or output creation.
 After successful original 20k training, numerical review, CPU closure and
 retained-reference preparation have all finished and exited, the frozen worker
 will check five CPU-FP64-known operators and both mature models on the two
@@ -113,3 +116,13 @@ quota. That excludes JIT/search, transfers, tiling, blending, decode and export;
 it cannot establish 100MP latency. Actual native viewing, broader ADC/color/photo
 and full-frame checks remain required before production integration. No claimed
 speedup, new default, SOTA result or completion of the 10-second goal follows.
+
+The separate queue waits at most24h for dependencies, then requires48GiB
+available for60s, with128GiB root/500GiB external reserves. Active work has a
+32GiB available-memory floor,16GiB CUDA quota and1h runtime bound; resource
+waiting is capped at4h. It signals only its exact created child on a failed
+guard. Failed/mutated/incomplete dependencies and existing output/claim paths
+refuse launch; no automatic retry, full-frame continuation or promotion.
+Thirty related tests pass. Two real CPU stub subprocesses exercise queue
+completion/rejection protocols without Torch/CUDA, plus duplicate-launch
+refusal; they are controller fixtures, not model or GPU results.

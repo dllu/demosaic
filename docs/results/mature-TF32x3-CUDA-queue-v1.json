@@ -1,0 +1,129 @@
+{
+  "status": "queued-frozen-CUDA-precision-candidate-behind-exact-successful-quality-work",
+  "source_commit": "966d05983287fb2c8297dc454886e9fd2c98e61e",
+  "launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-TF32x3-CUDA-queue-v1/launch.json",
+    "sha256": "80d76bbe55b2766b8363c804afe0deb55bd0c14b7877ea7d8b0d8c78d9e4848f"
+  },
+  "queue_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-TF32x3-CUDA-queue-v1/plan.json",
+    "sha256": "613072d105ff073502efc3e28ced72d672903454e1c737e075c1e7e69ad98771"
+  },
+  "queue_controller": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-TF32x3-CUDA-queue-v1/controller.py",
+    "sha256": "f6fddbaa423bc2797f57a58c43acc50ecd23323a339c5ceec67345156dd966b1"
+  },
+  "GPU_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-TF32x3-CUDA-v1/plan.json",
+    "sha256": "2b383a8e4fb00a331e6f466ae4cfb549cba4c5a90aa07269d6df6da81e7bbf30"
+  },
+  "CPU_controller_fixture": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-TF32x3-queue-CPU-fixtures-v1/receipt.json",
+    "sha256": "653b6dd6e0588b1de7b8555f251c75002fe7251c00ba783c49ac4993b9229c58"
+  },
+  "actual_waiting_observation": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-TF32x3-CUDA-queue-v1/launch-observation-v1.json",
+    "sha256": "8d08e3cc664ca8c3a2b378d038aec5845ae81a4f16564a4de3fc58197c29a04b"
+  },
+  "exact_queue_owner": {
+    "pid": 3509343,
+    "created": 1792410998.19
+  },
+  "observed_runtime_status": "waiting-for-exact-training-review-closure-and-reference-exits-no-Torch-or-CUDA",
+  "waiter_RSS_MiB": 17.71484375,
+  "waiter_children": 0,
+  "Torch_or_CUDA_mapped": false,
+  "GPU_output_created": false,
+  "GPU_candidate_frozen_files": 47,
+  "GPU_bound_inputs": 57,
+  "queue_controller_additional_frozen_files": 1,
+  "blocking_owners": [
+    {
+      "pid": 3343889,
+      "created": 1792403189.77
+    },
+    {
+      "pid": 3344678,
+      "created": 1792403257.66
+    },
+    {
+      "pid": 3375236,
+      "created": 1792403623.99
+    },
+    {
+      "pid": 3375237,
+      "created": 1792403624.1
+    },
+    {
+      "pid": 3375241,
+      "created": 1792403624.3
+    }
+  ],
+  "successful_terminal_dependencies": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/native-data-v84-v85-original20k-v1/status.json",
+      "status": "completed-native-data-original20000-awaiting-full-quality-and-native-review",
+      "controller": {
+        "pid": 3343889,
+        "created": 1792403189.77
+      },
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/native-data-v84-v85-original20k-v1/plan.json",
+        "sha256": "5dd3250ebda9c16cceb295f5d4788bedc81f54a2e78f03f475141ce4b35f24d1"
+      }
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/native-data-v84-v85-original20k-review-v1/status.json",
+      "status": "completed-directional-bank-inference-awaiting-statistical-and-manual-native-closure",
+      "controller": {
+        "pid": 3375236,
+        "created": 1792403623.99
+      },
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/native-data-v84-v85-original20k-review-v1/plan.json",
+        "sha256": "1e13b713c498e209f07d28aeafe920b36d333b8af8925f98fa84b4ff925f3b77"
+      }
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/native-data-v84-v85-original20k-review-v1/closure-status.json",
+      "status": "completed-CPU-numerical-and-native-board-preparation-awaiting-manual-review",
+      "controller": {
+        "pid": 3375237,
+        "created": 1792403624.1
+      },
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/native-data-v84-v85-original20k-review-v1/closure-plan.json",
+        "sha256": "ac22688382c4911a10510a94d9e9dfbfe50b7861956ff4f2cbc764a3c6c87b5d"
+      }
+    }
+  ],
+  "required_completed_receipts": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/native-data-v84-v85-original20k-review-v1/work/outputs/reference-closure/receipt.json",
+      "status": "prepared-directional-working-reference-boards-awaiting-manual-review"
+    }
+  ],
+  "resource_gates": {
+    "launch_available_gib": 48,
+    "active_available_gib": 32,
+    "stable_seconds": 60,
+    "root_reserve_gib": 128,
+    "external_reserve_gib": 500,
+    "dependency_timeout_seconds": 86400,
+    "resource_timeout_seconds": 14400,
+    "worker_timeout_seconds": 3600,
+    "poll_seconds": 15
+  },
+  "CUDA_allocator_limit_GiB": 16,
+  "GPU_accuracy_bounds_DN16": {
+    "maximum": 1,
+    "RMS": 0.25
+  },
+  "tests": {
+    "passed": 30,
+    "seconds": 4.96,
+    "Ruff": "passed"
+  },
+  "CPU_fixture_scope": "Two real short-lived CPU stub subprocesses deliberately simulate completion/rejection protocol; duplicate launches refuse. Controller mechanics only, no Torch/CUDA/model accuracy or speed evidence. Exact-child stop/reap covered by actual own-child test.",
+  "scope": "One deferred frozen V43/V63 numerical execution candidate after exact successful original20k training/full numerical review/CPU closure/retained-reference preparation and all named owner exits. No Torch/Triton/CUDA or child while waiting. Stable48GiB/60s launch,32GiB active floor,16GiB CUDA quota enforced by frozen worker,128GiB root/500GiB external reserves,24h dependency/4h resource/1h active deadlines. GPU plan keeps original1/.25DN16 array gates before conditional resident-only B4/native512 timing. No automatic retry, full-frame, quality/default change or promotion. Actual arrays/native views still require independent review."
+}
