@@ -82,7 +82,19 @@ def select_candidates(survey_path, catalog_path):
             raise ValueError("Duplicate candidate file ID")
         identities.add(identifier)
         suffix = Path(url.path).suffix.lower()
-        if suffix not in {".nef", ".raf", ".dng", ".arw", ".rw2"}:
+        if suffix not in {
+            ".nef",
+            ".raf",
+            ".dng",
+            ".arw",
+            ".rw2",
+            ".cr2",
+            ".cr3",
+            ".pef",
+            ".orf",
+            ".srw",
+            ".nrw",
+        }:
             raise ValueError("Unexpected RAW file extension")
         metadata = Path(candidate["metadata_file"])
         if checksum(metadata) != candidate["metadata_sha256"]:
@@ -175,7 +187,9 @@ def fetch_public_raw(survey, catalog, output, *, workers=2):
                 raise RuntimeError("Public RAW acquisition reached its 512GiB reserve")
             result = download_file(output / "files", {**record, "bytes": size})
             print(
-                json.dumps({"event": "public-raw-verified", "id": result["file_id"], "bytes": size}),
+                json.dumps(
+                    {"event": "public-raw-verified", "id": result["file_id"], "bytes": size}
+                ),
                 flush=True,
             )
             return result

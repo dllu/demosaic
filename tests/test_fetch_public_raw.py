@@ -68,7 +68,9 @@ def selection(tmp_path):
     return survey, catalog, metadata, content, tmp_path / "acquisition"
 
 
-def test_verified_acquisition_archives_license_metadata_and_remains_quarantined(selection, monkeypatch):
+def test_verified_acquisition_archives_license_metadata_and_remains_quarantined(
+    selection, monkeypatch
+):
     survey, catalog, metadata, content, output = selection
     calls = []
 
@@ -80,9 +82,7 @@ def test_verified_acquisition_archives_license_metadata_and_remains_quarantined(
         return response
 
     monkeypatch.setattr(module.urllib.request, "urlopen", urlopen)
-    monkeypatch.setattr(
-        module.shutil, "disk_usage", lambda p: SimpleNamespace(free=2 * 1024**4)
-    )
+    monkeypatch.setattr(module.shutil, "disk_usage", lambda p: SimpleNamespace(free=2 * 1024**4))
     result = module.fetch_public_raw(survey, catalog, output)
     assert calls == ["HEAD", "GET"]
     row = result["files"][0]
@@ -140,3 +140,35 @@ def test_existing_output_owner_prevents_duplicate_acquisition(selection):
         with pytest.raises(RuntimeError, match="owns"):
             module.fetch_public_raw(survey, catalog, output)
     assert not (output / "manifest.json").exists()
+
+
+@pytest.mark.parametrize("suffix", ["CR2", "CR3", "PEF", "ORF", "SRW", "NRW"])
+def test_additional_camera_containers_retain_exact_license_and_checksum_guards(selection, suffix):
+    survey, catalog, _, content, _ = selection
+    source = json.loads(catalog.read_text())
+    source["data"][0][7] = source["data"][0][7].replace("Model.NEF", "Model." + suffix)
+    catalog.write_text(json.dumps(source))
+    proposal = json.loads(survey.read_text())
+    proposal["catalog_sha256"] = module.checksum(catalog)
+    proposal["scouted"][0]["raw_link_html"] = source["data"][0][7]
+    survey.write_text(json.dumps(proposal))
+    record = module.select_candidates(survey, catalog)[0]
+    assert record["filename"] == "123." + suffix.lower()
+    assert record["publisher_checksum"]["value"] == hashlib.sha256(content).hexdigest()
+    assert record["license_url"] == module.CC0
+    # Accepting a container never makes it a decoded or admitted source.
+    assert "split" not in record and "rows" not in record
+
+
+@pytest.mark.parametrize("suffix", ["jpg", "zip", "exe"])
+def test_non_raw_container_still_fails_before_acquisition(selection, suffix):
+    survey, catalog, _, _, _ = selection
+    source = json.loads(catalog.read_text())
+    source["data"][0][7] = source["data"][0][7].replace("Model.NEF", "Model." + suffix)
+    catalog.write_text(json.dumps(source))
+    proposal = json.loads(survey.read_text())
+    proposal["catalog_sha256"] = module.checksum(catalog)
+    proposal["scouted"][0]["raw_link_html"] = source["data"][0][7]
+    survey.write_text(json.dumps(proposal))
+    with pytest.raises(ValueError, match="Unexpected RAW file extension"):
+        module.select_candidates(survey, catalog)
