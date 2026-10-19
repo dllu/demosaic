@@ -16,6 +16,11 @@ The completed log is
 `.cache/commons-archive-handoff-memory-recovery-20261019-v1/download.log`.
 Keep the reserve available for data preparation, checkpoints and review exports.
 
+The next [separate CPU preparation](commons-post4557-preparation.md) now converts
+4,337 of those arrivals to quarantined4×/8× caches, reusing the existing originals
+with a560GiB cache-preparation reserve. Its selection, actual fixture and live
+owner are pinned. The downloader stays stopped; current model recipes stay fixed.
+
 The [reviewed local extension](commons-local1188-reviewed.md) separately freezes
 890 additional training sources at both scales, with unchanged evaluation
 membership. The running V84/V85 comparison retains its original manifests.
