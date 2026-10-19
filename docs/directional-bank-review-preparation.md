@@ -1,7 +1,10 @@
 # V80/V81 review queue and independent checks
 
-Both V80/V81 arms have completed their fixed4000 updates, and the serial quality
-review is running. It began after the exact training controller and both workers
+The V80/V81 review is complete with neither arm promoted or extended.
+[Full report and native crops](directional-bank-original4k-review.md). Both arms
+completed their original4000 updates, all ten evaluation stages and CPU audits
+finished, and all eight final native boards (125 cells) were actually viewed.
+The fixed real-camera and weak-carrier requirements fail. Review began after the exact training controller and both workers
 exited successfully. Its independent final boundary audit passed:99/99/97 finite
 model/EMA/AdamW states for control and105/105/103 for bank, every optimizer step
 4000, original schedules and manifests, genuine parent and frozen DINO identity.
@@ -20,14 +23,15 @@ and the genuine V63 parent in FP32. Historical V43/RawNIND scores require the
 existing coverage, protocol and classical-control witnesses. No evaluation
 targets, data splits, model defaults or frozen criteria change.
 
-A separate CPU queue waits for all ten stages and exact reviewer exit. It checks
+A separate CPU queue waited for all ten stages and exact reviewer exit. It checked
 saved hue arrays/metrics/renders and analytic arithmetic, applies the fixed
 photo/camera and signed weak-carrier/flat-noise criteria, and builds native crop
-boards. A third queue adds retained V43/RawNIND comparisons with matched source,
+boards. The reference queue added retained V43/RawNIND comparisons with matched source,
 ROI, noise, exposure and reference metadata. Synthetic crops retain exact-GT
 labels; camera/GFX references remain independent qualitative references. All
-pixels remain native-sized. These queues cannot perform the required actual
-visual inspection or promote a model.
+pixels remain native-sized. The automatic queues did not make a manual quality
+decision. All final boards have since been actually viewed and the full fixed
+review completed; no model was promoted.
 
 The CPU preflight replays completed V78/V79/V63 results only. All 108 primary
 comparisons match exactly, including adverse canonical camera-linear results.
@@ -64,8 +68,8 @@ nonzero first/second optimizer moments. Its44-module source snapshot matches
 the frozen training core, and all89 common trainable model and EMA tensors have
 changed from the genuine parent; only normalization buffers remain identical.
 All136 sampled observations through3k exactly match the original control stream.
-These are read-only engineering checks. No interim checkpoint selection or
-change to either original4k budget follows; final quality review remains pending.
+These were read-only engineering checks. No interim checkpoint selection or
+change to either original4k budget followed. The final review is linked above.
 
 The control completed all4000 updates, passed its final99/99/97 finite-state
 checks, and exited successfully before the bank arm started its own original4000
@@ -76,7 +80,7 @@ The old trainer enabled cuDNN benchmarking, whereas this fresh matched pair uses
 strict deterministic execution. The first logged numeric differences are at
 step1. Equal inputs and RNG do not establish bitwise equivalence across these
 execution policies; this comparison does not attribute the difference to a
-single kernel or source change. The queued review evaluates both new final EMAs
+single kernel or source change. The review evaluated both new final EMAs
 freshly, using the new control for the bank comparison. Old neural scores are
 not substituted for the new control's results.
 
@@ -90,7 +94,7 @@ the intended new branch was active, without establishing a quality benefit or
 selecting an interim checkpoint. The bank arm subsequently completed its full
 original4000 budget and passed the final boundary audit described above.
 
-While full427 evaluation runs, all twelve completed known/unseen-camera triplets
+During full427 evaluation, all twelve completed known/unseen-camera triplets
 were actually viewed at their original512×192 PNG size, with160×160 unresized
 panels. They cover the fixed2pilesofplates/7D-1 and
 LucieB_3apples/LucieB_Coulicoco regions for fresh V80/V81/V63. PNG
@@ -100,17 +104,17 @@ views: strong color noise is removed, while low-contrast plate variation remains
 softened. The unseen regions mostly show smooth warm-colored surfaces and broad
 boundaries, giving limited evidence about thin structures. These independently
 demosaiced AHD references are not exact GT. The two partial observation records
-are linked in the registry, with full manual review
-and the quality decision explicitly pending. All final boards/cells, including
-V43/RawNIND and synthetic-GT/GFX/analytic comparisons, still require inspection.
+retain their original preliminary scope and pending flags. The final manual
+record now covers all eight boards, including V43/RawNIND and synthetic-GT/GFX/
+analytic comparisons; see the complete report.
 
-Trained V80/V81 quality and full native inspection remain pending. Reports will
-include at least two small100% noisy/restored/exact-GT triplets per checkpoint,
+The complete report includes two small100% noisy/restored/exact-GT triplets per checkpoint,
 plus cached DSCF3879/3880 sky/building/foliage/fence/lights with independent ISO100
 labels. The protected-final split remains closed. The existing V43 README pixels
 remain unchanged; full-frame export and timing require separate eligibility.
 
-The [report-asset packager](bank-report-assets.md) is also queued after the
-complete reference review. It prepares byte-identical triplets and all native
-boards with their full metadata; manual findings and numerical interpretation
-remain separate required work.
+The [report-asset packager](bank-report-assets.md) completed after the exact
+review/closure/reference owners exited. Its byte-identical PNGs and metadata
+were inspected and incorporated into the report. The automatic package retains
+its original manual-pending flag; the separate final view record and report
+record the actual completed inspection and fixed decision.
