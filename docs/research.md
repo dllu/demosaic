@@ -394,3 +394,16 @@ The [June 2026 MambaRaw paper](https://arxiv.org/abs/2606.24479) instead studies
 JPEG-conditioned reconstruction with stored metadata for coding. Its task
 differs from noisy-Bayer restoration, so its reported efficiency is not evidence
 for replacing this project's denoiser.
+
+## Physics-conditioned pretrained reference
+
+The [RAM authors' implementation](https://github.com/matthieutrs/ram/tree/0de1617403291e5a28179097795752200e65b82c)
+adds multiscale forward-operator conditioning to a DRUNet-style reconstruction
+network, with Poisson/Gaussian noise inputs. The
+[completed zero-shot CPU pilot](ram-CPU-pilot.md) strictly loads all825 published
+state tensors and checks four Bayer phases before six fixed photo/GFX cases.
+Both photographic PSNR/SSIM scores trail retained V43/V63. More real-scene
+texture accompanies residual grain and fine sky patterns; no broad native gain
+is established. All30 native board cells and12 independent PSNR replays verify.
+The model stays an isolated reference, with no adaptation on qualitative captures,
+production dependency, DINO replacement, full-frame continuation or promotion.
