@@ -53,3 +53,55 @@ Its `status.json` records the exact owner, plan and current stage. The dated
 launch observed PID257168/creation1792448532.19; check PID and creation time
 together before acting. New arrays and receipts live under `work/outputs/`.
 The archive/index and all original photos remain read-only.
+
+## Preliminary title and source-family review
+
+The [metadata-only screen and actual source-pair review](results/commons-post4557-title-review-v1.json)
+cover all4,337 arrivals before the complete cache/protected/duplicate results.
+There are3,905 train-bucket queries and432 newly reserved hashes. Anchors include
+all9,660 prior validation/test/reserved titles and all432 new reserved titles.
+The unchanged.55 title threshold flags1,102 queries;8 more have no feature
+neighbor. The other2,795 have no title flag and still require all remaining
+review. No new source is admitted.
+
+Eight focused tests pass. The reusable matcher reproduces all10,735 historical
+feature sets and all1,075 earlier threshold decisions, with maximum3.34e-16
+top-score difference. Sorted `math.fsum` accumulation makes the new calculation
+deterministic. Independent source/label coverage checks and dense FP64 dot/norm
+replays verify all19,448 saved neighbors, with maximum4.45e-16 difference.
+This checks saved-neighbor arithmetic rather than exhaustively recomputing
+every absent pair; title similarity does not establish scene identity.
+
+Two fixed sheets containing36 source pairs were actually viewed:24 high-ranking
+matches to the prior corpus and12 to newly reserved arrivals. They show shared
+buildings/sites, a coastal statue and a tractor capture sequence, including
+different framing/details that a near-identical-pixel test can miss. Broad
+locality/topic matches also occur: different Seattle scenes, masked-person
+photos and different parade years. Those preliminary flags remain withheld;
+the sample is not a complete content review and reused anchors are not
+independent observations. The resized identity thumbnails are not native model
+performance crops. Every original source/credit remains unchanged.
+
+IDF depends on the candidate population. Final title decisions must be recomputed
+after complete caches and protected/pixel-duplicate screening establish the
+actual candidate set. These preliminary counts are not the eventual corpus size.
+
+## Queued pixel-duplicate audit
+
+The [duplicate queue](results/commons-post4557-duplicate-queue-v1.json) waits for
+the exact preparer's successful exit and complete area/protected receipts.
+It then runs the existing dHash≤8/correlation≥.99 operator against all95,634
+prior8× rows, using a private clone of the completed fingerprint cache. It
+preserves every prior source/split, reserves new holdout hashes and withholds
+new groups linked to existing sources. Source/index/cache inputs remain
+read-only; no active model recipe changes.
+
+A genuine two-new/two-prior-source fixture completed this queue and audit.
+All48 production source copies match the fixture. A separate intentional startup
+stop confirms that the disposable controller cleans up its own child while the
+actual trainer stays live. The added disk guard and SIGTERM cleanup affect
+orchestration; the fingerprint operator is unchanged. The audit retains48GiB
+available RAM and548GiB external reserves, a30s stable launch gate and a3600s
+active bound. Failed predecessors or guards prevent continuation, without an
+automatic retry or admission. Its root is
+`/mnt/external/demosaic/commons-post4557-duplicate-audit-20261019-v1/`.
