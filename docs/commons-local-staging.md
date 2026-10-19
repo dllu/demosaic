@@ -43,15 +43,15 @@ main archive later so these originals are not downloaded twice.
 
 A separate [4×/8× preparation worker](commons-local-preparation.md) began preparing
 the completed batch, then stopped at its memory guard. Partial atomic caches are
-retained. Recovery is deferred until the
-[GPU recovery and review](bank-detachment-memory-recovery.md) finish. Full
+retained. A new [external-SSD recovery](commons-local-memory-recovery.md) waits
+for the exact GPU-review/CPU-closure owner to finish successfully. Full
 preparation and screening are pending; the completed two-source fixture is
 engineering validation, not corpus admission.
 
 All1,188 originals have now downloaded. The dependent
 [archive handoff](commons-archive-handoff.md) exited because preparation did not
 complete. It did not reconcile the archive or begin broader downloading.
-A fresh handoff will require a successful recovered preparation. External
+A fresh handoff now waits for successful recovered preparation. External
 capacity remains reserved for new originals and future cache/model work.
 Current model data remains frozen.
 

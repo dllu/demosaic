@@ -1,11 +1,11 @@
-# Local-original reconciliation and archive resume: deferred
+# Local-original reconciliation and archive resume: waiting for recovery
 
 The local batch has downloaded all**1,188 originals /17,175,771,412bytes**.
 A separate worker waited for the exact local downloader and cache preparer to
 exit. It then stopped because preparation had failed its available-memory guard.
 **Archive reconciliation and broader downloading did not begin.** Recovery is
-deferred until the [GPU recovery and review](bank-detachment-memory-recovery.md)
-finish, followed by successful cache preparation under a fresh plan. The
+queued under a [fresh recovery/handoff plan](commons-local-memory-recovery.md)
+that waits for GPU review and CPU closure, then successful cache preparation. The
 implementation and completed fixture below remain valid engineering evidence.
 [Verified live queue, source bindings and full fixture](results/commons-archive-handoff-queue-v1.json).
 

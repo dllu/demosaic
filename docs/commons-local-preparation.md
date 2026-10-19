@@ -3,9 +3,10 @@
 The [bounded local download](commons-local-staging.md) completed all1,188 originals.
 Its isolated CPU worker stopped at its 24 GiB available-memory guard during
 **4× linear uint16 cache** preparation. Partial atomic arrays are retained, but
-there is no completed corpus receipt. Recovery of both **4× and8× caches** is
-deferred until the [GPU recovery and review](bank-detachment-memory-recovery.md)
-finish; a fresh frozen plan will reuse independently verified valid outputs.
+there is no completed corpus receipt. A new
+[external-SSD recovery](commons-local-memory-recovery.md) of both **4× and8×
+caches** is queued behind the exact GPU-review/CPU-closure owner, with a 608 GiB
+external reserve. The original failed workflow described below remains intact.
 The full selected
 batch needs approximately9.40GiB and2.35GiB respectively, excluding small headers
 and manifests. This supports the existing4× → geometry/PSF → area2 training
@@ -69,6 +70,6 @@ as a reviewed corpus. No model-quality gain is claimed.
 
 The dependent [archive handoff](commons-archive-handoff.md) also exited because
 this owner did not complete successfully. Archive reconciliation and broader
-downloading did not begin. Any new handoff must bind to a successful recovered
-preparer. Preparation's inputs and membership remain frozen; no archive phase
+downloading did not begin. A new handoff now waits for the recovered preparer's
+successful exit. Preparation's inputs and membership remain frozen; no archive phase
 admits training sources.

@@ -75,6 +75,7 @@ retry or a training extension.
 The local Commons downloader completed all 1,188 originals before the memory
 stop. Its preparer retained partial atomic caches, but did not finish; the
 dependent archive handoff exited before reconciliation or broader downloading.
-Data preparation and archive recovery are deferred until GPU recovery and
-review finish, using a new frozen plan and retained valid outputs. No newly
+New [cache-recovery and archive-handoff plans](commons-local-memory-recovery.md)
+wait for GPU review and CPU closure before reusing retained valid outputs on
+the external SSD. No newly
 staged source has entered training, and no source photos were modified.

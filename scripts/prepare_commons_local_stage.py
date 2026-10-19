@@ -82,10 +82,14 @@ def guard(root, *, reserve_gib, additional_bytes=0):
     require(psutil.virtual_memory().available >= 24 * GIB, "Less than24GiB available RAM")
 
 
-def freeze(stage, root, references, *, reserve_gib=200):
+def freeze(stage, root, references, *, reserve_gib=200, recover_from=None, after_status=None):
     repository = Path(__file__).resolve().parents[1]
     stage, root = Path(stage).resolve(), writable_path(root)
-    require(root.is_relative_to(repository / ".cache"), "Use a local .cache preparation root")
+    require(
+        root.is_relative_to(repository / ".cache")
+        or root.is_relative_to(Path("/mnt/external/demosaic")),
+        "Use a repository .cache or external demosaic preparation root",
+    )
     require(not root.exists(), "Preparation root already exists")
     download = read(stage / "plan.json")
     require(stage == Path(download["root"]), "Download stage moved")
@@ -98,7 +102,7 @@ def freeze(stage, root, references, *, reserve_gib=200):
     )
     # All pending original bytes still count, independently of downloader progress.
     guard(
-        repository,
+        root.parent,
         reserve_gib=reserve_gib,
         additional_bytes=download["selected_bytes"] + payload + 4 * GIB,
     )
@@ -114,6 +118,51 @@ def freeze(stage, root, references, *, reserve_gib=200):
             require(sha(row["manifest"]) == row["manifest_sha256"], "Protected manifest changed")
             inputs.append(ref(row["manifest"]))
     inputs = list({item["path"]: item for item in inputs}.values())
+    recovery = None
+    if recover_from is not None:
+        old_root = Path(recover_from).resolve()
+        old_plan, old_status = read(old_root / "plan.json"), read(old_root / "status.json")
+        require(
+            Path(old_plan["root"]) == old_root and Path(old_plan["work"]) == old_root / "work",
+            "Failed preparation plan moved",
+        )
+        require(
+            old_status["status"] == "failed-local-preparation" and not alive(old_status["owner"]),
+            "Only a failed, exited preparer may supply recovery caches",
+        )
+        require(
+            old_plan["stage"] == str(stage)
+            and old_plan["references"] == str(Path(references).resolve()),
+            "Recovery source/scene references differ",
+        )
+        for path, digest in old_plan["frozen_files"].items():
+            require(sha(path) == digest, "Failed preparer's frozen source changed")
+        recovery = {"root": str(old_root), "factors": {}}
+        inputs.extend(ref(old_root / name) for name in ("plan.json", "status.json"))
+        for factor in (4, 8):
+            partial = Path(old_plan["work"]) / "outputs" / f"prepared{factor}"
+            manifest = partial / "manifest.jsonl"
+            if not manifest.exists():
+                manifest = partial / "manifest.jsonl.tmp"
+            if manifest.exists():
+                recipe = partial / "recipe.json"
+                recovery["factors"][str(factor)] = {
+                    "root": str(partial),
+                    "manifest": ref(manifest),
+                    "recipe": ref(recipe),
+                }
+                inputs.extend((ref(manifest), ref(recipe)))
+    dependency = None
+    if after_status is not None:
+        after_status = Path(after_status).resolve()
+        state = read(after_status)
+        dependency = {
+            "status_path": str(after_status),
+            "owner": state["controller"],
+            "plan": state["plan"],
+            "success_status": "completed-CPU-numerical-and-native-board-preparation-awaiting-manual-review",
+        }
+        inputs.append(state["plan"])
     root.mkdir()
     work = root / "work"
     sources = list((repository / "src/demosaic").glob("*.py"))
@@ -142,8 +191,94 @@ def freeze(stage, root, references, *, reserve_gib=200):
         "workers": 1,
         "scope": "Quarantined 4x/8x caches, full original/cache integrity, rounded-area consistency and protected-scene screening. No existing corpus or original is modified. New holdouts remain reserved; duplicate/content review and a separate data recipe are still required. No training admission.",
     }
+    if recovery is not None:
+        plan["recovery"] = recovery
+        plan["minimum_stable_available_gib"] = 48
+        plan["stable_memory_seconds"] = 60
+    if dependency is not None:
+        plan["after_completion"] = dependency
     save(root / "plan.json", plan)
     return plan
+
+
+def reuse_partial_caches(plan, output, selection, factor):
+    """Copy only manifest-bound atomic arrays; leave the failed run untouched."""
+    import numpy as np
+
+    partial = plan.get("recovery", {}).get("factors", {}).get(str(factor))
+    if partial is None:
+        return {"factor": factor, "copied": 0, "bytes": 0}
+    old_plan = read(Path(plan["recovery"]["root"]) / "plan.json")
+    for path, digest in old_plan["frozen_files"].items():
+        require(sha(path) == digest, "Failed preparer's frozen source changed")
+    for key in ("manifest", "recipe"):
+        require(ref(partial[key]["path"]) == partial[key], "Partial-cache metadata changed")
+    source = Path(partial["root"])
+    require(
+        read(partial["recipe"]["path"])
+        == {
+            "version": 1,
+            "factor": factor,
+            "source": plan["stage"],
+            "transfer": "linear-sRGB",
+            "dtype": "uint16",
+            "selection_manifest_sha256": sha(output / "selection.jsonl"),
+        },
+        "Partial-cache recipe differs",
+    )
+    expected = {row["sha1_hex"]: row for row in selection}
+    seen, copied_bytes = set(), 0
+    destination = output / f"prepared{factor}"
+    for line in Path(partial["manifest"]["path"]).read_text().splitlines():
+        row = json.loads(line)
+        identity = row["id"]
+        require(identity in expected and identity not in seen, "Unexpected partial-cache identity")
+        seen.add(identity)
+        require(
+            all(row[key] == value for key, value in expected[identity].items()),
+            "Partial-cache attribution differs",
+        )
+        relative = Path("images") / identity[:2] / f"{identity}.npy"
+        require(
+            row["cache"] == str(relative)
+            and row["bin_factor"] == factor
+            and row["color_space"] == "linear-sRGB"
+            and row["dtype"] == "uint16",
+            "Partial-cache identity/path/recipe differs",
+        )
+        original = source / relative
+        require(
+            not original.is_symlink() and original.resolve().is_relative_to(source.resolve()),
+            "Partial-cache path escapes its source",
+        )
+        guard(Path(plan["root"]), reserve_gib=plan["reserve_gib"])
+        require(sha(original) == row["cache_sha256"], "Partial-cache bytes changed")
+        array = np.load(original, mmap_mode="r", allow_pickle=False)
+        require(
+            array.dtype == np.uint16
+            and array.ndim == 3
+            and array.shape[-1] == 3
+            and list(array.shape) == row["shape"]
+            and min(array.shape[:2]) >= 2048 // factor,
+            "Invalid partial-cache array",
+        )
+        del array
+        target = destination / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        require(not target.exists(), "Recovery destination already exists")
+        temporary = target.with_suffix(".reuse.tmp")
+        with temporary.open("xb") as writer:
+            try:
+                with original.open("rb") as reader:
+                    shutil.copyfileobj(reader, writer, length=8 * 1024**2)
+                writer.flush()
+                require(sha(temporary) == row["cache_sha256"], "Copied partial-cache bytes differ")
+            except BaseException:
+                temporary.unlink(missing_ok=True)
+                raise
+        temporary.replace(target)
+        copied_bytes += target.stat().st_size
+    return {"factor": factor, "copied": len(seen), "bytes": copied_bytes}
 
 
 def downloaded_records(stage):
@@ -285,8 +420,33 @@ def run(plan_path):
         print(json.dumps({"status": state}), flush=True)
 
     try:
-        record("waiting-for-exact-local-downloader-exit")
+        dependency = plan.get("after_completion")
         deadline = time.monotonic() + plan["wait_seconds"]
+        if dependency is not None:
+            record("waiting-for-exact-GPU-review-closure-exit")
+            while alive(dependency["owner"]):
+                require(time.monotonic() < deadline, "Review closure wait exceeded declared budget")
+                time.sleep(20)
+            state = read(dependency["status_path"])
+            require(
+                state["controller"] == dependency["owner"]
+                and state["plan"] == dependency["plan"]
+                and state["status"] == dependency["success_status"],
+                "Review closure did not complete successfully with the declared identity",
+            )
+        if "recovery" in plan:
+            record("waiting-for-stable-memory-before-cache-recovery")
+            since = None
+            while True:
+                require(time.monotonic() < deadline, "Stable-memory wait exceeded declared budget")
+                if psutil.virtual_memory().available >= plan["minimum_stable_available_gib"] * GIB:
+                    since = time.monotonic() if since is None else since
+                    if time.monotonic() - since >= plan["stable_memory_seconds"]:
+                        break
+                else:
+                    since = None
+                time.sleep(10)
+        record("waiting-for-exact-local-downloader-exit")
         while alive(plan["download_owner"]):
             require(time.monotonic() < deadline, "Local download wait exceeded declared budget")
             time.sleep(20)
@@ -323,8 +483,10 @@ def run(plan_path):
                 return original_prepare_one(*args, **kwargs)
 
             prepare.prepare_one = guarded_prepare_one
+            reused = []
             try:
                 for factor in (4, 8):
+                    reused.append(reuse_partial_caches(plan, output, selection, factor))
                     record(
                         f"preparing-quarantined-{factor}x",
                         originals=len(selection),
@@ -340,6 +502,7 @@ def run(plan_path):
                     )
             finally:
                 prepare.prepare_one = original_prepare_one
+            save(output / "reused-caches.json", reused)
             record("auditing-all-cache-bytes-and-area-consistency")
             audit = audit_caches(output, selection)
             save(output / "cache-audit.json", audit)
@@ -366,6 +529,7 @@ def run(plan_path):
                 "plan": ref(plan_path),
                 "selection": ref(manifest),
                 "cache_audit": ref(output / "cache-audit.json"),
+                "reused_caches": ref(output / "reused-caches.json"),
                 "screening": ref(output / "protected-screen/summary.json"),
                 "candidates": ref(candidate_path),
                 "candidate_counts": dict(Counter(row["split"] for row in candidates)),
@@ -393,13 +557,22 @@ def main():
     command.add_argument("--root", required=True, type=Path)
     command.add_argument("--references", required=True, type=Path)
     command.add_argument("--reserve-gib", type=int, default=200)
+    command.add_argument("--recover-from", type=Path)
+    command.add_argument("--after-status", type=Path)
     command = sub.add_parser("run")
     command.add_argument("--plan", required=True, type=Path)
     args = parser.parse_args()
     if args.action == "freeze":
         print(
             json.dumps(
-                freeze(args.stage, args.root, args.references, reserve_gib=args.reserve_gib),
+                freeze(
+                    args.stage,
+                    args.root,
+                    args.references,
+                    reserve_gib=args.reserve_gib,
+                    recover_from=args.recover_from,
+                    after_status=args.after_status,
+                ),
                 indent=2,
             )
         )

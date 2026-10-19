@@ -1,0 +1,101 @@
+{
+  "status": "queued-tested-external-cache-recovery-and-dependent-archive-handoff",
+  "observed_utc": "2026-10-19T08:25:36.570147+00:00",
+  "actual_waiters": [
+    {
+      "root": "/mnt/external/demosaic/commons-qi-local-preparation-memory-recovery-20261019-v1",
+      "owner": {
+        "pid": 3251060,
+        "created": 1792398245.05
+      },
+      "status": "waiting-for-exact-GPU-review-closure-exit",
+      "actual_live": true,
+      "children": 0,
+      "no_libtorch_or_libcuda_mappings": true,
+      "plan": {
+        "path": "/mnt/external/demosaic/commons-qi-local-preparation-memory-recovery-20261019-v1/plan.json",
+        "sha256": "ef8b63461ba37c0b2cdb0f239e1a78be00cc2471a9d10db2e1f672bbd17cea79"
+      },
+      "launch": {
+        "path": "/mnt/external/demosaic/commons-qi-local-preparation-memory-recovery-20261019-v1/launch.json",
+        "sha256": "3682e143956e105a7ee51d842a4f11cbb31b6875ec4abd0da40212b9dc5ae385"
+      }
+    },
+    {
+      "root": "/home/dllu/proj/demosaic/.cache/commons-archive-handoff-memory-recovery-20261019-v1",
+      "owner": {
+        "pid": 3251161,
+        "created": 1792398271.35
+      },
+      "status": "waiting-for-exact-local-download-and-preparation-exits",
+      "actual_live": true,
+      "children": 0,
+      "no_libtorch_or_libcuda_mappings": true,
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/commons-archive-handoff-memory-recovery-20261019-v1/plan.json",
+        "sha256": "1af7f8762e22f9269c8cccc0de854003ee7cea7153be79e3b587b4a45dd5e8d8"
+      },
+      "launch": {
+        "path": "/home/dllu/proj/demosaic/.cache/commons-archive-handoff-memory-recovery-20261019-v1/launch.json",
+        "sha256": "bd7762cfdabc739e74bd48c9be865c624869268875adc95cf7b052a56e2bf7f2"
+      }
+    }
+  ],
+  "recovery_dependency": {
+    "status_path": "/home/dllu/proj/demosaic/.cache/experiments/bank-detachment-v82-v83-memory-recovery-native-closure-v1/closure-status.json",
+    "owner": {
+      "pid": 3220010,
+      "created": 1792396798.34
+    },
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/bank-detachment-v82-v83-memory-recovery-native-closure-v1/plan.json",
+      "sha256": "d3d71417dae761bd568aeefbf064dc97057ee7c474d76e396281114d50a43978"
+    },
+    "success_status": "completed-CPU-numerical-and-native-board-preparation-awaiting-manual-review"
+  },
+  "failed_source_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/commons-qi-local-preparation-20261019-v1/plan.json",
+    "sha256": "34c7d08202cb5f535ee7c284e55f6a24d50054135689f1245c46c5e10bd39f81"
+  },
+  "partial_manifest": {
+    "path": "/home/dllu/proj/demosaic/.cache/commons-qi-local-preparation-20261019-v1/work/outputs/prepared4/manifest.jsonl.tmp",
+    "sha256": "b51450789c6c4fa240cda9dfca4063a7a7ea70883fd0fd9010f71133ba85084f"
+  },
+  "manifest_recorded_reusable_4x_arrays": 771,
+  "note_reuse": "Actual array SHA/type/shape/attribution checks and independent copies happen only after the exact review/closure exits. Orphan/unrecorded arrays are regenerated. Failed source remains untouched.",
+  "frozen_preparation_files_checked": 47,
+  "immutable_preparation_inputs_checked": 54,
+  "training_core_files_exact_vs_failed_source": 44,
+  "changed_worker": [
+    "scripts/prepare_commons_local_stage.py"
+  ],
+  "unit_guard_tests_passed": 20,
+  "unit_test_command": "CUDA_VISIBLE_DEVICES= PYTHONPATH=src:scripts python -m pytest tests/test_prepare_commons_local_stage.py tests/test_recover_commons_partial_caches.py -q",
+  "actual_two_original_fixture": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/commons-local-recovery-preflight-20261019-v1/receipt.json",
+    "sha256": "9bc470c87b08a5e664089f919ed45397bf48e6b4931793cc7ad9a111ad52e78e"
+  },
+  "actual_fixture_exit_code": 0,
+  "fixture_area_samples": 1328802,
+  "fixture_area_max_uint16_codes": 1,
+  "prepared_source_counts_fixture": {
+    "4": 2,
+    "8": 2
+  },
+  "reserve_gib": 608,
+  "stable_launch_minimum_available_gib": 48,
+  "stable_launch_memory_seconds": 60,
+  "per_source_minimum_available_gib": 24,
+  "estimated_production_cache_payload_bytes": 12611315826,
+  "external_free_gib": 670.9018745422363,
+  "archive_index_exact_vs_old_handoff_snapshot": true,
+  "production_recovery_started_copying": false,
+  "production_reconciliation_started": false,
+  "broader_downloading_started": false,
+  "broader_download_limit": 10000,
+  "download_workers": 2,
+  "request_starts_per_second": 0.25,
+  "training_admission": false,
+  "manual_cache_review_complete": false,
+  "scope": "Separate diagnosed recovery plans preserve failed artifacts. Wait for GPU review and CPU closure; copy only validated manifest-bound atomic caches to new external output; finish original4x/8x ingestion/audit/screen. Dependent handoff reconciles completed originals before a bounded unchanged downloader resume. No active model/data/criteria change."
+}
