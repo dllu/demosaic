@@ -85,3 +85,11 @@ The operator reused94,455 fingerprints and computed1,179 new ones. Independent
 metadata review checks every old/new row and actual controller/child exit.
 New title-series/content review and coupled4×/8× admission remain pending.
 [Completed audit and frozen plan](results/commons-local1188-duplicate-audit-v1.json).
+
+The subsequent [actual content/title review and coupled freeze](commons-local1188-reviewed.md)
+adds890 sources to a separate85,757-source future training corpus. It withholds
+185 metadata risks and retains104 reserved sources; all9 protected flags remain
+out. All1179 content thumbnails,48 existing-neighbor pairs and nine new-reserved
+pairs were viewed. Every new training cache passes SHA/header checks at both
+scales, and all890 sources pass actual native256 clean-loader coverage with
+the documented two-ULP convolution-rounding excursion. Running recipes stay fixed.
