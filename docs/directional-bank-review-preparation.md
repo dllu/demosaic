@@ -63,3 +63,8 @@ include at least two small100% noisy/restored/exact-GT triplets per checkpoint,
 plus cached DSCF3879/3880 sky/building/foliage/fence/lights with independent ISO100
 labels. The protected-final split remains closed. The existing V43 README pixels
 remain unchanged; full-frame export and timing require separate eligibility.
+
+The [report-asset packager](bank-report-assets.md) is also queued after the
+complete reference review. It prepares byte-identical triplets and all native
+boards with their full metadata; manual findings and numerical interpretation
+remain separate required work.
