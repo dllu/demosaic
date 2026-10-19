@@ -1,8 +1,33 @@
-# Profile the current packed models after quality evaluation
+# Completed mixed16 packed-model CUDA profiles
 
-Two bounded GPU profiles are queued after the exact mixed16 quarter-review
-owner. The profiler currently waits without children. No GPU profile or new
-speed result is available yet. Training and quality evaluation retain priority.
+Both original 10k/160k-example V72/V73 GPU profiles completed after the exact
+quarter-review owner exited. CPU analysis now attributes all 1,093/1,315 device
+activities, independently checking External IDs, runtime correlations and
+operator/range containment with Decimal duration sums.
+[Completed analysis and independent audit](results/mixed16-quarter-CUDA-trace-analysis-v1.json).
+
+| Fixed IEEE-FP32 profile | No DINO V72 | DINO V73 |
+| --- | ---: | ---: |
+| Resident B4/native512 synchronized median, ms | 1120.04 | 1256.87 |
+| Summed traced device activity, ms | 1125.52 | 1276.88 |
+| Six spatial groups, ms (% of activity) | 941.24 (83.63%) | 951.74 (74.54%) |
+| Quarter-resolution stem, ms (% of activity) | 124.31 (11.05%) | 122.36 (9.58%) |
+| DINO context including backbone, ms (% of activity) | — | 138.22 (10.82%) |
+
+Convolution accounts for 75.32%/75.09% of group activity; adds, multiplies, ReLU
+and copies account for 20.96%/21.00%. Spatial groups are the main compute target
+for a future architecture/precision investigation. Both endpoints remain
+[quality-rejected](packed-isotropic-mixed16-quarter-review.md); this analysis
+introduces no optimization, retraining or inference default.
+
+The five unhooked samples per model are separate synchronized resident-input
+wall measurements. Instrumented device sums exclude 20/23 overlapping GPU
+annotations. All exclusive/inclusive/operator sums and 57 immutable input/source/
+result identities pass independent checks. No Torch was imported or GPU work
+launched for this analysis. These shared-machine samples exclude transfers,
+tiling/blending, decoding and export; the 100MP/10s target remains unmet.
+
+The following sections retain the frozen protocol and preparation history.
 
 [Frozen plan, actual owners, executed sources and CPU audits](results/mixed16-packed-inference-profile-queue-v1.json).
 Live status:
@@ -83,4 +108,4 @@ CUDA_VISIBLE_DEVICES='' uv run --no-sync python -P \
 Use the corresponding DINO directory for the other endpoint. Exclusive totals
 assign each kernel/copy/memset activity once to its innermost containing CPU
 range. Inclusive totals overlap, and summed device activity is distinct from
-unhooked elapsed time. No current10k GPU trace has been analyzed yet.
+unhooked elapsed time. Both actual 10k GPU traces have now been analyzed above.

@@ -29,15 +29,15 @@ existing rows and32 exact legacy crop comparisons. Active recipes retain128
 captures; a matched trained data-benefit test remains outstanding. No private
 source pixels/capture metadata are published.
 
-The [new candidate-bank context experiment](directional-bank-engineering.md)
-passes genuine CPU/CUDA mixed updates and exact disabled-default replay, with
-1,130 CPU tests passing. Fresh strict V80/V81 arms now run fixed original4k
-budgets with native128 held unchanged. This is an architecture experiment;
-trained quality, fixed eligibility and native crop review remain pending.
-The [validated evaluation and crop queue](directional-bank-review-preparation.md)
-now waits for exact training completion, with independent arithmetic, fixed
-weak-carrier/noise checks and matched V43/RawNIND native references. Its historical
-preflight is engineering evidence, not a V80/V81 quality result.
+The [completed bank-context V80/V81 review](directional-bank-original4k-review.md)
+finds a +.03017dB matched photo gain, but both arms fail known/unseen camera and
+weak-carrier requirements. All 81 source triplets/125 native cells and numerical
+audits are complete; neither model is promoted or extended. The subsequent
+[fixed gradient comparison](directional-bank-detachment-v82-v83.md) completed
+both original 4k budgets, including a
+[verified emergency-checkpoint recovery](bank-detachment-memory-recovery.md).
+Its full quality/native review is running. Finite states, matching inputs and
+exact RNG do not establish current quality or promotion eligibility.
 
 The [guarded photometry pilot](guarded-input-cfa-gain.md) fails its fixed
 high-saturation screen and is closed without full427 continuation. All30 native
@@ -61,6 +61,13 @@ automatically extended. The [completed mature FP32 execution validation](mature-
 adds optional autotuning, with118.22/120.48s warmed V43/V63 restores and a166.67s
 fresh V43 CLI restore including search. All full unquantized values and four
 RGB16 exports pass the original gates; sub10s remains unmet.
+
+The [completed V72/V73 GPU trace analysis](mixed16-packed-inference-profile.md)
+verifies 2,408 device activities and 57 immutable inputs/sources without new GPU
+execution. Their spatial groups account for 83.63%/74.54% of summed activity,
+dominated by convolutions. Resident B4/native512 FP32 medians are
+1120.04/1256.87ms, excluding the complete-photo pipeline. Both models remain
+quality-rejected; no optimization or new full-frame speed claim follows.
 
 The [completed mature-parent objective trial](reconstruction-objective-first1k-review.md)
 finds+.02026dB matched log-MSE photo PSNR, below its predeclared.03dB

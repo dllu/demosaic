@@ -1,0 +1,264 @@
+{
+  "status": "passed-independent-Decimal-and-dual-ID-audit-of-completed-mixed16-quarter-CUDA-traces",
+  "observed_utc": "2026-10-19T08:34:04.780353+00:00",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mixed16-quarter-trace-analysis-20261019-v1/plan.json",
+    "sha256": "231b82a21eadadde8aa45e5ec2c0ee14df597235cfb1bf674d35eec44668063c"
+  },
+  "auditor": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mixed16-quarter-trace-analysis-20261019-v1/independent_audit.py",
+    "sha256": "a29d48b8310bb1bd6363d32f7a975304f88486b3dd61dc13a639593831b2b471"
+  },
+  "reader": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mixed16-quarter-trace-analysis-20261019-v1/reader.py",
+    "sha256": "0128dbf6025d0c88f8f5d569ac24a9b6899942641add785919917bf822f14791"
+  },
+  "actual_reader_exit_codes": [
+    0,
+    0
+  ],
+  "immutable_inputs_rechecked": 57,
+  "Torch_imported": false,
+  "arms": [
+    {
+      "name": "no-dino",
+      "profile": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-quarter-FP32-profile-no-dino-v1/result.json",
+        "sha256": "aa0c732839a6508a0f75c168879e62f9275e7f5d9f16881150e958de2311c1e8"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/no-dino-packed-isotropic-mixed16-v72-step10000.pt",
+        "sha256": "d6e3bc6d98b1ffc294ac651c731636ef4072bef284925f357b690b78cc7fa9c1",
+        "step": 10000,
+        "model_config": {
+          "restoration_backbone": "packed-isotropic",
+          "width": 96,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": false,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "bottleneck",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": false,
+          "physical_anchors": false,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": false,
+          "adc_cfa_projection": false,
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 32,
+          "isotropic_residual_scale": 0.03125
+        },
+        "weights": "EMA"
+      },
+      "analysis": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mixed16-quarter-trace-analysis-20261019-v1/no-dino.json",
+        "sha256": "42d19cd6718a94a956f4b6d5cfa9a7291be03ed0b1abca4a8040d226215ead19"
+      },
+      "trace": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-quarter-FP32-profile-no-dino-v1/operator-trace.json",
+        "sha256": "f16dc2f8fdf54d26132d3f71055c43e897d83adf64fad01f2394e951acb37f9e"
+      },
+      "resident_synchronized_wall_median_ms": 1120.0383941177279,
+      "resident_synchronized_wall_samples_ms": [
+        1122.0197980292141,
+        1110.249905148521,
+        1111.7766441311687,
+        1121.1914070881903,
+        1120.0383941177279
+      ],
+      "GPU_activity_events": 1093,
+      "GPU_categories": {
+        "kernel": 1092,
+        "gpu_memcpy": 1
+      },
+      "excluded_overlapping_GPU_annotations": 20,
+      "all_runtime_and_CPU_operator_associations_independently_verified": true,
+      "independently_checked_exclusive_inclusive_operator_groups": [
+        13,
+        13,
+        64
+      ],
+      "summed_device_activity_ms": 1125.518466,
+      "six_groups_ms": 941.241252,
+      "six_groups_fraction": 0.8362734867825794,
+      "groups_cudnn_convolution_ms": 708.932337,
+      "groups_convolution_fraction_of_group_activity": 0.7531887658914465,
+      "groups_add_mul_relu_copy_ms": 197.249964,
+      "groups_pointwise_fraction_of_group_activity": 0.20956366243072397,
+      "quarter_stem_ms": 124.314285,
+      "quarter_stem_fraction": 0.11045068451147029,
+      "DINO_context_including_backbone_ms": 0.0,
+      "DINO_context_fraction": 0.0,
+      "batch": 4,
+      "native_context_size": 512,
+      "precision": "IEEE float32; no AMP/TF32",
+      "source_files": 40
+    },
+    {
+      "name": "dino",
+      "profile": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-quarter-FP32-profile-dino-v1/result.json",
+        "sha256": "097188b7491e0a10b0782f42bc8993f0c5025d23bdcb7e7fda33e936552ba142"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-packed-isotropic-mixed16-v73-step10000.pt",
+        "sha256": "64c5649a41669aa7e5276094278f3debb96b55174871c493ca380bf68ee3759f",
+        "step": 10000,
+        "model_config": {
+          "restoration_backbone": "packed-isotropic",
+          "width": 96,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "packed-convnext",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": false,
+          "physical_anchors": false,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": false,
+          "adc_cfa_projection": false,
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 32,
+          "isotropic_residual_scale": 0.03125
+        },
+        "weights": "EMA"
+      },
+      "analysis": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mixed16-quarter-trace-analysis-20261019-v1/dino.json",
+        "sha256": "b2b09724a6681977d93d8025eb7995bd8ebe5b9cd1690c224e36f50df534fa5e"
+      },
+      "trace": {
+        "path": "/mnt/external/demosaic/benchmarks/mixed16-quarter-FP32-profile-dino-v1/operator-trace.json",
+        "sha256": "662046dfd7c4c490cba11b5f3635aa60005fdc6ff8c63feea1b05c8e3a9a826b"
+      },
+      "resident_synchronized_wall_median_ms": 1256.8687200546265,
+      "resident_synchronized_wall_samples_ms": [
+        1254.862556932494,
+        1256.8687200546265,
+        1260.723769897595,
+        1264.7983878850937,
+        1247.0764140598476
+      ],
+      "GPU_activity_events": 1315,
+      "GPU_categories": {
+        "kernel": 1302,
+        "gpu_memcpy": 1,
+        "gpu_memset": 12
+      },
+      "excluded_overlapping_GPU_annotations": 23,
+      "all_runtime_and_CPU_operator_associations_independently_verified": true,
+      "independently_checked_exclusive_inclusive_operator_groups": [
+        15,
+        15,
+        87
+      ],
+      "summed_device_activity_ms": 1276.878362,
+      "six_groups_ms": 951.742738,
+      "six_groups_fraction": 0.7453667994727912,
+      "groups_cudnn_convolution_ms": 714.681169,
+      "groups_convolution_fraction_of_group_activity": 0.7509184367425139,
+      "groups_add_mul_relu_copy_ms": 199.888465,
+      "groups_pointwise_fraction_of_group_activity": 0.21002363035629487,
+      "quarter_stem_ms": 122.359724,
+      "quarter_stem_fraction": 0.09582723589140121,
+      "DINO_context_including_backbone_ms": 138.219228,
+      "DINO_context_fraction": 0.10824776432385029,
+      "batch": 4,
+      "native_context_size": 512,
+      "precision": "IEEE float32; no AMP/TF32",
+      "source_files": 40
+    }
+  ],
+  "optimization_or_promotion": false,
+  "scope": "Actual V72/V73 original10k IEEE-FP32 saved traces, no new model execution. Decimal sums and independent correlation/External-id/range containment cover every kernel/copy/memset activity. Overlapping GPU annotations excluded. Device activity sums are not critical-path time or full-frame timing; shared-machine resident samples do not establish an optimum. Both models remain quality-rejected; V43 unchanged.",
+  "independent_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mixed16-quarter-trace-analysis-20261019-v1/receipt.json",
+    "sha256": "360582094f31f4520a4b0dd6db0bb5e018f10fe3a473ea5c96240f623899c562"
+  },
+  "actual_independent_auditor_exit_code": 0
+}
