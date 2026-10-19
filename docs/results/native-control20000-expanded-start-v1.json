@@ -99,5 +99,76 @@
       "path": "/home/dllu/proj/demosaic/.cache/benchmarks/native-control20000-expanded-start-v1/retained4000-engineering.json",
       "sha256": "6922f15bbba0285fea5c831d2a88743a5aeba8c5320d921b784a12209a5982e4"
     }
+  },
+  "retained10000_engineering_followup": {
+    "status": "passed-closed-retained10000-matched-state-and-logged-input-engineering-check",
+    "observed_utc": "2026-10-19T17:22:39.860613+00:00",
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/audit-native-retained10000.py",
+      "sha256": "8444235e6d19da618ce013079f2beef779cf5eff1ce3f215901bee0220e6c65a"
+    },
+    "training_plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/native-data-v84-v85-original20k-v1/plan.json",
+      "sha256": "5dd3250ebda9c16cceb295f5d4788bedc81f54a2e78f03f475141ce4b35f24d1"
+    },
+    "retained_10000": [
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/native-data-v84-v85-original20k-v1/work/runs/native-data-control-v84/step-010000.pt",
+        "sha256": "9058a2404d0da190084ca7db501edb657560c3ccb8ab5c527db5a7fe656d5a7c"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/native-data-v84-v85-original20k-v1/work/runs/native-data-expanded-v85/step-010000.pt",
+        "sha256": "c22ec73863eb71bb8ba559fecc34294d50f7a576a80d414695bc9780070c03bb"
+      }
+    ],
+    "finite_states_each": {
+      "model": 91,
+      "EMA": 91,
+      "model_and_EMA_elements_each": 32904710,
+      "AdamW_slots": 89,
+      "all_optimizer_steps": 10000,
+      "second_moments_nonnegative": true
+    },
+    "original_planned_updates": 20000,
+    "learning_rate_floor_fraction": 0.1,
+    "actual_LR": 5.571396837256637e-06,
+    "optimizer_groups_exact": true,
+    "python_CPU_CUDA_RNG_exact_at10000": true,
+    "source_archives_differ_only_native_manifest": true,
+    "native_counts": [
+      {
+        "captures": 128,
+        "groups": 106
+      },
+      {
+        "captures": 150,
+        "groups": 120
+      }
+    ],
+    "recorded_observation_pairs": 416,
+    "shared_exact": 305,
+    "native": 111,
+    "native_changed": 111,
+    "logged_rows_batch_hash_LR_finite_checks_each": [
+      401,
+      401
+    ],
+    "all_frozen_runtime_hashes_exact": 253,
+    "CUDA_initialized": false,
+    "quality_inference": false,
+    "initial_guard_observation": {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/native-control20000-expanded-start-v1/retained10000-first-guard.json",
+      "sha256": "f9addb22df1ada12fc7b6014b1ebbdde399c65dd14795d15c7a905a1eeef1432"
+    },
+    "expanded_live_owner": {
+      "pid": 3666689,
+      "created": 1792421187.78
+    },
+    "latest_observed_step_before_audit": 10275,
+    "limits": "Retained engineering states and logged observations only. Unlogged examples are not independently replayed. Both original20k endpoints, final RNG equality and full quality/native review remain required. No interim selection or promotion.",
+    "audit_receipt": {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/native-control20000-expanded-start-v1/retained10000-engineering.json",
+      "sha256": "2ca83792e999c928dc4eff0f7d748e4ca5c063cb0f176c5bc6f461f30d59ba9f"
+    }
   }
 }

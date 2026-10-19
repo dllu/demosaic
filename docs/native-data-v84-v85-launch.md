@@ -48,6 +48,18 @@ schedule and 10% floor. All 130 logged shared-domain pairs match; all 46 logged
 native pairs differ. Source archives differ only in the native manifest. This
 is an engineering check; final 20k endpoints and quality review remain required.
 
+The closed retained 10k pair also passes. Both have finite 91-model/91-EMA/
+89-AdamW states, counters at 10000, identical optimizer groups and Python/CPU/CUDA
+RNGs, and LR 5.571396837256637e-6 from the original 20k schedule with its 10% floor.
+All 305 logged shared pairs match and all 111 native pairs differ. Each arm's
+401 logged training rows match batch hashes/LRs with finite loss/gradient norm;
+unlogged examples are not independently replayed. Source digests reconstruct,
+archives differ only in the native manifest, and all 253 runtime hashes remain
+exact. The first read-only attempt stopped at its initial safety guard before
+checkpoint IO; the completed check waited for stable memory headroom. The same
+public receipt preserves both observations. Final endpoint and quality requirements
+are unchanged.
+
 The original 20k production controller and expanded trainer run from
 commit `650a051`. The plan binds 253 frozen runtime files and 748 fixed input
 references, including the737 data/provenance inputs and engineering receipts.
