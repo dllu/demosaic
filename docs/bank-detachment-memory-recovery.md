@@ -61,6 +61,15 @@ foliage, fence and lights comparisons, with accurate independent-reference
 labels. Actual viewing and all original gates remain required before any
 quality conclusion. V43 and the README examples remain unchanged.
 
+A [source-bound report-assets queue](results/bank-detachment-report-assets-queue-v1.json)
+now waits for all three exact review/closure/reference owners to exit. Its
+actual historical CPU preflight verifies 125 native cells, 81 source triplets,
+eight boards and 12 selected triplets without Torch or inference. Production
+will include two exact-GT triplets per checkpoint and all four standing GFX
+regions, with identical pixels and complete source/ROI/noise/exposure/reference
+metadata. Historical replay is not evidence about the current models. Packaging
+retains `manual_review_completed: false` until the actual boards are viewed.
+
 Current operational roots:
 
 - Training: `.cache/experiments/bank-detachment-v82-v83-memory-recovery-v1/`.

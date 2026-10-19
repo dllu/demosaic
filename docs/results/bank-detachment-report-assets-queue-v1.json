@@ -1,0 +1,87 @@
+{
+  "status": "queued-source-bound-native-report-package-after-exact-review-owners",
+  "observed_utc": "2026-10-19T08:53:01.852491+00:00",
+  "root": "/home/dllu/proj/demosaic/.cache/experiments/bank-detachment-v82-v83-memory-recovery-report-assets-v1",
+  "owner": {
+    "pid": 3291122,
+    "created": 1792399908.89
+  },
+  "actual_live": true,
+  "actual_status": "waiting-for-exact-review-closure-reference-owner-exits",
+  "children": 0,
+  "no_libtorch_or_libcuda_mappings": true,
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/bank-detachment-v82-v83-memory-recovery-report-assets-v1/plan.json",
+    "sha256": "23447a8c9a7ad4dceb1f91506338fb248a638b10fab319ad4fb4d7bb9c0210e5"
+  },
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/bank-detachment-v82-v83-memory-recovery-report-assets-v1/package.py",
+    "sha256": "b6d599ec0c57873dcda6a88dca6677c1ad2bea6c288e0b58a8124afc1180cdc9"
+  },
+  "generic_bundler": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/bank-detachment-v82-v83-memory-recovery-report-assets-v1/tools/prepare_bank_report_assets.py",
+    "sha256": "041c31c8bd835fa1f5e2d27682746ba95f1a6cfbf2e5bb5e8099c952422e80bb"
+  },
+  "immutable_inputs_checked": 8,
+  "actual_predecessors": [
+    {
+      "role": "review",
+      "owner": {
+        "pid": 3219012,
+        "created": 1792396617.59
+      },
+      "actual_live": true
+    },
+    {
+      "role": "closure",
+      "owner": {
+        "pid": 3220010,
+        "created": 1792396798.34
+      },
+      "actual_live": true
+    },
+    {
+      "role": "reference",
+      "owner": {
+        "pid": 3220011,
+        "created": 1792396798.44
+      },
+      "actual_live": true
+    }
+  ],
+  "expected_checkpoint_labels": [
+    "V82-original4000",
+    "V83-original4000"
+  ],
+  "output": "/home/dllu/proj/demosaic/.cache/experiments/bank-detachment-v82-v83-memory-recovery-review-v1/work/outputs/report-assets-v1",
+  "output_exists": false,
+  "historical_preflight": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/bank-detachment-report-assets-historical-preflight-v2/plan.json",
+      "sha256": "1d674f0321174975b733c0ec1f10c1465be1ec0c57d861fcfb75d208fada527a"
+    },
+    "status": {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/bank-detachment-report-assets-historical-preflight-v2/status.json",
+      "sha256": "e08bdf6e6e921298df476f12177c69bc07c407df440298cb416c39665fb399bf"
+    },
+    "index": {
+      "path": "/mnt/external/demosaic/benchmarks/bank-detachment-report-assets-historical-preflight-v2/index.json",
+      "sha256": "ff407c3707dc49082b591a304bd5b2abf676e53bef8a23e590c1730feca8fde5"
+    },
+    "actual_exit_code": 0,
+    "native_cells_verified": 125,
+    "source_triplets_verified": 81,
+    "selected_report_triplets": 12,
+    "board_count": 8,
+    "manual_review_completed": false,
+    "current_model_quality_evidence": false
+  },
+  "preserved_initial_preflight_guard_failure": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/bank-detachment-report-assets-historical-preflight-v1/status.json",
+    "sha256": "46d5d423f3538efccdd6dee264dcac37a52216f9068ae24df3c41afccc8014af"
+  },
+  "guard_failure_resolution": "Fresh fixture uses an authorized external output; original writable_path guard remains unchanged. Production output stays inside the frozen review work root.",
+  "manual_review_completed": false,
+  "quality_decision": null,
+  "scope": "Private crop package only after all exact review/closure/reference owners exit successfully. Reuse established native pixel and source/ROI/noise/exposure/reference checks. No new inference, pixel resampling, performance conclusion, public image copy, README change or model promotion."
+}
