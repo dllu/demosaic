@@ -171,13 +171,24 @@ the executed successful fixtures.
 Operational roots:
 
 - `/mnt/external/demosaic/commons-post4557-content-bank-20261019-v1/`
-- `/mnt/external/demosaic/commons-post4557-content-retrieval-20261019-v1/`
+- `/mnt/external/demosaic/commons-post4557-content-retrieval-20261019-v2/`
 - `/mnt/external/demosaic/commons-post4557-contact-queue-20261019-v2/`
 
 These are inspection artifacts and queued work. Complete new caches, actual
 content/source-family review and a deliberate coupled4×/8× admission freeze
 are still required. Existing V86/V87 data and the representative README crops
 stay fixed.
+
+The [current detached query launch](results/commons-post4557-content-query-detached-v2.json)
+replaces an idle waiter that exited withSIGTERM/code143 before encoding.
+Its exact old owner was confirmed absent; the original claim/status/source and
+exit closure remain preserved in the v1 root. The sender/cause is unestablished.
+The fresh v2 root uses the identical49 frozen source files, operator, inputs
+and guards, with stdin closed and file logs in an independent session. Its
+timeout parent remains live underPID1 after the launching tool exits; the
+32700s outer bound covers the declared wait/resource/active limits. This is an
+explicit replacement of a confirmed exited idle owner, not an observation-timeout
+restart. The preparer, duplicate queue and model comparison remain live.
 
 ## Coupled admission for the new producer
 
