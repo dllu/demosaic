@@ -1,18 +1,22 @@
 # Expanding the Commons archive
 
-A [separate bounded local stage](commons-local-staging.md) has downloaded1,188
-additional checksum-disjoint originals with a16GiB payload cap and224GiB local
-reserve. It preserves the external archive and active experiment manifests.
+The archive downloader is running again under the
+[completed local-original reconciliation and bounded-resume plan](commons-archive-handoff.md).
+After the separate 1,188-source local cache preparation completed, all 1,188
+originals were reconciled into the archive with immutable attribution preserved.
+Two workers start at most .25 requests/second, with a 608 GiB reserve and
+10,000-file completion limit. At 2026-10-19 11:13 UTC this resumed job had added
+1,447 files / 9.8 GiB and reported 629.9 GiB free. The current log is
+`.cache/commons-archive-handoff-memory-recovery-20261019-v1/download.log`.
+Do not start another downloader while this owner holds the shared lock.
 
-The later [verified evaluation-snapshot consolidation](evaluation-snapshot-storage.md)
-reclaimed168.82GiB, restoring about670.93GiB external free space. Local cache
-preparation continues; its identities must be reconciled before a broader archive
-resume. No competing downloader has started.
+The [reviewed local extension](commons-local1188-reviewed.md) separately freezes
+890 additional training sources at both scales, with unchanged evaluation
+membership. The running V84/V85 comparison retains its original manifests.
+The recovery followed [evaluation-snapshot consolidation](evaluation-snapshot-storage.md),
+which reclaimed 168.82 GiB. Original failed memory-guard attempts remain recorded.
 
-The [local-original reconciliation and bounded-resume queue](commons-archive-handoff.md)
-now waits for successful local preparation. It will preserve the1,188 completed
-identities in the main archive before launching the unchanged download-only CLI,
-with two workers/.25 starts per second, a608GiB reserve and10,000-file limit.
+## Earlier archive run
 
 The existing Quality Images archive at `/mnt/external/qi` resumed on
 2026-10-15 at 23:44:50 UTC. At startup it contained 77,025 verified originals

@@ -63,9 +63,10 @@ DINOv3 additionally requires approved Hugging Face access via `HF_TOKEN`.
 See [experiment results](docs/experiments.md), [quality and noise diagnostics](docs/evaluation.md),
 [usage and data conventions](docs/usage.md), [research](docs/research.md),
 and the [completion evidence checklist](docs/requirements.md).
-The [Commons archive download](docs/commons-download.md) stopped cleanly at its
-512GiB free-space reserve after adding95,347 files; active experiments retain
-frozen manifests. The [completed matched V72/V73 review](docs/packed-isotropic-mixed16-quarter-review.md)
+The [Commons archive download](docs/commons-download.md) resumed after local-cache
+reconciliation, with a 608 GiB reserve; active experiments retain frozen manifests.
+A separate [reviewed RAW extension](docs/public-raw-expansion-v3.md) adds 18 camera
+models for future comparisons. The [completed matched V72/V73 review](docs/packed-isotropic-mixed16-quarter-review.md)
 finds gains over their own parents but losses against older equal-example models;
 neither replaces V43.
 The [completed content audit](docs/commons-content-overlap.md) supplies

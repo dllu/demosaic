@@ -1,15 +1,20 @@
-# Local-original reconciliation and archive resume: waiting for recovery
+# Local-original reconciliation and bounded archive resume
 
-The local batch has downloaded all**1,188 originals /17,175,771,412bytes**.
-A separate worker waited for the exact local downloader and cache preparer to
-exit. It then stopped because preparation had failed its available-memory guard.
-**Archive reconciliation and broader downloading did not begin.** Recovery is
-queued under a [fresh recovery/handoff plan](commons-local-memory-recovery.md)
-that waits for GPU review and CPU closure, then successful cache preparation. The
-implementation and completed fixture below remain valid engineering evidence.
-[Verified live queue, source bindings and full fixture](results/commons-archive-handoff-queue-v1.json).
+All **1,188 originals / 17,175,771,412 bytes** have completed local preparation
+and archive reconciliation under the
+[memory-recovery plan](commons-local-memory-recovery.md). The bounded archive
+download is running with two workers, .25 starts/second, a 608 GiB reserve and
+10,000-file completion limit. As of 2026-10-19 11:13 UTC it had added
+1,447 files / 9.8 GiB. Current state, exact owner/child identities, reconciliation
+receipt and logs are under
+`.cache/commons-archive-handoff-memory-recovery-20261019-v1/`.
 
-The original archive index still matches the snapshot used for local selection.
+The first worker stopped after local preparation failed its available-memory
+guard; it did not reconcile or download. That failed observation and the
+[original queue/fixture receipt](results/commons-archive-handoff-queue-v1.json)
+remain preserved. Recovery used a fresh root after successful preparation.
+
+At reconciliation, the selected archive rows matched the local-selection snapshot.
 The handoff takes the shared download lock and verifies that every immutable
 source/attribution field agrees among the frozen selection, local index and
 archive index. Complete source SHA1/byte checks guard new atomic copies to the
@@ -44,7 +49,7 @@ Its frozen plan/source, `status.json`, `controller.log` and future
 `reconciliation/receipt.json`/`download.log` record actual progress. The complete
 fixture is `.cache/benchmarks/commons-archive-handoff-preflight-v1/`.
 
-This is archive bookkeeping and download preparation. New sources remain out
-of the running V82/V83 corpora; duplicate/content review and a separately frozen
+This is archive bookkeeping and downloading. New sources remain out
+of the running V84/V85 corpora; duplicate/content review and a separately frozen
 data recipe remain required. Standing GFX and siblings stay excluded. No model
 quality, scene independence or training benefit is established here.

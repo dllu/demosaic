@@ -76,7 +76,7 @@ def test_extension_is_separate_preserves_sources_and_loads_deterministically(tmp
         admission.extend_native_targets(output / "manifest.json", review, tmp_path / "again")
 
 
-@pytest.mark.parametrize("change", ["cache", "camera", "split", "protected_scene", "legacy_scene"])
+@pytest.mark.parametrize("change", ["cache", "camera", "model", "source", "split", "protected_scene", "legacy_scene"])
 def test_public_row_cannot_change_admitted_cache_camera_split_or_scene(tmp_path, sources, change):
     _, _, candidate = sources
     rows = admission.approved_public_rows(candidate)
@@ -85,6 +85,10 @@ def test_public_row_cannot_change_admitted_cache_camera_split_or_scene(tmp_path,
         row["cache"] += ".other"
     elif change == "camera":
         row["raw_metadata"]["white_balance"] = [1, 1, 1]
+    elif change == "model":
+        row["source"]["model"] = "unreviewed camera model"
+    elif change == "source":
+        row["source"]["url"] += ".other"
     elif change == "split":
         row["split"] = "test"
     else:
@@ -154,3 +158,49 @@ def test_second_pinned_review_preserves_prior_sources_and_new_quality_exclusions
     assert len(reviewed["source_quality"]["verified"]) == 75
     rows = admission.approved_public_rows({"format_version": 2, "split": "train", "public_raw_admission": {"sha256": digest, "payload": payload.decode()}})
     assert len(rows) == 150
+
+
+def test_third_pinned_review_preserves_prior75_and_only_adds_source_reviewed18():
+    from pathlib import Path
+
+    root = Path(__file__).parents[1] / "docs/results"
+    prior_path = root / "public-raw-admission-v2.json"
+    prior = json.loads(prior_path.read_text())
+    payload = (root / "public-raw-admission-v3.json").read_bytes()
+    digest = hashlib.sha256(payload).hexdigest()
+    assert digest in admission.REVIEWED_ADMISSIONS
+    reviewed = json.loads(payload)
+    assert reviewed["previous_admission"]["sha256"] == hashlib.sha256(prior_path.read_bytes()).hexdigest()
+    assert reviewed["approved"][:75] == prior["approved"]
+    assert reviewed["rejected"][:len(prior["rejected"])] == prior["rejected"]
+    new = reviewed["approved"][75:]
+    assert {row["file_id"] for row in new} == {
+        1625, 2428, 5922, 2977, 4126, 5980, 1051, 5285, 6346,
+        6664, 1008, 2235, 3670, 4423, 2886, 1749, 964, 3821,
+    }
+    assert len(reviewed["approved"]) == 93
+    assert len({row["id"] for row in reviewed["approved"]}) == 93
+    assert not {row["file_id"] for row in reviewed["approved"]} & {
+        row["file_id"] for row in reviewed["rejected"]
+    }
+    assert {row["file_id"] for row in reviewed["rejected"][len(prior["rejected"]):]} == {
+        7104, 7150, 8961, 1621, 1389, 3094, 4915, 1860, 1580,
+        2974, 980, 2802, 2238, 3803, 3573, 1479, 1198, 1458,
+    }
+    assert len(reviewed["source_quality"]["verified"]) == 93
+    assert all(row["bin4_any_channel_near_white_fraction"] <= .001
+               for row in reviewed["source_quality"]["verified"])
+    rows = admission.approved_public_rows({
+        "format_version": 2, "split": "train",
+        "public_raw_admission": {"sha256": digest, "payload": payload.decode()},
+    })
+    assert len(rows) == 186
+    assert {factor for _, factor in rows} == {4, 8}
+    assert {row["source"]["filename"].rsplit(".", 1)[-1].lower() for row in new} == {
+        "cr2", "nef", "orf", "pef", "srw", "arw", "dng",
+    }
+    review_path = root / "public-raw-expansion-v3-source-review-v1.json"
+    assert reviewed["public_review_summary"]["sha256"] == hashlib.sha256(review_path.read_bytes()).hexdigest()
+    summary = json.loads(review_path.read_text())
+    assert summary["counts"]["pixel_flag_pairs_actually_viewed"] == 49
+    assert summary["excluded_new_file_ids"]["recognizable_existing_Commons_site"] == [1458]
