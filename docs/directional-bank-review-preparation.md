@@ -61,6 +61,19 @@ All136 sampled observations through3k exactly match the original control stream.
 These are read-only engineering checks. No interim checkpoint selection or
 change to either original4k budget follows; final quality review remains pending.
 
+The control has now completed all4000 updates, passed its final99/99/97 finite
+state checks, and exited successfully. The controller has launched the bank arm
+with its own original4000 budget. All176 sampled control batches match the closed
+V78 control stream; final Python/CPU/CUDA RNG states also match that old run.
+The final weights, optimizer and logged numerics do **not** match it exactly.
+The old trainer enabled cuDNN benchmarking, whereas this fresh matched pair uses
+strict deterministic execution. The first logged numeric differences are at
+step1. Equal inputs and RNG do not establish bitwise equivalence across these
+execution policies; this comparison does not attribute the difference to a
+single kernel or source change. The queued review evaluates both new final EMAs
+freshly, using the new control for the bank comparison. Old neural scores are
+not substituted for the new control's results.
+
 Trained V80/V81 quality and full native inspection remain pending. Reports will
 include at least two small100% noisy/restored/exact-GT triplets per checkpoint,
 plus cached DSCF3879/3880 sky/building/foliage/fence/lights with independent ISO100
