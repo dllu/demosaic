@@ -36,8 +36,11 @@ audits are complete; neither model is promoted or extended. The subsequent
 [fixed gradient comparison](directional-bank-detachment-v82-v83.md) completed
 both original 4k budgets, including a
 [verified emergency-checkpoint recovery](bank-detachment-memory-recovery.md).
-Its full quality/native review is running. Finite states, matching inputs and
-exact RNG do not establish current quality or promotion eligibility.
+Its [completed full quality/native review](bank-detachment-original4k-review.md)
+finds a negative matched photo effect and worse ADC detail. Both arms fail the
+camera/weak-detail criteria. All 125 native cells and complete numerical/array
+audits are reviewed; no promotion or extension follows. The full project
+quality and speed requirements remain unmet/unproven.
 
 The [guarded photometry pilot](guarded-input-cfa-gain.md) fails its fixed
 high-saturation screen and is closed without full427 continuation. All30 native

@@ -1,4 +1,4 @@
-# Bank-gradient study: original budgets complete, quality review running
+# Bank-gradient study: original budgets complete, review closed
 
 V82 connected completed its original4,000 updates and exited successfully.
 V83 detached later stopped at the system-memory guard and saved step2,999.
@@ -6,8 +6,9 @@ A [separately frozen recovery](bank-detachment-memory-recovery.md) restored that
 checkpoint and completed the original4,000-update boundary under the same
 [fixed experiment](directional-bank-detachment-v82-v83.md).
 The [independent completion audit](results/bank-detachment-recovered4000-completion-v1.json)
-passes; the fresh quality review has started.
-**Quality conclusions and model selection remain pending.** The following launch and
+passes. The [completed quality/native review](bank-detachment-original4k-review.md)
+rejects both arms under the original criteria, without promotion or extension.
+All 125 native cells have been viewed. The following launch and
 connected-completion observations are historical snapshots.
 [Completed connected boundary and verified detached handoff](results/bank-detachment-connected4000-reproduction-v1.json).
 

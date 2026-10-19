@@ -2,9 +2,10 @@
 
 The local download completed all 1,188 originals. Its preparer stopped at the
 memory guard, retaining **771 manifest-recorded 4× arrays**. A new frozen worker
-waits for the exact GPU-review/CPU-closure owner to exit successfully, then
-recovers both cache scales onto the external SSD. A fresh archive handoff waits
-for successful preparation.
+has passed the exact GPU-review/CPU-closure exit and stable-memory gates and is
+now preparing the external caches. All 1,188 4× caches completed without recorded
+errors; 8× preparation is running. Full cross-scale audit and screening remain
+pending. A fresh archive handoff waits for successful preparation.
 [Verified waiters, source bindings and actual fixture](results/commons-local-memory-recovery-queue-v1.json).
 
 The recovery preserves the failed plan, logs, partial manifests and arrays.

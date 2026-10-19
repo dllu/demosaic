@@ -1,5 +1,13 @@
 # Experiment evidence
 
+The [completed V82/V83 bank-gradient review](bank-detachment-original4k-review.md)
+closes both original 4k budgets without promotion. Detachment loses .00351dB
+photo PSNR against connected, with a negative source interval, and worsens the
+tested ADC-only carrier gain by .04520. Both arms fail parent-based known/unseen
+camera requirements and weak-detail gates. All eight boards/125 native cells
+were actually viewed; the report includes two exact-GT triplets per checkpoint
+and the standing GFX regions. V43 and its README pixels remain unchanged.
+
 The [completed V78/V79 original4k review](directional-interval-original4k-review.md)
 finds+.27801/+.27640dB photo PSNR over fresh V63, but failed camera criteria,
 weak texture and suppressed sign detail. All81 native triplets/125 cells and

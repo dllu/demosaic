@@ -4,7 +4,8 @@ The detached V83 arm stopped at the system-memory guard before update 3,000.
 It saved a genuine, finite emergency checkpoint at **step 2,999**. The connected
 V82 arm had already completed its original 4,000 updates. A separately frozen
 recovery completed the detached checkpoint's original 4,000-update boundary.
-The complete quality review is now running; its conclusions remain pending.
+The [complete quality/native review](bank-detachment-original4k-review.md) is
+closed: both arms miss the original requirements, without promotion or extension.
 [Diagnosed failure, state checks, actual replay and rebound review receipt](results/bank-detachment-memory-recovery-v1.json).
 [Completed 4,000-step boundary and independent CPU audit](results/bank-detachment-recovered4000-completion-v1.json).
 
@@ -52,23 +53,23 @@ the actual final checkpoints at step 4,000. Both have finite 105 model/105 EMA/
 arms. All 135 pre-interruption sample rows and 248 frozen files are preserved.
 The audit exited successfully with CUDA uninitialized.
 
-The same ten-stage photo, analytic, camera, color and native-pixel review is
-bound to the new recovery controller's exact PID and creation time. Separate
-CPU closure and reference followers wait for its successful completion. The
-first quality stage has started after the training owner's successful exit. The
-review retains exact-GT native crop triplets and the cached GFX sky, building,
-foliage, fence and lights comparisons, with accurate independent-reference
-labels. Actual viewing and all original gates remain required before any
-quality conclusion. V43 and the README examples remain unchanged.
+The same ten-stage photo, analytic, camera, color and native-pixel review
+completed after the exact recovery controller exited. CPU closure and reference
+followers also completed successfully. The final report retains exact-GT native
+triplets and cached GFX sky, building, foliage, fence and lights comparisons,
+with accurate independent-reference labels. All 125 native cells were actually
+viewed. Both arms fail the original criteria; V43 and README examples remain.
 
 A [source-bound report-assets queue](results/bank-detachment-report-assets-queue-v1.json)
-now waits for all three exact review/closure/reference owners to exit. Its
-actual historical CPU preflight verifies 125 native cells, 81 source triplets,
-eight boards and 12 selected triplets without Torch or inference. Production
-will include two exact-GT triplets per checkpoint and all four standing GFX
-regions, with identical pixels and complete source/ROI/noise/exposure/reference
-metadata. Historical replay is not evidence about the current models. Packaging
-retains `manual_review_completed: false` until the actual boards are viewed.
+waited for all three exact review/closure/reference owners to exit. Both its
+historical CPU preflight and current production package verify 125 native cells,
+81 source triplets, eight boards and 12 selected triplets. The final report has
+two exact-GT triplets per checkpoint and all four standing GFX regions, with
+unchanged pixels and complete source/ROI/noise/exposure/reference metadata.
+The separate manual record confirms actual viewing; the initial package receipt
+preserves its original pending flag. The
+[publication audit](results/bank-detachment-original4k-publication-v1.json)
+checks all 20 public PNGs and native cells without inference.
 
 Current operational roots:
 
@@ -84,7 +85,7 @@ retry or a training extension.
 The local Commons downloader completed all 1,188 originals before the memory
 stop. Its preparer retained partial atomic caches, but did not finish; the
 dependent archive handoff exited before reconciliation or broader downloading.
-New [cache-recovery and archive-handoff plans](commons-local-memory-recovery.md)
-wait for GPU review and CPU closure before reusing retained valid outputs on
-the external SSD. No newly
+New [cache recovery](commons-local-memory-recovery.md) has started on the
+external SSD after successful GPU review and CPU closure. Its dependent archive
+handoff still waits for successful full preparation. No newly
 staged source has entered training, and no source photos were modified.
