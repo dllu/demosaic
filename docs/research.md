@@ -373,7 +373,24 @@ supports a three-product Tensor Core precision mode. Its
 motivates an inference-only hidden-convolution candidate. The
 [genuine mature-model CPU proxy and offline SM121 compilation](mature-tf32x3-convolution.md)
 find small tested output differences and compiler acceptance. CPU arithmetic
-is not Tensor Core parity; actual CUDA error gates, native review and timing
-remain outstanding. No production code path, learned weights or training
-recipe changes. This is execution research, without a new architecture or
-quality claim, and follows the existing priority on verified quality.
+is not Tensor Core parity. The [completed actual CUDA follow-up](mature-tf32x3-cuda-review.md)
+passes all six numerical cases, with maximum 0.06640524 DN16 difference, but
+resident medians are 8.9–10.1% slower. No production code path, learned weights or
+training recipe changes follow. This is execution research, without a new
+architecture or quality claim.
+
+## Matched input context after the original20k data review
+
+The [completed native-data comparison](native-data-original20k-review.md) finds
+no positive matched photographic effect from the 22 extra native captures and
+no clear native detail gain. The AIM 2025 progressive-size results cited above
+motivate the separate [fixed input-context trial](training-context-v86-v87.md).
+Our inference is to isolate surrounding input pixels from the number of clean
+supervised pixels; the paper does not identify our failure's cause. Both arms
+will use the same 320px source/noise draws and 256px loss region, with 256px versus
+320px model forwards. This is not a reproduced method or an improved model yet.
+
+The [June 2026 MambaRaw paper](https://arxiv.org/abs/2606.24479) instead studies
+JPEG-conditioned reconstruction with stored metadata for coding. Its task
+differs from noisy-Bayer restoration, so its reported efficiency is not evidence
+for replacing this project's denoiser.

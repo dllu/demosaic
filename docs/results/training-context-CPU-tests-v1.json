@@ -1,0 +1,46 @@
+{
+  "status": "completed-context-CPU-regressions-and-protocol-tests-no-trained-quality-claim",
+  "recorded_UTC": "2026-10-19T21:31:06.070533+00:00",
+  "core_regressions": {
+    "passed": 108,
+    "seconds": 22.22,
+    "command": "CUDA_VISIBLE_DEVICES='' HF_HUB_OFFLINE=1 .venv/bin/python3 -m pytest -q tests/test_training_context.py tests/test_training.py tests/test_optimizer_batches.py tests/test_losses.py tests/test_paired_training.py --basetemp=.cache/pytest-context-crop-v3"
+  },
+  "protocol_guards": {
+    "passed": 11,
+    "seconds": 0.02,
+    "command": "CUDA_VISIBLE_DEVICES='' HF_HUB_OFFLINE=1 .venv/bin/python3 -m pytest -q tests/test_context_trial.py --basetemp=.cache/pytest-context-protocol-v1"
+  },
+  "scope": "Physical crop/CFA/core-gradient/mask and actual tiny-trainer full model/EMA/AdamW/RNG resume checks, plus closed-observation protocol fixtures. Does not verify genuine pretrained CPU/CUDA execution or quality; those discarded checks remain required.",
+  "source_and_test_bindings": [
+    {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/train.py",
+      "sha256": "a1e6dbaf645c23d9a594b51b766aae05fff85fdbb67715cc76fcee6bef53a148"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/training_context.py",
+      "sha256": "1322c59d3c7b931bdb9db50faadfa28516dcefd999b3902beef9e399be475b77"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/tests/test_training_context.py",
+      "sha256": "deba0ee02863363e1857f6d12a095122f6be8952ace9a6834e77b16d413dc8a0"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/tests/test_context_trial.py",
+      "sha256": "ef97a632f989c12ed64677584cf789c95befc8dbc2d410b814e98e145e7509f0"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/train_context_trial.py",
+      "sha256": "07b52d5d7b6f5967dbe88fa4cc4ca06e29d95ab56cfe24554f3cd99e88824547"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/prepare_context_trial.py",
+      "sha256": "d56753ecafacbbaf64973a26875dc5e5e4ea8b9829be8b20d7ea8d56b0bee80f"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/prepare_context_cohort.py",
+      "sha256": "60e53b0b5d4e656557567db5fa1be68a6724506dac68dd6a8771cd3e6e5557a3"
+    }
+  ],
+  "Ruff": "All changed Python files pass."
+}

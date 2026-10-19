@@ -1,5 +1,14 @@
 # Training data work, sampling order and batch size
 
+The default-off [input-context experiment](training-context-v86-v87.md) now
+separates prepared source size, actual forward size and central loss size.
+`patch_size: 320`, `forward_patch_size` set to `256` or `320`,
+`loss_patch_size: 256` and `validation_patch_size: 256` let both arms share
+source/noise/target draws while only one sees the surrounding 32px border. RGB targets/masks and packed
+RAW/variance/auxiliary fields retain their own coordinate units and Bayer
+alignment; resume rejects changed geometry. Legacy recipes omit these options.
+This is preparation for a controlled trial, without a quality or default change.
+
 The mixed trainer previously prepared a Commons batch on **every** optimizer
 step, including steps that replaced it with paired RAW or native-RAW synthetic
 data. Domain selection now precedes loading. Each loader samples only its

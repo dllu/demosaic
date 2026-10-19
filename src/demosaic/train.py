@@ -30,6 +30,7 @@ from .paired_training import PairedDataset, paired_reconstruction_loss, paired_s
 from .precision import amp_context, ieee_fp32
 from .raw_clean import RawCleanDataset, degrade_raw_clean, raw_clean_step
 from .safety import writable_path
+from .training_context import TrainingContext, require_resume_context
 
 
 @torch.inference_mode()
@@ -325,6 +326,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
 
 
 def _train(config, *, resume=None, initialize=None, stop_after=None):
+    training_context = TrainingContext.from_config(config)
     objective = validate_reconstruction_objective(
         config.get("reconstruction_objective", "charbonnier-v1")
     )
@@ -578,6 +580,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
             state["step"] * groups * config.get("batch_size", 4)
         ):
             raise ValueError("Resume example-draw counter differs from optimizer step")
+        require_resume_context(state["config"], config)
         if state["config"].get("ema_decay", 0.999) != config.get("ema_decay", 0.999):
             raise ValueError("Resume EMA decay differs from checkpoint")
         if state["config"].get("validation_protocol_sha256") != config.get(
@@ -746,7 +749,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
         CleanDataset(
             validation_manifest,
             split="val",
-            patch_size=config.get("patch_size", 256),
+            patch_size=config.get("validation_patch_size", config.get("patch_size", 256)),
             records=validation_records,
         ),
         batch_size=batch_size,
@@ -826,6 +829,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
                 if log_step and config.get("trace_observations", False)
                 else None
             )
+            forward_batch = training_context.forward_batch(batch) if training_context else batch
             model.set_noise(batch["shot"], batch["read"])
             forward_options = {"auxiliary": True}
             normalization_mask = None
@@ -836,17 +840,23 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
                 forward_options["normalization_mask"] = normalization_mask
             with amp_context(device, amp or precision == "float32", dtype=precision):
                 prediction, auxiliary = model(
-                    batch["packed"],
-                    batch["variance"],
-                    batch["colors"],
-                    batch["wb"],
-                    batch["matrix"],
+                    forward_batch["packed"],
+                    forward_batch["variance"],
+                    forward_batch["colors"],
+                    forward_batch["wb"],
+                    forward_batch["matrix"],
                     **forward_options,
                 )
+                if training_context:
+                    prediction, auxiliary, loss_batch = training_context.supervision(
+                        prediction, auxiliary, batch
+                    )
+                else:
+                    loss_batch = batch
                 if use_pair:
                     loss, terms = paired_reconstruction_loss(
                         prediction,
-                        batch,
+                        loss_batch,
                         auxiliary,
                         multiscale_sensor_weight=multiscale_weight,
                         objective=objective,
@@ -854,7 +864,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
                 else:
                     loss, terms = reconstruction_loss(
                         prediction,
-                        batch,
+                        loss_batch,
                         auxiliary,
                         physical_fp32=model.config.physical_fp32,
                         normalized_sensor_weight=config.get("normalized_sensor_weight", 0.0),
@@ -914,6 +924,17 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
                 metrics["batch_sha256"] = fingerprint
             if normalization_mask is not None:
                 metrics["normalization_mask"] = normalization_mask.tolist()
+            if training_context:
+                metrics.update(
+                    context_source_size=training_context.source_size,
+                    context_forward_size=training_context.forward_size,
+                    context_loss_size=training_context.loss_size,
+                )
+                if config.get("trace_observations", False):
+                    metrics.update(
+                        context_forward_sha256=batch_fingerprint(forward_batch),
+                        context_supervision_sha256=batch_fingerprint(loss_batch),
+                    )
             with (run / "metrics.jsonl").open("a") as log:
                 log.write(json.dumps(metrics) + "\n")
             print(json.dumps(metrics), flush=True)
@@ -936,7 +957,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
                 panel_data = CleanDataset(
                     validation_manifest,
                     split="val",
-                    patch_size=config.get("patch_size", 256),
+                    patch_size=config.get("validation_patch_size", config.get("patch_size", 256)),
                     records=validation_records,
                     native_crop=True,
                 )
