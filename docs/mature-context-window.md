@@ -75,7 +75,10 @@ has these eligible training-file counts:
 |256|512|84,867|100%|
 |320|640|50,912|59.99%|
 |384|768|21,709|25.58%|
+|416|832|13,530|15.94%|
+|432|864|10,860|12.80%|
 |448|896|7,504|8.84%|
+|480|960|3,979|4.69%|
 |512|1024|1,305|1.54%|
 
 These are audited-manifest dimension counts, not a new per-cache integrity audit
@@ -84,6 +87,16 @@ A future context experiment needs a matched eligible-subset control or an
 explicit mixed-size recipe; the current metadata do not justify stretching
 small images or silently changing membership. Batch-size throughput remains a
 separate question already measured under the current native256 recipe.
+
+An [expanded metadata count](results/training-context-size-availability-v1.json)
+also checks the native and paired corpora. All 128 current public/native and
+150 reviewed personal-extension captures meet the dimension requirement through
+448px; 512px leaves 25/47 respectively. The future 168-source extension retains
+all captures through 400px, then 163 at416 and161 at448. All576 saved paired
+crops declare512×512 dimensions. This identifies smaller context candidates
+with more available sources than512; larger-crop masks, actual loaders, GPU
+memory/throughput and trained quality still need separate tests. No sources,
+pixels, manifests, active patch size or model change from these counts.
 
 Nineteen native-board tests pass, including exact pixel preservation and
 shared sensorROI versus method-specific input-window metadata. Ruff passes.

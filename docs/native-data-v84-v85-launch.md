@@ -33,6 +33,18 @@ Each arm must pass the declared memory and disk gates. Runs are serial,
 with no automatic retry, extension or promotion. Final checkpoint quality and
 native crop reviews remain outstanding; the README stays on V43.
 
+The retained control 10k checkpoint now passes a
+[read-only midpoint engineering audit](results/native-control-retained10k-engineering-v1.json)
+after training advanced beyond its closed copy. All 91 model/91 EMA tensors and
+89 AdamW parameter states are finite, with every optimizer counter 10000.
+The LR is 5.571396837256637e−6, independently matching the original 20k cosine
+with its 10% floor. All 416 recorded domain choices match the declared selector;
+401 logged training rows match their observation hashes/LRs and have finite
+loss/gradient norm. All 44 archived package files and 253 frozen runtime files
+remain exact; the original data/protocol and source-snapshot digest match.
+This checks state and recipe integrity without inference or interim quality
+selection. Both original 20k endpoints and the complete final review remain required.
+
 The full review adapter has independently checked both genuine16-update
 CPU/CUDA checkpoint pairs, including91/91/89 states, original20k schedules,
 source-manifest-only archive differences and shared/RNG equality. It rejects
