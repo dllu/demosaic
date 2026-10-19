@@ -56,6 +56,16 @@ other rows, so its global index no longer matches the earlier wait snapshot.
 One unavailable original returned HTTP404 during the new download; its error is
 recorded separately from the successful1,188-source local preparation.
 
+The failed producer's 771 partial 4× NPY copies now have read-only file aliases
+to the identical arrays in the successful SSD recovery, retiring about 6.2 GiB
+of duplicate root-disk storage. Independent checks validate all 771 rows against
+both manifests, every cache SHA256, and actual NumPy shapes/uint16 headers. The
+failed status, partial manifests, recipe, errors, source and all active-plan
+hashes retain their exact bytes. Partial filename membership is unchanged;
+resolved physical cache identity now belongs to the recovered producer. Future
+preparation should use the complete recovered caches and fresh output roots.
+[Full inventory, storage receipt and independent audit](results/commons-partial-array-alias-20261019-v1.json).
+
 The earlier queue observation showed both waiters childless and without
 Torch/CUDA mappings, before any cache copy, reconciliation or broader download.
 That dated receipt is preserved; it is not the current completion state.
