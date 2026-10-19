@@ -32,15 +32,19 @@ def wait_status(path, owner):
     raise RuntimeError("Queued owner did not publish its wait status")
 
 
-def main(plan_path, preflight_path):
+def main(plan_path, preflight_path, *, validate_preflight=None):
     assert os.environ.get("CUDA_VISIBLE_DEVICES") != "", "Review must inherit a visible CUDA device"
     plan = read(plan_path)
     guard(plan)
     preflight = read(preflight_path)
-    assert (
-        preflight["status"] == "completed-historical-bank-review-preflight-no-new-quality-evidence"
-    )
-    assert preflight["comparison_rows_exact"] == 108 and len(preflight["CPU_portability"]) == 2
+    if validate_preflight is None:
+        assert (
+            preflight["status"]
+            == "completed-historical-bank-review-preflight-no-new-quality-evidence"
+        )
+        assert preflight["comparison_rows_exact"] == 108 and len(preflight["CPU_portability"]) == 2
+    else:
+        validate_preflight(preflight)
     assert preflight["CUDA_initialized"] is False
     status = read(plan["training_status"])
     assert status["controller"] == plan["training_owner"]

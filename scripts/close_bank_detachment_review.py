@@ -12,17 +12,18 @@ import psutil
 from close_directional_bank_review import native_report, read, ready, ref, save, sha
 
 
-def main(plan_path, *, historical_criteria=None):
+def main(plan_path, *, historical_criteria=None, numerical_criteria=None):
     os.nice(10)
     plan = read(plan_path)
     root = Path(plan["root"])
     historical = plan.get("historical_replay", False)
     assert historical is (historical_criteria is not None)
+    assert not historical or numerical_criteria is None
     for path, digest in plan["frozen_files"].items():
         assert sha(path) == digest, path
     for item in plan["inputs"]:
         assert ref(item["path"]) == item
-    assert ref(__file__) == plan["worker"]
+    assert ref(__file__) == plan.get("closure_engine", plan["worker"])
     assert ref(plan["review_plan"]["path"]) == plan["review_plan"]
     for item in plan["retained_native_reports"].values():
         assert ref(item["path"]) == item
@@ -131,6 +132,8 @@ def main(plan_path, *, historical_criteria=None):
         status["completed"].append("remaining-native-boards-created")
         if historical:
             score_criteria = historical_criteria
+        elif numerical_criteria is not None:
+            score_criteria = numerical_criteria
         else:
             from score_bank_detachment_eligibility import main as score_criteria
 

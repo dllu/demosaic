@@ -25,11 +25,31 @@ resolves that path before child launch. The successful CPU check used a fresh
 root; the failed plan and logs remain intact. Six focused observation-guard
 tests and Ruff pass. No neural or training-core implementation changed.
 
-The original20k production launch will bind the committed criteria, manifests,
-737 fixed data/provenance inputs, engineering receipts and frozen runtime
-sources. Each arm must pass the declared memory and disk gates. Runs are serial,
+The original20k production controller and control trainer are running from
+commit `650a051`. The plan binds253 frozen runtime files and748 fixed input
+references, including the737 data/provenance inputs and engineering receipts.
+[Dated live-owner launch snapshot](results/native-data-v84-v85-launch-v1.json).
+Each arm must pass the declared memory and disk gates. Runs are serial,
 with no automatic retry, extension or promotion. Final checkpoint quality and
 native crop reviews remain outstanding; the README stays on V43.
+
+The full review adapter has independently checked both genuine16-update
+CPU/CUDA checkpoint pairs, including91/91/89 states, original20k schedules,
+source-manifest-only archive differences and shared/RNG equality. It rejects
+live production and refuses engineering boundaries as quality results. An
+unchanged historical primary-score replay reproduces the original per-arm and
+matched thresholds; the new names describe generic scorer positions in that
+replay. No V84/V85 held-out predictions have been made. The analytic reviewer
+keeps all192 individual ADC layout/draw contrasts and12 group means, alongside
+the two existing weak-carrier/flat requirements. A loss in one case cannot be
+hidden by averaging. [Review preflight](results/native-data-review-preflight-v1.json).
+Eleven new focused guards and33 related review/lineage tests pass; Ruff passes.
+
+The shared panel engine retains its existing internal status names. The new
+adapter binds V84/V85 original20000 labels, genuine completed training owners,
+91/91/89 states and the original20k hue lineage. The queued CPU closure uses
+the new data-study scorer while retaining the existing saved-array, native-pixel
+and V43/RawNIND reference checks. Actual native viewing remains required.
 
 The separate Commons recovery has completed both cache scales and protected
 screening. Reconciliation has finished and the bounded archive downloader is
