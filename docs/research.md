@@ -351,3 +351,16 @@ are mixed. An exact-weight FP32 graph agrees with the upstream operator while
 native CPU FP16 execution differs materially; no Vulkan quality/speed or general
 model ranking follows. The older compact architecture is not a new2026 design.
 Weights/runtime stay isolated; separate weight-license terms remain unverified.
+
+## October 19: noise assumptions before another architecture change
+
+The [AIM 2025 RAW-denoising report](https://arxiv.org/html/2510.06601v1) attributes
+important gains to synthesis/training strategies and provides real dark-frame
+profiling material. Its RAW-to-RAW/ISP protocol differs from our joint task.
+Our inference: check residual-noise assumptions before introducing another
+camera-specific augmentation. The new [cached GFX correlation diagnostic](gfx-noise-correlation.md)
+finds no clear sky departure from its conditional independent-noise simulations
+at the tested Haar offsets. Textured contexts remain structure-confounded.
+Known row/column controls and an independent numerical audit pass. This is a
+limited input-only diagnostic, without noise-truth, quality or calibration claims;
+no upstream data/code/weights or noise-model changes follow.

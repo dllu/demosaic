@@ -1,0 +1,315 @@
+{
+  "status": "completed-exploratory-cached-GFX-Haar-correlation-probe-with-known-noise-controls",
+  "observed_utc": "2026-10-19T08:42:38.475753+00:00",
+  "source": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-inputs-v1/GFX-four-contexts-native512.npz",
+    "sha256": "2975a90f272b201a81954e6d1e1c41d58ff18c6249c22274b17f8dea0471cbd2"
+  },
+  "source_manifest": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-inputs-v1/inputs.json",
+    "sha256": "11655660520041c0b9255f197758c6c313ef50834605dc78350c1e5c6f3d8784"
+  },
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/gfx-haar-correlation-20261019-v1/probe.py",
+    "sha256": "a5383bb31ac331a90ec6ab90411f476a9f6b986dcda88ff29f063fa339cd7ad4"
+  },
+  "seed": 202610190842,
+  "null_draws_each": 128,
+  "lag_offsets_in_Haar_coefficient_grid": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      2,
+      0
+    ]
+  ],
+  "native_sensor_spacing_of_coefficients": 4,
+  "input_only_prior": {
+    "shot": 0.0014635775921166604,
+    "read_variance": 1.0715704128646712e-06,
+    "source": "Existing full-input Haar fit; not camera-specific dark/flat calibration"
+  },
+  "controls": {
+    "white_max_absolute_66": 0.012918938120470264,
+    "planted_row_expected": 0.24242424242424246,
+    "planted_row_measured": 0.24176780274080856,
+    "planted_column_expected": 0.15254237288135594,
+    "planted_column_measured": 0.15146208514525833,
+    "analytic_tolerance": 0.05
+  },
+  "null_arrays": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/gfx-haar-correlation-20261019-v1/null-correlations.npz",
+    "sha256": "bfc6c1f658e965c8d06ae3895234eca5a61cf55c28b43d3868c9b4d08176f41a"
+  },
+  "Torch_imported": false,
+  "training_admission": false,
+  "noise_or_model_change": false,
+  "scope": "Exploratory cached512-context measurements, no model execution or RAW decode.66 selected within-phase/cross-phase Haar correlations per context. Gaussian and PG nulls use a plane estimated from the same sky and existing input-fit prior, without sensor quantization/censoring. Conditional simulation quantiles are not real-noise ground truth or calibrated camera confidence intervals. Texture can cause correlations and inflate apparent noise. A small/null result does not prove independence at other lags, signals, captures or sensors. Standing GFX remains excluded from training.",
+  "raw_result": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/gfx-haar-correlation-20261019-v1/result.json",
+    "sha256": "fee1722c27ee66918ddc6bccad833c700f91ba1ef7e22956a7b3cd7b33c26dc7"
+  },
+  "independent_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/gfx-haar-correlation-20261019-v1/audit.json",
+    "sha256": "c98bc72ac8a9cca8bdc94ab231dcf448f6e4899de5cdb84875d789122fc2f810"
+  },
+  "actual_probe_exit_code": 0,
+  "actual_auditor_exit_code": 0,
+  "numpy_version": "2.5.4",
+  "maximum_independent_real_metric_error": 4.440892098500626e-16,
+  "source_capture": "Cached GFX100S DSCF3879 ISO6400; no low-ISO reference used",
+  "display_transform": "None: direct normalized CFA samples, no image rendering",
+  "regions": [
+    {
+      "region": {
+        "name": "overcast-sky",
+        "noisy_xy": [
+          5800,
+          1400
+        ],
+        "reference_xy": [
+          5800,
+          1400
+        ],
+        "size": 160,
+        "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+        "context_green_correlation": null
+      },
+      "context_xywh": [
+        5624,
+        1224,
+        512,
+        512
+      ],
+      "noisy_packed": {
+        "path": "/mnt/external/demosaic/evaluation/packed-isotropic-first32000-gfx-v2/overcast-sky-noisy-packed-f32.npy",
+        "sha256": "f875de8e6dcc3441800ee23c96b348dcb6d48fe26789c04f79f583568a53bd4d"
+      },
+      "reference_RGB": {
+        "path": "/mnt/external/demosaic/evaluation/packed-isotropic-first32000-gfx-v2/overcast-sky-reference-rgb-f32.npy",
+        "sha256": "a566b9ebfa173e706b820988dd1f47302f9d2e6521de7873dddd18f5a0ee6c49"
+      },
+      "reference": "Separate ISO100 f/5.6 capture and independently demosaiced reference, not GT"
+    },
+    {
+      "region": {
+        "name": "building-detail",
+        "noisy_xy": [
+          5790,
+          2690
+        ],
+        "reference_xy": [
+          5791,
+          2690
+        ],
+        "size": 160,
+        "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+        "context_green_correlation": 0.6824449896812439
+      },
+      "context_xywh": [
+        5614,
+        2514,
+        512,
+        512
+      ],
+      "noisy_packed": {
+        "path": "/mnt/external/demosaic/evaluation/packed-isotropic-first32000-gfx-v2/building-detail-noisy-packed-f32.npy",
+        "sha256": "d4e189e0cd48f85c05fd041001770728a6e2c5af496849516fb0f43ed98b2666"
+      },
+      "reference_RGB": {
+        "path": "/mnt/external/demosaic/evaluation/packed-isotropic-first32000-gfx-v2/building-detail-reference-rgb-f32.npy",
+        "sha256": "d4ce7ad0a632979efcb19e8153e0585167771a846923ea71c8c0e75ab7ad216c"
+      },
+      "reference": "Separate ISO100 f/5.6 capture and independently demosaiced reference, not GT"
+    },
+    {
+      "region": {
+        "name": "foliage",
+        "noisy_xy": [
+          8890,
+          5570
+        ],
+        "reference_xy": [
+          8890,
+          5570
+        ],
+        "size": 160,
+        "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+        "context_green_correlation": 0.9597686529159546
+      },
+      "context_xywh": [
+        8714,
+        5394,
+        512,
+        512
+      ],
+      "noisy_packed": {
+        "path": "/mnt/external/demosaic/evaluation/packed-isotropic-first32000-gfx-v2/foliage-noisy-packed-f32.npy",
+        "sha256": "a67eec1789664a3e3ea1aaa43e7cb8ece9c8cb9001a8f3b2d7717053d802f278"
+      },
+      "reference_RGB": {
+        "path": "/mnt/external/demosaic/evaluation/packed-isotropic-first32000-gfx-v2/foliage-reference-rgb-f32.npy",
+        "sha256": "35a77f7035e67561ffde8d214a0275b3f174a2859e6981f968a49a63d535670a"
+      },
+      "reference": "Separate ISO100 f/5.6 capture and independently demosaiced reference, not GT"
+    },
+    {
+      "region": {
+        "name": "chain-link-fence",
+        "noisy_xy": [
+          2240,
+          6000
+        ],
+        "reference_xy": [
+          2241,
+          6000
+        ],
+        "size": 160,
+        "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+        "context_green_correlation": 0.9550720453262329
+      },
+      "context_xywh": [
+        2064,
+        5824,
+        512,
+        512
+      ],
+      "noisy_packed": {
+        "path": "/mnt/external/demosaic/evaluation/packed-isotropic-first32000-gfx-v2/chain-link-fence-noisy-packed-f32.npy",
+        "sha256": "b145f28630c1abce870c99bc24160fa0276ef31bcff14e5a72d577c964c9d495"
+      },
+      "reference_RGB": {
+        "path": "/mnt/external/demosaic/evaluation/packed-isotropic-first32000-gfx-v2/chain-link-fence-reference-rgb-f32.npy",
+        "sha256": "07b02153c74b8d92052f0fc15ce417f64e54f551433ab87a6006eee44eeafe6a"
+      },
+      "reference": "Separate ISO100 f/5.6 capture and independently demosaiced reference, not GT"
+    }
+  ],
+  "real_cases": [
+    {
+      "name": "overcast-sky",
+      "colors": [
+        0,
+        1,
+        1,
+        2
+      ],
+      "phase_means": [
+        0.01320356127145944,
+        0.02163207385210164,
+        0.021737915160189858,
+        0.010725732184365983
+      ],
+      "phase_HH_variance_over_input_prior": [
+        1.0571735676469007,
+        1.0344517082448172,
+        1.0117959659328577,
+        1.0168160724870081
+      ],
+      "max_absolute_correlation_over_66": 0.023239079338813976,
+      "maximum_metric": "HH/cross-phase0,2",
+      "sky_plane_conditional_null_comparisons": {
+        "iid-Gaussian": {
+          "null_max_abs_q95": 0.02652779342365245,
+          "null_max_abs_q99": 0.03185348182095923,
+          "draws_at_least_as_extreme": 20,
+          "draws": 128
+        },
+        "iid-Poisson-Gaussian-input-prior": {
+          "null_max_abs_q95": 0.02570437275868116,
+          "null_max_abs_q99": 0.030065454636244254,
+          "draws_at_least_as_extreme": 22,
+          "draws": 128
+        }
+      }
+    },
+    {
+      "name": "building-detail",
+      "colors": [
+        0,
+        1,
+        1,
+        2
+      ],
+      "phase_means": [
+        0.02769039877433188,
+        0.04249604895653572,
+        0.042455704369084774,
+        0.020319517541313975
+      ],
+      "phase_HH_variance_over_input_prior": [
+        1.9979225568560806,
+        2.248745431195033,
+        2.129187749209731,
+        1.9513807720915188
+      ],
+      "max_absolute_correlation_over_66": 0.8254249176212182,
+      "maximum_metric": "H/cross-phase0,2",
+      "interpretation": "Scene-structure confounded; no context-matched noise null or real-noise significance claim. All raw coefficients and sky-null comparisons retained in bound raw result."
+    },
+    {
+      "name": "foliage",
+      "colors": [
+        0,
+        1,
+        1,
+        2
+      ],
+      "phase_means": [
+        0.009776595313581937,
+        0.01783228343990209,
+        0.017757543379401997,
+        0.005843543904570175
+      ],
+      "phase_HH_variance_over_input_prior": [
+        1.4157185399500045,
+        1.5950338793491055,
+        1.5612460231637337,
+        1.3158704660208658
+      ],
+      "max_absolute_correlation_over_66": 0.5482913406046749,
+      "maximum_metric": "H/cross-phase1,2",
+      "interpretation": "Scene-structure confounded; no context-matched noise null or real-noise significance claim. All raw coefficients and sky-null comparisons retained in bound raw result."
+    },
+    {
+      "name": "chain-link-fence",
+      "colors": [
+        0,
+        1,
+        1,
+        2
+      ],
+      "phase_means": [
+        0.01274451671847393,
+        0.022480567780057498,
+        0.022454015391117826,
+        0.00842761483006782
+      ],
+      "phase_HH_variance_over_input_prior": [
+        1.5335226920218499,
+        1.7468990911815139,
+        1.729702852882809,
+        2.567833643145921
+      ],
+      "max_absolute_correlation_over_66": 0.6827910278457788,
+      "maximum_metric": "V/cross-phase0,1",
+      "interpretation": "Scene-structure confounded; no context-matched noise null or real-noise significance claim. All raw coefficients and sky-null comparisons retained in bound raw result."
+    }
+  ],
+  "literature_context": {
+    "paper": "AIM 2025 Challenge on Real-World RAW Image Denoising",
+    "url": "https://arxiv.org/html/2510.06601v1",
+    "accessed_utc": "2026-10-19",
+    "scope": "RAW-to-RAW denoising and separate ISP, not this JDD protocol; motivates checking synthesis assumptions. No external data/code/weights incorporated."
+  }
+}
