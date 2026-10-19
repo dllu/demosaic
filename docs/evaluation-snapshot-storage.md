@@ -38,3 +38,14 @@ operator result and independent auditor source/log/receipt are retained in
 The reusable operator is `scripts/consolidate_evaluation_snapshots.py`.
 The [cumulative receipt](results/completed-evaluation-snapshot-storage-v1.json)
 records201.42GiB recovered across five completed operations.
+
+Two closed objective-engineering caches have separately moved from the internal
+SSD to an external archive, recovering 6.12 GiB of root space and using about
+6.12 GiB on the external SSD. All 294 file bytes, names, sizes and mtimes remain
+accessible through directory aliases at the original paths. An independent
+audit rehashes every file and checks the four active plans plus 465 reachable
+JSON documents; none references the relocated trees. Resolved physical names
+and inode identity now belong to the archive, with the mapping preserved for
+historical physical-path checks. Current training and review inputs are unchanged;
+future probes use fresh output roots.
+[Archive, full inventory and independent audit](results/closed-objective-benchmark-archive-20261019-v1.json).
