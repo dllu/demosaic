@@ -16,6 +16,11 @@ minimum2048px sides, maximum120MP and256MiB/file bounds. Deterministic page-ID
 hash ordering samples across the remaining queue. This does not establish
 semantic scene diversity or source-family independence.
 
+A [48-source original-image spot check](commons-local-content-review.md) has now
+been actually viewed. The sample contains varied architecture, vegetation,
+water/snow/sky, wildlife, vehicles, people and interior detail. Full prepared-cache
+review, duplicate screening and training benefit remain separate questions.
+
 Full original attribution records, credit/artist HTML, license URLs and source
 metadata are preserved in the local SQLite index and frozen selection JSON.
 The existing `pupphoto` downloader and its config module are copied byte-for-byte
