@@ -12,6 +12,28 @@ and original4000-update schedule. Each draws64,000 examples; context requires
 more computation. Neither additional data nor intermediate quality selection
 is part of this trial.
 
+The control arm has now completed its full original4000 budget. Its
+[independent closed-state audit](results/training-context-control-original4000-v1.json)
+verifies finite91 model/91EMA/89AdamW states, all counters4000, nonnegative
+second moments, genuine V63 initialization, unchanged ModelConfig, all45 archived
+package files,176 actual source/forward/loss observations and161 original-LR
+logs. Only fixed context mean/std buffers remain equal to parentEMA. Final LR
+is the original10% floor, stored as`1.0000000000000002e-6` in binary floating
+arithmetic. Final/retained checkpoint SHA256 is
+`0b1329fed98b93b35b9fa0364e3cbc55debca7de89e71776670ce5ff4a0b3a25`.
+This audit includes no model prediction or quality selection.
+
+The [dated second-arm start](results/training-context-second-arm-start-v1.json)
+observes actual context trainer273033/creation1792450020.69 after the control
+owner's successful exit. Context initializes from genuine V63 with a fresh
+optimizer/EMA, not the completed control endpoint. At that observation, all19
+published pairs through input step75 have identical full source and central
+loss fields across native/paired/Commons, with different actual256/320 forward
+fields. An immutable prefix snapshot preserves those observations as the live
+file continues changing. This is early engineering integrity only; all176 final
+pairs, final RNG/archive equality and the complete quality/native review are
+still required. The matched effect remains unproved.
+
 The [independent preflight audit](results/training-context-preflights-v1.json)
 loads all four actual closed16-step checkpoint states. CPU checks use B1,
 source64, forward32/64 and loss32; CUDA checks use intended B16, source320,
