@@ -1,9 +1,12 @@
-# Bank-gradient study: connected4k complete, detached running
+# Bank-gradient study: connected complete, detached recovery
 
 V82 connected completed its original4,000 updates and exited successfully.
-V83 detached started freshly from the genuine V63 EMA and reached logged step75
-under the same [fixed experiment](directional-bank-detachment-v82-v83.md).
-**Quality review and model selection remain pending.**
+V83 detached later stopped at the system-memory guard and saved step2,999.
+A [separately frozen recovery](bank-detachment-memory-recovery.md) restores that
+checkpoint and continues to the original4,000-update boundary under the same
+[fixed experiment](directional-bank-detachment-v82-v83.md).
+**Quality review and model selection remain pending.** The following launch and
+connected-completion observations are historical snapshots.
 [Completed connected boundary and verified detached handoff](results/bank-detachment-connected4000-reproduction-v1.json).
 
 A read-only CPU audit checks the completed connected checkpoint: all105 model/
@@ -45,7 +48,9 @@ cached GFX sky/building/foliage/fence/lights with independent ISO100-reference
 labels. Failed gates keep the study closed without automatic extension.
 V43 remains the working reference and README pixels remain unchanged.
 
-Current state is in
-`.cache/experiments/bank-detachment-v82-v83-original4k-v1/status.json` and its
-arm logs. The published launch receipt is a dated snapshot; process identity
-and current metrics must be checked before acting on later state.
+The original controller's failed status and logs remain at
+`.cache/experiments/bank-detachment-v82-v83-original4k-v1/`.
+Current recovery state is in
+`.cache/experiments/bank-detachment-v82-v83-memory-recovery-v1/status.json`.
+The published receipts are dated snapshots; process identity and current metrics
+must be checked before acting on later state.

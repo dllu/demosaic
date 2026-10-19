@@ -1,10 +1,12 @@
-# Queued local-original reconciliation and archive resume
+# Local-original reconciliation and archive resume: deferred
 
 The local batch has downloaded all**1,188 originals /17,175,771,412bytes**.
-A separate worker waits for the exact local downloader and cache preparer to
-exit, requires successful preparation, then reconciles the originals before
-resuming the existing archive downloader. Production reconciliation and broader
-downloading are pending at this snapshot.
+A separate worker waited for the exact local downloader and cache preparer to
+exit. It then stopped because preparation had failed its available-memory guard.
+**Archive reconciliation and broader downloading did not begin.** Recovery is
+deferred until the [GPU recovery and review](bank-detachment-memory-recovery.md)
+finish, followed by successful cache preparation under a fresh plan. The
+implementation and completed fixture below remain valid engineering evidence.
 [Verified live queue, source bindings and full fixture](results/commons-archive-handoff-queue-v1.json).
 
 The original archive index still matches the snapshot used for local selection.
@@ -35,8 +37,9 @@ originals in a separate archive. Their attribution remains exact. The actual
 unchanged downloader finds no pending files and exits0 without image downloads.
 The fixture uses its own lock; production retains the real shared lock.
 
-Operational queue: `.cache/commons-archive-handoff-20261019-v1/`, owner3126300 /
-creation1792393569.12 at launch. Verify PID/creation/live state before acting.
+Original queue: `.cache/commons-archive-handoff-20261019-v1/`, owner3126300 /
+creation1792393569.12 at launch. That owner has exited with
+`failed-archive-handoff-no-automatic-retry`; preserve its failed snapshot.
 Its frozen plan/source, `status.json`, `controller.log` and future
 `reconciliation/receipt.json`/`download.log` record actual progress. The complete
 fixture is `.cache/benchmarks/commons-archive-handoff-preflight-v1/`.

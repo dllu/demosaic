@@ -41,15 +41,19 @@ frozen data recipe are required before training admission. Standing GFX and
 siblings remain excluded. Retain the local selection/index when reconciling the
 main archive later so these originals are not downloaded twice.
 
-A separate [4×/8× preparation worker](commons-local-preparation.md) is now preparing
-the completed batch after the exact downloader's exit. Full preparation and
-screening are pending; the completed two-source fixture is engineering validation,
-not corpus admission.
+A separate [4×/8× preparation worker](commons-local-preparation.md) began preparing
+the completed batch, then stopped at its memory guard. Partial atomic caches are
+retained. Recovery is deferred until the
+[GPU recovery and review](bank-detachment-memory-recovery.md) finish. Full
+preparation and screening are pending; the completed two-source fixture is
+engineering validation, not corpus admission.
 
-All1,188 originals have now downloaded. A separate [archive handoff](commons-archive-handoff.md)
-waits for preparation, then reconciles these identities before a bounded broader
-resume. The recovered external capacity is reserved conservatively for both
-new originals and future cache/model work. Current model data remains frozen.
+All1,188 originals have now downloaded. The dependent
+[archive handoff](commons-archive-handoff.md) exited because preparation did not
+complete. It did not reconcile the archive or begin broader downloading.
+A fresh handoff will require a successful recovered preparation. External
+capacity remains reserved for new originals and future cache/model work.
+Current model data remains frozen.
 
 Inspect the local `download.log`, `launch.json` and SQLite status without
 starting another download. An incomplete, stopped local job resumes with:

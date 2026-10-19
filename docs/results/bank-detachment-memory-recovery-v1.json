@@ -1,0 +1,143 @@
+{
+  "status": "diagnosed-memory-stop-recovered-from-genuine-step2999-original4k",
+  "observed_utc": "2026-10-19T08:04:26.340241+00:00",
+  "preserved_failed_workflows": [
+    {
+      "receipt": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/bank-detachment-v82-v83-original4k-v1/status.json",
+        "sha256": "0b942feaf0cfa131f087e56f8422576d6a358b7135e6b2c3bd2b70bb2805f376"
+      },
+      "status": "failed-bank-detachment-trial-no-automatic-retry",
+      "error": "AssertionError('detached exited 1')"
+    },
+    {
+      "receipt": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/bank-detachment-v82-v83-original4k-review-v1/status.json",
+        "sha256": "c6e509d5880bf0a2c13e177d85976e3db8ed513dc6b42992e71e276825227c0f"
+      },
+      "status": "failed-directional-bank-review-no-automatic-retry",
+      "error": "RuntimeError('Both fixed training budgets must complete before review')"
+    },
+    {
+      "receipt": {
+        "path": "/home/dllu/proj/demosaic/.cache/commons-qi-local-preparation-20261019-v1/status.json",
+        "sha256": "7c9ed36366cbd9361be72e1c0294f917127e3877f5da573d62d728613e39cd0c"
+      },
+      "status": "failed-local-preparation",
+      "error": "ValueError: Less than24GiB available RAM"
+    },
+    {
+      "receipt": {
+        "path": "/home/dllu/proj/demosaic/.cache/commons-archive-handoff-20261019-v1/status.json",
+        "sha256": "0c298cb6498e747fd0d575140560e3f2e3f9aece080aba824d586dd906379c0a"
+      },
+      "status": "failed-archive-handoff-no-automatic-retry",
+      "error": "ValueError('Local preparation did not complete successfully')"
+    }
+  ],
+  "failure_cause": "Controlled system-memory guards: training reported6.7GB available; preparer required24GiB. Not a recorded numerical model failure. No other project process stopped.",
+  "recovery_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/bank-detachment-v82-v83-memory-recovery-v1/recovery.json",
+    "sha256": "a86a936e094e7a18d2c90f24e7bd5aa06af96d28faad67b0c1571fb4123e207b"
+  },
+  "training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/bank-detachment-v82-v83-memory-recovery-v1/training-plan.json",
+    "sha256": "2b88d6b3ace9f531768c234f221ad866ef5b4bd3bf967ebd032c37d990e866d6"
+  },
+  "adapter": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/bank-detachment-v82-v83-memory-recovery-v1/recover_bank_detachment.py",
+    "sha256": "e76ce16c94b4bd540ab55d88c33ab8c956862a482750d1f978318dd8c61dfe43"
+  },
+  "immutable_emergency_checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/bank-detachment-v82-v83-memory-recovery-v1/inputs/detached-emergency-step002999.pt",
+    "sha256": "a2d8ba8748be604595eea26064f92ee4769773c1bc23fba4bf4ed0e059f9eca1"
+  },
+  "checkpoint_step": 2999,
+  "original_horizon": 4000,
+  "remaining_updates": 1001,
+  "finite_model_EMA_AdamW": [
+    105,
+    105,
+    103
+  ],
+  "original_training_core_bytes_unchanged": 44,
+  "copied_frozen_training_files_checked": 248,
+  "CPU_emergency_proof": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/bank-detachment-memory-recovery-cpu-v1/CPU-emergency-proof.json",
+    "sha256": "a42d2838a7cfd53ba24320d7b76c30721574c617eaaefb7a27edd894b1aa9603"
+  },
+  "CPU_exact_resume": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/bank-detachment-memory-recovery-cpu-v1/CPU-exact-resume.json",
+    "sha256": "2c747ef273b0e45798104e272123586964af28190402048ced5fda0e92dca2b5"
+  },
+  "unchanged_review_reader_CPU_preflight": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/bank-detachment-memory-recovery-reader-cpu-v1/receipt.json",
+    "sha256": "4a7614ab58899910d6b293a4d36abaaa7262eb9f8335e3376074c28bf42d4dc2"
+  },
+  "actual_CPU_controller_exit_code": 0,
+  "CUDA_initialization_replay": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/bank-detachment-v82-v83-memory-recovery-v1/initial-replay.json",
+    "sha256": "8b68a8eb2a74e6563fc79c205d91c5f4f51c5ffedb80549ab3d7ac60cd1aa9dd"
+  },
+  "discarded_CUDA_replay_updates": 1,
+  "resume_controller": {
+    "pid": 3216666,
+    "created": 1792396322.39
+  },
+  "resume_worker": {
+    "pid": 3217208,
+    "created": 1792396406.2
+  },
+  "actual_owners_live": true,
+  "latest_logged_resumed_step": 3575,
+  "sampled_full_legacy_and_input_matches": 159,
+  "minimum_stable_available_GiB": 48,
+  "stable_memory_seconds": 60,
+  "memory_observations": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/bank-detachment-v82-v83-memory-recovery-v1/memory-observations.jsonl",
+    "sha256": "8295e7b820c674e8f97136ac6e91bda07ce953da0b11e75f1fd51c7251f5f1e7"
+  },
+  "current_available_GiB": 56.08522033691406,
+  "original_active_training_seconds": 4015.646223783493,
+  "remaining_training_timeout_seconds": 6784,
+  "original_total_arm_timeout_seconds": 10800,
+  "rebound_review_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/bank-detachment-v82-v83-memory-recovery-review-v1/plan.json",
+    "sha256": "fd07e4f326d576d259641a6957d74e2bf951e1cdf293be753e542ffc08c453a4"
+  },
+  "rebound_closure_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/bank-detachment-v82-v83-memory-recovery-native-closure-v1/plan.json",
+    "sha256": "d3d71417dae761bd568aeefbf064dc97057ee7c474d76e396281114d50a43978"
+  },
+  "rebound_reference_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/bank-detachment-v82-v83-memory-recovery-native-closure-v1/reference-plan.json",
+    "sha256": "b6846b3c64f004a8cfae75796e33c444aa65ed719f79667efc958e1686d44409"
+  },
+  "actual_waiters": [
+    {
+      "status": "waiting-for-exact-directional-bank-training-owner-exit",
+      "owner": {
+        "pid": 3219012,
+        "created": 1792396617.59
+      },
+      "actual_live": true,
+      "children": 0
+    },
+    {
+      "status": "waiting-for-exact-directional-bank-review-owner-exit",
+      "owner": {
+        "pid": 3220010,
+        "created": 1792396798.34
+      },
+      "actual_live": true,
+      "children": 0
+    }
+  ],
+  "reference_follower_actual_live": true,
+  "deferred_data_recovery": true,
+  "originals_and_completed_connected_arm_preserved": true,
+  "quality_review_complete": false,
+  "training_admission": false,
+  "promotion": false,
+  "scope": "Diagnosed shared-memory guard interruption. Continue exactly2999\u21924000 with unchanged model/data/seed/LR horizon/losses/thresholds; retain completed connected arm. One discarded genuine-parent update replays initial recorder/gradient evidence. No schedule extension, data admission, quality selection or original-artifact edit. CPU/cache/archive recovery remains deferred during GPU recovery/review."
+}

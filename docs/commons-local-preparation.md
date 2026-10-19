@@ -1,7 +1,11 @@
 # Local Commons cache preparation
 
 The [bounded local download](commons-local-staging.md) completed all1,188 originals.
-Its isolated CPU worker is now preparing both **4× and8× linear uint16 caches**.
+Its isolated CPU worker stopped at its 24 GiB available-memory guard during
+**4× linear uint16 cache** preparation. Partial atomic arrays are retained, but
+there is no completed corpus receipt. Recovery of both **4× and8× caches** is
+deferred until the [GPU recovery and review](bank-detachment-memory-recovery.md)
+finish; a fresh frozen plan will reuse independently verified valid outputs.
 The full selected
 batch needs approximately9.40GiB and2.35GiB respectively, excluding small headers
 and manifests. This supports the existing4× → geometry/PSF → area2 training
@@ -52,18 +56,19 @@ the production worker keeps the real shared lock and all input/source checks.
 Operational files:
 
 - Queue: `.cache/commons-qi-local-preparation-20261019-v1/`.
-- Actual owner at launch: PID3057802, creation1792390034.78. Verify both identity
-  and live state before acting; a status file alone is not liveness evidence.
+- Original owner at launch: PID3057802, creation1792390034.78; it has exited with
+  `failed-local-preparation`. The old failed workflow remains preserved.
 - Frozen47-source worker,49 immutable inputs and plan: `work/`, `plan.json`.
 - Progress: `status.json`, `controller.log`, `startup-observation.json`.
-- Future caches/audit/screen: `work/outputs/`; production completion is pending.
+- Partial caches: `work/outputs/`; full preparation/audit/screen remain pending.
 - Successful fixture: `.cache/benchmarks/commons-local-preparation-preflight-v3/`.
 
 The worker stops on failed guards and preserves its output for inspection.
 Do not start a duplicate while its exact owner is live or treat partial caches
 as a reviewed corpus. No model-quality gain is claimed.
 
-An [archive handoff](commons-archive-handoff.md) waits for this exact owner's
-successful exit. It then preserves the completed local identities before a
-bounded external download resumes. Preparation's inputs and membership remain
-frozen; the subsequent archive phase does not admit training sources.
+The dependent [archive handoff](commons-archive-handoff.md) also exited because
+this owner did not complete successfully. Archive reconciliation and broader
+downloading did not begin. Any new handoff must bind to a successful recovered
+preparer. Preparation's inputs and membership remain frozen; no archive phase
+admits training sources.
