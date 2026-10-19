@@ -32,4 +32,12 @@ threshold application reproduce exactly after role-key renaming, including all
 Source/test receipts and preflight/launch documentation are published. Next,
 freeze/queue the full review after exact training exit, then inspect actual
 native crops and apply the unchanged criteria to completed quality results.
+The full review is now frozen at commit643c249 into273 files with45 package
+modules byte-identical to the trainer. Review233871/creation1792446778.54,
+closure233873/creation1792446778.74 and references233874/creation1792446778.84
+are observed live and waiting for exact upstream exits. No held-out inference
+has started alongside training. Queue and plan hashes are published in the
+launch record. The control arm has reached step500/4000; this observation does
+not select an endpoint or prove a quality gain.
+
 PROMPT quality, real superiority and100MP10s goals remain unfulfilled.

@@ -51,6 +51,18 @@ panels precede saved-array audits, numerical criteria and native boards. The
 shared engine retains historical “directional-bank” status strings; actual
 checkpoint labels and lineage are V86/V87 original4000.
 
+The [actual queue receipt](results/training-context-review-queue-v1.json) binds
+review plan SHA256
+`1d8646feb6d6f4acfddda8cd97487e68b13e42d1094318043337e6b6626f8840`
+at `/mnt/external/demosaic/experiments/context-v86-v87-original4k-review-v1/`.
+It freezes273 files, including45 package modules exactly matching the actual
+trainer, and55 additional input references. Review233871/creation1792446778.54,
+CPU closure233873/creation1792446778.74 and reference supplement233874/creation
+1792446778.84 were all observed live and waiting. They cannot start new inference
+while the training owner is live. These process identities are dated receipts;
+current state comes from their status files. No automatic retry or promotion is
+queued; manual native viewing remains pending.
+
 At least two native160 noisy/restored/exact-GT triplets per checkpoint and
 standing GFX sky/building/foliage/fence plus sign/platform views remain required.
 The independent ISO100 AHD rendering is a qualitative reference, not exact GT.
