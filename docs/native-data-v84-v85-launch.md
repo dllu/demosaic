@@ -40,6 +40,14 @@ batches and one changed native batch. This checks the intended input treatment;
 the full 20k matched comparison, final RNG equality and quality review remain
 pending. [Endpoint and actual handoff audit](results/native-control20000-expanded-start-v1.json).
 
+The same receipt now includes a closed retained 4k follow-up, after the expanded
+trainer passed step 4025. Both arms have finite 91-model/91-EMA/89-AdamW states,
+all optimizer counters at 4000 and identical optimizer groups and Python/CPU/CUDA
+RNG states at that boundary. LR 9.206544616434249e-6 matches the original 20k
+schedule and 10% floor. All 130 logged shared-domain pairs match; all 46 logged
+native pairs differ. Source archives differ only in the native manifest. This
+is an engineering check; final 20k endpoints and quality review remain required.
+
 The original 20k production controller and expanded trainer run from
 commit `650a051`. The plan binds 253 frozen runtime files and 748 fixed input
 references, including the737 data/provenance inputs and engineering receipts.
