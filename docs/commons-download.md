@@ -1,5 +1,9 @@
 # Expanding the Commons archive
 
+A [separate bounded local stage](commons-local-staging.md) now downloads1,188
+additional checksum-disjoint originals with a16GiB payload cap and224GiB local
+reserve. It preserves the external archive and active experiment manifests.
+
 The existing Quality Images archive at `/mnt/external/qi` resumed on
 2026-10-15 at 23:44:50 UTC. At startup it contained 77,025 verified originals
 (195.2 GiB), with 380,719 pending files (4.23 TiB). Discovery and attribution
