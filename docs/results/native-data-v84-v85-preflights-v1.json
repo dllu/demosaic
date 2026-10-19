@@ -1,0 +1,101 @@
+{
+  "status": "independently-audited-engineering-preflights-only",
+  "proofs": {
+    "CPU": {
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/native-data-v84-v85-CPU-v2/plan.json",
+        "sha256": "a5a50ddf4d3d009befa660e86966892cf0957290a493954d8b1db8ea2fc2481c"
+      },
+      "status": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/native-data-v84-v85-CPU-v2/status.json",
+        "sha256": "5ba1e7404c28abd62eae18051d119819a2e3213cfc509f79759aa90ad3f65c32"
+      },
+      "results": {
+        "control": {
+          "path": "/home/dllu/proj/demosaic/.cache/benchmarks/native-data-v84-v85-CPU-v2/control-result.json",
+          "sha256": "835c398872a298eb308be0459a9716b3e8dc99d43447a91ba41977e0ac1529d5"
+        },
+        "expanded": {
+          "path": "/home/dllu/proj/demosaic/.cache/benchmarks/native-data-v84-v85-CPU-v2/expanded-result.json",
+          "sha256": "fea0a0f6375bcbb0b690a3bc27ccd08a710eaa26bb3a812bac6753b6fe2abbbc"
+        }
+      },
+      "actual_updates_per_arm": 16,
+      "original_schedule_updates": 20000,
+      "batch_size": 1,
+      "patch_size": 64,
+      "precision": "float32",
+      "finite_states_per_arm": {
+        "model": 91,
+        "EMA": 91,
+        "AdamW": 89
+      },
+      "shared_observations_exact": 15,
+      "native_observations": 1,
+      "native_observations_changed": 0,
+      "initial_EMA_exact_and_shared": true,
+      "final_Python_CPU_CUDA_RNG_exact": true,
+      "actual_controller_and_children_exited": true,
+      "all_44_training_core_files_match_working_tree": true,
+      "controller_matches_working_tree": true
+    },
+    "CUDA": {
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/native-data-v84-v85-CUDA-v1/plan.json",
+        "sha256": "8a1ad793163f654632d6f7f1df4e337c6dcad819993c574ce629f9befa01a491"
+      },
+      "status": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/native-data-v84-v85-CUDA-v1/status.json",
+        "sha256": "e6dfe4af837471d4805d06efa7b34e4ea2fa848ce5564495900d4fabcf6c9047"
+      },
+      "results": {
+        "control": {
+          "path": "/home/dllu/proj/demosaic/.cache/benchmarks/native-data-v84-v85-CUDA-v1/control-result.json",
+          "sha256": "947a73a62dc2a69e334b06ef8f2863e887968e779ff94f8d50bda72df7f1500f"
+        },
+        "expanded": {
+          "path": "/home/dllu/proj/demosaic/.cache/benchmarks/native-data-v84-v85-CUDA-v1/expanded-result.json",
+          "sha256": "5c13d2b49fc89df266e01388d3aba23fe620ff63d67028819a969e1a2e829a42"
+        }
+      },
+      "actual_updates_per_arm": 16,
+      "original_schedule_updates": 20000,
+      "batch_size": 16,
+      "patch_size": 256,
+      "precision": "bfloat16",
+      "finite_states_per_arm": {
+        "model": 91,
+        "EMA": 91,
+        "AdamW": 89
+      },
+      "shared_observations_exact": 15,
+      "native_observations": 1,
+      "native_observations_changed": 1,
+      "initial_EMA_exact_and_shared": true,
+      "final_Python_CPU_CUDA_RNG_exact": true,
+      "actual_controller_and_children_exited": true,
+      "all_44_training_core_files_match_working_tree": true,
+      "controller_matches_working_tree": true
+    }
+  },
+  "config_treatment": "native manifest and output directory only",
+  "counts": {
+    "control_captures": 128,
+    "control_groups": 106,
+    "expanded_captures": 150,
+    "expanded_groups": 120
+  },
+  "focused_guard_tests": {
+    "passed": 6,
+    "ruff": "passed"
+  },
+  "prior_failure": {
+    "status": {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/native-data-v84-v85-CPU-v1/status.json",
+      "sha256": "9f3dad0e019fe8421aa4c6f3de20bb4deb777f122b88b34dcdd21b382d70bbae"
+    },
+    "cause": "Relative plan path resolved under frozen working directory; failed before updates.",
+    "correction": "Resolve plan to absolute path before child launch; preserve failed artifacts."
+  },
+  "limits": "Discarded 16-update engineering checks; no trained quality or convergence claim. CPU native draw used a legacy member; CUDA native draw changed. No private pixels or source metadata published."
+}
