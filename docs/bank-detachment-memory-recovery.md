@@ -3,9 +3,10 @@
 The detached V83 arm stopped at the system-memory guard before update 3,000.
 It saved a genuine, finite emergency checkpoint at **step 2,999**. The connected
 V82 arm had already completed its original 4,000 updates. A separately frozen
-recovery now continues the detached checkpoint to the original 4,000-update
-boundary; the complete quality review remains pending.
+recovery completed the detached checkpoint's original 4,000-update boundary.
+The complete quality review is now running; its conclusions remain pending.
 [Diagnosed failure, state checks, actual replay and rebound review receipt](results/bank-detachment-memory-recovery-v1.json).
+[Completed 4,000-step boundary and independent CPU audit](results/bank-detachment-recovered4000-completion-v1.json).
 
 The trainer reported only 6.7 GB of available system memory. The separate
 Commons preparer also stopped at its 24 GiB memory guard. These are recorded
@@ -42,14 +43,19 @@ One discarded CUDA update from the genuine parent reproduced the original
 initial model, first output and raw gradient hashes. This reconstructs the
 original worker's initialization evidence; its weights do not enter the resumed
 trajectory. Before the resumed first forward, all saved model tensors exactly
-matched the step-2,999 checkpoint. Sampled input and target hashes are checked
-against the connected arm before the corresponding resumed update. At the
-receipt's dated observation, training had reached logged step 3,575 and all
-159 sampled observations matched.
+matched the step-2,999 checkpoint. Sampled input and target hashes were checked
+against the connected arm before the corresponding resumed update. The initial
+receipt records step 3,575; the subsequent independent completion audit verifies
+the actual final checkpoints at step 4,000. Both have finite 105 model/105 EMA/
+103 AdamW states and optimizer step 4,000. All 176 sampled input/target pairs,
+161 logged domain/LR pairs and final Python/CPU/CUDA RNG states match between
+arms. All 135 pre-interruption sample rows and 248 frozen files are preserved.
+The audit exited successfully with CUDA uninitialized.
 
 The same ten-stage photo, analytic, camera, color and native-pixel review is
 bound to the new recovery controller's exact PID and creation time. Separate
 CPU closure and reference followers wait for its successful completion. The
+first quality stage has started after the training owner's successful exit. The
 review retains exact-GT native crop triplets and the cached GFX sky, building,
 foliage, fence and lights comparisons, with accurate independent-reference
 labels. Actual viewing and all original gates remain required before any
