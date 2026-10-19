@@ -1,14 +1,20 @@
 # Expanding the Commons archive
 
-The archive downloader is running again under the
-[completed local-original reconciliation and bounded-resume plan](commons-archive-handoff.md).
+The archive downloader has completed the
+[local-original reconciliation and bounded-resume plan](commons-archive-handoff.md).
 After the separate 1,188-source local cache preparation completed, all 1,188
 originals were reconciled into the archive with immutable attribution preserved.
-Two workers start at most .25 requests/second, with a 608 GiB reserve and
-10,000-file completion limit. At 2026-10-19 11:13 UTC this resumed job had added
-1,447 files / 9.8 GiB and reported 629.9 GiB free. The current log is
+The subsequent two-worker, .25 starts/second job stopped normally at its
+**608 GiB reserve** on **2026-10-19 14:40:59 UTC**, after adding **4,557 originals /
+31.0 GiB**. Both exact processes have exited with controller-recorded exit 0.
+Every new original passes an independent size/SHA1 check; the 1,188 reconciled
+index rows remain exact including attribution. Five new HTTP 404s remain recorded.
+The archive now holds **178,117 downloaded originals / 754.7 GiB**, with 279,548
+pending, 2,477 excluded and 81 failed entries.
+[Final counts, metadata and byte-check receipt](results/commons-bounded-reserve-stop-20261019-v1.json).
+The completed log is
 `.cache/commons-archive-handoff-memory-recovery-20261019-v1/download.log`.
-Do not start another downloader while this owner holds the shared lock.
+Keep the reserve available for data preparation, checkpoints and review exports.
 
 The [reviewed local extension](commons-local1188-reviewed.md) separately freezes
 890 additional training sources at both scales, with unchanged evaluation
@@ -26,7 +32,7 @@ enrichment were already complete, so this job runs only the download phase.
 It stopped normally at2026-10-18 04:49:19UTC (Oct17 21:49:19Pacific) when
 available space reached its512GiB reserve. The actual downloader process has
 exited. This run added **95,347 files /512.5GiB** at an average2.7MiB/s.
-The archive now contains **172,372 downloaded originals /707.7GiB**, with
+At that earlier stop the archive contained **172,372 downloaded originals /707.7GiB**, with
 285,298 pending,2,477 excluded and76 failed entries. It remains a partial
 download. Keep the reserve available for current evaluation exports before
 resuming; download completion does not admit sources into an active experiment.

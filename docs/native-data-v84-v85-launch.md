@@ -25,8 +25,23 @@ resolves that path before child launch. The successful CPU check used a fresh
 root; the failed plan and logs remain intact. Six focused observation-guard
 tests and Ruff pass. No neural or training-core implementation changed.
 
-The original20k production controller and control trainer are running from
-commit `650a051`. The plan binds253 frozen runtime files and748 fixed input
+The control completed its original 20,000 updates and exited successfully.
+Its retained final checkpoint SHA256 is
+`134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10`.
+A read-only endpoint check verifies finite 91-model/91-EMA/89-AdamW states,
+all optimizer counters at 20000, the original schedule's 1e-6 final LR and 10% floor,
+all 801 logged batch hashes/LRs, 816 observed domain choices and the source digest.
+The retained final copy and closed `last.pt` have identical bytes.
+
+The expanded arm started serially after the successful control exit and stable
+memory gate, with actual owner 3666689 / creation 1792421187.78. Its first 17
+recorded observations through step 25 include 16 exactly matching Commons/paired
+batches and one changed native batch. This checks the intended input treatment;
+the full 20k matched comparison, final RNG equality and quality review remain
+pending. [Endpoint and actual handoff audit](results/native-control20000-expanded-start-v1.json).
+
+The original 20k production controller and expanded trainer run from
+commit `650a051`. The plan binds 253 frozen runtime files and 748 fixed input
 references, including the737 data/provenance inputs and engineering receipts.
 [Dated live-owner launch snapshot](results/native-data-v84-v85-launch-v1.json).
 Each arm must pass the declared memory and disk gates. Runs are serial,
@@ -68,6 +83,8 @@ no model outputs created while training is live. Review uses257 frozen files;
 all44 package files match the actual training runtime exactly.
 
 The separate Commons recovery has completed both cache scales and protected
-screening. Reconciliation has finished and the bounded archive downloader is
-running. These new arrivals stay outside both arms pending independent content,
-duplicate and split review. This comparison does not change the Commons corpus.
+screening. Reconciliation and the bounded archive download have finished; all
+4,557 subsequent originals pass size/SHA1 verification. These download arrivals
+remain outside both arms and require admission review. The separately
+[reviewed 890-source extension](commons-local1188-reviewed.md) is available for
+a future frozen recipe. This comparison does not change the Commons corpus.

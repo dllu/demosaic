@@ -2,11 +2,16 @@
 
 All **1,188 originals / 17,175,771,412 bytes** have completed local preparation
 and archive reconciliation under the
-[memory-recovery plan](commons-local-memory-recovery.md). The bounded archive
-download is running with two workers, .25 starts/second, a 608 GiB reserve and
-10,000-file completion limit. As of 2026-10-19 11:13 UTC it had added
-1,447 files / 9.8 GiB. Current state, exact owner/child identities, reconciliation
-receipt and logs are under
+[memory-recovery plan](commons-local-memory-recovery.md). The subsequent bounded
+download finished normally at **2026-10-19 14:40:59 UTC**, adding **4,557 originals /
+33,248,157,108 bytes (31.0 GiB)** before reaching its 608 GiB free-space reserve.
+The controller recorded exit 0; both exact owners have exited. A read-only audit
+verified every new original's size and SHA1 against its source record, all 1,188
+reconciled rows remain exact including attribution, and the five new failures
+are recorded HTTP 404s. The archive contains 178,117 downloaded originals /
+754.7 GiB, with 279,548 pending, 2,477 excluded and 81 failed entries.
+[Terminal audit](results/commons-bounded-reserve-stop-20261019-v1.json).
+Current state, exact owner/child identities, reconciliation receipt and logs are under
 `.cache/commons-archive-handoff-memory-recovery-20261019-v1/`.
 
 The first worker stopped after local preparation failed its available-memory
