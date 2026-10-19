@@ -1,10 +1,22 @@
-# Fresh bank-gradient quality study started
+# Bank-gradient study: connected4k complete, detached running
 
-V82 connected and V83 detached are running serially under the
-[fixed experiment](directional-bank-detachment-v82-v83.md). The connected arm
-has completed its first25 updates; the detached arm follows its original4000
-boundary. **There is no quality result or model promotion at this milestone.**
-[Frozen source, preflight bindings, runtime configuration and verified launch snapshot](results/bank-detachment-original4k-launch-v1.json).
+V82 connected completed its original4,000 updates and exited successfully.
+V83 detached started freshly from the genuine V63 EMA and reached logged step75
+under the same [fixed experiment](directional-bank-detachment-v82-v83.md).
+**Quality review and model selection remain pending.**
+[Completed connected boundary and verified detached handoff](results/bank-detachment-connected4000-reproduction-v1.json).
+
+A read-only CPU audit checks the completed connected checkpoint: all105 model/
+105 EMA tensors and103 AdamW states are finite. Model, EMA, optimizer, Python/
+CPU/CUDA RNG and best-monitor state exactly reproduce the prior connected V81
+at the same seed and inputs. All176 sampled inputs/legacy targets and161
+training rows match apart from timing/allocation. Checkpoint metadata/source
+identities differ. This is deterministic reproduction, without independent
+training-seed evidence or new quality scores. Detached's first19 sampled full/
+legacy/input observations through step75 match connected; its full4k budget
+and fresh ten-stage quality/native/manual review are still required.
+
+[Original frozen-source, runtime-configuration and launch snapshot](results/bank-detachment-original4k-launch-v1.json).
 
 Both arms freshly initialize genuine V63 original20k EMA and use identical
 bank architecture, data, seed51, strict B16/native256/BF16 execution, original
