@@ -34,6 +34,10 @@ frozen data recipe are required before training admission. Standing GFX and
 siblings remain excluded. Retain the local selection/index when reconciling the
 main archive later so these originals are not downloaded twice.
 
+A separate [4×/8× preparation worker](commons-local-preparation.md) is now queued
+behind the exact downloader's exit. Production preparation is pending; the
+completed two-source fixture is engineering validation, not corpus admission.
+
 Inspect the local `download.log`, `launch.json` and SQLite status without
 starting another download. A stopped local job resumes with:
 
