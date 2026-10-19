@@ -178,3 +178,50 @@ These are inspection artifacts and queued work. Complete new caches, actual
 content/source-family review and a deliberate coupled4×/8× admission freeze
 are still required. Existing V86/V87 data and the representative README crops
 stay fixed.
+
+## Coupled admission for the new producer
+
+The [format2 admission fixture and rejection evidence](results/commons-post4557-admission-compatibility-v1.json)
+exercise the future coupled freeze using the new downloaded-producer receipt.
+Legacy format1 review remains supported. This compatibility work does not admit
+the running4,337-source preparation or change any model recipe.
+
+`review_downloaded_commons.py` recomputes final title neighbors after the
+protected/pixel audit establishes the actual candidate population. Queries are
+only new candidate train rows. Anchors retain every prior val/test/reserved
+title and every new prepared val/test hash, including withheld holdout sources.
+The unchanged matcher and.55 threshold stay bound in the report. A
+`no-title-flag` result permits further review; all other title labels must remain
+withheld, and manual content/series review can withhold additional sources.
+
+Format2 freezing requires the exact completed producer, complete paired-cache
+and area receipts, unchanged duplicate thresholds and a duplicate input that
+matches the protected screen's cleared manifest/SHA. Prior rows and literal
+manifest bytes remain fixed. Existing duplicate exclusions cannot be released
+or omitted. Only reviewed train members receive new4× entries; the8× manifest
+also records withheld/reserved/excluded sources. Both new training cache scales
+receive SHA/header/source-attribution checks.
+
+Every complete4× source contact page must be actually viewed, with exact source
+rows, page indices and candidate coverage. Every fixed DINO contact page and
+pair needs an explicit identity-matched observation/decision. Shared or uncertain
+scene queries must remain withheld. Production uses the matching complete
+heldout bank; tiny engineering subsets cannot be relabeled as production.
+Engineering receipts carry `engineering_only: true` and do not update a recipe.
+The freezer retains copies of all four executed review/freezer source files.
+
+A genuine fixture uses three prior rows, including one test source, and two new
+originals already prepared at both scales. The actual viewed source thumbnails
+and seven DINO pairs are reused by exact PNG hashes. One title-uninformative
+source stays withheld; one source enters the engineering-only future manifest.
+Independent checks verify all nine cached array hashes/headers and every prior
+literal byte/row. The fixture is not a whole-corpus safety or quality result.
+
+Twenty-four focused tests pass, including all twelve legacy cases and new
+duplicate-exclusion guards. Twelve additional real-fixture rejection cases
+create no output: the actual unfinished producer, title-flag release, incomplete
+source viewing, an unviewed DINO page, released scene risk, changed pair identity,
+engineering evidence disguised as production, prior test promotion, preliminary
+title reports, changed source inventory, a protected-screen bypass and weakened
+duplicate thresholds. The actual context trainer stays live throughout. Full
+new-source viewing and the production duplicate/content results remain pending.

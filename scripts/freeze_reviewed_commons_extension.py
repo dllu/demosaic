@@ -52,9 +52,9 @@ def reviewed_rows(candidates, review):
     """No flag, reserved source or omitted identity can become training data."""
     by_id = {r["id"]: r for r in candidates}
     require(len(by_id) == len(candidates), "Duplicate candidate identity")
-    require(
-        all(r["split"] in {"train", "reserved"} for r in candidates), "Unexpected candidate split"
-    )
+    downloaded = review.get("format_version") == 2
+    allowed = {"train", "reserved", "excluded"} if downloaded else {"train", "reserved"}
+    require(all(r["split"] in allowed for r in candidates), "Unexpected candidate split")
     require(review["manual_source_content_screen_complete"] is True, "Content review incomplete")
     require(
         review["all_candidate_thumbnails_actually_viewed"] == len(candidates),
@@ -77,13 +77,22 @@ def reviewed_rows(candidates, review):
         reserved == {r["id"] for r in candidates if r["split"] == "reserved"},
         "Reserved decisions differ",
     )
+    if downloaded:
+        values = review["preexcluded_ids"]
+        require(
+            len(values) == len(set(values))
+            and set(values) == {r["id"] for r in candidates if r["split"] == "excluded"},
+            "Duplicate exclusions differ",
+        )
     result = copy.deepcopy(candidates)
     for row in result:
         if row["id"] in withheld:
             row.update(
                 original_split="train",
                 split="excluded",
-                excluded_reason="conservative-new-source-title-or-series-risk",
+                excluded_reason="conservative-new-source-title-content-or-series-risk"
+                if downloaded
+                else "conservative-new-source-title-or-series-risk",
             )
     return result
 
@@ -100,14 +109,17 @@ def freeze(base4, base8, prepared4, candidate8, review_path, output):
     inputs = [ref(p) for p in [base4, base8, prepared4, candidate8, review_path, __file__]]
     review = read(review_path)
     require(
-        review["format_version"] == 1 and review["status"] == REVIEW_STATUS, "Review not complete"
+        review["format_version"] in {1, 2} and review["status"] == REVIEW_STATUS,
+        "Review not complete",
     )
+    downloaded = review["format_version"] == 2
     inventory = checked(review["inventory"])
-    require(
-        inventory["candidate_manifest"] == ref(candidate8)
-        and inventory["base_manifest"] == ref(base8),
-        "Wrong reviewed candidate/base",
-    )
+    if not downloaded:
+        require(
+            inventory["candidate_manifest"] == ref(candidate8)
+            and inventory["base_manifest"] == ref(base8),
+            "Wrong reviewed candidate/base",
+        )
     duplicate = checked(review["duplicate_audit"])
     require(
         duplicate["manifest_sha256"] == ref(candidate8)["sha256"]
@@ -115,10 +127,12 @@ def freeze(base4, base8, prepared4, candidate8, review_path, output):
         "Duplicate audit differs",
     )
     terminal = checked(review["producer_terminal"])
-    require(
-        terminal["status"] == "prepared-and-screened-quarantine-awaiting-independent-review",
-        "Cache producer incomplete",
+    expected_status = (
+        "prepared-and-screened-downloaded-quarantine-awaiting-independent-review"
+        if downloaded
+        else "prepared-and-screened-quarantine-awaiting-independent-review"
     )
+    require(terminal["status"] == expected_status, "Cache producer incomplete")
     require(terminal["receipt"] == review["producer_receipt"], "Wrong producer receipt")
     owner = terminal["owner"]
     try:
@@ -130,7 +144,24 @@ def freeze(base4, base8, prepared4, candidate8, review_path, output):
     except psutil.NoSuchProcess:
         pass
     producer = checked(review["producer_receipt"])
+    if downloaded:
+        producer_plan = checked(producer["plan"])
+        require(
+            producer_plan["engineering_only"] is review["engineering_only"],
+            "Engineering/production producer mixed",
+        )
     protected = checked(producer["screening"])
+    if downloaded:
+        require(
+            duplicate["max_hamming"] == 8 and duplicate["min_correlation"] == 0.99,
+            "Duplicate thresholds differ from the reviewed operator",
+        )
+        require(
+            Path(duplicate["addition_manifest"]).resolve()
+            == Path(protected["cleared_manifest"]).resolve()
+            and duplicate["addition_sha256"] == protected["cleared_sha256"],
+            "Duplicate audit bypasses protected screening",
+        )
     expected_four = Path(protected["manifest"]).parent.parent / "prepared4/manifest.jsonl"
     require(
         Path(prepared4).resolve() == expected_four.resolve(), "Wrong complete4 producer manifest"
@@ -151,30 +182,31 @@ def freeze(base4, base8, prepared4, candidate8, review_path, output):
         sum(c["count"] for c in inventory["contacts"]) == len(inventory["new_rows"]),
         "Content count differs",
     )
-    for item in [*review["viewed_title_pair_contacts"], review["viewed_new_reserved_pairs"]]:
-        require(ref(item["path"]) == item, "Changed viewed title-pair screen")
-    title = checked(review["title_screen"])
-    policy = checked(title["policy"])
-    require(
-        title["inventory"] == review["inventory"] and title["policy"] == review["title_policy"],
-        "Wrong title review",
-    )
-    require(
-        policy["threshold"] == 0.55
-        and title["status"] == "completed-metadata-risk-screen-no-training-admission",
-        "Incomplete title screen",
-    )
-    decisions = checked(title["decisions"])
-    require(
-        sorted(r["id"] for r in decisions if r["decision"] == "eligible-after-data-review")
-        == review["eligible_train_ids"],
-        "Title flag released without separate review",
-    )
-    require(
-        sorted(r["id"] for r in decisions if r["decision"] != "eligible-after-data-review")
-        == review["withheld_train_ids"],
-        "Title decisions differ",
-    )
+    if not downloaded:
+        for item in [*review["viewed_title_pair_contacts"], review["viewed_new_reserved_pairs"]]:
+            require(ref(item["path"]) == item, "Changed viewed title-pair screen")
+        title = checked(review["title_screen"])
+        policy = checked(title["policy"])
+        require(
+            title["inventory"] == review["inventory"] and title["policy"] == review["title_policy"],
+            "Wrong title review",
+        )
+        require(
+            policy["threshold"] == 0.55
+            and title["status"] == "completed-metadata-risk-screen-no-training-admission",
+            "Incomplete title screen",
+        )
+        decisions = checked(title["decisions"])
+        require(
+            sorted(r["id"] for r in decisions if r["decision"] == "eligible-after-data-review")
+            == review["eligible_train_ids"],
+            "Title flag released without separate review",
+        )
+        require(
+            sorted(r["id"] for r in decisions if r["decision"] != "eligible-after-data-review")
+            == review["withheld_train_ids"],
+            "Title decisions differ",
+        )
     old4, old8, combined, four = [rows(p) for p in [base4, base8, candidate8, prepared4]]
     require(len(four) == area["prepared"]["4"], "Prepared4 membership incomplete")
     before8, before4 = ({r["id"]: r for r in group} for group in [old8, old4])
@@ -184,7 +216,22 @@ def freeze(base4, base8, prepared4, candidate8, review_path, output):
         "Existing source or split changed",
     )
     new = [r for r in combined if r["id"] not in before8]
-    require(new == inventory["new_rows"], "Reviewed additions differ")
+    if downloaded:
+        from review_downloaded_commons import validate_downloaded_review
+
+        inputs += [
+            ref(Path(__file__).with_name(name))
+            for name in [
+                "review_downloaded_commons.py",
+                "screen_commons_titles.py",
+                "render_commons_contact_sheets.py",
+            ]
+        ]
+        validate_downloaded_review(
+            review, inventory, new, base8, prepared4, Path(protected["manifest"]), candidate8
+        )
+    else:
+        require(new == inventory["new_rows"], "Reviewed additions differ")
     reviewed = reviewed_rows(new, review)
     active8 = {k for k, r in before8.items() if r["split"] in ACTIVE}
     require(before4.keys() == active8, "Base4/base8 active membership differs")
@@ -242,6 +289,15 @@ def freeze(base4, base8, prepared4, candidate8, review_path, output):
         require(ref(item["path"]) == item, "Input changed during freeze")
     output.mkdir(parents=True)
     shutil.copyfile(__file__, output / "source.py")
+    if downloaded:
+        source_output = output / "executed-review-sources"
+        source_output.mkdir()
+        for name in [
+            "review_downloaded_commons.py",
+            "screen_commons_titles.py",
+            "render_commons_contact_sheets.py",
+        ]:
+            shutil.copyfile(Path(__file__).with_name(name), source_output / name)
     outputs = {}
     for factor, source, added in [(4, base4, new4), (8, base8, reviewed)]:
         prefix = Path(source).read_bytes()
@@ -253,6 +309,8 @@ def freeze(base4, base8, prepared4, candidate8, review_path, output):
         outputs[str(factor)] = ref(path)
     receipt = {
         "status": "frozen-reviewed-coupled-Commons-extension-no-active-recipe-change",
+        "review_format_version": review["format_version"],
+        "engineering_only": bool(review.get("engineering_only", False)),
         "inputs": inputs,
         "manual_review": ref(review_path),
         "manifests": outputs,

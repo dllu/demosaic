@@ -100,3 +100,37 @@ def test_changed_review_bytes_fail_before_they_can_change_membership(tmp_path):
     path.write_text('{"status":"after"}')
     with pytest.raises(ValueError, match="Changed review/source"):
         extension.checked(receipt)
+
+
+def test_downloaded_review_preserves_prior_duplicate_exclusions():
+    rows, review = fixture()
+    excluded = {
+        "id": "duplicate",
+        "split": "excluded",
+        "original_split": "test",
+        "excluded_reason": "near_duplicate_of_existing",
+    }
+    rows.append(excluded)
+    review.update(
+        format_version=2, preexcluded_ids=["duplicate"], all_candidate_thumbnails_actually_viewed=4
+    )
+    result = extension.reviewed_rows(rows, review)
+    assert result[-1] == excluded and rows[-1] == excluded
+    assert result[1]["excluded_reason"] == "conservative-new-source-title-content-or-series-risk"
+
+
+@pytest.mark.parametrize("damage", ["promote", "omit", "duplicate_decision"])
+def test_downloaded_review_cannot_release_or_hide_pixel_exclusions(damage):
+    rows, review = fixture()
+    rows.append({"id": "duplicate", "split": "excluded"})
+    review.update(
+        format_version=2, preexcluded_ids=["duplicate"], all_candidate_thumbnails_actually_viewed=4
+    )
+    if damage == "promote":
+        review["eligible_train_ids"].append("duplicate")
+    elif damage == "omit":
+        review["preexcluded_ids"] = []
+    else:
+        review["preexcluded_ids"].append("duplicate")
+    with pytest.raises(ValueError):
+        extension.reviewed_rows(rows, review)
