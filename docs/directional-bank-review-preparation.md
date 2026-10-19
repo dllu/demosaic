@@ -51,12 +51,15 @@ stages, existing photo gates and native reference selection. Frozen review,
 closure, score, reference, color and highlight entry points import on CPU without
 initializing CUDA. Source hashes and the live queue owners are verified.
 
-The active control has also retained its1k checkpoint correctly. Its99 model/
-99 EMA/97 AdamW states are finite, all eight directional tensors have nonzero
-first/second optimizer moments, and its source snapshot matches the frozen
-training core. All56 sampled observations through1k exactly match the original
-control inputs. This is a read-only engineering boundary, with no quality score
-or change to either original4k budget.
+The active control has retained its1k,2k and3k checkpoints correctly. Each has
+99 model/99 EMA/97 AdamW finite states, and the3k audit verifies every optimizer
+step is3000 with the original4000 horizon. All eight directional tensors have
+nonzero first/second optimizer moments. Its44-module source snapshot matches
+the frozen training core, and all89 common trainable model and EMA tensors have
+changed from the genuine parent; only normalization buffers remain identical.
+All136 sampled observations through3k exactly match the original control stream.
+These are read-only engineering checks. No interim checkpoint selection or
+change to either original4k budget follows; final quality review remains pending.
 
 Trained V80/V81 quality and full native inspection remain pending. Reports will
 include at least two small100% noisy/restored/exact-GT triplets per checkpoint,
