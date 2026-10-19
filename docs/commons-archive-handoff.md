@@ -14,6 +14,15 @@ are recorded HTTP 404s. The archive contains 178,117 downloaded originals /
 Current state, exact owner/child identities, reconciliation receipt and logs are under
 `.cache/commons-archive-handoff-memory-recovery-20261019-v1/`.
 
+The completed stage's 1,188 duplicate local originals now use individual
+read-only aliases to those canonical SSD archive files. Full SHA1 and SHA256
+checks verified both copies before retiring about 16 GiB of duplicate root-disk
+bytes. The exact 1,188-file local listing, source index, attribution, prepared
+pixels and all manifests remain unchanged. Resolved file paths and stat identity
+now belong to the canonical originals. Treat this completed source cache as
+read-only; use a new root for any future local downloader.
+[Cache mapping, inventory and preserved bindings](results/commons-local-original-cache-alias-20261019-v1.json).
+
 The first worker stopped after local preparation failed its available-memory
 guard; it did not reconcile or download. That failed observation and the
 [original queue/fixture receipt](results/commons-archive-handoff-queue-v1.json)

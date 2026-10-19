@@ -7,6 +7,11 @@ original84,867 Commons sources; this extension needs its own declared recipe.
 No trained quality benefit is established here.
 [Source, review, cache and loader receipts](results/commons-local1188-reviewed-v1.json).
 
+The completed source cache now retains its exact 1,188 filenames through
+[verified per-file aliases to the canonical SSD originals](commons-archive-handoff.md).
+This retires about 16 GiB of duplicate local bytes; both frozen manifests,
+prepared pixel arrays, source index and attribution retain their original bytes.
+
 | New-source disposition | Count |
 | --- | ---: |
 | Prepared at both scales | 1,188 |
