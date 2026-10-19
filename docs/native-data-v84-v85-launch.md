@@ -19,11 +19,13 @@ The expanded final SHA256 is
 `44d46580d1026f8581e4a9404dbd7c3eed9721459cf19edd1efecdc266594c57`;
 the control final SHA256 remains
 `134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10`.
-The queued quality review has passed its training-boundary check and started
-the known/unseen panels. Full quality statistics and actual native crop viewing
-remain pending. This completion establishes training integrity without a
-quality or promotion claim. The earlier progress checks below retain their
-original scope; the README remains on V43.
+The complete [original20k quality and native review](native-data-original20k-review.md)
+has now finished. Expanded−control photo PSNR is −0.00422dB, with a source95%
+interval spanning zero. Both arms fail known-camera eligibility and both weak
+carrier gain requirements; four ADC layout/draw contrasts exceed the declared
+loss ceiling. All eight final boards were actually viewed. Neither arm is
+promoted or extended, and the README remains on V43. The earlier progress checks
+below retain their original engineering scope.
 
 Both discarded engineering checks passed 16 actual updates per arm, using the
 original20k schedule. CPU used B1/native64/FP32; CUDA used the intended
@@ -86,8 +88,8 @@ commit `650a051`. The plan binds 253 frozen runtime files and 748 fixed input
 references, including the737 data/provenance inputs and engineering receipts.
 [Dated live-owner launch snapshot](results/native-data-v84-v85-launch-v1.json).
 Each arm must pass the declared memory and disk gates. Runs are serial,
-with no automatic retry, extension or promotion. Final checkpoint quality and
-native crop reviews remain outstanding; the README stays on V43.
+with no automatic retry, extension or promotion. Final quality and native crop
+reviews have completed as linked above; the README stays on V43.
 
 The retained control 10k checkpoint now passes a
 [read-only midpoint engineering audit](results/native-control-retained10k-engineering-v1.json)
