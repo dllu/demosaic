@@ -63,6 +63,17 @@ while the training owner is live. These process identities are dated receipts;
 current state comes from their status files. No automatic retry or promotion is
 queued; manual native viewing remains pending.
 
+A separate [report-package waiter](results/training-context-report-assets-queue-v1.json)
+now follows those three exact review owners. Its context adapter requires both
+genuine4000 endpoints and the complete successful ten-stage/CPU/reference
+results, then reuses the existing pixel-preserving packager. A
+[CPU historical replay](results/training-context-report-assets-CPU-v1.json)
+reproduces all20 prior PNGs and125 native cells/81 source triplets with identical
+metadata. Nineteen native-board tests pass, including altered pixels, resized
+panels, mismatched source/noise/exposure and inaccurate reference labels. The
+replay contains no new V86/V87 prediction or quality evidence. The waiter is
+CPU-only; packaging leaves actual inspection and the performance decision open.
+
 At least two native160 noisy/restored/exact-GT triplets per checkpoint and
 standing GFX sky/building/foliage/fence plus sign/platform views remain required.
 The independent ISO100 AHD rendering is a qualitative reference, not exact GT.
