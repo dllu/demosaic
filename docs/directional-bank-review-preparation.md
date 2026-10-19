@@ -90,6 +90,17 @@ the intended new branch was active, without establishing a quality benefit or
 selecting an interim checkpoint. The bank arm subsequently completed its full
 original4000 budget and passed the final boundary audit described above.
 
+While full427 evaluation runs, all six completed known-camera triplets were
+actually viewed at their original512×192 PNG size, with160×160 unresized panels.
+They cover the two fixed2pilesofplates/7D-1 regions for fresh V80/V81/V63. PNG
+hashes, source/ROI/conditioning/display metadata and identical noisy/reference
+pixels across methods were checked. The three outputs look close in these
+views: strong color noise is removed, while low-contrast plate variation remains
+softened. These independently demosaiced AHD references are not exact GT. The
+partial observation record is linked in the registry, with full manual review
+and the quality decision explicitly pending. All final boards/cells, including
+V43/RawNIND and synthetic-GT/GFX/analytic comparisons, still require inspection.
+
 Trained V80/V81 quality and full native inspection remain pending. Reports will
 include at least two small100% noisy/restored/exact-GT triplets per checkpoint,
 plus cached DSCF3879/3880 sky/building/foliage/fence/lights with independent ISO100
