@@ -1,0 +1,1359 @@
+{
+  "status": "completed-CPU-spectral-hook-preflight-no-quality-decision",
+  "driver": {
+    "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/scripts/diagnose_spectral_gate_components.py",
+    "sha256": "2605cb00c9473512997310b539921198f621382341048901d11c34bd8ab8f333"
+  },
+  "plan": {
+    "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/plan.json",
+    "sha256": "37466bea5c57e9fda4c1005a5c25a6cef29ee44ff74bc76ff65d1f41ca9f4df0"
+  },
+  "checkpoint": {
+    "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-resource-recovery-v2/work/runs/spectral/last.pt",
+    "sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3",
+    "arm": "spectral",
+    "step": 4000,
+    "kind": "joint-checkpoint",
+    "label": "V89-original4000"
+  },
+  "device": "cpu",
+  "preflight": true,
+  "size": 64,
+  "roi_xywh": [
+    8,
+    8,
+    48,
+    48
+  ],
+  "draws": 1,
+  "model_state_sha256_unchanged": "a8f6d5743ed54a4c4473c7702ae02f255bdc5e2e751b9c17b514313a28310130",
+  "DINO_sha256_unchanged": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd",
+  "CPU_CUDA_RNG_unchanged": true,
+  "input_batches": 6,
+  "distinct_observations_per_mode": 6,
+  "case_component_statistics": [
+    {
+      "kind": "carrier",
+      "level": 0.01,
+      "contrast": 0.1,
+      "period": 8,
+      "condition": "adc-only",
+      "pattern": "RGGB",
+      "input_sha256": "5baaa1ed4f24895c740f7698353be13de3358881c18cdeda5e017b659daa9bb0",
+      "gate": [
+        0.06526567786931992
+      ],
+      "nonzero_mask_bins": [
+        2
+      ],
+      "censored_input_fraction": 0.0,
+      "full_branch_and_cut_replay_exact": true,
+      "innovation_signed_gain": [
+        0.0038832758947786594
+      ],
+      "known_carrier_mask_weight": [
+        0.9999999403953552
+      ],
+      "gain_decomposition_max_error": 9.886942419385118e-08,
+      "unit_gain_decomposition_max_error": 2.2867992943709226e-08,
+      "arrays": {
+        "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/cpu-preflight/arrays/batch-000.npz",
+        "sha256": "a4090fc2f660861acafab79e2104b09f3f7f521343d0ec9ba198af6a048b0860"
+      }
+    },
+    {
+      "kind": "carrier",
+      "level": 0.01,
+      "contrast": 0.1,
+      "period": 8,
+      "condition": "iso12800-prior",
+      "pattern": "RGGB",
+      "input_sha256": "bc38e963c3cc84f0dddd354a4df58e7383d4ea485b30177a50242e3bbc615b4b",
+      "gate": [
+        0.012983457185328007
+      ],
+      "nonzero_mask_bins": [
+        0
+      ],
+      "censored_input_fraction": 0.0,
+      "full_branch_and_cut_replay_exact": true,
+      "innovation_signed_gain": [
+        0.0
+      ],
+      "known_carrier_mask_weight": [
+        0.0
+      ],
+      "gain_decomposition_max_error": 0.0,
+      "unit_gain_decomposition_max_error": 0.0,
+      "arrays": {
+        "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/cpu-preflight/arrays/batch-001.npz",
+        "sha256": "0036b9d2cc5b60708389fbd4f4d80f7c80821e68869008bd725216d442670dff"
+      }
+    },
+    {
+      "kind": "carrier",
+      "level": 0.18,
+      "contrast": 0.02,
+      "period": 16,
+      "condition": "adc-only",
+      "pattern": "RGGB",
+      "input_sha256": "631847b17a235037cd96280f45147c2c0968e214f4f595d1d07f8346b506aea7",
+      "gate": [
+        0.05698123574256897
+      ],
+      "nonzero_mask_bins": [
+        4
+      ],
+      "censored_input_fraction": 0.0,
+      "full_branch_and_cut_replay_exact": true,
+      "innovation_signed_gain": [
+        -0.0024532035409192483
+      ],
+      "known_carrier_mask_weight": [
+        1.0
+      ],
+      "gain_decomposition_max_error": 1.924680832828961e-07,
+      "unit_gain_decomposition_max_error": 4.2589711625896226e-08,
+      "arrays": {
+        "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/cpu-preflight/arrays/batch-002.npz",
+        "sha256": "46e2c406b723ea2f04d676ed01c6f65a72c1221d7fd375aa744c06876a88ae6b"
+      }
+    },
+    {
+      "kind": "carrier",
+      "level": 0.18,
+      "contrast": 0.02,
+      "period": 16,
+      "condition": "iso12800-prior",
+      "pattern": "RGGB",
+      "input_sha256": "999ac4a568ef7b8980981ac8bca9766e90d6fcd1cd8eca9f229a8d73ec50cf6f",
+      "gate": [
+        0.02127351053059101
+      ],
+      "nonzero_mask_bins": [
+        0
+      ],
+      "censored_input_fraction": 0.0,
+      "full_branch_and_cut_replay_exact": true,
+      "innovation_signed_gain": [
+        0.0
+      ],
+      "known_carrier_mask_weight": [
+        0.0
+      ],
+      "gain_decomposition_max_error": 0.0,
+      "unit_gain_decomposition_max_error": 0.0,
+      "arrays": {
+        "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/cpu-preflight/arrays/batch-003.npz",
+        "sha256": "beb99850a9406ddbd097bf2df8e771d76119bb162d970cd52c105e7263a271e9"
+      }
+    },
+    {
+      "kind": "flat",
+      "level": 0.18,
+      "contrast": 0,
+      "period": null,
+      "condition": "adc-only",
+      "pattern": "RGGB",
+      "input_sha256": "375390bb26db2ebac65770253806e2392737a20c69d89ad9f4f9ad0ed18ae58e",
+      "gate": [
+        0.05948950722813606
+      ],
+      "nonzero_mask_bins": [
+        0
+      ],
+      "censored_input_fraction": 0.0,
+      "full_branch_and_cut_replay_exact": true,
+      "arrays": {
+        "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/cpu-preflight/arrays/batch-004.npz",
+        "sha256": "8ccadbb02793c9844b20e31546a2d5f5dbd07f445703c2123eba7b0a37b401a2"
+      }
+    },
+    {
+      "kind": "flat",
+      "level": 0.18,
+      "contrast": 0,
+      "period": null,
+      "condition": "iso12800-prior",
+      "pattern": "RGGB",
+      "input_sha256": "3c9cfb94d43702d085b923876d1cc48c31b0e073f1fe17069f6d52fb44b62e7f",
+      "gate": [
+        0.021677058190107346
+      ],
+      "nonzero_mask_bins": [
+        0
+      ],
+      "censored_input_fraction": 0.0,
+      "full_branch_and_cut_replay_exact": true,
+      "arrays": {
+        "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/cpu-preflight/arrays/batch-005.npz",
+        "sha256": "9a08c899f7a8fb6d2b2f9f2d364a2e263f107c7041278b23b3fb2b212f5b9a38"
+      }
+    }
+  ],
+  "baseline_metric_replay_max_errors": {},
+  "per_case": {
+    "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/cpu-preflight/per-case.jsonl",
+    "sha256": "4805ede3a6847e8752233fb1bd475221c0742052f27d97738ca6cfd621ee8777"
+  },
+  "native_crops": [],
+  "carrier_summary": [
+    {
+      "level": 0.01,
+      "contrast": 0.1,
+      "period": 8,
+      "condition": "adc-only",
+      "model": "base",
+      "cases": 1,
+      "metrics": {
+        "in_phase_gain": {
+          "mean": 0.992175198218426,
+          "std": 0.0,
+          "min": 0.992175198218426,
+          "max": 0.992175198218426
+        },
+        "gain_channel_std": {
+          "mean": 0.024790354504322126,
+          "std": 0.0,
+          "min": 0.024790354504322126,
+          "max": 0.024790354504322126
+        },
+        "quadrature_gain": {
+          "mean": 0.007366202976976876,
+          "std": 0.0,
+          "min": 0.007366202976976876,
+          "max": 0.007366202976976876
+        },
+        "amplitude_ratio": {
+          "mean": 0.9927270534208326,
+          "std": 0.0,
+          "min": 0.9927270534208326,
+          "max": 0.9927270534208326
+        },
+        "dc_bias_abs": {
+          "mean": 1.283930419357313e-05,
+          "std": 0.0,
+          "min": 1.283930419357313e-05,
+          "max": 1.283930419357313e-05
+        },
+        "noncarrier_rms": {
+          "mean": 2.0718704060888275e-05,
+          "std": 0.0,
+          "min": 2.0718704060888275e-05,
+          "max": 2.0718704060888275e-05
+        },
+        "linear_srgb_rmse": {
+          "mean": 3.921691485438634e-05,
+          "std": 0.0,
+          "min": 3.921691485438634e-05,
+          "max": 3.921691485438634e-05
+        }
+      }
+    },
+    {
+      "level": 0.01,
+      "contrast": 0.1,
+      "period": 8,
+      "condition": "adc-only",
+      "model": "full",
+      "cases": 1,
+      "metrics": {
+        "in_phase_gain": {
+          "mean": 0.9924287417214765,
+          "std": 0.0,
+          "min": 0.9924287417214765,
+          "max": 0.9924287417214765
+        },
+        "gain_channel_std": {
+          "mean": 0.02325063940279986,
+          "std": 0.0,
+          "min": 0.02325063940279986,
+          "max": 0.02325063940279986
+        },
+        "quadrature_gain": {
+          "mean": 0.007100061322952346,
+          "std": 0.0,
+          "min": 0.007100061322952346,
+          "max": 0.007100061322952346
+        },
+        "amplitude_ratio": {
+          "mean": 0.9929204128959054,
+          "std": 0.0,
+          "min": 0.9929204128959054,
+          "max": 0.9929204128959054
+        },
+        "dc_bias_abs": {
+          "mean": 1.2839343569345449e-05,
+          "std": 0.0,
+          "min": 1.2839343569345449e-05,
+          "max": 1.2839343569345449e-05
+        },
+        "noncarrier_rms": {
+          "mean": 2.0453984276867265e-05,
+          "std": 0.0,
+          "min": 2.0453984276867265e-05,
+          "max": 2.0453984276867265e-05
+        },
+        "linear_srgb_rmse": {
+          "mean": 3.782194642629799e-05,
+          "std": 0.0,
+          "min": 3.782194642629799e-05,
+          "max": 3.782194642629799e-05
+        }
+      }
+    },
+    {
+      "level": 0.01,
+      "contrast": 0.1,
+      "period": 8,
+      "condition": "adc-only",
+      "model": "malvar",
+      "cases": 1,
+      "metrics": {
+        "in_phase_gain": {
+          "mean": 1.0544368525973085,
+          "std": 0.0,
+          "min": 1.0544368525973085,
+          "max": 1.0544368525973085
+        },
+        "gain_channel_std": {
+          "mean": 0.002814181313904317,
+          "std": 0.0,
+          "min": 0.002814181313904317,
+          "max": 0.002814181313904317
+        },
+        "quadrature_gain": {
+          "mean": 6.79603731064874e-07,
+          "std": 0.0,
+          "min": 6.79603731064874e-07,
+          "max": 6.79603731064874e-07
+        },
+        "amplitude_ratio": {
+          "mean": 1.0544368525975445,
+          "std": 0.0,
+          "min": 1.0544368525975445,
+          "max": 1.0544368525975445
+        },
+        "dc_bias_abs": {
+          "mean": 3.0508882319692696e-06,
+          "std": 0.0,
+          "min": 3.0508882319692696e-06,
+          "max": 3.0508882319692696e-06
+        },
+        "noncarrier_rms": {
+          "mean": 3.786614494954562e-05,
+          "std": 0.0,
+          "min": 3.786614494954562e-05,
+          "max": 3.786614494954562e-05
+        },
+        "linear_srgb_rmse": {
+          "mean": 5.412404940541327e-05,
+          "std": 0.0,
+          "min": 5.412404940541327e-05,
+          "max": 5.412404940541327e-05
+        }
+      }
+    },
+    {
+      "level": 0.01,
+      "contrast": 0.1,
+      "period": 8,
+      "condition": "adc-only",
+      "model": "unit",
+      "cases": 1,
+      "metrics": {
+        "in_phase_gain": {
+          "mean": 0.9960584969811976,
+          "std": 0.0,
+          "min": 0.9960584969811976,
+          "max": 0.9960584969811976
+        },
+        "gain_channel_std": {
+          "mean": 0.012735473362842403,
+          "std": 0.0,
+          "min": 0.012735473362842403,
+          "max": 0.012735473362842403
+        },
+        "quadrature_gain": {
+          "mean": 0.003289549383422827,
+          "std": 0.0,
+          "min": 0.003289549383422827,
+          "max": 0.003289549383422827
+        },
+        "amplitude_ratio": {
+          "mean": 0.9960747971812615,
+          "std": 0.0,
+          "min": 0.9960747971812615,
+          "max": 0.9960747971812615
+        },
+        "dc_bias_abs": {
+          "mean": 1.2839371531848711e-05,
+          "std": 0.0,
+          "min": 1.2839371531848711e-05,
+          "max": 1.2839371531848711e-05
+        },
+        "noncarrier_rms": {
+          "mean": 2.179340718059627e-05,
+          "std": 0.0,
+          "min": 2.179340718059627e-05,
+          "max": 2.179340718059627e-05
+        },
+        "linear_srgb_rmse": {
+          "mean": 2.8538185078234402e-05,
+          "std": 0.0,
+          "min": 2.8538185078234402e-05,
+          "max": 2.8538185078234402e-05
+        }
+      }
+    },
+    {
+      "level": 0.01,
+      "contrast": 0.1,
+      "period": 8,
+      "condition": "iso12800-prior",
+      "model": "base",
+      "cases": 1,
+      "metrics": {
+        "in_phase_gain": {
+          "mean": 0.0032986546384269765,
+          "std": 0.0,
+          "min": 0.0032986546384269765,
+          "max": 0.0032986546384269765
+        },
+        "gain_channel_std": {
+          "mean": 0.0015072984410925286,
+          "std": 0.0,
+          "min": 0.0015072984410925286,
+          "max": 0.0015072984410925286
+        },
+        "quadrature_gain": {
+          "mean": 0.00910881615154467,
+          "std": 0.0,
+          "min": 0.00910881615154467,
+          "max": 0.00910881615154467
+        },
+        "amplitude_ratio": {
+          "mean": 0.010027288897586696,
+          "std": 0.0,
+          "min": 0.010027288897586696,
+          "max": 0.010027288897586696
+        },
+        "dc_bias_abs": {
+          "mean": 0.00027613745108566516,
+          "std": 0.0,
+          "min": 0.00027613745108566516,
+          "max": 0.00027613745108566516
+        },
+        "noncarrier_rms": {
+          "mean": 0.0003021793341655497,
+          "std": 0.0,
+          "min": 0.0003021793341655497,
+          "max": 0.0003021793341655497
+        },
+        "linear_srgb_rmse": {
+          "mean": 0.0008205953748642205,
+          "std": 0.0,
+          "min": 0.0008205953748642205,
+          "max": 0.0008205953748642205
+        }
+      }
+    },
+    {
+      "level": 0.01,
+      "contrast": 0.1,
+      "period": 8,
+      "condition": "iso12800-prior",
+      "model": "full",
+      "cases": 1,
+      "metrics": {
+        "in_phase_gain": {
+          "mean": 0.0032986546384269765,
+          "std": 0.0,
+          "min": 0.0032986546384269765,
+          "max": 0.0032986546384269765
+        },
+        "gain_channel_std": {
+          "mean": 0.0015072984410925286,
+          "std": 0.0,
+          "min": 0.0015072984410925286,
+          "max": 0.0015072984410925286
+        },
+        "quadrature_gain": {
+          "mean": 0.00910881615154467,
+          "std": 0.0,
+          "min": 0.00910881615154467,
+          "max": 0.00910881615154467
+        },
+        "amplitude_ratio": {
+          "mean": 0.010027288897586696,
+          "std": 0.0,
+          "min": 0.010027288897586696,
+          "max": 0.010027288897586696
+        },
+        "dc_bias_abs": {
+          "mean": 0.00027613745108566516,
+          "std": 0.0,
+          "min": 0.00027613745108566516,
+          "max": 0.00027613745108566516
+        },
+        "noncarrier_rms": {
+          "mean": 0.0003021793341655497,
+          "std": 0.0,
+          "min": 0.0003021793341655497,
+          "max": 0.0003021793341655497
+        },
+        "linear_srgb_rmse": {
+          "mean": 0.0008205953748642205,
+          "std": 0.0,
+          "min": 0.0008205953748642205,
+          "max": 0.0008205953748642205
+        }
+      }
+    },
+    {
+      "level": 0.01,
+      "contrast": 0.1,
+      "period": 8,
+      "condition": "iso12800-prior",
+      "model": "malvar",
+      "cases": 1,
+      "metrics": {
+        "in_phase_gain": {
+          "mean": 0.592123347417556,
+          "std": 0.0,
+          "min": 0.592123347417556,
+          "max": 0.592123347417556
+        },
+        "gain_channel_std": {
+          "mean": 0.8254812627924868,
+          "std": 0.0,
+          "min": 0.8254812627924868,
+          "max": 0.8254812627924868
+        },
+        "quadrature_gain": {
+          "mean": -0.1820977104477763,
+          "std": 0.0,
+          "min": -0.1820977104477763,
+          "max": -0.1820977104477763
+        },
+        "amplitude_ratio": {
+          "mean": 1.1142737091123098,
+          "std": 0.0,
+          "min": 1.1142737091123098,
+          "max": 1.1142737091123098
+        },
+        "dc_bias_abs": {
+          "mean": 0.0005311416765522008,
+          "std": 0.0,
+          "min": 0.0005311416765522008,
+          "max": 0.0005311416765522008
+        },
+        "noncarrier_rms": {
+          "mean": 0.009692294282398362,
+          "std": 0.0,
+          "min": 0.009692294282398362,
+          "max": 0.009692294282398362
+        },
+        "linear_srgb_rmse": {
+          "mean": 0.009751418972538044,
+          "std": 0.0,
+          "min": 0.009751418972538044,
+          "max": 0.009751418972538044
+        }
+      }
+    },
+    {
+      "level": 0.01,
+      "contrast": 0.1,
+      "period": 8,
+      "condition": "iso12800-prior",
+      "model": "unit",
+      "cases": 1,
+      "metrics": {
+        "in_phase_gain": {
+          "mean": 0.0032986546384269765,
+          "std": 0.0,
+          "min": 0.0032986546384269765,
+          "max": 0.0032986546384269765
+        },
+        "gain_channel_std": {
+          "mean": 0.0015072984410925286,
+          "std": 0.0,
+          "min": 0.0015072984410925286,
+          "max": 0.0015072984410925286
+        },
+        "quadrature_gain": {
+          "mean": 0.00910881615154467,
+          "std": 0.0,
+          "min": 0.00910881615154467,
+          "max": 0.00910881615154467
+        },
+        "amplitude_ratio": {
+          "mean": 0.010027288897586696,
+          "std": 0.0,
+          "min": 0.010027288897586696,
+          "max": 0.010027288897586696
+        },
+        "dc_bias_abs": {
+          "mean": 0.00027613745108566516,
+          "std": 0.0,
+          "min": 0.00027613745108566516,
+          "max": 0.00027613745108566516
+        },
+        "noncarrier_rms": {
+          "mean": 0.0003021793341655497,
+          "std": 0.0,
+          "min": 0.0003021793341655497,
+          "max": 0.0003021793341655497
+        },
+        "linear_srgb_rmse": {
+          "mean": 0.0008205953748642205,
+          "std": 0.0,
+          "min": 0.0008205953748642205,
+          "max": 0.0008205953748642205
+        }
+      }
+    },
+    {
+      "level": 0.18,
+      "contrast": 0.02,
+      "period": 16,
+      "condition": "adc-only",
+      "model": "base",
+      "cases": 1,
+      "metrics": {
+        "in_phase_gain": {
+          "mean": 0.9875374405394268,
+          "std": 0.0,
+          "min": 0.9875374405394268,
+          "max": 0.9875374405394268
+        },
+        "gain_channel_std": {
+          "mean": 0.003655669754448238,
+          "std": 0.0,
+          "min": 0.003655669754448238,
+          "max": 0.003655669754448238
+        },
+        "quadrature_gain": {
+          "mean": -0.0037371830804650056,
+          "std": 0.0,
+          "min": -0.0037371830804650056,
+          "max": -0.0037371830804650056
+        },
+        "amplitude_ratio": {
+          "mean": 0.9875610657134941,
+          "std": 0.0,
+          "min": 0.9875610657134941,
+          "max": 0.9875610657134941
+        },
+        "dc_bias_abs": {
+          "mean": 5.6885096739030715e-05,
+          "std": 0.0,
+          "min": 5.6885096739030715e-05,
+          "max": 5.6885096739030715e-05
+        },
+        "noncarrier_rms": {
+          "mean": 8.746358766304506e-05,
+          "std": 0.0,
+          "min": 8.746358766304506e-05,
+          "max": 8.746358766304506e-05
+        },
+        "linear_srgb_rmse": {
+          "mean": 0.00011251972699422166,
+          "std": 0.0,
+          "min": 0.00011251972699422166,
+          "max": 0.00011251972699422166
+        }
+      }
+    },
+    {
+      "level": 0.18,
+      "contrast": 0.02,
+      "period": 16,
+      "condition": "adc-only",
+      "model": "full",
+      "cases": 1,
+      "metrics": {
+        "in_phase_gain": {
+          "mean": 0.9873978464382205,
+          "std": 0.0,
+          "min": 0.9873978464382205,
+          "max": 0.9873978464382205
+        },
+        "gain_channel_std": {
+          "mean": 0.004287165388682896,
+          "std": 0.0,
+          "min": 0.004287165388682896,
+          "max": 0.004287165388682896
+        },
+        "quadrature_gain": {
+          "mean": -0.0029742986851466293,
+          "std": 0.0,
+          "min": -0.0029742986851466293,
+          "max": -0.0029742986851466293
+        },
+        "amplitude_ratio": {
+          "mean": 0.987421134570381,
+          "std": 0.0,
+          "min": 0.987421134570381,
+          "max": 0.987421134570381
+        },
+        "dc_bias_abs": {
+          "mean": 5.688498032373664e-05,
+          "std": 0.0,
+          "min": 5.688498032373664e-05,
+          "max": 5.688498032373664e-05
+        },
+        "noncarrier_rms": {
+          "mean": 8.625282110762327e-05,
+          "std": 0.0,
+          "min": 8.625282110762327e-05,
+          "max": 8.625282110762327e-05
+        },
+        "linear_srgb_rmse": {
+          "mean": 0.00011180777098573147,
+          "std": 0.0,
+          "min": 0.00011180777098573147,
+          "max": 0.00011180777098573147
+        }
+      }
+    },
+    {
+      "level": 0.18,
+      "contrast": 0.02,
+      "period": 16,
+      "condition": "adc-only",
+      "model": "malvar",
+      "cases": 1,
+      "metrics": {
+        "in_phase_gain": {
+          "mean": 1.0178011765646457,
+          "std": 0.0,
+          "min": 1.0178011765646457,
+          "max": 1.0178011765646457
+        },
+        "gain_channel_std": {
+          "mean": 0.0008244137535147829,
+          "std": 0.0,
+          "min": 0.0008244137535147829,
+          "max": 0.0008244137535147829
+        },
+        "quadrature_gain": {
+          "mean": 5.992244020369044e-07,
+          "std": 0.0,
+          "min": 5.992244020369044e-07,
+          "max": 5.992244020369044e-07
+        },
+        "amplitude_ratio": {
+          "mean": 1.0178011765650534,
+          "std": 0.0,
+          "min": 1.0178011765650534,
+          "max": 1.0178011765650534
+        },
+        "dc_bias_abs": {
+          "mean": 2.0963424247159392e-06,
+          "std": 0.0,
+          "min": 2.0963424247159392e-06,
+          "max": 2.0963424247159392e-06
+        },
+        "noncarrier_rms": {
+          "mean": 5.080434586566008e-05,
+          "std": 0.0,
+          "min": 5.080434586566008e-05,
+          "max": 5.080434586566008e-05
+        },
+        "linear_srgb_rmse": {
+          "mean": 6.8164578202865e-05,
+          "std": 0.0,
+          "min": 6.8164578202865e-05,
+          "max": 6.8164578202865e-05
+        }
+      }
+    },
+    {
+      "level": 0.18,
+      "contrast": 0.02,
+      "period": 16,
+      "condition": "adc-only",
+      "model": "unit",
+      "cases": 1,
+      "metrics": {
+        "in_phase_gain": {
+          "mean": 0.9850842795882192,
+          "std": 0.0,
+          "min": 0.9850842795882192,
+          "max": 0.9850842795882192
+        },
+        "gain_channel_std": {
+          "mean": 0.014794658236114285,
+          "std": 0.0,
+          "min": 0.014794658236114285,
+          "max": 0.014794658236114285
+        },
+        "quadrature_gain": {
+          "mean": 0.009655423589693546,
+          "std": 0.0,
+          "min": 0.009655423589693546,
+          "max": 0.009655423589693546
+        },
+        "amplitude_ratio": {
+          "mean": 0.9852177822585843,
+          "std": 0.0,
+          "min": 0.9852177822585843,
+          "max": 0.9852177822585843
+        },
+        "dc_bias_abs": {
+          "mean": 5.6884708687994966e-05,
+          "std": 0.0,
+          "min": 5.6884708687994966e-05,
+          "max": 5.6884708687994966e-05
+        },
+        "noncarrier_rms": {
+          "mean": 0.00010203046612805315,
+          "std": 0.0,
+          "min": 0.00010203046612805315,
+          "max": 0.00010203046612805315
+        },
+        "linear_srgb_rmse": {
+          "mean": 0.00013623168287987835,
+          "std": 0.0,
+          "min": 0.00013623168287987835,
+          "max": 0.00013623168287987835
+        }
+      }
+    },
+    {
+      "level": 0.18,
+      "contrast": 0.02,
+      "period": 16,
+      "condition": "iso12800-prior",
+      "model": "base",
+      "cases": 1,
+      "metrics": {
+        "in_phase_gain": {
+          "mean": 0.12335874834415017,
+          "std": 0.0,
+          "min": 0.12335874834415017,
+          "max": 0.12335874834415017
+        },
+        "gain_channel_std": {
+          "mean": 0.01564161869579216,
+          "std": 0.0,
+          "min": 0.01564161869579216,
+          "max": 0.01564161869579216
+        },
+        "quadrature_gain": {
+          "mean": 0.010686291123638112,
+          "std": 0.0,
+          "min": 0.010686291123638112,
+          "max": 0.010686291123638112
+        },
+        "amplitude_ratio": {
+          "mean": 0.12477109353870759,
+          "std": 0.0,
+          "min": 0.12477109353870759,
+          "max": 0.12477109353870759
+        },
+        "dc_bias_abs": {
+          "mean": 0.0007460780108070608,
+          "std": 0.0,
+          "min": 0.0007460780108070608,
+          "max": 0.0007460780108070608
+        },
+        "noncarrier_rms": {
+          "mean": 0.0007132917993493947,
+          "std": 0.0,
+          "min": 0.0007132917993493947,
+          "max": 0.0007132917993493947
+        },
+        "linear_srgb_rmse": {
+          "mean": 0.002544588708812938,
+          "std": 0.0,
+          "min": 0.002544588708812938,
+          "max": 0.002544588708812938
+        }
+      }
+    },
+    {
+      "level": 0.18,
+      "contrast": 0.02,
+      "period": 16,
+      "condition": "iso12800-prior",
+      "model": "full",
+      "cases": 1,
+      "metrics": {
+        "in_phase_gain": {
+          "mean": 0.12335874834415017,
+          "std": 0.0,
+          "min": 0.12335874834415017,
+          "max": 0.12335874834415017
+        },
+        "gain_channel_std": {
+          "mean": 0.01564161869579216,
+          "std": 0.0,
+          "min": 0.01564161869579216,
+          "max": 0.01564161869579216
+        },
+        "quadrature_gain": {
+          "mean": 0.010686291123638112,
+          "std": 0.0,
+          "min": 0.010686291123638112,
+          "max": 0.010686291123638112
+        },
+        "amplitude_ratio": {
+          "mean": 0.12477109353870759,
+          "std": 0.0,
+          "min": 0.12477109353870759,
+          "max": 0.12477109353870759
+        },
+        "dc_bias_abs": {
+          "mean": 0.0007460780108070608,
+          "std": 0.0,
+          "min": 0.0007460780108070608,
+          "max": 0.0007460780108070608
+        },
+        "noncarrier_rms": {
+          "mean": 0.0007132917993493947,
+          "std": 0.0,
+          "min": 0.0007132917993493947,
+          "max": 0.0007132917993493947
+        },
+        "linear_srgb_rmse": {
+          "mean": 0.002544588708812938,
+          "std": 0.0,
+          "min": 0.002544588708812938,
+          "max": 0.002544588708812938
+        }
+      }
+    },
+    {
+      "level": 0.18,
+      "contrast": 0.02,
+      "period": 16,
+      "condition": "iso12800-prior",
+      "model": "malvar",
+      "cases": 1,
+      "metrics": {
+        "in_phase_gain": {
+          "mean": 1.2284343417482158,
+          "std": 0.0,
+          "min": 1.2284343417482158,
+          "max": 1.2284343417482158
+        },
+        "gain_channel_std": {
+          "mean": 0.4188070088352599,
+          "std": 0.0,
+          "min": 0.4188070088352599,
+          "max": 0.4188070088352599
+        },
+        "quadrature_gain": {
+          "mean": 0.06816741952127414,
+          "std": 0.0,
+          "min": 0.06816741952127414,
+          "max": 0.06816741952127414
+        },
+        "amplitude_ratio": {
+          "mean": 1.2665926688008762,
+          "std": 0.0,
+          "min": 1.2665926688008762,
+          "max": 1.2665926688008762
+        },
+        "dc_bias_abs": {
+          "mean": 0.0003666733282835603,
+          "std": 0.0,
+          "min": 0.0003666733282835603,
+          "max": 0.0003666733282835603
+        },
+        "noncarrier_rms": {
+          "mean": 0.027667271759916436,
+          "std": 0.0,
+          "min": 0.027667271759916436,
+          "max": 0.027667271759916436
+        },
+        "linear_srgb_rmse": {
+          "mean": 0.02771102297453139,
+          "std": 0.0,
+          "min": 0.02771102297453139,
+          "max": 0.02771102297453139
+        }
+      }
+    },
+    {
+      "level": 0.18,
+      "contrast": 0.02,
+      "period": 16,
+      "condition": "iso12800-prior",
+      "model": "unit",
+      "cases": 1,
+      "metrics": {
+        "in_phase_gain": {
+          "mean": 0.12335874834415017,
+          "std": 0.0,
+          "min": 0.12335874834415017,
+          "max": 0.12335874834415017
+        },
+        "gain_channel_std": {
+          "mean": 0.01564161869579216,
+          "std": 0.0,
+          "min": 0.01564161869579216,
+          "max": 0.01564161869579216
+        },
+        "quadrature_gain": {
+          "mean": 0.010686291123638112,
+          "std": 0.0,
+          "min": 0.010686291123638112,
+          "max": 0.010686291123638112
+        },
+        "amplitude_ratio": {
+          "mean": 0.12477109353870759,
+          "std": 0.0,
+          "min": 0.12477109353870759,
+          "max": 0.12477109353870759
+        },
+        "dc_bias_abs": {
+          "mean": 0.0007460780108070608,
+          "std": 0.0,
+          "min": 0.0007460780108070608,
+          "max": 0.0007460780108070608
+        },
+        "noncarrier_rms": {
+          "mean": 0.0007132917993493947,
+          "std": 0.0,
+          "min": 0.0007132917993493947,
+          "max": 0.0007132917993493947
+        },
+        "linear_srgb_rmse": {
+          "mean": 0.002544588708812938,
+          "std": 0.0,
+          "min": 0.002544588708812938,
+          "max": 0.002544588708812938
+        }
+      }
+    }
+  ],
+  "flat_summary": [
+    {
+      "level": 0.18,
+      "contrast": 0,
+      "period": null,
+      "condition": "adc-only",
+      "model": "base",
+      "cases": 1,
+      "metrics": {
+        "dc_bias_abs_rgb": {
+          "mean": 4.391689187278428e-05,
+          "std": 0.0,
+          "min": 4.391689187278428e-05,
+          "max": 4.391689187278428e-05
+        },
+        "linear_srgb_rmse": {
+          "mean": 7.69362958028576e-05,
+          "std": 0.0,
+          "min": 7.69362958028576e-05,
+          "max": 7.69362958028576e-05
+        },
+        "spatial_luma_rms": {
+          "mean": 3.88166646957688e-05,
+          "std": 0.0,
+          "min": 3.88166646957688e-05,
+          "max": 3.88166646957688e-05
+        },
+        "relative_band_rms": {
+          "mean": 0.0001854136792617518,
+          "std": 0.0,
+          "min": 0.0001854136792617518,
+          "max": 0.0001854136792617518
+        },
+        "relative_peak_band_contrast": {
+          "mean": 0.00016433039796390496,
+          "std": 0.0,
+          "min": 0.00016433039796390496,
+          "max": 0.00016433039796390496
+        }
+      }
+    },
+    {
+      "level": 0.18,
+      "contrast": 0,
+      "period": null,
+      "condition": "adc-only",
+      "model": "full",
+      "cases": 1,
+      "metrics": {
+        "dc_bias_abs_rgb": {
+          "mean": 4.391689187278428e-05,
+          "std": 0.0,
+          "min": 4.391689187278428e-05,
+          "max": 4.391689187278428e-05
+        },
+        "linear_srgb_rmse": {
+          "mean": 7.69362958028576e-05,
+          "std": 0.0,
+          "min": 7.69362958028576e-05,
+          "max": 7.69362958028576e-05
+        },
+        "spatial_luma_rms": {
+          "mean": 3.88166646957688e-05,
+          "std": 0.0,
+          "min": 3.88166646957688e-05,
+          "max": 3.88166646957688e-05
+        },
+        "relative_band_rms": {
+          "mean": 0.0001854136792617518,
+          "std": 0.0,
+          "min": 0.0001854136792617518,
+          "max": 0.0001854136792617518
+        },
+        "relative_peak_band_contrast": {
+          "mean": 0.00016433039796390496,
+          "std": 0.0,
+          "min": 0.00016433039796390496,
+          "max": 0.00016433039796390496
+        }
+      }
+    },
+    {
+      "level": 0.18,
+      "contrast": 0,
+      "period": null,
+      "condition": "adc-only",
+      "model": "malvar",
+      "cases": 1,
+      "metrics": {
+        "dc_bias_abs_rgb": {
+          "mean": 7.678444129512648e-06,
+          "std": 0.0,
+          "min": 7.678444129512648e-06,
+          "max": 7.678444129512648e-06
+        },
+        "linear_srgb_rmse": {
+          "mean": 7.688354062593671e-06,
+          "std": 0.0,
+          "min": 7.688354062593671e-06,
+          "max": 7.688354062593671e-06
+        },
+        "spatial_luma_rms": {
+          "mean": 4.489742283548743e-09,
+          "std": 0.0,
+          "min": 4.489742283548743e-09,
+          "max": 4.489742283548743e-09
+        },
+        "relative_band_rms": {
+          "mean": 1.617627887941103e-24,
+          "std": 0.0,
+          "min": 1.617627887941103e-24,
+          "max": 1.617627887941103e-24
+        },
+        "relative_peak_band_contrast": {
+          "mean": 2.320642269268724e-24,
+          "std": 0.0,
+          "min": 2.320642269268724e-24,
+          "max": 2.320642269268724e-24
+        }
+      }
+    },
+    {
+      "level": 0.18,
+      "contrast": 0,
+      "period": null,
+      "condition": "adc-only",
+      "model": "unit",
+      "cases": 1,
+      "metrics": {
+        "dc_bias_abs_rgb": {
+          "mean": 4.391689187278428e-05,
+          "std": 0.0,
+          "min": 4.391689187278428e-05,
+          "max": 4.391689187278428e-05
+        },
+        "linear_srgb_rmse": {
+          "mean": 7.69362958028576e-05,
+          "std": 0.0,
+          "min": 7.69362958028576e-05,
+          "max": 7.69362958028576e-05
+        },
+        "spatial_luma_rms": {
+          "mean": 3.88166646957688e-05,
+          "std": 0.0,
+          "min": 3.88166646957688e-05,
+          "max": 3.88166646957688e-05
+        },
+        "relative_band_rms": {
+          "mean": 0.0001854136792617518,
+          "std": 0.0,
+          "min": 0.0001854136792617518,
+          "max": 0.0001854136792617518
+        },
+        "relative_peak_band_contrast": {
+          "mean": 0.00016433039796390496,
+          "std": 0.0,
+          "min": 0.00016433039796390496,
+          "max": 0.00016433039796390496
+        }
+      }
+    },
+    {
+      "level": 0.18,
+      "contrast": 0,
+      "period": null,
+      "condition": "iso12800-prior",
+      "model": "base",
+      "cases": 1,
+      "metrics": {
+        "dc_bias_abs_rgb": {
+          "mean": 0.0009916663438634676,
+          "std": 0.0,
+          "min": 0.0009916663438634676,
+          "max": 0.0009916663438634676
+        },
+        "linear_srgb_rmse": {
+          "mean": 0.0015992441692415005,
+          "std": 0.0,
+          "min": 0.0015992441692415005,
+          "max": 0.0015992441692415005
+        },
+        "spatial_luma_rms": {
+          "mean": 0.0009967141344987911,
+          "std": 0.0,
+          "min": 0.0009967141344987911,
+          "max": 0.0009967141344987911
+        },
+        "relative_band_rms": {
+          "mean": 0.005422151319368078,
+          "std": 0.0,
+          "min": 0.005422151319368078,
+          "max": 0.005422151319368078
+        },
+        "relative_peak_band_contrast": {
+          "mean": 0.0050736474385674486,
+          "std": 0.0,
+          "min": 0.0050736474385674486,
+          "max": 0.0050736474385674486
+        }
+      }
+    },
+    {
+      "level": 0.18,
+      "contrast": 0,
+      "period": null,
+      "condition": "iso12800-prior",
+      "model": "full",
+      "cases": 1,
+      "metrics": {
+        "dc_bias_abs_rgb": {
+          "mean": 0.0009916663438634676,
+          "std": 0.0,
+          "min": 0.0009916663438634676,
+          "max": 0.0009916663438634676
+        },
+        "linear_srgb_rmse": {
+          "mean": 0.0015992441692415005,
+          "std": 0.0,
+          "min": 0.0015992441692415005,
+          "max": 0.0015992441692415005
+        },
+        "spatial_luma_rms": {
+          "mean": 0.0009967141344987911,
+          "std": 0.0,
+          "min": 0.0009967141344987911,
+          "max": 0.0009967141344987911
+        },
+        "relative_band_rms": {
+          "mean": 0.005422151319368078,
+          "std": 0.0,
+          "min": 0.005422151319368078,
+          "max": 0.005422151319368078
+        },
+        "relative_peak_band_contrast": {
+          "mean": 0.0050736474385674486,
+          "std": 0.0,
+          "min": 0.0050736474385674486,
+          "max": 0.0050736474385674486
+        }
+      }
+    },
+    {
+      "level": 0.18,
+      "contrast": 0,
+      "period": null,
+      "condition": "iso12800-prior",
+      "model": "malvar",
+      "cases": 1,
+      "metrics": {
+        "dc_bias_abs_rgb": {
+          "mean": 0.0008573030934065825,
+          "std": 0.0,
+          "min": 0.0008573030934065825,
+          "max": 0.0008573030934065825
+        },
+        "linear_srgb_rmse": {
+          "mean": 0.02769194321022922,
+          "std": 0.0,
+          "min": 0.02769194321022922,
+          "max": 0.02769194321022922
+        },
+        "spatial_luma_rms": {
+          "mean": 0.021173520705331968,
+          "std": 0.0,
+          "min": 0.021173520705331968,
+          "max": 0.021173520705331968
+        },
+        "relative_band_rms": {
+          "mean": 0.06474409084571647,
+          "std": 0.0,
+          "min": 0.06474409084571647,
+          "max": 0.06474409084571647
+        },
+        "relative_peak_band_contrast": {
+          "mean": 0.017280622604941547,
+          "std": 0.0,
+          "min": 0.017280622604941547,
+          "max": 0.017280622604941547
+        }
+      }
+    },
+    {
+      "level": 0.18,
+      "contrast": 0,
+      "period": null,
+      "condition": "iso12800-prior",
+      "model": "unit",
+      "cases": 1,
+      "metrics": {
+        "dc_bias_abs_rgb": {
+          "mean": 0.0009916663438634676,
+          "std": 0.0,
+          "min": 0.0009916663438634676,
+          "max": 0.0009916663438634676
+        },
+        "linear_srgb_rmse": {
+          "mean": 0.0015992441692415005,
+          "std": 0.0,
+          "min": 0.0015992441692415005,
+          "max": 0.0015992441692415005
+        },
+        "spatial_luma_rms": {
+          "mean": 0.0009967141344987911,
+          "std": 0.0,
+          "min": 0.0009967141344987911,
+          "max": 0.0009967141344987911
+        },
+        "relative_band_rms": {
+          "mean": 0.005422151319368078,
+          "std": 0.0,
+          "min": 0.005422151319368078,
+          "max": 0.005422151319368078
+        },
+        "relative_peak_band_contrast": {
+          "mean": 0.0050736474385674486,
+          "std": 0.0,
+          "min": 0.0050736474385674486,
+          "max": 0.0050736474385674486
+        }
+      }
+    }
+  ],
+  "new_training_updates": 0,
+  "new_checkpoint_or_default": false,
+  "scope": "Fixed V89 weights and actual original CPU-seeded analytic inputs. Exact final-module replay and zero/unit scalar interventions conditional on the same trunk output. Frequency/target enter diagnostics only, never the input-only spectral inference. No gate search, retraining, photo/real/GFX inference, architecture-effect estimate or promotion. Original neural metric replay is bounded, not necessarily bitwise."
+}

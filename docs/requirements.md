@@ -38,6 +38,12 @@ records the preflight separately from the completed quality result above.
 The separate [generated operator-context study](spectral-operator-context.md)
 quantifies a window-dependence risk without changing the spectral experiment
 or establishing actual learned-model artifacts.
+The subsequent [fixed-weight gate diagnosis](spectral-gate-components.md)
+finds the learned gate passes only about1.3/2.0% of available correction on
+the two weak carriers. A unit intervention restores their contrast but changes
+ADC responses beyond the signed-loss limit in16 labelled tests; it is not
+integrated. All15 native cells and9024 independent saved-array metric scalars
+are checked. This conditional analytic result does not establish photo quality.
 
 The [CPU noise-proxy diagnostic](stabilized-noise-proxy.md) checks transformed
 variance and interior demosaicing covariance against generated simulations and

@@ -1,0 +1,874 @@
+{
+  "source_report": {
+    "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/cuda-diagnostic/summary.json",
+    "sha256": "d572c32d77c891849984ca244592412c0426d8d3dadd4cbf11867351eb03a893"
+  },
+  "board_source": {
+    "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/native/board.png",
+    "sha256": "b37954068875ad054dee394935627df594e9ba3884a5e5d9ccf7c5b7c7981c47"
+  },
+  "review": {
+    "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/native/manual-review-before-statistics.json",
+    "sha256": "59f8c2de4012a13f97d2d196e87473da9698473b751cb19ddcd7fcabd278de8b"
+  },
+  "checkpoint": {
+    "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-resource-recovery-v2/work/runs/spectral/last.pt",
+    "sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3",
+    "arm": "spectral",
+    "step": 4000,
+    "kind": "joint-checkpoint",
+    "label": "V89-original4000"
+  },
+  "triplets": [
+    {
+      "metadata": {
+        "image": "crop-79206de77d768b59.png",
+        "caption": "carrier-l0.01-c0.1-p8-draw0 / V89 / full",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "full",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "4783d652a7163d927ec27b3a14c29666aa2303aeb9c4505ba30ed6ff898aa966",
+        "source_id": "carrier-l0.01-c0.1-p8-draw0",
+        "source": {
+          "kind": "carrier",
+          "level": 0.01,
+          "contrast": 0.1,
+          "period": 8,
+          "seed": 20261016
+        },
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470588,
+            -0.0588235294,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            1.1176470588,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            -0.0588235294,
+            1.1176470588
+          ]
+        ],
+        "display_exposure": 1,
+        "checkpoint_sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3",
+        "model_label": "V89/full",
+        "reference": "Exact analytic target. Base and unit are fixed diagnostic interventions, not separately trained methods."
+      },
+      "original": {
+        "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/cuda-diagnostic/crop-79206de77d768b59.png",
+        "sha256": "4783d652a7163d927ec27b3a14c29666aa2303aeb9c4505ba30ed6ff898aa966"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/spectral-gate-components-full-dark8.png",
+        "sha256": "4783d652a7163d927ec27b3a14c29666aa2303aeb9c4505ba30ed6ff898aa966"
+      },
+      "published_relative_image": "../images/spectral-gate-components-full-dark8.png"
+    },
+    {
+      "metadata": {
+        "image": "crop-73ad781577eaf3f9.png",
+        "caption": "carrier-l0.01-c0.1-p8-draw0 / V89 / base",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "base",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "2ab70ad618bfe5133f0a7c2b3dedc6a31b1674fb9ab3dd8b14e497cedcfb1125",
+        "source_id": "carrier-l0.01-c0.1-p8-draw0",
+        "source": {
+          "kind": "carrier",
+          "level": 0.01,
+          "contrast": 0.1,
+          "period": 8,
+          "seed": 20261016
+        },
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470588,
+            -0.0588235294,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            1.1176470588,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            -0.0588235294,
+            1.1176470588
+          ]
+        ],
+        "display_exposure": 1,
+        "checkpoint_sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3",
+        "model_label": "V89/base",
+        "reference": "Exact analytic target. Base and unit are fixed diagnostic interventions, not separately trained methods."
+      },
+      "original": {
+        "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/cuda-diagnostic/crop-73ad781577eaf3f9.png",
+        "sha256": "2ab70ad618bfe5133f0a7c2b3dedc6a31b1674fb9ab3dd8b14e497cedcfb1125"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/spectral-gate-components-base-dark8.png",
+        "sha256": "2ab70ad618bfe5133f0a7c2b3dedc6a31b1674fb9ab3dd8b14e497cedcfb1125"
+      },
+      "published_relative_image": "../images/spectral-gate-components-base-dark8.png"
+    },
+    {
+      "metadata": {
+        "image": "crop-340cd0d8da9b3be2.png",
+        "caption": "carrier-l0.01-c0.1-p8-draw0 / V89 / unit",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "unit",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "4c0f5b400ce93ed66674d036582205e32d01990a9e84c46b34d24067d6b92c8b",
+        "source_id": "carrier-l0.01-c0.1-p8-draw0",
+        "source": {
+          "kind": "carrier",
+          "level": 0.01,
+          "contrast": 0.1,
+          "period": 8,
+          "seed": 20261016
+        },
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470588,
+            -0.0588235294,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            1.1176470588,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            -0.0588235294,
+            1.1176470588
+          ]
+        ],
+        "display_exposure": 1,
+        "checkpoint_sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3",
+        "model_label": "V89/unit",
+        "reference": "Exact analytic target. Base and unit are fixed diagnostic interventions, not separately trained methods."
+      },
+      "original": {
+        "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/cuda-diagnostic/crop-340cd0d8da9b3be2.png",
+        "sha256": "4c0f5b400ce93ed66674d036582205e32d01990a9e84c46b34d24067d6b92c8b"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/spectral-gate-components-unit-dark8.png",
+        "sha256": "4c0f5b400ce93ed66674d036582205e32d01990a9e84c46b34d24067d6b92c8b"
+      },
+      "published_relative_image": "../images/spectral-gate-components-unit-dark8.png"
+    },
+    {
+      "metadata": {
+        "image": "crop-1745d4229d3bccf9.png",
+        "caption": "carrier-l0.18-c0.02-p16-draw0 / V89 / full",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "full",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "a11665409f0df232212add1a06212fd2603dd3c758034848cb5c7b36db9a2bbe",
+        "source_id": "carrier-l0.18-c0.02-p16-draw0",
+        "source": {
+          "kind": "carrier",
+          "level": 0.18,
+          "contrast": 0.02,
+          "period": 16,
+          "seed": 20261016
+        },
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470588,
+            -0.0588235294,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            1.1176470588,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            -0.0588235294,
+            1.1176470588
+          ]
+        ],
+        "display_exposure": 1,
+        "checkpoint_sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3",
+        "model_label": "V89/full",
+        "reference": "Exact analytic target. Base and unit are fixed diagnostic interventions, not separately trained methods."
+      },
+      "original": {
+        "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/cuda-diagnostic/crop-1745d4229d3bccf9.png",
+        "sha256": "a11665409f0df232212add1a06212fd2603dd3c758034848cb5c7b36db9a2bbe"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/spectral-gate-components-full-bright16.png",
+        "sha256": "a11665409f0df232212add1a06212fd2603dd3c758034848cb5c7b36db9a2bbe"
+      },
+      "published_relative_image": "../images/spectral-gate-components-full-bright16.png"
+    },
+    {
+      "metadata": {
+        "image": "crop-327a56e6da9ac3aa.png",
+        "caption": "carrier-l0.18-c0.02-p16-draw0 / V89 / base",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "base",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "1b80bd15ab78cfe7a220e71e3b7327a38585b7431b8b5bb33f831e2f5b20410d",
+        "source_id": "carrier-l0.18-c0.02-p16-draw0",
+        "source": {
+          "kind": "carrier",
+          "level": 0.18,
+          "contrast": 0.02,
+          "period": 16,
+          "seed": 20261016
+        },
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470588,
+            -0.0588235294,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            1.1176470588,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            -0.0588235294,
+            1.1176470588
+          ]
+        ],
+        "display_exposure": 1,
+        "checkpoint_sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3",
+        "model_label": "V89/base",
+        "reference": "Exact analytic target. Base and unit are fixed diagnostic interventions, not separately trained methods."
+      },
+      "original": {
+        "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/cuda-diagnostic/crop-327a56e6da9ac3aa.png",
+        "sha256": "1b80bd15ab78cfe7a220e71e3b7327a38585b7431b8b5bb33f831e2f5b20410d"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/spectral-gate-components-base-bright16.png",
+        "sha256": "1b80bd15ab78cfe7a220e71e3b7327a38585b7431b8b5bb33f831e2f5b20410d"
+      },
+      "published_relative_image": "../images/spectral-gate-components-base-bright16.png"
+    },
+    {
+      "metadata": {
+        "image": "crop-809188f9b766281e.png",
+        "caption": "carrier-l0.18-c0.02-p16-draw0 / V89 / unit",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "unit",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "1b0d4613cb3302e53425cfac8dee16c6901fc174e84fba7de8f1d24d2b98c2d6",
+        "source_id": "carrier-l0.18-c0.02-p16-draw0",
+        "source": {
+          "kind": "carrier",
+          "level": 0.18,
+          "contrast": 0.02,
+          "period": 16,
+          "seed": 20261016
+        },
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470588,
+            -0.0588235294,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            1.1176470588,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            -0.0588235294,
+            1.1176470588
+          ]
+        ],
+        "display_exposure": 1,
+        "checkpoint_sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3",
+        "model_label": "V89/unit",
+        "reference": "Exact analytic target. Base and unit are fixed diagnostic interventions, not separately trained methods."
+      },
+      "original": {
+        "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/cuda-diagnostic/crop-809188f9b766281e.png",
+        "sha256": "1b0d4613cb3302e53425cfac8dee16c6901fc174e84fba7de8f1d24d2b98c2d6"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/spectral-gate-components-unit-bright16.png",
+        "sha256": "1b0d4613cb3302e53425cfac8dee16c6901fc174e84fba7de8f1d24d2b98c2d6"
+      },
+      "published_relative_image": "../images/spectral-gate-components-unit-bright16.png"
+    },
+    {
+      "metadata": {
+        "image": "crop-f3e5f6c8097b836a.png",
+        "caption": "flat-l0.18-draw0 / V89 / full",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "full",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "85abb9e4b48323ae2bac52d68e0b2edb2081c94bb55d76bd5601c349f9f0a1ca",
+        "source_id": "flat-l0.18-draw0",
+        "source": {
+          "kind": "flat",
+          "level": 0.18,
+          "contrast": 0,
+          "period": null,
+          "seed": 20261016
+        },
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470588,
+            -0.0588235294,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            1.1176470588,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            -0.0588235294,
+            1.1176470588
+          ]
+        ],
+        "display_exposure": 1,
+        "checkpoint_sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3",
+        "model_label": "V89/full",
+        "reference": "Exact analytic target. Base and unit are fixed diagnostic interventions, not separately trained methods."
+      },
+      "original": {
+        "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/cuda-diagnostic/crop-f3e5f6c8097b836a.png",
+        "sha256": "85abb9e4b48323ae2bac52d68e0b2edb2081c94bb55d76bd5601c349f9f0a1ca"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/spectral-gate-components-full-flat18.png",
+        "sha256": "85abb9e4b48323ae2bac52d68e0b2edb2081c94bb55d76bd5601c349f9f0a1ca"
+      },
+      "published_relative_image": "../images/spectral-gate-components-full-flat18.png"
+    },
+    {
+      "metadata": {
+        "image": "crop-f153949465028024.png",
+        "caption": "flat-l0.18-draw0 / V89 / base",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "base",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "33f739562052f3042782666927002c156385526cd32c2ec021c3d35679f03aef",
+        "source_id": "flat-l0.18-draw0",
+        "source": {
+          "kind": "flat",
+          "level": 0.18,
+          "contrast": 0,
+          "period": null,
+          "seed": 20261016
+        },
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470588,
+            -0.0588235294,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            1.1176470588,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            -0.0588235294,
+            1.1176470588
+          ]
+        ],
+        "display_exposure": 1,
+        "checkpoint_sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3",
+        "model_label": "V89/base",
+        "reference": "Exact analytic target. Base and unit are fixed diagnostic interventions, not separately trained methods."
+      },
+      "original": {
+        "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/cuda-diagnostic/crop-f153949465028024.png",
+        "sha256": "33f739562052f3042782666927002c156385526cd32c2ec021c3d35679f03aef"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/spectral-gate-components-base-flat18.png",
+        "sha256": "33f739562052f3042782666927002c156385526cd32c2ec021c3d35679f03aef"
+      },
+      "published_relative_image": "../images/spectral-gate-components-base-flat18.png"
+    },
+    {
+      "metadata": {
+        "image": "crop-7d20a355e85a1b8f.png",
+        "caption": "flat-l0.18-draw0 / V89 / unit",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "unit",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "2de6703aeab0c88580dc9a205e8806ee0376cb4feaac6040cb0f2fbdcbdee6d9",
+        "source_id": "flat-l0.18-draw0",
+        "source": {
+          "kind": "flat",
+          "level": 0.18,
+          "contrast": 0,
+          "period": null,
+          "seed": 20261016
+        },
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470588,
+            -0.0588235294,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            1.1176470588,
+            -0.0588235294
+          ],
+          [
+            -0.0588235294,
+            -0.0588235294,
+            1.1176470588
+          ]
+        ],
+        "display_exposure": 1,
+        "checkpoint_sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3",
+        "model_label": "V89/unit",
+        "reference": "Exact analytic target. Base and unit are fixed diagnostic interventions, not separately trained methods."
+      },
+      "original": {
+        "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/cuda-diagnostic/crop-7d20a355e85a1b8f.png",
+        "sha256": "2de6703aeab0c88580dc9a205e8806ee0376cb4feaac6040cb0f2fbdcbdee6d9"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/spectral-gate-components-unit-flat18.png",
+        "sha256": "2de6703aeab0c88580dc9a205e8806ee0376cb4feaac6040cb0f2fbdcbdee6d9"
+      },
+      "published_relative_image": "../images/spectral-gate-components-unit-flat18.png"
+    }
+  ],
+  "published_board": {
+    "path": "/home/dllu/proj/demosaic/docs/images/spectral-gate-components-native-v1.png",
+    "sha256": "b37954068875ad054dee394935627df594e9ba3884a5e5d9ccf7c5b7c7981c47"
+  }
+}

@@ -211,3 +211,8 @@ All final native boards: [photos](images/spectral-original4k-native-full427.png)
 No new full102MP export or timing was run for these ineligible endpoints.
 The README/default stays on V43. SOTA, decisive real-photo superiority and
 100MP/10s remain unmet/unproven; the complete project goal remains active.
+
+A subsequent [fixed-weight component diagnosis](spectral-gate-components.md)
+finds a small learned scalar gate suppresses available carrier correction on
+the analytic fixtures. This is a separate conditional inference study, with
+no retraining, change to this decision or new photographic improvement claim.

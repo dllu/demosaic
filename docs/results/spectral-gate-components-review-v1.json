@@ -1,0 +1,126 @@
+{
+  "status": "completed-spectral-component-mechanism-review-no-model-promotion",
+  "observed_UTC": "2026-10-20T06:05:22.274051+00:00",
+  "plan": {
+    "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/plan.json",
+    "sha256": "37466bea5c57e9fda4c1005a5c25a6cef29ee44ff74bc76ff65d1f41ca9f4df0"
+  },
+  "CPU_preflight": {
+    "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/cpu-preflight/summary.json",
+    "sha256": "f1fa487400b0a7509c1ed975d3ff3fbc06d60bb807c5cf745fd5c094310779c3"
+  },
+  "CUDA_diagnostic": {
+    "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/cuda-diagnostic/summary.json",
+    "sha256": "d572c32d77c891849984ca244592412c0426d8d3dadd4cbf11867351eb03a893"
+  },
+  "independent_array_audit": {
+    "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/independent-array-audit.json",
+    "sha256": "1f4b5c5439c681e593ea66144a54de102039807bf2060a61c210a50905ff2ef8"
+  },
+  "actual_native_view_before_statistics": {
+    "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/native/manual-review-before-statistics.json",
+    "sha256": "59f8c2de4012a13f97d2d196e87473da9698473b751cb19ddcd7fcabd278de8b"
+  },
+  "findings": [
+    {
+      "level": 0.01,
+      "contrast": 0.1,
+      "period": 8,
+      "cases": 16,
+      "gate_mean": 0.012820542207919061,
+      "gate_range": [
+        0.010483825579285622,
+        0.01383091788738966
+      ],
+      "known_carrier_mask_mean": 0.7858481742441654,
+      "known_carrier_mask_range": [
+        0.7544580698013306,
+        0.8091278076171875
+      ],
+      "mode_mean_metrics": {
+        "full": {
+          "in_phase_gain": 0.015140908754471208,
+          "gain_channel_std": 0.004247528609357192,
+          "quadrature_gain": -0.0007507314607600195,
+          "amplitude_ratio": 0.016024378425105082,
+          "dc_bias_abs": 0.0001013940871576183,
+          "noncarrier_rms": 0.00020285272945372843,
+          "linear_srgb_rmse": 0.0007377151642261632
+        },
+        "base": {
+          "in_phase_gain": 0.004573487504660146,
+          "gain_channel_std": 0.004008246417758329,
+          "quadrature_gain": -0.0008976507168198145,
+          "amplitude_ratio": 0.007542375595282517,
+          "dc_bias_abs": 0.00010139408715761806,
+          "noncarrier_rms": 0.00020285266292653946,
+          "linear_srgb_rmse": 0.0007447754698745337
+        },
+        "unit": {
+          "in_phase_gain": 0.8293187032011604,
+          "gain_channel_std": 0.06511764604091914,
+          "quadrature_gain": 0.011419765699619097,
+          "amplitude_ratio": 0.832127221534394,
+          "dc_bias_abs": 0.00010139408717824902,
+          "noncarrier_rms": 0.00020807634893998765,
+          "linear_srgb_rmse": 0.00028638516339476663
+        }
+      }
+    },
+    {
+      "level": 0.18,
+      "contrast": 0.02,
+      "period": 16,
+      "cases": 16,
+      "gate_mean": 0.019860654487274587,
+      "gate_range": [
+        0.01912667043507099,
+        0.02058720588684082
+      ],
+      "known_carrier_mask_mean": 0.8568783476948738,
+      "known_carrier_mask_range": [
+        0.8326172232627869,
+        0.8688191175460815
+      ],
+      "mode_mean_metrics": {
+        "full": {
+          "in_phase_gain": 0.3001761053083529,
+          "gain_channel_std": 0.032333529083375154,
+          "quadrature_gain": -0.0002917984030602679,
+          "amplitude_ratio": 0.30080328385165267,
+          "dc_bias_abs": 0.000687559891659582,
+          "noncarrier_rms": 0.0010079904992044242,
+          "linear_srgb_rmse": 0.002254768118588007
+        },
+        "base": {
+          "in_phase_gain": 0.28779989348581203,
+          "gain_channel_std": 0.03283555220109488,
+          "quadrature_gain": -0.00046689784449279034,
+          "amplitude_ratio": 0.28843005623461415,
+          "dc_bias_abs": 0.0006875598921581999,
+          "noncarrier_rms": 0.001007986360949537,
+          "linear_srgb_rmse": 0.002279816988636751
+        },
+        "unit": {
+          "in_phase_gain": 0.9108965720069879,
+          "gain_channel_std": 0.04407085534812901,
+          "quadrature_gain": 0.00808308350942039,
+          "amplitude_ratio": 0.9152143052497985,
+          "dc_bias_abs": 0.0006875598912800997,
+          "noncarrier_rms": 0.0010127430436356528,
+          "linear_srgb_rmse": 0.001416055299652851
+        }
+      }
+    }
+  ],
+  "high_noise_flat_case_slots_with_empty_mask_and_byte_exact_modes": 32,
+  "case_slots_per_mode": 448,
+  "unique_input_samples": 280,
+  "ADC_gain_loss_below_minus_.05_case_slots": 16,
+  "ADC_gain_loss_distinct_signal_layout_cases": 4,
+  "arrays_bytes": 838775466,
+  "no_new_training_or_checkpoint": true,
+  "model_or_serving_policy_promoted": false,
+  "interpretation": "On these fixed analytic fields, the learned scalar gate is an amplitude bottleneck conditional on V89 own adapted trunk. Unit masking retains recoverable carriers but is not a natural-photo result. Full/base is not the matched V89/V88 training effect. Unconditional unit gating also changes ADC responses beyond the fixed signed-loss diagnostic limit; no generic unit policy is integrated.",
+  "next_action": "Use fixed photographic and cached GFX inputs to diagnose the same zero/unit intervention before choosing a training/serving change. No new quality budget or protected-final evaluation is implied."
+}

@@ -1,0 +1,376 @@
+{
+  "status": "fixed-read-only-spectral-gate-component-plan-before-new-observations",
+  "created_UTC": "2026-10-20T05:51:53.403054+00:00",
+  "root": "/mnt/external/demosaic/experiments/spectral-gate-components-v1",
+  "work": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work",
+  "worker": {
+    "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/scripts/diagnose_spectral_gate_components.py",
+    "sha256": "2605cb00c9473512997310b539921198f621382341048901d11c34bd8ab8f333"
+  },
+  "checkpoint": {
+    "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-resource-recovery-v2/work/runs/spectral/last.pt",
+    "sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3",
+    "arm": "spectral",
+    "step": 4000,
+    "kind": "joint-checkpoint",
+    "label": "V89-original4000"
+  },
+  "protocol": {
+    "path": "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/configs/evaluation.yaml",
+    "sha256": "74b0df74b9734a714e04a0a1cf1e82ed0ba211b1d5b5fd745b9502ca5af2174c"
+  },
+  "original_cases": {
+    "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/outputs/analytic/per-case.jsonl",
+    "sha256": "97267a13b2ba2d4e46992d4199b2aa8ae01c2558f240338c39d606137bf4b4d9"
+  },
+  "original_label": "1:spectral:step-4000",
+  "DINO_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd",
+  "completed_predecessors": [
+    {
+      "status": {
+        "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/status.json",
+        "sha256": "ce9da4670671779acc73b17ca1bb76e5cce49db277b1d0fff6b3f55023828c88"
+      },
+      "owner": {
+        "pid": 622316,
+        "created": 1792466582.56
+      },
+      "terminal": "completed-directional-bank-inference-awaiting-statistical-and-manual-native-closure"
+    },
+    {
+      "status": {
+        "path": "/mnt/external/demosaic/experiments/vst-unused-inverse-CUDA-v2/status.json",
+        "sha256": "bf6458f7934b5bd1483a739517b4b2913db3409479fed334a62e48d0ab4947ad"
+      },
+      "owner": {
+        "pid": 622509,
+        "created": 1792466628.84
+      },
+      "terminal": "completed-isolated-VST-inverse-CUDA-numerical-and-resident-timing-probe"
+    },
+    {
+      "status": {
+        "path": "/mnt/external/demosaic/experiments/physical-feature-work-CUDA-v1/status.json",
+        "sha256": "8c5264251734522f693a42535d07b23d385245a45a4ec73832dff4d6ed67e996"
+      },
+      "owner": {
+        "pid": 636359,
+        "created": 1792467919.07
+      },
+      "terminal": "completed-isolated-anchored-physical-feature-CUDA-parity-and-timing"
+    }
+  ],
+  "gain_replay_atol": 0.0001,
+  "absolute_replay_atol": 1e-07,
+  "timeout_seconds": 900,
+  "planned_observations": 448,
+  "planned_batches": 112,
+  "planned_case_rows": 1792,
+  "fixed_modes": [
+    "full",
+    "base",
+    "unit",
+    "malvar"
+  ],
+  "selection": "Original14 carrier/flat specs, both conditions, all4CFAs/all4draws. Same CPU input generation and original source/helpers. Three fixed selected native cases, display1, ROI[48,48,160,160]; view before interpreting component statistics. Unit is a mathematical diagnostic only, not a trained/new serving model.",
+  "resource_limits": "CUDA allocator16GiB; available RAM24GiB runtime/40GiB CUDA launch; root reserve64GiB, external reserve500GiB; expected arrays<4GiB. No other GPU owner may remain from the completed review/probe chain.",
+  "scope": "Diagnose conditional final-head contributions on fixed V89 weights. No gate sweep, fitted carrier calibration, parameter update, new photo/real/GFX inference, training extension or model promotion. Full original neural metric replay must pass fixed bounds; all MHC metric witnesses exact.",
+  "actual_training_module_count": 46,
+  "HF_HOME": "/home/dllu/proj/demosaic/.cache/huggingface",
+  "inputs": [
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/final-quality-review.json",
+      "sha256": "8aa5d62feb8bd5e073276a0f55d2473f913da993028b70c60641484166a3a3bf"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/manual-native-review-before-statistics.json",
+      "sha256": "2e21bc943afc7d8bbafbd32eca87dd9392f3db27ca780db7342711c1bd038974"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/outputs/analytic/summary.json",
+      "sha256": "b444c3df6460cb2f25abd32d53b984b7c8f7aa7676f2f142c31efc55d966ef3d"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/outputs/analytic/per-case.jsonl",
+      "sha256": "97267a13b2ba2d4e46992d4199b2aa8ae01c2558f240338c39d606137bf4b4d9"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-resource-recovery-v2/work/runs/spectral/last.pt",
+      "sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/diagnose_spectral_gate_components.py",
+      "sha256": "2605cb00c9473512997310b539921198f621382341048901d11c34bd8ab8f333"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/configs/evaluation.yaml",
+      "sha256": "74b0df74b9734a714e04a0a1cf1e82ed0ba211b1d5b5fd745b9502ca5af2174c"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/paired.py",
+      "sha256": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/checkpoint_cache.py",
+      "sha256": "24399e0946d6d07872e6aa01cc4a7e12b4ae0c5c055bac9470a2dea8be2d4622"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/__init__.py",
+      "sha256": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/suite.py",
+      "sha256": "8470afe07484daf3b35d12370e962abec2c5ea6af8fafbd95d55d360f10f5548"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/execution.py",
+      "sha256": "ddabc53dd01ff8792196aed5787c1dc0224940eeeefbde85188e093df50059fd"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/dino_pyramid.py",
+      "sha256": "478c618f1804664a36c68bde43f68bbe8e4424ccb2d2f0bff822ac38873ea4cd"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/metrics.py",
+      "sha256": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/raw_directional.py",
+      "sha256": "4309e5c0952b6957035fb13d3c9149e4f42e18c6c7cd1d305677c2ae02a5df55"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/nonlocal_reference.py",
+      "sha256": "7e4a00e9d90a61b772da9c1a7414bf499f84b9c9bb0239fd250fb8263dfb3f88"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/losses.py",
+      "sha256": "a4cabdb29db0e5eb1d99f25b90c764479fb136a5b615fa95ee1b4ae9cd026721"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/personal_admission.py",
+      "sha256": "9431fa9ccda526e79f07a1ce9a8e4834689e519828395ce40135c2d09a4f777f"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/audit.py",
+      "sha256": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/inference.py",
+      "sha256": "0dfe6d0e8f9fbac820f9cabb41055e0dfd82e0b798148c2395f069b352c25165"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/noise.py",
+      "sha256": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/data.py",
+      "sha256": "560e4426aee8bcdb4630f9f00fc76b45162f5d2672e91aa9624493d8d3f1b137"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/color.py",
+      "sha256": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/prepare.py",
+      "sha256": "0573132bed2b21ba5be6fd0464daca4f506640a5f03b0311abbeec9b23a875f1"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/textures.py",
+      "sha256": "b4bc304a50de272cf7fcba272e67b828c163466ffc23ea3337a6a66f076dc664"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/optimizer_batches.py",
+      "sha256": "7791d33a769d7a3598e19c3838e4aa191a278c345dd4944264fbf5b0950e4d58"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/paired_training.py",
+      "sha256": "f4d949c3c2b0ad3edca52e47f781ca5c581484e786b8d7fe2e907088f85691b7"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/reporting.py",
+      "sha256": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/packed_isotropic.py",
+      "sha256": "c88568c931e3da224d0f27bd74cca4f23da25cea1e543d488b3defcfb9485dba"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/cli.py",
+      "sha256": "597ff352e5dfcb3e63375c02cee59949a056a77d51abe4116b4b95e0bfcd7805"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/raw_kernel.py",
+      "sha256": "32ba3747479f0e328fe87a84fb227dd456ae0d08b242a4d1411756dfbf9fb498"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/io.py",
+      "sha256": "2094984091e5e12d10fde9061c49aec6809da8a99fcba131f53255deca39807e"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/gaussian.py",
+      "sha256": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/__main__.py",
+      "sha256": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/training_context.py",
+      "sha256": "1322c59d3c7b931bdb9db50faadfa28516dcefd999b3902beef9e399be475b77"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/dino_adaptation.py",
+      "sha256": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/paired_admission.py",
+      "sha256": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/raw_admission.py",
+      "sha256": "06fe28c7a12559ce964f28571ecbbed282ac53ee4ecea1998945358dc7d5737b"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/model.py",
+      "sha256": "21c97c7cf970bfd3f6338fa7a37bf1057d07900b19a78c566d16baf421c17046"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/cfa.py",
+      "sha256": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/prior.py",
+      "sha256": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/safety.py",
+      "sha256": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/calibration.py",
+      "sha256": "e86f4c602a6cd7fd855d0bcfeb790cf17ed87611f19d97926f9db174909b2d26"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/precision.py",
+      "sha256": "f83635ef4834f0a5ad3c57824c50e8e0aaf5f95af34e8f802f04b131579594f4"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/raw_spectral.py",
+      "sha256": "84b723d4a2f8e2a644fde7c3083ba9fa925dcf40b386f392e9f0f419628bfee0"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/train.py",
+      "sha256": "daacc63b17c8a90d918427fa95febf679918646a6f77262460915c01c020acc4"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/registration.py",
+      "sha256": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/pretrained_rgb.py",
+      "sha256": "9018feb07b37c7f1431e9c23af85a049f83dee9ed70747b8681a4cb3e0f7035a"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/reference.py",
+      "sha256": "54ed094d58e245a56993ea3ce3ef9e21d2164e902d41d03bba9132bacd22891f"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/real_suite.py",
+      "sha256": "69d3d403d36b1230e35083cc55e2c1a485f82cd5058f6be83fb3d5c0c18a6825"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/vst.py",
+      "sha256": "355124a374177f1c08271834149c5979ab3477fdf255c60aa7cee0d47792a76b"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/raw_clean.py",
+      "sha256": "af8b1df13989d08285bffcf6d2bf358453e6e9c2514a48f4a2e2a1087b7499b6"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/realdata.py",
+      "sha256": "ed24db2b066531281a196e6fa074130cb0ee78a640eae5ccaaace234f5ad5421"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/scripts/diagnose_texture_response.py",
+      "sha256": "69497daa64825fb3ededc824b2bee3b9c574b74ffa8ab74ab934442d080c3b79"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/scripts/evaluate_texture_candidates.py",
+      "sha256": "450ad63dab126f2d78c4dddbc4a8327aecfeabb68f8cf73b6888e1c3cff58e85"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/scripts/profile_raw_kernel_inference.py",
+      "sha256": "731a415340d80b1e4868ee9a4e6671a205baa2ccbf5b5bc504fa35b0b05936f3"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/scripts/train_directional_bank_trial.py",
+      "sha256": "c7ebc349434cf9f63746675640bcd7a6bef5d5dead547a7f005487750481df0e"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/status.json",
+      "sha256": "ce9da4670671779acc73b17ca1bb76e5cce49db277b1d0fff6b3f55023828c88"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/vst-unused-inverse-CUDA-v2/status.json",
+      "sha256": "bf6458f7934b5bd1483a739517b4b2913db3409479fed334a62e48d0ab4947ad"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/physical-feature-work-CUDA-v1/status.json",
+      "sha256": "8c5264251734522f693a42535d07b23d385245a45a4ec73832dff4d6ed67e996"
+    }
+  ],
+  "frozen_files": {
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/configs/evaluation.yaml": "74b0df74b9734a714e04a0a1cf1e82ed0ba211b1d5b5fd745b9502ca5af2174c",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/scripts/diagnose_spectral_gate_components.py": "2605cb00c9473512997310b539921198f621382341048901d11c34bd8ab8f333",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/scripts/profile_raw_kernel_inference.py": "731a415340d80b1e4868ee9a4e6671a205baa2ccbf5b5bc504fa35b0b05936f3",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/scripts/train_directional_bank_trial.py": "c7ebc349434cf9f63746675640bcd7a6bef5d5dead547a7f005487750481df0e",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/scripts/diagnose_texture_response.py": "69497daa64825fb3ededc824b2bee3b9c574b74ffa8ab74ab934442d080c3b79",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/scripts/evaluate_texture_candidates.py": "450ad63dab126f2d78c4dddbc4a8327aecfeabb68f8cf73b6888e1c3cff58e85",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/paired.py": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/checkpoint_cache.py": "24399e0946d6d07872e6aa01cc4a7e12b4ae0c5c055bac9470a2dea8be2d4622",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/__init__.py": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/suite.py": "8470afe07484daf3b35d12370e962abec2c5ea6af8fafbd95d55d360f10f5548",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/execution.py": "ddabc53dd01ff8792196aed5787c1dc0224940eeeefbde85188e093df50059fd",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/dino_pyramid.py": "478c618f1804664a36c68bde43f68bbe8e4424ccb2d2f0bff822ac38873ea4cd",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/metrics.py": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/raw_directional.py": "4309e5c0952b6957035fb13d3c9149e4f42e18c6c7cd1d305677c2ae02a5df55",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/nonlocal_reference.py": "7e4a00e9d90a61b772da9c1a7414bf499f84b9c9bb0239fd250fb8263dfb3f88",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/losses.py": "a4cabdb29db0e5eb1d99f25b90c764479fb136a5b615fa95ee1b4ae9cd026721",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/personal_admission.py": "9431fa9ccda526e79f07a1ce9a8e4834689e519828395ce40135c2d09a4f777f",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/audit.py": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/inference.py": "0dfe6d0e8f9fbac820f9cabb41055e0dfd82e0b798148c2395f069b352c25165",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/noise.py": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/data.py": "560e4426aee8bcdb4630f9f00fc76b45162f5d2672e91aa9624493d8d3f1b137",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/color.py": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/prepare.py": "0573132bed2b21ba5be6fd0464daca4f506640a5f03b0311abbeec9b23a875f1",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/textures.py": "b4bc304a50de272cf7fcba272e67b828c163466ffc23ea3337a6a66f076dc664",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/optimizer_batches.py": "7791d33a769d7a3598e19c3838e4aa191a278c345dd4944264fbf5b0950e4d58",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/paired_training.py": "f4d949c3c2b0ad3edca52e47f781ca5c581484e786b8d7fe2e907088f85691b7",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/reporting.py": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/packed_isotropic.py": "c88568c931e3da224d0f27bd74cca4f23da25cea1e543d488b3defcfb9485dba",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/cli.py": "597ff352e5dfcb3e63375c02cee59949a056a77d51abe4116b4b95e0bfcd7805",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/raw_kernel.py": "32ba3747479f0e328fe87a84fb227dd456ae0d08b242a4d1411756dfbf9fb498",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/io.py": "2094984091e5e12d10fde9061c49aec6809da8a99fcba131f53255deca39807e",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/gaussian.py": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/training_context.py": "1322c59d3c7b931bdb9db50faadfa28516dcefd999b3902beef9e399be475b77",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/dino_adaptation.py": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/paired_admission.py": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/raw_admission.py": "06fe28c7a12559ce964f28571ecbbed282ac53ee4ecea1998945358dc7d5737b",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/model.py": "21c97c7cf970bfd3f6338fa7a37bf1057d07900b19a78c566d16baf421c17046",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/cfa.py": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/prior.py": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/safety.py": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/calibration.py": "e86f4c602a6cd7fd855d0bcfeb790cf17ed87611f19d97926f9db174909b2d26",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/precision.py": "f83635ef4834f0a5ad3c57824c50e8e0aaf5f95af34e8f802f04b131579594f4",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/raw_spectral.py": "84b723d4a2f8e2a644fde7c3083ba9fa925dcf40b386f392e9f0f419628bfee0",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/train.py": "daacc63b17c8a90d918427fa95febf679918646a6f77262460915c01c020acc4",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/registration.py": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/pretrained_rgb.py": "9018feb07b37c7f1431e9c23af85a049f83dee9ed70747b8681a4cb3e0f7035a",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/reference.py": "54ed094d58e245a56993ea3ce3ef9e21d2164e902d41d03bba9132bacd22891f",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/real_suite.py": "69d3d403d36b1230e35083cc55e2c1a485f82cd5058f6be83fb3d5c0c18a6825",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/vst.py": "355124a374177f1c08271834149c5979ab3477fdf255c60aa7cee0d47792a76b",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/raw_clean.py": "af8b1df13989d08285bffcf6d2bf358453e6e9c2514a48f4a2e2a1087b7499b6",
+    "/mnt/external/demosaic/experiments/spectral-gate-components-v1/work/src/demosaic/realdata.py": "ed24db2b066531281a196e6fa074130cb0ee78a640eae5ccaaace234f5ad5421"
+  }
+}
