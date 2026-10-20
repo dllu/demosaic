@@ -39,13 +39,13 @@ Use a new training manifest; preserve originals, historical manifests, protected
 series and the GFX scene/siblings. This is targeted review, not a claim that
 every corpus photo was manually viewed.
 
-The [current 163-source visual review](results/source-quality-visual-review-v5.json)
-withholds ten sources: a historic map scan, a photomontage, five graphic-only
-compositions, a predominantly
+The [current 189-source visual review](results/source-quality-visual-review-v6.json)
+withholds thirteen sources: a historic map scan, a photomontage, eight graphic-only
+or flat document compositions, a predominantly
 defocused station scene, and two images with visible noise/edge artifacts
-whose clean-target quality is uncertain. The other 153 remain, including fine
+whose clean-target quality is uncertain. The other 176 remain, including fine
 foliage, wheat, fur, coral, architectural grids and hazy/low-contrast landscapes.
-Thirty contact sheets and six larger native 1024 crops were actually inspected.
+Thirty-five contact sheets and seven larger native 1024 crops were actually inspected.
 The full ranking is still running; this is an initial review, not the final
 curated manifest or a trained-model result.
 
@@ -149,6 +149,18 @@ CPU/native176/B1, two-condition/two-CFA check supplies no quality gain, producti
 CUDA or full-panel qualification. Earlier probe output-path/metadata-format
 failures and their outputs are preserved in the receipt. Full evaluation still
 uses all 427 photos, seven conditions, four CFAs and native256.
+
+The [CPU validation/checkpoint-boundary proof](results/v43-quality-validation-CPU-proof-v1.json)
+adds 24 genuine V43 training and 120 validation forwards, with 144 DINO calls.
+It uses the unchanged planned 20k schedule, stops at 24 and tests diagnostic
+validation at 12/24 on two sources across all seven conditions/four CFAs.
+All 71 model tensors, 71 EMA tensors, 69 Adam states, RNG states and 24 actual
+input/metric records match the no-validation CPU witness exactly (elapsed time
+is excluded). Retained 12/24 checkpoints have the right optimizer counters;
+the repeated final boundary save is byte-identical. The launcher now accepts
+that identical repeat while rejecting changed bytes at an existing boundary.
+This is discarded CPU/native32/B1 engineering on provisional membership. It
+does not change the production validation cadence or establish model quality.
 
 ## Quality review
 

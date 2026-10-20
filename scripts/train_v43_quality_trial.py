@@ -38,9 +38,10 @@ def resources(root, available=24):
     )
 
 
-def prepare(curation_path, root, *, cpu_only=False):
+def prepare(curation_path, root, *, cpu_only=False, validation_proof=False):
     import yaml
 
+    assert not validation_proof or cpu_only
     curation = read(curation_path)
     assert curation["status"] == (
         "provisional-membership-for-CPU-launcher-proof"
@@ -123,6 +124,11 @@ def prepare(curation_path, root, *, cpu_only=False):
                 )
             elif phase == "CUDA":
                 actual["log_every"] = 1
+            if validation_proof:
+                actual.update(checkpoint_every=12, validation_images=2)
+                actual["experiment_notes"] = (
+                    "Discarded CPU validation/checkpoint-boundary proof on provisional data; planned20k schedule, stop24, validation12/24. Not production training or quality evidence."
+                )
             path = work / "configs" / f"{phase}-{arm}.yaml"
             path.parent.mkdir(exist_ok=True)
             path.write_text(yaml.safe_dump(actual, sort_keys=False))
@@ -169,8 +175,9 @@ def prepare(curation_path, root, *, cpu_only=False):
         "planned_updates": 20000,
         "phases": ["CPU"] if cpu_only else ["CPU", "CUDA", "train"],
         "engineering_only": cpu_only,
-        "arms": list(RECIPES),
-        "retain_steps": [4000, 8000, 12000, 16000],
+        "arms": ["V95"] if validation_proof else list(RECIPES),
+        "validation_preflight": validation_proof,
+        "retain_steps": [12, 24] if validation_proof else [4000, 8000, 12000, 16000],
         "timeouts_seconds": {"CPU": 900, "CUDA": 1800, "train": 172800},
         "wait_seconds": 7200,
         "stable_seconds": 2 if cpu_only else 60,
@@ -179,6 +186,10 @@ def prepare(curation_path, root, *, cpu_only=False):
     if cpu_only:
         plan["scope"] = (
             "Discarded CPU-only/B1/native32 launcher proof on explicitly provisional memberships, 24 updates per arm from original V43. Checks actual initialization, all-domain training, shared observation hashes, finite states, source archives and controller sequencing; never launches CUDA/production or qualifies final corpus curation."
+        )
+    if validation_proof:
+        plan["scope"] = (
+            "Discarded genuine V43 CPU/B1/native32 validation/EMA/checkpoint-boundary proof on provisional memberships.24 updates on original20k schedule, validation at12/24, all7 conditions/4CFAs on2 validation sources. One V95 engineering arm only; compare final model/EMA/Adam/RNG and all24 inputs to the no-validation CPU witness. Not final curation, CUDA, model quality or timing evidence."
         )
     save(root / "plan.json", plan)
     guard(plan)
@@ -272,10 +283,17 @@ def worker(plan_path, phase, arm):
 
     def retained(path, model, optimizer, ema, step, cfg, best):
         writer(path, model, optimizer, ema, step, cfg, best)
-        if phase == "train" and Path(path).name == "last.pt" and step in plan["retain_steps"]:
+        if (
+            (phase == "train" or plan.get("validation_preflight", False))
+            and Path(path).name == "last.pt"
+            and step in plan["retain_steps"]
+        ):
             destination = Path(path).with_name(f"step-{step:06d}.pt")
-            assert not destination.exists()
-            shutil.copyfile(path, destination)
+            if destination.exists():
+                # stop_after may save the same boundary again after validation.
+                assert ref(path)["sha256"] == ref(destination)["sha256"]
+            else:
+                shutil.copyfile(path, destination)
 
     def optimizer(model, options):
         result = optimizer_factory(model, options)
@@ -323,7 +341,13 @@ def worker(plan_path, phase, arm):
     assert {r["domain"] for r in rows} == {"synthetic", "native-RAW-synthetic", "paired-RAW"}
     assert all(math.isfinite(r["loss"]) and math.isfinite(r["grad_norm"]) for r in rows)
     if phase != "train":
-        assert counts["validation_forwards"] == 0 and len(rows) == updates
+        assert len(rows) == updates
+        if plan.get("validation_preflight", False):
+            assert counts["validation_forwards"] == 120
+            assert [r["step"] for r in metrics if r["event"] == "validation"] == [12, 24]
+            assert all((checkpoint.parent / f"step-{n:06d}.pt").exists() for n in (12, 24))
+        else:
+            assert counts["validation_forwards"] == 0
     else:
         assert [r["step"] for r in rows] == [1, *range(25, updates + 1, 25)]
         assert [r["step"] for r in metrics if r["event"] == "validation"] == [
@@ -488,6 +512,9 @@ def controller(plan_path):
                 assert result["engineering_only"] is (phase != "train")
                 state["completed"][f"{phase}-{arm}"] = ref(path)
                 record("completed-V43-quality-stage", phase=phase, arm=arm)
+            if plan.get("validation_preflight", False):
+                record("completed-discarded-CPU-validation-checkpoint-boundary-proof")
+                continue
             results = {
                 arm: read(state["completed"][f"{phase}-{arm}"]["path"]) for arm in plan["arms"]
             }
@@ -543,12 +570,22 @@ if __name__ == "__main__":
         action="store_true",
         help="Discarded launcher proof on explicitly provisional memberships; never launches CUDA or production training.",
     )
+    parser.add_argument(
+        "--validation-proof",
+        action="store_true",
+        help="CPU-only V95 checkpoint/validation boundary proof; keeps production schedules unchanged.",
+    )
     parser.add_argument("--phase", choices=("CPU", "CUDA", "train"))
     parser.add_argument("--arm", choices=tuple(RECIPES))
     args = parser.parse_args()
     if args.mode == "prepare":
         assert args.output
-        prepare(args.path.resolve(), args.output, cpu_only=args.cpu_only)
+        prepare(
+            args.path.resolve(),
+            args.output,
+            cpu_only=args.cpu_only,
+            validation_proof=args.validation_proof,
+        )
     elif args.mode == "worker":
         assert args.phase and args.arm
         worker(args.path.resolve(), args.phase, args.arm)
