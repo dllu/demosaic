@@ -85,3 +85,14 @@ CPU evidence is under `.cache/benchmarks/mature-mixed-precision-CPU-v1/`.
 V92 has completed original4000 and retains review priority. This finite
 screen cannot authorize a default/export change or full-frame continuation.
 SOTA, decisive real-photo superiority and actual100MP/10s remain unmet/unproven.
+
+The separate [native/scalar postprocessing](mature-mixed-precision-postprocessing.md)
+now passes genuine historical CPU checks:24 original triplet PNGs byte-exact,
+36 native board cells,29 independent physical-input fingerprints,576 saved
+analytic rows replayed exactly and640 Torch cross-checks within1.29e-14.
+Its new scalar reviewer requires actual new-policy native viewing first and
+retains per-observation failures alongside group means. This work does not
+modify the live GPU plan or supply a new FP16 quality/speed result.
+[Complete tool-preflight evidence](results/mature-mixed-precision-postprocessing-v1.json)
+binds the61-file prospective postprocessing bundle and11 passing numerical
+tests, and records the successful frozen-workspace correction.
