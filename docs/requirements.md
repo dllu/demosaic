@@ -28,10 +28,15 @@ Its [resource recovery](spectral-resource-recovery.md) preserves that state and
 deducts consumed time while using a64GiB operational root reserve. The validated
 [full final review and native packaging](spectral-review-preparation.md) are
 queued after successful original4000 exits; quality remains unproven.
-The [completion-log audit](spectral-log-completion.md) now verifies the completed
-original4k control and the fresh spectral1k state/RNG trajectory. An extra real
-first-resume log is preserved without restarting or extending the control.
-The fresh spectral arm and full native/numerical review remain in progress.
+The [completed original4k budgets](spectral-original4k-training-handoff.md) now
+pass the independent production boundary: all176 recorded observations,161
+shared scheduled logs, final RNG and source archives match. An extra real
+first-resume control log is preserved without additional control updates.
+Known/unseen stages are complete and the first18 native triplets are viewed;
+full427 and the remaining native/numerical review remain in progress.
+The separate [generated operator-context study](spectral-operator-context.md)
+quantifies a window-dependence risk without changing the spectral experiment
+or establishing actual learned-model artifacts.
 
 The [CPU noise-proxy diagnostic](stabilized-noise-proxy.md) checks transformed
 variance and interior demosaicing covariance against generated simulations and

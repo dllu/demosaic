@@ -1,0 +1,171 @@
+{
+  "status": "independently-verified-spectral-original4000-boundaries",
+  "engineering_preflight": false,
+  "training_geometry": {
+    "device": "cuda",
+    "native_size": 256
+  },
+  "training_status": {
+    "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-log-completion-v1/status.json",
+    "sha256": "c71019d6af4bf6e8648a4158a1fcd36af23ddddce73213fe7186b88a54fa84c4"
+  },
+  "checkpoints": [
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-resource-recovery-v2/work/runs/control/last.pt",
+      "sha256": "d17891aa95cadfffe02dc497a96a9de3481f6044a3c270762bc014cbca0c16e4",
+      "arm": "control",
+      "step": 4000,
+      "kind": "joint-checkpoint",
+      "label": "V88-original4000"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-resource-recovery-v2/work/runs/spectral/last.pt",
+      "sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3",
+      "arm": "spectral",
+      "step": 4000,
+      "kind": "joint-checkpoint",
+      "label": "V89-original4000"
+    }
+  ],
+  "evidence": [
+    {
+      "result": {
+        "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-log-completion-v1/control-result.json",
+        "sha256": "ca18b3614acd153e74ccbc08e096a3f6c38b19ba6b7ef93d323b1b6c5ba51b71"
+      },
+      "initializations": {
+        "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-resource-recovery-v2/control-initializations.json",
+        "sha256": "42ed81a5c3aab4cd4b241981e9ce2d42bde88febde561f317d86df12bbf2ceb5"
+      },
+      "captures": [
+        {
+          "common_initial_state_exact": true,
+          "DINO_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd",
+          "initial_output_exact_parent": false,
+          "resuming": true
+        }
+      ],
+      "retained": {
+        "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-resource-recovery-v2/work/runs/control/step-004000.pt",
+        "sha256": "d17891aa95cadfffe02dc497a96a9de3481f6044a3c270762bc014cbca0c16e4"
+      },
+      "finite_states": [
+        91,
+        91,
+        89
+      ],
+      "unchanged_from_parent_EMA": {
+        "model": [
+          "context.mean",
+          "context.std"
+        ],
+        "ema": [
+          "context.mean",
+          "context.std"
+        ]
+      },
+      "actual_training_package_files_exact": 46,
+      "recovery": {
+        "handoff": {
+          "path": "/mnt/external/demosaic/experiments/spectral-retention-handoff-v1/status.json",
+          "sha256": "f4b580f19ba74efba7361035a7c04d3df71061da93aa927c11525313b0ca2fb9"
+        },
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/experiments/spectral-retention-handoff-v1/control-step001000.pt",
+          "sha256": "2388c26b26767f0dd60c466b385bdaa93c7ca52543e1639310540898c184ab9c"
+        },
+        "preserved_observations": 56,
+        "remaining_updates_at_handoff": 3000,
+        "resource_recovery": {
+          "prior_failure": {
+            "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-retention-recovery-v1/status.json",
+            "sha256": "ebd550d76e0d64dc5baffe068f8dec854b5b9b9274fa5d96cf8325b6cd71d777"
+          },
+          "replayed_recorded_observations": 30,
+          "replayed_training_metric_rows": 31,
+          "all_recorded_input_loss_gradient_values_exact": true
+        },
+        "scope": "Exact saved-model initialization at resumed forward; original startup assertions precede the preserved first update. No new direct measurement of the interrupted process's unsaved initial tensors is claimed."
+      },
+      "retained1000": {
+        "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-resource-recovery-v2/work/runs/control/step-001000.pt",
+        "sha256": "2388c26b26767f0dd60c466b385bdaa93c7ca52543e1639310540898c184ab9c"
+      },
+      "additional_first_resume_logs": [
+        {
+          "event": "train",
+          "step": 1001,
+          "loss": 0.013241291046142578,
+          "lr": 8.865893511198153e-06,
+          "grad_norm": 0.40973782539367676,
+          "seconds_per_step": 8.929693039972335,
+          "cuda_gb": 6.8482176,
+          "domain": "synthetic",
+          "linear": 0.0041278996504843235,
+          "rendered": 0.010521861724555492,
+          "gradient": 0.0069062355905771255,
+          "highlight": 0.02790045365691185,
+          "sensor": 0.0037179177161306143,
+          "batch_sha256": "377b1717b9f7287310c2f27b763d19f14380592cf173f07848f7c518b96068e1",
+          "context_source_size": 256,
+          "context_forward_size": 256,
+          "context_loss_size": 256,
+          "context_forward_sha256": "377b1717b9f7287310c2f27b763d19f14380592cf173f07848f7c518b96068e1",
+          "context_supervision_sha256": "377b1717b9f7287310c2f27b763d19f14380592cf173f07848f7c518b96068e1"
+        }
+      ]
+    },
+    {
+      "result": {
+        "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-log-completion-v1/spectral-result.json",
+        "sha256": "40f173c950cf9568122580a589cdaf3ad65bcbddbbddab6bb19051e06a312f9e"
+      },
+      "initializations": {
+        "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-log-completion-v1/spectral-initializations.json",
+        "sha256": "479b328cfde1e90a10d95f0da235782c4333bb346497d4a4140dbd0483c519af"
+      },
+      "captures": [
+        {
+          "common_initial_state_exact": true,
+          "DINO_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd",
+          "initial_output_exact_parent": true,
+          "resuming": false
+        }
+      ],
+      "retained": {
+        "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-resource-recovery-v2/work/runs/spectral/step-004000.pt",
+        "sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3"
+      },
+      "finite_states": [
+        93,
+        93,
+        91
+      ],
+      "unchanged_from_parent_EMA": {
+        "model": [
+          "context.mean",
+          "context.std"
+        ],
+        "ema": [
+          "context.mean",
+          "context.std"
+        ]
+      },
+      "actual_training_package_files_exact": 46,
+      "recovery": null,
+      "retained1000": {
+        "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-resource-recovery-v2/work/runs/spectral/step-001000.pt",
+        "sha256": "2fecc66dbb031102d57db6aa9bfe03c9cac7963defe96f5c6a4e66fe1d682a3e"
+      },
+      "additional_first_resume_logs": []
+    }
+  ],
+  "paired_observation_audit": {
+    "recorded_pairs": 176,
+    "all_actual_source_forward_loss_pairs_exact": true
+  },
+  "logged_source_domain_LR_pairs": 161,
+  "final_Python_CPU_CUDA_RNG_exact": true,
+  "archived_source_and_data_exact": true,
+  "scope": "Full-state/fixed-horizon/source/RNG audit only. No quality evidence, automatic promotion or extension."
+}

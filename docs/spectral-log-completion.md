@@ -75,3 +75,10 @@ CUDA RNG states match the control at1,000; all41 scheduled metric domains, LRs
 and source/supervision hashes match. This verifies trajectory integrity and an
 active learned head, not restoration quality or endpoint eligibility.
 [Retained1k audit](results/spectral-first1000-integrity-v1.json).
+
+At04:36UTC both original4k endpoints completed and all176 paired observations,
+161 shared scheduled logs, final RNG and source archives matched. Both exact
+training owners exited. The [independent production boundary](results/spectral-original4000-training-boundary-v1.json)
+passed and the full quality review started. See the
+[completed-training handoff and first native GT views](spectral-original4k-training-handoff.md).
+This closes the training bookkeeping; full quality/native decisions remain open.
