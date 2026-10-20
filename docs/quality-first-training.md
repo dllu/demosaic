@@ -39,13 +39,13 @@ Use a new training manifest; preserve originals, historical manifests, protected
 series and the GFX scene/siblings. This is targeted review, not a claim that
 every corpus photo was manually viewed.
 
-The [current 245-source visual review](results/source-quality-visual-review-v10.json)
-withholds eighteen sources: a historic map scan, a photomontage, eight graphic-only
+The [current 269-source visual review](results/source-quality-visual-review-v11.json)
+withholds twenty sources: a historic map scan, a photomontage, eight graphic-only
 or flat document compositions, a predominantly
-defocused station scene, and seven images with visibly unreliable clean-target
-texture/noise/edge quality. The other 227 remain, including fine
+defocused station scene, and nine images with visibly unreliable clean-target
+texture/noise/edge quality. The other 249 remain, including fine
 foliage, wheat, fur, coral, architectural grids and hazy/low-contrast landscapes.
-Forty-six contact sheets and thirteen larger native 1024 crops were actually inspected.
+Fifty contact sheets and twenty larger native 1024 crops were actually inspected.
 The full ranking is still running; this is an initial review, not the final
 curated manifest or a trained-model result.
 
@@ -83,6 +83,15 @@ Twelve remain, including other high-ISO wildlife, water drops, portraits,
 architecture and fine lettering. ISO and software tags remain review cues only.
 EXIF warnings are preserved; metadata does not prove capture provenance or
 clean-target quality. This targeted sample is not a corpus defect-rate estimate.
+
+A posthoc followup inspects the next 24 highest recorded-ISO sources not already
+reviewed, using four more sheets and seven larger native crops. Two have strong
+outlined/flattened feather texture that remains visibly altered after binning;
+withhold them. The other 22 remain, including wildlife, action portraits, water
+drops, architecture and HDR-labeled interiors. Across both ISO-targeted rounds,
+40 sources were actually viewed and six withheld. These are selected extremes,
+not a random sample. Native grain or edge emphasis alone is insufficient when
+the binned target retains useful coherent detail.
 
 The final membership freeze requires visual decisions for the top 32 sources
 under each noise condition and the top 16 under each IQA proxy, plus all
