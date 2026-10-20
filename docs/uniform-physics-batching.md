@@ -86,3 +86,47 @@ then compare unchanged-weight predictions at actual serving dimensions and
 measure both policies with the same precision and inputs. The existing
 1DN16 maximum/.25DN16 RMS full-output gate should remain unchanged. No production
 integration follows from this CPU result alone.
+
+## Deferred GPU validation
+
+The actual frozen worker now passes its
+[CPU switching preflight](results/uniform-physics-worker-CPU-v1.json): eight
+unchanged V43/V63 comparisons,307,200 RGB values, repeated candidate predictions
+and restored-original predictions all match bytes. These are native80×64
+subcontexts in channels-last format, including both saved photos and the GFX/
+all-CFA analytic inputs. Model/DINO state, parameter identities and RNG remain
+unchanged. This extends the earlier contiguous V63 full-model check; it does
+not substitute for actual CUDA or native512 validation.
+
+The [queued GPU plan and verified waiting-owner receipt](results/uniform-physics-CUDA-queue-v1.json)
+bind67 source/checkpoint/input files, including all47 model modules. The actual
+CUDA entry point was called while all six predecessor owners were verified
+live; it rejected before CUDA initialization or output creation. Fourteen
+focused tests pass for the original numerical limits, unclipped comparisons,
+owner/plan identities, failed and incomplete dependencies, lingering children
+and separate system/external disk floors. No production source changed.
+
+The controller is queued under
+`/mnt/external/demosaic/experiments/uniform-physics-CUDA-v1/`. At the recorded
+verification it was live, child-free,18.1MiB RSS, without Torch/CUDA libraries
+mapped, and no GPU output/log existed. This is a historical liveness snapshot;
+read the actual `status.json` and verify PID/creation time before acting.
+
+It waits for successful exact exits of the original4000 training, all ten
+quality stages, CPU closure, retained references and native report packaging.
+The fixed review may still require actual human/agent viewing at that point.
+After48GiB available RAM remains stable for60 seconds, the probe can launch
+once with a16GiB CUDA allocator cap,24GiB runtime RAM floor,64GiB system disk
+reserve and500GiB external reserve. Dependency/resource/worker bounds are
+24hours/1hour/20minutes; failure does not trigger a retry or model change.
+
+The future GPU checks cover both mature checkpoints, both full native256 photo
+inputs, all four unchanged native512 GFX regions and the low/high-signal
+native512 all-CFA input: eight complete output pairs. The existing1 maximum/
+.25 RMS DN16 limits apply before clipping, rendering or quantization. All
+eight must pass before three warmups and four resident timings per policy,
+in ABBA/BAAB order, for each model. IEEE FP32, cuDNN autotuning, channels-last
+and the exact input noise conditioning stay fixed. Timings exclude search,
+loading, transfers, tiling, blending, decoding and export. Independent saved-array
+and native-crop review remain pending; no GPU speed or integration result is
+claimed by this queue.
