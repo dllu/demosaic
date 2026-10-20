@@ -1,0 +1,74 @@
+{
+  "status": "completed-generated-CPU-spectral-operator-context-diagnostic",
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/scripts/probe_spectral_tile_context.py",
+    "sha256": "fecefb8520932d11bceb5eebb8cd3ff74138c1f78a577acc6ce2cb5cef3e3531"
+  },
+  "sources": [
+    {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/raw_spectral.py",
+      "sha256": "84b723d4a2f8e2a644fde7c3083ba9fa925dcf40b386f392e9f0f419628bfee0"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/cfa.py",
+      "sha256": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/noise.py",
+      "sha256": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/prior.py",
+      "sha256": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a"
+    }
+  ],
+  "full_native_size": 768,
+  "common_native_xywh": [
+    304,
+    304,
+    160,
+    160
+  ],
+  "context_sizes": [
+    256,
+    512
+  ],
+  "context_offsets": [
+    -32,
+    0,
+    32
+  ],
+  "minimum_native_border_margin": 16,
+  "unit_gate": 1.0,
+  "fixed_base": "Global observation-only MHC followed by17px box mean; same base pixels in every context",
+  "WB": [
+    2.0,
+    1.0,
+    1.5
+  ],
+  "ADC_black_level": 0.03,
+  "CFA_patterns": [
+    "RGGB",
+    "BGGR",
+    "GRBG",
+    "GBRG"
+  ],
+  "cases": 32,
+  "context_rows": 576,
+  "per_context": {
+    "path": "/mnt/external/demosaic/experiments/spectral-operator-context-CPU-v1/per-context.json",
+    "sha256": "b1204b3a0a7ee246af426c8b749d0761e39266cce10cdc299df7bb8479506860"
+  },
+  "per_case": {
+    "path": "/mnt/external/demosaic/experiments/spectral-operator-context-CPU-v1/per-case.json",
+    "sha256": "98c05ef74e23a8f8d743d6040372f6a60ab8d314e7f9727085489392488f15af"
+  },
+  "example_corrections": {
+    "path": "/mnt/external/demosaic/experiments/spectral-operator-context-CPU-v1/example-corrections.npz",
+    "sha256": "0df9c404e1645346adcd3295499ba078cff5c079bc74751d05d6d24f57d417bf"
+  },
+  "all_source_core_and_repeat_checks_passed": true,
+  "Torch_CPU_RNG_unchanged": true,
+  "CUDA_initialized": false,
+  "scope": "Generated CPU spectral operator only, with gate fixed1 and a fixed observation-only coarse base. Reference means full768-context operator, not GT. No learned checkpoint, DINO, training or photograph. Real model base/gates can vary with context as well; these differences cannot predict trained-model quality, visible seams or100MP behavior. No thresholds, data, defaults or active training change."
+}
