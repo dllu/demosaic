@@ -3,6 +3,14 @@
 The objective is the complete project in `PROMPT.md`, including trained quality,
 not just software that executes. This checklist records the evidence required.
 
+The new [V90/V91 late RGB/DINO comparison](late-dino-rgb-v90-v91.md) tests
+spatial versus globally pooled semantic access in identical learned RGB heads.
+[Engineering checks](late-rgb-engineering.md) pass1,512 CPU regressions, all9
+CUDA cases,5 additional parser checks and genuine mixed-domain CPU/CUDA16-update
+plus supplementary fresh-process8+8 full-state/RNG replays. The original4000
+quality budgets are running sequentially. No quality result or promotion follows
+from these preflights; their trained/native review remains outstanding.
+
 The [completed V84/V85 native-data comparison](native-data-original20k-review.md)
 finishes both original20k budgets on128 versus150 captures. Its matched photo
 effect is−.00422dB with an interval crossing zero; camera/detail gates fail and

@@ -52,7 +52,7 @@ uv run demosaic infer /mnt/external/demosaic/models/v43-step2000.pt photo.raf \
   /mnt/external/demosaic/output/photo-linear.tiff \
   --preview /mnt/external/demosaic/output/photo-srgb.tiff --shot 0.001 --read 0.000001 \
   --tile 512 --overlap 64 --batch-size 4 --precision float32 --cudnn-benchmark
-uv run pytest -q
+PYTHONPATH=.:src:scripts uv run pytest -q
 ```
 
 Noise values above are examples, not measured camera profiles. Setup requires

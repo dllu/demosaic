@@ -29,3 +29,12 @@ preserve a verifiable common initialization or explicitly compare fresh models;
 moving nonzero learned offsets is not function-preserving. No new training
 recipe is launched from this literature note. Complete the original spectral
 budgets and native/numerical review before choosing another quality experiment.
+
+Those original budgets and the subsequent photo/component diagnoses are now
+complete. The independent [V90/V91 late RGB study](late-dino-rgb-v90-v91.md)
+retains the mature model's existing early DINO guidance and compares spatial
+versus globally pooled late prompts in the same zero-output RGB head. It reuses
+one frozen encoder pass. [Genuine CPU/CUDA engineering and process-boundary
+restart checks](late-rgb-engineering.md) pass; original4000 quality budgets are
+launched. This is a controlled new hypothesis, without reproduced PixIE scores
+or a demonstrated Bayer benefit yet.

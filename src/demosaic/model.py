@@ -60,6 +60,7 @@ class ModelConfig:
     raw_directional_bank_context: bool = False
     raw_directional_bank_detach_input: bool = False
     raw_spectral_residual: bool = False
+    late_rgb_refinement: str = "none"
     isotropic_groups: int = 6
     isotropic_blocks: int = 8
     isotropic_local_width: int = 32
@@ -414,6 +415,23 @@ class JointDemosaic(nn.Module):
             raise ValueError("RAW directional bank input detachment requires bank context")
         if type(cfg.raw_spectral_residual) is not bool:
             raise ValueError("RAW spectral residual must be a boolean")
+        if cfg.late_rgb_refinement not in ("none", "global", "spatial"):
+            raise ValueError("Late RGB refinement must be none, global or spatial")
+        if cfg.late_rgb_refinement != "none" and (
+            cfg.restoration_backbone != "pretrained-rgb"
+            or not cfg.dino
+            or cfg.dino_feature_fusion != "convnext-pyramid"
+            or not cfg.variance_stabilization
+            or not cfg.physical_anchors
+            or cfg.rgb_processing_scale != 1
+            or cfg.raw_kernel_reconstruction
+            or cfg.raw_directional_residual
+            or cfg.raw_spectral_residual
+            or cfg.adc_cfa_projection
+        ):
+            raise ValueError(
+                "Late RGB refinement requires native anchored ConvNeXt RGB without RAW heads"
+            )
         if cfg.raw_spectral_residual and (
             cfg.restoration_backbone != "pretrained-rgb"
             or not cfg.variance_stabilization
@@ -571,6 +589,13 @@ class JointDemosaic(nn.Module):
                     self.context = DinoPyramidContext(cfg)
             else:
                 self.context = DinoContext(cfg, 512) if cfg.dino else None
+            if cfg.late_rgb_refinement != "none":
+                from .late_rgb import LateRgbRefinement
+
+                with torch.random.fork_rng(devices=[]):
+                    self.pretrained_rgb.rgb_refinement = LateRgbRefinement(
+                        self.context.backbone.config.hidden_sizes, cfg.late_rgb_refinement
+                    )
             self.refiner = self.coarse_refiner = self.pyramid_refiner = None
             return
         if len(cfg.encoder_blocks) != len(cfg.decoder_blocks) or cfg.width < 4:

@@ -43,7 +43,7 @@ class DinoPyramidContext(nn.Module):
         self.backbone.eval()
         return self
 
-    def forward(self, preview, size):
+    def forward(self, preview, size, *, return_features=False):
         h, w = preview.shape[-2:]
         if (size[0] * 8, size[1] * 8) != (h + -h % 8, w + -w % 8):
             raise ValueError("ConvNeXt pyramid expects the native RGB trunk's padded extent")
@@ -73,7 +73,8 @@ class DinoPyramidContext(nn.Module):
             )
             factor = 4 // (2**index)
             offsets.append(offset[..., : size[0] * factor, : size[1] * factor] * gate)
-        return tuple(offsets)
+        offsets = tuple(offsets)
+        return (offsets, tuple(features)) if return_features else offsets
 
 
 class DinoPackedContext(nn.Module):

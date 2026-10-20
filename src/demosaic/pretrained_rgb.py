@@ -389,6 +389,7 @@ class PretrainedRgbDemosaic(nn.Module):
         self.raw_kernel = None
         self.raw_directional = None
         self.raw_spectral = None
+        self.rgb_refinement = None
         if raw_spectral_residual:
             from .raw_spectral import RawSpectralResidual
 
@@ -602,6 +603,7 @@ class PretrainedRgbDemosaic(nn.Module):
             or self.raw_kernel is not None
             or self.raw_directional is not None
             or self.raw_spectral is not None
+            or self.rgb_refinement is not None
         ):
             raise ValueError(
                 "Normalization augmentation requires full-resolution anchored RGB training"
@@ -674,11 +676,16 @@ class PretrainedRgbDemosaic(nn.Module):
             with torch.autocast(packed.device.type, enabled=False), ieee_fp32():
                 head_offset = self.project_measurements(condition)
             middle_offset, encoder_kwargs = None, {}
+            late_features = None
             if context is not None:
-                middle_offset = context(
-                    render(rgb if preview is None else preview, wb, matrix),
-                    (normalized.shape[-2] // 8, normalized.shape[-1] // 8),
-                )
+                preview_rgb = render(rgb if preview is None else preview, wb, matrix)
+                context_size = (normalized.shape[-2] // 8, normalized.shape[-1] // 8)
+                if self.rgb_refinement is None:
+                    middle_offset = context(preview_rgb, context_size)
+                else:
+                    middle_offset, late_features = context(
+                        preview_rgb, context_size, return_features=True
+                    )
                 if isinstance(middle_offset, tuple):
                     encoder_kwargs = {"encoder_offsets": middle_offset[:2]}
                     middle_offset = middle_offset[2]
@@ -686,6 +693,7 @@ class PretrainedRgbDemosaic(nn.Module):
                 self.raw_kernel is not None
                 or self.raw_directional is not None
                 or self.raw_spectral is not None
+                or self.rgb_refinement is not None
             ):
                 prediction, features = self.network(
                     normalized,
@@ -709,6 +717,13 @@ class PretrainedRgbDemosaic(nn.Module):
                     middle_offset=middle_offset,
                     **encoder_kwargs,
                 )[..., :h, :w]
+            if self.rgb_refinement is not None:
+                prediction = self.rgb_refinement(
+                    prediction,
+                    directional_features,
+                    condition[..., :h, :w],
+                    late_features,
+                )
         with torch.autocast(packed.device.type, enabled=False), ieee_fp32():
             output = prediction.float() * span + offset
             if profiles is not None:

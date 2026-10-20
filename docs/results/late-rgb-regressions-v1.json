@@ -1,0 +1,57 @@
+{
+  "status": "passed-complete-CPU-regressions-plus-fresh-restart-parser-tests",
+  "complete_suite": {
+    "command": "CUDA_VISIBLE_DEVICES='' HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 PYTHONPATH=.:src:scripts .venv/bin/pytest -q",
+    "passed": 1512,
+    "skipped": 9,
+    "runtime_seconds": 205.2,
+    "scope": "Complete suite before the supplementary parser test module was added; production model/training sources have not changed since this run."
+  },
+  "additional_parser_tests": {
+    "command": "CUDA_VISIBLE_DEVICES='' PYTHONPATH=.:src:scripts OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 .venv/bin/pytest -q tests/test_late_rgb_fresh_restart.py",
+    "passed": 5,
+    "runtime_seconds": 0.03,
+    "sources": [
+      {
+        "path": "/home/dllu/proj/demosaic/scripts/audit_late_rgb_fresh_restart.py",
+        "sha256": "9231ce14c0ded310e62ddbe11a57e64f635db6398ac872a33118fa73da5c92f9"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/tests/test_late_rgb_fresh_restart.py",
+        "sha256": "1cd8627399a0e4def841f7eecd1caddf08becee87e0d062a00b80e256e2ef8ab"
+      }
+    ]
+  },
+  "production_sources": [
+    {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/late_rgb.py",
+      "sha256": "8e81263dd3eaf619700ad34c550153f066ed6125788356feb3812b31b6eb1fb7"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/model.py",
+      "sha256": "a3c0c8e8c39b1183898d639572249dc68735a62141d5b1041e8082f193210545"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/pretrained_rgb.py",
+      "sha256": "6c08681bedf20863eef5106703a70376548f6faceb1b29f60366444c817fc8ae"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/dino_pyramid.py",
+      "sha256": "430c272eee1c764197b4f20810215798644f565a8d5e3637c7002d6fb71232af"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/train.py",
+      "sha256": "33a19cbf8b9456624df6d06a16546476460a7408e1b8e85f37a1051e73961ec5"
+    }
+  ],
+  "initial_invocation": {
+    "status": "failed-during-collection",
+    "reason": "Omitted repository/script import paths; four import errors. Corrected invocation above passes without changing production code or expectations."
+  },
+  "quality_or_throughput_claim": false,
+  "CUDA_regressions": {
+    "passed": 9,
+    "runtime_seconds": 2.61,
+    "scope": "All9 CUDA cases skipped by the complete CPU suite, selected explicitly after the owned CUDA training preflight and fresh restart finished. These are numerical regression checks, not throughput or quality scores."
+  }
+}
