@@ -21,6 +21,15 @@ slower and V63 is 1.59% faster. It is not integrated and supplies no new full-fr
 result. A separate future-watcher startup-race fix passes29 focused tests.
 The complete SOTA/native-superiority and100MP/10s requirements remain open.
 
+The subsequent [fixed late-head/shared-path diagnosis](late-rgb-component-review.md)
+replays96 unique analytic observations across six methods. The main ADC loss
+terms are already in the jointly adapted pre-head paths; present-day bypass
+or pooling does not recover them. All32 native cells are viewed, full metrics
+replay the prior checkpoints within fixed bounds, and320 independent RGB
+component projections pass. No model or default changes. A separate frozen-
+common-path training intervention remains to be tested, with exact model/EMA
+preservation and the full quality/native requirements.
+
 The [completed V84/V85 native-data comparison](native-data-original20k-review.md)
 finishes both original20k budgets on128 versus150 captures. Its matched photo
 effect is−.00422dB with an interval crossing zero; camera/detail gates fail and

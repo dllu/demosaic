@@ -4,6 +4,15 @@ Research started 2026-10-14. Sources below are primary implementations, papers,
 and vendor documentation. A recent publication is not itself evidence that this
 project matches its performance.
 
+The [late RGB/shared-path component diagnosis](late-rgb-component-review.md)
+finds that the two main low-contrast4px ADC losses are already present before
+the new head. Direct late-head effects and frozen prompt pooling barely change
+them. Genuine capture/inverse/head parity, all32 native cells, prior-scalar
+replay and independent direct RGB projections are complete. This supports
+testing preservation of the mature shared path during refinement training;
+it does not prove that freezing improves quality or rule out training-gradient
+effects from the head.
+
 The [October20 PixIE follow-up](research-pixie-followup.md) records a recent
 semantic-routing candidate and its differences from our current fusion.
 The accompanying [CPU noise-proxy study](stabilized-noise-proxy.md) checks a

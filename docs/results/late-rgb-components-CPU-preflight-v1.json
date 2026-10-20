@@ -1,0 +1,281 @@
+{
+  "status": "completed-genuine-CPU-late-RGB-component-capture-preflight",
+  "owner": {
+    "pid": 1209956,
+    "created": 1792501508.63
+  },
+  "plan": {
+    "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/plan.json",
+    "sha256": "812d2a21780e4966ac4a6787e75089c056340b18a9db9dee23caae88f6bb7aa0"
+  },
+  "driver": {
+    "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/work/scripts/diagnose_late_rgb_components.py",
+    "sha256": "4a130114f52a9aed9a862cfa594e8bfa1eb1d57360dfb253bd0cf7a5f193216a"
+  },
+  "observed_UTC": "2026-10-20T13:05:15.574105+00:00",
+  "engineering_CPU_only": true,
+  "CUDA_initialized": false,
+  "arrays": [
+    {
+      "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/CPU-output/parent-adc-only-carrier-0.01-0.02-4-all-CFAs-RGB-f32.npz",
+      "sha256": "15bf004f49321c58ae90a657830d56a14fa3f8fee010eefb931613e91d07b7b2"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/CPU-output/parent-iso12800-prior-carrier-0.01-0.1-8-RGGB-RGB-f32.npz",
+      "sha256": "2f12afc4b0c782823e2eb556f40cfda2e117fdf17062df590469ca3e7270b841"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/CPU-output/global-adc-only-carrier-0.01-0.02-4-all-CFAs-RGB-f32.npz",
+      "sha256": "4008e6777980b61d416b7ca2271362ff0b04fc519de72fcdc14c0a012a40beee"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/CPU-output/global-iso12800-prior-carrier-0.01-0.1-8-RGGB-RGB-f32.npz",
+      "sha256": "bb543289fbfc814b6be68b264ab87d837f62fef0c92611b002b208219fc9d3b1"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/CPU-output/spatial-adc-only-carrier-0.01-0.02-4-all-CFAs-RGB-f32.npz",
+      "sha256": "da4ed09ce88b0573fb492a3a8607465cbd5192a4b1147e037eb8c2badb55e7d6"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/CPU-output/spatial-iso12800-prior-carrier-0.01-0.1-8-RGGB-RGB-f32.npz",
+      "sha256": "76c829e8ce118b49d356c0ad322964f3086defa8ff5bbf0bfd2f32b37fd3aff0"
+    }
+  ],
+  "records": [
+    {
+      "model": "parent",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-convnext-wide-long-control-b16-v63-step20000.pt",
+        "sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5"
+      },
+      "fixture_id": "adc-only-carrier-0.01-0.02-4-all-CFAs",
+      "fixture": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/inputs/adc-only-carrier-0.01-0.02-4-all-CFAs.npz",
+        "sha256": "69f7218cdfa5ce84b5937b29a8eac46272e3fd823e46f3e18ceb7e0b4a864f06"
+      },
+      "cases": [
+        {
+          "level": 0.01,
+          "contrast": 0.02,
+          "period": 4,
+          "pattern": "RGGB",
+          "draw": 0,
+          "id": "carrier-l0.01-c0.02-p4-draw0"
+        }
+      ],
+      "policies": [
+        "full"
+      ],
+      "arrays": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/CPU-output/parent-adc-only-carrier-0.01-0.02-4-all-CFAs-RGB-f32.npz",
+        "sha256": "15bf004f49321c58ae90a657830d56a14fa3f8fee010eefb931613e91d07b7b2"
+      },
+      "actual_physical_tail_replay_exact": null,
+      "direct_head_replay_exact": null,
+      "no_extra_trunk_or_DINO_for_component_variants": true,
+      "measurement_input_sha256_before_after": "b628fa7bbf5b5f2fbf800dd53d52cc924760ea3ccc339cdfd8a8687a4f5ee9ae"
+    },
+    {
+      "model": "parent",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-convnext-wide-long-control-b16-v63-step20000.pt",
+        "sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5"
+      },
+      "fixture_id": "iso12800-prior-carrier-0.01-0.1-8-RGGB",
+      "fixture": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/inputs/iso12800-prior-carrier-0.01-0.1-8-RGGB.npz",
+        "sha256": "603b67a75890dbe877f0e4b0db5e3a75bbcf3ccef728ab01d8818b0617324238"
+      },
+      "cases": [
+        {
+          "level": 0.01,
+          "contrast": 0.1,
+          "period": 8,
+          "pattern": "RGGB",
+          "draw": 0,
+          "id": "carrier-l0.01-c0.1-p8-draw0"
+        }
+      ],
+      "policies": [
+        "full"
+      ],
+      "arrays": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/CPU-output/parent-iso12800-prior-carrier-0.01-0.1-8-RGGB-RGB-f32.npz",
+        "sha256": "2f12afc4b0c782823e2eb556f40cfda2e117fdf17062df590469ca3e7270b841"
+      },
+      "actual_physical_tail_replay_exact": null,
+      "direct_head_replay_exact": null,
+      "no_extra_trunk_or_DINO_for_component_variants": true,
+      "measurement_input_sha256_before_after": "d284a474e9ca15075038f9a40db91357369cf0f8ffe4b35e636c51bc5532ca41"
+    },
+    {
+      "model": "global",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/runs/control/step-004000.pt",
+        "sha256": "ba40d88149726c48f90d33399cf6ee4666daad470bff82bdfddf994a5e5eb3c4"
+      },
+      "fixture_id": "adc-only-carrier-0.01-0.02-4-all-CFAs",
+      "fixture": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/inputs/adc-only-carrier-0.01-0.02-4-all-CFAs.npz",
+        "sha256": "69f7218cdfa5ce84b5937b29a8eac46272e3fd823e46f3e18ceb7e0b4a864f06"
+      },
+      "cases": [
+        {
+          "level": 0.01,
+          "contrast": 0.02,
+          "period": 4,
+          "pattern": "RGGB",
+          "draw": 0,
+          "id": "carrier-l0.01-c0.02-p4-draw0"
+        }
+      ],
+      "policies": [
+        "full",
+        "bypass"
+      ],
+      "arrays": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/CPU-output/global-adc-only-carrier-0.01-0.02-4-all-CFAs-RGB-f32.npz",
+        "sha256": "4008e6777980b61d416b7ca2271362ff0b04fc519de72fcdc14c0a012a40beee"
+      },
+      "actual_physical_tail_replay_exact": true,
+      "direct_head_replay_exact": true,
+      "no_extra_trunk_or_DINO_for_component_variants": true,
+      "measurement_input_sha256_before_after": "b628fa7bbf5b5f2fbf800dd53d52cc924760ea3ccc339cdfd8a8687a4f5ee9ae"
+    },
+    {
+      "model": "global",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/runs/control/step-004000.pt",
+        "sha256": "ba40d88149726c48f90d33399cf6ee4666daad470bff82bdfddf994a5e5eb3c4"
+      },
+      "fixture_id": "iso12800-prior-carrier-0.01-0.1-8-RGGB",
+      "fixture": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/inputs/iso12800-prior-carrier-0.01-0.1-8-RGGB.npz",
+        "sha256": "603b67a75890dbe877f0e4b0db5e3a75bbcf3ccef728ab01d8818b0617324238"
+      },
+      "cases": [
+        {
+          "level": 0.01,
+          "contrast": 0.1,
+          "period": 8,
+          "pattern": "RGGB",
+          "draw": 0,
+          "id": "carrier-l0.01-c0.1-p8-draw0"
+        }
+      ],
+      "policies": [
+        "full",
+        "bypass"
+      ],
+      "arrays": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/CPU-output/global-iso12800-prior-carrier-0.01-0.1-8-RGGB-RGB-f32.npz",
+        "sha256": "bb543289fbfc814b6be68b264ab87d837f62fef0c92611b002b208219fc9d3b1"
+      },
+      "actual_physical_tail_replay_exact": true,
+      "direct_head_replay_exact": true,
+      "no_extra_trunk_or_DINO_for_component_variants": true,
+      "measurement_input_sha256_before_after": "d284a474e9ca15075038f9a40db91357369cf0f8ffe4b35e636c51bc5532ca41"
+    },
+    {
+      "model": "spatial",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/runs/spatial/step-004000.pt",
+        "sha256": "80ade7b792a8621c214d4450b9e0befa7d06be2d4797ecfaaa7227def9b609e7"
+      },
+      "fixture_id": "adc-only-carrier-0.01-0.02-4-all-CFAs",
+      "fixture": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/inputs/adc-only-carrier-0.01-0.02-4-all-CFAs.npz",
+        "sha256": "69f7218cdfa5ce84b5937b29a8eac46272e3fd823e46f3e18ceb7e0b4a864f06"
+      },
+      "cases": [
+        {
+          "level": 0.01,
+          "contrast": 0.02,
+          "period": 4,
+          "pattern": "RGGB",
+          "draw": 0,
+          "id": "carrier-l0.01-c0.02-p4-draw0"
+        }
+      ],
+      "policies": [
+        "full",
+        "bypass",
+        "pooled"
+      ],
+      "arrays": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/CPU-output/spatial-adc-only-carrier-0.01-0.02-4-all-CFAs-RGB-f32.npz",
+        "sha256": "da4ed09ce88b0573fb492a3a8607465cbd5192a4b1147e037eb8c2badb55e7d6"
+      },
+      "actual_physical_tail_replay_exact": true,
+      "direct_head_replay_exact": true,
+      "no_extra_trunk_or_DINO_for_component_variants": true,
+      "measurement_input_sha256_before_after": "b628fa7bbf5b5f2fbf800dd53d52cc924760ea3ccc339cdfd8a8687a4f5ee9ae"
+    },
+    {
+      "model": "spatial",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/runs/spatial/step-004000.pt",
+        "sha256": "80ade7b792a8621c214d4450b9e0befa7d06be2d4797ecfaaa7227def9b609e7"
+      },
+      "fixture_id": "iso12800-prior-carrier-0.01-0.1-8-RGGB",
+      "fixture": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/inputs/iso12800-prior-carrier-0.01-0.1-8-RGGB.npz",
+        "sha256": "603b67a75890dbe877f0e4b0db5e3a75bbcf3ccef728ab01d8818b0617324238"
+      },
+      "cases": [
+        {
+          "level": 0.01,
+          "contrast": 0.1,
+          "period": 8,
+          "pattern": "RGGB",
+          "draw": 0,
+          "id": "carrier-l0.01-c0.1-p8-draw0"
+        }
+      ],
+      "policies": [
+        "full",
+        "bypass",
+        "pooled"
+      ],
+      "arrays": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/CPU-output/spatial-iso12800-prior-carrier-0.01-0.1-8-RGGB-RGB-f32.npz",
+        "sha256": "76c829e8ce118b49d356c0ad322964f3086defa8ff5bbf0bfd2f32b37fd3aff0"
+      },
+      "actual_physical_tail_replay_exact": true,
+      "direct_head_replay_exact": true,
+      "no_extra_trunk_or_DINO_for_component_variants": true,
+      "measurement_input_sha256_before_after": "d284a474e9ca15075038f9a40db91357369cf0f8ffe4b35e636c51bc5532ca41"
+    }
+  ],
+  "head_input_captures": [],
+  "models": [
+    {
+      "model": "parent",
+      "state_sha256_before_after": "b3e5f1c055b0541db3935ac73d1c88327c07a2bbc23c040d3d14eef8a45cc1fa",
+      "DINO_state_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd",
+      "parameters_and_CPU_CUDA_RNG_unchanged": true,
+      "DINO_encoder_calls": 4
+    },
+    {
+      "model": "global",
+      "state_sha256_before_after": "2e359e418d2041a0855fd2b904044cd29dcf9795a94bf45bcf80ce435420d720",
+      "DINO_state_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd",
+      "parameters_and_CPU_CUDA_RNG_unchanged": true,
+      "DINO_encoder_calls": 4
+    },
+    {
+      "model": "spatial",
+      "state_sha256_before_after": "2e147a393d4fd22838761632ce76fd6f3e769a582f78735c306f3e6e5e692b6c",
+      "DINO_state_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd",
+      "parameters_and_CPU_CUDA_RNG_unchanged": true,
+      "DINO_encoder_calls": 4
+    }
+  ],
+  "common_trunk_and_DINO_forwards": 12,
+  "all_full_tail_head_replays_exact": true,
+  "all_states_and_RNG_unchanged": true,
+  "scope": "Fixed96 analytic observations, six frozen diagnostic methods. Actual full-output/tail/head parity, one common encoder per captured forward and reused variants. No training, target-forward, policy export, photo-quality improvement or promotion. All32 native cells must be actually viewed before interpreting new component metrics; preserve all cases and original checkpoint scalar replay.",
+  "native_viewing_complete": false,
+  "new_component_metrics_interpreted": false,
+  "model_or_default_changed": false
+}

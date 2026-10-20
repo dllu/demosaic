@@ -1,0 +1,49 @@
+{
+  "status": "completed-fixed-late-RGB-component-diagnosis-no-new-model-or-deployment-policy",
+  "observed_UTC": "2026-10-20T13:26:43.786134+00:00",
+  "driver": {
+    "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/publish_evidence.py",
+    "sha256": "742da87e64598082e96e2133cb98ce07d7cac6d4bf1cb1efb9902e1f2a86499f"
+  },
+  "plan": {
+    "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/plan.json",
+    "sha256": "812d2a21780e4966ac4a6787e75089c056340b18a9db9dee23caae88f6bb7aa0"
+  },
+  "CPU_preflight": {
+    "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/CPU-output/receipt.json",
+    "sha256": "91a4c21caaa52e103854ba43569b7afe2848d7c8a70b78cb942304a03a6d5dfb"
+  },
+  "GPU_capture": {
+    "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/GPU-output/receipt.json",
+    "sha256": "669d56f378c7d57bb8390729691748ad09ae081260d1e41bed9b4f1c0a9cf52c"
+  },
+  "manual_native_review_before_new_statistics": {
+    "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/manual-native-viewing.json",
+    "sha256": "98bb3e96e27d85800cc56a0784d60817f41e71840d1a42fed7ce111eb7abe75a"
+  },
+  "independent_scalar_review": {
+    "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/scalar-review/result.json",
+    "sha256": "11514d2e13d40a3cfb13117bab86468454770d3aae7f2c697b058c646ea522c4"
+  },
+  "independent_direct_RGB_projection_audit": {
+    "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/scalar-review/independent-component-projection-audit.json",
+    "sha256": "c55bb3d4d1ca2d161c23002034bbc0569078c24130c6da8a82249d644af487a7"
+  },
+  "all_group_means": {
+    "path": "/mnt/external/demosaic/experiments/late-rgb-detail-components-v1/scalar-review/all-group-means.json",
+    "sha256": "c1f846b01941425242550ae96fc278a9c683057717e783d49125536a43b2efb7"
+  },
+  "unique_observations": 96,
+  "methods": 6,
+  "metric_rows": 576,
+  "native_cells_actually_viewed": 32,
+  "native_triplets": 24,
+  "common_trunk_DINO_forwards": 75,
+  "all_full_tail_head_replays_exact": true,
+  "common_measurement_inputs_exact_across_all_models": true,
+  "all_five_captured_DINO_physical_fields_exact_between_arms": true,
+  "finding": "The two main4px ADC gain gaps are already present in the adapted pre-head paths. Immediate late-head differences and frozen pooling effects are tiny. Dark noisy carrier remains nearly absent before the new head. This does not exclude the head training gradients from causing shared-path adaptation, nor identify which common CNN/adapters/earlier-guidance parameters are responsible.",
+  "next_training_question": "A separate controlled test should protect the mature shared path while learning the refinement. Common model AND EMA tensors must remain exact if frozen; a frozen-head-only improvement is not established by this diagnosis. A deployment-time bypass or pooling swap is not qualified by analytic fields.",
+  "new_model_or_default_changed": false,
+  "project_goal_complete": false
+}
