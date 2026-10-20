@@ -22,8 +22,11 @@ its outcomes informed this choice. Freezing remains an unproven quality
 hypothesis; inference architecture and working defaults remain unchanged.
 Its [full quality/native review queue](late-rgb-head-only-review-preparation.md)
 now has genuine-state CPU integration, unchanged historical metric/native
-packaging replay and a source-frozen serial queue. The retained first1000 state
-preserves the common model/EMA bytes, but this does not establish a quality gain.
+packaging replay and a source-frozen serial queue. Original4000 training and
+the independent final-state audit now complete, preserving all91 common
+model/EMA tensors and matching176 recorded input pairs plus final RNG against
+historical V90. Fresh FP32 camera/photo/native review is running; this does
+not yet establish a quality gain.
 
 The [mature mixed-precision follow-up](mature-mixed-precision-engineering.md)
 separately checks the existing autocast policy on actual V43/V63 weights,

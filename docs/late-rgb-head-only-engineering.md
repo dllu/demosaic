@@ -73,12 +73,11 @@ quality measurements.
 
 ## Original4000 run and remaining review
 
-The [full frozen plan](results/late-rgb-head-only-full-plan-v1.json) launches
-one fresh V92 candidate from V63, retaining the original4000 schedule and
-64,000 examples. Both preflight controllers/workers have exited. Full controller
-1265645/create1792504985.8 launches owned worker1265932/create1792505056.08
-after60s of resource headroom, with the protocol's RAM/disk/CUDA/runtime limits and no automatic retry,
-extension or promotion. Its external operational status is
+The [full frozen plan](results/late-rgb-head-only-full-plan-v1.json) completes
+one fresh V92 candidate from V63: original4000 schedule and64,000 examples.
+Controller1265645/create1792504985.8 and worker1265932/create1792505056.08
+have both exited successfully after the fixed run and resource gates. Its
+external operational status is
 `/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/status.json`.
 The [observed startup receipt](results/late-rgb-head-only-startup-v1.json)
 verifies both exact live owners, actual first-forward parent parity and the
@@ -87,11 +86,21 @@ The independent [first1000 state audit](results/late-rgb-head-only-first1k-state
 now confirms all91 common model/EMA tensors still match V63 byte-for-byte,
 finite115/115/24 states and all56 logged observations through1000 matching V90.
 This is a retained engineering milestone, not early quality selection.
-The [full quality/native queue](late-rgb-head-only-review-preparation.md) is
-source-frozen and verified waiting for exact successful training exit.
+The [full quality/native queue](late-rgb-head-only-review-preparation.md)
+activates after verified successful training exit and is now running.
 
-Original4000 completion, full FP32 quality evaluation and actual native/GFX
-viewing remain separate requirements. The completed V90 is a fixed historical
+The [completed training receipt](results/late-rgb-head-only-original4000-completion-v1.json)
+and [independent final-state audit](results/late-rgb-head-only-final-boundaries-v1.json)
+verify finite115model/115EMA/24AdamW states, all24 counters4000, all91 common
+model/EMA tensors byte-identical to V63, all176 recorded source/forward/loss
+pairs and161 scheduled domain/LR logs matching V90, and identical final
+Python/CPU/CUDA RNG. All46 inference modules are byte-identical; only
+`train.py` differs. The retained original4000 checkpoint hash is
+`fa0825f7b5f33482953714a99741eec30d21362b81d9574d836086cabfb81908`.
+
+The fresh FP32 review has passed its boundary stage and started camera
+evaluation. Full quality evaluation and actual native/GFX viewing remain.
+The completed V90 is a fixed historical
 exploratory reference, not a freshly randomized control. Engineering success
 does not establish improved photos, SOTA, decisive real-photo superiority or
 100MP/10s. Working V43 and representative README crops remain unchanged.

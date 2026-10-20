@@ -44,15 +44,19 @@ The resulting [V92 head-only intervention](late-rgb-head-only-v92.md) now has
 model/EMA states remain V63 across six boundaries; only24 head tensors train.
 All inference modules remain unchanged. Its
 [fixed original4000 candidate](late-rgb-head-only-engineering.md) is launched,
-with completed V90 explicitly a historical exploratory reference. Training
-completion and full quality/native review remain pending; no improvement,
+with completed V90 explicitly a historical exploratory reference. The
+[original4000 completion](results/late-rgb-head-only-original4000-completion-v1.json)
+now verifies finite115/115/24 states, all91 common model/EMA tensors exact to
+V63,176 recorded input pairs,161 domain/LR logs and final RNG matching V90.
+Both training owners have exited and fresh FP32 review is running. Full
+quality/native review remains pending; no improvement,
 promotion or fulfillment of the complete objective follows from these checks.
 The [queued V92 full quality/native review](late-rgb-head-only-review-preparation.md)
 now passes63 reader/criterion and19 native-board tests, genuine discarded-state
 boundary reads, historical arithmetic replay and all20 exact native PNG copies.
-Its first1000 checkpoint preserves all91 common model/EMA tensors and56 logged
-input pairs, but original4000 completion and actual quality/native review remain
-pending. The queue cannot score engineering states or incomplete/live training.
+Its first1000 and final4000 checkpoints preserve all91 common model/EMA tensors;
+actual full quality/native review remains pending. The queue cannot score
+engineering states or incomplete/live training.
 
 The [completed V84/V85 native-data comparison](native-data-original20k-review.md)
 finishes both original20k budgets on128 versus150 captures. Its matched photo

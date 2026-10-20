@@ -1,7 +1,8 @@
 # V92 full quality and native review preparation
 
-V92 remains in its original4000-step training run. This preparation does not
-establish a quality gain. The [fixed head-only protocol](late-rgb-head-only-v92.md)
+V92 has completed its original4000-step training run. The independent final-state
+audit passes and the fresh FP32 quality review is running. No quality gain is
+established. The [fixed head-only protocol](late-rgb-head-only-v92.md)
 and [training engineering checks](late-rgb-head-only-engineering.md) remain the
 source of its scope and criteria. Completed V90 is a historical exploratory
 reference chosen after observing its results, not a newly randomized arm.
@@ -103,6 +104,12 @@ Operational files are `status.json`, `closure-status.json`,
 `report-assets-status.json` and `queue-launch.json` in that cache directory.
 The exact training status remains in
 `/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/status.json`.
-Failed stages preserve evidence and receive no automatic retry. Complete
-original4000 training, full inference, actual native viewing and the final
-quality decision remain pending. The working model and README stay V43.
+Failed stages preserve evidence and receive no automatic retry. The
+[original4000 completion record](results/late-rgb-head-only-original4000-completion-v1.json)
+binds finite115/115/24 states, exact common V63 model/EMA bytes,176 recorded
+input pairs,161 domain/LR logs and final RNG against historical V90.
+Checkpoint SHA is `fa0825f7b5f33482953714a99741eec30d21362b81d9574d836086cabfb81908`.
+Both training owners have exited; the boundary and known-camera stages complete,
+with unseen evaluation actually running at the recorded handoff. Full inference,
+actual native viewing and the final quality decision remain pending. The
+working model and README stay V43.

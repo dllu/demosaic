@@ -1,0 +1,89 @@
+{
+  "status": "independently-verified-V92-and-historical-V90-original4000-boundaries",
+  "engineering_preflight": false,
+  "training_status": {
+    "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/status.json",
+    "sha256": "20be98987e61468dd47ff349f582ad1bc30d9198ff4b3b5021fe468e3fe440fd"
+  },
+  "checkpoints": [
+    {
+      "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/runs/control/last.pt",
+      "sha256": "ba40d88149726c48f90d33399cf6ee4666daad470bff82bdfddf994a5e5eb3c4",
+      "arm": "historical",
+      "step": 4000,
+      "kind": "joint-checkpoint",
+      "label": "V90-historical-original4000"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/runs/control/last.pt",
+      "sha256": "fa0825f7b5f33482953714a99741eec30d21362b81d9574d836086cabfb81908",
+      "arm": "head-only",
+      "step": 4000,
+      "kind": "joint-checkpoint",
+      "label": "V92-head-only-original4000"
+    }
+  ],
+  "evidence": [
+    {
+      "result": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/control-result.json",
+        "sha256": "dd1d8a3360eff119e7a156bd90bc1015e6b09a876cb9e132d46c2bec2ef8e98c"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/runs/control/last.pt",
+        "sha256": "ba40d88149726c48f90d33399cf6ee4666daad470bff82bdfddf994a5e5eb3c4"
+      },
+      "retained4000": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/runs/control/step-004000.pt",
+        "sha256": "ba40d88149726c48f90d33399cf6ee4666daad470bff82bdfddf994a5e5eb3c4"
+      },
+      "retained1000": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/runs/control/step-001000.pt",
+        "sha256": "cb192a890918e25736776ac09307082a19a8b4a3a4299df4511fcf93d2afe265"
+      },
+      "finite_states": [
+        115,
+        115,
+        113
+      ],
+      "head_only": false,
+      "common_model_and_EMA_byte_exact_V63": false,
+      "source_archive": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/runs/control/source/f59edf34f3a9516f75353d7cd6b432ce5ceb93bc7048d4684358fb3aef72d34f"
+    },
+    {
+      "result": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/control-result.json",
+        "sha256": "bbd49783c1674cb9144d19d48faf7f299708c16d01ac4e467e8193eab15dd343"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/runs/control/last.pt",
+        "sha256": "fa0825f7b5f33482953714a99741eec30d21362b81d9574d836086cabfb81908"
+      },
+      "retained4000": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/runs/control/step-004000.pt",
+        "sha256": "fa0825f7b5f33482953714a99741eec30d21362b81d9574d836086cabfb81908"
+      },
+      "retained1000": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/runs/control/step-001000.pt",
+        "sha256": "7d4de0e9f053f796b21ea893410a819bd18e174eef8c7f92fff846177bdaed6a"
+      },
+      "finite_states": [
+        115,
+        115,
+        24
+      ],
+      "head_only": true,
+      "common_model_and_EMA_byte_exact_V63": true,
+      "source_archive": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/runs/control/source/28221cb0df4cd59336be268f19b1aab934ba0461b2f5fe295e183bbc6d965e53"
+    }
+  ],
+  "recorded_observation_pairs": 176,
+  "logged_source_domain_LR_pairs": 161,
+  "final_Python_CPU_CUDA_RNG_exact": true,
+  "inference_modules_byte_identical": 46,
+  "training_module_differences": [
+    "train.py"
+  ],
+  "comparison": "Exploratory V92 against fixed historical V90, not independent two-arm randomization.",
+  "scope": "Boundary/source/data/horizon/state proof only; no quality or promotion claim."
+}

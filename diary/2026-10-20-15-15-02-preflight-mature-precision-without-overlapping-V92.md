@@ -62,3 +62,18 @@ The [engineering report](../docs/mature-mixed-precision-engineering.md) links
 all public receipts and local operational paths. The working model/README
 remain unchanged. Full V92 completion/review, mature CUDA precision results,
 SOTA, decisive real-photo superiority and100MP/10s remain pending/unproven.
+
+Later in this turn V92 completes its original4000 updates/64,000 examples and
+both exact training owners exit successfully. The queued independent boundary
+reader passes: finite115/115/24 states, all24 Adam counters4000, all91 common
+model/EMA tensors byte-exact V63,176 recorded input pairs and161 scheduled logs
+matching historical V90, identical final Python/CPU/CUDA RNG and46 inference
+modules byte-identical. Only `train.py` differs. Final checkpoint SHA:
+`fa0825f7b5f33482953714a99741eec30d21362b81d9574d836086cabfb81908`.
+Completion receipt SHA:
+`72ccb3824b88701f6ea70ae589c3ab5eab28ba03595d653af6e6a0e976d29f1e`.
+Review starts automatically after actual exits: boundary and known stages
+complete, unseen worker1342872/create1792509787.09 is actually live at the
+handoff. No camera/photo scores were interpreted before the prescribed native
+review. Precision controller stays waiting with no GPU child. Full quality,
+native/GFX inspection and final decisions remain pending; no promotion.

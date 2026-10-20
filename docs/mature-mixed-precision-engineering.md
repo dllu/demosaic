@@ -82,6 +82,6 @@ The frozen photo triplets, foliage/fence crops and ISO100-reference caveat apply
 
 Operational files are under `.cache/benchmarks/mature-mixed-precision-CUDA-v1/`;
 CPU evidence is under `.cache/benchmarks/mature-mixed-precision-CPU-v1/`.
-V92 continues toward original4000 and retains review priority. This finite
+V92 has completed original4000 and retains review priority. This finite
 screen cannot authorize a default/export change or full-frame continuation.
 SOTA, decisive real-photo superiority and actual100MP/10s remain unmet/unproven.
