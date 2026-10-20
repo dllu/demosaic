@@ -161,6 +161,7 @@ def physical_rgb_features(
     rgb=None,
     stabilized=False,
     normalization_mask=None,
+    photometry_profiles=None,
 ):
     """Build normalized camera RGB and actual CFA/camera metadata in IEEE FP32.
 
@@ -231,12 +232,17 @@ def physical_rgb_features(
             else matrix.float()
         )
         camera = torch.cat((balance.clamp_min(1e-6).log2(), transform.flatten(1)), dim=1)
-        log_noise = (rgb_variance.clamp_min(1e-12).log() + 12) / 6
+        if photometry_profiles is None:
+            noise_condition = (rgb_variance.clamp_min(1e-12).log() + 12) / 6
+        else:
+            noise_condition = stabilized_photometry(photometry_profiles, offset, span).expand(
+                -1, -1, *rgb.shape[-2:]
+            )
         condition = torch.cat(
             (
                 measured,
                 mask,
-                log_noise,
+                noise_condition,
                 camera[:, :, None, None].expand(-1, -1, 2 * h, 2 * w),
             ),
             dim=1,
@@ -642,12 +648,8 @@ class PretrainedRgbDemosaic(nn.Module):
             rgb=base_rgb,
             stabilized=self.stabilized,
             normalization_mask=normalization_mask,
+            photometry_profiles=profiles if self.physical_anchors else None,
         )
-        if self.physical_anchors:
-            anchors = stabilized_photometry(profiles, offset, span)
-            condition = torch.cat(
-                (condition[:, :6], anchors.expand(-1, -1, *rgb.shape[-2:]), condition[:, 9:]), dim=1
-            )
         if self.processing_scale == 2:
             prediction = self.forward_packed(
                 normalized,

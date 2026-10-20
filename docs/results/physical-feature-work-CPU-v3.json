@@ -1,0 +1,85 @@
+{
+  "status": "completed-V63-physical-feature-CPU-byte-and-synthetic-autograd-parity",
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/scripts/probe_physical_feature_work_cpu.py",
+    "sha256": "29a516d08adc36b2a35f67e0e236a3370148cb18f00649c84745df8ee57acd9b"
+  },
+  "candidate_source": {
+    "path": "/home/dllu/proj/demosaic/src/demosaic/pretrained_rgb.py",
+    "sha256": "957c34e0ee77548a4b3dd847766011ccb1dcb4218c3463b88a5e5b4e87a1d1e2"
+  },
+  "common_inverse_source": {
+    "path": "/home/dllu/proj/demosaic/src/demosaic/vst.py",
+    "sha256": "9ac639792870c11ceb4960dc836ff7c70d7740491eb7b8c829ccf263616e9077"
+  },
+  "legacy_fixture": {
+    "path": "/home/dllu/proj/demosaic/tests/fixtures/physical_features_before_elimination.py",
+    "sha256": "148021ca23a94e4f74beb9635118192bffdd1a50aae6606ad8e9eec86ce981b5"
+  },
+  "checkpoint": {
+    "path": "/mnt/external/demosaic/models/dino-convnext-wide-long-control-b16-v63-step20000.pt",
+    "sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5"
+  },
+  "fixture": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-inputs-v1/inputs.json",
+    "sha256": "11655660520041c0b9255f197758c6c313ef50834605dc78350c1e5c6f3d8784"
+  },
+  "observation": {
+    "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-inputs-v1/GFX-four-contexts-native512.npz",
+    "sha256": "2975a90f272b201a81954e6d1e1c41d58ff18c6249c22274b17f8dea0471cbd2"
+  },
+  "relative_native_xywh": [
+    216,
+    224,
+    80,
+    64
+  ],
+  "conditioning": {
+    "shot": 0.0014635775921166604,
+    "read": 1.0715704128646712e-06,
+    "source": "input Haar fit"
+  },
+  "GFX_values_compared": 61440,
+  "GFX_output_files": {
+    "original": {
+      "path": "/mnt/external/demosaic/experiments/physical-feature-work-CPU-v3/original-GFX-RGB-f32.npy",
+      "sha256": "425cc15ec6282b5caed94f64387efaf3e43d4608710094a122495ef8dc17dcad"
+    },
+    "candidate": {
+      "path": "/mnt/external/demosaic/experiments/physical-feature-work-CPU-v3/candidate-GFX-RGB-f32.npy",
+      "sha256": "425cc15ec6282b5caed94f64387efaf3e43d4608710094a122495ef8dc17dcad"
+    }
+  },
+  "synthetic_native_size": [
+    64,
+    64
+  ],
+  "synthetic_CFA_patterns": [
+    "RGGB",
+    "BGGR",
+    "GRBG",
+    "GBRG"
+  ],
+  "synthetic_values_compared": 49152,
+  "synthetic_output_files": {
+    "original": {
+      "path": "/mnt/external/demosaic/experiments/physical-feature-work-CPU-v3/original-synthetic-RGB-f32.npy",
+      "sha256": "526fa8c17db4948725df9575ca7afad68ac66d7f5cc7a94589eaaa599685bbbb"
+    },
+    "candidate": {
+      "path": "/mnt/external/demosaic/experiments/physical-feature-work-CPU-v3/candidate-synthetic-RGB-f32.npy",
+      "sha256": "526fa8c17db4948725df9575ca7afad68ac66d7f5cc7a94589eaaa599685bbbb"
+    }
+  },
+  "all89_trainable_parameter_gradient_bytes_exact": true,
+  "trainable_gradient_elements": 32904704,
+  "gradient_hashes": {
+    "path": "/mnt/external/demosaic/experiments/physical-feature-work-CPU-v3/gradient-hashes.json",
+    "sha256": "dc0d8bee90a06ae2c12ee82603ed558f21d1b2f11c9bea1dbbe11aa2c3567308"
+  },
+  "all_model_output_bytes_exact": true,
+  "weights_and_RNG_unchanged": true,
+  "model_sha256": "b3e5f1c055b0541db3935ac73d1c88327c07a2bbc23c040d3d14eef8a45cc1fa",
+  "CUDA_initialized": false,
+  "scope": "CPU implementation parity with genuine V63 weights. Real cached GFX contexts are forward-only, without reference or objective. Eval-mode autograd uses deterministic synthetic all-CFA fields, no GT, optimizer or update. Both policies share the previously verified inverse cleanup. No CUDA timing, training-speed, broad quality, manual-view or full100MP claim; active training/review keep original frozen source."
+}
