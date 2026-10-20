@@ -37,13 +37,13 @@ Use a new training manifest; preserve originals, historical manifests, protected
 series and the GFX scene/siblings. This is targeted review, not a claim that
 every corpus photo was manually viewed.
 
-The [current 322-source visual review](results/source-quality-visual-review-v13.json)
+The [current 334-source visual review](results/source-quality-visual-review-v14.json)
 withholds twenty-three sources: a historic map scan, a photomontage, nine graphic-only
 or flat document compositions, a predominantly
 defocused station scene, and eleven images with visibly unreliable clean-target
-texture/noise/edge quality. The other 299 remain, including fine
+texture/noise/edge quality. The other 311 remain, including fine
 foliage, wheat, fur, coral, architectural grids and hazy/low-contrast landscapes.
-Fifty-nine contact sheets and twenty-six larger native 1024 crops were actually inspected.
+Sixty-one contact sheets and twenty-six larger native 1024 crops were actually inspected.
 The full ranking is still running; this is an initial review, not the final
 curated manifest or a trained-model result.
 
