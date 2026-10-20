@@ -118,9 +118,12 @@ outside Git; they contain generated fields, not personal captures.
 Executed model/worker sources and arrays remain under
 `/mnt/external/demosaic/experiments/spectral-gate-components-v1/`.
 
-The next check is the same fixed head intervention on photographic/cached GFX
-inputs. Natural edges, clipping and the separately measured
-[window-dependence risk](spectral-operator-context.md) can behave differently
-from these stationary carriers. No serving/default/checkpoint change, training
-extension or new quality promotion follows from this diagnostic. The complete
-project quality and100MP/10s goals remain open.
+The subsequent [fixed photographic/GFX pilot](spectral-photo-components.md)
+completes that check: unit gating introduces periodic texture and color casts,
+losing sRGB PSNR/SSIM on both photos in all six noisy conditions. The cached
+GFX wall gains a colored grid. The analytic amplitude bottleneck therefore
+does not justify turning up the gate on photographs. Natural edges, clipping
+and the separately measured [window-dependence risk](spectral-operator-context.md)
+need further isolated evidence. No serving/default/checkpoint change, training
+extension or new quality promotion follows. The complete project quality
+and100MP/10s goals remain open.

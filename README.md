@@ -81,6 +81,8 @@ finds+.278/.276dB photo gains but failed camera criteria and weak fine detail.
 All81 native triplets/125 cells are reviewed; neither model replaces V43.
 The [completed spectral4k review](docs/spectral-original4k-review.md) finds a small
 matched photo gain but failed weak-detail/known-camera criteria; V43 remains working.
+The [fixed spectral-gate photo/GFX diagnosis](docs/spectral-photo-components.md)
+finds that turning up the gate creates periodic texture and color errors.
 See [training pipeline work](docs/training-pipeline.md) for augmentation before
 the last reduction, selected-domain loading and the batch-size sweep.
 The [optional execution policy](docs/training-execution.md) adds verified mixed-domain

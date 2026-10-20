@@ -1,0 +1,21 @@
+{
+  "status": "failed-photo-pilot-nullable-metric-serialization-no-quality-decision",
+  "original_plan": {
+    "path": "/mnt/external/demosaic/experiments/spectral-photo-components-v1/plan.json",
+    "sha256": "d623211b64cf45020a2b39cd8e14fef4b538ed986a95d6bb7adaf49b05dcf1e3"
+  },
+  "executed_worker": {
+    "path": "/mnt/external/demosaic/experiments/spectral-photo-components-v1/work/scripts/diagnose_spectral_photo_components.py",
+    "sha256": "5263c1fd22bd6dc4345fb517b5beba8a24284320d383bc39eda917413a531c6c"
+  },
+  "terminal_tool_session": 5633,
+  "exit_code": 1,
+  "failure": "TypeError subtracting original null shadow highlight-boundary metric from a nonfinite float. No highlight boundary exists in that case.",
+  "completed_conditions": [
+    "adc-only",
+    "iso100-prior",
+    "iso1600-prior",
+    "iso12800-prior"
+  ],
+  "correction": "Use the original evaluator _number convention and require identical nullable support, preserving all original finite comparisons and their4-ULP bound. No model/data/intervention/noise/threshold change. All partial artifacts retained, not promoted or used as a completed quality result."
+}

@@ -1,18 +1,20 @@
 # Experiment evidence
 
-The [V88/V89 spectral experiment](spectral-v88-v89.md) tests input-derived
-coherent Fourier evidence around the mature frozen-DINO-guided model. Both
-arms use reviewed88508 Commons/native128/paired32, native256/B16/seed55 and
-original4000 updates. [Engineering checks](spectral-engineering.md) pass68 tests
-and genuine CPU/CUDA16-update/8+8 restart comparisons; the separate full trial
-is launched. No restoration-quality result, promotion or budget extension follows.
-The [retention-wrapper recovery](spectral-retention-recovery.md) preserves the
-verified1000 state, all46 model modules and original4000 schedule. Corrected
-CPU/CUDA and fresh-process resume checks pass; production resumes beyond1025.
-The [resource recovery](spectral-resource-recovery.md) subsequently replays
-unsaved work from the same1000 state with an explicit64GiB root-reserve addendum.
-[Full review/closure/reference/native packaging](spectral-review-preparation.md)
-is queued after both final original4000 endpoints; no quality result follows yet.
+The [completed V88/V89 spectral review](spectral-original4k-review.md) finishes
+both original4000 budgets and all native/numerical checks. Matched photo PSNR
+improves+.00776dB while SSIM falls; known-camera and weak-detail criteria fail.
+Neither endpoint is promoted or extended. Both arms use reviewed88508
+Commons/native128/paired32, native256/B16/seed55 and the46 original modules.
+[Engineering](spectral-engineering.md),
+[retention](spectral-retention-recovery.md) and
+[resource recovery](spectral-resource-recovery.md) remain separately documented.
+
+The following [fixed-weight analytic diagnosis](spectral-gate-components.md)
+finds a small trained scalar gate suppresses useful sinusoidal correction.
+Its [fixed photo/GFX follow-up](spectral-photo-components.md) rejects a blanket
+unit gate: both photos lose sRGB PSNR/SSIM in all six noisy conditions and the
+GFX wall gains a colored periodic grid. All54 triplets/90 native cells and84
+independent saved-array PSNR scalars are checked. No new model or policy follows.
 
 The [completed V86/V87 input-context review](training-context-original4k-review.md)
 finds +.00099dB matched photo PSNR with a95% source interval crossing zero.

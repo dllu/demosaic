@@ -43,7 +43,12 @@ finds the learned gate passes only about1.3/2.0% of available correction on
 the two weak carriers. A unit intervention restores their contrast but changes
 ADC responses beyond the signed-loss limit in16 labelled tests; it is not
 integrated. All15 native cells and9024 independent saved-array metric scalars
-are checked. This conditional analytic result does not establish photo quality.
+are checked. The subsequent [fixed photo/GFX pilot](spectral-photo-components.md)
+rejects unconditional unit gating: both photos lose sRGB PSNR/SSIM under all
+six noisy conditions and the cached GFX wall gains a colored periodic grid.
+All54 triplets/90 native cells are viewed before statistics, all input/output
+identities are exact and84 independently recomputed PSNR scalars agree within
+.000008dB. No serving change, full427 extension or promotion follows.
 
 The [CPU noise-proxy diagnostic](stabilized-noise-proxy.md) checks transformed
 variance and interior demosaicing covariance against generated simulations and

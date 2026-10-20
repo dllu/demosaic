@@ -1,0 +1,134 @@
+{
+  "status": "completed-fixed-photo-GFX-spectral-component-review-no-integration",
+  "reviewed_UTC": "2026-10-20T06:37:20.927385+00:00",
+  "plan": {
+    "path": "/mnt/external/demosaic/experiments/spectral-photo-components-v2/plan.json",
+    "sha256": "d46588c6b9b982deb2df0e636e5c62b90a52c59ded56d261a40ad8f7027ed3db"
+  },
+  "pilot": {
+    "path": "/mnt/external/demosaic/experiments/spectral-photo-components-v2/cuda-pilot/summary.json",
+    "sha256": "c8a4b251e9fb40647440ade57571d3005ee40524cba273d04f6820df42790dcb"
+  },
+  "manual_native_review_before_statistics": {
+    "path": "/mnt/external/demosaic/experiments/spectral-photo-components-v2/native/manual-review-before-statistics.json",
+    "sha256": "55851444645eeb1c9757dda99d6413536df0eb95a9f88d844479ccb7e2c01068"
+  },
+  "independent_array_audit": {
+    "path": "/mnt/external/demosaic/experiments/spectral-photo-components-v2/array-audit.json",
+    "sha256": "e4cdfa48b344a8921be6f71803c76c528fa2d2b80abdd44fdc7928b8462241fe"
+  },
+  "checkpoint": {
+    "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-resource-recovery-v2/work/runs/spectral/last.pt",
+    "sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3",
+    "arm": "spectral",
+    "step": 4000,
+    "kind": "joint-checkpoint",
+    "label": "V89-original4000"
+  },
+  "decision": "Reject unconditional unit-gate serving and do not extend this intervention to full427. No new training or checkpoint promotion.",
+  "findings": [
+    "Unit gating improves two ADC-only photo PSNRs but lowers sRGB PSNR and SSIM on both sources in all six noisy conditions.",
+    "The strongest noisy condition has mean unit-minus-trained sRGB PSNR -2.627512dB and SSIM -.0337879; clipped highlights average -6.313208dB and -.0193273.",
+    "Actual native views show periodic sky/wall texture, green highlight color casts and no convincing recovery of canopy cords/fine foliage.",
+    "The cached GFX building wall acquires a strong colored periodic pattern; fence contrast changes do not establish better fidelity. No reference score is computed.",
+    "Small trained gates suppress this harmful photographic innovation as well as withholding useful analytic carrier response. These observations do not isolate the cause of its selectivity failure."
+  ],
+  "per_condition_means_two_sources": [
+    {
+      "condition": "adc-only",
+      "unit_minus_full": {
+        "linear_psnr": 0.9354000091552734,
+        "srgb_psnr": 0.7658424377441406,
+        "srgb_ssim": 0.000700145959854126
+      },
+      "full_minus_base": {
+        "linear_psnr": 0.03384208679199219,
+        "srgb_psnr": 0.05242919921875,
+        "srgb_ssim": 0.0001093447208404541
+      }
+    },
+    {
+      "condition": "iso100-prior",
+      "unit_minus_full": {
+        "linear_psnr": 0.16642379760742188,
+        "srgb_psnr": -1.4848747253417969,
+        "srgb_ssim": -0.0060710906982421875
+      },
+      "full_minus_base": {
+        "linear_psnr": 0.017881393432617188,
+        "srgb_psnr": 0.018980026245117188,
+        "srgb_ssim": 4.976987838745117e-05
+      }
+    },
+    {
+      "condition": "iso1600-prior",
+      "unit_minus_full": {
+        "linear_psnr": -0.9300689697265625,
+        "srgb_psnr": -2.7955970764160156,
+        "srgb_ssim": -0.022736966609954834
+      },
+      "full_minus_base": {
+        "linear_psnr": 0.005596160888671875,
+        "srgb_psnr": 0.007884979248046875,
+        "srgb_ssim": 1.990795135498047e-05
+      }
+    },
+    {
+      "condition": "iso12800-prior",
+      "unit_minus_full": {
+        "linear_psnr": -1.0211067199707031,
+        "srgb_psnr": -2.627511978149414,
+        "srgb_ssim": -0.03378790616989136
+      },
+      "full_minus_base": {
+        "linear_psnr": 0.0023174285888671875,
+        "srgb_psnr": 0.0042438507080078125,
+        "srgb_ssim": 7.420778274536133e-06
+      }
+    },
+    {
+      "condition": "shadows",
+      "unit_minus_full": {
+        "linear_psnr": -1.0624160766601562,
+        "srgb_psnr": -1.8703250885009766,
+        "srgb_ssim": -0.009625256061553955
+      },
+      "full_minus_base": {
+        "linear_psnr": 0.0039577484130859375,
+        "srgb_psnr": 0.0038242340087890625,
+        "srgb_ssim": 3.337860107421875e-06
+      }
+    },
+    {
+      "condition": "highlights",
+      "unit_minus_full": {
+        "linear_psnr": -0.15399742126464844,
+        "srgb_psnr": -6.313207626342773,
+        "srgb_ssim": -0.019327282905578613
+      },
+      "full_minus_base": {
+        "linear_psnr": -0.00035572052001953125,
+        "srgb_psnr": -0.000759124755859375,
+        "srgb_ssim": -3.3468008041381836e-05
+      }
+    },
+    {
+      "condition": "legacy-noise",
+      "unit_minus_full": {
+        "linear_psnr": -1.0179195404052734,
+        "srgb_psnr": -2.8003387451171875,
+        "srgb_ssim": -0.029938310384750366
+      },
+      "full_minus_base": {
+        "linear_psnr": 0.0033206939697265625,
+        "srgb_psnr": 0.005428314208984375,
+        "srgb_ssim": 8.106231689453125e-06
+      }
+    }
+  ],
+  "new_training_updates": 0,
+  "serving_or_policy_changed": false,
+  "full427_extension": false,
+  "scope": "Two previously selected development photos, one RGGB layout and original fixed noise seed per condition. Four standing cached GFX native512 regions. No independent generalization, SOTA, full-frame quality or runtime claim. Base is V89 own adapted trunk, not V88/V63.",
+  "next_evidence": "Isolate why the same input-only innovation creates natural-scene color/periodic artifacts before choosing another learned gate, spectral support rule or architecture. Turning up the scalar gate is not justified."
+}
