@@ -39,12 +39,12 @@ Use a new training manifest; preserve originals, historical manifests, protected
 series and the GFX scene/siblings. This is targeted review, not a claim that
 every corpus photo was manually viewed.
 
-The [current 63-source visual review](results/source-quality-visual-review-v2.json)
+The [current 111-source visual review](results/source-quality-visual-review-v3.json)
 withholds five sources: a historic map scan, a photomontage, a predominantly
 defocused station scene, and two images with visible noise/edge artifacts
-whose clean-target quality is uncertain. The other 58 remain, including fine
+whose clean-target quality is uncertain. The other 106 remain, including fine
 foliage, wheat, fur, coral, architectural grids and hazy/low-contrast landscapes.
-Thirteen contact sheets and six larger native 1024 crops were actually inspected.
+Twenty-one contact sheets and six larger native 1024 crops were actually inspected.
 The full ranking is still running; this is an initial review, not the final
 curated manifest or a trained-model result.
 
@@ -55,6 +55,12 @@ additional sources already reviewed. `scripts/freeze_v43_curated_corpus.py
 training manifests. It checks the completed ranking receipt, source identities,
 the exact original V43 cohort and unchanged holdout memberships. Exclusions
 affect future training membership only.
+
+An additional posthoc ADC-error/local-gradient ratio review retained all twelve
+new selected sources: it mostly found legitimate smooth skies, saturated
+gradients and bright boundaries. Small denominators and model error affect this
+cue; it does not identify bad photographs reliably by itself. This reused partial
+source scores, with no additional inference or automatic exclusions.
 
 ## Matched V43 training comparison
 
@@ -98,6 +104,29 @@ DINO stays frozen and gradients, optimizer state and EMA remain finite.
 This uses batch 1/native 32 before curation and provides no model-quality,
 production CUDA, throughput or validation result. The focused data/training
 checks pass 53 tests with one skip.
+
+The [matched launcher CPU proof](results/v43-quality-launcher-CPU-proof-v2.json)
+then verifies all three arms on explicitly provisional memberships: 24 discarded
+updates per arm, 72 in total. All start with the exact original V43 EMA and fresh
+optimizers; the 71 model/71 EMA tensors and 69 Adam states are finite. All owners
+exit successfully. The data-only comparison preserves all 15 shared paired/native
+observations and changes five Commons observations; the fine-detail comparison
+preserves all ten paired observations and changes six treatment observations.
+Final Python/CPU/CUDA RNG states match across arms. Source archives differ only
+in the training manifest for the membership comparison and are identical for
+the augmentation comparison. This remains CPU/B1/native32 engineering, with no
+quality or timing claim.
+
+`scripts/train_v43_quality_trial.py` prepares the production freeze only from a
+completed final curation receipt. It checks that membership and augmentation
+are the only recipe differences, and that native/paired/validation manifests
+match the original V43 lineage. The launcher runs fresh CPU checks and discarded
+CUDA/B16/native256 checks before any of the three 20k stages. It enforces memory,
+disk and runtime bounds, keeps caches in authorized storage, retains 4k/8k/12k/16k
+diagnostic checkpoints, and uses the fixed 20k final EMA as the primary endpoint.
+The training-validation best checkpoint is separate. Failures are preserved;
+there is no automatic retry or promotion. **The production plan is not yet
+frozen or launched**, because full source ranking and final review are pending.
 
 ## Quality review
 
