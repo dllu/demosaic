@@ -28,6 +28,20 @@ Its [resource recovery](spectral-resource-recovery.md) preserves that state and
 deducts consumed time while using a64GiB operational root reserve. The validated
 [full final review and native packaging](spectral-review-preparation.md) are
 queued after successful original4000 exits; quality remains unproven.
+The [completion-log audit](spectral-log-completion.md) now verifies the completed
+original4k control and the fresh spectral1k state/RNG trajectory. An extra real
+first-resume log is preserved without restarting or extending the control.
+The fresh spectral arm and full native/numerical review remain in progress.
+
+The [CPU noise-proxy diagnostic](stabilized-noise-proxy.md) checks transformed
+variance and interior demosaicing covariance against generated simulations and
+the actual frozen physics source. Its dark-level average is close to the unit
+proxy, with substantial correlation and deviations of both signs elsewhere;
+it does not justify a broad scalar-prior change or prove a quality cause.
+Separate [inverse](vst-unused-inverse.md) and
+[physical-feature](physical-feature-unused-work.md) implementation cleanups have
+genuine-weight CPU output/gradient parity; their CUDA probes remain queued after
+training and full review. No full-model speed or new quality gain follows.
 
 The [reviewed public RAW146/private168 extensions](public-raw-expansion-v3.md)
 remain separate future inputs. The [completed Commons extension](commons-post4557-reviewed.md)
@@ -202,7 +216,7 @@ timing or production adoption follows.
 | Requirement | Evidence needed | Current state |
 | --- | --- | --- |
 | Modern method and DINOv3 recommendation | Primary-source research, architecture rationale, licensed pretrained backbone and ablation | Approved pinned DINOv3 weights and licenses, ViT/ConvNeXt implementations and matched ablations are recorded in [research](research.md). Mature context gains are inconsistent; the [completed RAW-native mixed16 review](packed-isotropic-mixed16-quarter-review.md) still trails older controls. The [completed directional/interval study](directional-interval-original4k-review.md) retains genuine frozen ConvNeXt features and the mature RGB predictor; photo/color gains coexist with failed camera criteria and weak detail. SOTA is unproven |
-| Free, broad training data | Source attribution manifest, content-grouped held-out split, real corpus training | Current trial: **84,867 train / 2,303 val / 2,255 test** Commons sources in the frozen [known-series quarantine](commons-content-overlap.md), with original holdouts preserved. Native targets retain [128 captures / 106 scene groups](public-raw-expansion-v2.md); the active paired manifest has 64 paired cases across 32 training scenes. Known series are excluded, but unknown aliases and ancestral exposure remain; complete scene independence or a data-only trained gain is unproven |
+| Free, broad training data | Source attribution manifest, content-grouped held-out split, real corpus training | Active spectral trial: **88,508 train / 2,303 val / 2,255 test** Commons sources in the [completed reviewed extension](commons-post4557-reviewed.md), with original holdouts preserved. Earlier trials retain their frozen84,867-source cohort and [known-series quarantine](commons-content-overlap.md). Native targets retain [128 captures / 106 scene groups](public-raw-expansion-v2.md); the active paired manifest has 64 paired cases across 32 training scenes. Known series are excluded, but unknown aliases and ancestral exposure remain; complete scene independence or a data-only trained gain is unproven |
 | 8×8 binning with additional precision | Linear-light float averaging and >8-bit cache, numerical tests | Linear-light averaging and uint16 caches are implemented and tested. Current Commons/native training uses 4× caches, geometry/PSF and final area2, with original 8× validation. Matching parent 4×/8× caches and the exact quarantined source subsets are audited; see [pipeline](training-pipeline.md), [cache preparation](commons-incoming-v5.md) and [content audit](commons-content-overlap.md) |
 | Geometry, optical blur, exposure, synthetic fine detail | Executable data augmentation and inspected samples | Implemented. Complete 4×→geometry/PSF→2× Commons/native targets improve full-photo PSNR by .50990 dB in the matched V34 trial; original 8× validation remains fixed |
 | Physical Bayer noise across cameras and ISO | Electron-domain Poisson/read noise, metadata and tests | Poisson/read/ADC simulation is moment-tested and signed black samples are retained. Single-capture estimates remain provisional; the [fit-support study](noise-calibration-fit-support.md) documents limits. Dedicated sensor calibration remains missing |

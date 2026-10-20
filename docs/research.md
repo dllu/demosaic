@@ -4,6 +4,12 @@ Research started 2026-10-14. Sources below are primary implementations, papers,
 and vendor documentation. A recent publication is not itself evidence that this
 project matches its performance.
 
+The [October20 PixIE follow-up](research-pixie-followup.md) records a recent
+semantic-routing candidate and its differences from our current fusion.
+The accompanying [CPU noise-proxy study](stabilized-noise-proxy.md) checks a
+specific physical assumption first; neither establishes a new model result
+or changes the live spectral comparison.
+
 The [CPU censored-highlight counterexamples](censored-highlight-gradients.md)
 isolate two constraints in the current implementation: a constant-preserving
 RAW head has no censored-channel offset, while hard display clipping can hide
