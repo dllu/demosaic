@@ -1,8 +1,9 @@
 # V92 full quality and native review preparation
 
 V92 has completed its original4000-step training run. The independent final-state
-audit passes and the fresh FP32 quality review is running. No quality gain is
-established. The [fixed head-only protocol](late-rgb-head-only-v92.md)
+audit passes and the [full FP32/native review is complete](late-rgb-head-only-original4k-review.md).
+V92 fails its quality criteria and is rejected without promotion or extension.
+The [fixed head-only protocol](late-rgb-head-only-v92.md)
 and [training engineering checks](late-rgb-head-only-engineering.md) remain the
 source of its scope and criteria. Completed V90 is a historical exploratory
 reference chosen after observing its results, not a newly randomized arm.
@@ -119,5 +120,6 @@ now records30 viewed cells from the fixed photo, known and unseen examples,
 with source pixels/checkpoint identities retained. Fine canopy cords remain
 missing and V92 looks close to its parent in these selected views. At this
 interim observation full427 is live;95 remaining native cells, complete scalar
-audits and the quality decision remain pending. No new numerical summary is interpreted
-or promotion inferred from these early crops.
+audits and the quality decision remained pending at that interim observation.
+The [final report](late-rgb-head-only-original4k-review.md) now completes all125
+actual views and scalar audits, rejecting V92 after seven failed primary gates.

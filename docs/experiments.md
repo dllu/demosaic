@@ -1,5 +1,12 @@
 # Experiment evidence
 
+The [completed V92 head-only review](late-rgb-head-only-original4k-review.md)
+finishes original4000 and all125 actual native cells. Frozen common model/EMA
+bytes preserve ADC detail relative to historical V90, but photo PSNR falls
+.16213dB and unseen CFA PSNR falls.34470dB versus V63. All seven primary gates
+and both high-noise gain/flat contrasts fail. V92 is rejected without extension
+or promotion; V43 remains the working reference.
+
 The [completed V90/V91 late RGB refinement review](late-rgb-original4k-review.md)
 finishes both original4000 budgets and all125 native cells. Spatial prompts
 add+.00217dB photo PSNR over their global means, with a positive source

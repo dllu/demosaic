@@ -5,6 +5,12 @@ the genuine V63 common path while learning the existing global late RGB head.
 This document records execution/state checks, not a quality or speed result.
 Architecture and inference defaults remain unchanged; no model is promoted.
 
+The [completed full quality/native review](late-rgb-head-only-original4k-review.md)
+now rejects V92 after its original4000 updates and125 actual native cells.
+Photo/unseen-camera means fall versus V63, despite improved ADC preservation
+relative to historical V90. Execution correctness does not establish quality;
+there is no extension, promotion or V92 full-frame run.
+
 `late_rgb_only: true` makes only the24 head tensors /100,547 parameters
 trainable. The1× optimizer group is empty and the20× group contains all24;
 AdamW creates only24 states. All91 common restoration tensors and the frozen

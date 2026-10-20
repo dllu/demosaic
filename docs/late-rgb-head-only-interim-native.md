@@ -1,5 +1,9 @@
 # V92 first fixed native views: detail loss remains
 
+This dated interim observation is superseded by the
+[completed full review](late-rgb-head-only-original4k-review.md), which rejects
+V92 after all125 native cells and numerical criteria are evaluated.
+
 V92 looks close to its V63 parent in the first fixed native photo and camera
 examples. All three neural methods remove much of the displayed noise, but the
 fine canopy cords visible in exact synthetic GT remain missing. These views
@@ -89,8 +93,9 @@ AHD references retain grain and do not provide exact pixel truth.
 
 ![Unseen camera crops with independently demosaiced AHD references](images/late-rgb-head-only-interim-unseen-native.png)
 
-The producer remains live in the full427 stage after completing boundary,
-known and unseen stages. The serial mature-precision controller is still
-waiting with no child or GPU output. The remaining full evaluation, source/
-scalar audits and actual native views retain priority. V43 and the README
-examples remain the working experimental reference.
+The [full427 inference stage has now completed](results/late-rgb-head-only-full427-completion-v1.json):
+its exact worker exited successfully and all74,424 expected rows are present.
+At that interim boundary, the workflow continued through statistics and the
+remaining review stages, with95 native cells pending. The subsequent final
+report completes those checks and rejects V92. V43 and the README examples
+remain the working experimental reference.
