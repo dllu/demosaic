@@ -21,6 +21,9 @@ arms. Its [68 tests and genuine CPU/CUDA engineering preflights](spectral-engine
 pass, including exact16 versus8+8 state/RNG equality. A separate original4000
 controller is launched; trained quality/native review remains pending. This is
 not a demonstrated improvement, and V43 remains the working reference.
+An [explicit retention-wrapper repair](spectral-retention-recovery.md) resumes
+the verified original1000 state with unchanged model/data/original4000 horizon;
+corrected CPU/CUDA and external checkpoint/prefix recovery checks pass.
 
 The [reviewed public RAW146/private168 extensions](public-raw-expansion-v3.md)
 remain separate future inputs. The [completed Commons extension](commons-post4557-reviewed.md)

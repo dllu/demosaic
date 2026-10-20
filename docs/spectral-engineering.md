@@ -7,6 +7,11 @@ engineering checkpoints, without a restoration-quality or speed result.**
 The [fixed V88/V89 protocol](spectral-v88-v89.md) defines the next comparison;
 V43 remains the working reference.
 
+An identified final double-save bug in this experiment's retention wrapper has
+an [explicit verified1000-checkpoint recovery](spectral-retention-recovery.md).
+The corrected CPU/CUDA and external-resume checks pass, and production has
+resumed its original4000 horizon. All46 model modules, data and losses stay fixed.
+
 [Complete preflight/hash/state receipt](results/spectral-engineering-preflights-v1.json).
 [Launch observation](results/spectral-original4k-launch-v1.json).
 
@@ -50,12 +55,15 @@ head and its20×head LR are the intervention; common data, losses and base LR
 remain fixed. The larger-context result does not support discarding smaller
 sources for another320px training field.
 
-Runs live under
+The initial run is preserved under
 `/mnt/external/demosaic/experiments/spectral-v88-v89-original4k-v1/`.
 The launch observation verifies the exact live controller/worker through logged
 control update100, all three source domains and20 recorded matching
 source/actual-forward/actual-loss observations. It is a captured startup record,
 not a terminal result or a replay of unrecorded samples.
+The current active run is under
+`/mnt/external/demosaic/experiments/spectral-v88-v89-retention-recovery-v1/`;
+the recovery report records the exact handoff, state checks and current owners.
 Only final original4000 endpoints are eligible for the declared full photographic,
 real-camera, analytic, hue/highlight and actual native-crop review. There is no
 automatic continuation, default change or promotion. GFX3879/3880 and siblings

@@ -22,6 +22,18 @@ PRIOR = Path("/mnt/external/demosaic/experiments/context-v86-v87-original4k-v1/p
 FUTURE = Path("/mnt/external/demosaic/commons-post4557-reviewed-20261020-v1")
 
 
+def retain_checkpoint(path, step):
+    """Retain a boundary once; repeated identical trainer saves are valid."""
+    path = Path(path)
+    target = path.with_name(f"step-{step:06d}.pt")
+    if target.exists():
+        if ref(path)["sha256"] != ref(target)["sha256"]:
+            raise ValueError("Repeated retained checkpoint differs; preserve both files")
+    else:
+        shutil.copyfile(path, target)
+    return ref(target)
+
+
 def prepare(root, device, full=False, cpu_preflight=None, cuda_preflight=None):
     previous = read(PRIOR)
     assert (
@@ -204,7 +216,23 @@ def worker(plan_path, name):
         training.save_checkpoint,
     )
     originals = training.reconstruction_loss, training.paired_reconstruction_loss
+    resume = plan.get("resume", {}).get(name)
     observations, captures, tracking = [], [], {"current": None, "resume": None}
+    if resume is not None:
+        assert ref(resume["checkpoint"]["path"]) == resume["checkpoint"]
+        assert ref(resume["observations"]["path"]) == resume["observations"]
+        tracking["resume"] = torch.load(
+            resume["checkpoint"]["path"], weights_only=True, map_location="cpu", mmap=True
+        )
+        assert tracking["resume"]["step"] == resume["step"] < boundary
+        assert tracking["resume"]["config"]["steps"] == 4000
+        observations.extend(read(resume["observations"]["path"]))
+        expected_steps = (
+            list(range(1, resume["step"] + 1))
+            if plan["engineering_only"]
+            else [*range(1, 17), *range(25, resume["step"] + 1, 25)]
+        )
+        assert [r["step"] for r in observations] == expected_steps
 
     def instrument(options):
         net = constructor(options)
@@ -247,6 +275,7 @@ def worker(plan_path, name):
                     "resuming": tracking["resume"] is not None,
                 }
             )
+            save(root / (name + "-initializations.json"), captures)
 
         hook = net.register_forward_hook(first_forward, with_kwargs=True)
 
@@ -295,19 +324,24 @@ def worker(plan_path, name):
     def retain(path, model, optimizer, ema, step, config, best):
         writer(path, model, optimizer, ema, step, config, best)
         if Path(path).name == "last.pt" and step in (1000, 4000):
-            target = Path(path).with_name(f"step-{step:06d}.pt")
-            assert not target.exists()
-            shutil.copyfile(path, target)
+            retain_checkpoint(path, step)
 
     training.JointDemosaic, training.prepare_training_batch = instrument, observed_batch
     training.save_checkpoint = retain
     training.reconstruction_loss, training.paired_reconstruction_loss = map(loss_wrapper, originals)
     try:
-        checkpoint = training.train(
-            arm["config"],
-            initialize=plan["parent"]["path"],
-            stop_after=8 if name == "restart" else boundary,
-        )
+        if resume is None:
+            checkpoint = training.train(
+                arm["config"],
+                initialize=plan["parent"]["path"],
+                stop_after=8 if name == "restart" else boundary,
+            )
+        else:
+            checkpoint = training.train(
+                arm["config"],
+                resume=resume["checkpoint"]["path"],
+                stop_after=boundary - resume["step"],
+            )
         if name == "restart":
             assert plan["engineering_only"]
             middle = root / "restart-step8.pt"
@@ -366,8 +400,11 @@ def worker(plan_path, name):
         root / (name + "-result.json"),
         {
             "status": "completed-one-spectral-training-arm-awaiting-comparison",
+            "arm": name,
             "checkpoint": ref(checkpoint),
             "captures": captures,
+            "initializations": ref(root / (name + "-initializations.json")),
+            "resume": resume,
             "observations": ref(root / (name + "-observations.json")),
             "metrics": ref(Path(checkpoint).parent / "metrics.jsonl"),
             "logged_observations": rows,
@@ -457,7 +494,9 @@ def controller(plan_path):
                 )
                 owner = {"pid": child.pid, "created": psutil.Process(child.pid).create_time()}
                 record("running-source-frozen-spectral-arm", child=owner)
-                deadline = time.monotonic() + plan["timeout_seconds"]
+                deadline = time.monotonic() + plan.get("arm_timeout_seconds", {}).get(
+                    arm["name"], plan["timeout_seconds"]
+                )
                 while child.poll() is None:
                     ram, disk, external = resources()
                     if time.monotonic() > deadline or ram < 24 or disk < 128 or external < 500:
