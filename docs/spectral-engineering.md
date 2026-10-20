@@ -52,8 +52,8 @@ sources for another320px training field.
 
 Runs live under
 `/mnt/external/demosaic/experiments/spectral-v88-v89-original4k-v1/`.
-The launch observation verifies the exact live controller/worker and the first
-100 logged control updates, all three source domains and20 recorded matching
+The launch observation verifies the exact live controller/worker through logged
+control update100, all three source domains and20 recorded matching
 source/actual-forward/actual-loss observations. It is a captured startup record,
 not a terminal result or a replay of unrecorded samples.
 Only final original4000 endpoints are eligible for the declared full photographic,
