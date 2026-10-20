@@ -21,6 +21,14 @@ slower and V63 is 1.59% faster. It is not integrated and supplies no new full-fr
 result. A separate future-watcher startup-race fix passes29 focused tests.
 The complete SOTA/native-superiority and100MP/10s requirements remain open.
 
+The [mature mixed-precision pilot](mature-mixed-precision-engineering.md)
+passes25 policy/queue tests and76 genuine-weight CPU forwards on V43/V63,
+with exact state/RNG/FP32 controls and independent native-code/one-DN checks.
+Its CUDA pilot is source-frozen and verified waiting behind all V92 jobs.
+CPU emulation supplies no CUDA accuracy, speed or full-frame result; earlier
+V42 timing still does not qualify these mature checkpoints. Working defaults
+and the complete objective remain unchanged and open.
+
 The subsequent [fixed late-head/shared-path diagnosis](late-rgb-component-review.md)
 replays96 unique analytic observations across six methods. The main ADC loss
 terms are already in the jointly adapted pre-head paths; present-day bypass

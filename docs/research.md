@@ -25,6 +25,13 @@ now has genuine-state CPU integration, unchanged historical metric/native
 packaging replay and a source-frozen serial queue. The retained first1000 state
 preserves the common model/EMA bytes, but this does not establish a quality gain.
 
+The [mature mixed-precision follow-up](mature-mixed-precision-engineering.md)
+separately checks the existing autocast policy on actual V43/V63 weights,
+including their different frozen DINO encoders. Genuine CPU execution and
+independent code-sensitivity checks pass. A bounded CUDA pilot waits behind
+all V92 review/package jobs; no mature CUDA speed or quality result follows
+from the older V42 timing or this CPU emulation.
+
 The [October20 PixIE follow-up](research-pixie-followup.md) records a recent
 semantic-routing candidate and its differences from our current fusion.
 The accompanying [CPU noise-proxy study](stabilized-noise-proxy.md) checks a
