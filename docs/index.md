@@ -15,7 +15,7 @@ training quality with its architecture and the larger cleaned corpus.
 | Training | [Data/augmentation pipeline](training-pipeline.md), [execution/restart](training-execution.md) |
 | Evaluation | [Quality/noise diagnostics](evaluation.md), [GFX test](gfx-qualitative.md) |
 | Method research | [Research/design record](research.md) |
-| Remaining requirements | [Completion evidence](requirements.md) |
+| Remaining requirements | [Current completion checklist](requirements.md), [historical progress log](requirements-archive.md) |
 
 Per-experiment reports contain numerical evidence, source/ROI metadata,
 checkpoint hashes, noise/display settings and native triplets. Real low-ISO or
