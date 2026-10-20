@@ -1,0 +1,40 @@
+{
+  "status": "fixed-future-CPU-review-startup-race-with-red-green-regression",
+  "current_script": {
+    "path": "/home/dllu/proj/demosaic/scripts/watch_uniform_physics_review.py",
+    "sha256": "c139918f5641ecf6b2fde33767340e4c3c5195da606b96e0af6f491d160a49ce"
+  },
+  "current_tests": [
+    {
+      "path": "/home/dllu/proj/demosaic/tests/test_uniform_physics_review.py",
+      "sha256": "c4565b9f81942d7b31d6784c1fb957670ed05d73672f2e3dd46584889c67180d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/tests/test_uniform_physics_probe.py",
+      "sha256": "b3e792ac3db2fdc6c3e36198a6de30debae82472848d57e12684ec8ab085c9f6"
+    }
+  ],
+  "JUnit": {
+    "path": "/mnt/external/demosaic/experiments/uniform-physics-CUDA-review-v3/startup-race-regressions.xml",
+    "sha256": "7f177f5b03515f0bbb22710013ce784d91a0c8d3e80aa6d130e0e9eb80ae85e6"
+  },
+  "passed": 29,
+  "failed": 0,
+  "pre_patch_regression": {
+    "test": "test_watcher_waits_for_initial_status_only_while_exact_parent_lives",
+    "failed": 1,
+    "deselected": 14,
+    "error": "FileNotFoundError at read(plan[GPU_status]) while exact parent mocked live"
+  },
+  "behavior": "Missing initial status waits only while the exact parent is live; missing status after parent exit raises. Failed terminals, changed identity/plan, live children and corrupt JSON retain their strict checks. No retry of a terminal failure.",
+  "live_frozen_driver_unchanged": {
+    "path": "/mnt/external/demosaic/experiments/uniform-physics-CUDA-review-v1/work/scripts/watch_uniform_physics_review.py",
+    "sha256": "6c62b9d16557f110613a735fee719cf94e82aa7ed555d28559dc1b1e0d07bf46"
+  },
+  "live_queue_plan": {
+    "path": "/mnt/external/demosaic/experiments/uniform-physics-CUDA-review-v3/plan.json",
+    "sha256": "e139f6896c65479777590c61f4ee6f12666e1c640ee8b6af668932b69d4dcca3"
+  },
+  "CUDA_VISIBLE_DEVICES_for_tests": "",
+  "scope": "Future source guard fix and focused CPU-only tests. Existing frozen quality/probe/watcher copies remain unchanged. No model, inference, recipe, numerical threshold, timing or promotion change."
+}

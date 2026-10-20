@@ -47,7 +47,17 @@ replacement lives in `uniform-physics-CUDA-review-v3/`, owner1129051/
 create1792496649.81. It retains the original independent array/native checks,
 historical integration receipt, bounds and actual-inspection requirement.
 All three replacement waiting processes are confirmed live and child-free,
-with no Torch/CUDA libraries loaded. No production source or test changed.
+with no Torch/CUDA libraries loaded. At that recovery snapshot, no production
+source or test had changed.
+
+A subsequent source fix prevents this startup race in future CPU-review
+queues: missing initial status waits while the exact parent is live and
+fails if that parent has exited. Existing failed-terminal, identity/plan,
+child-exit and corrupt-JSON checks remain strict. The new lifecycle test
+reproduces the original FileNotFoundError before the fix; all29 focused
+tests then pass. [Regression receipt](results/uniform-physics-review-startup-race-regressions-v1.json).
+The current frozen jobs keep their original source copies; the live CPU
+replacement already verified the initial status explicitly before launch.
 
 Separately, the first six synthetic noisy/restored/exact-GT triplets were
 actually viewed at native160px before reading new numerical quality values:
@@ -57,6 +67,14 @@ binds each PNG/source/ROI/checkpoint/noise/exposure. Both new heads retain the
 major building edges, but fine canopy suspension lines remain largely absent;
 no clear spatial-head advantage is visible in these selected crops. These
 observations do not complete the required eight-board/125-cell review.
+
+The subsequent [camera-board visual record](results/late-rgb-early-camera-native-view-v1.json)
+adds actual inspection of28 shared native cells from20 triplets, including
+both new heads, fresh V63 and matched retained V43/RawNIND. The boards use
+the same frozen assembly functions as the final report. Global/spatial look
+very close in these selected camera crops. Their final PNG/cell equivalence
+still needs checking after the complete review; these are partial visual
+observations, without new numerical interpretation or a promotion decision.
 
 Main review owner930391/create1792482701.57 and its exact full427 worker
 1124805/create1792495822.32 remain live;25,907 records were present at the

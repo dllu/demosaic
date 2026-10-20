@@ -156,3 +156,57 @@ def test_watcher_refuses_failed_or_incomplete_gpu_terminal(tmp_path, monkeypatch
         save(status, {"controller": owner, "plan": ref(path), "status": terminal})
         with pytest.raises(RuntimeError, match=message):
             ready(plan)
+
+
+def test_watcher_waits_for_initial_status_only_while_exact_parent_lives(tmp_path, monkeypatch):
+    from watch_uniform_physics_review import ready
+
+    path = tmp_path / "controller-plan.json"
+    save(path, {})
+    owner = {"pid": 123, "created": 1.0}
+    status = tmp_path / "status.json"
+    plan = {"GPU_status": str(status), "GPU_owner": owner, "GPU_controller_plan": ref(path)}
+    monkeypatch.setattr("watch_uniform_physics_review.alive", lambda o: o == owner)
+    assert ready(plan) is False
+    assert not status.exists()
+
+    save(
+        status,
+        {
+            "controller": owner,
+            "plan": ref(path),
+            "status": "completed-uniform-physics-CUDA-array-gates-and-resident-timing-awaiting-review",
+        },
+    )
+    assert ready(plan) is False
+    monkeypatch.setattr("watch_uniform_physics_review.alive", lambda _o: False)
+    assert ready(plan) is True
+    status.unlink()
+    with pytest.raises(RuntimeError, match="exited before writing its initial status"):
+        ready(plan)
+
+
+def test_watcher_refuses_failure_even_while_parent_is_live(tmp_path, monkeypatch):
+    from watch_uniform_physics_review import ready
+
+    path = tmp_path / "controller-plan.json"
+    save(path, {})
+    owner = {"pid": 123, "created": 1.0}
+    status = tmp_path / "status.json"
+    save(status, {"controller": owner, "plan": ref(path), "status": "failed-probe"})
+    plan = {"GPU_status": str(status), "GPU_owner": owner, "GPU_controller_plan": ref(path)}
+    monkeypatch.setattr("watch_uniform_physics_review.alive", lambda _o: True)
+    with pytest.raises(RuntimeError, match="dependency failed"):
+        ready(plan)
+
+
+def test_watcher_does_not_hide_corrupt_initial_status(tmp_path, monkeypatch):
+    import json
+
+    from watch_uniform_physics_review import ready
+
+    status = tmp_path / "status.json"
+    status.write_text("{ incomplete")
+    monkeypatch.setattr("watch_uniform_physics_review.alive", lambda _o: True)
+    with pytest.raises(json.JSONDecodeError):
+        ready({"GPU_status": str(status), "GPU_owner": {"pid": 123, "created": 1.0}})

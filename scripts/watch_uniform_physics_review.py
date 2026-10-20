@@ -13,7 +13,13 @@ from train_directional_bank_trial import read, ref, save
 
 
 def ready(plan):
-    state = read(plan["GPU_status"])
+    try:
+        state = read(plan["GPU_status"])
+    except FileNotFoundError:
+        # The parent can be live before its atomic initial status write.
+        if alive(plan["GPU_owner"]):
+            return False
+        raise RuntimeError("GPU owner exited before writing its initial status") from None
     if state["controller"] != plan["GPU_owner"] or state["plan"] != plan["GPU_controller_plan"]:
         raise ValueError("Exact GPU controller identity/plan changed")
     if ref(state["plan"]["path"]) != state["plan"]:
