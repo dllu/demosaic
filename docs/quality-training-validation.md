@@ -80,3 +80,29 @@ directory, retaining plans/code locally and fixing free-space reserves at
 64 GiB on the system disk and 384 GiB externally before the production freeze.
 The default local-artifact policy remains 64/500 GiB. The live source scanner's
 original 500 GiB floor is unchanged; its completion precedes production work.
+
+## Evaluation launcher integration
+
+The [CPU evaluation-launcher check](results/v43-quality-evaluation-launcher-CPU-proof-v3.json)
+passes on original V43 plus the same three discarded 24-update EMAs. The new
+controller/worker complete 48 real neural/DINO forwards, 84 metric records and
+eight native 160-pixel triplets; all 24 panels were actually viewed. All metric
+records and PNGs match the earlier reporting witness byte for byte. Native
+metadata matches except for report-specific checkpoint snapshot paths.
+The common noisy/GT pixels match across methods, independent summary arithmetic
+has zero discrepancy, and weights, DINO, configuration, parameter identities,
+RNG and declared inputs remain unchanged. Sampled physical-input hashes match
+before/after forwarding and across methods. All owners exit; CUDA remains off.
+
+A prepared v1 was unused. V2 stopped before any model forward because a strict
+configuration comparison distinguished lists from tuples; the canonical JSON
+comparison now matches the established training check. The failed artifact/log
+and owners' exit are preserved before a fresh v3 freeze. These checks cover the
+small CPU photo branch only. Full photo/real/texture/color/GFX execution, final
+curation, production CUDA and model quality remain unproven.
+
+The generic native-pixel validator also passes on 64 retained triplets from
+existing real, carrier/flat, color-grid and GFX reports. It verifies PNG hashes,
+native160 rectangles and shared noisy/reference pixels across methods without
+importing torch or running inference. This checks report-schema handling, not
+new branch execution or another visual review.

@@ -39,13 +39,13 @@ Use a new training manifest; preserve originals, historical manifests, protected
 series and the GFX scene/siblings. This is targeted review, not a claim that
 every corpus photo was manually viewed.
 
-The [current 222-source visual review](results/source-quality-visual-review-v9.json)
+The [current 245-source visual review](results/source-quality-visual-review-v10.json)
 withholds eighteen sources: a historic map scan, a photomontage, eight graphic-only
 or flat document compositions, a predominantly
 defocused station scene, and seven images with visibly unreliable clean-target
-texture/noise/edge quality. The other 204 remain, including fine
+texture/noise/edge quality. The other 227 remain, including fine
 foliage, wheat, fur, coral, architectural grids and hazy/low-contrast landscapes.
-Forty-two contact sheets and thirteen larger native 1024 crops were actually inspected.
+Forty-six contact sheets and thirteen larger native 1024 crops were actually inspected.
 The full ranking is still running; this is an initial review, not the final
 curated manifest or a trained-model result.
 
@@ -153,3 +153,15 @@ aggregate interpretation. Each model report includes at least two native
 noisy/restored/exact-GT triplets and accurately labeled real references, with
 checkpoint/ROI/noise/exposure metadata. No faster inference or new full-frame
 benchmark is part of this work.
+
+`scripts/evaluate_v43_quality_trial.py` prepares evaluation only after the matched
+training controller and workers finish. It pins the four checkpoint bytes,
+training-source snapshot, observations and protocol, then runs photo, known,
+unseen, weak-detail, color and two GFX stages serially. Fresh IEEE FP32 is shared
+across all endpoints; historical means retain their original compute metadata.
+RawNIND's global/per-channel input-only adapters appear in photo/real/GFX panels.
+Each stage checks frozen DINO/state, predictor arguments and native crop pixels;
+the primary photo/real summaries also receive independent coverage/arithmetic
+checks. Outputs still require actual native viewing and interpretation.
+The [CPU launcher integration](results/v43-quality-evaluation-launcher-CPU-proof-v3.json)
+passes on discarded checkpoints; it does not qualify the production branches.
