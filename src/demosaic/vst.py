@@ -104,14 +104,6 @@ class GeneralizedAnscombe(nn.Module):
             algebraic = z * math.sqrt(self.q) + z.square() / 4
             if self.inverse_mode == "algebraic":
                 return (algebraic * self.shot).float()
-            d = (z + 2 * math.sqrt(self.q)).clamp_min(1)
-            closed = (
-                algebraic
-                + 0.25
-                + math.sqrt(1.5) / (4 * d)
-                - 11 / (8 * d.square())
-                + 5 * math.sqrt(1.5) / (8 * d.pow(3))
-            )
             if self.inverse_mode == "table":
                 index = torch.searchsorted(self.expected, z.contiguous()).clamp(
                     1, len(self.means) - 1
@@ -131,5 +123,12 @@ class GeneralizedAnscombe(nn.Module):
                 tail = algebraic + 0.25 + correction * anchor / algebraic.clamp_min(anchor)
                 value = torch.where(z > self.expected[-1], tail, value)
             else:
-                value = closed
+                d = (z + 2 * math.sqrt(self.q)).clamp_min(1)
+                value = (
+                    algebraic
+                    + 0.25
+                    + math.sqrt(1.5) / (4 * d)
+                    - 11 / (8 * d.square())
+                    + 5 * math.sqrt(1.5) / (8 * d.pow(3))
+                )
             return (value * self.shot).float()

@@ -14,6 +14,14 @@ BOUNDARY = "independently-verified-spectral-original4000-boundaries"
 ENGINEERING_BOUNDARY = "independently-verified-spectral-engineering-boundaries"
 
 
+def canonical_training_rows(rows, *, engineering=False, resume_step=None):
+    """Keep the additional real first-resume log and match shared scheduled rows."""
+    expected = list(range(1, 17)) if engineering else [1, *range(25, 4001, 25)]
+    extras = [] if resume_step is None or resume_step + 1 in expected else [resume_step + 1]
+    assert [r["step"] for r in rows] == sorted(expected + extras)
+    return [r for r in rows if r["step"] in expected], [r for r in rows if r["step"] in extras]
+
+
 def require_completed(plan):
     status = read(plan["training_status"])
     engineering = plan.get("engineering_preflight", False)
@@ -229,8 +237,9 @@ def boundaries(plan):
 
         rows = train_rows(Path(checkpoint["path"]).parent)
         assert rows == case["logged_observations"]
-        assert [r["step"] for r in rows] == (
-            list(range(1, 17)) if engineering else [1, *range(25, 4001, 25)]
+        resume_step = training.get("resume", {}).get(arm["name"], {}).get("step")
+        scheduled_rows, extra_resume_rows = canonical_training_rows(
+            rows, engineering=engineering, resume_step=resume_step
         )
         assert ref(case["observations"]["path"]) == case["observations"]
         samples = read(case["observations"]["path"])
@@ -254,8 +263,18 @@ def boundaries(plan):
             assert (
                 row["lr"] == lr and math.isfinite(row["loss"]) and math.isfinite(row["grad_norm"])
             )
-            assert row["batch_sha256"] == by_step[row["step"]]["source_sha256"]
-            assert row["context_supervision_sha256"] == by_step[row["step"]]["actual_loss_sha256"]
+            if row["step"] in by_step:
+                assert row["batch_sha256"] == by_step[row["step"]]["source_sha256"]
+                assert (
+                    row["context_supervision_sha256"] == by_step[row["step"]]["actual_loss_sha256"]
+                )
+            else:
+                assert row["step"] == resume_step + 1
+                assert (
+                    row["batch_sha256"]
+                    == row["context_forward_sha256"]
+                    == row["context_supervision_sha256"]
+                )
         checkpoints.append(
             {
                 **checkpoint,
@@ -278,13 +297,14 @@ def boundaries(plan):
                 "actual_training_package_files_exact": 46,
                 "recovery": recovery,
                 "retained1000": None if engineering else first1000,
+                "additional_first_resume_logs": extra_resume_rows,
             }
         )
         cases.append(case)
         states.append(state)
         configs.append(cfg)
         observations.append(samples)
-        logs.append(rows)
+        logs.append(scheduled_rows)
     assert configs[0].keys() == configs[1].keys()
     assert {k for k in configs[0] if configs[0][k] != configs[1][k]} == {
         "run",

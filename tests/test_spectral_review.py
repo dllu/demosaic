@@ -169,3 +169,18 @@ def test_discarded_work_must_replay_exact_observations_and_metrics(review, tmp_p
         changed_row["loss"] += 0.001
     with pytest.raises(AssertionError):
         review.check_replayed_work(training, changed_obs, [changed_row])
+
+
+@pytest.mark.parametrize("extra", [1001, 1002, None])
+def test_resumed_log_is_preserved_and_only_declared_extra_is_accepted(review, extra):
+    base = [{"step": s} for s in [1, *range(25, 4001, 25)]]
+    rows = sorted(base + ([] if extra is None else [{"step": extra}]), key=lambda r: r["step"])
+    original = copy.deepcopy(rows)
+    if extra == 1001:
+        shared, additional = review.canonical_training_rows(rows, resume_step=1000)
+        assert shared == base and additional == [{"step": 1001}] and rows == original
+        with pytest.raises(AssertionError):
+            review.canonical_training_rows(rows)
+    else:
+        with pytest.raises(AssertionError):
+            review.canonical_training_rows(rows, resume_step=1000)

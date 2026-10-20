@@ -24,7 +24,10 @@ def prepare(training_path, historical_path, closure_path, preflight_path, output
     )
     status_path = Path(training["root"]) / "status.json"
     status = read(status_path)
-    assert alive(status["controller"]) and status["status"] == "running-source-frozen-spectral-arm"
+    assert alive(status["controller"]) and status["status"] in (
+        "running-source-frozen-spectral-arm",
+        "waiting-for-exact-control-original4000-completion",
+    )
     proof = read(preflight_path)
     validate_preflight(proof)
     root = writable_path(output).resolve()
