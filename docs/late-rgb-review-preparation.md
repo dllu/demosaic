@@ -49,10 +49,13 @@ input bindings. Plan SHA256:
 `12a4a0b4f2e585baf9266dc91a73321f1d2c8a567619f8c49f3676d5cef42a2c`.
 Root:
 `/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-review-v1/`.
-All review, CPU-closure, retained-reference and native-package owners are
-verified live and waiting for their exact successful predecessors. Their
-identities and observed training progress are in the queue snapshot; the live
-status files remain operational state rather than immutable completion proof.
+The initial queue snapshot records the review, CPU-closure, retained-reference
+and native-package owners and their predecessor checks. The waiting package
+watcher later exited before packaging; its
+[explicit recovery](late-rgb-queue-recovery.md) preserves the ended owner and
+binds a separate detached replacement. Main evaluation continues unchanged.
+Live status files remain operational state rather than immutable completion
+proof.
 
 Fresh FP32 evaluation retains the full427 photo/16 procedural sources, known4/
 unseen5 panels, seven conditions/four CFAs,418/416 source sensitivities,
