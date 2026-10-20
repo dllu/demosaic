@@ -1,0 +1,66 @@
+{
+  "status": "completed-header-inventory-and-actual-16-source-visual-review",
+  "recorded_local": "2026-10-20T13:14:21.560297-07:00",
+  "operator": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/publish-header-and-storage-checks-v1.py",
+    "sha256": "e6420ac23524c41e281a7be2ccf38776484493900afe08c9bab62b3e9c9edef8"
+  },
+  "receipt": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/source-capture-metadata-v3/receipt.json",
+    "sha256": "556a834b9e0920daf00605f596ada1e4de5dcdc2a37d21bc8a379b53a6877d8c"
+  },
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/source-capture-metadata-v3/plan.json",
+    "sha256": "71fa15cbcc7ced70f18976fae8e68411dc475c272825ecb2d9580d7a598b4c3e"
+  },
+  "manifest": {
+    "path": "/mnt/external/demosaic/commons-post4557-reviewed-20261020-v1/manifest4.jsonl",
+    "sha256": "18a21d02ea9256495aea1c7279404ca75a6baf77cb64c3fdc9bad4ed141d38e7"
+  },
+  "records": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/source-capture-metadata-v3/per-source.jsonl",
+    "sha256": "465c6d469d36535338660f33a0e797fdafb702be6ebded5c92fe2f1c94bcede1"
+  },
+  "training_sources": 88508,
+  "recorded_positive_ISO": 82094,
+  "ISO_at_least3200": 1370,
+  "metadata_exception_or_unsupported_format_records": 0,
+  "EXIF_warnings_preserved": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/source-capture-metadata-v3/worker.log",
+    "sha256": "71c55f699907445355bccf31f3e4ad24bdfa5f957df41ad021d441a29f908e3d"
+  },
+  "pixel_decodes_attempted": 0,
+  "torch_imported": false,
+  "CUDA_visible_devices": "",
+  "bounded_threads": 2,
+  "bounded_pending_futures": 32,
+  "source_ID_coverage_and_record_hash_independently_verified": true,
+  "owners_confirmed_exited": [
+    {
+      "pid": 1959163,
+      "created": 1792526891.93
+    },
+    {
+      "pid": 1959164,
+      "created": 1792526891.94
+    }
+  ],
+  "visual_review": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/source-visual-review-capture-ISO-v1/actual-visual-review.json",
+    "sha256": "24d976901aea08fad2649ec9b2af5b476271653ed49813628a5fdb2956467df6"
+  },
+  "actual_views": {
+    "native_sheets": 3,
+    "larger_native1024_crops": 5,
+    "sources": 16
+  },
+  "decisions": {
+    "retain": 12,
+    "withhold": 4
+  },
+  "prior_attempts": {
+    "v1": "Prepared, never launched.",
+    "v2": "Stopped after40 recorded rows: a valid MPO header failed the JPEG-only assertion. Preserved, both owners exited. V3 adds MPO and bounds pending futures before freezing and launching a fresh inventory."
+  },
+  "scope": "Training-only JPEG/MPO first-frame headers, no pixel decode/model inference/GPS extraction. Positive ISO counts describe metadata availability, not true capture provenance or clean-target quality. EXIF warnings remain in the worker log, so zero exception records does not assert complete/unblemished EXIF. No automatic exclusions, fresh whole-file hash claim for all originals, or prevalence estimate. Selected visual renderer separately verifies whole originals/cache hashes. Originals and historical memberships remain unchanged."
+}

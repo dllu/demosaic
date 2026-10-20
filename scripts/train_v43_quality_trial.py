@@ -30,15 +30,15 @@ def live(owner):
         return False
 
 
-def resources(root, available=24):
+def resources(root, available=24, *, root_reserve_gib=64, external_reserve_gib=500):
     return (
         psutil.virtual_memory().available >= available * 2**30
-        and shutil.disk_usage(root).free >= 64 * 2**30
-        and shutil.disk_usage("/mnt/external").free >= 500 * 2**30
+        and shutil.disk_usage(root).free >= root_reserve_gib * 2**30
+        and shutil.disk_usage("/mnt/external").free >= external_reserve_gib * 2**30
     )
 
 
-def prepare(curation_path, root, *, cpu_only=False, validation_proof=False):
+def prepare(curation_path, root, *, cpu_only=False, validation_proof=False, artifact_root=None):
     import yaml
 
     assert not validation_proof or cpu_only
@@ -57,6 +57,23 @@ def prepare(curation_path, root, *, cpu_only=False, validation_proof=False):
     assert root.is_relative_to(REPO / ".cache")
     root.mkdir(parents=True, exist_ok=False)
     work = root / "work"
+    disk_reserves = {"root_reserve_gib": 64, "external_reserve_gib": 500}
+    if artifact_root is None:
+        artifact_root = work / "runs"
+    else:
+        artifact_root = Path(artifact_root).resolve()
+        assert artifact_root.is_relative_to(Path("/mnt/external/demosaic"))
+        artifact_root.mkdir(parents=True, exist_ok=False)
+        marker = artifact_root / "artifact-owner.json"
+        save(
+            marker,
+            {
+                "plan_root": str(root),
+                "scope": "Artifact namespace reserved for this matched V43 study; originals and datasets are elsewhere.",
+            },
+        )
+        inputs.append(ref(marker))
+        disk_reserves["external_reserve_gib"] = 384
     sources = list((REPO / "src/demosaic").glob("*.py")) + [
         REPO / name
         for name in (
@@ -104,7 +121,7 @@ def prepare(curation_path, root, *, cpu_only=False, validation_proof=False):
         )
         configs[arm] = {}
         for phase in ("CPU",) if cpu_only else ("CPU", "CUDA", "train"):
-            actual = dict(config, run=str(work / "runs" / phase / arm))
+            actual = dict(config, run=str(artifact_root / phase / arm))
             if cpu_only:
                 actual["experiment_notes"] = (
                     "Discarded CPU-only launcher proof on provisional pre-final-ranking data; no CUDA, production training, final curation or quality claim."
@@ -149,6 +166,8 @@ def prepare(curation_path, root, *, cpu_only=False, validation_proof=False):
     plan = {
         "root": str(root),
         "work": str(work),
+        "artifact_root": str(artifact_root),
+        "disk_reserves": disk_reserves,
         "curation": ref(curation_path),
         "parent": parent,
         "configs": configs,
@@ -210,7 +229,7 @@ def worker(plan_path, phase, arm):
     (root / f"{phase}-{arm}.claim").open("x").close()
     config_path = plan["configs"][arm][phase]["path"]
     config = yaml.safe_load(Path(config_path).read_text())
-    assert resources(root, 32)
+    assert resources(root, 32, **plan.get("disk_reserves", {}))
     if phase == "CPU":
         assert os.environ.get("CUDA_VISIBLE_DEVICES") == "" and not torch.cuda.is_initialized()
     else:
@@ -455,7 +474,7 @@ def controller(plan_path):
                     assert time.monotonic() - began < plan["wait_seconds"]
                     stable = (
                         (time.monotonic() if stable is None else stable)
-                        if resources(root, 48)
+                        if resources(root, 48, **plan.get("disk_reserves", {}))
                         else None
                     )
                     if stable is not None and time.monotonic() - stable >= plan["stable_seconds"]:
@@ -502,7 +521,9 @@ def controller(plan_path):
                     record("running-V43-quality-stage", phase=phase, arm=arm, child=identity)
                     deadline = time.monotonic() + plan["timeouts_seconds"][phase]
                     while child.poll() is None:
-                        assert resources(root), "Training resource floor"
+                        assert resources(root, **plan.get("disk_reserves", {})), (
+                            "Training resource floor"
+                        )
                         assert time.monotonic() < deadline, "Training stage runtime bound"
                         time.sleep(2)
                     assert child.wait() == 0, (phase, arm, child.returncode)
@@ -566,6 +587,11 @@ if __name__ == "__main__":
     parser.add_argument("path", type=Path)
     parser.add_argument("--output", type=Path)
     parser.add_argument(
+        "--artifact-root",
+        type=Path,
+        help="Reserve a fresh /mnt/external/demosaic directory for run artifacts; plans/code stay local. Keeps 384 GiB external/64 GiB root free.",
+    )
+    parser.add_argument(
         "--cpu-only",
         action="store_true",
         help="Discarded launcher proof on explicitly provisional memberships; never launches CUDA or production training.",
@@ -585,6 +611,7 @@ if __name__ == "__main__":
             args.output,
             cpu_only=args.cpu_only,
             validation_proof=args.validation_proof,
+            artifact_root=args.artifact_root,
         )
     elif args.mode == "worker":
         assert args.phase and args.arm
