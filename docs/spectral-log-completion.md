@@ -66,3 +66,12 @@ with its original4k budget. Its initialization reports exact common parent
 state/output and the pinned DINO hash. The first17 actual observation
 dictionaries, through step25, match the completed control exactly. The fresh
 arm and all quality/native-review requirements remain in progress.
+
+The genuine retained spectral1k state passed a read-only CPU audit at03:51UTC:
+93 finite model/93 EMA tensors and91 AdamW states at1,000, nonnegative second
+moments, original schedule LR and20× head multiplier. The head weight/bias are
+nonzero in model and EMA. All56 recorded observations and saved Python/torch/
+CUDA RNG states match the control at1,000; all41 scheduled metric domains, LRs
+and source/supervision hashes match. This verifies trajectory integrity and an
+active learned head, not restoration quality or endpoint eligibility.
+[Retained1k audit](results/spectral-first1000-integrity-v1.json).

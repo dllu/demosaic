@@ -66,3 +66,15 @@ source spinning disks were untouched.
 [CPU parity](../docs/results/physical-feature-work-CPU-v3.json),
 [CPU serving census](../docs/results/physical-feature-work-serving-census-v1.json),
 [actual deferred queue](../docs/results/physical-feature-work-CUDA-queue-v1.json).
+
+At03:51UTC, independently audited the genuine retained spectral1k checkpoint
+2fecc66dbb031102d57db6aa9bfe03c9cac7963defe96f5c6a4e66fe1d682a3e.
+All93 model/93 EMA/91 AdamW states are finite, optimizer counters1,000 and second
+moments nonnegative; original LR and20× head multiplier match. Head weight/bias
+are nonzero in model and EMA. All56 observed dictionaries, saved Python/torch/
+CUDA RNG states and41 scheduled metric domain/LR/source/supervision hashes
+match the original control at1,000. The same exact fresh worker was live past
+1,125; no additional training or inference was performed. ReceiptSHA
+83304e082d7fc59642599c3321babc420332f423877b141994375ff5f11ddf37.
+[Public retained1k audit](../docs/results/spectral-first1000-integrity-v1.json).
+This is trajectory/state evidence, without a quality or promotion decision.
