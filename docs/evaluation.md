@@ -253,7 +253,7 @@ including per-phase conversion from our camera-white normalization. Earlier
 reports clipped its input and understated this comparator; those archived
 reports are historical and require a new comparison. New synthetic suites also
 run RawNIND in IEEE FP32. See the real development results in
-[experiments](experiments.md#paired-real-raw-development-and-camera-conditioning).
+[paired-RAW experiment archive](experiment-archive.md#paired-real-raw-development-and-camera-conditioning).
 
 ## Noise profiles
 

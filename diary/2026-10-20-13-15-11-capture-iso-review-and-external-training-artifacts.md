@@ -54,3 +54,8 @@ root64/external500 GiB floors remain unchanged. No restart, new GPU job or
 production study launch occurred. Final ranking, final manifest freeze and
 quality training/evaluation remain pending. V43 is still the reference.
 
+A subsequent documentation audit checked3,947 local file links and section
+anchors. It found one old evaluation link pointing to a section moved from the
+experiment index into the chronological archive; that link now targets the
+preserved section directly.
+
