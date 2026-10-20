@@ -16,6 +16,16 @@ CPU operator algebra and a64-layer compute census show approximate FP32
 agreement but97.68% more dense trunk MACs. The paper's NPU results do not
 establish a GB10 speedup; no production rewrite or new GPU job follows.
 
+The [October20 WGCAN release check and CPU transfer pilot](wgcan-raw-mhc-cpu-pilot.md)
+pins a recent wavelet/color-guided joint-restoration release and strictly loads
+its genuine294-tensor checkpoint. Its learned ISP RGB target differs from our
+linear output, so the fixed pilot uses its RAW branch followed by Malvar.
+All24 native cells are actually viewed; the selected transfer has stronger
+periodic texture and lower scores on both photos than stored V43. This is not
+the publisher's joint RGB benchmark or an architecture ranking. No license
+file/header was found in the pinned source, which remains an isolated reference;
+there is no production incorporation or new GPU job.
+
 The [CPU censored-highlight counterexamples](censored-highlight-gradients.md)
 isolate two constraints in the current implementation: a constant-preserving
 RAW head has no censored-channel offset, while hard display clipping can hide
