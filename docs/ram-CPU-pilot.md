@@ -73,14 +73,14 @@ rendered-sRGB conventions; the PNGs are RGB8 viewing copies.
 | Building/cloud | V43 IEEE CUDA | 40.14702 | 34.82487 | .959359 |
 | Building/cloud | V63 IEEE CUDA | 40.61390 | 35.38537 | .961910 |
 
-![RAM: noisy / restored / exact synthetic GT, canopy](images/RAM-CPU-photo0-native 256.png)
+![RAM: noisy / restored / exact synthetic GT, canopy](images/RAM-CPU-photo0-native256.png)
 
 Source-cache ROI `[237,51,160,160]`; input ROI `[48,48,160,160]`.
 [Roy Egloff, Vertigo Swiss Riviera](https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg),
 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), modified by
 binning, crop, simulated noise and restoration.
 
-![RAM: noisy / restored / exact synthetic GT, building/cloud](images/RAM-CPU-photo1-native 256.png)
+![RAM: noisy / restored / exact synthetic GT, building/cloud](images/RAM-CPU-photo1-native256.png)
 
 Source-cache ROI `[243,137,160,160]`; input ROI `[48,48,160,160]`.
 [Dietmar Rabich, Vancouver Coal Harbour](https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg),

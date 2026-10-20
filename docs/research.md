@@ -407,3 +407,18 @@ texture accompanies residual grain and fine sky patterns; no broad native gain
 is established. All30 native board cells and12 independent PSNR replays verify.
 The model stays an isolated reference, with no adaptation on qualitative captures,
 production dependency, DINO replacement, full-frame continuation or promotion.
+
+## Wavelet-guided RAW reference
+
+The [July 2026 WGCAN paper](https://doi.org/10.1016/j.imavis.2026.106137) and
+[pinned authors' code](https://github.com/user-hbj/WGCAN/tree/87413dd280af8228f34fe33188136077ad81ca68)
+provide wavelet-guided RAW restoration and a learned RGB ISP. The
+[completed RAW-stage/Malvar CPU transfer pilot](wgcan-RAW-CPU-pilot.md) loads all
+294 released state tensors and checks all four Bayer layouts before six fixed
+photo/GFX cases. Its photographic scores trail retained V43/V63; native crops
+show periodic grids and lost fence structure. All54 triplet panels, 30 board
+cells and12 PSNR replays verify. This evaluates our composition with an
+independent demosaicer, not the full published RGB pipeline or paper scores.
+Unverified upstream license terms keep source/weights in an isolated research
+cache. No production dependency, training change, broad ranking or promotion
+follows.
