@@ -207,7 +207,20 @@ def prepare_raw_clean(manifest, output, *, factor=8, min_size=256):
 class RawCleanDataset(Dataset):
     """Scene-balanced camera RGB with deterministic crops and physical metadata."""
 
-    def __init__(self, manifest, *, patch_size=256, seed=42, augmentation_downsample=1):
+    def __init__(
+        self,
+        manifest,
+        *,
+        patch_size=256,
+        seed=42,
+        augmentation_downsample=1,
+        optical_blur_probability=0.25,
+    ):
+        from .data import validate_probability
+
+        self.optical_blur_probability = validate_probability(
+            optical_blur_probability, "Native optical blur probability"
+        )
         self.path = Path(manifest)
         self.payload = self.path.read_bytes()
         data = json.loads(self.payload)
@@ -283,13 +296,15 @@ class RawCleanDataset(Dataset):
             / 65535
         )
         if self.augmentation_downsample == 2:
-            rgb = augment_before_downsample(rgb, self.size, rng)
+            rgb = augment_before_downsample(
+                rgb, self.size, rng, optical_blur_probability=self.optical_blur_probability
+            )
         else:
             rgb = F.interpolate(rgb[None], size=(size, size), mode="area")[0]
             rgb = torch.rot90(rgb, rng.randrange(4), (-2, -1))
             if rng.random() < 0.5:
                 rgb = rgb.flip(-1)
-            if rng.random() < 0.25:
+            if rng.random() < self.optical_blur_probability:
                 rgb = optical_blur(rgb, rng)
             if rng.random() < 0.2:
                 rgb = homography(rgb, rng)

@@ -58,6 +58,20 @@ def validate_flat_chroma_stops(value) -> float:
     return value
 
 
+def validate_probability(value, label):
+    value = float(value)
+    if not math.isfinite(value) or not 0 <= value <= 1:
+        raise ValueError(f"{label} must be finite and within [0,1]")
+    return value
+
+
+def attenuate_photographic_contrast(rgb, rng):
+    """Preserve the patch's color mean and fine geometry while lowering contrast."""
+    scale = 2 ** rng.uniform(-3, -1)
+    mean = rgb.mean((-2, -1), keepdim=True)
+    return mean + scale * (rgb - mean)
+
+
 def smooth_scene(size: int, rng: random.Random, *, chroma_stops=0.0) -> torch.Tensor:
     """Continuous-precision flat fields/ramps, including deep shadows.
 
@@ -100,7 +114,15 @@ class CleanDataset(Dataset):
         augmentation_downsample=1,
         weak_texture_fraction=0.0,
         flat_chroma_stops=0.0,
+        optical_blur_probability=0.25,
+        photographic_low_contrast_fraction=0.0,
     ):
+        self.optical_blur_probability = validate_probability(
+            optical_blur_probability, "Optical blur probability"
+        )
+        self.photographic_low_contrast_fraction = validate_probability(
+            photographic_low_contrast_fraction, "Photographic low contrast fraction"
+        )
         self.flat_chroma_stops = validate_flat_chroma_stops(flat_chroma_stops)
         self.manifest = Path(manifest)
         if records is None:
@@ -139,6 +161,7 @@ class CleanDataset(Dataset):
         rng = random.Random(self.seed + index)
         size = self.size * self.augmentation_downsample
         draw = rng.random()
+        photographic = False
         if draw < self.flat_fraction:
             rgb = smooth_scene(size, rng, chroma_stops=self.flat_chroma_stops)
         elif draw < self.flat_fraction + self.synthetic_fraction:
@@ -147,6 +170,7 @@ class CleanDataset(Dataset):
             else:
                 rgb = synthetic(size, rng)
         else:
+            photographic = True
             record = self.rows[
                 rng.randrange(len(self.rows)) if self.split == "train" else index % len(self.rows)
             ]
@@ -167,19 +191,28 @@ class CleanDataset(Dataset):
             if self.augmentation_downsample == 1:
                 rgb = F.interpolate(rgb[None], size=(size, size), mode="area")[0]
         if self.augmentation_downsample == 2:
-            rgb = augment_before_downsample(rgb, self.size, rng)
+            rgb = augment_before_downsample(
+                rgb, self.size, rng, optical_blur_probability=self.optical_blur_probability
+            )
         elif self.split == "train":
             rgb = torch.rot90(rgb, rng.randrange(4), (-2, -1))
             if rng.random() < 0.5:
                 rgb = rgb.flip(-1)
-            if rng.random() < 0.25:
+            if rng.random() < self.optical_blur_probability:
                 rgb = optical_blur(rgb, rng)
             if rng.random() < 0.2:
                 rgb = homography(rgb, rng)
+        if (
+            self.split == "train"
+            and photographic
+            and self.photographic_low_contrast_fraction
+            and rng.random() < self.photographic_low_contrast_fraction
+        ):
+            rgb = attenuate_photographic_contrast(rgb, rng)
         return {"rgb": rgb.contiguous(), "index": index}
 
 
-def augment_before_downsample(rgb, size, rng):
+def augment_before_downsample(rgb, size, rng, *, optical_blur_probability=0.25):
     """Compose geometry at 2x target resolution, then average linear 2x2 cells.
 
     Photographs start as 4x-binned linear uint16 caches. D4 transforms are exact;
@@ -194,7 +227,7 @@ def augment_before_downsample(rgb, size, rng):
         rgb = homography(rgb, rng, output_size=2 * size)
     elif rgb.shape[-2:] != (2 * size, 2 * size):
         rgb = F.interpolate(rgb[None], size=(2 * size, 2 * size), mode="area")[0]
-    if rng.random() < 0.25:
+    if rng.random() < optical_blur_probability:
         rgb = optical_blur(rgb, rng, pixel_scale=2)
     return F.avg_pool2d(rgb, 2)
 

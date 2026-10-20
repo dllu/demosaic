@@ -1,95 +1,68 @@
 # demosaic
 
-Joint Bayer demosaicing and denoising in linear camera RGB, with 16-bit TIFF
-output, physical noise conditioning, tiled inference, and an optional DINOv3
-feature branch. Experimental: training and quality validation are in progress.
-V43 step2000 remains the working experimental reference below. The
-[completed 160k-example review](docs/packed-isotropic-mixed16-quarter-review.md)
-finds progress over the new models' own parents, but both trail older controls
-and retain grain and detail/color limitations. State-of-the-art quality, decisive
-real-photo superiority and 100MP within 10 seconds remain unmet/unproven.
-Detailed comparisons and earlier trials are in [experiment results](docs/experiments.md).
+Joint Bayer demosaicing and denoising in linear camera RGB, with physical noise
+conditioning, frozen DINOv3 features and tiled 16-bit TIFF output on NVIDIA GB10.
+**V43 step 2000 remains the working experimental reference.** Later models often
+score higher PSNR, but have not established better overall real-photo quality
+and fine-detail recovery. State-of-the-art quality and 100 MP in 10 s remain open.
 
-Native 160×160 validation crops: noisy → denoised → GT, using V43 step 2000
-(autotuned FP32, fixed CPU-generated ISO12800 noise). These are 100% crops at the 8×8-binned
-evaluation resolution, with identical display transforms; open the PNG at 100%.
-They illustrate current behavior, including lost fine detail.
+Current work returns to **V43's architecture**: visually clean the larger
+Commons corpus, reduce blur augmentation, and train with more low-contrast fine
+detail. See the [quality plan](docs/quality-first-training.md),
+[experiment index](docs/experiments.md) and [documentation guide](docs/index.md).
 
-![Noisy, denoised and GT: fabric detail](docs/images/mature-cudnn-GT-v43-0014aa4e.png)
+![PSNR versus model version](docs/images/version-PSNR-history.png)
 
-![Noisy, denoised and GT: building and sky](docs/images/mature-cudnn-GT-v43-002fc6ee.png)
+[PSNR history, data and limitations](docs/performance-history.md). Version numbers
+name different experiments with unequal training budgets; these are descriptive
+results, not a controlled architecture ranking.
+
+## Current 100% crops
+
+Noisy → V43 → exact synthetic GT. Each panel is native 160×160 at the 8×-binned
+evaluation resolution, with fixed ISO12800 noise and shared display transforms.
+Fine cords and texture are still lost. [Source, ROI, checkpoint, noise and display
+metadata](docs/mature-cudnn-fullframe.md).
+
+![Fabric: noisy, restored and exact synthetic GT](docs/images/mature-cudnn-GT-v43-0014aa4e.png)
+
+![Building and sky: noisy, restored and exact synthetic GT](docs/images/mature-cudnn-GT-v43-002fc6ee.png)
 
 Sources: [Roy Egloff](https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg)
 and [Dietmar Rabich](https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg),
-[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); modified by binning,
-cropping, simulated noise and restoration. See [the FP32 report and crop receipts](docs/mature-cudnn-fullframe.md)
-and [real GFX100S crops](docs/gfx-qualitative.md).
+[CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/), modified by binning,
+crop, simulated noise and restoration.
 
-Real GFX100S foliage and chain-link-fence crops at native 160×160 sensor resolution:
-DSCF3879 noisy ISO6400 → experimental V43 step 2000 FP32 → DSCF3880 ISO100 f/5.6,
-with shared +2 EV display, cropped from the full 102 MP output.
-This closer pair is now the standing test. Framing is nearly identical, 3m38s
-apart; aperture and moving subjects differ, so the last panel is a qualitative
-reference, **not GT**. [All four regions and matched comparisons](docs/mature-cudnn-fullframe.md).
-Additional [Q2, a7R II and GFX50R native comparisons](docs/cross-camera-qualitative.md)
-use locally cached captures and explicitly labeled RawNIND comparators.
-Supplementary [neon-sign and platform crops](docs/gfx-highlight-qualitative.md)
-cover colored lighting and bright boundaries from the same cached GFX pair.
+Real GFX100S: DSCF3879 ISO 6400 → V43 → DSCF3880 ISO 100 f/5.6, native 160×160
+sensor pixels and shared +2 EV display. The last panel is an independent
+qualitative reference, **not GT**: aperture and moving subjects differ.
+[All four standing regions](docs/mature-cudnn-fullframe.md) ·
+[colored lights](docs/gfx-highlight-qualitative.md) ·
+[other cameras and RawNIND comparisons](docs/cross-camera-qualitative.md).
 
-![GFX foliage: noisy, denoised and separate low-ISO reference](docs/images/mature-cudnn-fullframe-v43-foliage.png)
+![GFX foliage: noisy, restored and separate low-ISO reference](docs/images/mature-cudnn-fullframe-v43-foliage.png)
 
-![GFX fence: noisy, denoised and separate low-ISO reference](docs/images/mature-cudnn-fullframe-v43-chain-link-fence.png)
+![GFX fence: noisy, restored and separate low-ISO reference](docs/images/mature-cudnn-fullframe-v43-chain-link-fence.png)
+
+## Setup and inference
+
+Linux, Python 3.12+, `uv` and a CUDA 13-compatible NVIDIA driver are required for
+the lockfile. DINOv3 requires approved Hugging Face access through `HF_TOKEN`.
 
 ```bash
 source scripts/env.sh
 uv sync --extra dev
-uv run demosaic prepare --output /mnt/external/demosaic/commons-v1 --limit 1024
-uv run demosaic train configs/base.yaml
-uv run demosaic evaluate /mnt/external/demosaic/runs/base-v3/best.pt \
-  --manifest /mnt/external/demosaic/commons-v1/manifest.jsonl \
-  --output /mnt/external/demosaic/evaluation/base-v3.json
 uv run demosaic infer /mnt/external/demosaic/models/v43-step2000.pt photo.raf \
   /mnt/external/demosaic/output/photo-linear.tiff \
-  --preview /mnt/external/demosaic/output/photo-srgb.tiff --shot 0.001 --read 0.000001 \
+  --preview /mnt/external/demosaic/output/photo-srgb.tiff \
+  --shot 0.001 --read 0.000001 \
   --tile 512 --overlap 64 --batch-size 4 --precision float32 --cudnn-benchmark
 PYTHONPATH=.:src:scripts uv run pytest -q
 ```
 
-Noise values above are examples, not measured camera profiles. Setup requires
-Linux, Python 3.12+, uv, and a CUDA 13-compatible NVIDIA driver for this lockfile.
-The optional FP32 autotuning flag adds startup search; [timings and full-output validation](docs/mature-cudnn-fullframe.md)
-distinguish the fresh CLI's 166.7s restore from the warmed 118.2s benchmark.
-DINOv3 additionally requires approved Hugging Face access via `HF_TOKEN`.
-See [experiment results](docs/experiments.md), [quality and noise diagnostics](docs/evaluation.md),
-[usage and data conventions](docs/usage.md), [research](docs/research.md),
-and the [completion evidence checklist](docs/requirements.md).
-The [Commons archive download](docs/commons-download.md) resumed after local-cache
-reconciliation, with a 608 GiB reserve; active experiments retain frozen manifests.
-A separate [reviewed RAW extension](docs/public-raw-expansion-v3.md) adds 18 camera
-models for future comparisons. The [completed matched V72/V73 review](docs/packed-isotropic-mixed16-quarter-review.md)
-finds gains over their own parents but losses against older equal-example models;
-neither replaces V43.
-The [completed content audit](docs/commons-content-overlap.md) supplies
-84,867-file training manifests with identified capture series quarantined.
-The [reviewed future extension](docs/commons-post4557-reviewed.md) has 88,508
-training sources at 4×/8×; current model comparisons keep their frozen data.
-The [completed objective comparison](docs/reconstruction-objective-first1k-review.md)
-misses its continuation gate. The [completed camera-supervision review](docs/camera-supervision-first1k-review.md)
-finds photo/color gains with mixed camera results; its continuation gate also fails.
-The [completed directional/interval review](docs/directional-interval-original4k-review.md)
-finds+.278/.276dB photo gains but failed camera criteria and weak fine detail.
-All81 native triplets/125 cells are reviewed; neither model replaces V43.
-The [completed spectral4k review](docs/spectral-original4k-review.md) finds a small
-matched photo gain but failed weak-detail/known-camera criteria; V43 remains working.
-The [fixed spectral-gate photo/GFX diagnosis](docs/spectral-photo-components.md)
-finds that turning up the gate creates periodic texture and color errors.
-See [training pipeline work](docs/training-pipeline.md) for augmentation before
-the last reduction, selected-domain loading and the batch-size sweep.
-The [optional execution policy](docs/training-execution.md) adds verified mixed-domain
-replay and guards against changing execution settings on resume.
-The [packed detail review](docs/packed-detail-v40-v41-review.md) retains the
-full-resolution model after testing two native-detail variants.
-See the [V37 inference precision and timing review](docs/hidden-autocast-v42-review.md)
-for an opt-in export with unchanged learned weights.
-The [strip export check](docs/rgb16-strip-export.md) reduces full-photo TIFF
-export memory while preserving the decoded 16-bit pixels.
+The noise values are examples; use appropriate camera/input priors.
+[Usage and training](docs/usage.md) · [data pipeline](docs/training-pipeline.md) ·
+[evaluation](docs/evaluation.md) · [research](docs/research.md) ·
+[local-time diary](diary/index.md). Speed experiments are deferred while quality
+work proceeds; existing [full-frame validation](docs/mature-cudnn-fullframe.md)
+remains available.

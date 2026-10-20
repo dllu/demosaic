@@ -97,7 +97,12 @@ def validate_late_rgb_only(config):
         raise ValueError("Late RGB-only training must be a boolean")
     if value and any(
         config.get(key, False)
-        for key in ("raw_kernel_only", "refiner_only", "coarse_refiner_only", "pyramid_refiner_only")
+        for key in (
+            "raw_kernel_only",
+            "refiner_only",
+            "coarse_refiner_only",
+            "pyramid_refiner_only",
+        )
     ):
         raise ValueError("Late RGB-only training cannot combine with another head-only mode")
     return value
@@ -471,6 +476,9 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
             patch_size=config.get("patch_size", 256),
             seed=config.get("seed", 42),
             augmentation_downsample=config.get("raw_clean_augmentation_downsample", 1),
+            optical_blur_probability=config.get(
+                "raw_clean_optical_blur_probability", config.get("optical_blur_probability", 0.25)
+            ),
         )
         if raw_clean_fraction
         else None
@@ -690,6 +698,8 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
             ("flat_fraction", 0.0, "flat fraction"),
             ("flat_chroma_stops", 0.0, "flat chroma stops"),
             ("weak_texture_fraction", 0.0, "weak texture fraction"),
+            ("optical_blur_probability", 0.25, "optical blur probability"),
+            ("photographic_low_contrast_fraction", 0.0, "photographic low contrast fraction"),
         ]:
             if state["config"].get(key, default) != config.get(key, default):
                 raise ValueError(f"Resume {label} differs; initialize a new run")
@@ -707,6 +717,13 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
             "raw_clean_augmentation_downsample", 1
         ):
             raise ValueError("Resume native RAW augmentation differs; initialize a new run")
+        if state["config"].get(
+            "raw_clean_optical_blur_probability",
+            state["config"].get("optical_blur_probability", 0.25),
+        ) != config.get(
+            "raw_clean_optical_blur_probability", config.get("optical_blur_probability", 0.25)
+        ):
+            raise ValueError("Resume native optical blur probability differs; initialize a new run")
         if state["config"].get("multiscale_sensor_weight", 0.0) != multiscale_weight:
             raise ValueError("Resume multiscale loss differs; initialize a new run")
         if state["config"].get("reconstruction_objective", "charbonnier-v1") != objective:
@@ -776,6 +793,8 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
         augmentation_downsample=config.get("augmentation_downsample", 1),
         weak_texture_fraction=config.get("weak_texture_fraction", 0.0),
         flat_chroma_stops=config["flat_chroma_stops"],
+        optical_blur_probability=config.get("optical_blur_probability", 0.25),
+        photographic_low_contrast_fraction=config.get("photographic_low_contrast_fraction", 0.0),
         records=records,
     )
     workers = config.get("workers", 2)
