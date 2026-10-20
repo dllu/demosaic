@@ -76,7 +76,13 @@ Artifacts remain under `/mnt/external/demosaic/experiments/`:
 - `late-rgb-v90-v91-{CPU,CUDA}-fresh-resume-v1/` failed preparation provenance;
 - `late-rgb-v90-v91-{CPU,CUDA}-fresh-resume-v2/` completed process-boundary audits.
 
-## Original quality budgets now running
+## Original quality budgets completed; evaluation running
+
+Both arms completed their original4000 updates and their exact training
+owners exited. The [independent final boundary audit](late-rgb-original4k-boundary.md)
+verifies finite full states, paired inputs, final RNG and actual archived
+source. The frozen evaluation queue has started. This establishes completed
+training provenance; quality and actual native-crop review remain pending.
 
 The new immutable `production-plan.json` adds both process-boundary
 certificates and regression receipts to the prepared base plan before any
@@ -86,8 +92,8 @@ as specified in the fixed protocol. Production-plan SHA256:
 Root: `/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/`.
 The live `status.json` is operational state, not a completed quality receipt.
 The [final evaluation queue](late-rgb-review-preparation.md) is separately
-validated and frozen against the actual training modules; it waits for both
-successful original4000 endpoints before any new quality predictions.
+validated and frozen against the actual training modules. It started only
+after both successful original4000 endpoints and exact owner exits.
 
 One arm runs at a time, with48GiB available for60s before launch,24GiB CUDA
 quota, root64GiB/external500GiB reserves and14,400s arm/resource-wait bounds.

@@ -1,0 +1,135 @@
+{
+  "status": "independently-verified-late-RGB-original4000-boundaries",
+  "engineering_preflight": false,
+  "training_geometry": {
+    "device": "cuda",
+    "native_size": 256,
+    "batch_size": 16
+  },
+  "training_status": {
+    "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/status.json",
+    "sha256": "26e48b3f945d29e0db1a5a3a32244a63da7473f32bf8b03b1d56128eaeecc15a"
+  },
+  "checkpoints": [
+    {
+      "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/runs/control/last.pt",
+      "sha256": "ba40d88149726c48f90d33399cf6ee4666daad470bff82bdfddf994a5e5eb3c4",
+      "arm": "control",
+      "step": 4000,
+      "kind": "joint-checkpoint",
+      "label": "V90-original4000"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/runs/spatial/last.pt",
+      "sha256": "80ade7b792a8621c214d4450b9e0befa7d06be2d4797ecfaaa7227def9b609e7",
+      "arm": "spatial",
+      "step": 4000,
+      "kind": "joint-checkpoint",
+      "label": "V91-original4000"
+    }
+  ],
+  "evidence": [
+    {
+      "result": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/control-result.json",
+        "sha256": "dd1d8a3360eff119e7a156bd90bc1015e6b09a876cb9e132d46c2bec2ef8e98c"
+      },
+      "initializations": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/control-initializations.json",
+        "sha256": "051a0a8c4c5ed0dbc1cefbcea95976902ffbe690519b123139cc27670b509407"
+      },
+      "captures": [
+        {
+          "common_initial_state_exact": true,
+          "DINO_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd",
+          "initial_output_exact_parent": true,
+          "resuming": false,
+          "initial_model_sha256": "71104eb4dcf64d56f8acbfabd770905672a422a5acb6e43f8ca1de217603e437",
+          "new_head_tensors": 24,
+          "new_head_parameters": 100547,
+          "first_gradient_sha256_zero_sign_canonicalized": "91dc4ea80c2bd129c462ff9187a9bce3f1d7c339e3cd6630dc241c2780a5c379"
+        }
+      ],
+      "retained": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/runs/control/step-004000.pt",
+        "sha256": "ba40d88149726c48f90d33399cf6ee4666daad470bff82bdfddf994a5e5eb3c4"
+      },
+      "retained1000": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/runs/control/step-001000.pt",
+        "sha256": "cb192a890918e25736776ac09307082a19a8b4a3a4299df4511fcf93d2afe265"
+      },
+      "finite_states": [
+        115,
+        115,
+        113
+      ],
+      "new_head_shapes_exact": true,
+      "unchanged_from_parent_EMA": {
+        "model": [
+          "context.mean",
+          "context.std"
+        ],
+        "ema": [
+          "context.mean",
+          "context.std"
+        ]
+      },
+      "actual_training_package_files_exact": 47
+    },
+    {
+      "result": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/spatial-result.json",
+        "sha256": "fc03252db5cd9b9fa36538a6e853e1b5c0adf9572811c0cdaa03aa70eeda8cb6"
+      },
+      "initializations": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/spatial-initializations.json",
+        "sha256": "051a0a8c4c5ed0dbc1cefbcea95976902ffbe690519b123139cc27670b509407"
+      },
+      "captures": [
+        {
+          "common_initial_state_exact": true,
+          "DINO_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd",
+          "initial_output_exact_parent": true,
+          "resuming": false,
+          "initial_model_sha256": "71104eb4dcf64d56f8acbfabd770905672a422a5acb6e43f8ca1de217603e437",
+          "new_head_tensors": 24,
+          "new_head_parameters": 100547,
+          "first_gradient_sha256_zero_sign_canonicalized": "91dc4ea80c2bd129c462ff9187a9bce3f1d7c339e3cd6630dc241c2780a5c379"
+        }
+      ],
+      "retained": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/runs/spatial/step-004000.pt",
+        "sha256": "80ade7b792a8621c214d4450b9e0befa7d06be2d4797ecfaaa7227def9b609e7"
+      },
+      "retained1000": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/runs/spatial/step-001000.pt",
+        "sha256": "a90222eb1ebfc1c783f7042379b755c4e949c63e67eb52fdfdecec5e591ee447"
+      },
+      "finite_states": [
+        115,
+        115,
+        113
+      ],
+      "new_head_shapes_exact": true,
+      "unchanged_from_parent_EMA": {
+        "model": [
+          "context.mean",
+          "context.std"
+        ],
+        "ema": [
+          "context.mean",
+          "context.std"
+        ]
+      },
+      "actual_training_package_files_exact": 47
+    }
+  ],
+  "paired_observation_audit": {
+    "recorded_pairs": 176,
+    "all_actual_source_forward_loss_pairs_exact": true
+  },
+  "logged_source_domain_LR_pairs": 161,
+  "final_Python_CPU_CUDA_RNG_exact": true,
+  "archived_source_and_data_exact": true,
+  "scope": "Independent full-state/source/horizon/RNG audit only. Engineering states cannot enter quality panels. No quality, extension or promotion claim."
+}

@@ -1,9 +1,11 @@
 # Final late RGB evaluation is prepared and queued
 
 The [V90/V91 study](late-dino-rgb-v90-v91.md) now has a validated final-review
-adapter and a frozen live queue. It waits for both exact original4000 trainer
-endpoints and their controller/child exits before inference. The global-prompt
-arm is still training; no new quality result or promotion follows yet.
+adapter and a frozen live queue. Both original4000 endpoints have completed,
+their exact training owners have exited, and the independent
+[final boundary audit](late-rgb-original4k-boundary.md) passes. The queued
+evaluation is running. Native inspection and quality interpretation remain
+pending; neither endpoint is promoted.
 
 [CPU integration receipt](results/late-rgb-review-preflight-v2.json),
 [verified queue snapshot](results/late-rgb-review-queue-v1.json),
