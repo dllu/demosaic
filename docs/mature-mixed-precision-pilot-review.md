@@ -11,6 +11,12 @@ and actual100MP16-bit validation remain required before integration. Working
 model/config/defaults remain unchanged; the older FP32 full-frame results are
 118.22/120.48s. No new whole-image timing or model-quality gain is claimed.
 
+The subsequent [full-quality qualification](mature-hidden-FP16-full-quality.md)
+passes genuine CPU execution but stops before the full suite: its CUDA
+matching-policy replay exceeds the fixed1DN16 maximum on three V43/GFX
+hidden-FP16 crops. The original finite screen remains recorded; the broader
+qualification and actual100MP test have not passed.
+
 [Complete CUDA receipt, policy margins and selection](results/mature-mixed-precision-CUDA-v1.json),
 [all per-observation results](results/mature-mixed-precision-CUDA-screen-v1.json),
 [independent Torch replay](results/mature-mixed-precision-independent-Torch-audit-v1.json),

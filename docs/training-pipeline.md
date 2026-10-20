@@ -9,12 +9,13 @@ Details and limitations are recorded below.
 
 The completed [spectral](spectral-original4k-review.md) and
 [late RGB](late-rgb-original4k-review.md) trials use native256/B16 and all88,508
-reviewed Commons training sources. Neither is promoted. The new opt-in
+reviewed Commons training sources. Neither is promoted. The opt-in
 [head-only training scope](late-rgb-head-only-engineering.md) protects the
 mature common path and avoids its backward graph while learning refinement;
 it retains the same geometry, selected-domain loading and controlled batch16.
-This is a separate engineering/quality experiment, without a new throughput,
-data-expansion or quality claim.
+Its [completed original4k review](late-rgb-head-only-original4k-review.md)
+retains exact common tensors but fails quality promotion. It provides no new
+training-throughput or data-expansion claim.
 
 The default-off [input-context experiment](training-context-v86-v87.md)
 separates prepared source size, actual forward size and central loss size.

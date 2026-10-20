@@ -1,0 +1,471 @@
+{
+  "status": "completed-independent-execution-difference-audit",
+  "executed_source": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/review/auditor-executed-source.py",
+    "sha256": "465c7eae1b5aac1ecb778662ec4d7274211ce3611282bb9373b9d629224d2795"
+  },
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/plan.json",
+    "sha256": "ffb8bda14416a65f70674a6b17b50ff61d8c072f2c7af71d0559dc536f452700"
+  },
+  "terminal": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/controller-status.json",
+    "sha256": "e41b50a15cfe589a303c623a885c2ba721d4dedf58e82ffe49881b85098ffbe9"
+  },
+  "receipts": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/paired-autotune/receipt.json",
+      "sha256": "67ac93460e45c24e37601ffd065b6f3e172fbf0db9c941a40760161748f60449"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-autotune/receipt.json",
+      "sha256": "9ad56666ecf685f42042fada50ffff3d545985d64aa4823199e7886bb88a5ba5"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/paired-fixed/receipt.json",
+      "sha256": "09104b39b711fa5ccf5dd6baf040215181ff88035fce1b84f36ba7e0cfad0daa"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-inference-load/receipt.json",
+      "sha256": "ed747f18e0674670d1cceb3804d8653962a04001326640ce0624f6b0cdaca843"
+    }
+  ],
+  "actual_forwards": 34,
+  "audited_RGB_values": 106954752,
+  "max_scalar_replay_error_DN16": 0.0,
+  "arms": [
+    {
+      "arm": "paired-autotune",
+      "actual_forwards": 4,
+      "captures": [
+        {
+          "label": "paired-0",
+          "policy": "fp32",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/paired-autotune/paired-0-fp32.npy",
+            "sha256": "83c7b9b904078eb0df6a56b8563641f5a949fe37e46781daf1fd07b3dcca4b87"
+          },
+          "matching_pilot_pass": true,
+          "max_abs_DN16": 0.0,
+          "max_crop_RMS_DN16": 0.0,
+          "same_process_bytes_exact": null
+        },
+        {
+          "label": "paired-0",
+          "policy": "fp16-hidden",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/paired-autotune/paired-0-fp16-hidden.npy",
+            "sha256": "ea8a424d949670888f93fe3d31ab29e218853b08d49ac4585dff63bd8a4b5ea6"
+          },
+          "matching_pilot_pass": false,
+          "max_abs_DN16": 15.749759674072266,
+          "max_crop_RMS_DN16": 0.2168949162394017,
+          "same_process_bytes_exact": null
+        },
+        {
+          "label": "paired-1",
+          "policy": "fp16-hidden",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/paired-autotune/paired-1-fp16-hidden.npy",
+            "sha256": "ea8a424d949670888f93fe3d31ab29e218853b08d49ac4585dff63bd8a4b5ea6"
+          },
+          "matching_pilot_pass": false,
+          "max_abs_DN16": 15.749759674072266,
+          "max_crop_RMS_DN16": 0.2168949162394017,
+          "same_process_bytes_exact": true
+        },
+        {
+          "label": "paired-1",
+          "policy": "fp32",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/paired-autotune/paired-1-fp32.npy",
+            "sha256": "83c7b9b904078eb0df6a56b8563641f5a949fe37e46781daf1fd07b3dcca4b87"
+          },
+          "matching_pilot_pass": true,
+          "max_abs_DN16": 0.0,
+          "max_crop_RMS_DN16": 0.0,
+          "same_process_bytes_exact": true
+        }
+      ]
+    },
+    {
+      "arm": "history-autotune",
+      "actual_forwards": 13,
+      "captures": [
+        {
+          "label": "history-0",
+          "policy": "fp32",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-autotune/history-0-fp32.npy",
+            "sha256": "7b8c9b68c351bf6aed6bffdb7a5bd94db4b0157f0f85c29994e9cff729eae1bc"
+          },
+          "matching_pilot_pass": true,
+          "max_abs_DN16": 0.046874284744262695,
+          "max_crop_RMS_DN16": 0.0008581865018565708,
+          "same_process_bytes_exact": null
+        },
+        {
+          "label": "history-1",
+          "policy": "fp32",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-autotune/history-1-fp32.npy",
+            "sha256": "7b8c9b68c351bf6aed6bffdb7a5bd94db4b0157f0f85c29994e9cff729eae1bc"
+          },
+          "matching_pilot_pass": true,
+          "max_abs_DN16": 0.046874284744262695,
+          "max_crop_RMS_DN16": 0.0008581865018565708,
+          "same_process_bytes_exact": true
+        },
+        {
+          "label": "history-2",
+          "policy": "fp32",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-autotune/history-2-fp32.npy",
+            "sha256": "7b8c9b68c351bf6aed6bffdb7a5bd94db4b0157f0f85c29994e9cff729eae1bc"
+          },
+          "matching_pilot_pass": true,
+          "max_abs_DN16": 0.046874284744262695,
+          "max_crop_RMS_DN16": 0.0008581865018565708,
+          "same_process_bytes_exact": true
+        },
+        {
+          "label": "history-0",
+          "policy": "fp16",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-autotune/history-0-fp16.npy",
+            "sha256": "cdf90fc0c3b0fbc65ebd5f56e67dcb3aa122a01ad3b7af4bdf49a28a6406fa07"
+          },
+          "matching_pilot_pass": false,
+          "max_abs_DN16": 15.171643495559692,
+          "max_crop_RMS_DN16": 0.2129109067837695,
+          "same_process_bytes_exact": null
+        },
+        {
+          "label": "history-1",
+          "policy": "fp16",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-autotune/history-1-fp16.npy",
+            "sha256": "cdf90fc0c3b0fbc65ebd5f56e67dcb3aa122a01ad3b7af4bdf49a28a6406fa07"
+          },
+          "matching_pilot_pass": false,
+          "max_abs_DN16": 15.171643495559692,
+          "max_crop_RMS_DN16": 0.2129109067837695,
+          "same_process_bytes_exact": true
+        },
+        {
+          "label": "history-2",
+          "policy": "fp16",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-autotune/history-2-fp16.npy",
+            "sha256": "cdf90fc0c3b0fbc65ebd5f56e67dcb3aa122a01ad3b7af4bdf49a28a6406fa07"
+          },
+          "matching_pilot_pass": false,
+          "max_abs_DN16": 15.171643495559692,
+          "max_crop_RMS_DN16": 0.2129109067837695,
+          "same_process_bytes_exact": true
+        },
+        {
+          "label": "history-0",
+          "policy": "fp16-hidden",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-autotune/history-0-fp16-hidden.npy",
+            "sha256": "ea8a424d949670888f93fe3d31ab29e218853b08d49ac4585dff63bd8a4b5ea6"
+          },
+          "matching_pilot_pass": false,
+          "max_abs_DN16": 15.749759674072266,
+          "max_crop_RMS_DN16": 0.2168949162394017,
+          "same_process_bytes_exact": null
+        },
+        {
+          "label": "history-1",
+          "policy": "fp16-hidden",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-autotune/history-1-fp16-hidden.npy",
+            "sha256": "ea8a424d949670888f93fe3d31ab29e218853b08d49ac4585dff63bd8a4b5ea6"
+          },
+          "matching_pilot_pass": false,
+          "max_abs_DN16": 15.749759674072266,
+          "max_crop_RMS_DN16": 0.2168949162394017,
+          "same_process_bytes_exact": true
+        },
+        {
+          "label": "history-2",
+          "policy": "fp16-hidden",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-autotune/history-2-fp16-hidden.npy",
+            "sha256": "ea8a424d949670888f93fe3d31ab29e218853b08d49ac4585dff63bd8a4b5ea6"
+          },
+          "matching_pilot_pass": false,
+          "max_abs_DN16": 15.749759674072266,
+          "max_crop_RMS_DN16": 0.2168949162394017,
+          "same_process_bytes_exact": true
+        },
+        {
+          "label": "paired-0",
+          "policy": "fp16-hidden",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-autotune/paired-0-fp16-hidden.npy",
+            "sha256": "ea8a424d949670888f93fe3d31ab29e218853b08d49ac4585dff63bd8a4b5ea6"
+          },
+          "matching_pilot_pass": false,
+          "max_abs_DN16": 15.749759674072266,
+          "max_crop_RMS_DN16": 0.2168949162394017,
+          "same_process_bytes_exact": true
+        },
+        {
+          "label": "paired-0",
+          "policy": "fp32",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-autotune/paired-0-fp32.npy",
+            "sha256": "7b8c9b68c351bf6aed6bffdb7a5bd94db4b0157f0f85c29994e9cff729eae1bc"
+          },
+          "matching_pilot_pass": true,
+          "max_abs_DN16": 0.046874284744262695,
+          "max_crop_RMS_DN16": 0.0008581865018565708,
+          "same_process_bytes_exact": true
+        },
+        {
+          "label": "paired-1",
+          "policy": "fp16-hidden",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-autotune/paired-1-fp16-hidden.npy",
+            "sha256": "ea8a424d949670888f93fe3d31ab29e218853b08d49ac4585dff63bd8a4b5ea6"
+          },
+          "matching_pilot_pass": false,
+          "max_abs_DN16": 15.749759674072266,
+          "max_crop_RMS_DN16": 0.2168949162394017,
+          "same_process_bytes_exact": true
+        },
+        {
+          "label": "paired-1",
+          "policy": "fp32",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-autotune/paired-1-fp32.npy",
+            "sha256": "7b8c9b68c351bf6aed6bffdb7a5bd94db4b0157f0f85c29994e9cff729eae1bc"
+          },
+          "matching_pilot_pass": true,
+          "max_abs_DN16": 0.046874284744262695,
+          "max_crop_RMS_DN16": 0.0008581865018565708,
+          "same_process_bytes_exact": true
+        }
+      ]
+    },
+    {
+      "arm": "paired-fixed",
+      "actual_forwards": 4,
+      "captures": [
+        {
+          "label": "paired-0",
+          "policy": "fp32",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/paired-fixed/paired-0-fp32.npy",
+            "sha256": "a249ed3ac6d91a802127368164d2130dd6b5760acb2dead624caea19a82dc377"
+          },
+          "matching_pilot_pass": true,
+          "max_abs_DN16": 0.05859285593032837,
+          "max_crop_RMS_DN16": 0.000993669905074427,
+          "same_process_bytes_exact": null
+        },
+        {
+          "label": "paired-0",
+          "policy": "fp16-hidden",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/paired-fixed/paired-0-fp16-hidden.npy",
+            "sha256": "2586d282800bae4b790e2f031e385126c3322f3b6ee5277f7bd26c70f8cdbd8a"
+          },
+          "matching_pilot_pass": false,
+          "max_abs_DN16": 15.347422063350677,
+          "max_crop_RMS_DN16": 0.24065346172100838,
+          "same_process_bytes_exact": null
+        },
+        {
+          "label": "paired-1",
+          "policy": "fp16-hidden",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/paired-fixed/paired-1-fp16-hidden.npy",
+            "sha256": "2586d282800bae4b790e2f031e385126c3322f3b6ee5277f7bd26c70f8cdbd8a"
+          },
+          "matching_pilot_pass": false,
+          "max_abs_DN16": 15.347422063350677,
+          "max_crop_RMS_DN16": 0.24065346172100838,
+          "same_process_bytes_exact": true
+        },
+        {
+          "label": "paired-1",
+          "policy": "fp32",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/paired-fixed/paired-1-fp32.npy",
+            "sha256": "a249ed3ac6d91a802127368164d2130dd6b5760acb2dead624caea19a82dc377"
+          },
+          "matching_pilot_pass": true,
+          "max_abs_DN16": 0.05859285593032837,
+          "max_crop_RMS_DN16": 0.000993669905074427,
+          "same_process_bytes_exact": true
+        }
+      ]
+    },
+    {
+      "arm": "history-inference-load",
+      "actual_forwards": 13,
+      "captures": [
+        {
+          "label": "history-0",
+          "policy": "fp32",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-inference-load/history-0-fp32.npy",
+            "sha256": "83c7b9b904078eb0df6a56b8563641f5a949fe37e46781daf1fd07b3dcca4b87"
+          },
+          "matching_pilot_pass": true,
+          "max_abs_DN16": 0.0,
+          "max_crop_RMS_DN16": 0.0,
+          "same_process_bytes_exact": null
+        },
+        {
+          "label": "history-1",
+          "policy": "fp32",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-inference-load/history-1-fp32.npy",
+            "sha256": "83c7b9b904078eb0df6a56b8563641f5a949fe37e46781daf1fd07b3dcca4b87"
+          },
+          "matching_pilot_pass": true,
+          "max_abs_DN16": 0.0,
+          "max_crop_RMS_DN16": 0.0,
+          "same_process_bytes_exact": true
+        },
+        {
+          "label": "history-2",
+          "policy": "fp32",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-inference-load/history-2-fp32.npy",
+            "sha256": "83c7b9b904078eb0df6a56b8563641f5a949fe37e46781daf1fd07b3dcca4b87"
+          },
+          "matching_pilot_pass": true,
+          "max_abs_DN16": 0.0,
+          "max_crop_RMS_DN16": 0.0,
+          "same_process_bytes_exact": true
+        },
+        {
+          "label": "history-0",
+          "policy": "fp16",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-inference-load/history-0-fp16.npy",
+            "sha256": "cdf90fc0c3b0fbc65ebd5f56e67dcb3aa122a01ad3b7af4bdf49a28a6406fa07"
+          },
+          "matching_pilot_pass": false,
+          "max_abs_DN16": 15.171643495559692,
+          "max_crop_RMS_DN16": 0.2129109067837695,
+          "same_process_bytes_exact": null
+        },
+        {
+          "label": "history-1",
+          "policy": "fp16",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-inference-load/history-1-fp16.npy",
+            "sha256": "cdf90fc0c3b0fbc65ebd5f56e67dcb3aa122a01ad3b7af4bdf49a28a6406fa07"
+          },
+          "matching_pilot_pass": false,
+          "max_abs_DN16": 15.171643495559692,
+          "max_crop_RMS_DN16": 0.2129109067837695,
+          "same_process_bytes_exact": true
+        },
+        {
+          "label": "history-2",
+          "policy": "fp16",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-inference-load/history-2-fp16.npy",
+            "sha256": "cdf90fc0c3b0fbc65ebd5f56e67dcb3aa122a01ad3b7af4bdf49a28a6406fa07"
+          },
+          "matching_pilot_pass": false,
+          "max_abs_DN16": 15.171643495559692,
+          "max_crop_RMS_DN16": 0.2129109067837695,
+          "same_process_bytes_exact": true
+        },
+        {
+          "label": "history-0",
+          "policy": "fp16-hidden",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-inference-load/history-0-fp16-hidden.npy",
+            "sha256": "ea8a424d949670888f93fe3d31ab29e218853b08d49ac4585dff63bd8a4b5ea6"
+          },
+          "matching_pilot_pass": false,
+          "max_abs_DN16": 15.749759674072266,
+          "max_crop_RMS_DN16": 0.2168949162394017,
+          "same_process_bytes_exact": null
+        },
+        {
+          "label": "history-1",
+          "policy": "fp16-hidden",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-inference-load/history-1-fp16-hidden.npy",
+            "sha256": "ea8a424d949670888f93fe3d31ab29e218853b08d49ac4585dff63bd8a4b5ea6"
+          },
+          "matching_pilot_pass": false,
+          "max_abs_DN16": 15.749759674072266,
+          "max_crop_RMS_DN16": 0.2168949162394017,
+          "same_process_bytes_exact": true
+        },
+        {
+          "label": "history-2",
+          "policy": "fp16-hidden",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-inference-load/history-2-fp16-hidden.npy",
+            "sha256": "ea8a424d949670888f93fe3d31ab29e218853b08d49ac4585dff63bd8a4b5ea6"
+          },
+          "matching_pilot_pass": false,
+          "max_abs_DN16": 15.749759674072266,
+          "max_crop_RMS_DN16": 0.2168949162394017,
+          "same_process_bytes_exact": true
+        },
+        {
+          "label": "paired-0",
+          "policy": "fp16-hidden",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-inference-load/paired-0-fp16-hidden.npy",
+            "sha256": "ea8a424d949670888f93fe3d31ab29e218853b08d49ac4585dff63bd8a4b5ea6"
+          },
+          "matching_pilot_pass": false,
+          "max_abs_DN16": 15.749759674072266,
+          "max_crop_RMS_DN16": 0.2168949162394017,
+          "same_process_bytes_exact": true
+        },
+        {
+          "label": "paired-0",
+          "policy": "fp32",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-inference-load/paired-0-fp32.npy",
+            "sha256": "83c7b9b904078eb0df6a56b8563641f5a949fe37e46781daf1fd07b3dcca4b87"
+          },
+          "matching_pilot_pass": true,
+          "max_abs_DN16": 0.0,
+          "max_crop_RMS_DN16": 0.0,
+          "same_process_bytes_exact": true
+        },
+        {
+          "label": "paired-1",
+          "policy": "fp16-hidden",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-inference-load/paired-1-fp16-hidden.npy",
+            "sha256": "ea8a424d949670888f93fe3d31ab29e218853b08d49ac4585dff63bd8a4b5ea6"
+          },
+          "matching_pilot_pass": false,
+          "max_abs_DN16": 15.749759674072266,
+          "max_crop_RMS_DN16": 0.2168949162394017,
+          "same_process_bytes_exact": true
+        },
+        {
+          "label": "paired-1",
+          "policy": "fp32",
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/outputs/history-inference-load/paired-1-fp32.npy",
+            "sha256": "83c7b9b904078eb0df6a56b8563641f5a949fe37e46781daf1fd07b3dcca4b87"
+          },
+          "matching_pilot_pass": true,
+          "max_abs_DN16": 0.0,
+          "max_crop_RMS_DN16": 0.0,
+          "same_process_bytes_exact": true
+        }
+      ]
+    }
+  ],
+  "scope": "Independent NumPy float64 replay of all saved physical differences and SHA/byte identities. Diagnostic comparisons only, without new inference, quality-population metrics, timing claims, parity relaxation, full-frame continuation or production adoption."
+}

@@ -21,42 +21,31 @@ slower and V63 is 1.59% faster. It is not integrated and supplies no new full-fr
 result. A separate future-watcher startup-race fix passes29 focused tests.
 The complete SOTA/native-superiority and100MP/10s requirements remain open.
 
-The [mature mixed-precision pilot](mature-mixed-precision-engineering.md)
-passes25 policy/queue tests and76 genuine-weight CPU forwards on V43/V63,
-with exact state/RNG/FP32 controls and independent native-code/one-DN checks.
-Its CUDA pilot is source-frozen and verified waiting behind all V92 jobs.
-CPU emulation supplies no CUDA accuracy, speed or full-frame result; earlier
-V42 timing still does not qualify these mature checkpoints. Working defaults
-and the complete objective remain unchanged and open.
+The [completed mature mixed-precision pilot](mature-mixed-precision-pilot-review.md)
+passes its finite CUDA screen, all48 actual native cells and independent scalar
+replay. Hidden FP16 gives resident B4/native512 median ratios4.250×/4.060× on
+V43/V63. The separate [full-quality qualification](mature-hidden-FP16-full-quality.md)
+passes102 genuine CPU forwards but stops at its matching-policy CUDA preflight:
+three V43/GFX crops exceed the fixed1DN16 maximum versus the pilot. No full
+quality suite or100MP continuation ran. Execution diagnosis remains separate;
+neither the pilot nor CPU emulation qualifies a whole-photo speed claim.
 
 The subsequent [fixed late-head/shared-path diagnosis](late-rgb-component-review.md)
 replays96 unique analytic observations across six methods. The main ADC loss
 terms are already in the jointly adapted pre-head paths; present-day bypass
 or pooling does not recover them. All32 native cells are viewed, full metrics
 replay the prior checkpoints within fixed bounds, and320 independent RGB
-component projections pass. No model or default changes. A separate frozen-
-common-path training intervention remains to be tested, with exact model/EMA
-preservation and the full quality/native requirements.
+component projections pass. No model or default changes. The subsequent frozen-
+common-path intervention below preserves those tensors but fails quality.
 
-The resulting [V92 head-only intervention](late-rgb-head-only-v92.md) now has
-112 passing unit/regression tests and genuine CPU/CUDA16 versus fresh-process
-8+8 engineering certificates. Independent byte audits verify all91 common
-model/EMA states remain V63 across six boundaries; only24 head tensors train.
-All inference modules remain unchanged. Its
-[fixed original4000 candidate](late-rgb-head-only-engineering.md) is launched,
-with completed V90 explicitly a historical exploratory reference. The
-[original4000 completion](results/late-rgb-head-only-original4000-completion-v1.json)
-now verifies finite115/115/24 states, all91 common model/EMA tensors exact to
-V63,176 recorded input pairs,161 domain/LR logs and final RNG matching V90.
-Both training owners have exited and fresh FP32 review is running. Full
-quality/native review remains pending; no improvement,
-promotion or fulfillment of the complete objective follows from these checks.
-The [queued V92 full quality/native review](late-rgb-head-only-review-preparation.md)
-now passes63 reader/criterion and19 native-board tests, genuine discarded-state
-boundary reads, historical arithmetic replay and all20 exact native PNG copies.
-Its first1000 and final4000 checkpoints preserve all91 common model/EMA tensors;
-actual full quality/native review remains pending. The queue cannot score
-engineering states or incomplete/live training.
+The [completed V92 head-only intervention](late-rgb-head-only-original4k-review.md)
+finishes its original4000 updates, full quality suite, all125 actual native
+cells and independent scalar/source audits. All91 common model/EMA tensors
+remain V63 exactly; the24 new head tensors train. This retains ADC carrier
+gain relative to historical V90, but photo PSNR falls.16213dB and unseen CFA
+PSNR falls.34470dB versus V63. All seven primary gates and both high-noise
+gain/flat contrasts fail. No extension, promotion or new full-frame run follows;
+V43 remains the working README reference and the complete objective stays open.
 
 The [completed V84/V85 native-data comparison](native-data-original20k-review.md)
 finishes both original20k budgets on128 versus150 captures. Its matched photo

@@ -1,0 +1,285 @@
+{
+  "status": "full-quality-qualification-stopped-at-CUDA-execution-parity-not-qualified",
+  "observed_UTC": "2026-10-20T17:29:28.916692+00:00",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-hidden-FP16-full-quality-v1/plan.json",
+    "sha256": "aa076e39113bec7b24a8f1c5816f747a069cfcb7e04842d9cd0c0d91fb428da3"
+  },
+  "frozen_files": 350,
+  "frozen_inputs": 1879,
+  "protocol": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-hidden-FP16-full-quality-v1/work/docs/mature-hidden-FP16-full-quality.md",
+    "sha256": "0152aa5091d17c0211dce345272cb5ee70040fe411e0bb14bd8a03450dc43045"
+  },
+  "source_modules_byte_exact_to_pilot": true,
+  "models": {
+    "V43": {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-hidden-FP16-full-quality-v1/work/checkpoints/V43.pt",
+      "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+      "step": 2000
+    },
+    "V63": {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-hidden-FP16-full-quality-v1/work/checkpoints/V63.pt",
+      "sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+      "step": 20000
+    }
+  },
+  "original_models": {
+    "V43": {
+      "path": "/mnt/external/demosaic/models/v43-step2000.pt",
+      "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+      "step": 2000
+    },
+    "V63": {
+      "path": "/mnt/external/demosaic/models/dino-convnext-wide-long-control-b16-v63-step20000.pt",
+      "sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+      "step": 20000
+    }
+  },
+  "frozen_unit_tests": {
+    "JUnit": {
+      "path": "/mnt/external/demosaic/mature-full-precision-unit-tests-v2.xml",
+      "sha256": "6d0ed0254a564d5ff25c7b76008a5b34ed0f46b8695593a850500e15332bafd7"
+    },
+    "passed": 20
+  },
+  "latest_unit_tests": {
+    "JUnit": {
+      "path": "/mnt/external/demosaic/mature-full-precision-unit-tests-v3.xml",
+      "sha256": "3017222381aac748d477183d21dfec1c3ba91f0312176a4d8ffbb76cc8b7a7b0"
+    },
+    "passed": 20
+  },
+  "CPU": {
+    "receipt": {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-hidden-FP16-full-quality-v1/work/outputs/CPU-receipt.json",
+      "sha256": "cc58d33eb1af620f2e09bcc0cc67da0d29a7cec5db50e7976797f5f0207dd89c"
+    },
+    "actual_forwards_total": 102,
+    "per_model_actual_forwards": 51,
+    "per_model_paired_runner_boundary_DINO_forwards": 50,
+    "per_model_direct_FP32_forwards": 1,
+    "per_model_panel_physical_cases": 24,
+    "per_model_extra_control_policy_forwards": 2,
+    "coverage": "native64; first two fixed eligible photos and one procedural; ADC/highest-noise; all4CFAs; all2policies",
+    "direct_FP32_bytes_exact": true,
+    "CUDA_initialized": false,
+    "engineering_only": true
+  },
+  "failure": {
+    "terminal_snapshot": {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/failure/controller-status.json",
+      "sha256": "f8028f787d07a2092ad0dd70904298d69147b3947187a690703ff7f6805c437a"
+    },
+    "log_snapshot": {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/failure/GPU-preflight.log",
+      "sha256": "21aebbc762f155646a5be33debdc3eab83f605cc4f8e9d738c52d9c8af8ea626"
+    },
+    "model": "V43",
+    "fixture": "GFX-four-native512-contexts",
+    "policy": "fp16-hidden",
+    "max_abs_DN16_per_crop": [
+      0.6479393318295479,
+      15.749759674072266,
+      4.439385384321213,
+      10.921708345413208
+    ],
+    "RMS_DN16_per_crop": [
+      0.05791073429405743,
+      0.2168949162394017,
+      0.06818417477508135,
+      0.09858990450472394
+    ],
+    "maximum_limit_DN16": 1,
+    "RMS_limit_DN16": 0.25,
+    "failed_maximum_crops": 3,
+    "maximum_gate_relaxed": false,
+    "original_unfavorable_half_prediction_saved": false,
+    "note": "Original worker asserted before saving its failed half array; preserved traceback retains all4 differences. All34 subsequent diagnostic predictions, including mismatches, were saved before comparisons. Checkout writer now preserves future failing arrays and labeled progress before raising.",
+    "FP32_control": {
+      "RGB": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-hidden-FP16-full-quality-v1/work/outputs/GPU-preflight-V43/fixture0-fp32.npy",
+        "sha256": "7b8c9b68c351bf6aed6bffdb7a5bd94db4b0157f0f85c29994e9cff729eae1bc"
+      },
+      "RGB_values": 3145728,
+      "maximum_DN16_vs_matching_pilot": 0.046874284744262695,
+      "RMS_DN16_vs_matching_pilot": 0.0005264822845121947,
+      "passed": true
+    },
+    "GPU_receipt_written": false,
+    "GPU_end_state_invariants_certified": false
+  },
+  "diagnostic": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/plan.json",
+      "sha256": "ffb8bda14416a65f70674a6b17b50ff61d8c072f2c7af71d0559dc536f452700"
+    },
+    "terminal_snapshot": {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/review/terminal-status.json",
+      "sha256": "e41b50a15cfe589a303c623a885c2ba721d4dedf58e82ffe49881b85098ffbe9"
+    },
+    "independent_audit": {
+      "path": "/home/dllu/proj/demosaic/docs/results/mature-precision-execution-independent-audit-v1.json",
+      "sha256": "d40835ef8bb260cb1ca5787911144c53a09a20b4cae8a46d35662a7205520c4d"
+    },
+    "executed_auditor_source": {
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-execution-drift-v1/review/auditor-executed-source.py",
+      "sha256": "465c7eae1b5aac1ecb778662ec4d7274211ce3611282bb9373b9d629224d2795"
+    },
+    "actual_forwards": 34,
+    "policy_observations": 136,
+    "audited_RGB_values": 106954752,
+    "maximum_scalar_replay_error_DN16": 0.0,
+    "summaries": [
+      {
+        "arm": "paired-autotune",
+        "actual_forwards": 4,
+        "policies": {
+          "fp16-hidden": {
+            "captures": 2,
+            "all_matching_pilot_pass": false,
+            "maximum_DN16_vs_matching_pilot": 15.749759674072266,
+            "maximum_crop_RMS_DN16_vs_matching_pilot": 0.2168949162394017,
+            "same_process_repeats": 1,
+            "all_same_process_repeats_byte_exact": true
+          },
+          "fp32": {
+            "captures": 2,
+            "all_matching_pilot_pass": true,
+            "maximum_DN16_vs_matching_pilot": 0.0,
+            "maximum_crop_RMS_DN16_vs_matching_pilot": 0.0,
+            "same_process_repeats": 1,
+            "all_same_process_repeats_byte_exact": true
+          }
+        }
+      },
+      {
+        "arm": "history-autotune",
+        "actual_forwards": 13,
+        "policies": {
+          "fp16": {
+            "captures": 3,
+            "all_matching_pilot_pass": false,
+            "maximum_DN16_vs_matching_pilot": 15.171643495559692,
+            "maximum_crop_RMS_DN16_vs_matching_pilot": 0.2129109067837695,
+            "same_process_repeats": 2,
+            "all_same_process_repeats_byte_exact": true
+          },
+          "fp16-hidden": {
+            "captures": 5,
+            "all_matching_pilot_pass": false,
+            "maximum_DN16_vs_matching_pilot": 15.749759674072266,
+            "maximum_crop_RMS_DN16_vs_matching_pilot": 0.2168949162394017,
+            "same_process_repeats": 4,
+            "all_same_process_repeats_byte_exact": true
+          },
+          "fp32": {
+            "captures": 5,
+            "all_matching_pilot_pass": true,
+            "maximum_DN16_vs_matching_pilot": 0.046874284744262695,
+            "maximum_crop_RMS_DN16_vs_matching_pilot": 0.0008581865018565708,
+            "same_process_repeats": 4,
+            "all_same_process_repeats_byte_exact": true
+          }
+        }
+      },
+      {
+        "arm": "paired-fixed",
+        "actual_forwards": 4,
+        "policies": {
+          "fp16-hidden": {
+            "captures": 2,
+            "all_matching_pilot_pass": false,
+            "maximum_DN16_vs_matching_pilot": 15.347422063350677,
+            "maximum_crop_RMS_DN16_vs_matching_pilot": 0.24065346172100838,
+            "same_process_repeats": 1,
+            "all_same_process_repeats_byte_exact": true
+          },
+          "fp32": {
+            "captures": 2,
+            "all_matching_pilot_pass": true,
+            "maximum_DN16_vs_matching_pilot": 0.05859285593032837,
+            "maximum_crop_RMS_DN16_vs_matching_pilot": 0.000993669905074427,
+            "same_process_repeats": 1,
+            "all_same_process_repeats_byte_exact": true
+          }
+        }
+      },
+      {
+        "arm": "history-inference-load",
+        "actual_forwards": 13,
+        "policies": {
+          "fp16": {
+            "captures": 3,
+            "all_matching_pilot_pass": false,
+            "maximum_DN16_vs_matching_pilot": 15.171643495559692,
+            "maximum_crop_RMS_DN16_vs_matching_pilot": 0.2129109067837695,
+            "same_process_repeats": 2,
+            "all_same_process_repeats_byte_exact": true
+          },
+          "fp16-hidden": {
+            "captures": 5,
+            "all_matching_pilot_pass": false,
+            "maximum_DN16_vs_matching_pilot": 15.749759674072266,
+            "maximum_crop_RMS_DN16_vs_matching_pilot": 0.2168949162394017,
+            "same_process_repeats": 4,
+            "all_same_process_repeats_byte_exact": true
+          },
+          "fp32": {
+            "captures": 5,
+            "all_matching_pilot_pass": true,
+            "maximum_DN16_vs_matching_pilot": 0.0,
+            "maximum_crop_RMS_DN16_vs_matching_pilot": 0.0,
+            "same_process_repeats": 4,
+            "all_same_process_repeats_byte_exact": true
+          }
+        }
+      }
+    ],
+    "cause_identified": false,
+    "within_process_reproducibility_does_not_establish_pilot_parity": true
+  },
+  "full_quality_forwards": 0,
+  "actual100MP_forwards": 0,
+  "full_quality_native_cells_generated": 0,
+  "automatic_retry": false,
+  "production_adoption": false,
+  "default_model": "V43 step2000 unchanged",
+  "scope": "Execution diagnosis only. The original finite pilot remains historical evidence. Full population quality, new whole-photo speed, decisive real-photo superiority and SOTA remain unproven; no gate relaxation or whole-photo continuation.",
+  "precision_helpers": {
+    "mature_precision_tools.py": {
+      "pilot": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/scripts/mature_precision_tools.py",
+        "sha256": "b6d09d9189f1e65b3c3e843bd24416de0a774bfcc84125afd712f9365aea94a7"
+      },
+      "qualification": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-hidden-FP16-full-quality-v1/work/scripts/mature_precision_tools.py",
+        "sha256": "b6d09d9189f1e65b3c3e843bd24416de0a774bfcc84125afd712f9365aea94a7"
+      },
+      "byte_exact": true
+    },
+    "preflight_mature_precision.py": {
+      "pilot": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/scripts/preflight_mature_precision.py",
+        "sha256": "41929c7dc87cea7ea390ce749a643e807aaac08e00762c748d5b1db1e84fe5f1"
+      },
+      "qualification": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-hidden-FP16-full-quality-v1/work/scripts/preflight_mature_precision.py",
+        "sha256": "41929c7dc87cea7ea390ce749a643e807aaac08e00762c748d5b1db1e84fe5f1"
+      },
+      "byte_exact": true
+    },
+    "profile_raw_kernel_inference.py": {
+      "pilot": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/scripts/profile_raw_kernel_inference.py",
+        "sha256": "731a415340d80b1e4868ee9a4e6671a205baa2ccbf5b5bc504fa35b0b05936f3"
+      },
+      "qualification": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-hidden-FP16-full-quality-v1/work/scripts/profile_raw_kernel_inference.py",
+        "sha256": "731a415340d80b1e4868ee9a4e6671a205baa2ccbf5b5bc504fa35b0b05936f3"
+      },
+      "byte_exact": true
+    }
+  },
+  "source_module_count_byte_exact_to_pilot": 47
+}
