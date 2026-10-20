@@ -1,0 +1,35 @@
+{
+  "status": "independently-replayed-width-fold-CPU-arrays-and-dense-MAC-census",
+  "probe": {
+    "path": "/mnt/external/demosaic/experiments/width-fold-convolution-CPU-v3/receipt.json",
+    "sha256": "e69c0d98b46eb0f4225622fd10c7e58c990f72aae5d7bf85a59f0b9cdd9fe548"
+  },
+  "saved_array_arithmetic": [
+    {
+      "dtype": "torch.float32",
+      "max_abs": 3.2782554626464844e-07,
+      "RMS": 4.269699780514878e-08,
+      "saved_original_and_folded_replayed": true
+    }
+  ],
+  "independent_scalar_control_max_abs": 4.996003610813204e-16,
+  "all64_hook_rows_match_manual_topology_MAC_count": true,
+  "manual_MAC_per_native_pixel": 2117568,
+  "manual_formula": "56 residual3x3 layers at equal C^2*area + head/tail3x3 + six stride2/up2 layers; 56*64^2*9+(4*64+64*3)*9+6*64*128",
+  "native512_B4_original_TMAC": 2.220430983168,
+  "native512_B4_dense_folded_TMAC": 4.389322358784,
+  "dense_MAC_ratio": 1.976788466769426,
+  "eligible_original_kernel_elements": 31264704,
+  "FP64_kernel_max_abs": 4.440892098500626e-15,
+  "FP32_kernel_max_abs": 5.9604644775390625e-06,
+  "actual_frozen_training_trunk_class_AST_exact": true,
+  "training_source": {
+    "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/src/demosaic/pretrained_rgb.py",
+    "sha256": "9018feb07b37c7f1431e9c23af85a049f83dee9ed70747b8681a4cb3e0f7035a"
+  },
+  "checked_class_names": [
+    "ResidualBlock",
+    "RgbRestorationTrunk"
+  ],
+  "GPU_execution_or_photo_quality_claim": false
+}

@@ -1,0 +1,2523 @@
+{
+  "status": "completed-CPU-width-fold-algebra-and-compute-audit",
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/scripts/probe_width_fold_convolution.py",
+    "sha256": "cd5376b689e133ae54b82bf78363d46d200ad6725a1030fa31b914c104e1da3a"
+  },
+  "executed_source": {
+    "path": "/mnt/external/demosaic/experiments/width-fold-convolution-CPU-v3/executed-source.py",
+    "sha256": "cd5376b689e133ae54b82bf78363d46d200ad6725a1030fa31b914c104e1da3a"
+  },
+  "parent_checkpoint": {
+    "path": "/mnt/external/demosaic/models/dino-convnext-wide-long-control-b16-v63-step20000.pt",
+    "sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5"
+  },
+  "trunk_source": {
+    "path": "/home/dllu/proj/demosaic/src/demosaic/pretrained_rgb.py",
+    "sha256": "957c34e0ee77548a4b3dd847766011ccb1dcb4218c3463b88a5e5b4e87a1d1e2"
+  },
+  "executed_trunk_source": {
+    "path": "/mnt/external/demosaic/experiments/width-fold-convolution-CPU-v3/executed-pretrained-rgb.py",
+    "sha256": "957c34e0ee77548a4b3dd847766011ccb1dcb4218c3463b88a5e5b4e87a1d1e2"
+  },
+  "parent_EMA_trunk_tensors_strictly_loaded": 64,
+  "torch": "2.14.1+cu130",
+  "numpy": "2.5.4",
+  "seed": 20261020,
+  "CPU_threads": 2,
+  "selected_kernel_cases": [
+    {
+      "layer": "m_head",
+      "dtype": "torch.float64",
+      "format": "contiguous",
+      "input_shape": [
+        1,
+        4,
+        5,
+        6
+      ],
+      "max_abs": 2.220446049250313e-16,
+      "RMS": 1.7932640567495992e-17,
+      "expected_max_abs": 0.7935588775439265,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_down1.0.res.0",
+      "dtype": "torch.float64",
+      "format": "contiguous",
+      "input_shape": [
+        1,
+        64,
+        5,
+        6
+      ],
+      "max_abs": 2.6645352591003757e-15,
+      "RMS": 3.730933856403173e-16,
+      "expected_max_abs": 4.544818947497884,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_down2.0.res.0",
+      "dtype": "torch.float64",
+      "format": "contiguous",
+      "input_shape": [
+        1,
+        128,
+        5,
+        6
+      ],
+      "max_abs": 2.220446049250313e-15,
+      "RMS": 3.711412354886148e-16,
+      "expected_max_abs": 4.1945124767104005,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_down3.0.res.0",
+      "dtype": "torch.float64",
+      "format": "contiguous",
+      "input_shape": [
+        1,
+        256,
+        5,
+        6
+      ],
+      "max_abs": 3.1086244689504383e-15,
+      "RMS": 4.834014109588307e-16,
+      "expected_max_abs": 5.866369823561977,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_body.0.res.0",
+      "dtype": "torch.float64",
+      "format": "contiguous",
+      "input_shape": [
+        1,
+        512,
+        5,
+        6
+      ],
+      "max_abs": 4.440892098500626e-15,
+      "RMS": 7.325566111658243e-16,
+      "expected_max_abs": 8.337220628758143,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_tail",
+      "dtype": "torch.float64",
+      "format": "contiguous",
+      "input_shape": [
+        1,
+        64,
+        5,
+        6
+      ],
+      "max_abs": 4.440892098500626e-16,
+      "RMS": 1.5401809026510347e-16,
+      "expected_max_abs": 1.1315219786454478,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_head",
+      "dtype": "torch.float64",
+      "format": "contiguous",
+      "input_shape": [
+        1,
+        4,
+        5,
+        7
+      ],
+      "max_abs": 1.6653345369377348e-16,
+      "RMS": 1.7321746964847858e-17,
+      "expected_max_abs": 1.1482765239438808,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_down1.0.res.0",
+      "dtype": "torch.float64",
+      "format": "contiguous",
+      "input_shape": [
+        1,
+        64,
+        5,
+        7
+      ],
+      "max_abs": 3.9968028886505635e-15,
+      "RMS": 3.655177541549993e-16,
+      "expected_max_abs": 5.596616705271509,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_down2.0.res.0",
+      "dtype": "torch.float64",
+      "format": "contiguous",
+      "input_shape": [
+        1,
+        128,
+        5,
+        7
+      ],
+      "max_abs": 2.4424906541753444e-15,
+      "RMS": 3.9545301462405536e-16,
+      "expected_max_abs": 4.540089948761977,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_down3.0.res.0",
+      "dtype": "torch.float64",
+      "format": "contiguous",
+      "input_shape": [
+        1,
+        256,
+        5,
+        7
+      ],
+      "max_abs": 3.1086244689504383e-15,
+      "RMS": 4.920438295559616e-16,
+      "expected_max_abs": 4.781425316084909,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_body.0.res.0",
+      "dtype": "torch.float64",
+      "format": "contiguous",
+      "input_shape": [
+        1,
+        512,
+        5,
+        7
+      ],
+      "max_abs": 4.440892098500626e-15,
+      "RMS": 7.614639278764574e-16,
+      "expected_max_abs": 7.605414167651253,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_tail",
+      "dtype": "torch.float64",
+      "format": "contiguous",
+      "input_shape": [
+        1,
+        64,
+        5,
+        7
+      ],
+      "max_abs": 3.3306690738754696e-16,
+      "RMS": 1.1315372593152117e-16,
+      "expected_max_abs": 1.2888422427767152,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_head",
+      "dtype": "torch.float64",
+      "format": "channels_last",
+      "input_shape": [
+        1,
+        4,
+        5,
+        6
+      ],
+      "max_abs": 1.1102230246251565e-16,
+      "RMS": 1.2866454565621538e-17,
+      "expected_max_abs": 0.7007629889328415,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_down1.0.res.0",
+      "dtype": "torch.float64",
+      "format": "channels_last",
+      "input_shape": [
+        1,
+        64,
+        5,
+        6
+      ],
+      "max_abs": 2.6645352591003757e-15,
+      "RMS": 3.561062588440345e-16,
+      "expected_max_abs": 5.2555222107165065,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_down2.0.res.0",
+      "dtype": "torch.float64",
+      "format": "channels_last",
+      "input_shape": [
+        1,
+        128,
+        5,
+        6
+      ],
+      "max_abs": 2.6645352591003757e-15,
+      "RMS": 4.2354582788964765e-16,
+      "expected_max_abs": 4.228655841745647,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_down3.0.res.0",
+      "dtype": "torch.float64",
+      "format": "channels_last",
+      "input_shape": [
+        1,
+        256,
+        5,
+        6
+      ],
+      "max_abs": 3.552713678800501e-15,
+      "RMS": 5.801261793963052e-16,
+      "expected_max_abs": 5.910605225689321,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_body.0.res.0",
+      "dtype": "torch.float64",
+      "format": "channels_last",
+      "input_shape": [
+        1,
+        512,
+        5,
+        6
+      ],
+      "max_abs": 4.440892098500626e-15,
+      "RMS": 8.294477146959829e-16,
+      "expected_max_abs": 7.758818940780884,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_tail",
+      "dtype": "torch.float64",
+      "format": "channels_last",
+      "input_shape": [
+        1,
+        64,
+        5,
+        6
+      ],
+      "max_abs": 4.440892098500626e-16,
+      "RMS": 1.70409150862208e-16,
+      "expected_max_abs": 1.427014001601786,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_head",
+      "dtype": "torch.float64",
+      "format": "channels_last",
+      "input_shape": [
+        1,
+        4,
+        5,
+        7
+      ],
+      "max_abs": 2.220446049250313e-16,
+      "RMS": 1.4925536132251616e-17,
+      "expected_max_abs": 0.6829321127921919,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_down1.0.res.0",
+      "dtype": "torch.float64",
+      "format": "channels_last",
+      "input_shape": [
+        1,
+        64,
+        5,
+        7
+      ],
+      "max_abs": 3.1086244689504383e-15,
+      "RMS": 3.735665269961015e-16,
+      "expected_max_abs": 6.735405665737464,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_down2.0.res.0",
+      "dtype": "torch.float64",
+      "format": "channels_last",
+      "input_shape": [
+        1,
+        128,
+        5,
+        7
+      ],
+      "max_abs": 3.552713678800501e-15,
+      "RMS": 4.3844588618585166e-16,
+      "expected_max_abs": 4.681406038666706,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_down3.0.res.0",
+      "dtype": "torch.float64",
+      "format": "channels_last",
+      "input_shape": [
+        1,
+        256,
+        5,
+        7
+      ],
+      "max_abs": 3.774758283725532e-15,
+      "RMS": 5.532925070023325e-16,
+      "expected_max_abs": 5.342497397867472,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_body.0.res.0",
+      "dtype": "torch.float64",
+      "format": "channels_last",
+      "input_shape": [
+        1,
+        512,
+        5,
+        7
+      ],
+      "max_abs": 4.440892098500626e-15,
+      "RMS": 8.295187047189263e-16,
+      "expected_max_abs": 7.851705697895812,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_tail",
+      "dtype": "torch.float64",
+      "format": "channels_last",
+      "input_shape": [
+        1,
+        64,
+        5,
+        7
+      ],
+      "max_abs": 1.1102230246251565e-15,
+      "RMS": 2.089627176956341e-16,
+      "expected_max_abs": 1.593603209293427,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_head",
+      "dtype": "torch.float32",
+      "format": "contiguous",
+      "input_shape": [
+        1,
+        4,
+        5,
+        6
+      ],
+      "max_abs": 6.705522537231445e-08,
+      "RMS": 1.3175008635511276e-08,
+      "expected_max_abs": 1.0807453393936157,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_down1.0.res.0",
+      "dtype": "torch.float32",
+      "format": "contiguous",
+      "input_shape": [
+        1,
+        64,
+        5,
+        6
+      ],
+      "max_abs": 4.0531158447265625e-06,
+      "RMS": 3.328107301822267e-07,
+      "expected_max_abs": 5.0286712646484375,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_down2.0.res.0",
+      "dtype": "torch.float32",
+      "format": "contiguous",
+      "input_shape": [
+        1,
+        128,
+        5,
+        6
+      ],
+      "max_abs": 3.0994415283203125e-06,
+      "RMS": 3.8260231277726297e-07,
+      "expected_max_abs": 4.502619743347168,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_down3.0.res.0",
+      "dtype": "torch.float32",
+      "format": "contiguous",
+      "input_shape": [
+        1,
+        256,
+        5,
+        6
+      ],
+      "max_abs": 3.5762786865234375e-06,
+      "RMS": 4.6723793064337e-07,
+      "expected_max_abs": 5.193506717681885,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_body.0.res.0",
+      "dtype": "torch.float32",
+      "format": "contiguous",
+      "input_shape": [
+        1,
+        512,
+        5,
+        6
+      ],
+      "max_abs": 5.7220458984375e-06,
+      "RMS": 7.067745105333953e-07,
+      "expected_max_abs": 7.9296183586120605,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_tail",
+      "dtype": "torch.float32",
+      "format": "contiguous",
+      "input_shape": [
+        1,
+        64,
+        5,
+        6
+      ],
+      "max_abs": 4.76837158203125e-07,
+      "RMS": 1.1921676738379211e-07,
+      "expected_max_abs": 1.199182391166687,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_head",
+      "dtype": "torch.float32",
+      "format": "contiguous",
+      "input_shape": [
+        1,
+        4,
+        5,
+        7
+      ],
+      "max_abs": 1.043081283569336e-07,
+      "RMS": 1.450271863884146e-08,
+      "expected_max_abs": 0.6880781054496765,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_down1.0.res.0",
+      "dtype": "torch.float32",
+      "format": "contiguous",
+      "input_shape": [
+        1,
+        64,
+        5,
+        7
+      ],
+      "max_abs": 2.6226043701171875e-06,
+      "RMS": 3.209601975109936e-07,
+      "expected_max_abs": 4.3317484855651855,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_down2.0.res.0",
+      "dtype": "torch.float32",
+      "format": "contiguous",
+      "input_shape": [
+        1,
+        128,
+        5,
+        7
+      ],
+      "max_abs": 3.0994415283203125e-06,
+      "RMS": 3.962503448814188e-07,
+      "expected_max_abs": 5.598361968994141,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_down3.0.res.0",
+      "dtype": "torch.float32",
+      "format": "contiguous",
+      "input_shape": [
+        1,
+        256,
+        5,
+        7
+      ],
+      "max_abs": 3.1441450119018555e-06,
+      "RMS": 4.852846257585449e-07,
+      "expected_max_abs": 5.831501483917236,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_body.0.res.0",
+      "dtype": "torch.float32",
+      "format": "contiguous",
+      "input_shape": [
+        1,
+        512,
+        5,
+        7
+      ],
+      "max_abs": 4.0531158447265625e-06,
+      "RMS": 7.175196743956298e-07,
+      "expected_max_abs": 7.839737415313721,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_tail",
+      "dtype": "torch.float32",
+      "format": "contiguous",
+      "input_shape": [
+        1,
+        64,
+        5,
+        7
+      ],
+      "max_abs": 8.344650268554688e-07,
+      "RMS": 1.786931646173844e-07,
+      "expected_max_abs": 1.4477804899215698,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_head",
+      "dtype": "torch.float32",
+      "format": "channels_last",
+      "input_shape": [
+        1,
+        4,
+        5,
+        6
+      ],
+      "max_abs": 1.1920928955078125e-07,
+      "RMS": 1.4070510634524734e-08,
+      "expected_max_abs": 0.9084962606430054,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_down1.0.res.0",
+      "dtype": "torch.float32",
+      "format": "channels_last",
+      "input_shape": [
+        1,
+        64,
+        5,
+        6
+      ],
+      "max_abs": 2.86102294921875e-06,
+      "RMS": 3.4400881827411e-07,
+      "expected_max_abs": 4.854248523712158,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_down2.0.res.0",
+      "dtype": "torch.float32",
+      "format": "channels_last",
+      "input_shape": [
+        1,
+        128,
+        5,
+        6
+      ],
+      "max_abs": 4.291534423828125e-06,
+      "RMS": 4.143848493369889e-07,
+      "expected_max_abs": 3.7145795822143555,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_down3.0.res.0",
+      "dtype": "torch.float32",
+      "format": "channels_last",
+      "input_shape": [
+        1,
+        256,
+        5,
+        6
+      ],
+      "max_abs": 4.0531158447265625e-06,
+      "RMS": 5.784310523299544e-07,
+      "expected_max_abs": 4.705997943878174,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_body.0.res.0",
+      "dtype": "torch.float32",
+      "format": "channels_last",
+      "input_shape": [
+        1,
+        512,
+        5,
+        6
+      ],
+      "max_abs": 4.76837158203125e-06,
+      "RMS": 9.07045726789553e-07,
+      "expected_max_abs": 7.941500186920166,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_tail",
+      "dtype": "torch.float32",
+      "format": "channels_last",
+      "input_shape": [
+        1,
+        64,
+        5,
+        6
+      ],
+      "max_abs": 4.172325134277344e-07,
+      "RMS": 1.5262848859374988e-07,
+      "expected_max_abs": 0.992355465888977,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_head",
+      "dtype": "torch.float32",
+      "format": "channels_last",
+      "input_shape": [
+        1,
+        4,
+        5,
+        7
+      ],
+      "max_abs": 8.940696716308594e-08,
+      "RMS": 1.100759700710555e-08,
+      "expected_max_abs": 0.8500940203666687,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_down1.0.res.0",
+      "dtype": "torch.float32",
+      "format": "channels_last",
+      "input_shape": [
+        1,
+        64,
+        5,
+        7
+      ],
+      "max_abs": 2.384185791015625e-06,
+      "RMS": 3.310446222184108e-07,
+      "expected_max_abs": 5.079071044921875,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_down2.0.res.0",
+      "dtype": "torch.float32",
+      "format": "channels_last",
+      "input_shape": [
+        1,
+        128,
+        5,
+        7
+      ],
+      "max_abs": 2.384185791015625e-06,
+      "RMS": 4.1627752023902457e-07,
+      "expected_max_abs": 4.396103382110596,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_down3.0.res.0",
+      "dtype": "torch.float32",
+      "format": "channels_last",
+      "input_shape": [
+        1,
+        256,
+        5,
+        7
+      ],
+      "max_abs": 4.172325134277344e-06,
+      "RMS": 5.591591210510787e-07,
+      "expected_max_abs": 5.881114482879639,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_body.0.res.0",
+      "dtype": "torch.float32",
+      "format": "channels_last",
+      "input_shape": [
+        1,
+        512,
+        5,
+        7
+      ],
+      "max_abs": 5.9604644775390625e-06,
+      "RMS": 8.902594381404521e-07,
+      "expected_max_abs": 7.964766979217529,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "layer": "m_tail",
+      "dtype": "torch.float32",
+      "format": "channels_last",
+      "input_shape": [
+        1,
+        64,
+        5,
+        7
+      ],
+      "max_abs": 8.344650268554688e-07,
+      "RMS": 2.0058835606119455e-07,
+      "expected_max_abs": 1.3382110595703125,
+      "finite": true,
+      "exact": false
+    }
+  ],
+  "independent_numpy_nonzero_bias_and_boundary_case": {
+    "max_abs": 4.440892098500626e-16,
+    "RMS": 1.0296319218683995e-16,
+    "expected_max_abs": 1.492785510287529,
+    "finite": true,
+    "exact": false
+  },
+  "whole_trunk_cases": [
+    {
+      "dtype": "torch.float32",
+      "format": "contiguous",
+      "input_shape": [
+        1,
+        3,
+        32,
+        32
+      ],
+      "max_abs": 3.2782554626464844e-07,
+      "RMS": 4.269699780514878e-08,
+      "expected_max_abs": 0.3066042959690094,
+      "finite": true,
+      "exact": false
+    },
+    {
+      "dtype": "torch.float32",
+      "format": "channels_last",
+      "input_shape": [
+        1,
+        3,
+        32,
+        32
+      ],
+      "max_abs": 4.172325134277344e-07,
+      "RMS": 4.578232322584938e-08,
+      "expected_max_abs": 0.306604266166687,
+      "finite": true,
+      "exact": false
+    }
+  ],
+  "compute_census": {
+    "layers": [
+      {
+        "name": "m_head",
+        "kind": "Conv2d",
+        "weight_shape": [
+          64,
+          4,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          4,
+          32,
+          32
+        ],
+        "output_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "MAC_native32_B1": 2359296,
+        "MAC_native512_B4": 2415919104,
+        "eligible_width_fold": true,
+        "weight_elements": 2304
+      },
+      {
+        "name": "m_down1.0.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          64,
+          64,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "output_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 36864
+      },
+      {
+        "name": "m_down1.0.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          64,
+          64,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "output_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 36864
+      },
+      {
+        "name": "m_down1.1.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          64,
+          64,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "output_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 36864
+      },
+      {
+        "name": "m_down1.1.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          64,
+          64,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "output_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 36864
+      },
+      {
+        "name": "m_down1.2.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          64,
+          64,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "output_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 36864
+      },
+      {
+        "name": "m_down1.2.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          64,
+          64,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "output_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 36864
+      },
+      {
+        "name": "m_down1.3.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          64,
+          64,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "output_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 36864
+      },
+      {
+        "name": "m_down1.3.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          64,
+          64,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "output_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 36864
+      },
+      {
+        "name": "m_down1.4",
+        "kind": "Conv2d",
+        "weight_shape": [
+          128,
+          64,
+          2,
+          2
+        ],
+        "input_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "output_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "MAC_native32_B1": 8388608,
+        "MAC_native512_B4": 8589934592,
+        "eligible_width_fold": false,
+        "weight_elements": 32768
+      },
+      {
+        "name": "m_down2.0.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          128,
+          128,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "output_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 147456
+      },
+      {
+        "name": "m_down2.0.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          128,
+          128,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "output_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 147456
+      },
+      {
+        "name": "m_down2.1.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          128,
+          128,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "output_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 147456
+      },
+      {
+        "name": "m_down2.1.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          128,
+          128,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "output_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 147456
+      },
+      {
+        "name": "m_down2.2.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          128,
+          128,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "output_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 147456
+      },
+      {
+        "name": "m_down2.2.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          128,
+          128,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "output_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 147456
+      },
+      {
+        "name": "m_down2.3.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          128,
+          128,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "output_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 147456
+      },
+      {
+        "name": "m_down2.3.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          128,
+          128,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "output_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 147456
+      },
+      {
+        "name": "m_down2.4",
+        "kind": "Conv2d",
+        "weight_shape": [
+          256,
+          128,
+          2,
+          2
+        ],
+        "input_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "output_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "MAC_native32_B1": 8388608,
+        "MAC_native512_B4": 8589934592,
+        "eligible_width_fold": false,
+        "weight_elements": 131072
+      },
+      {
+        "name": "m_down3.0.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          256,
+          256,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "output_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 589824
+      },
+      {
+        "name": "m_down3.0.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          256,
+          256,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "output_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 589824
+      },
+      {
+        "name": "m_down3.1.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          256,
+          256,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "output_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 589824
+      },
+      {
+        "name": "m_down3.1.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          256,
+          256,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "output_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 589824
+      },
+      {
+        "name": "m_down3.2.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          256,
+          256,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "output_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 589824
+      },
+      {
+        "name": "m_down3.2.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          256,
+          256,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "output_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 589824
+      },
+      {
+        "name": "m_down3.3.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          256,
+          256,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "output_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 589824
+      },
+      {
+        "name": "m_down3.3.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          256,
+          256,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "output_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 589824
+      },
+      {
+        "name": "m_down3.4",
+        "kind": "Conv2d",
+        "weight_shape": [
+          512,
+          256,
+          2,
+          2
+        ],
+        "input_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "output_shape": [
+          1,
+          512,
+          4,
+          4
+        ],
+        "MAC_native32_B1": 8388608,
+        "MAC_native512_B4": 8589934592,
+        "eligible_width_fold": false,
+        "weight_elements": 524288
+      },
+      {
+        "name": "m_body.0.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          512,
+          512,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          512,
+          4,
+          4
+        ],
+        "output_shape": [
+          1,
+          512,
+          4,
+          4
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 2359296
+      },
+      {
+        "name": "m_body.0.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          512,
+          512,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          512,
+          4,
+          4
+        ],
+        "output_shape": [
+          1,
+          512,
+          4,
+          4
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 2359296
+      },
+      {
+        "name": "m_body.1.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          512,
+          512,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          512,
+          4,
+          4
+        ],
+        "output_shape": [
+          1,
+          512,
+          4,
+          4
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 2359296
+      },
+      {
+        "name": "m_body.1.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          512,
+          512,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          512,
+          4,
+          4
+        ],
+        "output_shape": [
+          1,
+          512,
+          4,
+          4
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 2359296
+      },
+      {
+        "name": "m_body.2.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          512,
+          512,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          512,
+          4,
+          4
+        ],
+        "output_shape": [
+          1,
+          512,
+          4,
+          4
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 2359296
+      },
+      {
+        "name": "m_body.2.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          512,
+          512,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          512,
+          4,
+          4
+        ],
+        "output_shape": [
+          1,
+          512,
+          4,
+          4
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 2359296
+      },
+      {
+        "name": "m_body.3.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          512,
+          512,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          512,
+          4,
+          4
+        ],
+        "output_shape": [
+          1,
+          512,
+          4,
+          4
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 2359296
+      },
+      {
+        "name": "m_body.3.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          512,
+          512,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          512,
+          4,
+          4
+        ],
+        "output_shape": [
+          1,
+          512,
+          4,
+          4
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 2359296
+      },
+      {
+        "name": "m_up3.0",
+        "kind": "ConvTranspose2d",
+        "weight_shape": [
+          512,
+          256,
+          2,
+          2
+        ],
+        "input_shape": [
+          1,
+          512,
+          4,
+          4
+        ],
+        "output_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "MAC_native32_B1": 8388608,
+        "MAC_native512_B4": 8589934592,
+        "eligible_width_fold": false,
+        "weight_elements": 524288
+      },
+      {
+        "name": "m_up3.1.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          256,
+          256,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "output_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 589824
+      },
+      {
+        "name": "m_up3.1.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          256,
+          256,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "output_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 589824
+      },
+      {
+        "name": "m_up3.2.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          256,
+          256,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "output_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 589824
+      },
+      {
+        "name": "m_up3.2.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          256,
+          256,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "output_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 589824
+      },
+      {
+        "name": "m_up3.3.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          256,
+          256,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "output_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 589824
+      },
+      {
+        "name": "m_up3.3.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          256,
+          256,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "output_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 589824
+      },
+      {
+        "name": "m_up3.4.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          256,
+          256,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "output_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 589824
+      },
+      {
+        "name": "m_up3.4.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          256,
+          256,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "output_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 589824
+      },
+      {
+        "name": "m_up2.0",
+        "kind": "ConvTranspose2d",
+        "weight_shape": [
+          256,
+          128,
+          2,
+          2
+        ],
+        "input_shape": [
+          1,
+          256,
+          8,
+          8
+        ],
+        "output_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "MAC_native32_B1": 8388608,
+        "MAC_native512_B4": 8589934592,
+        "eligible_width_fold": false,
+        "weight_elements": 131072
+      },
+      {
+        "name": "m_up2.1.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          128,
+          128,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "output_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 147456
+      },
+      {
+        "name": "m_up2.1.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          128,
+          128,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "output_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 147456
+      },
+      {
+        "name": "m_up2.2.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          128,
+          128,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "output_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 147456
+      },
+      {
+        "name": "m_up2.2.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          128,
+          128,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "output_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 147456
+      },
+      {
+        "name": "m_up2.3.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          128,
+          128,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "output_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 147456
+      },
+      {
+        "name": "m_up2.3.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          128,
+          128,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "output_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 147456
+      },
+      {
+        "name": "m_up2.4.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          128,
+          128,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "output_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 147456
+      },
+      {
+        "name": "m_up2.4.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          128,
+          128,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "output_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 147456
+      },
+      {
+        "name": "m_up1.0",
+        "kind": "ConvTranspose2d",
+        "weight_shape": [
+          128,
+          64,
+          2,
+          2
+        ],
+        "input_shape": [
+          1,
+          128,
+          16,
+          16
+        ],
+        "output_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "MAC_native32_B1": 8388608,
+        "MAC_native512_B4": 8589934592,
+        "eligible_width_fold": false,
+        "weight_elements": 32768
+      },
+      {
+        "name": "m_up1.1.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          64,
+          64,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "output_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 36864
+      },
+      {
+        "name": "m_up1.1.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          64,
+          64,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "output_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 36864
+      },
+      {
+        "name": "m_up1.2.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          64,
+          64,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "output_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 36864
+      },
+      {
+        "name": "m_up1.2.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          64,
+          64,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "output_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 36864
+      },
+      {
+        "name": "m_up1.3.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          64,
+          64,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "output_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 36864
+      },
+      {
+        "name": "m_up1.3.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          64,
+          64,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "output_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 36864
+      },
+      {
+        "name": "m_up1.4.res.0",
+        "kind": "Conv2d",
+        "weight_shape": [
+          64,
+          64,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "output_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 36864
+      },
+      {
+        "name": "m_up1.4.res.2",
+        "kind": "Conv2d",
+        "weight_shape": [
+          64,
+          64,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "output_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "MAC_native32_B1": 37748736,
+        "MAC_native512_B4": 38654705664,
+        "eligible_width_fold": true,
+        "weight_elements": 36864
+      },
+      {
+        "name": "m_tail",
+        "kind": "Conv2d",
+        "weight_shape": [
+          3,
+          64,
+          3,
+          3
+        ],
+        "input_shape": [
+          1,
+          64,
+          32,
+          32
+        ],
+        "output_shape": [
+          1,
+          3,
+          32,
+          32
+        ],
+        "MAC_native32_B1": 1769472,
+        "MAC_native512_B4": 1811939328,
+        "eligible_width_fold": true,
+        "weight_elements": 1728
+      }
+    ],
+    "MAC_per_native_pixel": 2117568,
+    "MAC_native512_B4": 2220430983168,
+    "MAC_100MP_without_overlap_or_padding": 211756800000000,
+    "dense_folded_MAC_native512_B4": 4389322358784,
+    "eligible_original_weight_elements": 31264704,
+    "folded_kernel_dense_storage_factor": 4,
+    "folded_kernel_structural_nonzero_fraction": 0.5,
+    "folded_even_width_activation_element_factor": 1,
+    "convention": "Dense convolution MACs include padded-zero taps; one MAC is one multiply plus add. Bias, activation, residual, packing, conditioning, DINO, physics, tile overlap and output work excluded. Target census is analytical scaling of the executed native32/B1 geometry, not a target-size forward or timing."
+  },
+  "arrays": {
+    "path": "/mnt/external/demosaic/experiments/width-fold-convolution-CPU-v3/generated-trunk-arrays.npz",
+    "sha256": "12d3a4669f534581b701bb7408c88403c8671bc3270f76bd5056655bdc9bbbfd"
+  },
+  "CPU_RNG_unchanged": true,
+  "CUDA_initialized": false,
+  "model_quality_statistics_read": false,
+  "production_or_training_modified": false,
+  "scope": "Generated CPU inputs and genuine V63 EMA trunk only, without DINO/measurement offsets, physical inverse or photo inference. FP64 checks the algebra; FP32 is approximate, not bitwise/full-model/RGB16 parity. This dense width-fold implementation doubles eligible convolution MACs and quadruples their dense kernel storage. No CUDA timing, memory-peak, quality or speedup claim; no training/inference/default change or queued GPU execution."
+}

@@ -10,6 +10,12 @@ The accompanying [CPU noise-proxy study](stabilized-noise-proxy.md) checks a
 specific physical assumption first; neither establishes a new model result
 or changes the live spectral comparison.
 
+The [October20 width-folding follow-up](width-fold-convolution.md) checks a
+recent mobile RAW deployment idea against the actual V63 trunk. Independent
+CPU operator algebra and a64-layer compute census show approximate FP32
+agreement but97.68% more dense trunk MACs. The paper's NPU results do not
+establish a GB10 speedup; no production rewrite or new GPU job follows.
+
 The [CPU censored-highlight counterexamples](censored-highlight-gradients.md)
 isolate two constraints in the current implementation: a constant-preserving
 RAW head has no censored-channel offset, while hard display clipping can hide
