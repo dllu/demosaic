@@ -1,0 +1,95 @@
+{
+  "scope": "Training-source curation example, no restoration performance comparison. Left is a resized full-source context thumbnail; middle and right are native256 source/8x-target pixels with no resizing. No synthetic noise is added to this figure.",
+  "image": {
+    "path": "/home/dllu/proj/demosaic/docs/images/source-quality-flattened-foliage.png",
+    "sha256": "2f47a107d8f09c52403d65bcdcf6daf7e4ae99dc30a482e08ea9e1448d64aeea"
+  },
+  "source": {
+    "title": "File:Vista desde la torre de observaci\u00f3n, Parque Estatal Brown County, Indiana, Estados Unidos, 2012-10-14, DD 08.jpg",
+    "page_url": "https://commons.wikimedia.org/wiki/File:Vista_desde_la_torre_de_observaci%C3%B3n,_Parque_Estatal_Brown_County,_Indiana,_Estados_Unidos,_2012-10-14,_DD_08.jpg",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Vista_desde_la_torre_de_observaci%C3%B3n%2C_Parque_Estatal_Brown_County%2C_Indiana%2C_Estados_Unidos%2C_2012-10-14%2C_DD_08.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "attribution": "Diego Delso",
+    "credit": "Own work",
+    "sha1": "bcd06280780ecc220e0f14b757aee121dc4a0a59",
+    "sha1_hex": "bcd06280780ecc220e0f14b757aee121dc4a0a59",
+    "download_path": "images/bc/d0/bcd06280780ecc220e0f14b757aee121dc4a0a59.jpg",
+    "width": 3733,
+    "height": 2936,
+    "id": "bcd06280780ecc220e0f14b757aee121dc4a0a59",
+    "split": "train",
+    "bin_factor": 4,
+    "color_space": "linear-sRGB",
+    "dtype": "uint16",
+    "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/bc/bcd06280780ecc220e0f14b757aee121dc4a0a59.npy",
+    "shape": [
+      734,
+      933,
+      3
+    ],
+    "cache_sha256": "fc9b97034cfe74e20be878b47e7ba6b70be274ffe9c561014e7307570420a449"
+  },
+  "source_native_xywh_after_EXIF": [
+    1736,
+    1340,
+    256,
+    256
+  ],
+  "target_context_xywh_in_bin4": [
+    210,
+    111,
+    512,
+    512
+  ],
+  "target": "linear-sRGB bin4 uint16 plus final area2 -> native256, then sRGB preview encoding",
+  "display_exposure": 1,
+  "source_display": "ICC to sRGB if present; native crop never resized",
+  "binned_display": "linear-sRGB area2 from bin4, sRGB encoding; native256 pixels never resized",
+  "selection_checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-hidden-FP16-full-quality-v1/work/checkpoints/V43.pt",
+    "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5"
+  },
+  "selection_conditions": [
+    {
+      "name": "adc-only",
+      "shot": 0.0,
+      "read": 0.0,
+      "exposure": 1.0
+    },
+    {
+      "name": "iso12800-prior",
+      "shot": 0.00256,
+      "read": 2.62144e-05,
+      "exposure": 1.0
+    }
+  ],
+  "actual_review": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/source-visual-review-expanded-v6/actual-visual-review.json",
+    "sha256": "927d36bc00b6ba13c0df99ead3b5242a7b468c57a648e9678a7120e439137f27"
+  },
+  "decision": {
+    "id": "bcd06280780ecc220e0f14b757aee121dc4a0a59",
+    "title": "File:Vista desde la torre de observaci\u00f3n, Parque Estatal Brown County, Indiana, Estados Unidos, 2012-10-14, DD 08.jpg",
+    "decision": "withhold",
+    "reason": "Withhold as an unreliable clean target. Larger native1024 inspection shows extensively flattened/smeared foliage and bark texture and stepped color regions that persist in the8x target. This is a visible target-quality concern, not rejection merely for high loss or an assertion of a specific processing pipeline.",
+    "view": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/source-visual-review-expanded-v6/bcd06280780ecc220e0f14b757aee121dc4a0a59.png",
+      "sha256": "2f47a107d8f09c52403d65bcdcf6daf7e4ae99dc30a482e08ea9e1448d64aeea"
+    },
+    "source_original_SHA1": "bcd06280780ecc220e0f14b757aee121dc4a0a59",
+    "cache_SHA256": "fc9b97034cfe74e20be878b47e7ba6b70be274ffe9c561014e7307570420a449",
+    "larger_native_view": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/source-visual-review-expanded-v6/larger-native/bcd06280780ecc220e0f14b757aee121dc4a0a59.png",
+      "sha256": "6a03016c67e51f5c03db4b146be83aaea7e5eb14e06634019b92b56b751f8a17"
+    },
+    "larger_native_xywh_after_EXIF": [
+      1354,
+      956,
+      1024,
+      1024
+    ],
+    "larger_native_display": "ICC to sRGB if present, exposure1, native1024, no resizing"
+  }
+}

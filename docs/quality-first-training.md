@@ -39,15 +39,30 @@ Use a new training manifest; preserve originals, historical manifests, protected
 series and the GFX scene/siblings. This is targeted review, not a claim that
 every corpus photo was manually viewed.
 
-The [current 202-source visual review](results/source-quality-visual-review-v7.json)
-withholds thirteen sources: a historic map scan, a photomontage, eight graphic-only
+The [current 206-source visual review](results/source-quality-visual-review-v8.json)
+withholds fourteen sources: a historic map scan, a photomontage, eight graphic-only
 or flat document compositions, a predominantly
-defocused station scene, and two images with visible noise/edge artifacts
-whose clean-target quality is uncertain. The other 189 remain, including fine
+defocused station scene, and three images with visibly unreliable clean-target
+texture/noise/edge quality. The other 192 remain, including fine
 foliage, wheat, fur, coral, architectural grids and hazy/low-contrast landscapes.
-Thirty-eight contact sheets and seven larger native 1024 crops were actually inspected.
+Thirty-nine contact sheets and eight larger native 1024 crops were actually inspected.
 The full ranking is still running; this is an initial review, not the final
 curated manifest or a trained-model result.
+
+One withheld foliage source has extensively flattened/patchy texture and stepped
+color regions in a larger native view; those defects remain in the binned target.
+This is a visual target-quality decision, without inferring a particular filter.
+The context thumbnail is resized; the two 256-pixel crops retain their native
+pixels. Source ROI `[1736,1340,256,256]`; bin4 target context
+`[210,111,512,512]` followed by area2; display exposure ×1.0. The
+[figure metadata](results/source-quality-flattened-foliage-example.json) records
+source hashes, transforms, the V43 screening checkpoint and both noise conditions.
+
+![Withheld foliage source: context thumbnail, native source crop and native 8x-binned target](images/source-quality-flattened-foliage.png)
+
+Source: [Diego Delso, Brown County State Park](https://commons.wikimedia.org/wiki/File:Vista_desde_la_torre_de_observaci%C3%B3n,_Parque_Estatal_Brown_County,_Indiana,_Estados_Unidos,_2012-10-14,_DD_08.jpg),
+[CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/). Modified through
+binning, cropping, display conversion and context-thumbnail creation.
 
 The expanded title-cue review withholds graphic-only letter/illustration and
 textured tessellation compositions. The [Escher creator description](https://commons.wikimedia.org/wiki/File:Ambigram_tessellation_Escher.jpg)
