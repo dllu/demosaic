@@ -13,8 +13,8 @@ versus V43's original 40,170. Original validation 2,303 / test 2,255 memberships
 stay fixed. Actual downloading stopped at the reserve with 178,117 originals;
 archive discovery/attribution are complete and 279,548 originals remain pending.
 
-The [illustrated source review](corpus-source-review.md) currently covers 334
-sources: 311 retain and 23 withhold, including all 74 training sources with
+The [illustrated source review](corpus-source-review.md) currently covers 346
+sources: 323 retain and 23 withhold, including all 74 training sources with
 recorded ISO ≥12800. Native examples show why processed targets are withheld
 while real fine leaf veins and weak fog detail remain. High loss, ISO and
 software tags select review candidates; visible binned-target quality decides
