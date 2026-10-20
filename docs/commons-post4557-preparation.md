@@ -1,10 +1,11 @@
 # Preparing the newly downloaded Commons originals
 
-A separate CPU job is preparing **4,337 new originals at both 4× and 8×**.
-They come from the completed 4,557-file archive download and have not entered
-training. Existing V86/V87 source membership, validation/test sets and the
-standing GFX exclusions remain fixed. This is data preparation, without a
-trained quality or scene-diversity claim.
+A separate CPU job has completed **4,337 new originals at both 4× and 8×**.
+The [completed source/cache/content review and coupled freeze](commons-post4557-reviewed.md)
+admits 2,751 of them into a separate future corpus with 88,508 training sources.
+They come from the completed 4,557-file archive download. Existing V86/V87 source
+membership, validation/test sets and standing GFX exclusions remain fixed.
+No trained quality or scene-diversity benefit has been measured.
 [Actual launch and source bindings](results/commons-post4557-preparation-launch-v1.json).
 
 Selection compares source SHA1 identities against the complete prior reviewed

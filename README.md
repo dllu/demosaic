@@ -71,6 +71,8 @@ finds gains over their own parents but losses against older equal-example models
 neither replaces V43.
 The [completed content audit](docs/commons-content-overlap.md) supplies
 84,867-file training manifests with identified capture series quarantined.
+The [reviewed future extension](docs/commons-post4557-reviewed.md) has 88,508
+training sources at 4×/8×; current model comparisons keep their frozen data.
 The [completed objective comparison](docs/reconstruction-objective-first1k-review.md)
 misses its continuation gate. The [completed camera-supervision review](docs/camera-supervision-first1k-review.md)
 finds photo/color gains with mixed camera results; its continuation gate also fails.

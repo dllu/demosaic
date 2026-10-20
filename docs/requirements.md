@@ -14,12 +14,11 @@ are complete; full quality review is running. Complete final quality/native evid
 context-benefit or promotion claim.
 
 The [reviewed public RAW146/private168 extensions](public-raw-expansion-v3.md)
-and [890-source Commons extension](commons-local1188-reviewed.md) remain separate
-future inputs. Another [4,337 Commons arrivals](commons-post4557-preparation.md)
-are being prepared and reviewed at4×/8×; all source thumbnails are viewed, but
-complete caches, duplicate/content-neighbor decisions and final coupled admission
-remain pending. None establishes a trained diversity benefit or changes the
-context trial's frozen data.
+remain separate future inputs. The [completed Commons extension](commons-post4557-reviewed.md)
+now freezes88,508 future training sources at4×/8×:85,757 previously reviewed
+(including the earlier890) plus2,751 new members. Full original/cache checks,
+source/neighbor viewing and coupled admission are complete. None establishes
+a trained diversity benefit or changes the context trial's frozen data.
 
 The [actual three-product CUDA convolution review](mature-tf32x3-cuda-review.md)
 passes the six fixed numerical gates, with maximum.06640524DN16 difference,
