@@ -130,3 +130,49 @@ and the exact input noise conditioning stay fixed. Timings exclude search,
 loading, transfers, tiling, blending, decoding and export. Independent saved-array
 and native-crop review remain pending; no GPU speed or integration result is
 claimed by this queue.
+
+## Saved-array and native review preparation
+
+The deferred GPU result now has a tested CPU review path. The
+[historical integration receipt](results/uniform-physics-review-preflight-v2.json)
+replays the six existing TF32x3 GPU array pairs, independently reducing all
+7,077,888 unquantized RGB values with NumPy FP64 and scalar `math.fsum`.
+It reproduces the previous numerical and timing arithmetic. These are historical
+TF32x3 outputs, explicitly labelled as such, with no new batching inference,
+timing or quality result.
+
+The same integration re-renders24 native160px triplets and checks all72 panel
+pixel arrays against the earlier report. Four new comparison boards contain48
+native cells: two exact-GT photos per mature model and the four standing GFX
+regions. Photo targets replay from their original8×-binned source-cache ROIs;
+noisy/reference pixels remain equal across methods. The ISO100 GFX panels stay
+labelled as qualitative references. No crop pixels are resized. The new boards
+deduplicate the photo noisy/reference rows; their actual crop pixels match the
+old layout exactly. Actual viewing of these newly built boards is not claimed.
+
+The first integration attempt preserved its source/logs and partial outputs
+under `uniform-physics-review-preflight-v1/`: the final panel comparison used
+`original` to look up the historical `IEEE` policy. Only that historical lookup
+was corrected. The separate v2 execution passes; no model or GPU run failed.
+Twenty-six focused tests also pass, including unclipped negative values,
+changed metrics, duplicate cases, small CPU/nonfinite arrays, timing order,
+exact owner/plan checks and completed/rejected versus incomplete dependencies.
+
+[Verified CPU-review queue](results/uniform-physics-review-queue-v1.json).
+Its source-frozen owner waits behind the exact GPU controller and worker,
+without importing Torch/CUDA while waiting. All60 review bindings are fixed.
+After a complete GPU result it independently verifies all eight full output
+pairs, then prepares the24 triplets/four boards. On numerical rejection it
+audits the available failed prefix and produces no speed or full-native-package
+claim. It does not retry a failed GPU run.
+
+The review uses32GiB available RAM to start,24GiB while active,64GiB system and
+500GiB external disk reserves. Dependency/resource/individual CPU-stage bounds
+are30hours/1hour/3minutes. Only its exact owned child can be stopped on a bound.
+The final package remains explicitly awaiting actual inspection, with no
+promotion, default change, full-frame measurement or quality conclusion.
+
+Scripts: `audit_uniform_physics_arrays.py`, `render_uniform_physics_native.py`,
+`preflight_uniform_physics_review.py` and `watch_uniform_physics_review.py`.
+The queued plan/status and future outputs reside under
+`/mnt/external/demosaic/experiments/uniform-physics-CUDA-review-v1/`.
