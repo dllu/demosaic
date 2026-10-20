@@ -192,6 +192,25 @@ restart. The preparer, duplicate queue and model comparison remain live.
 
 ## Coupled admission for the new producer
 
+The [final-title queue and actual handoff fixture](results/commons-post4557-final-title-queue-v1.json)
+now bind the completed cache producer and duplicate-audit owners. After both
+exact processes and the audit's own children exit successfully, it checks the
+area/cache receipts, protected-screen input and unchanged duplicate thresholds,
+then runs the existing final title matcher on the resulting candidate population.
+It does not use preliminary title labels as final decisions. The operator and
+all50 frozen source copies match a genuine three-prior/two-new-source fixture;
+its decisions exactly reproduce the earlier admission fixture. A genuinely
+failed duplicate predecessor is refused without starting a title child or
+creating a result.
+
+This detached metadata-only handoff waits at
+`/mnt/external/demosaic/commons-post4557-final-title-20261020-v1/`, with an8h
+predecessor bound,600s active limit and29460s outer timeout. It retains48GiB
+available RAM and548GiB external disk before work. Its timeout parent was
+verified underPID1 after launch. SIGTERM cleanup addresses only its own active
+child. The prepared candidate still needs the actual DINO-pair review and
+explicit source decisions before a coupled freeze; the queue cannot admit data.
+
 The [format2 admission fixture and rejection evidence](results/commons-post4557-admission-compatibility-v1.json)
 exercise the future coupled freeze using the new downloaded-producer receipt.
 Legacy format1 review remains supported. This compatibility work does not admit
