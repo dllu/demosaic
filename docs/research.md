@@ -385,10 +385,14 @@ The [completed native-data comparison](native-data-original20k-review.md) finds
 no positive matched photographic effect from the 22 extra native captures and
 no clear native detail gain. The AIM 2025 progressive-size results cited above
 motivate the separate [fixed input-context trial](training-context-v86-v87.md).
-Our inference is to isolate surrounding input pixels from the number of clean
+Our inference was to isolate surrounding input pixels from the number of clean
 supervised pixels; the paper does not identify our failure's cause. Both arms
-will use the same 320px source/noise draws and 256px loss region, with 256px versus
-320px model forwards. This is not a reproduced method or an improved model yet.
+use the same320px source/noise draws and256px loss region, with256px versus320px
+model forwards. The [completed original4k review](training-context-original4k-review.md)
+finds +.00099dB matched photo PSNR with an interval crossing zero, failed
+known-camera/weak-detail gates and no clear native detail gain. All125 native
+cells are viewed; no model is promoted or extended. This is an independent
+controlled test rather than a reproduced progressive-size method.
 
 The [June 2026 MambaRaw paper](https://arxiv.org/abs/2606.24479) instead studies
 JPEG-conditioned reconstruction with stored metadata for coding. Its task

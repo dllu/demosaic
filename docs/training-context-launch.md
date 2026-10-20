@@ -2,10 +2,13 @@
 
 Both arms of the [fixed comparison](training-context-v86-v87.md) have completed
 their original4000 updates from genuine V63 original20k EMA. The exact trainer
-and controller processes have exited; the full quality review is running.
-This is a training-integrity record, not a performance report.
-The model architecture, working V43 checkpoint and README examples remain as
-before. Full quality and actual native viewing are pending.
+and controller processes have exited. The
+[completed full quality/native review](training-context-original4k-review.md)
+finds context−control photo PSNR +.00099dB with a95% source interval crossing
+zero. Both arms fail known-camera promotion and high-noise weak-detail criteria;
+neither is promoted or extended. V43 remains the working reference.
+This page preserves the training/launch record; the linked report contains
+the performance results and native crops.
 
 Both arms use the same native320 source/noise observations, with forward256
 versus320 and identical central256 loss regions. They have the same geometrically
@@ -29,9 +32,12 @@ V86 checkpoint SHA256:
 V87 checkpoint SHA256:
 `fb0c6d20b97760c218bb3d69b05791081467e8e40d25184e320a3b27aa02daf7`.
 Both use the final `last.pt`/identical retained step4000, without intermediate
-selection. The independent boundary stage passed and the serial FP32 review
-has started. Complete photographic/camera/color/detail/native evidence and actual
-viewing remain pending; no context benefit or model promotion is established.
+selection. All ten serial FP32 stages and the independent saved-array/numerical
+closure have completed. All125 native cells/81 source triplets were actually
+viewed before numerical decisions. The
+[publication checks](results/training-context-original4k-publication-v1.json)
+verify all20 copied PNGs and common source/reference pixels/settings. No context
+benefit or model promotion is established.
 
 The control arm has now completed its full original4000 budget. Its
 [independent closed-state audit](results/training-context-control-original4000-v1.json)
@@ -103,8 +109,9 @@ trainer, and55 additional input references. Review233871/creation1792446778.54,
 CPU closure233873/creation1792446778.74 and reference supplement233874/creation
 1792446778.84 were all observed live and waiting. They cannot start new inference
 while the training owner is live. These process identities are dated receipts;
-current state comes from their status files. No automatic retry or promotion is
-queued; manual native viewing remains pending.
+current state comes from their status files. All three owners have since exited
+successfully, and final manual native viewing is complete. No retry or promotion
+was performed.
 
 A separate [report-package waiter](results/training-context-report-assets-queue-v1.json)
 now follows those three exact review owners. Its context adapter requires both

@@ -1,5 +1,18 @@
 # Experiment evidence
 
+The [completed V86/V87 input-context review](training-context-original4k-review.md)
+finds +.00099dB matched photo PSNR with a95% source interval crossing zero.
+Both original4000 budgets and all176 input/supervision pairs are verified.
+Known-camera promotion and high-noise weak-detail requirements fail; all192
+ADC loss limits pass. All125 native cells/81 triplets are viewed, and neither
+endpoint is promoted or extended. The report includes two exact-GT triplets
+per checkpoint and the standing GFX sky/building/foliage/fence regions.
+
+The [completed new Commons review](commons-post4557-reviewed.md) separately
+adds2751 future training sources, giving88508 at4×/8× with the original
+validation/test memberships fixed. These sources were outside the context
+trial; their trained benefit remains unmeasured.
+
 The [completed V82/V83 bank-gradient review](bank-detachment-original4k-review.md)
 closes both original 4k budgets without promotion. Detachment loses .00351dB
 photo PSNR against connected, with a negative source interval, and worsens the

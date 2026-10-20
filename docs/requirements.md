@@ -10,8 +10,10 @@ neither endpoint is promoted. The subsequent fixed
 [V86/V87 input-context comparison](training-context-v86-v87.md) keeps identical
 320px source draws and256px supervision while changing the actual forward
 field. [Both original4000 endpoints and paired-state checks](results/training-context-original4000-completion-v1.json)
-are complete; full quality review is running. Complete final quality/native evidence is still required before a
-context-benefit or promotion claim.
+are complete. The [completed full quality/native review](training-context-original4k-review.md)
+finds +.00099dB matched photo PSNR with an interval crossing zero; known-camera
+and weak-detail gates fail. All192 ADC loss limits pass, all125 native cells
+are viewed, and neither model is promoted or extended.
 
 The [reviewed public RAW146/private168 extensions](public-raw-expansion-v3.md)
 remain separate future inputs. The [completed Commons extension](commons-post4557-reviewed.md)

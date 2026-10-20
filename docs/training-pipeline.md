@@ -1,13 +1,31 @@
 # Training data work, sampling order and batch size
 
-The default-off [input-context experiment](training-context-v86-v87.md) now
+The default-off [input-context experiment](training-context-v86-v87.md)
 separates prepared source size, actual forward size and central loss size.
 `patch_size: 320`, `forward_patch_size` set to `256` or `320`,
 `loss_patch_size: 256` and `validation_patch_size: 256` let both arms share
 source/noise/target draws while only one sees the surrounding 32px border. RGB targets/masks and packed
 RAW/variance/auxiliary fields retain their own coordinate units and Bayer
 alignment; resume rejects changed geometry. Legacy recipes omit these options.
-This is preparation for a controlled trial, without a quality or default change.
+The [completed original4k comparison](training-context-original4k-review.md)
+finds no positive matched photographic effect: +.00099dB with an interval
+crossing zero, failed known-camera promotion and failed weak-detail gains.
+Neither endpoint is promoted or extended; the default remains unchanged.
+
+The [geometric source counts](results/training-context-original4k-publication-v1.json)
+also constrain larger patches when preserving the final2× reduction:
+
+| Native output size | Required4× cache short side | Existing train sources | Reviewed future sources |
+| --- | --- | --- | --- |
+| 256 | 512 | 84,867 | 88,508 |
+| 320 | 640 | 50,912 | 54,059 |
+| 384 | 768 | 21,709 | 23,674 |
+| 512 | 1,024 | 1,305 | 1,679 |
+
+The existing320 count matches the actual frozen cohort's source IDs exactly.
+These are metadata-based geometric counts, without larger-patch performance or
+throughput claims. Native256 retains the full reviewed source population for
+the next experiment; the full future corpus is not qualified for320.
 
 The mixed trainer previously prepared a Commons batch on **every** optimizer
 step, including steps that replaced it with paired RAW or native-RAW synthetic
