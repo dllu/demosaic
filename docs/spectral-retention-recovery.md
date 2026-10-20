@@ -5,6 +5,11 @@ logged update1,025 in the published observation. Corrected CPU/CUDA and external
 resume checks pass. Final model quality has not been evaluated. V43 remains the
 working reference. [Complete recovery evidence](results/spectral-retention-recovery-v1.json).
 
+The first resumed controller later stopped at a resource bound. The
+[explicit operational reserve recovery](spectral-resource-recovery.md) records
+the failure and current run, preserving the original1000 checkpoint and4000
+horizon. The owner/root information below is the earlier dated observation.
+
 ## Fault and correction
 
 The trainer saves `last.pt` during its final scheduled validation and again when

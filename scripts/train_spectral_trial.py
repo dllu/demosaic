@@ -34,6 +34,21 @@ def retain_checkpoint(path, step):
     return ref(target)
 
 
+def root_disk_reserve(plan):
+    """Bound the operational root reserve separately from external run storage."""
+    reserve = float(plan.get("root_disk_reserve_gib", 128))
+    if not 64 <= reserve <= 128:
+        raise ValueError("Root disk reserve must be finite and between64 and128 GiB")
+    return reserve
+
+
+def resources_allow(plan, ram, disk, external, *, launch=False):
+    reserve = root_disk_reserve(plan)
+    if launch:
+        return ram >= 48 and disk > reserve and external > 500
+    return ram >= 24 and disk >= reserve and external >= 500
+
+
 def prepare(root, device, full=False, cpu_preflight=None, cuda_preflight=None):
     previous = read(PRIOR)
     assert (
@@ -427,6 +442,7 @@ def controller(plan_path):
     plan_path = Path(plan_path).resolve()
     plan = read(plan_path)
     guard(plan)
+    root_disk_reserve(plan)
     root = Path(plan["root"])
     with (root / "controller.claim").open("x") as stream:
         stream.write(str(os.getpid()))
@@ -456,7 +472,7 @@ def controller(plan_path):
             while True:
                 assert time.monotonic() < deadline, "Spectral resource-wait bound exhausted"
                 ram, disk, external = resources()
-                if ram >= 48 and disk > 128 and external > 500:
+                if resources_allow(plan, ram, disk, external, launch=True):
                     since = time.monotonic() if since is None else since
                     if time.monotonic() - since >= plan["stable_seconds"]:
                         break
@@ -499,10 +515,22 @@ def controller(plan_path):
                 )
                 while child.poll() is None:
                     ram, disk, external = resources()
-                    if time.monotonic() > deadline or ram < 24 or disk < 128 or external < 500:
+                    if time.monotonic() > deadline or not resources_allow(
+                        plan, ram, disk, external
+                    ):
                         if child.poll() is not None:
                             break
                         assert alive(owner) and os.getpgid(child.pid) == child.pid
+                        record(
+                            "stopping-exact-owned-spectral-worker-at-bound",
+                            stop_reason="runtime" if time.monotonic() > deadline else "resources",
+                            resources_at_stop={
+                                "available_RAM_GiB": ram,
+                                "root_free_GiB": disk,
+                                "external_free_GiB": external,
+                                "root_reserve_GiB": root_disk_reserve(plan),
+                            },
+                        )
                         os.killpg(child.pid, signal.SIGTERM)
                         child.wait(timeout=30)
                         raise RuntimeError(

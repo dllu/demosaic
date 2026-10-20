@@ -1,0 +1,105 @@
+{
+  "status": "verified-live-spectral-final-review-closure-reference-and-native-package-queues",
+  "observed_at_UTC": "2026-10-20T02:51:41.755201+00:00",
+  "review_plan": {
+    "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-original4k-review-v1/plan.json",
+    "sha256": "608237fcfd700662ef5169bd91dd3599ad68728c7394beea128d64d0c0ef0e34"
+  },
+  "training_plan": {
+    "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-resource-recovery-v2/plan.json",
+    "sha256": "68d190f70e14e19fe2765f034ec63b26cdb9ea3e09a38d69986854cb4618efe1"
+  },
+  "preflight": {
+    "path": "/mnt/external/demosaic/experiments/spectral-review-CPU-preflight-v2/receipt.json",
+    "sha256": "b13e005d26847443787adaa20be15dd2bd46edcc26c9aa5c70b1612a2641bc39"
+  },
+  "queue": {
+    "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-original4k-review-v1/queue-launch.json",
+    "sha256": "3badfd3f06325c5bc6868b9b4cb7546f9d85fb7917afa6523cc4f626ac6de054"
+  },
+  "package_plan": {
+    "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-original4k-review-v1/report-package-plan.json",
+    "sha256": "424a448a6df550a337757d106a72a769da33c6ba8867245c8f166c451a9190aa"
+  },
+  "package_launch": {
+    "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-original4k-review-v1/report-package-launch.json",
+    "sha256": "91c199b03b5558636359fc06f084402bb720adb09a23a2db2624f00f08980366"
+  },
+  "owners": {
+    "review_owner": {
+      "pid": 562979,
+      "created": 1792464516.72
+    },
+    "closure_owner": {
+      "pid": 562990,
+      "created": 1792464516.92
+    },
+    "reference_owner": {
+      "pid": 562992,
+      "created": 1792464517.03
+    },
+    "package_owner": {
+      "pid": 580553,
+      "created": 1792464611.09
+    }
+  },
+  "all_four_exact_followers_live_and_waiting": true,
+  "training_owner_snapshot": {
+    "controller": {
+      "pid": 557934,
+      "created": 1792464246.16
+    },
+    "plan": {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-resource-recovery-v2/plan.json",
+      "sha256": "68d190f70e14e19fe2765f034ec63b26cdb9ea3e09a38d69986854cb4618efe1"
+    },
+    "completed": {},
+    "status": "running-source-frozen-spectral-arm",
+    "updated_unix": 1792464315.7001023,
+    "arm": "control",
+    "child": {
+      "pid": 558182,
+      "created": 1792464315.65
+    }
+  },
+  "all_frozen_files_and_inputs_verified": {
+    "frozen_files": 293,
+    "inputs": 64
+  },
+  "all46_actual_training_modules_identical": true,
+  "quality_criteria": {
+    "predeclared_snapshot": {
+      "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-original4k-review-v1/work/docs/spectral-v88-v89.md",
+      "sha256": "fada778afe31c857a616576af306c3112e5311c571c2379309eb211979f8e0b0"
+    },
+    "scope": "Original4000 matched spectral experiment, unchanged full primary/sensitivity/weak-carrier/all192 ADC/hue/native criteria; explicit control1000 recovery. No automatic extension/promotion."
+  },
+  "no_review_boundary_or_model_predictions_yet": true,
+  "full_stages": [
+    "boundary",
+    "known",
+    "unseen",
+    "full427",
+    "statistics",
+    "sensitivity",
+    "gfx",
+    "analytic",
+    "hue",
+    "highlights"
+  ],
+  "native_package_contract": {
+    "native_panel_size": 160,
+    "exact_GT_triplets_per_checkpoint": 2,
+    "GFX_reference_triplets_per_checkpoint": 4,
+    "includes": [
+      "sky",
+      "building",
+      "foliage",
+      "chain-link-fence",
+      "highlights"
+    ],
+    "resize_crop_pixels": false,
+    "manual_review_required": true
+  },
+  "scope": "Live queue observation, not completed training, inference or quality. No new held-out predictions while training is live. Existing complete review/CPU arithmetic/reference/native packaging engines run serially after exact successful owners exit. Actual viewing and final numerical interpretation remain required; no automatic extension/promotion."
+}

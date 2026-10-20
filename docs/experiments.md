@@ -9,6 +9,10 @@ is launched. No restoration-quality result, promotion or budget extension follow
 The [retention-wrapper recovery](spectral-retention-recovery.md) preserves the
 verified1000 state, all46 model modules and original4000 schedule. Corrected
 CPU/CUDA and fresh-process resume checks pass; production resumes beyond1025.
+The [resource recovery](spectral-resource-recovery.md) subsequently replays
+unsaved work from the same1000 state with an explicit64GiB root-reserve addendum.
+[Full review/closure/reference/native packaging](spectral-review-preparation.md)
+is queued after both final original4000 endpoints; no quality result follows yet.
 
 The [completed V86/V87 input-context review](training-context-original4k-review.md)
 finds +.00099dB matched photo PSNR with a95% source interval crossing zero.

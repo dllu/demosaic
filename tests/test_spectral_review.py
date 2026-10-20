@@ -140,3 +140,32 @@ def test_recovery_requires_exact_saved_prefix_and_explicit_handoff(review, tmp_p
     changed[-1]["step"] = 999
     with pytest.raises(AssertionError):
         review.check_recovery(training, {"name": "control"}, case, changed)
+
+
+@pytest.mark.parametrize("mutation", ["source", "loss"])
+def test_discarded_work_must_replay_exact_observations_and_metrics(review, tmp_path, mutation):
+    observed = [{"step": 1025, "source_sha256": "abc"}]
+    oldrow = {
+        "step": 1025,
+        "domain": "commons",
+        "lr": 1e-5,
+        "batch_sha256": "abc",
+        "loss": 0.02,
+        "grad_norm": 0.1,
+    }
+    obs = tmp_path / "discarded.json"
+    obs.write_text(json.dumps(observed))
+    metrics = tmp_path / "discarded.jsonl"
+    metrics.write_text(json.dumps(oldrow) + "\n")
+    training = {"discarded_observations": review.ref(obs), "discarded_metrics": review.ref(metrics)}
+    assert (
+        review.check_replayed_work(training, observed, [oldrow])["replayed_recorded_observations"]
+        == 1
+    )
+    changed_obs, changed_row = copy.deepcopy(observed), copy.deepcopy(oldrow)
+    if mutation == "source":
+        changed_obs[0]["source_sha256"] = "changed"
+    else:
+        changed_row["loss"] += 0.001
+    with pytest.raises(AssertionError):
+        review.check_replayed_work(training, changed_obs, [changed_row])

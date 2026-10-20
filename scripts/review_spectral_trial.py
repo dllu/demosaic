@@ -1,6 +1,7 @@
 """Bind unchanged full quality panels to genuine V88/V89 original4000 endpoints."""
 
 import argparse
+import ast
 import math
 from pathlib import Path
 
@@ -43,7 +44,7 @@ def require_completed(plan):
     return status, training
 
 
-def check_recovery(training, arm, case, samples):
+def check_recovery(training, arm, case, samples, rows=None):
     """Verify explicit recovery provenance rather than claiming a fresh start."""
     resume = training.get("resume", {}).get(arm["name"])
     assert case.get("resume") == resume
@@ -68,12 +69,73 @@ def check_recovery(training, arm, case, samples):
     assert all(c["resuming"] and not c["initial_output_exact_parent"] for c in case["captures"])
     assert training["arm_timeout_seconds"]["control"] < 14400
     assert training["planned_updates"] == training["boundary_updates"] == 4000
+    resource = None
+    if "resource_recovery_of" in training:
+        previous = read(training["resource_recovery_of"]["path"])
+        failure = read(training["previous_failure"]["path"])
+        for item in [
+            training["resource_recovery_of"],
+            training["previous_failure"],
+            training["resource_guard_addendum"],
+        ]:
+            assert ref(item["path"]) == item
+        assert failure["status"] == "failed-spectral-trial-no-automatic-retry"
+        assert not panels.alive(failure["controller"]) and not panels.alive(failure["child"])
+        assert (
+            previous["recovery_of"] == training["recovery_of"]
+            and previous["resume"] == training["resume"]
+        )
+        assert training["root_disk_reserve_gib"] == 64
+        consumed = math.ceil(failure["updated_unix"] - failure["child"]["created"])
+        assert (
+            training["arm_timeout_seconds"]["control"]
+            == previous["arm_timeout_seconds"]["control"] - consumed
+        )
+        before, after = (
+            ast.parse(Path(p["worker"]["path"]).read_text()) for p in [previous, training]
+        )
+        for name in ["worker", "retain_checkpoint", "prepare"]:
+            a, b = (
+                next(n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == name)
+                for tree in [before, after]
+            )
+            assert ast.dump(a, include_attributes=False) == ast.dump(b, include_attributes=False)
+        resource = check_replayed_work(training, samples, rows)
     return {
         "handoff": training["handoff"],
         "checkpoint": resume["checkpoint"],
         "preserved_observations": 56,
         "remaining_updates_at_handoff": 3000,
+        "resource_recovery": resource,
         "scope": "Exact saved-model initialization at resumed forward; original startup assertions precede the preserved first update. No new direct measurement of the interrupted process's unsaved initial tensors is claimed.",
+    }
+
+
+def check_replayed_work(training, samples, rows):
+    """All saved observations/losses of discarded work must replay exactly."""
+    for key in ["discarded_observations", "discarded_metrics"]:
+        assert ref(training[key]["path"]) == training[key]
+    earlier = read(training["discarded_observations"]["path"])
+    assert earlier and all(r["step"] > 1000 for r in earlier)
+    current = {r["step"]: r for r in samples}
+    assert all(current[r["step"]] == r for r in earlier)
+    import json
+
+    oldrows = [
+        json.loads(line)
+        for line in Path(training["discarded_metrics"]["path"]).read_text().splitlines()
+    ]
+    bystep = {r["step"]: r for r in rows}
+    for row in oldrows:
+        assert all(
+            bystep[row["step"]][key] == row[key]
+            for key in ["step", "domain", "lr", "batch_sha256", "loss", "grad_norm"]
+        )
+    return {
+        "prior_failure": training.get("previous_failure"),
+        "replayed_recorded_observations": len(earlier),
+        "replayed_training_metric_rows": len(oldrows),
+        "all_recorded_input_loss_gradient_values_exact": True,
     }
 
 
@@ -180,7 +242,7 @@ def boundaries(plan):
             and r["source_sha256"] == r["actual_loss_sha256"]
             for r in samples
         )
-        recovery = check_recovery(training, arm, case, samples)
+        recovery = check_recovery(training, arm, case, samples, rows)
         by_step = {r["step"]: r for r in samples}
         for row in rows:
             progress = max(0, row["step"] - 100) / 3900

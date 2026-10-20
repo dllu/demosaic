@@ -24,6 +24,10 @@ not a demonstrated improvement, and V43 remains the working reference.
 An [explicit retention-wrapper repair](spectral-retention-recovery.md) resumes
 the verified original1000 state with unchanged model/data/original4000 horizon;
 corrected CPU/CUDA and external checkpoint/prefix recovery checks pass.
+Its [resource recovery](spectral-resource-recovery.md) preserves that state and
+deducts consumed time while using a64GiB operational root reserve. The validated
+[full final review and native packaging](spectral-review-preparation.md) are
+queued after successful original4000 exits; quality remains unproven.
 
 The [reviewed public RAW146/private168 extensions](public-raw-expansion-v3.md)
 remain separate future inputs. The [completed Commons extension](commons-post4557-reviewed.md)
