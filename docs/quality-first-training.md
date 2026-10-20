@@ -39,13 +39,13 @@ Use a new training manifest; preserve originals, historical manifests, protected
 series and the GFX scene/siblings. This is targeted review, not a claim that
 every corpus photo was manually viewed.
 
-The [current 269-source visual review](results/source-quality-visual-review-v11.json)
-withholds twenty sources: a historic map scan, a photomontage, eight graphic-only
+The [current 311-source visual review](results/source-quality-visual-review-v12.json)
+withholds twenty-two sources: a historic map scan, a photomontage, eight graphic-only
 or flat document compositions, a predominantly
-defocused station scene, and nine images with visibly unreliable clean-target
-texture/noise/edge quality. The other 249 remain, including fine
+defocused station scene, and eleven images with visibly unreliable clean-target
+texture/noise/edge quality. The other 289 remain, including fine
 foliage, wheat, fur, coral, architectural grids and hazy/low-contrast landscapes.
-Fifty contact sheets and twenty larger native 1024 crops were actually inspected.
+Fifty-seven contact sheets and twenty-six larger native 1024 crops were actually inspected.
 The full ranking is still running; this is an initial review, not the final
 curated manifest or a trained-model result.
 
@@ -92,6 +92,14 @@ drops, architecture and HDR-labeled interiors. Across both ISO-targeted rounds,
 40 sources were actually viewed and six withheld. These are selected extremes,
 not a random sample. Native grain or edge emphasis alone is insufficient when
 the binned target retains useful coherent detail.
+
+Review now covers **all 74 training sources with recorded ISO ≥12800**: 66 retain,
+eight withhold. Completing that group added 42 actual source views from seven
+sheets and six larger native crops; two more showed unreliable feather texture.
+Coherent fine feather barbs, real material patterns, mosaics, HDR-labeled
+architecture and weak stone surfaces remain. The header-defined subgroup is
+fully covered; this does not infer the defect rate of the broader corpus or
+the true capture ISO from metadata alone.
 
 The final membership freeze requires visual decisions for the top 32 sources
 under each noise condition and the top 16 under each IQA proxy, plus all
