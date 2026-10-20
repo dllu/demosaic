@@ -1,0 +1,73 @@
+{
+  "status": "independently-verified-original4000-control-endpoint-with-preserved-first-resume-log",
+  "observed_at_UTC": "2026-10-20T03:32:26.574742+00:00",
+  "training_plan": {
+    "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-log-completion-v1/plan.json",
+    "sha256": "e595dfb8808cb33b0d147047e4a33519ee612c5281061275356d16f6c6d59cf4"
+  },
+  "control_completion": {
+    "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-log-completion-v1/control-result.json",
+    "sha256": "ca18b3614acd153e74ccbc08e096a3f6c38b19ba6b7ef93d323b1b6c5ba51b71"
+  },
+  "checkpoint": {
+    "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-resource-recovery-v2/work/runs/control/last.pt",
+    "sha256": "d17891aa95cadfffe02dc497a96a9de3481f6044a3c270762bc014cbca0c16e4"
+  },
+  "actual_step": 4000,
+  "planned_steps": 4000,
+  "finite_states": {
+    "model": 91,
+    "EMA": 91,
+    "AdamW": 89
+  },
+  "all_AdamW_counters_4000_second_moments_nonnegative": true,
+  "original_terminal_LR": 1.0000000000000002e-06,
+  "training_metric_rows": 162,
+  "shared_scheduled_metric_rows": 161,
+  "additional_first_resume_log_steps": [
+    1001
+  ],
+  "all162_logs_original_schedule_LR_and_finite_loss_gradient": true,
+  "forward_and_supervision_observations": 176,
+  "all176_observed_forward_and_supervision_hashes_match": true,
+  "all46_actual_archived_model_modules_exact": true,
+  "unchanged_from_parent_EMA": {
+    "model": [
+      "context.mean",
+      "context.std"
+    ],
+    "ema": [
+      "context.mean",
+      "context.std"
+    ]
+  },
+  "recovery": {
+    "handoff": {
+      "path": "/mnt/external/demosaic/experiments/spectral-retention-handoff-v1/status.json",
+      "sha256": "f4b580f19ba74efba7361035a7c04d3df71061da93aa927c11525313b0ca2fb9"
+    },
+    "checkpoint": {
+      "path": "/mnt/external/demosaic/experiments/spectral-retention-handoff-v1/control-step001000.pt",
+      "sha256": "2388c26b26767f0dd60c466b385bdaa93c7ca52543e1639310540898c184ab9c"
+    },
+    "preserved_observations": 56,
+    "remaining_updates_at_handoff": 3000,
+    "resource_recovery": {
+      "prior_failure": {
+        "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-retention-recovery-v1/status.json",
+        "sha256": "ebd550d76e0d64dc5baffe068f8dec854b5b9b9274fa5d96cf8325b6cd71d777"
+      },
+      "replayed_recorded_observations": 30,
+      "replayed_training_metric_rows": 31,
+      "all_recorded_input_loss_gradient_values_exact": true
+    },
+    "scope": "Exact saved-model initialization at resumed forward; original startup assertions precede the preserved first update. No new direct measurement of the interrupted process's unsaved initial tensors is claimed."
+  },
+  "original_training_owners_exited": true,
+  "expected_log_only_postcheck_failure": {
+    "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-resource-recovery-v2/status.json",
+    "sha256": "e4ff8ef8fed5a359d9079145ae198184d09a0c93868332578b6c8873f1a978ed"
+  },
+  "CUDA_initialized": false,
+  "scope": "CPU endpoint/source/trajectory audit only. All4000 control updates completed before the known wrapper log-count failure. No new control update, model inference, quality result, direct exited-DINO-memory measurement, extension or promotion. Fresh spectral original4000 and full native/numerical review remain required."
+}

@@ -51,3 +51,18 @@ The fresh CPU integration receipt is
 SHA-256 `7e0e51976c373e9668dc20fa717b28b7a2e53ce6d04fefb9b57a49417504ad1c`.
 The frozen quality package still uses all 46 actual original training modules,
 including the original inverse-transform implementation.
+
+At03:32UTC the original control endpoint passed an additional independent CPU
+audit. All162 actual logs have finite loss/gradient and the exact original
+schedule LR; all176 recorded forward/supervision observations agree; all46
+archived model modules match. Model/EMA each have91 finite tensors and AdamW
+has89 finite states at4,000 with nonnegative second moments. The final and
+retained4k checkpoint hashes agree:
+`d17891aa95cadfffe02dc497a96a9de3481f6044a3c270762bc014cbca0c16e4`.
+See the [endpoint integrity receipt](results/spectral-control-original4000-integrity-v1.json).
+
+Fresh spectral worker628726/1792467113.42 started at03:31:53UTC, from step0
+with its original4k budget. Its initialization reports exact common parent
+state/output and the pinned DINO hash. The first17 actual observation
+dictionaries, through step25, match the completed control exactly. The fresh
+arm and all quality/native-review requirements remain in progress.
