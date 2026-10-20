@@ -2,6 +2,12 @@ State of the art 16 bit joint demosaicing and denoising from free images.
 
 See PROMPT.md for additional details.
 
+Diary filenames and human-facing diary creation times use the DST-aware
+America/Los_Angeles local timezone. Create entries with
+`python scripts/diary.py new "Title" --slug short-summary` to avoid UTC filenames.
+Explicitly labeled UTC timestamps inside machine receipts remain UTC. Historical
+renames are recorded in `diary/timestamp-corrections.json`; preserve receipt bytes.
+
 Performance reports for improved models must include at least two small native
 100% crop triplets: noisy, denoised, and GT. Use identical coordinates and display
 transforms across methods; never resize the crop pixels. Record source/ROI,
