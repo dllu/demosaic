@@ -1,10 +1,20 @@
 # Training data work, sampling order and batch size
 
-The next [spectral trial](spectral-v88-v89.md) keeps native256/B16 and uses all
-88,508 reviewed Commons training sources in both arms. Its genuine CPU/CUDA
-[engineering preflights](spectral-engineering.md) pass; the original4000
-comparison is separately launched. Geometry before area2 and selected-domain
-loading remain fixed. This does not establish a data-expansion or quality gain.
+The three requested changes are implemented and measured: geometry/PSF runs
+between4× binning and the final2× reduction; only the selected domain is loaded;
+and repeated throughput sweeps retain batch16. The matched geometry comparison
+gains.50990dB over8×-then-geometry on all427 photos. On the actual RGB pipeline,
+batch32 is only1.3% faster than16 while using roughly twice the CUDA allocation.
+Details and limitations are recorded below.
+
+The completed [spectral](spectral-original4k-review.md) and
+[late RGB](late-rgb-original4k-review.md) trials use native256/B16 and all88,508
+reviewed Commons training sources. Neither is promoted. The new opt-in
+[head-only training scope](late-rgb-head-only-engineering.md) protects the
+mature common path and avoids its backward graph while learning refinement;
+it retains the same geometry, selected-domain loading and controlled batch16.
+This is a separate engineering/quality experiment, without a new throughput,
+data-expansion or quality claim.
 
 The default-off [input-context experiment](training-context-v86-v87.md)
 separates prepared source size, actual forward size and central loss size.

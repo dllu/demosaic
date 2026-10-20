@@ -30,6 +30,16 @@ component projections pass. No model or default changes. A separate frozen-
 common-path training intervention remains to be tested, with exact model/EMA
 preservation and the full quality/native requirements.
 
+The resulting [V92 head-only intervention](late-rgb-head-only-v92.md) now has
+112 passing unit/regression tests and genuine CPU/CUDA16 versus fresh-process
+8+8 engineering certificates. Independent byte audits verify all91 common
+model/EMA states remain V63 across six boundaries; only24 head tensors train.
+All inference modules remain unchanged. Its
+[fixed original4000 candidate](late-rgb-head-only-engineering.md) is launched,
+with completed V90 explicitly a historical exploratory reference. Training
+completion and full quality/native review remain pending; no improvement,
+promotion or fulfillment of the complete objective follows from these checks.
+
 The [completed V84/V85 native-data comparison](native-data-original20k-review.md)
 finishes both original20k budgets on128 versus150 captures. Its matched photo
 effect is−.00422dB with an interval crossing zero; camera/detail gates fail and

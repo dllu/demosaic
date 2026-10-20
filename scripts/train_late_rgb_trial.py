@@ -212,6 +212,7 @@ def worker(plan_path, name):
     root, boundary = Path(plan["root"]), plan["boundary_updates"]
     arm = next(a for a in plan["arms"] if a["name"] == name)
     cfg = yaml.safe_load(Path(arm["config"]).read_text())
+    head_only = cfg.get("late_rgb_only", False)
     with (root / (name + ".claim")).open("x") as stream:
         stream.write(str(os.getpid()))
     assert psutil.virtual_memory().available > 40 * 2**30
@@ -299,6 +300,7 @@ def worker(plan_path, name):
                     "initial_model_sha256": model_hash(module),
                     "new_head_tensors": len(branch.state_dict()),
                     "new_head_parameters": sum(p.numel() for p in branch.parameters()),
+                    "late_rgb_only": head_only,
                 }
             )
             save(root / (name + "-initializations.json"), captures)
@@ -314,6 +316,12 @@ def worker(plan_path, name):
                 assert row["actual_forward_sha256"] == row["expected_forward_sha256"]
 
         net.register_forward_pre_hook(observe_forward)
+        if head_only:
+            def no_common_backward(_module, args):
+                prediction, features, condition, dino = args
+                assert not any(v.requires_grad for v in [prediction, features, condition, *dino])
+
+            net.pretrained_rgb.rgb_refinement.register_forward_pre_hook(no_common_backward)
         return net
 
     def observed_batch(*args, **kwargs):
@@ -335,6 +343,15 @@ def worker(plan_path, name):
 
     def observed_optimizer(model, config):
         optimizer = optimizer_constructor(model, config)
+        if head_only:
+            head_ids = {id(p) for p in model.pretrained_rgb.rgb_refinement.parameters()}
+            assert {id(p) for p in model.parameters() if p.requires_grad} == head_ids
+            assert [len(g["params"]) for g in optimizer.param_groups] == [0, 24]
+
+            def protected_gradients(_optimizer, _args, _kwargs):
+                assert all(p.grad is None for p in model.parameters() if id(p) not in head_ids)
+
+            optimizer.register_step_pre_hook(protected_gradients)
 
         def first_gradients(_optimizer, _args, _kwargs):
             handle.remove()
@@ -369,6 +386,11 @@ def worker(plan_path, name):
         return observe
 
     def retain(path, model, optimizer, ema, step, config, best):
+        if head_only:
+            actual = model.restoration_state_dict()
+            for key, value in parent["ema"].items():
+                assert torch.equal(actual[key].cpu(), value), ("protected model", key)
+                assert torch.equal(ema[key].cpu(), value), ("protected EMA", key)
         writer(path, model, optimizer, ema, step, config, best)
         if Path(path).name == "last.pt" and step in (1000, 4000):
             retain_checkpoint(path, step)
@@ -423,9 +445,13 @@ def worker(plan_path, name):
     for field in ("model", "ema"):
         assert len(state[field]) == 91 + len(model.pretrained_rgb.rgb_refinement.state_dict())
         assert all(torch.isfinite(x).all() for x in state[field].values())
-    assert len(state["optimizer"]["state"]) == 89 + len(
+    assert len(state["optimizer"]["state"]) == (0 if head_only else 89) + len(
         list(model.pretrained_rgb.rgb_refinement.parameters())
     )
+    if head_only:
+        for field in ["model", "ema"]:
+            for key, value in parent["ema"].items():
+                assert torch.equal(state[field][key], value), (field, key)
     for item in state["optimizer"]["state"].values():
         assert int(item["step"]) == boundary
         assert all(torch.isfinite(x).all() for x in item.values() if torch.is_tensor(x))
@@ -444,7 +470,7 @@ def worker(plan_path, name):
         )
     rows = train_rows(Path(checkpoint).parent)
     assert [r["step"] for r in rows] == (
-        list(range(1, 17)) if plan["engineering_only"] else [1, *range(25, 4001, 25)]
+        list(range(1, boundary + 1)) if plan["engineering_only"] else [1, *range(25, 4001, 25)]
     )
     for row in rows:
         witness = next(x for x in observations if x["step"] == row["step"])
@@ -465,6 +491,9 @@ def worker(plan_path, name):
             "actual_step": boundary,
             "planned_steps": 4000,
             "engineering_only": plan["engineering_only"],
+            "late_rgb_only": head_only,
+            "common_model_and_EMA_exact_parent": True if head_only else None,
+            "common_backward_absent": True if head_only else None,
             "source_sha256": state["config"]["source_sha256"],
             "source_snapshot": state["config"]["source_snapshot"],
             "finite_states": {

@@ -1,0 +1,563 @@
+{
+  "status": "head-only-full-run-engineering-prerequisites-verified-before-launch",
+  "full_plan": {
+    "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/plan.json",
+    "sha256": "93da7b7e5b8d0213bcd1580ffe709a53ebb801d8b125f6c9f3c8271cad950b46"
+  },
+  "preflights": [
+    {
+      "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-CPU16-v1/status.json",
+      "sha256": "33f9d6eafd8a806c4757308dc02f67efd4034ffa026608c62daebb5508722ab5"
+    },
+    {
+      "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-CUDA16-v1/status.json",
+      "sha256": "2ad1b2996b4f9e58cd8eab59a530a329f28f3c6cd2ac38b54f36dba8c73a7419"
+    }
+  ],
+  "independent_CPU_CUDA_byte_audit": {
+    "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-CUDA16-v1/common-byte-audit.json",
+    "sha256": "6a02d3730f86a709cc5635419ee6cd6dd3e4e44aee1da7442c9a1ccd5774b2a5"
+  },
+  "tests": [
+    {
+      "kind": "unit",
+      "tests": 34,
+      "junit": {
+        "path": "/mnt/external/demosaic/late-rgb-only-unit-v1.xml",
+        "sha256": "065940e4fecf74cadb5855e2a7d0f30bc892ba8970df2d44451e0d633ee6dbed"
+      }
+    },
+    {
+      "kind": "regression",
+      "tests": 78,
+      "junit": {
+        "path": "/mnt/external/demosaic/late-rgb-only-regression-v2.xml",
+        "sha256": "04836ee239ead7e2045537b89faa2ed45720f72893af9fc7228b3e7187e0fe06"
+      }
+    }
+  ],
+  "initial_regression_collection_error_preserved": {
+    "path": "/mnt/external/demosaic/late-rgb-only-regression-v1.xml",
+    "sha256": "edbf85f62faf9ad549fbdbebf92fd4ef3731ab17fbd26b1817ce3077521420ba"
+  },
+  "actual_model_modules": {
+    "__init__.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/__init__.py",
+        "sha256": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/__init__.py",
+        "sha256": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d"
+      },
+      "identical": true
+    },
+    "__main__.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/__main__.py",
+        "sha256": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/__main__.py",
+        "sha256": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279"
+      },
+      "identical": true
+    },
+    "audit.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/audit.py",
+        "sha256": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/audit.py",
+        "sha256": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d"
+      },
+      "identical": true
+    },
+    "calibration.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/calibration.py",
+        "sha256": "e86f4c602a6cd7fd855d0bcfeb790cf17ed87611f19d97926f9db174909b2d26"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/calibration.py",
+        "sha256": "e86f4c602a6cd7fd855d0bcfeb790cf17ed87611f19d97926f9db174909b2d26"
+      },
+      "identical": true
+    },
+    "cfa.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/cfa.py",
+        "sha256": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/cfa.py",
+        "sha256": "c7064736274d55273ab449129a776c4e9c76c5b53e88fbac2b1aeb86019fc252"
+      },
+      "identical": true
+    },
+    "checkpoint_cache.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/checkpoint_cache.py",
+        "sha256": "24399e0946d6d07872e6aa01cc4a7e12b4ae0c5c055bac9470a2dea8be2d4622"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/checkpoint_cache.py",
+        "sha256": "24399e0946d6d07872e6aa01cc4a7e12b4ae0c5c055bac9470a2dea8be2d4622"
+      },
+      "identical": true
+    },
+    "cli.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/cli.py",
+        "sha256": "597ff352e5dfcb3e63375c02cee59949a056a77d51abe4116b4b95e0bfcd7805"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/cli.py",
+        "sha256": "597ff352e5dfcb3e63375c02cee59949a056a77d51abe4116b4b95e0bfcd7805"
+      },
+      "identical": true
+    },
+    "color.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/color.py",
+        "sha256": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/color.py",
+        "sha256": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57"
+      },
+      "identical": true
+    },
+    "data.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/data.py",
+        "sha256": "560e4426aee8bcdb4630f9f00fc76b45162f5d2672e91aa9624493d8d3f1b137"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/data.py",
+        "sha256": "560e4426aee8bcdb4630f9f00fc76b45162f5d2672e91aa9624493d8d3f1b137"
+      },
+      "identical": true
+    },
+    "dino_adaptation.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/dino_adaptation.py",
+        "sha256": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/dino_adaptation.py",
+        "sha256": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861"
+      },
+      "identical": true
+    },
+    "dino_pyramid.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/dino_pyramid.py",
+        "sha256": "430c272eee1c764197b4f20810215798644f565a8d5e3637c7002d6fb71232af"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/dino_pyramid.py",
+        "sha256": "430c272eee1c764197b4f20810215798644f565a8d5e3637c7002d6fb71232af"
+      },
+      "identical": true
+    },
+    "execution.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/execution.py",
+        "sha256": "ddabc53dd01ff8792196aed5787c1dc0224940eeeefbde85188e093df50059fd"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/execution.py",
+        "sha256": "ddabc53dd01ff8792196aed5787c1dc0224940eeeefbde85188e093df50059fd"
+      },
+      "identical": true
+    },
+    "gaussian.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/gaussian.py",
+        "sha256": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/gaussian.py",
+        "sha256": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72"
+      },
+      "identical": true
+    },
+    "inference.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/inference.py",
+        "sha256": "0dfe6d0e8f9fbac820f9cabb41055e0dfd82e0b798148c2395f069b352c25165"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/inference.py",
+        "sha256": "0dfe6d0e8f9fbac820f9cabb41055e0dfd82e0b798148c2395f069b352c25165"
+      },
+      "identical": true
+    },
+    "io.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/io.py",
+        "sha256": "2094984091e5e12d10fde9061c49aec6809da8a99fcba131f53255deca39807e"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/io.py",
+        "sha256": "2094984091e5e12d10fde9061c49aec6809da8a99fcba131f53255deca39807e"
+      },
+      "identical": true
+    },
+    "late_rgb.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/late_rgb.py",
+        "sha256": "8e81263dd3eaf619700ad34c550153f066ed6125788356feb3812b31b6eb1fb7"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/late_rgb.py",
+        "sha256": "8e81263dd3eaf619700ad34c550153f066ed6125788356feb3812b31b6eb1fb7"
+      },
+      "identical": true
+    },
+    "losses.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/losses.py",
+        "sha256": "a4cabdb29db0e5eb1d99f25b90c764479fb136a5b615fa95ee1b4ae9cd026721"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/losses.py",
+        "sha256": "a4cabdb29db0e5eb1d99f25b90c764479fb136a5b615fa95ee1b4ae9cd026721"
+      },
+      "identical": true
+    },
+    "metrics.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/metrics.py",
+        "sha256": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/metrics.py",
+        "sha256": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31"
+      },
+      "identical": true
+    },
+    "model.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/model.py",
+        "sha256": "a3c0c8e8c39b1183898d639572249dc68735a62141d5b1041e8082f193210545"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/model.py",
+        "sha256": "a3c0c8e8c39b1183898d639572249dc68735a62141d5b1041e8082f193210545"
+      },
+      "identical": true
+    },
+    "noise.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/noise.py",
+        "sha256": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/noise.py",
+        "sha256": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce"
+      },
+      "identical": true
+    },
+    "nonlocal_reference.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/nonlocal_reference.py",
+        "sha256": "7e4a00e9d90a61b772da9c1a7414bf499f84b9c9bb0239fd250fb8263dfb3f88"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/nonlocal_reference.py",
+        "sha256": "7e4a00e9d90a61b772da9c1a7414bf499f84b9c9bb0239fd250fb8263dfb3f88"
+      },
+      "identical": true
+    },
+    "optimizer_batches.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/optimizer_batches.py",
+        "sha256": "7791d33a769d7a3598e19c3838e4aa191a278c345dd4944264fbf5b0950e4d58"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/optimizer_batches.py",
+        "sha256": "7791d33a769d7a3598e19c3838e4aa191a278c345dd4944264fbf5b0950e4d58"
+      },
+      "identical": true
+    },
+    "packed_isotropic.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/packed_isotropic.py",
+        "sha256": "c88568c931e3da224d0f27bd74cca4f23da25cea1e543d488b3defcfb9485dba"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/packed_isotropic.py",
+        "sha256": "c88568c931e3da224d0f27bd74cca4f23da25cea1e543d488b3defcfb9485dba"
+      },
+      "identical": true
+    },
+    "paired.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/paired.py",
+        "sha256": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/paired.py",
+        "sha256": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d"
+      },
+      "identical": true
+    },
+    "paired_admission.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/paired_admission.py",
+        "sha256": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/paired_admission.py",
+        "sha256": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825"
+      },
+      "identical": true
+    },
+    "paired_training.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/paired_training.py",
+        "sha256": "f4d949c3c2b0ad3edca52e47f781ca5c581484e786b8d7fe2e907088f85691b7"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/paired_training.py",
+        "sha256": "f4d949c3c2b0ad3edca52e47f781ca5c581484e786b8d7fe2e907088f85691b7"
+      },
+      "identical": true
+    },
+    "personal_admission.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/personal_admission.py",
+        "sha256": "9431fa9ccda526e79f07a1ce9a8e4834689e519828395ce40135c2d09a4f777f"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/personal_admission.py",
+        "sha256": "9431fa9ccda526e79f07a1ce9a8e4834689e519828395ce40135c2d09a4f777f"
+      },
+      "identical": true
+    },
+    "precision.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/precision.py",
+        "sha256": "f83635ef4834f0a5ad3c57824c50e8e0aaf5f95af34e8f802f04b131579594f4"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/precision.py",
+        "sha256": "f83635ef4834f0a5ad3c57824c50e8e0aaf5f95af34e8f802f04b131579594f4"
+      },
+      "identical": true
+    },
+    "prepare.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/prepare.py",
+        "sha256": "0573132bed2b21ba5be6fd0464daca4f506640a5f03b0311abbeec9b23a875f1"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/prepare.py",
+        "sha256": "0573132bed2b21ba5be6fd0464daca4f506640a5f03b0311abbeec9b23a875f1"
+      },
+      "identical": true
+    },
+    "pretrained_rgb.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/pretrained_rgb.py",
+        "sha256": "6c08681bedf20863eef5106703a70376548f6faceb1b29f60366444c817fc8ae"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/pretrained_rgb.py",
+        "sha256": "6c08681bedf20863eef5106703a70376548f6faceb1b29f60366444c817fc8ae"
+      },
+      "identical": true
+    },
+    "prior.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/prior.py",
+        "sha256": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/prior.py",
+        "sha256": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a"
+      },
+      "identical": true
+    },
+    "raw_admission.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/raw_admission.py",
+        "sha256": "06fe28c7a12559ce964f28571ecbbed282ac53ee4ecea1998945358dc7d5737b"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/raw_admission.py",
+        "sha256": "06fe28c7a12559ce964f28571ecbbed282ac53ee4ecea1998945358dc7d5737b"
+      },
+      "identical": true
+    },
+    "raw_clean.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/raw_clean.py",
+        "sha256": "af8b1df13989d08285bffcf6d2bf358453e6e9c2514a48f4a2e2a1087b7499b6"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/raw_clean.py",
+        "sha256": "af8b1df13989d08285bffcf6d2bf358453e6e9c2514a48f4a2e2a1087b7499b6"
+      },
+      "identical": true
+    },
+    "raw_directional.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/raw_directional.py",
+        "sha256": "4309e5c0952b6957035fb13d3c9149e4f42e18c6c7cd1d305677c2ae02a5df55"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/raw_directional.py",
+        "sha256": "4309e5c0952b6957035fb13d3c9149e4f42e18c6c7cd1d305677c2ae02a5df55"
+      },
+      "identical": true
+    },
+    "raw_kernel.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/raw_kernel.py",
+        "sha256": "32ba3747479f0e328fe87a84fb227dd456ae0d08b242a4d1411756dfbf9fb498"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/raw_kernel.py",
+        "sha256": "32ba3747479f0e328fe87a84fb227dd456ae0d08b242a4d1411756dfbf9fb498"
+      },
+      "identical": true
+    },
+    "raw_spectral.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/raw_spectral.py",
+        "sha256": "84b723d4a2f8e2a644fde7c3083ba9fa925dcf40b386f392e9f0f419628bfee0"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/raw_spectral.py",
+        "sha256": "84b723d4a2f8e2a644fde7c3083ba9fa925dcf40b386f392e9f0f419628bfee0"
+      },
+      "identical": true
+    },
+    "real_suite.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/real_suite.py",
+        "sha256": "69d3d403d36b1230e35083cc55e2c1a485f82cd5058f6be83fb3d5c0c18a6825"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/real_suite.py",
+        "sha256": "69d3d403d36b1230e35083cc55e2c1a485f82cd5058f6be83fb3d5c0c18a6825"
+      },
+      "identical": true
+    },
+    "realdata.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/realdata.py",
+        "sha256": "ed24db2b066531281a196e6fa074130cb0ee78a640eae5ccaaace234f5ad5421"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/realdata.py",
+        "sha256": "ed24db2b066531281a196e6fa074130cb0ee78a640eae5ccaaace234f5ad5421"
+      },
+      "identical": true
+    },
+    "reference.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/reference.py",
+        "sha256": "54ed094d58e245a56993ea3ce3ef9e21d2164e902d41d03bba9132bacd22891f"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/reference.py",
+        "sha256": "54ed094d58e245a56993ea3ce3ef9e21d2164e902d41d03bba9132bacd22891f"
+      },
+      "identical": true
+    },
+    "registration.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/registration.py",
+        "sha256": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/registration.py",
+        "sha256": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202"
+      },
+      "identical": true
+    },
+    "reporting.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/reporting.py",
+        "sha256": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/reporting.py",
+        "sha256": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d"
+      },
+      "identical": true
+    },
+    "safety.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/safety.py",
+        "sha256": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/safety.py",
+        "sha256": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7"
+      },
+      "identical": true
+    },
+    "suite.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/suite.py",
+        "sha256": "8470afe07484daf3b35d12370e962abec2c5ea6af8fafbd95d55d360f10f5548"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/suite.py",
+        "sha256": "8470afe07484daf3b35d12370e962abec2c5ea6af8fafbd95d55d360f10f5548"
+      },
+      "identical": true
+    },
+    "textures.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/textures.py",
+        "sha256": "b4bc304a50de272cf7fcba272e67b828c163466ffc23ea3337a6a66f076dc664"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/textures.py",
+        "sha256": "b4bc304a50de272cf7fcba272e67b828c163466ffc23ea3337a6a66f076dc664"
+      },
+      "identical": true
+    },
+    "train.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/train.py",
+        "sha256": "0eb86df7431571627406e847525ce4681c49432a529cf2421bc9d5ba42c3becd"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/train.py",
+        "sha256": "33a19cbf8b9456624df6d06a16546476460a7408e1b8e85f37a1051e73961ec5"
+      },
+      "identical": false
+    },
+    "training_context.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/training_context.py",
+        "sha256": "1322c59d3c7b931bdb9db50faadfa28516dcefd999b3902beef9e399be475b77"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/training_context.py",
+        "sha256": "1322c59d3c7b931bdb9db50faadfa28516dcefd999b3902beef9e399be475b77"
+      },
+      "identical": true
+    },
+    "vst.py": {
+      "executed": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-head-only-v92-original4k-v1/work/src/demosaic/vst.py",
+        "sha256": "9ac639792870c11ceb4960dc836ff7c70d7740491eb7b8c829ccf263616e9077"
+      },
+      "historical": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/src/demosaic/vst.py",
+        "sha256": "9ac639792870c11ceb4960dc836ff7c70d7740491eb7b8c829ccf263616e9077"
+      },
+      "identical": true
+    }
+  },
+  "no_quality_or_speed_claim": true
+}

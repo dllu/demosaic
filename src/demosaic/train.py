@@ -75,17 +75,39 @@ def evaluate(
     return {key: sum(values) / len(values) for key, values in scores.items()}
 
 
-def update_ema(model, ema, decay):
+def update_ema(model, ema, decay, *, trainable_only=False):
+    names = (
+        {name for name, value in model.named_parameters() if value.requires_grad}
+        if trainable_only
+        else None
+    )
     with torch.no_grad():
         for name, value in model.restoration_state_dict().items():
+            if names is not None and name not in names:
+                continue
             if value.is_floating_point():
                 ema[name].lerp_(value.detach(), 1 - decay)
             else:
                 ema[name].copy_(value)
 
 
+def validate_late_rgb_only(config):
+    value = config.get("late_rgb_only", False)
+    if type(value) is not bool:
+        raise ValueError("Late RGB-only training must be a boolean")
+    if value and any(
+        config.get(key, False)
+        for key in ("raw_kernel_only", "refiner_only", "coarse_refiner_only", "pyramid_refiner_only")
+    ):
+        raise ValueError("Late RGB-only training cannot combine with another head-only mode")
+    return value
+
+
 def make_optimizer(model, config):
     """Select optional RAW-head warmup or packed-phase learning-rate groups."""
+    late_only = validate_late_rgb_only(config)
+    if late_only and model.config.late_rgb_refinement == "none":
+        raise ValueError("Late RGB-only training requires late RGB refinement")
     raw_kernel_only = config.get("raw_kernel_only", False)
     if type(raw_kernel_only) is not bool:
         raise ValueError("RAW kernel-only training must be a boolean")
@@ -127,6 +149,9 @@ def make_optimizer(model, config):
         x != 1 for x in [multiplier, directional_multiplier, spectral_multiplier]
     ):
         raise ValueError("Late RGB learning-rate groups cannot combine with other RAW-head groups")
+    if late_only:
+        model.requires_grad_(False)
+        model.pretrained_rgb.rgb_refinement.requires_grad_(True)
     parameters = [p for p in model.parameters() if p.requires_grad]
     if multiplier != 1:
         phase = [
@@ -376,6 +401,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
 
 
 def _train(config, *, resume=None, initialize=None, stop_after=None):
+    late_only = validate_late_rgb_only(config)
     training_context = TrainingContext.from_config(config)
     objective = validate_reconstruction_objective(
         config.get("reconstruction_objective", "charbonnier-v1")
@@ -510,6 +536,8 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
     torch.manual_seed(seed)
     resume_state = torch.load(resume, map_location="cpu", weights_only=True) if resume else None
     if resume_state:
+        if validate_late_rgb_only(resume_state["config"]) != late_only:
+            raise ValueError("Resume late RGB training scope differs; initialize a new run")
         require_resume_execution(
             resume_state["config"],
             config["training_execution"],
@@ -955,7 +983,12 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
                     model.parameters(), 1, error_if_nonfinite=True
                 )
         optimizer.step()
-        update_ema(model, ema, min(config.get("ema_decay", 0.999), (1 + step) / (10 + step)))
+        update_ema(
+            model,
+            ema,
+            min(config.get("ema_decay", 0.999), (1 + step) / (10 + step)),
+            trainable_only=late_only,
+        )
         if log_step:
             metrics = {
                 "event": "train",

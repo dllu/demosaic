@@ -1,9 +1,12 @@
 """Late semantic access, physical parent preservation and portable training state."""
 
+import json
 from copy import deepcopy
 
+import numpy as np
 import pytest
 import torch
+import yaml
 from torch import nn
 from torch.nn import functional as F
 
@@ -11,7 +14,7 @@ from demosaic.cfa import color_indices
 from demosaic.inference import load_checkpoint
 from demosaic.late_rgb import LateRgbRefinement
 from demosaic.model import JointDemosaic, ModelConfig
-from demosaic.train import make_optimizer, set_learning_rate
+from demosaic.train import make_optimizer, set_learning_rate, update_ema, validate_late_rgb_only
 
 CHANNELS = (2, 3, 4, 5)
 
@@ -247,3 +250,184 @@ def test_optimizer_exact_new_parameter_group_and_invalid_multiplier():
     model.config.late_rgb_refinement = "none"
     with pytest.raises(ValueError, match="requires late RGB"):
         make_optimizer(model, {"late_rgb_lr_multiplier": 20})
+
+
+@pytest.mark.parametrize("mode", ["global", "spatial"])
+@pytest.mark.parametrize("amp", [False, True])
+def test_head_only_updates_hold_common_model_and_EMA_exact_without_common_backward(
+    tiny_convnext, mode, amp
+):
+    torch.manual_seed(91)
+    model = JointDemosaic(config(mode)).train()
+    initial = {k: v.detach().clone() for k, v in model.state_dict().items()}
+    ema = {k: v.detach().clone() for k, v in model.restoration_state_dict().items()}
+    optimizer = make_optimizer(
+        model, {"lr": 1e-5, "late_rgb_lr_multiplier": 20, "late_rgb_only": True}
+    )
+    head = model.pretrained_rgb.rgb_refinement
+    head_ids = {id(p) for p in head.parameters()}
+    assert {id(p) for p in model.parameters() if p.requires_grad} == head_ids
+    assert [len(g["params"]) for g in optimizer.param_groups] == [0, 24]
+    set_learning_rate(optimizer, 3e-6)
+    assert [g["lr"] for g in optimizer.param_groups] == [3e-6, 3e-6 * 20]
+    head_inputs, encoder_calls = [], []
+    handles = [
+        head.register_forward_pre_hook(lambda _m, args: head_inputs.append(args)),
+        model.context.backbone.register_forward_hook(lambda *_: encoder_calls.append(True)),
+    ]
+    raw = torch.rand(2, 4, 17, 25) * 0.2 + 0.1
+    args = (raw, torch.ones_like(raw) * 0.0002, color_indices("GBRG"))
+    model.set_noise(0.001, 0.000001)
+    try:
+        for _ in range(3):
+            optimizer.zero_grad(set_to_none=True)
+            with torch.autocast("cpu", dtype=torch.bfloat16, enabled=amp):
+                prediction = model(*args)
+                loss = prediction.square().mean()
+            loss.backward()
+            assert all(
+                p.grad is not None and torch.isfinite(p.grad).all() for p in head.parameters()
+            )
+            assert all(p.grad is None for p in model.parameters() if id(p) not in head_ids)
+            torch.nn.utils.clip_grad_norm_(model.parameters(), 1, error_if_nonfinite=True)
+            optimizer.step()
+            update_ema(model, ema, 0.9, trainable_only=True)
+    finally:
+        for handle in handles:
+            handle.remove()
+    assert len(encoder_calls) == len(head_inputs) == 3
+    for prediction, features, condition, dino in head_inputs:
+        assert not any(v.requires_grad for v in [prediction, features, condition, *dino])
+    for name, value in model.state_dict().items():
+        if not name.startswith("pretrained_rgb.rgb_refinement."):
+            assert torch.equal(value, initial[name]), name
+            if name in ema:
+                assert torch.equal(ema[name], initial[name]), name
+    assert head.output.weight.count_nonzero()
+    assert all(layer.weight.count_nonzero() for layer in head.modulations)
+    assert not torch.equal(ema["pretrained_rgb.rgb_refinement.output.weight"], head.output.weight)
+    assert len(optimizer.state) == 24
+    assert all(int(v["step"]) == 3 for v in optimizer.state.values())
+
+
+@pytest.mark.parametrize("value", [0, 1, None, "true"])
+def test_head_only_rejects_non_boolean_selection(value):
+    with pytest.raises(ValueError, match="must be a boolean"):
+        validate_late_rgb_only({"late_rgb_only": value})
+
+
+@pytest.mark.parametrize(
+    "other", ["raw_kernel_only", "refiner_only", "coarse_refiner_only", "pyramid_refiner_only"]
+)
+def test_head_only_rejects_combined_scopes(other):
+    with pytest.raises(ValueError, match="cannot combine"):
+        validate_late_rgb_only({"late_rgb_only": True, other: True})
+
+
+def test_head_only_requires_an_actual_late_head():
+    model = nn.Module()
+    model.config = config()
+    with pytest.raises(ValueError, match="requires late RGB refinement"):
+        make_optimizer(model, {"late_rgb_only": True})
+
+
+def test_trainable_only_EMA_leaves_frozen_parameters_and_buffers_untouched():
+    model = nn.Module()
+    model.head = nn.Parameter(torch.tensor([3.0]))
+    model.common = nn.Parameter(torch.tensor([5.0]), requires_grad=False)
+    model.register_buffer("buffer", torch.tensor([7.0]))
+    model.register_buffer("integer", torch.tensor([9]))
+    model.restoration_state_dict = model.state_dict
+    initial = {k: torch.zeros_like(v) for k, v in model.state_dict().items()}
+    scoped = deepcopy(initial)
+    update_ema(model, scoped, 0.5, trainable_only=True)
+    assert torch.equal(scoped["head"], torch.tensor([1.5]))
+    assert all(torch.equal(scoped[k], initial[k]) for k in ["common", "buffer", "integer"])
+    # The absent/false option preserves the existing complete-state update.
+    update_ema(model, initial, 0.5)
+    assert torch.equal(initial["head"], scoped["head"])
+    assert torch.equal(initial["common"], torch.tensor([2.5]))
+    assert torch.equal(initial["buffer"], torch.tensor([3.5]))
+    assert torch.equal(initial["integer"], model.integer)
+
+
+def test_head_only_training_restart_preserves_all_states_and_rejects_scope_change(
+    tiny_convnext, tmp_path
+):
+    from demosaic.train import train
+
+    torch.manual_seed(92)
+    parent = JointDemosaic(config())
+    weights = {k: v.detach().clone() for k, v in parent.restoration_state_dict().items()}
+    parent_path = tmp_path / "parent.pt"
+    torch.save(
+        {"model": weights, "ema": weights, "model_config": parent.config.to_dict()}, parent_path
+    )
+    np.save(tmp_path / "clean.npy", np.full((40, 40, 3), 11796, dtype=np.uint16))
+    manifest = tmp_path / "manifest.jsonl"
+    manifest.write_text(
+        "\n".join(
+            json.dumps({"id": split, "cache": "clean.npy", "split": split})
+            for split in ["train", "val"]
+        )
+    )
+    cfg = {
+        "model": config("global").to_dict(),
+        "manifest": str(manifest),
+        "run": str(tmp_path / "full"),
+        "device": "cpu",
+        "steps": 4,
+        "batch_size": 1,
+        "patch_size": 32,
+        "workers": 0,
+        "cpu_threads": 2,
+        "amp": False,
+        "precision": "float32",
+        "training_execution": "deterministic-v1",
+        "data_seed_per_step": True,
+        "warmup_steps": 1,
+        "checkpoint_every": 4,
+        "log_every": 1,
+        "val_batches": 1,
+        "validation_images": 1,
+        "min_available_gb": 0,
+        "late_rgb_only": True,
+        "late_rgb_lr_multiplier": 20,
+        "lr": 1e-5,
+    }
+    path = tmp_path / "config.yaml"
+    path.write_text(yaml.safe_dump(cfg))
+    full = train(path, initialize=parent_path)
+    cfg["run"] = str(tmp_path / "resumed")
+    path.write_text(yaml.safe_dump(cfg))
+    middle = train(path, initialize=parent_path, stop_after=2)
+    assert torch.load(middle, weights_only=True)["step"] == 2
+    resumed = train(path, resume=middle)
+    actual = torch.load(resumed, weights_only=True)
+    expected = torch.load(full, weights_only=True)
+
+    def identical(a, b):
+        assert type(a) is type(b)
+        if torch.is_tensor(a):
+            assert torch.equal(a, b)
+        elif isinstance(a, dict):
+            assert a.keys() == b.keys()
+            for key in a:
+                identical(a[key], b[key])
+        elif isinstance(a, (list, tuple)):
+            assert len(a) == len(b)
+            for x, y in zip(a, b, strict=True):
+                identical(x, y)
+        else:
+            assert a == b
+
+    for key in ["model", "ema", "optimizer", "torch_rng", "python_rng", "cuda_rng", "best", "step"]:
+        identical(actual[key], expected[key])
+    for field in ["model", "ema"]:
+        for name, value in weights.items():
+            assert torch.equal(actual[field][name], value), (field, name)
+    assert len(actual["optimizer"]["state"]) == 24
+    cfg["late_rgb_only"] = False
+    path.write_text(yaml.safe_dump(cfg))
+    with pytest.raises(ValueError, match="Resume late RGB training scope differs"):
+        train(path, resume=resumed)

@@ -13,6 +13,14 @@ testing preservation of the mature shared path during refinement training;
 it does not prove that freezing improves quality or rule out training-gradient
 effects from the head.
 
+The resulting [prospective V92 head-only intervention](late-rgb-head-only-v92.md)
+holds all common model/EMA tensors exact while learning only the existing
+global head. Its [engineering checks](late-rgb-head-only-engineering.md) cover
+gradient isolation, actual mixed-data updates and fresh-process restart.
+Completed V90 is explicitly a fixed historical exploratory reference, since
+its outcomes informed this choice. Freezing remains an unproven quality
+hypothesis; inference architecture and working defaults remain unchanged.
+
 The [October20 PixIE follow-up](research-pixie-followup.md) records a recent
 semantic-routing candidate and its differences from our current fusion.
 The accompanying [CPU noise-proxy study](stabilized-noise-proxy.md) checks a
