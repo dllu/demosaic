@@ -15,26 +15,26 @@ finds +.00099dB matched photo PSNR with an interval crossing zero; known-camera
 and weak-detail gates fail. All192 ADC loss limits pass, all125 native cells
 are viewed, and neither model is promoted or extended.
 
-The next [fixed V88/V89 spectral comparison](spectral-v88-v89.md) retains
-native256/B16 and admits the reviewed88,508-source Commons population to both
-arms. Its [68 tests and genuine CPU/CUDA engineering preflights](spectral-engineering.md)
-pass, including exact16 versus8+8 state/RNG equality. A separate original4000
-controller is launched; trained quality/native review remains pending. This is
-not a demonstrated improvement, and V43 remains the working reference.
-An [explicit retention-wrapper repair](spectral-retention-recovery.md) resumes
-the verified original1000 state with unchanged model/data/original4000 horizon;
-corrected CPU/CUDA and external checkpoint/prefix recovery checks pass.
-Its [resource recovery](spectral-resource-recovery.md) preserves that state and
-deducts consumed time while using a64GiB operational root reserve. The validated
-[full final review and native packaging](spectral-review-preparation.md) are
-queued after successful original4000 exits; quality remains unproven.
-The [completed original4k budgets](spectral-original4k-training-handoff.md) now
-pass the independent production boundary: all176 recorded observations,161
-shared scheduled logs, final RNG and source archives match. An extra real
-first-resume control log is preserved without additional control updates.
-Known/unseen stages are complete and26 selected native triplets/38 unique
-cells are viewed, including the retained V43/RawNIND camera comparisons;
-full427 and the remaining native/numerical review remain in progress.
+The [completed V88/V89 spectral4k review](spectral-original4k-review.md) finds
+small positive matched photo PSNR:+.00776dB,[+.00695,+.00851], with−.000148
+SSIM. Both fixed weak-carrier improvements miss+.05, and both endpoints lose
+known-camera performance versus V63. All192 individual ADC limits pass and
+all81 triplets/125 native cells are actually viewed before interpreting scores.
+Source sensitivities, full color/analytic array/arithmetic checks and final
+native packaging are complete. Neither model is promoted or extended; V43
+remains the working reference. SOTA and decisive native superiority remain
+unproven.
+
+The [fixed spectral experiment](spectral-v88-v89.md) retains native256/B16 and
+admits reviewed88,508 Commons sources to both arms. Its
+[engineering preflights](spectral-engineering.md),
+[retention repair](spectral-retention-recovery.md) and
+[resource recovery](spectral-resource-recovery.md) precede the genuine original4k
+completion. The [production boundary](spectral-original4k-training-handoff.md)
+checks all176 recorded observations,161 shared scheduled logs, final RNG and
+source archives. The extra real first-resume control log is retained without
+additional updates. [Final evaluation preparation](spectral-review-preparation.md)
+records the preflight separately from the completed quality result above.
 The separate [generated operator-context study](spectral-operator-context.md)
 quantifies a window-dependence risk without changing the spectral experiment
 or establishing actual learned-model artifacts.
@@ -46,8 +46,10 @@ proxy, with substantial correlation and deviations of both signs elsewhere;
 it does not justify a broad scalar-prior change or prove a quality cause.
 Separate [inverse](vst-unused-inverse.md) and
 [physical-feature](physical-feature-unused-work.md) implementation cleanups have
-genuine-weight CPU output/gradient parity; their CUDA probes remain queued after
-training and full review. No full-model speed or new quality gain follows.
+genuine-weight CPU output/gradient parity. Their
+[completed isolated CUDA probes](unused-physics-work-CUDA-review.md) retain exact
+outputs/sampled inverse gradients and physical-feature strides, with lower
+component medians. No full-model speed or new quality gain follows.
 
 The [reviewed public RAW146/private168 extensions](public-raw-expansion-v3.md)
 remain separate future inputs. The [completed Commons extension](commons-post4557-reviewed.md)

@@ -1,0 +1,124 @@
+{
+  "status": "completed-isolated-anchored-physical-feature-CUDA-parity-and-timing",
+  "plan": {
+    "path": "/mnt/external/demosaic/experiments/physical-feature-work-CUDA-v1/plan.json",
+    "sha256": "8e2e0fe8bd8b500c4731249c06be441760fbf65b1151b71671c7fcf146662dc9"
+  },
+  "predecessor_result": {
+    "path": "/mnt/external/demosaic/experiments/vst-unused-inverse-CUDA-v2/result.json",
+    "sha256": "65b21b098deaa6ec119f5874808166fb6fdcb49c69efdd46c8fa0f2705d3f6c1"
+  },
+  "results": [
+    {
+      "native_size": 64,
+      "batch": 4,
+      "layout": "contiguous",
+      "all_six_output_fields_bytes_and_strides_exact": true,
+      "values_compared": 458760,
+      "CUDA_ms": {
+        "original": [
+          0.8542400002479553,
+          0.8245120048522949,
+          0.8256959915161133,
+          0.8240320086479187,
+          0.81740802526474
+        ],
+        "candidate": [
+          0.8357120156288147,
+          0.8128640055656433,
+          0.8042240142822266,
+          0.8013759851455688,
+          0.8426880240440369
+        ]
+      },
+      "median_ms": {
+        "original": 0.8245120048522949,
+        "candidate": 0.8128640055656433
+      }
+    },
+    {
+      "native_size": 64,
+      "batch": 4,
+      "layout": "channels_last",
+      "all_six_output_fields_bytes_and_strides_exact": true,
+      "values_compared": 458760,
+      "CUDA_ms": {
+        "original": [
+          0.7306879758834839,
+          0.8137279748916626,
+          0.8159360289573669,
+          0.7978559732437134,
+          0.8047680258750916
+        ],
+        "candidate": [
+          0.7999680042266846,
+          0.7986559867858887,
+          0.7824000120162964,
+          0.7789120078086853,
+          0.787168025970459
+        ]
+      },
+      "median_ms": {
+        "original": 0.8047680258750916,
+        "candidate": 0.787168025970459
+      }
+    },
+    {
+      "native_size": 512,
+      "batch": 4,
+      "layout": "contiguous",
+      "all_six_output_fields_bytes_and_strides_exact": true,
+      "values_compared": 29360136,
+      "CUDA_ms": {
+        "original": [
+          5.473951816558838,
+          5.059936046600342,
+          5.403103828430176,
+          5.0259199142456055,
+          5.013376235961914
+        ],
+        "candidate": [
+          4.166656017303467,
+          3.8723840713500977,
+          4.527904033660889,
+          3.8136000633239746,
+          3.8182079792022705
+        ]
+      },
+      "median_ms": {
+        "original": 5.059936046600342,
+        "candidate": 3.8723840713500977
+      }
+    },
+    {
+      "native_size": 512,
+      "batch": 4,
+      "layout": "channels_last",
+      "all_six_output_fields_bytes_and_strides_exact": true,
+      "values_compared": 29360136,
+      "CUDA_ms": {
+        "original": [
+          5.102367877960205,
+          5.106527805328369,
+          5.657311916351318,
+          5.087967872619629,
+          5.075551986694336
+        ],
+        "candidate": [
+          4.566751956939697,
+          3.893631935119629,
+          4.04150390625,
+          3.887615919113159,
+          4.368896007537842
+        ]
+      },
+      "median_ms": {
+        "original": 5.102367877960205,
+        "candidate": 4.04150390625
+      }
+    }
+  ],
+  "all_output_bytes_and_strides_exact": true,
+  "CPU_CUDA_RNG_unchanged": true,
+  "scope": "Physical feature component only, deterministic nonphotographic all-CFA fields and mixed noise families. IEEE FP32 physical work with the unchanged FP64 GAT anchors. Five alternating CUDA-event samples after two warmups. No neural model, optimizer, training, reference, quality or full-frame speed claim; shared-machine workloads are not excluded."
+}

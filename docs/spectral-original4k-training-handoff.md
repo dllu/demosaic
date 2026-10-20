@@ -1,4 +1,9 @@
-# Original spectral4k training complete; quality review running
+# Original spectral4k training handoff
+
+**Update:** the [full quality/native review](spectral-original4k-review.md) is now
+complete. The small matched photo gain fails weak-detail and known-camera
+requirements; neither endpoint is promoted or extended. The text below records
+the earlier training-complete handoff and partial native review.
 
 Both original4,000-update budgets have finished. The independent production
 boundary audit verifies finite model/EMA/AdamW states, original schedule LRs,

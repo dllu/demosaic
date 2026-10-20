@@ -1,0 +1,190 @@
+{
+  "status": "completed-spectral-original4k-native-numerical-and-quality-decision",
+  "observed_UTC": "2026-10-20T05:34:25.750518+00:00",
+  "review_plan": {
+    "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/plan.json",
+    "sha256": "753f0fca62747cf3dd4646d31e81fd33942f40dad82c00388c31059d345e84a0"
+  },
+  "training_boundary": {
+    "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/training-boundary.json",
+    "sha256": "1f30a93c867da71875e44ba6e19fdc13055045a1339fb152971104f02ea639be"
+  },
+  "manual_native_review_before_statistics": {
+    "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/manual-native-review-before-statistics.json",
+    "sha256": "2e21bc943afc7d8bbafbd32eca87dd9392f3db27ca780db7342711c1bd038974"
+  },
+  "criteria": {
+    "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/outputs/closure/numerical-criteria.json",
+    "sha256": "f3b49a854f7f2cf80f2e117586f8c6c0bfaeb17a4411b81495e17bc8a674ce6d"
+  },
+  "primary_statistics": {
+    "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/primary-statistics.json",
+    "sha256": "44cd379560b53b4c6f519a97d9b9331233e83f399456c9ad16852a8e11be35c7"
+  },
+  "source_sensitivity": {
+    "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/work/outputs/sensitivity/result.json",
+    "sha256": "aef751b4a81a7fde1a19f4f8c75021728b404e431b668e736533f204705a2974"
+  },
+  "visual_observations": {
+    "known": "Control, spectral and V63 remain very similar at shelf and chart boundaries. The independent AHD shelf reference has horizontal variation that is smooth in all restored methods. RawNIND has softer/colored chart-boundary bands in these selected views; V43 has a few isolated chart points. These are selected high-noise views with independent AHD references, not exact RGB truth or evidence of broad superiority.",
+    "unseen": "The new endpoints, V63 and V43 retain similar broad brown-surface and fabric structure with soft fine detail. RawNIND looks softer at the selected fabric boundaries. No clear new spectral advantage or large new failure is visible in these selected views; population quality and real-photo superiority remain undecided.",
+    "full427": "Canopy fine radial cords remain absent in all four restored methods. Building boundaries survive in all; fine cloud structure stays soft. Control/spectral/parent are very similar in these two exact-GT views, without a clear new spectral advantage. V43 also lacks the canopy cords. This selected view is not a complete population/quality decision.",
+    "gfx": {
+      "overcast-sky": "All five restored methods produce a smooth gray sky. No obvious new spectral tint/pattern is visible in this selected native context.",
+      "building-detail": "The four project models retain straighter/sharper coarse building edges than RawNIND here; fine surface detail is still soft. Control and spectral look very similar to V63.",
+      "foliage": "Leaves/branches remain smooth and painted-looking in the project models; the new spectral endpoint has no clear fine-detail advantage over control/parent. RawNIND retains more grain/texture, without a decisive leaf-detail improvement.",
+      "chain-link-fence": "The project models retain a more coherent diagonal wire grid than RawNIND, which shows a softer/structured mesh texture. Control/spectral/parent remain similar; V43 has clear wire contrast. This one view is not a broad superiority result."
+    },
+    "analytic": "The dark8px carrier is absent or extremely weak in both restored panels compared with the visible exact analytic GT bars. The bright16px carrier remains faint and attenuated in both. The flat gray output looks smooth in both without an obvious new spectral pattern or color cast. No clear spectral improvement is apparent in these selected views; fitted gains/noise/ADC statistics remain uninterpreted.",
+    "hue": "The gray and orange contexts look close across the three methods. The parent magenta field has visible broad mottling while both new endpoints look smoother and closer to the uniform analytic reference in this selected view. Control/spectral remain very similar; no obvious new spectral hue failure appears here. Mean-color/array statistics remain uninterpreted.",
+    "hue-extra": "Bright low-saturation magenta is smoother in both new endpoints than in V63, whose field has broad mottling. The other selected orange/magenta fields look broadly close to the exact analytic colors; control/spectral remain similar, without an obvious new hue failure.",
+    "highlights": "All three restored ISO6400 blue-sign views suppress fine blue structure visible in the independent ISO100 image. Broad orange shapes and platform boundaries remain but fine detail is soft. The captures differ in time/aperture and are not exact GT. No clear new spectral advantage is visible."
+  },
+  "matched_effect": {
+    "comparisons": {
+      "known_CFA": {
+        "panel": "known",
+        "kind": "real",
+        "metric": "sensor_psnr",
+        "first": "V89-original4000",
+        "second": "V88-original4000",
+        "first_checkpoint_sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3",
+        "second_checkpoint_sha256": "d17891aa95cadfffe02dc497a96a9de3481f6044a3c270762bc014cbca0c16e4",
+        "sources": 4,
+        "first_source_balanced_mean": 54.17855172687107,
+        "second_source_balanced_mean": 54.18226925532023,
+        "mean_first_minus_second": -0.0037175284491617333,
+        "source_bootstrap_95_interval": [
+          -0.008332464430068853,
+          0.0009399520026338593
+        ]
+      },
+      "unseen_CFA": {
+        "panel": "unseen",
+        "kind": "real",
+        "metric": "sensor_psnr",
+        "first": "V89-original4000",
+        "second": "V88-original4000",
+        "first_checkpoint_sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3",
+        "second_checkpoint_sha256": "d17891aa95cadfffe02dc497a96a9de3481f6044a3c270762bc014cbca0c16e4",
+        "sources": 5,
+        "first_source_balanced_mean": 53.89400490654839,
+        "second_source_balanced_mean": 53.89214413960775,
+        "mean_first_minus_second": 0.0018607669406463857,
+        "source_bootstrap_95_interval": [
+          -0.0007780287000869635,
+          0.003973473442924558
+        ]
+      },
+      "photo_PSNR": {
+        "panel": "full427",
+        "kind": "photo",
+        "metric": "srgb_psnr",
+        "first": "V89-original4000",
+        "second": "V88-original4000",
+        "first_checkpoint_sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3",
+        "second_checkpoint_sha256": "d17891aa95cadfffe02dc497a96a9de3481f6044a3c270762bc014cbca0c16e4",
+        "sources": 427,
+        "first_source_balanced_mean": 36.196988380485735,
+        "second_source_balanced_mean": 36.18922801590476,
+        "mean_first_minus_second": 0.007760364580968162,
+        "source_bootstrap_95_interval": [
+          0.006945757636181568,
+          0.008511141759171116
+        ]
+      },
+      "photo_SSIM": {
+        "panel": "full427",
+        "kind": "photo",
+        "metric": "srgb_ssim",
+        "first": "V89-original4000",
+        "second": "V88-original4000",
+        "first_checkpoint_sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3",
+        "second_checkpoint_sha256": "d17891aa95cadfffe02dc497a96a9de3481f6044a3c270762bc014cbca0c16e4",
+        "sources": 427,
+        "first_source_balanced_mean": 0.96389967191674,
+        "second_source_balanced_mean": 0.9640476060186831,
+        "mean_first_minus_second": -0.00014793410194322652,
+        "source_bootstrap_95_interval": [
+          -0.0002763238115757739,
+          -5.041600076320003e-05
+        ]
+      },
+      "canonical_camera_linear_PSNR": {
+        "panel": "full427",
+        "kind": "photo",
+        "metric": "linear_psnr",
+        "first": "V89-original4000",
+        "second": "V88-original4000",
+        "first_checkpoint_sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3",
+        "second_checkpoint_sha256": "d17891aa95cadfffe02dc497a96a9de3481f6044a3c270762bc014cbca0c16e4",
+        "sources": 427,
+        "first_source_balanced_mean": 39.304816910238635,
+        "second_source_balanced_mean": 39.298302413389095,
+        "mean_first_minus_second": 0.006514496849547596,
+        "source_bootstrap_95_interval": [
+          0.0060797990465212256,
+          0.007014907810272533
+        ]
+      }
+    },
+    "gates": {
+      "positive_photo_PSNR_95pct_lower_bound": true,
+      "known_CFA_loss_at_most_.03dB": true,
+      "unseen_CFA_loss_at_most_.03dB": true
+    },
+    "all_numerical_criteria_pass": true
+  },
+  "endpoint_eligibility": [
+    {
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-resource-recovery-v2/work/runs/control/last.pt",
+        "sha256": "d17891aa95cadfffe02dc497a96a9de3481f6044a3c270762bc014cbca0c16e4",
+        "arm": "control",
+        "step": 4000,
+        "kind": "joint-checkpoint",
+        "label": "V88-original4000"
+      },
+      "gates": {
+        "known_CFA_mean_at_least_.05dB": false,
+        "known_CFA_positive_95pct_lower_bound": false,
+        "unseen_CFA_mean_at_least_.05dB": false,
+        "unseen_CFA_positive_95pct_lower_bound": true,
+        "photo_PSNR_mean_at_least_.05dB": true,
+        "photo_PSNR_positive_95pct_lower_bound": true,
+        "photo_SSIM_loss_at_most_.0001": true
+      },
+      "eligible": false
+    },
+    {
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-resource-recovery-v2/work/runs/spectral/last.pt",
+        "sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3",
+        "arm": "spectral",
+        "step": 4000,
+        "kind": "joint-checkpoint",
+        "label": "V89-original4000"
+      },
+      "gates": {
+        "known_CFA_mean_at_least_.05dB": false,
+        "known_CFA_positive_95pct_lower_bound": false,
+        "unseen_CFA_mean_at_least_.05dB": true,
+        "unseen_CFA_positive_95pct_lower_bound": true,
+        "photo_PSNR_mean_at_least_.05dB": true,
+        "photo_PSNR_positive_95pct_lower_bound": true,
+        "photo_SSIM_loss_at_most_.0001": true
+      },
+      "eligible": false
+    }
+  ],
+  "weak_detail_claim_criteria_pass": false,
+  "all192_ADC_detail_limits_pass": true,
+  "native_boards_actually_viewed": 8,
+  "native_source_triplets": 81,
+  "native_cells": 125,
+  "model_promoted_or_default_changed": false,
+  "additional_training_budget_or_fullframe_export_launched": false,
+  "working_reference": "V43",
+  "project_goal_complete": false,
+  "decision": "Both original4k budgets and full review complete. Small positive matched spectral photo PSNR comes with negative matched SSIM; weak-detail minima and own-parent known-camera criteria fail. Neither endpoint is promoted or extended. Full SOTA/native superiority/100MP10s objective remains unmet/unproven."
+}
