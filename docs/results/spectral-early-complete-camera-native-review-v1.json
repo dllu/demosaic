@@ -1,0 +1,1108 @@
+{
+  "status": "actually-viewed-early-complete-camera-native-comparisons",
+  "UTC": "2026-10-20T04:58:50.400022+00:00",
+  "review_plan": {
+    "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/plan.json",
+    "sha256": "753f0fca62747cf3dd4646d31e81fd33942f40dad82c00388c31059d345e84a0"
+  },
+  "validation": {
+    "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/early-complete-camera-native-v1/validation.json",
+    "sha256": "e828653788678e8c0adba41c0f49121636732bf8c22b297a22fbd7905e575954"
+  },
+  "boards": [
+    {
+      "panel": "known",
+      "board": {
+        "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/early-complete-camera-native-v1/known/board.png",
+        "sha256": "ad47c35fd8c6e56d4b4d15c991e1aca1efb156d2edef1f7219774915b68bf69d"
+      },
+      "receipt": {
+        "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/early-complete-camera-native-v1/known/board.json",
+        "sha256": "d3186bb4f33bbe764e9a7288d8d2e0d95de64d81b78c6f876006711cd940e397"
+      },
+      "triplets": 10,
+      "native_cells": 14,
+      "models": [
+        {
+          "label": "0:control:step-4000",
+          "display_label": "0:control:step-4000",
+          "sha256": "d17891aa95cadfffe02dc497a96a9de3481f6044a3c270762bc014cbca0c16e4"
+        },
+        {
+          "label": "1:spectral:step-4000",
+          "display_label": "1:spectral:step-4000",
+          "sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3"
+        },
+        {
+          "label": "2:dino-convnext-wide-long-control-b16-v63-full20k:step-20000",
+          "display_label": "2:dino-convnext-wide-long-control-b16-v63-full20k:step-20000",
+          "sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5"
+        },
+        {
+          "label": "RawNIND:cfa-channel:publisher",
+          "display_label": "RawNIND:cfa-channel:publisher",
+          "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+        },
+        {
+          "label": "2:dino-anchored-native-diverse-b16-v43:step-2000",
+          "display_label": "2:dino-anchored-native-diverse-b16-v43:step-2000",
+          "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5"
+        }
+      ],
+      "published_board": {
+        "path": "/home/dllu/proj/demosaic/docs/images/spectral-original4k-early-known-five-methods.png",
+        "sha256": "ad47c35fd8c6e56d4b4d15c991e1aca1efb156d2edef1f7219774915b68bf69d"
+      },
+      "actually_viewed_at_original_detail": true,
+      "visual_notes": "Control, spectral and V63 remain very similar at shelf and chart boundaries. The independent AHD shelf reference has horizontal variation that is smooth in all restored methods. RawNIND has softer/colored chart-boundary bands in these selected views; V43 has a few isolated chart points. These are selected high-noise views with independent AHD references, not exact RGB truth or evidence of broad superiority.",
+      "common_cases": [
+        {
+          "case": "[\"2pilesofplates\", \"2pilesofplates:c8ed38ce03b5fe6df0ece5615d148c2e524bb9adbcab535773db71b0f85fbdbe:1756:2756\"]",
+          "scene": "2pilesofplates",
+          "noisy_sha256": "c8ed38ce03b5fe6df0ece5615d148c2e524bb9adbcab535773db71b0f85fbdbe",
+          "prepared_crop": {
+            "id": "2pilesofplates:c8ed38ce03b5fe6df0ece5615d148c2e524bb9adbcab535773db71b0f85fbdbe:1756:2756",
+            "path": "crop-1a2b558160c55a70a0fcdec4.npz",
+            "sha256": "ce5be43933be44a44ceb04a984d40f2c90bc4caf6cb8ce085afdf85644af64a2",
+            "xywh": [
+              2756,
+              1756,
+              512,
+              512
+            ],
+            "valid_fraction": 0.9999008178710938
+          },
+          "evaluation_tile_xywh": [
+            176,
+            176,
+            160,
+            160
+          ],
+          "white_balance": [
+            2.40625,
+            1.0,
+            1.69140625
+          ],
+          "camera_to_srgb": [
+            [
+              1.6353747641867242,
+              -0.42196120206077053,
+              -0.21341356212595397
+            ],
+            [
+              -0.13106821045315706,
+              1.5426731789357453,
+              -0.411604968482588
+            ],
+            [
+              0.011429855280569487,
+              -0.4196218028471881,
+              1.4081919475666185
+            ]
+          ],
+          "display_exposure": 1.0,
+          "variance_multiplier": 1.0,
+          "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "conditioning": {
+            "shot": 0.001425164014313677,
+            "read": 1.570807341075873e-06,
+            "method": "input-only-Haar-fit"
+          }
+        },
+        {
+          "case": "[\"7D-1\", \"7D-1:ceb7d71d6a184aa2e7cf47f22b84c61fe4545746f9be72397d6fa03dbd4751ad:1476:2344\"]",
+          "scene": "7D-1",
+          "noisy_sha256": "ceb7d71d6a184aa2e7cf47f22b84c61fe4545746f9be72397d6fa03dbd4751ad",
+          "prepared_crop": {
+            "id": "7D-1:ceb7d71d6a184aa2e7cf47f22b84c61fe4545746f9be72397d6fa03dbd4751ad:1476:2344",
+            "path": "crop-a3ba859368f3f95bd70632ea.npz",
+            "sha256": "57bc05d205ddff3c74c42082faea8cecaf27bbb5f4befcee9c73b9fb92835e09",
+            "xywh": [
+              2344,
+              1476,
+              512,
+              512
+            ],
+            "valid_fraction": 0.9965286254882812
+          },
+          "evaluation_tile_xywh": [
+            176,
+            176,
+            160,
+            160
+          ],
+          "white_balance": [
+            2.0732421875,
+            1.0,
+            1.662109375
+          ],
+          "camera_to_srgb": [
+            [
+              1.9204999025301575,
+              -1.0413495812710656,
+              0.12084967874090806
+            ],
+            [
+              -0.24696281331132816,
+              1.7593124803218942,
+              -0.5123496670105661
+            ],
+            [
+              -0.006956121305943532,
+              -0.4895846857258788,
+              1.4965408070318222
+            ]
+          ],
+          "display_exposure": 1.0,
+          "variance_multiplier": 1.0,
+          "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "conditioning": {
+            "shot": 0.004811973071234885,
+            "read": 6.621451009845082e-05,
+            "method": "input-only-Haar-fit"
+          }
+        }
+      ],
+      "source_triplets": [
+        {
+          "case": "[\"2pilesofplates\", \"2pilesofplates:c8ed38ce03b5fe6df0ece5615d148c2e524bb9adbcab535773db71b0f85fbdbe:1756:2756\"]",
+          "checkpoint_label": "0:control:step-4000",
+          "checkpoint_sha256": "d17891aa95cadfffe02dc497a96a9de3481f6044a3c270762bc014cbca0c16e4",
+          "original_png": {
+            "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/early-complete-camera-native-v1/known/native-940856dd17ff65148abadb64e4c52d3b772e2046e1ff8fab7e8f58d539220784.png",
+            "sha256": "940856dd17ff65148abadb64e4c52d3b772e2046e1ff8fab7e8f58d539220784"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "AHD reference",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        {
+          "case": "[\"2pilesofplates\", \"2pilesofplates:c8ed38ce03b5fe6df0ece5615d148c2e524bb9adbcab535773db71b0f85fbdbe:1756:2756\"]",
+          "checkpoint_label": "1:spectral:step-4000",
+          "checkpoint_sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3",
+          "original_png": {
+            "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/early-complete-camera-native-v1/known/native-d9dd226c1a806a611a28784fa4478f3ac8ca0ba3dea7c060152420b9f705f1fd.png",
+            "sha256": "d9dd226c1a806a611a28784fa4478f3ac8ca0ba3dea7c060152420b9f705f1fd"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "AHD reference",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        {
+          "case": "[\"2pilesofplates\", \"2pilesofplates:c8ed38ce03b5fe6df0ece5615d148c2e524bb9adbcab535773db71b0f85fbdbe:1756:2756\"]",
+          "checkpoint_label": "2:dino-convnext-wide-long-control-b16-v63-full20k:step-20000",
+          "checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+          "original_png": {
+            "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/early-complete-camera-native-v1/known/native-69bf112b87e577be4e5aa40ff6ab8863f66fd27949f098cf57223e338203e2ec.png",
+            "sha256": "69bf112b87e577be4e5aa40ff6ab8863f66fd27949f098cf57223e338203e2ec"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "AHD reference",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        {
+          "case": "[\"7D-1\", \"7D-1:ceb7d71d6a184aa2e7cf47f22b84c61fe4545746f9be72397d6fa03dbd4751ad:1476:2344\"]",
+          "checkpoint_label": "0:control:step-4000",
+          "checkpoint_sha256": "d17891aa95cadfffe02dc497a96a9de3481f6044a3c270762bc014cbca0c16e4",
+          "original_png": {
+            "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/early-complete-camera-native-v1/known/native-5fa346f3391d845d0be147b721c1261165068f920807d56256d2598dd9f09949.png",
+            "sha256": "5fa346f3391d845d0be147b721c1261165068f920807d56256d2598dd9f09949"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "AHD reference",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        {
+          "case": "[\"7D-1\", \"7D-1:ceb7d71d6a184aa2e7cf47f22b84c61fe4545746f9be72397d6fa03dbd4751ad:1476:2344\"]",
+          "checkpoint_label": "1:spectral:step-4000",
+          "checkpoint_sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3",
+          "original_png": {
+            "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/early-complete-camera-native-v1/known/native-8a0455238832217430a370c92248728a3331c8b747ed24ea69d31c339456c507.png",
+            "sha256": "8a0455238832217430a370c92248728a3331c8b747ed24ea69d31c339456c507"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "AHD reference",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        {
+          "case": "[\"7D-1\", \"7D-1:ceb7d71d6a184aa2e7cf47f22b84c61fe4545746f9be72397d6fa03dbd4751ad:1476:2344\"]",
+          "checkpoint_label": "2:dino-convnext-wide-long-control-b16-v63-full20k:step-20000",
+          "checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+          "original_png": {
+            "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/early-complete-camera-native-v1/known/native-ef3ea64874d036985af8a7c142bf105b26643a7f81b23126b10b10be9fcb960d.png",
+            "sha256": "ef3ea64874d036985af8a7c142bf105b26643a7f81b23126b10b10be9fcb960d"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "AHD reference",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        {
+          "case": "[\"2pilesofplates\", \"2pilesofplates:c8ed38ce03b5fe6df0ece5615d148c2e524bb9adbcab535773db71b0f85fbdbe:1756:2756\"]",
+          "checkpoint_label": "RawNIND:cfa-channel:publisher",
+          "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "original_png": {
+            "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/early-complete-camera-native-v1/known/native-bcea716a8344dee98664201e841fde527bbde2c39466762988713ad70c38a9f2.png",
+            "sha256": "bcea716a8344dee98664201e841fde527bbde2c39466762988713ad70c38a9f2"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "AHD reference",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        {
+          "case": "[\"7D-1\", \"7D-1:ceb7d71d6a184aa2e7cf47f22b84c61fe4545746f9be72397d6fa03dbd4751ad:1476:2344\"]",
+          "checkpoint_label": "RawNIND:cfa-channel:publisher",
+          "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "original_png": {
+            "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/early-complete-camera-native-v1/known/native-fe10c1cda6c24ccbb837e2053871e806fd7fcd7ad83bb64d7e94a69580b7858e.png",
+            "sha256": "fe10c1cda6c24ccbb837e2053871e806fd7fcd7ad83bb64d7e94a69580b7858e"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "AHD reference",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        {
+          "case": "[\"2pilesofplates\", \"2pilesofplates:c8ed38ce03b5fe6df0ece5615d148c2e524bb9adbcab535773db71b0f85fbdbe:1756:2756\"]",
+          "checkpoint_label": "2:dino-anchored-native-diverse-b16-v43:step-2000",
+          "checkpoint_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+          "original_png": {
+            "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/early-complete-camera-native-v1/known/native-b34bbade48f0cd460b0f7bfb57aff8e43b274f56a914efcaaab8694c7354d945.png",
+            "sha256": "b34bbade48f0cd460b0f7bfb57aff8e43b274f56a914efcaaab8694c7354d945"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "AHD reference",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        {
+          "case": "[\"7D-1\", \"7D-1:ceb7d71d6a184aa2e7cf47f22b84c61fe4545746f9be72397d6fa03dbd4751ad:1476:2344\"]",
+          "checkpoint_label": "2:dino-anchored-native-diverse-b16-v43:step-2000",
+          "checkpoint_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+          "original_png": {
+            "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/early-complete-camera-native-v1/known/native-ac3cb0ba4b9ceb559f2b5d4f52f23746d56c272ef13068692d8374b7d8172cc1.png",
+            "sha256": "ac3cb0ba4b9ceb559f2b5d4f52f23746d56c272ef13068692d8374b7d8172cc1"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "AHD reference",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "panel": "unseen",
+      "board": {
+        "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/early-complete-camera-native-v1/unseen/board.png",
+        "sha256": "169a1f68c847d3de5d5c04f6ef79048f47bff7e83eb5c00cd849128346a95d6b"
+      },
+      "receipt": {
+        "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/early-complete-camera-native-v1/unseen/board.json",
+        "sha256": "cb635210c7f9449ff310797674fa87a143d698673b93550d6fee575561fa408e"
+      },
+      "triplets": 10,
+      "native_cells": 14,
+      "models": [
+        {
+          "label": "0:control:step-4000",
+          "display_label": "0:control:step-4000",
+          "sha256": "d17891aa95cadfffe02dc497a96a9de3481f6044a3c270762bc014cbca0c16e4"
+        },
+        {
+          "label": "1:spectral:step-4000",
+          "display_label": "1:spectral:step-4000",
+          "sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3"
+        },
+        {
+          "label": "2:dino-convnext-wide-long-control-b16-v63-full20k:step-20000",
+          "display_label": "2:dino-convnext-wide-long-control-b16-v63-full20k:step-20000",
+          "sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5"
+        },
+        {
+          "label": "RawNIND:cfa-channel:publisher",
+          "display_label": "RawNIND:cfa-channel:publisher",
+          "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+        },
+        {
+          "label": "2:dino-anchored-native-diverse-b16-v43:step-2000",
+          "display_label": "2:dino-anchored-native-diverse-b16-v43:step-2000",
+          "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5"
+        }
+      ],
+      "published_board": {
+        "path": "/home/dllu/proj/demosaic/docs/images/spectral-original4k-early-unseen-five-methods.png",
+        "sha256": "169a1f68c847d3de5d5c04f6ef79048f47bff7e83eb5c00cd849128346a95d6b"
+      },
+      "actually_viewed_at_original_detail": true,
+      "visual_notes": "The new endpoints, V63 and V43 retain similar broad brown-surface and fabric structure with soft fine detail. RawNIND looks softer at the selected fabric boundaries. No clear new spectral advantage or large new failure is visible in these selected views; population quality and real-photo superiority remain undecided.",
+      "common_cases": [
+        {
+          "case": "[\"LucieB_3apples\", \"LucieB_3apples:43c4b5592f33763de8ecc303986932cd30c0f07330e1987380f7e8c526c23614:1754:2756\"]",
+          "scene": "LucieB_3apples",
+          "noisy_sha256": "43c4b5592f33763de8ecc303986932cd30c0f07330e1987380f7e8c526c23614",
+          "prepared_crop": {
+            "id": "LucieB_3apples:43c4b5592f33763de8ecc303986932cd30c0f07330e1987380f7e8c526c23614:1754:2756",
+            "path": "crop-37aeb608babd2ebd25d92520.npz",
+            "sha256": "3c8aabdb22bb0543be9810496a2c0e34d336f7d4164e7462c97106e781feb08a",
+            "xywh": [
+              2756,
+              1754,
+              512,
+              512
+            ],
+            "valid_fraction": 0.99993896484375
+          },
+          "evaluation_tile_xywh": [
+            176,
+            176,
+            160,
+            160
+          ],
+          "white_balance": [
+            0.9794921875,
+            1.0,
+            2.162109375
+          ],
+          "camera_to_srgb": [
+            [
+              2.0060677171962595,
+              -1.2336652639354324,
+              0.22759754673917293
+            ],
+            [
+              -0.23706710137989376,
+              1.8006883583827236,
+              -0.5636212570028296
+            ],
+            [
+              -0.015706646354080415,
+              -0.555168390672119,
+              1.5708750370261992
+            ]
+          ],
+          "display_exposure": 1.0,
+          "variance_multiplier": 1.0,
+          "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "conditioning": {
+            "shot": 0.0023020145669588325,
+            "read": 5.020910101285205e-05,
+            "method": "input-only-Haar-fit"
+          }
+        },
+        {
+          "case": "[\"LucieB_Coulicoco\", \"LucieB_Coulicoco:f1807182ee7fbe2975c478d8228882dc06d69d1624898f28d05f289c8f3ae14f:1754:2756\"]",
+          "scene": "LucieB_Coulicoco",
+          "noisy_sha256": "f1807182ee7fbe2975c478d8228882dc06d69d1624898f28d05f289c8f3ae14f",
+          "prepared_crop": {
+            "id": "LucieB_Coulicoco:f1807182ee7fbe2975c478d8228882dc06d69d1624898f28d05f289c8f3ae14f:1754:2756",
+            "path": "crop-3f2c548379b685589c712dab.npz",
+            "sha256": "c505657aeee878dc737558f09981d364631aa2512354cce6557135a5fb7d368f",
+            "xywh": [
+              2756,
+              1754,
+              512,
+              512
+            ],
+            "valid_fraction": 1.0
+          },
+          "evaluation_tile_xywh": [
+            176,
+            176,
+            160,
+            160
+          ],
+          "white_balance": [
+            1.00390625,
+            1.0,
+            2.080078125
+          ],
+          "camera_to_srgb": [
+            [
+              2.0060677171962595,
+              -1.2336652639354324,
+              0.22759754673917293
+            ],
+            [
+              -0.23706710137989376,
+              1.8006883583827236,
+              -0.5636212570028296
+            ],
+            [
+              -0.015706646354080415,
+              -0.555168390672119,
+              1.5708750370261992
+            ]
+          ],
+          "display_exposure": 1.0,
+          "variance_multiplier": 1.0,
+          "reference": "Registered low-noise RAW, auxiliary LibRaw AHD RGB; primary scores use measured CFA",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "conditioning": {
+            "shot": 0.0023482592096665538,
+            "read": 0.00017038157420448983,
+            "method": "input-only-Haar-fit"
+          }
+        }
+      ],
+      "source_triplets": [
+        {
+          "case": "[\"LucieB_3apples\", \"LucieB_3apples:43c4b5592f33763de8ecc303986932cd30c0f07330e1987380f7e8c526c23614:1754:2756\"]",
+          "checkpoint_label": "0:control:step-4000",
+          "checkpoint_sha256": "d17891aa95cadfffe02dc497a96a9de3481f6044a3c270762bc014cbca0c16e4",
+          "original_png": {
+            "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/early-complete-camera-native-v1/unseen/native-06070f2e617fb6997095d53dbb0a9bc083b39465ed38d6d4a713e038f1fdb720.png",
+            "sha256": "06070f2e617fb6997095d53dbb0a9bc083b39465ed38d6d4a713e038f1fdb720"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "AHD reference",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        {
+          "case": "[\"LucieB_3apples\", \"LucieB_3apples:43c4b5592f33763de8ecc303986932cd30c0f07330e1987380f7e8c526c23614:1754:2756\"]",
+          "checkpoint_label": "1:spectral:step-4000",
+          "checkpoint_sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3",
+          "original_png": {
+            "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/early-complete-camera-native-v1/unseen/native-ed0810d601187648fed49279fa9f404c8bc065ad4ef018faaa45c1907c34f556.png",
+            "sha256": "ed0810d601187648fed49279fa9f404c8bc065ad4ef018faaa45c1907c34f556"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "AHD reference",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        {
+          "case": "[\"LucieB_3apples\", \"LucieB_3apples:43c4b5592f33763de8ecc303986932cd30c0f07330e1987380f7e8c526c23614:1754:2756\"]",
+          "checkpoint_label": "2:dino-convnext-wide-long-control-b16-v63-full20k:step-20000",
+          "checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+          "original_png": {
+            "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/early-complete-camera-native-v1/unseen/native-dd891ffff892e24dd87444a09917691a070bd4ea415401c5555c5d0a974383bd.png",
+            "sha256": "dd891ffff892e24dd87444a09917691a070bd4ea415401c5555c5d0a974383bd"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "AHD reference",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        {
+          "case": "[\"LucieB_Coulicoco\", \"LucieB_Coulicoco:f1807182ee7fbe2975c478d8228882dc06d69d1624898f28d05f289c8f3ae14f:1754:2756\"]",
+          "checkpoint_label": "0:control:step-4000",
+          "checkpoint_sha256": "d17891aa95cadfffe02dc497a96a9de3481f6044a3c270762bc014cbca0c16e4",
+          "original_png": {
+            "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/early-complete-camera-native-v1/unseen/native-c8bdb811c3d702e58c81c63ca36c28076f2eb7a335b3b9201a8443d211724f48.png",
+            "sha256": "c8bdb811c3d702e58c81c63ca36c28076f2eb7a335b3b9201a8443d211724f48"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "AHD reference",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        {
+          "case": "[\"LucieB_Coulicoco\", \"LucieB_Coulicoco:f1807182ee7fbe2975c478d8228882dc06d69d1624898f28d05f289c8f3ae14f:1754:2756\"]",
+          "checkpoint_label": "1:spectral:step-4000",
+          "checkpoint_sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3",
+          "original_png": {
+            "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/early-complete-camera-native-v1/unseen/native-3dbaddf68e9b57af9ab33adc58617687fd496ad3aff4f55f374d97850e6ec27c.png",
+            "sha256": "3dbaddf68e9b57af9ab33adc58617687fd496ad3aff4f55f374d97850e6ec27c"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "AHD reference",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        {
+          "case": "[\"LucieB_Coulicoco\", \"LucieB_Coulicoco:f1807182ee7fbe2975c478d8228882dc06d69d1624898f28d05f289c8f3ae14f:1754:2756\"]",
+          "checkpoint_label": "2:dino-convnext-wide-long-control-b16-v63-full20k:step-20000",
+          "checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+          "original_png": {
+            "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/early-complete-camera-native-v1/unseen/native-93d0d14dfc316e9cac861e031dd53e76ac5f3af31de6dcd29c178f262c070d84.png",
+            "sha256": "93d0d14dfc316e9cac861e031dd53e76ac5f3af31de6dcd29c178f262c070d84"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "AHD reference",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        {
+          "case": "[\"LucieB_3apples\", \"LucieB_3apples:43c4b5592f33763de8ecc303986932cd30c0f07330e1987380f7e8c526c23614:1754:2756\"]",
+          "checkpoint_label": "RawNIND:cfa-channel:publisher",
+          "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "original_png": {
+            "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/early-complete-camera-native-v1/unseen/native-eb4d52ca1282b54b2e47de8ece4618f8f8de7855ce4fff9b3703ef4dad7abd5d.png",
+            "sha256": "eb4d52ca1282b54b2e47de8ece4618f8f8de7855ce4fff9b3703ef4dad7abd5d"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "AHD reference",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        {
+          "case": "[\"LucieB_Coulicoco\", \"LucieB_Coulicoco:f1807182ee7fbe2975c478d8228882dc06d69d1624898f28d05f289c8f3ae14f:1754:2756\"]",
+          "checkpoint_label": "RawNIND:cfa-channel:publisher",
+          "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "original_png": {
+            "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/early-complete-camera-native-v1/unseen/native-7f86c082455b33a74fb31f9eea47b145289793c52bc68a2474d4376ba2bdcf5f.png",
+            "sha256": "7f86c082455b33a74fb31f9eea47b145289793c52bc68a2474d4376ba2bdcf5f"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "AHD reference",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        {
+          "case": "[\"LucieB_3apples\", \"LucieB_3apples:43c4b5592f33763de8ecc303986932cd30c0f07330e1987380f7e8c526c23614:1754:2756\"]",
+          "checkpoint_label": "2:dino-anchored-native-diverse-b16-v43:step-2000",
+          "checkpoint_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+          "original_png": {
+            "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/early-complete-camera-native-v1/unseen/native-9431a83a954f2fba2d6fd6853d94dddb563b617f51db83367667fffc939719e8.png",
+            "sha256": "9431a83a954f2fba2d6fd6853d94dddb563b617f51db83367667fffc939719e8"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "AHD reference",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        {
+          "case": "[\"LucieB_Coulicoco\", \"LucieB_Coulicoco:f1807182ee7fbe2975c478d8228882dc06d69d1624898f28d05f289c8f3ae14f:1754:2756\"]",
+          "checkpoint_label": "2:dino-anchored-native-diverse-b16-v43:step-2000",
+          "checkpoint_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+          "original_png": {
+            "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-final-log-review-v2/early-complete-camera-native-v1/unseen/native-3f5df51a94a7662f7c20ae6c1fe7bfc396f340b000b156f7075ac6827ae91b07.png",
+            "sha256": "3f5df51a94a7662f7c20ae6c1fe7bfc396f340b000b156f7075ac6827ae91b07"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "AHD reference",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "camera_source_triplets": 20,
+  "native_camera_cells": 28,
+  "total_selected_triplets_viewed_including_prior_fresh_synthetic": 26,
+  "total_selected_unique_cells_including_prior_fresh_synthetic": 38,
+  "reviewed_native_cell_size": [
+    160,
+    160
+  ],
+  "reference": "Registered independently demosaiced low-ISO AHD RGB; not exact RGB GT",
+  "new_model_quality_statistics_read": false,
+  "global_manual_review_complete": false,
+  "quality_decision": null,
+  "model_promoted_or_default_changed": false,
+  "scope": "Actual views at original detail after both camera producers exited successfully. Exact source/ROI/noise/display/common-pixel validation, including retained V43 and RawNIND. The other six final boards and all final package revalidation remain pending; this is neither a full quality decision nor a broad superiority claim."
+}

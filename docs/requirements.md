@@ -32,7 +32,8 @@ The [completed original4k budgets](spectral-original4k-training-handoff.md) now
 pass the independent production boundary: all176 recorded observations,161
 shared scheduled logs, final RNG and source archives match. An extra real
 first-resume control log is preserved without additional control updates.
-Known/unseen stages are complete and the first18 native triplets are viewed;
+Known/unseen stages are complete and26 selected native triplets/38 unique
+cells are viewed, including the retained V43/RawNIND camera comparisons;
 full427 and the remaining native/numerical review remain in progress.
 The separate [generated operator-context study](spectral-operator-context.md)
 quantifies a window-dependence risk without changing the spectral experiment

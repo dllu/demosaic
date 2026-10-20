@@ -26,10 +26,12 @@ The matched intervention does not isolate data expansion versus earlier models.
 and [original fixed experiment](spectral-v88-v89.md).
 
 Known and unseen camera inference has completed; full427 is running. The first
-18 native triplets have actually been viewed before reading numerical model
-quality results. They cover control/spectral/parent at two known scenes, two
-unseen scenes and two exact synthetic targets. This is an early visual record,
-not a completed quality decision or model promotion.
+18 fresh native triplets have actually been viewed before reading numerical
+model quality results. They cover control/spectral/parent at two known scenes,
+two unseen scenes and two exact synthetic targets. Eight additional retained
+V43/RawNIND camera triplets are now viewed alongside those fresh predictions:
+26 selected source triplets/38 unique native cells in total. This is an early
+visual record, not a completed quality decision or model promotion.
 
 ## Fixed exact-GT views
 
@@ -83,6 +85,28 @@ linear binning, crop, physical camera/noise simulation, restoration and renderin
 Camera development sources are Brummer/De Vleeschouwer's
 [RawNIND](https://doi.org/10.14428/DVN/DEQCIM), with the retained per-scene credits/
 CC0 grants; these views use registered low-noise CFA and auxiliary AHD RGB.
+
+## Matched camera comparisons with retained references
+
+These two boards include the new control/spectral endpoints, fresh V63,
+retained publisher RawNIND and working V43 on the exact same observations.
+Every cell remains160×160 unchanged pixels, with shared source/ROI, noise and
+display transforms validated. Together they contain20 source triplets and28
+unique native cells. The bottom row is an independently demosaiced registered
+low-ISO AHD reference, **not exact RGB GT**. Full checkpoint/board/source receipt
+bindings and actual viewing notes are in the
+[camera visual record](results/spectral-early-complete-camera-native-review-v1.json).
+
+![Known-camera native comparison: noisy, five methods, independent AHD reference](images/spectral-original4k-early-known-five-methods.png)
+
+![Unseen-camera native comparison: noisy, five methods, independent AHD reference](images/spectral-original4k-early-unseen-five-methods.png)
+
+The new endpoints remain visually similar to V63 and V43 at these shelf/chart
+and brown-surface/fabric contexts. RawNIND is softer at some selected chart and
+fabric boundaries. These few high-noise views establish neither a new spectral
+advantage nor broad superiority over RawNIND. All producer-completed input and
+native-pixel references were checked again before publication; the final
+eight-board package and numerical decision remain pending.
 
 ## Remaining review
 
