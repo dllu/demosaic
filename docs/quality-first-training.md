@@ -39,14 +39,24 @@ Use a new training manifest; preserve originals, historical manifests, protected
 series and the GFX scene/siblings. This is targeted review, not a claim that
 every corpus photo was manually viewed.
 
-The [current 139-source visual review](results/source-quality-visual-review-v4.json)
-withholds five sources: a historic map scan, a photomontage, a predominantly
+The [current 163-source visual review](results/source-quality-visual-review-v5.json)
+withholds ten sources: a historic map scan, a photomontage, five graphic-only
+compositions, a predominantly
 defocused station scene, and two images with visible noise/edge artifacts
-whose clean-target quality is uncertain. The other 134 remain, including fine
+whose clean-target quality is uncertain. The other 153 remain, including fine
 foliage, wheat, fur, coral, architectural grids and hazy/low-contrast landscapes.
-Twenty-six contact sheets and six larger native 1024 crops were actually inspected.
+Thirty contact sheets and six larger native 1024 crops were actually inspected.
 The full ranking is still running; this is an initial review, not the final
 curated manifest or a trained-model result.
+
+The expanded title-cue review withholds graphic-only letter/illustration and
+textured tessellation compositions. The [Escher creator description](https://commons.wikimedia.org/wiki/File:Ambigram_tessellation_Escher.jpg)
+corroborates its pattern-design intent; no particular pixel-generation pipeline
+is inferred. Physical stamps, tattoos, carvings and the
+[pencil/paper study](https://commons.wikimedia.org/wiki/File:Ambigram_Nothing_written.jpg)
+remain eligible based on their visible material detail and context. All nine
+inspected processing-title candidates remain, including a camcorder whose model
+name contains HDR. Software/HDR/title tags alone never decide exclusion.
 
 The final membership freeze requires visual decisions for the top 32 sources
 under each noise condition and the top 16 under each IQA proxy, plus all
@@ -127,6 +137,18 @@ diagnostic checkpoints, and uses the fixed 20k final EMA as the primary endpoint
 The training-validation best checkpoint is separate. Failures are preserved;
 there is no automatic retry or promotion. **The production plan is not yet
 frozen or launched**, because full source ranking and final review are pending.
+
+The [CPU reporting integration](results/v43-quality-reporting-CPU-proof-v4.json)
+also passes using the original V43 and three actual discarded 24-update EMAs:
+48 genuine neural/DINO forwards, 84 metric rows, and eight native 160-pixel
+triplets from two held-out photographs. All 24 panels were actually viewed.
+The noisy/GT pixels match exactly across methods, as do the display settings;
+independent summary arithmetic has zero discrepancy. Weights, configuration,
+parameter identities, RNG and declared inputs stay unchanged. This small
+CPU/native176/B1, two-condition/two-CFA check supplies no quality gain, production
+CUDA or full-panel qualification. Earlier probe output-path/metadata-format
+failures and their outputs are preserved in the receipt. Full evaluation still
+uses all 427 photos, seven conditions, four CFAs and native256.
 
 ## Quality review
 
