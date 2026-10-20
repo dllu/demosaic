@@ -113,3 +113,11 @@ Both training owners have exited; the boundary and known-camera stages complete,
 with unseen evaluation actually running at the recorded handoff. Full inference,
 actual native viewing and the final quality decision remain pending. The
 working model and README stay V43.
+
+The [first actual native-view report](late-rgb-head-only-interim-native.md)
+now records30 viewed cells from the fixed photo, known and unseen examples,
+with source pixels/checkpoint identities retained. Fine canopy cords remain
+missing and V92 looks close to its parent in these selected views. At this
+interim observation full427 is live;95 remaining native cells, complete scalar
+audits and the quality decision remain pending. No new numerical summary is interpreted
+or promotion inferred from these early crops.
