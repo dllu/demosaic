@@ -1,5 +1,12 @@
 # Late RGB evaluation continues after package-watcher recovery
 
+The recovered chain has now completed. The
+[final V90/V91 review](late-rgb-original4k-review.md) includes all125 native
+cells before numerical interpretation; camera/detail requirements prevent
+promotion. The [deferred physics GPU/native probe](uniform-physics-CUDA-review.md)
+also completes, with exact outputs and mixed timing, without integration.
+Original failed owners/queues and the recovery snapshot below remain retained.
+
 The V90/V91 original4000 evaluation is still running under its original
 controller and frozen recipe. The waiting report-package watcher exited with
 code143 before starting its package worker. A separate detached CPU watcher

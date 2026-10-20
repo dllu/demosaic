@@ -1,0 +1,96 @@
+{
+  "status": "completed-uniform-physics-CUDA-and-native-review-no-consistent-resident-speed-benefit",
+  "observed_UTC": "2026-10-20T12:34:39.314163+00:00",
+  "driver": {
+    "path": "/mnt/external/demosaic/experiments/uniform-physics-CUDA-review-v3/publish_review_evidence.py",
+    "sha256": "71c35d796c6cc225889cd4f3e9fc9da9b4a5ce9d31d9ff07e4d7e24bc526b6eb"
+  },
+  "GPU_plan": {
+    "path": "/mnt/external/demosaic/experiments/uniform-physics-CUDA-v2/GPU-plan.json",
+    "sha256": "986e26fd4716763faaee3e1e7999903f10610c4e3ba5ac4a1f694ba4e74aaaa7"
+  },
+  "GPU_controller_plan": {
+    "path": "/mnt/external/demosaic/experiments/uniform-physics-CUDA-v2/controller-plan.json",
+    "sha256": "78e4f2357aa8c6c0daafaacdedba4a677db2a8746cca77818c647d6dd754cec5"
+  },
+  "GPU_controller_terminal": {
+    "path": "/mnt/external/demosaic/experiments/uniform-physics-CUDA-v2/status.json",
+    "sha256": "52123996eeb13e25a1e17b6535ffce97170d49de73eb69698b0e69b43b6114ab"
+  },
+  "GPU_receipt": {
+    "path": "/mnt/external/demosaic/experiments/uniform-physics-CUDA-v2/GPU-output/receipt.json",
+    "sha256": "a29550f1198dfff43660b74a0d7864c5237bb4f34b6b3d502bdafb07e9b0cb47"
+  },
+  "CPU_controller_terminal": {
+    "path": "/mnt/external/demosaic/experiments/uniform-physics-CUDA-review-v3/status.json",
+    "sha256": "f947d39765f33f53db21c7e8eacea03bbc957cffa14b2acebdf57ee2fb2a3cb5"
+  },
+  "CPU_array_audit": {
+    "path": "/mnt/external/demosaic/experiments/uniform-physics-CUDA-review-v3/array-review/array-audit.json",
+    "sha256": "a44e6954cd9f3a5d0de239a2747a776162dbaae4c8a3b79930a509f693fcd840"
+  },
+  "native_preparation": {
+    "path": "/mnt/external/demosaic/experiments/uniform-physics-CUDA-review-v3/native-review/report.json",
+    "sha256": "a85f53f6c7b3836f59357046cce1c20a25c21a1f083f97084d83530e82cfc1f5"
+  },
+  "actual_native_review": {
+    "path": "/mnt/external/demosaic/experiments/uniform-physics-CUDA-review-v3/actual-native-review.json",
+    "sha256": "16567b8e44edbea4f0d06df9a9430beea9c8a4592db1b25c9080d26b4656b3e5"
+  },
+  "full_output_pairs": 8,
+  "RGB_values_per_policy": 13369344,
+  "all_original_candidate_RGB_bytes_exact": true,
+  "maximum_DN16": 0,
+  "RMS_DN16": 0,
+  "resident_timings": [
+    {
+      "model": "V43",
+      "samples_seconds": {
+        "original": [
+          0.7558430640492588,
+          0.7556369749363512,
+          0.758225621888414,
+          0.7625674351584166
+        ],
+        "candidate": [
+          0.7641015509143472,
+          0.7671817811205983,
+          0.7582953961100429,
+          0.7631868629250675
+        ]
+      },
+      "median_seconds": {
+        "original": 0.7570343429688364,
+        "candidate": 0.7636442069197074
+      },
+      "candidate_over_original_median": 1.0087312603612528
+    },
+    {
+      "model": "V63",
+      "samples_seconds": {
+        "original": [
+          0.7677450010087341,
+          0.7697877290192991,
+          0.80986133008264,
+          0.7924281528685242
+        ],
+        "candidate": [
+          0.7639325039926916,
+          0.7695773260202259,
+          0.7724578769411892,
+          0.7677648100070655
+        ]
+      },
+      "median_seconds": {
+        "original": 0.7811079409439117,
+        "candidate": 0.7686710680136457
+      },
+      "candidate_over_original_median": 0.9840779074461374
+    }
+  ],
+  "actual_native_cells_viewed": 48,
+  "source_triplets": 24,
+  "production_inference_changed": false,
+  "new_quality_or_fullframe_claim": false,
+  "decision": "All original accuracy gates and native checks pass exactly. Resident B4/native512 timing is mixed: the working V43 is slower and V63 slightly faster, with overlapping shared-machine sample ranges. No consistent benefit justifies production integration or full-frame continuation from this fixed probe. Keep the original implementation and retain both favorable/unfavorable timings. No retry, training, default or promotion change."
+}

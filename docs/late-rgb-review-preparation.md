@@ -1,11 +1,12 @@
 # Final late RGB evaluation is prepared and queued
 
-The [V90/V91 study](late-dino-rgb-v90-v91.md) now has a validated final-review
-adapter and a frozen live queue. Both original4000 endpoints have completed,
-their exact training owners have exited, and the independent
-[final boundary audit](late-rgb-original4k-boundary.md) passes. The queued
-evaluation is running. Native inspection and quality interpretation remain
-pending; neither endpoint is promoted.
+The [V90/V91 study](late-dino-rgb-v90-v91.md) has completed its original4000
+budgets and [full native/numerical review](late-rgb-original4k-review.md).
+Matched spatial photo PSNR improves+.00217dB, but camera and weak-detail
+requirements fail, including24 ADC draw/layout slots. Neither endpoint is
+promoted or extended. The validated adapter/frozen-queue preparation below
+is retained as provenance, including the independent
+[final boundary audit](late-rgb-original4k-boundary.md).
 
 [CPU integration receipt](results/late-rgb-review-preflight-v2.json),
 [verified queue snapshot](results/late-rgb-review-queue-v1.json),

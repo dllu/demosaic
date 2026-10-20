@@ -1,0 +1,374 @@
+{
+  "status": "completed-late-RGB-original4k-review-no-promotion-or-extension",
+  "observed_UTC": "2026-10-20T12:30:09.611547+00:00",
+  "driver": {
+    "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-review-v1/publish_review_evidence.py",
+    "sha256": "e6ee8b74017d28dc58c965676ce13e4031a9d574930e8d8710b0be61aedaf6c2"
+  },
+  "review_plan": {
+    "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-review-v1/plan.json",
+    "sha256": "12a4a0b4f2e585baf9266dc91a73321f1d2c8a567619f8c49f3676d5cef42a2c"
+  },
+  "training_boundary": {
+    "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-review-v1/training-boundary.json",
+    "sha256": "5e8b985412060273b6afe473af46959255d137d82f02aaefe39a861da9709599"
+  },
+  "manual_native_review_before_statistics": {
+    "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-review-v1/manual-native-review-before-statistics.json",
+    "sha256": "164387c2def8210717b9b305585c2f6ea8b27b68b08e4d6735c68b85b7658964"
+  },
+  "criteria": {
+    "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-review-v1/work/outputs/closure/numerical-criteria.json",
+    "sha256": "f9b82058733fda51d5258bdde1604c868d7784ceb583143947b2308a5caa30f3"
+  },
+  "primary_statistics": {
+    "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-review-v1/primary-statistics.json",
+    "sha256": "78078dc87f8e71ff6e2723e9764d43716a08b8b3704e63d7747c3bf0578c9c4b"
+  },
+  "source_sensitivity": {
+    "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-review-v1/work/outputs/sensitivity/result.json",
+    "sha256": "cb9ad5bff596f489d5e919e2738a32b351d5848eea3f342c0f081ca8b2a60d12"
+  },
+  "source_sensitivity_audit": {
+    "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-review-v1/work/outputs/sensitivity/independent-audit.json",
+    "sha256": "046e3eee2e49829e1289fb01c9aee9c3498c51dc2d9cae5a3b4625c17a6557f4"
+  },
+  "visual_observations": {
+    "full427": "All learned methods remove severe noise but omit most fine canopy suspension lines/ribbing visible in exact synthetic GT. Major building/window edges are retained; clouds are smoother than GT. Both new heads are close to one another; no decisive spatial-access advantage is apparent.",
+    "known": "Both new heads retain major plate/diagonal edges and the thin pale strand, with smooth dark surfaces. In the 7D chart crop both retain a small isolated bright point and have smooth fields. RawNIND has more uneven edge color/texture in that selected chart crop; this is not a broad camera-superiority claim. Global and spatial outputs look very close.",
+    "unseen": "The apple crop is mostly a smooth reddish-brown field in all methods. The second scene retains the broad cream/red boundaries in all methods with residual fine texture varying slightly. No decisive global/spatial detail or color advantage is apparent in these two cases.",
+    "gfx": "Both new heads yield smooth sky and retain major building edges and fence diamonds. Fine foliage remains smoothed relative to the independent sharper ISO100 capture. Global/spatial look very similar; no clear fine-detail advantage. RawNIND has stronger uneven/periodic fence texture in this crop. ISO100 differs in aperture/time/moving subjects and is not exact GT; no GFX scoring or broad-superiority claim.",
+    "analytic": "Both heads largely suppress the dark8px sinusoidal carrier visible in analytic GT. The brighter16px low-contrast carrier is faintly visible in both, with no decisive spatial advantage. The flat appears smooth. This is a visual observation; signed gains, RMS and all ADC cases remain unread until full native closure.",
+    "hue": "Gray and yellow-orange are mostly smooth in both new heads. The saturated magenta field has less visible blotchy modulation in both new heads than V63. Global/spatial are close to each other. No clear new spatial-head color defect appears in these three selected fields; the additional fixed palettes remain required. No numerical bias values have been read.",
+    "highlights": "Both new heads and V63 still flatten much of the blue sign interior relative to the independent ISO100 capture. Bright platform bars remain soft with a green/yellow cast. Global/spatial differ only subtly; neither clearly resolves highlight detail. ISO100 AHD differs in capture/aperture/time and is not exact GT; no pixelwise capture score or causal attribution.",
+    "hue-extra": "Both new heads smooth bright pale orange/magenta more consistently than V63 in these selected fields. Dark saturated fields are mostly smooth. Global and spatial look close; no clear new spatial-head color defect is apparent in these four fixed palettes."
+  },
+  "matched_effect": {
+    "comparisons": {
+      "known_CFA": {
+        "panel": "known",
+        "kind": "real",
+        "metric": "sensor_psnr",
+        "first": "V91-original4000",
+        "second": "V90-original4000",
+        "first_checkpoint_sha256": "80ade7b792a8621c214d4450b9e0befa7d06be2d4797ecfaaa7227def9b609e7",
+        "second_checkpoint_sha256": "ba40d88149726c48f90d33399cf6ee4666daad470bff82bdfddf994a5e5eb3c4",
+        "sources": 4,
+        "first_source_balanced_mean": 54.18870788150363,
+        "second_source_balanced_mean": 54.19441027111477,
+        "mean_first_minus_second": -0.005702389611139225,
+        "source_bootstrap_95_interval": [
+          -0.01320897208319849,
+          0.002750608656137743
+        ]
+      },
+      "unseen_CFA": {
+        "panel": "unseen",
+        "kind": "real",
+        "metric": "sensor_psnr",
+        "first": "V91-original4000",
+        "second": "V90-original4000",
+        "first_checkpoint_sha256": "80ade7b792a8621c214d4450b9e0befa7d06be2d4797ecfaaa7227def9b609e7",
+        "second_checkpoint_sha256": "ba40d88149726c48f90d33399cf6ee4666daad470bff82bdfddf994a5e5eb3c4",
+        "sources": 5,
+        "first_source_balanced_mean": 53.88603579203287,
+        "second_source_balanced_mean": 53.8846122317844,
+        "mean_first_minus_second": 0.0014235602484816922,
+        "source_bootstrap_95_interval": [
+          -0.0005636427137545752,
+          0.004762932459514138
+        ]
+      },
+      "photo_PSNR": {
+        "panel": "full427",
+        "kind": "photo",
+        "metric": "srgb_psnr",
+        "first": "V91-original4000",
+        "second": "V90-original4000",
+        "first_checkpoint_sha256": "80ade7b792a8621c214d4450b9e0befa7d06be2d4797ecfaaa7227def9b609e7",
+        "second_checkpoint_sha256": "ba40d88149726c48f90d33399cf6ee4666daad470bff82bdfddf994a5e5eb3c4",
+        "sources": 427,
+        "first_source_balanced_mean": 36.18860503621387,
+        "second_source_balanced_mean": 36.18643191316208,
+        "mean_first_minus_second": 0.002173123051785986,
+        "source_bootstrap_95_interval": [
+          0.001285956726699671,
+          0.0031447957933208575
+        ]
+      },
+      "photo_SSIM": {
+        "panel": "full427",
+        "kind": "photo",
+        "metric": "srgb_ssim",
+        "first": "V91-original4000",
+        "second": "V90-original4000",
+        "first_checkpoint_sha256": "80ade7b792a8621c214d4450b9e0befa7d06be2d4797ecfaaa7227def9b609e7",
+        "second_checkpoint_sha256": "ba40d88149726c48f90d33399cf6ee4666daad470bff82bdfddf994a5e5eb3c4",
+        "sources": 427,
+        "first_source_balanced_mean": 0.9640157174290362,
+        "second_source_balanced_mean": 0.9640255806317654,
+        "mean_first_minus_second": -9.863202729006119e-06,
+        "source_bootstrap_95_interval": [
+          -2.167891821920577e-05,
+          1.3349294243714705e-06
+        ]
+      },
+      "canonical_camera_linear_PSNR": {
+        "panel": "full427",
+        "kind": "photo",
+        "metric": "linear_psnr",
+        "first": "V91-original4000",
+        "second": "V90-original4000",
+        "first_checkpoint_sha256": "80ade7b792a8621c214d4450b9e0befa7d06be2d4797ecfaaa7227def9b609e7",
+        "second_checkpoint_sha256": "ba40d88149726c48f90d33399cf6ee4666daad470bff82bdfddf994a5e5eb3c4",
+        "sources": 427,
+        "first_source_balanced_mean": 39.29754762052891,
+        "second_source_balanced_mean": 39.29608713045053,
+        "mean_first_minus_second": 0.0014604900783819633,
+        "source_bootstrap_95_interval": [
+          0.0007391150977228157,
+          0.0021658482420758387
+        ]
+      }
+    },
+    "gates": {
+      "positive_photo_PSNR_95pct_lower_bound": true,
+      "known_CFA_loss_at_most_.03dB": true,
+      "unseen_CFA_loss_at_most_.03dB": true,
+      "photo_SSIM_loss_at_most_.0001": true
+    },
+    "all_numerical_criteria_pass": true
+  },
+  "endpoint_eligibility": [
+    {
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/runs/control/last.pt",
+        "sha256": "ba40d88149726c48f90d33399cf6ee4666daad470bff82bdfddf994a5e5eb3c4",
+        "arm": "control",
+        "step": 4000,
+        "kind": "joint-checkpoint",
+        "label": "V90-original4000"
+      },
+      "comparisons": {
+        "known_CFA": {
+          "panel": "known",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "first": "V90-original4000",
+          "second": "V63-parent",
+          "first_checkpoint_sha256": "ba40d88149726c48f90d33399cf6ee4666daad470bff82bdfddf994a5e5eb3c4",
+          "second_checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+          "sources": 4,
+          "first_source_balanced_mean": 54.19441027111477,
+          "second_source_balanced_mean": 54.20367664761014,
+          "mean_first_minus_second": -0.009266376495363104,
+          "source_bootstrap_95_interval": [
+            -0.02451292673747041,
+            0.0048429701063383845
+          ]
+        },
+        "unseen_CFA": {
+          "panel": "unseen",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "first": "V90-original4000",
+          "second": "V63-parent",
+          "first_checkpoint_sha256": "ba40d88149726c48f90d33399cf6ee4666daad470bff82bdfddf994a5e5eb3c4",
+          "second_checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+          "sources": 5,
+          "first_source_balanced_mean": 53.8846122317844,
+          "second_source_balanced_mean": 53.84318347507053,
+          "mean_first_minus_second": 0.04142875671386861,
+          "source_bootstrap_95_interval": [
+            -0.0030059814453096577,
+            0.09378174675835708
+          ]
+        },
+        "photo_PSNR": {
+          "panel": "full427",
+          "kind": "photo",
+          "metric": "srgb_psnr",
+          "first": "V90-original4000",
+          "second": "V63-parent",
+          "first_checkpoint_sha256": "ba40d88149726c48f90d33399cf6ee4666daad470bff82bdfddf994a5e5eb3c4",
+          "second_checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+          "sources": 427,
+          "first_source_balanced_mean": 36.18643191316208,
+          "second_source_balanced_mean": 35.93297502929928,
+          "mean_first_minus_second": 0.25345688386280896,
+          "source_bootstrap_95_interval": [
+            0.18551376743753717,
+            0.3399896597495323
+          ]
+        },
+        "photo_SSIM": {
+          "panel": "full427",
+          "kind": "photo",
+          "metric": "srgb_ssim",
+          "first": "V90-original4000",
+          "second": "V63-parent",
+          "first_checkpoint_sha256": "ba40d88149726c48f90d33399cf6ee4666daad470bff82bdfddf994a5e5eb3c4",
+          "second_checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+          "sources": 427,
+          "first_source_balanced_mean": 0.9640255806317654,
+          "second_source_balanced_mean": 0.9632898244212885,
+          "mean_first_minus_second": 0.0007357562104767921,
+          "source_bootstrap_95_interval": [
+            0.0006405226245657122,
+            0.0008374759545390853
+          ]
+        },
+        "canonical_camera_linear_PSNR": {
+          "panel": "full427",
+          "kind": "photo",
+          "metric": "linear_psnr",
+          "first": "V90-original4000",
+          "second": "V63-parent",
+          "first_checkpoint_sha256": "ba40d88149726c48f90d33399cf6ee4666daad470bff82bdfddf994a5e5eb3c4",
+          "second_checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+          "sources": 427,
+          "first_source_balanced_mean": 39.29608713045053,
+          "second_source_balanced_mean": 41.35985682185337,
+          "mean_first_minus_second": -2.0637696914028347,
+          "source_bootstrap_95_interval": [
+            -2.1755420223411885,
+            -1.933018066277668
+          ]
+        }
+      },
+      "gates": {
+        "known_CFA_mean_at_least_.05dB": false,
+        "known_CFA_positive_95pct_lower_bound": false,
+        "unseen_CFA_mean_at_least_.05dB": false,
+        "unseen_CFA_positive_95pct_lower_bound": false,
+        "photo_PSNR_mean_at_least_.05dB": true,
+        "photo_PSNR_positive_95pct_lower_bound": true,
+        "photo_SSIM_loss_at_most_.0001": true
+      },
+      "all_numerical_criteria_pass": false
+    },
+    {
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/work/runs/spatial/last.pt",
+        "sha256": "80ade7b792a8621c214d4450b9e0befa7d06be2d4797ecfaaa7227def9b609e7",
+        "arm": "spatial",
+        "step": 4000,
+        "kind": "joint-checkpoint",
+        "label": "V91-original4000"
+      },
+      "comparisons": {
+        "known_CFA": {
+          "panel": "known",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "first": "V91-original4000",
+          "second": "V63-parent",
+          "first_checkpoint_sha256": "80ade7b792a8621c214d4450b9e0befa7d06be2d4797ecfaaa7227def9b609e7",
+          "second_checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+          "sources": 4,
+          "first_source_balanced_mean": 54.18870788150363,
+          "second_source_balanced_mean": 54.20367664761014,
+          "mean_first_minus_second": -0.01496876610650233,
+          "source_bootstrap_95_interval": [
+            -0.023685508304179592,
+            -0.006770292917885001
+          ]
+        },
+        "unseen_CFA": {
+          "panel": "unseen",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "first": "V91-original4000",
+          "second": "V63-parent",
+          "first_checkpoint_sha256": "80ade7b792a8621c214d4450b9e0befa7d06be2d4797ecfaaa7227def9b609e7",
+          "second_checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+          "sources": 5,
+          "first_source_balanced_mean": 53.88603579203287,
+          "second_source_balanced_mean": 53.84318347507053,
+          "mean_first_minus_second": 0.0428523169623503,
+          "source_bootstrap_95_interval": [
+            -0.0014009263780366155,
+            0.09369023640950616
+          ]
+        },
+        "photo_PSNR": {
+          "panel": "full427",
+          "kind": "photo",
+          "metric": "srgb_psnr",
+          "first": "V91-original4000",
+          "second": "V63-parent",
+          "first_checkpoint_sha256": "80ade7b792a8621c214d4450b9e0befa7d06be2d4797ecfaaa7227def9b609e7",
+          "second_checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+          "sources": 427,
+          "first_source_balanced_mean": 36.18860503621387,
+          "second_source_balanced_mean": 35.93297502929928,
+          "mean_first_minus_second": 0.2556300069145949,
+          "source_bootstrap_95_interval": [
+            0.18807629092794945,
+            0.3422610467036219
+          ]
+        },
+        "photo_SSIM": {
+          "panel": "full427",
+          "kind": "photo",
+          "metric": "srgb_ssim",
+          "first": "V91-original4000",
+          "second": "V63-parent",
+          "first_checkpoint_sha256": "80ade7b792a8621c214d4450b9e0befa7d06be2d4797ecfaaa7227def9b609e7",
+          "second_checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+          "sources": 427,
+          "first_source_balanced_mean": 0.9640157174290362,
+          "second_source_balanced_mean": 0.9632898244212885,
+          "mean_first_minus_second": 0.0007258930077477859,
+          "source_bootstrap_95_interval": [
+            0.0006329354697663345,
+            0.0008293088577879707
+          ]
+        },
+        "canonical_camera_linear_PSNR": {
+          "panel": "full427",
+          "kind": "photo",
+          "metric": "linear_psnr",
+          "first": "V91-original4000",
+          "second": "V63-parent",
+          "first_checkpoint_sha256": "80ade7b792a8621c214d4450b9e0befa7d06be2d4797ecfaaa7227def9b609e7",
+          "second_checkpoint_sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+          "sources": 427,
+          "first_source_balanced_mean": 39.29754762052891,
+          "second_source_balanced_mean": 41.35985682185337,
+          "mean_first_minus_second": -2.0623092013244526,
+          "source_bootstrap_95_interval": [
+            -2.174244843385977,
+            -1.9314266371284292
+          ]
+        }
+      },
+      "gates": {
+        "known_CFA_mean_at_least_.05dB": false,
+        "known_CFA_positive_95pct_lower_bound": false,
+        "unseen_CFA_mean_at_least_.05dB": false,
+        "unseen_CFA_positive_95pct_lower_bound": false,
+        "photo_PSNR_mean_at_least_.05dB": true,
+        "photo_PSNR_positive_95pct_lower_bound": true,
+        "photo_SSIM_loss_at_most_.0001": true
+      },
+      "all_numerical_criteria_pass": false
+    }
+  ],
+  "weak_detail_claim_criteria_pass": false,
+  "all192_ADC_detail_limits_pass": false,
+  "ADC_failed_draw_layout_slots": 24,
+  "ADC_failed_distinct_signal_CFA_cases": 6,
+  "ADC_gain_difference_range": [
+    -0.16375883667418578,
+    0.013467415899039104
+  ],
+  "native_boards_actually_viewed": 8,
+  "native_source_triplets": 81,
+  "native_cells": 125,
+  "model_promoted_or_default_changed": false,
+  "additional_training_budget_or_newhead_fullframe_export_launched": false,
+  "working_reference": "V43 / original FP32",
+  "project_goal_complete": false,
+  "decision": "Spatial access has a small positive matched photo effect, with the predeclared primary nonregression/SSIM screen passing. Both endpoints fail known/unseen camera promotion requirements; both weak-carrier improvements miss+.05 and24 ADC draw/layout slots exceed the gain-loss limit. Native fine cords/foliage/sign detail remain weak. Neither arm is extended or promoted; V43 stays the working reference. One matched seed/source bootstrap does not establish SOTA, repeat-training uncertainty or100MP10s."
+}

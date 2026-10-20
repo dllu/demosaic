@@ -1,15 +1,19 @@
 # Experiment evidence
 
-The [fixed V90/V91 late RGB refinement study](late-dino-rgb-v90-v91.md)
-compares spatial DINO prompts with their global means in identical learned
-RGB heads after the mature trunk. [Engineering](late-rgb-engineering.md) passes
-unit/regression and genuine CPU/CUDA mixed-domain/restart checks, including
-separate process-boundary resumes. The original4000 budgets are launched;
-trained quality and native/full-frame eligibility remain unmeasured.
-The [validated final-review queue](late-rgb-review-preparation.md) is frozen
-against all47 actual model modules and waits for both exact4000 exits. It
-refuses engineering checkpoints as quality evidence and retains the fixed
-matched-SSIM/all-ADC criteria and unchanged native-pixel packaging.
+The [completed V90/V91 late RGB refinement review](late-rgb-original4k-review.md)
+finishes both original4000 budgets and all125 native cells. Spatial prompts
+add+.00217dB photo PSNR over their global means, with a positive source
+interval, but both endpoints fail camera requirements. Weak-carrier gains
+miss+.05 and24 ADC slots fail the loss limit. Neither head is promoted or
+extended. [Engineering](late-rgb-engineering.md), [fixed protocol](late-dino-rgb-v90-v91.md)
+and [evaluation preparation](late-rgb-review-preparation.md) retain exact
+paired observations, RNG, source and original-horizon evidence.
+
+The separate [uniform-physics GPU/native review](uniform-physics-CUDA-review.md)
+checks eight original/candidate outputs exactly across13.37million RGB
+positions and actually views48 native cells. Resident latency is.87% worse
+for V43 and1.59% better for V63, without a consistent or full-frame gain.
+No inference integration follows. V43 stays the working reference.
 
 The [completed V88/V89 spectral review](spectral-original4k-review.md) finishes
 both original4000 budgets and all native/numerical checks. Matched photo PSNR

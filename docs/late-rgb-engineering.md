@@ -3,9 +3,10 @@
 The [fixed V90/V91 comparison](late-dino-rgb-v90-v91.md) is implemented and its
 genuine-weight CPU/CUDA preflights pass. Two identical100,547-parameter learned
 RGB heads differ only in spatial access to existing frozen DINO features:
-global pooling versus spatial fields. The original4000-update quality runs are
-launched sequentially. No trained-quality, throughput or promotion result
-follows yet.
+global pooling versus spatial fields. Both original4000-update budgets and
+the [complete quality/native review](late-rgb-original4k-review.md) now finish.
+The matched photo gain is+.00217dB; camera/weak-detail/ADC requirements prevent
+promotion or extension. The engineering record below remains unchanged.
 
 ## Model and regression checks
 
@@ -76,13 +77,14 @@ Artifacts remain under `/mnt/external/demosaic/experiments/`:
 - `late-rgb-v90-v91-{CPU,CUDA}-fresh-resume-v1/` failed preparation provenance;
 - `late-rgb-v90-v91-{CPU,CUDA}-fresh-resume-v2/` completed process-boundary audits.
 
-## Original quality budgets completed; evaluation running
+## Original quality budgets and final evaluation completed
 
 Both arms completed their original4000 updates and their exact training
 owners exited. The [independent final boundary audit](late-rgb-original4k-boundary.md)
 verifies finite full states, paired inputs, final RNG and actual archived
-source. The frozen evaluation queue has started. This establishes completed
-training provenance; quality and actual native-crop review remain pending.
+source. The [completed evaluation](late-rgb-original4k-review.md) includes all
+eight boards/125 native cells before numerical interpretation. Neither
+endpoint meets the camera/detail requirements; V43 stays the working reference.
 
 The new immutable `production-plan.json` adds both process-boundary
 certificates and regression receipts to the prepared base plan before any

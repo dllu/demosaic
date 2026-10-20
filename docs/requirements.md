@@ -3,20 +3,23 @@
 The objective is the complete project in `PROMPT.md`, including trained quality,
 not just software that executes. This checklist records the evidence required.
 
-The new [V90/V91 late RGB/DINO comparison](late-dino-rgb-v90-v91.md) tests
-spatial versus globally pooled semantic access in identical learned RGB heads.
-[Engineering checks](late-rgb-engineering.md) pass1,512 CPU regressions, all9
-CUDA cases,5 additional parser checks and genuine mixed-domain CPU/CUDA16-update
-plus supplementary fresh-process8+8 full-state/RNG replays. The original4000
-quality budgets are running sequentially. No quality result or promotion follows
-from these preflights; their trained/native review remains outstanding.
-The [prepared final-review queue](late-rgb-review-preparation.md) now passes63
-focused tests and actual CPU integration on both devices' engineering states.
-It preserves all192 ADC cases and the matched SSIM cap, copies all47 actual
-training modules and validates125 historical native cells without resizing.
-The ten-stage review, CPU closure, reference supplement and package watcher
-are verified live, waiting for exact original4000 training exits. No new
-quality inference or promotion has occurred.
+The [completed V90/V91 late RGB/DINO review](late-rgb-original4k-review.md)
+finishes both original4000 budgets, paired full-state/input/source/RNG checks
+and all125 native cells before numerical interpretation. Spatial versus global
+prompts give+.00217dB matched photo PSNR, interval[+.00129,+.00314], but both
+endpoints fail camera promotion requirements. Weak-carrier gains miss+.05;
+24 of192 ADC draw/layout slots exceed the loss limit. All12 ADC means,
+color/analytic/primary audits and source sensitivities are retained. Neither
+arm is promoted or extended; V43/README remain the working reference.
+[Engineering](late-rgb-engineering.md), [fixed protocol](late-dino-rgb-v90-v91.md)
+and [queue recovery](late-rgb-queue-recovery.md) remain separate provenance.
+
+The [completed uniform-physics CUDA review](uniform-physics-CUDA-review.md)
+finds exact bytes across eight full output pairs/13.37million RGB positions
+and actual viewing of48 native cells. Resident timing is mixed: V43 is .87%
+slower and V63 is 1.59% faster. It is not integrated and supplies no new full-frame
+result. A separate future-watcher startup-race fix passes29 focused tests.
+The complete SOTA/native-superiority and100MP/10s requirements remain open.
 
 The [completed V84/V85 native-data comparison](native-data-original20k-review.md)
 finishes both original20k budgets on128 versus150 captures. Its matched photo

@@ -2,8 +2,12 @@
 
 An isolated CPU prototype produces identical physical fields and genuine V63
 predictions while reducing repeated Python calls for a scalar shot/read prior.
-The production model and the running V90/V91 training/review remain unchanged.
-There is no GPU timing or full-frame speed result yet.
+The [completed CUDA/native review](uniform-physics-CUDA-review.md) now checks
+all eight full outputs exactly across13.37million RGB values. Resident timing
+is mixed: V43 is.87% slower and V63 is1.59% faster. No production integration
+or new full-frame speed result follows. The CPU preparation record below is
+retained; V90/V91's separate [quality review](late-rgb-original4k-review.md)
+is also complete without promotion.
 
 [Executed sources, inputs, checkpoint, arrays and comparison receipt](results/uniform-physics-CPU-v1.json).
 
