@@ -1,7 +1,9 @@
 # V86/V87 input-context training and review
 
-The [fixed comparison](training-context-v86-v87.md) is running from genuine V63
-original20k EMA. This is an engineering/launch record, not a performance report.
+Both arms of the [fixed comparison](training-context-v86-v87.md) have completed
+their original4000 updates from genuine V63 original20k EMA. The exact trainer
+and controller processes have exited; the full quality review is running.
+This is a training-integrity record, not a performance report.
 The model architecture, working V43 checkpoint and README examples remain as
 before. Full quality and actual native viewing are pending.
 
@@ -11,6 +13,25 @@ eligible50,912 Commons sources, native128/106 groups, paired32, seed54, B16/BF16
 and original4000-update schedule. Each draws64,000 examples; context requires
 more computation. Neither additional data nor intermediate quality selection
 is part of this trial.
+
+The [final completion and paired-state audit](results/training-context-original4000-completion-v1.json)
+verifies all176 recorded source/actual-supervision pairs (94 Commons,42 native,
+40 paired), all intended256/320 forward differences,161 matching logged
+domain/LR/source/supervision records, exact final Python/CPU/CUDA RNG states and
+identical archived source/data. Both final states have finite91 model/91EMA/
+89AdamW tensors, all optimizer counters4000 and nonnegative second moments.
+The45 archived package files and genuine frozen DINO initialization match.
+All final/retained checkpoint bytes and training manifest hashes were checked
+again separately. These sampled observations do not replay every unlogged draw.
+
+V86 checkpoint SHA256:
+`0b1329fed98b93b35b9fa0364e3cbc55debca7de89e71776670ce5ff4a0b3a25`.
+V87 checkpoint SHA256:
+`fb0c6d20b97760c218bb3d69b05791081467e8e40d25184e320a3b27aa02daf7`.
+Both use the final `last.pt`/identical retained step4000, without intermediate
+selection. The independent boundary stage passed and the serial FP32 review
+has started. Complete photographic/camera/color/detail/native evidence and actual
+viewing remain pending; no context benefit or model promotion is established.
 
 The control arm has now completed its full original4000 budget. Its
 [independent closed-state audit](results/training-context-control-original4000-v1.json)
@@ -30,9 +51,9 @@ optimizer/EMA, not the completed control endpoint. At that observation, all19
 published pairs through input step75 have identical full source and central
 loss fields across native/paired/Commons, with different actual256/320 forward
 fields. An immutable prefix snapshot preserves those observations as the live
-file continues changing. This is early engineering integrity only; all176 final
-pairs, final RNG/archive equality and the complete quality/native review are
-still required. The matched effect remains unproved.
+file continued changing. This historical observation was early engineering
+integrity only. The final audit above now verifies all176 pairs and final
+RNG/archive equality; the matched quality effect remains unproved.
 
 The [independent preflight audit](results/training-context-preflights-v1.json)
 loads all four actual closed16-step checkpoint states. CPU checks use B1,

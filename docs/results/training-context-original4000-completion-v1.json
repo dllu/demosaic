@@ -1,0 +1,264 @@
+{
+  "status": "verified-both-original4000-context-endpoints-full-quality-in-progress",
+  "observed_UTC": "2026-10-20T00:30:31.009103+00:00",
+  "training_plan": {
+    "path": "/mnt/external/demosaic/experiments/context-v86-v87-original4k-v1/plan.json",
+    "sha256": "f2de4316d207d960c9cb84c1555fc1b8fdb83fbeedba0735ad1d216acbd91206"
+  },
+  "training_terminal": {
+    "path": "/mnt/external/demosaic/experiments/context-v86-v87-original4k-v1/status.json",
+    "sha256": "319c8d7e5216718e71557b8470e221333ec8464ee777c67bcd7a6208325ff713"
+  },
+  "boundary_audit": {
+    "path": "/mnt/external/demosaic/experiments/context-v86-v87-original4k-review-v1/training-boundary.json",
+    "sha256": "fbebb48a2097752bd62e47a00054c99dc63108c1752120577b342e116a01a3a7"
+  },
+  "boundary_evidence": {
+    "status": "independently-verified-context-original4000-boundaries",
+    "engineering_preflight": false,
+    "training_geometry": {
+      "device": "cuda",
+      "source_size": 320,
+      "loss_size": 256,
+      "forward_sizes": [
+        256,
+        320
+      ]
+    },
+    "training_status": {
+      "path": "/mnt/external/demosaic/experiments/context-v86-v87-original4k-v1/status.json",
+      "sha256": "319c8d7e5216718e71557b8470e221333ec8464ee777c67bcd7a6208325ff713"
+    },
+    "checkpoints": [
+      {
+        "path": "/mnt/external/demosaic/experiments/context-v86-v87-original4k-v1/work/runs/control-v86/last.pt",
+        "sha256": "0b1329fed98b93b35b9fa0364e3cbc55debca7de89e71776670ce5ff4a0b3a25",
+        "arm": "control",
+        "step": 4000,
+        "kind": "joint-checkpoint",
+        "label": "V86-original4000"
+      },
+      {
+        "path": "/mnt/external/demosaic/experiments/context-v86-v87-original4k-v1/work/runs/context-v87/last.pt",
+        "sha256": "fb0c6d20b97760c218bb3d69b05791081467e8e40d25184e320a3b27aa02daf7",
+        "arm": "context",
+        "step": 4000,
+        "kind": "joint-checkpoint",
+        "label": "V87-original4000"
+      }
+    ],
+    "paired_observation_audit": {
+      "recorded_pairs": 176,
+      "domains": {
+        "native": 42,
+        "paired": 40,
+        "commons": 94
+      },
+      "all_source_and_supervision_pairs_exact": true,
+      "all_actual_forward_fields_differ": true
+    },
+    "logged_source_core_domain_LR_pairs": 161,
+    "final_Python_CPU_CUDA_RNG_exact": true,
+    "archived_source_and_data_exact": true,
+    "evidence": [
+      {
+        "result": {
+          "path": "/mnt/external/demosaic/experiments/context-v86-v87-original4k-v1/control-result.json",
+          "sha256": "be5e039cb2c03ce2eea1c0a4fb035675dce31dc2844658dbc5a6d5f8e138174c"
+        },
+        "initialization": {
+          "initial_model_exact_parent_EMA": true,
+          "initial_model_sha256": "b3e5f1c055b0541db3935ac73d1c88327c07a2bbc23c040d3d14eef8a45cc1fa",
+          "DINO_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+        },
+        "source_sha256": "4eb6e8e147d1294ab7633b87bbc74df536e8341e20b1fb969459ddc5afc4ccce",
+        "retained": {
+          "path": "/mnt/external/demosaic/experiments/context-v86-v87-original4k-v1/work/runs/control-v86/step-004000.pt",
+          "sha256": "0b1329fed98b93b35b9fa0364e3cbc55debca7de89e71776670ce5ff4a0b3a25"
+        },
+        "finite_states": [
+          91,
+          91,
+          89
+        ],
+        "unchanged_from_parent_EMA": {
+          "model": [
+            "context.mean",
+            "context.std"
+          ],
+          "ema": [
+            "context.mean",
+            "context.std"
+          ]
+        },
+        "actual_training_package_files_exact": 45
+      },
+      {
+        "result": {
+          "path": "/mnt/external/demosaic/experiments/context-v86-v87-original4k-v1/context-result.json",
+          "sha256": "9d344c900a55b7b980ce1b824da008dcc837c14f0196f192bcfe785cb40da9c2"
+        },
+        "initialization": {
+          "initial_model_exact_parent_EMA": true,
+          "initial_model_sha256": "b3e5f1c055b0541db3935ac73d1c88327c07a2bbc23c040d3d14eef8a45cc1fa",
+          "DINO_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+        },
+        "source_sha256": "4eb6e8e147d1294ab7633b87bbc74df536e8341e20b1fb969459ddc5afc4ccce",
+        "retained": {
+          "path": "/mnt/external/demosaic/experiments/context-v86-v87-original4k-v1/work/runs/context-v87/step-004000.pt",
+          "sha256": "fb0c6d20b97760c218bb3d69b05791081467e8e40d25184e320a3b27aa02daf7"
+        },
+        "finite_states": [
+          91,
+          91,
+          89
+        ],
+        "unchanged_from_parent_EMA": {
+          "model": [
+            "context.mean",
+            "context.std"
+          ],
+          "ema": [
+            "context.mean",
+            "context.std"
+          ]
+        },
+        "actual_training_package_files_exact": 45
+      }
+    ],
+    "scope": "Independent fixed-horizon/source/core/RNG audit only; no quality or promotion claim."
+  },
+  "arms": [
+    {
+      "arm": "control",
+      "result": {
+        "path": "/mnt/external/demosaic/experiments/context-v86-v87-original4k-v1/control-result.json",
+        "sha256": "be5e039cb2c03ce2eea1c0a4fb035675dce31dc2844658dbc5a6d5f8e138174c"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/experiments/context-v86-v87-original4k-v1/work/runs/control-v86/last.pt",
+        "sha256": "0b1329fed98b93b35b9fa0364e3cbc55debca7de89e71776670ce5ff4a0b3a25"
+      },
+      "retained": {
+        "path": "/mnt/external/demosaic/experiments/context-v86-v87-original4k-v1/work/runs/control-v86/step-004000.pt",
+        "sha256": "0b1329fed98b93b35b9fa0364e3cbc55debca7de89e71776670ce5ff4a0b3a25"
+      },
+      "exact_exited_owner": {
+        "pid": 199319,
+        "created": 1792446286.18
+      },
+      "initialization": {
+        "initial_model_exact_parent_EMA": true,
+        "initial_model_sha256": "b3e5f1c055b0541db3935ac73d1c88327c07a2bbc23c040d3d14eef8a45cc1fa",
+        "DINO_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      },
+      "source_sha256": "4eb6e8e147d1294ab7633b87bbc74df536e8341e20b1fb969459ddc5afc4ccce",
+      "last_LR": 1.0000000000000002e-06,
+      "finite_states": {
+        "model": 91,
+        "EMA": 91,
+        "AdamW": 89
+      },
+      "observations": {
+        "path": "/mnt/external/demosaic/experiments/context-v86-v87-original4k-v1/control-observations.json",
+        "sha256": "097b9cfaeaa0c301fc9f2b0bd068826c755677976bf39fbe0da96b474977146c"
+      },
+      "metrics": {
+        "path": "/mnt/external/demosaic/experiments/context-v86-v87-original4k-v1/work/runs/control-v86/metrics.jsonl",
+        "sha256": "4bbd6394afecc6e6dbfc1e83cb7f424206d04c4761f113e79f148d6a7b330708"
+      }
+    },
+    {
+      "arm": "context",
+      "result": {
+        "path": "/mnt/external/demosaic/experiments/context-v86-v87-original4k-v1/context-result.json",
+        "sha256": "9d344c900a55b7b980ce1b824da008dcc837c14f0196f192bcfe785cb40da9c2"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/experiments/context-v86-v87-original4k-v1/work/runs/context-v87/last.pt",
+        "sha256": "fb0c6d20b97760c218bb3d69b05791081467e8e40d25184e320a3b27aa02daf7"
+      },
+      "retained": {
+        "path": "/mnt/external/demosaic/experiments/context-v86-v87-original4k-v1/work/runs/context-v87/step-004000.pt",
+        "sha256": "fb0c6d20b97760c218bb3d69b05791081467e8e40d25184e320a3b27aa02daf7"
+      },
+      "exact_exited_owner": {
+        "pid": 273033,
+        "created": 1792450020.69
+      },
+      "initialization": {
+        "initial_model_exact_parent_EMA": true,
+        "initial_model_sha256": "b3e5f1c055b0541db3935ac73d1c88327c07a2bbc23c040d3d14eef8a45cc1fa",
+        "DINO_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      },
+      "source_sha256": "4eb6e8e147d1294ab7633b87bbc74df536e8341e20b1fb969459ddc5afc4ccce",
+      "last_LR": 1.0000000000000002e-06,
+      "finite_states": {
+        "model": 91,
+        "EMA": 91,
+        "AdamW": 89
+      },
+      "observations": {
+        "path": "/mnt/external/demosaic/experiments/context-v86-v87-original4k-v1/context-observations.json",
+        "sha256": "bb21f2f8032f68f250975ab6f0475d35b000edf18303afde295bb2c7f1272017"
+      },
+      "metrics": {
+        "path": "/mnt/external/demosaic/experiments/context-v86-v87-original4k-v1/work/runs/context-v87/metrics.jsonl",
+        "sha256": "4e3b51a073ebf4c807e578d4b8aa0775868deee8435605a6151ca7a723976754"
+      }
+    }
+  ],
+  "exact_exited_controller": {
+    "pid": 198760,
+    "created": 1792446217.88
+  },
+  "recorded_paired_actual_source_forward_supervision_checks": 176,
+  "sampled_domains": {
+    "native": 42,
+    "paired": 40,
+    "commons": 94
+  },
+  "logged_source_domain_LR_supervision_pairs": 161,
+  "final_Python_CPU_CUDA_RNG_exact_rechecked": true,
+  "all4_checkpoint_copies_hashed": true,
+  "all_model_EMA_AdamW_finite_rechecked": true,
+  "all_AdamW_counters_4000_rechecked": true,
+  "training_manifest_hashes_rechecked": true,
+  "review_plan": {
+    "path": "/mnt/external/demosaic/experiments/context-v86-v87-original4k-review-v1/plan.json",
+    "sha256": "1d8646feb6d6f4acfddda8cd97487e68b13e42d1094318043337e6b6626f8840"
+  },
+  "observed_review_status": {
+    "controller": {
+      "pid": 233871,
+      "created": 1792446778.54
+    },
+    "plan": {
+      "path": "/mnt/external/demosaic/experiments/context-v86-v87-original4k-review-v1/plan.json",
+      "sha256": "1d8646feb6d6f4acfddda8cd97487e68b13e42d1094318043337e6b6626f8840"
+    },
+    "completed": [
+      "boundary",
+      "known"
+    ],
+    "status": "running-directional-bank-quality-review",
+    "updated_unix": 1792456224.9201958,
+    "stage": "unseen",
+    "child": {
+      "pid": 388820,
+      "created": 1792456224.87
+    }
+  },
+  "review_owner_confirmed_live": {
+    "pid": 233871,
+    "created": 1792446778.54
+  },
+  "CUDA_initialized": false,
+  "collector": {
+    "path": "/home/dllu/proj/demosaic/.cache/context-training-setup/publish_completion.py",
+    "sha256": "7e42dfe8ad3940d7567e53ec4714561663b7f29c4ff929181034bb2c4ea3503e"
+  },
+  "quality_or_context_benefit_established": false,
+  "model_promoted_or_defaults_changed": false,
+  "scope": "Actual final last.pt endpoints, fresh optimizer/full original4000 horizon per arm; independent saved-state/paired-input checks only.176 sampled pairs do not replay all64000 draws. Full ten-stage quality, saved-array/native audits and actual viewing remain pending. No SOTA, full-frame or speed claim."
+}

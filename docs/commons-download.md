@@ -23,7 +23,7 @@ owner are pinned. The downloader stays stopped; current model recipes stay fixed
 
 The [reviewed local extension](commons-local1188-reviewed.md) separately freezes
 890 additional training sources at both scales, with unchanged evaluation
-membership. The running V84/V85 comparison retains its original manifests.
+membership. The V86/V87 context comparison retains its original manifests.
 The recovery followed [evaluation-snapshot consolidation](evaluation-snapshot-storage.md),
 which reclaimed 168.82 GiB. Original failed memory-guard attempts remain recorded.
 

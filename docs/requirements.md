@@ -3,14 +3,28 @@
 The objective is the complete project in `PROMPT.md`, including trained quality,
 not just software that executes. This checklist records the evidence required.
 
-The fixed [V84/V85 native-data comparison](native-data-v84-v85-launch.md) is
-running original20k schedules on128 versus150 captures. New
-[reviewed public RAW146/private168 extensions](public-raw-expansion-v3.md) and
-the [890-source Commons extension](commons-local1188-reviewed.md) are separate
-future inputs; they do not yet establish a trained data benefit. The
-[CPU three-product convolution candidate](mature-tf32x3-convolution.md) checks
-unchanged mature models and offline compilation only. Actual GPU accuracy,
-speed, broad real-photo superiority and SOTA remain unmet/unproven.
+The [completed V84/V85 native-data comparison](native-data-original20k-review.md)
+finishes both original20k budgets on128 versus150 captures. Its matched photo
+effect is−.00422dB with an interval crossing zero; camera/detail gates fail and
+neither endpoint is promoted. The subsequent fixed
+[V86/V87 input-context comparison](training-context-v86-v87.md) keeps identical
+320px source draws and256px supervision while changing the actual forward
+field. [Both original4000 endpoints and paired-state checks](results/training-context-original4000-completion-v1.json)
+are complete; full quality review is running. Complete final quality/native evidence is still required before a
+context-benefit or promotion claim.
+
+The [reviewed public RAW146/private168 extensions](public-raw-expansion-v3.md)
+and [890-source Commons extension](commons-local1188-reviewed.md) remain separate
+future inputs. Another [4,337 Commons arrivals](commons-post4557-preparation.md)
+are being prepared and reviewed at4×/8×; all source thumbnails are viewed, but
+complete caches, duplicate/content-neighbor decisions and final coupled admission
+remain pending. None establishes a trained diversity benefit or changes the
+context trial's frozen data.
+
+The [actual three-product CUDA convolution review](mature-tf32x3-cuda-review.md)
+passes the six fixed numerical gates, with maximum.06640524DN16 difference,
+but resident timing is8.9–10.1% slower. It is not integrated. Full-frame10s,
+broad real-photo superiority and SOTA remain unmet/unproven.
 
 The [completed original4k directional/interval review](directional-interval-original4k-review.md)
 finds+.27801/+.27640dB photo PSNR over fresh V63, but both arms fail the fixed
@@ -35,7 +49,8 @@ sources and62 phase-binned targets.22 pass source clipping; source/overlap/scene
 review and72 independent FP64 code checks complete. Pinned loader integration
 now provides separate private150-capture/120-group extensions, preserving all128
 existing rows and32 exact legacy crop comparisons. Active recipes retain128
-captures; a matched trained data-benefit test remains outstanding. No private
+captures in the context trial; the completed native-data comparison above
+does not establish a benefit from the additional22. No private
 source pixels/capture metadata are published.
 
 The [completed bank-context V80/V81 review](directional-bank-original4k-review.md)
