@@ -7,6 +7,12 @@ bytes preserve ADC detail relative to historical V90, but photo PSNR falls
 and both high-noise gain/flat contrasts fail. V92 is rejected without extension
 or promotion; V43 remains the working reference.
 
+The [mature mixed-precision pilot](mature-mixed-precision-pilot-review.md)
+passes all fixed two-photo/96-analytic/ramp/native checks on V43/V63. Hidden
+FP16 cuts resident four-context medians690.54→162.49ms and704.41→173.51ms.
+All48 actual native cells and independent arithmetic replay pass. Full-suite
+quality and100MP16-bit qualification remain before any integration.
+
 The [completed V90/V91 late RGB refinement review](late-rgb-original4k-review.md)
 finishes both original4000 budgets and all125 native cells. Spatial prompts
 add+.00217dB photo PSNR over their global means, with a positive source

@@ -1,5 +1,9 @@
 # Native and numerical review of the mature precision pilot
 
+The [genuine CUDA/native/scalar review is now complete](mature-mixed-precision-pilot-review.md).
+All four half-policy screens pass; all48 new native cells are actually viewed.
+The procedures below record the prospective scopes and executed tooling.
+
 The saved-output review tools pass a genuine historical CPU preflight. All24
 original FP32 photo/GFX triplet PNGs replay byte for byte; both boards retain
 all36 native160px cells. All29 physical-input fingerprints match the producer.

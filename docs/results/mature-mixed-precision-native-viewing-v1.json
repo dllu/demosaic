@@ -1,0 +1,63 @@
+{
+  "status": "actually-viewed-all-native-mature-precision-cells-before-scalars",
+  "render_index": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-REVIEW-v2/work/outputs/native/index.json",
+    "sha256": "1a5a34bf94ea956252ad67fa92aa1d33d30c7ba0fb48be4644c2456f71cef08d"
+  },
+  "observed_UTC": "2026-10-20T16:26:25.778612+00:00",
+  "new_scalars_interpreted": false,
+  "boards": [
+    {
+      "receipt": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-REVIEW-v2/work/outputs/native/synthetic-native.json",
+        "sha256": "9a198ba5d77e1ed3c28be6f0e7c06dfc93698e0a6ae7ef41fffe124944048fe2"
+      },
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-REVIEW-v2/work/outputs/native/synthetic-native.png",
+        "sha256": "c3b4e64ad75efcdf8829c0d76e6e210c8495fda32aace9aebf903fb1a4798e72"
+      },
+      "native_cells_viewed": 16,
+      "observations": "All16 native photo cells actually viewed at original scale. Within each model, the FP32/FP16/FP16-hidden previews are visually close without a new visible artifact; fine canopy cords remain absent in every policy. V43/V63 tone differences are model differences."
+    },
+    {
+      "receipt": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-REVIEW-v2/work/outputs/native/gfx-native.json",
+        "sha256": "a620e8dd43f70fcdfd917915df69845740dea59c3309281c49dc783e54cc35a5"
+      },
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-REVIEW-v2/work/outputs/native/gfx-native.png",
+        "sha256": "693e0094aa02ba6b5048b3b1c320e24b5001a966de83e2ea8d546f43e06ee279"
+      },
+      "native_cells_viewed": 32,
+      "observations": "All32 native GFX cells actually viewed: sky, building, foliage and fence across both models/three policies, common exposure4. Within-model precision previews remain close; no new visible grid, band or colored blotch. Original softness and minor model tone differences remain. The ISO100 capture is a separate reference, not GT."
+    }
+  ],
+  "per_policy_findings": [
+    {
+      "model": "V43",
+      "policy": "fp16",
+      "no_visible_new_artifact": true,
+      "notes": "Both fixed native photo crops and all four standing GFX crops viewed. No new visible precision-specific artifact versus this same model FP32 output; original detail/color limits remain."
+    },
+    {
+      "model": "V43",
+      "policy": "fp16-hidden",
+      "no_visible_new_artifact": true,
+      "notes": "Both fixed native photo crops and all four standing GFX crops viewed. No new visible precision-specific artifact versus this same model FP32 output; original detail/color limits remain."
+    },
+    {
+      "model": "V63",
+      "policy": "fp16",
+      "no_visible_new_artifact": true,
+      "notes": "Both fixed native photo crops and all four standing GFX crops viewed. No new visible precision-specific artifact versus this same model FP32 output; original detail/color limits remain."
+    },
+    {
+      "model": "V63",
+      "policy": "fp16-hidden",
+      "no_visible_new_artifact": true,
+      "notes": "Both fixed native photo crops and all four standing GFX crops viewed. No new visible precision-specific artifact versus this same model FP32 output; original detail/color limits remain."
+    }
+  ],
+  "actual_native_cells_viewed": 48,
+  "scope": "Actual original-resolution new-CUDA-policy boards viewed before quality/timing summaries. Not historical replay, fabricated viewing or full quality qualification. Numerical gates remain pending."
+}

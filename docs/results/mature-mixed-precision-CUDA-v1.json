@@ -1,0 +1,543 @@
+{
+  "status": "completed-mature-precision-CUDA-finite-screen-passed-separate-qualification-required",
+  "observed_UTC": "2026-10-20T16:38:08.396489+00:00",
+  "GPU_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/plan.json",
+    "sha256": "b0f687834252458d1bb2be27716c1b11051389f041d40a69f0a470bb5a148e2c"
+  },
+  "GPU_terminal": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/controller-status.json",
+    "sha256": "9cd2c3c5e8abc49c50c2034525e5346db2f5a39384a1a4446759440bb22992de"
+  },
+  "GPU_receipt": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/receipt.json",
+    "sha256": "29529cb9a696ba083f7a50262c29b89aebdeded04209c6795875d1dc1fadcbcc"
+  },
+  "postprocessing_protocol": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-REVIEW-v2/plan.json",
+    "sha256": "5c3dea84d6f838852dbba72069ed0b9424e4071ea7ce7f5a90db800ca7c6be9f"
+  },
+  "actual_native_viewing": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-REVIEW-v2/work/outputs/manual-native-viewing.json",
+    "sha256": "74783979731d7a991ac993e8d2eb10470c05f187c63e44cb82ceadc49fe6184b"
+  },
+  "scalar_review": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-REVIEW-v2/work/outputs/scalar-review/result.json",
+    "sha256": "f07c5afc8c6eaecb5db42beaafb1c715f2ec8403103671c0ade55fca69f37e91"
+  },
+  "independent_Torch_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-REVIEW-v2/work/outputs/scalar-review/independent-Torch-audit.json",
+    "sha256": "83fb582528fd34695494867a5be6f97ec9ac31f49bde9465a5d1885059b3eefd"
+  },
+  "published_native": {
+    "path": "/home/dllu/proj/demosaic/docs/results/mature-mixed-precision-published-native-v1.json",
+    "sha256": "1ede85dc57b4b02c12be170e8a88db89957fcfa1583f79d2dff5b72129345674"
+  },
+  "models": [
+    {
+      "model": "V43",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v43-step2000.pt",
+        "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+        "step": 2000
+      },
+      "model_sha256": "4a45d92210acaeca3d4189c78eb22aa1cbc33f28b971dbeb56d1f6f29d62ed9a",
+      "DINO_sha256": "35035ba142eb119cd5980cf0d9809bfa28f622538c259ffb0fcf348ca6e68898",
+      "instrumented_encoder_calls": 94,
+      "unhooked_timing_forwards": 12
+    },
+    {
+      "model": "V63",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/dino-convnext-wide-long-control-b16-v63-step20000.pt",
+        "sha256": "ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5",
+        "step": 20000
+      },
+      "model_sha256": "b3e5f1c055b0541db3935ac73d1c88327c07a2bbc23c040d3d14eef8a45cc1fa",
+      "DINO_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd",
+      "instrumented_encoder_calls": 94,
+      "unhooked_timing_forwards": 12
+    }
+  ],
+  "actual_GPU_forwards": 212,
+  "saved_capture_arrays": 174,
+  "saved_timed_repeat_arrays": 24,
+  "actual_native_cells_viewed": 48,
+  "policy_summaries": [
+    {
+      "model": "V43",
+      "policy": "fp16",
+      "finite_screen_passed": true,
+      "worst_ADC_signed_gain_delta": -0.0012879851087589378,
+      "worst_noisy_carrier_gain_delta": -0.0008226510608421167,
+      "maximum_flat_luma_RMS_ratio": 1.0008975234983593,
+      "worst_photo_PSNR_delta_canonical_FP32": 0.000194549560546875,
+      "worst_photo_SSIM_delta_canonical_FP32": -1.1324882507324219e-06,
+      "maximum_physical_DN16": 19.864931255578995,
+      "maximum_fixture_RMS_DN16": 1.7153161878665044,
+      "volume_weighted_RMS_DN16": 0.33295729407887237
+    },
+    {
+      "model": "V43",
+      "policy": "fp16-hidden",
+      "finite_screen_passed": true,
+      "worst_ADC_signed_gain_delta": -0.0014900719570863918,
+      "worst_noisy_carrier_gain_delta": -0.0006921063296361496,
+      "maximum_flat_luma_RMS_ratio": 1.0008767279903261,
+      "worst_photo_PSNR_delta_canonical_FP32": 0.000125885009765625,
+      "worst_photo_SSIM_delta_canonical_FP32": -2.8014183044433594e-06,
+      "maximum_physical_DN16": 28.81010726094246,
+      "maximum_fixture_RMS_DN16": 2.8090623515599957,
+      "volume_weighted_RMS_DN16": 0.5007135631605049
+    },
+    {
+      "model": "V63",
+      "policy": "fp16",
+      "finite_screen_passed": true,
+      "worst_ADC_signed_gain_delta": -0.002343216066799214,
+      "worst_noisy_carrier_gain_delta": -0.00078697112138848,
+      "maximum_flat_luma_RMS_ratio": 1.0004786983804301,
+      "worst_photo_PSNR_delta_canonical_FP32": -0.000110626220703125,
+      "worst_photo_SSIM_delta_canonical_FP32": 1.7881393432617188e-07,
+      "maximum_physical_DN16": 19.706730544567108,
+      "maximum_fixture_RMS_DN16": 2.5283242239315538,
+      "volume_weighted_RMS_DN16": 0.363334120070056
+    },
+    {
+      "model": "V63",
+      "policy": "fp16-hidden",
+      "finite_screen_passed": true,
+      "worst_ADC_signed_gain_delta": -0.0018122728443610292,
+      "worst_noisy_carrier_gain_delta": -0.0008019470334225121,
+      "maximum_flat_luma_RMS_ratio": 1.0005409319961494,
+      "worst_photo_PSNR_delta_canonical_FP32": -5.340576171875e-05,
+      "worst_photo_SSIM_delta_canonical_FP32": -7.152557373046875e-07,
+      "maximum_physical_DN16": 27.90191799402237,
+      "maximum_fixture_RMS_DN16": 3.6666669599597426,
+      "volume_weighted_RMS_DN16": 0.5085709295667469
+    }
+  ],
+  "resident_timings": [
+    {
+      "model": "V43",
+      "policy": "fp32",
+      "seconds": [
+        0.6889114719815552,
+        0.6863723490387201,
+        0.6921734320931137,
+        0.6925839430186898
+      ],
+      "median_seconds": 0.6905424520373344,
+      "minimum_seconds": 0.6863723490387201,
+      "maximum_seconds": 0.6925839430186898,
+      "repeat_checks": [
+        {
+          "sample": 0,
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V43-timed00-fp32.npy",
+            "sha256": "83c7b9b904078eb0df6a56b8563641f5a949fe37e46781daf1fd07b3dcca4b87"
+          },
+          "byte_equal_first_capture": true,
+          "RGB_values": 3145728,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0
+        },
+        {
+          "sample": 5,
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V43-timed05-fp32.npy",
+            "sha256": "83c7b9b904078eb0df6a56b8563641f5a949fe37e46781daf1fd07b3dcca4b87"
+          },
+          "byte_equal_first_capture": true,
+          "RGB_values": 3145728,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0
+        },
+        {
+          "sample": 7,
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V43-timed07-fp32.npy",
+            "sha256": "83c7b9b904078eb0df6a56b8563641f5a949fe37e46781daf1fd07b3dcca4b87"
+          },
+          "byte_equal_first_capture": true,
+          "RGB_values": 3145728,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0
+        },
+        {
+          "sample": 10,
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V43-timed10-fp32.npy",
+            "sha256": "83c7b9b904078eb0df6a56b8563641f5a949fe37e46781daf1fd07b3dcca4b87"
+          },
+          "byte_equal_first_capture": true,
+          "RGB_values": 3145728,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0
+        }
+      ],
+      "first_calls": [
+        {
+          "kind": "first-policy-call-in-this-process",
+          "policy": "fp32",
+          "seconds": 17.785239303018898,
+          "includes_dtype_hooks_and_checks": true
+        }
+      ],
+      "median_speedup_fraction": 0.0
+    },
+    {
+      "model": "V43",
+      "policy": "fp16",
+      "seconds": [
+        0.1739170199725777,
+        0.17510371399112046,
+        0.1738351141102612,
+        0.1853234760928899
+      ],
+      "median_seconds": 0.17451036698184907,
+      "minimum_seconds": 0.1738351141102612,
+      "maximum_seconds": 0.1853234760928899,
+      "repeat_checks": [
+        {
+          "sample": 1,
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V43-timed01-fp16.npy",
+            "sha256": "0ee8d9351e01c889668289aa6e623f2f2e9a7f7065f598a615b4d7368a790f2a"
+          },
+          "byte_equal_first_capture": true,
+          "RGB_values": 3145728,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0
+        },
+        {
+          "sample": 4,
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V43-timed04-fp16.npy",
+            "sha256": "0ee8d9351e01c889668289aa6e623f2f2e9a7f7065f598a615b4d7368a790f2a"
+          },
+          "byte_equal_first_capture": true,
+          "RGB_values": 3145728,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0
+        },
+        {
+          "sample": 8,
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V43-timed08-fp16.npy",
+            "sha256": "0ee8d9351e01c889668289aa6e623f2f2e9a7f7065f598a615b4d7368a790f2a"
+          },
+          "byte_equal_first_capture": true,
+          "RGB_values": 3145728,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0
+        },
+        {
+          "sample": 9,
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V43-timed09-fp16.npy",
+            "sha256": "0ee8d9351e01c889668289aa6e623f2f2e9a7f7065f598a615b4d7368a790f2a"
+          },
+          "byte_equal_first_capture": true,
+          "RGB_values": 3145728,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0
+        }
+      ],
+      "first_calls": [
+        {
+          "kind": "first-policy-call-in-this-process",
+          "policy": "fp16",
+          "seconds": 1.4397678168024868,
+          "includes_dtype_hooks_and_checks": true
+        }
+      ],
+      "median_speedup_fraction": 2.9570282498412155
+    },
+    {
+      "model": "V43",
+      "policy": "fp16-hidden",
+      "seconds": [
+        0.16295296396128833,
+        0.16175847803242505,
+        0.16205818997696042,
+        0.16292483382858336
+      ],
+      "median_seconds": 0.1624915119027719,
+      "minimum_seconds": 0.16175847803242505,
+      "maximum_seconds": 0.16295296396128833,
+      "repeat_checks": [
+        {
+          "sample": 2,
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V43-timed02-fp16-hidden.npy",
+            "sha256": "87b11945e3495614ce51fe932d23f13d55d4039fb4b82730d2249fac4ef480d4"
+          },
+          "byte_equal_first_capture": true,
+          "RGB_values": 3145728,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0
+        },
+        {
+          "sample": 3,
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V43-timed03-fp16-hidden.npy",
+            "sha256": "87b11945e3495614ce51fe932d23f13d55d4039fb4b82730d2249fac4ef480d4"
+          },
+          "byte_equal_first_capture": true,
+          "RGB_values": 3145728,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0
+        },
+        {
+          "sample": 6,
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V43-timed06-fp16-hidden.npy",
+            "sha256": "87b11945e3495614ce51fe932d23f13d55d4039fb4b82730d2249fac4ef480d4"
+          },
+          "byte_equal_first_capture": true,
+          "RGB_values": 3145728,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0
+        },
+        {
+          "sample": 11,
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V43-timed11-fp16-hidden.npy",
+            "sha256": "87b11945e3495614ce51fe932d23f13d55d4039fb4b82730d2249fac4ef480d4"
+          },
+          "byte_equal_first_capture": true,
+          "RGB_values": 3145728,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0
+        }
+      ],
+      "first_calls": [
+        {
+          "kind": "first-policy-call-in-this-process",
+          "policy": "fp16-hidden",
+          "seconds": 0.16260514012537897,
+          "includes_dtype_hooks_and_checks": true
+        }
+      ],
+      "median_speedup_fraction": 3.24971399398712
+    },
+    {
+      "model": "V63",
+      "policy": "fp32",
+      "seconds": [
+        0.7042523168493062,
+        0.704562220023945,
+        0.7005823731888086,
+        0.7085047760047019
+      ],
+      "median_seconds": 0.7044072684366256,
+      "minimum_seconds": 0.7005823731888086,
+      "maximum_seconds": 0.7085047760047019,
+      "repeat_checks": [
+        {
+          "sample": 2,
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V63-timed02-fp32.npy",
+            "sha256": "94926894c416953aa66aaa7b261c7cf307b6739b088b6033d4f0544f7510f1a2"
+          },
+          "byte_equal_first_capture": true,
+          "RGB_values": 3145728,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0
+        },
+        {
+          "sample": 3,
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V63-timed03-fp32.npy",
+            "sha256": "94926894c416953aa66aaa7b261c7cf307b6739b088b6033d4f0544f7510f1a2"
+          },
+          "byte_equal_first_capture": true,
+          "RGB_values": 3145728,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0
+        },
+        {
+          "sample": 6,
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V63-timed06-fp32.npy",
+            "sha256": "94926894c416953aa66aaa7b261c7cf307b6739b088b6033d4f0544f7510f1a2"
+          },
+          "byte_equal_first_capture": true,
+          "RGB_values": 3145728,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0
+        },
+        {
+          "sample": 11,
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V63-timed11-fp32.npy",
+            "sha256": "94926894c416953aa66aaa7b261c7cf307b6739b088b6033d4f0544f7510f1a2"
+          },
+          "byte_equal_first_capture": true,
+          "RGB_values": 3145728,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0
+        }
+      ],
+      "first_calls": [
+        {
+          "kind": "first-policy-call-in-this-process",
+          "policy": "fp32",
+          "seconds": 2.30414320807904,
+          "includes_dtype_hooks_and_checks": true
+        }
+      ],
+      "median_speedup_fraction": 0.0
+    },
+    {
+      "model": "V63",
+      "policy": "fp16",
+      "seconds": [
+        0.18414758099243045,
+        0.18416013894602656,
+        0.18470741994678974,
+        0.18644434097222984
+      ],
+      "median_seconds": 0.18443377944640815,
+      "minimum_seconds": 0.18414758099243045,
+      "maximum_seconds": 0.18644434097222984,
+      "repeat_checks": [
+        {
+          "sample": 1,
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V63-timed01-fp16.npy",
+            "sha256": "6ce4e9825750ce4888a96b547b2f56d2f898e0c420cc7be91930862f8967efff"
+          },
+          "byte_equal_first_capture": true,
+          "RGB_values": 3145728,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0
+        },
+        {
+          "sample": 4,
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V63-timed04-fp16.npy",
+            "sha256": "6ce4e9825750ce4888a96b547b2f56d2f898e0c420cc7be91930862f8967efff"
+          },
+          "byte_equal_first_capture": true,
+          "RGB_values": 3145728,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0
+        },
+        {
+          "sample": 8,
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V63-timed08-fp16.npy",
+            "sha256": "6ce4e9825750ce4888a96b547b2f56d2f898e0c420cc7be91930862f8967efff"
+          },
+          "byte_equal_first_capture": true,
+          "RGB_values": 3145728,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0
+        },
+        {
+          "sample": 9,
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V63-timed09-fp16.npy",
+            "sha256": "6ce4e9825750ce4888a96b547b2f56d2f898e0c420cc7be91930862f8967efff"
+          },
+          "byte_equal_first_capture": true,
+          "RGB_values": 3145728,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0
+        }
+      ],
+      "first_calls": [
+        {
+          "kind": "first-policy-call-in-this-process",
+          "policy": "fp16",
+          "seconds": 0.18665756401605904,
+          "includes_dtype_hooks_and_checks": true
+        }
+      ],
+      "median_speedup_fraction": 2.8192963921845386
+    },
+    {
+      "model": "V63",
+      "policy": "fp16-hidden",
+      "seconds": [
+        0.1734648069832474,
+        0.17354634194634855,
+        0.17418544786050916,
+        0.17344950791448355
+      ],
+      "median_seconds": 0.17350557446479797,
+      "minimum_seconds": 0.17344950791448355,
+      "maximum_seconds": 0.17418544786050916,
+      "repeat_checks": [
+        {
+          "sample": 0,
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V63-timed00-fp16-hidden.npy",
+            "sha256": "769c137812a6cd553e6d8738dc9ea6f018f1755398c1eecbf2bf934c648ff739"
+          },
+          "byte_equal_first_capture": true,
+          "RGB_values": 3145728,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0
+        },
+        {
+          "sample": 5,
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V63-timed05-fp16-hidden.npy",
+            "sha256": "769c137812a6cd553e6d8738dc9ea6f018f1755398c1eecbf2bf934c648ff739"
+          },
+          "byte_equal_first_capture": true,
+          "RGB_values": 3145728,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0
+        },
+        {
+          "sample": 7,
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V63-timed07-fp16-hidden.npy",
+            "sha256": "769c137812a6cd553e6d8738dc9ea6f018f1755398c1eecbf2bf934c648ff739"
+          },
+          "byte_equal_first_capture": true,
+          "RGB_values": 3145728,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0
+        },
+        {
+          "sample": 10,
+          "RGB": {
+            "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V63-timed10-fp16-hidden.npy",
+            "sha256": "769c137812a6cd553e6d8738dc9ea6f018f1755398c1eecbf2bf934c648ff739"
+          },
+          "byte_equal_first_capture": true,
+          "RGB_values": 3145728,
+          "max_abs_DN16": 0.0,
+          "RMS_DN16": 0.0
+        }
+      ],
+      "first_calls": [
+        {
+          "kind": "first-policy-call-in-this-process",
+          "policy": "fp16-hidden",
+          "seconds": 1.2049300579819828,
+          "includes_dtype_hooks_and_checks": true
+        }
+      ],
+      "median_speedup_fraction": 3.0598538151265027
+    }
+  ],
+  "minimum_native_ramp_codes": 21692,
+  "minimum_one_DN_response_RMS": 1.5227977938954144e-05,
+  "selected_policy_for_separate_followup": "fp16-hidden",
+  "selection_reason": "Both hidden-branch policies pass every fixed finite-screen gate and have the fastest resident medians on both mature models. Require a separately frozen full quality and100MP16-bit study before integration.",
+  "full_quality_qualified": false,
+  "new_full_frame_runs": 0,
+  "model_or_default_changed": false,
+  "automatic_followup_launched": false,
+  "scope": "Genuine existing-weight policy study only. Both mature models pass the fixed two-photo/all96-analytic/ramp/native pilot and improve resident B4/native512 latency. All95,944,704 physical differences and3,840 analytic fields independently replay. Neither full quality,100MP latency, SOTA nor broad real-photo superiority follows. Physical FP32 head/skip/tail/inverse and original learned tensors/config remain unchanged.",
+  "independent_auditor_executed_source_snapshot": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-REVIEW-v2/work/outputs/scalar-review/independent-auditor-executed-source.py",
+    "sha256": "d4c776c443436def51099aba8698fe9a71f0a31616183686ae6ede10b1789c5d"
+  }
+}

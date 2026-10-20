@@ -1,8 +1,10 @@
 # Mature mixed-precision engineering and serial pilot
 
-The [fixed precision pilot](mature-mixed-precision-pilot.md) passes genuine
-CPU execution checks on both mature checkpoints. Its CUDA controller is
-verified waiting for all V92 jobs; no new CUDA accuracy or speed result exists.
+The [completed precision pilot](mature-mixed-precision-pilot-review.md) passes
+the fixed CUDA/native/numerical screen on both mature checkpoints. Hidden
+FP16 resident B4/native512 medians are162.49/173.51ms, versus690.54/704.41ms
+FP32:4.250×/4.060× observed ratios. All48 native cells and independent Torch
+arithmetic checks complete. Full quality and actual100MP qualification remain.
 The [mature full-frame result](mature-cudnn-fullframe.md) remains118.22/120.48s
 warmed IEEE FP32. Older V42 FP16 timings use different V37 weights.
 
@@ -58,12 +60,14 @@ one-DN observations. All methods use identical complete measurements and
 transforms. The existing192 ADC labels represent48 unique deterministic
 observations; all12 groups and four CFAs remain.
 
-Controller1331098/create1792508313.33 is separately detached. Its
+Controller1331098/create1792508313.33 was separately detached. Its
 [launch receipt](results/mature-mixed-precision-queue-v1.json) binds CPU proof
 and25 tests. It waits for exact V92 training, review, closure, reference and
 native-package owners, including surviving dynamic children. Successful
 terminal stages and original owner/plan identities must agree. The recorded
-handoff confirms the process actually live, zero children and no GPU output.
+handoff confirms the process actually live, zero children and no GPU output
+at launch. After every exact predecessor exited, worker1400254/create1792512940.95
+ran once and completed212 forwards /198 arrays. Both pilot owners have exited.
 Failed predecessors fail this pilot; it never restarts or stops those jobs.
 
 Only after that barrier and48GiB headroom for60s may its single GPU worker
@@ -82,8 +86,9 @@ The frozen photo triplets, foliage/fence crops and ISO100-reference caveat apply
 
 Operational files are under `.cache/benchmarks/mature-mixed-precision-CUDA-v1/`;
 CPU evidence is under `.cache/benchmarks/mature-mixed-precision-CPU-v1/`.
-V92 has completed original4000 and retains review priority. This finite
-screen cannot authorize a default/export change or full-frame continuation.
+V92 has completed its [full rejected review](late-rgb-head-only-original4k-review.md).
+This finite precision screen selects hidden FP16 for a separately frozen full
+quality and100MP study, with no default/export change or automatic continuation.
 SOTA, decisive real-photo superiority and actual100MP/10s remain unmet/unproven.
 
 The separate [native/scalar postprocessing](mature-mixed-precision-postprocessing.md)

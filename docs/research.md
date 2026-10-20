@@ -19,21 +19,26 @@ global head. Its [engineering checks](late-rgb-head-only-engineering.md) cover
 gradient isolation, actual mixed-data updates and fresh-process restart.
 Completed V90 is explicitly a fixed historical exploratory reference, since
 its outcomes informed this choice. Freezing remains an unproven quality
-hypothesis; inference architecture and working defaults remain unchanged.
-Its [full quality/native review queue](late-rgb-head-only-review-preparation.md)
-now has genuine-state CPU integration, unchanged historical metric/native
-packaging replay and a source-frozen serial queue. Original4000 training and
-the independent final-state audit now complete, preserving all91 common
-model/EMA tensors and matching176 recorded input pairs plus final RNG against
-historical V90. Fresh FP32 camera/photo/native review is running; this does
-not yet establish a quality gain.
+hypothesis at launch; inference architecture and working defaults remain unchanged.
+The [completed original4000 quality/native review](late-rgb-head-only-original4k-review.md)
+now rejects V92: photo PSNR falls.16213dB and unseen CFA PSNR falls.34470dB
+versus V63. All125 native cells are viewed. Common model/EMA bytes stay exact,
+and ADC preservation improves against historical V90, but both high-noise
+carrier/flat contrasts fail. Freezing the entire common path does not supply
+the requested quality benefit. It does not identify which common module or
+training gradients caused the previous adaptation's losses; finer localization
+would be a separate diagnosis. No training extension or promotion follows.
 
 The [mature mixed-precision follow-up](mature-mixed-precision-engineering.md)
 separately checks the existing autocast policy on actual V43/V63 weights,
 including their different frozen DINO encoders. Genuine CPU execution and
-independent code-sensitivity checks pass. A bounded CUDA pilot waits behind
-all V92 review/package jobs; no mature CUDA speed or quality result follows
-from the older V42 timing or this CPU emulation.
+independent code-sensitivity checks pass. The
+[completed bounded CUDA pilot](mature-mixed-precision-pilot-review.md) now passes
+the fixed accuracy/native screen after all V92 owners exit. Hidden FP16 is
+4.250×/4.060× faster on resident four-context medians, with all48 actual native
+cells,95.9million physical differences and3,840 analytic fields independently
+checked. It is selected for separate full-quality/100MP qualification; no
+full-frame or default change follows from this finite screen.
 
 The [October20 PixIE follow-up](research-pixie-followup.md) records a recent
 semantic-routing candidate and its differences from our current fusion.
