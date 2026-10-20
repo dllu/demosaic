@@ -1,0 +1,184 @@
+{
+  "status": "completed-unchanged-original-worker-replay-half-parity-still-fails",
+  "recorded_local": "2026-10-20T11:24:28.513085-07:00",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-original-worker-replay-v1/plan.json",
+    "sha256": "4ec459a13064bfc3723425ea82fdb98d6f12466a0c6751ce354d0abb041780ec"
+  },
+  "receipt": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-original-worker-replay-v1/outputs/receipt.json",
+    "sha256": "d55bf45a08a029df3cc1f44a9eb90892415316804eb88bc68c21bd4ed8a00895"
+  },
+  "terminal": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-original-worker-replay-v1/controller-status.json",
+    "sha256": "884987ef0744aa619d6567e7eb9f4347117d390486b37c61c4ae7f1f01811fd7"
+  },
+  "source_worker": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/scripts/probe_mature_precision_cuda.py",
+    "sha256": "1a2a8a94fb7ab2e320767e91035e891989168a05828c1347d05822ea942194d1"
+  },
+  "source_controller": {
+    "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/scripts/queue_mature_precision.py",
+    "sha256": "7d17dd454551b45f214f65214183303eeade84469b59bfd4c7e6e50eff61ffd6"
+  },
+  "actual_forwards": 25,
+  "instrumented_forwards": 13,
+  "timed_repeats_SHA_identical": 12,
+  "rows": [
+    {
+      "policy": "fp32",
+      "fixture": "GFX-four-native512-contexts",
+      "RGB": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-original-worker-replay-v1/outputs/V43-fp32-fixture00.npy",
+        "sha256": "256be0d1ecfbe75257c5a3d170ae053dacaeb0db7a9a825bd6f581c748586be8"
+      },
+      "matching_pilot": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V43-fp32-fixture00.npy",
+        "sha256": "83c7b9b904078eb0df6a56b8563641f5a949fe37e46781daf1fd07b3dcca4b87"
+      },
+      "differences": [
+        {
+          "max_abs_DN16": 0.0030517112463712692,
+          "RMS_DN16": 0.0003832981284114573
+        },
+        {
+          "max_abs_DN16": 0.07031142711639404,
+          "RMS_DN16": 0.0009525367762179145
+        },
+        {
+          "max_abs_DN16": 0.013671666383743286,
+          "RMS_DN16": 0.00034080371664041025
+        },
+        {
+          "max_abs_DN16": 0.04296809434890747,
+          "RMS_DN16": 0.00045390539331142417
+        }
+      ],
+      "matching_pilot_parity_pass": true
+    },
+    {
+      "policy": "fp16",
+      "fixture": "GFX-four-native512-contexts",
+      "RGB": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-original-worker-replay-v1/outputs/V43-fp16-fixture00.npy",
+        "sha256": "a2315096990b6e54552c667bff707e969ffed4bfcb8c54b3d398d69d24a78d09"
+      },
+      "matching_pilot": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V43-fp16-fixture00.npy",
+        "sha256": "0ee8d9351e01c889668289aa6e623f2f2e9a7f7065f598a615b4d7368a790f2a"
+      },
+      "differences": [
+        {
+          "max_abs_DN16": 1.7184796370565891,
+          "RMS_DN16": 0.06525969024833775
+        },
+        {
+          "max_abs_DN16": 16.44115537405014,
+          "RMS_DN16": 0.21993698112659119
+        },
+        {
+          "max_abs_DN16": 3.949158489704132,
+          "RMS_DN16": 0.07368262239485791
+        },
+        {
+          "max_abs_DN16": 13.527137339115143,
+          "RMS_DN16": 0.1088959506847958
+        }
+      ],
+      "matching_pilot_parity_pass": false
+    },
+    {
+      "policy": "fp16-hidden",
+      "fixture": "GFX-four-native512-contexts",
+      "RGB": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-original-worker-replay-v1/outputs/V43-fp16-hidden-fixture00.npy",
+        "sha256": "c867c938db9ce45dc33c52f9b06eafa038d49837c3823e3b15d21e738f8061a1"
+      },
+      "matching_pilot": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V43-fp16-hidden-fixture00.npy",
+        "sha256": "87b11945e3495614ce51fe932d23f13d55d4039fb4b82730d2249fac4ef480d4"
+      },
+      "differences": [
+        {
+          "max_abs_DN16": 1.1082594562321901,
+          "RMS_DN16": 0.06578273365698974
+        },
+        {
+          "max_abs_DN16": 15.085707306861877,
+          "RMS_DN16": 0.23972673675204106
+        },
+        {
+          "max_abs_DN16": 3.6517997458577156,
+          "RMS_DN16": 0.07427388885623247
+        },
+        {
+          "max_abs_DN16": 10.199063122272491,
+          "RMS_DN16": 0.1081200200865056
+        }
+      ],
+      "matching_pilot_parity_pass": false
+    },
+    {
+      "policy": "fp32",
+      "fixture": "photo-0",
+      "RGB": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-original-worker-replay-v1/outputs/V43-fp32-fixture01.npy",
+        "sha256": "73f8eb7850fb3bfc30c1ac2a8ba1c5aefed739498f303fe48c3ba7c6acc88d67"
+      },
+      "matching_pilot": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V43-fp32-fixture01.npy",
+        "sha256": "36a1466bc9acb8fac621792aab137c8ad1a5c6ea594265076f05d117d58b8456"
+      },
+      "differences": [
+        {
+          "max_abs_DN16": 0.05078047513961792,
+          "RMS_DN16": 0.006252190992146631
+        }
+      ],
+      "matching_pilot_parity_pass": true
+    },
+    {
+      "policy": "fp16",
+      "fixture": "photo-0",
+      "RGB": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-original-worker-replay-v1/outputs/V43-fp16-fixture01.npy",
+        "sha256": "4c375a32e7918e1a958cfb1c5a321d025e10656e75f620a8ba80f696e7bee043"
+      },
+      "matching_pilot": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V43-fp16-fixture01.npy",
+        "sha256": "07ef5988c7f0e406003d252eac9ed0e457ed37383cc696f879393da27d77b870"
+      },
+      "differences": [
+        {
+          "max_abs_DN16": 11.796694993972778,
+          "RMS_DN16": 0.8143287540258631
+        }
+      ],
+      "matching_pilot_parity_pass": false
+    },
+    {
+      "policy": "fp16-hidden",
+      "fixture": "photo-0",
+      "RGB": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-precision-original-worker-replay-v1/outputs/V43-fp16-hidden-fixture01.npy",
+        "sha256": "7daf2dd57f8a8311d611de1a699ed95b365e094bbb8132639a865bf65249be6b"
+      },
+      "matching_pilot": {
+        "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-mixed-precision-CUDA-v1/work/GPU-output/V43-fp16-hidden-fixture01.npy",
+        "sha256": "a61501db0d53eac6de31a9f4e6df311bcc96abfe581538e9af05e9e3d8cddc03"
+      },
+      "differences": [
+        {
+          "max_abs_DN16": 12.025207132101059,
+          "RMS_DN16": 0.8104200499087848
+        }
+      ],
+      "matching_pilot_parity_pass": false
+    }
+  ],
+  "timings_interpreted": false,
+  "newer_wrapper_is_sole_cause": false,
+  "cause_identified": false,
+  "quality_or_speed_claim": false,
+  "fixed_backend_followup": "Prepared but never launched; deferred at user request in favor of V43 architecture/data quality work."
+}

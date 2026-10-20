@@ -9,12 +9,36 @@ from pathlib import Path
 
 import numpy as np
 import psutil
+from mature_precision_execution import FIXED_EXECUTION, execution_snapshot, fixed_execution
 from mature_precision_tools import POLICIES, precision_policy
 from preflight_mature_precision import KEYS
 from train_directional_bank_trial import guard, read, ref, save
 
 
 def main(plan_path):
+    policy = read(plan_path).get("execution_policy")
+    if policy == FIXED_EXECUTION:
+        previous = execution_snapshot()
+        with fixed_execution():
+            capture(plan_path)
+        assert execution_snapshot() == previous
+        save(
+            Path(read(plan_path)["output"]) / "fixed-execution-restoration.json",
+            {
+                "plan": ref(plan_path),
+                "receipt": ref(Path(read(plan_path)["output"]) / "receipt.json"),
+                "outer_backend_settings_restored_exact": True,
+                "before": previous,
+                "after": execution_snapshot(),
+            },
+        )
+        return
+    if policy is not None:
+        raise ValueError("Unknown research execution policy")
+    return capture(plan_path)
+
+
+def capture(plan_path):
     import torch
     from profile_raw_kernel_inference import model_hash
 
@@ -37,7 +61,11 @@ def main(plan_path):
         min(previous["quota"], 16 * 2**30 / torch.cuda.get_device_properties(device).total_memory),
         device,
     )
-    torch.backends.cudnn.benchmark, torch.backends.cudnn.benchmark_limit = True, 10
+    torch.backends.cudnn.benchmark, torch.backends.cudnn.benchmark_limit = (
+        plan.get("execution_policy") != FIXED_EXECUTION,
+        10,
+    )
+    execution = execution_snapshot()
     output = Path(plan["output"])
     output.mkdir(parents=True, exist_ok=False)
     cpu_proof = read(plan["CPU_preflight"]["path"])
@@ -211,6 +239,7 @@ def main(plan_path):
                     not p.requires_grad and p.grad is None
                     for p in model.context.backbone.parameters()
                 )
+                assert execution_snapshot() == execution
                 assert len(captures) == len(plan["fixtures"]) * 3
                 assert len(calls) == 9 + (len(plan["fixtures"]) - 1) * 3 + 1
                 models.append(
@@ -247,6 +276,8 @@ def main(plan_path):
             "models": models,
             "owner": {"pid": os.getpid(), "created": psutil.Process().create_time()},
             "backend_settings_restored": True,
+            "execution_policy": plan.get("execution_policy", "original-autotune"),
+            "execution_backend_settings": execution,
             "scope": "Fixed existing-weight precision outputs and resident timings only. First policy calls share per-process library caches; not isolated cold starts or pure search cost. Quality, numeric gates and timing interpretation await actual native views. No full-frame result, training, export, default change or promotion.",
         },
     )

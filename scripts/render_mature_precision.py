@@ -45,6 +45,9 @@ def gpu_methods(plan_path, receipt_path):
         raise ValueError("Missing successful GPU receipt for this exact plan")
     if not receipt["backend_settings_restored"]:
         raise ValueError("GPU backend restoration failed")
+    execution = plan.get("execution_policy")
+    if execution and receipt.get("execution_policy") != execution:
+        raise ValueError("GPU execution policy differs from the frozen study")
     if [m["model"] for m in receipt["models"]] != list(plan["models"]):
         raise ValueError("GPU model set/order differs from the frozen pilot")
     methods = []
@@ -63,10 +66,18 @@ def gpu_methods(plan_path, receipt_path):
         for policy in POLICIES:
             methods.append(
                 {
-                    "label": model["model"] + ":" + policy,
+                    "label": model["model"] + ":" + policy + (":" + execution if execution else ""),
                     "model": model["model"],
                     "policy": policy,
                     "checkpoint": model["checkpoint"],
+                    **(
+                        {
+                            "execution_policy": execution,
+                            "execution_backend_settings": receipt["execution_backend_settings"],
+                        }
+                        if execution
+                        else {}
+                    ),
                     "RGB": {c["fixture"]: c["RGB"] for c in captures if c["policy"] == policy},
                 }
             )
