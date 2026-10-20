@@ -15,6 +15,13 @@ finds +.00099dB matched photo PSNR with an interval crossing zero; known-camera
 and weak-detail gates fail. All192 ADC loss limits pass, all125 native cells
 are viewed, and neither model is promoted or extended.
 
+The next [fixed V88/V89 spectral comparison](spectral-v88-v89.md) retains
+native256/B16 and admits the reviewed88,508-source Commons population to both
+arms. Its [68 tests and genuine CPU/CUDA engineering preflights](spectral-engineering.md)
+pass, including exact16 versus8+8 state/RNG equality. A separate original4000
+controller is launched; trained quality/native review remains pending. This is
+not a demonstrated improvement, and V43 remains the working reference.
+
 The [reviewed public RAW146/private168 extensions](public-raw-expansion-v3.md)
 remain separate future inputs. The [completed Commons extension](commons-post4557-reviewed.md)
 now freezes88,508 future training sources at4×/8×:85,757 previously reviewed

@@ -1,5 +1,12 @@
 # Experiment evidence
 
+The [V88/V89 spectral experiment](spectral-v88-v89.md) tests input-derived
+coherent Fourier evidence around the mature frozen-DINO-guided model. Both
+arms use reviewed88508 Commons/native128/paired32, native256/B16/seed55 and
+original4000 updates. [Engineering checks](spectral-engineering.md) pass68 tests
+and genuine CPU/CUDA16-update/8+8 restart comparisons; the separate full trial
+is launched. No restoration-quality result, promotion or budget extension follows.
+
 The [completed V86/V87 input-context review](training-context-original4k-review.md)
 finds +.00099dB matched photo PSNR with a95% source interval crossing zero.
 Both original4000 budgets and all176 input/supervision pairs are verified.

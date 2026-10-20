@@ -1,5 +1,11 @@
 # Training data work, sampling order and batch size
 
+The next [spectral trial](spectral-v88-v89.md) keeps native256/B16 and uses all
+88,508 reviewed Commons training sources in both arms. Its genuine CPU/CUDA
+[engineering preflights](spectral-engineering.md) pass; the original4000
+comparison is separately launched. Geometry before area2 and selected-domain
+loading remain fixed. This does not establish a data-expansion or quality gain.
+
 The default-off [input-context experiment](training-context-v86-v87.md)
 separates prepared source size, actual forward size and central loss size.
 `patch_size: 320`, `forward_patch_size` set to `256` or `320`,

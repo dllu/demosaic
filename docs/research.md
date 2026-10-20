@@ -426,3 +426,18 @@ independent demosaicer, not the full published RGB pipeline or paper scores.
 Unverified upstream license terms keep source/weights in an isolated research
 cache. No production dependency, training change, broad ranking or promotion
 follows.
+
+## Coherent frequency evidence after the context comparison
+
+[FFNet, April2026](https://doi.org/10.3390/math14071175) combines global and
+local Fourier feature blocks with channel attention for joint demosaicing and
+denoising. That primary paper motivates checking frequency evidence, without
+establishing a remedy for our physical shot-noise/detail failures. The new
+[fixed V88/V89 experiment](spectral-v88-v89.md) instead uses a shared input-RAW
+noise-normalized spectral mask and a zero-initialized scalar residual gate around
+the existing frozen-DINO-guided mature model. This is our independent design,
+not an FFNet reproduction or transfer of its Gaussian-noise benchmark results.
+No upstream code or weights are incorporated. Numerical/gradient correctness,
+flat false-detail controls and matched trained photographic/native quality are
+separate requirements; an analytic Gaussian bound is not calibrated for our
+Poisson/ADC noise or input-derived variance proxies.

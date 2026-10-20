@@ -300,6 +300,7 @@ class PretrainedRgbDemosaic(nn.Module):
         raw_directional_residual=False,
         raw_directional_bank_context=False,
         raw_directional_bank_detach_input=False,
+        raw_spectral_residual=False,
     ):
         super().__init__()
         if raw_directional_bank_context and not raw_directional_residual:
@@ -331,6 +332,17 @@ class PretrainedRgbDemosaic(nn.Module):
         ):
             raise ValueError(
                 "Directional residual requires native stabilized anchored RGB without other RAW heads"
+            )
+        if raw_spectral_residual and (
+            not stabilized
+            or not physical_anchors
+            or processing_scale != 1
+            or raw_kernel
+            or raw_directional_residual
+            or adc_projection
+        ):
+            raise ValueError(
+                "Spectral residual requires native stabilized anchored RGB without other RAW heads"
             )
         self.network = RgbRestorationTrunk(
             hidden_autocast=hidden_autocast, middle_skip_fp32=middle_skip_fp32
@@ -370,6 +382,11 @@ class PretrainedRgbDemosaic(nn.Module):
         self._noise_profiles = None
         self.raw_kernel = None
         self.raw_directional = None
+        self.raw_spectral = None
+        if raw_spectral_residual:
+            from .raw_spectral import RawSpectralResidual
+
+            self.raw_spectral = RawSpectralResidual()
         if raw_directional_residual:
             from .raw_directional import RawDirectionalResidual
 
@@ -578,6 +595,7 @@ class PretrainedRgbDemosaic(nn.Module):
             or self.processing_scale != 1
             or self.raw_kernel is not None
             or self.raw_directional is not None
+            or self.raw_spectral is not None
         ):
             raise ValueError(
                 "Normalization augmentation requires full-resolution anchored RGB training"
@@ -662,7 +680,11 @@ class PretrainedRgbDemosaic(nn.Module):
                 if isinstance(middle_offset, tuple):
                     encoder_kwargs = {"encoder_offsets": middle_offset[:2]}
                     middle_offset = middle_offset[2]
-            if self.raw_kernel is not None or self.raw_directional is not None:
+            if (
+                self.raw_kernel is not None
+                or self.raw_directional is not None
+                or self.raw_spectral is not None
+            ):
                 prediction, features = self.network(
                     normalized,
                     noise,
@@ -717,6 +739,10 @@ class PretrainedRgbDemosaic(nn.Module):
             if self.raw_directional is not None:
                 output = self.raw_directional(
                     output, original_packed, original_variance, colors, directional_features
+                )
+            if self.raw_spectral is not None:
+                output = self.raw_spectral(
+                    output, original_packed, original_variance, colors, directional_features, wb
                 )
             return output
 

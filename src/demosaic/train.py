@@ -111,6 +111,13 @@ def make_optimizer(model, config):
         raise ValueError("Directional learning-rate multiplier requires the directional branch")
     if directional_multiplier != 1 and multiplier != 1:
         raise ValueError("Directional and packed-phase learning-rate groups cannot combine")
+    spectral_multiplier = float(config.get("raw_spectral_lr_multiplier", 1))
+    if not math.isfinite(spectral_multiplier) or spectral_multiplier <= 0:
+        raise ValueError("Spectral learning-rate multiplier must be finite and positive")
+    if spectral_multiplier != 1 and not model.config.raw_spectral_residual:
+        raise ValueError("Spectral learning-rate multiplier requires the spectral branch")
+    if spectral_multiplier != 1 and (multiplier != 1 or directional_multiplier != 1):
+        raise ValueError("Spectral learning-rate groups cannot combine with other RAW-head groups")
     parameters = [p for p in model.parameters() if p.requires_grad]
     if multiplier != 1:
         phase = [
@@ -149,6 +156,23 @@ def make_optimizer(model, config):
                 "params": directional,
                 "lr_multiplier": directional_multiplier,
                 "lr": config.get("lr", 2e-4) * directional_multiplier,
+            },
+        ]
+    if spectral_multiplier != 1:
+        spectral = [
+            p
+            for name, p in model.named_parameters()
+            if p.requires_grad and name.startswith("pretrained_rgb.raw_spectral.")
+        ]
+        if not spectral:
+            raise ValueError("Spectral learning-rate multiplier needs trainable branch parameters")
+        ids = {id(p) for p in spectral}
+        parameters = [
+            {"params": [p for p in parameters if id(p) not in ids], "lr_multiplier": 1.0},
+            {
+                "params": spectral,
+                "lr_multiplier": spectral_multiplier,
+                "lr": config.get("lr", 2e-4) * spectral_multiplier,
             },
         ]
     return torch.optim.AdamW(parameters, lr=config.get("lr", 2e-4), weight_decay=0.01)
@@ -356,6 +380,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
             or options.get("rgb_processing_scale", 1) != 1
             or options.get("raw_kernel_reconstruction", False)
             or options.get("raw_directional_residual", False)
+            or options.get("raw_spectral_residual", False)
         ):
             raise ValueError(
                 "Normalization augmentation requires full-resolution anchored RGB training"
@@ -523,6 +548,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
                 if model.config.raw_directional_residual
                 else ()
             )
+            + (("pretrained_rgb.raw_spectral.",) if model.config.raw_spectral_residual else ())
         )
         if incompatible.unexpected_keys or any(
             not k.startswith(allowed_prefixes) for k in incompatible.missing_keys
@@ -633,6 +659,10 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
             config.get("raw_directional_lr_multiplier", 1)
         ):
             raise ValueError("Resume directional learning rate differs; initialize a new run")
+        if float(state["config"].get("raw_spectral_lr_multiplier", 1)) != float(
+            config.get("raw_spectral_lr_multiplier", 1)
+        ):
+            raise ValueError("Resume spectral learning rate differs; initialize a new run")
         if state["config"].get("normalization_augmentation", "none") != normalization_policy:
             raise ValueError("Resume normalization augmentation differs; initialize a new run")
         if state["config"].get("data_seed_per_step", False) != config.get(

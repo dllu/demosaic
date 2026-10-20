@@ -59,6 +59,7 @@ class ModelConfig:
     raw_directional_residual: bool = False
     raw_directional_bank_context: bool = False
     raw_directional_bank_detach_input: bool = False
+    raw_spectral_residual: bool = False
     isotropic_groups: int = 6
     isotropic_blocks: int = 8
     isotropic_local_width: int = 32
@@ -411,6 +412,20 @@ class JointDemosaic(nn.Module):
             raise ValueError("RAW directional bank input detachment must be a boolean")
         if cfg.raw_directional_bank_detach_input and not cfg.raw_directional_bank_context:
             raise ValueError("RAW directional bank input detachment requires bank context")
+        if type(cfg.raw_spectral_residual) is not bool:
+            raise ValueError("RAW spectral residual must be a boolean")
+        if cfg.raw_spectral_residual and (
+            cfg.restoration_backbone != "pretrained-rgb"
+            or not cfg.variance_stabilization
+            or not cfg.physical_anchors
+            or cfg.rgb_processing_scale != 1
+            or cfg.raw_kernel_reconstruction
+            or cfg.raw_directional_residual
+            or cfg.adc_cfa_projection
+        ):
+            raise ValueError(
+                "RAW spectral residual requires native stabilized anchored RGB without other RAW heads"
+            )
         if cfg.raw_directional_residual and (
             cfg.restoration_backbone != "pretrained-rgb"
             or not cfg.variance_stabilization
@@ -545,6 +560,7 @@ class JointDemosaic(nn.Module):
                 raw_directional_residual=cfg.raw_directional_residual,
                 raw_directional_bank_context=cfg.raw_directional_bank_context,
                 raw_directional_bank_detach_input=cfg.raw_directional_bank_detach_input,
+                raw_spectral_residual=cfg.raw_spectral_residual,
             )
             if cfg.dino and cfg.dino_feature_fusion == "convnext-pyramid":
                 from .dino_pyramid import DinoPyramidContext
