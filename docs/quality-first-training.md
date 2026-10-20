@@ -30,14 +30,22 @@ Use a new training manifest; preserve originals, historical manifests, protected
 series and the GFX scene/siblings. This is targeted review, not a claim that
 every corpus photo was manually viewed.
 
-The [first 31-source visual review](results/source-quality-first31-visual-review.json)
-withholds four sources: a historic map scan, a photomontage, a predominantly
-defocused station scene, and an event image with visible noise/edge artifacts
-whose clean-target quality is uncertain. The other 27 remain, including fine
-foliage, fur, coral, architectural grids and hazy/low-contrast landscapes.
-Seven contact sheets and four larger native 1024 crops were actually inspected.
+The [current 63-source visual review](results/source-quality-visual-review-v2.json)
+withholds five sources: a historic map scan, a photomontage, a predominantly
+defocused station scene, and two images with visible noise/edge artifacts
+whose clean-target quality is uncertain. The other 58 remain, including fine
+foliage, wheat, fur, coral, architectural grids and hazy/low-contrast landscapes.
+Thirteen contact sheets and six larger native 1024 crops were actually inspected.
 The full ranking is still running; this is an initial review, not the final
 curated manifest or a trained-model result.
+
+The final membership freeze requires visual decisions for the top 32 sources
+under each noise condition and the top 16 under each IQA proxy, plus all
+additional sources already reviewed. `scripts/freeze_v43_curated_corpus.py
+--help` describes the freeze; `--check` lists pending decisions without writing
+training manifests. It checks the completed ranking receipt, source identities,
+the exact original V43 cohort and unchanged holdout memberships. Exclusions
+affect future training membership only.
 
 ## Matched V43 training comparison
 
@@ -72,6 +80,15 @@ Tests preserve old augmentation pixels/RNG exactly, show zero probability
 executes no optical kernel, and check continuous low-contrast geometry/means.
 Resume rejects changed probabilities/fractions. These are data-path checks,
 not evidence of a trained quality gain.
+
+A [discarded CPU training proof](results/v43-quality-CPU-training-proof-v1.json)
+also completes 24 actual V43 updates from its exact original EMA and architecture,
+covering Commons, native RAW and paired RAW. It executes three photographic
+contrast attenuations and one weak-texture sample, with zero optical PSFs;
+DINO stays frozen and gradients, optimizer state and EMA remain finite.
+This uses batch 1/native 32 before curation and provides no model-quality,
+production CUDA, throughput or validation result. The focused data/training
+checks pass 53 tests with one skip.
 
 ## Quality review
 

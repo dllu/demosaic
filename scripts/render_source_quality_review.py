@@ -17,7 +17,7 @@ def checksum(path, algorithm):
         return hashlib.file_digest(stream, algorithm).hexdigest()
 
 
-def main(plan_path, candidates, output):
+def main(plan_path, candidates, output, *, loss_count=8, proxy_count=4, skip_reviewed=None):
     plan = read(plan_path)
     output.mkdir(parents=True, exist_ok=False)
     operator = output / "renderer-executed-source.py"
@@ -25,6 +25,11 @@ def main(plan_path, candidates, output):
     snapshot = output / "candidate-snapshot.json"
     shutil.copyfile(candidates, snapshot)
     ranked = read(snapshot)
+    skipped = set()
+    if skip_reviewed:
+        decisions = output / "previous-decisions.json"
+        shutil.copyfile(skip_reviewed, decisions)
+        skipped = {r["id"] for r in read(decisions)["sources"]}
     rows = {
         r["id"]: r
         for r in (
@@ -35,14 +40,16 @@ def main(plan_path, candidates, output):
     selected = {}
 
     def add(record, category):
+        if record["id"] in skipped:
+            return
         entry = selected.setdefault(record["id"], {"record": record, "categories": []})
         entry["categories"].append(category)
 
     for name, records in ranked["high_loss"].items():
-        for record in records[:8]:
+        for record in records[:loss_count]:
             add(record, "high_loss:" + name)
     for name, records in ranked["IQA_proxies_not_automatic_labels"].items():
-        for record in records[:4]:
+        for record in records[:proxy_count]:
             add(record, "proxy:" + name)
     for record in ranked.get("metadata_candidates", [])[:24]:
         add(record, "metadata-title-review-cue")
@@ -145,6 +152,11 @@ def main(plan_path, candidates, output):
             "candidate_snapshot": ref(snapshot),
             "sources_scored_at_selection": ranked["sources_scored"],
             "ranking_complete_at_selection": ranked["complete"],
+            "selection": {
+                "loss_count": loss_count,
+                "proxy_count": proxy_count,
+                "skipped_previously_reviewed": len(skipped),
+            },
             "operator": ref(operator),
             "sources": records,
             "sheets": sheets,
@@ -159,5 +171,16 @@ if __name__ == "__main__":
     parser.add_argument("plan", type=Path)
     parser.add_argument("candidates", type=Path)
     parser.add_argument("output", type=Path)
+    parser.add_argument("--loss-count", type=int, default=8)
+    parser.add_argument("--proxy-count", type=int, default=4)
+    parser.add_argument("--skip-reviewed", type=Path)
     args = parser.parse_args()
-    main(args.plan.resolve(), args.candidates.resolve(), args.output.resolve())
+    assert args.loss_count > 0 and args.proxy_count > 0
+    main(
+        args.plan.resolve(),
+        args.candidates.resolve(),
+        args.output.resolve(),
+        loss_count=args.loss_count,
+        proxy_count=args.proxy_count,
+        skip_reviewed=args.skip_reviewed,
+    )

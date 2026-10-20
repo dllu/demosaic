@@ -30,7 +30,7 @@ metadata](docs/mature-cudnn-fullframe.md).
 
 Sources: [Roy Egloff](https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg)
 and [Dietmar Rabich](https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg),
-[CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/), modified by binning,
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), modified by binning,
 crop, simulated noise and restoration.
 
 Real GFX100S: DSCF3879 ISO 6400 → V43 → DSCF3880 ISO 100 f/5.6, native 160×160
