@@ -1,0 +1,135 @@
+{
+  "status": "completed-fixed-GT-innovation-split-review-no-serving-change",
+  "reviewed_UTC": "2026-10-20T06:51:58.132901+00:00",
+  "plan": {
+    "path": "/mnt/external/demosaic/experiments/spectral-innovation-split-v1/plan.json",
+    "sha256": "be3c54af418e3b98ff07febf26fe957ad52265d79555778ce3c3c35413836d3d"
+  },
+  "scores": {
+    "path": "/mnt/external/demosaic/experiments/spectral-innovation-split-v1/scores.json",
+    "sha256": "af326e272a21ed62114227aa8ca7ef7a257de4b705ad3d4c053d635ac8ecbb82"
+  },
+  "independent_array_audit": {
+    "path": "/mnt/external/demosaic/experiments/spectral-innovation-split-v1/array-audit.json",
+    "sha256": "3a628435e18eb7074f86e3fae921f413798798ebf3fac6b0cdf294ac416ba17f"
+  },
+  "actual_native_review_before_statistics": {
+    "path": "/mnt/external/demosaic/experiments/spectral-innovation-split-v1/manual-review-before-statistics.json",
+    "sha256": "d4794503a67d9e3323e6aeadab58185eb4e31c58d284ee023ec874599dd18337"
+  },
+  "checkpoint": {
+    "path": "/mnt/external/demosaic/experiments/spectral-v88-v89-resource-recovery-v2/work/runs/spectral/last.pt",
+    "sha256": "bf6e15b8d6493a9dad491576d9da7a7a710081f234e56870009db38b779a29a3",
+    "arm": "spectral",
+    "step": 4000,
+    "kind": "joint-checkpoint",
+    "label": "V89-original4000"
+  },
+  "per_condition_means_two_sources": [
+    {
+      "condition": "adc-only",
+      "source_count": 2,
+      "srgb_PSNR_delta_to_base": {
+        "full": 0.0524299868049809,
+        "unit": 0.818271415882073,
+        "oracle_target": 0.8183156458618335,
+        "oracle_discrepancy": -9.182037453570047e-05
+      },
+      "target_component_MSE_change": -3.3112540291816644e-06,
+      "discrepancy_increment_after_target": -2.731542129553862e-11,
+      "component_cross_term": -3.708093439465221e-11
+    },
+    {
+      "condition": "iso100-prior",
+      "source_count": 2,
+      "srgb_PSNR_delta_to_base": {
+        "full": 0.01898529344643407,
+        "unit": -1.4658899092142832,
+        "oracle_target": -0.7246072865211204,
+        "oracle_discrepancy": -1.4200326540796624
+      },
+      "target_component_MSE_change": -3.943288785495004e-06,
+      "discrepancy_increment_after_target": 2.9285925118312585e-06,
+      "component_cross_term": -2.1567096530542836e-06
+    },
+    {
+      "condition": "iso1600-prior",
+      "source_count": 2,
+      "srgb_PSNR_delta_to_base": {
+        "full": 0.007886727123842974,
+        "unit": -2.78771345923224,
+        "oracle_target": -0.3168187085931322,
+        "oracle_discrepancy": -3.4969497869911947
+      },
+      "target_component_MSE_change": -6.215024226911427e-06,
+      "discrepancy_increment_after_target": 1.267567220065205e-05,
+      "component_cross_term": -6.75702324292376e-06
+    },
+    {
+      "condition": "iso12800-prior",
+      "source_count": 2,
+      "srgb_PSNR_delta_to_base": {
+        "full": 0.004246252680129459,
+        "unit": -2.6232674162428467,
+        "oracle_target": -0.15357374614270114,
+        "oracle_discrepancy": -3.4571010457155325
+      },
+      "target_component_MSE_change": -9.866929907830304e-06,
+      "discrepancy_increment_after_target": 2.5151025680285034e-05,
+      "component_cross_term": -1.1577949612626388e-05
+    },
+    {
+      "condition": "shadows",
+      "source_count": 2,
+      "srgb_PSNR_delta_to_base": {
+        "full": 0.003824625667274262,
+        "unit": -1.8665012277440916,
+        "oracle_target": 0.49176513889500484,
+        "oracle_discrepancy": -2.814930542179159
+      },
+      "target_component_MSE_change": -1.8871741881689228e-07,
+      "discrepancy_increment_after_target": 5.010467828501562e-07,
+      "component_cross_term": -2.21863160690127e-07
+    },
+    {
+      "condition": "highlights",
+      "source_count": 2,
+      "srgb_PSNR_delta_to_base": {
+        "full": -0.0007591390674406284,
+        "unit": -6.313966376691319,
+        "oracle_target": -14.904103458531514,
+        "oracle_discrepancy": -12.816731865446936
+      },
+      "target_component_MSE_change": -0.016736298719723784,
+      "discrepancy_increment_after_target": 0.012505887715916804,
+      "component_cross_term": -0.026372944565788516
+    },
+    {
+      "condition": "legacy-noise",
+      "source_count": 2,
+      "srgb_PSNR_delta_to_base": {
+        "full": 0.005429740318344756,
+        "unit": -2.7949100182177524,
+        "oracle_target": -0.2789478691042184,
+        "oracle_discrepancy": -3.5844338068010053
+      },
+      "target_component_MSE_change": -8.342918254438493e-06,
+      "discrepancy_increment_after_target": 1.9183086230223227e-05,
+      "component_cross_term": -9.527028257603197e-06
+    }
+  ],
+  "findings": [
+    "The high-noise visible sky grid and canopy-edge banding occur in the observation-to-target discrepancy term. Target-only removes the strong grid, but does not recover fine canopy cords.",
+    "Target-derived correction reduces unclipped camera RGB MSE on all14 original evaluation fields, yet its mean displayed sRGB PSNR loses in five of seven conditions. Target access does not make this fixed RGB backprojection reliable.",
+    "At highest noise, discrepancy-component energy is3.84/2.72 times target-component energy. Increment after target is positive in both sources; cross terms matter and are retained.",
+    "In clipped highlights, both oracle terms independently cause large opposing color casts and partly cancel. Target-only mean sRGB PSNR is -14.9041dB versus base; discrepancy-only -12.8167dB. This cannot be described as only stochastic-noise failure.",
+    "All14 complete fields contract measured-CFA error under the target term, as expected from A*K=I and mask weights in[0,1]. That property does not guarantee full-RGB, local-ROI or displayed color fidelity."
+  ],
+  "decision": "Retain rejection of unconditional unit gating. Neither GT-derived counterfactual is an inference method or a trained quality gain. Do not install a target-informed correction or choose a new gate from this pilot.",
+  "next_evidence": "A future quality experiment should learn joint RGB reconstruction and noise/semantic selectivity rather than assume a fixed measured-CFA/Malvar innovation becomes a reliable RGB update when its amplitude is increased. A matched late-DINO refinement study remains a distinct hypothesis requiring a fixed plan and genuine engineering/trained-quality checks.",
+  "training_updates": 0,
+  "GPU_used": false,
+  "new_GFX_oracle_or_reference_scores": false,
+  "serving_changed": false,
+  "scope": "Read-only CPU diagnostic of the seven original two-source photo conditions and fixed V89 arrays. No learned model loaded/updated, no GPU, no GFX oracle/GT assumption, no protected-final source, no new gate selection or inference/serving method. Score both original border8/native240 field and displayed native160 ROI. Prepare computes engineering checks and native images only; score requires actual pre-statistics view receipt. No quality acceptance criterion or promotion follows."
+}

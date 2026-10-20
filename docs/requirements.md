@@ -49,6 +49,12 @@ six noisy conditions and the cached GFX wall gains a colored periodic grid.
 All54 triplets/90 native cells are viewed before statistics, all input/output
 identities are exact and84 independently recomputed PSNR scalars agree within
 .000008dB. No serving change, full427 extension or promotion follows.
+The [GT-informed innovation split](spectral-innovation-split.md) then isolates
+visible high-noise patterns in the observation discrepancy, while the
+target-derived term itself creates highlight color casts. Full-field measured-CFA
+contraction does not guarantee displayed RGB fidelity. All28 native cells and
+644 independently recomputed metric/error scalars pass; these are oracle
+diagnostics, without a new model, inference rule or quality promotion.
 
 The [CPU noise-proxy diagnostic](stabilized-noise-proxy.md) checks transformed
 variance and interior demosaicing covariance against generated simulations and

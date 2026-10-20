@@ -15,6 +15,11 @@ Its [fixed photo/GFX follow-up](spectral-photo-components.md) rejects a blanket
 unit gate: both photos lose sRGB PSNR/SSIM in all six noisy conditions and the
 GFX wall gains a colored periodic grid. All54 triplets/90 native cells and84
 independent saved-array PSNR scalars are checked. No new model or policy follows.
+The [target-informed component split](spectral-innovation-split.md) subsequently
+shows that observation discrepancy carries the high-noise grid, while even
+the target-only correction can harm displayed colors. Both oracle terms use GT;
+neither is an inference method. All28 native cells and644 independent arithmetic
+checks pass, without training or GPU inference.
 
 The [completed V86/V87 input-context review](training-context-original4k-review.md)
 finds +.00099dB matched photo PSNR with a95% source interval crossing zero.

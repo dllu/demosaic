@@ -1,0 +1,107 @@
+{
+  "status": "completed-independent-Torch-CPU-innovation-split-audit",
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/scripts/audit_spectral_innovation_split.py",
+    "sha256": "db5f74f7aaa71219824a727c7e530691677a7f67014367fdc4b0f54dc5f746f0"
+  },
+  "plan": {
+    "path": "/mnt/external/demosaic/experiments/spectral-innovation-split-v1/plan.json",
+    "sha256": "be3c54af418e3b98ff07febf26fe957ad52265d79555778ce3c3c35413836d3d"
+  },
+  "scores": {
+    "path": "/mnt/external/demosaic/experiments/spectral-innovation-split-v1/scores.json",
+    "sha256": "af326e272a21ed62114227aa8ca7ef7a257de4b705ad3d4c053d635ac8ecbb82"
+  },
+  "original_array_fields_byte_exact": 98,
+  "FP64_Torch_FFT_and_measured_sites_max_abs_error": 4.996003610813204e-16,
+  "frozen_FP32_MHC_replay_max_abs_error": 1.230444850452983e-07,
+  "MSE_terms_checked": 224,
+  "MSE_terms_max_abs_error": 1.3877787807814457e-17,
+  "metrics_checked": 420,
+  "MSE_max_abs_error": 2.7755575615628914e-17,
+  "PSNR_FP32_renderer_max_abs_error": 2.4080985028263058e-06,
+  "global_measured_CFA_contraction_all14": [
+    {
+      "condition": "adc-only",
+      "before": [
+        5.1863200409316664e-06,
+        8.375771930797688e-06
+      ],
+      "after": [
+        9.923821730929895e-08,
+        5.712760845841334e-09
+      ]
+    },
+    {
+      "condition": "iso100-prior",
+      "before": [
+        6.9839480148194375e-06,
+        9.63885184947516e-06
+      ],
+      "after": [
+        1.8213890867682663e-06,
+        1.7737588562737292e-07
+      ]
+    },
+    {
+      "condition": "iso1600-prior",
+      "before": [
+        1.83722081999491e-05,
+        2.6921676156747775e-05
+      ],
+      "after": [
+        1.446109461548818e-05,
+        1.2148514237804966e-05
+      ]
+    },
+    {
+      "condition": "iso12800-prior",
+      "before": [
+        3.877702223381847e-05,
+        9.966814333227312e-05
+      ],
+      "after": [
+        3.276618816792026e-05,
+        8.00295528581115e-05
+      ]
+    },
+    {
+      "condition": "shadows",
+      "before": [
+        7.412368190158085e-07,
+        2.5077479839655598e-06
+      ],
+      "after": [
+        5.967318181534904e-07,
+        2.1823868773369474e-06
+      ]
+    },
+    {
+      "condition": "highlights",
+      "before": [
+        0.07667914684302643,
+        0.049510306850675756
+      ],
+      "after": [
+        0.0722136659796283,
+        0.02364031295791757
+      ]
+    },
+    {
+      "condition": "legacy-noise",
+      "before": [
+        2.84316165442093e-05,
+        5.455277688706996e-05
+      ],
+      "after": [
+        2.39746579011732e-05,
+        3.6467987872581414e-05
+      ]
+    }
+  ],
+  "native_cells_exact": 28,
+  "source_triplets_exact": 20,
+  "CPU_RNG_unchanged": true,
+  "CUDA_initialized": false,
+  "scope": "Checks conditional GT-derived diagnostic arithmetic, not an inference method. Full-field measured-site contraction does not guarantee local, unmeasured-RGB or display fidelity. No GFX GT or production/training change."
+}

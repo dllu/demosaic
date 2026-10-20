@@ -1,0 +1,46 @@
+{
+  "status": "actually-viewed-both-native-boards-before-new-component-quality-statistics",
+  "recorded_UTC": "2026-10-20T06:47:30.595006+00:00",
+  "preparation": {
+    "path": "/mnt/external/demosaic/experiments/spectral-innovation-split-v1/preparation.json",
+    "sha256": "f792ba47d7051eb31d3999352586f48e003ed4ed2d095d71c7fb47b000647e27"
+  },
+  "boards": [
+    {
+      "condition": "iso12800-prior",
+      "board": {
+        "path": "/mnt/external/demosaic/experiments/spectral-innovation-split-v1/iso12800-prior/native.png",
+        "sha256": "969951cbb16ffb25bd999d5992187caa501bac65922daa058ab3a3fb44256e31"
+      },
+      "receipt": {
+        "path": "/mnt/external/demosaic/experiments/spectral-innovation-split-v1/iso12800-prior/native.json",
+        "sha256": "81d15f3264678b37491fda083aa0a20edc539ad5d55c2c88710f53308ce8178d"
+      },
+      "cells": 14,
+      "triplets": 10
+    },
+    {
+      "condition": "highlights",
+      "board": {
+        "path": "/mnt/external/demosaic/experiments/spectral-innovation-split-v1/highlights/native.png",
+        "sha256": "34d9ae7ad222590ab1510f265aa96f597c7fbd2b3d2a790162739e7e2ae62320"
+      },
+      "receipt": {
+        "path": "/mnt/external/demosaic/experiments/spectral-innovation-split-v1/highlights/native.json",
+        "sha256": "3d7d7c09448e802571350fe27837c7fb99463f985fc11c7a4dcaa3a9fcfc470e"
+      },
+      "cells": 14,
+      "triplets": 10
+    }
+  ],
+  "all_boards_actually_viewed": true,
+  "statistics_interpreted": false,
+  "native_pixels_resized": false,
+  "cells": 28,
+  "triplets": 20,
+  "observations": {
+    "iso12800-prior": "Trained/base look close. Unit has grid in building sky and banding/color on canopy edge. ORACLE target-term output has no comparable strong grid but still does not restore GT radial canopy cords. ORACLE discrepancy-term output carries the visible sky grid and canopy-edge banding, like unit.",
+    "highlights": "Unit has green casts. ORACLE discrepancy-only output has much stronger green/cyan casts on building and green canopy edge. ORACLE target-only output itself has strong pink/magenta on canopy edge and building, absent exact GT. The two terms partially cancel visibly; it would be incorrect to claim the target-only term is harmless in highlights."
+  },
+  "scope": "Both oracle rows use exact synthetic GT to split a fixed operator. They are diagnostic counterfactuals, not deployable inference or trained models. No GFX oracle is constructed."
+}

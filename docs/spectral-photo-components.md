@@ -180,6 +180,10 @@ The inference result isolates a failure of the fixed innovation's selectivity
 on these photographs. It does not isolate whether phase ambiguity, statistical
 noise assumptions, clipping, window dependence or another mechanism causes
 each artifact. Those need evidence before choosing another gate or support
-rule. Analytic carrier recovery alone is insufficient; no production policy,
+rule. The subsequent [GT-informed component split](spectral-innovation-split.md)
+locates high-noise grid/banding in the observation discrepancy, while showing
+that even the target-derived correction can create strong highlight color casts.
+Its oracle rows are diagnostics, not inference methods. Analytic carrier
+recovery alone is insufficient; no production policy,
 checkpoint, training schedule or protected-final data changes. The complete
 project quality and100MP/10s objectives remain open.
