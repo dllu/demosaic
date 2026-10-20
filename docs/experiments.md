@@ -6,6 +6,10 @@ RGB heads after the mature trunk. [Engineering](late-rgb-engineering.md) passes
 unit/regression and genuine CPU/CUDA mixed-domain/restart checks, including
 separate process-boundary resumes. The original4000 budgets are launched;
 trained quality and native/full-frame eligibility remain unmeasured.
+The [validated final-review queue](late-rgb-review-preparation.md) is frozen
+against all47 actual model modules and waits for both exact4000 exits. It
+refuses engineering checkpoints as quality evidence and retains the fixed
+matched-SSIM/all-ADC criteria and unchanged native-pixel packaging.
 
 The [completed V88/V89 spectral review](spectral-original4k-review.md) finishes
 both original4000 budgets and all native/numerical checks. Matched photo PSNR

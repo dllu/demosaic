@@ -85,6 +85,9 @@ as specified in the fixed protocol. Production-plan SHA256:
 `a18f483213875463f02b50eff76fb112a4a7b662f1973742d0d4c6f3020e1d98`.
 Root: `/mnt/external/demosaic/experiments/late-rgb-v90-v91-original4k-v1/`.
 The live `status.json` is operational state, not a completed quality receipt.
+The [final evaluation queue](late-rgb-review-preparation.md) is separately
+validated and frozen against the actual training modules; it waits for both
+successful original4000 endpoints before any new quality predictions.
 
 One arm runs at a time, with48GiB available for60s before launch,24GiB CUDA
 quota, root64GiB/external500GiB reserves and14,400s arm/resource-wait bounds.
