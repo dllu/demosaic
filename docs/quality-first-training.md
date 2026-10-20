@@ -21,6 +21,15 @@ or optical augmentation. Only training rows enter. A genuine four-source/native 
 CPU proof passes before GPU scoring; a separate unit check matches every
 per-image loss term to V43's original training objective.
 
+The original worker remains running under an explicit supervision handoff at
+`.cache/quality-first-20261020/corpus-source-screen-supervision-v2/status.json`.
+Its projected duration was close to the first controller's six-hour bound;
+the new ceiling is eight hours from the **original** worker start. The scoring
+plan/source, PID, checkpoint, inputs and 24 GiB RAM / 64 GiB root / 500 GiB
+external reserves are unchanged. The exact old supervisor exited; the worker
+was neither stopped nor restarted. Use the new status path, since the old
+controller's preserved status is historical.
+
 Rank high-loss images alongside low-gradient, high-frequency and bright/clipped
 proxies. Inspect full-source context and native pixels for grain, blur,
 oversharpening, processing artifacts and non-photographic content. **High loss
