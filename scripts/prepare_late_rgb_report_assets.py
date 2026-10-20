@@ -10,8 +10,8 @@ from review_late_rgb_trial import BOUNDARY, require_completed
 from train_directional_bank_trial import guard, read, ref
 
 
-def ready(plan):
-    require_completed(plan)
+def ready(plan, *, training_checker=require_completed, boundary_status=BOUNDARY, labels=None):
+    training_checker(plan)
     root = Path(plan["root"])
     queue = read(root / "queue-launch.json")
     assert queue["plan"] == ref(root / "plan.json")
@@ -44,9 +44,10 @@ def ready(plan):
         raise ValueError("Retained reference supplement incomplete")
     boundary = read(root / "training-boundary.json")
     if (
-        boundary["status"] != BOUNDARY
+        boundary["status"] != boundary_status
         or boundary["engineering_preflight"] is not False
-        or [c["label"] for c in boundary["checkpoints"]] != ["V90-original4000", "V91-original4000"]
+        or [c["label"] for c in boundary["checkpoints"]]
+        != (labels if labels is not None else ["V90-original4000", "V91-original4000"])
         or any(c["step"] != 4000 for c in boundary["checkpoints"])
     ):
         raise ValueError("Expected genuine completed late RGB original4000 endpoints")

@@ -83,6 +83,12 @@ extension or promotion. Its external operational status is
 The [observed startup receipt](results/late-rgb-head-only-startup-v1.json)
 verifies both exact live owners, actual first-forward parent parity and the
 first16 source/forward/loss fingerprints against original V90.
+The independent [first1000 state audit](results/late-rgb-head-only-first1k-state-v1.json)
+now confirms all91 common model/EMA tensors still match V63 byte-for-byte,
+finite115/115/24 states and all56 logged observations through1000 matching V90.
+This is a retained engineering milestone, not early quality selection.
+The [full quality/native queue](late-rgb-head-only-review-preparation.md) is
+source-frozen and verified waiting for exact successful training exit.
 
 Original4000 completion, full FP32 quality evaluation and actual native/GFX
 viewing remain separate requirements. The completed V90 is a fixed historical

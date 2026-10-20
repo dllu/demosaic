@@ -20,6 +20,10 @@ gradient isolation, actual mixed-data updates and fresh-process restart.
 Completed V90 is explicitly a fixed historical exploratory reference, since
 its outcomes informed this choice. Freezing remains an unproven quality
 hypothesis; inference architecture and working defaults remain unchanged.
+Its [full quality/native review queue](late-rgb-head-only-review-preparation.md)
+now has genuine-state CPU integration, unchanged historical metric/native
+packaging replay and a source-frozen serial queue. The retained first1000 state
+preserves the common model/EMA bytes, but this does not establish a quality gain.
 
 The [October20 PixIE follow-up](research-pixie-followup.md) records a recent
 semantic-routing candidate and its differences from our current fusion.

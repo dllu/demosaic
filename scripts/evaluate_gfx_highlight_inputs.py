@@ -17,7 +17,7 @@ from demosaic.safety import writable_path
 
 
 @torch.inference_mode()
-def main(inputs, input_audit, checkpoints, output, rawnind=None):
+def main(inputs, input_audit, checkpoints, output, rawnind=None, *, checkpoint_labels=None):
     os.nice(5)
     torch.set_num_threads(2)
     assert not torch.cuda.is_initialized()
@@ -36,6 +36,10 @@ def main(inputs, input_audit, checkpoints, output, rawnind=None):
     provenance = [
         {"path": str(path), "sha256": sha(path), "kind": "checkpoint"} for path in checkpoints
     ]
+    if checkpoint_labels is not None:
+        assert set(checkpoint_labels) == {r["sha256"] for r in provenance}
+        assert all(isinstance(v, str) and v for v in checkpoint_labels.values())
+        assert len(set(checkpoint_labels.values())) == len(checkpoint_labels)
     if rawnind is not None:
         provenance.append(
             {
@@ -76,7 +80,9 @@ def main(inputs, input_audit, checkpoints, output, rawnind=None):
             model, state = load_checkpoint(record["path"], "cpu")
             record.update(
                 step=state["step"],
-                label=Path(state["config"]["run"]).name + f":step{state['step']}",
+                label=checkpoint_labels[record["sha256"]]
+                if checkpoint_labels is not None
+                else Path(state["config"]["run"]).name + f":step{state['step']}",
                 model_config=model.config.to_dict(),
             )
             del state

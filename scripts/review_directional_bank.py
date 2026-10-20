@@ -409,7 +409,9 @@ def worker(plan_path, stage):
         )
         return
     assert psutil.virtual_memory().available > 40 * 2**30
-    assert shutil.disk_usage(root).free > 128 * 2**30
+    output_reserve = float(plan.get("output_disk_reserve_gib", 128))
+    assert 64 <= output_reserve <= 128
+    assert shutil.disk_usage(root).free > output_reserve * 2**30
     torch.set_num_threads(4)
     device = torch.device("cuda", torch.cuda.current_device())
     fraction = min(
