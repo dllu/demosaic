@@ -4,8 +4,9 @@ The [quality study](quality-first-training.md) keeps V43's architecture and
 separates curated membership from the fine-detail augmentation package.
 The checks below establish engineering behavior only. Source ranking, final
 visual decisions, the production freeze and all six fresh CPU/CUDA preflights
-are complete. V93 completed its 20k control stage and V94 larger-corpus training
-is running. Matched held-out quality evaluation and native review remain pending.
+are complete. V93 and V94 completed their 20k stages; V95 is running after an
+explicit recovery from a system-disk reserve failure. Matched held-out quality
+evaluation and native review remain pending.
 
 ## Data, training and reporting checks
 
@@ -83,9 +84,17 @@ and frozen inputs. All 801 scheduled training rows are finite; all five
 validations cover the same 28 condition/CFA cells on eight sources. Its first24
 production inputs exactly match the discarded CUDA probe. Validation-best is
 step20,000 in this run; final20k EMA remains the predefined primary endpoint.
-V94 is running on the larger corpus. These are training/artifact checks;
+V94 completion is checked below. These are training/artifact checks;
 restoration quality still requires the complete matched evaluation and native
 crop review.
+
+The [completed V94 larger-data control](results/v43-quality-V94-completed-training-v1.json)
+passes the same complete saved-state audit: 20k updates, 20,160 DINO calls,
+all retained states and five scheduled validations. Its validation-best is at
+12k; final20k EMA remains primary. Across all 801 logged batches, the V93/V94
+control audit preserves 390 shared native/paired observations and changes 411
+Commons observations. This verifies the intended data comparison rather than
+restoration quality.
 
 `scripts/audit_v43_quality_training.py` replays these saved-state checks for each
 completed arm with CUDA hidden. Each receipt retains the executed audit source.
@@ -125,6 +134,30 @@ directory, retaining plans/code locally and fixing free-space reserves at
 64 GiB on the system disk and 384 GiB externally before the production freeze.
 The default local-artifact policy remains 64/500 GiB. The source scanner completed
 under its original 500 GiB floor before production preparation.
+
+V95 later stops at the system-disk reserve around logged step1,025, before its
+first saved training checkpoint. The original status/logs and all 62 failed-trial
+files are preserved with byte hashes and a path mapping. The
+[cold-checkpoint relocation](results/cold-checkpoint-relocation-20261021-v1.json)
+moves 66 owned old experiment inodes/116 path aliases to the external SSD,
+reclaiming about 32.4 GiB. Original checkpoint bytes, logical paths, modes and
+mtimes remain available; current study inputs, source code, photos and historical
+receipts stay unchanged. Current frozen source/input guards pass afterward.
+
+`scripts/recover_v43_quality_trial.py` prepares this explicit early-V95 recovery
+only after verifying the terminal owner identities, completed controls and
+preflights, matched control inputs, and restored resources. It archives the
+unsaved failed trial, then runs the exact original frozen worker/configuration
+from the original V43 initializer for a fresh20k stage. It keeps the resource
+and runtime bounds and single-attempt claims. The completed V93/V94 stages are
+reused. Final status still requires the full three-arm observation audit and
+will retain the recovery provenance.
+
+The [actual recovery observation](results/v43-quality-V95-manual-recovery-v1.json)
+confirms the new worker continues beyond the archived prefix. All 42 scheduled
+recorded batch fingerprints through step1,025 match exactly; the recorded new
+losses and gradients are finite. This checks logged inputs, rather than claiming
+bitwise equality of unlogged steps or floating-point training states.
 
 ## Evaluation launcher integration
 

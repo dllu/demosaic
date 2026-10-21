@@ -69,11 +69,12 @@ validation best and 4k/8k/12k/16k diagnostics retained separately.
 All six [final-cohort CPU/CUDA preflights](results/v43-quality-final-curated-preflights-v1.json)
 passed: 24 discarded updates per arm/phase, 144 actual training/DINO forwards.
 Independent checkpoint/metric checks pass, and paired/native observations match
-across controls as required. **V93 completed 20,000 updates; V94 is running on
-the larger corpus, and V95 follows serially.** The
-[completed-control audit](results/v43-quality-V93-completed-training-v1.json)
-verifies its final EMA, all retained checkpoints, optimizer counters and input
-traces. Full matched quality evaluation and native crop review remain pending.
+across controls as required. **V93 and V94 completed 20,000 updates each; V95 is
+running its fine-detail treatment.** Independent saved-state audits of
+[V93](results/v43-quality-V93-completed-training-v1.json) and
+[V94](results/v43-quality-V94-completed-training-v1.json) verify final EMAs,
+retained checkpoints, optimizer counters and input traces. Full matched quality
+evaluation and native crop review remain pending.
 
 The launcher can reserve a fresh `/mnt/external/demosaic` artifact directory
 through `--artifact-root`. Plans/code remain local; checkpoints and run traces
@@ -84,10 +85,16 @@ scan completed under its original 500 GiB external floor. The production plan
 is frozen at `.cache/quality-first-20261020/V43-curated-matched-training-v1/`.
 Its controller requires 48 GiB available RAM sustained for 60 s before each
 stage, with a two-hour resource-wait bound. Initial headroom was about 11 GiB;
-the original controller waited, then ran the six preflights, completed V93 and
-started V94
-without changing its resource policy or interfering with other workloads.
-The active RAM floor is 24 GiB. Check `status.json` there for live stage progress.
+the original controller waited, then ran the six preflights and completed both
+controls. V95 stopped around logged step1,025 when the system-disk reserve was
+crossed. Its unsaved partial trial is archived. After
+[relocating cold checkpoint copies](results/cold-checkpoint-relocation-20261021-v1.json)
+to restore about 32 GiB, explicit manual recovery restarts only V95 from the same
+original V43 weights/configuration. The
+[recovery receipt](results/v43-quality-V95-manual-recovery-v1.json) records exact
+replay of all 42 logged input batches through step1,025. The completed controls and passed preflights
+are reused. All resource bounds stay fixed, including the 24 GiB active RAM floor.
+Check the original `status.json` for live progress; it records the recovery plan.
 
 ## Quality review
 
