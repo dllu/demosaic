@@ -37,7 +37,7 @@ to initialize production or to claim a quality gain.
 
 The same controller has started the real V93 20k stage from the original V43
 EMA, rather than continuing its discarded probe. The immutable startup
-observation records 175 logged updates with finite losses and gradient norms,
+observation records production through logged step175, with all recorded losses and gradient norms finite,
 live controller/worker identities, and about55 GiB available RAM. V94 and V95
 will follow serially under the same frozen plan
 `2fec2f3e77e15791d1ece4e10e65133a84be234eba0702a4d4dcd643753f7556`.
