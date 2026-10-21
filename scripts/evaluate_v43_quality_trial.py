@@ -91,6 +91,25 @@ def prepare(training_root, root, *, cpu_proof=False, artifact_root=None, palette
                 "initialized_from": {**training["parent"], "step": 20000},
             }
         checkpoints.append(record)
+    reference_witnesses = {}
+    if palette:
+        review_path = REPO / "docs/results/v43-curated-original20k-complete-review-v1.json"
+        review = read(review_path)
+        previous = read(review["plan"]["path"])
+        assert ref(review["plan"]["path"]) == review["plan"]
+        assert [r["arm"] for r in previous["checkpoints"]] == ["V43", "V93", "V94", "V95"]
+        assert [r["sha256"] for r in checkpoints[:2]] == [
+            previous["checkpoints"][i]["sha256"] for i in (0, 3)
+        ]
+        inputs += [ref(review_path), review["plan"]]
+        for stage, panel in review["panels"].items():
+            witness = panel["result"]
+            assert ref(witness["path"]) == witness
+            result = read(witness["path"])
+            assert result["plan"] == review["plan"] and not live(result["owner"])
+            assert result["weights_DINO_config_parameter_ids_RNG_and_inputs_preserved"]
+            reference_witnesses[stage] = witness
+            inputs.append(witness)
     root = root.resolve()
     assert root.is_relative_to(REPO / ".cache")
     root.mkdir(parents=True, exist_ok=False)
@@ -198,6 +217,7 @@ def prepare(training_root, root, *, cpu_proof=False, artifact_root=None, palette
         "training_status": ref(status_path),
         "training_plan": ref(training_root / "plan.json"),
         "checkpoints": checkpoints,
+        "reference_witnesses": reference_witnesses,
         "cpu_proof": cpu_proof,
         "stages": ["photo"]
         if cpu_proof
@@ -283,6 +303,24 @@ def audit_triplets(output, crops):
         "shared_source_groups": len(groups),
         "common_noisy_and_reference_pixels_exact": True,
     }
+
+
+def check_reference_witnesses(invariants, previous):
+    """Check fresh V43/V95 state, counts and sampled inputs against the reviewed run."""
+    assert len(invariants) == len(previous) == 4
+    counts = {}
+    for name, current_index, previous_index in (("V43", 0, 0), ("V95", 1, 3)):
+        actual, expected = invariants[current_index], previous[previous_index]
+        assert actual == expected, name
+        counts[name] = {
+            "model_SHA256": actual["model_SHA256"],
+            "sampled_input_hashes_exact_previous": len(
+                actual["sampled_input_hashes_before_after_exact"]
+            ),
+            "forwards": actual["forwards"],
+            "observations": actual["observations"],
+        }
+    return counts
 
 
 def worker(plan_path, stage):
@@ -548,6 +586,11 @@ def worker(plan_path, stage):
     else:
         assert not torch.cuda.is_initialized()
     triplets = audit_triplets(output, report["native_crops"])
+    witness = plan.get("reference_witnesses", {}).get(stage)
+    witness_audit = None
+    if witness is not None:
+        assert ref(witness["path"]) == witness
+        witness_audit = check_reference_witnesses(invariants, read(witness["path"])["invariants"])
     guard(plan)
     save(
         root / (stage + "-result.json"),
@@ -561,6 +604,7 @@ def worker(plan_path, stage):
             "weights_DINO_config_parameter_ids_RNG_and_inputs_preserved": True,
             "arithmetic": arithmetic,
             "triplets": triplets,
+            "reviewed_reference_observation_witness": witness_audit,
             "report": ref(
                 output
                 / ("report.json" if stage in ("color", "gfx", "gfx-highlights") else "summary.json")

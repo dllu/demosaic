@@ -90,6 +90,13 @@ Require exact checkpoint stage/initializer lineage: V43 step 2k, V95 stage 20k
 from V43, and V96/V97 stage 4k from V95. The evaluation driver supports these
 explicit per-checkpoint expectations without changing the earlier study's gates.
 
+The evaluator also pins the reviewed V43/V95 stage receipts. Their fresh model
+hashes, forward/DINO counts, observation coverage and sampled physical-input
+hashes must match that earlier evaluation. Thirteen negative/sensitivity tests
+and a [seven-panel metadata replay](results/v95-palette-reference-witness-preparation-v1.json)
+check this gate without inference. This preparation reuses no predictions and
+does not qualify fresh candidate results; the live training snapshot is unchanged.
+
 Judge color tails alongside low-contrast detail and source/scene uncertainty;
 a better photographic mean alone is insufficient. Publish at least two small
 native noisy/restored/GT triplets per model with common coordinates/display
