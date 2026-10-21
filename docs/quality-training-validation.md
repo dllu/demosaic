@@ -4,8 +4,8 @@ The [quality study](quality-first-training.md) keeps V43's architecture and
 separates curated membership from the fine-detail augmentation package.
 The checks below establish engineering behavior only. Source ranking, final
 visual decisions, the production freeze and all six fresh CPU/CUDA preflights
-are complete. V93 production training has started; there is no completed new
-20k endpoint, measured quality improvement or speed result yet.
+are complete. V93 completed its 20k control stage and V94 larger-corpus training
+is running. Matched held-out quality evaluation and native review remain pending.
 
 ## Data, training and reporting checks
 
@@ -70,8 +70,25 @@ condition/CFA cells on eight validation sources, and the same worker continues
 beyond step4,000. The older parent omits 19 later configuration defaults; all
 shared fields and effective configurations match. An initial raw-dictionary
 audit failure and its corrected CPU-only check are preserved. This is a
-training diagnostic; the fixed20k endpoint and full native quality review remain
-outstanding.
+training diagnostic preceding the completed20k control below. Full native
+quality review remains outstanding.
+
+The [completed V93 control](results/v43-quality-V93-completed-training-v1.json)
+now records 20,000 optimizer/training forwards, 160 validation forwards and
+20,160 DINO calls. Its original worker exited successfully. The independent
+CPU-only auditor checks all four diagnostic files plus final and validation-best
+checkpoints: original lineage/effective architecture, finite model/EMA/Adam
+states, correct counters, exact curated/native/paired/validation/protocol hashes,
+and frozen inputs. All 801 scheduled training rows are finite; all five
+validations cover the same 28 condition/CFA cells on eight sources. Its first24
+production inputs exactly match the discarded CUDA probe. Validation-best is
+step20,000 in this run; final20k EMA remains the predefined primary endpoint.
+V94 is running on the larger corpus. These are training/artifact checks;
+restoration quality still requires the complete matched evaluation and native
+crop review.
+
+`scripts/audit_v43_quality_training.py` replays these saved-state checks for each
+completed arm with CUDA hidden. Each receipt retains the executed audit source.
 
 The [CPU reporting integration](results/v43-quality-reporting-CPU-proof-v4.json)
 also passes using the original V43 and three actual discarded 24-update EMAs:

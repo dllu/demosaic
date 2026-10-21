@@ -69,8 +69,11 @@ validation best and 4k/8k/12k/16k diagnostics retained separately.
 All six [final-cohort CPU/CUDA preflights](results/v43-quality-final-curated-preflights-v1.json)
 passed: 24 discarded updates per arm/phase, 144 actual training/DINO forwards.
 Independent checkpoint/metric checks pass, and paired/native observations match
-across controls as required. **V93 production training has started**; V94 and V95
-follow serially. There is no completed 20k endpoint or new quality result yet.
+across controls as required. **V93 completed 20,000 updates; V94 is running on
+the larger corpus, and V95 follows serially.** The
+[completed-control audit](results/v43-quality-V93-completed-training-v1.json)
+verifies its final EMA, all retained checkpoints, optimizer counters and input
+traces. Full matched quality evaluation and native crop review remain pending.
 
 The launcher can reserve a fresh `/mnt/external/demosaic` artifact directory
 through `--artifact-root`. Plans/code remain local; checkpoints and run traces
@@ -81,7 +84,8 @@ scan completed under its original 500 GiB external floor. The production plan
 is frozen at `.cache/quality-first-20261020/V43-curated-matched-training-v1/`.
 Its controller requires 48 GiB available RAM sustained for 60 s before each
 stage, with a two-hour resource-wait bound. Initial headroom was about 11 GiB;
-the original controller waited, then ran the six preflights and started V93
+the original controller waited, then ran the six preflights, completed V93 and
+started V94
 without changing its resource policy or interfering with other workloads.
 The active RAM floor is 24 GiB. Check `status.json` there for live stage progress.
 

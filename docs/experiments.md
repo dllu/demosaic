@@ -40,7 +40,7 @@ including early versions, negative studies and engineering details.
 The completed scan covers 88,508 training sources at 4×/8×. Targeted visual review
 of 371 sources withholds 24 while retaining legitimate difficult detail. The
 frozen matched V43 study uses 39,983 control / 88,484 larger training sources;
-all six fresh CPU/CUDA preflights passed and V93 production training has started.
+all six fresh CPU/CUDA preflights passed, V93 completed 20k and V94 is running.
 Originals and historical manifests remain read-only. Validation/test and the
 standing GFX scene remain outside training. See the [source review](corpus-source-review.md).
 
