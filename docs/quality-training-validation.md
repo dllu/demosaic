@@ -4,9 +4,9 @@ The [quality study](quality-first-training.md) keeps V43's architecture and
 separates curated membership from the fine-detail augmentation package.
 The checks below establish engineering behavior only. Source ranking, final
 visual decisions, the production freeze and all six fresh CPU/CUDA preflights
-are complete. V93 and V94 completed their 20k stages; V95 is running after
-resource-guard interruptions. Matched held-out quality
-evaluation and native review remain pending.
+are complete. V93, V94 and V95 completed their 20k stages and independent
+saved-state audits. The full matched quality evaluation is running; native
+review remains pending.
 
 ## Data, training and reporting checks
 
@@ -190,6 +190,18 @@ recorded losses/gradients stay finite through step 8,300 in the snapshot.
 This qualifies actual reserve-triggered continuation, without proving bitwise
 learned-state parity or image quality. The original two guard causes remain
 unknown; their older snapshots are not rewritten.
+
+V95 subsequently completes all 20,000 updates under that same worker identity.
+Its [independent final audit](results/v43-quality-V95-completed-training-v1.json)
+checks all six retained checkpoint files, 71 finite model/EMA tensors and 69
+Adam states per file, correct steps, canonical V43 architecture, unchanged
+manifests, all 801 logged training rows and the first 24 exact CUDA-probe inputs.
+The five scheduled validations contain all 28 condition/CFA cells, eight sources
+per cell. Counts are 20,000 training forwards, 160 validation forwards, 20,160
+DINO calls and 20,000 optimizer steps. The training worker/controller exit;
+the completed study also verifies 390 matched paired/native control rows and
+197 matched paired rows for the fine-detail treatment. These saved-state and
+trace checks do not establish held-out image quality.
 
 ## Evaluation launcher integration
 

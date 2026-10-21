@@ -39,8 +39,8 @@ fresh optimizer/EMA and common seed/schedule. These are new training stages.
 
 | Arm | Commons sources | Optical PSF probability | Low-contrast examples |
 | --- | --- | ---: | --- |
-| V93 small-cohort control | 39,983: original cohort intersected with eligible/curated IDs |.25|Original mix|
-| V94 larger-data control | 88,484: full curated larger corpus |.25|Original mix|
+| V93 small-cohort control | 39,983: original cohort intersected with eligible/curated IDs |0.25|Original mix|
+| V94 larger-data control | 88,484: full curated larger corpus |0.25|Original mix|
 | V95 fine-detail recipe | Same 88,484 sources as V94 |0|More weak procedural detail and contrast-attenuated photos|
 
 V94−V93 measures larger curated membership; V95−V94 measures the augmentation
@@ -69,47 +69,28 @@ validation best and 4k/8k/12k/16k diagnostics retained separately.
 All six [final-cohort CPU/CUDA preflights](results/v43-quality-final-curated-preflights-v1.json)
 passed: 24 discarded updates per arm/phase, 144 actual training/DINO forwards.
 Independent checkpoint/metric checks pass, and paired/native observations match
-across controls as required. **V93 and V94 completed 20,000 updates each; V95 is
-running its fine-detail treatment.** Independent saved-state audits of
+across controls as required. **V93, V94 and V95 completed 20,000 updates each.**
+Independent saved-state audits of
 [V93](results/v43-quality-V93-completed-training-v1.json) and
-[V94](results/v43-quality-V94-completed-training-v1.json) verify final EMAs,
+[V94](results/v43-quality-V94-completed-training-v1.json), followed by
+[V95](results/v43-quality-V95-completed-training-v1.json), verify final EMAs,
 retained checkpoints, optimizer counters and input traces. Full matched quality
-evaluation and native crop review remain pending.
+evaluation is running; native crop review remains pending.
 
-The launcher can reserve a fresh `/mnt/external/demosaic` artifact directory
-through `--artifact-root`. Plans/code remain local; checkpoints and run traces
-use the external SSD. This prospective training policy keeps 64 GiB free on the
-system disk and 384 GiB externally. Its path/ownership preparation check passes
-without allocating checkpoints or launching a controller. The current source
-scan completed under its original 500 GiB external floor. The production plan
-is frozen at `.cache/quality-first-20261020/V43-curated-matched-training-v1/`.
-Its controller requires 48 GiB available RAM sustained for 60 s before each
-stage, with a two-hour resource-wait bound. Initial headroom was about 11 GiB;
-the original controller waited, then ran the six preflights and completed both
-controls. Two early V95 attempts stopped at the generic resource guard around
-logged steps1,025/1,550; those guards did not record which resource crossed its
-limit. Low system-disk space was a confirmed blocker when recovery began. After
-[relocating cold checkpoint copies](results/cold-checkpoint-relocation-20261021-v1.json)
-to restore about 32 GiB, explicit recovery restarts only V95 from the same V43
-weights/configuration. Both unsaved attempts are archived. The
-[first recovery observation](results/v43-quality-V95-manual-recovery-v1.json)
-records input replay before the second stop. The current controller logs actual
-resource readings every2s. Disk-only shortages suspend its existing worker;
-it resumes after original launch thresholds are stable60s. A RAM-floor breach
-still terminates it. Completed controls and passed preflights are reused;
-numerical worker/configuration and RAM/disk thresholds are unchanged. The current
-recovery is `.cache/quality-first-20261020/V95-manual-recovery-v2/`; its
-[telemetry and continuation evidence](results/v43-quality-V95-resource-telemetry-recovery-v2.json)
-include exact replay of the 63 recorded batches through step1,550. Check the
-original study's `status.json` for live progress and recovery provenance.
+Plans/code remain local and checkpoints/run traces use a fresh external-SSD
+namespace. The completed production plan is
+`.cache/quality-first-20261020/V43-curated-matched-training-v1/`. Resource bounds
+remain RAM 48 GiB stable for 60 seconds before launch, 24 GiB active RAM, and
+64/384 GiB free on root/external storage, with a two-hour resource-wait bound.
 
-After its 8k validation, an actual root-disk reserve breach pauses V95 at
-logged step 8,025. A further 32.4 GiB of closed project checkpoint artifacts is
-relocated with bytes and original paths preserved. The same worker resumes
-after stable headroom and frozen-input checks; its paused metrics remain an
-exact prefix. See the [observed disk-pause receipt](results/v43-quality-V95-actual-disk-pause-v1.json).
-This establishes continuation, while the two earlier generic guard triggers
-remain unidentified. The full 20k quality comparison is still pending.
+V95 needed explicit recovery after two unsaved resource-guard stops. Their
+original triggers remain unknown because those guards lacked readings. Both
+partial trials are archived. Later telemetry captured a real disk-reserve
+pause after 8k; relocating closed checkpoint artifacts preserved bytes/paths
+and allowed the same worker to resume and reach 20k. Numerical code, recipe
+and resource thresholds stayed fixed. The
+[validation appendix](quality-training-validation.md) retains the recovery,
+relocation, observed continuation and final saved-state evidence.
 
 ## Quality review
 
@@ -131,5 +112,10 @@ RawNIND's global/per-channel input-only adapters appear in photo/real/GFX panels
 Each stage checks frozen DINO/state, predictor arguments and native crop pixels;
 the primary photo/real summaries also receive independent coverage/arithmetic
 checks. Outputs still require actual native viewing and interpretation.
+The [frozen production evaluation](results/v43-quality-full-evaluation-launch-v1.json)
+uses `.cache/quality-first-20261020/V43-curated-matched-evaluation-v1/` and
+`/mnt/external/demosaic/v43-curated-evaluation-20261021-v1/`. All three final
+20k EMAs are evaluated alongside original V43; the seven stages run serially.
+Current progress is recorded in that evaluation root's `status.json`.
 The [CPU launcher integration](results/v43-quality-evaluation-launcher-CPU-proof-v3.json)
 passes on discarded checkpoints; it does not qualify the production branches.
