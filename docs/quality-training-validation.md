@@ -4,8 +4,8 @@ The [quality study](quality-first-training.md) keeps V43's architecture and
 separates curated membership from the fine-detail augmentation package.
 The checks below establish engineering behavior only. Source ranking, final
 visual decisions, the production freeze and all six fresh CPU/CUDA preflights
-are complete. V93 and V94 completed their 20k stages; V95 is running after an
-explicit recovery from a system-disk reserve failure. Matched held-out quality
+are complete. V93 and V94 completed their 20k stages; V95 is running after
+resource-guard interruptions. Matched held-out quality
 evaluation and native review remain pending.
 
 ## Data, training and reporting checks
@@ -135,8 +135,10 @@ directory, retaining plans/code locally and fixing free-space reserves at
 The default local-artifact policy remains 64/500 GiB. The source scanner completed
 under its original 500 GiB floor before production preparation.
 
-V95 later stops at the system-disk reserve around logged step1,025, before its
-first saved training checkpoint. The original status/logs and all 62 failed-trial
+V95 later stops at a resource guard around logged step1,025, before its first
+saved training checkpoint. The old guard lacks the actual readings, so its
+trigger cannot be identified retrospectively. Low system-disk space blocks the
+initial recovery. The original status/logs and all 62 failed-trial
 files are preserved with byte hashes and a path mapping. The
 [cold-checkpoint relocation](results/cold-checkpoint-relocation-20261021-v1.json)
 moves 66 owned old experiment inodes/116 path aliases to the external SSD,
@@ -154,10 +156,27 @@ reused. Final status still requires the full three-arm observation audit and
 will retain the recovery provenance.
 
 The [actual recovery observation](results/v43-quality-V95-manual-recovery-v1.json)
-confirms the new worker continues beyond the archived prefix. All 42 scheduled
+confirms that first recovery continued beyond the archived prefix. All 42 scheduled
 recorded batch fingerprints through step1,025 match exactly; the recorded new
 losses and gradients are finite. This checks logged inputs, rather than claiming
 bitwise equality of unlogged steps or floating-point training states.
+
+That worker subsequently stops at the same generic guard near step1,550,
+again without the resource readings needed to identify the trigger. Both
+unsaved trials and controller evidence remain archived. The current recovery
+logs exact RAM/free-space/mount readings every2s, includes them in failures,
+and suspends its owned process group for disk-only shortages. It resumes the
+same PID after original launch thresholds are stable60s; RAM below24 GiB still
+terminates it. Numerical worker/configuration and resource thresholds are
+unchanged, and the original wall-time bound includes suspension. Process-group
+ownership, parent/child suspension/continuation and stopped-group cleanup pass
+an actual CPU integration test. A controlled3s pause on the actual V95 CUDA
+worker also preserves its identity and continues with finite recorded training.
+These checks establish operational continuation, rather than floating-point
+state parity or trained image quality.
+The [current recovery receipt](results/v43-quality-V95-resource-telemetry-recovery-v2.json)
+records the causal clarification, exact readings, CPU/CUDA continuation checks
+and exact replay of all 63 logged batches through step1,550.
 
 ## Evaluation launcher integration
 

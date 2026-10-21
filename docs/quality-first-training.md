@@ -86,15 +86,22 @@ is frozen at `.cache/quality-first-20261020/V43-curated-matched-training-v1/`.
 Its controller requires 48 GiB available RAM sustained for 60 s before each
 stage, with a two-hour resource-wait bound. Initial headroom was about 11 GiB;
 the original controller waited, then ran the six preflights and completed both
-controls. V95 stopped around logged step1,025 when the system-disk reserve was
-crossed. Its unsaved partial trial is archived. After
+controls. Two early V95 attempts stopped at the generic resource guard around
+logged steps1,025/1,550; those guards did not record which resource crossed its
+limit. Low system-disk space was a confirmed blocker when recovery began. After
 [relocating cold checkpoint copies](results/cold-checkpoint-relocation-20261021-v1.json)
-to restore about 32 GiB, explicit manual recovery restarts only V95 from the same
-original V43 weights/configuration. The
-[recovery receipt](results/v43-quality-V95-manual-recovery-v1.json) records exact
-replay of all 42 logged input batches through step1,025. The completed controls and passed preflights
-are reused. All resource bounds stay fixed, including the 24 GiB active RAM floor.
-Check the original `status.json` for live progress; it records the recovery plan.
+to restore about 32 GiB, explicit recovery restarts only V95 from the same V43
+weights/configuration. Both unsaved attempts are archived. The
+[first recovery observation](results/v43-quality-V95-manual-recovery-v1.json)
+records input replay before the second stop. The current controller logs actual
+resource readings every2s. Disk-only shortages suspend its existing worker;
+it resumes after original launch thresholds are stable60s. A RAM-floor breach
+still terminates it. Completed controls and passed preflights are reused;
+numerical worker/configuration and RAM/disk thresholds are unchanged. The current
+recovery is `.cache/quality-first-20261020/V95-manual-recovery-v2/`; its
+[telemetry and continuation evidence](results/v43-quality-V95-resource-telemetry-recovery-v2.json)
+include exact replay of the 63 recorded batches through step1,550. Check the
+original study's `status.json` for live progress and recovery provenance.
 
 ## Quality review
 

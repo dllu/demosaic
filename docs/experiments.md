@@ -41,7 +41,7 @@ The completed scan covers 88,508 training sources at 4×/8×. Targeted visual re
 of 371 sources withholds 24 while retaining legitimate difficult detail. The
 frozen matched V43 study uses 39,983 control / 88,484 larger training sources;
 all six fresh CPU/CUDA preflights passed, both controls completed20k, and V95 is
-running after explicit recovery from a system-disk reserve failure.
+running with resource telemetry and suspension handling after resource-guard stops.
 Originals and historical manifests remain read-only. Validation/test and the
 standing GFX scene remain outside training. See the [source review](corpus-source-review.md).
 

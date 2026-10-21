@@ -1,6 +1,7 @@
 """Explicitly recover an early V95 resource failure while retaining completed arms."""
 
 import argparse
+import json
 import os
 import shutil
 import signal
@@ -13,6 +14,62 @@ from train_directional_bank_trial import guard, read, ref, save
 from train_v43_quality_trial import compare_pair, live, resources
 
 REPO = Path(__file__).resolve().parents[1]
+
+
+def resource_snapshot(root):
+    result = {"unix": time.time(), "RAM_available_bytes": psutil.virtual_memory().available}
+    for name, path in (("root", root), ("external", "/mnt/external")):
+        try:
+            result[name + "_free_bytes"] = shutil.disk_usage(path).free
+        except OSError as error:
+            result[name + "_free_bytes"] = None
+            result[name + "_error"] = repr(error)
+    result["external_is_mount"] = os.path.ismount("/mnt/external")
+    try:
+        result["external_device"] = Path("/mnt/external").stat().st_dev
+    except OSError:
+        result["external_device"] = None
+    return result
+
+
+def headroom(snapshot, plan, ram_gib=24):
+    reserves = plan["disk_reserves"]
+    return (
+        snapshot["RAM_available_bytes"] >= ram_gib * 2**30
+        and snapshot["root_free_bytes"] is not None
+        and snapshot["root_free_bytes"] >= reserves["root_reserve_gib"] * 2**30
+        and snapshot["external_free_bytes"] is not None
+        and snapshot["external_free_bytes"] >= reserves["external_reserve_gib"] * 2**30
+        and snapshot["external_is_mount"]
+        and snapshot["external_device"] == plan["external_device"]
+    )
+
+
+def signal_owned_group(owner, sig):
+    process = psutil.Process(owner["pid"])
+    assert process.create_time() == owner["created"] and os.getsid(process.pid) == process.pid
+    assert process.status() != psutil.STATUS_ZOMBIE
+    os.killpg(process.pid, sig)
+
+
+def stop_owned_child(child, owner):
+    if child.poll() is not None:
+        return
+    try:
+        stopped = psutil.Process(child.pid).status() == psutil.STATUS_STOPPED
+        signal_owned_group(owner, signal.SIGTERM)
+        if stopped:
+            try:
+                signal_owned_group(owner, signal.SIGCONT)
+            except (psutil.NoSuchProcess, ProcessLookupError):
+                pass
+    except (psutil.NoSuchProcess, ProcessLookupError):
+        pass
+    try:
+        child.wait(timeout=15)
+    except subprocess.TimeoutExpired:
+        signal_owned_group(owner, signal.SIGKILL)
+        child.wait(timeout=10)
 
 
 def prepare(study, root, reclamation):
@@ -62,7 +119,7 @@ def prepare(study, root, reclamation):
     archived_status = failed / "status.json"
     shutil.copyfile(failure_path, archived_status)
     assert archived_status.read_bytes() == failure_path.read_bytes()
-    archive_run = Path(original["artifact_root"]) / "failed-train-V95-before-manual-recovery-v1"
+    archive_run = Path(original["artifact_root"]) / ("failed-train-V95-before-" + root.name)
     assert not archive_run.exists()
     trial_files = {str(p.relative_to(run)): ref(p) for p in run.rglob("*") if p.is_file()}
     run.rename(archive_run)
@@ -111,9 +168,12 @@ def prepare(study, root, reclamation):
         "wait_seconds": original["wait_seconds"],
         "stable_seconds": original["stable_seconds"],
         "timeout_seconds": original["timeouts_seconds"]["train"],
+        "external_device": Path("/mnt/external").stat().st_dev,
+        "resource_startup_observation": resource_snapshot(study),
+        "resource_policy": "Capture exact readings every2s. RAM below24GiB terminates the owned worker. Disk reserve/mount breach with adequate RAM suspends only the owned process group; resume the same PID after original48GiB/disk floors are stable60s, verifying both input guards. Disk wait bounded7200s and original stage wall-time bound still applies. No retry or numerical-worker change.",
         "inputs": inputs,
         "frozen_files": {str(operator): ref(operator)["sha256"]},
-        "scope": "One explicitly diagnosed manual recovery after root-disk reserve failure. Reuse all six passed preflights and completed V93/V94. Restart only V95 from original V43 step2000 using the exact original frozen worker/config/20k schedule, after byte-exact archival of its unsaved partial trial. No automatic retry, changed data/model/precision/resource policy or quality promotion.",
+        "scope": "Explicit manual recovery after an unsaved early V95 resource-guard stop. Previous guards did not record which resource crossed its floor. Reuse all passed preflights and completed V93/V94. Restart only V95 from original V43 step2000 with the exact original frozen numerical worker/config/20k schedule and unchanged resource thresholds. Preserve failed trial bytes. Add exact resource telemetry and same-worker disk suspension, with immediate termination for a RAM breach. No automatic retry or quality promotion.",
     }
     save(root / "plan.json", plan)
     guard(original)
@@ -141,11 +201,20 @@ def controller(plan_path):
         "original_failed_status": plan["original_failure"],
     }
     child, identity = None, None
+    last_snapshot = None
 
     def record(status, **extra):
         state.update(status=status, updated_unix=time.time(), **extra)
         save(study / "status.json", state)
         save(root / "status.json", state)
+
+    def observe():
+        nonlocal last_snapshot
+        snapshot = resource_snapshot(study)
+        last_snapshot = snapshot
+        with (root / "resource-history.jsonl").open("a") as stream:
+            stream.write(json.dumps(snapshot) + "\n")
+        return snapshot
 
     try:
         began, stable = time.monotonic(), None
@@ -154,7 +223,7 @@ def controller(plan_path):
             assert time.monotonic() - began < plan["wait_seconds"]
             stable = (
                 (time.monotonic() if stable is None else stable)
-                if resources(study, 48, **plan["disk_reserves"])
+                if headroom(observe(), plan, 48)
                 else None
             )
             if stable is not None and time.monotonic() - stable >= plan["stable_seconds"]:
@@ -198,7 +267,39 @@ def controller(plan_path):
             record("running-V43-quality-stage", phase="train", arm="V95", child=identity)
             deadline = time.monotonic() + plan["timeout_seconds"]
             while child.poll() is None:
-                assert resources(study, **plan["disk_reserves"]), "Training resource floor"
+                snapshot = observe()
+                assert snapshot["RAM_available_bytes"] >= 24 * 2**30, snapshot
+                if not headroom(snapshot, plan):
+                    signal_owned_group(identity, signal.SIGSTOP)
+                    record("paused-V43-training-disk-reserve", resource_snapshot=snapshot)
+                    paused_at, stable = time.monotonic(), None
+                    while True:
+                        assert child.poll() is None, "Suspended worker exited"
+                        assert time.monotonic() < deadline, "Training stage runtime bound"
+                        assert time.monotonic() - paused_at < plan["wait_seconds"], (
+                            "Disk reserve wait bound"
+                        )
+                        current = observe()
+                        assert current["RAM_available_bytes"] >= 24 * 2**30, current
+                        stable = (
+                            (time.monotonic() if stable is None else stable)
+                            if headroom(current, plan, 48)
+                            else None
+                        )
+                        if (
+                            stable is not None
+                            and time.monotonic() - stable >= plan["stable_seconds"]
+                        ):
+                            guard(original)
+                            guard(plan)
+                            signal_owned_group(identity, signal.SIGCONT)
+                            record(
+                                "running-V43-quality-stage",
+                                resumed_same_worker=True,
+                                resource_snapshot=current,
+                            )
+                            break
+                        time.sleep(2)
                 assert time.monotonic() < deadline, "Training stage runtime bound"
                 time.sleep(2)
             assert child.wait() == 0, child.returncode
@@ -248,18 +349,12 @@ def controller(plan_path):
         )
     except BaseException as error:
         if child is not None and child.poll() is None:
-            assert (
-                psutil.Process(child.pid).create_time() == identity["created"]
-                and os.getsid(child.pid) == child.pid
-            )
-            os.killpg(child.pid, signal.SIGTERM)
-            try:
-                child.wait(timeout=15)
-            except subprocess.TimeoutExpired:
-                assert psutil.Process(child.pid).create_time() == identity["created"]
-                os.killpg(child.pid, signal.SIGKILL)
-                child.wait(timeout=10)
-        record("failed-V43-quality-stage-preserved-no-automatic-retry", error=repr(error))
+            stop_owned_child(child, identity)
+        record(
+            "failed-V43-quality-stage-preserved-no-automatic-retry",
+            error=repr(error),
+            last_resource_snapshot=last_snapshot,
+        )
         raise
 
 

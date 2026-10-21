@@ -1,0 +1,72 @@
+{
+  "status": "V95-resource-telemetry-recovery-running-after-CPU-and-actual-CUDA-pause-checks",
+  "recorded_local": "2026-10-21T11:23:26.146102-07:00",
+  "original_numerical_training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V43-curated-matched-training-v1/plan.json",
+    "sha256": "2fec2f3e77e15791d1ece4e10e65133a84be234eba0702a4d4dcd643753f7556"
+  },
+  "previous_original_failure": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-manual-recovery-v1/failed-original/status.json",
+    "sha256": "04a103e114ebb02ecfbb0fbd50818d463fe259c69ff820d1b66ccfb261a0617a"
+  },
+  "previous_recovery_failure": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-manual-recovery-v2/failed-original/status.json",
+    "sha256": "1f5411bd08bc0ad39afc5b5444c462721c5e77c9601c42f55b8fb9b706ec0d53"
+  },
+  "causal_clarification": "Both earlier guards logged only a generic Training resource floor. Contemporaneous crossing values were not captured. Low system-disk space was observed at the first recovery and blocked a restart, but does not retrospectively identify the trigger of either stop. Earlier root-disk causal wording should be read with this correction. Historical receipts are preserved.",
+  "recovery_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-manual-recovery-v2/plan.json",
+    "sha256": "68f43182e585848a4b7c9667dcfe112168f4d4c63dae74d5040cbce1a9ab71a9"
+  },
+  "recovery_launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-manual-recovery-v2/launch.json",
+    "sha256": "2d00e3c668fbbb7dc310c14c19b86ecf00b7bfaefd2d1cd4239ad981a1fa7917"
+  },
+  "resource_policy": "Capture exact readings every2s. RAM below24GiB terminates the owned worker. Disk reserve/mount breach with adequate RAM suspends only the owned process group; resume the same PID after original48GiB/disk floors are stable60s, verifying both input guards. Disk wait bounded7200s and original stage wall-time bound still applies. No retry or numerical-worker change.",
+  "CPU_process_group_test": {
+    "source": {
+      "path": "/home/dllu/proj/demosaic/tests/test_quality_recovery_signals.py",
+      "sha256": "4cd7d8a374ff4e641002fa2a1add6b9e1cee16a9e27e0bb338c6ef4cc4fb0111"
+    },
+    "result": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/process-group-pause-proof-v2.xml",
+      "sha256": "bfc659f6be1f8c3ffa9af75c8816253e1f69dc1e0e8db615ddd2aa498dac0be6"
+    },
+    "scope": "One actual CPU parent/child integration test: wrong ownership rejected, both counters stop/resume under same identity, suspended group terminates cleanly. No model or GPU qualification from this test."
+  },
+  "actual_CUDA_pause_resume": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-manual-recovery-v2/actual-CUDA-worker-pause-resume-proof-v1.json",
+    "sha256": "6eb4f6b2e9b3689201aef772b3fec58b1665b6aad8697483497bbf4770ddbc20"
+  },
+  "resource_and_prefix_snapshot": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-manual-recovery-v2/resource-and-recorded-prefix-snapshot-v1.json",
+    "sha256": "11fea49950c5a3f5606da9769de7f090b50f7a0095eece24e087aeaabdaaf62c"
+  },
+  "controller": {
+    "pid": 3422254,
+    "created": 1792605923.15
+  },
+  "worker": {
+    "pid": 3422418,
+    "created": 1792605984.94
+  },
+  "last_logged_training_step_at_observation": 1950,
+  "recorded_input_prefix_batches_matched": 63,
+  "recorded_input_prefix_last_step": 1550,
+  "resource_samples_at_observation": 524,
+  "minimum_observed_GiB": {
+    "RAM_available_bytes": 59.97014617919922,
+    "root_free_bytes": 75.31109237670898,
+    "external_free_bytes": 461.8499565124512
+  },
+  "resource_thresholds_unchanged": {
+    "active_RAM_GiB": 24,
+    "launch_and_resume_RAM_GiB": 48,
+    "root_reserve_gib": 64,
+    "external_reserve_gib": 384,
+    "stable_seconds": 60,
+    "maximum_disk_pause_seconds": 7200,
+    "stage_wall_time_seconds": 172800
+  },
+  "scope": "Explicit manual recovery after an unsaved early V95 resource-guard stop. Previous guards did not record which resource crossed its floor. Reuse all passed preflights and completed V93/V94. Restart only V95 from original V43 step2000 with the exact original frozen numerical worker/config/20k schedule and unchanged resource thresholds. Preserve failed trial bytes. Add exact resource telemetry and same-worker disk suspension, with immediate termination for a RAM breach. No automatic retry or quality promotion. Actual CUDA worker resumes after controlled3s suspension with finite continuation. All63 logged input fingerprints through1550 replay exactly; full20k endpoint and quality evaluation remain pending."
+}

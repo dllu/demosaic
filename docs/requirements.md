@@ -32,7 +32,7 @@ preserve holdouts, selected row contents and inherited protected-series
 exclusions. All six [fresh CPU/CUDA checks](results/v43-quality-final-curated-preflights-v1.json)
 pass, both [V93](results/v43-quality-V93-completed-training-v1.json) and
 [V94](results/v43-quality-V94-completed-training-v1.json) completed20k, and V95 is
-running after explicit recovery from a system-disk reserve failure. New model quality remains
+running with resource telemetry after resource-guard interruptions. New model quality remains
 unmeasured until production and full review finish.
 
 Completed later studies, including [V92](late-rgb-head-only-original4k-review.md),
