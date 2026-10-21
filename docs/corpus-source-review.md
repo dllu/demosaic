@@ -19,14 +19,20 @@ or optical augmentation. Only training rows enter. A genuine four-source/native 
 CPU proof passes before GPU scoring; a separate unit check matches every
 per-image loss term to V43's original training objective.
 
-The original worker remains running under an explicit supervision handoff at
+The original worker completed under an explicit supervision handoff at
 `.cache/quality-first-20261020/corpus-source-screen-supervision-v2/status.json`.
 Its projected duration was close to the first controller's six-hour bound;
 the new ceiling is eight hours from the **original** worker start. The scoring
 plan/source, PID, checkpoint, inputs and 24 GiB RAM / 64 GiB root / 500 GiB
 external reserves are unchanged. The exact old supervisor exited; the worker
-was neither stopped nor restarted. Use the new status path, since the old
-controller's preserved status is historical.
+was neither stopped nor restarted. Both worker and new supervisor have now
+exited. Use the new status path, since the old controller's preserved status is
+historical. The completed receipt records 88,508 unique sources, 177,016 cases
+and 22,128 actual neural/DINO forwards. An independent streaming audit checks
+full training membership/condition coverage, finite scores, original loss
+arithmetic, ROI bounds, file hashes and actual owner exit. The
+[completion receipt](results/v43-quality-curation-and-training-plan-v1.json)
+records those checks and their limits.
 
 Rank high-loss images alongside low-gradient, high-frequency and bright/clipped
 proxies. Inspect full-source context and native pixels for grain, blur,
@@ -37,15 +43,21 @@ Use a new training manifest; preserve originals, historical manifests, protected
 series and the GFX scene/siblings. This is targeted review, not a claim that
 every corpus photo was manually viewed.
 
-The [current 346-source visual review](results/source-quality-visual-review-v15.json)
-withholds twenty-three sources: a historic map scan, a photomontage, nine graphic-only
+The [completed 371-source visual review](results/source-quality-visual-review-v17.json)
+withholds twenty-four sources: a historic map scan, a photomontage, ten graphic-only
 or flat document compositions, a predominantly
 defocused station scene, and eleven images with visibly unreliable clean-target
-texture/noise/edge quality. The other 323 remain, including fine
+texture/noise/edge quality. The other 347 remain, including fine
 foliage, wheat, fur, coral, architectural grids and hazy/low-contrast landscapes.
-Sixty-three contact sheets and twenty-six larger native 1024 crops were actually inspected.
-The full ranking is still running; this is an initial review, not the final
-curated manifest or a trained-model result.
+Sixty-eight contact sheets and twenty-seven larger native 1024 crops were
+actually inspected. This includes all 87 distinct required candidates from the
+completed ranking. The final round adds a flat stippled turtle illustration to
+the withheld set, while retaining physical tilework, stained glass, engraved
+metal, sand, speaker mesh, weak skies and haze. Four early larger-view decisions
+needed missing hash fields restored from their original render indexes; fresh
+original/cache hashes verify that repair without changing any decision.
+The final membership freeze is complete; these are source-quality decisions,
+not a trained-model result or a full-corpus manual inspection.
 
 ## Native examples
 
@@ -155,7 +167,13 @@ additional sources already reviewed. `scripts/freeze_v43_curated_corpus.py
 --help` describes the freeze; `--check` lists pending decisions without writing
 training manifests. It checks the completed ranking receipt, source identities,
 the exact original V43 cohort and unchanged holdout memberships. Exclusions
-affect future training membership only.
+affect future training membership only. The completed freeze at
+`.cache/quality-first-20261020/curated-corpus-v1/` contains 39,983 control and
+88,484 larger training sources. The original V43 cohort had 40,170: 172 are
+already ineligible under existing corpus policy and another 15 are among the
+24 newly withheld sources. Both cohorts retain the same 2,303 validation and
+2,255 test IDs; every selected row and full current holdout record matches its
+input manifest. No original or historical manifest was rewritten.
 
 An additional posthoc ADC-error/local-gradient ratio review retained all twelve
 new selected sources: it mostly found legitimate smooth skies, saturated

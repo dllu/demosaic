@@ -13,40 +13,41 @@ versus V43's original 40,170. Original validation 2,303 / test 2,255 memberships
 stay fixed. Actual downloading stopped at the reserve with 178,117 originals;
 archive discovery/attribution are complete and 279,548 originals remain pending.
 
-The [illustrated source review](corpus-source-review.md) currently covers 346
-sources: 323 retain and 23 withhold, including all 74 training sources with
+The [illustrated source review](corpus-source-review.md) covers 371
+sources: 347 retain and 24 withhold, including all 74 training sources with
 recorded ISO ≥12800. Native examples show why processed targets are withheld
 while real fine leaf veins and weak fog detail remain. High loss, ISO and
 software tags select review candidates; visible binned-target quality decides
 membership. This is targeted review, not a full-corpus manual inspection.
 
-The full V43 loss/IQA-proxy scan is still running. Final curation requires its
-completed receipt, visual decisions for the top 32 under each noise condition
-and top 16 under each proxy, plus all additional reviewed-source decisions.
-Apply exclusions through new manifests while preserving protected series,
-the GFX scene/siblings and historical data. Ranking/supervision details,
+The full V43 loss/IQA-proxy scan completed all 88,508 training sources and
+177,016 cases. All 87 distinct final top-32/top-16 candidates have visual
+decisions. New manifests apply the 24 exclusions while preserving protected
+series, the GFX scene/siblings and historical data. The independently checked
+cohorts contain **39,983 control / 88,484 larger training sources**, with unchanged
+2,303 validation / 2,255 test memberships. Ranking/supervision details,
 header-inventory evidence and the membership-freeze command are in the
 [source-review guide](corpus-source-review.md).
 
 ## Matched V43 training comparison
 
-After review, freeze the curated larger corpus and its intersection with the
-original V43 cohort. Apply existing protected/series exclusions and newly
-identified bad-source exclusions to both. Keep validation and native128/paired32
-data fixed. Every arm starts from the same original V43 step 2000 EMA, with a
+The frozen study uses the curated larger corpus and its intersection with the
+original V43 cohort. Existing protected/series and new bad-source exclusions
+apply to both. Validation and native128/paired32 data stay fixed.
+Every arm starts from the same original V43 step 2000 EMA, with a
 fresh optimizer/EMA and common seed/schedule. These are new training stages.
 
 | Arm | Commons sources | Optical PSF probability | Low-contrast examples |
 | --- | --- | ---: | --- |
-| V93 small-cohort control | Original cohort intersected with current eligible/curated IDs |.25|Original mix|
-| V94 larger-data control | Full curated larger corpus |.25|Original mix|
-| V95 fine-detail recipe | Same curated larger corpus as V94 |0|More weak procedural detail and contrast-attenuated photos|
+| V93 small-cohort control | 39,983: original cohort intersected with eligible/curated IDs |.25|Original mix|
+| V94 larger-data control | 88,484: full curated larger corpus |.25|Original mix|
+| V95 fine-detail recipe | Same 88,484 sources as V94 |0|More weak procedural detail and contrast-attenuated photos|
 
 V94−V93 measures larger curated membership; V95−V94 measures the augmentation
 package. Architecture stays fixed. Keep batch 16 and 25% paired/25% native/50%
 Commons. Plan equal 20,000-update stages with diagnostic intermediate checkpoints.
-Exact learning-rate/initializer/source settings and resource bounds will be
-frozen with the actual reviewed manifests before launch.
+Learning-rate/initializer/source settings and resource bounds are frozen in the
+[production plan receipt](results/v43-quality-curation-and-training-plan-v1.json).
 
 New opt-in controls are `optical_blur_probability` (default 0.25),
 `raw_clean_optical_blur_probability` (inherits it), and
@@ -70,8 +71,13 @@ through `--artifact-root`. Plans/code remain local; checkpoints and run traces
 use the external SSD. This prospective training policy keeps 64 GiB free on the
 system disk and 384 GiB externally. Its path/ownership preparation check passes
 without allocating checkpoints or launching a controller. The current source
-scan retains its original 500 GiB external floor. **Production is not yet
-frozen or launched**; complete ranking and final review come first.
+scan completed under its original 500 GiB external floor. The production plan
+is frozen at `.cache/quality-first-20261020/V43-curated-matched-training-v1/`.
+Its controller is queued, waiting for 48 GiB available RAM sustained for 60 s
+before each stage; the initial resource wait is bounded to two hours. At launch,
+only about 11 GiB was available. **No production updates have run yet.**
+Check `status.json` there for live stage progress. Do not relax the resource
+bound or interfere with other workloads to force a start.
 
 ## Quality review
 

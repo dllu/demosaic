@@ -37,11 +37,12 @@ including early versions, negative studies and engineering details.
 
 ## Data and current quality work
 
-The available reviewed Commons training set has 88,508 images at 4×/8×, versus
-V43's original 40,170. The new source-quality scan ranks only training sources;
-actual visual review will withhold bad or non-photographic material while
-retaining legitimate difficult detail. Originals and historical manifests remain
-read-only. Validation/test and the standing GFX scene remain outside training.
+The completed scan covers 88,508 training sources at 4×/8×. Targeted visual review
+of 371 sources withholds 24 while retaining legitimate difficult detail. The
+frozen matched V43 study uses 39,983 control / 88,484 larger training sources;
+its controller is queued for memory headroom before fresh preflights and training.
+Originals and historical manifests remain read-only. Validation/test and the
+standing GFX scene remain outside training. See the [source review](corpus-source-review.md).
 
 [Reviewed corpus](commons-post4557-reviewed.md) ·
 [archive status](commons-download.md) ·

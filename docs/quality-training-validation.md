@@ -3,8 +3,9 @@
 The [quality study](quality-first-training.md) keeps V43's architecture and
 separates curated membership from the fine-detail augmentation package.
 The checks below establish engineering behavior only. No new production model,
-quality improvement or speed result is claimed. Production still requires
-completed source ranking, final visual decisions and fresh CPU/CUDA preflights.
+quality improvement or speed result is claimed. Source ranking, final visual
+decisions and the production freeze are complete; fresh CPU/CUDA preflights
+remain required before production updates.
 
 ## Data, training and reporting checks
 
@@ -42,8 +43,10 @@ CUDA/B16/native256 checks before any of the three 20k stages. It enforces memory
 disk and runtime bounds, keeps caches in authorized storage, retains 4k/8k/12k/16k
 diagnostic checkpoints, and uses the fixed 20k final EMA as the primary endpoint.
 The training-validation best checkpoint is separate. Failures are preserved;
-there is no automatic retry or promotion. **The production plan is not yet
-frozen or launched**, because full source ranking and final review are pending.
+there is no automatic retry or promotion. The
+[production plan](results/v43-quality-curation-and-training-plan-v1.json)
+is frozen and its controller is queued for sufficient available RAM. No fresh
+production-plan preflight or production update had run at that launch snapshot.
 
 The [CPU reporting integration](results/v43-quality-reporting-CPU-proof-v4.json)
 also passes using the original V43 and three actual discarded 24-update EMAs:
@@ -78,8 +81,8 @@ no controller, checkpoints, CUDA or production training were launched.
 `--artifact-root` puts run artifacts under a fresh `/mnt/external/demosaic`
 directory, retaining plans/code locally and fixing free-space reserves at
 64 GiB on the system disk and 384 GiB externally before the production freeze.
-The default local-artifact policy remains 64/500 GiB. The live source scanner's
-original 500 GiB floor is unchanged; its completion precedes production work.
+The default local-artifact policy remains 64/500 GiB. The source scanner completed
+under its original 500 GiB floor before production preparation.
 
 ## Evaluation launcher integration
 
