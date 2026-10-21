@@ -203,3 +203,14 @@ existing real, carrier/flat, color-grid and GFX reports. It verifies PNG hashes,
 native160 rectangles and shared noisy/reference pixels across methods without
 importing torch or running inference. This checks report-schema handling, not
 new branch execution or another visual review.
+
+Before production evaluation, its controller now records exact resource
+readings and uses the same owned-process suspension helpers as V95 recovery.
+Disk-only shortages pause the existing worker; continuation requires stable
+launch headroom and a fresh frozen-input check. RAM breaches terminate it, and
+the original wait/stage bounds remain. Three
+[actual CPU worker tests](results/v43-quality-evaluation-resource-control-CPU-v1.json)
+with controlled resource readings pass: same-PID continuation, changed-input
+rejection while suspended, and RAM-floor failure with its exact reading.
+The numerical worker and native-validator syntax trees are unchanged. This is
+resource-control evidence, without new inference or production-quality evidence.

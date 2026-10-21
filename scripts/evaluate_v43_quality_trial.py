@@ -5,12 +5,19 @@ import json
 import math
 import os
 import shutil
+import signal
 import subprocess
 import sys
 import time
 from pathlib import Path
 
 import psutil
+from recover_v43_quality_trial import (
+    headroom,
+    resource_snapshot,
+    signal_owned_group,
+    stop_owned_child,
+)
 from train_directional_bank_trial import guard, read, ref, save
 from train_v43_quality_trial import DINO_SHA, live, resources
 
@@ -31,6 +38,7 @@ COLOR = Path("/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-
 def prepare(training_root, root, *, cpu_proof=False, artifact_root=None):
     import yaml
 
+    assert os.path.ismount("/mnt/external")
     status_path = training_root / "status.json"
     status, training = read(status_path), read(training_root / "plan.json")
     assert status["status"] == (
@@ -73,6 +81,7 @@ def prepare(training_root, root, *, cpu_proof=False, artifact_root=None):
         REPO / "scripts" / name
         for name in (
             "evaluate_v43_quality_trial.py",
+            "recover_v43_quality_trial.py",
             "train_v43_quality_trial.py",
             "train_directional_bank_trial.py",
             "profile_raw_kernel_inference.py",
@@ -186,6 +195,8 @@ def prepare(training_root, root, *, cpu_proof=False, artifact_root=None):
         "stable_seconds": 2 if cpu_proof else 60,
         "wait_seconds": 7200,
         "stage_timeout_seconds": 900 if cpu_proof else 43200,
+        "external_device": Path("/mnt/external").stat().st_dev,
+        "resource_policy": "Record actual RAM/free-space/mount readings every2s. Active RAM floor24GiB; disk-only shortages suspend the owned worker and resume the same PID after original48GiB/disk thresholds are stable. Disk wait bounded7200s; stage wall-time bound includes suspension. No automatic retry or numerical change.",
         "inputs": inputs,
         "frozen_files": {str(p): ref(p)["sha256"] for p in work.rglob("*") if p.is_file()},
         "scope": "Discarded CPU/native176/B1 reporting-launcher integration on2 photos/1 procedural source,2 conditions/2CFAs; not quality, CUDA or final curation evidence."
@@ -517,6 +528,42 @@ def worker(plan_path, stage):
     )
 
 
+def monitor_child(child, owner, *, plan, observe, record, deadline, poll_seconds=2):
+    """Keep an owned evaluation alive through bounded disk-only shortages."""
+    while child.poll() is None:
+        snapshot = observe()
+        assert snapshot["RAM_available_bytes"] >= 24 * 2**30, snapshot
+        if not headroom(snapshot, plan):
+            signal_owned_group(owner, signal.SIGSTOP)
+            record("paused-V43-evaluation-disk-reserve", resource_snapshot=snapshot)
+            paused_at, stable = time.monotonic(), None
+            while True:
+                assert child.poll() is None, "Suspended evaluation worker exited"
+                assert time.monotonic() < deadline, "Evaluation stage runtime bound"
+                assert time.monotonic() - paused_at < plan["wait_seconds"], (
+                    "Evaluation disk reserve wait bound"
+                )
+                current = observe()
+                assert current["RAM_available_bytes"] >= 24 * 2**30, current
+                stable = (
+                    (time.monotonic() if stable is None else stable)
+                    if headroom(current, plan, 48)
+                    else None
+                )
+                if stable is not None and time.monotonic() - stable >= plan["stable_seconds"]:
+                    guard(plan)
+                    signal_owned_group(owner, signal.SIGCONT)
+                    record(
+                        "running-V43-quality-evaluation",
+                        resumed_same_worker=True,
+                        resource_snapshot=current,
+                    )
+                    break
+                time.sleep(poll_seconds)
+        assert time.monotonic() < deadline, "Evaluation stage runtime bound"
+        time.sleep(poll_seconds)
+
+
 def controller(plan_path):
     plan = read(plan_path)
     guard(plan)
@@ -528,10 +575,18 @@ def controller(plan_path):
         "completed": {},
     }
     child, identity = None, None
+    last_snapshot = None
 
     def record(status, **extra):
         state.update(status=status, updated_unix=time.time(), **extra)
         save(root / "status.json", state)
+
+    def observe():
+        nonlocal last_snapshot
+        last_snapshot = resource_snapshot(root)
+        with (root / "resource-history.jsonl").open("a") as stream:
+            stream.write(json.dumps(last_snapshot) + "\n")
+        return last_snapshot
 
     try:
         for stage in plan["stages"]:
@@ -542,7 +597,7 @@ def controller(plan_path):
                 assert time.monotonic() - began < plan["wait_seconds"]
                 stable = (
                     (time.monotonic() if stable is None else stable)
-                    if resources(root, 48, **plan["disk_reserves"])
+                    if headroom(observe(), plan, 48)
                     else None
                 )
                 if stable is not None and time.monotonic() - stable >= plan["stable_seconds"]:
@@ -580,10 +635,14 @@ def controller(plan_path):
                 identity = {"pid": child.pid, "created": psutil.Process(child.pid).create_time()}
                 record("running-V43-quality-evaluation", stage=stage, child=identity)
                 deadline = time.monotonic() + plan["stage_timeout_seconds"]
-                while child.poll() is None:
-                    assert resources(root, **plan["disk_reserves"]), "Evaluation resource floor"
-                    assert time.monotonic() < deadline, "Evaluation stage runtime bound"
-                    time.sleep(2)
+                monitor_child(
+                    child,
+                    identity,
+                    plan=plan,
+                    observe=observe,
+                    record=record,
+                    deadline=deadline,
+                )
                 assert child.wait() == 0, (stage, child.returncode)
             result_path = root / (stage + "-result.json")
             result = read(result_path)
@@ -598,18 +657,12 @@ def controller(plan_path):
         )
     except BaseException as error:
         if child is not None and child.poll() is None:
-            import signal
-
-            assert psutil.Process(child.pid).create_time() == identity["created"]
-            assert os.getsid(child.pid) == child.pid
-            os.killpg(child.pid, signal.SIGTERM)
-            try:
-                child.wait(timeout=15)
-            except subprocess.TimeoutExpired:
-                assert psutil.Process(child.pid).create_time() == identity["created"]
-                os.killpg(child.pid, signal.SIGKILL)
-                child.wait(timeout=10)
-        record("failed-V43-evaluation-preserved-no-automatic-retry", error=repr(error))
+            stop_owned_child(child, identity)
+        record(
+            "failed-V43-evaluation-preserved-no-automatic-retry",
+            error=repr(error),
+            last_resource_snapshot=last_snapshot,
+        )
         raise
 
 

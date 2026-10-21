@@ -1,0 +1,43 @@
+{
+  "status": "evaluation-resource-monitor-actual-CPU-worker-tests-passed",
+  "recorded_local": "2026-10-21T11:32:34.252184-07:00",
+  "source": {
+    "path": "/home/dllu/proj/demosaic/scripts/evaluate_v43_quality_trial.py",
+    "sha256": "47bec5ec50927ca2ca22737142ad960776d9405845a6835071b93aba9b2bcb4a"
+  },
+  "shared_resource_and_process_helpers": {
+    "path": "/home/dllu/proj/demosaic/scripts/recover_v43_quality_trial.py",
+    "sha256": "90a6776eacfefb2615abeb0f23c98163e378ba1779664f5ead6370ccaed67b0c"
+  },
+  "test_source": {
+    "path": "/home/dllu/proj/demosaic/tests/test_v43_evaluation_resources.py",
+    "sha256": "1d1c12d1b7ef42f7f92b3687c1ae0acb95a844368cf3ea4c8e36edf75d4be9de"
+  },
+  "test_result": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/evaluation-resource-control-proof-v2.xml",
+    "sha256": "4779f92b06935c8d9048bf82a0b81f4d555fc8447e0b8a2ffcec5e2bc15ef097"
+  },
+  "tests_passed": 3,
+  "worker_and_native_validator_AST_unchanged_from_commit": {
+    "commit": "b9f276b1dd91b9bf02b428bdfb3818918900c40d",
+    "functions": {
+      "worker": true,
+      "audit_triplets": true
+    }
+  },
+  "checks": [
+    "Controlled disk reading pauses an actual owned CPU worker; counter stops and the same PID resumes only after the launch RAM threshold and stable interval.",
+    "A frozen input changed during suspension prevents continuation and leaves the owned worker stopped for cleanup.",
+    "A controlled RAM-floor breach preserves the exact sample in its exception and does not enter disk suspension."
+  ],
+  "policy": {
+    "active_RAM_GiB": 24,
+    "launch_and_resume_RAM_GiB": 48,
+    "root_free_GiB": 64,
+    "production_external_free_GiB": 384,
+    "production_stable_seconds": 60,
+    "disk_wait_seconds": 7200,
+    "stage_wall_seconds": 43200
+  },
+  "scope": "Actual CPU processes with controlled resource readings; no model inference, CUDA, quality, long-duration resource event or full production controller qualification. The numerical worker and native-validator ASTs are unchanged. Prepare will freeze the shared helper with the evaluation source. Full production evaluation remains pending V95 completion; earlier immutable CPU photo proof retains its original scope."
+}
