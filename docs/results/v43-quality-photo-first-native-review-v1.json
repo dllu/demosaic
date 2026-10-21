@@ -1,0 +1,56 @@
+{
+  "status": "actual-native-photo-view-completed-for-two-preselected-sources-six-methods",
+  "recorded_local": "2026-10-21T14:05:06.573242-07:00",
+  "render_index": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/photo-native-review-v1/index.json",
+    "sha256": "e083e4728002fe4de01ec3a37d17e0392eda0e677b108a2d8c70ca196612dcde"
+  },
+  "actually_viewed_images": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/photo-native-review-v1/0014aa4e075b1827f91ef8a02069e1e318f040ba-joint.png",
+      "sha256": "e2891e4290c04485fa79c4f3d260407c3aa8d467a4db0efb3606723b7f9d71df"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/photo-native-review-v1/0014aa4e075b1827f91ef8a02069e1e318f040ba-RawNIND.png",
+      "sha256": "8b7e8352f53719ff0b88783bad2b599d8a16c7313dd421acabbd70afd2921c8e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/photo-native-review-v1/002fc6eeadf637e81d5a327f117b79abb86becd9-joint.png",
+      "sha256": "2dc11847ce2abfafc3cb5e6d6a8bf8274284dfb42d6df68e0bf87a260787fc85"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/photo-native-review-v1/002fc6eeadf637e81d5a327f117b79abb86becd9-RawNIND.png",
+      "sha256": "4e9c709c23ca9780bd17ece39930b4960058732e2e2b7d96b3824a3dcc1c4a94"
+    }
+  ],
+  "triplets_viewed": 12,
+  "native160_panels_viewed": 36,
+  "display": "Original-resolution tool views of pure pixel-pasted montages; ISO12800 prior, RGGB, exposure1, same ROI [48,48,160,160], identical noisy/exact synthetic GT pixels across six methods per source.",
+  "source_selection": "First two fixed validation entries, chosen by the existing suite before prediction; not selected using model output or partial metrics.",
+  "source_observations": [
+    {
+      "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+      "scene": "Paraglider canopy and fine suspension lines against orange sky",
+      "observations": [
+        "All joint models remove the visible synthetic grain and retain the canopy outline.",
+        "Fine suspension lines remain visibly much weaker than the exact clean target across all six methods. Their recoverability at this noise level is not established by this crop.",
+        "The new controls show some broad color variation in the smooth orange region; these views do not establish a clear V95-over-V43 advantage."
+      ]
+    },
+    {
+      "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+      "scene": "Glass building, balcony rails and clouds",
+      "observations": [
+        "All four joint models preserve window divisions and balcony geometry more clearly than the two observed-input-only RawNIND adapters in these views.",
+        "Cloud wisps and fine rail detail remain softer than the exact clean target.",
+        "Differences among V43/V93/V94/V95 are subtle here; this single scene does not establish the desired new-model improvement."
+      ]
+    }
+  ],
+  "next_action": "Continue the unchanged full seven-stage evaluation and inspect weak-detail, color, measured-CFA and GFX panels before any ranking or promotion.",
+  "limits": "Actual review of two preselected high-noise synthetic photo sources only. Not a completed photographic-panel summary, training-repeat uncertainty estimate, broad real-photo superiority claim, learned-state proof or SOTA/promotion decision.",
+  "detailed_review_receipt": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/photo-native-review-v1/actual-visual-review-v1.json",
+    "sha256": "488697783fb10651c2f536aba913306412b8f9ceeb5aa73fc884e68710e33dfc"
+  }
+}
