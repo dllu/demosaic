@@ -15,7 +15,7 @@ priority; speed experiments are deferred.
 | 16-bit support and practical full-resolution output | Actual RAW processing, numerical checks and uint16 RGB TIFF exports | Demonstrated on the 101.996 MP GFX capture, including complete float-array/export checks and [actual CLI validation](mature-cudnn-fullframe.md). This does not establish sufficient restoration quality. |
 | 100 MP within 10 seconds on GB10 | Actual whole-photo measurement on a quality-qualified model, with clear timing scope | **Unmet.** The mature V43 FP32 report records 118.22 s warmed and a separate 166.67 s restore including search. These scopes differ. Resident tile ratios and faster rejected models do not prove this requirement. New speed work is deferred. |
 | Modern method with DINOv3 | Pinned licensed backbone, architecture rationale and measured ablations | Implemented with approved DINOv3 weights and recorded licenses; [research](research.md) and architecture experiments remain available. The new quality study preserves V43's frozen ViT-S/16 bottleneck architecture. Implementation alone is not SOTA evidence. |
-| Free, diverse training data and aggressive binning | Attribution, fixed holdouts, actual corpus training and reproducible augmentation | Available Commons membership is 88,508 train / 2,303 val / 2,255 test. The [data extension](commons-post4557-reviewed.md) and [4× → geometry → area2 pipeline](training-pipeline.md) are implemented. Final photographic-quality curation and the new matched V43 production stages are **pending**; source ranking or CPU probes are not trained quality results. |
+| Free, diverse training data and aggressive binning | Attribution, fixed holdouts, actual corpus training and reproducible augmentation | The completed scan covers 88,508 training sources; actual targeted visual review of 371 withholds 24. Frozen matched cohorts contain 39,983 control / 88,484 larger training sources, with unchanged 2,303 val / 2,255 test memberships. The [curation receipt](results/v43-quality-curation-and-training-plan-v1.json), [data extension](commons-post4557-reviewed.md) and [4× → geometry → area2 pipeline](training-pipeline.md) retain the evidence. New matched V43 production stages remain **pending**; curation and CPU probes are not trained quality results. |
 | Appropriate noise/exposure and camera handling | Physical observations, signed/negative-noise handling, highlight/shadow tests and real-camera checks | Implemented and tested, with remaining quality limitations documented in [evaluation](evaluation.md). Camera references and assumed noise priors retain their stated limits. |
 | Training and shared-machine operation | Locked Python/PyTorch/uv environment, bounded jobs, restart/data checks and real GB10 execution | Implemented. The [current quality plan](quality-first-training.md) records focused tests, actual discarded CPU training, paired input checks, resource bounds and the remaining CUDA/production work. |
 | Read-only originals and protected real-photo evaluation | Audited training manifests, local GFX cache and preserved source bytes | Standing policy: originals stay read-only; GFX DSCF3879/3880 and siblings stay outside training. The locally cached scene includes sky, buildings, foliage and fence. The ISO100 image is a separate qualitative reference, not exact GT. |
@@ -25,11 +25,13 @@ priority; speed experiments are deferred.
 
 The [V43 quality study](quality-first-training.md) separates the larger-corpus
 effect from the blur/low-contrast augmentation package using matched controls.
-The source screen covers training rows only. High loss and image-quality proxies
-select candidates for actual visual review; they never automatically label a
-photograph bad. Final curated manifests must preserve holdouts and existing
-protected-series exclusions. New model quality remains unmeasured until the
-production stages and full review finish.
+The completed source screen covers training rows only. High loss and image-quality
+proxies selected candidates for actual visual review; they never automatically
+labeled a photograph bad. Independent checks confirm the final curated cohorts
+preserve holdouts, selected row contents and inherited protected-series
+exclusions. The frozen training controller is queued for memory headroom before
+fresh CPU/CUDA checks and the three 20k stages. New model quality remains
+unmeasured until production and full review finish.
 
 Completed later studies, including [V92](late-rgb-head-only-original4k-review.md),
 retain their unfavorable evidence. Higher PSNR in one panel, finite training,

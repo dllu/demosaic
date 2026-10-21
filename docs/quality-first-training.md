@@ -51,7 +51,7 @@ Learning-rate/initializer/source settings and resource bounds are frozen in the
 
 New opt-in controls are `optical_blur_probability` (default 0.25),
 `raw_clean_optical_blur_probability` (inherits it), and
-`photographic_low_contrast_fraction` (default 0). V95 proposes 0 optical blur,
+`photographic_low_contrast_fraction` (default 0). V95 uses 0 optical blur,
 `.15` weak textures within the existing `.2` procedural fraction, and `.25`
 low-contrast probability conditional on a photographic Commons sample. Natural
 detail is continuously attenuated by 0.125–.5 around channel means, preserving
