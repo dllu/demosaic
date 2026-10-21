@@ -13,12 +13,14 @@ versus V43's original 40,170. Original validation 2,303 / test 2,255 memberships
 stay fixed. Actual downloading stopped at the reserve with 178,117 originals;
 archive discovery/attribution are complete and 279,548 originals remain pending.
 
-The [illustrated source review](corpus-source-review.md) covers 371
-sources: 347 retain and 24 withhold, including all 74 training sources with
+The [illustrated source review](corpus-source-review.md) uses 371 sources for
+the membership freeze: 347 retain and 24 withhold, including all 74 training sources with
 recorded ISO ≥12800. Native examples show why processed targets are withheld
 while real fine leaf veins and weak fog detail remain. High loss, ISO and
 software tags select review candidates; visible binned-target quality decides
-membership. This is targeted review, not a full-corpus manual inspection.
+membership. A later review retains another 24 sources, bringing actual visual
+coverage to 395 without changing this freeze. This is targeted review, not a
+full-corpus manual inspection.
 
 The full V43 loss/IQA-proxy scan completed all 88,508 training sources and
 177,016 cases. All 87 distinct final top-32/top-16 candidates have visual

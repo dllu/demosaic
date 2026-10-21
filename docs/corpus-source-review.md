@@ -43,7 +43,7 @@ Use a new training manifest; preserve originals, historical manifests, protected
 series and the GFX scene/siblings. This is targeted review, not a claim that
 every corpus photo was manually viewed.
 
-The [completed 371-source visual review](results/source-quality-visual-review-v17.json)
+The [371-source review used for the training freeze](results/source-quality-visual-review-v17.json)
 withholds twenty-four sources: a historic map scan, a photomontage, ten graphic-only
 or flat document compositions, a predominantly
 defocused station scene, and eleven images with visibly unreliable clean-target
@@ -180,4 +180,16 @@ new selected sources: it mostly found legitimate smooth skies, saturated
 gradients and bright boundaries. Small denominators and model error affect this
 cue; it does not identify bad photographs reliably by itself. This reused partial
 source scores, with no additional inference or automatic exclusions.
+
+A [post-freeze review of 24 additional sources](results/source-quality-postfreeze24-review-v1.json)
+retains all 24, bringing actual visual coverage to **395 sources: 371 retain /
+24 withhold**. Selection takes the next eight eligible unreviewed sources per
+loss ranking and four per IQA proxy. Four source/target sheets and three larger
+native source crops were actually viewed. Fishing nets, dense leaves/stalks,
+stained glass, circuits and worn engravings contain useful difficult detail;
+weak fog, aurora and wall texture remain legitimate targets. Photographed
+lettering and white specimen backgrounds alone do not establish a defect.
+This targeted batch supplies no additional clear exclusions and does not
+estimate a corpus defect rate. All current V93–V97 manifests and the original
+371-source freeze decisions remain unchanged.
 
