@@ -2,10 +2,10 @@
 
 The [quality study](quality-first-training.md) keeps V43's architecture and
 separates curated membership from the fine-detail augmentation package.
-The checks below establish engineering behavior only. No new production model,
-quality improvement or speed result is claimed. Source ranking, final visual
-decisions and the production freeze are complete; fresh CPU/CUDA preflights
-remain required before production updates.
+The checks below establish engineering behavior only. Source ranking, final
+visual decisions, the production freeze and all six fresh CPU/CUDA preflights
+are complete. V93 production training has started; there is no completed new
+20k endpoint, measured quality improvement or speed result yet.
 
 ## Data, training and reporting checks
 
@@ -45,8 +45,21 @@ diagnostic checkpoints, and uses the fixed 20k final EMA as the primary endpoint
 The training-validation best checkpoint is separate. Failures are preserved;
 there is no automatic retry or promotion. The
 [production plan](results/v43-quality-curation-and-training-plan-v1.json)
-is frozen and its controller is queued for sufficient available RAM. No fresh
-production-plan preflight or production update had run at that launch snapshot.
+is frozen. Its immutable launch snapshot records the initial memory wait;
+the same controller subsequently completed all preflights and started V93.
+
+The [final-cohort preflight receipt](results/v43-quality-final-curated-preflights-v1.json)
+covers three CPU/B1/native32 and three CUDA/B16/native256 runs on the actual
+39,983/88,484 curated cohorts. Each completes 24 discarded optimizer updates:
+144 training forwards and 144 DINO calls in total. Every arm initializes from
+the exact original V43 model and frozen DINO hashes with a fresh optimizer.
+An independent CPU-only audit verifies all six checkpoint hashes, 71 model/71
+EMA finite tensors, 69 finite Adam states with counter24, all metric/input-hash
+rows and actual preflight-owner exit. Both phases preserve all 15 shared
+paired/native observations for V93/V94 and all ten paired observations for
+V94/V95; intended treatment observations change. Frozen source/input guards pass.
+The attached production-start observation records V93 live with finite initial
+updates. These checks do not evaluate restoration quality.
 
 The [CPU reporting integration](results/v43-quality-reporting-CPU-proof-v4.json)
 also passes using the original V43 and three actual discarded 24-update EMAs:
