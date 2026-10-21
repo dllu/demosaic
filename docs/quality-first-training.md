@@ -75,7 +75,10 @@ Independent saved-state audits of
 [V94](results/v43-quality-V94-completed-training-v1.json), followed by
 [V95](results/v43-quality-V95-completed-training-v1.json), verify final EMAs,
 retained checkpoints, optimizer counters and input traces. Full matched quality
-evaluation is running; native crop review remains pending.
+evaluation and all preselected native views are complete. The
+[20k quality review](v43-curated-original20k-review.md) records photographic and
+weak-detail gains, remaining saturated-color/unseen-camera tradeoffs, and the
+decision to keep V43 as working reference while improving V95's quality.
 
 Plans/code remain local and checkpoints/run traces use a fresh external-SSD
 namespace. The completed production plan is
@@ -116,6 +119,8 @@ The [frozen production evaluation](results/v43-quality-full-evaluation-launch-v1
 uses `.cache/quality-first-20261020/V43-curated-matched-evaluation-v1/` and
 `/mnt/external/demosaic/v43-curated-evaluation-20261021-v1/`. All three final
 20k EMAs are evaluated alongside original V43; the seven stages run serially.
-Current progress is recorded in that evaluation root's `status.json`.
+Its final `status.json` records all seven completed stages. All 96 native
+triplets are represented in actual views, with independent primary, analytic
+and saved-color-array audits recorded in the quality review.
 The [CPU launcher integration](results/v43-quality-evaluation-launcher-CPU-proof-v3.json)
 passes on discarded checkpoints; it does not qualify the production branches.

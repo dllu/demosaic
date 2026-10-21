@@ -6,9 +6,11 @@ conditioning, frozen DINOv3 features and tiled 16-bit TIFF output on NVIDIA GB10
 score higher PSNR, but have not established better overall real-photo quality
 and fine-detail recovery. State-of-the-art quality and 100 MP in 10 s remain open.
 
-Current work returns to **V43's architecture**: visually clean the larger
-Commons corpus, reduce blur augmentation, and train with more low-contrast fine
-detail. See the [quality plan](docs/quality-first-training.md),
+The completed **V93–V95 study keeps V43's architecture**, using the curated larger
+corpus and less blur/more low-contrast detail. V95 improves photo scores and weak
+detail, with remaining color/camera tradeoffs. See the
+[quality review](docs/v43-curated-original20k-review.md),
+[plan](docs/quality-first-training.md),
 [experiment index](docs/experiments.md) and [documentation guide](docs/index.md).
 
 ![PSNR versus model version](docs/images/version-PSNR-history.png)

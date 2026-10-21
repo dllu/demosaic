@@ -5,8 +5,8 @@ separates curated membership from the fine-detail augmentation package.
 The checks below establish engineering behavior only. Source ranking, final
 visual decisions, the production freeze and all six fresh CPU/CUDA preflights
 are complete. V93, V94 and V95 completed their 20k stages and independent
-saved-state audits. The full matched quality evaluation is running; native
-review remains pending.
+saved-state audits. The full matched quality evaluation and all preselected
+native views are complete; see the [20k review](v43-curated-original20k-review.md).
 
 ## Data, training and reporting checks
 
@@ -220,8 +220,8 @@ A prepared v1 was unused. V2 stopped before any model forward because a strict
 configuration comparison distinguished lists from tuples; the canonical JSON
 comparison now matches the established training check. The failed artifact/log
 and owners' exit are preserved before a fresh v3 freeze. These checks cover the
-small CPU photo branch only. Full photo/real/texture/color/GFX execution, final
-curation, production CUDA and model quality remain unproven.
+small CPU photo branch only. They do not qualify the other production branches;
+the later completed production checks are recorded below.
 
 The generic native-pixel validator also passes on 64 retained triplets from
 existing real, carrier/flat, color-grid and GFX reports. It verifies PNG hashes,
@@ -239,3 +239,30 @@ with controlled resource readings pass: same-PID continuation, changed-input
 rejection while suspended, and RAM-floor failure with its exact reading.
 The numerical worker and native-validator syntax trees are unchanged. This is
 resource-control evidence, without new inference or production-quality evidence.
+
+## Completed production evaluation
+
+The [seven-stage result](results/v43-curated-original20k-complete-review-v1.json)
+binds the original V43 and all three final 20k EMAs. Actual joint-model/DINO
+calls total 17,824. Model/DINO/configuration/parameter-identity/RNG checks pass
+per stage, and sampled physical-input hashes match before/after and across
+the four checkpoints. All workers and the controller exit.
+
+Primary coverage/arithmetic checks include all 111,636 photo/procedural rows,
+648 known-camera rows and 810 unseen-camera rows, each with nine methods.
+Maximum independent summary discrepancy is 7.11e-15. The analytic auditor
+separately checks all 2,240 carrier/flat rows, 140 groups and 3,760 scalar fields,
+with maximum discrepancy 2.23e-16. These scalar checks do not recompute model
+predictions or assign training-seed uncertainty.
+
+The saved-color auditor checks all 1,176 observations/4,704 float predictions,
+28,224 Torch64 scalar fields and exact rerendering of all 12 native triplets.
+Maximum scalar discrepancy is 5.56e-16. A separate descriptive-summary audit
+checks all 72 groups/864 fields, with maximum discrepancy 8.68e-19.
+
+All 96 source triplets are represented in actual native views: 132 distinct
+160-pixel panels after shared noisy/reference cells. PNG/source/ROI/conditioning/
+display metadata and common pixels match across methods. The GFX scene and two
+highlight contexts remain separately captured qualitative references, with no
+pixelwise scores or full-frame output. The report retains real quality tradeoffs;
+passing execution/arithmetic checks does not promote V95 or establish SOTA.

@@ -64,6 +64,11 @@ STUDIES = [
         [92],
         "late-rgb-head-only-original4k-review.md",
     ),
+    (
+        "v43-curated-original20k-primary-statistics-v1.json",
+        [93, 94, 95],
+        "v43-curated-original20k-review.md",
+    ),
 ]
 METRICS = {
     ("full427", "photo", "srgb_psnr"): "photo_srgb_PSNR",
@@ -112,6 +117,8 @@ def collect():
         if "runs" in source:
             for panel in ("full427", "known", "unseen"):
                 summary = source["runs"][panel]
+                if "path" in summary and "sha256" in summary:
+                    summary = checked_reference(summary)
                 models = {m["label"]: m for m in summary["models"]}
                 for row in summary["overall"]:
                     name = row["model"]
@@ -248,6 +255,12 @@ def main():
         }
     )
     fig, axes = plt.subplots(2, 2, figsize=(11, 7.6), sharex=True, layout="constrained")
+    latest = points[-1]["version"]
+    ticks = [32, 43, 63, 72, 78, 84, 92]
+    if latest - ticks[-1] < 5:
+        ticks[-1] = latest
+    else:
+        ticks.append(latest)
     reference = next(p for p in points if p["version"] == 43)
     for row in range(2):
         shown = points if row == 0 else [p for p in points if p["version"] not in (72, 73)]
@@ -282,8 +295,9 @@ def main():
             axis.axvline(43, color="#d98b14", linewidth=1, alpha=0.5)
             axis.grid(axis="y", color="#dce2e8", linewidth=0.6)
             axis.legend(loc="best", frameon=False, fontsize=8)
-            axis.set_xticks([32, 43, 63, 72, 78, 84, 92])
-        for version in [43, 72, 92] if row == 0 else [34, 43, 63, 84, 92]:
+            axis.set_xticks(ticks)
+        highlighted = [43, 72, 92, latest] if row == 0 else [34, 43, 63, 84, 92, latest]
+        for version in dict.fromkeys(highlighted):
             p = next(r for r in shown if r["version"] == version)
             photo.annotate(
                 f"V{version}",
@@ -293,7 +307,7 @@ def main():
                 ha="center",
                 fontsize=8,
             )
-    axes[0, 0].set_title("All 32 selected endpoints", loc="left", fontsize=11)
+    axes[0, 0].set_title(f"All {len(points)} selected endpoints", loc="left", fontsize=11)
     axes[0, 1].set_title(
         "Full camera range, including RAW-native prototypes", loc="left", fontsize=10
     )
@@ -324,7 +338,7 @@ def main():
     (REPO / "docs/performance-history.md").write_text(
         "# PSNR history\n\nLater experiments often improve aggregate photographic PSNR, but none has established the combination of real-photo quality, fine-detail preservation and camera performance needed to replace V43 step2000. The version number names an experiment; it is not a training step.\n\n![PSNR versus model version](images/version-PSNR-history.png)\n\n"
         + result["description"]
-        + " Camera references are measured CFA samples; independently demosaiced RGB references are not exact GT. The small camera panels have substantial scene uncertainty. Higher means do not establish statistical significance, a common compute budget, or better low-contrast detail. Dashed lines show V43's measured means. The upper panels include all 32 endpoints; the lower panels omit V72/V73 RAW-native prototypes only to show the mature RGB range more clearly.\n\nAll photo points use the full fixed 427-source panel, seven conditions and four CFAs. Known/unseen points balance captures within scenes, then scenes (4/5 scenes, 72/90 crops). No screen16, procedural mean or model-selected subset is mixed into the photo curve. Precision details and original records remain in the source reports.\n\n"
+        + f" Camera references are measured CFA samples; independently demosaiced RGB references are not exact GT. The small camera panels have substantial scene uncertainty. Higher means do not establish statistical significance, a common compute budget, or better low-contrast detail. Dashed lines show V43's measured means. The upper panels include all {len(points)} endpoints; the lower panels omit V72/V73 RAW-native prototypes only to show the mature RGB range more clearly.\n\nAll photo points use the full fixed 427-source panel, seven conditions and four CFAs. Known/unseen points balance captures within scenes, then scenes (4/5 scenes, 72/90 crops). No screen16, procedural mean or model-selected subset is mixed into the photo curve. Precision details and original records remain in the source reports.\n\n"
         + "\n".join(rows)
         + "\n\n[CSV](results/version-PSNR-history.csv) · [Source records, checkpoint hashes and evaluation metadata](results/version-PSNR-history.json) · [SVG](images/version-PSNR-history.svg) · [PDF](images/version-PSNR-history.pdf). Rebuild from the shipped JSON with `source scripts/env.sh` then `.venv/bin/python scripts/plot_version_history.py`; `--refresh-sources` additionally audits and recollects the original local report archives. These figures reuse completed reports and perform no model inference. Native noisy/restored/reference crops remain in each linked review and the README.\n"
     )
