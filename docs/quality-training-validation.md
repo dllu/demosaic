@@ -61,6 +61,18 @@ V94/V95; intended treatment observations change. Frozen source/input guards pass
 The attached production-start observation records V93 live with finite initial
 updates. These checks do not evaluate restoration quality.
 
+The [first V93 production diagnostic](results/v43-quality-V93-first-production-checkpoint-v1.json)
+also passes independent saved-state checks at step4,000: 71 model/71 EMA finite
+tensors, the original restoration tensor keys, 69 finite Adam states with
+counter4000, and exact curated/source identities. The retained file matches
+`last.pt` at that observation. Scheduled validation completes all 28
+condition/CFA cells on eight validation sources, and the same worker continues
+beyond step4,000. The older parent omits 19 later configuration defaults; all
+shared fields and effective configurations match. An initial raw-dictionary
+audit failure and its corrected CPU-only check are preserved. This is a
+training diagnostic; the fixed20k endpoint and full native quality review remain
+outstanding.
+
 The [CPU reporting integration](results/v43-quality-reporting-CPU-proof-v4.json)
 also passes using the original V43 and three actual discarded 24-update EMAs:
 48 genuine neural/DINO forwards, 84 metric rows, and eight native 160-pixel
