@@ -1,0 +1,87 @@
+{
+  "status": "actual-V95-disk-reserve-suspension-and-same-worker-continuation-verified",
+  "recorded_local": "2026-10-21T12:19:58.458615-07:00",
+  "worker": {
+    "pid": 3422418,
+    "created": 1792605984.94
+  },
+  "controller": {
+    "pid": 3422254,
+    "created": 1792605923.15
+  },
+  "original_numerical_training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V43-curated-matched-training-v1/plan.json",
+    "sha256": "2fec2f3e77e15791d1ece4e10e65133a84be234eba0702a4d4dcd643753f7556"
+  },
+  "recovery_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-manual-recovery-v2/plan.json",
+    "sha256": "68f43182e585848a4b7c9667dcfe112168f4d4c63dae74d5040cbce1a9ab71a9"
+  },
+  "pause_observation": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/cold-checkpoint-relocation-v2/actual-reserve-pause-before-resumption.json",
+    "sha256": "ae564866c092ed9899176dd5b0a824aa480c6fe40a6c8948f1289d0dbbfb3dca"
+  },
+  "paused_status": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/cold-checkpoint-relocation-v2/paused-training-status.json",
+    "sha256": "7e6dd734a2d1bdc12fd0a395bbe4921e82c0d5bda6efc5150ae5b1ba630034ff"
+  },
+  "resumed_status": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/cold-checkpoint-relocation-v2/resumed-training-status.json",
+    "sha256": "e5652ff65efa503d5f7e6f21b4be5dfd79aaf7c6a028a94ed1579cdb3aa0df83"
+  },
+  "paused_metrics_immutable_copy": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/cold-checkpoint-relocation-v2/actual-reserve-pause-metrics-prefix.jsonl",
+    "sha256": "f97ba1f910c270761af45580c9956ecdcb74b3664431509c8bded51637f6273e"
+  },
+  "resumed_metrics_snapshot": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/cold-checkpoint-relocation-v2/metrics-after-resumption-snapshot.jsonl",
+    "sha256": "f12cd5fef22ab86f14affec36237f39694260a44aa6570be50422d91d7185544"
+  },
+  "resource_history_snapshot": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/cold-checkpoint-relocation-v2/resource-history-after-resumption-snapshot.jsonl",
+    "sha256": "ab5e82a7029207d3bf2288db4a36d4369c81946f86b1a405cdc64af60dd6ae47"
+  },
+  "observed_trigger_GiB": {
+    "RAM_available_bytes": 34.567840576171875,
+    "root_free_bytes": 62.30132293701172,
+    "external_free_bytes": 459.86855697631836
+  },
+  "observed_pause_seconds": 278.9657299518585,
+  "stable_headroom_samples_before_resume_seconds": 60.01341128349304,
+  "paused_last_logged_step": 8025,
+  "resumed_last_logged_step": 8300,
+  "recorded_losses_and_gradients_finite": true,
+  "paused_metrics_preserved_as_exact_prefix": true,
+  "paused_descendant_states": [
+    "stopped",
+    "stopped",
+    "stopped",
+    "stopped",
+    "stopped",
+    "stopped",
+    "stopped",
+    "stopped",
+    "stopped"
+  ],
+  "cold_relocation": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/cold-checkpoint-relocation-v2/receipt.json",
+    "sha256": "4a6900c27f4aa77ec87c7358628e4e8522187298682aa894ba69285b8876ff8a"
+  },
+  "cold_selection": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/cold-checkpoint-relocation-v2/selection-v2.json",
+    "sha256": "90b21e66a5b095dad23138dd794cdff774986db4b3fcc282f1bbea03c7595f39"
+  },
+  "cold_operator": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/cold-checkpoint-relocation-v2/relocate-executed-source.py",
+    "sha256": "e0b51283061a88400e136380a238948284cb296fe0905b6fa0b2e166926d5ec7"
+  },
+  "relocated_inode_groups": 71,
+  "relocated_aliases": 71,
+  "allocated_GiB_reclaimed": 32.371826171875,
+  "original_alias_target_metadata_check_passed": true,
+  "scope": "A real root-disk reserve event suspended the owned V95 worker and all nine observed descendants. Closed project checkpoint artifacts were copied to external SSD with full hash verification, modes/mtimes/logical paths preserved and current frozen inputs excluded. The controller resumed the same worker after original stable headroom and frozen guards. The paused metric bytes remain an exact prefix and recorded training continues finitely. No numerical-worker/config/data change, training restart, bitwise learned-state proof or quality claim. Earlier two generic guard failures remain causally unidentified.",
+  "detailed_proof": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/cold-checkpoint-relocation-v2/actual-reserve-continuation-proof-v1.json",
+    "sha256": "ed1496f6ed603244f8248be529f790c705a305a1fd182c2135e38a3efb88d290"
+  }
+}

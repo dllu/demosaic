@@ -178,6 +178,19 @@ The [current recovery receipt](results/v43-quality-V95-resource-telemetry-recove
 records the causal clarification, exact readings, CPU/CUDA continuation checks
 and exact replay of all 63 logged batches through step1,550.
 
+The later [actual reserve event](results/v43-quality-V95-actual-disk-pause-v1.json)
+records root free space below 64 GiB after 8k validation, with RAM above its
+active floor. The worker and all nine observed descendants are stopped at
+logged step 8,025. Another 71 closed checkpoint inodes/71 aliases move to the
+external SSD after full copy-hash verification, reclaiming 32.4 GiB locally;
+all original aliases resolve to targets with preserved modes/mtimes. The
+controller resumes the same worker after 60 seconds of qualifying readings and
+frozen-input checks. Its paused metric bytes remain an exact prefix, and
+recorded losses/gradients stay finite through step 8,300 in the snapshot.
+This qualifies actual reserve-triggered continuation, without proving bitwise
+learned-state parity or image quality. The original two guard causes remain
+unknown; their older snapshots are not rewritten.
+
 ## Evaluation launcher integration
 
 The [CPU evaluation-launcher check](results/v43-quality-evaluation-launcher-CPU-proof-v3.json)

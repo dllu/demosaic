@@ -103,6 +103,14 @@ recovery is `.cache/quality-first-20261020/V95-manual-recovery-v2/`; its
 include exact replay of the 63 recorded batches through step1,550. Check the
 original study's `status.json` for live progress and recovery provenance.
 
+After its 8k validation, an actual root-disk reserve breach pauses V95 at
+logged step 8,025. A further 32.4 GiB of closed project checkpoint artifacts is
+relocated with bytes and original paths preserved. The same worker resumes
+after stable headroom and frozen-input checks; its paused metrics remain an
+exact prefix. See the [observed disk-pause receipt](results/v43-quality-V95-actual-disk-pause-v1.json).
+This establishes continuation, while the two earlier generic guard triggers
+remain unidentified. The full 20k quality comparison is still pending.
+
 ## Quality review
 
 Compare completed endpoints with V43 and matched controls on the fixed 427-photo
