@@ -92,3 +92,39 @@ def test_explicit_fp32_grid_preserves_inference_scope_before_input_loading(monke
         with pytest.raises(RuntimeError, match="input boundary"):
             module.evaluate_records("unused", "unused", "unused", [], "parent", precision="float32")
         assert torch.is_grad_enabled() and not torch.is_inference_mode_enabled()
+
+
+def test_multistage_lineage_keeps_exact_parent_identity_and_stage_boundary():
+    module = script()
+    original = {"path": "original-V43.pt", "sha256": "original", "step": 2000}
+    parent = {"path": "final-V95.pt", "sha256": "parent", "step": 20000}
+    for checkpoint, step, initializer in [("parent", 20000, original), ("candidate", 4000, parent)]:
+        expected = {"step": step, "initialized_from": initializer}
+        state = {"step": step, "config": {"initialized_from": initializer}}
+        module.check_joint_lineage(state, checkpoint, "original", 20000, lineage=expected)
+        for bad in [
+            {"step": step - 1, "config": state["config"]},
+            {"step": step, "config": {"initialized_from": {**initializer, "step": 999}}},
+            {"step": step, "config": {"initialized_from": {**initializer, "sha256": "other"}}},
+            {"step": step, "config": {"initialized_from": {**initializer, "path": "other"}}},
+            {"step": step, "config": {}},
+        ]:
+            with pytest.raises(AssertionError):
+                module.check_joint_lineage(bad, checkpoint, "original", 20000, lineage=expected)
+    # An independently initialized original still has an exact, explicit boundary.
+    module.check_joint_lineage(
+        {"step": 2000, "config": {}}, "original", "original", 20000, lineage={"step": 2000}
+    )
+    with pytest.raises(AssertionError):
+        module.check_joint_lineage(
+            {"step": 1999, "config": {}}, "original", "original", 20000, lineage={"step": 2000}
+        )
+    with pytest.raises(AssertionError):
+        module.check_joint_lineage(
+            {"step": 2000, "config": {}},
+            "original",
+            "original",
+            2000,
+            fresh=True,
+            lineage={"step": 2000},
+        )

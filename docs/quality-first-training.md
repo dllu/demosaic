@@ -80,6 +80,11 @@ evaluation and all preselected native views are complete. The
 weak-detail gains, remaining saturated-color/unseen-camera tradeoffs, and the
 decision to keep V43 as working reference while improving V95's quality.
 
+The [V96/V97 follow-up](v95-flat-palette-quality-plan.md) tests the existing
+wider colored-flat palette from final V95 while preserving the weak-detail
+recipe and architecture. It is a prospective matched 4k study, with full
+quality/native review required before any new conclusion.
+
 Plans/code remain local and checkpoints/run traces use a fresh external-SSD
 namespace. The completed production plan is
 `.cache/quality-first-20261020/V43-curated-matched-training-v1/`. Resource bounds

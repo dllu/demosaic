@@ -32,16 +32,18 @@ def audit(root, arm, output):
     plan_path = root / "plan.json"
     plan = read(plan_path)
     guard(plan)
-    assert not plan["engineering_only"] and plan["planned_updates"] == 20000
+    assert not plan["engineering_only"]
+    updates = plan["planned_updates"]
+    assert updates > 0 and arm in plan["arms"]
     result_path = root / f"train-{arm}-result.json"
     result = read(result_path)
     assert result["status"] == "completed-V43-quality-stage-awaiting-independent-evaluation"
     assert result["plan"] == ref(plan_path) and result["phase"] == "train" and result["arm"] == arm
     assert not result["engineering_only"] and result["CUDA_initialized"]
     assert result["fresh_optimizer_empty"]
-    assert (
-        result["initial_model_sha256"]
-        == "4a45d92210acaeca3d4189c78eb22aa1cbc33f28b971dbeb56d1f6f29d62ed9a"
+    assert result["initial_model_sha256"] == plan.get(
+        "initial_model_sha256",
+        "4a45d92210acaeca3d4189c78eb22aa1cbc33f28b971dbeb56d1f6f29d62ed9a",
     )
     assert (
         result["DINO_sha256"] == "35035ba142eb119cd5980cf0d9809bfa28f622538c259ffb0fcf348ca6e68898"
@@ -61,18 +63,19 @@ def audit(root, arm, output):
     protocol = yaml.safe_load((Path(plan["work"]) / "configs/evaluation.yaml").read_text())
     assert len(protocol["conditions"]) == 7 and len(protocol["patterns"]) == 4
     assert cfg["validation_images"] == 8 and cfg["val_batches"] == 4
-    steps = [*plan["retain_steps"], plan["planned_updates"]]
+    steps = [*plan["retain_steps"], updates]
+    assert steps == plan.get("validation_steps", steps)
     expected_validation_forwards = len(steps) * (4 + 28 * math.ceil(8 / cfg["batch_size"]))
     assert result["counts"] == {
-        "training_forwards": 20000,
+        "training_forwards": updates,
         "validation_forwards": expected_validation_forwards,
-        "DINO_calls": 20000 + expected_validation_forwards,
-        "optimizer_steps": 20000,
+        "DINO_calls": updates + expected_validation_forwards,
+        "optimizer_steps": updates,
     }
     events = [json.loads(line) for line in Path(result["metrics"]["path"]).read_text().splitlines()]
     training = [r for r in events if r.get("event") == "train"]
     validation = [r for r in events if r.get("event") == "validation"]
-    assert [r["step"] for r in training] == [1, *range(25, 20001, 25)]
+    assert [r["step"] for r in training] == [1, *range(25, updates + 1, 25)]
     assert training == result["logged_training_observations"]
     assert all(math.isfinite(r["loss"]) and math.isfinite(r["grad_norm"]) for r in training)
     assert {r["domain"] for r in training} == {"native-RAW-synthetic", "paired-RAW", "synthetic"}
@@ -98,7 +101,7 @@ def audit(root, arm, output):
     cohort = read(plan["curation"]["path"])["cohorts"]["small" if arm == "V93" else "large"]
     run = Path(result["checkpoint"]["path"]).parent
     checkpoints = [(run / f"step-{n:06d}.pt", n) for n in plan["retain_steps"]]
-    checkpoints += [(run / "last.pt", 20000), (run / "best.pt", None)]
+    checkpoints += [(run / "last.pt", updates), (run / "best.pt", None)]
     retained = []
     for path, expected_step in checkpoints:
         identity = ref(path)
@@ -120,7 +123,10 @@ def audit(root, arm, output):
             assert all(
                 torch.isfinite(v).all().item() for v in item.values() if isinstance(v, torch.Tensor)
             )
-        assert actual["initialized_from"] == {**plan["parent"], "step": 2000}
+        assert actual["initialized_from"] == {
+            **plan["parent"],
+            "step": plan.get("parent_step", 2000),
+        }
         for key in cfg:
             if key != "validation_protocol":
                 assert actual[key] == cfg[key], key
@@ -177,7 +183,7 @@ def audit(root, arm, output):
             "DINO_sha256_from_executed_worker": result["DINO_sha256"],
             "source_sha256": result["source_sha256"],
             "curated_training_membership": cohort,
-            "all801_training_metric_rows_and_gradients_finite": True,
+            "training_metric_rows_with_finite_loss_and_gradients": len(training),
             "training_domain_log_counts": dict(collections.Counter(r["domain"] for r in training)),
             "all_first24_production_inputs_exact_discarded_CUDA_probe": True,
             "validation": {
@@ -190,7 +196,7 @@ def audit(root, arm, output):
             },
             "worker_final_frozen_DINO_assertions_completed": True,
             "auditor_CUDA_initialized": False,
-            "scope": "Independent CPU-only hashes, original lineage/effective architecture, every retained model/EMA/Adam state and step, exact final/probe input traces, fixed manifests/protocol and scheduled training-validation coverage. Frozen executed worker additionally checks final DINO weights/no gradients. No new inference or training; this is not a held-out quality comparison, native-crop review, inference-speed result or promotion. Fixed20k final EMA remains primary; validation-best and intermediates remain separate.",
+            "scope": f"Independent CPU-only hashes, exact stage lineage/effective architecture, every retained model/EMA/Adam state and step, exact final/probe input traces, fixed manifests/protocol and scheduled training-validation coverage. Frozen executed worker additionally checks final DINO weights/no gradients. No new inference or training; this is not a held-out quality comparison, native-crop review, inference-speed result or promotion. Fixed{updates} final EMA remains primary; validation-best and intermediates remain separate.",
         },
     )
     print(ref(output))
@@ -199,7 +205,7 @@ def audit(root, arm, output):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("root", type=Path)
-    parser.add_argument("--arm", choices=("V93", "V94", "V95"), required=True)
+    parser.add_argument("--arm", choices=("V93", "V94", "V95", "V96", "V97"), required=True)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     audit(args.root.resolve(), args.arm, args.output)

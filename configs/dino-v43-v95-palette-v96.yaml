@@ -1,0 +1,117 @@
+amp: true
+augmentation_downsample: 2
+batch_size: 16
+broad_camera: true
+channels_last: true
+checkpoint_every: 1000
+cpu_threads: 4
+data_seed_per_step: true
+device: cuda
+experiment_notes: Matched V96/V97 quality-only stage from final V95 EMA. Same curated88484
+  corpus, original V43 architecture, seed57/B16/native256/BF16/4000 updates, fresh
+  optimizer, zero PSFs, weak textures and photographic contrast attenuation retained.
+  Only colored smooth-field palette differs:0 vs8 stops; flat/synthetic/domain fractions,
+  neutral fields, other clean draws, losses and validation unchanged. Final4000 EMA
+  primary; no automatic promotion or speed work. Launch only through the frozen palette
+  controller after current-recipe data checks and discarded actual CPU/CUDA preflights.
+flat_fraction: 0.1
+initialize_parent:
+  checkpoint: /mnt/external/demosaic/v43-curated-training-20261020-v1/train/V95/last.pt
+  sha256: 189f5530ef8be6384e101e00fe50ece19297436b0c65b5bb3cabbb2f327e2bb6
+  step: 20000
+  selection: Final V95 stage20k EMA, same V43 architecture; fresh optimizer/EMA for
+    a matched4000-update palette stage.
+log_every: 25
+lr: 1.0e-05
+manifest: /home/dllu/proj/demosaic/.cache/quality-first-20261020/curated-corpus-v1/manifest4-large.jsonl
+min_available_gb: 24
+model:
+  restoration_backbone: pretrained-rgb
+  width: 64
+  encoder_blocks:
+  - 2
+  - 2
+  - 4
+  middle_blocks: 6
+  decoder_blocks:
+  - 2
+  - 2
+  - 2
+  attention: true
+  dino: true
+  dino_model: facebook/dinov3-vits16-pretrain-lvd1689m
+  dino_revision: 114c1379950215c8b35dfcd4e90a5c251dde0d32
+  dino_lora_rank: 0
+  dino_input_adapter: false
+  dino_feature_fusion: bottleneck
+  camera_conditioning: true
+  noise_modulation: false
+  physical_fp32: true
+  baseline: bilinear
+  prior_window: 7
+  standardized_noise: false
+  noise_refinement: false
+  refinement_width: 24
+  refinement_blocks: 4
+  refinement_window: 63
+  coarse_refinement_factor: 0
+  coarse_refinement_width: 24
+  coarse_refinement_blocks: 4
+  coarse_refinement_window: 31
+  pyramid_refinement: false
+  pyramid_measurements: true
+  pyramid_width: 24
+  pyramid_blocks: 2
+  variance_stabilization: true
+  physical_anchors: true
+  rgb_processing_scale: 1
+  packed_detail_prior: false
+  rgb_hidden_autocast: false
+  rgb_center_camera_matrix: false
+  rgb_middle_skip_fp32: false
+  adc_cfa_projection: false
+  raw_kernel_reconstruction: false
+  raw_kernel_windows:
+  - 1
+  - 5
+  - 17
+  raw_kernel_phase_conditioning: false
+  raw_directional_residual: false
+  raw_directional_bank_context: false
+  raw_directional_bank_detach_input: false
+  raw_spectral_residual: false
+  late_rgb_refinement: none
+  isotropic_groups: 6
+  isotropic_blocks: 8
+  isotropic_local_width: 32
+  isotropic_raw_gain: 1.0
+  isotropic_residual_scale: 1.0
+noise_free_fraction: 0.1
+paired_fraction: 0.25
+paired_manifest: /mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json
+paired_workers: 2
+patch_size: 256
+precision: bfloat16
+preserve_negative_read_noise: true
+raw_clean_augmentation_downsample: 2
+raw_clean_fraction: 0.25
+raw_clean_manifest: /mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json
+raw_clean_workers: 2
+reconstruct_highlights: true
+run: /mnt/external/demosaic/v95-palette-training-20261021-v1/train/V96
+seed: 57
+steps: 4000
+synthetic_fraction: 0.2
+trace_observations: true
+val_batches: 4
+validation_images: 8
+validation_manifest: /mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl
+validation_protocol: configs/evaluation.yaml
+warmup_steps: 100
+worker_start_method: spawn
+workers: 4
+optical_blur_probability: 0
+raw_clean_optical_blur_probability: 0
+photographic_low_contrast_fraction: 0.25
+weak_texture_fraction: 0.15
+flat_chroma_stops: 0

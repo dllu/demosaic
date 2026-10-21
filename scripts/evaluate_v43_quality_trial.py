@@ -35,14 +35,17 @@ RAWNIND = Path("/mnt/external/demosaic/references/rawnind")
 COLOR = Path("/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/plan.json")
 
 
-def prepare(training_root, root, *, cpu_proof=False, artifact_root=None):
+def prepare(training_root, root, *, cpu_proof=False, artifact_root=None, palette=False):
     import yaml
 
     assert os.path.ismount("/mnt/external")
     status_path = training_root / "status.json"
     status, training = read(status_path), read(training_root / "plan.json")
+    assert not (palette and cpu_proof)
     assert status["status"] == (
-        "completed-discarded-CPU-launcher-proof"
+        "completed-matched-V95-palette-training-awaiting-full-quality-and-native-review"
+        if palette
+        else "completed-discarded-CPU-launcher-proof"
         if cpu_proof
         else "completed-matched-V43-training-awaiting-full-evaluation-and-native-review"
     )
@@ -50,8 +53,30 @@ def prepare(training_root, root, *, cpu_proof=False, artifact_root=None):
     guard(training)
     assert status["plan"] == ref(training_root / "plan.json")
     inputs = [ref(status_path), ref(training_root / "plan.json"), training["parent"]]
-    checkpoints = [{"arm": "V43", **training["parent"]}]
-    for arm in ("V93", "V94", "V95"):
+    if palette:
+        original_ref = training["original_training_plan"]
+        assert ref(original_ref["path"]) == original_ref
+        original = read(original_ref["path"])
+        guard(original)
+        inputs.append(original_ref)
+        checkpoints = [
+            {"arm": "V43", **original["parent"], "expected_lineage": {"step": 2000}},
+            {
+                "arm": "V95",
+                **training["parent"],
+                "expected_lineage": {
+                    "step": 20000,
+                    "initialized_from": {**original["parent"], "step": 2000},
+                },
+            },
+        ]
+        inputs.append(original["parent"])
+        assert training["arms"] == ["V96", "V97"] and training["planned_updates"] == 4000
+        arms = training["arms"]
+    else:
+        checkpoints = [{"arm": "V43", **training["parent"]}]
+        arms = ("V93", "V94", "V95")
+    for arm in arms:
         item = status["completed"][("CPU-" if cpu_proof else "train-") + arm]
         assert ref(item["path"]) == item
         result = read(item["path"])
@@ -59,7 +84,13 @@ def prepare(training_root, root, *, cpu_proof=False, artifact_root=None):
         assert result["plan"] == ref(training_root / "plan.json")
         assert ref(result["checkpoint"]["path"]) == result["checkpoint"]
         inputs += [item, result["checkpoint"]]
-        checkpoints.append({"arm": arm, **result["checkpoint"]})
+        record = {"arm": arm, **result["checkpoint"]}
+        if palette:
+            record["expected_lineage"] = {
+                "step": 4000,
+                "initialized_from": {**training["parent"], "step": 20000},
+            }
+        checkpoints.append(record)
     root = root.resolve()
     assert root.is_relative_to(REPO / ".cache")
     root.mkdir(parents=True, exist_ok=False)
@@ -201,7 +232,12 @@ def prepare(training_root, root, *, cpu_proof=False, artifact_root=None):
         "frozen_files": {str(p): ref(p)["sha256"] for p in work.rglob("*") if p.is_file()},
         "scope": "Discarded CPU/native176/B1 reporting-launcher integration on2 photos/1 procedural source,2 conditions/2CFAs; not quality, CUDA or final curation evidence."
         if cpu_proof
-        else "Fixed final20k EMAs vs original V43, fresh IEEE FP32/channels-last observations and metrics. Full427-photo/16-procedural,7-condition/4-CFA suite, known4/unseen5 real development scenes, carrier/flat/color diagnostics and standing GFX plus highlights. RawNIND global/per-channel input-only gains included in photo/real/GFX. No output correction, model selection, speed claim or automatic promotion; independent numeric/native review required.",
+        else (
+            "Fixed final4000-stage V96/V97 EMAs vs parent V95 final20k and original V43 step2000. Each checkpoint has explicit exact step/initializer lineage. "
+            if palette
+            else "Fixed final20k EMAs vs original V43. "
+        )
+        + "Fresh IEEE FP32/channels-last observations and metrics. Full427-photo/16-procedural,7-condition/4-CFA suite, known4/unseen5 real development scenes, carrier/flat/color diagnostics and standing GFX plus highlights. RawNIND global/per-channel input-only gains included in photo/real/GFX. No output correction, model selection, speed claim or automatic promotion; independent numeric/native review required.",
     }
     save(root / "plan.json", plan)
     guard(plan)
@@ -289,12 +325,18 @@ def worker(plan_path, stage):
                 model, state = loader(*args, **kwargs)
             random.setstate(python_rng)
             strict_float32()
-            assert state["loaded_sha256"] in {r["sha256"] for r in plan["checkpoints"]}
-            assert state["step"] == (
+            match = next(r for r in plan["checkpoints"] if r["sha256"] == state["loaded_sha256"])
+            expected_step = (
                 2000
                 if state["loaded_sha256"] == plan["checkpoints"][0]["sha256"]
                 else (24 if plan["cpu_proof"] else 20000)
             )
+            assert state["step"] == match.get("expected_lineage", {}).get("step", expected_step)
+            if "initialized_from" in match.get("expected_lineage", {}):
+                assert (
+                    state["config"].get("initialized_from")
+                    == match["expected_lineage"]["initialized_from"]
+                )
             assert model_hash(model.context.backbone) == plan["DINO_SHA256"]
             record = {
                 "model": model,
@@ -673,6 +715,7 @@ if __name__ == "__main__":
     parser.add_argument("--output", type=Path)
     parser.add_argument("--artifact-root", type=Path)
     parser.add_argument("--cpu-proof", action="store_true")
+    parser.add_argument("--palette", action="store_true")
     parser.add_argument("--stage")
     args = parser.parse_args()
     if args.mode == "prepare":
@@ -682,6 +725,7 @@ if __name__ == "__main__":
             args.output,
             cpu_proof=args.cpu_proof,
             artifact_root=args.artifact_root,
+            palette=args.palette,
         )
     elif args.mode == "worker":
         assert args.stage

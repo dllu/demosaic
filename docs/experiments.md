@@ -44,6 +44,9 @@ all six fresh CPU/CUDA preflights passed, all three arms completed 20k with
 independent saved-state audits, and the full matched evaluation/native review is
 complete. The [V93–V95 review](v43-curated-original20k-review.md) finds photo and
 weak-detail gains with remaining saturated-color/unseen-camera tradeoffs.
+The [V96/V97 follow-up](v95-flat-palette-quality-plan.md) keeps that weak-detail
+recipe and tests a wider colored-flat palette from V95; quality results remain
+pending.
 Originals and historical manifests remain read-only. Validation/test and the
 standing GFX scene remain outside training. See the [source review](corpus-source-review.md).
 

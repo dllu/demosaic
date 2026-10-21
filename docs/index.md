@@ -6,7 +6,7 @@ training quality with its architecture and the larger cleaned corpus.
 
 | Topic | Start here |
 | --- | --- |
-| Current work | [V43 curated quality review](v43-curated-original20k-review.md) · [Training plan](quality-first-training.md) |
+| Current work | [V43 curated quality review](v43-curated-original20k-review.md) · [Training plan](quality-first-training.md) · [V95 color follow-up](v95-flat-palette-quality-plan.md) |
 | Results | [Experiment index](experiments.md), [PSNR history](performance-history.md) |
 | Older work | [Chronological archive](experiment-archive.md), [local-time diary](../diary/index.md) |
 | Current model | [V43 quality review](native-corpus-2k-review.md), [full-frame/crop validation](mature-cudnn-fullframe.md) |

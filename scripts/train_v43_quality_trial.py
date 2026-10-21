@@ -225,6 +225,8 @@ def worker(plan_path, phase, arm):
 
     plan = read(plan_path)
     guard(plan)
+    initial_model_sha = plan.get("initial_model_sha256", MODEL_SHA)
+    parent_step = plan.get("parent_step", 2000)
     root = Path(plan["root"])
     (root / f"{phase}-{arm}.claim").open("x").close()
     config_path = plan["configs"][arm][phase]["path"]
@@ -272,7 +274,7 @@ def worker(plan_path, phase, arm):
                 capture["initial_model_sha256"] = model_hash(module)
                 capture["DINO_sha256"] = model_hash(module.context.backbone)
                 assert (
-                    capture["initial_model_sha256"] == MODEL_SHA
+                    capture["initial_model_sha256"] == initial_model_sha
                     and capture["DINO_sha256"] == DINO_SHA
                 )
                 actual = module.restoration_state_dict()
@@ -342,7 +344,7 @@ def worker(plan_path, phase, arm):
             assert state["config"][key] == value, key
     assert state["step"] == counts["optimizer_steps"] == counts["training_forwards"] == updates
     assert counts["DINO_calls"] == counts["training_forwards"] + counts["validation_forwards"]
-    assert state["config"]["initialized_from"] == {**plan["parent"], "step": 2000}
+    assert state["config"]["initialized_from"] == {**plan["parent"], "step": parent_step}
     assert json.dumps(
         ModelConfig.from_checkpoint(state["model_config"]).to_dict(), sort_keys=True
     ) == json.dumps(expected, sort_keys=True)
@@ -369,13 +371,9 @@ def worker(plan_path, phase, arm):
             assert counts["validation_forwards"] == 0
     else:
         assert [r["step"] for r in rows] == [1, *range(25, updates + 1, 25)]
-        assert [r["step"] for r in metrics if r["event"] == "validation"] == [
-            4000,
-            8000,
-            12000,
-            16000,
-            20000,
-        ]
+        assert [r["step"] for r in metrics if r["event"] == "validation"] == plan.get(
+            "validation_steps", [4000, 8000, 12000, 16000, 20000]
+        )
     if phase == "CPU":
         assert not torch.cuda.is_initialized()
     guard(plan)
@@ -602,7 +600,7 @@ if __name__ == "__main__":
         help="CPU-only V95 checkpoint/validation boundary proof; keeps production schedules unchanged.",
     )
     parser.add_argument("--phase", choices=("CPU", "CUDA", "train"))
-    parser.add_argument("--arm", choices=tuple(RECIPES))
+    parser.add_argument("--arm", choices=(*RECIPES, "V96", "V97"))
     args = parser.parse_args()
     if args.mode == "prepare":
         assert args.output

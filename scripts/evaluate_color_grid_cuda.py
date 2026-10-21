@@ -198,9 +198,16 @@ def main(
     )
 
 
-def check_joint_lineage(state, checkpoint_sha256, parent_sha256, expected_step, *, fresh=False):
+def check_joint_lineage(
+    state, checkpoint_sha256, parent_sha256, expected_step, *, fresh=False, lineage=None
+):
     """Recognize the verified parent by content, independently of display labels."""
-    if fresh:
+    if lineage is not None:
+        assert not fresh and set(lineage) in ({"step"}, {"step", "initialized_from"})
+        assert state["step"] == lineage["step"]
+        if "initialized_from" in lineage:
+            assert state["config"].get("initialized_from") == lineage["initialized_from"]
+    elif fresh:
         assert checkpoint_sha256 != parent_sha256
         assert state["config"].get("initialized_from") is None
         assert state["step"] == expected_step
@@ -309,6 +316,7 @@ def evaluate_records(
                 parent_sha256,
                 expected_step,
                 fresh=record.get("initialization") == "fresh",
+                lineage=record.get("expected_lineage"),
             )
             del state
         else:
