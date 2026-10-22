@@ -174,3 +174,19 @@ the historical unprojected pair when common ADC inference is required.
 The rehearsal is not V98/V99 quality evidence. Its separate live observation
 records V98's final4k checkpoint and the running V99 owner; no new evaluation
 panel had started.
+
+The [secondary native-photo helper](../scripts/evaluate_v95_native_photo_conditions.py)
+now accepts the same projected V98/V99 comparison while preserving V43/V95
+reference policies and both final4k initializer identities. It retains the
+first four full-suite sources and two fixed native crop cases, at ADC-only,
+ISO100 and ISO12800: 36 planned triplets. It checks measured-sample fidelity
+on ADC inputs and requires positive-noise conditions to retain positive priors.
+All seven primary panels and their owners must finish/exit before its GPU
+worker starts; the full suite remains primary.
+
+The [native-helper preparation](results/v95-adc-native-detail-preparation-v1.json)
+passes 69 frozen checks and actual packaging/CLI checks, including the crop-board
+dependency. The historical preparation rehearsal starts no controller or
+worker. The new secondary diagnostic has not been prepared or queued yet,
+because its parent evaluation plan does not exist while V99 trains. Actual
+native viewing remains pending; no crop-quality result follows from these checks.

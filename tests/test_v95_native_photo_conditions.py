@@ -8,8 +8,10 @@ from evaluate_v95_native_photo_conditions import (
     COMPLETE,
     CONDITIONS,
     check_effective_config,
+    check_native_checkpoints,
     condition_protocols,
     dependency_ready,
+    measure_native_adc,
 )
 
 
@@ -80,7 +82,16 @@ def test_native_condition_selection_preserves_calibration_seed_and_adc_settings(
 
 @pytest.mark.parametrize(
     "case",
-    ["missing-condition", "duplicate", "missing-RGGB", "exposure", "ADC-noise", "negative", "nan"],
+    [
+        "missing-condition",
+        "duplicate",
+        "missing-RGGB",
+        "exposure",
+        "ADC-noise",
+        "negative",
+        "nan",
+        "zero-ISO100",
+    ],
 )
 def test_invalid_native_protocol_fails_before_any_data_or_model_loading(case):
     value = protocol()
@@ -96,6 +107,8 @@ def test_invalid_native_protocol_fails_before_any_data_or_model_loading(case):
         value["conditions"][0]["shot"] = 0.01
     elif case == "negative":
         value["conditions"][1]["read"] = -1
+    elif case == "zero-ISO100":
+        value["conditions"][1].update(shot=0, read=0)
     else:
         value["conditions"][1]["shot"] = float("nan")
     with pytest.raises(ValueError):
@@ -147,3 +160,108 @@ def test_other_plan_identity_cannot_satisfy_the_dependency():
     state["plan"]["sha256"] = "other"
     with pytest.raises(ValueError, match="identity"):
         dependency_ready(state, parent, is_live=lambda p: p["alive"])
+
+
+def adc_checkpoints():
+    result = [
+        {"arm": arm, "path": f"/{arm}.pt", "sha256": str(i) * 64}
+        for i, arm in enumerate(("V43", "V95", "V98", "V99"))
+    ]
+    initializer = {"step": 20000, **{k: result[1][k] for k in ("path", "sha256")}}
+    for checkpoint in result[2:]:
+        checkpoint.update(
+            expected_adc_projection=True,
+            expected_lineage={"step": 4000, "initialized_from": copy.deepcopy(initializer)},
+        )
+    result[2]["training_checkpoint"] = {"path": "/V98-unprojected.pt", "sha256": "a" * 64}
+    return result
+
+
+def test_only_declared_studies_are_accepted_with_common_adc_policy_and_final_lineage():
+    current = adc_checkpoints()
+    before = copy.deepcopy(current)
+    assert check_native_checkpoints(current) is True
+    assert current == before
+    legacy = [{"arm": arm} for arm in ("V43", "V95", "V96", "V97")]
+    assert check_native_checkpoints(legacy) is False
+    legacy[-1]["expected_adc_projection"] = True
+    with pytest.raises(ValueError, match="historical"):
+        check_native_checkpoints(legacy)
+
+
+@pytest.mark.parametrize(
+    "damage",
+    [
+        "raw-control",
+        "unprojected-candidate",
+        "nonbool-flag",
+        "changed-reference",
+        "intermediate",
+        "wrong-parent",
+        "missing-export-origin",
+        "unchanged-export-hash",
+        "wrong-arm",
+    ],
+)
+def test_unmatched_adc_native_comparisons_fail_before_model_loading(damage):
+    current = adc_checkpoints()
+    if damage == "raw-control":
+        current[2]["expected_adc_projection"] = False
+    elif damage == "unprojected-candidate":
+        current[3]["expected_adc_projection"] = False
+    elif damage == "nonbool-flag":
+        current[3]["expected_adc_projection"] = 1
+    elif damage == "changed-reference":
+        current[1]["expected_adc_projection"] = True
+    elif damage == "intermediate":
+        current[3]["expected_lineage"]["step"] = 3000
+    elif damage == "wrong-parent":
+        current[2]["expected_lineage"]["initialized_from"]["sha256"] = "b" * 64
+    elif damage == "missing-export-origin":
+        del current[2]["training_checkpoint"]
+    elif damage == "unchanged-export-hash":
+        current[2]["training_checkpoint"]["sha256"] = current[2]["sha256"]
+    else:
+        current[3]["arm"] = "V97"
+    with pytest.raises(ValueError):
+        check_native_checkpoints(current)
+
+
+@pytest.mark.parametrize("batched_colors", [False, True])
+def test_native_adc_observer_checks_selected_samples_and_preserves_inputs_and_rng(batched_colors):
+    import torch
+
+    from demosaic.cfa import PATTERNS, color_indices, mosaic
+
+    colors = (
+        torch.stack([color_indices(p) for p in PATTERNS])
+        if batched_colors
+        else color_indices("RGGB")
+    )
+    target = torch.rand(4, 3, 8, 12, generator=torch.Generator().manual_seed(58)) * 0.6 + 0.2
+    packed = mosaic(target, colors)
+    args = (
+        packed,
+        torch.zeros_like(packed),
+        colors,
+        torch.ones(4, 3),
+        torch.eye(3).repeat(4, 1, 1),
+    )
+    before = [x.clone() for x in args]
+    rng = torch.get_rng_state()
+    original = target.clone()
+    result = measure_native_adc(target, args, [(None, 1, False)])
+    assert result["observations"] == 4 and result["valid_CFA_values"] == packed.numel()
+    assert result["maximum_absolute_error_sensor_units"] == 0
+    selected = measure_native_adc(target, args, [(None, 1, False), (None, 1, True)] * 2)
+    assert selected["observations"] == 2 and selected["valid_CFA_values"] == packed.numel() // 2
+    with pytest.raises(ValueError, match="does not preserve"):
+        measure_native_adc(target + 0.01, args, [(None, 1, False)])
+    noisy = measure_native_adc(target + 0.01, args, [(None, 1, True)])
+    assert noisy == {
+        "observations": 0,
+        "valid_CFA_values": 0,
+        "maximum_absolute_error_sensor_units": None,
+    }
+    assert torch.equal(target, original) and torch.equal(rng, torch.get_rng_state())
+    assert all(torch.equal(x, y) for x, y in zip(args, before, strict=True))

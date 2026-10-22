@@ -31,6 +31,52 @@ def check_effective_config(actual, recorded):
         raise ValueError("Effective model config differs from the completed photo reference")
 
 
+def check_native_checkpoints(checkpoints):
+    """Accept the two declared studies, retaining common inference and initializer identities."""
+    arms = [checkpoint["arm"] for checkpoint in checkpoints]
+    if arms == ["V43", "V95", "V96", "V97"]:
+        if any(c.get("expected_adc_projection", False) is not False for c in checkpoints):
+            raise ValueError("The historical palette comparison uses unprojected inference")
+        return False
+    if arms != ["V43", "V95", "V98", "V99"]:
+        raise ValueError("Undeclared native-photo checkpoint comparison")
+    if any(c.get("expected_adc_projection", False) is not False for c in checkpoints[:2]):
+        raise ValueError("V43/V95 must retain their original inference policies")
+    if any(c.get("expected_adc_projection") is not True for c in checkpoints[2:]):
+        raise ValueError("Both ADC-training endpoints require projected inference")
+    parent = {key: checkpoints[1][key] for key in ("path", "sha256")}
+    expected = {"step": 4000, "initialized_from": {**parent, "step": 20000}}
+    if any(c.get("expected_lineage") != expected for c in checkpoints[2:]):
+        raise ValueError("ADC native views require both declared final4k V95 continuations")
+    raw_control = checkpoints[2].get("training_checkpoint")
+    if (
+        not isinstance(raw_control, dict)
+        or set(raw_control) != {"path", "sha256"}
+        or raw_control["sha256"] == checkpoints[2]["sha256"]
+    ):
+        raise ValueError("The projected V98 control must retain its distinct training checkpoint")
+    return True
+
+
+def measure_native_adc(prediction, args, profiles):
+    """Observe physical ADC selections without changing inputs, outputs or RNG."""
+    from evaluate_v43_quality_trial import adc_profile_indices, adc_sample_fidelity
+
+    selected = adc_profile_indices(profiles, len(args[0]))
+    if not selected:
+        return {
+            "observations": 0,
+            "valid_CFA_values": 0,
+            "maximum_absolute_error_sensor_units": None,
+        }
+    colors = args[2] if args[2].ndim == 1 else args[2][selected]
+    measured = adc_sample_fidelity(prediction[selected], args[0][selected], colors)
+    maximum = measured["maximum_absolute_error_sensor_units"]
+    if maximum is not None and maximum > 1e-6:
+        raise ValueError("Native ADC prediction does not preserve valid measured samples")
+    return measured
+
+
 def condition_protocols(protocol):
     """Keep the full suite's physical settings and select one condition/RGGB."""
     values = {c["name"]: c for c in protocol["conditions"]}
@@ -47,6 +93,8 @@ def condition_protocols(protocol):
             raise ValueError("Native detail requires finite unit-exposure sensor priors")
         if name == "adc-only" and (condition["shot"] != 0 or condition["read"] != 0):
             raise ValueError("ADC-only must have zero simulated shot/read noise")
+        if name != "adc-only" and condition["shot"] == condition["read"] == 0:
+            raise ValueError("Positive-noise native conditions must retain a positive prior")
         selected = copy.deepcopy(protocol)
         selected.update(patterns=["RGGB"], conditions=[copy.deepcopy(condition)])
         result[name] = selected
@@ -100,7 +148,9 @@ def compare_high_noise_previews(current_path, previous_path):
     }
 
 
-def prepare(parent_path, root, artifact_root):
+def prepare(parent_path, root, artifact_root, *, source_repository=None):
+    helper_repository = REPO if source_repository is None else Path(source_repository).resolve()
+    assert helper_repository == REPO or helper_repository.is_relative_to(REPO / ".cache")
     parent = read(parent_path)
     guard(parent)
     assert not parent["cpu_proof"] and parent["precision"] == "float32"
@@ -110,7 +160,10 @@ def prepare(parent_path, root, artifact_root):
         parent["photo_count"],
         parent["synthetic_count"],
     ) == (256, 4, 427, 16)
-    assert [c["arm"] for c in parent["checkpoints"]] == ["V43", "V95", "V96", "V97"]
+    adc_training = check_native_checkpoints(parent["checkpoints"])
+    if adc_training:
+        assert parent["ADC_valid_sample_error_limit"] == 1e-6
+        assert parent["ADC_fidelity_observations_per_projected_model"]["photo"] == 1772
     assert len(parent["stages"]) == 7
     protocols = condition_protocols(yaml.safe_load(Path(parent["protocol"]).read_text()))
     rows = [
@@ -149,7 +202,7 @@ def prepare(parent_path, root, artifact_root):
     ):
         target = work / name
         target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(REPO / name, target)
+        shutil.copyfile(helper_repository / name, target)
     selected_protocols = {}
     for name, value in protocols.items():
         target = work / "configs" / f"native-{name}.yaml"
@@ -176,6 +229,7 @@ def prepare(parent_path, root, artifact_root):
             "stages": parent["stages"],
         },
         "checkpoints": parent["checkpoints"],
+        "adc_training": adc_training,
         "photo_manifest": parent["photo_manifest"],
         "source_ids": [r["id"] for r in rows[:4]],
         "protocols": selected_protocols,
@@ -201,6 +255,8 @@ def prepare(parent_path, root, artifact_root):
 def worker(plan_path):
     plan = read(plan_path)
     guard(plan)
+    adc_training = check_native_checkpoints(plan["checkpoints"])
+    assert adc_training is plan.get("adc_training", False)
     root = Path(plan["root"])
     bridge = read(root / "dependency-evidence.json")
     assert ref(bridge["parent_status"]["path"]) == bridge["parent_status"]
@@ -244,6 +300,10 @@ def worker(plan_path):
     results = {}
     for condition in CONDITIONS:
         guard(plan)
+        selected_condition = yaml.safe_load(Path(plan["protocols"][condition]).read_text())[
+            "conditions"
+        ][0]
+        expected_adc = 4 if selected_condition["shot"] == selected_condition["read"] == 0 else 0
         models, rng = [], {}
 
         def loaded(*args, _models=models, _rng=rng, **kwargs):
@@ -305,6 +365,11 @@ def worker(plan_path):
                     dict(zip(("packed", "variance", "colors", "wb", "matrix"), args, strict=True))
                 )
                 record["inputs"].append(record.pop("pending"))
+                if checkpoint.get("expected_adc_projection", False):
+                    assert "ADC_fidelity" not in record  # Exactly one four-source forward.
+                    record["ADC_fidelity"] = measure_native_adc(
+                        prediction, args, _module.pretrained_rgb._noise_profiles
+                    )
 
             def dino(*_):
                 record["DINO_calls"] += 1
@@ -349,6 +414,7 @@ def worker(plan_path):
         assert report["inference_source_sha256"] == reference["inference_source_sha256"]
         assert len(models) == 4 and rng
         invariants = []
+        fidelity = []
         for index, record in enumerate(models):
             model = record["model"]
             assert (
@@ -377,6 +443,14 @@ def worker(plan_path):
                     "physical_input_hashes_before_after_exact": record["inputs"],
                 }
             )
+            if adc_training and index >= 2:
+                measured = record["ADC_fidelity"]
+                assert measured["observations"] == expected_adc
+                assert not expected_adc or measured["valid_CFA_values"] > 0
+                fidelity.append(
+                    {"model_index": index, "checkpoint": plan["checkpoints"][index], **measured}
+                )
+        assert len(fidelity) == (2 if adc_training else 0)
         assert all(r["inputs"] == models[0]["inputs"] for r in models)
         assert (
             torch.equal(rng["torch"], torch.get_rng_state()) and rng["python"] == random.getstate()
@@ -391,6 +465,7 @@ def worker(plan_path):
             "invariants": invariants,
             "arithmetic": arithmetic,
             "triplets": audit_triplets(output, report["native_crops"]),
+            **({"ADC_sample_fidelity": fidelity} if adc_training else {}),
         }
         # Retain the executed model/input/counter checks even if a later,
         # image-only comparison fails; such failures do not require new inference.
@@ -567,10 +642,16 @@ if __name__ == "__main__":
     parser.add_argument("path", type=Path)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--artifact-root", type=Path)
+    parser.add_argument("--source-repository", type=Path)
     args = parser.parse_args()
     if args.mode == "prepare":
         assert args.output and args.artifact_root
-        prepare(args.path.resolve(), args.output, args.artifact_root)
+        prepare(
+            args.path.resolve(),
+            args.output,
+            args.artifact_root,
+            source_repository=args.source_repository,
+        )
     elif args.mode == "worker":
         worker(args.path.resolve())
     else:
