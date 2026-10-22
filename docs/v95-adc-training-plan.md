@@ -103,8 +103,9 @@ All four discarded proofs completed: 24 actual updates per arm/device,
 CPU/CUDA pair has all 24 observed batches identical across every data domain.
 Independent checkpoint/config/lineage/EMA/Adam/finite-gradient checks pass.
 Candidate CUDA hooks preserve valid samples within 5.97e-8 sensor units.
-Production V98 passed step50; V99 will run serially after it. These are
-execution checks, not model-quality findings. The
+Production V98 completed all 4,000 updates; V99 is now running serially.
+The independent final-state audits remain queued. These are execution checks,
+not model-quality findings. The
 [preflights and historical launch observation](results/v95-adc-training-preflights-and-launch-v1.json)
 retain the actual evidence.
 
@@ -157,3 +158,19 @@ files byte-exact to the training archive. Queue plan SHA256:
 At this observation neither the audits nor any new quality panel had started.
 Training quality, native-crop inspection and the promotion decision remain
 pending; V43 remains the working reference.
+
+The [prepared photo auditor](../scripts/audit_adc_photo_contrasts.py) will report
+all-condition, ADC-only and positive-noise-only contrasts separately, keeping
+photographs and procedural sources separate. It first verifies the complete
+nine-method score grid and summary arithmetic, then averages within each source
+before resampling. `--expect-adc-pair` requires the projection flag on both
+primary endpoints; matched training lineage remains a separate audit.
+
+The [CPU preparation receipt](results/v95-adc-photo-contrast-preparation-v1.json)
+records 16 passing frozen tests and a rehearsal on completed V43/V95/V96/V97
+scores. Independent Decimal/scalar arithmetic rebuilds 10,632 source-metric
+means and checks 72 contrasts, agreeing within 7.11e-15. A real CLI check rejects
+the historical unprojected pair when common ADC inference is required.
+The rehearsal is not V98/V99 quality evidence. Its separate live observation
+records V98's final4k checkpoint and the running V99 owner; no new evaluation
+panel had started.

@@ -30,6 +30,14 @@ V96's extra training alone also gives no established PSNR gain over V95.
 Photographic SSIM rises slightly, from 0.960148 to 0.960290/0.960312, while
 chroma MAE worsens from 0.007596 to 0.007649/0.007631 for V96/V97.
 
+A [separate CPU replay of the same scores](results/v95-adc-photo-contrast-preparation-v1.json)
+splits V97 minus V96 by explicit noise priors: ADC-only photo PSNR gains
++0.06118 dB [0.03333, 0.09551], while the six positive-noise conditions give
+−0.00445 dB [−0.02518, +0.01460]. Each contrast balances the same 427 sources
+and uses the paired-source procedure above. The combined +0.00492 dB does
+not establish a gain on noisy photographs. This adds no inference and does
+not change the stop decision.
+
 Source-level changes reveal the failure tail. These values average all 28
 condition/CFA combinations within each photograph before taking deltas:
 
@@ -73,8 +81,8 @@ behavior that an aggregate mean can obscure.
 
 The fabric regression also affects V95 and V96. At ISO12800, its chroma MAE is
 0.003802 / 0.012539 / 0.013466 / 0.036038 for V43/V95/V96/V97. The building
-instead improves modestly. Lower-noise fabric scores also worsen; the queued
-native views will help inspect that behavior. These two fixed sources do not
+instead improves modestly. Lower-noise fabric scores also worsen; the completed
+native views below confirm color and detail failures. These two fixed sources do not
 determine the result over all 427 photographs.
 
 The [fixed-score audit](results/v95-palette-fixed-example-scores-v1.json)
