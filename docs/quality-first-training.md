@@ -74,7 +74,8 @@ examples each, among160,000 total training examples:
 | Reviewed ROI examples | 0 | 2,844 |
 
 The current pool adds3,640 eligible source IDs and removes23 relative to V84's
-original84,867; one of the24 visual exclusions was already outside that earlier
+original84,867; an [explicit exclusion-set check](results/training-v100-v101-source-exclusion-set-v1.json)
+shows that one of the24 visual exclusions was already outside that earlier
 pool. V101 reallocates some ordinary-photo draws to the six reviewed ROIs.
 These are complete **scheduled** counts, not a claim that the active trainer
 has finished them. The [source-coverage audit](results/training-v100-v101-source-coverage-v1.json)
