@@ -82,6 +82,14 @@ is available: a small known-camera gain and unseen-camera loss, with close
 native outputs. The full V84/V100/V101 photographic/camera study remains pending.
 [Launch and verification record](results/current-model-baseline-selection-v1.json).
 
+A [separate CPU reporting queue](results/V101-natural-detail-queue-v2.json)
+will add V101's final10000 EMA to the same12 cached bark/feather/canopy/fur
+observations used for V84/V100. It waits for the exact trainer to exit and checks
+the completed endpoint/hash; no intermediate checkpoint is selected. It uses
+the original frozen reporter, two CPU threads and no GPU. Its12 native triplets
+will be inspected before updating the current gallery; this is supplementary
+four-source evidence, separate from the full panels below.
+
 The evaluation queue at
 `.cache/current-quality-20261022-v1/evaluation-queue-v1/` waits for both original
 training owners to exit, then runs the seven panels below automatically. It
