@@ -83,7 +83,8 @@ are source observations, rather than independent model-selection cases.
 ## Reproduce and extend the comparisons
 
 Complete 101.996MP comparisons are queued for V84, final V100/V101 and RawNIND
-with CFA-channel input gain, after the current training and evaluation jobs.
+with CFA-channel input gain, after the running quality evaluation. Both training
+runs have completed their fixed10k endpoints.
 The run uses IEEE FP32, tile512/overlap64/B4, and exports linear-camera RGB16,
 tagged sRGB16 and overviews. Six native regions cover the four standing crops
 plus the neon sign and illuminated platform. Outputs will be in

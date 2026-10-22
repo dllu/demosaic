@@ -37,12 +37,13 @@ earlier24 exclusions; six newer exclusions are prepared separately. Hard or high
 is not automatically bad data. [Native source examples](corpus-source-review.md)
 show the decisions; protected holdouts and series stay fixed.
 
-V100's final continuation has small gains on the four-source
-[natural-detail diagnostic](heldout-detail.md); V101 is training. Current
+V101's completed continuation improves PSNR/SSIM on all12 selected cases against
+V84 and V100 in the [natural-detail gallery](heldout-detail.md), with small visible
+gains and remaining high-noise smoothing. Current
 [Q2/Sony/GFX50R comparisons](cross-camera-qualitative.md) show V84/V100 beside
 V43 and RawNIND. The [complete V84/V100 CPU camera comparison](real-camera-quality.md)
 finds a small known-camera gain and unseen-camera loss. The full joint
-evaluation with V101 and full-frame GFX export remain queued.
+evaluation with V101 is running; the full-frame GFX export follows it.
 The [16-scene paired test reserve](paired-reserved-test.md) is prepared and
 validated, with no model inference or scores; it remains outside model selection.
 

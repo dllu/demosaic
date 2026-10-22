@@ -77,8 +77,8 @@ The current pool adds3,640 eligible source IDs and removes23 relative to V84's
 original84,867; an [explicit exclusion-set check](results/training-v100-v101-source-exclusion-set-v1.json)
 shows that one of the24 visual exclusions was already outside that earlier
 pool. V101 reallocates some ordinary-photo draws to the six reviewed ROIs.
-These are complete **scheduled** counts, not a claim that the active trainer
-has finished them. The [source-coverage audit](results/training-v100-v101-source-coverage-v1.json)
+These reconstruct the complete fixed10k schedules; both trainers have now
+finished. The [source-coverage audit](results/training-v100-v101-source-coverage-v1.json)
 reconciles the earlier kind/ROI counts and checks24 actual reader source paths.
 Keep the current endpoints fixed; consider these exposure counts alongside the
 quality results when choosing a later training budget.
@@ -96,30 +96,32 @@ without automatic retries.
 
 Frozen plan: `.cache/current-quality-20261022-v1/training-v2/plan.json`.
 Runs: `/mnt/external/demosaic/v84-curated-quality-20261022-v2/`.
-All four discarded CPU/CUDA smokes passed. V100 completed 10,000 updates;
-V101 is training from the same original V84 weights. Actual phase/owner status
-is in the local `status.json`. The [complete V84/V100 CPU camera comparison](real-camera-quality.md)
-is available: a small known-camera gain and unseen-camera loss, with close
-native outputs. The full V84/V100/V101 photographic/camera study remains pending.
-[Launch and verification record](results/current-model-baseline-selection-v1.json).
+All four discarded CPU/CUDA smokes passed, and both production runs completed
+10,000 updates from the same exact V84 weights. Both original trainers/controllers
+have exited. Actual owner/phase status is in the local `status.json`.
+The [complete V84/V100 CPU camera comparison](real-camera-quality.md) is available:
+a small known-camera gain and unseen-camera loss, with close native outputs.
+The broader V84/V100/V101 photographic/camera study is now running.
+[Original launch and verification](results/current-model-baseline-selection-v1.json).
 
-A [separate CPU reporting queue](results/V101-natural-detail-queue-v2.json)
-will add V101's final10000 EMA to the same12 cached bark/feather/canopy/fur
-observations used for V84/V100. It waits for the exact trainer to exit and checks
-the completed endpoint/hash; no intermediate checkpoint is selected. It uses
-the original frozen reporter, two CPU threads and no GPU. Its12 native triplets
-will be inspected before updating the current gallery; this is supplementary
-four-source evidence, separate from the full panels below.
+The [supplementary CPU report](results/heldout-detail-V101-final-v1.json) compares
+V101's final10000 EMA on the same12 cached bark/feather/canopy/fur observations
+as V84/V100. It verified the finished endpoint/hash, used the original frozen
+reporter with two CPU threads and no GPU, and produced12 new native triplets.
+All72 cells of the three updated boards were inspected. V101 gains PSNR on all12
+selected cases against both V84/V100, with smaller high-noise gains and remaining
+fine-detail smoothing. This is four-source evidence, separate from the panels
+below. Its [queue record](results/V101-natural-detail-queue-v2.json) preserves
+the original execution setup.
 
 The evaluation queue at
-`.cache/current-quality-20261022-v1/evaluation-queue-v1/` waits for both original
-training owners to exit, then runs the seven panels below automatically. It
-compares V84 with the final V100/V101 EMAs under the same IEEE FP32 observations
-and includes RawNIND where applicable. Outputs go to
+`.cache/current-quality-20261022-v1/evaluation-queue-v1/` has started the seven
+panels below after both original training owners exited. It compares V84 with
+the final V100/V101 EMAs under the same IEEE FP32 observations and includes
+RawNIND where applicable. Outputs go to
 `/mnt/external/demosaic/v84-curated-evaluation-20261022-v1/`.
-The three-model reporting workflow passed a CPU smoke with 72 complete cases
-and six actually viewed native triplets; this checks execution and reporting,
-not the pending production models' quality.
+The three-model workflow previously passed a CPU reporting smoke with72 cases
+and six actually viewed native triplets; production results follow separately.
 [Evaluation readiness](results/v84-recipe-evaluation-readiness-v1.json).
 
 The full-frame queue at `.cache/current-quality-20261022-v1/fullframe-v1/`
@@ -137,12 +139,13 @@ references remain accurately labeled as nonexact.
 The [natural-detail gallery](heldout-detail.md) fixes four held-out contexts
 before viewing these model outputs: pale bark, white feathers, forest canopy
 and gray fur. Shared cached observations at ADC-only, ISO100 and ISO12800
-give a quick visual comparison as each final continuation becomes available.
-V100's final endpoint gains .076/.062/.007 dB over V84 on these selected
-ADC-only/ISO100/ISO12800 interiors. The images remain close and retain
-high-noise texture loss. This supplementary diagnosis does not replace the
-full panels above; [per-case evidence](results/heldout-detail-V100-final-v1.json)
-records the modest gains and small SSIM/chroma/gradient tradeoffs.
+give a matched visual comparison of both completed continuations.
+V101 gains .155/.110/.017dB over V84 on these selected
+ADC-only/ISO100/ISO12800 interiors, versus V100's .076/.062/.007dB.
+The images remain close and retain high-noise texture loss. This supplementary
+diagnosis does not replace the full panels above;
+[V101 per-case evidence](results/heldout-detail-V101-final-v1.json) records the
+gains and remaining chroma/gradient tradeoffs.
 
 Report source/scene intervals, adverse cases and the selection of any displayed
 checkpoint. Choose useful versions from overall metrics and actual images;

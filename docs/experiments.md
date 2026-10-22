@@ -38,11 +38,14 @@ including early versions, negative studies and engineering details.
 
 ## Data and current quality work
 
-V100/V101 continue from V84 on the curated88,484-source Commons cohort. One
+V100/V101 completed10k continuations from V84 on the curated88,484-source Commons cohort. One
 retains V84's augmentation; the other tests zero optical PSFs, weak synthetic
 textures, photographic contrast attenuation and reviewed fine-detail ROIs.
 The architecture, broad flat palette, native128 and paired32 targets stay fixed.
 See the [recipes, execution status and evaluation approach](quality-first-training.md).
+V101 improves all12 selected natural-detail PSNR cases against both V84/V100;
+the [current crop gallery](heldout-detail.md) shows the small gains and remaining
+smoothing while the complete matched comparison runs.
 
 The source scan covers88,508 training images, with530 actually reviewed and30
 withheld. Active runs apply the earlier24 exclusions; six more are prepared for

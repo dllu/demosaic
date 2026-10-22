@@ -2,8 +2,8 @@
 
 Start with the [README](../README.md) for setup, inference and representative
 native crops. **V84 is the current development baseline**, using the DRUNet RGB
-trunk and frozen DINOv3 ConvNeXt-Tiny features. Current training applies the
-larger cleaned corpus and fine-detail recipe to that architecture.
+trunk and frozen DINOv3 ConvNeXt-Tiny features. Current work compares the completed
+cleaned-data/fine-detail continuations, including new V101 native crops.
 
 | Topic | Start here |
 | --- | --- |

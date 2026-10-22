@@ -1,0 +1,639 @@
+{
+  "status": "completed-final-V101-selected-natural-detail-and-native-review",
+  "recorded_local": "2026-10-22T15:26:46.970274-07:00",
+  "training_result": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/training-v2/train-V101-result.json",
+    "sha256": "20a49f6a47d021ec2b98a06e7744114aa2c553f50d16f6b4a7c4fe58c9fefd66"
+  },
+  "V101_checkpoint": {
+    "path": "/mnt/external/demosaic/v84-curated-quality-20261022-v2/train/V101/last.pt",
+    "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3"
+  },
+  "checkpoint_selection": "Planned final10000 EMA; no intermediate search; exact production owner and reporting owners exited. SameV84initializer, freshAdamW/EMA,10k/B16/seed59/LR3e-6.",
+  "queue_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-detail-queue-v2/plan.json",
+    "sha256": "2b5b3f82f165838f44afb9c251d86591ec3dc014c2614e4fcb764ec731a178f7"
+  },
+  "queue_execution": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-detail-queue-v2/execution.json",
+    "sha256": "11d5f650a7138a9e73b2ce037554c5c7193a13a064201d59a0c72c4d7be33860"
+  },
+  "shared_input_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-inputs-v2/plan.json",
+    "sha256": "544de55e68c2352d896231c3663fb5024c2d8dd658c8f978da3534527b3b834f"
+  },
+  "V84_reference_report": {
+    "path": "/mnt/external/demosaic/heldout-detail-20261022-v1/V84-reference/report.json",
+    "sha256": "25274715d6382a33b3a322ce653f53516b6054a129aed8cb7e69a2067f302c37"
+  },
+  "V100_report": {
+    "path": "/mnt/external/demosaic/heldout-detail-20261022-v1/V100-final10000/report.json",
+    "sha256": "f0f9836ac002105fc3f0575f9b2e8baa36b3e4b55e97f5d9b549cc855077bd24"
+  },
+  "V101_report": {
+    "path": "/mnt/external/demosaic/heldout-detail-20261022-v1/V101-final10000/report.json",
+    "sha256": "40c17a3db536c5510e851a7d8ea57a782e311f047b3c7190b40a65be69496452"
+  },
+  "models": [
+    {
+      "label": "V101",
+      "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+      "source": "/mnt/external/demosaic/v84-curated-quality-20261022-v2/train/V101/last.pt",
+      "snapshot": "/mnt/external/demosaic/heldout-detail-20261022-v1/V101-final10000/weights/weights-6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3.pt",
+      "step": 10000,
+      "effective_model_config": {
+        "restoration_backbone": "pretrained-rgb",
+        "width": 64,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "dino_lora_rank": 0,
+        "dino_input_adapter": false,
+        "dino_feature_fusion": "convnext-pyramid",
+        "camera_conditioning": true,
+        "noise_modulation": false,
+        "physical_fp32": true,
+        "baseline": "bilinear",
+        "prior_window": 7,
+        "standardized_noise": false,
+        "noise_refinement": false,
+        "refinement_width": 24,
+        "refinement_blocks": 4,
+        "refinement_window": 63,
+        "coarse_refinement_factor": 0,
+        "coarse_refinement_width": 24,
+        "coarse_refinement_blocks": 4,
+        "coarse_refinement_window": 31,
+        "pyramid_refinement": false,
+        "pyramid_measurements": true,
+        "pyramid_width": 24,
+        "pyramid_blocks": 2,
+        "variance_stabilization": true,
+        "physical_anchors": true,
+        "rgb_processing_scale": 1,
+        "packed_detail_prior": false,
+        "rgb_hidden_autocast": false,
+        "rgb_center_camera_matrix": false,
+        "rgb_middle_skip_fp32": true,
+        "adc_cfa_projection": false,
+        "raw_kernel_reconstruction": false,
+        "raw_kernel_windows": [
+          1,
+          5,
+          17
+        ],
+        "raw_kernel_phase_conditioning": false,
+        "raw_directional_residual": false,
+        "raw_directional_bank_context": false,
+        "raw_directional_bank_detach_input": false,
+        "raw_spectral_residual": false,
+        "late_rgb_refinement": "none",
+        "isotropic_groups": 6,
+        "isotropic_blocks": 8,
+        "isotropic_local_width": 32,
+        "isotropic_raw_gain": 1.0,
+        "isotropic_residual_scale": 1.0
+      },
+      "compute_precision": "float32",
+      "device": "cpu"
+    }
+  ],
+  "source_count": 4,
+  "CFA": "RGGB",
+  "compute": "CPUfloat32/two threads; identical twelve cached observations and native256contexts",
+  "metric_ROI_in_native256_context_xywh": [
+    8,
+    8,
+    240,
+    240
+  ],
+  "display_ROI_in_native256_context_xywh": [
+    48,
+    48,
+    160,
+    160
+  ],
+  "display_exposure": 1,
+  "condition_means": [
+    {
+      "condition": "adc-only",
+      "source_count": 4,
+      "metrics": {
+        "V84": {
+          "srgb_psnr": 38.72993850708008,
+          "srgb_ssim": 0.9841396510601044,
+          "chroma_mae": 0.005806719709653407,
+          "gradient_mae": 0.01071391487494111
+        },
+        "V100": {
+          "srgb_psnr": 38.80605888366699,
+          "srgb_ssim": 0.9845476001501083,
+          "chroma_mae": 0.00578527880134061,
+          "gradient_mae": 0.01058113994076848
+        },
+        "V101": {
+          "srgb_psnr": 38.8847599029541,
+          "srgb_ssim": 0.9849004745483398,
+          "chroma_mae": 0.005739626009017229,
+          "gradient_mae": 0.010422110790386796
+        }
+      },
+      "PSNR_delta_V101_minus_V84": 0.15482139587402344,
+      "PSNR_delta_V101_minus_V100": 0.07870101928710938
+    },
+    {
+      "condition": "iso100-prior",
+      "source_count": 4,
+      "metrics": {
+        "V84": {
+          "srgb_psnr": 40.24361705780029,
+          "srgb_ssim": 0.9877600222826004,
+          "chroma_mae": 0.005007895641028881,
+          "gradient_mae": 0.009175246930681169
+        },
+        "V100": {
+          "srgb_psnr": 40.3052864074707,
+          "srgb_ssim": 0.9879182279109955,
+          "chroma_mae": 0.005001834069844335,
+          "gradient_mae": 0.009076060028746724
+        },
+        "V101": {
+          "srgb_psnr": 40.35352325439453,
+          "srgb_ssim": 0.9880365133285522,
+          "chroma_mae": 0.004992499889340252,
+          "gradient_mae": 0.008989796158857644
+        }
+      },
+      "PSNR_delta_V101_minus_V84": 0.10990619659423828,
+      "PSNR_delta_V101_minus_V100": 0.048236846923828125
+    },
+    {
+      "condition": "iso12800-prior",
+      "source_count": 4,
+      "metrics": {
+        "V84": {
+          "srgb_psnr": 33.409327030181885,
+          "srgb_ssim": 0.9233046472072601,
+          "chroma_mae": 0.0060950060142204165,
+          "gradient_mae": 0.020495005534030497
+        },
+        "V100": {
+          "srgb_psnr": 33.41615581512451,
+          "srgb_ssim": 0.9234466254711151,
+          "chroma_mae": 0.006103773426730186,
+          "gradient_mae": 0.020471003255806863
+        },
+        "V101": {
+          "srgb_psnr": 33.426119804382324,
+          "srgb_ssim": 0.9235977530479431,
+          "chroma_mae": 0.006092851224821061,
+          "gradient_mae": 0.020436160266399384
+        }
+      },
+      "PSNR_delta_V101_minus_V84": 0.016792774200439453,
+      "PSNR_delta_V101_minus_V100": 0.0099639892578125
+    }
+  ],
+  "paired_case_changes": {
+    "V84": {
+      "cases": [
+        {
+          "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+          "condition": "adc-only",
+          "delta_V101_minus_parent": {
+            "srgb_psnr": 0.216094970703125,
+            "srgb_ssim": 0.0007075667381286621,
+            "chroma_mae": -0.00011058803647756577,
+            "gradient_mae": -0.0005983337759971619
+          }
+        },
+        {
+          "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+          "condition": "iso100-prior",
+          "delta_V101_minus_parent": {
+            "srgb_psnr": 0.2063140869140625,
+            "srgb_ssim": 0.0005129575729370117,
+            "chroma_mae": -2.8041191399097443e-05,
+            "gradient_mae": -0.000493144616484642
+          }
+        },
+        {
+          "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+          "condition": "iso12800-prior",
+          "delta_V101_minus_parent": {
+            "srgb_psnr": 0.0406036376953125,
+            "srgb_ssim": 0.0004470944404602051,
+            "chroma_mae": 4.280358552932739e-06,
+            "gradient_mae": -0.00018330663442611694
+          }
+        },
+        {
+          "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+          "condition": "adc-only",
+          "delta_V101_minus_parent": {
+            "srgb_psnr": 0.11096954345703125,
+            "srgb_ssim": 0.00015121698379516602,
+            "chroma_mae": -1.6804086044430733e-05,
+            "gradient_mae": -5.994178354740143e-05
+          }
+        },
+        {
+          "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+          "condition": "iso100-prior",
+          "delta_V101_minus_parent": {
+            "srgb_psnr": 0.062255859375,
+            "srgb_ssim": 7.092952728271484e-06,
+            "chroma_mae": -3.934139385819435e-06,
+            "gradient_mae": -1.8862076103687286e-05
+          }
+        },
+        {
+          "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+          "condition": "iso12800-prior",
+          "delta_V101_minus_parent": {
+            "srgb_psnr": 0.00778961181640625,
+            "srgb_ssim": 6.973743438720703e-05,
+            "chroma_mae": 9.251059964299202e-06,
+            "gradient_mae": -1.195492222905159e-05
+          }
+        },
+        {
+          "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+          "condition": "adc-only",
+          "delta_V101_minus_parent": {
+            "srgb_psnr": 0.20519256591796875,
+            "srgb_ssim": 0.0018678903579711914,
+            "chroma_mae": -0.0001163780689239502,
+            "gradient_mae": -0.00041705649346113205
+          }
+        },
+        {
+          "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+          "condition": "iso100-prior",
+          "delta_V101_minus_parent": {
+            "srgb_psnr": 0.11800003051757812,
+            "srgb_ssim": 0.00045984983444213867,
+            "chroma_mae": -1.7452985048294067e-05,
+            "gradient_mae": -0.00017987005412578583
+          }
+        },
+        {
+          "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+          "condition": "iso12800-prior",
+          "delta_V101_minus_parent": {
+            "srgb_psnr": 0.012899398803710938,
+            "srgb_ssim": 0.0005354881286621094,
+            "chroma_mae": -1.5056692063808441e-05,
+            "gradient_mae": -3.6463141441345215e-05
+          }
+        },
+        {
+          "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+          "condition": "adc-only",
+          "delta_V101_minus_parent": {
+            "srgb_psnr": 0.08702850341796875,
+            "srgb_ssim": 0.000316619873046875,
+            "chroma_mae": -2.4604611098766327e-05,
+            "gradient_mae": -9.188428521156311e-05
+          }
+        },
+        {
+          "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+          "condition": "iso100-prior",
+          "delta_V101_minus_parent": {
+            "srgb_psnr": 0.0530548095703125,
+            "srgb_ssim": 0.00012606382369995117,
+            "chroma_mae": -1.215469092130661e-05,
+            "gradient_mae": -4.992634057998657e-05
+          }
+        },
+        {
+          "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+          "condition": "iso12800-prior",
+          "delta_V101_minus_parent": {
+            "srgb_psnr": 0.005878448486328125,
+            "srgb_ssim": 0.00012010335922241211,
+            "chroma_mae": -7.0938840508461e-06,
+            "gradient_mae": -3.6563724279403687e-06
+          }
+        }
+      ],
+      "improved": {
+        "srgb_psnr": 12,
+        "srgb_ssim": 12,
+        "chroma_mae": 10,
+        "gradient_mae": 12
+      }
+    },
+    "V100": {
+      "cases": [
+        {
+          "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+          "condition": "adc-only",
+          "delta_V101_minus_parent": {
+            "srgb_psnr": 0.14488983154296875,
+            "srgb_ssim": 0.0004938244819641113,
+            "chroma_mae": -9.768921881914139e-05,
+            "gradient_mae": -0.00039897486567497253
+          }
+        },
+        {
+          "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+          "condition": "iso100-prior",
+          "delta_V101_minus_parent": {
+            "srgb_psnr": 0.1203460693359375,
+            "srgb_ssim": 0.00029522180557250977,
+            "chroma_mae": -4.1711144149303436e-05,
+            "gradient_mae": -0.0002685822546482086
+          }
+        },
+        {
+          "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+          "condition": "iso12800-prior",
+          "delta_V101_minus_parent": {
+            "srgb_psnr": 0.025402069091796875,
+            "srgb_ssim": 0.0003116130828857422,
+            "chroma_mae": -2.8684735298156738e-05,
+            "gradient_mae": -0.00010840967297554016
+          }
+        },
+        {
+          "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+          "condition": "adc-only",
+          "delta_V101_minus_parent": {
+            "srgb_psnr": 0.05170440673828125,
+            "srgb_ssim": 6.771087646484375e-05,
+            "chroma_mae": -8.284812793135643e-06,
+            "gradient_mae": -3.565056249499321e-05
+          }
+        },
+        {
+          "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+          "condition": "iso100-prior",
+          "delta_V101_minus_parent": {
+            "srgb_psnr": 0.03275299072265625,
+            "srgb_ssim": 7.551908493041992e-05,
+            "chroma_mae": 1.9604340195655823e-07,
+            "gradient_mae": -2.416549250483513e-05
+          }
+        },
+        {
+          "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+          "condition": "iso12800-prior",
+          "delta_V101_minus_parent": {
+            "srgb_psnr": 0.002857208251953125,
+            "srgb_ssim": 4.4286251068115234e-05,
+            "chroma_mae": 6.149057298898697e-06,
+            "gradient_mae": -8.184928447008133e-06
+          }
+        },
+        {
+          "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+          "condition": "adc-only",
+          "delta_V101_minus_parent": {
+            "srgb_psnr": 0.07451629638671875,
+            "srgb_ssim": 0.0006925463676452637,
+            "chroma_mae": -6.0160644352436066e-05,
+            "gradient_mae": -0.00014808960258960724
+          }
+        },
+        {
+          "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+          "condition": "iso100-prior",
+          "delta_V101_minus_parent": {
+            "srgb_psnr": 0.019763946533203125,
+            "srgb_ssim": 7.241964340209961e-05,
+            "chroma_mae": 1.2182164937257767e-05,
+            "gradient_mae": -4.357006400823593e-05
+          }
+        },
+        {
+          "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+          "condition": "iso12800-prior",
+          "delta_V101_minus_parent": {
+            "srgb_psnr": 0.00811767578125,
+            "srgb_ssim": 0.0001850128173828125,
+            "chroma_mae": -1.3660173863172531e-05,
+            "gradient_mae": -2.331659197807312e-05
+          }
+        },
+        {
+          "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+          "condition": "adc-only",
+          "delta_V101_minus_parent": {
+            "srgb_psnr": 0.04369354248046875,
+            "srgb_ssim": 0.00015741586685180664,
+            "chroma_mae": -1.6476493328809738e-05,
+            "gradient_mae": -5.340157076716423e-05
+          }
+        },
+        {
+          "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+          "condition": "iso100-prior",
+          "delta_V101_minus_parent": {
+            "srgb_psnr": 0.020084381103515625,
+            "srgb_ssim": 2.9981136322021484e-05,
+            "chroma_mae": -8.003786206245422e-06,
+            "gradient_mae": -8.73766839504242e-06
+          }
+        },
+        {
+          "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+          "condition": "iso12800-prior",
+          "delta_V101_minus_parent": {
+            "srgb_psnr": 0.00347900390625,
+            "srgb_ssim": 6.35981559753418e-05,
+            "chroma_mae": -7.492955774068832e-06,
+            "gradient_mae": 5.392357707023621e-07
+          }
+        }
+      ],
+      "improved": {
+        "srgb_psnr": 12,
+        "srgb_ssim": 12,
+        "chroma_mae": 9,
+        "gradient_mae": 11
+      }
+    }
+  },
+  "native_triplets_new": 12,
+  "native160_cells_actually_viewed": 72,
+  "views": [
+    {
+      "condition": "adc-only",
+      "immutable_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-v1/V101-boards-v2/adc-only/photo-comparison.png",
+        "sha256": "c98c7f13181ef0769947ca64f3c21c6e83c7d9bf7876a46491aad57baa12814b"
+      },
+      "immutable_comparison": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-v1/V101-boards-v2/adc-only/photo-comparison.json",
+        "sha256": "7ca576f24d8c75590d68d96cc33ae1203f9a1e5c85222788d644db6535beccc5"
+      },
+      "immutable_manifest": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-v1/V101-boards-v2/adc-only/manifest.json",
+        "sha256": "b0c5c20b12679adeed954d2b0d1b6cd6879c5e463a7285d6894b817974404435"
+      },
+      "current_gallery": "docs/images/current-detail/adc-only/photo-comparison.png",
+      "native160_cells": 24,
+      "native160_cells_actually_viewed": 24,
+      "current_image_sha256_observed": "c98c7f13181ef0769947ca64f3c21c6e83c7d9bf7876a46491aad57baa12814b"
+    },
+    {
+      "condition": "iso100-prior",
+      "immutable_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-v1/V101-boards-v2/iso100-prior/photo-comparison.png",
+        "sha256": "422951ef7bfd3552bb823c4e306c42cbcb22e5b153f6b89bbd51115514f74aa8"
+      },
+      "immutable_comparison": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-v1/V101-boards-v2/iso100-prior/photo-comparison.json",
+        "sha256": "76733b9e1c810308a40b4cd835904b8f26ee7e8baf8ae1da2241058403f032c2"
+      },
+      "immutable_manifest": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-v1/V101-boards-v2/iso100-prior/manifest.json",
+        "sha256": "4a909122d636e21721f730d66733c5f4b4c3c799e370a4ba4b23eb854103beeb"
+      },
+      "current_gallery": "docs/images/current-detail/iso100-prior/photo-comparison.png",
+      "native160_cells": 24,
+      "native160_cells_actually_viewed": 24,
+      "current_image_sha256_observed": "422951ef7bfd3552bb823c4e306c42cbcb22e5b153f6b89bbd51115514f74aa8"
+    },
+    {
+      "condition": "iso12800-prior",
+      "immutable_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-v1/V101-boards-v2/iso12800-prior/photo-comparison.png",
+        "sha256": "6fc1aa1a065f68211c696264e67f7cc78109921b5dd1ebe5cc6c5477376cb487"
+      },
+      "immutable_comparison": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-v1/V101-boards-v2/iso12800-prior/photo-comparison.json",
+        "sha256": "9af9f364e143d85f97f772feacc40cd4e08cdfb7aa8df8c3ba8ace33627b1721"
+      },
+      "immutable_manifest": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-v1/V101-boards-v2/iso12800-prior/manifest.json",
+        "sha256": "4b93aab4681eb6a8f524e6fa556fb347c4627a88f534619fefa1ce01e6840d53"
+      },
+      "current_gallery": "docs/images/current-detail/iso12800-prior/photo-comparison.png",
+      "native160_cells": 24,
+      "native160_cells_actually_viewed": 24,
+      "current_image_sha256_observed": "6fc1aa1a065f68211c696264e67f7cc78109921b5dd1ebe5cc6c5477376cb487"
+    }
+  ],
+  "published_V101_triplets": [
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/current-detail/adc-only/crop-13bcf7db822435a5.png",
+      "sha256": "1352af2a4b2ddc8bb346d2d62bf3446afcbd22422814919b2da1aa4b05cc7b03"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/current-detail/adc-only/crop-13bcf7db822435a5.json",
+      "sha256": "8c19d1a6b0d7d950c1a0b929a42f43a12184758c8eb1978a959ff81e02b9fde8"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/current-detail/adc-only/crop-78c8429aa0cefc20.png",
+      "sha256": "cde31893b47410cf8f69f571c1d84c25080942d584b1d09d50d22b45fa172a21"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/current-detail/adc-only/crop-78c8429aa0cefc20.json",
+      "sha256": "f9bc421aea6567a9962e1cdf0b1a6e18be549ea2b1bd33eca577e50ffdce7125"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/current-detail/adc-only/crop-442ac54de9cfe447.png",
+      "sha256": "fb5e182f43202dd9378365b65b727cb6d916020cdf1f5a53f1384ba2412c7a52"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/current-detail/adc-only/crop-442ac54de9cfe447.json",
+      "sha256": "052180f2d876fdc8aa4a6e4e342e9b037740c35761993c3b646c9b1455a5c2a2"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/current-detail/adc-only/crop-a05f89d2e26ea499.png",
+      "sha256": "4053050fe3061cead64a5bd09ede64c8189d01cacf9e01677bbd26c28358522b"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/current-detail/adc-only/crop-a05f89d2e26ea499.json",
+      "sha256": "5f246e09f282b606cd47e6081a433881dca821dff9138e035541f0755e58495a"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso100-prior/crop-51d66b3cdddaae3b.png",
+      "sha256": "06bae8a41e4f73eaef7dc0db690f7ec50fe354e4752128236f7b098d7da9bd36"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso100-prior/crop-51d66b3cdddaae3b.json",
+      "sha256": "35a9896d92b766a8c8ec4e64b90073d9d99f77d112e91c96486b2e7c0e3841f9"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso100-prior/crop-9eaa402e149fce93.png",
+      "sha256": "1aa90bd99016d4b093f0301e42860ec0a27255b743ff0234b3d7136b2765058d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso100-prior/crop-9eaa402e149fce93.json",
+      "sha256": "65727ccc4c8ebcb550e4adedca6297301e00e564c11f146cb560d366ec30371c"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso100-prior/crop-abc01264e29efc3b.png",
+      "sha256": "198a329bcade5db9abc2c359991f59de4167e51f9250ce5e5ddfa89947a8fc48"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso100-prior/crop-abc01264e29efc3b.json",
+      "sha256": "eb287a2ca39187940dd3f2e0d5d81dc1c8d67362e9219d150d2bbadc84ae97e5"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso100-prior/crop-b68dc944b95068b5.png",
+      "sha256": "eed2e6e739ebd20f5fcb3c4de46911689b6326b918b181ec27276616273eea86"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso100-prior/crop-b68dc944b95068b5.json",
+      "sha256": "3cc718e5450c1bc14da065bbed1667eb2da65b8c0c9b3677f9edb8daa3a7b26c"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso12800-prior/crop-ef5f81d2207a73e6.png",
+      "sha256": "9d425e424a1dbb30fb3d4433676844a7079c1bd3e87fc9aac2da4ed44ebf71ec"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso12800-prior/crop-ef5f81d2207a73e6.json",
+      "sha256": "918547ec18f53f4a7d89925815f21a9154b907ded3a28c9bd9f12972c6d0cbce"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso12800-prior/crop-9cb90d19fa8b3964.png",
+      "sha256": "19f551ef1b2a8190ba022ac299c3d1efa0430ef32a2a7590ca35e3af8fc2b310"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso12800-prior/crop-9cb90d19fa8b3964.json",
+      "sha256": "55196fa3e1c13d5f99b549b0898af04b6d31751cca35bcd2309167420374e1d9"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso12800-prior/crop-933d1e28549aff7e.png",
+      "sha256": "1037a08d6e569a52e4e52f40f6d58d7acc216e30c1e2be4d7c3712f665637820"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso12800-prior/crop-933d1e28549aff7e.json",
+      "sha256": "98b1e547ca87ceb0f467e125a04537b93ce7789efc12d775a13ba46b51463cee"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso12800-prior/crop-182c413a3024c14e.png",
+      "sha256": "c5309f170e9d6555e7de63ca8f42a8d854e07375896efd2e61889426e3a6c070"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso12800-prior/crop-182c413a3024c14e.json",
+      "sha256": "59ec8d3c8e271d3745d4ee234b9bf0db4438c654fc9176525d21ef96ca1d2694"
+    }
+  ],
+  "model_weights_and_cached_inputs_unchanged": true,
+  "prior_V100_self_contained_replay": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-v1/V100-replay-v1/receipt.json",
+    "sha256": "a082979e5ef4096827339fd7265232b4d50b108e03894c6491d496d5c7a08f37"
+  },
+  "original_V84_and_V100_receipt_bytes_unchanged": true,
+  "gallery_highlight": "V101 is the useful new checkpoint among these matched original-policy comparisons; not an automatic global baseline promotion or comparison to ADC-only output operators.",
+  "visual_observation": "V101 and V100/V84 remain close. Low-noise bark fine grain and canopy structure gain a little contrast; high-noise feather/canopy/fur smoothing remains. Learned checkpoints remain much clearer than RawNIND on these natural materials. All source pixels/coordinates/noisy/GT/display settings common across methods.",
+  "scope": "Small input-selected four-source/RGGB/three-condition diagnostic, not the full427/7condition photo mean or real-camera proof. V101-vsV100 tests the combined augmentation/detail package; V101-vsV84 also changes training budget/optimizer/cohort. No ADC projection applied here; optional ADC output-operator comparison remains separate."
+}

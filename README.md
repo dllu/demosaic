@@ -11,9 +11,11 @@ Current work applies the cleaned 88,484-source Commons cohort, less optical blur
 and reviewed fine-detail examples to this stronger architecture. Useful new
 versions and image comparisons belong here as they become available. The
 [diary](diary/index.md) retains historical decisions.
-V100's final continuation has small [selected-detail gains](docs/heldout-detail.md)
-and [mixed real-camera results](docs/real-camera-quality.md). V101 tests the
-additional fine-detail recipe.
+V101's completed fine-detail continuation improves all12 selected natural-detail
+cases against V84/V100, with the largest gains at low noise.
+[Current native comparisons](docs/heldout-detail.md) show its progress and remaining
+smoothing. The full matched evaluation is running; V100's
+[completed camera comparison](docs/real-camera-quality.md) has mixed results.
 For explicit zero-shot/read inputs, [optional site consistency](docs/adc-consistency.md)
 adds **.40dB ADC-only PSNR** with unchanged V84 weights across all427 photos/four
 CFAs; positive-noise inputs bypass it. The report includes native crops and color tradeoffs.

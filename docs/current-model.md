@@ -13,6 +13,7 @@ ConvNeXt-Tiny feature pyramid. V43 remains a useful historical comparator.
 | V95 | 35.29553 | **54.33307** | 53.76990 | Stronger tested weak-carrier response |
 | V99 | 35.40133 | 54.31940 | 53.72165 | ADC-consistency experiment |
 | V100 | Pending | 54.17845 | 53.89614 | Curated-cohort continuation; real-camera tradeoff |
+| V101 | Pending | Pending | Pending | Fine-detail continuation; gains on selected natural photos |
 
 V84 gains about **1.54 dB over V43** on the full fixed photographic panel and
 has a higher unseen-camera mean. Its known-camera mean is slightly lower.
@@ -94,7 +95,10 @@ native sensor resolution, including RawNIND and a separate ISO 100 reference.
 The [natural-detail gallery](heldout-detail.md) adds bark, white feathers,
 forest canopy and fur at three noise levels. It shows V84's remaining
 high-noise detail loss as well as its sharper low-noise output.
-V100's cleaned-data continuation adds small gains on those selected contexts.
+V101's completed reduced-blur/detail continuation gains PSNR/SSIM on all12
+selected cases against V84 and the V100 control. The current gallery highlights
+V101, with low-noise gains and remaining high-noise smoothing documented. This
+is useful four-source progress; the full matched evaluation is running.
 For explicitly ADC-only inputs, use the [optional site correction](adc-consistency.md):
 it gains .400dB rendered PSNR over unchanged V84 weights across all427 photos,
 with all1,708 CFA cases improving. The complete report shows native examples
