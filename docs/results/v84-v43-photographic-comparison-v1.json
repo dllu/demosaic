@@ -1,0 +1,188 @@
+{
+  "status": "completed-descriptive-comparison-and-low-noise-native-gallery",
+  "recorded_local": "2026-10-22T11:11:15-07:00",
+  "existing_full_panel": {
+    "V43": {
+      "summary": {
+        "path": "/mnt/external/demosaic/v95-adc-evaluation-20261021-v1/photo/summary.json",
+        "sha256": "97cfca2ed8f04a3a4defd314615503f1ab744f063c20a579eb4fdb14bdf9a527"
+      },
+      "per_case": {
+        "path": "/mnt/external/demosaic/v95-adc-evaluation-20261021-v1/photo/per-image.jsonl",
+        "sha256": "a9f36a7c16fe2ec4fd492058a8640a3533232a81b4d712513b0cc638f142ac17"
+      },
+      "label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+      "checkpoint_sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+      "batch_size": 4,
+      "photo_srgb_PSNR": 34.8993346685548
+    },
+    "V84": {
+      "summary": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/native-data-v84-v85-original20k-review-v1/work/outputs/full427/summary.json",
+        "sha256": "c5ca1fe2dd6141a3626d48ac21a89b94dc3f010fbeeae732bfc96391c43ef014"
+      },
+      "per_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/native-data-v84-v85-original20k-review-v1/work/outputs/full427/per-image.jsonl",
+        "sha256": "b21605a1e71a37de1dc27a5f345be3ccb65546ddae21019f499ce6048f325f4e"
+      },
+      "label": "0:native-data-control-v84:step-20000",
+      "checkpoint_sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10",
+      "batch_size": 2,
+      "photo_srgb_PSNR": 36.439956565491926
+    }
+  },
+  "primary_photo_cases_per_model": 11956,
+  "condition_means": [
+    {
+      "condition": "adc-only",
+      "V43_photo_srgb_PSNR": 34.35261148926246,
+      "V84_photo_srgb_PSNR": 36.650316726407624,
+      "V84_minus_V43_dB": 2.297705237145167,
+      "cases": 1708,
+      "improved": 1708,
+      "regressed": 0,
+      "tied": 0
+    },
+    {
+      "condition": "iso100-prior",
+      "V43_photo_srgb_PSNR": 36.31759963605108,
+      "V84_photo_srgb_PSNR": 38.332044062067254,
+      "V84_minus_V43_dB": 2.014444426016171,
+      "cases": 1708,
+      "improved": 1707,
+      "regressed": 1,
+      "tied": 0
+    },
+    {
+      "condition": "iso1600-prior",
+      "V43_photo_srgb_PSNR": 35.583061778852475,
+      "V84_photo_srgb_PSNR": 36.983897771991664,
+      "V84_minus_V43_dB": 1.400835993139191,
+      "cases": 1708,
+      "improved": 1703,
+      "regressed": 5,
+      "tied": 0
+    },
+    {
+      "condition": "iso12800-prior",
+      "V43_photo_srgb_PSNR": 33.03426136289324,
+      "V84_photo_srgb_PSNR": 33.60023141521481,
+      "V84_minus_V43_dB": 0.5659700523215658,
+      "cases": 1708,
+      "improved": 1704,
+      "regressed": 4,
+      "tied": 0
+    },
+    {
+      "condition": "shadows",
+      "V43_photo_srgb_PSNR": 39.64997370851682,
+      "V84_photo_srgb_PSNR": 39.977570915668856,
+      "V84_minus_V43_dB": 0.32759720715203383,
+      "cases": 1708,
+      "improved": 1702,
+      "regressed": 6,
+      "tied": 0
+    },
+    {
+      "condition": "highlights",
+      "V43_photo_srgb_PSNR": 30.738610231904293,
+      "V84_photo_srgb_PSNR": 33.952494287379174,
+      "V84_minus_V43_dB": 3.213884055474882,
+      "cases": 1708,
+      "improved": 1705,
+      "regressed": 3,
+      "tied": 0
+    },
+    {
+      "condition": "legacy-noise",
+      "V43_photo_srgb_PSNR": 34.619224472403246,
+      "V84_photo_srgb_PSNR": 35.583140779714114,
+      "V84_minus_V43_dB": 0.9639163073108682,
+      "cases": 1708,
+      "improved": 1703,
+      "regressed": 5,
+      "tied": 0
+    }
+  ],
+  "source_mean_delta": {
+    "sources": 427,
+    "cases_per_source": 28,
+    "mean_dB": 1.5406218969371257,
+    "median_dB": 1.4309241431100028,
+    "min_dB": 0.34089183807373047,
+    "max_dB": 11.2414949962071,
+    "sources_with_positive_mean_delta": 427,
+    "paired_source_bootstrap95_dB": [
+      1.4627184644236777,
+      1.6244725629452998
+    ],
+    "bootstrap_resamples": 1000,
+    "bootstrap_seed": 42,
+    "interpretation": "Source variation only; models differ in architecture, data and training history. Not training-seed uncertainty or an isolated architecture effect."
+  },
+  "historical_plot_unchanged": {
+    "V43_primary_mean": 34.89934326247174,
+    "V43_used_here_minus_primary_dB": -8.593916938082202e-06,
+    "note": "This comparison uses the later fresh FP32 V43 reference. Its mean differs from the original plotted V43 measurement by about0.000009dB; plotted primary points remain unchanged."
+  },
+  "classical_cross_run_agreement": {
+    "score_rows": 35868,
+    "numeric_fields": 260184,
+    "null_fields_matching": 26760,
+    "maximum_absolute_difference": 7.62939453125e-06,
+    "note": "Historical CUDA runs use B4 and B2; tiny classical metric rounding differences remain. Inputs are paired by source, condition and CFA."
+  },
+  "fresh_CPU_gallery_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/low-noise-photo-v1/plan.json",
+    "sha256": "f5b45893a8d4bd85aeb9ee9dcfe3d1a313987018c47e14bc85283b0b6307df11"
+  },
+  "fresh_CPU_gallery_reports": [
+    {
+      "path": "/mnt/external/demosaic/v43-v84-low-noise-photo-20261022-v1/adc-only/summary.json",
+      "sha256": "0dd6539d78465638a04e0420e879fef89b7dddc0cf05b84d34e19c376469bb58"
+    },
+    {
+      "path": "/mnt/external/demosaic/v43-v84-low-noise-photo-20261022-v1/iso100-prior/summary.json",
+      "sha256": "0502c3af4d13351cafa8e2d3c1150c288fb451b6e92c470c620ad9a1d312c443"
+    }
+  ],
+  "published_triplet_sources": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/low-noise-photo-v1/published-inputs.json",
+    "sha256": "c10ab6bec836abd9429d1ab39d6064e3938bab1dc744fe68f58a366360a88dcf"
+  },
+  "native_views": [
+    {
+      "condition": "adc-only",
+      "manifest": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-quality/adc-only/manifest.json",
+        "sha256": "1234bd194d8cc233fe47889e8e0431c274c8ae162f8c552a9de2bbe6aa99e1b4"
+      },
+      "comparison": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-quality/adc-only/photo-comparison.json",
+        "sha256": "91e6d0784568fd6df9b48dae808ee540c4474441ea395f455f1677c52217848a"
+      },
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-quality/adc-only/photo-comparison.png",
+        "sha256": "f703b1c64367f2940d8d6d8bed5028755ef90d292b74ac484f7ec2e4ff5c236d"
+      },
+      "native160_cells_actually_viewed": 10
+    },
+    {
+      "condition": "iso100-prior",
+      "manifest": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-quality/iso100-prior/manifest.json",
+        "sha256": "8396a923de8f2a69d7411ccb65faa4731a9063f06e620b897da76ccc064723e8"
+      },
+      "comparison": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-quality/iso100-prior/photo-comparison.json",
+        "sha256": "49f9ef17a0e3049139003722bde1db7ed906447cbc11014c0a54def0f37d0460"
+      },
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-quality/iso100-prior/photo-comparison.png",
+        "sha256": "f792f475b4a4d6abe8b30e6abf55984bcfb8f8d3bab8a8031f9108dad30c8011"
+      },
+      "native160_cells_actually_viewed": 10
+    }
+  ],
+  "scope": "Reuses completed full427 CUDA scores for descriptive V84/V43 comparisons. New images use fresh CPU observations, the same first two fixed native256 photos, RGGB, adc-only/ISO100-prior and exact synthetic GT. They do not replace full-panel scores. Each native160 panel is unchanged; identical noisy and GT pixels across methods, with complete source/ROI/checkpoint/noise/display metadata. RawNIND uses input-only CFA-channel gain. All20 displayed native cells were actually viewed."
+}

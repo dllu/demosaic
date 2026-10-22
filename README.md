@@ -20,13 +20,15 @@ isolated architecture ablation.
 
 ## Current 100% crops
 
-Same noisy observation → V43 / V84 / V95 / V99 → exact synthetic GT. Every cell
+Same noisy observation → V43 / **V84** / RawNIND → exact synthetic GT. Every cell
 is an unchanged 160×160-pixel crop at the 8×-binned evaluation resolution, with
-ISO 12800 conditioning and shared display transforms. V84 retains the fabric's
-broad color more faithfully than V95/V99; fine cords remain a target for improvement.
-[Source, ROI, checkpoint, noise and display metadata](docs/images/current-quality/manifest.json).
+ISO 100 conditioning and shared display transforms. V84 preserves the fabric's
+orange color and fine suspension lines that V43 loses.
+[Source, ROI, checkpoint, noise and display metadata](docs/images/current-quality/iso100-prior/manifest.json).
+The [model guide](docs/current-model.md) also shows ADC-only and high-noise
+comparisons, where fine-detail loss remains a development target.
 
-![Native photographic comparisons: fabric and building](docs/images/current-quality/photo-comparison.png)
+![ISO100 native comparisons: fabric and building](docs/images/current-quality/iso100-prior/photo-comparison.png)
 
 Sources: [Roy Egloff](https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg)
 and [Dietmar Rabich](https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg),

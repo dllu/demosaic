@@ -27,17 +27,54 @@ cover four/five development scenes and use measured CFA targets. Versions have
 different training budgets and data; this table compares available checkpoints,
 not an isolated architectural ablation. [Full history and provenance](performance-history.md).
 
+V84's gain over V43 is larger in the low-noise conditions than the existing
+ISO 12800 gallery suggested:
+
+| Photographic condition | V84−V43 sRGB PSNR, dB |
+| --- | ---: |
+| ADC-only | +2.30 |
+| ISO 100 prior | +2.01 |
+| ISO 1600 prior | +1.40 |
+| ISO 12800 prior | +0.57 |
+| Shadows | +0.33 |
+| Highlights | +3.21 |
+| Legacy noise | +0.96 |
+
+These descriptive means cover all 427 photos and four CFAs per condition.
+Each photo's average over all 28 condition/CFA combinations improves; 24 of
+11,956 individual cases regress. The paired source interval for the overall
++1.54 dB change is [+1.46,+1.62] dB. This describes source variation, with unequal model training
+histories. [Per-condition counts, scores and provenance](results/v84-v43-photographic-comparison-v1.json).
+
 ## Native comparisons
 
 Each cell below is an unchanged 160×160-pixel crop. The same source coordinates,
 conditioning and display transforms apply across methods. Synthetic references
 are exact for the simulated observations. All images and complete per-method
-source/checkpoint/ROI metadata are shipped in the
-[gallery manifest](images/current-quality/manifest.json).
+source/checkpoint/ROI metadata accompany each gallery; the
+[high-noise/GFX manifest](images/current-quality/manifest.json) covers the earlier crops.
+
+The same two fixed photographic examples at ISO 100 show a clear V84 improvement
+in fine suspension lines, broad orange color and building boundaries. RawNIND
+uses input-only CFA-channel gain. These fresh CPU observations share source,
+noise, display and exact GT pixels across methods; the full-panel scores above
+retain their original CUDA evaluations.
+
+![ISO100: noisy, V43, V84, RawNIND and exact synthetic GT](images/current-quality/iso100-prior/photo-comparison.png)
+
+[ISO100 source/ROI/checkpoint metadata](images/current-quality/iso100-prior/manifest.json) ·
+[ADC-only comparison](images/current-quality/adc-only/photo-comparison.png)
+([metadata](images/current-quality/adc-only/manifest.json)).
+V84's ISO100 triplets: [fabric](images/current-quality/iso100-prior/V84-0014aa4e075b.png)
+([metadata](images/current-quality/iso100-prior/V84-0014aa4e075b.json)) and
+[building](images/current-quality/iso100-prior/V84-002fc6eeadf6.png)
+([metadata](images/current-quality/iso100-prior/V84-002fc6eeadf6.json)).
+
+At ISO 12800, the models remain much closer and suppress fine cords:
 
 ![Noisy, V43, V84, V95, V99 and exact synthetic GT on fabric and building crops](images/current-quality/photo-comparison.png)
 
-V84's adjacent-panel triplets: [fabric](images/current-quality/photo-V84-0014aa4e075b.png)
+V84's high-noise triplets: [fabric](images/current-quality/photo-V84-0014aa4e075b.png)
 ([metadata](images/current-quality/photo-V84-0014aa4e075b.json)) and
 [building](images/current-quality/photo-V84-002fc6eeadf6.png)
 ([metadata](images/current-quality/photo-V84-002fc6eeadf6.json)).

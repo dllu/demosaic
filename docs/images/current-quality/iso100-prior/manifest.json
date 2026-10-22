@@ -1,0 +1,1035 @@
+{
+  "preferred_model": "V84",
+  "groups": {
+    "photo": {
+      "kind": "synthetic",
+      "labels": {
+        "0:dino-anchored-native-diverse-b16-v43:step-2000": "V43",
+        "1:native-data-control-v84:step-20000": "V84",
+        "RawNIND:CFA-channel": "RawNIND"
+      },
+      "native_crops": [
+        {
+          "image": "V43-0014aa4e075b.png",
+          "caption": "0014aa4e075b1827f91ef8a02069e1e318f040ba / iso100-prior / RGGB / 0:dino-anchored-native-diverse-b16-v43:step-2000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "80d8ef831cf1279e7a3be669d4a1f26a3dc5ab0eb914c4e2558a3366e11cb33e",
+          "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "source": {
+            "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+            "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "author": "Roy Egloff",
+            "license": "CC BY-SA 4.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+            "attribution": null,
+            "credit": "Own work",
+            "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+            "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+            "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+            "width": 3888,
+            "height": 2592,
+            "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+            "split": "val",
+            "bin_factor": 8,
+            "color_space": "linear-sRGB",
+            "dtype": "uint16",
+            "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+            "shape": [
+              324,
+              486,
+              3
+            ],
+            "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+          },
+          "validation_index": 0,
+          "validation_seed": 42,
+          "evaluation_tile_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "condition": {
+            "name": "iso100-prior",
+            "shot": 2e-05,
+            "read": 1.6e-09,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "model": {
+            "label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+            "source": ".cache/benchmarks/mature-hidden-FP16-full-quality-v1/work/checkpoints/V43.pt",
+            "training_run": "/mnt/external/demosaic/runs/dino-anchored-native-diverse-b16-v43",
+            "snapshot": "/mnt/external/demosaic/v43-v84-low-noise-photo-20261022-v1/iso100-prior/weights/weights-0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5.pt",
+            "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+            "step": 2000,
+            "model_config": {
+              "restoration_backbone": "pretrained-rgb",
+              "width": 64,
+              "encoder_blocks": [
+                2,
+                2,
+                4
+              ],
+              "middle_blocks": 6,
+              "decoder_blocks": [
+                2,
+                2,
+                2
+              ],
+              "attention": true,
+              "dino": true,
+              "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+              "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+              "camera_conditioning": true,
+              "noise_modulation": false,
+              "physical_fp32": true,
+              "baseline": "bilinear",
+              "prior_window": 7,
+              "standardized_noise": false,
+              "noise_refinement": false,
+              "refinement_width": 24,
+              "refinement_blocks": 4,
+              "refinement_window": 63,
+              "coarse_refinement_factor": 0,
+              "coarse_refinement_width": 24,
+              "coarse_refinement_blocks": 4,
+              "coarse_refinement_window": 31,
+              "pyramid_refinement": false,
+              "pyramid_measurements": true,
+              "pyramid_width": 24,
+              "pyramid_blocks": 2,
+              "variance_stabilization": true,
+              "physical_anchors": true,
+              "rgb_processing_scale": 1,
+              "packed_detail_prior": false,
+              "rgb_hidden_autocast": false
+            },
+            "effective_model_config": {
+              "restoration_backbone": "pretrained-rgb",
+              "width": 64,
+              "encoder_blocks": [
+                2,
+                2,
+                4
+              ],
+              "middle_blocks": 6,
+              "decoder_blocks": [
+                2,
+                2,
+                2
+              ],
+              "attention": true,
+              "dino": true,
+              "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+              "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+              "dino_lora_rank": 0,
+              "dino_input_adapter": false,
+              "dino_feature_fusion": "bottleneck",
+              "camera_conditioning": true,
+              "noise_modulation": false,
+              "physical_fp32": true,
+              "baseline": "bilinear",
+              "prior_window": 7,
+              "standardized_noise": false,
+              "noise_refinement": false,
+              "refinement_width": 24,
+              "refinement_blocks": 4,
+              "refinement_window": 63,
+              "coarse_refinement_factor": 0,
+              "coarse_refinement_width": 24,
+              "coarse_refinement_blocks": 4,
+              "coarse_refinement_window": 31,
+              "pyramid_refinement": false,
+              "pyramid_measurements": true,
+              "pyramid_width": 24,
+              "pyramid_blocks": 2,
+              "variance_stabilization": true,
+              "physical_anchors": true,
+              "rgb_processing_scale": 1,
+              "packed_detail_prior": false,
+              "rgb_hidden_autocast": false,
+              "rgb_center_camera_matrix": false,
+              "rgb_middle_skip_fp32": false,
+              "adc_cfa_projection": false,
+              "raw_kernel_reconstruction": false,
+              "raw_kernel_windows": [
+                1,
+                5,
+                17
+              ],
+              "raw_kernel_phase_conditioning": false,
+              "raw_directional_residual": false,
+              "raw_directional_bank_context": false,
+              "raw_directional_bank_detach_input": false,
+              "raw_spectral_residual": false,
+              "late_rgb_refinement": "none",
+              "isotropic_groups": 6,
+              "isotropic_blocks": 8,
+              "isotropic_local_width": 32,
+              "isotropic_raw_gain": 1.0,
+              "isotropic_residual_scale": 1.0
+            },
+            "training_manifest_sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+            "compute_precision": "float32",
+            "refinement_compute_precision": "float32",
+            "memory_format": "contiguous"
+          },
+          "display_exposure": 1.0,
+          "reference": "Exact synthetic clean target"
+        },
+        {
+          "image": "V84-0014aa4e075b.png",
+          "caption": "0014aa4e075b1827f91ef8a02069e1e318f040ba / iso100-prior / RGGB / 1:native-data-control-v84:step-20000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "40161a1857110f2e5b4466d221f1befa26dbbb69b29e4e28e30411620c5f5b8f",
+          "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "source": {
+            "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+            "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "author": "Roy Egloff",
+            "license": "CC BY-SA 4.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+            "attribution": null,
+            "credit": "Own work",
+            "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+            "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+            "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+            "width": 3888,
+            "height": 2592,
+            "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+            "split": "val",
+            "bin_factor": 8,
+            "color_space": "linear-sRGB",
+            "dtype": "uint16",
+            "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+            "shape": [
+              324,
+              486,
+              3
+            ],
+            "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+          },
+          "validation_index": 0,
+          "validation_seed": 42,
+          "evaluation_tile_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "condition": {
+            "name": "iso100-prior",
+            "shot": 2e-05,
+            "read": 1.6e-09,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "model": {
+            "label": "1:native-data-control-v84:step-20000",
+            "source": "/mnt/external/demosaic/models/v84-original20000.pt",
+            "training_run": "/home/dllu/proj/demosaic/.cache/experiments/native-data-v84-v85-original20k-v1/work/runs/native-data-control-v84",
+            "snapshot": "/mnt/external/demosaic/v43-v84-low-noise-photo-20261022-v1/iso100-prior/weights/weights-134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10.pt",
+            "sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10",
+            "step": 20000,
+            "model_config": {
+              "restoration_backbone": "pretrained-rgb",
+              "width": 64,
+              "encoder_blocks": [
+                2,
+                2,
+                4
+              ],
+              "middle_blocks": 6,
+              "decoder_blocks": [
+                2,
+                2,
+                2
+              ],
+              "attention": true,
+              "dino": true,
+              "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+              "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+              "dino_lora_rank": 0,
+              "dino_input_adapter": false,
+              "dino_feature_fusion": "convnext-pyramid",
+              "camera_conditioning": true,
+              "noise_modulation": false,
+              "physical_fp32": true,
+              "baseline": "bilinear",
+              "prior_window": 7,
+              "standardized_noise": false,
+              "noise_refinement": false,
+              "refinement_width": 24,
+              "refinement_blocks": 4,
+              "refinement_window": 63,
+              "coarse_refinement_factor": 0,
+              "coarse_refinement_width": 24,
+              "coarse_refinement_blocks": 4,
+              "coarse_refinement_window": 31,
+              "pyramid_refinement": false,
+              "pyramid_measurements": true,
+              "pyramid_width": 24,
+              "pyramid_blocks": 2,
+              "variance_stabilization": true,
+              "physical_anchors": true,
+              "rgb_processing_scale": 1,
+              "packed_detail_prior": false,
+              "rgb_hidden_autocast": false,
+              "rgb_center_camera_matrix": false,
+              "rgb_middle_skip_fp32": true,
+              "adc_cfa_projection": false,
+              "raw_kernel_reconstruction": false,
+              "raw_kernel_windows": [
+                1,
+                5,
+                17
+              ],
+              "raw_kernel_phase_conditioning": false,
+              "raw_directional_residual": false,
+              "raw_directional_bank_context": false,
+              "raw_directional_bank_detach_input": false,
+              "isotropic_groups": 6,
+              "isotropic_blocks": 8,
+              "isotropic_local_width": 32,
+              "isotropic_raw_gain": 1.0,
+              "isotropic_residual_scale": 1.0
+            },
+            "effective_model_config": {
+              "restoration_backbone": "pretrained-rgb",
+              "width": 64,
+              "encoder_blocks": [
+                2,
+                2,
+                4
+              ],
+              "middle_blocks": 6,
+              "decoder_blocks": [
+                2,
+                2,
+                2
+              ],
+              "attention": true,
+              "dino": true,
+              "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+              "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+              "dino_lora_rank": 0,
+              "dino_input_adapter": false,
+              "dino_feature_fusion": "convnext-pyramid",
+              "camera_conditioning": true,
+              "noise_modulation": false,
+              "physical_fp32": true,
+              "baseline": "bilinear",
+              "prior_window": 7,
+              "standardized_noise": false,
+              "noise_refinement": false,
+              "refinement_width": 24,
+              "refinement_blocks": 4,
+              "refinement_window": 63,
+              "coarse_refinement_factor": 0,
+              "coarse_refinement_width": 24,
+              "coarse_refinement_blocks": 4,
+              "coarse_refinement_window": 31,
+              "pyramid_refinement": false,
+              "pyramid_measurements": true,
+              "pyramid_width": 24,
+              "pyramid_blocks": 2,
+              "variance_stabilization": true,
+              "physical_anchors": true,
+              "rgb_processing_scale": 1,
+              "packed_detail_prior": false,
+              "rgb_hidden_autocast": false,
+              "rgb_center_camera_matrix": false,
+              "rgb_middle_skip_fp32": true,
+              "adc_cfa_projection": false,
+              "raw_kernel_reconstruction": false,
+              "raw_kernel_windows": [
+                1,
+                5,
+                17
+              ],
+              "raw_kernel_phase_conditioning": false,
+              "raw_directional_residual": false,
+              "raw_directional_bank_context": false,
+              "raw_directional_bank_detach_input": false,
+              "raw_spectral_residual": false,
+              "late_rgb_refinement": "none",
+              "isotropic_groups": 6,
+              "isotropic_blocks": 8,
+              "isotropic_local_width": 32,
+              "isotropic_raw_gain": 1.0,
+              "isotropic_residual_scale": 1.0
+            },
+            "training_manifest_sha256": "952977c6af9a1b0d7428c25e2b9cf4f1338d90e3295de33b552cbeb8153be502",
+            "compute_precision": "float32",
+            "refinement_compute_precision": "float32",
+            "memory_format": "contiguous"
+          },
+          "display_exposure": 1.0,
+          "reference": "Exact synthetic clean target"
+        },
+        {
+          "image": "RawNIND-0014aa4e075b.png",
+          "caption": "0014aa4e075b1827f91ef8a02069e1e318f040ba / iso100-prior / RGGB / RawNIND:CFA-channel",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "df07823c5353823e1ffe7e4135f239c8f78aaa9d2d4ed9ae5810c2d76b4585b8",
+          "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "source": {
+            "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+            "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "author": "Roy Egloff",
+            "license": "CC BY-SA 4.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+            "attribution": null,
+            "credit": "Own work",
+            "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+            "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+            "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+            "width": 3888,
+            "height": 2592,
+            "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+            "split": "val",
+            "bin_factor": 8,
+            "color_space": "linear-sRGB",
+            "dtype": "uint16",
+            "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+            "shape": [
+              324,
+              486,
+              3
+            ],
+            "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+          },
+          "validation_index": 0,
+          "validation_seed": 42,
+          "evaluation_tile_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "condition": {
+            "name": "iso100-prior",
+            "shot": 2e-05,
+            "read": 1.6e-09,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "model": {
+            "label": "RawNIND:CFA-channel",
+            "directory": "/mnt/external/demosaic/references/rawnind",
+            "weight_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+            "gain": "per-channel-observed-CFA-least-squares",
+            "precision": "IEEE float32",
+            "input": "Signed/unclipped synthetic sensor units; no camera/global-ADC scale difference"
+          },
+          "display_exposure": 1.0,
+          "reference": "Exact synthetic clean target"
+        },
+        {
+          "image": "V43-002fc6eeadf6.png",
+          "caption": "002fc6eeadf637e81d5a327f117b79abb86becd9 / iso100-prior / RGGB / 0:dino-anchored-native-diverse-b16-v43:step-2000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "f221eaf1bce4e641f5a768592e7015cfa3030f5bc2edaf3a9a8f28cf4ed5d264",
+          "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "source": {
+            "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+            "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Vancouver_%28BC%2C_Canada%29%2C_Coal_Harbour_Seaside_Park%2C_Blick_in_den_Himmel_--_2022_--_2158.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "author": "Dietmar Rabich",
+            "license": "CC BY-SA 4.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+            "attribution": "Dietmar Rabich",
+            "credit": "Own work",
+            "sha1": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+            "sha1_hex": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+            "download_path": "images/00/2f/002fc6eeadf637e81d5a327f117b79abb86becd9.jpg",
+            "width": 3809,
+            "height": 2857,
+            "id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+            "split": "val",
+            "bin_factor": 8,
+            "color_space": "linear-sRGB",
+            "dtype": "uint16",
+            "cache": "/mnt/external/demosaic/commons-v1/images/00/002fc6eeadf637e81d5a327f117b79abb86becd9.npy",
+            "shape": [
+              357,
+              476,
+              3
+            ],
+            "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf"
+          },
+          "validation_index": 1,
+          "validation_seed": 42,
+          "evaluation_tile_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "condition": {
+            "name": "iso100-prior",
+            "shot": 2e-05,
+            "read": 1.6e-09,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "model": {
+            "label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+            "source": ".cache/benchmarks/mature-hidden-FP16-full-quality-v1/work/checkpoints/V43.pt",
+            "training_run": "/mnt/external/demosaic/runs/dino-anchored-native-diverse-b16-v43",
+            "snapshot": "/mnt/external/demosaic/v43-v84-low-noise-photo-20261022-v1/iso100-prior/weights/weights-0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5.pt",
+            "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+            "step": 2000,
+            "model_config": {
+              "restoration_backbone": "pretrained-rgb",
+              "width": 64,
+              "encoder_blocks": [
+                2,
+                2,
+                4
+              ],
+              "middle_blocks": 6,
+              "decoder_blocks": [
+                2,
+                2,
+                2
+              ],
+              "attention": true,
+              "dino": true,
+              "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+              "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+              "camera_conditioning": true,
+              "noise_modulation": false,
+              "physical_fp32": true,
+              "baseline": "bilinear",
+              "prior_window": 7,
+              "standardized_noise": false,
+              "noise_refinement": false,
+              "refinement_width": 24,
+              "refinement_blocks": 4,
+              "refinement_window": 63,
+              "coarse_refinement_factor": 0,
+              "coarse_refinement_width": 24,
+              "coarse_refinement_blocks": 4,
+              "coarse_refinement_window": 31,
+              "pyramid_refinement": false,
+              "pyramid_measurements": true,
+              "pyramid_width": 24,
+              "pyramid_blocks": 2,
+              "variance_stabilization": true,
+              "physical_anchors": true,
+              "rgb_processing_scale": 1,
+              "packed_detail_prior": false,
+              "rgb_hidden_autocast": false
+            },
+            "effective_model_config": {
+              "restoration_backbone": "pretrained-rgb",
+              "width": 64,
+              "encoder_blocks": [
+                2,
+                2,
+                4
+              ],
+              "middle_blocks": 6,
+              "decoder_blocks": [
+                2,
+                2,
+                2
+              ],
+              "attention": true,
+              "dino": true,
+              "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+              "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+              "dino_lora_rank": 0,
+              "dino_input_adapter": false,
+              "dino_feature_fusion": "bottleneck",
+              "camera_conditioning": true,
+              "noise_modulation": false,
+              "physical_fp32": true,
+              "baseline": "bilinear",
+              "prior_window": 7,
+              "standardized_noise": false,
+              "noise_refinement": false,
+              "refinement_width": 24,
+              "refinement_blocks": 4,
+              "refinement_window": 63,
+              "coarse_refinement_factor": 0,
+              "coarse_refinement_width": 24,
+              "coarse_refinement_blocks": 4,
+              "coarse_refinement_window": 31,
+              "pyramid_refinement": false,
+              "pyramid_measurements": true,
+              "pyramid_width": 24,
+              "pyramid_blocks": 2,
+              "variance_stabilization": true,
+              "physical_anchors": true,
+              "rgb_processing_scale": 1,
+              "packed_detail_prior": false,
+              "rgb_hidden_autocast": false,
+              "rgb_center_camera_matrix": false,
+              "rgb_middle_skip_fp32": false,
+              "adc_cfa_projection": false,
+              "raw_kernel_reconstruction": false,
+              "raw_kernel_windows": [
+                1,
+                5,
+                17
+              ],
+              "raw_kernel_phase_conditioning": false,
+              "raw_directional_residual": false,
+              "raw_directional_bank_context": false,
+              "raw_directional_bank_detach_input": false,
+              "raw_spectral_residual": false,
+              "late_rgb_refinement": "none",
+              "isotropic_groups": 6,
+              "isotropic_blocks": 8,
+              "isotropic_local_width": 32,
+              "isotropic_raw_gain": 1.0,
+              "isotropic_residual_scale": 1.0
+            },
+            "training_manifest_sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+            "compute_precision": "float32",
+            "refinement_compute_precision": "float32",
+            "memory_format": "contiguous"
+          },
+          "display_exposure": 1.0,
+          "reference": "Exact synthetic clean target"
+        },
+        {
+          "image": "V84-002fc6eeadf6.png",
+          "caption": "002fc6eeadf637e81d5a327f117b79abb86becd9 / iso100-prior / RGGB / 1:native-data-control-v84:step-20000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "eca740af0272763d8382981a1ed1bd2b98f86dcf017811889eae48bef0de940b",
+          "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "source": {
+            "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+            "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Vancouver_%28BC%2C_Canada%29%2C_Coal_Harbour_Seaside_Park%2C_Blick_in_den_Himmel_--_2022_--_2158.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "author": "Dietmar Rabich",
+            "license": "CC BY-SA 4.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+            "attribution": "Dietmar Rabich",
+            "credit": "Own work",
+            "sha1": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+            "sha1_hex": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+            "download_path": "images/00/2f/002fc6eeadf637e81d5a327f117b79abb86becd9.jpg",
+            "width": 3809,
+            "height": 2857,
+            "id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+            "split": "val",
+            "bin_factor": 8,
+            "color_space": "linear-sRGB",
+            "dtype": "uint16",
+            "cache": "/mnt/external/demosaic/commons-v1/images/00/002fc6eeadf637e81d5a327f117b79abb86becd9.npy",
+            "shape": [
+              357,
+              476,
+              3
+            ],
+            "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf"
+          },
+          "validation_index": 1,
+          "validation_seed": 42,
+          "evaluation_tile_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "condition": {
+            "name": "iso100-prior",
+            "shot": 2e-05,
+            "read": 1.6e-09,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "model": {
+            "label": "1:native-data-control-v84:step-20000",
+            "source": "/mnt/external/demosaic/models/v84-original20000.pt",
+            "training_run": "/home/dllu/proj/demosaic/.cache/experiments/native-data-v84-v85-original20k-v1/work/runs/native-data-control-v84",
+            "snapshot": "/mnt/external/demosaic/v43-v84-low-noise-photo-20261022-v1/iso100-prior/weights/weights-134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10.pt",
+            "sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10",
+            "step": 20000,
+            "model_config": {
+              "restoration_backbone": "pretrained-rgb",
+              "width": 64,
+              "encoder_blocks": [
+                2,
+                2,
+                4
+              ],
+              "middle_blocks": 6,
+              "decoder_blocks": [
+                2,
+                2,
+                2
+              ],
+              "attention": true,
+              "dino": true,
+              "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+              "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+              "dino_lora_rank": 0,
+              "dino_input_adapter": false,
+              "dino_feature_fusion": "convnext-pyramid",
+              "camera_conditioning": true,
+              "noise_modulation": false,
+              "physical_fp32": true,
+              "baseline": "bilinear",
+              "prior_window": 7,
+              "standardized_noise": false,
+              "noise_refinement": false,
+              "refinement_width": 24,
+              "refinement_blocks": 4,
+              "refinement_window": 63,
+              "coarse_refinement_factor": 0,
+              "coarse_refinement_width": 24,
+              "coarse_refinement_blocks": 4,
+              "coarse_refinement_window": 31,
+              "pyramid_refinement": false,
+              "pyramid_measurements": true,
+              "pyramid_width": 24,
+              "pyramid_blocks": 2,
+              "variance_stabilization": true,
+              "physical_anchors": true,
+              "rgb_processing_scale": 1,
+              "packed_detail_prior": false,
+              "rgb_hidden_autocast": false,
+              "rgb_center_camera_matrix": false,
+              "rgb_middle_skip_fp32": true,
+              "adc_cfa_projection": false,
+              "raw_kernel_reconstruction": false,
+              "raw_kernel_windows": [
+                1,
+                5,
+                17
+              ],
+              "raw_kernel_phase_conditioning": false,
+              "raw_directional_residual": false,
+              "raw_directional_bank_context": false,
+              "raw_directional_bank_detach_input": false,
+              "isotropic_groups": 6,
+              "isotropic_blocks": 8,
+              "isotropic_local_width": 32,
+              "isotropic_raw_gain": 1.0,
+              "isotropic_residual_scale": 1.0
+            },
+            "effective_model_config": {
+              "restoration_backbone": "pretrained-rgb",
+              "width": 64,
+              "encoder_blocks": [
+                2,
+                2,
+                4
+              ],
+              "middle_blocks": 6,
+              "decoder_blocks": [
+                2,
+                2,
+                2
+              ],
+              "attention": true,
+              "dino": true,
+              "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+              "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+              "dino_lora_rank": 0,
+              "dino_input_adapter": false,
+              "dino_feature_fusion": "convnext-pyramid",
+              "camera_conditioning": true,
+              "noise_modulation": false,
+              "physical_fp32": true,
+              "baseline": "bilinear",
+              "prior_window": 7,
+              "standardized_noise": false,
+              "noise_refinement": false,
+              "refinement_width": 24,
+              "refinement_blocks": 4,
+              "refinement_window": 63,
+              "coarse_refinement_factor": 0,
+              "coarse_refinement_width": 24,
+              "coarse_refinement_blocks": 4,
+              "coarse_refinement_window": 31,
+              "pyramid_refinement": false,
+              "pyramid_measurements": true,
+              "pyramid_width": 24,
+              "pyramid_blocks": 2,
+              "variance_stabilization": true,
+              "physical_anchors": true,
+              "rgb_processing_scale": 1,
+              "packed_detail_prior": false,
+              "rgb_hidden_autocast": false,
+              "rgb_center_camera_matrix": false,
+              "rgb_middle_skip_fp32": true,
+              "adc_cfa_projection": false,
+              "raw_kernel_reconstruction": false,
+              "raw_kernel_windows": [
+                1,
+                5,
+                17
+              ],
+              "raw_kernel_phase_conditioning": false,
+              "raw_directional_residual": false,
+              "raw_directional_bank_context": false,
+              "raw_directional_bank_detach_input": false,
+              "raw_spectral_residual": false,
+              "late_rgb_refinement": "none",
+              "isotropic_groups": 6,
+              "isotropic_blocks": 8,
+              "isotropic_local_width": 32,
+              "isotropic_raw_gain": 1.0,
+              "isotropic_residual_scale": 1.0
+            },
+            "training_manifest_sha256": "952977c6af9a1b0d7428c25e2b9cf4f1338d90e3295de33b552cbeb8153be502",
+            "compute_precision": "float32",
+            "refinement_compute_precision": "float32",
+            "memory_format": "contiguous"
+          },
+          "display_exposure": 1.0,
+          "reference": "Exact synthetic clean target"
+        },
+        {
+          "image": "RawNIND-002fc6eeadf6.png",
+          "caption": "002fc6eeadf637e81d5a327f117b79abb86becd9 / iso100-prior / RGGB / RawNIND:CFA-channel",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "cac6e21588af17a98523e6dbdf5c6e8b597e711f79da32f404857093af289d4d",
+          "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "source": {
+            "title": "File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg",
+            "page_url": "https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Vancouver_%28BC%2C_Canada%29%2C_Coal_Harbour_Seaside_Park%2C_Blick_in_den_Himmel_--_2022_--_2158.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "author": "Dietmar Rabich",
+            "license": "CC BY-SA 4.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+            "attribution": "Dietmar Rabich",
+            "credit": "Own work",
+            "sha1": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+            "sha1_hex": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+            "download_path": "images/00/2f/002fc6eeadf637e81d5a327f117b79abb86becd9.jpg",
+            "width": 3809,
+            "height": 2857,
+            "id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+            "split": "val",
+            "bin_factor": 8,
+            "color_space": "linear-sRGB",
+            "dtype": "uint16",
+            "cache": "/mnt/external/demosaic/commons-v1/images/00/002fc6eeadf637e81d5a327f117b79abb86becd9.npy",
+            "shape": [
+              357,
+              476,
+              3
+            ],
+            "cache_sha256": "0b5ccc2387535e14754b2fcb4236c5298c1e0a18c45d354047404e74e7a607bf"
+          },
+          "validation_index": 1,
+          "validation_seed": 42,
+          "evaluation_tile_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "condition": {
+            "name": "iso100-prior",
+            "shot": 2e-05,
+            "read": 1.6e-09,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "model": {
+            "label": "RawNIND:CFA-channel",
+            "directory": "/mnt/external/demosaic/references/rawnind",
+            "weight_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+            "gain": "per-channel-observed-CFA-least-squares",
+            "precision": "IEEE float32",
+            "input": "Signed/unclipped synthetic sensor units; no camera/global-ADC scale difference"
+          },
+          "display_exposure": 1.0,
+          "reference": "Exact synthetic clean target"
+        }
+      ]
+    }
+  }
+}
