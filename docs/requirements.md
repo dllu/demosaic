@@ -37,6 +37,10 @@ independent saved-state audits. The [complete matched quality review](v43-curate
 records photo/weak-detail gains and all 96 native triplets, alongside remaining
 saturated-color tails and unseen-camera uncertainty. V95 is a candidate; V43
 remains the working reference while those quality issues are addressed.
+The [completed V96/V97 follow-up](v95-flat-palette-quality-review.md) establishes
+no photo PSNR gain over V95 and worsens tested color tails; both stop at their
+declared final4k endpoints. All seven panels and the recovered lower-noise
+native views are reviewed. No new model is promoted.
 
 Completed later studies, including [V92](late-rgb-head-only-original4k-review.md),
 retain their unfavorable evidence. Higher PSNR in one panel, finite training,

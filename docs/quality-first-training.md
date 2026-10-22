@@ -85,11 +85,13 @@ decision to keep V43 as working reference while improving V95's quality.
 The [V96/V97 follow-up](v95-flat-palette-quality-plan.md) tests the existing
 wider colored-flat palette from final V95 while preserving the weak-detail
 recipe and architecture. Both matched 4k stages are complete and independently
-audited. All three fresh FP32 primary panels are complete, with no established
-photo PSNR gain over V95. The [quality review](v95-flat-palette-quality-review.md)
-records full means/uncertainty, a substantial regression tail, the V97 fabric
-color cast and actual native photo/camera views. Color/detail/GFX and the queued
-lower-noise native views remain required before a complete quality decision.
+audited. All seven fresh FP32 panels and native review are complete, with no
+established photo PSNR gain over V95. The [quality review](v95-flat-palette-quality-review.md)
+records full means/uncertainty, regression tails, worse color fields, some lost
+noisy weak-detail response, GFX and actual lower-noise views. The additional
+panels were independently recovered from saved outputs after operator errors;
+failed statuses are preserved and recovery repeats no inference. Both arms
+stop at final4k, without promotion or speed work.
 
 Plans/code remain local and checkpoints/run traces use a fresh external-SSD
 namespace. The completed production plan is

@@ -82,11 +82,11 @@ files and explicit checkpoint lineage/reference witnesses. Artifacts use
 `.cache/quality-first-20261020/V95-palette-matched-evaluation-v1/` and
 `/mnt/external/demosaic/v95-palette-evaluation-20261021-v1/`.
 
-The [first native-photo review](v95-flat-palette-quality-review.md) publishes two
-preselected triplets per joint model. V97 shows a visible green/olive fabric
-cast, and fine suspension lines remain weak in all four endpoints. The full
-primary, camera, analytic/color and GFX checks are still running; no quality
-promotion follows from the training audits or these two examples.
+The [completed quality review](v95-flat-palette-quality-review.md) publishes two
+preselected triplets per joint model and finishes all seven panels. V97 shows a
+visible green/olive fabric cast, and fine suspension lines remain weak in all
+four endpoints. Neither new endpoint establishes a photo PSNR gain over V95;
+both worsen tested color tails. Stop both arms at the declared final4k stage.
 
 The controller records actual resource readings every two seconds. Require
 48 GiB available RAM and 64/384 GiB free on root/external storage, stable for
@@ -129,8 +129,18 @@ until all seven primary evaluation stages and their owners exit. Planned checks
 include exact ADC input hashes against the full suite and unchanged
 model/DINO/configuration/RNG/input state. The primary comparison remains the
 complete suite; these are additional native detail views, without new training
-or source/checkpoint selection. Preparation, 14 tests and the actual no-worker
-dependency wait pass; model execution and visual interpretation remain pending.
+or source/checkpoint selection. The historical preparation receipt records 14
+tests and the actual no-worker dependency wait. The
+[completed saved-panel review](results/v95-palette-native-photo-conditions-complete-review-v1.json)
+records the actual three-condition outputs and viewing. A tuple/list metadata
+error stopped v1 before inference; a fresh corrected v2 rendered all panels
+then failed on a missing image-only helper. Both failures remain preserved.
+CPU-only recovery checks all108 scores exactly against the full suite and all12
+repeated high-noise triplets pixel-for-pixel, without repeating inference.
+Configuration comparison and package closure are fixed;21 tests and actual
+isolated archive execution pass. Future workers persist per-condition checks
+before optional image-only comparisons. The recovery receipt distinguishes
+source/trace evidence from independently persisted runtime counters.
 
 Judge color tails alongside low-contrast detail and source/scene uncertainty;
 a better photographic mean alone is insufficient. Publish at least two small

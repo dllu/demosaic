@@ -23,6 +23,14 @@ CONDITIONS = ("adc-only", "iso100-prior", "iso12800-prior")
 COMPLETE = "completed-V43-quality-panels-awaiting-independent-and-native-review"
 
 
+def check_effective_config(actual, recorded):
+    """Compare model values across the checkpoint tuple/JSON list boundary."""
+    if json.dumps(actual, sort_keys=True, allow_nan=False) != json.dumps(
+        recorded, sort_keys=True, allow_nan=False
+    ):
+        raise ValueError("Effective model config differs from the completed photo reference")
+
+
 def condition_protocols(protocol):
     """Keep the full suite's physical settings and select one condition/RGGB."""
     values = {c["name"]: c for c in protocol["conditions"]}
@@ -134,6 +142,7 @@ def prepare(parent_path, root, artifact_root):
         assert ref(target)["sha256"] == sha
     for name in (
         "scripts/evaluate_v95_native_photo_conditions.py",
+        "scripts/build_native_crop_board.py",
         "third_party/dinov3/LICENSE.md",
         "third_party/gaussian/Noise2VST-LICENSE",
         "third_party/gaussian/KAIR-LICENSE",
@@ -265,7 +274,9 @@ def worker(plan_path):
                 "inputs": [],
             }
             assert record["before"] == parent_result["invariants"][index]["model_SHA256"]
-            assert record["config"] == reference["models"][index]["effective_model_config"]
+            check_effective_config(
+                record["config"], reference["models"][index]["effective_model_config"]
+            )
             _models.append(record)
 
             def before(module, args, kwargs):
@@ -381,6 +392,12 @@ def worker(plan_path):
             "arithmetic": arithmetic,
             "triplets": audit_triplets(output, report["native_crops"]),
         }
+        # Retain the executed model/input/counter checks even if a later,
+        # image-only comparison fails; such failures do not require new inference.
+        core_path = root / (condition + "-core-result.json")
+        assert not core_path.exists()
+        save(core_path, results[condition])
+        results[condition]["persisted_core_checks"] = ref(core_path)
         if condition == "iso12800-prior":
             results[condition]["full_suite_native_preview_witness"] = compare_high_noise_previews(
                 output / "summary.json", Path(parent_result["report"]["path"])

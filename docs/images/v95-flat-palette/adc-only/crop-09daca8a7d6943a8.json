@@ -1,0 +1,200 @@
+{
+  "image": "crop-09daca8a7d6943a8.png",
+  "caption": "0014aa4e075b1827f91ef8a02069e1e318f040ba / adc-only / RGGB / 0:dino-anchored-native-diverse-b16-v43:step-2000",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Denoised",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "GT (synthetic)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "b8b559a0720ef7b02fce50d54733f657a24c582e06dfbc0dd0ba7d35f22fe2c7",
+  "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+  "source": {
+    "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+    "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "author": "Roy Egloff",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "attribution": null,
+    "credit": "Own work",
+    "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+    "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+    "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+    "width": 3888,
+    "height": 2592,
+    "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+    "split": "val",
+    "bin_factor": 8,
+    "color_space": "linear-sRGB",
+    "dtype": "uint16",
+    "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+    "shape": [
+      324,
+      486,
+      3
+    ],
+    "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+  },
+  "validation_index": 0,
+  "validation_seed": 42,
+  "evaluation_tile_xywh": [
+    48,
+    48,
+    160,
+    160
+  ],
+  "condition": {
+    "name": "adc-only",
+    "shot": 0.0,
+    "read": 0.0,
+    "exposure": 1.0
+  },
+  "pattern": "RGGB",
+  "model": {
+    "label": "0:dino-anchored-native-diverse-b16-v43:step-2000",
+    "source": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-hidden-FP16-full-quality-v1/work/checkpoints/V43.pt",
+    "training_run": "/mnt/external/demosaic/runs/dino-anchored-native-diverse-b16-v43",
+    "snapshot": "/mnt/external/demosaic/v95-palette-native-photo-conditions-20261021-v2/adc-only/weights/weights-0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5.pt",
+    "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+    "step": 2000,
+    "model_config": {
+      "restoration_backbone": "pretrained-rgb",
+      "width": 64,
+      "encoder_blocks": [
+        2,
+        2,
+        4
+      ],
+      "middle_blocks": 6,
+      "decoder_blocks": [
+        2,
+        2,
+        2
+      ],
+      "attention": true,
+      "dino": true,
+      "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+      "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+      "camera_conditioning": true,
+      "noise_modulation": false,
+      "physical_fp32": true,
+      "baseline": "bilinear",
+      "prior_window": 7,
+      "standardized_noise": false,
+      "noise_refinement": false,
+      "refinement_width": 24,
+      "refinement_blocks": 4,
+      "refinement_window": 63,
+      "coarse_refinement_factor": 0,
+      "coarse_refinement_width": 24,
+      "coarse_refinement_blocks": 4,
+      "coarse_refinement_window": 31,
+      "pyramid_refinement": false,
+      "pyramid_measurements": true,
+      "pyramid_width": 24,
+      "pyramid_blocks": 2,
+      "variance_stabilization": true,
+      "physical_anchors": true,
+      "rgb_processing_scale": 1,
+      "packed_detail_prior": false,
+      "rgb_hidden_autocast": false
+    },
+    "effective_model_config": {
+      "restoration_backbone": "pretrained-rgb",
+      "width": 64,
+      "encoder_blocks": [
+        2,
+        2,
+        4
+      ],
+      "middle_blocks": 6,
+      "decoder_blocks": [
+        2,
+        2,
+        2
+      ],
+      "attention": true,
+      "dino": true,
+      "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+      "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+      "dino_lora_rank": 0,
+      "dino_input_adapter": false,
+      "dino_feature_fusion": "bottleneck",
+      "camera_conditioning": true,
+      "noise_modulation": false,
+      "physical_fp32": true,
+      "baseline": "bilinear",
+      "prior_window": 7,
+      "standardized_noise": false,
+      "noise_refinement": false,
+      "refinement_width": 24,
+      "refinement_blocks": 4,
+      "refinement_window": 63,
+      "coarse_refinement_factor": 0,
+      "coarse_refinement_width": 24,
+      "coarse_refinement_blocks": 4,
+      "coarse_refinement_window": 31,
+      "pyramid_refinement": false,
+      "pyramid_measurements": true,
+      "pyramid_width": 24,
+      "pyramid_blocks": 2,
+      "variance_stabilization": true,
+      "physical_anchors": true,
+      "rgb_processing_scale": 1,
+      "packed_detail_prior": false,
+      "rgb_hidden_autocast": false,
+      "rgb_center_camera_matrix": false,
+      "rgb_middle_skip_fp32": false,
+      "adc_cfa_projection": false,
+      "raw_kernel_reconstruction": false,
+      "raw_kernel_windows": [
+        1,
+        5,
+        17
+      ],
+      "raw_kernel_phase_conditioning": false,
+      "raw_directional_residual": false,
+      "raw_directional_bank_context": false,
+      "raw_directional_bank_detach_input": false,
+      "raw_spectral_residual": false,
+      "late_rgb_refinement": "none",
+      "isotropic_groups": 6,
+      "isotropic_blocks": 8,
+      "isotropic_local_width": 32,
+      "isotropic_raw_gain": 1.0,
+      "isotropic_residual_scale": 1.0
+    },
+    "training_manifest_sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+    "compute_precision": "float32",
+    "refinement_compute_precision": "float32",
+    "memory_format": "channels_last"
+  },
+  "display_exposure": 1.0,
+  "reference": "Exact synthetic clean target"
+}

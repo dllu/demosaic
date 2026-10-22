@@ -1,14 +1,47 @@
 """Protect calibration identity and serialization of the additional native views."""
 
 import copy
+import json
 
 import pytest
 from evaluate_v95_native_photo_conditions import (
     COMPLETE,
     CONDITIONS,
+    check_effective_config,
     condition_protocols,
     dependency_ready,
 )
+
+
+def test_effective_model_config_accepts_checkpoint_sequences_after_json_roundtrip():
+    from demosaic.model import ModelConfig
+
+    actual = ModelConfig(dino=True, variance_stabilization=True).to_dict()
+    recorded = json.loads(json.dumps(actual))
+    assert actual != recorded  # Tuple defaults become lists in completed reports.
+    before = copy.deepcopy(actual)
+    check_effective_config(actual, recorded)
+    assert actual == before
+
+
+@pytest.mark.parametrize("changed", ["width", "flag", "blocks", "missing", "extra", "nan"])
+def test_effective_model_config_still_rejects_real_changes(changed):
+    actual = {"width": 64, "dino": True, "encoder_blocks": (2, 2, 4)}
+    recorded = json.loads(json.dumps(actual))
+    if changed == "width":
+        recorded["width"] = 32
+    elif changed == "flag":
+        recorded["dino"] = False
+    elif changed == "blocks":
+        recorded["encoder_blocks"][2] = 5
+    elif changed == "missing":
+        recorded.pop("width")
+    elif changed == "extra":
+        recorded["unknown"] = None
+    else:
+        recorded["width"] = float("nan")
+    with pytest.raises(ValueError):
+        check_effective_config(actual, recorded)
 
 
 def protocol():

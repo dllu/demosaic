@@ -46,10 +46,12 @@ complete. The [V93–V95 review](v43-curated-original20k-review.md) finds photo 
 weak-detail gains with remaining saturated-color/unseen-camera tradeoffs.
 The [V96/V97 follow-up](v95-flat-palette-quality-review.md) keeps that weak-detail
 recipe and tests a wider colored-flat palette from V95. Both 4k stages and all
-three primary panels are complete. Neither new endpoint establishes a photo
-PSNR gain over V95; small gains on most photos coexist with large regressions
-on a few. Native views show a green/olive fabric cast in V97. The remaining
-color/detail/GFX review continues; V43 remains the working reference.
+seven quality panels and native review are complete. Neither new endpoint
+establishes a photo PSNR gain over V95; small gains on most photos coexist with
+large regressions on a few. Both worsen tested color tails and lose some of
+V95's noisy weak-detail response. Lower-noise views confirm color/detail
+failures even with nearly clean inputs. Both stop at final4k; V43 remains the
+working reference and speed work remains deferred.
 Originals and historical manifests remain read-only. Validation/test and the
 standing GFX scene remain outside training. See the [source review](corpus-source-review.md).
 
