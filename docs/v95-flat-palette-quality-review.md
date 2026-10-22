@@ -4,6 +4,35 @@ The V97 endpoint shows a visible green/olive cast on the warm fabric in one pres
 
 V96 and V97 completed 4,000 matched updates from final V95 EMA, preserving the original V43 architecture, curated 88,484-source corpus and the recipe with zero optical blur and more weak detail. Only colored smooth-field palette span differs: 0 versus 8 stops. Final 4k EMAs are primary; validation-best checkpoints remain diagnostic. See the [training plan and audits](v95-flat-palette-quality-plan.md).
 
+## Fixed example scores
+
+These are individual evaluation tiles, without a pooled mean or confidence
+interval. Values are sRGB PSNR in dB for RGGB, exposure 1, over the native
+240×240 area after the 8-pixel evaluation border. The displayed native crops
+below use the smaller ROI [48,48,160,160]. The complete panel and its final
+state/input/reference checks are still pending.
+
+| Source | Condition | V43 | V95 | V96 | V97 |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Fabric | ADC-only | 28.673 | 23.300 | 21.280 | 21.420 |
+| Fabric | ISO100 prior | 26.873 | 21.719 | 20.982 | 19.522 |
+| Fabric | ISO12800 prior | 40.570 | 32.389 | 31.267 | 24.354 |
+| Building | ADC-only | 37.392 | 38.673 | 38.666 | 38.717 |
+| Building | ISO100 prior | 39.267 | 40.404 | 40.518 | 40.535 |
+| Building | ISO12800 prior | 35.394 | 35.842 | 35.865 | 35.869 |
+
+The fabric regression also affects V95 and V96. At ISO12800, its chroma MAE is
+0.003802 / 0.012539 / 0.013466 / 0.036038 for V43/V95/V96/V97. The building
+instead improves modestly. Lower-noise fabric scores also worsen; the queued
+native views will help inspect that behavior. These two fixed sources do not
+determine the result over all 427 photographs.
+
+The [fixed-score audit](results/v95-palette-fixed-example-scores-v1.json)
+freezes the complete first processing batch: 1,008 rows covering four sources,
+nine methods, seven conditions and four CFAs. Its 224 shared V43/V95 cases
+match all recorded metrics from the earlier completed FP32 study exactly.
+No extra inference or partial-panel average is used here.
+
 ## Native photographic triplets
 
 Noisy → restored → exact synthetic GT. Each panel is an unchanged native 160×160 crop from a fixed 256×256 evaluation tile at ROI [48,48,160,160], at the 8×-binned photographic evaluation resolution. Both sources were fixed before viewing the endpoints. All methods share RGGB, ISO12800-prior conditioning (shot 0.00256/read 2.62144e-5, exposure 1), white balance/matrix/seed and sRGB display exposure 1. PNG pixels are never resized. Each adjacent JSON records full source, checkpoint SHA256, conditioning and display metadata.

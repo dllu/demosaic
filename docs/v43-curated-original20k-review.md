@@ -79,7 +79,7 @@ Source: [File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jp
 
 Source: [File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Himmel -- 2022 -- 2158.jpg](https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg), Dietmar Rabich, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0). Modified by binning, cropping, synthetic sensor noise and restoration.
 
-The paraglider suspension lines remain weak at this noise level in every method. Building geometry is clearer in the joint models than RawNIND in these preselected views, while differences among the four joint models are modest. [Actual viewing record](results/v43-quality-photo-first-native-review-v1.json).
+The paraglider suspension lines remain weak at this noise level in every method. Building geometry is clearer in the joint models than RawNIND, and differences among joint endpoints on that building are modest. The fabric has a substantial V95 color regression that the earlier wording understated: its ISO12800/RGGB sRGB PSNR is 32.38894 dB versus V43's 40.57026, with chroma MAE 0.012539 versus 0.003802. These scores cover the 240×240 evaluation area after border trimming; the displayed crops are 160×160. The [fixed-example score audit](results/v95-palette-fixed-example-scores-v1.json) verifies the same V43/V95 case values against this completed study. The photographic mean gain does not remove this failure. [Actual viewing record](results/v43-quality-photo-first-native-review-v1.json).
 
 ## Weak detail and remaining quality review
 
