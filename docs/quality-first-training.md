@@ -18,9 +18,12 @@ the membership freeze: 347 retain and 24 withhold, including all 74 training sou
 recorded ISO ≥12800. Native examples show why processed targets are withheld
 while real fine leaf veins and weak fog detail remain. High loss, ISO and
 software tags select review candidates; visible binned-target quality decides
-membership. A later review retains another 24 sources, bringing actual visual
-coverage to 395 without changing this freeze. This is targeted review, not a
-full-corpus manual inspection.
+membership. Later reviews retain another 49 sources, bringing actual visual
+coverage to 420 without changing this freeze. The
+[prospective weak/fine ROI catalogue](corpus-source-review.md#prospective-weak-and-fine-texture-rois)
+adds six inspected training-only regions for a later sampling test; it is not
+applied to the current recipe. This is targeted review, not a full-corpus manual
+inspection.
 
 The full V43 loss/IQA-proxy scan completed all 88,508 training sources and
 177,016 cases. All 87 distinct final top-32/top-16 candidates have visual

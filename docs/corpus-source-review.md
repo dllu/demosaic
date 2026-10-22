@@ -193,3 +193,57 @@ This targeted batch supplies no additional clear exclusions and does not
 estimate a corpus defect rate. All current V93–V97 manifests and the original
 371-source freeze decisions remain unchanged.
 
+## Prospective weak and fine texture ROIs
+
+An [additional source/ROI review](results/low-contrast-training-source-review-v1.json)
+inspects 24 previously unreviewed title-selected training sources plus one
+hash-ordered control. All 25 are retained at the reviewed native/binned scales;
+no new clear exclusions were found. Cumulative visual coverage is now **420
+sources: 396 retain / 24 withhold**. The manifests used by V93–V99 stay fixed.
+This is targeted review, not a corpus defect-rate estimate.
+
+The [prospective ROI catalogue](../configs/low-contrast-training-rois-v1.json)
+records six existing training sources with inspected, hash-verified 512×512
+contexts in the 4× linear-sRGB cache. Final area2 gives native 256×256 targets
+at 8× binning. It is a catalogue for a later controlled sampling/weighting test,
+not an active sampler or new training-source admission. Some surrounding edges
+are strong; these are regions containing weak/fine structures, not global
+low-contrast labels. Geometric augmentation would need its own ROI boundary
+checks.
+
+| Source ID prefix | Inspected structure | Bin4 context [x,y,w,h] |
+| --- | --- | --- |
+| `6aa3e94bda50` | Gray wool fibers and wrapped thread | [160,0,512,512] |
+| `423c08bacc74` | Faint fishing-net lines; face outside this ROI | [288,256,512,512] |
+| `7b56d20ffd21` | Fine gray wire braid grooves | [96,360,512,512] |
+| `a4ae82e1e5b6` | Subtle grain on white-painted fence boards | [504,280,512,512] |
+| `ed29eebff641` | Pale lichen filaments against bark | [96,8,512,512] |
+| `9b4e6f950b1d` | Same-color cloth folds and crease edges, without claiming resolved fibers | [384,128,512,512] |
+
+Five source sheets, six complete native8 contexts and two focused-ROI sheets
+were actually inspected. Original SHA1/cache SHA256 and raw ROI/float32 target
+hashes are recorded. Natural defocus does not make an otherwise useful photo
+bad, and faint detail is not automatically blur. Title cues can also mislead:
+“Moss Malvern” is a car model. Its photograph stays valid, without being labeled
+vegetation or a priority fine-texture source.
+
+These figures show a resized full-source thumbnail, a native 256-pixel source
+crop and a native 256-pixel 8×-binned target. The two native views have different
+fields of view. Display exposure is ×1; native crop pixels are never resized.
+No noise simulation or restoration is applied. These are source-quality views,
+not noisy/denoised/GT model comparisons.
+
+![Gray yarn: context thumbnail, native source and native binned training target](images/low-contrast-training-yarn.png)
+
+[Yarn source/ROI/display metadata](images/low-contrast-training-yarn.json).
+Photo: [Anna.Massini](https://commons.wikimedia.org/wiki/File:Various_yarns_including_embroidery_thread,_filoforte_and_wool_in_various_shades_of_grey.jpg),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), modified by binning,
+cropping, display conversion and context-thumbnail creation; preview retains that license.
+
+![White fence: context thumbnail, native wood grain and native binned training target](images/low-contrast-training-white-fence.png)
+
+[Fence source/ROI/display metadata](images/low-contrast-training-white-fence.json).
+Photo: [Estormiz](https://commons.wikimedia.org/wiki/File:Fence_Pursitie_Oulu_20170305.jpg),
+[CC0](https://creativecommons.org/publicdomain/zero/1.0/), modified through
+binning, cropping, display conversion and context-thumbnail creation.
+
