@@ -69,6 +69,11 @@ STUDIES = [
         [93, 94, 95],
         "v43-curated-original20k-review.md",
     ),
+    (
+        "v95-palette-primary-statistics-v1.json",
+        [96, 97],
+        "v95-flat-palette-quality-review.md",
+    ),
 ]
 METRICS = {
     ("full427", "photo", "srgb_psnr"): "photo_srgb_PSNR",

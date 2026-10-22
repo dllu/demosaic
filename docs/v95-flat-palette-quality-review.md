@@ -1,8 +1,57 @@
-# Wider flat colors from V95: quality review in progress
+# Wider flat colors from V95: primary-panel results
 
-The V97 endpoint shows a visible green/olive cast on the warm fabric in one preselected native photo. All four joint models still lose much of its fine suspension-line detail at this noise level. **V43 remains the working reference.** The complete fresh FP32 evaluation is running; these are early qualitative observations, with no aggregate quality result yet.
+Neither V96 nor V97 establishes a photographic PSNR gain over V95. Most sources improve slightly, but substantial regressions on a few sources offset those gains. V97 also shows a visible green/olive cast on the warm fabric in one preselected native photo. **V43 remains the working reference.** All three primary panels are complete; weak-detail, color and GFX review continues.
 
 V96 and V97 completed 4,000 matched updates from final V95 EMA, preserving the original V43 architecture, curated 88,484-source corpus and the recipe with zero optical blur and more weak detail. Only colored smooth-field palette span differs: 0 versus 8 stops. Final 4k EMAs are primary; validation-best checkpoints remain diagnostic. See the [training plan and audits](v95-flat-palette-quality-plan.md).
+
+## Complete primary panels
+
+Fresh IEEE FP32, identical observations and fixed checkpoint bytes. Photo means
+balance 427 sources across seven conditions and four CFAs. Known/unseen camera
+means balance 4/5 scenes over 72/90 crops and compare measured CFA samples.
+The 16 procedural sources remain separate from photographic means.
+
+| Model | Photo sRGB PSNR | Known CFA PSNR | Unseen CFA PSNR |
+| --- | ---: | ---: | ---: |
+| V43 | 34.89933 | 54.23334 | 53.80629 |
+| V95 | 35.29553 | 54.33307 | 53.76990 |
+| V96 | 35.27828 | 54.32564 | 53.76643 |
+| V97 | 35.28321 | 54.32529 | 53.76365 |
+
+| Contrast | Photo delta, 95% interval | Known delta, 95% interval | Unseen delta, 95% interval |
+| --- | ---: | ---: | ---: |
+| V96 minus V95 | −0.01725 [−0.05519, +0.01372] | −0.00743 [−0.02260, +0.00774] | −0.00347 [−0.03997, +0.03219] |
+| V97 minus V95 | −0.01232 [−0.04718, +0.01788] | −0.00778 [−0.02797, +0.01241] | −0.00626 [−0.04127, +0.04183] |
+| V97 minus V96 | +0.00492 [−0.01276, +0.02189] | −0.00035 [−0.00798, +0.01090] | −0.00279 [−0.02342, +0.01716] |
+
+Intervals use 1,000 paired source/scene resamples, seed 42, and do not measure
+training-seed uncertainty. The matched wider-palette contrast is uncertain.
+V96's extra training alone also gives no established PSNR gain over V95.
+Photographic SSIM rises slightly, from 0.960148 to 0.960290/0.960312, while
+chroma MAE worsens from 0.007596 to 0.007649/0.007631 for V96/V97.
+
+Source-level changes reveal the failure tail. These values average all 28
+condition/CFA combinations within each photograph before taking deltas:
+
+| Contrast | Sources with higher PSNR | Median delta | Worst delta |
+| --- | ---: | ---: | ---: |
+| V95 minus V43 | 400/427 | +0.47461 | −6.35319 |
+| V96 minus V95 | 330/427 | +0.04068 | −3.98915 |
+| V97 minus V95 | 336/427 | +0.04166 | −3.38332 |
+| V97 minus V96 | 225/427 | +0.00091 | −1.82180 |
+
+The [primary statistics and independent replay](results/v95-palette-primary-statistics-v1.json)
+check all 111,636 photo/procedural records and 648/810 camera records.
+All 25,132 shared V43/V95 cases match the earlier completed study exactly,
+including 200,408 metric fields with nullable support. The maximum independent
+summary discrepancy is below 1.5e-14. The receipt retains per-noise means,
+all primary contrasts and source-delta quantiles.
+
+All 24 saved camera triplets were represented in 32 actually viewed native
+cells. The joint models look close in these four fixed ROIs, without a
+convincing palette-specific detail gain. The [camera viewing record](results/v95-palette-native-camera-review-v1.json)
+records the source boards and observations. AHD references retain grain and
+interpolation artifacts and are not exact RGB GT.
 
 ## Fixed example scores
 
@@ -10,7 +59,8 @@ These are individual evaluation tiles, without a pooled mean or confidence
 interval. Values are sRGB PSNR in dB for RGGB, exposure 1, over the native
 240×240 area after the 8-pixel evaluation border. The displayed native crops
 below use the smaller ROI [48,48,160,160]. The complete panel and its final
-state/input/reference checks are still pending.
+state/input/reference checks have passed; these two examples illustrate
+behavior that an aggregate mean can obscure.
 
 | Source | Condition | V43 | V95 | V96 | V97 |
 | --- | --- | ---: | ---: | ---: | ---: |
@@ -83,7 +133,7 @@ Source: [File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Hi
 
 ## Remaining review
 
-The two photo examples do not establish a general winner. The full suite of 427 photos and 16 procedural sources, known/unseen measured-CFA panels, carrier/flat/color grids and standing GFX sky/building/foliage/fence/highlights remain pending. Real paired/AHD or separate ISO100 GFX references are not exact GT. All primary means and uncertainty, numeric audits and remaining actual native views must be recorded before a quality decision. Speed work stays deferred.
+The primary means and native photo/camera views do not establish a general winner. Carrier/flat/color grids and standing GFX sky/building/foliage/fence/highlights remain pending. Real paired/AHD or separate ISO100 GFX references are not exact GT. Remaining numeric audits and actual native views are required before the complete quality decision. Speed work stays deferred.
 
 Additional ADC-only and ISO100 native views of the same fixed photos are queued
 to check weak detail at lower noise. An ISO12800 repeat will check consistency
