@@ -3,7 +3,7 @@
 The [V93–V95 review](v43-curated-original20k-review.md) finds clear photographic
 and weak-detail gains, with saturated high-noise color errors and uncertain
 unseen-camera gains still preventing promotion. Keep V43 as the working reference
-and continue quality work with its architecture. This is a prospective training
+and continue quality work with its architecture. This is an ongoing matched training
 comparison; it has no new held-out quality result yet.
 
 ## Matched comparison
@@ -59,12 +59,21 @@ model tensors, 71 finite EMA tensors and 69 finite Adam states at step 24,
 the exact V95 initializer and effective architecture. CPU and CUDA each have
 12 identical shared paired/native observations; affected Commons observations
 change as expected. The numerical package hash remains the completed V95
-package. V96 production has been observed through step 25 with finite loss
-and gradients; V97 follows serially. Full training and quality results remain
-pending. The [preflight and live-launch receipt](results/v95-palette-preflights-and-training-launch-v1.json)
+package. The initial production observation captured V96 through step 25 with
+finite loss and gradients. The [preflight and live-launch receipt](results/v95-palette-preflights-and-training-launch-v1.json)
 contains exact plan/source/checkpoint hashes, exited proof owners and actual
 production owner/resource readings. Forty focused data/lineage/resource tests
 pass; none is a held-out quality measurement.
+
+**V96 completed 4,000 updates; V97 is training.** The
+[independent V96 audit](results/v95-palette-V96-completed-training-v1.json)
+checks all five retained states (1k/2k/3k/final4k/validation-best), finite
+model/EMA/Adam tensors, exact V95 lineage and architecture, all 161 logged
+loss/gradient rows, four scheduled validations and exact first24 inputs versus
+its CUDA preflight. Counts are 4,000 optimizer/training forwards plus 128
+validation forwards and 4,128 DINO calls. Validation-best is step 3k;
+the predeclared final4k EMA remains primary. Matched V97 completion/input
+comparison and full quality/native review remain pending.
 
 The controller records actual resource readings every two seconds. Require
 48 GiB available RAM and 64/384 GiB free on root/external storage, stable for
