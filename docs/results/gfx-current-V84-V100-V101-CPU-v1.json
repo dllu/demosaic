@@ -1,0 +1,470 @@
+{
+  "status": "completed-six-region-current-GFX-CPU-comparison-with-native-viewing",
+  "recorded_local": "2026-10-22T15:41:16.573377-07:00",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/plan.json",
+    "sha256": "0ec97bc8c5496d8d8afffbebb9aab5b411aa5255354d905e40e77d0368e690a5"
+  },
+  "launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/launch.json",
+    "sha256": "208640d3bd1a3561e114612913c8008f1ad463a6540555d6eec0722936c02e90"
+  },
+  "execution": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/execution.json",
+    "sha256": "94b00c92adcb9eec9a7db76b3cab9795fba28a22a1e48588e935635806ce898c"
+  },
+  "result": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/result.json",
+    "sha256": "71b1f619688e6306c957169a14187f8b9d072439fba60e706d9ec0a35ff15b9e"
+  },
+  "report": {
+    "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/report.json",
+    "sha256": "3c394c48fb441b95d640657b0cedee10ec556a77f3161f024eb05c385fbcc29c"
+  },
+  "display_panel_replay": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/panel-replay.json",
+    "sha256": "aed411eb24e37b54e9716c422da80b50bf508e06b99ec335c7c7d04f6e709ca6"
+  },
+  "display_panel_replay_driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/replay-panels.py",
+    "sha256": "e21501d73f5e3cb8dcee136ff522d365912d65a48bdb617590fcc97cd272b08e"
+  },
+  "checkpoint_records": [
+    {
+      "arm": "V84",
+      "path": "/mnt/external/demosaic/models/v84-original20000.pt",
+      "sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10",
+      "step": 20000
+    },
+    {
+      "arm": "V100",
+      "path": "/mnt/external/demosaic/v84-curated-quality-20261022-v2/train/V100/last.pt",
+      "sha256": "4b689fb187b13df72fbf79ebd46f98cf7361c3ca8a97fb1f7afee940b249ad3e",
+      "step": 10000,
+      "initialized_from": {
+        "path": "/mnt/external/demosaic/models/v84-original20000.pt",
+        "sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10",
+        "step": 20000
+      }
+    },
+    {
+      "arm": "V101",
+      "path": "/mnt/external/demosaic/v84-curated-quality-20261022-v2/train/V101/last.pt",
+      "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+      "step": 10000,
+      "initialized_from": {
+        "path": "/mnt/external/demosaic/models/v84-original20000.pt",
+        "sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10",
+        "step": 20000
+      }
+    }
+  ],
+  "sources": [
+    {
+      "role": "noisy",
+      "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+      "metadata": {
+        "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+        "camera": "GFX100S",
+        "pattern": "RGGB",
+        "black_levels": [
+          4101.0,
+          4098.0,
+          4104.0,
+          4106.0
+        ],
+        "white_levels": [
+          65535.0,
+          65535.0,
+          65535.0,
+          65535.0
+        ],
+        "white_balance": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "camera_to_srgb": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "flip": 0,
+        "iso": 6400,
+        "adc_white_level": 65535.0
+      }
+    },
+    {
+      "role": "reference",
+      "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+      "metadata": {
+        "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+        "camera": "GFX100S",
+        "pattern": "RGGB",
+        "black_levels": [
+          256.0,
+          255.0,
+          256.0,
+          256.0
+        ],
+        "white_levels": [
+          65535.0,
+          65535.0,
+          65535.0,
+          65535.0
+        ],
+        "white_balance": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "camera_to_srgb": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "flip": 0,
+        "iso": 100,
+        "adc_white_level": 65535.0
+      }
+    }
+  ],
+  "conditioning": {
+    "shot": 0.0014635775921166604,
+    "read": 1.0715704128646712e-06,
+    "source": "input Haar fit"
+  },
+  "reference_calibration": {
+    "rgb_to_sensor_gains": [
+      1.0000624759971717,
+      1.0000575400374918,
+      1.000083683987943
+    ],
+    "samples": [
+      922554,
+      2316454,
+      693995
+    ]
+  },
+  "runtime": {
+    "device": "cpu",
+    "neural_precision": "float32",
+    "torch": "2.14.1+cu130",
+    "cuda_initialized": false
+  },
+  "scope": "Six fixed native160regions in512contexts,CPUfloat32/fourthreads.3currentlearnedcheckpoints plus RawNIND:CFA-channel. Samecached3879/3880,source ROIs and shared+2EV/WB/matrix. No synthetic noise/training/GPU/fullframe/speed claim or quality score against independentISO100reference.",
+  "neural_weights_and_cached_sources_unchanged": true,
+  "native_triplets": 24,
+  "native160_cells_actually_viewed": 36,
+  "float_artifacts_replayed": 36,
+  "display_panels_reproduced_exactly": 72,
+  "sidecar_derivation": "Original PNG bytes unchanged and source metadata retained; public names simplified and original sidecar reference plus source capture/calibration metadata added. No output pixels, ROI, exposure, WB, matrix, noise conditioning or reference interpretation changed.",
+  "actual_visual_observations": "Viewed all36native cells on the public board. V84/V100/V101 are close: clean sky, coherent fence mesh and clearer building rails than RawNIND; no large V101-specific quality leap visible here. Foliage remains smooth, saturated-light shapes/brightness differ from the independently capturedISO100reference, and fine boundaries remain development targets. V101 is highlighted as the new candidate, not a claim of real-reference pixelwise superiority.",
+  "fullframe_pending_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/fullframe-v1/plan.json",
+    "sha256": "8a9cb830562db1e30ee618f69c839108ce3fbffb5403caa57c71c275d9868f77"
+  },
+  "active_numerical_plans_verified_unchanged": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/evaluation-queue-v1/plan.json",
+      "sha256": "83e737f85a2c6650697f521c46c9fcea58bd40f1086642face9847b1af82e6a8"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/evaluation-v1/plan.json",
+      "sha256": "4298f247de518aff874b64ad7c786f7f8914dae4794ae2d7aca51028e70a199a"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/fullframe-v1/plan.json",
+      "sha256": "8a9cb830562db1e30ee618f69c839108ce3fbffb5403caa57c71c275d9868f77"
+    }
+  ],
+  "immutable_manifest": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/manifest.json",
+    "sha256": "2992179abd36a261dabfbc473ff35b8e7269614adf52dc8b5de59fe683a2e7eb"
+  },
+  "current_manifest_path": "docs/images/current-gfx/manifest.json",
+  "immutable_selection": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/selection.json",
+    "sha256": "93950ae5bbf4ae16741b5b56adc03d0973a3b929dfecac7c733244b8ef906727"
+  },
+  "current_selection_path": "docs/images/current-gfx/selection.json",
+  "immutable_board": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/gfx-comparison.png",
+    "sha256": "c664e82b524aacbef616e66cc0fda2bfb570cd1abb3a22bbc6ae77e03797885c"
+  },
+  "current_board_path": "docs/images/current-gfx/gfx-comparison.png",
+  "immutable_board_receipt": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/gfx-comparison.json",
+    "sha256": "dca898bbf3e8c9170fc4a1ba9d3762821cf7481c50d360ff58cf7506a7f83203"
+  },
+  "current_board_receipt_path": "docs/images/current-gfx/gfx-comparison.json",
+  "immutable_triplets": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/RawNIND-building-detail.png",
+      "sha256": "ece71fb5fc24e75a5a876ba814a32570be258f986e222ef0f21a76cf17e27b06"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/RawNIND-chain-link-fence.png",
+      "sha256": "17764bc0874cf8cff16a2f82c80fa700aee49f035abc529357a84bc5e9b4a927"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/RawNIND-colored-neon-sign.png",
+      "sha256": "5f8cd4419930cd6e0eff7440fd17b9225975d646b98a9260a42c102b2b47868d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/RawNIND-foliage.png",
+      "sha256": "1cf55fd081fa99be30de90318894bd37bd6847d591600750e156e569f4ae41b8"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/RawNIND-illuminated-platform-boundary.png",
+      "sha256": "97b97bafd814ac8456b30b25b722682b29bb8883a58b4ad437841d152b0fc6ba"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/RawNIND-overcast-sky.png",
+      "sha256": "7909f33be53d2d27b50bc6d6e9cd687001cb720ca9809d1cdd5975bad614c101"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V100-building-detail.png",
+      "sha256": "74ec08f1883341afd808a577339f734f5a6dad8e2d7c1cc8a832357d92bdbdbe"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V100-chain-link-fence.png",
+      "sha256": "9b3588b44405f2300ebb5d7b28bdde64e0289c52d59b44748e48bcb011519730"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V100-colored-neon-sign.png",
+      "sha256": "a006d433d263a28ba35f404d4a48f7b3c37b6227195a9ca192e9b6cbbf9d5f3c"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V100-foliage.png",
+      "sha256": "fb47a7b87fc9c1d92bd3ace52b37cfa0c56de3f4c6981b9785254da5d25d114e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V100-illuminated-platform-boundary.png",
+      "sha256": "492750780b5cb67fc57bd4e7bc1a6816b58a8b0bb15069de9e5bf0098f5d50c8"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V100-overcast-sky.png",
+      "sha256": "1fc3815860533d8b37c6e05b7c1a81b4bd0b35c548b815d107371acc37b5064d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V101-building-detail.png",
+      "sha256": "b1389d649191a4369c7b9f4dbd216d02d354387614370f6f98732dec87b46a51"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V101-chain-link-fence.png",
+      "sha256": "86e2cade4927ceb1898ad792cf50f35be6329edaebdd8dad439f9f5fce284fb0"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V101-colored-neon-sign.png",
+      "sha256": "20894138e98db566ecfb0a70468808a7c900e7eb1032d228843fcb5f8c4ef3d4"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V101-foliage.png",
+      "sha256": "f3bb9f6d62cd93bfc4d525bd1466ba8298fb6f52439ff0ac6392c7a9c4cd7e93"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V101-illuminated-platform-boundary.png",
+      "sha256": "f0f2022b8e98f04f95c9aa7f58182b4312e53c4f48444ac6fdc839af6eca3032"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V101-overcast-sky.png",
+      "sha256": "87077e9aaa52ceceecb97257a6d9579a450fc72918e6f40d53273876e4b9101a"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V84-building-detail.png",
+      "sha256": "babeeeacb8dc714f23219eb098d3b41806dcc4e70190b1548d6ff62c48c60ac2"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V84-chain-link-fence.png",
+      "sha256": "04ffa161109ac783e289cc7b2e2a0fc85045064878d52f357b23ee13b03ce8a3"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V84-colored-neon-sign.png",
+      "sha256": "79e3f2d46f734eb54048320bfd292fd8cae6d95408a426fdfbb38bc0c552fa42"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V84-foliage.png",
+      "sha256": "0d85fbc154aa9ef581fc5a6e1b63557faa9e1987294698d7a5edd66da161989d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V84-illuminated-platform-boundary.png",
+      "sha256": "2ee2597b1c014553ef3ce9e5ceba47501304546fe5f83eeb3a7267cec1fde5d7"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V84-overcast-sky.png",
+      "sha256": "37543f1d3f18d07131c1ecc8c96862511b5d115d974aa1b6d0cdb48e42a4631e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/RawNIND-building-detail.json",
+      "sha256": "c1bb0297602166656bc2edf6a8ff13ee8e78acd4c2f181937b2b00c7606f9fd3"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/RawNIND-chain-link-fence.json",
+      "sha256": "9e287f6776da92d1bfa53dee8cc145fead3a1675b2efca13065512ef1cba2be6"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/RawNIND-colored-neon-sign.json",
+      "sha256": "1a6ddf672e8a6c83c3542a6d6c70889ab42bb812d48a04bc929edd0193960cc8"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/RawNIND-foliage.json",
+      "sha256": "aca5ac674582ee1c42b1188939fb909607bbec2c4ba23615f03fe733f136eb3b"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/RawNIND-illuminated-platform-boundary.json",
+      "sha256": "90f030086475a26b94269a584870e43655b87efdadb8c9681bc26f9791a5547d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/RawNIND-overcast-sky.json",
+      "sha256": "4db4f36430ecaf3b698e5f68a3ffe511adbaf267267462e0f70c24eddba9aed5"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V100-building-detail.json",
+      "sha256": "6cd0e9d0342d3781662c997a4bb64b02ccb4b4f13a8a19e9c562832a590f48fd"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V100-chain-link-fence.json",
+      "sha256": "4e6952797f0d25ebde6b0662a26926c4974bf5b5476c14eff62c57397e2b3f47"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V100-colored-neon-sign.json",
+      "sha256": "e8849c506aa90596de42a9b2eff91200b0fae5e134910c3f777c705eba8e70c6"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V100-foliage.json",
+      "sha256": "8924de4d57523f462c0de4b0389b5a874241392b9bf7d9baac20f14175d2aeba"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V100-illuminated-platform-boundary.json",
+      "sha256": "51a558a63a2a39a77004fb0b3351f3f4aeceaa0681da84e406b39eb847567258"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V100-overcast-sky.json",
+      "sha256": "97799737879789f6a86841493f1752c7041f32219e08332a32f2426036ac6a2d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V101-building-detail.json",
+      "sha256": "652de62e649505a88e36dd2ce65022475627236da0fad59ec70b5cb5fee0e1ca"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V101-chain-link-fence.json",
+      "sha256": "b23850804ea8bcaa214649f6d72c5bf35c692624911a850157e4dc6bf8320fd8"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V101-colored-neon-sign.json",
+      "sha256": "ae1d21224e55f670b503bad5d0a9d63056e8b68a1d7ae1d537a8f1cd5d950172"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V101-foliage.json",
+      "sha256": "32198608981ced34a4e17b8e542f4382803b35fa60b8c7a30e38c1dc8a7c90e0"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V101-illuminated-platform-boundary.json",
+      "sha256": "f974976aa1528d4e5d79b2b27615c883088864cb69fa7f10ef197858e51bca96"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V101-overcast-sky.json",
+      "sha256": "ca8cf0fe221cfb674054dba3a0bed31d000c5d87218d9de912a7605954eac248"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V84-building-detail.json",
+      "sha256": "41224b9324e037fa19def51c9e1e5882ec85a8d6350332756fa1beb19ca72106"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V84-chain-link-fence.json",
+      "sha256": "3a0f835f9feef1899b36406dd6a848caa28763c146c6d2286fd64532a105d097"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V84-colored-neon-sign.json",
+      "sha256": "1774a05e6cf0cb7e7ee9b1319f4b1257e62b22cd1f7c4b941099214a31997280"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V84-foliage.json",
+      "sha256": "df52d515e0beb6b335411d574c0b1f361ea24bdc564f49b2ddb434e0133d2b0e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V84-illuminated-platform-boundary.json",
+      "sha256": "34ab57c9a1c909a01a3f215a6d9a1d3cc15e34afaee9d4bd9d1f4ac958475a05"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V101-GFX-context-CPU-v1/published-gallery-v1/V84-overcast-sky.json",
+      "sha256": "5c013219a26deba649e5142e15848267dc274459ca56b8fdee4a8e759073be71"
+    }
+  ],
+  "current_triplet_paths": [
+    "docs/images/current-gfx/RawNIND-building-detail.png",
+    "docs/images/current-gfx/RawNIND-chain-link-fence.png",
+    "docs/images/current-gfx/RawNIND-colored-neon-sign.png",
+    "docs/images/current-gfx/RawNIND-foliage.png",
+    "docs/images/current-gfx/RawNIND-illuminated-platform-boundary.png",
+    "docs/images/current-gfx/RawNIND-overcast-sky.png",
+    "docs/images/current-gfx/V100-building-detail.png",
+    "docs/images/current-gfx/V100-chain-link-fence.png",
+    "docs/images/current-gfx/V100-colored-neon-sign.png",
+    "docs/images/current-gfx/V100-foliage.png",
+    "docs/images/current-gfx/V100-illuminated-platform-boundary.png",
+    "docs/images/current-gfx/V100-overcast-sky.png",
+    "docs/images/current-gfx/V101-building-detail.png",
+    "docs/images/current-gfx/V101-chain-link-fence.png",
+    "docs/images/current-gfx/V101-colored-neon-sign.png",
+    "docs/images/current-gfx/V101-foliage.png",
+    "docs/images/current-gfx/V101-illuminated-platform-boundary.png",
+    "docs/images/current-gfx/V101-overcast-sky.png",
+    "docs/images/current-gfx/V84-building-detail.png",
+    "docs/images/current-gfx/V84-chain-link-fence.png",
+    "docs/images/current-gfx/V84-colored-neon-sign.png",
+    "docs/images/current-gfx/V84-foliage.png",
+    "docs/images/current-gfx/V84-illuminated-platform-boundary.png",
+    "docs/images/current-gfx/V84-overcast-sky.png",
+    "docs/images/current-gfx/RawNIND-building-detail.json",
+    "docs/images/current-gfx/RawNIND-chain-link-fence.json",
+    "docs/images/current-gfx/RawNIND-colored-neon-sign.json",
+    "docs/images/current-gfx/RawNIND-foliage.json",
+    "docs/images/current-gfx/RawNIND-illuminated-platform-boundary.json",
+    "docs/images/current-gfx/RawNIND-overcast-sky.json",
+    "docs/images/current-gfx/V100-building-detail.json",
+    "docs/images/current-gfx/V100-chain-link-fence.json",
+    "docs/images/current-gfx/V100-colored-neon-sign.json",
+    "docs/images/current-gfx/V100-foliage.json",
+    "docs/images/current-gfx/V100-illuminated-platform-boundary.json",
+    "docs/images/current-gfx/V100-overcast-sky.json",
+    "docs/images/current-gfx/V101-building-detail.json",
+    "docs/images/current-gfx/V101-chain-link-fence.json",
+    "docs/images/current-gfx/V101-colored-neon-sign.json",
+    "docs/images/current-gfx/V101-foliage.json",
+    "docs/images/current-gfx/V101-illuminated-platform-boundary.json",
+    "docs/images/current-gfx/V101-overcast-sky.json",
+    "docs/images/current-gfx/V84-building-detail.json",
+    "docs/images/current-gfx/V84-chain-link-fence.json",
+    "docs/images/current-gfx/V84-colored-neon-sign.json",
+    "docs/images/current-gfx/V84-foliage.json",
+    "docs/images/current-gfx/V84-illuminated-platform-boundary.json",
+    "docs/images/current-gfx/V84-overcast-sky.json"
+  ],
+  "current_board_matches_actually_viewed_immutable_snapshot_exactly": true
+}

@@ -7,7 +7,8 @@ that stronger architecture on the curated corpus and fine-detail recipe.
 useful progress; individual study gates do not freeze those recommendations.
 
 The broader objective in [PROMPT](../PROMPT.md) remains active. Quality has
-priority over speed.
+priority over speed. The current [GFX gallery](gfx-qualitative.md) includes
+V84/V100/V101 on all six fixed regions; their real-capture differences remain small.
 
 | Goal | Current evidence | Remaining work |
 | --- | --- | --- |

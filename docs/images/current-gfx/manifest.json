@@ -1,0 +1,4948 @@
+{
+  "preferred_model": "V101",
+  "groups": {
+    "gfx": {
+      "kind": "gfx",
+      "native_crops": [
+        {
+          "image": "V84-overcast-sky.png",
+          "caption": "overcast-sky / 0:native-data-control-v84:step-20000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "37543f1d3f18d07131c1ecc8c96862511b5d115d974aa1b6d0cdb48e42a4631e",
+          "region": {
+            "name": "overcast-sky",
+            "noisy_xy": [
+              5800,
+              1400
+            ],
+            "reference_xy": [
+              5800,
+              1400
+            ],
+            "size": 160,
+            "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+            "context_green_correlation": null
+          },
+          "model_label": "0:native-data-control-v84:step-20000",
+          "checkpoint_sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            5624,
+            1224,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+          "source_captures": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf"
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf"
+            }
+          ],
+          "reference_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0000624759971717,
+              1.0000575400374918,
+              1.000083683987943
+            ],
+            "samples": [
+              922554,
+              2316454,
+              693995
+            ]
+          },
+          "model": {
+            "label": "0:native-data-control-v84:step-20000",
+            "sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10",
+            "original_native_sidecar": {
+              "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/crop-2f19912294180573.json",
+              "sha256": "21c4efb62e29c3db888ea6a4307c5c66a45223d771347d2b8df617e8c0580dab"
+            }
+          }
+        },
+        {
+          "image": "V84-building-detail.png",
+          "caption": "building-detail / 0:native-data-control-v84:step-20000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "babeeeacb8dc714f23219eb098d3b41806dcc4e70190b1548d6ff62c48c60ac2",
+          "region": {
+            "name": "building-detail",
+            "noisy_xy": [
+              5790,
+              2690
+            ],
+            "reference_xy": [
+              5791,
+              2690
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.6824449896812439
+          },
+          "model_label": "0:native-data-control-v84:step-20000",
+          "checkpoint_sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            5614,
+            2514,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+          "source_captures": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf"
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf"
+            }
+          ],
+          "reference_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0000624759971717,
+              1.0000575400374918,
+              1.000083683987943
+            ],
+            "samples": [
+              922554,
+              2316454,
+              693995
+            ]
+          },
+          "model": {
+            "label": "0:native-data-control-v84:step-20000",
+            "sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10",
+            "original_native_sidecar": {
+              "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/crop-cf083e69e4818492.json",
+              "sha256": "85f5b3ea60f93de9c16d0b69c06fbfc4db485b042d0d634cd5b1feaebc78d7e4"
+            }
+          }
+        },
+        {
+          "image": "V84-foliage.png",
+          "caption": "foliage / 0:native-data-control-v84:step-20000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "0d85fbc154aa9ef581fc5a6e1b63557faa9e1987294698d7a5edd66da161989d",
+          "region": {
+            "name": "foliage",
+            "noisy_xy": [
+              8890,
+              5570
+            ],
+            "reference_xy": [
+              8890,
+              5570
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9597686529159546
+          },
+          "model_label": "0:native-data-control-v84:step-20000",
+          "checkpoint_sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            8714,
+            5394,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+          "source_captures": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf"
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf"
+            }
+          ],
+          "reference_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0000624759971717,
+              1.0000575400374918,
+              1.000083683987943
+            ],
+            "samples": [
+              922554,
+              2316454,
+              693995
+            ]
+          },
+          "model": {
+            "label": "0:native-data-control-v84:step-20000",
+            "sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10",
+            "original_native_sidecar": {
+              "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/crop-8a216ab68bf0379b.json",
+              "sha256": "2801a16c22253e2dc3e6331fcf3dac20dbaefa423a48049fc76fc9251da8d31c"
+            }
+          }
+        },
+        {
+          "image": "V84-chain-link-fence.png",
+          "caption": "chain-link-fence / 0:native-data-control-v84:step-20000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "04ffa161109ac783e289cc7b2e2a0fc85045064878d52f357b23ee13b03ce8a3",
+          "region": {
+            "name": "chain-link-fence",
+            "noisy_xy": [
+              2240,
+              6000
+            ],
+            "reference_xy": [
+              2241,
+              6000
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9550720453262329
+          },
+          "model_label": "0:native-data-control-v84:step-20000",
+          "checkpoint_sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            2064,
+            5824,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+          "source_captures": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf"
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf"
+            }
+          ],
+          "reference_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0000624759971717,
+              1.0000575400374918,
+              1.000083683987943
+            ],
+            "samples": [
+              922554,
+              2316454,
+              693995
+            ]
+          },
+          "model": {
+            "label": "0:native-data-control-v84:step-20000",
+            "sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10",
+            "original_native_sidecar": {
+              "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/crop-23173f7641b1615a.json",
+              "sha256": "43936897c5de1df9a357ba03dcf23fef868313f3f4c9baf70f3d4abf302d0cdf"
+            }
+          }
+        },
+        {
+          "image": "V84-colored-neon-sign.png",
+          "caption": "colored-neon-sign / 0:native-data-control-v84:step-20000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "79e3f2d46f734eb54048320bfd292fd8cae6d95408a426fdfbb38bc0c552fa42",
+          "region": {
+            "name": "colored-neon-sign",
+            "noisy_xy": [
+              9060,
+              2050
+            ],
+            "reference_xy": [
+              9060,
+              2050
+            ],
+            "size": 160,
+            "selection_method": "Input-only locator selection, then maximum normalized green correlation in512px input/reference contexts; integer offsets within+/-8 only, no output-dependent selection or warp",
+            "context_green_correlation": 0.9116097356755666
+          },
+          "model_label": "0:native-data-control-v84:step-20000",
+          "checkpoint_sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            8884,
+            1874,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+          "source_captures": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf"
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf"
+            }
+          ],
+          "reference_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0000624759971717,
+              1.0000575400374918,
+              1.000083683987943
+            ],
+            "samples": [
+              922554,
+              2316454,
+              693995
+            ]
+          },
+          "model": {
+            "label": "0:native-data-control-v84:step-20000",
+            "sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10",
+            "original_native_sidecar": {
+              "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/crop-edfb257eee83fcf0.json",
+              "sha256": "258a3e5b52691534ed968071543f03b47beb957bf9f352a51061a1b777d6d263"
+            }
+          }
+        },
+        {
+          "image": "V84-illuminated-platform-boundary.png",
+          "caption": "illuminated-platform-boundary / 0:native-data-control-v84:step-20000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "2ee2597b1c014553ef3ce9e5ceba47501304546fe5f83eeb3a7267cec1fde5d7",
+          "region": {
+            "name": "illuminated-platform-boundary",
+            "noisy_xy": [
+              10320,
+              4520
+            ],
+            "reference_xy": [
+              10321,
+              4520
+            ],
+            "size": 160,
+            "selection_method": "Input-only locator selection, then maximum normalized green correlation in512px input/reference contexts; integer offsets within+/-8 only, no output-dependent selection or warp",
+            "context_green_correlation": 0.9831606311368877
+          },
+          "model_label": "0:native-data-control-v84:step-20000",
+          "checkpoint_sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            10144,
+            4344,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+          "source_captures": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf"
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf"
+            }
+          ],
+          "reference_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0000624759971717,
+              1.0000575400374918,
+              1.000083683987943
+            ],
+            "samples": [
+              922554,
+              2316454,
+              693995
+            ]
+          },
+          "model": {
+            "label": "0:native-data-control-v84:step-20000",
+            "sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10",
+            "original_native_sidecar": {
+              "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/crop-998f894e8e39c5d3.json",
+              "sha256": "414cb5b8bc3b5f6504912c0842d6f7d78e9593960638d43f5c44d5e7ce8830cf"
+            }
+          }
+        },
+        {
+          "image": "V100-overcast-sky.png",
+          "caption": "overcast-sky / 1:V100:step-10000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "1fc3815860533d8b37c6e05b7c1a81b4bd0b35c548b815d107371acc37b5064d",
+          "region": {
+            "name": "overcast-sky",
+            "noisy_xy": [
+              5800,
+              1400
+            ],
+            "reference_xy": [
+              5800,
+              1400
+            ],
+            "size": 160,
+            "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+            "context_green_correlation": null
+          },
+          "model_label": "1:V100:step-10000",
+          "checkpoint_sha256": "4b689fb187b13df72fbf79ebd46f98cf7361c3ca8a97fb1f7afee940b249ad3e",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            5624,
+            1224,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+          "source_captures": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf"
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf"
+            }
+          ],
+          "reference_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0000624759971717,
+              1.0000575400374918,
+              1.000083683987943
+            ],
+            "samples": [
+              922554,
+              2316454,
+              693995
+            ]
+          },
+          "model": {
+            "label": "1:V100:step-10000",
+            "sha256": "4b689fb187b13df72fbf79ebd46f98cf7361c3ca8a97fb1f7afee940b249ad3e",
+            "original_native_sidecar": {
+              "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/crop-ffe0482ffcb7391d.json",
+              "sha256": "4ed0136745de860cf66ef2c536171beba2c013fc9950d7d8ade776672a79876c"
+            }
+          }
+        },
+        {
+          "image": "V100-building-detail.png",
+          "caption": "building-detail / 1:V100:step-10000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "74ec08f1883341afd808a577339f734f5a6dad8e2d7c1cc8a832357d92bdbdbe",
+          "region": {
+            "name": "building-detail",
+            "noisy_xy": [
+              5790,
+              2690
+            ],
+            "reference_xy": [
+              5791,
+              2690
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.6824449896812439
+          },
+          "model_label": "1:V100:step-10000",
+          "checkpoint_sha256": "4b689fb187b13df72fbf79ebd46f98cf7361c3ca8a97fb1f7afee940b249ad3e",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            5614,
+            2514,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+          "source_captures": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf"
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf"
+            }
+          ],
+          "reference_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0000624759971717,
+              1.0000575400374918,
+              1.000083683987943
+            ],
+            "samples": [
+              922554,
+              2316454,
+              693995
+            ]
+          },
+          "model": {
+            "label": "1:V100:step-10000",
+            "sha256": "4b689fb187b13df72fbf79ebd46f98cf7361c3ca8a97fb1f7afee940b249ad3e",
+            "original_native_sidecar": {
+              "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/crop-a543a10290b240d4.json",
+              "sha256": "7f72c386f1b6bfceda0cbd87c8f428e8b8f11f758e9b4269db1538c482a5fea5"
+            }
+          }
+        },
+        {
+          "image": "V100-foliage.png",
+          "caption": "foliage / 1:V100:step-10000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "fb47a7b87fc9c1d92bd3ace52b37cfa0c56de3f4c6981b9785254da5d25d114e",
+          "region": {
+            "name": "foliage",
+            "noisy_xy": [
+              8890,
+              5570
+            ],
+            "reference_xy": [
+              8890,
+              5570
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9597686529159546
+          },
+          "model_label": "1:V100:step-10000",
+          "checkpoint_sha256": "4b689fb187b13df72fbf79ebd46f98cf7361c3ca8a97fb1f7afee940b249ad3e",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            8714,
+            5394,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+          "source_captures": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf"
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf"
+            }
+          ],
+          "reference_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0000624759971717,
+              1.0000575400374918,
+              1.000083683987943
+            ],
+            "samples": [
+              922554,
+              2316454,
+              693995
+            ]
+          },
+          "model": {
+            "label": "1:V100:step-10000",
+            "sha256": "4b689fb187b13df72fbf79ebd46f98cf7361c3ca8a97fb1f7afee940b249ad3e",
+            "original_native_sidecar": {
+              "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/crop-ddaf359c77795aa4.json",
+              "sha256": "f623a822f4332fa7cb389ed0c1b2ba75b992c988d7e4c32bcd948465ed0059f8"
+            }
+          }
+        },
+        {
+          "image": "V100-chain-link-fence.png",
+          "caption": "chain-link-fence / 1:V100:step-10000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "9b3588b44405f2300ebb5d7b28bdde64e0289c52d59b44748e48bcb011519730",
+          "region": {
+            "name": "chain-link-fence",
+            "noisy_xy": [
+              2240,
+              6000
+            ],
+            "reference_xy": [
+              2241,
+              6000
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9550720453262329
+          },
+          "model_label": "1:V100:step-10000",
+          "checkpoint_sha256": "4b689fb187b13df72fbf79ebd46f98cf7361c3ca8a97fb1f7afee940b249ad3e",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            2064,
+            5824,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+          "source_captures": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf"
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf"
+            }
+          ],
+          "reference_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0000624759971717,
+              1.0000575400374918,
+              1.000083683987943
+            ],
+            "samples": [
+              922554,
+              2316454,
+              693995
+            ]
+          },
+          "model": {
+            "label": "1:V100:step-10000",
+            "sha256": "4b689fb187b13df72fbf79ebd46f98cf7361c3ca8a97fb1f7afee940b249ad3e",
+            "original_native_sidecar": {
+              "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/crop-a77015f8c6165cbc.json",
+              "sha256": "82fcd99a28c819055f15bce55f4778e3f0300db5fa46a3742f71a3929dcf19fa"
+            }
+          }
+        },
+        {
+          "image": "V100-colored-neon-sign.png",
+          "caption": "colored-neon-sign / 1:V100:step-10000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "a006d433d263a28ba35f404d4a48f7b3c37b6227195a9ca192e9b6cbbf9d5f3c",
+          "region": {
+            "name": "colored-neon-sign",
+            "noisy_xy": [
+              9060,
+              2050
+            ],
+            "reference_xy": [
+              9060,
+              2050
+            ],
+            "size": 160,
+            "selection_method": "Input-only locator selection, then maximum normalized green correlation in512px input/reference contexts; integer offsets within+/-8 only, no output-dependent selection or warp",
+            "context_green_correlation": 0.9116097356755666
+          },
+          "model_label": "1:V100:step-10000",
+          "checkpoint_sha256": "4b689fb187b13df72fbf79ebd46f98cf7361c3ca8a97fb1f7afee940b249ad3e",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            8884,
+            1874,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+          "source_captures": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf"
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf"
+            }
+          ],
+          "reference_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0000624759971717,
+              1.0000575400374918,
+              1.000083683987943
+            ],
+            "samples": [
+              922554,
+              2316454,
+              693995
+            ]
+          },
+          "model": {
+            "label": "1:V100:step-10000",
+            "sha256": "4b689fb187b13df72fbf79ebd46f98cf7361c3ca8a97fb1f7afee940b249ad3e",
+            "original_native_sidecar": {
+              "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/crop-b908a070b254f519.json",
+              "sha256": "9b39c6da87e46da47270a8b1576e588dd0035e1e242383a38719d33562a2cd27"
+            }
+          }
+        },
+        {
+          "image": "V100-illuminated-platform-boundary.png",
+          "caption": "illuminated-platform-boundary / 1:V100:step-10000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "492750780b5cb67fc57bd4e7bc1a6816b58a8b0bb15069de9e5bf0098f5d50c8",
+          "region": {
+            "name": "illuminated-platform-boundary",
+            "noisy_xy": [
+              10320,
+              4520
+            ],
+            "reference_xy": [
+              10321,
+              4520
+            ],
+            "size": 160,
+            "selection_method": "Input-only locator selection, then maximum normalized green correlation in512px input/reference contexts; integer offsets within+/-8 only, no output-dependent selection or warp",
+            "context_green_correlation": 0.9831606311368877
+          },
+          "model_label": "1:V100:step-10000",
+          "checkpoint_sha256": "4b689fb187b13df72fbf79ebd46f98cf7361c3ca8a97fb1f7afee940b249ad3e",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            10144,
+            4344,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+          "source_captures": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf"
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf"
+            }
+          ],
+          "reference_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0000624759971717,
+              1.0000575400374918,
+              1.000083683987943
+            ],
+            "samples": [
+              922554,
+              2316454,
+              693995
+            ]
+          },
+          "model": {
+            "label": "1:V100:step-10000",
+            "sha256": "4b689fb187b13df72fbf79ebd46f98cf7361c3ca8a97fb1f7afee940b249ad3e",
+            "original_native_sidecar": {
+              "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/crop-c3fbeb2f36f2b4de.json",
+              "sha256": "d67ed00fadec4d6be51b0ab7ce46d08681e83a0c88b9869726e054d79af9a648"
+            }
+          }
+        },
+        {
+          "image": "V101-overcast-sky.png",
+          "caption": "overcast-sky / 2:V101:step-10000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "87077e9aaa52ceceecb97257a6d9579a450fc72918e6f40d53273876e4b9101a",
+          "region": {
+            "name": "overcast-sky",
+            "noisy_xy": [
+              5800,
+              1400
+            ],
+            "reference_xy": [
+              5800,
+              1400
+            ],
+            "size": 160,
+            "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+            "context_green_correlation": null
+          },
+          "model_label": "2:V101:step-10000",
+          "checkpoint_sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            5624,
+            1224,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+          "source_captures": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf"
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf"
+            }
+          ],
+          "reference_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0000624759971717,
+              1.0000575400374918,
+              1.000083683987943
+            ],
+            "samples": [
+              922554,
+              2316454,
+              693995
+            ]
+          },
+          "model": {
+            "label": "2:V101:step-10000",
+            "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+            "original_native_sidecar": {
+              "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/crop-7397d404be4cef2d.json",
+              "sha256": "59726cf80345f6cf01d6f090c9757fcc57e2afc4560250431abb673254da90c8"
+            }
+          }
+        },
+        {
+          "image": "V101-building-detail.png",
+          "caption": "building-detail / 2:V101:step-10000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "b1389d649191a4369c7b9f4dbd216d02d354387614370f6f98732dec87b46a51",
+          "region": {
+            "name": "building-detail",
+            "noisy_xy": [
+              5790,
+              2690
+            ],
+            "reference_xy": [
+              5791,
+              2690
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.6824449896812439
+          },
+          "model_label": "2:V101:step-10000",
+          "checkpoint_sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            5614,
+            2514,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+          "source_captures": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf"
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf"
+            }
+          ],
+          "reference_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0000624759971717,
+              1.0000575400374918,
+              1.000083683987943
+            ],
+            "samples": [
+              922554,
+              2316454,
+              693995
+            ]
+          },
+          "model": {
+            "label": "2:V101:step-10000",
+            "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+            "original_native_sidecar": {
+              "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/crop-5114a4479814b504.json",
+              "sha256": "8d66973592500fddb62257c31462e9513641448787bc82ed248c2b0b8fa5f528"
+            }
+          }
+        },
+        {
+          "image": "V101-foliage.png",
+          "caption": "foliage / 2:V101:step-10000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "f3bb9f6d62cd93bfc4d525bd1466ba8298fb6f52439ff0ac6392c7a9c4cd7e93",
+          "region": {
+            "name": "foliage",
+            "noisy_xy": [
+              8890,
+              5570
+            ],
+            "reference_xy": [
+              8890,
+              5570
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9597686529159546
+          },
+          "model_label": "2:V101:step-10000",
+          "checkpoint_sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            8714,
+            5394,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+          "source_captures": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf"
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf"
+            }
+          ],
+          "reference_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0000624759971717,
+              1.0000575400374918,
+              1.000083683987943
+            ],
+            "samples": [
+              922554,
+              2316454,
+              693995
+            ]
+          },
+          "model": {
+            "label": "2:V101:step-10000",
+            "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+            "original_native_sidecar": {
+              "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/crop-35a7170bcf146020.json",
+              "sha256": "9d1ba481038e088f54b636791667529897007a5d150d0718b40d85eae8020c52"
+            }
+          }
+        },
+        {
+          "image": "V101-chain-link-fence.png",
+          "caption": "chain-link-fence / 2:V101:step-10000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "86e2cade4927ceb1898ad792cf50f35be6329edaebdd8dad439f9f5fce284fb0",
+          "region": {
+            "name": "chain-link-fence",
+            "noisy_xy": [
+              2240,
+              6000
+            ],
+            "reference_xy": [
+              2241,
+              6000
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9550720453262329
+          },
+          "model_label": "2:V101:step-10000",
+          "checkpoint_sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            2064,
+            5824,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+          "source_captures": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf"
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf"
+            }
+          ],
+          "reference_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0000624759971717,
+              1.0000575400374918,
+              1.000083683987943
+            ],
+            "samples": [
+              922554,
+              2316454,
+              693995
+            ]
+          },
+          "model": {
+            "label": "2:V101:step-10000",
+            "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+            "original_native_sidecar": {
+              "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/crop-4dfd91d5a410bd9e.json",
+              "sha256": "8f9aca5c4ead8aa535b01d336e154c0bcbd59ad59c565374a40ba78b56624333"
+            }
+          }
+        },
+        {
+          "image": "V101-colored-neon-sign.png",
+          "caption": "colored-neon-sign / 2:V101:step-10000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "20894138e98db566ecfb0a70468808a7c900e7eb1032d228843fcb5f8c4ef3d4",
+          "region": {
+            "name": "colored-neon-sign",
+            "noisy_xy": [
+              9060,
+              2050
+            ],
+            "reference_xy": [
+              9060,
+              2050
+            ],
+            "size": 160,
+            "selection_method": "Input-only locator selection, then maximum normalized green correlation in512px input/reference contexts; integer offsets within+/-8 only, no output-dependent selection or warp",
+            "context_green_correlation": 0.9116097356755666
+          },
+          "model_label": "2:V101:step-10000",
+          "checkpoint_sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            8884,
+            1874,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+          "source_captures": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf"
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf"
+            }
+          ],
+          "reference_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0000624759971717,
+              1.0000575400374918,
+              1.000083683987943
+            ],
+            "samples": [
+              922554,
+              2316454,
+              693995
+            ]
+          },
+          "model": {
+            "label": "2:V101:step-10000",
+            "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+            "original_native_sidecar": {
+              "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/crop-c660fa1fc578ca01.json",
+              "sha256": "1c9c585abdcddc0e2d553b8689e700d411500250e2ed68025d99b72bf8e48645"
+            }
+          }
+        },
+        {
+          "image": "V101-illuminated-platform-boundary.png",
+          "caption": "illuminated-platform-boundary / 2:V101:step-10000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "f0f2022b8e98f04f95c9aa7f58182b4312e53c4f48444ac6fdc839af6eca3032",
+          "region": {
+            "name": "illuminated-platform-boundary",
+            "noisy_xy": [
+              10320,
+              4520
+            ],
+            "reference_xy": [
+              10321,
+              4520
+            ],
+            "size": 160,
+            "selection_method": "Input-only locator selection, then maximum normalized green correlation in512px input/reference contexts; integer offsets within+/-8 only, no output-dependent selection or warp",
+            "context_green_correlation": 0.9831606311368877
+          },
+          "model_label": "2:V101:step-10000",
+          "checkpoint_sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            10144,
+            4344,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+          "source_captures": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf"
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf"
+            }
+          ],
+          "reference_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0000624759971717,
+              1.0000575400374918,
+              1.000083683987943
+            ],
+            "samples": [
+              922554,
+              2316454,
+              693995
+            ]
+          },
+          "model": {
+            "label": "2:V101:step-10000",
+            "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+            "original_native_sidecar": {
+              "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/crop-35423066f5316964.json",
+              "sha256": "18a0184b88ffae61c0438f54d28c96fb94ed07dc3a1a3c234382293e4bcc53ad"
+            }
+          }
+        },
+        {
+          "image": "RawNIND-overcast-sky.png",
+          "caption": "overcast-sky / RawNIND:CFA-channel",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "7909f33be53d2d27b50bc6d6e9cd687001cb720ca9809d1cdd5975bad614c101",
+          "region": {
+            "name": "overcast-sky",
+            "noisy_xy": [
+              5800,
+              1400
+            ],
+            "reference_xy": [
+              5800,
+              1400
+            ],
+            "size": 160,
+            "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+            "context_green_correlation": null
+          },
+          "model_label": "RawNIND:CFA-channel",
+          "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            5624,
+            1224,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+          "source_captures": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf"
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf"
+            }
+          ],
+          "reference_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0000624759971717,
+              1.0000575400374918,
+              1.000083683987943
+            ],
+            "samples": [
+              922554,
+              2316454,
+              693995
+            ]
+          },
+          "model": {
+            "label": "RawNIND:CFA-channel",
+            "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+            "original_native_sidecar": {
+              "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/crop-13aee51839823416.json",
+              "sha256": "49253a75651368943da4a0be7ca2e7beaea4710f98177f9e970f29dcc6798b5f"
+            }
+          }
+        },
+        {
+          "image": "RawNIND-building-detail.png",
+          "caption": "building-detail / RawNIND:CFA-channel",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "ece71fb5fc24e75a5a876ba814a32570be258f986e222ef0f21a76cf17e27b06",
+          "region": {
+            "name": "building-detail",
+            "noisy_xy": [
+              5790,
+              2690
+            ],
+            "reference_xy": [
+              5791,
+              2690
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.6824449896812439
+          },
+          "model_label": "RawNIND:CFA-channel",
+          "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            5614,
+            2514,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+          "source_captures": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf"
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf"
+            }
+          ],
+          "reference_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0000624759971717,
+              1.0000575400374918,
+              1.000083683987943
+            ],
+            "samples": [
+              922554,
+              2316454,
+              693995
+            ]
+          },
+          "model": {
+            "label": "RawNIND:CFA-channel",
+            "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+            "original_native_sidecar": {
+              "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/crop-0019b16339eb637d.json",
+              "sha256": "124a4de800d4918c4a5c0e7238171e2f6125d1f255f474b9d0761666a7b7f5c0"
+            }
+          }
+        },
+        {
+          "image": "RawNIND-foliage.png",
+          "caption": "foliage / RawNIND:CFA-channel",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "1cf55fd081fa99be30de90318894bd37bd6847d591600750e156e569f4ae41b8",
+          "region": {
+            "name": "foliage",
+            "noisy_xy": [
+              8890,
+              5570
+            ],
+            "reference_xy": [
+              8890,
+              5570
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9597686529159546
+          },
+          "model_label": "RawNIND:CFA-channel",
+          "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            8714,
+            5394,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+          "source_captures": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf"
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf"
+            }
+          ],
+          "reference_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0000624759971717,
+              1.0000575400374918,
+              1.000083683987943
+            ],
+            "samples": [
+              922554,
+              2316454,
+              693995
+            ]
+          },
+          "model": {
+            "label": "RawNIND:CFA-channel",
+            "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+            "original_native_sidecar": {
+              "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/crop-adfcc7cc42aa36b8.json",
+              "sha256": "47e9f66ce883f3efdb42a5380388a71567727780038cdd27821be4e78835687d"
+            }
+          }
+        },
+        {
+          "image": "RawNIND-chain-link-fence.png",
+          "caption": "chain-link-fence / RawNIND:CFA-channel",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "17764bc0874cf8cff16a2f82c80fa700aee49f035abc529357a84bc5e9b4a927",
+          "region": {
+            "name": "chain-link-fence",
+            "noisy_xy": [
+              2240,
+              6000
+            ],
+            "reference_xy": [
+              2241,
+              6000
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9550720453262329
+          },
+          "model_label": "RawNIND:CFA-channel",
+          "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            2064,
+            5824,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+          "source_captures": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf"
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf"
+            }
+          ],
+          "reference_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0000624759971717,
+              1.0000575400374918,
+              1.000083683987943
+            ],
+            "samples": [
+              922554,
+              2316454,
+              693995
+            ]
+          },
+          "model": {
+            "label": "RawNIND:CFA-channel",
+            "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+            "original_native_sidecar": {
+              "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/crop-4a52fe4d62961d7a.json",
+              "sha256": "35ea70f70c515ecddfc163a0f446a48bc677d5ae619934bf6f635c226e5d7fce"
+            }
+          }
+        },
+        {
+          "image": "RawNIND-colored-neon-sign.png",
+          "caption": "colored-neon-sign / RawNIND:CFA-channel",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "5f8cd4419930cd6e0eff7440fd17b9225975d646b98a9260a42c102b2b47868d",
+          "region": {
+            "name": "colored-neon-sign",
+            "noisy_xy": [
+              9060,
+              2050
+            ],
+            "reference_xy": [
+              9060,
+              2050
+            ],
+            "size": 160,
+            "selection_method": "Input-only locator selection, then maximum normalized green correlation in512px input/reference contexts; integer offsets within+/-8 only, no output-dependent selection or warp",
+            "context_green_correlation": 0.9116097356755666
+          },
+          "model_label": "RawNIND:CFA-channel",
+          "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            8884,
+            1874,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+          "source_captures": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf"
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf"
+            }
+          ],
+          "reference_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0000624759971717,
+              1.0000575400374918,
+              1.000083683987943
+            ],
+            "samples": [
+              922554,
+              2316454,
+              693995
+            ]
+          },
+          "model": {
+            "label": "RawNIND:CFA-channel",
+            "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+            "original_native_sidecar": {
+              "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/crop-7af0daee36caee8b.json",
+              "sha256": "d4e11ce30e95c95c399c5ec4f80a859b76ddf6922d492e1bb9519738f36cebec"
+            }
+          }
+        },
+        {
+          "image": "RawNIND-illuminated-platform-boundary.png",
+          "caption": "illuminated-platform-boundary / RawNIND:CFA-channel",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "97b97bafd814ac8456b30b25b722682b29bb8883a58b4ad437841d152b0fc6ba",
+          "region": {
+            "name": "illuminated-platform-boundary",
+            "noisy_xy": [
+              10320,
+              4520
+            ],
+            "reference_xy": [
+              10321,
+              4520
+            ],
+            "size": 160,
+            "selection_method": "Input-only locator selection, then maximum normalized green correlation in512px input/reference contexts; integer offsets within+/-8 only, no output-dependent selection or warp",
+            "context_green_correlation": 0.9831606311368877
+          },
+          "model_label": "RawNIND:CFA-channel",
+          "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "compute_precision": "float32",
+          "device": "cpu",
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06
+          },
+          "context_xywh": [
+            10144,
+            4344,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+          "source_captures": [
+            {
+              "role": "noisy",
+              "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  4101.0,
+                  4098.0,
+                  4104.0,
+                  4106.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 6400,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf"
+            },
+            {
+              "role": "reference",
+              "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+              "metadata": {
+                "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+                "camera": "GFX100S",
+                "pattern": "RGGB",
+                "black_levels": [
+                  256.0,
+                  255.0,
+                  256.0,
+                  256.0
+                ],
+                "white_levels": [
+                  65535.0,
+                  65535.0,
+                  65535.0,
+                  65535.0
+                ],
+                "white_balance": [
+                  1.5132450331125828,
+                  1.0,
+                  2.2152317880794703
+                ],
+                "camera_to_srgb": [
+                  [
+                    1.0725188393098881,
+                    0.17123593128834644,
+                    -0.24375477059823436
+                  ],
+                  [
+                    -0.1267191317089774,
+                    1.4310509369654432,
+                    -0.3043318052564657
+                  ],
+                  [
+                    -0.009697676902906037,
+                    -0.29348063283422965,
+                    1.3031783097371357
+                  ]
+                ],
+                "flip": 0,
+                "iso": 100,
+                "adc_white_level": 65535.0
+              },
+              "cached_path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf"
+            }
+          ],
+          "reference_calibration": {
+            "rgb_to_sensor_gains": [
+              1.0000624759971717,
+              1.0000575400374918,
+              1.000083683987943
+            ],
+            "samples": [
+              922554,
+              2316454,
+              693995
+            ]
+          },
+          "model": {
+            "label": "RawNIND:CFA-channel",
+            "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+            "original_native_sidecar": {
+              "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/crop-36471f13bb77f245.json",
+              "sha256": "b3f943b3f8047fe0b4607628de5f08719eeb289994e3e204a16692b27e99ec5e"
+            }
+          }
+        }
+      ],
+      "labels": {
+        "0:native-data-control-v84:step-20000": "V84",
+        "1:V100:step-10000": "V100",
+        "2:V101:step-10000": "V101",
+        "RawNIND:CFA-channel": "RawNIND"
+      }
+    }
+  },
+  "original_report": {
+    "path": "/mnt/external/demosaic/V84-V100-V101-GFX-context-CPU-20261022-v1/report.json",
+    "sha256": "3c394c48fb441b95d640657b0cedee10ec556a77f3161f024eb05c385fbcc29c"
+  },
+  "canonical_selection": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/fullframe-v1/selection.json",
+    "sha256": "93950ae5bbf4ae16741b5b56adc03d0973a3b929dfecac7c733244b8ef906727"
+  },
+  "scope": "Six predeclared native160GFX regions/512context; original V84 and finalV100/V101 EMAs plus RawNIND:CFA-channel, CPUF32/four threads. Same cached3879/3880, shared+2EV/WB/matrix/condition. No originals/HDD, training/GPU/fullframe/speed/PSNR claim or active-plan mutation. New qualitative comparisons to inspect before current docs update.",
+  "sidecar_derivation": "Original PNG bytes unchanged and source metadata retained; public names simplified and original sidecar reference plus source capture/calibration metadata added. No output pixels, ROI, exposure, WB, matrix, noise conditioning or reference interpretation changed.",
+  "selection_config": "selection.json",
+  "selection_config_sha256": "93950ae5bbf4ae16741b5b56adc03d0973a3b929dfecac7c733244b8ef906727"
+}

@@ -1,31 +1,42 @@
 # GFX100S qualitative comparisons
 
-**V84 is the current development baseline.** Compare it below with V43, V95
-and RawNIND on the standing train/platform scene. V84/V95 produce more coherent
-fence strands and cleaner building rails than RawNIND in these crops. V84 keeps
-smooth sky and useful leaf shapes; fine foliage texture and saturated-light
-boundaries remain areas to improve. The models are close in some regions, so
-use this scene alongside the photographic/camera results in the
-[current model guide](current-model.md).
-The [Q2, Sony a7R II and GFX50R comparison](cross-camera-qualitative.md) adds
-V84/V100 results on six existing low-ISO regions, without a clean reference.
+**Current comparisons include V84 and both completed V100/V101 continuations**,
+with RawNIND on the standing train/platform scene. V101's selected-photo gains
+are useful progress, but these real-capture results look close across the three
+learned checkpoints. They retain more coherent fence strands and cleaner
+building rails than RawNIND here. Foliage remains smooth, and saturated-light
+shapes/boundaries remain areas to improve.
 
-![Native sky, building, foliage and fence comparisons](images/current-quality/gfx-comparison.png)
+![Current native sky, building, foliage, fence and illuminated-region comparisons](images/current-gfx/gfx-comparison.png)
 
-Columns: noisy Malvar, V43, **V84**, V95, RawNIND with input-only per-CFA-channel
-gain, separate ISO 100 reference. Each cell is 160×160 sensor pixels, never resized.
-The learned-model crops use IEEE FP32 with 512px contexts. Shared conditioning:
-shot `.0014635775921166604`, read variance `1.0715704128646712e-6`; display ×4
-(+2 EV), with the noisy capture's WB and camera matrix shared across methods.
-PNG previews are 8-bit sRGB; this does not change restoration/output precision.
+Columns: noisy Malvar, V100, **V101**, V84, RawNIND with input-only per-CFA-channel
+gain, separate ISO100 reference. Each cell is **160×160 native sensor pixels**,
+never resized. Open the original PNG at100%; a browser may fit the board to its
+window. All current methods use the same512px contexts and CPU IEEE FP32.
+Shared conditioning is shot`.0014635775921166604`, read variance
+`1.0715704128646712e-6`, with display ×4(+2EV) and the noisy capture's WB/matrix.
+PNG previews are8-bit sRGB; inference and saved context arrays remain FP32.
+These are contextual comparisons, not the pending full-frame blend or timing.
 
-[V84 foliage triplet and metadata](images/current-quality/gfx-V84-foliage.json) ·
-[V84 fence triplet and metadata](images/current-quality/gfx-V84-chain-link-f.json) ·
-[all crop/checkpoint/source metadata](images/current-quality/manifest.json).
-Each method retains its own restored pixels. Shared source coordinates, display
-settings and reference pixels are checked by the gallery renderer. Its JSON
-also records the single V95 sky noisy-preview channel that differs by 1 RGB8
-level; no prediction or reference pixels are adjusted for presentation.
+[V101 foliage triplet and metadata](images/current-gfx/V101-foliage.json) ·
+[V101 fence triplet and metadata](images/current-gfx/V101-chain-link-fence.json) ·
+[all24triplets and source/checkpoint metadata](images/current-gfx/manifest.json) ·
+[actual native viewing and float-panel replay](results/gfx-current-V84-V100-V101-CPU-v1.json).
+Every public PNG retains the original report's pixels. Source captures,
+reference calibration, ROI, full checkpoint hash, noise, exposure and display
+settings accompany each sidecar. All72display panels reproduce the36 saved
+unquantized input/reference/prediction arrays exactly. Shared noisy/reference
+pixels match across methods with zero RGB8 tolerance.
+
+Assess these real views alongside the
+[current photographic/camera results](current-model.md).
+The [V43/V84/V95 comparison](images/current-quality/gfx-comparison.png)
+([metadata](images/current-quality/manifest.json)) remains useful context. Its
+single V95 sky noisy-preview channel differs by1RGB8 level, recorded in that
+older gallery's receipt; current predictions/reference pixels are never
+adjusted for presentation.
+The [Q2, Sony a7RII and GFX50R comparison](cross-camera-qualitative.md) adds
+V84/V100 on six low-ISO regions, without a clean reference.
 
 ## Capture and crop protocol
 
@@ -47,7 +58,7 @@ They are 3min38s apart. Aperture, depth of field, moving subjects, clouds and
 LED scan differ. The sharper ISO 100 exposure is a qualitative reference,
 **not exact GT**. No pixelwise PSNR/SSIM is computed against it.
 
-Regions were chosen from input/reference images before viewing model outputs.
+The six regions were fixed from input/reference images before this comparison.
 Only integer crop offsets are used: normalized-green correlation over a 512px
 context, ±12px; featureless sky uses identical coordinates. Displayed pixels
 are never warped, resized, sharpened or independently exposure-adjusted.
@@ -58,6 +69,8 @@ are never warped, resized, sharpened or independently exposure-adjusted.
 | Building detail | (5790,2690) | (5791,2690) |
 | Foliage | (8890,5570) | (8890,5570) |
 | Chain-link fence | (2240,6000) | (2241,6000) |
+| Colored neon sign | (9060,2050) | (9060,2050) |
+| Illuminated platform boundary | (10320,4520) | (10321,4520) |
 
 ## Isolated blue features
 
@@ -97,7 +110,7 @@ Rebuild the shipped gallery without inference or access to private RAWs:
 ```bash
 source scripts/env.sh
 PYTHONPATH=src:scripts uv run --no-sync python scripts/render_quality_comparisons.py \
-  docs/images/current-quality/manifest.json --noisy-preview-tolerance-dn 1
+  docs/images/current-gfx/manifest.json
 ```
 
 For another checkpoint, restore the same cached contexts and preserve the
@@ -106,10 +119,13 @@ sidecar metadata:
 ```bash
 source scripts/env.sh
 uv run --no-sync python scripts/report_raw_pair.py \
-  configs/gfx-qualitative-20231231.json \
+  docs/images/current-gfx/selection.json \
   /mnt/external/demosaic/models/v84-original20000.pt \
+  /mnt/external/demosaic/v84-curated-quality-20261022-v2/train/V100/last.pt \
+  /mnt/external/demosaic/v84-curated-quality-20261022-v2/train/V101/last.pt \
   --rawnind /mnt/external/demosaic/references/rawnind \
-  --rawnind-gain-modes cfa-ls cfa-channel \
+  --rawnind-gain-modes cfa-channel \
+  --device cpu --precision float32 --refinement-precision float32 \
   --output /mnt/external/demosaic/evaluation/gfx-next-review
 ```
 
