@@ -62,6 +62,26 @@ The GFX train/platform scene, its siblings and other protected evaluation
 captures stay outside training. Originals stay read-only; cached source data
 and frozen manifests avoid source HDD reads during these runs.
 
+Source selection draws with replacement, so pool size differs from exposure in
+one continuation. The fixed10k schedules contain55,843 photographic Commons
+examples each, among160,000 total training examples:
+
+| Full scheduled endpoint | V100 | V101 |
+| --- | ---: | ---: |
+| Unique photographic sources | 41,379 | 39,838 |
+| Unique sources newly eligible since original V84 | 1,686 | 1,631 |
+| Examples from those newly eligible sources | 2,291 | 2,168 |
+| Reviewed ROI examples | 0 | 2,844 |
+
+The current pool adds3,640 eligible source IDs and removes23 relative to V84's
+original84,867; one of the24 visual exclusions was already outside that earlier
+pool. V101 reallocates some ordinary-photo draws to the six reviewed ROIs.
+These are complete **scheduled** counts, not a claim that the active trainer
+has finished them. The [source-coverage audit](results/training-v100-v101-source-coverage-v1.json)
+reconciles the earlier kind/ROI counts and checks24 actual reader source paths.
+Keep the current endpoints fixed; consider these exposure counts alongside the
+quality results when choosing a later training budget.
+
 ## Execution and evaluation
 
 The source-frozen runner executes discarded eight-update 64×64 CPU/B1 and

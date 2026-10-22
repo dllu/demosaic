@@ -1,0 +1,110 @@
+{
+  "status": "completed-frozen-full-schedule-source-coverage-audit",
+  "recorded_local": "2026-10-22T15:00:25.993030-07:00",
+  "report": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/training-source-coverage-v1/report.json",
+    "sha256": "6a438852c4dee6eba2f2db86e2539bf16bff12c1c006cc117afb5fad1b5a1480"
+  },
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/training-source-coverage-v1/worker.py",
+    "sha256": "1c31ccdd6decb61d2bb0dd76cf6e2d22243df9105b0434999c936b84c923b39b"
+  },
+  "training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/training-v2/plan.json",
+    "sha256": "1fdfdd8cae7d1a784faeb2442d9b8a808c64e8131ea045d4f68b5958b78b941c"
+  },
+  "prior_sample_count_report": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/training-data-v101-v1/report.json",
+    "sha256": "a4f079398b37d19ec52e0a67690f1dbb8d0675fc4f15660bd7768d40af9e6f0e"
+  },
+  "same_prior_V101_kind_and_ROI_counts_verified": true,
+  "arms": {
+    "V100": {
+      "config": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/training-v2/work/configs/train-V100.yaml",
+        "sha256": "150821196c68ec56fcae3fcc458f53a2e0f1dc52d7e762a37b2969aacac6b151"
+      },
+      "manifest": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/curated-corpus-v1/manifest4-large.jsonl",
+        "sha256": "36ae0b55938c2cf52676cf82845e3eba6394bc95195c7a7b8822f8bd5a8e1ed2"
+      },
+      "eligible_sources": 88484,
+      "new_eligible_vs_parent": 3640,
+      "removed_vs_parent": 23,
+      "Commons_example_types": {
+        "other-synthetic": 16076,
+        "photographic": 55843,
+        "flat": 8049
+      },
+      "unique_photo_sources_scheduled": 41379,
+      "unique_ordinary_photo_sources_scheduled": 41379,
+      "unique_new_sources_scheduled": 1686,
+      "new_source_examples_scheduled": 2291,
+      "not_scheduled_eligible_sources": 47105,
+      "scheduled_ROI_examples": 0,
+      "ROI_examples_per_source": {},
+      "source_count_histogram": {
+        "0": 47105,
+        "1": 29654,
+        "2": 9407,
+        "3": 1949,
+        "4": 322,
+        "5": 42,
+        "6": 5
+      },
+      "ordinary_photo_source_examples": 55843
+    },
+    "V101": {
+      "config": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/training-v2/work/configs/train-V101.yaml",
+        "sha256": "a05b15027516860c00aa0fcb7ac5ba38506093f86fa704d1ccf5b78993072f31"
+      },
+      "manifest": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/curated-corpus-v1/manifest4-large.jsonl",
+        "sha256": "36ae0b55938c2cf52676cf82845e3eba6394bc95195c7a7b8822f8bd5a8e1ed2"
+      },
+      "eligible_sources": 88484,
+      "new_eligible_vs_parent": 3640,
+      "removed_vs_parent": 23,
+      "Commons_example_types": {
+        "weak-synthetic": 11970,
+        "photographic": 55843,
+        "flat": 8049,
+        "other-synthetic": 4106
+      },
+      "unique_photo_sources_scheduled": 39838,
+      "unique_ordinary_photo_sources_scheduled": 39834,
+      "unique_new_sources_scheduled": 1631,
+      "new_source_examples_scheduled": 2168,
+      "not_scheduled_eligible_sources": 48646,
+      "scheduled_ROI_examples": 2844,
+      "ROI_examples_per_source": {
+        "7b56d20ffd219cf8ecc485f7b594d9712aa376fd": 503,
+        "9b4e6f950b1d9b51b917392412f3d48e8931f7f3": 517,
+        "ed29eebff6412c37655292926a402425225126a6": 460,
+        "423c08bacc74f7569806786d83446992a4f568d3": 466,
+        "a4ae82e1e5b6abaf2401b0ed145c61aca301c094": 455,
+        "6aa3e94bda502cbbfc8232a5b788f498d39bb32a": 443
+      },
+      "source_count_histogram": {
+        "0": 48646,
+        "1": 29058,
+        "2": 8732,
+        "3": 1730,
+        "4": 278,
+        "5": 31,
+        "6": 3,
+        "444": 1,
+        "455": 1,
+        "460": 1,
+        "466": 1,
+        "503": 1,
+        "518": 1
+      },
+      "ordinary_photo_source_examples": 52999
+    }
+  },
+  "actual_reader_trace_checks": 24,
+  "no_neural_noise_or_optimizer_work": true,
+  "interpretation": "10k schedules photograph sources with replacement; full pool size is not unique source exposure in one continuation.3,640 new eligible sources and23 removed relative to the original V84 cohort. V101 ROI oversampling reduces ordinary-source diversity at fixed budget. This is schedule accounting, not completed active-trainer consumption or an attribution of quality gains. Keep current10k endpoints; use results and these counts when designing later budgets."
+}
