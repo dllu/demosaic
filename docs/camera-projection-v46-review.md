@@ -1,8 +1,11 @@
 # V46: camera projection omission has mixed global results
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 **V46 is not promoted.** It repairs the selected pattern color bias and improves
 photographic PSNR, but loses real-camera primary accuracy and photographic SSIM.
-The current V43 step2000 photographic experimental reference stays fixed.
+The current V43 step2000 photographic comparator was fixed for this study.
 [Complete measurements, export provenance and ten native triplets](results/camera-projection-v46-review.json).
 
 This is an inference-only intervention, not another trained model: take the

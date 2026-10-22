@@ -1,11 +1,14 @@
 # Joint restoration training from completed V66
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 V67 is a separately initialized joint restoration-training stage, following the
 [completed V66 review](raw-kernel-phase-v66-first1k-review.md). V66 improves its
 matched head warmup but remains grainy and far below mature V60. Both head
 warmups froze the existing restoration features. This motivates testing joint
 optimization, without claiming those frozen features caused the quality deficit.
-The [completed2k review](raw-kernel-phase-joint-v67-first2k-review.md) finds photo+2.81345dB over V66, still3.32464dB below mature V60, with remaining grain/weak-detail loss. **No promotion; V43 remains the working reference.**
+The [completed2k review](raw-kernel-phase-joint-v67-first2k-review.md) finds photo+2.81345dB over V66, still3.32464dB below mature V60, with remaining grain/weak-detail loss. **No promotion; V43 was the reference for this experiment.**
 
 [Recipe](../configs/dino-convnext-raw-kernel-phase-joint-b16-v67.yaml).
 [Executed preflights](results/raw-kernel-phase-joint-v67-preflight.json).

@@ -1,5 +1,8 @@
 # Camera-target convention audit and matched V76/V77 trial
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 A noiseless analytical audit finds incompatible camera-space meanings in the
 canonical highlight target and a constant-preserving RAW head. This motivates
 a default-off training mode, `camera_supervision: sensor-valid-v1`, and a fresh
@@ -136,4 +139,4 @@ the target or substituting physical training targets into evaluation.
 Own-parent differences also include data, fresh optimizer and schedule. Related
 capture-series ancestry is not removed by the new quarantine. A successful
 first boundary alone cannot establish SOTA, decisive real-photo superiority or
-the100MP/10s target. V43 remains the working reference and its README crops stay.
+the100MP/10s target. V43 was the reference for this experiment and its README crops stay.

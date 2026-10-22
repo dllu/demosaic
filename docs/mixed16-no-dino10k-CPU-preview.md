@@ -1,8 +1,11 @@
 # No-DINO160k-example CPU preview
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The completed10k checkpoint improves over its2k parent on both fixed photos,
 but trails the older RAW model at the same160,000-example budget and remains
-visibly grainy. V43 stays the working README reference. This selected CPU check
+visibly grainy. V43 was the reference for this study. This selected CPU check
 does not promote a model; the full matched GPU review remains queued while
 DINO finishes its unchanged schedule.
 

@@ -1,9 +1,12 @@
 # Direct phase conditioning: completed V66 warmup
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 V66 improves photo PSNR by **1.69373 dB** over the matched V65 warmup, but remains
 **6.13809 dB below V60**. Procedural PSNR falls 0.97537 dB. All 26 native panels
 were viewed: noise reduction improves, but substantial grain still obscures
-detail. **No promotion.** V43 remains the working reference. This completes the
+detail. **No promotion.** V43 was the reference for this experiment. This completes the
 declared 1,000-update head-only trial; it does not establish convergence.
 
 [All scores, hashes, audits and native crop receipts](results/raw-kernel-phase-warmup-v66-first1k-review.json).

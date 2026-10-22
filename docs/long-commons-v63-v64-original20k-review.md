@@ -1,11 +1,14 @@
 # Original20k Commons comparison: small data gain, persistent detail/color failures
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 Completing the original schedules improves photographic PSNR by **.16507dB for
 V63 and.17610dB for V64** over their own4k boundaries. Expanded Commons membership
 adds **.02598dB**,95% source interval[+.01779,+.03467], at20k. The known-series/site
 exclusions barely change this effect. These are useful average gains, but fine
 fabric cords remain missing, GFX detail stays soft and saturated-color errors
-persist. **Neither endpoint is promoted; V43 remains the working reference.**
+persist. **Neither endpoint is promoted; V43 was the reference for this experiment.**
 
 [Complete comparisons, metadata, actual58-view review and audit recovery](results/long-commons-v63-v64-original20k-review.json).
 [All58 original native crops](long-commons-v63-v64-original20k-native-gallery.md).

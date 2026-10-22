@@ -1,15 +1,16 @@
 # Documentation guide
 
 Start with the [README](../README.md) for setup, inference and representative
-native crops. V43 step 2000 remains the working model; current work focuses on
-training quality with its architecture and the larger cleaned corpus.
+native crops. **V84 is the current development baseline**, using the DRUNet RGB
+trunk and frozen DINOv3 ConvNeXt-Tiny features. Current training applies the
+larger cleaned corpus and fine-detail recipe to that architecture.
 
 | Topic | Start here |
 | --- | --- |
-| Current work | [Completed ADC-training review](v95-adc-training-quality-review.md) · [Corpus/training overview](quality-first-training.md) · [Completed V95 color follow-up](v95-flat-palette-quality-review.md) |
+| Current work | [V84 cleaned-data/fine-detail training](quality-first-training.md) · [Current model choices](current-model.md) |
 | Results | [Experiment index](experiments.md), [PSNR history](performance-history.md) |
 | Older work | [Chronological archive](experiment-archive.md), [local-time diary](../diary/index.md) |
-| Current model | [V43 quality review](native-corpus-2k-review.md), [full-frame/crop validation](mature-cudnn-fullframe.md) |
+| Current model | [V84/V85 quality and comparisons](current-model.md) · [GFX comparisons](gfx-qualitative.md) |
 | Usage | [Commands and data conventions](usage.md) |
 | Data | [Commons corpus](commons-post4557-reviewed.md), [illustrated source review](corpus-source-review.md), [source exclusions](commons-content-overlap.md), [native RAW targets](public-raw-expansion-v2.md) |
 | Training | [Data/augmentation pipeline](training-pipeline.md), [execution/restart](training-execution.md), [V43 quality-study checks](quality-training-validation.md) |
@@ -18,6 +19,8 @@ training quality with its architecture and the larger cleaned corpus.
 | Remaining requirements | [Current completion checklist](requirements.md), [historical progress log](requirements-archive.md) |
 
 Per-experiment reports contain numerical evidence, source/ROI metadata,
-checkpoint hashes, noise/display settings and native triplets. Real low-ISO or
+checkpoint hashes, noise/display settings and native triplets. Study-specific
+eligibility gates do not prevent showing useful versions or changing the current
+baseline. Timestamped historical decisions belong in the diary. Real low-ISO or
 independently demosaiced references are labeled accurately. Machine receipts
 retain recorded UTC timestamps; diary filenames use America/Los_Angeles time.

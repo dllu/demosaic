@@ -2,6 +2,12 @@ State of the art 16 bit joint demosaicing and denoising from free images.
 
 See PROMPT.md for additional details.
 
+Keep README and docs current with the best useful implementations and notable
+image comparisons. Study-specific significance/promotion gates do not freeze
+the architectural baseline or prevent documenting real gains. Compare strengths
+and remaining weaknesses directly. Use the timestamped diary for historical
+decisions; preserve existing machine receipts and experiment evidence.
+
 Diary filenames and human-facing diary creation times use the DST-aware
 America/Los_Angeles local timezone. Create entries with
 `python scripts/diary.py new "Title" --slug short-summary` to avoid UTC filenames.

@@ -1,5 +1,8 @@
 # Standing GFX pair: completed no-context model on CPU
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The completed fresh no-context 10k model remains close to retained V43 on the
 fixed sky, building, foliage and chain-link-fence crops. Both learned models
 retain more continuous fence lines than RawNIND, but fine leaf and building
@@ -9,8 +12,7 @@ broad quality/SOTA result. [All 20 new native PNGs and provenance](results/gfx-n
 This execution restores **four 512px contexts on CPU FP32**, then extracts
 native 160×160 crops. It produces no new full-frame TIFF or speed result. The
 original [fresh no-context/S/B trial](fresh-dino-capacity-10k.md) still must finish
-S/B and its full numerical, analytic and 102 MP GFX review. V43 stays the README
-reference. The two models have different histories and DINO configurations;
+S/B and its full numerical, analytic and 102 MP GFX review. V43 was the reference for this study. The two models have different histories and DINO configurations;
 these examples do not isolate a training-duration or foundation-model effect.
 
 ## Same source pair and display

@@ -1,11 +1,13 @@
 # V76/V77: completed first1000 camera-supervision review
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 Sensor-valid V77 improves rendered photo PSNR by **.16011dB** over matched V76,
 95% source interval[.09818,.23936], and greatly reduces bright uniform-field
 color bias. Its known-camera mean loses.02714dB, failing the original requirement
 that both known/unseen camera panels improve by at least.05dB with positive
-intervals. **Both arms stop at1k; no extension or promotion. V43 stays the working
-reference.** Fine cords, foliage texture and weak stripes remain missing.
+intervals. **Both arms stop at1k; no extension or promotion. V43 was the reference for this study.** Fine cords, foliage texture and weak stripes remain missing.
 
 [Complete source, score, sensitivity, array, native-view and state registry](results/camera-supervision-first1k-complete-v1.json).
 [Frozen recipe and original criteria](camera-supervision-v76-v77.md).

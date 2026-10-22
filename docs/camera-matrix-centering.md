@@ -1,5 +1,8 @@
 # Center the camera-matrix optimization coordinates
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The [camera-projection diagnosis](native-low-noise-camera-diagnosis.md) exposed a
 large low-noise color bias. [V46's complete review](camera-projection-v46-review.md)
 shows why simply deleting the camera inputs is insufficient: photographic and
@@ -54,7 +57,7 @@ separate from quality evidence.
 The [guarded workflow is launched](results/camera-centering-v47-v48-launch.json)
 in frozen source7cd1f12 and is now complete. All41 shared logged observations
 match. V48 lowers all four review-set PSNR means versus V47; both arms stop
-at1000 updates. V43 step2000 remains the photographic experimental reference.
+at1000 updates. V43 step2000 was the photographic comparator for this study.
 
 [V47 control](../configs/dino-camera-control-b16-v47.yaml) and
 [V48 centered](../configs/dino-camera-centered-b16-v48.yaml) share immutable V43
@@ -74,5 +77,4 @@ Run sequentially in a frozen checkout and review known/unseen paired data,
 all427 photographs/16 procedural patterns, full102MP GFX and at least two exact
 synthetic-GT native triplets per checkpoint. Preserve accurately labeled AHD and
 separate ISO100 references, identical crop/display settings, source/checkpoint/
-noise identities and verified RGB16 outputs. Current V43 remains the reference
-until the complete new quality review supports a selection.
+noise identities and verified RGB16 outputs. V43 was the reference during this study.

@@ -1,0 +1,217 @@
+{
+  "image": "gfx-V84-chain-link-f.png",
+  "caption": "chain-link-fence / V84-original20000",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Denoised",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "ISO100 ref (not GT)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "e74dd4cda2a4d91d2ff31097412e2e0c96913a01dd7ef89927a3921e4acf98ec",
+  "region": {
+    "name": "chain-link-fence",
+    "noisy_xy": [
+      2240,
+      6000
+    ],
+    "reference_xy": [
+      2241,
+      6000
+    ],
+    "size": 160,
+    "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+    "context_green_correlation": 0.9550720453262329
+  },
+  "context_xywh": [
+    2064,
+    5824,
+    512,
+    512
+  ],
+  "full_frame": false,
+  "conditioning": {
+    "shot": 0.0014635775921166604,
+    "read": 1.0715704128646712e-06
+  },
+  "display_exposure": 4,
+  "shared_wb": [
+    1.5132450331125828,
+    1.0,
+    2.2152317880794703
+  ],
+  "shared_matrix": [
+    [
+      1.0725188393098881,
+      0.17123593128834644,
+      -0.24375477059823436
+    ],
+    [
+      -0.1267191317089774,
+      1.4310509369654432,
+      -0.3043318052564657
+    ],
+    [
+      -0.009697676902906037,
+      -0.29348063283422965,
+      1.3031783097371357
+    ]
+  ],
+  "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+  "compute_precision": "float32",
+  "device": "cuda",
+  "source": {
+    "fixture": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-inputs-v1/inputs.json",
+      "sha256": "11655660520041c0b9255f197758c6c313ef50834605dc78350c1e5c6f3d8784"
+    },
+    "observation": {
+      "path": "/mnt/external/demosaic/benchmarks/packed-isotropic-compilation-inputs-v1/GFX-four-contexts-native512.npz",
+      "sha256": "2975a90f272b201a81954e6d1e1c41d58ff18c6249c22274b17f8dea0471cbd2"
+    },
+    "GFX_sources": [
+      {
+        "role": "noisy",
+        "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+        "metadata": {
+          "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "camera": "GFX100S",
+          "pattern": "RGGB",
+          "black_levels": [
+            4101.0,
+            4098.0,
+            4104.0,
+            4106.0
+          ],
+          "white_levels": [
+            65535.0,
+            65535.0,
+            65535.0,
+            65535.0
+          ],
+          "white_balance": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "camera_to_srgb": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "flip": 0,
+          "iso": 6400,
+          "adc_white_level": 65535.0
+        }
+      },
+      {
+        "role": "reference",
+        "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+        "metadata": {
+          "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+          "camera": "GFX100S",
+          "pattern": "RGGB",
+          "black_levels": [
+            256.0,
+            255.0,
+            256.0,
+            256.0
+          ],
+          "white_levels": [
+            65535.0,
+            65535.0,
+            65535.0,
+            65535.0
+          ],
+          "white_balance": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "camera_to_srgb": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "flip": 0,
+          "iso": 100,
+          "adc_white_level": 65535.0
+        }
+      }
+    ]
+  },
+  "model_label": "V84-original20000",
+  "checkpoint_sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10",
+  "model": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/native-data-v84-v85-original20k-v1/work/runs/native-data-control-v84/last.pt",
+    "sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10",
+    "arm": "control",
+    "step": 20000,
+    "kind": "joint-checkpoint",
+    "label": "V84-original20000",
+    "compute_policy": {
+      "benchmark": false
+    },
+    "RGB": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/native-data-v84-v85-original20k-review-v1/work/outputs/gfx/control-four-context-RGB-f32.npy",
+      "sha256": "2825e879abf9ea435bbb84182f8f8381f2a3479be718c662949271821dbc6c41"
+    },
+    "native_source_report": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/native-data-v84-v85-original20k-review-v1/work/outputs/gfx/report.json",
+      "sha256": "7526b7cd3465c1e69c68411456784d2591667f7ee2d4dd8799281af7bec2f9cd"
+    },
+    "native_source_PNG": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/native-data-v84-v85-original20k-review-v1/work/outputs/gfx/crop-40df642d151ea820.png",
+      "sha256": "e74dd4cda2a4d91d2ff31097412e2e0c96913a01dd7ef89927a3921e4acf98ec"
+    },
+    "retained_baseline": false
+  }
+}

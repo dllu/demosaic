@@ -1,157 +1,96 @@
-# Quality first: V43 architecture, cleaner data and retained fine detail
+# Quality training on the V84 baseline
 
-The priority is a convincing quality improvement over V43 step 2000. Speed work
-is deferred. Keep V43's original full-resolution pretrained RGB network,
-physical noise anchors/conditioning and genuine frozen DINOv3 ViT-S/16
-architecture. Later ConvNeXt, RAW-native and refinement experiments do not become
-the starting architecture for this study.
+**Use V84's DRUNet RGB trunk and frozen DINOv3 ConvNeXt-Tiny feature pyramid
+as the development baseline.** V84/V85 provide the strongest completed full-photo
+scores and useful image quality. V43 remains a historical comparator;
+[current models and native examples](current-model.md) explain the choice.
 
-## Corpus review
+## Current comparison
 
-The available reviewed Commons corpus contains 88,508 training images at 4×/8×,
-versus V43's original 40,170. Original validation 2,303 / test 2,255 memberships
-stay fixed. Actual downloading stopped at the reserve with 178,117 originals;
-archive discovery/attribution are complete and 279,548 originals remain pending.
+Two continuations start from the exact final V84 EMA with fresh AdamW/EMA:
 
-The [illustrated source review](corpus-source-review.md) uses 371 sources for
-the membership freeze: 347 retain and 24 withhold, including all 74 training sources with
-recorded ISO ≥12800. Native examples show why processed targets are withheld
-while real fine leaf veins and weak fog detail remain. High loss, ISO and
-software tags select review candidates; visible binned-target quality decides
-membership. Later reviews retain another 49 sources, bringing actual visual
-coverage to 420 without changing this freeze. The
-[prospective weak/fine ROI catalogue](corpus-source-review.md#prospective-weak-and-fine-texture-rois)
-adds six inspected training-only regions for a later sampling test; it is not
-applied to the current recipe. Its [optional reader now passes CPU data and
-resume checks](training-pipeline.md#reviewed-photographic-regions); quality
-effects remain untested. This is targeted review, not a full-corpus manual
-inspection.
+| Setting | V100 control | V101 fine-detail recipe |
+| --- | --- | --- |
+| Commons training pool | Curated 88,484 | Same |
+| Native / paired targets | Original 128 / 32 | Same |
+| Optical PSF probability, Commons and native | .25 | 0 |
+| Weak synthetic texture share within existing .20 synthetic share | 0 | .15 |
+| Photographic contrast attenuation probability | 0 | .25 |
+| Reviewed ROI probability, conditional on a photographic Commons sample | 0 | .05 |
+| Flat palette | Original V84 .10 share /8 chroma stops | Same |
+| Learned architecture / initializer | V84 final20k | Same exact weights |
+| Schedule | Seed59, B16/native256, BF16,10,000 updates, LR3e-6/warmup100 | Same |
 
-The full V43 loss/IQA-proxy scan completed all 88,508 training sources and
-177,016 cases. All 87 distinct final top-32/top-16 candidates have visual
-decisions. New manifests apply the 24 exclusions while preserving protected
-series, the GFX scene/siblings and historical data. The independently checked
-cohorts contain **39,983 control / 88,484 larger training sources**, with unchanged
-2,303 validation / 2,255 test memberships. Ranking/supervision details,
-header-inventory evidence and the membership-freeze command are in the
-[source-review guide](corpus-source-review.md).
+[Control recipe](../configs/quality-v84-curated-control-v100.yaml) ·
+[Fine-detail recipe](../configs/quality-v84-fine-detail-v101.yaml).
+The second arm tests the complete fine-detail package. Its result will not
+attribute a gain to one component in isolation. Keeping V84's broad palette
+avoids inheriting the narrower color distribution of the recent ViT-S runs.
 
-## Matched V43 training comparison
+Both use 4× caches, geometry before final area2 reduction, selected-domain loading,
+the unchanged physical noise priors, sensor-valid camera supervision and
+Charbonnier reconstruction. The native/paired fractions stay .25/.25. The six
+reviewed ROIs are existing training sources; oversampling their selected
+structures changes source/field-of-view frequency rather than adding new IDs.
+The [reader validation](training-pipeline.md#reviewed-photographic-regions) records
+hash, bounds, augmentation-order and resume checks.
 
-The frozen study uses the curated larger corpus and its intersection with the
-original V43 cohort. Existing protected/series and new bad-source exclusions
-apply to both. Validation and native128/paired32 data stay fixed.
-Every arm starts from the same original V43 step 2000 EMA, with a
-fresh optimizer/EMA and common seed/schedule. These are new training stages.
+## Data and source quality
 
-| Arm | Commons sources | Optical PSF probability | Low-contrast examples |
-| --- | --- | ---: | --- |
-| V93 small-cohort control | 39,983: original cohort intersected with eligible/curated IDs |0.25|Original mix|
-| V94 larger-data control | 88,484: full curated larger corpus |0.25|Original mix|
-| V95 fine-detail recipe | Same 88,484 sources as V94 |0|More weak procedural detail and contrast-attenuated photos|
+The current cohort has 88,484 Commons training sources, versus 84,867 in V84's
+original recipe. It preserves the same 2,303 validation and 2,255 test memberships.
+The full source scan covered 88,508 training images; targeted actual review now
+covers 420, retaining 396 and withholding 24. High loss, ISO and metadata selected
+review candidates; visible native/binned quality determined exclusions. Hard
+foliage, textiles, nets, weak fog and other useful detail remain eligible.
+This is targeted inspection, not a claim that every source was manually viewed.
 
-V94−V93 measures larger curated membership; V95−V94 measures the augmentation
-package. Architecture stays fixed. Keep batch 16 and 25% paired/25% native/50%
-Commons. Plan equal 20,000-update stages with diagnostic intermediate checkpoints.
-Learning-rate/initializer/source settings and resource bounds are frozen in the
-[production plan receipt](results/v43-quality-curation-and-training-plan-v1.json).
+[Illustrated source review](corpus-source-review.md) ·
+[Curated manifests and membership checks](results/v43-quality-curation-and-training-plan-v1.json) ·
+[Reviewed texture catalogue](../configs/low-contrast-training-rois-v1.json).
+The GFX train/platform scene, its siblings and other protected evaluation
+captures stay outside training. Originals stay read-only; cached source data
+and frozen manifests avoid source HDD reads during these runs.
 
-New opt-in controls are `optical_blur_probability` (default 0.25),
-`raw_clean_optical_blur_probability` (inherits it), and
-`photographic_low_contrast_fraction` (default 0). V95 uses 0 optical blur,
-`.15` weak textures within the existing `.2` procedural fraction, and `.25`
-low-contrast probability conditional on a photographic Commons sample. Natural
-detail is continuously attenuated by 0.125–.5 around channel means, preserving
-pixel geometry and mean color. Paired RAW stays unchanged. Geometry remains
-between 4× binning and final 2× reduction.
+## Execution and evaluation
 
-Data-path tests preserve legacy augmentation pixels/RNG and cover zero-PSF and
-low-contrast behavior. Genuine discarded CPU training, matched-arm, reporting
-and validation-boundary checks pass; see the [validation evidence](quality-training-validation.md).
-These engineering checks do not establish a quality gain. The launcher requires
-final reviewed manifests, then fresh CPU and CUDA/B16/native256 checks before
-three matched 20k stages. Final-step EMA is the primary endpoint, with training
-validation best and 4k/8k/12k/16k diagnostics retained separately.
+The source-frozen runner executes discarded eight-update 64×64 CPU/B1 and
+CUDA256/B16 smokes for each recipe, then starts each production run freshly from
+V84. It checks exact initial EMA/DINO identities, finite states and expected
+update counts. Available RAM must stay at least 48GiB for 15s before each worker;
+the trainer checkpoints/stops below 24GiB, and CUDA allocation is capped at 24GiB.
+Root/external startup reserves are 32/256GiB, comfortably above this study's
+few-GiB planned footprint. Only owned workers are managed; failures are preserved
+without automatic retries.
 
-All six [final-cohort CPU/CUDA preflights](results/v43-quality-final-curated-preflights-v1.json)
-passed: 24 discarded updates per arm/phase, 144 actual training/DINO forwards.
-Independent checkpoint/metric checks pass, and paired/native observations match
-across controls as required. **V93, V94 and V95 completed 20,000 updates each.**
-Independent saved-state audits of
-[V93](results/v43-quality-V93-completed-training-v1.json) and
-[V94](results/v43-quality-V94-completed-training-v1.json), followed by
-[V95](results/v43-quality-V95-completed-training-v1.json), verify final EMAs,
-retained checkpoints, optimizer counters and input traces. Full matched quality
-evaluation and all preselected native views are complete. The
-[20k quality review](v43-curated-original20k-review.md) records photographic and
-weak-detail gains, remaining saturated-color/unseen-camera tradeoffs, and the
-decision to keep V43 as working reference while improving V95's quality.
+Frozen plan: `.cache/current-quality-20261022-v1/training-v2/plan.json`.
+Runs: `/mnt/external/demosaic/v84-curated-quality-20261022-v2/`.
+All four discarded CPU/CUDA smokes passed. V100 is training; V101 is queued
+to start from the same original V84 weights after it. Actual phase/owner status
+is in the local `status.json`. Production quality results are pending.
+[Launch and verification record](results/current-model-baseline-selection-v1.json).
 
-The [V96/V97 follow-up](v95-flat-palette-quality-plan.md) tests the existing
-wider colored-flat palette from final V95 while preserving the weak-detail
-recipe and architecture. Both matched 4k stages are complete and independently
-audited. All seven fresh FP32 panels and native review are complete, with no
-established photo PSNR gain over V95. The [quality review](v95-flat-palette-quality-review.md)
-records full means/uncertainty, regression tails, worse color fields, some lost
-noisy weak-detail response, GFX and actual lower-noise views. The additional
-panels were independently recovered from saved outputs after operator errors;
-failed statuses are preserved and recovery repeats no inference. Both arms
-stop at final4k, without promotion or speed work.
+Compare new checkpoints with V84 and useful alternatives on full 427-photo,
+known/unseen measured-CFA, weak-detail/color and standing GFX tests. Show at
+least two unchanged native noisy/restored/GT triplets per reported model, with
+coordinates, checkpoint hash, noise and display metadata. Real ISO 100/AHD
+references remain accurately labeled as nonexact.
 
-The [V98/V99 experiment](v95-adc-training-plan.md) preserves V95's data,
-augmentation and V43 learned architecture while testing the existing ADC-only
-physical projection during training. Both use a shared lower LR2e-6 and the
-same seed58/final4k budget. Both production stages and independent saved-state
-audits are complete. The [full FP32 and native review is complete](v95-adc-training-quality-review.md).
-The primary learned contrast
-uses a projected V98 EMA export versus projected V99, so the known inference
-policy alone cannot count as a training gain. V99 gains .02880 dB, below the fixed
-.03 dB requirement, and lowers ADC photographic SSIM. ADC color improves, but
-high-noise color RMS and weak-detail retention fail their safeguards; ISO100
-fabric color errors remain. Both final4k endpoints stop without extension or
-promotion. The working reference stays V43, with speed work deferred.
+Report source/scene intervals, adverse cases and the selection of any displayed
+checkpoint. Choose useful versions from overall metrics and actual images;
+one small diagnostic loss or an interval crossing zero does not forbid using
+a better architecture or updating current documentation. Reserve stronger
+claims such as SOTA, broad real-camera superiority or a particular full-frame
+runtime for evidence covering those claims. Quality remains the priority.
 
-Plans/code remain local and checkpoints/run traces use a fresh external-SSD
-namespace. The completed production plan is
-`.cache/quality-first-20261020/V43-curated-matched-training-v1/`. Resource bounds
-remain RAM 48 GiB stable for 60 seconds before launch, 24 GiB active RAM, and
-64/384 GiB free on root/external storage, with a two-hour resource-wait bound.
+## Earlier evidence that informs this work
 
-V95 needed explicit recovery after two unsaved resource-guard stops. Their
-original triggers remain unknown because those guards lacked readings. Both
-partial trials are archived. Later telemetry captured a real disk-reserve
-pause after 8k; relocating closed checkpoint artifacts preserved bytes/paths
-and allowed the same worker to resume and reach 20k. Numerical code, recipe
-and resource thresholds stayed fixed. The
-[validation appendix](quality-training-validation.md) retains the recovery,
-relocation, observed continuation and final saved-state evidence.
-
-## Quality review
-
-Compare completed endpoints with V43 and matched controls on the fixed 427-photo
-panel, known/unseen measured-CFA panels, low-contrast ADC/noisy carriers,
-flat/color fields and GFX sky/building/foliage/fence/highlight contexts. Retain
-per-condition/source results and uncertainty. Inspect native crops before
-aggregate interpretation. Each model report includes at least two native
-noisy/restored/exact-GT triplets and accurately labeled real references, with
-checkpoint/ROI/noise/exposure metadata. No faster inference or new full-frame
-benchmark is part of this work.
-
-`scripts/evaluate_v43_quality_trial.py` prepares evaluation only after the matched
-training controller and workers finish. It pins the four checkpoint bytes,
-training-source snapshot, observations and protocol, then runs photo, known,
-unseen, weak-detail, color and two GFX stages serially. Fresh IEEE FP32 is shared
-across all endpoints; historical means retain their original compute metadata.
-RawNIND's global/per-channel input-only adapters appear in photo/real/GFX panels.
-Each stage checks frozen DINO/state, predictor arguments and native crop pixels;
-the primary photo/real summaries also receive independent coverage/arithmetic
-checks. Outputs still require actual native viewing and interpretation.
-The [frozen production evaluation](results/v43-quality-full-evaluation-launch-v1.json)
-uses `.cache/quality-first-20261020/V43-curated-matched-evaluation-v1/` and
-`/mnt/external/demosaic/v43-curated-evaluation-20261021-v1/`. All three final
-20k EMAs are evaluated alongside original V43; the seven stages run serially.
-Its final `status.json` records all seven completed stages. All 96 native
-triplets are represented in actual views, with independent primary, analytic
-and saved-color-array audits recorded in the quality review.
-The [CPU launcher integration](results/v43-quality-evaluation-launcher-CPU-proof-v3.json)
-passes on discarded checkpoints; it does not qualify the production branches.
+[V84/V85](native-data-original20k-review.md) improve photographic quality while
+the extra 22 native captures have little matched effect. The
+[V93–V95 cleaned-data/augmentation comparison](v43-curated-original20k-review.md)
+finds photo/weak-detail gains on the older ViT-S architecture, with remaining
+color shifts. [V96/V97](v95-flat-palette-quality-review.md) and
+[V98/V99](v95-adc-training-quality-review.md) expose further palette/ADC tradeoffs.
+Those are useful observations, not reasons to keep the global baseline at V43.
+Immutable receipts retain original study decisions; the timestamped
+[diary](../diary/index.md) preserves the chronology.

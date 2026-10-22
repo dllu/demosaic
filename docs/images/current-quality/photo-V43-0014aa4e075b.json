@@ -1,0 +1,238 @@
+{
+  "image": "photo-V43-0014aa4e075b.png",
+  "caption": "0014aa4e075b1827f91ef8a02069e1e318f040ba / iso12800-prior / RGGB / 2:dino-anchored-native-diverse-b16-v43:step-2000",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Denoised",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "GT (synthetic)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "326cef729cf96082cacfa0d3703102dd3a540dfe4af8cf4dcb1201f31aa2a3e6",
+  "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+  "source": {
+    "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+    "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "author": "Roy Egloff",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "attribution": null,
+    "credit": "Own work",
+    "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+    "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+    "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+    "width": 3888,
+    "height": 2592,
+    "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+    "split": "val",
+    "bin_factor": 8,
+    "color_space": "linear-sRGB",
+    "dtype": "uint16",
+    "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+    "shape": [
+      324,
+      486,
+      3
+    ],
+    "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+  },
+  "validation_index": 0,
+  "validation_seed": 42,
+  "evaluation_tile_xywh": [
+    48,
+    48,
+    160,
+    160
+  ],
+  "condition": {
+    "name": "iso12800-prior",
+    "shot": 0.00256,
+    "read": 2.62144e-05,
+    "exposure": 1.0
+  },
+  "pattern": "RGGB",
+  "model": {
+    "label": "2:dino-anchored-native-diverse-b16-v43:step-2000",
+    "source": "/mnt/external/demosaic/evaluation/paired-known-native-corpus-v37-v39-v43-2k/weights/weights-0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5.pt",
+    "training_run": "/mnt/external/demosaic/runs/dino-anchored-native-diverse-b16-v43",
+    "snapshot": "/mnt/external/demosaic/evaluation/packed-isotropic-mixed16-quarter-full427-v1/weights/weights-0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5.pt",
+    "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+    "step": 2000,
+    "model_config": {
+      "restoration_backbone": "pretrained-rgb",
+      "width": 64,
+      "encoder_blocks": [
+        2,
+        2,
+        4
+      ],
+      "middle_blocks": 6,
+      "decoder_blocks": [
+        2,
+        2,
+        2
+      ],
+      "attention": true,
+      "dino": true,
+      "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+      "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+      "camera_conditioning": true,
+      "noise_modulation": false,
+      "physical_fp32": true,
+      "baseline": "bilinear",
+      "prior_window": 7,
+      "standardized_noise": false,
+      "noise_refinement": false,
+      "refinement_width": 24,
+      "refinement_blocks": 4,
+      "refinement_window": 63,
+      "coarse_refinement_factor": 0,
+      "coarse_refinement_width": 24,
+      "coarse_refinement_blocks": 4,
+      "coarse_refinement_window": 31,
+      "pyramid_refinement": false,
+      "pyramid_measurements": true,
+      "pyramid_width": 24,
+      "pyramid_blocks": 2,
+      "variance_stabilization": true,
+      "physical_anchors": true,
+      "rgb_processing_scale": 1,
+      "packed_detail_prior": false,
+      "rgb_hidden_autocast": false
+    },
+    "effective_model_config": {
+      "restoration_backbone": "pretrained-rgb",
+      "width": 64,
+      "encoder_blocks": [
+        2,
+        2,
+        4
+      ],
+      "middle_blocks": 6,
+      "decoder_blocks": [
+        2,
+        2,
+        2
+      ],
+      "attention": true,
+      "dino": true,
+      "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+      "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+      "dino_lora_rank": 0,
+      "dino_input_adapter": false,
+      "dino_feature_fusion": "bottleneck",
+      "camera_conditioning": true,
+      "noise_modulation": false,
+      "physical_fp32": true,
+      "baseline": "bilinear",
+      "prior_window": 7,
+      "standardized_noise": false,
+      "noise_refinement": false,
+      "refinement_width": 24,
+      "refinement_blocks": 4,
+      "refinement_window": 63,
+      "coarse_refinement_factor": 0,
+      "coarse_refinement_width": 24,
+      "coarse_refinement_blocks": 4,
+      "coarse_refinement_window": 31,
+      "pyramid_refinement": false,
+      "pyramid_measurements": true,
+      "pyramid_width": 24,
+      "pyramid_blocks": 2,
+      "variance_stabilization": true,
+      "physical_anchors": true,
+      "rgb_processing_scale": 1,
+      "packed_detail_prior": false,
+      "rgb_hidden_autocast": false,
+      "rgb_center_camera_matrix": false,
+      "rgb_middle_skip_fp32": false,
+      "adc_cfa_projection": false,
+      "raw_kernel_reconstruction": false,
+      "raw_kernel_windows": [
+        1,
+        5,
+        17
+      ],
+      "raw_kernel_phase_conditioning": false,
+      "isotropic_groups": 6,
+      "isotropic_blocks": 8,
+      "isotropic_local_width": 32,
+      "isotropic_raw_gain": 1.0,
+      "isotropic_residual_scale": 1.0
+    },
+    "training_manifest_sha256": "22d07361d1b67de077560f6b8571388db699ead2d164201c71fe71ec5755f4c3",
+    "compute_precision": "float32",
+    "refinement_compute_precision": "float32",
+    "memory_format": "channels_last",
+    "native_source_report": {
+      "path": "/mnt/external/demosaic/evaluation/packed-isotropic-mixed16-quarter-full427-v1/summary.json",
+      "sha256": "ea7683b4ecc98be7f9bf98f6b908836c716b4ac17cfe929535c359afbb5ceb09"
+    },
+    "native_source_PNG": {
+      "path": "/mnt/external/demosaic/evaluation/packed-isotropic-mixed16-quarter-full427-v1/crop-b422a59ce9e32057.png",
+      "sha256": "326cef729cf96082cacfa0d3703102dd3a540dfe4af8cf4dcb1201f31aa2a3e6"
+    },
+    "retained_baseline": true
+  },
+  "display_exposure": 1.0,
+  "reference": "Exact synthetic clean target",
+  "white_balance": [
+    2.0,
+    1.0,
+    1.5
+  ],
+  "camera_to_srgb": [
+    [
+      1.1176470588,
+      -0.0588235294,
+      -0.0588235294
+    ],
+    [
+      -0.0588235294,
+      1.1176470588,
+      -0.0588235294
+    ],
+    [
+      -0.0588235294,
+      -0.0588235294,
+      1.1176470588
+    ]
+  ],
+  "cache_context_xywh": [
+    189,
+    3,
+    256,
+    256
+  ],
+  "displayed_cache_ROI_xywh": [
+    237,
+    51,
+    160,
+    160
+  ]
+}

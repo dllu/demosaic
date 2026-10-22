@@ -1,10 +1,12 @@
 # RAW-native review at 40,000 updates
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 Longer training improves both models, but **neither is promoted**. Compared with
 their own 8k boundaries, photo PSNR rises by 2.061/2.188 dB and measured-CFA
 camera scores by about 4.0–4.7 dB. Both still trail V43/V63 substantially, retain
-visible real-photo grain and miss the 100MP/10s target. V43 remains the working
-experimental reference; SOTA and decisive real-photo superiority remain unproven.
+visible real-photo grain and miss the 100MP/10s target. V43 was the reference for this study; SOTA and decisive real-photo superiority remain unproven.
 
 [Complete results, checkpoint/source hashes, native crop settings and audits](results/packed-isotropic-quarter-review-v1.json).
 [Original 8k review](packed-isotropic-first32000-review.md).

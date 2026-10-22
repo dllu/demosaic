@@ -1,5 +1,8 @@
 # Colored flat fields expose a late color error
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The original fresh no-context model's 10k checkpoint shifts a uniform warm field
 and one channel-permuted field, although its neutral flat remains accurate. The error is
 also present with ADC-only input: this selected failure does not require texture,
@@ -117,7 +120,7 @@ Keep these colored fields in future quality reviews alongside neutral flats,
 weak texture, full photographs and real captures. Existing optional pooled
 sensor losses and prior camera-conditioning trials already have mixed results;
 this finding alone is not evidence to promote one. The current V58 schedule,
-V43 README reference and protected-final scoring policy remain unchanged.
+V43 was the README reference for this study; its protected-final scoring policy remains unchanged.
 
 ## A testable smooth-color coverage gap
 

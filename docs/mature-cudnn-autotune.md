@@ -1,5 +1,8 @@
 # Mature V43/V63 FP32 autotuning probes
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 V43/V63 pass the original16-bit output limits with observed four-context median
 ratios of1.60×/1.64×. Their native views show no visible compute-policy change.
 These are context probes; complete-frame validation remains required before
@@ -54,7 +57,7 @@ explicitly pins the existing offline ViT-S/16 and ConvNeXt-tiny snapshots.
 No model, input, precision or numerical gate changed; no download was needed.
 
 All four workers and their controller exited successfully. Production defaults
-remain unchanged, and V43 remains the working quality reference. Next validate
+remain unchanged, and V43 was the reference for this experiment. Next validate
 complete V43/V63 original/autotuned outputs and RGB16 exports with the same
 strict gate and adequate reserved disk space. The100MP/10s and SOTA objectives
 remain unmet/unproven.

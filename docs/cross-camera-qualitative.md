@@ -1,5 +1,8 @@
 # Cached Q2, Sony a7R II and GFX50R qualitative checks
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The retained V43 step 2,000 model now has fixed native comparisons on three
 additional personal-camera captures. This extends the standing GFX100S scene;
 it does not replace DSCF3879/DSCF3880 or promote a newly trained model.
@@ -7,8 +10,7 @@ it does not replace DSCF3879/DSCF3880 or promote a newly trained model.
 
 A later [CPU FP32 check against the completed fresh no-context10k arm](cross-camera-none10k-cpu-review.md)
 reruns both models and RawNIND, adds direct learned comparisons and two exact-GT
-synthetic examples. It finds no clear new real-capture winner; V43 remains the
-reference while the complete long comparison continues.
+synthetic examples. It finds no clear new real-capture winner; V43 was the reference during this comparison.
 
 The [matched fresh no-context/S10k CPU review](fresh-none-S10k-cpu-review.md#three-additional-camera-contexts)
 now adds the completed S arm on these same fixed inputs. It recovers the noisy

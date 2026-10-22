@@ -1,12 +1,15 @@
 # Bounded RAW-kernel head warmup
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 V65 completed its original **1,000-update** warmup and full quality review.
 The [completed report](raw-kernel-warmup-v65-first1k-review.md) finds poor denoising;
 there is no promotion or joint continuation. The launch history follows. It starts from V60 full4k EMA and freezes
 all 91 existing restoration tensors, including DINO projections/gates, while
 learning 22,032 coefficient parameters. Actual DINO stays frozen. The new head
 starts at bilinear quality: this is a new stage with fresh AdamW/EMA, rather
-than a continuation preserving parent-quality output. V43 remains the working reference.
+than a continuation preserving parent-quality output. V43 was the reference for this experiment.
 
 [Recipe](../configs/dino-convnext-raw-kernel-warmup-b16-v65.yaml).
 [Actual launch, archived source/config/data and startup](results/raw-kernel-warmup-v65-launch.json).

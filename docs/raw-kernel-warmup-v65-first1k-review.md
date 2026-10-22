@@ -1,11 +1,13 @@
 # RAW-head warmup: completed 1,000-update review
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The new head passes its numerical/state checks but fails as a denoiser at this
 budget. Photo PSNR is **27.83246 dB**, versus 35.66428 for its mature V60 parent;
 known/unseen measured-CFA means fall 9.99/12.32dB. Native images remain grainy.
 Lower flat-color mean bias accompanies large residual noise, so it is not a
-restoration-quality improvement. **No promotion or joint continuation.** V43
-remains the working reference. The original 1,000-update warmup is complete;
+restoration-quality improvement. **No promotion or joint continuation.** V43 was the reference for this study. The original 1,000-update warmup is complete;
 this does not establish convergence or reject end-to-end RAW-kernel training.
 
 [All scores, hashes, audits and 26 actual native view receipts](results/raw-kernel-warmup-v65-first1k-review.json).

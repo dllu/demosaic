@@ -1,9 +1,12 @@
 # Completed matched normalization study: V68/V69
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 Both original4k schedules and the full review are complete. V69 gains+.02032dB
 photo sRGB PSNR over matched control, but its own1k progress interval includes
 zero. Weak texture/coarse color and mixed real/bright-color behavior prevent
-promotion. V43 remains the working reference. No extension beyond4k is queued.
+promotion. V43 was the reference for this experiment. No extension beyond4k is queued.
 
 [Final performance report and decision](normalization-v68-v69-original4k-review.md).
 [All81 actually viewed native triplets](normalization-v68-v69-original4k-native-gallery.md).
@@ -141,6 +144,6 @@ Review owner638004/1792261092.43 exited; its115 frozen guards remain verified.
 The final manual receipt is under
 `/mnt/external/demosaic/benchmarks/normalization-v68-v69-original4k-manual-review-v1/`.
 
-This study is closed. V43 remains the working reference; no post4k extension or
+This study is closed. V43 was the reference for this experiment; no post4k extension or
 production normalization-policy change is queued. The full PROMPT objectives of
 SOTA, decisive real-photo superiority and100MP within10s remain unmet/unproven.

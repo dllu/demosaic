@@ -8,6 +8,7 @@ import re
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
+MODEL_SELECTION = REPO / "configs/current-model.json"
 STUDIES = [
     ("geometry-corpus-v34-v36-review.json", [32, 34, 35, 36], "geometry-corpus-v34-v36-review.md"),
     ("native-corpus-2k-review.json", [37, 39, 43], "native-corpus-2k-review.md"),
@@ -238,6 +239,7 @@ def main():
     import matplotlib.pyplot as plt
 
     destination = REPO / "docs/results/version-PSNR-history.json"
+    preferred = json.loads(MODEL_SELECTION.read_text())["preferred_version"]
     if args.refresh_sources:
         points, evidence = collect()
         result = {
@@ -247,7 +249,11 @@ def main():
                 "known_CFA_PSNR": "4 scenes/8 pairs/72 crops, scene-balanced measured-CFA PSNR",
                 "unseen_CFA_PSNR": "5 scenes/10 pairs/90 crops, scene-balanced measured-CFA PSNR",
             },
-            "working_reference": "V43 step2000; higher PSNR alone is not promotion or proof of fine-detail/real-photo quality",
+            "working_reference": f"V{preferred} is the preferred development baseline; V43 is a historical comparator",
+            "model_selection": {
+                "path": "configs/current-model.json",
+                "sha256": digest(MODEL_SELECTION),
+            },
             "sources": evidence,
             "points": points,
         }
@@ -283,7 +289,7 @@ def main():
         ticks[-1] = latest
     else:
         ticks.append(latest)
-    reference = next(p for p in points if p["version"] == 43)
+    reference = next(p for p in points if p["version"] == preferred)
     for row in range(2):
         shown = points if row == 0 else [p for p in points if p["version"] not in (72, 73)]
         x = [p["version"] for p in shown]
@@ -294,10 +300,10 @@ def main():
             color="#d98b14",
             linewidth=1,
             linestyle="--",
-            label="V43 working reference",
+            label=f"V{preferred} current baseline",
         )
         photo.scatter(
-            [43],
+            [preferred],
             [reference["photo_srgb_PSNR"]],
             marker="*",
             c="#d98b14",
@@ -314,11 +320,13 @@ def main():
             camera.axhline(reference[field], color=color, linewidth=0.8, linestyle="--", alpha=0.6)
         camera.set_ylabel("Measured-CFA PSNR (dB)")
         for axis in (photo, camera):
-            axis.axvline(43, color="#d98b14", linewidth=1, alpha=0.5)
+            axis.axvline(preferred, color="#d98b14", linewidth=1, alpha=0.5)
             axis.grid(axis="y", color="#dce2e8", linewidth=0.6)
             axis.legend(loc="best", frameon=False, fontsize=8)
             axis.set_xticks(ticks)
-        highlighted = [43, 72, 92, latest] if row == 0 else [34, 43, 63, 84, 92, latest]
+        highlighted = (
+            [43, preferred, 72, 92, latest] if row == 0 else [34, 43, 63, preferred, 92, latest]
+        )
         for version in dict.fromkeys(highlighted):
             p = next(r for r in shown if r["version"] == version)
             photo.annotate(
@@ -341,7 +349,7 @@ def main():
         axis.set_xlabel("Model version (unequal training budgets)")
     fig.suptitle("PSNR by model version", fontsize=15)
     fig.supxlabel(
-        "ADC labels: ADC-only sample projection. Higher PSNR alone is not promotion.\nDashed lines: V43. Full values and provenance: CSV/JSON.",
+        f"Current baseline: V{preferred}. ADC labels: ADC-only sample projection.\nTraining budgets/data differ. Full values and provenance: CSV/JSON.",
         fontsize=9,
         color="#4b5563",
     )
@@ -358,9 +366,9 @@ def main():
             f"| V{p['version']} / {p['endpoint']} | {p['photo_srgb_PSNR']:.5f} | {p['known_CFA_PSNR']:.5f} | {p['unseen_CFA_PSNR']:.5f} | [Review]({p['report']}) |"
         )
     (REPO / "docs/performance-history.md").write_text(
-        "# PSNR history\n\nLater experiments often improve aggregate photographic PSNR, but none has established the combination of real-photo quality, fine-detail preservation and camera performance needed to replace V43 step2000. The version number names an experiment; it is not a training step.\n\n![PSNR versus model version](images/version-PSNR-history.png)\n\n"
+        f"# PSNR history\n\nV{preferred} is the current development baseline. V84/V85 improve full photographic PSNR by about1.54dB over V43 and offer useful overall quality gains. V95 has a stronger tested noisy weak-carrier response; model tradeoffs and native comparisons are in the [current model guide](current-model.md). The version number names an experiment, not a training step.\n\n![PSNR versus model version](images/version-PSNR-history.png)\n\n"
         + result["description"]
-        + f" Camera references are measured CFA samples; independently demosaiced RGB references are not exact GT. The small camera panels have substantial scene uncertainty. Higher means do not establish statistical significance, a common compute budget, or better low-contrast detail. Dashed lines show V43's measured means. The upper panels include all {len(points)} endpoints; the lower panels omit V72/V73 RAW-native prototypes only to show the mature RGB range more clearly.\n\nAll photo points use the full fixed 427-source panel, seven conditions and four CFAs. Known/unseen points balance captures within scenes, then scenes (4/5 scenes, 72/90 crops). No screen16, procedural mean or model-selected subset is mixed into the photo curve. Precision details and original records remain in the source reports.\n\nV98/V99 use the same ADC-only inference projection; only V99 trained through it. Their original V43/V95 references retain their checkpoint policies. All three primary panels are complete, but the [fixed photo criteria fail and the complete quality review rejects promotion](v95-adc-training-quality-review.md). These points do not indicate model promotion.\n\n"
+        + f" Camera references are measured CFA samples; independently demosaiced RGB references are not exact GT. Small camera panels have scene uncertainty. The plot describes checkpoints with unequal budgets and data; use the linked comparisons to assess particular gains and weaknesses. Dashed lines show V{preferred}'s measured means. The upper panels include all {len(points)} endpoints; the lower panels omit V72/V73 RAW-native prototypes only to show the mature RGB range more clearly.\n\nAll photo points use the full fixed427-source panel, seven conditions and four CFAs. Known/unseen points balance captures within scenes, then scenes (4/5 scenes,72/90 crops). Precision, checkpoint hashes and per-source results remain in the source reports.\n\nV98/V99 use common ADC-only inference projection; only V99 trained through it. Their original V43/V95 references retain their checkpoint policies. The [completed ADC study](v95-adc-training-quality-review.md) improves ADC color but retains positive-noise color/detail weaknesses. Study-specific statistical gates do not prevent showing progress or choosing a stronger development baseline.\n\n"
         + "\n".join(rows)
         + "\n\n[CSV](results/version-PSNR-history.csv) · [Source records, checkpoint hashes and evaluation metadata](results/version-PSNR-history.json) · [SVG](images/version-PSNR-history.svg) · [PDF](images/version-PSNR-history.pdf). Rebuild from the shipped JSON with `source scripts/env.sh` then `.venv/bin/python scripts/plot_version_history.py`; `--refresh-sources` additionally audits and recollects the original local report archives. These figures reuse completed reports and perform no model inference. Native noisy/restored/reference crops remain in each linked review and the README.\n"
     )

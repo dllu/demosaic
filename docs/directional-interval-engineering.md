@@ -1,11 +1,14 @@
 # Directional/interval engineering checks and launch
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The [predeclared V78/V79 study](directional-interval-v78-v79.md) has started its
 complete4,000-update arms serially. This is an implementation/execution result,
 not a model-quality report. The
 [byte-bound receipts and process identities](results/directional-interval-engineering-and-launch-v1.json)
 identify both preflights, frozen training/review sources, exact initializers and
-the queued evaluation. No checkpoint has been promoted; V43 remains the reference.
+the queued evaluation. No checkpoint has been promoted; V43 was the reference for this study.
 
 The full CPU suite passed1,059 tests with nine skips in104.36s. Four additional
 signed/near-black constant-scene invariants were then added; the focused

@@ -1,5 +1,8 @@
 # V72 first-gate CPU crop review
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 V72 has completed2,000 optimizer updates /8,000 original B4 source steps /
 32,000 example draws. On the two fixed synthetic observations it improves
 about0.50dB over the original RAW model at the same example budget, but remains
@@ -103,4 +106,4 @@ and54 unresized board cells. Both CPU execution and readback initialize no CUDA;
 28 relevant boundary/reporting tests and Ruff pass. The rendering operator is
 reused in readback, so this does not independently validate metric definitions.
 Full held-out/camera/analytic/color results, DINO comparison and full-frame
-quality/timing remain pending. V43 remains the working README reference.
+quality/timing remain pending. V43 was the reference for this study.

@@ -1,12 +1,15 @@
 # Original4k normalization: small matched gain, persistent fidelity failures
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 V69 normalization augmentation gains **+.02032dB** photographic sRGB PSNR over
 matched V68 control,95% source interval**[+.01426,+.02806]**. The augmented
 model's own1k-to4k change is only**+.00354dB[−.00177,+.00904]**; control falls
 **−.01057dB[−.01881,−.00452]**. The larger between-arm gap mostly reflects
 control's decline. Fine texture and coarse-color errors remain, with mixed
 bright-color results and no clear broad real-photo gain. **Neither endpoint is
-promoted; V43 remains the working reference. This original4k study is complete.**
+promoted; V43 was the reference for this experiment. This original4k study is complete.**
 
 [Full comparisons, metadata, hashes and audits](results/normalization-v68-v69-original4k-review.json).
 [All81 actually viewed original4k crop triplets](normalization-v68-v69-original4k-native-gallery.md).
@@ -275,7 +278,7 @@ seams/cement variation look crisper than the shown RawNIND comparator, but true
 texture versus residual noise is unverified. Q2 dark detail and Sony structures
 remain soft. These views do not demonstrate broad decisive real-photo superiority.
 
-## Why the working reference stays V43
+## Why V43 was the reference for this experiment
 
 Four historical V43 README originals were reopened at100%: the same two photos,
 GFX foliage and fence. Their displayed noisy/reference pixels are bitwise equal
@@ -324,7 +327,7 @@ a controlled speed difference and do not meet100MP within10s. Both linear16
 and sRGB16 outputs are verified for all three models.
 
 The original4k trial is closed without promotion or further normalization
-training. V43 and its representative README crops remain the working reference.
+training. V43 was the reference and source of representative README crops during this study.
 The next research task is a structural RAW reconstruction change addressing
 coarse color, weak texture and full-resolution compute cost, with a new matched
 protocol frozen before training. Full PROMPT SOTA, decisive superiority over

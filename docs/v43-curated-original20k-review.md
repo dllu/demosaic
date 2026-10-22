@@ -1,6 +1,9 @@
 # V43 architecture on curated Commons: 20k review
 
-V95 improves photographic PSNR and the tested weak-detail response. The six GFX regions show modest extra detail, while high-noise saturated-color tails worsen and unseen-camera uncertainty remains. **V95 is a promising candidate; V43 remains the working reference while those quality tradeoffs are addressed.**
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
+V95 improves photographic PSNR and the tested weak-detail response. The six GFX regions show modest extra detail, while high-noise saturated-color tails worsen and unseen-camera uncertainty remains. **V95 is a promising candidate; V43 was the reference for this experiment while those quality tradeoffs are addressed.**
 
 All new arms start from original V43 step 2000 with a fresh optimizer/EMA, the same seed and 20,000 additional updates. The final stage EMA is primary. These are unequal training budgets versus V43; the two matched contrasts isolate larger membership and the augmentation package. See the [recipe and curation](quality-first-training.md).
 
@@ -204,6 +207,6 @@ V95
 
 ## Decision and reproducibility
 
-Keep V43 as the working reference and V95 as the next quality candidate. The larger corpus alone has not shown a clear photographic gain at this matched budget; less blur and added low-contrast examples help the measured detail response. The next quality target is saturated high-noise color bias/nonuniformity while preserving that detail. Speed work remains deferred.
+Use V43 as the comparator for this experiment and V95 as the next quality candidate. The larger corpus alone has not shown a clear photographic gain at this matched budget; less blur and added low-contrast examples help the measured detail response. The next quality target is saturated high-noise color bias/nonuniformity while preserving that detail. Speed work remains deferred.
 
 [Complete seven-stage review record](results/v43-curated-original20k-complete-review-v1.json) binds the fixed plan, all result/report hashes, actual native views and independent audits. Four joint checkpoints complete 17,824 actual forwards/DINO calls across the panels; their model/DINO/configuration/RNG checks pass and sampled physical inputs match. All stage owners and the controller exit. This development study does not establish SOTA, broad unknown-scene superiority or full 100 MP/10 s qualification of V95.

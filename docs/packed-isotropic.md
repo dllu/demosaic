@@ -1,11 +1,14 @@
 # Experimental RAW-native isotropic backbone
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 `packed-isotropic` is implemented and passes engineering checks. Its
 [completed 40k review](packed-isotropic-quarter-review.md) finds clear progress
 over the [8k boundary](packed-isotropic-first32000-review.md), but photo scores
 29.73/29.95 dB still trail mature controls and native views retain substantial
 grain. Full GFX restores take50.70/53.74s. **Neither endpoint is promoted**;
-V43 remains the working reference.
+V43 was the reference for this experiment.
 The [experimental fixed-unit options](packed-isotropic-units.md) record RAW
 input gain and learned residual scale in checkpoints. Defaults preserve existing
 models; their isolated effect on full-data quality remains unmeasured. The completed batch-learning
@@ -394,7 +397,7 @@ An isolated, serialized GPU check after review-owner exit verifies that actual
 V71 EMA can learn the same easy synthetic fixture in FP32 and BF16, reducing
 MSE by about86% after128 updates. Its learned weights are discarded. This does
 not explain weak varied-photo learning or justify a production precision change.
-V43 stays the working and README reference; protected-final scenes remain unscored.
+V43 was the reference for this study; protected-final scenes remain unscored.
 
 The [production-training learning diagnosis](packed-isotropic-production-learning.md)
 then replays64 actual training examples. BF16 and FP32 are both weak on the mixed

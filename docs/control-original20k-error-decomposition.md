@@ -1,5 +1,8 @@
 # What worsened on V63's fabric example?
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 Most of the selected fabric example's regression from step4,000 to the original
 step20,000 endpoint is a color/coarse-error problem. In unclipped camera RGB,
 **88.36% of the added MSE comes from channel-mean bias** and another10.53% from
@@ -107,5 +110,5 @@ uv run --no-sync python scripts/decompose_control_errors.py \
 The output directory must be new. The completed input receipt binds the actual
 checkpoint, saved float predictions, observation plans and exact targets; the
 operator verifies their file hashes before analysis. Existing long-run owners,
-their frozen source/data, the original427 benchmark and V43 working reference
+their frozen source/data, the original427 benchmark and V43 study comparator
 remain unchanged. No endpoint is promoted by this diagnosis.

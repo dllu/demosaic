@@ -1,11 +1,14 @@
 # Normalization first1k: small mean gains, unresolved texture and color
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 At the first1,000 updates, V69 normalization augmentation gains **+.00621dB**
 photographic sRGB PSNR over matched V68 control,95% source interval
 **[+.00352,+.00920]**. Procedural PSNR gains+.09059dB. These small aggregate
 gains do not establish better real-photo restoration: fabric cords remain
 missing, GFX detail stays soft and saturated magenta retains coarse error.
-**Neither model is promoted; V43 remains the working reference.**
+**Neither model is promoted; V43 was the reference for this experiment.**
 
 [Complete statistics, crop metadata and audited artifacts](results/normalization-v68-v69-first1k-review.json).
 [All81 actually viewed native crops](normalization-v68-v69-first1k-native-gallery.md).

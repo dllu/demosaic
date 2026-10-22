@@ -1,5 +1,8 @@
 # Native report preparation and the connected first1k boundary
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The connected arm completed its first1000 updates and continues toward its
 original4000 budget. Its model/EMA/AdamW, Python/CPU/CUDA RNG and best state
 exactly match the earlier V81 connected checkpoint at1000. All56 sampled input/
@@ -39,7 +42,7 @@ includes at least two noisy/restored/exact-GT triplets per checkpoint, fixed
 coordinates/transforms, checkpoint hashes, noise/display exposure, and cached
 GFX sky/building/foliage/chain-link-fence/lights. ISO100 remains an independent
 qualitative reference. Board construction never resizes the crop pixels and
-never marks visual review complete. V43/default/README pixels remain unchanged;
+never marks visual review complete. V43/default/README pixels were unchanged during this study;
 no automatic continuation, full-frame run or promotion follows preparation.
 
 Current CPU preparation state is under

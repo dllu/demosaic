@@ -1,11 +1,14 @@
 # First trained DINO Q/V adapter review
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 **Stop V49 at its first1000 gate; do not promote rank4 adaptation.**
 Unseen primary and photographic PSNR fall versus V47 with negative
 evaluation-source intervals. Known primary is nearly unchanged; procedural
 PSNR also falls but its interval includes zero. A slight photographic SSIM
 increase does not offset these losses. This rejects this recipe at this gate,
-not low-rank adaptation generally. V43 step2000 stays the photographic reference.
+not low-rank adaptation generally. V43 step2000 was the photographic comparator for this study.
 
 [Complete matched comparison and20 native triplets](results/dino-lora-v49-review.json).
 The [V49 trial](dino-lora-v49-trial.md) adds73,728 parameters across24 rank4
@@ -52,7 +55,7 @@ exact. Each original case file/report/checkpoint hash remains in the receipt.
 This avoids a second training control while preserving its original measurements.
 It does not claim bitwise re-execution of old neural predictions.
 
-Current V43 step2000 remains a separate photographic experimental reference:
+V43 step2000 is the separately trained photographic study comparator:
 known54.23332, unseen53.80606 primary; photo34.89934/.957126,
 procedural33.28537/.966604. Its original optimizer history/seed differ; see its
 [review](native-corpus-2k-review.md), not a causal optimizer-equivalent comparison.

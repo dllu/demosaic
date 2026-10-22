@@ -1,9 +1,12 @@
 # Directional/interval first1k state audit and review preparation
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 V78 has passed its first1,000 updates on the unchanged original4,000-update
 schedule. This boundary verifies execution, not image quality. The
 [predeclared V78/V79 study](directional-interval-v78-v79.md) continues without
-recipe changes or an early quality decision. V43 remains the working reference.
+recipe changes or an early quality decision. V43 was the reference for this experiment.
 [Receipts, frozen inputs and live process identities](results/directional-interval-review-preparation-v1.json).
 
 The retained V78 step1000 checkpoint has SHA256

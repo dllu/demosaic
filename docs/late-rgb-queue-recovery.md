@@ -1,5 +1,8 @@
 # Late RGB evaluation continues after package-watcher recovery
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The recovered chain has now completed. The
 [final V90/V91 review](late-rgb-original4k-review.md) includes all125 native
 cells before numerical interpretation; camera/detail requirements prevent
@@ -88,5 +91,5 @@ Main review owner930391/create1792482701.57 and its exact full427 worker
 recovery snapshot. CPU closure and packaging follow unchanged. All fixed
 native boards must be viewed before numerical interpretation. Full quality,
 GFX/highlight/detail/color review, the inference probe and any promotion
-decision remain pending. V43 remains the working reference; SOTA, decisive
+decision remain pending. V43 was the reference for this experiment; SOTA, decisive
 native superiority and100MP/10s remain unmet/unproven.

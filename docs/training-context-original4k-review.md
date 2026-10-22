@@ -1,6 +1,9 @@
 # Completed V86/V87 original4k input-context comparison
 
-Larger input context does not demonstrate a photographic benefit in this fixed trial. Context−control sRGB PSNR is **+0.00099 [-0.00114, +0.00455] dB**; the source interval crosses zero. Both arms fail the known-camera promotion criteria and both high-noise weak-carrier gain requirements fail. All 192 ADC detail-loss limits pass. **Neither endpoint is promoted or extended; V43 remains the working reference.**
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
+Larger input context does not demonstrate a photographic benefit in this fixed trial. Context−control sRGB PSNR is **+0.00099 [-0.00114, +0.00455] dB**; the source interval crosses zero. Both arms fail the known-camera promotion criteria and both high-noise weak-carrier gain requirements fail. All 192 ADC detail-loss limits pass. **Neither endpoint is promoted or extended; V43 was the reference for this experiment.**
 
 [Full results and evidence](results/training-context-original4k-complete-v1.json). [Fixed criteria](training-context-v86-v87.md). [Original4000 training and matched-state checks](results/training-context-original4000-completion-v1.json).
 

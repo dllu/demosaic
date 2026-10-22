@@ -1,5 +1,11 @@
 # V84/V85: matched private-native data comparison
 
+This is the protocol for the completed V84/V85 comparison. **V84 is now the
+preferred development baseline**; see [current model choices](current-model.md)
+and [the completed results](native-data-original20k-review.md). The eligibility
+gates below describe that particular study, not requirements for updating the
+README or selecting a stronger architectural baseline.
+
 The completed bank-gradient study did not improve camera or weak-detail
 requirements. This separate study tests the already reviewed private-native
 extension, preserving the mature V63/DINO architecture. The only treatment
@@ -67,7 +73,8 @@ synthetic-GT triplets per checkpoint, with identical source/ROI/display/noise
 settings, checkpoint SHA and source attribution. View GFX sky, building,
 foliage, chain-link fence and illuminated sign/platform crops at native scale;
 ISO100 remains an independent reference with aperture/exposure/motion caveats.
-Keep README/V43 unchanged unless stronger quality is verified. Any eligible
-candidate still needs its own complete101.996MP linear/sRGB16 export, quantizer,
+Keep current documentation and image comparisons updated when useful versions
+are available. Checkpoint-specific full-frame claims need their own complete
+101.996MP linear/sRGB16 export, quantizer,
 native-quality and cold/warm timing checks. This experiment alone cannot prove
 SOTA, broad real superiority or100MP/10s.

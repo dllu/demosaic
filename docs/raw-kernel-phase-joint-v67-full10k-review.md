@@ -1,9 +1,12 @@
 # V67: completed original 10,000-update quality review
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 V67 gains **1.36945 dB over its 2,000-update checkpoint** on photographs, but
 still trails mature V60 by **1.95519 dB**. Native crops retain missing cords,
 soft foliage and weak stripes; bright saturated color regresses from first2k.
-**No promotion; V43 remains the working reference.** The original budget is
+**No promotion; V43 was the reference for this experiment.** The original budget is
 complete. This does not prove convergence.
 
 [All scores, comparisons, state/artifact audits and 28 actual native views](results/raw-kernel-phase-joint-v67-full10k-review.json).

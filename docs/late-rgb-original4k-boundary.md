@@ -1,5 +1,8 @@
 # Both late RGB arms completed their original4000 budgets
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 V90/global and V91/spatial each completed4,000 native256/B16 CUDA updates from
 the same V63 original20k EMA. Their exact controller and workers exited. The
 frozen final-review reader independently accepts both original endpoints.
@@ -41,5 +44,4 @@ Independent saved-array checks, complete native boards and actual viewing
 must precede interpretation of the new scores. Reports still require at least
 two native noisy/restored/exact-GT triplets per model and the cached standing
 GFX sky/building/foliage/fence and highlight comparisons, with the independent
-ISO100 capture labeled as a qualitative reference. V43 remains the working
-reference. SOTA, decisive native superiority and100MP/10s remain unmet/unproven.
+ISO100 capture labeled as a qualitative reference. V43 was the reference for this study. SOTA, decisive native superiority and100MP/10s remain unmet/unproven.

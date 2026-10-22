@@ -1,6 +1,9 @@
 # Smaller measured-CFA loss: first 1,000 updates
 
-**Stop V62 here and retain V43 as the working reference.** Reducing the loss
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
+**Stop V62 here and Use V43 as the comparator for this experiment.** Reducing the loss
 weight from .01 to .001 recovers much of V61's accuracy, but does not give a
 useful overall improvement over the matched loss-off V60 control. Photo PSNR
 is tied, photo SSIM and unseen-camera RAW accuracy fall, and weak detail remains

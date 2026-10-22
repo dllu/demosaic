@@ -1,5 +1,8 @@
 # Bank-gradient study: original budgets complete, review closed
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 V82 connected completed its original4,000 updates and exited successfully.
 V83 detached later stopped at the system-memory guard and saved step2,999.
 A [separately frozen recovery](bank-detachment-memory-recovery.md) restored that
@@ -49,7 +52,7 @@ photo/camera/analytic/color/native review will evaluate both final EMAs freshly.
 That review includes at least two100% exact-GT crop triplets per checkpoint and
 cached GFX sky/building/foliage/fence/lights with independent ISO100-reference
 labels. Failed gates keep the study closed without automatic extension.
-V43 remains the working reference and README pixels remain unchanged.
+V43 was the reference for this experiment and README pixels remain unchanged.
 
 The original controller's failed status and logs remain at
 `.cache/experiments/bank-detachment-v82-v83-original4k-v1/`.

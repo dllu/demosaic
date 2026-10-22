@@ -1,11 +1,14 @@
 # Input-CFA channel gain is rejected on photographs and the standing GFX scene
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The completed full427 test loses **1.10760dB** photo sRGB PSNR,95% source
 interval **[−1.16876,−1.03704]**, and.005190 SSIM against the unchanged V63
 parent. Both fixed source-exclusion subsets confirm the loss. A global GFX fit
 also turns sky/building purple and removes green foliage. **Reject both the
 native256 correction and the global-frame policy; do not integrate either.**
-V43 remains the working reference and inference defaults stay unchanged.
+V43 was the reference for this experiment and inference defaults stay unchanged.
 
 [Complete photo statistics, independent audits, source sensitivities and all52
 actually viewed native cells](results/mature-input-CFA-gain-complete-v1.json).
@@ -236,5 +239,5 @@ The fixed formula is not pursued further.39 focused source/global/closure tests
 pass, with the original seven input-fit/shared-forward checks retained.
 No new corrected full-frame RGB16 export or end-to-end timing is claimed. Ancestor scene-series exposure is not
 undone by new source exclusions. One seed and development data do not establish
-SOTA or decisive real-photo superiority. V43 remains the working reference;
+SOTA or decisive real-photo superiority. V43 was the reference for this experiment;
 the protected-final scenes remain closed.

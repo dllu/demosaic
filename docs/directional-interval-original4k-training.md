@@ -1,9 +1,12 @@
 # Both directional/interval arms complete the original budget
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 V78 and V79 have each completed all 4,000 planned updates and their training
 owners have exited successfully. The independent boundary stage passed and the
 fixed quality evaluation has started. This verifies training completion; image
-quality and model eligibility remain pending. V43 stays the working reference.
+quality and model eligibility remain pending. V43 was the reference for this experiment.
 [Bound checkpoints, source/input/RNG checks and retained states](results/directional-interval-original4k-training-complete-v1.json).
 
 | Arm | Interval weight | Updates | Example draws | Final checkpoint SHA256 |

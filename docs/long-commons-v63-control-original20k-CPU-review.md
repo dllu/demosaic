@@ -1,12 +1,15 @@
 # V63 original 20k endpoint: interim native CPU comparison
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The control completed its original 20,000-update schedule. On eight fixed saved
 observations, progress from step 4,000 is mixed: the fabric photograph regresses,
 the building photograph improves slightly, and both selected uniform colors
 improve. Fine fabric cords remain missing; GFX building, foliage and fence detail
 remain soft. **Do not promote this endpoint from these selected cases.** The
 expanded-data arm is now training; the full two-arm benchmark/hue/real-camera
-review remains pending. V43 remains the working reference.
+review remains pending. V43 was the reference for this experiment.
 
 [Executed comparisons, arrays, independent audits, native views and full metadata](results/long-commons-v63-control-original20k-CPU-review.json).
 [Original matched schedules and queued full review](long-commons-v63-v64-full20k.md).

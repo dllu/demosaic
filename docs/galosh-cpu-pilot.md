@@ -1,10 +1,12 @@
 # GALOSH: small CPU reference comparison
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The pinned GALOSH reference removes much of the grain in the two selected
 photographs and four GFX contexts, but loses fabric cords, blurs facade/leaves
 and substantially weakens fence contrast. Sky retains low-frequency variation.
-**No promotion or full benchmark follows from this pilot.** V43 remains the
-working reference and V67 continues its separate, unchanged training experiment.
+**No promotion or full benchmark follows from this pilot.** V43 was the reference for this study and V67 continues its separate, unchanged training experiment.
 
 [All inputs, hashes, scores, audits and12 actual native-view receipts](results/galosh-cpu-pilot.json).
 

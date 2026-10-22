@@ -1,10 +1,13 @@
 # Spectral4k: small photo gain; camera and weak-detail criteria fail
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 Both original4,000-update budgets and the complete review are finished. V89's
 matched photographic gain over V88 is **+.00776dB**, source-bootstrap95% interval
 **[+.00695,+.00851]**, with **−.000148 SSIM**. Both fixed weak-carrier gains fall
 short of+.05, and both endpoints lose known-camera performance versus V63.
-Neither is promoted or extended. V43 remains the working reference.
+Neither is promoted or extended. V43 was the reference for this experiment.
 
 All eight fixed native boards were actually inspected before interpreting the
 new quality statistics:81 source triplets/125 unchanged160px cells. Final

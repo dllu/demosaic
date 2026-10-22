@@ -1,8 +1,11 @@
 # V95 follow-up: preserve weak detail while improving saturated fields
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The [V93–V95 review](v43-curated-original20k-review.md) finds clear photographic
 and weak-detail gains, with saturated high-noise color errors and uncertain
-unseen-camera gains still preventing promotion. Keep V43 as the working reference
+unseen-camera gains still preventing promotion. Use V43 as the comparator for this experiment
 and continue quality work with its architecture. This is an ongoing matched training
 comparison; it has no new held-out quality result yet.
 

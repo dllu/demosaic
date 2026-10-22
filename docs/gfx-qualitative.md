@@ -1,40 +1,54 @@
-# GFX100S real-photo qualitative test
+# GFX100S qualitative comparisons
 
-**DSCF3879 (ISO6400) and DSCF3880 (ISO100) are the standing pair from now on.**
-They replace DSCF3842/DSCF3883. The December 31, 2023 train/platform scene and
-its siblings remain evaluation-only and excluded from training.
+**V84 is the current development baseline.** Compare it below with V43, V95
+and RawNIND on the standing train/platform scene. V84/V95 produce more coherent
+fence strands and cleaner building rails than RawNIND in these crops. V84 keeps
+smooth sky and useful leaf shapes; fine foliage texture and saturated-light
+boundaries remain areas to improve. The models are close in some regions, so
+use this scene alongside the photographic/camera results in the
+[current model guide](current-model.md).
 
-Both RAFs are cached in `.cache/gfx-qualitative-20231231/` (230 MiB total).
-[The cache receipt](results/gfx-3879-3880-cache.json) records original and cached
-paths, byte counts, matching SHA-256 hashes and unchanged source metadata.
-Subsequent tests read the local cache, leaving the source hard drives idle.
-Private RAWs and full-resolution renders are not checked into Git.
+![Native sky, building, foliage and fence comparisons](images/current-quality/gfx-comparison.png)
 
-The [retained V43 review](native-corpus-2k-review.md) contains the current README
-examples and verified full-frame RGB16 outputs. A later
-[CPU context check of completed fresh no-context10k versus V43](gfx-none10k-cpu-context-review.md)
-adds the same four fixed regions, both RawNIND calibrations and saved float
-contexts without a new promotion. Its full matched S/B/102 MP review remains
-pending. The [V34/V36 augmentation review](geometry-corpus-v34-v36-review.md) and
-the V16 gallery below remain historical comparisons using the same regions.
+Columns: noisy Malvar, V43, **V84**, V95, RawNIND with input-only per-CFA-channel
+gain, separate ISO 100 reference. Each cell is 160×160 sensor pixels, never resized.
+The learned-model crops use IEEE FP32 with 512px contexts. Shared conditioning:
+shot `.0014635775921166604`, read variance `1.0715704128646712e-6`; display ×4
+(+2 EV), with the noisy capture's WB and camera matrix shared across methods.
+PNG previews are 8-bit sRGB; this does not change restoration/output precision.
 
-Both captures are 11662×8746 Bayer images from the GFX100S and 55 mm lens:
+[V84 foliage triplet and metadata](images/current-quality/gfx-V84-foliage.json) ·
+[V84 fence triplet and metadata](images/current-quality/gfx-V84-chain-link-f.json) ·
+[all crop/checkpoint/source metadata](images/current-quality/manifest.json).
+Each method retains its own restored pixels. Shared source coordinates, display
+settings and reference pixels are checked by the gallery renderer. Its JSON
+also records the single V95 sky noisy-preview channel that differs by 1 RGB8
+level; no prediction or reference pixels are adjusted for presentation.
+
+## Capture and crop protocol
+
+DSCF3879 ISO 6400 and DSCF3880 ISO 100 are cached in
+`.cache/gfx-qualitative-20231231/` (230MiB). The
+[cache receipt](results/gfx-3879-3880-cache.json) records original/cache paths,
+matching SHA256 hashes and source metadata. Subsequent testing reads the local
+cache. Originals remain read-only; the scene and its siblings stay outside
+training. Private RAWs and full-resolution renders stay outside Git.
+
+Both captures are 11662×8746 Bayer images from the GFX100S and 55mm lens:
 
 | Capture | Time | ISO | Aperture | Shutter |
 | --- | --- | ---: | ---: | ---: |
-| DSCF3879 | 17:13:27 | 6400 | f/1.7 | 1/240 s |
-| DSCF3880 | 17:17:05 | 100 | f/5.6 | 3 s |
+| DSCF3879 | 17:13:27 | 6400 | f/1.7 | 1/240s |
+| DSCF3880 | 17:17:05 | 100 | f/5.6 | 3s |
 
-The frames have nearly identical framing and are **3 minutes 38 seconds apart**.
-Aperture, depth of field, moving subjects, lights and clouds still differ.
-The low-ISO image is a qualitative reference, **not exact GT**; no PSNR/SSIM
-is computed against it. Its higher sharpness is partly an aperture difference.
+They are 3min38s apart. Aperture, depth of field, moving subjects, clouds and
+LED scan differ. The sharper ISO 100 exposure is a qualitative reference,
+**not exact GT**. No pixelwise PSNR/SSIM is computed against it.
 
-Four 160×160 regions were chosen from the input/reference images before viewing
-model output. The reference receives only an integer crop-coordinate offset,
-selected by normalized green correlation over a 512-pixel context (±12 pixels).
-The featureless sky uses the same coordinates. No displayed pixels are warped,
-resized, sharpened or adjusted independently.
+Regions were chosen from input/reference images before viewing model outputs.
+Only integer crop offsets are used: normalized-green correlation over a 512px
+context, ±12px; featureless sky uses identical coordinates. Displayed pixels
+are never warped, resized, sharpened or independently exposure-adjusted.
 
 | Region | DSCF3879 top-left (x,y) | DSCF3880 top-left (x,y) |
 | --- | --- | --- |
@@ -43,104 +57,42 @@ resized, sharpened or adjusted independently.
 | Foliage | (8890,5570) | (8890,5570) |
 | Chain-link fence | (2240,6000) | (2241,6000) |
 
-In the historical V16 comparison below, each model restores the entire
-101.996 MP frame before cropping. V16 step5000
-uses FP16 neural inference with its default IEEE FP32 RGB refinement branch.
-RawNIND uses publisher normalization, signed/unclipped input, observed-CFA
-least-squares gain and IEEE FP32. Both use 512×512 tiles, overlap 64, batch 4,
-and FP32 blending. All panels share the noisy capture's white balance, color
-matrix and +2 EV display exposure. The input-only noise-fit result and actual
-conditioning are recorded in the [full report receipt](results/gfx-3879-3880-v16-full.json).
-The ISO100 reference is LibRaw AHD calibrated against its own CFA samples to
-match normalized sensor units. PNGs are 8-bit sRGB previews; restoration and
-full-frame TIFF outputs retain floating point/16-bit precision.
+## Reproduce and extend the comparisons
 
-Foliage, V16 then RawNIND:
+Rebuild the shipped gallery without inference or access to private RAWs:
 
-![Foliage: noisy ISO6400, V16, separate ISO100 reference](images/gfx3879-foliage-v16.png)
+```bash
+source scripts/env.sh
+PYTHONPATH=src:scripts uv run --no-sync python scripts/render_quality_comparisons.py \
+  docs/images/current-quality/manifest.json --noisy-preview-tolerance-dn 1
+```
 
-![Foliage: noisy ISO6400, RawNIND, separate ISO100 reference](images/gfx3879-foliage-rawnind.png)
-
-Chain-link fence, V16 then RawNIND:
-
-![Fence: noisy ISO6400, V16, separate ISO100 reference](images/gfx3879-chain-link-fence-v16.png)
-
-![Fence: noisy ISO6400, RawNIND, separate ISO100 reference](images/gfx3879-chain-link-fence-rawnind.png)
-
-Overcast sky, V16 then RawNIND:
-
-![Sky: noisy ISO6400, V16, separate ISO100 reference](images/gfx3879-overcast-sky-v16.png)
-
-![Sky: noisy ISO6400, RawNIND, separate ISO100 reference](images/gfx3879-overcast-sky-rawnind.png)
-
-Building detail, V16 then RawNIND:
-
-![Building: noisy ISO6400, V16, separate ISO100 reference](images/gfx3879-building-detail-v16.png)
-
-![Building: noisy ISO6400, RawNIND, separate ISO100 reference](images/gfx3879-building-detail-rawnind.png)
-
-Open each PNG at 100%. One sensor pixel occupies one PNG pixel. These are
-qualitative diagnostics; the project's quality goal remains open.
-
-The [stabilized Gaussian-prior review](stabilized-gaussian-review.md) adds matched
-512px-context foliage/fence comparisons with independent-phase and eight-step
-joint RGB priors. Joint RGB preserves more fence structure, but still softens
-leaves and leaves isolated colored dots. Those context crops are separate from
-the full-frame V16/RawNIND results on this page.
-
-That review also includes [full-frame Joint8 comparisons](stabilized-gaussian-review.md#full-102-mp-gfx-output)
-and verified RGB16 files. The fence advantage survives full-frame blending,
-but restoration takes 967.31 seconds in a shared-machine run and foliage remains
-soft. This is an expensive experimental reference; it is not the deployed model.
-
-Full 11662×8746×3 unsigned16 linear-camera-RGB and ICC sRGB TIFFs are saved in
-`/mnt/external/demosaic/evaluation/gfx-3879-3880-v16-5k-full/` as
-`restored-{0,1}-{linear16,srgb16}.tiff` (0 = V16, 1 = RawNIND).
-The receipt records output hashes, frozen model/source identities, display
-settings, exact ROI coordinates and restoration timings. All four TIFFs were
-verified as RGB uint16 with 16-bit sample tags; both sRGB files carry ICC profiles.
-Restoration took 36.39 s for V16 and 19.88 s for RawNIND, excluding decoding,
-model loading, rendering and TIFF encoding. This single shared-machine run is
-not an idle benchmark; the 10-second target remains unmet.
-
-Both methods lose some fine mesh and foliage detail. V16 also desaturates the
-foliage and leaves more color variation in the sky; the sharper f/5.6 reference
-should not be used to assign all capture differences to the restorers.
-
-To reproduce or test another checkpoint using the cached files:
+For another checkpoint, restore the same cached contexts and preserve the
+sidecar metadata:
 
 ```bash
 source scripts/env.sh
 uv run --no-sync python scripts/report_raw_pair.py \
-  configs/gfx-qualitative-20231231.json /path/to/checkpoint.pt \
+  configs/gfx-qualitative-20231231.json \
+  /mnt/external/demosaic/models/v84-original20000.pt \
   --rawnind /mnt/external/demosaic/references/rawnind \
-  --full-frame \
+  --rawnind-gain-modes cfa-ls cfa-channel \
   --output /mnt/external/demosaic/evaluation/gfx-next-review
 ```
 
-The output contains `report.md`, eight native PNG triplets, complete 16-bit
-TIFFs, source code, frozen weights and a JSON receipt. Coordinates are in the
-unrotated visible sensor. Omit `--full-frame` for the faster 512-pixel-context
-crop-only check. The config and `AGENTS.md` preserve this pair and all four
-regions for future reports.
+Use a fresh output directory. `--full-frame` additionally restores the full
+image and writes linear/sRGB16 TIFFs before cropping. Distinguish full-frame
+blended results from context-only comparisons. See
+[usage](usage.md) and the [16-bit/full-frame measurement record](mature-cudnn-fullframe.md).
+Current image comparisons should include useful new versions as they appear;
+a diagnostic tradeoff does not require keeping an older gallery indefinitely.
 
-Historical DSCF3842/DSCF3883 results remain unchanged: [V16 receipt](results/gfx-refiner-wide-v16-5k-full.json),
-[V15/RawNIND receipt](results/gfx-refiner-v15-5k-full.json) and
-[earlier crop-only receipt](results/gfx-20231231-native.json).
-The small GFX crops are from the user's own photographs, with permission
-recorded in `PROMPT.md`.
-
-The [V32/V33 review](low-lr-paired-v32-v33-review.md#standing-gfx-test-and-full-102-mp-files)
-adds the same four native regions from complete blended102MP restorations.
-All eight V30/V32/V33/RawNIND RGB16 files were verified. V32/V33 took35.42/35.77s
-in that successive shared-machine run; foliage remains soft and mesh irregular.
-The README now shows the V33 foliage/fence triplets. ISO100 remains a separate
-qualitative reference, not GT.
-
-`report_raw_pair.py --rawnind-gain-modes cfa-ls cfa-channel` can now include
-both input-only RawNIND calibrations, with separate gain adapters sharing the
-same upstream weights. The default remains the historical global CFA-LS.
-Receipts record each gain mode and the common weight hash. The new full102MP
-V32/V35 step2000 review includes both variants; all eight full-frame RGB16 files
-are verified in the [completed review](corpus-v32-v35-2k-review.md). The README
-now shows V32-2k full-frame foliage/fence. Detail loss and colored points remain.
+[Colored-light cases](gfx-highlight-qualitative.md) ·
+[V84/V85 quality results](native-data-original20k-review.md) ·
+[recent ADC/ISO 100 and GFX comparisons](v95-adc-training-quality-review.md).
+Older [V16 full-frame evidence](results/gfx-3879-3880-v16-full.json),
+[stabilized Gaussian-prior results](stabilized-gaussian-review.md) and
+[V32/V33 full-frame results](low-lr-paired-v32-v33-review.md) retain their original
+measurements. The timestamped [diary](../diary/index.md) records their history;
+this page presents the current useful comparisons. The crops use the user's
+own photographs with permission recorded in `PROMPT.md`.

@@ -1,5 +1,8 @@
 # V82/V83: fixed bank-input gradient comparison
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 This fresh comparison tests whether stopping the bank descriptor's gradient
 into the RGB base reduces detail loss during fine-tuning. The
 [fixed-weight gradient measurements](directional-bank-gradient-routing.md)
@@ -90,4 +93,4 @@ Keep the representative working README crops until a stronger model is verified.
 An eligible model still needs its own complete101.996MP run, linear/sRGB16
 export and quantizer checks, native visual inspection and cold/warm timing.
 This development comparison alone cannot establish SOTA, broad real superiority
-or the100MP/10s goal. V43 remains the working reference during the experiment.
+or the100MP/10s goal. V43 was the reference for this experiment during the experiment.

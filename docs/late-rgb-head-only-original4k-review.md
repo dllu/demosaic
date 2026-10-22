@@ -1,10 +1,13 @@
 # V92 original4000: freezing the common path does not improve overall quality
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 V92 fails all seven primary criteria and the separate weak-detail criteria.
 Against its V63 parent, photo PSNR falls **.16213dB**, unseen-camera CFA PSNR
 falls **.34470dB**, and photo SSIM falls **.001057**. The original4000-update
 run stops here, without promotion, extension or a V92 full-frame run.
-V43 and the README examples remain the working experimental reference.
+V43 and the README examples were the reference for this experiment.
 
 Freezing preserves ADC response better than historical V90: all192 original
 ADC layout/draw slots pass the individual loss limit. That does not translate

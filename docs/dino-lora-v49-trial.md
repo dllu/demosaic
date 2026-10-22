@@ -1,8 +1,10 @@
 # First trained DINO low-rank trial
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 **Completed and stopped at1000: [the full review](dino-lora-v49-review.md)
-rejects this rank4 recipe.** Unseen primary/photo PSNR regress; V43 stays the
-photographic reference.
+rejects this rank4 recipe.** Unseen primary/photo PSNR regress; V43 was the reference for this study.
 
 V49 tests the [verified query/value adapters](dino-low-rank-adaptation.md) at
 rank4 against the completed V47 control. There are73,728 new parameters in24

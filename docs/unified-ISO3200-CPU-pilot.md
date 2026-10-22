@@ -1,5 +1,8 @@
 # Publisher ISO 3200 reference on six saved inputs
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The transferred publisher default retains substantial grain in both photos and
 the GFX sky, with textured artifacts around fine structures. These selected
 views do not establish an overall improvement over V43. Keep V43 as the working
@@ -110,5 +113,4 @@ The original model, input and RNG remain unchanged; the first photo repeats
 exactly. CUDA remains uninitialized. A derived metadata record clarifies that
 scores use publisher-quantized RGB; original producer records, arrays and pixels
 stay intact. There is no GPU parity, full-frame speed or broad quality result.
-The top-level README retains V43, and the matched 160k-example review remains
-the next main model decision.
+At this pilot stage, the README retained V43 and the matched 160k-example review was pending.

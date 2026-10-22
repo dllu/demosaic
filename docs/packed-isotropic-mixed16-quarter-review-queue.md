@@ -1,5 +1,8 @@
 # Queued mixed16 review at160,000 examples
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The [complete review](packed-isotropic-mixed16-quarter-review.md) finished after both
 [continuations finished](packed-isotropic-mixed16-quarter-training.md) at10k /
 160,000 examples and their exact owners exited. The independent full-state,
@@ -14,7 +17,7 @@ covers16 original/additional analytic triplets. All4,704 fresh FP32 hue
 predictions, supplementary highlights, statistical/artifact checks and parent
 progress comparisons have completed. All146 triplets/202 native cells were
 actually inspected and matched to final reports; the owner exited successfully.
-Neither checkpoint is promoted. The decision keeps V43 as the working reference
+Neither checkpoint is promoted. The original decision kept V43 as its reference
 and selects CUDA profile/EMA analysis before the next training budget.
 The requirements below describe the preserved execution plan.
 

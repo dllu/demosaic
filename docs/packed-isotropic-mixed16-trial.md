@@ -1,5 +1,8 @@
 # Fresh mixed16 RAW quality trial
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The [frozen V72/V73 trial](results/packed-isotropic-mixed16-trial-launch-v1.json)
 uses the full original Commons/native/paired training mixture. Both genuine
 12-update prefixes passed model/EMA/Adam, common initial state/RNG, actual
@@ -10,7 +13,7 @@ pass; both training workers/controller have exited. The
 [completed full FP32 review](packed-isotropic-mixed16-first32000-review.md)
 finds +0.50510/+0.41568dB photo gains over older equal-example controls, but
 strong residual grain and151.54/169.39s FP32 full-frame restores prevent
-promotion. V43 remains the working reference. The earlier
+promotion. V43 was the reference for this experiment. The earlier
 [matched camera and native-crop interim review](packed-isotropic-mixed16-matched-camera-interim.md)
 finds only small DINO gains (+0.01779/+0.03839dB measured-CFA known/unseen),
 with both new arms substantially behind mature models and RawNIND.
@@ -93,7 +96,7 @@ includes full held-out/camera/analytic/color checks, at least two native100%
 noisy/denoised/exact-synthetic-GT crop triplets per model, and standing GFX
 foliage/fence comparisons with the ISO100 capture labeled an independent
 qualitative reference. There is no automatic extension, protected-final scoring
-or promotion. Existing V43 README examples remain the working reference.
+or promotion. The V43 README examples were retained at the time.
 
 The [frozen quality-review queue](results/packed-isotropic-mixed16-review-queue-v1.json)
 waited for the exact training controller and final child to exit successfully.

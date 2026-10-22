@@ -1,8 +1,11 @@
 # Mixed16 review at32,000 examples
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 V72/V73 improve full427-photo PSNR by **0.50510/0.41568dB** over their older
 equal-example controls, but remain visibly grainy and far below mature models.
-Neither is promoted; V43 stays the README working reference. The matched
+Neither is promoted; V43 was the README reference for this experiment. The matched
 DINO photo gain is only0.00493dB. Full-frame FP32 restores take151.54/169.39s,
 missing the100MP/10s target. SOTA and decisive real-photo superiority remain
 unmet/unproven.
@@ -51,7 +54,7 @@ registered low-noise measured CFA samples. AHD RGB is an auxiliary reference,
 | V73 new2k /32k examples | 28.18088 | .841624 | 47.03053 | 43.61822 |
 | Original V71 RAW8k /32k examples | 27.67085 | .815784 | 44.18253 | 41.43805 |
 | Original V70 DINO8k /32k examples | 27.76520 | .819797 | 44.35326 | 41.64024 |
-| V43 working reference | 34.89933 | .957125 | 54.23334 | 53.80629 |
+| V43 study comparator | 34.89933 | .957125 | 54.23334 | 53.80629 |
 | V63 mature DINO | 35.93298 | .963290 | 54.20368 | 53.84318 |
 | RawNIND global observed-CFA gain | 26.69578 | .790028 | 54.06860 | 53.56220 |
 | RawNIND channel observed-CFA gain | 26.68357 | .789899 | 54.08474 | 53.76822 |

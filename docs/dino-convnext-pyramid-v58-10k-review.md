@@ -1,11 +1,14 @@
 # DINOv3 ConvNeXt pyramid: completed 10,000-update review
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 ConvNeXt reaches **35.54954 dB** on 427 synthetic-noise photos, effectively tied
 with no-context (35.55039). It gains .02492 dB on known-camera measured CFA and
 loses .03866 dB on unseen cameras relative to that control. Fine texture remains
 soft, and the [mature saturated-flat diagnostic](mature-color-flat-review.md)
 finds large selected color errors despite neutral flats looking clean.
-**No promotion: V43 stays the README working reference.**
+**No promotion: V43 was the README reference for this experiment.**
 
 [Complete results, provenance, audits and 120 native crop receipts](results/dino-convnext-pyramid-v58-10k-review.json).
 [Architecture](dino-convnext-pyramid.md), [first1k review](dino-convnext-pyramid-v58-1k-review.md),

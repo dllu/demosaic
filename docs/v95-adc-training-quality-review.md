@@ -1,6 +1,9 @@
 # ADC training: better ADC color, failed overall quality
 
-V43 remains the working reference. The completed full photo panel finds a
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
+V43 was the reference for this experiment. The completed full photo panel finds a
 positive V99−projected-V98 PSNR gain of **.02880 dB**, below the fixed .03 dB
 requirement, with lower ADC photographic SSIM. The photo promotion criteria
 therefore fail. Both endpoints also lose fine fabric cords and shift its color

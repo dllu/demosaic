@@ -1,5 +1,15 @@
 # Data, training and inference
 
+## Current quality model
+
+Use **V84 final20k** as the development baseline:
+`/mnt/external/demosaic/models/v84-original20000.pt`. It uses DRUNet RGB
+restoration and frozen DINOv3 ConvNeXt-Tiny features. The
+[current model guide](current-model.md) records its hash, comparisons and
+alternatives; [current training](quality-first-training.md) applies the cleaned
+corpus and fine-detail recipe to this architecture. V43-specific measurements
+below retain their checkpoint labels and do not determine today's baseline.
+
 ## Environment and storage
 
 Run commands from the repository root after `source scripts/env.sh`. This keeps

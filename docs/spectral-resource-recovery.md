@@ -1,10 +1,13 @@
 # Spectral trial: operational disk-reserve recovery
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 Control training has resumed from the verified1000 state. The published
 observation reaches1050 and exactly reproduces the earlier recorded1025/1050
 inputs, losses, gradient norms and LRs. The original4000 schedule remains fixed.
 The [full final review is queued](spectral-review-preparation.md); model quality
-and actual native viewing remain pending. V43 remains working.
+and actual native viewing remain pending. V43 was the comparator during this study.
 
 [Recovery evidence](results/spectral-resource-recovery-v2.json).
 [Immutable operational addendum](spectral-root-reserve-addendum.md).

@@ -1,10 +1,12 @@
 # Joint RAW reconstruction: completed V67 review at2,000
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 V67 makes a substantial denoising gain over its V66 initializer: **photo+2.81345dB**,
 known/unseen measured-CFA+6.07209/+7.01233dB. Native grain decreases, but cords remain
 missing and real detail stays noisy/soft. Photo32.33964dB still trails mature V60
-by3.32464dB. Weak carriers are strongly attenuated. **No promotion; V43 remains the
-working reference.** This is2,000 of the original10,000 joint updates, not convergence.
+by3.32464dB. Weak carriers are strongly attenuated. **No promotion; V43 was the reference for this study.** This is2,000 of the original10,000 joint updates, not convergence.
 
 [All48 comparisons, hashes, audits and26 actual native-view receipts](results/raw-kernel-phase-joint-v67-first2k-review.json).
 [Declared stage, recipe and genuine CPU/CUDA checks](raw-kernel-phase-joint-v67.md).
@@ -149,7 +151,7 @@ relaxed. All26 new native PNGs were actually viewed.
 
 ## Decision and remaining original budget
 
-Keep V43 as working reference. V67 is a large improvement over its noisy V66
+Use V43 as the comparator for this experiment. V67 is a large improvement over its noisy V66
 initializer, but has not closed mature V60's primary-score gaps or the native
 quality deficit. This2k checkpoint is not convergence. Next verify a continuation
 from its complete model/EMA/AdamW/RNG state and finish the original remaining8,000

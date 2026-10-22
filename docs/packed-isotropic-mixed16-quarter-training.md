@@ -1,11 +1,14 @@
 # Mixed16 continuation to160,000 examples
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 Both isolated continuations have completed after the
 [complete32k-example quality review](packed-isotropic-mixed16-first32000-review.md).
 V72 no-DINO and V73 DINO each stopped at10,000 updates/160,000 examples.
 Their training workers and controller have exited. The
 [complete matched quality review](packed-isotropic-mixed16-quarter-review.md)
-is finished; neither is promoted and V43 remains the working reference. The
+is finished; neither is promoted and V43 was the reference for this experiment. The
 [completed-pair receipts and log check](results/mixed16-quarter-completed-training-CPU-v1.json)
 and [independent full-state boundary audit](results/mixed16-quarter-training-boundary-v1.json)
 record both endpoints and the actual handoff. The earlier

@@ -1,5 +1,8 @@
 # Fixed numerical checks for the directional study
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The [V78/V79 protocol](directional-interval-v78-v79.md) fixed these criteria
 before training. A separate checker now applies them to the final primary
 statistics without rounding. It does not change the experiment or decide
@@ -54,5 +57,4 @@ This is an execution milestone on the original schedule, not a quality gate.
 Both final4k runs and the [complete review](directional-interval-original4k-review.md)
 have now finished. The original checker rejects both arms' camera criteria and
 the matched interval photo-benefit criterion. Full81-triplet/125-cell review
-also retains texture/highlight limitations. No extension/promotion; V43 stays
-the working reference.
+also retains texture/highlight limitations. No extension/promotion; V43 was the reference for this study.

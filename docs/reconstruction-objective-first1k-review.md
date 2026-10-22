@@ -1,10 +1,13 @@
 # V74/V75 first1k: small PSNR gain, continuation gate fails
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The complete FP32 review finds **+.02026 dB** photographic PSNR for log-MSE
 (V75) over its matched control (V74), source-bootstrap95% interval
 **[+.00651,+.03618]**. This is below the **predeclared .03 dB continuation
 minimum**. Both stop at1,000 updates; neither is promoted or extended through
-the remaining3,000 updates. V43 remains the working reference.
+the remaining3,000 updates. V43 was the reference for this experiment.
 
 Camera means improve slightly, with an unseen-scene interval crossing zero.
 Photographic SSIM, chroma and highlight-boundary errors move slightly against
@@ -60,7 +63,7 @@ CFA samples; independent AHD RGB is not exact GT.
 | V74 control1k |35.94016|.963249|54.20562|53.83642|
 | V75 log-MSE1k |35.96041|.963194|54.27080|53.87060|
 | V63 original20k parent |35.93298|.963290|54.20368|53.84318|
-| V43 working reference |34.89933|.957125|54.23334|53.80629|
+| V43 study comparator |34.89933|.957125|54.23334|53.80629|
 | RawNIND global observed-CFA gain |26.69578|.790028|54.06860|53.56220|
 | RawNIND channel observed-CFA gain |26.68357|.789899|54.08474|53.76822|
 | Bilinear |27.55481|.811702|44.10599|41.41325|
@@ -145,7 +148,7 @@ demosaiced RGB reference. Reference noise and registration remain limitations.
 | V74 control1k |54.20562|53.83642|
 | V75 log-MSE1k |54.27080|53.87060|
 | V63 original20k parent |54.20368|53.84318|
-| V43 working reference |54.23334|53.80629|
+| V43 study comparator |54.23334|53.80629|
 | RawNIND global observed-CFA gain |54.06860|53.56220|
 | RawNIND channel observed-CFA gain |54.08474|53.76822|
 

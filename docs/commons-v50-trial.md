@@ -1,5 +1,8 @@
 # Test the larger Commons corpus with the retained architecture
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 **Completed at1000: [the full review](commons-expanded-v50-review.md)
 stops this checkpoint after known-primary/photo losses.** The frozen extension
 remains available; source count alone is not a quality result.
@@ -30,8 +33,7 @@ per-step data RNG. The full first-gate review then includes known/unseen paired
 data,427 photos/16 procedural sources, two exact synthetic-GT native crops and
 full102MP GFX sky/building/foliage/fence with verified RGB16 files. Reuse the
 cached V47 evaluator only after exact source/protocol/classical-case checks.
-More data alone does not establish a gain. V43 step2000 remains the current
-photographic experimental reference until a complete comparison supports a change.
+More data alone does not establish a gain. V43 step2000 was the photographic comparator for this study.
 
 The reviewed4× corpus is now complete: all10,558 new checksums verify and
 the active manifest SHA256 is

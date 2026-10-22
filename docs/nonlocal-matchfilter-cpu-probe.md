@@ -1,5 +1,8 @@
 # A recent RAW denoiser: genuine weights and a small CPU comparison
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The authors' released Nonlocal Match-Filter runs on our two saved photographic
 observations through its actual native CPU operator. Fine fabric cords and
 cloud wisps remain soft. This is a preliminary comparison of **RAW denoising
@@ -125,4 +128,4 @@ labeled cascade outputs and references. GPU numerical work waits for the owned
 V58 workflow to exit. The active environment and training run are unchanged;
 all preparation artifacts are in authorized external storage. The two CPU
 forwards are neither a full-frame speed benchmark nor evidence for the 10-second
-target. The README's V43 reference remains fixed.
+target. V43 was the README reference for this study.

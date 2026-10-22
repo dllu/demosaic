@@ -1,9 +1,12 @@
 # V78 completes its original training budget; V79 is running
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 V78 completed all 4,000 planned updates and its worker exited successfully.
 V79 then started from the same genuine V63 EMA with fresh optimizer/EMA/RNG,
 as specified in the [fixed study](directional-interval-v78-v79.md). Final quality
-review waits for both arms. V43 remains the working reference.
+review waits for both arms. V43 was the reference for this experiment.
 [Checkpoint hashes, retained states and handoff evidence](results/directional-v78-original4k-training-handoff-v1.json).
 
 The V78 final checkpoint SHA256 is

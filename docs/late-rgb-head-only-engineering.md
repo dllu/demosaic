@@ -1,5 +1,8 @@
 # Head-only training engineering checks
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The opt-in [V92 training-scope experiment](late-rgb-head-only-v92.md) freezes
 the genuine V63 common path while learning the existing global late RGB head.
 This document records execution/state checks, not a quality or speed result.
@@ -109,4 +112,4 @@ evaluation. Full quality evaluation and actual native/GFX viewing remain.
 The completed V90 is a fixed historical
 exploratory reference, not a freshly randomized control. Engineering success
 does not establish improved photos, SOTA, decisive real-photo superiority or
-100MP/10s. Working V43 and representative README crops remain unchanged.
+100MP/10s. V43 and the README crops were unchanged during this study.

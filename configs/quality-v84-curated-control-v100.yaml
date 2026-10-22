@@ -1,0 +1,77 @@
+amp: true
+augmentation_downsample: 2
+batch_size: 16
+broad_camera: true
+camera_supervision: sensor-valid-v1
+channels_last: true
+checkpoint_every: 1000
+cpu_threads: 4
+data_seed_per_step: true
+device: cuda
+experiment_notes: V84 DRUNet/official frozen DINOv3 ConvNeXt-Tiny quality continuation
+  on the curated88484 Commons cohort. Matched10k/B16/native256/seed59, LR3e-6 and
+  fresh AdamW/EMA. Preserve the V84 broad flat palette, native128 and paired32. V100
+  keeps the original augmentation policy; V101 tests the fine-detail package (zero
+  Commons/native PSFs, weak synthetic detail, photographic contrast attenuation and
+  conditional5% reviewed-ROI sampling). No architectural change. Evaluate useful overall
+  gains and show current native comparisons; report individual tradeoffs rather than
+  requiring every diagnostic to improve.
+flat_chroma_stops: 8
+flat_fraction: 0.1
+log_every: 25
+lr: 3.0e-06
+manifest: /home/dllu/proj/demosaic/.cache/quality-first-20261020/curated-corpus-v1/manifest4-large.jsonl
+min_available_gb: 24
+model:
+  camera_conditioning: true
+  dino: true
+  dino_feature_fusion: convnext-pyramid
+  dino_model: facebook/dinov3-convnext-tiny-pretrain-lvd1689m
+  dino_revision: 10d30274b4d445111e2d5bf75ac93bbd94db274b
+  physical_anchors: true
+  physical_fp32: true
+  restoration_backbone: pretrained-rgb
+  rgb_hidden_autocast: false
+  rgb_middle_skip_fp32: true
+  rgb_processing_scale: 1
+  variance_stabilization: true
+  width: 64
+multiscale_sensor_weight: 0
+noise_free_fraction: 0.1
+normalized_sensor_weight: 0
+paired_fraction: 0.25
+paired_manifest: /mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json
+paired_workers: 2
+patch_size: 256
+precision: bfloat16
+preserve_negative_read_noise: true
+raw_clean_augmentation_downsample: 2
+raw_clean_fraction: 0.25
+raw_clean_manifest: /mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json
+raw_clean_workers: 2
+reconstruct_highlights: true
+reconstruction_objective: charbonnier-v1
+reference_interval_weight: 0.0
+run: /mnt/external/demosaic/v84-curated-quality-20261022-v1/train/V100
+seed: 59
+steps: 10000
+synthetic_fraction: 0.2
+trace_observations: true
+training_execution: deterministic-v1
+val_batches: 4
+validation_images: 8
+validation_manifest: /mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl
+validation_protocol: configs/evaluation.yaml
+warmup_steps: 100
+worker_start_method: spawn
+workers: 2
+reviewed_roi_catalogue: /home/dllu/proj/demosaic/configs/low-contrast-training-rois-v1.json
+reviewed_roi_fraction: 0.0
+weak_texture_fraction: 0.0
+photographic_low_contrast_fraction: 0.0
+optical_blur_probability: 0.25
+raw_clean_optical_blur_probability: 0.25
+initialize_parent:
+  path: /mnt/external/demosaic/models/v84-original20000.pt
+  sha256: 134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10
+  step: 20000

@@ -1,9 +1,12 @@
 # Final spectral evaluation preparation
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The V88/V89 evaluator passes39 focused tests and CPU integration on genuine
 CPU/CUDA16-update engineering checkpoints. It refuses incomplete production,
 live owners and engineering states as quality evidence. The actual final4000
-review remains pending; V43 remains working.
+review remains pending; V43 was the comparator during this study.
 
 [Current preflight evidence](results/spectral-review-preflight-v2.json).
 [Verified live queue](results/spectral-review-queue-v1.json).

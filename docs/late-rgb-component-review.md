@@ -1,5 +1,8 @@
 # Detail loss is already present before the late RGB head
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The large V91-versus-V90 ADC gain losses are almost entirely present in
 their adapted pre-head outputs. Removing the late head or pooling V91's
 frozen prompts barely changes them. The dark noisy carrier is also nearly
@@ -12,7 +15,7 @@ or identify which common CNN/adapters/earlier-guidance parameters changed
 responsibly. Pre-head outputs come from jointly trained models; they are
 not models trained without the head. No new model, policy or default is
 promoted. The [complete V90/V91 quality result](late-rgb-original4k-review.md)
-and V43 working reference remain unchanged.
+and V43 study comparator remain unchanged.
 
 [Fixed protocol](late-rgb-detail-decomposition.md),
 [final diagnosis](results/late-rgb-components-final-review-v1.json),

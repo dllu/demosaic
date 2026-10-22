@@ -1,6 +1,9 @@
 # Wider flat colors from V95: completed quality review
 
-Stop both follow-up arms at their declared final 4k endpoints. Neither establishes a photographic PSNR gain over V95, both worsen tested color tails, and neither establishes a new native detail advantage. Most sources improve slightly, but substantial regressions on a few offset those gains. **V43 remains the working reference.** All seven panels, independent numeric audits and all 96 preselected native triplets have been reviewed.
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
+Stop both follow-up arms at their declared final 4k endpoints. Neither establishes a photographic PSNR gain over V95, both worsen tested color tails, and neither establishes a new native detail advantage. Most sources improve slightly, but substantial regressions on a few offset those gains. **V43 was the reference for this experiment.** All seven panels, independent numeric audits and all 96 preselected native triplets have been reviewed.
 
 V96 and V97 completed 4,000 matched updates from final V95 EMA, preserving the original V43 architecture, curated 88,484-source corpus and the recipe with zero optical blur and more weak detail. Only colored smooth-field palette span differs: 0 versus 8 stops. Final 4k EMAs are primary; validation-best checkpoints remain diagnostic. See the [training plan and audits](v95-flat-palette-quality-plan.md).
 

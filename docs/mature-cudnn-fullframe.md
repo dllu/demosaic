@@ -1,5 +1,8 @@
 # Mature FP32 full-frame autotuning and CLI validation
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 Opt-in cuDNN autotuning reduces the observed warmed 101.996MP restore from
 206.88→118.22s for V43 and 209.35→120.48s for V63. Both complete unquantized
 outputs pass the original 1DN16 maximum/.25DN16 RMS limits. A separate fresh
@@ -178,6 +181,5 @@ Checkpoint SHA256 values:
 - V43 step2000: `0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5`.
 - V63 step20000: `ed70952dd33c5d7da39199bf1306b58b579862920fb0cccd6b222f19871bc9b5`.
 
-All workers exited successfully. V43 remains the working experimental quality
-reference. This validates an optional execution policy; SOTA quality, decisive
+All workers exited successfully. V43 was the reference for these full-frame measurements. This validates an optional execution policy; SOTA quality, decisive
 real-photo superiority and sub10s full-frame inference remain unmet/unproven.

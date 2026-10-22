@@ -1,10 +1,13 @@
 # V80/V81: completed original4k bank-context review
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The bank context adds **+0.03017dB**
 full427 rendered PSNR over the matched control, source95% interval
 [+0.02652, +0.03364]. Both arms fail the fixed known4/unseen5 measured-CFA
 improvement requirements, and both weak-carrier gain gates fail.
-**Neither model is promoted or extended; V43 stays the working reference.**
+**Neither model is promoted or extended; V43 was the reference for this experiment.**
 Fine paraglider cords and neon-wave detail remain unresolved.
 
 [Complete results, source/checkpoint bindings, all groups and native-view decision](results/directional-bank-original4k-complete-v1.json).
@@ -287,7 +290,7 @@ DSCF3879 ISO6400 and independently demosaiced DSCF3880 ISO100 differ in aperture
 
 This original4k study is closed with both arms ineligible under the original
 criteria. No budget is extended, no threshold is changed and no model is
-promoted. V43 README pixels and the model default remain unchanged. No new
+promoted. V43 README pixels and the model default were unchanged during this study. No new
 full101.996MP run,16bit export, cold/warm speed claim or protected-final score
 is made for these ineligible checkpoints. SOTA, broad real superiority and the
 100MP/10s target remain unproven or unmet. A future experiment must have its

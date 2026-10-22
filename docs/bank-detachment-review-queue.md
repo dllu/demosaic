@@ -1,5 +1,8 @@
 # V82/V83 full review is queued
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The full review waits for both fresh original4000 budgets and the exact training
 controller/child exits. The waiting process is verified live, has no children
 and has loaded neither Torch nor CUDA libraries. It does not overlap inference
@@ -41,7 +44,7 @@ checkpoint, plus sky/building/foliage/fence GFX crops. All native pixels and
 display transforms remain fixed across methods. Actual native inspection,
 color/array audits, numerical criteria application and report closure still
 follow inference. No automatic continuation, full-frame serving trial or model
-promotion follows queue completion. V43 and the README crops remain unchanged.
+promotion follows queue completion. V43 and the README crops were unchanged during this study.
 
 Live review state is under
 `.cache/experiments/bank-detachment-v82-v83-original4k-review-v1/`; the launch

@@ -1,10 +1,13 @@
 # V78/V79: completed original4k directional/interval review
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 V78/V79 improve full427-photo rendered PSNR by **.27801/.27640dB** over the fresh
 genuine V63 parent, but both fail the original known/unseen camera requirements.
 The matched interval loss does not improve photographic PSNR. Fine cords remain
 missing and the standing GFX crops stay close to the parent. **Neither model is
-promoted or extended; V43 stays the working reference.** All numerical, color,
+promoted or extended; V43 was the reference for this experiment.** All numerical, color,
 analytic/highlight and native review is complete.
 
 [Complete source, checkpoint, score, native-view and decision registry](results/directional-interval-original4k-complete-v1.json).
@@ -239,7 +242,7 @@ cause or establish long-run training reproducibility. No default changes here.
 
 Both original camera gates fail. The matched interval photo-benefit gate also
 fails, and fine cords/weak carriers/blue-sign detail remain deficient. **Close
-this study without extension or promotion.** V43 remains the README reference;
+this study without extension or promotion.** V43 was the reference for this study;
 no new full102MP restoration, RGB16 export, timing or protected-final score is
 produced. State-of-the-art quality, decisive broad real-photo superiority and
 the100MP/10s target remain unmet/unproven; the overall project goal stays active.

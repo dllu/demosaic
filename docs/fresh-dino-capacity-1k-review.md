@@ -1,11 +1,13 @@
 # Fresh no-context / DINO-S / DINO-B: first1000 review
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 No promotion at this gate. The no-context arm leads both DINO branches on
 unseen-camera measured CFA and photographic PSNR. ViT-B recovers some of the
 photo deficit versus ViT-S, but does not surpass no context. Continue all three
 to3000 with the original optimizer, RNG and planned10000 schedule before
-drawing a convergence conclusion. V43 step2000 remains the experimental
-reference and the README selection.
+drawing a convergence conclusion. V43 step2000 was the experimental and README reference during this study.
 
 [Complete results, provenance and50 verified native triplets](results/fresh-dino-capacity-1k-review.json).
 [Matched setup and preflights](fresh-dino-capacity.md). All three begin from the

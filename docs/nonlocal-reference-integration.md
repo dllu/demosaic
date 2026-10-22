@@ -1,5 +1,8 @@
 # Optional recent RAW reference and standing GFX comparison
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The genuine Nonlocal Match-Filter reference is callable from the photographic,
 paired-RAW, analytic and GFX evaluators. Its CPU outputs reproduce the earlier
 [two-photo probe](nonlocal-matchfilter-cpu-probe.md) bit for bit. The new standing
@@ -80,7 +83,7 @@ now includes independent score/control checks, all selected native comparisons
 and full RGB16 integrity. Paired-real means are slightly higher but uncertain;
 synthetic-photo scores are lower, detail remains soft, and the
 [colored-field CPU diagnostic](nonlocal-reference-colored-flats.md) exposes a
-magenta grid/color failure. V43 stays the working model.
+magenta grid/color failure. V43 was the reference for this experiment.
 No training, current recipe or protected-final scoring changes.
 
 The same two high-noise synthetic observations retain exact simulated GT.

@@ -1,10 +1,13 @@
 # Expanded Commons data: completed first 4,000-update comparison
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 Extra training improves photo averages versus V60, but extra Commons membership
 gives a small, mixed effect at this boundary. Expanded V64 gains .01495dB photo
 sRGB PSNR over control V63, with a source interval spanning zero, and loses
 .01989/.01278dB on known/unseen measured-CFA accuracy. Native fine detail stays
-soft. **Neither is promoted; V43 remains the working reference.** Both whole
+soft. **Neither is promoted; V43 was the reference for this experiment.** Both whole
 states remain frozen at 4,000 under their original 20,000 schedules, without
 automatic continuation. This does not establish convergence or rule out benefits
 from more data with another budget or architecture.

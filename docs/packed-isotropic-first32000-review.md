@@ -1,11 +1,14 @@
 # Fresh RAW models at 32,000 examples: weak restoration, no promotion
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The first matched boundary of the fresh RAW-native experiment performs only
 slightly better than bilinear demosaicing. DINO V70 reaches **27.76515 dB**
 photographic sRGB PSNR, versus **27.67087 dB** without DINO V71 and
 **27.55481 dB** for bilinear. Native crops retain substantial noise. Both are
 well below the working V43 and mature V63 references and are slower in this
-full-frame run. **Neither endpoint is promoted; V43 remains the working model.**
+full-frame run. **Neither endpoint is promoted; V43 was the reference for this experiment.**
 
 [Source results, checkpoint hashes, exact crop sidecars and manual observations](results/packed-isotropic-first32000-review.json).
 [Architecture, actual batch sweep and training protocol](packed-isotropic.md).

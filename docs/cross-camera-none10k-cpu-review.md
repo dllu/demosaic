@@ -1,5 +1,8 @@
 # CPU qualitative check of the completed no-context model
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The completed fresh no-context 10,000-step arm looks close to retained V43 on
 the three fixed additional-camera contexts. This check does not support a new
 model promotion. Both learned methods show sharper GFX50R concrete seams than
@@ -159,5 +162,4 @@ CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=4 HF_HUB_OFFLINE=1 \
   --output /mnt/external/demosaic/evaluation/private-three-camera-none10k-cpu-replay
 ```
 
-Use the receipt's archived snapshots for immutable checkpoint replay. V43 stays
-the README reference until a complete quality review supports a change.
+Use the receipt's archived snapshots for immutable checkpoint replay. V43 was the README reference during this study.

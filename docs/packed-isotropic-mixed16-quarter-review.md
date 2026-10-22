@@ -1,9 +1,12 @@
 # Mixed16 review at160,000 examples
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 V72 no-DINO and V73 DINO improve photo PSNR by **+0.53338/+0.87718dB** over
 their own2k checkpoints, but trail older equal-example RAW controls by
 **1.02266/0.89509dB**. Both remain visibly grainy and far behind mature models.
-Neither is promoted; V43 remains the README working reference. The matched
+Neither is promoted; V43 was the README reference for this experiment. The matched
 DINO gain is0.34873dB on this development protocol. Full-frame FP32 restores
 take154.88/168.78s, missing the100MP/10s target. SOTA and decisive real-photo
 superiority remain unmet/unproven.
@@ -48,7 +51,7 @@ reference noise and registration remain limitations.
 | V73 new10k /160k examples | 29.05806 | .871473 | 49.74359 | 45.94882 |
 | Original V71 RAW40k /160k examples | 29.73199 | .883234 | 48.28272 | 46.14959 |
 | Original V70 DINO40k /160k examples | 29.95315 | .886794 | 48.36804 | 46.01175 |
-| V43 working reference | 34.89933 | .957125 | 54.23334 | 53.80629 |
+| V43 study comparator | 34.89933 | .957125 | 54.23334 | 53.80629 |
 | V63 mature DINO | 35.93298 | .963290 | 54.20368 | 53.84318 |
 | RawNIND global observed-CFA gain | 26.69578 | .790028 | 54.06860 | 53.56220 |
 | RawNIND channel observed-CFA gain | 26.68357 | .789899 | 54.08474 | 53.76822 |

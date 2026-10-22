@@ -1,7 +1,10 @@
 # V95 follow-up: train with ADC sample consistency
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 This is a prospective quality experiment, not an improved-model result.
-V43 remains the working reference. The completed
+V43 was the reference for this experiment. The completed
 [V96/V97 review](v95-flat-palette-quality-review.md) shows color shifts and lost
 detail on nearly clean inputs; more training and a wider flat palette did not
 repair them.
@@ -126,7 +129,7 @@ ADC photographic SSIM −.0020322. Both criteria fail. Known/unseen numeric audi
 are also complete. The [full seven-panel and lower-noise native review](v95-adc-training-quality-review.md)
 is complete: high-noise color RMS and retention of V95's weak-detail response
 also fail. No model is promoted
-or extended from the final4k endpoints; V43 remains the working reference.
+or extended from the final4k endpoints; V43 was the reference for this experiment.
 
 Sample-fidelity coverage derives from explicit priors:1,772 ADC observations
 per projected model in photo/procedural evaluation,224 in the analytic grid,
@@ -156,5 +159,5 @@ actual native review covers these triplets and all96 primary triplets through
 The [complete receipt](results/v95-adc-complete-quality-review-v1.json)
 binds counters, ADC fidelity, independent scalar/float64 array audits and the
 actual native/GFX findings. The [helper preparation](results/v95-adc-native-detail-preparation-v1.json)
-retains the separate69-test packaging rehearsal. V43 remains the reference;
+retains the separate69-test packaging rehearsal. V43 was the reference for this study;
 this failed final4k recipe receives no extension or speed work.

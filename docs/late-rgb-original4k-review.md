@@ -1,11 +1,14 @@
 # Late RGB4k: tiny spatial gain; camera and detail requirements fail
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 Both original4,000-update runs and the full review are complete. Spatial
 DINO access adds **+.00217dB** photo PSNR over the matched global head,
 source-bootstrap95% interval **[+.00129,+.00314]**. Neither endpoint meets
 the camera promotion requirements. Weak-carrier improvements miss their
 minimum, and24 of192 ADC draw/layout slots exceed the allowed gain loss.
-Neither arm is promoted or extended. V43 remains the working reference.
+Neither arm is promoted or extended. V43 was the reference for this experiment.
 
 All eight fixed native boards were actually viewed before new numerical
 interpretation:81 source triplets/125 unchanged160px cells. Final packaged

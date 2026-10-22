@@ -1,6 +1,16 @@
 # Completed V84/V85 original20k native-data comparison
 
-Adding the reviewed 22 native captures does not demonstrate a benefit in this fixed trial. Expanded−control photo PSNR is **-0.00422 [-0.00995, +0.00310] dB**; its source interval crosses zero. Both arms fail the declared known-camera promotion requirements, both weak-carrier gain gates fail, and four ADC layout/draw cases exceed the allowed detail loss. **Neither model is promoted or extended; V43 remains the working reference.**
+**V84 is the current quality and training baseline; V85 is a closely matched alternative.**
+Both reach about36.44dB on the fixed photographic panel, roughly1.54dB above
+V43, with improved unseen-camera means and reduced bright-magenta mottling
+versus their V63 parent. [Current choices and native comparisons](current-model.md).
+
+The specific addition of22 native captures has little matched effect:
+expanded−control photo PSNR is **−.00422 [−.00995,+.00310]dB**. The original
+study's strict known-camera/weak-carrier eligibility gates were not all met.
+Those study-specific decisions do not invalidate the useful V84/V85 checkpoints
+or require keeping V43 as the global baseline. The detailed results below
+retain the measured gains and remaining weaknesses.
 
 [Complete results and source bindings](results/native-data-original20k-complete-v1.json). [Publication checks](results/native-data-original20k-publication-v1.json). [Fixed criteria](native-data-v84-v85.md). [Training completion](results/native-data-original20000-completion-v1.json).
 

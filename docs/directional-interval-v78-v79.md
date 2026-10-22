@@ -1,9 +1,12 @@
 # Directional RAW residual and pre-clipping interval study
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 This is a new architecture/loss experiment, with no trained quality result yet.
 The [completed V76/V77 study](camera-supervision-first1k-review.md) remains
 closed at its failed original gate. Neither its checkpoints nor its optimizer
-states initialize these arms. V43 remains the working reference.
+states initialize these arms. V43 was the reference for this experiment.
 
 The implementation adds an opt-in `raw_directional_residual` around the mature
 native-resolution RGB/DINO model. Four directional 33-sample averages and the

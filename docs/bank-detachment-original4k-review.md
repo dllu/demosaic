@@ -1,10 +1,12 @@
 # V82/V83: completed original4k bank-gradient review
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 Detaching the bank descriptor input does **not** improve this matched study.
 Full427 rendered PSNR changes -0.00351dB
 against connected, source-bootstrap 95% interval [-0.00427, -0.00273]. ADC-only weak-detail
-gain also falls. **Neither arm is promoted or extended; V43 remains the working
-reference.** Both fail the original known/unseen camera requirements.
+gain also falls. **Neither arm is promoted or extended; V43 was the reference for this study.** Both fail the original known/unseen camera requirements.
 
 [Complete results and artifact registry](results/bank-detachment-original4k-complete-v1.json).
 [Publication/pixel/source audit](results/bank-detachment-original4k-publication-v1.json).

@@ -1,9 +1,11 @@
 # Spectral trial: repair checkpoint retention without resetting training
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The control has resumed from its verified1,000-update checkpoint and passed
 logged update1,025 in the published observation. Corrected CPU/CUDA and external
-resume checks pass. Final model quality has not been evaluated. V43 remains the
-working reference. [Complete recovery evidence](results/spectral-retention-recovery-v1.json).
+resume checks pass. Final model quality has not been evaluated. V43 was the reference for this study. [Complete recovery evidence](results/spectral-retention-recovery-v1.json).
 
 The first resumed controller later stopped at a resource bound. The
 [explicit operational reserve recovery](spectral-resource-recovery.md) records

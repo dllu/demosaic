@@ -1,10 +1,12 @@
 # Camera centering fails its matched quality gate
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 **Stop both arms at1000 updates. V48 is not promoted.** Centering the camera
 matrix lowers known/unseen measured-CFA PSNR and photographic/procedural sRGB
 PSNR versus its matched V47 control. All four source-bootstrap intervals are
-negative. The current V43 step2000 photographic experimental reference remains
-fixed. [Complete results and20 verified native triplets](results/camera-centering-v47-v48-review.json).
+negative. The current V43 step2000 photographic comparator was fixed for this study. [Complete results and20 verified native triplets](results/camera-centering-v47-v48-review.json).
 
 The [centering implementation](camera-matrix-centering.md) preserves the exact
 initial trainable tensors and predictions, retaining all WB/matrix information.

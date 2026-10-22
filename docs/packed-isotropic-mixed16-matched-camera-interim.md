@@ -1,5 +1,8 @@
 # Matched V72/V73 camera and native-crop interim review
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 At the matched 32,000-example gate, DINO V73 exceeds no-DINO V72 by only
 0.01779/0.03839 dB on known/unseen-camera measured-CFA PSNR. Both remain
 substantially behind mature models and RawNIND, and retain strong grain in the
@@ -39,7 +42,7 @@ CFA samples; independently demosaiced AHD RGB is an auxiliary reference,
 | V73 DINO, new2k /32k examples | 47.03053 | 43.61822 |
 | Original V71 no-DINO,8k /32k examples | 44.18253 | 41.43805 |
 | Original V70 DINO,8k /32k examples | 44.35326 | 41.64024 |
-| V43 working reference | 54.23334 | 53.80629 |
+| V43 study comparator | 54.23334 | 53.80629 |
 | V63 mature DINO | 54.20368 | 53.84318 |
 | RawNIND global observed-CFA gain | 54.06860 | 53.56220 |
 | RawNIND channel observed-CFA gain | 54.08474 | 53.76822 |
@@ -157,4 +160,4 @@ camera board cells are also exact copies from their hashed native PNGs. This
 reuses the rendering operator; it does not independently validate its metric
 definitions. The V73 photo/GFX boards and all three matched boards were viewed
 at native scale. The subsequent full quality/output/performance results are in
-the completed report linked above; V43 remains the README working reference.
+the completed report linked above; V43 was the README reference for this experiment.

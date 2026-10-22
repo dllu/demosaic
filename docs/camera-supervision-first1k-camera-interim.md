@@ -1,5 +1,8 @@
 # V76/V77 first1000: completed camera interim, full review running
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The later [completed full review](camera-supervision-first1k-review.md) supersedes
 this dated interim. Its original results and scope are retained below.
 
@@ -116,5 +119,4 @@ additional palettes were declared before this trial's hue outputs existed.
 All22 early triplets/34 native cells were actually viewed, but they do not close
 the remaining photographic/color/analytic/GFX review. Early image/source hashes
 must be revalidated after successful producer exit. No new full102MP export or
-timing is justified by this failed continuation screen. Working V43 and README
-crop examples remain; project quality and speed requirements remain outstanding.
+timing is justified by this failed continuation screen. V43 and the README crop examples were unchanged during this study; quality and speed goals remained outstanding.

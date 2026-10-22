@@ -1,11 +1,14 @@
 # Released RAW reference: complete development and real-photo comparison
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The genuine Nonlocal Match-Filter RAW denoiser plus independent Malvar reaches
 **30.07108 dB / .914082 SSIM** on 427 synthetic-noise photos, below V43 and our
 mature models. Its paired-real means are slightly higher, but source intervals
 cross zero against V43 and mature ConvNeXt. Fine fabric/foliage remains soft,
 fence grain/detail differs, and a [selected magenta flat](nonlocal-reference-colored-flats.md)
-shows a color shift and repeated grid on CPU. **Keep V43 as the working model;
+shows a color shift and repeated grid on CPU. **Use V43 as the comparator for this experiment;
 retain the released method as an optional reference. No broad winner or SOTA
 claim follows.**
 

@@ -1,5 +1,8 @@
 # Final4k directional study: partial native review
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 This page retains the earlier camera/native interim. The
 [completed full4k review](directional-interval-original4k-review.md) now includes
 all primary/color/analytic/highlight/GFX results and all81 triplets/125 cells.
@@ -9,8 +12,7 @@ examples. Building detail looks close to the genuine parent and V43. Both
 completed camera panels now fail the original numerical criteria. The
 selected known/unseen camera crops also show modest differences, without an
 obvious broad detail recovery. This is a partial review: full427 scores,
-color/analytic/highlight and standing GFX review remain pending. **V43 stays the
-working reference; neither new model is promoted.**
+color/analytic/highlight and standing GFX review remain pending. **V43 was the reference for this study; neither new model is promoted.**
 
 [Source, checkpoint, crop, display and actual-view receipts](results/directional-interval-native-interim-v1.json).
 [Complete original training budgets](directional-interval-original4k-training.md).

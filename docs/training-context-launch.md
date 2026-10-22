@@ -1,12 +1,15 @@
 # V86/V87 input-context training and review
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 Both arms of the [fixed comparison](training-context-v86-v87.md) have completed
 their original4000 updates from genuine V63 original20k EMA. The exact trainer
 and controller processes have exited. The
 [completed full quality/native review](training-context-original4k-review.md)
 finds context−control photo PSNR +.00099dB with a95% source interval crossing
 zero. Both arms fail known-camera promotion and high-noise weak-detail criteria;
-neither is promoted or extended. V43 remains the working reference.
+neither is promoted or extended. V43 was the reference for this experiment.
 This page preserves the training/launch record; the linked report contains
 the performance results and native crops.
 

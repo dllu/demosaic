@@ -1,5 +1,8 @@
 # Unit spectral gating damages the fixed photographic pilot
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The same fixed unit-gate intervention that restores the
 [analytic carriers](spectral-gate-components.md) creates periodic texture and
 color errors on natural images. It lowers sRGB PSNR and SSIM on both selected
@@ -11,7 +14,7 @@ This is a diagnosis of the genuine V89 step4000 EMA, not a newly trained model.
 Full uses its trained scalar gate; base is its own adapted trunk immediately
 before the spectral head; unit adds one copy of the same input-only innovation
 to that base. Base is not V88 or V63. There is no gate sweep, reference fitting,
-new parameter update or serving change. V43 remains the working reference.
+new parameter update or serving change. V43 was the reference for this experiment.
 
 ## Fixed inputs and results
 

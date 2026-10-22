@@ -1,74 +1,61 @@
-# Completion evidence
+# Project goals and current evidence
 
-The objective remains the full [PROMPT](../PROMPT.md), including trained image
-quality. **It is not complete.** V43 step 2000 remains the working experimental
-reference. Current work returns to its architecture, a larger visually curated
-Commons corpus and less blur/more low-contrast detail in training. Quality takes
-priority; speed experiments are deferred.
+**V84 is the current development baseline**, with V85 a closely matched
+alternative. The full-photo result is about1.54dB above V43. Current work trains
+that stronger architecture on the curated corpus and fine-detail recipe.
+[Current model choices](current-model.md) and the [README](../README.md) show
+useful progress; individual study gates do not freeze those recommendations.
 
-## Requirements and current evidence
+The broader objective in [PROMPT](../PROMPT.md) remains active. Quality has
+priority over speed.
 
-| Requirement | Evidence needed | Current state |
+| Goal | Current evidence | Remaining work |
 | --- | --- | --- |
-| State-of-the-art joint demosaicing and denoising | Trained comparisons with strong baselines, fixed held-out protocols and convincing native detail | **Unproven.** Later models improve some aggregate scores but retain detail/color/camera tradeoffs. See the [experiment index](experiments.md) and [PSNR history](performance-history.md); version number alone does not rank quality. |
-| Decisively better real-photo quality than RawNIND | Broad matched native comparisons across cameras, scenes, shadows, textures and clipping boundaries | **Unproven.** [Cross-camera comparisons](cross-camera-qualitative.md), [GFX detail](mature-cudnn-fullframe.md) and [colored-light contexts](gfx-highlight-qualitative.md) provide examples, but do not establish the requested broad superiority. |
-| 16-bit support and practical full-resolution output | Actual RAW processing, numerical checks and uint16 RGB TIFF exports | Demonstrated on the 101.996 MP GFX capture, including complete float-array/export checks and [actual CLI validation](mature-cudnn-fullframe.md). This does not establish sufficient restoration quality. |
-| 100 MP within 10 seconds on GB10 | Actual whole-photo measurement on a quality-qualified model, with clear timing scope | **Unmet.** The mature V43 FP32 report records 118.22 s warmed and a separate 166.67 s restore including search. These scopes differ. Resident tile ratios and faster rejected models do not prove this requirement. New speed work is deferred. |
-| Modern method with DINOv3 | Pinned licensed backbone, architecture rationale and measured ablations | Implemented with approved DINOv3 weights and recorded licenses; [research](research.md) and architecture experiments remain available. The new quality study preserves V43's frozen ViT-S/16 bottleneck architecture. Implementation alone is not SOTA evidence. |
-| Free, diverse training data and aggressive binning | Attribution, fixed holdouts, actual corpus training and reproducible augmentation | The completed scan covers 88,508 training sources; actual targeted visual review of 371 withholds 24. Frozen matched cohorts contain 39,983 control / 88,484 larger training sources, with unchanged 2,303 val / 2,255 test memberships. The [curation receipt](results/v43-quality-curation-and-training-plan-v1.json), [data extension](commons-post4557-reviewed.md) and [4× → geometry → area2 pipeline](training-pipeline.md) retain the evidence. All three matched V43 stages completed 20k with independent saved-state audits. The [complete quality/native review](v43-curated-original20k-review.md) finds photo/weak-detail gains and remaining color/camera tradeoffs; V43 remains the working reference. |
-| Appropriate noise/exposure and camera handling | Physical observations, signed/negative-noise handling, highlight/shadow tests and real-camera checks | Implemented and tested, with remaining quality limitations documented in [evaluation](evaluation.md). Camera references and assumed noise priors retain their stated limits. |
-| Training and shared-machine operation | Locked Python/PyTorch/uv environment, bounded jobs, restart/data checks and real GB10 execution | Implemented. The [current quality plan](quality-first-training.md) records focused tests, actual CPU/CUDA preflights, paired input checks, resource bounds, completed controls and explicit V95 recovery with archived failure evidence. |
-| Read-only originals and protected real-photo evaluation | Audited training manifests, local GFX cache and preserved source bytes | Standing policy: originals stay read-only; GFX DSCF3879/3880 and siblings stay outside training. The locally cached scene includes sky, buildings, foliage and fence. The ISO100 image is a separate qualitative reference, not exact GT. |
-| Reproducible reports and current documentation | Native crops, source/ROI/weights/noise/display metadata, diary, setup commands and Git history | Current [README](../README.md), [documentation guide](index.md) and per-study reports retain the evidence. Diary filenames now use DST-aware Los Angeles time; [the correction map](../diary/timestamp-corrections.json) preserves historical body hashes. Meaningful progress is committed and pushed. |
+| Excellent joint demosaicing and denoising | V84/V85:36.44dB on the full photographic panel, competitive measured-CFA results and cleaner native geometry | Improve fine texture, color tails and real-photo results; make strong benchmark claims only when their comparisons are complete |
+| Much better real-photo quality than RawNIND | Current GFX comparisons show more coherent mesh/rails and less grain with the learned models | Broaden actual scene/camera comparisons and recover more foliage/weak detail |
+| 16-bit and practical full-resolution output | Shared inference/export pipeline has produced verified101.996MP RGB16 TIFFs; V84's exact EMA loads through current code | Keep full-frame quality/precision/timing measurements specific to the selected checkpoint |
+| 100MP within10s on GB10 | Full-frame timing/export infrastructure exists; the target is still open | Measure and optimize the selected quality model after quality work |
+| Modern DINOv3 method | V84 uses the official pinned ConvNeXt-Tiny pyramid with pretrained DRUNet RGB restoration | Continue improvements from this strong family and assess other approaches when useful |
+| Free, diverse targets and aggressive binning |88,484 curated Commons training sources;4×→geometry→area2; native/paired targets and recorded attribution | Train and assess the current V84 continuations; expand useful real fine-detail coverage |
+| Physical noise/exposure and camera handling | Poisson/read noise, negative black-subtracted values, Bayer phases, clipping and WB/matrix conditioning are implemented | Continue testing shadows, saturated lights, color and low-noise behavior |
+| Reliable training and resource use | Source/manifest snapshots, restart checks, bounded jobs and actual CPU/CUDA operation | Monitor current runs and retain failures/results accurately |
+| Protected originals and evaluation scenes | Originals read-only; cached GFX3879/3880 and siblings excluded from training | Preserve those boundaries in new data recipes |
+| Current documentation and reproducibility | Native crops with source/ROI/weights/noise/display metadata; local-time diary; Git history | Update README/current guides and comparisons when good versions appear |
 
-## Current quality work
+## Active quality work
 
-The [V43 quality study](quality-first-training.md) separates the larger-corpus
-effect from the blur/low-contrast augmentation package using matched controls.
-The completed source screen covers training rows only. High loss and image-quality
-proxies selected candidates for actual visual review; they never automatically
-labeled a photograph bad. Independent checks confirm the final curated cohorts
-preserve holdouts, selected row contents and inherited protected-series
-exclusions. All six [fresh CPU/CUDA checks](results/v43-quality-final-curated-preflights-v1.json)
-pass, and [V93](results/v43-quality-V93-completed-training-v1.json),
-[V94](results/v43-quality-V94-completed-training-v1.json) and
-[V95](results/v43-quality-V95-completed-training-v1.json) completed 20k with
-independent saved-state audits. The [complete matched quality review](v43-curated-original20k-review.md)
-records photo/weak-detail gains and all 96 native triplets, alongside remaining
-saturated-color tails and unseen-camera uncertainty. V95 is a candidate; V43
-remains the working reference while those quality issues are addressed.
-The [completed V96/V97 follow-up](v95-flat-palette-quality-review.md) establishes
-no photo PSNR gain over V95 and worsens tested color tails; both stop at their
-declared final4k endpoints. All seven panels and the recovered lower-noise
-native views are reviewed. No new model is promoted.
-The [V98/V99 study](v95-adc-training-plan.md) completed both final4k stages and
-independent saved-state audits. Full FP32 quality evaluation is running, with
-lower-noise native views queued after all seven panels. These execution checks
-do not establish an improved model or change the completion status.
+[V100/V101](quality-first-training.md) use V84's architecture and exact final EMA,
+curated88,484 Commons, original native128/paired32 and its broad flat palette.
+The matched recipe comparison tests original augmentation against zero optical
+PSFs, weak synthetic textures, photographic contrast attenuation and reviewed
+ROI sampling. Both budgets are10,000 updates; short CPU/CUDA smokes are discarded.
+Current status and artifact locations are in the training guide.
 
-Completed later studies, including [V92](late-rgb-head-only-original4k-review.md),
-retain their unfavorable evidence. Higher PSNR in one panel, finite training,
-successful CPU/CUDA execution, or more data alone does not establish a quality
-improvement or justify promotion.
+Actual source-quality review covers420 sources:396 retained/24 withheld, after
+a complete loss/proxy scan of88,508 training sources. Hard or high-loss material
+is not automatically bad data. [Native source examples](corpus-source-review.md)
+show the decisions; protected holdouts and series stay fixed.
 
-## Evidence required before completion
+The [experiment index](experiments.md) and [PSNR history](performance-history.md)
+retain earlier gains and tradeoffs. For example, V95 improves a tested weak
+carrier, while V98/V99 improve ADC color but retain positive-noise color/detail
+issues. These observations inform the current recipe without making V43 the
+default again.
 
-- Evaluate trained endpoints against V43 and strong comparators on the fixed
-  photographic and measured-CFA panels; retain per-source/condition results and
-  uncertainty rather than relying on one average.
-- Inspect weak low-contrast detail, ADC-only reconstruction, noise, color,
-  highlights and real-camera scenes. Each improved-model report needs at least
-  two small native noisy/denoised/exact-GT crop triplets with matching coordinates
-  and transforms, no pixel resizing, checkpoint hash, noise and display exposure.
-  Independently demosaiced or different-exposure real references are labeled
-  accurately. Keep representative crops in the README.
-- Establish the requested restoration quality and broad real-photo advantage;
-  then qualify that model on an actual 100 MP 16-bit run. Report timing scope and
-  whether the 10-second target is met. Quality remains the higher priority.
-- Preserve reproducible inputs, manifests, licenses, source/checkpoint hashes,
-  validation artifacts, local-time diary entries and successful Git pushes.
+## Evidence for the full objective
 
-The [historical completion-evidence log](requirements-archive.md) preserves the
-previous chronological record unchanged after its archive header. Its old
-"pending" statements describe their original dates; they are not current job
-status. Detailed experiment evidence remains linked from the experiment index.
+Assess useful trained versions against the current baseline and strong
+comparators on the fixed photographic/camera panels and actual native images.
+Retain source/scene intervals and adverse cases. Each reported improved model
+needs at least two native noisy/restored/GT crop triplets with matching
+coordinates/transforms, checkpoint hash, conditioning and display exposure.
+Real AHD/separate ISO100 references remain nonexact and are not pixelwise GT.
+
+Show credible improvements and update current examples as they appear. Claims
+such as state-of-the-art quality, broad real-camera superiority or a particular
+100MP runtime need evidence covering those claims; they are not prerequisites
+for documenting an improved implementation or choosing a better baseline.
+
+The [diary](../diary/index.md) and [historical evidence log](requirements-archive.md)
+retain prior decisions. Existing machine receipts preserve original bytes and
+study-specific decisions, while current prose reflects today's implementation.

@@ -1,6 +1,9 @@
 # Multiscale measured-CFA loss: first 1,000 updates
 
-**Stop V61 at this boundary and retain V43 as the working reference.** The loss
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
+**Stop V61 at this boundary and Use V43 as the comparator for this experiment.** The loss
 improves bright saturated fields but lowers photographic and paired-real accuracy
 and suppresses weak detail more. A separate trial will test a ten-times smaller
 coefficient. This intermediate result does not establish convergence.
@@ -32,7 +35,7 @@ has different training history and paired batch 2.
 
 | Model | Photo PSNR / SSIM | Procedural PSNR / SSIM | Known CFA PSNR | Unseen CFA PSNR |
 | --- | --- | --- | ---: | ---: |
-| V43 working reference | 34.89934 / .957126 | See original report | 54.23332 | 53.80606 |
+| V43 study comparator | 34.89934 / .957126 | See original report | 54.23332 | 53.80606 |
 | V60 +1k | 35.54917 / .961343 | 33.96064 / .969193 | 54.21420 | 53.79297 |
 | V61 +1k | 35.33505 / .958582 | 34.40590 / .967661 | 54.05613 | 53.52672 |
 

@@ -2,51 +2,45 @@
 
 Joint Bayer demosaicing and denoising in linear camera RGB, with physical noise
 conditioning, frozen DINOv3 features and tiled 16-bit TIFF output on NVIDIA GB10.
-**V43 step 2000 remains the working experimental reference.** Later models often
-score higher PSNR, but have not established better overall real-photo quality
-and fine-detail recovery. State-of-the-art quality and 100 MP in 10 s remain open.
+**V84 is the current quality and training baseline**, using a pretrained DRUNet
+RGB trunk and DINOv3 ConvNeXt-Tiny feature pyramid. Its full-photo PSNR is
+36.44 dB, about **1.54 dB above V43**. V85 offers similar quality; V95 is a useful
+weak-detail comparison. [Current models, strengths and tradeoffs](docs/current-model.md).
 
-The completed **V93–V95 study keeps V43's architecture**, using the curated larger
-corpus and less blur/more low-contrast detail. V95 improves photo scores and weak
-detail, with remaining color/camera tradeoffs. See the
-[quality review](docs/v43-curated-original20k-review.md),
-[palette follow-up](docs/v95-flat-palette-quality-review.md),
-[completed ADC follow-up](docs/v95-adc-training-quality-review.md),
-[plan](docs/quality-first-training.md),
-[experiment index](docs/experiments.md) and [documentation guide](docs/index.md).
+Current work applies the cleaned 88,484-source Commons cohort, less optical blur
+and reviewed fine-detail examples to this stronger architecture. Useful new
+versions and image comparisons belong here as they become available. The
+[diary](diary/index.md) retains historical decisions.
 
 ![PSNR versus model version](docs/images/version-PSNR-history.png)
 
-[PSNR history, data and limitations](docs/performance-history.md). Version numbers
-name different experiments with unequal training budgets; these are descriptive
-results, not a controlled architecture ranking.
+[PSNR history and full values](docs/performance-history.md). Versions have unequal
+training budgets and data; this describes available models rather than an
+isolated architecture ablation.
 
 ## Current 100% crops
 
-Noisy → V43 → exact synthetic GT. Each panel is native 160×160 at the 8×-binned
-evaluation resolution, with fixed ISO12800 noise and shared display transforms.
-Fine cords and texture are still lost. [Source, ROI, checkpoint, noise and display
-metadata](docs/mature-cudnn-fullframe.md).
+Same noisy observation → V43 / V84 / V95 / V99 → exact synthetic GT. Every cell
+is an unchanged 160×160-pixel crop at the 8×-binned evaluation resolution, with
+ISO 12800 conditioning and shared display transforms. V84 retains the fabric's
+broad color more faithfully than V95/V99; fine cords remain a target for improvement.
+[Source, ROI, checkpoint, noise and display metadata](docs/images/current-quality/manifest.json).
 
-![Fabric: noisy, restored and exact synthetic GT](docs/images/mature-cudnn-GT-v43-0014aa4e.png)
-
-![Building and sky: noisy, restored and exact synthetic GT](docs/images/mature-cudnn-GT-v43-002fc6ee.png)
+![Native photographic comparisons: fabric and building](docs/images/current-quality/photo-comparison.png)
 
 Sources: [Roy Egloff](https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg)
 and [Dietmar Rabich](https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg),
 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), modified by binning,
 crop, simulated noise and restoration.
 
-Real GFX100S: DSCF3879 ISO 6400 → V43 → DSCF3880 ISO 100 f/5.6, native 160×160
-sensor pixels and shared +2 EV display. The last panel is an independent
-qualitative reference, **not GT**: aperture and moving subjects differ.
-[All four standing regions](docs/mature-cudnn-fullframe.md) ·
-[colored lights](docs/gfx-highlight-qualitative.md) ·
-[other cameras and RawNIND comparisons](docs/cross-camera-qualitative.md).
+Real GFX100S: DSCF3879 ISO 6400 → **V84** → DSCF3880 ISO 100 f/5.6. Native160
+sensor-pixel crops, 512px inference contexts and shared +2 EV display. The last
+panel is a separately captured qualitative reference, **not GT**.
+[Compare V43, V84, V95 and RawNIND on all four regions](docs/gfx-qualitative.md).
 
-![GFX foliage: noisy, restored and separate low-ISO reference](docs/images/mature-cudnn-fullframe-v43-foliage.png)
+![V84 GFX foliage: noisy, restored and separate low-ISO reference](docs/images/current-quality/gfx-V84-foliage.png)
 
-![GFX fence: noisy, restored and separate low-ISO reference](docs/images/mature-cudnn-fullframe-v43-chain-link-fence.png)
+![V84 GFX fence: noisy, restored and separate low-ISO reference](docs/images/current-quality/gfx-V84-chain-link-f.png)
 
 ## Setup and inference
 
@@ -56,7 +50,7 @@ the lockfile. DINOv3 requires approved Hugging Face access through `HF_TOKEN`.
 ```bash
 source scripts/env.sh
 uv sync --extra dev
-uv run demosaic infer /mnt/external/demosaic/models/v43-step2000.pt photo.raf \
+uv run demosaic infer /mnt/external/demosaic/models/v84-original20000.pt photo.raf \
   /mnt/external/demosaic/output/photo-linear.tiff \
   --preview /mnt/external/demosaic/output/photo-srgb.tiff \
   --shot 0.001 --read 0.000001 \
@@ -64,9 +58,9 @@ uv run demosaic infer /mnt/external/demosaic/models/v43-step2000.pt photo.raf \
 PYTHONPATH=.:src:scripts uv run pytest -q
 ```
 
-The noise values are examples; use appropriate camera/input priors.
-[Usage and training](docs/usage.md) · [data pipeline](docs/training-pipeline.md) ·
-[evaluation](docs/evaluation.md) · [research](docs/research.md) ·
-[local-time diary](diary/index.md). Speed experiments are deferred while quality
-work proceeds; existing [full-frame validation](docs/mature-cudnn-fullframe.md)
-remains available.
+Noise values are examples; use suitable camera/input priors.
+[Usage](docs/usage.md) · [current training](docs/quality-first-training.md) ·
+[data pipeline](docs/training-pipeline.md) · [experiments](docs/experiments.md) ·
+[documentation guide](docs/index.md). Quality takes priority. State-of-the-art
+quality and 100MP within 10s remain project goals; full-frame timing is
+checkpoint-specific.

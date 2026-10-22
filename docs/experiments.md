@@ -1,33 +1,33 @@
 # Experiment index
 
-**V43 step 2000 is the working reference.** Aggregate photo PSNR has increased
-in later experiments, but fine-detail loss, color artifacts and camera
-tradeoffs have prevented a convincing replacement. The next work keeps V43's
-architecture and changes data quality and augmentation, before pursuing speed.
+**V84 is the current development baseline; V85 is a close alternative.**
+Their36.44dB photographic result is about1.54dB above V43, with competitive
+camera results and useful native-image quality. V95 remains a useful comparison
+for weak detail. Study-specific statistical gates do not freeze the global
+baseline or prevent showing good versions as progress is made.
 
-[Current quality plan](quality-first-training.md) ·
-[PSNR history and complete point table](performance-history.md) ·
-[representative native crops](../README.md#current-100-crops) ·
-[complete chronological experiment archive](experiment-archive.md).
+[Current model choices and images](current-model.md) ·
+[Current quality training](quality-first-training.md) ·
+[PSNR history and full table](performance-history.md) ·
+[GFX comparisons](gfx-qualitative.md) ·
+[Experiment archive](experiment-archive.md).
 
 ![PSNR history](images/version-PSNR-history.png)
 
-The plot reuses completed primary evaluations. Architecture, data, initialization,
-training horizon and recorded precision differ across versions. Higher means
-alone do not establish better low-contrast detail or statistically significant
-camera gains. Every plotted checkpoint and source report is linked in the
-[history data](results/version-PSNR-history.json).
+The figure describes completed checkpoints with different architectures,
+initializers, data and training horizons. It shows real progress; use the linked
+matched studies when attributing a gain to a particular change.
 
 ## What the main experiment families established
 
 | Family | Main finding | Evidence |
 | --- | --- | --- |
-| Geometry and original V43 | Geometry/PSF before the final 2× reduction helped the matched photo test. Diverse native targets and the full-resolution RGB/DINOv3 ViT-S model produced the current reference | [V34/V36](geometry-corpus-v34-v36-review.md), [V43 step 2000](native-corpus-2k-review.md) |
-| Larger Commons corpus and longer training | Larger data helped average photo PSNR modestly in the ConvNeXt comparison, without resolving detail/color limitations | [V63/V64 original20k](long-commons-v63-v64-original20k-review.md) |
+| Geometry and original V43 | Geometry/PSF before the final 2× reduction helped the matched photo test. Diverse native targets and the full-resolution RGB/DINOv3 ViT-S model established the earlier ViT-S baseline | [V34/V36](geometry-corpus-v34-v36-review.md), [V43 step 2000](native-corpus-2k-review.md) |
+| Larger Commons corpus and longer training | Established the stronger ConvNeXt-pyramid family; the isolated corpus expansion adds a modest photographic gain | [V63/V64 original20k](long-commons-v63-v64-original20k-review.md) |
 | Color coordinates and supervision | Normalization, objective and camera-supervision changes produced tradeoffs | [V68/V69](normalization-v68-v69-original4k-review.md), [V74/V75](reconstruction-objective-first1k-review.md), [V76/V77](camera-supervision-first1k-review.md) |
 | Compact RAW-native architecture | The completed mixed-batch experiment remains far below the mature RGB models on primary panels | [V72/V73](packed-isotropic-mixed16-quarter-review.md) |
-| Directional, interval and bank heads | Higher photographic means coexisted with failed camera/detail criteria | [V78/V79](directional-interval-original4k-review.md), [V80/V81](directional-bank-original4k-review.md), [V82/V83](bank-detachment-original4k-review.md) |
-| Native data and larger context | The tested expansion and context changes did not supply the desired matched improvement | [V84/V85](native-data-original20k-review.md), [V86/V87](training-context-original4k-review.md) |
+| Directional, interval and bank heads | Several heads improve photographic means, with camera/detail tradeoffs; the simpler V84 family is stronger overall in the completed primary scores | [V78/V79](directional-interval-original4k-review.md), [V80/V81](directional-bank-original4k-review.md), [V82/V83](bank-detachment-original4k-review.md) |
+| Native data and larger context | V84/V85 reach36.44dB and provide the current quality baseline. The extra native captures have little matched effect; larger context is a separate small-effect comparison | [V84/V85](native-data-original20k-review.md), [V86/V87](training-context-original4k-review.md) |
 | Spectral and late RGB refinement | Small matched mean gains or protected common weights did not fix weak detail; head-only V92 regressed | [V88/V89](spectral-original4k-review.md), [V90/V91](late-rgb-original4k-review.md), [V92](late-rgb-head-only-original4k-review.md) |
 
 Each complete quality review retains source/checkpoint identities, native
@@ -37,50 +37,39 @@ including early versions, negative studies and engineering details.
 
 ## Data and current quality work
 
-The completed scan covers 88,508 training sources at 4×/8×. Targeted visual review
-of 371 sources withholds 24 while retaining legitimate difficult detail. The
-frozen matched V43 study uses 39,983 control / 88,484 larger training sources;
-all six fresh CPU/CUDA preflights passed, all three arms completed 20k with
-independent saved-state audits, and the full matched evaluation/native review is
-complete. The [V93–V95 review](v43-curated-original20k-review.md) finds photo and
-weak-detail gains with remaining saturated-color/unseen-camera tradeoffs.
-The [V96/V97 follow-up](v95-flat-palette-quality-review.md) keeps that weak-detail
-recipe and tests a wider colored-flat palette from V95. Both 4k stages and all
-seven quality panels and native review are complete. Neither new endpoint
-establishes a photo PSNR gain over V95; small gains on most photos coexist with
-large regressions on a few. Both worsen tested color tails and lose some of
-V95's noisy weak-detail response. Lower-noise views confirm color/detail
-failures even with nearly clean inputs. Both stop at final4k; V43 remains the
-working reference and speed work remains deferred.
-The [V98/V99 experiment](v95-adc-training-plan.md) tests training through the
-existing ADC-only sample projection with the same learned architecture and
-data. Both final4k training arms, all seven FP32 panels and the lower-noise
-native review are complete.
-Both endpoints use projected inference in the
-primary comparison, separating the training effect from the known inference
-policy. The [complete quality review](v95-adc-training-quality-review.md)
-retains synthetic and real GFX native triplets, with remaining fabric color/detail failures.
-V99−projected-V98 photo PSNR gains .02880 dB, below the fixed .03 dB criterion,
-and ADC photographic SSIM falls. ADC color improves, but high-noise color RMS
-and retention of V95's weak-detail response fail their safeguards. All132
-primary/secondary triplets were represented in actual native views. No model
-is promoted or extended from these final4k endpoints.
-Originals and historical manifests remain read-only. Validation/test and the
-standing GFX scene remain outside training. See the [source review](corpus-source-review.md).
+V100/V101 continue from V84 on the curated88,484-source Commons cohort. One
+retains V84's augmentation; the other tests zero optical PSFs, weak synthetic
+textures, photographic contrast attenuation and reviewed fine-detail ROIs.
+The architecture, broad flat palette, native128 and paired32 targets stay fixed.
+See the [recipes, execution status and evaluation approach](quality-first-training.md).
+
+The source scan covers88,508 training images, with420 actually reviewed and24
+withheld. The [illustrated source review](corpus-source-review.md) explains why
+processing defects/nonphotographic targets are removed while difficult foliage,
+textiles and weak real detail remain. Originals and historical manifests stay
+read-only; protected captures and the GFX scene/siblings remain outside training.
+
+Earlier [V93–V95](v43-curated-original20k-review.md) showed cleaner-data and
+weak-detail gains on the older ViT-S model. [V96/V97](v95-flat-palette-quality-review.md)
+and [V98/V99](v95-adc-training-quality-review.md) expose palette/ADC tradeoffs.
+The complete reports retain favorable and adverse results. They do not require
+using V43 as today's baseline.
 
 [Reviewed corpus](commons-post4557-reviewed.md) ·
-[archive status](commons-download.md) ·
-[augmentation and selected-domain loading](training-pipeline.md) ·
-[native RAW targets](public-raw-expansion-v2.md) ·
-[source/series exclusions](commons-content-overlap.md).
+[Archive status](commons-download.md) ·
+[Augmentation and selected-domain loading](training-pipeline.md) ·
+[Native targets](public-raw-expansion-v2.md) ·
+[Source/series exclusions](commons-content-overlap.md).
 
-## Engineering record
+## Reading the evidence
 
-The project can restore full 102 MP captures and export checked16-bit TIFFs.
-Earlier [FP32 timing/export validation](mature-cudnn-fullframe.md) and the
-[stopped FP16 qualification](mature-hidden-FP16-full-quality.md) remain documented.
-The new fixed-backend speed study was prepared but **not launched**; quality
-work now takes priority. There is no new speed/default or quality promotion.
+Current guides and README images reflect useful available implementations.
+Versioned reports retain the experiments' numerical results and protocols;
+original decisions and chronology remain in the timestamped [diary](../diary/index.md).
+Source/scene intervals describe the sampled cases, not training-seed uncertainty.
+Real AHD/separate ISO100 references are not exact GT.
 
-[Documentation guide](index.md) · [research](research.md) ·
-[completion evidence](requirements.md) · [local-time diary](../diary/index.md).
+[Full-frame RGB16 measurements](mature-cudnn-fullframe.md) remain specific to
+their checkpoints. Quality has priority over further speed work.
+[Documentation guide](index.md) · [Research](research.md) ·
+[Remaining project goals](requirements.md).

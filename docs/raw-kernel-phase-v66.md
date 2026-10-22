@@ -1,10 +1,13 @@
 # Direct CFA/native-phase conditioning: matched V66 trial
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 V66 completed its separate **1,000-update** head warmup after the
 [failed V65 review](raw-kernel-warmup-v65-first1k-review.md). It tests one change:
 give the reconstruction coefficients direct knowledge of the CFA pattern and
 the output pixel's position in its 2×2 Bayer cell. The [completed review](raw-kernel-phase-v66-first1k-review.md) finds +1.69dB photo PSNR over V65, but substantial grain and a 6.14dB deficit versus V60: no promotion.
-V43 remains the working reference.
+V43 was the reference for this experiment.
 
 [Recipe](../configs/dino-convnext-raw-kernel-phase-warmup-b16-v66.yaml).
 [Actual launch/source/data/startup](results/raw-kernel-phase-v66-launch.json).

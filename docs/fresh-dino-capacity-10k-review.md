@@ -1,10 +1,13 @@
 # Fresh DINO comparison: completed 10,000-update review
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 All three completed their original schedules and gained about 0.75 dB on 427
 synthetic-noise photos over their own step3000 checkpoints. No-context has the
 highest photo and unseen-camera primary means; DINO-S has a tiny, uncertain
 known-camera advantage, and DINO-B leads the procedural mean. There is no
-consistent DINO benefit. **Keep V43 step2000 as the README working reference**:
+consistent DINO benefit. **V43 step2000 was the README reference when this experiment closed**:
 the new mean gains coexist with a visible fabric color regression and missing
 fine texture. No model is promoted by this review.
 

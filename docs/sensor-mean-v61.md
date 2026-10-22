@@ -1,9 +1,12 @@
 # Full-restoration multiscale sensor-loss trial
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 V61 has completed its first 1,000 updates and its
 [quality review](sensor-mean-v61-first1k-review.md). Stop this .01 recipe:
 bright saturated-field bias improves, but photo/paired-real scores and weak
-detail regress. V43 remains the working reference. The experiment tests whether
+detail regress. V43 was the reference for this experiment. The experiment tests whether
 coarse measured-CFA supervision reduces remaining color/low-frequency errors
 without sacrificing photographic detail or paired-real accuracy. The
 [completed V60 comparison](wide-flat-palette-full4k-review.md) improves bright

@@ -1,9 +1,12 @@
 # Directional candidate context: fixed V80/V81 experiment
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 This fresh architecture comparison tests whether exposing averaged measurements
 to the directional mixing network improves weak-detail recovery. The completed
 V78/V79 interval study remains closed. Neither its trained checkpoints nor its
-optimizer states initialize these arms. V43 remains the working reference.
+optimizer states initialize these arms. V43 was the reference for this experiment.
 
 ## Intervention
 

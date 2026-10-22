@@ -1,11 +1,14 @@
 # Larger Commons corpus: first matched quality gate
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 **Stop this V50 gate at1000; do not promote the checkpoint.** Known primary
 and full-photo PSNR fall with negative source-bootstrap intervals. Unseen and
 procedural means also fall, with intervals including zero. This early one-seed
 result does not prove that more data is generally harmful or either corpus has
 converged. The separately frozen extension remains available for later trials.
-V43 step2000 stays the photographic experimental reference.
+V43 step2000 was the photographic comparator for this study.
 
 [Complete matched results and20 native comparisons](results/commons-expanded-v50-review.json).
 [V50](commons-v50-trial.md) changes only the Commons training membership:
@@ -59,8 +62,7 @@ Only V50 is recomputed. Cached V47 reuse verifies complete evaluator source
 identity and protocol/data/render/metric metadata, exact equality of24 known/
 30 unseen classical pair summaries and all37,212 classical synthetic records.
 Original report/case/checkpoint hashes remain in the receipt. No bitwise neural
-re-execution claim is made. Current V43 step2000 remains a separately trained
-photographic reference: known54.23332/unseen53.80606 primary, photo34.89934/
+re-execution claim is made. V43 step2000 is the separately trained photographic study comparator: known54.23332/unseen53.80606 primary, photo34.89934/
 .957126, procedural33.28537/.966604; its optimizer history/seed differ.
 See its [review](native-corpus-2k-review.md).
 

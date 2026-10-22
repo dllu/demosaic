@@ -1,5 +1,8 @@
 # Late DINO/RGB refinement: engineering checks pass
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The [fixed V90/V91 comparison](late-dino-rgb-v90-v91.md) is implemented and its
 genuine-weight CPU/CUDA preflights pass. Two identical100,547-parameter learned
 RGB heads differ only in spatial access to existing frozen DINO features:
@@ -84,7 +87,7 @@ owners exited. The [independent final boundary audit](late-rgb-original4k-bounda
 verifies finite full states, paired inputs, final RNG and actual archived
 source. The [completed evaluation](late-rgb-original4k-review.md) includes all
 eight boards/125 native cells before numerical interpretation. Neither
-endpoint meets the camera/detail requirements; V43 stays the working reference.
+endpoint meets the camera/detail requirements; V43 was the reference for this experiment.
 
 The new immutable `production-plan.json` adds both process-boundary
 certificates and regression receipts to the prepared base plan before any

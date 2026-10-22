@@ -1,12 +1,15 @@
 # Original matched Commons schedules: completed review
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 V63 and V64 both completed their **original20,000-update schedules**. The actual
 trainers and training controller exited; both audited immutable checkpoints
 verify. The primary evaluation, statistics/hue/artifact work and all58 native views are
 complete after a source-audit working-directory recovery. The
 [full performance review](long-commons-v63-v64-original20k-review.md) finds a
 small positive photo data effect, with persistent texture/color failures.
-Neither endpoint is promoted; V43 remains the working reference.
+Neither endpoint is promoted; V43 was the reference for this experiment.
 
 [Actual training completion, checkpoint hashes and logged cross-arm checks](results/long-commons-v63-v64-original20k-training-completion.json).
 The continuation returned to the stronger RGB+DINO path after the negative V67

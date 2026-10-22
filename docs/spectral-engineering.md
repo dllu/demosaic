@@ -1,11 +1,14 @@
 # Spectral residual engineering checks and fixed training launch
 
+Current architecture and recommendations: [current model guide](current-model.md).
+The versioned study below retains its measured results and original protocol.
+
 The optional measured-RAW Fourier residual passes68 targeted tests and genuine
 CPU/CUDA16-update mixed-domain preflights. Its68 new parameters initialize at
 zero, preserving parent predictions and common gradients. **These are discarded
 engineering checkpoints, without a restoration-quality or speed result.**
 The [fixed V88/V89 protocol](spectral-v88-v89.md) defines the next comparison;
-V43 remains the working reference.
+V43 was the reference for this experiment.
 
 An identified final double-save bug in this experiment's retention wrapper has
 an [explicit verified1000-checkpoint recovery](spectral-retention-recovery.md).
