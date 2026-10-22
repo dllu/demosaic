@@ -302,6 +302,22 @@ def prepare(
         )
         + "Fresh IEEE FP32/channels-last observations and metrics. Full427-photo/16-procedural,7-condition/4-CFA suite, known4/unseen5 real development scenes, carrier/flat/color diagnostics and standing GFX plus highlights. RawNIND global/per-channel input-only gains included in photo/real/GFX. Declared checkpoint policies only, no additional output correction, model selection, speed claim or automatic promotion; independent numeric/native review required.",
     }
+    if adc_training:
+        gfx_conditioning = {}
+        for stage in ("gfx", "gfx-highlights"):
+            witness = read(reference_witnesses[stage]["path"])
+            previous_report = witness["report"]
+            assert ref(previous_report["path"]) == previous_report
+            gfx_conditioning[stage] = read(previous_report["path"])["conditioning"]
+            inputs.append(previous_report)
+        plan["ADC_fidelity_observations_per_projected_model"] = expected_adc_coverage(
+            protocol,
+            plan["photo_count"] + plan["synthetic_count"],
+            read(COLOR)["cases"],
+            {stage: read(path)["cases"] for stage, path in CAMERAS.items()},
+            gfx_conditioning,
+        )
+        plan["ADC_valid_sample_error_limit"] = 1e-6
     save(root / "plan.json", plan)
     guard(plan)
     print(ref(root / "plan.json"))
@@ -375,6 +391,66 @@ def check_joint_model_config(actual, reference, *, adc_projection=False):
     assert json.dumps(actual, sort_keys=True) == json.dumps(expected, sort_keys=True)
 
 
+def adc_profile_indices(profiles, batch_size):
+    """Use explicit profile families, independently of observed variance values."""
+    assert type(batch_size) is int and batch_size > 0
+    assert profiles is not None and len(profiles) in (1, batch_size)
+    assert all(len(p) == 3 and type(p[2]) is bool for p in profiles)
+    profiles = profiles * batch_size if len(profiles) == 1 else profiles
+    return [i for i, (_, _, stochastic) in enumerate(profiles) if not stochastic]
+
+
+def expected_adc_coverage(protocol, photo_sources, color_cases, camera_cases, gfx_conditioning):
+    """Derive coverage from explicit priors, not ISO names or observed noise."""
+
+    def is_adc(condition):
+        assert all(math.isfinite(condition[k]) and condition[k] >= 0 for k in ("shot", "read"))
+        return condition["shot"] == condition["read"] == 0
+
+    assert set(protocol["patterns"]) == {"RGGB", "BGGR", "GRBG", "GBRG"}
+    assert len(protocol["patterns"]) == 4
+    assert sum(is_adc(c) for c in protocol["conditions"]) == 1
+    assert set(camera_cases) == {"known", "unseen"}
+    assert set(gfx_conditioning) == {"gfx", "gfx-highlights"}
+    result = {
+        "photo": photo_sources * 4,
+        "texture": 14 * 4 * 4,
+        "color": sum(is_adc(c["condition"]) for c in color_cases),
+    }
+    result.update(
+        {
+            stage: sum(len(c["crops"]) for c in cases if is_adc(c["conditioning"]))
+            for stage, cases in camera_cases.items()
+        }
+    )
+    result.update(
+        {
+            stage: (4 if stage == "gfx" else 2) * int(is_adc(condition))
+            for stage, condition in gfx_conditioning.items()
+        }
+    )
+    return result
+
+
+def adc_sample_fidelity(prediction, packed, colors):
+    """Read valid sensor-channel errors without modifying a prediction or RNG."""
+    import torch
+
+    from demosaic.cfa import mosaic
+
+    assert prediction.dtype == packed.dtype == torch.float32
+    assert torch.isfinite(prediction).all() and torch.isfinite(packed).all()
+    sampled = mosaic(prediction, colors)
+    assert sampled.shape == packed.shape
+    valid = (packed > 1 / 65535) & (packed < 1 - 1 / 65535)
+    errors = (sampled - packed).abs()[valid]
+    return {
+        "observations": len(packed),
+        "valid_CFA_values": errors.numel(),
+        "maximum_absolute_error_sensor_units": float(errors.max()) if errors.numel() else None,
+    }
+
+
 def worker(plan_path, stage):
     import random
 
@@ -444,6 +520,14 @@ def worker(plan_path, stage):
                     models[0]["config"],
                     adc_projection=match.get("expected_adc_projection", False),
                 )
+            if match.get("expected_adc_projection", False):
+                assert stage in plan["ADC_fidelity_observations_per_projected_model"]
+                assert plan["ADC_valid_sample_error_limit"] == 1e-6
+                record["ADC_fidelity"] = {
+                    "observations": 0,
+                    "valid_CFA_values": 0,
+                    "maximum_absolute_error_sensor_units": None,
+                }
             models.append(record)
 
             def before(module, args, kwargs):
@@ -472,8 +556,26 @@ def worker(plan_path, stage):
                     else None
                 )
 
-            def after(_module, args, value):
+            def after(module, args, value):
                 assert value.dtype == torch.float32 and torch.isfinite(value).all()
+                if "ADC_fidelity" in record:
+                    selected = adc_profile_indices(
+                        module.pretrained_rgb._noise_profiles, len(args[0])
+                    )
+                    if selected:
+                        colors = args[2] if args[2].ndim == 1 else args[2][selected]
+                        measured = adc_sample_fidelity(value[selected], args[0][selected], colors)
+                        maximum = measured["maximum_absolute_error_sensor_units"]
+                        if maximum is not None:
+                            assert maximum <= plan["ADC_valid_sample_error_limit"]
+                        aggregate = record["ADC_fidelity"]
+                        aggregate["observations"] += measured["observations"]
+                        aggregate["valid_CFA_values"] += measured["valid_CFA_values"]
+                        if maximum is not None:
+                            old = aggregate["maximum_absolute_error_sensor_units"]
+                            aggregate["maximum_absolute_error_sensor_units"] = (
+                                maximum if old is None else max(old, maximum)
+                            )
                 if record["pending_input_hash"] is not None:
                     assert record["pending_input_hash"] == batch_fingerprint(
                         dict(
@@ -646,6 +748,19 @@ def worker(plan_path, stage):
     if witness is not None:
         assert ref(witness["path"]) == witness
         witness_audit = check_reference_witnesses(invariants, read(witness["path"])["invariants"])
+    fidelity = []
+    if "ADC_fidelity_observations_per_projected_model" in plan:
+        expected = plan["ADC_fidelity_observations_per_projected_model"][stage]
+        for index, record in enumerate(models):
+            if "ADC_fidelity" not in record:
+                continue
+            measured = record["ADC_fidelity"]
+            assert measured["observations"] == expected
+            assert not expected or measured["valid_CFA_values"] > 0
+            fidelity.append(
+                {"model_index": index, "checkpoint": plan["checkpoints"][index], **measured}
+            )
+        assert len(fidelity) == 2
     guard(plan)
     save(
         root / (stage + "-result.json"),
@@ -665,6 +780,7 @@ def worker(plan_path, stage):
                 / ("report.json" if stage in ("color", "gfx", "gfx-highlights") else "summary.json")
             ),
             "scope": plan["scope"],
+            **({"ADC_sample_fidelity": fidelity} if fidelity else {}),
         },
     )
 

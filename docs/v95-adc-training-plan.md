@@ -122,3 +122,20 @@ Preparation produces the exact-EMA V98 export, retains its training lineage
 and requires the projected policy explicitly for both new endpoints. Focused
 tests reject unrelated architecture/precision changes; execution on completed
 endpoints and the complete quality decision remain pending.
+
+Full evaluation now also checks sample fidelity on every declared projected
+endpoint. Coverage is derived from explicit priors: 1,772 ADC observations per
+model in photo/procedural evaluation, 224 in the analytic grid and 588 in the
+color grid. Known/unseen camera and GFX priors are positive, so require zero
+ADC selections. Valid measured channels must agree with the input within
+1e-6 sensor units. Empty valid support reports no numeric maximum. These
+diagnostics are separate from the unchanged reference invariant schema and
+do not establish unmeasured-color accuracy or full RGB16 output precision.
+
+The [CPU observer preparation](results/v95-adc-full-panel-fidelity-preparation-v1.json)
+passes 35 focused checks and replay on all 588 saved V95 ADC color fields
+(38,535,168 valid CFA values). It detects input inconsistencies in the
+unprojected arrays; the existing projection reduces measured-sample error to
+at most 5.83e-11 in this fixed replay. All 588 positive-noise fields are skipped.
+No model inference, new noise or quality claim follows; actual V98/V99 full
+stage execution remains pending.
