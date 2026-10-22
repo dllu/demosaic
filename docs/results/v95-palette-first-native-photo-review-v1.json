@@ -1,0 +1,200 @@
+{
+  "status": "first-two-preselected-photo-cases-actually-viewed-and-native-triplets-published",
+  "recorded_local": "2026-10-21T17:52:23.087433-07:00",
+  "operator": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-palette-matched-evaluation-v1/publish-first-photo-review-v1.py",
+    "sha256": "4e9310b9a4997c4cfa2a2917051173d08d03aab2d1ad7ab3c45a6801ebc5acd9"
+  },
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-palette-matched-evaluation-v1/plan.json",
+    "sha256": "559e3fb7fac99f6fc5aaf27f1f98d5cc252dc1ca4692d3278ca8c9dafaadfd27"
+  },
+  "checkpoints": [
+    {
+      "arm": "V43",
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-hidden-FP16-full-quality-v1/work/checkpoints/V43.pt",
+      "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+      "expected_lineage": {
+        "step": 2000
+      }
+    },
+    {
+      "arm": "V95",
+      "path": "/mnt/external/demosaic/v43-curated-training-20261020-v1/train/V95/last.pt",
+      "sha256": "189f5530ef8be6384e101e00fe50ece19297436b0c65b5bb3cabbb2f327e2bb6",
+      "expected_lineage": {
+        "step": 20000,
+        "initialized_from": {
+          "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-hidden-FP16-full-quality-v1/work/checkpoints/V43.pt",
+          "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+          "step": 2000
+        }
+      }
+    },
+    {
+      "arm": "V96",
+      "path": "/mnt/external/demosaic/v95-palette-training-20261021-v2/train/V96/last.pt",
+      "sha256": "c3754741e210ece42093064bf8f95035c7735e79a82541b6edac83c24a510c0f",
+      "expected_lineage": {
+        "step": 4000,
+        "initialized_from": {
+          "path": "/mnt/external/demosaic/v43-curated-training-20261020-v1/train/V95/last.pt",
+          "sha256": "189f5530ef8be6384e101e00fe50ece19297436b0c65b5bb3cabbb2f327e2bb6",
+          "step": 20000
+        }
+      }
+    },
+    {
+      "arm": "V97",
+      "path": "/mnt/external/demosaic/v95-palette-training-20261021-v2/train/V97/last.pt",
+      "sha256": "1ab0b6a3d2e30260eb41eeb11a7990ef55b15bbfec9dbfa4257e091b2f47ce27",
+      "expected_lineage": {
+        "step": 4000,
+        "initialized_from": {
+          "path": "/mnt/external/demosaic/v43-curated-training-20261020-v1/train/V95/last.pt",
+          "sha256": "189f5530ef8be6384e101e00fe50ece19297436b0c65b5bb3cabbb2f327e2bb6",
+          "step": 20000
+        }
+      }
+    }
+  ],
+  "actual_native_review": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-palette-photo-native-review-v1/actual-visual-review-v1.json",
+    "sha256": "0aa12d21881be443188597053c5a7b22866a5bfc7e62dd32fad1ec94d66ecdfb"
+  },
+  "published_native_crops": [
+    {
+      "arm": "V43",
+      "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v95-flat-palette/crop-09daca8a7d6943a8.png",
+        "sha256": "65be39aaa868f7a6e828f0e16f87f099133e655d00f16db0a73cec1fb4275215"
+      },
+      "sidecar": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v95-flat-palette/crop-09daca8a7d6943a8.json",
+        "sha256": "79b90b05c65dc195b812c5e7b9592d655203a881b1b564cc4567191ff05eac33"
+      },
+      "original_image": {
+        "path": "/mnt/external/demosaic/v95-palette-evaluation-20261021-v1/photo/crop-09daca8a7d6943a8.png",
+        "sha256": "65be39aaa868f7a6e828f0e16f87f099133e655d00f16db0a73cec1fb4275215"
+      }
+    },
+    {
+      "arm": "V43",
+      "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v95-flat-palette/crop-085432538346e7c9.png",
+        "sha256": "4096189ab8acf0f1fe5959a190276a918acd69dfff7e57743ea846cd1c374136"
+      },
+      "sidecar": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v95-flat-palette/crop-085432538346e7c9.json",
+        "sha256": "e8dc98373e5ad36f290bd748461af364641244fb5e12f3793d4ee975a91d65ce"
+      },
+      "original_image": {
+        "path": "/mnt/external/demosaic/v95-palette-evaluation-20261021-v1/photo/crop-085432538346e7c9.png",
+        "sha256": "4096189ab8acf0f1fe5959a190276a918acd69dfff7e57743ea846cd1c374136"
+      }
+    },
+    {
+      "arm": "V95",
+      "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v95-flat-palette/crop-8f7bc348ce081939.png",
+        "sha256": "7f3d0314c938cdf97839711bceba3a8c656bf1722a923800013641166e64f875"
+      },
+      "sidecar": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v95-flat-palette/crop-8f7bc348ce081939.json",
+        "sha256": "1cafeb5b12e75538f8676fd6dc1a1628f84f5e9626c292e483b5c4a2cf719204"
+      },
+      "original_image": {
+        "path": "/mnt/external/demosaic/v95-palette-evaluation-20261021-v1/photo/crop-8f7bc348ce081939.png",
+        "sha256": "7f3d0314c938cdf97839711bceba3a8c656bf1722a923800013641166e64f875"
+      }
+    },
+    {
+      "arm": "V95",
+      "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v95-flat-palette/crop-00dd92d39a9244e1.png",
+        "sha256": "75b72ddc3562189ab1e8af328c86859e3ad69e2f2b6f31c5c8910e5e4fd87f9d"
+      },
+      "sidecar": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v95-flat-palette/crop-00dd92d39a9244e1.json",
+        "sha256": "efeecfae3a7c84961f882dbbedeb4430b9a6808eb50bd68e2082972bdc29c543"
+      },
+      "original_image": {
+        "path": "/mnt/external/demosaic/v95-palette-evaluation-20261021-v1/photo/crop-00dd92d39a9244e1.png",
+        "sha256": "75b72ddc3562189ab1e8af328c86859e3ad69e2f2b6f31c5c8910e5e4fd87f9d"
+      }
+    },
+    {
+      "arm": "V96",
+      "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v95-flat-palette/crop-c746f497532b5cb4.png",
+        "sha256": "8acbd0acfc3afd64e6b1692ea34a51246ec6646d6684f541459df6815be39281"
+      },
+      "sidecar": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v95-flat-palette/crop-c746f497532b5cb4.json",
+        "sha256": "36d96783261e26b613b4670517350f3ee30c6cbd1a07f81f1d383a6cb528d62d"
+      },
+      "original_image": {
+        "path": "/mnt/external/demosaic/v95-palette-evaluation-20261021-v1/photo/crop-c746f497532b5cb4.png",
+        "sha256": "8acbd0acfc3afd64e6b1692ea34a51246ec6646d6684f541459df6815be39281"
+      }
+    },
+    {
+      "arm": "V96",
+      "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v95-flat-palette/crop-f6b71053a64780db.png",
+        "sha256": "3876812b8595daeb538a8098d1d51bcddcb6ccb7760d3745bbc19a11b8fdeb93"
+      },
+      "sidecar": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v95-flat-palette/crop-f6b71053a64780db.json",
+        "sha256": "853e3d2296b09a9d85ef7d768d5e01e74da69ecef5f80e2311a3379dc668f513"
+      },
+      "original_image": {
+        "path": "/mnt/external/demosaic/v95-palette-evaluation-20261021-v1/photo/crop-f6b71053a64780db.png",
+        "sha256": "3876812b8595daeb538a8098d1d51bcddcb6ccb7760d3745bbc19a11b8fdeb93"
+      }
+    },
+    {
+      "arm": "V97",
+      "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v95-flat-palette/crop-7b24445a5eb68506.png",
+        "sha256": "8a7d43fb757ccac25e48498f90bc1067a885cacd860e174859a6f9174407fadf"
+      },
+      "sidecar": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v95-flat-palette/crop-7b24445a5eb68506.json",
+        "sha256": "1fb62218b0379f9185b4bab56511e090a2c893ec15601d6921896a80a5c5c70e"
+      },
+      "original_image": {
+        "path": "/mnt/external/demosaic/v95-palette-evaluation-20261021-v1/photo/crop-7b24445a5eb68506.png",
+        "sha256": "8a7d43fb757ccac25e48498f90bc1067a885cacd860e174859a6f9174407fadf"
+      }
+    },
+    {
+      "arm": "V97",
+      "source_id": "002fc6eeadf637e81d5a327f117b79abb86becd9",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v95-flat-palette/crop-b728114ba3debcb1.png",
+        "sha256": "1c38e024504700180741a7aefdff818e4679c74919d4017167dc393e2d861899"
+      },
+      "sidecar": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v95-flat-palette/crop-b728114ba3debcb1.json",
+        "sha256": "dbce201859cf81efa3deef66c93ef9f6c6ca3e00a250cdca35781b1b7c4b4312"
+      },
+      "original_image": {
+        "path": "/mnt/external/demosaic/v95-palette-evaluation-20261021-v1/photo/crop-b728114ba3debcb1.png",
+        "sha256": "1c38e024504700180741a7aefdff818e4679c74919d4017167dc393e2d861899"
+      }
+    }
+  ],
+  "observations": [
+    "Paraglider fabric: all four joint endpoints lose much of the fine suspension-line structure visible in exact GT at ISO12800. V97 has a visible green/olive shift and uneven fabric tone versus GT and the other joint endpoints. V96 also retains some low-frequency unevenness. This is an observed negative example, not a full color-grid conclusion.",
+    "Building/clouds: joint models retain clearer window/roof geometry than the two RawNIND adapters in the viewed board, while small differences among joint endpoints remain modest. Fine cloud texture is still smoothed. These two preselected photos do not establish broad real-camera superiority or a replacement for V43."
+  ],
+  "scope": "Two preselected exact-synthetic-GT photos per joint model, copied byte-exact with original source/ROI/checkpoint/noise/display sidecars. Full evaluation is still running; V97's visible fabric cast is a negative qualitative observation. No completed primary means, statistical interval, color-grid/real-camera conclusion, full-frame result or model promotion."
+}

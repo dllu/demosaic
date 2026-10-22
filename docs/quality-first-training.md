@@ -84,8 +84,11 @@ decision to keep V43 as working reference while improving V95's quality.
 
 The [V96/V97 follow-up](v95-flat-palette-quality-plan.md) tests the existing
 wider colored-flat palette from final V95 while preserving the weak-detail
-recipe and architecture. It is a prospective matched 4k study, with full
-quality/native review required before any new conclusion.
+recipe and architecture. Both matched 4k stages are complete and independently
+audited; the full fresh FP32 evaluation is running. The
+[first preselected native photos](v95-flat-palette-quality-review.md) show a
+V97 fabric color cast. Full metrics, camera/analytic/color/GFX and native review
+remain required before a quality decision.
 
 Plans/code remain local and checkpoints/run traces use a fresh external-SSD
 namespace. The completed production plan is

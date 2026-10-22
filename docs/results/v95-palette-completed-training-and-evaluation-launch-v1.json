@@ -1,0 +1,171 @@
+{
+  "status": "both-matched-final4k-stages-audited-and-full-FP32-evaluation-running",
+  "recorded_local": "2026-10-21T17:47:30.589947-07:00",
+  "operator": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-palette-matched-evaluation-v1/publish-completed-training-and-launch-v1.py",
+    "sha256": "d4aca0ad839120383d47a47f521e2decbfde0db80caaa466eb49ae0ec6c0353e"
+  },
+  "completed_training_status": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-palette-matched-training-v2/status.json",
+    "sha256": "ddc961ce8efb02ea810685c083beac52f7941e97559bdacae4aed61b72f85138"
+  },
+  "training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-palette-matched-training-v2/plan.json",
+    "sha256": "3fcc5b72cf781e844238cdefc696f73c05b4540935226742bb39b3588ed2b706"
+  },
+  "completed_arm_audits": [
+    {
+      "path": "/home/dllu/proj/demosaic/docs/results/v95-palette-V96-completed-training-v1.json",
+      "sha256": "3523d9b61201d87e356b3d5ec6de386ac960f6640382ea0e7c56cc6072047985"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/results/v95-palette-V97-completed-training-v1.json",
+      "sha256": "9ccadb1bf83e0baf9b687e4c061ea0e9d77816365d4b2d78ea82b967b21d9ee0"
+    }
+  ],
+  "production_counts": {
+    "V96": {
+      "training_forwards": 4000,
+      "validation_forwards": 128,
+      "DINO_calls": 4128,
+      "optimizer_steps": 4000
+    },
+    "V97": {
+      "training_forwards": 4000,
+      "validation_forwards": 128,
+      "DINO_calls": 4128,
+      "optimizer_steps": 4000
+    }
+  },
+  "matched_observation_audits": {
+    "CPU": {
+      "identical_shared_observations": 12,
+      "changed_treatment_observations": 1
+    },
+    "CUDA": {
+      "identical_shared_observations": 12,
+      "changed_treatment_observations": 9
+    },
+    "train": {
+      "identical_shared_observations": 69,
+      "changed_treatment_observations": 58
+    }
+  },
+  "each_first24_production_inputs_exact_own_CUDA_preflight": true,
+  "source_sha256": "ea9622343d2ad4d9f12ea0089884ad9dcefb87be4ae06f24eacc764829c02d09",
+  "evaluation_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-palette-matched-evaluation-v1/plan.json",
+    "sha256": "559e3fb7fac99f6fc5aaf27f1f98d5cc252dc1ca4692d3278ca8c9dafaadfd27"
+  },
+  "evaluation_launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-palette-matched-evaluation-v1/launch.json",
+    "sha256": "9c21448c842e9cc7f90020c3d999115a9dc1f0bf692647cfc3f0ebd9123b9afa"
+  },
+  "evaluation_checkpoints": [
+    {
+      "arm": "V43",
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-hidden-FP16-full-quality-v1/work/checkpoints/V43.pt",
+      "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+      "expected_lineage": {
+        "step": 2000
+      }
+    },
+    {
+      "arm": "V95",
+      "path": "/mnt/external/demosaic/v43-curated-training-20261020-v1/train/V95/last.pt",
+      "sha256": "189f5530ef8be6384e101e00fe50ece19297436b0c65b5bb3cabbb2f327e2bb6",
+      "expected_lineage": {
+        "step": 20000,
+        "initialized_from": {
+          "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-hidden-FP16-full-quality-v1/work/checkpoints/V43.pt",
+          "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+          "step": 2000
+        }
+      }
+    },
+    {
+      "arm": "V96",
+      "path": "/mnt/external/demosaic/v95-palette-training-20261021-v2/train/V96/last.pt",
+      "sha256": "c3754741e210ece42093064bf8f95035c7735e79a82541b6edac83c24a510c0f",
+      "expected_lineage": {
+        "step": 4000,
+        "initialized_from": {
+          "path": "/mnt/external/demosaic/v43-curated-training-20261020-v1/train/V95/last.pt",
+          "sha256": "189f5530ef8be6384e101e00fe50ece19297436b0c65b5bb3cabbb2f327e2bb6",
+          "step": 20000
+        }
+      }
+    },
+    {
+      "arm": "V97",
+      "path": "/mnt/external/demosaic/v95-palette-training-20261021-v2/train/V97/last.pt",
+      "sha256": "1ab0b6a3d2e30260eb41eeb11a7990ef55b15bbfec9dbfa4257e091b2f47ce27",
+      "expected_lineage": {
+        "step": 4000,
+        "initialized_from": {
+          "path": "/mnt/external/demosaic/v43-curated-training-20261020-v1/train/V95/last.pt",
+          "sha256": "189f5530ef8be6384e101e00fe50ece19297436b0c65b5bb3cabbb2f327e2bb6",
+          "step": 20000
+        }
+      }
+    }
+  ],
+  "evaluation_stages": [
+    "photo",
+    "known",
+    "unseen",
+    "texture",
+    "color",
+    "gfx",
+    "gfx-highlights"
+  ],
+  "declared_evaluation_inputs": 1796,
+  "frozen_evaluation_files": 64,
+  "reviewed_reference_witnesses": {
+    "photo": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V43-curated-matched-evaluation-v1/photo-result.json",
+      "sha256": "b93362d36ccd700993f6d637594528e77c8589d73855bcb508501c6a2a1aad49"
+    },
+    "known": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V43-curated-matched-evaluation-v1/known-result.json",
+      "sha256": "312136049fd1cc0c98b2f7f38ed864de9524853309650ad41366541b3cfa7c9e"
+    },
+    "unseen": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V43-curated-matched-evaluation-v1/unseen-result.json",
+      "sha256": "af3902ec52bdcafcad25e25849ffd359419400d80d1a618aa035e08eba282f8f"
+    },
+    "texture": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V43-curated-matched-evaluation-v1/texture-result.json",
+      "sha256": "a9f870d3e545bb9c5ede91e29c31724ff3f69888f8267967214a5bca825351cf"
+    },
+    "color": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V43-curated-matched-evaluation-v1/color-result.json",
+      "sha256": "6732b94083bea089a82c25665fed729494112ccbcfe8d0aa5b6fe31473afa885"
+    },
+    "gfx": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V43-curated-matched-evaluation-v1/gfx-result.json",
+      "sha256": "deb87e95badbb119f668271cd860e99535c58aa3e6e71a8fad01197d300a9229"
+    },
+    "gfx-highlights": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V43-curated-matched-evaluation-v1/gfx-highlights-result.json",
+      "sha256": "620187e889c3c6734d389571ec44728d5271b43ff69efc07ded350b34c6a8f01"
+    }
+  },
+  "actual_photo_progress_observed": {
+    "controller": {
+      "pid": 3905899,
+      "created": 1792629846.25
+    },
+    "child": {
+      "pid": 3906010,
+      "created": 1792629910.88
+    },
+    "last_log_progress": {
+      "event": "quality",
+      "sources_done": 8,
+      "total_sources": 443,
+      "rows": 2016
+    }
+  },
+  "scope": "Both fixed final4000-stage EMAs from V95, same originalV43 architecture and numerical package. Independent saved model/EMA/Adam/trace/validation audits pass. Full427-photo+16-procedural,7-condition/4-CFA,9-method fresh IEEEFP32/B4 evaluation is actually progressing, followed serially by known/unseen camera, carrier/flat/color and standingGFX/highlight stages. Reference invariant witnesses are pinned; final stage checks, independent arithmetic and actual native viewing remain required. No completed quality score, checkpoint selection, speed/default or model promotion is claimed."
+}

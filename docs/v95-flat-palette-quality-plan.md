@@ -65,15 +65,28 @@ contains exact plan/source/checkpoint hashes, exited proof owners and actual
 production owner/resource readings. Forty focused data/lineage/resource tests
 pass; none is a held-out quality measurement.
 
-**V96 completed 4,000 updates; V97 is training.** The
-[independent V96 audit](results/v95-palette-V96-completed-training-v1.json)
-checks all five retained states (1k/2k/3k/final4k/validation-best), finite
+**Both V96 and V97 completed 4,000 updates.** Independent audits of
+[V96](results/v95-palette-V96-completed-training-v1.json) and
+[V97](results/v95-palette-V97-completed-training-v1.json)
+check all five retained states per arm (1k/2k/3k/final4k/validation-best), finite
 model/EMA/Adam tensors, exact V95 lineage and architecture, all 161 logged
 loss/gradient rows, four scheduled validations and exact first24 inputs versus
-its CUDA preflight. Counts are 4,000 optimizer/training forwards plus 128
-validation forwards and 4,128 DINO calls. Validation-best is step 3k;
-the predeclared final4k EMA remains primary. Matched V97 completion/input
-comparison and full quality/native review remain pending.
+each arm's CUDA preflight. Each has 4,000 optimizer/training forwards plus 128
+validation forwards and 4,128 DINO calls. Validation-best is step 3k/2k for
+V96/V97; the predeclared final4k EMAs remain primary. All 69 logged paired/native
+observations match across arms, while 58 affected Commons observations differ.
+The [completed-training/evaluation launch receipt](results/v95-palette-completed-training-and-evaluation-launch-v1.json)
+records both exited training owners, the matched input checks and the live
+fresh FP32 full-panel evaluation. Its frozen plan has 1,796 inputs, 64 source
+files and explicit checkpoint lineage/reference witnesses. Artifacts use
+`.cache/quality-first-20261020/V95-palette-matched-evaluation-v1/` and
+`/mnt/external/demosaic/v95-palette-evaluation-20261021-v1/`.
+
+The [first native-photo review](v95-flat-palette-quality-review.md) publishes two
+preselected triplets per joint model. V97 shows a visible green/olive fabric
+cast, and fine suspension lines remain weak in all four endpoints. The full
+primary, camera, analytic/color and GFX checks are still running; no quality
+promotion follows from the training audits or these two examples.
 
 The controller records actual resource readings every two seconds. Require
 48 GiB available RAM and 64/384 GiB free on root/external storage, stable for
@@ -87,7 +100,8 @@ The initializer is the final V95 EMA checkpoint, SHA-256
 its full initialized model hash is
 `8c8646e5e984148338748423fbb97b36143b9d14b494b8f7844520c282c826f3`.
 Intermediate 1k/2k/3k checkpoints are diagnostic; final 4k EMAs are primary.
-Independent saved-state checks and held-out review remain necessary.
+Independent saved-state checks pass; held-out quality and native review remain
+necessary.
 
 ## Quality decision
 
