@@ -57,6 +57,27 @@ are never warped, resized, sharpened or independently exposure-adjusted.
 | Foliage | (8890,5570) | (8890,5570) |
 | Chain-link fence | (2240,6000) | (2241,6000) |
 
+## Isolated blue features
+
+Two blue features noticed in a V84 overview already occur in the noisy RAW.
+The first also persists in the separate ISO 100 exposure; the second is absent
+at those sensor coordinates in that later capture. Neither is created solely
+by restoration. This pair does not distinguish scene lights, motion and sensor
+causes, so the current processing retains them.
+
+| Sensor (x,y) | ISO 6400 blue photosite | ISO 100 blue photosite |
+| --- | ---: | ---: |
+| (9065,5759) | .32675 | .32808 |
+| (8991,5903) | .11302 | .00169 |
+
+Values are black-subtracted/white-normalized sensor units. These posthoc input
+diagnostics use two native 160×160 crops from each RAW, separately Malvar-demosaiced
+with shared WB/matrix and +2 EV. The independent ISO 100 capture is not GT. They
+are source observations, rather than independent model-selection cases.
+[Source, ROI, pixels and display metadata](results/gfx-blue-feature-input-reference-v1.json).
+
+![Native input/reference inspection of two blue features](images/gfx-blue-feature-input-reference.png)
+
 ## Reproduce and extend the comparisons
 
 Complete 101.996MP comparisons are queued for V84, final V100/V101 and RawNIND
