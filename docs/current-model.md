@@ -95,9 +95,11 @@ The [natural-detail gallery](heldout-detail.md) adds bark, white feathers,
 forest canopy and fur at three noise levels. It shows V84's remaining
 high-noise detail loss as well as its sharper low-noise output.
 V100's cleaned-data continuation adds small gains on those selected contexts.
-An [optional ADC-only site correction](adc-consistency.md) adds a separate
-fixed-weight diagnostic and native comparisons; it bypasses positive-noise
-profiles and does not change the current training baseline.
+For explicitly ADC-only inputs, use the [optional site correction](adc-consistency.md):
+it gains .400dB rendered PSNR over unchanged V84 weights across all427 photos,
+with all1,708 CFA cases improving. The complete report shows native examples
+and color/detail tradeoffs. Positive-noise profiles bypass it; the seven-condition
+values above and the original V84 training initializer remain unchanged.
 Its [complete real-camera comparison](real-camera-quality.md) is mixed;
 the full-photo comparison is still pending.
 The [Q2, Sony a7R II and GFX50R gallery](cross-camera-qualitative.md) also

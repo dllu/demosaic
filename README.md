@@ -14,6 +14,9 @@ versions and image comparisons belong here as they become available. The
 V100's final continuation has small [selected-detail gains](docs/heldout-detail.md)
 and [mixed real-camera results](docs/real-camera-quality.md). V101 tests the
 additional fine-detail recipe.
+For explicit zero-shot/read inputs, [optional site consistency](docs/adc-consistency.md)
+adds **.40dB ADC-only PSNR** with unchanged V84 weights across all427 photos/four
+CFAs; positive-noise inputs bypass it. The report includes native crops and color tradeoffs.
 
 ![PSNR versus model version](docs/images/version-PSNR-history.png)
 

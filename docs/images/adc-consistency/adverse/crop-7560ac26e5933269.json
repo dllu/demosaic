@@ -1,0 +1,161 @@
+{
+  "image": "crop-7560ac26e5933269.png",
+  "caption": "1f14eb69a090039363372d23b61634b624120013 / ADC-only / RGGB / V84",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Denoised",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "GT (synthetic)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "11eb1da17404dc9d4439f2e0acb5976f8746dbaf35a1442b5f8362529885a530",
+  "source_id": "1f14eb69a090039363372d23b61634b624120013",
+  "source": {
+    "title": "File:Kalan Minaret 04.jpg",
+    "page_url": "https://commons.wikimedia.org/wiki/File:Kalan_Minaret_04.jpg",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/40/Kalan_Minaret_04.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "author": "Bgag",
+    "license": "CC0",
+    "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "attribution": null,
+    "credit": "Own work",
+    "sha1": "1f14eb69a090039363372d23b61634b624120013",
+    "sha1_hex": "1f14eb69a090039363372d23b61634b624120013",
+    "download_path": "images/1f/14/1f14eb69a090039363372d23b61634b624120013.jpg",
+    "width": 2165,
+    "height": 3031,
+    "id": "1f14eb69a090039363372d23b61634b624120013",
+    "split": "val",
+    "bin_factor": 8,
+    "color_space": "linear-sRGB",
+    "dtype": "uint16",
+    "cache": "/mnt/external/demosaic/commons-v1/images/1f/1f14eb69a090039363372d23b61634b624120013.npy",
+    "shape": [
+      378,
+      270,
+      3
+    ],
+    "cache_sha256": "15ce4586f9e5db7e05439de70aa646425455049e92caa1f4c752b72012f88fa4"
+  },
+  "validation_index": 297,
+  "validation_seed": 42,
+  "source_cache_context_xywh": [
+    10,
+    105,
+    256,
+    256
+  ],
+  "evaluation_tile_xywh": [
+    50,
+    88,
+    160,
+    160
+  ],
+  "condition": {
+    "name": "adc-only",
+    "shot": 0.0,
+    "read": 0.0,
+    "exposure": 1.0
+  },
+  "pattern": "RGGB",
+  "display_exposure": 1,
+  "model": {
+    "label": "V84",
+    "sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10",
+    "step": 20000,
+    "compute_precision": "float32",
+    "device": "cpu",
+    "effective_model_config": {
+      "restoration_backbone": "pretrained-rgb",
+      "width": 64,
+      "encoder_blocks": [
+        2,
+        2,
+        4
+      ],
+      "middle_blocks": 6,
+      "decoder_blocks": [
+        2,
+        2,
+        2
+      ],
+      "attention": true,
+      "dino": true,
+      "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+      "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+      "dino_lora_rank": 0,
+      "dino_input_adapter": false,
+      "dino_feature_fusion": "convnext-pyramid",
+      "camera_conditioning": true,
+      "noise_modulation": false,
+      "physical_fp32": true,
+      "baseline": "bilinear",
+      "prior_window": 7,
+      "standardized_noise": false,
+      "noise_refinement": false,
+      "refinement_width": 24,
+      "refinement_blocks": 4,
+      "refinement_window": 63,
+      "coarse_refinement_factor": 0,
+      "coarse_refinement_width": 24,
+      "coarse_refinement_blocks": 4,
+      "coarse_refinement_window": 31,
+      "pyramid_refinement": false,
+      "pyramid_measurements": true,
+      "pyramid_width": 24,
+      "pyramid_blocks": 2,
+      "variance_stabilization": true,
+      "physical_anchors": true,
+      "rgb_processing_scale": 1,
+      "packed_detail_prior": false,
+      "rgb_hidden_autocast": false,
+      "rgb_center_camera_matrix": false,
+      "rgb_middle_skip_fp32": true,
+      "adc_cfa_projection": false,
+      "raw_kernel_reconstruction": false,
+      "raw_kernel_windows": [
+        1,
+        5,
+        17
+      ],
+      "raw_kernel_phase_conditioning": false,
+      "raw_directional_residual": false,
+      "raw_directional_bank_context": false,
+      "raw_directional_bank_detach_input": false,
+      "raw_spectral_residual": false,
+      "late_rgb_refinement": "none",
+      "isotropic_groups": 6,
+      "isotropic_blocks": 8,
+      "isotropic_local_width": 32,
+      "isotropic_raw_gain": 1.0,
+      "isotropic_residual_scale": 1.0
+    },
+    "output_operator": "Original V84"
+  },
+  "reference": "Exact synthetic clean target",
+  "selection": "Largest source-mean site-minus-V84 chromaMAE among remaining sources; show its largest-chroma-change CFA; Posthoc160window maximizing site-minus-V84 chromaMAE within common240interior; shared unchanged across methods."
+}

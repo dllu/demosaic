@@ -29,6 +29,7 @@ matched studies when attributing a gain to a particular change.
 | Directional, interval and bank heads | Several heads improve photographic means, with camera/detail tradeoffs; the simpler V84 family is stronger overall in the completed primary scores | [V78/V79](directional-interval-original4k-review.md), [V80/V81](directional-bank-original4k-review.md), [V82/V83](bank-detachment-original4k-review.md) |
 | Native data and larger context | V84/V85 reach36.44dB and provide the current quality baseline. The extra native captures have little matched effect; larger context is a separate small-effect comparison | [V84/V85](native-data-original20k-review.md), [V86/V87](training-context-original4k-review.md) |
 | Spectral and late RGB refinement | Small matched mean gains or protected common weights did not fix weak detail; head-only V92 regressed | [V88/V89](spectral-original4k-review.md), [V90/V91](late-rgb-original4k-review.md), [V92](late-rgb-head-only-original4k-review.md) |
+| ADC-only inference | With unchanged V84 weights, replacing only valid measured sites gains .400dB rendered PSNR across all427 sources/all1,708 CFA cases. SSIM/detail/chroma have documented individual tradeoffs; positive-noise profiles bypass it | [Complete site-consistency comparison and native crops](adc-consistency.md) |
 
 Each complete quality review retains source/checkpoint identities, native
 noisy/restored/reference crops and explicit real-reference limitations. The
