@@ -31,10 +31,16 @@ PSFs, weak synthetic textures, photographic contrast attenuation and reviewed
 ROI sampling. Both budgets are10,000 updates; short CPU/CUDA smokes are discarded.
 Current status and artifact locations are in the training guide.
 
-Actual source-quality review covers420 sources:396 retained/24 withheld, after
-a complete loss/proxy scan of88,508 training sources. Hard or high-loss material
+Actual source-quality review covers530 sources:500 retained/30 withheld, after
+a complete loss/proxy scan of88,508 training sources. The active runs use the
+earlier24 exclusions; six newer exclusions are prepared separately. Hard or high-loss material
 is not automatically bad data. [Native source examples](corpus-source-review.md)
 show the decisions; protected holdouts and series stay fixed.
+
+V100's final continuation has small gains on the four-source
+[natural-detail diagnostic](heldout-detail.md); V101 is training. Current
+[Q2/Sony/GFX50R comparisons](cross-camera-qualitative.md) show V84/V100 beside
+V43 and RawNIND. Broader evaluation and full-frame GFX export remain queued.
 
 The [experiment index](experiments.md) and [PSNR history](performance-history.md)
 retain earlier gains and tradeoffs. For example, V95 improves a tested weak

@@ -1,0 +1,507 @@
+{
+  "status": "completed-current-three-camera-qualitative-comparison",
+  "recorded_local": "2026-10-22T13:01:58-07:00",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/three-camera-v1/plan.json",
+    "sha256": "8538840313eba6c5a5010854fa03fbaf5d3f8e83758f098636cf218e73b6d299"
+  },
+  "launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/three-camera-v1/launch.json",
+    "sha256": "76d06a68f1a954147b35e61b9473272bde0af41d65f58e539c94bb8824c2828a"
+  },
+  "comparison_report": {
+    "path": "/mnt/external/demosaic/current-three-camera-20261022-v1/report.json",
+    "sha256": "32bca9b31856841adf6fb27c55da06fccb583b4237b8ff042d3091d0fe257bf0"
+  },
+  "selection": {
+    "path": "/home/dllu/proj/demosaic/configs/real-camera-qualitative.json",
+    "sha256": "67fcdceff358843c17083de1a4110c64b85b2989d526b7ded0845dba28d1d2b0"
+  },
+  "exact_training_source_absence_check": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/three-camera-v1/exclusion-check.json",
+    "sha256": "d25075c41a08e91d39fa90e89c1efd2452dcb239dd8290a5712753c8ddaae976"
+  },
+  "float_render_verification": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/three-camera-v1/float-render-verification.json",
+    "sha256": "bfe7826adbc65d2337f85fe4a3990a8aef499db0fdd84a5c2657b90a09522a71"
+  },
+  "models": [
+    {
+      "label": "dino-anchored-native-diverse-b16-v43, step 2000",
+      "source": "/mnt/external/demosaic/models/v43-step2000.pt",
+      "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+      "snapshot": "/mnt/external/demosaic/current-three-camera-20261022-v1/weights/weights-0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5.pt",
+      "compute_precision": "float32",
+      "device": "cpu",
+      "memory_format": "channels_last",
+      "model_config": {
+        "restoration_backbone": "pretrained-rgb",
+        "width": 64,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-vits16-pretrain-lvd1689m",
+        "dino_revision": "114c1379950215c8b35dfcd4e90a5c251dde0d32",
+        "dino_lora_rank": 0,
+        "dino_input_adapter": false,
+        "dino_feature_fusion": "bottleneck",
+        "camera_conditioning": true,
+        "noise_modulation": false,
+        "physical_fp32": true,
+        "baseline": "bilinear",
+        "prior_window": 7,
+        "standardized_noise": false,
+        "noise_refinement": false,
+        "refinement_width": 24,
+        "refinement_blocks": 4,
+        "refinement_window": 63,
+        "coarse_refinement_factor": 0,
+        "coarse_refinement_width": 24,
+        "coarse_refinement_blocks": 4,
+        "coarse_refinement_window": 31,
+        "pyramid_refinement": false,
+        "pyramid_measurements": true,
+        "pyramid_width": 24,
+        "pyramid_blocks": 2,
+        "variance_stabilization": true,
+        "physical_anchors": true,
+        "rgb_processing_scale": 1,
+        "packed_detail_prior": false,
+        "rgb_hidden_autocast": false,
+        "rgb_center_camera_matrix": false,
+        "rgb_middle_skip_fp32": false,
+        "adc_cfa_projection": false,
+        "raw_kernel_reconstruction": false,
+        "raw_kernel_windows": [
+          1,
+          5,
+          17
+        ],
+        "raw_kernel_phase_conditioning": false,
+        "raw_directional_residual": false,
+        "raw_directional_bank_context": false,
+        "raw_directional_bank_detach_input": false,
+        "raw_spectral_residual": false,
+        "late_rgb_refinement": "none",
+        "isotropic_groups": 6,
+        "isotropic_blocks": 8,
+        "isotropic_local_width": 32,
+        "isotropic_raw_gain": 1.0,
+        "isotropic_residual_scale": 1.0
+      }
+    },
+    {
+      "label": "native-data-control-v84, step 20000",
+      "source": "/mnt/external/demosaic/models/v84-original20000.pt",
+      "sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10",
+      "snapshot": "/mnt/external/demosaic/current-three-camera-20261022-v1/weights/weights-134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10.pt",
+      "compute_precision": "float32",
+      "device": "cpu",
+      "memory_format": "channels_last",
+      "model_config": {
+        "restoration_backbone": "pretrained-rgb",
+        "width": 64,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "dino_lora_rank": 0,
+        "dino_input_adapter": false,
+        "dino_feature_fusion": "convnext-pyramid",
+        "camera_conditioning": true,
+        "noise_modulation": false,
+        "physical_fp32": true,
+        "baseline": "bilinear",
+        "prior_window": 7,
+        "standardized_noise": false,
+        "noise_refinement": false,
+        "refinement_width": 24,
+        "refinement_blocks": 4,
+        "refinement_window": 63,
+        "coarse_refinement_factor": 0,
+        "coarse_refinement_width": 24,
+        "coarse_refinement_blocks": 4,
+        "coarse_refinement_window": 31,
+        "pyramid_refinement": false,
+        "pyramid_measurements": true,
+        "pyramid_width": 24,
+        "pyramid_blocks": 2,
+        "variance_stabilization": true,
+        "physical_anchors": true,
+        "rgb_processing_scale": 1,
+        "packed_detail_prior": false,
+        "rgb_hidden_autocast": false,
+        "rgb_center_camera_matrix": false,
+        "rgb_middle_skip_fp32": true,
+        "adc_cfa_projection": false,
+        "raw_kernel_reconstruction": false,
+        "raw_kernel_windows": [
+          1,
+          5,
+          17
+        ],
+        "raw_kernel_phase_conditioning": false,
+        "raw_directional_residual": false,
+        "raw_directional_bank_context": false,
+        "raw_directional_bank_detach_input": false,
+        "raw_spectral_residual": false,
+        "late_rgb_refinement": "none",
+        "isotropic_groups": 6,
+        "isotropic_blocks": 8,
+        "isotropic_local_width": 32,
+        "isotropic_raw_gain": 1.0,
+        "isotropic_residual_scale": 1.0
+      }
+    },
+    {
+      "label": "V100, step 10000",
+      "source": "/mnt/external/demosaic/v84-curated-quality-20261022-v2/train/V100/last.pt",
+      "sha256": "4b689fb187b13df72fbf79ebd46f98cf7361c3ca8a97fb1f7afee940b249ad3e",
+      "snapshot": "/mnt/external/demosaic/current-three-camera-20261022-v1/weights/weights-4b689fb187b13df72fbf79ebd46f98cf7361c3ca8a97fb1f7afee940b249ad3e.pt",
+      "compute_precision": "float32",
+      "device": "cpu",
+      "memory_format": "channels_last",
+      "model_config": {
+        "restoration_backbone": "pretrained-rgb",
+        "width": 64,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "dino_lora_rank": 0,
+        "dino_input_adapter": false,
+        "dino_feature_fusion": "convnext-pyramid",
+        "camera_conditioning": true,
+        "noise_modulation": false,
+        "physical_fp32": true,
+        "baseline": "bilinear",
+        "prior_window": 7,
+        "standardized_noise": false,
+        "noise_refinement": false,
+        "refinement_width": 24,
+        "refinement_blocks": 4,
+        "refinement_window": 63,
+        "coarse_refinement_factor": 0,
+        "coarse_refinement_width": 24,
+        "coarse_refinement_blocks": 4,
+        "coarse_refinement_window": 31,
+        "pyramid_refinement": false,
+        "pyramid_measurements": true,
+        "pyramid_width": 24,
+        "pyramid_blocks": 2,
+        "variance_stabilization": true,
+        "physical_anchors": true,
+        "rgb_processing_scale": 1,
+        "packed_detail_prior": false,
+        "rgb_hidden_autocast": false,
+        "rgb_center_camera_matrix": false,
+        "rgb_middle_skip_fp32": true,
+        "adc_cfa_projection": false,
+        "raw_kernel_reconstruction": false,
+        "raw_kernel_windows": [
+          1,
+          5,
+          17
+        ],
+        "raw_kernel_phase_conditioning": false,
+        "raw_directional_residual": false,
+        "raw_directional_bank_context": false,
+        "raw_directional_bank_detach_input": false,
+        "raw_spectral_residual": false,
+        "late_rgb_refinement": "none",
+        "isotropic_groups": 6,
+        "isotropic_blocks": 8,
+        "isotropic_local_width": 32,
+        "isotropic_raw_gain": 1.0,
+        "isotropic_residual_scale": 1.0
+      }
+    },
+    {
+      "label": "RawNIND:CFA-channel",
+      "gain_mode": "cfa-channel",
+      "precision": "IEEE float32",
+      "device": "cpu",
+      "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+    }
+  ],
+  "capture_contexts": 3,
+  "native_ROIs": 6,
+  "native_triplets": 18,
+  "native160_distinct_cells_actually_viewed": 30,
+  "layouts_actually_viewed": [
+    "Three original native review boards,30cells",
+    "Three published rearranged native boards, same30cells"
+  ],
+  "unquantized_float32_contexts_verified": 21,
+  "display_panels_rerendered_exactly": 54,
+  "maximum_absolute_RGB8_rerender_difference": 0,
+  "source_and_checkpoint_files_unchanged_after_run": true,
+  "compute": {
+    "device": "cpu",
+    "neural_precision": "float32",
+    "torch": "2.14.1+cu130",
+    "cuda_initialized": false
+  },
+  "views": [
+    {
+      "immutable_review_board": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/three-camera-v1/boards/q2.png",
+        "sha256": "421169d6b749ec63e8e4c24cf7734d1c7ab12354df55b93d8dbf7a839b048b72"
+      },
+      "immutable_review_receipt": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/three-camera-v1/boards/q2.json",
+        "sha256": "52a21d3a0d81a3ef82c088f880444160082e04f9b48e66e7c0b22adbc091595f"
+      },
+      "current_gallery": "docs/images/current-cameras/q2-comparison.png",
+      "published_board_pixels_match_review": true,
+      "native160_distinct_cells_actually_viewed": 10
+    },
+    {
+      "immutable_review_board": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/three-camera-v1/boards/a7rii.png",
+        "sha256": "ba2073a00c20083290b6dd614154398f0d3e068636f49ca29c4a828878debbe8"
+      },
+      "immutable_review_receipt": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/three-camera-v1/boards/a7rii.json",
+        "sha256": "b35afc4df7b05f49bf9f3ab261e02e61e0ec2962d893309a27916ce3e23165a0"
+      },
+      "current_gallery": "docs/images/current-cameras/a7rii-comparison.png",
+      "published_board_pixels_match_review": true,
+      "native160_distinct_cells_actually_viewed": 10
+    },
+    {
+      "immutable_review_board": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/three-camera-v1/boards/gfx50r.png",
+        "sha256": "fa363cd0c65e6a991d4c4e0c2b312b20a3c9b085b9f52e4b443712dd25e094d2"
+      },
+      "immutable_review_receipt": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/three-camera-v1/boards/gfx50r.json",
+        "sha256": "1dfeb8cd7a1215aadadfc0d459f00893d76202a3a060ad2057d9bcc0cf8fa8ee"
+      },
+      "current_gallery": "docs/images/current-cameras/gfx50r-comparison.png",
+      "published_board_pixels_match_review": true,
+      "native160_distinct_cells_actually_viewed": 10
+    }
+  ],
+  "published_source_triplets": [
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-73c5f3c086454044.png",
+        "sha256": "d21a7e16cc70ad87ab8efc4f46a6f2e89887412471cfb9e4925428d083ec7c2c"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-73c5f3c086454044.json",
+        "sha256": "b33edd97ce915429ca0208fff76cd6166876daf0d5f88beb438eca8947521d8a"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-8e8270beaed69c7d.png",
+        "sha256": "d8316583432480129f7409ba0c51ab7cdec20a031579e7ab0086aafe9cff252f"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-8e8270beaed69c7d.json",
+        "sha256": "2c8e9925e48e224ad16eeae9e2c57c24769bb6e95e46b3cd616807ad8fd4a838"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-58163212ffd59e36.png",
+        "sha256": "079fecd75ea573dcc5ac11d1bfd2c458099342b4cd0ad2bd2f08ccc18673ab37"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-58163212ffd59e36.json",
+        "sha256": "8fada373602662cb10cd1ec102a4ba8aa6eaa420deae6442d3d92207ff96ab4c"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-e2d7d42b6f4a792a.png",
+        "sha256": "a48438090224968d84e0792b7dd91eb7dc600d0896d25e2e2f471ec3087a9f85"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-e2d7d42b6f4a792a.json",
+        "sha256": "4d265d63ad5333e0242d5c035f042ab8775326aad93662e32b79e0dd9b8b5d0c"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-9b9ca24c99a7daec.png",
+        "sha256": "1cdac48d860c2711fabc1ffff43a1f44492654c35666e5e5749373e4e7337681"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-9b9ca24c99a7daec.json",
+        "sha256": "29356e5cef26f6b1074216d991008adc189145e1fc27e4f9d78f33931762082e"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-00a44254c9fa8b16.png",
+        "sha256": "7b3190dd6733255bd97840a55a0c56bd36fd45792d85ee09cc406d48db0bfef1"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-00a44254c9fa8b16.json",
+        "sha256": "e828b3717346edab5210a123cb9576eef0278fc5140d1d75e76b2d1217e9ebda"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-278099226e52b2e5.png",
+        "sha256": "d5744946a273e60f8056bc13e9b397e64c208375bcb2370e0acd09597fe6e6e1"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-278099226e52b2e5.json",
+        "sha256": "b09ff5c0ed58ea924c9c08d7f2ae501a9d0d3719830da3b89d445ea8834b9c95"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-ac378aaaf94ddcf8.png",
+        "sha256": "d037344c912ee0a030f691c352191befd2c339ae7cf76f69211812731667433b"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-ac378aaaf94ddcf8.json",
+        "sha256": "fa9a9b52f1d6c22c194a11bf862b3b908569420df9c2998c4248a32d12e97b75"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-001872ff81bf25bc.png",
+        "sha256": "19d56e84ec848fb1b0ae6d5b1d52e9c5211e7c84b76f84c2b59e2185d2b8903f"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-001872ff81bf25bc.json",
+        "sha256": "68f5ce453bf5b55b4947ca952ed20383ec612c8763c18e7b4cd3b7ac99e2f463"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-b754abc946dce76d.png",
+        "sha256": "a108c01dadc54964149e368311514a5704b111bafef4de5f3af0ca34eee405bc"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-b754abc946dce76d.json",
+        "sha256": "5112332d3dc2c253bf5e8ca27fba63b1de737cbc0b6ba4c756711f7fdde7ab2e"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-5a39e4a4285f0890.png",
+        "sha256": "3551135da1a04fcfc7b836c7c9528dc918c77d80e8b5470ffba8377e4438a4e5"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-5a39e4a4285f0890.json",
+        "sha256": "df729b6bfe163444d59b7a273216c201772e15572e9414f45f7f2270e22e4166"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-97b9ac41eda1a8e7.png",
+        "sha256": "06a724cdb3357f6a88cd372d7ece0472c78863abb5657f0801f7f9e6215a3efc"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-97b9ac41eda1a8e7.json",
+        "sha256": "86bb62c8c095e42c7f09c8d86b5b11a7a1531712e745fd11686fdc66aa845404"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-f94e4b6d83c8ea5e.png",
+        "sha256": "b5be87c6bab4b69b68c0e30b4c580e8b06442a301b9b9be2c35231fbbcb85f7c"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-f94e4b6d83c8ea5e.json",
+        "sha256": "e97e6b09d1d9512425cb39a207cf488c107c1815d3570c718d9a6c8615bc998d"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-135416c342080079.png",
+        "sha256": "08fd0d82a75f1e38150336420d898952559089e6ab0d3b58cfc24349105495fd"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-135416c342080079.json",
+        "sha256": "75c5b3d87e857f3f25efe96e29b591e66a6e41d4e574f22918e66efcc404761e"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-f162df6c16982201.png",
+        "sha256": "8ac94c3282c52b6892425cfaafcc8f0eca49330a06a2273525ed929b53e95866"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-f162df6c16982201.json",
+        "sha256": "6bf283722a2af18dc7d8806181be8997238598da691852d63d9007c04a32cd1b"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-75deddf60bfe9f44.png",
+        "sha256": "91de84d19e3e852be7f5f3339b0876c7e991beb9e351caa32ea975642f00c35e"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-75deddf60bfe9f44.json",
+        "sha256": "9e9bfcfde6d5b38c8018dff990a9831194e45c24f4092c21dc2ce3bf8f023a77"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-49bab01e54212bf9.png",
+        "sha256": "e44a17e25ab5ee33d2cd8f1c763d0cb29bba9625604b92fe7f53b6aa420f2358"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-49bab01e54212bf9.json",
+        "sha256": "5a48081a0ca50f0e7c14de2cfc52fac9a5dae641c747de60ecbb6d17a65891cf"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-ef79d4e4d449543b.png",
+        "sha256": "12502a2d2dbe04b3b0a3e94404fd3b4e4e64795249a724dcc58767a21948a313"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras/crop-ef79d4e4d449543b.json",
+        "sha256": "1355ffbba9a1280c1a8509df71d3e35474c951664e8253b7f0f29f2d49e8caa5"
+      }
+    }
+  ],
+  "visual_observations": {
+    "LEICA Q2": "All learned outputs and RawNIND remain soft on the dark rock structures. V84/V100 look close; no clear overall new winner in these crops.",
+    "ILCE-7RM2": "Denoising removes fuselage grain, while windows and edges remain soft in all methods. V84/V100 look close; no clear overall winner.",
+    "GFX 50R": "The learned outputs show finer concrete-surface variation and more coherent joints than RawNIND here. V84/V100 look close to each other and V43; no clean reference proves every retained fluctuation is true detail."
+  },
+  "reference": "No clean capture. RawNIND uses input-only CFA-channel gain on the same noisy capture; comparator, not GT. No pixelwise quality scores.",
+  "scope": "Existing six fixed development ROIs selected before these outputs. Three cached captures only; no source-HDD reads, new training admission, strict-unseen, full-frame or broad superiority claim. Current gallery may grow when useful versions appear; private review boards and source triplets preserve this observation."
+}

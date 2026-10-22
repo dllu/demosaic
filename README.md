@@ -41,6 +41,8 @@ Real GFX100S: DSCF3879 ISO 6400 → **V84** → DSCF3880 ISO 100 f/5.6. Native16
 sensor-pixel crops, 512px inference contexts and shared +2 EV display. The last
 panel is a separately captured qualitative reference, **not GT**.
 [Compare V43, V84, V95 and RawNIND on all four regions](docs/gfx-qualitative.md).
+The [Q2, Sony a7R II and GFX50R gallery](docs/cross-camera-qualitative.md)
+also includes V84/V100 on six fixed native regions.
 
 ![V84 GFX foliage: noisy, restored and separate low-ISO reference](docs/images/current-quality/gfx-V84-foliage.png)
 

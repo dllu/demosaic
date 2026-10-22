@@ -43,8 +43,9 @@ textures, photographic contrast attenuation and reviewed fine-detail ROIs.
 The architecture, broad flat palette, native128 and paired32 targets stay fixed.
 See the [recipes, execution status and evaluation approach](quality-first-training.md).
 
-The source scan covers88,508 training images, with420 actually reviewed and24
-withheld. The [illustrated source review](corpus-source-review.md) explains why
+The source scan covers88,508 training images, with530 actually reviewed and30
+withheld. Active runs apply the earlier24 exclusions; six more are prepared for
+the next cohort. The [illustrated source review](corpus-source-review.md) explains why
 processing defects/nonphotographic targets are removed while difficult foliage,
 textiles and weak real detail remain. Originals and historical manifests stay
 read-only; protected captures and the GFX scene/siblings remain outside training.

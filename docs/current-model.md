@@ -88,6 +88,10 @@ forest canopy and fur at three noise levels. It shows V84's remaining
 high-noise detail loss as well as its sharper low-noise output.
 V100's cleaned-data continuation now adds small gains on those selected
 contexts; the full-photo and camera comparison is still pending.
+The [Q2, Sony a7R II and GFX50R gallery](cross-camera-qualitative.md) also
+compares V84/V100 with V43 and RawNIND on six fixed native ROIs. Those
+low-ISO captures show closer results, with the clearest RawNIND separation
+on concrete texture; there is no clean reference.
 
 The [completed V84/V85 study](native-data-original20k-review.md) retains detailed
 metrics, uncertainty, color/weak-detail diagnostics and capture limitations.

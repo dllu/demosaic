@@ -7,6 +7,8 @@ smooth sky and useful leaf shapes; fine foliage texture and saturated-light
 boundaries remain areas to improve. The models are close in some regions, so
 use this scene alongside the photographic/camera results in the
 [current model guide](current-model.md).
+The [Q2, Sony a7R II and GFX50R comparison](cross-camera-qualitative.md) adds
+V84/V100 results on six existing low-ISO regions, without a clean reference.
 
 ![Native sky, building, foliage and fence comparisons](images/current-quality/gfx-comparison.png)
 
