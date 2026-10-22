@@ -53,6 +53,7 @@ class ModelConfig:
     rgb_center_camera_matrix: bool = False
     rgb_middle_skip_fp32: bool = False
     adc_cfa_projection: bool = False
+    adc_cfa_projection_mode: str = "malvar"
     raw_kernel_reconstruction: bool = False
     raw_kernel_windows: tuple[int, ...] = (1, 5, 17)
     raw_kernel_phase_conditioning: bool = False
@@ -455,6 +456,8 @@ class JointDemosaic(nn.Module):
             raise ValueError(
                 "RAW directional residual requires native stabilized anchored RGB without other RAW heads"
             )
+        if cfg.adc_cfa_projection_mode not in ("malvar", "sites"):
+            raise ValueError("ADC CFA projection mode must be malvar or sites")
         if cfg.adc_cfa_projection and (
             cfg.restoration_backbone != "pretrained-rgb" or not cfg.variance_stabilization
         ):
@@ -572,6 +575,7 @@ class JointDemosaic(nn.Module):
                 center_camera_matrix=cfg.rgb_center_camera_matrix,
                 middle_skip_fp32=cfg.rgb_middle_skip_fp32,
                 adc_projection=cfg.adc_cfa_projection,
+                adc_projection_mode=cfg.adc_cfa_projection_mode,
                 raw_kernel=cfg.raw_kernel_reconstruction,
                 raw_kernel_windows=cfg.raw_kernel_windows,
                 raw_kernel_phase_conditioning=cfg.raw_kernel_phase_conditioning,

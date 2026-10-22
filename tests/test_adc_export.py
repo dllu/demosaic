@@ -90,6 +90,27 @@ def test_training_export_rejects_missing_lineage_before_writing(tmp_path):
     assert not (tmp_path / "export").exists()
 
 
+def test_sites_export_preserves_weights_and_records_only_policy_changes(tmp_path):
+    path, digest = checkpoint(tmp_path)
+    result = module.export(path, tmp_path / "export", digest, mode="sites")
+    state = torch.load(result["export"], weights_only=True)
+    assert state["model_config"]["adc_cfa_projection"] is True
+    assert state["model_config"]["adc_cfa_projection_mode"] == "sites"
+    assert {
+        key for key, value in result["model_config"].items()
+        if value != result["parent_model_config"][key]
+    } == {"adc_cfa_projection", "adc_cfa_projection_mode"}
+    torch.testing.assert_close(state["model"]["weight"], torch.arange(512) / 65535, rtol=0, atol=0)
+    assert module.sha(path) == digest
+
+
+def test_invalid_mode_is_rejected_before_writing(tmp_path):
+    path, digest = checkpoint(tmp_path)
+    with pytest.raises(ValueError, match="mode"):
+        module.export(path, tmp_path / "export", digest, mode="unknown")
+    assert not (tmp_path / "export").exists()
+
+
 @pytest.mark.parametrize(
     "overrides",
     [

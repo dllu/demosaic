@@ -54,6 +54,9 @@ leave some fine-texture errors:
 ![ADC-only: noisy, V100, V84, RawNIND and exact synthetic GT](images/current-detail/adc-only/photo-comparison.png)
 
 [ADC-only source triplets and metadata](images/current-detail/adc-only/manifest.json).
+The [optional ADC-consistency comparison](adc-consistency.md) investigates
+these errors with unchanged V84 weights, showing both numerical gains and
+color/uniformity tradeoffs alongside native crops.
 
 ## High noise
 

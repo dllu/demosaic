@@ -46,14 +46,19 @@ def mosaic(rgb: Tensor, colors: Tensor) -> Tensor:
     ).squeeze(1)
 
 
-def adc_cfa_projection(prediction: Tensor, packed: Tensor, colors: Tensor, wb=None) -> Tensor:
-    """Backproject nonclipped ADC-only samples; caller must ensure shot=read=0.
+def adc_cfa_projection(
+    prediction: Tensor, packed: Tensor, colors: Tensor, wb=None, *, mode="malvar"
+) -> Tensor:
+    """Enforce nonclipped ADC-only samples; caller must ensure shot=read=0.
 
-    Retain the prediction's Malvar nullspace component with P+K(y-A(P)).
-    Near-black/clipped residuals are zero, preserving their measured channels
-    while allowing neighboring unmeasured RGB to change. No target fitting or
-    output clamp is used. Enforcing noisy observations would inject noise.
+    ``malvar`` retains the Malvar nullspace component with P+K(y-A(P)).
+    ``sites`` replaces only valid observed RGB channels, retaining every other
+    channel bit-for-bit. Both preserve near-black/clipped measured channels.
+    No target fitting or output clamp is used. Enforcing noisy observations
+    would inject noise.
     """
+    if mode not in ("malvar", "sites"):
+        raise ValueError("ADC CFA projection mode must be malvar or sites")
     if packed.ndim != 4 or packed.shape[1] != 4:
         raise ValueError("Expected four packed CFA phases")
     if prediction.shape != (packed.shape[0], 3, packed.shape[2] * 2, packed.shape[3] * 2):
@@ -61,6 +66,18 @@ def adc_cfa_projection(prediction: Tensor, packed: Tensor, colors: Tensor, wb=No
     with torch.autocast(device_type=prediction.device.type, enabled=False), ieee_fp32():
         prediction, packed = prediction.float(), packed.float()
         valid = (packed > 1 / 65535) & (packed < 1 - 1 / 65535)
+        if mode == "sites":
+            batch, _, height, width = packed.shape
+            if colors.ndim == 1:
+                colors = colors[None].expand(batch, -1)
+            phases = F.one_hot(colors, 3).permute(0, 2, 1)[..., None, None]
+            values = F.pixel_shuffle(
+                (packed[:, None] * phases).reshape(batch, 12, height, width), 2
+            )
+            mask = F.pixel_shuffle(
+                (valid[:, None] * phases).reshape(batch, 12, height, width), 2
+            ).bool()
+            return torch.where(mask, values, prediction)
         residual = (packed - mosaic(prediction, colors)) * valid
         return prediction + malvar(residual, colors, wb)
 

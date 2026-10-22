@@ -1,0 +1,160 @@
+{
+  "image": "crop-c4bfc48d1f393f08.png",
+  "caption": "Fine gray fur against a dark background / ADC-only / V84",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Denoised",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "GT (synthetic)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "375c9a8249e107a98b88152766bd37fa0a60a65650cb1536145255937820f333",
+  "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+  "source": {
+    "title": "File:Racoon clinging to a tree.JPG",
+    "page_url": "https://commons.wikimedia.org/wiki/File:Racoon_clinging_to_a_tree.JPG",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/29/Racoon_clinging_to_a_tree.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "author": "Korall",
+    "license": "CC BY 3.0",
+    "license_url": "https://creativecommons.org/licenses/by/3.0",
+    "attribution": null,
+    "credit": "Own work",
+    "sha1": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+    "sha1_hex": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+    "download_path": "images/2b/5a/2b5a51667b9906eecead8f82e08c7ba11750f8c6.jpg",
+    "width": 2592,
+    "height": 3888,
+    "id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+    "split": "val",
+    "bin_factor": 8,
+    "color_space": "linear-sRGB",
+    "dtype": "uint16",
+    "cache": "/mnt/external/demosaic/commons-v1/images/2b/2b5a51667b9906eecead8f82e08c7ba11750f8c6.npy",
+    "shape": [
+      486,
+      324,
+      3
+    ],
+    "cache_sha256": "a4f70f06dbfe2c044c3be5c85ab5047cb004b3378a980a7140bc3be71fab8a1f"
+  },
+  "validation_index": 392,
+  "source_cache_context_xywh": [
+    25,
+    133,
+    256,
+    256
+  ],
+  "evaluation_tile_xywh": [
+    48,
+    48,
+    160,
+    160
+  ],
+  "condition": {
+    "name": "adc-only",
+    "shot": 0.0,
+    "read": 0.0,
+    "exposure": 1.0
+  },
+  "pattern": "RGGB",
+  "display_exposure": 1,
+  "model": {
+    "label": "V84",
+    "sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10",
+    "step": 20000,
+    "compute_precision": "float32",
+    "device": "cpu",
+    "effective_model_config": {
+      "restoration_backbone": "pretrained-rgb",
+      "width": 64,
+      "encoder_blocks": [
+        2,
+        2,
+        4
+      ],
+      "middle_blocks": 6,
+      "decoder_blocks": [
+        2,
+        2,
+        2
+      ],
+      "attention": true,
+      "dino": true,
+      "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+      "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+      "dino_lora_rank": 0,
+      "dino_input_adapter": false,
+      "dino_feature_fusion": "convnext-pyramid",
+      "camera_conditioning": true,
+      "noise_modulation": false,
+      "physical_fp32": true,
+      "baseline": "bilinear",
+      "prior_window": 7,
+      "standardized_noise": false,
+      "noise_refinement": false,
+      "refinement_width": 24,
+      "refinement_blocks": 4,
+      "refinement_window": 63,
+      "coarse_refinement_factor": 0,
+      "coarse_refinement_width": 24,
+      "coarse_refinement_blocks": 4,
+      "coarse_refinement_window": 31,
+      "pyramid_refinement": false,
+      "pyramid_measurements": true,
+      "pyramid_width": 24,
+      "pyramid_blocks": 2,
+      "variance_stabilization": true,
+      "physical_anchors": true,
+      "rgb_processing_scale": 1,
+      "packed_detail_prior": false,
+      "rgb_hidden_autocast": false,
+      "rgb_center_camera_matrix": false,
+      "rgb_middle_skip_fp32": true,
+      "adc_cfa_projection": false,
+      "raw_kernel_reconstruction": false,
+      "raw_kernel_windows": [
+        1,
+        5,
+        17
+      ],
+      "raw_kernel_phase_conditioning": false,
+      "raw_directional_residual": false,
+      "raw_directional_bank_context": false,
+      "raw_directional_bank_detach_input": false,
+      "raw_spectral_residual": false,
+      "late_rgb_refinement": "none",
+      "isotropic_groups": 6,
+      "isotropic_blocks": 8,
+      "isotropic_local_width": 32,
+      "isotropic_raw_gain": 1.0,
+      "isotropic_residual_scale": 1.0
+    },
+    "output_operator": "Original V84"
+  },
+  "reference": "Exact synthetic clean target",
+  "selection": "Same4previously input-selected natural contexts; four constant-field counterchecks declared in this posthoc plan, no target-dependent gain fitting."
+}

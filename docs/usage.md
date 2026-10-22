@@ -9,6 +9,9 @@ restoration and frozen DINOv3 ConvNeXt-Tiny features. The
 alternatives; [current training](quality-first-training.md) applies the cleaned
 corpus and fine-detail recipe to this architecture. V43-specific measurements
 below retain their checkpoint labels and do not determine today's baseline.
+The [optional observed-site ADC export](adc-consistency.md#implementation-and-use)
+uses unchanged V84 weights and activates only at explicit shot=read=0;
+ordinary positive-noise RAW conditioning bypasses it.
 
 ## Environment and storage
 

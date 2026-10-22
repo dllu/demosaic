@@ -300,6 +300,7 @@ class PretrainedRgbDemosaic(nn.Module):
         center_camera_matrix=False,
         middle_skip_fp32=False,
         adc_projection=False,
+        adc_projection_mode="malvar",
         raw_kernel=False,
         raw_kernel_windows=(1, 5, 17),
         raw_kernel_phase_conditioning=False,
@@ -319,6 +320,8 @@ class PretrainedRgbDemosaic(nn.Module):
             raise ValueError(
                 "ADC CFA projection requires explicit stabilized RGB noise conditioning"
             )
+        if adc_projection_mode not in ("malvar", "sites"):
+            raise ValueError("ADC CFA projection mode must be malvar or sites")
         if processing_scale not in (1, 2) or processing_scale == 2 and not stabilized:
             raise ValueError("Packed processing requires variance stabilization and scale 2")
         if detail_prior and processing_scale != 2:
@@ -363,6 +366,7 @@ class PretrainedRgbDemosaic(nn.Module):
         )
         self.stabilized = stabilized
         self.adc_projection = adc_projection
+        self.adc_projection_mode = adc_projection_mode
         self.physical_anchors = physical_anchors
         self.processing_scale = processing_scale
         self.detail_prior = detail_prior
@@ -741,7 +745,9 @@ class PretrainedRgbDemosaic(nn.Module):
                 selected = [b for b, (_, _, stochastic) in enumerate(profiles) if not stochastic]
                 if selected:
                     if len(selected) == len(output):
-                        output = adc_cfa_projection(output, original_packed, colors, wb)
+                        output = adc_cfa_projection(
+                            output, original_packed, colors, wb, mode=self.adc_projection_mode
+                        )
                     else:
                         indices = torch.tensor(selected, device=output.device)
                         balance = (
@@ -750,7 +756,8 @@ class PretrainedRgbDemosaic(nn.Module):
                             else wb.reshape(-1, 3).expand(len(output), -1)[indices]
                         )
                         corrected = adc_cfa_projection(
-                            output[indices], original_packed[indices], colors[indices], balance
+                            output[indices], original_packed[indices], colors[indices], balance,
+                            mode=self.adc_projection_mode,
                         )
                         output = output.index_copy(0, indices, corrected)
             if self.raw_directional is not None:

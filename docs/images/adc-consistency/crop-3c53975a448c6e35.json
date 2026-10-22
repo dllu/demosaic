@@ -1,0 +1,160 @@
+{
+  "image": "crop-3c53975a448c6e35.png",
+  "caption": "Fine pale bark grain and fissures / ADC-only / V84+MHC",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Denoised",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "GT (synthetic)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "0fbc28c534380fbe633c35be534298e23e6fce945a428a4896898c2a88e02e30",
+  "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+  "source": {
+    "title": "File:Kentucky Coffee-tree Gymnocladus dioicus 3264px.jpg",
+    "page_url": "https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "author": "Photo (c)2007 Derek Ramsey (Ram-Man)",
+    "license": "CC BY-SA 2.5",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.5",
+    "attribution": null,
+    "credit": "Self-photographed",
+    "sha1": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+    "sha1_hex": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+    "download_path": "images/0a/e2/0ae232278265dabbdd54f52c34045a3d03323aa7.jpg",
+    "width": 3264,
+    "height": 2448,
+    "id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+    "split": "val",
+    "bin_factor": 8,
+    "color_space": "linear-sRGB",
+    "dtype": "uint16",
+    "cache": "/mnt/external/demosaic/commons-v1/images/0a/0ae232278265dabbdd54f52c34045a3d03323aa7.npy",
+    "shape": [
+      306,
+      408,
+      3
+    ],
+    "cache_sha256": "a2c1759485e1be5d43c88f439ff801da4a5f39e68953bcb966b66e813788e563"
+  },
+  "validation_index": 124,
+  "source_cache_context_xywh": [
+    104,
+    38,
+    256,
+    256
+  ],
+  "evaluation_tile_xywh": [
+    48,
+    48,
+    160,
+    160
+  ],
+  "condition": {
+    "name": "adc-only",
+    "shot": 0.0,
+    "read": 0.0,
+    "exposure": 1.0
+  },
+  "pattern": "RGGB",
+  "display_exposure": 1,
+  "model": {
+    "label": "V84+MHC",
+    "sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10",
+    "step": 20000,
+    "compute_precision": "float32",
+    "device": "cpu",
+    "effective_model_config": {
+      "restoration_backbone": "pretrained-rgb",
+      "width": 64,
+      "encoder_blocks": [
+        2,
+        2,
+        4
+      ],
+      "middle_blocks": 6,
+      "decoder_blocks": [
+        2,
+        2,
+        2
+      ],
+      "attention": true,
+      "dino": true,
+      "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+      "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+      "dino_lora_rank": 0,
+      "dino_input_adapter": false,
+      "dino_feature_fusion": "convnext-pyramid",
+      "camera_conditioning": true,
+      "noise_modulation": false,
+      "physical_fp32": true,
+      "baseline": "bilinear",
+      "prior_window": 7,
+      "standardized_noise": false,
+      "noise_refinement": false,
+      "refinement_width": 24,
+      "refinement_blocks": 4,
+      "refinement_window": 63,
+      "coarse_refinement_factor": 0,
+      "coarse_refinement_width": 24,
+      "coarse_refinement_blocks": 4,
+      "coarse_refinement_window": 31,
+      "pyramid_refinement": false,
+      "pyramid_measurements": true,
+      "pyramid_width": 24,
+      "pyramid_blocks": 2,
+      "variance_stabilization": true,
+      "physical_anchors": true,
+      "rgb_processing_scale": 1,
+      "packed_detail_prior": false,
+      "rgb_hidden_autocast": false,
+      "rgb_center_camera_matrix": false,
+      "rgb_middle_skip_fp32": true,
+      "adc_cfa_projection": false,
+      "raw_kernel_reconstruction": false,
+      "raw_kernel_windows": [
+        1,
+        5,
+        17
+      ],
+      "raw_kernel_phase_conditioning": false,
+      "raw_directional_residual": false,
+      "raw_directional_bank_context": false,
+      "raw_directional_bank_detach_input": false,
+      "raw_spectral_residual": false,
+      "late_rgb_refinement": "none",
+      "isotropic_groups": 6,
+      "isotropic_blocks": 8,
+      "isotropic_local_width": 32,
+      "isotropic_raw_gain": 1.0,
+      "isotropic_residual_scale": 1.0
+    },
+    "output_operator": "Existing interpolated ADC correction"
+  },
+  "reference": "Exact synthetic clean target",
+  "selection": "Same4previously input-selected natural contexts; four constant-field counterchecks declared in this posthoc plan, no target-dependent gain fitting."
+}

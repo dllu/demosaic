@@ -28,7 +28,11 @@ def tensor_digest(weights):
     return digest.hexdigest()
 
 
-def export(checkpoint, output, expected_sha256, *, preserve_training_lineage=False):
+def export(
+    checkpoint, output, expected_sha256, *, preserve_training_lineage=False, mode="malvar"
+):
+    if mode not in ("malvar", "sites"):
+        raise ValueError("ADC CFA projection mode must be malvar or sites")
     checkpoint = Path(checkpoint)
     if sha(checkpoint) != expected_sha256:
         raise ValueError("Parent checkpoint SHA256 changed")
@@ -46,9 +50,10 @@ def export(checkpoint, output, expected_sha256, *, preserve_training_lineage=Fal
     if preserve_training_lineage and not isinstance(training_config.get("initialized_from"), dict):
         raise ValueError("Training-lineage export requires the retained initializer record")
     config.adc_cfa_projection = True
-    assert [k for k, v in config.to_dict().items() if v != parent_config[k]] == [
-        "adc_cfa_projection"
-    ]
+    config.adc_cfa_projection_mode = mode
+    changed = {k for k, v in config.to_dict().items() if v != parent_config[k]}
+    assert "adc_cfa_projection" in changed
+    assert changed <= {"adc_cfa_projection", "adc_cfa_projection_mode"}
     selection = "ema" if "ema" in state else "model"
     weights = state[selection]
     weight_hash = tensor_digest(weights)
@@ -108,6 +113,7 @@ if __name__ == "__main__":
     parser.add_argument("--expected-sha256", required=True)
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--preserve-training-lineage", action="store_true")
+    parser.add_argument("--mode", choices=("malvar", "sites"), default="malvar")
     args = parser.parse_args()
     print(
         json.dumps(
@@ -116,6 +122,7 @@ if __name__ == "__main__":
                 args.output,
                 args.expected_sha256,
                 preserve_training_lineage=args.preserve_training_lineage,
+                mode=args.mode,
             )
         ),
         flush=True,
