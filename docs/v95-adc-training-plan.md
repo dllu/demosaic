@@ -139,3 +139,21 @@ unprojected arrays; the existing projection reduces measured-sample error to
 at most 5.83e-11 in this fixed replay. All 588 positive-noise fields are skipped.
 No model inference, new noise or quality claim follows; actual V98/V99 full
 stage execution remains pending.
+
+## Queued audits and full evaluation
+
+At 21:17 PDT on October 21, a CPU-only handoff queue is waiting on the original
+training controller and worker. It requires the exact plan/controller identity,
+all six completed phase/arm receipts and exited training owners before running
+the two independent saved-state audits. It then prepares the common projected
+comparison from frozen helpers and launches the existing serial seven-panel
+evaluator. The evaluator owns its GPU workers and resource controls after
+handoff; the queue exits. There is no training restart or automatic retry.
+
+The [launch receipt](results/v95-adc-quality-handoff-launch-v1.json) records
+71 passing focused checks, four actual frozen CLI checks and all 47 numerical
+files byte-exact to the training archive. Queue plan SHA256:
+`f0a8cc521b9c1b6033e69e1ce5be842a5b5d78fa62cf054319f508290c3a04ff`.
+At this observation neither the audits nor any new quality panel had started.
+Training quality, native-crop inspection and the promotion decision remain
+pending; V43 remains the working reference.

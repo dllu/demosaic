@@ -58,6 +58,9 @@ data. Four discarded CPU/CUDA checks and independent saved-state audits pass;
 production is running. Both endpoints will use projected inference in the
 primary comparison, separating the training effect from the known inference
 policy. Quality remains untested.
+The [frozen CPU handoff queue](results/v95-adc-quality-handoff-launch-v1.json)
+will audit both completed endpoints and launch all seven evaluation panels
+after the original training owners exit; numeric and native review follow.
 Originals and historical manifests remain read-only. Validation/test and the
 standing GFX scene remain outside training. See the [source review](corpus-source-review.md).
 

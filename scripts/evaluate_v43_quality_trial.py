@@ -36,10 +36,19 @@ COLOR = Path("/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-
 
 
 def prepare(
-    training_root, root, *, cpu_proof=False, artifact_root=None, palette=False, adc_training=False
+    training_root,
+    root,
+    *,
+    cpu_proof=False,
+    artifact_root=None,
+    palette=False,
+    adc_training=False,
+    source_repository=None,
 ):
     import yaml
 
+    helper_repository = REPO if source_repository is None else Path(source_repository).resolve()
+    assert helper_repository == REPO or helper_repository.is_relative_to(REPO / ".cache")
     assert os.path.ismount("/mnt/external")
     status_path = training_root / "status.json"
     status, training = read(status_path), read(training_root / "plan.json")
@@ -144,7 +153,10 @@ def prepare(
         from export_adc_cfa_projection import export
 
         for source in (Path(training["work"]) / "src/demosaic").glob("*.py"):
-            assert source.read_bytes() == (REPO / "src/demosaic" / source.name).read_bytes()
+            assert (
+                source.read_bytes()
+                == (helper_repository / "src/demosaic" / source.name).read_bytes()
+            )
         control = next(c for c in checkpoints if c["arm"] == "V98")
         original_control = {k: control[k] for k in ("path", "sha256")}
         exported = export(
@@ -161,13 +173,13 @@ def prepare(
         inputs += [
             ref(exported["export"]),
             ref(artifact_root / "V98-projected-control/receipt.json"),
-            ref(REPO / "scripts/export_adc_cfa_projection.py"),
+            ref(helper_repository / "scripts/export_adc_cfa_projection.py"),
         ]
     trained = Path(training["work"])
     files = [*trained.glob("src/demosaic/*.py")]
     files += [trained / p for p in ("pyproject.toml", "uv.lock", "configs/evaluation.yaml")]
     files += [
-        REPO / "scripts" / name
+        helper_repository / "scripts" / name
         for name in (
             "evaluate_v43_quality_trial.py",
             "recover_v43_quality_trial.py",
@@ -184,12 +196,12 @@ def prepare(
         )
     ]
     if adc_training:
-        files.append(REPO / "scripts/export_adc_cfa_projection.py")
+        files.append(helper_repository / "scripts/export_adc_cfa_projection.py")
     for source in files:
         relative = (
             source.relative_to(trained)
             if source.is_relative_to(trained)
-            else source.relative_to(REPO)
+            else source.relative_to(helper_repository)
         )
         target = work / relative
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -932,6 +944,7 @@ if __name__ == "__main__":
     parser.add_argument("--cpu-proof", action="store_true")
     parser.add_argument("--palette", action="store_true")
     parser.add_argument("--adc-training", action="store_true")
+    parser.add_argument("--source-repository", type=Path)
     parser.add_argument("--stage")
     args = parser.parse_args()
     if args.mode == "prepare":
@@ -943,6 +956,7 @@ if __name__ == "__main__":
             artifact_root=args.artifact_root,
             palette=args.palette,
             adc_training=args.adc_training,
+            source_repository=args.source_repository,
         )
     elif args.mode == "worker":
         assert args.stage
