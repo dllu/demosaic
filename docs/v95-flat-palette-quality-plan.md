@@ -120,6 +120,18 @@ and a [seven-panel metadata replay](results/v95-palette-reference-witness-prepar
 check this gate without inference. This preparation reuses no predictions and
 does not qualify fresh candidate results; the live training snapshot is unchanged.
 
+A [queued native-photo condition diagnosis](results/v95-palette-native-photo-conditions-preparation-v1.json)
+adds ADC-only/ISO100 views of the same two preselected cases, plus an ISO12800
+consistency repeat. It processes the full suite's first four sources at native
+256/B4 with the same four checkpoints and all nine methods, preserving every
+other physical setting and all 47 numerical source files. Its GPU worker waits
+until all seven primary evaluation stages and their owners exit. Planned checks
+include exact ADC input hashes against the full suite and unchanged
+model/DINO/configuration/RNG/input state. The primary comparison remains the
+complete suite; these are additional native detail views, without new training
+or source/checkpoint selection. Preparation, 14 tests and the actual no-worker
+dependency wait pass; model execution and visual interpretation remain pending.
+
 Judge color tails alongside low-contrast detail and source/scene uncertainty;
 a better photographic mean alone is insufficient. Publish at least two small
 native noisy/restored/GT triplets per model with common coordinates/display

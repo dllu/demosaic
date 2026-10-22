@@ -56,4 +56,13 @@ Source: [File:Vancouver (BC, Canada), Coal Harbour Seaside Park, Blick in den Hi
 
 The two photo examples do not establish a general winner. The full suite of 427 photos and 16 procedural sources, known/unseen measured-CFA panels, carrier/flat/color grids and standing GFX sky/building/foliage/fence/highlights remain pending. Real paired/AHD or separate ISO100 GFX references are not exact GT. All primary means and uncertainty, numeric audits and remaining actual native views must be recorded before a quality decision. Speed work stays deferred.
 
+Additional ADC-only and ISO100 native views of the same fixed photos are queued
+to check weak detail at lower noise. An ISO12800 repeat will check consistency
+with the full suite. The four-source processing batch, checkpoints, RGGB/ROI,
+calibration, seed and display settings stay fixed. Its controller waits for all
+seven full-evaluation stages and their owners to exit. Fourteen protocol and
+dependency tests pass, and an actual wait with no model worker is observed.
+The [preparation receipt](results/v95-palette-native-photo-conditions-preparation-v1.json)
+records these checks; the additional inference and native review are pending.
+
 [Native viewing and publication receipt](results/v95-palette-first-native-photo-review-v1.json) · [Completed training and full evaluation launch](results/v95-palette-completed-training-and-evaluation-launch-v1.json).
