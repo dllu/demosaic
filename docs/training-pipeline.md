@@ -7,8 +7,16 @@ gains.50990dB over8×-then-geometry on all427 photos. On the actual RGB pipeline
 batch32 is only1.3% faster than16 while using roughly twice the CUDA allocation.
 Details and limitations are recorded below.
 
+Current [V84-based quality runs](quality-first-training.md) use 88,484 curated
+Commons sources, 128 native captures and 32 paired training cases. The V101
+candidate removes optical PSFs and enables reviewed-region sampling; V100
+retains the original policy.
+The [source-quality guide](corpus-source-review.md) distinguishes these frozen
+inputs from the latest reviewed follow-up cohort. Later sections retain
+measurements from earlier cohorts and architectures.
+
 The completed [spectral](spectral-original4k-review.md) and
-[late RGB](late-rgb-original4k-review.md) trials use native256/B16 and all88,508
+[late RGB](late-rgb-original4k-review.md) trials use native 256×256/B16 and all88,508
 reviewed Commons training sources. Neither is promoted. The opt-in
 [head-only training scope](late-rgb-head-only-engineering.md) protects the
 mature common path and avoids its backward graph while learning refinement;
@@ -162,7 +170,8 @@ The opt-in training reader can oversample the six inspected regions in the
 `reviewed_roi_catalogue` names that file; `reviewed_roi_fraction` defaults to
 `0.0` and gives the selection probability **conditional on a photographic
 Commons sample**. Flat and synthetic samples retain their existing shares.
-No production recipe currently enables this option.
+The V101 quality recipe enables it at `.05`; V100 leaves it disabled. Their
+production quality comparison is pending.
 
 Selection happens before opening the image cache. A selected sample loads only
 its reviewed source, crops within the recorded 512×512 bin4 region, applies the
@@ -241,7 +250,7 @@ source hash. [Complete measurements and reproduction receipt](results/training-b
 The [second sweep](current-pipeline-batch-sweep.md) is complete on the actual
 4× Commons/native128 pipeline, using V43's frozen first1000 EMA initializer.
 It repeats batches 4/8/16/32/64 twice with 15 excluded warmup and 45 measured
-updates. Batch16 reaches **30.81 native256px patches/s**, 12.1% above batch4.
+updates. Batch16 reaches **30.81 native 256×256px patches/s**, 12.1% above batch4.
 Batch32 is only 1.3% faster, using 13.41 GB versus 6.95 GB peak CUDA allocation.
 Batch64 adds no clear benefit. Keep batch16 fixed in controlled quality trials.
 All ten cases verify the same initializer, source and data/augmentation recipe.

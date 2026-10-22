@@ -39,9 +39,12 @@ hash, bounds, augmentation-order and resume checks.
 
 The current cohort has 88,484 Commons training sources, versus 84,867 in V84's
 original recipe. It preserves the same 2,303 validation and 2,255 test memberships.
-The full source scan covered 88,508 training images; targeted actual review now
-covers 420, retaining 396 and withholding 24. High loss, ISO and metadata selected
-review candidates; visible native/binned quality determined exclusions. Hard
+The full source scan covered 88,508 training images. The active cohort applies
+24 visual exclusions. Targeted review now covers 530 sources, retaining 500 and
+withholding 30. The six latest exclusions are prepared in a separate
+88,478-source follow-up manifest; these running recipes keep their frozen inputs.
+High loss, ISO and metadata selected review candidates; visible native/binned
+quality determined exclusions. Hard
 foliage, textiles, nets, weak fog and other useful detail remain eligible.
 This is targeted inspection, not a claim that every source was manually viewed.
 

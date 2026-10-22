@@ -1,216 +1,138 @@
 # Training-source quality review
 
-Source quality decisions support the [matched V43 training study](quality-first-training.md).
-Review the actual binned target and keep genuine difficult or weak detail.
-Originals and historical manifests remain read-only.
+Source quality decisions support the current [V84-based quality experiments](quality-first-training.md).
+**530 training sources have now been visually reviewed: 500 retained and 30
+withheld.** The active V100/V101 runs keep their original 88,484-source cohort,
+which applies the earlier 24 exclusions. Six additional exclusions are prepared
+in a separate cohort for later training; they do not change the active study.
 
-The available reviewed Commons corpus contains 88,508 training images at 4×/8×,
-versus V43's original 40,170. Original validation 2,303 / test 2,255 memberships stay
-fixed. Archive discovery/attribution are complete; actual downloading stopped
-at the reserve with 178,117 originals and 279,548 still pending.
+| Cohort | Commons training sources | Validation / test | Visual exclusions |
+| --- | ---: | ---: | ---: |
+| Active V100/V101 | 88,484 | 2,303 / 2,255 | 24 |
+| Prepared follow-up | 88,478 | Same exact records | 30 |
 
-## Full-corpus ranking
+[Latest decisions, figures and cohort checks](results/source-quality-followup110-review-v1.json).
+Originals, existing manifests and protected evaluation scenes remain read-only.
+The GFX train/platform pair and siblings remain outside training.
 
-A source-frozen scan under
-`.cache/quality-first-20261020/corpus-source-screen-v1/` uses the actual V43
-step2000 checkpoint, IEEE FP32 and fixed ADC-only/ISO12800 conditions. It scores
-a native 256 center crop from the 4× cache plus final area2, without geometric
-or optical augmentation. Only training rows enter. A genuine four-source/native 64
-CPU proof passes before GPU scoring; a separate unit check matches every
-per-image loss term to V43's original training objective.
+## Selection and inspection
 
-The original worker completed under an explicit supervision handoff at
-`.cache/quality-first-20261020/corpus-source-screen-supervision-v2/status.json`.
-Its projected duration was close to the first controller's six-hour bound;
-the new ceiling is eight hours from the **original** worker start. The scoring
-plan/source, PID, checkpoint, inputs and 24 GiB RAM / 64 GiB root / 500 GiB
-external reserves are unchanged. The exact old supervisor exited; the worker
-was neither stopped nor restarted. Both worker and new supervisor have now
-exited. Use the new status path, since the old controller's preserved status is
-historical. The completed receipt records 88,508 unique sources, 177,016 cases
-and 22,128 actual neural/DINO forwards. An independent streaming audit checks
-full training membership/condition coverage, finite scores, original loss
-arithmetic, ROI bounds, file hashes and actual owner exit. The
-[completion receipt](results/v43-quality-curation-and-training-plan-v1.json)
-records those checks and their limits.
+The prepared pool contains 88,508 eligible Commons training sources at 4×/8×
+binning. The completed V43 scan scores all of them under ADC-only and ISO 12800
+priors: 177,016 cases and 22,128 neural/DINO forwards. It uses IEEE FP32, a
+native center crop and final area2 reduction, without geometric or optical
+augmentation. Its [completion and original cohort freeze](results/v43-quality-curation-and-training-plan-v1.json)
+retain source, loss, membership and owner checks. The older model's loss is a
+review cue, rather than a current quality ranking or an exclusion rule.
 
-Rank high-loss images alongside low-gradient, high-frequency and bright/clipped
-proxies. Inspect full-source context and native pixels for grain, blur,
-oversharpening, processing artifacts and non-photographic content. **High loss
-alone is not an exclusion rule**: fine foliage, textiles, fences and other useful
-hard detail should remain. Record visual decisions by source ID and reason.
-Use a new training manifest; preserve originals, historical manifests, protected
-series and the GFX scene/siblings. This is targeted review, not a claim that
-every corpus photo was manually viewed.
+All **319 unique candidates** in the saved top 128 per-condition loss lists,
+lowest-gradient 64, highest-Laplacian 64 and brightest 32 lists now have actual
+visual decisions. Other reviewed sources include title/metadata cues, all 74
+training sources with recorded ISO ≥12800, and weak/fine material examples.
+The latest pass inspected the remaining 110 candidates on 19 source sheets and
+six larger native 1024×1024 crops, retaining 104 and withholding 6. This targeted
+coverage does not estimate the defect rate of the full corpus.
 
-The [371-source review used for the training freeze](results/source-quality-visual-review-v17.json)
-withholds twenty-four sources: a historic map scan, a photomontage, ten graphic-only
-or flat document compositions, a predominantly
-defocused station scene, and eleven images with visibly unreliable clean-target
-texture/noise/edge quality. The other 347 remain, including fine
-foliage, wheat, fur, coral, architectural grids and hazy/low-contrast landscapes.
-Sixty-eight contact sheets and twenty-seven larger native 1024 crops were
-actually inspected. This includes all 87 distinct required candidates from the
-completed ranking. The final round adds a flat stippled turtle illustration to
-the withheld set, while retaining physical tilework, stained glass, engraved
-metal, sand, speaker mesh, weak skies and haze. Four early larger-view decisions
-needed missing hash fields restored from their original render indexes; fresh
-original/cache hashes verify that repair without changing any decision.
-The final membership freeze is complete; these are source-quality decisions,
-not a trained-model result or a full-corpus manual inspection.
+Inspect source context, native pixels and the actual binned target for grain,
+blur, flattened texture, exaggerated outlines and non-photographic compositions.
+Keep genuine hard detail: foliage, textiles, fences, painted/glazed materials,
+engraved lettering, weak fog and skies. Natural defocus or exposure-integrated
+motion is not automatically a defect. Grain that largely disappears after
+binning need not invalidate the target. White backgrounds, high ISO, HDR or
+stacking tags alone do not decide exclusion.
 
-## Native examples
+The figures below show a resized full-source thumbnail, a native 256×256 source
+crop and a native 256×256 8×-binned target. The native views have different physical
+fields of view. Only the thumbnail is resized; exposure is ×1. These are
+source-quality inspections, without simulated noise or model restoration.
 
-Each image has a resized full-source thumbnail on the left, a native256 source
-crop in the middle and a native256 8×-binned training target on the right.
-The two native crops have different physical fields of view. Display exposure
-is ×1.0; only the thumbnail is resized. These are source-quality views; sensor
-noise and restoration are not applied. The [gallery metadata](results/source-quality-gallery-v1.json)
-records source hashes, distinct ROIs, display transforms, decisions and credits.
-Open the original PNG at 100% if the viewer scales it.
+## Latest exclusions
 
-### Withhold: flattened foliage
+Five sources are flat front/back banknote composites dominated by printed text
+and illustration: Rothenburg, Berchtesgaden, Neustadt, Bad Oeynhausen and Berlin.
+Their assembled document presentation falls outside the photographic target.
+Photographs of actual mounted signs, engraved metal, book pages, stained glass
+and mosaics remain eligible when their material and scene detail are coherent.
 
-One withheld foliage source has extensively flattened/patchy texture and stepped
-color regions in a larger native view; those defects remain in the binned target.
-This is a visual target-quality decision, without inferring a particular filter.
-The context thumbnail is resized; the two 256-pixel crops retain their native
-pixels. Source ROI `[1736,1340,256,256]`; bin4 target context
-`[210,111,512,512]` followed by area2; display exposure ×1.0. The
-[figure metadata](results/source-quality-flattened-foliage-example.json) records
-source hashes, transforms, the V43 screening checkpoint and both noise conditions.
+![Withheld banknote composite: source context, native source and binned target](images/source-quality-banknote-composite.png)
 
-![Withheld foliage source: context thumbnail, native source crop and native 8x-binned target](images/source-quality-flattened-foliage.png)
+Source: [Christoph Scheibenberger, Rothenburg 50 Pfennig 1918](https://commons.wikimedia.org/wiki/File:Rothenburg_50_Pfennig_1918.jpg),
+public domain. Modified through binning, cropping and context-thumbnail creation.
+[Source hashes, ROIs and display metadata](results/source-quality-banknote-composite.json).
 
-Source: [Diego Delso, Brown County State Park](https://commons.wikimedia.org/wiki/File:Vista_desde_la_torre_de_observaci%C3%B3n,_Parque_Estatal_Brown_County,_Indiana,_Estados_Unidos,_2012-10-14,_DD_08.jpg),
-[CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/). Modified through
+The sixth source has flattened leaf surfaces and strongly edged, patchy
+boundaries in the larger native view, with residual patchiness in the binned
+target. Withholding it is a visual clean-target judgment; no particular
+processing tool is inferred. Other fine foliage sources remain eligible.
+
+![Withheld foliage: source context, native source and binned target](images/source-quality-paseo-foliage.png)
+
+[1024×1024 source crop, without resizing](images/source-quality-paseo-foliage-native1024.png).
+Source: [Lmbuga, Paseo con bancos na Alameda de Santiago](https://commons.wikimedia.org/wiki/File:2025_Paseo_con_bancos_na_Alameda_de_Santiago._Galiza.jpg),
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), modified through
 binning, cropping, display conversion and context-thumbnail creation.
+[Source hashes, ROIs and decision](results/source-quality-paseo-foliage.json).
 
-### Withhold: altered feather texture
+Earlier exclusions include a map, non-photographic compositions, a predominantly
+defocused scene and unreliable texture/edge targets. The illustrated
+[flattened-foliage example](images/source-quality-flattened-foliage.png)
+([metadata](results/source-quality-flattened-foliage-example.json)) and
+[altered-feather example](images/source-quality-processed-feathers.png)
+([metadata and credits](results/source-quality-gallery-v1.json)) retain their
+original evidence.
 
-The larger native view shows strongly outlined, flattened and patchy blue/orange
-plumage. Those local defects remain in the binned target. This is the recorded
-visual judgment for this source; it does not infer a particular processing tool.
-Other bird photographs with coherent fine feather detail remain eligible.
+## Retain weak and fine detail
 
-![Withheld bird: full-source thumbnail, native source crop and native binned target](images/source-quality-processed-feathers.png)
+The latest pass retains 104 useful sources, including dense fish, leaves, mesh,
+small circuitry, stained glass, weak cloud/sky boundaries and atmospheric scenes.
+The larger forest view has visible native grain, but binning suppresses it
+while retaining faint tree structure. Its low contrast is useful training data.
 
-Source: [Tisha Mukherjee, Crested Bunting](https://commons.wikimedia.org/wiki/File:Crested_Bunting_in_Saswad_August_2025_by_Tisha_Mukherjee_08.jpg),
-[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Modified through
+![Retained forest: source context, native source and binned target](images/source-quality-retained-weak-forest.png)
+
+Source: [Ermell, Neubürg Winter Wald](https://commons.wikimedia.org/wiki/File:Neub%C3%BCrg_Winter_Wald_2183874.jpg),
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), modified through
 binning, cropping, display conversion and context-thumbnail creation.
+[Source hashes, ROIs and decision](results/source-quality-retained-weak-forest.json).
+Earlier [leaf-vein](images/source-quality-retained-leaf.png) and
+[weak-fog](images/source-quality-retained-fog.png) examples also remain eligible;
+the [gallery metadata](results/source-quality-gallery-v1.json) retains their
+credits and native-view protocols.
 
-### Retain: fine leaf veins
+## Cohort use
 
-Dense real leaf veins remain useful hard detail even when V43 has high loss on
-them. The visible material structure supplies a reason to keep this source.
+The active manifest is
+`.cache/quality-first-20261020/curated-corpus-v1/manifest4-large.jsonl`.
+The follow-up manifest is
+`.cache/current-quality-20261022-v1/source-review-v1/future-cohort/manifest4-large.jsonl`,
+SHA256 `e5dafbbf6b301641306c7c451dac229f8340b848e773ea74b0434c2895f1fb45`.
+It removes only the six newly withheld training IDs. Every remaining row is an
+unchanged byte-for-byte subset; validation/test records and order are identical.
+All 530 reviewed decisions agree with its membership. Neither active recipe
+uses this follow-up manifest yet.
 
-![Retained leaf: full-source thumbnail, native source crop and native binned target](images/source-quality-retained-leaf.png)
+For reviewed-region sampling on that manifest, use the
+[companion catalogue](../configs/low-contrast-training-rois-curated-v2.json).
+It binds the new manifest path/SHA while preserving all six source records,
+coordinates and ROI/target hashes. The reader requires this exact binding;
+the original catalogue remains attached to the active cohort. Actual CPU data
+reads of all six regions pass with the follow-up manifest.
 
-Source: [Elucidate, Loquat leaf](https://commons.wikimedia.org/wiki/File:Loquat_leaf.JPG),
-[CC BY 3.0](https://creativecommons.org/licenses/by/3.0/). Modified through
-binning, cropping, display conversion and context-thumbnail creation.
+Source views read cached Commons originals from `/mnt/external/qi` and prepared
+linear-sRGB caches. Current training and GFX tests avoid source HDD access.
+New downloads and decisions enter a new frozen cohort instead of silently
+changing an existing run's inputs.
 
-### Retain: weak detail in fog
+## Reviewed weak and fine texture ROIs
 
-Native source grain falls substantially after binning. The faint boat/person
-silhouettes and weak atmospheric contrast remain legitimate photographic detail
-for the training pool. Low gradient alone does not establish a bad target.
-
-![Retained fog: full-source thumbnail, native source crop and native binned target](images/source-quality-retained-fog.png)
-
-Source: [Dominicus Johannes Bergsma, Put van Nederhorst in the mist](<https://commons.wikimedia.org/wiki/File:Put_van_Nederhorst_in_de_mist._28-02-2021._(d.j.b)_26.jpg>),
-[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Modified through
-binning, cropping, display conversion and context-thumbnail creation.
-
-## Additional selection cues and membership freeze
-
-The expanded title-cue review withholds graphic-only letter/illustration and
-textured tessellation compositions. The [Escher creator description](https://commons.wikimedia.org/wiki/File:Ambigram_tessellation_Escher.jpg)
-corroborates its pattern-design intent; no particular pixel-generation pipeline
-is inferred. Physical stamps, tattoos, carvings and the
-[pencil/paper study](https://commons.wikimedia.org/wiki/File:Ambigram_Nothing_written.jpg)
-remain eligible based on their visible material detail and context. All nine
-inspected processing-title candidates remain, including a camcorder whose model
-name contains HDR. Software/HDR/title tags alone never decide exclusion.
-
-A [complete header inventory](results/source-capture-metadata-review-v1.json)
-finds positive recorded ISO in 82,094 training sources, including 1,370 at ISO
-3200 or above. It reads JPEG/MPO headers without pixel decoding or inference.
-Eight highest-ISO sources plus eight deterministic high-ISO samples were
-actually viewed. Four bird photos have heavily etched/flattened feather texture
-and enhanced outlines that persist in the binned targets; withhold those.
-Twelve remain, including other high-ISO wildlife, water drops, portraits,
-architecture and fine lettering. ISO and software tags remain review cues only.
-EXIF warnings are preserved; metadata does not prove capture provenance or
-clean-target quality. This targeted sample is not a corpus defect-rate estimate.
-
-A posthoc followup inspects the next 24 highest recorded-ISO sources not already
-reviewed, using four more sheets and seven larger native crops. Two have strong
-outlined/flattened feather texture that remains visibly altered after binning;
-withhold them. The other 22 remain, including wildlife, action portraits, water
-drops, architecture and HDR-labeled interiors. Across both ISO-targeted rounds,
-40 sources were actually viewed and six withheld. These are selected extremes,
-not a random sample. Native grain or edge emphasis alone is insufficient when
-the binned target retains useful coherent detail.
-
-Review now covers **all 74 training sources with recorded ISO ≥12800**: 66 retain,
-eight withhold. Completing that group added 42 actual source views from seven
-sheets and six larger native crops; two more showed unreliable feather texture.
-Coherent fine feather barbs, real material patterns, mosaics, HDR-labeled
-architecture and weak stone surfaces remain. The header-defined subgroup is
-fully covered; this does not infer the defect rate of the broader corpus or
-the true capture ISO from metadata alone.
-
-The final membership freeze requires visual decisions for the top 32 sources
-under each noise condition and the top 16 under each IQA proxy, plus all
-additional sources already reviewed. `scripts/freeze_v43_curated_corpus.py
---help` describes the freeze; `--check` lists pending decisions without writing
-training manifests. It checks the completed ranking receipt, source identities,
-the exact original V43 cohort and unchanged holdout memberships. Exclusions
-affect future training membership only. The completed freeze at
-`.cache/quality-first-20261020/curated-corpus-v1/` contains 39,983 control and
-88,484 larger training sources. The original V43 cohort had 40,170: 172 are
-already ineligible under existing corpus policy and another 15 are among the
-24 newly withheld sources. Both cohorts retain the same 2,303 validation and
-2,255 test IDs; every selected row and full current holdout record matches its
-input manifest. No original or historical manifest was rewritten.
-
-An additional posthoc ADC-error/local-gradient ratio review retained all twelve
-new selected sources: it mostly found legitimate smooth skies, saturated
-gradients and bright boundaries. Small denominators and model error affect this
-cue; it does not identify bad photographs reliably by itself. This reused partial
-source scores, with no additional inference or automatic exclusions.
-
-A [post-freeze review of 24 additional sources](results/source-quality-postfreeze24-review-v1.json)
-retains all 24, bringing actual visual coverage to **395 sources: 371 retain /
-24 withhold**. Selection takes the next eight eligible unreviewed sources per
-loss ranking and four per IQA proxy. Four source/target sheets and three larger
-native source crops were actually viewed. Fishing nets, dense leaves/stalks,
-stained glass, circuits and worn engravings contain useful difficult detail;
-weak fog, aurora and wall texture remain legitimate targets. Photographed
-lettering and white specimen backgrounds alone do not establish a defect.
-This targeted batch supplies no additional clear exclusions and does not
-estimate a corpus defect rate. All current V93–V97 manifests and the original
-371-source freeze decisions remain unchanged.
-
-## Prospective weak and fine texture ROIs
-
-An [additional source/ROI review](results/low-contrast-training-source-review-v1.json)
-inspects 24 previously unreviewed title-selected training sources plus one
-hash-ordered control. All 25 are retained at the reviewed native/binned scales;
-no new clear exclusions were found. Cumulative visual coverage is now **420
-sources: 396 retain / 24 withhold**. The manifests used by V93–V99 stay fixed.
-This is targeted review, not a corpus defect-rate estimate.
-
-The [prospective ROI catalogue](../configs/low-contrast-training-rois-v1.json)
-records six existing training sources with inspected, hash-verified 512×512
-contexts in the 4× linear-sRGB cache. Final area2 gives native 256×256 targets
-at 8× binning. The [opt-in training reader](training-pipeline.md#reviewed-photographic-regions)
-now validates these boundaries and samples within them before augmentation and
-the final reduction. No production recipe enables it, and no trained quality
-comparison has used it. All sources already belong to the training cohort.
-Some surrounding edges are strong; these are regions containing weak/fine
-structures, not global low-contrast labels.
+The [six-region catalogue](../configs/low-contrast-training-rois-v1.json) records
+existing training sources with hash-verified 512×512 contexts in the 4× cache;
+final area2 gives native 256×256 targets. The
+[opt-in reader](training-pipeline.md#reviewed-photographic-regions) validates
+membership, hashes and bounds before sampling and augmentation.
+**V101 enables conditional 5% photographic ROI sampling; V100 leaves it off.**
+Their production quality comparison is pending. The catalogue and active
+manifests remain unchanged by this follow-up source review.
 
 | Source ID prefix | Inspected structure | Bin4 context [x,y,w,h] |
 | --- | --- | --- |
@@ -221,30 +143,7 @@ structures, not global low-contrast labels.
 | `ed29eebff641` | Pale lichen filaments against bark | [96,8,512,512] |
 | `9b4e6f950b1d` | Same-color cloth folds and crease edges, without claiming resolved fibers | [384,128,512,512] |
 
-Five source sheets, six complete native8 contexts and two focused-ROI sheets
-were actually inspected. Original SHA1/cache SHA256 and raw ROI/float32 target
-hashes are recorded. Natural defocus does not make an otherwise useful photo
-bad, and faint detail is not automatically blur. Title cues can also mislead:
-“Moss Malvern” is a car model. Its photograph stays valid, without being labeled
-vegetation or a priority fine-texture source.
-
-These figures show a resized full-source thumbnail, a native 256-pixel source
-crop and a native 256-pixel 8×-binned target. The two native views have different
-fields of view. Display exposure is ×1; native crop pixels are never resized.
-No noise simulation or restoration is applied. These are source-quality views,
-not noisy/denoised/GT model comparisons.
-
-![Gray yarn: context thumbnail, native source and native binned training target](images/low-contrast-training-yarn.png)
-
-[Yarn source/ROI/display metadata](images/low-contrast-training-yarn.json).
-Photo: [Anna.Massini](https://commons.wikimedia.org/wiki/File:Various_yarns_including_embroidery_thread,_filoforte_and_wool_in_various_shades_of_grey.jpg),
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), modified by binning,
-cropping, display conversion and context-thumbnail creation; preview retains that license.
-
-![White fence: context thumbnail, native wood grain and native binned training target](images/low-contrast-training-white-fence.png)
-
-[Fence source/ROI/display metadata](images/low-contrast-training-white-fence.json).
-Photo: [Estormiz](https://commons.wikimedia.org/wiki/File:Fence_Pursitie_Oulu_20170305.jpg),
-[CC0](https://creativecommons.org/publicdomain/zero/1.0/), modified through
-binning, cropping, display conversion and context-thumbnail creation.
-
+These are regions containing weak/fine structures, rather than global
+low-contrast labels. The [source/ROI review](results/low-contrast-training-source-review-v1.json)
+and [CPU reader validation](results/reviewed-ROI-loader-CPU-readiness-v1.json)
+record actual views, hash checks, augmentation order and resume behavior.
