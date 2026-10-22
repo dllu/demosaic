@@ -14,7 +14,7 @@ larger cleaned corpus and fine-detail recipe to that architecture.
 | Usage | [Commands and data conventions](usage.md) |
 | Data | [Commons corpus](commons-post4557-reviewed.md), [illustrated source review](corpus-source-review.md), [source exclusions](commons-content-overlap.md), [native RAW targets](public-raw-expansion-v2.md) |
 | Training | [Data/augmentation pipeline](training-pipeline.md), [execution/restart](training-execution.md), [V43 quality-study checks](quality-training-validation.md) |
-| Evaluation | [Quality/noise diagnostics](evaluation.md), [GFX test](gfx-qualitative.md) |
+| Evaluation | [Quality/noise diagnostics](evaluation.md), [natural fine detail](heldout-detail.md), [GFX test](gfx-qualitative.md) |
 | Method research | [Research/design record](research.md) |
 | Remaining requirements | [Current completion checklist](requirements.md), [historical progress log](requirements-archive.md) |
 

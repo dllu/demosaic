@@ -83,6 +83,9 @@ V84 retains the fabric's broad orange color more faithfully than V95/V99 in
 this high-noise example. Fine cords remain a development target for every model.
 The [GFX page](gfx-qualitative.md) compares sky, building, foliage and fence at
 native sensor resolution, including RawNIND and a separate ISO 100 reference.
+The [natural-detail gallery](heldout-detail.md) adds bark, white feathers,
+forest canopy and fur at three noise levels. It shows V84's remaining
+high-noise detail loss as well as its sharper low-noise output.
 
 The [completed V84/V85 study](native-data-original20k-review.md) retains detailed
 metrics, uncertainty, color/weak-detail diagnostics and capture limitations.

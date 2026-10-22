@@ -96,6 +96,13 @@ least two unchanged native noisy/restored/GT triplets per reported model, with
 coordinates, checkpoint hash, noise and display metadata. Real ISO 100/AHD
 references remain accurately labeled as nonexact.
 
+The [natural-detail gallery](heldout-detail.md) fixes four held-out contexts
+before viewing these model outputs: pale bark, white feathers, forest canopy
+and gray fur. Shared cached observations at ADC-only, ISO100 and ISO12800
+give a quick visual comparison as each final continuation becomes available.
+Its current V84/RawNIND reference shows remaining high-noise texture loss;
+this supplementary diagnosis does not replace the full panels above.
+
 Report source/scene intervals, adverse cases and the selection of any displayed
 checkpoint. Choose useful versions from overall metrics and actual images;
 one small diagnostic loss or an interval crossing zero does not forbid using
