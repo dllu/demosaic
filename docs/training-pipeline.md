@@ -155,6 +155,42 @@ WAL data in read-only mode and releases its metadata snapshot before decoding.
 The old immutable connection could miss newly committed downloads. Frozen
 selection rebinning reads its supplied manifest instead of the changing index.
 
+## Reviewed photographic regions
+
+The opt-in training reader can oversample the six inspected regions in the
+[weak/fine texture catalogue](../configs/low-contrast-training-rois-v1.json).
+`reviewed_roi_catalogue` names that file; `reviewed_roi_fraction` defaults to
+`0.0` and gives the selection probability **conditional on a photographic
+Commons sample**. Flat and synthetic samples retain their existing shares.
+No production recipe currently enables this option.
+
+Selection happens before opening the image cache. A selected sample loads only
+its reviewed source, crops within the recorded 512×512 bin4 region, applies the
+existing geometry, then performs the final area2 reduction. Native256 uses the
+whole recorded context before augmentation; smaller patches stay within it.
+This requires the training split, `augmentation_downsample: 2` and a prepared
+patch no larger than256. It changes source and field-of-view sampling, so a
+future comparison must account for both effects. Blur, contrast attenuation,
+noise and domain scheduling retain their separately configured policies.
+
+The reader checks exact training membership, manifest and cache hashes, aligned
+ROI bounds, dtype/shape, and recorded crop/target hashes. The trainer snapshots
+the catalogue bytes and SHA256; resume rejects a changed catalogue or fraction.
+`CleanDataset.reviewed_roi_for_index(index)` exposes the deterministic choice
+for data audits. The catalogue's area2 target hash identifies its reviewed
+unaugmented view; it does not identify every augmented training tensor.
+
+The [CPU readiness receipt](results/reviewed-ROI-loader-CPU-readiness-v1.json)
+records141 passing focused checks, including actual tiny CPU training with
+exact interrupted/resumed model, EMA and optimizer state. A separate clean-data
+probe checked224 real samples from the first24 scheduled steps: all224 disabled
+outputs matched the archived V95 reader, and all162 untreated active outputs
+remained bit-exact. It selected62 ROI samples covering all six sources, loaded
+one cache per photograph, and matched six tensors across two spawned workers.
+That probe used fraction0.5 solely to exercise the reader. It ran no denoising
+model, optimizer or sensor-noise simulation. These are implementation checks;
+the six-region sampling policy has no trained quality result yet.
+
 ## Batch-size sweep
 
 The current joint RAW-kernel model has its own

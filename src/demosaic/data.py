@@ -14,6 +14,7 @@ from torch.utils.data import Dataset
 from .cfa import PATTERNS, color_indices, mosaic
 from .noise import add_noise, sample_coefficients, variance_map
 from .precision import ieee_fp32
+from .reviewed_rois import ReviewedPhotoROIs, validate_roi_fraction
 from .textures import weak_texture
 
 
@@ -116,7 +117,17 @@ class CleanDataset(Dataset):
         flat_chroma_stops=0.0,
         optical_blur_probability=0.25,
         photographic_low_contrast_fraction=0.0,
+        reviewed_roi_catalogue=None,
+        reviewed_roi_fraction=0.0,
+        reviewed_roi_catalogue_sha256=None,
     ):
+        self.reviewed_roi_fraction = validate_roi_fraction(reviewed_roi_fraction)
+        if self.reviewed_roi_fraction and (
+            split != "train" or augmentation_downsample != 2 or reviewed_roi_catalogue is None
+        ):
+            raise ValueError(
+                "Reviewed photographic ROIs require a training catalogue and final downsample2"
+            )
         self.optical_blur_probability = validate_probability(
             optical_blur_probability, "Optical blur probability"
         )
@@ -137,6 +148,8 @@ class CleanDataset(Dataset):
             raise ValueError("Procedural sample fractions must be nonnegative and sum to <=1")
         self.synthetic_fraction = synthetic_fraction if split == "train" else 0
         self.flat_fraction = flat_fraction if split == "train" else 0
+        if self.reviewed_roi_fraction and self.flat_fraction + self.synthetic_fraction == 1:
+            raise ValueError("Reviewed photographic ROIs require a photographic component")
         if not 0 <= weak_texture_fraction <= synthetic_fraction:
             raise ValueError("Weak texture fraction must be within the existing synthetic fraction")
         self.weak_texture_fraction = weak_texture_fraction if split == "train" else 0
@@ -152,9 +165,28 @@ class CleanDataset(Dataset):
                 "Pre-downsample augmentation requires linear 4x-binned training caches"
             )
         self.augmentation_downsample = augmentation_downsample
+        self.reviewed_rois = (
+            ReviewedPhotoROIs(
+                reviewed_roi_catalogue,
+                self.manifest,
+                self.rows,
+                required_size=self.size * augmentation_downsample,
+                expected_sha256=reviewed_roi_catalogue_sha256,
+            )
+            if self.reviewed_roi_fraction
+            else None
+        )
 
     def __len__(self):
         return len(self.rows)
+
+    def reviewed_roi_for_index(self, index):
+        """Expose actual deterministic source choices for independent data-step audits."""
+        if self.reviewed_rois is None:
+            return None
+        if random.Random(self.seed + index).random() < self.flat_fraction + self.synthetic_fraction:
+            return None
+        return self.reviewed_rois.choose(self.seed, index, self.reviewed_roi_fraction)
 
     def __getitem__(self, index):
         # Validation always uses a fixed crop; training uses worker-seeded RNG.
@@ -174,14 +206,21 @@ class CleanDataset(Dataset):
             record = self.rows[
                 rng.randrange(len(self.rows)) if self.split == "train" else index % len(self.rows)
             ]
+            region = self.reviewed_roi_for_index(index)
+            if region is not None:
+                record = region.record
             array = np.load(self.manifest.parent / record["cache"], mmap_mode="r")
             h, w = array.shape[:2]
+            origin_x, origin_y = 0, 0
+            if region is not None:
+                origin_x, origin_y, w, h = region.xywh
             if min(h, w) < size:
                 raise ValueError(f"Cached image {record['id']} smaller than patch")
             # Only shrink cached images, never stretch away the binning benefit.
             crop_h = size if self.native_crop else rng.randint(size, min(h, int(size * 1.4)))
             crop_w = size if self.native_crop else rng.randint(size, min(w, int(size * 1.4)))
             y, x = rng.randrange(h - crop_h + 1), rng.randrange(w - crop_w + 1)
+            y, x = y + origin_y, x + origin_x
             rgb = (
                 torch.from_numpy(
                     array[y : y + crop_h, x : x + crop_w].copy().astype(np.float32)

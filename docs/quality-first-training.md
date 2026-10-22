@@ -22,7 +22,9 @@ membership. Later reviews retain another 49 sources, bringing actual visual
 coverage to 420 without changing this freeze. The
 [prospective weak/fine ROI catalogue](corpus-source-review.md#prospective-weak-and-fine-texture-rois)
 adds six inspected training-only regions for a later sampling test; it is not
-applied to the current recipe. This is targeted review, not a full-corpus manual
+applied to the current recipe. Its [optional reader now passes CPU data and
+resume checks](training-pipeline.md#reviewed-photographic-regions); quality
+effects remain untested. This is targeted review, not a full-corpus manual
 inspection.
 
 The full V43 loss/IQA-proxy scan completed all 88,508 training sources and

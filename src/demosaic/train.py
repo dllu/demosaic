@@ -29,6 +29,7 @@ from .optimizer_batches import backward_groups, batch_layout, optimizer_batches
 from .paired_training import PairedDataset, paired_reconstruction_loss, paired_step
 from .precision import amp_context, ieee_fp32
 from .raw_clean import RawCleanDataset, degrade_raw_clean, raw_clean_step
+from .reviewed_rois import require_resume_rois, validate_roi_fraction
 from .safety import writable_path
 from .training_context import TrainingContext, require_resume_context
 
@@ -445,6 +446,20 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
             )
     config["normalization_augmentation"] = normalization_policy
     config["flat_chroma_stops"] = validate_flat_chroma_stops(config.get("flat_chroma_stops", 0.0))
+    config["reviewed_roi_fraction"] = validate_roi_fraction(
+        config.get("reviewed_roi_fraction", 0.0)
+    )
+    roi_catalogue_payload = None
+    config.pop("reviewed_roi_catalogue_sha256", None)
+    if config["reviewed_roi_fraction"] and (
+        not config.get("reviewed_roi_catalogue") or config.get("augmentation_downsample", 1) != 2
+    ):
+        raise ValueError(
+            "Reviewed photographic ROIs require a training catalogue and final downsample2"
+        )
+    if config.get("reviewed_roi_catalogue"):
+        roi_catalogue_payload = Path(config["reviewed_roi_catalogue"]).read_bytes()
+        config["reviewed_roi_catalogue_sha256"] = hashlib.sha256(roi_catalogue_payload).hexdigest()
     multiscale_weight = float(config.get("multiscale_sensor_weight", 0.0))
     if not math.isfinite(multiscale_weight) or multiscale_weight < 0:
         raise ValueError("Multiscale sensor loss weight must be finite and nonnegative")
@@ -489,6 +504,11 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
     manifest_hash = hashlib.sha256(manifest_payload).hexdigest()
     records = [json.loads(line) for line in manifest_payload.splitlines()]
     config["manifest_sha256"] = manifest_hash
+    if (
+        roi_catalogue_payload is not None
+        and json.loads(roi_catalogue_payload)["source_manifest"]["sha256"] != manifest_hash
+    ):
+        raise ValueError("Reviewed ROI source manifest differs from the training snapshot")
     validation_manifest = config.get("validation_manifest", config["manifest"])
     if Path(validation_manifest).resolve() == Path(config["manifest"]).resolve():
         validation_payload, validation_records = manifest_payload, records
@@ -514,6 +534,8 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
     if raw_clean_data is not None:
         payloads["raw-clean-manifest.json"] = raw_clean_data.payload
     payloads["validation-manifest.jsonl"] = validation_payload
+    if roi_catalogue_payload is not None:
+        payloads["reviewed-photo-rois.json"] = roi_catalogue_payload
     if config.get("validation_protocol"):
         protocol = Path(config["validation_protocol"]).read_bytes()
         payloads["validation_protocol.yaml"] = protocol
@@ -689,6 +711,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
             != config["validation_manifest_sha256"]
         ):
             raise ValueError("Resume validation manifest differs from checkpoint")
+        require_resume_rois(state["config"], config)
         if state["config"].get("augmentation_downsample", 1) != config.get(
             "augmentation_downsample", 1
         ):
@@ -795,6 +818,9 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
         flat_chroma_stops=config["flat_chroma_stops"],
         optical_blur_probability=config.get("optical_blur_probability", 0.25),
         photographic_low_contrast_fraction=config.get("photographic_low_contrast_fraction", 0.0),
+        reviewed_roi_catalogue=config.get("reviewed_roi_catalogue"),
+        reviewed_roi_fraction=config["reviewed_roi_fraction"],
+        reviewed_roi_catalogue_sha256=config.get("reviewed_roi_catalogue_sha256"),
         records=records,
     )
     workers = config.get("workers", 2)

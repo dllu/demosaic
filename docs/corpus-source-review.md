@@ -205,11 +205,12 @@ This is targeted review, not a corpus defect-rate estimate.
 The [prospective ROI catalogue](../configs/low-contrast-training-rois-v1.json)
 records six existing training sources with inspected, hash-verified 512×512
 contexts in the 4× linear-sRGB cache. Final area2 gives native 256×256 targets
-at 8× binning. It is a catalogue for a later controlled sampling/weighting test,
-not an active sampler or new training-source admission. Some surrounding edges
-are strong; these are regions containing weak/fine structures, not global
-low-contrast labels. Geometric augmentation would need its own ROI boundary
-checks.
+at 8× binning. The [opt-in training reader](training-pipeline.md#reviewed-photographic-regions)
+now validates these boundaries and samples within them before augmentation and
+the final reduction. No production recipe enables it, and no trained quality
+comparison has used it. All sources already belong to the training cohort.
+Some surrounding edges are strong; these are regions containing weak/fine
+structures, not global low-contrast labels.
 
 | Source ID prefix | Inspected structure | Bin4 context [x,y,w,h] |
 | --- | --- | --- |
