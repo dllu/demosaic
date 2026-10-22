@@ -199,3 +199,9 @@ is waiting for all seven primary panels and exited owners. Its GPU worker has
 not started. The [execution receipt](results/v95-adc-training-complete-and-evaluation-launch-v1.json)
 records both actual launches. Complete native review remains pending; helper
 checks alone establish no crop-quality result.
+
+The [provisional native review](v95-adc-training-quality-review.md) now retains
+two unchanged high-noise triplets per new endpoint. The fixed fabric example
+still has color/detail failures; the building retains cleaner geometry than
+the RawNIND adapters. These individual examples and their saved-data checks
+do not replace full-panel statistics, lower-noise views or the declared gates.

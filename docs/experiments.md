@@ -58,7 +58,9 @@ data. Both final4k training arms and independent saved-state audits are complete
 the [full FP32 evaluation is running](results/v95-adc-training-complete-and-evaluation-launch-v1.json).
 Both endpoints use projected inference in the
 primary comparison, separating the training effect from the known inference
-policy. Full quality and native review remain pending.
+policy. The [first fixed native examples](v95-adc-training-quality-review.md)
+retain two triplets per new endpoint, with remaining fabric color/detail failures.
+Full quality and native review remain pending.
 The [frozen CPU handoff queue](results/v95-adc-quality-handoff-launch-v1.json)
 completed its audits and launched all seven evaluation panels after the original
 training owners exited. The lower-noise native-crop controller waits for that
