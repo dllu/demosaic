@@ -1,4 +1,4 @@
-"""Match 0/8-stop smooth palettes from V95 without changing V43's architecture."""
+"""Run matched V95 continuations for palette or ADC-only training constraints."""
 
 import argparse
 import collections
@@ -114,7 +114,7 @@ def audit_data(config, output):
     return ref(output)
 
 
-def prepare(root, artifact_root):
+def prepare(root, artifact_root, *, adc_training=False):
     original_root = BASE / "V43-curated-matched-training-v1"
     original = read(original_root / "plan.json")
     guard(original)
@@ -129,7 +129,9 @@ def prepare(root, artifact_root):
     review = REPO / "docs/results/v43-curated-original20k-complete-review-v1.json"
     reviewed = read(review)
     assert reviewed["panels"]["photo"]["invariants"][3]["model_SHA256"] == MODEL_SHA
-    templates = {arm: REPO / f"configs/dino-v43-v95-palette-{arm.lower()}.yaml" for arm in ARMS}
+    arms = ("V98", "V99") if adc_training else ARMS
+    variant = "adc-training" if adc_training else "palette"
+    templates = {arm: REPO / f"configs/dino-v43-v95-{variant}-{arm.lower()}.yaml" for arm in arms}
     recipes = {a: yaml.safe_load(p.read_text()) for a, p in templates.items()}
     prior_recipe = REPO / "configs/dino-v43-curated-fine-detail-v95.yaml"
     prior = yaml.safe_load(prior_recipe.read_text())
@@ -142,14 +144,31 @@ def prepare(root, artifact_root):
         "checkpoint_every",
         "flat_chroma_stops",
     }
+    if adc_training:
+        allowed |= {"lr", "model"}
+        quality = REPO / "docs/results/v95-palette-complete-quality-review-v1.json"
+        assert read(quality)["decision"].startswith("Stop the palette follow-up")
+        assert all(
+            not live(read(read(quality)["panels"][s]["result"]["path"])["owner"])
+            for s in read(quality)["panels"]
+        )
+        first, second = [dict(recipes[a]["model"]) for a in arms]
+        assert not first["adc_cfa_projection"] and second["adc_cfa_projection"] is True
+        second["adc_cfa_projection"] = False
+        assert first == second == prior["model"]
+        assert {k for k in recipes[arms[0]] if recipes[arms[0]][k] != recipes[arms[1]][k]} == {
+            "run",
+            "model",
+        }
+    else:
+        assert {k for k in recipes["V96"] if recipes["V96"][k] != recipes["V97"][k]} == {
+            "run",
+            "flat_chroma_stops",
+        }
+        assert [recipes[a]["flat_chroma_stops"] for a in arms] == [0, 8]
     assert {
-        k for k in prior.keys() | recipes["V96"].keys() if prior.get(k) != recipes["V96"].get(k)
+        k for k in prior.keys() | recipes[arms[0]].keys() if prior.get(k) != recipes[arms[0]].get(k)
     } <= allowed
-    assert {k for k in recipes["V96"] if recipes["V96"][k] != recipes["V97"][k]} == {
-        "run",
-        "flat_chroma_stops",
-    }
-    assert [recipes[a]["flat_chroma_stops"] for a in ARMS] == [0, 8]
     root = root.resolve()
     assert root.is_relative_to(REPO / ".cache")
     artifact_root = artifact_root.resolve()
@@ -160,7 +179,7 @@ def prepare(root, artifact_root):
     root.mkdir(parents=True, exist_ok=False)
     artifact_root.mkdir(parents=True, exist_ok=False)
     marker = artifact_root / "artifact-owner.json"
-    save(marker, {"plan_root": str(root), "scope": "V96/V97 matched palette training only"})
+    save(marker, {"plan_root": str(root), "scope": f"Matched {variant} training only"})
     work = root / "work"
     sources = list((REPO / "src/demosaic").glob("*.py"))
     for source in sources:
@@ -185,6 +204,16 @@ def prepare(root, artifact_root):
             "third_party/gaussian/KAIR-LICENSE",
         )
     ]
+    if adc_training:
+        sources.append(REPO / "docs/v95-adc-training-plan.md")
+        sources += [
+            REPO / p
+            for p in (
+                "scripts/export_adc_cfa_projection.py",
+                "tests/test_adc_training_plan.py",
+                "tests/test_adc_export.py",
+            )
+        ]
     for source in sources:
         target = work / source.relative_to(REPO)
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -200,12 +229,16 @@ def prepare(root, artifact_root):
         *[ref(p) for p in templates.values()],
         ref(prior_recipe),
     ]
-    data_audit = audit_data(recipes["V96"], root / "data-audit.json")
-    inputs.append(data_audit)
+    if adc_training:
+        inputs += [ref(quality), ref(work / "docs/v95-adc-training-plan.md")]
+    else:
+        inputs.append(audit_data(recipes["V96"], root / "data-audit.json"))
     configs = {}
-    for arm in ARMS:
+    for arm in arms:
         cfg = recipes[arm]
-        assert cfg["seed"] == 57 and cfg["steps"] == 4000 and cfg["checkpoint_every"] == 1000
+        assert cfg["seed"] == (58 if adc_training else 57)
+        assert cfg["steps"] == 4000 and cfg["checkpoint_every"] == 1000
+        assert cfg["lr"] == (2e-6 if adc_training else 1e-5)
         assert cfg["batch_size"] == 16 and cfg["patch_size"] == 256
         assert cfg["optical_blur_probability"] == cfg["raw_clean_optical_blur_probability"] == 0
         assert cfg["weak_texture_fraction"] == 0.15
@@ -243,7 +276,7 @@ def prepare(root, artifact_root):
         "original_training_plan": ref(original_root / "plan.json"),
         "curation": original["curation"],
         "engineering_only": False,
-        "arms": list(ARMS),
+        "arms": list(arms),
         "phases": ["CPU", "CUDA", "train"],
         "proof_updates": 24,
         "planned_updates": 4000,
@@ -261,6 +294,14 @@ def prepare(root, artifact_root):
         "frozen_files": {str(p): ref(p)["sha256"] for p in work.rglob("*") if p.is_file()},
         "scope": "V96/V97 matched4000-update stages from final V95 EMA with fresh optimizer/EMA, same V43 architecture and exact numerical package, seed57/B16/native256/BF16/lr1e-5/warmup100. Only flat_chroma_stops0/8 differs; same data/weak-detail/zero-PSF recipe, 1618 affected colored-flat draws among64000 planned patches. Discarded actual24-update CPU and CUDA proofs precede production. Final4000 EMAs primary; no automatic retry, model promotion or speed work. Full primary/color/carrier/GFX evaluation and native review required.",
     }
+    if adc_training:
+        plan.update(
+            study="adc-training",
+            model_overrides={"V99": {"adc_cfa_projection": True}},
+            identical_training_observations=True,
+            evaluation_policy="Evaluate V98 via an unchanged-EMA inference-only ADC-projected export versus V99 with projection on, both final4000. Common inference policy isolates constrained-training effect; V43/V95 stay original reference policies. Raw V98 remains diagnostic. No policy-only gain attributed to training.",
+            scope="V98/V99 matched4000-update stages from final V95 EMA, original V43 learned architecture, fresh optimizer/EMA, seed58/B16/native256/BF16/lr2e-6/warmup100. Same curated88484, zeroPSF/weak.15/photoLC.25/narrow flat palette and noise-free.1; only V99 trains through existing ADC-only physical projection. Positive noise bypasses projection. All sampled training domains/observations must match. Final4000 EMAs primary and common projected inference control required. Actual24-update CPU/CUDA proofs precede production, bounded resources/no automatic retry. Full primary/color/detail/GFX and native review required; no promotion or speed work.",
+        )
     save(root / "plan.json", plan)
     guard(plan)
     print(ref(root / "plan.json"))
@@ -270,6 +311,7 @@ def controller(plan_path):
     plan = read(plan_path)
     guard(plan)
     root, work = Path(plan["root"]), Path(plan["work"])
+    label = "ADC" if plan.get("model_overrides") else "palette"
     (root / "controller.claim").open("x").close()
     state = {
         "plan": ref(plan_path),
@@ -292,8 +334,8 @@ def controller(plan_path):
 
     def record_monitor(status, **extra):
         names = {
-            "paused-V43-evaluation-disk-reserve": "paused-palette-training-disk-reserve",
-            "running-V43-quality-evaluation": "running-palette-training-stage",
+            "paused-V43-evaluation-disk-reserve": f"paused-{label}-training-disk-reserve",
+            "running-V43-quality-evaluation": f"running-{label}-training-stage",
         }
         record(names[status], **extra)
 
@@ -301,7 +343,7 @@ def controller(plan_path):
         for phase in plan["phases"]:
             for arm in plan["arms"]:
                 guard(plan)
-                record("waiting-for-palette-training-headroom", phase=phase, arm=arm)
+                record(f"waiting-for-{label}-training-headroom", phase=phase, arm=arm)
                 began, stable = time.monotonic(), None
                 while True:
                     assert time.monotonic() - began < plan["wait_seconds"]
@@ -345,7 +387,7 @@ def controller(plan_path):
                         start_new_session=True,
                     )
                     owner = {"pid": child.pid, "created": psutil.Process(child.pid).create_time()}
-                    record("running-palette-training-stage", child=owner)
+                    record(f"running-{label}-training-stage", child=owner)
                     monitor_child(
                         child,
                         owner,
@@ -365,22 +407,26 @@ def controller(plan_path):
             domains = (
                 {"native-RAW-synthetic", "paired-RAW"} if phase == "train" else {"native", "paired"}
             )
+            if plan.get("identical_training_observations"):
+                domains |= {"synthetic" if phase == "train" else "commons"}
             assert len({r["source_sha256"] for r in results}) == 1
             state["observation_audits"][phase] = compare_pair(
-                *[r[key] for r in results], domains, require_changes=True
+                *[r[key] for r in results],
+                domains,
+                require_changes=not plan.get("identical_training_observations", False),
             )
             if phase == "train":
                 for result in results:
                     probe = read(root / f"CUDA-{result['arm']}-result.json")
                     assert result["early_observations"] == probe["early_observations"]
-            record("completed-matched-palette-phase", phase=phase)
+            record(f"completed-matched-{label}-phase", phase=phase)
         guard(plan)
-        record("completed-matched-V95-palette-training-awaiting-full-quality-and-native-review")
+        record(f"completed-matched-V95-{label}-training-awaiting-full-quality-and-native-review")
     except BaseException as error:
         if child is not None and child.poll() is None:
             stop_owned_child(child, owner)
         record(
-            "failed-palette-stage-preserved-no-automatic-retry",
+            f"failed-{label}-stage-preserved-no-automatic-retry",
             error=repr(error),
             last_resource_snapshot=snapshot,
         )
@@ -392,9 +438,10 @@ if __name__ == "__main__":
     parser.add_argument("mode", choices=("prepare", "controller"))
     parser.add_argument("path", type=Path)
     parser.add_argument("--artifact-root", type=Path)
+    parser.add_argument("--adc-training", action="store_true")
     args = parser.parse_args()
     if args.mode == "prepare":
         assert args.artifact_root
-        prepare(args.path, args.artifact_root)
+        prepare(args.path, args.artifact_root, adc_training=args.adc_training)
     else:
         controller(args.path.resolve())

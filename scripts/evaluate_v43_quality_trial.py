@@ -35,16 +35,20 @@ RAWNIND = Path("/mnt/external/demosaic/references/rawnind")
 COLOR = Path("/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/plan.json")
 
 
-def prepare(training_root, root, *, cpu_proof=False, artifact_root=None, palette=False):
+def prepare(
+    training_root, root, *, cpu_proof=False, artifact_root=None, palette=False, adc_training=False
+):
     import yaml
 
     assert os.path.ismount("/mnt/external")
     status_path = training_root / "status.json"
     status, training = read(status_path), read(training_root / "plan.json")
-    assert not (palette and cpu_proof)
+    assert sum((palette, cpu_proof, adc_training)) <= 1
     assert status["status"] == (
         "completed-matched-V95-palette-training-awaiting-full-quality-and-native-review"
         if palette
+        else "completed-matched-V95-ADC-training-awaiting-full-quality-and-native-review"
+        if adc_training
         else "completed-discarded-CPU-launcher-proof"
         if cpu_proof
         else "completed-matched-V43-training-awaiting-full-evaluation-and-native-review"
@@ -53,7 +57,7 @@ def prepare(training_root, root, *, cpu_proof=False, artifact_root=None, palette
     guard(training)
     assert status["plan"] == ref(training_root / "plan.json")
     inputs = [ref(status_path), ref(training_root / "plan.json"), training["parent"]]
-    if palette:
+    if palette or adc_training:
         original_ref = training["original_training_plan"]
         assert ref(original_ref["path"]) == original_ref
         original = read(original_ref["path"])
@@ -71,7 +75,8 @@ def prepare(training_root, root, *, cpu_proof=False, artifact_root=None, palette
             },
         ]
         inputs.append(original["parent"])
-        assert training["arms"] == ["V96", "V97"] and training["planned_updates"] == 4000
+        assert training["arms"] == (["V98", "V99"] if adc_training else ["V96", "V97"])
+        assert training["planned_updates"] == 4000
         arms = training["arms"]
     else:
         checkpoints = [{"arm": "V43", **training["parent"]}]
@@ -85,14 +90,25 @@ def prepare(training_root, root, *, cpu_proof=False, artifact_root=None, palette
         assert ref(result["checkpoint"]["path"]) == result["checkpoint"]
         inputs += [item, result["checkpoint"]]
         record = {"arm": arm, **result["checkpoint"]}
-        if palette:
+        if palette or adc_training:
             record["expected_lineage"] = {
                 "step": 4000,
                 "initialized_from": {**training["parent"], "step": 20000},
             }
+        if adc_training:
+            audit_path = training_root / f"independent-{arm}-training-audit-v1.json"
+            audit = read(audit_path)
+            assert (
+                audit["status"]
+                == "completed-matched-V43-arm-independent-saved-state-and-trace-audit-passed"
+            )
+            assert audit["plan"] == ref(training_root / "plan.json")
+            assert audit["primary_final_EMA_checkpoint"] == result["checkpoint"]
+            inputs.append(ref(audit_path))
+            record["expected_adc_projection"] = True
         checkpoints.append(record)
     reference_witnesses = {}
-    if palette:
+    if palette or adc_training:
         review_path = REPO / "docs/results/v43-curated-original20k-complete-review-v1.json"
         review = read(review_path)
         previous = read(review["plan"]["path"])
@@ -124,6 +140,29 @@ def prepare(training_root, root, *, cpu_proof=False, artifact_root=None, palette
         owner = artifact_root / "artifact-owner.json"
         save(owner, {"plan_root": str(root), "scope": "Matched V43 quality evaluation only"})
         inputs.append(ref(owner))
+    if adc_training:
+        from export_adc_cfa_projection import export
+
+        for source in (Path(training["work"]) / "src/demosaic").glob("*.py"):
+            assert source.read_bytes() == (REPO / "src/demosaic" / source.name).read_bytes()
+        control = next(c for c in checkpoints if c["arm"] == "V98")
+        original_control = {k: control[k] for k in ("path", "sha256")}
+        exported = export(
+            control["path"],
+            artifact_root / "V98-projected-control",
+            control["sha256"],
+            preserve_training_lineage=True,
+        )
+        control.update(
+            path=exported["export"],
+            sha256=exported["export_sha256"],
+            training_checkpoint=original_control,
+        )
+        inputs += [
+            ref(exported["export"]),
+            ref(artifact_root / "V98-projected-control/receipt.json"),
+            ref(REPO / "scripts/export_adc_cfa_projection.py"),
+        ]
     trained = Path(training["work"])
     files = [*trained.glob("src/demosaic/*.py")]
     files += [trained / p for p in ("pyproject.toml", "uv.lock", "configs/evaluation.yaml")]
@@ -144,6 +183,8 @@ def prepare(training_root, root, *, cpu_proof=False, artifact_root=None, palette
             "audit_colored_flats.py",
         )
     ]
+    if adc_training:
+        files.append(REPO / "scripts/export_adc_cfa_projection.py")
     for source in files:
         relative = (
             source.relative_to(trained)
@@ -255,9 +296,11 @@ def prepare(training_root, root, *, cpu_proof=False, artifact_root=None, palette
         else (
             "Fixed final4000-stage V96/V97 EMAs vs parent V95 final20k and original V43 step2000. Each checkpoint has explicit exact step/initializer lineage. "
             if palette
+            else "Fixed final4000 V98/V99 EMAs under common projected inference, versus original V43/V95 policies. V98 projection is an inference-only exact-EMA export with retained training lineage; V99 trained through projection. "
+            if adc_training
             else "Fixed final20k EMAs vs original V43. "
         )
-        + "Fresh IEEE FP32/channels-last observations and metrics. Full427-photo/16-procedural,7-condition/4-CFA suite, known4/unseen5 real development scenes, carrier/flat/color diagnostics and standing GFX plus highlights. RawNIND global/per-channel input-only gains included in photo/real/GFX. No output correction, model selection, speed claim or automatic promotion; independent numeric/native review required.",
+        + "Fresh IEEE FP32/channels-last observations and metrics. Full427-photo/16-procedural,7-condition/4-CFA suite, known4/unseen5 real development scenes, carrier/flat/color diagnostics and standing GFX plus highlights. RawNIND global/per-channel input-only gains included in photo/real/GFX. Declared checkpoint policies only, no additional output correction, model selection, speed claim or automatic promotion; independent numeric/native review required.",
     }
     save(root / "plan.json", plan)
     guard(plan)
@@ -323,6 +366,15 @@ def check_reference_witnesses(invariants, previous):
     return counts
 
 
+def check_joint_model_config(actual, reference, *, adc_projection=False):
+    """Permit the declared ADC policy only; all learned architecture fields match."""
+    assert type(adc_projection) is bool
+    expected = dict(reference)
+    if adc_projection:
+        expected["adc_cfa_projection"] = True
+    assert json.dumps(actual, sort_keys=True) == json.dumps(expected, sort_keys=True)
+
+
 def worker(plan_path, stage):
     import random
 
@@ -386,9 +438,12 @@ def worker(plan_path, stage):
                 "dino": 0,
                 "sampled_inputs": [],
             }
-            assert not models or json.dumps(record["config"], sort_keys=True) == json.dumps(
-                models[0]["config"], sort_keys=True
-            )
+            if models:
+                check_joint_model_config(
+                    record["config"],
+                    models[0]["config"],
+                    adc_projection=match.get("expected_adc_projection", False),
+                )
             models.append(record)
 
             def before(module, args, kwargs):
@@ -760,6 +815,7 @@ if __name__ == "__main__":
     parser.add_argument("--artifact-root", type=Path)
     parser.add_argument("--cpu-proof", action="store_true")
     parser.add_argument("--palette", action="store_true")
+    parser.add_argument("--adc-training", action="store_true")
     parser.add_argument("--stage")
     args = parser.parse_args()
     if args.mode == "prepare":
@@ -770,6 +826,7 @@ if __name__ == "__main__":
             cpu_proof=args.cpu_proof,
             artifact_root=args.artifact_root,
             palette=args.palette,
+            adc_training=args.adc_training,
         )
     elif args.mode == "worker":
         assert args.stage

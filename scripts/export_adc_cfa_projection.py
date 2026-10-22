@@ -1,6 +1,7 @@
 """Export an opt-in ADC-only policy with unchanged restoration weights."""
 
 import argparse
+import copy
 import hashlib
 import json
 from pathlib import Path
@@ -21,11 +22,13 @@ def tensor_digest(weights):
     for name, tensor in sorted(weights.items()):
         header = {"name": name, "dtype": str(tensor.dtype), "shape": list(tensor.shape)}
         digest.update(json.dumps(header, sort_keys=True).encode() + b"\0")
-        digest.update(tensor.detach().cpu().contiguous().reshape(-1).view(torch.uint8).numpy().tobytes())
+        digest.update(
+            tensor.detach().cpu().contiguous().reshape(-1).view(torch.uint8).numpy().tobytes()
+        )
     return digest.hexdigest()
 
 
-def export(checkpoint, output, expected_sha256):
+def export(checkpoint, output, expected_sha256, *, preserve_training_lineage=False):
     checkpoint = Path(checkpoint)
     if sha(checkpoint) != expected_sha256:
         raise ValueError("Parent checkpoint SHA256 changed")
@@ -39,8 +42,13 @@ def export(checkpoint, output, expected_sha256):
     ):
         raise ValueError("Expected stabilized physical-FP32 RGB without ADC projection")
     parent_config = config.to_dict()
+    training_config = copy.deepcopy(state.get("config", {}))
+    if preserve_training_lineage and not isinstance(training_config.get("initialized_from"), dict):
+        raise ValueError("Training-lineage export requires the retained initializer record")
     config.adc_cfa_projection = True
-    assert [k for k, v in config.to_dict().items() if v != parent_config[k]] == ["adc_cfa_projection"]
+    assert [k for k, v in config.to_dict().items() if v != parent_config[k]] == [
+        "adc_cfa_projection"
+    ]
     selection = "ema" if "ema" in state else "model"
     weights = state[selection]
     weight_hash = tensor_digest(weights)
@@ -65,12 +73,18 @@ def export(checkpoint, output, expected_sha256):
         "source_sha256": sources,
         "conditioning": "Only explicit shot=read=0 profiles activate projection; every positive shot or read prior bypasses it. No target fitting or output clamp.",
     }
+    exported_config = {"run": str(output.resolve()), "inference_only": True}
+    if preserve_training_lineage:
+        exported_config = dict(training_config, **exported_config)
+        exported_config["model"] = config.to_dict()
+        provenance["retained_training_lineage"] = training_config["initialized_from"]
+        provenance["training_model_config"] = parent_config
     exported = {
         "format_version": 1,
         "model_config": config.to_dict(),
         "model": weights,
         "step": state["step"],
-        "config": {"run": str(output.resolve()), "inference_only": True},
+        "config": exported_config,
         "inference_export": provenance,
     }
     path = output / "model.pt"
@@ -79,7 +93,9 @@ def export(checkpoint, output, expected_sha256):
     assert tensor_digest(loaded["model"]) == weight_hash
     assert loaded["model_config"] == config.to_dict()
     receipt = {
-        **provenance, "export": str(path.resolve()), "export_sha256": sha(path),
+        **provenance,
+        "export": str(path.resolve()),
+        "export_sha256": sha(path),
         "identical_learned_tensors_verified_after_serialization": True,
     }
     (output / "receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
@@ -91,5 +107,16 @@ if __name__ == "__main__":
     parser.add_argument("checkpoint", type=Path)
     parser.add_argument("--expected-sha256", required=True)
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--preserve-training-lineage", action="store_true")
     args = parser.parse_args()
-    print(json.dumps(export(args.checkpoint, args.output, args.expected_sha256)), flush=True)
+    print(
+        json.dumps(
+            export(
+                args.checkpoint,
+                args.output,
+                args.expected_sha256,
+                preserve_training_lineage=args.preserve_training_lineage,
+            )
+        ),
+        flush=True,
+    )

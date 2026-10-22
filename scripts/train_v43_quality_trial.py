@@ -1,6 +1,7 @@
 """Run matched V43 data-quality stages after a completed manual corpus freeze."""
 
 import argparse
+import copy
 import json
 import math
 import os
@@ -215,6 +216,23 @@ def prepare(curation_path, root, *, cpu_only=False, validation_proof=False, arti
     print(ref(root / "plan.json"))
 
 
+def expected_training_model_config(parent_config, plan, arm):
+    """Allow only the declared ADC training constraint; keep prior plans exact."""
+    expected = copy.deepcopy(parent_config)
+    overrides = plan.get("model_overrides", {})
+    if overrides:
+        if (
+            plan["arms"] != ["V98", "V99"]
+            or arm not in plan["arms"]
+            or overrides != {"V99": {"adc_cfa_projection": True}}
+            or overrides["V99"]["adc_cfa_projection"] is not True
+            or expected.get("adc_cfa_projection", False)
+        ):
+            raise ValueError("Unsupported training model override")
+        expected.update(overrides.get(arm, {}))
+    return expected
+
+
 def worker(plan_path, phase, arm):
     import torch
     import yaml
@@ -244,7 +262,9 @@ def worker(plan_path, phase, arm):
     parent = torch.load(plan["parent"]["path"], map_location="cpu", weights_only=True, mmap=True)
     for key in ("validation_manifest", "raw_clean_manifest", "paired_manifest"):
         assert ref(config[key])["sha256"] == parent["config"][key + "_sha256"]
-    expected = ModelConfig.from_checkpoint(parent["model_config"]).to_dict()
+    expected = expected_training_model_config(
+        ModelConfig.from_checkpoint(parent["model_config"]).to_dict(), plan, arm
+    )
     assert json.dumps(ModelConfig(**config["model"]).to_dict(), sort_keys=True) == json.dumps(
         expected, sort_keys=True
     )
@@ -286,12 +306,44 @@ def worker(plan_path, phase, arm):
         def dino(*_):
             counts["DINO_calls"] += 1
 
+        def after(module, args, value):
+            if not plan.get("model_overrides"):
+                return
+            from demosaic.cfa import mosaic
+
+            profiles = module.pretrained_rgb._noise_profiles
+            profiles = profiles * len(args[0]) if len(profiles) == 1 else profiles
+            selected = [i for i, (_, _, stochastic) in enumerate(profiles) if not stochastic]
+            if module.training:
+                capture["ADC_training_hook_images"] = capture.get(
+                    "ADC_training_hook_images", 0
+                ) + len(selected)
+            if selected and module.config.adc_cfa_projection:
+                with torch.no_grad():
+                    prediction = value[0] if isinstance(value, tuple) else value
+                    colors = args[2] if args[2].ndim == 1 else args[2][selected]
+                    observed = args[0][selected]
+                    sampled = mosaic(prediction[selected].float(), colors)
+                    valid = (observed > 1 / 65535) & (observed < 1 - 1 / 65535)
+                    error = (sampled - observed).abs()[valid]
+                    maximum = float(error.max()) if error.numel() else 0.0
+                    assert maximum <= 1e-6
+                    capture["ADC_max_valid_sample_error"] = max(
+                        capture.get("ADC_max_valid_sample_error", 0.0), maximum
+                    )
+
         model.register_forward_pre_hook(before, with_kwargs=True)
+        model.register_forward_hook(after)
         model.context.backbone.register_forward_hook(dino)
         return model
 
     def observe(*args, **kwargs):
         batch = batch_reader(*args, **kwargs)
+        if plan.get("model_overrides"):
+            capture["training_images"] = capture.get("training_images", 0) + len(batch["packed"])
+            capture["ADC_training_images"] = capture.get("ADC_training_images", 0) + int(
+                ((batch["shot"] == 0) & (batch["read"] == 0)).sum()
+            )
         if args[0] <= 24:
             early.append(
                 {
@@ -343,6 +395,11 @@ def worker(plan_path, phase, arm):
         if key != "validation_protocol":
             assert state["config"][key] == value, key
     assert state["step"] == counts["optimizer_steps"] == counts["training_forwards"] == updates
+    if plan.get("model_overrides"):
+        assert capture["training_images"] == updates * config["batch_size"]
+        assert capture.get("ADC_training_hook_images", 0) == capture["ADC_training_images"]
+        if phase != "CPU":
+            assert 0 < capture["ADC_training_images"] < capture["training_images"]
     assert counts["DINO_calls"] == counts["training_forwards"] + counts["validation_forwards"]
     assert state["config"]["initialized_from"] == {**plan["parent"], "step": parent_step}
     assert json.dumps(
@@ -600,7 +657,7 @@ if __name__ == "__main__":
         help="CPU-only V95 checkpoint/validation boundary proof; keeps production schedules unchanged.",
     )
     parser.add_argument("--phase", choices=("CPU", "CUDA", "train"))
-    parser.add_argument("--arm", choices=(*RECIPES, "V96", "V97"))
+    parser.add_argument("--arm", choices=(*RECIPES, "V96", "V97", "V98", "V99"))
     args = parser.parse_args()
     if args.mode == "prepare":
         assert args.output

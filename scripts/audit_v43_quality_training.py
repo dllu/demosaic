@@ -16,6 +16,7 @@ import psutil
 import torch
 import yaml
 from train_directional_bank_trial import guard, read, ref, save
+from train_v43_quality_trial import expected_training_model_config
 
 REPO = Path(__file__).resolve().parents[1]
 
@@ -98,6 +99,7 @@ def audit(root, arm, output):
 
     parent = torch.load(plan["parent"]["path"], map_location="cpu", weights_only=True, mmap=True)
     parent_cfg = ModelConfig.from_checkpoint(parent["model_config"]).to_dict()
+    expected_cfg = expected_training_model_config(parent_cfg, plan, arm)
     cohort = read(plan["curation"]["path"])["cohorts"]["small" if arm == "V93" else "large"]
     run = Path(result["checkpoint"]["path"]).parent
     checkpoints = [(run / f"step-{n:06d}.pt", n) for n in plan["retain_steps"]]
@@ -110,7 +112,7 @@ def audit(root, arm, output):
         assert step in steps and (expected_step is None or step == expected_step)
         assert json.dumps(
             ModelConfig.from_checkpoint(state["model_config"]).to_dict(), sort_keys=True
-        ) == json.dumps(parent_cfg, sort_keys=True)
+        ) == json.dumps(expected_cfg, sort_keys=True)
         assert state["model"].keys() == state["ema"].keys() == parent["ema"].keys()
         assert len(state["model"]) == len(state["ema"]) == 71
         for group in ("model", "ema"):
@@ -156,7 +158,8 @@ def audit(root, arm, output):
                 "model_tensors_finite": 71,
                 "EMA_tensors_finite": 71,
                 "Adam_states_finite_with_correct_step": 69,
-                "canonical_model_config_and_tensor_keys_exact_parent": True,
+                "canonical_model_config_and_tensor_keys_exact_parent": expected_cfg == parent_cfg,
+                "canonical_model_config_exact_declared_policy_and_tensor_keys_exact_parent": True,
             }
         )
         del state, optimizer, item
@@ -205,7 +208,9 @@ def audit(root, arm, output):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("root", type=Path)
-    parser.add_argument("--arm", choices=("V93", "V94", "V95", "V96", "V97"), required=True)
+    parser.add_argument(
+        "--arm", choices=("V93", "V94", "V95", "V96", "V97", "V98", "V99"), required=True
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     audit(args.root.resolve(), args.arm, args.output)

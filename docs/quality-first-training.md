@@ -93,6 +93,15 @@ panels were independently recovered from saved outputs after operator errors;
 failed statuses are preserved and recovery repeats no inference. Both arms
 stop at final4k, without promotion or speed work.
 
+The [V98/V99 experiment](v95-adc-training-plan.md) preserves V95's data,
+augmentation and V43 learned architecture while testing the existing ADC-only
+physical projection during training. Both use a shared lower LR2e-6 and the
+same seed58/final4k budget. Actual discarded CPU/CUDA checks and independent
+saved-state audits pass; production has started. The primary learned contrast
+uses a projected V98 EMA export versus projected V99, so the known inference
+policy alone cannot count as a training gain. Full quality and native review
+remain pending; the working reference stays V43.
+
 Plans/code remain local and checkpoints/run traces use a fresh external-SSD
 namespace. The completed production plan is
 `.cache/quality-first-20261020/V43-curated-matched-training-v1/`. Resource bounds

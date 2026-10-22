@@ -3,7 +3,7 @@
 import copy
 
 import pytest
-from evaluate_v43_quality_trial import check_reference_witnesses
+from evaluate_v43_quality_trial import check_joint_model_config, check_reference_witnesses
 
 
 def observations():
@@ -28,6 +28,36 @@ def test_reference_identity_follows_the_new_order_without_reusing_predictions():
     result = check_reference_witnesses(fresh, old)
     assert set(result) == {"V43", "V95"}
     assert all(r["sampled_input_hashes_exact_previous"] == 2 for r in result.values())
+
+
+def test_projection_policy_requires_an_explicit_evaluation_declaration():
+    parent = {"width": 64, "adc_cfa_projection": False, "rgb_hidden_autocast": False}
+    projected = {**parent, "adc_cfa_projection": True}
+    check_joint_model_config(parent, parent)
+    check_joint_model_config(projected, parent, adc_projection=True)
+    with pytest.raises(AssertionError):
+        check_joint_model_config(projected, parent)
+    with pytest.raises(AssertionError):
+        check_joint_model_config(parent, parent, adc_projection=True)
+
+
+@pytest.mark.parametrize("changed", ["width", "precision", "missing", "extra", "not-bool"])
+def test_declared_projection_never_allows_another_architecture_change(changed):
+    parent = {"width": 64, "adc_cfa_projection": False, "rgb_hidden_autocast": False}
+    value = {**parent, "adc_cfa_projection": True}
+    policy = True
+    if changed == "width":
+        value["width"] = 128
+    elif changed == "precision":
+        value["rgb_hidden_autocast"] = True
+    elif changed == "missing":
+        value.pop("width")
+    elif changed == "extra":
+        value["new_head"] = True
+    else:
+        policy = 1
+    with pytest.raises(AssertionError):
+        check_joint_model_config(value, parent, adc_projection=policy)
 
 
 @pytest.mark.parametrize("index", [0, 1])

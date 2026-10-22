@@ -52,6 +52,12 @@ large regressions on a few. Both worsen tested color tails and lose some of
 V95's noisy weak-detail response. Lower-noise views confirm color/detail
 failures even with nearly clean inputs. Both stop at final4k; V43 remains the
 working reference and speed work remains deferred.
+The [V98/V99 experiment](v95-adc-training-plan.md) now tests training through the
+existing ADC-only sample projection with the same learned architecture and
+data. Four discarded CPU/CUDA checks and independent saved-state audits pass;
+production is running. Both endpoints will use projected inference in the
+primary comparison, separating the training effect from the known inference
+policy. Quality remains untested.
 Originals and historical manifests remain read-only. Validation/test and the
 standing GFX scene remain outside training. See the [source review](corpus-source-review.md).
 
