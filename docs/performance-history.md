@@ -4,9 +4,11 @@ Later experiments often improve aggregate photographic PSNR, but none has establ
 
 ![PSNR versus model version](images/version-PSNR-history.png)
 
-Selected completed primary endpoints, chosen by study scope, never by highest score. Version numbers are experiment labels; architectures, data, initialization, training budgets and recorded compute precision differ. This is descriptive history, not a controlled ranking or training curve. Missing versions lack a selected complete comparable primary report here. Camera references are measured CFA samples; independently demosaiced RGB references are not exact GT. The small camera panels have substantial scene uncertainty. Higher means do not establish statistical significance, a common compute budget, or better low-contrast detail. Dashed lines show V43's measured means. The upper panels include all 37 endpoints; the lower panels omit V72/V73 RAW-native prototypes only to show the mature RGB range more clearly.
+Selected completed primary endpoints, chosen by study scope, never by highest score. Version numbers are experiment labels; architectures, data, initialization, training budgets and recorded compute precision differ. This is descriptive history, not a controlled ranking or training curve. Missing versions lack a selected complete comparable primary report here. Camera references are measured CFA samples; independently demosaiced RGB references are not exact GT. The small camera panels have substantial scene uncertainty. Higher means do not establish statistical significance, a common compute budget, or better low-contrast detail. Dashed lines show V43's measured means. The upper panels include all 39 endpoints; the lower panels omit V72/V73 RAW-native prototypes only to show the mature RGB range more clearly.
 
 All photo points use the full fixed 427-source panel, seven conditions and four CFAs. Known/unseen points balance captures within scenes, then scenes (4/5 scenes, 72/90 crops). No screen16, procedural mean or model-selected subset is mixed into the photo curve. Precision details and original records remain in the source reports.
+
+V98/V99 use the same ADC-only inference projection; only V99 trained through it. Their original V43/V95 references retain their checkpoint policies. All three primary panels are complete, but the [fixed photo criteria fail and remaining quality/native review is pending](v95-adc-training-quality-review.md). These points do not indicate model promotion.
 
 | Version / endpoint | Photo sRGB | Known CFA | Unseen CFA | Report |
 | --- | ---: | ---: | ---: | --- |
@@ -47,5 +49,7 @@ All photo points use the full fixed 427-source panel, seven conditions and four 
 | V95 / step-20000 | 35.29553 | 54.33307 | 53.76990 | [Review](v43-curated-original20k-review.md) |
 | V96 / step-4000 | 35.27828 | 54.32564 | 53.76643 | [Review](v95-flat-palette-quality-review.md) |
 | V97 / step-4000 | 35.28321 | 54.32529 | 53.76365 | [Review](v95-flat-palette-quality-review.md) |
+| V98 / step-4000 (ADC-projected) | 35.37252 | 54.33003 | 53.73025 | [Review](v95-adc-training-quality-review.md) |
+| V99 / step-4000 (ADC-projected) | 35.40133 | 54.31940 | 53.72165 | [Review](v95-adc-training-quality-review.md) |
 
 [CSV](results/version-PSNR-history.csv) · [Source records, checkpoint hashes and evaluation metadata](results/version-PSNR-history.json) · [SVG](images/version-PSNR-history.svg) · [PDF](images/version-PSNR-history.pdf). Rebuild from the shipped JSON with `source scripts/env.sh` then `.venv/bin/python scripts/plot_version_history.py`; `--refresh-sources` additionally audits and recollects the original local report archives. These figures reuse completed reports and perform no model inference. Native noisy/restored/reference crops remain in each linked review and the README.

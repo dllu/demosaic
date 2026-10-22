@@ -96,112 +96,65 @@ original thresholds recover. Record actual resource readings every 2 seconds;
 waits are bounded, failures preserved, no automatic retry or other-project
 process management. No production/default checkpoint changes before full review.
 
-## Execution status, October 21 local time
+## Execution status, October22 local time
 
-All four discarded proofs completed: 24 actual updates per arm/device,
-96 training/DINO forwards over 816 images, including 54 ADC images. Each
-CPU/CUDA pair has all 24 observed batches identical across every data domain.
-Independent checkpoint/config/lineage/EMA/Adam/finite-gradient checks pass.
-Candidate CUDA hooks preserve valid samples within 5.97e-8 sensor units.
-Both production arms completed all 4,000 updates and their owners exited.
-Independent CPU audits pass for every retained model/EMA/Adam state and the
-training/validation traces. Each arm processed 64,000 images, including 4,751
-ADC images; all 161 logged production batch hashes match across domains.
-The final4k EMAs remain primary; both validation-best checkpoints are step3000
-and remain diagnostic. These are execution checks, not model-quality findings.
-The
-[preflights and historical launch observation](results/v95-adc-training-preflights-and-launch-v1.json)
-retain the preflight evidence. The
-[completed training and evaluation launch](results/v95-adc-training-complete-and-evaluation-launch-v1.json)
-records the independent audits, final checkpoint hashes, exact-EMA projected
-V98 export and actual live evaluation/crop-controller observations.
+Both production arms completed4,000 updates and their owners exited.
+Independent saved-state audits pass for every retained model/EMA/Adam state and
+training/validation trace. Each arm processed64,000 images, including4,751 ADC
+images; all161 logged batch hashes match across domains. All four discarded
+CPU/CUDA preflights also passed, with exact24-batch correspondence per device
+pair. Final4k EMAs remain primary; both validation-best states are step3000 and
+remain diagnostic. The [training completion and evaluation launch receipt](results/v95-adc-training-complete-and-evaluation-launch-v1.json)
+retains the audits, checkpoint identities, exact-EMA projected V98 export and
+actual controller launches. The [preflight receipt](results/v95-adc-training-preflights-and-launch-v1.json)
+retains the separate discarded-run evidence.
 
 Frozen training plan:
 `.cache/quality-first-20261020/V95-ADC-matched-training-v1/plan.json`, SHA256
 `e2d4f9acc2c96b854612ccb933d0d2d20ab36f114cef184009fbdee57df5540a`.
 Artifacts: `/mnt/external/demosaic/v95-adc-training-20261021-v1/`.
-The run uses the frozen prospective copy of this plan; this status addition
-does not change that archive. Full evaluation was prepared with
-`scripts/evaluate_v43_quality_trial.py prepare ... --adc-training` after
-both owners exited and independent saved-state audits were written as
-`independent-V98-training-audit-v1.json` and
-`independent-V99-training-audit-v1.json` in the training-plan directory.
-Preparation produces the exact-EMA V98 export, retains its training lineage
-and requires the projected policy explicitly for both new endpoints. Focused
-tests reject unrelated architecture/precision changes. The primary photo GPU
-worker is running; complete quality and native review remain pending.
+The completed [CPU handoff](results/v95-adc-quality-handoff-launch-v1.json)
+audited the training states and launched the serial seven-panel evaluator.
+`scripts/evaluate_v43_quality_trial.py prepare ... --adc-training` requires
+both projected endpoints and unchanged final4k initializer lineage. Root status
+updates do not change the frozen prospective plan or its criteria.
 
-Full evaluation now also checks sample fidelity on every declared projected
-endpoint. Coverage is derived from explicit priors: 1,772 ADC observations per
-model in photo/procedural evaluation, 224 in the analytic grid and 588 in the
-color grid. Known/unseen camera and GFX priors are positive, so require zero
-ADC selections. Valid measured channels must agree with the input within
-1e-6 sensor units. Empty valid support reports no numeric maximum. These
-diagnostics are separate from the unchanged reference invariant schema and
-do not establish unmeasured-color accuracy or full RGB16 output precision.
+The photo worker has exited. All111,636 cases pass coverage/invariant checks;
+[independent photo auditing](v95-adc-training-quality-review.md#completed-photo-panel)
+finds V99−projected-V98 +.02880 dB, below the fixed .03 dB requirement, with
+ADC photographic SSIM −.0020322. Both criteria fail. Known/unseen numeric audits
+are also complete; remaining analytic/color/GFX panels and lower-noise native
+review still need closure. No model is promoted
+or extended from the final4k endpoints; V43 remains the working reference.
 
-The [CPU observer preparation](results/v95-adc-full-panel-fidelity-preparation-v1.json)
-passes 35 focused checks and replay on all 588 saved V95 ADC color fields
-(38,535,168 valid CFA values). It detects input inconsistencies in the
-unprojected arrays; the existing projection reduces measured-sample error to
-at most 5.83e-11 in this fixed replay. All 588 positive-noise fields are skipped.
-No model inference, new noise or quality claim follows; actual V98/V99 full
-stage execution remains pending.
+Sample-fidelity coverage derives from explicit priors:1,772 ADC observations
+per projected model in photo/procedural evaluation,224 in the analytic grid,
+and588 in the color grid. Positive camera/GFX priors require zero ADC selections.
+The completed photo stage checks114,270,400 valid measured values per model,
+with maximum error2.98e-8 sensor units, below the1e-6 limit. Empty valid support
+reports no numeric maximum. These diagnostics preserve the original reference
+invariant schema and establish neither unmeasured-color accuracy nor RGB16
+output precision.
 
-## Queued audits and full evaluation
+The [photo auditor](../scripts/audit_adc_photo_contrasts.py) checks the complete
+nine-method grid before reporting all-condition, ADC-only and positive-noise
+contrasts, separately for photographic/procedural sources. `--expect-adc-pair`
+requires projection on both endpoints; matched training lineage is checked
+separately. Its [historical CPU rehearsal](results/v95-adc-photo-contrast-preparation-v1.json)
+and the [full-panel observer rehearsal](results/v95-adc-full-panel-fidelity-preparation-v1.json)
+remain implementation evidence. The current
+[completed photo receipt](results/v95-adc-completed-photo-review-v1.json)
+records the actual V98/V99 result and independent Decimal/scalar replay.
 
-At 21:17 PDT on October 21, a CPU-only handoff queue is waiting on the original
-training controller and worker. It requires the exact plan/controller identity,
-all six completed phase/arm receipts and exited training owners before running
-the two independent saved-state audits. It then prepares the common projected
-comparison from frozen helpers and launches the existing serial seven-panel
-evaluator. The evaluator owns its GPU workers and resource controls after
-handoff; the queue exits. There is no training restart or automatic retry.
-
-The [launch receipt](results/v95-adc-quality-handoff-launch-v1.json) records
-71 passing focused checks, four actual frozen CLI checks and all 47 numerical
-files byte-exact to the training archive. Queue plan SHA256:
-`f0a8cc521b9c1b6033e69e1ce5be842a5b5d78fa62cf054319f508290c3a04ff`.
-At this observation neither the audits nor any new quality panel had started.
-Training quality, native-crop inspection and the promotion decision remain
-pending; V43 remains the working reference.
-
-The [prepared photo auditor](../scripts/audit_adc_photo_contrasts.py) will report
-all-condition, ADC-only and positive-noise-only contrasts separately, keeping
-photographs and procedural sources separate. It first verifies the complete
-nine-method score grid and summary arithmetic, then averages within each source
-before resampling. `--expect-adc-pair` requires the projection flag on both
-primary endpoints; matched training lineage remains a separate audit.
-
-The [CPU preparation receipt](results/v95-adc-photo-contrast-preparation-v1.json)
-records 16 passing frozen tests and a rehearsal on completed V43/V95/V96/V97
-scores. Independent Decimal/scalar arithmetic rebuilds 10,632 source-metric
-means and checks 72 contrasts, agreeing within 7.11e-15. A real CLI check rejects
-the historical unprojected pair when common ADC inference is required.
-The rehearsal is not V98/V99 quality evidence. Its separate live observation
-records V98's final4k checkpoint and the running V99 owner; no new evaluation
-panel had started.
-
-The [secondary native-photo helper](../scripts/evaluate_v95_native_photo_conditions.py)
-now accepts the same projected V98/V99 comparison while preserving V43/V95
-reference policies and both final4k initializer identities. It retains the
-first four full-suite sources and two fixed native crop cases, at ADC-only,
-ISO100 and ISO12800: 36 planned triplets. It checks measured-sample fidelity
-on ADC inputs and requires positive-noise conditions to retain positive priors.
-All seven primary panels and their owners must finish/exit before its GPU
-worker starts; the full suite remains primary.
-
-The [native-helper preparation](results/v95-adc-native-detail-preparation-v1.json)
-passes 69 frozen checks and actual packaging/CLI checks, including the crop-board
-dependency. The historical preparation rehearsal starts no controller or
-worker. The new secondary diagnostic is now prepared and its CPU controller
-is waiting for all seven primary panels and exited owners. Its GPU worker has
-not started. The [execution receipt](results/v95-adc-training-complete-and-evaluation-launch-v1.json)
-records both actual launches. Complete native review remains pending; helper
-checks alone establish no crop-quality result.
-
-The [provisional native review](v95-adc-training-quality-review.md) now retains
-two unchanged high-noise triplets per new endpoint. The fixed fabric example
-still has color/detail failures; the building retains cleaner geometry than
-the RawNIND adapters. These individual examples and their saved-data checks
-do not replace full-panel statistics, lower-noise views or the declared gates.
+The [secondary native-photo controller](../scripts/evaluate_v95_native_photo_conditions.py)
+waits for all seven primary panels and both owners to finish/exit before its
+GPU worker. It retains the first four full-suite sources and two fixed crop
+cases at ADC-only, ISO100 and ISO12800:36 planned triplets. It checks ADC sample
+fidelity and requires positive-noise priors to remain positive. Its
+[helper preparation](results/v95-adc-native-detail-preparation-v1.json)
+retains69 frozen checks and actual packaging/CLI evidence; the historical
+rehearsal launched no worker. Actual lower-noise rendering/viewing remains
+pending. The [current quality review](v95-adc-training-quality-review.md) already
+retains two unchanged high-noise triplets per new endpoint, including remaining
+fabric color/detail failures. Those examples do not replace the other panels
+or the declared criteria.

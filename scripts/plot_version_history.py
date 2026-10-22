@@ -74,6 +74,11 @@ STUDIES = [
         [96, 97],
         "v95-flat-palette-quality-review.md",
     ),
+    (
+        "v95-adc-primary-statistics-v1.json",
+        [98, 99],
+        "v95-adc-training-quality-review.md",
+    ),
 ]
 METRICS = {
     ("full427", "photo", "srgb_psnr"): "photo_srgb_PSNR",
@@ -144,6 +149,10 @@ def collect():
                         },
                     )
                     assert point["checkpoint_sha256"] == model["sha256"]
+                    effective = model.get("effective_model_config", model.get("model_config", {}))
+                    if effective.get("adc_cfa_projection", False):
+                        point["inference_policy"] = "ADC-only CFA projection"
+                        point["endpoint"] = f"step-{model['step']} (ADC-projected)"
                     metric = "srgb_psnr" if panel == "full427" else "sensor_psnr"
                     if panel == "full427" and row["kind"] != "photo":
                         continue
@@ -246,7 +255,15 @@ def main():
     else:
         result = json.loads(destination.read_text())
         points, evidence = result["points"], result["sources"]
-    columns = ["version", "endpoint", "checkpoint_sha256", *METRICS.values(), "report", "source"]
+    columns = [
+        "version",
+        "endpoint",
+        "checkpoint_sha256",
+        "inference_policy",
+        *METRICS.values(),
+        "report",
+        "source",
+    ]
     with destination.with_suffix(".csv").open("w") as stream:
         writer = csv.DictWriter(stream, columns, extrasaction="ignore", lineterminator="\n")
         writer.writeheader()
@@ -305,7 +322,7 @@ def main():
         for version in dict.fromkeys(highlighted):
             p = next(r for r in shown if r["version"] == version)
             photo.annotate(
-                f"V{version}",
+                f"V{version}" + (" (ADC)" if p.get("inference_policy") else ""),
                 (version, p["photo_srgb_PSNR"]),
                 xytext=(0, 7),
                 textcoords="offset points",
@@ -324,7 +341,7 @@ def main():
         axis.set_xlabel("Model version (unequal training budgets)")
     fig.suptitle("PSNR by model version", fontsize=15)
     fig.supxlabel(
-        "Higher means have not established better real-photo fine detail. Dashed lines: V43. Full values and provenance: CSV/JSON.",
+        "ADC labels: ADC-only sample projection. Higher PSNR alone is not promotion.\nDashed lines: V43. Full values and provenance: CSV/JSON.",
         fontsize=9,
         color="#4b5563",
     )
@@ -343,7 +360,7 @@ def main():
     (REPO / "docs/performance-history.md").write_text(
         "# PSNR history\n\nLater experiments often improve aggregate photographic PSNR, but none has established the combination of real-photo quality, fine-detail preservation and camera performance needed to replace V43 step2000. The version number names an experiment; it is not a training step.\n\n![PSNR versus model version](images/version-PSNR-history.png)\n\n"
         + result["description"]
-        + f" Camera references are measured CFA samples; independently demosaiced RGB references are not exact GT. The small camera panels have substantial scene uncertainty. Higher means do not establish statistical significance, a common compute budget, or better low-contrast detail. Dashed lines show V43's measured means. The upper panels include all {len(points)} endpoints; the lower panels omit V72/V73 RAW-native prototypes only to show the mature RGB range more clearly.\n\nAll photo points use the full fixed 427-source panel, seven conditions and four CFAs. Known/unseen points balance captures within scenes, then scenes (4/5 scenes, 72/90 crops). No screen16, procedural mean or model-selected subset is mixed into the photo curve. Precision details and original records remain in the source reports.\n\n"
+        + f" Camera references are measured CFA samples; independently demosaiced RGB references are not exact GT. The small camera panels have substantial scene uncertainty. Higher means do not establish statistical significance, a common compute budget, or better low-contrast detail. Dashed lines show V43's measured means. The upper panels include all {len(points)} endpoints; the lower panels omit V72/V73 RAW-native prototypes only to show the mature RGB range more clearly.\n\nAll photo points use the full fixed 427-source panel, seven conditions and four CFAs. Known/unseen points balance captures within scenes, then scenes (4/5 scenes, 72/90 crops). No screen16, procedural mean or model-selected subset is mixed into the photo curve. Precision details and original records remain in the source reports.\n\nV98/V99 use the same ADC-only inference projection; only V99 trained through it. Their original V43/V95 references retain their checkpoint policies. All three primary panels are complete, but the [fixed photo criteria fail and remaining quality/native review is pending](v95-adc-training-quality-review.md). These points do not indicate model promotion.\n\n"
         + "\n".join(rows)
         + "\n\n[CSV](results/version-PSNR-history.csv) · [Source records, checkpoint hashes and evaluation metadata](results/version-PSNR-history.json) · [SVG](images/version-PSNR-history.svg) · [PDF](images/version-PSNR-history.pdf). Rebuild from the shipped JSON with `source scripts/env.sh` then `.venv/bin/python scripts/plot_version_history.py`; `--refresh-sources` additionally audits and recollects the original local report archives. These figures reuse completed reports and perform no model inference. Native noisy/restored/reference crops remain in each linked review and the README.\n"
     )

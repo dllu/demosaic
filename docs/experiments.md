@@ -58,9 +58,12 @@ data. Both final4k training arms and independent saved-state audits are complete
 the [full FP32 evaluation is running](results/v95-adc-training-complete-and-evaluation-launch-v1.json).
 Both endpoints use projected inference in the
 primary comparison, separating the training effect from the known inference
-policy. The [first fixed native examples](v95-adc-training-quality-review.md)
+policy. The [completed photo audit and fixed native examples](v95-adc-training-quality-review.md)
 retain two triplets per new endpoint, with remaining fabric color/detail failures.
-Full quality and native review remain pending.
+V99−projected-V98 photo PSNR gains .02880 dB, below the fixed .03 dB criterion,
+and ADC photographic SSIM falls. Those photo criteria fail; the remaining
+quality panels and lower-noise native review still need completion. No model
+is promoted or extended from these final4k endpoints.
 The [frozen CPU handoff queue](results/v95-adc-quality-handoff-launch-v1.json)
 completed its audits and launched all seven evaluation panels after the original
 training owners exited. The lower-noise native-crop controller waits for that
