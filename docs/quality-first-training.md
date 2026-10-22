@@ -68,9 +68,9 @@ without automatic retries.
 
 Frozen plan: `.cache/current-quality-20261022-v1/training-v2/plan.json`.
 Runs: `/mnt/external/demosaic/v84-curated-quality-20261022-v2/`.
-All four discarded CPU/CUDA smokes passed. V100 is training; V101 is queued
-to start from the same original V84 weights after it. Actual phase/owner status
-is in the local `status.json`. Production quality results are pending.
+All four discarded CPU/CUDA smokes passed. V100 completed 10,000 updates;
+V101 is training from the same original V84 weights. Actual phase/owner status
+is in the local `status.json`. Broad production quality results are pending.
 [Launch and verification record](results/current-model-baseline-selection-v1.json).
 
 The evaluation queue at
@@ -100,8 +100,11 @@ The [natural-detail gallery](heldout-detail.md) fixes four held-out contexts
 before viewing these model outputs: pale bark, white feathers, forest canopy
 and gray fur. Shared cached observations at ADC-only, ISO100 and ISO12800
 give a quick visual comparison as each final continuation becomes available.
-Its current V84/RawNIND reference shows remaining high-noise texture loss;
-this supplementary diagnosis does not replace the full panels above.
+V100's final endpoint gains .076/.062/.007 dB over V84 on these selected
+ADC-only/ISO100/ISO12800 interiors. The images remain close and retain
+high-noise texture loss. This supplementary diagnosis does not replace the
+full panels above; [per-case evidence](results/heldout-detail-V100-final-v1.json)
+records the modest gains and small SSIM/chroma/gradient tradeoffs.
 
 Report source/scene intervals, adverse cases and the selection of any displayed
 checkpoint. Choose useful versions from overall metrics and actual images;

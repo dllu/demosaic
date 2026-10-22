@@ -86,6 +86,8 @@ native sensor resolution, including RawNIND and a separate ISO 100 reference.
 The [natural-detail gallery](heldout-detail.md) adds bark, white feathers,
 forest canopy and fur at three noise levels. It shows V84's remaining
 high-noise detail loss as well as its sharper low-noise output.
+V100's cleaned-data continuation now adds small gains on those selected
+contexts; the full-photo and camera comparison is still pending.
 
 The [completed V84/V85 study](native-data-original20k-review.md) retains detailed
 metrics, uncertainty, color/weak-detail diagnostics and capture limitations.

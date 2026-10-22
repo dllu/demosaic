@@ -1,0 +1,659 @@
+{
+  "status": "completed-V100-final-heldout-detail-comparison",
+  "recorded_local": "2026-10-22T12:53:17-07:00",
+  "training_result": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/training-v2/train-V100-result.json",
+    "sha256": "efc0fde8c3c32764bb66463ad8a1f40669f5bdeaa6749a669bba6ba8e11ea08a"
+  },
+  "V100_checkpoint": {
+    "path": "/mnt/external/demosaic/v84-curated-quality-20261022-v2/train/V100/last.pt",
+    "sha256": "4b689fb187b13df72fbf79ebd46f98cf7361c3ca8a97fb1f7afee940b249ad3e"
+  },
+  "checkpoint_selection": "Fixed final10000 endpoint, EMA selected by the standard loader; training worker exited successfully before CPU evaluation. No intermediate/best checkpoint search.",
+  "V84_reference_report": {
+    "path": "/mnt/external/demosaic/heldout-detail-20261022-v1/V84-reference/report.json",
+    "sha256": "25274715d6382a33b3a322ce653f53516b6054a129aed8cb7e69a2067f302c37"
+  },
+  "V100_report": {
+    "path": "/mnt/external/demosaic/heldout-detail-20261022-v1/V100-final10000/report.json",
+    "sha256": "f0f9836ac002105fc3f0575f9b2e8baa36b3e4b55e97f5d9b549cc855077bd24"
+  },
+  "shared_input_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-inputs-v2/plan.json",
+    "sha256": "544de55e68c2352d896231c3663fb5024c2d8dd658c8f978da3534527b3b834f"
+  },
+  "shared_observations": 12,
+  "source_count": 4,
+  "CFA": "RGGB",
+  "compute": "CPU FP32",
+  "metric_ROI_in_native256_context_xywh": [
+    8,
+    8,
+    240,
+    240
+  ],
+  "display_ROI_in_native256_context_xywh": [
+    48,
+    48,
+    160,
+    160
+  ],
+  "display_exposure": 1,
+  "per_case": [
+    {
+      "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+      "condition": "adc-only",
+      "pattern": "RGGB",
+      "V84": {
+        "linear_psnr": 38.22718048095703,
+        "srgb_psnr": 34.602603912353516,
+        "srgb_ssim": 0.9874228239059448,
+        "chroma_mae": 0.00940017495304346,
+        "gradient_mae": 0.018128715455532074,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 45.62117004394531
+      },
+      "V100": {
+        "linear_psnr": 38.30519485473633,
+        "srgb_psnr": 34.67380905151367,
+        "srgb_ssim": 0.9876365661621094,
+        "chroma_mae": 0.009387276135385036,
+        "gradient_mae": 0.017929356545209885,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 45.70814514160156
+      },
+      "V100_minus_V84": {
+        "linear_psnr": 0.07801437377929688,
+        "srgb_psnr": 0.07120513916015625,
+        "srgb_ssim": 0.00021374225616455078,
+        "chroma_mae": -1.2898817658424377e-05,
+        "gradient_mae": -0.00019935891032218933,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 0.08697509765625
+      }
+    },
+    {
+      "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+      "condition": "iso100-prior",
+      "pattern": "RGGB",
+      "V84": {
+        "linear_psnr": 38.75776290893555,
+        "srgb_psnr": 35.926815032958984,
+        "srgb_ssim": 0.9898145794868469,
+        "chroma_mae": 0.008314196020364761,
+        "gradient_mae": 0.01567291095852852,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 52.27107238769531
+      },
+      "V100": {
+        "linear_psnr": 38.875267028808594,
+        "srgb_psnr": 36.01278305053711,
+        "srgb_ssim": 0.9900323152542114,
+        "chroma_mae": 0.008327865973114967,
+        "gradient_mae": 0.015448348596692085,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 52.47652053833008
+      },
+      "V100_minus_V84": {
+        "linear_psnr": 0.11750411987304688,
+        "srgb_psnr": 0.085968017578125,
+        "srgb_ssim": 0.00021773576736450195,
+        "chroma_mae": 1.3669952750205994e-05,
+        "gradient_mae": -0.0002245623618364334,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 0.20544815063476562
+      }
+    },
+    {
+      "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+      "condition": "iso12800-prior",
+      "pattern": "RGGB",
+      "V84": {
+        "linear_psnr": 32.22538375854492,
+        "srgb_psnr": 29.942489624023438,
+        "srgb_ssim": 0.9531073570251465,
+        "chroma_mae": 0.008405485190451145,
+        "gradient_mae": 0.033734969794750214,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 43.06306457519531
+      },
+      "V100": {
+        "linear_psnr": 32.24405288696289,
+        "srgb_psnr": 29.957691192626953,
+        "srgb_ssim": 0.953242838382721,
+        "chroma_mae": 0.008438450284302235,
+        "gradient_mae": 0.03366007283329964,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 43.07897186279297
+      },
+      "V100_minus_V84": {
+        "linear_psnr": 0.01866912841796875,
+        "srgb_psnr": 0.015201568603515625,
+        "srgb_ssim": 0.0001354813575744629,
+        "chroma_mae": 3.296509385108948e-05,
+        "gradient_mae": -7.489696145057678e-05,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 0.01590728759765625
+      }
+    },
+    {
+      "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+      "condition": "adc-only",
+      "pattern": "RGGB",
+      "V84": {
+        "linear_psnr": 46.80525207519531,
+        "srgb_psnr": 41.826026916503906,
+        "srgb_ssim": 0.9911848306655884,
+        "chroma_mae": 0.0027976164128631353,
+        "gradient_mae": 0.004100919235497713,
+        "highlight_boundary_chroma_mae": 0.01520093809813261,
+        "highlight_boundary_rgb_mae": 0.01389453187584877,
+        "shadow_linear_psnr": 61.402099609375
+      },
+      "V100": {
+        "linear_psnr": 46.864437103271484,
+        "srgb_psnr": 41.885292053222656,
+        "srgb_ssim": 0.9912683367729187,
+        "chroma_mae": 0.0027890971396118402,
+        "gradient_mae": 0.004076628014445305,
+        "highlight_boundary_chroma_mae": 0.015197073109447956,
+        "highlight_boundary_rgb_mae": 0.013861901126801968,
+        "shadow_linear_psnr": 61.443599700927734
+      },
+      "V100_minus_V84": {
+        "linear_psnr": 0.059185028076171875,
+        "srgb_psnr": 0.05926513671875,
+        "srgb_ssim": 8.350610733032227e-05,
+        "chroma_mae": -8.51927325129509e-06,
+        "gradient_mae": -2.429122105240822e-05,
+        "highlight_boundary_chroma_mae": -3.864988684654236e-06,
+        "highlight_boundary_rgb_mae": -3.263074904680252e-05,
+        "shadow_linear_psnr": 0.041500091552734375
+      }
+    },
+    {
+      "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+      "condition": "iso100-prior",
+      "pattern": "RGGB",
+      "V84": {
+        "linear_psnr": 46.2696533203125,
+        "srgb_psnr": 43.564125061035156,
+        "srgb_ssim": 0.9906620383262634,
+        "chroma_mae": 0.0025195975322276354,
+        "gradient_mae": 0.004004898015409708,
+        "highlight_boundary_chroma_mae": 0.014914622530341148,
+        "highlight_boundary_rgb_mae": 0.014037685468792915,
+        "shadow_linear_psnr": 65.98069763183594
+      },
+      "V100": {
+        "linear_psnr": 46.26020431518555,
+        "srgb_psnr": 43.5936279296875,
+        "srgb_ssim": 0.9905936121940613,
+        "chroma_mae": 0.0025154673494398594,
+        "gradient_mae": 0.004010201431810856,
+        "highlight_boundary_chroma_mae": 0.014811530709266663,
+        "highlight_boundary_rgb_mae": 0.013927295804023743,
+        "shadow_linear_psnr": 66.05094146728516
+      },
+      "V100_minus_V84": {
+        "linear_psnr": -0.009449005126953125,
+        "srgb_psnr": 0.02950286865234375,
+        "srgb_ssim": -6.842613220214844e-05,
+        "chroma_mae": -4.130182787775993e-06,
+        "gradient_mae": 5.303416401147842e-06,
+        "highlight_boundary_chroma_mae": -0.00010309182107448578,
+        "highlight_boundary_rgb_mae": -0.00011038966476917267,
+        "shadow_linear_psnr": 0.07024383544921875
+      }
+    },
+    {
+      "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+      "condition": "iso12800-prior",
+      "pattern": "RGGB",
+      "V84": {
+        "linear_psnr": 39.80350112915039,
+        "srgb_psnr": 38.82383728027344,
+        "srgb_ssim": 0.969601035118103,
+        "chroma_mae": 0.0032385988160967827,
+        "gradient_mae": 0.0064817857928574085,
+        "highlight_boundary_chroma_mae": 0.021302441135048866,
+        "highlight_boundary_rgb_mae": 0.022130141034722328,
+        "shadow_linear_psnr": 60.01773452758789
+      },
+      "V100": {
+        "linear_psnr": 39.809356689453125,
+        "srgb_psnr": 38.82876968383789,
+        "srgb_ssim": 0.9696264863014221,
+        "chroma_mae": 0.003241700818762183,
+        "gradient_mae": 0.006478015799075365,
+        "highlight_boundary_chroma_mae": 0.0212764460593462,
+        "highlight_boundary_rgb_mae": 0.022129714488983154,
+        "shadow_linear_psnr": 60.00880432128906
+      },
+      "V100_minus_V84": {
+        "linear_psnr": 0.005855560302734375,
+        "srgb_psnr": 0.004932403564453125,
+        "srgb_ssim": 2.5451183319091797e-05,
+        "chroma_mae": 3.102002665400505e-06,
+        "gradient_mae": -3.769993782043457e-06,
+        "highlight_boundary_chroma_mae": -2.5995075702667236e-05,
+        "highlight_boundary_rgb_mae": -4.2654573917388916e-07,
+        "shadow_linear_psnr": -0.008930206298828125
+      }
+    },
+    {
+      "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+      "condition": "adc-only",
+      "pattern": "RGGB",
+      "V84": {
+        "linear_psnr": 45.72083282470703,
+        "srgb_psnr": 36.43574523925781,
+        "srgb_ssim": 0.9703900814056396,
+        "chroma_mae": 0.006883861497044563,
+        "gradient_mae": 0.013847134076058865,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 51.10246276855469
+      },
+      "V100": {
+        "linear_psnr": 45.858402252197266,
+        "srgb_psnr": 36.56642150878906,
+        "srgb_ssim": 0.9715654253959656,
+        "chroma_mae": 0.006827644072473049,
+        "gradient_mae": 0.01357816718518734,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 51.215110778808594
+      },
+      "V100_minus_V84": {
+        "linear_psnr": 0.13756942749023438,
+        "srgb_psnr": 0.13067626953125,
+        "srgb_ssim": 0.0011753439903259277,
+        "chroma_mae": -5.621742457151413e-05,
+        "gradient_mae": -0.0002689668908715248,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 0.11264801025390625
+      }
+    },
+    {
+      "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+      "condition": "iso100-prior",
+      "pattern": "RGGB",
+      "V84": {
+        "linear_psnr": 47.39151382446289,
+        "srgb_psnr": 39.007972717285156,
+        "srgb_ssim": 0.9825930595397949,
+        "chroma_mae": 0.0053480700589716434,
+        "gradient_mae": 0.010503992438316345,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 55.99032974243164
+      },
+      "V100": {
+        "linear_psnr": 47.494224548339844,
+        "srgb_psnr": 39.10620880126953,
+        "srgb_ssim": 0.982980489730835,
+        "chroma_mae": 0.005318434908986092,
+        "gradient_mae": 0.010367692448198795,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 56.12189865112305
+      },
+      "V100_minus_V84": {
+        "linear_psnr": 0.10271072387695312,
+        "srgb_psnr": 0.098236083984375,
+        "srgb_ssim": 0.00038743019104003906,
+        "chroma_mae": -2.9635149985551834e-05,
+        "gradient_mae": -0.0001362999901175499,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 0.13156890869140625
+      }
+    },
+    {
+      "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+      "condition": "iso12800-prior",
+      "pattern": "RGGB",
+      "V84": {
+        "linear_psnr": 39.50151443481445,
+        "srgb_psnr": 30.855043411254883,
+        "srgb_ssim": 0.8557244539260864,
+        "chroma_mae": 0.0069786980748176575,
+        "gradient_mae": 0.02711500972509384,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 45.90103530883789
+      },
+      "V100": {
+        "linear_psnr": 39.50795364379883,
+        "srgb_psnr": 30.859825134277344,
+        "srgb_ssim": 0.8560749292373657,
+        "chroma_mae": 0.0069773015566170216,
+        "gradient_mae": 0.02710186317563057,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 45.91118240356445
+      },
+      "V100_minus_V84": {
+        "linear_psnr": 0.006439208984375,
+        "srgb_psnr": 0.0047817230224609375,
+        "srgb_ssim": 0.0003504753112792969,
+        "chroma_mae": -1.39651820063591e-06,
+        "gradient_mae": -1.3146549463272095e-05,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 0.0101470947265625
+      }
+    },
+    {
+      "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+      "condition": "adc-only",
+      "pattern": "RGGB",
+      "V84": {
+        "linear_psnr": 50.1308479309082,
+        "srgb_psnr": 42.05537796020508,
+        "srgb_ssim": 0.9875608682632446,
+        "chroma_mae": 0.00414522597566247,
+        "gradient_mae": 0.006778890732675791,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 60.27391815185547
+      },
+      "V100": {
+        "linear_psnr": 50.1680908203125,
+        "srgb_psnr": 42.09871292114258,
+        "srgb_ssim": 0.9877200722694397,
+        "chroma_mae": 0.004137097857892513,
+        "gradient_mae": 0.006740408018231392,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 60.36012268066406
+      },
+      "V100_minus_V84": {
+        "linear_psnr": 0.037242889404296875,
+        "srgb_psnr": 0.0433349609375,
+        "srgb_ssim": 0.00015920400619506836,
+        "chroma_mae": -8.128117769956589e-06,
+        "gradient_mae": -3.848271444439888e-05,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 0.08620452880859375
+      }
+    },
+    {
+      "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+      "condition": "iso100-prior",
+      "pattern": "RGGB",
+      "V84": {
+        "linear_psnr": 49.952362060546875,
+        "srgb_psnr": 42.475555419921875,
+        "srgb_ssim": 0.9879704117774963,
+        "chroma_mae": 0.003849718952551484,
+        "gradient_mae": 0.006519186310470104,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 61.749271392822266
+      },
+      "V100": {
+        "linear_psnr": 49.97129440307617,
+        "srgb_psnr": 42.50852584838867,
+        "srgb_ssim": 0.9880664944648743,
+        "chroma_mae": 0.003845568047836423,
+        "gradient_mae": 0.00647799763828516,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 61.822059631347656
+      },
+      "V100_minus_V84": {
+        "linear_psnr": 0.018932342529296875,
+        "srgb_psnr": 0.032970428466796875,
+        "srgb_ssim": 9.608268737792969e-05,
+        "chroma_mae": -4.150904715061188e-06,
+        "gradient_mae": -4.118867218494415e-05,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 0.07278823852539062
+      }
+    },
+    {
+      "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+      "condition": "iso12800-prior",
+      "pattern": "RGGB",
+      "V84": {
+        "linear_psnr": 42.05370330810547,
+        "srgb_psnr": 34.01593780517578,
+        "srgb_ssim": 0.9147857427597046,
+        "chroma_mae": 0.005757241975516081,
+        "gradient_mae": 0.014648256823420525,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 49.90345764160156
+      },
+      "V100": {
+        "linear_psnr": 42.05788040161133,
+        "srgb_psnr": 34.01833724975586,
+        "srgb_ssim": 0.9148422479629517,
+        "chroma_mae": 0.005757641047239304,
+        "gradient_mae": 0.014644061215221882,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 49.90798568725586
+      },
+      "V100_minus_V84": {
+        "linear_psnr": 0.004177093505859375,
+        "srgb_psnr": 0.002399444580078125,
+        "srgb_ssim": 5.650520324707031e-05,
+        "chroma_mae": 3.9907172322273254e-07,
+        "gradient_mae": -4.195608198642731e-06,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 0.004528045654296875
+      }
+    }
+  ],
+  "condition_means": [
+    {
+      "condition": "adc-only",
+      "sources": 4,
+      "V84_srgb_psnr": 38.72993850708008,
+      "V100_srgb_psnr": 38.80605888366699,
+      "V100_minus_V84_srgb_psnr": 0.07612037658691406
+    },
+    {
+      "condition": "iso100-prior",
+      "sources": 4,
+      "V84_srgb_psnr": 40.24361705780029,
+      "V100_srgb_psnr": 40.3052864074707,
+      "V100_minus_V84_srgb_psnr": 0.061669349670410156
+    },
+    {
+      "condition": "iso12800-prior",
+      "sources": 4,
+      "V84_srgb_psnr": 33.409327030181885,
+      "V100_srgb_psnr": 33.41615581512451,
+      "V100_minus_V84_srgb_psnr": 0.006828784942626953
+    }
+  ],
+  "srgb_psnr_cases_improved": 12,
+  "srgb_ssim_cases_improved": 11,
+  "gradient_mae_cases_improved": 11,
+  "chroma_mae_cases_improved": 8,
+  "native_triplets_new": 12,
+  "native160_cells_actually_viewed": 60,
+  "views": [
+    {
+      "condition": "adc-only",
+      "immutable_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-v1/V100-boards/adc-only/photo-comparison.png",
+        "sha256": "abb9bc363bd7fbf0cb8dabc5026729c5f0953ccbd8da3bb33029412300b6d066"
+      },
+      "immutable_comparison": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-v1/V100-boards/adc-only/photo-comparison.json",
+        "sha256": "496efdfba56c091852501b16da6354eaccb4ec4b9962d0c92053606d92cf11e4"
+      },
+      "current_gallery": "docs/images/current-detail/adc-only/photo-comparison.png",
+      "native160_cells_actually_viewed": 20
+    },
+    {
+      "condition": "iso100-prior",
+      "immutable_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-v1/V100-boards/iso100-prior/photo-comparison.png",
+        "sha256": "b66b1cfe221903af3bbbe9c7c99777fd8c877d94bfe70531d66b814d56b71a16"
+      },
+      "immutable_comparison": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-v1/V100-boards/iso100-prior/photo-comparison.json",
+        "sha256": "a9123df92f92d866ea1e08f9751abd7e5bac0a3eef1aa8a798c37cd18a1f482a"
+      },
+      "current_gallery": "docs/images/current-detail/iso100-prior/photo-comparison.png",
+      "native160_cells_actually_viewed": 20
+    },
+    {
+      "condition": "iso12800-prior",
+      "immutable_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-v1/V100-boards/iso12800-prior/photo-comparison.png",
+        "sha256": "2e0c0cf9f541d242086177b288bad187fbd7a0880a7b9ad1b85d49c1e6dc9e6b"
+      },
+      "immutable_comparison": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-v1/V100-boards/iso12800-prior/photo-comparison.json",
+        "sha256": "fe104dffc0869f4331df6bb0de145933ccb1c0f24f003f7c1735ce2ba0649e70"
+      },
+      "current_gallery": "docs/images/current-detail/iso12800-prior/photo-comparison.png",
+      "native160_cells_actually_viewed": 20
+    }
+  ],
+  "published_V100_triplets": [
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-detail/adc-only/crop-668708a807cf0aac.png",
+        "sha256": "8830d3a04cc9ec254ee54ac8f1074c9c668d044b33861cfd93b1dd45dac5a2e5"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-detail/adc-only/crop-668708a807cf0aac.json",
+        "sha256": "6f4cdb956a858f37e03b056f4644e09b14f7db45697d6fa9b10e14c3daedd6d6"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso100-prior/crop-3cd3c4dd898b254a.png",
+        "sha256": "b00873d1a81d0f6b9cce45419465a336d8b5bca037fb4eeadb53cb32ea7bcb16"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso100-prior/crop-3cd3c4dd898b254a.json",
+        "sha256": "2d2d856ea217652c4abb1afadfe45f04d8ba405299168e6aec9f5b36e49631e5"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso12800-prior/crop-73f85438357d8cef.png",
+        "sha256": "f1a85b768b1ffc76d7f622bf2b45ecd68217ad6ef94de744319757425cad85a0"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso12800-prior/crop-73f85438357d8cef.json",
+        "sha256": "1f13fad8e798cfaf07043c57014741bd15386dfcb1037f724d28d90fe7a04d4b"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-detail/adc-only/crop-a54d42d5e60de2b2.png",
+        "sha256": "bd0574a99ed3d21cc1362e5271fb8a60f223ced9a4af7fb1aa0187751e260eba"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-detail/adc-only/crop-a54d42d5e60de2b2.json",
+        "sha256": "7c67b3f0d27b95fcc25d268c82ae206fd41edc43275efc55e55dcee7732568da"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso100-prior/crop-d1978607c323cd52.png",
+        "sha256": "ad73c0b37a2067d2d9a932f6776ad9525367512229a8de1568ebd95cd8c69e0f"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso100-prior/crop-d1978607c323cd52.json",
+        "sha256": "879a67de0917eab1618e04a851f03124c85ce8e7800fccbcd6960c6a3a192834"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso12800-prior/crop-05120ac04e52ca80.png",
+        "sha256": "fc877bf9c413543cba4963e91b69c6fae7e0dbe51cfb197ef937471e094cf4e7"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso12800-prior/crop-05120ac04e52ca80.json",
+        "sha256": "14cf917e299a92ac85ca65bb154a67d5f14a8eb3edc6898df81149e762c9e149"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-detail/adc-only/crop-78c51d93fb163170.png",
+        "sha256": "4e47506665283d5836cba9be82ecb4322b195d4185c471c256195b6c0e6e718e"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-detail/adc-only/crop-78c51d93fb163170.json",
+        "sha256": "fb54998fcd6d79394b78050dae307083faed59a0f17dffc32212f32222fef59f"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso100-prior/crop-3a0c8a33456a5ab5.png",
+        "sha256": "b7d47748f303b8c837e94561f395219a1fec8f7e124f7ec1c4d325e1b9ae2bf2"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso100-prior/crop-3a0c8a33456a5ab5.json",
+        "sha256": "e5a0f7652494db74416e3b1534d05d57eb275a270c0439ad1aca25478bfb5c15"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso12800-prior/crop-93aa9941c8f35f8f.png",
+        "sha256": "9a36eef62264428d44590596fbdcc70e74440d7a776dcab5163a8af72f09a539"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso12800-prior/crop-93aa9941c8f35f8f.json",
+        "sha256": "008bd14b31de08cb26c8807c8b772af57479e4432771679511bc1446d28bfd07"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-detail/adc-only/crop-7e6d33e3333243b0.png",
+        "sha256": "db491c15726bdd396e54a873c8e569e281deb10a14e41303e67b47e450f136dd"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-detail/adc-only/crop-7e6d33e3333243b0.json",
+        "sha256": "c1c807ce152deffc105035cb202597e1b816c2a74f64b1969f0f97c92a67661b"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso100-prior/crop-c586f3b619a60285.png",
+        "sha256": "0eb52b93439df0e35023a5c3bd186f5326ccedc339c184a7ab19f2c2fd9e134d"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso100-prior/crop-c586f3b619a60285.json",
+        "sha256": "2801c081fc90a8073f952cfff395d6947df7a590bd90c71a72854d5547787390"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso12800-prior/crop-c82251b09bfe01c8.png",
+        "sha256": "8d9a8f85c16c0ca4e74670cbcf5475d93332b63ee0685c815a46300ad4b906fd"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-detail/iso12800-prior/crop-c82251b09bfe01c8.json",
+        "sha256": "73bc8c60aa66d2feffd8fe52f6743bc1ca04873a3d28604ca3b949e9f95a9132"
+      }
+    }
+  ],
+  "model_weights_and_cached_inputs_unchanged": true,
+  "visual_observation": "V100 and V84 look close at native size. Small numerical gains on these selected contexts do not visibly resolve high-noise feather/canopy/fur smoothing. Both remain substantially sharper than RawNIND here.",
+  "scope": "Supplementary four input-selected source contexts, three conditions and one CFA; means use the 240-pixel interior, not just the displayed160 ROI. No claim of a full427, real-camera or full-frame gain. V101 and the already queued broad evaluation remain pending. Current gallery may gain useful new versions; immutable boards and per-model triplets preserve this observation."
+}

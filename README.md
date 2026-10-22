@@ -11,6 +11,8 @@ Current work applies the cleaned 88,484-source Commons cohort, less optical blur
 and reviewed fine-detail examples to this stronger architecture. Useful new
 versions and image comparisons belong here as they become available. The
 [diary](diary/index.md) retains historical decisions.
+The [natural-detail gallery](docs/heldout-detail.md) now includes V100's final
+continuation: small gains on four selected contexts, with broader testing queued.
 
 ![PSNR versus model version](docs/images/version-PSNR-history.png)
 
