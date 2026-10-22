@@ -165,13 +165,18 @@ selection rebinning reads its supplied manifest instead of the changing index.
 
 ## Reviewed photographic regions
 
-The opt-in training reader can oversample the six inspected regions in the
-[weak/fine texture catalogue](../configs/low-contrast-training-rois-v1.json).
+The opt-in reader supports the prepared
+[32-region fine-detail catalogue](../configs/low-contrast-training-rois-curated-v3.json)
+and its exact 88,477-source future manifest. It preserves the original six regions
+and adds 26 source photographs after actual native inspection.
+[Examples, source decisions and all 32 real-reader checks](corpus-source-review.md#reviewed-weak-and-fine-texture-rois).
 `reviewed_roi_catalogue` names that file; `reviewed_roi_fraction` defaults to
 `0.0` and gives the selection probability **conditional on a photographic
 Commons sample**. Flat and synthetic samples retain their existing shares.
-The V101 quality recipe enables it at `.05`; V100 leaves it disabled. Their
-production quality comparison is pending.
+Completed V101 used the [original six-region catalogue](../configs/low-contrast-training-rois-v1.json)
+at `.05`; V100 left it disabled. Their [current selected-detail results](heldout-detail.md)
+are available while the full matched comparison runs. The expanded catalogue
+is future-only and requires a fresh experiment with its matching manifest.
 
 Selection happens before opening the image cache. A selected sample loads only
 its reviewed source, crops within the recorded 512×512 bin4 region, applies the
@@ -198,7 +203,9 @@ remained bit-exact. It selected62 ROI samples covering all six sources, loaded
 one cache per photograph, and matched six tensors across two spawned workers.
 That probe used fraction0.5 solely to exercise the reader. It ran no denoising
 model, optimizer or sensor-noise simulation. These are implementation checks;
-the six-region sampling policy has no trained quality result yet.
+V101 now has trained evidence for its complete recipe package; the ROI-only
+effect is not isolated. The expanded 32-source catalogue has reader/data proof,
+with no trained result yet.
 
 ## Current recipe sampling and targets
 

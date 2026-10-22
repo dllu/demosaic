@@ -47,9 +47,12 @@ hash, bounds, augmentation-order and resume checks.
 The current cohort has 88,484 Commons training sources, versus 84,867 in V84's
 original recipe. It preserves the same 2,303 validation and 2,255 test memberships.
 The full source scan covered 88,508 training images. The active cohort applies
-24 visual exclusions. Targeted review now covers 530 sources, retaining 500 and
-withholding 30. The six latest exclusions are prepared in a separate
-88,478-source follow-up manifest; these running recipes keep their frozen inputs.
+24 visual exclusions. Targeted review now covers 570 sources: 539 retained and 31
+withheld/excluded. Seven additional exclusions are prepared in a separate
+88,477-source follow-up; the completed runs keep their frozen inputs. Its
+[expanded 32-region catalogue](../configs/low-contrast-training-rois-curated-v3.json)
+preserves the original six and adds 26 reviewed fine-detail sources for a future
+experiment. [Data, native examples and reader proof](results/source-quality-detail-catalogue-v3.json).
 High loss, ISO and metadata selected review candidates; visible native/binned
 quality determined exclusions. Hard
 foliage, textiles, nets, weak fog and other useful detail remain eligible.

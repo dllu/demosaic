@@ -32,9 +32,10 @@ PSFs, weak synthetic textures, photographic contrast attenuation and reviewed
 ROI sampling. Both budgets are10,000 updates; short CPU/CUDA smokes are discarded.
 Current status and artifact locations are in the training guide.
 
-Actual source-quality review covers530 sources:500 retained/30 withheld, after
+Actual source-quality review covers 570 sources: 539 retained/31 withheld, after
 a complete loss/proxy scan of88,508 training sources. The active runs use the
-earlier24 exclusions; six newer exclusions are prepared separately. Hard or high-loss material
+earlier 24 exclusions; seven newer exclusions and a 32-region detail catalogue are
+prepared separately for the next 88,477-source cohort. Hard or high-loss material
 is not automatically bad data. [Native source examples](corpus-source-review.md)
 show the decisions; protected holdouts and series stay fixed.
 

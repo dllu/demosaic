@@ -47,9 +47,10 @@ V101 improves all12 selected natural-detail PSNR cases against both V84/V100;
 the [current crop gallery](heldout-detail.md) shows the small gains and remaining
 smoothing while the complete matched comparison runs.
 
-The source scan covers88,508 training images, with530 actually reviewed and30
-withheld. Active runs apply the earlier24 exclusions; six more are prepared for
-the next cohort. The [illustrated source review](corpus-source-review.md) explains why
+The source scan covers88,508 training images, with570 actually reviewed and 31
+withheld/excluded. Completed runs used the earlier 24 exclusions; seven more and
+a 32-region detail catalogue are prepared for the next 88,477-source cohort.
+The [illustrated source review](corpus-source-review.md) explains why
 processing defects/nonphotographic targets are removed while difficult foliage,
 textiles and weak real detail remain. Originals and historical manifests stay
 read-only; protected captures and the GFX scene/siblings remain outside training.

@@ -1,17 +1,19 @@
 # Training-source quality review
 
 Source quality decisions support the current [V84-based quality experiments](quality-first-training.md).
-**530 training sources have now been visually reviewed: 500 retained and 30
-withheld.** The active V100/V101 runs keep their original 88,484-source cohort,
-which applies the earlier 24 exclusions. Six additional exclusions are prepared
-in a separate cohort for later training; they do not change the active study.
+**570 training sources have now been visually reviewed: 539 retained and 31
+outside training.** The 31 include four earlier `exclude` decisions and 27
+`withhold` decisions; their original ledger labels remain unchanged.
+The completed V100/V101 runs keep their frozen 88,484-source cohort and 24
+visual exclusions. The next prepared cohort has 88,477 sources and a
+32-region fine-detail catalogue; neither changes completed model inputs.
 
 | Cohort | Commons training sources | Validation / test | Visual exclusions |
 | --- | ---: | ---: | ---: |
-| Active V100/V101 | 88,484 | 2,303 / 2,255 | 24 |
-| Prepared follow-up | 88,478 | Same exact records | 30 |
+| Completed V100/V101 | 88,484 | 2,303 / 2,255 | 24 |
+| Prepared next cohort | 88,477 | Same exact records/order | 31 |
 
-[Latest decisions, figures and cohort checks](results/source-quality-followup110-review-v1.json).
+[Current decisions, native examples, catalogue and reader checks](results/source-quality-detail-catalogue-v3.json).
 Originals, existing manifests and protected evaluation scenes remain read-only.
 The GFX train/platform pair and siblings remain outside training.
 
@@ -29,8 +31,10 @@ All **319 unique candidates** in the saved top 128 per-condition loss lists,
 lowest-gradient 64, highest-Laplacian 64 and brightest 32 lists now have actual
 visual decisions. Other reviewed sources include title/metadata cues, all 74
 training sources with recorded ISO ≥12800, and weak/fine material examples.
-The latest pass inspected the remaining 110 candidates on 19 source sheets and
-six larger native 1024×1024 crops, retaining 104 and withholding 6. This targeted
+The preceding high-loss pass inspected 110 candidates on 19 source sheets and
+six larger native 1024×1024 crops, retaining 104 and withholding 6. The current
+input-only detail pass inspected 40 additional sources: 39 retained and 1 withheld,
+with 26 new ROI admissions. This targeted
 coverage does not estimate the defect rate of the full corpus.
 
 Inspect source context, native pixels and the actual binned target for grain,
@@ -46,7 +50,19 @@ crop and a native 256×256 8×-binned target. The native views have different ph
 fields of view. Only the thumbnail is resized; exposure is ×1. These are
 source-quality inspections, without simulated noise or model restoration.
 
-## Latest exclusions
+## Illustrated exclusions
+
+The new withheld clean target has residual fine grain in smooth bokeh and soft
+plumage in the reviewed native views. This is a conservative choice for a clean
+denoising target. No camera/ISO threshold or model loss selected its exclusion.
+
+![Withheld clean target: native 512 bin4 cache and native 256 final bin8 target](images/training-detail-v3/withheld-clean-target-native.png)
+
+Both panels show the same physical ROI at different cache resolutions, each at
+one image pixel per PNG pixel. No denoiser is applied. Source:
+[Timothy A.Gonsalves, Pond Heron Sheikalmudi](https://commons.wikimedia.org/wiki/File:Pond_Heron_Sheikalmudi_Feb26_A7CR_10011.jpg),
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), modified by binning,
+cropping and display conversion. [Pixels, source/ROI and decision](images/training-detail-v3/withheld-clean-target-native.json).
 
 Five sources are flat front/back banknote composites dominated by printed text
 and illustration: Rothenburg, Berchtesgaden, Neustadt, Bad Oeynhausen and Berlin.
@@ -60,7 +76,7 @@ Source: [Christoph Scheibenberger, Rothenburg 50 Pfennig 1918](https://commons.w
 public domain. Modified through binning, cropping and context-thumbnail creation.
 [Source hashes, ROIs and display metadata](results/source-quality-banknote-composite.json).
 
-The sixth source has flattened leaf surfaces and strongly edged, patchy
+A separate withheld foliage source has flattened leaf surfaces and strongly edged, patchy
 boundaries in the larger native view, with residual patchiness in the binned
 target. Withholding it is a visual clean-target judgment; no particular
 processing tool is inferred. Other fine foliage sources remain eligible.
@@ -83,7 +99,7 @@ original evidence.
 
 ## Retain weak and fine detail
 
-The latest pass retains 104 useful sources, including dense fish, leaves, mesh,
+The completed high-loss pass retains104 useful sources, including dense fish, leaves, mesh,
 small circuitry, stained glass, weak cloud/sky boundaries and atmospheric scenes.
 The larger forest view has visible native grain, but binning suppresses it
 while retaining faint tree structure. Its low contrast is useful training data.
@@ -101,38 +117,63 @@ credits and native-view protocols.
 
 ## Cohort use
 
-The active manifest is
+Completed V100/V101 use
 `.cache/quality-first-20261020/curated-corpus-v1/manifest4-large.jsonl`.
-The follow-up manifest is
-`.cache/current-quality-20261022-v1/source-review-v1/future-cohort/manifest4-large.jsonl`,
-SHA256 `e5dafbbf6b301641306c7c451dac229f8340b848e773ea74b0434c2895f1fb45`.
-It removes only the six newly withheld training IDs. Every remaining row is an
-unchanged byte-for-byte subset; validation/test records and order are identical.
-All 530 reviewed decisions agree with its membership. Neither active recipe
-uses this follow-up manifest yet.
+The prepared next manifest is
+`.cache/current-quality-20261022-v1/weak-detail-ROI-expansion-v1/future-cohort-v3/manifest4-large.jsonl`,
+SHA256 `9b3a7e162910fd0d695c310da1cc985c0cf901a1a87949cc787492cea34aded8`.
+It removes the newly withheld source from the earlier 88,478-source future
+snapshot. Every remaining row is byte-identical; validation/test bytes and
+order are unchanged. All 31 withheld/excluded IDs stay outside training.
+Earlier manifests and model inputs remain intact.
 
-For reviewed-region sampling on that manifest, use the
-[companion catalogue](../configs/low-contrast-training-rois-curated-v2.json).
-It binds the new manifest path/SHA while preserving all six source records,
-coordinates and ROI/target hashes. The reader requires this exact binding;
-the original catalogue remains attached to the active cohort. Actual CPU data
-reads of all six regions pass with the follow-up manifest.
+Use the [32-region companion catalogue](../configs/low-contrast-training-rois-curated-v3.json)
+with that exact manifest. The reader enforces its path/SHA, membership, cache
+hashes and ROI/target bounds. Independent integer averaging reproduces all 32
+float32 target hashes exactly. The actual clean reader visits all 32 regions
+under the existing 5% conditional probability, seed 60 mixed-domain schedule and
+zero-PSF geometry→area2 path, with finite native 256 outputs and no GPU/model.
+[Full preparation/review/reader evidence](results/source-quality-detail-catalogue-v3.json).
+These data are prepared for a future experiment, with no trained gain claimed.
 
-Source views read cached Commons originals from `/mnt/external/qi` and prepared
-linear-sRGB caches. Current training and GFX tests avoid source HDD access.
-New downloads and decisions enter a new frozen cohort instead of silently
-changing an existing run's inputs.
+Source views use existing prepared caches. New downloads and decisions enter
+a separate frozen cohort instead of changing an existing experiment's inputs.
 
 ## Reviewed weak and fine texture ROIs
 
-The [six-region catalogue](../configs/low-contrast-training-rois-v1.json) records
-existing training sources with hash-verified 512×512 contexts in the 4× cache;
-final area2 gives native 256×256 targets. The
-[opt-in reader](training-pipeline.md#reviewed-photographic-regions) validates
-membership, hashes and bounds before sampling and augmentation.
-**V101 enables conditional 5% photographic ROI sampling; V100 leaves it off.**
-Their production quality comparison is pending. The catalogue and active
-manifests remain unchanged by this follow-up source review.
+The current prepared catalogue keeps the original six regions and adds 26
+photographs:32 unique sources with exact 512×512 contexts in the 4× cache, giving
+native 256×256 area2 targets. Whole contexts have mixed contrast; selected local
+structures include weak veins, fibers, fur, reeds, grain and faint lines.
+
+![Six unchanged native 160 clean training crops: steel wool, slate, reeds, wing scales, frost and fur](images/training-detail-v3/clean-targets-native160.png)
+
+These are **clean training inputs**, with no noise simulation, denoising or
+measured model gain. All 160×160 crop pixels are unchanged; exposure is ×1.
+[Source/ROI/hash/display metadata](images/training-detail-v3/manifest.json).
+Credits, in reading order:
+
+| Detail | Source / author | License |
+| --- | --- | --- |
+| Steel wool | [Chris Woodrich](https://commons.wikimedia.org/wiki/File:SOS_brand_steel_wool_with_soap,_Canada,_2026-03-08.jpg) | CC BY-SA 4.0 |
+| Slate grain | [Ingo Mehling](https://commons.wikimedia.org/wiki/File:Krakow_-_Concrete_bicycles_at_Museum_of_Modern_Art.jpg) | CC BY-SA 4.0 |
+| Fog reeds | [Dominicus Johannes Bergsma](https://commons.wikimedia.org/wiki/File:Put_van_Nederhorst_in_de_mist._01-04-2026._(d.j.b)_20.jpg) | CC BY-SA 4.0 |
+| Wing scales | [Anitava Roy](https://commons.wikimedia.org/wiki/File:Close_wing_Basking_of_Freyeria_putli_(Kollar,_1844)_-_Black-spotted_Grass_Jewel_WLB.jpg) | CC BY-SA 4.0 |
+| Frost | [Hans Hillewaert](https://commons.wikimedia.org/wiki/File:Ammophila_arenaria_(frosted_leaves).jpg) | CC BY-SA 3.0 |
+| Pale fur | [Rhododendrites](https://commons.wikimedia.org/wiki/File:Leucistic_squirrel_in_Prospect_Park_(85614).jpg) | CC BY-SA 4.0 |
+
+License URLs and complete source metadata accompany every crop. Modifications
+are binning, cropping and display conversion. Candidate ranking used
+unquantized float32 display statistics; it did not automatically decide quality.
+Actual inspection corrected three proposals that favored plain/background
+areas. Naturally weak fog remains useful; blank or soft proposals need not be
+oversampled simply because their global contrast is low.
+
+The original six regions below remain byte-identical in the expanded catalogue.
+Completed V101 used only those six at 5% conditional photographic sampling;
+V100 left it off. Its [selected-detail improvement](heldout-detail.md) tests a
+combined recipe package; the ROI-only effect is not isolated. Broader 32-region
+sampling is prepared and validated, with its trained quality still to assess.
 
 | Source ID prefix | Inspected structure | Bin4 context [x,y,w,h] |
 | --- | --- | --- |
