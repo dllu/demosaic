@@ -84,6 +84,12 @@ and six actually viewed native triplets; this checks execution and reporting,
 not the pending production models' quality.
 [Evaluation readiness](results/v84-recipe-evaluation-readiness-v1.json).
 
+The full-frame queue at `.cache/current-quality-20261022-v1/fullframe-v1/`
+then restores the complete GFX scene with V84, both final continuations and
+RawNIND-channel. It exports RGB16 files and six fixed native crop comparisons;
+the [GFX guide](gfx-qualitative.md) records the settings. This queue also waits
+for the preceding controller to exit before launching a GPU worker.
+
 Compare new checkpoints with V84 and useful alternatives on full 427-photo,
 known/unseen measured-CFA, weak-detail/color and standing GFX tests. Show at
 least two unchanged native noisy/restored/GT triplets per reported model, with

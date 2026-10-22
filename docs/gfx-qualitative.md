@@ -59,6 +59,15 @@ are never warped, resized, sharpened or independently exposure-adjusted.
 
 ## Reproduce and extend the comparisons
 
+Complete 101.996MP comparisons are queued for V84, final V100/V101 and RawNIND
+with CFA-channel input gain, after the current training and evaluation jobs.
+The run uses IEEE FP32, tile512/overlap64/B4, and exports linear-camera RGB16,
+tagged sRGB16 and overviews. Six native regions cover the four standing crops
+plus the neon sign and illuminated platform. Outputs will be in
+`/mnt/external/demosaic/v84-quality-fullframe-20261022-v1/`.
+The cropped CPU export smoke passed; actual full-frame outputs and timing
+remain pending. [Queue and export checks](results/v84-quality-fullframe-readiness-v1.json).
+
 Rebuild the shipped gallery without inference or access to private RAWs:
 
 ```bash

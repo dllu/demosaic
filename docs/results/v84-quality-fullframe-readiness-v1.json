@@ -1,0 +1,72 @@
+{
+  "status": "CPU-cropped-export-smoke-complete-full-GFX-comparison-queued",
+  "recorded_local": "2026-10-22T11:54:24-07:00",
+  "fullframe_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/fullframe-v1/plan.json",
+    "sha256": "8a9cb830562db1e30ee618f69c839108ce3fbffb5403caa57c71c275d9868f77"
+  },
+  "launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/fullframe-v1/launch.json",
+    "sha256": "6a36e3a6a51190e592b9ce7b72f1897f7e12666e63c166752fc58b2822996010"
+  },
+  "waiting_controller_verified_live": {
+    "pid": 984425,
+    "created": 1792695189.65
+  },
+  "CPU_export_smoke": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/fullframe-smoke-v1/plan.json",
+      "sha256": "40b5863f9ce6e66888b26d74f164a2fe66c9e7ef8d78afd6b25b915cb829a53f"
+    },
+    "result": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/fullframe-smoke-v1/result.json",
+      "sha256": "bfaa6eb5d99d3c41eebf4ef80ea6e3d67c323fd21553e47021ec1304dffeab6a"
+    },
+    "report": {
+      "path": "/mnt/external/demosaic/v84-quality-fullframe-smoke-20261022-v1/report.json",
+      "sha256": "42d2f3c9094d70f1af71c660fc6ee9ce4d59a3b41991f9f733c9c59a4528bb70"
+    },
+    "exported_TIFFs": 4,
+    "shape_each": [
+      512,
+      512,
+      3
+    ],
+    "decoded_RGB_values_checked": 202752,
+    "sampled_max_quantization_error_DN16": 0.5011598467826843,
+    "native_triplets_actually_viewed": 2,
+    "RGB16_derived_overviews_actually_viewed": 2,
+    "CUDA_initialized": false,
+    "scope": "One cached512px foliage context, V84 plus RawNIND:CFA-channel. Cropped CPU integration only; not a complete101.996MP export, model quality result or full-frame timing qualification."
+  },
+  "drivers": [
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/queue_quality_fullframe.py",
+      "sha256": "ad32c235d525626f2b1d632495e2c6e3abc6a3ebf62e6580758184c5c0f7f84d"
+    }
+  ],
+  "focused_validation": {
+    "passed_tests": 36,
+    "command": "CUDA_VISIBLE_DEVICES='' PYTHONPATH=.:src:scripts .venv/bin/pytest -q tests/test_quality_fullframe_queue.py tests/test_preparation.py tests/test_rgb16_export_difference.py tests/test_quality_recipe_evaluation_queue.py"
+  },
+  "pending_run": {
+    "models": [
+      "V84 final20k",
+      "V100 final10k",
+      "V101 final10k",
+      "RawNIND:CFA-channel"
+    ],
+    "sensor_shape": [
+      8746,
+      11662
+    ],
+    "precision": "IEEE FP32",
+    "tile": 512,
+    "overlap": 64,
+    "batch_size": 4,
+    "fixed_native_regions": 6,
+    "exports": "Linear-camera-RGB16 and tagged/ICC sRGB16 per model, plus resized overviews and unchanged native160 triplets. Private full renders remain outside Git.",
+    "reference": "Independent ISO100 exposure, not exact GT; no pixelwise reference scoring.",
+    "selection_policy": "Full-frame images inform current recommendations; this is not a reinstated all-diagnostic promotion gate."
+  }
+}
