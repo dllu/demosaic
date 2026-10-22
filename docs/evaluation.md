@@ -213,6 +213,11 @@ rejected; interrupted downloads leave no completed manifest. The checked release
 produces 13 development files (366 MB) and 57 test files (2.090 GB). See
 [the acquisition receipt](results/paired-raw-acquisition.json).
 
+The [16-scene test reserve](paired-reserved-test.md) now has32 prepared pairs
+and288 verified native512 crops under the same fixed preparation defaults.
+It remains unscored and outside model selection; preparation is not a quality
+result or a reproduction of the publisher's complete benchmark.
+
 Acquisition alone establishes no quality result. Pair alignment, exposure gain,
 reference processing and noise conditioning must be explicit before scoring.
 On the checked Sony reference, LibRaw AHD with raw color, unit WB, linear output
