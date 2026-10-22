@@ -19,8 +19,10 @@ model identity and display settings; summary JSON holds full checkpoint hashes.
 Synthetic GT is exact. Paired real RGB is an auxiliary calibrated AHD reference;
 primary real scores use measured clean CFA samples. Independently captured
 personal photos require an explicit qualitative-reference label; see
-[the GFX scene](gfx-qualitative.md). Add representative native crops to the README
-when promoting an improved model, and preserve any visible failures in its report.
+[the GFX scene](gfx-qualitative.md). Keep representative native comparisons in
+the README/current guides as useful versions appear, with visible failures in
+their reports. The [current real-camera guide](real-camera-quality.md) includes
+the completed V84/V100 comparison and its mixed results.
 
 ## Multi-condition evaluation
 

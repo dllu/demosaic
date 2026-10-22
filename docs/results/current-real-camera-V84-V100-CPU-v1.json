@@ -1,0 +1,1077 @@
+{
+  "status": "completed-full-known-unseen-V84-V100-CPU-comparison",
+  "recorded_local": "2026-10-22T13:43:42-07:00",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V100-camera-CPU-v1/plan.json",
+    "sha256": "0ebc7aec8f1c1287495ef7621d67486d67617e479af3771d5229789816e4582d"
+  },
+  "launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V100-camera-CPU-v1/launch.json",
+    "sha256": "4e332ab4f2905ed9e3a317fb4a318be32f0114b385cc5d693ef69cf96ef4dcb3"
+  },
+  "result": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V100-camera-CPU-v1/result.json",
+    "sha256": "7656327af27ece9d59b0004ae280f97a8465524aa172579bd18b8bbdb359fba6"
+  },
+  "models": [
+    {
+      "label": "0:native-data-control-v84:step-20000",
+      "snapshot": "/mnt/external/demosaic/V100-camera-CPU-20261022-v1/known/weights/weights-134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10.pt",
+      "sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10",
+      "step": 20000,
+      "model_config": {
+        "restoration_backbone": "pretrained-rgb",
+        "width": 64,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "dino_lora_rank": 0,
+        "dino_input_adapter": false,
+        "dino_feature_fusion": "convnext-pyramid",
+        "camera_conditioning": true,
+        "noise_modulation": false,
+        "physical_fp32": true,
+        "baseline": "bilinear",
+        "prior_window": 7,
+        "standardized_noise": false,
+        "noise_refinement": false,
+        "refinement_width": 24,
+        "refinement_blocks": 4,
+        "refinement_window": 63,
+        "coarse_refinement_factor": 0,
+        "coarse_refinement_width": 24,
+        "coarse_refinement_blocks": 4,
+        "coarse_refinement_window": 31,
+        "pyramid_refinement": false,
+        "pyramid_measurements": true,
+        "pyramid_width": 24,
+        "pyramid_blocks": 2,
+        "variance_stabilization": true,
+        "physical_anchors": true,
+        "rgb_processing_scale": 1,
+        "packed_detail_prior": false,
+        "rgb_hidden_autocast": false,
+        "rgb_center_camera_matrix": false,
+        "rgb_middle_skip_fp32": true,
+        "adc_cfa_projection": false,
+        "raw_kernel_reconstruction": false,
+        "raw_kernel_windows": [
+          1,
+          5,
+          17
+        ],
+        "raw_kernel_phase_conditioning": false,
+        "raw_directional_residual": false,
+        "raw_directional_bank_context": false,
+        "raw_directional_bank_detach_input": false,
+        "raw_spectral_residual": false,
+        "late_rgb_refinement": "none",
+        "isotropic_groups": 6,
+        "isotropic_blocks": 8,
+        "isotropic_local_width": 32,
+        "isotropic_raw_gain": 1.0,
+        "isotropic_residual_scale": 1.0
+      },
+      "checkpoint_model_config": {
+        "restoration_backbone": "pretrained-rgb",
+        "width": 64,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "dino_lora_rank": 0,
+        "dino_input_adapter": false,
+        "dino_feature_fusion": "convnext-pyramid",
+        "camera_conditioning": true,
+        "noise_modulation": false,
+        "physical_fp32": true,
+        "baseline": "bilinear",
+        "prior_window": 7,
+        "standardized_noise": false,
+        "noise_refinement": false,
+        "refinement_width": 24,
+        "refinement_blocks": 4,
+        "refinement_window": 63,
+        "coarse_refinement_factor": 0,
+        "coarse_refinement_width": 24,
+        "coarse_refinement_blocks": 4,
+        "coarse_refinement_window": 31,
+        "pyramid_refinement": false,
+        "pyramid_measurements": true,
+        "pyramid_width": 24,
+        "pyramid_blocks": 2,
+        "variance_stabilization": true,
+        "physical_anchors": true,
+        "rgb_processing_scale": 1,
+        "packed_detail_prior": false,
+        "rgb_hidden_autocast": false,
+        "rgb_center_camera_matrix": false,
+        "rgb_middle_skip_fp32": true,
+        "adc_cfa_projection": false,
+        "raw_kernel_reconstruction": false,
+        "raw_kernel_windows": [
+          1,
+          5,
+          17
+        ],
+        "raw_kernel_phase_conditioning": false,
+        "raw_directional_residual": false,
+        "raw_directional_bank_context": false,
+        "raw_directional_bank_detach_input": false,
+        "isotropic_groups": 6,
+        "isotropic_blocks": 8,
+        "isotropic_local_width": 32,
+        "isotropic_raw_gain": 1.0,
+        "isotropic_residual_scale": 1.0
+      },
+      "compute_precision": "float32",
+      "refinement_compute_precision": "float32"
+    },
+    {
+      "label": "1:V100:step-10000",
+      "snapshot": "/mnt/external/demosaic/V100-camera-CPU-20261022-v1/known/weights/weights-4b689fb187b13df72fbf79ebd46f98cf7361c3ca8a97fb1f7afee940b249ad3e.pt",
+      "sha256": "4b689fb187b13df72fbf79ebd46f98cf7361c3ca8a97fb1f7afee940b249ad3e",
+      "step": 10000,
+      "model_config": {
+        "restoration_backbone": "pretrained-rgb",
+        "width": 64,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "dino_lora_rank": 0,
+        "dino_input_adapter": false,
+        "dino_feature_fusion": "convnext-pyramid",
+        "camera_conditioning": true,
+        "noise_modulation": false,
+        "physical_fp32": true,
+        "baseline": "bilinear",
+        "prior_window": 7,
+        "standardized_noise": false,
+        "noise_refinement": false,
+        "refinement_width": 24,
+        "refinement_blocks": 4,
+        "refinement_window": 63,
+        "coarse_refinement_factor": 0,
+        "coarse_refinement_width": 24,
+        "coarse_refinement_blocks": 4,
+        "coarse_refinement_window": 31,
+        "pyramid_refinement": false,
+        "pyramid_measurements": true,
+        "pyramid_width": 24,
+        "pyramid_blocks": 2,
+        "variance_stabilization": true,
+        "physical_anchors": true,
+        "rgb_processing_scale": 1,
+        "packed_detail_prior": false,
+        "rgb_hidden_autocast": false,
+        "rgb_center_camera_matrix": false,
+        "rgb_middle_skip_fp32": true,
+        "adc_cfa_projection": false,
+        "raw_kernel_reconstruction": false,
+        "raw_kernel_windows": [
+          1,
+          5,
+          17
+        ],
+        "raw_kernel_phase_conditioning": false,
+        "raw_directional_residual": false,
+        "raw_directional_bank_context": false,
+        "raw_directional_bank_detach_input": false,
+        "raw_spectral_residual": false,
+        "late_rgb_refinement": "none",
+        "isotropic_groups": 6,
+        "isotropic_blocks": 8,
+        "isotropic_local_width": 32,
+        "isotropic_raw_gain": 1.0,
+        "isotropic_residual_scale": 1.0
+      },
+      "checkpoint_model_config": {
+        "restoration_backbone": "pretrained-rgb",
+        "width": 64,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "dino_lora_rank": 0,
+        "dino_input_adapter": false,
+        "dino_feature_fusion": "convnext-pyramid",
+        "camera_conditioning": true,
+        "noise_modulation": false,
+        "physical_fp32": true,
+        "baseline": "bilinear",
+        "prior_window": 7,
+        "standardized_noise": false,
+        "noise_refinement": false,
+        "refinement_width": 24,
+        "refinement_blocks": 4,
+        "refinement_window": 63,
+        "coarse_refinement_factor": 0,
+        "coarse_refinement_width": 24,
+        "coarse_refinement_blocks": 4,
+        "coarse_refinement_window": 31,
+        "pyramid_refinement": false,
+        "pyramid_measurements": true,
+        "pyramid_width": 24,
+        "pyramid_blocks": 2,
+        "variance_stabilization": true,
+        "physical_anchors": true,
+        "rgb_processing_scale": 1,
+        "packed_detail_prior": false,
+        "rgb_hidden_autocast": false,
+        "rgb_center_camera_matrix": false,
+        "rgb_middle_skip_fp32": true,
+        "adc_cfa_projection": false,
+        "raw_kernel_reconstruction": false,
+        "raw_kernel_windows": [
+          1,
+          5,
+          17
+        ],
+        "raw_kernel_phase_conditioning": false,
+        "raw_directional_residual": false,
+        "raw_directional_bank_context": false,
+        "raw_directional_bank_detach_input": false,
+        "raw_spectral_residual": false,
+        "late_rgb_refinement": "none",
+        "isotropic_groups": 6,
+        "isotropic_blocks": 8,
+        "isotropic_local_width": 32,
+        "isotropic_raw_gain": 1.0,
+        "isotropic_residual_scale": 1.0
+      },
+      "compute_precision": "float32",
+      "refinement_compute_precision": "float32"
+    },
+    {
+      "label": "RawNIND",
+      "weight_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+      "input": "Publisher global-ADC normalization; signed/unclipped",
+      "gain": "Observed original-unit CFA, global and per-channel variants; no clean target",
+      "precision": "IEEE float32"
+    }
+  ],
+  "checkpoint_selection": "Fixed final V84 original20000 and V100 continuation10000 EMAs, no intermediate/best search. Different total budgets/cohorts; not an isolated cleaning-only effect.",
+  "compute": "CPU float32, batch2, CUDA disabled",
+  "panels": {
+    "known": {
+      "summary": {
+        "path": "/mnt/external/demosaic/V100-camera-CPU-20261022-v1/known/summary.json",
+        "sha256": "41f7b66825d4fadff7393a1f5c12fed739abbd172c8cfccd321e60be7b4e7944"
+      },
+      "per_crop": {
+        "path": "/mnt/external/demosaic/V100-camera-CPU-20261022-v1/known/per-crop.jsonl",
+        "sha256": "2990eed5eca143fdf74696fbb830301f8930d30be206d09470dd097db7404e46"
+      },
+      "independent_hierarchy_verification": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V100-camera-CPU-v1/known-numeric-verification.json",
+        "sha256": "db4f0486e6126a02f0c36a3eb3d972bde267ae3e205a688be370dc98a69a4120"
+      },
+      "scenes": 4,
+      "pairs": 8,
+      "crops": 72,
+      "score_rows": 504,
+      "overall": [
+        {
+          "model": "0:native-data-control-v84:step-20000",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 54.17122295167711,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 40.03506596883138,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.9320595065752665,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.006015604859890623,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.006363384202510739,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "1:V100:step-10000",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 54.17845355139838,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 40.043763478597,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.9321158362759485,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.006008928146911785,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.006362737706189768,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "Bilinear",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 44.105990701251564,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 29.836331288019817,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.5878965614570512,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.025037081963900063,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.02472208886562536,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "Malvar2004:WB",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 43.804250690672134,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 30.016488075256348,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.5982538397527404,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.020380146652718797,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.025714163202792406,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 54.08473788367377,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 39.71709707048204,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.9288316062755054,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.006199523340910672,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.006555797273500098,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 54.06859487957425,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 39.678046226501465,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.9288108572363853,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.006295617841210009,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.00655555372294556,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 50.07168859905667,
+              "count": 4
+            },
+            "reference_samples": {
+              "mean": 200661.7361111111,
+              "count": 4
+            },
+            "ahd_srgb_psnr": {
+              "mean": 35.86313025156657,
+              "count": 4
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.8550739652580684,
+              "count": 4
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.010007510757228982,
+              "count": 4
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.010634852427756414,
+              "count": 4
+            }
+          }
+        }
+      ],
+      "V100_minus_V84": {
+        "sensor_psnr": 0.0072305997212680495,
+        "reference_samples": 0.0,
+        "ahd_srgb_psnr": 0.008697509765617895,
+        "ahd_srgb_ssim": 5.632970068203402e-05,
+        "ahd_chroma_mae": -6.676712978838026e-06,
+        "ahd_gradient_mae": -6.464963209704133e-07
+      },
+      "scene_intervals": {
+        "sensor_psnr": {
+          "mean_V100_minus_V84": 0.007230599721269826,
+          "scene_bootstrap_95_interval": [
+            -0.013536877102326983,
+            0.040034559037948725
+          ],
+          "scenes": 4
+        },
+        "ahd_srgb_psnr": {
+          "mean_V100_minus_V84": 0.008697509765623224,
+          "scene_bootstrap_95_interval": [
+            -0.003964689042836866,
+            0.020030922359890013
+          ],
+          "scenes": 4
+        },
+        "ahd_srgb_ssim": {
+          "mean_V100_minus_V84": 5.6329700681950756e-05,
+          "scene_bootstrap_95_interval": [
+            -1.8729103936021563e-05,
+            0.00016115109125777738
+          ],
+          "scenes": 4
+        }
+      },
+      "V100_minus_V84_sensor_psnr_by_scene": {
+        "2pilesofplates": 0.05619515313042456,
+        "7D-1": -0.017660988701720726,
+        "MuseeL-CopteArch-C500D": -0.0011645423041457548,
+        "D60-2": -0.008447223239478774
+      },
+      "source_sha256": "7da0fd2f0718d2dcc0acaf7e45e179645607f323d46bcf716a17e2c75b81e67f"
+    },
+    "unseen": {
+      "summary": {
+        "path": "/mnt/external/demosaic/V100-camera-CPU-20261022-v1/unseen/summary.json",
+        "sha256": "575d0378c667b91301f81427439dd142ebad61d255462048120cabdf320ed507"
+      },
+      "per_crop": {
+        "path": "/mnt/external/demosaic/V100-camera-CPU-20261022-v1/unseen/per-crop.jsonl",
+        "sha256": "1b5f2ca0adfcbc015d83d43aa5e8e9f032a0f0c6408c9dcdccf9c4712ee2f082"
+      },
+      "independent_hierarchy_verification": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V100-camera-CPU-v1/unseen-numeric-verification.json",
+        "sha256": "01105ae0cf9cf577616a8aac0c75c0d91dea47364b7afe9a02d38a08611a746d"
+      },
+      "scenes": 5,
+      "pairs": 10,
+      "crops": 90,
+      "score_rows": 630,
+      "overall": [
+        {
+          "model": "0:native-data-control-v84:step-20000",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 53.92822486029731,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 38.86147566901313,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.924142453405592,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.0068094123982720915,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.006384442932903767,
+              "count": 5
+            }
+          }
+        },
+        {
+          "model": "1:V100:step-10000",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 53.89613558451335,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 38.82767041524251,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.9236953900920021,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.006840033601555559,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.006387916471188267,
+              "count": 5
+            }
+          }
+        },
+        {
+          "model": "Bilinear",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 41.413252978854715,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 25.495067532857256,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.37466981435815494,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.04243266408642133,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.038951587014728124,
+              "count": 5
+            }
+          }
+        },
+        {
+          "model": "Malvar2004:WB",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 40.9379695892334,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 25.860252401563855,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.40324432965781953,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.03489497559559014,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.038967067955268754,
+              "count": 5
+            }
+          }
+        },
+        {
+          "model": "RawNIND:cfa-channel:publisher",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 53.76821577284071,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 38.56191050211588,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.9221268190277948,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.007172431036209066,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.006613127654418349,
+              "count": 5
+            }
+          }
+        },
+        {
+          "model": "RawNIND:cfa-ls:publisher",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 53.56219914754232,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 38.14483521779378,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.9183800412548913,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.007813635220130285,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.006614771242150002,
+              "count": 5
+            }
+          }
+        },
+        {
+          "model": "Wiener7+Malvar2004:WB",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 49.59128977457682,
+              "count": 5
+            },
+            "reference_samples": {
+              "mean": 220744.8111111111,
+              "count": 5
+            },
+            "ahd_srgb_psnr": {
+              "mean": 33.028769705030655,
+              "count": 5
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.7922079967127906,
+              "count": 5
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.014855502892492545,
+              "count": 5
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.01228857956205805,
+              "count": 5
+            }
+          }
+        }
+      ],
+      "V100_minus_V84": {
+        "sensor_psnr": -0.03208927578396015,
+        "reference_samples": 0.0,
+        "ahd_srgb_psnr": -0.03380525377062327,
+        "ahd_srgb_ssim": -0.0004470633135899016,
+        "ahd_chroma_mae": 3.062120328346796e-05,
+        "ahd_gradient_mae": 3.473538284499804e-06
+      },
+      "scene_intervals": {
+        "sensor_psnr": {
+          "mean_V100_minus_V84": -0.03208927578396157,
+          "scene_bootstrap_95_interval": [
+            -0.05111639340718651,
+            -0.01212043762206605
+          ],
+          "scenes": 5
+        },
+        "ahd_srgb_psnr": {
+          "mean_V100_minus_V84": -0.033805253770617584,
+          "scene_bootstrap_95_interval": [
+            -0.05481351216634493,
+            -0.01279699537489023
+          ],
+          "scenes": 5
+        },
+        "ahd_srgb_ssim": {
+          "mean_V100_minus_V84": -0.00044706331359019026,
+          "scene_bootstrap_95_interval": [
+            -0.0009003553125594088,
+            -5.0447384516383306e-05
+          ],
+          "scenes": 5
+        }
+      },
+      "V100_minus_V84_sensor_psnr_by_scene": {
+        "LucieB_3apples": -0.009626388549804688,
+        "LucieB_Coulicoco": -0.06802113850910985,
+        "LucieB_bedroom_tapestry": -0.04141701592340041,
+        "LucieB_stick_figurine": -0.004796981811516332,
+        "LucieB_top_of_Expedit": -0.03658485412597656
+      },
+      "source_sha256": "7da0fd2f0718d2dcc0acaf7e45e179645607f323d46bcf716a17e2c75b81e67f"
+    }
+  },
+  "complete_score_rows": 1134,
+  "independently_reconstructed_hierarchical_means": 84,
+  "native_triplets_published": 16,
+  "distinct_native160_review_cells_actually_viewed": 24,
+  "native160_published_layout_cells_actually_viewed": 20,
+  "metric_ROI_in_prepared512_context_xywh": [
+    32,
+    32,
+    448,
+    448
+  ],
+  "display_ROI_in_prepared512_context_xywh": [
+    176,
+    176,
+    160,
+    160
+  ],
+  "display_exposure": 1,
+  "published_source_triplets": [
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/known/crop-a3df5066ec8074df.png",
+        "sha256": "159b7f76cd65852c75cbd7421fcaa3b6e185a26147068eeb69d66a86d4c7884f"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/known/crop-a3df5066ec8074df.json",
+        "sha256": "323734a73f1382392916a22fdcac237ecfb8bdaf39f17968746319e3b2d07a9b"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/known/crop-4735bc3f3b5b3a8e.png",
+        "sha256": "d3e3177afb4a5efe39f248e2490b816bc3dca86ecdae643739f73764f085c3d2"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/known/crop-4735bc3f3b5b3a8e.json",
+        "sha256": "8c95ab338b27e31cff73c36dfd1b30dca6918b4ed21089f434c7d61650bd1d59"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/known/crop-ec064f05af183504.png",
+        "sha256": "93012b7ca5471a08fc66a480cdbb129f00c001b61af8ccdb63be93692bbc096d"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/known/crop-ec064f05af183504.json",
+        "sha256": "418135077497b1ea4b463e301cc3d9257ac7825591a0615bf0cc1ec713338db1"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/known/crop-e7d0f796d23dc988.png",
+        "sha256": "bcea716a8344dee98664201e841fde527bbde2c39466762988713ad70c38a9f2"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/known/crop-e7d0f796d23dc988.json",
+        "sha256": "879e784db24daff93d37c11d9311f589366673b6168b31e0105f2d51a676b341"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/known/crop-f6af64fbd3da4e26.png",
+        "sha256": "9cd8e10398fb67852fb5b37d33fa0659cbc63b5dcaaedb64faf41242fae9ee68"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/known/crop-f6af64fbd3da4e26.json",
+        "sha256": "fe6648a7e5893620be8aa58c12eb34c1d39615ef4ea469466e528801ebedbf07"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/known/crop-269fc419c0a4c68c.png",
+        "sha256": "01ddd71748c1237aba20a01de6d857b75342f9994798b32dde523f9e2e607029"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/known/crop-269fc419c0a4c68c.json",
+        "sha256": "750848c98ad82d585b0348c6b9f6688160ac26658883c11edfd34311dfc6d423"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/known/crop-32b9a6635214c93c.png",
+        "sha256": "8e62b2fa019afb42888c49ae35e26a042d6ef8a1b8f5a31864831f5d63d80285"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/known/crop-32b9a6635214c93c.json",
+        "sha256": "6aac2707a4879a07dc0ac88e911e2218531ebbc17485910419dd1b205e30e593"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/known/crop-12c160f6ce4481f7.png",
+        "sha256": "32698b16f02d1dc11dd3f7225631be1011dc443455c2c18f3026a0ba9a949a01"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/known/crop-12c160f6ce4481f7.json",
+        "sha256": "11c0fda3d977cda1aea09a0cdbddcdb04274b4a0883d4149af555df2bcbad842"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/unseen/crop-5b167196a738f929.png",
+        "sha256": "2a59179a0b731450728573112b49e3bdc508fc6ad8a09f1ce459ffce41a78c6c"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/unseen/crop-5b167196a738f929.json",
+        "sha256": "c21886cffeb12cac2ae6ad38ef2f805a66ec80363d60dca2a874b894f6395a95"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/unseen/crop-d0b9a093eb0eb27c.png",
+        "sha256": "cd29111a2d6652c90fc2fb7e9bd56e992800e47cea3a52ef0c39c207e41ac945"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/unseen/crop-d0b9a093eb0eb27c.json",
+        "sha256": "ae38dbe99dcff5420633096a1aecc8023f9cfc64fa9fa80cd432934e7eb6f876"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/unseen/crop-6ec081c00909bcb3.png",
+        "sha256": "44706ec8fc59715a53f6610ab88d2936e933d1e31e9e3aed860a1491aa425e19"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/unseen/crop-6ec081c00909bcb3.json",
+        "sha256": "74d848f11ca0912336ed2bef8fbc5eec5400498b92d6b44a4c5c4c054108113c"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/unseen/crop-2c4fb2f0c36337ce.png",
+        "sha256": "404d86f2aa2a204ecd1104bf8634928ae560101313636c7359538e3216a6c081"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/unseen/crop-2c4fb2f0c36337ce.json",
+        "sha256": "93ae9aae9da65baf44c34fcb4af6bb6565317c63040dcf9d64fa7b9f175b1e79"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/unseen/crop-b8e14d1cf957b47f.png",
+        "sha256": "807910067ea2f86966a7f97374e1d36b52f340481fe826babb2810527746fa62"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/unseen/crop-b8e14d1cf957b47f.json",
+        "sha256": "a86e1820f4c2d3c8d18f9720fca77d2e22143c36cf0bab66984a4b8233836bd6"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/unseen/crop-2da4d56308d28cef.png",
+        "sha256": "c8486f7fbaa852dccb71be72925aea1a20f80f3647d0af0ff7e97da56c7ee76d"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/unseen/crop-2da4d56308d28cef.json",
+        "sha256": "58f76cb62025c3bb85980331b4e7244eb1919295108456679b2ee73a3a921f47"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/unseen/crop-a96db01761c01a81.png",
+        "sha256": "03494af3628885f51fc14af4d6a85fa1499bf187386074eb28c57d55cad55dd5"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/unseen/crop-a96db01761c01a81.json",
+        "sha256": "282ab39e162e58b49b92b13bb2401790a4e0f71ee74385aeeff0b70b7aa6b35d"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/unseen/crop-e259c5d02c42c0b4.png",
+        "sha256": "660edea24689d966736d06dccdf5eff036caba11b65b13bfe6de3ee9fc242bf5"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-real-quality/unseen/crop-e259c5d02c42c0b4.json",
+        "sha256": "11cbcabc0cf202158c465cd8bd781c758234007713e391ab7c80f01863fbfd60"
+      }
+    }
+  ],
+  "views": [
+    {
+      "panel": "known",
+      "immutable_review_board": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V100-camera-CPU-v1/known-native-review.png",
+        "sha256": "aa8e47b836dfc486cbc543f151990583d85ef3a65806f88e20036044d0a25f83"
+      },
+      "immutable_review_receipt": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V100-camera-CPU-v1/known-native-review.json",
+        "sha256": "fadae7b109e1925263085ffc643199b0c0449a30760df1e82fc75f3e072ebb3d"
+      },
+      "native_review_cells_actually_viewed": 12,
+      "immutable_published_layout": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V100-camera-CPU-v1/known-published-boards/comparison.png",
+        "sha256": "53ba04790fc47c8c8282703d6036c4d65a17f5e6e000f988c26b6d0cd52fa0ed"
+      },
+      "immutable_published_layout_receipt": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V100-camera-CPU-v1/known-published-boards/comparison.json",
+        "sha256": "7c62433c48615366e7d9fe5dfbacced7d72727372c1e85fb18c8cb580df3d313"
+      },
+      "published_cells_actually_viewed": 10,
+      "current_gallery": "docs/images/current-real-quality/known/comparison.png"
+    },
+    {
+      "panel": "unseen",
+      "immutable_review_board": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V100-camera-CPU-v1/unseen-native-review.png",
+        "sha256": "c8caf7c53c76c0cbc6423853e6f7e52b2f399ceb5424c6bcbf7f511383b9f87f"
+      },
+      "immutable_review_receipt": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V100-camera-CPU-v1/unseen-native-review.json",
+        "sha256": "4dfcbd59f17544ed3234094d346aa3efada3d04ec9488ac9191d9ae7188cad0e"
+      },
+      "native_review_cells_actually_viewed": 12,
+      "immutable_published_layout": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V100-camera-CPU-v1/unseen-published-boards/comparison.png",
+        "sha256": "26bef299a0a58be72778ff19017615c35a4ba4754d4e351f7330a5e1c1323e94"
+      },
+      "immutable_published_layout_receipt": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/V100-camera-CPU-v1/unseen-published-boards/comparison.json",
+        "sha256": "66811c014b78a9bb11cdb36e043a9b71497c77275a8821e5ab4c4b6c81decaae"
+      },
+      "published_cells_actually_viewed": 10,
+      "current_gallery": "docs/images/current-real-quality/unseen/comparison.png"
+    }
+  ],
+  "prepared_inputs_source_and_weight_files_unchanged": true,
+  "shared_noisy_and_AHD_reference_pixels_exact_across_methods": true,
+  "visual_observations": "V84/V100 look close on all4 displayed real contexts. Both retain a clearer thin curved feature on the plate crop and more low-amplitude variation in Coulicoco than RawNIND; AHD references retain noise and do not prove every fluctuation is true detail. Broad smooth regions/soft edges persist.",
+  "reference": "Primary measured clean CFA after shared integer registration/gain. Auxiliary calibrated AHD RGB is not exact RGB GT. RawNIND global/channel gains fit observed noisy CFA only.",
+  "scope": "Complete existing4known/5unseen camera development scenes:8+10pairs,72+90prepared crops,7methods. Known mean increases slightly; unseen mean falls on all5scenes. No publisher-reserved-test scoring, full427 update, broad real-superiority or SOTA claim. The already queued V84/V100/V101 GPU panels/full-frame runs remain separate. Current galleries may gain versions; immutable views/per-model triplets preserve this result."
+}

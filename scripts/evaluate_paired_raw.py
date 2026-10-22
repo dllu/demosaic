@@ -14,6 +14,7 @@ def main():
     parser.add_argument("--rawnind", type=Path)
     parser.add_argument("--gaussian-reference", type=Path)
     parser.add_argument("--nonlocal-reference", type=Path)
+    parser.add_argument("--device", choices=("cpu", "cuda"), default="cuda")
     parser.add_argument(
         "--precision", choices=("bfloat16", "float16", "float32"), default="float16"
     )
@@ -28,11 +29,16 @@ def main():
     )
     parser.add_argument("--prior-window", type=int, help="Diagnostic learned-model prior override")
     args = parser.parse_args()
+    if args.device == "cpu" and (
+        args.precision != "float32" or args.refinement_precision != "float32"
+    ):
+        parser.error("CPU evaluation requires float32 precision for both network and refinement")
     evaluate_pairs(
         args.checkpoint,
         args.prepared,
         args.output,
         rawnind=args.rawnind,
+        device=args.device,
         precision=args.precision,
         batch_size=args.batch_size,
         gallery=args.gallery,

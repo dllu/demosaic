@@ -77,7 +77,9 @@ Frozen plan: `.cache/current-quality-20261022-v1/training-v2/plan.json`.
 Runs: `/mnt/external/demosaic/v84-curated-quality-20261022-v2/`.
 All four discarded CPU/CUDA smokes passed. V100 completed 10,000 updates;
 V101 is training from the same original V84 weights. Actual phase/owner status
-is in the local `status.json`. Broad production quality results are pending.
+is in the local `status.json`. The [complete V84/V100 CPU camera comparison](real-camera-quality.md)
+is available: a small known-camera gain and unseen-camera loss, with close
+native outputs. The full V84/V100/V101 photographic/camera study remains pending.
 [Launch and verification record](results/current-model-baseline-selection-v1.json).
 
 The evaluation queue at

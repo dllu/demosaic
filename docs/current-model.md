@@ -12,6 +12,7 @@ ConvNeXt-Tiny feature pyramid. V43 remains a useful historical comparator.
 | V85 | 36.43574 | 54.17942 | 53.93069 | Similar quality, expanded native targets |
 | V95 | 35.29553 | **54.33307** | 53.76990 | Stronger tested weak-carrier response |
 | V99 | 35.40133 | 54.31940 | 53.72165 | ADC-consistency experiment |
+| V100 | Pending | 54.17845 | 53.89614 | Curated-cohort continuation; real-camera tradeoff |
 
 V84 gains about **1.54 dB over V43** on the full fixed photographic panel and
 has a higher unseen-camera mean. Its known-camera mean is slightly lower.
@@ -26,6 +27,13 @@ Photo means cover 427 images, seven conditions and four CFAs. Camera means
 cover four/five development scenes and use measured CFA targets. Versions have
 different training budgets and data; this table compares available checkpoints,
 not an isolated architectural ablation. [Full history and provenance](performance-history.md).
+
+V100's camera values come from the completed CPU FP32 comparison with V84;
+the other rows retain their earlier CUDA results. The matched CPU values,
+scene changes and native crops are in the [real-camera guide](real-camera-quality.md).
+V100 gains .00723 dB on known4 and loses .03209 dB on unseen5. Its full-photo
+result is still pending. These mixed effects are documented alongside its
+selected-photo gains.
 
 V84's gain over V43 is larger in the low-noise conditions than the existing
 ISO 12800 gallery suggested:
@@ -86,8 +94,9 @@ native sensor resolution, including RawNIND and a separate ISO 100 reference.
 The [natural-detail gallery](heldout-detail.md) adds bark, white feathers,
 forest canopy and fur at three noise levels. It shows V84's remaining
 high-noise detail loss as well as its sharper low-noise output.
-V100's cleaned-data continuation now adds small gains on those selected
-contexts; the full-photo and camera comparison is still pending.
+V100's cleaned-data continuation adds small gains on those selected contexts.
+Its [complete real-camera comparison](real-camera-quality.md) is mixed;
+the full-photo comparison is still pending.
 The [Q2, Sony a7R II and GFX50R gallery](cross-camera-qualitative.md) also
 compares V84/V100 with V43 and RawNIND on six fixed native ROIs. Those
 low-ISO captures show closer results, with the clearest RawNIND separation
