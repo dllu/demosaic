@@ -1,0 +1,66 @@
+{
+  "status": "reporting-smoke-complete-production-evaluation-queued-after-training",
+  "recorded_local": "2026-10-22T11:01:31-07:00",
+  "training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/training-v2/plan.json",
+    "sha256": "1fdfdd8cae7d1a784faeb2442d9b8a808c64e8131ea045d4f68b5958b78b941c"
+  },
+  "queue_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/evaluation-queue-v1/plan.json",
+    "sha256": "83e737f85a2c6650697f521c46c9fcea58bd40f1086642face9847b1af82e6a8"
+  },
+  "queue_launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/evaluation-queue-v1/launch.json",
+    "sha256": "d232ed74bbd7f94c9c5e4922c9ade33da83eb2bd6199b0e26367ff29bee6a469"
+  },
+  "queue_owner": {
+    "pid": 899941,
+    "created": 1792692004.15
+  },
+  "queue_owner_verified_live": true,
+  "waiting_on_training_owner": {
+    "pid": 844518,
+    "created": 1792689716.99
+  },
+  "training_worker_verified_live": {
+    "pid": 844831,
+    "created": 1792689873.11
+  },
+  "CPU_reporting_smoke": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/evaluation-smoke-v1/plan.json",
+      "sha256": "aae97b38dccdbe0190961e924c04069a584983508fc3c4f8209e7c63b4880c42"
+    },
+    "result": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/evaluation-smoke-v1/photo-result.json",
+      "sha256": "e9558a0757249946c70fbadeb30ad7bce284b4eca995b1a485b41cbf39baaeff"
+    },
+    "per_case_rows": {
+      "path": "/mnt/external/demosaic/v84-curated-evaluation-smoke-20261022-v1/photo/per-image.jsonl",
+      "sha256": "d6e410764e1d3a19193287d7380fc088ddd7b1e8b8ff98e8700519037cb842cf"
+    },
+    "cases": 72,
+    "forwards_per_learned_model": 12,
+    "native_triplets_actually_viewed": 6,
+    "native160_cells_actually_viewed": 18,
+    "arithmetic_max_absolute_error": 0.0,
+    "same_noisy_and_GT_pixels": true,
+    "scope": "V84 and two discarded eight-update CPU smokes; native176/B1, 2 photos + 1 procedural image, 2 conditions and 2 CFAs. CPU integration only, not production quality or CUDA evaluation."
+  },
+  "drivers": [
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/queue_quality_recipe_evaluation.py",
+      "sha256": "74187e2e60380e58be42ba6ce73305ee8911d8f40d0ace51cb53a3bca768efc7"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/evaluate_v43_quality_trial.py",
+      "sha256": "c1a43132c459d835b1a1f64e752d65cbb94594a7c99ff63b3d044f5f1bf23be5"
+    }
+  ],
+  "focused_validation": {
+    "tests": 66,
+    "command": "PYTHONPATH=.:src:scripts CUDA_VISIBLE_DEVICES='' .venv/bin/pytest -q tests/test_quality_recipe_evaluation_queue.py tests/test_v43_evaluation_resources.py tests/test_v43_evaluation_witnesses.py tests/test_adc_evaluation_fidelity.py tests/test_adc_quality_queue.py tests/test_reporting.py"
+  },
+  "comparison": "V84 final20k versus V100/V101 fixed final10k EMAs; unchanged learned architecture and frozen DINO. Full427/16-procedural/7-condition/4-CFA, known4/unseen5 development scenes, weak-detail/color and standing cached GFX plus highlights. FP32, shared observations and native crop metadata; RawNIND comparisons where applicable.",
+  "selection_policy": "Report actual gains and tradeoffs, inspect native crops and update current model recommendations when useful. Study-specific gates do not freeze the baseline. Production quality results remain pending."
+}

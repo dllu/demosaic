@@ -335,7 +335,7 @@ def prepare(
     print(ref(root / "plan.json"))
 
 
-def audit_triplets(output, crops):
+def audit_triplets(output, crops, minimum_methods=4):
     import numpy as np
     from PIL import Image
 
@@ -368,7 +368,9 @@ def audit_triplets(output, crops):
         else:
             common[key] = panels[0], panels[2]
         count += 1
-    assert count >= 8 and min(groups.values()) >= 4
+    assert minimum_methods >= 1
+    assert len(groups) >= 2 and count >= 2 * minimum_methods
+    assert min(groups.values()) >= minimum_methods
     return {
         "native160_triplets": count,
         "shared_source_groups": len(groups),
@@ -474,6 +476,8 @@ def worker(plan_path, stage):
     plan = read(plan_path)
     guard(plan)
     assert stage in plan["stages"]
+    model_count = len(plan["checkpoints"])
+    method_count = model_count + (3 if plan["cpu_proof"] else 5)
     root, output = Path(plan["root"]), Path(plan["artifact_root"]) / stage
     (root / (stage + ".claim")).open("x").close()
     owner = {"pid": os.getpid(), "created": psutil.Process().create_time()}
@@ -647,16 +651,20 @@ def worker(plan_path, stage):
                 (r["model"], r["kind"], r["id"], r["condition"], r["pattern"]) for r in records
             ]
             assert (
-                len(records) == len(actual) == len(set(actual)) == len(expected) == 84
+                len(records)
+                == len(actual)
+                == len(set(actual))
+                == len(expected)
+                == method_count * 3 * 4
                 and set(actual) == expected
             )
             arithmetic = compare_summary(records, report)
         else:
-            arithmetic = audit_photo(output, expected_methods=9)
+            arithmetic = audit_photo(output, expected_methods=method_count)
         expected_each = math.ceil(
             (plan["photo_count"] + plan["synthetic_count"]) / plan["batch_size"]
         ) * (4 if plan["cpu_proof"] else 28)
-        assert [r["forwards"] for r in models] == [expected_each] * 4
+        assert [r["forwards"] for r in models] == [expected_each] * model_count
     elif stage in CAMERAS:
         from audit_fresh_dino_statistics import audit_real
 
@@ -678,7 +686,7 @@ def worker(plan_path, stage):
             4 if stage == "known" else 5,
             8 if stage == "known" else 10,
             72 if stage == "known" else 90,
-            expected_methods=9,
+            expected_methods=method_count,
         )
     elif stage == "texture":
         import evaluate_texture_candidates as texture
@@ -686,7 +694,7 @@ def worker(plan_path, stage):
         texture.load_checkpoint = observe(texture.load_checkpoint)
         texture.main(checkpoints, output, device=device, precision="float32")
         report = read(output / "summary.json")
-        assert [r["observations"] for r in models] == [448] * 4
+        assert [r["observations"] for r in models] == [448] * model_count
     elif stage == "color":
         import evaluate_color_grid_cuda as color
 
@@ -702,7 +710,7 @@ def worker(plan_path, stage):
             precision="float32",
         )
         report = read(output / "report.json")
-        assert [r["forwards"] for r in models] == [1176] * 4
+        assert [r["forwards"] for r in models] == [1176] * model_count
     else:
         import report_raw_pair as gfx
 
@@ -726,7 +734,7 @@ def worker(plan_path, stage):
         gfx.main()
         report = read(output / "report.json")
         assert report["quality_scores"] is None and not report["full_frames"]
-    assert len(models) == 4 and rng
+    assert len(models) == model_count and rng
     invariants = []
     for record in models:
         model = record["model"]
@@ -754,7 +762,7 @@ def worker(plan_path, stage):
         )
     else:
         assert not torch.cuda.is_initialized()
-    triplets = audit_triplets(output, report["native_crops"])
+    triplets = audit_triplets(output, report["native_crops"], minimum_methods=model_count)
     witness = plan.get("reference_witnesses", {}).get(stage)
     witness_audit = None
     if witness is not None:

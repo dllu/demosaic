@@ -70,6 +70,17 @@ to start from the same original V84 weights after it. Actual phase/owner status
 is in the local `status.json`. Production quality results are pending.
 [Launch and verification record](results/current-model-baseline-selection-v1.json).
 
+The evaluation queue at
+`.cache/current-quality-20261022-v1/evaluation-queue-v1/` waits for both original
+training owners to exit, then runs the seven panels below automatically. It
+compares V84 with the final V100/V101 EMAs under the same IEEE FP32 observations
+and includes RawNIND where applicable. Outputs go to
+`/mnt/external/demosaic/v84-curated-evaluation-20261022-v1/`.
+The three-model reporting workflow passed a CPU smoke with 72 complete cases
+and six actually viewed native triplets; this checks execution and reporting,
+not the pending production models' quality.
+[Evaluation readiness](results/v84-recipe-evaluation-readiness-v1.json).
+
 Compare new checkpoints with V84 and useful alternatives on full 427-photo,
 known/unseen measured-CFA, weak-detail/color and standing GFX tests. Show at
 least two unchanged native noisy/restored/GT triplets per reported model, with
