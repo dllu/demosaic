@@ -123,8 +123,9 @@ The photo worker has exited. All111,636 cases pass coverage/invariant checks;
 [independent photo auditing](v95-adc-training-quality-review.md#completed-photo-panel)
 finds V99−projected-V98 +.02880 dB, below the fixed .03 dB requirement, with
 ADC photographic SSIM −.0020322. Both criteria fail. Known/unseen numeric audits
-are also complete; remaining analytic/color/GFX panels and lower-noise native
-review still need closure. No model is promoted
+are also complete. The [full seven-panel and lower-noise native review](v95-adc-training-quality-review.md)
+is complete: high-noise color RMS and retention of V95's weak-detail response
+also fail. No model is promoted
 or extended from the final4k endpoints; V43 remains the working reference.
 
 Sample-fidelity coverage derives from explicit priors:1,772 ADC observations
@@ -147,14 +148,13 @@ remain implementation evidence. The current
 records the actual V98/V99 result and independent Decimal/scalar replay.
 
 The [secondary native-photo controller](../scripts/evaluate_v95_native_photo_conditions.py)
-waits for all seven primary panels and both owners to finish/exit before its
-GPU worker. It retains the first four full-suite sources and two fixed crop
-cases at ADC-only, ISO100 and ISO12800:36 planned triplets. It checks ADC sample
-fidelity and requires positive-noise priors to remain positive. Its
-[helper preparation](results/v95-adc-native-detail-preparation-v1.json)
-retains69 frozen checks and actual packaging/CLI evidence; the historical
-rehearsal launched no worker. Actual lower-noise rendering/viewing remains
-pending. The [current quality review](v95-adc-training-quality-review.md) already
-retains two unchanged high-noise triplets per new endpoint, including remaining
-fabric color/detail failures. Those examples do not replace the other panels
-or the declared criteria.
+started only after all seven primary panels and both owners exited. It completed
+36 triplets over the first four sources and two fixed crop cases at ADC-only,
+ISO100 and ISO12800. All108 saved scalar rows match the full suite exactly;
+actual native review covers these triplets and all96 primary triplets through
+180 unchanged native cells. Both controllers and every owned worker have exited.
+The [complete receipt](results/v95-adc-complete-quality-review-v1.json)
+binds counters, ADC fidelity, independent scalar/float64 array audits and the
+actual native/GFX findings. The [helper preparation](results/v95-adc-native-detail-preparation-v1.json)
+retains the separate69-test packaging rehearsal. V43 remains the reference;
+this failed final4k recipe receives no extension or speed work.

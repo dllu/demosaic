@@ -11,6 +11,7 @@ corpus and less blur/more low-contrast detail. V95 improves photo scores and wea
 detail, with remaining color/camera tradeoffs. See the
 [quality review](docs/v43-curated-original20k-review.md),
 [palette follow-up](docs/v95-flat-palette-quality-review.md),
+[completed ADC follow-up](docs/v95-adc-training-quality-review.md),
 [plan](docs/quality-first-training.md),
 [experiment index](docs/experiments.md) and [documentation guide](docs/index.md).
 

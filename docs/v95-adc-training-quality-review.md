@@ -1,12 +1,12 @@
-# ADC-training study: photo criteria fail, full review pending
+# ADC training: better ADC color, failed overall quality
 
 V43 remains the working reference. The completed full photo panel finds a
 positive V99−projected-V98 PSNR gain of **.02880 dB**, below the fixed .03 dB
 requirement, with lower ADC photographic SSIM. The photo promotion criteria
 therefore fail. Both endpoints also lose fine fabric cords and shift its color
 in the fixed high-noise examples below. The completed camera panels show lower
-V99 means than V98. The remaining analytic/color/GFX panels and queued lower-noise
-native review still need closure. No model is promoted and this
+V99 means than V98. All seven panels and the lower-noise native review are now
+complete. No model is promoted and this
 final4k recipe will not be extended to chase a passing result.
 
 V98 and V99 keep V43's learned architecture and continue from final V95 EMA
@@ -93,6 +93,42 @@ The [PSNR history](performance-history.md) now includes both completed final4k
 primary endpoints and labels their projected inference policy. Their plotted
 means do not establish overall quality promotion.
 
+## Complete quality decision
+
+The [complete review](results/v95-adc-complete-quality-review-v1.json) retains all
+seven closed stages, 17,824 actual joint/DINO forwards and the separate native
+diagnostic's 12 forwards. All 96 primary and 36 secondary triplets were actually
+inspected through 180 unchanged native160 cells. All 108 secondary score rows
+match the corresponding full-suite values exactly across 864 metric fields.
+The independent analytic audit checks all 2,240 scalar cases. The color audit
+rebuilds all 4,704 saved predictions/28,224 metric fields in float64, maximum
+discrepancy 4.44e-16, and separately checks 864 summary fields. No model or noise
+was rerun for these CPU audits.
+
+V99's brighter .18-level/2%-contrast/16px noisy-carrier gain is **.59553**, below
+V95's .61471; V98 gives .58654 and V43 .24105. The required retention of V95's
+response fails. Individual ADC carrier gain losses stay within .05 (worst
+V99−V98 −.01107), and every flat-case spatial RMS stays within 1.25×V95 (largest
+ratio 1.02344). Passing those checks does not repair the failed photo criteria.
+
+| Endpoint | ADC p95 channel bias | ADC worst centered RMS | High-noise p95 channel bias | High-noise worst centered RMS |
+| --- | ---: | ---: | ---: | ---: |
+| V43 | .004885 | .001657 | .002569 | .002559 |
+| V95 | .002967 | .000874 | .005206 | .004058 |
+| V98 projected | .000204 | .000398 | .005326 | .007383 |
+| V99 projected | .000182 | .000285 | .005225 | .007655 |
+
+These are fixed-grid descriptors in camera RGB, not confidence intervals.
+V99 improves both ADC descriptors versus V95 and projected V98. High-noise
+worst centered RMS exceeds both references, while high-noise p95 bias remains
+above V95. Those declared color safeguards fail. Visible magenta-field mottling
+and positive-noise fabric color errors remain consistent with these limitations.
+
+Stop both final4k endpoints without extension or promotion. Retain the ADC
+improvement as a limited result; it does not establish a replacement for V43.
+The full project quality, broad real-photo RawNIND superiority and 100MP/10s
+goals remain unmet. Further work stays on quality and V43's learned architecture.
+
 ## Individual fixed examples
 
 These are single-tile sRGB scores, without pooled means or confidence intervals.
@@ -155,11 +191,48 @@ separate qualitative test with a nonexact low-ISO reference.
 
 [Building source/ROI/checkpoint/noise/display metadata](images/v95-adc-training/crop-c35a0135145fdcdb.json).
 
-The [previous review](v95-flat-palette-quality-review.md) retains matching
-V43/V95 crops and RawNIND context. The remaining analytic/color/GFX panels and queued
-ADC/ISO100/ISO12800 diagnostic still require independent numeric closure and
-actual native/GFX inspection. V43 stays the reference pending that review;
-speed work remains deferred.
+## Lower-noise fabric and real GFX
+
+In the fixed fabric tile, ADC-only PSNR rises from 39.65199 dB in projected V98
+to 40.26683 in V99. Both recover its orange color and cords much better than
+the unprojected references. At ISO100 the projection bypasses both models:
+V98/V99 score 21.31429/21.12916 dB and retain a yellow/olive color shift.
+These are individual cases, not the full-photo means above.
+
+![V99 ADC-only: noisy, restored and exact synthetic GT](images/v95-adc-training/adc-only/crop-f1ffca5ecb599f55.png)
+
+[ADC metadata](images/v95-adc-training/adc-only/crop-f1ffca5ecb599f55.json) ·
+[Matching V98 control](images/v95-adc-training/adc-only/crop-0f452518b631009f.png).
+
+![V99 ISO100: noisy, restored and exact synthetic GT](images/v95-adc-training/iso100-prior/crop-f1ffca5ecb599f55.png)
+
+[ISO100 metadata](images/v95-adc-training/iso100-prior/crop-f1ffca5ecb599f55.json) ·
+[Matching V98 control](images/v95-adc-training/iso100-prior/crop-0f452518b631009f.png).
+
+The standing DSCF3879/DSCF3880 GFX scene includes sky, building, foliage, fence
+and two illuminated-boundary crops. Learned fence strands and building rails
+remain more coherent than RawNIND, but V99 supplies no convincing new improvement
+over V95/V98; foliage texture is still smooth. Saturated sign boundaries remain
+imperfect. The ISO100 f/5.6 reference differs in aperture, time and LED scan;
+it is not exact GT and has no pixelwise quality score. Display exposure4 (+2EV)
+and coordinates are shared across methods; crop pixels are never resized.
+
+![V99 GFX foliage: noisy, restored and separate ISO100 reference, not GT](images/v95-adc-training/crop-ee4acb76b1400b6d.png)
+
+[Foliage metadata](images/v95-adc-training/crop-ee4acb76b1400b6d.json) ·
+[Matching V98 control](images/v95-adc-training/crop-b739547edef22611.png).
+
+![V99 GFX fence: noisy, restored and separate ISO100 reference, not GT](images/v95-adc-training/crop-a0c8f5216d7d89e7.png)
+
+[Fence metadata](images/v95-adc-training/crop-a0c8f5216d7d89e7.json) ·
+[Matching V98 control](images/v95-adc-training/crop-9ad5fbed46a17739.png).
+
+The [exact-copy publication receipt](results/v95-adc-complete-quality-publication-v1.json)
+retains both new models' six GFX regions and ADC/ISO100 fabric images, including
+checkpoint, source/ROI, conditioning and display sidecars. Condition subdirectories
+preserve distinct images whose original generated filenames repeat. The
+[previous review](v95-flat-palette-quality-review.md) retains matching V43/V95
+crops and RawNIND context. Speed work remains deferred.
 
 Photographic sources: [Roy Egloff](https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg)
 and [Dietmar Rabich](https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg),

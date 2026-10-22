@@ -52,22 +52,19 @@ large regressions on a few. Both worsen tested color tails and lose some of
 V95's noisy weak-detail response. Lower-noise views confirm color/detail
 failures even with nearly clean inputs. Both stop at final4k; V43 remains the
 working reference and speed work remains deferred.
-The [V98/V99 experiment](v95-adc-training-plan.md) now tests training through the
+The [V98/V99 experiment](v95-adc-training-plan.md) tests training through the
 existing ADC-only sample projection with the same learned architecture and
-data. Both final4k training arms and independent saved-state audits are complete;
-the [full FP32 evaluation is running](results/v95-adc-training-complete-and-evaluation-launch-v1.json).
+data. Both final4k training arms, all seven FP32 panels and the lower-noise
+native review are complete.
 Both endpoints use projected inference in the
 primary comparison, separating the training effect from the known inference
-policy. The [completed photo audit and fixed native examples](v95-adc-training-quality-review.md)
-retain two triplets per new endpoint, with remaining fabric color/detail failures.
+policy. The [complete quality review](v95-adc-training-quality-review.md)
+retains synthetic and real GFX native triplets, with remaining fabric color/detail failures.
 V99−projected-V98 photo PSNR gains .02880 dB, below the fixed .03 dB criterion,
-and ADC photographic SSIM falls. Those photo criteria fail; the remaining
-quality panels and lower-noise native review still need completion. No model
+and ADC photographic SSIM falls. ADC color improves, but high-noise color RMS
+and retention of V95's weak-detail response fail their safeguards. All132
+primary/secondary triplets were represented in actual native views. No model
 is promoted or extended from these final4k endpoints.
-The [frozen CPU handoff queue](results/v95-adc-quality-handoff-launch-v1.json)
-completed its audits and launched all seven evaluation panels after the original
-training owners exited. The lower-noise native-crop controller waits for that
-full run and its owners to exit; numeric and actual native review follow.
 Originals and historical manifests remain read-only. Validation/test and the
 standing GFX scene remain outside training. See the [source review](corpus-source-review.md).
 

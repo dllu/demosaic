@@ -6,7 +6,7 @@ training quality with its architecture and the larger cleaned corpus.
 
 | Topic | Start here |
 | --- | --- |
-| Current work | [ADC-constrained training](v95-adc-training-plan.md) · [Corpus/training overview](quality-first-training.md) · [Completed V95 color follow-up](v95-flat-palette-quality-review.md) |
+| Current work | [Completed ADC-training review](v95-adc-training-quality-review.md) · [Corpus/training overview](quality-first-training.md) · [Completed V95 color follow-up](v95-flat-palette-quality-review.md) |
 | Results | [Experiment index](experiments.md), [PSNR history](performance-history.md) |
 | Older work | [Chronological archive](experiment-archive.md), [local-time diary](../diary/index.md) |
 | Current model | [V43 quality review](native-corpus-2k-review.md), [full-frame/crop validation](mature-cudnn-fullframe.md) |

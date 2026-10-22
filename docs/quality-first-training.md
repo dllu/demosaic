@@ -102,11 +102,14 @@ The [V98/V99 experiment](v95-adc-training-plan.md) preserves V95's data,
 augmentation and V43 learned architecture while testing the existing ADC-only
 physical projection during training. Both use a shared lower LR2e-6 and the
 same seed58/final4k budget. Both production stages and independent saved-state
-audits are complete. The [full FP32 evaluation is running](results/v95-adc-training-complete-and-evaluation-launch-v1.json),
-with lower-noise native views queued behind all seven panels. The primary learned contrast
+audits are complete. The [full FP32 and native review is complete](v95-adc-training-quality-review.md).
+The primary learned contrast
 uses a projected V98 EMA export versus projected V99, so the known inference
-policy alone cannot count as a training gain. Full quality and native review
-remain pending; the working reference stays V43.
+policy alone cannot count as a training gain. V99 gains .02880 dB, below the fixed
+.03 dB requirement, and lowers ADC photographic SSIM. ADC color improves, but
+high-noise color RMS and weak-detail retention fail their safeguards; ISO100
+fabric color errors remain. Both final4k endpoints stop without extension or
+promotion. The working reference stays V43, with speed work deferred.
 
 Plans/code remain local and checkpoints/run traces use a fresh external-SSD
 namespace. The completed production plan is

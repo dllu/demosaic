@@ -8,7 +8,7 @@ Selected completed primary endpoints, chosen by study scope, never by highest sc
 
 All photo points use the full fixed 427-source panel, seven conditions and four CFAs. Known/unseen points balance captures within scenes, then scenes (4/5 scenes, 72/90 crops). No screen16, procedural mean or model-selected subset is mixed into the photo curve. Precision details and original records remain in the source reports.
 
-V98/V99 use the same ADC-only inference projection; only V99 trained through it. Their original V43/V95 references retain their checkpoint policies. All three primary panels are complete, but the [fixed photo criteria fail and remaining quality/native review is pending](v95-adc-training-quality-review.md). These points do not indicate model promotion.
+V98/V99 use the same ADC-only inference projection; only V99 trained through it. Their original V43/V95 references retain their checkpoint policies. All three primary panels are complete, but the [fixed photo criteria fail and the complete quality review rejects promotion](v95-adc-training-quality-review.md). These points do not indicate model promotion.
 
 | Version / endpoint | Photo sRGB | Known CFA | Unseen CFA | Report |
 | --- | ---: | ---: | ---: | --- |
