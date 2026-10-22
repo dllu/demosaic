@@ -103,26 +103,33 @@ All four discarded proofs completed: 24 actual updates per arm/device,
 CPU/CUDA pair has all 24 observed batches identical across every data domain.
 Independent checkpoint/config/lineage/EMA/Adam/finite-gradient checks pass.
 Candidate CUDA hooks preserve valid samples within 5.97e-8 sensor units.
-Production V98 completed all 4,000 updates; V99 is now running serially.
-The independent final-state audits remain queued. These are execution checks,
-not model-quality findings. The
+Both production arms completed all 4,000 updates and their owners exited.
+Independent CPU audits pass for every retained model/EMA/Adam state and the
+training/validation traces. Each arm processed 64,000 images, including 4,751
+ADC images; all 161 logged production batch hashes match across domains.
+The final4k EMAs remain primary; both validation-best checkpoints are step3000
+and remain diagnostic. These are execution checks, not model-quality findings.
+The
 [preflights and historical launch observation](results/v95-adc-training-preflights-and-launch-v1.json)
-retain the actual evidence.
+retain the preflight evidence. The
+[completed training and evaluation launch](results/v95-adc-training-complete-and-evaluation-launch-v1.json)
+records the independent audits, final checkpoint hashes, exact-EMA projected
+V98 export and actual live evaluation/crop-controller observations.
 
 Frozen training plan:
 `.cache/quality-first-20261020/V95-ADC-matched-training-v1/plan.json`, SHA256
 `e2d4f9acc2c96b854612ccb933d0d2d20ab36f114cef184009fbdee57df5540a`.
 Artifacts: `/mnt/external/demosaic/v95-adc-training-20261021-v1/`.
 The run uses the frozen prospective copy of this plan; this status addition
-does not change that archive. A future full evaluation uses
-`scripts/evaluate_v43_quality_trial.py prepare ... --adc-training` only after
-both owners exit and independent saved-state audits are written as
+does not change that archive. Full evaluation was prepared with
+`scripts/evaluate_v43_quality_trial.py prepare ... --adc-training` after
+both owners exited and independent saved-state audits were written as
 `independent-V98-training-audit-v1.json` and
 `independent-V99-training-audit-v1.json` in the training-plan directory.
 Preparation produces the exact-EMA V98 export, retains its training lineage
 and requires the projected policy explicitly for both new endpoints. Focused
-tests reject unrelated architecture/precision changes; execution on completed
-endpoints and the complete quality decision remain pending.
+tests reject unrelated architecture/precision changes. The primary photo GPU
+worker is running; complete quality and native review remain pending.
 
 Full evaluation now also checks sample fidelity on every declared projected
 endpoint. Coverage is derived from explicit priors: 1,772 ADC observations per
@@ -187,6 +194,8 @@ worker starts; the full suite remains primary.
 The [native-helper preparation](results/v95-adc-native-detail-preparation-v1.json)
 passes 69 frozen checks and actual packaging/CLI checks, including the crop-board
 dependency. The historical preparation rehearsal starts no controller or
-worker. The new secondary diagnostic has not been prepared or queued yet,
-because its parent evaluation plan does not exist while V99 trains. Actual
-native viewing remains pending; no crop-quality result follows from these checks.
+worker. The new secondary diagnostic is now prepared and its CPU controller
+is waiting for all seven primary panels and exited owners. Its GPU worker has
+not started. The [execution receipt](results/v95-adc-training-complete-and-evaluation-launch-v1.json)
+records both actual launches. Complete native review remains pending; helper
+checks alone establish no crop-quality result.

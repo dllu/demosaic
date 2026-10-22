@@ -1,0 +1,227 @@
+{
+  "status": "completed-matched-final4k-training-independent-audits-passed-full-evaluation-running-native-queued",
+  "recorded_local": "2026-10-21T22:25:41-07:00",
+  "operator": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/publish-v95-adc-training-complete-and-evaluation-launch-v1.py",
+    "sha256": "78b0e61ef9ee8d4126b1438143e55a5cc95dda4fbb4ee244b359da4c0fc92841"
+  },
+  "training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-ADC-matched-training-v1/plan.json",
+    "sha256": "e2d4f9acc2c96b854612ccb933d0d2d20ab36f114cef184009fbdee57df5540a"
+  },
+  "completed_training_status": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-ADC-matched-training-v1/status.json",
+    "sha256": "622325e41e84b733b8a86fec7e973a9acd03f1f05cb80fcccf33989053fa72c3"
+  },
+  "training_controller_and_last_worker_exited": true,
+  "arms": [
+    {
+      "arm": "V98",
+      "worker_result": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-ADC-matched-training-v1/train-V98-result.json",
+        "sha256": "c28714f2e58a1153e0b32683ba2e4c7ff44cd7d52c15ef92bd7a4a0f34da4f52"
+      },
+      "independent_audit": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-ADC-matched-training-v1/independent-V98-training-audit-v1.json",
+        "sha256": "f4c5e333a320bc39a78370f09daac6bc5dd575a84067b0de3847d58a4531cf43"
+      },
+      "final4k_checkpoint": {
+        "path": "/mnt/external/demosaic/v95-adc-training-20261021-v1/train/V98/last.pt",
+        "sha256": "5e8f5f32bfa3a1f37912566ebac1ca524e0fde1eab616ab215a8795f55ef8d96"
+      },
+      "executed_counts": {
+        "training_forwards": 4000,
+        "validation_forwards": 128,
+        "DINO_calls": 4128,
+        "optimizer_steps": 4000
+      },
+      "training_images": 64000,
+      "ADC_training_images": 4751,
+      "retained_checkpoint_steps_in_audit": [
+        1000,
+        2000,
+        3000,
+        4000,
+        3000
+      ],
+      "all161_training_rows_finite": true,
+      "production_first24_inputs_exact_own_CUDA_proof": true
+    },
+    {
+      "arm": "V99",
+      "worker_result": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-ADC-matched-training-v1/train-V99-result.json",
+        "sha256": "ed64fb747d3756bea81a6d182eba6ce23738932d7aa95989e164fd0a824bea76"
+      },
+      "independent_audit": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-ADC-matched-training-v1/independent-V99-training-audit-v1.json",
+        "sha256": "b29efaab6b345c4a233e59dbefa330a6b34c61a66ded604fe54602280f67d57e"
+      },
+      "final4k_checkpoint": {
+        "path": "/mnt/external/demosaic/v95-adc-training-20261021-v1/train/V99/last.pt",
+        "sha256": "e74656e5f556c1fa9a6f6655b59f979b89ee3adba7b30cfa08bd5a5a9d6de979"
+      },
+      "executed_counts": {
+        "training_forwards": 4000,
+        "validation_forwards": 128,
+        "DINO_calls": 4128,
+        "optimizer_steps": 4000
+      },
+      "training_images": 64000,
+      "ADC_training_images": 4751,
+      "retained_checkpoint_steps_in_audit": [
+        1000,
+        2000,
+        3000,
+        4000,
+        3000
+      ],
+      "all161_training_rows_finite": true,
+      "production_first24_inputs_exact_own_CUDA_proof": true
+    }
+  ],
+  "matched_logged_batch_counts": {
+    "CPU": {
+      "identical_shared_observations": 24,
+      "changed_treatment_observations": 0
+    },
+    "CUDA": {
+      "identical_shared_observations": 24,
+      "changed_treatment_observations": 0
+    },
+    "train": {
+      "identical_shared_observations": 161,
+      "changed_treatment_observations": 0
+    }
+  },
+  "initial_model_sha256": "8c8646e5e984148338748423fbb97b36143b9d14b494b8f7844520c282c826f3",
+  "frozen_DINO_sha256": "35035ba142eb119cd5980cf0d9809bfa28f622538c259ffb0fcf348ca6e68898",
+  "numerical_package_sha256": "ea9622343d2ad4d9f12ea0089884ad9dcefb87be4ae06f24eacc764829c02d09",
+  "dataset": "Same frozen curated88484 Commons, original native128/106 groups and paired32; zeroPSF/weak-detail recipe, seed58/B16/native256/BF16; fresh optimizer/EMA and LR2e-6 shared. Original V43 learned architecture; only candidate ADC training flag changes.",
+  "completed_handoff_status": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-ADC-quality-handoff-v1/status.json",
+    "sha256": "a03db22316952bb6c668199252102870fea44243443039d8675cbc465098a8b7"
+  },
+  "handoff_controller_exited": true,
+  "primary_evaluation_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-ADC-matched-evaluation-v1/plan.json",
+    "sha256": "e657049b99c2f36435f52ceb03b18085b93ccea37a5e0d462f1a311e31515de3"
+  },
+  "primary_evaluation_launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-ADC-matched-evaluation-v1/launch.json",
+    "sha256": "817e453538f3d04115d6f61bb4e26f79737570a111c12f44d18aa6bcc087c7fa"
+  },
+  "primary_evaluation_live_observation": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-ADC-quality-handoff-v1/completed-training-and-evaluation-launch-observation-v1/evaluation-status.json",
+    "sha256": "f6729975e5155299fec38faad8c4c29366a5c5d7483f23afa8247733cb64e2bd"
+  },
+  "primary_controller_at_observation": {
+    "pid": 37769,
+    "created": 1792646420.57
+  },
+  "primary_GPU_photo_worker_at_observation": {
+    "pid": 37941,
+    "created": 1792646485.63
+  },
+  "primary_stages": [
+    "photo",
+    "known",
+    "unseen",
+    "texture",
+    "color",
+    "gfx",
+    "gfx-highlights"
+  ],
+  "primary_completed_stages_at_observation": [],
+  "primary_checkpoints": [
+    {
+      "arm": "V43",
+      "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-hidden-FP16-full-quality-v1/work/checkpoints/V43.pt",
+      "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+      "expected_lineage": {
+        "step": 2000
+      }
+    },
+    {
+      "arm": "V95",
+      "path": "/mnt/external/demosaic/v43-curated-training-20261020-v1/train/V95/last.pt",
+      "sha256": "189f5530ef8be6384e101e00fe50ece19297436b0c65b5bb3cabbb2f327e2bb6",
+      "expected_lineage": {
+        "step": 20000,
+        "initialized_from": {
+          "path": "/home/dllu/proj/demosaic/.cache/benchmarks/mature-hidden-FP16-full-quality-v1/work/checkpoints/V43.pt",
+          "sha256": "0d74cf31fb1c7e3f97fc692c855a2ca0ee3ebf562b454e4f8b135c28fc0aa5c5",
+          "step": 2000
+        }
+      }
+    },
+    {
+      "arm": "V98",
+      "path": "/mnt/external/demosaic/v95-adc-evaluation-20261021-v1/V98-projected-control/model.pt",
+      "sha256": "6d8263f50b26dc6ab9fe18db1bcae6d6714cdbc5985db750e58a00b4e8765a88",
+      "expected_lineage": {
+        "step": 4000,
+        "initialized_from": {
+          "path": "/mnt/external/demosaic/v43-curated-training-20261020-v1/train/V95/last.pt",
+          "sha256": "189f5530ef8be6384e101e00fe50ece19297436b0c65b5bb3cabbb2f327e2bb6",
+          "step": 20000
+        }
+      },
+      "expected_adc_projection": true,
+      "training_checkpoint": {
+        "path": "/mnt/external/demosaic/v95-adc-training-20261021-v1/train/V98/last.pt",
+        "sha256": "5e8f5f32bfa3a1f37912566ebac1ca524e0fde1eab616ab215a8795f55ef8d96"
+      }
+    },
+    {
+      "arm": "V99",
+      "path": "/mnt/external/demosaic/v95-adc-training-20261021-v1/train/V99/last.pt",
+      "sha256": "e74656e5f556c1fa9a6f6655b59f979b89ee3adba7b30cfa08bd5a5a9d6de979",
+      "expected_lineage": {
+        "step": 4000,
+        "initialized_from": {
+          "path": "/mnt/external/demosaic/v43-curated-training-20261020-v1/train/V95/last.pt",
+          "sha256": "189f5530ef8be6384e101e00fe50ece19297436b0c65b5bb3cabbb2f327e2bb6",
+          "step": 20000
+        }
+      },
+      "expected_adc_projection": true
+    }
+  ],
+  "V98_exact_EMA_projected_export": {
+    "path": "/mnt/external/demosaic/v95-adc-evaluation-20261021-v1/V98-projected-control/receipt.json",
+    "sha256": "238ff8f24b9c684c03b9a1dd3afb84d42142bf14e86bb50748dbd0176a2b20ed"
+  },
+  "expected_ADC_observations_per_projected_model": {
+    "photo": 1772,
+    "texture": 224,
+    "color": 588,
+    "known": 0,
+    "unseen": 0,
+    "gfx": 0,
+    "gfx-highlights": 0
+  },
+  "primary_frozen_files": 65,
+  "primary_fixed_inputs": 1803,
+  "secondary_native_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-ADC-native-photo-conditions-v1/plan.json",
+    "sha256": "5508d4667f3313ac9c2bbe114211c4be49be9737558f045d50fed10680531244"
+  },
+  "secondary_native_launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-ADC-native-photo-conditions-v1/launch.json",
+    "sha256": "d4d63799ab93b97fcb33befb10977e52c1dce5c302f353d3df7f2a5053a576af"
+  },
+  "secondary_native_live_observation": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-first-20261020/V95-ADC-quality-handoff-v1/completed-training-and-evaluation-launch-observation-v1/native-status.json",
+    "sha256": "0af1b4d87ccc99e69bed6e7812f1815c13cec13f1b23c4a1797cd61dc57637e7"
+  },
+  "secondary_native_controller_at_observation": {
+    "pid": 38088,
+    "created": 1792646566.44
+  },
+  "secondary_native_frozen_files": 73,
+  "secondary_native_fixed_inputs": 16,
+  "secondary_native_GPU_worker_started": false,
+  "secondary_native_policy": "Wait for all7 primary stages and exited owners, then original first4 sources/RGGB/native256/F32 at ADC/ISO100/ISO12800;36 native160 triplets with unchanged coordinates/display. Common projection on V98/V99; measured ADC fidelity and positive-prior checks. No retry or promotion.",
+  "scope": "Completed training/audit and actual launch evidence. Both final4k EMAs remain primary; validation-best is step3000 for both and remains diagnostic. Primary photo GPU evaluation is live, zero panels completed at this observation; secondary GPU diagnostic is waiting. No held-out V98/V99 quality, native-viewing, DN16, 100MP speed or promotion claim. V43 remains the working reference."
+}

@@ -54,13 +54,15 @@ failures even with nearly clean inputs. Both stop at final4k; V43 remains the
 working reference and speed work remains deferred.
 The [V98/V99 experiment](v95-adc-training-plan.md) now tests training through the
 existing ADC-only sample projection with the same learned architecture and
-data. Four discarded CPU/CUDA checks and independent saved-state audits pass;
-production is running. Both endpoints will use projected inference in the
+data. Both final4k training arms and independent saved-state audits are complete;
+the [full FP32 evaluation is running](results/v95-adc-training-complete-and-evaluation-launch-v1.json).
+Both endpoints use projected inference in the
 primary comparison, separating the training effect from the known inference
-policy. Quality remains untested.
+policy. Full quality and native review remain pending.
 The [frozen CPU handoff queue](results/v95-adc-quality-handoff-launch-v1.json)
-will audit both completed endpoints and launch all seven evaluation panels
-after the original training owners exit; numeric and native review follow.
+completed its audits and launched all seven evaluation panels after the original
+training owners exited. The lower-noise native-crop controller waits for that
+full run and its owners to exit; numeric and actual native review follow.
 Originals and historical manifests remain read-only. Validation/test and the
 standing GFX scene remain outside training. See the [source review](corpus-source-review.md).
 

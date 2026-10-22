@@ -41,6 +41,10 @@ The [completed V96/V97 follow-up](v95-flat-palette-quality-review.md) establishe
 no photo PSNR gain over V95 and worsens tested color tails; both stop at their
 declared final4k endpoints. All seven panels and the recovered lower-noise
 native views are reviewed. No new model is promoted.
+The [V98/V99 study](v95-adc-training-plan.md) completed both final4k stages and
+independent saved-state audits. Full FP32 quality evaluation is running, with
+lower-noise native views queued after all seven panels. These execution checks
+do not establish an improved model or change the completion status.
 
 Completed later studies, including [V92](late-rgb-head-only-original4k-review.md),
 retain their unfavorable evidence. Higher PSNR in one panel, finite training,

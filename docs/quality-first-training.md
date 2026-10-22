@@ -96,8 +96,9 @@ stop at final4k, without promotion or speed work.
 The [V98/V99 experiment](v95-adc-training-plan.md) preserves V95's data,
 augmentation and V43 learned architecture while testing the existing ADC-only
 physical projection during training. Both use a shared lower LR2e-6 and the
-same seed58/final4k budget. Actual discarded CPU/CUDA checks and independent
-saved-state audits pass; production has started. The primary learned contrast
+same seed58/final4k budget. Both production stages and independent saved-state
+audits are complete. The [full FP32 evaluation is running](results/v95-adc-training-complete-and-evaluation-launch-v1.json),
+with lower-noise native views queued behind all seven panels. The primary learned contrast
 uses a projected V98 EMA export versus projected V99, so the known inference
 policy alone cannot count as a training gain. Full quality and native review
 remain pending; the working reference stays V43.
