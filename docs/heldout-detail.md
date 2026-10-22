@@ -11,7 +11,7 @@ these model outputs. They cover mixed contrast, including weak fine structures;
 they are not a set of globally low-contrast images. Their exact source IDs are
 absent from the training cohort. This small diagnostic complements the
 [full photographic and camera results](current-model.md). Both continuations
-are complete; their broader matched evaluation is running.
+and their [full matched primary panels](v84-curated-quality-review.md) are complete.
 
 Each cell is an unchanged **160×160 native-pixel crop** at the8×-binned evaluation
 resolution. Open the original PNG at100%; a browser may fit the board to its
@@ -41,7 +41,8 @@ quality target. These means describe four selected240-pixel interiors, not the
 full427 benchmark or real-camera quality.
 [Complete V101 per-case scores and viewed-image receipt](results/heldout-detail-V101-final-v1.json).
 The planned final endpoints were used without searching intermediate checkpoints.
-The [full photographic/camera evaluation is running](quality-first-training.md).
+The [completed full photographic/camera comparison](v84-curated-quality-review.md)
+confirms a smaller widespread photographic gain, with camera means close to V84.
 
 All three learned checkpoints here retain their original output policy. The
 [optional ADC-only site correction](adc-consistency.md) is evaluated separately;

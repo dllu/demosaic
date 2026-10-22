@@ -1,8 +1,9 @@
 # GFX100S qualitative comparisons
 
 **Current comparisons include V84 and both completed V100/V101 continuations**,
-with RawNIND on the standing train/platform scene. V101's selected-photo gains
-are useful progress, but these real-capture results look close across the three
+with RawNIND on the standing train/platform scene. V101 is the current
+recommended checkpoint after its [completed photographic gain](v84-curated-quality-review.md);
+these real-capture results look close across the three
 learned checkpoints. They retain more coherent fence strands and cleaner
 building rails than RawNIND here. Foliage remains smooth, and saturated-light
 shapes/boundaries remain areas to improve.
@@ -95,9 +96,9 @@ are source observations, rather than independent model-selection cases.
 
 ## Reproduce and extend the comparisons
 
-Complete 101.996MP comparisons are queued for V84, final V100/V101 and RawNIND
-with CFA-channel input gain, after the running quality evaluation. Both training
-runs have completed their fixed10k endpoints.
+Complete 101.996MP exports are running for V84, final V100/V101 and RawNIND
+with CFA-channel input gain. The seven-panel quality evaluation and both fixed10k
+training runs have completed; the full-frame worker started after their owners exited.
 The run uses IEEE FP32, tile512/overlap64/B4, and exports linear-camera RGB16,
 tagged sRGB16 and overviews. Six native regions cover the four standing crops
 plus the neon sign and illuminated platform. Outputs will be in

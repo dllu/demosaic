@@ -5,10 +5,12 @@
     "known_CFA_PSNR": "4 scenes/8 pairs/72 crops, scene-balanced measured-CFA PSNR",
     "unseen_CFA_PSNR": "5 scenes/10 pairs/90 crops, scene-balanced measured-CFA PSNR"
   },
-  "working_reference": "V84 is the preferred development baseline; V43 is a historical comparator",
+  "working_reference": "V101 is the preferred development baseline; V43 is a historical comparator",
   "model_selection": {
     "path": "configs/current-model.json",
-    "sha256": "c36a963c2435f06f812747df93472ea5e7850059f6c07f5f98d43a05155a8e09"
+    "sha256": "c36a963c2435f06f812747df93472ea5e7850059f6c07f5f98d43a05155a8e09",
+    "preferred_version": 84,
+    "explicit_recommendation_override": 101
   },
   "sources": [
     {
@@ -175,6 +177,15 @@
         99
       ],
       "report": "v95-adc-training-quality-review.md"
+    },
+    {
+      "path": "docs/results/v84-curated-quality-primary-statistics-v1.json",
+      "sha256": "c443cac0079ff2bda2f349f16464129b2d680c4e2941add5a08e06da2f10a857",
+      "versions": [
+        100,
+        101
+      ],
+      "report": "v84-curated-quality-review.md"
     }
   ],
   "points": [
@@ -4801,6 +4812,218 @@
       },
       "known_CFA_PSNR": 54.31940110524496,
       "unseen_CFA_PSNR": 53.721649932861325
+    },
+    {
+      "version": 100,
+      "checkpoint_sha256": "4b689fb187b13df72fbf79ebd46f98cf7361c3ca8a97fb1f7afee940b249ad3e",
+      "endpoint": "step-10000",
+      "step": 10000,
+      "report": "v84-curated-quality-review.md",
+      "source": "v84-curated-quality-primary-statistics-v1.json",
+      "photo_srgb_PSNR": 36.47264050480194,
+      "evaluation_metadata": {
+        "full427": {
+          "sources": 427,
+          "protocol": {
+            "patterns": [
+              "RGGB",
+              "BGGR",
+              "GRBG",
+              "GBRG"
+            ],
+            "white_balance": [
+              2.0,
+              1.0,
+              1.5
+            ],
+            "camera_to_srgb": [
+              [
+                1.1176470588,
+                -0.0588235294,
+                -0.0588235294
+              ],
+              [
+                -0.0588235294,
+                1.1176470588,
+                -0.0588235294
+              ],
+              [
+                -0.0588235294,
+                -0.0588235294,
+                1.1176470588
+              ]
+            ],
+            "border": 8,
+            "seed": 20261014,
+            "conditions": [
+              {
+                "name": "adc-only",
+                "shot": 0.0,
+                "read": 0.0,
+                "exposure": 1.0
+              },
+              {
+                "name": "iso100-prior",
+                "shot": 2e-05,
+                "read": 1.6e-09,
+                "exposure": 1.0
+              },
+              {
+                "name": "iso1600-prior",
+                "shot": 0.00032,
+                "read": 4.096e-07,
+                "exposure": 1.0
+              },
+              {
+                "name": "iso12800-prior",
+                "shot": 0.00256,
+                "read": 2.62144e-05,
+                "exposure": 1.0
+              },
+              {
+                "name": "shadows",
+                "shot": 0.00064,
+                "read": 1.6384e-06,
+                "exposure": 0.125
+              },
+              {
+                "name": "highlights",
+                "shot": 8e-05,
+                "read": 2.56e-08,
+                "exposure": 4.0
+              },
+              {
+                "name": "legacy-noise",
+                "shot": 0.001,
+                "read": 1e-06,
+                "exposure": 1.0
+              }
+            ]
+          },
+          "observation_and_metrics_precision": "IEEE FP32",
+          "manifest_sha256": "7cc76f460019582eeec519b332e9f9f53e030bdf579e2f27b915916a741cce0d",
+          "patch_size": 256,
+          "native_crop": true
+        },
+        "known": {
+          "protocol": "Mean crops within each noisy capture, mean captures within scene, mean scenes. Bootstrap scenes, not crops.",
+          "precision": "float32",
+          "prepared_sha256": "9fe6a7dc3981024516b421a67de6a81b819f57d9d52b19838458e783b0cb744c"
+        },
+        "unseen": {
+          "protocol": "Mean crops within each noisy capture, mean captures within scene, mean scenes. Bootstrap scenes, not crops.",
+          "precision": "float32",
+          "prepared_sha256": "2d78a7ba2a56e24af3f05b32ea01277853dc135dff3834810766b7c5ed2f0fa7"
+        }
+      },
+      "known_CFA_PSNR": 54.178455405765106,
+      "unseen_CFA_PSNR": 53.89613655938042
+    },
+    {
+      "version": 101,
+      "checkpoint_sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+      "endpoint": "step-10000",
+      "step": 10000,
+      "report": "v84-curated-quality-review.md",
+      "source": "v84-curated-quality-primary-statistics-v1.json",
+      "photo_srgb_PSNR": 36.50347114574475,
+      "evaluation_metadata": {
+        "full427": {
+          "sources": 427,
+          "protocol": {
+            "patterns": [
+              "RGGB",
+              "BGGR",
+              "GRBG",
+              "GBRG"
+            ],
+            "white_balance": [
+              2.0,
+              1.0,
+              1.5
+            ],
+            "camera_to_srgb": [
+              [
+                1.1176470588,
+                -0.0588235294,
+                -0.0588235294
+              ],
+              [
+                -0.0588235294,
+                1.1176470588,
+                -0.0588235294
+              ],
+              [
+                -0.0588235294,
+                -0.0588235294,
+                1.1176470588
+              ]
+            ],
+            "border": 8,
+            "seed": 20261014,
+            "conditions": [
+              {
+                "name": "adc-only",
+                "shot": 0.0,
+                "read": 0.0,
+                "exposure": 1.0
+              },
+              {
+                "name": "iso100-prior",
+                "shot": 2e-05,
+                "read": 1.6e-09,
+                "exposure": 1.0
+              },
+              {
+                "name": "iso1600-prior",
+                "shot": 0.00032,
+                "read": 4.096e-07,
+                "exposure": 1.0
+              },
+              {
+                "name": "iso12800-prior",
+                "shot": 0.00256,
+                "read": 2.62144e-05,
+                "exposure": 1.0
+              },
+              {
+                "name": "shadows",
+                "shot": 0.00064,
+                "read": 1.6384e-06,
+                "exposure": 0.125
+              },
+              {
+                "name": "highlights",
+                "shot": 8e-05,
+                "read": 2.56e-08,
+                "exposure": 4.0
+              },
+              {
+                "name": "legacy-noise",
+                "shot": 0.001,
+                "read": 1e-06,
+                "exposure": 1.0
+              }
+            ]
+          },
+          "observation_and_metrics_precision": "IEEE FP32",
+          "manifest_sha256": "7cc76f460019582eeec519b332e9f9f53e030bdf579e2f27b915916a741cce0d",
+          "patch_size": 256,
+          "native_crop": true
+        },
+        "known": {
+          "protocol": "Mean crops within each noisy capture, mean captures within scene, mean scenes. Bootstrap scenes, not crops.",
+          "precision": "float32",
+          "prepared_sha256": "9fe6a7dc3981024516b421a67de6a81b819f57d9d52b19838458e783b0cb744c"
+        },
+        "unseen": {
+          "protocol": "Mean crops within each noisy capture, mean captures within scene, mean scenes. Bootstrap scenes, not crops.",
+          "precision": "float32",
+          "prepared_sha256": "2d78a7ba2a56e24af3f05b32ea01277853dc135dff3834810766b7c5ed2f0fa7"
+        }
+      },
+      "known_CFA_PSNR": 54.174040423499214,
+      "unseen_CFA_PSNR": 53.923341327243385
     }
   ]
 }

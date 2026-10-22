@@ -2,20 +2,16 @@
 
 Joint Bayer demosaicing and denoising in linear camera RGB, with physical noise
 conditioning, frozen DINOv3 features and tiled 16-bit TIFF output on NVIDIA GB10.
-**V84 is the current quality and training baseline**, using a pretrained DRUNet
-RGB trunk and DINOv3 ConvNeXt-Tiny feature pyramid. Its full-photo PSNR is
-36.44 dB, about **1.54 dB above V43**. V85 offers similar quality; V95 is a useful
-weak-detail comparison. [Current models, strengths and tradeoffs](docs/current-model.md).
+**V101 is the current quality and training baseline**, continuing V84's
+pretrained DRUNet RGB trunk and frozen DINOv3 ConvNeXt-Tiny pyramid. It reaches
+**36.503 dB** on the full photographic panel: +0.064 dB over V84 and about
++1.60 dB over V43. Camera means remain close to V84.
+[Completed results, gains and tradeoffs](docs/v84-curated-quality-review.md).
 
-Current work applies the cleaned 88,484-source Commons cohort, less optical blur
-and reviewed fine-detail examples to this stronger architecture. Useful new
-versions and image comparisons belong here as they become available. The
-[diary](diary/index.md) retains historical decisions.
-V101's completed fine-detail continuation improves all12 selected natural-detail
-cases against V84/V100, with the largest gains at low noise.
-[Current native comparisons](docs/heldout-detail.md) show its progress and remaining
-smoothing. The full matched evaluation is running; V100's
-[completed camera comparison](docs/real-camera-quality.md) has mixed results.
+The cleaned 88,484-source continuation removes optical blur and adds weak/fine
+detail examples. V101 improves source-averaged PSNR on 418/427 photos; high-noise
+texture still needs work. The [current models](docs/current-model.md) and image
+galleries reflect useful progress; the [diary](diary/index.md) retains history.
 For explicit zero-shot/read inputs, [optional site consistency](docs/adc-consistency.md)
 adds **.40dB ADC-only PSNR** with unchanged V84 weights across all427 photos/four
 CFAs; positive-noise inputs bypass it. The report includes native crops and color tradeoffs.
@@ -28,20 +24,22 @@ isolated architecture ablation.
 
 ## Current 100% crops
 
-Same noisy observation → V43 / **V84** / RawNIND → exact synthetic GT. Every cell
-is an unchanged 160×160-pixel crop at the 8×-binned evaluation resolution, with
-ISO 100 conditioning and shared display transforms. V84 preserves the fabric's
-orange color and fine suspension lines that V43 loses.
-[Source, ROI, checkpoint, noise and display metadata](docs/images/current-quality/iso100-prior/manifest.json).
-The [model guide](docs/current-model.md) also shows ADC-only and high-noise
-comparisons, where fine-detail loss remains a development target.
+Noisy observation → **V101** → exact synthetic GT, at the ISO100 prior.
+These are unchanged 160×160 crops at the 8×-binned evaluation resolution, with
+shared coordinates and display transforms. Low-noise bark/canopy gains are
+small; fine-detail loss remains at high noise.
+[Compare V84, V100, V101 and RawNIND](docs/heldout-detail.md) ·
+[source/ROI/checkpoint/noise/display metadata](docs/images/current-detail/iso100-prior/manifest.json).
 
-![ISO100 native comparisons: fabric and building](docs/images/current-quality/iso100-prior/photo-comparison.png)
+![V101 bark: noisy, restored and exact synthetic GT](docs/images/current-detail/iso100-prior/crop-51d66b3cdddaae3b.png)
 
-Sources: [Roy Egloff](https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg)
-and [Dietmar Rabich](https://commons.wikimedia.org/wiki/File:Vancouver_(BC,_Canada),_Coal_Harbour_Seaside_Park,_Blick_in_den_Himmel_--_2022_--_2158.jpg),
+![V101 forest canopy: noisy, restored and exact synthetic GT](docs/images/current-detail/iso100-prior/crop-abc01264e29efc3b.png)
+
+Sources: [Derek Ramsey](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
+[CC BY-SA 2.5](https://creativecommons.org/licenses/by-sa/2.5/), and
+[Grendelkhan](https://commons.wikimedia.org/wiki/File:Forest_covered_hills_on_Yakushima.jpg),
 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), modified by binning,
-crop, simulated noise and restoration.
+cropping, simulated noise and restoration.
 
 Real GFX100S: DSCF3879 ISO 6400 → **V101** → DSCF3880 ISO 100 f/5.6. Native160
 sensor-pixel crops, 512px inference contexts and shared +2 EV display. The last
@@ -63,7 +61,7 @@ the lockfile. DINOv3 requires approved Hugging Face access through `HF_TOKEN`.
 ```bash
 source scripts/env.sh
 uv sync --extra dev
-uv run demosaic infer /mnt/external/demosaic/models/v84-original20000.pt photo.raf \
+uv run demosaic infer /mnt/external/demosaic/models/v101-final10000.pt photo.raf \
   /mnt/external/demosaic/output/photo-linear.tiff \
   --preview /mnt/external/demosaic/output/photo-srgb.tiff \
   --shot 0.001 --read 0.000001 \

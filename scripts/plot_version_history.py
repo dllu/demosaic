@@ -80,6 +80,11 @@ STUDIES = [
         [98, 99],
         "v95-adc-training-quality-review.md",
     ),
+    (
+        "v84-curated-quality-primary-statistics-v1.json",
+        [100, 101],
+        "v84-curated-quality-review.md",
+    ),
 ]
 METRICS = {
     ("full427", "photo", "srgb_psnr"): "photo_srgb_PSNR",
@@ -232,6 +237,11 @@ def main():
         action="store_true",
         help="Recollect archived report references (requires the original local archives).",
     )
+    parser.add_argument(
+        "--preferred-version",
+        type=int,
+        help="Explicit documented recommendation while an active run pins an older selector.",
+    )
     args = parser.parse_args()
     import matplotlib
 
@@ -239,7 +249,8 @@ def main():
     import matplotlib.pyplot as plt
 
     destination = REPO / "docs/results/version-PSNR-history.json"
-    preferred = json.loads(MODEL_SELECTION.read_text())["preferred_version"]
+    selected = json.loads(MODEL_SELECTION.read_text())["preferred_version"]
+    preferred = selected if args.preferred_version is None else args.preferred_version
     if args.refresh_sources:
         points, evidence = collect()
         result = {
@@ -253,6 +264,8 @@ def main():
             "model_selection": {
                 "path": "configs/current-model.json",
                 "sha256": digest(MODEL_SELECTION),
+                "preferred_version": selected,
+                "explicit_recommendation_override": args.preferred_version,
             },
             "sources": evidence,
             "points": points,
@@ -366,7 +379,7 @@ def main():
             f"| V{p['version']} / {p['endpoint']} | {p['photo_srgb_PSNR']:.5f} | {p['known_CFA_PSNR']:.5f} | {p['unseen_CFA_PSNR']:.5f} | [Review]({p['report']}) |"
         )
     (REPO / "docs/performance-history.md").write_text(
-        f"# PSNR history\n\nV{preferred} is the current development baseline. V84/V85 improve full photographic PSNR by about1.54dB over V43 and offer useful overall quality gains. V95 has a stronger tested noisy weak-carrier response; model tradeoffs and native comparisons are in the [current model guide](current-model.md). The version number names an experiment, not a training step.\n\n![PSNR versus model version](images/version-PSNR-history.png)\n\n"
+        f"# PSNR history\n\nV{preferred} is the current development baseline. V101 continues the V84 architectural family and reaches36.50347dB, +.06351dB over V84 and about1.60dB over V43. Its camera means remain close to V84. V95 has a stronger tested noisy weak-carrier response; model tradeoffs and native comparisons are in the [current model guide](current-model.md). The version number names an experiment, not a training step.\n\n![PSNR versus model version](images/version-PSNR-history.png)\n\n"
         + result["description"]
         + f" Camera references are measured CFA samples; independently demosaiced RGB references are not exact GT. Small camera panels have scene uncertainty. The plot describes checkpoints with unequal budgets and data; use the linked comparisons to assess particular gains and weaknesses. Dashed lines show V{preferred}'s measured means. The upper panels include all {len(points)} endpoints; the lower panels omit V72/V73 RAW-native prototypes only to show the mature RGB range more clearly.\n\nAll photo points use the full fixed427-source panel, seven conditions and four CFAs. Known/unseen points balance captures within scenes, then scenes (4/5 scenes,72/90 crops). Precision, checkpoint hashes and per-source results remain in the source reports.\n\nV98/V99 use common ADC-only inference projection; only V99 trained through it. Their original V43/V95 references retain their checkpoint policies. The [completed ADC study](v95-adc-training-quality-review.md) improves ADC color but retains positive-noise color/detail weaknesses. Study-specific statistical gates do not prevent showing progress or choosing a stronger development baseline.\n\n"
         + "\n".join(rows)

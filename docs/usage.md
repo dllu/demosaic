@@ -2,17 +2,17 @@
 
 ## Current quality model
 
-Use **V84 final20k** as the development baseline:
-`/mnt/external/demosaic/models/v84-original20000.pt`. It uses DRUNet RGB
+Use **V101 final10k** as the development checkpoint:
+`/mnt/external/demosaic/models/v101-final10000.pt`. It uses DRUNet RGB
 restoration and frozen DINOv3 ConvNeXt-Tiny features. The
 [current model guide](current-model.md) records its hash, comparisons and
 alternatives; [current training](quality-first-training.md) applies the cleaned
 corpus and fine-detail recipe to this architecture. V43-specific measurements
 below retain their checkpoint labels and do not determine today's baseline.
-For explicit shot=read=0 inputs, use the
-[optional observed-site ADC export](adc-consistency.md#implementation-and-use):
-its complete427-source/four-CFA check gains .400dB with unchanged V84 weights.
-Ordinary positive-noise RAW conditioning bypasses it.
+For explicit shot=read=0 inputs, the separately tested
+[V84 observed-site ADC export](adc-consistency.md#implementation-and-use) gains
+.400dB across427 sources/four CFAs with unchanged V84 weights. That result has
+not been measured for V101; positive-noise profiles bypass the correction.
 
 ## Environment and storage
 

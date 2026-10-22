@@ -1,19 +1,26 @@
 # Current models and development baseline
 
-**V84 final20k is the preferred baseline for image quality and further training.**
-V85 is a closely matched alternative. They use the full-resolution pretrained
-DRUNet RGB trunk, physical noise anchors and a frozen official DINOv3
-ConvNeXt-Tiny feature pyramid. V43 remains a useful historical comparator.
+**V101 final10k is the preferred checkpoint for image quality and further
+training.** It continues V84's full-resolution pretrained DRUNet RGB trunk,
+physical noise anchors and frozen official DINOv3 ConvNeXt-Tiny pyramid.
+V84 remains the architectural reference; V43 is a historical comparator.
 
 | Version | Photo sRGB PSNR | Known-camera CFA PSNR | Unseen-camera CFA PSNR | Main use |
 | --- | ---: | ---: | ---: | --- |
 | V43 | 34.89934 | 54.23332 | 53.80606 | Earlier ViT-S baseline |
-| **V84** | **36.43996** | 54.17122 | 53.92823 | Preferred quality/training baseline |
+| V84 | 36.43996 | 54.17122 | 53.92823 | Strong architectural reference |
 | V85 | 36.43574 | 54.17942 | 53.93069 | Similar quality, expanded native targets |
 | V95 | 35.29553 | **54.33307** | 53.76990 | Stronger tested weak-carrier response |
 | V99 | 35.40133 | 54.31940 | 53.72165 | ADC-consistency experiment |
-| V100 | Pending | 54.17845 | 53.89614 | Curated-cohort continuation; real-camera tradeoff |
-| V101 | Pending | Pending | Pending | Fine-detail continuation; gains on selected natural photos |
+| V100 | 36.47264 | 54.17846 | 53.89614 | Curated-cohort continuation; camera tradeoff |
+| **V101** | **36.50347** | 54.17404 | 53.92334 | **Preferred quality/training checkpoint** |
+
+V101 improves photo PSNR by +.06351 dB over V84, with 418/427 source means
+improving and gains in all seven conditions. SSIM, chroma and gradient error
+also improve on the photographic mean. Its known/unseen CFA changes versus
+V84 are +.00282/−.00488 dB; both small-scene intervals include zero. These gains
+and tradeoffs support using V101 while continuing to improve real fine detail.
+[Completed matched results, intervals and native crops](v84-curated-quality-review.md).
 
 V84 gains about **1.54 dB over V43** on the full fixed photographic panel and
 has a higher unseen-camera mean. Its known-camera mean is slightly lower.
@@ -29,12 +36,11 @@ cover four/five development scenes and use measured CFA targets. Versions have
 different training budgets and data; this table compares available checkpoints,
 not an isolated architectural ablation. [Full history and provenance](performance-history.md).
 
-V100's camera values come from the completed CPU FP32 comparison with V84;
-the other rows retain their earlier CUDA results. The matched CPU values,
-scene changes and native crops are in the [real-camera guide](real-camera-quality.md).
-V100 gains .00723 dB on known4 and loses .03209 dB on unseen5. Its full-photo
-result is still pending. These mixed effects are documented alongside its
-selected-photo gains.
+V84/V100/V101 now have a complete matched CUDA IEEE FP32 photographic and
+known/unseen-camera comparison. The [camera guide](real-camera-quality.md)
+shows per-scene changes and accurately labeled AHD reference crops; it also
+preserves the earlier V84/V100 CPU report. V101 recovers most of V100's
+unseen-camera loss, while auxiliary RGB detail/color differences remain.
 
 V84's gain over V43 is larger in the low-noise conditions than the existing
 ISO 12800 gallery suggested:
@@ -56,6 +62,12 @@ Each photo's average over all 28 condition/CFA combinations improves; 24 of
 histories. [Per-condition counts, scores and provenance](results/v84-v43-photographic-comparison-v1.json).
 
 ## Native comparisons
+
+The newest [full-panel native comparison](v84-curated-quality-review.md#native-photographic-comparisons)
+contains two shared noisy/restored/GT triplets per V84/V100/V101 checkpoint.
+The [natural-detail gallery](heldout-detail.md) and README highlight V101's
+low-noise progress. The older comparisons below retain the larger V84−V43
+advance and explain the architectural choice.
 
 Each cell below is an unchanged 160×160-pixel crop. The same source coordinates,
 conditioning and display transforms apply across methods. Synthetic references
@@ -99,15 +111,15 @@ forest canopy and fur at three noise levels. It shows V84's remaining
 high-noise detail loss as well as its sharper low-noise output.
 V101's completed reduced-blur/detail continuation gains PSNR/SSIM on all12
 selected cases against V84 and the V100 control. The current gallery highlights
-V101, with low-noise gains and remaining high-noise smoothing documented. This
-is useful four-source progress; the full matched evaluation is running.
+V101, with low-noise gains and remaining high-noise smoothing documented. The
+completed full-panel comparison confirms a smaller but widespread photographic gain.
 For explicitly ADC-only inputs, use the [optional site correction](adc-consistency.md):
 it gains .400dB rendered PSNR over unchanged V84 weights across all427 photos,
 with all1,708 CFA cases improving. The complete report shows native examples
 and color/detail tradeoffs. Positive-noise profiles bypass it; the seven-condition
 values above and the original V84 training initializer remain unchanged.
-Its [complete real-camera comparison](real-camera-quality.md) is mixed;
-the full-photo comparison is still pending.
+The [complete real-camera comparison](real-camera-quality.md) records the small
+CFA changes and remaining auxiliary RGB tradeoffs.
 The [Q2, Sony a7R II and GFX50R gallery](cross-camera-qualitative.md) also
 compares V84/V100 with V43 and RawNIND on six fixed native ROIs. Those
 low-ISO captures show closer results, with the clearest RawNIND separation
@@ -124,20 +136,16 @@ entries retain the original decisions.
 
 ## Use the current checkpoint
 
-Local checkpoint: `/mnt/external/demosaic/models/v84-original20000.pt`.
-SHA256: `134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10`.
-Inference selects its final EMA; the official DINOv3 checkpoint is loaded
-separately from the local Hugging Face cache. See [usage](usage.md).
-The current loader preserves all 91 EMA tensors and the frozen DINO identity;
-a 64×64 CPU smoke matches the archived implementation bit-for-bit.
-[Selection, loader and gallery verification](results/current-model-baseline-selection-v1.json).
+Local checkpoint: `/mnt/external/demosaic/models/v101-final10000.pt`.
+SHA256: `6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3`.
+The canonical copy matches the completed training artifact byte-for-byte.
+Inference selects its final EMA; the official DINOv3 checkpoint loads separately
+from the local Hugging Face cache. See [usage](usage.md).
 
-Quality work now applies the curated 88,484-source Commons cohort and the
-fine-detail augmentation ideas to this stronger architecture. The
-[training plan](quality-first-training.md) records the current experiments.
-Keep the README, this guide and GFX comparisons updated as useful versions
-appear. Reserve the timestamped diary for chronological decisions.
-
-Full-frame RGB16 and timing measurements are checkpoint-specific. Existing V43
-full-frame measurements do not describe V84's runtime. Quality remains the
-priority; the 100MP/10s and broader state-of-the-art targets remain open.
+V100/V101 continue V84 for 10,000 updates with fresh AdamW/EMA on the cleaned
+88,484-source cohort. V101 removes optical PSFs and adds weak textures,
+photographic contrast attenuation and six reviewed detail ROIs. Their matched
+comparison tests the complete recipe, without isolating individual components.
+The [next prepared 88,477-source cohort and 32-region catalogue](corpus-source-review.md)
+are future-only. Keep current guides and comparisons updated as useful versions
+appear; the timestamped diary retains chronological decisions.

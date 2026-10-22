@@ -1,9 +1,10 @@
-# Quality training on the V84 baseline
+# Quality training in the V84 architectural family
 
-**Use V84's DRUNet RGB trunk and frozen DINOv3 ConvNeXt-Tiny feature pyramid
-as the development baseline.** V84/V85 provide the strongest completed full-photo
-scores and useful image quality. V43 remains a historical comparator;
-[current models and native examples](current-model.md) explain the choice.
+**Use V101 as the next quality-training checkpoint, retaining V84's DRUNet RGB
+trunk and frozen DINOv3 ConvNeXt-Tiny pyramid.** The completed matched comparison
+reaches 36.50347 dB photographic PSNR (+.06351 dB over V84), with gains across all
+seven conditions and camera means close to V84. Native high-noise fine-detail
+loss remains. [Results and comparisons](v84-curated-quality-review.md).
 
 ## Current comparison
 
@@ -23,8 +24,8 @@ Two continuations start from the exact final V84 EMA with fresh AdamW/EMA:
 
 [Control recipe](../configs/quality-v84-curated-control-v100.yaml) ·
 [Fine-detail recipe](../configs/quality-v84-fine-detail-v101.yaml).
-The second arm tests the complete fine-detail package. Its result will not
-attribute a gain to one component in isolation. Keeping V84's broad palette
+The second arm tests the complete fine-detail package. Its gain does not
+attribute an effect to one component in isolation. Keeping V84's broad palette
 avoids inheriting the narrower color distribution of the recent ViT-S runs.
 
 The `.15` weak subset is 15 percentage points of Commons-domain samples,
@@ -102,9 +103,10 @@ Runs: `/mnt/external/demosaic/v84-curated-quality-20261022-v2/`.
 All four discarded CPU/CUDA smokes passed, and both production runs completed
 10,000 updates from the same exact V84 weights. Both original trainers/controllers
 have exited. Actual owner/phase status is in the local `status.json`.
-The [complete V84/V100 CPU camera comparison](real-camera-quality.md) is available:
-a small known-camera gain and unseen-camera loss, with close native outputs.
-The broader V84/V100/V101 photographic/camera study is now running.
+The [completed V84/V100/V101 primary report](v84-curated-quality-review.md)
+includes full427 photographic and known/unseen measured-CFA results, independently
+rebuilt source means, intervals and native crops. All seven evaluation panels
+have completed; the full-frame GFX export is running separately.
 [Original launch and verification](results/current-model-baseline-selection-v1.json).
 
 The [supplementary CPU report](results/heldout-detail-V101-final-v1.json) compares
@@ -118,8 +120,8 @@ below. Its [queue record](results/V101-natural-detail-queue-v2.json) preserves
 the original execution setup.
 
 The evaluation queue at
-`.cache/current-quality-20261022-v1/evaluation-queue-v1/` has started the seven
-panels below after both original training owners exited. It compares V84 with
+`.cache/current-quality-20261022-v1/evaluation-queue-v1/` completed all seven
+panels after both original training owners exited. It compares V84 with
 the final V100/V101 EMAs under the same IEEE FP32 observations and includes
 RawNIND where applicable. Outputs go to
 `/mnt/external/demosaic/v84-curated-evaluation-20261022-v1/`.
@@ -128,7 +130,7 @@ and six actually viewed native triplets; production results follow separately.
 [Evaluation readiness](results/v84-recipe-evaluation-readiness-v1.json).
 
 The full-frame queue at `.cache/current-quality-20261022-v1/fullframe-v1/`
-then restores the complete GFX scene with V84, both final continuations and
+is restoring the complete GFX scene with V84, both final continuations and
 RawNIND-channel. It exports RGB16 files and six fixed native crop comparisons;
 the [GFX guide](gfx-qualitative.md) records the settings. This queue also waits
 for the preceding controller to exit before launching a GPU worker.

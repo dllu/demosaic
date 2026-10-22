@@ -1,10 +1,10 @@
 # Project goals and current evidence
 
-**V84 is the current development baseline**, with V85 a closely matched
-alternative. The full-photo result is about1.54dB above V43. Current work trains
-that stronger architecture on the curated corpus and fine-detail recipe.
-[Current model choices](current-model.md) and the [README](../README.md) show
-useful progress; individual study gates do not freeze those recommendations.
+**V101 is the current development checkpoint in V84's architectural family.**
+Its full-photo result is 36.50347 dB, +.06351dB over V84 and about 1.60 dB above V43.
+Camera CFA means remain close to V84, with high-noise fine-detail loss still open.
+[Current choices](current-model.md) and the [README](../README.md) show useful
+progress; individual study gates do not freeze those recommendations.
 
 The broader objective in [PROMPT](../PROMPT.md) remains active. Quality has
 priority over speed. The current [GFX gallery](gfx-qualitative.md) includes
@@ -12,7 +12,7 @@ V84/V100/V101 on all six fixed regions; their real-capture differences remain sm
 
 | Goal | Current evidence | Remaining work |
 | --- | --- | --- |
-| Excellent joint demosaicing and denoising | V84/V85:36.44dB on the full photographic panel, competitive measured-CFA results and cleaner native geometry | Improve fine texture, color tails and real-photo results; make strong benchmark claims only when their comparisons are complete |
+| Excellent joint demosaicing and denoising | V101:36.50347dB on full427; close measured-CFA means and cleaner geometry than RawNIND in current native comparisons | Improve fine texture, color tails and real-photo results; make strong benchmark claims only when their comparisons are complete |
 | Much better real-photo quality than RawNIND | Current GFX comparisons show more coherent mesh/rails and less grain with the learned models | Broaden actual scene/camera comparisons and recover more foliage/weak detail |
 | 16-bit and practical full-resolution output | Shared inference/export pipeline has produced verified101.996MP RGB16 TIFFs; V84's exact EMA loads through current code | Keep full-frame quality/precision/timing measurements specific to the selected checkpoint |
 | 100MP within10s on GB10 | Full-frame timing/export infrastructure exists; the target is still open | Measure and optimize the selected quality model after quality work |
@@ -30,7 +30,11 @@ curated88,484 Commons, original native128/paired32 and its broad flat palette.
 The matched recipe comparison tests original augmentation against zero optical
 PSFs, weak synthetic textures, photographic contrast attenuation and reviewed
 ROI sampling. Both budgets are10,000 updates; short CPU/CUDA smokes are discarded.
-Current status and artifact locations are in the training guide.
+Both fixed endpoints and all seven evaluation panels have completed. V101
+reaches 36.50347 dB on full427 (+.06351 dB over V84), with camera CFA means close
+to V84 and remaining real fine-detail loss. It is the next quality checkpoint.
+[Completed primary results](v84-curated-quality-review.md). Full-frame exports
+are running separately; status and artifact locations are in the training guide.
 
 Actual source-quality review covers 570 sources: 539 retained/31 withheld, after
 a complete loss/proxy scan of88,508 training sources. The active runs use the
@@ -43,9 +47,9 @@ V101's completed continuation improves PSNR/SSIM on all12 selected cases against
 V84 and V100 in the [natural-detail gallery](heldout-detail.md), with small visible
 gains and remaining high-noise smoothing. Current
 [Q2/Sony/GFX50R comparisons](cross-camera-qualitative.md) show V84/V100 beside
-V43 and RawNIND. The [complete V84/V100 CPU camera comparison](real-camera-quality.md)
-finds a small known-camera gain and unseen-camera loss. The full joint
-evaluation with V101 is running; the full-frame GFX export follows it.
+V43 and RawNIND. The [completed three-model camera comparison](real-camera-quality.md)
+shows V101 CFA means close to V84, with auxiliary RGB tradeoffs. All seven
+quality panels have finished; full-frame GFX exports are running separately.
 The [16-scene paired test reserve](paired-reserved-test.md) is prepared and
 validated, with no model inference or scores; it remains outside model selection.
 

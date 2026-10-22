@@ -1,10 +1,10 @@
 # Experiment index
 
-**V84 is the current development baseline; V85 is a close alternative.**
-Their36.44dB photographic result is about1.54dB above V43, with competitive
-camera results and useful native-image quality. V95 remains a useful comparison
-for weak detail. Study-specific statistical gates do not freeze the global
-baseline or prevent showing good versions as progress is made.
+**V101 is the current development checkpoint in V84's architectural family.**
+Its 36.50347 dB photographic result is +.06351 dB over V84 and about 1.60 dB above V43,
+with close measured-CFA means and remaining high-noise texture loss. V95 remains
+a useful weak-detail comparison. Study-specific statistical gates do not freeze
+the baseline or prevent publishing useful gains and tradeoffs.
 
 [Current model choices and images](current-model.md) ·
 [Current quality training](quality-first-training.md) ·
@@ -43,9 +43,11 @@ retains V84's augmentation; the other tests zero optical PSFs, weak synthetic
 textures, photographic contrast attenuation and reviewed fine-detail ROIs.
 The architecture, broad flat palette, native128 and paired32 targets stay fixed.
 See the [recipes, execution status and evaluation approach](quality-first-training.md).
-V101 improves all12 selected natural-detail PSNR cases against both V84/V100;
-the [current crop gallery](heldout-detail.md) shows the small gains and remaining
-smoothing while the complete matched comparison runs.
+V101 reaches **36.50347dB** on full427, +.06351dB over V84, improving 418/427
+source means and all seven condition means. Known/unseen CFA means remain close
+to V84. The [completed primary report](v84-curated-quality-review.md) and
+[current native gallery](heldout-detail.md) show gains and remaining smoothing.
+V101 is the next training checkpoint in V84’s architectural family.
 
 The source scan covers88,508 training images, with570 actually reviewed and 31
 withheld/excluded. Completed runs used the earlier 24 exclusions; seven more and

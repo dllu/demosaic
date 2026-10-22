@@ -1,115 +1,125 @@
 # Current real-camera quality
 
-The completed V84/V100 CPU comparison shows a **small known-camera mean gain
-and an unseen-camera mean loss** after the V100 continuation. Their native
-outputs look close. The full photographic/GFX comparison with V101 is still
-pending; use these results alongside the [natural-detail examples](heldout-detail.md)
-and [current model guide](current-model.md).
+**V101 keeps measured-CFA means close to V84 while improving the photographic
+panel.** Its known4 change is +.00282dB and unseen5 change is −.00488dB; both
+scene intervals include zero. V100 has a small known gain and a clearer unseen
+loss. Native learned outputs look close, with low-amplitude detail still smoothed.
+[Current checkpoint choice](current-model.md) · [Full continuation study](v84-curated-quality-review.md).
 
 | Development panel | Method | Measured-CFA PSNR | Auxiliary AHD RGB PSNR | AHD SSIM |
 | --- | --- | ---: | ---: | ---: |
-| Known4 | V84 | 54.17122 | 40.03507 | .932060 |
-| Known4 | V100 | 54.17845 | 40.04376 | .932116 |
-| Known4 | RawNIND global | 54.06859 | 39.67805 | .928811 |
-| Known4 | RawNIND channel | 54.08474 | 39.71710 | .928832 |
-| Unseen5 | V84 | 53.92822 | 38.86148 | .924142 |
-| Unseen5 | V100 | 53.89614 | 38.82767 | .923695 |
-| Unseen5 | RawNIND global | 53.56220 | 38.14484 | .918380 |
-| Unseen5 | RawNIND channel | 53.76822 | 38.56191 | .922127 |
+| Known4 | V84 | 54.17122 | 40.03507 | 0.932059 |
+| Known4 | V100 | 54.17846 | 40.04376 | 0.932116 |
+| Known4 | **V101** | 54.17404 | 40.04254 | 0.932157 |
+| Known4 | RawNIND channel | 54.08474 | 39.71710 | 0.928831 |
+| Known4 | RawNIND global | 54.06860 | 39.67805 | 0.928811 |
+| Unseen5 | V84 | 53.92823 | 38.86148 | 0.924142 |
+| Unseen5 | V100 | 53.89614 | 38.82767 | 0.923695 |
+| Unseen5 | **V101** | 53.92334 | 38.83063 | 0.923922 |
+| Unseen5 | RawNIND channel | 53.76822 | 38.56191 | 0.922127 |
+| Unseen5 | RawNIND global | 53.56220 | 38.14484 | 0.918380 |
 
-These are fresh CPU FP32 results, B2, on all 72 known-camera and 90 unseen-camera
-prepared crops: 8/10 noisy captures across 4/5 scenes. Means balance crops within
-capture, captures within scene, then scenes. Both RawNIND gains fit observed
-noisy CFA only. Its publisher ADC normalization preserves signed/unclipped input.
-Primary references are measured low-ISO CFA after shared registration/gain;
-the auxiliary calibrated AHD RGB is **not exact RGB GT**.
+These are matched CUDA IEEE FP32 results, B2, on all 72 known and 90 unseen
+prepared native512 crops: 8/10 noisy captures across 4/5 scenes. Means balance
+crops within capture, captures within scene, then scenes. Both RawNIND gain
+variants fit observed noisy CFA only and preserve signed/unclipped publisher
+input normalization. Primary references are measured low-ISO CFA after shared
+registration/gain. Auxiliary calibrated AHD RGB is **not exact RGB GT**.
 
-[Complete scores, scene changes, intervals and viewed crops](results/current-real-camera-V84-V100-CPU-v1.json).
+[Complete source means, intervals, checkpoint hashes and independent row audit](results/v84-curated-quality-primary-statistics-v1.json).
+The prior [V84/V100 CPU report](results/current-real-camera-V84-V100-CPU-v1.json)
+remains unchanged; the current table uses the completed three-model CUDA study.
 
 ## Changes across scenes
 
-V100−V84 measured-CFA PSNR is +.00723 dB on known4, with a scene-bootstrap
-95% interval [−.01354,+.04003]. The plate scene improves +.05620 dB; the other
-three fall by .00116–.01766 dB. On unseen5, all five scene means fall:
-overall −.03209 dB [−.05112,−.01212], with individual changes from −.00480
-to −.06802 dB. Auxiliary RGB PSNR and SSIM also decrease on the unseen mean.
+| Panel / scene | V100−V84 CFA PSNR | V101−V84 CFA PSNR |
+| --- | ---: | ---: |
+| known / 2pilesofplates | +0.05620 | +0.03587 |
+| known / 7D-1 | -0.01766 | -0.02926 |
+| known / MuseeL-CopteArch-C500D | -0.00116 | +0.01263 |
+| known / D60-2 | -0.00845 | -0.00798 |
+| unseen / LucieB_3apples | -0.00962 | +0.01430 |
+| unseen / LucieB_Coulicoco | -0.06802 | -0.10289 |
+| unseen / LucieB_bedroom_tapestry | -0.04142 | -0.03418 |
+| unseen / LucieB_stick_figurine | -0.00480 | +0.07215 |
+| unseen / LucieB_top_of_Expedit | -0.03659 | +0.02620 |
 
-The continuation therefore has mixed real-camera effects alongside its small
-gains on the four selected synthetic-photo contexts. It changes the cohort,
-optimizer state and training budget relative to V84; this does not isolate a
-cleaning-only effect. V100/V101 share their initializer, cohort and schedule
-for the planned comparison of the complete fine-detail package.
+V101−V84 known4 change has a scene-bootstrap 95% interval [−.01878,+.02491]dB;
+unseen5 is [−.05601,+.04220]dB. Two known and three unseen scenes improve.
+The unseen Coulicoco change is −.10289dB; the stick figurine gains +.07215dB.
+V101 recovers most of V100's unseen loss, but auxiliary AHD RGB PSNR/SSIM still
+fall on the unseen mean. These mixed effects remain visible alongside the
+widespread synthetic-photo gain.
 
 Known/unseen names refer to this project's camera-development panels. RawNIND
-may have trained on development scenes. These small scene counts and separate
+may have trained on development scenes. Small scene counts and different
 training histories do not establish broad real-photo superiority or SOTA.
-The [prepared publisher test reserve](paired-reserved-test.md) remains unscored
-and outside model selection.
+The [publisher test reserve](paired-reserved-test.md) remains unscored and
+outside model selection.
 
 ## Native comparisons
 
-Every cell is an unchanged 160×160 sensor-pixel crop. Noisy, restored and AHD
-reference pixels use identical coordinates, WB, matrix and ×1 display exposure.
-Open the original PNG at 100% if the browser scales it. All methods share the
-same noisy/reference pixels; PNGs are RGB8 previews of floating-point evaluation.
+Columns: noisy Malvar, V84, V100, **V101**, RawNIND channel and AHD reference.
+Every cell is an unchanged 160×160 sensor-pixel crop. Shared coordinates, WB,
+matrix, exposure ×1 and noisy/reference pixels match exactly across methods.
+Open the original PNG at 100%; previews are RGB8, metrics use float predictions.
 
-Known-camera examples, ISO 12800: plate edges/curved feature and color patches.
-V84/V100 look close, with a clearer thin curve than RawNIND on the plate crop.
-Soft boundaries and broad smooth regions remain.
+Known-camera examples at ISO12800 show plate boundaries and color patches.
+The learned models preserve a clearer thin curve than RawNIND, with soft
+surfaces and boundaries remaining. The checkpoints look close.
 
-![Known cameras: noisy, V84, V100, RawNIND channel and nonexact AHD reference](images/current-real-quality/known/comparison.png)
+![Known cameras: noisy, V84, V100, V101, RawNIND and nonexact AHD reference](images/current-quality-v101/known/comparison.png)
 
-[Known source triplets, weights, noise and ROI records](images/current-real-quality/known/manifest.json).
+[Known source triplets, full weights, noise and ROI records](images/current-quality-v101/known/manifest.json).
 
-Unseen-camera examples: LucieB_3apples at ISO 6400 and LucieB_Coulicoco at
-ISO 12800. The learned models retain more low-amplitude spatial variation in
-Coulicoco than RawNIND. V84 and V100 remain close. The AHD reference retains
-noise, so these views do not prove every retained fluctuation is true texture.
+Unseen examples are LucieB_3apples at ISO6400 and LucieB_Coulicoco at ISO12800.
+The learned outputs retain more low-amplitude variation than RawNIND in the
+second crop. The AHD reference also retains noise; every visible fluctuation
+cannot be assumed to be true texture.
 
-![Unseen cameras: noisy, V84, V100, RawNIND channel and nonexact AHD reference](images/current-real-quality/unseen/comparison.png)
+![Unseen cameras: noisy, V84, V100, V101, RawNIND and nonexact AHD reference](images/current-quality-v101/unseen/comparison.png)
 
-[Unseen source triplets, weights, noise and ROI records](images/current-real-quality/unseen/manifest.json).
-All 16 source triplets, including both RawNIND gain variants, are retained.
-Both original review boards were actually viewed: 24 native cells. The two
-published layouts repeat 20 of those cells without resizing.
+[Unseen source triplets, full weights, noise and ROI records](images/current-quality-v101/unseen/manifest.json).
+All 24 cells on these two boards were actually viewed and checked against the
+copied source triplets without resizing. Two triplets per learned checkpoint
+per panel are provided, with real references labeled accurately.
 
 ## Reproduction and scope
 
-The fixed final EMAs are V84 original20000 and V100 continuation10000,
-without intermediate/best-checkpoint selection. SHA256s:
+Final EMAs are V84 original20000 and V100/V101 continuation10000. Full SHA256s
+are in the [continuation report](v84-curated-quality-review.md#checkpoints-and-next-work)
+and every crop sidecar. No intermediate checkpoint search selected these endpoints.
+RawNIND weights: `c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0`.
 
-- V84: `134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10`.
-- V100: `4b689fb187b13df72fbf79ebd46f98cf7361c3ca8a97fb1f7afee940b249ad3e`.
-- RawNIND: `c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0`.
+Metrics use the [32,32,448,448] interior of each prepared 512 context; displayed
+crops use [176,176,160,160]. Noise is the existing per-capture input-only Haar fit
+or disclosed ISO fallback, with exact coefficients in each triplet. No per-method
+reference exposure fit is performed.
 
-Metrics use the [32,32,448,448] interior of each prepared 512-pixel context. Display
-uses its [176,176,160,160] center. Conditioning is the existing per-capture
-input-only Haar fit or disclosed ISO fallback; full coefficients are in each
-triplet's metadata. No reference exposure fitting is performed per method.
-
-After sourcing `scripts/env.sh`, run the CPU evaluator into a fresh directory:
+After sourcing `scripts/env.sh`, rerun into a fresh directory:
 
 ```bash
 uv run --no-sync python scripts/evaluate_paired_raw.py \
   /mnt/external/demosaic/models/v84-original20000.pt \
   /mnt/external/demosaic/v84-curated-quality-20261022-v2/train/V100/last.pt \
+  /mnt/external/demosaic/models/v101-final10000.pt \
   --prepared /mnt/external/demosaic/evaluation/paired-raw-development-prepared-v1/manifest.json \
   --rawnind /mnt/external/demosaic/references/rawnind \
-  --device cpu --precision float32 --batch-size 2 \
-  --output /mnt/external/demosaic/V100-camera-CPU-replay-known
+  --device cuda --precision float32 --batch-size 2 \
+  --output /mnt/external/demosaic/V101-camera-replay-known
 ```
 
-Use `paired-unseen-development-prepared-v1/manifest.json` for the other panel.
-The completed job used the copied numerical implementation from
+Use `paired-unseen-development-prepared-v1/manifest.json` for unseen5. The
+completed job uses the copied numerical source in
 `.cache/current-quality-20261022-v1/evaluation-queue-v1/work/`.
-Results: `/mnt/external/demosaic/V100-camera-CPU-20261022-v1/`.
-The independent check rebuilds all 84 hierarchical means from 1,134 per-crop
-records. Inputs, weights and source files stay unchanged; the evaluator exited
-successfully before this report. This CPU comparison does not replace the
-queued full V84/V100/V101 GPU study or full-frame measurements.
+Outputs: `/mnt/external/demosaic/v84-curated-evaluation-20261022-v1/{known,unseen}/`.
+Independent aggregation reproduces every reported hierarchical mean from all
+1,296 case rows across both panels. Inputs/weights remain unchanged and both
+stage owners exited successfully before publication. Full-frame GFX operation
+is evaluated separately.
 
 Images: [Raw Natural Image Noise Dataset](https://doi.org/10.14428/DVN/DEQCIM),
 Benoit Brummer and Christophe De Vleeschouwer (2025),
-[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0).
-`7D-1` is credited to Peter Wemmert under CC0 in the cached `permissions.txt`.
-Panels are modified by crop, display conversion and restoration.
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+`7D-1`: Peter Wemmert, CC0, per cached `permissions.txt`.
+Modifications are cropping, display conversion and restoration.
