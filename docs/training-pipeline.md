@@ -200,6 +200,55 @@ That probe used fraction0.5 solely to exercise the reader. It ran no denoising
 model, optimizer or sensor-noise simulation. These are implementation checks;
 the six-region sampling policy has no trained quality result yet.
 
+## Current recipe sampling and targets
+
+The V101 recipe keeps `.20` total synthetic and `.10` flat shares within the
+Commons domain. `weak_texture_fraction: .15` takes 15 percentage points from
+that synthetic total; it is roughly 75% of synthetic Commons samples, not 15%
+of that component. Photographic contrast attenuation has probability `.25`
+conditional on a photographic sample. Reviewed-region sampling has its own
+conditional probability `.05`.
+
+Reconstructing the exact seed59 full10,000-update/B16 schedule gives:
+
+| Source type | Scheduled examples | Share of all examples |
+| --- | ---: | ---: |
+| Photographic Commons, including reviewed regions | 55,843 | 34.902% |
+| Weak synthetic | 11,970 | 7.481% |
+| Other synthetic | 4,106 | 2.566% |
+| Flat fields | 8,049 | 5.031% |
+| Native RAW synthetic | 40,512 | 25.320% |
+| Registered paired RAW | 39,520 | 24.700% |
+
+The schedule selects 4,998 Commons, 2,532 native and 2,470 paired steps.
+Within the photographic Commons row, 2,844 examples use reviewed regions:
+5.093% of those photographs and 1.778% of all160,000 examples. Each of the six
+reviewed sources is scheduled443–517 times. These are deterministic schedule
+counts, not a claim that the still-running model has consumed the entire run.
+
+Actual clean-target reconstruction at each source's earliest scheduled index
+confirms finite FP32 native256 tensors and zero optical-PSF calls in those
+six reads. One draw applies linear contrast attenuation with scale `.191659`;
+the other five do not. The reader mixes toward the patch's per-channel mean,
+preserving geometry while reducing contrast. The captured before/after pair
+matches that affine operation within2e-7 in linear units.
+
+![Native clean training inputs: lichen before/after attenuation and unchanged fishing-net target](images/training-v101-targets-native.png)
+
+Each panel is an unchanged160×160 crop at [48,48,160,160] inside its augmented
+256-pixel target, with shared ×1 exposure and linear-sRGB→sRGB display.
+These are clean training-data illustrations, without sensor noise or a neural
+prediction. They do not establish improved trained detail retention.
+[Source/ROI/sample-index/display metadata](images/training-v101-targets-native.json) ·
+[Counts, frozen reader references and actual viewing](results/training-v101-sampling-and-targets-v1.json).
+All six reconstructed contexts were inspected through12 native before/after
+cells; the illustration repeats four of those cells without resizing.
+
+Sources: [GT1976, pale beard lichen](https://commons.wikimedia.org/wiki/File:2017-07-20_%28153%29_Unidentified_Usnea_%28beard_lichen%29_at_Zedlacher_Paradies,_Matrei_in_Osttirol,_Austria.jpg)
+and [Basile Morin, fishing net](https://commons.wikimedia.org/wiki/File:Sitting_boy_weaving_a_fishing_net_in_Laos.jpg),
+[CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0), modified through
+binning, cropping, training geometry and the indicated contrast attenuation.
+
 ## Batch-size sweep
 
 The current joint RAW-kernel model has its own

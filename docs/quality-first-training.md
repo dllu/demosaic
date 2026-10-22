@@ -14,7 +14,7 @@ Two continuations start from the exact final V84 EMA with fresh AdamW/EMA:
 | Commons training pool | Curated 88,484 | Same |
 | Native / paired targets | Original 128 / 32 | Same |
 | Optical PSF probability, Commons and native | .25 | 0 |
-| Weak synthetic texture share within existing .20 synthetic share | 0 | .15 |
+| Synthetic share of Commons-domain samples / weak subset | .20 / 0 | .20 / .15 |
 | Photographic contrast attenuation probability | 0 | .25 |
 | Reviewed ROI probability, conditional on a photographic Commons sample | 0 | .05 |
 | Flat palette | Original V84 .10 share /8 chroma stops | Same |
@@ -26,6 +26,13 @@ Two continuations start from the exact final V84 EMA with fresh AdamW/EMA:
 The second arm tests the complete fine-detail package. Its result will not
 attribute a gain to one component in isolation. Keeping V84's broad palette
 avoids inheriting the narrower color distribution of the recent ViT-S runs.
+
+The `.15` weak subset is 15 percentage points of Commons-domain samples,
+roughly 75% of their synthetic component. It is about 7.5% of all training
+examples after domain selection. The `.05` reviewed-ROI probability is
+conditional on a photographic Commons sample, about 1.8% of all examples.
+[Exact seed59 schedule counts and actual clean-target views](training-pipeline.md#current-recipe-sampling-and-targets)
+make these different denominators explicit.
 
 Both use 4× caches, geometry before final area2 reduction, selected-domain loading,
 the unchanged physical noise priors, sensor-valid camera supervision and
