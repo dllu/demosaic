@@ -53,17 +53,19 @@ def key(row):
     )
 
 
-def anchors(base, additional):
+def anchors(base, additional, *, workspace_cache=None):
     selected = [dict(row, pool="Commons-heldout") for row in base if row["split"] in HELDOUT]
     selected += [dict(row) for row in additional if row["pool"] in {"native150", "protected45"}]
     if len({(row["pool"], row["id"]) for row in selected}) != len(selected):
         raise ValueError("Ambiguous source identities in the retrieval bank")
+    cache_root = (
+        Path(workspace_cache).resolve()
+        if workspace_cache is not None
+        else Path(__file__).resolve().parents[1] / ".cache"
+    )
     for row in selected:
         path = Path(row["cache"]).resolve()
-        if not (
-            path.is_relative_to("/mnt/external/demosaic")
-            or path.is_relative_to(Path(__file__).resolve().parents[1] / ".cache")
-        ):
+        if not (path.is_relative_to("/mnt/external/demosaic") or path.is_relative_to(cache_root)):
             raise ValueError("Content review must use SSD caches, never original HDD paths")
         if (
             row["bin_factor"] != 8
@@ -87,11 +89,13 @@ def reused_locations(selected, pools):
     return [lookup.get(key(row)) for row in selected]
 
 
-def resources(root, started=None):
+def resources(root, started=None, *, reserve_gib=548):
+    if type(reserve_gib) is not int or reserve_gib < 256:
+        raise ValueError("External disk reserve must be an integer of at least256GiB")
     if psutil.virtual_memory().available < 48 * 2**30:
         raise RuntimeError("Available RAM below48GiB content-review reserve")
-    if shutil.disk_usage(root).free < 548 * 2**30:
-        raise RuntimeError("External free space below548GiB content-review reserve")
+    if shutil.disk_usage(root).free < reserve_gib * 2**30:
+        raise RuntimeError(f"External free space below{reserve_gib}GiB content-review reserve")
     if started is not None and time.monotonic() - started > 3600:
         raise RuntimeError("One-hour content-bank bound reached")
 

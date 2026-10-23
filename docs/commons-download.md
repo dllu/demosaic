@@ -57,6 +57,25 @@ engineering thumbnails were viewed, not the new source population. Rendering
 alone never supplies manual source-quality review or data admission.
 Root:`/mnt/external/demosaic/commons-post4000-contact-queue-20261022-v1/`.
 
+The source-overlap reference bank is complete: **10,287 cached vectors**,
+comprising10,092 prior Commons holdouts,150 native-camera and45 protected views.
+It reuses existing vectors instead of re-encoding the bank. All cached image
+hashes/headers passed; independent checks match every vector's IEEE bits to
+its source and preserve the full10,087 current holdout IDs plus five earlier
+protected holdout hashes. Both original8-image CPU encoder replays are exact.
+
+Preliminary title matching covers3,418 new train-bucket queries against10,092
+prior and391 new heldout anchors:972 title risks,11 uninformative titles and
+2,435 without a title flag. These are review cues. Final title decisions must
+be recomputed after protected/duplicate screening changes the candidate set.
+A live source-only DINO query queue waits for the exact preparer's successful
+two-scale/cache/area/protected receipt and exit, then retrieves neighbors for
+the new sources. Its two-query fixture reproduces all vectors, ten neighbors
+and the original contact PNG exactly; all seven fixture source pairs were
+viewed. [Completed bank, source coverage, tests and actual query launch](results/commons-post4000-content-readiness-v1.json).
+Root:`/mnt/external/demosaic/commons-post4000-content-retrieval-20261022-v1/`.
+No new source-quality decision or training admission follows from these checks.
+
 Current root: `/mnt/external/demosaic/commons-post4000-preparation-20261022-v1/`.
 `launch.json` records the exact timeout supervisor; `status.json` records the
 worker's PID/creation time and stage. Results will appear under`work/outputs/`.

@@ -72,12 +72,12 @@ def nearest(query, database, identities, count=3):
     return result
 
 
-def freeze(producer, bank, titles, root, engineering=False):
+def freeze(producer, bank, titles, root, engineering=False, *, reserve_gib=548):
     repo = Path(__file__).resolve().parents[1]
     root = Path(root).resolve()
     if root.exists() or not root.is_relative_to("/mnt/external/demosaic"):
         raise ValueError("Use a fresh external demosaic retrieval root")
-    resources(root.parent)
+    resources(root.parent, reserve_gib=reserve_gib)
     production = read(producer)
     state = read(producer.parent / "status.json")
     receipt = read(bank)
@@ -134,6 +134,7 @@ def freeze(producer, bank, titles, root, engineering=False):
         "queue_seconds": 25200,
         "resource_wait_seconds": 3600,
         "stable_resource_seconds": 30,
+        "reserve_gib": reserve_gib,
     }
     save(root / "plan.json", plan)
     return ref(root / "plan.json")
@@ -228,7 +229,7 @@ def run(path):
         status("waiting-for-stable-content-retrieval-resources")
         while True:
             try:
-                resources(root)
+                resources(root, reserve_gib=plan.get("reserve_gib", 548))
                 stable = stable or time.monotonic()
                 if time.monotonic() - stable >= plan["stable_resource_seconds"]:
                     break
@@ -269,7 +270,7 @@ def run(path):
             shape=(len(records), 768),
         )
         for first in range(0, len(records), BATCH):
-            resources(root, started)
+            resources(root, started, reserve_gib=plan.get("reserve_gib", 548))
             batch = records[first : first + BATCH]
             output = encode(batch)
             if first == 0:
@@ -302,7 +303,7 @@ def run(path):
             database = reference_vectors[indices]
             identities = [reference_rows[i]["id"] for i in indices]
             for first in range(0, len(queries), 32):
-                resources(root, started)
+                resources(root, started, reserve_gib=plan.get("reserve_gib", 548))
                 local = queries[first : first + 32]
                 found = nearest(vectors[local], database, identities)
                 for qi, ranked in zip(local, found, strict=True):
@@ -346,7 +347,7 @@ def run(path):
         ]
         contacts = []
         for first in range(0, len(chosen), 12):
-            resources(root, started)
+            resources(root, started, reserve_gib=plan.get("reserve_gib", 548))
             sheet = Image.new("RGB", (1200, 920), "#e8e8e8")
             draw = ImageDraw.Draw(sheet)
             for local, entry in enumerate(chosen[first : first + 12]):
@@ -425,12 +426,22 @@ if __name__ == "__main__":
     for name in ["producer", "bank", "titles", "root"]:
         prepare.add_argument("--" + name, type=Path, required=True)
     prepare.add_argument("--engineering", action="store_true")
+    prepare.add_argument("--reserve-gib", type=int, default=548)
     execute = sub.add_parser("run")
     execute.add_argument("plan", type=Path)
     args = parser.parse_args()
     if args.command == "freeze":
         print(
-            json.dumps(freeze(args.producer, args.bank, args.titles, args.root, args.engineering))
+            json.dumps(
+                freeze(
+                    args.producer,
+                    args.bank,
+                    args.titles,
+                    args.root,
+                    args.engineering,
+                    reserve_gib=args.reserve_gib,
+                )
+            )
         )
     else:
         run(args.plan)

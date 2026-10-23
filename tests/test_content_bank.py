@@ -87,3 +87,28 @@ def test_shared_resource_guards_stop_before_inference(bank, monkeypatch, ram, di
     monkeypatch.setattr(bank.shutil, "disk_usage", lambda _: SimpleNamespace(free=disk * 2**30))
     with pytest.raises(RuntimeError):
         bank.resources("/mnt/external")
+
+
+@pytest.mark.parametrize("reserve", [255, -1, True, 288.5, float("nan")])
+def test_invalid_explicit_reserves_fail_before_resource_access(bank, monkeypatch, reserve):
+    def unexpected(*args):
+        pytest.fail("Invalid reserve must fail before resource access")
+
+    monkeypatch.setattr(bank.psutil, "virtual_memory", unexpected)
+    with pytest.raises(ValueError, match="at least256GiB"):
+        bank.resources(None, reserve_gib=reserve)
+
+
+def test_explicit_reserve_preserves_exact_disk_and_memory_boundaries(bank, monkeypatch):
+    available = 48 * 2**30
+    free = 288 * 2**30
+    monkeypatch.setattr(bank.psutil, "virtual_memory", lambda: SimpleNamespace(available=available))
+    monkeypatch.setattr(bank.shutil, "disk_usage", lambda _: SimpleNamespace(free=free))
+    bank.resources("/mnt/external", reserve_gib=288)
+    free -= 1
+    with pytest.raises(RuntimeError, match="288GiB"):
+        bank.resources("/mnt/external", reserve_gib=288)
+    free += 1
+    available -= 1
+    with pytest.raises(RuntimeError, match="RAM"):
+        bank.resources("/mnt/external", reserve_gib=288)
