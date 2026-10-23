@@ -6,8 +6,9 @@ updates with exactly matching model, EMA, AdamW, Python/CPU/CUDA RNG states,
 inputs, and logged losses. The default remains `throughput-v1`.
 
 The implementation checks below used the recorded V63 study setup. Current
-[V102/V103 training](quality-first-training.md) instead starts from V101 on the
-88,477-source cleaned cohort; its own launch receipt binds the actual settings.
+[V104 training](quality-first-training.md) starts from V102 on the reviewed
+90,872-source cohort; its own launch receipt binds actual settings. Completed
+V102/V103 used V101 and88,477 sources.
 
 The genuine V63 initializer, official frozen DINOv3 ConvNeXt-tiny, original
 4,000-update learning-rate horizon, B16/native256/BF16, channels-last layout,

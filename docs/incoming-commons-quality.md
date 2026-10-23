@@ -12,8 +12,9 @@ sources have validation hash buckets; they receive quality flags and remain
 reserved. The two earlier malformed-ICC failures remain separately withheld.
 Originals and prepared caches are unchanged. The completed protected, duplicate,
 title and content/series review now admits **2,395 additions** to a separately
-frozen **90,872-source future training cohort**. Current V102/V103 inputs stay
-fixed. Validation/test remain 2,303/2,255 with their original records and order.
+frozen **90,872-source training cohort**,now used by the
+[V104 continuation from V102](quality-first-training.md#active-v104-cleaned-corpus-continuation).
+Completed V102/V103 inputs remain fixed. Validation/test remain 2,303/2,255 with their original records and order.
 [Completed freeze, independent audit and actual CPU reader](results/commons-post4000-reviewed-v1.json).
 
 Most thumbnail flags cleared under native inspection. The opposing door

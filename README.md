@@ -10,8 +10,8 @@ quality; V102 has lower ADC flat-color error and stronger tested weak texture.
 [Completed results, native comparisons and tradeoffs](docs/v102-v103-quality-review.md).
 
 The zero-blur/detail recipe improves425/427 photographic source means over V101.
-Fine high-noise texture and real foliage still need work. The next reviewed
-corpus adds2,395 eligible photos, bringing training to90,872 sources.
+Fine high-noise texture and real foliage still need work. V104 is training on the reviewed larger
+corpus:2,395 eligible additions,bringing training to90,872 sources.
 [Current models](docs/current-model.md) · [Source-quality review](docs/incoming-commons-quality.md) ·
 [Historical diary](diary/index.md).
 For explicit zero-shot/read inputs, [optional site consistency](docs/adc-consistency.md)

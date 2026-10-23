@@ -7,14 +7,15 @@ gains.50990dB over8×-then-geometry on all427 photos. On the actual RGB pipeline
 batch32 is only1.3% faster than16 while using roughly twice the CUDA allocation.
 Details and limitations are recorded below.
 
-Current [V102/V103 quality continuations](quality-first-training.md) start
-from V101 on the separate 88,477-source Commons cohort, keeping 128 native and 32
-paired captures. Both retain the zero-PSF/weak-detail recipe, with six versus 32
-reviewed regions at the same conditional 5% probability. Completed V100/V101
-used the frozen 88,484-source cohort; V101 removed optical PSFs and added the
-original six ROIs. The [source-quality guide](corpus-source-review.md) records
-which cohort each experiment uses. Later measurements retain their actual
-source pools and architecture labels.
+Current [V104 quality training](quality-first-training.md) starts from V102 EMA
+on the reviewed90,872-source cohort,retaining128 native/32 paired targets,
+zero optical PSFs,weak textures,photographic contrast attenuation and the same
+six reviewed regions. The [completed V102/V103 study](v102-v103-quality-review.md)
+compared six/32 regions at the same5% conditional-photo probability on88,477
+sources; its photo difference was small. Earlier V100/V101 used88,484 sources.
+[Source review](incoming-commons-quality.md) records new eligible photos and
+frozen cohort boundaries. Later measurements retain their actual source pools
+and architecture labels.
 
 The completed [spectral](spectral-original4k-review.md) and
 [late RGB](late-rgb-original4k-review.md) trials use native 256×256/B16 and all88,508
@@ -207,7 +208,8 @@ That probe used fraction0.5 solely to exercise the reader. It ran no denoising
 model, optimizer or sensor-noise simulation. These are implementation checks;
 V101 now has trained evidence for its complete recipe package; the ROI-only
 effect is not isolated. The expanded 32-source catalogue has reader/data proof,
-with the V102/V103 ROI comparison still running. Completed V102 final20k shows
+and the [completed V102/V103 comparison](v102-v103-quality-review.md) shows
+a tiny mixed ROI effect. V102 final20k also shows
 [selected-detail progress](heldout-detail.md) using the original six regions;
 it does not measure the expanded32-region effect.
 

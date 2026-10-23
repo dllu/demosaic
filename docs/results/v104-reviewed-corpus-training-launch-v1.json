@@ -1,0 +1,359 @@
+{
+  "status": "V104-production-started-after-both-discarded-smokes-passed",
+  "recorded_local": "2026-10-23T09:42:24.358450-07:00",
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-corpus-training-preparation-v1/publish-launch-v1.py",
+    "sha256": "ddbe29affb121a72ba546252693c30785212b2daa1a1ebefdcfe53c32906a80c"
+  },
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-corpus-training-v1/plan.json",
+    "sha256": "383da795a2d0bdb75f9900155c2f5d7fb84e74bb3609e44018fbad028290bd8f"
+  },
+  "launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-corpus-training-v1/launch.json",
+    "sha256": "f2dcc9a531ed07c3fa19c530a059fe086ec32e335c73aa766d2ed36897dcea32"
+  },
+  "parent": {
+    "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+    "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a"
+  },
+  "parent_step": 20000,
+  "recipe": {
+    "path": "/home/dllu/proj/demosaic/configs/quality-v102-reviewed-corpus-v104.yaml",
+    "sha256": "72894d8cbac5fde39923a525cc44c4380b23c484a9ceaf5e4a1e13f2aba32b4c"
+  },
+  "corpus": {
+    "path": "/mnt/external/demosaic/commons-post4000-reviewed-20261022-v1/manifest4.jsonl",
+    "sha256": "a68450954e5ed7a1c45da3349c7007faf3a608c9b8a4dd3fb1c16f3882ce277b"
+  },
+  "reviewed_ROIs": {
+    "path": "/home/dllu/proj/demosaic/configs/low-contrast-training-rois-six-reviewed90872-v4.json",
+    "sha256": "d585f6620a394330beec8323c950ae92d7138c4ccc19b83645119350e32e51d7"
+  },
+  "preparation": {
+    "receipt": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-corpus-training-preparation-v1/preparation.json",
+      "sha256": "4124942c939298dbb0cd82c5d4a49150978c5dc99c76ea0e185ffdcd3a1638f8"
+    },
+    "status": "prepared-single-V104-cleaned-corpus-continuation-not-yet-trained",
+    "recorded_local": "2026-10-23T09:32:37.494839-07:00",
+    "recipe": {
+      "path": "/home/dllu/proj/demosaic/configs/quality-v102-reviewed-corpus-v104.yaml",
+      "sha256": "72894d8cbac5fde39923a525cc44c4380b23c484a9ceaf5e4a1e13f2aba32b4c"
+    },
+    "prior_recipe": {
+      "path": "/home/dllu/proj/demosaic/configs/quality-v101-detail-six-v102.yaml",
+      "sha256": "59628d96983e9f536eb76a7f45479a789e51ad956aff3c96543b0568cd15570f"
+    },
+    "catalogue": {
+      "path": "/home/dllu/proj/demosaic/configs/low-contrast-training-rois-six-reviewed90872-v4.json",
+      "sha256": "d585f6620a394330beec8323c950ae92d7138c4ccc19b83645119350e32e51d7"
+    },
+    "prior_catalogue": {
+      "path": "/home/dllu/proj/demosaic/configs/low-contrast-training-rois-control-v3.json",
+      "sha256": "79a456457947204eb144374b8efc1ed4e18bbafcdf60c328ce8ceee3285c5d08"
+    },
+    "corpus": {
+      "path": "/mnt/external/demosaic/commons-post4000-reviewed-20261022-v1/manifest4.jsonl",
+      "sha256": "a68450954e5ed7a1c45da3349c7007faf3a608c9b8a4dd3fb1c16f3882ce277b"
+    },
+    "training_sources": 90872,
+    "prior_training_sources": 88477,
+    "newly_eligible_sources": 2395,
+    "all6_ROI_objects_identical": true,
+    "actual_ROI_reader": {
+      "regions": 6,
+      "all_cache_and_crop_and_target_hashes_bounds_membership_exact": true
+    },
+    "only_recipe_changes": [
+      "experiment_notes",
+      "initialize_parent",
+      "manifest",
+      "reviewed_roi_catalogue",
+      "run",
+      "seed"
+    ],
+    "remaining": "Actual discarded CPU/CUDA8update integration and original fresh20k production,followed by matched evaluation and native review."
+  },
+  "controller_at_publication": {
+    "pid": 2938981,
+    "created": 1792773192.89
+  },
+  "child_at_publication": {
+    "pid": 2939389,
+    "created": 1792773283.87
+  },
+  "actual_status_at_publication": "running-quality-training",
+  "smokes": {
+    "CPU": {
+      "receipt": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-corpus-training-v1/CPU-V104-result.json",
+        "sha256": "3648ef19f8edd98d46cbf954012d8003140384309fee2b2110427d22a7f79770"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/v102-reviewed-corpus-20261023-v1/CPU/V104/last.pt",
+        "sha256": "f367be8ebd21e23af35d5c9e93b5397e52e48f6b45cd0fe3d5e4057fcc81ffc5"
+      },
+      "initialization": {
+        "initial_EMA_exact": true,
+        "DINO_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      }
+    },
+    "CUDA": {
+      "receipt": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-corpus-training-v1/CUDA-V104-result.json",
+        "sha256": "1142af15b55c6bc137cdf153d39b90abbf8deca402895b0d071ece9ccb91c4cc"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/v102-reviewed-corpus-20261023-v1/CUDA/V104/last.pt",
+        "sha256": "a4ea588126b1eebb7dd8e70a2514af987af16165fda68c4d5bbbc2d0a7b3a708"
+      },
+      "initialization": {
+        "initial_EMA_exact": true,
+        "DINO_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      }
+    }
+  },
+  "fixed_original_endpoint_updates": 20000,
+  "settings": {
+    "Commons_sources": 90872,
+    "new_eligible_sources": 2395,
+    "native_captures": 128,
+    "paired_captures": 32,
+    "seed": 61,
+    "batch": 16,
+    "patch": 256,
+    "precision": "bfloat16",
+    "lr": 1e-05,
+    "warmup_updates": 200,
+    "fresh_AdamW_EMA": true,
+    "zero_Commons_native_optical_PSF": true,
+    "unchanged_original6_ROI_objects": true,
+    "conditional_photo_ROI_probability": 0.05
+  },
+  "scheduled_source_exposure": {
+    "receipt": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-corpus-training-preparation-v1/source-coverage.json",
+      "sha256": "6989dbf83d18911f43468331d235378714d81fef5c4ee5bb059a54be06d6bfe5"
+    },
+    "status": "completed-schedule-and12-actual-source-reader-checks",
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-corpus-training-preparation-v1/audit-source-coverage-v1.py",
+      "sha256": "cd84b249c07133a606d2fe991ad7480019544910eb318cfda7dbaf1ff4e6906e"
+    },
+    "training_plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-corpus-training-v1/plan.json",
+      "sha256": "383da795a2d0bdb75f9900155c2f5d7fb84e74bb3609e44018fbad028290bd8f"
+    },
+    "recipe": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-corpus-training-v1/work/configs/train-V104.yaml",
+      "sha256": "9ed9e6a055d640ffb0c6716c249b47a2a22fdf5bab4ea6614f7c56cd77196969"
+    },
+    "corpus": {
+      "path": "/mnt/external/demosaic/commons-post4000-reviewed-20261022-v1/manifest4.jsonl",
+      "sha256": "a68450954e5ed7a1c45da3349c7007faf3a608c9b8a4dd3fb1c16f3882ce277b"
+    },
+    "eligible_sources": 90872,
+    "new_eligible_sources": 2395,
+    "source_types_within_Commons": {
+      "photo": 113058,
+      "weak-synthetic": 24049,
+      "other-synthetic": 8090,
+      "flat": 16387
+    },
+    "photographic_examples": 113058,
+    "unique_photo_sources_scheduled": 62976,
+    "unique_new_sources_scheduled": 1645,
+    "new_source_examples_scheduled": 2811,
+    "ROI_examples": 5672,
+    "ROI_examples_per_source": {
+      "6aa3e94bda502cbbfc8232a5b788f498d39bb32a": 954,
+      "423c08bacc74f7569806786d83446992a4f568d3": 960,
+      "ed29eebff6412c37655292926a402425225126a6": 989,
+      "9b4e6f950b1d9b51b917392412f3d48e8931f7f3": 943,
+      "7b56d20ffd219cf8ecc485f7b594d9712aa376fd": 891,
+      "a4ae82e1e5b6abaf2401b0ed145c61aca301c094": 935
+    },
+    "actual_reader_trace": [
+      {
+        "sample_index": 81,
+        "source_id": "47a5bd3c905a4ef441f7ef42dee28de8048a62ff",
+        "new_source": true,
+        "reviewed_ROI": false,
+        "opened_path": "/mnt/external/demosaic/commons-post4000-preparation-20261022-v1/work/outputs/prepared4/images/47/47a5bd3c905a4ef441f7ef42dee28de8048a62ff.npy",
+        "finite_repeat_exact": true,
+        "target_float32_sha256": "e146b3f40ada334a587f253d56241b40386e5fb6839c78a4a4934ec56d234643"
+      },
+      {
+        "sample_index": 61169,
+        "source_id": "1682dd0af24833ce9ebf158a8620adc0b76e6b10",
+        "new_source": true,
+        "reviewed_ROI": false,
+        "opened_path": "/mnt/external/demosaic/commons-post4000-preparation-20261022-v1/work/outputs/prepared4/images/16/1682dd0af24833ce9ebf158a8620adc0b76e6b10.npy",
+        "finite_repeat_exact": true,
+        "target_float32_sha256": "5a0bac1e69c806277bad68df980be779d3e7783d818bd532c5919ff2057ef761"
+      },
+      {
+        "sample_index": 129127,
+        "source_id": "05070904ceacc4e7e943b6d2f560eb6143b13ea5",
+        "new_source": true,
+        "reviewed_ROI": false,
+        "opened_path": "/mnt/external/demosaic/commons-post4000-preparation-20261022-v1/work/outputs/prepared4/images/05/05070904ceacc4e7e943b6d2f560eb6143b13ea5.npy",
+        "finite_repeat_exact": true,
+        "target_float32_sha256": "bb7b43a7c918b565ab52dc07446611866dc3506e4b95e8d2b29f9a7c76268262"
+      },
+      {
+        "sample_index": 195354,
+        "source_id": "ad95b73e4c37e12138457af4a47283e055995726",
+        "new_source": true,
+        "reviewed_ROI": false,
+        "opened_path": "/mnt/external/demosaic/commons-post4000-preparation-20261022-v1/work/outputs/prepared4/images/ad/ad95b73e4c37e12138457af4a47283e055995726.npy",
+        "finite_repeat_exact": true,
+        "target_float32_sha256": "8d716d2f36f63072d557308d062e4b0ccc21128fb0821d3c5c0bfa857f8d0502"
+      },
+      {
+        "sample_index": 258042,
+        "source_id": "ec7b47c97d40533b25e103949b305015688210e4",
+        "new_source": true,
+        "reviewed_ROI": false,
+        "opened_path": "/mnt/external/demosaic/commons-post4000-preparation-20261022-v1/work/outputs/prepared4/images/ec/ec7b47c97d40533b25e103949b305015688210e4.npy",
+        "finite_repeat_exact": true,
+        "target_float32_sha256": "5f730fc1d9fe5f8ce2a554bd8eb442a203f765efd0b69dddc3e42ceac49bc483"
+      },
+      {
+        "sample_index": 319926,
+        "source_id": "85724efa291ee7d867ebb7e95c8891bc41fb39fd",
+        "new_source": true,
+        "reviewed_ROI": false,
+        "opened_path": "/mnt/external/demosaic/commons-post4000-preparation-20261022-v1/work/outputs/prepared4/images/85/85724efa291ee7d867ebb7e95c8891bc41fb39fd.npy",
+        "finite_repeat_exact": true,
+        "target_float32_sha256": "1a9077b362fcda5babb33e3f021262cb3a24605978686209b02f9ff724ef742b"
+      },
+      {
+        "sample_index": 68,
+        "source_id": "6aa3e94bda502cbbfc8232a5b788f498d39bb32a",
+        "new_source": false,
+        "reviewed_ROI": true,
+        "opened_path": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/6a/6aa3e94bda502cbbfc8232a5b788f498d39bb32a.npy",
+        "finite_repeat_exact": true,
+        "target_float32_sha256": "74f123788d2587c74b72b9704b09ae281eafb3f0d3350de04573939e175014a1"
+      },
+      {
+        "sample_index": 91,
+        "source_id": "423c08bacc74f7569806786d83446992a4f568d3",
+        "new_source": false,
+        "reviewed_ROI": true,
+        "opened_path": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/42/423c08bacc74f7569806786d83446992a4f568d3.npy",
+        "finite_repeat_exact": true,
+        "target_float32_sha256": "81cc2c83708956ebcd3883a1b68e59342fc1032ce5d7fe6b959f14f81579096c"
+      },
+      {
+        "sample_index": 162,
+        "source_id": "ed29eebff6412c37655292926a402425225126a6",
+        "new_source": false,
+        "reviewed_ROI": true,
+        "opened_path": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/ed/ed29eebff6412c37655292926a402425225126a6.npy",
+        "finite_repeat_exact": true,
+        "target_float32_sha256": "4f7efffba25f8699c7cd1eeddf6a9faad2d29309a81d47b3f133b55c5fc557d4"
+      },
+      {
+        "sample_index": 422,
+        "source_id": "9b4e6f950b1d9b51b917392412f3d48e8931f7f3",
+        "new_source": false,
+        "reviewed_ROI": true,
+        "opened_path": "/mnt/external/demosaic/commons-incoming-20261016-v3-quarantine/extension4/prepared4/images/9b/9b4e6f950b1d9b51b917392412f3d48e8931f7f3.npy",
+        "finite_repeat_exact": true,
+        "target_float32_sha256": "874c70c1545880b218aa7660a49ec061649b08eb2f2c60e5a8835f42757f3c3b"
+      },
+      {
+        "sample_index": 439,
+        "source_id": "7b56d20ffd219cf8ecc485f7b594d9712aa376fd",
+        "new_source": false,
+        "reviewed_ROI": true,
+        "opened_path": "/mnt/external/demosaic/commons-incoming-20261017-v4-quarantine/extension4/prepared4/images/7b/7b56d20ffd219cf8ecc485f7b594d9712aa376fd.npy",
+        "finite_repeat_exact": true,
+        "target_float32_sha256": "f1a6ec95396d5c3bfc1ad9b90822264242988b71667c9a689128a4c609e2c580"
+      },
+      {
+        "sample_index": 453,
+        "source_id": "a4ae82e1e5b6abaf2401b0ed145c61aca301c094",
+        "new_source": false,
+        "reviewed_ROI": true,
+        "opened_path": "/mnt/external/demosaic/commons-incoming-20261016-v2-quarantine/extension4/prepared4/images/a4/a4ae82e1e5b6abaf2401b0ed145c61aca301c094.npy",
+        "finite_repeat_exact": true,
+        "target_float32_sha256": "8d62facf4e6f2abddee9b43bfc9645c9b43390c7afcb732cd0ee3747b361445e"
+      }
+    ],
+    "Torch_RNG_unchanged": true,
+    "CUDA_initialized": false,
+    "scope": "Full fixed20k source schedule,not evidence that the active trainer has completed it. No denoiser or optimizer here. Six new-source and all6 unchanged-ROI actual reader examples,repeated exactly. Synthetic/domain draws omitted before photo retrieval as in the actual reader."
+  },
+  "queued_evaluation": {
+    "seven_panels": {
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-corpus-evaluation-queue-v1/plan.json",
+        "sha256": "6c83c760efecbbd6450c74e5e4c26bb9e0069adb93cca3c63206f2620877b428"
+      },
+      "launch": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-corpus-evaluation-queue-v1/launch.json",
+        "sha256": "e19ea6c6a63198ac6d26ae002969bd2896c85b903366a70509128f5bf43b4241"
+      },
+      "observed_status": "waiting-for-owned-quality-training"
+    },
+    "fullframe": {
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-corpus-fullframe-v1/plan.json",
+        "sha256": "fc165670e61d96248c25e64f035ecf1fec28ca5cf021b2f7cc8a5f7638a4483a"
+      },
+      "launch": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-corpus-fullframe-v1/launch.json",
+        "sha256": "4d22fbc989ea04e1301b1e3822cd1efe4ed0ef68b9af52c82c070cf8b0843d15"
+      },
+      "observed_status": "waiting-for-quality-evaluation"
+    },
+    "discarded_CPU_reporting": {
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-corpus-reporting-CPU-v1/plan.json",
+        "sha256": "cbc0a977c068b18b11d704923e177b47b5b5ac197cd643b20de3869437ce2785"
+      },
+      "launch": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-corpus-reporting-CPU-v1/launch.json",
+        "sha256": "4e3afad5d2b439776c60237c793b2a9c4022189c4614b4693f7eb713271126dd"
+      },
+      "observed_status": "completed-quality-recipe-evaluation-awaiting-image-review"
+    }
+  },
+  "discarded_CPU_reporting": {
+    "summary": {
+      "path": "/mnt/external/demosaic/v102-reviewed-corpus-reporting-CPU-20261023-v1/photo/summary.json",
+      "sha256": "d2f05fe4d7c5075f9c4cec7dda27d019adb13301e4f5cf96dc71ac12ea6db604"
+    },
+    "case_rows": {
+      "path": "/mnt/external/demosaic/v102-reviewed-corpus-reporting-CPU-20261023-v1/photo/per-image.jsonl",
+      "sha256": "e3387508e311250637885996f0240874ae1900a4f7e8b3eea11f472c84c25f27"
+    },
+    "row_count": 60,
+    "unchanged_native_triplets": 4,
+    "native_board": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-corpus-training-preparation-v1/CPU-reporting-native.png",
+      "sha256": "6749bfd2800f86a2b92c4c125ea4529003a27214aa544f0c50236dc42895c74e"
+    },
+    "board_receipt": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-corpus-training-preparation-v1/CPU-reporting-native.json",
+      "sha256": "f367b0f4f25c25bc0a2d48ffc4eb4cbc0093f45b58c22440d02b5b7b56b6f730"
+    },
+    "native_cells_actually_viewed": 8,
+    "observations": "Parent and8-update smoke restore coherently; fine fabric cords remain absent. This checks loader/reporting integration only and is not a trained quality gain.",
+    "precision": "CPU FP32",
+    "CUDA_visible": false
+  },
+  "resource_floors": {
+    "startup_available_RAM_GiB": 48,
+    "trainer_stop_available_RAM_GiB": 24,
+    "per_worker_CUDA_cap_GiB": 24,
+    "root_startup_free_GiB": 32,
+    "external_startup_free_GiB": 256,
+    "no_automatic_retries": true
+  },
+  "scope": "One prospective20k continuation from V102 on newly reviewed90872 corpus. Budget,seed and corpus differ from parent; this is not isolated corpus causation. No production quality result or recommendation change until completed matched evidence and actual native review. V102 remains preferred. Sources read-only,protected evaluation captures and siblings excluded. Larger batch/speed work deferred."
+}

@@ -131,7 +131,7 @@ probability; all48 numerical modules match. The tiny photo difference gives
 little reason to expand ROI sampling unchanged. Compared with V101, budget,
 seed, LR and cohort also change; its gain cannot be attributed to data alone.
 
-Continue from V102 on the newly reviewed **90,872-source corpus**, initially
+V104 now continues from V102 on the reviewed **90,872-source corpus**, initially
 keeping its six-ROI recipe and zero blur. The new2,395 eligible arrivals add
 scene diversity; the five new eligible fine-detail sources can support a later
 controlled ROI intervention. Their quality benefit has not yet been measured.

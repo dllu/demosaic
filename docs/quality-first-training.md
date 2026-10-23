@@ -57,16 +57,53 @@ and code snapshots remain unchanged; the
 All48 numerical modules match between arms; the archive hash differs solely
 because the reviewed-ROI catalogue is frozen with the recipe.
 
-## Next cleaned-corpus continuation
+## Active V104 cleaned-corpus continuation
 
-Use the reviewed **90,872-source**4×/8× pair from the
-[incoming source review](incoming-commons-quality.md). Start from exact V102 EMA
-with fresh optimizer/EMA, initially retaining its six-ROI,zero-PSF/detail recipe.
-This tests the next quality step without adding an ROI intervention whose
-preceding six/32 comparison had little photographic effect. The2,395 newly
-eligible arrivals and five optional fine-detail sources remain separate facts:
-source diversity is ready; their trained quality benefit is unmeasured.
-Keep2,303 validation/2,255 test memberships and protected scene exclusions fixed.
+**V104 production training is running** from exact V102 final20k EMA on the
+reviewed **90,872-source**4×/8× pair. Both discarded eight-update CPU and
+CUDA checks passed, verifying exact parent EMA initialization,finite states
+and unchanged official DINO. The original20k production run starts freshly
+again with AdamW/EMA,seed61,B16/native256/BF16,LR1e-5/warmup200. Its six original
+ROI objects and5% conditional-photo probability,zero optical PSFs,weak synthetic
+textures,photo contrast attenuation,native128/paired32 remain unchanged.
+
+[Recipe](../configs/quality-v102-reviewed-corpus-v104.yaml) ·
+[Six-ROI binding](../configs/low-contrast-training-rois-six-reviewed90872-v4.json) ·
+[Actual launch,discarded smoke/report proof and source exposure](results/v104-reviewed-corpus-training-launch-v1.json).
+V102 remains the recommended inference checkpoint; V104 has no production
+quality result yet. More training,seed and data change together,so any gain
+cannot be attributed solely to the larger corpus.
+
+The fixed20k schedule contains113,058 photographic examples,62,976 unique
+photo sources and2,811 draws from1,645 newly eligible sources. Its5,672 reviewed
+ROI draws cover the same six sources. These are reconstructed full-schedule
+counts,not a claim that training has finished. Twelve actual clean-reader
+checks cover six new-source draws and all six ROIs,repeated exactly with
+finite native256 outputs and unchanged Torch RNG,no GPU or denoiser.
+
+Full427/16procedural/seven-condition/four-CFA,known4/unseen5 measured-camera,
+weak texture,color,GFX and highlights are queued after the exact original
+trainer/controller exits. Complete102MP RGB16 exports follow evaluation.
+A discarded CPU reporting integration already passed60 case rows/four triplets;
+all eight unique native board cells were actually viewed. It checks reporting,
+not model improvement. The new cohort preserves2,303 validation/2,255 test
+memberships and all protected scene exclusions.
+
+Local frozen roots under`.cache/current-quality-20261023-v1/`:
+`reviewed-corpus-training-v1/`,`reviewed-corpus-evaluation-queue-v1/`,
+`reviewed-corpus-evaluation-v1/`,`reviewed-corpus-fullframe-v1/`.
+Artifacts under`/mnt/external/demosaic/`:
+`v102-reviewed-corpus-20261023-v1/`,
+`v102-reviewed-corpus-evaluation-20261023-v1/`,
+`v102-reviewed-corpus-fullframe-20261023-v1/`.
+Startup floors are48GiB RAM,32GiB root and256GiB external free space;
+trainer stops below24GiB available RAM and CUDA allocation is capped at24GiB.
+Failures are preserved without automatic retry. Quality remains the priority.
+
+The2,395 eligible arrivals and five optional fine-detail sources are documented
+in the [incoming source review](incoming-commons-quality.md). The earlier
+six/32 ROI comparison had little photographic effect; retain the simpler six
+before adding another ROI intervention.
 
 ## Completed V100/V101 comparison
 

@@ -52,8 +52,8 @@ to V84. The [completed primary report](v84-curated-quality-review.md) and
 V102/V103 completed their20k six/32-region comparison on88,477 sources. All seven
 evaluation panels and full-frame exports finished. V102 improves425/427 source
 means over V101; the six/32 ROI effect is small and mixed across diagnostics.
-[Completed current results](v102-v103-quality-review.md). The next reviewed
-90,872-source corpus adds2,395 eligible arrivals; its benefit remains to measure.
+[Completed current results](v102-v103-quality-review.md). V104 is now training from V102 on the reviewed
+90,872-source corpus with2,395 eligible additions; its benefit remains to measure.
 [Source review and native examples](incoming-commons-quality.md).
 
 The source scan covers88,508 training images, with570 actually reviewed and 31

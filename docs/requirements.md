@@ -38,8 +38,7 @@ high-noise texture,foliage and saturated-light detail remain weaknesses.
 The next reviewed **90,872-source** corpus adds2,395 eligible arrivals. Native
 source views,duplicate/content/title/series exclusions,protected holdouts and
 actual reader checks are documented in the [incoming review](incoming-commons-quality.md).
-Start its quality continuation from V102; the larger cohort's trained benefit
-remains unmeasured. Earlier570-source/31-exclusion review and six/32-ROI studies
+V104 is training from V102 on this cohort; its trained benefit remains unmeasured. Earlier570-source/31-exclusion review and six/32-ROI studies
 retain their frozen inputs and receipts. [Training/data details](quality-first-training.md).
 
 [Current native detail](heldout-detail.md),[camera](real-camera-quality.md) and

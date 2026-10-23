@@ -7,7 +7,8 @@ V101 on full427 and raises both measured-camera means. V103 is a close
 alternative; V102 has lower ADC flat-color error and stronger tested weak texture.
 [Completed study and native comparisons](v102-v103-quality-review.md).
 All seven evaluation panels and complete102MP GFX exports have finished.
-The newly reviewed90,872-source cohort is ready for the next quality continuation.
+V104 is training from V102 on the newly reviewed90,872-source cohort; its
+production quality remains unmeasured.
 
 | Topic | Start here |
 | --- | --- |

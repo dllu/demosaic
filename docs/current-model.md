@@ -58,8 +58,9 @@ the local cache. [Current selector](../configs/current-model.json) ·
 
 V102/V103 both completed20k fresh-optimizer continuations from V101 on the
 88,477-source cohort. Only six/32 reviewed ROIs differ; zero-PSF,weak-texture,
-photographic-contrast recipes and numerical code match. Next use the cleaned
-90,872-source corpus from V102, retaining quality as the priority.
+photographic-contrast recipes and numerical code match. V104 is now training on the cleaned
+90,872-source corpus from V102, retaining quality as the priority. Its production
+quality remains unmeasured.
 [Current recipes and data](quality-first-training.md) · [Incoming source review](incoming-commons-quality.md).
 Earlier [V100/V101](v84-curated-quality-review.md) and
 [V84/V85](native-data-original20k-review.md) reports retain their results;
