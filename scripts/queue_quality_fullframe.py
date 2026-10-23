@@ -83,9 +83,9 @@ def prepare(queue_root, root, artifact_root, *, cpu_smoke=False):
         "stage_timeout_seconds": 1200 if cpu_smoke else 43200,
         "inputs": [launch["plan"], ref(queue_root / "launch.json")],
         "frozen_files": {str(p): ref(p)["sha256"] for p in (worker_file, path)},
-        "scope": "Cropped CPU512/one-tile export integration, V84 and RawNIND; no production/full-camera quality or timing claim."
+        "scope": f"Cropped CPU512/one-tile export integration, {queue.get('parent_label', 'V84')} and RawNIND; no production/full-camera quality or timing claim."
         if cpu_smoke
-        else "Complete101.996MP GFX RGB16 exports for V84 and fixed V100/V101 final EMAs, plus RawNIND:CFA-channel. IEEE FP32, tile512/overlap64/B4, cached3879/3880, original four regions plus two fixed highlight regions. Shared+2EV and independent ISO100 reference, never exact GT. No speed optimization or automatic promotion; update actual native comparisons after viewing.",
+        else f"Complete101.996MP GFX RGB16 exports for {queue.get('parent_label', 'V84')} and fixed {', '.join(queue.get('training_arms', ('V100', 'V101')))} final EMAs, plus RawNIND:CFA-channel. IEEE FP32, tile512/overlap64/B4, cached3879/3880, original four regions plus two fixed highlight regions. Shared+2EV and independent ISO100 reference, never exact GT. No speed optimization or automatic promotion; update actual native comparisons after viewing.",
     }
     save(root / "plan.json", plan)
     return root / "plan.json"
@@ -141,10 +141,26 @@ def worker(path):
     guard(training)
     state = read(Path(plan["training_root"]) / "status.json")
     if plan["cpu_smoke"]:
-        records = [{"arm": "V84", **training["parent"], "expected_lineage": {"step": 20000}}]
+        records = [
+            {
+                "arm": queue.get("parent_label", "V84"),
+                **training["parent"],
+                "expected_lineage": {"step": training.get("parent_step", 20000)},
+            }
+        ]
     else:
-        assert training_ready(state, queue["training_plan"], queue["training_controller"])
-        records, _ = checkpoints(state, training, cpu_smoke=False)
+        assert training_ready(
+            state,
+            queue["training_plan"],
+            queue["training_controller"],
+            arms=queue.get("training_arms", ("V100", "V101")),
+        )
+        records, _ = checkpoints(
+            state,
+            training,
+            cpu_smoke=False,
+            parent_label=queue.get("parent_label", "V84"),
+        )
         torch.cuda.set_per_process_memory_fraction(
             24 * 2**30 / torch.cuda.get_device_properties(0).total_memory
         )

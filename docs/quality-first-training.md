@@ -40,6 +40,34 @@ The runner reads explicit recipe lineage and snapshots its parent choice, leavin
 It waited for both full-frame owners to exit; CPU/CUDA checks and production
 retain the resource floors below, with no automatic retry.
 
+The matched evaluation and full-frame queues are now live behind these runs:
+
+- `.cache/current-quality-20261022-v1/detail-diversity-evaluation-queue-v1/`
+  waits for both fixed 20k endpoints and the original training owners to exit.
+  It then compares V101/V102/V103 in IEEE FP32 on full427 photos plus 16
+  procedural sources, seven conditions/four CFAs, known4/unseen5 measured-CFA,
+  weak textures, flat colors and the standing GFX regions plus highlights.
+- `.cache/current-quality-20261022-v1/detail-diversity-fullframe-v1/`
+  waits for all seven panels and that exact evaluation controller to finish,
+  then exports complete 102MP GFX restorations with tile512/overlap64/B4,
+  RGB16 files and six fixed native crop comparisons.
+
+Outputs are `/mnt/external/demosaic/v101-detail-diversity-evaluation-20261022-v1/`
+and `/mnt/external/demosaic/v101-detail-diversity-fullframe-20261022-v1/`.
+The actual CPU reporting smoke passed 72 score rows/six triplets, with 10 unique
+native160 cells viewed. A separate cropped 512 CPU export smoke passed four
+RGB16 TIFFs for V101/RawNIND, with four native cells viewed. Neither is a final
+quality or full-frame timing result. [Source/owner boundaries and verified readiness](results/v101-detail-diversity-evaluation-readiness-v1.json).
+
+The training archive hash includes the ROI catalogue as well as numerical code.
+The six/32 catalogues therefore have different archive IDs. Independent checks
+reconstruct those IDs and allow only `reviewed-photo-rois.json` to differ,
+matching each frozen recipe. All 48 numerical modules, other manifests, locks
+and licenses remain byte-identical; code or unrelated data drift is rejected.
+These checks preserve the experimental difference without treating it as code
+drift. Final quality still requires the completed panels and native review;
+no intermediate checkpoint or automatic promotion is selected by these queues.
+
 ## Completed V100/V101 comparison
 
 Two continuations start from the exact final V84 EMA with fresh AdamW/EMA:

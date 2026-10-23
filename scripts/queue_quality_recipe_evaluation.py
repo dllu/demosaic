@@ -1,7 +1,9 @@
-"""Evaluate V84 recipe continuations after their exact training owners finish."""
+"""Evaluate fixed recipe continuations after their exact training owners finish."""
 
 import argparse
+import hashlib
 import os
+import re
 import shutil
 import time
 from pathlib import Path
@@ -33,25 +35,80 @@ HELPERS = (
 )
 
 
-def training_ready(state, plan_ref, owner, *, is_live=live):
+def phase_keys(arms):
+    arms = tuple(arms)
+    assert arms and len(set(arms)) == len(arms)
+    assert all(re.fullmatch(r"V[1-9]\d*", arm) for arm in arms)
+    return {f"{phase}-{arm}" for phase in ("CPU", "CUDA", "train") for arm in arms}
+
+
+def training_ready(state, plan_ref, owner, *, arms=ARMS, is_live=live):
+    keys = phase_keys(arms)
     assert state["plan"] == plan_ref, "Training plan changed"
     assert state["controller"] == owner, "Training owner changed"
     assert not state["status"].startswith("failed"), state.get("error", state["status"])
-    assert set(state["completed"]) <= KEYS, "Unexpected training phase"
+    assert set(state["completed"]) <= keys, "Unexpected training phase"
     if state["status"] != TERMINAL:
         assert is_live(owner), "Training controller exited before completion"
         return False
-    assert set(state["completed"]) == KEYS, "Incomplete training coverage"
+    assert set(state["completed"]) == keys, "Incomplete training coverage"
     return not is_live(owner) and not is_live(state["child"])
 
 
-def checkpoints(state, training, *, cpu_smoke):
+def reviewed_catalogue_source_boundary(results, training, phase):
+    """An archived ROI catalogue is data; permit its declared bytes, never code drift."""
+    import yaml
+
+    snapshots, inputs = {}, []
+    for arm, result in results.items():
+        snapshot = Path(result["checkpoint"]["path"]).parent / "source" / result["source_sha256"]
+        assert snapshot.is_dir(), "Missing actual training source archive"
+        files = {p.name: ref(p) for p in snapshot.iterdir() if p.is_file()}
+        config = yaml.safe_load(Path(training["arms"][arm][phase]).read_text())
+        assert (
+            files["reviewed-photo-rois.json"]["sha256"]
+            == ref(config["reviewed_roi_catalogue"])["sha256"]
+        ), "Archived catalogue differs from the frozen recipe"
+        assert files["manifest.jsonl"]["sha256"] == ref(config["manifest"])["sha256"]
+        # train.py hashes the named payloads before separately copying manifest.jsonl.
+        digest = hashlib.sha256()
+        for name in sorted(files):
+            if name == "manifest.jsonl":
+                continue
+            digest.update(name.encode())
+            with Path(files[name]["path"]).open("rb") as stream:
+                for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+                    digest.update(chunk)
+        assert digest.hexdigest() == result["source_sha256"]
+        snapshots[arm] = files
+        inputs.extend(files.values())
+    first = next(iter(snapshots.values()))
+    assert all(set(files) == set(first) for files in snapshots.values())
+    changed = {name for name in first if len({f[name]["sha256"] for f in snapshots.values()}) != 1}
+    assert changed == {"reviewed-photo-rois.json"}, (
+        "Training source/data drift beyond the declared ROI catalogue",
+        changed,
+    )
+    for name in first:
+        if name.endswith(".py"):
+            assert (
+                first[name]["sha256"]
+                == ref(Path(training["work"]) / "src/demosaic" / name)["sha256"]
+            )
+    return inputs
+
+
+def checkpoints(state, training, *, cpu_smoke, parent_label="V84"):
     phase = "CPU" if cpu_smoke else "train"
     updates = training["smoke_updates"] if cpu_smoke else training["train_updates"]
     parent = training["parent"]
-    records = [{"arm": "V84", **parent, "expected_lineage": {"step": 20000}}]
-    inputs, sources = [], set()
-    for arm in ARMS:
+    parent_step = training.get("parent_step", 20000)
+    arms = tuple(training["arms"])
+    phase_keys(arms)
+    assert re.fullmatch(r"V[1-9]\d*", parent_label) and parent_label not in arms
+    records = [{"arm": parent_label, **parent, "expected_lineage": {"step": parent_step}}]
+    inputs, sources, results = [], set(), {}
+    for arm in arms:
         item = state["completed"][f"{phase}-{arm}"]
         assert ref(item["path"]) == item
         result = read(item["path"])
@@ -64,6 +121,7 @@ def checkpoints(state, training, *, cpu_smoke):
         assert not live(result["owner"])
         assert ref(result["checkpoint"]["path"]) == result["checkpoint"]
         sources.add(result["source_sha256"])
+        results[arm] = result
         inputs.extend((item, result["checkpoint"]))
         records.append(
             {
@@ -71,15 +129,18 @@ def checkpoints(state, training, *, cpu_smoke):
                 **result["checkpoint"],
                 "expected_lineage": {
                     "step": updates,
-                    "initialized_from": {**parent, "step": 20000},
+                    "initialized_from": {**parent, "step": parent_step},
                 },
             }
         )
-    assert len(sources) == 1, "Training arms used different numerical source"
+    if len(sources) != 1:
+        inputs.extend(reviewed_catalogue_source_boundary(results, training, phase))
     return records, inputs
 
 
-def prepare(training_root, root, evaluation_root, artifact_root, *, cpu_smoke=False):
+def prepare(
+    training_root, root, evaluation_root, artifact_root, *, cpu_smoke=False, parent_label="V84"
+):
     import json
 
     import yaml
@@ -92,15 +153,17 @@ def prepare(training_root, root, evaluation_root, artifact_root, *, cpu_smoke=Fa
     assert not artifact_root.exists() and os.path.ismount("/mnt/external")
     training_ref, launch_ref = ref(training_root / "plan.json"), ref(training_root / "launch.json")
     training, launch = read(training_ref["path"]), read(launch_ref["path"])
-    assert list(training["arms"]) == list(ARMS)
-    assert training["train_updates"] == 10000 and training["smoke_updates"] == 8
+    arms = tuple(training["arms"])
+    phase_keys(arms)
+    assert re.fullmatch(r"V[1-9]\d*", parent_label) and parent_label not in arms
+    assert training["train_updates"] >= training["smoke_updates"] == 8
     assert launch["plan"] == training_ref
     guard(training)
     state = read(training_root / "status.json")
     if cpu_smoke:
-        checkpoints(state, training, cpu_smoke=True)
+        checkpoints(state, training, cpu_smoke=True, parent_label=parent_label)
     else:
-        training_ready(state, training_ref, launch["controller"])
+        training_ready(state, training_ref, launch["controller"], arms=arms)
     root.mkdir(parents=True, exist_ok=False)
     work, trained = root / "work", Path(training["work"])
     files = [*trained.glob("src/demosaic/*.py")]
@@ -170,6 +233,8 @@ def prepare(training_root, root, evaluation_root, artifact_root, *, cpu_smoke=Fa
         "training_root": str(training_root),
         "training_plan": training_ref,
         "training_controller": launch["controller"],
+        "training_arms": list(arms),
+        "parent_label": parent_label,
         "evaluation_root": str(evaluation_root),
         "artifact_root": str(artifact_root),
         "cpu_smoke": cpu_smoke,
@@ -202,9 +267,9 @@ def prepare(training_root, root, evaluation_root, artifact_root, *, cpu_smoke=Fa
         "external_device": Path("/mnt/external").stat().st_dev,
         "inputs": inputs,
         "frozen_files": {str(p): ref(p)["sha256"] for p in work.rglob("*") if p.is_file()},
-        "scope": "Discarded CPU reporting integration using V84 and both eight-update CPU smokes; not a production quality result."
+        "scope": f"Discarded CPU reporting integration using {parent_label} and {', '.join(arms)} eight-update CPU smokes; not a production quality result."
         if cpu_smoke
-        else "V84 final20k versus fixed V100/V101 final10k EMAs. Fresh IEEE FP32 full427/16-procedural/7-condition/4-CFA, known/unseen measured-CFA, weak-detail/color and standing GFX plus highlights. Same observations and display metadata; no checkpoint selection or automatic promotion. Report useful gains and tradeoffs, then update current recommendations and native comparisons.",
+        else f"{parent_label} step{training.get('parent_step', 20000)} versus fixed {', '.join(arms)} step{training['train_updates']} EMAs. Fresh IEEE FP32 full427/16-procedural/7-condition/4-CFA, known/unseen measured-CFA, weak-detail/color and standing GFX plus highlights. Same observations and display metadata; no checkpoint selection or automatic promotion. Report useful gains and tradeoffs, then update current recommendations and native comparisons.",
     }
     save(root / "plan.json", plan)
     guard(plan)
@@ -215,7 +280,12 @@ def prepare_evaluation(plan, state):
     root, work = Path(plan["evaluation_root"]), Path(plan["work"])
     training = read(plan["training_plan"]["path"])
     guard(training)
-    records, inputs = checkpoints(state, training, cpu_smoke=plan["cpu_smoke"])
+    records, inputs = checkpoints(
+        state,
+        training,
+        cpu_smoke=plan["cpu_smoke"],
+        parent_label=plan.get("parent_label", "V84"),
+    )
     root.mkdir(parents=True, exist_ok=False)
     Path(plan["artifact_root"]).mkdir(parents=True, exist_ok=False)
     save(root / "training-boundary.json", state)
@@ -274,7 +344,10 @@ def controller(path):
         while True:
             state = read(Path(plan["training_root"]) / "status.json")
             if plan["cpu_smoke"] or training_ready(
-                state, plan["training_plan"], plan["training_controller"]
+                state,
+                plan["training_plan"],
+                plan["training_controller"],
+                arms=plan.get("training_arms", ARMS),
             ):
                 break
             assert time.monotonic() - started < plan["dependency_wait_seconds"]
@@ -300,6 +373,7 @@ if __name__ == "__main__":
     parser.add_argument("--evaluation-root", type=Path)
     parser.add_argument("--artifacts", type=Path)
     parser.add_argument("--cpu-smoke", action="store_true")
+    parser.add_argument("--parent-label", default="V84")
     args = parser.parse_args()
     if args.mode == "prepare":
         print(
@@ -309,6 +383,7 @@ if __name__ == "__main__":
                 args.evaluation_root,
                 args.artifacts,
                 cpu_smoke=args.cpu_smoke,
+                parent_label=args.parent_label,
             )
         )
     else:
