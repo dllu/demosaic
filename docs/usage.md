@@ -9,6 +9,11 @@ restoration and frozen DINOv3 ConvNeXt-Tiny features. The
 alternatives; [current training](quality-first-training.md) applies the cleaned
 corpus and fine-detail recipe to this architecture. V43-specific measurements
 below retain their checkpoint labels and do not determine today's baseline.
+The read-only `/mnt/external/demosaic/models/v102-progress5000.pt` is also
+available: its [selected-detail gains](heldout-detail.md) and
+[GFX context comparisons](gfx-qualitative.md#v102-at-5000-updates) are published
+while its original20k continuation runs. Full427/camera/full-frame coverage
+currently belongs to V101, rather than this selected progress panel.
 For explicit shot=read=0 inputs, the separately tested
 [V84 observed-site ADC export](adc-consistency.md#implementation-and-use) gains
 .400dB across427 sources/four CFAs with unchanged V84 weights. That result has
@@ -212,7 +217,8 @@ real RAW development quality, but it is still behind RawNIND. Flat-only V14 is
 rejected. See [the review and native crop comparisons](photo-refinement-review.md).
 
 The larger `configs/dino-paired-refiner-wide-v16.yaml` has completed its 5000-step
-review and supplies the current README examples. It remains behind RawNIND on
+review. Its historical crop evidence remains available; the README now shows
+the current V101/V102 family. V16 remains behind RawNIND on
 real development data. The optional `model.coarse_refinement_factor` adds a
 pooled RGB correction (factor 2/4/8/16; default 0 disables it).
 `coarse_refiner_only: true` freezes everything except that new branch and cannot

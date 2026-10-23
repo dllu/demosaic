@@ -22,7 +22,9 @@ personal photos require an explicit qualitative-reference label; see
 [the GFX scene](gfx-qualitative.md). Keep representative native comparisons in
 the README/current guides as useful versions appear, with visible failures in
 their reports. The [current real-camera guide](real-camera-quality.md) includes
-the completed V84/V100 comparison and its mixed results.
+the completed V84/V100/V101 comparison and its mixed results. The selected
+[V102@5000 progress panel](heldout-detail.md) has its own scope and does not
+replace those completed full photographic/camera results.
 
 ## Multi-condition evaluation
 

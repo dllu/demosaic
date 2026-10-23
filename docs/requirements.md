@@ -8,16 +8,17 @@ progress; individual study gates do not freeze those recommendations.
 
 The broader objective in [PROMPT](../PROMPT.md) remains active. Quality has
 priority over speed. The current [GFX gallery](gfx-qualitative.md) includes
-V84/V100/V101 on all six fixed regions; their real-capture differences remain small.
+V84/V100/V101 full-frame outputs and fixed V102@5000 CPU contexts on all six
+regions; their real-capture differences remain small.
 
 | Goal | Current evidence | Remaining work |
 | --- | --- | --- |
 | Excellent joint demosaicing and denoising | V101:36.50347dB on full427; close measured-CFA means and cleaner geometry than RawNIND in current native comparisons | Improve fine texture, color tails and real-photo results; make strong benchmark claims only when their comparisons are complete |
 | Much better real-photo quality than RawNIND | Current GFX comparisons show more coherent mesh/rails and less grain with the learned models | Broaden actual scene/camera comparisons and recover more foliage/weak detail |
-| 16-bit and practical full-resolution output | Shared inference/export pipeline has produced verified101.996MP RGB16 TIFFs; V84's exact EMA loads through current code | Keep full-frame quality/precision/timing measurements specific to the selected checkpoint |
-| 100MP within10s on GB10 | Full-frame timing/export infrastructure exists; the target is still open | Measure and optimize the selected quality model after quality work |
-| Modern DINOv3 method | V84 uses the official pinned ConvNeXt-Tiny pyramid with pretrained DRUNet RGB restoration | Continue improvements from this strong family and assess other approaches when useful |
-| Free, diverse targets and aggressive binning |88,484 curated Commons training sources;4×→geometry→area2; native/paired targets and recorded attribution | Train and assess the current V84 continuations; expand useful real fine-detail coverage |
+| 16-bit and practical full-resolution output | Verified101.996MP RGB16 TIFFs from V84/V100/V101 and RawNIND through the shared exporter | Keep full-frame quality/precision/timing measurements specific to the selected checkpoint |
+| 100MP within10s on GB10 | V101 inference/blending takes168.05s in the recorded IEEE FP32 configuration; target remains open | Optimize after improving quality |
+| Modern DINOv3 method | V101 continues the official pinned ConvNeXt-Tiny pyramid and pretrained DRUNet RGB family | Continue quality improvements and assess other approaches when useful |
+| Free, diverse targets and aggressive binning | Completed V101 uses88,484 curated Commons sources; active V102/V103 use88,477 with31 visual exclusions;4×→geometry→area2 | Compare six versus32 detail regions and review new Commons arrivals |
 | Physical noise/exposure and camera handling | Poisson/read noise, negative black-subtracted values, Bayer phases, clipping and WB/matrix conditioning are implemented | Continue testing shadows, saturated lights, color and low-noise behavior |
 | Reliable training and resource use | Source/manifest snapshots, restart checks, bounded jobs and actual CPU/CUDA operation | Monitor current runs and retain failures/results accurately |
 | Protected originals and evaluation scenes | Originals read-only; cached GFX3879/3880 and siblings excluded from training | Preserve those boundaries in new data recipes |
@@ -37,8 +38,8 @@ to V84 and remaining real fine-detail loss. It is the next quality checkpoint.
 are complete and independently verified; status and artifact locations are in the training guide.
 
 Actual source-quality review covers 570 sources: 539 retained/31 withheld, after
-a complete loss/proxy scan of88,508 training sources. The active runs use the
-earlier 24 exclusions; seven newer exclusions and a 32-region detail catalogue are
+a complete loss/proxy scan of88,508 training sources. Completed V100/V101 use the
+earlier24 exclusions; seven newer exclusions and a32-region detail catalogue are
 applied in the separate 88,477-source V102/V103 cohort. Hard or high-loss material
 is not automatically bad data. [Native source examples](corpus-source-review.md)
 show the decisions; protected holdouts and series stay fixed.
@@ -51,6 +52,10 @@ V43 and RawNIND. The [completed three-model camera comparison](real-camera-quali
 shows V101 CFA means close to V84, with auxiliary RGB tradeoffs. All seven
 quality panels and full-frame GFX exports have finished. V102/V103 now train
 from V101 with six versus 32 reviewed regions on the88,477-source cohort.
+The fixed V102@5000 progress checkpoint gains +.158/+.149/+.020dB over V101
+on the four-source ADC/ISO100/ISO12800 detail panel. Its native crops are
+published now, including remaining high-noise smoothing and close GFX results.
+Those selected12 cases do not stand for full427 or a measured-camera comparison.
 The [16-scene paired test reserve](paired-reserved-test.md) is prepared and
 validated, with no model inference or scores; it remains outside model selection.
 

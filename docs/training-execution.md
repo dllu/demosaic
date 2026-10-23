@@ -5,9 +5,13 @@ experiments. Two fresh CUDA processes complete six real mixed-domain optimizer
 updates with exactly matching model, EMA, AdamW, Python/CPU/CUDA RNG states,
 inputs, and logged losses. The default remains `throughput-v1`.
 
+The implementation checks below used the recorded V63 study setup. Current
+[V102/V103 training](quality-first-training.md) instead starts from V101 on the
+88,477-source cleaned cohort; its own launch receipt binds the actual settings.
+
 The genuine V63 initializer, official frozen DINOv3 ConvNeXt-tiny, original
 4,000-update learning-rate horizon, B16/native256/BF16, channels-last layout,
-and current Commons 84,867 / native 128 / paired 32 sources remain fixed. The first six
+and that study's Commons 84,867 / native 128 / paired 32 sources remain fixed. The first six
 domains are Commons, native, Commons, Commons, native, paired. All 99 model / 99 EMA /
 97 optimizer states and all 97 trainable gradients are finite; DINO remains frozen
 and unchanged. Peak CUDA allocation is 7.33 GiB. These short updates are discarded
