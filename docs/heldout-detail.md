@@ -10,9 +10,9 @@ The four contexts were selected by viewing clean inputs before inspecting
 these model outputs. They cover mixed contrast, including weak fine structures;
 they are not a set of globally low-contrast images. Their exact source IDs are
 absent from the training cohort. This small diagnostic complements the
-[full photographic and camera results](current-model.md). V104's full panels and
-complete GFX exports are active; V102 remains the fully evaluated overall
-baseline. The [completed V102/V103 comparison](v102-v103-quality-review.md) and
+[full photographic and camera results](v104-reviewed-corpus-quality.md). V104's full
+panels and complete GFX exports are finished; it is the positive-noise working
+baseline, with lower ADC bias and a higher unseen-camera mean retained by V102. The [completed V102/V103 comparison](v102-v103-quality-review.md) and
 earlier material comparisons remain available below.
 
 Each cell is an unchanged **160×160 native-pixel crop** at the8×-binned evaluation
@@ -67,7 +67,7 @@ The read-only local file is `/mnt/external/demosaic/models/v104-final20000.pt`.
 [Actual scores, replay checks and all 60 viewed native cells](results/V104-final20000-heldout-detail-CPU-v1.json) ·
 [Independent original 20k checkpoint/source boundary](results/V104-original20000-training-boundary-v1.json).
 The [full quality evaluation](quality-first-training.md#active-v104-cleaned-corpus-continuation)
-and complete 102MP GFX exports remain active. The loss is the original .001
+and complete 102MP GFX exports are finished. The loss is the original .001
 Charbonnier setting; the new experimental epsilon option was not used.
 
 ## V102 versus V103 on the fixed material panel

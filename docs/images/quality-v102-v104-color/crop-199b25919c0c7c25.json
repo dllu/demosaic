@@ -1,0 +1,182 @@
+{
+  "image": "crop-199b25919c0c7c25.png",
+  "caption": "V102 / V104 worst ADC case / h045-s0.98-l0.90",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Restored",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "GT (analytic)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "51a88cd3059c220384b280cefc849b72f8fcb944f8b2266ebcd223856af20dab",
+  "case": {
+    "id": "h045-s0.98-l0.90",
+    "palette": "h045-s0.98-l0.90",
+    "source": {
+      "id": "h045-s0.98-l0.90",
+      "hue_degrees": 45,
+      "saturation": 0.98,
+      "peak": 0.9,
+      "linear_srgb": [
+        0.9,
+        0.6795,
+        0.018000000000000016
+      ]
+    },
+    "condition": {
+      "name": "adc-only",
+      "shot": 0.0,
+      "read": 0.0,
+      "exposure": 1.0
+    },
+    "pattern": "RGGB",
+    "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h045-s0.98-l0.90-adc-only-RGGB.npz",
+    "sha256": "a73c65a1e6c2a207b5de6b10893943b25dd6c97b4ff487fdb2cfc4a46dd85e17",
+    "target_camera_RGB": [
+      0.42243748903274536,
+      0.6574499607086182,
+      0.06345000118017197
+    ],
+    "draws_per_pattern": 1
+  },
+  "model": {
+    "arm": "V102",
+    "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+    "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+    "expected_lineage": {
+      "step": 20000
+    },
+    "kind": "joint-checkpoint",
+    "step": 20000,
+    "label": "V102",
+    "model_config": {
+      "restoration_backbone": "pretrained-rgb",
+      "width": 64,
+      "encoder_blocks": [
+        2,
+        2,
+        4
+      ],
+      "middle_blocks": 6,
+      "decoder_blocks": [
+        2,
+        2,
+        2
+      ],
+      "attention": true,
+      "dino": true,
+      "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+      "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+      "dino_lora_rank": 0,
+      "dino_input_adapter": false,
+      "dino_feature_fusion": "convnext-pyramid",
+      "camera_conditioning": true,
+      "noise_modulation": false,
+      "physical_fp32": true,
+      "baseline": "bilinear",
+      "prior_window": 7,
+      "standardized_noise": false,
+      "noise_refinement": false,
+      "refinement_width": 24,
+      "refinement_blocks": 4,
+      "refinement_window": 63,
+      "coarse_refinement_factor": 0,
+      "coarse_refinement_width": 24,
+      "coarse_refinement_blocks": 4,
+      "coarse_refinement_window": 31,
+      "pyramid_refinement": false,
+      "pyramid_measurements": true,
+      "pyramid_width": 24,
+      "pyramid_blocks": 2,
+      "variance_stabilization": true,
+      "physical_anchors": true,
+      "rgb_processing_scale": 1,
+      "packed_detail_prior": false,
+      "rgb_hidden_autocast": false,
+      "rgb_center_camera_matrix": false,
+      "rgb_middle_skip_fp32": true,
+      "adc_cfa_projection": false,
+      "adc_cfa_projection_mode": "malvar",
+      "raw_kernel_reconstruction": false,
+      "raw_kernel_windows": [
+        1,
+        5,
+        17
+      ],
+      "raw_kernel_phase_conditioning": false,
+      "raw_directional_residual": false,
+      "raw_directional_bank_context": false,
+      "raw_directional_bank_detach_input": false,
+      "raw_spectral_residual": false,
+      "late_rgb_refinement": "none",
+      "isotropic_groups": 6,
+      "isotropic_blocks": 8,
+      "isotropic_local_width": 32,
+      "isotropic_raw_gain": 1.0,
+      "isotropic_residual_scale": 1.0
+    },
+    "compute_precision": "float32, physicalFP32",
+    "memory_format": "channels_last"
+  },
+  "ROI_xywh": [
+    48,
+    48,
+    160,
+    160
+  ],
+  "white_balance": [
+    2.0,
+    1.0,
+    1.5
+  ],
+  "camera_to_srgb": [
+    [
+      1.1176470518112183,
+      -0.05882352963089943,
+      -0.05882352963089943
+    ],
+    [
+      -0.05882352963089943,
+      1.1176470518112183,
+      -0.05882352963089943
+    ],
+    [
+      -0.05882352963089943,
+      -0.05882352963089943,
+      1.1176470518112183
+    ]
+  ],
+  "conditioning": {
+    "name": "adc-only",
+    "shot": 0.0,
+    "read": 0.0,
+    "exposure": 1.0
+  },
+  "display_exposure": 1.0,
+  "reference": "Exact uniform analytic target, not a real photo.",
+  "selection_basis": "Posthoc maximum V104 ADC mean-channel bias among the completed1176-case color grid; same case shown for both models."
+}

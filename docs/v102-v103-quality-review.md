@@ -1,6 +1,8 @@
 # V102/V103: completed detail-diversity comparison
 
-**V102 final20k is the current quality and training baseline.** It reaches
+**V102 final20k is the preferred result of this six/32-ROI study.** The
+[current V104 baseline](v104-reviewed-corpus-quality.md) adds a further photographic
+gain while retaining documented ADC/unseen-camera tradeoffs. V102 reaches
 36.67951dB photographic PSNR, +.17604dB over V101 and about1.78dB over V43.
 V103 is a close alternative with a .00140dB higher photo mean. V102 has higher
 measured-CFA means, stronger tested weak-texture response and lower ADC flat-color
@@ -143,8 +145,8 @@ V104 completed 20k from V102 on the reviewed **90,872-source corpus**,
 keeping its six-ROI recipe and zero blur. The new2,395 eligible arrivals add
 scene diversity; the five new eligible fine-detail sources can support a later
 controlled ROI intervention. The [completed selected-material comparison](heldout-detail.md)
-improves PSNR, SSIM and gradient error in all 12 cases; broader photographic,
-camera and GFX evaluation is active. More training and data change together,
+improves PSNR, SSIM and gradient error in all 12 cases; full photographic,
+camera and GFX evaluation and complete exports are finished. More training and data change together,
 so this does not isolate a corpus effect.
 [Incoming data review](incoming-commons-quality.md) · [Training](quality-first-training.md).
 

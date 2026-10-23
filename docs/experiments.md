@@ -1,12 +1,11 @@
 # Experiment index
 
-**V102 is the current quality baseline in V84's architectural family.**
-It reaches36.67951dB on full427,+.17604dB over V101 and about1.78dB above V43,
-with higher measured-camera means. V103 is a close photo-quality alternative;
-V102 has lower ADC color error and stronger tested weak texture.
-[Completed matched study and native comparisons](v102-v103-quality-review.md).
-Study-specific statistical gates do not freeze the baseline or prevent publishing
-useful gains and remaining weaknesses.
+**V104 is the current positive-noise quality baseline in V84's architectural
+family.** It reaches 36.80085dB on full427, +.12134dB over V102 and about1.90dB
+above V43. Known-camera and weak-texture results improve; V102 retains lower
+ADC flat-color bias and a higher unseen-camera mean.
+[Completed V104 study and native comparisons](v104-reviewed-corpus-quality.md).
+Useful gains and remaining weaknesses are documented directly.
 
 [Current model choices and images](current-model.md) ·
 [Current quality training](quality-first-training.md) ·
@@ -55,11 +54,11 @@ means over V101; the six/32 ROI effect is small and mixed across diagnostics.
 [Completed current results](v102-v103-quality-review.md). V104 completed 20k
 from V102 on 90,872 sources with 2,395 eligible additions. It improves PSNR,
 SSIM and gradient error in all 12 selected material cases; [native comparisons](heldout-detail.md)
-are current while broader quality evaluation runs.
+are current; all seven evaluation panels and full-frame exports are complete.
 [Source review and native examples](incoming-commons-quality.md).
-The [V111/V112 loss-scale comparison](loss-scale-training.md) is queued from the
-original V104 EMA on the cleaned 90,864-source corpus. Four discarded CPU/CUDA
-checks pass; its fixed 20k runs wait for V104's original exports.
+The [V111/V112 loss-scale comparison](loss-scale-training.md) retains the original
+V104 EMA on the cleaned 90,864-source corpus. Four discarded CPU/CUDA checks
+pass; V111 is now training and V112 follows at its fixed 20k budget.
 
 The source scan covers88,508 training images, with570 actually reviewed and 31
 withheld/excluded. Completed runs used the earlier 24 exclusions; seven more and

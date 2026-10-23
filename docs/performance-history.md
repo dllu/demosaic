@@ -1,10 +1,10 @@
 # PSNR history
 
-V102 is the current development baseline, with 36.67951 dB photographic PSNR and 54.23709/53.97177 dB known/unseen measured-CFA PSNR. Its photographic change from V43 is +1.78 dB. Training histories differ; current strengths, tradeoffs and native comparisons are in the [model guide](current-model.md). A version names an experiment, not a training step.
+V104 is the fully evaluated inference reference, with 36.80085 dB photographic PSNR and 54.26606/53.91700 dB known/unseen measured-CFA PSNR. Its photographic change from V43 is +1.90 dB. Training histories differ; current strengths, tradeoffs and native comparisons are in the [model guide](current-model.md). A version names an experiment, not a training step.
 
 ![PSNR versus model version](images/version-PSNR-history.png)
 
-Selected completed primary endpoints, chosen by study scope, never by highest score. Version numbers are experiment labels; architectures, data, initialization, training budgets and recorded compute precision differ. This is descriptive history, not a controlled ranking or training curve. Missing versions lack a selected complete comparable primary report here. Camera references are measured CFA samples; independently demosaiced RGB references are not exact GT. Small camera panels have scene uncertainty. The plot describes checkpoints with unequal budgets and data; use the linked comparisons to assess particular gains and weaknesses. Dashed lines show V102's measured means. The upper panels include all 43 endpoints; the lower panels omit V72/V73 RAW-native prototypes only to show the mature RGB range more clearly.
+Selected fixed primary endpoints, chosen by study scope, never by highest score. Each plotted metric has a completed primary panel; pending metrics remain blank. Version numbers are experiment labels; architectures, data, initialization, training budgets and recorded compute precision differ. This is descriptive history, not a controlled ranking or training curve. Missing versions lack a selected comparable primary report here. Camera references are measured CFA samples; independently demosaiced RGB references are not exact GT. Small camera panels have scene uncertainty. The plot describes checkpoints with unequal budgets and data; use the linked comparisons to assess particular gains and weaknesses. Dashed lines show V104's measured means. There are 44 completed photo endpoints and 44/44 known/unseen camera endpoints. The lower panels omit V72/V73 RAW-native prototypes only to show the mature RGB range more clearly.
 
 All photo points use the full fixed427-source panel, seven conditions and four CFAs. Known/unseen points balance captures within scenes, then scenes (4/5 scenes,72/90 crops). Precision, checkpoint hashes and per-source results remain in the source reports.
 
@@ -55,5 +55,6 @@ V98/V99 use common ADC-only inference projection; only V99 trained through it. T
 | V101 / step-10000 | 36.50347 | 54.17404 | 53.92334 | [Review](v84-curated-quality-review.md) |
 | V102 / step-20000 | 36.67951 | 54.23709 | 53.97177 | [Review](v102-v103-quality-review.md) |
 | V103 / step-20000 | 36.68091 | 54.22003 | 53.96410 | [Review](v102-v103-quality-review.md) |
+| V104 / step-20000 | 36.80085 | 54.26606 | 53.91700 | [Review](v104-reviewed-corpus-quality.md) |
 
 [CSV](results/version-PSNR-history.csv) · [Source records, checkpoint hashes and evaluation metadata](results/version-PSNR-history.json) · [SVG](images/version-PSNR-history.svg) · [PDF](images/version-PSNR-history.pdf). Rebuild from the shipped JSON with `source scripts/env.sh` then `.venv/bin/python scripts/plot_version_history.py`; `--refresh-sources` additionally audits and recollects the original local report archives. These figures reuse completed reports and perform no model inference. Native noisy/restored/reference crops remain in each linked review and the README.

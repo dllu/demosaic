@@ -2,18 +2,20 @@
 
 ## Current quality model
 
-Use **V102 final20k** as the development checkpoint:
-`/mnt/external/demosaic/models/v102-final20000.pt`. It uses DRUNet RGB
+Use **V104 final20k** for positive-noise restoration and continued quality training:
+`/mnt/external/demosaic/models/v104-final20000.pt`. It uses DRUNet RGB
 restoration and frozen official DINOv3 ConvNeXt-Tiny features. The
 [current model guide](current-model.md) records its hash and alternatives;
-[completed primary panels, diagnostics and native crops](v102-v103-quality-review.md)
+[completed primary panels, diagnostics and native crops](v104-reviewed-corpus-quality.md)
 cover full427 photos,known/unseen measured-camera and complete102MP GFX output.
 Continue quality work with the [reviewed corpus and zero-blur recipe](quality-first-training.md).
 Earlier measurements below retain their checkpoint labels.
 For explicit shot=read=0 inputs, the separately tested
 [V84 observed-site ADC export](adc-consistency.md#implementation-and-use) gains
 .400dB across427 sources/four CFAs with unchanged V84 weights. That result has
-not been measured for V102; positive-noise profiles bypass the correction.
+not been measured for V104; positive-noise profiles bypass the correction.
+V102 remains a lower-flat-bias alternative for explicit zero-shot/read inputs;
+its checkpoint path and measured tradeoffs are in the model guide.
 
 ## Environment and storage
 

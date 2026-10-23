@@ -7,8 +7,9 @@ gains.50990dB over8×-then-geometry on all427 photos. On the actual RGB pipeline
 batch32 is only1.3% faster than16 while using roughly twice the CUDA allocation.
 Details and limitations are recorded below.
 
-The completed [V104 quality run](quality-first-training.md) started from V102 EMA
-on the reviewed90,872-source cohort,retaining128 native/32 paired targets,
+The [active V111/V112 quality trial](loss-scale-training.md) starts from the exact
+V104 EMA on 90,864 reviewed sources. V111 is training and V112 follows, retaining
+128 native/32 paired targets,
 zero optical PSFs,weak textures,photographic contrast attenuation and the same
 six reviewed regions. The [completed V102/V103 study](v102-v103-quality-review.md)
 compared six/32 regions at the same5% conditional-photo probability on88,477
@@ -353,7 +354,7 @@ The completed [V32/V33 lower-LR mixture review](low-lr-paired-v32-v33-review.md)
 uses batch16 and the cached grid with the original8× data. V32 improves full427
 photo PSNR by.17289dB over V30; V33 improves real rendered means while giving up
 unseen measured-CFA accuracy versus V30. V33 continues only to its next review
-gate. The [first Commons extension](commons-download.md#first-prepared-extension)
+gate. The [first Commons extension](results/commons-extension-20261016-v1.json)
 adds1,808 eligible training sources in a separate frozen manifest. Neither this
 extension nor partial4× preparation has been admitted to these matched trials.
 The new ingestion/audit tests bring the full suite to **260 passing tests**.
@@ -373,7 +374,7 @@ frozen 8× manifest. This is a single-seed pilot, not convergence evidence.
 
 The geometry change applies to both Commons and native synthetic targets;
 registered paired RAW keeps its exact sensor-phase transforms. The corpus change
-adds only the [1,808 audited Commons training sources](commons-download.md#first-prepared-extension).
+adds only the [1,808 audited Commons training sources](results/commons-extension-20261016-v1.json).
 V35's validation, paired and native manifest hashes and runtime code/initializer
 match V32. All 27 shared logged paired/native batches match at the first 1k gate;
 Commons draws change with the corpus.
@@ -398,7 +399,7 @@ stopped: better unseen primary PSNR versus its first 1k, mixed rendered scores,
 and a lower photographic screen mean. It does not replace these matched controls.
 The rebin/merge guards bring validation to **271 passing tests**.
 
-The [preparation worker sweep](commons-download.md#preparation-workers) selects
+The [preparation worker sweep](results/commons4-preparation-workers-v1.json) selects
 eight workers for the remaining base4× preparation, reusing26,314 finished
 caches. New-source4× preparation is complete (1,808 train, no failures). Its
 merge completed after the full base audit. The detached V34/V36 workflow waited

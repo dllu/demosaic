@@ -1,66 +1,52 @@
 # Project goals and current evidence
 
-**V102 is the current quality baseline in V84's architectural family.**
-It reaches36.67951dB on full427,+.17604dB over V101 and about1.78dB above V43,
-with higher known/unseen measured-CFA means. Fine high-noise detail remains open.
-[Current choices](current-model.md) and the [README](../README.md) show useful
-progress; individual study gates do not freeze those recommendations.
+**V104 is the working quality baseline for positive-noise RAW and continued
+training in V84's architectural family.** It reaches 36.80085dB on full427,
++.12134dB over V102 and about1.90dB over V43, with stronger known-camera and
+weak-texture results. V102 retains lower ADC flat-color bias and a higher
+unseen-camera mean. [Current choices](current-model.md) and the [README](../README.md)
+show gains and remaining weaknesses directly.
 
 The broader objective in [PROMPT](../PROMPT.md) remains active. Quality has
-priority over speed. The current [GFX gallery](gfx-qualitative.md) includes
-complete V101/V102/V103/RawNIND frames and six native regions; learned
-real-capture differences remain small.
+priority over speed. The [GFX gallery](gfx-qualitative.md) now compares complete
+V102/V104/RawNIND frames and six native regions. Real model differences remain
+small, and fine foliage and saturated-light detail still need work.
 
 | Goal | Current evidence | Remaining work |
 | --- | --- | --- |
-| Excellent joint demosaicing and denoising | V102:36.67951dB on full427; improved measured-CFA means and cleaner geometry than RawNIND in current native comparisons | Improve fine texture, color tails and real-photo results; make strong benchmark claims only when their comparisons are complete |
-| Much better real-photo quality than RawNIND | Current GFX comparisons show more coherent mesh/rails and less grain with the learned models | Broaden actual scene/camera comparisons and recover more foliage/weak detail |
-| 16-bit and practical full-resolution output | Verified101.996MP RGB16 TIFFs from V101/V102/V103 and RawNIND through the shared exporter | Keep full-frame quality/precision/timing measurements specific to the selected checkpoint |
-| 100MP within10s on GB10 | V102 inference/blending takes202.31s in the recorded IEEE FP32 configuration; target remains open | Optimize after improving quality |
-| Modern DINOv3 method | V102 continues the official pinned ConvNeXt-Tiny pyramid and pretrained DRUNet RGB family | Continue quality improvements and assess other approaches when useful |
-| Free, diverse targets and aggressive binning | V104 completed 20k on 90,872 reviewed sources; next 90,864 removes eight further source-specific targets; 4×→geometry→area2 | Measure the queued V104 loss-scale trial and later capacity comparison; retain source/detail review |
-| Physical noise/exposure and camera handling | Poisson/read noise, negative black-subtracted values, Bayer phases, clipping and WB/matrix conditioning are implemented | Continue testing shadows, saturated lights, color and low-noise behavior |
-| Reliable training and resource use | Source/manifest snapshots, restart checks, bounded jobs and actual CPU/CUDA operation | Monitor current runs and retain failures/results accurately |
-| Protected originals and evaluation scenes | Originals read-only; cached GFX3879/3880 and siblings excluded from training | Preserve those boundaries in new data recipes |
-| Current documentation and reproducibility | Native crops with source/ROI/weights/noise/display metadata; local-time diary; Git history | Update README/current guides and comparisons when good versions appear |
+| Excellent joint demosaicing and denoising | V104 reaches36.80085dB on full427, improves424/427 source means and has stronger tested weak carriers | Improve fine texture, ADC color tails and real-photo results; complete broad comparisons before making SOTA claims |
+| Much better real-photo quality than RawNIND | Current native GFX comparisons show clearer mesh/rails with learned models | Broaden scene/camera comparisons and recover more foliage/weak detail |
+| 16-bit and practical full-resolution output | Six current101.996MP linear/sRGB RGB16 TIFFs rehashed/reopened; earlier exports preserved | Keep quality/precision/timing evidence specific to each selected checkpoint |
+| 100MP within10s on GB10 | V104 inference/blending takes168.73s in the current IEEE FP32 run; target remains open | Optimize after improving quality |
+| Modern DINOv3 method | V104 uses the official pinned ConvNeXt-Tiny pyramid and pretrained DRUNet RGB family | Continue quality improvements and assess useful alternatives |
+| Free, diverse targets and aggressive binning | V104 completed20k on90,872 sources; active90,864-source trial removes eight further targets;4×→geometry→area2 | Measure the matched loss-scale trial and later capacity comparison; retain visual source/detail review |
+| Physical noise/exposure and camera handling | Poisson/read noise, negative black-subtracted values, Bayer phases, clipping and WB/matrix conditioning implemented | Improve low-noise color and test shadows/saturated lights across cameras |
+| Reliable training and resource use | Source/manifest snapshots, exact resume checks and actual CPU/CUDA operation; queue failures retained and corrected | Monitor the active fixed budgets and preserve evidence |
+| Protected originals and evaluation scenes | Originals read-only; cached GFX3879/3880 and siblings excluded from training | Preserve these boundaries in future cohorts |
+| Current documentation and reproducibility | Current native triplets with source/ROI/weights/noise/display metadata, updated plot, local-time diary and Git history | Refresh comparisons as useful models complete |
 
 ## Active quality work
 
-[V102 final20k is the current quality baseline](v102-v103-quality-review.md),
-continuing V84's DRUNet/frozen DINOv3 ConvNeXt-Tiny family with zero optical PSFs,
-weak textures,photographic contrast attenuation and six reviewed ROIs. It gains
-+.17604dB over V101 on full427,with425 source means improving and higher
-known/unseen CFA means. V103 has nearly identical photo quality; V102's flat-color
-and weak-carrier diagnostics favor it overall. All seven evaluation panels and
-complete102MP GFX exports finished and were independently checked. Fine
-high-noise texture,foliage and saturated-light detail remain weaknesses.
+[V104's completed review](v104-reviewed-corpus-quality.md) covers all seven
+panels, the selected material test and complete 102MP exports. Photographic,
+known-camera and weak-carrier results improve over V102, while the unseen-camera
+mean falls and the ADC flat-color maximum rises. These tradeoffs remain visible
+alongside the gains. More training, seed and corpus change together, so the
+result does not isolate the data-cleaning effect.
 
-V104's reviewed **90,872-source** corpus adds2,395 eligible arrivals. Native
-source views,duplicate/content/title/series exclusions,protected holdouts and
-actual reader checks are documented in the [incoming review](incoming-commons-quality.md).
-V104 completed 20k from V102 on this cohort, improving PSNR, SSIM and gradient
-error in all 12 selected material cases; full photographic, camera and GFX
-evaluation is active. Earlier 570-source/31-exclusion review and six/32-ROI studies
-retain their frozen inputs and receipts. [Training/data details](quality-first-training.md).
+The [V111/V112 loss-scale trial](loss-scale-training.md) retains the exact V104
+EMA and learned fusion gates on the further-cleaned **90,864-source** corpus.
+V111 is training; V112 follows at its fixed20k budget, changing only epsilon
+.001→.0003. Actual CPU/CUDA checks and the corrected production handoff are
+recorded. The earlier Tiny/Small capacity recipes remain unlaunched and can use
+a better completed initializer later. [Source review](incoming-commons-quality.md) ·
+[Current training](quality-first-training.md).
 
-The completed incoming source screen and native follow-up freeze a separate
-**90,864-source** future cohort: three visibly degraded photo targets and five
-atlas reproductions are additionally withheld. The V109 Tiny/V110 Small
-recipes pass actual discarded CPU and CUDA checks, but their production runs
-remain unlaunched pending V104 review. [Current capacity preparation](convnext-small-capacity.md#prepared-matched-quality-trial).
-
-[Current native detail](heldout-detail.md),[camera](real-camera-quality.md) and
-[GFX full-frame](gfx-qualitative.md) galleries show useful gains and remaining
-weaknesses. The merged [linear DNG/JPEG path](dng-export.md) adds optional Bayer
-hot-pixel removal before restoration. Its default-off repair does not alter
-these completed comparisons. The [16-scene paired test reserve](paired-reserved-test.md)
-remains prepared,unscored and outside model selection.
-
-The [experiment index](experiments.md) and [PSNR history](performance-history.md)
-retain earlier gains and tradeoffs. For example, V95 improves a tested weak
-carrier, while V98/V99 improve ADC color but retain positive-noise color/detail
-issues. These observations inform the current recipe without making V43 the
-default again.
+The merged [linear DNG/JPEG path](dng-export.md) adds optional Bayer hot-pixel
+removal before restoration; repair was off in these comparisons. The
+[16-scene paired test reserve](paired-reserved-test.md) remains unscored and
+outside selection. The [experiment index](experiments.md) and
+[PSNR history](performance-history.md) preserve earlier gains and tradeoffs.
 
 ## Evidence for the full objective
 

@@ -1,14 +1,12 @@
 # Method research and design record
 
-Current implementation: pretrained DRUNet RGB restoration with a frozen official
-DINOv3 ConvNeXt-Tiny pyramid in V84's architectural family. V102 final20k is the
-quality baseline after completed full 427-photo, camera, texture, color and GFX evaluation.
-V103 has nearly identical photo quality; V102 has stronger tested weak texture,
-lower ADC color error and slightly better selected material means. V104 is
-complete at 20k from V102 on 90,872 sources, with zero optical blur. It improves
-PSNR, SSIM and gradient error in all 12 selected material cases; broader
-evaluation is active.
-See [current models](current-model.md) and the [active cleaned-data recipes](quality-first-training.md).
+Current implementation: V104's pretrained DRUNet RGB restoration with an official
+frozen DINOv3 ConvNeXt-Tiny pyramid in V84's architectural family. Its completed
+full427 result reaches 36.80085dB, +.12134dB over V102, with stronger known-camera,
+material and weak-texture results. V102 retains lower ADC flat-color bias and a
+higher unseen-camera mean. All seven panels and complete GFX exports are done.
+See [current models](current-model.md), [completed V104 results](v104-reviewed-corpus-quality.md)
+and the [active loss-scale trial](loss-scale-training.md).
 The literature/design record below explains the explored approaches; its older
 study decisions do not freeze the current architecture or README examples.
 
@@ -19,14 +17,14 @@ or substituting Wiener/self/clean-oracle previews gives no consistent gain.
 This is a fixed-weight result, not a trained-backbone/fusion ablation; the
 unavailable clean-image oracle is never a candidate method. Current quality
 work continues from V102 on the reviewed larger corpus; the fixed V104 endpoint
-has completed the material/detail report and is receiving full matched evaluation.
+has completed its material/detail and full matched evaluation.
 
 The [larger frozen ConvNeXt check](convnext-small-capacity.md) now pins official
 Small weights and verifies compatible native feature shapes. A direct backbone
 swap loses quality on four material cases. Resetting the fusion gates gives
 Tiny/Small an exact common starting function, and both pass eight discarded
 CPU optimizer updates with matching initial prediction/loss and batch hashes.
-This prepares a later trained capacity comparison; V104's data experiment continues.
+This prepares a later capacity comparison; V104's completed result now informs initialization.
 
 The cleaned 90,864-source Tiny/Small recipes now pass separate eight-update
 CPU and CUDA/native256/B16 checks, with exact initial identities, matching
@@ -36,8 +34,8 @@ output gradients on 108 fixed V102 training-source restorations. Smaller epsilon
 strengthens low-noise faint-detail slopes but increases the full gradient more.
 The [queued V111/V112 trial](loss-scale-training.md) tests .001 versus .0003 from
 the original V104 EMA on the cleaned corpus, preserving its architecture and
-learned fusion gates. Actual CPU/CUDA checks pass; full training waits for
-V104's current exports. The current trainer exposes an
+learned fusion gates. Actual CPU/CUDA checks pass; V111 is now training after
+the completed V104 exports and V112 follows. The trainer exposes an
 [explicit reconstruction-epsilon option](loss-smoothing-detail.md#configurable-training-scale)
 with exact default/gradient replay and resumed-training checks. Production
 defaults and existing frozen recipes remain unchanged.

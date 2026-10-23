@@ -1,63 +1,65 @@
 # GFX100S qualitative comparisons
 
-**V102 final20k is the current quality baseline.** The latest gallery compares
-complete102MP outputs for V101,V102,V103 and RawNIND on the standing
-DSCF3879/DSCF3880 scene. The learned results remain close: fence strands and
-building rails are more coherent than RawNIND, while fine foliage and saturated
-sign structure still need work. [Completed model comparison](v102-v103-quality-review.md).
-
-V104 completed 20k and improves the [selected material cases](heldout-detail.md).
-Its complete 102MP exports follow the active quality evaluation. Current GFX
-images below retain the completed V101/V102/V103 comparison.
+**V104 is the current positive-noise quality baseline.** The latest gallery
+compares complete 102MP V102/V104/RawNIND outputs on DSCF3879/DSCF3880. The two
+learned models remain close: fence strands and building rails are more coherent
+than RawNIND, while fine foliage and saturated-sign structure remain soft.
+[Completed V104 metrics and tradeoffs](v104-reviewed-corpus-quality.md).
 
 ## Current complete full-frame comparisons
 
-![Six native GFX regions: noisy,V101,V102,V103,RawNIND and independent ISO100 reference](images/current-gfx-v102-v103-fullframe/gfx-comparison.png)
+![Six native GFX regions: noisy,V102,V104,RawNIND and independent ISO100 reference](images/gfx-v102-v104-fullframe/comparison.png)
 
-Columns: noisy Malvar,V101,**V102**,V103,RawNIND with input-only per-CFA-channel
-gain,separate ISO100 f/5.6 reference. Each cell is **160×160 native sensor
-pixels**, never resized. Open the original at100%; browsers may fit the board
-to the window. Crops come from complete101.996MP blended IEEE FP32 restorations,
-with tile512/overlap64/B4, before RGB16 encoding. All36 cells were actually viewed;
-shared noisy/reference pixels match exactly across methods.
+Rows: noisy Malvar, V102, V104, RawNIND with input-only CFA-channel gain,
+independent ISO100 f/5.6 reference. Each cell is **160×160 native sensor pixels**,
+never resized. Crops come from complete 101.996MP IEEE FP32 blended outputs,
+with tile512/overlap64/B4, before RGB16 encoding. All 30 native cells were
+viewed at original resolution; shared noisy/reference pixels match exactly.
+Open the original PNG at 100%; a browser may fit it to the window.
 
-The last column is a separately captured, independently demosaiced qualitative
-reference, **not GT**. Aperture,motion,LED scan and exposure differ. No pixelwise
-quality scores are computed against it. Shared conditioning is
-shot`.0014635775921166604`,read variance`1.0715704128646712e-6`,display×4(+2EV),
-with the noisy capture's WB/matrix. PNGs are RGB8 sRGB previews; restored contexts
-are FP32. [All24 triplets and source/ROI/checkpoint/noise/display metadata](images/current-gfx-v102-v103-fullframe/manifest.json).
+The final row is a separately captured and independently demosaiced qualitative
+reference, **not GT**. Aperture, motion, LED scan and exposure differ; it has no
+pixelwise quality score. Shared conditioning is shot .0014635775921166604,
+read variance 1.0715704128646712e-6, display ×4 (+2EV), using the noisy capture's
+WB/matrix. PNGs are RGB8 previews of float output.
+[All 18 triplets and source/ROI/checkpoint/noise/display metadata](images/gfx-v102-v104-fullframe/manifest.json).
 
-![V102 full-frame foliage triplet](images/current-gfx-v102-v103-fullframe/V102-foliage.png)
+![V104 full-frame foliage: noisy, restored and separate low-ISO reference](images/gfx-v102-v104-fullframe/V104-foliage.png)
 
-![V102 full-frame chain-link-fence triplet](images/current-gfx-v102-v103-fullframe/V102-chain-link-fence.png)
+![V104 full-frame fence: noisy, restored and separate low-ISO reference](images/gfx-v102-v104-fullframe/V104-chain-link-fence.png)
 
-The foliage remains soft in all three learned models. Fence geometry is more
-continuous than RawNIND; blue/neon and illuminated edges still become rounded
-or filled. The low-ISO capture has different optical detail and is not a
-pixelwise scoring target. Four resized full-frame overviews were also viewed;
-scene structure is coherent, but those overviews cannot establish native detail.
+Foliage retains broad leaf shapes while losing fine surface detail. Fence
+geometry is clearer than RawNIND; bright blue/neon and platform edges remain
+rounded or filled. The separate f/5.6 capture has different optical detail.
+Three resized full-frame overviews were also viewed: scene geometry is coherent,
+while native detail must be assessed from the unchanged crops above.
+[V102 overview](images/gfx-v102-v104-fullframe/V102-overview.png) ·
+[V104 overview](images/gfx-v102-v104-fullframe/V104-overview.png) ·
+[RawNIND overview](images/gfx-v102-v104-fullframe/RawNIND-overview.png).
 
-All eight RGB16 linear/sRGB TIFFs reopen as8746×11662×3,uint16,16bits/channel,
-with complete-file hashes independently verified. The original writer also
-checks sampled decoded rows against supplied floats; that is an export-path
-check, not a whole-image learned-precision bound.
+All six linear/sRGB RGB16 TIFFs were completely rehashed and reopened as
+8746×11662×3 uint16, 16 bits/channel. The original exporter also checked sampled
+decoded rows against supplied floats; this is an export-path check rather than
+a whole-image learned-precision bound.
 
 | Method | Full-frame inference/blending, seconds | Peak CUDA allocation, GB |
 | --- | ---: | ---: |
-| V101 | 199.51 | 3.61 |
-| **V102** | **202.31** | **3.61** |
-| V103 | 199.67 | 3.61 |
-| RawNIND channel | 17.46 | 2.01 |
+| V102 | 168.20 | 3.37 |
+| V104 | 168.73 | 3.36 |
+| RawNIND channel | 17.40 | 1.77 |
 
-Settings: IEEE FP32,tile512/overlap64/B4,520 tiles,channels-last. These are
-shared-machine observations excluding RAW decoding,model loading and writes.
-They do not meet100MP/10s; quality remains the priority.
-Artifacts:`/mnt/external/demosaic/v101-detail-diversity-fullframe-20261022-v1/`.
-The controller and worker exited successfully.
-[Completion,native/overview viewing and independent TIFF audit](results/v102-v103-quality-complete-v1.json).
+Settings: IEEE FP32, tile512/overlap64/B4, 520 tiles, channels-last. These
+shared-machine observations exclude RAW decoding, model loading and writes.
+They do not meet 100MP/10s; no speed optimization is claimed. Artifacts are in
+`/mnt/external/demosaic/v102-reviewed-corpus-fullframe-20261023-v1/`.
+The original controller and worker exited successfully.
+[Full-frame audit, hashes and original export receipts](results/v104-reviewed-corpus-fullframe-v1.json).
 
 ## Other useful comparisons
+
+The [V101/V102/V103 complete-frame gallery](images/current-gfx-v102-v103-fullframe/gfx-comparison.png)
+([metadata](images/current-gfx-v102-v103-fullframe/manifest.json)) preserves the
+previous comparison and its separate timings.
 
 The [V102 fixed5k/final20k CPU512-context comparison](images/current-gfx-v102-final/gfx-comparison.png)
 ([metadata](images/current-gfx-v102-final/manifest.json),
@@ -141,7 +143,7 @@ are source observations, rather than independent model-selection cases.
 ## Reproduction
 
 The source-frozen completed job is recorded under
-`.cache/current-quality-20261022-v1/detail-diversity-fullframe-v1/`.
+`.cache/current-quality-20261023-v1/reviewed-corpus-fullframe-v1/`.
 Its plan binds the fixed checkpoint hashes, source code, protected local RAW
 cache and six ROIs. All seven preceding evaluation stages finished before
 this GPU job began. Crops are extracted after complete-frame blending and

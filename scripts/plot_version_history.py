@@ -4,6 +4,7 @@ import argparse
 import csv
 import hashlib
 import json
+import math
 import re
 from pathlib import Path
 
@@ -90,12 +91,39 @@ STUDIES = [
         [102, 103],
         "v102-v103-quality-review.md",
     ),
+    (
+        "v104-reviewed-corpus-primary-statistics-v1.json",
+        [104],
+        "v104-reviewed-corpus-quality.md",
+    ),
 ]
 METRICS = {
     ("full427", "photo", "srgb_psnr"): "photo_srgb_PSNR",
     ("known", "real", "sensor_psnr"): "known_CFA_PSNR",
     ("unseen", "real", "sensor_psnr"): "unseen_CFA_PSNR",
 }
+# Each missing metric must be intentional; older studies still require all panels.
+REQUIRED_METRICS_BY_STUDY = {
+    "v104-reviewed-corpus-photo-statistics-v1.json": ("photo_srgb_PSNR",),
+}
+
+
+def metric_points(points, field):
+    """Omit unfinished panels rather than inventing or carrying forward a score."""
+    completed = [p for p in points if field in p]
+    for point in completed:
+        value = point[field]
+        if (
+            isinstance(value, bool)
+            or not isinstance(value, (int, float))
+            or not math.isfinite(value)
+        ):
+            raise ValueError(f"Completed {field} must be finite: V{point['version']}")
+    return [p["version"] for p in completed], [p[field] for p in completed]
+
+
+def metric_text(point, field):
+    return f"{point[field]:.5f}" if field in point else "pending"
 
 
 def digest(path):
@@ -137,6 +165,8 @@ def collect():
         selected = {}
         if "runs" in source:
             for panel in ("full427", "known", "unseen"):
+                if panel not in source["runs"]:
+                    continue
                 summary = source["runs"][panel]
                 if "path" in summary and "sha256" in summary:
                     summary = checked_reference(summary)
@@ -228,7 +258,10 @@ def collect():
                             point.setdefault("evaluation_sources", []).append(entry)
         assert set(selected) == set(versions), (filename, set(selected), versions)
         for point in selected.values():
-            assert all(k in point for k in METRICS.values()), (filename, point)
+            required = REQUIRED_METRICS_BY_STUDY.get(filename, tuple(METRICS.values()))
+            assert all(k in point for k in required), (filename, point)
+            for field in METRICS.values():
+                metric_points([point], field)
             output.append(point)
     output.sort(key=lambda r: r["version"])
     assert len({r["version"] for r in output}) == len(output)
@@ -259,13 +292,13 @@ def main():
     if args.refresh_sources:
         points, evidence = collect()
         result = {
-            "description": "Selected completed primary endpoints, chosen by study scope, never by highest score. Version numbers are experiment labels; architectures, data, initialization, training budgets and recorded compute precision differ. This is descriptive history, not a controlled ranking or training curve. Missing versions lack a selected complete comparable primary report here.",
+            "description": "Selected fixed primary endpoints, chosen by study scope, never by highest score. Each plotted metric has a completed primary panel; pending metrics remain blank. Version numbers are experiment labels; architectures, data, initialization, training budgets and recorded compute precision differ. This is descriptive history, not a controlled ranking or training curve. Missing versions lack a selected comparable primary report here.",
             "panels": {
                 "photo_srgb_PSNR": "427 fixed photos, seven noise/exposure conditions, four CFAs; source-balanced sRGB PSNR",
                 "known_CFA_PSNR": "4 scenes/8 pairs/72 crops, scene-balanced measured-CFA PSNR",
                 "unseen_CFA_PSNR": "5 scenes/10 pairs/90 crops, scene-balanced measured-CFA PSNR",
             },
-            "working_reference": f"V{preferred} is the preferred development baseline; V43 is a historical comparator",
+            "working_reference": f"V{preferred} is the fully evaluated inference reference; V43 is a historical comparator",
             "model_selection": {
                 "path": "configs/current-model.json",
                 "sha256": digest(MODEL_SELECTION),
@@ -279,6 +312,8 @@ def main():
     else:
         result = json.loads(destination.read_text())
         points, evidence = result["points"], result["sources"]
+    for field in METRICS.values():
+        metric_points(points, field)
     columns = [
         "version",
         "endpoint",
@@ -308,17 +343,17 @@ def main():
     else:
         ticks.append(latest)
     reference = next(p for p in points if p["version"] == preferred)
+    assert all(field in reference for field in METRICS.values()), "Reference panels are incomplete"
     for row in range(2):
         shown = points if row == 0 else [p for p in points if p["version"] not in (72, 73)]
-        x = [p["version"] for p in shown]
         photo, camera = axes[row]
-        photo.scatter(x, [p["photo_srgb_PSNR"] for p in shown], c="#2563a6", s=24)
+        photo.scatter(*metric_points(shown, "photo_srgb_PSNR"), c="#2563a6", s=24)
         photo.axhline(
             reference["photo_srgb_PSNR"],
             color="#d98b14",
             linewidth=1,
             linestyle="--",
-            label=f"V{preferred} current baseline",
+            label=f"V{preferred} evaluated reference",
         )
         photo.scatter(
             [preferred],
@@ -334,7 +369,7 @@ def main():
             ("known_CFA_PSNR", "#2563a6", "o", "Known: 4 scenes"),
             ("unseen_CFA_PSNR", "#7c4c9c", "s", "Unseen: 5 scenes"),
         ]:
-            camera.scatter(x, [p[field] for p in shown], c=color, marker=marker, s=23, label=title)
+            camera.scatter(*metric_points(shown, field), c=color, marker=marker, s=23, label=title)
             camera.axhline(reference[field], color=color, linewidth=0.8, linestyle="--", alpha=0.6)
         camera.set_ylabel("Measured-CFA PSNR (dB)")
         for axis in (photo, camera):
@@ -347,6 +382,8 @@ def main():
         )
         for version in dict.fromkeys(highlighted):
             p = next(r for r in shown if r["version"] == version)
+            if "photo_srgb_PSNR" not in p:
+                continue
             offset, alignment = (0, 7), "center"
             if 0 < latest - preferred <= 3:
                 if version == preferred:
@@ -363,7 +400,10 @@ def main():
             )
     axes[0, 0].set_title(f"All {len(points)} selected endpoints", loc="left", fontsize=11)
     axes[0, 1].set_title(
-        "Full camera range, including RAW-native prototypes", loc="left", fontsize=10
+        f"Measured CFA: {len(metric_points(points, 'known_CFA_PSNR')[0])} known / "
+        f"{len(metric_points(points, 'unseen_CFA_PSNR')[0])} unseen endpoints",
+        loc="left",
+        fontsize=10,
     )
     axes[1, 0].set_title("Mature RGB models: closer view", loc="left", fontsize=11)
     axes[1, 1].set_title(
@@ -373,7 +413,7 @@ def main():
         axis.set_xlabel("Model version (unequal training budgets)")
     fig.suptitle("PSNR by model version", fontsize=15)
     fig.supxlabel(
-        f"Current baseline: V{preferred}. ADC labels: ADC-only sample projection.\nTraining budgets/data differ. Full values and provenance: CSV/JSON.",
+        f"Evaluated reference: V{preferred}. Pending metrics are omitted. ADC labels: ADC-only sample projection.\nTraining budgets/data differ. Full values and provenance: CSV/JSON.",
         fontsize=9,
         color="#4b5563",
     )
@@ -386,12 +426,15 @@ def main():
         "| --- | ---: | ---: | ---: | --- |",
     ]
     for p in points:
+        photo_value, known_value, unseen_value = [
+            metric_text(p, field) for field in METRICS.values()
+        ]
         rows.append(
-            f"| V{p['version']} / {p['endpoint']} | {p['photo_srgb_PSNR']:.5f} | {p['known_CFA_PSNR']:.5f} | {p['unseen_CFA_PSNR']:.5f} | [Review]({p['report']}) |"
+            f"| V{p['version']} / {p['endpoint']} | {photo_value} | {known_value} | {unseen_value} | [Review]({p['report']}) |"
         )
     original = next(p for p in points if p["version"] == 43)
     (REPO / "docs/performance-history.md").write_text(
-        f"# PSNR history\n\nV{preferred} is the current development baseline, with "
+        f"# PSNR history\n\nV{preferred} is the fully evaluated inference reference, with "
         f"{reference['photo_srgb_PSNR']:.5f} dB photographic PSNR and "
         f"{reference['known_CFA_PSNR']:.5f}/{reference['unseen_CFA_PSNR']:.5f} dB "
         f"known/unseen measured-CFA PSNR. Its photographic change from V43 is "
@@ -400,7 +443,7 @@ def main():
         "are in the [model guide](current-model.md). A version names an experiment, "
         "not a training step.\n\n![PSNR versus model version](images/version-PSNR-history.png)\n\n"
         + result["description"]
-        + f" Camera references are measured CFA samples; independently demosaiced RGB references are not exact GT. Small camera panels have scene uncertainty. The plot describes checkpoints with unequal budgets and data; use the linked comparisons to assess particular gains and weaknesses. Dashed lines show V{preferred}'s measured means. The upper panels include all {len(points)} endpoints; the lower panels omit V72/V73 RAW-native prototypes only to show the mature RGB range more clearly.\n\nAll photo points use the full fixed427-source panel, seven conditions and four CFAs. Known/unseen points balance captures within scenes, then scenes (4/5 scenes,72/90 crops). Precision, checkpoint hashes and per-source results remain in the source reports.\n\nV98/V99 use common ADC-only inference projection; only V99 trained through it. Their original V43/V95 references retain their checkpoint policies. The [completed ADC study](v95-adc-training-quality-review.md) improves ADC color but retains positive-noise color/detail weaknesses. Study-specific statistical gates do not prevent showing progress or choosing a stronger development baseline.\n\n"
+        + f" Camera references are measured CFA samples; independently demosaiced RGB references are not exact GT. Small camera panels have scene uncertainty. The plot describes checkpoints with unequal budgets and data; use the linked comparisons to assess particular gains and weaknesses. Dashed lines show V{preferred}'s measured means. There are {len(metric_points(points, 'photo_srgb_PSNR')[0])} completed photo endpoints and {len(metric_points(points, 'known_CFA_PSNR')[0])}/{len(metric_points(points, 'unseen_CFA_PSNR')[0])} known/unseen camera endpoints. The lower panels omit V72/V73 RAW-native prototypes only to show the mature RGB range more clearly.\n\nAll photo points use the full fixed427-source panel, seven conditions and four CFAs. Known/unseen points balance captures within scenes, then scenes (4/5 scenes,72/90 crops). Precision, checkpoint hashes and per-source results remain in the source reports.\n\nV98/V99 use common ADC-only inference projection; only V99 trained through it. Their original V43/V95 references retain their checkpoint policies. The [completed ADC study](v95-adc-training-quality-review.md) improves ADC color but retains positive-noise color/detail weaknesses. Study-specific statistical gates do not prevent showing progress or choosing a stronger development baseline.\n\n"
         + "\n".join(rows)
         + "\n\n[CSV](results/version-PSNR-history.csv) · [Source records, checkpoint hashes and evaluation metadata](results/version-PSNR-history.json) · [SVG](images/version-PSNR-history.svg) · [PDF](images/version-PSNR-history.pdf). Rebuild from the shipped JSON with `source scripts/env.sh` then `.venv/bin/python scripts/plot_version_history.py`; `--refresh-sources` additionally audits and recollects the original local report archives. These figures reuse completed reports and perform no model inference. Native noisy/restored/reference crops remain in each linked review and the README.\n"
     )

@@ -17,8 +17,8 @@ inspection, rather than native inspection of every image.
 | Cohort | Training sources | Status |
 | --- | ---: | --- |
 | V102/V103 | 88,477 | Completed model comparison |
-| V104 | 90,872 | Original 20k training complete; broader evaluation active |
-| Next reviewed cohort | **90,864** | V111/V112 loss-scale trial queued; V109 Tiny / V110 Small remain prepared |
+| V104 | 90,872 | Original 20k training, all panels and full-frame exports complete |
+| Next reviewed cohort | **90,864** | V111 training / V112 queued; V109 Tiny / V110 Small remain prepared |
 
 The next cohort applies **eight additional training-source withholds relative
 to V104**: the three previously inspected photo-quality cases and five printed
@@ -49,14 +49,14 @@ matching first losses. [Actual CUDA checks](results/backbone-cleaned-recipes-CUD
 Production training has not launched for the capacity comparison.
 The [next loss-scale comparison](loss-scale-training.md) instead retains the
 original V104 EMA and learned gates on this same cleaned corpus. Both recipes
-pass discarded CPU/CUDA checks; their fixed 20k runs are queued after V104's
-original evaluation and full-frame exports.
+pass discarded CPU/CUDA checks; V111 is training after V104's completed exports,
+with V112 next at its fixed 20k budget.
 
 These inputs supersede the unlaunched 90,869-source preparation. Earlier
 manifests, recipes and receipts remain preserved. V104 completed its original
 90,872-source run. Its [selected material gains](heldout-detail.md) are published
-while broader evaluation continues; the next initializer will use the useful
-completed evidence. [Current quality training](quality-first-training.md).
+alongside its [completed full comparison](v104-reviewed-corpus-quality.md). Its
+exact EMA now initializes the loss-scale test, while V102 remains a separate reference. [Current quality training](quality-first-training.md).
 
 ## Printed atlas targets and photographed windows
 

@@ -1,0 +1,84 @@
+{
+  "image": "RawNIND-colored-neon-sign.png",
+  "caption": "colored-neon-sign / RawNIND:CFA-channel",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Denoised",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "ISO100 ref (not GT)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "f20209623f66598c96e02932a8b09a5faef3f578a6b9aecdc95560977f4daae7",
+  "region": {
+    "name": "colored-neon-sign",
+    "noisy_xy": [
+      9060,
+      2050
+    ],
+    "reference_xy": [
+      9060,
+      2050
+    ],
+    "size": 160,
+    "selection_method": "Input-only locator selection, then maximum normalized green correlation in512px input/reference contexts; integer offsets within+/-8 only, no output-dependent selection or warp",
+    "context_green_correlation": 0.9116097356755666
+  },
+  "model_label": "RawNIND:CFA-channel",
+  "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+  "compute_precision": "float32",
+  "device": "cuda",
+  "conditioning": {
+    "shot": 0.0014635775921166604,
+    "read": 1.0715704128646712e-06
+  },
+  "context_xywh": null,
+  "full_frame": true,
+  "display_exposure": 4.0,
+  "shared_wb": [
+    1.5132450331125828,
+    1.0,
+    2.2152317880794703
+  ],
+  "shared_matrix": [
+    [
+      1.0725188393098881,
+      0.17123593128834644,
+      -0.24375477059823436
+    ],
+    [
+      -0.1267191317089774,
+      1.4310509369654432,
+      -0.3043318052564657
+    ],
+    [
+      -0.009697676902906037,
+      -0.29348063283422965,
+      1.3031783097371357
+    ]
+  ],
+  "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping"
+}

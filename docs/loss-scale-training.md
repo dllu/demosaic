@@ -1,10 +1,11 @@
 # Controlled training test for faint detail
 
-**V111 and V112 are queued continuations from the original V104 final 20k
+**V111 is training and V112 is queued from the original V104 final 20k
 EMA.** They keep the same architecture, data, initialization and budget, changing
-only reconstruction Charbonnier epsilon: **.001 versus .0003**. Their training
-waits for V104's owned evaluation and full-frame exports to finish. The [V104 material gains](heldout-detail.md) are
-already published while its broader photo, camera and GFX evaluation continues.
+only reconstruction Charbonnier epsilon: **.001 versus .0003**. The trial
+started after V104's owned evaluation and full-frame exports finished.
+[Completed V104 strengths and tradeoffs](v104-reviewed-corpus-quality.md) and
+[material gains](heldout-detail.md) remain separate from this new hypothesis.
 
 The [fixed-output diagnostic](loss-smoothing-detail.md) found that smaller
 epsilon strengthens gradients for faint low-noise detail, but increases the
@@ -29,7 +30,7 @@ remains available for a later capacity comparison.
 [V111 recipe](../configs/quality-v104-loss-scale-v111.yaml) ·
 [V112 recipe](../configs/quality-v104-loss-scale-v112.yaml) ·
 [Preparation, actual reader checks and discarded CPU/CUDA evidence](results/v104-loss-scale-prepared-v1.json) ·
-[Actual live training/evaluation/export queues](results/v104-loss-scale-queued-v1.json).
+[Actual production launch, corrected handoff and live queues](results/v104-loss-scale-training-started-v2.json).
 Apart from output location, epsilon is the only arm difference. The original
 parent is read-only at `/mnt/external/demosaic/models/v104-final20000.pt`, SHA256
 `8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300`.
@@ -59,15 +60,24 @@ the corrected wrapper runs CUDA in a new root and retains the successful CPU
 evidence. The production trainer and recipes are unchanged.
 
 The live execution controller adopts these successful checks after verifying
-source and phase-configuration equivalence. It waits for the exact original
-V104 export owner and child to exit successfully, then starts each 20k arm
-freshly from the original V104 EMA. It does not repeat the smokes. Full matched
+source and phase-configuration equivalence. It verified the exact original
+V104 export owner and child had exited successfully, then started V111
+freshly from the original V104 EMA. Its first logged loss, gradient and input
+hash reproduce the CUDA preflight exactly. It does not repeat the smokes. Full matched
 evaluation and complete 102MP RGB16 exports are queued afterward, with
 [V102 as a separate fixed reference](../configs/quality-v104-loss-scale-reference-checkpoints-v1.json).
-A [separate CPU material queue](results/v104-loss-scale-material-queued-v1.json)
+A [separate CPU material queue](results/v104-loss-scale-training-started-v2.json)
 will compare both final endpoints with V104 and V102 on the original 12 cached
 observations, producing native noisy/restored/exact-GT triplets.
-No production optimizer updates had started when the queue receipt was written.
+V112 starts after V111's fixed endpoint. Neither has a completed production
+quality result yet.
+
+The first queue stopped before any optimizer update because its controller
+looked for a child field omitted from terminal export status. A new controller
+binds the immutable export-result owner instead. Failed queues and source bytes
+remain preserved; current training and reporting use separate v2 roots. The
+frozen recipe definitions retain their bytes, with controller-resolved outputs
+under `/mnt/external/demosaic/v104-loss-scale-20261023-v2/train/{V111,V112}/`.
 Failures are preserved without automatic retry.
 
 ## Data and planned comparisons

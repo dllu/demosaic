@@ -3,14 +3,14 @@
 `scripts/export_raw_dng.py` restores ordinary Bayer RAW/XMP pairs with a selected
 checkpoint. It loads the model once, uses IEEE FP32 tiles, and writes a native
 RGB16 DNG, a full-resolution sRGB JPEG, an adapted `.dng.xmp`, and a batch JSON
-manifest. Source RAWs and XMPs remain read-only. No personal images are committed.
+manifest. Source RAWs and XMPs remain read-only.
 
 ```bash
 source scripts/env.sh
 PYTHONPATH=src uv run python scripts/export_raw_dng.py \
-  /mnt/external/demosaic/models/v102-final20000.pt \
+  /mnt/external/demosaic/models/v104-final20000.pt \
   '/path/to/raw/2023-12-31-17*.raf' \
-  --only-with-xmp --suffix v102 \
+  --only-with-xmp --suffix v104 \
   --output-dir ~/pictures/composites/2023-12-31-ochanomizu \
   --darktable-cli /opt/darktable/bin/darktable-cli --cudnn-benchmark --hot-pixels
 ```
@@ -35,8 +35,8 @@ Timings are shared-machine observations, not a new model speed claim.
 
 ## Hot-pixel correction
 
-`--hot-pixels` repairs isolated bright Bayer outliers **before V102 or another
-restoration model sees them**, so correction is included in both the DNG and
+`--hot-pixels` repairs isolated bright Bayer outliers **before the restoration
+model sees them**, so correction is included in both the DNG and
 JPEG. Enabling a darktable preview module after demosaicing cannot repair the
 stored Bayer measurements; darktable's module skips RGB linear DNGs. The option
 is explicit and off by default, preserving earlier comparison protocols.

@@ -1,12 +1,144 @@
 # Quality training in the V84 architectural family
 
 **V104 final20k initializes the next quality trial in V84's DRUNet RGB/frozen
-DINOv3 ConvNeXt-Tiny family.** Its selected material gains are published below;
-broader evaluation is active. The fully evaluated V102 reference reaches
+DINOv3 ConvNeXt-Tiny family.** All seven panels and full-frame exports are
+complete: photo PSNR reaches 36.80085dB, +.12134dB over V102. Known-camera and
+weak-detail scores improve; V102 retains lower ADC bias and a higher unseen
+camera mean. [Complete V104 comparison](v104-reviewed-corpus-quality.md). V102 reaches
 36.67951dB photographic PSNR, +.17604dB over V101, with higher known/unseen CFA
 means. V103 is a close alternative; V102's
 flat-color and weak-texture diagnostics favor it overall. High-noise fine detail
 remains soft. [Completed results and native comparisons](v102-v103-quality-review.md).
+
+## Active V104 loss-scale comparison
+
+[V111 and V112](loss-scale-training.md) test reconstruction epsilon .001 versus
+.0003 from the original V104 final 20k EMA, preserving all 91 tensors and learned
+fusion gates. The architecture, cleaned 90,864-source corpus, original six ROIs
+and fixed 20k budget match. Both use seed 62, fresh AdamW/EMA, B16/native256/BF16,
+LR 1e-5 and 200 warmup updates. Epsilon is the only numerical recipe difference;
+paired RAW keeps its existing .0001 scale.
+
+The [fixed-output diagnostic](loss-smoothing-detail.md) motivates this trained
+test but does not establish better restoration. Compare final image metrics,
+weak detail, color and native crops on the same observations. Raw loss values
+across epsilon settings use different objectives. V111 is now training after the
+original V104 evaluation/export owners finished; V112 follows. Its four successful CPU/CUDA
+smokes are adopted with verified source/configuration equivalence, without
+repetition. Earlier experiments retain their inputs and evidence.
+[Recipes, reader checks and actual discarded preflights](results/v104-loss-scale-prepared-v1.json) ·
+[Actual training launch, corrected handoff and owned queues](results/v104-loss-scale-training-started-v2.json).
+
+<a id="active-v104-cleaned-corpus-continuation"></a>
+
+## Completed V104 cleaned-corpus continuation
+
+**V104 completed its original 20,000 updates** from exact V102 final20k EMA on the
+reviewed **90,872-source**4×/8× pair. Both discarded eight-update CPU and
+CUDA checks passed, verifying exact parent EMA initialization,finite states
+and unchanged official DINO. The production run used fresh
+AdamW/EMA,seed61,B16/native256/BF16,LR1e-5/warmup200. Its six original
+ROI objects and5% conditional-photo probability,zero optical PSFs,weak synthetic
+textures,photo contrast attenuation,native128/paired32 remain unchanged.
+
+[Recipe](../configs/quality-v102-reviewed-corpus-v104.yaml) ·
+[Six-ROI binding](../configs/low-contrast-training-rois-six-reviewed90872-v4.json) ·
+[Actual launch,discarded smoke/report proof and source exposure](results/v104-reviewed-corpus-training-launch-v1.json).
+V104 improves PSNR, SSIM and gradient error in all 12 fixed material cases over
+V102, with mean PSNR gains of +.246/.166/.024dB at ADC-only/ISO100/ISO12800.
+Chroma improves in 11/12 cases.
+[Native comparisons and remaining smoothing](heldout-detail.md#v104-versus-v102-on-the-fixed-material-panel).
+V104 is the positive-noise and training baseline; V102 remains a useful ADC
+and unseen-camera reference. More training, seed and data change together, so the gain cannot be
+attributed solely to the larger corpus.
+
+The fixed20k schedule contains113,058 photographic examples,62,976 unique
+photo sources and2,811 draws from1,645 newly eligible sources. Its5,672 reviewed
+ROI draws cover the same six sources. These are reconstructed full-schedule
+counts; the fixed20k endpoint has now completed. Twelve actual clean-reader
+checks cover six new-source draws and all six ROIs,repeated exactly with
+finite native256 outputs and unchanged Torch RNG,no GPU or denoiser.
+
+Full427/16procedural/seven-condition/four-CFA,known4/unseen5 measured-camera,
+weak texture, color, GFX and highlights are complete after the original
+trainer/controller exited. Complete 102MP RGB16 exports also finished and were
+independently rehashed/reopened. [Current results](v104-reviewed-corpus-quality.md).
+The separate CPU-only material report is complete, using the original final
+V104 EMA and all 12 exactly replayed observations. All 60 native board cells
+were actually viewed, including the matched RawNIND reference.
+[Verified fixed20k/source boundary](results/V104-original20000-training-boundary-v1.json) ·
+[Material report](results/V104-final20000-heldout-detail-CPU-v1.json).
+A discarded CPU reporting integration already passed60 case rows/four triplets;
+all eight unique native board cells were actually viewed. It checks reporting,
+not model improvement. The new cohort preserves2,303 validation/2,255 test
+memberships and all protected scene exclusions.
+
+Local frozen roots under`.cache/current-quality-20261023-v1/`:
+`reviewed-corpus-training-v1/`,`reviewed-corpus-evaluation-queue-v1/`,
+`reviewed-corpus-evaluation-v1/`,`reviewed-corpus-fullframe-v1/`.
+Artifacts under`/mnt/external/demosaic/`:
+`v102-reviewed-corpus-20261023-v1/`,
+`v102-reviewed-corpus-evaluation-20261023-v1/`,
+`v102-reviewed-corpus-fullframe-20261023-v1/`.
+Startup floors are48GiB RAM,32GiB root and256GiB external free space;
+trainer stops below24GiB available RAM and CUDA allocation is capped at24GiB.
+Failures are preserved without automatic retry. Quality remains the priority.
+
+The2,395 eligible arrivals and five optional fine-detail sources are documented
+in the [incoming source review](incoming-commons-quality.md). The earlier
+six/32 ROI comparison had little photographic effect; retain the simpler six
+before adding another ROI intervention.
+
+## Prepared Tiny/Small quality comparison
+
+[V109 Tiny](../configs/quality-v102-backbone-tiny-v109.yaml) and
+[V110 Small](../configs/quality-v102-backbone-small-v110.yaml) recipes are frozen
+for a matched 20,000-update comparison on the separate **90,864-source** corpus.
+Both load one V102-derived initializer file with three zeroed fusion-gate
+tensors; the other 88 EMA tensors remain exact. This gives the encoders a common
+initial function while allowing their fusion to adapt during training. Only
+the official frozen encoder name/revision/hash differs between arms. Both use
+seed 62, batch 16, native 256-pixel patches, BF16, learning rate 1e-5, 200 warmup
+updates, zero optical blur and the original six ROIs.
+
+The corpus applies eight additional visually inspected withholds relative to
+V104: three degraded photo targets and five atlas reproductions. Four atlas
+sources were in the older V102 corpus; 2,391 new arrivals remain eligible.
+Validation/test and protected-source boundaries remain fixed. Twelve actual
+clean-reader examples repeat exactly: six new-source draws and all six ROIs.
+The full prospective schedule contains
+111,559 photo examples from 62,367 unique sources, including 2,707 draws from
+1,634 newly eligible sources and 5,657 ROI examples. These are scheduled exposure
+counts, not completed training. [Prepared plan, hashes and reader evidence](results/backbone-capacity-training-prepared-v2.json).
+
+No production controller has launched for these recipes.
+The incoming loss-tail review and V104 comparison are complete. Select a useful
+completed initializer for a later capacity trial; the loss-scale test above retains its
+learned gates. Preserve this preparation if a later result supplies a better
+initializer. The earlier unlaunched V107/V108 preparation remains preserved.
+The [fixed-reference configuration](../configs/quality-v102-backbone-reference-checkpoints-v1.json)
+and [validated reporting/export support](training-execution.md#fixed-references-alongside-derived-initializers)
+keep original V102 separate from the zero-gate derivative. Separate discarded
+eight-update CPU checks now pass for both cleaned recipes, with exact initial
+EMA/encoder identities, finite final model/EMA/Adam and identical eight-batch
+observations across all three data domains. [Actual CPU evidence](results/backbone-cleaned-recipes-CPU-v1.json).
+Fresh eight-update CUDA checks now pass at native256/B16/BF16. Initial EMA and
+per-arm encoder identities match; all eight actual observations and the first
+loss agree across arms, and model/EMA/Adam remain finite.
+[Actual CUDA evidence](results/backbone-cleaned-recipes-CUDA-v1.json).
+These are discarded fixtures. Review V104 before selecting the production
+initializer, then compare final native photo/material/color/weak-detail/GFX
+outputs before drawing a capacity conclusion.
+[Capacity evidence and remaining work](convnext-small-capacity.md).
+
+The [fixed-output loss-smoothing diagnostic](loss-smoothing-detail.md) measures
+whether a smaller Charbonnier scale strengthens faint-detail supervision.
+It motivates the separate V111/V112 training comparison above. The current trainer now
+exposes [validated reconstruction epsilon](loss-smoothing-detail.md#configurable-training-scale),
+with exact default replay and nondefault resume checks. The capacity recipes
+retain the original loss alongside their fixed data and encoder settings.
+
+<a id="current-matched-comparison-v102v103"></a>
 
 ## Completed matched comparison: V102/V103
 
@@ -59,131 +191,6 @@ and code snapshots remain unchanged; the
 [completion receipt](results/v102-v103-quality-complete-v1.json) closes the review.
 All48 numerical modules match between arms; the archive hash differs solely
 because the reviewed-ROI catalogue is frozen with the recipe.
-
-## Active V104 cleaned-corpus continuation
-
-**V104 completed its original 20,000 updates** from exact V102 final20k EMA on the
-reviewed **90,872-source**4×/8× pair. Both discarded eight-update CPU and
-CUDA checks passed, verifying exact parent EMA initialization,finite states
-and unchanged official DINO. The production run used fresh
-AdamW/EMA,seed61,B16/native256/BF16,LR1e-5/warmup200. Its six original
-ROI objects and5% conditional-photo probability,zero optical PSFs,weak synthetic
-textures,photo contrast attenuation,native128/paired32 remain unchanged.
-
-[Recipe](../configs/quality-v102-reviewed-corpus-v104.yaml) ·
-[Six-ROI binding](../configs/low-contrast-training-rois-six-reviewed90872-v4.json) ·
-[Actual launch,discarded smoke/report proof and source exposure](results/v104-reviewed-corpus-training-launch-v1.json).
-V104 improves PSNR, SSIM and gradient error in all 12 fixed material cases over
-V102, with mean PSNR gains of +.246/.166/.024dB at ADC-only/ISO100/ISO12800.
-Chroma improves in 11/12 cases.
-[Native comparisons and remaining smoothing](heldout-detail.md#v104-versus-v102-on-the-fixed-material-panel).
-V102 remains the fully evaluated inference baseline while V104's broader
-panels run. More training, seed and data change together, so the gain cannot be
-attributed solely to the larger corpus.
-
-The fixed20k schedule contains113,058 photographic examples,62,976 unique
-photo sources and2,811 draws from1,645 newly eligible sources. Its5,672 reviewed
-ROI draws cover the same six sources. These are reconstructed full-schedule
-counts; the fixed20k endpoint has now completed. Twelve actual clean-reader
-checks cover six new-source draws and all six ROIs,repeated exactly with
-finite native256 outputs and unchanged Torch RNG,no GPU or denoiser.
-
-Full427/16procedural/seven-condition/four-CFA,known4/unseen5 measured-camera,
-weak texture,color,GFX and highlights are now evaluating after the original
-trainer/controller exited. Complete102MP RGB16 exports follow evaluation.
-The separate CPU-only material report is complete, using the original final
-V104 EMA and all 12 exactly replayed observations. All 60 native board cells
-were actually viewed, including the matched RawNIND reference.
-[Verified fixed20k/source boundary](results/V104-original20000-training-boundary-v1.json) ·
-[Material report](results/V104-final20000-heldout-detail-CPU-v1.json).
-A discarded CPU reporting integration already passed60 case rows/four triplets;
-all eight unique native board cells were actually viewed. It checks reporting,
-not model improvement. The new cohort preserves2,303 validation/2,255 test
-memberships and all protected scene exclusions.
-
-Local frozen roots under`.cache/current-quality-20261023-v1/`:
-`reviewed-corpus-training-v1/`,`reviewed-corpus-evaluation-queue-v1/`,
-`reviewed-corpus-evaluation-v1/`,`reviewed-corpus-fullframe-v1/`.
-Artifacts under`/mnt/external/demosaic/`:
-`v102-reviewed-corpus-20261023-v1/`,
-`v102-reviewed-corpus-evaluation-20261023-v1/`,
-`v102-reviewed-corpus-fullframe-20261023-v1/`.
-Startup floors are48GiB RAM,32GiB root and256GiB external free space;
-trainer stops below24GiB available RAM and CUDA allocation is capped at24GiB.
-Failures are preserved without automatic retry. Quality remains the priority.
-
-The2,395 eligible arrivals and five optional fine-detail sources are documented
-in the [incoming source review](incoming-commons-quality.md). The earlier
-six/32 ROI comparison had little photographic effect; retain the simpler six
-before adding another ROI intervention.
-
-## Queued V104 loss-scale comparison
-
-[V111 and V112](loss-scale-training.md) test reconstruction epsilon .001 versus
-.0003 from the original V104 final 20k EMA, preserving all 91 tensors and learned
-fusion gates. The architecture, cleaned 90,864-source corpus, original six ROIs
-and fixed 20k budget match. Both use seed 62, fresh AdamW/EMA, B16/native256/BF16,
-LR 1e-5 and 200 warmup updates. Epsilon is the only numerical recipe difference;
-paired RAW keeps its existing .0001 scale.
-
-The [fixed-output diagnostic](loss-smoothing-detail.md) motivates this trained
-test but does not establish better restoration. Compare final image metrics,
-weak detail, color and native crops on the same observations. Raw loss values
-across epsilon settings use different objectives. Training is queued after the
-original V104 evaluation/export owners finish. Its four successful CPU/CUDA
-smokes are adopted with verified source/configuration equivalence, without
-repetition. Earlier experiments retain their inputs and evidence.
-[Recipes, reader checks and actual discarded preflights](results/v104-loss-scale-prepared-v1.json) ·
-[Actual owned training/evaluation/export queues](results/v104-loss-scale-queued-v1.json).
-
-## Prepared Tiny/Small quality comparison
-
-[V109 Tiny](../configs/quality-v102-backbone-tiny-v109.yaml) and
-[V110 Small](../configs/quality-v102-backbone-small-v110.yaml) recipes are frozen
-for a matched 20,000-update comparison on the separate **90,864-source** corpus.
-Both load one V102-derived initializer file with three zeroed fusion-gate
-tensors; the other 88 EMA tensors remain exact. This gives the encoders a common
-initial function while allowing their fusion to adapt during training. Only
-the official frozen encoder name/revision/hash differs between arms. Both use
-seed 62, batch 16, native 256-pixel patches, BF16, learning rate 1e-5, 200 warmup
-updates, zero optical blur and the original six ROIs.
-
-The corpus applies eight additional visually inspected withholds relative to
-V104: three degraded photo targets and five atlas reproductions. Four atlas
-sources were in the older V102 corpus; 2,391 new arrivals remain eligible.
-Validation/test and protected-source boundaries remain fixed. Twelve actual
-clean-reader examples repeat exactly: six new-source draws and all six ROIs.
-The full prospective schedule contains
-111,559 photo examples from 62,367 unique sources, including 2,707 draws from
-1,634 newly eligible sources and 5,657 ROI examples. These are scheduled exposure
-counts, not completed training. [Prepared plan, hashes and reader evidence](results/backbone-capacity-training-prepared-v2.json).
-
-No production controller has launched for these recipes.
-The incoming loss-tail review is complete. Review V104's broader results before
-selecting a capacity initializer; the matched loss-scale test above retains its
-learned gates. Preserve this preparation if a later result supplies a better
-initializer. The earlier unlaunched V107/V108 preparation remains preserved.
-The [fixed-reference configuration](../configs/quality-v102-backbone-reference-checkpoints-v1.json)
-and [validated reporting/export support](training-execution.md#fixed-references-alongside-derived-initializers)
-keep original V102 separate from the zero-gate derivative. Separate discarded
-eight-update CPU checks now pass for both cleaned recipes, with exact initial
-EMA/encoder identities, finite final model/EMA/Adam and identical eight-batch
-observations across all three data domains. [Actual CPU evidence](results/backbone-cleaned-recipes-CPU-v1.json).
-Fresh eight-update CUDA checks now pass at native256/B16/BF16. Initial EMA and
-per-arm encoder identities match; all eight actual observations and the first
-loss agree across arms, and model/EMA/Adam remain finite.
-[Actual CUDA evidence](results/backbone-cleaned-recipes-CUDA-v1.json).
-These are discarded fixtures. Review V104 before selecting the production
-initializer, then compare final native photo/material/color/weak-detail/GFX
-outputs before drawing a capacity conclusion.
-[Capacity evidence and remaining work](convnext-small-capacity.md).
-
-The [fixed-output loss-smoothing diagnostic](loss-smoothing-detail.md) measures
-whether a smaller Charbonnier scale strengthens faint-detail supervision.
-It motivates the separate V111/V112 training comparison above. The current trainer now
-exposes [validated reconstruction epsilon](loss-smoothing-detail.md#configurable-training-scale),
-with exact default replay and nondefault resume checks. The capacity recipes
-retain the original loss alongside their fixed data and encoder settings.
 
 ## Completed V100/V101 comparison
 
