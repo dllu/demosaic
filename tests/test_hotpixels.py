@@ -50,7 +50,8 @@ def test_adjacent_other_color_signal_protects_small_real_light():
     assert report["coherent_candidates_preserved"] == 2
 
 
-def test_representative_poisson_read_noise_is_not_removed_as_hot_pixels():
+@pytest.mark.parametrize("clusters", [False, True])
+def test_representative_poisson_read_noise_is_not_removed_as_hot_pixels(clusters):
     rng = np.random.default_rng(830)
     signal = np.repeat(np.array([0.002, 0.02, 0.2])[None], 512, axis=0)
     signal = np.repeat(signal, 256, axis=1)
@@ -58,7 +59,7 @@ def test_representative_poisson_read_noise_is_not_removed_as_hot_pixels():
     raw = (rng.poisson(signal / shot) * shot + rng.normal(0, np.sqrt(read), signal.shape)).astype(
         np.float32
     )
-    clean, report = repair_hot_pixels(raw, shot=shot, read=read)
+    clean, report = repair_hot_pixels(raw, shot=shot, read=read, clusters=clusters)
     np.testing.assert_array_equal(clean, raw)
     assert report["corrected_pixels"] == 0
 
