@@ -25,6 +25,7 @@ from demosaic.dng import (
     render_darktable_jpeg,
     write_dng,
 )
+from demosaic.hotpixels import repair_hot_pixels
 from demosaic.inference import load_checkpoint, restore_tiled
 from demosaic.io import read_raw
 from demosaic.noise import Sensor
@@ -82,6 +83,14 @@ def parser():
     root.add_argument("--cudnn-benchmark", action="store_true")
     root.add_argument("--jpeg-quality", type=int, default=97)
     root.add_argument("--overwrite", action="store_true")
+    root.add_argument(
+        "--hot-pixels",
+        action="store_true",
+        help="Repair isolated bright Bayer defects before model inference",
+    )
+    root.add_argument("--hot-pixel-sigma", type=float, default=6.0)
+    root.add_argument("--hot-pixel-ratio", type=float, default=2.0)
+    root.add_argument("--hot-pixel-min-delta", type=float, default=0.005)
     return root
 
 
@@ -94,6 +103,16 @@ def run(args):
         raise ValueError("Noise coefficients must be finite and nonnegative")
     if not 1 <= args.jpeg_quality <= 100:
         raise ValueError("JPEG quality must be in [1,100]")
+    if args.hot_pixels and (
+        not all(
+            math.isfinite(value)
+            for value in (args.hot_pixel_sigma, args.hot_pixel_ratio, args.hot_pixel_min_delta)
+        )
+        or args.hot_pixel_sigma <= 0
+        or args.hot_pixel_ratio <= 1
+        or args.hot_pixel_min_delta < 0
+    ):
+        raise ValueError("Invalid hot-pixel thresholds")
     if shutil.which(str(args.darktable_cli)) is None:
         raise FileNotFoundError(f"darktable-cli not found: {args.darktable_cli}")
     checkpoint_path = args.checkpoint.expanduser().resolve()
@@ -163,6 +182,18 @@ def run(args):
                 )
             else:
                 shot, read, noise_method = args.shot, args.read, "explicit"
+            hot_pixels = {"enabled": False}
+            if args.hot_pixels:
+                raw, correction = repair_hot_pixels(
+                    raw,
+                    shot=shot,
+                    read=read,
+                    sigma=args.hot_pixel_sigma,
+                    ratio=args.hot_pixel_ratio,
+                    min_delta=args.hot_pixel_min_delta,
+                )
+                hot_pixels = {"enabled": True, **correction}
+                print(f"Repaired {correction['corrected_pixels']} isolated hot pixels", flush=True)
             rgb, stats = restore_tiled(
                 model,
                 raw,
@@ -188,6 +219,7 @@ def run(args):
                 "noise_method": noise_method,
                 "noise_estimate": estimate.to_dict() if estimate else None,
                 "inference": stats,
+                "hot_pixels": hot_pixels,
             }
             write_dng(
                 dng,

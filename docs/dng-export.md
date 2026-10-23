@@ -12,7 +12,7 @@ PYTHONPATH=src uv run python scripts/export_raw_dng.py \
   '/path/to/raw/2023-12-31-17*.raf' \
   --only-with-xmp --suffix v101 \
   --output-dir ~/pictures/composites/2023-12-31-ochanomizu \
-  --darktable-cli /opt/darktable/bin/darktable-cli --cudnn-benchmark
+  --darktable-cli /opt/darktable/bin/darktable-cli --cudnn-benchmark --hot-pixels
 ```
 
 Quoted globs are expanded by the exporter. By default, every selected input needs
@@ -32,6 +32,43 @@ profiles. Supply both `--shot` and `--read` to use calibrated coefficients.
 The manifest records the estimate, fallback, coefficients, checkpoint/source/XMP
 hashes, tile settings, timings and output hashes for every completed image.
 Timings are shared-machine observations, not a new model speed claim.
+
+## Hot-pixel correction
+
+`--hot-pixels` repairs isolated bright Bayer outliers **before V101 or another
+restoration model sees them**, so correction is included in both the DNG and
+JPEG. Enabling a darktable preview module after demosaicing cannot repair the
+stored Bayer measurements; darktable's module skips RGB linear DNGs. The option
+is explicit and off by default, preserving earlier comparison protocols.
+
+The detector compares each site with its eight nearest neighbors of the same
+Bayer phase (offsets of two sensor pixels). A candidate must exceed their maximum
+by six noise standard deviations and be more than twice as bright. The minimum
+excess is .005 in black-subtracted, white-normalized units. Before replacement,
+an immediately neighboring site that exceeds its own phase median by three
+noise standard deviations protects spatially coherent light detail. Remaining
+candidates are replaced with the median of the eight same-phase neighbors.
+The original RAW and input array remain unchanged. All decisions read unchanged
+input, so results do not depend on processing strips or earlier corrections.
+
+Thresholds are adjustable with `--hot-pixel-sigma`, `--hot-pixel-ratio` and
+`--hot-pixel-min-delta`. The noise coefficients are the same ones supplied to
+restoration. Counts, phase counts, parameters, coordinate hashes and selected
+before/after values are stored in the DNG provenance and batch manifest. The
+three-pixel image border, clusters and supported highlights are intentionally
+left alone. A genuine unresolved single-color light remains ambiguous in a
+single exposure; this is a conservative outlier detector, not a calibrated
+sensor defect map. It does not change model weights or training data.
+
+On the private four-image GFX100S batch, the selected settings corrected 2,574 and
+3,229 sites in the two ISO 6400 captures, and 767 and 1,001 in the ISO 100 captures.
+The immediate-neighbor guard retained 1,242/980 additional candidates in the high
+ISO frames, including inspected illuminated-façade detail. These are correction
+counts, not verified physical defect counts. Original source images and their
+sidecars remain read-only; private native before/after crops and machine
+receipts stay with the exports. There is no new model-quality or speed claim.
+
+## Output format and sidecars
 
 The DNG contains unbalanced scene-linear camera RGB with three 16-bit channels,
 PhotometricInterpretation `LinearRaw`, zero black, white 65535, the original
@@ -64,4 +101,6 @@ strips, orientation and color tags, neutral white balance, protected destination
 and invalid-image atomicity. Optional darktable integration checks the original
 sensor crop is not applied twice. A small CPU batch test exercises RAW decoding,
 restoration, DNG/JPEG generation, hashing and refusal to overwrite originals.
+Hot-pixel tests cover all four CFA phases, sparse changes, unchanged input,
+noise-only data, line/edge/light protection and strip-boundary invariance.
 The format follows the [Adobe DNG specification](https://helpx.adobe.com/camera-raw/desktop/dng-and-file-formats/digital-negative.html).

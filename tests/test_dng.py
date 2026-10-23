@@ -245,9 +245,11 @@ def test_batch_cpu_export_decodes_raw_and_preserves_originals(tmp_path):
         (50778, "H", 1, 21, False),
         (50717, "I", 1, 65535, False),
     ]
+    mosaic = np.full((64, 96), 6554, dtype=np.uint16)
+    mosaic[32, 48] = 65535
     tifffile.imwrite(
         source,
-        np.full((64, 96), 6554, dtype=np.uint16),
+        mosaic,
         photometric=32803,
         metadata=None,
         extratags=tags,
@@ -284,10 +286,13 @@ def test_batch_cpu_export_decodes_raw_and_preserves_originals(tmp_path):
             "32",
             "--overlap",
             "16",
+            "--hot-pixels",
         ]
     )
     result = module.run(args)
     assert len(result["completed"]) == 1
+    assert result["completed"][0]["hot_pixels"]["enabled"]
+    assert result["completed"][0]["hot_pixels"]["corrected_pixels"] == 1
     assert hashlib.sha256(source.read_bytes()).hexdigest() == original_hash
     with rawpy.imread(str(output / "photo-tiny.dng")) as decoder:
         assert decoder.raw_image_visible.shape == (64, 96, 4)
