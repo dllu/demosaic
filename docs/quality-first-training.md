@@ -42,6 +42,14 @@ foliage remain soft. This captures useful quarter-budget progress without
 changing the final20k comparison or claiming full-panel/camera gains.
 [Checkpoint boundary and actual native review](results/V102-progress5000-detail-GFX-CPU-v1.json).
 
+An [early final-V102 CPU report queue](results/V102-final20000-CPU-report-queue-v1.json)
+will freeze the original20k endpoint only after its exact training child exits
+and completion/lineage/state checks pass. It will report the same12 selected
+material cases and six cached GFX contexts while V103 can continue. Its52
+reporting sources match the executed5k comparison; nine metadata-gate controls
+pass. Quality/native results remain pending. The full matched panels and
+complete GFX exports below still wait for both original20k endpoints.
+
 Frozen plan: `.cache/current-quality-20261022-v1/detail-diversity-training-v1/plan.json`.
 Artifacts: `/mnt/external/demosaic/v101-detail-diversity-20261022-v1/`.
 The runner reads explicit recipe lineage and snapshots its parent choice, leaving
