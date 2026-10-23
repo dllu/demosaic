@@ -33,8 +33,11 @@ CPU and CUDA/native256/B16 checks, with exact initial identities, matching
 observations and finite states. Their production runs await V104 review.
 The [loss-smoothing diagnostic](loss-smoothing-detail.md) also measures 324
 output gradients on 108 fixed V102 training-source restorations. Smaller epsilon
-strengthens low-noise faint-detail slopes but increases the full gradient more;
-it remains a later training hypothesis. The current trainer exposes an
+strengthens low-noise faint-detail slopes but increases the full gradient more.
+The [queued V111/V112 trial](loss-scale-training.md) tests .001 versus .0003 from
+the original V104 EMA on the cleaned corpus, preserving its architecture and
+learned fusion gates. Actual CPU/CUDA checks pass; full training waits for
+V104's current exports. The current trainer exposes an
 [explicit reconstruction-epsilon option](loss-smoothing-detail.md#configurable-training-scale)
 with exact default/gradient replay and resumed-training checks. Production
 defaults and existing frozen recipes remain unchanged.

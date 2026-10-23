@@ -57,6 +57,9 @@ from V102 on 90,872 sources with 2,395 eligible additions. It improves PSNR,
 SSIM and gradient error in all 12 selected material cases; [native comparisons](heldout-detail.md)
 are current while broader quality evaluation runs.
 [Source review and native examples](incoming-commons-quality.md).
+The [V111/V112 loss-scale comparison](loss-scale-training.md) is queued from the
+original V104 EMA on the cleaned 90,864-source corpus. Four discarded CPU/CUDA
+checks pass; its fixed 20k runs wait for V104's original exports.
 
 The source scan covers88,508 training images, with570 actually reviewed and 31
 withheld/excluded. Completed runs used the earlier 24 exclusions; seven more and

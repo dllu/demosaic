@@ -2,8 +2,9 @@
 
 **Smaller Charbonnier epsilon strengthens supervision of faint low-noise
 detail, while increasing the overall output gradient more.** This fixed-V102
-diagnostic motivates a later matched training test. The current loss and
-Tiny/Small recipes remain unchanged; no restored-quality gain is established.
+diagnostic motivates the [queued V111/V112 matched training test](loss-scale-training.md)
+from V104 on the cleaned corpus. The default loss and Tiny/Small recipes remain
+unchanged; no restored-quality gain from the new scale is established.
 
 The production penalty is `sqrt(error² + 1e-6)`, so epsilon is **0.001**.
 Its elementwise derivative is `error / sqrt(error² + epsilon²)`. Errors below
@@ -82,8 +83,8 @@ detail or prove a better training outcome.
 These are selected training sources, one noise draw per case and a fixed
 camera transform. They do not measure held-out quality, broad-camera/paired
 loss behavior, gradients through the network or generalization after training.
-The chosen band also does not cover every fine structure. A later matched
-training comparison can test the idea while holding architecture, data,
+The chosen band also does not cover every fine structure. The queued matched
+training comparison tests the idea while holding architecture, data,
 initializer and budget fixed. The [current cleaned-data capacity comparison](convnext-small-capacity.md#prepared-matched-quality-trial)
 keeps the original loss so its encoder comparison remains interpretable.
 

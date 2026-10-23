@@ -18,7 +18,7 @@ real-capture differences remain small.
 | 16-bit and practical full-resolution output | Verified101.996MP RGB16 TIFFs from V101/V102/V103 and RawNIND through the shared exporter | Keep full-frame quality/precision/timing measurements specific to the selected checkpoint |
 | 100MP within10s on GB10 | V102 inference/blending takes202.31s in the recorded IEEE FP32 configuration; target remains open | Optimize after improving quality |
 | Modern DINOv3 method | V102 continues the official pinned ConvNeXt-Tiny pyramid and pretrained DRUNet RGB family | Continue quality improvements and assess other approaches when useful |
-| Free, diverse targets and aggressive binning | V104 completed 20k on 90,872 reviewed sources; next 90,864 removes eight further source-specific targets; 4×→geometry→area2 | Measure the larger corpus and the cleaned Tiny/Small trial; retain source/detail review |
+| Free, diverse targets and aggressive binning | V104 completed 20k on 90,872 reviewed sources; next 90,864 removes eight further source-specific targets; 4×→geometry→area2 | Measure the queued V104 loss-scale trial and later capacity comparison; retain source/detail review |
 | Physical noise/exposure and camera handling | Poisson/read noise, negative black-subtracted values, Bayer phases, clipping and WB/matrix conditioning are implemented | Continue testing shadows, saturated lights, color and low-noise behavior |
 | Reliable training and resource use | Source/manifest snapshots, restart checks, bounded jobs and actual CPU/CUDA operation | Monitor current runs and retain failures/results accurately |
 | Protected originals and evaluation scenes | Originals read-only; cached GFX3879/3880 and siblings excluded from training | Preserve those boundaries in new data recipes |

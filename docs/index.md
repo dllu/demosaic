@@ -13,7 +13,7 @@ small gains and remaining high-noise softness; broader quality evaluation is act
 
 | Topic | Start here |
 | --- | --- |
-| Current work | [V84-family cleaned-data/fine-detail training](quality-first-training.md) · [Current model choices](current-model.md) |
+| Current work | [V84-family cleaned-data/fine-detail training](quality-first-training.md) · [V104 loss-scale test](loss-scale-training.md) · [Current model choices](current-model.md) |
 | Results | [Experiment index](experiments.md), [PSNR history](performance-history.md) |
 | Older work | [Chronological archive](experiment-archive.md), [local-time diary](../diary/index.md) |
 | Current model | [V102/V103 quality and comparisons](current-model.md) · [Real-camera metrics](real-camera-quality.md) · [GFX comparisons](gfx-qualitative.md) · [Q2/Sony/GFX50R](cross-camera-qualitative.md) |

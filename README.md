@@ -13,9 +13,11 @@ The zero-blur/detail recipe improves425/427 photographic source means over V101.
 Fine high-noise texture and real foliage still need work. V104 completed 20k
 updates on 90,872 sources and improves PSNR and SSIM in all 12 selected material
 cases; its full photographic, camera and GFX evaluation is running.
-The next [matched Tiny/Small quality recipes](docs/convnext-small-capacity.md#prepared-matched-quality-trial)
-are prepared on 90,864 cleaned sources and pass discarded CPU/CUDA checks;
-production training has not launched.
+The next [matched loss-scale test](docs/loss-scale-training.md) uses V104 and
+90,864 cleaned sources to test faint-detail supervision, queued after V104's
+current exports. The separate
+[Tiny/Small recipes](docs/convnext-small-capacity.md#prepared-matched-quality-trial)
+remain prepared.
 [Current models](docs/current-model.md) · [Source-quality review](docs/incoming-commons-quality.md) ·
 [Historical diary](diary/index.md).
 For explicit zero-shot/read inputs, [optional site consistency](docs/adc-consistency.md)

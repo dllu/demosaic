@@ -7,6 +7,8 @@ Tiny and Small exactly matching initial outputs and a usable starting point
 for a later trained comparison. V102 remains the current quality baseline;
 V104 completed its larger-corpus run; selected material gains are published
 and broader evaluation is active.
+The [queued loss-scale trial](loss-scale-training.md) retains the original V104
+EMA and gates; the capacity recipes below remain unlaunched.
 
 ## Official weights and interface
 

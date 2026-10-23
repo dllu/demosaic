@@ -1,0 +1,384 @@
+{
+  "status": "prepared-matched-V104-loss-scale-trial-four-actual-preflights-no-production-launch",
+  "recorded_local": "2026-10-23T15:17:34.701912-07:00",
+  "publisher": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-preparation-v1/publish.py",
+    "sha256": "65696e0ef4cc5f8d3675545c8bc6a30398092480663f1c930687bb3aeee2a256"
+  },
+  "production_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-training-v1/plan.json",
+    "sha256": "71f5bc0f5f2a1842bf3e515ab778de33374e7c7ebe9cf38e14f591f3c3243891"
+  },
+  "recipes": [
+    {
+      "path": "/home/dllu/proj/demosaic/configs/quality-v104-loss-scale-v111.yaml",
+      "sha256": "da4836824d606a96499cf715fdda071d98d0fc5ad16e8bf48e2c86f30c77be77"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/configs/quality-v104-loss-scale-v112.yaml",
+      "sha256": "433d7ea6edde917fa0722e2475dc6f40a1e4d91f44f14b6008045cbc41b84f20"
+    }
+  ],
+  "parent": {
+    "path": "/mnt/external/demosaic/models/v104-final20000.pt",
+    "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300"
+  },
+  "parent_step": 20000,
+  "all91_original_parent_EMA_tensors_preserved": true,
+  "learned_fusion_gates_preserved": true,
+  "backbones": {
+    "V111": {
+      "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+      "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+      "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+    },
+    "V112": {
+      "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+      "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+      "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+    }
+  },
+  "only_arm_differences": [
+    "run",
+    "reconstruction_charbonnier_epsilon"
+  ],
+  "matched": {
+    "seed": 62,
+    "updates_per_arm": 20000,
+    "batch_size": 16,
+    "patch_size": 256,
+    "precision": "bfloat16",
+    "lr": 1e-05,
+    "warmup_steps": 200,
+    "fresh_AdamW_EMA": true,
+    "optical_blur_probability": 0,
+    "native_targets": 128,
+    "paired_targets": 32,
+    "reviewed_ROIs": 6,
+    "conditional_photo_ROI_probability": 0.05
+  },
+  "epsilon": {
+    "V111": 0.001,
+    "V112": 0.0003,
+    "paired_RAW_unchanged": 0.0001
+  },
+  "reviewed_corpus": {
+    "path": "/mnt/external/demosaic/commons-source-tail-reviewed-20261023-v2/manifest4.jsonl",
+    "sha256": "4175378ca100351eca4669220892d4d4e8db9c47133016206c7c0eadd7ab427e"
+  },
+  "ROI_catalogue": {
+    "path": "/home/dllu/proj/demosaic/configs/low-contrast-training-rois-six-reviewed90864-v6.json",
+    "sha256": "6901e20354006efc657fecbe7e50032d1c71edade332266d2525086e110cf6da"
+  },
+  "corpus_review": {
+    "path": "/home/dllu/proj/demosaic/docs/results/commons-source-tail-reviewed90864-v1.json",
+    "sha256": "909c9092eea5e0821a51c4379461860c6d472a56e81396d5e255c365d9369b19"
+  },
+  "actual_reader_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-preparation-v1/source-coverage.json",
+    "sha256": "686f3ff5ed1e90d040208d4d9647e2e9e3d99be0bf0e7d6a88730cdfd06f019e"
+  },
+  "prospective_source_schedule": {
+    "eligible_sources": 90864,
+    "new_eligible_sources": 2391,
+    "photographic_examples": 111559,
+    "unique_photo_sources_scheduled": 62367,
+    "unique_new_sources_scheduled": 1634,
+    "new_source_examples_scheduled": 2707,
+    "ROI_examples": 5657
+  },
+  "actual_preflight_receipt": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-preflight-v2/receipt.json",
+    "sha256": "390aced6c37e0ce40c3f853c85ed72c317614d91b82f9487b320e0adfeba3aba"
+  },
+  "preflight_results": {
+    "CPU-V111": {
+      "worker_result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-preflight-v1/training/CPU-V111-result.json",
+        "sha256": "583c80c2673293209b9b6193ef87bc5c889bc7761188428790cac215889dbe2f"
+      },
+      "first_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-preflight-v1/CPU-V111-first-prediction.json",
+        "sha256": "e9a9504b1c4e427af496b8da23c2b3821be0541dbe6e4f814d737bc94f720ebf"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/v104-loss-scale-preflight-20261023-v1/CPU/V111/last.pt",
+        "sha256": "4d1b5df4811e6a68f16601278a0441e92f1d447300fda93b25150af760d48d9a"
+      },
+      "metrics": {
+        "path": "/mnt/external/demosaic/v104-loss-scale-preflight-20261023-v1/CPU/V111/metrics.jsonl",
+        "sha256": "2e302eef46d95562fed8ebb9e4c03eff7ab8bc8b4d47c43b5764cd92a29a248a"
+      },
+      "epsilon": 0.001,
+      "step": 8,
+      "initial_EMA_and_frozen_encoder_exact": true,
+      "model_EMA_tensors_finite": 91,
+      "Adam_states_finite_all_step8": 89,
+      "first_logged_loss": 0.006312352605164051,
+      "first_logged_gradient_norm": 0.17926758527755737,
+      "actual_config": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-preflight-v1/training/work/configs/CPU-V111.yaml",
+        "sha256": "097eef9bb8ceab63c346c832748833276866a6de8ce1712941f52f0b7fd85875"
+      },
+      "source_archive_SHA256": "212747fc42786b235dc0f06c192f63da6557d41911a0d3c9400437e4da286f6e",
+      "maximum_logged_CUDA_allocation_GB_decimal": 0,
+      "maximum_logged_CUDA_allocation_GiB": 0.0
+    },
+    "CPU-V112": {
+      "worker_result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-preflight-v1/training/CPU-V112-result.json",
+        "sha256": "438c6425110cb09ec5387297058af1a67def460eeabf4ccddd1e62711019d497"
+      },
+      "first_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-preflight-v1/CPU-V112-first-prediction.json",
+        "sha256": "e9a9504b1c4e427af496b8da23c2b3821be0541dbe6e4f814d737bc94f720ebf"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/v104-loss-scale-preflight-20261023-v1/CPU/V112/last.pt",
+        "sha256": "8c9f06a4c5afe80d75c1830d72c9c80165d6fa219bf5c5b8247d0be3ffb2a133"
+      },
+      "metrics": {
+        "path": "/mnt/external/demosaic/v104-loss-scale-preflight-20261023-v1/CPU/V112/metrics.jsonl",
+        "sha256": "83fc436ec7a246f7dc0532cb37e22ed9b1f5d2a610224862780072787b3fa9bc"
+      },
+      "epsilon": 0.0003,
+      "step": 8,
+      "initial_EMA_and_frozen_encoder_exact": true,
+      "model_EMA_tensors_finite": 91,
+      "Adam_states_finite_all_step8": 89,
+      "first_logged_loss": 0.005800226237624884,
+      "first_logged_gradient_norm": 0.2085578590631485,
+      "actual_config": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-preflight-v1/training/work/configs/CPU-V112.yaml",
+        "sha256": "3dca7a39d201d6f9684928cf347c7ae039d83333987480cf8bf8bce74626cb4d"
+      },
+      "source_archive_SHA256": "212747fc42786b235dc0f06c192f63da6557d41911a0d3c9400437e4da286f6e",
+      "maximum_logged_CUDA_allocation_GB_decimal": 0,
+      "maximum_logged_CUDA_allocation_GiB": 0.0
+    },
+    "CUDA-V111": {
+      "worker_result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-preflight-v2/training/CUDA-V111-result.json",
+        "sha256": "3934664b6fc62b5029445b003641f4b3ec37178bfdf84892fe2090b9acef0a99"
+      },
+      "first_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-preflight-v2/CUDA-V111-first-prediction.json",
+        "sha256": "fadb488aea10f0ada295b20dbf3d3be2066dcb156262983accf14a8f5512529d"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/v104-loss-scale-preflight-20261023-v2/CUDA/V111/last.pt",
+        "sha256": "c24db919ae3151cd9333b430af17f44f0d6ada40485debabeecaead1b832269b"
+      },
+      "metrics": {
+        "path": "/mnt/external/demosaic/v104-loss-scale-preflight-20261023-v2/CUDA/V111/metrics.jsonl",
+        "sha256": "8fa546a4c7003e9f7e0705f78d3f77104ec6d83783e7bae2957eed09e676848d"
+      },
+      "epsilon": 0.001,
+      "step": 8,
+      "initial_EMA_and_frozen_encoder_exact": true,
+      "model_EMA_tensors_finite": 91,
+      "Adam_states_finite_all_step8": 89,
+      "first_logged_loss": 0.010142810642719269,
+      "first_logged_gradient_norm": 0.07502613216638565,
+      "actual_config": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-preflight-v2/training/work/configs/CUDA-V111.yaml",
+        "sha256": "bf43e509996f62e421bf6fdb7e657cbc19c8ab845bb798feb468e94a1cccc719"
+      },
+      "source_archive_SHA256": "212747fc42786b235dc0f06c192f63da6557d41911a0d3c9400437e4da286f6e",
+      "maximum_logged_CUDA_allocation_GB_decimal": 6.951158272,
+      "maximum_logged_CUDA_allocation_GiB": 6.473770618438721
+    },
+    "CUDA-V112": {
+      "worker_result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-preflight-v2/training/CUDA-V112-result.json",
+        "sha256": "32be04c1e3a0d1886e3b59767fd500f2ffd0dc1dfda69d57fbe935edd0a3a5e2"
+      },
+      "first_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-preflight-v2/CUDA-V112-first-prediction.json",
+        "sha256": "fadb488aea10f0ada295b20dbf3d3be2066dcb156262983accf14a8f5512529d"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/v104-loss-scale-preflight-20261023-v2/CUDA/V112/last.pt",
+        "sha256": "bda86f7269bd262889b5157dbf3f9c88bcf5ed1adcf1a0efd185056805e6f242"
+      },
+      "metrics": {
+        "path": "/mnt/external/demosaic/v104-loss-scale-preflight-20261023-v2/CUDA/V112/metrics.jsonl",
+        "sha256": "63f35d7ee2e1bc02a2690fbfab4b760bb7862769a65d830fba6dc21b8f2420b3"
+      },
+      "epsilon": 0.0003,
+      "step": 8,
+      "initial_EMA_and_frozen_encoder_exact": true,
+      "model_EMA_tensors_finite": 91,
+      "Adam_states_finite_all_step8": 89,
+      "first_logged_loss": 0.0095201525837183,
+      "first_logged_gradient_norm": 0.08111897110939026,
+      "actual_config": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-preflight-v2/training/work/configs/CUDA-V112.yaml",
+        "sha256": "3e03b7fc6a2d8a12186d1eb480bf0a7629124bfc964414b0612bd69b89b842a6"
+      },
+      "source_archive_SHA256": "212747fc42786b235dc0f06c192f63da6557d41911a0d3c9400437e4da286f6e",
+      "maximum_logged_CUDA_allocation_GB_decimal": 6.951158272,
+      "maximum_logged_CUDA_allocation_GiB": 6.473770618438721
+    }
+  },
+  "private_memory_field_unit_correction": "The private driver labeled raw cuda_gb values as GiB. train.py logs bytes/1e9: preserve private bytes and publish explicit decimal GB plus converted GiB.",
+  "matched_actual_inputs_and_first_outputs": {
+    "CPU": {
+      "all8_observation_fingerprints_exact": true,
+      "first_actual_predictions_and_auxiliary_exact": true,
+      "epsilon_changes_actual_first_loss_and_gradient": true,
+      "input_trace": [
+        {
+          "step": 1,
+          "domain": "synthetic",
+          "batch_sha256": "db69add057087e8b17f269c9fd29e7c78c470af5eba0fb196542589c9dca1ee8"
+        },
+        {
+          "step": 2,
+          "domain": "native-RAW-synthetic",
+          "batch_sha256": "915c96ff67830a15aa52f5513dc31c05986e44dd29ceda4eea786116aae331f8"
+        },
+        {
+          "step": 3,
+          "domain": "synthetic",
+          "batch_sha256": "94f1b8f17acfba2bed937da9c06fad8945f5c640d5f7c615858ebb6f8f6654f1"
+        },
+        {
+          "step": 4,
+          "domain": "synthetic",
+          "batch_sha256": "c9dbaccbef2fbd1c6f8f8062e48ffe3d834426e1367a51305d0e0c4d536f54bd"
+        },
+        {
+          "step": 5,
+          "domain": "paired-RAW",
+          "batch_sha256": "0e2050042661e33aea80a47f92d8e309ce83f131e9a5839d86ff331a410d3b6e"
+        },
+        {
+          "step": 6,
+          "domain": "synthetic",
+          "batch_sha256": "8d22a59a46016f1ec1dc368ccbaf27632837df7b8dfe01053500adea00af6da2"
+        },
+        {
+          "step": 7,
+          "domain": "paired-RAW",
+          "batch_sha256": "71fd12947cae9a2ba167c4c60460d6b54e9c60200d2a9a40c3ef55103e73d43d"
+        },
+        {
+          "step": 8,
+          "domain": "synthetic",
+          "batch_sha256": "96811698a8bc242aae75cde20e6b3b5acb9e40c4d7f39ff053550c2ee8e6a3c7"
+        }
+      ],
+      "domain_counts": {
+        "synthetic": 5,
+        "native-RAW-synthetic": 1,
+        "paired-RAW": 2
+      },
+      "preserved_successful_CPU_runs_reused_without_repetition": true
+    },
+    "CUDA": {
+      "all8_observation_fingerprints_exact": true,
+      "first_actual_predictions_and_auxiliary_exact": true,
+      "epsilon_changes_actual_first_loss_and_gradient": true,
+      "input_trace": [
+        {
+          "step": 1,
+          "domain": "synthetic",
+          "batch_sha256": "86cb6f3c2c839ad4cfa93e5c9517ee4da169ece67746a036101857ed5a307522"
+        },
+        {
+          "step": 2,
+          "domain": "native-RAW-synthetic",
+          "batch_sha256": "7fe9a1fb2fe1b203c9e54f232a76334ce9bea545cd3e93b6996fb7bf238857d8"
+        },
+        {
+          "step": 3,
+          "domain": "synthetic",
+          "batch_sha256": "dd34252fca5ba460d55794913c0fce8672ace791ab23bb04488f8a872fb245fc"
+        },
+        {
+          "step": 4,
+          "domain": "synthetic",
+          "batch_sha256": "df24b9da5b4d9f8376245a4022e0c9e38ebf6b20f173d837d30329fa6a101593"
+        },
+        {
+          "step": 5,
+          "domain": "paired-RAW",
+          "batch_sha256": "12ea5eb5889365655a619baa75d2ef92a956c8fd4fde878499001cf48153e2e7"
+        },
+        {
+          "step": 6,
+          "domain": "synthetic",
+          "batch_sha256": "62fababb325881093cc11715a38d4c3c3e8418512a2af7a9257dd44d6f04925d"
+        },
+        {
+          "step": 7,
+          "domain": "paired-RAW",
+          "batch_sha256": "445bb741d64b969cc0e373edd265e561d956778617f50589db9dd47956fdef79"
+        },
+        {
+          "step": 8,
+          "domain": "synthetic",
+          "batch_sha256": "ad828b5fe7fb0df8dd6390b05a526dd18308c5e8c857cad41f787fe7a7cf816a"
+        }
+      ],
+      "domain_counts": {
+        "synthetic": 5,
+        "native-RAW-synthetic": 1,
+        "paired-RAW": 2
+      }
+    }
+  },
+  "all_four_actual_source_archives_same_SHA256": "212747fc42786b235dc0f06c192f63da6557d41911a0d3c9400437e4da286f6e",
+  "preserved_wrapper_failure_and_correction": {
+    "preserved_prior_failure": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-preflight-v1/status.json",
+      "sha256": "606766f695dbcb8712c610c7924a1ea58f266cb8ae5a2ce32d2583b8e3c3e6c2"
+    },
+    "preserved_prior_failure_log": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-preflight-v1/CUDA-V111.log",
+      "sha256": "9aae6acdad824bbc02cbb37483b8d4c0daf00c0d89b0a7a543ab2f232696c403"
+    },
+    "correction": "Guard the diagnostic wrapper entry point for spawned data-loader imports; unchanged production trainer and recipes. Successful CPU evidence retained; only CUDA checks execute in v2."
+  },
+  "failed_wrapper_attempt_saved_no_checkpoint_or_train_rows": true,
+  "fixed_reference_manifest": {
+    "path": "/home/dllu/proj/demosaic/configs/quality-v104-loss-scale-reference-checkpoints-v1.json",
+    "sha256": "482c172e1880696ee34b26c52ca993411786d47ab310deb45cf7e22537f96cca"
+  },
+  "fixed_reference_checkpoints": [
+    {
+      "arm": "V102",
+      "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+      "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+      "expected_lineage": {
+        "step": 20000
+      },
+      "expected_backbone": {
+        "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      }
+    }
+  ],
+  "unchanged_original_plans": {
+    "reviewed-corpus-training-v1": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-corpus-training-v1/plan.json",
+      "sha256": "383da795a2d0bdb75f9900155c2f5d7fb84e74bb3609e44018fbad028290bd8f"
+    },
+    "reviewed-corpus-evaluation-v1": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-corpus-evaluation-v1/plan.json",
+      "sha256": "40e051c8a7428ff20ed92dca892b2140a623aacc6e79cbdbeda574a80210a5fa"
+    },
+    "reviewed-corpus-fullframe-v1": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-corpus-fullframe-v1/plan.json",
+      "sha256": "fc165670e61d96248c25e64f035ecf1fec28ca5cf021b2f7cc8a5f7638a4483a"
+    },
+    "backbone-capacity-training-v2": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/backbone-capacity-training-v2/plan.json",
+      "sha256": "f3712b9161e4e7c3778672868551f686f2ff9fda16cae45eb0330a5601dd5af0"
+    }
+  },
+  "production_controller_launched": false,
+  "scope": "Prepared quality comparison and four successful discarded eight-update checks, CPU64/B1/FP32 and CUDA256/B16/BF16, with exact original V104 EMA/official Tiny initialization, matched eight observation batches and initial prediction/auxiliary outputs. Successful CPU evidence retained after a diagnostic-wrapper spawn failure; corrected guarded wrapper runs only CUDA in a new root. No trained quality, timing or completed-production exposure claim. Compare fixed final image metrics and native triplets; raw loss values are not comparable across epsilon settings. Original V104 queues and earlier evidence remain unchanged."
+}

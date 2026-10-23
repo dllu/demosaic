@@ -18,7 +18,7 @@ inspection, rather than native inspection of every image.
 | --- | ---: | --- |
 | V102/V103 | 88,477 | Completed model comparison |
 | V104 | 90,872 | Original 20k training complete; broader evaluation active |
-| Next reviewed pair | **90,864** | Prepared V109 Tiny / V110 Small recipes |
+| Next reviewed cohort | **90,864** | V111/V112 loss-scale trial queued; V109 Tiny / V110 Small remain prepared |
 
 The next cohort applies **eight additional training-source withholds relative
 to V104**: the three previously inspected photo-quality cases and five printed
@@ -47,6 +47,10 @@ Eight-update CUDA checks also pass at native256/B16/BF16, with exact initial
 EMA/encoder identities, finite model/EMA/Adam, matching actual observations and
 matching first losses. [Actual CUDA checks](results/backbone-cleaned-recipes-CUDA-v1.json).
 Production training has not launched for the capacity comparison.
+The [next loss-scale comparison](loss-scale-training.md) instead retains the
+original V104 EMA and learned gates on this same cleaned corpus. Both recipes
+pass discarded CPU/CUDA checks; their fixed 20k runs are queued after V104's
+original evaluation and full-frame exports.
 
 These inputs supersede the unlaunched 90,869-source preparation. Earlier
 manifests, recipes and receipts remain preserved. V104 completed its original

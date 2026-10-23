@@ -1,8 +1,10 @@
 # Quality training in the V84 architectural family
 
-**Continue quality work from V102 final20k in V84's DRUNet RGB/frozen DINOv3
-ConvNeXt-Tiny family.** It reaches36.67951dB photographic PSNR,+.17604dB over
-V101, with higher known/unseen CFA means. V103 is a close alternative; V102's
+**V104 final20k initializes the next quality trial in V84's DRUNet RGB/frozen
+DINOv3 ConvNeXt-Tiny family.** Its selected material gains are published below;
+broader evaluation is active. The fully evaluated V102 reference reaches
+36.67951dB photographic PSNR, +.17604dB over V101, with higher known/unseen CFA
+means. V103 is a close alternative; V102's
 flat-color and weak-texture diagnostics favor it overall. High-noise fine detail
 remains soft. [Completed results and native comparisons](v102-v103-quality-review.md).
 
@@ -37,7 +39,7 @@ V102/V103 photo PSNR is36.67951/36.68091dB. V102 gains+.17604dB over V101
 on full427, with425 source means improving; known/unseen CFA means rise to
 54.23709/53.97177dB. The six/32 ROI difference has only a tiny photo effect,
 while V102 has lower ADC color bias and stronger tested weak-carrier response.
-Use V102 as the next initializer. [Scores, uncertainty, actual native review
+V102 initialized the subsequent V104 continuation. [Scores, uncertainty, actual native review
 and hashes](v102-v103-quality-review.md).
 
 The [four-material CPU panel](heldout-detail.md) separately shows V102's
@@ -115,6 +117,25 @@ in the [incoming source review](incoming-commons-quality.md). The earlier
 six/32 ROI comparison had little photographic effect; retain the simpler six
 before adding another ROI intervention.
 
+## Queued V104 loss-scale comparison
+
+[V111 and V112](loss-scale-training.md) test reconstruction epsilon .001 versus
+.0003 from the original V104 final 20k EMA, preserving all 91 tensors and learned
+fusion gates. The architecture, cleaned 90,864-source corpus, original six ROIs
+and fixed 20k budget match. Both use seed 62, fresh AdamW/EMA, B16/native256/BF16,
+LR 1e-5 and 200 warmup updates. Epsilon is the only numerical recipe difference;
+paired RAW keeps its existing .0001 scale.
+
+The [fixed-output diagnostic](loss-smoothing-detail.md) motivates this trained
+test but does not establish better restoration. Compare final image metrics,
+weak detail, color and native crops on the same observations. Raw loss values
+across epsilon settings use different objectives. Training is queued after the
+original V104 evaluation/export owners finish. Its four successful CPU/CUDA
+smokes are adopted with verified source/configuration equivalence, without
+repetition. Earlier experiments retain their inputs and evidence.
+[Recipes, reader checks and actual discarded preflights](results/v104-loss-scale-prepared-v1.json) ·
+[Actual owned training/evaluation/export queues](results/v104-loss-scale-queued-v1.json).
+
 ## Prepared Tiny/Small quality comparison
 
 [V109 Tiny](../configs/quality-v102-backbone-tiny-v109.yaml) and
@@ -138,9 +159,10 @@ The full prospective schedule contains
 counts, not completed training. [Prepared plan, hashes and reader evidence](results/backbone-capacity-training-prepared-v2.json).
 
 No production controller has launched for these recipes.
-The incoming loss-tail review is complete. Complete and review V104 first;
-retain the prepared evidence if later results warrant a different initializer
-or cohort. The earlier unlaunched V107/V108 preparation remains preserved.
+The incoming loss-tail review is complete. Review V104's broader results before
+selecting a capacity initializer; the matched loss-scale test above retains its
+learned gates. Preserve this preparation if a later result supplies a better
+initializer. The earlier unlaunched V107/V108 preparation remains preserved.
 The [fixed-reference configuration](../configs/quality-v102-backbone-reference-checkpoints-v1.json)
 and [validated reporting/export support](training-execution.md#fixed-references-alongside-derived-initializers)
 keep original V102 separate from the zero-gate derivative. Separate discarded
@@ -158,10 +180,10 @@ outputs before drawing a capacity conclusion.
 
 The [fixed-output loss-smoothing diagnostic](loss-smoothing-detail.md) measures
 whether a smaller Charbonnier scale strengthens faint-detail supervision.
-It motivates a separate later training comparison. The current trainer now
+It motivates the separate V111/V112 training comparison above. The current trainer now
 exposes [validated reconstruction epsilon](loss-smoothing-detail.md#configurable-training-scale),
-with exact default replay and nondefault resume checks. Current recipes retain
-the original loss alongside their fixed data and encoder settings.
+with exact default replay and nondefault resume checks. The capacity recipes
+retain the original loss alongside their fixed data and encoder settings.
 
 ## Completed V100/V101 comparison
 

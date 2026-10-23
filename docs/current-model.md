@@ -4,6 +4,9 @@
 V84's full-resolution pretrained DRUNet RGB trunk, physical noise anchors and
 frozen official DINOv3 ConvNeXt-Tiny pyramid. V103 is a close alternative;
 V43 remains a historical comparator.
+V104's completed selected-material gains are already published, and its exact
+final EMA initializes the [next quality trial](loss-scale-training.md). Its
+broader photographic/camera/GFX evaluation is still running.
 
 | Version | Photo sRGB PSNR | Known4 CFA PSNR | Unseen5 CFA PSNR | Main use |
 | --- | ---: | ---: | ---: | --- |
@@ -69,6 +72,8 @@ at ADC-only/ISO100/ISO12800.
 Its full photographic, camera and GFX evaluation is active. The read-only
 candidate is `/mnt/external/demosaic/models/v104-final20000.pt`; broader results
 will inform the next useful baseline.
+The queued V111/V112 loss-scale test preserves V104's learned fusion gates and
+holds the cleaned data and budget fixed. It has no production quality result yet.
 [Current recipes and data](quality-first-training.md) · [Incoming source review](incoming-commons-quality.md).
 Earlier [V100/V101](v84-curated-quality-review.md) and
 [V84/V85](native-data-original20k-review.md) reports retain their results;
