@@ -8,6 +8,14 @@ See [current models](current-model.md) and the [active cleaned-data recipes](qua
 The literature/design record below explains the explored approaches; its older
 study decisions do not freeze the current architecture or README examples.
 
+Current [V101 path/preview diagnostics](noise-conditioning.md#which-path-responds-to-conditioning)
+make132 actual CPU restorations on the fixed material inputs. Lower CNN sigma
+retains structure and grain while losing high-noise PSNR. Scaling DINO offsets
+or substituting Wiener/self/clean-oracle previews gives no consistent gain.
+This is a fixed-weight result, not a trained-backbone/fusion ablation; the
+unavailable clean-image oracle is never a candidate method. Current quality
+work remains the matched cleaned-data/detail continuations.
+
 Research started 2026-10-14. Sources below are primary implementations, papers,
 and vendor documentation. A recent publication is not itself evidence that this
 project matches its performance.

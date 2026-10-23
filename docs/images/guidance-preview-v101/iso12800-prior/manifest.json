@@ -1,0 +1,1757 @@
+{
+  "preferred_model": "V101",
+  "scope": "Fixed-weight causal diagnostic, not trained architecture ablation. GT-preview is an unavailable oracle where present, never a candidate method. Native160 crops unchanged; all shared noisy/GT/display fields exact.",
+  "groups": {
+    "photo": {
+      "kind": "synthetic",
+      "labels": {
+        "V101-noisy-preview": "V101",
+        "V101-Wiener7-preview": "Wiener7",
+        "V101-self-preview": "Self (2 passes)",
+        "V101-GT-preview-ORACLE": "GT ORACLE"
+      },
+      "native_crops": [
+        {
+          "image": "V101-noisy-preview-0ae232278265.png",
+          "caption": "Fine pale bark grain and fissures / iso12800-prior / V101-noisy-preview",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "9d425e424a1dbb30fb3d4433676844a7079c1bd3e87fc9aac2da4ed44ebf71ec",
+          "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+          "source": {
+            "title": "File:Kentucky Coffee-tree Gymnocladus dioicus 3264px.jpg",
+            "page_url": "https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "author": "Photo (c)2007 Derek Ramsey (Ram-Man)",
+            "license": "CC BY-SA 2.5",
+            "license_url": "https://creativecommons.org/licenses/by-sa/2.5",
+            "attribution": null,
+            "credit": "Self-photographed",
+            "sha1": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sha1_hex": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "download_path": "images/0a/e2/0ae232278265dabbdd54f52c34045a3d03323aa7.jpg",
+            "width": 3264,
+            "height": 2448,
+            "id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "split": "val",
+            "bin_factor": 8,
+            "color_space": "linear-sRGB",
+            "dtype": "uint16",
+            "cache": "/mnt/external/demosaic/commons-v1/images/0a/0ae232278265dabbdd54f52c34045a3d03323aa7.npy",
+            "shape": [
+              306,
+              408,
+              3
+            ],
+            "cache_sha256": "a2c1759485e1be5d43c88f439ff801da4a5f39e68953bcb966b66e813788e563"
+          },
+          "validation_index": 124,
+          "validation_seed": 42,
+          "evaluation_tile_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "source_cache_context_xywh": [
+            104,
+            38,
+            256,
+            256
+          ],
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "model": {
+            "label": "V101-noisy-preview",
+            "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+            "source": "/mnt/external/demosaic/models/v101-final10000.pt",
+            "step": 10000,
+            "policy": {
+              "label": "V101-noisy-preview",
+              "preview": "noisy-Malvar",
+              "oracle": false,
+              "logical_restoration_passes": 1
+            },
+            "first_pass_prediction": null,
+            "device": "cpu",
+            "compute_precision": "float32"
+          },
+          "display_exposure": 1,
+          "reference": "Exact synthetic clean target",
+          "observation": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-inputs-v2/0ae232278265dabbdd54f52c34045a3d03323aa7-iso12800-prior-RGGB.npz",
+            "sha256": "bedb51d2acad1a205f8b0902df657197bfd871769d8984c2fe4c7e183d2f670a"
+          },
+          "detail": "Fine pale bark grain and fissures",
+          "selection": "Four diverse contexts selected after actually viewing10 clean native256 contexts and their native160 centers, before viewing model outputs on these cases. Bark, white feathers, forest canopy/haze and gray fur. Mixed contrast; selected for fine/weak structures, not global low-contrast labels."
+        },
+        {
+          "image": "V101-Wiener7-preview-0ae232278265.png",
+          "caption": "Fine pale bark grain and fissures / iso12800-prior / V101-Wiener7-preview",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "9ce58d59b943d035c5f2dcf85236eea322165fe03da8a349c51c83dea532ebcd",
+          "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+          "source": {
+            "title": "File:Kentucky Coffee-tree Gymnocladus dioicus 3264px.jpg",
+            "page_url": "https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "author": "Photo (c)2007 Derek Ramsey (Ram-Man)",
+            "license": "CC BY-SA 2.5",
+            "license_url": "https://creativecommons.org/licenses/by-sa/2.5",
+            "attribution": null,
+            "credit": "Self-photographed",
+            "sha1": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sha1_hex": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "download_path": "images/0a/e2/0ae232278265dabbdd54f52c34045a3d03323aa7.jpg",
+            "width": 3264,
+            "height": 2448,
+            "id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "split": "val",
+            "bin_factor": 8,
+            "color_space": "linear-sRGB",
+            "dtype": "uint16",
+            "cache": "/mnt/external/demosaic/commons-v1/images/0a/0ae232278265dabbdd54f52c34045a3d03323aa7.npy",
+            "shape": [
+              306,
+              408,
+              3
+            ],
+            "cache_sha256": "a2c1759485e1be5d43c88f439ff801da4a5f39e68953bcb966b66e813788e563"
+          },
+          "validation_index": 124,
+          "validation_seed": 42,
+          "evaluation_tile_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "source_cache_context_xywh": [
+            104,
+            38,
+            256,
+            256
+          ],
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "model": {
+            "label": "V101-Wiener7-preview",
+            "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+            "source": "/mnt/external/demosaic/models/v101-final10000.pt",
+            "step": 10000,
+            "policy": {
+              "label": "V101-Wiener7-preview",
+              "preview": "input-Wiener7",
+              "oracle": false,
+              "logical_restoration_passes": 1
+            },
+            "first_pass_prediction": null,
+            "device": "cpu",
+            "compute_precision": "float32"
+          },
+          "display_exposure": 1,
+          "reference": "Exact synthetic clean target",
+          "observation": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-inputs-v2/0ae232278265dabbdd54f52c34045a3d03323aa7-iso12800-prior-RGGB.npz",
+            "sha256": "bedb51d2acad1a205f8b0902df657197bfd871769d8984c2fe4c7e183d2f670a"
+          },
+          "detail": "Fine pale bark grain and fissures",
+          "selection": "Four diverse contexts selected after actually viewing10 clean native256 contexts and their native160 centers, before viewing model outputs on these cases. Bark, white feathers, forest canopy/haze and gray fur. Mixed contrast; selected for fine/weak structures, not global low-contrast labels."
+        },
+        {
+          "image": "V101-self-preview-0ae232278265.png",
+          "caption": "Fine pale bark grain and fissures / iso12800-prior / V101-self-preview",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "ed087f603d39f006614498cc14545e1b76bf9bec506f53396e2cfcbcf3f42220",
+          "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+          "source": {
+            "title": "File:Kentucky Coffee-tree Gymnocladus dioicus 3264px.jpg",
+            "page_url": "https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "author": "Photo (c)2007 Derek Ramsey (Ram-Man)",
+            "license": "CC BY-SA 2.5",
+            "license_url": "https://creativecommons.org/licenses/by-sa/2.5",
+            "attribution": null,
+            "credit": "Self-photographed",
+            "sha1": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sha1_hex": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "download_path": "images/0a/e2/0ae232278265dabbdd54f52c34045a3d03323aa7.jpg",
+            "width": 3264,
+            "height": 2448,
+            "id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "split": "val",
+            "bin_factor": 8,
+            "color_space": "linear-sRGB",
+            "dtype": "uint16",
+            "cache": "/mnt/external/demosaic/commons-v1/images/0a/0ae232278265dabbdd54f52c34045a3d03323aa7.npy",
+            "shape": [
+              306,
+              408,
+              3
+            ],
+            "cache_sha256": "a2c1759485e1be5d43c88f439ff801da4a5f39e68953bcb966b66e813788e563"
+          },
+          "validation_index": 124,
+          "validation_seed": 42,
+          "evaluation_tile_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "source_cache_context_xywh": [
+            104,
+            38,
+            256,
+            256
+          ],
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "model": {
+            "label": "V101-self-preview",
+            "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+            "source": "/mnt/external/demosaic/models/v101-final10000.pt",
+            "step": 10000,
+            "policy": {
+              "label": "V101-self-preview",
+              "preview": "self-first-pass",
+              "oracle": false,
+              "logical_restoration_passes": 2
+            },
+            "first_pass_prediction": {
+              "path": "/mnt/external/demosaic/V101-conditioning-probe-CPU-20261022-v1/predictions/0ae232278265dabbdd54f52c34045a3d03323aa7-iso12800-prior-1x.npy",
+              "sha256": "953e1ddeb5cf7046bc61fccbd4e1800ba0e89d2895d6eed239d00aa480dbbe96"
+            },
+            "device": "cpu",
+            "compute_precision": "float32"
+          },
+          "display_exposure": 1,
+          "reference": "Exact synthetic clean target",
+          "observation": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-inputs-v2/0ae232278265dabbdd54f52c34045a3d03323aa7-iso12800-prior-RGGB.npz",
+            "sha256": "bedb51d2acad1a205f8b0902df657197bfd871769d8984c2fe4c7e183d2f670a"
+          },
+          "detail": "Fine pale bark grain and fissures",
+          "selection": "Four diverse contexts selected after actually viewing10 clean native256 contexts and their native160 centers, before viewing model outputs on these cases. Bark, white feathers, forest canopy/haze and gray fur. Mixed contrast; selected for fine/weak structures, not global low-contrast labels."
+        },
+        {
+          "image": "V101-GT-preview-ORACLE-0ae232278265.png",
+          "caption": "Fine pale bark grain and fissures / iso12800-prior / V101-GT-preview-ORACLE \u2014 ORACLE, not a usable method",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "36f2d37e61ad941c392dd344b169d1a4070a385028a8ca61554e5b15ab6d0466",
+          "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+          "source": {
+            "title": "File:Kentucky Coffee-tree Gymnocladus dioicus 3264px.jpg",
+            "page_url": "https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "author": "Photo (c)2007 Derek Ramsey (Ram-Man)",
+            "license": "CC BY-SA 2.5",
+            "license_url": "https://creativecommons.org/licenses/by-sa/2.5",
+            "attribution": null,
+            "credit": "Self-photographed",
+            "sha1": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sha1_hex": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "download_path": "images/0a/e2/0ae232278265dabbdd54f52c34045a3d03323aa7.jpg",
+            "width": 3264,
+            "height": 2448,
+            "id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "split": "val",
+            "bin_factor": 8,
+            "color_space": "linear-sRGB",
+            "dtype": "uint16",
+            "cache": "/mnt/external/demosaic/commons-v1/images/0a/0ae232278265dabbdd54f52c34045a3d03323aa7.npy",
+            "shape": [
+              306,
+              408,
+              3
+            ],
+            "cache_sha256": "a2c1759485e1be5d43c88f439ff801da4a5f39e68953bcb966b66e813788e563"
+          },
+          "validation_index": 124,
+          "validation_seed": 42,
+          "evaluation_tile_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "source_cache_context_xywh": [
+            104,
+            38,
+            256,
+            256
+          ],
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "model": {
+            "label": "V101-GT-preview-ORACLE",
+            "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+            "source": "/mnt/external/demosaic/models/v101-final10000.pt",
+            "step": 10000,
+            "policy": {
+              "label": "V101-GT-preview-ORACLE",
+              "preview": "GT-oracle-only",
+              "oracle": true,
+              "logical_restoration_passes": null
+            },
+            "first_pass_prediction": null,
+            "device": "cpu",
+            "compute_precision": "float32"
+          },
+          "display_exposure": 1,
+          "reference": "Exact synthetic clean target",
+          "observation": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-inputs-v2/0ae232278265dabbdd54f52c34045a3d03323aa7-iso12800-prior-RGGB.npz",
+            "sha256": "bedb51d2acad1a205f8b0902df657197bfd871769d8984c2fe4c7e183d2f670a"
+          },
+          "detail": "Fine pale bark grain and fissures",
+          "selection": "Four diverse contexts selected after actually viewing10 clean native256 contexts and their native160 centers, before viewing model outputs on these cases. Bark, white feathers, forest canopy/haze and gray fur. Mixed contrast; selected for fine/weak structures, not global low-contrast labels."
+        },
+        {
+          "image": "V101-noisy-preview-14d8ea6cea4a.png",
+          "caption": "Subtle white feather texture / iso12800-prior / V101-noisy-preview",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "19f551ef1b2a8190ba022ac299c3d1efa0430ef32a2a7590ca35e3af8fc2b310",
+          "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+          "source": {
+            "title": "File:Snowy egret in profile.jpg",
+            "page_url": "https://commons.wikimedia.org/wiki/File:Snowy_egret_in_profile.jpg",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/1/12/Snowy_egret_in_profile.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "author": "Serebit",
+            "license": "CC BY-SA 4.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+            "attribution": null,
+            "credit": "Own work",
+            "sha1": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sha1_hex": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "download_path": "images/14/d8/14d8ea6cea4a27346a643e6d767f800729fb4693.jpg",
+            "width": 6000,
+            "height": 4000,
+            "id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "split": "val",
+            "bin_factor": 8,
+            "color_space": "linear-sRGB",
+            "dtype": "uint16",
+            "cache": "/mnt/external/demosaic/commons-v1/images/14/14d8ea6cea4a27346a643e6d767f800729fb4693.npy",
+            "shape": [
+              500,
+              750,
+              3
+            ],
+            "cache_sha256": "76baaa81d4fe8e7ec7f275470d8dd8db9bf3f5ab2f58a1f46e956d31d2ec6aba"
+          },
+          "validation_index": 200,
+          "validation_seed": 42,
+          "evaluation_tile_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "source_cache_context_xywh": [
+            271,
+            127,
+            256,
+            256
+          ],
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "model": {
+            "label": "V101-noisy-preview",
+            "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+            "source": "/mnt/external/demosaic/models/v101-final10000.pt",
+            "step": 10000,
+            "policy": {
+              "label": "V101-noisy-preview",
+              "preview": "noisy-Malvar",
+              "oracle": false,
+              "logical_restoration_passes": 1
+            },
+            "first_pass_prediction": null,
+            "device": "cpu",
+            "compute_precision": "float32"
+          },
+          "display_exposure": 1,
+          "reference": "Exact synthetic clean target",
+          "observation": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-inputs-v2/14d8ea6cea4a27346a643e6d767f800729fb4693-iso12800-prior-RGGB.npz",
+            "sha256": "ef981d8ed4ff42eef04349da3f25bdbc87182a48823ea6eac98c022563568148"
+          },
+          "detail": "Subtle white feather texture",
+          "selection": "Four diverse contexts selected after actually viewing10 clean native256 contexts and their native160 centers, before viewing model outputs on these cases. Bark, white feathers, forest canopy/haze and gray fur. Mixed contrast; selected for fine/weak structures, not global low-contrast labels."
+        },
+        {
+          "image": "V101-Wiener7-preview-14d8ea6cea4a.png",
+          "caption": "Subtle white feather texture / iso12800-prior / V101-Wiener7-preview",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "5943ffd02f0cdcde7c067b63563680a7098b9870f08355753b10186186ac5430",
+          "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+          "source": {
+            "title": "File:Snowy egret in profile.jpg",
+            "page_url": "https://commons.wikimedia.org/wiki/File:Snowy_egret_in_profile.jpg",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/1/12/Snowy_egret_in_profile.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "author": "Serebit",
+            "license": "CC BY-SA 4.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+            "attribution": null,
+            "credit": "Own work",
+            "sha1": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sha1_hex": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "download_path": "images/14/d8/14d8ea6cea4a27346a643e6d767f800729fb4693.jpg",
+            "width": 6000,
+            "height": 4000,
+            "id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "split": "val",
+            "bin_factor": 8,
+            "color_space": "linear-sRGB",
+            "dtype": "uint16",
+            "cache": "/mnt/external/demosaic/commons-v1/images/14/14d8ea6cea4a27346a643e6d767f800729fb4693.npy",
+            "shape": [
+              500,
+              750,
+              3
+            ],
+            "cache_sha256": "76baaa81d4fe8e7ec7f275470d8dd8db9bf3f5ab2f58a1f46e956d31d2ec6aba"
+          },
+          "validation_index": 200,
+          "validation_seed": 42,
+          "evaluation_tile_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "source_cache_context_xywh": [
+            271,
+            127,
+            256,
+            256
+          ],
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "model": {
+            "label": "V101-Wiener7-preview",
+            "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+            "source": "/mnt/external/demosaic/models/v101-final10000.pt",
+            "step": 10000,
+            "policy": {
+              "label": "V101-Wiener7-preview",
+              "preview": "input-Wiener7",
+              "oracle": false,
+              "logical_restoration_passes": 1
+            },
+            "first_pass_prediction": null,
+            "device": "cpu",
+            "compute_precision": "float32"
+          },
+          "display_exposure": 1,
+          "reference": "Exact synthetic clean target",
+          "observation": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-inputs-v2/14d8ea6cea4a27346a643e6d767f800729fb4693-iso12800-prior-RGGB.npz",
+            "sha256": "ef981d8ed4ff42eef04349da3f25bdbc87182a48823ea6eac98c022563568148"
+          },
+          "detail": "Subtle white feather texture",
+          "selection": "Four diverse contexts selected after actually viewing10 clean native256 contexts and their native160 centers, before viewing model outputs on these cases. Bark, white feathers, forest canopy/haze and gray fur. Mixed contrast; selected for fine/weak structures, not global low-contrast labels."
+        },
+        {
+          "image": "V101-self-preview-14d8ea6cea4a.png",
+          "caption": "Subtle white feather texture / iso12800-prior / V101-self-preview",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "669cc0c0090aada43bd8cb669f98567ba2739fdfe9a97a8eec18a2b04e90cd1a",
+          "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+          "source": {
+            "title": "File:Snowy egret in profile.jpg",
+            "page_url": "https://commons.wikimedia.org/wiki/File:Snowy_egret_in_profile.jpg",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/1/12/Snowy_egret_in_profile.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "author": "Serebit",
+            "license": "CC BY-SA 4.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+            "attribution": null,
+            "credit": "Own work",
+            "sha1": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sha1_hex": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "download_path": "images/14/d8/14d8ea6cea4a27346a643e6d767f800729fb4693.jpg",
+            "width": 6000,
+            "height": 4000,
+            "id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "split": "val",
+            "bin_factor": 8,
+            "color_space": "linear-sRGB",
+            "dtype": "uint16",
+            "cache": "/mnt/external/demosaic/commons-v1/images/14/14d8ea6cea4a27346a643e6d767f800729fb4693.npy",
+            "shape": [
+              500,
+              750,
+              3
+            ],
+            "cache_sha256": "76baaa81d4fe8e7ec7f275470d8dd8db9bf3f5ab2f58a1f46e956d31d2ec6aba"
+          },
+          "validation_index": 200,
+          "validation_seed": 42,
+          "evaluation_tile_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "source_cache_context_xywh": [
+            271,
+            127,
+            256,
+            256
+          ],
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "model": {
+            "label": "V101-self-preview",
+            "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+            "source": "/mnt/external/demosaic/models/v101-final10000.pt",
+            "step": 10000,
+            "policy": {
+              "label": "V101-self-preview",
+              "preview": "self-first-pass",
+              "oracle": false,
+              "logical_restoration_passes": 2
+            },
+            "first_pass_prediction": {
+              "path": "/mnt/external/demosaic/V101-conditioning-probe-CPU-20261022-v1/predictions/14d8ea6cea4a27346a643e6d767f800729fb4693-iso12800-prior-1x.npy",
+              "sha256": "c86854cf7ef3f2fe860239f51233e66e754f32c98c0c6c906e008278fe2b967c"
+            },
+            "device": "cpu",
+            "compute_precision": "float32"
+          },
+          "display_exposure": 1,
+          "reference": "Exact synthetic clean target",
+          "observation": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-inputs-v2/14d8ea6cea4a27346a643e6d767f800729fb4693-iso12800-prior-RGGB.npz",
+            "sha256": "ef981d8ed4ff42eef04349da3f25bdbc87182a48823ea6eac98c022563568148"
+          },
+          "detail": "Subtle white feather texture",
+          "selection": "Four diverse contexts selected after actually viewing10 clean native256 contexts and their native160 centers, before viewing model outputs on these cases. Bark, white feathers, forest canopy/haze and gray fur. Mixed contrast; selected for fine/weak structures, not global low-contrast labels."
+        },
+        {
+          "image": "V101-GT-preview-ORACLE-14d8ea6cea4a.png",
+          "caption": "Subtle white feather texture / iso12800-prior / V101-GT-preview-ORACLE \u2014 ORACLE, not a usable method",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "6e09ed5932a846a8a2229f3a7bdf0a1128d77ab2ea71692aafd787078d8d822e",
+          "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+          "source": {
+            "title": "File:Snowy egret in profile.jpg",
+            "page_url": "https://commons.wikimedia.org/wiki/File:Snowy_egret_in_profile.jpg",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/1/12/Snowy_egret_in_profile.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "author": "Serebit",
+            "license": "CC BY-SA 4.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+            "attribution": null,
+            "credit": "Own work",
+            "sha1": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sha1_hex": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "download_path": "images/14/d8/14d8ea6cea4a27346a643e6d767f800729fb4693.jpg",
+            "width": 6000,
+            "height": 4000,
+            "id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "split": "val",
+            "bin_factor": 8,
+            "color_space": "linear-sRGB",
+            "dtype": "uint16",
+            "cache": "/mnt/external/demosaic/commons-v1/images/14/14d8ea6cea4a27346a643e6d767f800729fb4693.npy",
+            "shape": [
+              500,
+              750,
+              3
+            ],
+            "cache_sha256": "76baaa81d4fe8e7ec7f275470d8dd8db9bf3f5ab2f58a1f46e956d31d2ec6aba"
+          },
+          "validation_index": 200,
+          "validation_seed": 42,
+          "evaluation_tile_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "source_cache_context_xywh": [
+            271,
+            127,
+            256,
+            256
+          ],
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "model": {
+            "label": "V101-GT-preview-ORACLE",
+            "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+            "source": "/mnt/external/demosaic/models/v101-final10000.pt",
+            "step": 10000,
+            "policy": {
+              "label": "V101-GT-preview-ORACLE",
+              "preview": "GT-oracle-only",
+              "oracle": true,
+              "logical_restoration_passes": null
+            },
+            "first_pass_prediction": null,
+            "device": "cpu",
+            "compute_precision": "float32"
+          },
+          "display_exposure": 1,
+          "reference": "Exact synthetic clean target",
+          "observation": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-inputs-v2/14d8ea6cea4a27346a643e6d767f800729fb4693-iso12800-prior-RGGB.npz",
+            "sha256": "ef981d8ed4ff42eef04349da3f25bdbc87182a48823ea6eac98c022563568148"
+          },
+          "detail": "Subtle white feather texture",
+          "selection": "Four diverse contexts selected after actually viewing10 clean native256 contexts and their native160 centers, before viewing model outputs on these cases. Bark, white feathers, forest canopy/haze and gray fur. Mixed contrast; selected for fine/weak structures, not global low-contrast labels."
+        },
+        {
+          "image": "V101-noisy-preview-212ae12913ef.png",
+          "caption": "Fine forest canopy and weak distant tree structure / iso12800-prior / V101-noisy-preview",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "1037a08d6e569a52e4e52f40f6d58d7acc216e30c1e2be4d7c3712f665637820",
+          "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+          "source": {
+            "title": "File:Forest covered hills on Yakushima.jpg",
+            "page_url": "https://commons.wikimedia.org/wiki/File:Forest_covered_hills_on_Yakushima.jpg",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Forest_covered_hills_on_Yakushima.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "author": "Grendelkhan",
+            "license": "CC BY-SA 4.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+            "attribution": null,
+            "credit": "Own work",
+            "sha1": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sha1_hex": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "download_path": "images/21/2a/212ae12913effa23268af953b4c8f8e8b7ab4ef5.jpg",
+            "width": 4048,
+            "height": 3036,
+            "id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "split": "val",
+            "bin_factor": 8,
+            "color_space": "linear-sRGB",
+            "dtype": "uint16",
+            "cache": "/mnt/external/demosaic/commons-v1/images/21/212ae12913effa23268af953b4c8f8e8b7ab4ef5.npy",
+            "shape": [
+              379,
+              506,
+              3
+            ],
+            "cache_sha256": "93b465730cea963f16edf53d3b3c2187dfa9519b0ff6a8b8d1e57e1f7db3d30b"
+          },
+          "validation_index": 320,
+          "validation_seed": 42,
+          "evaluation_tile_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "source_cache_context_xywh": [
+            133,
+            67,
+            256,
+            256
+          ],
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "model": {
+            "label": "V101-noisy-preview",
+            "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+            "source": "/mnt/external/demosaic/models/v101-final10000.pt",
+            "step": 10000,
+            "policy": {
+              "label": "V101-noisy-preview",
+              "preview": "noisy-Malvar",
+              "oracle": false,
+              "logical_restoration_passes": 1
+            },
+            "first_pass_prediction": null,
+            "device": "cpu",
+            "compute_precision": "float32"
+          },
+          "display_exposure": 1,
+          "reference": "Exact synthetic clean target",
+          "observation": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-inputs-v2/212ae12913effa23268af953b4c8f8e8b7ab4ef5-iso12800-prior-RGGB.npz",
+            "sha256": "0b7f562714f2de3859f5ead02dc39a7212097590e156ca0125c61d34e3d83769"
+          },
+          "detail": "Fine forest canopy and weak distant tree structure",
+          "selection": "Four diverse contexts selected after actually viewing10 clean native256 contexts and their native160 centers, before viewing model outputs on these cases. Bark, white feathers, forest canopy/haze and gray fur. Mixed contrast; selected for fine/weak structures, not global low-contrast labels."
+        },
+        {
+          "image": "V101-Wiener7-preview-212ae12913ef.png",
+          "caption": "Fine forest canopy and weak distant tree structure / iso12800-prior / V101-Wiener7-preview",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "4fb67c77623243df95281b71dc25c3f154cc36efa3625c1aaa37660446d03ca2",
+          "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+          "source": {
+            "title": "File:Forest covered hills on Yakushima.jpg",
+            "page_url": "https://commons.wikimedia.org/wiki/File:Forest_covered_hills_on_Yakushima.jpg",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Forest_covered_hills_on_Yakushima.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "author": "Grendelkhan",
+            "license": "CC BY-SA 4.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+            "attribution": null,
+            "credit": "Own work",
+            "sha1": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sha1_hex": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "download_path": "images/21/2a/212ae12913effa23268af953b4c8f8e8b7ab4ef5.jpg",
+            "width": 4048,
+            "height": 3036,
+            "id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "split": "val",
+            "bin_factor": 8,
+            "color_space": "linear-sRGB",
+            "dtype": "uint16",
+            "cache": "/mnt/external/demosaic/commons-v1/images/21/212ae12913effa23268af953b4c8f8e8b7ab4ef5.npy",
+            "shape": [
+              379,
+              506,
+              3
+            ],
+            "cache_sha256": "93b465730cea963f16edf53d3b3c2187dfa9519b0ff6a8b8d1e57e1f7db3d30b"
+          },
+          "validation_index": 320,
+          "validation_seed": 42,
+          "evaluation_tile_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "source_cache_context_xywh": [
+            133,
+            67,
+            256,
+            256
+          ],
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "model": {
+            "label": "V101-Wiener7-preview",
+            "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+            "source": "/mnt/external/demosaic/models/v101-final10000.pt",
+            "step": 10000,
+            "policy": {
+              "label": "V101-Wiener7-preview",
+              "preview": "input-Wiener7",
+              "oracle": false,
+              "logical_restoration_passes": 1
+            },
+            "first_pass_prediction": null,
+            "device": "cpu",
+            "compute_precision": "float32"
+          },
+          "display_exposure": 1,
+          "reference": "Exact synthetic clean target",
+          "observation": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-inputs-v2/212ae12913effa23268af953b4c8f8e8b7ab4ef5-iso12800-prior-RGGB.npz",
+            "sha256": "0b7f562714f2de3859f5ead02dc39a7212097590e156ca0125c61d34e3d83769"
+          },
+          "detail": "Fine forest canopy and weak distant tree structure",
+          "selection": "Four diverse contexts selected after actually viewing10 clean native256 contexts and their native160 centers, before viewing model outputs on these cases. Bark, white feathers, forest canopy/haze and gray fur. Mixed contrast; selected for fine/weak structures, not global low-contrast labels."
+        },
+        {
+          "image": "V101-self-preview-212ae12913ef.png",
+          "caption": "Fine forest canopy and weak distant tree structure / iso12800-prior / V101-self-preview",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "7c9ef4ed6677310b3e7efc1c73cb34e5ae919f2cd281d28ae2b5a8cd6613291a",
+          "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+          "source": {
+            "title": "File:Forest covered hills on Yakushima.jpg",
+            "page_url": "https://commons.wikimedia.org/wiki/File:Forest_covered_hills_on_Yakushima.jpg",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Forest_covered_hills_on_Yakushima.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "author": "Grendelkhan",
+            "license": "CC BY-SA 4.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+            "attribution": null,
+            "credit": "Own work",
+            "sha1": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sha1_hex": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "download_path": "images/21/2a/212ae12913effa23268af953b4c8f8e8b7ab4ef5.jpg",
+            "width": 4048,
+            "height": 3036,
+            "id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "split": "val",
+            "bin_factor": 8,
+            "color_space": "linear-sRGB",
+            "dtype": "uint16",
+            "cache": "/mnt/external/demosaic/commons-v1/images/21/212ae12913effa23268af953b4c8f8e8b7ab4ef5.npy",
+            "shape": [
+              379,
+              506,
+              3
+            ],
+            "cache_sha256": "93b465730cea963f16edf53d3b3c2187dfa9519b0ff6a8b8d1e57e1f7db3d30b"
+          },
+          "validation_index": 320,
+          "validation_seed": 42,
+          "evaluation_tile_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "source_cache_context_xywh": [
+            133,
+            67,
+            256,
+            256
+          ],
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "model": {
+            "label": "V101-self-preview",
+            "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+            "source": "/mnt/external/demosaic/models/v101-final10000.pt",
+            "step": 10000,
+            "policy": {
+              "label": "V101-self-preview",
+              "preview": "self-first-pass",
+              "oracle": false,
+              "logical_restoration_passes": 2
+            },
+            "first_pass_prediction": {
+              "path": "/mnt/external/demosaic/V101-conditioning-probe-CPU-20261022-v1/predictions/212ae12913effa23268af953b4c8f8e8b7ab4ef5-iso12800-prior-1x.npy",
+              "sha256": "717aebd92bcde3c87a92e7eec075984cf431abac87274e13b453f872afb6e72b"
+            },
+            "device": "cpu",
+            "compute_precision": "float32"
+          },
+          "display_exposure": 1,
+          "reference": "Exact synthetic clean target",
+          "observation": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-inputs-v2/212ae12913effa23268af953b4c8f8e8b7ab4ef5-iso12800-prior-RGGB.npz",
+            "sha256": "0b7f562714f2de3859f5ead02dc39a7212097590e156ca0125c61d34e3d83769"
+          },
+          "detail": "Fine forest canopy and weak distant tree structure",
+          "selection": "Four diverse contexts selected after actually viewing10 clean native256 contexts and their native160 centers, before viewing model outputs on these cases. Bark, white feathers, forest canopy/haze and gray fur. Mixed contrast; selected for fine/weak structures, not global low-contrast labels."
+        },
+        {
+          "image": "V101-GT-preview-ORACLE-212ae12913ef.png",
+          "caption": "Fine forest canopy and weak distant tree structure / iso12800-prior / V101-GT-preview-ORACLE \u2014 ORACLE, not a usable method",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "47b63aa837e547ac696ef420927cc5cf2ad474b98a204e8ebc81a4273cae3e95",
+          "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+          "source": {
+            "title": "File:Forest covered hills on Yakushima.jpg",
+            "page_url": "https://commons.wikimedia.org/wiki/File:Forest_covered_hills_on_Yakushima.jpg",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Forest_covered_hills_on_Yakushima.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "author": "Grendelkhan",
+            "license": "CC BY-SA 4.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+            "attribution": null,
+            "credit": "Own work",
+            "sha1": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sha1_hex": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "download_path": "images/21/2a/212ae12913effa23268af953b4c8f8e8b7ab4ef5.jpg",
+            "width": 4048,
+            "height": 3036,
+            "id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "split": "val",
+            "bin_factor": 8,
+            "color_space": "linear-sRGB",
+            "dtype": "uint16",
+            "cache": "/mnt/external/demosaic/commons-v1/images/21/212ae12913effa23268af953b4c8f8e8b7ab4ef5.npy",
+            "shape": [
+              379,
+              506,
+              3
+            ],
+            "cache_sha256": "93b465730cea963f16edf53d3b3c2187dfa9519b0ff6a8b8d1e57e1f7db3d30b"
+          },
+          "validation_index": 320,
+          "validation_seed": 42,
+          "evaluation_tile_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "source_cache_context_xywh": [
+            133,
+            67,
+            256,
+            256
+          ],
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "model": {
+            "label": "V101-GT-preview-ORACLE",
+            "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+            "source": "/mnt/external/demosaic/models/v101-final10000.pt",
+            "step": 10000,
+            "policy": {
+              "label": "V101-GT-preview-ORACLE",
+              "preview": "GT-oracle-only",
+              "oracle": true,
+              "logical_restoration_passes": null
+            },
+            "first_pass_prediction": null,
+            "device": "cpu",
+            "compute_precision": "float32"
+          },
+          "display_exposure": 1,
+          "reference": "Exact synthetic clean target",
+          "observation": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-inputs-v2/212ae12913effa23268af953b4c8f8e8b7ab4ef5-iso12800-prior-RGGB.npz",
+            "sha256": "0b7f562714f2de3859f5ead02dc39a7212097590e156ca0125c61d34e3d83769"
+          },
+          "detail": "Fine forest canopy and weak distant tree structure",
+          "selection": "Four diverse contexts selected after actually viewing10 clean native256 contexts and their native160 centers, before viewing model outputs on these cases. Bark, white feathers, forest canopy/haze and gray fur. Mixed contrast; selected for fine/weak structures, not global low-contrast labels."
+        },
+        {
+          "image": "V101-noisy-preview-2b5a51667b99.png",
+          "caption": "Fine gray fur against a dark background / iso12800-prior / V101-noisy-preview",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "c5309f170e9d6555e7de63ca8f42a8d854e07375896efd2e61889426e3a6c070",
+          "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+          "source": {
+            "title": "File:Racoon clinging to a tree.JPG",
+            "page_url": "https://commons.wikimedia.org/wiki/File:Racoon_clinging_to_a_tree.JPG",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/29/Racoon_clinging_to_a_tree.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "author": "Korall",
+            "license": "CC BY 3.0",
+            "license_url": "https://creativecommons.org/licenses/by/3.0",
+            "attribution": null,
+            "credit": "Own work",
+            "sha1": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sha1_hex": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "download_path": "images/2b/5a/2b5a51667b9906eecead8f82e08c7ba11750f8c6.jpg",
+            "width": 2592,
+            "height": 3888,
+            "id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "split": "val",
+            "bin_factor": 8,
+            "color_space": "linear-sRGB",
+            "dtype": "uint16",
+            "cache": "/mnt/external/demosaic/commons-v1/images/2b/2b5a51667b9906eecead8f82e08c7ba11750f8c6.npy",
+            "shape": [
+              486,
+              324,
+              3
+            ],
+            "cache_sha256": "a4f70f06dbfe2c044c3be5c85ab5047cb004b3378a980a7140bc3be71fab8a1f"
+          },
+          "validation_index": 392,
+          "validation_seed": 42,
+          "evaluation_tile_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "source_cache_context_xywh": [
+            25,
+            133,
+            256,
+            256
+          ],
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "model": {
+            "label": "V101-noisy-preview",
+            "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+            "source": "/mnt/external/demosaic/models/v101-final10000.pt",
+            "step": 10000,
+            "policy": {
+              "label": "V101-noisy-preview",
+              "preview": "noisy-Malvar",
+              "oracle": false,
+              "logical_restoration_passes": 1
+            },
+            "first_pass_prediction": null,
+            "device": "cpu",
+            "compute_precision": "float32"
+          },
+          "display_exposure": 1,
+          "reference": "Exact synthetic clean target",
+          "observation": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-inputs-v2/2b5a51667b9906eecead8f82e08c7ba11750f8c6-iso12800-prior-RGGB.npz",
+            "sha256": "5999c0e141b7e992791570f745d13c8f468b78b09b8388e551b36285ef698655"
+          },
+          "detail": "Fine gray fur against a dark background",
+          "selection": "Four diverse contexts selected after actually viewing10 clean native256 contexts and their native160 centers, before viewing model outputs on these cases. Bark, white feathers, forest canopy/haze and gray fur. Mixed contrast; selected for fine/weak structures, not global low-contrast labels."
+        },
+        {
+          "image": "V101-Wiener7-preview-2b5a51667b99.png",
+          "caption": "Fine gray fur against a dark background / iso12800-prior / V101-Wiener7-preview",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "ee021f640563eb88836b166c182893ef6da79952978dfb6dd5a7f50aeb3c4425",
+          "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+          "source": {
+            "title": "File:Racoon clinging to a tree.JPG",
+            "page_url": "https://commons.wikimedia.org/wiki/File:Racoon_clinging_to_a_tree.JPG",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/29/Racoon_clinging_to_a_tree.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "author": "Korall",
+            "license": "CC BY 3.0",
+            "license_url": "https://creativecommons.org/licenses/by/3.0",
+            "attribution": null,
+            "credit": "Own work",
+            "sha1": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sha1_hex": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "download_path": "images/2b/5a/2b5a51667b9906eecead8f82e08c7ba11750f8c6.jpg",
+            "width": 2592,
+            "height": 3888,
+            "id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "split": "val",
+            "bin_factor": 8,
+            "color_space": "linear-sRGB",
+            "dtype": "uint16",
+            "cache": "/mnt/external/demosaic/commons-v1/images/2b/2b5a51667b9906eecead8f82e08c7ba11750f8c6.npy",
+            "shape": [
+              486,
+              324,
+              3
+            ],
+            "cache_sha256": "a4f70f06dbfe2c044c3be5c85ab5047cb004b3378a980a7140bc3be71fab8a1f"
+          },
+          "validation_index": 392,
+          "validation_seed": 42,
+          "evaluation_tile_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "source_cache_context_xywh": [
+            25,
+            133,
+            256,
+            256
+          ],
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "model": {
+            "label": "V101-Wiener7-preview",
+            "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+            "source": "/mnt/external/demosaic/models/v101-final10000.pt",
+            "step": 10000,
+            "policy": {
+              "label": "V101-Wiener7-preview",
+              "preview": "input-Wiener7",
+              "oracle": false,
+              "logical_restoration_passes": 1
+            },
+            "first_pass_prediction": null,
+            "device": "cpu",
+            "compute_precision": "float32"
+          },
+          "display_exposure": 1,
+          "reference": "Exact synthetic clean target",
+          "observation": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-inputs-v2/2b5a51667b9906eecead8f82e08c7ba11750f8c6-iso12800-prior-RGGB.npz",
+            "sha256": "5999c0e141b7e992791570f745d13c8f468b78b09b8388e551b36285ef698655"
+          },
+          "detail": "Fine gray fur against a dark background",
+          "selection": "Four diverse contexts selected after actually viewing10 clean native256 contexts and their native160 centers, before viewing model outputs on these cases. Bark, white feathers, forest canopy/haze and gray fur. Mixed contrast; selected for fine/weak structures, not global low-contrast labels."
+        },
+        {
+          "image": "V101-self-preview-2b5a51667b99.png",
+          "caption": "Fine gray fur against a dark background / iso12800-prior / V101-self-preview",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "7d6216486320141f619b6b7b24af252674fd0d212936d65fec09d453395a9030",
+          "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+          "source": {
+            "title": "File:Racoon clinging to a tree.JPG",
+            "page_url": "https://commons.wikimedia.org/wiki/File:Racoon_clinging_to_a_tree.JPG",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/29/Racoon_clinging_to_a_tree.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "author": "Korall",
+            "license": "CC BY 3.0",
+            "license_url": "https://creativecommons.org/licenses/by/3.0",
+            "attribution": null,
+            "credit": "Own work",
+            "sha1": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sha1_hex": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "download_path": "images/2b/5a/2b5a51667b9906eecead8f82e08c7ba11750f8c6.jpg",
+            "width": 2592,
+            "height": 3888,
+            "id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "split": "val",
+            "bin_factor": 8,
+            "color_space": "linear-sRGB",
+            "dtype": "uint16",
+            "cache": "/mnt/external/demosaic/commons-v1/images/2b/2b5a51667b9906eecead8f82e08c7ba11750f8c6.npy",
+            "shape": [
+              486,
+              324,
+              3
+            ],
+            "cache_sha256": "a4f70f06dbfe2c044c3be5c85ab5047cb004b3378a980a7140bc3be71fab8a1f"
+          },
+          "validation_index": 392,
+          "validation_seed": 42,
+          "evaluation_tile_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "source_cache_context_xywh": [
+            25,
+            133,
+            256,
+            256
+          ],
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "model": {
+            "label": "V101-self-preview",
+            "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+            "source": "/mnt/external/demosaic/models/v101-final10000.pt",
+            "step": 10000,
+            "policy": {
+              "label": "V101-self-preview",
+              "preview": "self-first-pass",
+              "oracle": false,
+              "logical_restoration_passes": 2
+            },
+            "first_pass_prediction": {
+              "path": "/mnt/external/demosaic/V101-conditioning-probe-CPU-20261022-v1/predictions/2b5a51667b9906eecead8f82e08c7ba11750f8c6-iso12800-prior-1x.npy",
+              "sha256": "5ed0d69e515aa65ffc23a9331587cef09de2b279af4065a482708b01cefb7244"
+            },
+            "device": "cpu",
+            "compute_precision": "float32"
+          },
+          "display_exposure": 1,
+          "reference": "Exact synthetic clean target",
+          "observation": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-inputs-v2/2b5a51667b9906eecead8f82e08c7ba11750f8c6-iso12800-prior-RGGB.npz",
+            "sha256": "5999c0e141b7e992791570f745d13c8f468b78b09b8388e551b36285ef698655"
+          },
+          "detail": "Fine gray fur against a dark background",
+          "selection": "Four diverse contexts selected after actually viewing10 clean native256 contexts and their native160 centers, before viewing model outputs on these cases. Bark, white feathers, forest canopy/haze and gray fur. Mixed contrast; selected for fine/weak structures, not global low-contrast labels."
+        },
+        {
+          "image": "V101-GT-preview-ORACLE-2b5a51667b99.png",
+          "caption": "Fine gray fur against a dark background / iso12800-prior / V101-GT-preview-ORACLE \u2014 ORACLE, not a usable method",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "GT (synthetic)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "014a9a459b83d8641f6bfa99c4de262896a99846c38b3ed0ff77638f1b0b2031",
+          "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+          "source": {
+            "title": "File:Racoon clinging to a tree.JPG",
+            "page_url": "https://commons.wikimedia.org/wiki/File:Racoon_clinging_to_a_tree.JPG",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/29/Racoon_clinging_to_a_tree.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "author": "Korall",
+            "license": "CC BY 3.0",
+            "license_url": "https://creativecommons.org/licenses/by/3.0",
+            "attribution": null,
+            "credit": "Own work",
+            "sha1": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sha1_hex": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "download_path": "images/2b/5a/2b5a51667b9906eecead8f82e08c7ba11750f8c6.jpg",
+            "width": 2592,
+            "height": 3888,
+            "id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "split": "val",
+            "bin_factor": 8,
+            "color_space": "linear-sRGB",
+            "dtype": "uint16",
+            "cache": "/mnt/external/demosaic/commons-v1/images/2b/2b5a51667b9906eecead8f82e08c7ba11750f8c6.npy",
+            "shape": [
+              486,
+              324,
+              3
+            ],
+            "cache_sha256": "a4f70f06dbfe2c044c3be5c85ab5047cb004b3378a980a7140bc3be71fab8a1f"
+          },
+          "validation_index": 392,
+          "validation_seed": 42,
+          "evaluation_tile_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "source_cache_context_xywh": [
+            25,
+            133,
+            256,
+            256
+          ],
+          "condition": {
+            "name": "iso12800-prior",
+            "shot": 0.00256,
+            "read": 2.62144e-05,
+            "exposure": 1.0
+          },
+          "pattern": "RGGB",
+          "model": {
+            "label": "V101-GT-preview-ORACLE",
+            "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+            "source": "/mnt/external/demosaic/models/v101-final10000.pt",
+            "step": 10000,
+            "policy": {
+              "label": "V101-GT-preview-ORACLE",
+              "preview": "GT-oracle-only",
+              "oracle": true,
+              "logical_restoration_passes": null
+            },
+            "first_pass_prediction": null,
+            "device": "cpu",
+            "compute_precision": "float32"
+          },
+          "display_exposure": 1,
+          "reference": "Exact synthetic clean target",
+          "observation": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/heldout-detail-inputs-v2/2b5a51667b9906eecead8f82e08c7ba11750f8c6-iso12800-prior-RGGB.npz",
+            "sha256": "5999c0e141b7e992791570f745d13c8f468b78b09b8388e551b36285ef698655"
+          },
+          "detail": "Fine gray fur against a dark background",
+          "selection": "Four diverse contexts selected after actually viewing10 clean native256 contexts and their native160 centers, before viewing model outputs on these cases. Bark, white feathers, forest canopy/haze and gray fur. Mixed contrast; selected for fine/weak structures, not global low-contrast labels."
+        }
+      ]
+    }
+  }
+}

@@ -5,6 +5,9 @@ it is not a general quality fix for V101.** On the four fixed held-out natural
 contexts, all three alternative strengths lose high-noise PSNR against the
 original conditioning. The native crops also show that some additional detail
 is useful. Keep that tradeoff visible alongside the [training improvements](quality-first-training.md).
+Controlled path and DINO-preview checks below now localize that tradeoff:
+the CNN noise channel drives most of the tested strength effect, while changing
+only the DINO preview gives no consistent improvement on these cases.
 
 This diagnostic holds the V101 final10000 EMA and all noisy/target arrays fixed.
 Factors .50/.75/1.00/1.25 multiply both the supplied shot/read-variance
@@ -117,6 +120,90 @@ reference scores rank these outputs.
 [Exact baseline replay, 24 float predictions and 36 actually viewed native cells](results/V101-GFX-conditioning-CPU-v1.json).
 These variants make the denoising/detail tradeoff explicit; the current 1×
 default and completed full-frame comparisons remain unchanged.
+
+## Which path responds to conditioning?
+
+Seven predefined interventions made84 actual CPU FP32 forwards on the same12
+cached observations. Only the named input/path changes; weights, physical
+measurements, other input tensors, parameter identities and RNG remain exact.
+The baseline reproduces all12 previous float predictions and scores exactly.
+These are fixed-weight interventions, not retrained architecture ablations.
+
+| Intervention | ADC PSNR | ISO100 PSNR | ISO12800 PSNR |
+| --- | ---: | ---: | ---: |
+| Original V101 | **38.88476** | **40.35352** | **33.42612** |
+| Input variance map only ×.5 | 38.88476 | 40.35352 | 33.42612 |
+| Shot/read-variance profile only ×.75 | 38.88476 | 40.34904 | 33.06758 |
+| CNN noise standard deviation only ×√.75 | 38.88476 | 40.34833 | 33.08901 |
+| CNN noise standard deviation only ×√.5 | 38.88476 | 40.33863 | 31.53461 |
+| DINO adapter offsets ×0 | 38.53593 | 40.33152 | 33.41443 |
+| DINO adapter offsets ×1.5 | 38.83069 | 40.30618 | 33.41632 |
+
+The map-only intervention is bit-identical to baseline for all12 predictions.
+V101's stabilized base uses the scalar physical profile to transform the RAW
+and form its CNN noise channel, then replaces the internal variance map with a
+normalized proxy. The original map feeds optional directional/spectral heads
+that this checkpoint does not have. That is the implemented conditioning path,
+rather than evidence of a broken noise input. Profile-only ×.75 exactly replays
+the earlier joint ×.75 experiment, as expected from this path.
+
+Changing only the CNN sigma supplies most of the high-noise strength effect:
+more visible structure/grain, with lower PSNR. Removing DINO offsets hurts
+ADC-only PSNR substantially; multiplying them by1.5 also loses mean PSNR.
+All three unscaled ConvNeXt adapter outputs were checked exact across policies.
+DINO still executes for the zero-offset control. These results do not establish
+that a newly trained fusion or stronger backbone cannot help.
+
+![ADC-only path interventions: noisy, lower CNN sigma, zero DINO offsets, stronger DINO offsets, V101 and exact GT](images/conditioning-paths-v101/adc-only/photo-comparison.png)
+
+![High-noise path interventions on the same four contexts](images/conditioning-paths-v101/iso12800-prior/photo-comparison.png)
+
+Each unchanged160 cell uses the original source/ROI, exposure×1 and exact GT.
+All48 cells were actually viewed. High-noise feathers, canopy and fur remain
+smoothed; the sigma reduction restores some structure and grain, without a
+general visual win. [ADC triplets/metadata](images/conditioning-paths-v101/adc-only/manifest.json) ·
+[ISO12800 triplets/metadata](images/conditioning-paths-v101/iso12800-prior/manifest.json) ·
+[All84 scores/predictions, path controls and native review](results/V101-conditioning-paths-CPU-v1.json).
+
+## Cleaner DINO previews
+
+The actual V101 ConvNeXt-Tiny branch was also evaluated with four predefined
+preview inputs: noisy Malvar, input-only Wiener7, a first V101 restoration, and
+the exact clean image. The final option is an **unavailable GT oracle diagnostic**,
+never a usable method or candidate checkpoint. Only the DINO RGB preview changes;
+the RAW measurements, physical profile, CNN normalized input/noise channel and
+measurement offsets stay exact. Each intervention still executes DINO.
+
+| DINO preview | ADC PSNR | ISO100 PSNR | ISO12800 PSNR |
+| --- | ---: | ---: | ---: |
+| Original noisy Malvar | **38.88476** | 40.35352 | **33.42612** |
+| Input-only Wiener7 | 38.88476 | **40.35409** | 33.42362 |
+| First V101 restoration, logically two passes | 38.87790 | 40.34827 | 33.42574 |
+| Exact clean image, **ORACLE only** | 38.87069 | 40.34659 | 33.42266 |
+
+All48 genuine forwards completed. Baseline float predictions reproduce the
+prior12 cases exactly; Wiener is also exact in ADC-only conditions. Source means
+and saved float hashes were independently checked. Self-preview reuses an exact
+cached first pass here, but deployment would require two restoration passes;
+this supplies no speed claim. Cleaner feature input alone gives no consistent
+gain with the fixed trained adapters. Distribution changes and training may
+matter; this does not test training on denoised features or establish a general
+upper bound for DINO guidance.
+
+![ADC-only preview interventions; clean preview is labeled GT ORACLE](images/guidance-preview-v101/adc-only/photo-comparison.png)
+
+![High-noise preview interventions; exact clean preview is a diagnostic only](images/guidance-preview-v101/iso12800-prior/photo-comparison.png)
+
+The48 native160 cells were actually viewed. Outputs remain close, with no
+consistent recovery of weak plumage/canopy/fur. All noisy/GT pixels, coordinates,
+conditioning and display exposure×1 are shared exactly.
+[ADC triplets/metadata](images/guidance-preview-v101/adc-only/manifest.json) ·
+[ISO12800 triplets/metadata](images/guidance-preview-v101/iso12800-prior/manifest.json) ·
+[All48 scores/predictions, exact input-path checks and oracle boundary](results/V101-guidance-preview-CPU-v1.json).
+These checks favor continuing the cleaned-data/detail training rather than
+applying a blanket lower sigma or cleaner-preview override. The current
+calibrated policy stays in use. The older [ViT-S feature-similarity study](dino-preview-sensitivity.md)
+is a separate encoder/feature diagnostic, rather than this restoration test.
 
 ## Sources
 
