@@ -126,6 +126,15 @@ hash, bounds, augmentation-order and resume checks.
 
 ## Data and source quality
 
+The next reviewed4×/8× corpus is ready with **90,872 Commons training sources**,
+adding2,395 inspected/cleared arrivals while retaining all31 current quality
+exclusions and unchanged2,303 validation/2,255 test sources. Five additional
+reviewed fine-detail sources are eligible for later ROI work. Native views,
+source/series decisions and eight actual CPU reader checks are in the
+[incoming source review](incoming-commons-quality.md). This future cohort leaves
+the current matched V102/V103 experiment's88,477 sources and ROI inputs fixed;
+its trained quality benefit remains to measure.
+
 The completed V100/V101 cohort has 88,484 Commons training sources, versus 84,867 in V84's
 original recipe. It preserves the same 2,303 validation and 2,255 test memberships.
 The full source scan covered 88,508 training images. That cohort applies 24 visual exclusions. Targeted review now covers 570 sources: 539 retained and 31

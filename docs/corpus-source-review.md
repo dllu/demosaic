@@ -18,12 +18,19 @@ Originals, existing manifests and protected evaluation scenes remain read-only.
 The GFX train/platform pair and siblings remain outside training.
 
 The next [3,809-source arrival batch](commons-download.md) has finalized3,807
-valid4× caches and39 source sheets, with8× still preparing. Two malformed-ICC
+valid caches at both4×/8×. All39 source sheets/3,807 thumbnail contexts and61
+targeted native source identities have now been actually inspected. Four train
+hashes and two already-reserved validation hashes receive visual quality
+withholds. [New decisions and native examples](incoming-commons-quality.md).
+Two malformed-ICC
 side-by-side stereo composites were actually inspected and withheld through
 an explicit failure ledger; their originals and error evidence remain intact.
-The valid-source sheets await actual visual inspection. These
-arrivals do not contribute to the570 reviewed-training-source count above,
-and remain outside current training pending the full cache/overlap/content review.
+These arrivals do not contribute to the570 current-cohort review count above.
+The completed duplicate/title/content-series review admits2,395 additions to
+a separately frozen90,872-source future cohort, with all existing validation/
+test records preserved. Protected screening flags43 valid sources; current
+V102/V103 still use their original88,477-source inputs.
+[Completed new corpus and actual CPU reader](results/commons-post4000-reviewed-v1.json).
 
 ## Selection and inspection
 
@@ -142,8 +149,9 @@ float32 target hashes exactly. The actual clean reader visits all 32 regions
 under the existing 5% conditional probability, seed 60 mixed-domain schedule and
 zero-PSF geometry→area2 path, with finite native 256 outputs and no GPU/model.
 [Full preparation/review/reader evidence](results/source-quality-detail-catalogue-v3.json).
-V102/V103 now use these frozen data; their fixed endpoints remain in progress,
-with no quality gain claimed. [Recipes and actual checks](quality-first-training.md#next-matched-comparison-v102v103).
+V102/V103 use these frozen data. V102 has completed20k updates and improved
+the selected detail panel; V103 continues, with their full matched comparison
+still pending. [Recipes and current results](quality-first-training.md#current-matched-comparison-v102v103).
 
 Source views use existing prepared caches. New downloads and decisions enter
 a separate frozen cohort instead of changing an existing experiment's inputs.
