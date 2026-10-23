@@ -21,6 +21,7 @@ HELPERS = (
     "queue_v95_adc_quality.py",
     "audit_v43_quality_training.py",
     "evaluate_v43_quality_trial.py",
+    "frozen_backbone_identity.py",
     "export_adc_cfa_projection.py",
     "train_v43_quality_trial.py",
     "train_directional_bank_trial.py",

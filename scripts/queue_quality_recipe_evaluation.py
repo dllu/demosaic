@@ -10,6 +10,7 @@ from pathlib import Path
 
 import psutil
 from evaluate_v43_quality_trial import CAMERAS, COLOR, PANEL, RAWNIND
+from frozen_backbone_identity import CONVNEXT_TINY_SHA256, validate_backbone_identity
 from train_directional_bank_trial import guard, read, ref, save
 from train_v43_quality_trial import live
 
@@ -17,8 +18,9 @@ REPO = Path(__file__).resolve().parents[1]
 ARMS = ("V100", "V101")
 TERMINAL = "completed-training-awaiting-model-comparisons"
 KEYS = {f"{phase}-{arm}" for phase in ("CPU", "CUDA", "train") for arm in ARMS}
-DINO_SHA = "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+DINO_SHA = CONVNEXT_TINY_SHA256
 HELPERS = (
+    "frozen_backbone_identity.py",
     "queue_quality_recipe_evaluation.py",
     "evaluate_v43_quality_trial.py",
     "recover_v43_quality_trial.py",
@@ -107,16 +109,22 @@ def checkpoints(state, training, *, cpu_smoke, parent_label="V84"):
     phase_keys(arms)
     assert re.fullmatch(r"V[1-9]\d*", parent_label) and parent_label not in arms
     records = [{"arm": parent_label, **parent, "expected_lineage": {"step": parent_step}}]
+    if "parent_backbone" in training:
+        records[0]["expected_backbone"] = validate_backbone_identity(training["parent_backbone"])
+    backbones = training.get("backbones", {})
+    if backbones:
+        assert set(backbones) == set(arms), "Incomplete declared backbone identities"
     inputs, sources, results = [], set(), {}
     for arm in arms:
         item = state["completed"][f"{phase}-{arm}"]
         assert ref(item["path"]) == item
         result = read(item["path"])
+        identity = validate_backbone_identity(backbones[arm]) if backbones else None
         assert result["status"] == "completed-quality-training-phase"
         assert (result["phase"], result["arm"], result["updates"]) == (phase, arm, updates)
         assert result["initialization"] == {
             "initial_EMA_exact": True,
-            "DINO_sha256": DINO_SHA,
+            "DINO_sha256": identity["sha256"] if identity else DINO_SHA,
         }
         assert not live(result["owner"])
         assert ref(result["checkpoint"]["path"]) == result["checkpoint"]
@@ -133,6 +141,8 @@ def checkpoints(state, training, *, cpu_smoke, parent_label="V84"):
                 },
             }
         )
+        if identity:
+            records[-1]["expected_backbone"] = identity
     if len(sources) != 1:
         inputs.extend(reviewed_catalogue_source_boundary(results, training, phase))
     return records, inputs

@@ -182,6 +182,7 @@ def prepare(
         helper_repository / "scripts" / name
         for name in (
             "evaluate_v43_quality_trial.py",
+            "frozen_backbone_identity.py",
             "recover_v43_quality_trial.py",
             "train_v43_quality_trial.py",
             "train_directional_bank_trial.py",
@@ -396,12 +397,18 @@ def check_reference_witnesses(invariants, previous):
     return counts
 
 
-def check_joint_model_config(actual, reference, *, adc_projection=False):
-    """Permit the declared ADC policy only; all learned architecture fields match."""
+def check_joint_model_config(actual, reference, *, adc_projection=False, expected_backbone=None):
+    """Permit declared encoder/ADC differences while retaining restoration settings."""
+    from frozen_backbone_identity import validate_backbone_identity
+
     assert type(adc_projection) is bool
     expected = dict(reference)
     if adc_projection:
         expected["adc_cfa_projection"] = True
+    if expected_backbone is not None:
+        identity = validate_backbone_identity(expected_backbone)
+        expected["dino_model"] = identity["model"]
+        expected["dino_revision"] = identity["revision"]
     assert json.dumps(actual, sort_keys=True) == json.dumps(expected, sort_keys=True)
 
 
@@ -469,6 +476,7 @@ def worker(plan_path, stage):
     import random
 
     import torch
+    from frozen_backbone_identity import verify_backbone_identity
     from profile_raw_kernel_inference import model_hash
 
     from demosaic.train import batch_fingerprint
@@ -519,7 +527,12 @@ def worker(plan_path, stage):
                     state["config"].get("initialized_from")
                     == match["expected_lineage"]["initialized_from"]
                 )
-            assert model_hash(model.context.backbone) == plan["DINO_SHA256"]
+            expected_dino_sha256 = verify_backbone_identity(
+                model.config.to_dict(),
+                model_hash(model.context.backbone),
+                match,
+                legacy_sha256=plan["DINO_SHA256"],
+            )
             record = {
                 "model": model,
                 "before": model_hash(model),
@@ -529,12 +542,15 @@ def worker(plan_path, stage):
                 "observations": 0,
                 "dino": 0,
                 "sampled_inputs": [],
+                "expected_DINO_SHA256": expected_dino_sha256,
+                "expected_backbone": match.get("expected_backbone"),
             }
             if models:
                 check_joint_model_config(
                     record["config"],
                     models[0]["config"],
                     adc_projection=match.get("expected_adc_projection", False),
+                    expected_backbone=match.get("expected_backbone"),
                 )
             if match.get("expected_adc_projection", False):
                 assert stage in plan["ADC_fidelity_observations_per_projected_model"]
@@ -739,7 +755,7 @@ def worker(plan_path, stage):
     for record in models:
         model = record["model"]
         assert model_hash(model) == record["before"]
-        assert model_hash(model.context.backbone) == plan["DINO_SHA256"]
+        assert model_hash(model.context.backbone) == record["expected_DINO_SHA256"]
         assert record["config"] == model.config.to_dict() and record["ids"] == [
             id(p) for p in model.parameters()
         ]
@@ -753,6 +769,8 @@ def worker(plan_path, stage):
                 "sampled_input_hashes_before_after_exact": record["sampled_inputs"],
             }
         )
+        if record["expected_backbone"] is not None:
+            invariants[-1]["expected_backbone"] = record["expected_backbone"]
     assert all(r["sampled_inputs"] == models[0]["sampled_inputs"] for r in models)
     assert torch.equal(rng["torch"], torch.get_rng_state()) and rng["python"] == random.getstate()
     if device == "cuda":

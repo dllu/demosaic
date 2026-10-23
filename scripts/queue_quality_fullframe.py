@@ -129,6 +129,7 @@ def worker(path):
     import numpy as np
     import report_raw_pair as gfx
     import torch
+    from frozen_backbone_identity import verify_backbone_identity
     from PIL import Image
     from profile_raw_kernel_inference import model_hash
     from queue_quality_recipe_evaluation import DINO_SHA, checkpoints, training_ready
@@ -148,6 +149,8 @@ def worker(path):
                 "expected_lineage": {"step": training.get("parent_step", 20000)},
             }
         ]
+        if "parent_backbone" in training:
+            records[0]["expected_backbone"] = training["parent_backbone"]
     else:
         assert training_ready(
             state,
@@ -178,7 +181,9 @@ def worker(path):
                 checkpoint["config"]["initialized_from"]
                 == record["expected_lineage"]["initialized_from"]
             )
-        assert model_hash(model.context.backbone) == DINO_SHA
+        verify_backbone_identity(
+            model.config.to_dict(), model_hash(model.context.backbone), record, legacy_sha256=DINO_SHA
+        )
         before.append((model, model_hash(model)))
         return model, checkpoint
 

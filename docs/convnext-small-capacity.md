@@ -88,10 +88,12 @@ weights,production recipes and earlier machine receipts retain their bytes.
 A later quality comparison can start from the best completed V84-family EMA
 and final reviewed corpus,reset these gate tensors for both backbones, and train
 fixed matched budgets. It should include photographic/camera metrics, native
-material/color/weak-detail crops and the standing six-region GFX test. Existing
-study-specific Tiny backbone-hash assumptions need explicit per-model identities
-before such a mixed-backbone evaluation. The current model/data experiment
-continues with its original queues.
+material/color/weak-detail crops and the standing six-region GFX test. The [quality operators now support explicit per-model identities](training-execution.md#explicit-frozen-backbone-identities),
+with 119 passing targeted tests and actual discarded CPU training, reporting and
+RGB16 export checks. The shared Tiny expectation remains available for legacy
+plans; only declared encoder model/revision differences are permitted. A trained
+CUDA capacity comparison remains separate from these integration fixtures.
+The current model/data experiment continues with its original queues.
 
 Photo sources: [Derek Ramsey, bark](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
 [CC BY-SA 2.5](https://creativecommons.org/licenses/by-sa/2.5/), and

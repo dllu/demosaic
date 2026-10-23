@@ -70,7 +70,7 @@ def main(checkpoints, output, *, device="cuda", precision="float16", nonlocal_re
     models, provenance = [], []
     for index, checkpoint in enumerate(checkpoints):
         model, state = load_checkpoint(checkpoint, device)
-        name = Path(state["config"]["run"]).name
+        name = Path(state.get("config", {}).get("run", checkpoint.stem)).name
         label = f"{index}:{name}:step-{state['step']}"
         models.append((label, model.eval()))
         if device.type == "cuda":

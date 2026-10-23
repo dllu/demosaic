@@ -6,7 +6,10 @@ inspected across 39 sheets. Initial follow-up covered **61 source identities**:
 follow-up below adds **11 identities**, bringing targeted native review to
 **72 unique sources**. A subsequent [review of 14 more candidates](results/incoming-source-loss-prefix192-native-review-v1.json)
 from the 192-source ranking snapshot retains all 14, bringing actual native
-inspection to 86 unique source identities. Full-tail review is still pending; this is not
+inspection to 86 unique source identities. A [576-source-prefix follow-up](results/incoming-source-loss-prefix576-native-review-v1.json)
+adds 13 more identities, bringing native inspection to 99 unique sources. It retains
+12 and records one further tulip photograph for a future quality withhold.
+Full-tail review is still pending; this is not
 a native-quality audit of every image in the batch.
 [Sources, decisions, exact views and hashes](results/commons-post4000-source-quality-v1.json).
 
@@ -79,6 +82,37 @@ panels retain 256×256 native pixels, exposure ×1. Originals are ICC-managed to
 sRGB; targets use exact area2-from4× binning followed by sRGB display. These are
 training-source views, not denoised model outputs or independent clean references.
 Modifications: cropping, binning, context-thumbnail creation and display conversion.
+
+## Further loss-tail review: 576 of 2,395 sources
+
+Thirteen further sources were inspected across 26 native 256 source/target
+panels and two native 1024 views. Twelve remain eligible, including architecture,
+butterflies, real glass, leaf/stem detail and transparent insect wings. The larger
+tower source view supports retaining its ordinary focus/depth variation.
+
+A tulip image is recorded for the next quality-withhold set. Its larger source
+view confirms strong outlines and flattened/cellular leaf and petal texture;
+the binned target retains an outlined appearance. The judgment concerns this
+source's visible target quality and makes no camera-wide or processing-software
+claim. Two additional future withholds are now recorded in total; the active
+90,872-source V104 manifest and previous admission receipts remain fixed.
+
+![Tulips: context, native source and native binned target for future withholding](images/incoming-source-loss-prefix576/tulips-future-withhold.png)
+
+[Unchanged 1024×1024 source view](images/incoming-source-loss-prefix576/tulips-native1024.png) ·
+[Source/ROI/decision metadata](images/incoming-source-loss-prefix576/tulips-future-withhold.json).
+Source: [Екатерина Борисова, Tulip festival](https://commons.wikimedia.org/wiki/File:Tulip_festival_2025_on_Yelagin_Island_14.jpg),
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+
+![Retained faint transparent wing structure](images/incoming-source-loss-prefix576/retained-weak-wing-veins.png)
+
+[Source/ROI/decision metadata](images/incoming-source-loss-prefix576/retained-weak-wing-veins.json).
+Source: [Vengolis, Mortonagrion varralli](https://commons.wikimedia.org/wiki/File:Mortonagrion_varralli7903.jpg),
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+
+Only context thumbnails are resized; middle source and right area2-from4× target
+panels retain native 256 pixels at exposure ×1. Modifications: binning, cropping and
+display conversion. [All 13 decisions, views, hashes and partial-ranking scope](results/incoming-source-loss-prefix576-native-review-v1.json).
 
 Most thumbnail flags cleared under native inspection. The opposing door
 handles belong to one scene; the repeated window pattern is real glass and

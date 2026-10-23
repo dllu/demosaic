@@ -24,6 +24,50 @@ EMA, optimizer, RNG and best-validation state. Strict four updates match a 2+2
 resume exactly and exercise all three domains. Tiny real validation runs on the
 original targets; its scores are not quality comparisons.
 
+## Explicit frozen backbone identities
+
+The quality recipe operator now records an encoder model name, pinned revision
+and measured state SHA256 for the parent and each arm. This allows a declared
+Tiny/Small comparison while retaining strict restoration settings. Legacy plans
+keep their original shared-hash behavior and original field-by-field checks.
+The encoder expectation is checked against the loaded model at training entry,
+each quality loader and RGB16 export; an incorrect state hash fails before a
+learned prediction.
+
+In a recipe that selects the pinned Small model, record the measured encoder
+state hash alongside its model configuration. The common initializer's encoder
+has its own expectation:
+
+```yaml
+expected_dino_sha256: 691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14
+parent_dino_sha256: 370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd
+model:
+  dino_model: facebook/dinov3-convnext-small-pretrain-lvd1689m
+  dino_revision: 421020015aa4266363db803b6049a529999afb1e
+```
+
+These fields supplement a complete quality recipe. The SHA identifies the
+loaded encoder state; the separately recorded weight-file checksum has a
+different role. The default expectation remains the original official Tiny
+state for existing recipes. New source-frozen plans include the identity
+validator with their operator dependencies, including reports that reuse older
+numerical source snapshots.
+
+Actual CPU integration passed two fresh eight-update workers from the same
+V102-derived gate-zero initializer file, then a three-model report with 72 score
+rows and exact arithmetic. A deliberately wrong Small hash was rejected before
+any learned forward. A cached 512 GFX export check produced six RGB16 TIFFs;
+all 4,718,592 channel values reopen within .502 DN of their float inputs, with no
+RAF decode or CUDA. Fifteen native 160 cells were actually viewed. These are
+discarded integration fixtures, not completed quality models or whole 102MP
+operation. [Source, tests, model identities and actual receipts](results/mixed-backbone-operator-CPU-v1.json).
+
+The [capacity diagnostic](convnext-small-capacity.md) explains why copying
+Tiny's learned fusion into Small is not a trained capacity result. Derived
+inference checkpoints also work in texture/GFX reporters when their metadata
+has no training-run directory; the original checkpoint filename supplies the
+report label. Existing checkpoint hashes and machine receipts retain their bytes.
+
 ## Configuration and resume
 
 Add this to a new experiment's YAML:

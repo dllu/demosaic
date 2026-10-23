@@ -11,6 +11,11 @@ import time
 from pathlib import Path
 
 import psutil
+from frozen_backbone_identity import (
+    CONVNEXT_TINY_SHA256,
+    backbone_identity,
+    verify_backbone_identity,
+)
 from train_directional_bank_trial import guard, read, ref, save
 from train_v43_quality_trial import live
 
@@ -18,6 +23,7 @@ REPO = Path(__file__).resolve().parents[1]
 
 
 def prepare(root, artifact_root, recipes, after_run_root=None):
+    import torch
     import yaml
 
     configs = [yaml.safe_load(recipe.read_text()) for recipe in recipes]
@@ -25,6 +31,11 @@ def prepare(root, artifact_root, recipes, after_run_root=None):
     assert all(config["initialize_parent"] == lineage for config in configs)
     parent = {key: lineage[key] for key in ("path", "sha256")}
     assert ref(parent["path"]) == parent
+    parent_hash = configs[0].get("parent_dino_sha256", CONVNEXT_TINY_SHA256)
+    assert all(c.get("parent_dino_sha256", CONVNEXT_TINY_SHA256) == parent_hash for c in configs)
+    parent_state = torch.load(parent["path"], map_location="cpu", weights_only=True, mmap=True)
+    parent_backbone = backbone_identity(parent_state["model_config"], parent_hash)
+    del parent_state
     updates = configs[0]["steps"]
     assert isinstance(updates, int) and updates >= 8
     assert all(config["steps"] == updates for config in configs)
@@ -38,6 +49,7 @@ def prepare(root, artifact_root, recipes, after_run_root=None):
         REPO / name
         for name in (
             "scripts/train_quality_recipes.py",
+            "scripts/frozen_backbone_identity.py",
             "scripts/train_directional_bank_trial.py",
             "scripts/train_v43_quality_trial.py",
             "scripts/profile_raw_kernel_inference.py",
@@ -81,7 +93,7 @@ def prepare(root, artifact_root, recipes, after_run_root=None):
             "terminal_status": terminal,
         }
         inputs.append(dependency_plan)
-    arms = {}
+    arms, backbones = {}, {}
     for recipe, config in zip(recipes, configs, strict=True):
         match = re.search(r"(?:^|-)(v\d+)$", recipe.stem, re.IGNORECASE)
         assert match is not None, "Recipe filename must end in its explicit model version"
@@ -90,6 +102,9 @@ def prepare(root, artifact_root, recipes, after_run_root=None):
         assert config["initialize_parent"]["sha256"] == parent["sha256"]
         assert config["batch_size"] == 16 and config["patch_size"] == 256
         assert config["model"]["dino_feature_fusion"] == "convnext-pyramid"
+        backbones[name] = backbone_identity(
+            config["model"], config.get("expected_dino_sha256", CONVNEXT_TINY_SHA256)
+        )
         inputs.append(ref(recipe))
         for key in (
             "manifest",
@@ -127,6 +142,8 @@ def prepare(root, artifact_root, recipes, after_run_root=None):
         "artifact_root": str(artifact_root),
         "parent": parent,
         "parent_step": lineage["step"],
+        "parent_backbone": parent_backbone,
+        "backbones": backbones,
         "parent_selection": ref(parent_selection),
         "after_run": dependency,
         "arms": arms,
@@ -167,9 +184,11 @@ def worker(path, phase, arm):
             assert all(torch.equal(actual[k].cpu(), value) for k, value in parent["ema"].items())
             captured["initial_EMA_exact"] = True
             captured["DINO_sha256"] = model_hash(module.context.backbone)
-            assert (
-                captured["DINO_sha256"]
-                == "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+            verify_backbone_identity(
+                module.config.to_dict(),
+                captured["DINO_sha256"],
+                {"expected_backbone": plan.get("backbones", {}).get(arm)},
+                legacy_sha256=CONVNEXT_TINY_SHA256,
             )
             hook.remove()
 

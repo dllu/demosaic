@@ -1,0 +1,485 @@
+{
+  "status": "completed-per-checkpoint-backbone-operator-CPU-integration",
+  "recorded_local": "2026-10-23T11:14:54.117531-07:00",
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/mixed-backbone-operator-CPU-v1/publish-complete.py",
+    "sha256": "328c4c35363c349136192bbbb81a7e735fddda79eb0cdbb7aea6d221323b6488"
+  },
+  "changed_source_files": [
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/frozen_backbone_identity.py",
+      "sha256": "135f5b1af9512fe77f466bc5be39569f58fcf7a32727255f8b5b1ff33c968868"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/train_quality_recipes.py",
+      "sha256": "db74604782e07dccfeda8fdd6ae20ef5434d6ddcd8f6af201d8060949bb93077"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/queue_quality_recipe_evaluation.py",
+      "sha256": "1b1b3d9fa6dae5c280941a6ac4222692869c093c4231671f9dea8fe21025514d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/evaluate_v43_quality_trial.py",
+      "sha256": "b72392e4f1bb4a5775e9dcb11635373b71b66343c739cd2248af5e8e290a5147"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/queue_quality_fullframe.py",
+      "sha256": "965992e35968032e4ec3f4ed92419fbc5aaf7cf2554072f4b499d65069e3ec5a"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/queue_v95_adc_quality.py",
+      "sha256": "13e81916a6036614a01ed35c1de751bd302ced642926efa17c24dc0d4cda2f7c"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/train_v95_palette_trial.py",
+      "sha256": "50b448cf8fcd94354f13a8a0170e7ac845cd65fee03450079bc1e104528320c3"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/report_raw_pair.py",
+      "sha256": "24e83623a53106704cbfff3002c36b93c990307103da07ac65a8ea5cd0ad7bae"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/evaluate_texture_candidates.py",
+      "sha256": "8702465fca826d0e01219571436939f7c80245b39150d15e175a3c54930bf3b0"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/tests/test_frozen_backbone_identity.py",
+      "sha256": "1e334b3ae07e79e8d27755d34646bb1f606dd003b26a3c2d5e3973469ef2fb6e"
+    }
+  ],
+  "training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/mixed-backbone-operator-CPU-v1/training/plan.json",
+    "sha256": "a3223881b2b6eee6c20d9c6e7352254ab9329e6f909368b14fcb5dbc0047bcbc"
+  },
+  "training_launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/mixed-backbone-operator-CPU-v1/training/launch.json",
+    "sha256": "f7cf325ad8194fc723702b245f7a48d6566a9e9a7886c12fca703f3c9ad9a9db"
+  },
+  "common_initializer": {
+    "path": "/mnt/external/demosaic/convnext-small-transfer-CPU-20261023-v1/Tiny-zero.pt",
+    "sha256": "ae5dfa93f03cd241f1e212b6dcfa5f0fdbe6ac5cff9b9eda57b64cb40b2418c5"
+  },
+  "common_initializer_backbone": {
+    "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+    "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+    "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+  },
+  "expected_arm_backbones": {
+    "V105": {
+      "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+      "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+      "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+    },
+    "V106": {
+      "model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+      "revision": "421020015aa4266363db803b6049a529999afb1e",
+      "sha256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14"
+    }
+  },
+  "actual_CPU8_training_results": {
+    "V105": {
+      "receipt": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/mixed-backbone-operator-CPU-v1/training/CPU-V105-result.json",
+        "sha256": "e8540ef541721c2fba340d9a8c21d4cef5b1a9ddf624088511fdfa0ab4dee696"
+      },
+      "status": "completed-quality-training-phase",
+      "phase": "CPU",
+      "arm": "V105",
+      "updates": 8,
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/mixed-backbone-operator-CPU-20261023-v1/CPU/V105/last.pt",
+        "sha256": "a84cb504586426006a2ae9a26d3bf6dfd0f15ddff575eece492d5a4a9fc364a3"
+      },
+      "initialization": {
+        "initial_EMA_exact": true,
+        "DINO_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      },
+      "source_sha256": "c81710df408aac42203287895f6643605ba41f2cdadccb15f85aef6ec100bba7",
+      "owner": {
+        "pid": 3019355,
+        "created": 1792777710.75
+      },
+      "scope": "Discarded implementation smoke"
+    },
+    "V106": {
+      "receipt": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/mixed-backbone-operator-CPU-v1/training/CPU-V106-result.json",
+        "sha256": "07dedf3f6d053ba934d77ae964dc8c8b764acc94a42f15928c6ce5b469a14953"
+      },
+      "status": "completed-quality-training-phase",
+      "phase": "CPU",
+      "arm": "V106",
+      "updates": 8,
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/mixed-backbone-operator-CPU-20261023-v1/CPU/V106/last.pt",
+        "sha256": "c3dda251ff28eead4546175fd1b75b7fa4947e371b8c5a101f2accfd45813584"
+      },
+      "initialization": {
+        "initial_EMA_exact": true,
+        "DINO_sha256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14"
+      },
+      "source_sha256": "c81710df408aac42203287895f6643605ba41f2cdadccb15f85aef6ec100bba7",
+      "owner": {
+        "pid": 3019431,
+        "created": 1792777734.32
+      },
+      "scope": "Discarded implementation smoke"
+    }
+  },
+  "production_or_CUDA_phases_executed": false,
+  "reporting": {
+    "result": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/mixed-backbone-operator-CPU-v1/evaluation/photo-result.json",
+      "sha256": "1c938198d7ebb4f8887566a7fd5a823279d96dd0f4e4cd7cbe07ab8acb1306f2"
+    },
+    "summary": {
+      "path": "/mnt/external/demosaic/mixed-backbone-reporting-CPU-20261023-v1/photo/summary.json",
+      "sha256": "62c477920eb160bbaf289836ffc468599e3efb6cdbd0af14af69e940cd36164e"
+    },
+    "case_rows": {
+      "path": "/mnt/external/demosaic/mixed-backbone-reporting-CPU-20261023-v1/photo/per-image.jsonl",
+      "sha256": "c1833576b75d5977a54e7bfdb1d5ec00ffb56861234cfb5b1bdbaaa78d52ae86"
+    },
+    "rows": 72,
+    "source_group_arithmetic_exact": true,
+    "per_model_encoder_invariants": [
+      {
+        "model_SHA256": "91b5e4215774a6969e41838f8f08d50f0da9640c6fd8e58693e20ba4a073341e",
+        "forwards": 12,
+        "DINO_calls": 12,
+        "observations": 12,
+        "sampled_input_hashes_before_after_exact": [
+          {
+            "forward": 1,
+            "sha256": "dac4f5ea8756c508758559f202014cc89cbecf020f6ef2ff99dd4cb85544767d"
+          },
+          {
+            "forward": 2,
+            "sha256": "5782ef05caa3a07ac63aac5c5c2394bbbbfaba466c1c739745d01db1923da70e"
+          }
+        ],
+        "expected_backbone": {
+          "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+        }
+      },
+      {
+        "model_SHA256": "1557dda65be04668e31156e04e1e2d9b5f0005ebcb6b1e205cba13c265b8513b",
+        "forwards": 12,
+        "DINO_calls": 12,
+        "observations": 12,
+        "sampled_input_hashes_before_after_exact": [
+          {
+            "forward": 1,
+            "sha256": "dac4f5ea8756c508758559f202014cc89cbecf020f6ef2ff99dd4cb85544767d"
+          },
+          {
+            "forward": 2,
+            "sha256": "5782ef05caa3a07ac63aac5c5c2394bbbbfaba466c1c739745d01db1923da70e"
+          }
+        ],
+        "expected_backbone": {
+          "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+        }
+      },
+      {
+        "model_SHA256": "174ee498c5cc2b643d1bfc837575a9f7a72f15b84fcc0613b167b8be3dc758ff",
+        "forwards": 12,
+        "DINO_calls": 12,
+        "observations": 12,
+        "sampled_input_hashes_before_after_exact": [
+          {
+            "forward": 1,
+            "sha256": "dac4f5ea8756c508758559f202014cc89cbecf020f6ef2ff99dd4cb85544767d"
+          },
+          {
+            "forward": 2,
+            "sha256": "5782ef05caa3a07ac63aac5c5c2394bbbbfaba466c1c739745d01db1923da70e"
+          }
+        ],
+        "expected_backbone": {
+          "model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+          "revision": "421020015aa4266363db803b6049a529999afb1e",
+          "sha256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14"
+        }
+      }
+    ]
+  },
+  "negative_actual_wrong_encoder_check": {
+    "receipt": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/mixed-backbone-operator-CPU-v1/negative-wrong-small-hash/receipt.json",
+      "sha256": "27bb16603187f6a435ace4619db5570217b6f41d501d16f7ffec311cfddd13c9"
+    },
+    "status": "passed-actual-wrong-backbone-negative-check",
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/mixed-backbone-operator-CPU-v1/negative-wrong-small-hash/plan.json",
+      "sha256": "f519ad32efc5a7211ff71f00e73bdbf84058972ea8d870909c9c8d7a00cf334f"
+    },
+    "rejection": "Loaded frozen backbone parameters differ from their SHA256",
+    "learned_forwards": 0,
+    "no_completed_stage_or_quality_report": true
+  },
+  "RGB16_export": {
+    "receipt": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/mixed-backbone-operator-CPU-v1/cached-GFX-export-v2/receipt.json",
+      "sha256": "ec8bd3ad0872fc52f770bb73e8b55136ee029a3ea81cce904c9e0363bef615ae"
+    },
+    "status": "completed-cached512-mixed-backbone-RGB16-export-awaiting-native-review",
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/mixed-backbone-operator-CPU-v1/cached-GFX-export-v2/plan.json",
+      "sha256": "fa8fceb99a53193ed9b966c0cd5ebaed11b08d6e13f4c3488b24256c9ee6c643"
+    },
+    "report": {
+      "path": "/mnt/external/demosaic/mixed-backbone-GFX-export-CPU-20261023-v2/report.json",
+      "sha256": "b15d6a9b92d091663fe7088786c554808035d9ee195294833f45e454f3de07f4"
+    },
+    "models": [
+      {
+        "checkpoint": {
+          "arm": "V102",
+          "path": "/mnt/external/demosaic/convnext-small-transfer-CPU-20261023-v1/Tiny-zero.pt",
+          "sha256": "ae5dfa93f03cd241f1e212b6dcfa5f0fdbe6ac5cff9b9eda57b64cb40b2418c5",
+          "expected_lineage": {
+            "step": 20000
+          },
+          "expected_backbone": {
+            "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+          }
+        },
+        "full_model_state_SHA256": "91b5e4215774a6969e41838f8f08d50f0da9640c6fd8e58693e20ba4a073341e",
+        "actual_DINO_SHA256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      },
+      {
+        "checkpoint": {
+          "arm": "V105",
+          "path": "/mnt/external/demosaic/mixed-backbone-operator-CPU-20261023-v1/CPU/V105/last.pt",
+          "sha256": "a84cb504586426006a2ae9a26d3bf6dfd0f15ddff575eece492d5a4a9fc364a3",
+          "expected_lineage": {
+            "step": 8,
+            "initialized_from": {
+              "path": "/mnt/external/demosaic/convnext-small-transfer-CPU-20261023-v1/Tiny-zero.pt",
+              "sha256": "ae5dfa93f03cd241f1e212b6dcfa5f0fdbe6ac5cff9b9eda57b64cb40b2418c5",
+              "step": 20000
+            }
+          },
+          "expected_backbone": {
+            "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+          }
+        },
+        "full_model_state_SHA256": "1557dda65be04668e31156e04e1e2d9b5f0005ebcb6b1e205cba13c265b8513b",
+        "actual_DINO_SHA256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      },
+      {
+        "checkpoint": {
+          "arm": "V106",
+          "path": "/mnt/external/demosaic/mixed-backbone-operator-CPU-20261023-v1/CPU/V106/last.pt",
+          "sha256": "c3dda251ff28eead4546175fd1b75b7fa4947e371b8c5a101f2accfd45813584",
+          "expected_lineage": {
+            "step": 8,
+            "initialized_from": {
+              "path": "/mnt/external/demosaic/convnext-small-transfer-CPU-20261023-v1/Tiny-zero.pt",
+              "sha256": "ae5dfa93f03cd241f1e212b6dcfa5f0fdbe6ac5cff9b9eda57b64cb40b2418c5",
+              "step": 20000
+            }
+          },
+          "expected_backbone": {
+            "model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+            "revision": "421020015aa4266363db803b6049a529999afb1e",
+            "sha256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14"
+          }
+        },
+        "full_model_state_SHA256": "174ee498c5cc2b643d1bfc837575a9f7a72f15b84fcc0613b167b8be3dc758ff",
+        "actual_DINO_SHA256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14"
+      }
+    ],
+    "exports": [
+      {
+        "image": {
+          "path": "/mnt/external/demosaic/mixed-backbone-GFX-export-CPU-20261023-v2/restored-0-linear16.tiff",
+          "sha256": "704678fc6b2035385c24c8f34437aeee255dbdabe140d7bbfe8e8333704d8d9f"
+        },
+        "shape": [
+          512,
+          512,
+          3
+        ],
+        "dtype": "uint16",
+        "color_space": "linear-camera-RGB",
+        "sampled_RGB_values": 50688,
+        "sampled_maximum_quantization_error_DN16": 0.5001135244965553,
+        "scope": "TIFF shape/type/tags and 33 decoded full-width rows versus supplied float pixels; not a whole-image precision comparison.",
+        "all786432_channel_values_verified": true,
+        "whole_array_maximum_rounding_error_16bit_DN": 0.5002044290304184,
+        "file": {
+          "path": "/mnt/external/demosaic/mixed-backbone-GFX-export-CPU-20261023-v2/restored-0-linear16.tiff",
+          "sha256": "704678fc6b2035385c24c8f34437aeee255dbdabe140d7bbfe8e8333704d8d9f"
+        }
+      },
+      {
+        "image": {
+          "path": "/mnt/external/demosaic/mixed-backbone-GFX-export-CPU-20261023-v2/restored-0-srgb16.tiff",
+          "sha256": "e647262f8e72039adbbd07aed46f0b7860838c8b0eb394e21ffb36e2b9eaa53b"
+        },
+        "shape": [
+          512,
+          512,
+          3
+        ],
+        "dtype": "uint16",
+        "color_space": "sRGB",
+        "sampled_RGB_values": 50688,
+        "sampled_maximum_quantization_error_DN16": 0.5017095804214478,
+        "scope": "TIFF shape/type/tags and 33 decoded full-width rows versus supplied float pixels; not a whole-image precision comparison.",
+        "all786432_channel_values_verified": true,
+        "whole_array_maximum_rounding_error_16bit_DN": 0.5018628835678101,
+        "file": {
+          "path": "/mnt/external/demosaic/mixed-backbone-GFX-export-CPU-20261023-v2/restored-0-srgb16.tiff",
+          "sha256": "e647262f8e72039adbbd07aed46f0b7860838c8b0eb394e21ffb36e2b9eaa53b"
+        }
+      },
+      {
+        "image": {
+          "path": "/mnt/external/demosaic/mixed-backbone-GFX-export-CPU-20261023-v2/restored-1-linear16.tiff",
+          "sha256": "a8a7c471ad01700e5d8796dd156cf7ceec670f10db2262c5abc75fe3c910b737"
+        },
+        "shape": [
+          512,
+          512,
+          3
+        ],
+        "dtype": "uint16",
+        "color_space": "linear-camera-RGB",
+        "sampled_RGB_values": 50688,
+        "sampled_maximum_quantization_error_DN16": 0.49999241437762976,
+        "scope": "TIFF shape/type/tags and 33 decoded full-width rows versus supplied float pixels; not a whole-image precision comparison.",
+        "all786432_channel_values_verified": true,
+        "whole_array_maximum_rounding_error_16bit_DN": 0.5001155883073807,
+        "file": {
+          "path": "/mnt/external/demosaic/mixed-backbone-GFX-export-CPU-20261023-v2/restored-1-linear16.tiff",
+          "sha256": "a8a7c471ad01700e5d8796dd156cf7ceec670f10db2262c5abc75fe3c910b737"
+        }
+      },
+      {
+        "image": {
+          "path": "/mnt/external/demosaic/mixed-backbone-GFX-export-CPU-20261023-v2/restored-1-srgb16.tiff",
+          "sha256": "968a0f05be60c783eebf1588466e890b9629a9532dccd9504e297e317dc68bc1"
+        },
+        "shape": [
+          512,
+          512,
+          3
+        ],
+        "dtype": "uint16",
+        "color_space": "sRGB",
+        "sampled_RGB_values": 50688,
+        "sampled_maximum_quantization_error_DN16": 0.5009746849536896,
+        "scope": "TIFF shape/type/tags and 33 decoded full-width rows versus supplied float pixels; not a whole-image precision comparison.",
+        "all786432_channel_values_verified": true,
+        "whole_array_maximum_rounding_error_16bit_DN": 0.5018935799598694,
+        "file": {
+          "path": "/mnt/external/demosaic/mixed-backbone-GFX-export-CPU-20261023-v2/restored-1-srgb16.tiff",
+          "sha256": "968a0f05be60c783eebf1588466e890b9629a9532dccd9504e297e317dc68bc1"
+        }
+      },
+      {
+        "image": {
+          "path": "/mnt/external/demosaic/mixed-backbone-GFX-export-CPU-20261023-v2/restored-2-linear16.tiff",
+          "sha256": "474a3ef15aea9908f308bba93d9414558d31f487bb87839458cd59acd7430ee1"
+        },
+        "shape": [
+          512,
+          512,
+          3
+        ],
+        "dtype": "uint16",
+        "color_space": "linear-camera-RGB",
+        "sampled_RGB_values": 50688,
+        "sampled_maximum_quantization_error_DN16": 0.500022079795599,
+        "scope": "TIFF shape/type/tags and 33 decoded full-width rows versus supplied float pixels; not a whole-image precision comparison.",
+        "all786432_channel_values_verified": true,
+        "whole_array_maximum_rounding_error_16bit_DN": 0.5001153089106083,
+        "file": {
+          "path": "/mnt/external/demosaic/mixed-backbone-GFX-export-CPU-20261023-v2/restored-2-linear16.tiff",
+          "sha256": "474a3ef15aea9908f308bba93d9414558d31f487bb87839458cd59acd7430ee1"
+        }
+      },
+      {
+        "image": {
+          "path": "/mnt/external/demosaic/mixed-backbone-GFX-export-CPU-20261023-v2/restored-2-srgb16.tiff",
+          "sha256": "4cc7344d4116cf606ead059ad159a53ea303c0e7842fc72a8b99b1b475f96dad"
+        },
+        "shape": [
+          512,
+          512,
+          3
+        ],
+        "dtype": "uint16",
+        "color_space": "sRGB",
+        "sampled_RGB_values": 50688,
+        "sampled_maximum_quantization_error_DN16": 0.5012513399124146,
+        "scope": "TIFF shape/type/tags and 33 decoded full-width rows versus supplied float pixels; not a whole-image precision comparison.",
+        "all786432_channel_values_verified": true,
+        "whole_array_maximum_rounding_error_16bit_DN": 0.5019376873970032,
+        "file": {
+          "path": "/mnt/external/demosaic/mixed-backbone-GFX-export-CPU-20261023-v2/restored-2-srgb16.tiff",
+          "sha256": "4cc7344d4116cf606ead059ad159a53ea303c0e7842fc72a8b99b1b475f96dad"
+        }
+      }
+    ],
+    "total_decoded_channel_values_verified": 4718592,
+    "noisy_array_exact_to_cached_packed": true,
+    "reference_native160_exact": true,
+    "RAW_decodes": 0,
+    "CUDA_initialized": false,
+    "torch_CPU_threads": 4,
+    "elapsed_seconds": 33.96632775501348,
+    "scope": "CPU512 single-tile blended RGB16 export for derived Tiny-zero initializer and two discarded8update Tiny/Small smoke checkpoints. Cached genuine GFX foliage packed/raw/reference arrays,original conditioning,+2EV,native160,independent ISO100 reference not GT. Verify each pinned encoder and every encoded TIFF pixel. No RAW decoding,new training,full102MP operation or improved-model quality claim."
+  },
+  "actual_native_review": {
+    "cells": 15,
+    "boards": [
+      {
+        "kind": "photo",
+        "receipt": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/mixed-backbone-operator-CPU-v1/native-view/photo.json",
+          "sha256": "b598fcdf0ebd20514bc548dbed1730475fe4faaea546ff4705ca542ffdfba840"
+        },
+        "board": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/mixed-backbone-operator-CPU-v1/native-view/photo.png",
+          "sha256": "88182e1e40d2d5fa355bd9ef575edac676e085a8de239e82bedd09e3f1e68c3b"
+        },
+        "actual_native_cells_viewed": 10,
+        "native_cells_exact": true
+      },
+      {
+        "kind": "gfx",
+        "receipt": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/mixed-backbone-operator-CPU-v1/native-view/gfx.json",
+          "sha256": "082428627b7a0ba7c4d563ea9b134447330ce296b2209b9dbb267fb3deb16104"
+        },
+        "board": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/mixed-backbone-operator-CPU-v1/native-view/gfx.png",
+          "sha256": "e30bd7b508e3a8744c35f7aaec88f06e433e9dff74a089e661d36732bb43f078"
+        },
+        "actual_native_cells_viewed": 5,
+        "native_cells_exact": true
+      }
+    ],
+    "observations": "Discarded smoke outputs remain close to the gate-zero initializer. Fabric cords and weak cloud texture are soft; cached GFX foliage is still smooth. This is pipeline integration,not a quality gain."
+  },
+  "validation": {
+    "ruff": "passed",
+    "pytest": "119 passed",
+    "pytest_command": "PYTHONPATH=.:src:scripts .venv/bin/pytest -q tests/test_frozen_backbone_identity.py tests/test_quality_recipe_evaluation_queue.py tests/test_quality_fullframe_queue.py tests/test_v43_evaluation_witnesses.py tests/test_adc_evaluation_fidelity.py tests/test_adc_quality_queue.py tests/test_adc_training_plan.py",
+    "source_frozen_helper_closures_include_identity_module": true
+  },
+  "compatibility": "Legacy shared-hash and exact model-config checks remain strict. New plans freeze per-model name,40-character revision and loaded-state SHA256. Only declared dino_model/dino_revision differences are allowed; unrelated restoration settings and existing declared ADC policies retain their checks. Current V104 uses its original frozen copies and original data.",
+  "scope": "Actual discarded CPU-only integration labelsV105/V106,not trained quality endpoints or PSNR history entries. One common V102-derived Tiny-zero initializer file,correct Tiny/Small frozen hashes,real training/reporting/GFX crops and RGB16 encoding. These checks do not establish trained Small benefit or full102MP CUDA qualification."
+}

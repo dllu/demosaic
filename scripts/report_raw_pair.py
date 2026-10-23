@@ -101,7 +101,8 @@ def main():
             frozen, args.device, refinement_precision=args.refinement_precision
         )
         model.eval().to(memory_format=torch.channels_last)
-        label = f"{i}:{Path(state['config']['run']).name}:step-{state['step']}"
+        name = Path(state.get("config", {}).get("run", path.stem)).name
+        label = f"{i}:{name}:step-{state['step']}"
         models.append((label, model, args.precision))
         weights.append(
             {

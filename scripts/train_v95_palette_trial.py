@@ -193,6 +193,7 @@ def prepare(root, artifact_root, *, adc_training=False):
             "scripts/train_v95_palette_trial.py",
             "scripts/train_v43_quality_trial.py",
             "scripts/evaluate_v43_quality_trial.py",
+            "scripts/frozen_backbone_identity.py",
             "scripts/recover_v43_quality_trial.py",
             "scripts/train_directional_bank_trial.py",
             "scripts/profile_raw_kernel_inference.py",
