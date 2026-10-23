@@ -1,24 +1,24 @@
 # Project goals and current evidence
 
-**V101 is the fully benchmarked default in V84's architectural family.**
-Its full-photo result is 36.50347 dB, +.06351dB over V84 and about 1.60 dB above V43.
-Camera CFA means remain close to V84, with high-noise fine-detail loss still open.
+**V102 is the current quality baseline in V84's architectural family.**
+It reaches36.67951dB on full427,+.17604dB over V101 and about1.78dB above V43,
+with higher known/unseen measured-CFA means. Fine high-noise detail remains open.
 [Current choices](current-model.md) and the [README](../README.md) show useful
 progress; individual study gates do not freeze those recommendations.
 
 The broader objective in [PROMPT](../PROMPT.md) remains active. Quality has
 priority over speed. The current [GFX gallery](gfx-qualitative.md) includes
-V84/V100/V101 full-frame outputs and V102 final20k CPU contexts on all six
-regions; their real-capture differences remain small.
+complete V101/V102/V103/RawNIND frames and six native regions; learned
+real-capture differences remain small.
 
 | Goal | Current evidence | Remaining work |
 | --- | --- | --- |
-| Excellent joint demosaicing and denoising | V101:36.50347dB on full427; close measured-CFA means and cleaner geometry than RawNIND in current native comparisons | Improve fine texture, color tails and real-photo results; make strong benchmark claims only when their comparisons are complete |
+| Excellent joint demosaicing and denoising | V102:36.67951dB on full427; improved measured-CFA means and cleaner geometry than RawNIND in current native comparisons | Improve fine texture, color tails and real-photo results; make strong benchmark claims only when their comparisons are complete |
 | Much better real-photo quality than RawNIND | Current GFX comparisons show more coherent mesh/rails and less grain with the learned models | Broaden actual scene/camera comparisons and recover more foliage/weak detail |
-| 16-bit and practical full-resolution output | Verified101.996MP RGB16 TIFFs from V84/V100/V101 and RawNIND through the shared exporter | Keep full-frame quality/precision/timing measurements specific to the selected checkpoint |
-| 100MP within10s on GB10 | V101 inference/blending takes168.05s in the recorded IEEE FP32 configuration; target remains open | Optimize after improving quality |
-| Modern DINOv3 method | V101 continues the official pinned ConvNeXt-Tiny pyramid and pretrained DRUNet RGB family | Continue quality improvements and assess other approaches when useful |
-| Free, diverse targets and aggressive binning | Completed V101 uses88,484 curated Commons sources; active V102/V103 use88,477 with31 visual exclusions;4×→geometry→area2 | Compare six versus32 detail regions and review new Commons arrivals |
+| 16-bit and practical full-resolution output | Verified101.996MP RGB16 TIFFs from V101/V102/V103 and RawNIND through the shared exporter | Keep full-frame quality/precision/timing measurements specific to the selected checkpoint |
+| 100MP within10s on GB10 | V102 inference/blending takes202.31s in the recorded IEEE FP32 configuration; target remains open | Optimize after improving quality |
+| Modern DINOv3 method | V102 continues the official pinned ConvNeXt-Tiny pyramid and pretrained DRUNet RGB family | Continue quality improvements and assess other approaches when useful |
+| Free, diverse targets and aggressive binning | Completed V102/V103 use88,477 sources with31 quality exclusions; next90,872 cohort ready;4×→geometry→area2 | Measure the reviewed larger corpus from V102; continue source/detail review |
 | Physical noise/exposure and camera handling | Poisson/read noise, negative black-subtracted values, Bayer phases, clipping and WB/matrix conditioning are implemented | Continue testing shadows, saturated lights, color and low-noise behavior |
 | Reliable training and resource use | Source/manifest snapshots, restart checks, bounded jobs and actual CPU/CUDA operation | Monitor current runs and retain failures/results accurately |
 | Protected originals and evaluation scenes | Originals read-only; cached GFX3879/3880 and siblings excluded from training | Preserve those boundaries in new data recipes |
@@ -26,41 +26,28 @@ regions; their real-capture differences remain small.
 
 ## Active quality work
 
-[V100/V101](quality-first-training.md) use V84's architecture and exact final EMA,
-curated88,484 Commons, original native128/paired32 and its broad flat palette.
-The matched recipe comparison tests original augmentation against zero optical
-PSFs, weak synthetic textures, photographic contrast attenuation and reviewed
-ROI sampling. Both budgets are10,000 updates; short CPU/CUDA smokes are discarded.
-Both fixed endpoints and all seven evaluation panels have completed. V101
-reaches 36.50347 dB on full427 (+.06351 dB over V84), with camera CFA means close
-to V84 and remaining real fine-detail loss. V102 final20k now leads the selected
-material-detail comparison for further quality development.
-[Completed primary results](v84-curated-quality-review.md). Full-frame exports
-are complete and independently verified; status and artifact locations are in the training guide.
+[V102 final20k is the current quality baseline](v102-v103-quality-review.md),
+continuing V84's DRUNet/frozen DINOv3 ConvNeXt-Tiny family with zero optical PSFs,
+weak textures,photographic contrast attenuation and six reviewed ROIs. It gains
++.17604dB over V101 on full427,with425 source means improving and higher
+known/unseen CFA means. V103 has nearly identical photo quality; V102's flat-color
+and weak-carrier diagnostics favor it overall. All seven evaluation panels and
+complete102MP GFX exports finished and were independently checked. Fine
+high-noise texture,foliage and saturated-light detail remain weaknesses.
 
-Actual source-quality review covers 570 sources: 539 retained/31 withheld, after
-a complete loss/proxy scan of88,508 training sources. Completed V100/V101 use the
-earlier24 exclusions; seven newer exclusions and a32-region detail catalogue are
-applied in the separate 88,477-source V102/V103 cohort. Hard or high-loss material
-is not automatically bad data. [Native source examples](corpus-source-review.md)
-show the decisions; protected holdouts and series stay fixed.
+The next reviewed **90,872-source** corpus adds2,395 eligible arrivals. Native
+source views,duplicate/content/title/series exclusions,protected holdouts and
+actual reader checks are documented in the [incoming review](incoming-commons-quality.md).
+Start its quality continuation from V102; the larger cohort's trained benefit
+remains unmeasured. Earlier570-source/31-exclusion review and six/32-ROI studies
+retain their frozen inputs and receipts. [Training/data details](quality-first-training.md).
 
-V101's completed continuation improves PSNR/SSIM on all12 selected cases against
-V84 and V100 in the [natural-detail gallery](heldout-detail.md), with small visible
-gains and remaining high-noise smoothing. Current
-[Q2/Sony/GFX50R comparisons](cross-camera-qualitative.md) show V84/V100 beside
-V43 and RawNIND. The [completed three-model camera comparison](real-camera-quality.md)
-shows V101 CFA means close to V84, with auxiliary RGB tradeoffs. All seven
-quality panels and full-frame GFX exports have finished. V102 has completed its
-20k continuation; V103 is running. Both start from V101 with six versus32
-reviewed regions on the88,477-source cohort.
-V102's original20k endpoint gains +.362/+.285/+.043dB over V101
-on the four-source ADC/ISO100/ISO12800 detail panel. Its native crops are
-published now, including all12 PSNR/SSIM/chroma/gradient gains, remaining
-high-noise smoothing and close GFX results.
-Those selected12 cases do not stand for full427 or a measured-camera comparison.
-The [16-scene paired test reserve](paired-reserved-test.md) is prepared and
-validated, with no model inference or scores; it remains outside model selection.
+[Current native detail](heldout-detail.md),[camera](real-camera-quality.md) and
+[GFX full-frame](gfx-qualitative.md) galleries show useful gains and remaining
+weaknesses. The merged [linear DNG/JPEG path](dng-export.md) adds optional Bayer
+hot-pixel removal before restoration. Its default-off repair does not alter
+these completed comparisons. The [16-scene paired test reserve](paired-reserved-test.md)
+remains prepared,unscored and outside model selection.
 
 The [experiment index](experiments.md) and [PSNR history](performance-history.md)
 retain earlier gains and tradeoffs. For example, V95 improves a tested weak

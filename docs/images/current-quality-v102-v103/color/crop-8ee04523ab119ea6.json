@@ -1,0 +1,186 @@
+{
+  "image": "crop-8ee04523ab119ea6.png",
+  "caption": "V103 / h030-s0.98-l0.90",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Restored",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "GT (analytic)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "4fd56854ce6ff63aac8e39b0a293ca7cdefbeeb57948489fb5a875fe911e5b78",
+  "case": {
+    "id": "h030-s0.98-l0.90",
+    "palette": "h030-s0.98-l0.90",
+    "source": {
+      "id": "h030-s0.98-l0.90",
+      "hue_degrees": 30,
+      "saturation": 0.98,
+      "peak": 0.9,
+      "linear_srgb": [
+        0.9,
+        0.459,
+        0.018000000000000016
+      ]
+    },
+    "condition": {
+      "name": "iso12800-prior",
+      "shot": 0.00256,
+      "read": 2.62144e-05,
+      "exposure": 1.0
+    },
+    "pattern": "RGGB",
+    "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h030-s0.98-l0.90-iso12800-prior-RGGB.npz",
+    "sha256": "1b763d74f2ec1eede3711b13c2feab8e86e55bddcecf5005d3d9d206c196c008",
+    "target_camera_RGB": [
+      0.41692498326301575,
+      0.45900002121925354,
+      0.05609999969601631
+    ],
+    "draws_per_pattern": 1
+  },
+  "model": {
+    "arm": "V103",
+    "path": "/mnt/external/demosaic/v101-detail-diversity-20261022-v1/train/V103/last.pt",
+    "sha256": "eb20e21163d0ff411be9598d12d93963fa9cd0be57c22c5a147228230cf26ba1",
+    "expected_lineage": {
+      "step": 20000,
+      "initialized_from": {
+        "path": "/mnt/external/demosaic/models/v101-final10000.pt",
+        "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+        "step": 10000
+      }
+    },
+    "kind": "joint-checkpoint",
+    "step": 20000,
+    "label": "V103",
+    "model_config": {
+      "restoration_backbone": "pretrained-rgb",
+      "width": 64,
+      "encoder_blocks": [
+        2,
+        2,
+        4
+      ],
+      "middle_blocks": 6,
+      "decoder_blocks": [
+        2,
+        2,
+        2
+      ],
+      "attention": true,
+      "dino": true,
+      "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+      "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+      "dino_lora_rank": 0,
+      "dino_input_adapter": false,
+      "dino_feature_fusion": "convnext-pyramid",
+      "camera_conditioning": true,
+      "noise_modulation": false,
+      "physical_fp32": true,
+      "baseline": "bilinear",
+      "prior_window": 7,
+      "standardized_noise": false,
+      "noise_refinement": false,
+      "refinement_width": 24,
+      "refinement_blocks": 4,
+      "refinement_window": 63,
+      "coarse_refinement_factor": 0,
+      "coarse_refinement_width": 24,
+      "coarse_refinement_blocks": 4,
+      "coarse_refinement_window": 31,
+      "pyramid_refinement": false,
+      "pyramid_measurements": true,
+      "pyramid_width": 24,
+      "pyramid_blocks": 2,
+      "variance_stabilization": true,
+      "physical_anchors": true,
+      "rgb_processing_scale": 1,
+      "packed_detail_prior": false,
+      "rgb_hidden_autocast": false,
+      "rgb_center_camera_matrix": false,
+      "rgb_middle_skip_fp32": true,
+      "adc_cfa_projection": false,
+      "adc_cfa_projection_mode": "malvar",
+      "raw_kernel_reconstruction": false,
+      "raw_kernel_windows": [
+        1,
+        5,
+        17
+      ],
+      "raw_kernel_phase_conditioning": false,
+      "raw_directional_residual": false,
+      "raw_directional_bank_context": false,
+      "raw_directional_bank_detach_input": false,
+      "raw_spectral_residual": false,
+      "late_rgb_refinement": "none",
+      "isotropic_groups": 6,
+      "isotropic_blocks": 8,
+      "isotropic_local_width": 32,
+      "isotropic_raw_gain": 1.0,
+      "isotropic_residual_scale": 1.0
+    },
+    "compute_precision": "float32, physicalFP32",
+    "memory_format": "channels_last"
+  },
+  "ROI_xywh": [
+    48,
+    48,
+    160,
+    160
+  ],
+  "white_balance": [
+    2.0,
+    1.0,
+    1.5
+  ],
+  "camera_to_srgb": [
+    [
+      1.1176470588,
+      -0.0588235294,
+      -0.0588235294
+    ],
+    [
+      -0.0588235294,
+      1.1176470588,
+      -0.0588235294
+    ],
+    [
+      -0.0588235294,
+      -0.0588235294,
+      1.1176470588
+    ]
+  ],
+  "conditioning": {
+    "name": "iso12800-prior",
+    "shot": 0.00256,
+    "read": 2.62144e-05,
+    "exposure": 1.0
+  },
+  "display_exposure": 1.0,
+  "reference": "Exact uniform analytic target, not a real photo."
+}

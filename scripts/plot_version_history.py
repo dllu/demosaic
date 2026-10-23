@@ -85,6 +85,11 @@ STUDIES = [
         [100, 101],
         "v84-curated-quality-review.md",
     ),
+    (
+        "v101-detail-diversity-primary-statistics-v1.json",
+        [102, 103],
+        "v102-v103-quality-review.md",
+    ),
 ]
 METRICS = {
     ("full427", "photo", "srgb_psnr"): "photo_srgb_PSNR",
@@ -342,12 +347,18 @@ def main():
         )
         for version in dict.fromkeys(highlighted):
             p = next(r for r in shown if r["version"] == version)
+            offset, alignment = (0, 7), "center"
+            if 0 < latest - preferred <= 3:
+                if version == preferred:
+                    offset, alignment = (-12, 20), "right"
+                elif version == latest:
+                    offset, alignment = (12, 6), "left"
             photo.annotate(
                 f"V{version}" + (" (ADC)" if p.get("inference_policy") else ""),
                 (version, p["photo_srgb_PSNR"]),
-                xytext=(0, 7),
+                xytext=offset,
                 textcoords="offset points",
-                ha="center",
+                ha=alignment,
                 fontsize=8,
             )
     axes[0, 0].set_title(f"All {len(points)} selected endpoints", loc="left", fontsize=11)
@@ -378,8 +389,16 @@ def main():
         rows.append(
             f"| V{p['version']} / {p['endpoint']} | {p['photo_srgb_PSNR']:.5f} | {p['known_CFA_PSNR']:.5f} | {p['unseen_CFA_PSNR']:.5f} | [Review]({p['report']}) |"
         )
+    original = next(p for p in points if p["version"] == 43)
     (REPO / "docs/performance-history.md").write_text(
-        f"# PSNR history\n\nV{preferred} is the current development baseline. V101 continues the V84 architectural family and reaches36.50347dB, +.06351dB over V84 and about1.60dB over V43. Its camera means remain close to V84. V95 has a stronger tested noisy weak-carrier response; model tradeoffs and native comparisons are in the [current model guide](current-model.md). The version number names an experiment, not a training step.\n\n![PSNR versus model version](images/version-PSNR-history.png)\n\n"
+        f"# PSNR history\n\nV{preferred} is the current development baseline, with "
+        f"{reference['photo_srgb_PSNR']:.5f} dB photographic PSNR and "
+        f"{reference['known_CFA_PSNR']:.5f}/{reference['unseen_CFA_PSNR']:.5f} dB "
+        f"known/unseen measured-CFA PSNR. Its photographic change from V43 is "
+        f"+{reference['photo_srgb_PSNR'] - original['photo_srgb_PSNR']:.2f} dB. "
+        "Training histories differ; current strengths, tradeoffs and native comparisons "
+        "are in the [model guide](current-model.md). A version names an experiment, "
+        "not a training step.\n\n![PSNR versus model version](images/version-PSNR-history.png)\n\n"
         + result["description"]
         + f" Camera references are measured CFA samples; independently demosaiced RGB references are not exact GT. Small camera panels have scene uncertainty. The plot describes checkpoints with unequal budgets and data; use the linked comparisons to assess particular gains and weaknesses. Dashed lines show V{preferred}'s measured means. The upper panels include all {len(points)} endpoints; the lower panels omit V72/V73 RAW-native prototypes only to show the mature RGB range more clearly.\n\nAll photo points use the full fixed427-source panel, seven conditions and four CFAs. Known/unseen points balance captures within scenes, then scenes (4/5 scenes,72/90 crops). Precision, checkpoint hashes and per-source results remain in the source reports.\n\nV98/V99 use common ADC-only inference projection; only V99 trained through it. Their original V43/V95 references retain their checkpoint policies. The [completed ADC study](v95-adc-training-quality-review.md) improves ADC color but retains positive-noise color/detail weaknesses. Study-specific statistical gates do not prevent showing progress or choosing a stronger development baseline.\n\n"
         + "\n".join(rows)

@@ -2,19 +2,18 @@
 
 Joint Bayer demosaicing and denoising in linear camera RGB, with physical noise
 conditioning, frozen DINOv3 features and tiled 16-bit TIFF output on NVIDIA GB10.
-**V101 is the current fully benchmarked default**, continuing V84's
-pretrained DRUNet RGB trunk and frozen DINOv3 ConvNeXt-Tiny pyramid. It reaches
-**36.503 dB** on the full photographic panel: +0.064 dB over V84 and about
-+1.60 dB over V43. Camera means remain close to V84.
-[Completed results, gains and tradeoffs](docs/v84-curated-quality-review.md).
+**V102 final20k is the current quality baseline**, continuing V84's pretrained
+DRUNet RGB trunk and frozen DINOv3 ConvNeXt-Tiny pyramid. It reaches **36.680dB**
+on the full427-photo panel: +.176dB over V101 and about+1.78dB over V43,
+with higher known/unseen measured-camera means. V103 has nearly identical photo
+quality; V102 has lower ADC flat-color error and stronger tested weak texture.
+[Completed results, native comparisons and tradeoffs](docs/v102-v103-quality-review.md).
 
-The cleaned 88,484-source continuation removes optical blur and adds weak/fine
-detail examples. V101 improves source-averaged PSNR on 418/427 photos; high-noise
-texture still needs work. The [current models](docs/current-model.md) and image
-galleries reflect useful progress; the [diary](diary/index.md) retains history.
-**V102 final20k adds +0.29 dB at the ISO100 prior** on the four-source detail
-panel (+.36 ADC-only, +.043 high noise). Its latest native crops are below;
-V103 and the full matched evaluation continue.
+The zero-blur/detail recipe improves425/427 photographic source means over V101.
+Fine high-noise texture and real foliage still need work. The next reviewed
+corpus adds2,395 eligible photos, bringing training to90,872 sources.
+[Current models](docs/current-model.md) · [Source-quality review](docs/incoming-commons-quality.md) ·
+[Historical diary](diary/index.md).
 For explicit zero-shot/read inputs, [optional site consistency](docs/adc-consistency.md)
 adds **.40dB ADC-only PSNR** with unchanged V84 weights across all427 photos/four
 CFAs; positive-noise inputs bypass it. The report includes native crops and color tradeoffs.
@@ -45,16 +44,16 @@ Sources: [Derek Ramsey](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-
 cropping, simulated noise and restoration.
 
 Real GFX100S: DSCF3879 ISO 6400 → **V102 final20k** → DSCF3880 ISO 100 f/5.6. Native160
-sensor-pixel crops from cached512 contexts, with shared +2EV display. The last
+sensor-pixel crops from complete102MP blended outputs, with shared +2EV display. The last
 panel is a separately captured qualitative reference, **not GT**.
-[Compare the current V102 contexts and complete102MP V84/V100/V101/RawNIND outputs](docs/gfx-qualitative.md).
+[Compare complete102MP V101/V102/V103/RawNIND outputs](docs/gfx-qualitative.md).
 Real-photo changes remain small; fine foliage and saturated-light detail still need work.
 The [Q2, Sony a7R II and GFX50R gallery](docs/cross-camera-qualitative.md)
 also includes V84/V100 on six fixed native regions.
 
-![V102 final20k GFX foliage: noisy, restored and separate low-ISO reference](docs/images/current-gfx-v102-final/V102-final20000-foliage.png)
+![V102 final20k GFX foliage: noisy, restored and separate low-ISO reference](docs/images/current-gfx-v102-v103-fullframe/V102-foliage.png)
 
-![V102 final20k GFX fence: noisy, restored and separate low-ISO reference](docs/images/current-gfx-v102-final/V102-final20000-chain-link-fence.png)
+![V102 final20k GFX fence: noisy, restored and separate low-ISO reference](docs/images/current-gfx-v102-v103-fullframe/V102-chain-link-fence.png)
 
 ## Setup and inference
 
@@ -64,7 +63,7 @@ the lockfile. DINOv3 requires approved Hugging Face access through `HF_TOKEN`.
 ```bash
 source scripts/env.sh
 uv sync --extra dev
-uv run demosaic infer /mnt/external/demosaic/models/v101-final10000.pt photo.raf \
+uv run demosaic infer /mnt/external/demosaic/models/v102-final20000.pt photo.raf \
   /mnt/external/demosaic/output/photo-linear.tiff \
   --preview /mnt/external/demosaic/output/photo-srgb.tiff \
   --shot 0.001 --read 0.000001 \

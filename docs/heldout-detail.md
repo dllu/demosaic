@@ -11,10 +11,9 @@ The four contexts were selected by viewing clean inputs before inspecting
 these model outputs. They cover mixed contrast, including weak fine structures;
 they are not a set of globally low-contrast images. Their exact source IDs are
 absent from the training cohort. This small diagnostic complements the
-[full photographic and camera results](current-model.md). V100/V101 and their
-[full matched primary panels](v84-curated-quality-review.md) are complete;
-V102's original20k endpoint is complete; V103 is running and their full matched
-evaluation remains queued.
+[full photographic and camera results](current-model.md). The [V102/V103 full matched primary panels](v102-v103-quality-review.md) and
+complete GFX exports are finished; V102 is the current quality baseline.
+V103 has not been run on this separate four-material CPU panel.
 
 Each cell is an unchanged **160×160 native-pixel crop** at the8×-binned evaluation
 resolution. Open the original PNG at100%; a browser may fit the board to its
@@ -33,7 +32,8 @@ V102 continues the final V101 EMA with fresh AdamW/EMA on the separately frozen
 88,477-source cohort, retaining its six reviewed ROIs and zero-PSF/detail
 recipe. Its **original20,000-update endpoint** has finished; the earlier fixed
 quarter-budget5k snapshot remains alongside it. Neither was selected through
-a best-checkpoint search. V103 is running its32-ROI arm at the same final budget.
+a best-checkpoint search. V103 completed its32-ROI arm at the same final budget; its full427 results
+are in the [completed comparison](v102-v103-quality-review.md).
 
 | Condition, four-source mean | V101 PSNR | V102@5000 | V102 final20k | Final−V101, dB |
 | --- | ---: | ---: | ---: | ---: |

@@ -1,6 +1,6 @@
 # Curated-data and fine-detail continuations
 
-**V101 is the recommended checkpoint for further quality work.** Its full-photo
+**This completed study established V101; use [V102 for current quality work](v102-v103-quality-review.md).** Its full-photo
 PSNR is **36.50347 dB**, versus V100's 36.47264 and V84's 36.43996. SSIM, linear
 PSNR, chroma error and gradient error also improve on the photographic mean.
 The camera results remain close to V84; native high-noise texture loss remains.
@@ -145,11 +145,11 @@ raw cases within 1e-10, with no duplicate model/case pairs.
 | V100 | `4b689fb187b13df72fbf79ebd46f98cf7361c3ca8a97fb1f7afee940b249ad3e` |
 | V101 | `6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3` |
 
-Use `/mnt/external/demosaic/models/v101-final10000.pt`; the canonical copy is
+The earlier V101 artifact is `/mnt/external/demosaic/models/v101-final10000.pt`; the canonical copy is
 byte-identical to the final training artifact. Inference selects its EMA and
 loads the frozen official DINO separately. V101 remains in the V84 architectural
 family. The [88,477-source cohort and 32-region catalogue](corpus-source-review.md)
-now support the running V102/V103 comparison. They were not used in the
+support the [completed V102/V103 comparison](v102-v103-quality-review.md). They were not used in the
 completed V100/V101 continuations.
 More real fine-detail coverage and a sufficient source-exposure budget remain
 quality priorities. Speed optimization follows quality work.

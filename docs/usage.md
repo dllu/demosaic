@@ -2,22 +2,18 @@
 
 ## Current quality model
 
-Use **V101 final10k** as the development checkpoint:
-`/mnt/external/demosaic/models/v101-final10000.pt`. It uses DRUNet RGB
-restoration and frozen DINOv3 ConvNeXt-Tiny features. The
-[current model guide](current-model.md) records its hash, comparisons and
-alternatives; [current training](quality-first-training.md) applies the cleaned
-corpus and fine-detail recipe to this architecture. V43-specific measurements
-below retain their checkpoint labels and do not determine today's baseline.
-The read-only `/mnt/external/demosaic/models/v102-final20000.pt` is also
-available: its [selected-detail gains](heldout-detail.md) and
-[GFX context comparisons](gfx-qualitative.md#v102-at-5000-and-20000-updates) are published
-after its original20k continuation finished. Full427/camera/full-frame coverage
-currently belongs to V101, rather than this selected progress panel.
+Use **V102 final20k** as the development checkpoint:
+`/mnt/external/demosaic/models/v102-final20000.pt`. It uses DRUNet RGB
+restoration and frozen official DINOv3 ConvNeXt-Tiny features. The
+[current model guide](current-model.md) records its hash and alternatives;
+[completed primary panels, diagnostics and native crops](v102-v103-quality-review.md)
+cover full427 photos,known/unseen measured-camera and complete102MP GFX output.
+Continue quality work with the [reviewed corpus and zero-blur recipe](quality-first-training.md).
+Earlier measurements below retain their checkpoint labels.
 For explicit shot=read=0 inputs, the separately tested
 [V84 observed-site ADC export](adc-consistency.md#implementation-and-use) gains
 .400dB across427 sources/four CFAs with unchanged V84 weights. That result has
-not been measured for V101; positive-noise profiles bypass the correction.
+not been measured for V102; positive-noise profiles bypass the correction.
 
 ## Environment and storage
 

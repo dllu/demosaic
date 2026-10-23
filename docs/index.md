@@ -1,22 +1,20 @@
 # Documentation guide
 
-Start with the [README](../README.md) for setup, inference and representative
-native crops. **V101 is the fully benchmarked default**, continuing V84’s DRUNet RGB
-trunk and frozen DINOv3 ConvNeXt-Tiny features. The completed cleaned-data/detail
-comparison shows a small widespread photographic gain with close camera means.
-V102/V103 now compare six versus32 reviewed regions on the separate88,477-source
-cohort. V102's original20k endpoint now leads the selected-detail comparison,
-with +.29dB ISO100 over V101 and improved scores in all12 cases. The README,
-[detail gallery](heldout-detail.md) and GFX guide show its current crops. V103
-is running; full matched evaluation remains queued. Completed full-frame
-comparisons remain alongside the newer cached-context results.
+Start with the [README](../README.md) for setup,inference and representative
+native crops. **V102 final20k is the current quality baseline**, continuing
+V84's DRUNet RGB/frozen DINOv3 ConvNeXt-Tiny architecture. It gains+.176dB over
+V101 on full427 and raises both measured-camera means. V103 is a close
+alternative; V102 has lower ADC flat-color error and stronger tested weak texture.
+[Completed study and native comparisons](v102-v103-quality-review.md).
+All seven evaluation panels and complete102MP GFX exports have finished.
+The newly reviewed90,872-source cohort is ready for the next quality continuation.
 
 | Topic | Start here |
 | --- | --- |
 | Current work | [V84-family cleaned-data/fine-detail training](quality-first-training.md) · [Current model choices](current-model.md) |
 | Results | [Experiment index](experiments.md), [PSNR history](performance-history.md) |
 | Older work | [Chronological archive](experiment-archive.md), [local-time diary](../diary/index.md) |
-| Current model | [V101/V102 quality and comparisons](current-model.md) · [Real-camera metrics](real-camera-quality.md) · [GFX comparisons](gfx-qualitative.md) · [Q2/Sony/GFX50R](cross-camera-qualitative.md) |
+| Current model | [V102/V103 quality and comparisons](current-model.md) · [Real-camera metrics](real-camera-quality.md) · [GFX comparisons](gfx-qualitative.md) · [Q2/Sony/GFX50R](cross-camera-qualitative.md) |
 | Usage | [Commands and data conventions](usage.md) · [Linear DNG/JPEG export](dng-export.md) |
 | Data | [Next90,872-source corpus and native review](incoming-commons-quality.md), [prior Commons corpus](commons-post4557-reviewed.md), [source quality](corpus-source-review.md), [source exclusions](commons-content-overlap.md), [native RAW targets](public-raw-expansion-v2.md) |
 | Training | [Data/augmentation pipeline](training-pipeline.md), [execution/restart](training-execution.md), [V43 quality-study checks](quality-training-validation.md) |

@@ -1,11 +1,10 @@
 # Quality training in the V84 architectural family
 
-**Continue quality work in V84's DRUNet RGB/frozen DINOv3 ConvNeXt-Tiny family.**
-V102 final20k now has the best selected material-detail results and is available
-for further development. V101 is the fully benchmarked default; its matched comparison
-reaches 36.50347 dB photographic PSNR (+.06351 dB over V84), with gains across all
-seven conditions and camera means close to V84. Native high-noise fine-detail
-loss remains. [Results and comparisons](v84-curated-quality-review.md).
+**Continue quality work from V102 final20k in V84's DRUNet RGB/frozen DINOv3
+ConvNeXt-Tiny family.** It reaches36.67951dB photographic PSNR,+.17604dB over
+V101, with higher known/unseen CFA means. V103 is a close alternative; V102's
+flat-color and weak-texture diagnostics favor it overall. High-noise fine detail
+remains soft. [Completed results and native comparisons](v102-v103-quality-review.md).
 
 ## Current matched comparison: V102/V103
 
@@ -29,63 +28,45 @@ while rebinding to the same new manifest.
 [Six-region recipe](../configs/quality-v101-detail-six-v102.yaml) ·
 [Expanded recipe](../configs/quality-v101-detail-expanded-v103.yaml) ·
 [Actual launch and discarded CPU/CUDA checks](results/v101-detail-diversity-training-launch-v1.json).
-All four eight-update checks passed from exact V101 weights with finite states
-and unchanged official DINO. Both production arms start freshly again. V102
-has completed its original20k updates and exited; V103 is running. Both fixed
-endpoints have matched evaluation queued.
-The larger budget also improves source exposure compared with the 10k pilot.
+All four discarded eight-update CPU/CUDA checks passed from exact V101 weights
+with finite states and unchanged official DINO. Both original20k production
+endpoints, all seven evaluation panels and complete GFX exports have completed
+successfully. Owners exited; no intermediate checkpoint search selected them.
 
-The **original V102 final20k endpoint** improves all12 selected material cases
-in PSNR, SSIM, chroma and gradient error versus both V101 and fixed5000. Mean
-PSNR gains over V101 are +.362/+.285/+.043dB at ADC/ISO100/ISO12800. Its
-[native comparisons](heldout-detail.md) and
-[cached GFX contexts](gfx-qualitative.md#v102-at-5000-and-20000-updates) are published.
-Low-noise bark/canopy improve modestly; high-noise detail and real foliage
-remain soft. This is selected-panel progress, not full427/camera proof.
-[Checkpoint, scores and126 actually viewed native cells](results/V102-final20000-detail-GFX-CPU-v1.json).
+V102/V103 photo PSNR is36.67951/36.68091dB. V102 gains+.17604dB over V101
+on full427, with425 source means improving; known/unseen CFA means rise to
+54.23709/53.97177dB. The six/32 ROI difference has only a tiny photo effect,
+while V102 has lower ADC color bias and stronger tested weak-carrier response.
+Use V102 as the next initializer. [Scores, uncertainty, actual native review
+and hashes](v102-v103-quality-review.md).
 
-The early final-V102 CPU comparison has completed while V103 continues. It
-uses the original fixed endpoint and loader-resolved parent architecture, with
-all91 tensor names/shapes matching, finite model/EMA/Adam and exact lineage.
-Cached GFX inputs reproduce all six V101 float contexts/PNGs without RAF decode.
-The receipt preserves the corrected reporting preflight/metadata provenance;
-the original training and full evaluation queues remain unchanged. The full
-matched panels and complete exports below still wait for both original20k endpoints.
+The [four-material CPU panel](heldout-detail.md) separately shows V102's
++.362/+.285/+.043dB ADC/ISO100/ISO12800 gain over V101 and all12 improved
+PSNR/SSIM/chroma/gradient cases. V103 was not run on that separate panel.
+The [current GFX gallery](gfx-qualitative.md) now uses completed blended102MP
+outputs for V101/V102/V103/RawNIND; older512CPU contexts remain linked.
 
-Frozen plan: `.cache/current-quality-20261022-v1/detail-diversity-training-v1/plan.json`.
-Artifacts: `/mnt/external/demosaic/v101-detail-diversity-20261022-v1/`.
-The runner reads explicit recipe lineage and snapshots its parent choice, leaving
-`configs/current-model.json` free to track recommendations during a run.
-It waited for both full-frame owners to exit; CPU/CUDA checks and production
-retain the resource floors below, with no automatic retry.
+Frozen roots under`.cache/current-quality-20261022-v1/`:
+`detail-diversity-training-v1/`,`detail-diversity-evaluation-v1/`,
+`detail-diversity-fullframe-v1/`. Corresponding artifacts under
+`/mnt/external/demosaic/` are`v101-detail-diversity-20261022-v1/`,
+`v101-detail-diversity-evaluation-20261022-v1/` and
+`v101-detail-diversity-fullframe-20261022-v1/`. Original pending-status receipts
+and code snapshots remain unchanged; the
+[completion receipt](results/v102-v103-quality-complete-v1.json) closes the review.
+All48 numerical modules match between arms; the archive hash differs solely
+because the reviewed-ROI catalogue is frozen with the recipe.
 
-The matched evaluation and full-frame queues are now live behind these runs:
+## Next cleaned-corpus continuation
 
-- `.cache/current-quality-20261022-v1/detail-diversity-evaluation-queue-v1/`
-  waits for both fixed 20k endpoints and the original training owners to exit.
-  It then compares V101/V102/V103 in IEEE FP32 on full427 photos plus 16
-  procedural sources, seven conditions/four CFAs, known4/unseen5 measured-CFA,
-  weak textures, flat colors and the standing GFX regions plus highlights.
-- `.cache/current-quality-20261022-v1/detail-diversity-fullframe-v1/`
-  waits for all seven panels and that exact evaluation controller to finish,
-  then exports complete 102MP GFX restorations with tile512/overlap64/B4,
-  RGB16 files and six fixed native crop comparisons.
-
-Outputs are `/mnt/external/demosaic/v101-detail-diversity-evaluation-20261022-v1/`
-and `/mnt/external/demosaic/v101-detail-diversity-fullframe-20261022-v1/`.
-The actual CPU reporting smoke passed 72 score rows/six triplets, with 10 unique
-native160 cells viewed. A separate cropped 512 CPU export smoke passed four
-RGB16 TIFFs for V101/RawNIND, with four native cells viewed. Neither is a final
-quality or full-frame timing result. [Source/owner boundaries and verified readiness](results/v101-detail-diversity-evaluation-readiness-v1.json).
-
-The training archive hash includes the ROI catalogue as well as numerical code.
-The six/32 catalogues therefore have different archive IDs. Independent checks
-reconstruct those IDs and allow only `reviewed-photo-rois.json` to differ,
-matching each frozen recipe. All 48 numerical modules, other manifests, locks
-and licenses remain byte-identical; code or unrelated data drift is rejected.
-These checks preserve the experimental difference without treating it as code
-drift. Final quality still requires the completed panels and native review;
-no intermediate checkpoint or automatic promotion is selected by these queues.
+Use the reviewed **90,872-source**4×/8× pair from the
+[incoming source review](incoming-commons-quality.md). Start from exact V102 EMA
+with fresh optimizer/EMA, initially retaining its six-ROI,zero-PSF/detail recipe.
+This tests the next quality step without adding an ROI intervention whose
+preceding six/32 comparison had little photographic effect. The2,395 newly
+eligible arrivals and five optional fine-detail sources remain separate facts:
+source diversity is ready; their trained quality benefit is unmeasured.
+Keep2,303 validation/2,255 test memberships and protected scene exclusions fixed.
 
 ## Completed V100/V101 comparison
 

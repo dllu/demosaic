@@ -95,8 +95,8 @@ window without power compensation, and is not whole-image sensor-noise RMS.
 
 These are four selected synthetic-photo contexts, not full427 or real-camera
 quality proof. The current calibrated 1× default remains unchanged. The
-V102/V103 experiment continues to test richer clean/detail training, which may
-improve this tradeoff without a blanket conditioning override.
+[completed V102/V103 comparison](v102-v103-quality-review.md) improves full-panel
+quality and tested weak-carrier response, with fine high-noise detail still open.
 
 ## Real GFX contexts
 

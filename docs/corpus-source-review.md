@@ -149,9 +149,9 @@ float32 target hashes exactly. The actual clean reader visits all 32 regions
 under the existing 5% conditional probability, seed 60 mixed-domain schedule and
 zero-PSF geometry→area2 path, with finite native 256 outputs and no GPU/model.
 [Full preparation/review/reader evidence](results/source-quality-detail-catalogue-v3.json).
-V102/V103 use these frozen data. V102 has completed20k updates and improved
-the selected detail panel; V103 continues, with their full matched comparison
-still pending. [Recipes and current results](quality-first-training.md#current-matched-comparison-v102v103).
+V102/V103 completed20k updates on these frozen data. Their full427/camera
+comparison and complete GFX exports are finished; V102 is the current baseline.
+The next90,872-source cohort is documented in the [incoming review](incoming-commons-quality.md). [Recipes and current results](quality-first-training.md#current-matched-comparison-v102v103).
 
 Source views use existing prepared caches. New downloads and decisions enter
 a separate frozen cohort instead of changing an existing experiment's inputs.

@@ -8,7 +8,7 @@ manifest. Source RAWs and XMPs remain read-only. No personal images are committe
 ```bash
 source scripts/env.sh
 PYTHONPATH=src uv run python scripts/export_raw_dng.py \
-  /mnt/external/demosaic/models/v101-final10000.pt \
+  /mnt/external/demosaic/models/v102-final20000.pt \
   '/path/to/raw/2023-12-31-17*.raf' \
   --only-with-xmp --suffix v101 \
   --output-dir ~/pictures/composites/2023-12-31-ochanomizu \
@@ -35,7 +35,7 @@ Timings are shared-machine observations, not a new model speed claim.
 
 ## Hot-pixel correction
 
-`--hot-pixels` repairs isolated bright Bayer outliers **before V101 or another
+`--hot-pixels` repairs isolated bright Bayer outliers **before V102 or another
 restoration model sees them**, so correction is included in both the DNG and
 JPEG. Enabling a darktable preview module after demosaicing cannot repair the
 stored Bayer measurements; darktable's module skips RGB linear DNGs. The option

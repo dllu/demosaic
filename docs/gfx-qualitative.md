@@ -1,87 +1,83 @@
 # GFX100S qualitative comparisons
 
-**Current comparisons include V102 final20k, fixed5k and complete V84/V100/V101 outputs**
-on the standing train/platform scene. V101 is the current
-fully benchmarked default after its [completed photographic gain](v84-curated-quality-review.md);
-these real-capture results look close across the
-learned checkpoints. They retain more coherent fence strands and cleaner
-building rails than RawNIND here. Foliage remains smooth, and saturated-light
-shapes/boundaries remain areas to improve.
+**V102 final20k is the current quality baseline.** The latest gallery compares
+complete102MP outputs for V101,V102,V103 and RawNIND on the standing
+DSCF3879/DSCF3880 scene. The learned results remain close: fence strands and
+building rails are more coherent than RawNIND, while fine foliage and saturated
+sign structure still need work. [Completed model comparison](v102-v103-quality-review.md).
+
+## Current complete full-frame comparisons
+
+![Six native GFX regions: noisy,V101,V102,V103,RawNIND and independent ISO100 reference](images/current-gfx-v102-v103-fullframe/gfx-comparison.png)
+
+Columns: noisy Malvar,V101,**V102**,V103,RawNIND with input-only per-CFA-channel
+gain,separate ISO100 f/5.6 reference. Each cell is **160×160 native sensor
+pixels**, never resized. Open the original at100%; browsers may fit the board
+to the window. Crops come from complete101.996MP blended IEEE FP32 restorations,
+with tile512/overlap64/B4, before RGB16 encoding. All36 cells were actually viewed;
+shared noisy/reference pixels match exactly across methods.
+
+The last column is a separately captured, independently demosaiced qualitative
+reference, **not GT**. Aperture,motion,LED scan and exposure differ. No pixelwise
+quality scores are computed against it. Shared conditioning is
+shot`.0014635775921166604`,read variance`1.0715704128646712e-6`,display×4(+2EV),
+with the noisy capture's WB/matrix. PNGs are RGB8 sRGB previews; restored contexts
+are FP32. [All24 triplets and source/ROI/checkpoint/noise/display metadata](images/current-gfx-v102-v103-fullframe/manifest.json).
+
+![V102 full-frame foliage triplet](images/current-gfx-v102-v103-fullframe/V102-foliage.png)
+
+![V102 full-frame chain-link-fence triplet](images/current-gfx-v102-v103-fullframe/V102-chain-link-fence.png)
+
+The foliage remains soft in all three learned models. Fence geometry is more
+continuous than RawNIND; blue/neon and illuminated edges still become rounded
+or filled. The low-ISO capture has different optical detail and is not a
+pixelwise scoring target. Four resized full-frame overviews were also viewed;
+scene structure is coherent, but those overviews cannot establish native detail.
+
+All eight RGB16 linear/sRGB TIFFs reopen as8746×11662×3,uint16,16bits/channel,
+with complete-file hashes independently verified. The original writer also
+checks sampled decoded rows against supplied floats; that is an export-path
+check, not a whole-image learned-precision bound.
+
+| Method | Full-frame inference/blending, seconds | Peak CUDA allocation, GB |
+| --- | ---: | ---: |
+| V101 | 199.51 | 3.61 |
+| **V102** | **202.31** | **3.61** |
+| V103 | 199.67 | 3.61 |
+| RawNIND channel | 17.46 | 2.01 |
+
+Settings: IEEE FP32,tile512/overlap64/B4,520 tiles,channels-last. These are
+shared-machine observations excluding RAW decoding,model loading and writes.
+They do not meet100MP/10s; quality remains the priority.
+Artifacts:`/mnt/external/demosaic/v101-detail-diversity-fullframe-20261022-v1/`.
+The controller and worker exited successfully.
+[Completion,native/overview viewing and independent TIFF audit](results/v102-v103-quality-complete-v1.json).
+
+## Other useful comparisons
+
+The [V102 fixed5k/final20k CPU512-context comparison](images/current-gfx-v102-final/gfx-comparison.png)
+([metadata](images/current-gfx-v102-final/manifest.json),
+[exact parent replay and report corrections](results/V102-final20000-detail-GFX-CPU-v1.json))
+is separate from full-frame blending. Its final20k material-panel gain remains
+in the [natural-detail guide](heldout-detail.md).
+<a id="v102-at-5000-updates"></a>
+<a id="v102-at-5000-and-20000-updates"></a>
+
+The earlier [V84/V100/V101 complete-frame gallery](images/current-gfx-fullframe/gfx-comparison.png)
+([original receipt](results/gfx-V84-V100-V101-fullframe-v1.json)) retains its
+168.47/168.21/168.05s timings and original pixels; the new table measures a
+separate run. [Older CPU contexts](images/current-gfx/gfx-comparison.png) and
+[V43/V84/V95](images/current-quality/gfx-comparison.png) remain useful evidence.
+The latter's single V95 noisy-sky channel differs by1RGB8 level, as recorded
+in its receipt; current pixels are never adjusted for presentation.
 
 The [fixed-V101 conditioning study](noise-conditioning.md#real-gfx-contexts)
-compares .50/.75/1.00/1.25× variance strengths on these same six regions. Lower
-strengths retain more wall/foliage texture and grain; higher strength smooths
-further. It uses cached CPU 512 contexts, with no reference scoring or production
-default change. The comparisons retain the original1× conditioning.
-
-<a id="v102-at-5000-updates"></a>
-
-## V102 at 5000 and 20000 updates
-
-V102's original20k endpoint improves all12 selected material-case PSNR, SSIM,
-chroma and gradient scores over V101 and fixed5000. These real-capture outputs
-remain close: foliage is still soft and saturated sign structure needs work.
-They are **CPU512 context restorations**, separate from complete blended frames.
-The last column is the independent ISO100 f/5.6 reference, **not GT**.
-
-![Six native regions: noisy, V101, V102 final20k, V102@5000 and independent ISO100 reference](images/current-gfx-v102-final/gfx-comparison.png)
-
-Each cell is160×160 native sensor pixels, with shared coordinates, original
-physical conditioning and +2EV display. All30 cells were actually viewed;
-shared noisy/reference pixels match exactly. Cached Bayer/reference arrays
-avoid RAF decoding and source-HDD reads. V101 reproduces all six earlier float
-predictions and triplet PNGs exactly. No RGB reference scores are computed.
-
-V102 final20k triplets: [foliage](images/current-gfx-v102-final/V102-final20000-foliage.png)
-([metadata](images/current-gfx-v102-final/V102-final20000-foliage.json)) and
-[fence](images/current-gfx-v102-final/V102-final20000-chain-link-fence.png)
-([metadata](images/current-gfx-v102-final/V102-final20000-chain-link-fence.json)).
-[All18 triplets, ROI/noise/display/checkpoint metadata](images/current-gfx-v102-final/manifest.json) ·
-[Final checkpoint, exact parent replay and actual native review](results/V102-final20000-detail-GFX-CPU-v1.json).
-The receipt also preserves the original worker report and the correction of a
-copied duplicate checkpoint field; PNGs and float predictions are unchanged.
-
-Read-only checkpoint:`/mnt/external/demosaic/models/v102-final20000.pt`, SHA256
-`55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a`.
-The [fixed5k evidence](results/V102-progress5000-detail-GFX-CPU-v1.json) remains
-available. V103 and the full matched panels/complete exports are still pending.
-
-## Complete full-frame comparisons
-
-![Current native sky, building, foliage, fence and illuminated-region comparisons](images/current-gfx-fullframe/gfx-comparison.png)
-
-Columns: noisy Malvar, V100, **V101**, V84, RawNIND with input-only per-CFA-channel
-gain, separate ISO100 reference. Each cell is **160×160 native sensor pixels**,
-never resized. Open the original PNG at100%; a browser may fit the board to its
-window. These crops come from complete 101.996MP blended CUDA IEEE FP32 restorations,
-with tile512/overlap64/B4, before RGB16 encoding.
-Shared conditioning is shot`.0014635775921166604`, read variance
-`1.0715704128646712e-6`, with display ×4(+2EV) and the noisy capture's WB/matrix.
-PNG previews are8-bit sRGB; inference and saved context arrays remain FP32.
-All four complete exports and eight RGB16 TIFFs have been independently verified.
-The [earlier 512px CPU contexts](images/current-gfx/gfx-comparison.png) remain
-available as a separate comparison.
-
-[V101 foliage triplet and metadata](images/current-gfx-fullframe/V101-foliage.json) ·
-[V101 fence triplet and metadata](images/current-gfx-fullframe/V101-chain-link-fence.json) ·
-[all24triplets and source/checkpoint metadata](images/current-gfx-fullframe/manifest.json) ·
-[native viewing, full-frame operation and TIFF audit](results/gfx-V84-V100-V101-fullframe-v1.json).
-Every public PNG retains the original report's pixels. Source captures,
-reference calibration, ROI, full checkpoint hash, noise, exposure and display
-settings accompany each sidecar. All 36 native board cells were actually viewed,
-and shared noisy/reference pixels match across methods with zero RGB8 tolerance.
-The [CPU context report](results/gfx-current-V84-V100-V101-CPU-v1.json) separately
-reproduces all 72 of its display panels from saved float contexts.
-
-Assess these real views alongside the
-[current photographic/camera results](current-model.md).
-The [V43/V84/V95 comparison](images/current-quality/gfx-comparison.png)
-([metadata](images/current-quality/manifest.json)) remains useful context. Its
-single V95 sky noisy-preview channel differs by1RGB8 level, recorded in that
-older gallery's receipt; current predictions/reference pixels are never
-adjusted for presentation.
-The [Q2, Sony a7RII and GFX50R comparison](cross-camera-qualitative.md) adds
-V84/V100 on six low-ISO regions, without a clean reference.
+compares .50/.75/1.00/1.25× variance on the same six cached512 contexts. Lower
+strengths retain more texture and grain; the calibrated1× default is unchanged.
+The [Q2,Sony a7RII and GFX50R comparison](cross-camera-qualitative.md) adds six
+low-ISO regions for V84/V100 without a clean reference. The
+[linear DNG/JPEG exporter](dng-export.md) and optional Bayer hot-pixel repair
+are merged; repair is explicit and was off in these comparisons.
 
 ## Capture and crop protocol
 
@@ -138,72 +134,12 @@ are source observations, rather than independent model-selection cases.
 
 ![Native input/reference inspection of two blue features](images/gfx-blue-feature-input-reference.png)
 
-## Reproduce and extend the comparisons
+## Reproduction
 
-Complete 101.996MP exports have finished for V84, V100, V101 and RawNIND with
-CFA-channel input gain. The worker and controller exited normally. All eight
-TIFFs reopen as 8746×11662×3 uint16 RGB; sRGB files carry ICC profiles. Independent
-checks rehash every complete file and confirm shape/depth/tags. The writer also
-compares 33 decoded full-width rows per export with supplied floats: sampled
-maximum rounding error is .50194 normalized 16-bit DN. This verifies the export
-path, rather than a whole-image learned-precision bound.
-
-| Model | Full-frame inference/blending, seconds |
-| --- | ---: |
-| V84 | 168.47 |
-| V100 | 168.21 |
-| **V101** | **168.05** |
-| RawNIND channel | 17.25 |
-
-Settings: IEEE FP32, tile512/overlap64/B4, 520 tiles, channels-last. These observed
-shared-machine timings exclude RAW decode, model loading and TIFF writes.
-They do not meet the 100MP/10s target; quality remains the priority. Native
-crops come directly from the blended float frame, before RGB16 encoding.
-All six regions and four resized whole-scene overviews were inspected. The
-learned outputs look close, with coherent mesh/rails but soft foliage and
-lit-sign structure. The low-ISO exposure remains a nonexact reference.
-
-Outputs: `/mnt/external/demosaic/v84-quality-fullframe-20261022-v1/`.
-[Completed exports, timings, native review and independent audit](results/gfx-V84-V100-V101-fullframe-v1.json).
-[Original queue and cropped CPU export smoke](results/v84-quality-fullframe-readiness-v1.json).
-
-Rebuild the shipped gallery without inference or access to private RAWs:
-
-```bash
-source scripts/env.sh
-PYTHONPATH=src:scripts uv run --no-sync python scripts/render_quality_comparisons.py \
-  docs/images/current-gfx/manifest.json
-```
-
-For another checkpoint, restore the same cached contexts and preserve the
-sidecar metadata:
-
-```bash
-source scripts/env.sh
-uv run --no-sync python scripts/report_raw_pair.py \
-  docs/images/current-gfx/selection.json \
-  /mnt/external/demosaic/models/v84-original20000.pt \
-  /mnt/external/demosaic/v84-curated-quality-20261022-v2/train/V100/last.pt \
-  /mnt/external/demosaic/v84-curated-quality-20261022-v2/train/V101/last.pt \
-  --rawnind /mnt/external/demosaic/references/rawnind \
-  --rawnind-gain-modes cfa-channel \
-  --device cpu --precision float32 --refinement-precision float32 \
-  --output /mnt/external/demosaic/evaluation/gfx-next-review
-```
-
-Use a fresh output directory. `--full-frame` additionally restores the full
-image and writes linear/sRGB16 TIFFs before cropping. Distinguish full-frame
-blended results from context-only comparisons. See
-[usage](usage.md) and the [16-bit/full-frame measurement record](mature-cudnn-fullframe.md).
-Current image comparisons should include useful new versions as they appear;
-a diagnostic tradeoff does not require keeping an older gallery indefinitely.
-
-[Colored-light cases](gfx-highlight-qualitative.md) ·
-[V84/V85 quality results](native-data-original20k-review.md) ·
-[recent ADC/ISO 100 and GFX comparisons](v95-adc-training-quality-review.md).
-Older [V16 full-frame evidence](results/gfx-3879-3880-v16-full.json),
-[stabilized Gaussian-prior results](stabilized-gaussian-review.md) and
-[V32/V33 full-frame results](low-lr-paired-v32-v33-review.md) retain their original
-measurements. The timestamped [diary](../diary/index.md) records their history;
-this page presents the current useful comparisons. The crops use the user's
-own photographs with permission recorded in `PROMPT.md`.
+The source-frozen completed job is recorded under
+`.cache/current-quality-20261022-v1/detail-diversity-fullframe-v1/`.
+Its plan binds the fixed checkpoint hashes, source code, protected local RAW
+cache and six ROIs. All seven preceding evaluation stages finished before
+this GPU job began. Crops are extracted after complete-frame blending and
+retain exact source/reference pixels. Preserve this evidence and use a fresh
+output directory for any later model comparison.
