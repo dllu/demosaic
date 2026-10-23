@@ -39,6 +39,9 @@ bark/canopy results. The [complete GFX gallery](gfx-qualitative.md) includes
 sky, building, foliage, chain-link fence and two illuminated regions from
 full102MP blended outputs. Real f/5.6 ISO100 is an independent reference,not GT.
 The [camera guide](real-camera-quality.md) shows known/unseen native crops.
+The [Q2, Sony and GFX50R gallery](cross-camera-qualitative.md) now compares
+V100/V102/V103 on six fixed native regions. These low-ISO real-photo changes
+remain small; dark rocks and window detail are still soft.
 
 V84's broader improvement over V43 remains visible in the
 [low-noise photographic comparisons](images/current-quality/iso100-prior/photo-comparison.png)

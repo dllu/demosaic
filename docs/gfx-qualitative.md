@@ -75,7 +75,7 @@ The [fixed-V101 conditioning study](noise-conditioning.md#real-gfx-contexts)
 compares .50/.75/1.00/1.25× variance on the same six cached512 contexts. Lower
 strengths retain more texture and grain; the calibrated1× default is unchanged.
 The [Q2,Sony a7RII and GFX50R comparison](cross-camera-qualitative.md) adds six
-low-ISO regions for V84/V100 without a clean reference. The
+low-ISO regions for V100/V102/V103 without a clean reference. The
 [linear DNG/JPEG exporter](dng-export.md) and optional Bayer hot-pixel repair
 are merged; repair is explicit and was off in these comparisons.
 

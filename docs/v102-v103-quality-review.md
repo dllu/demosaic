@@ -121,6 +121,13 @@ for V101/V102/V103 and17.46s for RawNIND-channel, IEEE FP32,tile512/overlap64/B4
 These shared-machine observations exclude loading/export and do not meet10s.
 [Capture protocol, six ROI coordinates and full-frame records](gfx-qualitative.md).
 
+The [updated Q2, Sony a7R II and GFX50R gallery](cross-camera-qualitative.md)
+adds V102/V103 alongside V100 on six fixed low-ISO regions. All 30 native cells
+were viewed; versions look close, with soft Q2 shadows and Sony windows.
+Concrete-surface variation and joints remain clearer than RawNIND here. These
+unpaired captures have no clean reference or pixelwise score. All 15 shared
+float contexts and six V100 triplet PNGs reproduce the earlier gallery exactly.
+
 ## What changed and what comes next
 
 Both arms start from the exact V101 final10k EMA, fresh AdamW/EMA, seed60,
