@@ -1,0 +1,132 @@
+{
+  "status": "validated-paired-hot-pixel-feature-integration",
+  "recorded_local": "2026-10-23T13:29:44.939502-07:00",
+  "publisher": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/linear-dng-paired-merge-v1/publish.py",
+    "sha256": "7efe5dd3c2fbc1ad093be0b5208b940278121142c2686f523fc54802a3ce5b5f"
+  },
+  "main_before_merge": "2a3ba415ab3771880e05848c40a3b40bd9e275c1",
+  "feature_commit": "4381fc23b6e4dc6245d201abb0d6e929dae38f14",
+  "feature_historical_diary_bytes_preserved": {
+    "path": "/home/dllu/proj/demosaic/diary/2026-10-22-23-13-15-paired-hot-pixel-investigation.md",
+    "sha256": "47ea0d6a24d6a0581a9c3db0e7e35f8bce0ff75450fc1f39c220225a9178e1de"
+  },
+  "integration_files": [
+    {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/hotpixels.py",
+      "sha256": "0a4b8777a47b49af0f16c83c86b970387960c44432228e5f958b433c71d30672"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/export_raw_dng.py",
+      "sha256": "71ed31af46bbd7facd03e50eca1683843641fa3895dacb2a5899f03c00157115"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/tests/test_hotpixels.py",
+      "sha256": "2c79f3427ca13f725eae35b6a260d9cf8bc14d0d585287668a95eb9bbccd2f03"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/tests/test_hotpixel_clusters.py",
+      "sha256": "927e00aae9598511eec99adbd410e64e0c66f36934ad3e468283ecc5ef429e0e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/tests/test_dng.py",
+      "sha256": "1f7ef612cef4669f7c43b17ab0091312cac7eb2a8ff7d0e60fe2bb86cf4e01d0"
+    }
+  ],
+  "validation": {
+    "actual_pytest_command": "CUDA_VISIBLE_DEVICES='' HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 PYTHONPATH=src:scripts OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=1 .venv/bin/python -m pytest tests/test_hotpixels.py tests/test_hotpixel_clusters.py tests/test_dng.py --basetemp=.cache/pytest-linear-dng-followup-20261023 -q",
+    "observed_exit_code": 0,
+    "observed_stdout_summary": "42 passed in 5.42s",
+    "tests_passed": 42,
+    "tests_skipped": 0,
+    "actual_CPU_DNG_and_darktable_JPEG_exports_both_hot_pixel_switches": true,
+    "ruff_check": "All checks passed!",
+    "ruff_format_check": "5 files already formatted",
+    "post_test_code_change": "Only the CLI progress message removes the word isolated so it describes either correction mode; Ruff rerun passes."
+  },
+  "original_concurrent_V104_jobs": {
+    "reviewed-corpus-training-v1": {
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-corpus-training-v1/plan.json",
+        "sha256": "383da795a2d0bdb75f9900155c2f5d7fb84e74bb3609e44018fbad028290bd8f"
+      },
+      "status_observed": "running-quality-training",
+      "original_owners_live": {
+        "controller": {
+          "pid": 2938981,
+          "created": 1792773192.89
+        },
+        "child": {
+          "pid": 2939389,
+          "created": 1792773283.87
+        }
+      },
+      "frozen_inputs_verified": true
+    },
+    "reviewed-corpus-evaluation-queue-v1": {
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-corpus-evaluation-queue-v1/plan.json",
+        "sha256": "6c83c760efecbbd6450c74e5e4c26bb9e0069adb93cca3c63206f2620877b428"
+      },
+      "status_observed": "waiting-for-owned-quality-training",
+      "original_owners_live": {
+        "controller": {
+          "pid": 2939380,
+          "created": 1792773283.21
+        }
+      },
+      "frozen_inputs_verified": true
+    },
+    "reviewed-corpus-fullframe-v1": {
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-corpus-fullframe-v1/plan.json",
+        "sha256": "fc165670e61d96248c25e64f035ecf1fec28ca5cf021b2f7cc8a5f7638a4483a"
+      },
+      "status_observed": "waiting-for-quality-evaluation",
+      "original_owners_live": {
+        "controller": {
+          "pid": 2939893,
+          "created": 1792773306.66
+        }
+      },
+      "frozen_inputs_verified": true
+    },
+    "V104-final-detail-queue-v1": {
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-final-detail-queue-v1/plan.json",
+        "sha256": "cfe6053fd75f61fe6be6b098f6050015e78228c180b008c5aa35ffffe3568d17"
+      },
+      "status_observed": "waiting-for-original-V104-endpoint",
+      "original_owners_live": {
+        "controller": {
+          "pid": 2991227,
+          "created": 1792774258.33
+        }
+      },
+      "frozen_inputs_verified": true
+    }
+  },
+  "prior_capacity_preparations": {
+    "backbone-capacity-training-v1": {
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/backbone-capacity-training-v1/plan.json",
+        "sha256": "d8d6fcdd554348265d9e0c2043b8bf36a26752d226313593c24d5b714a753e39"
+      },
+      "controller_unlaunched": true,
+      "frozen_inputs_verified": true
+    },
+    "backbone-capacity-training-v2": {
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/backbone-capacity-training-v2/plan.json",
+        "sha256": "f3712b9161e4e7c3778672868551f686f2ff9fda16cae45eb0330a5601dd5af0"
+      },
+      "controller_unlaunched": true,
+      "frozen_inputs_verified": true
+    }
+  },
+  "cleaned_recipe_CPU_checks": {
+    "path": "/home/dllu/proj/demosaic/docs/results/backbone-cleaned-recipes-CPU-v1.json",
+    "sha256": "73a1856c9388616c8e6b041f034fdcaf36b827a535b9693974e6673bbe78e173"
+  },
+  "scope": "Integrates explicit opt-in paired-site correction and its documentation/tests. No RAW originals, model weights, training data, frozen jobs or previous machine receipts changed. No new quality or speed claim."
+}

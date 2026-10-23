@@ -91,6 +91,11 @@ def parser():
     root.add_argument("--hot-pixel-sigma", type=float, default=6.0)
     root.add_argument("--hot-pixel-ratio", type=float, default=2.0)
     root.add_argument("--hot-pixel-min-delta", type=float, default=0.005)
+    root.add_argument(
+        "--hot-pixel-clusters",
+        action="store_true",
+        help="Also repair paired same-color defects; implies --hot-pixels",
+    )
     return root
 
 
@@ -103,7 +108,7 @@ def run(args):
         raise ValueError("Noise coefficients must be finite and nonnegative")
     if not 1 <= args.jpeg_quality <= 100:
         raise ValueError("JPEG quality must be in [1,100]")
-    if args.hot_pixels and (
+    if (args.hot_pixels or args.hot_pixel_clusters) and (
         not all(
             math.isfinite(value)
             for value in (args.hot_pixel_sigma, args.hot_pixel_ratio, args.hot_pixel_min_delta)
@@ -183,7 +188,7 @@ def run(args):
             else:
                 shot, read, noise_method = args.shot, args.read, "explicit"
             hot_pixels = {"enabled": False}
-            if args.hot_pixels:
+            if args.hot_pixels or args.hot_pixel_clusters:
                 raw, correction = repair_hot_pixels(
                     raw,
                     shot=shot,
@@ -191,9 +196,11 @@ def run(args):
                     sigma=args.hot_pixel_sigma,
                     ratio=args.hot_pixel_ratio,
                     min_delta=args.hot_pixel_min_delta,
+                    clusters=args.hot_pixel_clusters,
+                    pattern=metadata.pattern,
                 )
                 hot_pixels = {"enabled": True, **correction}
-                print(f"Repaired {correction['corrected_pixels']} isolated hot pixels", flush=True)
+                print(f"Repaired {correction['corrected_pixels']} hot pixels", flush=True)
             rgb, stats = restore_tiled(
                 model,
                 raw,

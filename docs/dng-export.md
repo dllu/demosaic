@@ -10,7 +10,7 @@ source scripts/env.sh
 PYTHONPATH=src uv run python scripts/export_raw_dng.py \
   /mnt/external/demosaic/models/v102-final20000.pt \
   '/path/to/raw/2023-12-31-17*.raf' \
-  --only-with-xmp --suffix v101 \
+  --only-with-xmp --suffix v102 \
   --output-dir ~/pictures/composites/2023-12-31-ochanomizu \
   --darktable-cli /opt/darktable/bin/darktable-cli --cudnn-benchmark --hot-pixels
 ```
@@ -59,6 +59,15 @@ three-pixel image border, clusters and supported highlights are intentionally
 left alone. A genuine unresolved single-color light remains ambiguous in a
 single exposure; this is a conservative outlier detector, not a calibrated
 sensor defect map. It does not change model weights or training data.
+
+For paired defects, `--hot-pixel-clusters` enables an optional seven-of-eight
+neighbor rule and implies `--hot-pixels`. It checks line continuation before
+discarding a bright neighbor, and requires another CFA color to corroborate a
+small light. This handles same-phase pairs and diagonal pairs in the two green
+phases. It leaves a four-pixel border unchanged. The original isolated mode
+remains the default. [The roof-speck investigation](hot-pixel-clusters.md) records
+confirmed recurring pairs, native V101 context comparisons and remaining
+ambiguity for unresolved same-color lights and larger/mixed-color clusters.
 
 On the private four-image GFX100S batch, the selected settings corrected 2,574 and
 3,229 sites in the two ISO 6400 captures, and 767 and 1,001 in the ISO 100 captures.
