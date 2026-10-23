@@ -37,3 +37,12 @@ two-source fixture. Complete original/cache/area/protected checks precede
 independent duplicate/content/series/manual review and a separate future freeze.
 
 [Completed source reconciliation and actual launch](../docs/results/commons-post4000-preparation-launch-v1.json).
+
+Startup follow-up: the worker reached4× preparation. Independently checked
+the first12 atomically published arrays from complete temporary-manifest rows:
+whole SHA256, uint16/HWC shape, minimum512px side, source dimensions up to EXIF
+rotation, every pinned attribution/source field and deterministic hash splits.
+All frozen worker/package/helper files remain exact. Both exact producer and
+V102 owners were observed live. This is not a finalized manifest or a complete
+8×/area/protected/source-quality result; arrays and partial manifests were
+left untouched. [Independent startup receipt](../docs/results/commons-post4000-preparation-startup-v1.json).

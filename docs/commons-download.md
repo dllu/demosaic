@@ -40,6 +40,11 @@ screens42 cached protected references plus GFX capture/series metadata. Existing
 ingestion/color/safety operators match the previously executed fixture exactly.
 No source HDD or personal RAW is needed. This is a live launch, not completed
 caches or source-quality approval.
+The first12 atomically published4× arrays independently pass whole-file SHA256,
+uint16/HWC headers, geometry, deterministic splits and all original attribution
+fields; all frozen source files remain exact. The producer and trainer were
+confirmed live. [Actual startup sample](results/commons-post4000-preparation-startup-v1.json).
+These checks use complete temporary-manifest rows and do not finalize a corpus.
 
 Current root: `/mnt/external/demosaic/commons-post4000-preparation-20261022-v1/`.
 `launch.json` records the exact timeout supervisor; `status.json` records the
