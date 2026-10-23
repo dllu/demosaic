@@ -1,25 +1,28 @@
 # Training-source quality review
 
 Source quality decisions support the current [V84-based quality experiments](quality-first-training.md).
-**570 training sources have now been visually reviewed: 539 retained and 31
+**An earlier review covered 570 training sources: 539 retained and 31
 outside training.** The 31 include four earlier `exclude` decisions and 27
 `withhold` decisions; their original ledger labels remain unchanged.
 The completed V100/V101 runs keep their frozen 88,484-source cohort and 24
-visual exclusions. V102/V103 now use the separate 88,477-source cohort and six/32-region catalogues;
+visual exclusions. Completed V102/V103 use the separate88,477-source cohort and six/32-region catalogues;
 neither changes completed V100/V101 inputs.
 
 | Cohort | Commons training sources | Validation / test | Visual exclusions |
 | --- | ---: | ---: | ---: |
 | Completed V100/V101 | 88,484 | 2,303 / 2,255 | 24 |
-| V102/V103 | 88,477 | Same exact records/order | 31 |
+| Completed V102/V103 | 88,477 | Same exact records/order | 31 |
+| Active V104 | 90,872 | Same exact records/order | Prior31 plus four incoming quality withholds; duplicate/series/protected exclusions also apply |
 
 [Current decisions, native examples, catalogue and reader checks](results/source-quality-detail-catalogue-v3.json).
 Originals, existing manifests and protected evaluation scenes remain read-only.
 The GFX train/platform pair and siblings remain outside training.
 
-The next [3,809-source arrival batch](commons-download.md) has finalized3,807
+The additional [3,809-source arrival batch](commons-download.md) has finalized3,807
 valid caches at both4×/8×. All39 source sheets/3,807 thumbnail contexts and61
-targeted native source identities have now been actually inspected. Four train
+initial targeted native source identities were actually inspected. A later
+loss-tail follow-up adds11 more identities (72 unique),with one future quality
+withhold recorded separately. Four train
 hashes and two already-reserved validation hashes receive visual quality
 withholds. [New decisions and native examples](incoming-commons-quality.md).
 Two malformed-ICC
@@ -27,10 +30,27 @@ side-by-side stereo composites were actually inspected and withheld through
 an explicit failure ledger; their originals and error evidence remain intact.
 These arrivals do not contribute to the570 current-cohort review count above.
 The completed duplicate/title/content-series review admits2,395 additions to
-a separately frozen90,872-source future cohort, with all existing validation/
-test records preserved. Protected screening flags43 valid sources; current
-V102/V103 still use their original88,477-source inputs.
+a separately frozen90,872-source cohort now used by V104,with all existing
+validation/test records preserved. Protected screening flags43 valid sources;
+completed V102/V103 keep their original88,477-source inputs.
 [Completed new corpus and actual CPU reader](results/commons-post4000-reviewed-v1.json).
+
+## Incoming loss-tail follow-up
+
+A CPU-only V102 source-difficulty scan is running on the 2,395 newly eligible
+training IDs. Four stratified real-source checks passed 8 case rows, four neural/
+DINO forwards,unchanged model, configuration, RNG and inputs and no CUDA initialization.
+The full scan uses native 256 targets from fixed 512 centres in 4× caches followed
+by area2, ADC-only/high-noise declared priors and two CPU threads. It ranks the
+original reference-white screening objective; these are not actual stochastic
+V104 training losses or a model comparison. High loss remains a review cue.
+[Exact subset, checkpoint, live launch and probe evidence](results/incoming-source-loss-V102-CPU-readiness-v1.json).
+
+The original full scan remains pending. An [initial64-source ranking follow-up](incoming-commons-quality.md#first-loss-tail-follow-up-64-of-2395-sources-scored)
+actually inspects11 additional identities:10 retained and one future withhold.
+No automatic exclusions or current-manifest changes follow from scores.
+Any new quality decisions enter a separately frozen future cohort; current
+V104 continues on its original reviewed inputs.
 
 ## Selection and inspection
 
@@ -134,7 +154,7 @@ credits and native-view protocols.
 
 Completed V100/V101 use
 `.cache/quality-first-20261020/curated-corpus-v1/manifest4-large.jsonl`.
-The current V102/V103 manifest is
+The completed V102/V103 manifest is
 `.cache/current-quality-20261022-v1/weak-detail-ROI-expansion-v1/future-cohort-v3/manifest4-large.jsonl`,
 SHA256 `9b3a7e162910fd0d695c310da1cc985c0cf901a1a87949cc787492cea34aded8`.
 It removes the newly withheld source from the earlier 88,478-source future
@@ -151,14 +171,14 @@ zero-PSF geometry→area2 path, with finite native 256 outputs and no GPU/model.
 [Full preparation/review/reader evidence](results/source-quality-detail-catalogue-v3.json).
 V102/V103 completed20k updates on these frozen data. Their full427/camera
 comparison and complete GFX exports are finished; V102 is the current baseline.
-The next90,872-source cohort is documented in the [incoming review](incoming-commons-quality.md). [Recipes and current results](quality-first-training.md#current-matched-comparison-v102v103).
+The active V10490,872-source cohort is documented in the [incoming review](incoming-commons-quality.md). [Recipes and current results](quality-first-training.md#current-matched-comparison-v102v103).
 
 Source views use existing prepared caches. New downloads and decisions enter
 a separate frozen cohort instead of changing an existing experiment's inputs.
 
 ## Reviewed weak and fine texture ROIs
 
-The current expanded catalogue keeps the original six regions and adds 26
+The available expanded catalogue keeps the original six regions and adds 26
 photographs:32 unique sources with exact 512×512 contexts in the 4× cache, giving
 native 256×256 area2 targets. Whole contexts have mixed contrast; selected local
 structures include weak veins, fibers, fur, reeds, grain and faint lines.

@@ -30,7 +30,7 @@ Noisy observation → **V102 final20k** → exact synthetic GT, at the ISO100 pr
 These are unchanged 160×160 crops at the 8×-binned evaluation resolution, with
 shared coordinates and display transforms. Low-noise bark/canopy gains are
 small; fine-detail loss remains at high noise.
-[Compare V84, V100, V101, V102 and RawNIND](docs/heldout-detail.md) ·
+[Compare V84,V100,V101,V102,V103 and RawNIND](docs/heldout-detail.md) ·
 [source/ROI/checkpoint/noise/display metadata](docs/images/current-detail/iso100-prior/manifest.json).
 
 ![V102 final20k, bark: noisy, restored and exact synthetic GT](docs/images/current-detail/iso100-prior/V102-final20000-0ae232278265.png)

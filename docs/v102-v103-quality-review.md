@@ -70,8 +70,9 @@ V103 noisy/restored/exact-GT triplets at the identical coordinates:
 ![V103 building triplet](images/current-quality-v102-v103/photo/V103-002fc6eeadf6.png)
 
 The [selected natural-detail gallery](heldout-detail.md) separately shows
-V102's stronger low-noise bark/canopy results. V103 has not been evaluated on
-that four-material CPU panel; its completed full427 scores are reported above.
+V102's stronger low-noise bark/canopy results. The [completed V103 material follow-up](heldout-detail.md#v102-versus-v103-on-the-fixed-material-panel)
+reproduces V102 exactly and shows similarly small,slightly lower V103 condition
+means. It complements the full427 scores above.
 
 ## Weak texture and flat color
 

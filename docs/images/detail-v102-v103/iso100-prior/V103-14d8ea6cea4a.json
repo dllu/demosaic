@@ -1,0 +1,168 @@
+{
+  "image": "V103-14d8ea6cea4a.png",
+  "caption": "Subtle white feather texture / iso100-prior / V103-final20000",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Denoised",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "GT (synthetic)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "b579942007cfd52db039a9ca65414a6f6e375be9061f566cc22258db1c6ce2f4",
+  "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+  "source": {
+    "title": "File:Snowy egret in profile.jpg",
+    "page_url": "https://commons.wikimedia.org/wiki/File:Snowy_egret_in_profile.jpg",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/1/12/Snowy_egret_in_profile.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "author": "Serebit",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "attribution": null,
+    "credit": "Own work",
+    "sha1": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+    "sha1_hex": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+    "download_path": "images/14/d8/14d8ea6cea4a27346a643e6d767f800729fb4693.jpg",
+    "width": 6000,
+    "height": 4000,
+    "id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+    "split": "val",
+    "bin_factor": 8,
+    "color_space": "linear-sRGB",
+    "dtype": "uint16",
+    "cache": "/mnt/external/demosaic/commons-v1/images/14/14d8ea6cea4a27346a643e6d767f800729fb4693.npy",
+    "shape": [
+      500,
+      750,
+      3
+    ],
+    "cache_sha256": "76baaa81d4fe8e7ec7f275470d8dd8db9bf3f5ab2f58a1f46e956d31d2ec6aba"
+  },
+  "validation_index": 200,
+  "validation_seed": 42,
+  "evaluation_tile_xywh": [
+    48,
+    48,
+    160,
+    160
+  ],
+  "source_cache_context_xywh": [
+    271,
+    127,
+    256,
+    256
+  ],
+  "condition": {
+    "name": "iso100-prior",
+    "shot": 2e-05,
+    "read": 1.6e-09,
+    "exposure": 1.0
+  },
+  "pattern": "RGGB",
+  "model": {
+    "label": "V103-final20000",
+    "sha256": "eb20e21163d0ff411be9598d12d93963fa9cd0be57c22c5a147228230cf26ba1",
+    "source": "/mnt/external/demosaic/models/v103-final20000.pt",
+    "snapshot": "/mnt/external/demosaic/V102-V103-heldout-detail-20261023-v1/weights/weights-eb20e21163d0ff411be9598d12d93963fa9cd0be57c22c5a147228230cf26ba1.pt",
+    "step": 20000,
+    "effective_model_config": {
+      "restoration_backbone": "pretrained-rgb",
+      "width": 64,
+      "encoder_blocks": [
+        2,
+        2,
+        4
+      ],
+      "middle_blocks": 6,
+      "decoder_blocks": [
+        2,
+        2,
+        2
+      ],
+      "attention": true,
+      "dino": true,
+      "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+      "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+      "dino_lora_rank": 0,
+      "dino_input_adapter": false,
+      "dino_feature_fusion": "convnext-pyramid",
+      "camera_conditioning": true,
+      "noise_modulation": false,
+      "physical_fp32": true,
+      "baseline": "bilinear",
+      "prior_window": 7,
+      "standardized_noise": false,
+      "noise_refinement": false,
+      "refinement_width": 24,
+      "refinement_blocks": 4,
+      "refinement_window": 63,
+      "coarse_refinement_factor": 0,
+      "coarse_refinement_width": 24,
+      "coarse_refinement_blocks": 4,
+      "coarse_refinement_window": 31,
+      "pyramid_refinement": false,
+      "pyramid_measurements": true,
+      "pyramid_width": 24,
+      "pyramid_blocks": 2,
+      "variance_stabilization": true,
+      "physical_anchors": true,
+      "rgb_processing_scale": 1,
+      "packed_detail_prior": false,
+      "rgb_hidden_autocast": false,
+      "rgb_center_camera_matrix": false,
+      "rgb_middle_skip_fp32": true,
+      "adc_cfa_projection": false,
+      "adc_cfa_projection_mode": "malvar",
+      "raw_kernel_reconstruction": false,
+      "raw_kernel_windows": [
+        1,
+        5,
+        17
+      ],
+      "raw_kernel_phase_conditioning": false,
+      "raw_directional_residual": false,
+      "raw_directional_bank_context": false,
+      "raw_directional_bank_detach_input": false,
+      "raw_spectral_residual": false,
+      "late_rgb_refinement": "none",
+      "isotropic_groups": 6,
+      "isotropic_blocks": 8,
+      "isotropic_local_width": 32,
+      "isotropic_raw_gain": 1.0,
+      "isotropic_residual_scale": 1.0
+    },
+    "compute_precision": "float32",
+    "device": "cpu"
+  },
+  "display_exposure": 1,
+  "reference": "Exact synthetic clean target",
+  "observation": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/heldout-detail-followup-v1/inputs/14d8ea6cea4a27346a643e6d767f800729fb4693-iso100-prior-RGGB.npz",
+    "sha256": "900022542f9e72a9938115221e46f32179f7ad78b2d2282707528827ce455d1b"
+  },
+  "detail": "Subtle white feather texture",
+  "selection": "Four diverse contexts selected after actually viewing10 clean native256 contexts and their native160 centers, before viewing model outputs on these cases. Bark, white feathers, forest canopy/haze and gray fur. Mixed contrast; selected for fine/weak structures, not global low-contrast labels."
+}

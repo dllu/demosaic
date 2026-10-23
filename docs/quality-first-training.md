@@ -42,7 +42,8 @@ and hashes](v102-v103-quality-review.md).
 
 The [four-material CPU panel](heldout-detail.md) separately shows V102's
 +.362/+.285/+.043dB ADC/ISO100/ISO12800 gain over V101 and all12 improved
-PSNR/SSIM/chroma/gradient cases. V103 was not run on that separate panel.
+PSNR/SSIM/chroma/gradient cases. The [completed V103 material follow-up](heldout-detail.md#v102-versus-v103-on-the-fixed-material-panel)
+is slightly lower than V102 on its four-source condition means, with close native output.
 The [current GFX gallery](gfx-qualitative.md) now uses completed blended102MP
 outputs for V101/V102/V103/RawNIND; older512CPU contexts remain linked.
 
@@ -83,7 +84,9 @@ finite native256 outputs and unchanged Torch RNG,no GPU or denoiser.
 
 Full427/16procedural/seven-condition/four-CFA,known4/unseen5 measured-camera,
 weak texture,color,GFX and highlights are queued after the exact original
-trainer/controller exits. Complete102MP RGB16 exports follow evaluation.
+trainer/controller exits. Complete102MP RGB16 exports follow evaluation. A separate CPU-only queue will
+compare the original final V104 EMA with V102 on all 12 fixed material cases,
+using current frozen source and exactly replayed observations after the trainer exits.
 A discarded CPU reporting integration already passed60 case rows/four triplets;
 all eight unique native board cells were actually viewed. It checks reporting,
 not model improvement. The new cohort preserves2,303 validation/2,255 test

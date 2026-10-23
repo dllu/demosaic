@@ -1,10 +1,11 @@
 # Method research and design record
 
-Current implementation: pretrained DRUNet RGB restoration with a frozen
-DINOv3 ConvNeXt-Tiny feature pyramid in V84's architectural family. V101 is the
-fully benchmarked default; V102's original20k endpoint has better selected
-material-detail scores and current native/GFX comparisons. V103 and their full
-matched evaluation continue.
+Current implementation: pretrained DRUNet RGB restoration with a frozen official
+DINOv3 ConvNeXt-Tiny pyramid in V84's architectural family. V102 final20k is the
+quality baseline after completed full 427-photo, camera, texture, color and GFX evaluation.
+V103 has nearly identical photo quality; V102 has stronger tested weak texture,
+lower ADC color error and slightly better selected material means. V104 is
+training from V102 on the reviewed 90,872-source corpus, with zero optical blur.
 See [current models](current-model.md) and the [active cleaned-data recipes](quality-first-training.md).
 The literature/design record below explains the explored approaches; its older
 study decisions do not freeze the current architecture or README examples.
@@ -15,7 +16,8 @@ retains structure and grain while losing high-noise PSNR. Scaling DINO offsets
 or substituting Wiener/self/clean-oracle previews gives no consistent gain.
 This is a fixed-weight result, not a trained-backbone/fusion ablation; the
 unavailable clean-image oracle is never a candidate method. Current quality
-work remains the matched cleaned-data/detail continuations.
+work continues from V102 on the reviewed larger corpus; the fixed V104 endpoint
+will receive the same material/detail and full matched evaluation.
 
 Research started 2026-10-14. Sources below are primary implementations, papers,
 and vendor documentation. A recent publication is not itself evidence that this

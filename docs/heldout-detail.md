@@ -13,7 +13,7 @@ they are not a set of globally low-contrast images. Their exact source IDs are
 absent from the training cohort. This small diagnostic complements the
 [full photographic and camera results](current-model.md). The [V102/V103 full matched primary panels](v102-v103-quality-review.md) and
 complete GFX exports are finished; V102 is the current quality baseline.
-V103 has not been run on this separate four-material CPU panel.
+The completed V103 follow-up below is also available; it remains close to V102.
 
 Each cell is an unchanged **160×160 native-pixel crop** at the8×-binned evaluation
 resolution. Open the original PNG at100%; a browser may fit the board to its
@@ -25,6 +25,58 @@ The [fixed-weight noise-conditioning probe](noise-conditioning.md) separates a
 related detail/grain tradeoff: lower priors preserve more high-noise structure
 and residual error. It keeps the true noisy observations fixed; the current
 calibrated default remains unchanged.
+
+## V102 versus V103 on the fixed material panel
+
+The original final 20k EMAs are now compared on the same 12 cached observations.
+All 12 V102 scores and triplet PNGs reproduce the earlier report exactly.
+V103 improves all 12 PSNR, SSIM, chroma and gradient cases over V101,but is slightly
+lower than V102 on these four-source condition means:
+
+| Condition | V102 PSNR | V103 PSNR | V103−V102, dB |
+| --- | ---: | ---: | ---: |
+| ADC-only | 39.24687 | 39.24499 | −.00187 |
+| ISO100 prior | 40.63881 | 40.62445 | −.01436 |
+| ISO12800 prior | 33.46901 | 33.46767 | −.00134 |
+
+V103 improves 4/12 PSNR cases over V102 and regresses 8; SSIM splits 6/6.
+Chroma/gradient error improve in 4/3 cases and worsen in 8/9 respectively.
+These small differences from one seed and four selected sources support retaining V102;
+they do not override V103's nearly identical full 427-photo result.
+[Exact scores, identities, input replay and 48 actually viewed native cells](results/V103-final20000-heldout-detail-CPU-v1.json).
+
+Columns: noisy Malvar, V102, V103, exact synthetic GT. Each cell is 160×160 native
+pixels at the 8×-binned evaluation resolution. No resizing, sharpening or
+method-specific display changes are applied. Low-noise bark and canopy remain
+close; high-noise pale feathers, distant canopy and individual hairs stay soft.
+
+![V102 and V103 native ISO100 material comparison](images/detail-v102-v103/iso100-prior/photo-comparison.png)
+
+[ISO100 source, ROI, checkpoint, noise and display records](images/detail-v102-v103/iso100-prior/manifest.json) ·
+[ADC-only native comparison](images/detail-v102-v103/adc-only/photo-comparison.png)
+([metadata](images/detail-v102-v103/adc-only/manifest.json)) ·
+[High-noise native comparison](images/detail-v102-v103/iso12800-prior/photo-comparison.png)
+([metadata](images/detail-v102-v103/iso12800-prior/manifest.json)).
+
+Two V103 noisy/restored/exact-GT triplets at the ISO100 prior:
+
+![V103 bark native triplet](images/detail-v102-v103/iso100-prior/V103-0ae232278265.png)
+
+![V103 canopy native triplet](images/detail-v102-v103/iso100-prior/V103-212ae12913ef.png)
+
+Sources: [Derek Ramsey, bark](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
+[CC BY-SA 2.5](https://creativecommons.org/licenses/by-sa/2.5/), and
+[Grendelkhan, forest canopy](https://commons.wikimedia.org/wiki/File:Forest_covered_hills_on_Yakushima.jpg),
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Modifications:
+binning, cropping, synthetic noise, restoration and shared display conversion.
+Remaining source credits accompany each gallery manifest and the earlier panel below.
+
+V104's original final 20k endpoint is queued for this same CPU panel after its
+exact trainer/controller exits. Freshly prepared inputs reproduce all 12
+original observation tensor hashes and all four source IDs are absent from the
+90,872-source training cohort. The queue uses the current frozen loader source;
+it accepts no intermediate checkpoint and performs no automatic promotion.
+[Active training and evidence](quality-first-training.md#active-v104-cleaned-corpus-continuation).
 
 ## Current continuations
 

@@ -1,0 +1,168 @@
+{
+  "image": "V103-2b5a51667b99.png",
+  "caption": "Fine gray fur against a dark background / iso12800-prior / V103-final20000",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Denoised",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "GT (synthetic)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "2ea655456bada8995fcc7776d6590e9c7f453ebcbca9a01abf6efa40cefb9917",
+  "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+  "source": {
+    "title": "File:Racoon clinging to a tree.JPG",
+    "page_url": "https://commons.wikimedia.org/wiki/File:Racoon_clinging_to_a_tree.JPG",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/29/Racoon_clinging_to_a_tree.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "author": "Korall",
+    "license": "CC BY 3.0",
+    "license_url": "https://creativecommons.org/licenses/by/3.0",
+    "attribution": null,
+    "credit": "Own work",
+    "sha1": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+    "sha1_hex": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+    "download_path": "images/2b/5a/2b5a51667b9906eecead8f82e08c7ba11750f8c6.jpg",
+    "width": 2592,
+    "height": 3888,
+    "id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+    "split": "val",
+    "bin_factor": 8,
+    "color_space": "linear-sRGB",
+    "dtype": "uint16",
+    "cache": "/mnt/external/demosaic/commons-v1/images/2b/2b5a51667b9906eecead8f82e08c7ba11750f8c6.npy",
+    "shape": [
+      486,
+      324,
+      3
+    ],
+    "cache_sha256": "a4f70f06dbfe2c044c3be5c85ab5047cb004b3378a980a7140bc3be71fab8a1f"
+  },
+  "validation_index": 392,
+  "validation_seed": 42,
+  "evaluation_tile_xywh": [
+    48,
+    48,
+    160,
+    160
+  ],
+  "source_cache_context_xywh": [
+    25,
+    133,
+    256,
+    256
+  ],
+  "condition": {
+    "name": "iso12800-prior",
+    "shot": 0.00256,
+    "read": 2.62144e-05,
+    "exposure": 1.0
+  },
+  "pattern": "RGGB",
+  "model": {
+    "label": "V103-final20000",
+    "sha256": "eb20e21163d0ff411be9598d12d93963fa9cd0be57c22c5a147228230cf26ba1",
+    "source": "/mnt/external/demosaic/models/v103-final20000.pt",
+    "snapshot": "/mnt/external/demosaic/V102-V103-heldout-detail-20261023-v1/weights/weights-eb20e21163d0ff411be9598d12d93963fa9cd0be57c22c5a147228230cf26ba1.pt",
+    "step": 20000,
+    "effective_model_config": {
+      "restoration_backbone": "pretrained-rgb",
+      "width": 64,
+      "encoder_blocks": [
+        2,
+        2,
+        4
+      ],
+      "middle_blocks": 6,
+      "decoder_blocks": [
+        2,
+        2,
+        2
+      ],
+      "attention": true,
+      "dino": true,
+      "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+      "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+      "dino_lora_rank": 0,
+      "dino_input_adapter": false,
+      "dino_feature_fusion": "convnext-pyramid",
+      "camera_conditioning": true,
+      "noise_modulation": false,
+      "physical_fp32": true,
+      "baseline": "bilinear",
+      "prior_window": 7,
+      "standardized_noise": false,
+      "noise_refinement": false,
+      "refinement_width": 24,
+      "refinement_blocks": 4,
+      "refinement_window": 63,
+      "coarse_refinement_factor": 0,
+      "coarse_refinement_width": 24,
+      "coarse_refinement_blocks": 4,
+      "coarse_refinement_window": 31,
+      "pyramid_refinement": false,
+      "pyramid_measurements": true,
+      "pyramid_width": 24,
+      "pyramid_blocks": 2,
+      "variance_stabilization": true,
+      "physical_anchors": true,
+      "rgb_processing_scale": 1,
+      "packed_detail_prior": false,
+      "rgb_hidden_autocast": false,
+      "rgb_center_camera_matrix": false,
+      "rgb_middle_skip_fp32": true,
+      "adc_cfa_projection": false,
+      "adc_cfa_projection_mode": "malvar",
+      "raw_kernel_reconstruction": false,
+      "raw_kernel_windows": [
+        1,
+        5,
+        17
+      ],
+      "raw_kernel_phase_conditioning": false,
+      "raw_directional_residual": false,
+      "raw_directional_bank_context": false,
+      "raw_directional_bank_detach_input": false,
+      "raw_spectral_residual": false,
+      "late_rgb_refinement": "none",
+      "isotropic_groups": 6,
+      "isotropic_blocks": 8,
+      "isotropic_local_width": 32,
+      "isotropic_raw_gain": 1.0,
+      "isotropic_residual_scale": 1.0
+    },
+    "compute_precision": "float32",
+    "device": "cpu"
+  },
+  "display_exposure": 1,
+  "reference": "Exact synthetic clean target",
+  "observation": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/heldout-detail-followup-v1/inputs/2b5a51667b9906eecead8f82e08c7ba11750f8c6-iso12800-prior-RGGB.npz",
+    "sha256": "5999c0e141b7e992791570f745d13c8f468b78b09b8388e551b36285ef698655"
+  },
+  "detail": "Fine gray fur against a dark background",
+  "selection": "Four diverse contexts selected after actually viewing10 clean native256 contexts and their native160 centers, before viewing model outputs on these cases. Bark, white feathers, forest canopy/haze and gray fur. Mixed contrast; selected for fine/weak structures, not global low-contrast labels."
+}
