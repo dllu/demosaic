@@ -1,0 +1,108 @@
+{
+  "status": "completed-reconstruction-epsilon-API-default-replay-and-resume-proof",
+  "recorded_local": "2026-10-23T14:22:34.678869-07:00",
+  "publisher": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reconstruction-epsilon-integration-v2/publish.py",
+    "sha256": "7def63baabc038132dfc0409fc7ef73e7b94c744e734691157371f370829e54e"
+  },
+  "actual_CPU_workers": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reconstruction-epsilon-integration-v1/receipt.json",
+    "sha256": "953743a4516112136b77d65a862cbb2fb333bff2c1675a3a2460e8722e33d8ad"
+  },
+  "gradient_replay": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reconstruction-epsilon-integration-v1/gradient-replay.json",
+    "sha256": "16afa9bee8b54853d06420f4a2d21de887d63c5a8a8dfa6cf72609dbce3c934f"
+  },
+  "current_modules": [
+    {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/losses.py",
+      "sha256": "d40f85031b28eacc43f69a00796452c39c83b3f7a4e90f5a4a57e3e887690d11"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/train.py",
+      "sha256": "0bc0a81ec6ed3d275e3c3b5334daac70d7f93a862b39c84ccc85433d67456153"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/optimizer_batches.py",
+      "sha256": "e68eb6b758364914059113b09d0ab4802bd684a462f906cd38cbea61a0e1722d"
+    }
+  ],
+  "test_command": "CUDA_VISIBLE_DEVICES='' PYTHONPATH=src:scripts OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=1 .venv/bin/python -m pytest tests/test_reconstruction_epsilon.py tests/test_losses.py tests/test_reconstruction_objective.py tests/test_reference_interval.py tests/test_camera_supervision.py tests/test_optimizer_batches.py tests/test_training.py tests/test_paired_training.py --basetemp=.cache/pytest-reconstruction-epsilon-v1 -q",
+  "observed_tests": {
+    "passed": 139,
+    "skipped": 0,
+    "seconds": 31.21
+  },
+  "all324_archived_loss_terms_and_complete_gradient_tensors_exact": true,
+  "gradient_elements_exact": 63700992,
+  "original_V102_parent": {
+    "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+    "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a"
+  },
+  "discarded_CPU_updates": 8,
+  "native_patch": 64,
+  "batch_size": 1,
+  "legacy_default_vs_new_default_exact_fields": [
+    "model",
+    "ema",
+    "optimizer",
+    "torch_rng",
+    "python_rng",
+    "step",
+    "best"
+  ],
+  "epsilon0003_full8_vs_4plus4_exact_fields": [
+    "model",
+    "ema",
+    "optimizer",
+    "torch_rng",
+    "python_rng",
+    "step",
+    "best"
+  ],
+  "default_all8_logged_values_exact_except_wall_time": true,
+  "all8_actual_observation_hashes_match_default_and_changed_epsilon": true,
+  "workers": {
+    "legacy-default": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reconstruction-epsilon-integration-v1/legacy-default/CPU-fixture-result.json",
+      "sha256": "e0b6bfabddf22ba8d06aa3909a5796139cf3497243bff3f6422534e9e7d08925"
+    },
+    "new-default": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reconstruction-epsilon-integration-v1/new-default/CPU-fixture-result.json",
+      "sha256": "1c15a9e13fe8a19d0c3afc5d97bef540e1e7fad31c9f32d2258cd33c48a8e4e2"
+    },
+    "new-small": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reconstruction-epsilon-integration-v1/new-small/CPU-fixture-result.json",
+      "sha256": "c0763daef1818846a11024c0887b29550bd982f3c4f16dc07d1863b42358c6a5"
+    }
+  },
+  "corrected_resume_fixture_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reconstruction-epsilon-integration-v2/plan.json",
+    "sha256": "1ff5914c58aa3d181aeaf2c3b9c939ccee30128fab69353506f8afac4acb3e50"
+  },
+  "preserved_duration_error": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reconstruction-epsilon-integration-v1/duration-witness-failure.json",
+    "sha256": "4d441b11ee61ebfa65de56203f38241f7392bcc3782edf6ebd3b1e9fcb91f217"
+  },
+  "resumed_checkpoint": {
+    "path": "/mnt/external/demosaic/reconstruction-epsilon-CPU-20261023-v1/resumed-v2/last.pt",
+    "sha256": "c768f27486cbebe297b966eed983a0324a1cc954043cd4507d33343bd4f4ffc6"
+  },
+  "partial4_checkpoint": {
+    "path": "/mnt/external/demosaic/reconstruction-epsilon-CPU-20261023-v1/resumed/partial4-preserved.pt",
+    "sha256": "8591ac9195e6ac25dd716f6d3ff025309fe0315f7c6335d7961c371692d1f8f1"
+  },
+  "partial_reference_resolution": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reconstruction-epsilon-integration-v2/partial-reference-resolution.json",
+    "sha256": "1d529704a15aef3f9a9f8405f41a9c8cea3b5a7b1d57909d8a0d7358427c17a7"
+  },
+  "changed_epsilon_rejection_before_any_forward": {
+    "error": "Resume reconstruction epsilon differs; initialize a new run",
+    "learned_forwards": 0
+  },
+  "changed_model_tensors_epsilon_vs_control": 89,
+  "specialized_losses_unchanged": "Paired RAW retains epsilon0.0001; reference-white interval and noise-normalized losses retain their existing penalties. The new setting affects only ordinary reconstruction Charbonnier terms.",
+  "production_recipes_or_running_jobs_changed": false,
+  "CUDA_initialized": false,
+  "scope": "Training API/integration correctness only. Eight-update CPU states are discarded fixtures,not quality models. No performance improvement,production loss/default change or alteration of prior machine receipts."
+}

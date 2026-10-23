@@ -86,3 +86,41 @@ The chosen band also does not cover every fine structure. A later matched
 training comparison can test the idea while holding architecture, data,
 initializer and budget fixed. The [current cleaned-data capacity comparison](convnext-small-capacity.md#prepared-matched-quality-trial)
 keeps the original loss so its encoder comparison remains interpretable.
+
+## Configurable training scale
+
+The current trainer exposes this experimental setting:
+
+```yaml
+reconstruction_charbonnier_epsilon: 0.0003
+```
+
+The default is **0.001**, including legacy checkpoints with no field. The
+setting applies to synthetic Commons/native camera-linear, rendered, spatial
+gradient and auxiliary reconstruction penalties. Paired RAW retains its
+existing **0.0001** scale. Reference-white interval, noise-normalized and
+multiscale sensor penalties also retain their separate definitions. Under
+`image-log-mse-v1`, the primary log-MSE terms stay fixed while the Charbonnier
+gradient/auxiliary terms use the chosen epsilon.
+
+The value must be positive with a finite normal FP32 square. Checkpoints store
+the validated value; resume rejects a changed epsilon. Use a fresh source-frozen
+plan for a new comparison. Existing V104 and capacity preparations retain their
+original code and settings. Inference has no new option or weight transform.
+
+Implementation checks pass **139 targeted tests**. The API exactly reproduces
+all 324 archived losses, terms and complete output-gradient tensors, totaling
+**63,700,992 gradient elements**. Actual eight-update V102 CPU continuations
+with the default reproduce archived model/EMA/Adam, Python/Torch RNG and logged
+values exactly. A .0003 continuation matches a 4+4 resumed run exactly, and a
+changed-epsilon resume fails before any learned forward.
+[Source hashes, actual training states and complete evidence](results/reconstruction-epsilon-implementation-v1.json).
+These are discarded implementation fixtures, without a quality conclusion.
+Use fixed image metrics and native crops for trained comparisons; raw loss
+values differ across epsilon settings.
+
+The .0003 setting also passes eight actual CUDA updates from original V102
+at native256/B16/configured BF16. Initial EMA and official frozen Tiny identity
+match, with all91 model/EMA tensors and89 Adam states finite. All three data
+domains execute. [Actual CUDA preflight](results/reconstruction-epsilon-CUDA-v1.json).
+The fixture overlaps V104 and is not a throughput or quality measurement.

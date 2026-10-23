@@ -151,7 +151,9 @@ outputs before drawing a capacity conclusion.
 
 The [fixed-output loss-smoothing diagnostic](loss-smoothing-detail.md) measures
 whether a smaller Charbonnier scale strengthens faint-detail supervision.
-It motivates a separate later training comparison; current recipes retain
+It motivates a separate later training comparison. The current trainer now
+exposes [validated reconstruction epsilon](loss-smoothing-detail.md#configurable-training-scale),
+with exact default replay and nondefault resume checks. Current recipes retain
 the original loss alongside their fixed data and encoder settings.
 
 ## Completed V100/V101 comparison

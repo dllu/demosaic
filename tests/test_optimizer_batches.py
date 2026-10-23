@@ -116,7 +116,8 @@ def test_optional_objective_reaches_both_domains_with_matching_accumulated_gradi
 
 @pytest.mark.parametrize("forward", [1, 4])
 @pytest.mark.parametrize("interval_weight", [0.0, 0.1])
-def test_sensor_camera_targets_reach_only_synthetic_groups_with_matching_gradients(forward, interval_weight):
+@pytest.mark.parametrize("epsilon", [.001, .0003])
+def test_sensor_camera_targets_reach_only_synthetic_groups_with_matching_gradients(forward, interval_weight, epsilon):
     model,batches=physical_fixture();domains=['paired','native','commons','paired']
     losses=[]
     for domain,batch in zip(domains,batches,strict=True):
@@ -125,14 +126,15 @@ def test_sensor_camera_targets_reach_only_synthetic_groups_with_matching_gradien
         else:
             batch['sensor_target']=batch['target']*1.2
             value,_=training.reconstruction_loss(prediction,batch,auxiliary,camera_supervision='sensor-valid-v1',
-                reference_interval_weight=interval_weight)
+                reference_interval_weight=interval_weight, reconstruction_charbonnier_epsilon=epsilon)
         losses.append(value)
     expected=torch.stack(losses).mean();expected.backward()
     norm=torch.nn.utils.clip_grad_norm_(model.parameters(),1)
     gradients=[p.grad.clone() for p in model.parameters()];model.zero_grad(set_to_none=True)
     selected=[(i+1,d,b) for i,(d,b) in enumerate(zip(domains,batches,strict=True))]
     value,_,actual_norm,_=backward_groups(model,selected,lambda step,domain,batch:batch,
-        {**options(forward),'camera_supervision':'sensor-valid-v1', 'reference_interval_weight': interval_weight})
+        {**options(forward),'camera_supervision':'sensor-valid-v1', 'reference_interval_weight': interval_weight,
+         'reconstruction_charbonnier_epsilon':epsilon})
     torch.testing.assert_close(value,expected);torch.testing.assert_close(actual_norm,norm)
     for p,gradient in zip(model.parameters(),gradients,strict=True):
         torch.testing.assert_close(p.grad,gradient,rtol=1e-4,atol=1e-6)

@@ -32,7 +32,10 @@ observations and finite states. Their production runs await V104 review.
 The [loss-smoothing diagnostic](loss-smoothing-detail.md) also measures 324
 output gradients on 108 fixed V102 training-source restorations. Smaller epsilon
 strengthens low-noise faint-detail slopes but increases the full gradient more;
-it remains a later training hypothesis, with the current loss unchanged.
+it remains a later training hypothesis. The current trainer exposes an
+[explicit reconstruction-epsilon option](loss-smoothing-detail.md#configurable-training-scale)
+with exact default/gradient replay and resumed-training checks. Production
+defaults and existing frozen recipes remain unchanged.
 
 Research started 2026-10-14. Sources below are primary implementations, papers,
 and vendor documentation. A recent publication is not itself evidence that this

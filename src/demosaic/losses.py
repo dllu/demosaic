@@ -1,6 +1,7 @@
 """Reconstruction losses that explicitly measure edge and highlight chroma errors."""
 
 import math
+from functools import partial
 
 import torch
 from torch.nn import functional as F
@@ -9,9 +10,28 @@ from .cfa import mosaic
 from .color import render
 from .precision import ieee_fp32
 
+DEFAULT_RECONSTRUCTION_EPSILON = 1e-3
 
-def charbonnier(error):
-    return (error.square() + 1e-6).sqrt().mean()
+
+def validate_reconstruction_epsilon(value):
+    try:
+        epsilon = float(value)
+    except (TypeError, ValueError):
+        raise ValueError("Reconstruction epsilon must be finite and positive") from None
+    limits = torch.finfo(torch.float32)
+    squared = epsilon * epsilon
+    if (
+        isinstance(value, bool)
+        or not math.isfinite(epsilon)
+        or epsilon <= 0
+        or not limits.tiny <= squared <= limits.max
+    ):
+        raise ValueError("Reconstruction epsilon must be positive with a finite normal FP32 square")
+    return epsilon
+
+
+def charbonnier(error, *, epsilon=DEFAULT_RECONSTRUCTION_EPSILON):
+    return (error.square() + epsilon**2).sqrt().mean()
 
 
 def validate_reconstruction_objective(value):
@@ -26,12 +46,14 @@ def validate_camera_supervision(value):
     return value
 
 
-def masked_reconstruction(error, valid, objective):
+def masked_reconstruction(error, valid, objective, *, epsilon=DEFAULT_RECONSTRUCTION_EPSILON):
     if objective == "image-log-mse-v1":
         return image_log_mse(error, valid)
     valid = valid.expand_as(error)
     error = error.float().masked_fill(~valid, 0)
-    return (error.square() + 1e-6).sqrt().masked_fill(~valid, 0).sum() / valid.sum().clamp_min(1)
+    return (error.square() + epsilon**2).sqrt().masked_fill(
+        ~valid, 0
+    ).sum() / valid.sum().clamp_min(1)
 
 
 def reference_white_interval_loss(prediction, batch):
@@ -142,8 +164,10 @@ def reconstruction_loss(
     objective="charbonnier-v1",
     camera_supervision="reference-white-v1",
     reference_interval_weight=0.0,
+    reconstruction_charbonnier_epsilon=DEFAULT_RECONSTRUCTION_EPSILON,
 ):
     validate_reconstruction_objective(objective)
+    epsilon = validate_reconstruction_epsilon(reconstruction_charbonnier_epsilon)
     validate_camera_supervision(camera_supervision)
     if not math.isfinite(reference_interval_weight) or reference_interval_weight < 0:
         raise ValueError("Reference interval weight must be finite and nonnegative")
@@ -154,7 +178,9 @@ def reconstruction_loss(
     if not math.isfinite(multiscale_sensor_weight) or multiscale_sensor_weight < 0:
         raise ValueError("Multiscale sensor loss weight must be finite and nonnegative")
     target = batch["target"]
-    penalty = image_log_mse if objective == "image-log-mse-v1" else charbonnier
+    penalty = (
+        image_log_mse if objective == "image-log-mse-v1" else partial(charbonnier, epsilon=epsilon)
+    )
     sensor_target, sensor_valid, sensor_batch = None, None, batch
     if camera_supervision == "sensor-valid-v1":
         sensor_target = batch.get("sensor_target")
@@ -163,7 +189,9 @@ def reconstruction_loss(
         # Target-only validity: unmeasured/clipped sensor signals are not made
         # reliable by a good prediction. Display targets stay reference-white.
         sensor_valid = (sensor_target >= 0) & (sensor_target < 0.98)
-        linear = masked_reconstruction(prediction - sensor_target, sensor_valid, objective)
+        linear = masked_reconstruction(
+            prediction - sensor_target, sensor_valid, objective, epsilon=epsilon
+        )
         sensor_batch = {**batch, "target": sensor_target}
     else:
         linear = penalty(prediction - target)
@@ -171,7 +199,10 @@ def reconstruction_loss(
     truth = render(target, batch["wb"], batch["matrix"], fp32=physical_fp32)
     rendered = penalty(display - truth)
     gradient = (
-        sum(charbonnier(torch.diff(display, dim=d) - torch.diff(truth, dim=d)) for d in (-1, -2))
+        sum(
+            charbonnier(torch.diff(display, dim=d) - torch.diff(truth, dim=d), epsilon=epsilon)
+            for d in (-1, -2)
+        )
         / 2
     )
     # Dilate the saturation region; penalize wrong chroma, including its boundary.
@@ -186,9 +217,10 @@ def reconstruction_loss(
                 auxiliary - mosaic(sensor_target, batch["colors"]),
                 mosaic(sensor_valid, batch["colors"]),
                 "charbonnier-v1",
+                epsilon=epsilon,
             )
         else:
-            sensor = charbonnier(auxiliary - mosaic(target, batch["colors"]))
+            sensor = charbonnier(auxiliary - mosaic(target, batch["colors"]), epsilon=epsilon)
     loss = linear + 0.5 * rendered + 0.1 * gradient + 0.1 * highlight + 0.1 * sensor
     terms = {
         "linear": linear,

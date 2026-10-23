@@ -4,7 +4,7 @@ from collections import defaultdict
 
 import torch
 
-from .losses import reconstruction_loss
+from .losses import DEFAULT_RECONSTRUCTION_EPSILON, reconstruction_loss
 from .paired_training import paired_reconstruction_loss
 from .precision import amp_context, ieee_fp32
 
@@ -104,6 +104,9 @@ def backward_groups(model, selected, prepare, config, *, fingerprint=None):
                         objective=config.get("reconstruction_objective", "charbonnier-v1"),
                         camera_supervision=config.get("camera_supervision", "reference-white-v1"),
                         reference_interval_weight=config.get("reference_interval_weight", 0.0),
+                        reconstruction_charbonnier_epsilon=config.get(
+                            "reconstruction_charbonnier_epsilon", DEFAULT_RECONSTRUCTION_EPSILON
+                        ),
                     )
                 if not torch.isfinite(value):
                     raise RuntimeError("Nonfinite group loss; last checkpoint retained")

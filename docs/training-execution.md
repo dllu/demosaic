@@ -24,6 +24,26 @@ EMA, optimizer, RNG and best-validation state. Strict four updates match a 2+2
 resume exactly and exercise all three domains. Tiny real validation runs on the
 original targets; its scores are not quality comparisons.
 
+## Reconstruction loss smoothing
+
+`reconstruction_charbonnier_epsilon` controls the Charbonnier scale for
+synthetic Commons/native reconstruction, including linear, rendered, spatial
+gradient and auxiliary terms. The default remains **0.001**. Paired RAW keeps
+its existing **0.0001** scale; interval and noise-normalized sensor penalties
+also retain their separate definitions. The trainer stores the validated value
+and refuses to resume with a different one. Missing legacy metadata means the
+original default.
+
+The [loss diagnostic and option](loss-smoothing-detail.md#configurable-training-scale)
+record 139 passing tests, exact default V102 CPU training replay and exact
+nondefault 4+4 resume. All 324 archived full output-gradient tensors also match
+the new API. These establish implementation behavior, with no trained quality
+gain. A separate eight-update CUDA/native256/B16 preflight also passes with
+.0003, exact initialization/encoder identity and finite model/EMA/Adam state.
+[CUDA evidence](results/reconstruction-epsilon-CUDA-v1.json).
+Existing source-frozen runs and capacity preparations keep their code
+and loss settings; a new comparison needs a fresh preparation.
+
 ## Explicit frozen backbone identities
 
 The quality recipe operator now records an encoder model name, pinned revision

@@ -19,9 +19,11 @@ from .color import render
 from .data import CleanDataset, degrade, validate_flat_chroma_stops
 from .execution import require_resume_execution, training_execution, validate_training_execution
 from .losses import (
+    DEFAULT_RECONSTRUCTION_EPSILON,
     psnr,
     reconstruction_loss,
     validate_camera_supervision,
+    validate_reconstruction_epsilon,
     validate_reconstruction_objective,
 )
 from .model import JointDemosaic, ModelConfig
@@ -413,6 +415,10 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
         config.get("reconstruction_objective", "charbonnier-v1")
     )
     config["reconstruction_objective"] = objective
+    reconstruction_epsilon = validate_reconstruction_epsilon(
+        config.get("reconstruction_charbonnier_epsilon", DEFAULT_RECONSTRUCTION_EPSILON)
+    )
+    config["reconstruction_charbonnier_epsilon"] = reconstruction_epsilon
     camera_supervision = validate_camera_supervision(
         config.get("camera_supervision", "reference-white-v1")
     )
@@ -751,6 +757,15 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
             raise ValueError("Resume multiscale loss differs; initialize a new run")
         if state["config"].get("reconstruction_objective", "charbonnier-v1") != objective:
             raise ValueError("Resume reconstruction objective differs; initialize a new run")
+        if (
+            float(
+                state["config"].get(
+                    "reconstruction_charbonnier_epsilon", DEFAULT_RECONSTRUCTION_EPSILON
+                )
+            )
+            != reconstruction_epsilon
+        ):
+            raise ValueError("Resume reconstruction epsilon differs; initialize a new run")
         if state["config"].get("camera_supervision", "reference-white-v1") != camera_supervision:
             raise ValueError("Resume camera supervision differs; initialize a new run")
         if float(state["config"].get("reference_interval_weight", 0.0)) != interval_weight:
@@ -1011,6 +1026,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
                         objective=objective,
                         camera_supervision=camera_supervision,
                         reference_interval_weight=interval_weight,
+                        reconstruction_charbonnier_epsilon=reconstruction_epsilon,
                     )
             if not torch.isfinite(loss):
                 raise RuntimeError(f"Nonfinite loss at step {step}; last checkpoint retained")
