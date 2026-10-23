@@ -139,10 +139,13 @@ probability; all48 numerical modules match. The tiny photo difference gives
 little reason to expand ROI sampling unchanged. Compared with V101, budget,
 seed, LR and cohort also change; its gain cannot be attributed to data alone.
 
-V104 now continues from V102 on the reviewed **90,872-source corpus**, initially
+V104 completed 20k from V102 on the reviewed **90,872-source corpus**,
 keeping its six-ROI recipe and zero blur. The new2,395 eligible arrivals add
 scene diversity; the five new eligible fine-detail sources can support a later
-controlled ROI intervention. Their quality benefit has not yet been measured.
+controlled ROI intervention. The [completed selected-material comparison](heldout-detail.md)
+improves PSNR, SSIM and gradient error in all 12 cases; broader photographic,
+camera and GFX evaluation is active. More training and data change together,
+so this does not isolate a corpus effect.
 [Incoming data review](incoming-commons-quality.md) · [Training](quality-first-training.md).
 
 | Canonical checkpoint | SHA256 |

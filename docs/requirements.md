@@ -18,7 +18,7 @@ real-capture differences remain small.
 | 16-bit and practical full-resolution output | Verified101.996MP RGB16 TIFFs from V101/V102/V103 and RawNIND through the shared exporter | Keep full-frame quality/precision/timing measurements specific to the selected checkpoint |
 | 100MP within10s on GB10 | V102 inference/blending takes202.31s in the recorded IEEE FP32 configuration; target remains open | Optimize after improving quality |
 | Modern DINOv3 method | V102 continues the official pinned ConvNeXt-Tiny pyramid and pretrained DRUNet RGB family | Continue quality improvements and assess other approaches when useful |
-| Free, diverse targets and aggressive binning | V104 trains on90,872 reviewed sources; next90,864 removes eight further source-specific targets;4×→geometry→area2 | Measure the larger corpus and the cleaned Tiny/Small trial; retain source/detail review |
+| Free, diverse targets and aggressive binning | V104 completed 20k on 90,872 reviewed sources; next 90,864 removes eight further source-specific targets; 4×→geometry→area2 | Measure the larger corpus and the cleaned Tiny/Small trial; retain source/detail review |
 | Physical noise/exposure and camera handling | Poisson/read noise, negative black-subtracted values, Bayer phases, clipping and WB/matrix conditioning are implemented | Continue testing shadows, saturated lights, color and low-noise behavior |
 | Reliable training and resource use | Source/manifest snapshots, restart checks, bounded jobs and actual CPU/CUDA operation | Monitor current runs and retain failures/results accurately |
 | Protected originals and evaluation scenes | Originals read-only; cached GFX3879/3880 and siblings excluded from training | Preserve those boundaries in new data recipes |
@@ -38,7 +38,9 @@ high-noise texture,foliage and saturated-light detail remain weaknesses.
 V104's reviewed **90,872-source** corpus adds2,395 eligible arrivals. Native
 source views,duplicate/content/title/series exclusions,protected holdouts and
 actual reader checks are documented in the [incoming review](incoming-commons-quality.md).
-V104 is training from V102 on this cohort; its trained benefit remains unmeasured. Earlier570-source/31-exclusion review and six/32-ROI studies
+V104 completed 20k from V102 on this cohort, improving PSNR, SSIM and gradient
+error in all 12 selected material cases; full photographic, camera and GFX
+evaluation is active. Earlier 570-source/31-exclusion review and six/32-ROI studies
 retain their frozen inputs and receipts. [Training/data details](quality-first-training.md).
 
 The completed incoming source screen and native follow-up freeze a separate

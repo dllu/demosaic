@@ -7,7 +7,7 @@ gains.50990dB over8×-then-geometry on all427 photos. On the actual RGB pipeline
 batch32 is only1.3% faster than16 while using roughly twice the CUDA allocation.
 Details and limitations are recorded below.
 
-Current [V104 quality training](quality-first-training.md) starts from V102 EMA
+The completed [V104 quality run](quality-first-training.md) started from V102 EMA
 on the reviewed90,872-source cohort,retaining128 native/32 paired targets,
 zero optical PSFs,weak textures,photographic contrast attenuation and the same
 six reviewed regions. The [completed V102/V103 study](v102-v103-quality-review.md)

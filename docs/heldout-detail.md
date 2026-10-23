@@ -1,9 +1,8 @@
 # Natural fine-detail comparisons
 
-**V102 final20k improves PSNR, SSIM, chroma and gradient error on all12 selected
-cases over V101 and fixed V102@5000**, adding +.36dB ADC-only, +.29dB ISO100
-and +.043dB ISO12800 over V101.
-Visible changes are small. V84/V100/V101/V102 all preserve substantially more bark grain,
+**V104 final20k improves PSNR, SSIM and gradient error on all 12 selected cases
+over V102**, adding +.246dB ADC-only, +.166dB ISO100 and +.024dB ISO12800.
+Visible changes are small. Both preserve substantially more bark grain,
 feather texture, canopy structure and fur than RawNIND here. At high noise,
 white plumage, distant trees and individual hairs remain smoothed.
 
@@ -11,20 +10,65 @@ The four contexts were selected by viewing clean inputs before inspecting
 these model outputs. They cover mixed contrast, including weak fine structures;
 they are not a set of globally low-contrast images. Their exact source IDs are
 absent from the training cohort. This small diagnostic complements the
-[full photographic and camera results](current-model.md). The [V102/V103 full matched primary panels](v102-v103-quality-review.md) and
-complete GFX exports are finished; V102 is the current quality baseline.
-The completed V103 follow-up below is also available; it remains close to V102.
+[full photographic and camera results](current-model.md). V104's full panels and
+complete GFX exports are active; V102 remains the fully evaluated overall
+baseline. The [completed V102/V103 comparison](v102-v103-quality-review.md) and
+earlier material comparisons remain available below.
 
 Each cell is an unchanged **160×160 native-pixel crop** at the8×-binned evaluation
 resolution. Open the original PNG at100%; a browser may fit the board to its
 window. Columns share the same noisy observation, coordinates, display and exact
-synthetic target. RawNIND uses input-only CFA-channel gain. V102@20000 is highlighted
-among the matched checkpoints in this gallery.
+synthetic target. RawNIND uses input-only CFA-channel gain. Current boards
+compare V102,V104 and RawNIND without highlighting a preferred model.
 
 The [fixed-weight noise-conditioning probe](noise-conditioning.md) separates a
 related detail/grain tradeoff: lower priors preserve more high-noise structure
 and residual error. It keeps the true noisy observations fixed; the current
 calibrated default remains unchanged.
+
+## V104 versus V102 on the fixed material panel
+
+The original V104 final 20k EMA completes its fresh-optimizer continuation
+from V102 on the larger 90,872-source cohort. All 12 V102 scores and triplet
+PNGs reproduce the earlier report exactly. RawNIND's twelve observation arrays
+also match exactly, with identical noisy/GT pixels and physical/display settings.
+
+| Condition, four-source mean | V102 PSNR | V104 PSNR | V104−V102, dB |
+| --- | ---: | ---: | ---: |
+| ADC-only | 39.24687 | 39.49290 | +.24604 |
+| ISO100 prior | 40.63881 | 40.80494 | +.16612 |
+| ISO12800 prior | 33.46901 | 33.49300 | +.02399 |
+
+PSNR, SSIM and gradient error improve in 12/12 cases; chroma improves in 11/12.
+High-noise fur has a small chroma-error increase of 5.92e-6. Low-noise bark/canopy
+structure is slightly more coherent, while pale feathers, distant canopy and
+individual hairs remain soft at high noise. These four selected sources and
+one noise draw per case do not establish broad photographic or real-camera quality.
+More training and changed data are coupled, so this does not isolate a corpus effect.
+
+![V102,V104 and RawNIND at the ISO100 prior, native160 cells](images/detail-v102-v104/iso100-prior/photo-comparison.png)
+
+[ISO100 source/ROI/weights/noise/display metadata](images/detail-v102-v104/iso100-prior/manifest.json) ·
+[ADC-only native board](images/detail-v102-v104/adc-only/photo-comparison.png)
+([metadata](images/detail-v102-v104/adc-only/manifest.json)) ·
+[High-noise native board](images/detail-v102-v104/iso12800-prior/photo-comparison.png)
+([metadata](images/detail-v102-v104/iso12800-prior/manifest.json)).
+
+Two V104 noisy/restored/exact-synthetic-GT triplets at ISO100, with unchanged
+160×160 crop pixels and shared exposure ×1:
+
+![V104 bark native triplet](images/detail-v102-v104/iso100-prior/V104-0ae232278265.png)
+
+![V104 canopy native triplet](images/detail-v102-v104/iso100-prior/V104-212ae12913ef.png)
+
+V104 checkpoint SHA256:
+`8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300`.
+The read-only local file is `/mnt/external/demosaic/models/v104-final20000.pt`.
+[Actual scores, replay checks and all 60 viewed native cells](results/V104-final20000-heldout-detail-CPU-v1.json) ·
+[Independent original 20k checkpoint/source boundary](results/V104-original20000-training-boundary-v1.json).
+The [full quality evaluation](quality-first-training.md#active-v104-cleaned-corpus-continuation)
+and complete 102MP GFX exports remain active. The loss is the original .001
+Charbonnier setting; the new experimental epsilon option was not used.
 
 ## V102 versus V103 on the fixed material panel
 
@@ -71,14 +115,7 @@ Sources: [Derek Ramsey, bark](https://commons.wikimedia.org/wiki/File:Kentucky_C
 binning, cropping, synthetic noise, restoration and shared display conversion.
 Remaining source credits accompany each gallery manifest and the earlier panel below.
 
-V104's original final 20k endpoint is queued for this same CPU panel after its
-exact trainer/controller exits. Freshly prepared inputs reproduce all 12
-original observation tensor hashes and all four source IDs are absent from the
-90,872-source training cohort. The queue uses the current frozen loader source;
-it accepts no intermediate checkpoint and performs no automatic promotion.
-[Active training and evidence](quality-first-training.md#active-v104-cleaned-corpus-continuation).
-
-## Current continuations
+## Earlier continuations
 
 V102 continues the final V101 EMA with fresh AdamW/EMA on the separately frozen
 88,477-source cohort, retaining its six reviewed ROIs and zero-PSF/detail

@@ -5,7 +5,8 @@ fusion layers need adaptation.** Directly swapping it into V102 loses quality
 on the four checked material cases. Resetting three fusion-gate tensors gives
 Tiny and Small exactly matching initial outputs and a usable starting point
 for a later trained comparison. V102 remains the current quality baseline;
-V104 continues its original larger-corpus run.
+V104 completed its larger-corpus run; selected material gains are published
+and broader evaluation is active.
 
 ## Official weights and interface
 
@@ -133,9 +134,9 @@ now keeps original V102 separate from the `V102-zero` initializer in reports
 and exports. Actual CPU reporting/export checks preserve earlier outputs,
 and 146 targeted tests pass. [Reference handling and actual evidence](training-execution.md#fixed-references-alongside-derived-initializers).
 
-These recipes have no training controller or quality scores. Complete and
-review V104 before launch; a better useful initializer or further source
-decisions can supersede this prepared plan while
+These recipes have no production controller or quality scores. Review the
+completed V104 checkpoint and its quality comparisons before launch. A better
+initializer or further source decisions can supersede this prepared plan while
 preserving it. The trained comparison will use original V102 as well as
 its accurately labeled zero-gate derivative, both fixed endpoints, the standing
 GFX scene and native crop triplets. No capacity benefit is established yet.

@@ -60,33 +60,40 @@ because the reviewed-ROI catalogue is frozen with the recipe.
 
 ## Active V104 cleaned-corpus continuation
 
-**V104 production training is running** from exact V102 final20k EMA on the
+**V104 completed its original 20,000 updates** from exact V102 final20k EMA on the
 reviewed **90,872-source**4×/8× pair. Both discarded eight-update CPU and
 CUDA checks passed, verifying exact parent EMA initialization,finite states
-and unchanged official DINO. The original20k production run starts freshly
-again with AdamW/EMA,seed61,B16/native256/BF16,LR1e-5/warmup200. Its six original
+and unchanged official DINO. The production run used fresh
+AdamW/EMA,seed61,B16/native256/BF16,LR1e-5/warmup200. Its six original
 ROI objects and5% conditional-photo probability,zero optical PSFs,weak synthetic
 textures,photo contrast attenuation,native128/paired32 remain unchanged.
 
 [Recipe](../configs/quality-v102-reviewed-corpus-v104.yaml) ·
 [Six-ROI binding](../configs/low-contrast-training-rois-six-reviewed90872-v4.json) ·
 [Actual launch,discarded smoke/report proof and source exposure](results/v104-reviewed-corpus-training-launch-v1.json).
-V102 remains the recommended inference checkpoint; V104 has no production
-quality result yet. More training,seed and data change together,so any gain
-cannot be attributed solely to the larger corpus.
+V104 improves PSNR, SSIM and gradient error in all 12 fixed material cases over
+V102, with mean PSNR gains of +.246/.166/.024dB at ADC-only/ISO100/ISO12800.
+Chroma improves in 11/12 cases.
+[Native comparisons and remaining smoothing](heldout-detail.md#v104-versus-v102-on-the-fixed-material-panel).
+V102 remains the fully evaluated inference baseline while V104's broader
+panels run. More training, seed and data change together, so the gain cannot be
+attributed solely to the larger corpus.
 
 The fixed20k schedule contains113,058 photographic examples,62,976 unique
 photo sources and2,811 draws from1,645 newly eligible sources. Its5,672 reviewed
 ROI draws cover the same six sources. These are reconstructed full-schedule
-counts,not a claim that training has finished. Twelve actual clean-reader
+counts; the fixed20k endpoint has now completed. Twelve actual clean-reader
 checks cover six new-source draws and all six ROIs,repeated exactly with
 finite native256 outputs and unchanged Torch RNG,no GPU or denoiser.
 
 Full427/16procedural/seven-condition/four-CFA,known4/unseen5 measured-camera,
-weak texture,color,GFX and highlights are queued after the exact original
-trainer/controller exits. Complete102MP RGB16 exports follow evaluation. A separate CPU-only queue will
-compare the original final V104 EMA with V102 on all 12 fixed material cases,
-using current frozen source and exactly replayed observations after the trainer exits.
+weak texture,color,GFX and highlights are now evaluating after the original
+trainer/controller exited. Complete102MP RGB16 exports follow evaluation.
+The separate CPU-only material report is complete, using the original final
+V104 EMA and all 12 exactly replayed observations. All 60 native board cells
+were actually viewed, including the matched RawNIND reference.
+[Verified fixed20k/source boundary](results/V104-original20000-training-boundary-v1.json) ·
+[Material report](results/V104-final20000-heldout-detail-CPU-v1.json).
 A discarded CPU reporting integration already passed60 case rows/four triplets;
 all eight unique native board cells were actually viewed. It checks reporting,
 not model improvement. The new cohort preserves2,303 validation/2,255 test

@@ -17,7 +17,7 @@ inspection, rather than native inspection of every image.
 | Cohort | Training sources | Status |
 | --- | ---: | --- |
 | V102/V103 | 88,477 | Completed model comparison |
-| V104 | 90,872 | Original training run continues unchanged |
+| V104 | 90,872 | Original 20k training complete; broader evaluation active |
 | Next reviewed pair | **90,864** | Prepared V109 Tiny / V110 Small recipes |
 
 The next cohort applies **eight additional training-source withholds relative
@@ -49,9 +49,10 @@ matching first losses. [Actual CUDA checks](results/backbone-cleaned-recipes-CUD
 Production training has not launched for the capacity comparison.
 
 These inputs supersede the unlaunched 90,869-source preparation. Earlier
-manifests, recipes and receipts remain preserved. V104 keeps its original
-90,872-source inputs and evaluation queues; the next initializer will be chosen
-after reviewing its completed result. [Current quality training](quality-first-training.md).
+manifests, recipes and receipts remain preserved. V104 completed its original
+90,872-source run. Its [selected material gains](heldout-detail.md) are published
+while broader evaluation continues; the next initializer will use the useful
+completed evidence. [Current quality training](quality-first-training.md).
 
 ## Printed atlas targets and photographed windows
 

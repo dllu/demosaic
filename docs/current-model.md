@@ -1,6 +1,6 @@
 # Current models and development baseline
 
-**Use V102 final20k for inference and continued quality training.** It continues
+**V102 final20k is the fully evaluated inference/training reference.** It continues
 V84's full-resolution pretrained DRUNet RGB trunk, physical noise anchors and
 frozen official DINOv3 ConvNeXt-Tiny pyramid. V103 is a close alternative;
 V43 remains a historical comparator.
@@ -61,9 +61,14 @@ the local cache. [Current selector](../configs/current-model.json) ·
 
 V102/V103 both completed20k fresh-optimizer continuations from V101 on the
 88,477-source cohort. Only six/32 reviewed ROIs differ; zero-PSF,weak-texture,
-photographic-contrast recipes and numerical code match. V104 is now training on the cleaned
-90,872-source corpus from V102, retaining quality as the priority. Its production
-quality remains unmeasured.
+photographic-contrast recipes and numerical code match. V104 completed 20k
+updates from V102 on 90,872 sources. It improves PSNR, SSIM and gradient error
+in all 12 selected material cases, with mean PSNR gains of +.246/.166/.024dB
+at ADC-only/ISO100/ISO12800.
+[Native V104/V102/RawNIND comparisons](heldout-detail.md#v104-versus-v102-on-the-fixed-material-panel).
+Its full photographic, camera and GFX evaluation is active. The read-only
+candidate is `/mnt/external/demosaic/models/v104-final20000.pt`; broader results
+will inform the next useful baseline.
 [Current recipes and data](quality-first-training.md) · [Incoming source review](incoming-commons-quality.md).
 Earlier [V100/V101](v84-curated-quality-review.md) and
 [V84/V85](native-data-original20k-review.md) reports retain their results;

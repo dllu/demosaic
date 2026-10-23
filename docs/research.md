@@ -5,7 +5,9 @@ DINOv3 ConvNeXt-Tiny pyramid in V84's architectural family. V102 final20k is the
 quality baseline after completed full 427-photo, camera, texture, color and GFX evaluation.
 V103 has nearly identical photo quality; V102 has stronger tested weak texture,
 lower ADC color error and slightly better selected material means. V104 is
-training from V102 on the reviewed 90,872-source corpus, with zero optical blur.
+complete at 20k from V102 on 90,872 sources, with zero optical blur. It improves
+PSNR, SSIM and gradient error in all 12 selected material cases; broader
+evaluation is active.
 See [current models](current-model.md) and the [active cleaned-data recipes](quality-first-training.md).
 The literature/design record below explains the explored approaches; its older
 study decisions do not freeze the current architecture or README examples.
@@ -17,7 +19,7 @@ or substituting Wiener/self/clean-oracle previews gives no consistent gain.
 This is a fixed-weight result, not a trained-backbone/fusion ablation; the
 unavailable clean-image oracle is never a candidate method. Current quality
 work continues from V102 on the reviewed larger corpus; the fixed V104 endpoint
-will receive the same material/detail and full matched evaluation.
+has completed the material/detail report and is receiving full matched evaluation.
 
 The [larger frozen ConvNeXt check](convnext-small-capacity.md) now pins official
 Small weights and verifies compatible native feature shapes. A direct backbone

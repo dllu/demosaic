@@ -2,7 +2,7 @@
 
 Joint Bayer demosaicing and denoising in linear camera RGB, with physical noise
 conditioning, frozen DINOv3 features and tiled 16-bit TIFF output on NVIDIA GB10.
-**V102 final20k is the current quality baseline**, continuing V84's pretrained
+**V102 final20k is the fully evaluated quality baseline**, continuing V84's pretrained
 DRUNet RGB trunk and frozen DINOv3 ConvNeXt-Tiny pyramid. It reaches **36.680dB**
 on the full427-photo panel: +.176dB over V101 and about+1.78dB over V43,
 with higher known/unseen measured-camera means. V103 has nearly identical photo
@@ -10,8 +10,9 @@ quality; V102 has lower ADC flat-color error and stronger tested weak texture.
 [Completed results, native comparisons and tradeoffs](docs/v102-v103-quality-review.md).
 
 The zero-blur/detail recipe improves425/427 photographic source means over V101.
-Fine high-noise texture and real foliage still need work. V104 is training on the reviewed larger
-corpus:2,395 eligible additions,bringing training to90,872 sources.
+Fine high-noise texture and real foliage still need work. V104 completed 20k
+updates on 90,872 sources and improves PSNR and SSIM in all 12 selected material
+cases; its full photographic, camera and GFX evaluation is running.
 The next [matched Tiny/Small quality recipes](docs/convnext-small-capacity.md#prepared-matched-quality-trial)
 are prepared on 90,864 cleaned sources and pass discarded CPU/CUDA checks;
 production training has not launched.
@@ -29,16 +30,16 @@ isolated architecture ablation.
 
 ## Current 100% crops
 
-Noisy observation → **V102 final20k** → exact synthetic GT, at the ISO100 prior.
+Noisy observation → **V104 final20k** → exact synthetic GT, at the ISO100 prior.
 These are unchanged 160×160 crops at the 8×-binned evaluation resolution, with
-shared coordinates and display transforms. Low-noise bark/canopy gains are
-small; fine-detail loss remains at high noise.
-[Compare V84,V100,V101,V102,V103 and RawNIND](docs/heldout-detail.md) ·
-[source/ROI/checkpoint/noise/display metadata](docs/images/current-detail/iso100-prior/manifest.json).
+shared coordinates and display transforms. V104 gains +.166dB over V102 on the
+four selected ISO100 contexts; high-noise detail remains soft. Broader results
+are pending. [Compare V102,V104 and RawNIND](docs/heldout-detail.md) ·
+[source/ROI/checkpoint/noise/display metadata](docs/images/detail-v102-v104/iso100-prior/manifest.json).
 
-![V102 final20k, bark: noisy, restored and exact synthetic GT](docs/images/current-detail/iso100-prior/V102-final20000-0ae232278265.png)
+![V104 final20k, bark: noisy, restored and exact synthetic GT](docs/images/detail-v102-v104/iso100-prior/V104-0ae232278265.png)
 
-![V102 final20k, canopy: noisy, restored and exact synthetic GT](docs/images/current-detail/iso100-prior/V102-final20000-212ae12913ef.png)
+![V104 final20k, canopy: noisy, restored and exact synthetic GT](docs/images/detail-v102-v104/iso100-prior/V104-212ae12913ef.png)
 
 Sources: [Derek Ramsey](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
 [CC BY-SA 2.5](https://creativecommons.org/licenses/by-sa/2.5/), and

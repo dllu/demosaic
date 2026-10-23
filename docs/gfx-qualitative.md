@@ -6,6 +6,10 @@ DSCF3879/DSCF3880 scene. The learned results remain close: fence strands and
 building rails are more coherent than RawNIND, while fine foliage and saturated
 sign structure still need work. [Completed model comparison](v102-v103-quality-review.md).
 
+V104 completed 20k and improves the [selected material cases](heldout-detail.md).
+Its complete 102MP exports follow the active quality evaluation. Current GFX
+images below retain the completed V101/V102/V103 comparison.
+
 ## Current complete full-frame comparisons
 
 ![Six native GFX regions: noisy,V101,V102,V103,RawNIND and independent ISO100 reference](images/current-gfx-v102-v103-fullframe/gfx-comparison.png)

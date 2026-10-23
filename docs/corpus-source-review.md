@@ -12,7 +12,7 @@ neither changes completed V100/V101 inputs.
 | --- | ---: | ---: | ---: |
 | Completed V100/V101 | 88,484 | 2,303 / 2,255 | 24 |
 | Completed V102/V103 | 88,477 | Same exact records/order | 31 |
-| Active V104 | 90,872 | Same exact records/order | Prior31 plus four incoming quality withholds; duplicate/series/protected exclusions also apply |
+| Completed V104 20k | 90,872 | Same exact records/order | Prior31 plus four incoming quality withholds; duplicate/series/protected exclusions also apply |
 | Prepared V109/V110 | 90,864 | Same exact records/order | Eight additional withholds relative to V104: three photo-quality cases and five atlas reproductions |
 
 [Current decisions, native examples, catalogue and reader checks](results/source-quality-detail-catalogue-v3.json).
@@ -52,8 +52,8 @@ actually inspected native views at their scored coordinates. Targeted review
 retains difficult natural texture and weak detail. A follow-up of atlas credits
 finds five printed reproductions among training targets, while retaining two
 real photographed-window controls. These and three earlier photo-quality
-withholds enter the separate **90,864-source** future cohort. Current V104
-continues on its original inputs. [Current native examples, decisions and
+withholds enter the separate **90,864-source** future cohort. Completed V104
+retains its original training inputs. [Current native examples, decisions and
 prepared data](incoming-commons-quality.md).
 
 ## Selection and inspection
@@ -175,7 +175,7 @@ zero-PSF geometry→area2 path, with finite native 256 outputs and no GPU/model.
 [Full preparation/review/reader evidence](results/source-quality-detail-catalogue-v3.json).
 V102/V103 completed20k updates on these frozen data. Their full427/camera
 comparison and complete GFX exports are finished; V102 is the current baseline.
-The active V10490,872-source cohort is documented in the [incoming review](incoming-commons-quality.md). [Recipes and current results](quality-first-training.md#current-matched-comparison-v102v103).
+The completed V104 90,872-source training cohort is documented in the [incoming review](incoming-commons-quality.md). [Recipes and current results](quality-first-training.md#current-matched-comparison-v102v103).
 
 Source views use existing prepared caches. New downloads and decisions enter
 a separate frozen cohort instead of changing an existing experiment's inputs.
