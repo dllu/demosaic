@@ -11,6 +11,7 @@ from pathlib import Path
 
 import numpy as np
 import psutil
+from commons_preparation_review import load_failure_review, validate_coverage
 
 from demosaic.prepare import free_license
 from demosaic.safety import REPOSITORY, writable_path
@@ -171,10 +172,25 @@ def freeze(base4, base8, prepared4, candidate8, review_path, output, *, reserve_
         Path(prepared4).resolve() == expected_four.resolve(), "Wrong complete4 producer manifest"
     )
     area = checked(producer["cache_audit"])
-    require(
-        not any(area["errors"].values()) and area["area_max_uint16_codes"] <= 1,
-        "Cache/area audit failed",
-    )
+    require(area["area_max_uint16_codes"] <= 1, "Cache/area audit failed")
+    if any(area["errors"].values()):
+        require(
+            downloaded and review.get("preparation_failure_review"),
+            "Unreviewed preparation errors remain",
+        )
+        failure_ref = review["preparation_failure_review"]
+        require(ref(failure_ref["path"]) == failure_ref, "Changed preparation failure review")
+        failure = load_failure_review(
+            failure_ref["path"], producer["plan"], producer_plan["selection"]
+        )
+        raw_selection = read(producer_plan["selection"]["path"])
+        raw_prepared = {"4": rows(prepared4), "8": rows(protected["manifest"])}
+        validate_coverage(raw_selection, raw_prepared, area["errors"], failure["errors"])
+        require(
+            area["prepared"] == {k: len(v) for k, v in raw_prepared.items()},
+            "Prepared failure coverage differs",
+        )
+        inputs.extend(failure["inputs"])
     for contact in review["viewed_contacts"]:
         require(contact["actual_viewed"] is True, "Unviewed content screen")
         require(ref(contact["PNG"]["path"]) == contact["PNG"], "Changed contact screen")

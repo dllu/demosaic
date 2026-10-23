@@ -6,11 +6,12 @@ remains partial. Every new file passed size and publisher-SHA1 verification;
 the original controller and downloader exited. Three failed requests remain
 recorded: two404s and one publisher-size mismatch, without automatic retry.
 
-**A separate CPU job is preparing3,809 eligible arrivals at4× and8×**, launched
-at21:26PDT. It excludes103 unsupported license labels and88 geometry failures,
-and checks against all178,117 prior downloaded/prepared source identities.
-The new data remains quarantined/reserved until complete cache/source/neighbor
-review and a separate frozen recipe. Active V102/V103 inputs stay fixed.
+The separate CPU job selected3,809 eligible arrivals for4×/8× preparation,
+after103 unsupported-license and88 geometry omissions. **The4× pass completed
+3,807 caches; two malformed-ICC stereo composites are explicitly withheld.**
+The original8× job continues. It checks against all178,117 prior downloaded/
+prepared identities. The new data stays outside training until complete
+cache/source/neighbor review and a separate frozen recipe.
 [Completed download reconciliation and actual preparation launch](results/commons-post4000-preparation-launch-v1.json).
 
 ## Download result and current preparation
@@ -46,16 +47,21 @@ fields; all frozen source files remain exact. The producer and trainer were
 confirmed live. [Actual startup sample](results/commons-post4000-preparation-startup-v1.json).
 These checks use complete temporary-manifest rows and do not finalize a corpus.
 
-A separate [source-contact queue](results/commons-post4000-contact-queue-v1.json)
-waits for the **complete4× manifest, finalized error file and summary with zero
-failures**, then renders all3,809 sources on39 sheets. It may run during8×
-preparation, but refuses a partial manifest or incomplete source coverage.
-Its explicit288GiB reserve retains48GiB RAM and all cache/source integrity
-checks. Eight focused tests and an actual two-source queue/renderer fixture
-pass; that fixture's PNG exactly matches the prechange renderer. Those two old
-engineering thumbnails were viewed, not the new source population. Rendering
-alone never supplies manual source-quality review or data admission.
-Root:`/mnt/external/demosaic/commons-post4000-contact-queue-20261022-v1/`.
+The original zero-error contact queue correctly stopped. Its explicit
+replacement has rendered **all3,807 valid sources on39 sheets**, while8×
+continues. The two withheld JPEGs decode as side-by-side stereo pairs, but their
+672-byte embedded ICC profiles cannot be opened. Two unmanaged source overviews
+and two native256 crops were actually viewed for composition/identity; their
+color is unvalidated. Originals and error records remain unchanged, with no
+ICC bypass or source repair.
+
+A bound manual failure ledger accounts for exactly those two sources. Every
+selected source must have a cache or its exact reviewed failure at each scale;
+unknown/changed failures, missing targets or changed credits/pixel recipes still
+stop downstream work. The current source sheets are rendered but **not yet
+visually reviewed**. Default handling continues to require zero errors.
+[Actual source inspection, explicit exclusions, complete sheets and checks](results/commons-post4000-reviewed-failures-v1.json).
+Root:`/mnt/external/demosaic/commons-post4000-contact-queue-20261022-v2/`.
 
 The source-overlap reference bank is complete: **10,287 cached vectors**,
 comprising10,092 prior Commons holdouts,150 native-camera and45 protected views.
@@ -64,16 +70,20 @@ hashes/headers passed; independent checks match every vector's IEEE bits to
 its source and preserve the full10,087 current holdout IDs plus five earlier
 protected holdout hashes. Both original8-image CPU encoder replays are exact.
 
-Preliminary title matching covers3,418 new train-bucket queries against10,092
+Preliminary title matching now covers3,416 valid train-bucket queries against10,092
 prior and391 new heldout anchors:972 title risks,11 uninformative titles and
-2,435 without a title flag. These are review cues. Final title decisions must
+2,433 without a title flag. These are review cues. Final title decisions must
 be recomputed after protected/duplicate screening changes the candidate set.
 A live source-only DINO query queue waits for the exact preparer's successful
-two-scale/cache/area/protected receipt and exit, then retrieves neighbors for
-the new sources. Its two-query fixture reproduces all vectors, ten neighbors
+two-scale/cache/area/protected receipt and exit, accounting for the two explicit
+failures, then retrieves neighbors for all3,807 valid sources. Its two-query
+fixture reproduces all vectors, ten neighbors
 and the original contact PNG exactly; all seven fixture source pairs were
 viewed. [Completed bank, source coverage, tests and actual query launch](results/commons-post4000-content-readiness-v1.json).
-Root:`/mnt/external/demosaic/commons-post4000-content-retrieval-20261022-v1/`.
+Root:`/mnt/external/demosaic/commons-post4000-content-retrieval-20261022-v2/`.
+The incompatible original idle waiter was explicitly retired before any source
+encoding; its source/log/status and retirement are preserved. The preparer and
+training jobs were not restarted.
 No new source-quality decision or training admission follows from these checks.
 
 Current root: `/mnt/external/demosaic/commons-post4000-preparation-20261022-v1/`.

@@ -14,6 +14,7 @@ import psutil
 import torch
 from audit_commons_dino_overlap import BATCH, MODEL, REVISION, image_tensor, ref
 from build_commons_content_bank import BACKBONE, RECIPE, read, resources, rows, save
+from commons_preparation_review import load_failure_review, validate_coverage
 from PIL import Image, ImageDraw
 from profile_raw_kernel_inference import model_hash
 from torch.nn import functional as F
@@ -72,13 +73,16 @@ def nearest(query, database, identities, count=3):
     return result
 
 
-def freeze(producer, bank, titles, root, engineering=False, *, reserve_gib=548):
+def freeze(
+    producer, bank, titles, root, engineering=False, *, reserve_gib=548, failure_review=None
+):
     repo = Path(__file__).resolve().parents[1]
     root = Path(root).resolve()
     if root.exists() or not root.is_relative_to("/mnt/external/demosaic"):
         raise ValueError("Use a fresh external demosaic retrieval root")
     resources(root.parent, reserve_gib=reserve_gib)
     production = read(producer)
+    reviewed = load_failure_review(failure_review, ref(producer), production["selection"])
     state = read(producer.parent / "status.json")
     receipt = read(bank)
     if receipt["status"] != "completed-source-content-anchor-bank-no-training-admission":
@@ -96,6 +100,7 @@ def freeze(producer, bank, titles, root, engineering=False, *, reserve_gib=548):
         receipt["input_rows"],
         receipt["vectors"],
     ]
+    inputs.extend(reviewed["inputs"])
     for item in inputs:
         if ref(item["path"]) != item:
             raise ValueError("Changed retrieval input")
@@ -111,6 +116,7 @@ def freeze(producer, bank, titles, root, engineering=False, *, reserve_gib=548):
             "build_commons_content_bank.py",
             "audit_commons_dino_overlap.py",
             "profile_raw_kernel_inference.py",
+            "commons_preparation_review.py",
         ]
     ]
     for file in files:
@@ -135,6 +141,7 @@ def freeze(producer, bank, titles, root, engineering=False, *, reserve_gib=548):
         "resource_wait_seconds": 3600,
         "stable_resource_seconds": 30,
         "reserve_gib": reserve_gib,
+        "preparation_failure_review": ref(failure_review) if failure_review else None,
     }
     save(root / "plan.json", plan)
     return ref(root / "plan.json")
@@ -197,18 +204,30 @@ def run(path):
             if ref(item["path"]) != item:
                 raise ValueError("Changed producer audit")
         audit = read(result["cache_audit"]["path"])
-        total = read(plan["producer"]["path"])["selected_originals"]
+        production = read(plan["producer"]["path"])
+        original_selection = read(production["selection"]["path"])
+        reviewed = load_failure_review(
+            plan["preparation_failure_review"]["path"]
+            if plan.get("preparation_failure_review")
+            else None,
+            plan["producer"],
+            production["selection"],
+        )
+        prepared = {
+            str(f): rows(producer_root / f"work/outputs/prepared{f}/manifest.jsonl") for f in [4, 8]
+        }
+        expected = validate_coverage(
+            original_selection, prepared, audit["errors"], reviewed["errors"]
+        )
+        total = len(expected)
         if (
-            audit["prepared"] != {"4": total, "8": total}
-            or any(audit["errors"].values())
+            len(original_selection) != production["selected_originals"]
+            or audit["prepared"] != {"4": total, "8": total}
             or audit["area_max_uint16_codes"] > 1
         ):
             raise ValueError("Producer did not verify all selected two-scale caches")
         manifest = producer_root / "work/outputs/prepared8/manifest.jsonl"
-        records = rows(manifest)
-        expected = {
-            r["sha1_hex"] for r in read(read(plan["producer"]["path"])["selection"]["path"])
-        }
+        records = prepared["8"]
         if len(records) != total or {r["id"] for r in records} != expected:
             raise ValueError("Incomplete new source population")
         for row in records:
@@ -397,6 +416,8 @@ def run(path):
             "contact_pairs": ref(root / "contact-pairs.json"),
             "contacts": contacts,
             "new_sources": total,
+            "original_selected_sources": production["selected_originals"],
+            "preparation_failure_review": plan.get("preparation_failure_review"),
             "train_hash_queries": len(queries),
             "new_reserved_anchors": len(reserved),
             "anchor_pools": dict(Counter(r["pool"] for r in reference_rows)),
@@ -427,6 +448,7 @@ if __name__ == "__main__":
         prepare.add_argument("--" + name, type=Path, required=True)
     prepare.add_argument("--engineering", action="store_true")
     prepare.add_argument("--reserve-gib", type=int, default=548)
+    prepare.add_argument("--failure-review", type=Path)
     execute = sub.add_parser("run")
     execute.add_argument("plan", type=Path)
     args = parser.parse_args()
@@ -440,6 +462,7 @@ if __name__ == "__main__":
                     args.root,
                     args.engineering,
                     reserve_gib=args.reserve_gib,
+                    failure_review=args.failure_review,
                 )
             )
         )

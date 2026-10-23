@@ -9,6 +9,7 @@ import json
 import shutil
 from pathlib import Path
 
+from commons_preparation_review import SOURCE_FIELDS
 from render_commons_contact_sheets import FIELDS
 from screen_commons_titles import THRESHOLD, retrieve
 from train_directional_interval_trial import read, ref, save
@@ -17,6 +18,33 @@ from demosaic.safety import writable_path
 
 FINAL_TITLE_STATUS = "completed-final-candidate-title-retrieval-no-training-admission"
 CONTENT_STATUS = "completed-source-content-neighbors-awaiting-actual-review-no-training-admission"
+
+
+def validate_anchor_coverage(base, anchor_rows):
+    """Require every admission holdout's exact pixels/source; allow extra heldouts."""
+    pools = {"Commons-heldout", "native150", "protected45"}
+    require(all(row.get("pool") in pools for row in anchor_rows), "Unknown anchor pool")
+    require(
+        len({(r["pool"], r["id"]) for r in anchor_rows}) == len(anchor_rows),
+        "Duplicate anchor identity",
+    )
+    expected = {r["id"]: r for r in base if r["split"] in {"val", "test", "reserved"}}
+    commons = {r["id"]: r for r in anchor_rows if r["pool"] == "Commons-heldout"}
+    require(
+        all(r["split"] in {"val", "test", "reserved"} for r in commons.values()),
+        "Training source in heldout anchor pool",
+    )
+    require(expected.keys() <= commons.keys(), "Content bank omits an admission holdout")
+    fields = [*SOURCE_FIELDS, "cache_sha256", "shape", "bin_factor", "dtype", "color_space"]
+    for identity, row in expected.items():
+        require(
+            all(
+                field in commons[identity] and commons[identity][field] == row[field]
+                for field in fields
+            ),
+            "Heldout anchor pixels or source attribution differ",
+        )
+    return len(commons)
 
 
 def require(value, message):
@@ -229,25 +257,39 @@ def validate_downloaded_review(review, inventory, new, base8, prepared4, prepare
         "Incomplete content anchor bank",
     )
     require(bank["engineering"] is review["engineering_only"], "Engineering/production bank mixed")
-    same_base = bank_plan["base"] == ref(base8)
-    if not same_base and review["engineering_only"]:
-        original = {r["id"]: r for r in rows(bank_plan["base"]["path"])}
-        same_base = all(r == original.get(r["id"]) for r in rows(base8))
-    require(same_base, "Content heldout anchors differ from admission base")
-    require(ref(bank_plan["base"]["path"]) == bank_plan["base"], "Changed anchor source base")
+    expected_commons = sum(r["split"] in {"val", "test", "reserved"} for r in rows(base8))
+    if "base" in bank_plan:
+        same_base = bank_plan["base"] == ref(base8)
+        if not same_base and review["engineering_only"]:
+            original = {r["id"]: r for r in rows(bank_plan["base"]["path"])}
+            same_base = all(r == original.get(r["id"]) for r in rows(base8))
+        require(same_base, "Content heldout anchors differ from admission base")
+        require(ref(bank_plan["base"]["path"]) == bank_plan["base"], "Changed anchor source base")
+    else:
+        require(
+            bank.get("all_selected_vectors_exact_to_completed_sources") is True
+            and bank.get("fresh") == 0,
+            "Unknown incremental anchor provenance",
+        )
+        checked(bank_plan["previous"])
+        checked(bank_plan["arrivals"])
+        require(ref(bank["input_rows"]["path"]) == bank["input_rows"], "Changed anchor population")
+        expected_commons = validate_anchor_coverage(rows(base8), rows(bank["input_rows"]["path"]))
     if not review["engineering_only"]:
         require(
             bank["pools"]
             == {
-                "Commons-heldout": sum(
-                    r["split"] in {"val", "test", "reserved"} for r in rows(base8)
-                ),
+                "Commons-heldout": expected_commons,
                 "native150": 150,
                 "protected45": 45,
             },
             "Production anchor pool coverage differs",
         )
     require(content["producer_receipt"] == review["producer_receipt"], "Content producer differs")
+    require(
+        content_plan.get("preparation_failure_review") == review.get("preparation_failure_review"),
+        "Content and admission failure reviews differ",
+    )
     require(content["new_sources"] == len(source), "Content retrieval omits new sources")
     require(
         content["train_hash_queries"] == sum(r["split"] == "train" for r in prepared_rows)

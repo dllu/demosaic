@@ -17,9 +17,11 @@ neither changes completed V100/V101 inputs.
 Originals, existing manifests and protected evaluation scenes remain read-only.
 The GFX train/platform pair and siblings remain outside training.
 
-The next [3,809-source arrival batch](commons-download.md) is preparing both
-cache scales separately. Its complete4× source-contact queue will render39
-sheets for actual visual inspection after all4× outputs finalize. These
+The next [3,809-source arrival batch](commons-download.md) has finalized3,807
+valid4× caches and39 source sheets, with8× still preparing. Two malformed-ICC
+side-by-side stereo composites were actually inspected and withheld through
+an explicit failure ledger; their originals and error evidence remain intact.
+The valid-source sheets await actual visual inspection. These
 arrivals do not contribute to the570 reviewed-training-source count above,
 and remain outside current training pending the full cache/overlap/content review.
 

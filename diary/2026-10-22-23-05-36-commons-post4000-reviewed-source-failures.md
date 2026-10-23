@@ -1,0 +1,15 @@
+# Withhold two malformed-ICC stereo targets and resume complete valid-source review
+
+Recorded: 2026-10-22T23:05:36-07:00 (America/Los_Angeles).
+
+The original4x pass finalized3807 valid caches and two failures, both `cannot open profile from string`. Independently inspected both exact publisher-SHA JPEGs: each is a9792x3672 side-by-side stereo composition, with a672-byte malformed ICC header. Viewed two unmanaged source overviews and two native256 seam crops for identity/composition only; color is unvalidated. Withhold these two clean targets rather than ignoring ICC conversion or altering originals. Both are train-hash sources; valid counts are3416train/196val/195test. Original3809 records, failures, attribution and source bytes are retained.
+
+Added explicit source-failure review accounting. A signed-by-hash manual ledger binds the original producer/selection, full source records, actual viewed evidence and exact errors. Cache/failure sets must partition every selected source at each scale. Unknown/changed/missing/duplicate failures, source/credit drift, incomplete scales and pixel-recipe changes remain fatal. Optional ledger handling is shared by source contacts, source DINO retrieval and the coupled freezer; the default remains zero-error. No metadata/color repair or training admission.
+
+The first contact queue correctly stopped at its zero-error guard. A new generic queue and actual two-source frozen fixture reproduce the old PNG exactly; an initial fixture import error was caught before execution and corrected with a freeze-only renderer import. All three final production sources match the corrected actual fixture. The explicit replacement produces all39 sheets/3807 valid4x thumbnails, with no valid-source viewing claimed yet. Original8x producer stays live.
+
+Retired only the exact owned, idle original DINO waiter after confirming no source encoding had started; it could not accept the known two failures. Preserved its claim/source/log/status and explicit retirement. A new ledger-aware queue remains live behind the unchanged producer. The genuine two-query fixture reproduces every vector, neighbor and PNG byte. Recomputed preliminary titles on3807 valid sources:3416queries,972risk/11uninformative/2433no-flag,391new holdouts. These are not source-quality/admission decisions.
+
+The final reviewer now accepts a verified conservative heldout-bank superset instead of requiring the incremental bank to have a legacy base filename: all10087 required holdouts must retain exact pixels/geometry/credits, and the five additional protected holdout hashes stay included. Missing/changed targets, train-tagged or duplicated anchors fail. Actual full-bank identity check passes. Nineteen new failure checks/eight anchor-coverage checks plus28 related legacy/retrieval tests pass; Ruff/format pass.
+
+[Original errors, actual views, exact ledger, complete sheets, live replacement and tests](../docs/results/commons-post4000-reviewed-failures-v1.json). Current model training/evaluation inputs remain unchanged. The separate hot-pixel/linear-DNG branch is next for review/merge before further model work.
