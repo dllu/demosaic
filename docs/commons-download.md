@@ -1,41 +1,64 @@
 # Expanding the Commons archive
 
-A **bounded download of up to 4,000 more originals is running**, started on
-2026-10-22 at **14:32 PDT**. It uses the existing Commons Quality Images index
-at `/mnt/external/qi`, without discovery or attribution enrichment. The archive
-is still partial: before this run it held **178,117 originals / 754.7 GiB**, with
-**279,548 pending**. Completion of an earlier bounded batch did not complete the
-archive. At 14:42 PDT, 162 additional originals had been published; this is a
-progress observation, not a final byte audit.
+The bounded download **completed4,000 new originals /27.66GiB** on2026-10-22.
+The archive now holds **182,117 downloaded originals**, up from178,117, and
+remains partial. Every new file passed size and publisher-SHA1 verification;
+the original controller and downloader exited. Three failed requests remain
+recorded: two404s and one publisher-size mismatch, without automatic retry.
 
-[Launch, capacity estimate, live owners and isolation receipt](results/commons-bounded-download-launch-20261022-v1.json).
+**A separate CPU job is preparing3,809 eligible arrivals at4× and8×**, launched
+at21:26PDT. It excludes103 unsupported license labels and88 geometry failures,
+and checks against all178,117 prior downloaded/prepared source identities.
+The new data remains quarantined/reserved until complete cache/source/neighbor
+review and a separate frozen recipe. Active V102/V103 inputs stay fixed.
+[Completed download reconciliation and actual preparation launch](results/commons-post4000-preparation-launch-v1.json).
 
-## Current limits and progress
+## Download result and current preparation
 
-The singleton job has two workers, at most .25 request starts/second, a
+The completed download ran from14:32 to18:59PDT using two workers,
+at most .25 request starts/second, a
 **336 GiB free-space reserve**, a 4,000-completion limit and a 12-hour deadline.
-It runs at nice10 with idle I/O priority. The unchanged downloader resumes
-partials and verifies publisher size/SHA1 before atomic publication. The shared
-lock is inherited by the child, so another cooperating launcher cannot start
-while that downloader remains alive.
+It used nice10/idle I/O and the existing index without discovery or enrichment.
+The unchanged downloader verified size/SHA1 before atomic publication; its
+controller repeated those checks on all4,000 completed originals. Independent
+count/metadata reconciliation confirms the full178,117→182,117 delta and checks
+the whole-second timestamp boundary, with no omitted launch-second files.
+[Original launch and capacity estimate](results/commons-bounded-download-launch-20261022-v1.json).
 
-Metadata for the next 4,000 queued originals estimates **27.66 GiB of original
-files**. About **3,912** meet the current 2,048-pixel minimum short side; their
-4×/8× uint16 caches would add about **24.47 GiB**, before audit overhead and
-exclusions. These are estimates, not admissions. Free space was about374GiB at
-the launch-receipt observation; the bounded budget leaves room for the active
-quality study and its planned full-frame exports. The entire pending archive
-would exceed available capacity.
+The3,809-source two-scale estimate is **23.876GiB**. At launch,336.83GiB free
+covers that complete payload plus4GiB margin above a **288GiB reserve**.
+The reserve leaves32GiB above the ongoing quality study's256GiB floor for its
+remaining checkpoint/evaluation/full-frame writes. The job requires48GiB
+available RAM stable for60s, uses one CPU worker/single-thread libraries,
+nice10/idle I/O, hidden CUDA and a21,600s supervised bound. Guards stop work
+without retry or partial admission.
 
-Operational files are under
+The producer first rechecks selected original bytes and immutable attribution
+against a short read-only index transaction, then prepares both cache scales,
+audits all cache bytes/headers and the complete4×→area2 one-code bound, and
+screens42 cached protected references plus GFX capture/series metadata. Existing
+ingestion/color/safety operators match the previously executed fixture exactly.
+No source HDD or personal RAW is needed. This is a live launch, not completed
+caches or source-quality approval.
+
+Current root: `/mnt/external/demosaic/commons-post4000-preparation-20261022-v1/`.
+`launch.json` records the exact timeout supervisor; `status.json` records the
+worker's PID/creation time and stage. Results will appear under`work/outputs/`.
+
+```bash
+cat /mnt/external/demosaic/commons-post4000-preparation-20261022-v1/status.json
+tail -10 /mnt/external/demosaic/commons-post4000-preparation-20261022-v1/worker.log
+```
+
+Completed download evidence remains under
 `.cache/current-quality-20261022-v1/commons-bounded-download-v1/`:
 
 - `plan.json` / `launch.json`: frozen limits, source hashes and owned processes;
-- `status.json` / `controller.log`: current phase and reserve/deadline checks;
+- `status.json` / `controller.log`: terminal result and reserve/deadline checks;
 - `download.log` / `worker.log`: actual downloader progress;
-- `new-originals.jsonl`: produced at termination after independent size/SHA1 audit.
+- `new-originals.jsonl`: all4,000 completed original records after size/SHA1 audit.
 
-Inspect the existing job without starting another:
+Inspect the completed download:
 
 ```bash
 tail -10 .cache/current-quality-20261022-v1/commons-bounded-download-v1/download.log
@@ -59,18 +82,18 @@ Prior per-path modes/mtimes remain in the restoration ledger. Working training
 checkpoints, canonical models, originals and prepared data were not relinked.
 [Completed storage and active-plan verification](results/frozen-evaluation-weight-sharing-v1.json).
 
-The original bounded downloader remains the only owner of the archive download
-lock. This storage change increases its headroom without changing the 336 GiB
-reserve, current manifests, source admission policy or numerical experiments.
+The completed download retained its336GiB reserve. Its lock is now available to
+the cache producer; another cooperating download cannot run while preparation
+holds it. Storage sharing did not change source admission or numerical recipes.
 
 The preparation/review-freeze tools now accept an explicitly budgeted reserve
 of at least256GiB, while retaining their historical560/500GiB defaults. Before
 preparation, free space must cover **the entire new4×/8× payload plus4GiB margin
 above the selected reserve**; the48GiB available-memory guard also remains.
-For this bounded batch,288GiB is a prospective reserve:256GiB for the active
+For this bounded batch,288GiB is the frozen reserve:256GiB for the active
 quality study plus32GiB for its remaining checkpoint/evaluation/full-frame
-writes. The actual audited arrivals, free space and remaining writes must be
-recalculated before launch. This changes no running plan or downloader limit.
+writes. The actual audited selection/payload and available storage were
+recalculated before launch. This changes no existing quality-study plan.
 [Resource-policy changes and37 passing focused tests](results/commons-bounded-preparation-budget-v1.json).
 
 ## Admission into a future training corpus
@@ -103,13 +126,13 @@ headers/hashes; partial producers never enter training.
 
 `scripts/resume_commons_qi.sh` is the generic cooperating launcher. It supports
 `QI_RESERVE_GIB`, `QI_WORKERS`, `QI_REQUESTS_PER_SECOND`, `QI_DOWNLOADER`,
-`QI_ROOT` and `QI_LOG_FILE`; its defaults differ from the **current bounded
-plan above**. Do not start it alongside that job. `scripts/expand_commons.py`
+`QI_ROOT` and `QI_LOG_FILE`; its defaults differ from the completed bounded
+plan above. Do not start it alongside the cache producer. `scripts/expand_commons.py`
 and `scripts/rebin_commons_extension.py` implement earlier selection/preparation
 workflows. New arrivals use `scripts/prepare_downloaded_commons.py` for a frozen
 selection, verified original/attribution bytes, both cache scales and protected
-screening. It acquires the same download lock, so preparation starts after the
-current downloader exits. All prior prepared/quarantined/failed identities must
+screening. It acquires the same download lock, after the original downloader
+exits. All prior prepared/quarantined/failed identities must
 be excluded. Follow the [completed preparation](commons-post4557-preparation.md)
 and [reviewed coupled freeze](commons-post4557-reviewed.md) for the independent
 cache/source/neighbor review required before admission.
