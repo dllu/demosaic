@@ -1,0 +1,46 @@
+{
+  "schema": "linear-dng-feature-merge-validation-v1",
+  "recorded_local": "2026-10-22T23:13:52.579242-07:00",
+  "main_parent": "764ecaf2a6c02b544f268cb029954df0464b1e0f",
+  "feature_parent": "cf4635c22bc6e3fc650826170c734436e3087368",
+  "source_refs": {
+    "src/demosaic/dng.py": "dc2a54f4ee88d032013cf806892c1c1bb688b8c47a5efaaec738268f449c3999",
+    "src/demosaic/hotpixels.py": "213ed2b66364d3efc5bd975abf93e7e4f831635fff6f1c47c175c4e0209787cb",
+    "src/demosaic/io.py": "3e693732086ee6c4995989dbb9740dc76f3ee13449c407a85d89a138466f798a",
+    "scripts/export_raw_dng.py": "9263fc1919873b6838dd4a88b48395fb087cfa930337cfe0c6f0bf8bc60a48aa",
+    "tests/test_dng.py": "809c31aaced7a26bd467e759ce0fb40e651636cc26db6739eebdcedb23e02786",
+    "tests/test_hotpixels.py": "9c6341f78557d603e500a336dc4fe70d12f521d36e8a803279aae82cb9fb8eaf",
+    "tests/test_restoration.py": "43a3139f2778eb5a1c8ccd84c2884e9180609ff4e450fbacde129fafe027a429",
+    "tests/test_inference_alignment.py": "d2a64ff4c40ac8c1174b05cb38e5a75bb3eccbf63bffe5efd378eedae948e868",
+    "tests/test_calibration.py": "cbb4fe85611f616446297414489d801afdf53a1d890308397c59d9684450d37e",
+    "tests/test_real_noise_conditioning.py": "fca467e2f1650e9f1f354aab3b8de2e48de8a8a3694665d60dcd6eb5b97840be",
+    "docs/dng-export.md": "e4b57ce0cb27506aecf0989d0f8b750fbe87261eca4b9a313c4d5005361c413f",
+    "docs/index.md": "6f45c970cbab9dbf63733364182b769889c8a4081fc83e129d37e6d541aeeef6"
+  },
+  "pytest": {
+    "command": "CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 .venv/bin/python -m pytest -q tests/test_dng.py tests/test_hotpixels.py tests/test_restoration.py tests/test_inference_alignment.py tests/test_calibration.py tests/test_real_noise_conditioning.py --basetemp=.cache/pytest-linear-dng-merge-20261022-v1",
+    "exit_code": 0,
+    "passed": 66,
+    "skipped": 2,
+    "elapsed_seconds": 4.14,
+    "skip_reason": "Two existing CUDA numerical precision parameterizations; this merge validation hid CUDA to avoid competing with V103 training.",
+    "darktable_integration": "Both native JPEG and complete CPU RAW-to-DNG/JPEG batch tests ran and passed; no darktable integration skips.",
+    "coverage": [
+      "LibRaw independent exact RGB16 decoding, partial strips and four orientations",
+      "Color matrix and inverse white balance, no baked display transform",
+      "Hot-pixel repair across four CFA phases, original array unchanged, coherent detail/noise/strip invariance",
+      "Original RAW and sidecar remain unchanged; collision and destination checks",
+      "Native dimensions and sRGB ICC, JPEG 4:4:4, adapted sensor crop disabled",
+      "Existing TIFF, tiled inference alignment, calibration and real-noise conditioning"
+    ]
+  },
+  "style": {
+    "ruff_check": "passed: six feature Python files",
+    "ruff_format_check": "passed: six feature Python files",
+    "git_diff_cached_check": "passed"
+  },
+  "merge_resolution": "docs/index.md keeps current V101/V102 guidance and adds linear DNG/JPEG usage link. README and docs/usage merged automatically.",
+  "protocol": "Hot-pixel removal stays opt-in and off by default. No weights, training data, noise profiles or existing numerical evaluation settings changed.",
+  "active_work": "Verified original V103 trainer, preparation worker, retrieval waiter and evaluation/fullframe controllers remained live with original PID creation identities. No training or producer restarted.",
+  "limitations": "Small CPU integration fixtures validate export behavior; this is not an improved-model quality report or a new full-resolution speed benchmark."
+}
