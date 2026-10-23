@@ -46,6 +46,17 @@ fields; all frozen source files remain exact. The producer and trainer were
 confirmed live. [Actual startup sample](results/commons-post4000-preparation-startup-v1.json).
 These checks use complete temporary-manifest rows and do not finalize a corpus.
 
+A separate [source-contact queue](results/commons-post4000-contact-queue-v1.json)
+waits for the **complete4× manifest, finalized error file and summary with zero
+failures**, then renders all3,809 sources on39 sheets. It may run during8×
+preparation, but refuses a partial manifest or incomplete source coverage.
+Its explicit288GiB reserve retains48GiB RAM and all cache/source integrity
+checks. Eight focused tests and an actual two-source queue/renderer fixture
+pass; that fixture's PNG exactly matches the prechange renderer. Those two old
+engineering thumbnails were viewed, not the new source population. Rendering
+alone never supplies manual source-quality review or data admission.
+Root:`/mnt/external/demosaic/commons-post4000-contact-queue-20261022-v1/`.
+
 Current root: `/mnt/external/demosaic/commons-post4000-preparation-20261022-v1/`.
 `launch.json` records the exact timeout supervisor; `status.json` records the
 worker's PID/creation time and stage. Results will appear under`work/outputs/`.

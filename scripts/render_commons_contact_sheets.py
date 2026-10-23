@@ -79,12 +79,23 @@ def inventory(manifest, selection):
     return records
 
 
-def render(manifest, selection, output):
+def resources(output, reserve_gib=548):
+    if type(reserve_gib) is not int or reserve_gib < 256:
+        raise ValueError("External disk reserve must be an integer of at least256GiB")
+    if (
+        psutil.virtual_memory().available < 48 * 2**30
+        or shutil.disk_usage(output).free < reserve_gib * 2**30
+    ):
+        raise RuntimeError("Source review exceeded declared RAM/disk reserves")
+
+
+def render(manifest, selection, output, *, reserve_gib=548):
     output = Path(output).resolve()
     if output.exists() or not output.is_relative_to("/mnt/external/demosaic"):
         raise ValueError("Use a fresh external demosaic contact root")
     if os.environ.get("CUDA_VISIBLE_DEVICES") != "":
         raise ValueError("Hide CUDA for source review")
+    resources(output.parent, reserve_gib)
     bindings = [ref(manifest), ref(selection), ref(__file__)]
     records = inventory(manifest, selection)
     output.mkdir(parents=True)
@@ -94,12 +105,9 @@ def render(manifest, selection, output):
     started = time.monotonic()
     contacts = []
     for page in range(math.ceil(len(records) / 100)):
-        if (
-            psutil.virtual_memory().available < 48 * 2**30
-            or shutil.disk_usage(output).free < 548 * 2**30
-            or time.monotonic() - started > 3600
-        ):
-            raise RuntimeError("Source review exceeded declared RAM/disk/time reserves")
+        resources(output, reserve_gib)
+        if time.monotonic() - started > 3600:
+            raise RuntimeError("Source review exceeded the declared time bound")
         sheet = Image.new("RGB", (1400, 1200), "#e8e8e8")
         draw = ImageDraw.Draw(sheet)
         group = records[page * 100 : (page + 1) * 100]
@@ -137,6 +145,7 @@ def render(manifest, selection, output):
         "contacts": contacts,
         "count": len(records),
         "bin_factors": sorted({r["bin_factor"] for r in records}),
+        "external_reserve_gib": reserve_gib,
         "all_cache_hashes_and_headers_checked": True,
         "elapsed_seconds": time.monotonic() - started,
         "display": "Full cached image fit within136x96, independent F32 linear-light RGB planes BOX-area resized then sRGB and RGB8. No exposure adjustment. Source thumbnails, not native performance crops.",
@@ -160,5 +169,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ["manifest", "selection", "output"]:
         parser.add_argument("--" + name, type=Path, required=True)
+    parser.add_argument("--reserve-gib", type=int, default=548)
     args = parser.parse_args()
-    render(args.manifest, args.selection, args.output)
+    render(args.manifest, args.selection, args.output, reserve_gib=args.reserve_gib)

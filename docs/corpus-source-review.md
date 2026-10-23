@@ -17,6 +17,12 @@ neither changes completed V100/V101 inputs.
 Originals, existing manifests and protected evaluation scenes remain read-only.
 The GFX train/platform pair and siblings remain outside training.
 
+The next [3,809-source arrival batch](commons-download.md) is preparing both
+cache scales separately. Its complete4× source-contact queue will render39
+sheets for actual visual inspection after all4× outputs finalize. These
+arrivals do not contribute to the570 reviewed-training-source count above,
+and remain outside current training pending the full cache/overlap/content review.
+
 ## Selection and inspection
 
 The prepared pool contains 88,508 eligible Commons training sources at 4×/8×
