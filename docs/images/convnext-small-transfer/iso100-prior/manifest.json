@@ -1,0 +1,1444 @@
+{
+  "source_report": {
+    "path": "/mnt/external/demosaic/convnext-small-transfer-CPU-20261023-v1/results/report.json",
+    "sha256": "55dc751307dce55a592c48b7ebbc996ad3721748585f73035dfc4fc2529aa913"
+  },
+  "labels": {
+    "Tiny-original": "V102",
+    "Small-swap": "Small swap",
+    "Tiny-zero": "Tiny zero",
+    "Small-zero": "Small zero"
+  },
+  "native_crops": [
+    {
+      "image": "Tiny-original-0ae232278265.png",
+      "caption": "Fine pale bark grain and fissures / iso100-prior / Tiny-original",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "410130b552b9c51659e480d73dce5219b3941f12d07b0cf8027b1003b416a3aa",
+      "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+      "source": {
+        "title": "File:Kentucky Coffee-tree Gymnocladus dioicus 3264px.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Photo (c)2007 Derek Ramsey (Ram-Man)",
+        "license": "CC BY-SA 2.5",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.5",
+        "attribution": null,
+        "credit": "Self-photographed",
+        "sha1": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+        "sha1_hex": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+        "download_path": "images/0a/e2/0ae232278265dabbdd54f52c34045a3d03323aa7.jpg",
+        "width": 3264,
+        "height": 2448,
+        "id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/0a/0ae232278265dabbdd54f52c34045a3d03323aa7.npy",
+        "shape": [
+          306,
+          408,
+          3
+        ],
+        "cache_sha256": "a2c1759485e1be5d43c88f439ff801da4a5f39e68953bcb966b66e813788e563"
+      },
+      "condition": {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      "pattern": "RGGB",
+      "evaluation_tile_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "source_cache_context_xywh": [
+        104,
+        38,
+        256,
+        256
+      ],
+      "model": {
+        "label": "Tiny-original",
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+          "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a"
+        },
+        "gate_reset": false,
+        "backbone_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "backbone_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+        "effective_model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "backbone_numeric_SHA256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd",
+        "base_checkpoint": {
+          "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+          "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a"
+        },
+        "new_training_updates": 0,
+        "inherited_step_is_base_EMA_history": 20000,
+        "device": "cpu",
+        "compute_precision": "float32"
+      },
+      "display_exposure": 1,
+      "reference": "Exact synthetic clean target",
+      "observation": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/heldout-detail-followup-v1/inputs/0ae232278265dabbdd54f52c34045a3d03323aa7-iso100-prior-RGGB.npz",
+        "sha256": "c23ea9d37080fe8d1f07d2399a4f906b26f9dfc71add9ec2eb4c69b7649ecd95"
+      },
+      "scope": "Four selected cached bark/canopy low/high-noise cases,CPU FP32,zero new training updates. Blind frozen Tiny-to-Small backbone swap transfers exact91 learned EMA tensors; it is not assumed function-preserving. Paired gate-zero variants change only3 gate tensors and test a common initial function. Native160 triplets,official pinned backbone identities and all changes disclosed. No full427 result,production baseline change,GPU training or speed test."
+    },
+    {
+      "image": "Tiny-original-212ae12913ef.png",
+      "caption": "Fine forest canopy and weak distant tree structure / iso100-prior / Tiny-original",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "72ce1f2aa7bf606db5d7c5cacaae6b5e5aea4dccab6d4da1e5c449f1707ee5cd",
+      "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+      "source": {
+        "title": "File:Forest covered hills on Yakushima.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Forest_covered_hills_on_Yakushima.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Forest_covered_hills_on_Yakushima.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Grendelkhan",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "attribution": null,
+        "credit": "Own work",
+        "sha1": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+        "sha1_hex": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+        "download_path": "images/21/2a/212ae12913effa23268af953b4c8f8e8b7ab4ef5.jpg",
+        "width": 4048,
+        "height": 3036,
+        "id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/21/212ae12913effa23268af953b4c8f8e8b7ab4ef5.npy",
+        "shape": [
+          379,
+          506,
+          3
+        ],
+        "cache_sha256": "93b465730cea963f16edf53d3b3c2187dfa9519b0ff6a8b8d1e57e1f7db3d30b"
+      },
+      "condition": {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      "pattern": "RGGB",
+      "evaluation_tile_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "source_cache_context_xywh": [
+        133,
+        67,
+        256,
+        256
+      ],
+      "model": {
+        "label": "Tiny-original",
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+          "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a"
+        },
+        "gate_reset": false,
+        "backbone_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "backbone_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+        "effective_model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "backbone_numeric_SHA256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd",
+        "base_checkpoint": {
+          "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+          "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a"
+        },
+        "new_training_updates": 0,
+        "inherited_step_is_base_EMA_history": 20000,
+        "device": "cpu",
+        "compute_precision": "float32"
+      },
+      "display_exposure": 1,
+      "reference": "Exact synthetic clean target",
+      "observation": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/heldout-detail-followup-v1/inputs/212ae12913effa23268af953b4c8f8e8b7ab4ef5-iso100-prior-RGGB.npz",
+        "sha256": "33140a02ebc311c73d14fcd60faa75ae45be0f4f70175dd9f6a16cbd83035ba8"
+      },
+      "scope": "Four selected cached bark/canopy low/high-noise cases,CPU FP32,zero new training updates. Blind frozen Tiny-to-Small backbone swap transfers exact91 learned EMA tensors; it is not assumed function-preserving. Paired gate-zero variants change only3 gate tensors and test a common initial function. Native160 triplets,official pinned backbone identities and all changes disclosed. No full427 result,production baseline change,GPU training or speed test."
+    },
+    {
+      "image": "Small-swap-0ae232278265.png",
+      "caption": "Fine pale bark grain and fissures / iso100-prior / Small-swap",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "659b564118da0d6d28d0357ab0a4af214956ab4aa0015dddc146e97b5e8d6901",
+      "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+      "source": {
+        "title": "File:Kentucky Coffee-tree Gymnocladus dioicus 3264px.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Photo (c)2007 Derek Ramsey (Ram-Man)",
+        "license": "CC BY-SA 2.5",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.5",
+        "attribution": null,
+        "credit": "Self-photographed",
+        "sha1": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+        "sha1_hex": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+        "download_path": "images/0a/e2/0ae232278265dabbdd54f52c34045a3d03323aa7.jpg",
+        "width": 3264,
+        "height": 2448,
+        "id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/0a/0ae232278265dabbdd54f52c34045a3d03323aa7.npy",
+        "shape": [
+          306,
+          408,
+          3
+        ],
+        "cache_sha256": "a2c1759485e1be5d43c88f439ff801da4a5f39e68953bcb966b66e813788e563"
+      },
+      "condition": {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      "pattern": "RGGB",
+      "evaluation_tile_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "source_cache_context_xywh": [
+        104,
+        38,
+        256,
+        256
+      ],
+      "model": {
+        "label": "Small-swap",
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/convnext-small-transfer-CPU-20261023-v1/Small-swap.pt",
+          "sha256": "66d945f2df49dc7ea05489aba52516d0e97ccc0e77d8e56ab9f1d1c064fafd33"
+        },
+        "gate_reset": false,
+        "backbone_model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+        "backbone_revision": "421020015aa4266363db803b6049a529999afb1e",
+        "only_base_restoration_tensors_changed": [],
+        "new_training_updates": 0,
+        "sha256": "66d945f2df49dc7ea05489aba52516d0e97ccc0e77d8e56ab9f1d1c064fafd33",
+        "effective_model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+          "dino_revision": "421020015aa4266363db803b6049a529999afb1e",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "backbone_numeric_SHA256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14",
+        "base_checkpoint": {
+          "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+          "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a"
+        },
+        "inherited_step_is_base_EMA_history": 20000,
+        "device": "cpu",
+        "compute_precision": "float32"
+      },
+      "display_exposure": 1,
+      "reference": "Exact synthetic clean target",
+      "observation": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/heldout-detail-followup-v1/inputs/0ae232278265dabbdd54f52c34045a3d03323aa7-iso100-prior-RGGB.npz",
+        "sha256": "c23ea9d37080fe8d1f07d2399a4f906b26f9dfc71add9ec2eb4c69b7649ecd95"
+      },
+      "scope": "Four selected cached bark/canopy low/high-noise cases,CPU FP32,zero new training updates. Blind frozen Tiny-to-Small backbone swap transfers exact91 learned EMA tensors; it is not assumed function-preserving. Paired gate-zero variants change only3 gate tensors and test a common initial function. Native160 triplets,official pinned backbone identities and all changes disclosed. No full427 result,production baseline change,GPU training or speed test."
+    },
+    {
+      "image": "Small-swap-212ae12913ef.png",
+      "caption": "Fine forest canopy and weak distant tree structure / iso100-prior / Small-swap",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "f257131cfb96bf3de9a607c2eaab5303f00e94515dac53ff895a5be9282ffa0d",
+      "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+      "source": {
+        "title": "File:Forest covered hills on Yakushima.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Forest_covered_hills_on_Yakushima.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Forest_covered_hills_on_Yakushima.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Grendelkhan",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "attribution": null,
+        "credit": "Own work",
+        "sha1": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+        "sha1_hex": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+        "download_path": "images/21/2a/212ae12913effa23268af953b4c8f8e8b7ab4ef5.jpg",
+        "width": 4048,
+        "height": 3036,
+        "id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/21/212ae12913effa23268af953b4c8f8e8b7ab4ef5.npy",
+        "shape": [
+          379,
+          506,
+          3
+        ],
+        "cache_sha256": "93b465730cea963f16edf53d3b3c2187dfa9519b0ff6a8b8d1e57e1f7db3d30b"
+      },
+      "condition": {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      "pattern": "RGGB",
+      "evaluation_tile_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "source_cache_context_xywh": [
+        133,
+        67,
+        256,
+        256
+      ],
+      "model": {
+        "label": "Small-swap",
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/convnext-small-transfer-CPU-20261023-v1/Small-swap.pt",
+          "sha256": "66d945f2df49dc7ea05489aba52516d0e97ccc0e77d8e56ab9f1d1c064fafd33"
+        },
+        "gate_reset": false,
+        "backbone_model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+        "backbone_revision": "421020015aa4266363db803b6049a529999afb1e",
+        "only_base_restoration_tensors_changed": [],
+        "new_training_updates": 0,
+        "sha256": "66d945f2df49dc7ea05489aba52516d0e97ccc0e77d8e56ab9f1d1c064fafd33",
+        "effective_model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+          "dino_revision": "421020015aa4266363db803b6049a529999afb1e",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "backbone_numeric_SHA256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14",
+        "base_checkpoint": {
+          "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+          "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a"
+        },
+        "inherited_step_is_base_EMA_history": 20000,
+        "device": "cpu",
+        "compute_precision": "float32"
+      },
+      "display_exposure": 1,
+      "reference": "Exact synthetic clean target",
+      "observation": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/heldout-detail-followup-v1/inputs/212ae12913effa23268af953b4c8f8e8b7ab4ef5-iso100-prior-RGGB.npz",
+        "sha256": "33140a02ebc311c73d14fcd60faa75ae45be0f4f70175dd9f6a16cbd83035ba8"
+      },
+      "scope": "Four selected cached bark/canopy low/high-noise cases,CPU FP32,zero new training updates. Blind frozen Tiny-to-Small backbone swap transfers exact91 learned EMA tensors; it is not assumed function-preserving. Paired gate-zero variants change only3 gate tensors and test a common initial function. Native160 triplets,official pinned backbone identities and all changes disclosed. No full427 result,production baseline change,GPU training or speed test."
+    },
+    {
+      "image": "Tiny-zero-0ae232278265.png",
+      "caption": "Fine pale bark grain and fissures / iso100-prior / Tiny-zero",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "e34f4118258dca6fe199971ba0aaa8b290fd6821148eb5955e55a067cae53dfb",
+      "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+      "source": {
+        "title": "File:Kentucky Coffee-tree Gymnocladus dioicus 3264px.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Photo (c)2007 Derek Ramsey (Ram-Man)",
+        "license": "CC BY-SA 2.5",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.5",
+        "attribution": null,
+        "credit": "Self-photographed",
+        "sha1": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+        "sha1_hex": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+        "download_path": "images/0a/e2/0ae232278265dabbdd54f52c34045a3d03323aa7.jpg",
+        "width": 3264,
+        "height": 2448,
+        "id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/0a/0ae232278265dabbdd54f52c34045a3d03323aa7.npy",
+        "shape": [
+          306,
+          408,
+          3
+        ],
+        "cache_sha256": "a2c1759485e1be5d43c88f439ff801da4a5f39e68953bcb966b66e813788e563"
+      },
+      "condition": {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      "pattern": "RGGB",
+      "evaluation_tile_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "source_cache_context_xywh": [
+        104,
+        38,
+        256,
+        256
+      ],
+      "model": {
+        "label": "Tiny-zero",
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/convnext-small-transfer-CPU-20261023-v1/Tiny-zero.pt",
+          "sha256": "ae5dfa93f03cd241f1e212b6dcfa5f0fdbe6ac5cff9b9eda57b64cb40b2418c5"
+        },
+        "gate_reset": true,
+        "backbone_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "backbone_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "only_base_restoration_tensors_changed": [
+          "context.gates.0",
+          "context.gates.1",
+          "context.gates.2"
+        ],
+        "new_training_updates": 0,
+        "sha256": "ae5dfa93f03cd241f1e212b6dcfa5f0fdbe6ac5cff9b9eda57b64cb40b2418c5",
+        "effective_model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "backbone_numeric_SHA256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd",
+        "base_checkpoint": {
+          "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+          "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a"
+        },
+        "inherited_step_is_base_EMA_history": 20000,
+        "device": "cpu",
+        "compute_precision": "float32"
+      },
+      "display_exposure": 1,
+      "reference": "Exact synthetic clean target",
+      "observation": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/heldout-detail-followup-v1/inputs/0ae232278265dabbdd54f52c34045a3d03323aa7-iso100-prior-RGGB.npz",
+        "sha256": "c23ea9d37080fe8d1f07d2399a4f906b26f9dfc71add9ec2eb4c69b7649ecd95"
+      },
+      "scope": "Four selected cached bark/canopy low/high-noise cases,CPU FP32,zero new training updates. Blind frozen Tiny-to-Small backbone swap transfers exact91 learned EMA tensors; it is not assumed function-preserving. Paired gate-zero variants change only3 gate tensors and test a common initial function. Native160 triplets,official pinned backbone identities and all changes disclosed. No full427 result,production baseline change,GPU training or speed test."
+    },
+    {
+      "image": "Tiny-zero-212ae12913ef.png",
+      "caption": "Fine forest canopy and weak distant tree structure / iso100-prior / Tiny-zero",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "d1d7c42b1a4080c01d0c020611e01a39b4f1fe6c9f923e3de8696a046877f264",
+      "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+      "source": {
+        "title": "File:Forest covered hills on Yakushima.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Forest_covered_hills_on_Yakushima.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Forest_covered_hills_on_Yakushima.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Grendelkhan",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "attribution": null,
+        "credit": "Own work",
+        "sha1": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+        "sha1_hex": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+        "download_path": "images/21/2a/212ae12913effa23268af953b4c8f8e8b7ab4ef5.jpg",
+        "width": 4048,
+        "height": 3036,
+        "id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/21/212ae12913effa23268af953b4c8f8e8b7ab4ef5.npy",
+        "shape": [
+          379,
+          506,
+          3
+        ],
+        "cache_sha256": "93b465730cea963f16edf53d3b3c2187dfa9519b0ff6a8b8d1e57e1f7db3d30b"
+      },
+      "condition": {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      "pattern": "RGGB",
+      "evaluation_tile_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "source_cache_context_xywh": [
+        133,
+        67,
+        256,
+        256
+      ],
+      "model": {
+        "label": "Tiny-zero",
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/convnext-small-transfer-CPU-20261023-v1/Tiny-zero.pt",
+          "sha256": "ae5dfa93f03cd241f1e212b6dcfa5f0fdbe6ac5cff9b9eda57b64cb40b2418c5"
+        },
+        "gate_reset": true,
+        "backbone_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "backbone_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "only_base_restoration_tensors_changed": [
+          "context.gates.0",
+          "context.gates.1",
+          "context.gates.2"
+        ],
+        "new_training_updates": 0,
+        "sha256": "ae5dfa93f03cd241f1e212b6dcfa5f0fdbe6ac5cff9b9eda57b64cb40b2418c5",
+        "effective_model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "backbone_numeric_SHA256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd",
+        "base_checkpoint": {
+          "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+          "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a"
+        },
+        "inherited_step_is_base_EMA_history": 20000,
+        "device": "cpu",
+        "compute_precision": "float32"
+      },
+      "display_exposure": 1,
+      "reference": "Exact synthetic clean target",
+      "observation": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/heldout-detail-followup-v1/inputs/212ae12913effa23268af953b4c8f8e8b7ab4ef5-iso100-prior-RGGB.npz",
+        "sha256": "33140a02ebc311c73d14fcd60faa75ae45be0f4f70175dd9f6a16cbd83035ba8"
+      },
+      "scope": "Four selected cached bark/canopy low/high-noise cases,CPU FP32,zero new training updates. Blind frozen Tiny-to-Small backbone swap transfers exact91 learned EMA tensors; it is not assumed function-preserving. Paired gate-zero variants change only3 gate tensors and test a common initial function. Native160 triplets,official pinned backbone identities and all changes disclosed. No full427 result,production baseline change,GPU training or speed test."
+    },
+    {
+      "image": "Small-zero-0ae232278265.png",
+      "caption": "Fine pale bark grain and fissures / iso100-prior / Small-zero",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "e34f4118258dca6fe199971ba0aaa8b290fd6821148eb5955e55a067cae53dfb",
+      "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+      "source": {
+        "title": "File:Kentucky Coffee-tree Gymnocladus dioicus 3264px.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Photo (c)2007 Derek Ramsey (Ram-Man)",
+        "license": "CC BY-SA 2.5",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.5",
+        "attribution": null,
+        "credit": "Self-photographed",
+        "sha1": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+        "sha1_hex": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+        "download_path": "images/0a/e2/0ae232278265dabbdd54f52c34045a3d03323aa7.jpg",
+        "width": 3264,
+        "height": 2448,
+        "id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/0a/0ae232278265dabbdd54f52c34045a3d03323aa7.npy",
+        "shape": [
+          306,
+          408,
+          3
+        ],
+        "cache_sha256": "a2c1759485e1be5d43c88f439ff801da4a5f39e68953bcb966b66e813788e563"
+      },
+      "condition": {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      "pattern": "RGGB",
+      "evaluation_tile_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "source_cache_context_xywh": [
+        104,
+        38,
+        256,
+        256
+      ],
+      "model": {
+        "label": "Small-zero",
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/convnext-small-transfer-CPU-20261023-v1/Small-zero.pt",
+          "sha256": "2e112b0ae9e0f3a60b673b9d7f67cd60449e49f3b43682995f354fa475971886"
+        },
+        "gate_reset": true,
+        "backbone_model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+        "backbone_revision": "421020015aa4266363db803b6049a529999afb1e",
+        "only_base_restoration_tensors_changed": [
+          "context.gates.0",
+          "context.gates.1",
+          "context.gates.2"
+        ],
+        "new_training_updates": 0,
+        "sha256": "2e112b0ae9e0f3a60b673b9d7f67cd60449e49f3b43682995f354fa475971886",
+        "effective_model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+          "dino_revision": "421020015aa4266363db803b6049a529999afb1e",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "backbone_numeric_SHA256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14",
+        "base_checkpoint": {
+          "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+          "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a"
+        },
+        "inherited_step_is_base_EMA_history": 20000,
+        "device": "cpu",
+        "compute_precision": "float32"
+      },
+      "display_exposure": 1,
+      "reference": "Exact synthetic clean target",
+      "observation": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/heldout-detail-followup-v1/inputs/0ae232278265dabbdd54f52c34045a3d03323aa7-iso100-prior-RGGB.npz",
+        "sha256": "c23ea9d37080fe8d1f07d2399a4f906b26f9dfc71add9ec2eb4c69b7649ecd95"
+      },
+      "scope": "Four selected cached bark/canopy low/high-noise cases,CPU FP32,zero new training updates. Blind frozen Tiny-to-Small backbone swap transfers exact91 learned EMA tensors; it is not assumed function-preserving. Paired gate-zero variants change only3 gate tensors and test a common initial function. Native160 triplets,official pinned backbone identities and all changes disclosed. No full427 result,production baseline change,GPU training or speed test."
+    },
+    {
+      "image": "Small-zero-212ae12913ef.png",
+      "caption": "Fine forest canopy and weak distant tree structure / iso100-prior / Small-zero",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "d1d7c42b1a4080c01d0c020611e01a39b4f1fe6c9f923e3de8696a046877f264",
+      "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+      "source": {
+        "title": "File:Forest covered hills on Yakushima.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Forest_covered_hills_on_Yakushima.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Forest_covered_hills_on_Yakushima.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Grendelkhan",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "attribution": null,
+        "credit": "Own work",
+        "sha1": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+        "sha1_hex": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+        "download_path": "images/21/2a/212ae12913effa23268af953b4c8f8e8b7ab4ef5.jpg",
+        "width": 4048,
+        "height": 3036,
+        "id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/21/212ae12913effa23268af953b4c8f8e8b7ab4ef5.npy",
+        "shape": [
+          379,
+          506,
+          3
+        ],
+        "cache_sha256": "93b465730cea963f16edf53d3b3c2187dfa9519b0ff6a8b8d1e57e1f7db3d30b"
+      },
+      "condition": {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      "pattern": "RGGB",
+      "evaluation_tile_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "source_cache_context_xywh": [
+        133,
+        67,
+        256,
+        256
+      ],
+      "model": {
+        "label": "Small-zero",
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/convnext-small-transfer-CPU-20261023-v1/Small-zero.pt",
+          "sha256": "2e112b0ae9e0f3a60b673b9d7f67cd60449e49f3b43682995f354fa475971886"
+        },
+        "gate_reset": true,
+        "backbone_model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+        "backbone_revision": "421020015aa4266363db803b6049a529999afb1e",
+        "only_base_restoration_tensors_changed": [
+          "context.gates.0",
+          "context.gates.1",
+          "context.gates.2"
+        ],
+        "new_training_updates": 0,
+        "sha256": "2e112b0ae9e0f3a60b673b9d7f67cd60449e49f3b43682995f354fa475971886",
+        "effective_model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+          "dino_revision": "421020015aa4266363db803b6049a529999afb1e",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "backbone_numeric_SHA256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14",
+        "base_checkpoint": {
+          "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+          "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a"
+        },
+        "inherited_step_is_base_EMA_history": 20000,
+        "device": "cpu",
+        "compute_precision": "float32"
+      },
+      "display_exposure": 1,
+      "reference": "Exact synthetic clean target",
+      "observation": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/heldout-detail-followup-v1/inputs/212ae12913effa23268af953b4c8f8e8b7ab4ef5-iso100-prior-RGGB.npz",
+        "sha256": "33140a02ebc311c73d14fcd60faa75ae45be0f4f70175dd9f6a16cbd83035ba8"
+      },
+      "scope": "Four selected cached bark/canopy low/high-noise cases,CPU FP32,zero new training updates. Blind frozen Tiny-to-Small backbone swap transfers exact91 learned EMA tensors; it is not assumed function-preserving. Paired gate-zero variants change only3 gate tensors and test a common initial function. Native160 triplets,official pinned backbone identities and all changes disclosed. No full427 result,production baseline change,GPU training or speed test."
+    }
+  ]
+}

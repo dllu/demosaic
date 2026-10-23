@@ -19,6 +19,13 @@ unavailable clean-image oracle is never a candidate method. Current quality
 work continues from V102 on the reviewed larger corpus; the fixed V104 endpoint
 will receive the same material/detail and full matched evaluation.
 
+The [larger frozen ConvNeXt check](convnext-small-capacity.md) now pins official
+Small weights and verifies compatible native feature shapes. A direct backbone
+swap loses quality on four material cases. Resetting the fusion gates gives
+Tiny/Small an exact common starting function, and both pass eight discarded
+CPU optimizer updates with matching initial prediction/loss and batch hashes.
+This prepares a later trained capacity comparison; V104's data experiment continues.
+
 Research started 2026-10-14. Sources below are primary implementations, papers,
 and vendor documentation. A recent publication is not itself evidence that this
 project matches its performance.

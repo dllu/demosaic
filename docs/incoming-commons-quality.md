@@ -4,7 +4,10 @@ All **3,807 valid arrivals** have now had their full-image thumbnail contexts
 inspected across 39 sheets. Initial follow-up covered **61 source identities**:
 69 four-panel native views and one additional native 1024 crop. The loss-tail
 follow-up below adds **11 identities**, bringing targeted native review to
-**72 unique sources**. This is not a native-quality audit of every image in the batch.
+**72 unique sources**. A subsequent [review of 14 more candidates](results/incoming-source-loss-prefix192-native-review-v1.json)
+from the 192-source ranking snapshot retains all 14, bringing actual native
+inspection to 86 unique source identities. Full-tail review is still pending; this is not
+a native-quality audit of every image in the batch.
 [Sources, decisions, exact views and hashes](results/commons-post4000-source-quality-v1.json).
 
 Four train-bucket sources are withheld: three artwork-only reproductions and
