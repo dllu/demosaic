@@ -1,12 +1,13 @@
 # Quality training in the V84 architectural family
 
-**Use V101 as the next quality-training checkpoint, retaining V84's DRUNet RGB
-trunk and frozen DINOv3 ConvNeXt-Tiny pyramid.** The completed matched comparison
+**Continue quality work in V84's DRUNet RGB/frozen DINOv3 ConvNeXt-Tiny family.**
+V102 final20k now has the best selected material-detail results and is available
+for further development. V101 is the fully benchmarked default; its matched comparison
 reaches 36.50347 dB photographic PSNR (+.06351 dB over V84), with gains across all
 seven conditions and camera means close to V84. Native high-noise fine-detail
 loss remains. [Results and comparisons](v84-curated-quality-review.md).
 
-## Next matched comparison: V102/V103
+## Current matched comparison: V102/V103
 
 Both runs continue the exact final V101 EMA on the newly frozen 88,477-source
 cohort, with fresh AdamW/EMA. They retain the zero-PSF, weak-texture and
@@ -29,26 +30,27 @@ while rebinding to the same new manifest.
 [Expanded recipe](../configs/quality-v101-detail-expanded-v103.yaml) ·
 [Actual launch and discarded CPU/CUDA checks](results/v101-detail-diversity-training-launch-v1.json).
 All four eight-update checks passed from exact V101 weights with finite states
-and unchanged official DINO. Production starts freshly again. V102 is running;
-V103 follows it. Both fixed20k endpoints have matched evaluation queued.
+and unchanged official DINO. Both production arms start freshly again. V102
+has completed its original20k updates and exited; V103 is running. Both fixed
+endpoints have matched evaluation queued.
 The larger budget also improves source exposure compared with the 10k pilot.
 
-The **fixed V102@5000 progress checkpoint** already improves all12 selected
-detail-case PSNR/gradient scores over V101, by +.158/+.149/+.020dB mean PSNR
-at ADC/ISO100/ISO12800. Its [native comparisons](heldout-detail.md) and
-[GFX contexts](gfx-qualitative.md#v102-at-5000-updates) are published now.
-Two SSIM cases and one chroma case regress slightly; high-noise detail and real
-foliage remain soft. This captures useful quarter-budget progress without
-changing the final20k comparison or claiming full-panel/camera gains.
-[Checkpoint boundary and actual native review](results/V102-progress5000-detail-GFX-CPU-v1.json).
+The **original V102 final20k endpoint** improves all12 selected material cases
+in PSNR, SSIM, chroma and gradient error versus both V101 and fixed5000. Mean
+PSNR gains over V101 are +.362/+.285/+.043dB at ADC/ISO100/ISO12800. Its
+[native comparisons](heldout-detail.md) and
+[cached GFX contexts](gfx-qualitative.md#v102-at-5000-and-20000-updates) are published.
+Low-noise bark/canopy improve modestly; high-noise detail and real foliage
+remain soft. This is selected-panel progress, not full427/camera proof.
+[Checkpoint, scores and126 actually viewed native cells](results/V102-final20000-detail-GFX-CPU-v1.json).
 
-An [early final-V102 CPU report queue](results/V102-final20000-CPU-report-queue-v1.json)
-will freeze the original20k endpoint only after its exact training child exits
-and completion/lineage/state checks pass. It will report the same12 selected
-material cases and six cached GFX contexts while V103 can continue. Its52
-reporting sources match the executed5k comparison; nine metadata-gate controls
-pass. Quality/native results remain pending. The full matched panels and
-complete GFX exports below still wait for both original20k endpoints.
+The early final-V102 CPU comparison has completed while V103 continues. It
+uses the original fixed endpoint and loader-resolved parent architecture, with
+all91 tensor names/shapes matching, finite model/EMA/Adam and exact lineage.
+Cached GFX inputs reproduce all six V101 float contexts/PNGs without RAF decode.
+The receipt preserves the corrected reporting preflight/metadata provenance;
+the original training and full evaluation queues remain unchanged. The full
+matched panels and complete exports below still wait for both original20k endpoints.
 
 Frozen plan: `.cache/current-quality-20261022-v1/detail-diversity-training-v1/plan.json`.
 Artifacts: `/mnt/external/demosaic/v101-detail-diversity-20261022-v1/`.

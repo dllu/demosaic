@@ -1,9 +1,9 @@
 # GFX100S qualitative comparisons
 
-**Current comparisons include V84, completed V100/V101 and V102 at5,000 updates**
+**Current comparisons include V102 final20k, fixed5k and complete V84/V100/V101 outputs**
 on the standing train/platform scene. V101 is the current
-recommended checkpoint after its [completed photographic gain](v84-curated-quality-review.md);
-these real-capture results look close across the three
+fully benchmarked default after its [completed photographic gain](v84-curated-quality-review.md);
+these real-capture results look close across the
 learned checkpoints. They retain more coherent fence strands and cleaner
 building rails than RawNIND here. Foliage remains smooth, and saturated-light
 shapes/boundaries remain areas to improve.
@@ -12,8 +12,41 @@ The [fixed-V101 conditioning study](noise-conditioning.md#real-gfx-contexts)
 compares .50/.75/1.00/1.25× variance strengths on these same six regions. Lower
 strengths retain more wall/foliage texture and grain; higher strength smooths
 further. It uses cached CPU 512 contexts, with no reference scoring or production
-default change. The full-frame comparison below uses the original 1× conditioning and
-complete full-frame blends.
+default change. The comparisons retain the original1× conditioning.
+
+<a id="v102-at-5000-updates"></a>
+
+## V102 at 5000 and 20000 updates
+
+V102's original20k endpoint improves all12 selected material-case PSNR, SSIM,
+chroma and gradient scores over V101 and fixed5000. These real-capture outputs
+remain close: foliage is still soft and saturated sign structure needs work.
+They are **CPU512 context restorations**, separate from complete blended frames.
+The last column is the independent ISO100 f/5.6 reference, **not GT**.
+
+![Six native regions: noisy, V101, V102 final20k, V102@5000 and independent ISO100 reference](images/current-gfx-v102-final/gfx-comparison.png)
+
+Each cell is160×160 native sensor pixels, with shared coordinates, original
+physical conditioning and +2EV display. All30 cells were actually viewed;
+shared noisy/reference pixels match exactly. Cached Bayer/reference arrays
+avoid RAF decoding and source-HDD reads. V101 reproduces all six earlier float
+predictions and triplet PNGs exactly. No RGB reference scores are computed.
+
+V102 final20k triplets: [foliage](images/current-gfx-v102-final/V102-final20000-foliage.png)
+([metadata](images/current-gfx-v102-final/V102-final20000-foliage.json)) and
+[fence](images/current-gfx-v102-final/V102-final20000-chain-link-fence.png)
+([metadata](images/current-gfx-v102-final/V102-final20000-chain-link-fence.json)).
+[All18 triplets, ROI/noise/display/checkpoint metadata](images/current-gfx-v102-final/manifest.json) ·
+[Final checkpoint, exact parent replay and actual native review](results/V102-final20000-detail-GFX-CPU-v1.json).
+The receipt also preserves the original worker report and the correction of a
+copied duplicate checkpoint field; PNGs and float predictions are unchanged.
+
+Read-only checkpoint:`/mnt/external/demosaic/models/v102-final20000.pt`, SHA256
+`55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a`.
+The [fixed5k evidence](results/V102-progress5000-detail-GFX-CPU-v1.json) remains
+available. V103 and the full matched panels/complete exports are still pending.
+
+## Complete full-frame comparisons
 
 ![Current native sky, building, foliage, fence and illuminated-region comparisons](images/current-gfx-fullframe/gfx-comparison.png)
 
@@ -49,35 +82,6 @@ older gallery's receipt; current predictions/reference pixels are never
 adjusted for presentation.
 The [Q2, Sony a7RII and GFX50R comparison](cross-camera-qualitative.md) adds
 V84/V100 on six low-ISO regions, without a clean reference.
-
-## V102 at 5000 updates
-
-V102's fixed quarter-budget checkpoint adds small gains on the selected
-[synthetic fine-detail cases](heldout-detail.md), so it is included here while
-its original20k training continues. These are **CPU512 context restorations**,
-separate from the complete blended outputs above. Both methods use the same
-six cached observations, original1× physical conditioning and +2EV display.
-V101's float predictions and PNGs reproduce its earlier CPU report exactly.
-
-![Six native regions: noisy, V101, V102 at5000 updates and independent ISO100 reference](images/progress-v102-5000/gfx/gfx-comparison.png)
-
-The learned real-photo outputs remain close. Foliage remains soft and saturated
-sign structure still needs improvement; this is useful progress tracking,
-without a claim of a large real-capture breakthrough. Each cell is160×160
-sensor pixels. All24 native cells were viewed; noisy/reference pixels match
-exactly across methods. The independent ISO100 f/5.6 capture remains **not GT**,
-and is never a pixelwise scoring target.
-
-V102 triplets: [foliage](images/progress-v102-5000/gfx/V102@5000-foliage.png)
-([metadata](images/progress-v102-5000/gfx/V102@5000-foliage.json)) and
-[fence](images/progress-v102-5000/gfx/V102@5000-chain-link-fence.png)
-([metadata](images/progress-v102-5000/gfx/V102@5000-chain-link-fence.json)).
-[All12 triplets, coordinates, exposure/noise and checkpoint hashes](images/progress-v102-5000/gfx/manifest.json) ·
-[Fixed checkpoint, parent replay and viewed-image receipt](results/V102-progress5000-detail-GFX-CPU-v1.json).
-Checkpoint SHA256 is
-`64f3540fa6415a179d061efc226330fc59e21c3306048dcb6854d18528e6505b`;
-read-only local path: `/mnt/external/demosaic/models/v102-progress5000.pt`.
-The matched final V102/V103 full panels and complete GFX exports remain queued.
 
 ## Capture and crop protocol
 

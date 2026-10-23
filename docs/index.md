@@ -1,20 +1,22 @@
 # Documentation guide
 
 Start with the [README](../README.md) for setup, inference and representative
-native crops. **V101 is the current development checkpoint**, continuing V84’s DRUNet RGB
+native crops. **V101 is the fully benchmarked default**, continuing V84’s DRUNet RGB
 trunk and frozen DINOv3 ConvNeXt-Tiny features. The completed cleaned-data/detail
 comparison shows a small widespread photographic gain with close camera means.
 V102/V103 now compare six versus32 reviewed regions on the separate88,477-source
-cohort. V102's fixed5k progress already adds low-noise gains on the selected
-detail panel, now shown in the README and [detail gallery](heldout-detail.md).
-The GFX guide includes both completed full-frame and new V102 context comparisons.
+cohort. V102's original20k endpoint now leads the selected-detail comparison,
+with +.29dB ISO100 over V101 and improved scores in all12 cases. The README,
+[detail gallery](heldout-detail.md) and GFX guide show its current crops. V103
+is running; full matched evaluation remains queued. Completed full-frame
+comparisons remain alongside the newer cached-context results.
 
 | Topic | Start here |
 | --- | --- |
 | Current work | [V84-family cleaned-data/fine-detail training](quality-first-training.md) · [Current model choices](current-model.md) |
 | Results | [Experiment index](experiments.md), [PSNR history](performance-history.md) |
 | Older work | [Chronological archive](experiment-archive.md), [local-time diary](../diary/index.md) |
-| Current model | [V101/V84 quality and comparisons](current-model.md) · [Real-camera metrics](real-camera-quality.md) · [GFX comparisons](gfx-qualitative.md) · [Q2/Sony/GFX50R](cross-camera-qualitative.md) |
+| Current model | [V101/V102 quality and comparisons](current-model.md) · [Real-camera metrics](real-camera-quality.md) · [GFX comparisons](gfx-qualitative.md) · [Q2/Sony/GFX50R](cross-camera-qualitative.md) |
 | Usage | [Commands and data conventions](usage.md) |
 | Data | [Commons corpus](commons-post4557-reviewed.md), [illustrated source review](corpus-source-review.md), [source exclusions](commons-content-overlap.md), [native RAW targets](public-raw-expansion-v2.md) |
 | Training | [Data/augmentation pipeline](training-pipeline.md), [execution/restart](training-execution.md), [V43 quality-study checks](quality-training-validation.md) |

@@ -1,6 +1,6 @@
 # Experiment index
 
-**V101 is the current development checkpoint in V84's architectural family.**
+**V101 is the fully benchmarked default in V84's architectural family.**
 Its 36.50347 dB photographic result is +.06351 dB over V84 and about 1.60 dB above V43,
 with close measured-CFA means and remaining high-noise texture loss. V95 remains
 a useful weak-detail comparison. Study-specific statistical gates do not freeze
@@ -47,14 +47,14 @@ V101 reaches **36.50347dB** on full427, +.06351dB over V84, improving 418/427
 source means and all seven condition means. Known/unseen CFA means remain close
 to V84. The [completed primary report](v84-curated-quality-review.md) and
 [current native gallery](heldout-detail.md) show gains and remaining smoothing.
-V101 is the current training checkpoint in V84’s architectural family.
-V102/V103 are running matched20k continuations that isolate six versus 32
-reviewed regions at the same 5% conditional sampling probability.
-V102's fixed5k checkpoint gains +.158/+.149/+.020dB on four selected detail
-sources at ADC/ISO100/ISO12800. The [current gallery](heldout-detail.md) and
-[GFX guide](gfx-qualitative.md#v102-at-5000-updates) show it immediately,
-including small SSIM/chroma regressions and close real-photo results. This
-progress panel does not replace either final20k endpoint or the full427 results.
+V102 has completed its original20k continuation; V103 is running. The pair tests
+six versus32 reviewed regions at the same5% conditional sampling probability.
+**V102 final20k** gains +.362/+.285/+.043dB over V101 on the four selected detail
+sources at ADC/ISO100/ISO12800. All12 PSNR/SSIM/chroma/gradient cases improve
+versus V101 and fixed5000. The [current gallery](heldout-detail.md) and
+[GFX guide](gfx-qualitative.md#v102-at-5000-and-20000-updates) show it now,
+including remaining high-noise smoothing and close real-photo results. The
+full427/camera comparison remains queued behind both original20k endpoints.
 
 The source scan covers88,508 training images, with570 actually reviewed and 31
 withheld/excluded. Completed runs used the earlier 24 exclusions; seven more and

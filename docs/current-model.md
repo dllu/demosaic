@@ -1,7 +1,8 @@
 # Current models and development baseline
 
-**V101 final10k is the preferred checkpoint for image quality and further
-training.** It continues V84's full-resolution pretrained DRUNet RGB trunk,
+**V102 final20k has the best selected natural-detail results; V101 final10k
+remains the default with complete full-panel results.** Both continue V84's
+full-resolution pretrained DRUNet RGB trunk,
 physical noise anchors and frozen official DINOv3 ConvNeXt-Tiny pyramid.
 V84 remains the architectural reference; V43 is a historical comparator.
 
@@ -22,15 +23,16 @@ V84 are +.00282/−.00488 dB; both small-scene intervals include zero. These gai
 and tradeoffs support using V101 while continuing to improve real fine detail.
 [Completed matched results, intervals and native crops](v84-curated-quality-review.md).
 
-**Newer progress: V102 at5,000 updates** gains +.158/+.149/+.020dB over V101
-on the four-source ADC/ISO100/ISO12800 detail panel, with PSNR and gradient error
-improving in all12 cases. Its [native detail gallery](heldout-detail.md) and
-[six-region GFX comparison](gfx-qualitative.md#v102-at-5000-updates) are current.
-SSIM/chroma have small individual regressions; real GFX remains close and fine
-detail is still soft. The fixed checkpoint is available for use now at
-`/mnt/external/demosaic/models/v102-progress5000.pt`. V101 remains the default
-with complete full427/camera/full-frame results; the original20k V102/V103
-runs continue. The selected12 cases are not added to the full-panel table.
+**V102's original20k endpoint** gains +.362/+.285/+.043dB over V101 on the
+four-source ADC/ISO100/ISO12800 detail panel. PSNR, SSIM, chroma and gradient
+error improve in all12 cases versus both V101 and fixed V102@5000. Its
+[native detail gallery](heldout-detail.md) and
+[six-region GFX comparison](gfx-qualitative.md#v102-at-5000-and-20000-updates)
+are current. Real GFX remains close and fine detail is still soft. The latest
+checkpoint is available now at `/mnt/external/demosaic/models/v102-final20000.pt`.
+Use it for continued detail development; V101 supplies the completed
+full427/camera/full-frame measurements. V103 is running, with the full matched
+evaluation queued. The selected12 cases are not added to the full-panel table.
 
 V84 gains about **1.54 dB over V43** on the full fixed photographic panel and
 has a higher unseen-camera mean. Its known-camera mean is slightly lower.
@@ -75,7 +77,7 @@ histories. [Per-condition counts, scores and provenance](results/v84-v43-photogr
 
 The newest [full-panel native comparison](v84-curated-quality-review.md#native-photographic-comparisons)
 contains two shared noisy/restored/GT triplets per V84/V100/V101 checkpoint.
-The [natural-detail gallery](heldout-detail.md) and README highlight V102's fixed5000
+The [natural-detail gallery](heldout-detail.md) and README highlight V102's final20k
 low-noise progress. The older comparisons below retain the larger V84−V43
 advance and explain the architectural choice.
 
@@ -121,7 +123,7 @@ forest canopy and fur at three noise levels. It shows V84's remaining
 high-noise detail loss as well as its sharper low-noise output.
 V101's completed reduced-blur/detail continuation gains PSNR/SSIM on all12
 selected cases against V84 and the V100 control. The current gallery adds
-V102@5000, with further low-noise gains and remaining high-noise smoothing. The
+V102@20000 alongside fixed5000, with further low-noise gains and remaining high-noise smoothing. The
 completed full-panel comparison confirms a smaller but widespread photographic gain.
 For explicitly ADC-only inputs, use the [optional site correction](adc-consistency.md):
 it gains .400dB rendered PSNR over unchanged V84 weights across all427 photos,
@@ -158,6 +160,7 @@ V100/V101 continue V84 for 10,000 updates with fresh AdamW/EMA on the cleaned
 photographic contrast attenuation and six reviewed detail ROIs. Their matched
 comparison tests the complete recipe, without isolating individual components.
 The [88,477-source cohort and 32-region catalogue](corpus-source-review.md)
-are now used by the matched V102/V103 continuation. The fixed V102@5000 progress
-is documented alongside the completed results. Keep current guides and comparisons updated as useful versions
+are now used by the matched V102/V103 continuation. V102's original20k selected
+detail/GFX results are published; V103 and full matched evaluation continue.
+Keep current guides and comparisons updated as useful versions
 appear; the timestamped diary retains chronological decisions.

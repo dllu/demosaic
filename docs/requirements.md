@@ -1,6 +1,6 @@
 # Project goals and current evidence
 
-**V101 is the current development checkpoint in V84's architectural family.**
+**V101 is the fully benchmarked default in V84's architectural family.**
 Its full-photo result is 36.50347 dB, +.06351dB over V84 and about 1.60 dB above V43.
 Camera CFA means remain close to V84, with high-noise fine-detail loss still open.
 [Current choices](current-model.md) and the [README](../README.md) show useful
@@ -8,7 +8,7 @@ progress; individual study gates do not freeze those recommendations.
 
 The broader objective in [PROMPT](../PROMPT.md) remains active. Quality has
 priority over speed. The current [GFX gallery](gfx-qualitative.md) includes
-V84/V100/V101 full-frame outputs and fixed V102@5000 CPU contexts on all six
+V84/V100/V101 full-frame outputs and V102 final20k CPU contexts on all six
 regions; their real-capture differences remain small.
 
 | Goal | Current evidence | Remaining work |
@@ -33,7 +33,8 @@ PSFs, weak synthetic textures, photographic contrast attenuation and reviewed
 ROI sampling. Both budgets are10,000 updates; short CPU/CUDA smokes are discarded.
 Both fixed endpoints and all seven evaluation panels have completed. V101
 reaches 36.50347 dB on full427 (+.06351 dB over V84), with camera CFA means close
-to V84 and remaining real fine-detail loss. It is the next quality checkpoint.
+to V84 and remaining real fine-detail loss. V102 final20k now leads the selected
+material-detail comparison for further quality development.
 [Completed primary results](v84-curated-quality-review.md). Full-frame exports
 are complete and independently verified; status and artifact locations are in the training guide.
 
@@ -50,11 +51,13 @@ gains and remaining high-noise smoothing. Current
 [Q2/Sony/GFX50R comparisons](cross-camera-qualitative.md) show V84/V100 beside
 V43 and RawNIND. The [completed three-model camera comparison](real-camera-quality.md)
 shows V101 CFA means close to V84, with auxiliary RGB tradeoffs. All seven
-quality panels and full-frame GFX exports have finished. V102/V103 now train
-from V101 with six versus 32 reviewed regions on the88,477-source cohort.
-The fixed V102@5000 progress checkpoint gains +.158/+.149/+.020dB over V101
+quality panels and full-frame GFX exports have finished. V102 has completed its
+20k continuation; V103 is running. Both start from V101 with six versus32
+reviewed regions on the88,477-source cohort.
+V102's original20k endpoint gains +.362/+.285/+.043dB over V101
 on the four-source ADC/ISO100/ISO12800 detail panel. Its native crops are
-published now, including remaining high-noise smoothing and close GFX results.
+published now, including all12 PSNR/SSIM/chroma/gradient gains, remaining
+high-noise smoothing and close GFX results.
 Those selected12 cases do not stand for full427 or a measured-camera comparison.
 The [16-scene paired test reserve](paired-reserved-test.md) is prepared and
 validated, with no model inference or scores; it remains outside model selection.

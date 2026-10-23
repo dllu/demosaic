@@ -1,0 +1,203 @@
+{
+  "image": "V101-illuminated-platform-boundary.png",
+  "caption": "illuminated-platform-boundary / V101 / CPU512 context, not full frame",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Denoised",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "ISO100 ref (not GT)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "f0f2022b8e98f04f95c9aa7f58182b4312e53c4f48444ac6fdc839af6eca3032",
+  "region": {
+    "name": "illuminated-platform-boundary",
+    "noisy_xy": [
+      10320,
+      4520
+    ],
+    "reference_xy": [
+      10321,
+      4520
+    ],
+    "size": 160,
+    "selection_method": "Input-only locator selection, then maximum normalized green correlation in512px input/reference contexts; integer offsets within+/-8 only, no output-dependent selection or warp",
+    "context_green_correlation": 0.9831606311368877
+  },
+  "checkpoint_sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+  "compute_precision": "float32",
+  "device": "cpu",
+  "conditioning": {
+    "shot": 0.0014635775921166604,
+    "read": 1.0715704128646712e-06
+  },
+  "context_xywh": [
+    10144,
+    4344,
+    512,
+    512
+  ],
+  "full_frame": false,
+  "display_exposure": 4.0,
+  "shared_wb": [
+    1.5132450331125828,
+    1.0,
+    2.2152317880794703
+  ],
+  "shared_matrix": [
+    [
+      1.0725188393098881,
+      0.17123593128834644,
+      -0.24375477059823436
+    ],
+    [
+      -0.1267191317089774,
+      1.4310509369654432,
+      -0.3043318052564657
+    ],
+    [
+      -0.009697676902906037,
+      -0.29348063283422965,
+      1.3031783097371357
+    ]
+  ],
+  "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+  "model_label": "V101",
+  "model": {
+    "label": "V101",
+    "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3",
+    "step": 10000,
+    "source": "/mnt/external/demosaic/models/v101-final10000.pt",
+    "device": "cpu",
+    "compute_precision": "float32",
+    "source_captures": [
+      {
+        "role": "noisy",
+        "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634",
+        "metadata": {
+          "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "camera": "GFX100S",
+          "pattern": "RGGB",
+          "black_levels": [
+            4101.0,
+            4098.0,
+            4104.0,
+            4106.0
+          ],
+          "white_levels": [
+            65535.0,
+            65535.0,
+            65535.0,
+            65535.0
+          ],
+          "white_balance": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "camera_to_srgb": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "flip": 0,
+          "iso": 6400,
+          "adc_white_level": 65535.0
+        }
+      },
+      {
+        "role": "reference",
+        "sha256": "10afc189888370bec67499e9ea6fe28a4ffe925e3296c288580efd7b6c4d08cb",
+        "metadata": {
+          "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-17-05_DSCF3880_fad45f6c7220eba9bad23a04e886c364157f9985.raf",
+          "camera": "GFX100S",
+          "pattern": "RGGB",
+          "black_levels": [
+            256.0,
+            255.0,
+            256.0,
+            256.0
+          ],
+          "white_levels": [
+            65535.0,
+            65535.0,
+            65535.0,
+            65535.0
+          ],
+          "white_balance": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "camera_to_srgb": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "flip": 0,
+          "iso": 100,
+          "adc_white_level": 65535.0
+        }
+      }
+    ],
+    "reference_calibration": {
+      "rgb_to_sensor_gains": [
+        1.0000624759971717,
+        1.0000575400374918,
+        1.000083683987943
+      ],
+      "samples": [
+        922554,
+        2316454,
+        693995
+      ]
+    }
+  }
+}

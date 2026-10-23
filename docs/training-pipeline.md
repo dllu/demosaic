@@ -207,7 +207,7 @@ That probe used fraction0.5 solely to exercise the reader. It ran no denoising
 model, optimizer or sensor-noise simulation. These are implementation checks;
 V101 now has trained evidence for its complete recipe package; the ROI-only
 effect is not isolated. The expanded 32-source catalogue has reader/data proof,
-with the V102/V103 ROI comparison still running. Fixed V102@5000 already shows
+with the V102/V103 ROI comparison still running. Completed V102 final20k shows
 [selected-detail progress](heldout-detail.md) using the original six regions;
 it does not measure the expanded32-region effect.
 
