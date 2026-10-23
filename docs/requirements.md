@@ -18,7 +18,7 @@ real-capture differences remain small.
 | 16-bit and practical full-resolution output | Verified101.996MP RGB16 TIFFs from V101/V102/V103 and RawNIND through the shared exporter | Keep full-frame quality/precision/timing measurements specific to the selected checkpoint |
 | 100MP within10s on GB10 | V102 inference/blending takes202.31s in the recorded IEEE FP32 configuration; target remains open | Optimize after improving quality |
 | Modern DINOv3 method | V102 continues the official pinned ConvNeXt-Tiny pyramid and pretrained DRUNet RGB family | Continue quality improvements and assess other approaches when useful |
-| Free, diverse targets and aggressive binning | Completed V102/V103 use88,477 sources with31 quality exclusions; next90,872 cohort ready;4×→geometry→area2 | Measure the reviewed larger corpus from V102; continue source/detail review |
+| Free, diverse targets and aggressive binning | V104 trains on90,872 reviewed sources; next90,864 removes eight further source-specific targets;4×→geometry→area2 | Measure the larger corpus and the cleaned Tiny/Small trial; retain source/detail review |
 | Physical noise/exposure and camera handling | Poisson/read noise, negative black-subtracted values, Bayer phases, clipping and WB/matrix conditioning are implemented | Continue testing shadows, saturated lights, color and low-noise behavior |
 | Reliable training and resource use | Source/manifest snapshots, restart checks, bounded jobs and actual CPU/CUDA operation | Monitor current runs and retain failures/results accurately |
 | Protected originals and evaluation scenes | Originals read-only; cached GFX3879/3880 and siblings excluded from training | Preserve those boundaries in new data recipes |
@@ -35,11 +35,17 @@ and weak-carrier diagnostics favor it overall. All seven evaluation panels and
 complete102MP GFX exports finished and were independently checked. Fine
 high-noise texture,foliage and saturated-light detail remain weaknesses.
 
-The next reviewed **90,872-source** corpus adds2,395 eligible arrivals. Native
+V104's reviewed **90,872-source** corpus adds2,395 eligible arrivals. Native
 source views,duplicate/content/title/series exclusions,protected holdouts and
 actual reader checks are documented in the [incoming review](incoming-commons-quality.md).
 V104 is training from V102 on this cohort; its trained benefit remains unmeasured. Earlier570-source/31-exclusion review and six/32-ROI studies
 retain their frozen inputs and receipts. [Training/data details](quality-first-training.md).
+
+The completed incoming source screen and native follow-up freeze a separate
+**90,864-source** future cohort: three visibly degraded photo targets and five
+atlas reproductions are additionally withheld. The V109 Tiny/V110 Small
+recipes pass actual discarded CPU and CUDA checks, but their production runs
+remain unlaunched pending V104 review. [Current capacity preparation](convnext-small-capacity.md#prepared-matched-quality-trial).
 
 [Current native detail](heldout-detail.md),[camera](real-camera-quality.md) and
 [GFX full-frame](gfx-qualitative.md) galleries show useful gains and remaining

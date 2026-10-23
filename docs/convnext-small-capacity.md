@@ -121,7 +121,12 @@ native64/B1/FP32. Initial EMA and frozen-encoder identities match exactly,
 model/EMA/Adam stay finite, and all eight observation fingerprints match across
 arms through Commons/synthetic, native-RAW and paired-RAW domains.
 [Actual cleaned-recipe CPU evidence](results/backbone-cleaned-recipes-CPU-v1.json).
-The production preparations remain unchanged and unlaunched; CUDA checks remain.
+Both cleaned recipes also pass eight discarded CUDA updates at native256,
+batch16/BF16. All eight actual observations and the first loss match across
+arms, with exact initial EMA/encoder identities and finite model/EMA/Adam.
+Reported peak allocation is 6.95GB Tiny /7.04GB Small. These runs overlap V104;
+their timings do not measure throughput. [Actual CUDA evidence](results/backbone-cleaned-recipes-CUDA-v1.json).
+The production preparations remain unchanged and unlaunched.
 
 The [explicit reference set](../configs/quality-v102-backbone-reference-checkpoints-v1.json)
 now keeps original V102 separate from the `V102-zero` initializer in reports

@@ -26,6 +26,14 @@ Tiny/Small an exact common starting function, and both pass eight discarded
 CPU optimizer updates with matching initial prediction/loss and batch hashes.
 This prepares a later trained capacity comparison; V104's data experiment continues.
 
+The cleaned 90,864-source Tiny/Small recipes now pass separate eight-update
+CPU and CUDA/native256/B16 checks, with exact initial identities, matching
+observations and finite states. Their production runs await V104 review.
+The [loss-smoothing diagnostic](loss-smoothing-detail.md) also measures 324
+output gradients on 108 fixed V102 training-source restorations. Smaller epsilon
+strengthens low-noise faint-detail slopes but increases the full gradient more;
+it remains a later training hypothesis, with the current loss unchanged.
+
 Research started 2026-10-14. Sources below are primary implementations, papers,
 and vendor documentation. A recent publication is not itself evidence that this
 project matches its performance.

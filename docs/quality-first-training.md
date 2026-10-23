@@ -130,7 +130,7 @@ The full prospective schedule contains
 1,634 newly eligible sources and 5,657 ROI examples. These are scheduled exposure
 counts, not completed training. [Prepared plan, hashes and reader evidence](results/backbone-capacity-training-prepared-v2.json).
 
-No controller, CUDA smoke or production run has launched for these recipes.
+No production controller has launched for these recipes.
 The incoming loss-tail review is complete. Complete and review V104 first;
 retain the prepared evidence if later results warrant a different initializer
 or cohort. The earlier unlaunched V107/V108 preparation remains preserved.
@@ -140,9 +140,19 @@ keep original V102 separate from the zero-gate derivative. Separate discarded
 eight-update CPU checks now pass for both cleaned recipes, with exact initial
 EMA/encoder identities, finite final model/EMA/Adam and identical eight-batch
 observations across all three data domains. [Actual CPU evidence](results/backbone-cleaned-recipes-CPU-v1.json).
-Fresh CUDA checks and final native photo/material/color/weak-detail/GFX
-comparisons precede any quality conclusion.
+Fresh eight-update CUDA checks now pass at native256/B16/BF16. Initial EMA and
+per-arm encoder identities match; all eight actual observations and the first
+loss agree across arms, and model/EMA/Adam remain finite.
+[Actual CUDA evidence](results/backbone-cleaned-recipes-CUDA-v1.json).
+These are discarded fixtures. Review V104 before selecting the production
+initializer, then compare final native photo/material/color/weak-detail/GFX
+outputs before drawing a capacity conclusion.
 [Capacity evidence and remaining work](convnext-small-capacity.md).
+
+The [fixed-output loss-smoothing diagnostic](loss-smoothing-detail.md) measures
+whether a smaller Charbonnier scale strengthens faint-detail supervision.
+It motivates a separate later training comparison; current recipes retain
+the original loss alongside their fixed data and encoder settings.
 
 ## Completed V100/V101 comparison
 

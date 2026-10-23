@@ -43,7 +43,10 @@ batch1/FP32. Initialization and frozen encoders match exactly; model/EMA/Adam
 remain finite, and all eight actual observation fingerprints match across arms
 through Commons/synthetic, native-RAW and paired-RAW domains.
 [Actual CPU checks](results/backbone-cleaned-recipes-CPU-v1.json).
-CUDA and production phases have not launched for the capacity comparison.
+Eight-update CUDA checks also pass at native256/B16/BF16, with exact initial
+EMA/encoder identities, finite model/EMA/Adam, matching actual observations and
+matching first losses. [Actual CUDA checks](results/backbone-cleaned-recipes-CUDA-v1.json).
+Production training has not launched for the capacity comparison.
 
 These inputs supersede the unlaunched 90,869-source preparation. Earlier
 manifests, recipes and receipts remain preserved. V104 keeps its original
