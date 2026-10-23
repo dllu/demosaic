@@ -48,10 +48,27 @@ controller terminates only its matching child on its deadline or guard failure;
 it does not automatically retry a failed job. Originals and attribution remain
 in the archive after a normal reserve/limit stop.
 
+## SSD capacity for the download
+
+Verified duplicate frozen evaluation weights now share read-only filesystem
+storage. This released **6.96 GiB** of allocated blocks by relinking 137 duplicate
+copies into 31 shared objects, preserving all 168 artifact paths and checkpoint
+bytes/hashes. Whole-file SHA256 checks passed before and after replacement;
+the shared objects passed the actual immutable checkpoint-cache validation.
+Prior per-path modes/mtimes remain in the restoration ledger. Working training
+checkpoints, canonical models, originals and prepared data were not relinked.
+[Completed storage and active-plan verification](results/frozen-evaluation-weight-sharing-v1.json).
+
+The original bounded downloader remains the only owner of the archive download
+lock. This storage change increases its headroom without changing the 336 GiB
+reserve, current manifests, source admission policy or numerical experiments.
+
 ## Admission into a future training corpus
 
 **Downloading does not change a training or evaluation manifest.** V100/V101
 retain their frozen 88,484-source cohort and original numerical snapshots.
+V102/V103 use their separately frozen 88,477-source cohort; new downloads do
+not change any of these recipes.
 Their training, evaluation and full-frame plans do not bind the live archive
 SQLite index. New arrivals require separate two-scale preparation,
 protected-scene and duplicate screening, source-quality review and a frozen
@@ -60,8 +77,8 @@ manifest before any later training experiment.
 The [completed 4,557-original batch](commons-post4557-preparation.md) prepared
 4,337 suitable arrivals at both scales. Its [reviewed extension](commons-post4557-reviewed.md)
 added 2,751 training sources to produce the 88,508-source pool. Subsequent
-[high-loss/source-quality review](corpus-source-review.md) produced the active
-88,484-source cohort and a separately prepared 88,478-source follow-up. See
+[high-loss/source-quality review](corpus-source-review.md) produced the completed V100/V101
+88,484-source cohort and the current V102/V103 88,477-source cohort. See
 [quality-first training](quality-first-training.md) for the current recipes.
 Validation/test membership and the protected GFX scene/siblings remain fixed.
 
