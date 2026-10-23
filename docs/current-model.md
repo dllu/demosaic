@@ -22,6 +22,16 @@ V84 are +.00282/−.00488 dB; both small-scene intervals include zero. These gai
 and tradeoffs support using V101 while continuing to improve real fine detail.
 [Completed matched results, intervals and native crops](v84-curated-quality-review.md).
 
+**Newer progress: V102 at5,000 updates** gains +.158/+.149/+.020dB over V101
+on the four-source ADC/ISO100/ISO12800 detail panel, with PSNR and gradient error
+improving in all12 cases. Its [native detail gallery](heldout-detail.md) and
+[six-region GFX comparison](gfx-qualitative.md#v102-at-5000-updates) are current.
+SSIM/chroma have small individual regressions; real GFX remains close and fine
+detail is still soft. The fixed checkpoint is available for use now at
+`/mnt/external/demosaic/models/v102-progress5000.pt`. V101 remains the default
+with complete full427/camera/full-frame results; the original20k V102/V103
+runs continue. The selected12 cases are not added to the full-panel table.
+
 V84 gains about **1.54 dB over V43** on the full fixed photographic panel and
 has a higher unseen-camera mean. Its known-camera mean is slightly lower.
 The stronger ConvNeXt family is a useful advance despite that small-panel
@@ -65,7 +75,7 @@ histories. [Per-condition counts, scores and provenance](results/v84-v43-photogr
 
 The newest [full-panel native comparison](v84-curated-quality-review.md#native-photographic-comparisons)
 contains two shared noisy/restored/GT triplets per V84/V100/V101 checkpoint.
-The [natural-detail gallery](heldout-detail.md) and README highlight V101's
+The [natural-detail gallery](heldout-detail.md) and README highlight V102's fixed5000
 low-noise progress. The older comparisons below retain the larger V84−V43
 advance and explain the architectural choice.
 
@@ -110,8 +120,8 @@ The [natural-detail gallery](heldout-detail.md) adds bark, white feathers,
 forest canopy and fur at three noise levels. It shows V84's remaining
 high-noise detail loss as well as its sharper low-noise output.
 V101's completed reduced-blur/detail continuation gains PSNR/SSIM on all12
-selected cases against V84 and the V100 control. The current gallery highlights
-V101, with low-noise gains and remaining high-noise smoothing documented. The
+selected cases against V84 and the V100 control. The current gallery adds
+V102@5000, with further low-noise gains and remaining high-noise smoothing. The
 completed full-panel comparison confirms a smaller but widespread photographic gain.
 For explicitly ADC-only inputs, use the [optional site correction](adc-consistency.md):
 it gains .400dB rendered PSNR over unchanged V84 weights across all427 photos,
@@ -148,5 +158,6 @@ V100/V101 continue V84 for 10,000 updates with fresh AdamW/EMA on the cleaned
 photographic contrast attenuation and six reviewed detail ROIs. Their matched
 comparison tests the complete recipe, without isolating individual components.
 The [88,477-source cohort and 32-region catalogue](corpus-source-review.md)
-are now used by the matched V102/V103 continuation, with no new quality result yet. Keep current guides and comparisons updated as useful versions
+are now used by the matched V102/V103 continuation. The fixed V102@5000 progress
+is documented alongside the completed results. Keep current guides and comparisons updated as useful versions
 appear; the timestamped diary retains chronological decisions.

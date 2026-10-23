@@ -27,7 +27,7 @@ matched studies when attributing a gain to a particular change.
 | Color coordinates and supervision | Normalization, objective and camera-supervision changes produced tradeoffs | [V68/V69](normalization-v68-v69-original4k-review.md), [V74/V75](reconstruction-objective-first1k-review.md), [V76/V77](camera-supervision-first1k-review.md) |
 | Compact RAW-native architecture | The completed mixed-batch experiment remains far below the mature RGB models on primary panels | [V72/V73](packed-isotropic-mixed16-quarter-review.md) |
 | Directional, interval and bank heads | Several heads improve photographic means, with camera/detail tradeoffs; the simpler V84 family is stronger overall in the completed primary scores | [V78/V79](directional-interval-original4k-review.md), [V80/V81](directional-bank-original4k-review.md), [V82/V83](bank-detachment-original4k-review.md) |
-| Native data and larger context | V84/V85 reach36.44dB and provide the current quality baseline. The extra native captures have little matched effect; larger context is a separate small-effect comparison | [V84/V85](native-data-original20k-review.md), [V86/V87](training-context-original4k-review.md) |
+| Native data and larger context | V84/V85 establish the36.44dB architectural reference continued by V101. The extra native captures have little matched effect; larger context is a separate small-effect comparison | [V84/V85](native-data-original20k-review.md), [V86/V87](training-context-original4k-review.md) |
 | Spectral and late RGB refinement | Small matched mean gains or protected common weights did not fix weak detail; head-only V92 regressed | [V88/V89](spectral-original4k-review.md), [V90/V91](late-rgb-original4k-review.md), [V92](late-rgb-head-only-original4k-review.md) |
 | ADC-only inference | With unchanged V84 weights, replacing only valid measured sites gains .400dB rendered PSNR across all427 sources/all1,708 CFA cases. SSIM/detail/chroma have documented individual tradeoffs; positive-noise profiles bypass it | [Complete site-consistency comparison and native crops](adc-consistency.md) |
 
@@ -50,6 +50,11 @@ to V84. The [completed primary report](v84-curated-quality-review.md) and
 V101 is the current training checkpoint in V84’s architectural family.
 V102/V103 are running matched20k continuations that isolate six versus 32
 reviewed regions at the same 5% conditional sampling probability.
+V102's fixed5k checkpoint gains +.158/+.149/+.020dB on four selected detail
+sources at ADC/ISO100/ISO12800. The [current gallery](heldout-detail.md) and
+[GFX guide](gfx-qualitative.md#v102-at-5000-updates) show it immediately,
+including small SSIM/chroma regressions and close real-photo results. This
+progress panel does not replace either final20k endpoint or the full427 results.
 
 The source scan covers88,508 training images, with570 actually reviewed and 31
 withheld/excluded. Completed runs used the earlier 24 exclusions; seven more and

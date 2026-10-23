@@ -5,7 +5,9 @@ native crops. **V101 is the current development checkpoint**, continuing V84’s
 trunk and frozen DINOv3 ConvNeXt-Tiny features. The completed cleaned-data/detail
 comparison shows a small widespread photographic gain with close camera means.
 V102/V103 now compare six versus32 reviewed regions on the separate88,477-source
-cohort; the current GFX gallery uses completed full-frame restorations.
+cohort. V102's fixed5k progress already adds low-noise gains on the selected
+detail panel, now shown in the README and [detail gallery](heldout-detail.md).
+The GFX guide includes both completed full-frame and new V102 context comparisons.
 
 | Topic | Start here |
 | --- | --- |

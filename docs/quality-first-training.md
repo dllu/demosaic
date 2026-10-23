@@ -30,8 +30,17 @@ while rebinding to the same new manifest.
 [Actual launch and discarded CPU/CUDA checks](results/v101-detail-diversity-training-launch-v1.json).
 All four eight-update checks passed from exact V101 weights with finite states
 and unchanged official DINO. Production starts freshly again. V102 is running;
-V103 follows it. Both fixed 20k endpoints require evaluation before claiming a gain.
+V103 follows it. Both fixed20k endpoints have matched evaluation queued.
 The larger budget also improves source exposure compared with the 10k pilot.
+
+The **fixed V102@5000 progress checkpoint** already improves all12 selected
+detail-case PSNR/gradient scores over V101, by +.158/+.149/+.020dB mean PSNR
+at ADC/ISO100/ISO12800. Its [native comparisons](heldout-detail.md) and
+[GFX contexts](gfx-qualitative.md#v102-at-5000-updates) are published now.
+Two SSIM cases and one chroma case regress slightly; high-noise detail and real
+foliage remain soft. This captures useful quarter-budget progress without
+changing the final20k comparison or claiming full-panel/camera gains.
+[Checkpoint boundary and actual native review](results/V102-progress5000-detail-GFX-CPU-v1.json).
 
 Frozen plan: `.cache/current-quality-20261022-v1/detail-diversity-training-v1/plan.json`.
 Artifacts: `/mnt/external/demosaic/v101-detail-diversity-20261022-v1/`.

@@ -1,7 +1,9 @@
 # Method research and design record
 
 Current implementation: pretrained DRUNet RGB restoration with a frozen
-DINOv3 ConvNeXt-Tiny feature pyramid, using V84 as the development baseline.
+DINOv3 ConvNeXt-Tiny feature pyramid, using V101 as the development checkpoint
+in V84's architectural family. Fixed V102@5000 detail/GFX progress is also
+available while the matched20k continuations run.
 See [current models](current-model.md) and the [active cleaned-data recipes](quality-first-training.md).
 The literature/design record below explains the explored approaches; its older
 study decisions do not freeze the current architecture or README examples.

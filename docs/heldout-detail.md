@@ -1,8 +1,8 @@
 # Natural fine-detail comparisons
 
-**V101's final fine-detail continuation improves PSNR on all12 selected cases
-versus both V84 and V100.** The gains are strongest at low noise and visible
-changes are small. V84/V100/V101 all preserve substantially more bark grain,
+**V102 at 5,000 updates improves PSNR and gradient error on all12 selected cases
+over V101**, adding about +.15dB at low noise and +.02dB at high noise.
+Visible changes are small. V84/V100/V101/V102 all preserve substantially more bark grain,
 feather texture, canopy structure and fur than RawNIND here. At high noise,
 white plumage, distant trees and individual hairs remain smoothed.
 
@@ -10,13 +10,14 @@ The four contexts were selected by viewing clean inputs before inspecting
 these model outputs. They cover mixed contrast, including weak fine structures;
 they are not a set of globally low-contrast images. Their exact source IDs are
 absent from the training cohort. This small diagnostic complements the
-[full photographic and camera results](current-model.md). Both continuations
-and their [full matched primary panels](v84-curated-quality-review.md) are complete.
+[full photographic and camera results](current-model.md). V100/V101 and their
+[full matched primary panels](v84-curated-quality-review.md) are complete;
+the original V102/V103 20k runs and their matched evaluation remain in progress.
 
 Each cell is an unchanged **160×160 native-pixel crop** at the8×-binned evaluation
 resolution. Open the original PNG at100%; a browser may fit the board to its
 window. Columns share the same noisy observation, coordinates, display and exact
-synthetic target. RawNIND uses input-only CFA-channel gain. V101 is highlighted
+synthetic target. RawNIND uses input-only CFA-channel gain. V102@5000 is highlighted
 among the matched checkpoints in this gallery.
 
 The [fixed-weight noise-conditioning probe](noise-conditioning.md) separates a
@@ -25,6 +26,28 @@ and residual error. It keeps the true noisy observations fixed; the current
 calibrated default remains unchanged.
 
 ## Current continuations
+
+V102 continues the final V101 EMA with fresh AdamW/EMA on the separately frozen
+88,477-source cohort, retaining its six reviewed ROIs and zero-PSF/detail
+recipe. This fixed **5,000-of-20,000-update** checkpoint was captured before
+inspecting these outputs, without a best-checkpoint search. Its original
+training run continues. V103 will compare32 ROIs at the same final budget.
+
+| Condition, four-source mean | V101 PSNR | V102@5000 PSNR | Change, dB |
+| --- | ---: | ---: | ---: |
+| ADC-only | 38.885 | **39.043** | +.158 |
+| ISO100 prior | 40.354 | **40.503** | +.149 |
+| ISO12800 prior | 33.426 | **33.447** | +.020 |
+
+PSNR and gradient error improve in12/12 cases; SSIM improves in10/12 and chroma
+error in11/12. The largest SSIM loss is .000164; the largest chroma-MAE increase
+is .00000325. Low-noise bark and canopy improve slightly, while high-noise
+feathers, canopy and fur remain smoothed. These are four selected sources,
+three conditions and RGGB, rather than full427 or measured-camera results.
+Continuation budget, LR, seed and cohort differ from V101, so this comparison
+does not isolate a dataset effect. The [progress receipt](results/V102-progress5000-detail-GFX-CPU-v1.json)
+records all12 scores and actual viewing of84 native gallery cells plus24 GFX
+cells. [Six-region real-capture comparison](gfx-qualitative.md#v102-at-5000-updates).
 
 V100/V101 each continue the exact V84 final20k EMA for10,000 updates on the
 curated88,484-source cohort, with fresh AdamW/EMA. V100 retains the control
@@ -49,7 +72,7 @@ The planned final endpoints were used without searching intermediate checkpoints
 The [completed full photographic/camera comparison](v84-curated-quality-review.md)
 confirms a smaller widespread photographic gain, with camera means close to V84.
 
-All three learned checkpoints here retain their original output policy. The
+All learned checkpoints here retain their original output policy. The
 [optional ADC-only site correction](adc-consistency.md) is evaluated separately;
 it is not applied to any column in these training comparisons.
 
@@ -58,7 +81,7 @@ it is not applied to any column in these training comparisons.
 At the ISO 100 prior, V84 retains the fine pale bark texture, feather strands
 and canopy detail that RawNIND softens:
 
-![ISO100: noisy, V100, V101, V84, RawNIND and exact synthetic GT on bark, feathers, forest and fur](images/current-detail/iso100-prior/photo-comparison.png)
+![ISO100: noisy, V100, V101, V102@5000, V84, RawNIND and exact synthetic GT on bark, feathers, forest and fur](images/current-detail/iso100-prior/photo-comparison.png)
 
 [ISO100 source triplets and metadata](images/current-detail/iso100-prior/manifest.json)
 include source attribution, checkpoint hashes, source/context coordinates,
@@ -67,7 +90,7 @@ noise parameters and display exposure.
 With no simulated shot/read noise, demosaicing and ADC quantization still
 leave some fine-texture errors:
 
-![ADC-only: noisy, V100, V101, V84, RawNIND and exact synthetic GT](images/current-detail/adc-only/photo-comparison.png)
+![ADC-only: noisy, V100, V101, V102@5000, V84, RawNIND and exact synthetic GT](images/current-detail/adc-only/photo-comparison.png)
 
 [ADC-only source triplets and metadata](images/current-detail/adc-only/manifest.json).
 The [optional ADC site correction](adc-consistency.md) gains .400dB across the
@@ -82,7 +105,7 @@ At the ISO 12800 prior, V84 restores the broad structures much better than
 RawNIND, but the feather/canopy/fur examples show why detail retention remains
 an active quality target:
 
-![ISO12800: noisy, V100, V101, V84, RawNIND and exact synthetic GT](images/current-detail/iso12800-prior/photo-comparison.png)
+![ISO12800: noisy, V100, V101, V102@5000, V84, RawNIND and exact synthetic GT](images/current-detail/iso12800-prior/photo-comparison.png)
 
 [ISO12800 source triplets and metadata](images/current-detail/iso12800-prior/manifest.json).
 The standing [GFX comparisons](gfx-qualitative.md) provide a separate check on
@@ -126,11 +149,15 @@ V100 uses its final10000 EMA, checkpoint SHA256
 Its receipt preserves the earlier three boards/60 native160 cells.
 V101 uses the final10000 EMA, checkpoint SHA256
 `6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3`.
-Its receipt adds12 triplets and records actual inspection of the current three
+Its receipt adds12 triplets and records actual inspection of its three
 boards/72 native160 cells, with self-contained immutable gallery copies.
-All shared noisy/GT pixels remain exact; earlier receipts and source crops are
-unchanged. V101's local checkpoint is
-`/mnt/external/demosaic/v84-curated-quality-20261022-v2/train/V101/last.pt`.
+V102 uses its fixed5000 EMA, checkpoint SHA256
+`64f3540fa6415a179d061efc226330fc59e21c3306048dcb6854d18528e6505b`.
+Its receipt adds12 triplets and preserves self-contained copies of the enlarged
+three boards/84 native160 cells. All shared noisy/GT pixels remain exact;
+earlier receipts and individual source crops are unchanged. The read-only
+local checkpoints are `/mnt/external/demosaic/models/v101-final10000.pt` and
+`/mnt/external/demosaic/models/v102-progress5000.pt`.
 
 [report_heldout_detail.py](../scripts/report_heldout_detail.py) prepares shared
 observations and evaluates additional checkpoints. The frozen local input plan

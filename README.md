@@ -12,6 +12,9 @@ The cleaned 88,484-source continuation removes optical blur and adds weak/fine
 detail examples. V101 improves source-averaged PSNR on 418/427 photos; high-noise
 texture still needs work. The [current models](docs/current-model.md) and image
 galleries reflect useful progress; the [diary](diary/index.md) retains history.
+**V102 at 5,000 updates adds +0.15 dB at low noise** on the four-source detail
+panel, with smaller high-noise gains. Its native crops are shown below while
+the original 20k V102/V103 comparison continues.
 For explicit zero-shot/read inputs, [optional site consistency](docs/adc-consistency.md)
 adds **.40dB ADC-only PSNR** with unchanged V84 weights across all427 photos/four
 CFAs; positive-noise inputs bypass it. The report includes native crops and color tradeoffs.
@@ -24,16 +27,16 @@ isolated architecture ablation.
 
 ## Current 100% crops
 
-Noisy observation → **V101** → exact synthetic GT, at the ISO100 prior.
+Noisy observation → **V102 at 5,000 updates** → exact synthetic GT, at the ISO100 prior.
 These are unchanged 160×160 crops at the 8×-binned evaluation resolution, with
 shared coordinates and display transforms. Low-noise bark/canopy gains are
 small; fine-detail loss remains at high noise.
-[Compare V84, V100, V101 and RawNIND](docs/heldout-detail.md) ·
+[Compare V84, V100, V101, V102 and RawNIND](docs/heldout-detail.md) ·
 [source/ROI/checkpoint/noise/display metadata](docs/images/current-detail/iso100-prior/manifest.json).
 
-![V101 bark: noisy, restored and exact synthetic GT](docs/images/current-detail/iso100-prior/crop-51d66b3cdddaae3b.png)
+![V102 at 5000 updates, bark: noisy, restored and exact synthetic GT](docs/images/current-detail/iso100-prior/V102-progress5000-0ae232278265.png)
 
-![V101 forest canopy: noisy, restored and exact synthetic GT](docs/images/current-detail/iso100-prior/crop-abc01264e29efc3b.png)
+![V102 at 5000 updates, canopy: noisy, restored and exact synthetic GT](docs/images/current-detail/iso100-prior/V102-progress5000-212ae12913ef.png)
 
 Sources: [Derek Ramsey](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
 [CC BY-SA 2.5](https://creativecommons.org/licenses/by-sa/2.5/), and
@@ -46,6 +49,8 @@ sensor-pixel crops from complete102MP blended restorations, with shared +2 EV di
 panel is a separately captured qualitative reference, **not GT**.
 [Compare V84, V100, V101 and RawNIND on six regions](docs/gfx-qualitative.md).
 V101 and V84 look close here; fine foliage and saturated-light detail remain targets.
+The same guide also shows the newer V102 checkpoint on six cached CPU contexts;
+its real-photo changes are small.
 The [Q2, Sony a7R II and GFX50R gallery](docs/cross-camera-qualitative.md)
 also includes V84/V100 on six fixed native regions.
 
