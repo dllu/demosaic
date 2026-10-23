@@ -112,10 +112,15 @@ six original ROIs. The encoder model/revision/hash are the only arm differences
 apart from run location. [Prepared plan, initializer/recipe/corpus hashes and
 prospective source exposure](results/backbone-capacity-training-prepared-v1.json).
 
+The [explicit reference set](../configs/quality-v102-backbone-reference-checkpoints-v1.json)
+now keeps original V102 separate from the `V102-zero` initializer in reports
+and exports. Actual CPU reporting/export checks preserve earlier outputs,
+and 146 targeted tests pass. [Reference handling and actual evidence](training-execution.md#fixed-references-alongside-derived-initializers).
+
 These recipes have no training controller or quality scores. Complete and
 review V104 and the remaining incoming loss tail before launch; a better useful
 initializer or further source decisions can supersede this prepared plan while
-preserving it. The trained comparison must include original V102 as well as
+preserving it. The trained comparison will use original V102 as well as
 its accurately labeled zero-gate derivative, both fixed endpoints, the standing
 GFX scene and native crop triplets. No capacity benefit is established yet.
 

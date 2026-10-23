@@ -30,6 +30,23 @@ def evaluation_ready(state, plan_ref, owner, *, is_live=live):
     return not is_live(owner)
 
 
+def freeze_export_operators(root):
+    """Use current record validators without rewriting an older queue snapshot."""
+    operators = root / "operators"
+    operators.mkdir(exist_ok=False)
+    for name in ("queue_quality_recipe_evaluation.py", "frozen_backbone_identity.py"):
+        shutil.copyfile(REPO / "scripts" / name, operators / name)
+    return operators
+
+
+def worker_pythonpath(plan):
+    work = Path(plan["work"])
+    paths = [str(work / "src"), str(work / "scripts")]
+    if "operators" in plan:
+        paths.insert(0, plan["operators"])
+    return ":".join(paths)
+
+
 def prepare(queue_root, root, artifact_root, *, cpu_smoke=False):
     queue_root, root, artifact_root = queue_root.resolve(), root.resolve(), artifact_root.resolve()
     assert root.is_relative_to(REPO / ".cache") and not root.exists()
@@ -43,6 +60,7 @@ def prepare(queue_root, root, artifact_root, *, cpu_smoke=False):
     root.mkdir(parents=True, exist_ok=False)
     worker_file = root / "worker.py"
     shutil.copyfile(__file__, worker_file)
+    operators = freeze_export_operators(root)
     selection = read(queue["gfx"]["gfx"])
     highlights = read(queue["gfx"]["gfx-highlights"])
     assert all(selection[k] == highlights[k] for k in ("noisy", "reference", "display_exposure"))
@@ -64,6 +82,7 @@ def prepare(queue_root, root, artifact_root, *, cpu_smoke=False):
         "root": str(root),
         "work": queue["work"],
         "worker": str(worker_file),
+        "operators": str(operators),
         "artifact_root": str(artifact_root),
         "evaluation_queue_root": str(queue_root),
         "evaluation_queue_plan": launch["plan"],
@@ -82,11 +101,19 @@ def prepare(queue_root, root, artifact_root, *, cpu_smoke=False):
         "dependency_wait_seconds": 172800,
         "stage_timeout_seconds": 1200 if cpu_smoke else 43200,
         "inputs": [launch["plan"], ref(queue_root / "launch.json")],
-        "frozen_files": {str(p): ref(p)["sha256"] for p in (worker_file, path)},
+        "frozen_files": {
+            str(p): ref(p)["sha256"] for p in (worker_file, path, *operators.glob("*.py"))
+        },
         "scope": f"Cropped CPU512/one-tile export integration, {queue.get('parent_label', 'V84')} and RawNIND; no production/full-camera quality or timing claim."
         if cpu_smoke
         else f"Complete101.996MP GFX RGB16 exports for {queue.get('parent_label', 'V84')} and fixed {', '.join(queue.get('training_arms', ('V100', 'V101')))} final EMAs, plus RawNIND:CFA-channel. IEEE FP32, tile512/overlap64/B4, cached3879/3880, original four regions plus two fixed highlight regions. Shared+2EV and independent ISO100 reference, never exact GT. No speed optimization or automatic promotion; update actual native comparisons after viewing.",
     }
+    if queue.get("reference_checkpoints"):
+        plan["scope"] += (
+            " Additional fixed references: "
+            + ", ".join(r["arm"] for r in queue["reference_checkpoints"])
+            + "."
+        )
     save(root / "plan.json", plan)
     return root / "plan.json"
 
@@ -125,6 +152,44 @@ def inspect_export(path, expected, *, color_space, flip):
     }
 
 
+def export_checkpoints(state, training, queue, *, cpu_smoke):
+    from frozen_backbone_identity import validate_backbone_identity
+    from queue_quality_recipe_evaluation import (
+        checkpoints,
+        training_ready,
+        validate_reference_checkpoints,
+    )
+
+    parent_label = queue.get("parent_label", "V84")
+    references = queue.get("reference_checkpoints", ())
+    if cpu_smoke:
+        parent = {
+            "arm": parent_label,
+            **training["parent"],
+            "expected_lineage": {"step": training.get("parent_step", 20000)},
+        }
+        if "parent_backbone" in training:
+            parent["expected_backbone"] = validate_backbone_identity(training["parent_backbone"])
+        return [
+            *validate_reference_checkpoints(references, training, parent_label=parent_label),
+            parent,
+        ]
+    assert training_ready(
+        state,
+        queue["training_plan"],
+        queue["training_controller"],
+        arms=queue.get("training_arms", ("V100", "V101")),
+    )
+    records, _ = checkpoints(
+        state,
+        training,
+        cpu_smoke=False,
+        parent_label=parent_label,
+        reference_checkpoints=references,
+    )
+    return records
+
+
 def worker(path):
     import numpy as np
     import report_raw_pair as gfx
@@ -132,7 +197,7 @@ def worker(path):
     from frozen_backbone_identity import verify_backbone_identity
     from PIL import Image
     from profile_raw_kernel_inference import model_hash
-    from queue_quality_recipe_evaluation import DINO_SHA, checkpoints, training_ready
+    from queue_quality_recipe_evaluation import DINO_SHA
 
     plan = read(path)
     guard(plan)
@@ -141,29 +206,8 @@ def worker(path):
     training = read(Path(plan["training_root"]) / "plan.json")
     guard(training)
     state = read(Path(plan["training_root"]) / "status.json")
-    if plan["cpu_smoke"]:
-        records = [
-            {
-                "arm": queue.get("parent_label", "V84"),
-                **training["parent"],
-                "expected_lineage": {"step": training.get("parent_step", 20000)},
-            }
-        ]
-        if "parent_backbone" in training:
-            records[0]["expected_backbone"] = training["parent_backbone"]
-    else:
-        assert training_ready(
-            state,
-            queue["training_plan"],
-            queue["training_controller"],
-            arms=queue.get("training_arms", ("V100", "V101")),
-        )
-        records, _ = checkpoints(
-            state,
-            training,
-            cpu_smoke=False,
-            parent_label=queue.get("parent_label", "V84"),
-        )
+    records = export_checkpoints(state, training, queue, cpu_smoke=plan["cpu_smoke"])
+    if not plan["cpu_smoke"]:
         torch.cuda.set_per_process_memory_fraction(
             24 * 2**30 / torch.cuda.get_device_properties(0).total_memory
         )
@@ -182,7 +226,10 @@ def worker(path):
                 == record["expected_lineage"]["initialized_from"]
             )
         verify_backbone_identity(
-            model.config.to_dict(), model_hash(model.context.backbone), record, legacy_sha256=DINO_SHA
+            model.config.to_dict(),
+            model_hash(model.context.backbone),
+            record,
+            legacy_sha256=DINO_SHA,
         )
         before.append((model, model_hash(model)))
         return model, checkpoint
@@ -323,7 +370,7 @@ def controller(path):
         work = Path(plan["work"])
         env = dict(
             os.environ,
-            PYTHONPATH=f"{work / 'src'}:{work / 'scripts'}",
+            PYTHONPATH=worker_pythonpath(plan),
             CUDA_VISIBLE_DEVICES="" if plan["cpu_smoke"] else "0",
             HF_HUB_OFFLINE="1",
             TRANSFORMERS_OFFLINE="1",

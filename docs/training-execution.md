@@ -68,6 +68,46 @@ inference checkpoints also work in texture/GFX reporters when their metadata
 has no training-run directory; the original checkpoint filename supplies the
 report label. Existing checkpoint hashes and machine receipts retain their bytes.
 
+## Fixed references alongside derived initializers
+
+An initialization transform can change a model before any new training. Keep
+the original useful checkpoint as a separate reference. The quality queue now
+accepts `--references` with a JSON list binding each reference label, absolute
+checkpoint path, full file SHA256, expected step and frozen encoder identity.
+The manifest and checkpoint files become frozen plan inputs. Labels and file
+hashes must be distinct from the initializer, trained arms and other references.
+Actual loading verifies the declared step and encoder before a prediction.
+
+For the prepared capacity recipes, use
+[`quality-v102-backbone-reference-checkpoints-v1.json`](../configs/quality-v102-backbone-reference-checkpoints-v1.json)
+for original V102, and label the common initializer `V102-zero`. Its inherited
+step 20,000 describes the base restoration weights; zeroing the three gates
+adds no training updates. After the actual training controller has launched,
+prepare the reporting queue with these additional arguments:
+
+```bash
+--parent-label V102-zero \
+--references configs/quality-v102-backbone-reference-checkpoints-v1.json
+```
+
+The fixed references accompany the initializer and completed arms throughout
+the quality panels and complete GFX export. New full-frame plans also freeze
+their current record validators in a separate operator directory, ahead of an
+older queue's helper modules. The queue's numerical source and existing frozen
+files retain their bytes. Plans without extra references keep their original
+record sets and training-completion checks.
+
+Actual CPU reporting with original V102, its derivative and two earlier
+discarded eight-update Tiny/Small fixtures completed 84 case rows. All 72
+previous case scores and 18 native panels reproduce exactly. An incorrect
+original-reference step is rejected at the loaded-state check with zero learned
+forwards. The cached 512-pixel GFX export produced four RGB16 TIFFs; all
+3,145,728 channel values reopen within .502 DN, with no RAF decode or CUDA.
+All 16 native review cells were viewed; weak umbrella/cloud detail and GFX
+foliage remain soft. These are integration checks, with no new training or
+quality gain. The 146 targeted tests include fresh-process import precedence
+for older queue snapshots. [Actual plans, model identities and receipts](results/fixed-reference-operator-CPU-v1.json).
+
 ## Configuration and resume
 
 Add this to a new experiment's YAML:

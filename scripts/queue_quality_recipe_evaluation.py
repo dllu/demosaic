@@ -10,7 +10,11 @@ from pathlib import Path
 
 import psutil
 from evaluate_v43_quality_trial import CAMERAS, COLOR, PANEL, RAWNIND
-from frozen_backbone_identity import CONVNEXT_TINY_SHA256, validate_backbone_identity
+from frozen_backbone_identity import (
+    CONVNEXT_TINY_SHA256,
+    sha256_identity,
+    validate_backbone_identity,
+)
 from train_directional_bank_trial import guard, read, ref, save
 from train_v43_quality_trial import live
 
@@ -19,6 +23,7 @@ ARMS = ("V100", "V101")
 TERMINAL = "completed-training-awaiting-model-comparisons"
 KEYS = {f"{phase}-{arm}" for phase in ("CPU", "CUDA", "train") for arm in ARMS}
 DINO_SHA = CONVNEXT_TINY_SHA256
+MODEL_LABEL = r"V[1-9]\d*(?:-[a-z][a-z0-9]*)*"
 HELPERS = (
     "frozen_backbone_identity.py",
     "queue_quality_recipe_evaluation.py",
@@ -100,21 +105,63 @@ def reviewed_catalogue_source_boundary(results, training, phase):
     return inputs
 
 
-def checkpoints(state, training, *, cpu_smoke, parent_label="V84"):
+def validate_reference_checkpoints(references, training, *, parent_label):
+    """Bind optional fixed baselines independently from a derived initializer."""
+    assert re.fullmatch(MODEL_LABEL, parent_label) and parent_label not in training["arms"]
+    if not isinstance(references, (list, tuple)):
+        raise TypeError("Reference checkpoints must be a list of explicit records")
+    labels = {parent_label, *training["arms"]}
+    hashes = {training["parent"]["sha256"]}
+    records = []
+    fields = {"arm", "path", "sha256", "expected_lineage", "expected_backbone"}
+    for record in references:
+        if not isinstance(record, dict) or set(record) != fields:
+            raise ValueError(
+                "Reference checkpoint requires label, file, step and backbone identity"
+            )
+        label = record["arm"]
+        if not isinstance(label, str) or not re.fullmatch(MODEL_LABEL, label) or label in labels:
+            raise ValueError("Reference checkpoint label is invalid or duplicated")
+        digest = sha256_identity(record["sha256"])
+        if digest in hashes:
+            raise ValueError("Reference checkpoint duplicates another checkpoint hash")
+        lineage = record["expected_lineage"]
+        if (
+            not isinstance(lineage, dict)
+            or set(lineage) != {"step"}
+            or type(lineage["step"]) is not int
+            or lineage["step"] < 0
+        ):
+            raise ValueError("Reference checkpoint requires an explicit nonnegative integer step")
+        identity = validate_backbone_identity(record["expected_backbone"])
+        if ref(record["path"]) != {"path": record["path"], "sha256": digest}:
+            raise ValueError("Reference checkpoint file differs from its absolute path/SHA256")
+        records.append({**record, "expected_lineage": dict(lineage), "expected_backbone": identity})
+        labels.add(label)
+        hashes.add(digest)
+    return records
+
+
+def checkpoints(state, training, *, cpu_smoke, parent_label="V84", reference_checkpoints=()):
     phase = "CPU" if cpu_smoke else "train"
     updates = training["smoke_updates"] if cpu_smoke else training["train_updates"]
     parent = training["parent"]
     parent_step = training.get("parent_step", 20000)
     arms = tuple(training["arms"])
     phase_keys(arms)
-    assert re.fullmatch(r"V[1-9]\d*", parent_label) and parent_label not in arms
-    records = [{"arm": parent_label, **parent, "expected_lineage": {"step": parent_step}}]
+    references = validate_reference_checkpoints(
+        reference_checkpoints, training, parent_label=parent_label
+    )
+    parent_record = {"arm": parent_label, **parent, "expected_lineage": {"step": parent_step}}
     if "parent_backbone" in training:
-        records[0]["expected_backbone"] = validate_backbone_identity(training["parent_backbone"])
+        parent_record["expected_backbone"] = validate_backbone_identity(training["parent_backbone"])
+    records = [*references, parent_record]
     backbones = training.get("backbones", {})
     if backbones:
         assert set(backbones) == set(arms), "Incomplete declared backbone identities"
-    inputs, sources, results = [], set(), {}
+    inputs = [{key: r[key] for key in ("path", "sha256")} for r in references]
+    reference_hashes = {r["sha256"] for r in references}
+    sources, results = set(), {}
     for arm in arms:
         item = state["completed"][f"{phase}-{arm}"]
         assert ref(item["path"]) == item
@@ -128,6 +175,9 @@ def checkpoints(state, training, *, cpu_smoke, parent_label="V84"):
         }
         assert not live(result["owner"])
         assert ref(result["checkpoint"]["path"]) == result["checkpoint"]
+        assert result["checkpoint"]["sha256"] not in reference_hashes, (
+            "Reference duplicates a trained endpoint"
+        )
         sources.add(result["source_sha256"])
         results[arm] = result
         inputs.extend((item, result["checkpoint"]))
@@ -149,7 +199,14 @@ def checkpoints(state, training, *, cpu_smoke, parent_label="V84"):
 
 
 def prepare(
-    training_root, root, evaluation_root, artifact_root, *, cpu_smoke=False, parent_label="V84"
+    training_root,
+    root,
+    evaluation_root,
+    artifact_root,
+    *,
+    cpu_smoke=False,
+    parent_label="V84",
+    references=None,
 ):
     import json
 
@@ -165,13 +222,25 @@ def prepare(
     training, launch = read(training_ref["path"]), read(launch_ref["path"])
     arms = tuple(training["arms"])
     phase_keys(arms)
-    assert re.fullmatch(r"V[1-9]\d*", parent_label) and parent_label not in arms
+    assert re.fullmatch(MODEL_LABEL, parent_label) and parent_label not in arms
     assert training["train_updates"] >= training["smoke_updates"] == 8
     assert launch["plan"] == training_ref
     guard(training)
+    reference_input = ref(references) if references is not None else None
+    reference_records = validate_reference_checkpoints(
+        read(references) if references is not None else (), training, parent_label=parent_label
+    )
+    if reference_input is not None:
+        assert ref(references) == reference_input, "Reference manifest changed during preparation"
     state = read(training_root / "status.json")
     if cpu_smoke:
-        checkpoints(state, training, cpu_smoke=True, parent_label=parent_label)
+        checkpoints(
+            state,
+            training,
+            cpu_smoke=True,
+            parent_label=parent_label,
+            reference_checkpoints=reference_records,
+        )
     else:
         training_ready(state, training_ref, launch["controller"], arms=arms)
     root.mkdir(parents=True, exist_ok=False)
@@ -194,6 +263,9 @@ def prepare(
         protocol["patterns"] = ["RGGB", "BGGR"]
         (work / "configs/smoke-evaluation.yaml").write_text(yaml.safe_dump(protocol))
     inputs = [training_ref, launch_ref, training["parent"], ref(PANEL)]
+    if references is not None:
+        inputs.append(reference_input)
+        inputs.extend({key: r[key] for key in ("path", "sha256")} for r in reference_records)
     rows = [json.loads(line) for line in PANEL.read_text().splitlines()]
     rows = [row for row in rows if row["split"] == "val"]
     assert len(rows) == len({row["id"] for row in rows}) == 427
@@ -281,6 +353,11 @@ def prepare(
         if cpu_smoke
         else f"{parent_label} step{training.get('parent_step', 20000)} versus fixed {', '.join(arms)} step{training['train_updates']} EMAs. Fresh IEEE FP32 full427/16-procedural/7-condition/4-CFA, known/unseen measured-CFA, weak-detail/color and standing GFX plus highlights. Same observations and display metadata; no checkpoint selection or automatic promotion. Report useful gains and tradeoffs, then update current recommendations and native comparisons.",
     }
+    if references is not None:
+        plan["reference_checkpoints"] = reference_records
+        plan["scope"] += (
+            " Additional fixed references: " + ", ".join(r["arm"] for r in reference_records) + "."
+        )
     save(root / "plan.json", plan)
     guard(plan)
     return root / "plan.json"
@@ -295,6 +372,7 @@ def prepare_evaluation(plan, state):
         training,
         cpu_smoke=plan["cpu_smoke"],
         parent_label=plan.get("parent_label", "V84"),
+        reference_checkpoints=plan.get("reference_checkpoints", ()),
     )
     root.mkdir(parents=True, exist_ok=False)
     Path(plan["artifact_root"]).mkdir(parents=True, exist_ok=False)
@@ -384,6 +462,9 @@ if __name__ == "__main__":
     parser.add_argument("--artifacts", type=Path)
     parser.add_argument("--cpu-smoke", action="store_true")
     parser.add_argument("--parent-label", default="V84")
+    parser.add_argument(
+        "--references", type=Path, help="JSON list of fixed baseline checkpoint identity records"
+    )
     args = parser.parse_args()
     if args.mode == "prepare":
         print(
@@ -394,6 +475,7 @@ if __name__ == "__main__":
                 args.artifacts,
                 cpu_smoke=args.cpu_smoke,
                 parent_label=args.parent_label,
+                references=args.references,
             )
         )
     else:

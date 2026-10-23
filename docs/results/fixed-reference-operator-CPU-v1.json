@@ -1,0 +1,441 @@
+{
+  "status": "completed-explicit-original-reference-operator-CPU-integration",
+  "recorded_local": "2026-10-23T12:00:31.843474-07:00",
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-reference-operator-CPU-v1/publish-complete.py",
+    "sha256": "0ec9dcde06b811223b4d4e136e92b2b95de5750be2e27fdf592c83dd824b04d8"
+  },
+  "changed_sources": [
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/queue_quality_recipe_evaluation.py",
+      "sha256": "ae783355035f52b404e123050f9fd418d68ca5472dea989aecd10d1398d8af80"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/queue_quality_fullframe.py",
+      "sha256": "032a9babcbc15c214d852fbae8b0906f69629d9097b18dfa44940eae72c5d8b6"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/tests/test_quality_reference_checkpoints.py",
+      "sha256": "b546ae54d40bcf104e9ff66b5684ae5042226e4f95035b06277d7a112a519f20"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/configs/quality-v102-backbone-reference-checkpoints-v1.json",
+      "sha256": "482c172e1880696ee34b26c52ca993411786d47ab310deb45cf7e22537f96cca"
+    }
+  ],
+  "evaluation_queue_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-reference-operator-CPU-v1/evaluation-queue/plan.json",
+    "sha256": "b2fd5a9bb31ac5e9edf688180f12b6cb053e317a851a4d04510cdd91adf3e133"
+  },
+  "evaluation_queue_launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-reference-operator-CPU-v1/evaluation-queue/launch.json",
+    "sha256": "52f5b839d3c40ff729fe2aa240fee69a21d2b8653deda8cbfd0638564dd716b4"
+  },
+  "actual_report_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-reference-operator-CPU-v1/evaluation/plan.json",
+    "sha256": "a368821184a5a1e7f55d880dbcbd191c59394748efbe08f33237e3742e31fde7"
+  },
+  "actual_report_result": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-reference-operator-CPU-v1/evaluation/photo-result.json",
+    "sha256": "7ac1fd4d0a3a9e190538edb35130974c4c43b5cd4e25c2593b031602403e3ab1"
+  },
+  "checkpoint_records": [
+    {
+      "arm": "V102",
+      "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+      "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+      "expected_lineage": {
+        "step": 20000
+      },
+      "expected_backbone": {
+        "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      }
+    },
+    {
+      "arm": "V102-zero",
+      "path": "/mnt/external/demosaic/convnext-small-transfer-CPU-20261023-v1/Tiny-zero.pt",
+      "sha256": "ae5dfa93f03cd241f1e212b6dcfa5f0fdbe6ac5cff9b9eda57b64cb40b2418c5",
+      "expected_lineage": {
+        "step": 20000
+      },
+      "expected_backbone": {
+        "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      }
+    },
+    {
+      "arm": "V105",
+      "path": "/mnt/external/demosaic/mixed-backbone-operator-CPU-20261023-v1/CPU/V105/last.pt",
+      "sha256": "a84cb504586426006a2ae9a26d3bf6dfd0f15ddff575eece492d5a4a9fc364a3",
+      "expected_lineage": {
+        "step": 8,
+        "initialized_from": {
+          "path": "/mnt/external/demosaic/convnext-small-transfer-CPU-20261023-v1/Tiny-zero.pt",
+          "sha256": "ae5dfa93f03cd241f1e212b6dcfa5f0fdbe6ac5cff9b9eda57b64cb40b2418c5",
+          "step": 20000
+        }
+      },
+      "expected_backbone": {
+        "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      }
+    },
+    {
+      "arm": "V106",
+      "path": "/mnt/external/demosaic/mixed-backbone-operator-CPU-20261023-v1/CPU/V106/last.pt",
+      "sha256": "c3dda251ff28eead4546175fd1b75b7fa4947e371b8c5a101f2accfd45813584",
+      "expected_lineage": {
+        "step": 8,
+        "initialized_from": {
+          "path": "/mnt/external/demosaic/convnext-small-transfer-CPU-20261023-v1/Tiny-zero.pt",
+          "sha256": "ae5dfa93f03cd241f1e212b6dcfa5f0fdbe6ac5cff9b9eda57b64cb40b2418c5",
+          "step": 20000
+        }
+      },
+      "expected_backbone": {
+        "model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+        "revision": "421020015aa4266363db803b6049a529999afb1e",
+        "sha256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14"
+      }
+    }
+  ],
+  "source_report": {
+    "path": "/mnt/external/demosaic/fixed-reference-reporting-CPU-20261023-v1/photo/summary.json",
+    "sha256": "01c9d3a70736ff0d08c384fef9a99b5a8fc38278466fa75e51699ac8fb217dc0"
+  },
+  "case_rows": 84,
+  "per_model_encoder_and_forward_invariants": [
+    {
+      "model_SHA256": "025c8867a30d4059297d917915506bf15fc427a621510034cbcfa94850a2c55c",
+      "forwards": 12,
+      "DINO_calls": 12,
+      "observations": 12,
+      "sampled_input_hashes_before_after_exact": [
+        {
+          "forward": 1,
+          "sha256": "dac4f5ea8756c508758559f202014cc89cbecf020f6ef2ff99dd4cb85544767d"
+        },
+        {
+          "forward": 2,
+          "sha256": "5782ef05caa3a07ac63aac5c5c2394bbbbfaba466c1c739745d01db1923da70e"
+        }
+      ],
+      "expected_backbone": {
+        "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      }
+    },
+    {
+      "model_SHA256": "91b5e4215774a6969e41838f8f08d50f0da9640c6fd8e58693e20ba4a073341e",
+      "forwards": 12,
+      "DINO_calls": 12,
+      "observations": 12,
+      "sampled_input_hashes_before_after_exact": [
+        {
+          "forward": 1,
+          "sha256": "dac4f5ea8756c508758559f202014cc89cbecf020f6ef2ff99dd4cb85544767d"
+        },
+        {
+          "forward": 2,
+          "sha256": "5782ef05caa3a07ac63aac5c5c2394bbbbfaba466c1c739745d01db1923da70e"
+        }
+      ],
+      "expected_backbone": {
+        "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      }
+    },
+    {
+      "model_SHA256": "1557dda65be04668e31156e04e1e2d9b5f0005ebcb6b1e205cba13c265b8513b",
+      "forwards": 12,
+      "DINO_calls": 12,
+      "observations": 12,
+      "sampled_input_hashes_before_after_exact": [
+        {
+          "forward": 1,
+          "sha256": "dac4f5ea8756c508758559f202014cc89cbecf020f6ef2ff99dd4cb85544767d"
+        },
+        {
+          "forward": 2,
+          "sha256": "5782ef05caa3a07ac63aac5c5c2394bbbbfaba466c1c739745d01db1923da70e"
+        }
+      ],
+      "expected_backbone": {
+        "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      }
+    },
+    {
+      "model_SHA256": "174ee498c5cc2b643d1bfc837575a9f7a72f15b84fcc0613b167b8be3dc758ff",
+      "forwards": 12,
+      "DINO_calls": 12,
+      "observations": 12,
+      "sampled_input_hashes_before_after_exact": [
+        {
+          "forward": 1,
+          "sha256": "dac4f5ea8756c508758559f202014cc89cbecf020f6ef2ff99dd4cb85544767d"
+        },
+        {
+          "forward": 2,
+          "sha256": "5782ef05caa3a07ac63aac5c5c2394bbbbfaba466c1c739745d01db1923da70e"
+        }
+      ],
+      "expected_backbone": {
+        "model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+        "revision": "421020015aa4266363db803b6049a529999afb1e",
+        "sha256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14"
+      }
+    }
+  ],
+  "source_group_arithmetic_exact": true,
+  "old_output_replay": {
+    "receipt": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-reference-operator-CPU-v1/replay-equivalence.json",
+      "sha256": "5fb3f62305fb75688cc1008b98aed870a413e0b6e9e3c525ef6e3ee0fd939a92"
+    },
+    "status": "completed-actual-reference-addition-replay-equivalence",
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-reference-operator-CPU-v1/verify-replay.py",
+      "sha256": "72fd15b186670d790dc71adce2b63983a44d1d09a85ca75d48a32cd041e20828"
+    },
+    "before": {
+      "path": "/mnt/external/demosaic/mixed-backbone-reporting-CPU-20261023-v1/photo/summary.json",
+      "sha256": "62c477920eb160bbaf289836ffc468599e3efb6cdbd0af14af69e940cd36164e"
+    },
+    "after": {
+      "path": "/mnt/external/demosaic/fixed-reference-reporting-CPU-20261023-v1/photo/summary.json",
+      "sha256": "01c9d3a70736ff0d08c384fef9a99b5a8fc38278466fa75e51699ac8fb217dc0"
+    },
+    "old_case_rows": 72,
+    "new_case_rows": 84,
+    "old_case_metrics_exact": 72,
+    "old_native_triplets_exact": 6,
+    "old_native160_panels_exact": 18,
+    "only_added_checkpoint": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+    "scope": "Only originalV102 reference was added. All72 prior learned/classical case metrics and18 existing native panels match exactly, ignoring changed method indices in labels. No new training or quality gain."
+  },
+  "actual_wrong_reference_step_rejection": {
+    "receipt": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-reference-operator-CPU-v1/negative-wrong-reference-step-v2/receipt.json",
+      "sha256": "ded252eaf4c761afa67eacbe20c809b2dbb782643b80254ff5edaf7427e88b75"
+    },
+    "status": "passed-actual-wrong-reference-step-with-exact-loaded-state-and-failure-location",
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-reference-operator-CPU-v1/negative-wrong-reference-step-v2/plan.json",
+      "sha256": "fb96bb9209484d294b45614b2370252c97604dafabb5e9e08ec5e76bd0383d68"
+    },
+    "worker": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-reference-operator-CPU-v1/negative-wrong-reference-step-v2/worker.py",
+      "sha256": "fd9970ce6c5672db89623afd4d7a7def533375622b5565e5b1d50c4a3c47cefa"
+    },
+    "expected_step_deliberately_wrong": 19999,
+    "actual_baseline_step": 20000,
+    "actual_baseline_SHA256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+    "failure_function": "loaded",
+    "failure_source": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-reference-operator-CPU-v1/evaluation-queue/work/scripts/evaluate_v43_quality_trial.py",
+      "sha256": "b72392e4f1bb4a5775e9dcb11635373b71b66343c739cd2248af5e8e290a5147"
+    },
+    "learned_forwards": 0,
+    "no_completed_stage_or_quality_report": true
+  },
+  "cached512_GFX_RGB16": {
+    "receipt": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-reference-operator-CPU-v1/cached-GFX-export/receipt.json",
+      "sha256": "1cc3dc2a59370aea1ff6af7dd6d925b7108487aae6cf3462489d60811dedd0d2"
+    },
+    "status": "completed-cached512-explicit-reference-RGB16-export-awaiting-native-review",
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-reference-operator-CPU-v1/cached-GFX-export/plan.json",
+      "sha256": "54c82f88d6ed4639c784c89ca52e39cf6225da1b3f736e847c6a2d2600098458"
+    },
+    "report": {
+      "path": "/mnt/external/demosaic/fixed-reference-GFX-export-CPU-20261023-v1/report.json",
+      "sha256": "481abf4fabf7f2d1c67927b6305b1210967936adcb6ff9dbb2c9d32888934dbd"
+    },
+    "models": [
+      {
+        "checkpoint": {
+          "arm": "V102",
+          "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+          "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+          "expected_lineage": {
+            "step": 20000
+          },
+          "expected_backbone": {
+            "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+          }
+        },
+        "full_model_state_SHA256": "025c8867a30d4059297d917915506bf15fc427a621510034cbcfa94850a2c55c",
+        "actual_DINO_SHA256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      },
+      {
+        "checkpoint": {
+          "arm": "V102-zero",
+          "path": "/mnt/external/demosaic/convnext-small-transfer-CPU-20261023-v1/Tiny-zero.pt",
+          "sha256": "ae5dfa93f03cd241f1e212b6dcfa5f0fdbe6ac5cff9b9eda57b64cb40b2418c5",
+          "expected_lineage": {
+            "step": 20000
+          },
+          "expected_backbone": {
+            "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+            "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+            "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+          }
+        },
+        "full_model_state_SHA256": "91b5e4215774a6969e41838f8f08d50f0da9640c6fd8e58693e20ba4a073341e",
+        "actual_DINO_SHA256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      }
+    ],
+    "exports": [
+      {
+        "image": {
+          "path": "/mnt/external/demosaic/fixed-reference-GFX-export-CPU-20261023-v1/restored-0-linear16.tiff",
+          "sha256": "a7ed463f11acbf2618c4d3f1b7cc1aacf3f45c5c064cba2c09261bd6eda9570b"
+        },
+        "shape": [
+          512,
+          512,
+          3
+        ],
+        "dtype": "uint16",
+        "color_space": "linear-camera-RGB",
+        "sampled_RGB_values": 50688,
+        "sampled_maximum_quantization_error_DN16": 0.500022747553885,
+        "scope": "TIFF shape/type/tags and 33 decoded full-width rows versus supplied float pixels; not a whole-image precision comparison.",
+        "all786432_channel_values_verified": true,
+        "whole_array_maximum_rounding_error_16bit_DN": 0.5002376958727837,
+        "file": {
+          "path": "/mnt/external/demosaic/fixed-reference-GFX-export-CPU-20261023-v1/restored-0-linear16.tiff",
+          "sha256": "a7ed463f11acbf2618c4d3f1b7cc1aacf3f45c5c064cba2c09261bd6eda9570b"
+        }
+      },
+      {
+        "image": {
+          "path": "/mnt/external/demosaic/fixed-reference-GFX-export-CPU-20261023-v1/restored-0-srgb16.tiff",
+          "sha256": "138d5fae95591d037920ad58a366887c07880a38f5b1fad268b905679d0bdcbe"
+        },
+        "shape": [
+          512,
+          512,
+          3
+        ],
+        "dtype": "uint16",
+        "color_space": "sRGB",
+        "sampled_RGB_values": 50688,
+        "sampled_maximum_quantization_error_DN16": 0.5012819766998291,
+        "scope": "TIFF shape/type/tags and 33 decoded full-width rows versus supplied float pixels; not a whole-image precision comparison.",
+        "all786432_channel_values_verified": true,
+        "whole_array_maximum_rounding_error_16bit_DN": 0.5019234418869019,
+        "file": {
+          "path": "/mnt/external/demosaic/fixed-reference-GFX-export-CPU-20261023-v1/restored-0-srgb16.tiff",
+          "sha256": "138d5fae95591d037920ad58a366887c07880a38f5b1fad268b905679d0bdcbe"
+        }
+      },
+      {
+        "image": {
+          "path": "/mnt/external/demosaic/fixed-reference-GFX-export-CPU-20261023-v1/restored-1-linear16.tiff",
+          "sha256": "704678fc6b2035385c24c8f34437aeee255dbdabe140d7bbfe8e8333704d8d9f"
+        },
+        "shape": [
+          512,
+          512,
+          3
+        ],
+        "dtype": "uint16",
+        "color_space": "linear-camera-RGB",
+        "sampled_RGB_values": 50688,
+        "sampled_maximum_quantization_error_DN16": 0.5001135244965553,
+        "scope": "TIFF shape/type/tags and 33 decoded full-width rows versus supplied float pixels; not a whole-image precision comparison.",
+        "all786432_channel_values_verified": true,
+        "whole_array_maximum_rounding_error_16bit_DN": 0.5002044290304184,
+        "file": {
+          "path": "/mnt/external/demosaic/fixed-reference-GFX-export-CPU-20261023-v1/restored-1-linear16.tiff",
+          "sha256": "704678fc6b2035385c24c8f34437aeee255dbdabe140d7bbfe8e8333704d8d9f"
+        }
+      },
+      {
+        "image": {
+          "path": "/mnt/external/demosaic/fixed-reference-GFX-export-CPU-20261023-v1/restored-1-srgb16.tiff",
+          "sha256": "7425dbee38e271f10ebbf7b7b707bfe878b8fbf13298436d22dc96f321a63443"
+        },
+        "shape": [
+          512,
+          512,
+          3
+        ],
+        "dtype": "uint16",
+        "color_space": "sRGB",
+        "sampled_RGB_values": 50688,
+        "sampled_maximum_quantization_error_DN16": 0.5017095804214478,
+        "scope": "TIFF shape/type/tags and 33 decoded full-width rows versus supplied float pixels; not a whole-image precision comparison.",
+        "all786432_channel_values_verified": true,
+        "whole_array_maximum_rounding_error_16bit_DN": 0.5018628835678101,
+        "file": {
+          "path": "/mnt/external/demosaic/fixed-reference-GFX-export-CPU-20261023-v1/restored-1-srgb16.tiff",
+          "sha256": "7425dbee38e271f10ebbf7b7b707bfe878b8fbf13298436d22dc96f321a63443"
+        }
+      }
+    ],
+    "total_decoded_channel_values_verified": 3145728,
+    "noisy_array_exact_to_cached_packed": true,
+    "reference_native160_exact": true,
+    "RAW_decodes": 0,
+    "CUDA_initialized": false,
+    "torch_CPU_threads": 4,
+    "elapsed_seconds": 13.916521396953613,
+    "scope": "Actual CPU record selection through export_checkpoints,originalV102 and separately labeled derivedTiny-zero,then public report_raw_pair on genuine cached512 GFX foliage. Shared full-scene conditioning,+2EV,native160 independent ISO100 reference,zeroRAF decodes. Four RGB16 TIFFs verified at every channel value. Not full102MP,CUDA,new training or a quality-gain claim."
+  },
+  "export_record_selection_and_TIFF_inspection_function_ASTs_exact_to_current_code": true,
+  "native_review": {
+    "actual_native160_cells_viewed": 16,
+    "boards": [
+      {
+        "receipt": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-reference-operator-CPU-v1/native-view/photo.json",
+          "sha256": "e2f7ced7765caefb9f5173cc43bc6d1c238bbebf142dbff9088b04cfb8cbdc4b"
+        },
+        "board": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-reference-operator-CPU-v1/native-view/photo.png",
+          "sha256": "14139c4a24d6364d643627f2451b30b88744634d554d59571318356dd55f7991"
+        },
+        "actual_native160_cells_viewed": 12
+      },
+      {
+        "receipt": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-reference-operator-CPU-v1/native-view/gfx.json",
+          "sha256": "d0344cee49c1a1dcc3ae9cbd7a6aeda68d26578c9baf271943135a6df75fa50a"
+        },
+        "board": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-reference-operator-CPU-v1/native-view/gfx.png",
+          "sha256": "b5f12b98ce112cdf5856e8fa51b962b79268b07f734494e330ab6100390f3d91"
+        },
+        "actual_native160_cells_viewed": 4
+      }
+    ],
+    "observations": "Original V102,its gate-zero derivative and discarded CPU8 outputs remain close. Weak umbrella ribs and cloud texture are still soft; cached GFX foliage remains overly smooth. Independent ISO100 reference is not exact GT. No quality gain established."
+  },
+  "validation": {
+    "pytest": "146 passed",
+    "log": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-reference-operator-CPU-v1/pytest.log",
+      "sha256": "f3b8444902bd229a9dc4cf626388b1d336d184cf1669d9922fce64e229387825"
+    },
+    "ruff_check": "passed",
+    "ruff_format_check": "passed",
+    "legacy_export_helper_import_checked_in_fresh_CPU_process": true
+  },
+  "compatibility": "References are optional. Legacy record sets and phase/owner/lineage checks remain enforced. New references pin label,absolute checkpoint path,SHA256,actual step and encoder identity. Duplicate labels/files and changed references fail. New export plans freeze record helpers separately ahead of older queue operators,without changing numerical source or archived files; older plans retain their original module search path.",
+  "new_training_updates": 0,
+  "CUDA_or_production_launched": false,
+  "scope": "Actual CPU integration with original V102,its separate zero-gate derivative,and two previously discarded8update fixtures labeledV105/V106. Their labels are not quality endpoints or history entries. Public report queued and completed; actual export-record selector and public GFX reporter ran on one genuine cached512 context,not the whole102MP scene. No new training,capacity result or automatic promotion. Original V104 and source scan continue with their original inputs."
+}

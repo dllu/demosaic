@@ -131,8 +131,9 @@ counts, not completed training. [Prepared plan, hashes and reader evidence](resu
 No controller, CUDA smoke or production run has launched for these recipes.
 Complete and review V104 and the incoming loss-tail scan first; retain the
 prepared evidence if later results warrant a different initializer or cohort.
-Original V102 must remain an explicit evaluation reference alongside its
-separately labeled zero-gate derivative. Fresh CPU/CUDA checks and final native
+The [fixed-reference configuration](../configs/quality-v102-backbone-reference-checkpoints-v1.json)
+and [validated reporting/export support](training-execution.md#fixed-references-alongside-derived-initializers)
+keep original V102 separate from the zero-gate derivative. Fresh CPU/CUDA checks and final native
 photo/material/color/weak-detail/GFX comparisons precede any quality conclusion.
 [Capacity evidence and remaining work](convnext-small-capacity.md).
 
