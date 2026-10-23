@@ -5,13 +5,13 @@ Source quality decisions support the current [V84-based quality experiments](qua
 outside training.** The 31 include four earlier `exclude` decisions and 27
 `withhold` decisions; their original ledger labels remain unchanged.
 The completed V100/V101 runs keep their frozen 88,484-source cohort and 24
-visual exclusions. The next prepared cohort has 88,477 sources and a
-32-region fine-detail catalogue; neither changes completed model inputs.
+visual exclusions. V102/V103 now use the separate 88,477-source cohort and six/32-region catalogues;
+neither changes completed V100/V101 inputs.
 
 | Cohort | Commons training sources | Validation / test | Visual exclusions |
 | --- | ---: | ---: | ---: |
 | Completed V100/V101 | 88,484 | 2,303 / 2,255 | 24 |
-| Prepared next cohort | 88,477 | Same exact records/order | 31 |
+| V102/V103 | 88,477 | Same exact records/order | 31 |
 
 [Current decisions, native examples, catalogue and reader checks](results/source-quality-detail-catalogue-v3.json).
 Originals, existing manifests and protected evaluation scenes remain read-only.
@@ -119,7 +119,7 @@ credits and native-view protocols.
 
 Completed V100/V101 use
 `.cache/quality-first-20261020/curated-corpus-v1/manifest4-large.jsonl`.
-The prepared next manifest is
+The current V102/V103 manifest is
 `.cache/current-quality-20261022-v1/weak-detail-ROI-expansion-v1/future-cohort-v3/manifest4-large.jsonl`,
 SHA256 `9b3a7e162910fd0d695c310da1cc985c0cf901a1a87949cc787492cea34aded8`.
 It removes the newly withheld source from the earlier 88,478-source future
@@ -134,14 +134,15 @@ float32 target hashes exactly. The actual clean reader visits all 32 regions
 under the existing 5% conditional probability, seed 60 mixed-domain schedule and
 zero-PSF geometry→area2 path, with finite native 256 outputs and no GPU/model.
 [Full preparation/review/reader evidence](results/source-quality-detail-catalogue-v3.json).
-These data are prepared for a future experiment, with no trained gain claimed.
+V102/V103 now use these frozen data; their fixed endpoints remain in progress,
+with no quality gain claimed. [Recipes and actual checks](quality-first-training.md#next-matched-comparison-v102v103).
 
 Source views use existing prepared caches. New downloads and decisions enter
 a separate frozen cohort instead of changing an existing experiment's inputs.
 
 ## Reviewed weak and fine texture ROIs
 
-The current prepared catalogue keeps the original six regions and adds 26
+The current expanded catalogue keeps the original six regions and adds 26
 photographs:32 unique sources with exact 512×512 contexts in the 4× cache, giving
 native 256×256 area2 targets. Whole contexts have mixed contrast; selected local
 structures include weak veins, fibers, fur, reeds, grain and faint lines.
@@ -173,7 +174,7 @@ The original six regions below remain byte-identical in the expanded catalogue.
 Completed V101 used only those six at 5% conditional photographic sampling;
 V100 left it off. Its [selected-detail improvement](heldout-detail.md) tests a
 combined recipe package; the ROI-only effect is not isolated. Broader 32-region
-sampling is prepared and validated, with its trained quality still to assess.
+sampling is prepared and validated, now running as the V103 arm, with quality still to assess.
 
 | Source ID prefix | Inspected structure | Bin4 context [x,y,w,h] |
 | --- | --- | --- |

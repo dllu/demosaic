@@ -47,11 +47,13 @@ V101 reaches **36.50347dB** on full427, +.06351dB over V84, improving 418/427
 source means and all seven condition means. Known/unseen CFA means remain close
 to V84. The [completed primary report](v84-curated-quality-review.md) and
 [current native gallery](heldout-detail.md) show gains and remaining smoothing.
-V101 is the next training checkpoint in V84’s architectural family.
+V101 is the current training checkpoint in V84’s architectural family.
+V102/V103 are running matched20k continuations that isolate six versus 32
+reviewed regions at the same 5% conditional sampling probability.
 
 The source scan covers88,508 training images, with570 actually reviewed and 31
 withheld/excluded. Completed runs used the earlier 24 exclusions; seven more and
-a 32-region detail catalogue are prepared for the next 88,477-source cohort.
+a32-region detail catalogue are used by V102/V103 on the separate 88,477-source cohort.
 The [illustrated source review](corpus-source-review.md) explains why
 processing defects/nonphotographic targets are removed while difficult foliage,
 textiles and weak real detail remain. Originals and historical manifests stay

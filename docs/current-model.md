@@ -139,6 +139,7 @@ entries retain the original decisions.
 Local checkpoint: `/mnt/external/demosaic/models/v101-final10000.pt`.
 SHA256: `6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3`.
 The canonical copy matches the completed training artifact byte-for-byte.
+[Current selector and completed-owner verification](results/current-model-V101-selection-v1.json).
 Inference selects its final EMA; the official DINOv3 checkpoint loads separately
 from the local Hugging Face cache. See [usage](usage.md).
 
@@ -146,6 +147,6 @@ V100/V101 continue V84 for 10,000 updates with fresh AdamW/EMA on the cleaned
 88,484-source cohort. V101 removes optical PSFs and adds weak textures,
 photographic contrast attenuation and six reviewed detail ROIs. Their matched
 comparison tests the complete recipe, without isolating individual components.
-The [next prepared 88,477-source cohort and 32-region catalogue](corpus-source-review.md)
-are future-only. Keep current guides and comparisons updated as useful versions
+The [88,477-source cohort and 32-region catalogue](corpus-source-review.md)
+are now used by the matched V102/V103 continuation, with no new quality result yet. Keep current guides and comparisons updated as useful versions
 appear; the timestamped diary retains chronological decisions.

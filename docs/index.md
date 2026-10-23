@@ -4,6 +4,8 @@ Start with the [README](../README.md) for setup, inference and representative
 native crops. **V101 is the current development checkpoint**, continuing V84’s DRUNet RGB
 trunk and frozen DINOv3 ConvNeXt-Tiny features. The completed cleaned-data/detail
 comparison shows a small widespread photographic gain with close camera means.
+V102/V103 now compare six versus32 reviewed regions on the separate88,477-source
+cohort; the current GFX gallery uses completed full-frame restorations.
 
 | Topic | Start here |
 | --- | --- |

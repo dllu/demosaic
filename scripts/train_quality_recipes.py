@@ -2,6 +2,7 @@
 
 import argparse
 import os
+import re
 import shutil
 import signal
 import subprocess
@@ -16,12 +17,17 @@ from train_v43_quality_trial import live
 REPO = Path(__file__).resolve().parents[1]
 
 
-def prepare(root, artifact_root, recipes):
+def prepare(root, artifact_root, recipes, after_run_root=None):
     import yaml
 
-    selection = read(REPO / "configs/current-model.json")
-    parent = selection["checkpoint"]
+    configs = [yaml.safe_load(recipe.read_text()) for recipe in recipes]
+    lineage = configs[0]["initialize_parent"]
+    assert all(config["initialize_parent"] == lineage for config in configs)
+    parent = {key: lineage[key] for key in ("path", "sha256")}
     assert ref(parent["path"]) == parent
+    updates = configs[0]["steps"]
+    assert isinstance(updates, int) and updates >= 8
+    assert all(config["steps"] == updates for config in configs)
     root, artifact_root = root.resolve(), artifact_root.resolve()
     assert root.is_relative_to(REPO / ".cache")
     assert artifact_root.is_relative_to(Path("/mnt/external/demosaic"))
@@ -47,14 +53,42 @@ def prepare(root, artifact_root, recipes):
         target = work / source.relative_to(REPO)
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source, target)
-    inputs = [parent, ref(REPO / "configs/current-model.json")]
+    # Recipes explicitly select their parent. Never pin the mutable recommendation
+    # file: documentation/model selection must be able to advance during a run.
+    parent_selection = work / "configs/parent-selection.json"
+    save(parent_selection, {"checkpoint": parent, "step": lineage["step"]})
+    inputs = [parent]
+    dependency = None
+    if after_run_root is not None:
+        after_run_root = after_run_root.resolve()
+        assert after_run_root.is_relative_to(REPO / ".cache")
+        status = read(after_run_root / "status.json")
+        dependency_plan = ref(after_run_root / "plan.json")
+        guard(read(dependency_plan["path"]))
+        assert status["plan"] == dependency_plan
+        terminal = "completed-GFX-fullframe-exports-awaiting-image-review"
+        assert status["status"] in ("running-GFX-fullframe-exports", terminal)
+        dependency_child = (
+            status["child"]
+            if status["status"] != terminal
+            else read(status["result"]["path"])["owner"]
+        )
+        dependency = {
+            "root": str(after_run_root),
+            "plan": dependency_plan,
+            "controller": status["controller"],
+            "child": dependency_child,
+            "terminal_status": terminal,
+        }
+        inputs.append(dependency_plan)
     arms = {}
-    for recipe in recipes:
-        config = yaml.safe_load(recipe.read_text())
-        name = "V100" if recipe.stem.endswith("v100") else "V101"
+    for recipe, config in zip(recipes, configs, strict=True):
+        match = re.search(r"(?:^|-)(v\d+)$", recipe.stem, re.IGNORECASE)
+        assert match is not None, "Recipe filename must end in its explicit model version"
+        name = match[1].upper()
         assert name not in arms
         assert config["initialize_parent"]["sha256"] == parent["sha256"]
-        assert config["steps"] == 10000 and config["batch_size"] == 16
+        assert config["batch_size"] == 16 and config["patch_size"] == 256
         assert config["model"]["dino_feature_fusion"] == "convnext-pyramid"
         inputs.append(ref(recipe))
         for key in (
@@ -92,13 +126,16 @@ def prepare(root, artifact_root, recipes):
         "work": str(work),
         "artifact_root": str(artifact_root),
         "parent": parent,
+        "parent_step": lineage["step"],
+        "parent_selection": ref(parent_selection),
+        "after_run": dependency,
         "arms": arms,
         "inputs": inputs,
         "frozen_files": {str(p): ref(p)["sha256"] for p in work.rglob("*") if p.is_file()},
         "python": sys.executable,
         "smoke_updates": 8,
-        "train_updates": 10000,
-        "scope": "V84 architecture on curated Commons; original augmentation versus fine-detail package. CPU64/B1 and CUDA256/B16 eight-update smokes are discarded; both production arms start freshly from the same V84 final EMA.",
+        "train_updates": updates,
+        "scope": f"Matched explicit-parent V84-family quality recipes, {updates} updates. CPU64/B1 and CUDA256/B16 eight-update smokes are discarded; production arms start freshly from the same parent EMA. Recipe files record the intended experimental difference.",
     }
     save(root / "plan.json", plan)
     return root / "plan.json"
@@ -117,6 +154,7 @@ def worker(path, phase, arm):
             24 * 2**30 / torch.cuda.get_device_properties(0).total_memory
         )
     parent = torch.load(plan["parent"]["path"], map_location="cpu", weights_only=True, mmap=True)
+    assert parent["step"] == plan["parent_step"]
     constructor, captured = training.JointDemosaic, {}
 
     def instrument(config):
@@ -194,6 +232,25 @@ def controller(path):
         save(root / "status.json", state)
 
     try:
+        if dependency := plan.get("after_run"):
+            record("waiting-for-owned-fullframe-export", dependency=dependency)
+            started = time.monotonic()
+            while True:
+                assert time.monotonic() - started < 43200
+                guard(plan)
+                status = read(Path(dependency["root"]) / "status.json")
+                assert status["plan"] == dependency["plan"]
+                assert status["controller"] == dependency["controller"]
+                if status["status"] == dependency["terminal_status"]:
+                    result = read(status["result"]["path"])
+                    assert ref(status["result"]["path"]) == status["result"]
+                    assert result["owner"] == dependency["child"]
+                    if not live(dependency["controller"]) and not live(dependency["child"]):
+                        break
+                else:
+                    assert status["status"] == "running-GFX-fullframe-exports", status["status"]
+                    assert live(dependency["controller"])
+                time.sleep(15)
         for phase in ("CPU", "CUDA", "train"):
             for arm in plan["arms"]:
                 guard(plan)
@@ -276,9 +333,10 @@ if __name__ == "__main__":
     parser.add_argument("--recipes", type=Path, nargs="+")
     parser.add_argument("--phase", choices=("CPU", "CUDA", "train"))
     parser.add_argument("--arm")
+    parser.add_argument("--after-run-root", type=Path)
     args = parser.parse_args()
     if args.mode == "prepare":
-        print(prepare(args.path, args.artifacts, args.recipes))
+        print(prepare(args.path, args.artifacts, args.recipes, args.after_run_root))
     elif args.mode == "controller":
         controller(args.path)
     else:

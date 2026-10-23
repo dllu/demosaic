@@ -41,17 +41,17 @@ Sources: [Derek Ramsey](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-
 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), modified by binning,
 cropping, simulated noise and restoration.
 
-Real GFX100S: DSCF3879 ISO 6400 → **V101** → DSCF3880 ISO 100 f/5.6. Native160
-sensor-pixel crops, 512px inference contexts and shared +2 EV display. The last
+Real GFX100S: DSCF3879 ISO 6400 → **V101** → DSCF3880 ISO 100 f/5.6. Native 160
+sensor-pixel crops from complete102MP blended restorations, with shared +2 EV display. The last
 panel is a separately captured qualitative reference, **not GT**.
 [Compare V84, V100, V101 and RawNIND on six regions](docs/gfx-qualitative.md).
 V101 and V84 look close here; fine foliage and saturated-light detail remain targets.
 The [Q2, Sony a7R II and GFX50R gallery](docs/cross-camera-qualitative.md)
 also includes V84/V100 on six fixed native regions.
 
-![V101 GFX foliage: noisy, restored and separate low-ISO reference](docs/images/current-gfx/V101-foliage.png)
+![V101 GFX foliage: noisy, restored and separate low-ISO reference](docs/images/current-gfx-fullframe/V101-foliage.png)
 
-![V101 GFX fence: noisy, restored and separate low-ISO reference](docs/images/current-gfx/V101-chain-link-fence.png)
+![V101 GFX fence: noisy, restored and separate low-ISO reference](docs/images/current-gfx-fullframe/V101-chain-link-fence.png)
 
 ## Setup and inference
 

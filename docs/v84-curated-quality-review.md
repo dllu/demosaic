@@ -94,7 +94,8 @@ stronger low-noise bark grain and canopy contrast, with all 12 PSNR/SSIM cases
 improving against both checkpoints. The [standing GFX comparison](gfx-qualitative.md)
 contains sky, building, foliage, fence and two illuminated regions. Those real
 capture outputs remain close; their independently captured ISO100 reference
-is not GT. Full-resolution exports are a separate running job.
+is not GT. The complete 102MP FP32 exports are now verified; V101 inference/blending
+took 168.05s with tile512/overlap64/B4. These timings exclude loading/export.
 
 ## Weak texture and color
 
@@ -147,7 +148,8 @@ raw cases within 1e-10, with no duplicate model/case pairs.
 Use `/mnt/external/demosaic/models/v101-final10000.pt`; the canonical copy is
 byte-identical to the final training artifact. Inference selects its EMA and
 loads the frozen official DINO separately. V101 remains in the V84 architectural
-family. The [prepared 88,477-source next cohort and 32-region catalogue](corpus-source-review.md)
-are future inputs, not the data used in these completed continuations.
+family. The [88,477-source cohort and 32-region catalogue](corpus-source-review.md)
+now support the running V102/V103 comparison. They were not used in the
+completed V100/V101 continuations.
 More real fine-detail coverage and a sufficient source-exposure budget remain
 quality priorities. Speed optimization follows quality work.

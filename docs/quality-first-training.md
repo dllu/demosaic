@@ -6,7 +6,41 @@ reaches 36.50347 dB photographic PSNR (+.06351 dB over V84), with gains across a
 seven conditions and camera means close to V84. Native high-noise fine-detail
 loss remains. [Results and comparisons](v84-curated-quality-review.md).
 
-## Current comparison
+## Next matched comparison: V102/V103
+
+Both runs continue the exact final V101 EMA on the newly frozen 88,477-source
+cohort, with fresh AdamW/EMA. They retain the zero-PSF, weak-texture and
+photographic contrast package. The only recipe difference is **six versus 32
+reviewed source regions**, both sampled at 5% conditional on a photographic
+Commons example. The six-region control preserves the original ROI objects
+while rebinding to the same new manifest.
+
+| Shared setting | Value |
+| --- | --- |
+| Parent | V101 final10000 EMA |
+| Commons cohort / visual exclusions | 88,477 /31 |
+| Native / paired captures | 128 /32 |
+| Schedule | Seed60, 20,000 updates, B16/native256, BF16 |
+| LR / warmup | 1e-5 /200 updates |
+| V102 reviewed regions | Original 6 |
+| V103 reviewed regions | Expanded 32 |
+
+[Six-region recipe](../configs/quality-v101-detail-six-v102.yaml) ·
+[Expanded recipe](../configs/quality-v101-detail-expanded-v103.yaml) ·
+[Actual launch and discarded CPU/CUDA checks](results/v101-detail-diversity-training-launch-v1.json).
+All four eight-update checks passed from exact V101 weights with finite states
+and unchanged official DINO. Production starts freshly again. V102 is running;
+V103 follows it. Both fixed 20k endpoints require evaluation before claiming a gain.
+The larger budget also improves source exposure compared with the 10k pilot.
+
+Frozen plan: `.cache/current-quality-20261022-v1/detail-diversity-training-v1/plan.json`.
+Artifacts: `/mnt/external/demosaic/v101-detail-diversity-20261022-v1/`.
+The runner reads explicit recipe lineage and snapshots its parent choice, leaving
+`configs/current-model.json` free to track recommendations during a run.
+It waited for both full-frame owners to exit; CPU/CUDA checks and production
+retain the resource floors below, with no automatic retry.
+
+## Completed V100/V101 comparison
 
 Two continuations start from the exact final V84 EMA with fresh AdamW/EMA:
 
@@ -45,15 +79,13 @@ hash, bounds, augmentation-order and resume checks.
 
 ## Data and source quality
 
-The current cohort has 88,484 Commons training sources, versus 84,867 in V84's
+The completed V100/V101 cohort has 88,484 Commons training sources, versus 84,867 in V84's
 original recipe. It preserves the same 2,303 validation and 2,255 test memberships.
-The full source scan covered 88,508 training images. The active cohort applies
-24 visual exclusions. Targeted review now covers 570 sources: 539 retained and 31
-withheld/excluded. Seven additional exclusions are prepared in a separate
-88,477-source follow-up; the completed runs keep their frozen inputs. Its
+The full source scan covered 88,508 training images. That cohort applies 24 visual exclusions. Targeted review now covers 570 sources: 539 retained and 31
+withheld/excluded. Seven additional exclusions are applied to the separate
+88,477-source V102/V103 cohort; V100/V101 keep their frozen inputs. Its
 [expanded 32-region catalogue](../configs/low-contrast-training-rois-curated-v3.json)
-preserves the original six and adds 26 reviewed fine-detail sources for a future
-experiment. [Data, native examples and reader proof](results/source-quality-detail-catalogue-v3.json).
+preserves the original six and adds 26 reviewed fine-detail sources for V103. [Data, native examples and reader proof](results/source-quality-detail-catalogue-v3.json).
 High loss, ISO and metadata selected review candidates; visible native/binned
 quality determined exclusions. Hard
 foliage, textiles, nets, weak fog and other useful detail remain eligible.
@@ -106,7 +138,8 @@ have exited. Actual owner/phase status is in the local `status.json`.
 The [completed V84/V100/V101 primary report](v84-curated-quality-review.md)
 includes full427 photographic and known/unseen measured-CFA results, independently
 rebuilt source means, intervals and native crops. All seven evaluation panels
-have completed; the full-frame GFX export is running separately.
+and the complete GFX exports have finished; [full-frame results](gfx-qualitative.md)
+include native crops and checkpoint-specific timings.
 [Original launch and verification](results/current-model-baseline-selection-v1.json).
 
 The [supplementary CPU report](results/heldout-detail-V101-final-v1.json) compares
@@ -129,11 +162,11 @@ The three-model workflow previously passed a CPU reporting smoke with72 cases
 and six actually viewed native triplets; production results follow separately.
 [Evaluation readiness](results/v84-recipe-evaluation-readiness-v1.json).
 
-The full-frame queue at `.cache/current-quality-20261022-v1/fullframe-v1/`
-is restoring the complete GFX scene with V84, both final continuations and
-RawNIND-channel. It exports RGB16 files and six fixed native crop comparisons;
-the [GFX guide](gfx-qualitative.md) records the settings. This queue also waits
-for the preceding controller to exit before launching a GPU worker.
+The completed full-frame queue at `.cache/current-quality-20261022-v1/fullframe-v1/`
+restored the complete GFX scene with V84, both final continuations and
+RawNIND-channel. It exported RGB16 files and six fixed native crop comparisons;
+the [GFX guide](gfx-qualitative.md) records the settings. It waited
+for the preceding controller to exit before launching its GPU worker.
 
 Compare new checkpoints with V84 and useful alternatives on full 427-photo,
 known/unseen measured-CFA, weak-detail/color and standing GFX tests. Show at

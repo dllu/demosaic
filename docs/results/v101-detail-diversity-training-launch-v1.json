@@ -1,0 +1,77 @@
+{
+  "status": "all4discardedCPU-CUDAsmokes-passed-production-continuations-started",
+  "recorded_local": "2026-10-22T16:59:28.448937-07:00",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/detail-diversity-training-v1/plan.json",
+    "sha256": "cc82ccf57e9f9fd70f240a248a4b31ac094b84d04b315cace7646332e59dbbee"
+  },
+  "launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/detail-diversity-training-v1/launch.json",
+    "sha256": "7fc18f5955d1195a91b8ad404b5f464c520afa5c467aa067e3d9655c77a21e3a"
+  },
+  "preflight": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/detail-diversity-training-v1/preflight.json",
+    "sha256": "f83a5fbefdf636859f2fb65a19235feda324ea3a147439c9cb717511b596748d"
+  },
+  "controller": {
+    "pid": 1957419,
+    "created": 1792713378.53
+  },
+  "actual_status_at_publication": "running-quality-training",
+  "phase": "train",
+  "arm": "V102",
+  "child_at_publication": {
+    "pid": 1958443,
+    "created": 1792713542.96
+  },
+  "smokes": {
+    "CPU-V102": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/detail-diversity-training-v1/CPU-V102-result.json",
+      "sha256": "c8b82c1f70c2f1a4ce3f96d78f23bfb0b66166f7c8610d830744ed37f102c00f"
+    },
+    "CPU-V103": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/detail-diversity-training-v1/CPU-V103-result.json",
+      "sha256": "764a9ed650926e863745be1de0e188d64da9b531d5f43dafa143a8a934e1899f"
+    },
+    "CUDA-V102": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/detail-diversity-training-v1/CUDA-V102-result.json",
+      "sha256": "275836706c5c6133a85f58029ac1e6b06b3bde5d6a5d2df2c7cbe4271439466a"
+    },
+    "CUDA-V103": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/detail-diversity-training-v1/CUDA-V103-result.json",
+      "sha256": "f10a9af3d160a126b2cfeb63b88e9dec481237969c3efbefe8d5acc23fc85398"
+    }
+  },
+  "parent": {
+    "path": "/mnt/external/demosaic/models/v101-final10000.pt",
+    "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3"
+  },
+  "parent_step": 10000,
+  "updates_per_arm": 20000,
+  "only_recipe_changes": [
+    "reviewed_roi_catalogue",
+    "run"
+  ],
+  "common_settings": {
+    "seed": 60,
+    "batch_size": 16,
+    "native_patch": 256,
+    "lr": 1e-05,
+    "warmup_steps": 200,
+    "fresh_AdamW_EMA": true,
+    "zero_Commons_native_PSF": true,
+    "reviewed_ROI_conditional_probability": 0.05,
+    "six_vs32_source_regions": true,
+    "Commons_train_sources": 88477,
+    "native_captures": 128,
+    "paired_captures": 32
+  },
+  "data_review": {
+    "path": "/home/dllu/proj/demosaic/docs/results/source-quality-detail-catalogue-v3.json",
+    "sha256": "271866217ddceac249ee9a515c7d6b158aab327441cde7236dab4f686b4afcbb"
+  },
+  "mutable_recommendation_file_not_bound": true,
+  "prior_fullframe_owners_exited_before_smokes": true,
+  "no_trained_quality_claim": true,
+  "scope": "Both discarded8update smokes begin from exactV101EMA. Production arms freshly initialize again; no intermediate endpoint search, no speed experiment, no automatic retries. Remaining quality evaluation/native review follows completed fixed20k endpoints."
+}

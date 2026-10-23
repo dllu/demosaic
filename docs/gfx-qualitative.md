@@ -8,26 +8,30 @@ learned checkpoints. They retain more coherent fence strands and cleaner
 building rails than RawNIND here. Foliage remains smooth, and saturated-light
 shapes/boundaries remain areas to improve.
 
-![Current native sky, building, foliage, fence and illuminated-region comparisons](images/current-gfx/gfx-comparison.png)
+![Current native sky, building, foliage, fence and illuminated-region comparisons](images/current-gfx-fullframe/gfx-comparison.png)
 
 Columns: noisy Malvar, V100, **V101**, V84, RawNIND with input-only per-CFA-channel
 gain, separate ISO100 reference. Each cell is **160×160 native sensor pixels**,
 never resized. Open the original PNG at100%; a browser may fit the board to its
-window. All current methods use the same512px contexts and CPU IEEE FP32.
+window. These crops come from complete 101.996MP blended CUDA IEEE FP32 restorations,
+with tile512/overlap64/B4, before RGB16 encoding.
 Shared conditioning is shot`.0014635775921166604`, read variance
 `1.0715704128646712e-6`, with display ×4(+2EV) and the noisy capture's WB/matrix.
 PNG previews are8-bit sRGB; inference and saved context arrays remain FP32.
-These are contextual comparisons, not the pending full-frame blend or timing.
+All four complete exports and eight RGB16 TIFFs have been independently verified.
+The [earlier 512px CPU contexts](images/current-gfx/gfx-comparison.png) remain
+available as a separate comparison.
 
-[V101 foliage triplet and metadata](images/current-gfx/V101-foliage.json) ·
-[V101 fence triplet and metadata](images/current-gfx/V101-chain-link-fence.json) ·
-[all24triplets and source/checkpoint metadata](images/current-gfx/manifest.json) ·
-[actual native viewing and float-panel replay](results/gfx-current-V84-V100-V101-CPU-v1.json).
+[V101 foliage triplet and metadata](images/current-gfx-fullframe/V101-foliage.json) ·
+[V101 fence triplet and metadata](images/current-gfx-fullframe/V101-chain-link-fence.json) ·
+[all24triplets and source/checkpoint metadata](images/current-gfx-fullframe/manifest.json) ·
+[native viewing, full-frame operation and TIFF audit](results/gfx-V84-V100-V101-fullframe-v1.json).
 Every public PNG retains the original report's pixels. Source captures,
 reference calibration, ROI, full checkpoint hash, noise, exposure and display
-settings accompany each sidecar. All72display panels reproduce the36 saved
-unquantized input/reference/prediction arrays exactly. Shared noisy/reference
-pixels match across methods with zero RGB8 tolerance.
+settings accompany each sidecar. All 36 native board cells were actually viewed,
+and shared noisy/reference pixels match across methods with zero RGB8 tolerance.
+The [CPU context report](results/gfx-current-V84-V100-V101-CPU-v1.json) separately
+reproduces all 72 of its display panels from saved float contexts.
 
 Assess these real views alongside the
 [current photographic/camera results](current-model.md).
@@ -96,15 +100,32 @@ are source observations, rather than independent model-selection cases.
 
 ## Reproduce and extend the comparisons
 
-Complete 101.996MP exports are running for V84, final V100/V101 and RawNIND
-with CFA-channel input gain. The seven-panel quality evaluation and both fixed10k
-training runs have completed; the full-frame worker started after their owners exited.
-The run uses IEEE FP32, tile512/overlap64/B4, and exports linear-camera RGB16,
-tagged sRGB16 and overviews. Six native regions cover the four standing crops
-plus the neon sign and illuminated platform. Outputs will be in
-`/mnt/external/demosaic/v84-quality-fullframe-20261022-v1/`.
-The cropped CPU export smoke passed; actual full-frame outputs and timing
-remain pending. [Queue and export checks](results/v84-quality-fullframe-readiness-v1.json).
+Complete 101.996MP exports have finished for V84, V100, V101 and RawNIND with
+CFA-channel input gain. The worker and controller exited normally. All eight
+TIFFs reopen as 8746×11662×3 uint16 RGB; sRGB files carry ICC profiles. Independent
+checks rehash every complete file and confirm shape/depth/tags. The writer also
+compares 33 decoded full-width rows per export with supplied floats: sampled
+maximum rounding error is .50194 normalized 16-bit DN. This verifies the export
+path, rather than a whole-image learned-precision bound.
+
+| Model | Full-frame inference/blending, seconds |
+| --- | ---: |
+| V84 | 168.47 |
+| V100 | 168.21 |
+| **V101** | **168.05** |
+| RawNIND channel | 17.25 |
+
+Settings: IEEE FP32, tile512/overlap64/B4, 520 tiles, channels-last. These observed
+shared-machine timings exclude RAW decode, model loading and TIFF writes.
+They do not meet the 100MP/10s target; quality remains the priority. Native
+crops come directly from the blended float frame, before RGB16 encoding.
+All six regions and four resized whole-scene overviews were inspected. The
+learned outputs look close, with coherent mesh/rails but soft foliage and
+lit-sign structure. The low-ISO exposure remains a nonexact reference.
+
+Outputs: `/mnt/external/demosaic/v84-quality-fullframe-20261022-v1/`.
+[Completed exports, timings, native review and independent audit](results/gfx-V84-V100-V101-fullframe-v1.json).
+[Original queue and cropped CPU export smoke](results/v84-quality-fullframe-readiness-v1.json).
 
 Rebuild the shipped gallery without inference or access to private RAWs:
 

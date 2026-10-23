@@ -1,0 +1,94 @@
+{
+  "report": {
+    "path": "/mnt/external/demosaic/v84-quality-fullframe-20261022-v1/report.json",
+    "sha256": "08af133b3c94e967159371869fc2989b3415da0be647c3f65913bcceb1659ada"
+  },
+  "public_gallery": "docs/images/current-gfx-fullframe",
+  "immutable_gallery": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/fullframe-publication-v1/published-gallery/manifest.json",
+    "sha256": "52a5f25c3587973689fe7f9a1f979f2927e6b587d3b788b33c6c17a6a0e97bdb"
+  },
+  "immutable_board": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/fullframe-publication-v1/published-gallery/gfx-comparison.png",
+    "sha256": "e4981d3e997450cb9dff16a1fd6477945c76f667b0d21a91a7a9626e9c4a77f4"
+  },
+  "immutable_board_cells": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/fullframe-publication-v1/published-gallery/gfx-comparison.json",
+    "sha256": "e3343da625b5ee859def2b95545b6d47a7c001393525ee621eabc8ec417e53d2"
+  },
+  "source_result": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/fullframe-v1/result.json",
+    "sha256": "a69dc06f119159190b2dfb2ae81cf2ad49a134cd91a415e9801fbc0b8901ed13"
+  },
+  "status": "completed-full101996MP-GFX-exports-independent-TIFF-audit-and-actual-native-overview-review",
+  "recorded_local": "2026-10-22T16:59:27.888015-07:00",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/fullframe-v1/plan.json",
+    "sha256": "8a9cb830562db1e30ee618f69c839108ce3fbffb5403caa57c71c275d9868f77"
+  },
+  "independent_export_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/fullframe-publication-v1/independent-export-audit.json",
+    "sha256": "c3df8a0239e8afc430958a512e1981973587d5978cee4615ef9d9bd6ba8ec860"
+  },
+  "export_count": 8,
+  "shape": [
+    8746,
+    11662,
+    3
+  ],
+  "output_dtype": "uint16",
+  "native160_cells_actually_viewed": 36,
+  "full_frame_float_restoration_crop_source": true,
+  "all_noisy_and_independent_reference_pixels_shared_exactly": true,
+  "private_resized_overview_board": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261022-v1/fullframe-publication-v1/overview-context-only.png",
+    "sha256": "2808f8fc0ecbfaf8a767283efd62c5b2de72da137040fc991fd0fb65ec1f62b2"
+  },
+  "overviews_actually_viewed": 4,
+  "maximum_writer_sampled_quantization_error_DN16": 0.5019367933273315,
+  "total_TIFF_bytes": 4895815232,
+  "timings": [
+    {
+      "model": "0:native-data-control-v84:step-20000",
+      "seconds": 168.4726029871963,
+      "scope": "restoration inference and blending; excludes RAW decode, model load, TIFF export",
+      "tile": 512,
+      "overlap": 64,
+      "batch_size": 4,
+      "precision": "float32",
+      "megapixels": 101.995852
+    },
+    {
+      "model": "1:V100:step-10000",
+      "seconds": 168.21273292205296,
+      "scope": "restoration inference and blending; excludes RAW decode, model load, TIFF export",
+      "tile": 512,
+      "overlap": 64,
+      "batch_size": 4,
+      "precision": "float32",
+      "megapixels": 101.995852
+    },
+    {
+      "model": "2:V101:step-10000",
+      "seconds": 168.04739387589507,
+      "scope": "restoration inference and blending; excludes RAW decode, model load, TIFF export",
+      "tile": 512,
+      "overlap": 64,
+      "batch_size": 4,
+      "precision": "float32",
+      "megapixels": 101.995852
+    },
+    {
+      "model": "RawNIND:CFA-channel",
+      "seconds": 17.253858817042783,
+      "scope": "restoration inference and blending; excludes RAW decode, model load, TIFF export",
+      "tile": 512,
+      "overlap": 64,
+      "batch_size": 4,
+      "precision": "float32",
+      "megapixels": 101.995852
+    }
+  ],
+  "finding": "Learned outputs remain close. Fence strands/rails are more coherent than RawNIND; foliage and lit-sign fine structure still smooth. Resized whole-scene overviews show similar broad behavior; they are not native pixel-quality proof. No broad real-camera superiority or10second target claim.",
+  "references": "DSCF3880 is an independent ISO100f5.6 exposure, not exact GT. All sources are local cached RAFs; originals remain read-only and scene/siblings outside training."
+}

@@ -1,9 +1,9 @@
 {
-  "preferred_version": 84,
-  "name": "V84 final20000",
+  "preferred_version": 101,
+  "name": "V101 final10000",
   "checkpoint": {
-    "path": "/mnt/external/demosaic/models/v84-original20000.pt",
-    "sha256": "134887e12357aabf420cceee3ee53fc8832cf02a8f81ff883b829a9e51e16f10"
+    "path": "/mnt/external/demosaic/models/v101-final10000.pt",
+    "sha256": "6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3"
   },
   "architecture": {
     "restoration_backbone": "pretrained-rgb",
@@ -12,12 +12,15 @@
     "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
     "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b"
   },
-  "closely_matched_alternative": 85,
+  "closely_matched_alternative": 84,
   "notable_comparators": [
     43,
+    85,
     95,
-    99
+    99,
+    100
   ],
-  "selection_basis": "Strongest completed fixed photographic results, competitive measured-CFA results and useful native-image quality. Individual study significance/promotion gates do not freeze the development baseline.",
-  "review": "docs/current-model.md"
+  "selection_basis": "Completed full427 photo PSNR36.50347dB (+.06351 over V84), improved photo SSIM/chroma/gradient means and418/427 source PSNR gains; known/unseen CFA changes+.00282/-.00488dB versus V84. Native natural-detail gains and close GFX outputs. Use this useful continuation without requiring every diagnostic to win. Same V84 DRUNet/DINOv3 ConvNeXt-Tiny architecture.",
+  "review": "docs/current-model.md",
+  "performance_report": "docs/v84-curated-quality-review.md"
 }

@@ -34,12 +34,12 @@ Both fixed endpoints and all seven evaluation panels have completed. V101
 reaches 36.50347 dB on full427 (+.06351 dB over V84), with camera CFA means close
 to V84 and remaining real fine-detail loss. It is the next quality checkpoint.
 [Completed primary results](v84-curated-quality-review.md). Full-frame exports
-are running separately; status and artifact locations are in the training guide.
+are complete and independently verified; status and artifact locations are in the training guide.
 
 Actual source-quality review covers 570 sources: 539 retained/31 withheld, after
 a complete loss/proxy scan of88,508 training sources. The active runs use the
 earlier 24 exclusions; seven newer exclusions and a 32-region detail catalogue are
-prepared separately for the next 88,477-source cohort. Hard or high-loss material
+applied in the separate 88,477-source V102/V103 cohort. Hard or high-loss material
 is not automatically bad data. [Native source examples](corpus-source-review.md)
 show the decisions; protected holdouts and series stay fixed.
 
@@ -49,7 +49,8 @@ gains and remaining high-noise smoothing. Current
 [Q2/Sony/GFX50R comparisons](cross-camera-qualitative.md) show V84/V100 beside
 V43 and RawNIND. The [completed three-model camera comparison](real-camera-quality.md)
 shows V101 CFA means close to V84, with auxiliary RGB tradeoffs. All seven
-quality panels have finished; full-frame GFX exports are running separately.
+quality panels and full-frame GFX exports have finished. V102/V103 now train
+from V101 with six versus 32 reviewed regions on the88,477-source cohort.
 The [16-scene paired test reserve](paired-reserved-test.md) is prepared and
 validated, with no model inference or scores; it remains outside model selection.
 

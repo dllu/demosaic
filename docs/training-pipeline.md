@@ -7,13 +7,14 @@ gains.50990dB over8×-then-geometry on all427 photos. On the actual RGB pipeline
 batch32 is only1.3% faster than16 while using roughly twice the CUDA allocation.
 Details and limitations are recorded below.
 
-Current [V84-based quality runs](quality-first-training.md) use 88,484 curated
-Commons sources, 128 native captures and 32 paired training cases. The V101
-candidate removes optical PSFs and enables reviewed-region sampling; V100
-retains the original policy.
-The [source-quality guide](corpus-source-review.md) distinguishes these frozen
-inputs from the latest reviewed follow-up cohort. Later sections retain
-measurements from earlier cohorts and architectures.
+Current [V102/V103 quality continuations](quality-first-training.md) start
+from V101 on the separate 88,477-source Commons cohort, keeping 128 native and 32
+paired captures. Both retain the zero-PSF/weak-detail recipe, with six versus 32
+reviewed regions at the same conditional 5% probability. Completed V100/V101
+used the frozen 88,484-source cohort; V101 removed optical PSFs and added the
+original six ROIs. The [source-quality guide](corpus-source-review.md) records
+which cohort each experiment uses. Later measurements retain their actual
+source pools and architecture labels.
 
 The completed [spectral](spectral-original4k-review.md) and
 [late RGB](late-rgb-original4k-review.md) trials use native 256×256/B16 and all88,508
@@ -165,9 +166,9 @@ selection rebinning reads its supplied manifest instead of the changing index.
 
 ## Reviewed photographic regions
 
-The opt-in reader supports the prepared
+The opt-in reader supports the current
 [32-region fine-detail catalogue](../configs/low-contrast-training-rois-curated-v3.json)
-and its exact 88,477-source future manifest. It preserves the original six regions
+and its exact88,477-source V102/V103 manifest. It preserves the original six regions
 and adds 26 source photographs after actual native inspection.
 [Examples, source decisions and all 32 real-reader checks](corpus-source-review.md#reviewed-weak-and-fine-texture-rois).
 `reviewed_roi_catalogue` names that file; `reviewed_roi_fraction` defaults to
@@ -175,8 +176,9 @@ and adds 26 source photographs after actual native inspection.
 Commons sample**. Flat and synthetic samples retain their existing shares.
 Completed V101 used the [original six-region catalogue](../configs/low-contrast-training-rois-v1.json)
 at `.05`; V100 left it disabled. Their [current selected-detail results](heldout-detail.md)
-are available while the full matched comparison runs. The expanded catalogue
-is future-only and requires a fresh experiment with its matching manifest.
+and the [full matched results](v84-curated-quality-review.md) are available. The expanded catalogue
+is used by V103 with its matching manifest; V102 uses the same original six
+regions rebound to that manifest. Both production endpoints are still running.
 
 Selection happens before opening the image cache. A selected sample loads only
 its reviewed source, crops within the recorded 512×512 bin4 region, applies the
@@ -205,7 +207,7 @@ That probe used fraction0.5 solely to exercise the reader. It ran no denoising
 model, optimizer or sensor-noise simulation. These are implementation checks;
 V101 now has trained evidence for its complete recipe package; the ROI-only
 effect is not isolated. The expanded 32-source catalogue has reader/data proof,
-with no trained result yet.
+with V102/V103 training in progress and no evaluated gain yet.
 
 ## Current recipe sampling and targets
 
@@ -231,7 +233,9 @@ The schedule selects 4,998 Commons, 2,532 native and 2,470 paired steps.
 Within the photographic Commons row, 2,844 examples use reviewed regions:
 5.093% of those photographs and 1.778% of all160,000 examples. Each of the six
 reviewed sources is scheduled443–517 times. These are deterministic schedule
-counts, not a claim that the still-running model has consumed the entire run.
+counts for the completed V101 schedule, not the new V102/V103 runs.
+The [full source-coverage audit](results/training-v100-v101-source-coverage-v1.json)
+reconciles these counts with the finished endpoints.
 
 Actual clean-target reconstruction at each source's earliest scheduled index
 confirms finite FP32 native256 tensors and zero optical-PSF calls in those
