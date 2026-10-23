@@ -75,6 +75,8 @@ PYTHONPATH=.:src:scripts uv run pytest -q
 ```
 
 Noise values are examples; use suitable camera/input priors.
+[Linear DNG + full-resolution JPEG batch export](docs/dng-export.md) preserves
+camera RGB and adapts existing darktable XMP edits without repeating denoising.
 [Usage](docs/usage.md) · [current training](docs/quality-first-training.md) ·
 [data pipeline](docs/training-pipeline.md) · [experiments](docs/experiments.md) ·
 [documentation guide](docs/index.md). Quality takes priority. State-of-the-art

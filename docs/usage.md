@@ -21,6 +21,10 @@ not been measured for V101; positive-noise profiles bypass the correction.
 
 ## Environment and storage
 
+For native RGB16 DNGs plus full-resolution JPEGs from RAW/XMP pairs, use the
+[batch DNG exporter](dng-export.md). It records noise conditioning and hashes,
+and retains adapted darktable edits alongside the restored camera-linear data.
+
 Run commands from the repository root after `source scripts/env.sh`. This keeps
 uv, Hugging Face, Torch, compiler caches and temporary files inside the repository.
 Large generated data and runs belong in `/mnt/external/demosaic`. Source photo

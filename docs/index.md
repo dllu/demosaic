@@ -15,7 +15,7 @@ The GFX guide includes both completed full-frame and new V102 context comparison
 | Results | [Experiment index](experiments.md), [PSNR history](performance-history.md) |
 | Older work | [Chronological archive](experiment-archive.md), [local-time diary](../diary/index.md) |
 | Current model | [V101/V84 quality and comparisons](current-model.md) · [Real-camera metrics](real-camera-quality.md) · [GFX comparisons](gfx-qualitative.md) · [Q2/Sony/GFX50R](cross-camera-qualitative.md) |
-| Usage | [Commands and data conventions](usage.md) |
+| Usage | [Commands and data conventions](usage.md) · [Linear DNG/JPEG export](dng-export.md) |
 | Data | [Commons corpus](commons-post4557-reviewed.md), [illustrated source review](corpus-source-review.md), [source exclusions](commons-content-overlap.md), [native RAW targets](public-raw-expansion-v2.md) |
 | Training | [Data/augmentation pipeline](training-pipeline.md), [execution/restart](training-execution.md), [V43 quality-study checks](quality-training-validation.md) |
 | Evaluation | [Quality/noise diagnostics](evaluation.md), [natural fine detail](heldout-detail.md), [noise/detail tradeoff](noise-conditioning.md), [ADC-only consistency](adc-consistency.md), [GFX test](gfx-qualitative.md), [prepared test reserve](paired-reserved-test.md) |

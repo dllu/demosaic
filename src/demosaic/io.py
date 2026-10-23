@@ -24,6 +24,8 @@ class RawMetadata:
     flip: int
     iso: float | None = None
     adc_white_level: float | None = None
+    make: str | None = None
+    xyz_to_camera: list[list[float]] | None = None
 
 
 def camera_matrix(cam_xyz):
@@ -51,7 +53,7 @@ def exif_identity(path):
     if not shutil.which("exiftool"):
         return {}
     result = subprocess.run(
-        ["exiftool", "-j", "-Model", "-ISO", str(path)],
+        ["exiftool", "-j", "-Make", "-Model", "-ISO", str(path)],
         capture_output=True,
         text=True,
         check=True,
@@ -107,6 +109,8 @@ def read_raw(path):
             int(raw.sizes.flip),
             identity.get("ISO"),
             float(raw.white_level),
+            identity.get("Make"),
+            raw.rgb_xyz_matrix[:3].tolist(),
         )
     return image, meta
 
