@@ -8,6 +8,13 @@ learned checkpoints. They retain more coherent fence strands and cleaner
 building rails than RawNIND here. Foliage remains smooth, and saturated-light
 shapes/boundaries remain areas to improve.
 
+The [fixed-V101 conditioning study](noise-conditioning.md#real-gfx-contexts)
+compares .50/.75/1.00/1.25× variance strengths on these same six regions. Lower
+strengths retain more wall/foliage texture and grain; higher strength smooths
+further. It uses cached CPU 512 contexts, with no reference scoring or production
+default change. The main comparison below uses the original 1× conditioning and
+complete full-frame blends.
+
 ![Current native sky, building, foliage, fence and illuminated-region comparisons](images/current-gfx-fullframe/gfx-comparison.png)
 
 Columns: noisy Malvar, V100, **V101**, V84, RawNIND with input-only per-CFA-channel

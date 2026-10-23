@@ -19,6 +19,11 @@ window. Columns share the same noisy observation, coordinates, display and exact
 synthetic target. RawNIND uses input-only CFA-channel gain. V101 is highlighted
 among the matched checkpoints in this gallery.
 
+The [fixed-weight noise-conditioning probe](noise-conditioning.md) separates a
+related detail/grain tradeoff: lower priors preserve more high-noise structure
+and residual error. It keeps the true noisy observations fixed; the current
+calibrated default remains unchanged.
+
 ## Current continuations
 
 V100/V101 each continue the exact V84 final20k EMA for10,000 updates on the
