@@ -78,6 +78,32 @@ def test_declared_memory_and_disk_reserves_stop_work(worker, monkeypatch, ram, d
         )
 
 
+@pytest.mark.parametrize("reserve", [255, -1, True, 288.5, float("nan")])
+def test_invalid_reserve_stops_before_reading_inputs_or_creating_outputs(worker, tmp_path, reserve):
+    output = tmp_path / "untouched"
+    with pytest.raises(ValueError, match="at least256GiB"):
+        worker.freeze(None, [], None, output, reserve_gib=reserve)
+    assert not output.exists()
+
+
+def test_explicit_smaller_budget_still_protects_complete_payload_and_memory(worker, monkeypatch):
+    available = 64 * 2**30
+    free = 288 * 2**30 + 1024
+    monkeypatch.setattr(
+        worker.psutil, "virtual_memory", lambda: SimpleNamespace(available=available)
+    )
+    monkeypatch.setattr(worker.shutil, "disk_usage", lambda _: SimpleNamespace(free=free))
+    plan = {"root": "/mnt/external", "minimum_available_gib": 48, "reserve_gib": 288}
+    worker.resources(plan, additional_bytes=1024)
+    free -= 1
+    with pytest.raises(RuntimeError, match="disk space"):
+        worker.resources(plan, additional_bytes=1024)
+    free += 1
+    available = 47 * 2**30
+    with pytest.raises(RuntimeError, match="memory"):
+        worker.resources(plan, additional_bytes=1024)
+
+
 @pytest.mark.parametrize("damage", ["attribution", "original_bytes"])
 def test_pinned_source_and_actual_bytes_cannot_change(worker, tmp_path, monkeypatch, damage):
     source = tmp_path / "archive"

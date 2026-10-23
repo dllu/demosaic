@@ -63,6 +63,16 @@ The original bounded downloader remains the only owner of the archive download
 lock. This storage change increases its headroom without changing the 336 GiB
 reserve, current manifests, source admission policy or numerical experiments.
 
+The preparation/review-freeze tools now accept an explicitly budgeted reserve
+of at least256GiB, while retaining their historical560/500GiB defaults. Before
+preparation, free space must cover **the entire new4×/8× payload plus4GiB margin
+above the selected reserve**; the48GiB available-memory guard also remains.
+For this bounded batch,288GiB is a prospective reserve:256GiB for the active
+quality study plus32GiB for its remaining checkpoint/evaluation/full-frame
+writes. The actual audited arrivals, free space and remaining writes must be
+recalculated before launch. This changes no running plan or downloader limit.
+[Resource-policy changes and37 passing focused tests](results/commons-bounded-preparation-budget-v1.json).
+
 ## Admission into a future training corpus
 
 **Downloading does not change a training or evaluation manifest.** V100/V101
@@ -96,8 +106,13 @@ headers/hashes; partial producers never enter training.
 `QI_ROOT` and `QI_LOG_FILE`; its defaults differ from the **current bounded
 plan above**. Do not start it alongside that job. `scripts/expand_commons.py`
 and `scripts/rebin_commons_extension.py` implement earlier selection/preparation
-workflows. For new arrivals follow the protected-scene screening and frozen
-selection procedure in [the incoming-corpus guide](commons-incoming-v4.md).
+workflows. New arrivals use `scripts/prepare_downloaded_commons.py` for a frozen
+selection, verified original/attribution bytes, both cache scales and protected
+screening. It acquires the same download lock, so preparation starts after the
+current downloader exits. All prior prepared/quarantined/failed identities must
+be excluded. Follow the [completed preparation](commons-post4557-preparation.md)
+and [reviewed coupled freeze](commons-post4557-reviewed.md) for the independent
+cache/source/neighbor review required before admission.
 
 Preserved completed receipts include:
 

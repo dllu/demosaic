@@ -57,21 +57,26 @@ def payload(records):
 
 
 def resources(plan, *, additional_bytes=0):
+    validate_disk_reserve(plan["reserve_gib"])
     if psutil.virtual_memory().available < plan["minimum_available_gib"] * 2**30:
         raise RuntimeError("Available memory is below the declared preparation reserve")
     if shutil.disk_usage(plan["root"]).free < plan["reserve_gib"] * 2**30 + additional_bytes:
         raise RuntimeError("External disk space is below the declared preparation reserve")
 
 
+def validate_disk_reserve(reserve_gib):
+    if type(reserve_gib) is not int or reserve_gib < 256:
+        raise ValueError("External disk reserve must be an integer of at least256GiB")
+
+
 def freeze(records_path, prior_paths, references, output, *, limit=0, reserve_gib=560):
+    validate_disk_reserve(reserve_gib)
     repo = Path(__file__).resolve().parents[1]
     root = writable_path(output)
     if not root.is_relative_to(Path("/mnt/external/demosaic")) or root.exists():
         raise ValueError("Use a fresh external demosaic preparation root")
-    if reserve_gib < 560 or limit < 0:
-        raise ValueError(
-            "At least560GiB external reserve and a nonnegative fixture limit are required"
-        )
+    if limit < 0:
+        raise ValueError("A nonnegative fixture limit is required")
     inputs = [ref(records_path), *(ref(p) for p in prior_paths), ref(references)]
     protected = read(references)
     for row in protected["protected"]:

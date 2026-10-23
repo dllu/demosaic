@@ -101,11 +101,15 @@ def source_fields(row):
     return {k: v for k, v in row.items() if k not in REBIN_FIELDS}
 
 
-def freeze(base4, base8, prepared4, candidate8, review_path, output):
+def freeze(base4, base8, prepared4, candidate8, review_path, output, *, reserve_gib=500):
+    require(
+        type(reserve_gib) is int and reserve_gib >= 256,
+        "External disk reserve must be an integer of at least256GiB",
+    )
     output = writable_path(output)
     require(not output.exists(), "Output exists; preserve previous freezes")
     require(psutil.virtual_memory().available >= 24 * 2**30, "System memory guard")
-    require(shutil.disk_usage("/mnt/external").free >= 500 * 2**30, "External disk reserve")
+    require(shutil.disk_usage("/mnt/external").free >= reserve_gib * 2**30, "External disk reserve")
     inputs = [ref(p) for p in [base4, base8, prepared4, candidate8, review_path, __file__]]
     review = read(review_path)
     require(
@@ -311,6 +315,7 @@ def freeze(base4, base8, prepared4, candidate8, review_path, output):
         "status": "frozen-reviewed-coupled-Commons-extension-no-active-recipe-change",
         "review_format_version": review["format_version"],
         "engineering_only": bool(review.get("engineering_only", False)),
+        "external_reserve_gib": reserve_gib,
         "inputs": inputs,
         "manual_review": ref(review_path),
         "manifests": outputs,
@@ -342,6 +347,15 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     for key in ["base4", "base8", "prepared4", "candidate8", "review", "output"]:
         parser.add_argument("--" + key, type=Path, required=True)
+    parser.add_argument("--reserve-gib", type=int, default=500)
     args = parser.parse_args()
     require(os.environ.get("CUDA_VISIBLE_DEVICES") == "", "Use hidden CUDA for data-only freezing")
-    freeze(args.base4, args.base8, args.prepared4, args.candidate8, args.review, args.output)
+    freeze(
+        args.base4,
+        args.base8,
+        args.prepared4,
+        args.candidate8,
+        args.review,
+        args.output,
+        reserve_gib=args.reserve_gib,
+    )

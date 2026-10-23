@@ -9,6 +9,14 @@ extension = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(extension)
 
 
+@pytest.mark.parametrize("reserve", [255, -1, True, 288.5, float("nan")])
+def test_freezer_rejects_invalid_reserve_before_any_output(tmp_path, reserve):
+    output = tmp_path / "untouched"
+    with pytest.raises(ValueError, match="at least256GiB"):
+        extension.freeze(None, None, None, None, None, output, reserve_gib=reserve)
+    assert not output.exists()
+
+
 def fixture():
     rows = [
         {"id": "a", "split": "train", "author": "photographer-a"},

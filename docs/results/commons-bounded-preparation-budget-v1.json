@@ -1,0 +1,52 @@
+{
+  "status": "bounded-reserve-policy-tested-no-active-plan-change",
+  "recorded_local": "2026-10-22T18:50:12.867766-07:00",
+  "files": [
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/prepare_downloaded_commons.py",
+      "sha256": "70001c28b6b5b385f9f2bf9ed0eca0b7d1c700e7d308ab5ac3ddd01c2b2b4a0e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/freeze_reviewed_commons_extension.py",
+      "sha256": "62ca00e73b3215b3141930a25fdf8532a18cc68155d8dc6fa2c527e0fe488ccf"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/tests/test_downloaded_commons.py",
+      "sha256": "4261ae98a01cb4c4b0ee99216e17c28316936eea82a8e440f4b83a75a257e06e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/tests/test_reviewed_commons_extension.py",
+      "sha256": "6daf2046ee360eeefbcb9db59daabdecbe9e1a3e11bf2b1687b2ccceba8d9278"
+    }
+  ],
+  "validation": {
+    "focused_tests_passed": 37,
+    "covered_behaviors": [
+      "Reject below256GiB, negative, boolean, fractional and NaN reserves before input reads/output creation",
+      "Explicit288GiB accepts complete additional-byte budget exactly; one byte short stops work",
+      "Available memory below declared48GiB stops work",
+      "Existing preparation and reviewed-coupled-freeze tests remain passing"
+    ],
+    "ruff_and_format_passed": true
+  },
+  "resource_policy": {
+    "minimum_explicit_external_reserve_gib": 256,
+    "unchanged_preparation_default_gib": 560,
+    "unchanged_reviewed_freeze_default_gib": 500,
+    "preparation_requires_entire_two_scale_estimate_plus_margin_gib": 4,
+    "preparation_available_memory_gib": 48,
+    "next_batch_prospective_reserve_gib": 288,
+    "prospective_quality_write_allowance_above256_gib": 32,
+    "must_recalculate_actual_complete_payload_and_free_space_before_launch": true
+  },
+  "observation": {
+    "available_RAM_gib": 82.16452026367188,
+    "external_free_gib": 337.8243522644043
+  },
+  "active_downloader_reserve_gib_unchanged": 336,
+  "active_training_evaluation_floor_gib_unchanged": 256,
+  "active_jobs_not_restarted_or_modified": true,
+  "source_selection_cache_pixel_operators_and_visual_admission_unchanged": true,
+  "new_data_prepared_or_admitted_by_this_change": false,
+  "scope": "Permit a declared capacity budget for the upcoming bounded downloaded batch instead of historical fixed560/500GiB floors. Whole-payload+4GiB guard,48GiB memory check, singleton archive lock, original/attribution integrity, two-scale full audit, protected-scene screen and separate manual reviewed freeze remain required. A prospective288GiB reserve adds32GiB allowance above active256GiB quality-study floor; actual post-download capacity and future writes must be checked before a preparation launch."
+}
