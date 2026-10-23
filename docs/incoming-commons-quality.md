@@ -7,8 +7,10 @@ follow-up below adds **11 identities**, bringing targeted native review to
 **72 unique sources**. A subsequent [review of 14 more candidates](results/incoming-source-loss-prefix192-native-review-v1.json)
 from the 192-source ranking snapshot retains all 14, bringing actual native
 inspection to 86 unique source identities. A [576-source-prefix follow-up](results/incoming-source-loss-prefix576-native-review-v1.json)
-adds 13 more identities, bringing native inspection to 99 unique sources. It retains
-12 and records one further tulip photograph for a future quality withhold.
+adds 13 more identities. A [1,280-source-prefix follow-up](results/incoming-source-loss-prefix1280-native-review-v1.json)
+adds another 27, bringing actual native inspection to **126 unique sources**.
+The additional reviews identify three source-specific quality withholds, now
+applied in the separate **90,869-source** cohort described below.
 Full-tail review is still pending; this is not
 a native-quality audit of every image in the batch.
 [Sources, decisions, exact views and hashes](results/commons-post4000-source-quality-v1.json).
@@ -24,11 +26,20 @@ frozen **90,872-source training cohort**,now used by the
 Completed V102/V103 inputs remain fixed. Validation/test remain 2,303/2,255 with their original records and order.
 [Completed freeze, independent audit and actual CPU reader](results/commons-post4000-reviewed-v1.json).
 
+The next [90,869-source pair](results/commons-source-tail-reviewed90869-v1.json)
+applies the two flower and one ornament decisions from actual native follow-up.
+All other rows retain their literal bytes and order. The three sources remain
+recorded as excluded in the 8× manifest; all validation, test, protected and
+earlier exclusion boundaries remain inherited. Its six original training ROI
+objects are unchanged, with a new manifest binding. Twelve actual reader checks
+cover six remaining new sources and all six ROIs. [Prepared matched capacity
+recipes and reader evidence](results/backbone-capacity-training-prepared-v1.json).
 
 A subsequent [V102 CPU loss-tail scan](corpus-source-review.md#incoming-loss-tail-follow-up)
 is running on the 2,395 eligible additions, after a four-source/eight-case
 implementation check. Full ranking and native tail review remain pending;
-this adds no current exclusions or claim of complete neural source coverage.
+the running V104 cohort stays fixed. Neither targeted review nor partial
+ranking establishes complete neural or native-quality coverage.
 
 ## First loss-tail follow-up: 64 of 2,395 sources scored
 
@@ -38,12 +49,12 @@ source/target panels and 11 context thumbnails. A further native 1024 view
 confirmed the flower decision below. All 11 are additional to the earlier 61
 native identities. [Views, hashes, partial-ranking scope and decisions](results/incoming-source-loss-first64-native-review-v1.json).
 
-One additional flower photograph is recorded for **withholding from the next
+One additional flower photograph is **withheld in the separate 90,869-source
 corpus**. Its native source has strongly flattened/smeared petal surfaces and
 conspicuous edge contours; the binned target retains a flat patchwork appearance.
 This records visible source quality rather than a known processing algorithm.
 The current V104 90,872-source cohort remains unchanged; the full scan and remaining
-tail review will inform a later frozen cohort.
+tail review can inform a subsequent frozen cohort.
 
 ![Future withhold: source context, native source and native binned flower target](images/incoming-source-loss-first64/flower-future-withhold.png)
 
@@ -94,8 +105,9 @@ A tulip image is recorded for the next quality-withhold set. Its larger source
 view confirms strong outlines and flattened/cellular leaf and petal texture;
 the binned target retains an outlined appearance. The judgment concerns this
 source's visible target quality and makes no camera-wide or processing-software
-claim. Two additional future withholds are now recorded in total; the active
-90,872-source V104 manifest and previous admission receipts remain fixed.
+claim. This source joins the earlier flower in the separate 90,869-source cohort's
+quality withholds; the active 90,872-source V104 manifest and previous admission
+receipts remain fixed.
 
 ![Tulips: context, native source and native binned target for future withholding](images/incoming-source-loss-prefix576/tulips-future-withhold.png)
 
@@ -113,6 +125,49 @@ Source: [Vengolis, Mortonagrion varralli](https://commons.wikimedia.org/wiki/Fil
 Only context thumbnails are resized; middle source and right area2-from4× target
 panels retain native 256 pixels at exposure ×1. Modifications: binning, cropping and
 display conversion. [All 13 decisions, views, hashes and partial-ranking scope](results/incoming-source-loss-prefix576-native-review-v1.json).
+
+## Further loss-tail review: 1,280 of 2,395 sources
+
+Twenty-seven additional identities were viewed across 54 native source/target
+panels and five larger native 1024 source crops. Twenty-six remain eligible.
+The ornament photograph below has conspicuous outlines and flattened dark
+foliage/wall texture in the larger source view; its binned target retains an
+exaggerated outlined appearance. It is the third additional quality withhold.
+The separate corpus applies this visible source-specific decision without an
+HDR-title, camera-family or processing-software rule.
+
+![Withheld ornament: context, native source and native binned target](images/incoming-source-loss-prefix1280/ornament-withhold.png)
+
+[Native 1024 source view](images/incoming-source-loss-prefix1280/ornament-native1024.png) ·
+[Source/ROI/display/decision](images/incoming-source-loss-prefix1280/ornament-withhold.json).
+Source: [ermell, Großgressingen](https://commons.wikimedia.org/wiki/File:Gro%C3%9Fgressingen-P1060172HDR.jpg),
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+
+A different HDR-titled stream photograph remains eligible: branches, rocks and
+water retain coherent photographic detail. The butterfly photograph preserves
+fine hairs, droplets and weak translucent wing structure. Stippled metal,
+sunrise grass, dusk ridges, underwater skin, physical specimen hairs and
+architectural grids also remain eligible after actual inspection.
+
+![Retained stream and fine branches](images/incoming-source-loss-prefix1280/retained-HDR-stream.png)
+
+[Source/ROI/display/decision](images/incoming-source-loss-prefix1280/retained-HDR-stream.json).
+Source: [Diego Delso, Ordesa stream](https://commons.wikimedia.org/wiki/File:Parque_nacional_de_Ordesa_y_Monte_Perdido,_Huesca,_Espa%C3%B1a,_2015-01-07,_DD_09-10_HDR.JPG),
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+
+![Retained fine dew and butterfly-wing structure](images/incoming-source-loss-prefix1280/retained-butterfly-dew.png)
+
+[Source/ROI/display/decision](images/incoming-source-loss-prefix1280/retained-butterfly-dew.json).
+Source: [Sven Damerow, Kohlweißling am Morgen](https://commons.wikimedia.org/wiki/File:Kohlwei%C3%9Fling_am_Morgen.jpg),
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+
+Only left contexts are resized. Middle source and right binned target panels
+retain native 256 pixels, at exposure ×1; their physical field of view differs
+because the target is binned. Source pixels are ICC-managed to sRGB; targets
+use exact linear area2-from4× followed by sRGB display. Modifications: cropping,
+binning, context-thumbnail creation and display conversion. These inspect clean
+training sources, without noisy observations or denoiser outputs. [All 27
+decisions, views and partial-ranking scope](results/incoming-source-loss-prefix1280-native-review-v1.json).
 
 Most thumbnail flags cleared under native inspection. The opposing door
 handles belong to one scene; the repeated window pattern is real glass and

@@ -1,0 +1,82 @@
+amp: true
+augmentation_downsample: 2
+batch_size: 16
+broad_camera: true
+camera_supervision: sensor-valid-v1
+channels_last: true
+checkpoint_every: 1000
+cpu_threads: 4
+data_seed_per_step: true
+device: cuda
+experiment_notes: Prospective matched fixed20k Tiny-zero (V107) versus Small-zero
+  (V108) quality comparison on reviewed90869 Commons sources. Both load the same readonly
+  V102-derived Tiny-zero EMA file; only its three fusion gates were zeroed, preserving
+  the other88 EMA tensors. Official frozen encoder identity is the only arm difference.
+  Fresh AdamW/EMA,seed62,B16/native256/BF16,LR1e-5/warmup200; same original six ROIs,5percent
+  conditional-photo sampling,zeroPSF,weak textures,photo contrast attenuation,native128/paired32.
+  The initializer has zero new updates; inherited step20000 describes base V102. Compare
+  fixed endpoints to each other,zero-gate initializer and original V102 on full photo/camera/color/weak-detail/material
+  and native GFX views. No CUDA/production launch while original V104 training/evaluation/export
+  owners run. No speed study or automatic promotion; source review is targeted and
+  partial,with three additional source-specific quality withholds.
+flat_chroma_stops: 8
+flat_fraction: 0.1
+log_every: 25
+lr: 1.0e-05
+manifest: /mnt/external/demosaic/commons-source-tail-reviewed-20261023-v1/manifest4.jsonl
+min_available_gb: 24
+model:
+  camera_conditioning: true
+  dino: true
+  dino_feature_fusion: convnext-pyramid
+  dino_model: facebook/dinov3-convnext-tiny-pretrain-lvd1689m
+  dino_revision: 10d30274b4d445111e2d5bf75ac93bbd94db274b
+  physical_anchors: true
+  physical_fp32: true
+  restoration_backbone: pretrained-rgb
+  rgb_hidden_autocast: false
+  rgb_middle_skip_fp32: true
+  rgb_processing_scale: 1
+  variance_stabilization: true
+  width: 64
+multiscale_sensor_weight: 0
+noise_free_fraction: 0.1
+normalized_sensor_weight: 0
+paired_fraction: 0.25
+paired_manifest: /mnt/external/demosaic/evaluation/paired-train32-prepared-v1/manifest.json
+paired_workers: 2
+patch_size: 256
+precision: bfloat16
+preserve_negative_read_noise: true
+raw_clean_augmentation_downsample: 2
+raw_clean_fraction: 0.25
+raw_clean_manifest: /mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json
+raw_clean_workers: 2
+reconstruct_highlights: true
+reconstruction_objective: charbonnier-v1
+reference_interval_weight: 0.0
+run: /mnt/external/demosaic/v102-backbone-capacity-20261023-v1/train/V107
+seed: 62
+steps: 20000
+synthetic_fraction: 0.2
+trace_observations: true
+training_execution: deterministic-v1
+val_batches: 4
+validation_images: 8
+validation_manifest: /mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl
+validation_protocol: configs/evaluation.yaml
+warmup_steps: 200
+worker_start_method: spawn
+workers: 2
+reviewed_roi_catalogue: /home/dllu/proj/demosaic/configs/low-contrast-training-rois-six-reviewed90869-v5.json
+reviewed_roi_fraction: 0.05
+weak_texture_fraction: 0.15
+photographic_low_contrast_fraction: 0.25
+optical_blur_probability: 0.0
+raw_clean_optical_blur_probability: 0.0
+initialize_parent:
+  path: /mnt/external/demosaic/convnext-small-transfer-CPU-20261023-v1/Tiny-zero.pt
+  sha256: ae5dfa93f03cd241f1e212b6dcfa5f0fdbe6ac5cff9b9eda57b64cb40b2418c5
+  step: 20000
+parent_dino_sha256: 370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd
+expected_dino_sha256: 370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd

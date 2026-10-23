@@ -95,6 +95,30 @@ plans; only declared encoder model/revision differences are permitted. A trained
 CUDA capacity comparison remains separate from these integration fixtures.
 The current model/data experiment continues with its original queues.
 
+## Prepared matched quality trial
+
+The [V107 Tiny](../configs/quality-v102-backbone-tiny-v107.yaml) and
+[V108 Small](../configs/quality-v102-backbone-small-v108.yaml) recipes now freeze
+the same V102-derived Tiny-zero initializer file and reviewed 90,869-source
+corpus. Seed 62, 20,000 updates, batch 16, native 256-pixel patches, BF16,
+learning rate 1e-5, 200 warmup updates and the original six
+ROI objects match. Three newly inspected source-specific quality withholds are
+applied in this separate corpus; current V104 data stays fixed. All 50 Python
+modules match V104's frozen implementation.
+
+Twelve actual source-reader checks repeat exactly with finite native256 output,
+unchanged Torch RNG and no CUDA. They cover six remaining new arrivals and all
+six original ROIs. The encoder model/revision/hash are the only arm differences
+apart from run location. [Prepared plan, initializer/recipe/corpus hashes and
+prospective source exposure](results/backbone-capacity-training-prepared-v1.json).
+
+These recipes have no training controller or quality scores. Complete and
+review V104 and the remaining incoming loss tail before launch; a better useful
+initializer or further source decisions can supersede this prepared plan while
+preserving it. The trained comparison must include original V102 as well as
+its accurately labeled zero-gate derivative, both fixed endpoints, the standing
+GFX scene and native crop triplets. No capacity benefit is established yet.
+
 Photo sources: [Derek Ramsey, bark](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
 [CC BY-SA 2.5](https://creativecommons.org/licenses/by-sa/2.5/), and
 [Grendelkhan, forest canopy](https://commons.wikimedia.org/wiki/File:Forest_covered_hills_on_Yakushima.jpg),

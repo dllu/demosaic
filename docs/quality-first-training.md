@@ -6,7 +6,7 @@ V101, with higher known/unseen CFA means. V103 is a close alternative; V102's
 flat-color and weak-texture diagnostics favor it overall. High-noise fine detail
 remains soft. [Completed results and native comparisons](v102-v103-quality-review.md).
 
-## Current matched comparison: V102/V103
+## Completed matched comparison: V102/V103
 
 Both runs continue the exact final V101 EMA on the newly frozen 88,477-source
 cohort, with fresh AdamW/EMA. They retain the zero-PSF, weak-texture and
@@ -108,6 +108,34 @@ in the [incoming source review](incoming-commons-quality.md). The earlier
 six/32 ROI comparison had little photographic effect; retain the simpler six
 before adding another ROI intervention.
 
+## Prepared Tiny/Small quality comparison
+
+[V107 Tiny](../configs/quality-v102-backbone-tiny-v107.yaml) and
+[V108 Small](../configs/quality-v102-backbone-small-v108.yaml) recipes are frozen
+for a matched 20,000-update comparison on the separate **90,869-source** corpus.
+Both load one V102-derived initializer file with three zeroed fusion-gate
+tensors; the other 88 EMA tensors remain exact. This gives the encoders a common
+initial function while allowing their fusion to adapt during training. Only
+the official frozen encoder name/revision/hash differs between arms. Both use
+seed 62, batch 16, native 256-pixel patches, BF16, learning rate 1e-5, 200 warmup
+updates, zero optical blur and the original six ROIs.
+
+The corpus applies three additional visually inspected source-quality withholds,
+leaving 2,392 new eligible arrivals. Validation/test and all earlier source
+boundaries remain fixed. Twelve actual clean-reader examples repeat exactly:
+six new-source draws and all six ROIs. The full prospective schedule contains
+111,559 photo examples from 62,369 unique sources, including 2,710 draws from
+1,635 newly eligible sources and 5,657 ROI examples. These are scheduled exposure
+counts, not completed training. [Prepared plan, hashes and reader evidence](results/backbone-capacity-training-prepared-v1.json).
+
+No controller, CUDA smoke or production run has launched for these recipes.
+Complete and review V104 and the incoming loss-tail scan first; retain the
+prepared evidence if later results warrant a different initializer or cohort.
+Original V102 must remain an explicit evaluation reference alongside its
+separately labeled zero-gate derivative. Fresh CPU/CUDA checks and final native
+photo/material/color/weak-detail/GFX comparisons precede any quality conclusion.
+[Capacity evidence and remaining work](convnext-small-capacity.md).
+
 ## Completed V100/V101 comparison
 
 Two continuations start from the exact final V84 EMA with fresh AdamW/EMA:
@@ -147,14 +175,15 @@ hash, bounds, augmentation-order and resume checks.
 
 ## Data and source quality
 
-The next reviewed4×/8× corpus is ready with **90,872 Commons training sources**,
-adding2,395 inspected/cleared arrivals while retaining all31 current quality
-exclusions and unchanged2,303 validation/2,255 test sources. Five additional
-reviewed fine-detail sources are eligible for later ROI work. Native views,
-source/series decisions and eight actual CPU reader checks are in the
-[incoming source review](incoming-commons-quality.md). This future cohort leaves
-the current matched V102/V103 experiment's88,477 sources and ROI inputs fixed;
-its trained quality benefit remains to measure.
+V104 uses the reviewed **90,872-source**4×/8× pair. The next prepared capacity
+recipes use **90,869 sources**, applying three more source-specific native
+quality decisions while preserving the earlier31 exclusions and unchanged
+2,303 validation/2,255 test memberships. Actual native inspection of the arrivals
+now covers 126 unique identities; the full loss scan and remaining tail review
+continue. This is targeted inspection, not exhaustive manual quality review.
+Native source comparisons, corpus bindings and actual reader checks are in the
+[incoming source review](incoming-commons-quality.md). Existing experiment
+manifests and machine receipts retain their original bytes.
 
 The completed V100/V101 cohort has 88,484 Commons training sources, versus 84,867 in V84's
 original recipe. It preserves the same 2,303 validation and 2,255 test memberships.
