@@ -31,6 +31,11 @@ flat-color bias improves, but worst ADC-only flat-color mean bias rises
 fixed native comparisons. Use the V102 checkpoint for explicit zero-noise ADC
 workflows when lower flat-color bias matters; selection is not switched automatically.
 
+A [saved-prediction ADC diagnostic](v104-adc-color-projection.md) reduces V104's
+worst grid bias to 31.91 DN16 with the existing Malvar residual projection.
+The full ADC photographic comparison is running on CPU; texture checks remain
+pending. This does not change the checkpoint or ADC recommendation.
+
 Photo means cover 427 images, seven conditions and four CFAs. Camera means
 balance four/five development scenes against measured CFA references;
 independently processed AHD RGB is auxiliary, not exact GT. Training histories
@@ -52,8 +57,9 @@ All seven evaluation panels and complete RGB16 exports are finished. Eighty-eigh
 new photo/camera/diagnostic/GFX native cells and three resized full-frame
 overviews were viewed. Real model differences remain small; fine foliage and
 saturated-sign detail remain weaknesses. The separate
-[Q2, Sony and GFX50R gallery](cross-camera-qualitative.md) currently compares
-V100/V102/V103 on six fixed low-ISO regions.
+[Q2, Sony and GFX50R gallery](cross-camera-qualitative.md) now compares
+V102/V104 on six fixed low-ISO regions. Its 24 native cells show little visual
+separation, with no clear overall gain or regression.
 
 ## Use and next training
 

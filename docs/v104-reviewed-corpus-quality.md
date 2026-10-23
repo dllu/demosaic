@@ -116,6 +116,12 @@ rows and grouped statistics were rebuilt. The 28 diagnostic cells were viewed
 at original resolution.
 [Independent color/texture statistics and original array evidence](results/v104-reviewed-corpus-diagnostics-v1.json).
 
+A subsequent [saved-float ADC projection diagnostic](v104-adc-color-projection.md)
+reduces V104's worst analytic-grid bias to 31.91 DN16 with the existing Malvar
+residual operator. It does not change the original scores above or the current
+checkpoint: a full ADC photo comparison is running, with texture evidence
+still pending.
+
 ## Complete real GFX outputs
 
 ![Six native GFX regions, V102,V104 and RawNIND](images/gfx-v102-v104-fullframe/comparison.png)
@@ -132,6 +138,12 @@ V104 inference/blending took 168.73s in this shared-machine IEEE FP32/B4,
 tile512/overlap64 run. It does not meet 100MP/10s. This excludes loading/export
 and is separate from earlier timings.
 [Capture protocol, six ROIs and full-frame audit](gfx-qualitative.md).
+
+The additional [Q2/Sony a7R II/GFX50R gallery](cross-camera-qualitative.md) now
+compares V102/V104 on six fixed low-ISO native regions. The 24 viewed cells
+show little visual separation and no clear overall gain or regression. It
+uses saved, bit-exact original inputs and no additional RAW decoding; RawNIND
+is a comparator, with no clean reference or pixelwise scores.
 
 ## Training boundary and next work
 

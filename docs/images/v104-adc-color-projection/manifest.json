@@ -1,0 +1,2393 @@
+{
+  "native_crops": [
+    {
+      "image": "crop-ffdb5024ae33178d.png",
+      "caption": "V102 original / h045-s0.98-l0.90 / ADC only; post-hoc diagnostic",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (analytic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "51a88cd3059c220384b280cefc849b72f8fcb944f8b2266ebcd223856af20dab",
+      "case": {
+        "id": "h045-s0.98-l0.90",
+        "palette": "h045-s0.98-l0.90",
+        "source": {
+          "id": "h045-s0.98-l0.90",
+          "hue_degrees": 45,
+          "saturation": 0.98,
+          "peak": 0.9,
+          "linear_srgb": [
+            0.9,
+            0.6795,
+            0.018000000000000016
+          ]
+        },
+        "condition": {
+          "name": "adc-only",
+          "shot": 0.0,
+          "read": 0.0,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h045-s0.98-l0.90-adc-only-RGGB.npz",
+        "sha256": "a73c65a1e6c2a207b5de6b10893943b25dd6c97b4ff487fdb2cfc4a46dd85e17",
+        "target_camera_RGB": [
+          0.42243748903274536,
+          0.6574499607086182,
+          0.06345000118017197
+        ],
+        "draws_per_pattern": 1
+      },
+      "model": {
+        "arm": "V102",
+        "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+        "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+        "expected_lineage": {
+          "step": 20000
+        },
+        "kind": "joint-checkpoint",
+        "step": 20000,
+        "label": "V102 original",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "compute_precision": "float32, physicalFP32",
+        "memory_format": "channels_last",
+        "diagnostic_postprocess": "original"
+      },
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "conditioning": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "display_exposure": 1.0,
+      "reference": "Exact uniform analytic target; not a real photograph. Cases selected post hoc from original worst mean-bias observations."
+    },
+    {
+      "image": "crop-4061198d467bca1d.png",
+      "caption": "V102 + sites / h045-s0.98-l0.90 / ADC only; post-hoc diagnostic",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (analytic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "043a1c545aae6a4d4a1c5a78b107ee6b831044286f3beba19c1f1465dcae978c",
+      "case": {
+        "id": "h045-s0.98-l0.90",
+        "palette": "h045-s0.98-l0.90",
+        "source": {
+          "id": "h045-s0.98-l0.90",
+          "hue_degrees": 45,
+          "saturation": 0.98,
+          "peak": 0.9,
+          "linear_srgb": [
+            0.9,
+            0.6795,
+            0.018000000000000016
+          ]
+        },
+        "condition": {
+          "name": "adc-only",
+          "shot": 0.0,
+          "read": 0.0,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h045-s0.98-l0.90-adc-only-RGGB.npz",
+        "sha256": "a73c65a1e6c2a207b5de6b10893943b25dd6c97b4ff487fdb2cfc4a46dd85e17",
+        "target_camera_RGB": [
+          0.42243748903274536,
+          0.6574499607086182,
+          0.06345000118017197
+        ],
+        "draws_per_pattern": 1
+      },
+      "model": {
+        "arm": "V102",
+        "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+        "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+        "expected_lineage": {
+          "step": 20000
+        },
+        "kind": "joint-checkpoint",
+        "step": 20000,
+        "label": "V102 + sites",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "compute_precision": "float32, physicalFP32",
+        "memory_format": "channels_last",
+        "diagnostic_postprocess": "sites"
+      },
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "conditioning": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "display_exposure": 1.0,
+      "reference": "Exact uniform analytic target; not a real photograph. Cases selected post hoc from original worst mean-bias observations."
+    },
+    {
+      "image": "crop-928f7398c8253ab7.png",
+      "caption": "V102 + malvar / h045-s0.98-l0.90 / ADC only; post-hoc diagnostic",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (analytic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "9d1853f9c55fbe8e4b4bef9bba99c3fb38050fac1d4c498b9954c40ee671a574",
+      "case": {
+        "id": "h045-s0.98-l0.90",
+        "palette": "h045-s0.98-l0.90",
+        "source": {
+          "id": "h045-s0.98-l0.90",
+          "hue_degrees": 45,
+          "saturation": 0.98,
+          "peak": 0.9,
+          "linear_srgb": [
+            0.9,
+            0.6795,
+            0.018000000000000016
+          ]
+        },
+        "condition": {
+          "name": "adc-only",
+          "shot": 0.0,
+          "read": 0.0,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h045-s0.98-l0.90-adc-only-RGGB.npz",
+        "sha256": "a73c65a1e6c2a207b5de6b10893943b25dd6c97b4ff487fdb2cfc4a46dd85e17",
+        "target_camera_RGB": [
+          0.42243748903274536,
+          0.6574499607086182,
+          0.06345000118017197
+        ],
+        "draws_per_pattern": 1
+      },
+      "model": {
+        "arm": "V102",
+        "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+        "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+        "expected_lineage": {
+          "step": 20000
+        },
+        "kind": "joint-checkpoint",
+        "step": 20000,
+        "label": "V102 + malvar",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "compute_precision": "float32, physicalFP32",
+        "memory_format": "channels_last",
+        "diagnostic_postprocess": "malvar"
+      },
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "conditioning": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "display_exposure": 1.0,
+      "reference": "Exact uniform analytic target; not a real photograph. Cases selected post hoc from original worst mean-bias observations."
+    },
+    {
+      "image": "crop-45a39b67b92c253b.png",
+      "caption": "V104 original / h045-s0.98-l0.90 / ADC only; post-hoc diagnostic",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (analytic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "32cb35f76c2053db951b316b2b54cd076330e7e502d89443b7e1d18b5a890ef6",
+      "case": {
+        "id": "h045-s0.98-l0.90",
+        "palette": "h045-s0.98-l0.90",
+        "source": {
+          "id": "h045-s0.98-l0.90",
+          "hue_degrees": 45,
+          "saturation": 0.98,
+          "peak": 0.9,
+          "linear_srgb": [
+            0.9,
+            0.6795,
+            0.018000000000000016
+          ]
+        },
+        "condition": {
+          "name": "adc-only",
+          "shot": 0.0,
+          "read": 0.0,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h045-s0.98-l0.90-adc-only-RGGB.npz",
+        "sha256": "a73c65a1e6c2a207b5de6b10893943b25dd6c97b4ff487fdb2cfc4a46dd85e17",
+        "target_camera_RGB": [
+          0.42243748903274536,
+          0.6574499607086182,
+          0.06345000118017197
+        ],
+        "draws_per_pattern": 1
+      },
+      "model": {
+        "arm": "V104",
+        "path": "/mnt/external/demosaic/v102-reviewed-corpus-20261023-v1/train/V104/last.pt",
+        "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+        "expected_lineage": {
+          "step": 20000,
+          "initialized_from": {
+            "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+            "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+            "step": 20000
+          }
+        },
+        "kind": "joint-checkpoint",
+        "step": 20000,
+        "label": "V104 original",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "compute_precision": "float32, physicalFP32",
+        "memory_format": "channels_last",
+        "diagnostic_postprocess": "original"
+      },
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "conditioning": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "display_exposure": 1.0,
+      "reference": "Exact uniform analytic target; not a real photograph. Cases selected post hoc from original worst mean-bias observations."
+    },
+    {
+      "image": "crop-e884e077929450c1.png",
+      "caption": "V104 + sites / h045-s0.98-l0.90 / ADC only; post-hoc diagnostic",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (analytic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "916844cdcdd33a24e5b9988e7619691d83bed17b4505369a2ea26c4e95bc1f97",
+      "case": {
+        "id": "h045-s0.98-l0.90",
+        "palette": "h045-s0.98-l0.90",
+        "source": {
+          "id": "h045-s0.98-l0.90",
+          "hue_degrees": 45,
+          "saturation": 0.98,
+          "peak": 0.9,
+          "linear_srgb": [
+            0.9,
+            0.6795,
+            0.018000000000000016
+          ]
+        },
+        "condition": {
+          "name": "adc-only",
+          "shot": 0.0,
+          "read": 0.0,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h045-s0.98-l0.90-adc-only-RGGB.npz",
+        "sha256": "a73c65a1e6c2a207b5de6b10893943b25dd6c97b4ff487fdb2cfc4a46dd85e17",
+        "target_camera_RGB": [
+          0.42243748903274536,
+          0.6574499607086182,
+          0.06345000118017197
+        ],
+        "draws_per_pattern": 1
+      },
+      "model": {
+        "arm": "V104",
+        "path": "/mnt/external/demosaic/v102-reviewed-corpus-20261023-v1/train/V104/last.pt",
+        "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+        "expected_lineage": {
+          "step": 20000,
+          "initialized_from": {
+            "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+            "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+            "step": 20000
+          }
+        },
+        "kind": "joint-checkpoint",
+        "step": 20000,
+        "label": "V104 + sites",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "compute_precision": "float32, physicalFP32",
+        "memory_format": "channels_last",
+        "diagnostic_postprocess": "sites"
+      },
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "conditioning": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "display_exposure": 1.0,
+      "reference": "Exact uniform analytic target; not a real photograph. Cases selected post hoc from original worst mean-bias observations."
+    },
+    {
+      "image": "crop-bda61a34b5a52c2d.png",
+      "caption": "V104 + malvar / h045-s0.98-l0.90 / ADC only; post-hoc diagnostic",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (analytic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "0bfa07ac46fb410f23e776b488b303f5bd2bad868835b2b71c2186adda371d2a",
+      "case": {
+        "id": "h045-s0.98-l0.90",
+        "palette": "h045-s0.98-l0.90",
+        "source": {
+          "id": "h045-s0.98-l0.90",
+          "hue_degrees": 45,
+          "saturation": 0.98,
+          "peak": 0.9,
+          "linear_srgb": [
+            0.9,
+            0.6795,
+            0.018000000000000016
+          ]
+        },
+        "condition": {
+          "name": "adc-only",
+          "shot": 0.0,
+          "read": 0.0,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h045-s0.98-l0.90-adc-only-RGGB.npz",
+        "sha256": "a73c65a1e6c2a207b5de6b10893943b25dd6c97b4ff487fdb2cfc4a46dd85e17",
+        "target_camera_RGB": [
+          0.42243748903274536,
+          0.6574499607086182,
+          0.06345000118017197
+        ],
+        "draws_per_pattern": 1
+      },
+      "model": {
+        "arm": "V104",
+        "path": "/mnt/external/demosaic/v102-reviewed-corpus-20261023-v1/train/V104/last.pt",
+        "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+        "expected_lineage": {
+          "step": 20000,
+          "initialized_from": {
+            "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+            "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+            "step": 20000
+          }
+        },
+        "kind": "joint-checkpoint",
+        "step": 20000,
+        "label": "V104 + malvar",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "compute_precision": "float32, physicalFP32",
+        "memory_format": "channels_last",
+        "diagnostic_postprocess": "malvar"
+      },
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "conditioning": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "display_exposure": 1.0,
+      "reference": "Exact uniform analytic target; not a real photograph. Cases selected post hoc from original worst mean-bias observations."
+    },
+    {
+      "image": "crop-0afd7a9b13dfbf51.png",
+      "caption": "V102 original / h180-s0.98-l0.90 / ADC only; post-hoc diagnostic",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (analytic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "c9930a9e035c33b76d2e61c8e5b08400b0843477efc21b4ab7112edcfc4176fe",
+      "case": {
+        "id": "h180-s0.98-l0.90",
+        "palette": "h180-s0.98-l0.90",
+        "source": {
+          "id": "h180-s0.98-l0.90",
+          "hue_degrees": 180,
+          "saturation": 0.98,
+          "peak": 0.9,
+          "linear_srgb": [
+            0.018000000000000016,
+            0.9,
+            0.9
+          ]
+        },
+        "condition": {
+          "name": "adc-only",
+          "shot": 0.0,
+          "read": 0.0,
+          "exposure": 1.0
+        },
+        "pattern": "BGGR",
+        "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h180-s0.98-l0.90-adc-only-BGGR.npz",
+        "sha256": "f6569e1eb58acfadc8951c806266ef1ed24a747b7a3ebb38bebbb4d6473eb964",
+        "target_camera_RGB": [
+          0.05310000106692314,
+          0.8559000492095947,
+          0.5705999732017517
+        ],
+        "draws_per_pattern": 1
+      },
+      "model": {
+        "arm": "V102",
+        "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+        "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+        "expected_lineage": {
+          "step": 20000
+        },
+        "kind": "joint-checkpoint",
+        "step": 20000,
+        "label": "V102 original",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "compute_precision": "float32, physicalFP32",
+        "memory_format": "channels_last",
+        "diagnostic_postprocess": "original"
+      },
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "conditioning": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "display_exposure": 1.0,
+      "reference": "Exact uniform analytic target; not a real photograph. Cases selected post hoc from original worst mean-bias observations."
+    },
+    {
+      "image": "crop-66042bf6f91fa8a4.png",
+      "caption": "V102 + sites / h180-s0.98-l0.90 / ADC only; post-hoc diagnostic",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (analytic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "105cc4b71436ff2179b7ebbd70f10e32418305a03df82a5b84a84c4daf349719",
+      "case": {
+        "id": "h180-s0.98-l0.90",
+        "palette": "h180-s0.98-l0.90",
+        "source": {
+          "id": "h180-s0.98-l0.90",
+          "hue_degrees": 180,
+          "saturation": 0.98,
+          "peak": 0.9,
+          "linear_srgb": [
+            0.018000000000000016,
+            0.9,
+            0.9
+          ]
+        },
+        "condition": {
+          "name": "adc-only",
+          "shot": 0.0,
+          "read": 0.0,
+          "exposure": 1.0
+        },
+        "pattern": "BGGR",
+        "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h180-s0.98-l0.90-adc-only-BGGR.npz",
+        "sha256": "f6569e1eb58acfadc8951c806266ef1ed24a747b7a3ebb38bebbb4d6473eb964",
+        "target_camera_RGB": [
+          0.05310000106692314,
+          0.8559000492095947,
+          0.5705999732017517
+        ],
+        "draws_per_pattern": 1
+      },
+      "model": {
+        "arm": "V102",
+        "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+        "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+        "expected_lineage": {
+          "step": 20000
+        },
+        "kind": "joint-checkpoint",
+        "step": 20000,
+        "label": "V102 + sites",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "compute_precision": "float32, physicalFP32",
+        "memory_format": "channels_last",
+        "diagnostic_postprocess": "sites"
+      },
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "conditioning": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "display_exposure": 1.0,
+      "reference": "Exact uniform analytic target; not a real photograph. Cases selected post hoc from original worst mean-bias observations."
+    },
+    {
+      "image": "crop-e0a80d02bc771120.png",
+      "caption": "V102 + malvar / h180-s0.98-l0.90 / ADC only; post-hoc diagnostic",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (analytic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "744ba07f9aa5642ac1fe59af315c3b4a61952a5b64928017c0dea1a48d78b157",
+      "case": {
+        "id": "h180-s0.98-l0.90",
+        "palette": "h180-s0.98-l0.90",
+        "source": {
+          "id": "h180-s0.98-l0.90",
+          "hue_degrees": 180,
+          "saturation": 0.98,
+          "peak": 0.9,
+          "linear_srgb": [
+            0.018000000000000016,
+            0.9,
+            0.9
+          ]
+        },
+        "condition": {
+          "name": "adc-only",
+          "shot": 0.0,
+          "read": 0.0,
+          "exposure": 1.0
+        },
+        "pattern": "BGGR",
+        "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h180-s0.98-l0.90-adc-only-BGGR.npz",
+        "sha256": "f6569e1eb58acfadc8951c806266ef1ed24a747b7a3ebb38bebbb4d6473eb964",
+        "target_camera_RGB": [
+          0.05310000106692314,
+          0.8559000492095947,
+          0.5705999732017517
+        ],
+        "draws_per_pattern": 1
+      },
+      "model": {
+        "arm": "V102",
+        "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+        "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+        "expected_lineage": {
+          "step": 20000
+        },
+        "kind": "joint-checkpoint",
+        "step": 20000,
+        "label": "V102 + malvar",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "compute_precision": "float32, physicalFP32",
+        "memory_format": "channels_last",
+        "diagnostic_postprocess": "malvar"
+      },
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "conditioning": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "display_exposure": 1.0,
+      "reference": "Exact uniform analytic target; not a real photograph. Cases selected post hoc from original worst mean-bias observations."
+    },
+    {
+      "image": "crop-02c9ee4ed140fd21.png",
+      "caption": "V104 original / h180-s0.98-l0.90 / ADC only; post-hoc diagnostic",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (analytic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "ce1bd8bee8540c470c27d2697d7fdb15ed6c0e6541758be290866811925d1c4d",
+      "case": {
+        "id": "h180-s0.98-l0.90",
+        "palette": "h180-s0.98-l0.90",
+        "source": {
+          "id": "h180-s0.98-l0.90",
+          "hue_degrees": 180,
+          "saturation": 0.98,
+          "peak": 0.9,
+          "linear_srgb": [
+            0.018000000000000016,
+            0.9,
+            0.9
+          ]
+        },
+        "condition": {
+          "name": "adc-only",
+          "shot": 0.0,
+          "read": 0.0,
+          "exposure": 1.0
+        },
+        "pattern": "BGGR",
+        "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h180-s0.98-l0.90-adc-only-BGGR.npz",
+        "sha256": "f6569e1eb58acfadc8951c806266ef1ed24a747b7a3ebb38bebbb4d6473eb964",
+        "target_camera_RGB": [
+          0.05310000106692314,
+          0.8559000492095947,
+          0.5705999732017517
+        ],
+        "draws_per_pattern": 1
+      },
+      "model": {
+        "arm": "V104",
+        "path": "/mnt/external/demosaic/v102-reviewed-corpus-20261023-v1/train/V104/last.pt",
+        "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+        "expected_lineage": {
+          "step": 20000,
+          "initialized_from": {
+            "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+            "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+            "step": 20000
+          }
+        },
+        "kind": "joint-checkpoint",
+        "step": 20000,
+        "label": "V104 original",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "compute_precision": "float32, physicalFP32",
+        "memory_format": "channels_last",
+        "diagnostic_postprocess": "original"
+      },
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "conditioning": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "display_exposure": 1.0,
+      "reference": "Exact uniform analytic target; not a real photograph. Cases selected post hoc from original worst mean-bias observations."
+    },
+    {
+      "image": "crop-03210a4c2da54859.png",
+      "caption": "V104 + sites / h180-s0.98-l0.90 / ADC only; post-hoc diagnostic",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (analytic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "6f978060e6f1366055d820739783dd786a2358789e3eca5b84289d45575e25a6",
+      "case": {
+        "id": "h180-s0.98-l0.90",
+        "palette": "h180-s0.98-l0.90",
+        "source": {
+          "id": "h180-s0.98-l0.90",
+          "hue_degrees": 180,
+          "saturation": 0.98,
+          "peak": 0.9,
+          "linear_srgb": [
+            0.018000000000000016,
+            0.9,
+            0.9
+          ]
+        },
+        "condition": {
+          "name": "adc-only",
+          "shot": 0.0,
+          "read": 0.0,
+          "exposure": 1.0
+        },
+        "pattern": "BGGR",
+        "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h180-s0.98-l0.90-adc-only-BGGR.npz",
+        "sha256": "f6569e1eb58acfadc8951c806266ef1ed24a747b7a3ebb38bebbb4d6473eb964",
+        "target_camera_RGB": [
+          0.05310000106692314,
+          0.8559000492095947,
+          0.5705999732017517
+        ],
+        "draws_per_pattern": 1
+      },
+      "model": {
+        "arm": "V104",
+        "path": "/mnt/external/demosaic/v102-reviewed-corpus-20261023-v1/train/V104/last.pt",
+        "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+        "expected_lineage": {
+          "step": 20000,
+          "initialized_from": {
+            "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+            "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+            "step": 20000
+          }
+        },
+        "kind": "joint-checkpoint",
+        "step": 20000,
+        "label": "V104 + sites",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "compute_precision": "float32, physicalFP32",
+        "memory_format": "channels_last",
+        "diagnostic_postprocess": "sites"
+      },
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "conditioning": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "display_exposure": 1.0,
+      "reference": "Exact uniform analytic target; not a real photograph. Cases selected post hoc from original worst mean-bias observations."
+    },
+    {
+      "image": "crop-e4b4c88552987ad5.png",
+      "caption": "V104 + malvar / h180-s0.98-l0.90 / ADC only; post-hoc diagnostic",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (analytic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "6815a3033781076d686319f3a70b8aadfb9c2071c666899633443060aa721a44",
+      "case": {
+        "id": "h180-s0.98-l0.90",
+        "palette": "h180-s0.98-l0.90",
+        "source": {
+          "id": "h180-s0.98-l0.90",
+          "hue_degrees": 180,
+          "saturation": 0.98,
+          "peak": 0.9,
+          "linear_srgb": [
+            0.018000000000000016,
+            0.9,
+            0.9
+          ]
+        },
+        "condition": {
+          "name": "adc-only",
+          "shot": 0.0,
+          "read": 0.0,
+          "exposure": 1.0
+        },
+        "pattern": "BGGR",
+        "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h180-s0.98-l0.90-adc-only-BGGR.npz",
+        "sha256": "f6569e1eb58acfadc8951c806266ef1ed24a747b7a3ebb38bebbb4d6473eb964",
+        "target_camera_RGB": [
+          0.05310000106692314,
+          0.8559000492095947,
+          0.5705999732017517
+        ],
+        "draws_per_pattern": 1
+      },
+      "model": {
+        "arm": "V104",
+        "path": "/mnt/external/demosaic/v102-reviewed-corpus-20261023-v1/train/V104/last.pt",
+        "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+        "expected_lineage": {
+          "step": 20000,
+          "initialized_from": {
+            "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+            "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+            "step": 20000
+          }
+        },
+        "kind": "joint-checkpoint",
+        "step": 20000,
+        "label": "V104 + malvar",
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "compute_precision": "float32, physicalFP32",
+        "memory_format": "channels_last",
+        "diagnostic_postprocess": "malvar"
+      },
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "white_balance": [
+        [
+          2.0,
+          1.0,
+          1.5
+        ]
+      ],
+      "camera_to_srgb": [
+        [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ]
+      ],
+      "conditioning": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "display_exposure": 1.0,
+      "reference": "Exact uniform analytic target; not a real photograph. Cases selected post hoc from original worst mean-bias observations."
+    }
+  ],
+  "summary": [
+    {
+      "model": "V102",
+      "mode": "original",
+      "cases": 588,
+      "max_abs_channel_mean_bias_DN16": {
+        "mean": 10.044914818470215,
+        "p95": 38.288471330271534,
+        "maximum": 59.230066513514615
+      },
+      "camera_RGB_RMSE_DN16": {
+        "mean": 7.73128759703357,
+        "p95": 29.41217770930172,
+        "maximum": 41.674142585498785
+      },
+      "MSE_improved": 0,
+      "MSE_regressed": 0,
+      "MSE_equal": 588
+    },
+    {
+      "model": "V102",
+      "mode": "sites",
+      "cases": 588,
+      "max_abs_channel_mean_bias_DN16": {
+        "mean": 7.254070366906001,
+        "p95": 28.365644701728304,
+        "maximum": 46.2514451270923
+      },
+      "camera_RGB_RMSE_DN16": {
+        "mean": 6.4758333724691735,
+        "p95": 24.895455881249045,
+        "maximum": 35.27768978903612
+      },
+      "MSE_improved": 557,
+      "MSE_regressed": 31,
+      "MSE_equal": 0
+    },
+    {
+      "model": "V102",
+      "mode": "malvar",
+      "cases": 588,
+      "max_abs_channel_mean_bias_DN16": {
+        "mean": 2.7408649697524567,
+        "p95": 10.461176727407762,
+        "maximum": 25.160756360774393
+      },
+      "camera_RGB_RMSE_DN16": {
+        "mean": 3.0993261481819268,
+        "p95": 10.666590327267796,
+        "maximum": 21.552715237279077
+      },
+      "MSE_improved": 547,
+      "MSE_regressed": 41,
+      "MSE_equal": 0
+    },
+    {
+      "model": "V104",
+      "mode": "original",
+      "cases": 588,
+      "max_abs_channel_mean_bias_DN16": {
+        "mean": 14.455816063155218,
+        "p95": 43.70374665201524,
+        "maximum": 1218.0574063721813
+      },
+      "camera_RGB_RMSE_DN16": {
+        "mean": 10.630622624970064,
+        "p95": 35.40377306474398,
+        "maximum": 708.5018162463688
+      },
+      "MSE_improved": 0,
+      "MSE_regressed": 0,
+      "MSE_equal": 588
+    },
+    {
+      "model": "V104",
+      "mode": "sites",
+      "cases": 588,
+      "max_abs_channel_mean_bias_DN16": {
+        "mean": 9.447349814324552,
+        "p95": 32.825293937952885,
+        "maximum": 610.6677226708853
+      },
+      "camera_RGB_RMSE_DN16": {
+        "mean": 8.577019264938958,
+        "p95": 30.237991574154833,
+        "maximum": 503.4406247715961
+      },
+      "MSE_improved": 547,
+      "MSE_regressed": 41,
+      "MSE_equal": 0
+    },
+    {
+      "model": "V104",
+      "mode": "malvar",
+      "cases": 588,
+      "max_abs_channel_mean_bias_DN16": {
+        "mean": 2.56517305726736,
+        "p95": 9.59730981702785,
+        "maximum": 31.908770172011284
+      },
+      "camera_RGB_RMSE_DN16": {
+        "mean": 2.936325830292288,
+        "p95": 10.171348922279913,
+        "maximum": 25.900651615353986
+      },
+      "MSE_improved": 531,
+      "MSE_regressed": 57,
+      "MSE_equal": 0
+    }
+  ],
+  "source_report": {
+    "path": "/mnt/external/demosaic/V104-adc-color-projection-20261023-v2/report.json",
+    "sha256": "5a4b420f9a64fcc7c257c78205b7e6a91547c2a7dcf866ebe6bbfc595dade18a"
+  },
+  "independent_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-adc-color-projection-v2/audit.json",
+    "sha256": "1f4f681ec9fa2dc78d90d34f0e19db591c01d7347ca1e11e04075da9b74bbd35"
+  },
+  "board": {
+    "path": "/home/dllu/proj/demosaic/docs/images/v104-adc-color-projection/native-comparison.png",
+    "sha256": "0d80e48b2db07d844052a6a5e7105b5e834e6231ec331a46bef0c56d60f2be1d"
+  },
+  "board_receipt": {
+    "path": "/home/dllu/proj/demosaic/docs/images/v104-adc-color-projection/native-comparison.json",
+    "sha256": "2799b3587542737ea0dfbe5498aa9d62b2bdf68790bf9527821e3d2e5d334e9f"
+  },
+  "scope": "Existing untuned sites/malvar CFA projection on all 588 saved ADC-only analytic flat cases for V102/V104. No positive-noise projection, new inference, training change, checkpoint export or target fitting. Post-hoc worst-case crop selection. Flat bias repair is not evidence of photograph/texture quality or a new model recommendation."
+}

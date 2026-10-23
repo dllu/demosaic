@@ -1,0 +1,73 @@
+{
+  "status": "running-CPU-ADC-photo-comparison-no-final-quality-result",
+  "recorded_local": "2026-10-23T16:44:41.354702-07:00",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-ADC-full427-CPU-v1/plan.json",
+    "sha256": "5ad0e9ae5562a6b3fae79b5ecc68a1254ac44cc8451926468542fecce72ba0d4"
+  },
+  "launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-ADC-full427-CPU-v1/launch.json",
+    "sha256": "f0e2e95b560f144e4c7a386bc423acaa8496401a3b20fb3e2e602253962b536c"
+  },
+  "controller": {
+    "pid": 3450932,
+    "created": 1792798993.73
+  },
+  "child": {
+    "pid": 3450943,
+    "created": 1792798994.58
+  },
+  "checkpoint": {
+    "path": "/mnt/external/demosaic/models/v104-final20000.pt",
+    "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300"
+  },
+  "photo_manifest": {
+    "path": "/mnt/external/demosaic/evaluation/manifests/common-8192-44732-val-v1.jsonl",
+    "sha256": "7cc76f460019582eeec519b332e9f9f53e030bdf579e2f27b915916a741cce0d"
+  },
+  "protocol": {
+    "path": "/home/dllu/proj/demosaic/configs/evaluation.yaml",
+    "sha256": "74b0df74b9734a714e04a0a1cf1e82ed0ba211b1d5b5fd745b9502ca5af2174c"
+  },
+  "planned_sources": 427,
+  "CFA_patterns": 4,
+  "planned_case_method_rows": 5124,
+  "planned_neural_batched_forwards": 856,
+  "runtime": {
+    "device": "cpu",
+    "precision": "IEEE FP32",
+    "threads": 2,
+    "batch_size": 2
+  },
+  "first_actual_progress_snapshot": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-ADC-full427-CPU-v1/first-production-progress.json",
+    "sha256": "3958877c17d9ea868f4900ebade20508288272f46e9f919fc403f9d0b53ffdb8"
+  },
+  "first_actual_24_rows_snapshot": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-ADC-full427-CPU-v1/first-production-metrics.json",
+    "sha256": "ac9a55961e4ad2bee9b9592628ed7c15bc8051853adbbb5f7cb9577ad4a01677"
+  },
+  "first_neural_forwards_completed": 4,
+  "hypothesis": "Do either existing, untuned ADC projection operators repair the flat-color bias while preserving V104 photographic structure and color?",
+  "scope": "Full427 existing photographic validation sources, all four CFAs, ADC-only; fixed V104 final20000 EMA, CPU IEEE FP32, batch2/2threads/contiguous. Original output, existing Malvar residual projection and valid observed-site-only replacement share one actual neural prediction per observation. Native256contexts, scored240interior, six fixed native160triplets from first two existing validation sources. No training changes, automatic checkpoint export/promotion, positive-noise or real-camera superiority claims. Compare source-balanced original-policy changes; independent metrics and actual crop review required after completion.",
+  "no_final_metrics_or_recommendation": true,
+  "independent_statistics_and_native_review_still_required": true,
+  "parallel_training_observation": {
+    "arm": "V111",
+    "actual_logged_step": 3550,
+    "controller": {
+      "pid": 3426533,
+      "created": 1792795962.1
+    },
+    "child": {
+      "pid": 3426593,
+      "created": 1792795980.02
+    },
+    "V112_queued": true
+  },
+  "live_locations_not_hashed": {
+    "status": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-ADC-full427-CPU-v1/status.json",
+    "progress": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-ADC-full427-CPU-v1/progress.json",
+    "log": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-ADC-full427-CPU-v1/worker.log"
+  }
+}

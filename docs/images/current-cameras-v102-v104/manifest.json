@@ -1,0 +1,2416 @@
+{
+  "models": [
+    {
+      "label": "V102, step 20000",
+      "source": "/mnt/external/demosaic/models/v102-final20000.pt",
+      "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+      "snapshot": "/mnt/external/demosaic/three-camera-V102-V103-CPU-20261023-v2/weights/weights-55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a.pt",
+      "compute_precision": "float32",
+      "device": "cpu",
+      "memory_format": "channels_last",
+      "model_config": {
+        "restoration_backbone": "pretrained-rgb",
+        "width": 64,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "dino_lora_rank": 0,
+        "dino_input_adapter": false,
+        "dino_feature_fusion": "convnext-pyramid",
+        "camera_conditioning": true,
+        "noise_modulation": false,
+        "physical_fp32": true,
+        "baseline": "bilinear",
+        "prior_window": 7,
+        "standardized_noise": false,
+        "noise_refinement": false,
+        "refinement_width": 24,
+        "refinement_blocks": 4,
+        "refinement_window": 63,
+        "coarse_refinement_factor": 0,
+        "coarse_refinement_width": 24,
+        "coarse_refinement_blocks": 4,
+        "coarse_refinement_window": 31,
+        "pyramid_refinement": false,
+        "pyramid_measurements": true,
+        "pyramid_width": 24,
+        "pyramid_blocks": 2,
+        "variance_stabilization": true,
+        "physical_anchors": true,
+        "rgb_processing_scale": 1,
+        "packed_detail_prior": false,
+        "rgb_hidden_autocast": false,
+        "rgb_center_camera_matrix": false,
+        "rgb_middle_skip_fp32": true,
+        "adc_cfa_projection": false,
+        "adc_cfa_projection_mode": "malvar",
+        "raw_kernel_reconstruction": false,
+        "raw_kernel_windows": [
+          1,
+          5,
+          17
+        ],
+        "raw_kernel_phase_conditioning": false,
+        "raw_directional_residual": false,
+        "raw_directional_bank_context": false,
+        "raw_directional_bank_detach_input": false,
+        "raw_spectral_residual": false,
+        "late_rgb_refinement": "none",
+        "isotropic_groups": 6,
+        "isotropic_blocks": 8,
+        "isotropic_local_width": 32,
+        "isotropic_raw_gain": 1.0,
+        "isotropic_residual_scale": 1.0
+      }
+    },
+    {
+      "label": "V104, step 20000",
+      "source": "/mnt/external/demosaic/models/v104-final20000.pt",
+      "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+      "compute_precision": "float32",
+      "device": "cpu",
+      "memory_format": "channels_last",
+      "model_config": {
+        "restoration_backbone": "pretrained-rgb",
+        "width": 64,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "dino_lora_rank": 0,
+        "dino_input_adapter": false,
+        "dino_feature_fusion": "convnext-pyramid",
+        "camera_conditioning": true,
+        "noise_modulation": false,
+        "physical_fp32": true,
+        "baseline": "bilinear",
+        "prior_window": 7,
+        "standardized_noise": false,
+        "noise_refinement": false,
+        "refinement_width": 24,
+        "refinement_blocks": 4,
+        "refinement_window": 63,
+        "coarse_refinement_factor": 0,
+        "coarse_refinement_width": 24,
+        "coarse_refinement_blocks": 4,
+        "coarse_refinement_window": 31,
+        "pyramid_refinement": false,
+        "pyramid_measurements": true,
+        "pyramid_width": 24,
+        "pyramid_blocks": 2,
+        "variance_stabilization": true,
+        "physical_anchors": true,
+        "rgb_processing_scale": 1,
+        "packed_detail_prior": false,
+        "rgb_hidden_autocast": false,
+        "rgb_center_camera_matrix": false,
+        "rgb_middle_skip_fp32": true,
+        "adc_cfa_projection": false,
+        "adc_cfa_projection_mode": "malvar",
+        "raw_kernel_reconstruction": false,
+        "raw_kernel_windows": [
+          1,
+          5,
+          17
+        ],
+        "raw_kernel_phase_conditioning": false,
+        "raw_directional_residual": false,
+        "raw_directional_bank_context": false,
+        "raw_directional_bank_detach_input": false,
+        "raw_spectral_residual": false,
+        "late_rgb_refinement": "none",
+        "isotropic_groups": 6,
+        "isotropic_blocks": 8,
+        "isotropic_local_width": 32,
+        "isotropic_raw_gain": 1.0,
+        "isotropic_residual_scale": 1.0
+      }
+    },
+    {
+      "label": "RawNIND:CFA-channel",
+      "gain_mode": "cfa-channel",
+      "precision": "IEEE float32",
+      "device": "cpu",
+      "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+    }
+  ],
+  "selection": [
+    {
+      "raw": {
+        "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2021-06-11-19-48-11_L1000122_addf0e21e71ad60bb16a75f7f0490ece80f68fa4.dng",
+        "camera": "LEICA Q2",
+        "pattern": "GBRG",
+        "black_levels": [
+          512.0,
+          512.0,
+          512.0,
+          512.0
+        ],
+        "white_levels": [
+          16383.0,
+          16383.0,
+          16383.0,
+          16383.0
+        ],
+        "white_balance": [
+          1.9765623807907104,
+          1.0,
+          1.5419921875
+        ],
+        "camera_to_srgb": [
+          [
+            1.2486980365881155,
+            -0.06457115493095107,
+            -0.18412688165716443
+          ],
+          [
+            -0.09512700077260573,
+            1.1885042279444495,
+            -0.09337722717184385
+          ],
+          [
+            0.013758207840115224,
+            -0.29287099976587055,
+            1.2791127919257554
+          ]
+        ],
+        "flip": 0,
+        "iso": 100,
+        "adc_white_level": 16383.0,
+        "make": "LEICA CAMERA AG",
+        "xyz_to_camera": [
+          [
+            1.2311999797821045,
+            -0.5440000295639038,
+            -0.1307000070810318
+          ],
+          [
+            -0.6407999992370605,
+            1.5499000549316406,
+            0.08240000158548355
+          ],
+          [
+            -0.10750000178813934,
+            0.16769999265670776,
+            0.722000002861023
+          ]
+        ]
+      },
+      "crop_xywh": [
+        250,
+        4054,
+        512,
+        512
+      ],
+      "shot_prior": 4.372832896220782e-05,
+      "read_prior": 1.6048777837313756e-07,
+      "source_sha256": "78e99e7b845b285f1c5b80afb16cce3f63ba1052a6f2bfb8491ecd6ecc31de4a",
+      "id": "private-camera-0",
+      "purpose": "Q2 rocks and shadows",
+      "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2021-06-11-19-48-11_L1000122_addf0e21e71ad60bb16a75f7f0490ece80f68fa4.dng",
+      "original": "/mnt/dataz/pictures/raw/2021-06-11-19-48-11_L1000122_addf0e21e71ad60bb16a75f7f0490ece80f68fa4.dng",
+      "camera": "LEICA Q2",
+      "iso": 100,
+      "x": 0.03,
+      "y": 0.72,
+      "size": 512,
+      "display_exposure": 2.0,
+      "shot": 4.372832896220782e-05,
+      "read": 1.6048777837313756e-07,
+      "noise_source": "input-only Haar flat-patch fit",
+      "noise_profile": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/noise-0.json",
+      "regions": [
+        {
+          "name": "upper-left",
+          "xywh": [
+            64,
+            64,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "lower-right",
+          "xywh": [
+            256,
+            256,
+            160,
+            160
+          ]
+        }
+      ],
+      "scope": "Development qualitative capture; no clean reference, no pixelwise quality score, no training admission."
+    },
+    {
+      "raw": {
+        "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2019-10-13-21-38-20_DSC02083_bd0b79a49a75536a6a06c6e783772555b458b89d.arw",
+        "camera": "ILCE-7RM2",
+        "pattern": "RGGB",
+        "black_levels": [
+          512.0,
+          512.0,
+          512.0,
+          512.0
+        ],
+        "white_levels": [
+          15360.0,
+          15360.0,
+          15360.0,
+          15360.0
+        ],
+        "white_balance": [
+          2.74609375,
+          1.0,
+          1.41796875
+        ],
+        "camera_to_srgb": [
+          [
+            1.7435892297682514,
+            -0.5660201930118276,
+            -0.17756903675642394
+          ],
+          [
+            -0.1791506511827845,
+            1.6220624622720643,
+            -0.4429118110892798
+          ],
+          [
+            -0.0013247590471994687,
+            -0.38987250821605224,
+            1.3911972672632518
+          ]
+        ],
+        "flip": 0,
+        "iso": 400,
+        "adc_white_level": 16383.0,
+        "make": "SONY",
+        "xyz_to_camera": [
+          [
+            0.6628999710083008,
+            -0.1899999976158142,
+            -0.04830000177025795
+          ],
+          [
+            -0.4618000090122223,
+            1.2348999977111816,
+            0.2549999952316284
+          ],
+          [
+            -0.062199998646974564,
+            0.13809999823570251,
+            0.6514000296592712
+          ]
+        ]
+      },
+      "crop_xywh": [
+        3984,
+        2978,
+        512,
+        512
+      ],
+      "shot_prior": 8.19833843920702e-05,
+      "read_prior": 1.2061987546279834e-07,
+      "source_sha256": "01104550e4cde320a53918721a7e1bdf2c9369d01eece0d8cce46c861c816e39",
+      "id": "private-camera-1",
+      "purpose": "a7R II airplane fuselage detail",
+      "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2019-10-13-21-38-20_DSC02083_bd0b79a49a75536a6a06c6e783772555b458b89d.arw",
+      "original": "/mnt/dataz/pictures/raw/2019-10-13-21-38-20_DSC02083_bd0b79a49a75536a6a06c6e783772555b458b89d.arw",
+      "camera": "ILCE-7RM2",
+      "iso": 400,
+      "x": 0.5,
+      "y": 0.56,
+      "size": 512,
+      "display_exposure": 1,
+      "shot": 8.19833843920702e-05,
+      "read": 1.2061987546279834e-07,
+      "noise_source": "input-only Haar flat-patch fit",
+      "noise_profile": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/noise-1.json",
+      "regions": [
+        {
+          "name": "upper-left",
+          "xywh": [
+            64,
+            64,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "lower-right",
+          "xywh": [
+            256,
+            256,
+            160,
+            160
+          ]
+        }
+      ],
+      "scope": "Development qualitative capture; no clean reference, no pixelwise quality score, no training admission."
+    },
+    {
+      "raw": {
+        "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2019-05-19-15-15-05_DSCF2416_a2b2c8996d79eff8da71d668ada86d5dc8d58459.raf",
+        "camera": "GFX 50R",
+        "pattern": "RGGB",
+        "black_levels": [
+          65.0,
+          65.0,
+          65.0,
+          65.0
+        ],
+        "white_levels": [
+          15872.0,
+          15872.0,
+          15872.0,
+          15872.0
+        ],
+        "white_balance": [
+          1.6920529801324504,
+          1.0,
+          1.6821192052980132
+        ],
+        "camera_to_srgb": [
+          [
+            1.474794070769569,
+            -0.19416920770899534,
+            -0.28062486306057394
+          ],
+          [
+            -0.23507562604513235,
+            1.6967978053199106,
+            -0.4617221792747782
+          ],
+          [
+            -0.0026595712410704,
+            -0.4699886543873294,
+            1.4726482256283997
+          ]
+        ],
+        "flip": 0,
+        "iso": 100,
+        "adc_white_level": 15872.0,
+        "make": "FUJIFILM",
+        "xyz_to_camera": [
+          [
+            1.1756000518798828,
+            -0.47540000081062317,
+            -0.08739999681711197
+          ],
+          [
+            -0.30559998750686646,
+            1.1045000553131104,
+            0.2304999977350235
+          ],
+          [
+            -0.038100000470876694,
+            0.14569999277591705,
+            0.600600004196167
+          ]
+        ]
+      },
+      "crop_xywh": [
+        1656,
+        1552,
+        512,
+        512
+      ],
+      "shot_prior": 1.9414241387097276e-05,
+      "read_prior": 1.6413062836047303e-07,
+      "source_sha256": "f6214285997723a12b142b480fe70d996e5fde44b8c25c8bf352f5b31ad3846e",
+      "id": "private-camera-2",
+      "purpose": "GFX 50R architecture",
+      "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2019-05-19-15-15-05_DSCF2416_a2b2c8996d79eff8da71d668ada86d5dc8d58459.raf",
+      "original": "/mnt/dataz/pictures/raw/2019-05-19-15-15-05_DSCF2416_a2b2c8996d79eff8da71d668ada86d5dc8d58459.raf",
+      "camera": "GFX 50R",
+      "iso": 100,
+      "x": 0.2,
+      "y": 0.25,
+      "size": 512,
+      "display_exposure": 2.0,
+      "shot": 1.9414241387097276e-05,
+      "read": 1.6413062836047303e-07,
+      "noise_source": "input-only Haar flat-patch fit",
+      "noise_profile": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/noise-2.json",
+      "regions": [
+        {
+          "name": "upper-left",
+          "xywh": [
+            64,
+            64,
+            160,
+            160
+          ]
+        },
+        {
+          "name": "lower-right",
+          "xywh": [
+            256,
+            256,
+            160,
+            160
+          ]
+        }
+      ],
+      "scope": "Development qualitative capture; no clean reference, no pixelwise quality score, no training admission."
+    }
+  ],
+  "native_crops": [
+    {
+      "image": "crop-9e799f41c29c9564.png",
+      "caption": "LEICA Q2 / Q2 rocks and shadows / upper-left / V102, step 20000 / RawNIND:CFA-channel",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "RawNIND (not GT)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "87a19580f6cc6976a2a37da8c5a96524535c79a0c2baeddf73d16dab00b9817d",
+      "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2021-06-11-19-48-11_L1000122_addf0e21e71ad60bb16a75f7f0490ece80f68fa4.dng",
+      "source_sha256": "78e99e7b845b285f1c5b80afb16cce3f63ba1052a6f2bfb8491ecd6ecc31de4a",
+      "raw_metadata": {
+        "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2021-06-11-19-48-11_L1000122_addf0e21e71ad60bb16a75f7f0490ece80f68fa4.dng",
+        "camera": "LEICA Q2",
+        "pattern": "GBRG",
+        "black_levels": [
+          512.0,
+          512.0,
+          512.0,
+          512.0
+        ],
+        "white_levels": [
+          16383.0,
+          16383.0,
+          16383.0,
+          16383.0
+        ],
+        "white_balance": [
+          1.9765623807907104,
+          1.0,
+          1.5419921875
+        ],
+        "camera_to_srgb": [
+          [
+            1.2486980365881155,
+            -0.06457115493095107,
+            -0.18412688165716443
+          ],
+          [
+            -0.09512700077260573,
+            1.1885042279444495,
+            -0.09337722717184385
+          ],
+          [
+            0.013758207840115224,
+            -0.29287099976587055,
+            1.2791127919257554
+          ]
+        ],
+        "flip": 0,
+        "iso": 100,
+        "adc_white_level": 16383.0,
+        "make": "LEICA CAMERA AG",
+        "xyz_to_camera": [
+          [
+            1.2311999797821045,
+            -0.5440000295639038,
+            -0.1307000070810318
+          ],
+          [
+            -0.6407999992370605,
+            1.5499000549316406,
+            0.08240000158548355
+          ],
+          [
+            -0.10750000178813934,
+            0.16769999265670776,
+            0.722000002861023
+          ]
+        ]
+      },
+      "context_xywh": [
+        250,
+        4054,
+        512,
+        512
+      ],
+      "sensor_roi_xywh": [
+        314,
+        4118,
+        160,
+        160
+      ],
+      "context_roi_xywh": [
+        64,
+        64,
+        160,
+        160
+      ],
+      "region": "upper-left",
+      "model_label": "V102, step 20000",
+      "checkpoint_sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+      "compute_precision": "float32",
+      "device": "cpu",
+      "baseline": {
+        "label": "RawNIND:CFA-channel",
+        "gain_mode": "cfa-channel",
+        "precision": "IEEE float32",
+        "device": "cpu",
+        "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+      },
+      "conditioning": {
+        "shot": 4.372832896220782e-05,
+        "read": 1.6048777837313756e-07,
+        "source": "input-only Haar flat-patch fit"
+      },
+      "white_balance": [
+        1.9765623807907104,
+        1.0,
+        1.5419921875
+      ],
+      "camera_to_srgb": [
+        [
+          1.2486980365881155,
+          -0.06457115493095107,
+          -0.18412688165716443
+        ],
+        [
+          -0.09512700077260573,
+          1.1885042279444495,
+          -0.09337722717184385
+        ],
+        [
+          0.013758207840115224,
+          -0.29287099976587055,
+          1.2791127919257554
+        ]
+      ],
+      "display_exposure": 2.0,
+      "reference": "RawNIND on the same noisy capture; comparator, not GT; no pixelwise score"
+    },
+    {
+      "image": "crop-cb08ed70430f59e1.png",
+      "caption": "LEICA Q2 / Q2 rocks and shadows / lower-right / V102, step 20000 / RawNIND:CFA-channel",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "RawNIND (not GT)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "f4c490504f06929311a09f49673f37fba4c0a6bccf7b77953acf5607915e968f",
+      "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2021-06-11-19-48-11_L1000122_addf0e21e71ad60bb16a75f7f0490ece80f68fa4.dng",
+      "source_sha256": "78e99e7b845b285f1c5b80afb16cce3f63ba1052a6f2bfb8491ecd6ecc31de4a",
+      "raw_metadata": {
+        "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2021-06-11-19-48-11_L1000122_addf0e21e71ad60bb16a75f7f0490ece80f68fa4.dng",
+        "camera": "LEICA Q2",
+        "pattern": "GBRG",
+        "black_levels": [
+          512.0,
+          512.0,
+          512.0,
+          512.0
+        ],
+        "white_levels": [
+          16383.0,
+          16383.0,
+          16383.0,
+          16383.0
+        ],
+        "white_balance": [
+          1.9765623807907104,
+          1.0,
+          1.5419921875
+        ],
+        "camera_to_srgb": [
+          [
+            1.2486980365881155,
+            -0.06457115493095107,
+            -0.18412688165716443
+          ],
+          [
+            -0.09512700077260573,
+            1.1885042279444495,
+            -0.09337722717184385
+          ],
+          [
+            0.013758207840115224,
+            -0.29287099976587055,
+            1.2791127919257554
+          ]
+        ],
+        "flip": 0,
+        "iso": 100,
+        "adc_white_level": 16383.0,
+        "make": "LEICA CAMERA AG",
+        "xyz_to_camera": [
+          [
+            1.2311999797821045,
+            -0.5440000295639038,
+            -0.1307000070810318
+          ],
+          [
+            -0.6407999992370605,
+            1.5499000549316406,
+            0.08240000158548355
+          ],
+          [
+            -0.10750000178813934,
+            0.16769999265670776,
+            0.722000002861023
+          ]
+        ]
+      },
+      "context_xywh": [
+        250,
+        4054,
+        512,
+        512
+      ],
+      "sensor_roi_xywh": [
+        506,
+        4310,
+        160,
+        160
+      ],
+      "context_roi_xywh": [
+        256,
+        256,
+        160,
+        160
+      ],
+      "region": "lower-right",
+      "model_label": "V102, step 20000",
+      "checkpoint_sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+      "compute_precision": "float32",
+      "device": "cpu",
+      "baseline": {
+        "label": "RawNIND:CFA-channel",
+        "gain_mode": "cfa-channel",
+        "precision": "IEEE float32",
+        "device": "cpu",
+        "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+      },
+      "conditioning": {
+        "shot": 4.372832896220782e-05,
+        "read": 1.6048777837313756e-07,
+        "source": "input-only Haar flat-patch fit"
+      },
+      "white_balance": [
+        1.9765623807907104,
+        1.0,
+        1.5419921875
+      ],
+      "camera_to_srgb": [
+        [
+          1.2486980365881155,
+          -0.06457115493095107,
+          -0.18412688165716443
+        ],
+        [
+          -0.09512700077260573,
+          1.1885042279444495,
+          -0.09337722717184385
+        ],
+        [
+          0.013758207840115224,
+          -0.29287099976587055,
+          1.2791127919257554
+        ]
+      ],
+      "display_exposure": 2.0,
+      "reference": "RawNIND on the same noisy capture; comparator, not GT; no pixelwise score"
+    },
+    {
+      "image": "crop-0d2b88c4b389d3d9.png",
+      "caption": "ILCE-7RM2 / a7R II airplane fuselage detail / upper-left / V102, step 20000 / RawNIND:CFA-channel",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "RawNIND (not GT)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "9a4b9290cd91471a9f73fc761f0701108b5de8acfbc914aa3a55dce75c1100e2",
+      "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2019-10-13-21-38-20_DSC02083_bd0b79a49a75536a6a06c6e783772555b458b89d.arw",
+      "source_sha256": "01104550e4cde320a53918721a7e1bdf2c9369d01eece0d8cce46c861c816e39",
+      "raw_metadata": {
+        "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2019-10-13-21-38-20_DSC02083_bd0b79a49a75536a6a06c6e783772555b458b89d.arw",
+        "camera": "ILCE-7RM2",
+        "pattern": "RGGB",
+        "black_levels": [
+          512.0,
+          512.0,
+          512.0,
+          512.0
+        ],
+        "white_levels": [
+          15360.0,
+          15360.0,
+          15360.0,
+          15360.0
+        ],
+        "white_balance": [
+          2.74609375,
+          1.0,
+          1.41796875
+        ],
+        "camera_to_srgb": [
+          [
+            1.7435892297682514,
+            -0.5660201930118276,
+            -0.17756903675642394
+          ],
+          [
+            -0.1791506511827845,
+            1.6220624622720643,
+            -0.4429118110892798
+          ],
+          [
+            -0.0013247590471994687,
+            -0.38987250821605224,
+            1.3911972672632518
+          ]
+        ],
+        "flip": 0,
+        "iso": 400,
+        "adc_white_level": 16383.0,
+        "make": "SONY",
+        "xyz_to_camera": [
+          [
+            0.6628999710083008,
+            -0.1899999976158142,
+            -0.04830000177025795
+          ],
+          [
+            -0.4618000090122223,
+            1.2348999977111816,
+            0.2549999952316284
+          ],
+          [
+            -0.062199998646974564,
+            0.13809999823570251,
+            0.6514000296592712
+          ]
+        ]
+      },
+      "context_xywh": [
+        3984,
+        2978,
+        512,
+        512
+      ],
+      "sensor_roi_xywh": [
+        4048,
+        3042,
+        160,
+        160
+      ],
+      "context_roi_xywh": [
+        64,
+        64,
+        160,
+        160
+      ],
+      "region": "upper-left",
+      "model_label": "V102, step 20000",
+      "checkpoint_sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+      "compute_precision": "float32",
+      "device": "cpu",
+      "baseline": {
+        "label": "RawNIND:CFA-channel",
+        "gain_mode": "cfa-channel",
+        "precision": "IEEE float32",
+        "device": "cpu",
+        "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+      },
+      "conditioning": {
+        "shot": 8.19833843920702e-05,
+        "read": 1.2061987546279834e-07,
+        "source": "input-only Haar flat-patch fit"
+      },
+      "white_balance": [
+        2.74609375,
+        1.0,
+        1.41796875
+      ],
+      "camera_to_srgb": [
+        [
+          1.7435892297682514,
+          -0.5660201930118276,
+          -0.17756903675642394
+        ],
+        [
+          -0.1791506511827845,
+          1.6220624622720643,
+          -0.4429118110892798
+        ],
+        [
+          -0.0013247590471994687,
+          -0.38987250821605224,
+          1.3911972672632518
+        ]
+      ],
+      "display_exposure": 1,
+      "reference": "RawNIND on the same noisy capture; comparator, not GT; no pixelwise score"
+    },
+    {
+      "image": "crop-830593775985584a.png",
+      "caption": "ILCE-7RM2 / a7R II airplane fuselage detail / lower-right / V102, step 20000 / RawNIND:CFA-channel",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "RawNIND (not GT)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "f93b4b872010de5d8a093cc643b3c12e3c88e360da701236d4268b639207abc1",
+      "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2019-10-13-21-38-20_DSC02083_bd0b79a49a75536a6a06c6e783772555b458b89d.arw",
+      "source_sha256": "01104550e4cde320a53918721a7e1bdf2c9369d01eece0d8cce46c861c816e39",
+      "raw_metadata": {
+        "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2019-10-13-21-38-20_DSC02083_bd0b79a49a75536a6a06c6e783772555b458b89d.arw",
+        "camera": "ILCE-7RM2",
+        "pattern": "RGGB",
+        "black_levels": [
+          512.0,
+          512.0,
+          512.0,
+          512.0
+        ],
+        "white_levels": [
+          15360.0,
+          15360.0,
+          15360.0,
+          15360.0
+        ],
+        "white_balance": [
+          2.74609375,
+          1.0,
+          1.41796875
+        ],
+        "camera_to_srgb": [
+          [
+            1.7435892297682514,
+            -0.5660201930118276,
+            -0.17756903675642394
+          ],
+          [
+            -0.1791506511827845,
+            1.6220624622720643,
+            -0.4429118110892798
+          ],
+          [
+            -0.0013247590471994687,
+            -0.38987250821605224,
+            1.3911972672632518
+          ]
+        ],
+        "flip": 0,
+        "iso": 400,
+        "adc_white_level": 16383.0,
+        "make": "SONY",
+        "xyz_to_camera": [
+          [
+            0.6628999710083008,
+            -0.1899999976158142,
+            -0.04830000177025795
+          ],
+          [
+            -0.4618000090122223,
+            1.2348999977111816,
+            0.2549999952316284
+          ],
+          [
+            -0.062199998646974564,
+            0.13809999823570251,
+            0.6514000296592712
+          ]
+        ]
+      },
+      "context_xywh": [
+        3984,
+        2978,
+        512,
+        512
+      ],
+      "sensor_roi_xywh": [
+        4240,
+        3234,
+        160,
+        160
+      ],
+      "context_roi_xywh": [
+        256,
+        256,
+        160,
+        160
+      ],
+      "region": "lower-right",
+      "model_label": "V102, step 20000",
+      "checkpoint_sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+      "compute_precision": "float32",
+      "device": "cpu",
+      "baseline": {
+        "label": "RawNIND:CFA-channel",
+        "gain_mode": "cfa-channel",
+        "precision": "IEEE float32",
+        "device": "cpu",
+        "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+      },
+      "conditioning": {
+        "shot": 8.19833843920702e-05,
+        "read": 1.2061987546279834e-07,
+        "source": "input-only Haar flat-patch fit"
+      },
+      "white_balance": [
+        2.74609375,
+        1.0,
+        1.41796875
+      ],
+      "camera_to_srgb": [
+        [
+          1.7435892297682514,
+          -0.5660201930118276,
+          -0.17756903675642394
+        ],
+        [
+          -0.1791506511827845,
+          1.6220624622720643,
+          -0.4429118110892798
+        ],
+        [
+          -0.0013247590471994687,
+          -0.38987250821605224,
+          1.3911972672632518
+        ]
+      ],
+      "display_exposure": 1,
+      "reference": "RawNIND on the same noisy capture; comparator, not GT; no pixelwise score"
+    },
+    {
+      "image": "crop-0d31988be403925d.png",
+      "caption": "GFX 50R / GFX 50R architecture / upper-left / V102, step 20000 / RawNIND:CFA-channel",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "RawNIND (not GT)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "bdbc7dc22d6c538de230455333c4bb060100f4c26deaaa03b17ec6992e7056fd",
+      "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2019-05-19-15-15-05_DSCF2416_a2b2c8996d79eff8da71d668ada86d5dc8d58459.raf",
+      "source_sha256": "f6214285997723a12b142b480fe70d996e5fde44b8c25c8bf352f5b31ad3846e",
+      "raw_metadata": {
+        "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2019-05-19-15-15-05_DSCF2416_a2b2c8996d79eff8da71d668ada86d5dc8d58459.raf",
+        "camera": "GFX 50R",
+        "pattern": "RGGB",
+        "black_levels": [
+          65.0,
+          65.0,
+          65.0,
+          65.0
+        ],
+        "white_levels": [
+          15872.0,
+          15872.0,
+          15872.0,
+          15872.0
+        ],
+        "white_balance": [
+          1.6920529801324504,
+          1.0,
+          1.6821192052980132
+        ],
+        "camera_to_srgb": [
+          [
+            1.474794070769569,
+            -0.19416920770899534,
+            -0.28062486306057394
+          ],
+          [
+            -0.23507562604513235,
+            1.6967978053199106,
+            -0.4617221792747782
+          ],
+          [
+            -0.0026595712410704,
+            -0.4699886543873294,
+            1.4726482256283997
+          ]
+        ],
+        "flip": 0,
+        "iso": 100,
+        "adc_white_level": 15872.0,
+        "make": "FUJIFILM",
+        "xyz_to_camera": [
+          [
+            1.1756000518798828,
+            -0.47540000081062317,
+            -0.08739999681711197
+          ],
+          [
+            -0.30559998750686646,
+            1.1045000553131104,
+            0.2304999977350235
+          ],
+          [
+            -0.038100000470876694,
+            0.14569999277591705,
+            0.600600004196167
+          ]
+        ]
+      },
+      "context_xywh": [
+        1656,
+        1552,
+        512,
+        512
+      ],
+      "sensor_roi_xywh": [
+        1720,
+        1616,
+        160,
+        160
+      ],
+      "context_roi_xywh": [
+        64,
+        64,
+        160,
+        160
+      ],
+      "region": "upper-left",
+      "model_label": "V102, step 20000",
+      "checkpoint_sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+      "compute_precision": "float32",
+      "device": "cpu",
+      "baseline": {
+        "label": "RawNIND:CFA-channel",
+        "gain_mode": "cfa-channel",
+        "precision": "IEEE float32",
+        "device": "cpu",
+        "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+      },
+      "conditioning": {
+        "shot": 1.9414241387097276e-05,
+        "read": 1.6413062836047303e-07,
+        "source": "input-only Haar flat-patch fit"
+      },
+      "white_balance": [
+        1.6920529801324504,
+        1.0,
+        1.6821192052980132
+      ],
+      "camera_to_srgb": [
+        [
+          1.474794070769569,
+          -0.19416920770899534,
+          -0.28062486306057394
+        ],
+        [
+          -0.23507562604513235,
+          1.6967978053199106,
+          -0.4617221792747782
+        ],
+        [
+          -0.0026595712410704,
+          -0.4699886543873294,
+          1.4726482256283997
+        ]
+      ],
+      "display_exposure": 2.0,
+      "reference": "RawNIND on the same noisy capture; comparator, not GT; no pixelwise score"
+    },
+    {
+      "image": "crop-5aa8d09a217b91bb.png",
+      "caption": "GFX 50R / GFX 50R architecture / lower-right / V102, step 20000 / RawNIND:CFA-channel",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "RawNIND (not GT)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "68930319c0f217bd391e270cbb7202023f1afd190ea63dcb87b705b768b254c7",
+      "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2019-05-19-15-15-05_DSCF2416_a2b2c8996d79eff8da71d668ada86d5dc8d58459.raf",
+      "source_sha256": "f6214285997723a12b142b480fe70d996e5fde44b8c25c8bf352f5b31ad3846e",
+      "raw_metadata": {
+        "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2019-05-19-15-15-05_DSCF2416_a2b2c8996d79eff8da71d668ada86d5dc8d58459.raf",
+        "camera": "GFX 50R",
+        "pattern": "RGGB",
+        "black_levels": [
+          65.0,
+          65.0,
+          65.0,
+          65.0
+        ],
+        "white_levels": [
+          15872.0,
+          15872.0,
+          15872.0,
+          15872.0
+        ],
+        "white_balance": [
+          1.6920529801324504,
+          1.0,
+          1.6821192052980132
+        ],
+        "camera_to_srgb": [
+          [
+            1.474794070769569,
+            -0.19416920770899534,
+            -0.28062486306057394
+          ],
+          [
+            -0.23507562604513235,
+            1.6967978053199106,
+            -0.4617221792747782
+          ],
+          [
+            -0.0026595712410704,
+            -0.4699886543873294,
+            1.4726482256283997
+          ]
+        ],
+        "flip": 0,
+        "iso": 100,
+        "adc_white_level": 15872.0,
+        "make": "FUJIFILM",
+        "xyz_to_camera": [
+          [
+            1.1756000518798828,
+            -0.47540000081062317,
+            -0.08739999681711197
+          ],
+          [
+            -0.30559998750686646,
+            1.1045000553131104,
+            0.2304999977350235
+          ],
+          [
+            -0.038100000470876694,
+            0.14569999277591705,
+            0.600600004196167
+          ]
+        ]
+      },
+      "context_xywh": [
+        1656,
+        1552,
+        512,
+        512
+      ],
+      "sensor_roi_xywh": [
+        1912,
+        1808,
+        160,
+        160
+      ],
+      "context_roi_xywh": [
+        256,
+        256,
+        160,
+        160
+      ],
+      "region": "lower-right",
+      "model_label": "V102, step 20000",
+      "checkpoint_sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a",
+      "compute_precision": "float32",
+      "device": "cpu",
+      "baseline": {
+        "label": "RawNIND:CFA-channel",
+        "gain_mode": "cfa-channel",
+        "precision": "IEEE float32",
+        "device": "cpu",
+        "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+      },
+      "conditioning": {
+        "shot": 1.9414241387097276e-05,
+        "read": 1.6413062836047303e-07,
+        "source": "input-only Haar flat-patch fit"
+      },
+      "white_balance": [
+        1.6920529801324504,
+        1.0,
+        1.6821192052980132
+      ],
+      "camera_to_srgb": [
+        [
+          1.474794070769569,
+          -0.19416920770899534,
+          -0.28062486306057394
+        ],
+        [
+          -0.23507562604513235,
+          1.6967978053199106,
+          -0.4617221792747782
+        ],
+        [
+          -0.0026595712410704,
+          -0.4699886543873294,
+          1.4726482256283997
+        ]
+      ],
+      "display_exposure": 2.0,
+      "reference": "RawNIND on the same noisy capture; comparator, not GT; no pixelwise score"
+    },
+    {
+      "image": "crop-d3a93e47a83692c9.png",
+      "caption": "LEICA Q2 / Q2 rocks and shadows / upper-left / V104, step 20000 / RawNIND:CFA-channel",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "RawNIND (not GT)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "6452c2359c1dfe9afd95f23c5029a053c0889d941e884ae3afd6783ef4d3434e",
+      "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2021-06-11-19-48-11_L1000122_addf0e21e71ad60bb16a75f7f0490ece80f68fa4.dng",
+      "source_sha256": "78e99e7b845b285f1c5b80afb16cce3f63ba1052a6f2bfb8491ecd6ecc31de4a",
+      "raw_metadata": {
+        "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2021-06-11-19-48-11_L1000122_addf0e21e71ad60bb16a75f7f0490ece80f68fa4.dng",
+        "camera": "LEICA Q2",
+        "pattern": "GBRG",
+        "black_levels": [
+          512.0,
+          512.0,
+          512.0,
+          512.0
+        ],
+        "white_levels": [
+          16383.0,
+          16383.0,
+          16383.0,
+          16383.0
+        ],
+        "white_balance": [
+          1.9765623807907104,
+          1.0,
+          1.5419921875
+        ],
+        "camera_to_srgb": [
+          [
+            1.2486980365881155,
+            -0.06457115493095107,
+            -0.18412688165716443
+          ],
+          [
+            -0.09512700077260573,
+            1.1885042279444495,
+            -0.09337722717184385
+          ],
+          [
+            0.013758207840115224,
+            -0.29287099976587055,
+            1.2791127919257554
+          ]
+        ],
+        "flip": 0,
+        "iso": 100,
+        "adc_white_level": 16383.0,
+        "make": "LEICA CAMERA AG",
+        "xyz_to_camera": [
+          [
+            1.2311999797821045,
+            -0.5440000295639038,
+            -0.1307000070810318
+          ],
+          [
+            -0.6407999992370605,
+            1.5499000549316406,
+            0.08240000158548355
+          ],
+          [
+            -0.10750000178813934,
+            0.16769999265670776,
+            0.722000002861023
+          ]
+        ]
+      },
+      "context_xywh": [
+        250,
+        4054,
+        512,
+        512
+      ],
+      "sensor_roi_xywh": [
+        314,
+        4118,
+        160,
+        160
+      ],
+      "context_roi_xywh": [
+        64,
+        64,
+        160,
+        160
+      ],
+      "region": "upper-left",
+      "model_label": "V104, step 20000",
+      "checkpoint_sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+      "compute_precision": "float32",
+      "device": "cpu",
+      "baseline": {
+        "label": "RawNIND:CFA-channel",
+        "gain_mode": "cfa-channel",
+        "precision": "IEEE float32",
+        "device": "cpu",
+        "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+      },
+      "conditioning": {
+        "shot": 4.372832896220782e-05,
+        "read": 1.6048777837313756e-07,
+        "source": "input-only Haar flat-patch fit"
+      },
+      "white_balance": [
+        1.9765623807907104,
+        1.0,
+        1.5419921875
+      ],
+      "camera_to_srgb": [
+        [
+          1.2486980365881155,
+          -0.06457115493095107,
+          -0.18412688165716443
+        ],
+        [
+          -0.09512700077260573,
+          1.1885042279444495,
+          -0.09337722717184385
+        ],
+        [
+          0.013758207840115224,
+          -0.29287099976587055,
+          1.2791127919257554
+        ]
+      ],
+      "display_exposure": 2.0,
+      "reference": "RawNIND on the same noisy capture; comparator, not GT; no pixelwise score"
+    },
+    {
+      "image": "crop-ad2ea1789908f0b4.png",
+      "caption": "LEICA Q2 / Q2 rocks and shadows / lower-right / V104, step 20000 / RawNIND:CFA-channel",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "RawNIND (not GT)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "34e503e22623a8a0986a18e44b214f70d958e0d700126ec2f0288797ffefd5d0",
+      "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2021-06-11-19-48-11_L1000122_addf0e21e71ad60bb16a75f7f0490ece80f68fa4.dng",
+      "source_sha256": "78e99e7b845b285f1c5b80afb16cce3f63ba1052a6f2bfb8491ecd6ecc31de4a",
+      "raw_metadata": {
+        "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2021-06-11-19-48-11_L1000122_addf0e21e71ad60bb16a75f7f0490ece80f68fa4.dng",
+        "camera": "LEICA Q2",
+        "pattern": "GBRG",
+        "black_levels": [
+          512.0,
+          512.0,
+          512.0,
+          512.0
+        ],
+        "white_levels": [
+          16383.0,
+          16383.0,
+          16383.0,
+          16383.0
+        ],
+        "white_balance": [
+          1.9765623807907104,
+          1.0,
+          1.5419921875
+        ],
+        "camera_to_srgb": [
+          [
+            1.2486980365881155,
+            -0.06457115493095107,
+            -0.18412688165716443
+          ],
+          [
+            -0.09512700077260573,
+            1.1885042279444495,
+            -0.09337722717184385
+          ],
+          [
+            0.013758207840115224,
+            -0.29287099976587055,
+            1.2791127919257554
+          ]
+        ],
+        "flip": 0,
+        "iso": 100,
+        "adc_white_level": 16383.0,
+        "make": "LEICA CAMERA AG",
+        "xyz_to_camera": [
+          [
+            1.2311999797821045,
+            -0.5440000295639038,
+            -0.1307000070810318
+          ],
+          [
+            -0.6407999992370605,
+            1.5499000549316406,
+            0.08240000158548355
+          ],
+          [
+            -0.10750000178813934,
+            0.16769999265670776,
+            0.722000002861023
+          ]
+        ]
+      },
+      "context_xywh": [
+        250,
+        4054,
+        512,
+        512
+      ],
+      "sensor_roi_xywh": [
+        506,
+        4310,
+        160,
+        160
+      ],
+      "context_roi_xywh": [
+        256,
+        256,
+        160,
+        160
+      ],
+      "region": "lower-right",
+      "model_label": "V104, step 20000",
+      "checkpoint_sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+      "compute_precision": "float32",
+      "device": "cpu",
+      "baseline": {
+        "label": "RawNIND:CFA-channel",
+        "gain_mode": "cfa-channel",
+        "precision": "IEEE float32",
+        "device": "cpu",
+        "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+      },
+      "conditioning": {
+        "shot": 4.372832896220782e-05,
+        "read": 1.6048777837313756e-07,
+        "source": "input-only Haar flat-patch fit"
+      },
+      "white_balance": [
+        1.9765623807907104,
+        1.0,
+        1.5419921875
+      ],
+      "camera_to_srgb": [
+        [
+          1.2486980365881155,
+          -0.06457115493095107,
+          -0.18412688165716443
+        ],
+        [
+          -0.09512700077260573,
+          1.1885042279444495,
+          -0.09337722717184385
+        ],
+        [
+          0.013758207840115224,
+          -0.29287099976587055,
+          1.2791127919257554
+        ]
+      ],
+      "display_exposure": 2.0,
+      "reference": "RawNIND on the same noisy capture; comparator, not GT; no pixelwise score"
+    },
+    {
+      "image": "crop-5cd19a3dd97f9935.png",
+      "caption": "ILCE-7RM2 / a7R II airplane fuselage detail / upper-left / V104, step 20000 / RawNIND:CFA-channel",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "RawNIND (not GT)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "1e1807156f916631506a428a35d07cebeb8c6ed543e4a32c69c248b8e3d960bf",
+      "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2019-10-13-21-38-20_DSC02083_bd0b79a49a75536a6a06c6e783772555b458b89d.arw",
+      "source_sha256": "01104550e4cde320a53918721a7e1bdf2c9369d01eece0d8cce46c861c816e39",
+      "raw_metadata": {
+        "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2019-10-13-21-38-20_DSC02083_bd0b79a49a75536a6a06c6e783772555b458b89d.arw",
+        "camera": "ILCE-7RM2",
+        "pattern": "RGGB",
+        "black_levels": [
+          512.0,
+          512.0,
+          512.0,
+          512.0
+        ],
+        "white_levels": [
+          15360.0,
+          15360.0,
+          15360.0,
+          15360.0
+        ],
+        "white_balance": [
+          2.74609375,
+          1.0,
+          1.41796875
+        ],
+        "camera_to_srgb": [
+          [
+            1.7435892297682514,
+            -0.5660201930118276,
+            -0.17756903675642394
+          ],
+          [
+            -0.1791506511827845,
+            1.6220624622720643,
+            -0.4429118110892798
+          ],
+          [
+            -0.0013247590471994687,
+            -0.38987250821605224,
+            1.3911972672632518
+          ]
+        ],
+        "flip": 0,
+        "iso": 400,
+        "adc_white_level": 16383.0,
+        "make": "SONY",
+        "xyz_to_camera": [
+          [
+            0.6628999710083008,
+            -0.1899999976158142,
+            -0.04830000177025795
+          ],
+          [
+            -0.4618000090122223,
+            1.2348999977111816,
+            0.2549999952316284
+          ],
+          [
+            -0.062199998646974564,
+            0.13809999823570251,
+            0.6514000296592712
+          ]
+        ]
+      },
+      "context_xywh": [
+        3984,
+        2978,
+        512,
+        512
+      ],
+      "sensor_roi_xywh": [
+        4048,
+        3042,
+        160,
+        160
+      ],
+      "context_roi_xywh": [
+        64,
+        64,
+        160,
+        160
+      ],
+      "region": "upper-left",
+      "model_label": "V104, step 20000",
+      "checkpoint_sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+      "compute_precision": "float32",
+      "device": "cpu",
+      "baseline": {
+        "label": "RawNIND:CFA-channel",
+        "gain_mode": "cfa-channel",
+        "precision": "IEEE float32",
+        "device": "cpu",
+        "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+      },
+      "conditioning": {
+        "shot": 8.19833843920702e-05,
+        "read": 1.2061987546279834e-07,
+        "source": "input-only Haar flat-patch fit"
+      },
+      "white_balance": [
+        2.74609375,
+        1.0,
+        1.41796875
+      ],
+      "camera_to_srgb": [
+        [
+          1.7435892297682514,
+          -0.5660201930118276,
+          -0.17756903675642394
+        ],
+        [
+          -0.1791506511827845,
+          1.6220624622720643,
+          -0.4429118110892798
+        ],
+        [
+          -0.0013247590471994687,
+          -0.38987250821605224,
+          1.3911972672632518
+        ]
+      ],
+      "display_exposure": 1,
+      "reference": "RawNIND on the same noisy capture; comparator, not GT; no pixelwise score"
+    },
+    {
+      "image": "crop-ea5692297478ef4b.png",
+      "caption": "ILCE-7RM2 / a7R II airplane fuselage detail / lower-right / V104, step 20000 / RawNIND:CFA-channel",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "RawNIND (not GT)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "bc46a323a0937108f60d26a6806fab931f039b42dff64b29fc12cb241354a6d0",
+      "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2019-10-13-21-38-20_DSC02083_bd0b79a49a75536a6a06c6e783772555b458b89d.arw",
+      "source_sha256": "01104550e4cde320a53918721a7e1bdf2c9369d01eece0d8cce46c861c816e39",
+      "raw_metadata": {
+        "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2019-10-13-21-38-20_DSC02083_bd0b79a49a75536a6a06c6e783772555b458b89d.arw",
+        "camera": "ILCE-7RM2",
+        "pattern": "RGGB",
+        "black_levels": [
+          512.0,
+          512.0,
+          512.0,
+          512.0
+        ],
+        "white_levels": [
+          15360.0,
+          15360.0,
+          15360.0,
+          15360.0
+        ],
+        "white_balance": [
+          2.74609375,
+          1.0,
+          1.41796875
+        ],
+        "camera_to_srgb": [
+          [
+            1.7435892297682514,
+            -0.5660201930118276,
+            -0.17756903675642394
+          ],
+          [
+            -0.1791506511827845,
+            1.6220624622720643,
+            -0.4429118110892798
+          ],
+          [
+            -0.0013247590471994687,
+            -0.38987250821605224,
+            1.3911972672632518
+          ]
+        ],
+        "flip": 0,
+        "iso": 400,
+        "adc_white_level": 16383.0,
+        "make": "SONY",
+        "xyz_to_camera": [
+          [
+            0.6628999710083008,
+            -0.1899999976158142,
+            -0.04830000177025795
+          ],
+          [
+            -0.4618000090122223,
+            1.2348999977111816,
+            0.2549999952316284
+          ],
+          [
+            -0.062199998646974564,
+            0.13809999823570251,
+            0.6514000296592712
+          ]
+        ]
+      },
+      "context_xywh": [
+        3984,
+        2978,
+        512,
+        512
+      ],
+      "sensor_roi_xywh": [
+        4240,
+        3234,
+        160,
+        160
+      ],
+      "context_roi_xywh": [
+        256,
+        256,
+        160,
+        160
+      ],
+      "region": "lower-right",
+      "model_label": "V104, step 20000",
+      "checkpoint_sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+      "compute_precision": "float32",
+      "device": "cpu",
+      "baseline": {
+        "label": "RawNIND:CFA-channel",
+        "gain_mode": "cfa-channel",
+        "precision": "IEEE float32",
+        "device": "cpu",
+        "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+      },
+      "conditioning": {
+        "shot": 8.19833843920702e-05,
+        "read": 1.2061987546279834e-07,
+        "source": "input-only Haar flat-patch fit"
+      },
+      "white_balance": [
+        2.74609375,
+        1.0,
+        1.41796875
+      ],
+      "camera_to_srgb": [
+        [
+          1.7435892297682514,
+          -0.5660201930118276,
+          -0.17756903675642394
+        ],
+        [
+          -0.1791506511827845,
+          1.6220624622720643,
+          -0.4429118110892798
+        ],
+        [
+          -0.0013247590471994687,
+          -0.38987250821605224,
+          1.3911972672632518
+        ]
+      ],
+      "display_exposure": 1,
+      "reference": "RawNIND on the same noisy capture; comparator, not GT; no pixelwise score"
+    },
+    {
+      "image": "crop-9a0f716d9937e855.png",
+      "caption": "GFX 50R / GFX 50R architecture / upper-left / V104, step 20000 / RawNIND:CFA-channel",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "RawNIND (not GT)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "0dfbf25b672631ec0bdd045493c4936b36bc2d7bb1e025cd569c46ef64969fe6",
+      "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2019-05-19-15-15-05_DSCF2416_a2b2c8996d79eff8da71d668ada86d5dc8d58459.raf",
+      "source_sha256": "f6214285997723a12b142b480fe70d996e5fde44b8c25c8bf352f5b31ad3846e",
+      "raw_metadata": {
+        "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2019-05-19-15-15-05_DSCF2416_a2b2c8996d79eff8da71d668ada86d5dc8d58459.raf",
+        "camera": "GFX 50R",
+        "pattern": "RGGB",
+        "black_levels": [
+          65.0,
+          65.0,
+          65.0,
+          65.0
+        ],
+        "white_levels": [
+          15872.0,
+          15872.0,
+          15872.0,
+          15872.0
+        ],
+        "white_balance": [
+          1.6920529801324504,
+          1.0,
+          1.6821192052980132
+        ],
+        "camera_to_srgb": [
+          [
+            1.474794070769569,
+            -0.19416920770899534,
+            -0.28062486306057394
+          ],
+          [
+            -0.23507562604513235,
+            1.6967978053199106,
+            -0.4617221792747782
+          ],
+          [
+            -0.0026595712410704,
+            -0.4699886543873294,
+            1.4726482256283997
+          ]
+        ],
+        "flip": 0,
+        "iso": 100,
+        "adc_white_level": 15872.0,
+        "make": "FUJIFILM",
+        "xyz_to_camera": [
+          [
+            1.1756000518798828,
+            -0.47540000081062317,
+            -0.08739999681711197
+          ],
+          [
+            -0.30559998750686646,
+            1.1045000553131104,
+            0.2304999977350235
+          ],
+          [
+            -0.038100000470876694,
+            0.14569999277591705,
+            0.600600004196167
+          ]
+        ]
+      },
+      "context_xywh": [
+        1656,
+        1552,
+        512,
+        512
+      ],
+      "sensor_roi_xywh": [
+        1720,
+        1616,
+        160,
+        160
+      ],
+      "context_roi_xywh": [
+        64,
+        64,
+        160,
+        160
+      ],
+      "region": "upper-left",
+      "model_label": "V104, step 20000",
+      "checkpoint_sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+      "compute_precision": "float32",
+      "device": "cpu",
+      "baseline": {
+        "label": "RawNIND:CFA-channel",
+        "gain_mode": "cfa-channel",
+        "precision": "IEEE float32",
+        "device": "cpu",
+        "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+      },
+      "conditioning": {
+        "shot": 1.9414241387097276e-05,
+        "read": 1.6413062836047303e-07,
+        "source": "input-only Haar flat-patch fit"
+      },
+      "white_balance": [
+        1.6920529801324504,
+        1.0,
+        1.6821192052980132
+      ],
+      "camera_to_srgb": [
+        [
+          1.474794070769569,
+          -0.19416920770899534,
+          -0.28062486306057394
+        ],
+        [
+          -0.23507562604513235,
+          1.6967978053199106,
+          -0.4617221792747782
+        ],
+        [
+          -0.0026595712410704,
+          -0.4699886543873294,
+          1.4726482256283997
+        ]
+      ],
+      "display_exposure": 2.0,
+      "reference": "RawNIND on the same noisy capture; comparator, not GT; no pixelwise score"
+    },
+    {
+      "image": "crop-23833f6fe3258a69.png",
+      "caption": "GFX 50R / GFX 50R architecture / lower-right / V104, step 20000 / RawNIND:CFA-channel",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Restored",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "RawNIND (not GT)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "bcb0cd1a62ab276d1c860a34c1abba12163ef4c4f63ffd0d1fc7cf47eb754f88",
+      "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2019-05-19-15-15-05_DSCF2416_a2b2c8996d79eff8da71d668ada86d5dc8d58459.raf",
+      "source_sha256": "f6214285997723a12b142b480fe70d996e5fde44b8c25c8bf352f5b31ad3846e",
+      "raw_metadata": {
+        "source": "/home/dllu/proj/demosaic/.cache/real-camera-qualitative/2019-05-19-15-15-05_DSCF2416_a2b2c8996d79eff8da71d668ada86d5dc8d58459.raf",
+        "camera": "GFX 50R",
+        "pattern": "RGGB",
+        "black_levels": [
+          65.0,
+          65.0,
+          65.0,
+          65.0
+        ],
+        "white_levels": [
+          15872.0,
+          15872.0,
+          15872.0,
+          15872.0
+        ],
+        "white_balance": [
+          1.6920529801324504,
+          1.0,
+          1.6821192052980132
+        ],
+        "camera_to_srgb": [
+          [
+            1.474794070769569,
+            -0.19416920770899534,
+            -0.28062486306057394
+          ],
+          [
+            -0.23507562604513235,
+            1.6967978053199106,
+            -0.4617221792747782
+          ],
+          [
+            -0.0026595712410704,
+            -0.4699886543873294,
+            1.4726482256283997
+          ]
+        ],
+        "flip": 0,
+        "iso": 100,
+        "adc_white_level": 15872.0,
+        "make": "FUJIFILM",
+        "xyz_to_camera": [
+          [
+            1.1756000518798828,
+            -0.47540000081062317,
+            -0.08739999681711197
+          ],
+          [
+            -0.30559998750686646,
+            1.1045000553131104,
+            0.2304999977350235
+          ],
+          [
+            -0.038100000470876694,
+            0.14569999277591705,
+            0.600600004196167
+          ]
+        ]
+      },
+      "context_xywh": [
+        1656,
+        1552,
+        512,
+        512
+      ],
+      "sensor_roi_xywh": [
+        1912,
+        1808,
+        160,
+        160
+      ],
+      "context_roi_xywh": [
+        256,
+        256,
+        160,
+        160
+      ],
+      "region": "lower-right",
+      "model_label": "V104, step 20000",
+      "checkpoint_sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+      "compute_precision": "float32",
+      "device": "cpu",
+      "baseline": {
+        "label": "RawNIND:CFA-channel",
+        "gain_mode": "cfa-channel",
+        "precision": "IEEE float32",
+        "device": "cpu",
+        "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+      },
+      "conditioning": {
+        "shot": 1.9414241387097276e-05,
+        "read": 1.6413062836047303e-07,
+        "source": "input-only Haar flat-patch fit"
+      },
+      "white_balance": [
+        1.6920529801324504,
+        1.0,
+        1.6821192052980132
+      ],
+      "camera_to_srgb": [
+        [
+          1.474794070769569,
+          -0.19416920770899534,
+          -0.28062486306057394
+        ],
+        [
+          -0.23507562604513235,
+          1.6967978053199106,
+          -0.4617221792747782
+        ],
+        [
+          -0.0026595712410704,
+          -0.4699886543873294,
+          1.4726482256283997
+        ]
+      ],
+      "display_exposure": 2.0,
+      "reference": "RawNIND on the same noisy capture; comparator, not GT; no pixelwise score"
+    }
+  ],
+  "source_report": {
+    "path": "/mnt/external/demosaic/three-camera-V104-CPU-20261023-v2/report.json",
+    "sha256": "fa0aa8e6fb403a21a0450d6fe342da73c3d81c82e0eed119f03cbc162758fea2"
+  },
+  "figures": [
+    {
+      "slug": "q2",
+      "camera": "LEICA Q2",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras-v102-v104/q2-comparison.png",
+        "sha256": "80e2fb3ddf7514d98fe290158feea9cb31d50aa2956847d6945251050e13401b"
+      },
+      "receipt": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras-v102-v104/q2-comparison.json",
+        "sha256": "74cf97dedf08da652f28c16ff00383896f5bc2442ad2921ed07f1cc5a5fd11ef"
+      },
+      "native_cells": 8
+    },
+    {
+      "slug": "a7rii",
+      "camera": "ILCE-7RM2",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras-v102-v104/a7rii-comparison.png",
+        "sha256": "2b8d57a095c1f3c648cba39f3b2e631f96d42b7ec7d5850b1141b344a63f8a98"
+      },
+      "receipt": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras-v102-v104/a7rii-comparison.json",
+        "sha256": "30648749118d9e1f3a1ad2ce09ff812c6981cf6862e50013966b6512feb51af5"
+      },
+      "native_cells": 8
+    },
+    {
+      "slug": "gfx50r",
+      "camera": "GFX 50R",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras-v102-v104/gfx50r-comparison.png",
+        "sha256": "e1d68c44d5ee57d4f6bba09c3e27447be4d2359c964448c005b8354a899bd129"
+      },
+      "receipt": {
+        "path": "/home/dllu/proj/demosaic/docs/images/current-cameras-v102-v104/gfx50r-comparison.json",
+        "sha256": "6ff96b9876c9122ffc346a6930db315574ae29cc3ee4e7446a95d5cd2bcc10c9"
+      },
+      "native_cells": 8
+    }
+  ],
+  "scope": "CPU IEEE FP32 final20000 V104 on three existing Q2/a7RII/GFX50R captures, six fixed native160 ROIs; original input tensors reconstructed bit-exactly from measured CFA sites in retained Bilinear floats and original priors/WB/matrix. Reuse original V102 and RawNIND outputs unchanged. No RAW decoding, no original reads, no training changes, no exact GT or pixelwise quality scores.",
+  "float_render_verification": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/three-camera-V104-CPU-v2/float-render-verification.json",
+    "sha256": "dcc9ba6d7d503976abf484185315e662f7213b738494ac7b60d8648a48297389"
+  }
+}

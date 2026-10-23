@@ -54,7 +54,7 @@ panel is a separately captured qualitative reference, **not GT**.
 [Compare complete102MP V102/V104/RawNIND outputs](docs/gfx-qualitative.md).
 Real-photo changes remain small; fine foliage and saturated-light detail still need work.
 The [Q2, Sony a7R II and GFX50R gallery](docs/cross-camera-qualitative.md)
-also compares V100/V102/V103 on six fixed native regions.
+also compares V102/V104 on six fixed native regions; changes remain small.
 
 ![V104 final20k GFX foliage: noisy, restored and separate low-ISO reference](docs/images/gfx-v102-v104-fullframe/V104-foliage.png)
 

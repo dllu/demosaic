@@ -1,10 +1,14 @@
-# ADC-only consistency on the current V84 model
+# ADC-only sample consistency
 
-**Use the optional observed-site correction for explicitly ADC-only inputs.**
+**Observed-site correction is validated on V84 for explicitly ADC-only inputs.**
 With unchanged V84 weights it gains **.400 dB sRGB PSNR** on all427 validation
 photos and all four CFAs. Every source average and all1,708 source/CFA cases
 improve. Positive shot/read priors bypass it, so this is separate from real-RAW
-denoising and the ongoing V100/V101 training work.
+denoising. The current quality/training baseline is
+[V104](current-model.md). A [V104 saved-float diagnostic](v104-adc-color-projection.md)
+finds that Malvar residual projection reduces its worst flat-color bias
+1,218.06→31.91 DN16, but photographic and texture validation remain required.
+The V84 photo gain below is not a measured V104 gain.
 
 [Complete numerical audit, hashes and viewed native crops](results/v84-adc-sites-full427-v1.json).
 The [earlier four-photo pilot and implementation receipt](results/v84-adc-sites-pilot-and-implementation-v1.json)
