@@ -110,9 +110,9 @@ before adding another ROI intervention.
 
 ## Prepared Tiny/Small quality comparison
 
-[V107 Tiny](../configs/quality-v102-backbone-tiny-v107.yaml) and
-[V108 Small](../configs/quality-v102-backbone-small-v108.yaml) recipes are frozen
-for a matched 20,000-update comparison on the separate **90,869-source** corpus.
+[V109 Tiny](../configs/quality-v102-backbone-tiny-v109.yaml) and
+[V110 Small](../configs/quality-v102-backbone-small-v110.yaml) recipes are frozen
+for a matched 20,000-update comparison on the separate **90,864-source** corpus.
 Both load one V102-derived initializer file with three zeroed fusion-gate
 tensors; the other 88 EMA tensors remain exact. This gives the encoders a common
 initial function while allowing their fusion to adapt during training. Only
@@ -120,21 +120,28 @@ the official frozen encoder name/revision/hash differs between arms. Both use
 seed 62, batch 16, native 256-pixel patches, BF16, learning rate 1e-5, 200 warmup
 updates, zero optical blur and the original six ROIs.
 
-The corpus applies three additional visually inspected source-quality withholds,
-leaving 2,392 new eligible arrivals. Validation/test and all earlier source
-boundaries remain fixed. Twelve actual clean-reader examples repeat exactly:
-six new-source draws and all six ROIs. The full prospective schedule contains
-111,559 photo examples from 62,369 unique sources, including 2,710 draws from
-1,635 newly eligible sources and 5,657 ROI examples. These are scheduled exposure
-counts, not completed training. [Prepared plan, hashes and reader evidence](results/backbone-capacity-training-prepared-v1.json).
+The corpus applies eight additional visually inspected withholds relative to
+V104: three degraded photo targets and five atlas reproductions. Four atlas
+sources were in the older V102 corpus; 2,391 new arrivals remain eligible.
+Validation/test and protected-source boundaries remain fixed. Twelve actual
+clean-reader examples repeat exactly: six new-source draws and all six ROIs.
+The full prospective schedule contains
+111,559 photo examples from 62,367 unique sources, including 2,707 draws from
+1,634 newly eligible sources and 5,657 ROI examples. These are scheduled exposure
+counts, not completed training. [Prepared plan, hashes and reader evidence](results/backbone-capacity-training-prepared-v2.json).
 
 No controller, CUDA smoke or production run has launched for these recipes.
-Complete and review V104 and the incoming loss-tail scan first; retain the
-prepared evidence if later results warrant a different initializer or cohort.
+The incoming loss-tail review is complete. Complete and review V104 first;
+retain the prepared evidence if later results warrant a different initializer
+or cohort. The earlier unlaunched V107/V108 preparation remains preserved.
 The [fixed-reference configuration](../configs/quality-v102-backbone-reference-checkpoints-v1.json)
 and [validated reporting/export support](training-execution.md#fixed-references-alongside-derived-initializers)
-keep original V102 separate from the zero-gate derivative. Fresh CPU/CUDA checks and final native
-photo/material/color/weak-detail/GFX comparisons precede any quality conclusion.
+keep original V102 separate from the zero-gate derivative. Separate discarded
+eight-update CPU checks now pass for both cleaned recipes, with exact initial
+EMA/encoder identities, finite final model/EMA/Adam and identical eight-batch
+observations across all three data domains. [Actual CPU evidence](results/backbone-cleaned-recipes-CPU-v1.json).
+Fresh CUDA checks and final native photo/material/color/weak-detail/GFX
+comparisons precede any quality conclusion.
 [Capacity evidence and remaining work](convnext-small-capacity.md).
 
 ## Completed V100/V101 comparison
@@ -177,11 +184,14 @@ hash, bounds, augmentation-order and resume checks.
 ## Data and source quality
 
 V104 uses the reviewed **90,872-source**4×/8× pair. The next prepared capacity
-recipes use **90,869 sources**, applying three more source-specific native
-quality decisions while preserving the earlier31 exclusions and unchanged
-2,303 validation/2,255 test memberships. Actual native inspection of the arrivals
-now covers 126 unique identities; the full loss scan and remaining tail review
-continue. This is targeted inspection, not exhaustive manual quality review.
+recipes use **90,864 sources**, applying eight additional withholds relative to
+V104 while preserving earlier exclusions and unchanged 2,303 validation/2,255
+test memberships. The 2,395-source loss screen is complete, with all 74 final
+ranking candidates inspected at their scored native coordinates. Targeted
+native inspection of the arrivals now covers 153 unique identities. Five atlas
+reproductions are withheld after source-credit and native-view checks; real
+photographed-window controls remain eligible. This is targeted inspection,
+not exhaustive manual quality review.
 Native source comparisons, corpus bindings and actual reader checks are in the
 [incoming source review](incoming-commons-quality.md). Existing experiment
 manifests and machine receipts retain their original bytes.

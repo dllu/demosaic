@@ -13,7 +13,8 @@ The zero-blur/detail recipe improves425/427 photographic source means over V101.
 Fine high-noise texture and real foliage still need work. V104 is training on the reviewed larger
 corpus:2,395 eligible additions,bringing training to90,872 sources.
 The next [matched Tiny/Small quality recipes](docs/convnext-small-capacity.md#prepared-matched-quality-trial)
-are prepared on a separately cleaned cohort; training has not launched.
+are prepared on 90,864 cleaned sources and pass discarded CPU checks;
+production training has not launched.
 [Current models](docs/current-model.md) · [Source-quality review](docs/incoming-commons-quality.md) ·
 [Historical diary](diary/index.md).
 For explicit zero-shot/read inputs, [optional site consistency](docs/adc-consistency.md)

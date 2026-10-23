@@ -1,0 +1,123 @@
+{
+  "status": "prepared-matched-Tiny-Small-quality-trial-no-controller-launched",
+  "recorded_local": "2026-10-23T13:16:13.049831-07:00",
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/backbone-capacity-preparation-v2/publish-prepared-v2.py",
+    "sha256": "3be7bd308ed87625f44ec10b1ef1952c3b1716ea78c42071a0596d2d94e3b7e8"
+  },
+  "training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/backbone-capacity-training-v2/plan.json",
+    "sha256": "f3712b9161e4e7c3778672868551f686f2ff9fda16cae45eb0330a5601dd5af0"
+  },
+  "recipes": [
+    {
+      "path": "/home/dllu/proj/demosaic/configs/quality-v102-backbone-tiny-v109.yaml",
+      "sha256": "da1dd7aa42b5f0c7bbd87eedd95e81cc2af545614142b38124b621dc52a24c66"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/configs/quality-v102-backbone-small-v110.yaml",
+      "sha256": "c7106838b2a52647c15f6dd0ef395620df7f5e708627adf8413825997ae0969e"
+    }
+  ],
+  "corpus_receipt": {
+    "path": "/mnt/external/demosaic/commons-source-tail-reviewed-20261023-v2/receipt.json",
+    "sha256": "909c9092eea5e0821a51c4379461860c6d472a56e81396d5e255c365d9369b19"
+  },
+  "ROI_catalogue": {
+    "path": "/home/dllu/proj/demosaic/configs/low-contrast-training-rois-six-reviewed90864-v6.json",
+    "sha256": "6901e20354006efc657fecbe7e50032d1c71edade332266d2525086e110cf6da"
+  },
+  "recommended_completed_baseline": {
+    "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+    "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a"
+  },
+  "common_initializer": {
+    "path": "/mnt/external/demosaic/convnext-small-transfer-CPU-20261023-v1/Tiny-zero.pt",
+    "sha256": "ae5dfa93f03cd241f1e212b6dcfa5f0fdbe6ac5cff9b9eda57b64cb40b2418c5"
+  },
+  "initializer_parent_EMA_tensors": 91,
+  "initializer_original_EMA_tensors_exact": 88,
+  "initializer_only_zeroed_tensors": [
+    "context.gates.0",
+    "context.gates.1",
+    "context.gates.2"
+  ],
+  "common_initializer_has_zero_new_training_updates": true,
+  "declared_backbones": {
+    "V109": {
+      "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+      "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+      "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+    },
+    "V110": {
+      "model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+      "revision": "421020015aa4266363db803b6049a529999afb1e",
+      "sha256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14"
+    }
+  },
+  "matched": {
+    "seed": 62,
+    "per_arm_fixed_updates": 20000,
+    "batch_size": 16,
+    "patch_size": 256,
+    "precision": "bfloat16",
+    "lr": 1e-05,
+    "warmup_steps": 200,
+    "optical_blur_probability": 0,
+    "reviewed_ROIs": 6,
+    "conditional_photo_ROI_probability": 0.05,
+    "native_targets": 128,
+    "paired_targets": 32
+  },
+  "only_arm_differences": [
+    "run",
+    "expected_dino_sha256",
+    "model.dino_model",
+    "model.dino_revision"
+  ],
+  "numerical_Python_modules_exact_to_original_V104": 50,
+  "actual_CPU_reader_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/backbone-capacity-preparation-v2/source-coverage.json",
+    "sha256": "1f38ac7e1d4857f279750e99e97513c7b498f53069c6bbf83df5fbf2b297a91f"
+  },
+  "source_schedule": {
+    "eligible_sources": 90864,
+    "new_eligible_sources": 2391,
+    "source_types_within_Commons": {
+      "photo": 111559,
+      "flat": 16061,
+      "other-synthetic": 7942,
+      "weak-synthetic": 23958
+    },
+    "photographic_examples": 111559,
+    "unique_photo_sources_scheduled": 62367,
+    "unique_new_sources_scheduled": 1634,
+    "new_source_examples_scheduled": 2707,
+    "ROI_examples": 5657
+  },
+  "prior_discarded_operator_integration": {
+    "path": "/home/dllu/proj/demosaic/docs/results/mixed-backbone-operator-CPU-v1.json",
+    "sha256": "a2b2bb2de4c78268b52642dd94ffe418d95547e45327a4abdc3a2a9703b555f6"
+  },
+  "CUDA_or_production_launched": false,
+  "remaining_before_production": [
+    "Review original V104 fixed endpoint and original evaluation/fullframe outputs; use a better useful initializer if established.",
+    "Run fresh discarded CPU/CUDA eight-update checks on these recipes before production.",
+    "Launch fixed matched training only after original V104 GPU work exits,then evaluate original V102,its accurately labeled zero-gate initializer and both final endpoints with native material/color/weak-detail/GFX comparisons."
+  ],
+  "scope": "Prepared quality experiment, not launched training, a quality gain, or an endpoint in PSNR history. Twelve real source-reader examples repeat exactly with unchanged Torch RNG and no CUDA; full schedule counts are prospective. Current V104, existing baseline weights and earlier machine receipts retain their bytes.",
+  "supersedes_unlaunched_preparation": {
+    "path": "/home/dllu/proj/demosaic/docs/results/backbone-capacity-training-prepared-v1.json",
+    "sha256": "4b6e04bbb985110f80621eb7002c32ce77daeec351d67859dfaf967b90390e96"
+  },
+  "complete_source_review": {
+    "path": "/home/dllu/proj/demosaic/docs/results/incoming-source-loss-complete-v1.json",
+    "sha256": "ec736158b7f63b1ff065388cb0040a03183aae9ed25c4f4d1261bcaf45bf37a8"
+  },
+  "removed_original_training_source_ids": [
+    "2a44e2501d9d82143bb803fde7f450324d1fe208",
+    "43f04e9c44415dab494d7b51507c9b681f90c306",
+    "6f573b4c6a70dc328ecdc74db36047f704f41a4a",
+    "75ccc31e2f9ebbdc6bb6f7d0c24209bee2325cb1"
+  ]
+}

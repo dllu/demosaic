@@ -97,20 +97,31 @@ The current model/data experiment continues with its original queues.
 
 ## Prepared matched quality trial
 
-The [V107 Tiny](../configs/quality-v102-backbone-tiny-v107.yaml) and
-[V108 Small](../configs/quality-v102-backbone-small-v108.yaml) recipes now freeze
-the same V102-derived Tiny-zero initializer file and reviewed 90,869-source
+The [V109 Tiny](../configs/quality-v102-backbone-tiny-v109.yaml) and
+[V110 Small](../configs/quality-v102-backbone-small-v110.yaml) recipes freeze
+the same V102-derived Tiny-zero initializer file and reviewed 90,864-source
 corpus. Seed 62, 20,000 updates, batch 16, native 256-pixel patches, BF16,
 learning rate 1e-5, 200 warmup updates and the original six
-ROI objects match. Three newly inspected source-specific quality withholds are
-applied in this separate corpus; current V104 data stays fixed. All 50 Python
-modules match V104's frozen implementation.
+ROI objects match. Eight additional source-specific withholds relative to V104
+remove three visibly degraded photo targets and five atlas reproductions.
+Four atlas images were in the older V102 corpus. Current V104 data stays fixed.
+All 50 Python modules match V104's frozen implementation.
 
 Twelve actual source-reader checks repeat exactly with finite native256 output,
 unchanged Torch RNG and no CUDA. They cover six remaining new arrivals and all
 six original ROIs. The encoder model/revision/hash are the only arm differences
 apart from run location. [Prepared plan, initializer/recipe/corpus hashes and
-prospective source exposure](results/backbone-capacity-training-prepared-v1.json).
+prospective source exposure](results/backbone-capacity-training-prepared-v2.json).
+The completed [incoming source review](incoming-commons-quality.md) checks all
+74 final ranking candidates at their scored native coordinates. The earlier
+unlaunched V107/V108 preparation and its receipts remain preserved.
+
+Fresh discarded eight-update CPU checks pass for both cleaned recipes at
+native64/B1/FP32. Initial EMA and frozen-encoder identities match exactly,
+model/EMA/Adam stay finite, and all eight observation fingerprints match across
+arms through Commons/synthetic, native-RAW and paired-RAW domains.
+[Actual cleaned-recipe CPU evidence](results/backbone-cleaned-recipes-CPU-v1.json).
+The production preparations remain unchanged and unlaunched; CUDA checks remain.
 
 The [explicit reference set](../configs/quality-v102-backbone-reference-checkpoints-v1.json)
 now keeps original V102 separate from the `V102-zero` initializer in reports
@@ -118,8 +129,8 @@ and exports. Actual CPU reporting/export checks preserve earlier outputs,
 and 146 targeted tests pass. [Reference handling and actual evidence](training-execution.md#fixed-references-alongside-derived-initializers).
 
 These recipes have no training controller or quality scores. Complete and
-review V104 and the remaining incoming loss tail before launch; a better useful
-initializer or further source decisions can supersede this prepared plan while
+review V104 before launch; a better useful initializer or further source
+decisions can supersede this prepared plan while
 preserving it. The trained comparison will use original V102 as well as
 its accurately labeled zero-gate derivative, both fixed endpoints, the standing
 GFX scene and native crop triplets. No capacity benefit is established yet.

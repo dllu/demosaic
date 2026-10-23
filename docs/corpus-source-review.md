@@ -13,6 +13,7 @@ neither changes completed V100/V101 inputs.
 | Completed V100/V101 | 88,484 | 2,303 / 2,255 | 24 |
 | Completed V102/V103 | 88,477 | Same exact records/order | 31 |
 | Active V104 | 90,872 | Same exact records/order | Prior31 plus four incoming quality withholds; duplicate/series/protected exclusions also apply |
+| Prepared V109/V110 | 90,864 | Same exact records/order | Eight additional withholds relative to V104: three photo-quality cases and five atlas reproductions |
 
 [Current decisions, native examples, catalogue and reader checks](results/source-quality-detail-catalogue-v3.json).
 Originals, existing manifests and protected evaluation scenes remain read-only.
@@ -20,9 +21,9 @@ The GFX train/platform pair and siblings remain outside training.
 
 The additional [3,809-source arrival batch](commons-download.md) has finalized3,807
 valid caches at both4×/8×. All39 source sheets/3,807 thumbnail contexts and61
-initial targeted native source identities were actually inspected. A later
-loss-tail follow-up adds11 more identities (72 unique),with one future quality
-withhold recorded separately. Four train
+initial targeted native source identities were actually inspected. Completed
+loss-tail follow-ups bring targeted native coverage to 153 unique arrival
+identities, with new decisions applied to a separate future cohort. Four train
 hashes and two already-reserved validation hashes receive visual quality
 withholds. [New decisions and native examples](incoming-commons-quality.md).
 Two malformed-ICC
@@ -37,20 +38,23 @@ completed V102/V103 keep their original88,477-source inputs.
 
 ## Incoming loss-tail follow-up
 
-A CPU-only V102 source-difficulty scan is running on the 2,395 newly eligible
-training IDs. Four stratified real-source checks passed 8 case rows, four neural/
-DINO forwards,unchanged model, configuration, RNG and inputs and no CUDA initialization.
-The full scan uses native 256 targets from fixed 512 centres in 4× caches followed
-by area2, ADC-only/high-noise declared priors and two CPU threads. It ranks the
+A CPU-only V102 source-difficulty scan has completed all 2,395 newly eligible
+training IDs: 4,790 cases and 2,396 neural/DINO forwards. Independent rank and
+input reconstruction verifies the complete screen. It uses native 256 targets
+from fixed 512 centres in 4× caches followed by area2, ADC-only/high-noise
+declared priors and two CPU threads. It ranks the
 original reference-white screening objective; these are not actual stochastic
 V104 training losses or a model comparison. High loss remains a review cue.
-[Exact subset, checkpoint, live launch and probe evidence](results/incoming-source-loss-V102-CPU-readiness-v1.json).
+[Complete scan, hashes, source decisions and native coverage](results/incoming-source-loss-complete-v1.json).
 
-The original full scan remains pending. An [initial64-source ranking follow-up](incoming-commons-quality.md#first-loss-tail-follow-up-64-of-2395-sources-scored)
-actually inspects11 additional identities:10 retained and one future withhold.
-No automatic exclusions or current-manifest changes follow from scores.
-Any new quality decisions enter a separately frozen future cohort; current
-V104 continues on its original reviewed inputs.
+All 74 unique sources in the final top32 loss lists and top12 proxy lists have
+actually inspected native views at their scored coordinates. Targeted review
+retains difficult natural texture and weak detail. A follow-up of atlas credits
+finds five printed reproductions among training targets, while retaining two
+real photographed-window controls. These and three earlier photo-quality
+withholds enter the separate **90,864-source** future cohort. Current V104
+continues on its original inputs. [Current native examples, decisions and
+prepared data](incoming-commons-quality.md).
 
 ## Selection and inspection
 
@@ -209,8 +213,11 @@ oversampled simply because their global contrast is low.
 The original six regions below remain byte-identical in the expanded catalogue.
 Completed V101 used only those six at 5% conditional photographic sampling;
 V100 left it off. Its [selected-detail improvement](heldout-detail.md) tests a
-combined recipe package; the ROI-only effect is not isolated. Broader 32-region
-sampling is prepared and validated, now running as the V103 arm, with quality still to assess.
+combined recipe package; the ROI-only effect is not isolated. The completed
+V103 comparison uses the broader 32-region catalogue. It has nearly identical
+photographic PSNR to V102, weaker tested fine detail and higher ADC flat-color
+error, so current recipes retain the original six regions.
+[Completed quality comparison](v102-v103-quality-review.md).
 
 | Source ID prefix | Inspected structure | Bin4 context [x,y,w,h] |
 | --- | --- | --- |
