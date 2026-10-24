@@ -119,6 +119,10 @@ The full prospective schedule contains
 counts, not completed training. [Prepared plan, hashes and reader evidence](results/backbone-capacity-training-prepared-v2.json).
 
 No production controller has launched for these recipes.
+An alternative [V104-to-Small lateral fit](small-feature-transfer.md) now
+preserves the learned gates and nearly matches selected Tiny photo means,
+with remaining camera losses. It supplies a fitted initializer candidate;
+final-parent selection, optimizer checks and joint training remain pending.
 The incoming loss-tail review and V104 comparison are complete. Select a useful
 completed initializer for a later capacity trial; the loss-scale test above retains its
 learned gates. Preserve this preparation if a later result supplies a better

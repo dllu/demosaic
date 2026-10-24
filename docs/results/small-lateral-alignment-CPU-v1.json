@@ -1,0 +1,513 @@
+{
+  "status": "completed-training-only-Small-feature-fit-and-fixed-transfer-review",
+  "recorded_local": "2026-10-24T01:21:39.231764-07:00",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-lateral-alignment-CPU-v1/plan-v1.json",
+    "sha256": "908ac4bcff78e7b822621a2cba728f10fc373c629c95cb3ca1f4f51d405c4270"
+  },
+  "worker_source": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-lateral-alignment-CPU-v1/worker-v1.py",
+    "sha256": "5edc192b6a9148976629a207bbb4f038e2757daf3f695b50d07a5ef055c8c156"
+  },
+  "launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-lateral-alignment-CPU-v1/launch-v1.json",
+    "sha256": "8f268c0f7a6970e5f49319502d9a7094b0efc49601bc42b81ed4fd1fad08d907"
+  },
+  "result": {
+    "path": "/mnt/external/demosaic/Small-lateral-alignment-CPU-20261024-v1/result.json",
+    "sha256": "c3d913b4c512bb1374d1951ce695c764e757fe444162677cf84b3d93877debe9"
+  },
+  "parent": {
+    "path": "/mnt/external/demosaic/models/v104-final20000.pt",
+    "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300"
+  },
+  "derived_checkpoint": {
+    "path": "/mnt/external/demosaic/Small-lateral-alignment-CPU-20261024-v1/Small-aligned-from-V104.pt",
+    "sha256": "6a055cb6f5e03676c69a9523350e9236b7e19f162b6ca9f535858d14d42e8baa"
+  },
+  "encoder": {
+    "model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+    "revision": "421020015aa4266363db803b6049a529999afb1e",
+    "numeric_sha256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14"
+  },
+  "feature_fit": {
+    "path": "/mnt/external/demosaic/Small-lateral-alignment-CPU-20261024-v1/feature-fit.json",
+    "sha256": "ef5799e044ff5faf454ad4b409abd52824c7ef1dabcc17bc50c155007099813c"
+  },
+  "ridge_arithmetic_preflight": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-lateral-alignment-CPU-v1/ridge-arithmetic-preflight-v1.json",
+    "sha256": "6ff3c7d98e9fcf91828ea11584ac7f167305103178769e3688d7fb5c2a042d0a"
+  },
+  "independent_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-lateral-alignment-CPU-v1/audit-v1.json",
+    "sha256": "8da573ec9d8cab40e42ab4e9d4dfec63170ab79cb55a68aa0a78a629035384b8"
+  },
+  "serialized_checkpoint_validation": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-lateral-alignment-CPU-v1/export-check-v1.json",
+    "sha256": "d73c79d077f6e387cc2adf32eeb7f22d4dfa995d7d769f3ec91d081fe2b2516c"
+  },
+  "native_render": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-lateral-alignment-CPU-v1/native-v1.json",
+    "sha256": "72affd2d0b491b4ea4b70cd7de6b290332a2d18499cd48fcee1771d3fa717b7a"
+  },
+  "fit_training_sources": 64,
+  "separate_training_feature_check_sources": 16,
+  "fit_and_check_source_IDs_disjoint": true,
+  "validation_and_test_sources_entering_feature_fit": 0,
+  "GFX_RAW_reads_for_fit": 0,
+  "fitted_EMA_tensors": [
+    "context.laterals.0.weight",
+    "context.laterals.0.bias",
+    "context.laterals.1.weight",
+    "context.laterals.1.bias",
+    "context.laterals.2.weight",
+    "context.laterals.2.bias",
+    "context.laterals.3.weight",
+    "context.laterals.3.bias"
+  ],
+  "other_EMA_tensors_exact": 83,
+  "all_three_learned_gates_preserved": true,
+  "joint_optimizer_updates": 0,
+  "inherited_checkpoint_step": 20000,
+  "step_scope": "Inherited V104 restoration history; new Small state has64-source linear feature fitting and zero new joint optimizer updates.",
+  "feature_check_stage_scores": [
+    {
+      "stage": 0,
+      "input_channels": 96,
+      "output_channels": 64,
+      "scores": {
+        "fit": {
+          "samples": 16384,
+          "target_RMS": 0.16334381151561797,
+          "blind_error_RMS": 0.16472548354336258,
+          "aligned_error_RMS": 0.03883051023393609
+        },
+        "feature-check": {
+          "samples": 4096,
+          "target_RMS": 0.1608072903531924,
+          "blind_error_RMS": 0.16261942722797243,
+          "aligned_error_RMS": 0.03965405043539737
+        }
+      }
+    },
+    {
+      "stage": 1,
+      "input_channels": 192,
+      "output_channels": 64,
+      "scores": {
+        "fit": {
+          "samples": 16384,
+          "target_RMS": 0.11010874192306679,
+          "blind_error_RMS": 0.12108920387080997,
+          "aligned_error_RMS": 0.030002669731000235
+        },
+        "feature-check": {
+          "samples": 4096,
+          "target_RMS": 0.10891113090730518,
+          "blind_error_RMS": 0.12052064908054494,
+          "aligned_error_RMS": 0.03114185146205281
+        }
+      }
+    },
+    {
+      "stage": 2,
+      "input_channels": 384,
+      "output_channels": 64,
+      "scores": {
+        "fit": {
+          "samples": 16384,
+          "target_RMS": 0.4673470102177137,
+          "blind_error_RMS": 2.942197866213283,
+          "aligned_error_RMS": 0.3232480781212864
+        },
+        "feature-check": {
+          "samples": 4096,
+          "target_RMS": 0.45603625697652606,
+          "blind_error_RMS": 2.927841973250343,
+          "aligned_error_RMS": 0.3625028960280037
+        }
+      }
+    },
+    {
+      "stage": 3,
+      "input_channels": 768,
+      "output_channels": 64,
+      "scores": {
+        "fit": {
+          "samples": 4096,
+          "target_RMS": 0.35096220686593954,
+          "blind_error_RMS": 0.3617248911386534,
+          "aligned_error_RMS": 0.15079937938108876
+        },
+        "feature-check": {
+          "samples": 1024,
+          "target_RMS": 0.3495116554971733,
+          "blind_error_RMS": 0.36001050129060547,
+          "aligned_error_RMS": 0.36748184906431436
+        }
+      }
+    }
+  ],
+  "photo_condition_means": [
+    {
+      "model": "Tiny-parent",
+      "condition": "adc-only",
+      "sources": 4,
+      "srgb_PSNR": 39.49290456113904
+    },
+    {
+      "model": "Tiny-parent",
+      "condition": "iso100-prior",
+      "sources": 4,
+      "srgb_PSNR": 40.80493393979644
+    },
+    {
+      "model": "Tiny-parent",
+      "condition": "iso12800-prior",
+      "sources": 4,
+      "srgb_PSNR": 33.49299830720385
+    },
+    {
+      "model": "Small-blind",
+      "condition": "adc-only",
+      "sources": 4,
+      "srgb_PSNR": 30.593527063280476
+    },
+    {
+      "model": "Small-blind",
+      "condition": "iso100-prior",
+      "sources": 4,
+      "srgb_PSNR": 35.94252860982711
+    },
+    {
+      "model": "Small-blind",
+      "condition": "iso12800-prior",
+      "sources": 4,
+      "srgb_PSNR": 30.620179096289135
+    },
+    {
+      "model": "Small-aligned",
+      "condition": "adc-only",
+      "sources": 4,
+      "srgb_PSNR": 39.48009995784025
+    },
+    {
+      "model": "Small-aligned",
+      "condition": "iso100-prior",
+      "sources": 4,
+      "srgb_PSNR": 40.80864284576617
+    },
+    {
+      "model": "Small-aligned",
+      "condition": "iso12800-prior",
+      "sources": 4,
+      "srgb_PSNR": 33.4912458064284
+    }
+  ],
+  "selected_camera_scores": [
+    {
+      "model": "Tiny-parent",
+      "key": "camera-0",
+      "scene": "LucieB_Coulicoco",
+      "sensor_PSNR": 56.989277520441206
+    },
+    {
+      "model": "Tiny-parent",
+      "key": "camera-1",
+      "scene": "LucieB_top_of_Expedit",
+      "sensor_PSNR": 60.67192328402061
+    },
+    {
+      "model": "Small-blind",
+      "key": "camera-0",
+      "scene": "LucieB_Coulicoco",
+      "sensor_PSNR": 44.27603650268618
+    },
+    {
+      "model": "Small-blind",
+      "key": "camera-1",
+      "scene": "LucieB_top_of_Expedit",
+      "sensor_PSNR": 36.72766713188234
+    },
+    {
+      "model": "Small-aligned",
+      "key": "camera-0",
+      "scene": "LucieB_Coulicoco",
+      "sensor_PSNR": 56.72693659974193
+    },
+    {
+      "model": "Small-aligned",
+      "key": "camera-1",
+      "scene": "LucieB_top_of_Expedit",
+      "sensor_PSNR": 60.41804171782903
+    }
+  ],
+  "selected_color_scores": [
+    {
+      "model": "Tiny-parent",
+      "case": 0,
+      "max_abs_camera_channel_mean_bias_DN16": 0.5716356026561699
+    },
+    {
+      "model": "Tiny-parent",
+      "case": 196,
+      "max_abs_camera_channel_mean_bias_DN16": 3.387899754311366
+    },
+    {
+      "model": "Tiny-parent",
+      "case": 392,
+      "max_abs_camera_channel_mean_bias_DN16": 2.0502944515115815
+    },
+    {
+      "model": "Tiny-parent",
+      "case": 787,
+      "max_abs_camera_channel_mean_bias_DN16": 17.35043837428093
+    },
+    {
+      "model": "Tiny-parent",
+      "case": 1008,
+      "max_abs_camera_channel_mean_bias_DN16": 1218.0574063721813
+    },
+    {
+      "model": "Tiny-parent",
+      "case": 1151,
+      "max_abs_camera_channel_mean_bias_DN16": 115.84000470318132
+    },
+    {
+      "model": "Tiny-parent",
+      "case": 1156,
+      "max_abs_camera_channel_mean_bias_DN16": 77.23466833729762
+    },
+    {
+      "model": "Tiny-parent",
+      "case": 1175,
+      "max_abs_camera_channel_mean_bias_DN16": 43.77446891575819
+    },
+    {
+      "model": "Small-blind",
+      "case": 0,
+      "max_abs_camera_channel_mean_bias_DN16": 0.8721831081937125
+    },
+    {
+      "model": "Small-blind",
+      "case": 196,
+      "max_abs_camera_channel_mean_bias_DN16": 12.649706887341926
+    },
+    {
+      "model": "Small-blind",
+      "case": 392,
+      "max_abs_camera_channel_mean_bias_DN16": 1143.2112003533227
+    },
+    {
+      "model": "Small-blind",
+      "case": 787,
+      "max_abs_camera_channel_mean_bias_DN16": 14915.492072758963
+    },
+    {
+      "model": "Small-blind",
+      "case": 1008,
+      "max_abs_camera_channel_mean_bias_DN16": 12138.255456990435
+    },
+    {
+      "model": "Small-blind",
+      "case": 1151,
+      "max_abs_camera_channel_mean_bias_DN16": 556.0363436915853
+    },
+    {
+      "model": "Small-blind",
+      "case": 1156,
+      "max_abs_camera_channel_mean_bias_DN16": 71.2831067971114
+    },
+    {
+      "model": "Small-blind",
+      "case": 1175,
+      "max_abs_camera_channel_mean_bias_DN16": 74.93691683867947
+    },
+    {
+      "model": "Small-aligned",
+      "case": 0,
+      "max_abs_camera_channel_mean_bias_DN16": 0.5542960702205164
+    },
+    {
+      "model": "Small-aligned",
+      "case": 196,
+      "max_abs_camera_channel_mean_bias_DN16": 3.4388710305442145
+    },
+    {
+      "model": "Small-aligned",
+      "case": 392,
+      "max_abs_camera_channel_mean_bias_DN16": 2.1633563096722357
+    },
+    {
+      "model": "Small-aligned",
+      "case": 787,
+      "max_abs_camera_channel_mean_bias_DN16": 17.440429982054045
+    },
+    {
+      "model": "Small-aligned",
+      "case": 1008,
+      "max_abs_camera_channel_mean_bias_DN16": 1170.4297356018797
+    },
+    {
+      "model": "Small-aligned",
+      "case": 1151,
+      "max_abs_camera_channel_mean_bias_DN16": 122.38984814886936
+    },
+    {
+      "model": "Small-aligned",
+      "case": 1156,
+      "max_abs_camera_channel_mean_bias_DN16": 81.1778089287167
+    },
+    {
+      "model": "Small-aligned",
+      "case": 1175,
+      "max_abs_camera_channel_mean_bias_DN16": 50.65658474185621
+    }
+  ],
+  "actual_fit_and_pilot_forward_counts": {
+    "restoration": 57,
+    "Tiny_encoder": 81,
+    "Small_encoder": 136
+  },
+  "additional_actual_serialized_reload_restoration_and_Small_encoder_forwards": 2,
+  "actual_total_restoration_root_forwards": 59,
+  "actual_total_frozen_encoder_forwards": 219,
+  "all112_native_cells_actually_viewed": true,
+  "diagnostic_triplets": 4,
+  "galleries": [
+    {
+      "group": "iso100-prior",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-lateral-alignment/iso100-prior.png",
+        "sha256": "60f29ba75abc70152ce9d925259a380e3bd53489c31f411173c82df1c2a3d80b"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-lateral-alignment/iso100-prior.json",
+        "sha256": "162821c302c19727bb852cd03dd9ceb1b0f98a1c86a80dfe58f9e49231cb783e"
+      }
+    },
+    {
+      "group": "iso12800-prior",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-lateral-alignment/iso12800-prior.png",
+        "sha256": "8bc5fb82b518ad6bfc65eeae3ebe58e98e29b4cd43d692b1f590f812bed14dd5"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-lateral-alignment/iso12800-prior.json",
+        "sha256": "c2199b5521ee3876b0197c617254ea0bd449b1c55047414a27383116cbb055ea"
+      }
+    },
+    {
+      "group": "camera",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-lateral-alignment/camera.png",
+        "sha256": "5b6cbddb47abff322c1ada8ea51159ac4a4f2c31ae54d4b87b6daace48625a4d"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-lateral-alignment/camera.json",
+        "sha256": "3f01f1b8febea158505a268d1a4a6fe2e0c1106e8bbaf4f9bc950f5e31776cb6"
+      }
+    },
+    {
+      "group": "gfx-Small-blind",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-lateral-alignment/gfx-Small-blind.png",
+        "sha256": "293c6c3c0afd7d7e7a3e6f6ece9378b7226af4846cafa62a914881fce028e6a3"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-lateral-alignment/gfx-Small-blind.json",
+        "sha256": "9c42b457c79ba8fb2792f1fae92d369ff14b05a79be17c8d758fccc08c34e4a3"
+      }
+    },
+    {
+      "group": "gfx-Small-aligned",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-lateral-alignment/gfx-Small-aligned.png",
+        "sha256": "4d91ef3205baff0a73904c967ac24f8fd783211982cc809a63ea0e614a918b22"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-lateral-alignment/gfx-Small-aligned.json",
+        "sha256": "56001c88ce625fcb6c84414c20c2a2d64003d081f25e0c3f484c27a780734e4c"
+      }
+    },
+    {
+      "group": "color",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-lateral-alignment/color.png",
+        "sha256": "1aabc1380842489f21602c481f9055c60523202e79212fdd3f77caebe5a12da7"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-lateral-alignment/color.json",
+        "sha256": "8c68457da810c3d3881596c1a980159fa941d0def49f9a1627817197892d51db"
+      }
+    }
+  ],
+  "native_findings": "Blind Small introduces colored camera blobs, building/fence distortions, foliage smearing and flat-color shifts. Aligned Small largely restores Tiny appearance; residual camera blotches, foliage/sign softness and original color limitations remain. Independent GFX ISO100/AHD references are not exact GT.",
+  "recommendation": "Use the aligned file as a candidate initializer for later Small adaptation, retaining original learned-gate Tiny and earlier common-function preparations as references. Choose the useful completed parent after ongoing V111/V112 full results; any later refit uses a new immutable plan. Current positive-noise selector remains V104.",
+  "remaining_work": "Final-parent selection, actual optimizer/CUDA checks for that initializer, joint training and full photo/camera/analytic/GFX evaluation remain pending. This is an initialization-transfer result, not trained capacity evidence or broad superiority over Tiny/RawNIND.",
+  "CUDA_initialized": false,
+  "RAW_decodes": 0,
+  "selector": {
+    "path": "/home/dllu/proj/demosaic/configs/current-model.json",
+    "sha256": "9a00af3a82c2ed63693bfdcc32580605686072e0254d6633f1b795e22f684cf6"
+  },
+  "original_workflow_handles_at_publication": [
+    {
+      "run": "loss-scale-training-v2",
+      "role": "controller",
+      "pid": 3426533,
+      "created": 1792795962.1,
+      "live_at_publication": true
+    },
+    {
+      "run": "loss-scale-training-v2",
+      "role": "child",
+      "pid": 3740704,
+      "created": 1792813517.8,
+      "live_at_publication": true
+    },
+    {
+      "run": "loss-scale-evaluation-queue-v2",
+      "role": "controller",
+      "pid": 3426549,
+      "created": 1792795967.56,
+      "live_at_publication": true
+    },
+    {
+      "run": "loss-scale-fullframe-v2",
+      "role": "controller",
+      "pid": 3426555,
+      "created": 1792795971.34,
+      "live_at_publication": true
+    },
+    {
+      "run": "loss-scale-material-queue-v2",
+      "role": "controller",
+      "pid": 3426557,
+      "created": 1792795971.61,
+      "live_at_publication": true
+    },
+    {
+      "run": "V104-dihedral-pilot-CPU-v1",
+      "role": "eight-view full GFX controller",
+      "pid": 3963376,
+      "created": 1792821711.69,
+      "live_at_publication": true
+    },
+    {
+      "run": "eight-view-full-quality-v1",
+      "role": "controller",
+      "pid": 4127938,
+      "created": 1792825828.32,
+      "live_at_publication": true
+    },
+    {
+      "run": "eight-view-full-quality-v1",
+      "role": "independent metric audit controller",
+      "pid": 4138085,
+      "created": 1792826759.29,
+      "live_at_publication": true
+    }
+  ],
+  "limitations": "Fixed64 training-source previews with one randomized broad-camera/noise draw each,16 separate training sources for feature transfer checks, and selected12photo/2adverse-camera/6GFX/8color restoration observations. Fixed ridge0.001, no held-out parameter tuning. Deepest-stage feature-check error does not improve. All neural weights/sources/results retained; originals unchanged."
+}

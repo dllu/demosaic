@@ -1,12 +1,17 @@
 # Larger frozen ConvNeXt capacity: transfer and common initialization
 
-**Official DINOv3 ConvNeXt-Small fits the existing feature pyramid, but its
-fusion layers need adaptation.** Directly swapping it into V102 loses quality
-on the four checked material cases. Resetting three fusion-gate tensors gives
-Tiny and Small exactly matching initial outputs and a usable starting point
-for a later trained comparison. V104 is the current positive-noise quality
-baseline after its completed larger-corpus comparison; the fixed-weight transfer
-measurements below retain their original V102 initializer.
+**Small now has a fitted initializer that retains V104's learned fusion gates.**
+A training-only fit of its four lateral projections nearly preserves the three
+selected photo-condition means; two adverse-camera scores remain .25–.26dB below
+Tiny. Joint training and a trained capacity benefit remain unmeasured.
+[Current transfer method, fitted checkpoint and native comparisons](small-feature-transfer.md).
+V104 remains the positive-noise working baseline while V111/V112 complete their
+matched review.
+
+The earlier fixed-weight V102 transfer below demonstrates the feature mismatch.
+Resetting three gates gives Tiny and Small exactly matching initial outputs;
+those separate common-function preparations remain preserved for a later
+trained comparison.
 The [queued loss-scale trial](loss-scale-training.md) retains the original V104
 EMA and gates; the capacity recipes below remain unlaunched.
 

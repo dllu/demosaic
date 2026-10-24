@@ -21,7 +21,9 @@ worst ADC flat bias rises to 2,143 DN16; fine 8-pixel texture remains weak. The
 [matched loss-scale test](docs/loss-scale-training.md) uses V104 and 90,864
 cleaned sources; V111 has finished and V112 is training. The separate
 [Tiny/Small recipes](docs/convnext-small-capacity.md#prepared-matched-quality-trial)
-remain prepared.
+remain prepared. A [training-only feature fit](docs/small-feature-transfer.md)
+now gives Small a closer V104 initializer with learned gates preserved;
+camera gaps and joint training remain.
 [Current models](docs/current-model.md) · [Source-quality review](docs/incoming-commons-quality.md) ·
 [Historical diary](diary/index.md).
 For explicit zero-shot/read inputs, the [optional V104 sites export](docs/adc-consistency.md)

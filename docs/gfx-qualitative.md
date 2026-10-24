@@ -68,6 +68,12 @@ also compares V104/V111 with their three fusion gates zeroed on all six contexts
 Native differences remain small and fine foliage/sign detail stays soft; the
 selected photo/camera metrics favor retaining the learned fusion.
 
+The [Small feature-transfer boards](small-feature-transfer.md#color-and-standing-gfx-scene)
+show the same six contexts before and after training-only lateral alignment.
+Alignment removes the blind encoder swap's colored/structural artifacts and
+returns close to V104; foliage/sign detail remains soft. These are 512-pixel
+context results, separate from the complete-frame comparisons.
+
 ![Six GFX contexts: noisy, V104, V111, RawNIND pre-upsampled and separate ISO100 reference](images/v111-early-gfx/comparison.png)
 
 [V111's completed material and real-photo review](v111-early-quality.md) adds

@@ -24,6 +24,9 @@ shows stronger coarse carriers and high-noise color, with a worse ADC bias tail.
 The [current fusion-gate diagnostic](fusion-gate-quality.md) retains useful
 DINO fusion: disabling it reduces selected color failures but weakens photo and
 adverse-camera results, with little visible GFX change.
+A [training-only Small feature fit](small-feature-transfer.md) retains these
+gates and nearly preserves selected Tiny photo means; trained capacity and
+complete comparisons remain pending.
 
 | Topic | Start here |
 | --- | --- |
