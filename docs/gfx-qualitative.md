@@ -14,6 +14,17 @@ from the completed full-frame outputs below.
 
 ## Current complete full-frame comparisons
 
+The [stronger released RawNIND reference now has a complete frame](rawnind-fullframe.md),
+with the same CFA-channel calibration and all six native regions. Its blue-sign
+grid is reduced relative to half; V104 retains more regular fence wires and
+fine foliage remains soft across methods.
+
+![V104 and both released RawNIND references, full-frame native crops](images/gfx-strong-fullframe/comparison.png)
+
+[All eighteen triplets, common previews and metadata](images/gfx-strong-fullframe/manifest.json).
+The separate ISO100 capture remains a qualitative reference, not GT. The earlier
+V102/V104 comparison and its complete exports remain below.
+
 ![Six native GFX regions: noisy,V102,V104,RawNIND and independent ISO100 reference](images/gfx-v102-v104-fullframe/comparison.png)
 
 Rows: noisy Malvar, V102, V104, RawNIND half with input-only CFA-channel gain,

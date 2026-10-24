@@ -18,6 +18,8 @@ over V104 and close, mixed changes versus V111; high-noise fine detail remains s
 The [V113 Small training queue](small-aligned-training.md) uses fitted feature
 transfer with learned gates preserved and reuses completed V111 as its Tiny
 control. Eight actual CPU updates pass; CUDA and fresh20k training are queued.
+The [stronger RawNIND full-frame comparison](rawnind-fullframe.md) adds complete
+GFX output and six native regions; fence and foliage weaknesses remain visible.
 The optional [V104 ADC sites export](adc-consistency.md) adds .2885 dB on the
 complete ADC-only photo panel, with unchanged learned weights and documented
 flat-color tradeoffs.

@@ -107,6 +107,11 @@ display. Width48 still has coarse/moire-prone fence mesh and a more conspicuous
 periodic grid/grain in the blue sign than pre-upsampled. These views do not
 establish a broad real-photo ordering.
 
+The [complete pre-upsampled GFX restoration](rawnind-fullframe.md) now supplements
+these context views. It uses the same six native regions and CFA-channel policy;
+V104 retains more regular mesh, and fine foliage remains unresolved. Its full
+RGB16 exports and retained float crops are separate from the earlier pilot.
+
 The [two adverse Canon EOS M100 fields](images/rawnind-three-variants-current/camera/comparison.png)
 retain the source and ROI selection made before evaluating the new variant.
 The half and pre-upsampled variants are smoother and score higher than V104 on those
