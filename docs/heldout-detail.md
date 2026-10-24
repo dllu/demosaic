@@ -1,27 +1,57 @@
 # Natural fine-detail comparisons
 
-**V111 final20k improves PSNR, SSIM, chroma and gradient error on all twelve
-selected cases over V104**, adding +.254dB ADC-only, +.100dB ISO100 and +.019dB
-ISO12800. [Early completed material and GFX report](v111-early-quality.md).
-V104 previously improved all twelve PSNR/SSIM/gradient cases over V102.
-Visible changes are small. These models preserve substantially more bark grain,
-feather texture, canopy structure and fur than RawNIND here. At high noise,
-white plumage, distant trees and individual hairs remain smoothed.
+**V112 final20k is the current quality baseline.** It improves all twelve
+selected material cases over V104, with four-source PSNR means of
+39.74086/40.90266/33.51165dB at ADC-only/ISO100/ISO12800. Its native differences
+from V111 are small; the completed camera/color panels favor V112.
+[Matched V111/V112 material results](v111-v112-material.md) ·
+[Complete current quality report](v112-quality.md).
 
 The four contexts were selected by viewing clean inputs before inspecting
 these model outputs. They cover mixed contrast, including weak fine structures;
 they are not a set of globally low-contrast images. Their exact source IDs are
 absent from the training cohort. This small diagnostic complements the
-[full photographic and camera results](v104-reviewed-corpus-quality.md). V104's full
-panels and complete GFX exports are finished; it is the positive-noise working
-baseline, with lower ADC bias and a higher unseen-camera mean retained by V102. The [completed V102/V103 comparison](v102-v103-quality-review.md) and
-earlier material comparisons remain available below.
+[full photographic and camera results](v112-quality.md). The current comparison
+with the stronger released RawNIND reference is below; earlier V111/V104 and
+V102/V104 comparisons retain their explicit checkpoints and observations.
 
 Each cell is an unchanged **160×160 native-pixel crop** at the8×-binned evaluation
 resolution. Open the original PNG at100%; a browser may fit the board to its
 window. Columns share the same noisy observation, coordinates, display and exact
-synthetic target. RawNIND uses input-only CFA-channel gain. Current boards
-compare V104/V111; earlier V102/V104/RawNIND boards remain below.
+synthetic target. RawNIND uses input-only CFA-channel gain. The new board uses
+the released pre-upsampled model; older boards explicitly identify their
+half-resolution reference.
+
+## V112 versus the stronger released RawNIND reference
+
+![Native high-noise bark/fur: noisy, pre-upsampled RawNIND, V112 and exact synthetic GT](images/current-detail-reference/high-noise-bark-fur.png)
+
+All eight cells retain their original native160 pixels. The two methods use
+identical observations, source/ROI, WB/matrix, ISO12800 shot.00256/read
+variance2.62144e-5 and display exposure×1. V112 retains much more bark grain
+and fine fur than the stronger reference in these selected synthetic examples,
+while still smoothing individual hairs and fine texture visible in GT.
+[Original triplets, source credits, checkpoint hashes and pixel bindings](images/current-detail-reference/native-manifest.json).
+
+Across all four original material sources, V112 exceeds the stronger reference
+by +11.606/+12.775/+5.914dB at ADC-only/ISO100/ISO12800. All twelve cases improve.
+These are **four-source material means**, not the full427-photo benchmark or
+evidence of broad real-camera superiority. On the complete development camera
+panels, V112 leads by only+.00846/+.08850dB and loses four of nine scene means.
+[Current scene comparisons and limitations](rawnind-variants.md#current-v112-camera-comparison) ·
+[Original score joins and independent arithmetic/pixel checks](results/v112-strong-reference-current-v1.json).
+
+Two standalone V112 noisy → restored → exact synthetic GT triplets at the same
+high-noise condition, ROI and exposure:
+
+![V112 high-noise bark: noisy, restored and exact synthetic GT](images/v111-v112-material/iso12800-prior/crop-9569f489e23dc754.png)
+
+![V112 high-noise fur: noisy, restored and exact synthetic GT](images/v111-v112-material/iso12800-prior/crop-29035cf50f417019.png)
+
+[Bark metadata](images/v111-v112-material/iso12800-prior/crop-9569f489e23dc754.json) ·
+[Fur metadata](images/v111-v112-material/iso12800-prior/crop-29035cf50f417019.json).
+These reuse original retained outputs and PNGs. No neural inference, new noise
+or RAW decoding is performed for this current gallery.
 
 The [fixed-weight noise-conditioning probe](noise-conditioning.md) separates a
 related detail/grain tradeoff: lower priors preserve more high-noise structure
@@ -45,7 +75,8 @@ fine white feathers and hairs remain soft at high noise. The
 [report](v111-early-quality.md) records all24 rows, source/ROI/weights/noise/display,
 unchanged inputs and source credits. Extra training, seed and corpus changes
 are confounded versus V104. The [complete camera panels](v111-early-quality.md#complete-development-camera-panels)
-show −.01336/+.02006dB known/unseen changes; its full-photo result is pending.
+show −.01336/+.02006dB known/unseen changes; its completed full-photo mean is
+36.90367dB. [Completed primary comparison](v111-v112-primary-quality.md).
 The completed analytic grids improve high-noise color/coarse carriers but
 worsen the ADC flat-bias tail; the combined report shows these tradeoffs.
 

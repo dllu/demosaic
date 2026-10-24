@@ -86,12 +86,14 @@ qualitative reference to DSCF3879 ISO6400, **not GT**.
 [Verified RGB16 files and167.51s FP32 observation](results/v112-fullframe-review-v1.json).
 The separately preserved [V104/V111/V112 context gallery](images/v112-quality/gfx/comparison.png)
 contains the earlier512px-context observations. Broad real-camera superiority
-is still unachieved.
+is still unachieved. The [current stronger-reference comparison](rawnind-variants.md#current-v112-camera-comparison)
+shows four of nine camera scene means still favoring pre-upsampled RawNIND,
+despite V112's substantial gains on the selected synthetic material cases.
 
 The [larger-encoder transfer](small-feature-transfer.md) now uses V112 teacher
 targets and retained Small training features/previews. Matched Tiny/Small
-continuations passed actual CPU optimizer checks and are [queued](small-aligned-training.md)
-for 20,000 further updates each. Trained quality remains pending; the old idle
+continuations passed actual CPU/CUDA optimizer checks; [V114 is training](small-aligned-training.md)
+for 20,000 further updates, with V115 following on the same budget. Trained quality remains pending; the old idle
 V113 plan and evidence remain preserved. V104/sites and V102 remain useful
 alternatives; the 100MP/10s target remains open.
 

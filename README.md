@@ -48,6 +48,8 @@ shared coordinates and display transforms. [Compare useful versions](docs/v112-q
 
 ![V112 canopy: noisy, restored and exact GT](docs/images/v111-v112-material/iso100-prior/crop-277f4c06ef24083e.png)
 
+[Higher-noise crops versus the stronger released RawNIND reference](docs/heldout-detail.md).
+
 Sources: [Derek Ramsey](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
 [CC BY-SA 2.5](https://creativecommons.org/licenses/by-sa/2.5/), and
 [Grendelkhan](https://commons.wikimedia.org/wiki/File:Forest_covered_hills_on_Yakushima.jpg),

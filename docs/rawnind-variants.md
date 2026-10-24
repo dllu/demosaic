@@ -4,9 +4,10 @@
 
 **The released pre-upsampled RawNIND is a stronger tested comparator than the
 half-resolution variant used in our earlier reports.** It improves all 12
-checked photographic cases and eight of nine development scene means. V104
-still retains substantially more synthetic-photo detail, but its measured
-real-camera means are close to this stronger reference. Broad real-camera
+checked photographic cases and eight of nine development scene means.
+Current V112 retains substantially more detail on the selected synthetic
+photos, but its measured real-camera means remain close to this stronger
+reference. It loses four of nine camera scene means; broad real-camera
 superiority remains unproven.
 
 The released width-48 model also finished the same observations and complete
@@ -31,15 +32,18 @@ weights and training histories mean this is not an isolated architecture ablatio
 Four previously selected material sources, original 240-pixel interiors,
 three original noise draws/conditions, rendered sRGB PSNR:
 
-| Condition | V104 | RawNIND half | RawNIND pre-upsampled | RawNIND width48 |
-| --- | ---: | ---: | ---: | ---: |
-| ADC-only | 39.49290 | 27.60011 | 28.13487 | 27.02694 |
-| ISO100 prior | 40.80494 | 27.59567 | 28.12808 | 27.02605 |
-| ISO12800 prior | 33.49300 | 27.11000 | 27.59760 | 26.73293 |
+| Condition | V112 | V104 | RawNIND half | RawNIND pre-upsampled | RawNIND width48 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| ADC-only | **39.74086** | 39.49290 | 27.60011 | 28.13487 | 27.02694 |
+| ISO100 prior | **40.90266** | 40.80494 | 27.59567 | 28.12808 | 27.02605 |
+| ISO12800 prior | **33.51165** | 33.49300 | 27.11000 | 27.59760 | 26.73293 |
 
 The alternative gains about .49–.53 dB over the half-resolution model, with
 all 12 cases improving. V104 also beats the alternative in all 12. This is a
 four-source material diagnostic, not a new 427-photo/seven-condition mean.
+V112 also improves all twelve cases over the stronger reference; the original
+V104 metric rows replay exactly across the two execution sets.
+[Current native comparison](heldout-detail.md#v112-versus-the-stronger-released-rawnind-reference).
 
 The **complete** original camera development panels use 72 known-scene crops
 and 90 unseen-scene crops, 448-pixel scoring interiors, measured registered
@@ -49,6 +53,7 @@ low-ISO CFA references and source-balanced means:
 | --- | ---: | ---: |
 | V102 | 54.23709 | 53.97177 |
 | V104 | 54.26606 | 53.91700 |
+| **V112** | **54.26914** | **53.95378** |
 | RawNIND half | 54.08474 | 53.76822 |
 | RawNIND pre-upsampled | 54.26068 | 53.86528 |
 | RawNIND width48 | 53.98802 | 53.66548 |
@@ -64,6 +69,32 @@ Width48 minus half is −.09671/−.10273 dB on known/unseen panels, with all ni
 scene means declining. Width48 minus pre-upsampled is −.27265/−.19980 dB,
 intervals [−.30529,−.24002]/[−.31024,−.06174], with eight of nine scenes declining.
 The wider checkpoint does not replace the stronger pre-upsampled comparator.
+
+## Current V112 camera comparison
+
+V112 minus pre-upsampled RawNIND is **+.00846dB known / +.08850dB unseen**,
+with 2/4 and 3/5 scene means improving. Exact empirical scene-resampling95%
+intervals are [−.38377,+.41835] and [−.24883,+.36799]. These enumerate all
+4⁴/5⁵ resamples of the fixed small scene sets; they do not measure training-seed
+uncertainty or establish a general winner.
+
+![Current V112 and historical V104 differences against the stronger released RawNIND, all nine camera scenes](images/current-detail-reference/camera-scene-gaps.png)
+
+Each point averages nine crops per noisy capture, two captures per scene.
+Known/unseen refer to our training membership. V112 still loses on D60-2
+(−.11473dB), MuseeL-CopteArch-C500D (−.54382), LucieB_Coulicoco (−.46431)
+and LucieB_top_of_Expedit (−.16024). Its larger gains on plates, tapestry and
+other scenes do not remove those weaknesses. These four scenes remain useful
+checks for the active Tiny/Small comparison, whose endpoint archives retain
+every numerical prediction for later native review.
+
+[All scene values and standalone SVG](images/current-detail-reference/camera-figure.json) ·
+[Score/input joins and independent checks](results/v112-strong-reference-current-v1.json).
+The review joins all162 original crop scores with matching prepared manifests,
+scene/capture/tile/ISO/CFA identities and reference-sample counts. All162 original
+V104 control rows replay exactly. V112 full-camera float predictions were not
+retained in that older evaluation, so this recomputes aggregation rather than
+metric definitions from float arrays. It adds no neural inference or new scores.
 
 “Unseen” means held out from **our** training. External-model training membership
 and overlap remain unproven. Neither these means nor this source set establish
