@@ -1,0 +1,107 @@
+{
+  "image": "crop-d307593832816b66.png",
+  "caption": "Fine forest canopy and weak distant tree structure / iso100-prior / V104-prior-1x",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Denoised",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "GT (synthetic)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "8a513aad45e38b454903337df7ef709cbc7f48d614a6c45455f84f18b54244a7",
+  "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+  "source": {
+    "title": "File:Forest covered hills on Yakushima.jpg",
+    "page_url": "https://commons.wikimedia.org/wiki/File:Forest_covered_hills_on_Yakushima.jpg",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Forest_covered_hills_on_Yakushima.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "author": "Grendelkhan",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "attribution": null,
+    "credit": "Own work",
+    "sha1": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+    "sha1_hex": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+    "download_path": "images/21/2a/212ae12913effa23268af953b4c8f8e8b7ab4ef5.jpg",
+    "width": 4048,
+    "height": 3036,
+    "id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+    "split": "val",
+    "bin_factor": 8,
+    "color_space": "linear-sRGB",
+    "dtype": "uint16",
+    "cache": "/mnt/external/demosaic/commons-v1/images/21/212ae12913effa23268af953b4c8f8e8b7ab4ef5.npy",
+    "shape": [
+      379,
+      506,
+      3
+    ],
+    "cache_sha256": "93b465730cea963f16edf53d3b3c2187dfa9519b0ff6a8b8d1e57e1f7db3d30b"
+  },
+  "validation_index": 320,
+  "validation_seed": 42,
+  "evaluation_tile_xywh": [
+    48,
+    48,
+    160,
+    160
+  ],
+  "source_cache_context_xywh": [
+    133,
+    67,
+    256,
+    256
+  ],
+  "condition": {
+    "name": "iso100-prior",
+    "shot": 2e-05,
+    "read": 1.6e-09,
+    "exposure": 1.0
+  },
+  "pattern": "RGGB",
+  "model": {
+    "label": "V104-prior-1x",
+    "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+    "source": "/mnt/external/demosaic/models/v104-final20000.pt",
+    "step": 20000,
+    "variance_multiplier": 1.0,
+    "policy": "Scale both declared shot/read coefficients and the input variance map; keep the noisy observations and target unchanged.",
+    "device": "cpu",
+    "compute_precision": "float32",
+    "effective_conditioning": {
+      "shot": 2e-05,
+      "read": 1.6e-09
+    }
+  },
+  "display_exposure": 1,
+  "reference": "Exact synthetic clean target; observations generated with actual condition, not the conditioning override",
+  "observation": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/heldout-detail-followup-v1/inputs/212ae12913effa23268af953b4c8f8e8b7ab4ef5-iso100-prior-RGGB.npz",
+    "sha256": "33140a02ebc311c73d14fcd60faa75ae45be0f4f70175dd9f6a16cbd83035ba8"
+  },
+  "detail": "Fine forest canopy and weak distant tree structure",
+  "selection": "Four diverse contexts selected after actually viewing10 clean native256 contexts and their native160 centers, before viewing model outputs on these cases. Bark, white feathers, forest canopy/haze and gray fur. Mixed contrast; selected for fine/weak structures, not global low-contrast labels."
+}

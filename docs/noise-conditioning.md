@@ -1,218 +1,146 @@
 # Noise conditioning and fine detail
 
-**Lower noise conditioning trades stronger fine structure for residual grain;
-it is not a general quality fix for V101.** On the four fixed held-out natural
-contexts, all three alternative strengths lose high-noise PSNR against the
-original conditioning. The native crops also show that some additional detail
-is useful. Keep that tradeoff visible alongside the [training improvements](quality-first-training.md).
-Controlled path and DINO-preview checks below now localize that tradeoff:
-the CNN noise channel drives most of the tested strength effect, while changing
-only the DINO preview gives no consistent improvement on these cases.
+**Use suitable physical shot/read priors with V104.** Lower conditioning retains
+more structure and grain in these fixed examples, with lower high-noise PSNR.
+It is a useful denoising/detail control, with no demonstrated general quality
+win from the alternative strengths. V104 remains the positive-noise/training
+baseline; the V111/V112 loss-scale test continues unchanged.
 
-This diagnostic holds the V101 final10000 EMA and all noisy/target arrays fixed.
-Factors .50/.75/1.00/1.25 multiply both the supplied shot/read-variance
-coefficients and the variance map. These are variance factors, not standard
-deviation factors. The simulated observation still has its original physical
-noise. Crop metadata records the actual generation condition and effective
-conditioning separately; this is a declared prior mismatch, not a different
-exposure or noise realization. All outputs use CPU IEEE FP32, without training,
-additional ADC correction or a change to production defaults.
+This current-model check holds the V104 final20000 EMA and all observations
+fixed. Factors .50/.75/1.00/1.25 multiply the supplied shot coefficient,
+read-noise variance and input variance map. They are **variance factors**, so
+.50× corresponds to approximately .707× standard deviation. Actual noise,
+exposure, CFA, WB, matrix and target pixels stay unchanged. These are declared
+conditioning mismatches evaluated on one checkpoint, without retraining or
+new noise draws.
 
 ## Fixed photographic results
 
-| Conditioning strength | ISO100 PSNR | ISO12800 PSNR | ISO12800 SSIM | ISO12800 gradient MAE |
+Four previously selected held-out contexts: bark, egret, forest canopy and fur.
+They use native256 contexts from 8×-binned Commons targets, RGGB, scored240
+interiors, CPU IEEE FP32 and the same original observations under ADC-only,
+ISO100 and ISO12800 priors. These are selected development contexts rather
+than a full427 result or training-seed comparison.
+
+| Conditioning | ISO100 PSNR | ISO12800 PSNR | ISO12800 SSIM | ISO12800 gradient MAE |
 | --- | ---: | ---: | ---: | ---: |
-| .50× | 40.34055 | 31.43948 | .868022 | .026434 |
-| .75× | 40.34904 | 33.06758 | .918281 | .021273 |
-| **1.00×** | 40.35352 | **33.42612** | **.923598** | **.020436** |
-| 1.25× | **40.35552** | 33.28616 | .917192 | .020777 |
+| 0.50× | 40.79216 | 31.07231 | 0.846694 | 0.027845 |
+| 0.75× | 40.80141 | 33.08845 | 0.916710 | 0.021317 |
+| 1.00× | 40.80494 | 33.49300 | 0.924289 | 0.020291 |
+| 1.25× | 40.80539 | 33.34016 | 0.917849 | 0.020663 |
 
-Means balance the four sources: bark, egret, forest canopy and fur. Scoring
-uses native 240 interiors from the fixed 256 contexts, RGGB and unquantized
-predictions. At ISO12800, .50/.75/1.25× lose 1.98664/.35854/.13996dB on average;
-each loses PSNR on all four sources. At ISO100 the means remain close, including
-a +.00200 dB change at 1.25×. ADC-only predictions are byte-identical across all
-four factors, as multiplying zero coefficients preserves the zero-noise input.
+At ISO12800, .50/.75/1.25× lose **2.42068/.40455/.15284dB** respectively;
+each loses PSNR on all four sources. At ISO100 the changes are small, including
++.00045dB at1.25×. ADC-only predictions are byte-identical across all strengths,
+as zero coefficients remain zero.
 
-All 12 original 1× score rows and native PNGs reproduce the previous V101 report
-exactly. The model, frozen DINO, config, parameter identities and cached inputs
-remain unchanged. Independent NumPy F64 PSNR calculations on all 48 saved float
-predictions differ by at most 3.4e-6 dB, and every source-mean calculation agrees.
-[Complete cases, conditioning, predictions and verification](results/V101-conditioning-probe-CPU-v1.json).
+The twelve original V104 scores and native PNGs replay exactly. All 91 EMA
+tensors, the official frozen encoder, weights/configuration/parameter IDs,
+inputs and per-forward Torch RNG are checked. The run makes48 actual
+DINO-backed forwards. Independent NumPy64 WB/matrix/gamma/MSE arithmetic
+checks every saved linear/rendered PSNR and all source means. All144 source
+triplet panels rerender exactly.
+[Completed execution, independent audit and actual native review](results/V104-conditioning-probe-CPU-v1.json).
 
 ## Native comparisons
 
-Columns: noisy Malvar, .50×, .75×, **1.00×**, 1.25× and exact synthetic GT.
-Every cell is an unchanged 160×160 crop at the 8×-binned evaluation resolution,
-with the same source coordinates and display exposure ×1 across methods.
-The labels describe conditioning strength; every restored column uses the
-same checkpoint SHA256
-`6f691c653a618bdde0d7db501f3efc557a9699e2dbba73cf94c7440b364ef3e3`.
+Columns are the four fixed contexts; rows are noisy Malvar, .50×, .75×,
+**1.00×**, 1.25× and exact synthetic GT. Each cell is an unchanged160×160 crop
+at the 8×-binned evaluation resolution, with shared coordinates and display
+exposure ×1. Lower conditioning retains more fine canopy/fur structure and
+visible grain, particularly on the smooth feather/background areas. Higher
+conditioning smooths additional structure.
 
-At ISO12800, lower conditioning retains more hair/canopy structure but also
-grain, most apparent on smooth feathers/backgrounds. Higher conditioning
-smooths additional fine structures. Those changes matter alongside the score
-differences; they are not all explained by PSNR alone.
+![V104 high-noise conditioning strengths on bark, feathers, canopy and fur](images/conditioning-v104/iso12800-prior/comparison.png)
 
-![Four native high-noise contexts under four declared conditioning strengths](images/conditioning-v101/iso12800-prior/photo-comparison.png)
+[16 high-noise triplets and full source/ROI/checkpoint/actual-noise/effective-conditioning/display metadata](images/conditioning-v104/iso12800-prior/manifest.json).
 
-[ISO12800 source/ROI/checkpoint/actual-noise/effective-conditioning/display metadata](images/conditioning-v101/iso12800-prior/manifest.json).
-The source set was selected from clean inputs before reviewing these outputs;
-it is not a collection of the biggest gains from the conditioning probe.
+Two small triplets at .75× conditioning: noisy → V104 → exact synthetic GT.
+Their actual observation noise remains the original ISO12800 prior.
 
-Low-noise bark and canopy remain visually close:
+![Bark, V104 .75× conditioning: noisy, restored and exact synthetic GT](images/conditioning-v104/iso12800-prior/crop-1f6dc9e967acab93.png)
 
-![Native low-noise bark and canopy under four declared conditioning strengths](images/conditioning-v101/iso100-prior/photo-comparison.png)
+![Canopy, V104 .75× conditioning: noisy, restored and exact synthetic GT](images/conditioning-v104/iso12800-prior/crop-75f5d39f14224a76.png)
 
-[ISO100 metadata and source triplets](images/conditioning-v101/iso100-prior/manifest.json).
-All 36 unique board cells were actually viewed. Shared noisy/GT pixels and
-physical/display settings match exactly; effective conditioning stays explicit
-inside each method record.
+Low-noise bark/canopy remain close:
+
+![V104 low-noise bark and canopy under the same four strengths](images/conditioning-v104/iso100-prior/comparison.png)
+
+[Eight low-noise triplets and metadata](images/conditioning-v104/iso100-prior/manifest.json) ·
+[Source credits and original material selection](heldout-detail.md).
+All36 synthetic board cells were viewed at original resolution.
 
 ## Detail versus off-target structure
 
-A descriptive projection onto exact-GT luminance frequencies helps separate
-some retained structure from additional error. The following uses the entire
-240px scoring interior, mean subtraction, a separable Hann window and the
-predeclared radial band 1/16–1/4 cycles/pixel. The projected gain is the real
-GT/prediction cross-energy divided by GT energy. The residual is orthogonal
-to that projected GT band and includes noise and restoration error.
+The same predefined descriptive frequency measurement used in the earlier
+V101 study is applied to retained V104 predictions: mean-subtracted240px
+sRGB luminance, a separable Hann window and radial band1/16–1/4 cycles/pixel.
+Projected gain measures real GT/prediction cross-energy divided by GT energy.
+Residual RMS is orthogonal to that projected GT band and includes noise and
+restoration error.
 
-| ISO12800 conditioning | Mean GT-projected band gain | Off-target band RMS, sRGB luminance |
+| ISO12800 conditioning | Mean GT-projected band gain | Off-target band RMS |
 | --- | ---: | ---: |
-| .50× | .98518 | .004799 |
-| .75× | .97498 | .004420 |
-| 1.00× | .96356 | .004278 |
-| 1.25× | .95192 | .004269 |
+| 0.50× | 0.98760 | 0.004955 |
+| 0.75× | 0.97664 | 0.004428 |
+| 1.00× | 0.96509 | 0.004276 |
+| 1.25× | 0.95352 | 0.004265 |
 
-For the fur context, gain rises from .93338 at 1× to .97951 at .5×, while off-target
-RMS rises .004432→.005505. Lower conditioning therefore retains additional
-GT-correlated signal as well as additional error. Projection can also include
-sharpening and chance noise/GT correlation from a single noise draw; it does
-not prove that every retained hair or edge is real. RMS uses the same Hann
-window without power compensation, and is not whole-image sensor-noise RMS.
-[Exact definitions, per-source values and saved-input analysis](results/V101-conditioning-probe-CPU-v1.json).
-
-These are four selected synthetic-photo contexts, not full427 or real-camera
-quality proof. The current calibrated 1× default remains unchanged. The
-[completed V102/V103 comparison](v102-v103-quality-review.md) improves full-panel
-quality and tested weak-carrier response, with fine high-noise detail still open.
+Lower conditioning preserves additional GT-correlated band structure and
+additional error. Sharpening and chance correlation from a single noise draw
+can contribute to gain; this does not establish that every retained feature
+is real. RMS includes the Hann window without power compensation, and is not
+whole-image sensor-noise RMS. Full definitions and per-source values accompany
+the linked execution receipt.
 
 ## Real GFX contexts
 
-The same four strengths were evaluated on all six standing GFX regions, using
-only the previously cached packed Bayer/reference arrays. No RAF or source
-HDD read was needed. These are CPU 512 contexts, not full-frame blends. The
-original 1× column exactly reproduces all six prior floating predictions and
-triplet PNGs; every column shares the same native 160 coordinates, noisy pixels,
-independent reference and +2EV display transform.
+All six standing regions use the previously cached packed Bayer/reference
+arrays: no RAW decoding or source-HDD access. These are **512px context
+restorations**, separate from complete102MP blends. Original coordinates,
+shared +2EV display and independent ISO100 f/5.6 reference stay fixed. That
+capture differs in aperture, time and moving subjects; **it is not GT**, and
+no pixelwise reference score ranks these variants.
 
-![GFX sky, building, foliage, fence and illuminated details under four conditioning strengths](images/conditioning-v101/gfx/gfx-comparison.png)
+![V104 conditioning on sky, building, foliage, fence, neon and platform](images/conditioning-v104/gfx/comparison.png)
 
-At .50× the wall, foliage and fence background retain more texture and grain.
-.75× produces a milder change; 1.25× smooths additional structure. Sky stays
-relatively uniform in the displayed crops. The fence strands remain coherent
-and fine lit-sign structure stays soft. The independent ISO100 f/5.6 exposure
-has different optics, time and moving subjects: **it is not GT**, and no RGB
-reference scores rank these outputs.
+At .50×, walls, foliage and fence backgrounds retain more structure and grain;
+.75× produces a milder change. The sky remains mostly smooth, with more specks
+at .50×. Higher conditioning softens foliage. Fence strands stay coherent and
+fine illuminated-sign structure remains soft.
 
-[All 24 triplets, source/ROI/weights/actual-estimate/effective-conditioning metadata](images/conditioning-v101/gfx/manifest.json) ·
-[Exact baseline replay, 24 float predictions and 36 actually viewed native cells](results/V101-GFX-conditioning-CPU-v1.json).
-These variants make the denoising/detail tradeoff explicit; the current 1×
-default and completed full-frame comparisons remain unchanged.
+[All24 triplets and source/ROI/checkpoint/input-estimate/effective-conditioning/display metadata](images/conditioning-v104/gfx/manifest.json) ·
+[Actual24 forwards, float/display audit and36 viewed native cells](results/V104-GFX-conditioning-CPU-v1.json).
+The CPU1× baseline differs from the original CUDA FP32 contexts by at most
+1.91e-6 camera units and one RGB8 code. This numerical parity is recorded
+without claiming byte-exact CPU/CUDA output. All strength comparisons above
+share the new CPU implementation and display transform.
+
+A same-capture sky consistency check uses disjoint2×2 Haar coefficients within
+each Bayer phase, normalized by the supplied profile's predicted variance.
+Robust normalized standard deviations range **.9919–1.0154**, corresponding to
+variance factors .984–1.031. This offers little indication of a factor-two
+variance overestimate in that sky patch. It is a local check of an already
+input-fitted profile, **not independent camera calibration**; scene texture,
+correlation and limited brightness range constrain interpretation. It uses no
+model output or ISO100 reference. The full definition and arrays are bound in
+the GFX receipt. No automatic prior or production-default change follows.
 
 ## Which path responds to conditioning?
 
-Seven predefined interventions made84 actual CPU FP32 forwards on the same12
-cached observations. Only the named input/path changes; weights, physical
-measurements, other input tensors, parameter identities and RNG remain exact.
-The baseline reproduces all12 previous float predictions and scores exactly.
-These are fixed-weight interventions, not retrained architecture ablations.
+In V104's stabilized RGB configuration, explicit shot/read profiles control the
+variance-stabilizing transform and CNN noise channel. The internal variance
+map is replaced by a normalized proxy; optional map-dependent refinement heads
+are disabled. Scaling the map alone therefore does not provide the equivalent
+strength control. Set both physical shot/read coefficients deliberately.
+[Implementation](../src/demosaic/pretrained_rgb.py).
 
-| Intervention | ADC PSNR | ISO100 PSNR | ISO12800 PSNR |
-| --- | ---: | ---: | ---: |
-| Original V101 | **38.88476** | **40.35352** | **33.42612** |
-| Input variance map only ×.5 | 38.88476 | 40.35352 | 33.42612 |
-| Shot/read-variance profile only ×.75 | 38.88476 | 40.34904 | 33.06758 |
-| CNN noise standard deviation only ×√.75 | 38.88476 | 40.34833 | 33.08901 |
-| CNN noise standard deviation only ×√.5 | 38.88476 | 40.33863 | 31.53461 |
-| DINO adapter offsets ×0 | 38.53593 | 40.33152 | 33.41443 |
-| DINO adapter offsets ×1.5 | 38.83069 | 40.30618 | 33.41632 |
+The [earlier V101 investigation](v101-conditioning-study.md) retains its numerical
+path interventions and DINO-preview counterchecks. Those measurements localize
+the earlier strength response mainly to the CNN noise channel; they are
+separate from the current V104 scores. The current quality work addresses
+faint-detail supervision with the [matched V111/V112 loss-scale trial](loss-scale-training.md).
 
-The map-only intervention is bit-identical to baseline for all12 predictions.
-V101's stabilized base uses the scalar physical profile to transform the RAW
-and form its CNN noise channel, then replaces the internal variance map with a
-normalized proxy. The original map feeds optional directional/spectral heads
-that this checkpoint does not have. That is the implemented conditioning path,
-rather than evidence of a broken noise input. Profile-only ×.75 exactly replays
-the earlier joint ×.75 experiment, as expected from this path.
-
-Changing only the CNN sigma supplies most of the high-noise strength effect:
-more visible structure/grain, with lower PSNR. Removing DINO offsets hurts
-ADC-only PSNR substantially; multiplying them by1.5 also loses mean PSNR.
-All three unscaled ConvNeXt adapter outputs were checked exact across policies.
-DINO still executes for the zero-offset control. These results do not establish
-that a newly trained fusion or stronger backbone cannot help.
-
-![ADC-only path interventions: noisy, lower CNN sigma, zero DINO offsets, stronger DINO offsets, V101 and exact GT](images/conditioning-paths-v101/adc-only/photo-comparison.png)
-
-![High-noise path interventions on the same four contexts](images/conditioning-paths-v101/iso12800-prior/photo-comparison.png)
-
-Each unchanged160 cell uses the original source/ROI, exposure×1 and exact GT.
-All48 cells were actually viewed. High-noise feathers, canopy and fur remain
-smoothed; the sigma reduction restores some structure and grain, without a
-general visual win. [ADC triplets/metadata](images/conditioning-paths-v101/adc-only/manifest.json) ·
-[ISO12800 triplets/metadata](images/conditioning-paths-v101/iso12800-prior/manifest.json) ·
-[All84 scores/predictions, path controls and native review](results/V101-conditioning-paths-CPU-v1.json).
-
-## Cleaner DINO previews
-
-The actual V101 ConvNeXt-Tiny branch was also evaluated with four predefined
-preview inputs: noisy Malvar, input-only Wiener7, a first V101 restoration, and
-the exact clean image. The final option is an **unavailable GT oracle diagnostic**,
-never a usable method or candidate checkpoint. Only the DINO RGB preview changes;
-the RAW measurements, physical profile, CNN normalized input/noise channel and
-measurement offsets stay exact. Each intervention still executes DINO.
-
-| DINO preview | ADC PSNR | ISO100 PSNR | ISO12800 PSNR |
-| --- | ---: | ---: | ---: |
-| Original noisy Malvar | **38.88476** | 40.35352 | **33.42612** |
-| Input-only Wiener7 | 38.88476 | **40.35409** | 33.42362 |
-| First V101 restoration, logically two passes | 38.87790 | 40.34827 | 33.42574 |
-| Exact clean image, **ORACLE only** | 38.87069 | 40.34659 | 33.42266 |
-
-All48 genuine forwards completed. Baseline float predictions reproduce the
-prior12 cases exactly; Wiener is also exact in ADC-only conditions. Source means
-and saved float hashes were independently checked. Self-preview reuses an exact
-cached first pass here, but deployment would require two restoration passes;
-this supplies no speed claim. Cleaner feature input alone gives no consistent
-gain with the fixed trained adapters. Distribution changes and training may
-matter; this does not test training on denoised features or establish a general
-upper bound for DINO guidance.
-
-![ADC-only preview interventions; clean preview is labeled GT ORACLE](images/guidance-preview-v101/adc-only/photo-comparison.png)
-
-![High-noise preview interventions; exact clean preview is a diagnostic only](images/guidance-preview-v101/iso12800-prior/photo-comparison.png)
-
-The48 native160 cells were actually viewed. Outputs remain close, with no
-consistent recovery of weak plumage/canopy/fur. All noisy/GT pixels, coordinates,
-conditioning and display exposure×1 are shared exactly.
-[ADC triplets/metadata](images/guidance-preview-v101/adc-only/manifest.json) ·
-[ISO12800 triplets/metadata](images/guidance-preview-v101/iso12800-prior/manifest.json) ·
-[All48 scores/predictions, exact input-path checks and oracle boundary](results/V101-guidance-preview-CPU-v1.json).
-These checks favor continuing the cleaned-data/detail training rather than
-applying a blanket lower sigma or cleaner-preview override. The current
-calibrated policy stays in use. The older [ViT-S feature-similarity study](dino-preview-sensitivity.md)
-is a separate encoder/feature diagnostic, rather than this restoration test.
-
-## Sources
-
-| Detail | Source / creator | License |
-| --- | --- | --- |
-| Bark | [Derek Ramsey](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg) | [CC BY-SA 2.5](https://creativecommons.org/licenses/by-sa/2.5/) |
-| Egret | [Serebit](https://commons.wikimedia.org/wiki/File:Snowy_egret_in_profile.jpg) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
-| Canopy | [Grendelkhan](https://commons.wikimedia.org/wiki/File:Forest_covered_hills_on_Yakushima.jpg) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
-| Fur | [Korall](https://commons.wikimedia.org/wiki/File:Racoon_clinging_to_a_tree.JPG) | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) |
-
-Modifications are binning, cropping, synthetic noise, restoration and shared
-display conversion. Full source attribution and hashes accompany every crop.
+V104 checkpoint SHA256:
+`8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300`.
+[Current model choices](current-model.md) · [Complete GFX comparisons](gfx-qualitative.md).

@@ -1,0 +1,170 @@
+{
+  "status": "completed-V104-GFX-conditioning-and-native-review",
+  "recorded_local": "2026-10-23T17:21:25.291788-07:00",
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-conditioning-probe-CPU-v1/close-review.py",
+    "sha256": "39f1bb604b5e9e7fc5ce4f7fbaf41544c5b5d35d5f5a7c29250d1c9de58a0199"
+  },
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-GFX-conditioning-CPU-v1/plan.json",
+    "sha256": "e46f4a4eb519c99ac3cb5256c0938a16fb185a77b81c78db41b01532db7b3903"
+  },
+  "launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-GFX-conditioning-CPU-v1/launch.json",
+    "sha256": "5091d458884246b2fd21f069fa7cb88cf33a5d9afdd6968e04942aa23effeb9b"
+  },
+  "report": {
+    "path": "/mnt/external/demosaic/V104-GFX-conditioning-CPU-20261023-v1/report.json",
+    "sha256": "f5a6957a8bde788e0842f841fd9de4df564616964199c8fed1194fd5c344a0db"
+  },
+  "owner_exited": true,
+  "checkpoint": {
+    "path": "/mnt/external/demosaic/models/v104-final20000.pt",
+    "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300"
+  },
+  "actual_DINO_calls": 24,
+  "EMA_tensors_exact": 91,
+  "gallery": {
+    "slug": "gfx",
+    "manifest": {
+      "path": "/home/dllu/proj/demosaic/docs/images/conditioning-v104/gfx/manifest.json",
+      "sha256": "69f90447d27a034ef64eb5d224bb18b67e44edd0a14f7530df98a4f10ade8c69"
+    },
+    "board": {
+      "path": "/home/dllu/proj/demosaic/docs/images/conditioning-v104/gfx/comparison.png",
+      "sha256": "dd9e97948750f05c63f1c3c8374b4261d2e71cd8a2bd9a260b890f851fc2f733"
+    },
+    "board_receipt": {
+      "path": "/home/dllu/proj/demosaic/docs/images/conditioning-v104/gfx/comparison.json",
+      "sha256": "a3639e6fe4fc0fd18e8ba17cbfd8a49027f3bdf4025f6ff2a1c15dceccd7f395"
+    },
+    "native_cells": 36,
+    "native_triplets": 24,
+    "native160_cells_actually_viewed": 36
+  },
+  "native160_unique_cells_actually_viewed": 36,
+  "triplets": 24,
+  "saved_float_predictions": 24,
+  "independent_float_display_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-GFX-conditioning-CPU-v1/independent-audit.json",
+    "sha256": "fd52279368844356b03a6f06ec4461d9f63e2d297fccd5b61401bd06a3290cf7"
+  },
+  "baseline_CPU_vs_original_CUDA_float_parity": [
+    {
+      "region": "overcast-sky",
+      "prior_device": "cuda",
+      "new_device": "cpu",
+      "maximum_absolute_camera_RGB_difference": 5.587935447692871e-08,
+      "mean_absolute_camera_RGB_difference": 4.4503423168862355e-09,
+      "float_pixels_exact": false,
+      "PNG_bytes_exact_to_original_GPU": false
+    },
+    {
+      "region": "building-detail",
+      "prior_device": "cuda",
+      "new_device": "cpu",
+      "maximum_absolute_camera_RGB_difference": 1.9073486328125e-06,
+      "mean_absolute_camera_RGB_difference": 7.094962395370885e-09,
+      "float_pixels_exact": false,
+      "PNG_bytes_exact_to_original_GPU": false
+    },
+    {
+      "region": "foliage",
+      "prior_device": "cuda",
+      "new_device": "cpu",
+      "maximum_absolute_camera_RGB_difference": 1.4901161193847656e-07,
+      "mean_absolute_camera_RGB_difference": 3.2853957332434902e-09,
+      "float_pixels_exact": false,
+      "PNG_bytes_exact_to_original_GPU": true
+    },
+    {
+      "region": "chain-link-fence",
+      "prior_device": "cuda",
+      "new_device": "cpu",
+      "maximum_absolute_camera_RGB_difference": 9.5367431640625e-07,
+      "mean_absolute_camera_RGB_difference": 4.470446235416148e-09,
+      "float_pixels_exact": false,
+      "PNG_bytes_exact_to_original_GPU": false
+    },
+    {
+      "region": "colored-neon-sign",
+      "prior_device": "cuda",
+      "new_device": "cpu",
+      "maximum_absolute_camera_RGB_difference": 8.344650268554688e-07,
+      "mean_absolute_camera_RGB_difference": 7.575377658497473e-09,
+      "float_pixels_exact": false,
+      "PNG_bytes_exact_to_original_GPU": false
+    },
+    {
+      "region": "illuminated-platform-boundary",
+      "prior_device": "cuda",
+      "new_device": "cpu",
+      "maximum_absolute_camera_RGB_difference": 7.152557373046875e-07,
+      "mean_absolute_camera_RGB_difference": 1.8836901816143836e-08,
+      "float_pixels_exact": false,
+      "PNG_bytes_exact_to_original_GPU": false
+    }
+  ],
+  "baseline_CPU_vs_original_CUDA_RGB8_parity": [
+    {
+      "region": "overcast-sky",
+      "prior_device": "cuda",
+      "current_device": "cpu",
+      "maximum_RGB8_triplet_difference": 1,
+      "different_RGB8_values": 2,
+      "PNG_bytes_exact": false
+    },
+    {
+      "region": "building-detail",
+      "prior_device": "cuda",
+      "current_device": "cpu",
+      "maximum_RGB8_triplet_difference": 1,
+      "different_RGB8_values": 4,
+      "PNG_bytes_exact": false
+    },
+    {
+      "region": "foliage",
+      "prior_device": "cuda",
+      "current_device": "cpu",
+      "maximum_RGB8_triplet_difference": 0,
+      "different_RGB8_values": 0,
+      "PNG_bytes_exact": true
+    },
+    {
+      "region": "chain-link-fence",
+      "prior_device": "cuda",
+      "current_device": "cpu",
+      "maximum_RGB8_triplet_difference": 1,
+      "different_RGB8_values": 1,
+      "PNG_bytes_exact": false
+    },
+    {
+      "region": "colored-neon-sign",
+      "prior_device": "cuda",
+      "current_device": "cpu",
+      "maximum_RGB8_triplet_difference": 1,
+      "different_RGB8_values": 2,
+      "PNG_bytes_exact": false
+    },
+    {
+      "region": "illuminated-platform-boundary",
+      "prior_device": "cuda",
+      "current_device": "cpu",
+      "maximum_RGB8_triplet_difference": 1,
+      "different_RGB8_values": 1,
+      "PNG_bytes_exact": false
+    }
+  ],
+  "input_only_sky_noise_consistency": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-GFX-conditioning-CPU-v1/sky-noise-consistency.json",
+    "sha256": "0c8094f7759429ab2d00810930c5183dbb8e25c7fd0911f9502f9ea61453435e"
+  },
+  "all_shared_noisy_reference_pixels_exact": true,
+  "weights_DINO_config_parameter_ids_inputs_and_Torch_RNG_unchanged": true,
+  "RAW_decodes": 0,
+  "original_source_reads": 0,
+  "quality_scores": null,
+  "production_default_unchanged": true,
+  "findings": "At.5x, wall/foliage/fence backgrounds retain more structure and visible grain; .75x is a milder change. Sky stays mostly smooth with more specks at.5x. Higher conditioning softens foliage. Fence geometry remains coherent and fine sign structure stays soft. The independent low-ISO reference differs in aperture/time/motion and is not GT.",
+  "scope": "V104 final20000 CPU FP32/4threads/channels-last on six cached standing GFX512 contexts, four predefined noise-variance strengths1/.5/.75/1.25. Keep original Bayer/reference arrays, WB/matrix/native160 ROI and+2EV display; no RAW decode/HDD read/new observation or training. Baseline compared numerically with prior CUDA FP32 context output, not falsely claimed byte-exact. Independent ISO100 f/5.6 reference is not GT; no RGB quality score or fullframe result/default change. Every forward preserves inputs/RNG and exact91 EMA/frozen Tiny."
+}

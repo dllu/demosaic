@@ -1,0 +1,1681 @@
+{
+  "status": "completed-V104-fixed-weight-conditioning-and-native-review",
+  "recorded_local": "2026-10-23T17:21:25.290256-07:00",
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-conditioning-probe-CPU-v1/close-review.py",
+    "sha256": "39f1bb604b5e9e7fc5ce4f7fbaf41544c5b5d35d5f5a7c29250d1c9de58a0199"
+  },
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-conditioning-probe-CPU-v1/plan.json",
+    "sha256": "fb9430c7cf85b8674020a0d941ea52a7d169f9fb0779cf0af50d96dcc2159121"
+  },
+  "launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-conditioning-probe-CPU-v1/launch.json",
+    "sha256": "d8becdbf0f3c690d5fe8f1a8a77f195c34628591d3384479a85ea05a69839757"
+  },
+  "report": {
+    "path": "/mnt/external/demosaic/V104-conditioning-probe-CPU-20261023-v1/report.json",
+    "sha256": "9768098787c488314710c0173f54942fef2d133ec98d97ea0aefca2a32bba71a"
+  },
+  "owner_exited": true,
+  "checkpoint": {
+    "path": "/mnt/external/demosaic/models/v104-final20000.pt",
+    "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300"
+  },
+  "models": [
+    {
+      "label": "V104-prior-1x",
+      "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+      "source": "/mnt/external/demosaic/models/v104-final20000.pt",
+      "step": 20000,
+      "variance_multiplier": 1.0,
+      "policy": "Scale both declared shot/read coefficients and the input variance map; keep the noisy observations and target unchanged.",
+      "device": "cpu",
+      "compute_precision": "float32"
+    },
+    {
+      "label": "V104-prior-0.5x",
+      "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+      "source": "/mnt/external/demosaic/models/v104-final20000.pt",
+      "step": 20000,
+      "variance_multiplier": 0.5,
+      "policy": "Scale both declared shot/read coefficients and the input variance map; keep the noisy observations and target unchanged.",
+      "device": "cpu",
+      "compute_precision": "float32"
+    },
+    {
+      "label": "V104-prior-0.75x",
+      "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+      "source": "/mnt/external/demosaic/models/v104-final20000.pt",
+      "step": 20000,
+      "variance_multiplier": 0.75,
+      "policy": "Scale both declared shot/read coefficients and the input variance map; keep the noisy observations and target unchanged.",
+      "device": "cpu",
+      "compute_precision": "float32"
+    },
+    {
+      "label": "V104-prior-1.25x",
+      "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+      "source": "/mnt/external/demosaic/models/v104-final20000.pt",
+      "step": 20000,
+      "variance_multiplier": 1.25,
+      "policy": "Scale both declared shot/read coefficients and the input variance map; keep the noisy observations and target unchanged.",
+      "device": "cpu",
+      "compute_precision": "float32"
+    }
+  ],
+  "per_case_scores": [
+    {
+      "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+      "condition": "adc-only",
+      "model": "V104-prior-1x",
+      "actual_observation_noise": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.0,
+        "read": 0.0
+      },
+      "variance_multiplier": 1.0,
+      "metrics": {
+        "linear_psnr": 39.53050994873047,
+        "srgb_psnr": 35.53375244140625,
+        "srgb_ssim": 0.9902473092079163,
+        "chroma_mae": 0.009031434543430805,
+        "gradient_mae": 0.015513375401496887,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 46.6750373840332
+      }
+    },
+    {
+      "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+      "condition": "adc-only",
+      "model": "V104-prior-0.5x",
+      "actual_observation_noise": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.0,
+        "read": 0.0
+      },
+      "variance_multiplier": 0.5,
+      "metrics": {
+        "linear_psnr": 39.53050994873047,
+        "srgb_psnr": 35.53375244140625,
+        "srgb_ssim": 0.9902473092079163,
+        "chroma_mae": 0.009031434543430805,
+        "gradient_mae": 0.015513375401496887,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 46.6750373840332
+      }
+    },
+    {
+      "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+      "condition": "adc-only",
+      "model": "V104-prior-0.75x",
+      "actual_observation_noise": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.0,
+        "read": 0.0
+      },
+      "variance_multiplier": 0.75,
+      "metrics": {
+        "linear_psnr": 39.53050994873047,
+        "srgb_psnr": 35.53375244140625,
+        "srgb_ssim": 0.9902473092079163,
+        "chroma_mae": 0.009031434543430805,
+        "gradient_mae": 0.015513375401496887,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 46.6750373840332
+      }
+    },
+    {
+      "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+      "condition": "adc-only",
+      "model": "V104-prior-1.25x",
+      "actual_observation_noise": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.0,
+        "read": 0.0
+      },
+      "variance_multiplier": 1.25,
+      "metrics": {
+        "linear_psnr": 39.53050994873047,
+        "srgb_psnr": 35.53375244140625,
+        "srgb_ssim": 0.9902473092079163,
+        "chroma_mae": 0.009031434543430805,
+        "gradient_mae": 0.015513375401496887,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 46.6750373840332
+      }
+    },
+    {
+      "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+      "condition": "iso100-prior",
+      "model": "V104-prior-1x",
+      "actual_observation_noise": {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 2e-05,
+        "read": 1.6e-09
+      },
+      "variance_multiplier": 1.0,
+      "metrics": {
+        "linear_psnr": 39.842994689941406,
+        "srgb_psnr": 36.807804107666016,
+        "srgb_ssim": 0.991790235042572,
+        "chroma_mae": 0.008057473227381706,
+        "gradient_mae": 0.01371154934167862,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 53.77772521972656
+      }
+    },
+    {
+      "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+      "condition": "iso100-prior",
+      "model": "V104-prior-0.5x",
+      "actual_observation_noise": {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 1e-05,
+        "read": 8e-10
+      },
+      "variance_multiplier": 0.5,
+      "metrics": {
+        "linear_psnr": 39.841854095458984,
+        "srgb_psnr": 36.80200958251953,
+        "srgb_ssim": 0.9917919039726257,
+        "chroma_mae": 0.00806451216340065,
+        "gradient_mae": 0.013715088367462158,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 53.843162536621094
+      }
+    },
+    {
+      "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+      "condition": "iso100-prior",
+      "model": "V104-prior-0.75x",
+      "actual_observation_noise": {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 1.5000000000000002e-05,
+        "read": 1.2e-09
+      },
+      "variance_multiplier": 0.75,
+      "metrics": {
+        "linear_psnr": 39.84258270263672,
+        "srgb_psnr": 36.805233001708984,
+        "srgb_ssim": 0.9917910099029541,
+        "chroma_mae": 0.008060790598392487,
+        "gradient_mae": 0.013713047839701176,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 53.806949615478516
+      }
+    },
+    {
+      "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+      "condition": "iso100-prior",
+      "model": "V104-prior-1.25x",
+      "actual_observation_noise": {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 2.5e-05,
+        "read": 2e-09
+      },
+      "variance_multiplier": 1.25,
+      "metrics": {
+        "linear_psnr": 39.84326934814453,
+        "srgb_psnr": 36.81000518798828,
+        "srgb_ssim": 0.9917897582054138,
+        "chroma_mae": 0.008054514415562153,
+        "gradient_mae": 0.01371033675968647,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 53.75282669067383
+      }
+    },
+    {
+      "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+      "condition": "iso12800-prior",
+      "model": "V104-prior-1x",
+      "actual_observation_noise": {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.00256,
+        "read": 2.62144e-05
+      },
+      "variance_multiplier": 1.0,
+      "metrics": {
+        "linear_psnr": 32.37510299682617,
+        "srgb_psnr": 30.087308883666992,
+        "srgb_ssim": 0.9545191526412964,
+        "chroma_mae": 0.008289667777717113,
+        "gradient_mae": 0.03313256427645683,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 43.38580322265625
+      }
+    },
+    {
+      "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+      "condition": "iso12800-prior",
+      "model": "V104-prior-0.5x",
+      "actual_observation_noise": {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.00128,
+        "read": 1.31072e-05
+      },
+      "variance_multiplier": 0.5,
+      "metrics": {
+        "linear_psnr": 32.2193489074707,
+        "srgb_psnr": 29.875301361083984,
+        "srgb_ssim": 0.9544442296028137,
+        "chroma_mae": 0.00834553875029087,
+        "gradient_mae": 0.034052036702632904,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 43.715152740478516
+      }
+    },
+    {
+      "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+      "condition": "iso12800-prior",
+      "model": "V104-prior-0.75x",
+      "actual_observation_noise": {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.0019200000000000003,
+        "read": 1.96608e-05
+      },
+      "variance_multiplier": 0.75,
+      "metrics": {
+        "linear_psnr": 32.337501525878906,
+        "srgb_psnr": 30.034244537353516,
+        "srgb_ssim": 0.9550360441207886,
+        "chroma_mae": 0.008304948918521404,
+        "gradient_mae": 0.0333358570933342,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 43.690853118896484
+      }
+    },
+    {
+      "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+      "condition": "iso12800-prior",
+      "model": "V104-prior-1.25x",
+      "actual_observation_noise": {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.0032,
+        "read": 3.2768e-05
+      },
+      "variance_multiplier": 1.25,
+      "metrics": {
+        "linear_psnr": 32.318172454833984,
+        "srgb_psnr": 30.024864196777344,
+        "srgb_ssim": 0.9527598023414612,
+        "chroma_mae": 0.008286629803478718,
+        "gradient_mae": 0.03347112238407135,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 42.844749450683594
+      }
+    },
+    {
+      "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+      "condition": "adc-only",
+      "model": "V104-prior-1x",
+      "actual_observation_noise": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.0,
+        "read": 0.0
+      },
+      "variance_multiplier": 1.0,
+      "metrics": {
+        "linear_psnr": 47.354312896728516,
+        "srgb_psnr": 42.55352020263672,
+        "srgb_ssim": 0.9919685125350952,
+        "chroma_mae": 0.0026699535083025694,
+        "gradient_mae": 0.003880167845636606,
+        "highlight_boundary_chroma_mae": 0.01468387246131897,
+        "highlight_boundary_rgb_mae": 0.01321545708924532,
+        "shadow_linear_psnr": 62.54583740234375
+      }
+    },
+    {
+      "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+      "condition": "adc-only",
+      "model": "V104-prior-0.5x",
+      "actual_observation_noise": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.0,
+        "read": 0.0
+      },
+      "variance_multiplier": 0.5,
+      "metrics": {
+        "linear_psnr": 47.354312896728516,
+        "srgb_psnr": 42.55352020263672,
+        "srgb_ssim": 0.9919685125350952,
+        "chroma_mae": 0.0026699535083025694,
+        "gradient_mae": 0.003880167845636606,
+        "highlight_boundary_chroma_mae": 0.01468387246131897,
+        "highlight_boundary_rgb_mae": 0.01321545708924532,
+        "shadow_linear_psnr": 62.54583740234375
+      }
+    },
+    {
+      "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+      "condition": "adc-only",
+      "model": "V104-prior-0.75x",
+      "actual_observation_noise": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.0,
+        "read": 0.0
+      },
+      "variance_multiplier": 0.75,
+      "metrics": {
+        "linear_psnr": 47.354312896728516,
+        "srgb_psnr": 42.55352020263672,
+        "srgb_ssim": 0.9919685125350952,
+        "chroma_mae": 0.0026699535083025694,
+        "gradient_mae": 0.003880167845636606,
+        "highlight_boundary_chroma_mae": 0.01468387246131897,
+        "highlight_boundary_rgb_mae": 0.01321545708924532,
+        "shadow_linear_psnr": 62.54583740234375
+      }
+    },
+    {
+      "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+      "condition": "adc-only",
+      "model": "V104-prior-1.25x",
+      "actual_observation_noise": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.0,
+        "read": 0.0
+      },
+      "variance_multiplier": 1.25,
+      "metrics": {
+        "linear_psnr": 47.354312896728516,
+        "srgb_psnr": 42.55352020263672,
+        "srgb_ssim": 0.9919685125350952,
+        "chroma_mae": 0.0026699535083025694,
+        "gradient_mae": 0.003880167845636606,
+        "highlight_boundary_chroma_mae": 0.01468387246131897,
+        "highlight_boundary_rgb_mae": 0.01321545708924532,
+        "shadow_linear_psnr": 62.54583740234375
+      }
+    },
+    {
+      "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+      "condition": "iso100-prior",
+      "model": "V104-prior-1x",
+      "actual_observation_noise": {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 2e-05,
+        "read": 1.6e-09
+      },
+      "variance_multiplier": 1.0,
+      "metrics": {
+        "linear_psnr": 46.724578857421875,
+        "srgb_psnr": 43.97174072265625,
+        "srgb_ssim": 0.9911625981330872,
+        "chroma_mae": 0.002466683741658926,
+        "gradient_mae": 0.003838646225631237,
+        "highlight_boundary_chroma_mae": 0.014560381881892681,
+        "highlight_boundary_rgb_mae": 0.013638726435601711,
+        "shadow_linear_psnr": 66.58736419677734
+      }
+    },
+    {
+      "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+      "condition": "iso100-prior",
+      "model": "V104-prior-0.5x",
+      "actual_observation_noise": {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 1e-05,
+        "read": 8e-10
+      },
+      "variance_multiplier": 0.5,
+      "metrics": {
+        "linear_psnr": 46.727481842041016,
+        "srgb_psnr": 43.96708679199219,
+        "srgb_ssim": 0.9911779165267944,
+        "chroma_mae": 0.002455006819218397,
+        "gradient_mae": 0.0038510423619300127,
+        "highlight_boundary_chroma_mae": 0.014609581790864468,
+        "highlight_boundary_rgb_mae": 0.013679911382496357,
+        "shadow_linear_psnr": 66.44509887695312
+      }
+    },
+    {
+      "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+      "condition": "iso100-prior",
+      "model": "V104-prior-0.75x",
+      "actual_observation_noise": {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 1.5000000000000002e-05,
+        "read": 1.2e-09
+      },
+      "variance_multiplier": 0.75,
+      "metrics": {
+        "linear_psnr": 46.734737396240234,
+        "srgb_psnr": 43.97517776489258,
+        "srgb_ssim": 0.9912100434303284,
+        "chroma_mae": 0.0024607470259070396,
+        "gradient_mae": 0.0038351821713149548,
+        "highlight_boundary_chroma_mae": 0.014582609757781029,
+        "highlight_boundary_rgb_mae": 0.013655281625688076,
+        "shadow_linear_psnr": 66.56568145751953
+      }
+    },
+    {
+      "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+      "condition": "iso100-prior",
+      "model": "V104-prior-1.25x",
+      "actual_observation_noise": {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 2.5e-05,
+        "read": 2e-09
+      },
+      "variance_multiplier": 1.25,
+      "metrics": {
+        "linear_psnr": 46.701560974121094,
+        "srgb_psnr": 43.96379470825195,
+        "srgb_ssim": 0.9910839796066284,
+        "chroma_mae": 0.0024718400090932846,
+        "gradient_mae": 0.0038505690172314644,
+        "highlight_boundary_chroma_mae": 0.014539222232997417,
+        "highlight_boundary_rgb_mae": 0.013625247403979301,
+        "shadow_linear_psnr": 66.58232116699219
+      }
+    },
+    {
+      "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+      "condition": "iso12800-prior",
+      "model": "V104-prior-1x",
+      "actual_observation_noise": {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.00256,
+        "read": 2.62144e-05
+      },
+      "variance_multiplier": 1.0,
+      "metrics": {
+        "linear_psnr": 39.87361526489258,
+        "srgb_psnr": 38.9333381652832,
+        "srgb_ssim": 0.9700043201446533,
+        "chroma_mae": 0.003178616985678673,
+        "gradient_mae": 0.0064362226985394955,
+        "highlight_boundary_chroma_mae": 0.021263113245368004,
+        "highlight_boundary_rgb_mae": 0.022082988172769547,
+        "shadow_linear_psnr": 60.22335433959961
+      }
+    },
+    {
+      "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+      "condition": "iso12800-prior",
+      "model": "V104-prior-0.5x",
+      "actual_observation_noise": {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.00128,
+        "read": 1.31072e-05
+      },
+      "variance_multiplier": 0.5,
+      "metrics": {
+        "linear_psnr": 35.02354431152344,
+        "srgb_psnr": 33.508819580078125,
+        "srgb_ssim": 0.7785288691520691,
+        "chroma_mae": 0.004040450323373079,
+        "gradient_mae": 0.021444760262966156,
+        "highlight_boundary_chroma_mae": 0.020674873143434525,
+        "highlight_boundary_rgb_mae": 0.023822590708732605,
+        "shadow_linear_psnr": 48.331642150878906
+      }
+    },
+    {
+      "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+      "condition": "iso12800-prior",
+      "model": "V104-prior-0.75x",
+      "actual_observation_noise": {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.0019200000000000003,
+        "read": 1.96608e-05
+      },
+      "variance_multiplier": 0.75,
+      "metrics": {
+        "linear_psnr": 38.36246871948242,
+        "srgb_psnr": 38.296173095703125,
+        "srgb_ssim": 0.9533854126930237,
+        "chroma_mae": 0.003226964036002755,
+        "gradient_mae": 0.008041823282837868,
+        "highlight_boundary_chroma_mae": 0.02071940153837204,
+        "highlight_boundary_rgb_mae": 0.022331219166517258,
+        "shadow_linear_psnr": 59.83014678955078
+      }
+    },
+    {
+      "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+      "condition": "iso12800-prior",
+      "model": "V104-prior-1.25x",
+      "actual_observation_noise": {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.0032,
+        "read": 3.2768e-05
+      },
+      "variance_multiplier": 1.25,
+      "metrics": {
+        "linear_psnr": 39.63826370239258,
+        "srgb_psnr": 38.6956787109375,
+        "srgb_ssim": 0.9682642221450806,
+        "chroma_mae": 0.0031665703281760216,
+        "gradient_mae": 0.006563644856214523,
+        "highlight_boundary_chroma_mae": 0.0219363234937191,
+        "highlight_boundary_rgb_mae": 0.022735722362995148,
+        "shadow_linear_psnr": 59.77490997314453
+      }
+    },
+    {
+      "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+      "condition": "adc-only",
+      "model": "V104-prior-1x",
+      "actual_observation_noise": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.0,
+        "read": 0.0
+      },
+      "variance_multiplier": 1.0,
+      "metrics": {
+        "linear_psnr": 46.91539764404297,
+        "srgb_psnr": 37.420440673828125,
+        "srgb_ssim": 0.9764306545257568,
+        "chroma_mae": 0.006322507280856371,
+        "gradient_mae": 0.012209584936499596,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 52.36534881591797
+      }
+    },
+    {
+      "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+      "condition": "adc-only",
+      "model": "V104-prior-0.5x",
+      "actual_observation_noise": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.0,
+        "read": 0.0
+      },
+      "variance_multiplier": 0.5,
+      "metrics": {
+        "linear_psnr": 46.91539764404297,
+        "srgb_psnr": 37.420440673828125,
+        "srgb_ssim": 0.9764306545257568,
+        "chroma_mae": 0.006322507280856371,
+        "gradient_mae": 0.012209584936499596,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 52.36534881591797
+      }
+    },
+    {
+      "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+      "condition": "adc-only",
+      "model": "V104-prior-0.75x",
+      "actual_observation_noise": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.0,
+        "read": 0.0
+      },
+      "variance_multiplier": 0.75,
+      "metrics": {
+        "linear_psnr": 46.91539764404297,
+        "srgb_psnr": 37.420440673828125,
+        "srgb_ssim": 0.9764306545257568,
+        "chroma_mae": 0.006322507280856371,
+        "gradient_mae": 0.012209584936499596,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 52.36534881591797
+      }
+    },
+    {
+      "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+      "condition": "adc-only",
+      "model": "V104-prior-1.25x",
+      "actual_observation_noise": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.0,
+        "read": 0.0
+      },
+      "variance_multiplier": 1.25,
+      "metrics": {
+        "linear_psnr": 46.91539764404297,
+        "srgb_psnr": 37.420440673828125,
+        "srgb_ssim": 0.9764306545257568,
+        "chroma_mae": 0.006322507280856371,
+        "gradient_mae": 0.012209584936499596,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 52.36534881591797
+      }
+    },
+    {
+      "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+      "condition": "iso100-prior",
+      "model": "V104-prior-1x",
+      "actual_observation_noise": {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 2e-05,
+        "read": 1.6e-09
+      },
+      "variance_multiplier": 1.0,
+      "metrics": {
+        "linear_psnr": 48.08755874633789,
+        "srgb_psnr": 39.728450775146484,
+        "srgb_ssim": 0.9852051138877869,
+        "chroma_mae": 0.005188490729779005,
+        "gradient_mae": 0.00950644537806511,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 57.43471145629883
+      }
+    },
+    {
+      "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+      "condition": "iso100-prior",
+      "model": "V104-prior-0.5x",
+      "actual_observation_noise": {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 1e-05,
+        "read": 8e-10
+      },
+      "variance_multiplier": 0.5,
+      "metrics": {
+        "linear_psnr": 48.081787109375,
+        "srgb_psnr": 39.7139778137207,
+        "srgb_ssim": 0.985243558883667,
+        "chroma_mae": 0.005224957130849361,
+        "gradient_mae": 0.00948115810751915,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 57.44886779785156
+      }
+    },
+    {
+      "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+      "condition": "iso100-prior",
+      "model": "V104-prior-0.75x",
+      "actual_observation_noise": {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 1.5000000000000002e-05,
+        "read": 1.2e-09
+      },
+      "variance_multiplier": 0.75,
+      "metrics": {
+        "linear_psnr": 48.08725357055664,
+        "srgb_psnr": 39.72367477416992,
+        "srgb_ssim": 0.9852332472801208,
+        "chroma_mae": 0.005204031243920326,
+        "gradient_mae": 0.009492306038737297,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 57.441978454589844
+      }
+    },
+    {
+      "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+      "condition": "iso100-prior",
+      "model": "V104-prior-1.25x",
+      "actual_observation_noise": {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 2.5e-05,
+        "read": 2e-09
+      },
+      "variance_multiplier": 1.25,
+      "metrics": {
+        "linear_psnr": 48.084564208984375,
+        "srgb_psnr": 39.73015594482422,
+        "srgb_ssim": 0.9851655960083008,
+        "chroma_mae": 0.005176093429327011,
+        "gradient_mae": 0.009522536769509315,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 57.426395416259766
+      }
+    },
+    {
+      "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+      "condition": "iso12800-prior",
+      "model": "V104-prior-1x",
+      "actual_observation_noise": {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.00256,
+        "read": 2.62144e-05
+      },
+      "variance_multiplier": 1.0,
+      "metrics": {
+        "linear_psnr": 39.548744201660156,
+        "srgb_psnr": 30.9049015045166,
+        "srgb_ssim": 0.8573216199874878,
+        "chroma_mae": 0.006889617536216974,
+        "gradient_mae": 0.026994116604328156,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 45.97221755981445
+      }
+    },
+    {
+      "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+      "condition": "iso12800-prior",
+      "model": "V104-prior-0.5x",
+      "actual_observation_noise": {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.00128,
+        "read": 1.31072e-05
+      },
+      "variance_multiplier": 0.5,
+      "metrics": {
+        "linear_psnr": 38.68730545043945,
+        "srgb_psnr": 29.84370231628418,
+        "srgb_ssim": 0.8401247262954712,
+        "chroma_mae": 0.007881893776357174,
+        "gradient_mae": 0.030779866501688957,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 45.226783752441406
+      }
+    },
+    {
+      "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+      "condition": "iso12800-prior",
+      "model": "V104-prior-0.75x",
+      "actual_observation_noise": {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.0019200000000000003,
+        "read": 1.96608e-05
+      },
+      "variance_multiplier": 0.75,
+      "metrics": {
+        "linear_psnr": 39.45865249633789,
+        "srgb_psnr": 30.708799362182617,
+        "srgb_ssim": 0.8617205023765564,
+        "chroma_mae": 0.007266653701663017,
+        "gradient_mae": 0.027402522042393684,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 45.92223358154297
+      }
+    },
+    {
+      "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+      "condition": "iso12800-prior",
+      "model": "V104-prior-1.25x",
+      "actual_observation_noise": {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.0032,
+        "read": 3.2768e-05
+      },
+      "variance_multiplier": 1.25,
+      "metrics": {
+        "linear_psnr": 39.32026290893555,
+        "srgb_psnr": 30.687082290649414,
+        "srgb_ssim": 0.8404641151428223,
+        "chroma_mae": 0.006768369115889072,
+        "gradient_mae": 0.02784413844347,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 45.62038803100586
+      }
+    },
+    {
+      "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+      "condition": "adc-only",
+      "model": "V104-prior-1x",
+      "actual_observation_noise": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.0,
+        "read": 0.0
+      },
+      "variance_multiplier": 1.0,
+      "metrics": {
+        "linear_psnr": 50.2717399597168,
+        "srgb_psnr": 42.463905334472656,
+        "srgb_ssim": 0.9888021945953369,
+        "chroma_mae": 0.00402289442718029,
+        "gradient_mae": 0.006407748907804489,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 61.179840087890625
+      }
+    },
+    {
+      "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+      "condition": "adc-only",
+      "model": "V104-prior-0.5x",
+      "actual_observation_noise": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.0,
+        "read": 0.0
+      },
+      "variance_multiplier": 0.5,
+      "metrics": {
+        "linear_psnr": 50.2717399597168,
+        "srgb_psnr": 42.463905334472656,
+        "srgb_ssim": 0.9888021945953369,
+        "chroma_mae": 0.00402289442718029,
+        "gradient_mae": 0.006407748907804489,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 61.179840087890625
+      }
+    },
+    {
+      "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+      "condition": "adc-only",
+      "model": "V104-prior-0.75x",
+      "actual_observation_noise": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.0,
+        "read": 0.0
+      },
+      "variance_multiplier": 0.75,
+      "metrics": {
+        "linear_psnr": 50.2717399597168,
+        "srgb_psnr": 42.463905334472656,
+        "srgb_ssim": 0.9888021945953369,
+        "chroma_mae": 0.00402289442718029,
+        "gradient_mae": 0.006407748907804489,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 61.179840087890625
+      }
+    },
+    {
+      "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+      "condition": "adc-only",
+      "model": "V104-prior-1.25x",
+      "actual_observation_noise": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.0,
+        "read": 0.0
+      },
+      "variance_multiplier": 1.25,
+      "metrics": {
+        "linear_psnr": 50.2717399597168,
+        "srgb_psnr": 42.463905334472656,
+        "srgb_ssim": 0.9888021945953369,
+        "chroma_mae": 0.00402289442718029,
+        "gradient_mae": 0.006407748907804489,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 61.179840087890625
+      }
+    },
+    {
+      "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+      "condition": "iso100-prior",
+      "model": "V104-prior-1x",
+      "actual_observation_noise": {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 2e-05,
+        "read": 1.6e-09
+      },
+      "variance_multiplier": 1.0,
+      "metrics": {
+        "linear_psnr": 50.111793518066406,
+        "srgb_psnr": 42.71174621582031,
+        "srgb_ssim": 0.9885014891624451,
+        "chroma_mae": 0.0038021893706172705,
+        "gradient_mae": 0.006302152760326862,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 62.15544891357422
+      }
+    },
+    {
+      "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+      "condition": "iso100-prior",
+      "model": "V104-prior-0.5x",
+      "actual_observation_noise": {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 1e-05,
+        "read": 8e-10
+      },
+      "variance_multiplier": 0.5,
+      "metrics": {
+        "linear_psnr": 50.085113525390625,
+        "srgb_psnr": 42.685585021972656,
+        "srgb_ssim": 0.9883643388748169,
+        "chroma_mae": 0.0038009777199476957,
+        "gradient_mae": 0.006342983804643154,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 62.14895248413086
+      }
+    },
+    {
+      "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+      "condition": "iso100-prior",
+      "model": "V104-prior-0.75x",
+      "actual_observation_noise": {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 1.5000000000000002e-05,
+        "read": 1.2e-09
+      },
+      "variance_multiplier": 0.75,
+      "metrics": {
+        "linear_psnr": 50.101806640625,
+        "srgb_psnr": 42.70154571533203,
+        "srgb_ssim": 0.9884566068649292,
+        "chroma_mae": 0.0038013001903891563,
+        "gradient_mae": 0.006317632272839546,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 62.15572738647461
+      }
+    },
+    {
+      "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+      "condition": "iso100-prior",
+      "model": "V104-prior-1.25x",
+      "actual_observation_noise": {
+        "name": "iso100-prior",
+        "shot": 2e-05,
+        "read": 1.6e-09,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 2.5e-05,
+        "read": 2e-09
+      },
+      "variance_multiplier": 1.25,
+      "metrics": {
+        "linear_psnr": 50.1167106628418,
+        "srgb_psnr": 42.71760559082031,
+        "srgb_ssim": 0.9885138869285583,
+        "chroma_mae": 0.0038033972959965467,
+        "gradient_mae": 0.006293588317930698,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 62.149024963378906
+      }
+    },
+    {
+      "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+      "condition": "iso12800-prior",
+      "model": "V104-prior-1x",
+      "actual_observation_noise": {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.00256,
+        "read": 2.62144e-05
+      },
+      "variance_multiplier": 1.0,
+      "metrics": {
+        "linear_psnr": 42.08214569091797,
+        "srgb_psnr": 34.046443939208984,
+        "srgb_ssim": 0.9153125286102295,
+        "chroma_mae": 0.005720025859773159,
+        "gradient_mae": 0.01460118405520916,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 49.90987777709961
+      }
+    },
+    {
+      "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+      "condition": "iso12800-prior",
+      "model": "V104-prior-0.5x",
+      "actual_observation_noise": {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.00128,
+        "read": 1.31072e-05
+      },
+      "variance_multiplier": 0.5,
+      "metrics": {
+        "linear_psnr": 39.756385803222656,
+        "srgb_psnr": 31.061431884765625,
+        "srgb_ssim": 0.8136786222457886,
+        "chroma_mae": 0.006514830514788628,
+        "gradient_mae": 0.025103915482759476,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 47.151275634765625
+      }
+    },
+    {
+      "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+      "condition": "iso12800-prior",
+      "model": "V104-prior-0.75x",
+      "actual_observation_noise": {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.0019200000000000003,
+        "read": 1.96608e-05
+      },
+      "variance_multiplier": 0.75,
+      "metrics": {
+        "linear_psnr": 41.69347381591797,
+        "srgb_psnr": 33.3145866394043,
+        "srgb_ssim": 0.8966982960700989,
+        "chroma_mae": 0.0059991637244820595,
+        "gradient_mae": 0.01648799329996109,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 49.283939361572266
+      }
+    },
+    {
+      "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+      "condition": "iso12800-prior",
+      "model": "V104-prior-1.25x",
+      "actual_observation_noise": {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      "effective_conditioning": {
+        "shot": 0.0032,
+        "read": 3.2768e-05
+      },
+      "variance_multiplier": 1.25,
+      "metrics": {
+        "linear_psnr": 41.95100784301758,
+        "srgb_psnr": 33.953025817871094,
+        "srgb_ssim": 0.909908652305603,
+        "chroma_mae": 0.005712441168725491,
+        "gradient_mae": 0.014774554409086704,
+        "highlight_boundary_chroma_mae": null,
+        "highlight_boundary_rgb_mae": null,
+        "shadow_linear_psnr": 49.60955047607422
+      }
+    }
+  ],
+  "means": [
+    {
+      "model": "V104-prior-1x",
+      "variance_multiplier": 1.0,
+      "condition": "adc-only",
+      "sources": 4,
+      "metrics": {
+        "linear_psnr": 46.01799011230469,
+        "srgb_psnr": 39.49290466308594,
+        "srgb_ssim": 0.9868621677160263,
+        "chroma_mae": 0.005511697439942509,
+        "gradient_mae": 0.009502719272859395,
+        "highlight_boundary_chroma_mae": 0.01468387246131897,
+        "highlight_boundary_rgb_mae": 0.01321545708924532,
+        "shadow_linear_psnr": 55.69151592254639
+      }
+    },
+    {
+      "model": "V104-prior-1x",
+      "variance_multiplier": 1.0,
+      "condition": "iso100-prior",
+      "sources": 4,
+      "metrics": {
+        "linear_psnr": 46.191731452941895,
+        "srgb_psnr": 40.804935455322266,
+        "srgb_ssim": 0.9891648590564728,
+        "chroma_mae": 0.004878709267359227,
+        "gradient_mae": 0.008339698426425457,
+        "highlight_boundary_chroma_mae": 0.014560381881892681,
+        "highlight_boundary_rgb_mae": 0.013638726435601711,
+        "shadow_linear_psnr": 59.98881244659424
+      }
+    },
+    {
+      "model": "V104-prior-1x",
+      "variance_multiplier": 1.0,
+      "condition": "iso12800-prior",
+      "sources": 4,
+      "metrics": {
+        "linear_psnr": 38.46990203857422,
+        "srgb_psnr": 33.492998123168945,
+        "srgb_ssim": 0.9242894053459167,
+        "chroma_mae": 0.00601948203984648,
+        "gradient_mae": 0.02029102190863341,
+        "highlight_boundary_chroma_mae": 0.021263113245368004,
+        "highlight_boundary_rgb_mae": 0.022082988172769547,
+        "shadow_linear_psnr": 49.87281322479248
+      }
+    },
+    {
+      "model": "V104-prior-0.5x",
+      "variance_multiplier": 0.5,
+      "condition": "adc-only",
+      "sources": 4,
+      "metrics": {
+        "linear_psnr": 46.01799011230469,
+        "srgb_psnr": 39.49290466308594,
+        "srgb_ssim": 0.9868621677160263,
+        "chroma_mae": 0.005511697439942509,
+        "gradient_mae": 0.009502719272859395,
+        "highlight_boundary_chroma_mae": 0.01468387246131897,
+        "highlight_boundary_rgb_mae": 0.01321545708924532,
+        "shadow_linear_psnr": 55.69151592254639
+      }
+    },
+    {
+      "model": "V104-prior-0.5x",
+      "variance_multiplier": 0.5,
+      "condition": "iso100-prior",
+      "sources": 4,
+      "metrics": {
+        "linear_psnr": 46.184059143066406,
+        "srgb_psnr": 40.79216480255127,
+        "srgb_ssim": 0.989144429564476,
+        "chroma_mae": 0.004886363458354026,
+        "gradient_mae": 0.008347568160388619,
+        "highlight_boundary_chroma_mae": 0.014609581790864468,
+        "highlight_boundary_rgb_mae": 0.013679911382496357,
+        "shadow_linear_psnr": 59.97152042388916
+      }
+    },
+    {
+      "model": "V104-prior-0.5x",
+      "variance_multiplier": 0.5,
+      "condition": "iso12800-prior",
+      "sources": 4,
+      "metrics": {
+        "linear_psnr": 36.42164611816406,
+        "srgb_psnr": 31.07231378555298,
+        "srgb_ssim": 0.8466941118240356,
+        "chroma_mae": 0.006695678341202438,
+        "gradient_mae": 0.027845144737511873,
+        "highlight_boundary_chroma_mae": 0.020674873143434525,
+        "highlight_boundary_rgb_mae": 0.023822590708732605,
+        "shadow_linear_psnr": 46.10621356964111
+      }
+    },
+    {
+      "model": "V104-prior-0.75x",
+      "variance_multiplier": 0.75,
+      "condition": "adc-only",
+      "sources": 4,
+      "metrics": {
+        "linear_psnr": 46.01799011230469,
+        "srgb_psnr": 39.49290466308594,
+        "srgb_ssim": 0.9868621677160263,
+        "chroma_mae": 0.005511697439942509,
+        "gradient_mae": 0.009502719272859395,
+        "highlight_boundary_chroma_mae": 0.01468387246131897,
+        "highlight_boundary_rgb_mae": 0.01321545708924532,
+        "shadow_linear_psnr": 55.69151592254639
+      }
+    },
+    {
+      "model": "V104-prior-0.75x",
+      "variance_multiplier": 0.75,
+      "condition": "iso100-prior",
+      "sources": 4,
+      "metrics": {
+        "linear_psnr": 46.19159507751465,
+        "srgb_psnr": 40.80140781402588,
+        "srgb_ssim": 0.9891727268695831,
+        "chroma_mae": 0.004881717264652252,
+        "gradient_mae": 0.008339542080648243,
+        "highlight_boundary_chroma_mae": 0.014582609757781029,
+        "highlight_boundary_rgb_mae": 0.013655281625688076,
+        "shadow_linear_psnr": 59.992584228515625
+      }
+    },
+    {
+      "model": "V104-prior-0.75x",
+      "variance_multiplier": 0.75,
+      "condition": "iso12800-prior",
+      "sources": 4,
+      "metrics": {
+        "linear_psnr": 37.9630241394043,
+        "srgb_psnr": 33.08845090866089,
+        "srgb_ssim": 0.9167100638151169,
+        "chroma_mae": 0.006199432595167309,
+        "gradient_mae": 0.02131704892963171,
+        "highlight_boundary_chroma_mae": 0.02071940153837204,
+        "highlight_boundary_rgb_mae": 0.022331219166517258,
+        "shadow_linear_psnr": 49.681793212890625
+      }
+    },
+    {
+      "model": "V104-prior-1.25x",
+      "variance_multiplier": 1.25,
+      "condition": "adc-only",
+      "sources": 4,
+      "metrics": {
+        "linear_psnr": 46.01799011230469,
+        "srgb_psnr": 39.49290466308594,
+        "srgb_ssim": 0.9868621677160263,
+        "chroma_mae": 0.005511697439942509,
+        "gradient_mae": 0.009502719272859395,
+        "highlight_boundary_chroma_mae": 0.01468387246131897,
+        "highlight_boundary_rgb_mae": 0.01321545708924532,
+        "shadow_linear_psnr": 55.69151592254639
+      }
+    },
+    {
+      "model": "V104-prior-1.25x",
+      "variance_multiplier": 1.25,
+      "condition": "iso100-prior",
+      "sources": 4,
+      "metrics": {
+        "linear_psnr": 46.18652629852295,
+        "srgb_psnr": 40.80539035797119,
+        "srgb_ssim": 0.9891383051872253,
+        "chroma_mae": 0.004876461287494749,
+        "gradient_mae": 0.008344257716089487,
+        "highlight_boundary_chroma_mae": 0.014539222232997417,
+        "highlight_boundary_rgb_mae": 0.013625247403979301,
+        "shadow_linear_psnr": 59.97764205932617
+      }
+    },
+    {
+      "model": "V104-prior-1.25x",
+      "variance_multiplier": 1.25,
+      "condition": "iso12800-prior",
+      "sources": 4,
+      "metrics": {
+        "linear_psnr": 38.30692672729492,
+        "srgb_psnr": 33.34016275405884,
+        "srgb_ssim": 0.9178491979837418,
+        "chroma_mae": 0.005983502604067326,
+        "gradient_mae": 0.020663365023210645,
+        "highlight_boundary_chroma_mae": 0.0219363234937191,
+        "highlight_boundary_rgb_mae": 0.022735722362995148,
+        "shadow_linear_psnr": 49.46239948272705
+      }
+    }
+  ],
+  "spectral_design": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-conditioning-probe-CPU-v1/spectral-design.json",
+    "sha256": "cf95bf2c9c916fb16f96656a32a85bda5d1040d4da5a0b1bf168b7242a2fe311"
+  },
+  "spectral_analysis": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-conditioning-probe-CPU-v1/spectral-analysis-v1.json",
+    "sha256": "2d34654ce8e4b7dee4f7e68cbd118edb5e297d0dfb48de7cadc6d8ce4f6fc5c0"
+  },
+  "spectral_means": [
+    {
+      "model": "V104-prior-1x",
+      "variance_multiplier": 1.0,
+      "condition": "adc-only",
+      "sources": 4,
+      "GT_projected_band_gain": 0.9916643347498947,
+      "off_target_band_RMS_sRGB_luma": 0.0012131915176075286,
+      "GT_band_RMS_sRGB_luma": 0.025414246237489883
+    },
+    {
+      "model": "V104-prior-1x",
+      "variance_multiplier": 1.0,
+      "condition": "iso100-prior",
+      "sources": 4,
+      "GT_projected_band_gain": 0.9988285025200293,
+      "off_target_band_RMS_sRGB_luma": 0.0009685855748745642,
+      "GT_band_RMS_sRGB_luma": 0.025414246237489883
+    },
+    {
+      "model": "V104-prior-1x",
+      "variance_multiplier": 1.0,
+      "condition": "iso12800-prior",
+      "sources": 4,
+      "GT_projected_band_gain": 0.9650877268461897,
+      "off_target_band_RMS_sRGB_luma": 0.004276492315754513,
+      "GT_band_RMS_sRGB_luma": 0.025414246237489883
+    },
+    {
+      "model": "V104-prior-0.5x",
+      "variance_multiplier": 0.5,
+      "condition": "adc-only",
+      "sources": 4,
+      "GT_projected_band_gain": 0.9916643347498947,
+      "off_target_band_RMS_sRGB_luma": 0.0012131915176075286,
+      "GT_band_RMS_sRGB_luma": 0.025414246237489883
+    },
+    {
+      "model": "V104-prior-0.5x",
+      "variance_multiplier": 0.5,
+      "condition": "iso100-prior",
+      "sources": 4,
+      "GT_projected_band_gain": 0.9994243975483971,
+      "off_target_band_RMS_sRGB_luma": 0.0009725972769001014,
+      "GT_band_RMS_sRGB_luma": 0.025414246237489883
+    },
+    {
+      "model": "V104-prior-0.5x",
+      "variance_multiplier": 0.5,
+      "condition": "iso12800-prior",
+      "sources": 4,
+      "GT_projected_band_gain": 0.9876047221508132,
+      "off_target_band_RMS_sRGB_luma": 0.004955457275191059,
+      "GT_band_RMS_sRGB_luma": 0.025414246237489883
+    },
+    {
+      "model": "V104-prior-0.75x",
+      "variance_multiplier": 0.75,
+      "condition": "adc-only",
+      "sources": 4,
+      "GT_projected_band_gain": 0.9916643347498947,
+      "off_target_band_RMS_sRGB_luma": 0.0012131915176075286,
+      "GT_band_RMS_sRGB_luma": 0.025414246237489883
+    },
+    {
+      "model": "V104-prior-0.75x",
+      "variance_multiplier": 0.75,
+      "condition": "iso100-prior",
+      "sources": 4,
+      "GT_projected_band_gain": 0.9990822264299296,
+      "off_target_band_RMS_sRGB_luma": 0.0009697120091546787,
+      "GT_band_RMS_sRGB_luma": 0.025414246237489883
+    },
+    {
+      "model": "V104-prior-0.75x",
+      "variance_multiplier": 0.75,
+      "condition": "iso12800-prior",
+      "sources": 4,
+      "GT_projected_band_gain": 0.9766444924246436,
+      "off_target_band_RMS_sRGB_luma": 0.004428251550865409,
+      "GT_band_RMS_sRGB_luma": 0.025414246237489883
+    },
+    {
+      "model": "V104-prior-1.25x",
+      "variance_multiplier": 1.25,
+      "condition": "adc-only",
+      "sources": 4,
+      "GT_projected_band_gain": 0.9916643347498947,
+      "off_target_band_RMS_sRGB_luma": 0.0012131915176075286,
+      "GT_band_RMS_sRGB_luma": 0.025414246237489883
+    },
+    {
+      "model": "V104-prior-1.25x",
+      "variance_multiplier": 1.25,
+      "condition": "iso100-prior",
+      "sources": 4,
+      "GT_projected_band_gain": 0.9986185771418136,
+      "off_target_band_RMS_sRGB_luma": 0.0009682109452171584,
+      "GT_band_RMS_sRGB_luma": 0.025414246237489883
+    },
+    {
+      "model": "V104-prior-1.25x",
+      "variance_multiplier": 1.25,
+      "condition": "iso12800-prior",
+      "sources": 4,
+      "GT_projected_band_gain": 0.9535152849349,
+      "off_target_band_RMS_sRGB_luma": 0.0042650537662231565,
+      "GT_band_RMS_sRGB_luma": 0.025414246237489883
+    }
+  ],
+  "independent_score_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-conditioning-probe-CPU-v1/independent-audit.json",
+    "sha256": "787196bf48e4650f18e1791238c79fe6a5bff9b1bf20d23ebd88b2fd7a81eb0b"
+  },
+  "galleries": [
+    {
+      "slug": "iso100-prior",
+      "manifest": {
+        "path": "/home/dllu/proj/demosaic/docs/images/conditioning-v104/iso100-prior/manifest.json",
+        "sha256": "ac3f5a1a44ff3e2da3ebc2a30927e5acf680c2e3b7d58d7f8c94cbfb5f9e343c"
+      },
+      "board": {
+        "path": "/home/dllu/proj/demosaic/docs/images/conditioning-v104/iso100-prior/comparison.png",
+        "sha256": "f893920d1b77a2b1caba979b30cf2249f54754fd3b6381ddaa90379a6e2f8286"
+      },
+      "board_receipt": {
+        "path": "/home/dllu/proj/demosaic/docs/images/conditioning-v104/iso100-prior/comparison.json",
+        "sha256": "7095c83f8a47d06b6b6e0fdee5019b59b149e8e301d1d9e8f427be5d0ba31004"
+      },
+      "native_cells": 12,
+      "native_triplets": 8,
+      "native160_cells_actually_viewed": 12
+    },
+    {
+      "slug": "iso12800-prior",
+      "manifest": {
+        "path": "/home/dllu/proj/demosaic/docs/images/conditioning-v104/iso12800-prior/manifest.json",
+        "sha256": "3e8ff0fcbfd787206cdfe61db0356a59e980853aa0495f9e480da03a002564ce"
+      },
+      "board": {
+        "path": "/home/dllu/proj/demosaic/docs/images/conditioning-v104/iso12800-prior/comparison.png",
+        "sha256": "e847f353057731779181b5d200ac6dc95c0f23b8cc0cefe74fbdcb93dc19aa44"
+      },
+      "board_receipt": {
+        "path": "/home/dllu/proj/demosaic/docs/images/conditioning-v104/iso12800-prior/comparison.json",
+        "sha256": "0dbe7edb911716609d0fbd4b60aa90266e2f8f9f3bea023ff20090dbf48aab8e"
+      },
+      "native_cells": 24,
+      "native_triplets": 16,
+      "native160_cells_actually_viewed": 24
+    }
+  ],
+  "baseline12_scores_and_nativePNGs_exact": true,
+  "ADC_predictions_identical_all4factors": true,
+  "actual_DINO_calls": 48,
+  "EMA_tensors_exact": 91,
+  "weights_DINO_config_parameter_ids_inputs_and_Torch_RNG_unchanged": true,
+  "native160_unique_cells_actually_viewed": 36,
+  "public_native_triplets": 24,
+  "production_default_unchanged": true,
+  "scope": "V104 final20000 fixed-weight CPU IEEE FP32 probe on twelve saved heldout observations, four strengths1/.5/.75/1.25 scaling shot/read variance and variance map. Physical noisy/target arrays and display are unchanged; mismatched conditioning is explicit. Exact synthetic GT, native160. Require all12 original V104 scores and PNGs to replay, all ADC strengths bit-identical, 48 actual DINO-backed forwards and original91 EMA exact. No training, checkpoint/default change, new data/noise draw or full427 claim.",
+  "native_findings": "Low-noise bark/canopy remain close. Lower conditioning retains more fine structure in high-noise canopy/fur and more grain, especially flat feathers/background; higher conditioning smooths fine detail. Lower strengths recover additional GT-correlated band signal and additional off-target energy. These four contexts do not establish a generally better prior or model."
+}

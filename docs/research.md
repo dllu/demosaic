@@ -10,14 +10,20 @@ and the [active loss-scale trial](loss-scale-training.md).
 The literature/design record below explains the explored approaches; its older
 study decisions do not freeze the current architecture or README examples.
 
-Current [V101 path/preview diagnostics](noise-conditioning.md#which-path-responds-to-conditioning)
+The current [V104 conditioning study](noise-conditioning.md) repeats the
+fixed-strength comparison on twelve exact-target observations and six standing
+GFX contexts. Lower conditioning retains more fine structure and grain while
+losing high-noise PSNR; the nominal protocol remains unchanged. A local
+same-capture sky check finds noise scale close to the supplied profile.
+
+Earlier [V101 path/preview diagnostics](v101-conditioning-study.md#which-path-responds-to-conditioning)
 make132 actual CPU restorations on the fixed material inputs. Lower CNN sigma
 retains structure and grain while losing high-noise PSNR. Scaling DINO offsets
 or substituting Wiener/self/clean-oracle previews gives no consistent gain.
 This is a fixed-weight result, not a trained-backbone/fusion ablation; the
 unavailable clean-image oracle is never a candidate method. Current quality
-work continues from V102 on the reviewed larger corpus; the fixed V104 endpoint
-has completed its material/detail and full matched evaluation.
+work continues from V104 on the further-cleaned corpus; its fixed endpoint
+has completed its material/detail and full evaluation.
 
 The [larger frozen ConvNeXt check](convnext-small-capacity.md) now pins official
 Small weights and verifies compatible native feature shapes. A direct backbone
@@ -28,7 +34,8 @@ This prepares a later capacity comparison; V104's completed result now informs i
 
 The cleaned 90,864-source Tiny/Small recipes now pass separate eight-update
 CPU and CUDA/native256/B16 checks, with exact initial identities, matching
-observations and finite states. Their production runs await V104 review.
+observations and finite states. Their production runs remain unlaunched while
+V111/V112 has priority; later capacity work can use the best completed initializer.
 The [loss-smoothing diagnostic](loss-smoothing-detail.md) also measures 324
 output gradients on 108 fixed V102 training-source restorations. Smaller epsilon
 strengthens low-noise faint-detail slopes but increases the full gradient more.

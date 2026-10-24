@@ -62,6 +62,11 @@ saturated-sign detail remain weaknesses. The separate
 V102/V104 on six fixed low-ISO regions. Its 24 native cells show little visual
 separation, with no clear overall gain or regression.
 
+The [current conditioning study](noise-conditioning.md) shows more fine
+structure and grain under lower V104 noise priors. All alternative strengths
+lose high-noise PSNR on the four fixed exact-target contexts; the nominal
+protocol remains unchanged. Six native GFX regions show the real-photo tradeoff.
+
 ## Use and next training
 
 Current checkpoint: `/mnt/external/demosaic/models/v104-final20000.pt`.

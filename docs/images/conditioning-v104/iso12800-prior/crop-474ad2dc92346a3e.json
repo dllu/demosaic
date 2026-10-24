@@ -1,0 +1,107 @@
+{
+  "image": "crop-474ad2dc92346a3e.png",
+  "caption": "Subtle white feather texture / iso12800-prior / V104-prior-1x",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Denoised",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "GT (synthetic)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "ff2b78007659e588ab003e4d926db9aa6759ff0173a79c0689c401eb0082df1b",
+  "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+  "source": {
+    "title": "File:Snowy egret in profile.jpg",
+    "page_url": "https://commons.wikimedia.org/wiki/File:Snowy_egret_in_profile.jpg",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/1/12/Snowy_egret_in_profile.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "author": "Serebit",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "attribution": null,
+    "credit": "Own work",
+    "sha1": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+    "sha1_hex": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+    "download_path": "images/14/d8/14d8ea6cea4a27346a643e6d767f800729fb4693.jpg",
+    "width": 6000,
+    "height": 4000,
+    "id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+    "split": "val",
+    "bin_factor": 8,
+    "color_space": "linear-sRGB",
+    "dtype": "uint16",
+    "cache": "/mnt/external/demosaic/commons-v1/images/14/14d8ea6cea4a27346a643e6d767f800729fb4693.npy",
+    "shape": [
+      500,
+      750,
+      3
+    ],
+    "cache_sha256": "76baaa81d4fe8e7ec7f275470d8dd8db9bf3f5ab2f58a1f46e956d31d2ec6aba"
+  },
+  "validation_index": 200,
+  "validation_seed": 42,
+  "evaluation_tile_xywh": [
+    48,
+    48,
+    160,
+    160
+  ],
+  "source_cache_context_xywh": [
+    271,
+    127,
+    256,
+    256
+  ],
+  "condition": {
+    "name": "iso12800-prior",
+    "shot": 0.00256,
+    "read": 2.62144e-05,
+    "exposure": 1.0
+  },
+  "pattern": "RGGB",
+  "model": {
+    "label": "V104-prior-1x",
+    "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+    "source": "/mnt/external/demosaic/models/v104-final20000.pt",
+    "step": 20000,
+    "variance_multiplier": 1.0,
+    "policy": "Scale both declared shot/read coefficients and the input variance map; keep the noisy observations and target unchanged.",
+    "device": "cpu",
+    "compute_precision": "float32",
+    "effective_conditioning": {
+      "shot": 0.00256,
+      "read": 2.62144e-05
+    }
+  },
+  "display_exposure": 1,
+  "reference": "Exact synthetic clean target; observations generated with actual condition, not the conditioning override",
+  "observation": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/heldout-detail-followup-v1/inputs/14d8ea6cea4a27346a643e6d767f800729fb4693-iso12800-prior-RGGB.npz",
+    "sha256": "ef981d8ed4ff42eef04349da3f25bdbc87182a48823ea6eac98c022563568148"
+  },
+  "detail": "Subtle white feather texture",
+  "selection": "Four diverse contexts selected after actually viewing10 clean native256 contexts and their native160 centers, before viewing model outputs on these cases. Bark, white feathers, forest canopy/haze and gray fur. Mixed contrast; selected for fine/weak structures, not global low-contrast labels."
+}

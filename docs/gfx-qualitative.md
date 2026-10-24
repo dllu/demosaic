@@ -77,11 +77,14 @@ separate run. [Older CPU contexts](images/current-gfx/gfx-comparison.png) and
 The latter's single V95 noisy-sky channel differs by1RGB8 level, as recorded
 in its receipt; current pixels are never adjusted for presentation.
 
-The [fixed-V101 conditioning study](noise-conditioning.md#real-gfx-contexts)
+The [current V104 conditioning study](noise-conditioning.md#real-gfx-contexts)
 compares .50/.75/1.00/1.25× variance on the same six cached512 contexts. Lower
-strengths retain more texture and grain; the calibrated1× default is unchanged.
+strengths retain more texture and grain; the nominal1× protocol is unchanged.
+A local sky check finds normalized noise scale close to1, while the exact-target
+contexts show lower high-noise PSNR under the alternative strengths. These
+context results supplement the full-frame comparison above.
 The [Q2,Sony a7RII and GFX50R comparison](cross-camera-qualitative.md) adds six
-low-ISO regions for V100/V102/V103 without a clean reference. The
+low-ISO regions for V102/V104 without a clean reference. The
 [linear DNG/JPEG exporter](dng-export.md) and optional Bayer hot-pixel repair
 are merged; repair is explicit and was off in these comparisons.
 
