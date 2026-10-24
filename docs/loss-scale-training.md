@@ -72,6 +72,15 @@ observations, producing native noisy/restored/exact-GT triplets.
 V112 starts after V111's fixed endpoint. Neither has a completed production
 quality result yet.
 
+An additional [early CPU material queue](results/v111-final20000-early-material-queued-v1.json)
+will review V111's fixed final20k endpoint while V112 trains. It requires the
+original V111 worker to exit and the existing training controller to adopt its
+completed receipt before reading the checkpoint. It uses the same twelve
+cached observations, saves unquantized predictions and native160 triplets,
+and adds no V104 inference. This supplementary review is separate from the
+unchanged full matched evaluation and later four-model material queue; no
+intermediate checkpoint is selected and no quality outcome is available yet.
+
 The first queue stopped before any optimizer update because its controller
 looked for a child field omitted from terminal export status. A new controller
 binds the immutable export-result owner instead. Failed queues and source bytes
