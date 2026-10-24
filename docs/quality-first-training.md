@@ -25,7 +25,10 @@ weak detail, color and native crops on the same observations. Raw loss values
 across epsilon settings use different objectives. V111 completed its original20k
 and [improves all twelve fixed material cases](v111-early-quality.md); real GFX
 changes remain small. Complete camera means change −.01336/+.02006dB known/unseen
-versus V104, with all five unseen scenes improving. V112 has also completed its original20k endpoint; full matched evaluation is running.
+versus V104, with all five unseen scenes improving. V112 has also completed its
+original20k endpoint. Its [material comparison](v111-v112-material.md) improves
+all twelve cases over V104 but looks close to V111, with slightly lower PSNR
+means and mixed structural/color changes. Full matched evaluation is running.
 V111's complete analytic grids improve high-noise color and coarse carriers,
 while ADC flat-color maximum bias rises to 2,143 DN16; finer carriers remain
 weak. The [combined report](v111-early-quality.md#complete-weak-texture-and-flat-color-panels)

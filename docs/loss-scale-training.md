@@ -1,13 +1,16 @@
 # Controlled training test for faint detail
 
 **V111 and V112 completed their original20k endpoints from the same V104 EMA.**
-Full matched GPU evaluation is running; the four-model CPU material report has
-finished computation and awaits actual native review.
+Full matched GPU evaluation is running. The four-model CPU
+[material review is complete](v111-v112-material.md): V112 improves all
+twelve cases over V104, while its condition PSNR means are slightly below V111.
+Native changes are small, and mean gradient errors are slightly lower. Full
+photo/camera/analytic/GFX comparisons remain in progress.
 V111's [early material/GFX review](v111-early-quality.md)
 improves all twelve material cases over V104, with small real-photo changes.
 V111's complete camera panels change −.01336/+.02006dB known/unseen versus V104;
 V111's complete analytic grids show improved coarse carriers/high-noise color
-and a worse ADC flat-bias tail. Full-photo and matched V112 results remain pending.
+and a worse ADC flat-bias tail. Full-photo and remaining matched V112 panels are pending.
 Both keep the same architecture, data, initialization and budget, changing
 only reconstruction Charbonnier epsilon: **.001 versus .0003**. The trial
 started after V104's owned evaluation and full-frame exports finished.

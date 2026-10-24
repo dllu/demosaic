@@ -62,7 +62,9 @@ V104 EMA on the cleaned 90,864-source corpus. Four discarded CPU/CUDA checks
 pass. V111 completed20k and [improves all twelve material cases](v111-early-quality.md),
 with modest native gains and small GFX changes. Its complete camera and analytic
 grids are reviewed: coarse carriers/high-noise color improve, while worst ADC
-bias rises to 2,143 DN16. V112 has also completed20k; full matched evaluation is running.
+bias rises to 2,143 DN16. V112 has also completed20k: its
+[material review](v111-v112-material.md) improves all twelve cases over V104
+but gives no clear native advantage over V111. Full matched evaluation is running.
 
 The source scan covers88,508 training images, with570 actually reviewed and 31
 withheld/excluded. Completed runs used the earlier 24 exclusions; seven more and

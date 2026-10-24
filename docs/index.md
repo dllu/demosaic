@@ -13,6 +13,8 @@ panels](v111-early-quality.md#complete-development-camera-panels) show a small k
 loss and unseen-scene gain. V112 has completed20k with a
 smaller reconstruction loss scale; full matched evaluation is running.
 [Actual trial and evidence](loss-scale-training.md).
+The [completed material comparison](v111-v112-material.md) shows V112's gains
+over V104 and close, mixed changes versus V111; high-noise fine detail remains soft.
 The optional [V104 ADC sites export](adc-consistency.md) adds .2885 dB on the
 complete ADC-only photo panel, with unchanged learned weights and documented
 flat-color tradeoffs.

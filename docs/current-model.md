@@ -115,6 +115,12 @@ V112 has also completed20k, changing only epsilon .001→.0003 under matched
 budgets. Full comparisons are running. [Actual production launch and corrected handoff](results/v104-loss-scale-training-started-v2.json).
 The read-only V111 candidate is `/mnt/external/demosaic/models/v111-final20000.pt`,
 SHA256 `97ab9ca5f1f182ff42a4245c630bba810607a3d13b61cf8aae5842192a18da15`.
+The read-only V112 final20k candidate is
+`/mnt/external/demosaic/models/v112-final20000.pt`, SHA256
+`21c3cca8370df21e3412f9ccbf441c35afcfad8fd03174c7727f4f88874783b1`.
+Its [matched material report](v111-v112-material.md) improves all twelve cases
+over V104 but gives no clear native advantage over V111. Full comparisons
+continue; V111's known camera/color tradeoffs remain documented.
 
 Earlier [V102/V103](v102-v103-quality-review.md),
 [V100/V101](v84-curated-quality-review.md) and

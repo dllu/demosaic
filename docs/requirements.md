@@ -47,7 +47,9 @@ its original20k budget, changing only epsilon .001→.0003; full matched evaluat
 means change −.01336/+.02006dB known/unseen versus V104, with all5 unseen scene
 means improving and persistent local dark-field failures. Complete analytic
 grids improve high-noise color/coarse carriers but raise worst ADC bias to
-2,143 DN16. Full-photo and matched V112 results are pending. Actual CPU/CUDA checks and the corrected production handoff are
+2,143 DN16. The [matched V112 material review](v111-v112-material.md) improves
+all twelve cases over V104 but gives no clear native advantage over V111.
+Full-photo and remaining matched V112 panels are pending. Actual CPU/CUDA checks and the corrected production handoff are
 recorded. The earlier Tiny/Small capacity recipes remain unlaunched and can use
 a better completed initializer later. [Source review](incoming-commons-quality.md) ·
 [Current training](quality-first-training.md).

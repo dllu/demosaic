@@ -14,7 +14,10 @@ carriers and high-noise color, but a worse ADC flat-bias tail.
 [Complete weak-texture/color execution, independent audit and native review](results/v111-texture-color-complete-v1.json).
 The material comparison covers four selected sources, the GFX comparison six
 real contexts and the camera panels all72/90 development crops. The full
-427-photo result and matched V112 comparison remain pending.
+427-photo result and remaining matched V112 panels are pending.
+The [matched material comparison](v111-v112-material.md) is now complete:
+V112 also improves all twelve cases over V104 and looks close to V111, with
+slightly lower condition PSNR means and slightly lower gradient errors.
 
 ## Fixed material observations
 

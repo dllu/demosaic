@@ -19,8 +19,10 @@ Its complete camera panels show −.013/+.020dB known/unseen changes versus V104
 full-photo results remain pending. High-noise flat color improves, while the
 worst ADC flat bias rises to 2,143 DN16; fine 8-pixel texture remains weak. The
 [matched loss-scale test](docs/loss-scale-training.md) uses V104 and 90,864
-cleaned sources; both original20k endpoints have finished and matched evaluation is running. The separate
-[Tiny/Small recipes](docs/convnext-small-capacity.md#prepared-matched-quality-trial)
+cleaned sources; both original20k endpoints have finished and full matched evaluation is running.
+V112 [improves all twelve material cases over V104](docs/v111-v112-material.md),
+but its PSNR means are slightly below V111 and native output looks very close.
+The separate [Tiny/Small recipes](docs/convnext-small-capacity.md#prepared-matched-quality-trial)
 remain prepared. A [training-only feature fit](docs/small-feature-transfer.md)
 now gives Small a closer V104 initializer with learned gates preserved;
 camera gaps and joint training remain.
