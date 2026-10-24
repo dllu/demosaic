@@ -177,6 +177,13 @@ def test_gfx_full_floats_render_common_inputs_and_approximate_reference(tmp_path
     result = gfx_comparison(a, b, "a"*64, "b"*64, output)
     assert result["quality_scores"] is None and result["new_neural_forwards"] == 0
     assert len(result["boards"]) == 2 and len(result["boards"][0]["panels"]) == 12
+    named_output = tmp_path/"tiny-small"
+    named_output.mkdir()
+    named = gfx_comparison(a, b, "a"*64, "b"*64, named_output, labels=("V114 Tiny", "V115 Small"))
+    for original, renamed in zip(result["boards"], named["boards"], strict=True):
+        assert [p["pixel_sha256"] for p in original["panels"]] == [p["pixel_sha256"] for p in renamed["panels"]]
+        assert {p["label"] for p in renamed["panels"]} == {"Noisy", "V114 Tiny", "V115 Small", "ISO100 ref (not GT)"}
+        assert all(source["candidate"]["prediction"]["checkpoint"]["sha256"] == "b"*64 for source in renamed["sources"])
     path = b.parent/"0-reference-rgb.npy"
     reference = np.load(path)
     reference[..., 0, 0] += .01

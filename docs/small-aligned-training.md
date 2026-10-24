@@ -102,16 +102,28 @@ The [old V104-derived CPU check and V113 plan](results/small-aligned-training-qu
 and [intentional idle supersession](results/small-aligned-v113-superseded-v1.json)
 remain preserved. They have no production CUDA updates and are not resumed.
 
-The [retained-prediction endpoint evaluation](quality-prediction-archive.md) is
-has started after the exact training controller exited successfully. It covers the complete
+The [retained-prediction endpoint evaluation](quality-prediction-archive.md)
+started after the exact training controller exited successfully. It covers the complete
 photo/camera/analytic panels, six GFX contexts and complete 102MP exports for
 both new models, reusing existing V112/RawNIND controls. Exact numerical targets
 and native FP32 predictions are retained for independent review without
-repeating model inference. The photographic stage is running under the original
-evaluator owner and frozen source; other declared stages follow.
+repeating model inference. Photo, known-camera and unseen-camera stages have
+completed under the original evaluator owner and frozen source; analytic and
+GFX stages follow. Independent checks and native review remain pending.
 An independent CPU audit is also queued after that exact evaluator. It checks
 the retained numerical panels, source/scene comparisons and color/detail tails,
 and prepares native bark/canopy triplets. Actual photo/GFX viewing follows.
+
+A [direct Tiny-versus-Small comparison](results/v114-v115-matched-review-queued-v1.json)
+is queued after that exact audit exits successfully. It matches all 14,190
+observation pairs by source, noise, targets, masks and display transforms, then
+joins independently rebuilt metrics. Photo differences balance sources; camera
+differences balance captures within scenes, then scenes. It also prepares two
+Small noisy/restored/exact synthetic GT triplets, a matched material board and
+all six native full-frame GFX regions, including foliage and fence. This CPU
+join adds no neural calls, noise draws or RAW decoding. The comparison measures
+the fitted Small transfer method, including its changed initial lateral maps.
+Actual native viewing and a current-model recommendation follow the evidence.
 
 The first CUDA wrapper lacked a multiprocessing main guard. A spawned loader
 re-entered it and failed before the first batch; the root receipt confirms zero

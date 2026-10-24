@@ -1,0 +1,86 @@
+{
+  "status": "queued-CPU-only-matched-Tiny-Small-retained-output-comparison",
+  "recorded_local": "2026-10-24T16:50:58.171566-07:00",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-V115-matched-review-v1/plan-v1.json",
+    "sha256": "5b539f5e703597309a93e8576cfbc67cd691c5f20f3e5ffec42f1526cfdc501e"
+  },
+  "controller": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-V115-matched-review-v1/controller-v1.py",
+    "sha256": "0c8653401fb307f3addc4fbbde3b1eaeddc94135c01c392913ce10730950f78d"
+  },
+  "launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-V115-matched-review-v1/launch-v1.json",
+    "sha256": "013a947a8831d87b8833d2c0186b68cadbf9b8eceaa872cc3b63e0f906370f39"
+  },
+  "observed_comparison": {
+    "owner": {
+      "pid": 1539637,
+      "created": 1792885795.83
+    },
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-V115-matched-review-v1/plan-v1.json",
+      "sha256": "5b539f5e703597309a93e8576cfbc67cd691c5f20f3e5ffec42f1526cfdc501e"
+    },
+    "completed": {},
+    "status": "waiting-for-exact-original-Tiny-Small-independent-audit",
+    "updated_unix": 1792885795.95322,
+    "dependency": {
+      "pid": 986159,
+      "created": 1792855223.35
+    }
+  },
+  "completed_training": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V112-continuations-training-v2/result-v1.json",
+    "sha256": "64dbda6ae3749451cab38f80f29d61d4b4976a09c5e442c5af73b9a95be0ad80"
+  },
+  "independent_endpoint_inspection": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-V115-trained-endpoints-review-v1/result-v1.json",
+    "sha256": "23646244533cdf38e2539427c3c0a8ca1af13c2b236c7c2d014eb5c2f37836cc"
+  },
+  "checkpoints": {
+    "V114": {
+      "path": "/mnt/external/demosaic/V112-continuations-20261024-v2/V114/train/V114/last.pt",
+      "sha256": "2285c84b7015bcf122e71b890723f80aaf216bde849256c77f070c2493f9d2d2"
+    },
+    "V115": {
+      "path": "/mnt/external/demosaic/V112-continuations-20261024-v2/V115/train/V115/last.pt",
+      "sha256": "fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84"
+    }
+  },
+  "expected_matched_observations": {
+    "photo": 12404,
+    "known": 72,
+    "unseen": 90,
+    "texture": 448,
+    "color": 1176
+  },
+  "total_matched_observation_pairs": 14190,
+  "independent_audit_dependency": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V112-continuations-independent-audit-v2/queue-plan-v1.json",
+      "sha256": "5ea4fcbffa8573ad17071331cc949791e9c30b7f5623edc8add5403270e83671"
+    },
+    "owner": {
+      "pid": 986159,
+      "created": 1792855223.35
+    },
+    "status": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V112-continuations-independent-audit-v2/status.json"
+  },
+  "new_neural_forwards": 0,
+  "new_encoder_forwards": 0,
+  "new_optimizer_updates": 0,
+  "new_noise_observations": 0,
+  "RAW_decodes": 0,
+  "native_outputs": "Two complete V115 noisy/restored/exact synthetic GT triplets, matched Tiny/Small material board, and six native full-GFX regions in two boards; same coordinates/transforms. ISO100 GFX is a separate approximate reference, not GT. Actual viewing follows completion.",
+  "label_change": "Public GFX comparison accepts explicit Tiny/Small method labels; default V114/V116 labels and all native crop pixels stay unchanged. Existing frozen V114/V116 queue remains unchanged.",
+  "validation": {
+    "matched_comparison_tests_passed": 25,
+    "ruff": "passed",
+    "same_GFX_crop_pixel_hashes_under_both_label_sets": true,
+    "completed_training_bindings_checked": true,
+    "all_frozen_files_checked": 10,
+    "Torch_imported_for_queue_preflight": false
+  },
+  "scope": "Original equal-budget trained V114 Tiny versus fitted V115 Small, using exact original independent-audit rows/metadata and retained native material/full-GFX floats. Matched parent history, seed, data and20k budget; Small changes frozen encoder plus fitted initial lateral maps, not pure capacity alone. Require identical observation coverage, noisy inputs, targets/masks and display transforms. Two candidate noisy/restored/exact-GT triplets plus matched materials and all six GFX regions. Real ISO100 references approximate. Zero model/encoder calls, noise generation, RAW decoding or training. Original seven job sources/owners and budgets untouched; no automatic publication, recommendation or retry. Actual native/GFX viewing follows."
+}

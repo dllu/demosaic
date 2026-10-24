@@ -108,7 +108,8 @@ def bound_array(item):
     return value
 
 
-def gfx_comparison(control_result, candidate_result, control_sha, candidate_sha, output):
+def gfx_comparison(control_result, candidate_result, control_sha, candidate_sha, output, *,
+                   labels=("V114 control", "V116 candidate")):
     """Render all methods with one NumPy64 transform; ISO100 remains approximate."""
     stages = [read_bound(binding(path)) for path in (control_result, candidate_result)]
     reports = [read_bound(stage["report"]) for stage in stages]
@@ -172,7 +173,7 @@ def gfx_comparison(control_result, candidate_result, control_sha, candidate_sha,
         columns.append([ap[name][0], ap[name][1], bp[name][1], ap[name][2]])
         provenance.append({"control": a[name], "candidate": b[name]})
     boards = [board(Path(output)/f"matched-gfx-{i//3+1}.png", columns[i:i+3],
-                    ["Noisy", "V114 control", "V116 candidate", "ISO100 ref (not GT)"],
+                    ["Noisy", *labels, "ISO100 ref (not GT)"],
                     [str(j+1) for j in range(i, i+3)], provenance[i:i+3]) for i in (0, 3)]
     return {"boards": boards, "regions_in_column_order": names,
             "display": "Shared NumPy64 WB/matrix and exposure, clipped sRGB, round-to-nearest RGB8",

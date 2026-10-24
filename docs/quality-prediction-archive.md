@@ -15,7 +15,8 @@ model inference. Their complete endpoint quality results remain pending.
 
 The initial queue stopped after its training dependency's pre-forward spawn
 failure. The current evaluator has observed successful exit of the guarded
-training controller and started the photographic stage. Both actual CUDA checks
+training controller. Photo and both camera stages have completed; analytic and
+GFX evaluation follow. Both actual CUDA checks
 and original 20,000-update production runs passed. The failed attempt performed
 zero learned work. Original sources/receipts remain preserved.
 
