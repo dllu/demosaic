@@ -6,6 +6,12 @@ Its [separate opt-in extension](results/paired-train83-reviewed.json) contains83
 publisher scene IDs/71 sampling groups. Existing recipes keep their original
 32-scene manifest and sampling behavior.
 
+The [training-reference quality review](paired-reference-quality.md) separately
+checks all 576 base crops and prepares a mask-only revision for two reviewed
+low-ISO references. It adds no scene or source and keeps the original manifest
+and running comparison unchanged. Actual native256 reader/loss checks pass;
+the revised targets have no trained-quality result yet.
+
 The embedded review payload records acquisition, protected/Commons screening,
 prepared-target and manual-review SHA256s; protected scene names; and every
 approved case including its noise conditioning, camera metadata, references

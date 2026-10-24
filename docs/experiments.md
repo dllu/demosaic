@@ -56,6 +56,9 @@ from V102 on 90,872 sources with 2,395 eligible additions. It improves PSNR,
 SSIM and gradient error in all 12 selected material cases; [native comparisons](heldout-detail.md)
 are current; all seven evaluation panels and full-frame exports are complete.
 [Source review and native examples](incoming-commons-quality.md).
+The [complete paired training-reference audit](paired-reference-quality.md)
+also prepares a narrow opt-in mask revision for two recurring red-speck
+references, preserving useful flagged texture and the active data bindings.
 The [completed V111/V112 loss-scale comparison](loss-scale-training.md)
 uses the cleaned90,864-source corpus and original V104 EMA/gates. Both add about
 .10dB on full 427; V112 improves camera/color over V111 and becomes the current

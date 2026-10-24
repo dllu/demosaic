@@ -39,6 +39,10 @@ draws relative to V112's seed 62 continuation. Total new production budget is
 40,000 updates. Completed V112 is a reference; V114 supplies the matched
 extra-training control for V115.
 
+The subsequently [reviewed paired-reference mask revision](paired-reference-quality.md)
+is available for future experiments. This matched comparison retains its original
+train32 manifest, observations and frozen sources.
+
 [V114 recipe](../configs/quality-v112-tiny-continuation-v114.yaml) ·
 [V115 recipe](../configs/quality-v112-small-aligned-v115.yaml).
 This compares the fitted larger-encoder transfer method with an equal-budget

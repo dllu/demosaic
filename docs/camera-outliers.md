@@ -108,6 +108,14 @@ optional detector. Neither ratio is made a new default or preferred solely
 from these development scores. Original references/masks and historical
 results are preserved; the 16-scene reserve remains unscored.
 
+## Training-reference follow-up
+
+The [paired training-reference audit](paired-reference-quality.md) checks the
+separate train32 cohort across all 576 cached crops. Many bright-isolation flags
+occur on useful fine-detail surfaces. One fixed Nikon Z6 red speck contaminates
+two low-ISO references; a separate reviewed mask revision excludes only those
+neighborhoods. No active recipe, held-out reference or benchmark score changes.
+
 ## Execution and practical scope
 
 All new neural work is CPU FP32 using the original V112 inference archive.
