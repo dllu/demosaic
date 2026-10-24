@@ -130,6 +130,21 @@ memory and disk reserves before starting. Independent metric checks and actual
 native-crop review follow completion; this queue adds no measured quality result
 yet. [Plan, CPU proof and launch receipt](results/v104-dihedral8-full-quality-queued-v1.json).
 
+An independent score audit is also queued after the full evaluation. It
+regenerates the original input fingerprints, rehashes saved means and rebuilds
+photo PSNR/detail, measured-CFA, carrier/flat and analytic-color metrics in
+NumPy64. Source-weighted changes against the original V104 results and scene
+comparisons against the stronger RawNIND pre-upsampled reference use existing
+control measurements. Neural-module calls are forbidden during the audit.
+Full photo replay uses the original CUDA RNG after evaluation finishes.
+
+Its actual CPU fixtures agree with saved PSNR within .000004dB and reproduce
+their inputs exactly. The new context replay also reproduces all 112 existing
+texture batches and recovers the published V104 photo/known/unseen means.
+These verify arithmetic and joins using existing artifacts; the full eight-view
+results and native review remain pending.
+[Audit scope, proofs and exact process dependency](results/v104-dihedral8-audit-queued-v1.json).
+
 Thirty-seven targeted operator tests pass, including single-view references,
 measured-CFA scoring and cache-policy separation. Real-weight CPU engineering
 checks complete 24 model/encoder forwards over two photo observations and one

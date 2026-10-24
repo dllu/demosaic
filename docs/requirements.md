@@ -56,7 +56,9 @@ The optional [eight-view V104 mode](dihedral-quality.md) improves all twelve
 selected material cases and two adverse camera crops with unchanged weights.
 CPU/GB10 and native RGB16/DNG checks pass. It needs eight evaluations per tile;
 full-panel qualification remains open and its complete 102MP export is queued
-after the original workflow. It does not meet the speed target or remove the
+after the original workflow. Full photo/camera/texture/color evaluation and an
+independent saved-score audit are queued in sequence; their broad results and
+native review remain pending. It does not meet the speed target or remove the
 remaining dark-field/fine-detail failures.
 
 The [V104 ADC diagnostics](v104-adc-color-projection.md) show that the existing

@@ -1,0 +1,132 @@
+{
+  "status": "independent-full-quality-metric-audit-queued-no-new-quality-results",
+  "recorded_local": "2026-10-24T00:26:57.841558-07:00",
+  "evaluation_receipt": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v104-dihedral8-full-quality-queued-v1.json",
+    "sha256": "35f3f1948dbce9d677dbc2c0db13d612e9a1be7d11e10dfa6cdfa3c9d467a1c0"
+  },
+  "audit_design": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/eight-view-full-quality-v1/audit-plan-v2.json",
+    "sha256": "8ca9ca907b1c952beee50d9a8540de71bdee78c8066b6f715e2388c7800d1c9b"
+  },
+  "audit_source": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/eight-view-full-quality-v1/audit-v2.py",
+    "sha256": "193427a6f0cfe7261c8ba4232f4e07552b69b7d03140a01cf51e39519feb9a16"
+  },
+  "CPU_arithmetic_proof": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/eight-view-full-quality-v1/audit-CPU-preflight-v1.json",
+    "sha256": "0835edf2ee16998ae4f67d915eee4238f0a395bc29b6bc15875cdf2ea0c42542"
+  },
+  "analytic_metadata_proof": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/eight-view-full-quality-v1/audit-analytic-preflight-v1.json",
+    "sha256": "db23fada902c98c70cace0036e93a54a232afb341f63a70bf0e5f8ca1494fdf1"
+  },
+  "preflight_results": {
+    "actual_retained_photo_observations": 2,
+    "actual_retained_camera_crops": 1,
+    "maximum_PSNR_discrepancy_dB": 3.126866758407232e-06,
+    "photo_and_camera_input_fingerprints_exact": true,
+    "texture_input_batches_exact": 112,
+    "actual_original_color_cases": [
+      0,
+      787,
+      1008,
+      1175
+    ],
+    "historical_photo_camera_panel_means_recovered": 3,
+    "new_neural_forwards": 0,
+    "CUDA_initialized": false
+  },
+  "queue_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/eight-view-full-quality-v1/audit-queue-plan-v1.json",
+    "sha256": "9dc596a1f9d19427f9bce4956d36c7cfc996c9105c59f21bf69fe6e6f76d3a70"
+  },
+  "queue_source": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/eight-view-full-quality-v1/queue-audit-v1.py",
+    "sha256": "55b044b5d7f13495bb5f72a5d5193a06848346f5521e2c0c76acd0b3f5a0926b"
+  },
+  "launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/eight-view-full-quality-v1/audit-launch-v1.json",
+    "sha256": "64a0e06818baa6354c8cee596af9eea2e162bf8d1f0d566d9450489176c333e8"
+  },
+  "observed_status": {
+    "status": "waiting-for-exact-full-quality-evaluation-owner",
+    "owner": {
+      "pid": 4138085,
+      "created": 1792826759.29
+    },
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/eight-view-full-quality-v1/audit-queue-plan-v1.json",
+      "sha256": "9dc596a1f9d19427f9bce4956d36c7cfc996c9105c59f21bf69fe6e6f76d3a70"
+    },
+    "updated_unix": 1792826759.3744009,
+    "child": null
+  },
+  "planned_observations": {
+    "photo": 12404,
+    "known": 72,
+    "unseen": 90,
+    "texture": 448,
+    "color": 1176
+  },
+  "metric_scope": "Independent NumPy64 linear/rendered PSNR, chroma/gradient error, measured-CFA PSNR/count, Fourier carrier/flat response, and analytic camera RGB/phase color errors. Exact regenerated input fingerprints; rehash all retained means. Original source-weighted V104 comparisons and strong RawNIND-preup scene comparisons reused without neural inference.",
+  "inference_mean_scope": "Eight-view NumPy64 averaging was checked and hashed during inference. The later audit rescoring uses saved means; it does not reconstruct views from hashes.",
+  "CUDA_scope": "Full photo replay needs the original CUDA RNG and physical kernels, after the exact full evaluation owner exits. No neural/module forwards are allowed. Future CUDA training must also wait for this audit owner.",
+  "remaining_review": "Full output evaluation and audit have not run. Full analytic dispatch, native triplets and actual full-frame viewing remain pending. SSIM and masked highlight/shadow scores retain existing implementation.",
+  "source_evolution": "Executed audit v1/source/plan/proofs retained; v2 only changes design/output version paths and tightens non-PSNR comparisons to at most2e-6. Observed CPU proof maxima already pass these limits; operators are unchanged.",
+  "selector": {
+    "path": "/home/dllu/proj/demosaic/configs/current-model.json",
+    "sha256": "9a00af3a82c2ed63693bfdcc32580605686072e0254d6633f1b795e22f684cf6"
+  },
+  "live_handles_at_recording": [
+    {
+      "run": "loss-scale-training-v2",
+      "role": "controller",
+      "pid": 3426533,
+      "created": 1792795962.1
+    },
+    {
+      "run": "loss-scale-training-v2",
+      "role": "child",
+      "pid": 3740704,
+      "created": 1792813517.8
+    },
+    {
+      "run": "loss-scale-evaluation-queue-v2",
+      "role": "controller",
+      "pid": 3426549,
+      "created": 1792795967.56
+    },
+    {
+      "run": "loss-scale-fullframe-v2",
+      "role": "controller",
+      "pid": 3426555,
+      "created": 1792795971.34
+    },
+    {
+      "run": "loss-scale-material-queue-v2",
+      "role": "controller",
+      "pid": 3426557,
+      "created": 1792795971.61
+    },
+    {
+      "run": "V104-dihedral-pilot-CPU-v1",
+      "role": "eight-view full GFX controller",
+      "pid": 3963376,
+      "created": 1792821711.69
+    },
+    {
+      "run": "eight-view-full-quality-v1",
+      "role": "controller",
+      "pid": 4127938,
+      "created": 1792825828.32
+    },
+    {
+      "run": "eight-view-full-quality-v1",
+      "role": "independent metric audit controller",
+      "pid": 4138085,
+      "created": 1792826759.29
+    }
+  ],
+  "scope": "Engineering/preparation evidence only. No new model weights, training, quality scores or independent human/native review. Original V111/V112 training and existing queues continue unchanged."
+}
