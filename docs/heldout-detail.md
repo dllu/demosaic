@@ -187,11 +187,13 @@ leave some fine-texture errors:
 ![ADC-only: noisy, V100, V101, V102@20000, V102@5000, V84, RawNIND and exact synthetic GT](images/current-detail/adc-only/photo-comparison.png)
 
 [ADC-only source triplets and metadata](images/current-detail/adc-only/manifest.json).
-The [optional ADC site correction](adc-consistency.md) gains .400dB across the
-complete427-photo/four-CFA ADC-only panel with unchanged V84 weights. Its native
-examples include these four contexts, preselected fabric/building views and
-posthoc weakest-gain/chroma-increase cases. Color/uniformity tradeoffs remain
-documented; positive-noise inputs bypass it.
+The current [optional V104 ADC sites export](adc-consistency.md) gains .2885 dB
+across the complete 427-photo/four-CFA ADC-only panel with unchanged learned
+weights. Its report includes actual export triplets, fixed fabric/building
+views and adverse cases. Flat-color and local chroma tradeoffs remain;
+positive-noise inputs bypass it. The
+[earlier V84 study](v84-adc-consistency-study.md) preserves that version's .400 dB
+gain and the original four-context comparisons.
 
 ## High noise
 

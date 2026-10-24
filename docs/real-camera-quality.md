@@ -115,6 +115,27 @@ supports repeatable future comparisons without changing current training,
 frozen evaluation plans or promotion criteria. These remain outside training;
 the protected 16-scene test reserve is untouched.
 
+A fixed low-frequency consistency check does **not** repair these fields.
+Adding a normalized Gaussian average of measured-CFA residuals reduces some
+channel-mean offsets but introduces broad colored blotches. The two fixed
+filters use sigma 4/support 33 and sigma 8/support 65 sensor pixels, full
+strength, with no target or fitted blend. Relative to original V104:
+
+| Selected camera crop | Sigma 4 CFA PSNR change | Sigma 8 CFA PSNR change |
+| --- | ---: | ---: |
+| Coulicoco | −5.61955 dB | −1.91411 dB |
+| top_of_Expedit | −7.03245 dB | −3.19985 dB |
+
+Both also regress on all eight positive-noise material cases. At the ISO12800
+prior, the four-source rendered mean falls .42020/.11211 dB respectively.
+These fixed corrections are rejected; the trained model and output defaults
+remain current. This small diagnostic does not rule out a learned or
+noise-aware constraint. [Native camera comparison](images/v104-low-frequency-consistency/camera/comparison.png) ·
+[Exact-target material comparison](images/v104-low-frequency-consistency/photo/comparison.png) ·
+[Independent operator/score audit and all 24 viewed cells](results/v104-low-frequency-consistency-rejected-v1.json).
+The [original plan and source lineage](results/v104-low-frequency-consistency-plan-lineage-v1.json)
+retain the fixed filters before any outcomes and the later reporting repairs.
+
 ## Reproduction and earlier evidence
 
 The original V102/V104 final 20k EMAs are evaluated without an intermediate

@@ -1,0 +1,1021 @@
+{
+  "status": "saved-native-board-awaiting-manual-review",
+  "kind": "synthetic",
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/scripts/build_native_crop_board.py",
+    "sha256": "50f7b3c952d2cbc63f1ae69c6a3c10332a26a7f65e5229cf852a4f99b845d92e"
+  },
+  "reports": [
+    {
+      "path": "/mnt/external/demosaic/V104-low-frequency-consistency-review-20261023-v1/photo-report.json",
+      "sha256": "251f91963cd18ab980d6386aaab8940f621206fd406ddb3224d5fd55f68c3c16"
+    }
+  ],
+  "board": {
+    "path": "/mnt/external/demosaic/V104-low-frequency-consistency-review-20261023-v1/photo-board.png",
+    "sha256": "13099c7dc43e80babb6fb0e5fd63f9cfff08b24b118303e1ae02b1525c3a07f9"
+  },
+  "models": [
+    {
+      "label": "V104",
+      "display_label": "V104",
+      "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300"
+    },
+    {
+      "label": "V104+LP33",
+      "display_label": "V104+LP33",
+      "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300"
+    },
+    {
+      "label": "V104+LP65",
+      "display_label": "V104+LP65",
+      "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300"
+    }
+  ],
+  "native_cells_exact": 10,
+  "source_triplets": [
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/V104-low-frequency-consistency-review-20261023-v1/crop-83c5056011c03058.png",
+        "sha256": "d9e27ae17df8460537144d1ba62679e970937ddbbddcd35ee9de38e5a3682194"
+      },
+      "crop": {
+        "image": "crop-83c5056011c03058.png",
+        "caption": "Fine pale bark grain and fissures / ISO12800 / V104",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "d9e27ae17df8460537144d1ba62679e970937ddbbddcd35ee9de38e5a3682194",
+        "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+        "source": {
+          "title": "File:Kentucky Coffee-tree Gymnocladus dioicus 3264px.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Photo (c)2007 Derek Ramsey (Ram-Man)",
+          "license": "CC BY-SA 2.5",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.5",
+          "attribution": null,
+          "credit": "Self-photographed",
+          "sha1": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+          "sha1_hex": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+          "download_path": "images/0a/e2/0ae232278265dabbdd54f52c34045a3d03323aa7.jpg",
+          "width": 3264,
+          "height": 2448,
+          "id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/0a/0ae232278265dabbdd54f52c34045a3d03323aa7.npy",
+          "shape": [
+            306,
+            408,
+            3
+          ],
+          "cache_sha256": "a2c1759485e1be5d43c88f439ff801da4a5f39e68953bcb966b66e813788e563"
+        },
+        "validation_index": 124,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "source_cache_context_xywh": [
+          104,
+          38,
+          256,
+          256
+        ],
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "model": {
+          "label": "V104",
+          "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+          "source": "/mnt/external/demosaic/models/v104-final20000.pt",
+          "step": 20000,
+          "variance_multiplier": 1.0,
+          "policy": "Scale both declared shot/read coefficients and the input variance map; keep the noisy observations and target unchanged.",
+          "device": "cpu",
+          "compute_precision": "float32",
+          "effective_conditioning": {
+            "shot": 0.00256,
+            "read": 2.62144e-05
+          },
+          "output_policy": {
+            "label": "V104",
+            "sigma": null,
+            "radius": null
+          },
+          "learned_weights_unchanged": true
+        },
+        "display_exposure": 1,
+        "reference": "Exact synthetic clean target; observations generated with actual condition, not the conditioning override",
+        "observation": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/heldout-detail-followup-v1/inputs/0ae232278265dabbdd54f52c34045a3d03323aa7-iso12800-prior-RGGB.npz",
+          "sha256": "bedb51d2acad1a205f8b0902df657197bfd871769d8984c2fe4c7e183d2f670a"
+        },
+        "detail": "Fine pale bark grain and fissures",
+        "selection": "Two original material-panel sources fixed in pilot plan, high-noise condition and original native ROI; no output-dependent ROI."
+      }
+    },
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/V104-low-frequency-consistency-review-20261023-v1/crop-573f51c2b523742e.png",
+        "sha256": "3eee882f292592d8be2bec76655fc18781b3d81214486c3414886605038a94ab"
+      },
+      "crop": {
+        "image": "crop-573f51c2b523742e.png",
+        "caption": "Fine pale bark grain and fissures / ISO12800 / V104+LP33",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "3eee882f292592d8be2bec76655fc18781b3d81214486c3414886605038a94ab",
+        "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+        "source": {
+          "title": "File:Kentucky Coffee-tree Gymnocladus dioicus 3264px.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Photo (c)2007 Derek Ramsey (Ram-Man)",
+          "license": "CC BY-SA 2.5",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.5",
+          "attribution": null,
+          "credit": "Self-photographed",
+          "sha1": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+          "sha1_hex": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+          "download_path": "images/0a/e2/0ae232278265dabbdd54f52c34045a3d03323aa7.jpg",
+          "width": 3264,
+          "height": 2448,
+          "id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/0a/0ae232278265dabbdd54f52c34045a3d03323aa7.npy",
+          "shape": [
+            306,
+            408,
+            3
+          ],
+          "cache_sha256": "a2c1759485e1be5d43c88f439ff801da4a5f39e68953bcb966b66e813788e563"
+        },
+        "validation_index": 124,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "source_cache_context_xywh": [
+          104,
+          38,
+          256,
+          256
+        ],
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "model": {
+          "label": "V104+LP33",
+          "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+          "source": "/mnt/external/demosaic/models/v104-final20000.pt",
+          "step": 20000,
+          "variance_multiplier": 1.0,
+          "policy": "Scale both declared shot/read coefficients and the input variance map; keep the noisy observations and target unchanged.",
+          "device": "cpu",
+          "compute_precision": "float32",
+          "effective_conditioning": {
+            "shot": 0.00256,
+            "read": 2.62144e-05
+          },
+          "output_policy": {
+            "label": "V104+LP33",
+            "sigma": 4.0,
+            "radius": 16
+          },
+          "learned_weights_unchanged": true
+        },
+        "display_exposure": 1,
+        "reference": "Exact synthetic clean target; observations generated with actual condition, not the conditioning override",
+        "observation": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/heldout-detail-followup-v1/inputs/0ae232278265dabbdd54f52c34045a3d03323aa7-iso12800-prior-RGGB.npz",
+          "sha256": "bedb51d2acad1a205f8b0902df657197bfd871769d8984c2fe4c7e183d2f670a"
+        },
+        "detail": "Fine pale bark grain and fissures",
+        "selection": "Two original material-panel sources fixed in pilot plan, high-noise condition and original native ROI; no output-dependent ROI."
+      }
+    },
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/V104-low-frequency-consistency-review-20261023-v1/crop-6fc190ef9d757b5d.png",
+        "sha256": "fadef2e010a0c75255647f2b7907ead603b2a7573b77012dc76be61d00ae8f40"
+      },
+      "crop": {
+        "image": "crop-6fc190ef9d757b5d.png",
+        "caption": "Fine pale bark grain and fissures / ISO12800 / V104+LP65",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "fadef2e010a0c75255647f2b7907ead603b2a7573b77012dc76be61d00ae8f40",
+        "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+        "source": {
+          "title": "File:Kentucky Coffee-tree Gymnocladus dioicus 3264px.jpg",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Photo (c)2007 Derek Ramsey (Ram-Man)",
+          "license": "CC BY-SA 2.5",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.5",
+          "attribution": null,
+          "credit": "Self-photographed",
+          "sha1": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+          "sha1_hex": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+          "download_path": "images/0a/e2/0ae232278265dabbdd54f52c34045a3d03323aa7.jpg",
+          "width": 3264,
+          "height": 2448,
+          "id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/0a/0ae232278265dabbdd54f52c34045a3d03323aa7.npy",
+          "shape": [
+            306,
+            408,
+            3
+          ],
+          "cache_sha256": "a2c1759485e1be5d43c88f439ff801da4a5f39e68953bcb966b66e813788e563"
+        },
+        "validation_index": 124,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "source_cache_context_xywh": [
+          104,
+          38,
+          256,
+          256
+        ],
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "model": {
+          "label": "V104+LP65",
+          "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+          "source": "/mnt/external/demosaic/models/v104-final20000.pt",
+          "step": 20000,
+          "variance_multiplier": 1.0,
+          "policy": "Scale both declared shot/read coefficients and the input variance map; keep the noisy observations and target unchanged.",
+          "device": "cpu",
+          "compute_precision": "float32",
+          "effective_conditioning": {
+            "shot": 0.00256,
+            "read": 2.62144e-05
+          },
+          "output_policy": {
+            "label": "V104+LP65",
+            "sigma": 8.0,
+            "radius": 32
+          },
+          "learned_weights_unchanged": true
+        },
+        "display_exposure": 1,
+        "reference": "Exact synthetic clean target; observations generated with actual condition, not the conditioning override",
+        "observation": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/heldout-detail-followup-v1/inputs/0ae232278265dabbdd54f52c34045a3d03323aa7-iso12800-prior-RGGB.npz",
+          "sha256": "bedb51d2acad1a205f8b0902df657197bfd871769d8984c2fe4c7e183d2f670a"
+        },
+        "detail": "Fine pale bark grain and fissures",
+        "selection": "Two original material-panel sources fixed in pilot plan, high-noise condition and original native ROI; no output-dependent ROI."
+      }
+    },
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/V104-low-frequency-consistency-review-20261023-v1/crop-285950c3606a79aa.png",
+        "sha256": "609b31e4e48aadadbce753cb6691defb9c29606932108321e6970d1a1a87c7b0"
+      },
+      "crop": {
+        "image": "crop-285950c3606a79aa.png",
+        "caption": "Fine gray fur against a dark background / ISO12800 / V104",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "609b31e4e48aadadbce753cb6691defb9c29606932108321e6970d1a1a87c7b0",
+        "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+        "source": {
+          "title": "File:Racoon clinging to a tree.JPG",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Racoon_clinging_to_a_tree.JPG",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/29/Racoon_clinging_to_a_tree.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Korall",
+          "license": "CC BY 3.0",
+          "license_url": "https://creativecommons.org/licenses/by/3.0",
+          "attribution": null,
+          "credit": "Own work",
+          "sha1": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+          "sha1_hex": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+          "download_path": "images/2b/5a/2b5a51667b9906eecead8f82e08c7ba11750f8c6.jpg",
+          "width": 2592,
+          "height": 3888,
+          "id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/2b/2b5a51667b9906eecead8f82e08c7ba11750f8c6.npy",
+          "shape": [
+            486,
+            324,
+            3
+          ],
+          "cache_sha256": "a4f70f06dbfe2c044c3be5c85ab5047cb004b3378a980a7140bc3be71fab8a1f"
+        },
+        "validation_index": 392,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "source_cache_context_xywh": [
+          25,
+          133,
+          256,
+          256
+        ],
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "model": {
+          "label": "V104",
+          "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+          "source": "/mnt/external/demosaic/models/v104-final20000.pt",
+          "step": 20000,
+          "variance_multiplier": 1.0,
+          "policy": "Scale both declared shot/read coefficients and the input variance map; keep the noisy observations and target unchanged.",
+          "device": "cpu",
+          "compute_precision": "float32",
+          "effective_conditioning": {
+            "shot": 0.00256,
+            "read": 2.62144e-05
+          },
+          "output_policy": {
+            "label": "V104",
+            "sigma": null,
+            "radius": null
+          },
+          "learned_weights_unchanged": true
+        },
+        "display_exposure": 1,
+        "reference": "Exact synthetic clean target; observations generated with actual condition, not the conditioning override",
+        "observation": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/heldout-detail-followup-v1/inputs/2b5a51667b9906eecead8f82e08c7ba11750f8c6-iso12800-prior-RGGB.npz",
+          "sha256": "5999c0e141b7e992791570f745d13c8f468b78b09b8388e551b36285ef698655"
+        },
+        "detail": "Fine gray fur against a dark background",
+        "selection": "Two original material-panel sources fixed in pilot plan, high-noise condition and original native ROI; no output-dependent ROI."
+      }
+    },
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/V104-low-frequency-consistency-review-20261023-v1/crop-1f9a35d232c32bdb.png",
+        "sha256": "9c549dc75bd958ee06b499341d14038f9fdbba0523521285f48b0a5466dccd5e"
+      },
+      "crop": {
+        "image": "crop-1f9a35d232c32bdb.png",
+        "caption": "Fine gray fur against a dark background / ISO12800 / V104+LP33",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "9c549dc75bd958ee06b499341d14038f9fdbba0523521285f48b0a5466dccd5e",
+        "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+        "source": {
+          "title": "File:Racoon clinging to a tree.JPG",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Racoon_clinging_to_a_tree.JPG",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/29/Racoon_clinging_to_a_tree.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Korall",
+          "license": "CC BY 3.0",
+          "license_url": "https://creativecommons.org/licenses/by/3.0",
+          "attribution": null,
+          "credit": "Own work",
+          "sha1": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+          "sha1_hex": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+          "download_path": "images/2b/5a/2b5a51667b9906eecead8f82e08c7ba11750f8c6.jpg",
+          "width": 2592,
+          "height": 3888,
+          "id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/2b/2b5a51667b9906eecead8f82e08c7ba11750f8c6.npy",
+          "shape": [
+            486,
+            324,
+            3
+          ],
+          "cache_sha256": "a4f70f06dbfe2c044c3be5c85ab5047cb004b3378a980a7140bc3be71fab8a1f"
+        },
+        "validation_index": 392,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "source_cache_context_xywh": [
+          25,
+          133,
+          256,
+          256
+        ],
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "model": {
+          "label": "V104+LP33",
+          "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+          "source": "/mnt/external/demosaic/models/v104-final20000.pt",
+          "step": 20000,
+          "variance_multiplier": 1.0,
+          "policy": "Scale both declared shot/read coefficients and the input variance map; keep the noisy observations and target unchanged.",
+          "device": "cpu",
+          "compute_precision": "float32",
+          "effective_conditioning": {
+            "shot": 0.00256,
+            "read": 2.62144e-05
+          },
+          "output_policy": {
+            "label": "V104+LP33",
+            "sigma": 4.0,
+            "radius": 16
+          },
+          "learned_weights_unchanged": true
+        },
+        "display_exposure": 1,
+        "reference": "Exact synthetic clean target; observations generated with actual condition, not the conditioning override",
+        "observation": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/heldout-detail-followup-v1/inputs/2b5a51667b9906eecead8f82e08c7ba11750f8c6-iso12800-prior-RGGB.npz",
+          "sha256": "5999c0e141b7e992791570f745d13c8f468b78b09b8388e551b36285ef698655"
+        },
+        "detail": "Fine gray fur against a dark background",
+        "selection": "Two original material-panel sources fixed in pilot plan, high-noise condition and original native ROI; no output-dependent ROI."
+      }
+    },
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/V104-low-frequency-consistency-review-20261023-v1/crop-431b7993924ee8dc.png",
+        "sha256": "77b5d559adf7002c795163c14646c3d3077f59f22b0b2920a42bb40656f8e6e1"
+      },
+      "crop": {
+        "image": "crop-431b7993924ee8dc.png",
+        "caption": "Fine gray fur against a dark background / ISO12800 / V104+LP65",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (synthetic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "77b5d559adf7002c795163c14646c3d3077f59f22b0b2920a42bb40656f8e6e1",
+        "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+        "source": {
+          "title": "File:Racoon clinging to a tree.JPG",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Racoon_clinging_to_a_tree.JPG",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/29/Racoon_clinging_to_a_tree.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "author": "Korall",
+          "license": "CC BY 3.0",
+          "license_url": "https://creativecommons.org/licenses/by/3.0",
+          "attribution": null,
+          "credit": "Own work",
+          "sha1": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+          "sha1_hex": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+          "download_path": "images/2b/5a/2b5a51667b9906eecead8f82e08c7ba11750f8c6.jpg",
+          "width": 2592,
+          "height": 3888,
+          "id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+          "split": "val",
+          "bin_factor": 8,
+          "color_space": "linear-sRGB",
+          "dtype": "uint16",
+          "cache": "/mnt/external/demosaic/commons-v1/images/2b/2b5a51667b9906eecead8f82e08c7ba11750f8c6.npy",
+          "shape": [
+            486,
+            324,
+            3
+          ],
+          "cache_sha256": "a4f70f06dbfe2c044c3be5c85ab5047cb004b3378a980a7140bc3be71fab8a1f"
+        },
+        "validation_index": 392,
+        "validation_seed": 42,
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "source_cache_context_xywh": [
+          25,
+          133,
+          256,
+          256
+        ],
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "model": {
+          "label": "V104+LP65",
+          "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+          "source": "/mnt/external/demosaic/models/v104-final20000.pt",
+          "step": 20000,
+          "variance_multiplier": 1.0,
+          "policy": "Scale both declared shot/read coefficients and the input variance map; keep the noisy observations and target unchanged.",
+          "device": "cpu",
+          "compute_precision": "float32",
+          "effective_conditioning": {
+            "shot": 0.00256,
+            "read": 2.62144e-05
+          },
+          "output_policy": {
+            "label": "V104+LP65",
+            "sigma": 8.0,
+            "radius": 32
+          },
+          "learned_weights_unchanged": true
+        },
+        "display_exposure": 1,
+        "reference": "Exact synthetic clean target; observations generated with actual condition, not the conditioning override",
+        "observation": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/heldout-detail-followup-v1/inputs/2b5a51667b9906eecead8f82e08c7ba11750f8c6-iso12800-prior-RGGB.npz",
+          "sha256": "5999c0e141b7e992791570f745d13c8f468b78b09b8388e551b36285ef698655"
+        },
+        "detail": "Fine gray fur against a dark background",
+        "selection": "Two original material-panel sources fixed in pilot plan, high-noise condition and original native ROI; no output-dependent ROI."
+      }
+    }
+  ],
+  "cells": [
+    {
+      "case": [
+        0,
+        "\"0ae232278265dabbdd54f52c34045a3d03323aa7\""
+      ],
+      "row_label": "Noisy (Malvar)",
+      "model_label": "V104",
+      "part": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/V104-low-frequency-consistency-review-20261023-v1/crop-83c5056011c03058.png",
+        "sha256": "d9e27ae17df8460537144d1ba62679e970937ddbbddcd35ee9de38e5a3682194"
+      },
+      "source_xywh": [
+        8,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        180,
+        72,
+        160,
+        160
+      ],
+      "pixel_sha256": "8ac9202017d37b4f4abe85db69ab06d5bef8253e156385c600f3399055d8e04e"
+    },
+    {
+      "case": [
+        0,
+        "\"0ae232278265dabbdd54f52c34045a3d03323aa7\""
+      ],
+      "row_label": "V104",
+      "model_label": "V104",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/V104-low-frequency-consistency-review-20261023-v1/crop-83c5056011c03058.png",
+        "sha256": "d9e27ae17df8460537144d1ba62679e970937ddbbddcd35ee9de38e5a3682194"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        180,
+        256,
+        160,
+        160
+      ],
+      "pixel_sha256": "03d9d6acf2a76a3a19a88a1e61f80d063a95ef3b9add93ce6bf1be4ec22e1fef"
+    },
+    {
+      "case": [
+        0,
+        "\"0ae232278265dabbdd54f52c34045a3d03323aa7\""
+      ],
+      "row_label": "V104+LP33",
+      "model_label": "V104+LP33",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/V104-low-frequency-consistency-review-20261023-v1/crop-573f51c2b523742e.png",
+        "sha256": "3eee882f292592d8be2bec76655fc18781b3d81214486c3414886605038a94ab"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        180,
+        440,
+        160,
+        160
+      ],
+      "pixel_sha256": "a466795e8b84f49ca9aee721bd2161c913d1be8f62d86828702f7d98666d1e1e"
+    },
+    {
+      "case": [
+        0,
+        "\"0ae232278265dabbdd54f52c34045a3d03323aa7\""
+      ],
+      "row_label": "V104+LP65",
+      "model_label": "V104+LP65",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/V104-low-frequency-consistency-review-20261023-v1/crop-6fc190ef9d757b5d.png",
+        "sha256": "fadef2e010a0c75255647f2b7907ead603b2a7573b77012dc76be61d00ae8f40"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        180,
+        624,
+        160,
+        160
+      ],
+      "pixel_sha256": "31a5c102c0da270fc9f66e29d17defc0be90fbaa72c44a34c5d0acbace93e7cc"
+    },
+    {
+      "case": [
+        0,
+        "\"0ae232278265dabbdd54f52c34045a3d03323aa7\""
+      ],
+      "row_label": "GT (synthetic)",
+      "model_label": "V104",
+      "part": 2,
+      "image": {
+        "path": "/mnt/external/demosaic/V104-low-frequency-consistency-review-20261023-v1/crop-83c5056011c03058.png",
+        "sha256": "d9e27ae17df8460537144d1ba62679e970937ddbbddcd35ee9de38e5a3682194"
+      },
+      "source_xywh": [
+        344,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        180,
+        808,
+        160,
+        160
+      ],
+      "pixel_sha256": "2567a0fea221407fb8f22be8493622ebfe0acc7c6859e4ed1f20575bce6754da"
+    },
+    {
+      "case": [
+        0,
+        "\"2b5a51667b9906eecead8f82e08c7ba11750f8c6\""
+      ],
+      "row_label": "Noisy (Malvar)",
+      "model_label": "V104",
+      "part": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/V104-low-frequency-consistency-review-20261023-v1/crop-285950c3606a79aa.png",
+        "sha256": "609b31e4e48aadadbce753cb6691defb9c29606932108321e6970d1a1a87c7b0"
+      },
+      "source_xywh": [
+        8,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        348,
+        72,
+        160,
+        160
+      ],
+      "pixel_sha256": "2bf874f3c53da6280dfa80844901c5ec4fd49ae0230281d2642ab36f0da00127"
+    },
+    {
+      "case": [
+        0,
+        "\"2b5a51667b9906eecead8f82e08c7ba11750f8c6\""
+      ],
+      "row_label": "V104",
+      "model_label": "V104",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/V104-low-frequency-consistency-review-20261023-v1/crop-285950c3606a79aa.png",
+        "sha256": "609b31e4e48aadadbce753cb6691defb9c29606932108321e6970d1a1a87c7b0"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        348,
+        256,
+        160,
+        160
+      ],
+      "pixel_sha256": "c6586d8a472385dd9f8fe05d8b718876dcad841cab534098161aa168afc6524e"
+    },
+    {
+      "case": [
+        0,
+        "\"2b5a51667b9906eecead8f82e08c7ba11750f8c6\""
+      ],
+      "row_label": "V104+LP33",
+      "model_label": "V104+LP33",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/V104-low-frequency-consistency-review-20261023-v1/crop-1f9a35d232c32bdb.png",
+        "sha256": "9c549dc75bd958ee06b499341d14038f9fdbba0523521285f48b0a5466dccd5e"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        348,
+        440,
+        160,
+        160
+      ],
+      "pixel_sha256": "c1b697572e5d69518153307b2ea8d0300ca13fb3eeb7eee373f8b3d1545c49ea"
+    },
+    {
+      "case": [
+        0,
+        "\"2b5a51667b9906eecead8f82e08c7ba11750f8c6\""
+      ],
+      "row_label": "V104+LP65",
+      "model_label": "V104+LP65",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/V104-low-frequency-consistency-review-20261023-v1/crop-431b7993924ee8dc.png",
+        "sha256": "77b5d559adf7002c795163c14646c3d3077f59f22b0b2920a42bb40656f8e6e1"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        348,
+        624,
+        160,
+        160
+      ],
+      "pixel_sha256": "5cca9fb4cf6673eaf2a1b435755b1033037e8cead1e33ca585153f342a1154e7"
+    },
+    {
+      "case": [
+        0,
+        "\"2b5a51667b9906eecead8f82e08c7ba11750f8c6\""
+      ],
+      "row_label": "GT (synthetic)",
+      "model_label": "V104",
+      "part": 2,
+      "image": {
+        "path": "/mnt/external/demosaic/V104-low-frequency-consistency-review-20261023-v1/crop-285950c3606a79aa.png",
+        "sha256": "609b31e4e48aadadbce753cb6691defb9c29606932108321e6970d1a1a87c7b0"
+      },
+      "source_xywh": [
+        344,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        348,
+        808,
+        160,
+        160
+      ],
+      "pixel_sha256": "b1daeeef5fde002623c5969fc0db2be61ef398a56b36d58be450fb62bcb11c6f"
+    }
+  ],
+  "scope": "Saved RGB8 preview PNG rearrangement only. Every cell is an unchanged native160px square; shared metadata and noisy/reference pixels match across methods. Recorded checkpoint hashes are retained, not rehashed here. No inference, new score, quality finding, training or promotion. Manual review remains required."
+}
