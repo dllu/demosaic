@@ -10,8 +10,8 @@ All seven V104 panels and complete102MP exports are finished. V111 completed20k
 on90,864 sources and [improves all twelve material cases](v111-early-quality.md),
 with modest native gains and small real GFX changes. Its [complete camera
 panels](v111-early-quality.md#complete-development-camera-panels) show a small known-scene
-loss and unseen-scene gain. V112 is training with a
-smaller reconstruction loss scale; full matched results are pending.
+loss and unseen-scene gain. V112 has completed20k with a
+smaller reconstruction loss scale; full matched evaluation is running.
 [Actual trial and evidence](loss-scale-training.md).
 The optional [V104 ADC sites export](adc-consistency.md) adds .2885 dB on the
 complete ADC-only photo panel, with unchanged learned weights and documented

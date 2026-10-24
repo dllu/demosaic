@@ -1,7 +1,9 @@
 # Controlled training test for faint detail
 
-**V111 completed its original20k endpoint; V112 is training from the same
-original V104 EMA.** V111's [early material/GFX review](v111-early-quality.md)
+**V111 and V112 completed their original20k endpoints from the same V104 EMA.**
+Full matched GPU evaluation is running; the four-model CPU material report has
+finished computation and awaits actual native review.
+V111's [early material/GFX review](v111-early-quality.md)
 improves all twelve material cases over V104, with small real-photo changes.
 V111's complete camera panels change −.01336/+.02006dB known/unseen versus V104;
 V111's complete analytic grids show improved coarse carriers/high-noise color
@@ -41,6 +43,15 @@ parent is read-only at `/mnt/external/demosaic/models/v104-final20000.pt`, SHA25
 `8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300`.
 No gate reset or backbone substitution is applied.
 
+The adopted V112 final checkpoint is read-only at
+`/mnt/external/demosaic/models/v112-final20000.pt`, SHA256
+`21c3cca8370df21e3412f9ccbf441c35afcfad8fd03174c7727f4f88874783b1`.
+Its original trainer/controller have exited. All 91 model/EMA tensors and 89
+Adam states at step20000 are finite, and all 801 logged input/domain/LR rows
+match V111. [Endpoint, exact canonical copy and comparison handoff](results/v112-original20000-training-boundary-v1.json).
+This establishes training completion; image-quality conclusions await the
+matched reports and native/full-frame review.
+
 The setting changes ordinary camera-linear, rendered, spatial-gradient and
 auxiliary Charbonnier penalties. Paired RAW retains its existing .0001 scale;
 other sensor penalties retain their separate definitions. See the
@@ -72,11 +83,12 @@ hash reproduce the CUDA preflight exactly. It does not repeat the smokes. Full m
 evaluation and complete 102MP RGB16 exports are queued afterward, with
 [V102 as a separate fixed reference](../configs/quality-v104-loss-scale-reference-checkpoints-v1.json).
 A [separate CPU material queue](results/v104-loss-scale-training-started-v2.json)
-will compare both final endpoints with V104 and V102 on the original 12 cached
-observations, producing native noisy/restored/exact-GT triplets.
+has computed both final endpoints with V104 and V102 on the original 12 cached
+observations, producing native noisy/restored/exact-GT triplets awaiting review.
 V112 started after V111's fixed endpoint and original worker exit. Its first
-input/loss/gradient replay its CUDA preflight; all currently checked logged
-input/domain/LR rows match V111. This is an execution check, not a quality result.
+input/loss/gradient replay its CUDA preflight; all 801 logged input/domain/LR
+rows match V111 through the original20k endpoint. This verifies execution;
+quality is assessed with image metrics and native comparisons.
 
 An additional [early CPU material queue](results/v111-final20000-early-material-queued-v1.json)
 finished V111's fixed final20k endpoint after verifying the original worker's
@@ -119,10 +131,9 @@ The deterministic per-arm schedule contains 111,559 photographic examples from
 62,367 unique sources, including 2,707 draws from 1,634 new eligible sources
 and 5,657 reviewed-ROI examples. Twelve actual clean-reader checks cover six
 new-source draws and all six ROIs; repeated native256 tensors match exactly
-with finite output and unchanged Torch RNG. These are prospective exposure
-counts and reader checks. V111 has now completed the declared schedule; V112
-still has future draws. The counts reconstruct scheduled exposure rather than
-independently verifying every unlogged fetch.
+with finite output and unchanged Torch RNG. These are reconstructed exposure
+counts and reader checks. Both completed their declared schedules; the counts
+do not independently verify every unlogged fetch.
 
 Compare the original fixed final endpoints with each other and V104, retaining
 V102 as a separately labeled reference. Use full photographic and measured-camera

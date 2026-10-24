@@ -5,8 +5,8 @@ material cases over V104.** It is a useful new detail candidate in the same
 DRUNet RGB / frozen DINOv3 ConvNeXt-Tiny family. Native low-noise bark and
 canopy improve slightly; high-noise feather/hair detail and real GFX foliage
 remain soft. Complete camera panels show a small known-scene loss and unseen-scene
-gain versus V104. Full photographic results will follow V112's matched training
-run, which is now live. The completed analytic grids show stronger coarse
+gain versus V104. V112 has also completed its original20k budget; the full matched photographic
+evaluation is running. The completed analytic grids show stronger coarse
 carriers and high-noise color, but a worse ADC flat-bias tail.
 
 [Material/GFX checkpoint, training boundary and native evidence](results/v111-final20000-early-quality-v1.json) ·

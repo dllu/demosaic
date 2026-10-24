@@ -111,8 +111,8 @@ effect. [Original endpoint/source boundary](results/V104-original20000-training-
 The [V111/V112 loss-scale test](loss-scale-training.md) retains its exact EMA
 and learned fusion gates on the further-cleaned 90,864-source corpus. V111 has
 completed20k and [improves all twelve material cases](v111-early-quality.md);
-V112 is training, changing only epsilon .001→.0003 under matched20k
-budgets. [Actual production launch and corrected handoff](results/v104-loss-scale-training-started-v2.json).
+V112 has also completed20k, changing only epsilon .001→.0003 under matched
+budgets. Full comparisons are running. [Actual production launch and corrected handoff](results/v104-loss-scale-training-started-v2.json).
 The read-only V111 candidate is `/mnt/external/demosaic/models/v111-final20000.pt`,
 SHA256 `97ab9ca5f1f182ff42a4245c630bba810607a3d13b61cf8aae5842192a18da15`.
 

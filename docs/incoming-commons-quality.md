@@ -18,7 +18,7 @@ inspection, rather than native inspection of every image.
 | --- | ---: | --- |
 | V102/V103 | 88,477 | Completed model comparison |
 | V104 | 90,872 | Original 20k training, all panels and full-frame exports complete |
-| Next reviewed cohort | **90,864** | V111 final20k complete / V112 training; V109 Tiny / V110 Small remain prepared |
+| Next reviewed cohort | **90,864** | V111/V112 original20k complete; matched evaluation running; V109 Tiny / V110 Small remain prepared |
 
 The next cohort applies **eight additional training-source withholds relative
 to V104**: the three previously inspected photo-quality cases and five printed
@@ -50,7 +50,7 @@ Production training has not launched for the capacity comparison.
 The [next loss-scale comparison](loss-scale-training.md) instead retains the
 original V104 EMA and learned gates on this same cleaned corpus. Both recipes
 pass discarded CPU/CUDA checks. V111 completed20k and [improves all twelve fixed
-material cases](v111-early-quality.md); V112 is training at its fixed20k budget.
+material cases](v111-early-quality.md); V112 has also completed its original20k budget; matched evaluation is running.
 The full matched photo/camera/color results are pending.
 
 These inputs supersede the unlaunched 90,869-source preparation. Earlier

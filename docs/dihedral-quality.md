@@ -169,7 +169,7 @@ Corrected checks pass without changing the pilot scores or model weights.
 Full 427-photo, complete camera panels and full analytic color/weak-texture grids
 are queued and remain unevaluated for this policy. The eight-view full 102MP
 export is queued, so no full-frame speed or broad-superiority claim follows from these context
-comparisons. V112's matched training continues separately.
+comparisons. Both fixed training endpoints are complete; their matched evaluation continues separately.
 
 Photo attribution: [Derek Ramsey, bark](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
 [CC BY-SA 2.5](https://creativecommons.org/licenses/by-sa/2.5/);

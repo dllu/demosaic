@@ -42,8 +42,8 @@ result does not isolate the data-cleaning effect.
 The [V111/V112 loss-scale trial](loss-scale-training.md) retains the exact V104
 EMA and learned fusion gates on the further-cleaned **90,864-source** corpus.
 V111 completed20k and [improves all twelve fixed material cases](v111-early-quality.md)
-over V104, with modest native gains and small real GFX changes. V112 is training
-at its fixed20k budget, changing only epsilon .001→.0003. V111's complete camera
+over V104, with modest native gains and small real GFX changes. V112 has completed
+its original20k budget, changing only epsilon .001→.0003; full matched evaluation is running. V111's complete camera
 means change −.01336/+.02006dB known/unseen versus V104, with all5 unseen scene
 means improving and persistent local dark-field failures. Complete analytic
 grids improve high-noise color/coarse carriers but raise worst ADC bias to
