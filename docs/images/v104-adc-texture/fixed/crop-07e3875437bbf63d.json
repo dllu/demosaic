@@ -1,0 +1,89 @@
+{
+  "image": "crop-07e3875437bbf63d.png",
+  "caption": "carrier-l0.01-c0.1-p8-draw0 / RGGB / ADC-only / V104+Malvar",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Restored",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "GT (analytic)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "2e819cbc533ca1281407104708906d6e4bcc9c2d0b4875322aaf2ed3248ddcc7",
+  "source_id": "carrier-l0.01-c0.1-p8-draw0",
+  "source": {
+    "kind": "carrier",
+    "level": 0.01,
+    "contrast": 0.1,
+    "period": 8
+  },
+  "evaluation_tile_xywh": [
+    48,
+    48,
+    160,
+    160
+  ],
+  "condition": {
+    "name": "adc-only",
+    "shot": 0.0,
+    "read": 0.0,
+    "exposure": 1.0
+  },
+  "pattern": "RGGB",
+  "white_balance": [
+    2.0,
+    1.0,
+    1.5
+  ],
+  "camera_to_srgb": [
+    [
+      1.1176470588,
+      -0.0588235294,
+      -0.0588235294
+    ],
+    [
+      -0.0588235294,
+      1.1176470588,
+      -0.0588235294
+    ],
+    [
+      -0.0588235294,
+      -0.0588235294,
+      1.1176470588
+    ]
+  ],
+  "display_exposure": 1.0,
+  "model": {
+    "label": "V104+Malvar",
+    "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+    "step": 20000,
+    "compute_precision": "IEEE float32",
+    "device": "cpu",
+    "output_operator": "malvar"
+  },
+  "reference": "Exact analytic target; no fitted inference calibration.",
+  "selection": "Four fixed RGGB cases declared in frozen plan before inference."
+}

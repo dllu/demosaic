@@ -22,6 +22,8 @@ remain prepared.
 For explicit zero-shot/read inputs, [optional site consistency](docs/adc-consistency.md)
 adds **.40dB ADC-only PSNR** with unchanged V84 weights across all427 photos/four
 CFAs; positive-noise inputs bypass it. The report includes native crops and color tradeoffs.
+The [V104 ADC diagnostics](docs/v104-adc-color-projection.md) show color/texture
+tradeoffs; its full photographic comparison is running.
 
 ![PSNR versus model version](docs/images/version-PSNR-history.png)
 

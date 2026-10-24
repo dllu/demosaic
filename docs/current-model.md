@@ -33,8 +33,9 @@ workflows when lower flat-color bias matters; selection is not switched automati
 
 A [saved-prediction ADC diagnostic](v104-adc-color-projection.md) reduces V104's
 worst grid bias to 31.91 DN16 with the existing Malvar residual projection.
-The full ADC photographic comparison is running on CPU; texture checks remain
-pending. This does not change the checkpoint or ADC recommendation.
+The [ADC texture check](v104-adc-color-projection.md#adc-texture-check) finds
+carrier gains and phase-specific regressions; the full photographic comparison
+is running on CPU. This does not change the checkpoint or ADC recommendation.
 
 Photo means cover 427 images, seven conditions and four CFAs. Camera means
 balance four/five development scenes against measured CFA references;

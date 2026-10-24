@@ -1,0 +1,459 @@
+{
+  "status": "saved-native-board-awaiting-manual-review",
+  "kind": "analytic",
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/three-camera-V104-CPU-v1/work/scripts/build_native_crop_board.py",
+    "sha256": "50f7b3c952d2cbc63f1ae69c6a3c10332a26a7f65e5229cf852a4f99b845d92e"
+  },
+  "reports": [
+    {
+      "path": "/mnt/external/demosaic/V104-ADC-texture-adverse-20261023-v1/report.json",
+      "sha256": "a94bbc41338b8b2a7cfa1072db51bddee6584c567e84e970c76a3dfe5fbb1d67"
+    }
+  ],
+  "board": {
+    "path": "/mnt/external/demosaic/V104-ADC-texture-adverse-20261023-v1/native-comparison.png",
+    "sha256": "694e321497a81ca1059848b7dc27d4d61f39aca8853c20b55ab42e4c6fb1e1c3"
+  },
+  "models": [
+    {
+      "label": "V104",
+      "display_label": "V104",
+      "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300"
+    },
+    {
+      "label": "V104+Malvar",
+      "display_label": "V104+Malvar",
+      "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300"
+    },
+    {
+      "label": "V104+sites",
+      "display_label": "V104+sites",
+      "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300"
+    }
+  ],
+  "native_cells_exact": 5,
+  "source_triplets": [
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/V104-ADC-texture-adverse-20261023-v1/crop-7f5f032e83dc6267.png",
+        "sha256": "9702813844f9014db7bee6f8bf3a3663ea9e9f71713e0baf4b6124e0518ba7ee"
+      },
+      "crop": {
+        "image": "crop-7f5f032e83dc6267.png",
+        "caption": "Posthoc largest Malvar carrier RMSE increase / carrier-l0.18-c0.02-p4-draw0 / GBRG / V104",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Restored",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "9702813844f9014db7bee6f8bf3a3663ea9e9f71713e0baf4b6124e0518ba7ee",
+        "source_id": "carrier-l0.18-c0.02-p4-draw0",
+        "source": {
+          "kind": "carrier",
+          "level": 0.18,
+          "contrast": 0.02,
+          "period": 4
+        },
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "name": "adc-only",
+          "shot": 0.0,
+          "read": 0.0,
+          "exposure": 1.0
+        },
+        "pattern": "GBRG",
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ],
+        "display_exposure": 1.0,
+        "model": {
+          "label": "V104",
+          "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+          "step": 20000,
+          "compute_precision": "IEEE float32",
+          "device": "cpu",
+          "output_operator": "original"
+        },
+        "reference": "Exact analytic target; no fitted inference calibration.",
+        "selection": "Posthoc maximum V104+Malvar-minus-V104 linear-sRGB RMSE among 48 fixed carrier/CFA cases. Same fixed center ROI and display for all methods; retained floats only."
+      }
+    },
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/V104-ADC-texture-adverse-20261023-v1/crop-35e997ae30574924.png",
+        "sha256": "dd4b919e3318ced18cba286f3344d903a1cd17b0083a68d376e8bd5eb937ceb5"
+      },
+      "crop": {
+        "image": "crop-35e997ae30574924.png",
+        "caption": "Posthoc largest Malvar carrier RMSE increase / carrier-l0.18-c0.02-p4-draw0 / GBRG / V104+Malvar",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Restored",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "dd4b919e3318ced18cba286f3344d903a1cd17b0083a68d376e8bd5eb937ceb5",
+        "source_id": "carrier-l0.18-c0.02-p4-draw0",
+        "source": {
+          "kind": "carrier",
+          "level": 0.18,
+          "contrast": 0.02,
+          "period": 4
+        },
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "name": "adc-only",
+          "shot": 0.0,
+          "read": 0.0,
+          "exposure": 1.0
+        },
+        "pattern": "GBRG",
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ],
+        "display_exposure": 1.0,
+        "model": {
+          "label": "V104+Malvar",
+          "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+          "step": 20000,
+          "compute_precision": "IEEE float32",
+          "device": "cpu",
+          "output_operator": "malvar"
+        },
+        "reference": "Exact analytic target; no fitted inference calibration.",
+        "selection": "Posthoc maximum V104+Malvar-minus-V104 linear-sRGB RMSE among 48 fixed carrier/CFA cases. Same fixed center ROI and display for all methods; retained floats only."
+      }
+    },
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/V104-ADC-texture-adverse-20261023-v1/crop-584adca5f15c990a.png",
+        "sha256": "e9c5622b3195d7c4161c509a5861a7dd703b6bb9f41b93cf832bd15534fd45ea"
+      },
+      "crop": {
+        "image": "crop-584adca5f15c990a.png",
+        "caption": "Posthoc largest Malvar carrier RMSE increase / carrier-l0.18-c0.02-p4-draw0 / GBRG / V104+sites",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Restored",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT (analytic)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "e9c5622b3195d7c4161c509a5861a7dd703b6bb9f41b93cf832bd15534fd45ea",
+        "source_id": "carrier-l0.18-c0.02-p4-draw0",
+        "source": {
+          "kind": "carrier",
+          "level": 0.18,
+          "contrast": 0.02,
+          "period": 4
+        },
+        "evaluation_tile_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "condition": {
+          "name": "adc-only",
+          "shot": 0.0,
+          "read": 0.0,
+          "exposure": 1.0
+        },
+        "pattern": "GBRG",
+        "white_balance": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_to_srgb": [
+          [
+            1.1176470518112183,
+            -0.05882352963089943,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            1.1176470518112183,
+            -0.05882352963089943
+          ],
+          [
+            -0.05882352963089943,
+            -0.05882352963089943,
+            1.1176470518112183
+          ]
+        ],
+        "display_exposure": 1.0,
+        "model": {
+          "label": "V104+sites",
+          "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+          "step": 20000,
+          "compute_precision": "IEEE float32",
+          "device": "cpu",
+          "output_operator": "sites"
+        },
+        "reference": "Exact analytic target; no fitted inference calibration.",
+        "selection": "Posthoc maximum V104+Malvar-minus-V104 linear-sRGB RMSE among 48 fixed carrier/CFA cases. Same fixed center ROI and display for all methods; retained floats only."
+      }
+    }
+  ],
+  "cells": [
+    {
+      "case": [
+        0,
+        "\"carrier-l0.18-c0.02-p4-draw0\""
+      ],
+      "row_label": "Noisy (Malvar)",
+      "model_label": "V104",
+      "part": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/V104-ADC-texture-adverse-20261023-v1/crop-7f5f032e83dc6267.png",
+        "sha256": "9702813844f9014db7bee6f8bf3a3663ea9e9f71713e0baf4b6124e0518ba7ee"
+      },
+      "source_xywh": [
+        8,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        180,
+        72,
+        160,
+        160
+      ],
+      "pixel_sha256": "7554e6488840b91147b699c3c8230ead795a20976320836a1c4fb7eb5ef9dd57"
+    },
+    {
+      "case": [
+        0,
+        "\"carrier-l0.18-c0.02-p4-draw0\""
+      ],
+      "row_label": "V104",
+      "model_label": "V104",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/V104-ADC-texture-adverse-20261023-v1/crop-7f5f032e83dc6267.png",
+        "sha256": "9702813844f9014db7bee6f8bf3a3663ea9e9f71713e0baf4b6124e0518ba7ee"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        180,
+        256,
+        160,
+        160
+      ],
+      "pixel_sha256": "665df73523ae355766e2522dda202cbcc7ec37ff6d2366f8b4369d09ee660f07"
+    },
+    {
+      "case": [
+        0,
+        "\"carrier-l0.18-c0.02-p4-draw0\""
+      ],
+      "row_label": "V104+Malvar",
+      "model_label": "V104+Malvar",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/V104-ADC-texture-adverse-20261023-v1/crop-35e997ae30574924.png",
+        "sha256": "dd4b919e3318ced18cba286f3344d903a1cd17b0083a68d376e8bd5eb937ceb5"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        180,
+        440,
+        160,
+        160
+      ],
+      "pixel_sha256": "5d11e53ae8d448c82c6b08aba7b2c2618b7c524c527a86aebb230a7ac43e016e"
+    },
+    {
+      "case": [
+        0,
+        "\"carrier-l0.18-c0.02-p4-draw0\""
+      ],
+      "row_label": "V104+sites",
+      "model_label": "V104+sites",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/V104-ADC-texture-adverse-20261023-v1/crop-584adca5f15c990a.png",
+        "sha256": "e9c5622b3195d7c4161c509a5861a7dd703b6bb9f41b93cf832bd15534fd45ea"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        180,
+        624,
+        160,
+        160
+      ],
+      "pixel_sha256": "883ad7ade9dee34a50107469cbd99a1d80d8e7f8ab3d75329d461cdbe50ab40b"
+    },
+    {
+      "case": [
+        0,
+        "\"carrier-l0.18-c0.02-p4-draw0\""
+      ],
+      "row_label": "GT (analytic)",
+      "model_label": "V104",
+      "part": 2,
+      "image": {
+        "path": "/mnt/external/demosaic/V104-ADC-texture-adverse-20261023-v1/crop-7f5f032e83dc6267.png",
+        "sha256": "9702813844f9014db7bee6f8bf3a3663ea9e9f71713e0baf4b6124e0518ba7ee"
+      },
+      "source_xywh": [
+        344,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        180,
+        808,
+        160,
+        160
+      ],
+      "pixel_sha256": "c6306586649511df497fab6817d18e9456a528aeb0b71cde174ada55c3fe81f2"
+    }
+  ],
+  "scope": "Saved RGB8 preview PNG rearrangement only. Every cell is an unchanged native160px square; shared metadata and noisy/reference pixels match across methods. Recorded checkpoint hashes are retained, not rehashed here. No inference, new score, quality finding, training or promotion. Manual review remains required."
+}

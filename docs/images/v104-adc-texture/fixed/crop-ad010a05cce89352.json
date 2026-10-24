@@ -1,0 +1,89 @@
+{
+  "image": "crop-ad010a05cce89352.png",
+  "caption": "flat-l0.18-draw0 / RGGB / ADC-only / V104+sites",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Restored",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "GT (analytic)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "8c5e66e5b9f97121672283f12a0d7df6acffad54d3e3dc00e2a58c0dda2cdef6",
+  "source_id": "flat-l0.18-draw0",
+  "source": {
+    "kind": "flat",
+    "level": 0.18,
+    "contrast": 0,
+    "period": null
+  },
+  "evaluation_tile_xywh": [
+    48,
+    48,
+    160,
+    160
+  ],
+  "condition": {
+    "name": "adc-only",
+    "shot": 0.0,
+    "read": 0.0,
+    "exposure": 1.0
+  },
+  "pattern": "RGGB",
+  "white_balance": [
+    2.0,
+    1.0,
+    1.5
+  ],
+  "camera_to_srgb": [
+    [
+      1.1176470588,
+      -0.0588235294,
+      -0.0588235294
+    ],
+    [
+      -0.0588235294,
+      1.1176470588,
+      -0.0588235294
+    ],
+    [
+      -0.0588235294,
+      -0.0588235294,
+      1.1176470588
+    ]
+  ],
+  "display_exposure": 1.0,
+  "model": {
+    "label": "V104+sites",
+    "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+    "step": 20000,
+    "compute_precision": "IEEE float32",
+    "device": "cpu",
+    "output_operator": "sites"
+  },
+  "reference": "Exact analytic target; no fitted inference calibration.",
+  "selection": "Four fixed RGGB cases declared in frozen plan before inference."
+}

@@ -42,6 +42,12 @@ recorded. The earlier Tiny/Small capacity recipes remain unlaunched and can use
 a better completed initializer later. [Source review](incoming-commons-quality.md) ·
 [Current training](quality-first-training.md).
 
+The [V104 ADC diagnostics](v104-adc-color-projection.md) show that the existing
+Malvar residual operator repairs most flat-color bias, with texture gains and
+individual phase regressions. The full427/four-CFA photo comparison is running
+on CPU; an owned queue will aggregate complete results and render both policies'
+adverse examples. This has not changed the checkpoint or ADC recommendation.
+
 The merged [linear DNG/JPEG path](dng-export.md) adds optional Bayer hot-pixel
 removal before restoration; repair was off in these comparisons. The
 [16-scene paired test reserve](paired-reserved-test.md) remains unscored and

@@ -121,7 +121,5 @@ refresh instead reconstructs the bit-exact old inputs and computes only V104:
 Its frozen plan binds the retained inputs, prior execution witness, weights and
 copied implementation. Outputs are in
 `/mnt/external/demosaic/three-camera-V104-CPU-20261023-v2/`.
-The first launch omitted explicit noise conditioning and stopped before its
-first successful forward; that source/log/output remain preserved separately.
 The [earlier V43 execution receipt](results/cross-camera-v43-qualitative.json)
 and timestamped diary preserve historical evidence.

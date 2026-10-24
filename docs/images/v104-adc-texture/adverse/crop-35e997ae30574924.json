@@ -1,0 +1,89 @@
+{
+  "image": "crop-35e997ae30574924.png",
+  "caption": "Posthoc largest Malvar carrier RMSE increase / carrier-l0.18-c0.02-p4-draw0 / GBRG / V104+Malvar",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Restored",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "GT (analytic)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "dd4b919e3318ced18cba286f3344d903a1cd17b0083a68d376e8bd5eb937ceb5",
+  "source_id": "carrier-l0.18-c0.02-p4-draw0",
+  "source": {
+    "kind": "carrier",
+    "level": 0.18,
+    "contrast": 0.02,
+    "period": 4
+  },
+  "evaluation_tile_xywh": [
+    48,
+    48,
+    160,
+    160
+  ],
+  "condition": {
+    "name": "adc-only",
+    "shot": 0.0,
+    "read": 0.0,
+    "exposure": 1.0
+  },
+  "pattern": "GBRG",
+  "white_balance": [
+    2.0,
+    1.0,
+    1.5
+  ],
+  "camera_to_srgb": [
+    [
+      1.1176470518112183,
+      -0.05882352963089943,
+      -0.05882352963089943
+    ],
+    [
+      -0.05882352963089943,
+      1.1176470518112183,
+      -0.05882352963089943
+    ],
+    [
+      -0.05882352963089943,
+      -0.05882352963089943,
+      1.1176470518112183
+    ]
+  ],
+  "display_exposure": 1.0,
+  "model": {
+    "label": "V104+Malvar",
+    "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+    "step": 20000,
+    "compute_precision": "IEEE float32",
+    "device": "cpu",
+    "output_operator": "malvar"
+  },
+  "reference": "Exact analytic target; no fitted inference calibration.",
+  "selection": "Posthoc maximum V104+Malvar-minus-V104 linear-sRGB RMSE among 48 fixed carrier/CFA cases. Same fixed center ROI and display for all methods; retained floats only."
+}

@@ -7,7 +7,8 @@ improve. Positive shot/read priors bypass it, so this is separate from real-RAW
 denoising. The current quality/training baseline is
 [V104](current-model.md). A [V104 saved-float diagnostic](v104-adc-color-projection.md)
 finds that Malvar residual projection reduces its worst flat-color bias
-1,218.06→31.91 DN16, but photographic and texture validation remain required.
+1,218.06→31.91 DN16. Its completed texture check shows phase-specific tradeoffs;
+photographic validation is still running.
 The V84 photo gain below is not a measured V104 gain.
 
 [Complete numerical audit, hashes and viewed native crops](results/v84-adc-sites-full427-v1.json).

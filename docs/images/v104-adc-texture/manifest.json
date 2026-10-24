@@ -1,0 +1,55 @@
+{
+  "galleries": [
+    {
+      "slug": "fixed",
+      "manifest": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v104-adc-texture/fixed/manifest.json",
+        "sha256": "f5ba6e673e386c544c43ce9d9771b36962743a979c84a889166b0227f20799dd"
+      },
+      "native_cells_actually_viewed": 20
+    },
+    {
+      "slug": "adverse",
+      "manifest": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v104-adc-texture/adverse/manifest.json",
+        "sha256": "1f1e263123272d0db82b4ab468a1dc0b228637179fb3ad9ae760dc115bdbb960"
+      },
+      "native_cells_actually_viewed": 5
+    }
+  ],
+  "models": [
+    {
+      "label": "V104",
+      "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+      "step": 20000,
+      "compute_precision": "IEEE float32",
+      "device": "cpu",
+      "output_operator": "original"
+    },
+    {
+      "label": "V104+Malvar",
+      "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+      "step": 20000,
+      "compute_precision": "IEEE float32",
+      "device": "cpu",
+      "output_operator": "malvar"
+    },
+    {
+      "label": "V104+sites",
+      "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+      "step": 20000,
+      "compute_precision": "IEEE float32",
+      "device": "cpu",
+      "output_operator": "sites"
+    }
+  ],
+  "scope": "Prospective fixed V104 final20000 CPU FP32 output-policy comparison on 48 known horizontal carriers and eight flat fields, ADC-only, four CFAs, levels .01/.18, contrasts .02/.10, periods4/8/16; one deterministic ADC draw per specification (the old four identical ADC copies add no independent evidence). Original/Malvar/sites share one actual neural prediction; Noisy Malvar is a comparator. Full256 signals, native160 scoring/display, no interpolation or target-fitted correction. Four native RGGB cases declared before output. Additionally three actual whole-model forwards on four positive-prior inputs exercise production bypass with both operators bit-exact. No training/checkpoint/selector changes, photographic quality or SOTA claims; full427 photo comparison is separate and remains running.",
+  "source_report": {
+    "path": "/mnt/external/demosaic/V104-ADC-texture-CPU-20261023-v1/summary.json",
+    "sha256": "9481ffc947f72e84d4a0274fc1a0917fc7ac52d22511481fc10ce61e9c8f1ad7"
+  },
+  "independent_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-ADC-texture-CPU-v1/audit.json",
+    "sha256": "8c45939c53f823bb94794be158845d56530844b52ae9264b34661eb215498183"
+  }
+}

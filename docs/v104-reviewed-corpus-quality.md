@@ -119,8 +119,9 @@ at original resolution.
 A subsequent [saved-float ADC projection diagnostic](v104-adc-color-projection.md)
 reduces V104's worst analytic-grid bias to 31.91 DN16 with the existing Malvar
 residual operator. It does not change the original scores above or the current
-checkpoint: a full ADC photo comparison is running, with texture evidence
-still pending.
+checkpoint: a full ADC photo comparison is running. The completed ADC texture
+check shows carrier gains and individual Malvar regressions, including a
+native GBRG counterexample.
 
 ## Complete real GFX outputs
 
