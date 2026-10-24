@@ -1,8 +1,10 @@
 # Natural fine-detail comparisons
 
-**V104 final20k improves PSNR, SSIM and gradient error on all 12 selected cases
-over V102**, adding +.246dB ADC-only, +.166dB ISO100 and +.024dB ISO12800.
-Visible changes are small. Both preserve substantially more bark grain,
+**V111 final20k improves PSNR, SSIM, chroma and gradient error on all twelve
+selected cases over V104**, adding +.254dB ADC-only, +.100dB ISO100 and +.019dB
+ISO12800. [Early completed material and GFX report](v111-early-quality.md).
+V104 previously improved all twelve PSNR/SSIM/gradient cases over V102.
+Visible changes are small. These models preserve substantially more bark grain,
 feather texture, canopy structure and fur than RawNIND here. At high noise,
 white plumage, distant trees and individual hairs remain smoothed.
 
@@ -19,12 +21,30 @@ Each cell is an unchanged **160×160 native-pixel crop** at the8×-binned evalua
 resolution. Open the original PNG at100%; a browser may fit the board to its
 window. Columns share the same noisy observation, coordinates, display and exact
 synthetic target. RawNIND uses input-only CFA-channel gain. Current boards
-compare V102,V104 and RawNIND without highlighting a preferred model.
+compare V104/V111; earlier V102/V104/RawNIND boards remain below.
 
 The [fixed-weight noise-conditioning probe](noise-conditioning.md) separates a
 related detail/grain tradeoff: lower priors preserve more high-noise structure
 and residual error. It keeps the true noisy observations fixed; the current
 calibrated default remains unchanged.
+
+## V111 versus V104 on the fixed material panel
+
+Noisy → V111 → exact synthetic GT at the ISO100 prior, native160 pixels:
+
+![V111 bark native triplet](images/v111-early-material/iso100-prior/crop-5c9cfe7a56e7eadf.png)
+
+![V111 canopy native triplet](images/v111-early-material/iso100-prior/crop-f8f123bdd99f51b9.png)
+
+[All four sources and both methods, ISO100](images/v111-early-material/iso100-prior/comparison.png)
+([metadata](images/v111-early-material/iso100-prior/manifest.json)) ·
+[ADC-only](images/v111-early-material/adc-only/comparison.png) ·
+[ISO12800](images/v111-early-material/iso12800-prior/comparison.png).
+All48 cells were actually viewed. Low-noise bark/canopy gain modest structure;
+fine white feathers and hairs remain soft at high noise. The
+[report](v111-early-quality.md) records all24 rows, source/ROI/weights/noise/display,
+unchanged inputs and source credits. Extra training, seed and corpus changes
+are confounded versus V104. Full photographic/camera/color results are pending.
 
 ## V104 versus V102 on the fixed material panel
 

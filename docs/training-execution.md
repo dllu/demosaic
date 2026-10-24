@@ -6,8 +6,9 @@ updates with exactly matching model, EMA, AdamW, Python/CPU/CUDA RNG states,
 inputs, and logged losses. The default remains `throughput-v1`.
 
 The implementation checks below used the recorded V63 study setup. Current
-[V111/V112 trial](loss-scale-training.md) uses V104 on 90,864 sources. V111 is
-training after four source/config-matched CPU/CUDA checks; V112 follows. The
+[V111/V112 trial](loss-scale-training.md) uses V104 on 90,864 sources. V111
+completed20k with [early material/GFX review](v111-early-quality.md); V112 is
+training after its verified same-parent handoff. The
 [actual launch](results/v104-loss-scale-training-started-v2.json) preserves a corrected
 zero-update queue handoff failure. V104 completed 20k from V102 on 90,872 sources;
 V102/V103 used V101 and 88,477 sources. Each run retains its actual settings and evidence.

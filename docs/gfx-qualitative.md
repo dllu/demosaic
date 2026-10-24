@@ -55,6 +55,19 @@ They do not meet 100MP/10s; no speed optimization is claimed. Artifacts are in
 The original controller and worker exited successfully.
 [Full-frame audit, hashes and original export receipts](results/v104-reviewed-corpus-fullframe-v1.json).
 
+## V111 final20k context comparison
+
+![Six GFX contexts: noisy, V104, V111, RawNIND pre-upsampled and separate ISO100 reference](images/v111-early-gfx/comparison.png)
+
+[V111's completed material and real-photo review](v111-early-quality.md) adds
+the same six standing regions after its original20k endpoint. These are
+**512-pixel context** restorations, native160 cells and shared+2EV, with reused
+V104 and stronger RawNIND-preup outputs. V111/V104 look close: coherent mesh and
+building edges persist, while fine foliage and saturated-sign structure remain
+soft. All30 cells were actually viewed. The independent ISO100 f/5.6 image is
+qualitative, not GT; these are not new102MP exports.
+[All18 triplets, checkpoint/source/ROI/noise/display metadata](images/v111-early-gfx/manifest.json).
+
 ## Stronger released RawNIND reference
 
 The [pre-upsampled RawNIND comparison](rawnind-variants.md) adds a stronger

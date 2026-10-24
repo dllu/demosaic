@@ -6,9 +6,11 @@ and continued quality training.** It reaches 36.80085dB on full427, +.12134dB
 over V102, improving 424 source means and the tested weak texture. V102 retains
 lower ADC flat-color bias and a higher unseen-camera mean.
 [Completed V104 results and native comparisons](v104-reviewed-corpus-quality.md).
-All seven panels and complete 102MP exports are finished. V111 is training
-from V104 on the further-cleaned 90,864-source corpus; V112 follows with a
-smaller reconstruction loss scale. [Actual trial and evidence](loss-scale-training.md).
+All seven V104 panels and complete102MP exports are finished. V111 completed20k
+on90,864 sources and [improves all twelve material cases](v111-early-quality.md),
+with modest native gains and small real GFX changes. V112 is training with a
+smaller reconstruction loss scale; full matched results are pending.
+[Actual trial and evidence](loss-scale-training.md).
 The optional [V104 ADC sites export](adc-consistency.md) adds .2885 dB on the
 complete ADC-only photo panel, with unchanged learned weights and documented
 flat-color tradeoffs.

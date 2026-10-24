@@ -1,0 +1,163 @@
+{
+  "image": "crop-d397d506779378a6.png",
+  "caption": "chain-link-fence / V111",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Denoised",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "ISO100 ref (not GT)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "191431d362af581b4b62ea64e10f5d542546822b843e7bc9527d29d2b4aeedd6",
+  "region": {
+    "name": "chain-link-fence",
+    "noisy_xy": [
+      2240,
+      6000
+    ],
+    "reference_xy": [
+      2241,
+      6000
+    ],
+    "size": 160,
+    "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+    "context_green_correlation": 0.9550720453262329
+  },
+  "model_label": "V111",
+  "checkpoint_sha256": "97ab9ca5f1f182ff42a4245c630bba810607a3d13b61cf8aae5842192a18da15",
+  "compute_precision": "IEEE float32",
+  "device": "cpu",
+  "conditioning": {
+    "shot": 0.0014635775921166604,
+    "read": 1.0715704128646712e-06
+  },
+  "context_xywh": [
+    2064,
+    5824,
+    512,
+    512
+  ],
+  "full_frame": false,
+  "display_exposure": 4.0,
+  "shared_wb": [
+    1.5132450331125828,
+    1.0,
+    2.2152317880794703
+  ],
+  "shared_matrix": [
+    [
+      1.0725188393098881,
+      0.17123593128834644,
+      -0.24375477059823436
+    ],
+    [
+      -0.1267191317089774,
+      1.4310509369654432,
+      -0.3043318052564657
+    ],
+    [
+      -0.009697676902906037,
+      -0.29348063283422965,
+      1.3031783097371357
+    ]
+  ],
+  "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+  "model": {
+    "label": "V111",
+    "sha256": "97ab9ca5f1f182ff42a4245c630bba810607a3d13b61cf8aae5842192a18da15",
+    "source": "/mnt/external/demosaic/models/v111-final20000.pt",
+    "step": 20000,
+    "effective_model_config": {
+      "restoration_backbone": "pretrained-rgb",
+      "width": 64,
+      "encoder_blocks": [
+        2,
+        2,
+        4
+      ],
+      "middle_blocks": 6,
+      "decoder_blocks": [
+        2,
+        2,
+        2
+      ],
+      "attention": true,
+      "dino": true,
+      "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+      "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+      "dino_lora_rank": 0,
+      "dino_input_adapter": false,
+      "dino_feature_fusion": "convnext-pyramid",
+      "camera_conditioning": true,
+      "noise_modulation": false,
+      "physical_fp32": true,
+      "baseline": "bilinear",
+      "prior_window": 7,
+      "standardized_noise": false,
+      "noise_refinement": false,
+      "refinement_width": 24,
+      "refinement_blocks": 4,
+      "refinement_window": 63,
+      "coarse_refinement_factor": 0,
+      "coarse_refinement_width": 24,
+      "coarse_refinement_blocks": 4,
+      "coarse_refinement_window": 31,
+      "pyramid_refinement": false,
+      "pyramid_measurements": true,
+      "pyramid_width": 24,
+      "pyramid_blocks": 2,
+      "variance_stabilization": true,
+      "physical_anchors": true,
+      "rgb_processing_scale": 1,
+      "packed_detail_prior": false,
+      "rgb_hidden_autocast": false,
+      "rgb_center_camera_matrix": false,
+      "rgb_middle_skip_fp32": true,
+      "adc_cfa_projection": false,
+      "adc_cfa_projection_mode": "malvar",
+      "raw_kernel_reconstruction": false,
+      "raw_kernel_windows": [
+        1,
+        5,
+        17
+      ],
+      "raw_kernel_phase_conditioning": false,
+      "raw_directional_residual": false,
+      "raw_directional_bank_context": false,
+      "raw_directional_bank_detach_input": false,
+      "raw_spectral_residual": false,
+      "late_rgb_refinement": "none",
+      "isotropic_groups": 6,
+      "isotropic_blocks": 8,
+      "isotropic_local_width": 32,
+      "isotropic_raw_gain": 1.0,
+      "isotropic_residual_scale": 1.0
+    },
+    "device": "cpu",
+    "compute_precision": "IEEE float32"
+  }
+}

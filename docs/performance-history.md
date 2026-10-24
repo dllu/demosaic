@@ -8,6 +8,10 @@ Selected fixed primary endpoints, chosen by study scope, never by highest score.
 
 All photo points use the full fixed427-source panel, seven conditions and four CFAs. Known/unseen points balance captures within scenes, then scenes (4/5 scenes,72/90 crops). Precision, checkpoint hashes and per-source results remain in the source reports.
 
+V111 completed its fixed20k endpoint with [gains on all twelve selected material
+cases and a six-context GFX comparison](v111-early-quality.md). Its full427/camera
+panels are pending, so those supplementary means are not plotted as full-panel points.
+
 V98/V99 use common ADC-only inference projection; only V99 trained through it. Their original V43/V95 references retain their checkpoint policies. The [completed ADC study](v95-adc-training-quality-review.md) improves ADC color but retains positive-noise color/detail weaknesses. Study-specific statistical gates do not prevent showing progress or choosing a stronger development baseline.
 
 | Version / endpoint | Photo sRGB | Known CFA | Unseen CFA | Report |

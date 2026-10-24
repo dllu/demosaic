@@ -1,0 +1,98 @@
+{
+  "image": "crop-9a64927408786507.png",
+  "caption": "illuminated-platform-boundary / V104",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Denoised",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "ISO100 ref (not GT)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "fc8baa18ed013dd5dad70b97333ae4a605bc96657dbe7ea668bd289b4e1478f9",
+  "region": {
+    "name": "illuminated-platform-boundary",
+    "noisy_xy": [
+      10320,
+      4520
+    ],
+    "reference_xy": [
+      10321,
+      4520
+    ],
+    "size": 160,
+    "selection_method": "Input-only locator selection, then maximum normalized green correlation in512px input/reference contexts; integer offsets within+/-8 only, no output-dependent selection or warp",
+    "context_green_correlation": 0.9831606311368877
+  },
+  "model_label": "V104",
+  "checkpoint_sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+  "compute_precision": "IEEE float32",
+  "device": "cpu",
+  "conditioning": {
+    "shot": 0.0014635775921166604,
+    "read": 1.0715704128646712e-06
+  },
+  "context_xywh": [
+    10144,
+    4344,
+    512,
+    512
+  ],
+  "full_frame": false,
+  "display_exposure": 4.0,
+  "shared_wb": [
+    1.5132450331125828,
+    1.0,
+    2.2152317880794703
+  ],
+  "shared_matrix": [
+    [
+      1.0725188393098881,
+      0.17123593128834644,
+      -0.24375477059823436
+    ],
+    [
+      -0.1267191317089774,
+      1.4310509369654432,
+      -0.3043318052564657
+    ],
+    [
+      -0.009697676902906037,
+      -0.29348063283422965,
+      1.3031783097371357
+    ]
+  ],
+  "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+  "model": {
+    "label": "V104",
+    "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+    "source": "/mnt/external/demosaic/models/v104-final20000.pt",
+    "step": 20000,
+    "reuse": "Bound original CPU float outputs; zero new forwards.",
+    "device": "cpu",
+    "compute_precision": "IEEE float32"
+  }
+}

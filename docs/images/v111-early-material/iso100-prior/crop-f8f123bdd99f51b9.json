@@ -1,0 +1,168 @@
+{
+  "image": "crop-f8f123bdd99f51b9.png",
+  "caption": "Fine forest canopy and weak distant tree structure / iso100-prior / V111-final20000",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Denoised",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "GT (synthetic)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "6f18008249ab7023dc5722c307e0eae8181c235e6fe2c24cfb5e0bfe4592f3ad",
+  "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+  "source": {
+    "title": "File:Forest covered hills on Yakushima.jpg",
+    "page_url": "https://commons.wikimedia.org/wiki/File:Forest_covered_hills_on_Yakushima.jpg",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Forest_covered_hills_on_Yakushima.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "author": "Grendelkhan",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "attribution": null,
+    "credit": "Own work",
+    "sha1": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+    "sha1_hex": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+    "download_path": "images/21/2a/212ae12913effa23268af953b4c8f8e8b7ab4ef5.jpg",
+    "width": 4048,
+    "height": 3036,
+    "id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+    "split": "val",
+    "bin_factor": 8,
+    "color_space": "linear-sRGB",
+    "dtype": "uint16",
+    "cache": "/mnt/external/demosaic/commons-v1/images/21/212ae12913effa23268af953b4c8f8e8b7ab4ef5.npy",
+    "shape": [
+      379,
+      506,
+      3
+    ],
+    "cache_sha256": "93b465730cea963f16edf53d3b3c2187dfa9519b0ff6a8b8d1e57e1f7db3d30b"
+  },
+  "validation_index": 320,
+  "validation_seed": 42,
+  "evaluation_tile_xywh": [
+    48,
+    48,
+    160,
+    160
+  ],
+  "source_cache_context_xywh": [
+    133,
+    67,
+    256,
+    256
+  ],
+  "condition": {
+    "name": "iso100-prior",
+    "shot": 2e-05,
+    "read": 1.6e-09,
+    "exposure": 1.0
+  },
+  "pattern": "RGGB",
+  "model": {
+    "label": "V111-final20000",
+    "sha256": "97ab9ca5f1f182ff42a4245c630bba810607a3d13b61cf8aae5842192a18da15",
+    "source": "/mnt/external/demosaic/v104-loss-scale-20261023-v2/train/V111/last.pt",
+    "snapshot": "/mnt/external/demosaic/V111-final20000-early-material-20261023-v1/weights/weights-97ab9ca5f1f182ff42a4245c630bba810607a3d13b61cf8aae5842192a18da15.pt",
+    "step": 20000,
+    "effective_model_config": {
+      "restoration_backbone": "pretrained-rgb",
+      "width": 64,
+      "encoder_blocks": [
+        2,
+        2,
+        4
+      ],
+      "middle_blocks": 6,
+      "decoder_blocks": [
+        2,
+        2,
+        2
+      ],
+      "attention": true,
+      "dino": true,
+      "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+      "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+      "dino_lora_rank": 0,
+      "dino_input_adapter": false,
+      "dino_feature_fusion": "convnext-pyramid",
+      "camera_conditioning": true,
+      "noise_modulation": false,
+      "physical_fp32": true,
+      "baseline": "bilinear",
+      "prior_window": 7,
+      "standardized_noise": false,
+      "noise_refinement": false,
+      "refinement_width": 24,
+      "refinement_blocks": 4,
+      "refinement_window": 63,
+      "coarse_refinement_factor": 0,
+      "coarse_refinement_width": 24,
+      "coarse_refinement_blocks": 4,
+      "coarse_refinement_window": 31,
+      "pyramid_refinement": false,
+      "pyramid_measurements": true,
+      "pyramid_width": 24,
+      "pyramid_blocks": 2,
+      "variance_stabilization": true,
+      "physical_anchors": true,
+      "rgb_processing_scale": 1,
+      "packed_detail_prior": false,
+      "rgb_hidden_autocast": false,
+      "rgb_center_camera_matrix": false,
+      "rgb_middle_skip_fp32": true,
+      "adc_cfa_projection": false,
+      "adc_cfa_projection_mode": "malvar",
+      "raw_kernel_reconstruction": false,
+      "raw_kernel_windows": [
+        1,
+        5,
+        17
+      ],
+      "raw_kernel_phase_conditioning": false,
+      "raw_directional_residual": false,
+      "raw_directional_bank_context": false,
+      "raw_directional_bank_detach_input": false,
+      "raw_spectral_residual": false,
+      "late_rgb_refinement": "none",
+      "isotropic_groups": 6,
+      "isotropic_blocks": 8,
+      "isotropic_local_width": 32,
+      "isotropic_raw_gain": 1.0,
+      "isotropic_residual_scale": 1.0
+    },
+    "compute_precision": "float32",
+    "device": "cpu"
+  },
+  "display_exposure": 1,
+  "reference": "Exact synthetic clean target",
+  "observation": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/heldout-detail-followup-v1/inputs/212ae12913effa23268af953b4c8f8e8b7ab4ef5-iso100-prior-RGGB.npz",
+    "sha256": "33140a02ebc311c73d14fcd60faa75ae45be0f4f70175dd9f6a16cbd83035ba8"
+  },
+  "detail": "Fine forest canopy and weak distant tree structure",
+  "selection": "Four diverse contexts selected after actually viewing10 clean native256 contexts and their native160 centers, before viewing model outputs on these cases. Bark, white feathers, forest canopy/haze and gray fur. Mixed contrast; selected for fine/weak structures, not global low-contrast labels."
+}

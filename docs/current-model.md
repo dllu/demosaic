@@ -1,7 +1,9 @@
 # Current models and development baseline
 
-**Use V104 final20k for positive-noise RAW restoration and continued quality
-training.** It retains V84's pretrained DRUNet RGB trunk, physical noise anchors
+**V111 final20k adds measured material gains over V104; V104 remains the fully
+evaluated working baseline.** [V111's native comparisons](v111-early-quality.md)
+show improvements in all twelve material cases and small real GFX changes;
+its broad photo/camera/color results are pending. Both retain V84's pretrained DRUNet RGB trunk, physical noise anchors
 and official frozen DINOv3 ConvNeXt-Tiny pyramid. V102 remains useful for lower
 ADC flat-color bias and its higher unseen-camera CFA mean. V43 is a
 historical comparator. [Completed V104 report and native comparisons](v104-reviewed-corpus-quality.md).
@@ -21,6 +23,7 @@ the original positive-noise/training checkpoint stays current.
 | V102 | 36.67951 | 54.23709 | **53.97177** | Lower ADC bias; unseen-camera reference |
 | V103 | 36.68091 | 54.22003 | 53.96410 | Similar photo quality, expanded ROI catalogue |
 | **V104** | **36.80085** | **54.26606** | 53.91700 | **Current positive-noise and training baseline** |
+| V111 | pending | pending | pending | New material/detail candidate; final20k complete |
 
 V104 improves 424/427 photographic source means and all seven condition means
 over V102. All source SSIM/gradient means and all 12 selected material
@@ -97,9 +100,12 @@ V104 adds 20k fresh-optimizer updates on 90,872 reviewed Commons sources to V102
 More training, seed and data change together, so this does not isolate a corpus
 effect. [Original endpoint/source boundary](results/V104-original20000-training-boundary-v1.json).
 The [V111/V112 loss-scale test](loss-scale-training.md) retains its exact EMA
-and learned fusion gates on the further-cleaned 90,864-source corpus. V111 is
-training; V112 follows, changing only epsilon .001→.0003 under matched 20k
+and learned fusion gates on the further-cleaned 90,864-source corpus. V111 has
+completed20k and [improves all twelve material cases](v111-early-quality.md);
+V112 is training, changing only epsilon .001→.0003 under matched20k
 budgets. [Actual production launch and corrected handoff](results/v104-loss-scale-training-started-v2.json).
+The read-only V111 candidate is `/mnt/external/demosaic/models/v111-final20000.pt`,
+SHA256 `97ab9ca5f1f182ff42a4245c630bba810607a3d13b61cf8aae5842192a18da15`.
 
 Earlier [V102/V103](v102-v103-quality-review.md),
 [V100/V101](v84-curated-quality-review.md) and

@@ -58,7 +58,9 @@ are current; all seven evaluation panels and full-frame exports are complete.
 [Source review and native examples](incoming-commons-quality.md).
 The [V111/V112 loss-scale comparison](loss-scale-training.md) retains the original
 V104 EMA on the cleaned 90,864-source corpus. Four discarded CPU/CUDA checks
-pass; V111 is now training and V112 follows at its fixed 20k budget.
+pass. V111 completed20k and [improves all twelve material cases](v111-early-quality.md),
+with modest native gains and small GFX changes; V112 is training. Full matched
+photo/camera/color results remain pending.
 
 The source scan covers88,508 training images, with570 actually reviewed and 31
 withheld/excluded. Completed runs used the earlier 24 exclusions; seven more and

@@ -12,9 +12,12 @@ bias and a higher unseen-camera mean.
 
 V104 completed 20k updates on 90,872 sources, all seven evaluation panels and
 complete 102MP GFX exports. Fine high-noise texture and real foliage still need work.
-The next [matched loss-scale test](docs/loss-scale-training.md) uses V104 and
-90,864 cleaned sources to test faint-detail supervision: V111 is training and
-V112 is queued. The separate
+**V111 final20k adds useful material gains:** all twelve selected cases improve
+in PSNR, SSIM, chroma and gradient error over V104, with +.254/.100/.019dB
+at ADC-only/ISO100/ISO12800. [Native comparisons and real GFX limitations](docs/v111-early-quality.md).
+Its broad photo/camera/color results remain pending. The
+[matched loss-scale test](docs/loss-scale-training.md) uses V104 and 90,864
+cleaned sources; V111 has finished and V112 is training. The separate
 [Tiny/Small recipes](docs/convnext-small-capacity.md#prepared-matched-quality-trial)
 remain prepared.
 [Current models](docs/current-model.md) · [Source-quality review](docs/incoming-commons-quality.md) ·
@@ -32,16 +35,16 @@ isolated architecture ablation.
 
 ## Current 100% crops
 
-Noisy observation → **V104 final20k** → exact synthetic GT, at the ISO100 prior.
+Noisy observation → **V111 final20k** → exact synthetic GT, at the ISO100 prior.
 These are unchanged 160×160 crops at the 8×-binned evaluation resolution, with
-shared coordinates and display transforms. V104 gains +.166dB over V102 on the
-four selected ISO100 contexts; high-noise detail remains soft.
-[Compare V102,V104 and RawNIND](docs/heldout-detail.md) ·
-[source/ROI/checkpoint/noise/display metadata](docs/images/detail-v102-v104/iso100-prior/manifest.json).
+shared coordinates and display transforms. V111 gains +.100dB over V104 on the
+four selected ISO100 contexts; high-noise detail remains soft. Its full427 result
+is pending. [Compare V104/V111 and earlier methods](docs/heldout-detail.md) ·
+[source/ROI/checkpoint/noise/display metadata](docs/images/v111-early-material/iso100-prior/manifest.json).
 
-![V104 final20k, bark: noisy, restored and exact synthetic GT](docs/images/detail-v102-v104/iso100-prior/V104-0ae232278265.png)
+![V111 final20k, bark: noisy, restored and exact synthetic GT](docs/images/v111-early-material/iso100-prior/crop-5c9cfe7a56e7eadf.png)
 
-![V104 final20k, canopy: noisy, restored and exact synthetic GT](docs/images/detail-v102-v104/iso100-prior/V104-212ae12913ef.png)
+![V111 final20k, canopy: noisy, restored and exact synthetic GT](docs/images/v111-early-material/iso100-prior/crop-f8f123bdd99f51b9.png)
 
 Sources: [Derek Ramsey](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
 [CC BY-SA 2.5](https://creativecommons.org/licenses/by-sa/2.5/), and
@@ -54,6 +57,8 @@ sensor-pixel crops from complete102MP blended outputs, with shared +2EV display.
 panel is a separately captured qualitative reference, **not GT**.
 [Compare complete102MP V102/V104/RawNIND outputs](docs/gfx-qualitative.md).
 Real-photo changes remain small; fine foliage and saturated-light detail still need work.
+The newer [V111 six-context comparison](docs/v111-early-quality.md#standing-gfx100s-test)
+looks close to V104 and includes the stronger RawNIND pre-upsampled reference.
 The [Q2, Sony a7R II and GFX50R gallery](docs/cross-camera-qualitative.md)
 also compares V102/V104 on six fixed native regions; changes remain small.
 [V104 conditioning controls](docs/noise-conditioning.md) illustrate the

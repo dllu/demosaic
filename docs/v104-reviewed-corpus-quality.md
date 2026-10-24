@@ -162,8 +162,10 @@ SHA256 `8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300`.
 
 The [next V111/V112 trial](loss-scale-training.md) retains this exact EMA and
 learned fusion gates on the further-cleaned 90,864-source corpus, changing only
-reconstruction epsilon .001 versus .0003. V111 is now training after the
-original V104 exports finished; V112 follows at the same fixed 20k budget.
+reconstruction epsilon .001 versus .0003. V111 completed20k and
+[improves all twelve fixed material cases](v111-early-quality.md), with small
+real GFX changes. V112 is training at the same fixed20k budget; full matched
+results remain pending.
 [Actual launch and corrected zero-update queue handoff](results/v104-loss-scale-training-started-v2.json).
 Fine real-photo detail and the 100MP/10s target remain open.
 

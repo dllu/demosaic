@@ -1,6 +1,6 @@
 # Quality training in the V84 architectural family
 
-**V104 final20k initializes the next quality trial in V84's DRUNet RGB/frozen
+**V104 final20k initializes the active quality trial in V84's DRUNet RGB/frozen
 DINOv3 ConvNeXt-Tiny family.** All seven panels and full-frame exports are
 complete: photo PSNR reaches 36.80085dB, +.12134dB over V102. Known-camera and
 weak-detail scores improve; V102 retains lower ADC bias and a higher unseen
@@ -22,8 +22,9 @@ paired RAW keeps its existing .0001 scale.
 The [fixed-output diagnostic](loss-smoothing-detail.md) motivates this trained
 test but does not establish better restoration. Compare final image metrics,
 weak detail, color and native crops on the same observations. Raw loss values
-across epsilon settings use different objectives. V111 is now training after the
-original V104 evaluation/export owners finished; V112 follows. Its four successful CPU/CUDA
+across epsilon settings use different objectives. V111 completed its original20k
+and [improves all twelve fixed material cases](v111-early-quality.md); real GFX
+changes remain small. V112 is now training. The four successful CPU/CUDA
 smokes are adopted with verified source/configuration equivalence, without
 repetition. Earlier experiments retain their inputs and evidence.
 [Recipes, reader checks and actual discarded preflights](results/v104-loss-scale-prepared-v1.json) ·

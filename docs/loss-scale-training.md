@@ -1,7 +1,9 @@
 # Controlled training test for faint detail
 
-**V111 is training and V112 is queued from the original V104 final 20k
-EMA.** They keep the same architecture, data, initialization and budget, changing
+**V111 completed its original20k endpoint; V112 is training from the same
+original V104 EMA.** V111's [early material/GFX review](v111-early-quality.md)
+improves all twelve material cases over V104, with small real-photo changes.
+The full matched quality results remain pending. Both keep the same architecture, data, initialization and budget, changing
 only reconstruction Charbonnier epsilon: **.001 versus .0003**. The trial
 started after V104's owned evaluation and full-frame exports finished.
 [Completed V104 strengths and tradeoffs](v104-reviewed-corpus-quality.md) and
@@ -69,17 +71,19 @@ evaluation and complete 102MP RGB16 exports are queued afterward, with
 A [separate CPU material queue](results/v104-loss-scale-training-started-v2.json)
 will compare both final endpoints with V104 and V102 on the original 12 cached
 observations, producing native noisy/restored/exact-GT triplets.
-V112 starts after V111's fixed endpoint. Neither has a completed production
-quality result yet.
+V112 started after V111's fixed endpoint and original worker exit. Its first
+input/loss/gradient replay its CUDA preflight; all currently checked logged
+input/domain/LR rows match V111. This is an execution check, not a quality result.
 
 An additional [early CPU material queue](results/v111-final20000-early-material-queued-v1.json)
-will review V111's fixed final20k endpoint while V112 trains. It requires the
-original V111 worker to exit and the existing training controller to adopt its
-completed receipt before reading the checkpoint. It uses the same twelve
-cached observations, saves unquantized predictions and native160 triplets,
-and adds no V104 inference. This supplementary review is separate from the
-unchanged full matched evaluation and later four-model material queue; no
-intermediate checkpoint is selected and no quality outcome is available yet.
+finished V111's fixed final20k endpoint after verifying the original worker's
+exit and controller adoption. It used the same twelve cached observations,
+saved unquantized predictions/native160 triplets and added no V104 inference.
+The [completed early report](v111-early-quality.md) shows +.254/.100/.019dB
+ADC-only/ISO100/ISO12800 and all twelve PSNR/SSIM/chroma/gradient cases improving.
+Six GFX context comparisons look close to V104. This supplementary review is
+separate from the unchanged full matched evaluation and later four-model
+material queue; no intermediate checkpoint was selected.
 
 The first queue stopped before any optimizer update because its controller
 looked for a child field omitted from terminal export status. A new controller
@@ -104,7 +108,9 @@ The deterministic per-arm schedule contains 111,559 photographic examples from
 and 5,657 reviewed-ROI examples. Twelve actual clean-reader checks cover six
 new-source draws and all six ROIs; repeated native256 tensors match exactly
 with finite output and unchanged Torch RNG. These are prospective exposure
-counts and reader checks, separate from completed training.
+counts and reader checks. V111 has now completed the declared schedule; V112
+still has future draws. The counts reconstruct scheduled exposure rather than
+independently verifying every unlogged fetch.
 
 Compare the original fixed final endpoints with each other and V104, retaining
 V102 as a separately labeled reference. Use full photographic and measured-camera

@@ -41,8 +41,10 @@ result does not isolate the data-cleaning effect.
 
 The [V111/V112 loss-scale trial](loss-scale-training.md) retains the exact V104
 EMA and learned fusion gates on the further-cleaned **90,864-source** corpus.
-V111 is training; V112 follows at its fixed20k budget, changing only epsilon
-.001→.0003. Actual CPU/CUDA checks and the corrected production handoff are
+V111 completed20k and [improves all twelve fixed material cases](v111-early-quality.md)
+over V104, with modest native gains and small real GFX changes. V112 is training
+at its fixed20k budget, changing only epsilon .001→.0003. Full matched
+photo/camera/color/detail results are pending. Actual CPU/CUDA checks and the corrected production handoff are
 recorded. The earlier Tiny/Small capacity recipes remain unlaunched and can use
 a better completed initializer later. [Source review](incoming-commons-quality.md) ·
 [Current training](quality-first-training.md).

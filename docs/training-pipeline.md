@@ -8,7 +8,8 @@ batch32 is only1.3% faster than16 while using roughly twice the CUDA allocation.
 Details and limitations are recorded below.
 
 The [active V111/V112 quality trial](loss-scale-training.md) starts from the exact
-V104 EMA on 90,864 reviewed sources. V111 is training and V112 follows, retaining
+V104 EMA on 90,864 reviewed sources. V111 completed20k with [material gains](v111-early-quality.md),
+and V112 is training. Both retain
 128 native/32 paired targets,
 zero optical PSFs,weak textures,photographic contrast attenuation and the same
 six reviewed regions. The [completed V102/V103 study](v102-v103-quality-review.md)

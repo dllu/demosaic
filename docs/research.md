@@ -39,10 +39,11 @@ V111/V112 has priority; later capacity work can use the best completed initializ
 The [loss-smoothing diagnostic](loss-smoothing-detail.md) also measures 324
 output gradients on 108 fixed V102 training-source restorations. Smaller epsilon
 strengthens low-noise faint-detail slopes but increases the full gradient more.
-The [queued V111/V112 trial](loss-scale-training.md) tests .001 versus .0003 from
+The [active V111/V112 trial](loss-scale-training.md) tests .001 versus .0003 from
 the original V104 EMA on the cleaned corpus, preserving its architecture and
-learned fusion gates. Actual CPU/CUDA checks pass; V111 is now training after
-the completed V104 exports and V112 follows. The trainer exposes an
+learned fusion gates. Actual CPU/CUDA checks pass. V111 completed20k and
+[improves all twelve material cases](v111-early-quality.md), with small GFX
+changes; V112 is training and full matched quality results are pending. The trainer exposes an
 [explicit reconstruction-epsilon option](loss-smoothing-detail.md#configurable-training-scale)
 with exact default/gradient replay and resumed-training checks. Production
 defaults and existing frozen recipes remain unchanged.
