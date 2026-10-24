@@ -59,19 +59,21 @@ The original controller and worker exited successfully.
 
 The [pre-upsampled RawNIND comparison](rawnind-variants.md) adds a stronger
 released reference, improving all 12 selected photographic cases and eight
-of nine development scene means over the half-resolution model.
+of nine development scene means over the half-resolution model. The released
+width48 model has also been checked and does not improve the matched panel means.
 
-![Six native GFX contexts: noisy, V104, RawNIND half, RawNIND pre-upsampled and independent ISO100 reference](images/rawnind-preupsample-current/gfx/comparison.png)
+![Six native GFX contexts: noisy, V104, RawNIND half, pre-upsampled, width48 and independent ISO100 reference](images/rawnind-three-variants-current/gfx/comparison.png)
 
 These are matched **512-pixel context** restorations with unchanged native 160
 display cells and shared +2EV; the complete 102MP comparison above retains
 its original half-resolution reference. V104's exact retained CPU predictions
 are reused. The alternative improves some coarse sign/rail structure over
 half, but foliage remains soft and mesh less regular than V104. Shared display
-clipping limits saturated-light comparisons. The separate ISO100 f/5.6 capture
+clipping limits saturated-light comparisons. Width48 retains coarse fence mesh
+and a conspicuous periodic grid/grain in the blue sign. The separate ISO100 f/5.6 capture
 remains a qualitative reference, not GT or a pixelwise scoring target.
-[All 18 triplets, source/ROI/checkpoint and display metadata](images/rawnind-preupsample-current/gfx/manifest.json).
-All 30 cells in this additional board were actually viewed at native resolution.
+[All 24 triplets, source/ROI/checkpoint and display metadata](images/rawnind-three-variants-current/gfx/manifest.json).
+All 36 cells in this additional board were actually viewed at native resolution.
 
 ## Other useful comparisons
 

@@ -7,26 +7,33 @@ still retains substantially more synthetic-photo detail, but its measured
 real-camera means are close to this stronger reference. Broad real-camera
 superiority remains unproven.
 
-[Complete executions, independent audits and native evidence](results/rawnind-preupsample-current-v1.json).
+The released width-48 model also finished the same observations and complete
+camera panels. It scores below both width-32 references on all three photo
+condition means and both camera panel means. Greater width alone did not help
+this checkpoint; its different training history prevents a capacity-only conclusion.
+
+[Current three-variant executions, audits and native evidence](results/rawnind-three-variants-current-v1.json) ·
+[Earlier half/pre-upsampled execution](results/rawnind-preupsample-current-v1.json).
 Historical RawNIND scores retain their original half-resolution checkpoint;
 the four-source photographic pilot below does not replace its full427 results.
 
 ## Matched observations and scores
 
-Both references use the authors' original UtNet2, four packed Bayer planes,
-32 starting channels and LeakyReLU. The half-resolution network upsamples at
-its PixelShuffle output head. The alternative bilinearly upsamples the four
+All three references use the authors' original UtNet2, four packed Bayer planes
+and LeakyReLU. The original and pre-upsampled models have 32 starting channels;
+the wider model has 48. The half-resolution networks upsample at
+their PixelShuffle output heads. The alternative bilinearly upsamples the four
 input planes before the CNN and uses a three-channel output head. Different
 weights and training histories mean this is not an isolated architecture ablation.
 
 Four previously selected material sources, original 240-pixel interiors,
 three original noise draws/conditions, rendered sRGB PSNR:
 
-| Condition | V104 | RawNIND half | RawNIND pre-upsampled |
-| --- | ---: | ---: | ---: |
-| ADC-only | 39.49290 | 27.60011 | 28.13487 |
-| ISO100 prior | 40.80494 | 27.59567 | 28.12808 |
-| ISO12800 prior | 33.49300 | 27.11000 | 27.59760 |
+| Condition | V104 | RawNIND half | RawNIND pre-upsampled | RawNIND width48 |
+| --- | ---: | ---: | ---: | ---: |
+| ADC-only | 39.49290 | 27.60011 | 28.13487 | 27.02694 |
+| ISO100 prior | 40.80494 | 27.59567 | 28.12808 | 27.02605 |
+| ISO12800 prior | 33.49300 | 27.11000 | 27.59760 | 26.73293 |
 
 The alternative gains about .49–.53 dB over the half-resolution model, with
 all 12 cases improving. V104 also beats the alternative in all 12. This is a
@@ -42,6 +49,7 @@ low-ISO CFA references and source-balanced means:
 | V104 | 54.26606 | 53.91700 |
 | RawNIND half | 54.08474 | 53.76822 |
 | RawNIND pre-upsampled | 54.26068 | 53.86528 |
+| RawNIND width48 | 53.98802 | 53.66548 |
 
 Pre-upsampled minus half is **+.17594 dB** on known scenes, source-bootstrap
 95% interval [+.11324,+.23672], improving 4/4 scenes. On unseen scenes it is
@@ -49,6 +57,11 @@ Pre-upsampled minus half is **+.17594 dB** on known scenes, source-bootstrap
 .07039 dB. V104 minus the alternative is only +.00539/+.05172 dB on the two
 panels, with intervals [−.40295,+.43126]/[−.29569,+.34782] spanning zero.
 These intervals describe this fixed small source set, not training-seed uncertainty.
+
+Width48 minus half is −.09671/−.10273 dB on known/unseen panels, with all nine
+scene means declining. Width48 minus pre-upsampled is −.27265/−.19980 dB,
+intervals [−.30529,−.24002]/[−.31024,−.06174], with eight of nine scenes declining.
+The wider checkpoint does not replace the stronger pre-upsampled comparator.
 
 “Unseen” means held out from **our** training. External-model training membership
 and overlap remain unproven. Neither these means nor this source set establish
@@ -68,36 +81,56 @@ previews; scores use the unquantized float outputs.
 
 ![Pre-upsampled RawNIND fur: noisy, restored and exact synthetic GT](images/rawnind-preupsample-current/photo/crop-e5936d48a18f1ff1.png)
 
-[V104 and both RawNIND variants, native comparison](images/rawnind-preupsample-current/photo/comparison.png) ·
-[Source/ROI/checkpoint/noise/display and license metadata](images/rawnind-preupsample-current/photo/manifest.json).
+[V104 and all three RawNIND variants, native comparison](images/rawnind-three-variants-current/photo/comparison.png) ·
+[Source/ROI/checkpoint/noise/display and license metadata](images/rawnind-three-variants-current/photo/manifest.json).
 Bark derives from Derek Ramsey (CC BY-SA 2.5), fur from Korall (CC BY 3.0);
 binning, simulated noise, restoration and cropping are recorded modifications.
 
 The alternative improves bark contours and fur modestly over the half-resolution
-model. Both remain visibly softer than V104 on these exact-target examples;
+model. Width48 remains soft and coarse on these same bark/fur crops. All three
+remain visibly softer than V104 on these exact-target examples;
 V104 itself still misses some fine hairs and bark texture.
 
 ## Real captures
 
-[All six standing GFX regions](images/rawnind-preupsample-current/gfx/comparison.png)
-compare noisy Malvar, V104 and both RawNIND variants with the independent
+[All six standing GFX regions](images/rawnind-three-variants-current/gfx/comparison.png)
+compare noisy Malvar, V104 and all three RawNIND variants with the independent
 DSCF3880 ISO100 reference. These are **512-pixel context restorations**, not new
 102MP outputs. Each displayed cell is native 160, with common +2EV display.
 The reference differs in aperture, exposure, motion and time and is **not GT**.
-[GFX source/ROI/noise/display metadata](images/rawnind-preupsample-current/gfx/manifest.json).
+[GFX source/ROI/noise/display metadata](images/rawnind-three-variants-current/gfx/manifest.json).
 
 V104 retains more regular mesh and building edges. The alternative is slightly
 less coarse than half around some sign/rail structures, but foliage remains
 soft. Saturated-light differences are also limited by clipping in this shared
-display. These views do not establish a broad real-photo ordering.
+display. Width48 still has coarse/moire-prone fence mesh and a more conspicuous
+periodic grid/grain in the blue sign than pre-upsampled. These views do not
+establish a broad real-photo ordering.
 
-The [two adverse Canon EOS M100 fields](images/rawnind-preupsample-current/camera/comparison.png)
+The [two adverse Canon EOS M100 fields](images/rawnind-three-variants-current/camera/comparison.png)
 retain the source and ROI selection made before evaluating the new variant.
-Both RawNIND variants are smoother and score higher than V104 on those
+The half and pre-upsampled variants are smoother and score higher than V104 on those
 specifically selected dark crops. Pre-upsampled versus half is mixed there:
 58.98999 versus 58.92127 dB on Coulicoco, 62.07481 versus 62.08642 on top_of_Expedit.
 The AHD display reference is auxiliary, **not exact RGB GT**.
-[Camera source/ROI/checkpoint/display records](images/rawnind-preupsample-current/camera/manifest.json).
+[Camera source/ROI/checkpoint/display records](images/rawnind-three-variants-current/camera/manifest.json).
+
+## Use a tested reference
+
+The standard loader detects width and upsampling position from the checkpoint
+and strictly loads every tensor. Evaluator receipts record the detected model
+configuration and checkpoint hash. Download a separately pinned variant with:
+
+```bash
+source scripts/env.sh
+PYTHONPATH=src uv run python scripts/fetch_rawnind.py --variant preupsample
+```
+
+Pass `/mnt/external/demosaic/references/rawnind-preupsample` to existing
+`--rawnind` options. `--variant wide48` selects the wider checkpoint;
+`--output PATH` selects another cache directory. The default remains the
+historical half-resolution checkpoint. Each directory uses the canonical
+`utnet2-bayer.pt` filename; existing mismatched weights or provenance are rejected.
 
 ## Checkpoints and verification
 
@@ -112,29 +145,37 @@ four inputs, width 32, disabled transfer function and output-gain matching.
 | --- | ---: | --- |
 | Half | 4,350,000 | `c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0` |
 | Pre-upsampled | 4,320,000 | `3d8d5fab966f790f4adbaf1786ca1ee81cb027d9cd45220787247b0af99fd814` |
+| Width48 | 5,985,000 | `a13db60df69de2e107a9470bd419dbcc1bb4861f37e7127159f7ed774dc4ea99` |
 
 The separately cached alternative is
 `/mnt/external/demosaic/references/rawnind-preupsample-20261023-v1/utnet2-bayer-preupsample.pt`.
 Its SHA256 pins the observed downloaded bytes; the provider-returned
 31,057,675-byte size is verified. It is not a separately published SHA256 claim.
 All 46 tensors load strictly, with 7,760,451 parameters and no random fallback.
+The width48 checkpoint has 17,457,948 parameters and 69,848,070 bytes;
+its publisher arguments confirm width48 and preupsample=false.
 
-Both variants preserve signed input samples, use recorded publisher global-ADC
-normalization and fit gains only to the noisy CFA channels. Neither sees the
+All variants preserve signed input samples, use recorded publisher global-ADC
+normalization and fit gains only to the noisy CFA channels. No model sees the
 clean reference or consumes an explicit shot/read prior. The half model's four
 pilot camera outputs replay earlier floats exactly; all 162 full-panel CPU
 controls agree with the previous CUDA primary PSNR within .0000496 dB.
 Four-CFA native 64 checks have identical canonical network inputs, repeated
 outputs are exact and inverse-flip differences stay below 1.8e-7.
 
-The pilot and full panels contain 378 actual reference-network forwards, zero
-new V104 forwards and no training updates or RAW decodes. Independent NumPy64
-rebuilds 376 primary score rows, including overlapping pilot observations,
-and checks 1,104 channel-gain normal equations. All 96 native panels reproduce
-from saved floats; all 52 distinct board cells were actually viewed.
+The original two-variant study contains 378 reference-network forwards. This
+extension adds only 189 width48 forwards: five native64 functional checks,
+22 pilot images and all 162 camera crops. Earlier controls are reused without
+inference. Neither study adds V104 inference, training or RAW decodes.
+Independent NumPy64 checks rebuild 554 joined reference score rows, including
+overlapping pilot/full observations, and 1,656 channel-gain normal equations.
+All 126 native panels reproduce from saved floats; all 62 distinct board cells
+were actually viewed. Standard-loader validation separately replays one native256
+observation byte-exactly for each genuine checkpoint, confirms cache reuse
+without downloads and preserves the legacy loader's constructor RNG/state.
 Source snapshots and existing machine evidence retain their bytes.
 
 Current training and the V104 selector are unchanged. Retain this stronger
 tested reference in additional quality comparisons while preserving historical
-half-resolution scores. Other released variants, including width 48, remain
-untested here; this is not an exhaustive ranking of the published variants.
+half-resolution scores. Other released variants remain untested here;
+this is not an exhaustive ranking of the published variants.

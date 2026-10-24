@@ -45,6 +45,7 @@ def rawnind_comparators(directory, modes, *, device="cuda"):
         receipts.append(
             {
                 "label": labels[mode],
+                "model_config": getattr(first, "reference_config", None),
                 "gain_mode": mode,
                 "precision": "IEEE float32",
                 "device": str(device),

@@ -34,6 +34,9 @@ now reaches 54.26068/53.86528 dB on the complete known/unseen development
 panels. V104's corresponding advantages are small and uncertain. The selected
 synthetic-photo and GFX comparisons retain useful detail gains, while broad
 real-camera superiority remains open.
+The [tested width48 RawNIND checkpoint](rawnind-variants.md) scores below both
+width32 references on the matched photographic and camera means, so it does
+not replace the pre-upsampled comparator.
 
 At the tested weak high-noise carrier, period16 gain rises .49887→.60487 and
 period8 gain .02135→.05945; the finer carrier remains largely absent. High-noise

@@ -1,0 +1,102 @@
+{
+  "image": "crop-98a30ba01325c557.png",
+  "caption": "gfx / building-detail / RawNIND-preup",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Denoised",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "ISO100 ref (not GT)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "53acc2054e50e519da3ff8e75249b07d65b02ddf1fd31871033c462ff2e27aee",
+  "region": {
+    "name": "building-detail",
+    "noisy_xy": [
+      5790,
+      2690
+    ],
+    "reference_xy": [
+      5791,
+      2690
+    ],
+    "size": 160,
+    "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+    "context_green_correlation": 0.6824449896812439
+  },
+  "model_label": "RawNIND-preup",
+  "checkpoint_sha256": "3d8d5fab966f790f4adbaf1786ca1ee81cb027d9cd45220787247b0af99fd814",
+  "compute_precision": "float32",
+  "device": "cuda",
+  "conditioning": {
+    "shot": 0.0014635775921166604,
+    "read": 1.0715704128646712e-06
+  },
+  "context_xywh": [
+    5614,
+    2514,
+    512,
+    512
+  ],
+  "full_frame": false,
+  "display_exposure": 4.0,
+  "shared_wb": [
+    1.5132450331125828,
+    1.0,
+    2.2152317880794703
+  ],
+  "shared_matrix": [
+    [
+      1.0725188393098881,
+      0.17123593128834644,
+      -0.24375477059823436
+    ],
+    [
+      -0.1267191317089774,
+      1.4310509369654432,
+      -0.3043318052564657
+    ],
+    [
+      -0.009697676902906037,
+      -0.29348063283422965,
+      1.3031783097371357
+    ]
+  ],
+  "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+  "model": {
+    "label": "RawNIND-preup",
+    "sha256": "3d8d5fab966f790f4adbaf1786ca1ee81cb027d9cd45220787247b0af99fd814",
+    "source": "/mnt/external/demosaic/references/rawnind-preupsample-20261023-v1/utnet2-bayer-preupsample.pt",
+    "preupsample": true,
+    "funit": 32,
+    "gain_mode": "input-only CFA-channel LS",
+    "clip_input": false,
+    "device": "cpu",
+    "compute_precision": "IEEE float32",
+    "physical_noise_conditioning": false,
+    "training_updates_in_this_study": 0
+  }
+}

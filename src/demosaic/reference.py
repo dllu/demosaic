@@ -91,6 +91,30 @@ def load_rawnind(
     directory, *, gain_mode="input-mean", device="cpu", input_scale=None, clip_input=False
 ):
     directory = Path(directory)
+    state = torch.load(directory / "utnet2-bayer.pt", map_location="cpu", weights_only=True)
+    if not isinstance(state, dict):
+        raise TypeError("Expected a RawNIND Bayer UtNet2 state dictionary")
+    # Released Bayer variants share the UtNet2 body. Their first and last
+    # convolutions identify the width and whether upsampling precedes the CNN.
+    first = state.get("convs1.0.weight")
+    last = state.get("output_module.0.weight")
+    if (
+        not isinstance(first, torch.Tensor)
+        or first.ndim != 4
+        or tuple(first.shape[1:]) != (4, 3, 3)
+        or first.shape[0] < 1
+        or not isinstance(last, torch.Tensor)
+        or last.ndim != 4
+        or tuple(last.shape[1:]) != (first.shape[0], 1, 1)
+        or last.shape[0] not in (3, 12)
+    ):
+        raise ValueError("Unsupported RawNIND Bayer UtNet2 checkpoint geometry")
+    configuration = {
+        "in_channels": 4,
+        "funit": first.shape[0],
+        "activation": "LeakyReLU",
+        "preupsample": last.shape[0] == 3,
+    }
     # The imported upstream module only uses rawproc in a separate Passthrough
     # class. Avoid importing its entire research training dependency stack.
     names = ("rawnind", "rawnind.libs", "rawnind.libs.rawproc")
@@ -109,11 +133,12 @@ def load_rawnind(
                 sys.modules.pop(name, None)
             else:
                 sys.modules[name] = value
-    network = module.UtNet2(in_channels=4, funit=32, activation="LeakyReLU")
-    state = torch.load(directory / "utnet2-bayer.pt", map_location="cpu", weights_only=True)
+    network = module.UtNet2(**configuration)
     network.load_state_dict(state, strict=True)
-    return (
+    reference = (
         RawNind(network, gain_mode, input_scale=input_scale, clip_input=clip_input)
         .to(device)
         .eval()
     )
+    reference.reference_config = configuration
+    return reference

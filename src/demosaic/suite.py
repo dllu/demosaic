@@ -303,6 +303,7 @@ def run_suite(
             {
                 "label": "RawNIND:CFA-LS",
                 "directory": str(rawnind),
+                "model_config": getattr(reference, "reference_config", None),
                 "weight_sha256": hashlib.sha256(
                     (Path(rawnind) / "utnet2-bayer.pt").read_bytes()
                 ).hexdigest(),
@@ -316,6 +317,7 @@ def run_suite(
             {
                 "label": "RawNIND:CFA-channel",
                 "directory": str(rawnind),
+                "model_config": getattr(reference, "reference_config", None),
                 "weight_sha256": model_records[-1]["weight_sha256"],
                 "gain": "per-channel-observed-CFA-least-squares",
                 "precision": "IEEE float32",

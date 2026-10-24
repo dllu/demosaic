@@ -1,0 +1,102 @@
+{
+  "image": "crop-c1c87b563da905ab.png",
+  "caption": "gfx / overcast-sky / RawNIND-half",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Denoised",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "ISO100 ref (not GT)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "7909f33be53d2d27b50bc6d6e9cd687001cb720ca9809d1cdd5975bad614c101",
+  "region": {
+    "name": "overcast-sky",
+    "noisy_xy": [
+      5800,
+      1400
+    ],
+    "reference_xy": [
+      5800,
+      1400
+    ],
+    "size": 160,
+    "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+    "context_green_correlation": null
+  },
+  "model_label": "RawNIND-half",
+  "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+  "compute_precision": "float32",
+  "device": "cuda",
+  "conditioning": {
+    "shot": 0.0014635775921166604,
+    "read": 1.0715704128646712e-06
+  },
+  "context_xywh": [
+    5624,
+    1224,
+    512,
+    512
+  ],
+  "full_frame": false,
+  "display_exposure": 4.0,
+  "shared_wb": [
+    1.5132450331125828,
+    1.0,
+    2.2152317880794703
+  ],
+  "shared_matrix": [
+    [
+      1.0725188393098881,
+      0.17123593128834644,
+      -0.24375477059823436
+    ],
+    [
+      -0.1267191317089774,
+      1.4310509369654432,
+      -0.3043318052564657
+    ],
+    [
+      -0.009697676902906037,
+      -0.29348063283422965,
+      1.3031783097371357
+    ]
+  ],
+  "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+  "model": {
+    "label": "RawNIND-half",
+    "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+    "source": "/mnt/external/demosaic/references/rawnind/utnet2-bayer.pt",
+    "preupsample": false,
+    "funit": 32,
+    "gain_mode": "input-only CFA-channel LS",
+    "clip_input": false,
+    "device": "cpu",
+    "compute_precision": "IEEE float32",
+    "physical_noise_conditioning": false,
+    "training_updates_in_this_study": 0
+  }
+}

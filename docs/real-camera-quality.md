@@ -33,6 +33,10 @@ RawNIND. V104 exceeds this alternative by only .00539/.05172 dB; both
 scene-bootstrap intervals span zero. The new reference uses matched CPU
 IEEE FP32 inputs/calibration, with every legacy RawNIND control checked against
 the earlier CUDA scores. Existing seven-method receipts retain their bytes.
+The additional released width48 checkpoint reaches **53.98802/53.66548 dB**,
+below both width32 references on these matched panels. Pre-upsampled remains
+the strongest of the three tested RawNIND checkpoints; different training
+histories prevent treating width alone as the cause.
 
 ## Scene changes
 

@@ -118,6 +118,7 @@ def evaluate_pairs(
         receipts.append(
             {
                 "label": "RawNIND",
+                "model_config": getattr(reference, "reference_config", None),
                 "weight_sha256": hashlib.sha256(
                     (Path(rawnind) / "utnet2-bayer.pt").read_bytes()
                 ).hexdigest(),
