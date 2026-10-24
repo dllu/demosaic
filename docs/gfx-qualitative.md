@@ -6,6 +6,12 @@ learned models remain close: fence strands and building rails are more coherent
 than RawNIND, while fine foliage and saturated-sign structure remain soft.
 [Completed V104 metrics and tradeoffs](v104-reviewed-corpus-quality.md).
 
+The optional [eight-view V104 comparison](dihedral-quality.md#standing-gfx-scene)
+adds all six fixed native regions from 512-pixel contexts. Changes look small;
+foliage and saturated-sign detail remain soft. Its complete 102MP export is
+queued after the existing matched workflow. The context gallery is separate
+from the completed full-frame outputs below.
+
 ## Current complete full-frame comparisons
 
 ![Six native GFX regions: noisy,V102,V104,RawNIND and independent ISO100 reference](images/gfx-v102-v104-fullframe/comparison.png)

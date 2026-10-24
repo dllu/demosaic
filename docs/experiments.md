@@ -31,6 +31,7 @@ matched studies when attributing a gain to a particular change.
 | Native data and larger context | V84/V85 establish the36.44dB architectural reference continued by V101. The extra native captures have little matched effect; larger context is a separate small-effect comparison | [V84/V85](native-data-original20k-review.md), [V86/V87](training-context-original4k-review.md) |
 | Spectral and late RGB refinement | Small matched mean gains or protected common weights did not fix weak detail; head-only V92 regressed | [V88/V89](spectral-original4k-review.md), [V90/V91](late-rgb-original4k-review.md), [V92](late-rgb-head-only-original4k-review.md) |
 | ADC-only inference | With unchanged V104 weights, replacing only valid measured sites gains .2885 dB rendered PSNR across all 427 sources/all 1,708 CFA cases. Local chroma/SSIM regressions and a flat-color tail remain; positive-noise profiles bypass it | [Complete site-consistency comparison, actual export and native crops](adc-consistency.md) |
+| Eight-view inference | Exact rotations/reflections improve all twelve selected V104 material cases and two adverse camera crops; high-noise fine detail/blotches remain. Costs eight evaluations per tile; full panels/export pending | [Measured gains, native images and CPU/GB10/RGB16/DNG checks](dihedral-quality.md) |
 
 Each complete quality review retains source/checkpoint identities, native
 noisy/restored/reference crops and explicit real-reference limitations. The
@@ -59,8 +60,9 @@ are current; all seven evaluation panels and full-frame exports are complete.
 The [V111/V112 loss-scale comparison](loss-scale-training.md) retains the original
 V104 EMA on the cleaned 90,864-source corpus. Four discarded CPU/CUDA checks
 pass. V111 completed20k and [improves all twelve material cases](v111-early-quality.md),
-with modest native gains and small GFX changes; V112 is training. Full matched
-photo/camera/color results remain pending.
+with modest native gains and small GFX changes. Its complete camera and analytic
+grids are reviewed: coarse carriers/high-noise color improve, while worst ADC
+bias rises to 2,143 DN16. V112 is training; full matched results remain pending.
 
 The source scan covers88,508 training images, with570 actually reviewed and 31
 withheld/excluded. Completed runs used the earlier 24 exclusions; seven more and

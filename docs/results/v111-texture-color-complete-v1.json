@@ -1,0 +1,746 @@
+{
+  "status": "completed-V111-full-analytic-texture-color-independent-audit-and-native-review",
+  "recorded_local": "2026-10-23T23:17:25.698702-07:00",
+  "checkpoint": {
+    "path": "/mnt/external/demosaic/models/v111-final20000.pt",
+    "sha256": "97ab9ca5f1f182ff42a4245c630bba810607a3d13b61cf8aae5842192a18da15"
+  },
+  "execution_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V111-full-diagnostics-CPU-v1/plan.json",
+    "sha256": "dd04d3eefa9602657f2428d1b4021b1e88651630f66b858ed4bb03a82a471771"
+  },
+  "worker_source": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V111-full-diagnostics-CPU-v1/worker.py",
+    "sha256": "16a2e38d27af6ebf9bc5206f5cea82053730182dbbca053e866a5df4800527e7"
+  },
+  "training_boundary": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V111-endpoint-material-early-v1/final-training-boundary.json",
+    "sha256": "47907379d6f2b9a4d8dd65310b6291ccf4912ded28c9b9ff0de9b956ddcd8db5"
+  },
+  "original_result": {
+    "path": "/mnt/external/demosaic/V111-full-diagnostics-CPU-20261023-v1/result.json",
+    "sha256": "f8f1b286ad8989e646f301df0e3958b4c50957d4ff3c243218c8e3f66efd87a4"
+  },
+  "CPU_parent_replay": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V111-full-diagnostics-CPU-v1/parent-preflight.json",
+    "sha256": "17d629723565d747de7560452ecd5c44fbcfa8a362a8833885ff0663a06ec7ba"
+  },
+  "independent_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V111-full-diagnostics-CPU-v1/audit.json",
+    "sha256": "21ca203a583328d980fa1c8bcb870bf690b82d0f5b25fd9a8c241017ef7b933e"
+  },
+  "audit_source": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V111-full-diagnostics-CPU-v1/audit.py",
+    "sha256": "1ffedef0f5810d2e4ab90af08248df4aeb7ad4c90920fc62df073755d7af9ee2"
+  },
+  "audit_design": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V111-full-diagnostics-CPU-v1/audit-design.json",
+    "sha256": "24971db5b00d876bf9c3707189fd4d80a7d77ac21f3118077c4794e6f234a899"
+  },
+  "bias_DN16": [
+    {
+      "model": "V102",
+      "condition": "adc-only",
+      "cases": 588,
+      "mean": 10.044914818470215,
+      "p95": 38.288471330271534,
+      "maximum": 59.230066513514615,
+      "worst_case": 1081
+    },
+    {
+      "model": "V102",
+      "condition": "iso12800-prior",
+      "cases": 588,
+      "mean": 21.266729495799407,
+      "p95": 70.27273954297122,
+      "maximum": 122.47368270032457,
+      "worst_case": 1156
+    },
+    {
+      "model": "V104",
+      "condition": "adc-only",
+      "cases": 588,
+      "mean": 14.455816063155218,
+      "p95": 43.70374665201524,
+      "maximum": 1218.0574063721813,
+      "worst_case": 1008
+    },
+    {
+      "model": "V104",
+      "condition": "iso12800-prior",
+      "cases": 588,
+      "mean": 19.33862302399557,
+      "p95": 59.85250026834776,
+      "maximum": 115.84000470318132,
+      "worst_case": 1151
+    },
+    {
+      "model": "V111",
+      "condition": "adc-only",
+      "cases": 588,
+      "mean": 27.638230182844207,
+      "p95": 45.42886208116092,
+      "maximum": 2142.978438245575,
+      "worst_case": 787
+    },
+    {
+      "model": "V111",
+      "condition": "iso12800-prior",
+      "cases": 588,
+      "mean": 17.84558287009364,
+      "p95": 50.84496266573317,
+      "maximum": 91.8943440895644,
+      "worst_case": 887
+    }
+  ],
+  "selected_carrier_groups": [
+    {
+      "level": 0.18,
+      "contrast": 0.02,
+      "period": 4,
+      "condition": "iso12800-prior",
+      "model": "0:V102:step-20000",
+      "cases": 16,
+      "metrics": {
+        "in_phase_gain": {
+          "mean": 0.0001578948976159956,
+          "std": 0.0010533330426346168,
+          "min": -0.0012362827116576397,
+          "max": 0.0018856785989380895
+        },
+        "gain_channel_std": {
+          "mean": 0.0033989988812594793,
+          "std": 0.0006748231423170114,
+          "min": 0.00219049727384697,
+          "max": 0.004527794587047139
+        },
+        "quadrature_gain": {
+          "mean": -4.5463420128487455e-05,
+          "std": 0.0009821019126597685,
+          "min": -0.0018990655601108357,
+          "max": 0.0017828315730947057
+        },
+        "amplitude_ratio": {
+          "mean": 0.003758415659837093,
+          "std": 0.0007542376210729846,
+          "min": 0.0023404026235406207,
+          "max": 0.0050861348380393506
+        },
+        "dc_bias_abs": {
+          "mean": 0.000643398722505575,
+          "std": 0.00018023594501987005,
+          "min": 0.00039202958004846966,
+          "max": 0.0009913699922486456
+        },
+        "noncarrier_rms": {
+          "mean": 0.0005115932327496679,
+          "std": 4.150961131843973e-05,
+          "min": 0.0004318602903980278,
+          "max": 0.0005977400195855871
+        },
+        "linear_srgb_rmse": {
+          "mean": 0.002704339706482825,
+          "std": 5.323304162645824e-05,
+          "min": 0.0026320407439745174,
+          "max": 0.0028088747414645467
+        }
+      }
+    },
+    {
+      "level": 0.18,
+      "contrast": 0.02,
+      "period": 4,
+      "condition": "iso12800-prior",
+      "model": "1:V104:step-20000",
+      "cases": 16,
+      "metrics": {
+        "in_phase_gain": {
+          "mean": 0.00155790938031563,
+          "std": 0.000959344030408219,
+          "min": 0.0002971530384623594,
+          "max": 0.0033225691983316988
+        },
+        "gain_channel_std": {
+          "mean": 0.004529839003128093,
+          "std": 0.0006554548285677514,
+          "min": 0.0033786602803225125,
+          "max": 0.005872812414902453
+        },
+        "quadrature_gain": {
+          "mean": 0.00028559561347499675,
+          "std": 0.0007038771321102581,
+          "min": -0.0011832769666809651,
+          "max": 0.0018147441327166583
+        },
+        "amplitude_ratio": {
+          "mean": 0.00510073714972759,
+          "std": 0.0007569314980554842,
+          "min": 0.0038334066695321378,
+          "max": 0.00643044426237074
+        },
+        "dc_bias_abs": {
+          "mean": 0.0005041839260905556,
+          "std": 0.00016795537400208181,
+          "min": 0.0002761479288604744,
+          "max": 0.0008206529066933366
+        },
+        "noncarrier_rms": {
+          "mean": 0.0004928130593805041,
+          "std": 4.2514035837720995e-05,
+          "min": 0.000425112906652706,
+          "max": 0.0005861804797405629
+        },
+        "linear_srgb_rmse": {
+          "mean": 0.002661762504575221,
+          "std": 4.1713645543384175e-05,
+          "min": 0.00259217671548277,
+          "max": 0.002738023752077408
+        }
+      }
+    },
+    {
+      "level": 0.18,
+      "contrast": 0.02,
+      "period": 8,
+      "condition": "iso12800-prior",
+      "model": "0:V102:step-20000",
+      "cases": 16,
+      "metrics": {
+        "in_phase_gain": {
+          "mean": 0.021349251125697365,
+          "std": 0.015120454882427543,
+          "min": 0.0068220224240628236,
+          "max": 0.06559106038256472
+        },
+        "gain_channel_std": {
+          "mean": 0.002466831731232353,
+          "std": 0.0009807947037494384,
+          "min": 0.0005484247159408841,
+          "max": 0.00412454777501892
+        },
+        "quadrature_gain": {
+          "mean": 0.0016479363947468544,
+          "std": 0.003946713202698436,
+          "min": -0.0070785002527253525,
+          "max": 0.0076573919571155296
+        },
+        "amplitude_ratio": {
+          "mean": 0.022401173993667433,
+          "std": 0.01502238982847395,
+          "min": 0.00707622758129111,
+          "max": 0.06612954597912041
+        },
+        "dc_bias_abs": {
+          "mean": 0.000529466937941191,
+          "std": 0.00015230834392412887,
+          "min": 0.00020465715259370318,
+          "max": 0.0007924543009372176
+        },
+        "noncarrier_rms": {
+          "mean": 0.000600669724309848,
+          "std": 7.061878509822045e-05,
+          "min": 0.0005223564058991665,
+          "max": 0.00073548697641748
+        },
+        "linear_srgb_rmse": {
+          "mean": 0.0026481007494247553,
+          "std": 4.3739074116984755e-05,
+          "min": 0.0025816754503854545,
+          "max": 0.002747198085456141
+        }
+      }
+    },
+    {
+      "level": 0.18,
+      "contrast": 0.02,
+      "period": 8,
+      "condition": "iso12800-prior",
+      "model": "1:V104:step-20000",
+      "cases": 16,
+      "metrics": {
+        "in_phase_gain": {
+          "mean": 0.05945032285782072,
+          "std": 0.039006790433123134,
+          "min": 0.011643000827636918,
+          "max": 0.15502450314184535
+        },
+        "gain_channel_std": {
+          "mean": 0.0029682363580841205,
+          "std": 0.0010781249169890211,
+          "min": 0.0004076552341898746,
+          "max": 0.005218091711329234
+        },
+        "quadrature_gain": {
+          "mean": -0.0003949250784950324,
+          "std": 0.005737626544131034,
+          "min": -0.012161531370066954,
+          "max": 0.0068760321496927354
+        },
+        "amplitude_ratio": {
+          "mean": 0.059981191077867875,
+          "std": 0.03901149103544399,
+          "min": 0.01182911440857974,
+          "max": 0.15530214257033012
+        },
+        "dc_bias_abs": {
+          "mean": 0.00039340454118199383,
+          "std": 0.00010777451132237039,
+          "min": 0.00021006046294176164,
+          "max": 0.0006050176905929386
+        },
+        "noncarrier_rms": {
+          "mean": 0.0007197303807316474,
+          "std": 0.00015425099481447974,
+          "min": 0.0005219653000343521,
+          "max": 0.0010867033229084093
+        },
+        "linear_srgb_rmse": {
+          "mean": 0.0025562327666655378,
+          "std": 5.2238110071153286e-05,
+          "min": 0.0024452233832205302,
+          "max": 0.002669729341097827
+        }
+      }
+    },
+    {
+      "level": 0.18,
+      "contrast": 0.02,
+      "period": 16,
+      "condition": "iso12800-prior",
+      "model": "0:V102:step-20000",
+      "cases": 16,
+      "metrics": {
+        "in_phase_gain": {
+          "mean": 0.49887061769522756,
+          "std": 0.12558589141277698,
+          "min": 0.23070600765241922,
+          "max": 0.7693703524432717
+        },
+        "gain_channel_std": {
+          "mean": 0.033999507811855595,
+          "std": 0.01009091261199047,
+          "min": 0.01668049826888548,
+          "max": 0.05386690507854567
+        },
+        "quadrature_gain": {
+          "mean": 0.00566975206646864,
+          "std": 0.02468683867555431,
+          "min": -0.04050030671570224,
+          "max": 0.05638746016721432
+        },
+        "amplitude_ratio": {
+          "mean": 0.49954589790743453,
+          "std": 0.12565542707157465,
+          "min": 0.23073583596789157,
+          "max": 0.7705578721555811
+        },
+        "dc_bias_abs": {
+          "mean": 0.0003181463386344758,
+          "std": 0.0001491490240755006,
+          "min": 0.00012947210119086208,
+          "max": 0.0007078329692148203
+        },
+        "noncarrier_rms": {
+          "mean": 0.0011689993422100116,
+          "std": 9.023565596591893e-05,
+          "min": 0.0009582576919800776,
+          "max": 0.0013140397554795616
+        },
+        "linear_srgb_rmse": {
+          "mean": 0.0018095758215236795,
+          "std": 0.00018709888103216038,
+          "min": 0.0015257440897753977,
+          "max": 0.002302489623800658
+        }
+      }
+    },
+    {
+      "level": 0.18,
+      "contrast": 0.02,
+      "period": 16,
+      "condition": "iso12800-prior",
+      "model": "1:V104:step-20000",
+      "cases": 16,
+      "metrics": {
+        "in_phase_gain": {
+          "mean": 0.6048680273039462,
+          "std": 0.114442492135596,
+          "min": 0.32955942301533886,
+          "max": 0.832484748029577
+        },
+        "gain_channel_std": {
+          "mean": 0.03965710876306054,
+          "std": 0.009751208435428588,
+          "min": 0.02122585815321226,
+          "max": 0.05295764066469433
+        },
+        "quadrature_gain": {
+          "mean": 0.003955750016038272,
+          "std": 0.03086023510638547,
+          "min": -0.05182460259706154,
+          "max": 0.0567747293010506
+        },
+        "amplitude_ratio": {
+          "mean": 0.6057211189206366,
+          "std": 0.11446943823456215,
+          "min": 0.3295624040526033,
+          "max": 0.8337065174770933
+        },
+        "dc_bias_abs": {
+          "mean": 0.00030542332872414077,
+          "std": 0.00015529069317840382,
+          "min": 9.510987968242939e-05,
+          "max": 0.00074276530949835
+        },
+        "noncarrier_rms": {
+          "mean": 0.001253811969667476,
+          "std": 8.936431992658405e-05,
+          "min": 0.0010421865714774316,
+          "max": 0.001405762492332563
+        },
+        "linear_srgb_rmse": {
+          "mean": 0.001686251371567977,
+          "std": 0.0001580125672592874,
+          "min": 0.0014344979215567936,
+          "max": 0.002108569952562578
+        }
+      }
+    },
+    {
+      "level": 0.18,
+      "contrast": 0.02,
+      "period": 4,
+      "condition": "iso12800-prior",
+      "model": "0:V111:step-20000",
+      "cases": 16,
+      "metrics": {
+        "in_phase_gain": {
+          "mean": 0.0018195388266631308,
+          "std": 0.000965067004688046,
+          "min": 0.0003426173043258441,
+          "max": 0.003952275553754391
+        },
+        "gain_channel_std": {
+          "mean": 0.0035302150012170583,
+          "std": 0.0007209467791984879,
+          "min": 0.0021186891499102765,
+          "max": 0.005060127140054628
+        },
+        "quadrature_gain": {
+          "mean": -0.00044805284328358386,
+          "std": 0.0006143703063118182,
+          "min": -0.0019523055536476961,
+          "max": 0.0007240368083139786
+        },
+        "amplitude_ratio": {
+          "mean": 0.004168062086611883,
+          "std": 0.0007832543355023133,
+          "min": 0.00288739093177124,
+          "max": 0.005569737097155406
+        },
+        "dc_bias_abs": {
+          "mean": 0.00046615414311596914,
+          "std": 0.00019390638380581657,
+          "min": 0.0001902577248891387,
+          "max": 0.0008766646804166112
+        },
+        "noncarrier_rms": {
+          "mean": 0.0004920128004618613,
+          "std": 4.686435588787833e-05,
+          "min": 0.0004316489212671122,
+          "max": 0.0005973421551390455
+        },
+        "linear_srgb_rmse": {
+          "mean": 0.00265032988890497,
+          "std": 4.3513097076324615e-05,
+          "min": 0.0025816247698539152,
+          "max": 0.0027468327175182742
+        }
+      }
+    },
+    {
+      "level": 0.18,
+      "contrast": 0.02,
+      "period": 8,
+      "condition": "iso12800-prior",
+      "model": "0:V111:step-20000",
+      "cases": 16,
+      "metrics": {
+        "in_phase_gain": {
+          "mean": 0.08697058784920705,
+          "std": 0.04611472253707982,
+          "min": 0.015880754620238805,
+          "max": 0.1988777238258992
+        },
+        "gain_channel_std": {
+          "mean": 0.0028799875606193358,
+          "std": 0.0010666125632863939,
+          "min": 0.000970063596372232,
+          "max": 0.005135646783842967
+        },
+        "quadrature_gain": {
+          "mean": -0.0018253200955946386,
+          "std": 0.007255160677942721,
+          "min": -0.014932268351980584,
+          "max": 0.011906521166067543
+        },
+        "amplitude_ratio": {
+          "mean": 0.08744818934733536,
+          "std": 0.04610967191401928,
+          "min": 0.016000758280476896,
+          "max": 0.19906402723463934
+        },
+        "dc_bias_abs": {
+          "mean": 0.0003354546770508015,
+          "std": 9.625299068304755e-05,
+          "min": 0.00018488820028523625,
+          "max": 0.0005153364684688244
+        },
+        "noncarrier_rms": {
+          "mean": 0.0008129949549847742,
+          "std": 0.00016586170526773652,
+          "min": 0.0005316832315067606,
+          "max": 0.0012069740957339127
+        },
+        "linear_srgb_rmse": {
+          "mean": 0.002506235770313018,
+          "std": 5.544383998394065e-05,
+          "min": 0.0023995951363621833,
+          "max": 0.0026408042739406484
+        }
+      }
+    },
+    {
+      "level": 0.18,
+      "contrast": 0.02,
+      "period": 16,
+      "condition": "iso12800-prior",
+      "model": "0:V111:step-20000",
+      "cases": 16,
+      "metrics": {
+        "in_phase_gain": {
+          "mean": 0.6249796083843671,
+          "std": 0.10498854619244759,
+          "min": 0.36848161718797884,
+          "max": 0.8130859766880323
+        },
+        "gain_channel_std": {
+          "mean": 0.029006625518052352,
+          "std": 0.007815322330919873,
+          "min": 0.01342575802858146,
+          "max": 0.041824469442135984
+        },
+        "quadrature_gain": {
+          "mean": 0.00588021594861114,
+          "std": 0.03140560326687238,
+          "min": -0.0525084519084947,
+          "max": 0.06242422195017028
+        },
+        "amplitude_ratio": {
+          "mean": 0.6258611910385612,
+          "std": 0.10491802132093661,
+          "min": 0.3684940926690367,
+          "max": 0.8139263565261962
+        },
+        "dc_bias_abs": {
+          "mean": 0.0003204200447553546,
+          "std": 0.00015848835181534444,
+          "min": 7.37168898764425e-05,
+          "max": 0.0007791419965277047
+        },
+        "noncarrier_rms": {
+          "mean": 0.001222118591259318,
+          "std": 7.115003292848121e-05,
+          "min": 0.0010642651203861295,
+          "max": 0.0013485309129257635
+        },
+        "linear_srgb_rmse": {
+          "mean": 0.0016258238221975425,
+          "std": 0.00015594703446118703,
+          "min": 0.0013978155753882684,
+          "max": 0.002038502823061133
+        }
+      }
+    }
+  ],
+  "worst_V111_ADC_case": {
+    "index": 787,
+    "case": {
+      "id": "gray-l0.90",
+      "palette": "gray-l0.90",
+      "source": {
+        "id": "gray-l0.90",
+        "hue_degrees": null,
+        "saturation": 0.0,
+        "peak": 0.9,
+        "linear_srgb": [
+          0.9,
+          0.9,
+          0.9
+        ]
+      },
+      "condition": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "pattern": "GBRG",
+      "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/gray-l0.90-adc-only-GBRG.npz",
+      "sha256": "99a427d2576698aa7656316fdf0d4ceaf74c3adeeb196536da3757f2281ad954",
+      "target_camera_RGB": [
+        0.45000001788139343,
+        0.9000000357627869,
+        0.6000000238418579
+      ],
+      "draws_per_pattern": 1
+    },
+    "metrics": {
+      "camera_RGB_mean_error": [
+        -0.0010468452703207732,
+        0.03269975491333753,
+        -0.000466468941885978
+      ],
+      "camera_RGB_MSE": 0.00036521267079041666,
+      "camera_RGB_mean_component_fraction": 0.9771360956791241,
+      "spatially_centered_camera_RGB_RMS": 0.0028896691093832283,
+      "predicted_minus_GT_CFA_phase_mean": [
+        0.03211467009969056,
+        -0.00020442765206098556,
+        -0.0009139819582924247,
+        0.031938908491283655
+      ],
+      "observed_minus_GT_CFA_phase_mean": [
+        -1.6689300537109375e-06,
+        -6.616115570068359e-06,
+        -1.2516975402832031e-06,
+        -1.6689300537109375e-06
+      ]
+    },
+    "selection": "Post hoc maximum V111 ADC mean-channel bias; same field shown for all three models."
+  },
+  "new_V111_observations": 1624,
+  "parent_replays": 4,
+  "other_reference_forwards": 0,
+  "optimizer_steps": 0,
+  "RAW_decodes": 0,
+  "CUDA_initialized": false,
+  "independent_checks": {
+    "color_predictions_and_input_archives_rehashed_and_remeasured": 1176,
+    "weak_input_batches_reproduced_exactly": 112,
+    "weak_predictions_rehashed": 448,
+    "weak_and_Malvar_rows_rebuilt": 896,
+    "maximum_errors": {
+      "color:camera_RGB_mean_error": 0.0,
+      "color:camera_RGB_MSE": 0.0,
+      "color:camera_RGB_mean_component_fraction": 0.0,
+      "color:spatially_centered_camera_RGB_RMS": 0.0,
+      "color:predicted_minus_GT_CFA_phase_mean": 0.0,
+      "color:observed_minus_GT_CFA_phase_mean": 0.0,
+      "texture:in_phase_gain": 1.0368528952087175e-13,
+      "texture:gain_channel_std": 6.905587213168474e-14,
+      "texture:quadrature_gain": 1.545430450278218e-13,
+      "texture:amplitude_ratio": 1.5720758028692217e-13,
+      "texture:dc_bias_abs": 2.867714746224159e-16,
+      "texture:noncarrier_rms": 6.938893903907228e-18,
+      "texture:linear_srgb_rmse": 3.469446951953614e-18,
+      "original-Malvar:in_phase_gain": 0.0,
+      "original-Malvar:gain_channel_std": 0.0,
+      "original-Malvar:quadrature_gain": 0.0,
+      "original-Malvar:amplitude_ratio": 0.0,
+      "original-Malvar:dc_bias_abs": 0.0,
+      "original-Malvar:noncarrier_rms": 0.0,
+      "original-Malvar:linear_srgb_rmse": 0.0,
+      "texture:dc_bias_abs_rgb": 3.885780586188048e-16,
+      "texture:spatial_luma_rms": 3.469446951953614e-18,
+      "texture:relative_band_rms": 1.6653345369377348e-16,
+      "texture:relative_peak_band_contrast": 2.0816681711721685e-17,
+      "original-Malvar:dc_bias_abs_rgb": 0.0,
+      "original-Malvar:spatial_luma_rms": 0.0,
+      "original-Malvar:relative_band_rms": 0.0,
+      "original-Malvar:relative_peak_band_contrast": 0.0,
+      "texture-group:mean": 0.0,
+      "texture-group:std": 0.0,
+      "texture-group:min": 0.0,
+      "texture-group:max": 0.0
+    },
+    "all448_original_Malvar_rows_exact": true
+  },
+  "native_review": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V111-full-diagnostics-CPU-v1/native-viewed-complete-v1.json",
+    "sha256": "23bc7c44aa60ac7fe38ca231e98e28236f019a200e36d1f7b53b5f3f175df655"
+  },
+  "native_cells_actually_viewed": 40,
+  "native_triplets": 24,
+  "native_panels": 72,
+  "public_images": "docs/images/v111-full-diagnostics",
+  "renderers": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V111-full-diagnostics-CPU-v1/render-native.py",
+      "sha256": "0ce471378510950d96aa77a1f3e3ac8abcfb8a1960eaebf75bca0b800031890e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V111-full-diagnostics-CPU-v1/render-native-color-v2.py",
+      "sha256": "c104a36db7fb100dbbb00c5fa2f3e2ef6ce59af775943ce46a37a0a3aafe17d5"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V111-full-diagnostics-CPU-v1/render-worst-adc.py",
+      "sha256": "feed4c621236d7b471c73863afaebbfb8734534036cb005319cc264352b7d65d"
+    }
+  ],
+  "original_queued_receipt": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v111-full-diagnostics-queued-v1.json",
+    "sha256": "fc82ddfa5557265494c6c6ab0d3638f862905d3fa4f454c843341695a52343a2"
+  },
+  "original_twelve_frozen_plans_unchanged": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-training-v2/plan.json",
+      "sha256": "bc2d8c81cea1203b10c8cb403e26e7add3de934e4ba50b96c08d31ffc6d2dba5"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-execution-v2/plan.json",
+      "sha256": "9659a7636b7f367c4358722e00629be2a8f5a23447d37dfd9deff75ab680b7b6"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-evaluation-queue-v2/plan.json",
+      "sha256": "a82fc870d9288a80314a70514201b737289e5223fccedbb7a51b07c7d12f6037"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-fullframe-v2/plan.json",
+      "sha256": "1b46067d57c16587573dfe92734d74ba2d5ba0ed6e82a23fbcc3feb9b559e8b0"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-material-queue-v2/plan.json",
+      "sha256": "f51df2254beeded49233a42928cce6e1ae96c2cd355f5acd7e358b27c326c5c5"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/three-camera-V104-CPU-v2/plan.json",
+      "sha256": "9037089448e8624a93d9b5008e5562b8d836583c6bf899277691b4544f068bf5"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-ADC-full427-CPU-v1/plan.json",
+      "sha256": "5ad0e9ae5562a6b3fae79b5ecc68a1254ac44cc8451926468542fecce72ba0d4"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-ADC-photo-review-queue-v1/plan.json",
+      "sha256": "7cb36e6cd861ed6898a012736c3aa94e5ca38bd57b5fc9714fb7eea4af2865c4"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-ADC-texture-CPU-v1/plan.json",
+      "sha256": "99314594e9c67df10b8275332ff5efddcceef6e03d0c1f3107a7e54b1eb523e7"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-conditioning-probe-CPU-v1/plan.json",
+      "sha256": "fb9430c7cf85b8674020a0d941ea52a7d169f9fb0779cf0af50d96dcc2159121"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-GFX-conditioning-CPU-v1/plan.json",
+      "sha256": "e46f4a4eb519c99ac3cb5256c0938a16fb185a77b81c78db41b01532db7b3903"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-unseen-adverse-CPU-v2/plan.json",
+      "sha256": "5fc73c2304872a3791a9d441f6b0cd6601871838ee106940eb9c3db87a0fef69"
+    }
+  ],
+  "limits": "Complete original analytic448 texture/neutral-flat and1176 color grids for V111 CPU FP32, with existing audited V102/V104 GPU controls reused. Four V104 CPU replays bound checked-case mean bias differences below.001DN16 only. Analytic carrier/flat scores are not natural-photo or broad-camera superiority. Full427/V112 matching/full exports remain pending. Original source scripts, old receipts and matched queues retain bytes."
+}

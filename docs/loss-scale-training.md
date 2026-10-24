@@ -4,7 +4,8 @@
 original V104 EMA.** V111's [early material/GFX review](v111-early-quality.md)
 improves all twelve material cases over V104, with small real-photo changes.
 V111's complete camera panels change −.01336/+.02006dB known/unseen versus V104;
-full-photo/color/weak-detail and the matched V112 results remain pending.
+V111's complete analytic grids show improved coarse carriers/high-noise color
+and a worse ADC flat-bias tail. Full-photo and matched V112 results remain pending.
 Both keep the same architecture, data, initialization and budget, changing
 only reconstruction Charbonnier epsilon: **.001 versus .0003**. The trial
 started after V104's owned evaluation and full-frame exports finished.
@@ -87,12 +88,14 @@ Six GFX context comparisons look close to V104. This supplementary review is
 separate from the unchanged full matched evaluation and later four-model
 material queue; no intermediate checkpoint was selected.
 
-A supplementary [V111 CPU diagnostic run](results/v111-full-diagnostics-queued-v1.json)
-now covers all448 original weak-texture/neutral-flat and1,176 flat-color cases
-while V112 trains. Four parent color replays pass CPU/GPU comparison, and an
-independent saved-float audit is queued after the exact worker exits. Complete
-diagnostic scores and native viewing remain pending; this adds no training or
-CUDA inference and leaves the original matched queues unchanged.
+A supplementary [completed V111 CPU diagnostic run](results/v111-texture-color-complete-v1.json)
+covers all 448 original weak-texture/neutral-flat and 1,176 flat-color cases.
+The independent audit passes and all 40 native cells were actually viewed.
+High-noise mean/max flat bias improves to 17.85/91.89 DN16; ADC bias worsens to
+27.64/2,142.98 DN16. Fine 8-pixel carrier response remains weak despite a gain.
+The [combined report](v111-early-quality.md#complete-weak-texture-and-flat-color-panels)
+shows the original selections and V111's new worst ADC field. This adds no
+training or CUDA inference and leaves the original matched queues unchanged.
 
 The first queue stopped before any optimizer update because its controller
 looked for a child field omitted from terminal export status. A new controller

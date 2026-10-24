@@ -1,0 +1,109 @@
+{
+  "image": "crop-97d7aab6c8e7b2d9.png",
+  "caption": "V111 / h045-s0.98-l0.90",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Restored",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "GT (analytic)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "113451a0ffadd81a8b542029bba9dbac8377d470c88a3695af7336f603a1de48",
+  "case": {
+    "id": "h045-s0.98-l0.90",
+    "palette": "h045-s0.98-l0.90",
+    "source": {
+      "id": "h045-s0.98-l0.90",
+      "hue_degrees": 45,
+      "saturation": 0.98,
+      "peak": 0.9,
+      "linear_srgb": [
+        0.9,
+        0.6795,
+        0.018000000000000016
+      ]
+    },
+    "condition": {
+      "name": "adc-only",
+      "shot": 0.0,
+      "read": 0.0,
+      "exposure": 1.0
+    },
+    "pattern": "RGGB",
+    "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h045-s0.98-l0.90-adc-only-RGGB.npz",
+    "sha256": "a73c65a1e6c2a207b5de6b10893943b25dd6c97b4ff487fdb2cfc4a46dd85e17",
+    "target_camera_RGB": [
+      0.42243748903274536,
+      0.6574499607086182,
+      0.06345000118017197
+    ],
+    "draws_per_pattern": 1
+  },
+  "ROI_xywh": [
+    48,
+    48,
+    160,
+    160
+  ],
+  "white_balance": [
+    2.0,
+    1.0,
+    1.5
+  ],
+  "camera_to_srgb": [
+    [
+      1.1176470518112183,
+      -0.05882352963089943,
+      -0.05882352963089943
+    ],
+    [
+      -0.05882352963089943,
+      1.1176470518112183,
+      -0.05882352963089943
+    ],
+    [
+      -0.05882352963089943,
+      -0.05882352963089943,
+      1.1176470518112183
+    ]
+  ],
+  "conditioning": {
+    "name": "adc-only",
+    "shot": 0.0,
+    "read": 0.0,
+    "exposure": 1.0
+  },
+  "display_exposure": 1.0,
+  "reference": "Exact uniform analytic target, not a real photo.",
+  "selection_basis": "Posthoc maximum V104 ADC mean-channel bias among the completed1176-case color grid; same case shown for both models.",
+  "model": {
+    "label": "V111",
+    "sha256": "97ab9ca5f1f182ff42a4245c630bba810607a3d13b61cf8aae5842192a18da15",
+    "path": "/mnt/external/demosaic/models/v111-final20000.pt",
+    "compute_precision": "CPU B1 contiguous IEEE FP32"
+  }
+}

@@ -65,6 +65,7 @@ def restore_tiled(
     amp=True,
     precision="bfloat16",
     refinement_precision=None,
+    self_ensemble="none",
 ):
     """Return CPU float32 RGB and timing. `tile`/`overlap` use sensor pixels.
 
@@ -93,6 +94,8 @@ def restore_tiled(
         raise ValueError("Invalid batch size or noise coefficients")
     if precision not in COMPUTE_DTYPES:
         raise ValueError(f"Unknown compute precision {precision!r}")
+    if self_ensemble not in ("none", "dihedral8"):
+        raise ValueError(f"Unknown self-ensemble policy {self_ensemble!r}")
     if refinement_precision is not None:
         model.set_refinement_precision(refinement_precision)
     device = torch.device(device)
@@ -160,7 +163,14 @@ def restore_tiled(
             .expand(len(current), -1, -1)
         )
         with amp_context(device, amp, dtype=precision):
-            outputs = model(tiles, variance, batch_colors, batch_wb, batch_matrix)
+            if self_ensemble == "dihedral8":
+                from .self_ensemble import predict_dihedral8
+
+                outputs = predict_dihedral8(
+                    model, tiles, variance, batch_colors, batch_wb, batch_matrix
+                )
+            else:
+                outputs = model(tiles, variance, batch_colors, batch_wb, batch_matrix)
         outputs = outputs.float().cpu()
         compute_seconds += time.perf_counter() - compute_started
         blend_started = time.perf_counter()
@@ -184,6 +194,8 @@ def restore_tiled(
         "tile_grid_alignment": alignment,
         "tile_stride": stride,
         "batch_size": batch_size,
+        "self_ensemble": self_ensemble,
+        "model_views_per_tile": 8 if self_ensemble == "dihedral8" else 1,
         "compute_precision": precision if amp and device.type == "cuda" else "float32",
         "refinement_compute_precision": getattr(model, "refinement_precision", "float32")
         if device.type == "cuda"

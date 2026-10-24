@@ -4,10 +4,18 @@
 evaluated working baseline.** [V111's native comparisons](v111-early-quality.md)
 show improvements in all twelve material cases and small real GFX changes.
 Its complete camera panels change −.01336/+.02006dB known/unseen versus V104;
-full-photo/color results are pending. Both retain V84's pretrained DRUNet RGB trunk, physical noise anchors
+full-photo results are pending. Its complete analytic grids improve high-noise
+color and coarse carriers, while worst ADC mean-channel bias rises to 2,143 DN16.
+Both retain V84's pretrained DRUNet RGB trunk, physical noise anchors
 and official frozen DINOv3 ConvNeXt-Tiny pyramid. V102 remains useful for lower
 ADC flat-color bias and its higher unseen-camera CFA mean. V43 is a
 historical comparator. [Completed V104 report and native comparisons](v104-reviewed-corpus-quality.md).
+
+For optional inference quality, [V104 with eight exact views](dihedral-quality.md)
+improves all twelve selected material cases and two adverse camera crops.
+Use `--self-ensemble dihedral8`; it requires eight model evaluations per tile.
+Full-panel and complete 102MP policy results remain pending, and dark-field
+blotches/high-noise fine-detail loss remain visible.
 
 For explicitly ADC-only photographic restoration, the [optional V104 sites
 export](adc-consistency.md) gains +.28850dB on all 427 sources/all 1,708 CFA cases,
@@ -24,7 +32,7 @@ the original positive-noise/training checkpoint stays current.
 | V102 | 36.67951 | 54.23709 | **53.97177** | Lower ADC bias; unseen-camera reference |
 | V103 | 36.68091 | 54.22003 | 53.96410 | Similar photo quality, expanded ROI catalogue |
 | **V104** | **36.80085** | **54.26606** | 53.91700 | **Current positive-noise and training baseline** |
-| V111 | pending | 54.25270 | 53.93706 | New material/detail candidate; camera panels complete |
+| V111 | pending | 54.25270 | 53.93706 | Material/coarse-detail/high-noise color gains; worse ADC tail |
 
 V104 improves 424/427 photographic source means and all seven condition means
 over V102. All source SSIM/gradient means and all 12 selected material

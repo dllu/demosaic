@@ -5,6 +5,11 @@ tradeoff.** V111−V104 is −.01336dB known and+.02006dB unseen; all five unsee
 scene means improve. V102 still has the higher unseen mean, and selected dark
 fields remain worse than the stronger RawNIND-preup reference. [V111's complete
 camera results and native views](v111-early-quality.md#complete-development-camera-panels).
+
+The optional [eight-view V104 pilot](dihedral-quality.md#adverse-real-camera-crops)
+improves the two original adverse crop scores by .313/.267dB. Both retain
+colored blotches and remain below RawNIND pre-upsampled. These selected crop
+scores are separate from the complete scene-balanced panels below.
 [Current model choices](current-model.md) ·
 [V104 results and native photo triplets](v104-reviewed-corpus-quality.md).
 

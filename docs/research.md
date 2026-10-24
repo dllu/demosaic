@@ -50,6 +50,14 @@ V112 is training and full matched quality results are pending. The trainer expos
 with exact default/gradient replay and resumed-training checks. Production
 defaults and existing frozen recipes remain unchanged.
 
+The [optional eight-view inference study](dihedral-quality.md) now measures
+uniform averaging of exact sensor rotations/reflections with the same V104
+weights. It improves twelve fixed material cases and two adverse camera crops,
+without repairing all fine detail/blotches. Production CPU/GB10 and RGB16/DNG
+checks pass; full panels and complete 102MP policy results remain pending.
+The completed [V111 analytic grids](v111-early-quality.md#complete-weak-texture-and-flat-color-panels)
+also show better high-noise color/coarse carriers and worse ADC flat bias.
+
 Research started 2026-10-14. Sources below are primary implementations, papers,
 and vendor documentation. A recent publication is not itself evidence that this
 project matches its performance.

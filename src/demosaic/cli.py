@@ -86,6 +86,13 @@ def parser():
     benchmark.add_argument("--batch-size", type=int, default=8)
     benchmark.add_argument("--device", default="cuda")
     benchmark.add_argument("--output", type=Path, required=True)
+    for command in (infer, benchmark):
+        command.add_argument(
+            "--self-ensemble",
+            choices=("none", "dihedral8"),
+            default="none",
+            help="Optional eight-view quality mode; requires eight model evaluations per tile",
+        )
     profile = commands.add_parser(
         "noise-profile", help="Estimate shot/read noise from flat RAW patches"
     )
@@ -297,6 +304,7 @@ def main(argv=None):
                 matrix=matrix,
                 precision=args.precision,
                 refinement_precision=args.refinement_precision,
+                self_ensemble=args.self_ensemble,
             )
         stats["cudnn_autotune"] = backend_policy
         write_rgb16(output, rgb.permute(1, 2, 0).numpy(), metadata=metadata, flip=flip)
@@ -393,6 +401,7 @@ def main(argv=None):
             "batch_size": args.batch_size,
             "device": args.device,
             "precision": args.precision,
+            "self_ensemble": args.self_ensemble,
         }
         restore_tiled(model, raw[: args.tile, : args.tile], color_indices("RGGB"), **kwargs)
         rgb, stats = restore_tiled(model, raw, color_indices("RGGB"), **kwargs)

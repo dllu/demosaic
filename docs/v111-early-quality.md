@@ -1,4 +1,4 @@
-# V111 final20k: material gains and complete camera panels
+# V111 final20k: material gains and ADC color tradeoffs
 
 **V111 improves PSNR, SSIM, chroma error and gradient error on all twelve fixed
 material cases over V104.** It is a useful new detail candidate in the same
@@ -6,21 +6,15 @@ DRUNet RGB / frozen DINOv3 ConvNeXt-Tiny family. Native low-noise bark and
 canopy improve slightly; high-noise feather/hair detail and real GFX foliage
 remain soft. Complete camera panels show a small known-scene loss and unseen-scene
 gain versus V104. Full photographic results will follow V112's matched training
-run, which is now live. An additional CPU evaluation is running the complete
-existing weak-texture and flat-color panels before that matched GPU report.
+run, which is now live. The completed analytic grids show stronger coarse
+carriers and high-noise color, but a worse ADC flat-bias tail.
 
 [Material/GFX checkpoint, training boundary and native evidence](results/v111-final20000-early-quality-v1.json) ·
-[Complete camera execution, independent audit and original adverse views](results/v111-camera-complete-v1.json).
+[Complete camera execution, independent audit and original adverse views](results/v111-camera-complete-v1.json) ·
+[Complete weak-texture/color execution, independent audit and native review](results/v111-texture-color-complete-v1.json).
 The material comparison covers four selected sources, the GFX comparison six
-real contexts and the camera panels all72/90 development crops. Full427,
-flat-color and weak-carrier results are still pending.
-
-The [early CPU diagnostic execution](results/v111-full-diagnostics-queued-v1.json)
-uses all448 original weak-carrier/neutral-flat and1,176 color observations,
-retaining float predictions for independent arithmetic and native review.
-Four V104 color replays agree with prior GPU outputs within.001 DN16 mean-channel
-bias. Complete scores and native review are pending; these execution checks
-do not establish a new quality gain. The original matched queues are unchanged.
+real contexts and the camera panels all72/90 development crops. The full
+427-photo result and matched V112 comparison remain pending.
 
 ## Fixed material observations
 
@@ -69,6 +63,62 @@ All 48 board cells were viewed at native resolution. Low-noise bark grain and
 canopy separation improve modestly. Fine white feathers and hairs remain
 smoothed, especially at high noise; the numerical gains do not imply restored
 fine structure everywhere.
+
+## Complete weak-texture and flat-color panels
+
+The original 384 weak carriers, 64 neutral flats and 1,176 color cases are
+complete. At level .18 / relative contrast .02 / ISO12800, mean in-phase
+carrier response across four CFAs/four draws changes as follows:
+
+| Period, pixels | V104 gain | V111 gain |
+| --- | ---: | ---: |
+| 4 | .00156 | .00182 |
+| 8 | .05945 | .08697 |
+| 16 | .60487 | .62498 |
+
+The fine 4/8-pixel patterns remain largely missing. Period8 noncarrier RMS
+rises .000720→.000813; period16 residual RMS falls .001254→.001222. More
+carrier response alone does not establish clean detail recovery.
+
+![Original weak carriers and neutral flat: noisy, V102, V104, V111 and exact analytic GT](images/v111-full-diagnostics/texture/comparison.png)
+
+The original selected high-noise carriers and neutral flat look close to V104;
+the visible period16 carrier remains uneven/soft. [Native source/ROI/noise/display metadata](images/v111-full-diagnostics/texture/manifest.json).
+
+Color values below are the maximum absolute camera-channel **mean bias** in
+DN16 across each 160-pixel scoring ROI, separate from pixel error. Each
+condition contains all 588 original palette/CFA cases.
+
+| Condition | Model | Mean | 95th percentile | Maximum |
+| --- | --- | ---: | ---: | ---: |
+| ADC-only | V102 | 10.04 | 38.29 | 59.23 |
+| ADC-only | V104 | 14.46 | 43.70 | 1218.06 |
+| ADC-only | V111 | 27.64 | 45.43 | 2142.98 |
+| ISO12800 | V102 | 21.27 | 70.27 | 122.47 |
+| ISO12800 | V104 | 19.34 | 59.85 | 115.84 |
+| ISO12800 | V111 | 17.85 | 50.84 | 91.89 |
+
+High-noise color improves; the ADC tail worsens. The original three prospective
+colors and original V104 worst ADC field are retained in the
+[four-case board](images/v111-full-diagnostics/color/comparison.png)
+([metadata](images/v111-full-diagnostics/color/manifest.json)).
+The new **post hoc V111 worst ADC field** is bright neutral gray, linear-sRGB
+.9, GBRG, case787, shown identically for all three models:
+
+![V111 worst ADC field: noisy, V102, V104, V111 and exact analytic GT](images/v111-full-diagnostics/worst-adc/comparison.png)
+
+V111 has green mean error +.03269975 camera units, or 2,142.98 DN16. The RGB8
+preview has a slight green tint; the float bias is large relative to 16-bit
+precision. V102 retains the lower ADC flat-color bias.
+[Exact palette, ROI, checkpoint and conditioning metadata](images/v111-full-diagnostics/worst-adc/manifest.json).
+
+All 1,176 new color metrics reproduce exactly in independent NumPy64. All
+896 weak/Malvar rows reproduce within 1.58e-13, with every original input and
+all 448 earlier Malvar rows exact. Earlier audited V102/V104 controls are reused;
+four actual V104 color replays agree with their GPU outputs within .001 DN16
+mean-channel bias. This bounds those checked cases, not all-case device parity.
+All 40 new native cells were actually viewed. Analytic grids complement the
+photo/camera evidence and do not establish broad scene superiority.
 
 ## Complete development camera panels
 
@@ -156,8 +206,8 @@ The read-only candidate checkpoint is
 `/mnt/external/demosaic/models/v111-final20000.pt`, SHA256
 `97ab9ca5f1f182ff42a4245c630bba810607a3d13b61cf8aae5842192a18da15`.
 It works with the existing inference commands. V104 remains the broadly
-evaluated working default while V111's full photo/color/weak-detail results
-are pending; the new material gains and comparisons are available now.
+evaluated working default while V111's full photo result is pending; the new
+material, camera and diagnostic comparisons show its gains and weaknesses now.
 
 The earlier material/GFX reviews made eighteen V111 CPU FP32 forwards: twelve native256
 material inputs and six native512 GFX contexts, with zero new other-model
@@ -168,6 +218,7 @@ All126 native panels reproduce exactly from saved floats, and all78 distinct
 board cells were actually viewed. The audit preflight caught a missing board
 helper before execution; the failed attempt is retained and a separately pinned
 helper passes the corrected replay. Active training and original queues retain
-their frozen bytes. Full427/color/weak-detail panels, complete exports and the protected test reserve
-are outside this report; complete camera results above supplement the earlier
-material/GFX execution. No speed or SOTA claim follows.
+their frozen bytes. The complete texture/color follow-up adds 1,624 V111 CPU
+observations plus four parent replays, with no CUDA, optimizer or RAW decode.
+Full427, complete exports and the protected test reserve are outside this
+report. No speed or SOTA claim follows.

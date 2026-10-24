@@ -18,6 +18,12 @@ actual serialized-export triplets and remaining flat-color limitations.
 V102 remains a lower-flat-bias alternative for explicit zero-shot/read inputs;
 its checkpoint path and measured tradeoffs are in the model guide.
 
+Add `--self-ensemble dihedral8` to `infer` for optional eight-view quality
+inference. It preserves Bayer geometry and averages camera-RGB predictions
+before tile blending and RGB16 export, requiring eight model evaluations per
+tile. `benchmark` and the DNG batch exporter accept the same option; receipts
+record the policy. [Measured gains, native comparisons and remaining limitations](dihedral-quality.md).
+
 ## Environment and storage
 
 For native RGB16 DNGs plus full-resolution JPEGs from RAW/XMP pairs, use the

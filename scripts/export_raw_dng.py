@@ -79,6 +79,12 @@ def parser():
     root.add_argument("--tile", type=int, default=512)
     root.add_argument("--overlap", type=int, default=64)
     root.add_argument("--batch-size", type=int, default=4)
+    root.add_argument(
+        "--self-ensemble",
+        choices=("none", "dihedral8"),
+        default="none",
+        help="Optional eight-view quality mode; eight model evaluations per tile",
+    )
     root.add_argument("--device", default="cuda")
     root.add_argument("--cudnn-benchmark", action="store_true")
     root.add_argument("--jpeg-quality", type=int, default=97)
@@ -151,6 +157,7 @@ def run(args):
     manifest = {
         "checkpoint": str(checkpoint_path),
         "precision": "IEEE FP32",
+        "self_ensemble": args.self_ensemble,
         "noise_policy": "Explicit coefficients or reliable input-only Haar fit, nominal ISO fallback",
         "preview": "Original darktable edits; identity RAW preparation; RAW/profiled denoising disabled; sRGB JPEG 4:4:4",
         "completed": [],
@@ -215,6 +222,7 @@ def run(args):
                 matrix=metadata.camera_to_srgb,
                 precision="float32",
                 refinement_precision="float32",
+                self_ensemble=args.self_ensemble,
             )
             del raw
             provenance = {

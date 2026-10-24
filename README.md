@@ -16,7 +16,8 @@ complete 102MP GFX exports. Fine high-noise texture and real foliage still need 
 in PSNR, SSIM, chroma and gradient error over V104, with +.254/.100/.019dB
 at ADC-only/ISO100/ISO12800. [Native comparisons and real GFX limitations](docs/v111-early-quality.md).
 Its complete camera panels show −.013/+.020dB known/unseen changes versus V104;
-full-photo/color results remain pending. The
+full-photo results remain pending. High-noise flat color improves, while the
+worst ADC flat bias rises to 2,143 DN16; fine 8-pixel texture remains weak. The
 [matched loss-scale test](docs/loss-scale-training.md) uses V104 and 90,864
 cleaned sources; V111 has finished and V112 is training. The separate
 [Tiny/Small recipes](docs/convnext-small-capacity.md#prepared-matched-quality-trial)
@@ -27,6 +28,12 @@ For explicit zero-shot/read inputs, the [optional V104 sites export](docs/adc-co
 adds **.2885dB ADC-only PSNR** across all 427 photos/four CFAs with unchanged learned
 weights. All 1,708 cases improve; positive-noise inputs bypass it. Native crops,
 flat-color limitations and adverse cases accompany the result.
+
+The optional [eight-view quality mode](docs/dihedral-quality.md),
+`--self-ensemble dihedral8`, improves all twelve selected V104 material cases
+by +.568/.293/.082dB at ADC-only/ISO100/ISO12800. It also improves two adverse
+camera crops, with remaining blotches. This costs eight model evaluations per
+tile; full-panel and complete 102MP eight-view results remain pending.
 
 ![PSNR versus model version](docs/images/version-PSNR-history.png)
 

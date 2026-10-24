@@ -26,6 +26,10 @@ across epsilon settings use different objectives. V111 completed its original20k
 and [improves all twelve fixed material cases](v111-early-quality.md); real GFX
 changes remain small. Complete camera means change −.01336/+.02006dB known/unseen
 versus V104, with all five unseen scenes improving. V112 is now training.
+V111's complete analytic grids improve high-noise color and coarse carriers,
+while ADC flat-color maximum bias rises to 2,143 DN16; finer carriers remain
+weak. The [combined report](v111-early-quality.md#complete-weak-texture-and-flat-color-panels)
+shows that regression alongside the material gains.
 The four successful CPU/CUDA
 smokes are adopted with verified source/configuration equivalence, without
 repetition. Earlier experiments retain their inputs and evidence.

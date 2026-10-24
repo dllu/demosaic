@@ -45,7 +45,9 @@ fine white feathers and hairs remain soft at high noise. The
 [report](v111-early-quality.md) records all24 rows, source/ROI/weights/noise/display,
 unchanged inputs and source credits. Extra training, seed and corpus changes
 are confounded versus V104. The [complete camera panels](v111-early-quality.md#complete-development-camera-panels)
-show −.01336/+.02006dB known/unseen changes; full-photo/color results are pending.
+show −.01336/+.02006dB known/unseen changes; its full-photo result is pending.
+The completed analytic grids improve high-noise color/coarse carriers but
+worsen the ADC flat-bias tail; the combined report shows these tradeoffs.
 
 ## V104 versus V102 on the fixed material panel
 

@@ -33,6 +33,11 @@ The manifest records the estimate, fallback, coefficients, checkpoint/source/XMP
 hashes, tile settings, timings and output hashes for every completed image.
 Timings are shared-machine observations, not a new model speed claim.
 
+`--self-ensemble dihedral8` enables the optional [eight-view quality mode](dihedral-quality.md).
+It uses eight exact sensor rotations/reflections per tile and averages linear
+camera RGB before DNG/JPEG output. Hot-pixel correction still runs first. The
+batch manifest and each DNG's inference provenance record the selected policy.
+
 ## Hot-pixel correction
 
 `--hot-pixels` repairs isolated bright Bayer outliers **before the restoration

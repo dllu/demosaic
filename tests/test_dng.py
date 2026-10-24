@@ -220,7 +220,10 @@ def test_darktable_native_preview_does_not_reapply_sensor_crop(tmp_path):
 
 @pytest.mark.skipif(DARKTABLE is None, reason="darktable-cli integration")
 @pytest.mark.parametrize("hot_pixel_switch", ["--hot-pixels", "--hot-pixel-clusters"])
-def test_batch_cpu_export_decodes_raw_and_preserves_originals(tmp_path, hot_pixel_switch):
+@pytest.mark.parametrize("self_ensemble", ["none", "dihedral8"])
+def test_batch_cpu_export_decodes_raw_and_preserves_originals(
+    tmp_path, hot_pixel_switch, self_ensemble
+):
     import torch
 
     from demosaic.model import JointDemosaic, ModelConfig
@@ -288,10 +291,14 @@ def test_batch_cpu_export_decodes_raw_and_preserves_originals(tmp_path, hot_pixe
             "--overlap",
             "16",
             hot_pixel_switch,
+            "--self-ensemble",
+            self_ensemble,
         ]
     )
     result = module.run(args)
     assert len(result["completed"]) == 1
+    assert result["self_ensemble"] == self_ensemble
+    assert result["completed"][0]["inference"]["self_ensemble"] == self_ensemble
     assert result["completed"][0]["hot_pixels"]["enabled"]
     assert result["completed"][0]["hot_pixels"]["corrected_pixels"] == 1
     assert result["completed"][0]["hot_pixels"]["cluster_mode"] == (

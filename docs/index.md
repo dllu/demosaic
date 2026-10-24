@@ -16,6 +16,10 @@ smaller reconstruction loss scale; full matched results are pending.
 The optional [V104 ADC sites export](adc-consistency.md) adds .2885 dB on the
 complete ADC-only photo panel, with unchanged learned weights and documented
 flat-color tradeoffs.
+The optional [eight-view inference mode](dihedral-quality.md) improves the fixed
+V104 material/adverse-camera pilot with unchanged weights, at eight evaluations
+per tile. V111's [complete texture/color review](v111-early-quality.md#complete-weak-texture-and-flat-color-panels)
+shows stronger coarse carriers and high-noise color, with a worse ADC bias tail.
 
 | Topic | Start here |
 | --- | --- |

@@ -45,11 +45,19 @@ V111 completed20k and [improves all twelve fixed material cases](v111-early-qual
 over V104, with modest native gains and small real GFX changes. V112 is training
 at its fixed20k budget, changing only epsilon .001→.0003. V111's complete camera
 means change −.01336/+.02006dB known/unseen versus V104, with all5 unseen scene
-means improving and persistent local dark-field failures. Full-photo/color/detail
-and matched V112 results are pending. Actual CPU/CUDA checks and the corrected production handoff are
+means improving and persistent local dark-field failures. Complete analytic
+grids improve high-noise color/coarse carriers but raise worst ADC bias to
+2,143 DN16. Full-photo and matched V112 results are pending. Actual CPU/CUDA checks and the corrected production handoff are
 recorded. The earlier Tiny/Small capacity recipes remain unlaunched and can use
 a better completed initializer later. [Source review](incoming-commons-quality.md) ·
 [Current training](quality-first-training.md).
+
+The optional [eight-view V104 mode](dihedral-quality.md) improves all twelve
+selected material cases and two adverse camera crops with unchanged weights.
+CPU/GB10 and native RGB16/DNG checks pass. It needs eight evaluations per tile;
+full-panel qualification remains open and its complete 102MP export is queued
+after the original workflow. It does not meet the speed target or remove the
+remaining dark-field/fine-detail failures.
 
 The [V104 ADC diagnostics](v104-adc-color-projection.md) show that the existing
 Malvar residual operator repairs most flat-color bias, with texture gains and

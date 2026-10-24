@@ -1,0 +1,112 @@
+{
+  "image": "crop-7efcb8eb0f0478aa.png",
+  "caption": "V104 / V111 worst ADC case787 / gray-l0.90 GBRG",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Restored",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "GT (analytic)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "d273a02e4b7f87c949cd67cc7e6922f4a13d2ad30206473a1211cc46b2f8efbf",
+  "case": {
+    "id": "gray-l0.90",
+    "palette": "gray-l0.90",
+    "source": {
+      "id": "gray-l0.90",
+      "hue_degrees": null,
+      "saturation": 0.0,
+      "peak": 0.9,
+      "linear_srgb": [
+        0.9,
+        0.9,
+        0.9
+      ]
+    },
+    "condition": {
+      "name": "adc-only",
+      "shot": 0.0,
+      "read": 0.0,
+      "exposure": 1.0
+    },
+    "pattern": "GBRG",
+    "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/gray-l0.90-adc-only-GBRG.npz",
+    "sha256": "99a427d2576698aa7656316fdf0d4ceaf74c3adeeb196536da3757f2281ad954",
+    "target_camera_RGB": [
+      0.45000001788139343,
+      0.9000000357627869,
+      0.6000000238418579
+    ],
+    "draws_per_pattern": 1
+  },
+  "ROI_xywh": [
+    48,
+    48,
+    160,
+    160
+  ],
+  "conditioning": {
+    "name": "adc-only",
+    "shot": 0.0,
+    "read": 0.0,
+    "exposure": 1.0
+  },
+  "white_balance": [
+    2.0,
+    1.0,
+    1.5
+  ],
+  "camera_to_srgb": [
+    [
+      1.1176470518112183,
+      -0.05882352963089943,
+      -0.05882352963089943
+    ],
+    [
+      -0.05882352963089943,
+      1.1176470518112183,
+      -0.05882352963089943
+    ],
+    [
+      -0.05882352963089943,
+      -0.05882352963089943,
+      1.1176470518112183
+    ]
+  ],
+  "display_exposure": 1,
+  "reference": "Exact uniform analytic target, not a real photo.",
+  "selection_basis": "Post hoc maximum V111 ADC mean-channel bias in completed1176-case grid; identical case for all models.",
+  "model": {
+    "label": "V104",
+    "path": "/mnt/external/demosaic/v102-reviewed-corpus-20261023-v1/train/V104/last.pt",
+    "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+    "prediction": {
+      "path": "/mnt/external/demosaic/v102-reviewed-corpus-evaluation-20261023-v1/color/model1-case787-RGB-f32.npy",
+      "sha256": "97ec0f15687f0094380cf7d5599fa229dc92c279d381c47d2c610621f414948c"
+    }
+  }
+}
