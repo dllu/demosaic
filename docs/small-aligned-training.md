@@ -1,7 +1,8 @@
 # Matched quality training from V112
 
-**V114 Tiny has completed its original 20,000-update continuation; V115 fitted
-Small is training with the same budget.** Both passed eight actual native 256/B16/BF16
+**V114 Tiny and V115 fitted Small have both completed their original
+20,000-update continuations. Their complete quality evaluation is running.**
+Both passed eight actual native 256/B16/BF16
 CUDA updates after the original eight-view evaluation/audit exited successfully.
 They use seed 63 and V112's trained loss scale. V112 remains the current learned
 baseline while endpoint quality is unmeasured.
@@ -10,7 +11,7 @@ baseline while endpoint quality is unmeasured.
 [V112 baseline](v112-quality.md) · [Completed Small transfer](small-feature-transfer.md).
 [Guarded training launch and successful CUDA checks](results/v112-spawn-guard-training-and-evaluation-v2.json) ·
 [Current corrected evaluation/review queues](results/evaluation-backbone-interface-fix-v1.json).
-[Completed Tiny endpoint and live Small/queue observation](results/v114-trained-v115-running-v1.json).
+[Completed endpoints, independent Small payload inspection and evaluator handoff](results/v114-v115-trained-quality-running-v1.json).
 
 V114 finished on October 24 at 11:12 PDT with 20,000 optimizer updates and 640
 validation forwards. Model, EMA and Adam states are finite; the official Tiny
@@ -19,6 +20,21 @@ evaluation. The generic accounting status string incorrectly says Small; the
 worker's arm, backbone hash, initializer and checkpoint identify Tiny V114.
 That original receipt is preserved unchanged.
 
+V115 finished on October 24 at 16:24 PDT with 20,000 optimizer updates and 640
+validation forwards. Its official Small encoder remains frozen. All 801 logged
+inputs/domains/LRs match Tiny, as do the 20 validation comparator scores and
+panel definitions. Unlogged production input tensors are not independently
+verified. A separate CPU inspection reopens the immutable final checkpoint:
+91 model tensors and 91 EMA tensors are finite FP32, all 89 Adam states are
+finite and at step 20,000, and the explicit fitted-parent/configuration match.
+This inspection adds no neural call, update, RAW decode or CUDA work.
+
+The final Small checkpoint is
+`/mnt/external/demosaic/V112-continuations-20261024-v2/V115/train/V115/last.pt`,
+SHA256 `fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84`.
+This establishes completed training, not a quality improvement. Existing
+V112 remains the learned baseline while the retained endpoints are measured.
+
 ## Models and budget
 
 | Arm | Initialization | New production updates |
@@ -26,7 +42,7 @@ That original receipt is preserved unchanged.
 | V114 Tiny | All 91 V112 EMA tensors and official frozen Tiny encoder | 20,000 |
 | V115 Small | V112 trunk/gates with fixed 64-source lateral fit and official frozen Small encoder | 20,000 |
 
-Small changes eight lateral tensors; the other 83 EMA tensors and all three
+The Small initializer changes eight lateral tensors; the other 83 EMA tensors and all three
 learned fusion gates remain exact to V112. Its initializer records inherited
 step 20000 and zero new joint updates. Sixteen separate training sources check
 the feature fit; validation, test and GFX do not enter fitting.
@@ -87,11 +103,12 @@ and [intentional idle supersession](results/small-aligned-v113-superseded-v1.jso
 remain preserved. They have no production CUDA updates and are not resumed.
 
 The [retained-prediction endpoint evaluation](quality-prediction-archive.md) is
-now queued behind this exact training controller. It covers the complete
+has started after the exact training controller exited successfully. It covers the complete
 photo/camera/analytic panels, six GFX contexts and complete 102MP exports for
 both new models, reusing existing V112/RawNIND controls. Exact numerical targets
-and native FP32 predictions will be retained for independent review without
-repeating model inference. Its controller is waiting with no child or CUDA work.
+and native FP32 predictions are retained for independent review without
+repeating model inference. The photographic stage is running under the original
+evaluator owner and frozen source; other declared stages follow.
 An independent CPU audit is also queued after that exact evaluator. It checks
 the retained numerical panels, source/scene comparisons and color/detail tails,
 and prepares native bark/canopy triplets. Actual photo/GFX viewing follows.

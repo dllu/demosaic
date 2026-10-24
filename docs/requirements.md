@@ -19,7 +19,7 @@ GFX gallery do not establish broad real-camera superiority. Quality precedes spe
 | Modern DINOv3 architecture | V84-family DRUNet RGB trunk and official frozen ConvNeXt-Tiny pyramid; completed V112-derived Small feature fit | Measure trained Tiny/Small endpoints and retain useful quality gains |
 | Diverse clean targets and binning |90,864-source cleaned corpus;4×→geometry→area2, zero optical blur, weak textures/photo contrast, six reviewed ROIs | Retain visual source review and fine-detail coverage |
 | Physical noise/camera/color | Poisson/read noise, signed black subtraction, all Bayer phases, WB/matrix, exposure/clipping; V112 repairs large ADC tails | Spatial dark-field/weak-detail failures remain |
-| Reliable resource-aware training | Exact parent/source/data snapshots, actual checks, fixed endpoints and retained failures; V114 completed20k and V115 is training, with evaluation/review queued | Complete trained endpoint measurements, independent metric checks and native review |
+| Reliable resource-aware training | Exact parent/source/data snapshots, actual checks, fixed endpoints and retained failures; V114/V115 both completed20k, with endpoint evaluation running and independent review queued | Complete trained endpoint measurements, independent metric checks and native review |
 | Protected originals/tests | Local GFX3879/3880 cache; originals read-only; standing scene/siblings outside training;16-scene test reserve unscored | Preserve boundaries in future cohorts |
 | Current documentation |46 completed primary endpoints in plot; native triplets with source/ROI/hash/noise/display; local-time diary | Update as useful results complete, without old promotion freezes |
 
@@ -36,8 +36,8 @@ The original V104 [eight-view full 102MP export and native review](dihedral-full
 and full numerical panels/audit are complete. Eight-view photo PSNR reaches
 37.04376dB with remaining color/detail weaknesses. The V112-derived Small
 initializer and actual CPU/CUDA updates are verified. [Matched Tiny/Small
-continuations](small-aligned-training.md) have completed V114's 20,000 updates;
-V115 is training on the same budget, with automatic endpoint evaluation. Intervals describe fixed
+continuations](small-aligned-training.md) have both completed 20,000 updates,
+with automatic endpoint evaluation now running. Intervals describe fixed
 evaluation units and do not measure training-repeat uncertainty.
 
 The [training-reference review](paired-reference-quality.md) checks all 576

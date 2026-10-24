@@ -59,8 +59,9 @@ The [Small feature-transfer method](small-feature-transfer.md) now preserves
 V112's learned gates and trunk through a training-only lateral fit. Photo means
 stay close; two adverse-camera crops remain .20–.32dB worse. Matched V114 Tiny
 and V115 fitted Small passed eight actual CPU and CUDA updates each;
-[V114 has completed 20,000 updates and V115 is training](small-aligned-training.md).
-Each receives 20,000 further updates at seed 63. Endpoint quality remains pending.
+[both have completed 20,000 updates](small-aligned-training.md).
+Each received 20,000 further updates at seed 63. Endpoint evaluation is running;
+quality and native review remain pending.
 
 The [V116 data trial](fine-detail-data-training.md) is queued after that exact
 review chain. It holds Tiny's architecture fixed to reuse completed V114 as the

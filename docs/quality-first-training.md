@@ -26,7 +26,7 @@ The [Small feature fit](small-feature-transfer.md) now uses V112 teacher targets
 and retained training previews/Small features. Both Tiny and fitted Small passed
 eight actual CPU optimizer updates with identical input/domain/LR schedules.
 [Matched V114/V115 continuations](small-aligned-training.md) passed actual CUDA
-checks. V114 has completed 20,000 updates and Small is training on the same budget. The idle
+checks and both have completed 20,000 updates. Their endpoint evaluation is running. The idle
 V104-derived V113 plan remains preserved without CUDA/production work.
 
 The [V116 follow-up](fine-detail-data-training.md) is queued after the current

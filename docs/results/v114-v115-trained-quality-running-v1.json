@@ -1,0 +1,91 @@
+{
+  "status": "completed-matched-V114-V115-training-quality-evaluation-running",
+  "recorded_local": "2026-10-24T16:30:49.436819-07:00",
+  "independent_endpoint_inspection": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-V115-trained-endpoints-review-v1/result-v1.json",
+    "sha256": "23646244533cdf38e2539427c3c0a8ca1af13c2b236c7c2d014eb5c2f37836cc"
+  },
+  "inspection_source": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-V115-trained-endpoints-review-v1/verify-v1.py",
+    "sha256": "3c13edc7bc51e377557170d6b59bda3634ca949ca38c822e96ba47ba86b7b042"
+  },
+  "inspection_log": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-V115-trained-endpoints-review-v1/verification-v1.log",
+    "sha256": "1def1574b08c18a638e0d4920fd909134358261f83c0bd1a26470c30bd0d76f5"
+  },
+  "completed_original_training": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V112-continuations-training-v2/result-v1.json",
+    "sha256": "64dbda6ae3749451cab38f80f29d61d4b4976a09c5e442c5af73b9a95be0ad80"
+  },
+  "training_receipts": {
+    "V114": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V112-continuations-training-v2/train-V114-accounting-v1.json",
+      "sha256": "5b74c2454ff22f1c18163aec0b17cd6f8ef2cc09dede9814a614739fadf333a0"
+    },
+    "V115": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V112-continuations-training-v2/train-V115-accounting-v1.json",
+      "sha256": "f192839972b460c1c9785b6286529eb750620d7e15f77c0ac20a38b461a4da2c"
+    }
+  },
+  "checkpoints": {
+    "V114": {
+      "path": "/mnt/external/demosaic/V112-continuations-20261024-v2/V114/train/V114/last.pt",
+      "sha256": "2285c84b7015bcf122e71b890723f80aaf216bde849256c77f070c2493f9d2d2"
+    },
+    "V115": {
+      "path": "/mnt/external/demosaic/V112-continuations-20261024-v2/V115/train/V115/last.pt",
+      "sha256": "fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84"
+    }
+  },
+  "new_production_updates_per_arm": 20000,
+  "validation_forwards_per_arm": 640,
+  "official_frozen_backbone_SHA256": {
+    "V114": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd",
+    "V115": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14"
+  },
+  "Small_payload_directly_inspected": {
+    "step": 20000,
+    "model_and_EMA_tensors_each": 91,
+    "all_model_and_EMA_FP32_finite": true,
+    "AdamW_states": 89,
+    "all_AdamW_steps": 20000,
+    "AdamW_finite": true,
+    "official_backbone_record": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14",
+    "explicit_fitted_parent": {
+      "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/Small-aligned-from-V112.pt",
+      "sha256": "6b9a863e43ce17594a629440a86388bff93b92b1df33d05c409bd2678cc323e6",
+      "step": 20000
+    }
+  },
+  "matched_logged_training_inputs_domains_LRs": 801,
+  "matched_validation_comparators_and_panel_definitions": 20,
+  "unlogged_production_inputs_independently_verified": false,
+  "observed_evaluation": {
+    "owner": {
+      "pid": 986158,
+      "created": 1792855221.87
+    },
+    "queue_plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V112-continuations-evaluation-v3/queue-plan-v2.json",
+      "sha256": "2fe25724838e2257de7a06f3272cbbf5e057e72a01143a7ef1454561e5f11063"
+    },
+    "completed": {},
+    "status": "running-frozen-endpoint-quality-stage",
+    "updated_unix": 1792884288.6692398,
+    "dependency": {
+      "pid": 867877,
+      "created": 1792848017.25
+    },
+    "stage": "photo",
+    "child": {
+      "pid": 1523589,
+      "created": 1792884288.62
+    }
+  },
+  "inspection_new_neural_forwards": 0,
+  "inspection_new_optimizer_updates": 0,
+  "inspection_RAW_decodes": 0,
+  "inspection_CUDA_initialized": false,
+  "current_learned_baseline": "V112; trained Tiny/Small quality remains unmeasured",
+  "scope": "Actual original20000-update endpoints and evaluator handoff, not an improvement/performance claim. Model/EMA/Adam Small tensors are finite; each of89 Adam states reaches20000; frozen official Small identity verified by original worker, configuration and source lineage. All91 initial tensors match the explicit fitted Small parent in the executed receipt; this is a fitted-transfer comparison, not pure capacity alone. Existing Tiny evidence adopted; generic Small status text on its historical receipt remains unchanged. Both source archives and all original queues remain intact. Independent numerical/native/GFX review follows retained predictions without repeat inference."
+}

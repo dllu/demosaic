@@ -1,11 +1,11 @@
 # Retained predictions for quality reports
 
-**The matched V114/V115 endpoint evaluation is queued after training.** It
+**V114/V115 have both completed 20,000 updates; their endpoint evaluation is running.** It
 evaluates each new model once per declared observation and retains the native
 FP32 predictions and exact supervision used by the evaluator. This supports
 independent score checks, crop reports and later diagnostics without repeating
-model inference. Tiny V114 has completed 20,000 updates and Small V115 is training;
-their complete endpoint quality results remain pending.
+model inference. Their complete endpoint quality results remain pending.
+[Completed training, payload inspection and handoff](results/v114-v115-trained-quality-running-v1.json).
 
 [Queue, source boundary, genuine-output replay and test evidence](results/v112-prediction-archive-evaluation-queued-v1.json) ·
 [Guarded training launch](results/v112-spawn-guard-training-and-evaluation-v2.json) ·
@@ -14,8 +14,9 @@ their complete endpoint quality results remain pending.
 [Independent audit proof and queue](results/v112-independent-archive-audit-queued-v1.json).
 
 The initial queue stopped after its training dependency's pre-forward spawn
-failure. Its replacement waits for the guarded training controller; both actual
-CUDA checks pass, V114 production is complete and V115 is running. The failed attempt performed
+failure. The current evaluator has observed successful exit of the guarded
+training controller and started the photographic stage. Both actual CUDA checks
+and original 20,000-update production runs passed. The failed attempt performed
 zero learned work. Original sources/receipts remain preserved.
 
 The current evaluator supplies the required `legacy_sha256` keyword while
@@ -26,8 +27,8 @@ The two idle reviewers were replaced with corrected frozen sources: evaluation
 v3 and independent audit v2. Only the collector's execution file changes;
 physical model/observations/counts/budgets remain exact to the original queue.
 The old idle owners exited without children or completed stages, and their
-sources, logs and terminal receipts remain preserved. Training continues under
-its original owner.
+sources, logs and terminal receipts remain preserved. Original training is now
+complete; the evaluator retains its declared source, owner and budgets.
 
 ## Scheduled coverage
 

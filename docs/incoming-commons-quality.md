@@ -38,8 +38,8 @@ reconstruction epsilon. V112 is now the working baseline after
 [complete photo/camera/color/material/GFX evaluation](v112-quality.md).
 The [V114 Tiny / V115 fitted Small continuations](small-aligned-training.md)
 use seed63 and this same corpus, six ROIs, zero optical blur and existing
-contrast/detail recipe. Their actual CPU/CUDA checks passed; V114 completed
-20,000 updates and V115 is training. No new frequency-profile option changes these
+contrast/detail recipe. Their actual CPU/CUDA checks and both original
+20,000-update runs completed; endpoint evaluation is running. No new frequency-profile option changes these
 frozen recipes.
 
 A separate [paired-reference review](paired-reference-quality.md) inspects all

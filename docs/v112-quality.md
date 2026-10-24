@@ -92,8 +92,8 @@ despite V112's substantial gains on the selected synthetic material cases.
 
 The [larger-encoder transfer](small-feature-transfer.md) now uses V112 teacher
 targets and retained Small training features/previews. Matched Tiny/Small
-continuations passed actual CPU/CUDA optimizer checks; [V114 has completed 20,000 updates and V115 is training](small-aligned-training.md)
-on the same budget. Endpoint quality remains pending; the old idle
+continuations passed actual CPU/CUDA optimizer checks; [both have completed 20,000 updates](small-aligned-training.md)
+on the same budget. Endpoint evaluation is running; quality remains pending. The old idle
 V113 plan and evidence remain preserved. V104/sites and V102 remain useful
 alternatives; the 100MP/10s target remains open.
 

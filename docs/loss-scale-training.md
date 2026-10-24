@@ -18,8 +18,8 @@ The [fixed-output gradient diagnostic](loss-smoothing-detail.md) motivated this
 trained comparison without predicting its outcome. The smaller scale repairs
 the large ADC tail here, but does not restore finer carriers. The
 [Small transfer](small-feature-transfer.md) now uses V112. Matched V114 Tiny and
-V115 fitted Small passed actual CPU updates and are [queued](small-aligned-training.md)
-for equal further training. The idle V113 plan and earlier evidence remain preserved.
+V115 fitted Small [completed equal further 20,000-update runs](small-aligned-training.md),
+with endpoint evaluation now running. The idle V113 plan and earlier evidence remain preserved.
 
 ## Matched recipes
 

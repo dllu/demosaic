@@ -157,4 +157,6 @@ with zero model calls or updates. That attempted source/log/receipt remains
 preserved; the corrected copy uses fresh output roots. The completed checks
 verify the real training path at CPU64, without establishing convergence,
 native256/BF16 CUDA readiness or a quality gain. Their checkpoints remain
-engineering evidence; current V114/V115 training and V112 selection are unchanged.
+engineering evidence; original V114/V115 recipes and V112 selection are unchanged.
+Both continuations have completed 20,000 updates and their endpoint evaluation
+is running; the fine profile is reserved for the separate V116 data comparison.

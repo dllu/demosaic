@@ -131,10 +131,10 @@ import, and the first worker rejected a manifest-index assumption. Both had
 zero neural forwards or optimizer updates. The corrected worker checks source
 IDs and preserves all successful observations without repetition.
 
-The [matched V114/V115 plan](small-aligned-training.md) continues V112 Tiny and
+The [matched V114/V115 runs](small-aligned-training.md) have continued V112 Tiny and
 this fitted Small initializer for 20,000 additional updates each at seed 63.
 Both passed eight actual discarded CPU and native 256/B16/BF16 CUDA updates.
-V114 training has started after the original GPU chain; Small follows. Trained
+Both original runs are complete and endpoint evaluation is running. Trained
 Small quality remains unmeasured.
 
 The [public projection fitter](../scripts/fit_dino_laterals.py) reproduces the
