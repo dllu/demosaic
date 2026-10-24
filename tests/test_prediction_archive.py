@@ -1,4 +1,6 @@
+import errno
 import json
+from pathlib import Path
 
 import numpy as np
 import pytest
@@ -106,6 +108,36 @@ def test_existing_color_prediction_is_shared_without_another_array_copy(tmp_path
     assert Path(row["prediction"]["path"]).samefile(source)
     assert source.read_bytes() == original
     assert np.array_equal(next(iter_predictions(archive.manifest))[1], target)
+
+
+def test_cross_filesystem_prediction_copy_preserves_original_bytes_and_permissions(tmp_path, monkeypatch):
+    context, target, supervision = batch()
+    source = tmp_path/"external.npy"
+    np.save(source, target, allow_pickle=False)
+    source.chmod(0o640)
+    original, mode = source.read_bytes(), source.stat().st_mode
+    def cross_device(*_args):
+        raise OSError(errno.EXDEV, "Cross-device link")
+    monkeypatch.setattr("demosaic.prediction_archive.os.link", cross_device)
+    archive = PredictionArchive(tmp_path/"archive")
+    row = archive.append(model(), context, target, supervision, prediction_file=source)
+    copied = Path(row["prediction"]["path"])
+    assert not copied.samefile(source) and copied.read_bytes() == original
+    assert source.read_bytes() == original and source.stat().st_mode == mode
+    assert np.array_equal(next(iter_predictions(archive.manifest))[1], target)
+
+
+def test_prediction_link_errors_other_than_cross_device_are_not_hidden(tmp_path, monkeypatch):
+    context, target, supervision = batch()
+    source = tmp_path/"existing.npy"
+    np.save(source, target, allow_pickle=False)
+    def denied(*_args):
+        raise PermissionError(errno.EACCES, "Denied")
+    monkeypatch.setattr("demosaic.prediction_archive.os.link", denied)
+    archive = PredictionArchive(tmp_path/"archive")
+    with pytest.raises(PermissionError):
+        archive.append(model(), context, target, supervision, prediction_file=source)
+    assert len(list(iter_predictions(archive.manifest))) == 0
 
 
 @pytest.mark.parametrize("invalid", ["half", "nonfinite", "shape", "missing-target"])

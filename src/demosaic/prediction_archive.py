@@ -1,8 +1,10 @@
 """Native FP32 predictions and exact supervision for later quality audits."""
 
+import errno
 import hashlib
 import json
 import os
+import shutil
 from pathlib import Path
 
 import numpy as np
@@ -104,8 +106,16 @@ class PredictionArchive:
             source = Path(prediction_file)
             if fingerprint(np.load(source, allow_pickle=False)) != fingerprint(values):
                 raise ValueError("Existing prediction differs from the evaluated values")
-            # Keep the original file's bytes and permissions; both paths are audited.
-            os.link(source, path)
+            # Share bytes on one filesystem. Across filesystems, preserve the
+            # original NPY bytes in an exclusive copy without touching the source.
+            try:
+                os.link(source, path)
+            except OSError as error:
+                if error.errno != errno.EXDEV:
+                    raise
+                with source.open("rb") as original, path.open("xb") as destination:
+                    shutil.copyfileobj(original, destination)
+                path.chmod(0o444)
         row = {"schema": "demosaic-predictions-v1", "index": index, "model": model,
                "context": context, "prediction": _binding(path), "prediction_values": fingerprint(values),
                "supervision": self._targets[target_key], "supervision_values": descriptions}

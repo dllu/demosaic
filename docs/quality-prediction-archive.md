@@ -8,7 +8,8 @@ model inference. The trained endpoints and their quality results remain pending.
 
 [Queue, source boundary, genuine-output replay and test evidence](results/v112-prediction-archive-evaluation-queued-v1.json) ·
 [Current guarded training/evaluation queues](results/v112-spawn-guard-training-and-evaluation-v2.json) ·
-[Matched training](small-aligned-training.md).
+[Matched training](small-aligned-training.md) ·
+[Independent audit proof and queue](results/v112-independent-archive-audit-queued-v1.json).
 
 The initial queue stopped after its training dependency's pre-forward spawn
 failure. Its replacement waits for the guarded training controller; both actual
@@ -61,6 +62,9 @@ input fingerprints, array shapes/dtypes and file/value hashes. Cross-method
 alignment rejects changed sources, ordering, inputs or supervision. Existing
 color-grid predictions are hard-linked into the archive rather than written a
 second time; the evaluator's already loaded observations supply supervision.
+When an existing prediction and archive are on different filesystems, an
+exclusive byte-for-byte copy replaces the hard link. The original stays intact;
+other link errors still stop the writer.
 
 Actual packed input/colors are also retained for the selected material sources,
 so native noisy/denoised/exact synthetic GT triplets can be built later without
@@ -84,7 +88,7 @@ keeps completed records and partial evidence and stops without automatic retry.
 
 ## Verification and resource boundary
 
-Thirty-eight targeted tests pass, covering signed/HDR FP32 fidelity, supervision
+The original 38-test verification covers signed/HDR FP32 fidelity, supervision
 sharing, source/input/order mismatches, corruption, inference-policy separation,
 existing-file sharing, and evaluator callbacks. Nonlearned operator fixtures
 confirm that callbacks add no model evaluations and receive actual targets/masks.
@@ -101,8 +105,50 @@ before later stages and a 208GiB runtime reserve, with 48GiB available RAM at
 stage start and a 24GiB CUDA allocation quota. These are new prospective limits
 after training exits; earlier frozen workflow limits are unchanged.
 
-Full metric reconstruction and actual native viewing follow the completed
-endpoints. Reports must include at least two native triplets and the standing
-GFX foliage/fence and other regions, with accurate reference labels. Useful
-measured gains can advance the docs and implementation without a historical
-promotion gate freezing the model choice.
+## Independent audit after evaluation
+
+The [CPU audit](../scripts/queue_quality_archive_audit.py) now waits for the
+exact endpoint-evaluation process to exit successfully with all eight stages.
+It then checks **28,380 numerical observations** across the two models, directly
+from the saved FP32 predictions and actual targets. It imports no Torch,
+regenerates no noise, runs no model and decodes no RAW.
+
+[Independent NumPy64 arithmetic](../src/demosaic/archive_metrics.py) reconstructs
+photo linear/rendered PSNR, chroma/gradient error, measured-CFA scores, analytic
+color bias, carrier gain/phase/residual and neutral-flat FFT measures. Complete
+archive/report joins and shared supervision are required. SSIM and masked
+boundary/shadow metrics retain the original evaluator implementation.
+
+Photo comparisons pair the same condition/CFA observations and weight sources
+equally. Camera comparisons average crops within capture, captures within scene,
+then scenes equally. Source/scene bootstraps describe fixed evaluation units,
+not training-seed uncertainty. Existing V112 and stronger RawNIND controls are
+reused. Color tails and weak 4/8/16-pixel carriers accompany the primary means.
+
+For each model, the audit also prepares two native 160-pixel triplets of the
+preselected bark and canopy sources at ISO12800. Their noisy Malvar, restored
+and exact synthetic GT panels use identical ROI, WB/matrix and display exposure.
+Receipts record source, checkpoint, conditioning, target/prediction hashes and
+encoded cell hashes; every PNG is reopened and checked. Actual viewing of these
+and the standing GFX/full-frame foliage/fence regions remains a separate step.
+No model recommendation changes automatically.
+
+Thirty-two focused archive/audit tests pass, including cross-filesystem copying,
+all Bayer phases and Malvar borders, valid-sample thresholds, closed-form carrier
+responses, FFT bands, source/capture weighting, report coverage and native cells.
+A source-frozen proof audits **17 genuine retained observations** from earlier
+photo, adverse-camera, carrier/flat and color runs. Maximum photo PSNR discrepancy
+is .0000021dB; camera/color arithmetic agrees exactly and carrier/flat differences
+are below 1.7e-14. Both generated native triplets were actually viewed. This is
+engineering verification, not a new model-quality experiment.
+
+The proof exposed and preserved two setup failures before any prediction record:
+an output above the frozen workspace boundary and a cross-filesystem hard link.
+Fresh corrected output roots and the tested copy fallback resolve them; original
+sources, logs and partial files remain unchanged. The queued audit writes inside
+its own frozen workspace and requires 8GiB available RAM and 2GiB output space.
+Failures stop with evidence preserved and no automatic retry.
+
+The trained endpoint results remain pending. Useful measured gains can advance
+the docs and implementation without a historical promotion gate freezing the
+model choice.

@@ -79,6 +79,9 @@ photo/camera/analytic panels, six GFX contexts and complete 102MP exports for
 both new models, reusing existing V112/RawNIND controls. Exact numerical targets
 and native FP32 predictions will be retained for independent review without
 repeating model inference. Its controller is waiting with no child or CUDA work.
+An independent CPU audit is also queued after that exact evaluator. It checks
+the retained numerical panels, source/scene comparisons and color/detail tails,
+and prepares native bark/canopy triplets. Actual photo/GFX viewing follows.
 
 The first CUDA wrapper lacked a multiprocessing main guard. A spawned loader
 re-entered it and failed before the first batch; the root receipt confirms zero

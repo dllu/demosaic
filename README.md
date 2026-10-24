@@ -16,7 +16,7 @@ and complete 102MP exports are verified. FP32 inference/blending takes 167.51s.
 The [larger-encoder transfer](docs/small-feature-transfer.md) now starts from
 V112. Both continuations passed actual CPU/CUDA updates, and
 [V114 training is running](docs/small-aligned-training.md), with
-[automatic endpoint evaluation and retained predictions](docs/quality-prediction-archive.md).
+[automatic evaluation and independent saved-prediction review](docs/quality-prediction-archive.md).
 [Current models](docs/current-model.md) · [Source-quality review](docs/incoming-commons-quality.md) ·
 [Historical diary](diary/index.md).
 For explicit zero-shot/read inputs, the [optional V104 sites export](docs/adc-consistency.md)
