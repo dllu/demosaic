@@ -1,9 +1,9 @@
 {
-  "preferred_version": 104,
-  "name": "V104 final20000",
+  "preferred_version": 112,
+  "name": "V112 final20000",
   "checkpoint": {
-    "path": "/mnt/external/demosaic/models/v104-final20000.pt",
-    "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300"
+    "path": "/mnt/external/demosaic/models/v112-final20000.pt",
+    "sha256": "21c3cca8370df21e3412f9ccbf441c35afcfad8fd03174c7727f4f88874783b1"
   },
   "architecture": {
     "restoration_backbone": "pretrained-rgb",
@@ -12,7 +12,7 @@
     "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
     "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b"
   },
-  "closely_matched_alternative": 102,
+  "closely_matched_alternative": 111,
   "notable_comparators": [
     43,
     84,
@@ -21,10 +21,13 @@
     99,
     100,
     101,
-    103
+    102,
+    103,
+    104,
+    111
   ],
-  "selection_basis": "Full427 photographic PSNR36.80085dB (+.12134 over V102),424/427 source means improve and all7 condition means rise. All427 source SSIM/gradient means and all12 selected material PSNR/SSIM/gradient cases improve. High-noise period16 weak-carrier gain rises .49887 to .60487; complete GFX outputs remain close, with sharper structure than RawNIND but soft fine foliage and saturated signs. Known CFA54.26606 improves .02897dB; unseen CFA53.91700 declines .05477dB. ADC flat-color worst-case bias rises from59.23 to1218.06DN, while high-noise color bias improves. Favor V104 for positive-noise photographic restoration and continued quality training; retain V102 for strict zero-noise ADC workflows and its stronger unseen-camera mean. Same V84 DRUNet/frozen official DINOv3 ConvNeXt-Tiny family; useful gains and remaining weaknesses are documented directly.",
+  "selection_basis": "Full427 photographic PSNR36.90238dB (+.10154 over V104),425/427 source means improve and all7 condition means rise. Near-equal photo PSNR to V111 (-.00129dB), with higher known/unseen CFA means54.26914/53.95378dB (+.01644/+.01672 over V111). ADC flat-color maximum bias50.89DN16 versus V1041218.06 and V1112142.98; high-noise mean/max17.53/91.07DN16 improve over V10419.34/115.84. High-noise weak-carrier gains improve at periods8/16 to.09580/.65759, while4-pixel detail remains nearly absent. Same V84-family pretrained DRUNet RGB trunk and official frozen DINOv3 ConvNeXt-Tiny pyramid, cleaned90864-source corpus and retained learned gates. Six standing GFX512 contexts remain close with soft foliage; no broad real-camera superiority claim. Prefer V112 for current restoration and further quality training; retain V111, V104/sites and V102 as explicitly labeled useful alternatives. Full-frame V112 exports/timing continue in the original workflow.",
   "review": "docs/current-model.md",
-  "performance_report": "docs/v104-reviewed-corpus-quality.md",
-  "recommendation_scope": "Default for positive-noise RAW captures and next quality training. For explicit zero-shot/read ADC workflows, select V102 when lower flat-color bias matters. V102 remains a separate evaluation reference."
+  "performance_report": "docs/v112-quality.md",
+  "recommendation_scope": "Current positive-noise RAW and quality-training baseline, with substantially lower tested ADC flat-color tails as well. Optional V104 ADC-sites export has a separate observed-sample fidelity/photo-PSNR tradeoff. V102 retains a slightly higher unseen-camera panel mean. Preserve original explicit-parent experimental plans and controls independently of this recommendation."
 }

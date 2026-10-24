@@ -139,7 +139,7 @@ fields. On 48 tested ADC carrier/CFA cases, sites improves RGB RMSE in all 48;
 Malvar improves 39 and regresses 9. These are complementary diagnostics rather
 than independent photographs. [Color/texture results and native counterexample](v104-adc-color-projection.md).
 
-Keep the original V104 for current positive-noise restoration/training, and
+Use [V112](v112-quality.md) for current restoration/training, and
 consider V102 when lower unprojected flat-color bias or its higher unseen-camera
 mean matters. The current model selector does not switch checkpoints by noise.
 [Current choices](current-model.md) · [Earlier completed V84 study](v84-adc-consistency-study.md).

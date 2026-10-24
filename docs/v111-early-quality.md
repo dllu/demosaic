@@ -5,16 +5,17 @@ material cases over V104.** It is a useful new detail candidate in the same
 DRUNet RGB / frozen DINOv3 ConvNeXt-Tiny family. Native low-noise bark and
 canopy improve slightly; high-noise feather/hair detail and real GFX foliage
 remain soft. Complete camera panels show a small known-scene loss and unseen-scene
-gain versus V104. V112 has also completed its original20k budget; the full matched photographic
-evaluation is running. The completed analytic grids show stronger coarse
+gain versus V104. The [complete primary panels](v111-v112-primary-quality.md) now show
+V111/V112 at36.90367/36.90238dB on full427. The completed analytic grids show stronger coarse
 carriers and high-noise color, but a worse ADC flat-bias tail.
 
 [Material/GFX checkpoint, training boundary and native evidence](results/v111-final20000-early-quality-v1.json) ·
 [Complete camera execution, independent audit and original adverse views](results/v111-camera-complete-v1.json) ·
 [Complete weak-texture/color execution, independent audit and native review](results/v111-texture-color-complete-v1.json).
 The material comparison covers four selected sources, the GFX comparison six
-real contexts and the camera panels all72/90 development crops. The full
-427-photo result and remaining matched V112 panels are pending.
+real contexts and the camera panels all72/90 development crops. All seven matched panels are now complete, and [V112 is the current baseline](v112-quality.md)
+with higher camera means and a repaired ADC tail. This page retains the earlier
+CPU material/camera/analytic evidence with its original scope.
 The [matched material comparison](v111-v112-material.md) is now complete:
 V112 also improves all twelve cases over V104 and looks close to V111, with
 slightly lower condition PSNR means and slightly lower gradient errors.
@@ -209,14 +210,15 @@ All91 final model/EMA tensors and89 Adam states are finite at step20000.
 The original worker exited, its controller adopted the completed receipt and
 the actual source/manifest snapshot verifies. V112 starts from the same V104
 EMA at epsilon .0003; its first input, loss and gradient replay its CUDA
-preflight exactly. The two final endpoints will supply the matched loss test.
+preflight exactly. The [completed matched test](v112-quality.md) now favors V112.
 
 The read-only candidate checkpoint is
 `/mnt/external/demosaic/models/v111-final20000.pt`, SHA256
 `97ab9ca5f1f182ff42a4245c630bba810607a3d13b61cf8aae5842192a18da15`.
-It works with the existing inference commands. V104 remains the broadly
-evaluated working default while V111's full photo result is pending; the new
-material, camera and diagnostic comparisons show its gains and weaknesses now.
+It works with the existing inference commands. The complete primary panels
+now show V111's36.90367dB photo result, while [V112 is the working default](v112-quality.md)
+with higher camera means and repaired ADC color tails. The original early
+material/camera/analytic evidence remains preserved here.
 
 The earlier material/GFX reviews made eighteen V111 CPU FP32 forwards: twelve native256
 material inputs and six native512 GFX contexts, with zero new other-model

@@ -1,0 +1,98 @@
+{
+  "status": "completed-V112-full102MP-RGB16-and-native-review",
+  "recorded_local": "2026-10-24T03:52:30.024535-07:00",
+  "original_execution": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-fullframe-v2/result.json",
+    "sha256": "26c11a259018a653a70788d2d2ca410c49307cabc17cba657679f43b9af64fe3"
+  },
+  "original_report": {
+    "path": "/mnt/external/demosaic/v104-loss-scale-fullframe-20261023-v2/report.json",
+    "sha256": "66bb77c7a8cddec903f07baecfb5d27d18fd756fbae1a80ae6c4760117aa6edc"
+  },
+  "selected_checkpoint_sha256": "21c3cca8370df21e3412f9ccbf441c35afcfad8fd03174c7727f4f88874783b1",
+  "V112_exports_rehashed_and_reopened": [
+    {
+      "image": {
+        "path": "/mnt/external/demosaic/v104-loss-scale-fullframe-20261023-v2/restored-3-linear16.tiff",
+        "sha256": "e90a6c23629bb1f78f2f7ba6d4ecfc70ad4e2e5ca762c31f280bb353871ff5d2"
+      },
+      "shape": [
+        8746,
+        11662,
+        3
+      ],
+      "dtype": "uint16",
+      "color_space": "linear-camera-RGB",
+      "sampled_RGB_values": 1154538,
+      "sampled_maximum_quantization_error_DN16": 0.5013198256492615,
+      "scope": "TIFF shape/type/tags and 33 decoded full-width rows versus supplied float pixels; not a whole-image precision comparison."
+    },
+    {
+      "image": {
+        "path": "/mnt/external/demosaic/v104-loss-scale-fullframe-20261023-v2/restored-3-srgb16.tiff",
+        "sha256": "4418fa2f65bb4b92d651474dfe1b1353feaa290e525af7c87662e819109dfc07"
+      },
+      "shape": [
+        8746,
+        11662,
+        3
+      ],
+      "dtype": "uint16",
+      "color_space": "sRGB",
+      "sampled_RGB_values": 1154538,
+      "sampled_maximum_quantization_error_DN16": 0.5019372701644897,
+      "scope": "TIFF shape/type/tags and 33 decoded full-width rows versus supplied float pixels; not a whole-image precision comparison."
+    }
+  ],
+  "V112_timing": {
+    "seconds": 167.5125913079828,
+    "tile_seconds": 167.46366325207055,
+    "compute_transfer_seconds": 166.97992230812088,
+    "blend_seconds": 0.44895897433161736,
+    "megapixels": 101.995852,
+    "tiles": 520,
+    "tile": 512,
+    "overlap": 64,
+    "tile_grid_alignment": 2,
+    "tile_stride": 448,
+    "batch_size": 4,
+    "compute_precision": "float32",
+    "refinement_compute_precision": "float32",
+    "memory_format": "channels_last",
+    "peak_cuda_gb": 3.852571648
+  },
+  "native_renderer": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V111-V112-photo-review-v1/render-full-GFX-v1.py",
+    "sha256": "c492302607b338dab5eb1978efd350c2465efc7b07fc0b7df073f5511edf4a83"
+  },
+  "native_render": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V111-V112-photo-review-v1/full-gfx-render-v1.json",
+    "sha256": "65fe41084552b366cc4c0dd9328c3380f72740fe4d76153eaf496ddf1d392da5"
+  },
+  "native_cells_actually_viewed": 36,
+  "native_board": {
+    "path": "/home/dllu/proj/demosaic/docs/images/v112-fullframe/comparison.png",
+    "sha256": "2fca9cee41d96ed8cf447c2f8f01a3713c5745de048469f562319416ffa68920"
+  },
+  "native_metadata": {
+    "path": "/home/dllu/proj/demosaic/docs/images/v112-fullframe/comparison.json",
+    "sha256": "2e1a1e00d216bee79abd542c6974a5085abc80b6b98ce4d7ed6f0cd23641a688"
+  },
+  "native_manifest": {
+    "path": "/home/dllu/proj/demosaic/docs/images/v112-fullframe/manifest.json",
+    "sha256": "85197fa14ab1fba6b399ce140422c38cf089d16ad5141e5439a8b3e8010b02a7"
+  },
+  "common_preview_policy": "One CPU-rendered noisy/reference preview across all methods. All12 underlying float inputs match bit-exactly. Any1DN8 shared-preview change is recorded; all restored pixels and original PNGs are unchanged, with no resizing.",
+  "actual_native_findings": [
+    "V112 remains close to V104 on full-frame foliage/building/fence; fine leaf structure stays soft.",
+    "Learned V104/V112 keep thinner,more continuous mesh than both RawNIND references.",
+    "Pre-upsampled RawNIND reduces half-model blue-sign grid texture,while saturated sign structure remains limited across methods.",
+    "The independently captured ISO100 f/5.6 reference is not GT; no GFX pixelwise score."
+  ],
+  "new_neural_forwards_by_render_and_review": 0,
+  "full_objective_unachieved": [
+    "Broad real-camera superiority and finer low-contrast detail",
+    "100MP within10seconds; this measured FP32 observation is167.51seconds"
+  ],
+  "scope": "Completed original full-frame run,not a new benchmark. Shape/type/tags and33 decoded full-width rows were compared to supplied floats by the original exporter; this review rehashes/reopens both complete V112 files and views all36 native cells. Not a whole-image learned-precision bound. Earlier context/color and scalar receipts stay unchanged."
+}

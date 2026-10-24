@@ -96,7 +96,7 @@ STUDIES = [
         [104],
         "v104-reviewed-corpus-quality.md",
     ),
-    ("v111-camera-complete-v1.json", [111], "v111-early-quality.md"),
+    ("v111-v112-primary-quality-v1.json", [111, 112], "v111-v112-primary-quality.md"),
 ]
 METRICS = {
     ("full427", "photo", "srgb_psnr"): "photo_srgb_PSNR",
@@ -313,7 +313,7 @@ def main():
                 "known_CFA_PSNR": "4 scenes/8 pairs/72 crops, scene-balanced measured-CFA PSNR",
                 "unseen_CFA_PSNR": "5 scenes/10 pairs/90 crops, scene-balanced measured-CFA PSNR",
             },
-            "working_reference": f"V{preferred} is the fully evaluated inference reference; V43 is a historical comparator",
+            "working_reference": f"V{preferred} is the working quality reference; V43 is a historical comparator",
             "model_selection": {
                 "path": "configs/current-model.json",
                 "sha256": digest(MODEL_SELECTION),
@@ -463,7 +463,7 @@ def main():
     data_link = destination.relative_to(REPO / "docs").as_posix()
     csv_link = destination.with_suffix(".csv").relative_to(REPO / "docs").as_posix()
     (REPO / "docs/performance-history.md").write_text(
-        f"# PSNR history\n\nV{preferred} is the fully evaluated inference reference, with "
+        f"# PSNR history\n\nV{preferred} is the working quality reference, with "
         f"{reference['photo_srgb_PSNR']:.5f} dB photographic PSNR and "
         f"{reference['known_CFA_PSNR']:.5f}/{reference['unseen_CFA_PSNR']:.5f} dB "
         f"known/unseen measured-CFA PSNR. Its photographic change from V43 is "

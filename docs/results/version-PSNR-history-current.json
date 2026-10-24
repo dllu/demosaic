@@ -5,11 +5,11 @@
     "known_CFA_PSNR": "4 scenes/8 pairs/72 crops, scene-balanced measured-CFA PSNR",
     "unseen_CFA_PSNR": "5 scenes/10 pairs/90 crops, scene-balanced measured-CFA PSNR"
   },
-  "working_reference": "V104 is the fully evaluated inference reference; V43 is a historical comparator",
+  "working_reference": "V112 is the working quality reference; V43 is a historical comparator",
   "model_selection": {
     "path": "configs/current-model.json",
-    "sha256": "9a00af3a82c2ed63693bfdcc32580605686072e0254d6633f1b795e22f684cf6",
-    "preferred_version": 104,
+    "sha256": "66c2fff3e56e8ee56656389236b0b8e4f19d15bcce4ab7e6d5b59b50b4a8cfff",
+    "preferred_version": 112,
     "explicit_recommendation_override": null
   },
   "sources": [
@@ -205,12 +205,13 @@
       "report": "v104-reviewed-corpus-quality.md"
     },
     {
-      "path": "docs/results/v111-camera-complete-v1.json",
-      "sha256": "c4d1c3adc5275831be4a465d4b79bbdd438b55085d9c833ae51dbd909cab918b",
+      "path": "docs/results/v111-v112-primary-quality-v1.json",
+      "sha256": "1cb18d94426536ce10bf3b41cca456b56f3a7104d78b78f2be4f18e8cb5b83ec",
       "versions": [
-        111
+        111,
+        112
       ],
-      "report": "v111-early-quality.md"
+      "report": "v111-v112-primary-quality.md"
     }
   ],
   "points": [
@@ -5371,49 +5372,214 @@
     {
       "version": 111,
       "checkpoint_sha256": "97ab9ca5f1f182ff42a4245c630bba810607a3d13b61cf8aae5842192a18da15",
-      "endpoint": "V111-final20000",
-      "report": "v111-early-quality.md",
-      "source": "v111-camera-complete-v1.json",
-      "known_CFA_PSNR": 54.2527027659946,
-      "unseen_CFA_PSNR": 53.93706067403158,
-      "evaluation_sources": [
-        {
-          "checkpoint_sha256": "97ab9ca5f1f182ff42a4245c630bba810607a3d13b61cf8aae5842192a18da15",
-          "panel": "known",
-          "prepared_manifest": {
-            "path": "/mnt/external/demosaic/evaluation/paired-raw-development-prepared-v1/manifest.json",
-            "sha256": "9fe6a7dc3981024516b421a67de6a81b819f57d9d52b19838458e783b0cb744c"
+      "endpoint": "step-20000",
+      "step": 20000,
+      "report": "v111-v112-primary-quality.md",
+      "source": "v111-v112-primary-quality-v1.json",
+      "photo_srgb_PSNR": 36.903670688104604,
+      "evaluation_metadata": {
+        "full427": {
+          "sources": 427,
+          "protocol": {
+            "patterns": [
+              "RGGB",
+              "BGGR",
+              "GRBG",
+              "GBRG"
+            ],
+            "white_balance": [
+              2.0,
+              1.0,
+              1.5
+            ],
+            "camera_to_srgb": [
+              [
+                1.1176470588,
+                -0.0588235294,
+                -0.0588235294
+              ],
+              [
+                -0.0588235294,
+                1.1176470588,
+                -0.0588235294
+              ],
+              [
+                -0.0588235294,
+                -0.0588235294,
+                1.1176470588
+              ]
+            ],
+            "border": 8,
+            "seed": 20261014,
+            "conditions": [
+              {
+                "name": "adc-only",
+                "shot": 0.0,
+                "read": 0.0,
+                "exposure": 1.0
+              },
+              {
+                "name": "iso100-prior",
+                "shot": 2e-05,
+                "read": 1.6e-09,
+                "exposure": 1.0
+              },
+              {
+                "name": "iso1600-prior",
+                "shot": 0.00032,
+                "read": 4.096e-07,
+                "exposure": 1.0
+              },
+              {
+                "name": "iso12800-prior",
+                "shot": 0.00256,
+                "read": 2.62144e-05,
+                "exposure": 1.0
+              },
+              {
+                "name": "shadows",
+                "shot": 0.00064,
+                "read": 1.6384e-06,
+                "exposure": 0.125
+              },
+              {
+                "name": "highlights",
+                "shot": 8e-05,
+                "read": 2.56e-08,
+                "exposure": 4.0
+              },
+              {
+                "name": "legacy-noise",
+                "shot": 0.001,
+                "read": 1e-06,
+                "exposure": 1.0
+              }
+            ]
           },
-          "rows": {
-            "path": "/mnt/external/demosaic/V111-full-camera-CPU-20261023-v1/per-crop.jsonl",
-            "sha256": "71ebaa8b502a79124ff2c00c430572694aae8d77d2a11bbca9a56f380a19bba0"
-          },
-          "precision": "CPU IEEE float32/native B1",
-          "border": 32,
-          "source_plan": {
-            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V111-full-camera-CPU-v1/plan.json",
-            "sha256": "2feb2860321d439805e832dacffe3ac35a833405d6d11b462dd7c5ac8540b227"
-          }
+          "observation_and_metrics_precision": "IEEE FP32",
+          "manifest_sha256": "7cc76f460019582eeec519b332e9f9f53e030bdf579e2f27b915916a741cce0d",
+          "patch_size": 256,
+          "native_crop": true
         },
-        {
-          "checkpoint_sha256": "97ab9ca5f1f182ff42a4245c630bba810607a3d13b61cf8aae5842192a18da15",
-          "panel": "unseen",
-          "prepared_manifest": {
-            "path": "/mnt/external/demosaic/evaluation/paired-unseen-development-prepared-v1/manifest.json",
-            "sha256": "2d78a7ba2a56e24af3f05b32ea01277853dc135dff3834810766b7c5ed2f0fa7"
-          },
-          "rows": {
-            "path": "/mnt/external/demosaic/V111-full-camera-CPU-20261023-v1/per-crop.jsonl",
-            "sha256": "71ebaa8b502a79124ff2c00c430572694aae8d77d2a11bbca9a56f380a19bba0"
-          },
-          "precision": "CPU IEEE float32/native B1",
-          "border": 32,
-          "source_plan": {
-            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V111-full-camera-CPU-v1/plan.json",
-            "sha256": "2feb2860321d439805e832dacffe3ac35a833405d6d11b462dd7c5ac8540b227"
-          }
+        "known": {
+          "protocol": "Mean crops within each noisy capture, mean captures within scene, mean scenes. Bootstrap scenes, not crops.",
+          "precision": "float32",
+          "prepared_sha256": "9fe6a7dc3981024516b421a67de6a81b819f57d9d52b19838458e783b0cb744c"
+        },
+        "unseen": {
+          "protocol": "Mean crops within each noisy capture, mean captures within scene, mean scenes. Bootstrap scenes, not crops.",
+          "precision": "float32",
+          "prepared_sha256": "2d78a7ba2a56e24af3f05b32ea01277853dc135dff3834810766b7c5ed2f0fa7"
         }
-      ]
+      },
+      "known_CFA_PSNR": 54.252704037560356,
+      "unseen_CFA_PSNR": 53.937061903211806
+    },
+    {
+      "version": 112,
+      "checkpoint_sha256": "21c3cca8370df21e3412f9ccbf441c35afcfad8fd03174c7727f4f88874783b1",
+      "endpoint": "step-20000",
+      "step": 20000,
+      "report": "v111-v112-primary-quality.md",
+      "source": "v111-v112-primary-quality-v1.json",
+      "photo_srgb_PSNR": 36.902383452875235,
+      "evaluation_metadata": {
+        "full427": {
+          "sources": 427,
+          "protocol": {
+            "patterns": [
+              "RGGB",
+              "BGGR",
+              "GRBG",
+              "GBRG"
+            ],
+            "white_balance": [
+              2.0,
+              1.0,
+              1.5
+            ],
+            "camera_to_srgb": [
+              [
+                1.1176470588,
+                -0.0588235294,
+                -0.0588235294
+              ],
+              [
+                -0.0588235294,
+                1.1176470588,
+                -0.0588235294
+              ],
+              [
+                -0.0588235294,
+                -0.0588235294,
+                1.1176470588
+              ]
+            ],
+            "border": 8,
+            "seed": 20261014,
+            "conditions": [
+              {
+                "name": "adc-only",
+                "shot": 0.0,
+                "read": 0.0,
+                "exposure": 1.0
+              },
+              {
+                "name": "iso100-prior",
+                "shot": 2e-05,
+                "read": 1.6e-09,
+                "exposure": 1.0
+              },
+              {
+                "name": "iso1600-prior",
+                "shot": 0.00032,
+                "read": 4.096e-07,
+                "exposure": 1.0
+              },
+              {
+                "name": "iso12800-prior",
+                "shot": 0.00256,
+                "read": 2.62144e-05,
+                "exposure": 1.0
+              },
+              {
+                "name": "shadows",
+                "shot": 0.00064,
+                "read": 1.6384e-06,
+                "exposure": 0.125
+              },
+              {
+                "name": "highlights",
+                "shot": 8e-05,
+                "read": 2.56e-08,
+                "exposure": 4.0
+              },
+              {
+                "name": "legacy-noise",
+                "shot": 0.001,
+                "read": 1e-06,
+                "exposure": 1.0
+              }
+            ]
+          },
+          "observation_and_metrics_precision": "IEEE FP32",
+          "manifest_sha256": "7cc76f460019582eeec519b332e9f9f53e030bdf579e2f27b915916a741cce0d",
+          "patch_size": 256,
+          "native_crop": true
+        },
+        "known": {
+          "protocol": "Mean crops within each noisy capture, mean captures within scene, mean scenes. Bootstrap scenes, not crops.",
+          "precision": "float32",
+          "prepared_sha256": "9fe6a7dc3981024516b421a67de6a81b819f57d9d52b19838458e783b0cb744c"
+        },
+        "unseen": {
+          "protocol": "Mean crops within each noisy capture, mean captures within scene, mean scenes. Bootstrap scenes, not crops.",
+          "precision": "float32",
+          "prepared_sha256": "2d78a7ba2a56e24af3f05b32ea01277853dc135dff3834810766b7c5ed2f0fa7"
+        }
+      },
+      "known_CFA_PSNR": 54.26913987265693,
+      "unseen_CFA_PSNR": 53.95377718607584
     }
   ]
 }

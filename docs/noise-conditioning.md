@@ -1,5 +1,7 @@
 # Noise conditioning and fine detail
 
+**Current model: [V112](v112-quality.md).** The conditioning measurements below hold V104 fixed; they do not claim a new V112 conditioning sweep.
+
 **Use suitable physical shot/read priors with V104.** Lower conditioning retains
 more structure and grain in these fixed examples, with lower high-noise PSNR.
 It is a useful denoising/detail control, with no demonstrated general quality

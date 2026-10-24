@@ -1,10 +1,22 @@
 # GFX100S qualitative comparisons
 
-**V104 is the current positive-noise quality baseline.** The latest gallery
-compares complete 102MP V102/V104/RawNIND-half outputs on DSCF3879/DSCF3880. The two
-learned models remain close: fence strands and building rails are more coherent
-than RawNIND, while fine foliage and saturated-sign structure remain soft.
-[Completed V104 metrics and tradeoffs](v104-reviewed-corpus-quality.md).
+**V112 is the current quality baseline, with complete101.996MP exports.**
+The full-frame gallery compares V104/V112 and both released RawNIND references
+at all six fixed native regions. The learned models retain more regular mesh;
+fine foliage and saturated-sign structure remain soft. [Current quality report](v112-quality.md).
+
+![Complete-frame V104,V112,half/pre-upsampled RawNIND and independent ISO100 reference](images/v112-fullframe/comparison.png)
+
+All36 native160 cells were viewed, with common+2EV and no resizing. All twelve
+underlying noisy/reference float arrays match exactly; one common preview is
+used across CPU/GPU runs. [Source/ROI/weights/noise/display and preview provenance](images/v112-fullframe/manifest.json).
+The separate ISO100 f/5.6 exposure is a qualitative reference, **not GT**.
+V112's linear/sRGB RGB16 TIFFs are rehashed/reopened; the original exporter
+checked33 decoded full-width rows per file against floats. FP32 inference/
+blending takes167.51s, tile512/overlap64/B4. [Completed full-frame receipt](results/v112-fullframe-review-v1.json).
+
+The [earlier six-context V104/V111/V112 comparison](images/v112-quality/gfx/comparison.png)
+remains separately labeled, with its [original metadata](images/v112-quality/gfx/manifest.json).
 
 The optional [eight-view V104 comparison](dihedral-quality.md#standing-gfx-scene)
 adds all six fixed native regions from 512-pixel contexts. Changes look small;
@@ -12,7 +24,7 @@ foliage and saturated-sign detail remain soft. Its complete 102MP export is
 queued after the existing matched workflow. The context gallery is separate
 from the completed full-frame outputs below.
 
-## Current complete full-frame comparisons
+## Other complete full-frame references
 
 The [stronger released RawNIND reference now has a complete frame](rawnind-fullframe.md),
 with the same CFA-channel calibration and all six native regions. Its blue-sign

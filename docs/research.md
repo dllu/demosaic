@@ -1,6 +1,8 @@
 # Method research and design record
 
-Current implementation: V104's pretrained DRUNet RGB restoration with an official
+**Current quality baseline: [V112](v112-quality.md).** Its completed panels and color repair supersede V104 as the working choice; older measured studies below retain their explicit checkpoints.
+
+Current implementation: V112's pretrained DRUNet RGB restoration with an official
 frozen DINOv3 ConvNeXt-Tiny pyramid in V84's architectural family. Its completed
 full427 result reaches 36.80085dB, +.12134dB over V102, with stronger known-camera,
 material and weak-texture results. V102 retains lower ADC flat-color bias and a

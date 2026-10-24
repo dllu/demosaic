@@ -1,51 +1,33 @@
 # Quality training in the V84 architectural family
 
-**V104 final20k initializes the active quality trial in V84's DRUNet RGB/frozen
-DINOv3 ConvNeXt-Tiny family.** All seven panels and full-frame exports are
-complete: photo PSNR reaches 36.80085dB, +.12134dB over V102. Known-camera and
-weak-detail scores improve; V102 retains lower ADC bias and a higher unseen
-camera mean. [Complete V104 comparison](v104-reviewed-corpus-quality.md). V102 reaches
-36.67951dB photographic PSNR, +.17604dB over V101, with higher known/unseen CFA
-means. V103 is a close alternative; V102's
-flat-color and weak-texture diagnostics favor it overall. High-noise fine detail
-remains soft. [Completed results and native comparisons](v102-v103-quality-review.md).
+**V112 final20k is the current baseline in V84's DRUNet/frozen DINOv3
+ConvNeXt-Tiny family.** All seven matched panels are complete: photo36.90238dB,
+known/unseen CFA54.26914/53.95378dB and worst ADC flat bias50.89DN16.
+It keeps V111-like photographic quality while improving camera and color
+results. [Complete current results and native images](v112-quality.md).
+Complete102MP exports and their167.51s FP32 observation are verified. Fine high-noise and real foliage
+detail remain weak; quality still precedes speed.
 
-## Active V104 loss-scale comparison
+## Completed loss-scale comparison and next training
 
-[V111 and V112](loss-scale-training.md) test reconstruction epsilon .001 versus
-.0003 from the original V104 final 20k EMA, preserving all 91 tensors and learned
-fusion gates. The architecture, cleaned 90,864-source corpus, original six ROIs
-and fixed 20k budget match. Both use seed 62, fresh AdamW/EMA, B16/native256/BF16,
-LR 1e-5 and 200 warmup updates. Epsilon is the only numerical recipe difference;
-paired RAW keeps its existing .0001 scale.
+[V111/V112](loss-scale-training.md) retain the original V104 EMA and learned
+gates on90,864 cleaned sources. Both use seed62, fresh AdamW/EMA,20k updates,
+B16/native256/BF16, LR1e-5/warmup200, six reviewed ROIs, zero optical PSFs,
+weak textures and photographic contrast attenuation. Only reconstruction epsilon
+changes, .001→.0003; paired RAW stays.0001.
 
-The [fixed-output diagnostic](loss-smoothing-detail.md) motivates this trained
-test but does not establish better restoration. Compare final image metrics,
-weak detail, color and native crops on the same observations. Raw loss values
-across epsilon settings use different objectives. V111 completed its original20k
-and [improves all twelve fixed material cases](v111-early-quality.md); real GFX
-changes remain small. Complete camera means change −.01336/+.02006dB known/unseen
-versus V104, with all five unseen scenes improving. V112 has also completed its
-original20k endpoint. Its [material comparison](v111-v112-material.md) improves
-all twelve cases over V104 but looks close to V111, with slightly lower PSNR
-means and mixed structural/color changes. Full matched evaluation is running.
-V111's complete analytic grids improve high-noise color and coarse carriers,
-while ADC flat-color maximum bias rises to 2,143 DN16; finer carriers remain
-weak. The [combined report](v111-early-quality.md#complete-weak-texture-and-flat-color-panels)
-shows that regression alongside the material gains.
-The four successful CPU/CUDA
-smokes are adopted with verified source/configuration equivalence, without
-repetition. Earlier experiments retain their inputs and evidence.
-[Recipes, reader checks and actual discarded preflights](results/v104-loss-scale-prepared-v1.json) ·
-[Actual training launch, corrected handoff and owned queues](results/v104-loss-scale-training-started-v2.json).
+Both add about.10dB over V104 on full427. V112's camera means and substantially
+lower ADC tail favor it over V111 despite a.00129dB lower photo mean.
+[Primary comparison](v111-v112-primary-quality.md). Larger8/16-pixel weak carriers
+improve, while4-pixel structure remains nearly absent. Selected native material
+and all six GFX contexts stay visible alongside these limits.
 
-The [V113 Small experiment](small-aligned-training.md) now uses the fitted
-V104-derived initializer with learned gates preserved, following V111's exact
-cleaned-corpus/epsilon.001 recipe. Its eight discarded CPU updates match the
-original Tiny input/domain/LR sequence with finite model/EMA/Adam. The queued
-CUDA check and fresh20k run wait for the existing GPU chain. Completed V111 is
-the control; its training is not repeated. This tests larger features plus
-fitted transfer, with trained quality still unmeasured.
+The [Small feature fit](small-feature-transfer.md) and eight actual CPU optimizer
+updates preserve useful learned gates. The idle V104-derived V113 queue was
+superseded before any CUDA/production work so the next experiment can start
+from V112. [Current rebase and preserved evidence](small-aligned-training.md).
+Reuse cached Small features/previews, fit new V112 teacher targets, then verify
+the initializer and actual optimizer/CUDA execution under a fresh plan.
 
 <a id="active-v104-cleaned-corpus-continuation"></a>
 
@@ -66,8 +48,8 @@ V104 improves PSNR, SSIM and gradient error in all 12 fixed material cases over
 V102, with mean PSNR gains of +.246/.166/.024dB at ADC-only/ISO100/ISO12800.
 Chroma improves in 11/12 cases.
 [Native comparisons and remaining smoothing](heldout-detail.md#v104-versus-v102-on-the-fixed-material-panel).
-V104 is the positive-noise and training baseline; V102 remains a useful ADC
-and unseen-camera reference. More training, seed and data change together, so the gain cannot be
+V104 is the completed reference for that study; V112 is now the working baseline.
+V102 remains a useful unseen-camera reference. More training, seed and data change together, so the gain cannot be
 attributed solely to the larger corpus.
 
 The fixed20k schedule contains113,058 photographic examples,62,976 unique

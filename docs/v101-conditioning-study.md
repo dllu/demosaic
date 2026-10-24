@@ -1,4 +1,4 @@
-Current V104 guidance and comparisons: [noise conditioning](noise-conditioning.md).
+V104-specific conditioning guidance and comparisons: [noise conditioning](noise-conditioning.md).
 The V101 study below retains its original measured protocol and results.
 
 # Noise conditioning and fine detail

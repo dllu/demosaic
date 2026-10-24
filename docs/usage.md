@@ -2,11 +2,11 @@
 
 ## Current quality model
 
-Use **V104 final20k** for positive-noise restoration and continued quality training:
-`/mnt/external/demosaic/models/v104-final20000.pt`. It uses DRUNet RGB
+Use **V112 final20k** for positive-noise restoration and continued quality training:
+`/mnt/external/demosaic/models/v112-final20000.pt`. It uses DRUNet RGB
 restoration and frozen official DINOv3 ConvNeXt-Tiny features. The
 [current model guide](current-model.md) records its hash and alternatives;
-[completed primary panels, diagnostics and native crops](v104-reviewed-corpus-quality.md)
+[completed primary panels, diagnostics and native crops](v112-quality.md)
 cover full427 photos,known/unseen measured-camera and complete102MP GFX output.
 Continue quality work with the [reviewed corpus and zero-blur recipe](quality-first-training.md).
 Earlier measurements below retain their checkpoint labels.
@@ -15,8 +15,8 @@ For explicit shot=read=0 inputs, the separately tested
 .2885 dB across 427 sources/four CFAs with unchanged learned weights. All 1,708
 cases improve; positive-noise profiles bypass the correction. Its report includes
 actual serialized-export triplets and remaining flat-color limitations.
-V102 remains a lower-flat-bias alternative for explicit zero-shot/read inputs;
-its checkpoint path and measured tradeoffs are in the model guide.
+V112 also has a lower tested unprojected ADC flat-color tail; V102 retains
+a slightly higher unseen-camera mean. The model guide records these alternatives.
 
 Add `--self-ensemble dihedral8` to `infer` for optional eight-view quality
 inference. It preserves Bayer geometry and averages camera-RGB predictions

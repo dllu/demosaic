@@ -7,19 +7,14 @@ gains.50990dB over8×-then-geometry on all427 photos. On the actual RGB pipeline
 batch32 is only1.3% faster than16 while using roughly twice the CUDA allocation.
 Details and limitations are recorded below.
 
-The [active V111/V112 quality trial](loss-scale-training.md) starts from the exact
-V104 EMA on 90,864 reviewed sources. V111 completed20k with [material gains](v111-early-quality.md),
-and V112 has also completed20k. The [matched material review](v111-v112-material.md)
-finds gains over V104 but no clear native advantage over V111. Full matched
-evaluation is running. Both retain
-128 native/32 paired targets,
-zero optical PSFs,weak textures,photographic contrast attenuation and the same
-six reviewed regions. The [completed V102/V103 study](v102-v103-quality-review.md)
-compared six/32 regions at the same5% conditional-photo probability on88,477
-sources; its photo difference was small. Earlier V100/V101 used88,484 sources.
-[Source review](incoming-commons-quality.md) records new eligible photos and
-frozen cohort boundaries. Later measurements retain their actual source pools
-and architecture labels.
+The [completed V111/V112 quality trial](v112-quality.md) uses90,864 reviewed
+sources and selects V112 as the current baseline. It retains native128/paired32,
+zero optical PSFs, weak textures, photographic contrast attenuation and six
+reviewed regions. The [Small rebase](small-aligned-training.md) reuses cached
+training features/previews before a new V112-derived initializer and budget.
+Earlier source pools,32-ROI comparisons and their receipts remain separately
+recorded in the [source review](incoming-commons-quality.md) and
+[V102/V103 study](v102-v103-quality-review.md).
 
 The completed [spectral](spectral-original4k-review.md) and
 [late RGB](late-rgb-original4k-review.md) trials use native 256×256/B16 and all88,508

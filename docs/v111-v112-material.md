@@ -6,6 +6,11 @@ gradient errors are slightly lower too. Bark/canopy changes remain modest and
 high-noise feather/fur detail stays smooth. The smaller reconstruction epsilon
 does not establish a quality win on this selected panel.
 
+The [complete primary and analytic comparison](v112-quality.md) now favors
+V112 for camera/color quality: photo means stay close, while its large ADC
+bias tail is repaired. The selected material result below remains unchanged
+and does not stand in for those broader panels.
+
 [Checkpoints, original execution, paired scores and native metadata](results/v111-v112-material-review-v1.json).
 Both completed their original 20,000 updates from the same V104 EMA on the
 90,864-source corpus, seed62 and identical schedule. Epsilon .001 versus .0003
@@ -64,10 +69,9 @@ match. Neither checkpoint was selected from intermediate training steps.
 
 ## What remains open
 
-The [full matched workflow](loss-scale-training.md) is evaluating the 427-photo,
-known/unseen-camera, weak-texture/color and standing GFX/highlight panels.
-Complete 102MP exports follow. V112's real-camera/color tradeoffs remain
-unmeasured here. The [V111 report](v111-early-quality.md) retains its completed
+The [full matched workflow](v112-quality.md) has completed all seven panels
+and full102MP exports. This page remains the selected material report; broader
+camera/color gains and remaining fine-detail limits are in the complete review. The [V111 report](v111-early-quality.md) retains its completed
 camera/analytic gains and ADC bias regression. GFX ISO100 remains a separately
 captured qualitative reference, not exact GT.
 

@@ -1,0 +1,589 @@
+{
+  "status": "completed-V112-seven-panel-quality-review-selected-current-baseline-full-exports-running",
+  "recorded_local": "2026-10-24T03:43:11.028256-07:00",
+  "publisher": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V111-V112-photo-review-v1/publish-V112-v1.py",
+    "sha256": "5a97d6df7ab491c1ea55ea6d575dc6e27acc856663328e3b4bf6f7987720d0cd"
+  },
+  "selected_version": 112,
+  "checkpoint": {
+    "path": "/mnt/external/demosaic/models/v112-final20000.pt",
+    "sha256": "21c3cca8370df21e3412f9ccbf441c35afcfad8fd03174c7727f4f88874783b1"
+  },
+  "selector_snapshot": {
+    "preferred_version": 112,
+    "name": "V112 final20000",
+    "checkpoint": {
+      "path": "/mnt/external/demosaic/models/v112-final20000.pt",
+      "sha256": "21c3cca8370df21e3412f9ccbf441c35afcfad8fd03174c7727f4f88874783b1"
+    },
+    "architecture": {
+      "restoration_backbone": "pretrained-rgb",
+      "rgb_trunk": "DRUNet",
+      "dino_feature_fusion": "convnext-pyramid",
+      "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+      "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b"
+    },
+    "closely_matched_alternative": 111,
+    "notable_comparators": [
+      43,
+      84,
+      85,
+      95,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      111
+    ],
+    "selection_basis": "Full427 photographic PSNR36.90238dB (+.10154 over V104),425/427 source means improve and all7 condition means rise. Near-equal photo PSNR to V111 (-.00129dB), with higher known/unseen CFA means54.26914/53.95378dB (+.01644/+.01672 over V111). ADC flat-color maximum bias50.89DN16 versus V1041218.06 and V1112142.98; high-noise mean/max17.53/91.07DN16 improve over V10419.34/115.84. High-noise weak-carrier gains improve at periods8/16 to.09580/.65759, while4-pixel detail remains nearly absent. Same V84-family pretrained DRUNet RGB trunk and official frozen DINOv3 ConvNeXt-Tiny pyramid, cleaned90864-source corpus and retained learned gates. Six standing GFX512 contexts remain close with soft foliage; no broad real-camera superiority claim. Prefer V112 for current restoration and further quality training; retain V111, V104/sites and V102 as explicitly labeled useful alternatives. Full-frame V112 exports/timing continue in the original workflow.",
+    "review": "docs/current-model.md",
+    "performance_report": "docs/v112-quality.md",
+    "recommendation_scope": "Current positive-noise RAW and quality-training baseline, with substantially lower tested ADC flat-color tails as well. Optional V104 ADC-sites export has a separate observed-sample fidelity/photo-PSNR tradeoff. V102 retains a slightly higher unseen-camera panel mean. Preserve original explicit-parent experimental plans and controls independently of this recommendation."
+  },
+  "selector": {
+    "path": "/home/dllu/proj/demosaic/configs/current-model.json",
+    "sha256": "66c2fff3e56e8ee56656389236b0b8e4f19d15bcce4ab7e6d5b59b50b4a8cfff"
+  },
+  "previous_selector_preserved": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V111-V112-photo-review-v1/before-V112-selection-v1/configs/current-model.json",
+    "sha256": "9a00af3a82c2ed63693bfdcc32580605686072e0254d6633f1b795e22f684cf6"
+  },
+  "completed_original_stages": {
+    "photo": {
+      "completion": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-evaluation-v2/photo-result.json",
+        "sha256": "f8049e57c1f20f1da61d214596484c596e6190ff86717f2aa38add0ecd9270fa"
+      },
+      "report": {
+        "path": "/mnt/external/demosaic/v104-loss-scale-evaluation-20261023-v2/photo/summary.json",
+        "sha256": "49ec22abf3ec99682271e42ce8e19ccf522e2aafd3f47f963e7fad0c510f6f54"
+      },
+      "actual_V112_invariants": {
+        "model_SHA256": "930aba430869da794f2817d3a4b3f36e5af1ef2940965e0f5bf3b395c28c7eb3",
+        "forwards": 3108,
+        "DINO_calls": 3108,
+        "observations": 12404,
+        "sampled_input_hashes_before_after_exact": [
+          {
+            "forward": 1,
+            "sha256": "5225cc3e2fe4bc2243572f1ecb64cfca64e9681c703cd6b8594d7b5a3e942d32"
+          },
+          {
+            "forward": 2,
+            "sha256": "84cd4910ec0fde817e9e6d77a63ac09625e9939c7fc00e17422cb1024545a230"
+          },
+          {
+            "forward": 256,
+            "sha256": "d3ac79a8ac68faa1a773b59df2bd6f735150a8d565a5ed16f6dd85178f51dd87"
+          },
+          {
+            "forward": 512,
+            "sha256": "1ed4fac81629e0434c197917658ad39aead1d71d7d1a8a326fa813d15ad439f9"
+          },
+          {
+            "forward": 768,
+            "sha256": "37b0b8d2c35e102a81b6fac094f7eb553f60f6ee6bc1bdf40328e3a23a806ee0"
+          },
+          {
+            "forward": 1024,
+            "sha256": "e67fa416b8dd2ecb02dc171bd6362e3ce242314bfb282bc602632e08747dbb19"
+          },
+          {
+            "forward": 1280,
+            "sha256": "0e312e9e16b3bed2a685438a09c2c6a710f32291f6902546577fad995db89f43"
+          },
+          {
+            "forward": 1536,
+            "sha256": "e03851128ceb941db0be12d0e9e3432b9d2e6063fb1c54fef10c6692a298be3b"
+          },
+          {
+            "forward": 1792,
+            "sha256": "5bd90c1ab6221c92f5aa31e9f5b1b7b7d215816885a15fc17e0bf29d3b7d49d3"
+          },
+          {
+            "forward": 2048,
+            "sha256": "d31a201ecc7ad16373d6e310e9199032c36807641c24dd98d78b7e25c835e9f6"
+          },
+          {
+            "forward": 2304,
+            "sha256": "01c6663a53f1f799b158edf3d209ea1a8f49ee2a77d5a365a2cd072a9b07c7a5"
+          },
+          {
+            "forward": 2560,
+            "sha256": "3c1f5e7442064260144cb31b9b4d9dfa8cbb4091cc4ccaad9b31e8a4055e9662"
+          },
+          {
+            "forward": 2816,
+            "sha256": "34353e2fc88c96114268cd978d6b610f92f6076bbf8d41216ef20e3b017ff324"
+          },
+          {
+            "forward": 3072,
+            "sha256": "b0807ad96190f1102df0b9911f824b3cdd42e6c368744b98bb5be27456dc998c"
+          }
+        ],
+        "expected_backbone": {
+          "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+        }
+      }
+    },
+    "known": {
+      "completion": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-evaluation-v2/known-result.json",
+        "sha256": "620d6b3c3516e688dea05be208cc4701a56cca7b5be0f7717e6c60a76f1a4e19"
+      },
+      "report": {
+        "path": "/mnt/external/demosaic/v104-loss-scale-evaluation-20261023-v2/known/summary.json",
+        "sha256": "3e68eef64c16d06992d7a99ccb01f7b91236216459e21b0b67994cde3f56725f"
+      },
+      "actual_V112_invariants": {
+        "model_SHA256": "930aba430869da794f2817d3a4b3f36e5af1ef2940965e0f5bf3b395c28c7eb3",
+        "forwards": 24,
+        "DINO_calls": 24,
+        "observations": 72,
+        "sampled_input_hashes_before_after_exact": [
+          {
+            "forward": 1,
+            "sha256": "41e95a9c3535cb27888a2efabb35e33c5a2a08627b69ac82c732980e88a93fa1"
+          },
+          {
+            "forward": 2,
+            "sha256": "57df98f091b758c111b21cb9d55f3d1ec8ab935c625f5c1bd9b3839d3ae65354"
+          }
+        ],
+        "expected_backbone": {
+          "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+        }
+      }
+    },
+    "unseen": {
+      "completion": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-evaluation-v2/unseen-result.json",
+        "sha256": "6f448f7665456693c0aa657fd7428585834932481f99da0b1d7a5eb07023e241"
+      },
+      "report": {
+        "path": "/mnt/external/demosaic/v104-loss-scale-evaluation-20261023-v2/unseen/summary.json",
+        "sha256": "44b61263b3912648d0d1b0abcf4966e45927f05ee932c8954c89ef7abffb5031"
+      },
+      "actual_V112_invariants": {
+        "model_SHA256": "930aba430869da794f2817d3a4b3f36e5af1ef2940965e0f5bf3b395c28c7eb3",
+        "forwards": 30,
+        "DINO_calls": 30,
+        "observations": 90,
+        "sampled_input_hashes_before_after_exact": [
+          {
+            "forward": 1,
+            "sha256": "db891541bc0ba0248a85dd6e6f0ace07c7134a4dea4eea61862fcf6ecc6397e1"
+          },
+          {
+            "forward": 2,
+            "sha256": "9e175a6231fe2f943026e189983a837ef2c5b854e0e5b7e5ada75c46ca0303c0"
+          }
+        ],
+        "expected_backbone": {
+          "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+        }
+      }
+    },
+    "texture": {
+      "completion": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-evaluation-v2/texture-result.json",
+        "sha256": "5f73dddebe4f3dd3e6c33a26e46994080073389cbb44b54bdd4f24dda0018ce3"
+      },
+      "report": {
+        "path": "/mnt/external/demosaic/v104-loss-scale-evaluation-20261023-v2/texture/summary.json",
+        "sha256": "94454050b18c76d97dae31e1f8c114a913213ab23b03e792fba6fb96e5f1ff9d"
+      },
+      "actual_V112_invariants": {
+        "model_SHA256": "930aba430869da794f2817d3a4b3f36e5af1ef2940965e0f5bf3b395c28c7eb3",
+        "forwards": 112,
+        "DINO_calls": 112,
+        "observations": 448,
+        "sampled_input_hashes_before_after_exact": [
+          {
+            "forward": 1,
+            "sha256": "179d547fcb635e76f7e7dc9480d901340c613f435d718372898785219ade2176"
+          },
+          {
+            "forward": 2,
+            "sha256": "f31432096ad68ed95d1613133d00d846779cbbeec96537967e153ad056f6c5de"
+          }
+        ],
+        "expected_backbone": {
+          "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+        }
+      }
+    },
+    "color": {
+      "completion": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-evaluation-v2/color-result.json",
+        "sha256": "50d7358a6777e7b2508e13d7085ca8ad3c135e0ff418337fd5cc91e96b51d03c"
+      },
+      "report": {
+        "path": "/mnt/external/demosaic/v104-loss-scale-evaluation-20261023-v2/color/report.json",
+        "sha256": "390736044c20ccd626053fb994fee4c8967a7f1a36f2243620dd38c9b27a9158"
+      },
+      "actual_V112_invariants": {
+        "model_SHA256": "930aba430869da794f2817d3a4b3f36e5af1ef2940965e0f5bf3b395c28c7eb3",
+        "forwards": 1176,
+        "DINO_calls": 1176,
+        "observations": 1176,
+        "sampled_input_hashes_before_after_exact": [
+          {
+            "forward": 1,
+            "sha256": "6671699eb133c37a9bd984913b582c2903a0a9bbd82e9a8c1175a1c8f1dbb130"
+          },
+          {
+            "forward": 2,
+            "sha256": "544326dc90ed2fb73ddd0b71ba20c65700d7d5df876b023dda7abeea7f339652"
+          },
+          {
+            "forward": 256,
+            "sha256": "170b450a3b6e5c7bcc1c1f17f2310bea38d40638d12e0dc8f4744f75557204e8"
+          },
+          {
+            "forward": 512,
+            "sha256": "836df7975561a3bffd8e32c7fd335e9a1d818b2a799ce67e0a7901e9781dbe97"
+          },
+          {
+            "forward": 768,
+            "sha256": "411416cb4c914310ae35e11e1aa3163d8d490c6ede1e97a1a6455faac59516ff"
+          },
+          {
+            "forward": 1024,
+            "sha256": "eebbbb9fe341d26e69bb10029059ab8888082ac9f0041161ddbcec83f6eccce8"
+          }
+        ],
+        "expected_backbone": {
+          "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+        }
+      }
+    },
+    "gfx": {
+      "completion": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-evaluation-v2/gfx-result.json",
+        "sha256": "d0c392eb83748e8e442002f40d951777b56433f5d108cc5bd81266ddb206acfc"
+      },
+      "report": {
+        "path": "/mnt/external/demosaic/v104-loss-scale-evaluation-20261023-v2/gfx/report.json",
+        "sha256": "8cfc449e02cbb94bbeabc9bcd9355690f42f0aef7dc3575de84a6a4c5eb800f6"
+      },
+      "actual_V112_invariants": {
+        "model_SHA256": "930aba430869da794f2817d3a4b3f36e5af1ef2940965e0f5bf3b395c28c7eb3",
+        "forwards": 4,
+        "DINO_calls": 4,
+        "observations": 4,
+        "sampled_input_hashes_before_after_exact": [
+          {
+            "forward": 1,
+            "sha256": "3a79a74f5a934b24cba706e56c831ef567d01397af002997d5382dfc77ff7dd6"
+          },
+          {
+            "forward": 2,
+            "sha256": "7067dfe0047897ee59c9beafc1e451059c46b0b122020c4ff3fee074f7dfb45b"
+          }
+        ],
+        "expected_backbone": {
+          "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+        }
+      }
+    },
+    "gfx-highlights": {
+      "completion": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-evaluation-v2/gfx-highlights-result.json",
+        "sha256": "31e5a782d54b77b8791fa4118890e29f7822dd7edbfad06f2eec733c88de2612"
+      },
+      "report": {
+        "path": "/mnt/external/demosaic/v104-loss-scale-evaluation-20261023-v2/gfx-highlights/report.json",
+        "sha256": "1f5086b4b3a8f7b7e3436b4cfa08e3ebf7aeb0bb5ca6357ef2e9addade7fbe6b"
+      },
+      "actual_V112_invariants": {
+        "model_SHA256": "930aba430869da794f2817d3a4b3f36e5af1ef2940965e0f5bf3b395c28c7eb3",
+        "forwards": 2,
+        "DINO_calls": 2,
+        "observations": 2,
+        "sampled_input_hashes_before_after_exact": [
+          {
+            "forward": 1,
+            "sha256": "d075228d2946b293bab67e618bab261fff7b5d8f52d9caf1cca5df081900ada8"
+          },
+          {
+            "forward": 2,
+            "sha256": "7d9ff0a2b4dc5fe57db6bd10af62f8f9dce4e05a1f2a9f58045579561484c93a"
+          }
+        ],
+        "expected_backbone": {
+          "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+        }
+      }
+    }
+  },
+  "primary_statistics": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v111-v112-primary-quality-v1.json",
+    "sha256": "1cb18d94426536ce10bf3b41cca456b56f3a7104d78b78f2be4f18e8cb5b83ec"
+  },
+  "photo_PSNR": 36.902383452875235,
+  "known_CFA_PSNR": 54.26913987265693,
+  "unseen_CFA_PSNR": 53.95377718607584,
+  "photo_source_contrast": {
+    "first": 112,
+    "second": 104,
+    "metric": "srgb_psnr",
+    "sources": 427,
+    "mean_first_minus_second": 0.10153716956145314,
+    "source_bootstrap_95_interval": [
+      0.09670842052024532,
+      0.10634576491824613
+    ],
+    "sources_better": 425,
+    "minimum_source_change": -0.30270617348807605,
+    "maximum_source_change": 0.42404767445155755
+  },
+  "color_grid_descriptive_statistics": [
+    {
+      "version": "V102",
+      "condition": "adc-only",
+      "cases": 588,
+      "mean_max_abs_channel_bias_DN16": 10.044914818470215,
+      "p95_max_abs_channel_bias_DN16": 38.288471330271534,
+      "maximum_abs_channel_bias_DN16": 59.230066513514615,
+      "worst_case": 1081,
+      "worst_palette": "h180-s0.98-l0.90",
+      "worst_pattern": "BGGR"
+    },
+    {
+      "version": "V102",
+      "condition": "iso12800-prior",
+      "cases": 588,
+      "mean_max_abs_channel_bias_DN16": 21.266729495799407,
+      "p95_max_abs_channel_bias_DN16": 70.27273954297122,
+      "maximum_abs_channel_bias_DN16": 122.47368270032457,
+      "worst_case": 1156,
+      "worst_palette": "h315-s0.98-l0.90",
+      "worst_pattern": "RGGB"
+    },
+    {
+      "version": "V104",
+      "condition": "adc-only",
+      "cases": 588,
+      "mean_max_abs_channel_bias_DN16": 14.455816063155218,
+      "p95_max_abs_channel_bias_DN16": 43.70374665201524,
+      "maximum_abs_channel_bias_DN16": 1218.0574063721813,
+      "worst_case": 1008,
+      "worst_palette": "h045-s0.98-l0.90",
+      "worst_pattern": "RGGB"
+    },
+    {
+      "version": "V104",
+      "condition": "iso12800-prior",
+      "cases": 588,
+      "mean_max_abs_channel_bias_DN16": 19.33862302399557,
+      "p95_max_abs_channel_bias_DN16": 59.85250026834776,
+      "maximum_abs_channel_bias_DN16": 115.84000470318132,
+      "worst_case": 1151,
+      "worst_palette": "h300-s0.98-l0.90",
+      "worst_pattern": "GBRG"
+    },
+    {
+      "version": "V111",
+      "condition": "adc-only",
+      "cases": 588,
+      "mean_max_abs_channel_bias_DN16": 27.638272836984953,
+      "p95_max_abs_channel_bias_DN16": 45.428062105574796,
+      "maximum_abs_channel_bias_DN16": 2142.984028675407,
+      "worst_case": 787,
+      "worst_palette": "gray-l0.90",
+      "worst_pattern": "GBRG"
+    },
+    {
+      "version": "V111",
+      "condition": "iso12800-prior",
+      "cases": 588,
+      "mean_max_abs_channel_bias_DN16": 17.84558234048227,
+      "p95_max_abs_channel_bias_DN16": 50.84497246554091,
+      "maximum_abs_channel_bias_DN16": 91.89445410375482,
+      "worst_case": 887,
+      "worst_palette": "h165-s0.50-l0.90",
+      "worst_pattern": "GBRG"
+    },
+    {
+      "version": "V112",
+      "condition": "adc-only",
+      "cases": 588,
+      "mean_max_abs_channel_bias_DN16": 7.454870990093207,
+      "p95_max_abs_channel_bias_DN16": 29.969699921116177,
+      "maximum_abs_channel_bias_DN16": 50.89439740869129,
+      "worst_case": 1035,
+      "worst_palette": "h090-s0.98-l0.90",
+      "worst_pattern": "GBRG"
+    },
+    {
+      "version": "V112",
+      "condition": "iso12800-prior",
+      "cases": 588,
+      "mean_max_abs_channel_bias_DN16": 17.532867052839485,
+      "p95_max_abs_channel_bias_DN16": 52.33665494608227,
+      "maximum_abs_channel_bias_DN16": 91.06990018783836,
+      "worst_case": 1020,
+      "worst_palette": "h060-s0.98-l0.90",
+      "worst_pattern": "RGGB"
+    }
+  ],
+  "independent_Torch64_color_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V111-V112-photo-review-v1/color-array-audit-v1/audit.json",
+    "sha256": "b877e03750681d0575c5c568237c218633a785c9c8204d8ed9582fb00cae274e"
+  },
+  "color_float_predictions_independently_rebuilt": 4704,
+  "color_metric_fields": 28224,
+  "maximum_independent_color_metric_difference": 3.3306690738754696e-16,
+  "executed_color_audit_source_preserved": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V111-V112-photo-review-v1/executed-color-audit-source-v1/audit_saved_color_flats.py",
+    "sha256": "b89f2fc8f933721b176af354e62a75c4316f89271cdd15da65d18d2918425ec6"
+  },
+  "weak18percent_two_percent_contrast_ISO12800_carriers": [
+    {
+      "model": "0:V102:step-20000",
+      "period": 4,
+      "in_phase_gain": 0.0001578948976159956,
+      "cases": 16
+    },
+    {
+      "model": "1:V104:step-20000",
+      "period": 4,
+      "in_phase_gain": 0.00155790938031563,
+      "cases": 16
+    },
+    {
+      "model": "2:V111:step-20000",
+      "period": 4,
+      "in_phase_gain": 0.0018195366270170367,
+      "cases": 16
+    },
+    {
+      "model": "3:V112:step-20000",
+      "period": 4,
+      "in_phase_gain": 0.001363652739497631,
+      "cases": 16
+    },
+    {
+      "model": "0:V102:step-20000",
+      "period": 8,
+      "in_phase_gain": 0.021349251125697365,
+      "cases": 16
+    },
+    {
+      "model": "1:V104:step-20000",
+      "period": 8,
+      "in_phase_gain": 0.05945032285782072,
+      "cases": 16
+    },
+    {
+      "model": "2:V111:step-20000",
+      "period": 8,
+      "in_phase_gain": 0.08697083403484016,
+      "cases": 16
+    },
+    {
+      "model": "3:V112:step-20000",
+      "period": 8,
+      "in_phase_gain": 0.09579551020201721,
+      "cases": 16
+    },
+    {
+      "model": "0:V102:step-20000",
+      "period": 16,
+      "in_phase_gain": 0.49887061769522756,
+      "cases": 16
+    },
+    {
+      "model": "1:V104:step-20000",
+      "period": 16,
+      "in_phase_gain": 0.6048680273039462,
+      "cases": 16
+    },
+    {
+      "model": "2:V111:step-20000",
+      "period": 16,
+      "in_phase_gain": 0.6249797565405508,
+      "cases": 16
+    },
+    {
+      "model": "3:V112:step-20000",
+      "period": 16,
+      "in_phase_gain": 0.6575851352146836,
+      "cases": 16
+    }
+  ],
+  "native_GFX_cells_actually_viewed": 30,
+  "native_ADC_cells_actually_viewed": 10,
+  "GFX_native_board": {
+    "path": "/home/dllu/proj/demosaic/docs/images/v112-quality/gfx/comparison.png",
+    "sha256": "4247074ccc3bca3ac83382b46b9e35c17b305a6ee8a61e55800628f5650222d5"
+  },
+  "GFX_native_manifest": {
+    "path": "/home/dllu/proj/demosaic/docs/images/v112-quality/gfx/manifest.json",
+    "sha256": "df04e365da54b0fc29b021b0076dee4e6b51182b7a1587a48f5771c4280f53ac"
+  },
+  "ADC_native_board": {
+    "path": "/home/dllu/proj/demosaic/docs/images/v112-quality/adc/comparison.png",
+    "sha256": "4f671a512432f63bbd25de169d2121c7c6408383a87240681239d45305c38b0b"
+  },
+  "ADC_native_manifest": {
+    "path": "/home/dllu/proj/demosaic/docs/images/v112-quality/adc/manifest.json",
+    "sha256": "47eb05c090165bb48da797e00cb4239aea1f87cc1b6fdfb9d15f02c907a3ee75"
+  },
+  "ADC_native_renderer": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V111-V112-photo-review-v1/render-flat-v1.py",
+    "sha256": "69e911a13502fbce23aa1b1cc87bdfb2b07d071ae707c8655ec2d6e6b7d5070c"
+  },
+  "preserved_GFX_preparation_failures": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V111-V112-photo-review-v1/gfx-v1/failure.json",
+      "sha256": "0d6d94909a5ea03cabdc265eb5b07916dbb238c8cb34065be4b094f8510cd3bd"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V111-V112-photo-review-v1/gfx-v2/cli-labels-failure.json",
+      "sha256": "d1e860177917cf92d75601c7d6becc6b11007fa985bb8a101880369f8e582b90"
+    }
+  ],
+  "existing_material_review": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v111-v112-material-review-v1.json",
+    "sha256": "d8f762fb5a3f557ea643ab2856403e150a041a33b9a46d2c2981fe4e2655b4cf"
+  },
+  "actual_native_findings": [
+    "V112 and V111 GFX512 contexts remain close to V104; foliage/fence/sign fine detail remains soft.",
+    "The V111 gray ADC field has a visible green cast; V112 returns close to the exact analytic target in the already selected cases.",
+    "Full-color tails and camera means favor V112 while V111 has near-equal photographic PSNR.",
+    "Period8/16 high-noise carriers improve; period4 remains nearly absent. No broad real-camera superiority or SOTA claim."
+  ],
+  "superseded_waiting_Small_plan": {
+    "path": "/home/dllu/proj/demosaic/docs/results/small-aligned-v113-superseded-v1.json",
+    "sha256": "8d90d7d00cd0ef380175a4575a1e803410e94f5ef121d1ce0648c4de249f7757"
+  },
+  "next_quality_work": "Refit Small from the stronger V112 teacher using retained Small training features and cached previews, then actual optimizer/CUDA checks and a new explicit fixed-budget plan. Previous V113 performed8 discarded CPU updates and no GPU/production work.",
+  "new_neural_forwards_by_this_review": 0,
+  "CUDA_initialized_by_this_review": false,
+  "remaining_work": [
+    "Review the original full-frame V112 RGB16 exports/timing when the current owner exits.",
+    "Complete existing V104 dihedral8 evaluation/audit as separately labeled work.",
+    "Improve fine high-noise/real foliage detail and adverse-camera behavior using the new baseline.",
+    "Keep the100MP/10s target open; quality first."
+  ],
+  "scope": "Current V112 selection follows completed primary photo/camera panels, full1176-case color and448-case weak-detail diagnostics, independent saved-float checks and actual native review. Original receipts, source and failed preparations remain preserved. Full GFX frames are being generated by the original untouched queue. Promotion does not wait on old study-specific significance gates; strengths and remaining weaknesses are documented directly."
+}

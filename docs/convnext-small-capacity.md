@@ -1,20 +1,18 @@
 # Larger frozen ConvNeXt capacity: transfer and common initialization
 
-**Small now has a fitted initializer that retains V104's learned fusion gates.**
-A training-only fit of its four lateral projections nearly preserves the three
-selected photo-condition means; two adverse-camera scores remain .25–.26dB below
-Tiny. Eight actual CPU optimizer updates pass, and [V113 is queued](small-aligned-training.md)
-for a CUDA check and fresh20k training against the completed V111 Tiny control.
+**Small transfer is being rebased onto the current V112 quality baseline.**
+The existing V104-derived fit keeps learned gates and nearly preserves selected
+photo means; eight actual CPU optimizer updates pass. Its idle V113 queue was
+superseded before GPU work after V112's stronger camera/color results.
+[Current next steps](small-aligned-training.md) ·
+[Preserved fitted initializer and native comparisons](small-feature-transfer.md).
 Joint training and a trained capacity benefit remain unmeasured.
-[Current transfer method, fitted checkpoint and native comparisons](small-feature-transfer.md).
-V104 remains the positive-noise working baseline; V111/V112 material gains and
-remaining camera/color tradeoffs stay visible during their broader review.
 
 The earlier fixed-weight V102 transfer below demonstrates the feature mismatch.
 Resetting three gates gives Tiny and Small exactly matching initial outputs;
 those separate common-function preparations remain preserved for a later
 trained comparison.
-The [queued loss-scale trial](loss-scale-training.md) retains the original V104
+The [completed loss-scale trial](loss-scale-training.md) retains the original V104
 EMA and gates; the capacity recipes below remain unlaunched.
 
 A [current V104/V111 gate diagnostic](fusion-gate-quality.md) shows why the

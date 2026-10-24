@@ -174,7 +174,7 @@ under the existing 5% conditional probability, seed 60 mixed-domain schedule and
 zero-PSF geometry→area2 path, with finite native 256 outputs and no GPU/model.
 [Full preparation/review/reader evidence](results/source-quality-detail-catalogue-v3.json).
 V102/V103 completed20k updates on these frozen data. Their full427/camera
-comparison and complete GFX exports are finished; V104 now supplies the positive-noise baseline.
+comparison and complete GFX exports are finished; V104 supplied that study's positive-noise baseline; [V112 is now current](v112-quality.md).
 The completed V104 90,872-source training cohort is documented in the [incoming review](incoming-commons-quality.md). [Recipes and current results](quality-first-training.md#current-matched-comparison-v102v103).
 
 Source views use existing prepared caches. New downloads and decisions enter

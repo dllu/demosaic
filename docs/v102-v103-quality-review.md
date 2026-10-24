@@ -1,7 +1,9 @@
 # V102/V103: completed detail-diversity comparison
 
+**Current baseline: [V112](v112-quality.md).** The V102/V103 study below remains a separately scoped reference.
+
 **V102 final20k is the preferred result of this six/32-ROI study.** The
-[current V104 baseline](v104-reviewed-corpus-quality.md) adds a further photographic
+[later V104 study](v104-reviewed-corpus-quality.md) adds a further photographic
 gain while retaining documented ADC/unseen-camera tradeoffs. V102 reaches
 36.67951dB photographic PSNR, +.17604dB over V101 and about1.78dB over V43.
 V103 is a close alternative with a .00140dB higher photo mean. V102 has higher

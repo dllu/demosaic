@@ -1,5 +1,7 @@
 # Cached Q2, Sony a7R II and GFX50R comparisons
 
+**Current model: [V112](v112-quality.md).** The Q2/Sony/GFX50R images below retain their measured V102/V104 checkpoints; new V112 comparisons on those captures remain open.
+
 Current comparisons show **V104 and V102 final20k**, alongside RawNIND. They
 extend the standing [GFX100S train scene](gfx-qualitative.md) using three existing
 cached captures. V104 and V102 look close here, with no clear overall gain or

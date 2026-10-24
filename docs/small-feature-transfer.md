@@ -121,7 +121,7 @@ ISO100 photo predictions bit-exactly.
 Actual operation totals are 59 restoration forwards and 219 frozen-encoder
 forwards, including feature collection and two serialized-checkpoint replays.
 No CUDA or RAW decoding occurs. The parent is restored exactly, originals remain
-read-only and the current V104 selector stays unchanged.
+read-only. The V104 selector was unchanged during that fit; V112 is now selected.
 
 The public [projection fitter](../scripts/fit_dino_laterals.py) reproduces the
 eight coefficient tensors bit-exactly from the retained training feature pairs,
@@ -138,14 +138,13 @@ PYTHONPATH=src .venv/bin/python scripts/fit_dino_laterals.py \
 This writes projection arrays; the fitted full initializer is the separately
 hashed checkpoint above.
 
-The [V113 training experiment](small-aligned-training.md) now uses this fitted
-initializer and the same recipe as completed V111 Tiny, without repeating the
-Tiny continuation. Eight discarded CPU optimizer updates pass with exact
-initial EMA/gates, matching actual inputs and finite model/EMA/Adam. A live
-queue waits for the existing GPU chain before a native256/B16/BF16 CUDA check
-and fresh20k Small training. Full photo/camera/analytic and real GFX comparison
-will assess the trained result. This preserves the original fitted evidence;
-it does not claim a trained capacity benefit or isolate capacity from transfer.
+The [next training experiment](small-aligned-training.md) is moving to the
+stronger V112 baseline. This V104-derived initializer passed eight actual CPU
+optimizer updates with exact initial EMA/gates, matching inputs and finite
+model/EMA/Adam. Its idle V113 queue was intentionally superseded before any
+CUDA or production work. Preserve this result and reuse retained Small features
+and cached previews for a new V112-teacher fit, followed by fresh checks and an
+explicit budget. No trained Small quality benefit is claimed.
 The earlier [common-function Tiny/Small preparations](convnext-small-capacity.md)
 remain preserved and unlaunched; they answer a different initialization question.
 

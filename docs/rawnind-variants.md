@@ -1,5 +1,7 @@
 # Current RawNIND reference variants
 
+**Current joint model: [V112](v112-quality.md).** The released-reference study below retains its original V104 controls and checkpoint-specific scores.
+
 **The released pre-upsampled RawNIND is a stronger tested comparator than the
 half-resolution variant used in our earlier reports.** It improves all 12
 checked photographic cases and eight of nine development scene means. V104
@@ -180,7 +182,7 @@ observation byte-exactly for each genuine checkpoint, confirms cache reuse
 without downloads and preserves the legacy loader's constructor RNG/state.
 Source snapshots and existing machine evidence retain their bytes.
 
-Current training and the V104 selector are unchanged. Retain this stronger
+At execution, training and the V104 selector were unchanged. V112 is now selected. Retain this stronger
 tested reference in additional quality comparisons while preserving historical
 half-resolution scores. Other released variants remain untested here;
 this is not an exhaustive ranking of the published variants.

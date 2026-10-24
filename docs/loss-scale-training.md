@@ -1,31 +1,25 @@
 # Controlled training test for faint detail
 
-**V111 and V112 completed their original20k endpoints from the same V104 EMA.**
-Full matched GPU evaluation is running. The four-model CPU
-[material review is complete](v111-v112-material.md): V112 improves all
-twelve cases over V104, while its condition PSNR means are slightly below V111.
-Native changes are small, and mean gradient errors are slightly lower. Full
-photo/camera/analytic/GFX comparisons remain in progress.
-V111's [early material/GFX review](v111-early-quality.md)
-improves all twelve material cases over V104, with small real-photo changes.
-V111's complete camera panels change −.01336/+.02006dB known/unseen versus V104;
-V111's complete analytic grids show improved coarse carriers/high-noise color
-and a worse ADC flat-bias tail. Full-photo and remaining matched V112 panels are pending.
-Both keep the same architecture, data, initialization and budget, changing
-only reconstruction Charbonnier epsilon: **.001 versus .0003**. The trial
-started after V104's owned evaluation and full-frame exports finished.
-[Completed V104 strengths and tradeoffs](v104-reviewed-corpus-quality.md) and
-[material gains](heldout-detail.md) remain separate from this new hypothesis.
+**V112 is the current baseline after the completed matched comparison.**
+All seven panels are complete: full-photo PSNR36.90238dB, known/unseen CFA
+54.26914/53.95378dB and worst ADC flat bias50.89DN16. V111 photo quality is
+near-equal at36.90367dB, but its camera means are lower and ADC maximum rises
+to2,142.98DN16. [Complete results and native comparisons](v112-quality.md) ·
+[Primary source/scene statistics](v111-v112-primary-quality.md).
 
-The [fixed-output diagnostic](loss-smoothing-detail.md) found that smaller
-epsilon strengthens gradients for faint low-noise detail, but increases the
-total gradient more and reduces its alignment with the missing-detail band.
-A trained comparison is needed to establish whether this helps restoration.
-The .0003 arm tests a milder change than .0001. This test retains V104's learned
-fusion gates. The [V113 Small experiment](small-aligned-training.md) now follows
-the V111 recipe using fitted feature transfer and the completed Tiny control;
-its CPU check passes and CUDA/training are queued. The earlier
-[zero-gate Tiny/Small preparation](convnext-small-capacity.md) remains preserved.
+Both completed their original20k endpoints from the same V104 EMA. They retain
+the architecture, data, initialization, learned gates and budget, changing only
+reconstruction Charbonnier epsilon: **.001 versus.0003**. The four-source
+[material report](v111-v112-material.md) alone looked close; the complete color
+and camera panels establish useful additional gains. Fine high-noise detail
+remains weak. Complete102MP exports and their167.51s FP32 observation are verified.
+
+The [fixed-output gradient diagnostic](loss-smoothing-detail.md) motivated this
+trained comparison without predicting its outcome. The smaller scale repairs
+the large ADC tail here, but does not restore finer carriers. The
+[Small training work](small-aligned-training.md) is now moving to V112; the idle
+V113 preparation was superseded before GPU work. Original source, receipts,
+CPU checks and earlier zero-gate capacity preparations remain preserved.
 
 ## Matched recipes
 

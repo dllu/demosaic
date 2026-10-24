@@ -1,6 +1,8 @@
-# V104: larger-corpus continuation and current quality tradeoffs
+# V104: larger-corpus continuation and measured quality tradeoffs
 
-**V104 is the working baseline for positive-noise captures and continued
+**Current baseline: [V112](v112-quality.md).** This page retains the completed V104 larger-corpus study and its original evidence.
+
+**V104 was the working baseline for positive-noise captures and continued
 quality training.** Its full 427-photo mean rises by **.12134dB to 36.80085dB**, with higher
 SSIM and lower chroma/gradient error. Known-camera CFA PSNR rises .02897dB;
 unseen-camera CFA PSNR falls .05477dB. V102 remains a useful reference for that

@@ -1,4 +1,4 @@
-Current V104 results and deployment: [ADC sample consistency](adc-consistency.md).
+V104-specific results and deployment: [ADC sample consistency](adc-consistency.md).
 The V84 study below retains its measured protocol and historical evidence.
 
 # ADC-only sample consistency

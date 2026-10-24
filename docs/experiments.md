@@ -1,11 +1,10 @@
 # Experiment index
 
-**V104 is the current positive-noise quality baseline in V84's architectural
-family.** It reaches 36.80085dB on full427, +.12134dB over V102 and about1.90dB
-above V43. Known-camera and weak-texture results improve; V102 retains lower
-ADC flat-color bias and a higher unseen-camera mean.
-[Completed V104 study and native comparisons](v104-reviewed-corpus-quality.md).
-Useful gains and remaining weaknesses are documented directly.
+**V112 is the current quality baseline in V84's architectural family.**
+It reaches36.90238dB on full427, +.10154dB over V104, with425 source means
+improving, higher known/unseen camera means and worst ADC flat bias50.89DN16.
+[Complete current results and native comparisons](v112-quality.md). Fine
+high-noise/real foliage detail remains weak; original evidence stays visible.
 
 [Current model choices and images](current-model.md) ·
 [Current quality training](quality-first-training.md) ·
@@ -57,20 +56,13 @@ from V102 on 90,872 sources with 2,395 eligible additions. It improves PSNR,
 SSIM and gradient error in all 12 selected material cases; [native comparisons](heldout-detail.md)
 are current; all seven evaluation panels and full-frame exports are complete.
 [Source review and native examples](incoming-commons-quality.md).
-The [V111/V112 loss-scale comparison](loss-scale-training.md) retains the original
-V104 EMA on the cleaned 90,864-source corpus. Four discarded CPU/CUDA checks
-pass. V111 completed20k and [improves all twelve material cases](v111-early-quality.md),
-with modest native gains and small GFX changes. Its complete camera and analytic
-grids are reviewed: coarse carriers/high-noise color improve, while worst ADC
-bias rises to 2,143 DN16. V112 has also completed20k: its
-[material review](v111-v112-material.md) improves all twelve cases over V104
-but gives no clear native advantage over V111. Full matched evaluation is running.
-
-The [V113 Small experiment](small-aligned-training.md) retains the learned
-gates through fitted feature transfer. Eight genuine CPU optimizer updates
-pass; CUDA checks and fresh20k training are queued. Completed V111 supplies
-the Tiny control without a duplicate continuation. Trained quality remains
-unmeasured; the earlier zero-gate capacity preparations stay preserved.
+The [completed V111/V112 loss-scale comparison](loss-scale-training.md)
+uses the cleaned90,864-source corpus and original V104 EMA/gates. Both add about
+.10dB on full427; V112 improves camera/color over V111 and becomes the current
+baseline. The [primary report](v111-v112-primary-quality.md) and
+[complete review](v112-quality.md) show native strengths and remaining limits.
+The [Small work](small-aligned-training.md) moves to V112; the older idle V113
+plan was superseded before GPU work, preserving its eight actual CPU updates.
 
 The source scan covers88,508 training images, with570 actually reviewed and 31
 withheld/excluded. Completed runs used the earlier 24 exclusions; seven more and

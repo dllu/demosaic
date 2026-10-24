@@ -1,99 +1,52 @@
 # Project goals and current evidence
 
-**V104 is the working quality baseline for positive-noise RAW and continued
-training in V84's architectural family.** It reaches 36.80085dB on full427,
-+.12134dB over V102 and about1.90dB over V43, with stronger known-camera and
-weak-texture results. V102 retains lower ADC flat-color bias and a higher
-unseen-camera mean. [Current choices](current-model.md) and the [README](../README.md)
-show gains and remaining weaknesses directly.
+**V112 final20k is the current restoration and quality-training baseline.**
+It reaches36.90238dB on all427 photos, +.10154dB over V104, with425 source means
+improving. Known/unseen CFA means are54.26914/53.95378dB; worst ADC flat bias
+falls to50.89DN16. [Current choices](current-model.md) · [Complete review](v112-quality.md).
 
-The broader objective in [PROMPT](../PROMPT.md) remains active. Quality has
-priority over speed. The [GFX gallery](gfx-qualitative.md) now compares complete
-V102/V104/RawNIND frames and six native regions. Real model differences remain
-small, and fine foliage and saturated-light detail still need work.
-
-The stronger [released RawNIND pre-upsampled reference](rawnind-variants.md)
-improves eight of nine development scene means over the earlier reference and
-nearly matches V104 on known-camera CFA PSNR. Current synthetic-detail gains
-therefore remain separate from the unachieved broad real-camera objective.
+The full [PROMPT](../PROMPT.md) objective remains active. Fine real foliage,
+weak detail and adverse-camera behavior still need work. The stronger released
+RawNIND remains competitive on real-camera scenes; source means and the small
+GFX gallery do not establish broad real-camera superiority. Quality precedes speed.
 
 | Goal | Current evidence | Remaining work |
 | --- | --- | --- |
-| Excellent joint demosaicing and denoising | V104 reaches36.80085dB on full427, improves424/427 source means and has stronger tested weak carriers | Improve fine texture, ADC color tails and real-photo results; complete broad comparisons before making SOTA claims |
-| Much better real-photo quality than RawNIND | Current native GFX comparisons show clearer mesh/rails with learned models | Broaden scene/camera comparisons and recover more foliage/weak detail |
-| 16-bit and practical full-resolution output | Six current101.996MP linear/sRGB RGB16 TIFFs rehashed/reopened; earlier exports preserved | Keep quality/precision/timing evidence specific to each selected checkpoint |
-| 100MP within10s on GB10 | V104 inference/blending takes168.73s in the current IEEE FP32 run; target remains open | Optimize after improving quality |
-| Modern DINOv3 method | V104 uses the official pinned ConvNeXt-Tiny pyramid and pretrained DRUNet RGB family | Continue quality improvements and assess useful alternatives |
-| Free, diverse targets and aggressive binning | V104 completed20k on90,872 sources; active90,864-source trial removes eight further targets;4×→geometry→area2 | Measure the matched loss-scale trial and later capacity comparison; retain visual source/detail review |
-| Physical noise/exposure and camera handling | Poisson/read noise, negative black-subtracted values, Bayer phases, clipping and WB/matrix conditioning implemented | Improve low-noise color and test shadows/saturated lights across cameras |
-| Reliable training and resource use | Source/manifest snapshots, exact resume checks and actual CPU/CUDA operation; queue failures retained and corrected | Monitor the active fixed budgets and preserve evidence |
-| Protected originals and evaluation scenes | Originals read-only; cached GFX3879/3880 and siblings excluded from training | Preserve these boundaries in future cohorts |
-| Current documentation and reproducibility | Current native triplets with source/ROI/weights/noise/display metadata, updated plot, local-time diary and Git history | Refresh comparisons as useful models complete |
+| Excellent joint restoration | V112 full-photo36.90238dB,425/427 source gains and improved8/16-pixel weak carriers | Recover finer detail and reduce adverse cases before SOTA claims |
+| Much better real-photo quality than RawNIND | Complete V112/V104/half/pre-upsampled GFX frames and six native regions; learned models retain more regular mesh | Improve fine foliage and broaden real-camera evidence |
+| 16-bit/full-resolution output | Complete101.996MP V112 linear/sRGB RGB16 exports rehashed/reopened; original exporter compared33 decoded full-width rows per file with floats | Preserve per-checkpoint quality/precision evidence |
+| 100MP within10s on GB10 | V112 FP32 inference/blending167.51s, tile512/overlap64/B4 | Target open; improve quality before speed work |
+| Modern DINOv3 architecture | V84-family DRUNet RGB trunk and official frozen ConvNeXt-Tiny pyramid | Transfer the larger frozen Small encoder from the stronger V112 parent |
+| Diverse clean targets and binning |90,864-source cleaned corpus;4×→geometry→area2, zero optical blur, weak textures/photo contrast, six reviewed ROIs | Retain visual source review and fine-detail coverage |
+| Physical noise/camera/color | Poisson/read noise, signed black subtraction, all Bayer phases, WB/matrix, exposure/clipping; V112 repairs large ADC tails | Spatial dark-field/weak-detail failures remain |
+| Reliable resource-aware training | Exact parent/source/data snapshots, CPU/CUDA checks, fixed endpoints and retained failures | New explicit Small initializer/budget after the current GPU chain |
+| Protected originals/tests | Local GFX3879/3880 cache; originals read-only; standing scene/siblings outside training;16-scene test reserve unscored | Preserve boundaries in future cohorts |
+| Current documentation |46 completed primary endpoints in plot; native triplets with source/ROI/hash/noise/display; local-time diary | Update as useful results complete, without old promotion freezes |
 
-## Active quality work
+## Current work and evidence
 
-[V104's completed review](v104-reviewed-corpus-quality.md) covers all seven
-panels, the selected material test and complete 102MP exports. Photographic,
-known-camera and weak-carrier results improve over V102, while the unseen-camera
-mean falls and the ADC flat-color maximum rises. These tradeoffs remain visible
-alongside the gains. More training, seed and corpus change together, so the
-result does not isolate the data-cleaning effect.
+[All seven V111/V112 panels](v112-quality.md) are complete. V112 has V111-like
+photo PSNR and better camera/color results; independent Torch64 arithmetic
+checks all4704 saved color predictions. Actual native review covers material,
+ADC failures, all six GFX contexts and complete full-frame comparisons.
+[Primary statistics](v111-v112-primary-quality.md) ·
+[Full-frame receipt](results/v112-fullframe-review-v1.json).
 
-The [V111/V112 loss-scale trial](loss-scale-training.md) retains the exact V104
-EMA and learned fusion gates on the further-cleaned **90,864-source** corpus.
-V111 completed20k and [improves all twelve fixed material cases](v111-early-quality.md)
-over V104, with modest native gains and small real GFX changes. V112 has completed
-its original20k budget, changing only epsilon .001→.0003; full matched evaluation is running. V111's complete camera
-means change −.01336/+.02006dB known/unseen versus V104, with all5 unseen scene
-means improving and persistent local dark-field failures. Complete analytic
-grids improve high-noise color/coarse carriers but raise worst ADC bias to
-2,143 DN16. The [matched V112 material review](v111-v112-material.md) improves
-all twelve cases over V104 but gives no clear native advantage over V111.
-Full-photo and remaining matched V112 panels are pending. Actual CPU/CUDA checks and the corrected production handoff are
-recorded. [V113 Small plus fitted transfer](small-aligned-training.md) passes
-eight actual CPU updates and is queued for CUDA checks and fresh20k training,
-using completed V111 as its Tiny control. The earlier zero-gate Tiny/Small
-recipes remain preserved and unlaunched. [Source review](incoming-commons-quality.md) ·
-[Current training](quality-first-training.md).
+The original V104 eight-view export/evaluation/audit remains a separately
+labeled workflow. The [Small training work](small-aligned-training.md) now moves
+to V112; the idle V113 queue was superseded before GPU work and its actual CPU
+results remain preserved. Source/scene intervals describe fixed evaluation
+units and do not measure training-repeat uncertainty.
 
-The optional [eight-view V104 mode](dihedral-quality.md) improves all twelve
-selected material cases and two adverse camera crops with unchanged weights.
-CPU/GB10 and native RGB16/DNG checks pass. It needs eight evaluations per tile;
-full-panel qualification remains open and its complete 102MP export is queued
-after the original workflow. Full photo/camera/texture/color evaluation and an
-independent saved-score audit are queued in sequence; their broad results and
-native review remain pending. It does not meet the speed target or remove the
-remaining dark-field/fine-detail failures.
+Each improved-model report needs at least two native noisy/restored/exact-GT
+triplets with common coordinates/transforms and recorded weights, conditioning
+and display exposure. Real AHD/separate ISO100 references stay explicitly
+nonexact. [Current GFX gallery](gfx-qualitative.md) · [Version history](performance-history.md).
+Hot-pixel repair and [linear DNG/JPEG output](dng-export.md) are merged; repair
+was off in these comparisons.
 
-The [V104 ADC diagnostics](v104-adc-color-projection.md) show that the existing
-Malvar residual operator repairs most flat-color bias, with texture gains and
-individual phase regressions. The [completed full427/four-CFA study](adc-consistency.md)
-supports an optional V104 sites export: +.28850dB, all 1,708 cases improving,
-with actual serialized-export parity checks. Flat-color limitations remain;
-the original positive-noise/training checkpoint is unchanged. New
-[unseen-camera adverse views](real-camera-quality.md#targeted-dark-field-regressions)
-retain spatial-residual weaknesses alongside the gains.
-
-The merged [linear DNG/JPEG path](dng-export.md) adds optional Bayer hot-pixel
-removal before restoration; repair was off in these comparisons. The
-[16-scene paired test reserve](paired-reserved-test.md) remains unscored and
-outside selection. The [experiment index](experiments.md) and
-[PSNR history](performance-history.md) preserve earlier gains and tradeoffs.
-
-## Evidence for the full objective
-
-Assess useful trained versions against the current baseline and strong
-comparators on the fixed photographic/camera panels and actual native images.
-Retain source/scene intervals and adverse cases. Each reported improved model
-needs at least two native noisy/restored/GT crop triplets with matching
-coordinates/transforms, checkpoint hash, conditioning and display exposure.
-Real AHD/separate ISO100 references remain nonexact and are not pixelwise GT.
-
-Show credible improvements and update current examples as they appear. Claims
-such as state-of-the-art quality, broad real-camera superiority or a particular
-100MP runtime need evidence covering those claims; they are not prerequisites
-for documenting an improved implementation or choosing a better baseline.
-
-The [diary](../diary/index.md) and [historical evidence log](requirements-archive.md)
-retain prior decisions. Existing machine receipts preserve original bytes and
-study-specific decisions, while current prose reflects today's implementation.
+Useful prior results and original receipts remain intact:
+[V104](v104-reviewed-corpus-quality.md), [V102/V103](v102-v103-quality-review.md),
+[V111 material/analytic results](v111-early-quality.md) and the
+[stronger RawNIND comparison](rawnind-variants.md). Current implementation choices
+follow useful quality gains, not old study-specific significance gates.
