@@ -58,6 +58,8 @@ The [Q2, Sony a7R II and GFX50R gallery](docs/cross-camera-qualitative.md)
 also compares V102/V104 on six fixed native regions; changes remain small.
 [V104 conditioning controls](docs/noise-conditioning.md) illustrate the
 tradeoff between retained detail and residual grain.
+The additional [RawNIND variant comparison](docs/rawnind-variants.md) uses a
+stronger released reference; its real-camera means nearly match V104.
 
 ![V104 final20k GFX foliage: noisy, restored and separate low-ISO reference](docs/images/gfx-v102-v104-fullframe/V104-foliage.png)
 

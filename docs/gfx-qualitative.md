@@ -1,7 +1,7 @@
 # GFX100S qualitative comparisons
 
 **V104 is the current positive-noise quality baseline.** The latest gallery
-compares complete 102MP V102/V104/RawNIND outputs on DSCF3879/DSCF3880. The two
+compares complete 102MP V102/V104/RawNIND-half outputs on DSCF3879/DSCF3880. The two
 learned models remain close: fence strands and building rails are more coherent
 than RawNIND, while fine foliage and saturated-sign structure remain soft.
 [Completed V104 metrics and tradeoffs](v104-reviewed-corpus-quality.md).
@@ -10,7 +10,7 @@ than RawNIND, while fine foliage and saturated-sign structure remain soft.
 
 ![Six native GFX regions: noisy,V102,V104,RawNIND and independent ISO100 reference](images/gfx-v102-v104-fullframe/comparison.png)
 
-Rows: noisy Malvar, V102, V104, RawNIND with input-only CFA-channel gain,
+Rows: noisy Malvar, V102, V104, RawNIND half with input-only CFA-channel gain,
 independent ISO100 f/5.6 reference. Each cell is **160×160 native sensor pixels**,
 never resized. Crops come from complete 101.996MP IEEE FP32 blended outputs,
 with tile512/overlap64/B4, before RGB16 encoding. All 30 native cells were
@@ -54,6 +54,24 @@ They do not meet 100MP/10s; no speed optimization is claimed. Artifacts are in
 `/mnt/external/demosaic/v102-reviewed-corpus-fullframe-20261023-v1/`.
 The original controller and worker exited successfully.
 [Full-frame audit, hashes and original export receipts](results/v104-reviewed-corpus-fullframe-v1.json).
+
+## Stronger released RawNIND reference
+
+The [pre-upsampled RawNIND comparison](rawnind-variants.md) adds a stronger
+released reference, improving all 12 selected photographic cases and eight
+of nine development scene means over the half-resolution model.
+
+![Six native GFX contexts: noisy, V104, RawNIND half, RawNIND pre-upsampled and independent ISO100 reference](images/rawnind-preupsample-current/gfx/comparison.png)
+
+These are matched **512-pixel context** restorations with unchanged native 160
+display cells and shared +2EV; the complete 102MP comparison above retains
+its original half-resolution reference. V104's exact retained CPU predictions
+are reused. The alternative improves some coarse sign/rail structure over
+half, but foliage remains soft and mesh less regular than V104. Shared display
+clipping limits saturated-light comparisons. The separate ISO100 f/5.6 capture
+remains a qualitative reference, not GT or a pixelwise scoring target.
+[All 18 triplets, source/ROI/checkpoint and display metadata](images/rawnind-preupsample-current/gfx/manifest.json).
+All 30 cells in this additional board were actually viewed at native resolution.
 
 ## Other useful comparisons
 

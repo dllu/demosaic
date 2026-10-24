@@ -12,6 +12,11 @@ priority over speed. The [GFX gallery](gfx-qualitative.md) now compares complete
 V102/V104/RawNIND frames and six native regions. Real model differences remain
 small, and fine foliage and saturated-light detail still need work.
 
+The stronger [released RawNIND pre-upsampled reference](rawnind-variants.md)
+improves eight of nine development scene means over the earlier reference and
+nearly matches V104 on known-camera CFA PSNR. Current synthetic-detail gains
+therefore remain separate from the unachieved broad real-camera objective.
+
 | Goal | Current evidence | Remaining work |
 | --- | --- | --- |
 | Excellent joint demosaicing and denoising | V104 reaches36.80085dB on full427, improves424/427 source means and has stronger tested weak carriers | Improve fine texture, ADC color tails and real-photo results; complete broad comparisons before making SOTA claims |

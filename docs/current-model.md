@@ -29,6 +29,12 @@ PSNR/SSIM/gradient cases improve. The source-bootstrap 95% interval for its
 unseen-camera CFA falls .05477dB, with both small-panel intervals including zero.
 These intervals describe source/scene sampling rather than training-seed uncertainty.
 
+The stronger [released RawNIND pre-upsampled reference](rawnind-variants.md)
+now reaches 54.26068/53.86528 dB on the complete known/unseen development
+panels. V104's corresponding advantages are small and uncertain. The selected
+synthetic-photo and GFX comparisons retain useful detail gains, while broad
+real-camera superiority remains open.
+
 At the tested weak high-noise carrier, period16 gain rises .49887→.60487 and
 period8 gain .02135→.05945; the finer carrier remains largely absent. High-noise
 flat-color bias improves, but worst ADC-only flat-color mean bias rises

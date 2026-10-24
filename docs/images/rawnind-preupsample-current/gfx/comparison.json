@@ -1,0 +1,2747 @@
+{
+  "status": "saved-native-board-awaiting-manual-review",
+  "kind": "gfx",
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/scripts/build_native_crop_board.py",
+    "sha256": "50f7b3c952d2cbc63f1ae69c6a3c10332a26a7f65e5229cf852a4f99b845d92e"
+  },
+  "reports": [
+    {
+      "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/gfx-report.json",
+      "sha256": "dafb629ebde59a4a4dc7fcd248d7cbfcf8752a71e4ebe3fa7b5f1cb8d442a9af"
+    }
+  ],
+  "board": {
+    "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/gfx-comparison.png",
+    "sha256": "00f2a688380827dc36a811f97d31114bfd22c49afc21c3e831e681e80e2581e1"
+  },
+  "models": [
+    {
+      "label": "V104",
+      "display_label": "V104",
+      "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300"
+    },
+    {
+      "label": "RawNIND-half",
+      "display_label": "RawNIND-half",
+      "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+    },
+    {
+      "label": "RawNIND-preup",
+      "display_label": "RawNIND-preup",
+      "sha256": "3d8d5fab966f790f4adbaf1786ca1ee81cb027d9cd45220787247b0af99fd814"
+    }
+  ],
+  "native_cells_exact": 30,
+  "source_triplets": [
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-e423686993c43332.png",
+        "sha256": "36cd35df0412604de294d227826b2594944f83b6d36c0e464099c68595a93021"
+      },
+      "crop": {
+        "image": "crop-e423686993c43332.png",
+        "caption": "gfx / overcast-sky / V104",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "36cd35df0412604de294d227826b2594944f83b6d36c0e464099c68595a93021",
+        "region": {
+          "name": "overcast-sky",
+          "noisy_xy": [
+            5800,
+            1400
+          ],
+          "reference_xy": [
+            5800,
+            1400
+          ],
+          "size": 160,
+          "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+          "context_green_correlation": null
+        },
+        "model_label": "V104",
+        "checkpoint_sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+        "compute_precision": "float32",
+        "device": "cuda",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          5624,
+          1224,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "model": {
+          "label": "V104",
+          "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+          "source": "/mnt/external/demosaic/models/v104-final20000.pt",
+          "step": 20000,
+          "device": "cpu",
+          "compute_precision": "IEEE float32",
+          "reuse": "Exact retained V104 CPU predictions; zero new V104 forwards."
+        }
+      }
+    },
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-c1c87b563da905ab.png",
+        "sha256": "7909f33be53d2d27b50bc6d6e9cd687001cb720ca9809d1cdd5975bad614c101"
+      },
+      "crop": {
+        "image": "crop-c1c87b563da905ab.png",
+        "caption": "gfx / overcast-sky / RawNIND-half",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "7909f33be53d2d27b50bc6d6e9cd687001cb720ca9809d1cdd5975bad614c101",
+        "region": {
+          "name": "overcast-sky",
+          "noisy_xy": [
+            5800,
+            1400
+          ],
+          "reference_xy": [
+            5800,
+            1400
+          ],
+          "size": 160,
+          "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+          "context_green_correlation": null
+        },
+        "model_label": "RawNIND-half",
+        "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "compute_precision": "float32",
+        "device": "cuda",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          5624,
+          1224,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "model": {
+          "label": "RawNIND-half",
+          "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "source": "/mnt/external/demosaic/references/rawnind/utnet2-bayer.pt",
+          "preupsample": false,
+          "gain_mode": "input-only CFA-channel LS",
+          "clip_input": false,
+          "device": "cpu",
+          "compute_precision": "IEEE float32",
+          "physical_noise_conditioning": false,
+          "training_updates_in_this_study": 0
+        }
+      }
+    },
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-b97ce1aaa25b2a58.png",
+        "sha256": "85acaec508672df5ef3bb1f85d2386cd508978a43ffffcdecac314ff8e36c8d9"
+      },
+      "crop": {
+        "image": "crop-b97ce1aaa25b2a58.png",
+        "caption": "gfx / overcast-sky / RawNIND-preup",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "85acaec508672df5ef3bb1f85d2386cd508978a43ffffcdecac314ff8e36c8d9",
+        "region": {
+          "name": "overcast-sky",
+          "noisy_xy": [
+            5800,
+            1400
+          ],
+          "reference_xy": [
+            5800,
+            1400
+          ],
+          "size": 160,
+          "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+          "context_green_correlation": null
+        },
+        "model_label": "RawNIND-preup",
+        "checkpoint_sha256": "3d8d5fab966f790f4adbaf1786ca1ee81cb027d9cd45220787247b0af99fd814",
+        "compute_precision": "float32",
+        "device": "cuda",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          5624,
+          1224,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "model": {
+          "label": "RawNIND-preup",
+          "sha256": "3d8d5fab966f790f4adbaf1786ca1ee81cb027d9cd45220787247b0af99fd814",
+          "source": "/mnt/external/demosaic/references/rawnind-preupsample-20261023-v1/utnet2-bayer-preupsample.pt",
+          "preupsample": true,
+          "gain_mode": "input-only CFA-channel LS",
+          "clip_input": false,
+          "device": "cpu",
+          "compute_precision": "IEEE float32",
+          "physical_noise_conditioning": false,
+          "training_updates_in_this_study": 0
+        }
+      }
+    },
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-dfd705e08155860c.png",
+        "sha256": "4856aa76a64b247ccfa1f5aaae1977f50b9d09f320f135b484dd9b25a9c9aad7"
+      },
+      "crop": {
+        "image": "crop-dfd705e08155860c.png",
+        "caption": "gfx / building-detail / V104",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "4856aa76a64b247ccfa1f5aaae1977f50b9d09f320f135b484dd9b25a9c9aad7",
+        "region": {
+          "name": "building-detail",
+          "noisy_xy": [
+            5790,
+            2690
+          ],
+          "reference_xy": [
+            5791,
+            2690
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.6824449896812439
+        },
+        "model_label": "V104",
+        "checkpoint_sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+        "compute_precision": "float32",
+        "device": "cuda",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          5614,
+          2514,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "model": {
+          "label": "V104",
+          "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+          "source": "/mnt/external/demosaic/models/v104-final20000.pt",
+          "step": 20000,
+          "device": "cpu",
+          "compute_precision": "IEEE float32",
+          "reuse": "Exact retained V104 CPU predictions; zero new V104 forwards."
+        }
+      }
+    },
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-75aa7d349a1498ca.png",
+        "sha256": "ece71fb5fc24e75a5a876ba814a32570be258f986e222ef0f21a76cf17e27b06"
+      },
+      "crop": {
+        "image": "crop-75aa7d349a1498ca.png",
+        "caption": "gfx / building-detail / RawNIND-half",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "ece71fb5fc24e75a5a876ba814a32570be258f986e222ef0f21a76cf17e27b06",
+        "region": {
+          "name": "building-detail",
+          "noisy_xy": [
+            5790,
+            2690
+          ],
+          "reference_xy": [
+            5791,
+            2690
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.6824449896812439
+        },
+        "model_label": "RawNIND-half",
+        "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "compute_precision": "float32",
+        "device": "cuda",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          5614,
+          2514,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "model": {
+          "label": "RawNIND-half",
+          "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "source": "/mnt/external/demosaic/references/rawnind/utnet2-bayer.pt",
+          "preupsample": false,
+          "gain_mode": "input-only CFA-channel LS",
+          "clip_input": false,
+          "device": "cpu",
+          "compute_precision": "IEEE float32",
+          "physical_noise_conditioning": false,
+          "training_updates_in_this_study": 0
+        }
+      }
+    },
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-98a30ba01325c557.png",
+        "sha256": "53acc2054e50e519da3ff8e75249b07d65b02ddf1fd31871033c462ff2e27aee"
+      },
+      "crop": {
+        "image": "crop-98a30ba01325c557.png",
+        "caption": "gfx / building-detail / RawNIND-preup",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "53acc2054e50e519da3ff8e75249b07d65b02ddf1fd31871033c462ff2e27aee",
+        "region": {
+          "name": "building-detail",
+          "noisy_xy": [
+            5790,
+            2690
+          ],
+          "reference_xy": [
+            5791,
+            2690
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.6824449896812439
+        },
+        "model_label": "RawNIND-preup",
+        "checkpoint_sha256": "3d8d5fab966f790f4adbaf1786ca1ee81cb027d9cd45220787247b0af99fd814",
+        "compute_precision": "float32",
+        "device": "cuda",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          5614,
+          2514,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "model": {
+          "label": "RawNIND-preup",
+          "sha256": "3d8d5fab966f790f4adbaf1786ca1ee81cb027d9cd45220787247b0af99fd814",
+          "source": "/mnt/external/demosaic/references/rawnind-preupsample-20261023-v1/utnet2-bayer-preupsample.pt",
+          "preupsample": true,
+          "gain_mode": "input-only CFA-channel LS",
+          "clip_input": false,
+          "device": "cpu",
+          "compute_precision": "IEEE float32",
+          "physical_noise_conditioning": false,
+          "training_updates_in_this_study": 0
+        }
+      }
+    },
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-320d818511698567.png",
+        "sha256": "f0ed44498c1bcccfa153dbd6737e467783a69dbb9e512048b999d4ff8020431f"
+      },
+      "crop": {
+        "image": "crop-320d818511698567.png",
+        "caption": "gfx / foliage / V104",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "f0ed44498c1bcccfa153dbd6737e467783a69dbb9e512048b999d4ff8020431f",
+        "region": {
+          "name": "foliage",
+          "noisy_xy": [
+            8890,
+            5570
+          ],
+          "reference_xy": [
+            8890,
+            5570
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9597686529159546
+        },
+        "model_label": "V104",
+        "checkpoint_sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+        "compute_precision": "float32",
+        "device": "cuda",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          8714,
+          5394,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "model": {
+          "label": "V104",
+          "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+          "source": "/mnt/external/demosaic/models/v104-final20000.pt",
+          "step": 20000,
+          "device": "cpu",
+          "compute_precision": "IEEE float32",
+          "reuse": "Exact retained V104 CPU predictions; zero new V104 forwards."
+        }
+      }
+    },
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-ea42590b172b5292.png",
+        "sha256": "1cf55fd081fa99be30de90318894bd37bd6847d591600750e156e569f4ae41b8"
+      },
+      "crop": {
+        "image": "crop-ea42590b172b5292.png",
+        "caption": "gfx / foliage / RawNIND-half",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "1cf55fd081fa99be30de90318894bd37bd6847d591600750e156e569f4ae41b8",
+        "region": {
+          "name": "foliage",
+          "noisy_xy": [
+            8890,
+            5570
+          ],
+          "reference_xy": [
+            8890,
+            5570
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9597686529159546
+        },
+        "model_label": "RawNIND-half",
+        "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "compute_precision": "float32",
+        "device": "cuda",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          8714,
+          5394,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "model": {
+          "label": "RawNIND-half",
+          "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "source": "/mnt/external/demosaic/references/rawnind/utnet2-bayer.pt",
+          "preupsample": false,
+          "gain_mode": "input-only CFA-channel LS",
+          "clip_input": false,
+          "device": "cpu",
+          "compute_precision": "IEEE float32",
+          "physical_noise_conditioning": false,
+          "training_updates_in_this_study": 0
+        }
+      }
+    },
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-3afe5f5feaa5c928.png",
+        "sha256": "8a760b18bbe5cc6731dbceac3d948944a36c5be63253528d76b7370be5272eb0"
+      },
+      "crop": {
+        "image": "crop-3afe5f5feaa5c928.png",
+        "caption": "gfx / foliage / RawNIND-preup",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "8a760b18bbe5cc6731dbceac3d948944a36c5be63253528d76b7370be5272eb0",
+        "region": {
+          "name": "foliage",
+          "noisy_xy": [
+            8890,
+            5570
+          ],
+          "reference_xy": [
+            8890,
+            5570
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9597686529159546
+        },
+        "model_label": "RawNIND-preup",
+        "checkpoint_sha256": "3d8d5fab966f790f4adbaf1786ca1ee81cb027d9cd45220787247b0af99fd814",
+        "compute_precision": "float32",
+        "device": "cuda",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          8714,
+          5394,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "model": {
+          "label": "RawNIND-preup",
+          "sha256": "3d8d5fab966f790f4adbaf1786ca1ee81cb027d9cd45220787247b0af99fd814",
+          "source": "/mnt/external/demosaic/references/rawnind-preupsample-20261023-v1/utnet2-bayer-preupsample.pt",
+          "preupsample": true,
+          "gain_mode": "input-only CFA-channel LS",
+          "clip_input": false,
+          "device": "cpu",
+          "compute_precision": "IEEE float32",
+          "physical_noise_conditioning": false,
+          "training_updates_in_this_study": 0
+        }
+      }
+    },
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-8b263835c2b44f49.png",
+        "sha256": "b4d305ef37586e6943bbdb61c3b4f7693dd3c24ee4e061b274a425286d1ea5a9"
+      },
+      "crop": {
+        "image": "crop-8b263835c2b44f49.png",
+        "caption": "gfx / chain-link-fence / V104",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "b4d305ef37586e6943bbdb61c3b4f7693dd3c24ee4e061b274a425286d1ea5a9",
+        "region": {
+          "name": "chain-link-fence",
+          "noisy_xy": [
+            2240,
+            6000
+          ],
+          "reference_xy": [
+            2241,
+            6000
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9550720453262329
+        },
+        "model_label": "V104",
+        "checkpoint_sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+        "compute_precision": "float32",
+        "device": "cuda",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          2064,
+          5824,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "model": {
+          "label": "V104",
+          "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+          "source": "/mnt/external/demosaic/models/v104-final20000.pt",
+          "step": 20000,
+          "device": "cpu",
+          "compute_precision": "IEEE float32",
+          "reuse": "Exact retained V104 CPU predictions; zero new V104 forwards."
+        }
+      }
+    },
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-98b6cf500db4c30b.png",
+        "sha256": "17764bc0874cf8cff16a2f82c80fa700aee49f035abc529357a84bc5e9b4a927"
+      },
+      "crop": {
+        "image": "crop-98b6cf500db4c30b.png",
+        "caption": "gfx / chain-link-fence / RawNIND-half",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "17764bc0874cf8cff16a2f82c80fa700aee49f035abc529357a84bc5e9b4a927",
+        "region": {
+          "name": "chain-link-fence",
+          "noisy_xy": [
+            2240,
+            6000
+          ],
+          "reference_xy": [
+            2241,
+            6000
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9550720453262329
+        },
+        "model_label": "RawNIND-half",
+        "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "compute_precision": "float32",
+        "device": "cuda",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          2064,
+          5824,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "model": {
+          "label": "RawNIND-half",
+          "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "source": "/mnt/external/demosaic/references/rawnind/utnet2-bayer.pt",
+          "preupsample": false,
+          "gain_mode": "input-only CFA-channel LS",
+          "clip_input": false,
+          "device": "cpu",
+          "compute_precision": "IEEE float32",
+          "physical_noise_conditioning": false,
+          "training_updates_in_this_study": 0
+        }
+      }
+    },
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-f516ed65dbd0e8e1.png",
+        "sha256": "56c6f3079c976b8208096ea6e42dd8903666de0dd102f0a8267f352df08d9a08"
+      },
+      "crop": {
+        "image": "crop-f516ed65dbd0e8e1.png",
+        "caption": "gfx / chain-link-fence / RawNIND-preup",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "56c6f3079c976b8208096ea6e42dd8903666de0dd102f0a8267f352df08d9a08",
+        "region": {
+          "name": "chain-link-fence",
+          "noisy_xy": [
+            2240,
+            6000
+          ],
+          "reference_xy": [
+            2241,
+            6000
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9550720453262329
+        },
+        "model_label": "RawNIND-preup",
+        "checkpoint_sha256": "3d8d5fab966f790f4adbaf1786ca1ee81cb027d9cd45220787247b0af99fd814",
+        "compute_precision": "float32",
+        "device": "cuda",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          2064,
+          5824,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "model": {
+          "label": "RawNIND-preup",
+          "sha256": "3d8d5fab966f790f4adbaf1786ca1ee81cb027d9cd45220787247b0af99fd814",
+          "source": "/mnt/external/demosaic/references/rawnind-preupsample-20261023-v1/utnet2-bayer-preupsample.pt",
+          "preupsample": true,
+          "gain_mode": "input-only CFA-channel LS",
+          "clip_input": false,
+          "device": "cpu",
+          "compute_precision": "IEEE float32",
+          "physical_noise_conditioning": false,
+          "training_updates_in_this_study": 0
+        }
+      }
+    },
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-353e626f3d50610a.png",
+        "sha256": "24b99c19c7afdb8618db87a7e16a01804a6806dc2255671a2a48ce9457639530"
+      },
+      "crop": {
+        "image": "crop-353e626f3d50610a.png",
+        "caption": "gfx / colored-neon-sign / V104",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "24b99c19c7afdb8618db87a7e16a01804a6806dc2255671a2a48ce9457639530",
+        "region": {
+          "name": "colored-neon-sign",
+          "noisy_xy": [
+            9060,
+            2050
+          ],
+          "reference_xy": [
+            9060,
+            2050
+          ],
+          "size": 160,
+          "selection_method": "Input-only locator selection, then maximum normalized green correlation in512px input/reference contexts; integer offsets within+/-8 only, no output-dependent selection or warp",
+          "context_green_correlation": 0.9116097356755666
+        },
+        "model_label": "V104",
+        "checkpoint_sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+        "compute_precision": "float32",
+        "device": "cuda",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          8884,
+          1874,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "model": {
+          "label": "V104",
+          "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+          "source": "/mnt/external/demosaic/models/v104-final20000.pt",
+          "step": 20000,
+          "device": "cpu",
+          "compute_precision": "IEEE float32",
+          "reuse": "Exact retained V104 CPU predictions; zero new V104 forwards."
+        }
+      }
+    },
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-222d48605669ddfb.png",
+        "sha256": "5f8cd4419930cd6e0eff7440fd17b9225975d646b98a9260a42c102b2b47868d"
+      },
+      "crop": {
+        "image": "crop-222d48605669ddfb.png",
+        "caption": "gfx / colored-neon-sign / RawNIND-half",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "5f8cd4419930cd6e0eff7440fd17b9225975d646b98a9260a42c102b2b47868d",
+        "region": {
+          "name": "colored-neon-sign",
+          "noisy_xy": [
+            9060,
+            2050
+          ],
+          "reference_xy": [
+            9060,
+            2050
+          ],
+          "size": 160,
+          "selection_method": "Input-only locator selection, then maximum normalized green correlation in512px input/reference contexts; integer offsets within+/-8 only, no output-dependent selection or warp",
+          "context_green_correlation": 0.9116097356755666
+        },
+        "model_label": "RawNIND-half",
+        "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "compute_precision": "float32",
+        "device": "cuda",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          8884,
+          1874,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "model": {
+          "label": "RawNIND-half",
+          "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "source": "/mnt/external/demosaic/references/rawnind/utnet2-bayer.pt",
+          "preupsample": false,
+          "gain_mode": "input-only CFA-channel LS",
+          "clip_input": false,
+          "device": "cpu",
+          "compute_precision": "IEEE float32",
+          "physical_noise_conditioning": false,
+          "training_updates_in_this_study": 0
+        }
+      }
+    },
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-6b4d10ca2528f85d.png",
+        "sha256": "c222d4c0c7b0e6ab9fa8e603d289b2431d4902775cb60d9b5433468f6c8885d1"
+      },
+      "crop": {
+        "image": "crop-6b4d10ca2528f85d.png",
+        "caption": "gfx / colored-neon-sign / RawNIND-preup",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "c222d4c0c7b0e6ab9fa8e603d289b2431d4902775cb60d9b5433468f6c8885d1",
+        "region": {
+          "name": "colored-neon-sign",
+          "noisy_xy": [
+            9060,
+            2050
+          ],
+          "reference_xy": [
+            9060,
+            2050
+          ],
+          "size": 160,
+          "selection_method": "Input-only locator selection, then maximum normalized green correlation in512px input/reference contexts; integer offsets within+/-8 only, no output-dependent selection or warp",
+          "context_green_correlation": 0.9116097356755666
+        },
+        "model_label": "RawNIND-preup",
+        "checkpoint_sha256": "3d8d5fab966f790f4adbaf1786ca1ee81cb027d9cd45220787247b0af99fd814",
+        "compute_precision": "float32",
+        "device": "cuda",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          8884,
+          1874,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "model": {
+          "label": "RawNIND-preup",
+          "sha256": "3d8d5fab966f790f4adbaf1786ca1ee81cb027d9cd45220787247b0af99fd814",
+          "source": "/mnt/external/demosaic/references/rawnind-preupsample-20261023-v1/utnet2-bayer-preupsample.pt",
+          "preupsample": true,
+          "gain_mode": "input-only CFA-channel LS",
+          "clip_input": false,
+          "device": "cpu",
+          "compute_precision": "IEEE float32",
+          "physical_noise_conditioning": false,
+          "training_updates_in_this_study": 0
+        }
+      }
+    },
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-8e639440a8b598f2.png",
+        "sha256": "fc8baa18ed013dd5dad70b97333ae4a605bc96657dbe7ea668bd289b4e1478f9"
+      },
+      "crop": {
+        "image": "crop-8e639440a8b598f2.png",
+        "caption": "gfx / illuminated-platform-boundary / V104",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "fc8baa18ed013dd5dad70b97333ae4a605bc96657dbe7ea668bd289b4e1478f9",
+        "region": {
+          "name": "illuminated-platform-boundary",
+          "noisy_xy": [
+            10320,
+            4520
+          ],
+          "reference_xy": [
+            10321,
+            4520
+          ],
+          "size": 160,
+          "selection_method": "Input-only locator selection, then maximum normalized green correlation in512px input/reference contexts; integer offsets within+/-8 only, no output-dependent selection or warp",
+          "context_green_correlation": 0.9831606311368877
+        },
+        "model_label": "V104",
+        "checkpoint_sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+        "compute_precision": "float32",
+        "device": "cuda",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          10144,
+          4344,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "model": {
+          "label": "V104",
+          "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+          "source": "/mnt/external/demosaic/models/v104-final20000.pt",
+          "step": 20000,
+          "device": "cpu",
+          "compute_precision": "IEEE float32",
+          "reuse": "Exact retained V104 CPU predictions; zero new V104 forwards."
+        }
+      }
+    },
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-47efbd3d846908e4.png",
+        "sha256": "97b97bafd814ac8456b30b25b722682b29bb8883a58b4ad437841d152b0fc6ba"
+      },
+      "crop": {
+        "image": "crop-47efbd3d846908e4.png",
+        "caption": "gfx / illuminated-platform-boundary / RawNIND-half",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "97b97bafd814ac8456b30b25b722682b29bb8883a58b4ad437841d152b0fc6ba",
+        "region": {
+          "name": "illuminated-platform-boundary",
+          "noisy_xy": [
+            10320,
+            4520
+          ],
+          "reference_xy": [
+            10321,
+            4520
+          ],
+          "size": 160,
+          "selection_method": "Input-only locator selection, then maximum normalized green correlation in512px input/reference contexts; integer offsets within+/-8 only, no output-dependent selection or warp",
+          "context_green_correlation": 0.9831606311368877
+        },
+        "model_label": "RawNIND-half",
+        "checkpoint_sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+        "compute_precision": "float32",
+        "device": "cuda",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          10144,
+          4344,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "model": {
+          "label": "RawNIND-half",
+          "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0",
+          "source": "/mnt/external/demosaic/references/rawnind/utnet2-bayer.pt",
+          "preupsample": false,
+          "gain_mode": "input-only CFA-channel LS",
+          "clip_input": false,
+          "device": "cpu",
+          "compute_precision": "IEEE float32",
+          "physical_noise_conditioning": false,
+          "training_updates_in_this_study": 0
+        }
+      }
+    },
+    {
+      "report_index": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-0459f9603d64adff.png",
+        "sha256": "f43202cf0d49d2f8c71ec1ef5ce36e673a145e97a27387039e72b5fd295e4224"
+      },
+      "crop": {
+        "image": "crop-0459f9603d64adff.png",
+        "caption": "gfx / illuminated-platform-boundary / RawNIND-preup",
+        "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+        "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+        "panels": [
+          {
+            "label": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Denoised",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "ISO100 ref (not GT)",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "png_sha256": "f43202cf0d49d2f8c71ec1ef5ce36e673a145e97a27387039e72b5fd295e4224",
+        "region": {
+          "name": "illuminated-platform-boundary",
+          "noisy_xy": [
+            10320,
+            4520
+          ],
+          "reference_xy": [
+            10321,
+            4520
+          ],
+          "size": 160,
+          "selection_method": "Input-only locator selection, then maximum normalized green correlation in512px input/reference contexts; integer offsets within+/-8 only, no output-dependent selection or warp",
+          "context_green_correlation": 0.9831606311368877
+        },
+        "model_label": "RawNIND-preup",
+        "checkpoint_sha256": "3d8d5fab966f790f4adbaf1786ca1ee81cb027d9cd45220787247b0af99fd814",
+        "compute_precision": "float32",
+        "device": "cuda",
+        "conditioning": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06
+        },
+        "context_xywh": [
+          10144,
+          4344,
+          512,
+          512
+        ],
+        "full_frame": false,
+        "display_exposure": 4.0,
+        "shared_wb": [
+          1.5132450331125828,
+          1.0,
+          2.2152317880794703
+        ],
+        "shared_matrix": [
+          [
+            1.0725188393098881,
+            0.17123593128834644,
+            -0.24375477059823436
+          ],
+          [
+            -0.1267191317089774,
+            1.4310509369654432,
+            -0.3043318052564657
+          ],
+          [
+            -0.009697676902906037,
+            -0.29348063283422965,
+            1.3031783097371357
+          ]
+        ],
+        "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping",
+        "model": {
+          "label": "RawNIND-preup",
+          "sha256": "3d8d5fab966f790f4adbaf1786ca1ee81cb027d9cd45220787247b0af99fd814",
+          "source": "/mnt/external/demosaic/references/rawnind-preupsample-20261023-v1/utnet2-bayer-preupsample.pt",
+          "preupsample": true,
+          "gain_mode": "input-only CFA-channel LS",
+          "clip_input": false,
+          "device": "cpu",
+          "compute_precision": "IEEE float32",
+          "physical_noise_conditioning": false,
+          "training_updates_in_this_study": 0
+        }
+      }
+    }
+  ],
+  "cells": [
+    {
+      "case": [
+        0,
+        "\"overcast-sky\""
+      ],
+      "row_label": "Noisy (Malvar)",
+      "model_label": "V104",
+      "part": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-e423686993c43332.png",
+        "sha256": "36cd35df0412604de294d227826b2594944f83b6d36c0e464099c68595a93021"
+      },
+      "source_xywh": [
+        8,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        180,
+        72,
+        160,
+        160
+      ],
+      "pixel_sha256": "32cc637cc1bdb2f46f808cb613b6eef397e656af579fbd0597324ff683e17d77"
+    },
+    {
+      "case": [
+        0,
+        "\"overcast-sky\""
+      ],
+      "row_label": "V104",
+      "model_label": "V104",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-e423686993c43332.png",
+        "sha256": "36cd35df0412604de294d227826b2594944f83b6d36c0e464099c68595a93021"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        180,
+        256,
+        160,
+        160
+      ],
+      "pixel_sha256": "52ee263b93bbe2df51b1eb57913a3fe18828be2827e913d8a0ca5e1495dd9e29"
+    },
+    {
+      "case": [
+        0,
+        "\"overcast-sky\""
+      ],
+      "row_label": "RawNIND-half",
+      "model_label": "RawNIND-half",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-c1c87b563da905ab.png",
+        "sha256": "7909f33be53d2d27b50bc6d6e9cd687001cb720ca9809d1cdd5975bad614c101"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        180,
+        440,
+        160,
+        160
+      ],
+      "pixel_sha256": "996e3f6deb1349c923943fc15919e09b1e70bc8938a33003ddeaff3bf06ed101"
+    },
+    {
+      "case": [
+        0,
+        "\"overcast-sky\""
+      ],
+      "row_label": "RawNIND-preup",
+      "model_label": "RawNIND-preup",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-b97ce1aaa25b2a58.png",
+        "sha256": "85acaec508672df5ef3bb1f85d2386cd508978a43ffffcdecac314ff8e36c8d9"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        180,
+        624,
+        160,
+        160
+      ],
+      "pixel_sha256": "ae62a3758064b4386f677f7c61cdc32024e7629afd1850810202d74663df80ed"
+    },
+    {
+      "case": [
+        0,
+        "\"overcast-sky\""
+      ],
+      "row_label": "ISO100 ref (not GT)",
+      "model_label": "V104",
+      "part": 2,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-e423686993c43332.png",
+        "sha256": "36cd35df0412604de294d227826b2594944f83b6d36c0e464099c68595a93021"
+      },
+      "source_xywh": [
+        344,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        180,
+        808,
+        160,
+        160
+      ],
+      "pixel_sha256": "cc6cdbbfe58c0b3f45111c1079bfaea2a87de039ee6a56264de78bbd19fe254d"
+    },
+    {
+      "case": [
+        0,
+        "\"building-detail\""
+      ],
+      "row_label": "Noisy (Malvar)",
+      "model_label": "V104",
+      "part": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-dfd705e08155860c.png",
+        "sha256": "4856aa76a64b247ccfa1f5aaae1977f50b9d09f320f135b484dd9b25a9c9aad7"
+      },
+      "source_xywh": [
+        8,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        348,
+        72,
+        160,
+        160
+      ],
+      "pixel_sha256": "62bc4e7459b201b277f6b02ba7930c0f65ce6f0a2007ef565c971811e227f468"
+    },
+    {
+      "case": [
+        0,
+        "\"building-detail\""
+      ],
+      "row_label": "V104",
+      "model_label": "V104",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-dfd705e08155860c.png",
+        "sha256": "4856aa76a64b247ccfa1f5aaae1977f50b9d09f320f135b484dd9b25a9c9aad7"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        348,
+        256,
+        160,
+        160
+      ],
+      "pixel_sha256": "32478de2e16befadc93fdec3a1a6e0e57452b594f9f0e5e66c12d19be922b0ed"
+    },
+    {
+      "case": [
+        0,
+        "\"building-detail\""
+      ],
+      "row_label": "RawNIND-half",
+      "model_label": "RawNIND-half",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-75aa7d349a1498ca.png",
+        "sha256": "ece71fb5fc24e75a5a876ba814a32570be258f986e222ef0f21a76cf17e27b06"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        348,
+        440,
+        160,
+        160
+      ],
+      "pixel_sha256": "3c531b1301690214878bb5bf32092e9d0fb99dba500f033f34e691dc1e03d94e"
+    },
+    {
+      "case": [
+        0,
+        "\"building-detail\""
+      ],
+      "row_label": "RawNIND-preup",
+      "model_label": "RawNIND-preup",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-98a30ba01325c557.png",
+        "sha256": "53acc2054e50e519da3ff8e75249b07d65b02ddf1fd31871033c462ff2e27aee"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        348,
+        624,
+        160,
+        160
+      ],
+      "pixel_sha256": "b94f27fb2f67931e6fa26f3e807e6ffb06b698ab60035cd73a542ede553ec3dc"
+    },
+    {
+      "case": [
+        0,
+        "\"building-detail\""
+      ],
+      "row_label": "ISO100 ref (not GT)",
+      "model_label": "V104",
+      "part": 2,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-dfd705e08155860c.png",
+        "sha256": "4856aa76a64b247ccfa1f5aaae1977f50b9d09f320f135b484dd9b25a9c9aad7"
+      },
+      "source_xywh": [
+        344,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        348,
+        808,
+        160,
+        160
+      ],
+      "pixel_sha256": "1d90f38eb5ac46a8242d8ccc36439ae3a85b60d6275334962f0bbe643001b82d"
+    },
+    {
+      "case": [
+        0,
+        "\"foliage\""
+      ],
+      "row_label": "Noisy (Malvar)",
+      "model_label": "V104",
+      "part": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-320d818511698567.png",
+        "sha256": "f0ed44498c1bcccfa153dbd6737e467783a69dbb9e512048b999d4ff8020431f"
+      },
+      "source_xywh": [
+        8,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        516,
+        72,
+        160,
+        160
+      ],
+      "pixel_sha256": "5b920643208fc78b736d079784728688c144556fd1b1dec6317b64439f08bec9"
+    },
+    {
+      "case": [
+        0,
+        "\"foliage\""
+      ],
+      "row_label": "V104",
+      "model_label": "V104",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-320d818511698567.png",
+        "sha256": "f0ed44498c1bcccfa153dbd6737e467783a69dbb9e512048b999d4ff8020431f"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        516,
+        256,
+        160,
+        160
+      ],
+      "pixel_sha256": "89a46d27e98736f2162771962e53215f03ddf4f01b18f76e79f54d97217835d6"
+    },
+    {
+      "case": [
+        0,
+        "\"foliage\""
+      ],
+      "row_label": "RawNIND-half",
+      "model_label": "RawNIND-half",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-ea42590b172b5292.png",
+        "sha256": "1cf55fd081fa99be30de90318894bd37bd6847d591600750e156e569f4ae41b8"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        516,
+        440,
+        160,
+        160
+      ],
+      "pixel_sha256": "bca8965ffa8c41dc776917991cfdb2c53da3ee6566f961c010b5dbe0b6a7d39b"
+    },
+    {
+      "case": [
+        0,
+        "\"foliage\""
+      ],
+      "row_label": "RawNIND-preup",
+      "model_label": "RawNIND-preup",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-3afe5f5feaa5c928.png",
+        "sha256": "8a760b18bbe5cc6731dbceac3d948944a36c5be63253528d76b7370be5272eb0"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        516,
+        624,
+        160,
+        160
+      ],
+      "pixel_sha256": "37d3b6a1d56ae6caf896145766579d9ce77bd2f39f2f3303f2c9c97512475d7d"
+    },
+    {
+      "case": [
+        0,
+        "\"foliage\""
+      ],
+      "row_label": "ISO100 ref (not GT)",
+      "model_label": "V104",
+      "part": 2,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-320d818511698567.png",
+        "sha256": "f0ed44498c1bcccfa153dbd6737e467783a69dbb9e512048b999d4ff8020431f"
+      },
+      "source_xywh": [
+        344,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        516,
+        808,
+        160,
+        160
+      ],
+      "pixel_sha256": "cd38aecbada20ef30a8c67e3bd3c6d5c0271863222b85b5137583e973dc376bd"
+    },
+    {
+      "case": [
+        0,
+        "\"chain-link-fence\""
+      ],
+      "row_label": "Noisy (Malvar)",
+      "model_label": "V104",
+      "part": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-8b263835c2b44f49.png",
+        "sha256": "b4d305ef37586e6943bbdb61c3b4f7693dd3c24ee4e061b274a425286d1ea5a9"
+      },
+      "source_xywh": [
+        8,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        684,
+        72,
+        160,
+        160
+      ],
+      "pixel_sha256": "5e4036cbde60bf44cd642bd3444406a08c3bf0050a395af013b454b7afd1f9d4"
+    },
+    {
+      "case": [
+        0,
+        "\"chain-link-fence\""
+      ],
+      "row_label": "V104",
+      "model_label": "V104",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-8b263835c2b44f49.png",
+        "sha256": "b4d305ef37586e6943bbdb61c3b4f7693dd3c24ee4e061b274a425286d1ea5a9"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        684,
+        256,
+        160,
+        160
+      ],
+      "pixel_sha256": "0227c49d1fb63b3222fc154ef134b2ca3047098646a967d2dbc83eed687830ad"
+    },
+    {
+      "case": [
+        0,
+        "\"chain-link-fence\""
+      ],
+      "row_label": "RawNIND-half",
+      "model_label": "RawNIND-half",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-98b6cf500db4c30b.png",
+        "sha256": "17764bc0874cf8cff16a2f82c80fa700aee49f035abc529357a84bc5e9b4a927"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        684,
+        440,
+        160,
+        160
+      ],
+      "pixel_sha256": "d25c28a545cd8bf92bcfabb31e9b5d4db99d8e7cdb3db898fe397fe161e5e176"
+    },
+    {
+      "case": [
+        0,
+        "\"chain-link-fence\""
+      ],
+      "row_label": "RawNIND-preup",
+      "model_label": "RawNIND-preup",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-f516ed65dbd0e8e1.png",
+        "sha256": "56c6f3079c976b8208096ea6e42dd8903666de0dd102f0a8267f352df08d9a08"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        684,
+        624,
+        160,
+        160
+      ],
+      "pixel_sha256": "489d3177664620b41d4409cc4cdd4208149e64de8d16047312038c6c7620cc18"
+    },
+    {
+      "case": [
+        0,
+        "\"chain-link-fence\""
+      ],
+      "row_label": "ISO100 ref (not GT)",
+      "model_label": "V104",
+      "part": 2,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-8b263835c2b44f49.png",
+        "sha256": "b4d305ef37586e6943bbdb61c3b4f7693dd3c24ee4e061b274a425286d1ea5a9"
+      },
+      "source_xywh": [
+        344,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        684,
+        808,
+        160,
+        160
+      ],
+      "pixel_sha256": "d20cf4940d9f17d4096a0daa0ebe1dfd20eff3bd0ecf1f4594e191d06c316f17"
+    },
+    {
+      "case": [
+        0,
+        "\"colored-neon-sign\""
+      ],
+      "row_label": "Noisy (Malvar)",
+      "model_label": "V104",
+      "part": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-353e626f3d50610a.png",
+        "sha256": "24b99c19c7afdb8618db87a7e16a01804a6806dc2255671a2a48ce9457639530"
+      },
+      "source_xywh": [
+        8,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        852,
+        72,
+        160,
+        160
+      ],
+      "pixel_sha256": "469419605d2cf5ef73cef4adfea66180cbeb11f3f9d71b8bb30fcfe8fb7446e9"
+    },
+    {
+      "case": [
+        0,
+        "\"colored-neon-sign\""
+      ],
+      "row_label": "V104",
+      "model_label": "V104",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-353e626f3d50610a.png",
+        "sha256": "24b99c19c7afdb8618db87a7e16a01804a6806dc2255671a2a48ce9457639530"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        852,
+        256,
+        160,
+        160
+      ],
+      "pixel_sha256": "e4677801849ecb6d8eb7f59a5d9b8e9b4e69afb48d331c7f811bcdfa1126d8b3"
+    },
+    {
+      "case": [
+        0,
+        "\"colored-neon-sign\""
+      ],
+      "row_label": "RawNIND-half",
+      "model_label": "RawNIND-half",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-222d48605669ddfb.png",
+        "sha256": "5f8cd4419930cd6e0eff7440fd17b9225975d646b98a9260a42c102b2b47868d"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        852,
+        440,
+        160,
+        160
+      ],
+      "pixel_sha256": "dcff94c77ffde9c40bbc80ea8fd3542a09deec255dc04b0e146e2e8118d67f80"
+    },
+    {
+      "case": [
+        0,
+        "\"colored-neon-sign\""
+      ],
+      "row_label": "RawNIND-preup",
+      "model_label": "RawNIND-preup",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-6b4d10ca2528f85d.png",
+        "sha256": "c222d4c0c7b0e6ab9fa8e603d289b2431d4902775cb60d9b5433468f6c8885d1"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        852,
+        624,
+        160,
+        160
+      ],
+      "pixel_sha256": "286936ac73f32c237b37cf1af7e984aef67c810e941f3077b28b7eec9dbd3eaf"
+    },
+    {
+      "case": [
+        0,
+        "\"colored-neon-sign\""
+      ],
+      "row_label": "ISO100 ref (not GT)",
+      "model_label": "V104",
+      "part": 2,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-353e626f3d50610a.png",
+        "sha256": "24b99c19c7afdb8618db87a7e16a01804a6806dc2255671a2a48ce9457639530"
+      },
+      "source_xywh": [
+        344,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        852,
+        808,
+        160,
+        160
+      ],
+      "pixel_sha256": "96b456b3e791acd715c7438cad915a98e3f558c2c78009cd379c14a5e26a3eb4"
+    },
+    {
+      "case": [
+        0,
+        "\"illuminated-platform-boundary\""
+      ],
+      "row_label": "Noisy (Malvar)",
+      "model_label": "V104",
+      "part": 0,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-8e639440a8b598f2.png",
+        "sha256": "fc8baa18ed013dd5dad70b97333ae4a605bc96657dbe7ea668bd289b4e1478f9"
+      },
+      "source_xywh": [
+        8,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        1020,
+        72,
+        160,
+        160
+      ],
+      "pixel_sha256": "4ffd9926623ef8adfbc6458a1df1d87002bf9eed7560ad5ff77f0727fd1e8fcb"
+    },
+    {
+      "case": [
+        0,
+        "\"illuminated-platform-boundary\""
+      ],
+      "row_label": "V104",
+      "model_label": "V104",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-8e639440a8b598f2.png",
+        "sha256": "fc8baa18ed013dd5dad70b97333ae4a605bc96657dbe7ea668bd289b4e1478f9"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        1020,
+        256,
+        160,
+        160
+      ],
+      "pixel_sha256": "f490ffda63dcb3cdb461a97d0b69ff69b2c65f264d0215b90b30ed991bcda499"
+    },
+    {
+      "case": [
+        0,
+        "\"illuminated-platform-boundary\""
+      ],
+      "row_label": "RawNIND-half",
+      "model_label": "RawNIND-half",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-47efbd3d846908e4.png",
+        "sha256": "97b97bafd814ac8456b30b25b722682b29bb8883a58b4ad437841d152b0fc6ba"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        1020,
+        440,
+        160,
+        160
+      ],
+      "pixel_sha256": "225061a011810781a4b82c6492713f4e469901b623d086f97859b0177eaf2cf0"
+    },
+    {
+      "case": [
+        0,
+        "\"illuminated-platform-boundary\""
+      ],
+      "row_label": "RawNIND-preup",
+      "model_label": "RawNIND-preup",
+      "part": 1,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-0459f9603d64adff.png",
+        "sha256": "f43202cf0d49d2f8c71ec1ef5ce36e673a145e97a27387039e72b5fd295e4224"
+      },
+      "source_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        1020,
+        624,
+        160,
+        160
+      ],
+      "pixel_sha256": "0fb270e47f9bb015585ba7542efec8b7f4c6fb80665e49f68877bdacde549abd"
+    },
+    {
+      "case": [
+        0,
+        "\"illuminated-platform-boundary\""
+      ],
+      "row_label": "ISO100 ref (not GT)",
+      "model_label": "V104",
+      "part": 2,
+      "image": {
+        "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/native-review/crop-8e639440a8b598f2.png",
+        "sha256": "fc8baa18ed013dd5dad70b97333ae4a605bc96657dbe7ea668bd289b4e1478f9"
+      },
+      "source_xywh": [
+        344,
+        24,
+        160,
+        160
+      ],
+      "board_xywh": [
+        1020,
+        808,
+        160,
+        160
+      ],
+      "pixel_sha256": "bd24bd83f825902aa1a23a06814d955daa2ce580b35191772185d2ab01761770"
+    }
+  ],
+  "scope": "Saved RGB8 preview PNG rearrangement only. Every cell is an unchanged native160px square; shared metadata and noisy/reference pixels match across methods. Recorded checkpoint hashes are retained, not rehashed here. No inference, new score, quality finding, training or promotion. Manual review remains required."
+}

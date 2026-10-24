@@ -46,6 +46,12 @@ individual hairs remain soft at high noise. These four selected sources and
 one noise draw per case do not establish broad photographic or real-camera quality.
 More training and changed data are coupled, so this does not isolate a corpus effect.
 
+The additional [released RawNIND pre-upsampled comparison](rawnind-variants.md)
+now improves all 12 material cases over the half-resolution reference, with
+ISO12800 mean 27.11000→27.59760 dB. V104 remains higher at 33.49300 dB on those
+same four sources. Its linked native triplets and six GFX regions retain this
+stronger comparator alongside the earlier half-resolution evidence.
+
 ![V102,V104 and RawNIND at the ISO100 prior, native160 cells](images/detail-v102-v104/iso100-prior/photo-comparison.png)
 
 [ISO100 source/ROI/weights/noise/display metadata](images/detail-v102-v104/iso100-prior/manifest.json) ·

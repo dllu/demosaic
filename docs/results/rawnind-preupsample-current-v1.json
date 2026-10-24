@@ -1,0 +1,901 @@
+{
+  "status": "completed-genuine-RawNIND-preupsample-pilot-and-full-development-camera-review",
+  "recorded_local": "2026-10-23T19:13:33.225896-07:00",
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/RawNIND-preupsample-CPU-v1/close.py",
+    "sha256": "24ed9ddd7a646fe59d482a042dc03366ddc200c7672fcd7506f3e99d32be7757"
+  },
+  "pilot_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/RawNIND-preupsample-CPU-v1/plan.json",
+    "sha256": "b8b20c8fa8f00fcac569970acf0cdec842d0ae43618fae8c218f72be336c1769"
+  },
+  "pilot_result": {
+    "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/result.json",
+    "sha256": "ffc0cd9f6cc286fb7584a8008403faaecb2a24133f6a18f7293b643583555a5e"
+  },
+  "pilot_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/RawNIND-preupsample-CPU-v1/audit.json",
+    "sha256": "c5f6db6dc600215785e7ee6b57ef805201c982ba4eea2eec6ad5f9316664b590"
+  },
+  "pilot_functional": {
+    "path": "/mnt/external/demosaic/RawNIND-preupsample-CPU-20261023-v1/functional.json",
+    "sha256": "d3c77932179908dcf5b1d33e4cce0d276897281d2ddccff59c6a9d4018e27a55"
+  },
+  "executed_source_archive": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/RawNIND-preupsample-CPU-v1/executed-source-snapshot.json",
+    "sha256": "176ae3db6611d85908d4d2caee6331d35a0f059ee30236a46deb6ed2f14f193f"
+  },
+  "full_camera_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/RawNIND-preupsample-full-paired-CPU-v1/plan.json",
+    "sha256": "49ba36659f96eac899b136ed0d67dec9e7f96c5b36ce59dc478a089ab2fa11bd"
+  },
+  "full_camera_result": {
+    "path": "/mnt/external/demosaic/RawNIND-preupsample-full-paired-CPU-20261023-v1/result.json",
+    "sha256": "b8cc30abe8785a337681fc2ef932ed25007d23bbe066c4ea3f3b57ba5f82ecb0"
+  },
+  "full_camera_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/RawNIND-preupsample-full-paired-CPU-v1/audit.json",
+    "sha256": "d3bf2e97de52d5f8483d9a381983b10931666f55aa365f8f915c3c8432c79e23"
+  },
+  "identities": {
+    "RawNIND-half": {
+      "state_sha256": "5c656d5054c871d3ec39e8000d69fdcf733728db5c55aa9aefc2695b049a90e9",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/references/rawnind/utnet2-bayer.pt",
+        "sha256": "c1f7de3de24cb12f4803ee65e11cfb467e9a5b80c3cb7126746ef026106c15e0"
+      },
+      "state_tensors": 46,
+      "parameters": 7760748,
+      "preupsample": false,
+      "gain_mode": "cfa-channel",
+      "clip_input": false
+    },
+    "RawNIND-preup": {
+      "state_sha256": "3304b0c69ea2cb84b400597aa501bb6f2ed26ab0809e26068e10bc597605afc3",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/references/rawnind-preupsample-20261023-v1/utnet2-bayer-preupsample.pt",
+        "sha256": "3d8d5fab966f790f4adbaf1786ca1ee81cb027d9cd45220787247b0af99fd814"
+      },
+      "state_tensors": 46,
+      "parameters": 7760451,
+      "preupsample": true,
+      "gain_mode": "cfa-channel",
+      "clip_input": false
+    }
+  },
+  "photo_condition_means": [
+    {
+      "condition": "adc-only",
+      "model": "V104",
+      "sources": 4,
+      "srgb_psnr": 39.49290466308594,
+      "srgb_ssim": 0.9868621677160263
+    },
+    {
+      "condition": "adc-only",
+      "model": "RawNIND-half",
+      "sources": 4,
+      "srgb_psnr": 27.60011339187622,
+      "srgb_ssim": 0.7698703408241272
+    },
+    {
+      "condition": "adc-only",
+      "model": "RawNIND-preup",
+      "sources": 4,
+      "srgb_psnr": 28.134867191314697,
+      "srgb_ssim": 0.787553533911705
+    },
+    {
+      "condition": "iso100-prior",
+      "model": "V104",
+      "sources": 4,
+      "srgb_psnr": 40.804935455322266,
+      "srgb_ssim": 0.9891648590564728
+    },
+    {
+      "condition": "iso100-prior",
+      "model": "RawNIND-half",
+      "sources": 4,
+      "srgb_psnr": 27.595672130584717,
+      "srgb_ssim": 0.7695150226354599
+    },
+    {
+      "condition": "iso100-prior",
+      "model": "RawNIND-preup",
+      "sources": 4,
+      "srgb_psnr": 28.1280779838562,
+      "srgb_ssim": 0.7871004492044449
+    },
+    {
+      "condition": "iso12800-prior",
+      "model": "V104",
+      "sources": 4,
+      "srgb_psnr": 33.492998123168945,
+      "srgb_ssim": 0.9242894053459167
+    },
+    {
+      "condition": "iso12800-prior",
+      "model": "RawNIND-half",
+      "sources": 4,
+      "srgb_psnr": 27.109997749328613,
+      "srgb_ssim": 0.7454124093055725
+    },
+    {
+      "condition": "iso12800-prior",
+      "model": "RawNIND-preup",
+      "sources": 4,
+      "srgb_psnr": 27.597595691680908,
+      "srgb_ssim": 0.7613608986139297
+    }
+  ],
+  "photo_paired_changes": [
+    {
+      "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+      "condition": "adc-only",
+      "preupsample_minus_half": 0.2954730987548828,
+      "V104_minus_preupsample": 10.130088806152344
+    },
+    {
+      "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+      "condition": "adc-only",
+      "preupsample_minus_half": 1.089508056640625,
+      "V104_minus_preupsample": 10.199455261230469
+    },
+    {
+      "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+      "condition": "adc-only",
+      "preupsample_minus_half": 0.46212005615234375,
+      "V104_minus_preupsample": 11.199790954589844
+    },
+    {
+      "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+      "condition": "adc-only",
+      "preupsample_minus_half": 0.2919139862060547,
+      "V104_minus_preupsample": 13.902814865112305
+    },
+    {
+      "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+      "condition": "iso100-prior",
+      "preupsample_minus_half": 0.2953014373779297,
+      "V104_minus_preupsample": 12.44102668762207
+    },
+    {
+      "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+      "condition": "iso100-prior",
+      "preupsample_minus_half": 1.0839252471923828,
+      "V104_minus_preupsample": 11.630069732666016
+    },
+    {
+      "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+      "condition": "iso100-prior",
+      "preupsample_minus_half": 0.45972633361816406,
+      "V104_minus_preupsample": 11.458503723144531
+    },
+    {
+      "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+      "condition": "iso100-prior",
+      "preupsample_minus_half": 0.29067039489746094,
+      "V104_minus_preupsample": 15.17782974243164
+    },
+    {
+      "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+      "condition": "iso12800-prior",
+      "preupsample_minus_half": 0.2784233093261719,
+      "V104_minus_preupsample": 4.109382629394531
+    },
+    {
+      "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+      "condition": "iso12800-prior",
+      "preupsample_minus_half": 1.013681411743164,
+      "V104_minus_preupsample": 7.188478469848633
+    },
+    {
+      "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+      "condition": "iso12800-prior",
+      "preupsample_minus_half": 0.3708648681640625,
+      "V104_minus_preupsample": 3.708078384399414
+    },
+    {
+      "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+      "condition": "iso12800-prior",
+      "preupsample_minus_half": 0.28742218017578125,
+      "V104_minus_preupsample": 8.57567024230957
+    }
+  ],
+  "preupsample_photo_cases_improved_over_half": 12,
+  "V104_photo_cases_improved_over_preupsample": 12,
+  "camera_panel_means": [
+    {
+      "panel": "known",
+      "model": "V102",
+      "sources": 4,
+      "pairs": 8,
+      "crops": 72,
+      "sensor_psnr": 54.2370884153578
+    },
+    {
+      "panel": "known",
+      "model": "V104",
+      "sources": 4,
+      "pairs": 8,
+      "crops": 72,
+      "sensor_psnr": 54.26606183581882
+    },
+    {
+      "panel": "known",
+      "model": "RawNIND-half",
+      "sources": 4,
+      "pairs": 8,
+      "crops": 72,
+      "sensor_psnr": 54.084737936655685
+    },
+    {
+      "panel": "known",
+      "model": "RawNIND-preup",
+      "sources": 4,
+      "pairs": 8,
+      "crops": 72,
+      "sensor_psnr": 54.26067590713501
+    },
+    {
+      "panel": "unseen",
+      "model": "V102",
+      "sources": 5,
+      "pairs": 10,
+      "crops": 90,
+      "sensor_psnr": 53.97177475823296
+    },
+    {
+      "panel": "unseen",
+      "model": "V104",
+      "sources": 5,
+      "pairs": 10,
+      "crops": 90,
+      "sensor_psnr": 53.917003419664184
+    },
+    {
+      "panel": "unseen",
+      "model": "RawNIND-half",
+      "sources": 5,
+      "pairs": 10,
+      "crops": 90,
+      "sensor_psnr": 53.76821577284071
+    },
+    {
+      "panel": "unseen",
+      "model": "RawNIND-preup",
+      "sources": 5,
+      "pairs": 10,
+      "crops": 90,
+      "sensor_psnr": 53.86528146531847
+    }
+  ],
+  "camera_scene_means": [
+    {
+      "panel": "known",
+      "scene": "2pilesofplates",
+      "model": "RawNIND-half",
+      "sensor_psnr": 61.71048948499892
+    },
+    {
+      "panel": "known",
+      "scene": "2pilesofplates",
+      "model": "RawNIND-preup",
+      "sensor_psnr": 61.901274575127495
+    },
+    {
+      "panel": "known",
+      "scene": "2pilesofplates",
+      "model": "V102",
+      "sensor_psnr": 62.42849159240723
+    },
+    {
+      "panel": "known",
+      "scene": "2pilesofplates",
+      "model": "V104",
+      "sensor_psnr": 62.512461980183915
+    },
+    {
+      "panel": "known",
+      "scene": "7D-1",
+      "model": "RawNIND-half",
+      "sensor_psnr": 48.68643124898274
+    },
+    {
+      "panel": "known",
+      "scene": "7D-1",
+      "model": "RawNIND-preup",
+      "sensor_psnr": 48.773827658759224
+    },
+    {
+      "panel": "known",
+      "scene": "7D-1",
+      "model": "V102",
+      "sensor_psnr": 48.88972091674805
+    },
+    {
+      "panel": "known",
+      "scene": "7D-1",
+      "model": "V104",
+      "sensor_psnr": 48.85803582933214
+    },
+    {
+      "panel": "known",
+      "scene": "D60-2",
+      "model": "RawNIND-half",
+      "sensor_psnr": 51.36212370130751
+    },
+    {
+      "panel": "known",
+      "scene": "D60-2",
+      "model": "RawNIND-preup",
+      "sensor_psnr": 51.62278832329644
+    },
+    {
+      "panel": "known",
+      "scene": "D60-2",
+      "model": "V102",
+      "sensor_psnr": 51.470037672254776
+    },
+    {
+      "panel": "known",
+      "scene": "D60-2",
+      "model": "V104",
+      "sensor_psnr": 51.514267179701065
+    },
+    {
+      "panel": "known",
+      "scene": "MuseeL-CopteArch-C500D",
+      "model": "RawNIND-half",
+      "sensor_psnr": 54.57990731133355
+    },
+    {
+      "panel": "known",
+      "scene": "MuseeL-CopteArch-C500D",
+      "model": "RawNIND-preup",
+      "sensor_psnr": 54.74481307135688
+    },
+    {
+      "panel": "known",
+      "scene": "MuseeL-CopteArch-C500D",
+      "model": "V102",
+      "sensor_psnr": 54.160103480021164
+    },
+    {
+      "panel": "known",
+      "scene": "MuseeL-CopteArch-C500D",
+      "model": "V104",
+      "sensor_psnr": 54.17948235405816
+    },
+    {
+      "panel": "unseen",
+      "scene": "LucieB_3apples",
+      "model": "RawNIND-half",
+      "sensor_psnr": 48.97023010253906
+    },
+    {
+      "panel": "unseen",
+      "scene": "LucieB_3apples",
+      "model": "RawNIND-preup",
+      "sensor_psnr": 49.092192331949875
+    },
+    {
+      "panel": "unseen",
+      "scene": "LucieB_3apples",
+      "model": "V102",
+      "sensor_psnr": 49.30312622918023
+    },
+    {
+      "panel": "unseen",
+      "scene": "LucieB_3apples",
+      "model": "V104",
+      "sensor_psnr": 49.35013877020942
+    },
+    {
+      "panel": "unseen",
+      "scene": "LucieB_Coulicoco",
+      "model": "RawNIND-half",
+      "sensor_psnr": 57.53802405463325
+    },
+    {
+      "panel": "unseen",
+      "scene": "LucieB_Coulicoco",
+      "model": "RawNIND-preup",
+      "sensor_psnr": 57.73504575093587
+    },
+    {
+      "panel": "unseen",
+      "scene": "LucieB_Coulicoco",
+      "model": "V102",
+      "sensor_psnr": 57.42547755771213
+    },
+    {
+      "panel": "unseen",
+      "scene": "LucieB_Coulicoco",
+      "model": "V104",
+      "sensor_psnr": 57.219981299506294
+    },
+    {
+      "panel": "unseen",
+      "scene": "LucieB_bedroom_tapestry",
+      "model": "RawNIND-half",
+      "sensor_psnr": 51.17208947075738
+    },
+    {
+      "panel": "unseen",
+      "scene": "LucieB_bedroom_tapestry",
+      "model": "RawNIND-preup",
+      "sensor_psnr": 51.348624759250214
+    },
+    {
+      "panel": "unseen",
+      "scene": "LucieB_bedroom_tapestry",
+      "model": "V102",
+      "sensor_psnr": 51.796775817871094
+    },
+    {
+      "panel": "unseen",
+      "scene": "LucieB_bedroom_tapestry",
+      "model": "V104",
+      "sensor_psnr": 51.79763073391385
+    },
+    {
+      "panel": "unseen",
+      "scene": "LucieB_stick_figurine",
+      "model": "RawNIND-half",
+      "sensor_psnr": 55.769088109334305
+    },
+    {
+      "panel": "unseen",
+      "scene": "LucieB_stick_figurine",
+      "model": "RawNIND-preup",
+      "sensor_psnr": 55.829285091824005
+    },
+    {
+      "panel": "unseen",
+      "scene": "LucieB_stick_figurine",
+      "model": "V102",
+      "sensor_psnr": 56.14084434509277
+    },
+    {
+      "panel": "unseen",
+      "scene": "LucieB_stick_figurine",
+      "model": "V104",
+      "sensor_psnr": 56.120857874552414
+    },
+    {
+      "panel": "unseen",
+      "scene": "LucieB_top_of_Expedit",
+      "model": "RawNIND-half",
+      "sensor_psnr": 55.39164712693956
+    },
+    {
+      "panel": "unseen",
+      "scene": "LucieB_top_of_Expedit",
+      "model": "RawNIND-preup",
+      "sensor_psnr": 55.32125939263238
+    },
+    {
+      "panel": "unseen",
+      "scene": "LucieB_top_of_Expedit",
+      "model": "V102",
+      "sensor_psnr": 55.192649841308594
+    },
+    {
+      "panel": "unseen",
+      "scene": "LucieB_top_of_Expedit",
+      "model": "V104",
+      "sensor_psnr": 55.096408420138886
+    }
+  ],
+  "camera_source_contrasts": [
+    {
+      "panel": "known",
+      "a": "RawNIND-preup",
+      "b": "RawNIND-half",
+      "mean_change_dB": 0.17593797047933002,
+      "source_95_interval": [
+        0.1132435798645055,
+        0.23672490649753009
+      ],
+      "improved_sources": 4,
+      "worsened_sources": 0,
+      "source_changes": [
+        {
+          "scene": "2pilesofplates",
+          "difference_dB": 0.19078509012857836
+        },
+        {
+          "scene": "7D-1",
+          "difference_dB": 0.08739640977648122
+        },
+        {
+          "scene": "D60-2",
+          "difference_dB": 0.2606646219889299
+        },
+        {
+          "scene": "MuseeL-CopteArch-C500D",
+          "difference_dB": 0.16490576002333057
+        }
+      ]
+    },
+    {
+      "panel": "known",
+      "a": "V104",
+      "b": "RawNIND-preup",
+      "mean_change_dB": 0.005385928683809382,
+      "source_95_interval": [
+        -0.4029459953308123,
+        0.43126026789347094
+      ],
+      "improved_sources": 2,
+      "worsened_sources": 2,
+      "source_changes": [
+        {
+          "scene": "2pilesofplates",
+          "difference_dB": 0.6111874050564197
+        },
+        {
+          "scene": "7D-1",
+          "difference_dB": 0.0842081705729143
+        },
+        {
+          "scene": "D60-2",
+          "difference_dB": -0.10852114359537524
+        },
+        {
+          "scene": "MuseeL-CopteArch-C500D",
+          "difference_dB": -0.5653307172987212
+        }
+      ]
+    },
+    {
+      "panel": "known",
+      "a": "V102",
+      "b": "RawNIND-preup",
+      "mean_change_dB": -0.023587491777206537,
+      "source_95_interval": [
+        -0.40955887900458166,
+        0.3572251001993827
+      ],
+      "improved_sources": 2,
+      "worsened_sources": 2,
+      "source_changes": [
+        {
+          "scene": "2pilesofplates",
+          "difference_dB": 0.5272170172797317
+        },
+        {
+          "scene": "7D-1",
+          "difference_dB": 0.115893257988823
+        },
+        {
+          "scene": "D60-2",
+          "difference_dB": -0.1527506510416643
+        },
+        {
+          "scene": "MuseeL-CopteArch-C500D",
+          "difference_dB": -0.5847095913357165
+        }
+      ]
+    },
+    {
+      "panel": "unseen",
+      "a": "RawNIND-preup",
+      "b": "RawNIND-half",
+      "mean_change_dB": 0.09706569247775718,
+      "source_95_interval": [
+        0.006552251180015389,
+        0.17381523980034502
+      ],
+      "improved_sources": 4,
+      "worsened_sources": 1,
+      "source_changes": [
+        {
+          "scene": "LucieB_3apples",
+          "difference_dB": 0.12196222941081203
+        },
+        {
+          "scene": "LucieB_Coulicoco",
+          "difference_dB": 0.19702169630262034
+        },
+        {
+          "scene": "LucieB_bedroom_tapestry",
+          "difference_dB": 0.17653528849283617
+        },
+        {
+          "scene": "LucieB_stick_figurine",
+          "difference_dB": 0.060196982489699735
+        },
+        {
+          "scene": "LucieB_top_of_Expedit",
+          "difference_dB": -0.07038773430718237
+        }
+      ]
+    },
+    {
+      "panel": "unseen",
+      "a": "V104",
+      "b": "RawNIND-preup",
+      "mean_change_dB": 0.05172195434570455,
+      "source_95_interval": [
+        -0.29569430881076075,
+        0.34782079060872634
+      ],
+      "improved_sources": 3,
+      "worsened_sources": 2,
+      "source_changes": [
+        {
+          "scene": "LucieB_3apples",
+          "difference_dB": 0.25794643825954466
+        },
+        {
+          "scene": "LucieB_Coulicoco",
+          "difference_dB": -0.5150644514295735
+        },
+        {
+          "scene": "LucieB_bedroom_tapestry",
+          "difference_dB": 0.4490059746636348
+        },
+        {
+          "scene": "LucieB_stick_figurine",
+          "difference_dB": 0.2915727827284087
+        },
+        {
+          "scene": "LucieB_top_of_Expedit",
+          "difference_dB": -0.22485097249349195
+        }
+      ]
+    },
+    {
+      "panel": "unseen",
+      "a": "V102",
+      "b": "RawNIND-preup",
+      "mean_change_dB": 0.1064932929144959,
+      "source_95_interval": [
+        -0.14915097554524692,
+        0.3460709042019303
+      ],
+      "improved_sources": 3,
+      "worsened_sources": 2,
+      "source_changes": [
+        {
+          "scene": "LucieB_3apples",
+          "difference_dB": 0.21093389723035472
+        },
+        {
+          "scene": "LucieB_Coulicoco",
+          "difference_dB": -0.30956819322373974
+        },
+        {
+          "scene": "LucieB_bedroom_tapestry",
+          "difference_dB": 0.4481510586208799
+        },
+        {
+          "scene": "LucieB_stick_figurine",
+          "difference_dB": 0.31155925326876854
+        },
+        {
+          "scene": "LucieB_top_of_Expedit",
+          "difference_dB": -0.12860955132378393
+        }
+      ]
+    }
+  ],
+  "camera_bootstrap": {
+    "resamples": 10000,
+    "seed": 42,
+    "unit": "scene after balancing captures and crops",
+    "scope": "Fixed development-source variation, not training-seed uncertainty or external-model generalization."
+  },
+  "independent_primary_rows_rebuilt": 376,
+  "input_only_CFA_gain_normal_equations_checked": 1104,
+  "pilot_maximum_independent_PSNR_discrepancies": {
+    "linear_psnr": 3.005167030778466e-06,
+    "srgb_psnr": 3.7646315362849236e-06,
+    "sensor_psnr": 3.3394563274669053e-06
+  },
+  "full_camera_maximum_independent_primary_PSNR_discrepancy": 4.264352227778545e-06,
+  "original_half_full_camera_CPU_vs_CUDA_parity": {
+    "sensor_psnr": 4.9591064453125e-05,
+    "reference_samples": 0.0,
+    "ahd_srgb_psnr": 1.9073486328125e-05,
+    "ahd_srgb_ssim": 2.0265579223632812e-06,
+    "ahd_chroma_mae": 2.514570951461792e-08,
+    "ahd_gradient_mae": 3.725290298461914e-09
+  },
+  "galleries": [
+    {
+      "kind": "photo",
+      "manifest": {
+        "path": "/home/dllu/proj/demosaic/docs/images/rawnind-preupsample-current/photo/manifest.json",
+        "sha256": "a17c46d69ae476d50bb11893cb30e59c34dd0390935b6e1e7f0acaf2a4c686c6"
+      },
+      "board": {
+        "path": "/home/dllu/proj/demosaic/docs/images/rawnind-preupsample-current/photo/comparison.png",
+        "sha256": "d89088741099a9184eb95c9b3a537942bf728565a98f8c4b269f3d6c5da3f81d"
+      },
+      "board_receipt": {
+        "path": "/home/dllu/proj/demosaic/docs/images/rawnind-preupsample-current/photo/comparison.json",
+        "sha256": "ea6e5bf8258aed4122182b3ab40d1ee96b08ea5c892ccd5d6909d1112fc49395"
+      },
+      "native_triplets": 6,
+      "native_cells_actually_viewed": 10
+    },
+    {
+      "kind": "camera",
+      "manifest": {
+        "path": "/home/dllu/proj/demosaic/docs/images/rawnind-preupsample-current/camera/manifest.json",
+        "sha256": "e314e30a9a0556d81cdb13b921c572f4afa2b881506ec00bfb7c7daac836dcb6"
+      },
+      "board": {
+        "path": "/home/dllu/proj/demosaic/docs/images/rawnind-preupsample-current/camera/comparison.png",
+        "sha256": "ae4066a75e6e401de9b87ad019eeef9af615a456cc51c0d65bd741d5957ed149"
+      },
+      "board_receipt": {
+        "path": "/home/dllu/proj/demosaic/docs/images/rawnind-preupsample-current/camera/comparison.json",
+        "sha256": "dab089756237337af3593c9b2f10cf1e21a09c860b2fbb087a46593ec3e98d75"
+      },
+      "native_triplets": 8,
+      "native_cells_actually_viewed": 12
+    },
+    {
+      "kind": "gfx",
+      "manifest": {
+        "path": "/home/dllu/proj/demosaic/docs/images/rawnind-preupsample-current/gfx/manifest.json",
+        "sha256": "f2e2f22b178f1b6a5c562b42f0a7834baf856ccd9ff4f0b9283eb535e3b0d0c2"
+      },
+      "board": {
+        "path": "/home/dllu/proj/demosaic/docs/images/rawnind-preupsample-current/gfx/comparison.png",
+        "sha256": "00f2a688380827dc36a811f97d31114bfd22c49afc21c3e831e681e80e2581e1"
+      },
+      "board_receipt": {
+        "path": "/home/dllu/proj/demosaic/docs/images/rawnind-preupsample-current/gfx/comparison.json",
+        "sha256": "39138e166af6722f718ac699f0771bf6027301344d30c9702032463731de3176"
+      },
+      "native_triplets": 18,
+      "native_cells_actually_viewed": 30
+    }
+  ],
+  "native_triplets": 32,
+  "native160_panels_rerendered_exactly": 96,
+  "native_board_cells_actually_viewed": 52,
+  "actual_native_findings": "Pre-upsample bark/fur improve modestly over half, but V104 preserves much more fine structure. Both RawNIND variants smooth the selected dark Canon fields more than V104 and have higher measured-CFA scores there. On GFX, pre-upsample is slightly less coarse than half around some sign/rail structures, but foliage remains soft and mesh less regular than V104; saturated-light detail remains weak. No broad visual winner or exact GFX GT.",
+  "source_provenance": {
+    "publisher_repository": {
+      "path": "/home/dllu/proj/demosaic/.cache/research/current-comparators-20261023-v1/rawnind-head.json",
+      "sha256": "5a6e0edcd81a7eef5019d78c176df2aa99444b409f5044bcd1c0b687dcf82bdc"
+    },
+    "publisher_weight_license": {
+      "path": "/home/dllu/proj/demosaic/.cache/research/current-comparators-20261023-v1/rawnind-README.md",
+      "sha256": "634efc8da0ebc3a94d150c3a50ecca11321d592ee25bf7fb323980446898eeaf"
+    },
+    "publisher_model_definitions": {
+      "path": "/home/dllu/proj/demosaic/.cache/research/current-comparators-20261023-v1/rawnind-graph_denoise_models_definitions.yaml",
+      "sha256": "a5b2aa3876ba05e1903d6bd3d21bed48bc1d7d4edfcef73154faae4e4378ec83"
+    },
+    "publisher_folder_lineage": {
+      "path": "/home/dllu/proj/demosaic/.cache/research/current-comparators-20261023-v1/publisher-folder-lineage.json",
+      "sha256": "dd31a84921fdb209f507fe8dafa70d8b064a8a4448adc2cca3eb71c8cc32d497"
+    },
+    "publisher_models_and_configs": {
+      "path": "/home/dllu/proj/demosaic/.cache/research/current-comparators-20261023-v1/publisher-variant-configs-and-models.json",
+      "sha256": "b6dd04b3ba2513233ca7ae3889e540ca1a14ec21de2acf52792f4dbb6e17a677"
+    },
+    "publisher_preupsample_args": {
+      "path": "/home/dllu/proj/demosaic/.cache/research/current-comparators-20261023-v1/publisher-preupsample-args.yaml",
+      "sha256": "c285bb004e4402b8b12038602f0398eb5d2e1234d07952b6be5077b4310a322e"
+    },
+    "acquisition": {
+      "path": "/home/dllu/proj/demosaic/.cache/research/current-comparators-20261023-v1/preupsample-checkpoint.json",
+      "sha256": "1c9108ad21ac4535d1b053ed25d9c0962478aab64405314e93ee579713b57e7b"
+    },
+    "Drive_metadata": {
+      "path": "/home/dllu/proj/demosaic/.cache/research/current-comparators-20261023-v1/preupsample-drive-metadata.json",
+      "sha256": "06fad0a244c70d9e26aea74b5bf46210afc076482f9fb01d4fc9604363b1b195"
+    },
+    "current_darktable_package_source": {
+      "path": "/home/dllu/proj/demosaic/.cache/research/current-comparators-20261023-v1/darktable-source-receipt.json",
+      "sha256": "5cbf4d598cc2fa1fc2d399bfcb471030b35b62bb88690e5e5ee7d45c1d6ea17f"
+    },
+    "checkpoint_checksum_scope": "Exact publisher-linked file ID verified through author README Drive folder hierarchy; byte size31057675 verified. SHA256 pins observed downloaded bytes, not a separately published SHA256 claim.",
+    "license": "Publisher source GPL-3.0; weights offered under GPL-3.0 and CC-BY-4.0. Source/weights remain separately cached, not redistributed in this commit."
+  },
+  "new_reference_network_forwards": 378,
+  "new_V104_forwards": 0,
+  "new_training_updates": 0,
+  "RAW_decodes": 0,
+  "CUDA_initialized": false,
+  "frozen_quality_plans_unchanged": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-training-v2/plan.json",
+      "sha256": "bc2d8c81cea1203b10c8cb403e26e7add3de934e4ba50b96c08d31ffc6d2dba5"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-execution-v2/plan.json",
+      "sha256": "9659a7636b7f367c4358722e00629be2a8f5a23447d37dfd9deff75ab680b7b6"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-evaluation-queue-v2/plan.json",
+      "sha256": "a82fc870d9288a80314a70514201b737289e5223fccedbb7a51b07c7d12f6037"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-fullframe-v2/plan.json",
+      "sha256": "1b46067d57c16587573dfe92734d74ba2d5ba0ed6e82a23fbcc3feb9b559e8b0"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-material-queue-v2/plan.json",
+      "sha256": "f51df2254beeded49233a42928cce6e1ae96c2cd355f5acd7e358b27c326c5c5"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/three-camera-V104-CPU-v2/plan.json",
+      "sha256": "9037089448e8624a93d9b5008e5562b8d836583c6bf899277691b4544f068bf5"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-ADC-full427-CPU-v1/plan.json",
+      "sha256": "5ad0e9ae5562a6b3fae79b5ecc68a1254ac44cc8451926468542fecce72ba0d4"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-ADC-photo-review-queue-v1/plan.json",
+      "sha256": "7cb36e6cd861ed6898a012736c3aa94e5ca38bd57b5fc9714fb7eea4af2865c4"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-ADC-texture-CPU-v1/plan.json",
+      "sha256": "99314594e9c67df10b8275332ff5efddcceef6e03d0c1f3107a7e54b1eb523e7"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-conditioning-probe-CPU-v1/plan.json",
+      "sha256": "fb9430c7cf85b8674020a0d941ea52a7d169f9fb0779cf0af50d96dcc2159121"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-GFX-conditioning-CPU-v1/plan.json",
+      "sha256": "e46f4a4eb519c99ac3cb5256c0938a16fb185a77b81c78db41b01532db7b3903"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V104-unseen-adverse-CPU-v2/plan.json",
+      "sha256": "5fc73c2304872a3791a9d441f6b0cd6601871838ee106940eb9c3db87a0fef69"
+    }
+  ],
+  "live_quality_process_handles": [
+    {
+      "run": "loss-scale-training-v2",
+      "role": "controller",
+      "pid": 3426533,
+      "created": 1792795962.1
+    },
+    {
+      "run": "loss-scale-training-v2",
+      "role": "child",
+      "pid": 3426593,
+      "created": 1792795980.02
+    },
+    {
+      "run": "loss-scale-evaluation-queue-v2",
+      "role": "controller",
+      "pid": 3426549,
+      "created": 1792795967.56
+    },
+    {
+      "run": "loss-scale-fullframe-v2",
+      "role": "controller",
+      "pid": 3426555,
+      "created": 1792795971.34
+    },
+    {
+      "run": "loss-scale-material-queue-v2",
+      "role": "controller",
+      "pid": 3426557,
+      "created": 1792795971.61
+    }
+  ],
+  "current_selector_unchanged": true,
+  "recommendation": "Retain the stronger tested pre-upsample RawNIND as an additional quality comparator. Keep historical half-resolution evidence accurately labeled; do not silently substitute its full427 scores. Current positive-noise/training baseline remains V104.",
+  "limitations": [
+    "Four material sources/three noise conditions, not a new full427 reference score. Full camera panels cover4/5 development scenes and72/90 crops; protected16-scene test remains unscored.",
+    "Both RawNIND variants use the same signed/global-ADC/input-only channel-LS contract. Different architecture and training history mean gains are not an isolated capacity ablation.",
+    "External training membership and overlap are unproven; unseen means held out from our training only. Scene-bootstrap intervals do not establish training-seed or broad-camera uncertainty.",
+    "GFX comparison uses512px contexts,not new102MP outputs. Separate ISO100 f5.6 capture and camera AHD are qualitative/auxiliary references,not exact RGB GT.",
+    "Additional publisher variants,including width48,are identified but untested here. This is not an exhaustive model-zoo or SOTA ranking."
+  ],
+  "scope": "Fixed exploratory comparison of genuine RawNIND Bayer half-resolution iter4350000 and pre-upsample iter4320000, both official UtNet2/in_channels4/funit32/LeakyReLU, strict checkpoint states and original source. Same existing noisy observations, global-ADC camera normalization, signed measurements preserved, input-only CFA-channel LS gains, CPU IEEE FP32/nativeB1/two threads. Reuse V104 exact floats, no new V104 forwards/training/default/selector/frozen-queue changes. Score all original12 material cases and4 paired adverse/batch-partner crops; view same two previously selected adverse camera ROIs and all6 cached GFX512 contexts with fixed displays. GFX ISO100 is an independent qualitative reference, no pixelwise score; AHD camera RGB auxiliary, not exact GT. No new RAW/original-HDD read. Separate source/architecture/training histories; this finite pilot cannot establish a global ranking or speed claim."
+}

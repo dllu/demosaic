@@ -26,6 +26,14 @@ unclipped publisher normalization. The independent 1,134-row audit rebuilds
 all seven methods and reproduces every earlier V102 case metric exactly.
 [Source means, case archives, intervals and hashes](results/v104-reviewed-corpus-primary-statistics-v1.json).
 
+The [released pre-upsampled RawNIND comparison](rawnind-variants.md) now adds
+a stronger reference on the same complete 72/90-crop panels: **54.26068/53.86528 dB**.
+It improves eight of nine scene means over the earlier half-resolution
+RawNIND. V104 exceeds this alternative by only .00539/.05172 dB; both
+scene-bootstrap intervals span zero. The new reference uses matched CPU
+IEEE FP32 inputs/calibration, with every legacy RawNIND control checked against
+the earlier CUDA scores. Existing seven-method receipts retain their bytes.
+
 ## Scene changes
 
 | Panel / scene | V104−V102 CFA PSNR, dB |
@@ -48,7 +56,7 @@ selection. These results do not establish broad real-camera superiority.
 
 ## Native comparisons
 
-Rows: noisy Malvar, V102, V104, RawNIND channel, independent AHD reference.
+Rows: noisy Malvar, V102, V104, RawNIND half with channel gain, independent AHD reference.
 Each cell is an unchanged 160×160 sensor-pixel crop with matching coordinates,
 WB, matrix and exposure ×1. Shared noisy/reference pixels match exactly.
 All 20 camera-board cells were viewed at original resolution. V102/V104 remain
@@ -73,10 +81,15 @@ interior, using identical coordinates for every method.
 
 Full 448-interior CFA PSNR for these selected crops:
 
-| Scene | V102 | V104 | RawNIND channel |
-| --- | ---: | ---: | ---: |
-| LucieB_Coulicoco | 57.82471 | 56.98928 | 58.92127 |
-| LucieB_top_of_Expedit | 61.15482 | 60.67192 | 62.08642 |
+| Scene | V102 | V104 | RawNIND half | RawNIND pre-upsampled |
+| --- | ---: | ---: | ---: | ---: |
+| LucieB_Coulicoco | 57.82471 | 56.98928 | 58.92127 | 58.98999 |
+| LucieB_top_of_Expedit | 61.15482 | 60.67192 | 62.08642 | 62.07481 |
+
+The additional RawNIND column comes from the separately validated
+[released-variant study](rawnind-variants.md); its
+[native board](images/rawnind-preupsample-current/camera/comparison.png) retains
+the same previously selected sources, ROIs and shared +2EV display.
 
 The original CUDA losses are −.83543/−.48289dB. CPU replay reproduces primary
 and auxiliary PSNR within 7.63e-6dB; original full-panel metrics remain unchanged.
