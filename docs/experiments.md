@@ -61,8 +61,11 @@ uses the cleaned90,864-source corpus and original V104 EMA/gates. Both add about
 .10dB on full427; V112 improves camera/color over V111 and becomes the current
 baseline. The [primary report](v111-v112-primary-quality.md) and
 [complete review](v112-quality.md) show native strengths and remaining limits.
-The [Small work](small-aligned-training.md) moves to V112; the older idle V113
-plan was superseded before GPU work, preserving its eight actual CPU updates.
+The [completed Small transfer](small-feature-transfer.md) now uses V112 teacher
+targets and cached training features. Photo means remain close, while two dark
+camera crops lose .20–.32dB. Matched Tiny V114 / fitted Small V115 passed eight
+actual CPU updates each and are [queued](small-aligned-training.md) for 20,000
+further updates per arm. The old idle V113 plan and evidence remain preserved.
 
 The source scan covers88,508 training images, with570 actually reviewed and 31
 withheld/excluded. Completed runs used the earlier 24 exclusions; seven more and

@@ -1,46 +1,73 @@
-# Small quality training from the current baseline
+# Matched quality training from V112
 
-**The next Small initializer is being rebased onto V112.** V112 now combines
-higher camera means and much lower ADC color bias with V111-like photo PSNR.
-The earlier V104-derived V113 queue was stopped while still idle, before any
-CUDA or production updates. [Current baseline](v112-quality.md) ·
-[Actual supersession boundary](results/small-aligned-v113-superseded-v1.json).
+**V114 Tiny and V115 fitted Small are queued for matched continuations from
+V112 history.** Both receive 20,000 additional updates, seed 63 and V112's trained
+loss scale. The controller waits for the exact original eight-view evaluation
+and its independent audit to finish before new CUDA work. V112 remains current;
+the queued models have no production updates yet.
 
-## Current next step
+[Plans, actual CPU checks and queue boundary](results/v112-continuations-queued-v1.json) ·
+[V112 baseline](v112-quality.md) · [Completed Small transfer](small-feature-transfer.md).
 
-Reuse the retained Small training features and cached previews from the
-[existing transfer fit](small-feature-transfer.md). Compute new Tiny teacher
-lateral targets from V112, preserving its learned gates and restoration trunk.
-Keep fitting and feature-check sources separate and keep validation, test and
-GFX captures outside fitting. Verify preview normalization before reusing
-features; changing the teacher does not justify repeating the Small encoder
-or source augmentation unnecessarily.
+## Models and budget
 
-Then verify the new serialized initializer and actual optimizer behavior,
-perform native256/B16/BF16 CUDA checks when the original GPU chain releases
-CUDA, and freeze a new explicit training plan from the successful initializer.
-Use V112's cleaned90,864-source, zero-PSF, weak-detail/contrast recipe and trained
-loss scale. The new fit, GPU check and production run are not yet claimed complete.
-Quality comparisons must retain source budgets, native triplets, camera/color
-and standing GFX evidence, with accurate reference labels.
+| Arm | Initialization | New production updates |
+| --- | --- | ---: |
+| V114 Tiny | All 91 V112 EMA tensors and official frozen Tiny encoder | 20,000 |
+| V115 Small | V112 trunk/gates with fixed 64-source lateral fit and official frozen Small encoder | 20,000 |
 
-## Preserved implementation evidence
+Small changes eight lateral tensors; the other 83 EMA tensors and all three
+learned fusion gates remain exact to V112. Its initializer records inherited
+step 20000 and zero new joint updates. Sixteen separate training sources check
+the feature fit; validation, test and GFX do not enter fitting.
 
-The earlier V104-derived fit changes eight lateral tensors and keeps83 EMA
-tensors and all three nonzero learned gates exact. It uses64 training sources
-for fitting and16 different training sources for feature checking. Its inherited
-step20000 records V104 history and zero new joint updates.
+Both use the same cleaned 90,864-source corpus, reviewed low-contrast ROIs, zero
+optical PSFs, photographic contrast and weak-detail recipe. Training uses
+native 256/B16/BF16, LR 1e-5 with 200 warmup updates, Charbonnier epsilon .0003,
+fresh AdamW/EMA and deterministic per-step data seeding. Seed 63 supplies new
+draws relative to V112's seed 62 continuation. Total new production budget is
+40,000 updates. Completed V112 is a reference; V114 supplies the matched
+extra-training control for V115.
 
-Eight actual discarded CPU64/B1/FP32 forward/backward/AdamW/EMA updates pass.
-All91 initial EMA tensors match the fitted checkpoint; all89 fresh Adam states
-reach step8, with finite model/EMA/Adam and no gradients in the frozen official
-Small encoder. Every actual input/domain/step/LR matches V111's earlier CPU
-check. [Original source, recipe and CPU evidence](results/small-aligned-training-queued-v1.json).
-These are implementation results, not trained Small quality or timing results.
+[V114 recipe](../configs/quality-v112-tiny-continuation-v114.yaml) ·
+[V115 recipe](../configs/quality-v112-small-aligned-v115.yaml).
+This compares the fitted larger-encoder transfer method with an equal-budget
+Tiny continuation. The feature fit is an additional intervention.
 
-The original V113 recipe, prospective sources, controller log/terminal status
-and CPU checkpoint remain preserved. Only its verified waiting controller was
-stopped; original GPU evaluation/export/dihedral/audit owners were untouched.
-The recorded terminal KeyboardInterrupt is an intentional planning change,
-not a numerical failure or automatic retry. The older zero-gate capacity
-preparations also remain preserved and unlaunched.
+## Completed implementation checks
+
+Each arm passed eight actual CPU 64/B1/FP32 forward/backward/AdamW/EMA updates.
+All 91 initial EMA tensors match its explicit parent, all 89 fresh Adam states
+reach step 8, and model/EMA/Adam remain finite. Both official encoders stay frozen
+with no gradients. All eight actual input hashes, domains, steps and learning
+rates match between arms. Those steps cover paired, native and Commons data.
+Source archives are identical. These sixteen updates are discarded; the
+controller adopts their receipts without repeating them.
+
+Execution order is CUDA check V114, CUDA check V115, production V114, then V115.
+Both CUDA checks are eight discarded updates at native 256/B16/BF16. Production
+starts fresh from its explicit initializer; its first output/loss must match
+its own successful CUDA check. The worker checks optimizer/forward counts,
+frozen encoder identity, finite state and the recorded input schedule. Small's
+logged inputs/domains/LRs must match Tiny's eight CUDA rows and 801 production
+rows. Unlogged production inputs are not independently verified.
+
+## Queue and quality review
+
+The queue binds the original audit owner's PID/creation time, plan and successful
+terminal receipt. Earlier owned GPU processes must exit. It observes 48GiB
+available RAM, a 24GiB model memory quota, 248GiB free external space before each
+new phase and a 240GiB runtime reserve. These are prospective limits; the earlier
+workflow's frozen reserve remains unchanged. Failures preserve attempted work,
+sources and logs and stop without automatic retry.
+
+Endpoint evaluation must compare V112, matched Tiny and fitted Small on complete
+photo/camera/analytic panels. Publish at least two native noisy / denoised /
+exact synthetic GT triplets plus standing GFX foliage/fence and other regions
+with accurate reference labels. Document useful progress and weaknesses directly,
+without a study-specific significance gate freezing implementation or examples.
+Quality precedes speed.
+
+The [old V104-derived CPU check and V113 plan](results/small-aligned-training-queued-v1.json)
+and [intentional idle supersession](results/small-aligned-v113-superseded-v1.json)
+remain preserved. They have no production CUDA updates and are not resumed.

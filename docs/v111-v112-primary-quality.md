@@ -89,9 +89,9 @@ useful results.
 
 The [stronger RawNIND reference](rawnind-variants.md) remains close on measured
 camera means and has a [complete GFX comparison](rawnind-fullframe.md).
-Broad real-camera superiority is still unachieved. The [Small training work](small-aligned-training.md) is moving to V112. Its
-older idle V113 plan was superseded before GPU work; no trained Small quality
-result is claimed.
+Broad real-camera superiority is still unachieved. The [Small transfer](small-feature-transfer.md)
+now uses V112; matched Tiny/Small continuations passed actual CPU updates and
+are [queued](small-aligned-training.md). No trained Small quality result is claimed.
 
 The scalar review runs no neural inference. Original nine-method coverage and
 summary arithmetic pass; all24,808 earlier V102/V104 case-metric rows replay

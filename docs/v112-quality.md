@@ -88,12 +88,12 @@ The separately preserved [V104/V111/V112 context gallery](images/v112-quality/gf
 contains the earlier512px-context observations. Broad real-camera superiority
 is still unachieved.
 
-The [larger-encoder training work](small-aligned-training.md) is moving to V112.
-The idle V113 preparation was superseded before any CUDA or production updates;
-its successful CPU evidence and source remain preserved. A new Small fit will
-reuse retained training features and cached previews before fresh optimizer/
-CUDA checks and a new explicit training plan. V104/sites and V102 remain useful
-separate alternatives; the100MP/10s target remains open.
+The [larger-encoder transfer](small-feature-transfer.md) now uses V112 teacher
+targets and retained Small training features/previews. Matched Tiny/Small
+continuations passed actual CPU optimizer checks and are [queued](small-aligned-training.md)
+for 20,000 further updates each. Trained quality remains pending; the old idle
+V113 plan and evidence remain preserved. V104/sites and V102 remain useful
+alternatives; the 100MP/10s target remains open.
 
 Photo attribution: [Derek Ramsey, bark](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
 [CC BY-SA2.5](https://creativecommons.org/licenses/by-sa/2.5/), and

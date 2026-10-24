@@ -17,9 +17,9 @@ remains weak. Complete102MP exports and their167.51s FP32 observation are verifi
 The [fixed-output gradient diagnostic](loss-smoothing-detail.md) motivated this
 trained comparison without predicting its outcome. The smaller scale repairs
 the large ADC tail here, but does not restore finer carriers. The
-[Small training work](small-aligned-training.md) is now moving to V112; the idle
-V113 preparation was superseded before GPU work. Original source, receipts,
-CPU checks and earlier zero-gate capacity preparations remain preserved.
+[Small transfer](small-feature-transfer.md) now uses V112. Matched V114 Tiny and
+V115 fitted Small passed actual CPU updates and are [queued](small-aligned-training.md)
+for equal further training. The idle V113 plan and earlier evidence remain preserved.
 
 ## Matched recipes
 

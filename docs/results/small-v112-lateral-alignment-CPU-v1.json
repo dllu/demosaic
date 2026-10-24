@@ -1,0 +1,773 @@
+{
+  "recorded_local": "2026-10-24T04:36:59.791115-07:00",
+  "publisher": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-V112-alignment-CPU-v1/publish-v1.py",
+    "sha256": "8e36dcfa42ece3435032f69839c8da53e13686a7ef3c1512937c91b8d61eac8f"
+  },
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-V112-alignment-CPU-v1/plan-v2.json",
+    "sha256": "a536785f402cb4ec5029a849632cec1ca2d0e60fd886ce36aa1ae6fa7e126fa7"
+  },
+  "execution": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-V112-alignment-CPU-v1/execution-v2.json",
+    "sha256": "05680874e6fae626f99bbc05b79e657fa77fcc8b709ce9693f8c28971a8a17a6"
+  },
+  "result": {
+    "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/result.json",
+    "sha256": "118eb6a00b7ec315091d48009d3d405a158cea49d56530bd7e89299633d5e180"
+  },
+  "numeric_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-V112-alignment-CPU-v1/audit-v1.json",
+    "sha256": "cd6395e52587b7a47c744ce49877bdeaae5c3184d2054dd0bf67a8f99921dc67"
+  },
+  "native": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-V112-alignment-CPU-v1/native-v1.json",
+    "sha256": "e2dc7b99b2b80f4fbb14900b6bc0534d1451285da609803ec8b9a8a44c380f76"
+  },
+  "parent": {
+    "path": "/mnt/external/demosaic/models/v112-final20000.pt",
+    "sha256": "21c3cca8370df21e3412f9ccbf441c35afcfad8fd03174c7727f4f88874783b1"
+  },
+  "derived_checkpoint": {
+    "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/Small-aligned-from-V112.pt",
+    "sha256": "6b9a863e43ce17594a629440a86388bff93b92b1df33d05c409bd2678cc323e6"
+  },
+  "Small_backbone": {
+    "model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+    "revision": "421020015aa4266363db803b6049a529999afb1e",
+    "numeric_sha256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14"
+  },
+  "feature_fit": {
+    "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/feature-fit.json",
+    "sha256": "0d60479aeda055dc5d6b9e2bf61a86f3163beec15fc530d18652e39f2bb45a3d"
+  },
+  "feature_check": [
+    {
+      "stage": 0,
+      "input_channels": 96,
+      "output_channels": 64,
+      "scores": {
+        "fit": {
+          "samples": 16384,
+          "target_RMS": 0.16414900442371705,
+          "blind_error_RMS": 0.16602620454607342,
+          "aligned_error_RMS": 0.0389605035105079
+        },
+        "feature-check": {
+          "samples": 4096,
+          "target_RMS": 0.16164199374064733,
+          "blind_error_RMS": 0.16392601191747125,
+          "aligned_error_RMS": 0.03978446576791248
+        }
+      }
+    },
+    {
+      "stage": 1,
+      "input_channels": 192,
+      "output_channels": 64,
+      "scores": {
+        "fit": {
+          "samples": 16384,
+          "target_RMS": 0.11006027289603619,
+          "blind_error_RMS": 0.12102407172969723,
+          "aligned_error_RMS": 0.030066662778647356
+        },
+        "feature-check": {
+          "samples": 4096,
+          "target_RMS": 0.10886706240837923,
+          "blind_error_RMS": 0.12047483482248467,
+          "aligned_error_RMS": 0.031205844359520042
+        }
+      }
+    },
+    {
+      "stage": 2,
+      "input_channels": 384,
+      "output_channels": 64,
+      "scores": {
+        "fit": {
+          "samples": 16384,
+          "target_RMS": 0.466182526842099,
+          "blind_error_RMS": 2.9049305484624277,
+          "aligned_error_RMS": 0.3221886049383036
+        },
+        "feature-check": {
+          "samples": 4096,
+          "target_RMS": 0.4551796009431366,
+          "blind_error_RMS": 2.8912163890676017,
+          "aligned_error_RMS": 0.36134463131133615
+        }
+      }
+    },
+    {
+      "stage": 3,
+      "input_channels": 768,
+      "output_channels": 64,
+      "scores": {
+        "fit": {
+          "samples": 4096,
+          "target_RMS": 0.34975347726073347,
+          "blind_error_RMS": 0.36043093615108734,
+          "aligned_error_RMS": 0.15023106233307731
+        },
+        "feature-check": {
+          "samples": 1024,
+          "target_RMS": 0.3478692868242811,
+          "blind_error_RMS": 0.3582341210857654,
+          "aligned_error_RMS": 0.3655501261141003
+        }
+      }
+    }
+  ],
+  "photo": [
+    {
+      "condition": "adc-only",
+      "unique_sources": 4,
+      "metrics": {
+        "Tiny-V112": {
+          "linear_psnr": 46.186951637268066,
+          "srgb_psnr": 39.740859031677246,
+          "chroma_mae": 0.005416043975856155,
+          "gradient_mae": 0.009239462437108159
+        },
+        "Small-aligned": {
+          "linear_psnr": 46.18778133392334,
+          "srgb_psnr": 39.72744846343994,
+          "chroma_mae": 0.005422718822956085,
+          "gradient_mae": 0.009237875696271658
+        }
+      },
+      "Small_minus_Tiny": {
+        "linear_psnr": 0.0008296966552734375,
+        "srgb_psnr": -0.013410568237304688,
+        "chroma_mae": 6.674847099930048e-06,
+        "gradient_mae": -1.5867408365011215e-06
+      }
+    },
+    {
+      "condition": "iso100-prior",
+      "unique_sources": 4,
+      "metrics": {
+        "Tiny-V112": {
+          "linear_psnr": 46.28666400909424,
+          "srgb_psnr": 40.90266418457031,
+          "chroma_mae": 0.004843579197768122,
+          "gradient_mae": 0.008220357238315046
+        },
+        "Small-aligned": {
+          "linear_psnr": 46.29085159301758,
+          "srgb_psnr": 40.90231990814209,
+          "chroma_mae": 0.004843712435103953,
+          "gradient_mae": 0.008213895314838737
+        }
+      },
+      "Small_minus_Tiny": {
+        "linear_psnr": 0.004187583923339844,
+        "srgb_psnr": -0.00034427642822265625,
+        "chroma_mae": 1.332373358309269e-07,
+        "gradient_mae": -6.461923476308584e-06
+      }
+    },
+    {
+      "condition": "iso12800-prior",
+      "unique_sources": 4,
+      "metrics": {
+        "Tiny-V112": {
+          "linear_psnr": 38.482110023498535,
+          "srgb_psnr": 33.5116548538208,
+          "chroma_mae": 0.00597668212139979,
+          "gradient_mae": 0.0202507785288617
+        },
+        "Small-aligned": {
+          "linear_psnr": 38.4846134185791,
+          "srgb_psnr": 33.51078176498413,
+          "chroma_mae": 0.0059827519580721855,
+          "gradient_mae": 0.020239078672602773
+        }
+      },
+      "Small_minus_Tiny": {
+        "linear_psnr": 0.0025033950805664062,
+        "srgb_psnr": -0.0008730888366699219,
+        "chroma_mae": 6.069836672395468e-06,
+        "gradient_mae": -1.1699856258928776e-05
+      }
+    }
+  ],
+  "camera": [
+    {
+      "key": "camera-0",
+      "scene": "LucieB_Coulicoco",
+      "sensor_psnr": {
+        "Tiny-V112": 57.11509359665763,
+        "Small-aligned": 56.91244517061689
+      },
+      "Small_minus_Tiny": -0.20264842604073863
+    },
+    {
+      "key": "camera-1",
+      "scene": "LucieB_top_of_Expedit",
+      "sensor_psnr": {
+        "Tiny-V112": 60.97538787806463,
+        "Small-aligned": 60.65846395790801
+      },
+      "Small_minus_Tiny": -0.3169239201566185
+    }
+  ],
+  "color": [
+    {
+      "key": "color-0",
+      "case": {
+        "id": "gray-l0.02",
+        "palette": "gray-l0.02",
+        "source": {
+          "id": "gray-l0.02",
+          "hue_degrees": null,
+          "saturation": 0.0,
+          "peak": 0.02,
+          "linear_srgb": [
+            0.02,
+            0.02,
+            0.02
+          ]
+        },
+        "condition": {
+          "name": "adc-only",
+          "shot": 0.0,
+          "read": 0.0,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/gray-l0.02-adc-only-RGGB.npz",
+        "sha256": "ced93dc5fba63e0805a1fad5f134013222b76a2e4f059c1b97fd787005f688e1",
+        "target_camera_RGB": [
+          0.010000000707805157,
+          0.020000001415610313,
+          0.013333332724869251
+        ],
+        "draws_per_pattern": 1
+      },
+      "max_abs_channel_mean_bias_DN16": {
+        "Tiny-V112": 0.5153345198839816,
+        "Small-aligned": 0.5048323083494324
+      }
+    },
+    {
+      "key": "color-196",
+      "case": {
+        "id": "h345-s0.50-l0.02",
+        "palette": "h345-s0.50-l0.02",
+        "source": {
+          "id": "h345-s0.50-l0.02",
+          "hue_degrees": 345,
+          "saturation": 0.5,
+          "peak": 0.02,
+          "linear_srgb": [
+            0.02,
+            0.01,
+            0.0125
+          ]
+        },
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h345-s0.50-l0.02-iso12800-prior-RGGB.npz",
+        "sha256": "14288699d7035aad2489024fb2faf3b3c9f029857a53584b32e0afe37905372a",
+        "target_camera_RGB": [
+          0.009562499821186066,
+          0.010625000111758709,
+          0.008500000461935997
+        ],
+        "draws_per_pattern": 1
+      },
+      "max_abs_channel_mean_bias_DN16": {
+        "Tiny-V112": 3.197562852586452,
+        "Small-aligned": 3.2866643071829458
+      }
+    },
+    {
+      "key": "color-392",
+      "case": {
+        "id": "gray-l0.18",
+        "palette": "gray-l0.18",
+        "source": {
+          "id": "gray-l0.18",
+          "hue_degrees": null,
+          "saturation": 0.0,
+          "peak": 0.18,
+          "linear_srgb": [
+            0.18,
+            0.18,
+            0.18
+          ]
+        },
+        "condition": {
+          "name": "adc-only",
+          "shot": 0.0,
+          "read": 0.0,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/gray-l0.18-adc-only-RGGB.npz",
+        "sha256": "f8bf3d831dcc4fa9b3c3210b1699d74c3fb7e36329fcdda38c040cbe7d5f19a1",
+        "target_camera_RGB": [
+          0.09000001102685928,
+          0.18000002205371857,
+          0.12000000476837158
+        ],
+        "draws_per_pattern": 1
+      },
+      "max_abs_channel_mean_bias_DN16": {
+        "Tiny-V112": 1.641675102994486,
+        "Small-aligned": 1.9459049463708653
+      }
+    },
+    {
+      "key": "color-787",
+      "case": {
+        "id": "gray-l0.90",
+        "palette": "gray-l0.90",
+        "source": {
+          "id": "gray-l0.90",
+          "hue_degrees": null,
+          "saturation": 0.0,
+          "peak": 0.9,
+          "linear_srgb": [
+            0.9,
+            0.9,
+            0.9
+          ]
+        },
+        "condition": {
+          "name": "adc-only",
+          "shot": 0.0,
+          "read": 0.0,
+          "exposure": 1.0
+        },
+        "pattern": "GBRG",
+        "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/gray-l0.90-adc-only-GBRG.npz",
+        "sha256": "99a427d2576698aa7656316fdf0d4ceaf74c3adeeb196536da3757f2281ad954",
+        "target_camera_RGB": [
+          0.45000001788139343,
+          0.9000000357627869,
+          0.6000000238418579
+        ],
+        "draws_per_pattern": 1
+      },
+      "max_abs_channel_mean_bias_DN16": {
+        "Tiny-V112": 20.78512320800219,
+        "Small-aligned": 22.005214606469963
+      }
+    },
+    {
+      "key": "color-1008",
+      "case": {
+        "id": "h045-s0.98-l0.90",
+        "palette": "h045-s0.98-l0.90",
+        "source": {
+          "id": "h045-s0.98-l0.90",
+          "hue_degrees": 45,
+          "saturation": 0.98,
+          "peak": 0.9,
+          "linear_srgb": [
+            0.9,
+            0.6795,
+            0.018000000000000016
+          ]
+        },
+        "condition": {
+          "name": "adc-only",
+          "shot": 0.0,
+          "read": 0.0,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h045-s0.98-l0.90-adc-only-RGGB.npz",
+        "sha256": "a73c65a1e6c2a207b5de6b10893943b25dd6c97b4ff487fdb2cfc4a46dd85e17",
+        "target_camera_RGB": [
+          0.42243748903274536,
+          0.6574499607086182,
+          0.06345000118017197
+        ],
+        "draws_per_pattern": 1
+      },
+      "max_abs_channel_mean_bias_DN16": {
+        "Tiny-V112": 32.729169354724576,
+        "Small-aligned": 38.344474467322286
+      }
+    },
+    {
+      "key": "color-1151",
+      "case": {
+        "id": "h300-s0.98-l0.90",
+        "palette": "h300-s0.98-l0.90",
+        "source": {
+          "id": "h300-s0.98-l0.90",
+          "hue_degrees": 300,
+          "saturation": 0.98,
+          "peak": 0.9,
+          "linear_srgb": [
+            0.9,
+            0.018000000000000016,
+            0.9
+          ]
+        },
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "GBRG",
+        "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h300-s0.98-l0.90-iso12800-prior-GBRG.npz",
+        "sha256": "b9a16a791719c842dcca71318061489a5ac975beb8f5152ae92b8c9d0b64de3e",
+        "target_camera_RGB": [
+          0.427949994802475,
+          0.10619999468326569,
+          0.5705999732017517
+        ],
+        "draws_per_pattern": 1
+      },
+      "max_abs_channel_mean_bias_DN16": {
+        "Tiny-V112": 66.69402976917335,
+        "Small-aligned": 68.55513784509385
+      }
+    },
+    {
+      "key": "color-1156",
+      "case": {
+        "id": "h315-s0.98-l0.90",
+        "palette": "h315-s0.98-l0.90",
+        "source": {
+          "id": "h315-s0.98-l0.90",
+          "hue_degrees": 315,
+          "saturation": 0.98,
+          "peak": 0.9,
+          "linear_srgb": [
+            0.9,
+            0.018000000000000016,
+            0.6795
+          ]
+        },
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h315-s0.98-l0.90-iso12800-prior-RGGB.npz",
+        "sha256": "6f08684e792ad7c9830d86de8813335b5440d747a802f1b1a932026710116a83",
+        "target_camera_RGB": [
+          0.42243748903274536,
+          0.09517499804496765,
+          0.4383000135421753
+        ],
+        "draws_per_pattern": 1
+      },
+      "max_abs_channel_mean_bias_DN16": {
+        "Tiny-V112": 38.91506873073522,
+        "Small-aligned": 39.387467146787095
+      }
+    },
+    {
+      "key": "color-1175",
+      "case": {
+        "id": "h345-s0.98-l0.90",
+        "palette": "h345-s0.98-l0.90",
+        "source": {
+          "id": "h345-s0.98-l0.90",
+          "hue_degrees": 345,
+          "saturation": 0.98,
+          "peak": 0.9,
+          "linear_srgb": [
+            0.9,
+            0.018000000000000016,
+            0.23850000000000002
+          ]
+        },
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "GBRG",
+        "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h345-s0.98-l0.90-iso12800-prior-GBRG.npz",
+        "sha256": "38ce288d65772307a28caa620f55e523a8087e2e9776d6b80fa1045f6b76f54f",
+        "target_camera_RGB": [
+          0.41141247749328613,
+          0.07312499731779099,
+          0.1736999899148941
+        ],
+        "draws_per_pattern": 1
+      },
+      "max_abs_channel_mean_bias_DN16": {
+        "Tiny-V112": 47.087852347246375,
+        "Small-aligned": 50.27151478146552
+      }
+    },
+    {
+      "key": "color-1035",
+      "case": {
+        "id": "h090-s0.98-l0.90",
+        "palette": "h090-s0.98-l0.90",
+        "source": {
+          "id": "h090-s0.98-l0.90",
+          "hue_degrees": 90,
+          "saturation": 0.98,
+          "peak": 0.9,
+          "linear_srgb": [
+            0.459,
+            0.9,
+            0.018000000000000016
+          ]
+        },
+        "condition": {
+          "name": "adc-only",
+          "shot": 0.0,
+          "read": 0.0,
+          "exposure": 1.0
+        },
+        "pattern": "GBRG",
+        "arrays": "/mnt/external/demosaic/evaluation/prospective-color-grid-20261017-v1/h090-s0.98-l0.90-adc-only-GBRG.npz",
+        "sha256": "7e1e809028eeed06a35bed7d1a79d03b51592476af52c27a68a77ad077ff9fea",
+        "target_camera_RGB": [
+          0.22949999570846558,
+          0.8338499665260315,
+          0.05609999969601631
+        ],
+        "draws_per_pattern": 1
+      },
+      "max_abs_channel_mean_bias_DN16": {
+        "Tiny-V112": 50.89439740869129,
+        "Small-aligned": 53.3906242818608
+      }
+    }
+  ],
+  "photo_cases_up": 5,
+  "photo_case_delta_range_dB": [
+    -0.091461181640625,
+    0.06373977661132812
+  ],
+  "actual_forward_counts": {
+    "Tiny_encoder": 82,
+    "Small_encoder": 32,
+    "restoration": 33
+  },
+  "joint_optimizer_updates": 0,
+  "reused_Small_features_and_sampling_positions": 80,
+  "cached_previews_normalized_exactly": 80,
+  "old_V104_targets_replayed_exactly": 320,
+  "Small_feature_replay_sources": 1,
+  "native_board_cells_actually_viewed": 60,
+  "triplets_readback_exact_to_viewed_cells": 2,
+  "viewed_boards": [
+    {
+      "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/native-v1/iso100-prior-0.png",
+      "sha256": "68078e874c447adda68479e78dfdfac1edd868b93a7a00d24305e46ab800ffe0"
+    },
+    {
+      "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/native-v1/iso12800-prior-0.png",
+      "sha256": "966592e55f8e44fb2f5fda155060c72b07bc626ab55507314f0dcbf7fa993646"
+    },
+    {
+      "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/native-v1/camera-0.png",
+      "sha256": "371497621e3bc7209f63b8f79840ddf85782cc1a2ac822e177fa82f7671c28cc"
+    },
+    {
+      "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/native-v1/gfx-0.png",
+      "sha256": "1f7340951cc43e3c0d73811837855ebccf3d5714f683eb0c7a2ff434dbc0d0e8"
+    },
+    {
+      "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/native-v1/gfx-1.png",
+      "sha256": "f5dd522d746f4521e4e15b117246e78a22397d0c2814f21ef001c8d149dbf1a1"
+    },
+    {
+      "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/native-v1/color-0.png",
+      "sha256": "dcf5e9d922305b3f8ee96ba19ffa365e1a7ff05866de3661be6e36751bf1afbb"
+    }
+  ],
+  "viewing_notes": "Tiny/Small appear close on bark/canopy and all six GFX contexts. Fine foliage/sign structure remains soft. The two dark camera crops retain blotchy residuals. Three ADC fields show no large transfer color artifacts. This is a zero-joint-update initializer, not a trained quality improvement.",
+  "assets": [
+    {
+      "source": {
+        "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/native-v1/iso100-prior-0.png",
+        "sha256": "68078e874c447adda68479e78dfdfac1edd868b93a7a00d24305e46ab800ffe0"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-v112-alignment/iso100-prior-0.png",
+        "sha256": "68078e874c447adda68479e78dfdfac1edd868b93a7a00d24305e46ab800ffe0"
+      }
+    },
+    {
+      "source": {
+        "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/native-v1/iso100-prior-0.json",
+        "sha256": "7df71a15dfb00ddf16e4fc5faf2b631a22722c398f50c274c0acacb6ecade88b"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-v112-alignment/iso100-prior-0.json",
+        "sha256": "7df71a15dfb00ddf16e4fc5faf2b631a22722c398f50c274c0acacb6ecade88b"
+      }
+    },
+    {
+      "source": {
+        "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/native-v1/iso12800-prior-0.png",
+        "sha256": "966592e55f8e44fb2f5fda155060c72b07bc626ab55507314f0dcbf7fa993646"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-v112-alignment/iso12800-prior-0.png",
+        "sha256": "966592e55f8e44fb2f5fda155060c72b07bc626ab55507314f0dcbf7fa993646"
+      }
+    },
+    {
+      "source": {
+        "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/native-v1/iso12800-prior-0.json",
+        "sha256": "947253d4eb3249f374a65fd6eaf1f719396939e13435a6055393364b6b6713c6"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-v112-alignment/iso12800-prior-0.json",
+        "sha256": "947253d4eb3249f374a65fd6eaf1f719396939e13435a6055393364b6b6713c6"
+      }
+    },
+    {
+      "source": {
+        "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/native-v1/camera-0.png",
+        "sha256": "371497621e3bc7209f63b8f79840ddf85782cc1a2ac822e177fa82f7671c28cc"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-v112-alignment/camera-0.png",
+        "sha256": "371497621e3bc7209f63b8f79840ddf85782cc1a2ac822e177fa82f7671c28cc"
+      }
+    },
+    {
+      "source": {
+        "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/native-v1/camera-0.json",
+        "sha256": "24ba2b4a9945412e06aba9367a19f5c91ab5c80749185bd9e3dac3b261b91708"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-v112-alignment/camera-0.json",
+        "sha256": "24ba2b4a9945412e06aba9367a19f5c91ab5c80749185bd9e3dac3b261b91708"
+      }
+    },
+    {
+      "source": {
+        "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/native-v1/gfx-0.png",
+        "sha256": "1f7340951cc43e3c0d73811837855ebccf3d5714f683eb0c7a2ff434dbc0d0e8"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-v112-alignment/gfx-0.png",
+        "sha256": "1f7340951cc43e3c0d73811837855ebccf3d5714f683eb0c7a2ff434dbc0d0e8"
+      }
+    },
+    {
+      "source": {
+        "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/native-v1/gfx-0.json",
+        "sha256": "002ca0e424049065e00dbd67425934f83aaa3a5930186a30c434d20618793bc1"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-v112-alignment/gfx-0.json",
+        "sha256": "002ca0e424049065e00dbd67425934f83aaa3a5930186a30c434d20618793bc1"
+      }
+    },
+    {
+      "source": {
+        "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/native-v1/gfx-1.png",
+        "sha256": "f5dd522d746f4521e4e15b117246e78a22397d0c2814f21ef001c8d149dbf1a1"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-v112-alignment/gfx-1.png",
+        "sha256": "f5dd522d746f4521e4e15b117246e78a22397d0c2814f21ef001c8d149dbf1a1"
+      }
+    },
+    {
+      "source": {
+        "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/native-v1/gfx-1.json",
+        "sha256": "6527466042403b0590dac29cc480024a4789468cff3da8551dee045e469d7719"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-v112-alignment/gfx-1.json",
+        "sha256": "6527466042403b0590dac29cc480024a4789468cff3da8551dee045e469d7719"
+      }
+    },
+    {
+      "source": {
+        "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/native-v1/color-0.png",
+        "sha256": "dcf5e9d922305b3f8ee96ba19ffa365e1a7ff05866de3661be6e36751bf1afbb"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-v112-alignment/color-0.png",
+        "sha256": "dcf5e9d922305b3f8ee96ba19ffa365e1a7ff05866de3661be6e36751bf1afbb"
+      }
+    },
+    {
+      "source": {
+        "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/native-v1/color-0.json",
+        "sha256": "a19584dcbfe42ae24d073e476ecc471e3f71b193c5c9369cb5ba971202d12cb9"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-v112-alignment/color-0.json",
+        "sha256": "a19584dcbfe42ae24d073e476ecc471e3f71b193c5c9369cb5ba971202d12cb9"
+      }
+    },
+    {
+      "source": {
+        "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/native-v1/crop-628448e8846878b4.png",
+        "sha256": "21cf345d702a97bde8ab89f34d9ce1e40d5d1f877737833d6bd1aae850e98488"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-v112-alignment/crop-628448e8846878b4.png",
+        "sha256": "21cf345d702a97bde8ab89f34d9ce1e40d5d1f877737833d6bd1aae850e98488"
+      }
+    },
+    {
+      "source": {
+        "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/native-v1/crop-628448e8846878b4.json",
+        "sha256": "915b38ff09862cd910750b8139e9126c7ad36601e3c0b9dc4c0660d91524c09e"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-v112-alignment/crop-628448e8846878b4.json",
+        "sha256": "915b38ff09862cd910750b8139e9126c7ad36601e3c0b9dc4c0660d91524c09e"
+      }
+    },
+    {
+      "source": {
+        "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/native-v1/crop-35279342f776f1e7.png",
+        "sha256": "d16504f95853a23e4534268462c0fa97c17ce0a22346d367ceedeaf72a2dbd34"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-v112-alignment/crop-35279342f776f1e7.png",
+        "sha256": "d16504f95853a23e4534268462c0fa97c17ce0a22346d367ceedeaf72a2dbd34"
+      }
+    },
+    {
+      "source": {
+        "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/native-v1/crop-35279342f776f1e7.json",
+        "sha256": "85d25e19c08ea8ac9337c7b4aa1cac28de334318f25ba0fba70d0c6da437db2b"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/images/small-v112-alignment/crop-35279342f776f1e7.json",
+        "sha256": "85d25e19c08ea8ac9337c7b4aa1cac28de334318f25ba0fba70d0c6da437db2b"
+      }
+    }
+  ],
+  "current_selector_unchanged": {
+    "path": "/home/dllu/proj/demosaic/configs/current-model.json",
+    "sha256": "66c2fff3e56e8ee56656389236b0b8e4f19d15bcce4ab7e6d5b59b50b4a8cfff"
+  },
+  "preserved_pre_execution_failures": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-V112-alignment-CPU-v1/launch-import-failure-v1.json",
+      "sha256": "48b85d578e3ec3e4ee4c5d4805ed93071a37b78452125ced3a491f33aa8a2958"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-V112-alignment-CPU-v1/failure-v1.json",
+      "sha256": "74187abaae4d934ef5cf3009f51d3b0481a5ae80efd78b964af7605e5448b72a"
+    }
+  ],
+  "failure_scope": "Wrong interpreter failed at torch import. First actual worker then rejected manifest indexing before any neural forward. Their sources/logs/claim/empty output remain preserved. Revised worker verifies source IDs. Both failures had zero optimizer/encoder/restoration work.",
+  "scope": "Selected four photos/three conditions, two adverse camera crops, nine palette-condition-CFA cases and six cached GFX contexts. Training-only64-source lateral fit plus16 separate feature-check sources. No full-panel or trained-capacity claim; Tiny photo controls reuse immutable scores/native PNGs; GFX/color controls reuse retained floats."
+}

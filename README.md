@@ -13,8 +13,9 @@ V111 has near-equal photo PSNR; V112 improves camera and color results. Fine
 high-noise texture and real foliage still need work. All seven matched panels
 and complete 102MP exports are verified. FP32 inference/blending takes 167.51s.
 [Primary comparison](docs/v111-v112-primary-quality.md).
-The [larger-encoder work](docs/small-aligned-training.md) is being rebased onto
-V112; the earlier idle V113 plan was superseded before any GPU training.
+The [larger-encoder transfer](docs/small-feature-transfer.md) now starts from
+V112. Matched Tiny/Small continuations passed actual CPU updates and are
+[queued behind the current GPU evaluation](docs/small-aligned-training.md).
 [Current models](docs/current-model.md) · [Source-quality review](docs/incoming-commons-quality.md) ·
 [Historical diary](diary/index.md).
 For explicit zero-shot/read inputs, the [optional V104 sites export](docs/adc-consistency.md)

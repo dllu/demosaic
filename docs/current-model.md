@@ -50,12 +50,12 @@ repair was off in these comparisons.
 
 ## Next architecture work and references
 
-The [Small feature-transfer method](small-feature-transfer.md) preserves learned
-gates through a training-only fit. Its V104-derived initializer passed eight
-actual CPU optimizer updates, but the idle V113 queue was superseded before
-any GPU training after V112's stronger results. [Current rebase and preserved
-evidence](small-aligned-training.md). Reuse cached Small features/previews for
-a V112-teacher fit, then fresh checks and an explicit training budget.
+The [Small feature-transfer method](small-feature-transfer.md) now preserves
+V112's learned gates and trunk through a training-only lateral fit. Photo means
+stay close; two adverse-camera crops remain .20–.32dB worse. Matched V114 Tiny
+and V115 fitted Small continuations passed eight actual CPU updates each and
+are [queued behind the original GPU evaluation/audit](small-aligned-training.md).
+Each receives 20,000 further updates at seed 63. Trained quality remains pending.
 
 Earlier results remain useful and their receipts unchanged:
 [V104](v104-reviewed-corpus-quality.md), [V102/V103](v102-v103-quality-review.md),

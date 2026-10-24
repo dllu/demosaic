@@ -1,12 +1,12 @@
 # Larger frozen ConvNeXt capacity: transfer and common initialization
 
-**Small transfer is being rebased onto the current V112 quality baseline.**
-The existing V104-derived fit keeps learned gates and nearly preserves selected
-photo means; eight actual CPU optimizer updates pass. Its idle V113 queue was
-superseded before GPU work after V112's stronger camera/color results.
-[Current next steps](small-aligned-training.md) ·
-[Preserved fitted initializer and native comparisons](small-feature-transfer.md).
-Joint training and a trained capacity benefit remain unmeasured.
+**Small transfer now starts from the current V112 quality baseline.**
+The completed training-only fit preserves its learned gates and nearly matches
+selected photo means; two adverse-camera crops remain .20–.32dB worse.
+Matched Tiny/Small continuations passed eight actual CPU updates each and are
+[queued behind the original GPU evaluation/audit](small-aligned-training.md).
+[Current fitted initializer and native comparisons](small-feature-transfer.md).
+Production training and a trained capacity benefit remain unmeasured.
 
 The earlier fixed-weight V102 transfer below demonstrates the feature mismatch.
 Resetting three gates gives Tiny and Small exactly matching initial outputs;

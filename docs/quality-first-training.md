@@ -22,12 +22,12 @@ lower ADC tail favor it over V111 despite a.00129dB lower photo mean.
 improve, while4-pixel structure remains nearly absent. Selected native material
 and all six GFX contexts stay visible alongside these limits.
 
-The [Small feature fit](small-feature-transfer.md) and eight actual CPU optimizer
-updates preserve useful learned gates. The idle V104-derived V113 queue was
-superseded before any CUDA/production work so the next experiment can start
-from V112. [Current rebase and preserved evidence](small-aligned-training.md).
-Reuse cached Small features/previews, fit new V112 teacher targets, then verify
-the initializer and actual optimizer/CUDA execution under a fresh plan.
+The [Small feature fit](small-feature-transfer.md) now uses V112 teacher targets
+and retained training previews/Small features. Both Tiny and fitted Small passed
+eight actual CPU optimizer updates with identical input/domain/LR schedules.
+[Matched V114/V115 continuations](small-aligned-training.md) are queued for
+20,000 further updates each after the original GPU evaluation/audit. The idle
+V104-derived V113 plan remains preserved without CUDA/production work.
 
 <a id="active-v104-cleaned-corpus-continuation"></a>
 

@@ -1,0 +1,476 @@
+{
+  "board": {
+    "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/native-v1/camera-0.png",
+    "sha256": "371497621e3bc7209f63b8f79840ddf85782cc1a2ac822e177fa82f7671c28cc"
+  },
+  "cells": [
+    {
+      "row": 0,
+      "column": 0,
+      "label": "Noisy (Malvar)",
+      "ROI_png_xywh": [
+        8,
+        40,
+        160,
+        160
+      ],
+      "pixel_SHA256": "939c8ea7f0eff641f4f750e2f02da29f2bfbaf7c3e3b9b8388fda9d66dc2258f"
+    },
+    {
+      "row": 0,
+      "column": 1,
+      "label": "V112 Tiny",
+      "ROI_png_xywh": [
+        176,
+        40,
+        160,
+        160
+      ],
+      "pixel_SHA256": "1cced2ec91a4e69cc31c5a29cbdc5ed768b11145ab24071ed9d92b7e0e07c530"
+    },
+    {
+      "row": 0,
+      "column": 2,
+      "label": "Small aligned to V112",
+      "ROI_png_xywh": [
+        344,
+        40,
+        160,
+        160
+      ],
+      "pixel_SHA256": "2f08e4f7dcb06a035f0e3d4d550d521cf777fdd2d22e8514da6250b31ed9b43f"
+    },
+    {
+      "row": 0,
+      "column": 3,
+      "label": "AHD ref (not exact GT)",
+      "ROI_png_xywh": [
+        512,
+        40,
+        160,
+        160
+      ],
+      "pixel_SHA256": "f3eb269ac235692989fb9ddcb2d13339e4c7cad8b0c5efd980f3ec7844c237ea"
+    },
+    {
+      "row": 1,
+      "column": 0,
+      "label": "Noisy (Malvar)",
+      "ROI_png_xywh": [
+        8,
+        248,
+        160,
+        160
+      ],
+      "pixel_SHA256": "6a5a3c50d33f978034b1d2f305e74f4b49aadd272ad1377cdf932849bbec521d"
+    },
+    {
+      "row": 1,
+      "column": 1,
+      "label": "V112 Tiny",
+      "ROI_png_xywh": [
+        176,
+        248,
+        160,
+        160
+      ],
+      "pixel_SHA256": "ae1b3b59603d85d5fb838dfcd4abf0ee2e3400a5aea49ab62f727fb4a5f63438"
+    },
+    {
+      "row": 1,
+      "column": 2,
+      "label": "Small aligned to V112",
+      "ROI_png_xywh": [
+        344,
+        248,
+        160,
+        160
+      ],
+      "pixel_SHA256": "74e86a76a1f2bc475d90173da3fc9b43aaa5d227e8e009f81cae47796f98565b"
+    },
+    {
+      "row": 1,
+      "column": 3,
+      "label": "AHD ref (not exact GT)",
+      "ROI_png_xywh": [
+        512,
+        248,
+        160,
+        160
+      ],
+      "pixel_SHA256": "d5a91ece8045680a1aaf1f488286a4bc260e361f3ce05b69f1090286b76ddafc"
+    }
+  ],
+  "rows": [
+    {
+      "key": "camera-0",
+      "labels": [
+        "Noisy (Malvar)",
+        "V112 Tiny",
+        "Small aligned to V112",
+        "AHD ref (not exact GT)"
+      ],
+      "metadata": {
+        "key": "camera-0",
+        "kind": "camera",
+        "input": {
+          "path": "/mnt/external/demosaic/V104-unseen-adverse-CPU-20261023-v2/case0-inputs.npz",
+          "sha256": "c0b6a31075a100d552b4a14921d3ce9ea7f48a4d28e50b14116fe71e7b8027ee"
+        },
+        "input_index": 1,
+        "source_id": null,
+        "condition": null,
+        "source": null,
+        "source_context": null,
+        "real_capture_ROIs": null,
+        "camera_tile": "LucieB_Coulicoco:f1807182ee7fbe2975c478d8228882dc06d69d1624898f28d05f289c8f3ae14f:3348:2756",
+        "parent_checkpoint": {
+          "path": "/mnt/external/demosaic/models/v112-final20000.pt",
+          "sha256": "21c3cca8370df21e3412f9ccbf441c35afcfad8fd03174c7727f4f88874783b1"
+        },
+        "derived_checkpoint": {
+          "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/Small-aligned-from-V112.pt",
+          "sha256": "6b9a863e43ce17594a629440a86388bff93b92b1df33d05c409bd2678cc323e6"
+        },
+        "Small_backbone": {
+          "model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+          "revision": "421020015aa4266363db803b6049a529999afb1e",
+          "numeric_sha256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14"
+        },
+        "source_ROI_xywh": [
+          50,
+          32,
+          160,
+          160
+        ],
+        "reference_ROI_in_retained_array_xywh": [
+          50,
+          32,
+          160,
+          160
+        ],
+        "conditioning": {
+          "shot": 0.0023482592096665538,
+          "read": 0.00017038157420448983,
+          "method": "input-only-Haar-fit",
+          "estimate": {
+            "shot": 0.0023482592096665538,
+            "read": 0.00017038157420448983,
+            "reliable": true,
+            "reason": "fit",
+            "candidate_patches": 4096,
+            "accepted_patches": 1199,
+            "intensity_span": 0.06260512955486772,
+            "reference_intensity": 0.06184215098619461,
+            "reference_variance": 0.0003241711820010096,
+            "shot_interval": [
+              0.0017713892032946148,
+              0.003107752589990377
+            ],
+            "read_interval": [
+              0.000130196057114057,
+              0.00021017072927938582
+            ],
+            "bins": [
+              {
+                "mean": 0.037331704050302505,
+                "variance": 0.00024029890482779592,
+                "patches": 75
+              },
+              {
+                "mean": 0.0426618754863739,
+                "variance": 0.0002583925670478493,
+                "patches": 75
+              },
+              {
+                "mean": 0.04648628085851669,
+                "variance": 0.00027513832901604474,
+                "patches": 75
+              },
+              {
+                "mean": 0.049039408564567566,
+                "variance": 0.00028016348369419575,
+                "patches": 75
+              },
+              {
+                "mean": 0.05116194486618042,
+                "variance": 0.0002882984990719706,
+                "patches": 75
+              },
+              {
+                "mean": 0.05317879468202591,
+                "variance": 0.0003091453108936548,
+                "patches": 75
+              },
+              {
+                "mean": 0.0560268759727478,
+                "variance": 0.000310206669382751,
+                "patches": 75
+              },
+              {
+                "mean": 0.06038716062903404,
+                "variance": 0.0003285295970272273,
+                "patches": 75
+              },
+              {
+                "mean": 0.06320273876190186,
+                "variance": 0.00033291729050688446,
+                "patches": 75
+              },
+              {
+                "mean": 0.06547649204730988,
+                "variance": 0.00033622721093706787,
+                "patches": 75
+              },
+              {
+                "mean": 0.06830255687236786,
+                "variance": 0.00034963031066581607,
+                "patches": 75
+              },
+              {
+                "mean": 0.07187666743993759,
+                "variance": 0.0003632954030763358,
+                "patches": 75
+              },
+              {
+                "mean": 0.07532474398612976,
+                "variance": 0.0003655982727650553,
+                "patches": 75
+              },
+              {
+                "mean": 0.081906259059906,
+                "variance": 0.0003507589572109282,
+                "patches": 75
+              },
+              {
+                "mean": 0.09307220578193665,
+                "variance": 0.00036906631430611014,
+                "patches": 75
+              },
+              {
+                "mean": 0.10986495018005371,
+                "variance": 0.00039619908784516156,
+                "patches": 74
+              }
+            ]
+          }
+        },
+        "white_balance": [
+          [
+            1.00390625,
+            1.0,
+            2.080078125
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              2.0060677528381348,
+              -1.2336652278900146,
+              0.22759754955768585
+            ],
+            [
+              -0.2370671033859253,
+              1.80068838596344,
+              -0.5636212825775146
+            ],
+            [
+              -0.01570664718747139,
+              -0.5551683902740479,
+              1.5708750486373901
+            ]
+          ]
+        ],
+        "display_exposure": 4,
+        "reference": "AHD ref (not exact GT)",
+        "joint_optimizer_updates": 0,
+        "pixel_scale": "1 sensor/evaluation pixel per PNG pixel; no resampling"
+      }
+    },
+    {
+      "key": "camera-1",
+      "labels": [
+        "Noisy (Malvar)",
+        "V112 Tiny",
+        "Small aligned to V112",
+        "AHD ref (not exact GT)"
+      ],
+      "metadata": {
+        "key": "camera-1",
+        "kind": "camera",
+        "input": {
+          "path": "/mnt/external/demosaic/V104-unseen-adverse-CPU-20261023-v2/case1-inputs.npz",
+          "sha256": "dc3c634bcd966074f0a78b9c6f21131cef98a5bfca6c78dad1841835a002e534"
+        },
+        "input_index": 0,
+        "source_id": null,
+        "condition": null,
+        "source": null,
+        "source_context": null,
+        "real_capture_ROIs": null,
+        "camera_tile": "LucieB_top_of_Expedit:5ae631ae691e6ff47354f03d42b1f66c42860fe33912546abd0c1ff4195e12b1:3348:160",
+        "parent_checkpoint": {
+          "path": "/mnt/external/demosaic/models/v112-final20000.pt",
+          "sha256": "21c3cca8370df21e3412f9ccbf441c35afcfad8fd03174c7727f4f88874783b1"
+        },
+        "derived_checkpoint": {
+          "path": "/mnt/external/demosaic/Small-V112-alignment-CPU-20261024-v1-v2/Small-aligned-from-V112.pt",
+          "sha256": "6b9a863e43ce17594a629440a86388bff93b92b1df33d05c409bd2678cc323e6"
+        },
+        "Small_backbone": {
+          "model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+          "revision": "421020015aa4266363db803b6049a529999afb1e",
+          "numeric_sha256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14"
+        },
+        "source_ROI_xywh": [
+          319,
+          100,
+          160,
+          160
+        ],
+        "reference_ROI_in_retained_array_xywh": [
+          319,
+          100,
+          160,
+          160
+        ],
+        "conditioning": {
+          "shot": 0.003040483276502749,
+          "read": 0.00014358315203565782,
+          "method": "input-only-Haar-fit",
+          "estimate": {
+            "shot": 0.003040483276502749,
+            "read": 0.00014358315203565782,
+            "reliable": true,
+            "reason": "fit",
+            "candidate_patches": 4096,
+            "accepted_patches": 1604,
+            "intensity_span": 0.08203720953315496,
+            "reference_intensity": 0.07910807803273201,
+            "reference_variance": 0.0003813649818766862,
+            "shot_interval": [
+              0.0025222901971153028,
+              0.003561307262133541
+            ],
+            "read_interval": [
+              0.00011402846897125931,
+              0.0001781263270090821
+            ],
+            "bins": [
+              {
+                "mean": 0.03709666058421135,
+                "variance": 0.00024783724802546203,
+                "patches": 101
+              },
+              {
+                "mean": 0.04359041899442673,
+                "variance": 0.000269167881924659,
+                "patches": 101
+              },
+              {
+                "mean": 0.05207716301083565,
+                "variance": 0.000299722800264135,
+                "patches": 101
+              },
+              {
+                "mean": 0.058134354650974274,
+                "variance": 0.00031559253693558276,
+                "patches": 101
+              },
+              {
+                "mean": 0.06389525160193443,
+                "variance": 0.0003462829627096653,
+                "patches": 100
+              },
+              {
+                "mean": 0.06854642927646637,
+                "variance": 0.0003587694518500939,
+                "patches": 100
+              },
+              {
+                "mean": 0.07258817553520203,
+                "variance": 0.000370287147234194,
+                "patches": 100
+              },
+              {
+                "mean": 0.07669378817081451,
+                "variance": 0.00038136509829200804,
+                "patches": 100
+              },
+              {
+                "mean": 0.08194912225008011,
+                "variance": 0.000406469902372919,
+                "patches": 100
+              },
+              {
+                "mean": 0.08576557785272598,
+                "variance": 0.0004089059366378933,
+                "patches": 100
+              },
+              {
+                "mean": 0.0900939516723156,
+                "variance": 0.0004343271575635299,
+                "patches": 100
+              },
+              {
+                "mean": 0.09408562630414963,
+                "variance": 0.00045342517842072994,
+                "patches": 100
+              },
+              {
+                "mean": 0.09806341677904129,
+                "variance": 0.00047154800267890096,
+                "patches": 100
+              },
+              {
+                "mean": 0.10254593193531036,
+                "variance": 0.0004781208699569106,
+                "patches": 100
+              },
+              {
+                "mean": 0.10972194001078606,
+                "variance": 0.0004368804511614144,
+                "patches": 100
+              },
+              {
+                "mean": 0.12486057728528976,
+                "variance": 0.0004722416342701763,
+                "patches": 100
+              }
+            ]
+          }
+        },
+        "white_balance": [
+          [
+            0.9140625,
+            1.0,
+            2.39453125
+          ]
+        ],
+        "camera_to_srgb": [
+          [
+            [
+              2.0060677528381348,
+              -1.2336652278900146,
+              0.22759754955768585
+            ],
+            [
+              -0.2370671033859253,
+              1.80068838596344,
+              -0.5636212825775146
+            ],
+            [
+              -0.01570664718747139,
+              -0.5551683902740479,
+              1.5708750486373901
+            ]
+          ]
+        ],
+        "display_exposure": 4,
+        "reference": "AHD ref (not exact GT)",
+        "joint_optimizer_updates": 0,
+        "pixel_scale": "1 sensor/evaluation pixel per PNG pixel; no resampling"
+      }
+    }
+  ]
+}

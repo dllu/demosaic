@@ -91,11 +91,11 @@ also compares V104/V111 with their three fusion gates zeroed on all six contexts
 Native differences remain small and fine foliage/sign detail stays soft; the
 selected photo/camera metrics favor retaining the learned fusion.
 
-The [Small feature-transfer boards](small-feature-transfer.md#color-and-standing-gfx-scene)
-show the same six contexts before and after training-only lateral alignment.
-Alignment removes the blind encoder swap's colored/structural artifacts and
-returns close to V104; foliage/sign detail remains soft. These are 512-pixel
-context results, separate from the complete-frame comparisons.
+The [current Small feature-transfer boards](small-feature-transfer.md#color-and-standing-gfx-scene)
+compare V112 Tiny and the Small initializer aligned to its learned lateral
+outputs on all six contexts. Their appearance is close; foliage/sign detail
+remains soft. These are 512-pixel context results with zero new joint updates,
+separate from the complete-frame comparisons and pending trained Small results.
 
 ![Six GFX contexts: noisy, V104, V111, RawNIND pre-upsampled and separate ISO100 reference](images/v111-early-gfx/comparison.png)
 
