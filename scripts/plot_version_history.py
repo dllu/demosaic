@@ -96,6 +96,7 @@ STUDIES = [
         [104],
         "v104-reviewed-corpus-quality.md",
     ),
+    ("v111-camera-complete-v1.json", [111], "v111-early-quality.md"),
 ]
 METRICS = {
     ("full427", "photo", "srgb_psnr"): "photo_srgb_PSNR",
@@ -105,6 +106,7 @@ METRICS = {
 # Each missing metric must be intentional; older studies still require all panels.
 REQUIRED_METRICS_BY_STUDY = {
     "v104-reviewed-corpus-photo-statistics-v1.json": ("photo_srgb_PSNR",),
+    "v111-camera-complete-v1.json": ("known_CFA_PSNR", "unseen_CFA_PSNR"),
 }
 
 
@@ -276,6 +278,11 @@ def main():
         help="Recollect archived report references (requires the original local archives).",
     )
     parser.add_argument(
+        "--data",
+        type=Path,
+        help="History JSON in docs/results; defaults to the current registry, with the historical seed as fallback.",
+    )
+    parser.add_argument(
         "--preferred-version",
         type=int,
         help="Explicit documented recommendation while an active run pins an older selector.",
@@ -286,7 +293,15 @@ def main():
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    destination = REPO / "docs/results/version-PSNR-history.json"
+    destination = REPO / "docs/results/version-PSNR-history-current.json"
+    if args.data is not None:
+        destination = args.data if args.data.is_absolute() else REPO / args.data
+    elif not args.refresh_sources and not destination.exists():
+        destination = REPO / "docs/results/version-PSNR-history.json"
+    if destination.resolve().parent != (REPO / "docs/results").resolve():
+        parser.error("--data must name a JSON in this repository's docs/results directory")
+    if destination.suffix != ".json":
+        parser.error("--data must name a JSON file")
     selected = json.loads(MODEL_SELECTION.read_text())["preferred_version"]
     preferred = selected if args.preferred_version is None else args.preferred_version
     if args.refresh_sources:
@@ -398,7 +413,11 @@ def main():
                 ha=alignment,
                 fontsize=8,
             )
-    axes[0, 0].set_title(f"All {len(points)} selected endpoints", loc="left", fontsize=11)
+    axes[0, 0].set_title(
+        f"Photo: {len(metric_points(points, 'photo_srgb_PSNR')[0])} completed endpoints",
+        loc="left",
+        fontsize=11,
+    )
     axes[0, 1].set_title(
         f"Measured CFA: {len(metric_points(points, 'known_CFA_PSNR')[0])} known / "
         f"{len(metric_points(points, 'unseen_CFA_PSNR')[0])} unseen endpoints",
@@ -433,6 +452,16 @@ def main():
             f"| V{p['version']} / {p['endpoint']} | {photo_value} | {known_value} | {unseen_value} | [Review]({p['report']}) |"
         )
     original = next(p for p in points if p["version"] == 43)
+    pending_photo = [p for p in points if "photo_srgb_PSNR" not in p]
+    pending_note = ""
+    if pending_photo:
+        pending_note = (
+            "\n\nCompleted camera panels with pending full-photo results: "
+            + ", ".join(f"[V{p['version']}]({p['report']})" for p in pending_photo)
+            + ". Selected material means are not substituted for full427 scores."
+        )
+    data_link = destination.relative_to(REPO / "docs").as_posix()
+    csv_link = destination.with_suffix(".csv").relative_to(REPO / "docs").as_posix()
     (REPO / "docs/performance-history.md").write_text(
         f"# PSNR history\n\nV{preferred} is the fully evaluated inference reference, with "
         f"{reference['photo_srgb_PSNR']:.5f} dB photographic PSNR and "
@@ -443,9 +472,10 @@ def main():
         "are in the [model guide](current-model.md). A version names an experiment, "
         "not a training step.\n\n![PSNR versus model version](images/version-PSNR-history.png)\n\n"
         + result["description"]
+        + pending_note
         + f" Camera references are measured CFA samples; independently demosaiced RGB references are not exact GT. Small camera panels have scene uncertainty. The plot describes checkpoints with unequal budgets and data; use the linked comparisons to assess particular gains and weaknesses. Dashed lines show V{preferred}'s measured means. There are {len(metric_points(points, 'photo_srgb_PSNR')[0])} completed photo endpoints and {len(metric_points(points, 'known_CFA_PSNR')[0])}/{len(metric_points(points, 'unseen_CFA_PSNR')[0])} known/unseen camera endpoints. The lower panels omit V72/V73 RAW-native prototypes only to show the mature RGB range more clearly.\n\nAll photo points use the full fixed427-source panel, seven conditions and four CFAs. Known/unseen points balance captures within scenes, then scenes (4/5 scenes,72/90 crops). Precision, checkpoint hashes and per-source results remain in the source reports.\n\nV98/V99 use common ADC-only inference projection; only V99 trained through it. Their original V43/V95 references retain their checkpoint policies. The [completed ADC study](v95-adc-training-quality-review.md) improves ADC color but retains positive-noise color/detail weaknesses. Study-specific statistical gates do not prevent showing progress or choosing a stronger development baseline.\n\n"
         + "\n".join(rows)
-        + "\n\n[CSV](results/version-PSNR-history.csv) · [Source records, checkpoint hashes and evaluation metadata](results/version-PSNR-history.json) · [SVG](images/version-PSNR-history.svg) · [PDF](images/version-PSNR-history.pdf). Rebuild from the shipped JSON with `source scripts/env.sh` then `.venv/bin/python scripts/plot_version_history.py`; `--refresh-sources` additionally audits and recollects the original local report archives. These figures reuse completed reports and perform no model inference. Native noisy/restored/reference crops remain in each linked review and the README.\n"
+        + f"\n\n[CSV]({csv_link}) · [Source records, checkpoint hashes and evaluation metadata]({data_link}) · [SVG](images/version-PSNR-history.svg) · [PDF](images/version-PSNR-history.pdf). Rebuild from the shipped JSON with `source scripts/env.sh` then `.venv/bin/python scripts/plot_version_history.py`; `--refresh-sources` additionally audits and recollects the original local report archives. `--data docs/results/NAME.json` chooses another recorded registry. These figures reuse completed reports and perform no model inference. Native noisy/restored/reference crops remain in each linked review and the README.\n"
     )
     print({"versions": len(points), "source_reports": len(evidence), "data": str(destination)})
 

@@ -1,0 +1,30 @@
+{
+  "preferred_version": 104,
+  "name": "V104 final20000",
+  "checkpoint": {
+    "path": "/mnt/external/demosaic/models/v104-final20000.pt",
+    "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300"
+  },
+  "architecture": {
+    "restoration_backbone": "pretrained-rgb",
+    "rgb_trunk": "DRUNet",
+    "dino_feature_fusion": "convnext-pyramid",
+    "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+    "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b"
+  },
+  "closely_matched_alternative": 102,
+  "notable_comparators": [
+    43,
+    84,
+    85,
+    95,
+    99,
+    100,
+    101,
+    103
+  ],
+  "selection_basis": "Full427 photographic PSNR36.80085dB (+.12134 over V102),424/427 source means improve and all7 condition means rise. All427 source SSIM/gradient means and all12 selected material PSNR/SSIM/gradient cases improve. High-noise period16 weak-carrier gain rises .49887 to .60487; complete GFX outputs remain close, with sharper structure than RawNIND but soft fine foliage and saturated signs. Known CFA54.26606 improves .02897dB; unseen CFA53.91700 declines .05477dB. ADC flat-color worst-case bias rises from59.23 to1218.06DN, while high-noise color bias improves. Favor V104 for positive-noise photographic restoration and continued quality training; retain V102 for strict zero-noise ADC workflows and its stronger unseen-camera mean. Same V84 DRUNet/frozen official DINOv3 ConvNeXt-Tiny family; useful gains and remaining weaknesses are documented directly.",
+  "review": "docs/current-model.md",
+  "performance_report": "docs/v104-reviewed-corpus-quality.md",
+  "recommendation_scope": "Default for positive-noise RAW captures and next quality training. For explicit zero-shot/read ADC workflows, select V102 when lower flat-color bias matters. V102 remains a separate evaluation reference."
+}

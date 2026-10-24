@@ -37,6 +37,35 @@ def test_undeclared_missing_camera_panels_still_fail(tmp_path, monkeypatch):
         history.collect()
 
 
+def test_declared_camera_panels_do_not_fabricate_a_full_photo_score(tmp_path, monkeypatch):
+    results = tmp_path / "docs/results"
+    results.mkdir(parents=True)
+    filename = "v111-camera-complete-v1.json"
+    comparisons = [
+        {
+            "panel": panel,
+            "kind": "real",
+            "metric": "sensor_psnr",
+            "sources": count,
+            "first": "V111-final20000",
+            "second": "V104-final20000",
+            "first_checkpoint_sha256": "a" * 64,
+            "second_checkpoint_sha256": "b" * 64,
+            "first_source_balanced_mean": value,
+            "second_source_balanced_mean": 54.0,
+        }
+        for panel, count, value in [("known", 4, 54.25), ("unseen", 5, 53.94)]
+    ]
+    (results / filename).write_text(json.dumps({"comparisons": comparisons}))
+    monkeypatch.setattr(history, "REPO", tmp_path)
+    monkeypatch.setattr(history, "STUDIES", [(filename, [111], "review.md")])
+    points, _ = history.collect()
+    assert history.metric_points(points, "known_CFA_PSNR") == ([111], [54.25])
+    assert history.metric_points(points, "unseen_CFA_PSNR") == ([111], [53.94])
+    assert history.metric_points(points, "photo_srgb_PSNR") == ([], [])
+    assert history.metric_text(points[0], "photo_srgb_PSNR") == "pending"
+
+
 @pytest.mark.parametrize("invalid", [None, float("nan"), float("inf"), True])
 def test_unfinished_or_invalid_values_cannot_be_plotted_as_measurements(invalid):
     with pytest.raises(ValueError, match="must be finite"):

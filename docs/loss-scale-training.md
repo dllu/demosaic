@@ -3,7 +3,9 @@
 **V111 completed its original20k endpoint; V112 is training from the same
 original V104 EMA.** V111's [early material/GFX review](v111-early-quality.md)
 improves all twelve material cases over V104, with small real-photo changes.
-The full matched quality results remain pending. Both keep the same architecture, data, initialization and budget, changing
+V111's complete camera panels change −.01336/+.02006dB known/unseen versus V104;
+full-photo/color/weak-detail and the matched V112 results remain pending.
+Both keep the same architecture, data, initialization and budget, changing
 only reconstruction Charbonnier epsilon: **.001 versus .0003**. The trial
 started after V104's owned evaluation and full-frame exports finished.
 [Completed V104 strengths and tradeoffs](v104-reviewed-corpus-quality.md) and

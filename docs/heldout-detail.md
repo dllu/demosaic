@@ -44,7 +44,8 @@ All48 cells were actually viewed. Low-noise bark/canopy gain modest structure;
 fine white feathers and hairs remain soft at high noise. The
 [report](v111-early-quality.md) records all24 rows, source/ROI/weights/noise/display,
 unchanged inputs and source credits. Extra training, seed and corpus changes
-are confounded versus V104. Full photographic/camera/color results are pending.
+are confounded versus V104. The [complete camera panels](v111-early-quality.md#complete-development-camera-panels)
+show −.01336/+.02006dB known/unseen changes; full-photo/color results are pending.
 
 ## V104 versus V102 on the fixed material panel
 

@@ -15,7 +15,8 @@ complete 102MP GFX exports. Fine high-noise texture and real foliage still need 
 **V111 final20k adds useful material gains:** all twelve selected cases improve
 in PSNR, SSIM, chroma and gradient error over V104, with +.254/.100/.019dB
 at ADC-only/ISO100/ISO12800. [Native comparisons and real GFX limitations](docs/v111-early-quality.md).
-Its broad photo/camera/color results remain pending. The
+Its complete camera panels show −.013/+.020dB known/unseen changes versus V104;
+full-photo/color results remain pending. The
 [matched loss-scale test](docs/loss-scale-training.md) uses V104 and 90,864
 cleaned sources; V111 has finished and V112 is training. The separate
 [Tiny/Small recipes](docs/convnext-small-capacity.md#prepared-matched-quality-trial)

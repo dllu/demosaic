@@ -1,23 +1,35 @@
 # Current real-camera quality
 
-**V104 raises known-camera CFA PSNR and lowers the unseen-camera mean relative
-to V102.** Its photographic gain is stronger and more consistent. The camera
-panels remain small: three of four known scenes improve, versus two of five
-unseen scenes. [Current model choices](current-model.md) ·
+**V111 recovers part of V104's unseen-camera loss, with a small known-scene
+tradeoff.** V111−V104 is −.01336dB known and+.02006dB unseen; all five unseen
+scene means improve. V102 still has the higher unseen mean, and selected dark
+fields remain worse than the stronger RawNIND-preup reference. [V111's complete
+camera results and native views](v111-early-quality.md#complete-development-camera-panels).
+[Current model choices](current-model.md) ·
 [V104 results and native photo triplets](v104-reviewed-corpus-quality.md).
 
 | Panel | Method | Measured-CFA PSNR | Auxiliary AHD RGB PSNR | AHD SSIM |
 | --- | --- | ---: | ---: | ---: |
 | Known4 | V102 | 54.23709 | 40.07688 | .932273 |
 | Known4 | V104 | **54.26606** | **40.10615** | .932371 |
+| Known4 | V111 | 54.25270 | 40.10536 | .932408 |
 | Unseen5 | V102 | **53.97177** | **38.84229** | .923933 |
 | Unseen5 | V104 | 53.91700 | 38.78090 | .923041 |
+| Unseen5 | V111 | 53.93706 | 38.81689 | .923736 |
 
 The V104−V102 known CFA change is +.02897dB, with a scene-bootstrap 95% interval
 [−.01271, +.06782]. The unseen change is −.05477dB [−.13994, +.01515]. These
 intervals describe sampled scenes rather than training-seed uncertainty.
 
-These matched CUDA IEEE FP32/B2 results cover all 72 known and 90 unseen
+V111−V104 source-bootstrap95% intervals are[−.02103,+.00130] known and
+[+.00869,+.03304] unseen, with1/4 and5/5 scene means improving. New V111 rows
+use CPU IEEE FP32/nativeB1 and exactly matched original inputs; the original
+V102/V104 GPU controls are reused. Four V104 CPU replays match stored CPU
+floats exactly and primary GPU scores within.000008dB. Complete data, auxiliary
+metrics and all source changes are in the
+[independent camera receipt](results/v111-camera-complete-v1.json).
+
+The original V102/V104 matched CUDA IEEE FP32/B2 results cover all72 known and90 unseen
 native512 crops: 8/10 noisy captures across 4/5 scenes. Means balance crops
 within capture, captures within scene, then scenes. Primary references are
 measured low-ISO CFA after shared registration/gain. Independently processed
@@ -85,10 +97,16 @@ interior, using identical coordinates for every method.
 
 Full 448-interior CFA PSNR for these selected crops:
 
-| Scene | V102 | V104 | RawNIND half | RawNIND pre-upsampled |
-| --- | ---: | ---: | ---: | ---: |
-| LucieB_Coulicoco | 57.82471 | 56.98928 | 58.92127 | 58.98999 |
-| LucieB_top_of_Expedit | 61.15482 | 60.67192 | 62.08642 | 62.07481 |
+| Scene | V102 | V104 | V111 | RawNIND half | RawNIND pre-upsampled |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| LucieB_Coulicoco | 57.82471 | 56.98928 | 56.95765 | 58.92127 | 58.98999 |
+| LucieB_top_of_Expedit | 61.15482 | 60.67192 | 60.88411 | 62.08642 | 62.07481 |
+
+The [V111 board](images/v111-full-camera-adverse/comparison.png)
+([metadata](images/v111-full-camera-adverse/manifest.json)) retains these exact
+parent-adverse sources and ROIs. V111 still has broad spatial/color blotches;
+the Coulicoco crop declines.03164dB versus V104 and top_of_Expedit gains.21219dB,
+while both remain below RawNIND-preup. All12 native160 cells were viewed.
 
 The additional RawNIND column comes from the separately validated
 [released-variant study](rawnind-variants.md); its

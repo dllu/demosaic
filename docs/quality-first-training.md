@@ -24,7 +24,9 @@ test but does not establish better restoration. Compare final image metrics,
 weak detail, color and native crops on the same observations. Raw loss values
 across epsilon settings use different objectives. V111 completed its original20k
 and [improves all twelve fixed material cases](v111-early-quality.md); real GFX
-changes remain small. V112 is now training. The four successful CPU/CUDA
+changes remain small. Complete camera means change −.01336/+.02006dB known/unseen
+versus V104, with all five unseen scenes improving. V112 is now training.
+The four successful CPU/CUDA
 smokes are adopted with verified source/configuration equivalence, without
 repetition. Earlier experiments retain their inputs and evidence.
 [Recipes, reader checks and actual discarded preflights](results/v104-loss-scale-prepared-v1.json) ·

@@ -1,15 +1,18 @@
-# V111 final20k: early material gains and real GFX comparison
+# V111 final20k: material gains and complete camera panels
 
 **V111 improves PSNR, SSIM, chroma error and gradient error on all twelve fixed
 material cases over V104.** It is a useful new detail candidate in the same
 DRUNet RGB / frozen DINOv3 ConvNeXt-Tiny family. Native low-noise bark and
 canopy improve slightly; high-noise feather/hair detail and real GFX foliage
-remain soft. The full photographic and camera comparison will follow V112's
+remain soft. Complete camera panels show a small known-scene loss and unseen-scene
+gain versus V104. Full photographic/color/weak-detail results will follow V112's
 matched training run, which is now live.
 
-[Checkpoint, completed training boundary, independent audits and all native evidence](results/v111-final20000-early-quality-v1.json).
-This report covers four selected sources and six real contexts. It does not
-replace V104's completed full427, camera, color or weak-carrier results.
+[Material/GFX checkpoint, training boundary and native evidence](results/v111-final20000-early-quality-v1.json) ·
+[Complete camera execution, independent audit and original adverse views](results/v111-camera-complete-v1.json).
+The material comparison covers four selected sources, the GFX comparison six
+real contexts and the camera panels all72/90 development crops. Full427,
+flat-color and weak-carrier results are still pending.
 
 ## Fixed material observations
 
@@ -59,6 +62,55 @@ canopy separation improve modestly. Fine white feathers and hairs remain
 smoothed, especially at high noise; the numerical gains do not imply restored
 fine structure everywhere.
 
+## Complete development camera panels
+
+The original known72/unseen90 native512 crops, original case noise profiles,
+448-pixel scoring interiors and registered low-ISO measured CFA references
+remain fixed. Means balance nine crops per capture, two captures per scene,
+then four/five scenes. Independently demosaiced AHD RGB is auxiliary, **not exact GT**.
+
+| Method | Known4 CFA PSNR | Unseen5 CFA PSNR |
+| --- | ---: | ---: |
+| V102 | 54.23709 | 53.97177 |
+| V104 | 54.26606 | 53.91700 |
+| V111 | 54.25270 | 53.93706 |
+| RawNIND pre-upsampled | 54.26068 | 53.86528 |
+
+V111−V104 is **−.01336dB** known, source-bootstrap95% interval
+[−.02103,+.00130], improving1/4 scenes; **+.02006dB** unseen,
+[+.00869,+.03304], improving5/5 scenes. V102 retains the higher unseen mean.
+V111−RawNIND-preup is −.00797/+.07178dB, with intervals
+[−.40182,+.41106]/[−.27981,+.36162] spanning zero. These intervals describe this
+fixed small scene set, not training-seed or broad-camera uncertainty.
+“Unseen” means held out from our training; external RawNIND membership/overlap
+remains unproven. The protected16-scene test remains unscored.
+
+![Original adverse Canon M100 fields: noisy, V102, V104, V111, RawNIND pre-upsampled and auxiliary AHD](images/v111-full-camera-adverse/comparison.png)
+
+The two source/ROI selections predate V111. Display cells are native160 with
+shared+2EV; every method uses identical input/reference pixels and coordinates.
+Full448-interior CFA PSNR for the selected crops:
+
+| Scene | V102 | V104 | V111 | RawNIND pre-upsampled |
+| --- | ---: | ---: | ---: | ---: |
+| Coulicoco | 57.82471 | 56.98928 | 56.95765 | 58.98999 |
+| top_of_Expedit | 61.15482 | 60.67192 | 60.88411 | 62.07481 |
+
+V111 still has broad spatial/color blotches in these fields. Coulicoco's
+selected crop declines.03164dB versus V104 while top_of_Expedit gains.21219dB;
+both remain below RawNIND-preup. All12 native cells were viewed.
+[All eight triplets, source/ROI/weights/conditioning/display metadata](images/v111-full-camera-adverse/manifest.json).
+All five unseen **scene means** improving does not repair every local crop.
+
+All162 input fingerprints match the earlier reference comparison. NumPy64
+independently rebuilds the new measured-CFA and AHD-rendered PSNR/chroma/gradient
+scores, maximum PSNR difference under.000005dB. Earlier V102/V104 GPU controls
+and RawNIND CPU controls are reused. Four actual V104 CPU replays reproduce
+stored CPU floats exactly and agree with GPU primary PSNR within.000008dB;
+this does not replay every original model/crop. Broader matched GPU evaluation
+remains queued after V112. This camera follow-up adds162 V111 forwards and
+four parent replays, with zero other-reference inference or training.
+
 ## Standing GFX100S test
 
 ![Six GFX regions: noisy, V104, V111, stronger RawNIND pre-upsampled and separate ISO100 reference](images/v111-early-gfx/comparison.png)
@@ -96,10 +148,10 @@ The read-only candidate checkpoint is
 `/mnt/external/demosaic/models/v111-final20000.pt`, SHA256
 `97ab9ca5f1f182ff42a4245c630bba810607a3d13b61cf8aae5842192a18da15`.
 It works with the existing inference commands. V104 remains the broadly
-evaluated working default while V111's full photo/camera/color/detail results
+evaluated working default while V111's full photo/color/weak-detail results
 are pending; the new material gains and comparisons are available now.
 
-The early reviews make eighteen V111 CPU FP32 forwards: twelve native256
+The earlier material/GFX reviews made eighteen V111 CPU FP32 forwards: twelve native256
 material inputs and six native512 GFX contexts, with zero new other-model
 inference, training or RAW decoding. Independent NumPy64 rebuilds24 paired
 score rows for linear/sRGB PSNR and chroma/gradient MAE; maximum PSNR difference
@@ -108,5 +160,6 @@ All126 native panels reproduce exactly from saved floats, and all78 distinct
 board cells were actually viewed. The audit preflight caught a missing board
 helper before execution; the failed attempt is retained and a separately pinned
 helper passes the corrected replay. Active training and original queues retain
-their frozen bytes. Full panels, complete exports and the protected test reserve
-are outside this early report; no speed or SOTA claim follows.
+their frozen bytes. Full427/color/weak-detail panels, complete exports and the protected test reserve
+are outside this report; complete camera results above supplement the earlier
+material/GFX execution. No speed or SOTA claim follows.

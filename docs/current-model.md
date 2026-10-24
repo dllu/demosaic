@@ -2,8 +2,9 @@
 
 **V111 final20k adds measured material gains over V104; V104 remains the fully
 evaluated working baseline.** [V111's native comparisons](v111-early-quality.md)
-show improvements in all twelve material cases and small real GFX changes;
-its broad photo/camera/color results are pending. Both retain V84's pretrained DRUNet RGB trunk, physical noise anchors
+show improvements in all twelve material cases and small real GFX changes.
+Its complete camera panels change −.01336/+.02006dB known/unseen versus V104;
+full-photo/color results are pending. Both retain V84's pretrained DRUNet RGB trunk, physical noise anchors
 and official frozen DINOv3 ConvNeXt-Tiny pyramid. V102 remains useful for lower
 ADC flat-color bias and its higher unseen-camera CFA mean. V43 is a
 historical comparator. [Completed V104 report and native comparisons](v104-reviewed-corpus-quality.md).
@@ -23,7 +24,7 @@ the original positive-noise/training checkpoint stays current.
 | V102 | 36.67951 | 54.23709 | **53.97177** | Lower ADC bias; unseen-camera reference |
 | V103 | 36.68091 | 54.22003 | 53.96410 | Similar photo quality, expanded ROI catalogue |
 | **V104** | **36.80085** | **54.26606** | 53.91700 | **Current positive-noise and training baseline** |
-| V111 | pending | pending | pending | New material/detail candidate; final20k complete |
+| V111 | pending | 54.25270 | 53.93706 | New material/detail candidate; camera panels complete |
 
 V104 improves 424/427 photographic source means and all seven condition means
 over V102. All source SSIM/gradient means and all 12 selected material

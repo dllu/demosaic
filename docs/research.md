@@ -43,7 +43,9 @@ The [active V111/V112 trial](loss-scale-training.md) tests .001 versus .0003 fro
 the original V104 EMA on the cleaned corpus, preserving its architecture and
 learned fusion gates. Actual CPU/CUDA checks pass. V111 completed20k and
 [improves all twelve material cases](v111-early-quality.md), with small GFX
-changes; V112 is training and full matched quality results are pending. The trainer exposes an
+changes. Its complete camera panels show −.01336/+.02006dB known/unseen changes
+versus V104, with5/5 unseen scenes improving but persistent dark-field blotches.
+V112 is training and full matched quality results are pending. The trainer exposes an
 [explicit reconstruction-epsilon option](loss-smoothing-detail.md#configurable-training-scale)
 with exact default/gradient replay and resumed-training checks. Production
 defaults and existing frozen recipes remain unchanged.
