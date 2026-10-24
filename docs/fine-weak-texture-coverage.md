@@ -4,7 +4,8 @@ The sampled photographic, contrast-attenuated photographic and native RAW
 targets already contain fine-frequency content. The dedicated weak-texture
 sources have a narrower gap: almost no energy around four-pixel structures.
 An optional `fine-v1` profile now supplies that band while retaining the existing
-weak-source quota. Its reader checks pass; **trained quality remains untested**.
+weak-source quota. Its reader and CPU training checks pass;
+**trained quality remains untested**.
 V112 remains the working model, and the running V114/V115 comparison retains
 its frozen recipes and legacy texture profile.
 
@@ -117,8 +118,40 @@ visibility; no model outcome exists. Both native pairs and the chart were viewed
 
 The 28 targeted tests pass, including frequency support, routing, legacy
 compatibility and actual tiny-model interrupted/resumed training with exact
-model/EMA/Adam/RNG states. A later matched production test must compare recovered
-fine detail, unrelated residuals and flat false detail, alongside complete
+model/EMA/Adam/RNG states. The real-model CPU check below also passes.
+A later matched production test must compare recovered fine detail, unrelated
+residuals and flat false detail, alongside complete
 photo/camera/color and standing GFX review. The [current architecture comparison](small-aligned-training.md)
 comes first; the [optional normalized-band loss](contrast-normalized-band-supervision.md)
 also remains disabled.
+
+## Actual V112 training-path check
+
+Both legacy and fine recipes pass **eight discarded CPU64/B16/FP32 optimizer
+updates** from the exact V112 EMA. These are 16 model forwards, 16 encoder
+forwards and 16 updates total, with 256 sample draws across paired, native and Commons
+domains. All 91 initial EMA tensors match the parent, all 89 fresh Adam states
+reach step8, model/EMA/Adam stay finite, and the official Tiny encoder stays
+unchanged and without gradients. No validation or CUDA work occurs.
+[Execution, saved arrays and independent NumPy audit](results/fine-weak-real-V112-CPU-v1.json).
+
+The batch16 schedule actually exercises five fine targets: two fiber and three
+random fields. Only these five of 48 Commons clean targets change. All nine
+weak draws retain their seed, background, tint, peak contrast and downstream
+geometry RNG. Both runs read the same 110 cached arrays with verified identical
+bytes. The first two root predictions/losses are exact before the replacement
+batch; both runs retain identical domains and learning rates.
+
+All camera matrices, WB, CFA and shot/read parameters stay bit exact. Six whole
+noisy batches are identical. In the two replacement batches, changed Poisson
+rates also change some sibling noise draws through variable RNG consumption;
+the receipt records changed slots per field. Clean/sensor targets change only
+at the intended five indices. The per-step RNG preserves later unchanged
+batches. This check does not claim identical noise for every unchanged target.
+
+The first source copy omitted three trainer-required license files and stopped
+with zero model calls or updates. That attempted source/log/receipt remains
+preserved; the corrected copy uses fresh output roots. The completed checks
+verify the real training path at CPU64, without establishing convergence,
+native256/BF16 CUDA readiness or a quality gain. Their checkpoints remain
+engineering evidence; current V114/V115 training and V112 selection are unchanged.

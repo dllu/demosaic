@@ -71,8 +71,8 @@ high-noise declines; the weight remains zero in current recipes.
 The [clean-target frequency audit](fine-weak-texture-coverage.md) finds fine-band
 energy in sampled photographs/native targets, but almost none around four-pixel
 structures in the dedicated weak generators. The optional fine profile adds
-coverage within that quota and passes reader compatibility checks. Its trained
-quality is untested; active Tiny/Small recipes retain their legacy profile.
+coverage within that quota and passes reader and real-model CPU training checks.
+Its trained quality is untested; active Tiny/Small recipes retain their legacy profile.
 
 The [optional eight-view inference study](dihedral-quality.md) now measures
 uniform averaging of exact sensor rotations/reflections with the same V104

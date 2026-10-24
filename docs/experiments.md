@@ -72,8 +72,9 @@ contexts and complete-frame exports; existing controls are reused.
 
 The [clean-target frequency audit](fine-weak-texture-coverage.md) finds a narrow
 gap in dedicated weak textures, while sampled photo/native targets contain
-fine-frequency energy. The optional fine profile passes reader checks but has
-no trained-quality result and does not change the active comparison.
+fine-frequency energy. The optional fine profile passes reader and actual V112
+CPU training checks but has no trained-quality result and does not change the
+active comparison.
 
 The source scan covers88,508 training images, with570 actually reviewed and 31
 withheld/excluded. Completed runs used the earlier 24 exclusions; seven more and

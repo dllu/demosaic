@@ -1,0 +1,254 @@
+{
+  "recorded_local": "2026-10-24T09:29:10.535811-07:00",
+  "publisher": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fine-weak-training-CPU-v2/publish-v1.py",
+    "sha256": "36b3fe19d52e59efbc81a9b7ccd9abc9b7090a45163b8c5ca3e0b15534193a05"
+  },
+  "worker": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fine-weak-training-CPU-v2/worker-v1.py",
+    "sha256": "6dd20930d19eb42605e23f5435b578ff59d14bb3323a2985eca8eb3211789c80"
+  },
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fine-weak-training-CPU-v2/plan-v1.json",
+    "sha256": "e76623fe1460189e4d7179302d1fd322eb18db7bb5f23ebb8e5f8f6a3b39314b"
+  },
+  "parent": {
+    "path": "/mnt/external/demosaic/models/v112-final20000.pt",
+    "sha256": "21c3cca8370df21e3412f9ccbf441c35afcfad8fd03174c7727f4f88874783b1"
+  },
+  "official_backbone_sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd",
+  "prior_zero_update_failure": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fine-weak-training-CPU-v1/work/legacy/failure-v1.json",
+    "sha256": "cadd2c538db49a78b7995d5219d25513c7f908780ddd76cade0271cc5fdb9be6"
+  },
+  "prior_failure_log": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fine-weak-training-CPU-v1/legacy-run-v1.log",
+    "sha256": "a926c017f655b19e149a6e03255dfbf4006ba0dc0f8bb579d2b44171e6421324"
+  },
+  "correction": "Add exactly three license artifacts required by trainer source archive; same worker/model/data/loss/noise, new output roots and validation-protocol path only. Prior model/encoder/optimizer counts were all zero. Fine arm never attempted in v1.",
+  "CPU_geometry": {
+    "native_pixels": 64,
+    "batch": 16,
+    "precision": "float32",
+    "threads": 2
+  },
+  "arms": {
+    "legacy": {
+      "result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fine-weak-training-CPU-v2/work/legacy/result-v1.json",
+        "sha256": "ac313c67d76ae4bdc10f50a1739ca78a205a267b60ca2940ab1f23cac645d1d0"
+      },
+      "recipe": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fine-weak-training-CPU-v2/work/configs/CPU-legacy.yaml",
+        "sha256": "a1fe967132aa9e189331281492512b815c2577cbdb94c7ecd65f2e6dda3ac693"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fine-weak-training-CPU-v2/work/legacy/train/last.pt",
+        "sha256": "3746ff79c6d200ad42a4a321391c58092765761ab48328c5c281866e985aac1d"
+      },
+      "metrics": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fine-weak-training-CPU-v2/work/legacy/train/metrics.jsonl",
+        "sha256": "09e7eecb50e1845cbb4360efcd4a9f6598693e968da06cdd24d6f00bb7583a0c"
+      },
+      "counts": {
+        "model": 8,
+        "encoder": 8,
+        "optimizer": 8
+      },
+      "actual_examples": 128,
+      "actual_domain_draws": {
+        "paired": 64,
+        "native": 16,
+        "Commons": 48
+      },
+      "fine_quota_within_Commons": 0,
+      "gradient_norms_after_clipping": [
+        0.1814086236812328,
+        0.1800960176165343,
+        0.2592075662433138,
+        0.2489730740739292,
+        0.13109814704138134,
+        0.2584131110262693,
+        0.1680504428188256,
+        0.2197561888229995
+      ],
+      "initial91_EMA_exact_to_V112": true,
+      "all89_AdamW_steps": 8,
+      "model_EMA_Adam_finite": true,
+      "frozen_official_encoder_without_gradients": true
+    },
+    "fine": {
+      "result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fine-weak-training-CPU-v2/work/fine/result-v1.json",
+        "sha256": "97df4cc7fa645be42808cc9e0f6d73ccd6875f83b6848a3c26b6f0f123c9791f"
+      },
+      "recipe": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fine-weak-training-CPU-v2/work/configs/CPU-fine.yaml",
+        "sha256": "76c42c1ee1ffb7755a64eab3a51f84d696987f02d4854f49c6977244003573e7"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fine-weak-training-CPU-v2/work/fine/train/last.pt",
+        "sha256": "d39181eeea7a71ab09e07eed146babfb98cb61c63df717a161fa6cfaaca260b6"
+      },
+      "metrics": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fine-weak-training-CPU-v2/work/fine/train/metrics.jsonl",
+        "sha256": "11bfaba2398a07c5dcd6bcd60085940ea776286f84a44ae92b36523d7de78752"
+      },
+      "counts": {
+        "model": 8,
+        "encoder": 8,
+        "optimizer": 8
+      },
+      "actual_examples": 128,
+      "actual_domain_draws": {
+        "paired": 64,
+        "native": 16,
+        "Commons": 48
+      },
+      "fine_quota_within_Commons": 0.075,
+      "gradient_norms_after_clipping": [
+        0.1814086236812328,
+        0.1800960176165343,
+        0.27500104706372935,
+        0.24914025706657866,
+        0.13143748782119827,
+        0.25912451429522687,
+        0.16776080468657956,
+        0.21684280755390012
+      ],
+      "initial91_EMA_exact_to_V112": true,
+      "all89_AdamW_steps": 8,
+      "model_EMA_Adam_finite": true,
+      "frozen_official_encoder_without_gradients": true
+    }
+  },
+  "independent_numpy_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fine-weak-training-CPU-v2/audit-result-v1.json",
+    "sha256": "33e4074095e8b10609564a3a1a0dc29423a0b118d31c3347656c22800a2a15b0"
+  },
+  "total_root_model_calls": 16,
+  "total_encoder_calls": 16,
+  "total_optimizer_updates": 16,
+  "total_actual_sample_draws": 256,
+  "total_new_synthetic_noise_observations": 128,
+  "total_validation_forwards": 0,
+  "CUDA_initialized": false,
+  "fine_target_indices": [
+    37,
+    39,
+    45,
+    117,
+    120
+  ],
+  "fine_random_targets": 3,
+  "fine_fiber_targets": 2,
+  "weak_draws_per_arm": 9,
+  "unchanged_other_Commons_clean_targets": 43,
+  "identical_cache_array_paths_and_bytes": 110,
+  "all9_weak_background_seed_kind_tint_peak_and_geometry_RNG_coupled": true,
+  "all_camera_and_noise_parameters_bit_exact": true,
+  "unchanged_whole_observation_batches": [
+    1,
+    2,
+    4,
+    5,
+    6,
+    7
+  ],
+  "changed_whole_observation_batches": [
+    3,
+    8
+  ],
+  "changed_batch_fields": [
+    {
+      "step": 3,
+      "slots": {
+        "packed": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "variance": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "colors": [],
+        "target": [
+          5,
+          7,
+          13
+        ],
+        "wb": [],
+        "matrix": [],
+        "shot": [],
+        "read": [],
+        "sensor_target": [
+          5,
+          7,
+          13
+        ]
+      }
+    },
+    {
+      "step": 8,
+      "slots": {
+        "packed": [
+          5,
+          6,
+          8
+        ],
+        "variance": [
+          5,
+          6,
+          8
+        ],
+        "colors": [],
+        "target": [
+          5,
+          8
+        ],
+        "wb": [],
+        "matrix": [],
+        "shot": [],
+        "read": [],
+        "sensor_target": [
+          5,
+          8
+        ]
+      }
+    }
+  ],
+  "first_two_root_outputs_and_losses_bit_exact": true,
+  "schedule_domains_LRs_identical": true,
+  "noise_coupling": "Within replacement batches, changed Poisson rates can alter generator consumption and sibling observation noise. Only intended clean/sensor targets change; all camera/noise parameters and six unchanged whole batches stay bit exact. Per-step RNG isolates later batches.",
+  "source_clean_audit": {
+    "path": "/home/dllu/proj/demosaic/docs/results/fine-weak-frequency-coverage-v1.json",
+    "sha256": "3e1b1f1561d3b1893ae0901902220a6809e628e6b94ce5fbb380d1959af9760c"
+  },
+  "scope": "Discarded engineering updates of the real V112 model; not a trained quality endpoint, convergence, production native256/BF16 CUDA validation, speed result or new live training job. Active V114/V115 recipes, source archives, budgets and reviewers remain untouched. Both CPU checkpoints are retained as smoke evidence and are not current-model candidates."
+}
