@@ -22,10 +22,10 @@ worst ADC flat bias rises to 2,143 DN16; fine 8-pixel texture remains weak. The
 cleaned sources; both original20k endpoints have finished and full matched evaluation is running.
 V112 [improves all twelve material cases over V104](docs/v111-v112-material.md),
 but its PSNR means are slightly below V111 and native output looks very close.
-The separate [Tiny/Small recipes](docs/convnext-small-capacity.md#prepared-matched-quality-trial)
-remain prepared. A [training-only feature fit](docs/small-feature-transfer.md)
-now gives Small a closer V104 initializer with learned gates preserved;
-camera gaps and joint training remain.
+A [training-only feature fit](docs/small-feature-transfer.md) gives Small a
+closer V104 initializer with learned gates preserved. **[V113 is queued](docs/small-aligned-training.md)**
+for a CUDA check and fresh20k training against the completed V111 Tiny control;
+eight discarded CPU updates pass. Trained capacity gains remain unmeasured.
 [Current models](docs/current-model.md) · [Source-quality review](docs/incoming-commons-quality.md) ·
 [Historical diary](diary/index.md).
 For explicit zero-shot/read inputs, the [optional V104 sites export](docs/adc-consistency.md)

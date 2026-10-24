@@ -122,6 +122,12 @@ Its [matched material report](v111-v112-material.md) improves all twelve cases
 over V104 but gives no clear native advantage over V111. Full comparisons
 continue; V111's known camera/color tradeoffs remain documented.
 
+The [V113 Small experiment](small-aligned-training.md) uses the fitted
+V104-derived initializer with learned gates preserved and reuses V111 as the
+completed Tiny control. Eight actual CPU optimizer updates pass; a CUDA check
+and fresh20k run are queued behind the current GPU chain. There is no trained
+Small quality result yet.
+
 Earlier [V102/V103](v102-v103-quality-review.md),
 [V100/V101](v84-curated-quality-review.md) and
 [V84/V85](native-data-original20k-review.md) studies preserve their scores and

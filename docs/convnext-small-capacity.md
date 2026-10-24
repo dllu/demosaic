@@ -3,10 +3,12 @@
 **Small now has a fitted initializer that retains V104's learned fusion gates.**
 A training-only fit of its four lateral projections nearly preserves the three
 selected photo-condition means; two adverse-camera scores remain .25–.26dB below
-Tiny. Joint training and a trained capacity benefit remain unmeasured.
+Tiny. Eight actual CPU optimizer updates pass, and [V113 is queued](small-aligned-training.md)
+for a CUDA check and fresh20k training against the completed V111 Tiny control.
+Joint training and a trained capacity benefit remain unmeasured.
 [Current transfer method, fitted checkpoint and native comparisons](small-feature-transfer.md).
-V104 remains the positive-noise working baseline while V111/V112 complete their
-matched review.
+V104 remains the positive-noise working baseline; V111/V112 material gains and
+remaining camera/color tradeoffs stay visible during their broader review.
 
 The earlier fixed-weight V102 transfer below demonstrates the feature mismatch.
 Resetting three gates gives Tiny and Small exactly matching initial outputs;

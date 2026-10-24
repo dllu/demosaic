@@ -22,8 +22,10 @@ epsilon strengthens gradients for faint low-noise detail, but increases the
 total gradient more and reduces its alignment with the missing-detail band.
 A trained comparison is needed to establish whether this helps restoration.
 The .0003 arm tests a milder change than .0001. This test retains V104's learned
-fusion gates; the separate [Tiny/Small preparation](convnext-small-capacity.md)
-remains available for a later capacity comparison.
+fusion gates. The [V113 Small experiment](small-aligned-training.md) now follows
+the V111 recipe using fitted feature transfer and the completed Tiny control;
+its CPU check passes and CUDA/training are queued. The earlier
+[zero-gate Tiny/Small preparation](convnext-small-capacity.md) remains preserved.
 
 ## Matched recipes
 

@@ -50,8 +50,10 @@ grids improve high-noise color/coarse carriers but raise worst ADC bias to
 2,143 DN16. The [matched V112 material review](v111-v112-material.md) improves
 all twelve cases over V104 but gives no clear native advantage over V111.
 Full-photo and remaining matched V112 panels are pending. Actual CPU/CUDA checks and the corrected production handoff are
-recorded. The earlier Tiny/Small capacity recipes remain unlaunched and can use
-a better completed initializer later. [Source review](incoming-commons-quality.md) ·
+recorded. [V113 Small plus fitted transfer](small-aligned-training.md) passes
+eight actual CPU updates and is queued for CUDA checks and fresh20k training,
+using completed V111 as its Tiny control. The earlier zero-gate Tiny/Small
+recipes remain preserved and unlaunched. [Source review](incoming-commons-quality.md) ·
 [Current training](quality-first-training.md).
 
 The optional [eight-view V104 mode](dihedral-quality.md) improves all twelve

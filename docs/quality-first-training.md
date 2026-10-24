@@ -39,6 +39,14 @@ repetition. Earlier experiments retain their inputs and evidence.
 [Recipes, reader checks and actual discarded preflights](results/v104-loss-scale-prepared-v1.json) ·
 [Actual training launch, corrected handoff and owned queues](results/v104-loss-scale-training-started-v2.json).
 
+The [V113 Small experiment](small-aligned-training.md) now uses the fitted
+V104-derived initializer with learned gates preserved, following V111's exact
+cleaned-corpus/epsilon.001 recipe. Its eight discarded CPU updates match the
+original Tiny input/domain/LR sequence with finite model/EMA/Adam. The queued
+CUDA check and fresh20k run wait for the existing GPU chain. Completed V111 is
+the control; its training is not repeated. This tests larger features plus
+fitted transfer, with trained quality still unmeasured.
+
 <a id="active-v104-cleaned-corpus-continuation"></a>
 
 ## Completed V104 cleaned-corpus continuation

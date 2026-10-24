@@ -138,10 +138,14 @@ PYTHONPATH=src .venv/bin/python scripts/fit_dino_laterals.py \
 This writes projection arrays; the fitted full initializer is the separately
 hashed checkpoint above.
 
-Choose the useful completed parent after the ongoing V111/V112 comparison.
-If that changes, preserve this result and fit a new initializer under a new
-plan. Actual optimizer/CUDA checks and joint training for the final initializer
-come next, followed by full photo/camera/analytic and real GFX comparisons.
+The [V113 training experiment](small-aligned-training.md) now uses this fitted
+initializer and the same recipe as completed V111 Tiny, without repeating the
+Tiny continuation. Eight discarded CPU optimizer updates pass with exact
+initial EMA/gates, matching actual inputs and finite model/EMA/Adam. A live
+queue waits for the existing GPU chain before a native256/B16/BF16 CUDA check
+and fresh20k Small training. Full photo/camera/analytic and real GFX comparison
+will assess the trained result. This preserves the original fitted evidence;
+it does not claim a trained capacity benefit or isolate capacity from transfer.
 The earlier [common-function Tiny/Small preparations](convnext-small-capacity.md)
 remain preserved and unlaunched; they answer a different initialization question.
 
