@@ -12,15 +12,15 @@ All **3,807 valid arrivals** also had full-source thumbnails inspected across
 This is a complete neural screen of the eligible additions and targeted visual
 inspection, rather than native inspection of every image.
 
-## Current data and prepared training
+## Current data and training
 
 | Cohort | Training sources | Status |
 | --- | ---: | --- |
 | V102/V103 | 88,477 | Completed model comparison |
 | V104 | 90,872 | Original 20k training, all panels and full-frame exports complete |
-| Next reviewed cohort | **90,864** | V111/V112 original20k complete; matched evaluation running; V109 Tiny / V110 Small remain prepared |
+| Current reviewed cohort | **90,864** | V111/V112 complete; V112 is the working baseline; V114/V115 continuations use this corpus |
 
-The next cohort applies **eight additional training-source withholds relative
+The current cohort applies **eight additional training-source withholds relative
 to V104**: the three previously inspected photo-quality cases and five printed
 atlas images. Four atlas targets were in the older V102 corpus; one was an
 arrival. Relative to V102, the next corpus adds **2,391 eligible arrivals** and
@@ -31,9 +31,21 @@ source/cache metadata retain their bytes. Originals and cache pixels are unchang
 
 The original six training ROI objects are preserved with a new manifest binding.
 Twelve actual clean-reader checks repeat exactly: six new-source draws and all
-six ROIs, with finite native256 targets, unchanged Torch RNG and no CUDA. The
-prepared matched comparison uses seed 62, 20,000 updates per arm, zero optical
-blur and the same contrast/detail recipe. Its prospective photo schedule has
+six ROIs, with finite native256 targets, unchanged Torch RNG and no CUDA.
+[V111/V112](loss-scale-training.md) completed their original 20,000 updates each
+on this cohort, preserving the V104 EMA and learned gates while comparing
+reconstruction epsilon. V112 is now the working baseline after
+[complete photo/camera/color/material/GFX evaluation](v112-quality.md).
+The [V114 Tiny / V115 fitted Small continuations](small-aligned-training.md)
+use seed63 and this same corpus, six ROIs, zero optical blur and existing
+contrast/detail recipe. Their actual CPU/CUDA checks passed; V114 is training,
+and V115 follows its endpoint. No new frequency-profile option changes these
+frozen recipes.
+
+### Preserved, unlaunched V109/V110 preparation
+
+The earlier capacity preparation used seed62, 20,000 planned updates per arm,
+zero optical blur and the same contrast/detail recipe. Its prospective photo schedule has
 111,559 examples from 62,367 unique sources, including 2,707 draws from 1,634
 newly eligible sources and 5,657 ROI examples. These are scheduled counts, not
 completed training. [Prepared recipes and actual reader evidence](results/backbone-capacity-training-prepared-v2.json).
@@ -46,18 +58,17 @@ through Commons/synthetic, native-RAW and paired-RAW domains.
 Eight-update CUDA checks also pass at native256/B16/BF16, with exact initial
 EMA/encoder identities, finite model/EMA/Adam, matching actual observations and
 matching first losses. [Actual CUDA checks](results/backbone-cleaned-recipes-CUDA-v1.json).
-Production training has not launched for the capacity comparison.
-The [next loss-scale comparison](loss-scale-training.md) instead retains the
-original V104 EMA and learned gates on this same cleaned corpus. Both recipes
-pass discarded CPU/CUDA checks. V111 completed20k and [improves all twelve fixed
-material cases](v111-early-quality.md); V112 has also completed its original20k budget; matched evaluation is running.
-The full matched photo/camera/color results are pending.
+Production training did not launch for V109/V110. The active V114/V115
+comparison above instead retains V112's learned function and fits the Small
+laterals to its features. These older prospective counts are not receipts of
+exposure in the current production run.
 
 These inputs supersede the unlaunched 90,869-source preparation. Earlier
 manifests, recipes and receipts remain preserved. V104 completed its original
 90,872-source run. Its [selected material gains](heldout-detail.md) are published
 alongside its [completed full comparison](v104-reviewed-corpus-quality.md). Its
-exact EMA now initializes the loss-scale test, while V102 remains a separate reference. [Current quality training](quality-first-training.md).
+exact EMA initialized the completed loss-scale test, while V102 remains a
+separate reference. [Current quality training](quality-first-training.md).
 
 ## Printed atlas targets and photographed windows
 

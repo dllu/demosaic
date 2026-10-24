@@ -120,6 +120,7 @@ class CleanDataset(Dataset):
         reviewed_roi_catalogue=None,
         reviewed_roi_fraction=0.0,
         reviewed_roi_catalogue_sha256=None,
+        fine_weak_texture_fraction=0.0,
     ):
         self.reviewed_roi_fraction = validate_roi_fraction(reviewed_roi_fraction)
         if self.reviewed_roi_fraction and (
@@ -153,6 +154,10 @@ class CleanDataset(Dataset):
         if not 0 <= weak_texture_fraction <= synthetic_fraction:
             raise ValueError("Weak texture fraction must be within the existing synthetic fraction")
         self.weak_texture_fraction = weak_texture_fraction if split == "train" else 0
+        fine_fraction = validate_probability(fine_weak_texture_fraction, "Fine weak texture fraction")
+        if fine_fraction > weak_texture_fraction:
+            raise ValueError("Fine weak texture fraction must fit inside the weak texture quota")
+        self.fine_weak_texture_fraction = fine_fraction if split == "train" else 0
         if self.weak_texture_fraction and augmentation_downsample != 2:
             raise ValueError("Weak texture training requires augmentation before final downsample2")
         self.native_crop = native_crop
@@ -198,7 +203,11 @@ class CleanDataset(Dataset):
             rgb = smooth_scene(size, rng, chroma_stops=self.flat_chroma_stops)
         elif draw < self.flat_fraction + self.synthetic_fraction:
             if draw < self.flat_fraction + self.weak_texture_fraction:
-                rgb, _ = weak_texture(size, rng, pixel_scale=self.augmentation_downsample)
+                if draw < self.flat_fraction + self.fine_weak_texture_fraction:
+                    rgb, _ = weak_texture(size, rng, pixel_scale=self.augmentation_downsample,
+                                          frequency_profile="fine-v1")
+                else:
+                    rgb, _ = weak_texture(size, rng, pixel_scale=self.augmentation_downsample)
             else:
                 rgb = synthetic(size, rng)
         else:

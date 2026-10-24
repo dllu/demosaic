@@ -1,4 +1,4 @@
-"""Continuous-precision weak texture candidates, separate from active recipes."""
+"""Continuous-precision weak textures with explicit final-pixel frequency profiles."""
 
 import math
 import random
@@ -6,7 +6,7 @@ import random
 import torch
 
 
-def weak_texture(size: int, rng: random.Random, *, pixel_scale=1, kind=None):
+def weak_texture(size: int, rng: random.Random, *, pixel_scale=1, kind=None, frequency_profile="legacy"):
     """Return a bounded scene-linear RGB texture and its generation recipe.
 
     Coordinates/frequencies use final sensor-pixel units. A caller preparing a
@@ -14,7 +14,7 @@ def weak_texture(size: int, rng: random.Random, *, pixel_scale=1, kind=None):
     reduction afterwards. This routine has no camera mosaic, noise, display
     encoding, 8-bit rasterization or global random-state dependency.
 
-    This is an experimental source, not an enabled training policy. Peak
+    The legacy profile is used by current quality recipes. Peak
     relative contrast is .005--.2; measured RMS contrast is recorded separately.
     Band-limited fields and curved fibers complement flat/strong-shape sources.
     """
@@ -22,6 +22,8 @@ def weak_texture(size: int, rng: random.Random, *, pixel_scale=1, kind=None):
         raise ValueError("Texture size must be an integer >=32")
     if pixel_scale not in (1, 2):
         raise ValueError("Texture pixel scale must be1 or2")
+    if frequency_profile not in ("legacy", "fine-v1"):
+        raise ValueError("Unknown weak texture frequency profile")
     kind = rng.choice(("bandlimited", "fibers")) if kind is None else kind
     if kind not in ("bandlimited", "fibers"):
         raise ValueError("Unknown weak texture kind")
@@ -41,9 +43,12 @@ def weak_texture(size: int, rng: random.Random, *, pixel_scale=1, kind=None):
         "tint": tint.tolist(),
         "space": "scene-linear-sRGB",
     }
+    if frequency_profile != "legacy":
+        recipe["frequency_profile"] = frequency_profile
     if kind == "bandlimited":
         # Low/high limits are safely below final Nyquist even on the 2x canvas.
-        low, high = 1 / 48, rng.uniform(1 / 8, 0.22)
+        low, high = ((1 / 6, rng.uniform(.34, .40)) if frequency_profile == "fine-v1"
+                     else (1 / 48, rng.uniform(1 / 8, 0.22)))
         exponent = rng.uniform(0, 1.5)
         fy = torch.fft.fftfreq(size, d=1 / pixel_scale)[:, None]
         fx = torch.fft.rfftfreq(size, d=1 / pixel_scale)[None]
@@ -62,7 +67,8 @@ def weak_texture(size: int, rng: random.Random, *, pixel_scale=1, kind=None):
     else:
         coordinates = (torch.arange(size, dtype=torch.float32) + 0.5) / pixel_scale
         y, x = torch.meshgrid(coordinates, coordinates, indexing="ij")
-        angle, period = rng.uniform(0, math.pi), rng.uniform(6, 32)
+        angle = rng.uniform(0, math.pi)
+        period = rng.uniform(3.5, 6) if frequency_profile == "fine-v1" else rng.uniform(6, 32)
         along = x * math.cos(angle) + y * math.sin(angle)
         across = -x * math.sin(angle) + y * math.cos(angle)
         bend_period, bend = rng.uniform(32, 96), rng.uniform(0.1, 0.7)

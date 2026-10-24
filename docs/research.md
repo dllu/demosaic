@@ -68,6 +68,12 @@ Its [optional trainer implementation and V112 parameter check](contrast-normaliz
 now pass CPU/API checks. Parameter alignment is mixed, including two faint
 high-noise declines; the weight remains zero in current recipes.
 
+The [clean-target frequency audit](fine-weak-texture-coverage.md) finds fine-band
+energy in sampled photographs/native targets, but almost none around four-pixel
+structures in the dedicated weak generators. The optional fine profile adds
+coverage within that quota and passes reader compatibility checks. Its trained
+quality is untested; active Tiny/Small recipes retain their legacy profile.
+
 The [optional eight-view inference study](dihedral-quality.md) now measures
 uniform averaging of exact sensor rotations/reflections with the same V104
 weights. It improves twelve fixed material cases and two adverse camera crops,
@@ -346,10 +352,12 @@ future controlled context check; the report does not prove this project's
 detail loss comes from patch size. Its RAW-to-RAW benchmarks, additional data
 and compute budgets differ from our commercially usable joint reconstruction.
 
-[Experimental weak-texture source and actual CPU preparation](weak-texture-source.md)
-remain default-off after the [negative/mixed V55 first gate](weak-texture-v55-review.md).
-Any further change needs matched trained quality, flat-region false-detail
-checks and the standing full/native/GFX review.
+[Continuous-precision weak textures](weak-texture-source.md) are now used by
+the current V112/V114/V115 quality recipes as part of the tested fine-detail
+package. The [negative/mixed V55 first gate](weak-texture-v55-review.md) remains
+an earlier architecture-specific result. The new
+[fine-frequency profile](fine-weak-texture-coverage.md) remains disabled pending
+matched trained quality, flat-region false-detail checks and full/native/GFX review.
 
 ## Learned input adaptation candidate
 

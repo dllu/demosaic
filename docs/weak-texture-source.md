@@ -1,12 +1,14 @@
-# Experimental continuous-precision weak textures
+# Continuous-precision weak training textures
 
-The prepared generator supplies bounded low-contrast targets without an8-bit
-raster intermediate. It is available through a default-off training option;
-active recipes retain their original data. No trained-model
-improvement follows from generating clean fields or passing engineering tests.
+The generator supplies bounded low-contrast targets without an 8-bit
+raster intermediate. Current V112/V114/V115 recipes use the legacy profile
+at `weak_texture_fraction: .15`, within the `.20` Commons procedural quota.
+The library default remains zero. The newer optional
+[fine-frequency profile](fine-weak-texture-coverage.md) is disabled in those
+recipes; its clean-source checks establish coverage, not trained quality.
 [Actual32-sample CPU preparation receipt](results/weak-texture-source-preflight.json).
 
-`demosaic.textures.weak_texture(size, rng, pixel_scale=1, kind=None)` returns
+`demosaic.textures.weak_texture(size, rng, pixel_scale=1, kind=None, frequency_profile="legacy")` returns
 scene-linear float32 RGB and a complete seed/parameter recipe. Modes are
 isotropic band-limited random fields and curved, multi-frequency fibers.
 Background levels span2⁻⁸–.5, peak relative contrast .005–.2, with a constant
@@ -21,7 +23,7 @@ No geometry follows that reduction. The random-field passband ends below.22
 cycles/final pixel. This is a generator support constraint, not a claim that
 later geometry/PSFs preserve an ideal band limit.
 
-The actual CPU preflight produces16 fields per mode and passes them through
+The original CPU preflight produces16 legacy fields per mode and passes them through
 the current augmentation function. All32 outputs are finite, positive float32
 RGB at256px. Before geometry/PSF, area2 retains98.20–99.86% of the input RMS
 contrast. Input/area2/augmented tensor hashes, recipe parameters and four full
@@ -41,14 +43,17 @@ signed coherent contrast and unrelated residual energy on exact analytic
 targets. Any eventual training trial must preserve the photo/flat allocation,
 use a matched control, check flat false detail and repeat native/full/GFX review.
 
-## Optional training routing
+## Training routing
 
-Set `weak_texture_fraction: 0.1` alongside `synthetic_fraction: 0.2` and
+For example, set `weak_texture_fraction: 0.1` alongside `synthetic_fraction: 0.2` and
 `augmentation_downsample: 2`. This replaces half the existing procedural quota,
 keeping photographic and flat probabilities unchanged. With the25/25/50 paired/
 native/Commons mix, weak fields occupy an expected5% of all patches. Native
 and registered paired data do not change. The default is0, and validation
 always disables procedural sources. Geometry/PSFs still precede final area2.
+Current quality recipes instead use `.15`, or 7.5% of all patches with that
+domain mix, and disable optical blur. Their total weak quota is unchanged by
+the new default-off `fine_weak_texture_fraction` option.
 
 Routing selects the source before generation or photo IO. Weak draws do not
 load a Commons photo or generate a discarded strong-shape image. Resume rejects

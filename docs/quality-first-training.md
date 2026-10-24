@@ -29,6 +29,12 @@ eight actual CPU optimizer updates with identical input/domain/LR schedules.
 checks and started V114's 20,000 updates; Small follows after its endpoint. The idle
 V104-derived V113 plan remains preserved without CUDA/production work.
 
+A [clean-target frequency audit](fine-weak-texture-coverage.md) identifies a gap
+in the dedicated weak-source band, while sampled photos and native targets
+already contain fine energy. An optional fine profile passes reader/routing
+checks, with no trained-quality claim. The active comparison keeps the existing
+weak profile; this data change awaits a later matched training test.
+
 <a id="active-v104-cleaned-corpus-continuation"></a>
 
 ## Completed V104 cleaned-corpus continuation

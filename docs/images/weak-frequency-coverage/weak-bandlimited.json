@@ -1,0 +1,94 @@
+{
+  "image": {
+    "path": "/home/dllu/proj/demosaic/docs/images/weak-frequency-coverage/weak-bandlimited.png",
+    "sha256": "bd3552f61780fa3f9e222f5acb61d7b6b70a0fd09b8a22037df3e1fb3e13cb47"
+  },
+  "sample_index": 120,
+  "panels": [
+    {
+      "label": "Legacy clean target",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ],
+      "pixel_sha256": "af15abdfca044a99994dc243c3629fab1f9fb5814efb138c088ad3730d6e2f0b"
+    },
+    {
+      "label": "Fine clean target",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "pixel_sha256": "68c327b412c444ca0f4fffc7dcdb2d1d89703e9fd0dc1c5c88536947a80b9383"
+    }
+  ],
+  "legacy_target": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/training-frequency-coverage-v1/work/results/clean-036.npy",
+    "sha256": "11687de88ed7bd9ccb4f7b6e8081876ff8a3503bd72d45267758643f275907be"
+  },
+  "fine_target": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fine-weak-texture-reader-v2/work/results/fine-000120.npy",
+    "sha256": "8a5f5cebdbaf206d48b29bc6bc2864d3e00fb5a8f21a535bef59be0ad175455c"
+  },
+  "legacy_generation": {
+    "recipe": {
+      "kind": "bandlimited",
+      "size": 512,
+      "pixel_scale": 2,
+      "seed": 2784853188488913611,
+      "level": 0.182125255333724,
+      "peak_relative_contrast": 0.1590392039032403,
+      "tint": [
+        0.5392113924026489,
+        1.0,
+        0.4918662905693054
+      ],
+      "space": "scene-linear-sRGB",
+      "frequency_band_cycles_per_final_pixel": [
+        0.020833333333333332,
+        0.21097231391817645
+      ],
+      "amplitude_exponent": 0.04947940341120671,
+      "rms_relative_contrast": 0.03610341569873298
+    },
+    "post_generator_rng_sha256": "a581362e51521ed8d3dbccb6a726d3730b60fc288ffa526942bb662c95583056"
+  },
+  "fine_generation": {
+    "recipe": {
+      "kind": "bandlimited",
+      "size": 512,
+      "pixel_scale": 2,
+      "seed": 2784853188488913611,
+      "level": 0.182125255333724,
+      "peak_relative_contrast": 0.1590392039032403,
+      "tint": [
+        0.5392113924026489,
+        1.0,
+        0.4918662905693054
+      ],
+      "space": "scene-linear-sRGB",
+      "frequency_profile": "fine-v1",
+      "frequency_band_cycles_per_final_pixel": [
+        0.16666666666666666,
+        0.39429830352726936
+      ],
+      "amplitude_exponent": 0.04947940341120671,
+      "rms_relative_contrast": 0.034987266734293226
+    },
+    "post_generator_rng_sha256": "a581362e51521ed8d3dbccb6a726d3730b60fc288ffa526942bb662c95583056"
+  },
+  "ROI_xywh": [
+    48,
+    48,
+    160,
+    160
+  ],
+  "display_exposure": 1,
+  "display_transform": "Common linear-sRGB to8-bit sRGB; no resizing or contrast stretch",
+  "selection": "Largest generator level*peak-contrast within this replacement kind for visibility, before viewing. No model outcome exists.",
+  "reference": "Two generated clean training fields; no added sensor noise, restored output, real capture or quality score."
+}

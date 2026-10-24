@@ -732,6 +732,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
             ("flat_fraction", 0.0, "flat fraction"),
             ("flat_chroma_stops", 0.0, "flat chroma stops"),
             ("weak_texture_fraction", 0.0, "weak texture fraction"),
+            ("fine_weak_texture_fraction", 0.0, "fine weak texture fraction"),
             ("optical_blur_probability", 0.25, "optical blur probability"),
             ("photographic_low_contrast_fraction", 0.0, "photographic low contrast fraction"),
         ]:
@@ -837,6 +838,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
         flat_fraction=config.get("flat_fraction", 0.0),
         augmentation_downsample=config.get("augmentation_downsample", 1),
         weak_texture_fraction=config.get("weak_texture_fraction", 0.0),
+        fine_weak_texture_fraction=config.get("fine_weak_texture_fraction", 0.0),
         flat_chroma_stops=config["flat_chroma_stops"],
         optical_blur_probability=config.get("optical_blur_probability", 0.25),
         photographic_low_contrast_fraction=config.get("photographic_low_contrast_fraction", 0.0),
