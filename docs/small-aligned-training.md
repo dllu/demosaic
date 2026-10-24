@@ -1,7 +1,7 @@
 # Matched quality training from V112
 
-**V114 Tiny has started its original 20,000-update continuation; V115 fitted
-Small follows with the same budget.** Both passed eight actual native 256/B16/BF16
+**V114 Tiny has completed its original 20,000-update continuation; V115 fitted
+Small is training with the same budget.** Both passed eight actual native 256/B16/BF16
 CUDA updates after the original eight-view evaluation/audit exited successfully.
 They use seed 63 and V112's trained loss scale. V112 remains the current learned
 baseline while endpoint quality is unmeasured.
@@ -10,6 +10,14 @@ baseline while endpoint quality is unmeasured.
 [V112 baseline](v112-quality.md) · [Completed Small transfer](small-feature-transfer.md).
 [Guarded training launch and successful CUDA checks](results/v112-spawn-guard-training-and-evaluation-v2.json) ·
 [Current corrected evaluation/review queues](results/evaluation-backbone-interface-fix-v1.json).
+[Completed Tiny endpoint and live Small/queue observation](results/v114-trained-v115-running-v1.json).
+
+V114 finished on October 24 at 11:12 PDT with 20,000 optimizer updates and 640
+validation forwards. Model, EMA and Adam states are finite; the official Tiny
+encoder remains frozen. Its endpoint has not yet received the complete quality
+evaluation. The generic accounting status string incorrectly says Small; the
+worker's arm, backbone hash, initializer and checkpoint identify Tiny V114.
+That original receipt is preserved unchanged.
 
 ## Models and budget
 

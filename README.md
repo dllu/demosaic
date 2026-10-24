@@ -14,11 +14,12 @@ high-noise texture and real foliage still need work. All seven matched panels
 and complete 102MP exports are verified. FP32 inference/blending takes 167.51s.
 [Primary comparison](docs/v111-v112-primary-quality.md).
 The [larger-encoder transfer](docs/small-feature-transfer.md) now starts from
-V112. Both continuations passed actual CPU/CUDA updates, and
-[V114 training is running](docs/small-aligned-training.md), with
+V112. [V114 Tiny has completed 20,000 updates and V115 Small is training](docs/small-aligned-training.md), with
 [automatic evaluation and independent saved-prediction review](docs/quality-prediction-archive.md).
 [Current models](docs/current-model.md) · [Source-quality review](docs/incoming-commons-quality.md) ·
 [Historical diary](diary/index.md).
+The [camera-outlier audit](docs/camera-outliers.md) shows how isolated repair and
+reference-contaminating sensor points affect the real-camera comparisons.
 For explicit zero-shot/read inputs, the [optional V104 sites export](docs/adc-consistency.md)
 adds **.2885dB ADC-only PSNR** across all 427 photos/four CFAs with unchanged learned
 weights. All 1,708 cases improve; positive-noise inputs bypass it. Native crops,

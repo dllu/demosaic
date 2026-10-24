@@ -65,6 +65,12 @@ left alone. A genuine unresolved single-color light remains ambiguous in a
 single exposure; this is a conservative outlier detector, not a calibrated
 sensor defect map. It does not change model weights or training data.
 
+The [complete V112/stronger-RawNIND camera check](camera-outliers.md) now
+documents a large localized improvement, mixed scene-level effects and
+reference-contaminating fixed-coordinate points, with two native crop triplets.
+Its ratio 8 follow-up is exploratory; library/CLI defaults and original benchmark
+protocols remain unchanged.
+
 For paired defects, `--hot-pixel-clusters` enables an optional seven-of-eight
 neighbor rule and implies `--hot-pixels`. It checks line continuation before
 discarding a bright neighbor, and requires another CFA color to corroborate a

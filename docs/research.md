@@ -41,8 +41,8 @@ training previews/features, fits 64 sources and checks 16 distinct training
 sources. Selected photo means remain close to V112, but two dark-camera crops
 lose .20–.32dB. Matched [V114 Tiny / V115 fitted Small continuations](small-aligned-training.md)
 passed eight actual CPU and CUDA optimizer updates each, with exact initial
-identities and matching batches/domains/LRs. V114 training has started; each
-arm receives 20,000 further updates, with retained-prediction evaluation queued.
+identities and matching batches/domains/LRs. V114 has completed 20,000 updates;
+V115 is training on the same budget, with retained-prediction evaluation queued.
 The [loss-smoothing diagnostic](loss-smoothing-detail.md) also measures 324
 output gradients on 108 fixed V102 training-source restorations. Smaller epsilon
 strengthens low-noise faint-detail slopes but increases the full gradient more.

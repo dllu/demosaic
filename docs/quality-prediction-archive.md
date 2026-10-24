@@ -4,7 +4,8 @@
 evaluates each new model once per declared observation and retains the native
 FP32 predictions and exact supervision used by the evaluator. This supports
 independent score checks, crop reports and later diagnostics without repeating
-model inference. The trained endpoints and their quality results remain pending.
+model inference. Tiny V114 has completed 20,000 updates and Small V115 is training;
+their complete endpoint quality results remain pending.
 
 [Queue, source boundary, genuine-output replay and test evidence](results/v112-prediction-archive-evaluation-queued-v1.json) ·
 [Guarded training launch](results/v112-spawn-guard-training-and-evaluation-v2.json) ·
@@ -14,7 +15,7 @@ model inference. The trained endpoints and their quality results remain pending.
 
 The initial queue stopped after its training dependency's pre-forward spawn
 failure. Its replacement waits for the guarded training controller; both actual
-CUDA checks pass and V114 production is running. The failed attempt performed
+CUDA checks pass, V114 production is complete and V115 is running. The failed attempt performed
 zero learned work. Original sources/receipts remain preserved.
 
 The current evaluator supplies the required `legacy_sha256` keyword while

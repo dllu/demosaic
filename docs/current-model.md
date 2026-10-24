@@ -47,6 +47,10 @@ verified. V112 FP32 inference/blending takes167.51s; V104's earlier168.73s
 observation remains a separate checkpoint measurement. The100MP/10s target stays open, with quality first.
 Hot-pixel repair and [linear DNG/JPEG export](dng-export.md) are available;
 repair was off in these comparisons.
+The [supplementary camera-outlier study](camera-outliers.md) tests existing
+isolated repair with both V112 and stronger RawNIND. It localizes a large museum
+deficit to one bright sample and finds recurring reference-supported sensor
+points; it does not establish a broad repaired-input winner or change defaults.
 
 ## Next architecture work and references
 
@@ -54,8 +58,8 @@ The [Small feature-transfer method](small-feature-transfer.md) now preserves
 V112's learned gates and trunk through a training-only lateral fit. Photo means
 stay close; two adverse-camera crops remain .20–.32dB worse. Matched V114 Tiny
 and V115 fitted Small passed eight actual CPU and CUDA updates each;
-[V114 training is running](small-aligned-training.md), with Small following.
-Each receives 20,000 further updates at seed 63. Trained quality remains pending.
+[V114 has completed 20,000 updates and V115 is training](small-aligned-training.md).
+Each receives 20,000 further updates at seed 63. Endpoint quality remains pending.
 
 Earlier results remain useful and their receipts unchanged:
 [V104](v104-reviewed-corpus-quality.md), [V102/V103](v102-v103-quality-review.md),

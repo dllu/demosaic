@@ -64,8 +64,8 @@ baseline. The [primary report](v111-v112-primary-quality.md) and
 The [completed Small transfer](small-feature-transfer.md) now uses V112 teacher
 targets and cached training features. Photo means remain close, while two dark
 camera crops lose .20–.32dB. Matched Tiny V114 / fitted Small V115 passed eight
-actual CPU/CUDA updates each; [V114 training has started](small-aligned-training.md),
-with 20,000 further updates per arm. The old idle V113 plan and evidence remain preserved.
+actual CPU/CUDA updates each; [V114 has completed 20,000 updates and V115 is training](small-aligned-training.md).
+Endpoint quality remains pending. The old idle V113 plan and evidence remain preserved.
 Their [endpoint evaluation queue](quality-prediction-archive.md) retains exact
 targets and native predictions across all numerical panels, with standing GFX
 contexts and complete-frame exports; existing controls are reused.

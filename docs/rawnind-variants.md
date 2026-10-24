@@ -96,6 +96,14 @@ V104 control rows replay exactly. V112 full-camera float predictions were not
 retained in that older evaluation, so this recomputes aggregation rather than
 metric definitions from float arrays. It adds no neural inference or new scores.
 
+The subsequent [adverse-output and isolated-repair audit](camera-outliers.md)
+finds one green outlier accounts for 67% of V112 error in the worst selected
+museum field. Repair shrinks that crop's gap from 4.70 to .07 dB with the same
+corrected input for both methods. Some M100 reference-supported points also
+recur at fixed sensor coordinates across unrelated scenes. Original scores
+here remain unchanged; those deficits cannot all be interpreted as ordinary
+noise/detail loss or genuine scene-detail regressions.
+
 “Unseen” means held out from **our** training. External-model training membership
 and overlap remain unproven. Neither these means nor this source set establish
 a broad real-camera winner or SOTA result. The protected 16-scene reserve
