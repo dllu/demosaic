@@ -83,6 +83,7 @@ than a controlled cross-method timing comparison. The 100MP/10s goal is open.
 The original frozen V104 checkpoint is
 `8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300`.
 Noise conditioning remains shot .0014635775921166604 and read variance
-.0000010715704128646712. The full photo/camera/texture/color eight-view panels
-are still running under their original evaluation/audit owners. Their measured
-results, rather than this single scene, will establish the broader quality gain.
+.0000010715704128646712. The [full photo/camera/texture/color panels and independent
+audit](dihedral-quality.md) are complete, reaching37.04376dB on full 427 with higher
+camera means and a remaining ADC color tail. These measurements and native
+examples establish the broader gain and limits of the policy.

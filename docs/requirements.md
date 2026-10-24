@@ -1,7 +1,7 @@
 # Project goals and current evidence
 
 **V112 final20k is the current restoration and quality-training baseline.**
-It reaches36.90238dB on all427 photos, +.10154dB over V104, with425 source means
+It reaches36.90238dB on all 427 photos, +.10154dB over V104, with425 source means
 improving. Known/unseen CFA means are54.26914/53.95378dB; worst ADC flat bias
 falls to50.89DN16. [Current choices](current-model.md) · [Complete review](v112-quality.md).
 
@@ -19,7 +19,7 @@ GFX gallery do not establish broad real-camera superiority. Quality precedes spe
 | Modern DINOv3 architecture | V84-family DRUNet RGB trunk and official frozen ConvNeXt-Tiny pyramid | Transfer the larger frozen Small encoder from the stronger V112 parent |
 | Diverse clean targets and binning |90,864-source cleaned corpus;4×→geometry→area2, zero optical blur, weak textures/photo contrast, six reviewed ROIs | Retain visual source review and fine-detail coverage |
 | Physical noise/camera/color | Poisson/read noise, signed black subtraction, all Bayer phases, WB/matrix, exposure/clipping; V112 repairs large ADC tails | Spatial dark-field/weak-detail failures remain |
-| Reliable resource-aware training | Exact parent/source/data snapshots, actual checks, fixed endpoints and retained failures; V112-derived Tiny/Small passed CPU updates | Queued matched continuations after the original GPU chain, then endpoint quality review |
+| Reliable resource-aware training | Exact parent/source/data snapshots, actual checks, fixed endpoints and retained failures; V114 training is running and matched V115/evaluation follow | Complete trained endpoint measurements, independent metric checks and native review |
 | Protected originals/tests | Local GFX3879/3880 cache; originals read-only; standing scene/siblings outside training;16-scene test reserve unscored | Preserve boundaries in future cohorts |
 | Current documentation |46 completed primary endpoints in plot; native triplets with source/ROI/hash/noise/display; local-time diary | Update as useful results complete, without old promotion freezes |
 
@@ -33,10 +33,11 @@ ADC failures, all six GFX contexts and complete full-frame comparisons.
 [Full-frame receipt](results/v112-fullframe-review-v1.json).
 
 The original V104 [eight-view full 102MP export and native review](dihedral-fullframe.md)
-are complete; its broad evaluation/audit remains in progress. The V112-derived
-Small initializer and actual CPU updates are verified. [Matched Tiny/Small
-continuations](small-aligned-training.md) are queued for 20,000 further updates
-each after the original GPU chain. Source/scene intervals describe fixed
+and full numerical panels/audit are complete. Eight-view photo PSNR reaches
+37.04376dB with remaining color/detail weaknesses. The V112-derived Small
+initializer and actual CPU/CUDA updates are verified. [Matched Tiny/Small
+continuations](small-aligned-training.md) have started V114 training, with 20,000
+further updates per arm and automatic endpoint evaluation. Intervals describe fixed
 evaluation units and do not measure training-repeat uncertainty.
 
 Each improved-model report needs at least two native noisy/restored/exact-GT

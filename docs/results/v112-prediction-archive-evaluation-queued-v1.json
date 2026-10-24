@@ -1,0 +1,193 @@
+{
+  "recorded_local": "2026-10-24T05:57:01.433524-07:00",
+  "queue_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V112-continuations-evaluation-v1/queue-plan-v1.json",
+    "sha256": "867d1b5db87f573ad22f71b1105f0ece92e443c2ee623a2672af8d903e38fdce"
+  },
+  "launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V112-continuations-evaluation-v1/launch-v1.json",
+    "sha256": "a662407aa03cb0a60b34738c7e5a10a6d76040559c16c750ab685f5d1b74444b"
+  },
+  "observed_status": {
+    "owner": {
+      "pid": 856762,
+      "created": 1792846321.65
+    },
+    "queue_plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V112-continuations-evaluation-v1/queue-plan-v1.json",
+      "sha256": "867d1b5db87f573ad22f71b1105f0ece92e443c2ee623a2672af8d903e38fdce"
+    },
+    "completed": {},
+    "status": "waiting-for-exact-matched-training-owner",
+    "updated_unix": 1792846322.1386094,
+    "dependency": {
+      "pid": 726126,
+      "created": 1792842066.86
+    }
+  },
+  "public_collector": {
+    "path": "/home/dllu/proj/demosaic/scripts/collect_quality_predictions.py",
+    "sha256": "faf4d0dd640a1e3e000c83fb9c4c1ea79d2ad2c4553770e88ce4ab327865e6fb"
+  },
+  "public_controller": {
+    "path": "/home/dllu/proj/demosaic/scripts/queue_matched_quality_predictions.py",
+    "sha256": "f0595479fb5e905b7168e4734eaa5fef1af92b1848258689280aa416b34a923f"
+  },
+  "public_archive": {
+    "path": "/home/dllu/proj/demosaic/src/demosaic/prediction_archive.py",
+    "sha256": "c596aedd038cd2f6a760b4746a070c8e1870e38743d12087c49626d9f767633f"
+  },
+  "genuine_retained_output_archive_proof": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/prediction-archive-proof-v1/result-v1.json",
+    "sha256": "33f1a22bfdc47abdfb030f30fea6267b7173ddfe4fbd9f6d09f1b258c41613cc"
+  },
+  "actual_archive_proof_prediction_arrays": 4,
+  "actual_archive_proof_models": 2,
+  "maximum_rebuilt_sensor_PSNR_error": 0.0,
+  "new_neural_forwards_in_proof": 0,
+  "new_RAW_decodes_in_proof": 0,
+  "Torch_imported_in_proof": false,
+  "targeted_tests": {
+    "passed": 38,
+    "seconds": 4.05,
+    "scope": "Archive fidelity/corruption/alignment, evaluator callbacks/policies, photo/real metrics and texture metrics. Fixtures use no pretrained model. No learned CPU/CUDA work repeated."
+  },
+  "test_sources": [
+    {
+      "path": "/home/dllu/proj/demosaic/tests/test_prediction_archive.py",
+      "sha256": "06f3f758ae92b77fe66f4afc179636bcaf6a3865a15d00db58f11d904fb86f6a"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/tests/test_self_ensemble_evaluation.py",
+      "sha256": "d2cbd810d329cdab66ab1644ee9f1f16e49c8d9583b7410d7dbc30c5676dce0a"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/tests/test_suite.py",
+      "sha256": "e5fca27e3bdb8e680a271ef8cfe7f23dd3d634418d6be786cb41e6a5451f4ad5"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/tests/test_real_suite.py",
+      "sha256": "70d5f57482db4a845c1c8984b94c3b1abf5c8dd471b7fc130eed507fc6311d3d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/tests/test_texture_candidate_metrics.py",
+      "sha256": "dce2cca902d5b17a320966365b0be4a0d8418960f7dc83fd62251627e9f310e0"
+    }
+  ],
+  "core_training_source_boundary": [
+    {
+      "arm": "V114",
+      "training_plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V112-continuations-training-v1/V114/plan.json",
+        "sha256": "2d2c093a692c43ada10a72f6a61cb4467820490bf28fe4d00d0dfb1569016a33"
+      },
+      "evaluation_only_changed_modules": [
+        "real_suite.py",
+        "suite.py"
+      ]
+    },
+    {
+      "arm": "V115",
+      "training_plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V112-continuations-training-v1/V115/plan.json",
+        "sha256": "beccdcb5ffc851a4a31d6725ab6f5aaa150e8f236820829ff60609041d62098e"
+      },
+      "evaluation_only_changed_modules": [
+        "real_suite.py",
+        "suite.py"
+      ]
+    }
+  ],
+  "photo_observation_AST_identical_to_original": true,
+  "stages": {
+    "photo": {
+      "calls_per_model": 3108,
+      "observations_per_model": 12404,
+      "output": "/mnt/external/demosaic/V112-continuations-quality-20261024-v1/photo",
+      "manifest": {
+        "path": "/mnt/external/demosaic/evaluation/manifests/common-8192-44732-val-v1.jsonl",
+        "sha256": "7cc76f460019582eeec519b332e9f9f53e030bdf579e2f27b915916a741cce0d"
+      },
+      "protocol": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V112-continuations-evaluation-v1/work/configs/evaluation.yaml",
+        "sha256": "74b0df74b9734a714e04a0a1cf1e82ed0ba211b1d5b5fd745b9502ca5af2174c"
+      },
+      "future_input_witness": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/photo/retained-means.jsonl",
+      "future_original_result": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/photo/result.json"
+    },
+    "known": {
+      "calls_per_model": 24,
+      "observations_per_model": 72,
+      "output": "/mnt/external/demosaic/V112-continuations-quality-20261024-v1/known",
+      "manifest": {
+        "path": "/mnt/external/demosaic/evaluation/paired-raw-development-prepared-v1/manifest.json",
+        "sha256": "9fe6a7dc3981024516b421a67de6a81b819f57d9d52b19838458e783b0cb744c"
+      },
+      "future_input_witness": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/known/retained-means.jsonl",
+      "future_original_result": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/known/result.json"
+    },
+    "unseen": {
+      "calls_per_model": 30,
+      "observations_per_model": 90,
+      "output": "/mnt/external/demosaic/V112-continuations-quality-20261024-v1/unseen",
+      "manifest": {
+        "path": "/mnt/external/demosaic/evaluation/paired-unseen-development-prepared-v1/manifest.json",
+        "sha256": "2d78a7ba2a56e24af3f05b32ea01277853dc135dff3834810766b7c5ed2f0fa7"
+      },
+      "future_input_witness": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/unseen/retained-means.jsonl",
+      "future_original_result": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/unseen/result.json"
+    },
+    "texture": {
+      "calls_per_model": 112,
+      "observations_per_model": 448,
+      "output": "/mnt/external/demosaic/V112-continuations-quality-20261024-v1/texture",
+      "future_input_witness": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/texture/retained-means.jsonl",
+      "future_original_result": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/texture/result.json"
+    },
+    "color": {
+      "calls_per_model": 1176,
+      "observations_per_model": 1176,
+      "output": "/mnt/external/demosaic/V112-continuations-quality-20261024-v1/color",
+      "future_input_witness": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/color/retained-means.jsonl",
+      "future_original_result": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/color/result.json"
+    },
+    "gfx": {
+      "calls_per_model": 4,
+      "observations_per_model": 4,
+      "output": "/mnt/external/demosaic/V112-continuations-quality-20261024-v1/gfx",
+      "selection": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V112-continuations-evaluation-v1/work/configs/gfx.json",
+        "sha256": "dfa66bc9c2b2c49605cea4c15e49dc90212c7de5bdfb6be2ef03203beb97cc75"
+      }
+    },
+    "gfx-highlights": {
+      "calls_per_model": 2,
+      "observations_per_model": 2,
+      "output": "/mnt/external/demosaic/V112-continuations-quality-20261024-v1/gfx-highlights",
+      "selection": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V112-continuations-evaluation-v1/work/configs/gfx-highlights.json",
+        "sha256": "b5733d0b100e6daa9778b379d985c64391dc27fbe183dab510161d2104c8e5d3"
+      }
+    },
+    "full-gfx": {
+      "calls_per_model": 130,
+      "observations_per_model": 520,
+      "output": "/mnt/external/demosaic/V112-continuations-quality-20261024-v1/full-gfx",
+      "selection": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V112-continuations-evaluation-v1/work/configs/full-gfx.json",
+        "sha256": "93950ae5bbf4ae16741b5b56adc03d0973a3b929dfecac7c733244b8ef906727"
+      }
+    }
+  },
+  "planned_model_and_encoder_calls": 9172,
+  "planned_image_observations_including_full_frame_tiles": 29432,
+  "new_endpoint_CUDA_calls_at_receipt": 0,
+  "controller_children_at_receipt": 0,
+  "new_endpoint_predictions_at_receipt": 0,
+  "current_selector": {
+    "path": "/home/dllu/proj/demosaic/configs/current-model.json",
+    "sha256": "66c2fff3e56e8ee56656389236b0b8e4f19d15bcce4ab7e6d5b59b50b4a8cfff"
+  },
+  "source_and_artifact_guards": true,
+  "scope": "New V114/V115 endpoints only, eight single-view FP32 stages after exact matched-training owner success. Retain native predictions/exact supervision and compare all numerical-panel inputs to original completed eight-view witnesses. Existing V112 and stronger RawNIND controls are reused, without neural reruns. Six full-frame native floats and two RGB16 exports per new model. No automatic model promotion or retry; numeric/native review follows."
+}

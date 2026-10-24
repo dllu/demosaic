@@ -49,6 +49,7 @@ def evaluate_pairs(
     gaussian_reference=None,
     nonlocal_reference=None,
     self_ensemble="none",
+    prediction_callback=None,
 ):
     if self_ensemble not in ("none", "dihedral8"):
         raise ValueError(f"Unknown self-ensemble policy {self_ensemble!r}")
@@ -222,6 +223,13 @@ def evaluate_pairs(
                             else model(*arguments)
                         )
                     predictions.append((label, prediction))
+                    if prediction_callback is not None:
+                        prediction_callback(label, {"ids": [c["id"] for c in crop_records],
+                                                    "scene": case["scene"], "conditioning": case["conditioning"],
+                                                    "noise_multiplier": noise_multiplier,
+                                                    "pattern": meta["pattern"]}, prediction,
+                                            {**tensors, "packed": packed, "variance": arguments[1],
+                                             "colors": labels, "wb": wb, "matrix": matrix})
                 border = 32
                 region = (..., slice(border, -border), slice(border, -border))
                 for label, prediction in predictions:

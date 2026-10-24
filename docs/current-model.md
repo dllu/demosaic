@@ -1,7 +1,7 @@
 # Current model choices
 
 **V112 final20k is the working restoration and quality-training baseline.**
-It reaches36.90238dB on all427 photos, +.10154dB over V104, with425 source means
+It reaches36.90238dB on all 427 photos, +.10154dB over V104, with425 source means
 improving. It keeps V111-like photo quality while raising both camera means and
 reducing worst ADC flat bias to50.89DN16. [Complete review and native images](v112-quality.md).
 
@@ -11,7 +11,7 @@ reducing worst ADC flat bias to50.89DN16. [Complete review and native images](v1
 | Near-equal photographic alternative | V111: photo36.90367dB, but lower camera means and ADC maximum2,142.98DN16 |
 | Explicit ADC sample fidelity/photo PSNR | Optional [V104 sites export](adc-consistency.md): +.28850dB over original V104 on full ADC photo panel; color/detail tradeoffs remain |
 | Separate earlier camera reference | V102: unseen CFA53.97177dB remains slightly higher; its overall photo mean is36.67951dB |
-| Optional eight-view inference | [V104 pilot gains](dihedral-quality.md) and [complete 102MP RGB16/native review](dihedral-fullframe.md); eight evaluations per tile. Broad panels/audit continue separately from V112 selection |
+| Optional eight-view inference | [Completed V104 full panels](dihedral-quality.md): photo37.04376dB, known/unseen54.33283/53.99412dB; all 427 photo-source means improve over V104 single. ADC max420.90DN16 remains worse than V112; eight evaluations per tile |
 
 ## Run the current model
 
@@ -53,8 +53,8 @@ repair was off in these comparisons.
 The [Small feature-transfer method](small-feature-transfer.md) now preserves
 V112's learned gates and trunk through a training-only lateral fit. Photo means
 stay close; two adverse-camera crops remain .20–.32dB worse. Matched V114 Tiny
-and V115 fitted Small continuations passed eight actual CPU updates each and
-are [queued behind the original GPU evaluation/audit](small-aligned-training.md).
+and V115 fitted Small passed eight actual CPU and CUDA updates each;
+[V114 training is running](small-aligned-training.md), with Small following.
 Each receives 20,000 further updates at seed 63. Trained quality remains pending.
 
 Earlier results remain useful and their receipts unchanged:

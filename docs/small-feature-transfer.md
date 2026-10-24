@@ -133,9 +133,9 @@ IDs and preserves all successful observations without repetition.
 
 The [matched V114/V115 plan](small-aligned-training.md) continues V112 Tiny and
 this fitted Small initializer for 20,000 additional updates each at seed 63.
-Both passed eight actual discarded CPU optimizer updates. CUDA checks and
-production wait for the original GPU evaluation/audit chain. These checks do
-not establish a trained Small quality gain.
+Both passed eight actual discarded CPU and native 256/B16/BF16 CUDA updates.
+V114 training has started after the original GPU chain; Small follows. Trained
+Small quality remains unmeasured.
 
 The [public projection fitter](../scripts/fit_dino_laterals.py) reproduces the
 maps from retained training feature pairs:

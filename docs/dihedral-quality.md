@@ -1,10 +1,11 @@
 # Optional eight-view restoration
 
-**Eight-view V104 improves all twelve fixed material cases and both selected
-adverse camera crops.** It uses the original V104 weights, averaging exact
-rotations/reflections in linear camera RGB. Bark and canopy improve modestly;
-high-noise fine detail and real dark-field blotches remain. This is an optional
-inference policy requiring eight model evaluations per tile.
+**Eight-view V104 reaches 37.04376dB on the complete 427-photo panel**, with every
+source mean improving over single-view V104. Known/unseen camera means also
+improve. It uses the original weights and exact sensor rotations/reflections,
+requiring eight evaluations per tile. Its ADC color tail remains worse than
+V112's, and fine high-noise detail stays weak. V112 remains the default learned
+baseline; eight views are a measured higher-PSNR option with explicit tradeoffs.
 
 Add `--self-ensemble dihedral8` to `demosaic infer`, `demosaic benchmark`,
 `demosaic quality` or
@@ -14,12 +15,50 @@ reported quality uses `--precision float32`; reduced-precision quality has not
 been measured for this policy. The [complete 102MP GFX export is now reviewed](dihedral-fullframe.md),
 with native foliage/fence and other regions, two RGB16 files and a recorded
 885.93s inference/blending interval. The pilot comparisons below use fixed
-256/512-pixel contexts; full quality panels are still running.
+256/512-pixel contexts. All five full numerical panels and their independent
+metric audit are now complete.
 
 [Scores, sources, weights, independent audit and implementation checks](results/v104-dihedral8-pilot-v1.json).
 The original final20k checkpoint is `/mnt/external/demosaic/models/v104-final20000.pt`,
 SHA256 `8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300`.
 No weights, noise coefficients or target-dependent gains were fitted.
+
+## Complete primary results
+
+| Method | Photo sRGB PSNR | Known CFA PSNR | Unseen CFA PSNR | Worst ADC bias, DN16 |
+| --- | ---: | ---: | ---: | ---: |
+| V104 single | 36.80085 | 54.26606 | 53.91700 | 1,218.06 |
+| V112 single | 36.90238 | 54.26914 | 53.95378 | **50.89** |
+| V104 eight views | **37.04376** | **54.33283** | **53.99412** | 420.90 |
+
+Eight views gain .24291dB over V104 on 427 sources, source-bootstrap 95% interval
+[.23543,.25064], with 427/427 source means increasing. Known/unseen gains over
+V104 are .06677/.07712dB, with 4/4 and 5/5 scene means increasing. Relative to
+current V112, the respective mean gains are .14138/.06369/.04034dB. Source/scene
+intervals describe fixed evaluation units, not training-seed uncertainty.
+
+[Full-panel sources, independent reductions, color/detail data and provenance](results/v104-dihedral8-full-quality-primary-v1.json) ·
+[Actual full-panel native viewing](results/v104-dihedral8-full-quality-native-view-v1.json).
+Some scenes remain below the stronger RawNIND reference; broad qualitative
+superiority remains unachieved. V112 has lower ADC/noisy-color tails and slightly
+stronger 16-pixel weak-detail recovery. At 18% gray /2% contrast /ISO12800,
+eight-view gains are .00297/.09545/.63945 for 4/8/16-pixel carriers: the finest
+carrier is still nearly absent.
+
+Two native 160-pixel triplets from the completed full panel, noisy → restored →
+exact synthetic GT. Both use RGGB, the ISO12800 prior, shot .00256/read variance
+.0000262144, shared WB/matrix, exposure ×1 and ROI [48,48,160,160] in native 256
+contexts. Pixels are never resized:
+
+![Full-panel eight-view example: noisy, restored and exact synthetic GT](images/v104-dihedral8-full-quality/crop-5fa4178602bc1406.png)
+
+![Full-panel eight-view building: noisy, restored and exact synthetic GT](images/v104-dihedral8-full-quality/crop-e2066017cc3680b3.png)
+
+[First source/weights/conditioning/display metadata](images/v104-dihedral8-full-quality/crop-5fa4178602bc1406.json) ·
+[Second metadata](images/v104-dihedral8-full-quality/crop-e2066017cc3680b3.json).
+Coarse edges are preserved; faint lines in the orange field and fine cloud
+texture remain smoothed. These examples supplement the fixed material and
+real-camera observations below.
 
 ## Fixed photographic panel
 
@@ -76,7 +115,7 @@ no new reference inference was run.
 
 ![GFX native contexts: noisy, single view, eight views and separate ISO100 reference](images/v104-dihedral8-pilot/gfx/comparison.png)
 
-All six fixed sky/building/foliage/fence/sign/platform regions use native160
+All six fixed sky/building/foliage/fence/sign/platform regions use native 160
 sensor-pixel crops from 512-pixel contexts and common +2EV display.
 DSCF3879 ISO6400 is the input; DSCF3880 ISO100 f/5.6 is an independently
 captured qualitative reference, **not GT**. Aperture, exposure and moving
@@ -104,7 +143,7 @@ under .000004dB. All 20 identity views exactly replay the retained original
 V104 floats. SSIM and masked highlight/shadow metrics retain their original
 implementation. All 80 distinct native cells were actually viewed.
 
-## Full comparison running
+## Full comparison and independent audit complete
 
 The full comparison now uses the public photo, prepared-camera, texture and
 color evaluators with `self_ensemble="dihedral8"`. Checkpoint labels and receipts
@@ -128,12 +167,12 @@ also replay the preserved single-view observation code exactly. Existing
 single-view/reference results remain the controls.
 
 The evaluation started after the exact eight-view full-GFX process and original
-V111/V112 workflow completed successfully. It retains its frozen memory/disk
-limits. Independent metric checks and native-crop review follow completion;
-no broad quality result is reported yet.
+V111/V112 workflow completed successfully. All five numerical panels completed
+under the frozen resource limits. Independent metric reconstruction and the
+full-panel photo examples above are complete.
 [Original plan, CPU proof and launch receipt](results/v104-dihedral8-full-quality-queued-v1.json).
 
-An independent score audit is also queued after the full evaluation. It
+The independent score audit finished after the full evaluation. It
 regenerates the original input fingerprints, rehashes saved means and rebuilds
 photo PSNR/detail, measured-CFA, carrier/flat and analytic-color metrics in
 NumPy64. Source-weighted changes against the original V104 results and scene
@@ -144,8 +183,10 @@ Full photo replay uses the original CUDA RNG after evaluation finishes.
 Its actual CPU fixtures agree with saved PSNR within .000004dB and reproduce
 their inputs exactly. The new context replay also reproduces all 112 existing
 texture batches and recovers the published V104 photo/known/unseen means.
-These verify arithmetic and joins using existing artifacts; the full eight-view
-results and native review remain pending.
+Those fixtures were followed by the full 14,190-observation audit. Maximum
+independent rendered-PSNR difference is .000203dB; color fields agree exactly
+and carrier fields within 1.1e-13. SSIM and masked photo metrics retain the public
+Torch implementation. Original machine receipts remain unchanged.
 [Audit scope, proofs and exact process dependency](results/v104-dihedral8-audit-queued-v1.json).
 
 Thirty-seven targeted operator tests pass, including single-view references,
@@ -169,12 +210,12 @@ the first GPU validator failed to reset device-specific noise tables after
 moving a previously used CPU model. Their sources/logs remain preserved.
 Corrected checks pass without changing the pilot scores or model weights.
 
-Full 427-photo, complete camera panels and analytic color/weak-texture grids
-remain in progress and unreported for this policy. The complete 102MP export
+The full 427-photo, complete camera and analytic color/weak-texture panels are
+complete and independently checked. The complete 102MP export
 and native review are finished, with their own [file/timing evidence](dihedral-fullframe.md).
 The V111/V112 matched comparison is complete; V112 remains current. The
-[new Tiny/Small continuations](small-aligned-training.md) wait for this original
-evaluation and independent audit before starting CUDA work.
+[new Tiny/Small continuations](small-aligned-training.md) passed actual CUDA
+checks and started V114 training after this original chain exited.
 
 Photo attribution: [Derek Ramsey, bark](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
 [CC BY-SA 2.5](https://creativecommons.org/licenses/by-sa/2.5/);

@@ -54,10 +54,20 @@ def test_photo_suite_averages_only_checkpoint_and_records_policy(tmp_path, monke
         'white_balance': [1, 1, 1], 'camera_to_srgb': np.eye(3).tolist(),
         'conditions': [{'name': 'adc', 'shot': 0, 'read': 0, 'exposure': 1}]}))
     output = tmp_path/'photo'
+    captured = []
+    def capture(label, context, prediction, batch):
+        if label.startswith('0:unit'):
+            captured.append((context, prediction.clone(), {k: v.clone() for k, v in batch.items()}))
     suite.run_suite([checkpoint], manifest, output, config, patch_size=32, batch_size=1,
                     synthetic_count=0, device='cpu', precision='float32',
-                    gaussian_reference=tmp_path/'reference', self_ensemble=policy)
+                    gaussian_reference=tmp_path/'reference', self_ensemble=policy,
+                    prediction_callback=capture)
     assert own.calls == 2*views and reference.calls == 2
+    assert len(captured) == 2
+    assert {c['pattern'] for c, _, _ in captured} == {'RGGB', 'GBRG'}
+    assert all(c['ids'] == ['unit-photo'] and c['seed'] == 42 for c, _, _ in captured)
+    assert all(p.dtype == b['target'].dtype == torch.float32 and p.shape == b['target'].shape
+               for _, p, b in captured)
     data = json.loads((output/'protocol.json').read_text())
     assert data['models'][0]['self_ensemble'] == policy
     assert data['models'][0]['model_views_per_tile'] == views
@@ -96,9 +106,17 @@ def test_real_suite_preserves_reference_policy_and_measured_mask(tmp_path, monke
     manifest.write_text(json.dumps({'cases': [case], 'split': 'unit', 'notes': 'unit-only fixture',
                                    'dataset_license': 'unit-only', 'attribution': 'unit fixture'}))
     output = tmp_path/'camera'
+    captured = []
+    def capture(label, context, prediction, batch):
+        if label.startswith('0:unit'):
+            captured.append((context, prediction.clone(), {k: v.clone() for k, v in batch.items()}))
     real_suite.evaluate_pairs([checkpoint], manifest, output, device='cpu', precision='float32',
-        gaussian_reference=tmp_path/'reference', self_ensemble=policy)
+        gaussian_reference=tmp_path/'reference', self_ensemble=policy, prediction_callback=capture)
     assert own.calls == views and reference.calls == 1
+    assert len(captured) == 1 and captured[0][0]['ids'] == ['unit-crop']
+    assert captured[0][0]['scene'] == 'unit-scene'
+    assert torch.equal(captured[0][2]['sensor_mask'][0], torch.from_numpy(mask))
+    assert torch.equal(captured[0][2]['reference_rgb'][0], torch.from_numpy(rgb))
     data = json.loads((output/'summary.json').read_text())
     assert data['models'][0]['self_ensemble'] == policy and data['models'][0]['model_views_per_tile'] == views
     rows = [json.loads(s) for s in (output/'per-crop.jsonl').read_text().splitlines()]
@@ -144,3 +162,27 @@ def test_quality_cli_exposes_policy_without_changing_default():
     args = ['quality', 'weights.pt', '--manifest', 'data.jsonl', '--output', 'output']
     assert parser().parse_args(args).self_ensemble == 'none'
     assert parser().parse_args(args+['--self-ensemble', 'dihedral8']).self_ensemble == 'dihedral8'
+
+
+def test_texture_callback_retains_actual_targets_without_extra_forwards(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    (tmp_path/'configs').mkdir()
+    (tmp_path/'configs/evaluation.yaml').write_text(yaml.safe_dump({
+        'patterns': ['RGGB', 'BGGR', 'GRBG', 'GBRG'],
+        'white_balance': [1, 1, 1], 'camera_to_srgb': np.eye(3).tolist(),
+        'conditions': [{'name': name, 'shot': 0, 'read': 0, 'exposure': 1}
+                       for name in texture.probe.CONDITIONS]}))
+    own = SpatialBias().eval()
+    state = {'step': 3, 'loaded_sha256': 'a'*64, 'config': {'run': 'unit'}}
+    monkeypatch.setattr(texture, 'load_checkpoint', lambda *_a, **_k: (own, state))
+    checkpoint = tmp_path/'fixture.pt'
+    checkpoint.write_bytes(b'nonlearned fixture')
+    captured = []
+    def capture(label, context, prediction, batch):
+        captured.append((context, tuple(prediction.shape), tuple(batch['target'].shape)))
+    texture.main([checkpoint], tmp_path/'texture', device='cpu', precision='float32',
+                 prediction_callback=capture)
+    assert own.calls == len(captured) == 448//texture.probe.DRAWS
+    assert {c['kind'] for c, _, _ in captured} == {'carrier', 'flat'}
+    assert all(p == t == (texture.probe.DRAWS, 3, texture.probe.SIZE, texture.probe.SIZE)
+               for _, p, t in captured)

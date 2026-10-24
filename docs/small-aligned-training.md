@@ -1,13 +1,14 @@
 # Matched quality training from V112
 
-**V114 Tiny and V115 fitted Small are queued for matched continuations from
-V112 history.** Both receive 20,000 additional updates, seed 63 and V112's trained
-loss scale. The controller waits for the exact original eight-view evaluation
-and its independent audit to finish before new CUDA work. V112 remains current;
-the queued models have no production updates yet.
+**V114 Tiny has started its original 20,000-update continuation; V115 fitted
+Small follows with the same budget.** Both passed eight actual native 256/B16/BF16
+CUDA updates after the original eight-view evaluation/audit exited successfully.
+They use seed 63 and V112's trained loss scale. V112 remains the current learned
+baseline while endpoint quality is unmeasured.
 
 [Plans, actual CPU checks and queue boundary](results/v112-continuations-queued-v1.json) ·
 [V112 baseline](v112-quality.md) · [Completed Small transfer](small-feature-transfer.md).
+[Current guarded launch, successful CUDA checks and evaluation queue](results/v112-spawn-guard-training-and-evaluation-v2.json).
 
 ## Models and budget
 
@@ -71,3 +72,18 @@ Quality precedes speed.
 The [old V104-derived CPU check and V113 plan](results/small-aligned-training-queued-v1.json)
 and [intentional idle supersession](results/small-aligned-v113-superseded-v1.json)
 remain preserved. They have no production CUDA updates and are not resumed.
+
+The [retained-prediction endpoint evaluation](quality-prediction-archive.md) is
+now queued behind this exact training controller. It covers the complete
+photo/camera/analytic panels, six GFX contexts and complete 102MP exports for
+both new models, reusing existing V112/RawNIND controls. Exact numerical targets
+and native FP32 predictions will be retained for independent review without
+repeating model inference. Its controller is waiting with no child or CUDA work.
+
+The first CUDA wrapper lacked a multiprocessing main guard. A spawned loader
+re-entered it and failed before the first batch; the root receipt confirms zero
+prepared batches, forwards or optimizer steps. The original controller stopped
+the attempt and its dependent evaluator stopped without CUDA. Sources, logs,
+receipts and partial directories remain preserved. A corrected wrapper passed a
+real spawn-import test, then both actual eight-update CUDA checks with identical
+inputs/domains/LRs and finite state. The original 16 CPU updates were reused.

@@ -233,6 +233,7 @@ def evaluate_records(
     reuse_only=False,
     precision="float16",
     self_ensemble="none",
+    prediction_callback=None,
 ):
     """Evaluate explicitly validated records; callers validate their actual owner."""
     if self_ensemble not in ("none", "dihedral8"):
@@ -372,6 +373,8 @@ def evaluate_records(
                 new_count += 1
                 new_view_count += record["model_views_per_tile"]
             assert v.shape == (1, 3, 256, 256) and v.dtype == np.float32 and np.isfinite(v).all()
+            if prediction_callback is not None:
+                prediction_callback(model_index, c, v, cpu, path)
             predictions.append(
                 {
                     "path": str(path),

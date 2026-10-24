@@ -25,7 +25,8 @@ tile. `benchmark`, `quality` and the DNG batch exporter accept the same option; 
 record the policy. [Measured gains, native comparisons and remaining limitations](dihedral-quality.md).
 The [completed full 102MP RGB16 review](dihedral-fullframe.md) includes native
 foliage/fence comparisons and the actual FP32 inference observation. Broader
-eight-view quality panels remain in progress.
+eight-view quality panels and independent checks are complete, with measured
+photo/camera gains and remaining color/detail tradeoffs.
 
 ## Environment and storage
 

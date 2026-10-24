@@ -12,11 +12,11 @@ detail remain weak; quality still precedes speed.
 
 [V111/V112](loss-scale-training.md) retain the original V104 EMA and learned
 gates on90,864 cleaned sources. Both use seed62, fresh AdamW/EMA,20k updates,
-B16/native256/BF16, LR1e-5/warmup200, six reviewed ROIs, zero optical PSFs,
+B16/native 256/BF16, LR1e-5/warmup200, six reviewed ROIs, zero optical PSFs,
 weak textures and photographic contrast attenuation. Only reconstruction epsilon
 changes, .001→.0003; paired RAW stays.0001.
 
-Both add about.10dB over V104 on full427. V112's camera means and substantially
+Both add about.10dB over V104 on full 427. V112's camera means and substantially
 lower ADC tail favor it over V111 despite a.00129dB lower photo mean.
 [Primary comparison](v111-v112-primary-quality.md). Larger8/16-pixel weak carriers
 improve, while4-pixel structure remains nearly absent. Selected native material
@@ -25,8 +25,8 @@ and all six GFX contexts stay visible alongside these limits.
 The [Small feature fit](small-feature-transfer.md) now uses V112 teacher targets
 and retained training previews/Small features. Both Tiny and fitted Small passed
 eight actual CPU optimizer updates with identical input/domain/LR schedules.
-[Matched V114/V115 continuations](small-aligned-training.md) are queued for
-20,000 further updates each after the original GPU evaluation/audit. The idle
+[Matched V114/V115 continuations](small-aligned-training.md) passed actual CUDA
+checks and started V114's 20,000 updates; Small follows after its endpoint. The idle
 V104-derived V113 plan remains preserved without CUDA/production work.
 
 <a id="active-v104-cleaned-corpus-continuation"></a>
@@ -37,7 +37,7 @@ V104-derived V113 plan remains preserved without CUDA/production work.
 reviewed **90,872-source**4×/8× pair. Both discarded eight-update CPU and
 CUDA checks passed, verifying exact parent EMA initialization,finite states
 and unchanged official DINO. The production run used fresh
-AdamW/EMA,seed61,B16/native256/BF16,LR1e-5/warmup200. Its six original
+AdamW/EMA,seed61,B16/native 256/BF16,LR1e-5/warmup200. Its six original
 ROI objects and5% conditional-photo probability,zero optical PSFs,weak synthetic
 textures,photo contrast attenuation,native128/paired32 remain unchanged.
 
@@ -57,7 +57,7 @@ photo sources and2,811 draws from1,645 newly eligible sources. Its5,672 reviewed
 ROI draws cover the same six sources. These are reconstructed full-schedule
 counts; the fixed20k endpoint has now completed. Twelve actual clean-reader
 checks cover six new-source draws and all six ROIs,repeated exactly with
-finite native256 outputs and unchanged Torch RNG,no GPU or denoiser.
+finite native 256 outputs and unchanged Torch RNG,no GPU or denoiser.
 
 Full427/16procedural/seven-condition/four-CFA,known4/unseen5 measured-camera,
 weak texture, color, GFX and highlights are complete after the original
@@ -126,7 +126,7 @@ keep original V102 separate from the zero-gate derivative. Separate discarded
 eight-update CPU checks now pass for both cleaned recipes, with exact initial
 EMA/encoder identities, finite final model/EMA/Adam and identical eight-batch
 observations across all three data domains. [Actual CPU evidence](results/backbone-cleaned-recipes-CPU-v1.json).
-Fresh eight-update CUDA checks now pass at native256/B16/BF16. Initial EMA and
+Fresh eight-update CUDA checks now pass at native 256/B16/BF16. Initial EMA and
 per-arm encoder identities match; all eight actual observations and the first
 loss agree across arms, and model/EMA/Adam remain finite.
 [Actual CUDA evidence](results/backbone-cleaned-recipes-CUDA-v1.json).
@@ -158,7 +158,7 @@ while rebinding to the same new manifest.
 | Parent | V101 final10000 EMA |
 | Commons cohort / visual exclusions | 88,477 /31 |
 | Native / paired captures | 128 /32 |
-| Schedule | Seed60, 20,000 updates, B16/native256, BF16 |
+| Schedule | Seed60, 20,000 updates, B16/native 256, BF16 |
 | LR / warmup | 1e-5 /200 updates |
 | V102 reviewed regions | Original 6 |
 | V103 reviewed regions | Expanded 32 |
@@ -172,7 +172,7 @@ endpoints, all seven evaluation panels and complete GFX exports have completed
 successfully. Owners exited; no intermediate checkpoint search selected them.
 
 V102/V103 photo PSNR is36.67951/36.68091dB. V102 gains+.17604dB over V101
-on full427, with425 source means improving; known/unseen CFA means rise to
+on full 427, with425 source means improving; known/unseen CFA means rise to
 54.23709/53.97177dB. The six/32 ROI difference has only a tiny photo effect,
 while V102 has lower ADC color bias and stronger tested weak-carrier response.
 V102 initialized the subsequent V104 continuation. [Scores, uncertainty, actual native review
@@ -210,7 +210,7 @@ Two continuations start from the exact final V84 EMA with fresh AdamW/EMA:
 | Reviewed ROI probability, conditional on a photographic Commons sample | 0 | .05 |
 | Flat palette | Original V84 .10 share /8 chroma stops | Same |
 | Learned architecture / initializer | V84 final20k | Same exact weights |
-| Schedule | Seed59, B16/native256, BF16,10,000 updates, LR3e-6/warmup100 | Same |
+| Schedule | Seed59, B16/native 256, BF16,10,000 updates, LR3e-6/warmup100 | Same |
 
 [Control recipe](../configs/quality-v84-curated-control-v100.yaml) ·
 [Fine-detail recipe](../configs/quality-v84-fine-detail-v101.yaml).
@@ -305,7 +305,7 @@ All four discarded CPU/CUDA smokes passed, and both production runs completed
 10,000 updates from the same exact V84 weights. Both original trainers/controllers
 have exited. Actual owner/phase status is in the local `status.json`.
 The [completed V84/V100/V101 primary report](v84-curated-quality-review.md)
-includes full427 photographic and known/unseen measured-CFA results, independently
+includes full 427 photographic and known/unseen measured-CFA results, independently
 rebuilt source means, intervals and native crops. All seven evaluation panels
 and the complete GFX exports have finished; [full-frame results](gfx-qualitative.md)
 include native crops and checkpoint-specific timings.

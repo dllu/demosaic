@@ -1,7 +1,7 @@
 # Experiment index
 
 **V112 is the current quality baseline in V84's architectural family.**
-It reaches36.90238dB on full427, +.10154dB over V104, with425 source means
+It reaches36.90238dB on full 427, +.10154dB over V104, with425 source means
 improving, higher known/unseen camera means and worst ADC flat bias50.89DN16.
 [Complete current results and native comparisons](v112-quality.md). Fine
 high-noise/real foliage detail remains weak; original evidence stays visible.
@@ -30,7 +30,7 @@ matched studies when attributing a gain to a particular change.
 | Native data and larger context | V84/V85 establish the36.44dB architectural reference continued by V101. The extra native captures have little matched effect; larger context is a separate small-effect comparison | [V84/V85](native-data-original20k-review.md), [V86/V87](training-context-original4k-review.md) |
 | Spectral and late RGB refinement | Small matched mean gains or protected common weights did not fix weak detail; head-only V92 regressed | [V88/V89](spectral-original4k-review.md), [V90/V91](late-rgb-original4k-review.md), [V92](late-rgb-head-only-original4k-review.md) |
 | ADC-only inference | With unchanged V104 weights, replacing only valid measured sites gains .2885 dB rendered PSNR across all 427 sources/all 1,708 CFA cases. Local chroma/SSIM regressions and a flat-color tail remain; positive-noise profiles bypass it | [Complete site-consistency comparison, actual export and native crops](adc-consistency.md) |
-| Eight-view inference | Exact rotations/reflections improve all twelve selected V104 material cases and two adverse camera crops; high-noise fine detail/blotches remain. Complete102MP RGB16/native review is finished; broad panels run separately. Costs eight evaluations per tile | [Pilot and implementation checks](dihedral-quality.md), [complete-frame comparison](dihedral-fullframe.md) |
+| Eight-view inference | Full427 photo PSNR37.04376dB; all 427 source means and4/4 known,5/5 unseen scene means improve over V104 single. ADC tail420.90DN16 remains worse than V112, with fine-detail/blotch weaknesses. Costs eight evaluations per tile | [Full panels, native examples and independent audit](dihedral-quality.md), [complete-frame comparison](dihedral-fullframe.md) |
 
 Each complete quality review retains source/checkpoint identities, native
 noisy/restored/reference crops and explicit real-reference limitations. The
@@ -44,7 +44,7 @@ retains V84's augmentation; the other tests zero optical PSFs, weak synthetic
 textures, photographic contrast attenuation and reviewed fine-detail ROIs.
 The architecture, broad flat palette, native128 and paired32 targets stay fixed.
 See the [recipes, execution status and evaluation approach](quality-first-training.md).
-V101 reaches **36.50347dB** on full427, +.06351dB over V84, improving 418/427
+V101 reaches **36.50347dB** on full 427, +.06351dB over V84, improving 418/427
 source means and all seven condition means. Known/unseen CFA means remain close
 to V84. The [completed primary report](v84-curated-quality-review.md) and
 [current native gallery](heldout-detail.md) show gains and remaining smoothing.
@@ -58,14 +58,17 @@ are current; all seven evaluation panels and full-frame exports are complete.
 [Source review and native examples](incoming-commons-quality.md).
 The [completed V111/V112 loss-scale comparison](loss-scale-training.md)
 uses the cleaned90,864-source corpus and original V104 EMA/gates. Both add about
-.10dB on full427; V112 improves camera/color over V111 and becomes the current
+.10dB on full 427; V112 improves camera/color over V111 and becomes the current
 baseline. The [primary report](v111-v112-primary-quality.md) and
 [complete review](v112-quality.md) show native strengths and remaining limits.
 The [completed Small transfer](small-feature-transfer.md) now uses V112 teacher
 targets and cached training features. Photo means remain close, while two dark
 camera crops lose .20–.32dB. Matched Tiny V114 / fitted Small V115 passed eight
-actual CPU updates each and are [queued](small-aligned-training.md) for 20,000
-further updates per arm. The old idle V113 plan and evidence remain preserved.
+actual CPU/CUDA updates each; [V114 training has started](small-aligned-training.md),
+with 20,000 further updates per arm. The old idle V113 plan and evidence remain preserved.
+Their [endpoint evaluation queue](quality-prediction-archive.md) retains exact
+targets and native predictions across all numerical panels, with standing GFX
+contexts and complete-frame exports; existing controls are reused.
 
 The source scan covers88,508 training images, with570 actually reviewed and 31
 withheld/excluded. Completed runs used the earlier 24 exclusions; seven more and

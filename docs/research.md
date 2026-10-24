@@ -4,7 +4,7 @@
 
 Current implementation: V112's pretrained DRUNet RGB restoration with an official
 frozen DINOv3 ConvNeXt-Tiny pyramid in V84's architectural family. Its completed
-full427 result reaches 36.90238dB, +.10154dB over V104, with 425/427 photo-source
+full 427 result reaches 36.90238dB, +.10154dB over V104, with 425/427 photo-source
 means improving. Known/unseen camera means are 54.26914/53.95378dB; worst ADC
 flat-color bias falls from V104's 1,218 to 50.89 DN16. All seven panels and
 complete GFX exports are done. Fine high-noise and real foliage detail remain
@@ -40,9 +40,9 @@ The [completed Small lateral fit](small-feature-transfer.md) reuses 80 retained
 training previews/features, fits 64 sources and checks 16 distinct training
 sources. Selected photo means remain close to V112, but two dark-camera crops
 lose .20–.32dB. Matched [V114 Tiny / V115 fitted Small continuations](small-aligned-training.md)
-passed eight actual CPU optimizer updates each, with exact initial identities
-and matching batches/domains/LRs. Their CUDA checks and 20,000 further updates
-per arm wait for the original eight-view evaluation/audit chain.
+passed eight actual CPU and CUDA optimizer updates each, with exact initial
+identities and matching batches/domains/LRs. V114 training has started; each
+arm receives 20,000 further updates, with retained-prediction evaluation queued.
 The [loss-smoothing diagnostic](loss-smoothing-detail.md) also measures 324
 output gradients on 108 fixed V102 training-source restorations. Smaller epsilon
 strengthens low-noise faint-detail slopes but increases the full gradient more.
@@ -63,7 +63,9 @@ uniform averaging of exact sensor rotations/reflections with the same V104
 weights. It improves twelve fixed material cases and two adverse camera crops,
 without repairing all fine detail/blotches. Production CPU/GB10 and RGB16/DNG
 checks pass. Its [complete 102MP RGB16 export and native review](dihedral-fullframe.md)
-are finished; broad quality panels and their independent audit remain in progress.
+are finished. Full panels and independent audit now show37.04376dB photographic
+PSNR and higher camera means, with all 427 source means up over V104 single.
+The ADC tail remains420.90DN16, worse than V112's50.89; fine detail remains weak.
 The completed [V111 analytic grids](v111-early-quality.md#complete-weak-texture-and-flat-color-panels)
 also show better high-noise color/coarse carriers and worse ADC flat bias.
 
@@ -381,7 +383,7 @@ data and budget; no full-suite, real-camera, CUDA, SOTA or speed result follows.
 The [optional evaluator and standing GFX contexts](nonlocal-reference-integration.md)
 pass genuine CPU replay and native review. The [completed CUDA/full-suite
 comparison](nonlocal-reference-full-review.md) now includes genuine native
-operators, full427/paired panels, full 102MP GFX output and three cameras. Its
+operators, full 427/paired panels, full 102MP GFX output and three cameras. Its
 synthetic-photo scores are lower; small paired-real differences are uncertain.
 The reference remains optional and establishes neither SOTA nor broad real
 superiority for this project.

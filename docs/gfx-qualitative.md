@@ -7,7 +7,7 @@ fine foliage and saturated-sign structure remain soft. [Current quality report](
 
 ![Complete-frame V104,V112,half/pre-upsampled RawNIND and independent ISO100 reference](images/v112-fullframe/comparison.png)
 
-All36 native160 cells were viewed, with common+2EV and no resizing. All twelve
+All36 native 160 cells were viewed, with common+2EV and no resizing. All twelve
 underlying noisy/reference float arrays match exactly; one common preview is
 used across CPU/GPU runs. [Source/ROI/weights/noise/display and preview provenance](images/v112-fullframe/manifest.json).
 The separate ISO100 f/5.6 exposure is a qualitative reference, **not GT**.
@@ -23,7 +23,8 @@ all six fixed regions from its completed 102MP RGB16 export, alongside V104,
 V112 and the stronger RawNIND reference. Single/eight-view changes look small;
 fine foliage and saturated-sign detail remain soft. Its two TIFFs, sampled color
 consistency and all 36 native cells are verified. The recorded FP32 inference/
-blending interval is 885.93s; full quality panels remain in progress.
+blending interval is 885.93s; [full quality panels and independent audit](dihedral-quality.md)
+are now complete. Fine-detail and ADC color weaknesses remain documented.
 
 ![RGB16 full-frame foliage/fence: noisy, V104 single/eight, V112, stronger RawNIND and separate ISO100 reference](images/v104-dihedral8-fullframe/comparison-1.png)
 
@@ -108,7 +109,7 @@ separate from the complete-frame comparisons and pending trained Small results.
 
 [V111's completed material and real-photo review](v111-early-quality.md) adds
 the same six standing regions after its original20k endpoint. These are
-**512-pixel context** restorations, native160 cells and shared+2EV, with reused
+**512-pixel context** restorations, native 160 cells and shared+2EV, with reused
 V104 and stronger RawNIND-preup outputs. V111/V104 look close: coherent mesh and
 building edges persist, while fine foliage and saturated-sign structure remain
 soft. All30 cells were actually viewed. The independent ISO100 f/5.6 image is

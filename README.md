@@ -14,8 +14,9 @@ high-noise texture and real foliage still need work. All seven matched panels
 and complete 102MP exports are verified. FP32 inference/blending takes 167.51s.
 [Primary comparison](docs/v111-v112-primary-quality.md).
 The [larger-encoder transfer](docs/small-feature-transfer.md) now starts from
-V112. Matched Tiny/Small continuations passed actual CPU updates and are
-[queued behind the current GPU evaluation](docs/small-aligned-training.md).
+V112. Both continuations passed actual CPU/CUDA updates, and
+[V114 training is running](docs/small-aligned-training.md), with
+[automatic endpoint evaluation and retained predictions](docs/quality-prediction-archive.md).
 [Current models](docs/current-model.md) · [Source-quality review](docs/incoming-commons-quality.md) ·
 [Historical diary](diary/index.md).
 For explicit zero-shot/read inputs, the [optional V104 sites export](docs/adc-consistency.md)
@@ -23,12 +24,12 @@ adds **.2885dB ADC-only PSNR** across all 427 photos/four CFAs with unchanged le
 weights. All 1,708 cases improve; positive-noise inputs bypass it. Native crops,
 flat-color limitations and adverse cases accompany the result.
 
-The optional [eight-view quality mode](docs/dihedral-quality.md),
-`--self-ensemble dihedral8`, improves all twelve selected V104 material cases
-by +.568/.293/.082dB at ADC-only/ISO100/ISO12800. It also improves two adverse
-camera crops, with remaining blotches. This costs eight model evaluations per
-tile. The [complete 102MP eight-view export and native review](docs/dihedral-fullframe.md)
-are finished; full photo/camera/texture/color panels are running.
+The optional [eight-view V104 mode](docs/dihedral-quality.md),
+`--self-ensemble dihedral8`, reaches **37.044dB** on the 427-photo panel (+.243dB over V104,
+427/427 source means up) and 54.333/53.994dB known/unseen CFA. Its worse ADC color
+tail (421 versus V112's 50.9 DN16) and weak fine detail remain visible. All panels
+are independently checked; the [complete 102MP export](docs/dihedral-fullframe.md)
+takes 885.93s. V112 remains the default learned baseline.
 
 ![PSNR versus model version](docs/images/version-PSNR-history.png)
 

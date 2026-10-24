@@ -54,6 +54,7 @@ def flat_metrics(prediction, target, roi=probe.ROI):
 def main(
     checkpoints, output, *, device="cuda", precision="float16", nonlocal_reference=None,
     self_ensemble="none",
+    prediction_callback=None,
 ):
     if self_ensemble not in ("none", "dihedral8"):
         raise ValueError(f"Unknown self-ensemble policy {self_ensemble!r}")
@@ -157,6 +158,11 @@ def main(
                             )
                         assert torch.isfinite(prediction).all()
                         predictions.append((label, prediction.float().cpu()))
+                        if prediction_callback is not None:
+                            prediction_callback(label, {"ids": ids, "kind": kind, "level": level,
+                                                       "contrast": contrast, "period": period,
+                                                       "condition": condition, "pattern": pattern,
+                                                       "seed": probe.SEED}, prediction, batch)
                     for label, prediction in predictions:
                         linear = probe.linear_srgb(prediction, cpu["wb"], cpu["matrix"])
                         metrics = (

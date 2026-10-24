@@ -230,6 +230,7 @@ def run_suite(
     gaussian_reference=None,
     nonlocal_reference=None,
     self_ensemble="none",
+    prediction_callback=None,
 ):
     if self_ensemble not in ("none", "dihedral8"):
         raise ValueError(f"Unknown self-ensemble policy {self_ensemble!r}")
@@ -431,6 +432,10 @@ def run_suite(
                                 else model(*arguments)
                             )
                         predictions.append((label, prediction))
+                        if prediction_callback is not None:
+                            prediction_callback(label, {"ids": ids, "condition": condition,
+                                                       "pattern": pattern, "seed": protocol.get("seed", 42)},
+                                                prediction, batch)
                     trim = (
                         (slice(None), slice(None), slice(border, -border), slice(border, -border))
                         if border
