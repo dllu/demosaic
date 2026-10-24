@@ -11,9 +11,10 @@ Add `--self-ensemble dihedral8` to `demosaic infer`, `demosaic benchmark`,
 [`scripts/export_raw_dng.py`](../scripts/export_raw_dng.py). The ordinary default
 is `none`. Output receipts record the policy and model views per tile. The
 reported quality uses `--precision float32`; reduced-precision quality has not
-been measured for this policy. The
-full 102MP GFX export is queued after the original V111/V112 workflow; the
-comparisons here use fixed 256/512-pixel contexts.
+been measured for this policy. The [complete 102MP GFX export is now reviewed](dihedral-fullframe.md),
+with native foliage/fence and other regions, two RGB16 files and a recorded
+885.93s inference/blending interval. The pilot comparisons below use fixed
+256/512-pixel contexts; full quality panels are still running.
 
 [Scores, sources, weights, independent audit and implementation checks](results/v104-dihedral8-pilot-v1.json).
 The original final20k checkpoint is `/mnt/external/demosaic/models/v104-final20000.pt`,
@@ -34,7 +35,7 @@ improve; mean chroma and gradient errors fall in every condition.
 
 These four-source means describe this fixed material panel, not the full 427-photo
 photo panel, all four CFAs, or training-seed uncertainty. The separate
-[V111 trained-model report](v111-early-quality.md) retains its own gains.
+[current V112 trained-model report](v112-quality.md) retains its own gains.
 
 Noisy Malvar → **V104 eight views** → exact synthetic GT. Both examples use
 160-pixel crops at ROI [48,48,160,160] within their original 256-pixel contexts, the
@@ -82,8 +83,10 @@ captured qualitative reference, **not GT**. Aperture, exposure and moving
 subjects differ. Single/eight-view changes look small: fence/building geometry
 remains coherent, while foliage and saturated-light detail remain soft.
 [Complete crop and transform metadata](images/v104-dihedral8-pilot/gfx/manifest.json).
-The [full-frame gallery](gfx-qualitative.md) retains the completed single-view
-102MP comparisons until the queued eight-view export is actually reviewed.
+The [complete-frame eight-view comparison](dihedral-fullframe.md) now adds all
+six regions from the actual RGB16 export, alongside V104/V112 single-view and
+stronger RawNIND. The [main GFX gallery](gfx-qualitative.md) retains V112's
+unquantized full-frame crop comparisons separately.
 
 ## Implementation and verification
 
@@ -101,7 +104,7 @@ under .000004dB. All 20 identity views exactly replay the retained original
 V104 floats. SSIM and masked highlight/shadow metrics retain their original
 implementation. All 80 distinct native cells were actually viewed.
 
-## Full comparison queued
+## Full comparison running
 
 The full comparison now uses the public photo, prepared-camera, texture and
 color evaluators with `self_ensemble="dihedral8"`. Checkpoint labels and receipts
@@ -124,11 +127,11 @@ independent NumPy64 reconstruction of each mean. The photographic observations
 also replay the preserved single-view observation code exactly. Existing
 single-view/reference results remain the controls.
 
-The queue waits for the exact eight-view full-GFX process, which itself follows
-the original V111/V112 matched workflow. It checks successful dependency results,
-memory and disk reserves before starting. Independent metric checks and actual
-native-crop review follow completion; this queue adds no measured quality result
-yet. [Plan, CPU proof and launch receipt](results/v104-dihedral8-full-quality-queued-v1.json).
+The evaluation started after the exact eight-view full-GFX process and original
+V111/V112 workflow completed successfully. It retains its frozen memory/disk
+limits. Independent metric checks and native-crop review follow completion;
+no broad quality result is reported yet.
+[Original plan, CPU proof and launch receipt](results/v104-dihedral8-full-quality-queued-v1.json).
 
 An independent score audit is also queued after the full evaluation. It
 regenerates the original input fingerprints, rehashes saved means and rebuilds
@@ -166,10 +169,12 @@ the first GPU validator failed to reset device-specific noise tables after
 moving a previously used CPU model. Their sources/logs remain preserved.
 Corrected checks pass without changing the pilot scores or model weights.
 
-Full 427-photo, complete camera panels and full analytic color/weak-texture grids
-are queued and remain unevaluated for this policy. The eight-view full 102MP
-export is queued, so no full-frame speed or broad-superiority claim follows from these context
-comparisons. Both fixed training endpoints are complete; their matched evaluation continues separately.
+Full 427-photo, complete camera panels and analytic color/weak-texture grids
+remain in progress and unreported for this policy. The complete 102MP export
+and native review are finished, with their own [file/timing evidence](dihedral-fullframe.md).
+The V111/V112 matched comparison is complete; V112 remains current. The
+[new Tiny/Small continuations](small-aligned-training.md) wait for this original
+evaluation and independent audit before starting CUDA work.
 
 Photo attribution: [Derek Ramsey, bark](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
 [CC BY-SA 2.5](https://creativecommons.org/licenses/by-sa/2.5/);

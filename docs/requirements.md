@@ -19,7 +19,7 @@ GFX gallery do not establish broad real-camera superiority. Quality precedes spe
 | Modern DINOv3 architecture | V84-family DRUNet RGB trunk and official frozen ConvNeXt-Tiny pyramid | Transfer the larger frozen Small encoder from the stronger V112 parent |
 | Diverse clean targets and binning |90,864-source cleaned corpus;4×→geometry→area2, zero optical blur, weak textures/photo contrast, six reviewed ROIs | Retain visual source review and fine-detail coverage |
 | Physical noise/camera/color | Poisson/read noise, signed black subtraction, all Bayer phases, WB/matrix, exposure/clipping; V112 repairs large ADC tails | Spatial dark-field/weak-detail failures remain |
-| Reliable resource-aware training | Exact parent/source/data snapshots, CPU/CUDA checks, fixed endpoints and retained failures | New explicit Small initializer/budget after the current GPU chain |
+| Reliable resource-aware training | Exact parent/source/data snapshots, actual checks, fixed endpoints and retained failures; V112-derived Tiny/Small passed CPU updates | Queued matched continuations after the original GPU chain, then endpoint quality review |
 | Protected originals/tests | Local GFX3879/3880 cache; originals read-only; standing scene/siblings outside training;16-scene test reserve unscored | Preserve boundaries in future cohorts |
 | Current documentation |46 completed primary endpoints in plot; native triplets with source/ROI/hash/noise/display; local-time diary | Update as useful results complete, without old promotion freezes |
 
@@ -32,11 +32,12 @@ ADC failures, all six GFX contexts and complete full-frame comparisons.
 [Primary statistics](v111-v112-primary-quality.md) ·
 [Full-frame receipt](results/v112-fullframe-review-v1.json).
 
-The original V104 eight-view export/evaluation/audit remains a separately
-labeled workflow. The [Small training work](small-aligned-training.md) now moves
-to V112; the idle V113 queue was superseded before GPU work and its actual CPU
-results remain preserved. Source/scene intervals describe fixed evaluation
-units and do not measure training-repeat uncertainty.
+The original V104 [eight-view full 102MP export and native review](dihedral-fullframe.md)
+are complete; its broad evaluation/audit remains in progress. The V112-derived
+Small initializer and actual CPU updates are verified. [Matched Tiny/Small
+continuations](small-aligned-training.md) are queued for 20,000 further updates
+each after the original GPU chain. Source/scene intervals describe fixed
+evaluation units and do not measure training-repeat uncertainty.
 
 Each improved-model report needs at least two native noisy/restored/exact-GT
 triplets with common coordinates/transforms and recorded weights, conditioning

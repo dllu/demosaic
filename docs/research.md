@@ -4,11 +4,12 @@
 
 Current implementation: V112's pretrained DRUNet RGB restoration with an official
 frozen DINOv3 ConvNeXt-Tiny pyramid in V84's architectural family. Its completed
-full427 result reaches 36.80085dB, +.12134dB over V102, with stronger known-camera,
-material and weak-texture results. V102 retains lower ADC flat-color bias and a
-higher unseen-camera mean. All seven panels and complete GFX exports are done.
-See [current models](current-model.md), [completed V104 results](v104-reviewed-corpus-quality.md)
-and the [active loss-scale trial](loss-scale-training.md).
+full427 result reaches 36.90238dB, +.10154dB over V104, with 425/427 photo-source
+means improving. Known/unseen camera means are 54.26914/53.95378dB; worst ADC
+flat-color bias falls from V104's 1,218 to 50.89 DN16. All seven panels and
+complete GFX exports are done. Fine high-noise and real foliage detail remain
+weak. See [current models](current-model.md), [completed V112 results](v112-quality.md)
+and the [matched loss-scale comparison](loss-scale-training.md).
 The literature/design record below explains the explored approaches; its older
 study decisions do not freeze the current architecture or README examples.
 
@@ -24,30 +25,35 @@ retains structure and grain while losing high-noise PSNR. Scaling DINO offsets
 or substituting Wiener/self/clean-oracle previews gives no consistent gain.
 This is a fixed-weight result, not a trained-backbone/fusion ablation; the
 unavailable clean-image oracle is never a candidate method. Current quality
-work continues from V104 on the further-cleaned corpus; its fixed endpoint
-has completed its material/detail and full evaluation.
+work now continues from V112 on the further-cleaned corpus; its material,
+full quality panels and complete-frame review are finished.
 
 The [larger frozen ConvNeXt check](convnext-small-capacity.md) now pins official
 Small weights and verifies compatible native feature shapes. A direct backbone
 swap loses quality on four material cases. Resetting the fusion gates gives
 Tiny/Small an exact common starting function, and both pass eight discarded
 CPU optimizer updates with matching initial prediction/loss and batch hashes.
-This prepares a later capacity comparison; V104's completed result now informs initialization.
+Those common-function preparations remain preserved and unlaunched. Current
+initialization retains V112's useful learned gates and restoration trunk.
 
-The cleaned 90,864-source Tiny/Small recipes now pass separate eight-update
-CPU and CUDA/native256/B16 checks, with exact initial identities, matching
-observations and finite states. Their production runs remain unlaunched while
-V111/V112 has priority; later capacity work can use the best completed initializer.
+The [completed Small lateral fit](small-feature-transfer.md) reuses 80 retained
+training previews/features, fits 64 sources and checks 16 distinct training
+sources. Selected photo means remain close to V112, but two dark-camera crops
+lose .20–.32dB. Matched [V114 Tiny / V115 fitted Small continuations](small-aligned-training.md)
+passed eight actual CPU optimizer updates each, with exact initial identities
+and matching batches/domains/LRs. Their CUDA checks and 20,000 further updates
+per arm wait for the original eight-view evaluation/audit chain.
 The [loss-smoothing diagnostic](loss-smoothing-detail.md) also measures 324
 output gradients on 108 fixed V102 training-source restorations. Smaller epsilon
 strengthens low-noise faint-detail slopes but increases the full gradient more.
-The [active V111/V112 trial](loss-scale-training.md) tests .001 versus .0003 from
+The [completed V111/V112 trial](loss-scale-training.md) tests .001 versus .0003 from
 the original V104 EMA on the cleaned corpus, preserving its architecture and
 learned fusion gates. Actual CPU/CUDA checks pass. V111 completed20k and
 [improves all twelve material cases](v111-early-quality.md), with small GFX
 changes. Its complete camera panels show −.01336/+.02006dB known/unseen changes
 versus V104, with5/5 unseen scenes improving but persistent dark-field blotches.
-V112 has also completed20k and full matched quality evaluation is running. The trainer exposes an
+V112 completed20k and all seven matched quality panels, becoming the current
+baseline with V111-like photo PSNR and better camera/color results. The trainer exposes an
 [explicit reconstruction-epsilon option](loss-smoothing-detail.md#configurable-training-scale)
 with exact default/gradient replay and resumed-training checks. Production
 defaults and existing frozen recipes remain unchanged.
@@ -56,7 +62,8 @@ The [optional eight-view inference study](dihedral-quality.md) now measures
 uniform averaging of exact sensor rotations/reflections with the same V104
 weights. It improves twelve fixed material cases and two adverse camera crops,
 without repairing all fine detail/blotches. Production CPU/GB10 and RGB16/DNG
-checks pass; full panels and complete 102MP policy results remain pending.
+checks pass. Its [complete 102MP RGB16 export and native review](dihedral-fullframe.md)
+are finished; broad quality panels and their independent audit remain in progress.
 The completed [V111 analytic grids](v111-early-quality.md#complete-weak-texture-and-flat-color-panels)
 also show better high-noise color/coarse carriers and worse ADC flat bias.
 
@@ -374,7 +381,7 @@ data and budget; no full-suite, real-camera, CUDA, SOTA or speed result follows.
 The [optional evaluator and standing GFX contexts](nonlocal-reference-integration.md)
 pass genuine CPU replay and native review. The [completed CUDA/full-suite
 comparison](nonlocal-reference-full-review.md) now includes genuine native
-operators, full427/paired panels, full102MP GFX output and three cameras. Its
+operators, full427/paired panels, full 102MP GFX output and three cameras. Its
 synthetic-photo scores are lower; small paired-real differences are uncertain.
 The reference remains optional and establishes neither SOTA nor broad real
 superiority for this project.

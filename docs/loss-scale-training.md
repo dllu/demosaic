@@ -48,8 +48,8 @@ The adopted V112 final checkpoint is read-only at
 Its original trainer/controller have exited. All 91 model/EMA tensors and 89
 Adam states at step20000 are finite, and all 801 logged input/domain/LR rows
 match V111. [Endpoint, exact canonical copy and comparison handoff](results/v112-original20000-training-boundary-v1.json).
-This establishes training completion; image-quality conclusions await the
-matched reports and native/full-frame review.
+Training, matched quality panels and native/full-frame review are complete.
+The [current V112 report](v112-quality.md) records the measured quality conclusions.
 
 The setting changes ordinary camera-linear, rendered, spatial-gradient and
 auxiliary Charbonnier penalties. Paired RAW retains its existing .0001 scale;
@@ -74,16 +74,17 @@ by spawned data-loader workers. Its failed log and source remain preserved;
 the corrected wrapper runs CUDA in a new root and retains the successful CPU
 evidence. The production trainer and recipes are unchanged.
 
-The live execution controller adopts these successful checks after verifying
+The execution controller adopted these successful checks after verifying
 source and phase-configuration equivalence. It verified the exact original
 V104 export owner and child had exited successfully, then started V111
 freshly from the original V104 EMA. Its first logged loss, gradient and input
-hash reproduce the CUDA preflight exactly. It does not repeat the smokes. Full matched
-evaluation and complete 102MP RGB16 exports are queued afterward, with
+hash reproduce the CUDA preflight exactly. It did not repeat the smokes. Full matched
+evaluation and complete 102MP RGB16 exports are now complete, with
 [V102 as a separate fixed reference](../configs/quality-v104-loss-scale-reference-checkpoints-v1.json).
 A [separate CPU material queue](results/v104-loss-scale-training-started-v2.json)
 has computed both final endpoints with V104 and V102 on the original 12 cached
-observations, producing native noisy/restored/exact-GT triplets awaiting review.
+observations, producing native noisy/restored/exact-GT triplets that are now
+[reviewed and published](v111-v112-material.md).
 V112 started after V111's fixed endpoint and original worker exit. Its first
 input/loss/gradient replay its CUDA preflight; all 801 logged input/domain/LR
 rows match V111 through the original20k endpoint. This verifies execution;

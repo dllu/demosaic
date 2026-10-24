@@ -11,7 +11,7 @@ reducing worst ADC flat bias to50.89DN16. [Complete review and native images](v1
 | Near-equal photographic alternative | V111: photo36.90367dB, but lower camera means and ADC maximum2,142.98DN16 |
 | Explicit ADC sample fidelity/photo PSNR | Optional [V104 sites export](adc-consistency.md): +.28850dB over original V104 on full ADC photo panel; color/detail tradeoffs remain |
 | Separate earlier camera reference | V102: unseen CFA53.97177dB remains slightly higher; its overall photo mean is36.67951dB |
-| Optional eight-view inference | Tested [V104 pilot](dihedral-quality.md); eight evaluations per tile. Broad panels/export/audit continue separately from V112 selection |
+| Optional eight-view inference | [V104 pilot gains](dihedral-quality.md) and [complete 102MP RGB16/native review](dihedral-fullframe.md); eight evaluations per tile. Broad panels/audit continue separately from V112 selection |
 
 ## Run the current model
 
@@ -42,7 +42,7 @@ soft. The [stronger released RawNIND reference](rawnind-variants.md) remains
 competitive on camera scenes; broad real-camera superiority is not achieved.
 The separate ISO100 GFX exposure and AHD references are not exact RGB GT.
 
-All seven matched panels and complete101.996MP V112 RGB16 exports are
+All seven matched panels and complete 101.996MP V112 RGB16 exports are
 verified. V112 FP32 inference/blending takes167.51s; V104's earlier168.73s
 observation remains a separate checkpoint measurement. The100MP/10s target stays open, with quality first.
 Hot-pixel repair and [linear DNG/JPEG export](dng-export.md) are available;

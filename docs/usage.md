@@ -7,7 +7,7 @@ Use **V112 final20k** for positive-noise restoration and continued quality train
 restoration and frozen official DINOv3 ConvNeXt-Tiny features. The
 [current model guide](current-model.md) records its hash and alternatives;
 [completed primary panels, diagnostics and native crops](v112-quality.md)
-cover full427 photos,known/unseen measured-camera and complete102MP GFX output.
+cover full427 photos,known/unseen measured-camera and complete 102MP GFX output.
 Continue quality work with the [reviewed corpus and zero-blur recipe](quality-first-training.md).
 Earlier measurements below retain their checkpoint labels.
 For explicit shot=read=0 inputs, the separately tested
@@ -23,6 +23,9 @@ inference. It preserves Bayer geometry and averages camera-RGB predictions
 before tile blending and RGB16 export, requiring eight model evaluations per
 tile. `benchmark`, `quality` and the DNG batch exporter accept the same option; receipts
 record the policy. [Measured gains, native comparisons and remaining limitations](dihedral-quality.md).
+The [completed full 102MP RGB16 review](dihedral-fullframe.md) includes native
+foliage/fence comparisons and the actual FP32 inference observation. Broader
+eight-view quality panels remain in progress.
 
 ## Environment and storage
 

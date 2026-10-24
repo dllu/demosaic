@@ -1,6 +1,6 @@
 # GFX100S qualitative comparisons
 
-**V112 is the current quality baseline, with complete101.996MP exports.**
+**V112 is the current quality baseline, with complete 101.996MP exports.**
 The full-frame gallery compares V104/V112 and both released RawNIND references
 at all six fixed native regions. The learned models retain more regular mesh;
 fine foliage and saturated-sign structure remain soft. [Current quality report](v112-quality.md).
@@ -18,11 +18,18 @@ blending takes167.51s, tile512/overlap64/B4. [Completed full-frame receipt](resu
 The [earlier six-context V104/V111/V112 comparison](images/v112-quality/gfx/comparison.png)
 remains separately labeled, with its [original metadata](images/v112-quality/gfx/manifest.json).
 
-The optional [eight-view V104 comparison](dihedral-quality.md#standing-gfx-scene)
-adds all six fixed native regions from 512-pixel contexts. Changes look small;
-foliage and saturated-sign detail remain soft. Its complete 102MP export is
-queued after the existing matched workflow. The context gallery is separate
-from the completed full-frame outputs below.
+The optional [eight-view V104 full-frame review](dihedral-fullframe.md) now adds
+all six fixed regions from its completed 102MP RGB16 export, alongside V104,
+V112 and the stronger RawNIND reference. Single/eight-view changes look small;
+fine foliage and saturated-sign detail remain soft. Its two TIFFs, sampled color
+consistency and all 36 native cells are verified. The recorded FP32 inference/
+blending interval is 885.93s; full quality panels remain in progress.
+
+![RGB16 full-frame foliage/fence: noisy, V104 single/eight, V112, stronger RawNIND and separate ISO100 reference](images/v104-dihedral8-fullframe/comparison-1.png)
+
+These restored cells all use camera-RGB16 exports, common +2EV and no resizing.
+They are separate from the unquantized crop gallery above and earlier 512-pixel
+[pilot context comparison](dihedral-quality.md#standing-gfx-scene).
 
 ## Other complete full-frame references
 
