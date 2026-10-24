@@ -23,6 +23,7 @@ from demosaic.nonlocal_reference import CHECKPOINT_SHA256, load_nonlocal_referen
 from demosaic.precision import amp_context
 from demosaic.reporting import display_crop, save_triplet
 from demosaic.safety import writable_path
+from demosaic.self_ensemble import predict_dihedral8
 
 
 def read(path):
@@ -91,6 +92,7 @@ def reuse_match(record, reuse):
         i
         for i, c in enumerate(reuse["checkpoints"])
         if (c["kind"], c["sha256"], c["path"]) == (record["kind"], record["sha256"], record["path"])
+        and c.get("self_ensemble", "none") == record.get("self_ensemble", "none")
     ]
     assert len(matches) <= 1
     if not matches:
@@ -151,6 +153,7 @@ def main(
     reuse_report=None,
     reuse_audit=None,
     reuse_only=False,
+    self_ensemble="none",
 ):
     status = completed(workflow, expected_step)
     plan = read(inputs)
@@ -195,6 +198,7 @@ def main(
         reuse_report,
         reuse_audit,
         reuse_only,
+        self_ensemble=self_ensemble,
     )
 
 
@@ -228,8 +232,11 @@ def evaluate_records(
     reuse_audit=None,
     reuse_only=False,
     precision="float16",
+    self_ensemble="none",
 ):
     """Evaluate explicitly validated records; callers validate their actual owner."""
+    if self_ensemble not in ("none", "dihedral8"):
+        raise ValueError(f"Unknown self-ensemble policy {self_ensemble!r}")
     if precision not in ("float16", "float32"):
         raise ValueError("Color-grid precision must be float16 or float32")
     if precision != "float16" and (
@@ -243,6 +250,9 @@ def evaluate_records(
         raise ValueError("Grid output exists; inspect it or choose a new directory")
     assert records and len({r["sha256"] for r in records}) == len(records)
     source = {str(p): sha(p) for p in Path("src/demosaic").glob("*.py")}
+    for record in records:
+        record["self_ensemble"] = self_ensemble if record["kind"] == "joint-checkpoint" else "none"
+        record["model_views_per_tile"] = 8 if record["self_ensemble"] == "dihedral8" else 1
     reuse = reuse_manifest(reuse_report, reuse_audit, inputs, source)
     matches = [reuse_match(r, reuse) for r in records]
     if reuse_only and any(m is None for m in matches):
@@ -293,7 +303,7 @@ def evaluate_records(
     results = []
     predictions = []
     crops = []
-    new_count, reused_count = 0, 0
+    new_count, reused_count, new_view_count = 0, 0, 0
     for model_index, record in enumerate(records):
         previous_index = matches[model_index]
         model = None
@@ -309,6 +319,8 @@ def evaluate_records(
                 compute_precision=f"{precision}, physicalFP32",
                 memory_format="channels_last",
             )
+            if record["self_ensemble"] == "dihedral8":
+                record["label"] += ":dihedral8"
             assert record.get("initialization") in (None, "fresh")
             check_joint_lineage(
                 state,
@@ -346,17 +358,19 @@ def evaluate_records(
                 }
                 model.set_noise(condition["shot"], condition["read"])
                 with amp_context("cuda", dtype=precision):
-                    p = model(
-                        batch["packed"],
-                        batch["variance"],
-                        batch["colors"],
-                        batch["wb"],
-                        batch["matrix"],
+                    arguments = tuple(
+                        batch[k] for k in ("packed", "variance", "colors", "wb", "matrix")
+                    )
+                    p = (
+                        predict_dihedral8(model, *arguments)
+                        if record["self_ensemble"] == "dihedral8"
+                        else model(*arguments)
                     )
                 v = p.cpu().numpy()
                 path = output / f"model{model_index}-case{case_index}-RGB-f32.npy"
                 np.save(path, v, allow_pickle=False)
                 new_count += 1
+                new_view_count += record["model_views_per_tile"]
             assert v.shape == (1, 3, 256, 256) and v.dtype == np.float32 and np.isfinite(v).all()
             predictions.append(
                 {
@@ -442,7 +456,11 @@ def evaluate_records(
         "group_summary": summarize(results),
         "scope": plan["scope"],
         "CUDA_initialized": torch.cuda.is_initialized(),
-        "prediction_work": {"new_inference": new_count, "reused_verified_arrays": reused_count},
+        "prediction_work": {
+            "new_inference": new_count,
+            "reused_verified_arrays": reused_count,
+            "new_model_view_evaluations": new_view_count,
+        },
         "limitations": "One observation per grid cell, one WB/camera, three brightnesses/two saturations; scene-linear HSV, not perceptually uniform. Clean targets stay below white; noisy ADC can clip. Descriptive quantiles are not confidence intervals. Not training-repeat uncertainty, real-photo quality, convergence, cause or SOTA evidence.",
     }
     (output / "report.json").write_text(json.dumps(report, indent=2, allow_nan=False) + "\n")
@@ -468,6 +486,7 @@ if __name__ == "__main__":
     p.add_argument("--reuse-report", type=Path)
     p.add_argument("--reuse-audit", type=Path)
     p.add_argument("--reuse-only", action="store_true")
+    p.add_argument("--self-ensemble", choices=["none", "dihedral8"], default="none")
     a = p.parse_args()
     main(
         a.inputs,
@@ -478,4 +497,5 @@ if __name__ == "__main__":
         a.reuse_report,
         a.reuse_audit,
         a.reuse_only,
+        self_ensemble=a.self_ensemble,
     )

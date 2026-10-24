@@ -17,6 +17,7 @@ from demosaic.nonlocal_reference import load_nonlocal_reference
 from demosaic.precision import amp_context
 from demosaic.reporting import display_crop, save_triplet
 from demosaic.safety import writable_path
+from demosaic.self_ensemble import predict_dihedral8
 from demosaic.suite import observation
 
 
@@ -50,7 +51,12 @@ def flat_metrics(prediction, target, roi=probe.ROI):
 
 
 @torch.inference_mode()
-def main(checkpoints, output, *, device="cuda", precision="float16", nonlocal_reference=None):
+def main(
+    checkpoints, output, *, device="cuda", precision="float16", nonlocal_reference=None,
+    self_ensemble="none",
+):
+    if self_ensemble not in ("none", "dihedral8"):
+        raise ValueError(f"Unknown self-ensemble policy {self_ensemble!r}")
     device = torch.device(device)
     if device.type == "cpu" and precision != "float32":
         raise ValueError("CPU evaluation requires explicit float32")
@@ -67,11 +73,14 @@ def main(checkpoints, output, *, device="cuda", precision="float16", nonlocal_re
     for path in [Path(__file__), Path(probe.__file__)]:
         shutil.copyfile(path, output / path.name)
     protocol = yaml.safe_load(Path("configs/evaluation.yaml").read_text())
-    models, provenance = [], []
+    models, provenance, ensemble_labels = [], [], set()
     for index, checkpoint in enumerate(checkpoints):
         model, state = load_checkpoint(checkpoint, device)
         name = Path(state.get("config", {}).get("run", checkpoint.stem)).name
         label = f"{index}:{name}:step-{state['step']}"
+        if self_ensemble == "dihedral8":
+            label += ":dihedral8"
+            ensemble_labels.add(label)
         models.append((label, model.eval()))
         if device.type == "cuda":
             model.to(memory_format=torch.channels_last)
@@ -81,6 +90,8 @@ def main(checkpoints, output, *, device="cuda", precision="float16", nonlocal_re
                 "checkpoint": str(checkpoint),
                 "sha256": state["loaded_sha256"],
                 "config": model.config.to_dict(),
+                "self_ensemble": self_ensemble,
+                "model_views_per_tile": 8 if self_ensemble == "dihedral8" else 1,
             }
         )
         del state
@@ -136,12 +147,13 @@ def main(checkpoints, output, *, device="cuda", precision="float16", nonlocal_re
                     for label, model in models:
                         model.set_noise(condition["shot"], condition["read"])
                         with amp_context(device, dtype=precision):
-                            prediction = model(
-                                batch["packed"],
-                                batch["variance"],
-                                batch["colors"],
-                                batch["wb"],
-                                batch["matrix"],
+                            arguments = tuple(
+                                batch[k] for k in ("packed", "variance", "colors", "wb", "matrix")
+                            )
+                            prediction = (
+                                predict_dihedral8(model, *arguments)
+                                if label in ensemble_labels
+                                else model(*arguments)
                             )
                         assert torch.isfinite(prediction).all()
                         predictions.append((label, prediction.float().cpu()))
@@ -240,6 +252,7 @@ def main(checkpoints, output, *, device="cuda", precision="float16", nonlocal_re
         "scope": "Matched analytic carrier/flat diagnostic only; no natural-photo quality or SOTA claim. Same384 CPU-seeded carriers plus64 flat observations across2 conditions/4 CFAs/4 draws. Flat targets have zero texture; ADC duplicates do not add independent evidence.",
         "device": str(device),
         "precision": precision,
+        "learned_model_self_ensemble": self_ensemble,
         "models": provenance,
         "native_crops": crops,
         "roi_xywh": probe.ROI,
@@ -260,6 +273,7 @@ if __name__ == "__main__":
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--device", choices=["cpu", "cuda"], default="cuda")
     parser.add_argument("--nonlocal-reference", type=Path)
+    parser.add_argument("--self-ensemble", choices=["none", "dihedral8"], default="none")
     parser.add_argument(
         "--precision", choices=["float32", "float16", "bfloat16"], default="float16"
     )
@@ -270,4 +284,5 @@ if __name__ == "__main__":
         device=args.device,
         precision=args.precision,
         nonlocal_reference=args.nonlocal_reference,
+        self_ensemble=args.self_ensemble,
     )

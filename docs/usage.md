@@ -21,7 +21,7 @@ its checkpoint path and measured tradeoffs are in the model guide.
 Add `--self-ensemble dihedral8` to `infer` for optional eight-view quality
 inference. It preserves Bayer geometry and averages camera-RGB predictions
 before tile blending and RGB16 export, requiring eight model evaluations per
-tile. `benchmark` and the DNG batch exporter accept the same option; receipts
+tile. `benchmark`, `quality` and the DNG batch exporter accept the same option; receipts
 record the policy. [Measured gains, native comparisons and remaining limitations](dihedral-quality.md).
 
 ## Environment and storage
@@ -274,6 +274,12 @@ Final evaluation must include all CFA phases, multiple noise/exposure conditions
 edge/highlight/shadow and texture crops, scene deduplication, real RAW inspection,
 and correctly calibrated comparisons with RawNIND and strong current baselines.
 Neither passing numerical tests nor beating bilinear establishes state of the art.
+
+`quality --self-ensemble dihedral8 --precision float32` evaluates eight-view
+checkpoint predictions on the same observations. References keep one view;
+report labels and provenance identify the policy. The prepared-camera Python
+entrypoint `real_suite.evaluate_pairs` and the texture/color evaluation scripts
+accept the same policy. [Full comparison scope and current results](dihedral-quality.md).
 
 To fetch and compare the original RawNIND weights, separately licensed and
 checksum-pinned:

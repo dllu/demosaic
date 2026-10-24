@@ -6,7 +6,8 @@ rotations/reflections in linear camera RGB. Bark and canopy improve modestly;
 high-noise fine detail and real dark-field blotches remain. This is an optional
 inference policy requiring eight model evaluations per tile.
 
-Add `--self-ensemble dihedral8` to `demosaic infer`, `demosaic benchmark` or
+Add `--self-ensemble dihedral8` to `demosaic infer`, `demosaic benchmark`,
+`demosaic quality` or
 [`scripts/export_raw_dng.py`](../scripts/export_raw_dng.py). The ordinary default
 is `none`. Output receipts record the policy and model views per tile. The
 reported quality uses `--precision float32`; reduced-precision quality has not
@@ -100,7 +101,43 @@ under .000004dB. All 20 identity views exactly replay the retained original
 V104 floats. SSIM and masked highlight/shadow metrics retain their original
 implementation. All 80 distinct native cells were actually viewed.
 
-The production helper exactly reproduces four genuine-weight pilot cases,
+## Full comparison queued
+
+The full comparison now uses the public photo, prepared-camera, texture and
+color evaluators with `self_ensemble="dihedral8"`. Checkpoint labels and receipts
+record the policy; reference methods keep their original single-view inference.
+Color caches match the inference policy as well as the weights, so single-view
+predictions cannot stand in for eight-view results.
+
+| Panel | Averaged observations |
+| --- | ---: |
+| 427 photos + 16 procedural sources, 7 conditions × 4 CFAs | 12,404 |
+| Known-camera crops | 72 |
+| Unseen-camera crops | 90 |
+| Weak carriers and neutral flats | 448 |
+| Analytic colors | 1,176 |
+| Total | 14,190 |
+
+These require 113,520 per-image model-view evaluations. The frozen run retains
+every averaged prediction and records input fingerprints, view hashes and an
+independent NumPy64 reconstruction of each mean. The photographic observations
+also replay the preserved single-view observation code exactly. Existing
+single-view/reference results remain the controls.
+
+The queue waits for the exact eight-view full-GFX process, which itself follows
+the original V111/V112 matched workflow. It checks successful dependency results,
+memory and disk reserves before starting. Independent metric checks and actual
+native-crop review follow completion; this queue adds no measured quality result
+yet. [Plan, CPU proof and launch receipt](results/v104-dihedral8-full-quality-queued-v1.json).
+
+Thirty-seven targeted operator tests pass, including single-view references,
+measured-CFA scoring and cache-policy separation. Real-weight CPU engineering
+checks complete 24 model/encoder forwards over two photo observations and one
+camera crop; each streamed mean agrees exactly with the independent NumPy64
+calculation. These small CPU fixtures verify execution, not full-panel quality.
+
+The earlier pilot integration checks show that the production helper exactly
+reproduces four genuine-weight pilot cases,
 with 40 actual CPU forwards including tiled RGB16 write/read. A small actual
 GB10/CPU 128-pixel check agrees within 1.79e-7 camera units, with identical rounded
 PSNR. It overlaps training and provides no throughput measurement. Thirty-two
@@ -114,9 +151,9 @@ the first GPU validator failed to reset device-specific noise tables after
 moving a previously used CPU model. Their sources/logs remain preserved.
 Corrected checks pass without changing the pilot scores or model weights.
 
-Full 427-photo, complete camera panels and full analytic color/weak-texture grids have
-not been evaluated for this policy. The eight-view full 102MP export is queued,
-so no full-frame speed or broad-superiority claim follows from these context
+Full 427-photo, complete camera panels and full analytic color/weak-texture grids
+are queued and remain unevaluated for this policy. The eight-view full 102MP
+export is queued, so no full-frame speed or broad-superiority claim follows from these context
 comparisons. V112's matched training continues separately.
 
 Photo attribution: [Derek Ramsey, bark](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),

@@ -33,7 +33,8 @@ The optional [eight-view quality mode](docs/dihedral-quality.md),
 `--self-ensemble dihedral8`, improves all twelve selected V104 material cases
 by +.568/.293/.082dB at ADC-only/ISO100/ISO12800. It also improves two adverse
 camera crops, with remaining blotches. This costs eight model evaluations per
-tile; full-panel and complete 102MP eight-view results remain pending.
+tile; the full photo/camera/texture/color comparison is queued, and complete
+102MP eight-view results remain pending.
 
 ![PSNR versus model version](docs/images/version-PSNR-history.png)
 

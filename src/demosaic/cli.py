@@ -86,13 +86,6 @@ def parser():
     benchmark.add_argument("--batch-size", type=int, default=8)
     benchmark.add_argument("--device", default="cuda")
     benchmark.add_argument("--output", type=Path, required=True)
-    for command in (infer, benchmark):
-        command.add_argument(
-            "--self-ensemble",
-            choices=("none", "dihedral8"),
-            default="none",
-            help="Optional eight-view quality mode; requires eight model evaluations per tile",
-        )
     profile = commands.add_parser(
         "noise-profile", help="Estimate shot/read noise from flat RAW patches"
     )
@@ -114,6 +107,13 @@ def parser():
     quality.add_argument("--gaussian-reference", type=Path)
     quality.add_argument("--nonlocal-reference", type=Path)
     quality.add_argument("--device", default="cuda")
+    for command in (infer, benchmark, quality):
+        command.add_argument(
+            "--self-ensemble",
+            choices=("none", "dihedral8"),
+            default="none",
+            help="Optional eight-view checkpoint quality mode; references keep one view",
+        )
     for command in (infer, benchmark, quality):
         command.add_argument(
             "--precision",
@@ -361,6 +361,7 @@ def main(argv=None):
             refinement_precision=args.refinement_precision,
             gaussian_reference=args.gaussian_reference,
             nonlocal_reference=args.nonlocal_reference,
+            self_ensemble=args.self_ensemble,
         )
     elif args.command == "noise-profile":
         from .calibration import estimate_noise

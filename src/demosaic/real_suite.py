@@ -19,6 +19,7 @@ from .prior import wiener_packed
 from .reference import RawNind, load_rawnind, publisher_input_scale
 from .reporting import center_crop, display_crop, save_triplet, write_report
 from .safety import writable_path
+from .self_ensemble import predict_dihedral8
 from .suite import freeze_checkpoint, summarize
 
 
@@ -47,7 +48,10 @@ def evaluate_pairs(
     refinement_precision="float32",
     gaussian_reference=None,
     nonlocal_reference=None,
+    self_ensemble="none",
 ):
+    if self_ensemble not in ("none", "dihedral8"):
+        raise ValueError(f"Unknown self-ensemble policy {self_ensemble!r}")
     if (
         precision not in COMPUTE_DTYPES
         or batch_size < 1
@@ -76,7 +80,7 @@ def evaluate_pairs(
     (archive / "prepared-manifest.json").write_bytes(payload)
     torch.set_num_threads(4)
     torch.set_float32_matmul_precision("high")
-    models, receipts = [], []
+    models, receipts, ensemble_labels = [], [], set()
     for index, source in enumerate(checkpoints):
         frozen, digest = freeze_checkpoint(source, output / "weights")
         model, state = load_checkpoint(frozen, device, refinement_precision=refinement_precision)
@@ -89,6 +93,9 @@ def evaluate_pairs(
             model.to(memory_format=torch.channels_last)
         name = Path(state.get("config", {}).get("run", Path(source).parent)).name
         label = f"{index}:{name}:step-{state['step']}"
+        if self_ensemble == "dihedral8":
+            label += ":dihedral8"
+            ensemble_labels.add(label)
         models.append((label, model, precision))
         receipts.append(
             {
@@ -98,6 +105,8 @@ def evaluate_pairs(
                 "step": state["step"],
                 "model_config": model.config.to_dict(),
                 "checkpoint_model_config": state["model_config"],
+                "self_ensemble": self_ensemble,
+                "model_views_per_tile": 8 if self_ensemble == "dihedral8" else 1,
                 "compute_precision": precision,
                 "refinement_compute_precision": refinement_precision
                 if torch.device(device).type == "cuda"
@@ -206,7 +215,12 @@ def evaluate_pairs(
                         )
                         model.set_noise(shot * multiplier, read * multiplier)
                     with amp_context(device, dtype=compute):
-                        prediction = model(packed, variance * noise_multiplier, labels, wb, matrix)
+                        arguments = (packed, variance * noise_multiplier, labels, wb, matrix)
+                        prediction = (
+                            predict_dihedral8(model, *arguments)
+                            if label in ensemble_labels
+                            else model(*arguments)
+                        )
                     predictions.append((label, prediction))
                 border = 32
                 region = (..., slice(border, -border), slice(border, -border))
@@ -351,6 +365,7 @@ def evaluate_pairs(
         "batch_size": batch_size,
         "learned_model_variance_multiplier": noise_multiplier,
         "prior_window_override": prior_window,
+        "learned_model_self_ensemble": self_ensemble,
         "source_sha256": source_sha256,
         "torch": str(torch.__version__),
         "scenes": len({c["scene"] for c in data["cases"]}),

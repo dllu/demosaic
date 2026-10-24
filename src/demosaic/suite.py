@@ -23,6 +23,7 @@ from .prior import wiener_packed
 from .reference import RawNind, load_rawnind
 from .reporting import center_crop, display_crop, save_triplet, write_report
 from .safety import writable_path
+from .self_ensemble import predict_dihedral8
 
 
 def observation(rgb, identities, condition, pattern, wb, matrix, seed):
@@ -228,7 +229,10 @@ def run_suite(
     refinement_precision="float32",
     gaussian_reference=None,
     nonlocal_reference=None,
+    self_ensemble="none",
 ):
+    if self_ensemble not in ("none", "dihedral8"):
+        raise ValueError(f"Unknown self-ensemble policy {self_ensemble!r}")
     output = writable_path(output)
     output.mkdir(parents=True, exist_ok=True)
     protocol = yaml.safe_load(Path(config).read_text())
@@ -256,7 +260,7 @@ def run_suite(
         records=[json.loads(line) for line in payload.splitlines()],
     )
     count = min(limit, len(data)) if limit else len(data)
-    models, model_records = [], []
+    models, model_records, ensemble_labels = [], [], set()
     for index, source in enumerate(checkpoints):
         frozen, digest = freeze_checkpoint(source, output / "weights")
         model, state = load_checkpoint(frozen, device, refinement_precision=refinement_precision)
@@ -265,6 +269,9 @@ def run_suite(
             model.to(memory_format=torch.channels_last)
         run_name = Path(state.get("config", {}).get("run", Path(source).parent)).name
         label = f"{index}:{run_name}:step-{state['step']}"
+        if self_ensemble == "dihedral8":
+            label += ":dihedral8"
+            ensemble_labels.add(label)
         models.append((label, model, True))
         model_records.append(
             {
@@ -276,6 +283,8 @@ def run_suite(
                 "step": state["step"],
                 "model_config": state["model_config"],
                 "effective_model_config": model.config.to_dict(),
+                "self_ensemble": self_ensemble,
+                "model_views_per_tile": 8 if self_ensemble == "dihedral8" else 1,
                 "training_manifest_sha256": state["config"].get("manifest_sha256"),
                 "compute_precision": precision
                 if torch.device(device).type == "cuda"
@@ -361,6 +370,7 @@ def run_suite(
         "inference_source_snapshot": str(snapshot),
         "observation_and_metrics_precision": "IEEE FP32",
         "noise_pairing": "per-source/condition/CFA seed; independent of model and batch size",
+        "learned_model_self_ensemble": self_ensemble,
     }
     (output / "protocol.json").write_text(json.dumps(metadata, indent=2) + "\n")
     records, crops = [], []
@@ -412,12 +422,13 @@ def run_suite(
                         if hasattr(model, "set_noise"):
                             model.set_noise(condition["shot"], condition["read"])
                         with amp_context(device, dtype=precision if amp else "float32"):
-                            prediction = model(
-                                batch["packed"],
-                                batch["variance"],
-                                batch["colors"],
-                                batch["wb"],
-                                batch["matrix"],
+                            arguments = tuple(
+                                batch[k] for k in ("packed", "variance", "colors", "wb", "matrix")
+                            )
+                            prediction = (
+                                predict_dihedral8(model, *arguments)
+                                if label in ensemble_labels
+                                else model(*arguments)
                             )
                         predictions.append((label, prediction))
                     trim = (
