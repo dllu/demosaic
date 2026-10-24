@@ -21,6 +21,9 @@ V104 material/adverse-camera pilot with unchanged weights, at eight evaluations
 per tile. Its full photo/camera/texture/color comparison is queued after the
 existing GPU workflow. V111's [complete texture/color review](v111-early-quality.md#complete-weak-texture-and-flat-color-panels)
 shows stronger coarse carriers and high-noise color, with a worse ADC bias tail.
+The [current fusion-gate diagnostic](fusion-gate-quality.md) retains useful
+DINO fusion: disabling it reduces selected color failures but weakens photo and
+adverse-camera results, with little visible GFX change.
 
 | Topic | Start here |
 | --- | --- |

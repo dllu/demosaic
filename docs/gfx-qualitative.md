@@ -63,6 +63,11 @@ The original controller and worker exited successfully.
 
 ## V111 final20k context comparison
 
+The [current fusion-gate diagnostic](fusion-gate-quality.md#standing-gfx-scene-and-the-next-capacity-test)
+also compares V104/V111 with their three fusion gates zeroed on all six contexts.
+Native differences remain small and fine foliage/sign detail stays soft; the
+selected photo/camera metrics favor retaining the learned fusion.
+
 ![Six GFX contexts: noisy, V104, V111, RawNIND pre-upsampled and separate ISO100 reference](images/v111-early-gfx/comparison.png)
 
 [V111's completed material and real-photo review](v111-early-quality.md) adds

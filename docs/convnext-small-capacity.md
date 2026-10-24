@@ -10,6 +10,14 @@ measurements below retain their original V102 initializer.
 The [queued loss-scale trial](loss-scale-training.md) retains the original V104
 EMA and gates; the capacity recipes below remain unlaunched.
 
+A [current V104/V111 gate diagnostic](fusion-gate-quality.md) shows why the
+learned-gate parent remains a useful separate reference. Zeroing the three
+gates reduces selected extreme color biases, but loses .33–.52dB on the two
+adverse camera crops and lowers every tested photo-condition mean. Fine GFX
+detail remains soft. Common initialization therefore carries an adaptation
+cost; judge the trained capacity results against their original useful parent
+as well as against each other.
+
 ## Official weights and interface
 
 Meta publishes both backbones in the [DINOv3 repository](https://github.com/facebookresearch/dinov3#pretrained-models)

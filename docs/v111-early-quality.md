@@ -110,6 +110,12 @@ The new **post hoc V111 worst ADC field** is bright neutral gray, linear-sRGB
 V111 has green mean error +.03269975 camera units, or 2,142.98 DN16. The RGB8
 preview has a slight green tint; the float bias is large relative to 16-bit
 precision. V102 retains the lower ADC flat-color bias.
+
+A [controlled fusion-gate diagnostic](fusion-gate-quality.md) lowers this
+selected V111 bias to 1,505.66 DN16 when the three DINO gates are zeroed. Large
+error remains, while photo means and both adverse-camera scores regress.
+The useful implementation keeps its learned fusion; this intervention is not
+a trained replacement or a full-grid repair.
 [Exact palette, ROI, checkpoint and conditioning metadata](images/v111-full-diagnostics/worst-adc/manifest.json).
 
 All 1,176 new color metrics reproduce exactly in independent NumPy64. All
