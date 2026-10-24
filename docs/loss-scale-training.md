@@ -87,6 +87,13 @@ Six GFX context comparisons look close to V104. This supplementary review is
 separate from the unchanged full matched evaluation and later four-model
 material queue; no intermediate checkpoint was selected.
 
+A supplementary [V111 CPU diagnostic run](results/v111-full-diagnostics-queued-v1.json)
+now covers all448 original weak-texture/neutral-flat and1,176 flat-color cases
+while V112 trains. Four parent color replays pass CPU/GPU comparison, and an
+independent saved-float audit is queued after the exact worker exits. Complete
+diagnostic scores and native viewing remain pending; this adds no training or
+CUDA inference and leaves the original matched queues unchanged.
+
 The first queue stopped before any optimizer update because its controller
 looked for a child field omitted from terminal export status. A new controller
 binds the immutable export-result owner instead. Failed queues and source bytes

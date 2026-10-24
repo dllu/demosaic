@@ -5,14 +5,22 @@ material cases over V104.** It is a useful new detail candidate in the same
 DRUNet RGB / frozen DINOv3 ConvNeXt-Tiny family. Native low-noise bark and
 canopy improve slightly; high-noise feather/hair detail and real GFX foliage
 remain soft. Complete camera panels show a small known-scene loss and unseen-scene
-gain versus V104. Full photographic/color/weak-detail results will follow V112's
-matched training run, which is now live.
+gain versus V104. Full photographic results will follow V112's matched training
+run, which is now live. An additional CPU evaluation is running the complete
+existing weak-texture and flat-color panels before that matched GPU report.
 
 [Material/GFX checkpoint, training boundary and native evidence](results/v111-final20000-early-quality-v1.json) ·
 [Complete camera execution, independent audit and original adverse views](results/v111-camera-complete-v1.json).
 The material comparison covers four selected sources, the GFX comparison six
 real contexts and the camera panels all72/90 development crops. Full427,
 flat-color and weak-carrier results are still pending.
+
+The [early CPU diagnostic execution](results/v111-full-diagnostics-queued-v1.json)
+uses all448 original weak-carrier/neutral-flat and1,176 color observations,
+retaining float predictions for independent arithmetic and native review.
+Four V104 color replays agree with prior GPU outputs within.001 DN16 mean-channel
+bias. Complete scores and native review are pending; these execution checks
+do not establish a new quality gain. The original matched queues are unchanged.
 
 ## Fixed material observations
 
