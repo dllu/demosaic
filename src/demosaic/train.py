@@ -23,6 +23,7 @@ from .losses import (
     psnr,
     reconstruction_loss,
     validate_camera_supervision,
+    validate_normalized_band_weight,
     validate_reconstruction_epsilon,
     validate_reconstruction_objective,
 )
@@ -423,6 +424,10 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
         config.get("camera_supervision", "reference-white-v1")
     )
     config["camera_supervision"] = camera_supervision
+    band_weight = validate_normalized_band_weight(config.get("normalized_band_weight", 0.0))
+    if band_weight and camera_supervision != "sensor-valid-v1":
+        raise ValueError("Normalized band supervision requires sensor-valid clean camera targets")
+    config["normalized_band_weight"] = band_weight
     interval_weight = float(config.get("reference_interval_weight", 0.0))
     if not math.isfinite(interval_weight) or interval_weight < 0:
         raise ValueError("Reference interval weight must be finite and nonnegative")
@@ -770,6 +775,8 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
             raise ValueError("Resume camera supervision differs; initialize a new run")
         if float(state["config"].get("reference_interval_weight", 0.0)) != interval_weight:
             raise ValueError("Resume reference interval weight differs; initialize a new run")
+        if float(state["config"].get("normalized_band_weight", 0.0)) != band_weight:
+            raise ValueError("Resume normalized band weight differs; initialize a new run")
         if float(state["config"].get("raw_directional_lr_multiplier", 1)) != float(
             config.get("raw_directional_lr_multiplier", 1)
         ):
@@ -1027,6 +1034,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
                         camera_supervision=camera_supervision,
                         reference_interval_weight=interval_weight,
                         reconstruction_charbonnier_epsilon=reconstruction_epsilon,
+                        normalized_band_weight=band_weight,
                     )
             if not torch.isfinite(loss):
                 raise RuntimeError(f"Nonfinite loss at step {step}; last checkpoint retained")

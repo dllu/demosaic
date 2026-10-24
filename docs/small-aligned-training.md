@@ -8,7 +8,8 @@ baseline while endpoint quality is unmeasured.
 
 [Plans, actual CPU checks and queue boundary](results/v112-continuations-queued-v1.json) ·
 [V112 baseline](v112-quality.md) · [Completed Small transfer](small-feature-transfer.md).
-[Current guarded launch, successful CUDA checks and evaluation queue](results/v112-spawn-guard-training-and-evaluation-v2.json).
+[Guarded training launch and successful CUDA checks](results/v112-spawn-guard-training-and-evaluation-v2.json) ·
+[Current corrected evaluation/review queues](results/evaluation-backbone-interface-fix-v1.json).
 
 ## Models and budget
 

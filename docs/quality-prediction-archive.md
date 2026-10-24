@@ -7,7 +7,8 @@ independent score checks, crop reports and later diagnostics without repeating
 model inference. The trained endpoints and their quality results remain pending.
 
 [Queue, source boundary, genuine-output replay and test evidence](results/v112-prediction-archive-evaluation-queued-v1.json) ·
-[Current guarded training/evaluation queues](results/v112-spawn-guard-training-and-evaluation-v2.json) ·
+[Guarded training launch](results/v112-spawn-guard-training-and-evaluation-v2.json) ·
+[Current corrected evaluation/review queues](results/evaluation-backbone-interface-fix-v1.json) ·
 [Matched training](small-aligned-training.md) ·
 [Independent audit proof and queue](results/v112-independent-archive-audit-queued-v1.json).
 
@@ -15,6 +16,17 @@ The initial queue stopped after its training dependency's pre-forward spawn
 failure. Its replacement waits for the guarded training controller; both actual
 CUDA checks pass and V114 production is running. The failed attempt performed
 zero learned work. Original sources/receipts remain preserved.
+
+The current evaluator supplies the required `legacy_sha256` keyword while
+checking each checkpoint's explicit official Tiny/Small identity. An interface
+review found the omitted keyword before any endpoint evaluation; a regression
+test now exercises the real required-keyword interface.
+The two idle reviewers were replaced with corrected frozen sources: evaluation
+v3 and independent audit v2. Only the collector's execution file changes;
+physical model/observations/counts/budgets remain exact to the original queue.
+The old idle owners exited without children or completed stages, and their
+sources, logs and terminal receipts remain preserved. Training continues under
+its original owner.
 
 ## Scheduled coverage
 

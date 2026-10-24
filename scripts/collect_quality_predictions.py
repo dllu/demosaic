@@ -27,6 +27,12 @@ def strict_float32():
     torch.backends.cudnn.allow_tf32 = False
 
 
+def verify_recorded_backbone(model, checkpoint):
+    identity = checkpoint["expected_backbone"]
+    return verify_backbone_identity(model.config.to_dict(), model_hash(model.context.backbone), checkpoint,
+                                    legacy_sha256=identity["sha256"])
+
+
 @torch.inference_mode()
 def collect(plan_path, stage):
     plan = read(plan_path)
@@ -91,7 +97,7 @@ def collect(plan_path, stage):
             assert state["step"] == 20000 and state["config"]["initialized_from"] == checkpoint["expected_lineage"]["initialized_from"]
             assert len(model.restoration_state_dict()) == 91
             assert all(torch.equal(v.cpu(), state["ema"][k]) for k, v in model.restoration_state_dict().items())
-            verify_backbone_identity(model.config.to_dict(), model_hash(model.context.backbone), checkpoint)
+            verify_recorded_backbone(model, checkpoint)
             record = {"model": model, "checkpoint": checkpoint, "before": model_hash(model),
                       "calls": 0, "observations": 0, "encoder_calls": 0, "input_sequence": [], "output_hashes": []}
             models.append(record)

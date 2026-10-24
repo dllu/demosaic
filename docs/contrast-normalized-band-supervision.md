@@ -46,7 +46,8 @@ camera RGB channels within [0,.98), and the outer eight pixels are omitted.
 Here `s` is each image's valid clean-target band RMS, floored at **.001** and
 detached from backpropagation. Empty valid regions contribute zero. Targets
 supply training supervision only; no target-dependent inference correction
-is proposed. The prototype is not connected to production training.
+is proposed. The original prototype remains isolated; a matching optional
+trainer setting is now available below and defaults to zero.
 The additions differ in effective weight and smoothing as well as normalization;
 this comparison does not isolate normalization alone.
 
@@ -85,10 +86,84 @@ study forbids module forwards, initializes no CUDA and preserves Torch RNG.
 It performs zero new model/encoder calls, noise draws, RAW decodes or training
 updates. Original sources and all completed receipts remain intact.
 
+## Optional training implementation
+
+New experiments can explicitly select:
+
+```yaml
+camera_supervision: sensor-valid-v1
+reconstruct_highlights: true
+normalized_band_weight: 0.0003
+```
+
+The [implementation](../src/demosaic/detail_loss.py) keeps the stated band,
+scale floor, smoothing, validity neighborhood and border. It runs in FP32,
+using the retained sensor target before reference-white display conversion.
+Only Commons/native synthetic observations receive it; paired RAW references
+retain their existing objective. The weight defaults to **zero**, skipping all
+band work and keeping existing loss terms unchanged. Nonfinite/negative weights
+and incompatible supervision fail explicitly. Legacy checkpoints with no field
+mean zero; resume rejects a changed weight. No inference option or new model
+parameters are introduced.
+
+[Complete API/training/parameter evidence](results/normalized-band-integration-v1.json).
+The API reproduces all 108 saved baseline losses and complete output gradients,
+and all 108 normalized-band gradient tensors, **bit for bit**: 42,467,328 checked
+gradient elements. A 109-test suite passes, followed by two strengthened
+routing/resume tests. Actual mixed-data training resumes exactly for both zero
+and nonzero weights, including legacy checkpoints without the field.
+
+Eight discarded **V112** CPU64/B1/FP32 optimizer updates also pass. All 91 initial
+EMA tensors match V112; all 89 fresh AdamW states reach step 8 and remain finite
+alongside model/EMA. The official Tiny encoder stays frozen with no gradients.
+All eight input/domain/step/LR rows match the original CPU control. Four paired
+batches omit the term; four synthetic batches include it. First prediction and
+paired loss match the original control exactly. No validation scoring or new
+production run occurs.
+
+The first discarded attempt omitted the explicit parent initializer and stopped
+before its first forward. Its source, log, zero-forward/update receipt and
+partial output remain preserved. A corrected explicit initializer in a fresh
+output root passes; no successful neural work was repeated to fix bookkeeping.
+
+## Actual V112 parameter response
+
+A separate fixed-checkpoint check makes eight new native256 V112 forwards on
+two deterministic training-source strata, ×.025/×1 contrast and ADC/ISO12800.
+Its three backward passes per case measure baseline, added band and the
+Jacobian-transposed missing-detail direction. Weights stay fixed. Unlike the
+earlier output-space study, this includes the learned network's parameter
+coupling and actual auxiliary output.
+
+Cosine of the negative parameter gradient with the corrective direction at ×.025:
+
+| Training source stratum | Observation | Baseline | Added band |
+| --- | --- | ---: | ---: |
+| New photograph | ADC-only | .177224 | .196157 |
+| New photograph | ISO12800 | −.404351 | −.405093 |
+| Reviewed ROI | ADC-only | .257024 | .272298 |
+| Reviewed ROI | ISO12800 | .163447 | .149787 |
+
+Alignment rises in five of eight cases and falls in three, including **both
+faint high-noise cases**. Negative cosine means the objective descent direction
+opposes this particular correction. Better output-space alignment therefore
+does not imply better parameter-space alignment or a useful optimizer update.
+This small engineering check does not rank restored image quality.
+
+All per-parameter Gram entries are independently checked with NumPy64 and
+Torch64 (maximum absolute discrepancy 1.8e-11). Full gradients on the two
+predeclared faint/high-noise cases are reopened and checked: 534 FP32 tensors,
+shapes, hashes and Gram entries. Other cases retain streamed per-layer hashes
+and Gram entries. The checkpoint, official encoder, configuration and Torch RNG
+stay unchanged. No noise is regenerated, no RAW is decoded and no CUDA is used
+in this fixed-weight check.
+
 ## Next quality question
 
 The normalized term is a candidate for a later matched training comparison after
 the current Tiny/Small results establish the useful architectural baseline.
+The new option remains off, given the mixed parameter response and unmeasured
+trained quality. GPU qualification is still required before a new production run.
 This diagnosis does not show how network gradients, generalization, flat-field
 artifacts, color tails or real foliage would change. Any trained comparison
 still needs complete matched panels, native noisy / restored / GT triplets and

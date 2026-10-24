@@ -107,6 +107,7 @@ def backward_groups(model, selected, prepare, config, *, fingerprint=None):
                         reconstruction_charbonnier_epsilon=config.get(
                             "reconstruction_charbonnier_epsilon", DEFAULT_RECONSTRUCTION_EPSILON
                         ),
+                        normalized_band_weight=config.get("normalized_band_weight", 0.0),
                     )
                 if not torch.isfinite(value):
                     raise RuntimeError("Nonfinite group loss; last checkpoint retained")

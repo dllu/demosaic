@@ -64,6 +64,9 @@ normalized 3–9 band term increases faint-detail correction per gradient norm
 by 11–15%; finer-band gains are smaller. Independent derivatives pass without
 new model calls. It is a later training candidate, with no trained-quality
 claim or change to the active Tiny/Small comparison.
+Its [optional trainer implementation and V112 parameter check](contrast-normalized-band-supervision.md#optional-training-implementation)
+now pass CPU/API checks. Parameter alignment is mixed, including two faint
+high-noise declines; the weight remains zero in current recipes.
 
 The [optional eight-view inference study](dihedral-quality.md) now measures
 uniform averaging of exact sensor rotations/reflections with the same V104

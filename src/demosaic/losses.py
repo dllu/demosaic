@@ -8,6 +8,7 @@ from torch.nn import functional as F
 
 from .cfa import mosaic
 from .color import render
+from .detail_loss import normalized_band_loss, validate_normalized_band_weight
 from .precision import ieee_fp32
 
 DEFAULT_RECONSTRUCTION_EPSILON = 1e-3
@@ -165,10 +166,16 @@ def reconstruction_loss(
     camera_supervision="reference-white-v1",
     reference_interval_weight=0.0,
     reconstruction_charbonnier_epsilon=DEFAULT_RECONSTRUCTION_EPSILON,
+    normalized_band_weight=0.0,
 ):
     validate_reconstruction_objective(objective)
     epsilon = validate_reconstruction_epsilon(reconstruction_charbonnier_epsilon)
     validate_camera_supervision(camera_supervision)
+    band_weight = validate_normalized_band_weight(normalized_band_weight)
+    if band_weight and camera_supervision != "sensor-valid-v1":
+        raise ValueError("Normalized band supervision requires sensor-valid clean camera targets")
+    if band_weight and "sensor_reference" in batch:
+        raise ValueError("Normalized band supervision requires exact synthetic targets, not paired references")
     if not math.isfinite(reference_interval_weight) or reference_interval_weight < 0:
         raise ValueError("Reference interval weight must be finite and nonnegative")
     if reference_interval_weight and camera_supervision != "sensor-valid-v1":
@@ -241,6 +248,10 @@ def reconstruction_loss(
         interval = reference_white_interval_loss(prediction, batch)
         loss = loss + reference_interval_weight * interval
         terms["reference_interval"] = interval
+    if band_weight:
+        detail = normalized_band_loss(prediction, sensor_target)
+        loss = loss + band_weight * detail
+        terms["normalized_band"] = detail
     return loss, terms
 
 
