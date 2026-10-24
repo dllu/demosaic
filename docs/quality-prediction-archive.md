@@ -185,6 +185,10 @@ frozen sources and owners.
 V116 outputs stay inside its frozen internal workspace. Phase starts require
 128 GiB internal free, with 96 GiB reserved at runtime and 208 GiB external free
 for the read-only input store. These new limits do not change the original
-queues' guards. Retained V114/V116 rows still need the matched source/scene join
-and actual native viewing before a data-recipe quality conclusion.
+queues' guards. The [matched V114/V116 source/scene join](fine-detail-data-training.md#matched-saved-output-comparison)
+is now queued after both exact independent audits. It checks input, target/mask
+and display identity, reuses the independently rebuilt metrics and prepares a
+Markdown report with native material triplets and all six full-frame GFX regions.
+No control inference is repeated. Actual native viewing remains pending before
+a data-recipe quality conclusion.
 [Source and queue receipt](results/v116-detail-data-queued-v2.json).

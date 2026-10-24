@@ -104,12 +104,59 @@ it prepares at least two native noisy/restored/exact-GT material triplets.
 Real GFX references remain approximate and include foliage/fence.
 
 The evaluator handles a declared single candidate, so existing V114/V115,
-V112 and stronger RawNIND controls need no repeat inference. Retained V114 and
-V116 source/scene observations must be paired for the data-recipe comparison;
-the candidate audit also reports against existing V112/RawNIND controls.
+V112 and stronger RawNIND controls need no repeat inference. A dedicated
+[matched comparison is now queued](results/v114-v116-matched-comparison-queued-v1.json)
+after both exact independent-audit owners. It pairs all 14,190 retained V114/V116
+observations; the candidate audit also reports against existing V112/RawNIND controls.
 Actual material/GFX viewing and comparison of strengths and weaknesses remain
 required. No statistical promotion rule or automatic recommendation change is
 introduced.
+
+## Matched saved-output comparison
+
+The [comparison](../scripts/compare_quality_archives.py) selects exact checkpoint
+hashes and inference policies across the two-model control and single-candidate
+archives. It checks complete observation metadata and scoring protocols, then
+requires identical noisy-input and logical target/mask/WB/matrix fingerprints.
+It pairs independently rebuilt NumPy64 metrics without rereading every prediction
+file or running the models again. Photo summaries weight sources equally; camera
+summaries average crops within capture, captures within scene, and scenes equally.
+Intervals describe these fixed sources/scenes, not training-seed uncertainty.
+Color tails, carrier phase/residual and flat-field false texture accompany PSNR;
+carrier gain is interpreted relative to one.
+
+The [CPU controller](../scripts/queue_detail_data_comparison.py) also checks both
+actual training receipts and the frozen recipes. All explicit settings agree
+apart from the two declared data changes, run/notes and equal-content validation
+protocol paths. Default-off fine-source and normalized-band settings are handled
+explicitly. Same parent, model, seed, schedule and budget are verified rather than
+inferred from version labels. The old generic Small status text does not override
+the V114 worker's actual Tiny arm/backbone evidence.
+
+[Native reporting](../scripts/compare_quality_crops.py) preserves both complete
+candidate noisy/restored/exact-GT triplets and builds a noisy/V114/V116/GT board
+without resizing any crop. Six GFX regions use the retained **unquantized FP32
+crops of full blended 102MP outputs**. Noisy, restored and independent ISO100
+reference floats share one NumPy64 exposure/WB/matrix transform. Reference source,
+ROI and input pixels must agree across endpoints. ISO100 remains approximate and
+receives no pixelwise score. All PNG cells are reopened and checked.
+
+Twenty-five new comparison cases plus the sixteen existing arithmetic cases
+pass. They cover a closed-form 6.0206 dB gain, mismatched inputs/targets/masks,
+coverage, policy, protocols and display, recipe changes, completed owner/arm/budget
+evidence, and six-region GFX rendering. A separate frozen readiness proof reuses
+17 genuine retained method observations: two photo self-comparisons, two Tiny–Small
+camera pairs, eight texture self-comparisons and three color self-comparisons.
+The two native material columns were actually viewed. This is **engineering
+readiness, not V114/V116 quality evidence**. It adds zero neural/encoder calls,
+optimizer updates, noise observations or RAW decodes.
+
+The waiting comparison requires 8 GiB available RAM and 2 GiB output headroom.
+It writes a reviewable Markdown report, bound numeric results and native images
+inside its frozen workspace. Existing six owners and sources remain unchanged.
+Failures preserve evidence and stop without automatic retry. Actual viewing and
+publication of useful measured gains/weaknesses follow when results are ready;
+there is no statistical gate freezing the model choice.
 
 New training/evaluation artifacts stay in internal SSD caches. Phase starts
 require 128 GiB internal free / 48 GiB available RAM, with a 96 GiB internal

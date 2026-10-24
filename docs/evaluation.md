@@ -36,6 +36,12 @@ per-image metrics and paired source-level bootstrap intervals. Predictions from
 every method use exactly the same noisy observations. Noise seeds depend on the
 source ID, condition and CFA pattern, not the model or batch order.
 
+For separately evaluated endpoints, the [matched archive comparison](fine-detail-data-training.md#matched-saved-output-comparison)
+checks exact checkpoint/policy identity, complete source/capture metadata and
+identical saved noisy-input, target/mask and display fingerprints before pairing
+independent scores. It reuses native material and full-frame GFX outputs for
+common-transform comparisons, with no new neural inference or RAW decoding.
+
 Current runs also archive the evaluation source, manifest and protocol. Physical
 color transforms, classical interpolation and metrics use IEEE FP32 even inside
 autocast. The learned network may use BF16. Checkpoints predating the precision
