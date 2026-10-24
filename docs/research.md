@@ -58,6 +58,13 @@ baseline with V111-like photo PSNR and better camera/color results. The trainer 
 with exact default/gradient replay and resumed-training checks. Production
 defaults and existing frozen recipes remain unchanged.
 
+The [contrast-normalized band diagnosis](contrast-normalized-band-supervision.md)
+reuses all 108 saved training predictions with the current .0003 scale. Its
+normalized 3–9 band term increases faint-detail correction per gradient norm
+by 11–15%; finer-band gains are smaller. Independent derivatives pass without
+new model calls. It is a later training candidate, with no trained-quality
+claim or change to the active Tiny/Small comparison.
+
 The [optional eight-view inference study](dihedral-quality.md) now measures
 uniform averaging of exact sensor rotations/reflections with the same V104
 weights. It improves twelve fixed material cases and two adverse camera crops,

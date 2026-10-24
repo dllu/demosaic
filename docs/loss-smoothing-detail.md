@@ -1,12 +1,23 @@
 # Loss smoothing and faint detail
 
-**Smaller Charbonnier epsilon strengthens supervision of faint low-noise
-detail, while increasing the overall output gradient more.** This fixed-V102
-diagnostic motivates the [active V111/V112 matched training test](loss-scale-training.md)
-from V104 on the cleaned corpus. The default loss and Tiny/Small recipes remain
-unchanged; no restored-quality gain from the new scale is established.
+**The current V112 recipe uses Charbonnier epsilon .0003.** The
+[completed V111/V112 comparison](loss-scale-training.md) on the cleaned corpus
+supports V112 as the current learned baseline, with 36.90238dB photographic PSNR
+and substantially lower tested color tails. Its matched Tiny/Small continuations
+use the same scale. [Current quality evidence](v112-quality.md).
 
-The production penalty is `sqrt(error² + 1e-6)`, so epsilon is **0.001**.
+The fixed-V102 diagnosis below motivated that comparison: smaller epsilon
+strengthens faint low-noise supervision while increasing the overall output
+gradient more. It measures output-space sensitivity, independently of the later
+trained-quality results.
+
+The [new contrast-normalized band diagnosis](contrast-normalized-band-supervision.md)
+reuses all 108 saved predictions with the .0003 baseline. Its faint-detail
+correction slope grows more than total gradient magnitude; this is a candidate
+for later training, with no new restored-quality result.
+
+The library default remains `sqrt(error² + 1e-6)`, with epsilon **0.001**;
+V112 and its current continuation recipes explicitly select **0.0003**.
 Its elementwise derivative is `error / sqrt(error² + epsilon²)`. Errors below
 epsilon still contribute; their gradients are weaker than the limiting L1
 gradient. Linear-camera and rendered losses each use their own numeric units.
@@ -83,10 +94,11 @@ detail or prove a better training outcome.
 These are selected training sources, one noise draw per case and a fixed
 camera transform. They do not measure held-out quality, broad-camera/paired
 loss behavior, gradients through the network or generalization after training.
-The chosen band also does not cover every fine structure. The active matched
+The chosen band also does not cover every fine structure. The completed matched
 training comparison tests the idea while holding architecture, data,
-initializer and budget fixed. The [current cleaned-data capacity comparison](convnext-small-capacity.md#prepared-matched-quality-trial)
-keeps the original loss so its encoder comparison remains interpretable.
+initializer and budget fixed. The [current fitted Small/Tiny comparison](small-aligned-training.md)
+uses V112's .0003 scale; the earlier unlaunched zero-gate capacity recipes keep
+their original settings and receipts.
 
 ## Configurable training scale
 

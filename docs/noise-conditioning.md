@@ -5,8 +5,9 @@
 **Use suitable physical shot/read priors with V104.** Lower conditioning retains
 more structure and grain in these fixed examples, with lower high-noise PSNR.
 It is a useful denoising/detail control, with no demonstrated general quality
-win from the alternative strengths. V104 remains the positive-noise/training
-baseline; the V111/V112 loss-scale test continues unchanged.
+win from the alternative strengths. V112 is the current positive-noise/training
+baseline after its completed quality comparison. These V104 measurements do not
+establish an alternative conditioning recommendation for V112.
 
 This current-model check holds the V104 final20000 EMA and all observations
 fixed. Factors .50/.75/1.00/1.25 multiply the supplied shot coefficient,
