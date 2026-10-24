@@ -55,13 +55,65 @@ All 20 camera-board cells were viewed at original resolution. V102/V104 remain
 close, with soft fine surface/weave detail. The separate AHD reference retains
 noise; its fluctuations cannot all be treated as scene texture.
 
-![Known-camera plates and patches, native160 cells](images/quality-v102-v104-known/comparison.png)
+![Known-camera plates and patches, native 160 cells](images/quality-v102-v104-known/comparison.png)
 
 [Known source/ROI/checkpoint/noise/display metadata](images/quality-v102-v104-known/manifest.json).
 
-![Unseen-camera apples and cloth, native160 cells](images/quality-v102-v104-unseen/comparison.png)
+![Unseen-camera apples and cloth, native 160 cells](images/quality-v102-v104-unseen/comparison.png)
 
 [Unseen source/ROI/checkpoint/noise/display metadata](images/quality-v102-v104-unseen/manifest.json).
+
+## Targeted dark-field regressions
+
+Two additional views inspect the largest mean-decreasing unseen scenes. For
+each, the original complete grid selects the crop with the largest V104−V102
+CFA PSNR loss. Both are Canon EOS M100 at ISO12800. A post hoc native 160 window
+then maximizes measured-CFA squared-error increase inside the scored 448
+interior, using identical coordinates for every method.
+
+Full 448-interior CFA PSNR for these selected crops:
+
+| Scene | V102 | V104 | RawNIND channel |
+| --- | ---: | ---: | ---: |
+| LucieB_Coulicoco | 57.82471 | 56.98928 | 58.92127 |
+| LucieB_top_of_Expedit | 61.15482 | 60.67192 | 62.08642 |
+
+The original CUDA losses are −.83543/−.48289dB. CPU replay reproduces primary
+and auxiliary PSNR within 7.63e-6dB; original full-panel metrics remain unchanged.
+Independent NumPy64 masked-CFA arithmetic checks all 12 replay score rows,
+including original batch partners.
+
+Noisy → V104 → independent AHD reference, with shared **+2EV display** to
+inspect these dark fields. Each panel is an unchanged 160×160 crop. The AHD
+image is auxiliary, **not exact GT**. The display boost changes no inference,
+exposure fit or scored quantity.
+
+![LucieB_Coulicoco: noisy, V104 and independent AHD reference, shared +2EV](images/v104-unseen-adverse/display2EV/crop-45639a9f60951d36.png)
+
+![LucieB_top_of_Expedit: noisy, V104 and independent AHD reference, shared +2EV](images/v104-unseen-adverse/display2EV/crop-96e641d297c6abd4.png)
+
+[All three methods at +2EV](images/v104-unseen-adverse/display2EV/native-comparison.png) ·
+[Original exposure ×1](images/v104-unseen-adverse/standard/native-comparison.png) ·
+[Source/ROI/checkpoint/noise/display metadata](images/v104-unseen-adverse/display2EV/manifest.json).
+
+V104 has more coarse variation in the Coulicoco brown field; top-of-Expedit
+also retains broad patches/bands. RawNIND is smoother and has higher measured
+CFA PSNR on both selected crops. Reference noise means that visible AHD
+fluctuations cannot all be called surface detail. These targeted adverse cases
+do not establish the ordering on other scenes.
+
+Measured channel-mean offsets account for 14.8%/14.4% of V104's full-crop CFA MSE,
+leaving most error after those means are removed. Remaining error includes
+spatial reconstruction, residual noise and registration/gain effects; this
+is not an identified training cause. These cases complement faint-detail
+examples when reviewing the pending loss-scale models.
+
+[Executed replay, independent decomposition and 20 viewed display cells](results/v104-unseen-adverse-review-v1.json) ·
+[Fixed development stress sources/ROIs](../configs/paired-adverse-v104.json).
+There are two physical ROIs, each shown at two exposures. The catalogue
+supports repeatable future comparisons without changing current training,
+frozen evaluation plans or promotion criteria. These remain outside training;
+the protected 16-scene test reserve is untouched.
 
 ## Reproduction and earlier evidence
 

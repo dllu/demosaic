@@ -9,6 +9,9 @@ lower ADC flat-color bias and a higher unseen-camera mean.
 All seven panels and complete 102MP exports are finished. V111 is training
 from V104 on the further-cleaned 90,864-source corpus; V112 follows with a
 smaller reconstruction loss scale. [Actual trial and evidence](loss-scale-training.md).
+The optional [V104 ADC sites export](adc-consistency.md) adds .2885 dB on the
+complete ADC-only photo panel, with unchanged learned weights and documented
+flat-color tradeoffs.
 
 | Topic | Start here |
 | --- | --- |

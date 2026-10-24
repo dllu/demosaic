@@ -19,11 +19,10 @@ V112 is queued. The separate
 remain prepared.
 [Current models](docs/current-model.md) · [Source-quality review](docs/incoming-commons-quality.md) ·
 [Historical diary](diary/index.md).
-For explicit zero-shot/read inputs, [optional site consistency](docs/adc-consistency.md)
-adds **.40dB ADC-only PSNR** with unchanged V84 weights across all427 photos/four
-CFAs; positive-noise inputs bypass it. The report includes native crops and color tradeoffs.
-The [V104 ADC diagnostics](docs/v104-adc-color-projection.md) show color/texture
-tradeoffs; its full photographic comparison is running.
+For explicit zero-shot/read inputs, the [optional V104 sites export](docs/adc-consistency.md)
+adds **.2885dB ADC-only PSNR** across all 427 photos/four CFAs with unchanged learned
+weights. All 1,708 cases improve; positive-noise inputs bypass it. Native crops,
+flat-color limitations and adverse cases accompany the result.
 
 ![PSNR versus model version](docs/images/version-PSNR-history.png)
 

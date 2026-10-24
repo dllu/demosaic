@@ -11,9 +11,10 @@ cover full427 photos,known/unseen measured-camera and complete102MP GFX output.
 Continue quality work with the [reviewed corpus and zero-blur recipe](quality-first-training.md).
 Earlier measurements below retain their checkpoint labels.
 For explicit shot=read=0 inputs, the separately tested
-[V84 observed-site ADC export](adc-consistency.md#implementation-and-use) gains
-.400dB across427 sources/four CFAs with unchanged V84 weights. That result has
-not been measured for V104; positive-noise profiles bypass the correction.
+[V104 observed-site ADC export](adc-consistency.md#use-the-optional-export) gains
+.2885 dB across 427 sources/four CFAs with unchanged learned weights. All 1,708
+cases improve; positive-noise profiles bypass the correction. Its report includes
+actual serialized-export triplets and remaining flat-color limitations.
 V102 remains a lower-flat-bias alternative for explicit zero-shot/read inputs;
 its checkpoint path and measured tradeoffs are in the model guide.
 

@@ -44,9 +44,12 @@ a better completed initializer later. [Source review](incoming-commons-quality.m
 
 The [V104 ADC diagnostics](v104-adc-color-projection.md) show that the existing
 Malvar residual operator repairs most flat-color bias, with texture gains and
-individual phase regressions. The full427/four-CFA photo comparison is running
-on CPU; an owned queue will aggregate complete results and render both policies'
-adverse examples. This has not changed the checkpoint or ADC recommendation.
+individual phase regressions. The [completed full427/four-CFA study](adc-consistency.md)
+supports an optional V104 sites export: +.28850dB, all 1,708 cases improving,
+with actual serialized-export parity checks. Flat-color limitations remain;
+the original positive-noise/training checkpoint is unchanged. New
+[unseen-camera adverse views](real-camera-quality.md#targeted-dark-field-regressions)
+retain spatial-residual weaknesses alongside the gains.
 
 The merged [linear DNG/JPEG path](dng-export.md) adds optional Bayer hot-pixel
 removal before restoration; repair was off in these comparisons. The

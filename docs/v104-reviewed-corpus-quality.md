@@ -57,7 +57,7 @@ WB/matrix and display exposure. The final row is exact synthetic GT. PNGs are
 RGB8 previews; scores use float predictions. All ten native cells were viewed
 at original resolution.
 
-![Noisy,V102,V104,RawNIND and exact synthetic GT, native160 cells](images/quality-v102-v104-photo/comparison.png)
+![Noisy,V102,V104,RawNIND and exact synthetic GT, native 160 cells](images/quality-v102-v104-photo/comparison.png)
 
 V102/V104 look close at this ISO12800 prior. Both miss the fine fabric cords
 and retain sharper architectural contours than RawNIND here. Two V104
@@ -107,7 +107,7 @@ error is +.018586 camera units, versus input quantization residuals below
 show only a small tint difference; the float bias is substantial relative to
 V102. V102 remains the lower-bias choice for explicit zero-shot/read workflows.
 
-![Three fixed high-noise colors and V104's posthoc worst ADC case](images/quality-v102-v104-color/comparison.png)
+![Three fixed high-noise colors and V104's post hoc worst ADC case](images/quality-v102-v104-color/comparison.png)
 
 [Color source/ROI/checkpoint/noise/display metadata](images/quality-v102-v104-color/manifest.json).
 All 2,352 saved float predictions and 1,176 input archives were rehashed; all
@@ -119,9 +119,10 @@ at original resolution.
 A subsequent [saved-float ADC projection diagnostic](v104-adc-color-projection.md)
 reduces V104's worst analytic-grid bias to 31.91 DN16 with the existing Malvar
 residual operator. It does not change the original scores above or the current
-checkpoint: a full ADC photo comparison is running. The completed ADC texture
-check shows carrier gains and individual Malvar regressions, including a
-native GBRG counterexample.
+checkpoint. The [completed ADC photographic study](adc-consistency.md) supports
+an optional sites export, with +.28850dB on all 427 sources/all 1,708 CFA cases.
+Its flat-color tail remains 610.67DN16. The texture check also retains individual
+Malvar regressions, including a native GBRG counterexample.
 
 ## Complete real GFX outputs
 

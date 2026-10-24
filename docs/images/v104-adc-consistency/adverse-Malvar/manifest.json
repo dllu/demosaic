@@ -1,0 +1,1006 @@
+{
+  "source_report": {
+    "path": "/mnt/external/demosaic/V104-ADC-full427-adverse-Malvar-20261023-v1/report.json",
+    "sha256": "0721eeca27c2238cd89dd459776c4345d1e9032fa46db7c84463495150f2119e"
+  },
+  "native_crops": [
+    {
+      "image": "crop-411dcae59ad318f1.png",
+      "caption": "08c294851fc8999cb608dc7a5f53d28767620f49 / ADC-only / RGGB / V104",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "5de735e0bd426e0aaaa3aa4f9c4608f2104d4469d242296bedcbed3853864a6e",
+      "source_id": "08c294851fc8999cb608dc7a5f53d28767620f49",
+      "source": {
+        "title": "File:Dahlia 'Moonfire' 005.JPG",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Dahlia_'Moonfire'_005.JPG",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Dahlia_%27Moonfire%27_005.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Dominicus Johannes Bergsma",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "attribution": null,
+        "credit": "Own work",
+        "sha1": "08c294851fc8999cb608dc7a5f53d28767620f49",
+        "sha1_hex": "08c294851fc8999cb608dc7a5f53d28767620f49",
+        "download_path": "images/08/c2/08c294851fc8999cb608dc7a5f53d28767620f49.jpg",
+        "width": 2352,
+        "height": 2659,
+        "id": "08c294851fc8999cb608dc7a5f53d28767620f49",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/08/08c294851fc8999cb608dc7a5f53d28767620f49.npy",
+        "shape": [
+          332,
+          294,
+          3
+        ],
+        "cache_sha256": "9cd5ffd905bacb3c0d67738b3e9a427c6bb034fa3b8bdde4e7f32ef747ef2d50"
+      },
+      "validation_index": 95,
+      "validation_seed": 42,
+      "source_cache_context_xywh": [
+        20,
+        52,
+        256,
+        256
+      ],
+      "evaluation_tile_xywh": [
+        66,
+        57,
+        160,
+        160
+      ],
+      "condition": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "pattern": "RGGB",
+      "display_exposure": 1,
+      "model": {
+        "label": "V104",
+        "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+        "step": 20000,
+        "compute_precision": "float32",
+        "device": "cpu",
+        "effective_model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "output_operator": "Original V104"
+      },
+      "reference": "Exact synthetic clean target",
+      "selection": "Lowest source-mean MHC-minus-V104 sRGBPSNR; show its lowest-PSNR-change CFA; Posthoc160window maximizing MHC-minus-V104 sRGB squared error within common240interior; shared unchanged across methods."
+    },
+    {
+      "image": "crop-3f60df2c3a52cb00.png",
+      "caption": "08c294851fc8999cb608dc7a5f53d28767620f49 / ADC-only / RGGB / V104+MHC",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "64422a0b7471a6d8bdbd02a2967ebaccacbb32b8bc32ee0f09bf7d0b2f6ae60d",
+      "source_id": "08c294851fc8999cb608dc7a5f53d28767620f49",
+      "source": {
+        "title": "File:Dahlia 'Moonfire' 005.JPG",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Dahlia_'Moonfire'_005.JPG",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Dahlia_%27Moonfire%27_005.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Dominicus Johannes Bergsma",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "attribution": null,
+        "credit": "Own work",
+        "sha1": "08c294851fc8999cb608dc7a5f53d28767620f49",
+        "sha1_hex": "08c294851fc8999cb608dc7a5f53d28767620f49",
+        "download_path": "images/08/c2/08c294851fc8999cb608dc7a5f53d28767620f49.jpg",
+        "width": 2352,
+        "height": 2659,
+        "id": "08c294851fc8999cb608dc7a5f53d28767620f49",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/08/08c294851fc8999cb608dc7a5f53d28767620f49.npy",
+        "shape": [
+          332,
+          294,
+          3
+        ],
+        "cache_sha256": "9cd5ffd905bacb3c0d67738b3e9a427c6bb034fa3b8bdde4e7f32ef747ef2d50"
+      },
+      "validation_index": 95,
+      "validation_seed": 42,
+      "source_cache_context_xywh": [
+        20,
+        52,
+        256,
+        256
+      ],
+      "evaluation_tile_xywh": [
+        66,
+        57,
+        160,
+        160
+      ],
+      "condition": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "pattern": "RGGB",
+      "display_exposure": 1,
+      "model": {
+        "label": "V104+MHC",
+        "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+        "step": 20000,
+        "compute_precision": "float32",
+        "device": "cpu",
+        "effective_model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "output_operator": "Existing ADC Malvar correction"
+      },
+      "reference": "Exact synthetic clean target",
+      "selection": "Lowest source-mean MHC-minus-V104 sRGBPSNR; show its lowest-PSNR-change CFA; Posthoc160window maximizing MHC-minus-V104 sRGB squared error within common240interior; shared unchanged across methods."
+    },
+    {
+      "image": "crop-eeec8a7e3626699d.png",
+      "caption": "08c294851fc8999cb608dc7a5f53d28767620f49 / ADC-only / RGGB / V104+site",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "2dc8a36440f68f6a90ebb47e775a306cab16bad07a4125a276bff95e458af0d7",
+      "source_id": "08c294851fc8999cb608dc7a5f53d28767620f49",
+      "source": {
+        "title": "File:Dahlia 'Moonfire' 005.JPG",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Dahlia_'Moonfire'_005.JPG",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Dahlia_%27Moonfire%27_005.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Dominicus Johannes Bergsma",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "attribution": null,
+        "credit": "Own work",
+        "sha1": "08c294851fc8999cb608dc7a5f53d28767620f49",
+        "sha1_hex": "08c294851fc8999cb608dc7a5f53d28767620f49",
+        "download_path": "images/08/c2/08c294851fc8999cb608dc7a5f53d28767620f49.jpg",
+        "width": 2352,
+        "height": 2659,
+        "id": "08c294851fc8999cb608dc7a5f53d28767620f49",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/08/08c294851fc8999cb608dc7a5f53d28767620f49.npy",
+        "shape": [
+          332,
+          294,
+          3
+        ],
+        "cache_sha256": "9cd5ffd905bacb3c0d67738b3e9a427c6bb034fa3b8bdde4e7f32ef747ef2d50"
+      },
+      "validation_index": 95,
+      "validation_seed": 42,
+      "source_cache_context_xywh": [
+        20,
+        52,
+        256,
+        256
+      ],
+      "evaluation_tile_xywh": [
+        66,
+        57,
+        160,
+        160
+      ],
+      "condition": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "pattern": "RGGB",
+      "display_exposure": 1,
+      "model": {
+        "label": "V104+site",
+        "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+        "step": 20000,
+        "compute_precision": "float32",
+        "device": "cpu",
+        "effective_model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "output_operator": "Replace only valid observed CFA channels"
+      },
+      "reference": "Exact synthetic clean target",
+      "selection": "Lowest source-mean MHC-minus-V104 sRGBPSNR; show its lowest-PSNR-change CFA; Posthoc160window maximizing MHC-minus-V104 sRGB squared error within common240interior; shared unchanged across methods."
+    },
+    {
+      "image": "crop-2beebfee9e6ece68.png",
+      "caption": "0aa60cdc24a95a107e13140492b02906065913e1 / ADC-only / GBRG / V104",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "280db9413c9ca68a269daaa9f49a91ca15f8da9b5491fd687cd5fb2eb9591965",
+      "source_id": "0aa60cdc24a95a107e13140492b02906065913e1",
+      "source": {
+        "title": "File:Wraxall 2013 MMB 76 Bonfire.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Wraxall_2013_MMB_76_Bonfire.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Wraxall_2013_MMB_76_Bonfire.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "mattbuck (category)",
+        "license": "CC BY-SA 3.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "attribution": null,
+        "credit": "Own work by mattbuck.",
+        "sha1": "0aa60cdc24a95a107e13140492b02906065913e1",
+        "sha1_hex": "0aa60cdc24a95a107e13140492b02906065913e1",
+        "download_path": "images/0a/a6/0aa60cdc24a95a107e13140492b02906065913e1.jpg",
+        "width": 3129,
+        "height": 2760,
+        "id": "0aa60cdc24a95a107e13140492b02906065913e1",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/0a/0aa60cdc24a95a107e13140492b02906065913e1.npy",
+        "shape": [
+          345,
+          391,
+          3
+        ],
+        "cache_sha256": "149edaa2061687d5f2db81239ce6f1fb473995ce667ec483e7ba711ac24cbc1b"
+      },
+      "validation_index": 120,
+      "validation_seed": 42,
+      "source_cache_context_xywh": [
+        52,
+        80,
+        256,
+        256
+      ],
+      "evaluation_tile_xywh": [
+        88,
+        85,
+        160,
+        160
+      ],
+      "condition": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "pattern": "GBRG",
+      "display_exposure": 1,
+      "model": {
+        "label": "V104",
+        "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+        "step": 20000,
+        "compute_precision": "float32",
+        "device": "cpu",
+        "effective_model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "output_operator": "Original V104"
+      },
+      "reference": "Exact synthetic clean target",
+      "selection": "Largest source-mean MHC-minus-V104 chromaMAE among remaining sources; show its largest-chroma-change CFA; Posthoc160window maximizing MHC-minus-V104 chromaMAE within common240interior; shared unchanged across methods."
+    },
+    {
+      "image": "crop-a4a62cd8350ca4aa.png",
+      "caption": "0aa60cdc24a95a107e13140492b02906065913e1 / ADC-only / GBRG / V104+MHC",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "d44f70716be52a58150be3f6ff457f3f32e65d61a61a4bb2c1456a5966451d3f",
+      "source_id": "0aa60cdc24a95a107e13140492b02906065913e1",
+      "source": {
+        "title": "File:Wraxall 2013 MMB 76 Bonfire.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Wraxall_2013_MMB_76_Bonfire.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Wraxall_2013_MMB_76_Bonfire.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "mattbuck (category)",
+        "license": "CC BY-SA 3.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "attribution": null,
+        "credit": "Own work by mattbuck.",
+        "sha1": "0aa60cdc24a95a107e13140492b02906065913e1",
+        "sha1_hex": "0aa60cdc24a95a107e13140492b02906065913e1",
+        "download_path": "images/0a/a6/0aa60cdc24a95a107e13140492b02906065913e1.jpg",
+        "width": 3129,
+        "height": 2760,
+        "id": "0aa60cdc24a95a107e13140492b02906065913e1",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/0a/0aa60cdc24a95a107e13140492b02906065913e1.npy",
+        "shape": [
+          345,
+          391,
+          3
+        ],
+        "cache_sha256": "149edaa2061687d5f2db81239ce6f1fb473995ce667ec483e7ba711ac24cbc1b"
+      },
+      "validation_index": 120,
+      "validation_seed": 42,
+      "source_cache_context_xywh": [
+        52,
+        80,
+        256,
+        256
+      ],
+      "evaluation_tile_xywh": [
+        88,
+        85,
+        160,
+        160
+      ],
+      "condition": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "pattern": "GBRG",
+      "display_exposure": 1,
+      "model": {
+        "label": "V104+MHC",
+        "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+        "step": 20000,
+        "compute_precision": "float32",
+        "device": "cpu",
+        "effective_model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "output_operator": "Existing ADC Malvar correction"
+      },
+      "reference": "Exact synthetic clean target",
+      "selection": "Largest source-mean MHC-minus-V104 chromaMAE among remaining sources; show its largest-chroma-change CFA; Posthoc160window maximizing MHC-minus-V104 chromaMAE within common240interior; shared unchanged across methods."
+    },
+    {
+      "image": "crop-2cc689f1c67238ac.png",
+      "caption": "0aa60cdc24a95a107e13140492b02906065913e1 / ADC-only / GBRG / V104+site",
+      "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+      "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Denoised",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "GT (synthetic)",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "png_sha256": "98c5cfbc1784f8a68123669dfa72a4ee869015d570350e26123e6b9f52788a5d",
+      "source_id": "0aa60cdc24a95a107e13140492b02906065913e1",
+      "source": {
+        "title": "File:Wraxall 2013 MMB 76 Bonfire.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Wraxall_2013_MMB_76_Bonfire.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Wraxall_2013_MMB_76_Bonfire.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "mattbuck (category)",
+        "license": "CC BY-SA 3.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "attribution": null,
+        "credit": "Own work by mattbuck.",
+        "sha1": "0aa60cdc24a95a107e13140492b02906065913e1",
+        "sha1_hex": "0aa60cdc24a95a107e13140492b02906065913e1",
+        "download_path": "images/0a/a6/0aa60cdc24a95a107e13140492b02906065913e1.jpg",
+        "width": 3129,
+        "height": 2760,
+        "id": "0aa60cdc24a95a107e13140492b02906065913e1",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/0a/0aa60cdc24a95a107e13140492b02906065913e1.npy",
+        "shape": [
+          345,
+          391,
+          3
+        ],
+        "cache_sha256": "149edaa2061687d5f2db81239ce6f1fb473995ce667ec483e7ba711ac24cbc1b"
+      },
+      "validation_index": 120,
+      "validation_seed": 42,
+      "source_cache_context_xywh": [
+        52,
+        80,
+        256,
+        256
+      ],
+      "evaluation_tile_xywh": [
+        88,
+        85,
+        160,
+        160
+      ],
+      "condition": {
+        "name": "adc-only",
+        "shot": 0.0,
+        "read": 0.0,
+        "exposure": 1.0
+      },
+      "pattern": "GBRG",
+      "display_exposure": 1,
+      "model": {
+        "label": "V104+site",
+        "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+        "step": 20000,
+        "compute_precision": "float32",
+        "device": "cpu",
+        "effective_model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "output_operator": "Replace only valid observed CFA channels"
+      },
+      "reference": "Exact synthetic clean target",
+      "selection": "Largest source-mean MHC-minus-V104 chromaMAE among remaining sources; show its largest-chroma-change CFA; Posthoc160window maximizing MHC-minus-V104 chromaMAE within common240interior; shared unchanged across methods."
+    }
+  ],
+  "shared_display": {
+    "white_balance": [
+      2.0,
+      1.0,
+      1.5
+    ],
+    "camera_to_srgb": [
+      [
+        1.1176470588,
+        -0.0588235294,
+        -0.0588235294
+      ],
+      [
+        -0.0588235294,
+        1.1176470588,
+        -0.0588235294
+      ],
+      [
+        -0.0588235294,
+        -0.0588235294,
+        1.1176470588
+      ]
+    ],
+    "display_exposure": 1.0
+  },
+  "scope": "Exact synthetic target; native160 pixels, shared coordinates/display. Export examples use the actual serialized sites checkpoint and reproduce the scored sites-policy PNG bytes."
+}

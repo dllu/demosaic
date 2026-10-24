@@ -106,7 +106,7 @@ structure; a better gain alone does not establish a better reconstruction.
 Noisy Malvar → V104 + Malvar residual → exact analytic GT. The two fixed
 examples below are level .01 / contrast .10 / period8 and level .18 / contrast
 .02 / period16, both RGGB. Each panel is an unchanged 160×160 crop at
-[48,48,160,160] inside its native256 context. WB, matrix and exposure ×1 match
+[48,48,160,160] inside its native 256 context. WB, matrix and exposure ×1 match
 the flat-color display. Four native examples were declared before inference.
 
 ![Dark period8: noisy, V104 Malvar projection and exact analytic GT](images/v104-adc-texture/fixed/crop-07e3875437bbf63d.png)
@@ -142,23 +142,26 @@ statistics. All 45 panels across 15 triplets render exactly, and all 25 native
 board cells were checked and viewed.
 [Execution, independent audit and actual native review](results/v104-adc-texture-projection-v1.json).
 
-## Photographic validation still running
+## Completed photographic validation and optional export
 
-**A completed V104 photographic comparison remains pending.** In
-the [completed V84 photograph study](adc-consistency.md), Malvar repaired linear
-error but produced more rendered-color tradeoffs than sites. Therefore flat
-bias alone does not choose V104's output policy. Compare noise-free photographic
-sources and clipped/near-black regions before exporting
-or recommending a projected V104 checkpoint. A CPU FP32 comparison of all 427
-validation photos/four CFAs is now running with two threads and batch size two,
-sharing each V104 neural prediction across the three policies. No final
-comparison result is available.
-[Frozen plan and actual production launch](results/v104-adc-photo-comparison-started-v1.json).
-A [verified waiting queue](results/v104-adc-photo-review-queued-v1.json) will
-process all complete rows, source intervals and separate adverse cases for both
-operators after the exact existing owners finish. Actual native viewing will
-still be required. These diagnostics change neither
-the current selector nor the running V111/V112 training/evaluation plans.
+The [completed full427/four-CFA photo comparison](adc-consistency.md) measures
++.28850dB sRGB PSNR for sites, with all 427 sources/all 1,708 CFA cases improving.
+Malvar gains +.23308dB on average but regresses on 48 sources, including the native
+flower/fiber counterexamples in that report. All 30 benchmark cells and both
+actual serialized-export triplets have been viewed; original partner-batch
+scores reproduce exactly.
+
+The optional sites export retains the original 91 EMA tensors and official
+frozen encoder. Actual native 256 forwards match four ADC-sites predictions and
+eight original positive-noise predictions byte-for-byte. The current main
+checkpoint, selector and V111/V112 training plans remain unchanged.
+[Complete performance, actual export and preflight evidence](results/v104-adc-sites-full427-v1.json).
+
+Sites' remaining 610.67DN16 analytic-grid tail and local photographic chroma
+regressions stay visible. Malvar's stronger color repair does not uniformly
+preserve fine structure; its photographic and phase-specific regressions remain
+part of the comparison. Neither operator improves a positive-noise GFX capture,
+where production bypasses ADC projection.
 
 V104 SHA256: `8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300`.
 V102 SHA256: `55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a`.

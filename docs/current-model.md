@@ -2,9 +2,14 @@
 
 **Use V104 final20k for positive-noise RAW restoration and continued quality
 training.** It retains V84's pretrained DRUNet RGB trunk, physical noise anchors
-and official frozen DINOv3 ConvNeXt-Tiny pyramid. V102 remains useful for strict
-zero-shot/read ADC workflows and its higher unseen-camera CFA mean. V43 is a
+and official frozen DINOv3 ConvNeXt-Tiny pyramid. V102 remains useful for lower
+ADC flat-color bias and its higher unseen-camera CFA mean. V43 is a
 historical comparator. [Completed V104 report and native comparisons](v104-reviewed-corpus-quality.md).
+
+For explicitly ADC-only photographic restoration, the [optional V104 sites
+export](adc-consistency.md) gains +.28850dB on all 427 sources/all 1,708 CFA cases,
+with the exact same learned weights. It remains an inference-only policy;
+the original positive-noise/training checkpoint stays current.
 
 | Version | Photo sRGB PSNR | Known4 CFA PSNR | Unseen5 CFA PSNR | Main use |
 | --- | ---: | ---: | ---: | --- |
@@ -27,15 +32,16 @@ These intervals describe source/scene sampling rather than training-seed uncerta
 At the tested weak high-noise carrier, period16 gain rises .49887→.60487 and
 period8 gain .02135→.05945; the finer carrier remains largely absent. High-noise
 flat-color bias improves, but worst ADC-only flat-color mean bias rises
-59.23→1,218.06 DN16. The report shows that posthoc worst case alongside the
+59.23→1,218.06 DN16. The report shows that post hoc worst case alongside the
 fixed native comparisons. Use the V102 checkpoint for explicit zero-noise ADC
-workflows when lower flat-color bias matters; selection is not switched automatically.
+workflows when lower unprojected flat-color bias matters; selection is not switched automatically.
 
 A [saved-prediction ADC diagnostic](v104-adc-color-projection.md) reduces V104's
 worst grid bias to 31.91 DN16 with the existing Malvar residual projection.
 The [ADC texture check](v104-adc-color-projection.md#adc-texture-check) finds
-carrier gains and phase-specific regressions; the full photographic comparison
-is running on CPU. This does not change the checkpoint or ADC recommendation.
+carrier gains and phase-specific regressions. The completed photographic study
+supports the optional sites export; its worst analytic-grid bias remains
+610.67DN16, so it does not remove the flat-color tradeoff.
 
 Photo means cover 427 images, seven conditions and four CFAs. Camera means
 balance four/five development scenes against measured CFA references;
