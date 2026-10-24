@@ -61,6 +61,12 @@ and V115 fitted Small passed eight actual CPU and CUDA updates each;
 [V114 has completed 20,000 updates and V115 is training](small-aligned-training.md).
 Each receives 20,000 further updates at seed 63. Endpoint quality remains pending.
 
+The [V116 data trial](fine-detail-data-training.md) is queued after that exact
+review chain. It holds Tiny's architecture fixed to reuse completed V114 as the
+equal-budget control, testing fine weak sources and reviewed reference masks.
+Its trained quality is unmeasured; the larger-encoder recommendation can still
+advance when the Small results are reviewed.
+
 Earlier results remain useful and their receipts unchanged:
 [V104](v104-reviewed-corpus-quality.md), [V102/V103](v102-v103-quality-review.md),
 [V100/V101](v84-curated-quality-review.md), [V84/V85](native-data-original20k-review.md)

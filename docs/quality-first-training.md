@@ -29,6 +29,13 @@ eight actual CPU optimizer updates with identical input/domain/LR schedules.
 checks. V114 has completed 20,000 updates and Small is training on the same budget. The idle
 V104-derived V113 plan remains preserved without CUDA/production work.
 
+The [V116 follow-up](fine-detail-data-training.md) is queued after the current
+Tiny/Small review. It reuses V114 as the matched Tiny control, testing fine weak
+sources and reviewed paired-reference masks with the same parent/20k schedule.
+One native256 mask-path update and data/loss compatibility checks pass; CUDA
+and trained quality remain pending. The larger-encoder results can independently
+advance the current architectural recommendation.
+
 A [clean-target frequency audit](fine-weak-texture-coverage.md) identifies a gap
 in the dedicated weak-source band, while sampled photos and native targets
 already contain fine energy. An optional fine profile passes reader/routing

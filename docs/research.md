@@ -73,6 +73,10 @@ energy in sampled photographs/native targets, but almost none around four-pixel
 structures in the dedicated weak generators. The optional fine profile adds
 coverage within that quota and passes reader and real-model CPU training checks.
 Its trained quality is untested; active Tiny/Small recipes retain their legacy profile.
+The [V116 data comparison](fine-detail-data-training.md) is now queued after
+that review, combining the fine profile with reviewed paired-reference masks
+and reusing completed V114's equal-budget Tiny control. Native mask-path and
+default-source/loss checks pass; CUDA and trained quality remain pending.
 
 The [optional eight-view inference study](dihedral-quality.md) now measures
 uniform averaging of exact sensor rotations/reflections with the same V104
@@ -356,8 +360,9 @@ and compute budgets differ from our commercially usable joint reconstruction.
 the current V112/V114/V115 quality recipes as part of the tested fine-detail
 package. The [negative/mixed V55 first gate](weak-texture-v55-review.md) remains
 an earlier architecture-specific result. The new
-[fine-frequency profile](fine-weak-texture-coverage.md) remains disabled pending
-matched trained quality, flat-region false-detail checks and full/native/GFX review.
+[fine-frequency profile](fine-weak-texture-coverage.md) stays disabled in those
+running recipes. V116 queues its matched trained-quality test, including
+flat-region false-detail checks and complete numerical/native/GFX review.
 
 ## Learned input adaptation candidate
 

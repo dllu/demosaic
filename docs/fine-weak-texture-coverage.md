@@ -8,6 +8,8 @@ weak-source quota. Its reader and CPU training checks pass;
 **trained quality remains untested**.
 V112 remains the working model, and the running V114/V115 comparison retains
 its frozen recipes and legacy texture profile.
+The [V116 follow-up](fine-detail-data-training.md) is now queued to test the fine
+profile and reviewed paired-reference masks against completed Tiny V114.
 
 [Source audit, reader results and artifact bindings](results/fine-weak-frequency-coverage-v1.json).
 
@@ -86,7 +88,8 @@ generation; a fine draw loads no photograph or discarded procedural target.
 
 The library default is zero. Validation disables both weak profiles, resume
 rejects a changed fine quota, and existing positional `CleanDataset` arguments
-retain their meanings. No current production recipe enables this new option.
+retain their meanings. V116 is the first queued production recipe selecting
+the option; its CUDA check and production training have not started.
 
 ## Actual reader compatibility and native views
 

@@ -78,6 +78,10 @@ gap in dedicated weak textures, while sampled photo/native targets contain
 fine-frequency energy. The optional fine profile passes reader and actual V112
 CPU training checks but has no trained-quality result and does not change the
 active comparison.
+The [V116 trial](fine-detail-data-training.md) is now queued after that review,
+combining the fine profile and reviewed paired masks while reusing completed
+V114 as its matched Tiny control. Native256 mask-path and source/loss checks
+pass. Single-candidate evaluation and independent review are queued too.
 
 The source scan covers88,508 training images, with570 actually reviewed and 31
 withheld/excluded. Completed runs used the earlier 24 exclusions; seven more and

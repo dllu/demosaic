@@ -16,6 +16,8 @@ and complete 102MP exports are verified. FP32 inference/blending takes 167.51s.
 The [larger-encoder transfer](docs/small-feature-transfer.md) now starts from
 V112. [V114 Tiny has completed 20,000 updates and V115 Small is training](docs/small-aligned-training.md), with
 [automatic evaluation and independent saved-prediction review](docs/quality-prediction-archive.md).
+[V116 is queued](docs/fine-detail-data-training.md) to test fine-detail sources and
+reviewed reference masks against the matched V114 control.
 [Current models](docs/current-model.md) · [Source-quality review](docs/incoming-commons-quality.md) ·
 [Historical diary](diary/index.md).
 The [camera-outlier audit](docs/camera-outliers.md) shows how isolated repair and

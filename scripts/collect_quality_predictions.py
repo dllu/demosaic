@@ -33,10 +33,32 @@ def verify_recorded_backbone(model, checkpoint):
                                     legacy_sha256=identity["sha256"])
 
 
+def validate_checkpoint_declarations(checkpoints):
+    """Reject invalid or duplicate endpoints before starting neural work."""
+    expected = [record["sha256"] for record in checkpoints]
+    if (not expected or any(not isinstance(value, str) or len(value) != 64
+                           or any(c not in "0123456789abcdef" for c in value)
+                           for value in expected) or len(set(expected)) != len(expected)):
+        raise ValueError("Declare distinct nonempty endpoint checkpoints")
+    return expected
+
+
+def verify_model_coverage(checkpoints, records, alignment=None):
+    """Allow an incremental candidate while requiring every declared endpoint."""
+    expected = validate_checkpoint_declarations(checkpoints)
+    actual = [record["checkpoint"]["sha256"] for record in records]
+    if len(actual) != len(expected) or set(actual) != set(expected):
+        raise ValueError("Collected endpoint coverage differs from the declared checkpoints")
+    if alignment is not None and alignment["models"] != len(expected):
+        raise ValueError("Archive model count differs from the declared checkpoints")
+    return len(expected)
+
+
 @torch.inference_mode()
 def collect(plan_path, stage):
     plan = read(plan_path)
     guard(plan)
+    validate_checkpoint_declarations(plan["checkpoints"])
     assert ref(__file__) == plan["collector_source"]
     assert Path(suite.__file__).resolve().is_relative_to(Path(plan["work"]))
     specification = plan["stages"][stage]
@@ -187,7 +209,7 @@ def collect(plan_path, stage):
             sys.argv.append("--full-frame")
         gfx.main()
         report = report_dir / "report.json"
-    assert len(models) == 2
+    verify_model_coverage(plan["checkpoints"], models)
     invariants = []
     for record in models:
         assert record["calls"] == record["encoder_calls"] == specification["calls_per_model"]
@@ -199,7 +221,8 @@ def collect(plan_path, stage):
         invariants.append({k: v for k, v in record.items() if k in ["checkpoint", "before", "calls", "observations", "encoder_calls", "input_sequence", "output_hashes"]})
     alignment = archive.verify_alignment() if archive is not None else None
     if archive is not None:
-        assert alignment["models"] == 2 and alignment["observations_per_model"] == specification["calls_per_model"]
+        verify_model_coverage(plan["checkpoints"], models, alignment)
+        assert alignment["observations_per_model"] == specification["calls_per_model"]
     guard(plan)
     save(output / "result.json", {"stage": stage, "plan": ref(plan_path), "source": ref(__file__), "report": ref(report),
                                   "owner": {"pid": os.getpid(), "created": psutil.Process().create_time()}, "invariants": invariants,
@@ -207,7 +230,7 @@ def collect(plan_path, stage):
                                   "alignment": alignment, "full_native_floats": full_native,
                                   "reference_neural_forwards": 0, "optimizer_updates": 0,
                                   "RAW_decodes": 2 if stage in {"gfx", "gfx-highlights", "full-gfx"} else 0,
-                                  "scope": "New V114/V115 final20000 only; single-view FP32. Complete predictions/targets retained on numerical panels. Existing V112/RawNIND controls reused separately. Full GFX native floats kept before RGB16 encoding."})
+                                  "scope": "Declared new final20000 endpoints only; single-view FP32. Complete predictions/targets retained on numerical panels. Existing controls reused separately. Full GFX native floats kept before RGB16 encoding."})
     models.clear()
     gc.collect()
     torch.cuda.empty_cache()

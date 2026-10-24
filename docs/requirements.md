@@ -43,7 +43,11 @@ evaluation units and do not measure training-repeat uncertainty.
 The [training-reference review](paired-reference-quality.md) checks all 576
 paired train32 crops and prepares a separate mask revision for two recurring
 red-speck references. Actual native256 reader/loss checks pass; trained quality
-is unmeasured and current experiments retain their original data.
+is unmeasured and the running Tiny/Small comparison retains its original data.
+The [V116 follow-up](fine-detail-data-training.md) is now queued to train that
+revision together with fine weak sources, reusing V114's matched control.
+Its native256 mask update and source/loss compatibility pass; actual CUDA,
+trained quality and the complete single-candidate review remain pending.
 
 Each improved-model report needs at least two native noisy/restored/exact-GT
 triplets with common coordinates/transforms and recorded weights, conditioning

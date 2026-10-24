@@ -165,3 +165,26 @@ Failures stop with evidence preserved and no automatic retry.
 The trained endpoint results remain pending. Useful measured gains can advance
 the docs and implementation without a historical promotion gate freezing the
 model choice.
+
+## Incremental V116 evaluation
+
+The [V116 data trial](fine-detail-data-training.md) has a separate evaluator and
+CPU audit queued behind its exact training owner. It declares one new checkpoint:
+4,586 model/encoder calls and 14,190 numerical observations, with the same
+material, analytic, camera and standing GFX/full-frame coverage. The original
+V114/V115 evaluation runs once and retains the matched V114 control outputs.
+No control inference is repeated for the data-recipe trial.
+
+The collector validates distinct declared checkpoints and complete archive
+coverage for one or two models; the independent queue checks the declared model
+and observation counts. Eleven new cases cover single/two-model archives,
+missing/duplicated endpoints and internal/legacy-external queue plans; the
+28-test identity/archive/queue suite passes. Original waiting queues keep their
+frozen sources and owners.
+
+V116 outputs stay inside its frozen internal workspace. Phase starts require
+128 GiB internal free, with 96 GiB reserved at runtime and 208 GiB external free
+for the read-only input store. These new limits do not change the original
+queues' guards. Retained V114/V116 rows still need the matched source/scene join
+and actual native viewing before a data-recipe quality conclusion.
+[Source and queue receipt](results/v116-detail-data-queued-v2.json).

@@ -4,7 +4,7 @@
 references.** A separate manifest now excludes small neighborhoods around that
 point from supervision in four registered crops. All input and intensity arrays
 retain their original bytes. The running Tiny/Small comparison keeps its pinned
-original data; the reviewed revision is ready for a later training experiment.
+original data; the reviewed revision is selected by the [queued V116 trial](fine-detail-data-training.md).
 Its effect on trained image quality is unmeasured.
 
 [Scan, independent checks, native images and revised-manifest receipt](results/paired-training-reference-outliers-v1.json).

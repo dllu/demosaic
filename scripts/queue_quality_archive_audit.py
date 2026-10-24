@@ -39,12 +39,24 @@ def guard(plan):
             raise ValueError(f"Changed frozen source: {path}")
 
 
+def verify_audit_counts(result, expected_models, expected_observations):
+    """Require complete numerical coverage for each declared new endpoint."""
+    counts = result["observations"]
+    if (type(expected_models) is not int or expected_models < 1
+            or result["models"] != expected_models or len(counts) != expected_models
+            or any(value != expected_observations for value in counts.values())):
+        raise ValueError("Independent observation counts differ")
+
+
 def prepare(root, quality_plan, proof):
     root, quality_plan = root.absolute(), quality_plan.absolute()
     if not root.resolve().is_relative_to(REPO/".cache"):
         raise ValueError("Audit queue roots belong in the repository cache")
     quality = read(quality_plan)
     guard(quality)
+    expected_models = quality.get("expected_model_count", 2)
+    if type(expected_models) is not int or expected_models < 1:
+        raise ValueError("Positive declared endpoint count required")
     status_path = Path(quality["root"])/"status.json"
     state = read(status_path)
     if state["queue_plan"] != binding(quality_plan) or not live(state["owner"]) or state["status"].startswith("failed"):
@@ -75,9 +87,10 @@ def prepare(root, quality_plan, proof):
             "material_ids": ["0ae232278265dabbdd54f52c34045a3d03323aa7", "212ae12913effa23268af953b4c8f8e8b7ab4ef5"],
             "maximum_wait_seconds": 345600, "minimum_available_RAM_GiB": 8, "minimum_free_output_GiB": 2,
             "expected_observations_per_model": {s: quality["stages"][s]["observations_per_model"] for s in NUMERICAL},
+            "expected_model_count": expected_models,
             "controller_source": binding(work/"scripts/queue_quality_archive_audit.py"),
             "inputs": inputs, "frozen_files": {str(p): binding(p)["sha256"] for p in work.rglob("*") if p.is_file()},
-            "scope": "NumPy64 independent primary/analytic metrics from exact retained targets; 28380 observations, zero neural/encoder calls, noise regeneration, RAW decoding or CUDA. Two native bark/canopy triplets per model. Existing V112/stronger RawNIND controls reused. Human photo/GFX viewing and model recommendation remain separate; no automatic retry or promotion."}
+            "scope": f"NumPy64 independent primary/analytic metrics from exact retained targets; {14190 * expected_models} observations, zero neural/encoder calls, noise regeneration, RAW decoding or CUDA. Two native bark/canopy triplets per model. Existing controls reused. Human photo/GFX viewing and model recommendation remain separate; no automatic retry or promotion."}
     write(root/"queue-plan-v1.json", plan)
     guard(plan)
     return root/"queue-plan-v1.json"
@@ -199,9 +212,8 @@ def controller(path):
             results[stage] = audit(original["archive"]["path"], original["report"]["path"], output/stage, stage=stage,
                                    material_ids=plan["material_ids"] if stage == "photo" else (),
                                    source_manifest=evaluation["stages"][stage]["manifest"]["path"] if stage == "photo" else None)
-            counts = results[stage]["observations"]
-            if results[stage]["models"] != 2 or len(counts) != 2 or any(v != plan["expected_observations_per_model"][stage] for v in counts.values()):
-                raise ValueError("Independent observation counts differ")
+            expected_models = plan.get("expected_model_count", 2)
+            verify_audit_counts(results[stage], expected_models, plan["expected_observations_per_model"][stage])
             state["completed"][stage] = binding(output/stage/"result.json")
             record("completed-independent-CPU-stage")
         guard(plan)

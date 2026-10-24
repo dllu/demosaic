@@ -34,14 +34,17 @@ def function_ast(path, name):
 
 def prepare(root, artifacts, training_root, witness_plan, gfx_selections, controls=()):
     root, artifacts, training_root = root.resolve(), artifacts.resolve(), training_root.resolve()
-    assert root.is_relative_to(REPO / ".cache") and artifacts.is_relative_to(Path("/mnt/external/demosaic"))
+    assert root.is_relative_to(REPO / ".cache")
+    internal_artifacts = artifacts.is_relative_to(root / "work")
+    assert internal_artifacts or artifacts.is_relative_to(Path("/mnt/external/demosaic"))
     status = read(training_root / "status.json")
     execution = ref(training_root / "execution-plan-v1.json")
     training = read(execution["path"])
     guard(training)
     assert status["execution_plan"] == execution and live(status["owner"])
     assert not status["status"].startswith("failed")
-    assert [a["arm"] for a in training["arms"]] == ["V114", "V115"]
+    arm_names = [a["arm"] for a in training["arms"]]
+    assert arm_names and len(arm_names) == len(set(arm_names))
     original = read(witness_plan)
     guard(original)
     assert function_ast(REPO / "src/demosaic/suite.py", "observation") == function_ast(original["historical_suite"]["path"], "observation")
@@ -101,20 +104,25 @@ def prepare(root, artifacts, training_root, witness_plan, gfx_selections, contro
     snapshot = {str(p): ref(p)["sha256"] for p in work.rglob("*") if p.is_file()}
     plan = {"root": str(root), "work": str(work), "artifact_root": str(artifacts), "python": sys.executable,
             "training_execution": execution, "training_owner": status["owner"], "training_status": str(training_root / "status.json"),
-            "expected_training_terminal": "completed-matched-V114-V115-training-awaiting-quality-comparisons",
-            "expected_training_phases": [f"{phase}-{arm}" for phase in ["CUDA", "train"] for arm in ["V114", "V115"]],
+            "expected_training_terminal": training.get("terminal_status", "completed-matched-V114-V115-training-awaiting-quality-comparisons"),
+            "expected_training_phases": [f"{phase}-{arm}" for phase in ["CUDA", "train"] for arm in arm_names],
+            "expected_model_count": len(arm_names),
             "original_witness_plan": ref(witness_plan), "stages": stages, "color_inputs": original["color_inputs"],
             "material_photo_ids": ["0ae232278265dabbdd54f52c34045a3d03323aa7", "14d8ea6cea4a27346a643e6d767f800729fb4693",
                                    "212ae12913effa23268af953b4c8f8e8b7ab4ef5", "2b5a51667b9906eecead8f82e08c7ba11750f8c6"],
             "shared_checkpoint_cache": str(artifacts / ".checkpoint-cache"),
-            "existing_control_files": control_files, "estimated_retained_and_export_budget_GiB": 30,
+            "existing_control_files": control_files, "estimated_retained_and_export_budget_GiB": 15 * len(arm_names),
             "collector_source": ref(work / "scripts/collect_quality_predictions.py"),
             "controller_source": ref(work / "scripts/queue_matched_quality_predictions.py"),
-            "maximum_training_wait_seconds": 259200, "first_stage_external_free_GiB": 248,
-            "phase_start_external_free_GiB": 216, "runtime_external_reserve_GiB": 208,
+            "maximum_training_wait_seconds": 259200,
+            "first_stage_external_free_GiB": 208 if internal_artifacts else 248,
+            "phase_start_external_free_GiB": 208 if internal_artifacts else 216,
+            "runtime_external_reserve_GiB": 208,
+            "phase_start_internal_free_GiB": 128 if internal_artifacts else 32,
+            "runtime_internal_reserve_GiB": 96 if internal_artifacts else 16,
             "core_training_sources_unchanged": source_checks, "photo_observation_AST_identical_to_original": True,
             "inputs": inputs, "frozen_files": snapshot,
-            "scope": "New V114/V115 endpoints only, eight single-view FP32 stages after exact matched-training owner success. Retain native predictions/exact supervision and compare all numerical-panel inputs to original completed eight-view witnesses. Existing V112 and stronger RawNIND controls are reused, without neural reruns. Six full-frame native floats and two RGB16 exports per new model. No automatic model promotion or retry; numeric/native review follows."}
+            "scope": "Declared new endpoints only, eight single-view FP32 stages after exact training-owner success. Retain native predictions/exact supervision and compare all numerical-panel inputs to original completed eight-view witnesses. Existing controls are reused without neural reruns. Six full-frame native floats and two RGB16 exports per new model. No automatic model promotion or retry; numeric/native review follows."}
     save(root / "queue-plan-v1.json", plan)
     guard(plan)
     return root / "queue-plan-v1.json"
@@ -126,6 +134,7 @@ def endpoint_plan(plan, state):
     from demosaic.checkpoint_cache import freeze_checkpoint
 
     execution = read(plan["training_execution"]["path"])
+    assert len(execution["arms"]) == plan.get("expected_model_count", len(execution["arms"]))
     assert set(state["completed"]) == set(plan["expected_training_phases"])
     checkpoints, inputs = [], list(plan["inputs"])
     artifacts = Path(plan["artifact_root"])
@@ -202,7 +211,7 @@ def controller(path):
             record("waiting-for-quality-headroom", stage=stage, child=None)
             began, stable = time.monotonic(), None
             while True:
-                enough = (psutil.virtual_memory().available >= 48*2**30 and shutil.disk_usage(root).free >= 32*2**30
+                enough = (psutil.virtual_memory().available >= 48*2**30 and shutil.disk_usage(root).free >= plan.get("phase_start_internal_free_GiB", 32)*2**30
                           and shutil.disk_usage("/mnt/external").free >= plan["first_stage_external_free_GiB" if index == 0 else "phase_start_external_free_GiB"]*2**30)
                 stable = (time.monotonic() if stable is None else stable) if enough else None
                 if stable is not None and time.monotonic()-stable >= 15:
@@ -222,6 +231,7 @@ def controller(path):
                 while child.poll() is None:
                     assert time.monotonic()-began < 43200
                     assert psutil.virtual_memory().available >= 24*2**30
+                    assert shutil.disk_usage(root).free >= plan.get("runtime_internal_reserve_GiB", 16)*2**30
                     assert shutil.disk_usage("/mnt/external").free >= plan["runtime_external_reserve_GiB"]*2**30
                     time.sleep(2)
                 assert child.wait() == 0, (stage, child.returncode)
