@@ -1,0 +1,99 @@
+{
+  "status": "completed-path-and-byte-preserving-immutable-snapshot-consolidation",
+  "recorded_local": "2026-10-23T18:18:19.275221-07:00",
+  "result": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/checkpoint-storage-dedup-v1/result.json",
+    "sha256": "4377db0ce1d2fba74c246fc2a5e0e2854f031881e6eb5dc7f16010774d72e50d"
+  },
+  "frozen_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/checkpoint-storage-dedup-v1/plan.json",
+    "sha256": "521e34842eca50d51fe0c02749ae3122b5060beed4976a0328b86358ab6b0b8e"
+  },
+  "content_verification": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/checkpoint-storage-dedup-v1/content-verification.json",
+    "sha256": "771bf7818d5ab143216cf2a0d0e2bdd500d9595afda26aeddb881593b8001518"
+  },
+  "operation_journal": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/checkpoint-storage-dedup-v1/replacement-journal.jsonl",
+    "sha256": "2720475bfbf09422c7e7fcc5587ebaeaed8a5a090d5cf13886cc659128b4f65f"
+  },
+  "initial_inventory_filter_correction": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/checkpoint-storage-dedup-v1/inventory-filter-correction.json",
+    "sha256": "4f223c915bad2392b471d35c2582f4e7979b1ff3fef9d5a77c76a7ed2e1aaed8"
+  },
+  "groups": 17,
+  "distinct_input_files_verified": 61,
+  "snapshot_paths_consolidated": 208,
+  "logical_duplicate_bytes_removed": 20212782759,
+  "external_free_GiB_after": 286.28554916381836,
+  "independent_postcheck": "Rehashed every canonical snapshot; verified every original alias points to the expected inode with unchanged size/mode/owner and exact total link count. Revalidated every active plan input/frozen file and current selector.",
+  "active_plans": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-training-v2/plan.json",
+      "sha256": "bc2d8c81cea1203b10c8cb403e26e7add3de934e4ba50b96c08d31ffc6d2dba5"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-execution-v2/plan.json",
+      "sha256": "9659a7636b7f367c4358722e00629be2a8f5a23447d37dfd9deff75ab680b7b6"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-evaluation-queue-v2/plan.json",
+      "sha256": "a82fc870d9288a80314a70514201b737289e5223fccedbb7a51b07c7d12f6037"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-fullframe-v2/plan.json",
+      "sha256": "1b46067d57c16587573dfe92734d74ba2d5ba0ed6e82a23fbcc3feb9b559e8b0"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/loss-scale-material-queue-v2/plan.json",
+      "sha256": "f51df2254beeded49233a42928cce6e1ae96c2cd355f5acd7e358b27c326c5c5"
+    }
+  ],
+  "live_exact_process_handles": [
+    {
+      "run": "loss-scale-training-v2",
+      "role": "controller",
+      "pid": 3426533,
+      "created": 1792795962.1
+    },
+    {
+      "run": "loss-scale-training-v2",
+      "role": "child",
+      "pid": 3426593,
+      "created": 1792795980.02
+    },
+    {
+      "run": "loss-scale-evaluation-queue-v2",
+      "role": "controller",
+      "pid": 3426549,
+      "created": 1792795967.56
+    },
+    {
+      "run": "loss-scale-fullframe-v2",
+      "role": "controller",
+      "pid": 3426555,
+      "created": 1792795971.34
+    },
+    {
+      "run": "loss-scale-material-queue-v2",
+      "role": "controller",
+      "pid": 3426557,
+      "created": 1792795971.61
+    }
+  ],
+  "protected_current_checkpoints": [
+    {
+      "path": "/mnt/external/demosaic/models/v104-final20000.pt",
+      "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300"
+    },
+    {
+      "path": "/mnt/external/demosaic/models/v102-final20000.pt",
+      "sha256": "55936a11ca5be7c1ae941953e14c8afe1186123f366e54f1947104a894e64c7a"
+    },
+    {
+      "path": "/mnt/external/demosaic/models/v104-final20000-adc-sites.pt",
+      "sha256": "1d9c02be5876515811fb4067ba84fc666538dbe9024c85ff0cffc478310fc85a"
+    }
+  ],
+  "scope": "Storage maintenance to preserve room for planned quality evaluations; no model, dataset, inference or quality measurement changes. Free-space delta can include concurrent training writes."
+}
