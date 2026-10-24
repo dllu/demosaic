@@ -1,5 +1,11 @@
 # Optional eight-view restoration
 
+**Current V112 weights also benefit from eight views on the fixed material
+panel:** all twelve cases improve, with mean+.54335/.27285/.07936dB for
+ADC/ISO100/ISO12800. Both selected adverse camera crops and four selected color
+cases improve over V112 single. [New native material/GFX comparisons and limits](v112-eight-view.md).
+Fine real detail remains soft; full V112 eight-view panels/frame are unmeasured.
+
 **Eight-view V104 reaches 37.04376dB on the complete 427-photo panel**, with every
 source mean improving over single-view V104. Known/unseen camera means also
 improve. It uses the original weights and exact sensor rotations/reflections,

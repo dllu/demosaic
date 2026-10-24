@@ -5,6 +5,9 @@ It reaches36.90238dB on full 427, +.10154dB over V104, with425 source means
 improving, higher known/unseen camera means and worst ADC flat bias50.89DN16.
 [Complete current results and native comparisons](v112-quality.md). Fine
 high-noise/real foliage detail remains weak; original evidence stays visible.
+The [same-weight V112 eight-view comparison](v112-eight-view.md) improves all
+twelve fixed material cases, with modest native changes and remaining real
+detail weaknesses. Its complete V112 panels/frame remain unmeasured.
 
 [Current model choices and images](current-model.md) ·
 [Current quality training](quality-first-training.md) ·

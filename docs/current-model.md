@@ -11,7 +11,8 @@ reducing worst ADC flat bias to50.89DN16. [Complete review and native images](v1
 | Near-equal photographic alternative | V111: photo36.90367dB, but lower camera means and ADC maximum2,142.98DN16 |
 | Explicit ADC sample fidelity/photo PSNR | Optional [V104 sites export](adc-consistency.md): +.28850dB over original V104 on full ADC photo panel; color/detail tradeoffs remain |
 | Separate earlier camera reference | V102: unseen CFA53.97177dB remains slightly higher; its overall photo mean is36.67951dB |
-| Optional eight-view inference | [Completed V104 full panels](dihedral-quality.md): photo37.04376dB, known/unseen54.33283/53.99412dB; all 427 photo-source means improve over V104 single. ADC max420.90DN16 remains worse than V112; eight evaluations per tile |
+| Optional eight-view inference with current V112 weights | [Fixed24 comparison](v112-eight-view.md): all12 material PSNRs improve, mean gains+.543/.273/.079dB at ADC/ISO100/ISO12800; two adverse camera crops and four color cases improve over single view. Real fine detail remains soft; full panels/frame unmeasured; eight evaluations per tile |
+| Eight-view full-panel reference | [Completed V104 full panels](dihedral-quality.md): photo37.04376dB, known/unseen54.33283/53.99412dB; all427 photo-source means improve over V104 single. ADC max420.90DN16 remains worse than V112 single |
 
 ## Run the current model
 

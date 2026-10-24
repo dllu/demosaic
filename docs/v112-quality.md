@@ -97,6 +97,12 @@ on the same budget. Endpoint quality remains pending; the old idle
 V113 plan and evidence remain preserved. V104/sites and V102 remain useful
 alternatives; the 100MP/10s target remains open.
 
+The [optional V112 eight-view mode](v112-eight-view.md) now improves all twelve
+fixed material cases, both selected adverse camera crops and four selected
+color fields over single view. Native material/GFX comparisons show modest
+changes with persistent soft fine detail. It uses the same weights and eight
+evaluations per tile; full V112 eight-view panels/frame are unmeasured.
+
 Photo attribution: [Derek Ramsey, bark](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
 [CC BY-SA2.5](https://creativecommons.org/licenses/by-sa/2.5/), and
 [Grendelkhan, canopy](https://commons.wikimedia.org/wiki/File:Forest_covered_hills_on_Yakushima.jpg),

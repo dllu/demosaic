@@ -34,6 +34,9 @@ The optional [eight-view V104 mode](docs/dihedral-quality.md),
 tail (421 versus V112's 50.9 DN16) and weak fine detail remain visible. All panels
 are independently checked; the [complete 102MP export](docs/dihedral-fullframe.md)
 takes 885.93s. V112 remains the default learned baseline.
+The [V112 eight-view comparison](docs/v112-eight-view.md) improves all twelve
+fixed material cases and both selected adverse camera crops, with native
+photo/GFX/color comparisons. Full V112 eight-view panels remain unmeasured.
 
 ![PSNR versus model version](docs/images/version-PSNR-history.png)
 
@@ -43,16 +46,16 @@ isolated architecture ablation.
 
 ## Current 100% crops
 
-Noisy observation → **V112 final20k** → exact synthetic GT, ISO100 prior.
+Noisy observation → **V112 final20k, optional eight views** → exact synthetic GT, ISO100 prior.
 These are unchanged 160×160 crops at the 8×-binned evaluation resolution, with
-shared coordinates and display transforms. [Compare useful versions](docs/v112-quality.md) ·
-[source/ROI/checkpoint/noise/display metadata](docs/images/v111-v112-material/iso100-prior/crop-647b560234a48ad7.json).
+shared coordinates and display transforms. [Compare useful modes and remaining weaknesses](docs/v112-eight-view.md) ·
+[source/ROI/checkpoint/noise/display metadata](docs/images/v112-dihedral8-pilot/manifest.json).
 
-![V112 bark: noisy, restored and exact GT](docs/images/v111-v112-material/iso100-prior/crop-647b560234a48ad7.png)
+![Eight-view V112 bark: noisy, restored and exact GT](docs/images/v112-dihedral8-pilot/crop-ae5e2918b2f5d748.png)
 
-![V112 canopy: noisy, restored and exact GT](docs/images/v111-v112-material/iso100-prior/crop-277f4c06ef24083e.png)
+![Eight-view V112 canopy: noisy, restored and exact GT](docs/images/v112-dihedral8-pilot/crop-eab57f7bf8e44af3.png)
 
-[Higher-noise crops versus the stronger released RawNIND reference](docs/heldout-detail.md).
+[Higher-noise crops versus the stronger released RawNIND reference](docs/images/v112-dihedral8-pilot/photo-iso12800-prior.png).
 
 Sources: [Derek Ramsey](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
 [CC BY-SA 2.5](https://creativecommons.org/licenses/by-sa/2.5/), and

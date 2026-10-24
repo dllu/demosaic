@@ -18,6 +18,23 @@ blending takes167.51s, tile512/overlap64/B4. [Completed full-frame receipt](resu
 The [earlier six-context V104/V111/V112 comparison](images/v112-quality/gfx/comparison.png)
 remains separately labeled, with its [original metadata](images/v112-quality/gfx/manifest.json).
 
+## V112 eight-view context comparison
+
+The [current eight-view V112 comparison](v112-eight-view.md) improves all twelve
+fixed photographic cases and both selected adverse camera crops. On the standing
+GFX scene, native changes remain small: foliage and saturated sign detail stay
+soft; sky and building/fence geometry remain coherent.
+
+![Six GFX contexts: noisy, V104 eight views, V112 single/eight views, stronger RawNIND, separate ISO100 reference](images/v112-dihedral8-pilot/gfx.png)
+
+All36 cells are native160 pixels from512px contexts, with common+2EV, WB and
+matrix. Columns: sky, building, foliage, chain-link fence, neon, platform boundary.
+DSCF3880 ISO100 f/5.6 remains an independently demosaiced qualitative reference,
+**not GT**. These are context restorations; complete102MP eight-view V112 exports
+and timing are unmeasured. [Source/ROI/checkpoint/noise/display receipts](images/v112-dihedral8-pilot/gfx.json).
+
+## Eight-view full-frame reference
+
 The optional [eight-view V104 full-frame review](dihedral-fullframe.md) now adds
 all six fixed regions from its completed 102MP RGB16 export, alongside V104,
 V112 and the stronger RawNIND reference. Single/eight-view changes look small;
