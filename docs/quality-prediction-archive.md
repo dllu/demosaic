@@ -173,8 +173,9 @@ model choice.
 
 ## Incremental V116 evaluation
 
-The [V116 data trial](fine-detail-data-training.md) has a separate evaluator and
-CPU audit queued behind its exact training owner. It declares one new checkpoint:
+The [V116 data trial](fine-detail-data-training.md) has completed training, with
+a separate evaluator running and CPU audit queued behind that exact owner.
+It declares one new checkpoint:
 4,586 model/encoder calls and 14,190 numerical observations, with the same
 material, analytic, camera and standing GFX/full-frame coverage. The original
 V114/V115 evaluation runs once and retains the matched V114 control outputs.

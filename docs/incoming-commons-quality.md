@@ -46,7 +46,8 @@ frozen recipes.
 A separate [paired-reference review](paired-reference-quality.md) inspects all
 576 cached training crops. It preserves useful fine-detail examples and prepares
 a narrow mask revision for two low-ISO references with a recurring red speck.
-That revision is used by running V116; original Tiny/Small bindings stay exact.
+That revision is used by completed V116 training, whose full quality evaluation
+is running; original Tiny/Small bindings stay exact.
 
 ### Preserved, unlaunched V109/V110 preparation
 

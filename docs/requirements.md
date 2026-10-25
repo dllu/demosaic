@@ -21,14 +21,14 @@ the GFX gallery do not establish broad real-camera superiority. Quality precedes
 | Modern DINOv3 architecture | V84-family DRUNet and official frozen Tiny/Small pyramids; completed matched trained comparison | Retain useful gains and improve finer detail |
 | Diverse clean targets and binning |90,864 reviewed sources;4×→geometry→area2, zero optical blur, six ROIs, weak textures/photo contrast | V116 fine-source/reference-mask quality remains unmeasured |
 | Physical noise/camera/color | Poisson/read noise, signed black subtraction, all Bayer phases, WB/matrix and exposure/clipping; Tiny ADC/high-noise max bias51.73/85.40DN16 | Spatial dark-field/weak-detail failures remain |
-| Resource-aware training and evaluation | Exact source/parent snapshots and retained failures; both20k endpoints,28,380 independently checked numerical observations,14,190 direct matched pairs | Finish newly running V116 and inspect its complete saved-output review |
+| Resource-aware training and evaluation | Exact source/parent snapshots and retained failures; completed Tiny/Small panels plus V116's20k training audit | Finish V116's running full evaluation and inspect its complete saved-output review |
 | Protected originals/tests | Local GFX3879/3880 cache; originals read-only; standing scene/siblings outside training;16-scene test reserve unscored | Preserve boundaries in future cohorts |
 | Current documentation |48 completed primary endpoints in plot; native triplets and GFX comparisons with metadata; local-time diary | Update useful results without promotion freezes |
 
 The [V116 data trial](fine-detail-data-training.md) passed its eight discarded
-CUDA updates and started its original20k run. Its matched Tiny control is V114;
-the original V112 initializer/seed/budget stay fixed. A single-candidate evaluator,
-independent audit and direct saved-output comparison are waiting downstream.
+CUDA updates and completed its original20k run. Its matched Tiny control is V114;
+the original V112 initializer/seed/budget stay fixed. A single-candidate evaluator
+is running; independent audit and direct saved-output comparison are waiting downstream.
 Trained quality and actual native review remain pending. A separate
 [V114 eight-view pilot](v114-eight-view.md) is complete on24 saved observations,
 improving selected material/camera scores with a color-bias tradeoff. Its full

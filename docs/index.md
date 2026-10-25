@@ -15,8 +15,8 @@ and complete102MP RGB16 exports are finished for both endpoints. Fine foliage,
 neon detail and camera mottling remain weak; broad real-camera superiority
 and100MP/10s remain goals. [GFX gallery](gfx-qualitative.md).
 
-The [V116 data trial](fine-detail-data-training.md) has started after passing
-its CUDA check. It tests fine weak sources and reviewed paired-reference masks
+The [V116 data trial](fine-detail-data-training.md) has completed20,000 updates,
+and its full quality evaluation is running. It tests fine weak sources and reviewed paired-reference masks
 against completed Tiny V114. Its frozen parent/seed/budget and source/receipt
 evidence remain intact. Trained quality is pending.
 

@@ -3,8 +3,9 @@
 **A training-only audit found a recurring Nikon Z6 red speck in two low-ISO
 references.** A separate manifest now excludes small neighborhoods around that
 point from supervision in four registered crops. All input and intensity arrays
-retain their original bytes. The running Tiny/Small comparison keeps its pinned
-original data; the reviewed revision is selected by the [queued V116 trial](fine-detail-data-training.md).
+retain their original bytes. The completed Tiny/Small comparison kept its pinned
+original data; the reviewed revision is selected by the [V116 trial](fine-detail-data-training.md),
+which has completed training and is undergoing full quality evaluation.
 Its effect on trained image quality is unmeasured.
 
 [Scan, independent checks, native images and revised-manifest receipt](results/paired-training-reference-outliers-v1.json).

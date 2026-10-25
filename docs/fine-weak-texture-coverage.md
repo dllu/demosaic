@@ -5,10 +5,10 @@ targets already contain fine-frequency content. The dedicated weak-texture
 sources have a narrower gap: almost no energy around four-pixel structures.
 An optional `fine-v1` profile now supplies that band while retaining the existing
 weak-source quota. Its reader and CPU training checks pass;
-**trained quality remains untested**.
+**endpoint quality review remains pending**.
 V114 is the current working model after the [completed Tiny/Small comparison](v114-v115-quality.md),
 which retained the legacy texture profile.
-The [running V116 follow-up](fine-detail-data-training.md) tests the fine
+The [V116 follow-up](fine-detail-data-training.md) has completed training and tests the fine
 profile and reviewed paired-reference masks against completed Tiny V114.
 
 [Source audit, reader results and artifact bindings](results/fine-weak-frequency-coverage-v1.json).
@@ -158,5 +158,7 @@ preserved; the corrected copy uses fresh output roots. The completed checks
 verify the real training path at CPU64, without establishing convergence,
 native256/BF16 CUDA readiness or a quality gain. Their checkpoints remain
 engineering evidence; original V114/V115 recipes and V112 selection are unchanged.
-Both continuations have completed 20,000 updates and their endpoint evaluation
-is running; the fine profile is reserved for the separate V116 data comparison.
+Both continuations have completed20,000 updates and their
+[endpoint review](v114-v115-quality.md) selects V114 as the general baseline.
+The fine profile is used by the separate completed V116 training run, whose
+full quality evaluation is running.

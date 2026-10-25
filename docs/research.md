@@ -19,8 +19,9 @@ high whole-patch gain. Averaging lowers weak-group residual error but slightly
 lowers gain too. This is exploratory evidence for a remaining quality problem,
 not a validated training intervention; V116 remains unchanged.
 
-The [V116 data trial](fine-detail-data-training.md) has started its original20k
-run after the eight-update CUDA check. It tests fine weak sources and reviewed
+The [V116 data trial](fine-detail-data-training.md) has completed its original20k
+run after the eight-update CUDA check; full quality evaluation is running.
+It tests fine weak sources and reviewed
 paired masks against the exact completed V114 control, preserving its original
 V112 initializer and matched budget. Trained quality is pending. The design
 record below retains explicitly named older checkpoints and measurements.
@@ -85,8 +86,8 @@ The [clean-target frequency audit](fine-weak-texture-coverage.md) finds fine-ban
 energy in sampled photographs/native targets, but almost none around four-pixel
 structures in the dedicated weak generators. The optional fine profile adds
 coverage within that quota and passes reader and real-model CPU training checks.
-Its trained quality is untested; active Tiny/Small recipes retain their legacy profile.
-The [V116 data comparison](fine-detail-data-training.md) is now training,
+Its trained quality is pending; the completed Tiny/Small recipes retain their legacy profile.
+The [V116 data comparison](fine-detail-data-training.md) has completed training,
 combining the fine profile with reviewed paired-reference masks and reusing
 completed V114's equal-budget Tiny control. Native mask-path/default compatibility
 and actual CUDA checks pass; trained quality remains pending.
@@ -373,8 +374,8 @@ and compute budgets differ from our commercially usable joint reconstruction.
 the current V112/V114/V115 quality recipes as part of the tested fine-detail
 package. The [negative/mixed V55 first gate](weak-texture-v55-review.md) remains
 an earlier architecture-specific result. The new
-[fine-frequency profile](fine-weak-texture-coverage.md) stays disabled in those
-running recipes. V116 queues its matched trained-quality test, including
+[fine-frequency profile](fine-weak-texture-coverage.md) stayed disabled in those
+completed recipes. V116's matched trained-quality evaluation is running, including
 flat-region false-detail checks and complete numerical/native/GFX review.
 
 ## Learned input adaptation candidate

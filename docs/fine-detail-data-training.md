@@ -1,8 +1,10 @@
 # Fine-detail data trial: V116 versus matched Tiny V114
 
-**V116 is training after the completed Tiny/Small quality review.**
-Its eight discarded CUDA updates passed before the original20k production run
-started. [CUDA and launch evidence](results/v116-detail-data-running-v1.json). It tests fine
+**V116 has completed its original20,000 updates; full quality evaluation is running.**
+The exact original owner and worker exited successfully, with20,000 prepared
+batches, training/encoder calls and optimizer steps, plus640 validation calls.
+[Completed training audit](results/v116-training-complete-v1.json) ·
+[Earlier CUDA and launch evidence](results/v116-detail-data-running-v1.json). It tests fine
 weak-texture sources and reviewed paired-reference masks with the same V112
 Tiny architecture, parent, seed, schedule and 20,000-update budget as completed
 V114. V114's completed evaluation supplies retained control outputs; its training
@@ -16,7 +18,7 @@ V116 retains its original explicit V112 parent and matched control.
 
 ## Data changes with the architecture held fixed
 
-| Setting | Completed V114 control | Running V116 |
+| Setting | Completed V114 control | Completed V116 training |
 | --- | --- | --- |
 | Initial restoration weights | V112 final20k EMA | Same exact 91 tensors |
 | Frozen encoder | Official DINOv3 ConvNeXt-Tiny | Same weights/revision |
@@ -87,7 +89,8 @@ the subsequent actual eight-update BF16/CUDA check also passed.
 
 The controller observed successful exit of the exact original Tiny/Small
 independent audit. Eight discarded native256/B16/BF16 CUDA updates passed;
-production then started fresh from V112 for its original20,000 updates. Expected monitoring adds 640 validation forwards.
+production then started fresh from V112 and completed its original20,000 updates,
+with640 validation forwards.
 Failures preserve work and stop without automatic retries.
 
 CUDA preparation must match the completed native CPU clean prefix. Unchanged
@@ -97,7 +100,7 @@ prediction/loss must match the original common V114 starting function and then
 the candidate's own discarded check. Logged controls cover 801 production rows;
 unlogged production tensors are not independently verified in full.
 
-A separate evaluator is live and waiting behind that exact V116 controller.
+A separate evaluator has started on that exact completed V116 checkpoint.
 It makes **4,586 new model/encoder calls**, retaining FP32 predictions and
 supervision for all **14,190 numerical observations**, plus six standing GFX
 contexts and a complete 102MP export. The independent CPU audit is queued too;
@@ -112,6 +115,24 @@ observations; the candidate audit also reports against existing V112/RawNIND con
 Actual material/GFX viewing and comparison of strengths and weaknesses remain
 required. No statistical promotion rule or automatic recommendation change is
 introduced.
+
+The read-only endpoint audit checks all801 logged batches against V114:
+**520 unchanged input hashes match exactly;281 changes match the declared data
+schedule.** All logged steps, domains and learning rates agree; losses and
+gradient norms remain finite. It also checks all808 worker input records and
+the original72 source bindings. The executed worker verified all89 Adam states
+at step20,000, finite model/EMA/optimizer tensors and the frozen official Tiny
+encoder. The independent log audit adopts those tensor checks without loading
+the checkpoint or repeating inference; unlogged input tensors are not all
+independently verified.
+
+All20 small validation monitors have finite scores and the same comparator
+scores and panel definitions as V114. The final eight-source monitor is
+38.02121 versus38.03232dB, a−.01111dB difference. This is not the full427-photo
+endpoint result or a checkpoint-selection rule. A first audit attempt compared
+nominal domain names directly with display labels and stopped; the corrected
+audit uses the mapping in the frozen trainer. Both source/log versions are
+preserved, with zero new model calls.
 
 A separate [local-detail archive audit](local-material-detail.md#full-photo-follow-up)
 is now waiting after that original comparison. It stratifies all427 photos by

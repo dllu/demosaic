@@ -114,5 +114,5 @@ native photo, camera and all six GFX regions were actually viewed.
 
 The original pre-forward spawn failure and corrected wrapper/checks remain in
 the bound receipts linked above and the timestamped diary. No successful model
-work was repeated for reporting. [V116](fine-detail-data-training.md) has now
-started its separately controlled data trial against completed V114.
+work was repeated for reporting. [V116](fine-detail-data-training.md) has completed
+its separately controlled training against V114 and is undergoing full evaluation.

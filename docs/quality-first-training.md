@@ -29,8 +29,9 @@ checks and both completed20k plus all endpoint evaluation, independent metrics
 and native review. [Current results](v114-v115-quality.md). The idle
 V104-derived V113 plan remains preserved without CUDA/production work.
 
-The [V116 follow-up](fine-detail-data-training.md) is now training after the
-completed Tiny/Small review and its eight-update CUDA check. It reuses V114 as the matched Tiny control, testing fine weak
+The [V116 follow-up](fine-detail-data-training.md) has completed20,000 updates
+after the Tiny/Small review and its eight-update CUDA check; full quality
+evaluation is running. It reuses V114 as the matched Tiny control, testing fine weak
 sources and reviewed paired-reference masks with the same parent/20k schedule.
 Native256 mask-path, data/loss compatibility and actual CUDA checks pass;
 trained quality remains pending. Tiny/Small architectural tradeoffs remain

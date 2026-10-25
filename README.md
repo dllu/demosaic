@@ -15,9 +15,9 @@ foliage/neon detail and dark-camera mottling. All numerical panels, independent
 saved-prediction checks, native review and complete102MP RGB16 exports are done.
 [Current choices](docs/current-model.md) · [GFX gallery](docs/gfx-qualitative.md).
 
-[V116 is training](docs/fine-detail-data-training.md) to test fine weak sources
+[V116 has completed training](docs/fine-detail-data-training.md) to test fine weak sources
 and reviewed paired-reference masks against the matched V114 control. Its
-quality is pending. The90,864-source corpus, zero optical blur and geometry
+full quality evaluation is running. The90,864-source corpus, zero optical blur and geometry
 before final downsampling remain in use. [Data review](docs/incoming-commons-quality.md) ·
 [Training pipeline](docs/training-pipeline.md) · [Historical diary](diary/index.md).
 

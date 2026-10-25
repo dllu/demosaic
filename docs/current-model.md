@@ -66,8 +66,8 @@ states prevent a speed ranking. The100MP/10s target remains open. Hot-pixel
 repair and [linear DNG/JPEG export](dng-export.md) are available; repair was off
 in these comparisons. [Camera-outlier diagnostics](camera-outliers.md).
 
-The [V116 data trial](fine-detail-data-training.md) has passed its CUDA check
-and started its original20k run. It holds Tiny's architecture fixed against
+The [V116 data trial](fine-detail-data-training.md) has completed its original20k
+run, and its full quality evaluation is running. It holds Tiny's architecture fixed against
 completed V114 while testing fine weak sources and reviewed reference masks.
 Its original V112 initializer, control, seed and schedule remain unchanged.
 Trained quality and native review are pending. Quality precedes speed.
