@@ -19,4 +19,3 @@ Tiny/Small natural-detail comparison from the smaller eight-view material panel,
 and identify final V115 Small as V119's actual parent. No research source,
 training recipe, running worker or queued review is changed. Quality conclusions
 await the original full20k endpoint and actual native image review.
-

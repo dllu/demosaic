@@ -58,4 +58,3 @@ would be genuine new inputs, rather than replaying old comparisons for reporting
 [Native development set](../docs/native-camera-development.md) ·
 [Selection and protocol](../configs/native-camera-development-v1.json) ·
 [Preparation/readback/identity receipts](../docs/results/native-camera-development-inputs-v1.json).
-
