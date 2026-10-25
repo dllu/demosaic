@@ -28,8 +28,9 @@ V19's gains over V16 are only +0.01709/+0.02280 dB. Its known-camera gain is
 uneven: scene-bootstrap interval [−0.00114,+0.05062]; the unseen-camera interval
 is [+0.01702,+0.02859]. RawNIND still leads V19 by 0.77685/0.46083 dB.
 The crops retain color variation, smoothing and lost fine structure. Neither
-candidate establishes a clear qualitative improvement, so V16 remains the
-reviewed model and supplies the README examples.
+candidate established a clear qualitative improvement over V16 in this study.
+The README now follows the [current models](current-model.md); these historical
+comparisons do not select the current baseline.
 
 The matched **64-photo** synthetic screen favors V18: PSNR/SSIM
 32.05204/0.925757 versus V19 31.97551/0.924235. Eight procedural sources give

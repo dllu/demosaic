@@ -1,9 +1,10 @@
 # Multiscale correction with measured-CFA innovation
 
-This experiment addresses the fine-detail loss and coarse color variation in
-[the current GFX texture crops](gfx-qualitative.md). Its completed first
-1000-step review does not establish a quality improvement. V16 remains the reviewed
-model until real RAW, synthetic and native-crop comparisons justify a change.
+This completed V24/V25 experiment tested fine-detail loss and coarse color
+variation in the standing [GFX texture crops](gfx-qualitative.md). Its first
+1000-step review did not establish a useful improvement over its V16 parent.
+The results below describe that architecture and training budget; current
+deployment and quality training use the [current model choices](current-model.md).
 
 V24/V25 append the same 255,840-parameter correction network to frozen V16
 step5000. A two-level encoder/decoder uses existing gated blocks, skip paths

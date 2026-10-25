@@ -543,6 +543,15 @@ Known row/column controls and an independent numerical audit pass. This is a
 limited input-only diagnostic, without noise-truth, quality or calibration claims;
 no upstream data/code/weights or noise-model changes follow.
 
+Broad color drift also has two completed correction probes: the fixed
+[V43 local measured-CFA mean correction](cfa-mean-consistency-probe.md) loses
+1.20045dB on its eight-photo development sample, while the
+[V60 flatness-gated correction](flat-moment-CPU-screen.md) changes photographic
+PSNR negligibly and has mixed flat-field errors. Both use observation-minus-model
+residuals; these residuals are correlated with the restoration, so an input-noise
+mean scale does not establish confidence in a correction. These findings describe
+the tested operators and older checkpoints, not later-model quality measurements.
+
 ## Mature FP32 execution candidate
 
 The current [Triton dot API](https://triton-lang.org/main/python-api/generated/triton.language.dot.html)

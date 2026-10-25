@@ -1,10 +1,12 @@
 # Local measured-CFA mean correction is rejected
 
-**Do not integrate this operator into the model.** It improves the selected
+**This fixed V43 correction was not adopted.** It improves the selected
 low-noise pattern color biases but loses1.20045dB on the eight-photo development
 sample (95% source-bootstrap interval[−1.72494,−.78036]). All16 procedural
 sources average−.14281dB[−.36282,+.13041], with lower SSIM. This is a development
-probe, not a full427-photo review or a trained architecture comparison.
+probe, not a full427-photo review or a trained architecture comparison. Current
+deployment follows the [current model choices](current-model.md). These results
+do not measure this operator on later checkpoints.
 [Complete results and eight native triplets](results/cfa-mean-consistency-probe-v2.json).
 
 The [standalone diagnostic](../scripts/probe_cfa_mean_consistency.py) samples

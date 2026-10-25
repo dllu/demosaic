@@ -234,8 +234,8 @@ real RAW development quality, but it is still behind RawNIND. Flat-only V14 is
 rejected. See [the review and native crop comparisons](photo-refinement-review.md).
 
 The larger `configs/dino-paired-refiner-wide-v16.yaml` has completed its 5000-step
-review. Its historical crop evidence remains available; the README now shows
-the current V101/V102 family. V16 remains behind RawNIND on
+review. Its historical crop evidence remains available; the README follows the
+[current model choices](current-model.md). V16 remains behind RawNIND on
 real development data. The optional `model.coarse_refinement_factor` adds a
 pooled RGB correction (factor 2/4/8/16; default 0 disables it).
 `coarse_refiner_only: true` freezes everything except that new branch and cannot

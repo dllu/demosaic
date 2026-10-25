@@ -1,9 +1,11 @@
 # Fixed flatness-gated correction: completed development screen
 
-**Reject this fixed postprocess.** Its photo gain is negligible, procedural SSIM
-falls slightly, and fine detail does not visibly improve. The SSIM decrease
+**This fixed V60 postprocess was not adopted.** Its photo gain is negligible,
+procedural SSIM falls slightly, and fine detail does not visibly improve. The SSIM decrease
 triggers the rejection rule written before scoring. No window/threshold search,
-production integration, new training or full427 extension follows.
+production integration, new training or full427 extension followed this screen.
+The rule applies to this study; current deployment and training follow the
+[current model choices](current-model.md).
 [Complete execution, source/checkpoint hashes, independent aggregation and eight actual native views](results/flat-moment-CPU-screen-v1.json).
 [Earlier pilot, full hue grid and standing GFX comparisons](flat-moment-CPU-pilot.md).
 
@@ -80,6 +82,6 @@ rectangular correction boundary is visible. Original then corrected:
 
 ![Procedural13 corrected: noisy, correction, exact simulated GT](images/flat-moment-screen-CPU-v1-crop-e64039a9bcfcbd8a.png)
 
-The original V63/V64 20k training/review queues and background Commons download
-continue separately. No improved trained model, full-frame timing gain, decisive
-real-photo superiority or SOTA result is established by this rejected correction.
+The screen did not change the original V63/V64 20k training/review queues or
+background Commons download. No improved trained model, full-frame timing gain,
+decisive real-photo superiority or SOTA result is established by this rejected correction.

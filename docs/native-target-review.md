@@ -28,11 +28,13 @@ optimization need not be bit-identical.
 Primary native-minus-control PSNR is −0.02802/−0.00009 dB on four/five development
 scenes, with scene-bootstrap 95% intervals [−0.06059,+0.00019] and
 [−0.02972,+0.02872]. Auxiliary SSIM is 0.921461/0.906839 versus
-0.921379/0.907351. Neither candidate is promoted; V16 remains the reviewed model.
+0.921379/0.907351. Neither candidate replaced its V16 parent in this pilot.
 Scope here is limited to short correction-branch adaptation. The subsequent
 [matched V22/V23 body-adaptation review](native-joint-review.md) has mixed
 primary results and does not promote either candidate. Longer training remains
-unmeasured for this native-target recipe.
+unmeasured for this native-target recipe. Later native-data training is part of
+the [current models](current-model.md); the pilot does not determine the current
+architectural baseline.
 
 On the matched **64-photo** synthetic screen, PSNR/SSIM is
 31.97303/0.924220 for native targets and 31.97150/0.924175 for control.

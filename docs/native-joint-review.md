@@ -3,8 +3,10 @@
 V22/V23 completed their predeclared first 1000-step review. Native targets with
 body adaptation have mixed effects: they improve known-camera measured-CFA
 PSNR over the matched control, reduce unseen-camera measured-CFA PSNR, and
-improve auxiliary AHD-rendered PSNR on both panels. Neither is promoted; V16
-remains the reviewed model. These short trials do not establish a quality gain.
+improve auxiliary AHD-rendered PSNR on both panels. These short trials did not
+replace their V16 parent or establish a general quality gain. Later native-data
+training is part of the [current models](current-model.md); this result applies
+to the V22/V23 recipe below.
 
 Both start from the same frozen V16 step5000 EMA, seed 44, LR 3e-5, planned
 5000-step schedule and architecture as the first [V20/V21 pilot](native-target-review.md).

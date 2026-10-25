@@ -1,12 +1,14 @@
 # Flatness-gated CFA mean correction: mixed results
 
-**Keep this fixed correction out of production.** It reduces bright uniform-color
+**This fixed V60 correction was not adopted.** It reduces bright uniform-color
 bias, but five of eighteen aggregate flat-field groups regress in camera-RGB
 RMSE. High-noise spatial variation usually increases. Reviewed photographs show
 no useful detail gain. The predeclared
 [broader CPU screen is now complete and rejected](flat-moment-CPU-screen.md):
 negligible photo change and a small procedural SSIM decrease. The original
-receipt below preserves its earlier pending-at-capture state.
+receipt below preserves its earlier pending-at-capture state. Current deployment
+follows the [current model choices](current-model.md); this probe does not measure
+the correction on later checkpoints.
 [Execution hashes, complete group summaries, independent checks and 26 actual native views](results/flat-moment-CPU-v1.json).
 
 This is a separate hypothesis from the rejected
@@ -101,4 +103,4 @@ The completed screen covers eight fixed protocol photos and all sixteen
 procedural sources, seven conditions and four CFAs. Its CPU noise draws differ
 from historical CUDA draws. It fails the predeclared procedural SSIM rule; no
 threshold/window search, integration, full427 extension or new training follows.
-The original 20k training queues remain unchanged.
+The probe did not change the original 20k training queues.
