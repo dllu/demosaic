@@ -46,6 +46,14 @@ All four new TIFFs and921,600 retained-ROI RGB16 values verify. The112.94/95.39s
 FP32 intervals are separate timing observations; warmup/workspace differences
 prevent a speed ranking. Quality and100MP/10s remain open goals.
 
+## Fixed Tiny/Small output mean
+
+The [completed V115/V117 mean study](fixed-tiny-small-mean.md#standing-gfx-scene)
+compares all six unchanged native regions against both components. Averaging
+their retained FP32 full-frame crops leaves foliage painterly and blue neon
+markings flat, with no clear qualitative gain. Its numerical scores are an
+intermediate tradeoff; current useful single-model galleries remain above.
+
 ## Completed V116 data comparison
 
 The [V116 full review](v116-quality.md) adds the fine-source/reviewed-mask

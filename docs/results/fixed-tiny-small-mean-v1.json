@@ -1,0 +1,886 @@
+{
+  "recorded_local": "2026-10-25T13:30:52.078697-07:00",
+  "status": "completed-fixed-mean-scores-and-public-assets-material-board-review-pending",
+  "publisher": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-V115-V117-mean-v2/publish-v1.py",
+    "sha256": "40337bfdff741e7cbe843ce544ac9488a7714061a593636547ed313c2ae26b0e"
+  },
+  "completed": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-V115-V117-mean-v2/result-v1.json",
+    "sha256": "684083f246b1b9e8ed2cc5a4ba6edf6d0a711ad420a0254b3f11b166031b806e"
+  },
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-V115-V117-mean-v2/plan-v1.json",
+    "sha256": "02d035a2bdfb4149d12eb3a4f15916eb83f24b8ca5f075d0927615f8cd695369"
+  },
+  "layout_import_preflight": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-V115-V117-mean-v2/layout-import-preflight-v1.json",
+    "sha256": "338ce656d113499ebb904119ba6a09c9cd893792fabd4c5c1b4525615d6e4e69"
+  },
+  "preserved_zero_mean_failed_attempt": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-V115-V117-mean-v1/failure-v1.json",
+    "sha256": "51e4e471d03f542c773fc6c807d4adad07344d22b1ed066cd40256380f2ff26a"
+  },
+  "definition": {
+    "name": "V115+V117 mean",
+    "operator": "(V115_FP32 + V117_FP32) * float32(0.5)",
+    "space": "linear-camera-RGB before clipping/rendering",
+    "weights": [
+      0.5,
+      0.5
+    ],
+    "component_checkpoint_sha256": [
+      "fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84",
+      "f69452432a852ac4c5ffdcbf7d6fe6837a3ab46adbc8a7fdae073111220b8ab0"
+    ],
+    "component_policy": "none",
+    "fitted_to_targets": false
+  },
+  "operator_definition_sha256": "71a2994d5302103fe6b4998ba5d31c319bb9711b46ed226cd887fc96b5880002",
+  "primary": {
+    "photo": {
+      "V114": [
+        {
+          "metric": "srgb_psnr",
+          "units": 427,
+          "observations": 11956,
+          "current_mean": 37.02408376174802,
+          "control_mean": 36.979730619209484,
+          "change": 0.04435314253853201,
+          "units_increased": 422,
+          "bootstrap_95_interval": [
+            0.0413584093597767,
+            0.047652724713004385
+          ],
+          "aggregation": "Mean conditions/CFAs within source, sources equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "linear_psnr",
+          "units": 427,
+          "observations": 11956,
+          "current_mean": 39.934270106957364,
+          "control_mean": 39.90276088534856,
+          "change": 0.03150922160879241,
+          "units_increased": 424,
+          "bootstrap_95_interval": [
+            0.029735735793190547,
+            0.033331055278201724
+          ],
+          "aggregation": "Mean conditions/CFAs within source, sources equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "chroma_mae",
+          "units": 427,
+          "observations": 11956,
+          "current_mean": 0.0061000863714303355,
+          "control_mean": 0.006140319675627139,
+          "change": -4.02333041968044e-05,
+          "units_increased": 10,
+          "bootstrap_95_interval": [
+            -4.5256337890445104e-05,
+            -3.589960817496594e-05
+          ],
+          "aggregation": "Mean conditions/CFAs within source, sources equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "gradient_mae",
+          "units": 427,
+          "observations": 11956,
+          "current_mean": 0.010334585679018283,
+          "control_mean": 0.010376011346361446,
+          "change": -4.1425667343160506e-05,
+          "units_increased": 1,
+          "bootstrap_95_interval": [
+            -4.4219109862168284e-05,
+            -3.897186663116588e-05
+          ],
+          "aggregation": "Mean conditions/CFAs within source, sources equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        }
+      ],
+      "V115": [
+        {
+          "metric": "srgb_psnr",
+          "units": 427,
+          "observations": 11956,
+          "current_mean": 37.02408376174802,
+          "control_mean": 36.97700389588815,
+          "change": 0.047079865859862034,
+          "units_increased": 425,
+          "bootstrap_95_interval": [
+            0.0443436100645442,
+            0.050245381568202775
+          ],
+          "aggregation": "Mean conditions/CFAs within source, sources equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "linear_psnr",
+          "units": 427,
+          "observations": 11956,
+          "current_mean": 39.934270106957364,
+          "control_mean": 39.90049861127504,
+          "change": 0.0337714956823053,
+          "units_increased": 423,
+          "bootstrap_95_interval": [
+            0.03207022103645308,
+            0.03550339361034965
+          ],
+          "aggregation": "Mean conditions/CFAs within source, sources equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "chroma_mae",
+          "units": 427,
+          "observations": 11956,
+          "current_mean": 0.0061000863714303355,
+          "control_mean": 0.006141379420169759,
+          "change": -4.129304873942487e-05,
+          "units_increased": 10,
+          "bootstrap_95_interval": [
+            -4.51007051815671e-05,
+            -3.7966191298522665e-05
+          ],
+          "aggregation": "Mean conditions/CFAs within source, sources equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "gradient_mae",
+          "units": 427,
+          "observations": 11956,
+          "current_mean": 0.010334585679018283,
+          "control_mean": 0.010378948199327515,
+          "change": -4.436252030923054e-05,
+          "units_increased": 0,
+          "bootstrap_95_interval": [
+            -4.6743656157922216e-05,
+            -4.208808332747044e-05
+          ],
+          "aggregation": "Mean conditions/CFAs within source, sources equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        }
+      ],
+      "V117": [
+        {
+          "metric": "srgb_psnr",
+          "units": 427,
+          "observations": 11956,
+          "current_mean": 37.02408376174802,
+          "control_mean": 37.044081297949184,
+          "change": -0.019997536201174795,
+          "units_increased": 33,
+          "bootstrap_95_interval": [
+            -0.022098076765298316,
+            -0.018067902307835886
+          ],
+          "aggregation": "Mean conditions/CFAs within source, sources equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "linear_psnr",
+          "units": 427,
+          "observations": 11956,
+          "current_mean": 39.934270106957364,
+          "control_mean": 39.947647740313265,
+          "change": -0.013377633355917011,
+          "units_increased": 36,
+          "bootstrap_95_interval": [
+            -0.015916380914906436,
+            -0.009650249161651777
+          ],
+          "aggregation": "Mean conditions/CFAs within source, sources equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "chroma_mae",
+          "units": 427,
+          "observations": 11956,
+          "current_mean": 0.0061000863714303355,
+          "control_mean": 0.006085648019082132,
+          "change": 1.4438352348202679e-05,
+          "units_increased": 354,
+          "bootstrap_95_interval": [
+            1.151775505029278e-05,
+            1.808644149235645e-05
+          ],
+          "aggregation": "Mean conditions/CFAs within source, sources equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "gradient_mae",
+          "units": 427,
+          "observations": 11956,
+          "current_mean": 0.010334585679018283,
+          "control_mean": 0.010316795671275993,
+          "change": 1.7790007742288955e-05,
+          "units_increased": 397,
+          "bootstrap_95_interval": [
+            1.6326448183430793e-05,
+            1.9337885088133208e-05
+          ],
+          "aggregation": "Mean conditions/CFAs within source, sources equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        }
+      ]
+    },
+    "known": {
+      "V114": [
+        {
+          "metric": "sensor_psnr",
+          "units": 4,
+          "observations": 72,
+          "current_mean": 54.31386611306484,
+          "control_mean": 54.286274450150124,
+          "change": 0.02759166291470727,
+          "units_increased": 3,
+          "bootstrap_95_interval": [
+            0.003379551861170782,
+            0.052551578933833554
+          ],
+          "aggregation": "Mean crops within capture, captures within scene, scenes equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "ahd_srgb_psnr",
+          "units": 4,
+          "observations": 72,
+          "current_mean": 40.140145919024306,
+          "control_mean": 40.120586267953044,
+          "change": 0.01955965107126012,
+          "units_increased": 2,
+          "bootstrap_95_interval": [
+            -0.012056251805290685,
+            0.051175553947810926
+          ],
+          "aggregation": "Mean crops within capture, captures within scene, scenes equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "ahd_chroma_mae",
+          "units": 4,
+          "observations": 72,
+          "current_mean": 0.00600372648590978,
+          "control_mean": 0.006004679043900006,
+          "change": -9.525579902263173e-07,
+          "units_increased": 2,
+          "bootstrap_95_interval": [
+            -2.096118803115478e-05,
+            2.2830158587807976e-05
+          ],
+          "aggregation": "Mean crops within capture, captures within scene, scenes equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "ahd_gradient_mae",
+          "units": 4,
+          "observations": 72,
+          "current_mean": 0.006352477166929306,
+          "control_mean": 0.0063544748995926804,
+          "change": -1.997732663374741e-06,
+          "units_increased": 0,
+          "bootstrap_95_interval": [
+            -3.650438044003855e-06,
+            -3.4502728274562675e-07
+          ],
+          "aggregation": "Mean crops within capture, captures within scene, scenes equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        }
+      ],
+      "V115": [
+        {
+          "metric": "sensor_psnr",
+          "units": 4,
+          "observations": 72,
+          "current_mean": 54.31386611306484,
+          "control_mean": 54.3240497430543,
+          "change": -0.010183629989471754,
+          "units_increased": 1,
+          "bootstrap_95_interval": [
+            -0.020739890378774106,
+            0.0009013051489592527
+          ],
+          "aggregation": "Mean crops within capture, captures within scene, scenes equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "ahd_srgb_psnr",
+          "units": 4,
+          "observations": 72,
+          "current_mean": 40.140145919024306,
+          "control_mean": 40.14541138289833,
+          "change": -0.00526546387403215,
+          "units_increased": 2,
+          "bootstrap_95_interval": [
+            -0.018113277330385813,
+            0.007582349582321513
+          ],
+          "aggregation": "Mean crops within capture, captures within scene, scenes equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "ahd_chroma_mae",
+          "units": 4,
+          "observations": 72,
+          "current_mean": 0.00600372648590978,
+          "control_mean": 0.006000089300647489,
+          "change": 3.637185262291096e-06,
+          "units_increased": 2,
+          "bootstrap_95_interval": [
+            -1.595512603477984e-05,
+            2.1956546923302062e-05
+          ],
+          "aggregation": "Mean crops within capture, captures within scene, scenes equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "ahd_gradient_mae",
+          "units": 4,
+          "observations": 72,
+          "current_mean": 0.006352477166929306,
+          "control_mean": 0.006352537065331583,
+          "change": -5.98984022779801e-08,
+          "units_increased": 1,
+          "bootstrap_95_interval": [
+            -2.412101369175779e-06,
+            3.3152191643644364e-06
+          ],
+          "aggregation": "Mean crops within capture, captures within scene, scenes equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        }
+      ],
+      "V117": [
+        {
+          "metric": "sensor_psnr",
+          "units": 4,
+          "observations": 72,
+          "current_mean": 54.31386611306484,
+          "control_mean": 54.273029131027684,
+          "change": 0.0408369820371437,
+          "units_increased": 4,
+          "bootstrap_95_interval": [
+            0.02359965337209502,
+            0.06672456160769258
+          ],
+          "aggregation": "Mean crops within capture, captures within scene, scenes equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "ahd_srgb_psnr",
+          "units": 4,
+          "observations": 72,
+          "current_mean": 40.140145919024306,
+          "control_mean": 40.11422472563576,
+          "change": 0.025921193388542818,
+          "units_increased": 4,
+          "bootstrap_95_interval": [
+            0.009136052171225373,
+            0.03567530665597474
+          ],
+          "aggregation": "Mean crops within capture, captures within scene, scenes equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "ahd_chroma_mae",
+          "units": 4,
+          "observations": 72,
+          "current_mean": 0.00600372648590978,
+          "control_mean": 0.00601950328818692,
+          "change": -1.5776802277140236e-05,
+          "units_increased": 1,
+          "bootstrap_95_interval": [
+            -3.771146075433893e-05,
+            4.632508684604278e-06
+          ],
+          "aggregation": "Mean crops within capture, captures within scene, scenes equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "ahd_gradient_mae",
+          "units": 4,
+          "observations": 72,
+          "current_mean": 0.006352477166929306,
+          "control_mean": 0.006355473926162834,
+          "change": -2.9967592335285956e-06,
+          "units_increased": 0,
+          "bootstrap_95_interval": [
+            -8.479230668224577e-06,
+            -2.0055452671263914e-07
+          ],
+          "aggregation": "Mean crops within capture, captures within scene, scenes equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        }
+      ]
+    },
+    "unseen": {
+      "V114": [
+        {
+          "metric": "sensor_psnr",
+          "units": 5,
+          "observations": 90,
+          "current_mean": 54.001949986584144,
+          "control_mean": 54.00290177852391,
+          "change": -0.0009517919397765695,
+          "units_increased": 2,
+          "bootstrap_95_interval": [
+            -0.012429568041950745,
+            0.010525984162397606
+          ],
+          "aggregation": "Mean crops within capture, captures within scene, scenes equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "ahd_srgb_psnr",
+          "units": 5,
+          "observations": 90,
+          "current_mean": 38.88679627061135,
+          "control_mean": 38.87572875995375,
+          "change": 0.011067510657603918,
+          "units_increased": 4,
+          "bootstrap_95_interval": [
+            0.00025503581093033745,
+            0.0235880678650247
+          ],
+          "aggregation": "Mean crops within capture, captures within scene, scenes equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "ahd_chroma_mae",
+          "units": 5,
+          "observations": 90,
+          "current_mean": 0.006782585896953566,
+          "control_mean": 0.006792312603899587,
+          "change": -9.726706946021692e-06,
+          "units_increased": 1,
+          "bootstrap_95_interval": [
+            -1.8830209796565944e-05,
+            -8.079553993524044e-07
+          ],
+          "aggregation": "Mean crops within capture, captures within scene, scenes equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "ahd_gradient_mae",
+          "units": 5,
+          "observations": 90,
+          "current_mean": 0.0063781569999129374,
+          "control_mean": 0.00637892643210902,
+          "change": -7.694321960832056e-07,
+          "units_increased": 2,
+          "bootstrap_95_interval": [
+            -1.8985267749020012e-06,
+            3.596623827355899e-07
+          ],
+          "aggregation": "Mean crops within capture, captures within scene, scenes equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        }
+      ],
+      "V115": [
+        {
+          "metric": "sensor_psnr",
+          "units": 5,
+          "observations": 90,
+          "current_mean": 54.001949986584144,
+          "control_mean": 54.004167932397806,
+          "change": -0.002217945813666233,
+          "units_increased": 2,
+          "bootstrap_95_interval": [
+            -0.018010115806069392,
+            0.015717758236202427
+          ],
+          "aggregation": "Mean crops within capture, captures within scene, scenes equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "ahd_srgb_psnr",
+          "units": 5,
+          "observations": 90,
+          "current_mean": 38.88679627061135,
+          "control_mean": 38.87572599892992,
+          "change": 0.011070271681425936,
+          "units_increased": 3,
+          "bootstrap_95_interval": [
+            -0.003394832660850966,
+            0.025535376023702837
+          ],
+          "aggregation": "Mean crops within capture, captures within scene, scenes equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "ahd_chroma_mae",
+          "units": 5,
+          "observations": 90,
+          "current_mean": 0.006782585896953566,
+          "control_mean": 0.00679131554210555,
+          "change": -8.729645151983427e-06,
+          "units_increased": 2,
+          "bootstrap_95_interval": [
+            -2.29254071187384e-05,
+            4.540771714569777e-06
+          ],
+          "aggregation": "Mean crops within capture, captures within scene, scenes equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "ahd_gradient_mae",
+          "units": 5,
+          "observations": 90,
+          "current_mean": 0.0063781569999129374,
+          "control_mean": 0.006379366491407734,
+          "change": -1.2094914947977444e-06,
+          "units_increased": 1,
+          "bootstrap_95_interval": [
+            -2.3698986245771632e-06,
+            1.9549794398592695e-07
+          ],
+          "aggregation": "Mean crops within capture, captures within scene, scenes equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        }
+      ],
+      "V117": [
+        {
+          "metric": "sensor_psnr",
+          "units": 5,
+          "observations": 90,
+          "current_mean": 54.001949986584144,
+          "control_mean": 53.97338902292127,
+          "change": 0.028560963662864935,
+          "units_increased": 4,
+          "bootstrap_95_interval": [
+            0.003535010368224789,
+            0.04824739895800434
+          ],
+          "aggregation": "Mean crops within capture, captures within scene, scenes equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "ahd_srgb_psnr",
+          "units": 5,
+          "observations": 90,
+          "current_mean": 38.88679627061135,
+          "control_mean": 38.87667258277744,
+          "change": 0.010123687833909401,
+          "units_increased": 3,
+          "bootstrap_95_interval": [
+            -0.004273764750169562,
+            0.024521140417988363
+          ],
+          "aggregation": "Mean crops within capture, captures within scene, scenes equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "ahd_chroma_mae",
+          "units": 5,
+          "observations": 90,
+          "current_mean": 0.006782585896953566,
+          "control_mean": 0.006790643175065879,
+          "change": -8.057278112313938e-06,
+          "units_increased": 2,
+          "bootstrap_95_interval": [
+            -2.3546460076973204e-05,
+            7.43190385234533e-06
+          ],
+          "aggregation": "Mean crops within capture, captures within scene, scenes equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        },
+        {
+          "metric": "ahd_gradient_mae",
+          "units": 5,
+          "observations": 90,
+          "current_mean": 0.0063781569999129374,
+          "control_mean": 0.006380128655103949,
+          "change": -1.9716551910117787e-06,
+          "units_increased": 2,
+          "bootstrap_95_interval": [
+            -3.739634630936517e-06,
+            -2.0367575108704018e-07
+          ],
+          "aggregation": "Mean crops within capture, captures within scene, scenes equally",
+          "interpretation": "Paired fixed evaluation units; no training-seed or general-camera uncertainty",
+          "shared_invalid_observations": 0
+        }
+      ]
+    }
+  },
+  "color": [
+    {
+      "method": "V114",
+      "condition": "adc-only",
+      "observations": 588,
+      "mean_max_channel_bias_DN16": 7.080626634137155,
+      "worst_max_channel_bias_DN16": 51.73073087279918,
+      "worst_case": 1161,
+      "mean_centered_RGB_RMS_DN16": 2.8226373520363905
+    },
+    {
+      "method": "V114",
+      "condition": "iso12800-prior",
+      "observations": 588,
+      "mean_max_channel_bias_DN16": 17.083398308475875,
+      "worst_max_channel_bias_DN16": 85.40040784132434,
+      "worst_case": 1151,
+      "mean_centered_RGB_RMS_DN16": 28.77284904560466
+    },
+    {
+      "method": "V115",
+      "condition": "adc-only",
+      "observations": 588,
+      "mean_max_channel_bias_DN16": 7.795868859959178,
+      "worst_max_channel_bias_DN16": 65.63843666933826,
+      "worst_case": 1016,
+      "mean_centered_RGB_RMS_DN16": 2.6434485225298303
+    },
+    {
+      "method": "V115",
+      "condition": "iso12800-prior",
+      "observations": 588,
+      "mean_max_channel_bias_DN16": 18.210070009961004,
+      "worst_max_channel_bias_DN16": 106.79029629629804,
+      "worst_case": 1117,
+      "mean_centered_RGB_RMS_DN16": 29.419945933731253
+    },
+    {
+      "method": "V117",
+      "condition": "adc-only",
+      "observations": 588,
+      "mean_max_channel_bias_DN16": 8.186656556120374,
+      "worst_max_channel_bias_DN16": 63.88999015289228,
+      "worst_case": 1035,
+      "mean_centered_RGB_RMS_DN16": 2.7098512730303046
+    },
+    {
+      "method": "V117",
+      "condition": "iso12800-prior",
+      "observations": 588,
+      "mean_max_channel_bias_DN16": 17.43122068414882,
+      "worst_max_channel_bias_DN16": 85.2892373575014,
+      "worst_case": 1143,
+      "mean_centered_RGB_RMS_DN16": 28.50682971262989
+    },
+    {
+      "method": "V115+V117 mean",
+      "condition": "adc-only",
+      "observations": 588,
+      "mean_max_channel_bias_DN16": 7.430715458808528,
+      "worst_max_channel_bias_DN16": 62.75164144364971,
+      "worst_case": 1016,
+      "mean_centered_RGB_RMS_DN16": 2.359414487583495
+    },
+    {
+      "method": "V115+V117 mean",
+      "condition": "iso12800-prior",
+      "observations": 588,
+      "mean_max_channel_bias_DN16": 17.536765066557106,
+      "worst_max_channel_bias_DN16": 83.29494253214216,
+      "worst_case": 1020,
+      "mean_centered_RGB_RMS_DN16": 28.259382426974856
+    }
+  ],
+  "selected_carriers": [
+    {
+      "method": "V114",
+      "period": 4,
+      "fixed_draws": 4,
+      "CFA_patterns": 4,
+      "observations": 16,
+      "mean_projected_gain": 0.0012314357017915957
+    },
+    {
+      "method": "V114",
+      "period": 8,
+      "fixed_draws": 4,
+      "CFA_patterns": 4,
+      "observations": 16,
+      "mean_projected_gain": 0.1337123559909162
+    },
+    {
+      "method": "V114",
+      "period": 16,
+      "fixed_draws": 4,
+      "CFA_patterns": 4,
+      "observations": 16,
+      "mean_projected_gain": 0.7133510568944474
+    },
+    {
+      "method": "V115",
+      "period": 4,
+      "fixed_draws": 4,
+      "CFA_patterns": 4,
+      "observations": 16,
+      "mean_projected_gain": 0.0020950072257468564
+    },
+    {
+      "method": "V115",
+      "period": 8,
+      "fixed_draws": 4,
+      "CFA_patterns": 4,
+      "observations": 16,
+      "mean_projected_gain": 0.15217095667842837
+    },
+    {
+      "method": "V115",
+      "period": 16,
+      "fixed_draws": 4,
+      "CFA_patterns": 4,
+      "observations": 16,
+      "mean_projected_gain": 0.6886512472443089
+    },
+    {
+      "method": "V117",
+      "period": 4,
+      "fixed_draws": 4,
+      "CFA_patterns": 4,
+      "observations": 16,
+      "mean_projected_gain": 0.0014167946591303654
+    },
+    {
+      "method": "V117",
+      "period": 8,
+      "fixed_draws": 4,
+      "CFA_patterns": 4,
+      "observations": 16,
+      "mean_projected_gain": 0.1378805153533629
+    },
+    {
+      "method": "V117",
+      "period": 16,
+      "fixed_draws": 4,
+      "CFA_patterns": 4,
+      "observations": 16,
+      "mean_projected_gain": 0.7471295313822439
+    },
+    {
+      "method": "V115+V117 mean",
+      "period": 4,
+      "fixed_draws": 4,
+      "CFA_patterns": 4,
+      "observations": 16,
+      "mean_projected_gain": 0.001755899962191648
+    },
+    {
+      "method": "V115+V117 mean",
+      "period": 8,
+      "fixed_draws": 4,
+      "CFA_patterns": 4,
+      "observations": 16,
+      "mean_projected_gain": 0.14502573763913643
+    },
+    {
+      "method": "V115+V117 mean",
+      "period": 16,
+      "fixed_draws": 4,
+      "CFA_patterns": 4,
+      "observations": 16,
+      "mean_projected_gain": 0.7178903906886641
+    }
+  ],
+  "stages": {
+    "known": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-V115-V117-mean-v2/work/artifacts/known/result-v1.json",
+      "sha256": "548991443fc7707ec9c443af7fc928d4762e83c300e3e567f018e03e41f295d9"
+    },
+    "unseen": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-V115-V117-mean-v2/work/artifacts/unseen/result-v1.json",
+      "sha256": "ae4f49afc50f35ffe7592b64d6162d1f1661fccf983527690222b31ad212125b"
+    },
+    "photo": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-V115-V117-mean-v2/work/artifacts/photo/result-v1.json",
+      "sha256": "d6e2f559da4c3d2dca60e9623ae9a40a405683de6d6749351dc440095c7bd586"
+    },
+    "texture": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-V115-V117-mean-v2/work/artifacts/texture/result-v1.json",
+      "sha256": "725b1f180e0091822baa385d6bcc8115ff3b18f06de43801d806cd77037f4e12"
+    },
+    "color": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-V115-V117-mean-v2/work/artifacts/color/result-v1.json",
+      "sha256": "97c271fa83cd46efa5b24a5dc3b6df8d0b2e3ed02e9b7192404e4c7be74b76d9"
+    }
+  },
+  "observations": 14190,
+  "batch_means": 4450,
+  "actual_selected_prediction_readback": [
+    {
+      "prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-V115-V117-mean-v2/work/artifacts/photo/archive/predictions/batch-000880.npy",
+        "sha256": "75a719a136f24893d7e9d1a1ffdea29d40fac675824e231ae09fc5f139fee4c9"
+      },
+      "native_stored_mean_exact_to_component_FP32_arithmetic": true,
+      "component_arrays": [
+        {
+          "path": "/mnt/external/demosaic/V112-continuations-quality-20261024-v3/photo/archive/predictions/batch-001761.npy",
+          "sha256": "6e50c151ad1791f473f5f0d1f7e020f5ec15b2fc0bae15accc0210ae5d10c555"
+        },
+        {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V117-V118-band-quality-v1/work/artifacts/photo/archive/predictions/batch-001760.npy",
+          "sha256": "f9cdabcb40d944c553964c8b24beaf078f55926ce578d58cf47d72afba96747f"
+        }
+      ]
+    },
+    {
+      "prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/fixed-V115-V117-mean-v2/work/artifacts/photo/archive/predictions/batch-002252.npy",
+        "sha256": "60a4c01129600a6df3edae43aab3e0afae4f621975944766487f08b3097ea4e7"
+      },
+      "native_stored_mean_exact_to_component_FP32_arithmetic": true,
+      "component_arrays": [
+        {
+          "path": "/mnt/external/demosaic/V112-continuations-quality-20261024-v3/photo/archive/predictions/batch-004505.npy",
+          "sha256": "20bc5a7afd76bb8b42be562fe994b6c1abeab5348a26334d89c5c5f589996f02"
+        },
+        {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V117-V118-band-quality-v1/work/artifacts/photo/archive/predictions/batch-004504.npy",
+          "sha256": "cc36b9b00b46889098a3af4d8f959652bd774ced60d263d3aadd82dbdad28f0f"
+        }
+      ]
+    }
+  ],
+  "maximum_FP32_mean_rounding_error": 1.1920928955078125e-07,
+  "maximum_independent_unclipped_MSE_decomposition_error": 0.0,
+  "assets": {
+    "path": "/home/dllu/proj/demosaic/docs/images/fixed-tiny-small-mean-v1/manifest.json",
+    "sha256": "7618d19f02b8c876257d36c2293be6a97e507f0ff018b06a756914082c92b482"
+  },
+  "Torch_imported": false,
+  "new_neural_forwards": 0,
+  "new_noise_observations": 0,
+  "RAW_decodes": 0,
+  "optimizer_updates": 0,
+  "scope": "One prospective fixed equal V115 Small / V117 Tiny output mean, with no coefficient search/target fitting. Reuse completed matched single-view FP32 predictions and exact targets only. Full five numerical stages, source/scene-balanced component/general comparisons and two native exact-GT triplets. Not a new trained checkpoint, architecture selection or real-camera superiority claim. Native viewing and interpretation follow; V119 and all original jobs remain unchanged."
+}

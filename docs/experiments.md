@@ -48,6 +48,7 @@ matched studies when attributing a gain to a particular change.
 | Spectral and late RGB refinement | Small matched mean gains or protected common weights did not fix weak detail; head-only V92 regressed | [V88/V89](spectral-original4k-review.md), [V90/V91](late-rgb-original4k-review.md), [V92](late-rgb-head-only-original4k-review.md) |
 | ADC-only inference | With unchanged V104 weights, replacing only valid measured sites gains .2885 dB rendered PSNR across all 427 sources/all 1,708 CFA cases. Local chroma/SSIM regressions and a flat-color tail remain; positive-noise profiles bypass it | [Complete site-consistency comparison, actual export and native crops](adc-consistency.md) |
 | Eight-view inference | Full427 photo PSNR37.04376dB; all 427 source means and4/4 known,5/5 unseen scene means improve over V104 single. ADC tail420.90DN16 remains worse than V112, with fine-detail/blotch weaknesses. Costs eight evaluations per tile | [Full panels, native examples and independent audit](dihedral-quality.md), [complete-frame comparison](dihedral-fullframe.md) |
+| Fixed Tiny/Small output mean | Equal V115/V117 mean gives photo37.02408dB and camera54.31387/54.00195dB: an intermediate tradeoff, with no clear native GFX detail gain. All14,190 numerical cases reuse saved predictions | [Scores, two exact-GT triplets and six native GFX regions](fixed-tiny-small-mean.md) |
 
 Each complete quality review retains source/checkpoint identities, native
 noisy/restored/reference crops and explicit real-reference limitations. The

@@ -104,6 +104,11 @@ and RGB16 checks are published. Keep the term off for further quality work;
 architecture and parent remain choices guided by their measured tradeoffs.
 
 [PSNR history](performance-history.md) includes both new endpoints.
+The [fixed V115/V117 output mean](fixed-tiny-small-mean.md) gives an intermediate
+tradeoff: photo 37.02408dB and camera 54.31387/54.00195dB. It loses photo score
+to V117 and camera means to V115, with unchanged visible GFX fine-detail loss.
+This completed saved-output study does not establish a better trained architecture.
+[Native review and publication checks](results/fixed-tiny-small-mean-review-v1.json).
 Earlier useful comparisons retain their exact checkpoints and receipts:
 [V112](v112-quality.md), [V104](v104-reviewed-corpus-quality.md),
 [V102/V103](v102-v103-quality-review.md), [V84/V85](native-data-original20k-review.md)

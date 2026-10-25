@@ -163,3 +163,10 @@ The bounded worker keeps the existing 48/24GiB available-RAM floors, 24GiB CUDA
 quota and 128/96GiB internal disk floors, preserving failures without automatic
 retry. Useful completed progress continues to update current guides as full
 results and native review become available.
+
+The [archive-layout check](results/native-camera-development-output-layout-v1.json)
+places the queued archive under `work/artifacts/archive`, reached through the
+controller's existing `archive` path. The actual frozen safety module accepts
+that destination. This was set up before any predictions or endpoint resolution;
+the waiting controller, its 67 frozen source bindings and original plan remain
+unchanged.

@@ -124,6 +124,10 @@ def prepare(root):
         inputs.append(binding(source))
         shutil.copyfile(source, destination)
         destination.chmod(0o444)
+    # The frozen safety module treats work as its repository. Resolve the
+    # archive into that workspace while retaining the controller's public path.
+    (work / "artifacts").mkdir()
+    (root / "archive").symlink_to(Path("work/artifacts/archive"), target_is_directory=True)
     checkpoint = binding(reference_dir / "utnet2-bayer.pt")
     assert checkpoint["sha256"] == REFERENCE_SHA
     methods.append({"label": "RawNIND-preup", "kind": "rawnind-preup", "checkpoint": checkpoint,
