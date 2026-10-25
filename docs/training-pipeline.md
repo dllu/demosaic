@@ -17,6 +17,13 @@ Earlier source pools,32-ROI comparisons and their receipts remain separately
 recorded in the [source review](incoming-commons-quality.md) and
 [V102/V103 study](v102-v103-quality-review.md).
 
+The [running V119 Small continuation](cleaned-diverse-small-training.md) uses
+90,791 cleaned Commons sources and the corrected83-ID paired extension with
+the original camera probabilities. Both16-step CPU/CUDA checks pass, including
+all three data paths. Its fresh20k endpoint has a queued full quality, independent
+and native comparison against saved V115/V114/V117 outputs. It retains zero
+optical PSFs and the current geometry; trained-quality results remain pending.
+
 The completed [spectral](spectral-original4k-review.md) and
 [late RGB](late-rgb-original4k-review.md) trials use native 256×256/B16 and all88,508
 reviewed Commons training sources. Neither is promoted. The opt-in

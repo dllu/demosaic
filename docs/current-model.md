@@ -67,9 +67,10 @@ It is a fitted-transfer comparison, not capacity alone.
 The [full saved-output local-detail comparison](local-material-detail.md#tiny-versus-fitted-small-on-the-same-full-photo-support)
 now covers the same427 sources for both encoders. Weak natural-detail response
 is nearly unchanged; Small's camera and eight-pixel advantages make it a useful
-parent for the next cleaned-data run, without suggesting that size alone fixes
+parent for the [running V119 cleaned-data trial](cleaned-diverse-small-training.md), without suggesting that size alone fixes
 faint detail. The [reviewed83-ID paired extension](paired-camera-sampling.md)
-is prepared with corrected reference masks and the original camera proportions.
+retains corrected reference masks and the original camera proportions. Both
+discarded implementation checks pass; V119's full20k quality review is pending.
 
 ## Quality and remaining work
 

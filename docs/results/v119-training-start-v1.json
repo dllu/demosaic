@@ -1,0 +1,183 @@
+{
+  "status": "original-V119-training-in-progress-after-both-discarded-checks",
+  "recorded_local": "2026-10-25T11:07:51.914263-07:00",
+  "recipe": {
+    "path": "/home/dllu/proj/demosaic/configs/quality-v115-cleaned-diverse-v119.yaml",
+    "sha256": "4a11465818f35c90c677bf4a3325296900e7254bdfe5818e2d4abeaeb9775388"
+  },
+  "training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V115-cleaned-diverse-training-v1/run/plan.json",
+    "sha256": "b1ba6b917882ff4dd985892dd27be7d3ef4dcd7fb3e1b1e93864dd3be48b863b"
+  },
+  "execution_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V115-cleaned-diverse-training-v1/run/execution-plan-v1.json",
+    "sha256": "c6526a74b1066a8a47491e9a6dcd4c50888903bdfbb1fb7545ad8bbf6527d65f"
+  },
+  "controller_launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V115-cleaned-diverse-training-v1/run/controller-launch-v1.json",
+    "sha256": "78ae11a53947d70a49315ae57705919bdaf14cd50834518fe2d3b55b6f84fe4f"
+  },
+  "parent": {
+    "path": "/mnt/external/demosaic/V112-continuations-20261024-v2/V115/train/V115/last.pt",
+    "sha256": "fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84"
+  },
+  "parent_step": 20000,
+  "official_frozen_encoder": {
+    "model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+    "revision": "421020015aa4266363db803b6049a529999afb1e",
+    "sha256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14"
+  },
+  "expected_source_archive_sha256": "7edfbceae2e6363cd07e868720a3ea2ef7b386ffee7c2d6ad4b434bd629d429e",
+  "frozen_files": 72,
+  "data_manifests": {
+    "manifest": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/next-source-tail-top512-v1/future-cohort-v1/manifest4.jsonl",
+      "sha256": "284ae6e45bda4680a82b5b5deb30d44b6d16a5c7bc6113567f83f2588adb70a2"
+    },
+    "validation_manifest": {
+      "path": "/mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl",
+      "sha256": "02e473906a0f478b9a38eff7983ec5c58327fc7d345cc47c13929ff21fc93b0a"
+    },
+    "raw_clean_manifest": {
+      "path": "/mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json",
+      "sha256": "0dde4a0ca1ad68332d8a1c9d61fdc561db6501cd262d534647b979de82e3cf80"
+    },
+    "paired_manifest": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/paired83-mask-camera-preflight-v1/dataset/manifest.json",
+      "sha256": "7f7ac15b8d285fb140dea9fb5ec4b24b3385f51d901b51a12fd17e89e3fb70ac"
+    },
+    "reviewed_roi_catalogue": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/next-source-tail-top512-v1/future-cohort-v1/six-ROI-catalogue-v1.json",
+      "sha256": "1564b0966c91106209f2e0f396116fffd470faa40a4861e973c3ef568bb21dd0"
+    },
+    "photo_sampling_reference_manifest": {
+      "path": "/mnt/external/demosaic/commons-source-tail-reviewed-20261023-v2/manifest4.jsonl",
+      "sha256": "4175378ca100351eca4669220892d4d4e8db9c47133016206c7c0eadd7ab427e"
+    }
+  },
+  "paired_camera_sampling_weights": {
+    "Canon EOS 6D": 0.125,
+    "ILCE-7C": 0.75,
+    "NIKON D40": 0.03125,
+    "NIKON Z 6": 0.09375
+  },
+  "discarded_checks": {
+    "CPU": {
+      "accounting": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V115-cleaned-diverse-training-v1/run/CPU-V119-accounting-v1.json",
+        "sha256": "7a8e7a8bcc36d110d1ce276b48db160d602531454af07e23bbfc93a8eb67c4d9"
+      },
+      "counts": {
+        "training_forwards": 16,
+        "encoder_training_forwards": 16,
+        "validation_forwards": 0,
+        "encoder_validation_forwards": 0,
+        "optimizer_steps": 16,
+        "prepared_training_batches": 16,
+        "synthetic_loss_calls": 12,
+        "paired_loss_calls": 4,
+        "normalized_band_evaluations": 0
+      },
+      "domains": {
+        "commons": 11,
+        "paired": 4,
+        "native": 1
+      },
+      "updates": 16,
+      "initial_all91_EMA_exact": true,
+      "fresh_AdamW_states": 89,
+      "model_EMA_Adam_finite": true,
+      "encoder_frozen_no_gradients": true,
+      "owner_exited": true
+    },
+    "CUDA": {
+      "accounting": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V115-cleaned-diverse-training-v1/run/CUDA-V119-accounting-v1.json",
+        "sha256": "c6f1c6b03626e88b9a39a715760c6fd287f5763f7a77c4dd0e0e8ace10461df8"
+      },
+      "counts": {
+        "training_forwards": 16,
+        "encoder_training_forwards": 16,
+        "validation_forwards": 0,
+        "encoder_validation_forwards": 0,
+        "optimizer_steps": 16,
+        "prepared_training_batches": 16,
+        "synthetic_loss_calls": 12,
+        "paired_loss_calls": 4,
+        "normalized_band_evaluations": 0
+      },
+      "domains": {
+        "commons": 11,
+        "paired": 4,
+        "native": 1
+      },
+      "updates": 16,
+      "initial_all91_EMA_exact": true,
+      "fresh_AdamW_states": 89,
+      "model_EMA_Adam_finite": true,
+      "encoder_frozen_no_gradients": true,
+      "owner_exited": true
+    }
+  },
+  "production_training_owner": {
+    "pid": 3134902,
+    "created": 1792951461.96
+  },
+  "controller_owner": {
+    "pid": 3125213,
+    "created": 1792951326.78
+  },
+  "production_log_prefix": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V115-cleaned-diverse-training-v1/run/first-production-log-prefix-v1.jsonl",
+    "sha256": "d92edaab80701a55f9cb9df41094920472ebfbac2e78cd15e3fc11972f9d6f2d"
+  },
+  "production_logged_steps_at_recording": [
+    1,
+    25,
+    50,
+    75,
+    100,
+    125,
+    150,
+    175,
+    200
+  ],
+  "first_production_loss_exact_to_discarded_CUDA": true,
+  "all_logged_loss_gradient_LR_finite": true,
+  "planned_original_updates": 20000,
+  "planned_validation_calls": 640,
+  "planned_domain_batches": {
+    "commons": 10013,
+    "paired": 5021,
+    "native": 4966
+  },
+  "queued_reviews": {
+    "quality_and_independent_audit": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-cleaned-diverse-review-preparation-v1/result-v1.json",
+      "sha256": "6356a2ff4756b9a90fc2083ed9d53a3f3828d416a0a1183320147ca9940d773b"
+    },
+    "three_retained_model_contrasts": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-cleaned-diverse-matched-preparation-v1/result-v1.json",
+      "sha256": "542c05440b09d5d03baf81d53db9b6e5bd1472bdc021b2728b6a18d6d47f99af"
+    }
+  },
+  "planned_quality_stages": 8,
+  "planned_new_endpoint_model_and_encoder_calls": 4586,
+  "planned_independent_primary_observations": 14190,
+  "planned_retained_reference_contrasts": [
+    "V115-V119",
+    "V114-V119",
+    "V117-V119"
+  ],
+  "planned_photo_sources": 427,
+  "planned_local_detail_cases_per_contrast": 5124,
+  "planned_unique_GT_blocks_reused": 96075,
+  "planned_full_GFX_native_regions": 6,
+  "planned_RGB16_exports": 2,
+  "planned_RGB16_native_channel_values_checked": 460800,
+  "new_neural_forwards_for_publication": 0,
+  "new_noise_observations_for_publication": 0,
+  "RAW_decodes_for_publication": 0,
+  "quality_claim": null,
+  "scope": "V119: full20000-update fresh V115 Small final-EMA continuation, seed65/LR1e-5/warm200/B16/native256/BF16. Cleaned90791 Commons with source-preserving reference and six reviewed ROIs; corrected83-ID/71-group paired targets with original32 camera probabilities; native128 unchanged. Same legacy weak.15/fine0/photo-contrast attenuation.25/zero optical PSFs/geometry-before-area2/epsilon.0003, paired epsilon.0001, band0. Discard CPU64/B1/FP32 and CUDA256/B16/BF16 sixteen-step checks covering all3 domains before fresh production. Combined data changes and extra training; not an isolated causal dataset study. Full photo/camera/analytic/color/GFX102MP/independent/matched/native/RGB16 review after20k; reuse saved controls without new control NN calls. Preserve actual sources/failures; no automatic retry or budget extension. Quality precedes speed."
+}

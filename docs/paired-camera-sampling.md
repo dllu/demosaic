@@ -11,6 +11,9 @@ A separate derived83-ID/71-group manifest now includes the four corrected
 train32 masks. All102 new reviewed cases and their crops retain their original
 records and bytes; the canonical admission payload is unchanged. This is
 prepared data, without a trained-quality claim or a change to current models.
+The [V119 Small continuation](cleaned-diverse-small-training.md) now uses it
+with the cleaned Commons corpus; both discarded checks pass and full quality
+results are pending.
 [Data/reader/source receipts](results/paired83-camera-mask-reader-v1.json) ·
 [Original review](paired-training-admission.md) ·
 [Reference-mask rationale](paired-reference-quality.md).

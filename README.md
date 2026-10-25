@@ -17,8 +17,10 @@ saved-prediction checks, native review and complete102MP RGB16 exports are done.
 
 [V116's complete review](docs/v116-quality.md) finds higher tested eight-pixel
 carrier gain, similar weak natural detail and a worse ADC color tail; V114
-retains the better overall balance. The90,864-source corpus, zero optical blur and geometry
-before final downsampling remain in use. [Data review](docs/incoming-commons-quality.md) ·
+retains the better overall balance. These models use90,864 sources, zero optical blur and geometry
+before final downsampling. [V119 is training](docs/cleaned-diverse-small-training.md)
+from V115 Small with90,791 cleaned sources and the expanded paired set; quality
+results are pending. [Data review](docs/incoming-commons-quality.md) ·
 [Training pipeline](docs/training-pipeline.md) · [Historical diary](diary/index.md).
 
 **V117 is a useful single-view photo-score option:**37.04408dB, +.06435 over
