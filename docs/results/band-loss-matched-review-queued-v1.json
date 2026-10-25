@@ -1,0 +1,49 @@
+{
+  "recorded_local": "2026-10-24T23:56:13.489940-07:00",
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V117-V118-band-review-preparation-v1/prepare-v1.py",
+    "sha256": "cd83a8e1d5731705565e289143edffc7377269aad5d39f58d898b3a1c9a7354e"
+  },
+  "queue_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V117-V118-band-matched-review-v1/queue-plan-v1.json",
+    "sha256": "a6fe528dee5aea644ebfa27d2e1df793f63577f1861c7e2b01e90931fc7d4123"
+  },
+  "owner": {
+    "pid": 2148219,
+    "created": 1792911373.19
+  },
+  "original_audit_owner": {
+    "pid": 2094020,
+    "created": 1792908598.57
+  },
+  "recipe_contract": {
+    "only_objective_difference": "normalized_band_weight0/.0003",
+    "seed": 64,
+    "steps_per_arm": 20000,
+    "common_parent": {
+      "path": "/mnt/external/demosaic/models/v114-final20000.pt",
+      "sha256": "2285c84b7015bcf122e71b890723f80aaf216bde849256c77f070c2493f9d2d2",
+      "step": 20000
+    },
+    "reference_contrasts": "V114 reference also differs in extra training, seed and the common mask correction; only V117/V118 isolate the band coefficient"
+  },
+  "rejected_recipe_changes": [
+    "lr",
+    "fine-data",
+    "band-weight",
+    "budget",
+    "parent"
+  ],
+  "spawn_import_guard_passed": true,
+  "frozen_process_import_probe": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V117-V118-band-review-preparation-v1/frozen-import-probe-v1.json",
+    "sha256": "741f9357f2d2f8cda84ec976c5bd959fa49aa85cf57bf94fc8aa4f4baeb71bdd"
+  },
+  "new_neural_forwards": 0,
+  "new_encoder_forwards": 0,
+  "optimizer_updates": 0,
+  "new_noise_observations": 0,
+  "RAW_decodes": 0,
+  "Torch_imported": false,
+  "scope": "Wait on the exact original band-loss CPU audit, then compare all14190 paired scores for V117/V118 and both versus retained F64 V114. Resolve checkpoint hashes only from completed original20k receipts. Same-input/target/transform matching, native160 GT triplets/material boards and all six full-frame GFX regions, plus all427 GT-only local-detail strata per contrast. Repeated endpoints/noise/CFA/block cases across contrasts add no independent sources. Zero neural/encoder calls, updates, noise or RAW decodes. Actual viewing/interpretation and model selection remain separate; no automatic retry or promotion."
+}

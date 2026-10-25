@@ -166,6 +166,15 @@ The older four-source/eight-view pilot remains separate: policy, targets,
 sampling and source support differ. No noise-debiasing, training-seed interval,
 four-pixel carrier recovery or real-camera superiority follows from this audit.
 
+The active [V117/V118 loss pair](band-loss-training.md) has a separate
+[queued saved-output review](results/band-loss-matched-review-queued-v1.json).
+It repeats these GT-only definitions for the isolated V117/V118 contrast and
+for both endpoints against retained V114. Each must cover all427 photos,
+three priors/four CFAs and5124 paired cases, with actual input/supervision
+matching. The same96,075 GT blocks are reused across contrasts; this does not
+multiply independent sources. No new inference, noise generation or RAW decode
+is added. Results remain pending while the original training runs.
+
 A separate [unequal-coverage fixture](results/local-detail-source-weighting-proof-v1.json)
 gives two sources225 versus15 eligible blocks, with candidate gains.75 and.25.
 The equal-source result is.5; the energy/block-pooled result is.71875. Both

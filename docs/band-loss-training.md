@@ -86,8 +86,43 @@ independent CPU audit is queued too, preparing at least two native160px
 noisy/restored/exact-GT triplets per model. Six standing GFX regions include
 foliage/fence, plus complete102MP outputs. ISO100 remains an approximate
 independent reference, not GT; scene/siblings remain outside training.
-The final comparison must isolate V118 versus V117 and also show both against
-retained V114 outputs. No control neural inference is repeated for reporting.
+A separate [matched review is now queued](results/band-loss-matched-review-queued-v1.json)
+after the exact original audit owner. It resolves checkpoint hashes from the
+successful original20k receipts, then prepares three complete contrasts:
+
+* V118 versus V117 isolates the band-loss coefficient.
+* V117 versus retained V114 measures the zero-band continuation with the common
+  mask correction and new training seed.
+* V118 versus retained V114 shows the resulting quality relative to the parent.
+
+Each pairs all14,190 numerical observations, requiring identical noisy-input,
+target/mask/WB/matrix fingerprints and scoring protocols. The V114 reference
+uses its independently rebuilt F64 rows; the audit's historical V112 summaries
+remain explicitly separate. Matched material boards, two native GT triplets
+per candidate and all six full-frame GFX regions accompany each contrast.
+No control neural inference is repeated for reporting.
+
+```mermaid
+flowchart LR
+    T["V117 control, then V118 band"] --> E["Eight stages, both checkpoints"]
+    E --> A["Independent NumPy64 audit"]
+    A --> R["Three contrasts, local detail, RGB16 checks"]
+    R --> H["Actual native review and model choice"]
+```
+
+The CPU job also applies the [full-photo local definitions](local-material-detail.md#full-photo-follow-up)
+to all427 photos/5124 source-noise-CFA cases per contrast. It reuses the same
+96,075 GT blocks; three contrasts do not add independent material coverage.
+All contrast strata, phase/carrier response, residuals and flat-color tails
+remain available alongside primary PSNR. The four new TIFFs get hash/type/shape
+checks, with921,600 linear-RGB16 values in twelve native ROIs checked against
+retained FP32 quantization. The already verified V114 exports are reused.
+
+The frozen CPU controller imports with no Torch and rejects unintended changes
+to LR, fine data, band weight, budget and parent. It declares8GiB available RAM,
+4GiB output headroom, a1200s total analysis bound and600s per local audit.
+Actual native viewing/interpretation follows; no model is selected automatically.
+Original training/evaluation/audit sources, owners and budgets stay unchanged.
 
 Artifacts stay in the frozen internal workspace, with128GiB free required at
 phase starts and96GiB at runtime. Cached external inputs retain208GiB free;
