@@ -10,8 +10,8 @@ to test fine weak sources and reviewed reference masks against matched V114;
 eight-pixel carrier gain rises, but broad weak-material gain is unchanged and ADC tails worsen.
 The [V117/V118 loss pair](band-loss-training.md) now tests normalized-band
 supervision from V114 with common corrected data and matched20k schedules.
-V117's control has completed all 20,000 updates; V118 is training before full
-quality review.
+Both original runs have completed all20,000 updates. Full quality collection
+has started; independent metrics and native review are pending.
 The [current V114 eight-view pilot](v114-eight-view.md) improves all12 fixed
 material cases and both selected camera crops, with a small selected color-bias
 tradeoff; independent/native review is complete and full panels/frame remain

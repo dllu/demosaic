@@ -173,7 +173,8 @@ for both endpoints against retained V114. Each must cover all427 photos,
 three priors/four CFAs and5124 paired cases, with actual input/supervision
 matching. The same96,075 GT blocks are reused across contrasts; this does not
 multiply independent sources. No new inference, noise generation or RAW decode
-is added. Results remain pending while the original training runs.
+is added by the local audit. Both original20k runs are complete; results remain
+pending while full-quality collection and its downstream audits proceed.
 
 A separate [unequal-coverage fixture](results/local-detail-source-weighting-proof-v1.json)
 gives two sources225 versus15 eligible blocks, with candidate gains.75 and.25.

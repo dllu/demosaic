@@ -81,8 +81,9 @@ general balance; the new gains and weaknesses remain documented. Quality precede
 
 The [V117/V118 loss pair](band-loss-training.md) now starts directly from V114:
 weight0 versus.0003 normalized-band supervision, with common corrected data,
-legacy weak sources, seed64 and20k budgets. V117's control has completed all
-20,000 updates; V118 is running and full quality/independent review is queued.
+legacy weak sources, seed64 and20k budgets. Both original runs have completed all
+20,000 updates. Full quality collection has started; independent/native review
+is pending.
 This changes the training objective while retaining the current architectural baseline.
 
 [PSNR history](performance-history.md) includes all three completed endpoints.

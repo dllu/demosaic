@@ -10,8 +10,8 @@ Fine high-noise and real foliage/neon detail remain weak. Quality precedes speed
 The active [V117/V118 band-loss pair](band-loss-training.md) starts from V114,
 keeps the same corrected data and native256/B16 schedule, and changes only
 the normalized-band weight0/.0003. Both eight-update CPU/CUDA checks pass;
-V117's original20k control is complete and V118 is training. Full numerical,
-native/GFX and independent review are queued; no trained-quality claim yet.
+both original20k runs are complete. Full numerical collection has started;
+native/GFX and independent review are pending, with no trained-quality claim yet.
 
 ## Completed loss-scale comparison and next training
 

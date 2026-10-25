@@ -207,7 +207,7 @@ Both start from V114 with the same corrected data and seed64; only the band
 coefficient0/.0003 differs. Four actual eight-update checks pass at CPU64/B1/FP32
 and CUDA256/B16/BF16. Initial predictions/physical inputs agree, all optimizer
 states remain finite, default-off does no band work and paired RAW omits the term.
-V117's original20k control is complete; the fresh V118 production arm is running.
+Both original20k production runs are complete; full quality collection has started.
 The [completed V116 trial](v116-quality.md) separately tests data coverage and
 reviewed masks. Its analytic gain did not transfer to broader weak material.
 This diagnosis does not show how network gradients, generalization, flat-field

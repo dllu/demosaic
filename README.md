@@ -22,8 +22,9 @@ before final downsampling remain in use. [Data review](docs/incoming-commons-qua
 [Training pipeline](docs/training-pipeline.md) · [Historical diary](diary/index.md).
 
 [V117/V118 are testing normalized-band supervision](docs/band-loss-training.md)
-from V114 with matched data and20k budgets. V117's control has completed all
-20,000 updates; V118 is training. Full quality and native review remain queued.
+from V114 with matched data and20k budgets. Both original runs have completed
+20,000 updates. Full quality collection has started; independent/native review
+is pending.
 
 The optional [V114 eight-view comparison](docs/v114-eight-view.md) improves all
 twelve fixed material cases and both selected adverse camera crops. Mean gains

@@ -1,13 +1,14 @@
 # V114-parent band-loss training
 
-**V117's original 20,000-update control is complete; V118 is running from the
-shared V114 parent. Both passed their discarded CPU and native256 CUDA checks.**
+**Both original 20,000-update runs are complete from the shared V114 parent.
+Full quality collection has started; independent/native review is pending.**
 This tests whether explicit weak-band supervision improves natural detail after the
 [V116 data-only trial](v116-quality.md) left broad weak-material gain unchanged.
 V114 remains the current general model; trained quality for this pair is pending.
 
 [Execution/checkpoint/input receipts](results/v114-band-loss-training-started-v1.json) ·
 [V117 completion and V118 startup audit](results/v117-training-complete-v1.json) ·
+[Both full-budget completion receipts](results/v117-v118-training-complete-v1.json) ·
 [V117 recipe](../configs/quality-v114-band-control-v117.yaml) ·
 [V118 recipe](../configs/quality-v114-band-normalized-v118.yaml).
 
@@ -63,7 +64,7 @@ V117's first 4,194,304 FP32 prediction/auxiliary values match its own CUDA check
 exactly; its first loss matches too. The original startup receipt retains its
 775-step observed prefix, with finite loss/gradient-norm/LR.
 
-The [completion audit](results/v117-training-complete-v1.json) now binds V117's
+The [earlier completion audit](results/v117-training-complete-v1.json) binds V117's
 original final checkpoint
 `f69452432a852ac4c5ffdcbf7d6fe6837a3ab46adbc8a7fdae073111220b8ab0`.
 Its actual worker records **20,000 optimizer updates**, all 89 AdamW states at
@@ -77,8 +78,21 @@ V118 starts freshly from the same V114 EMA. Its first 4,194,304 saved FP32 value
 and first loss match V117 exactly. The immutable startup audit covers 37 logged
 rows through step 900: input hashes, domains, steps and learning rates match the
 control; unpaired band terms are finite and paired batches omit them. This
-checks the observed prefix, not every unlogged input or a completed V118 run.
-The audit uses saved arrays/logs without neural inference or checkpoint loading.
+checks that observed prefix; its bytes remain preserved. The new
+[full-budget completion summary](results/v117-v118-training-complete-v1.json)
+extends the comparison to all808 sampled input records and801 logged
+input/domain/step/LR records, which match exactly across arms. Both have20
+finite validation monitors. V118's original worker also verifies all89 AdamW
+states at20,000, finite model/EMA/optimizer tensors, exact V114 initialization
+and the unchanged official frozen encoder. The CPU publication verifies both
+checkpoint hashes and all72 frozen files, adopting the worker's tensor checks
+without loading either model. The first-output tensor audit is reused.
+
+V118 checkpoint SHA256:
+`5307c1789a9d29343de9e6c1ee35fd31f7551ef9b2b40bbf7e7cbf28cdaee751`.
+The original controller completed at2026-10-25 08:53:53PDT and exited; the full
+quality evaluator then started its photo stage. These are training-completion
+checks, without a trained-quality result or a changed model selection.
 
 The physical source archive is byte-identical to completed V116:
 `707abdcea6f3e14a48a7d6ebc7f1769e3da8e96d8959d856fcfc32961787075b`.
@@ -89,15 +103,15 @@ matched inputs; the observer avoids hashing every logged batch twice.
 
 V117's actual 20k allocation is 5,013 paired / 4,955 native / 10,032 Commons batches,
 with 14,987 synthetic/native loss calls and zero band-loss evaluations. This
-matches the frozen seed64 routing. V118 has the same prospective allocation
-and plans 14,987 band evaluations; its full-run counts remain pending. Unlogged
-production input tensors are not independently checked in full. Failures
+matches the frozen seed64 routing. V118's completed worker records the same
+actual allocation and14,987 band evaluations. Unlogged production input tensors
+are not independently checked in full. Failures
 preserve evidence and stop without automatic retry or a budget extension.
 
 ## Full quality review and resource limits
 
-The exact training owner has a live evaluator waiting downstream for both
-checkpoints. It declares **9,172 new model/encoder calls**, **28,380 numerical
+The original downstream evaluator is now running the full-photo stage on the
+two completed checkpoints. It declares **9,172 new model/encoder calls**, **28,380 numerical
 observations**, all eight stages and retained FP32 predictions/targets. The
 independent CPU audit is queued too, preparing at least two native160px
 noisy/restored/exact-GT triplets per model. Six standing GFX regions include
