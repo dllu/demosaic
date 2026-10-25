@@ -24,8 +24,9 @@ before final downsampling remain in use. [Data review](docs/incoming-commons-qua
 Earlier useful modes remain available: [V104 eight views](docs/dihedral-quality.md)
 reaches37.044dB on the full photo panel, with a worse ADC color tail;
 [V112 eight views](docs/v112-eight-view.md) improves twelve fixed material cases
-but has no complete-panel/frame measurement. V114 eight-view quality is
-unmeasured. The [V104 ADC sites option](docs/adc-consistency.md) and
+but has no complete-panel/frame measurement. A [fixed24 V114 eight-view pilot
+is running](docs/results/v114-dihedral8-pilot-running-v1.json); its quality review
+and complete-panel/frame measurements remain pending. The [V104 ADC sites option](docs/adc-consistency.md) and
 [camera-outlier study](docs/camera-outliers.md) retain their explicit weights
 and measured tradeoffs.
 

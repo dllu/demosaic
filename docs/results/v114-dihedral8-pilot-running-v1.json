@@ -1,0 +1,95 @@
+{
+  "status": "running-fixed24-V114-eight-view-CPU-pilot",
+  "recorded_local": "2026-10-24T18:28:01.264331-07:00",
+  "checkpoint": {
+    "path": "/mnt/external/demosaic/models/v114-final20000.pt",
+    "sha256": "2285c84b7015bcf122e71b890723f80aaf216bde849256c77f070c2493f9d2d2"
+  },
+  "self_ensemble": "dihedral8",
+  "execution_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-dihedral-pilot-CPU-v1/plan-v1.json",
+    "sha256": "dd1b43c9a9f54668a8601c07aacfe7cfb6c073653c222d8b5c39fac91cf2a295"
+  },
+  "launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-dihedral-pilot-CPU-v1/launch-v1.json",
+    "sha256": "d76e3887b6dc95f510c8cd7e0abd34dc6ee6fbbf5e8d84b4a273be8af158e854"
+  },
+  "worker": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-dihedral-pilot-CPU-v1/worker-v1.py",
+    "sha256": "952f50e5eeff7e05635bb520df30c64881086975879d6d9a9529e7e5289a2077"
+  },
+  "observations": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-dihedral-pilot-CPU-v1/observations-v1.json",
+    "sha256": "e8d7dd49b2f4537c560e3c81cc9efde16ded0483e50f152bfc3f31421ae8c843"
+  },
+  "previous_V112_result": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V112-dihedral-pilot-CPU-v2/result-v1.json",
+    "sha256": "66627dec4f11bc8bdf20bcd7a9ed5705d0f5f5f6730092dcbbbc386f99ac7873"
+  },
+  "observed_pilot": {
+    "owner": {
+      "pid": 1659833,
+      "created": 1792891125.11
+    },
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-dihedral-pilot-CPU-v1/plan-v1.json",
+      "sha256": "dd1b43c9a9f54668a8601c07aacfe7cfb6c073653c222d8b5c39fac91cf2a295"
+    },
+    "status": "running-fixed-V114-eight-view-CPU-pilot",
+    "counts": {
+      "model": 134,
+      "encoder": 134
+    },
+    "updated_unix": 1792891670.6662037,
+    "observation": 16,
+    "kind": "gfx",
+    "view": 6
+  },
+  "independent_analysis_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-dihedral-pilot-CPU-v1/analysis-plan-v1.json",
+    "sha256": "f8e000bb74bb70cf9bd5b249a9335d2498467c27a94dcb4ccaa7d1d7f8f32069"
+  },
+  "independent_analysis_launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-dihedral-pilot-CPU-v1/analysis-launch-v1.json",
+    "sha256": "9e5882f4cec2bcf00da04e95b785dff5085f03591ac6d4c15d05e3c34484f720"
+  },
+  "observed_analysis_queue": {
+    "owner": {
+      "pid": 1660813,
+      "created": 1792891351.91
+    },
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-dihedral-pilot-CPU-v1/analysis-plan-v1.json",
+      "sha256": "f8e000bb74bb70cf9bd5b249a9335d2498467c27a94dcb4ccaa7d1d7f8f32069"
+    },
+    "status": "waiting-for-exact-live-V114-pilot-exit",
+    "updated_unix": 1792891352.0114865,
+    "dependency": {
+      "pid": 1659833,
+      "created": 1792891125.11
+    }
+  },
+  "planned_new_neural_forwards": 192,
+  "planned_new_encoder_forwards": 192,
+  "fixed_observations": 24,
+  "observation_kinds": {
+    "photo": 12,
+    "camera": 2,
+    "GFX512_contexts": 6,
+    "analytic_colors": 4
+  },
+  "copied_frozen_source_files": 71,
+  "all_original_V112_source_bytes_preserved": true,
+  "old_V112_identity_assertions": "Moved to historical provenance; changed V114 weights are never required to reproduce V112 outputs. Identity is a component of each new eight-view mean, with no separate control-only inference.",
+  "controls": "Exact old V112-eight-view, V104-eight-view and stronger RawNIND predictions; no reference model is rerun.",
+  "planned_new_noise_observations": 0,
+  "planned_RAW_decodes": 0,
+  "optimizer_updates": 0,
+  "CUDA_VISIBLE_DEVICES": "",
+  "CPU_threads": 2,
+  "minimum_start_available_RAM_GiB": 64,
+  "runtime_minimum_available_RAM_GiB": 48,
+  "original_V116_jobs_changed": false,
+  "quality_status": "Pilot and independent/native review pending; no performance improvement claim, full427/all-camera/all1176-color/full102MP claim or default change. At least2 native noisy/restored/exact-GT triplets and six GFX regions required for a completed quality report.",
+  "scope": "New V114 dihedral8 fixed24 CPU quality pilot, reusing exactly the previously evaluated V112 inputs:12 material,2 adverse camera,6 standing GFX512 contexts and4 prior color cases. All older model outputs remain immutable controls. V112 identity-score assertions are retained as historical provenance, never asserted for changed V114 weights. Public eight-view physics/source exact to prior executed snapshot; worker changes only model labels and RAM reserves. New192 root/encoder calls total, with each identity a component of the eight-view mean; zero separate identity-only inference, noise generation, RAW decoding, interpolation, training or CUDA. CPU2/nice10/IEEE FP32;64GiB start and48GiB runtime RAM,128/96GiB internal and208GiB external reserves. Original V116 training/evaluation/audit/comparison owners, sources and budgets unchanged. Stop/preserve failures without automatic retries. Independent mean/metric/native review and at least2 native noisy/restored/exact-GT triplets required before an improvement report; real ISO100/AHD references approximate, never GT. Fixed pilot only, no full427/full-frame/timing or automatic recommendation claim."
+}

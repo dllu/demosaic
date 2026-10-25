@@ -19,6 +19,13 @@ mean, with3/5 scenes rising. Tiny has slightly higher photo PSNR and lower color
 bias. Both improve over V112. This selects a useful general balance without
 hiding Small's gains or applying an old study-specific promotion threshold.
 
+A [V114 eight-view CPU pilot](results/v114-dihedral8-pilot-running-v1.json) is
+running on the same24 saved material/camera/GFX/color inputs as the completed
+V112 pilot. Its192 new model/encoder calls include each identity view as part
+of the mean; all older reference outputs are reused. Independent saved-output
+and native review follow. Quality and complete panels/frame remain unmeasured;
+the original V116 training/review chain continues unchanged.
+
 ## Run the current model
 
 [Explicit selection](../configs/current-model.json):

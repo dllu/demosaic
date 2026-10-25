@@ -1,5 +1,10 @@
 # Optional eight-view restoration
 
+The [current V114 fixed24 pilot](results/v114-dihedral8-pilot-running-v1.json)
+is running with exact saved inputs and reused V112/V104/RawNIND controls. Its
+independent metrics and native review are pending. The completed measurements
+below retain their explicit older checkpoints.
+
 **V112 weights also benefit from eight views on the fixed material
 panel:** all twelve cases improve, with mean+.54335/.27285/.07936dB for
 ADC/ISO100/ISO12800. Both selected adverse camera crops and four selected color
