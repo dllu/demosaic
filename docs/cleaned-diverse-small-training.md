@@ -76,3 +76,9 @@ and all six GFX regions, including foliage and chain-link fence. It retains
 identical coordinates and display transforms without resizing pixels. GFX's
 separate ISO100 exposure is an approximate reference, not GT. Actual viewing,
 interpretation and current documentation updates follow the completed results.
+
+A supplementary [native-camera development comparison](native-camera-development.md)
+is queued after that original job chain. It compares the final V119 checkpoint
+with V114/V115/V117 and RawNIND on 240 new, shared stored observations from
+11 held-out camera captures. Low-noise reference estimates retain their own
+scope and do not replace the primary panels or real GFX review.

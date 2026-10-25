@@ -1,12 +1,14 @@
-# Native camera development inputs
+# Native camera development comparison
 
-A supplementary development set now has **20 fixed256px regions from11 CC0
-captures**, with240 shared synthetic-noise observations. It starts from
+A supplementary development set has **20 fixed 256px regions from 11 CC0
+captures**, with 240 shared synthetic-noise observations. It starts from
 phase-aligned, low-ISO camera RGB rather than processed Commons RGB. Source WB
-and color matrices remain attached to each region. **Prediction collection has
-not launched; this is prepared data without a model-quality result.**
+and color matrices remain attached to each region. **The five-method comparison
+is queued behind V119's original job chain; predictions and quality results
+are pending.**
 [Selection and protocol](../configs/native-camera-development-v1.json) ·
-[Preparation and actual readback evidence](results/native-camera-development-inputs-v1.json).
+[Preparation and actual readback evidence](results/native-camera-development-inputs-v1.json) ·
+[Queued comparison and preflight](results/native-camera-development-queue-v1.json).
 
 The source references are **low-noise estimates, not exact noiseless GT**.
 They retain reduced source noise and optical blur. Future scores describe
@@ -121,8 +123,43 @@ Sources: per-file CC0 grants from the [RAW source catalogue](https://raw.pixls.u
 with original URLs and metadata checksums in the selection. Modified by
 phase-aligned binning, cropping and the shared display transform.
 
-The next comparison can evaluate V119's final endpoint alongside useful
-V114/V115/V117 options and the stronger released RawNIND reference after the
-original review releases GPU ownership. These would be first predictions on
-the new inputs. Useful completed progress continues to update current guides
-as its full results and native review become available.
+## Queued comparison
+
+The [queue](../scripts/queue_native_camera_development.py) waits for the original
+V119 training, all eight endpoint stages, independent CPU audit and three
+saved-output contrasts to finish and release their exact process owners. It
+then resolves the completed, immutable final 20,000-step V119 checkpoint from
+those receipts. It does not read the live intermediate checkpoint.
+
+The useful V114/V115/V117 options and the released RawNIND preupsample model
+share all 240 stored observations with V119. These are **first predictions on
+new inputs**: 1,200 declared model calls, including 960 frozen DINO encoder
+calls and 240 RawNIND network calls. Existing controls on the full photo/camera
+panels continue to reuse saved predictions. RawNIND uses the existing CFA-channel
+gain adapter without target fitting, input clipping or additional input scaling.
+
+The [collector and CPU analysis](../scripts/evaluate_native_camera_development.py)
+retain native FP32 predictions, exact reference arrays, actual input fingerprints,
+checkpoint/encoder identity and call counts. Camera RGB PSNR, rendered sRGB PSNR,
+chroma and gradient errors average CFAs/regions within capture before giving each
+capture equal weight. Matched V119 comparisons include capture bootstrap intervals;
+they do not capture training-seed uncertainty or unknown place relationships.
+Reference-only local DCT bands describe low-contrast reference recovery and may
+include residual reference noise.
+
+Ten unchanged 160px noisy/denoised/reference triplets cover grass/root and
+weathered wood for all five methods. Twelve native comparison boards show all
+20 regions at each noise condition, with identical coordinates, WB/matrix and
+exposure across methods. No pixels are resized. Actual native viewing and
+interpretation follow these outputs; no model recommendation changes merely
+because a queued job finishes.
+
+The frozen preflight passes closed-form camera/sRGB PSNR and unequal-coverage
+source weighting. It rejects a live V119 endpoint, changed process identity or
+changed plan before resolving any checkpoint. Source compilation and CPU imports
+pass without Torch; no new model inference, noise generation or RAW decoding has
+occurred at the recorded launch. The controller is idle while training continues.
+The bounded worker keeps the existing 48/24GiB available-RAM floors, 24GiB CUDA
+quota and 128/96GiB internal disk floors, preserving failures without automatic
+retry. Useful completed progress continues to update current guides as full
+results and native review become available.
