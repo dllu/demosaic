@@ -1,5 +1,9 @@
 # Training data work, sampling order and batch size
 
+Optional [per-source loss diagnostics](source-loss-diagnostics.md) trace future
+high-loss Commons examples to their actual source and crop without an additional
+neural forward. They are disabled by default; V119's frozen run is unchanged.
+
 The three requested changes are implemented and measured: geometry/PSF runs
 between4× binning and the final2× reduction; only the selected domain is loaded;
 and repeated throughput sweeps retain batch16. The matched geometry comparison

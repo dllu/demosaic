@@ -42,7 +42,7 @@ def optimizer_batches(selected, groups):
         raise ValueError("Incomplete optimizer batch")
 
 
-def backward_groups(model, selected, prepare, config, *, fingerprint=None):
+def backward_groups(model, selected, prepare, config, *, fingerprint=None, observer=None):
     """Accumulate equal group losses and clip once; caller steps the optimizer.
 
     `prepare` receives original data step/domain/source values. Forward chunks
@@ -111,6 +111,9 @@ def backward_groups(model, selected, prepare, config, *, fingerprint=None):
                     )
                 if not torch.isfinite(value):
                     raise RuntimeError("Nonfinite group loss; last checkpoint retained")
+                if observer is not None:
+                    data_step, _, clean = selection[index]
+                    observer(data_step, domain, clean, prediction[region], auxiliary[region], batch)
                 chunk_losses.append(value)
                 losses.append(value.detach())
                 for name, term in parts.items():

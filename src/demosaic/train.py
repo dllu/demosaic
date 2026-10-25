@@ -35,6 +35,7 @@ from .precision import amp_context, ieee_fp32
 from .raw_clean import RawCleanDataset, degrade_raw_clean, raw_clean_step
 from .reviewed_rois import require_resume_rois, validate_roi_fraction
 from .safety import writable_path
+from .source_loss import SourceLossTrace, validate_source_loss_every
 from .training_context import TrainingContext, require_resume_context
 
 
@@ -411,6 +412,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
 
 
 def _train(config, *, resume=None, initialize=None, stop_after=None):
+    source_loss_every = validate_source_loss_every(config.get("source_loss_every", 0))
     late_only = validate_late_rgb_only(config)
     training_context = TrainingContext.from_config(config)
     objective = validate_reconstruction_objective(
@@ -872,6 +874,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
         photo_sampling_reference_manifest=config.get("photo_sampling_reference_manifest"),
         photo_sampling_reference_sha256=config.get("photo_sampling_reference_sha256"),
         records=records,
+        trace_sources=source_loss_every > 0,
     )
     workers = config.get("workers", 2)
     worker_start_method = config.get("worker_start_method")
@@ -976,6 +979,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
     selected = selected_batches(
         loaders, first_data, last_data, seed, paired_fraction, raw_clean_fraction
     )
+    source_trace = SourceLossTrace(run / "source-loss.jsonl", config) if source_loss_every else None
     for step, selection in optimizer_batches(selected, groups):
         data_step, domain, clean = selection[0]
         if step == first + 1 or step % 50 == 0:
@@ -995,6 +999,11 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
         optimizer.zero_grad(set_to_none=True)
         log_step = step == first + 1 or step % config.get("log_every", 25) == 0
         normalization_mask = None
+        source_observer = (
+            partial(source_trace, step=step)
+            if source_trace is not None and (step == first + 1 or step % source_loss_every == 0)
+            else None
+        )
         if groups > 1:
             loss, terms, grad_norm, observations = backward_groups(
                 model,
@@ -1004,6 +1013,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
                 fingerprint=batch_fingerprint
                 if log_step and config.get("trace_observations", False)
                 else None,
+                observer=source_observer,
             )
             fingerprint = (
                 hashlib.sha256(json.dumps(observations, sort_keys=True).encode()).hexdigest()
@@ -1066,6 +1076,8 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
                     )
             if not torch.isfinite(loss):
                 raise RuntimeError(f"Nonfinite loss at step {step}; last checkpoint retained")
+            if source_observer is not None:
+                source_observer(data_step, domain, clean, prediction, auxiliary, loss_batch)
             with (
                 ieee_fp32()
                 if precision == "float32"

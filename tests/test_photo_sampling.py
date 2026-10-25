@@ -112,6 +112,56 @@ def test_no_removed_sources_is_exact_for_all_procedural_and_photographic_draws(c
         assert torch.equal(first[index]["rgb"], second[index]["rgb"])
 
 
+def test_optional_source_trace_matches_actual_loads_without_changing_draws(corpus, monkeypatch):
+    reference, active, _ = corpus
+    settings = {**options(), "fine_weak_texture_fraction": 0.05,
+                "photo_sampling_reference_manifest": reference}
+    plain = CleanDataset(active, **settings)
+    traced = CleanDataset(active, **settings, trace_sources=True)
+    actual_loads = []
+    load = np.load
+
+    def observe(path, *args, **kwargs):
+        actual_loads.append(str(Path(path).absolute()))
+        return load(path, *args, **kwargs)
+
+    monkeypatch.setattr("demosaic.data.np.load", observe)
+    python_rng, torch_rng = random.getstate(), torch.get_rng_state().clone()
+    kinds = set()
+    for index in range(80):
+        control = plain[index]
+        assert set(control) == {"rgb", "index"}
+        actual_loads.clear()
+        candidate = traced[index]
+        assert torch.equal(candidate["rgb"], control["rgb"])
+        source = json.loads(candidate["source"])
+        kinds.add(source["kind"])
+        assert source["draw_index"] == index and source["draw_seed"] == 64 + index
+        if source["kind"] == "photographic":
+            assert actual_loads == [source["cache"]]
+            assert source["source_id"] in {"a", "c"}
+            assert source["cache_sha256"] == digest(source["cache"])
+            x, y, width, height = source["cache_xywh"]
+            assert 0 <= x <= 160 - width and 0 <= y <= 128 - height
+        else:
+            assert not actual_loads
+    assert kinds == {"photographic", "smooth-field", "procedural", "weak-texture", "fine-weak-texture"}
+    assert random.getstate() == python_rng and torch.equal(torch.get_rng_state(), torch_rng)
+
+    region = SimpleNamespace(record=traced.rows[0], xywh=(16, 16, 96, 96))
+    monkeypatch.setattr(traced, "reviewed_roi_for_index", lambda _index: region)
+    for index in range(80):
+        source = json.loads(traced[index]["source"])
+        if source["kind"] == "photographic":
+            assert source["reviewed_roi_xywh"] == [16, 16, 96, 96]
+            assert source["source_id"] == region.record["id"]
+            x, y, width, height = source["cache_xywh"]
+            assert 16 <= x <= 112 - width and 16 <= y <= 112 - height
+            break
+    else:
+        raise AssertionError("Expected a photographic draw")
+
+
 def test_roi_override_does_not_retry_a_nominal_excluded_source_or_change_geometry(
     corpus, monkeypatch
 ):

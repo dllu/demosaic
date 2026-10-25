@@ -124,7 +124,11 @@ class CleanDataset(Dataset):
         fine_weak_texture_fraction=0.0,
         photo_sampling_reference_manifest=None,
         photo_sampling_reference_sha256=None,
+        trace_sources=False,
     ):
+        if type(trace_sources) is not bool:
+            raise ValueError("Source tracing must be a boolean")
+        self.trace_sources = trace_sources
         self.reviewed_roi_fraction = validate_roi_fraction(reviewed_roi_fraction)
         if self.reviewed_roi_fraction and (
             split != "train" or augmentation_downsample != 2 or reviewed_roi_catalogue is None
@@ -216,14 +220,21 @@ class CleanDataset(Dataset):
         size = self.size * self.augmentation_downsample
         draw = rng.random()
         photographic = False
+        provenance = {"kind": "procedural"} if self.trace_sources else None
         if draw < self.flat_fraction:
+            if provenance is not None:
+                provenance["kind"] = "smooth-field"
             rgb = smooth_scene(size, rng, chroma_stops=self.flat_chroma_stops)
         elif draw < self.flat_fraction + self.synthetic_fraction:
             if draw < self.flat_fraction + self.weak_texture_fraction:
                 if draw < self.flat_fraction + self.fine_weak_texture_fraction:
+                    if provenance is not None:
+                        provenance["kind"] = "fine-weak-texture"
                     rgb, _ = weak_texture(size, rng, pixel_scale=self.augmentation_downsample,
                                           frequency_profile="fine-v1")
                 else:
+                    if provenance is not None:
+                        provenance["kind"] = "weak-texture"
                     rgb, _ = weak_texture(size, rng, pixel_scale=self.augmentation_downsample)
             else:
                 rgb = synthetic(size, rng)
@@ -252,6 +263,15 @@ class CleanDataset(Dataset):
             crop_w = size if self.native_crop else rng.randint(size, min(w, int(size * 1.4)))
             y, x = rng.randrange(h - crop_h + 1), rng.randrange(w - crop_w + 1)
             y, x = y + origin_y, x + origin_x
+            if provenance is not None:
+                provenance.update(
+                    kind="photographic",
+                    source_id=record["id"],
+                    cache=str((self.manifest.parent / record["cache"]).absolute()),
+                    cache_sha256=record.get("cache_sha256"),
+                    cache_xywh=[x, y, crop_w, crop_h],
+                    reviewed_roi_xywh=list(region.xywh) if region is not None else None,
+                )
             rgb = (
                 torch.from_numpy(
                     array[y : y + crop_h, x : x + crop_w].copy().astype(np.float32)
@@ -279,7 +299,19 @@ class CleanDataset(Dataset):
             and rng.random() < self.photographic_low_contrast_fraction
         ):
             rgb = attenuate_photographic_contrast(rgb, rng)
-        return {"rgb": rgb.contiguous(), "index": index}
+            if provenance is not None:
+                provenance["photographic_contrast_attenuated"] = True
+        result = {"rgb": rgb.contiguous(), "index": index}
+        if provenance is not None:
+            provenance.update(
+                draw_index=int(index),
+                draw_seed=self.seed + int(index),
+                manifest=str(self.manifest.absolute()),
+                augmentation_downsample=self.augmentation_downsample,
+            )
+            # A JSON string collates uniformly across procedural/photo/ROI draws.
+            result["source"] = json.dumps(provenance, sort_keys=True)
+        return result
 
 
 def augment_before_downsample(rgb, size, rng, *, optical_blur_probability=0.25):

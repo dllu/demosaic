@@ -378,3 +378,51 @@ def test_legacy_default_update_matches_archived_training_loop(tmp_path):
         for name, value in state.items():
             assert torch.equal(value, new["optimizer"]["state"][index][name])
     assert torch.equal(old["torch_rng"], new["torch_rng"])
+
+
+@pytest.mark.parametrize("groups,forward", [(1, 1), (4, 2)])
+def test_optional_source_loss_logging_preserves_actual_training_and_resume(tmp_path, groups, forward):
+    commons, native, pairs = manifests(tmp_path)
+    recipe = {
+        **options(forward), "optimizer_batch_groups": groups,
+        "manifest": str(commons), "raw_clean_manifest": str(native),
+        "paired_manifest": str(pairs), "paired_fraction": .25, "raw_clean_fraction": .25,
+        "device": "cpu", "steps": 3, "seed": 51, "batch_size": 2, "patch_size": 32,
+        "workers": 0, "raw_clean_workers": 0, "paired_workers": 0, "cpu_threads": 2,
+        "warmup_steps": 1, "checkpoint_every": 3, "log_every": 1,
+        "val_batches": 1, "min_available_gb": 0, "trace_observations": True,
+        "camera_supervision": "sensor-valid-v1", "reconstruct_highlights": True,
+        "reconstruction_charbonnier_epsilon": .0003,
+        "model": {"restoration_backbone": "packed-isotropic", "camera_conditioning": True,
+                  "width": 4, "isotropic_groups": 1, "isotropic_blocks": 1,
+                  "isotropic_local_width": 4},
+    }
+    path = tmp_path / "recipe.yaml"
+    outputs = []
+    for name, interval in [("off", 0), ("on", 2), ("resumed", 2)]:
+        recipe.update(run=str(tmp_path/name), source_loss_every=interval)
+        path.write_text(yaml.safe_dump(recipe))
+        if name == "resumed":
+            partial_checkpoint = training.train(path, stop_after=1)
+            output = training.train(path, resume=partial_checkpoint)
+        else:
+            output = training.train(path)
+        outputs.append(output)
+    expected, *others = [torch.load(p, weights_only=True) for p in outputs]
+    for actual in others:
+        for kind in ["model", "ema"]:
+            assert all(torch.equal(value, actual[kind][name]) for name, value in expected[kind].items())
+        for index, state in expected["optimizer"]["state"].items():
+            assert all(torch.equal(value, actual["optimizer"]["state"][index][name]) for name, value in state.items())
+        assert torch.equal(expected["torch_rng"], actual["torch_rng"])
+        assert expected["python_rng"] == actual["python_rng"]
+    assert not (outputs[0].parent/"source-loss.jsonl").exists()
+    rows = [json.loads(line) for line in (outputs[1].parent/"source-loss.jsonl").read_text().splitlines()]
+    expected_draws = [
+        (step, data_step, (data_step-1)*2+example)
+        for step in (1, 2) for data_step in range((step-1)*groups+1, step*groups+1)
+        if training.training_domain(data_step, 51, .25, .25) == "commons"
+        for example in range(2)
+    ]
+    assert [(r["step"], r["data_step"], r["source"]["draw_index"]) for r in rows] == expected_draws
+    assert rows
