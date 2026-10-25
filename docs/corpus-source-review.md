@@ -1,11 +1,12 @@
 # Training-source quality review
 
 Source quality decisions support the current [V84-based quality experiments](quality-first-training.md).
-A [further 123-source review](next-source-tail-review.md) retains 108 hard sources
-and withholds 15 flat reproductions, preparing a separate 90,847-source
-next cohort. Every active source in each original global top256 loss list has
-now been inspected. The cumulative earlier-pool ledger covers 723 sources: 675
-retained and 48 outside training. The current V117/V118 pair keeps its frozen
+A [source-family follow-up](next-source-tail-review.md) inspects and withholds 45
+additional flat reproductions, preparing a separate 90,802-source next cohort.
+The preceding 123-source review retained 108 hard photos and withheld 15.
+Every active source in each original global top256 loss list has been inspected.
+The cumulative earlier-pool ledger covers 768 sources: 675 retained and 93
+outside training. The current V117/V118 pair keeps its frozen
 90,864-source cohort.
 
 **An earlier review covered 570 training sources: 539 retained and 31
@@ -21,7 +22,7 @@ neither changes completed V100/V101 inputs.
 | Completed V102/V103 | 88,477 | Same exact records/order | 31 |
 | Completed V104 20k | 90,872 | Same exact records/order | Prior31 plus four incoming quality withholds; duplicate/series/protected exclusions also apply |
 | Completed V111/V112/V114/V115/V116; active V117/V118 | 90,864 | Same exact records/order | Eight additional withholds relative to V104: three photo-quality cases and five atlas reproductions |
-| Prepared next cohort | 90,847 | Same exact records/order | Prior 30-source pass withheld two and retained 28; latest 123-source pass withholds 15 reproductions and retains 108 hard photos |
+| Prepared next cohort | 90,802 | Same exact records/order | Prior passes withheld 17 and retained 136; latest family pass inspects and withholds 44 banknote layouts and one drawing plate |
 
 [Current decisions, native examples, catalogue and reader checks](results/source-quality-detail-catalogue-v3.json).
 Originals, existing manifests and protected evaluation scenes remain read-only.
