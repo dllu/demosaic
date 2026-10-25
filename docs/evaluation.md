@@ -16,7 +16,11 @@ select the first two scene names, highest-ISO capture in each scene, middle
 prepared tile and its center. These choices precede model output inspection;
 all methods use the same regions. Receipts retain source identities, coordinates,
 model identity and display settings; summary JSON holds full checkpoint hashes.
-Synthetic GT is exact. Paired real RGB is an auxiliary calibrated AHD reference;
+Synthetic RGB-target reports use exact provided target pixels. The separate
+[native camera development inputs](native-camera-development.md) retain low-noise
+RAW-derived reference estimates, with source noise and optics still present;
+their240 shared input cases are prepared and model predictions remain unlaunched.
+Paired real RGB is an auxiliary calibrated AHD reference;
 primary real scores use measured clean CFA samples. Independently captured
 personal photos require an explicit qualitative-reference label; see
 [the GFX scene](gfx-qualitative.md). Keep representative native comparisons in
