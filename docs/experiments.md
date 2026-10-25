@@ -8,6 +8,9 @@ response, while Tiny has slightly higher photo PSNR and lower color bias.
 Fine foliage/neon and dark-camera mottling remain weak. [V116 has completed full review](v116-quality.md)
 to test fine weak sources and reviewed reference masks against matched V114;
 eight-pixel carrier gain rises, but broad weak-material gain is unchanged and ADC tails worsen.
+The [V117/V118 loss pair](band-loss-training.md) now tests normalized-band
+supervision from V114 with common corrected data and matched20k schedules.
+CPU/CUDA checks pass; V117's control is running before the V118 production arm.
 The [current V114 eight-view pilot](v114-eight-view.md) improves all12 fixed
 material cases and both selected camera crops, with a small selected color-bias
 tradeoff; independent/native review is complete and full panels/frame remain

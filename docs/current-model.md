@@ -73,6 +73,12 @@ slightly, broad weak-material gain is unchanged and ADC worst bias rises to
 239.15DN16. Native GFX foliage/neon softness remains. V114 retains the better
 general balance; the new gains and weaknesses remain documented. Quality precedes speed.
 
+The [V117/V118 loss pair](band-loss-training.md) now starts directly from V114:
+weight0 versus.0003 normalized-band supervision, with common corrected data,
+legacy weak sources, seed64 and20k budgets. Actual CPU/CUDA checks pass; V117's
+control is running and full quality/independent review is queued. This changes
+the training objective while retaining the current architectural baseline.
+
 [PSNR history](performance-history.md) includes all three completed endpoints.
 Earlier useful comparisons retain their exact checkpoints and receipts:
 [V112](v112-quality.md), [V104](v104-reviewed-corpus-quality.md),

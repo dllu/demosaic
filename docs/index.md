@@ -20,6 +20,10 @@ weak-carrier gain, but does not improve broad weak natural detail and worsens
 the ADC color tail. Complete metrics, native triplets, six GFX regions and RGB16
 checks are published. V114 retains the better overall balance.
 
+The [V117/V118 band-loss pair](band-loss-training.md) tests explicit band
+supervision from V114 with matched data/20k budgets. CPU/CUDA checks pass;
+V117's control is running, with complete evaluation and independent review queued.
+
 Earlier [V112 loss-scale results](v112-quality.md),
 [V104 eight-view full panels](dihedral-quality.md), [V112 eight-view pilot](v112-eight-view.md),
 [ADC sites option](adc-consistency.md) and [stronger RawNIND comparisons](rawnind-fullframe.md)

@@ -21,6 +21,10 @@ retains the better overall balance. The90,864-source corpus, zero optical blur a
 before final downsampling remain in use. [Data review](docs/incoming-commons-quality.md) ·
 [Training pipeline](docs/training-pipeline.md) · [Historical diary](diary/index.md).
 
+[V117/V118 are testing normalized-band supervision](docs/band-loss-training.md)
+from V114 with matched data and20k budgets. Both CPU/CUDA checks pass; V117's
+control is training and full quality review is queued. Trained quality is pending.
+
 The optional [V114 eight-view comparison](docs/v114-eight-view.md) improves all
 twelve fixed material cases and both selected adverse camera crops. Mean gains
 are+.558/.264/.079dB at ADC/ISO100/ISO12800, with slightly higher selected color

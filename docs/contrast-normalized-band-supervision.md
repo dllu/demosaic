@@ -4,7 +4,9 @@
 missing faint structure in these saved training examples.** At additional
 contrast ×.025, its median corrective slope rises 17–19% while total gradient
 norm rises 3–5%, relative to epsilon .0003. This is a loss diagnosis, with no
-new trained model or restored-quality claim. V114 is the current general baseline
+restored-quality claim. The [V117/V118 training pair](band-loss-training.md)
+has passed actual CPU/CUDA checks and started its original20k schedule;
+trained quality is pending. V114 is the current general baseline
 after the [completed Tiny/Small comparison](v114-v115-quality.md). The term stays
 off in the [completed V116 data trial](v116-quality.md).
 
@@ -200,11 +202,14 @@ observed raw-gradient concern.
 
 ## Next quality question
 
-The normalized term remains a candidate for a later matched training comparison.
-It stays off given the mixed parameter response and unmeasured trained quality;
-the [completed V116 trial](v116-quality.md) tests data coverage and
-reviewed reference masks alone. GPU qualification of a nonzero band term is still
-required before a new production run.
+The normalized term is now selected by the [V117/V118 matched training comparison](band-loss-training.md).
+Both start from V114 with the same corrected data and seed64; only the band
+coefficient0/.0003 differs. Four actual eight-update checks pass at CPU64/B1/FP32
+and CUDA256/B16/BF16. Initial predictions/physical inputs agree, all optimizer
+states remain finite, default-off does no band work and paired RAW omits the term.
+V117's original20k control is running before the fresh V118 production arm.
+The [completed V116 trial](v116-quality.md) separately tests data coverage and
+reviewed masks. Its analytic gain did not transfer to broader weak material.
 This diagnosis does not show how network gradients, generalization, flat-field
 artifacts, color tails or real foliage would change. Any trained comparison
 still needs complete matched panels, native noisy / restored / GT triplets and

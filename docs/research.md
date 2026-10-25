@@ -26,6 +26,12 @@ weak-material response and a worse ADC color tail. V114 retains the better
 general balance. Same V112 initializer and matched budget remain verified. The design
 record below retains explicitly named older checkpoints and measurements.
 
+The active [V117/V118 objective comparison](band-loss-training.md) now starts
+from V114. It holds corrected data/legacy weak sources, seed64 and the20k budget
+fixed while changing normalized-band weight0/.0003. CPU/CUDA checks pass;
+V117's control is training, followed by V118 and complete independent/native
+quality review. The earlier local-gradient checks do not decide trained quality.
+
 The current [V104 conditioning study](noise-conditioning.md) repeats the
 fixed-strength comparison on twelve exact-target observations and six standing
 GFX contexts. Lower conditioning retains more fine structure and grain while
@@ -80,7 +86,8 @@ new model calls. It is a later training candidate, with no trained-quality
 claim or change to the active Tiny/Small comparison.
 Its [optional trainer implementation and V112 parameter check](contrast-normalized-band-supervision.md#optional-training-implementation)
 now pass CPU/API checks. Parameter alignment is mixed, including two faint
-high-noise declines; the weight remains zero in current recipes.
+high-noise declines. The completed data trials keep weight zero; the active
+V117/V118 pair now tests0/.0003 from V114 with matched full training.
 
 The [clean-target frequency audit](fine-weak-texture-coverage.md) finds fine-band
 energy in sampled photographs/native targets, but almost none around four-pixel

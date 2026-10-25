@@ -98,6 +98,21 @@ were reproduced exactly** with selected-only loading. Unlogged observations were
 not separately hashed. Mixed-domain interruption/restart tests retain identical
 weights and EMA, and guards reject any fetch from an unselected domain.
 
+## Internal training artifacts
+
+The [active V117/V118 loss pair](band-loss-training.md) retains native256/B16
+and the current90,864-source geometry. Metadata coverage at4×→area2 is90,864
+sources for256px,55,998 for320px,24,753 for384px and1,762 for512px, without
+upscaling. A global larger-patch trial would also change source coverage.
+
+The recipe preparer now accepts artifacts inside its own frozen `root/work/`
+workspace. Internal jobs declare128/96GiB internal phase/runtime headroom and
+208GiB external input reserves; existing external jobs retain their32/16GiB
+internal and256/128GiB external limits. Six path/resource tests pass. The new
+pair also verifies zero band evaluations for the default-off control and paired
+RAW, and reuses existing production trace hashes to avoid duplicate hashing.
+All original executed sources and receipts keep their bytes.
+
 ## Augmentation before the final reduction
 
 The optional `augmentation_downsample: 2` training path is:

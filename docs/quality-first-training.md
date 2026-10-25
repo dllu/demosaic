@@ -7,6 +7,12 @@ has slightly higher photo PSNR and lower color bias. Both improve over V112.
 [Completed panels, native comparisons and RGB16 exports](v114-v115-quality.md).
 Fine high-noise and real foliage/neon detail remain weak. Quality precedes speed.
 
+The active [V117/V118 band-loss pair](band-loss-training.md) starts from V114,
+keeps the same corrected data and native256/B16 schedule, and changes only
+the normalized-band weight0/.0003. Both eight-update CPU/CUDA checks pass;
+V117's original20k control is running before the V118 arm. Full numerical,
+native/GFX and independent review are queued; no trained-quality claim yet.
+
 ## Completed loss-scale comparison and next training
 
 [V111/V112](loss-scale-training.md) retain the original V104 EMA and learned

@@ -22,7 +22,25 @@ from train_v43_quality_trial import live
 REPO = Path(__file__).resolve().parents[1]
 
 
+def storage_policy(root, artifact_root):
+    """Allow frozen-workspace outputs while retaining legacy external limits."""
+    root, artifact_root = Path(root).resolve(), Path(artifact_root).resolve()
+    if not root.is_relative_to(REPO / ".cache"):
+        raise ValueError("Training workspace must be inside the repository cache")
+    internal = artifact_root.is_relative_to(root / "work")
+    if not internal and not artifact_root.is_relative_to(Path("/mnt/external/demosaic")):
+        raise ValueError("Training artifacts need the frozen workspace or external scratch")
+    return {
+        "internal_artifacts": internal,
+        "phase_start_internal_free_GiB": 128 if internal else 32,
+        "runtime_internal_reserve_GiB": 96 if internal else 16,
+        "phase_start_external_free_GiB": 208 if internal else 256,
+        "runtime_external_reserve_GiB": 208 if internal else 128,
+    }
+
+
 def prepare(root, artifact_root, recipes, after_run_root=None):
+    policy = storage_policy(root, artifact_root)
     import torch
     import yaml
 
@@ -41,7 +59,6 @@ def prepare(root, artifact_root, recipes, after_run_root=None):
     assert all(config["steps"] == updates for config in configs)
     root, artifact_root = root.resolve(), artifact_root.resolve()
     assert root.is_relative_to(REPO / ".cache")
-    assert artifact_root.is_relative_to(Path("/mnt/external/demosaic"))
     root.mkdir(parents=True, exist_ok=False)
     artifact_root.mkdir(parents=True, exist_ok=False)
     work = root / "work"
@@ -152,6 +169,7 @@ def prepare(root, artifact_root, recipes, after_run_root=None):
         "python": sys.executable,
         "smoke_updates": 8,
         "train_updates": updates,
+        **policy,
         "scope": f"Matched explicit-parent V84-family quality recipes, {updates} updates. CPU64/B1 and CUDA256/B16 eight-update smokes are discarded; production arms start freshly from the same parent EMA. Recipe files record the intended experimental difference.",
     }
     save(root / "plan.json", plan)
@@ -279,8 +297,10 @@ def controller(path):
                     assert time.monotonic() - began < 7200
                     enough = (
                         psutil.virtual_memory().available >= 48 * 2**30
-                        and shutil.disk_usage(root).free >= 32 * 2**30
-                        and shutil.disk_usage(plan["artifact_root"]).free >= 256 * 2**30
+                        and shutil.disk_usage(root).free
+                        >= plan.get("phase_start_internal_free_GiB", 32) * 2**30
+                        and shutil.disk_usage("/mnt/external").free
+                        >= plan.get("phase_start_external_free_GiB", 256) * 2**30
                     )
                     stable = (time.monotonic() if stable is None else stable) if enough else None
                     if stable is not None and time.monotonic() - stable >= 15:
@@ -322,8 +342,14 @@ def controller(path):
                     started = time.monotonic()
                     while child.poll() is None:
                         assert time.monotonic() - started < (43200 if phase == "train" else 1200)
-                        assert shutil.disk_usage(root).free > 16 * 2**30
-                        assert shutil.disk_usage(plan["artifact_root"]).free > 128 * 2**30
+                        assert (
+                            shutil.disk_usage(root).free
+                            > plan.get("runtime_internal_reserve_GiB", 16) * 2**30
+                        )
+                        assert (
+                            shutil.disk_usage("/mnt/external").free
+                            > plan.get("runtime_external_reserve_GiB", 128) * 2**30
+                        )
                         time.sleep(2)
                     assert child.wait() == 0, (phase, arm, child.returncode)
                 result = root / f"{phase}-{arm}-result.json"
