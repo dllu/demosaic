@@ -34,12 +34,12 @@ updates the current guides without an old promotion gate.
 
 | Topic | Start here |
 | --- | --- |
-| Current work | [V84-family cleaned-data/fine-detail training](quality-first-training.md) · [Completed loss-scale test](loss-scale-training.md) · [Current model choices](current-model.md) |
+| Current work | [Running V119 Small/data trial](cleaned-diverse-small-training.md) · [Current quality training](quality-first-training.md) · [Current model choices](current-model.md) |
 | Results | [Experiment index](experiments.md), [PSNR history](performance-history.md) |
 | Older work | [Chronological archive](experiment-archive.md), [local-time diary](../diary/index.md) |
 | Current model | [V114, V115 and useful alternatives](current-model.md) · [Real-camera metrics](real-camera-quality.md) · [GFX comparisons](gfx-qualitative.md) · [Q2/Sony/GFX50R](cross-camera-qualitative.md) |
 | Usage | [Commands and data conventions](usage.md) · [Linear DNG/JPEG export](dng-export.md) |
-| Data | [Reviewed90,864-source training corpus and native review](incoming-commons-quality.md), [prior Commons corpus](commons-post4557-reviewed.md), [source quality](corpus-source-review.md), [source exclusions](commons-content-overlap.md), [native RAW targets](public-raw-expansion-v2.md) |
+| Data | [Current cleaned Commons/expanded paired recipe](cleaned-diverse-small-training.md), [corpus and native review](incoming-commons-quality.md), [paired camera sampler](paired-camera-sampling.md), [source quality](corpus-source-review.md), [source exclusions](commons-content-overlap.md), [native RAW targets](public-raw-expansion-v2.md) |
 | Training | [Data/augmentation pipeline](training-pipeline.md), [execution/restart](training-execution.md), [current loss-pair checks](band-loss-training.md), [earlier V93–V95 engineering evidence](quality-training-validation.md) |
 | Evaluation | [Quality/noise diagnostics](evaluation.md), [natural fine detail](heldout-detail.md), [RawNIND variants](rawnind-variants.md), [noise/detail tradeoff](noise-conditioning.md), [ADC-only consistency](adc-consistency.md), [V104 color/texture projection diagnostics](v104-adc-color-projection.md), [GFX test](gfx-qualitative.md), [prepared test reserve](paired-reserved-test.md) |
 | Method research | [Research/design record](research.md) |

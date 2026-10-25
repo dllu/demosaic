@@ -13,11 +13,12 @@ spatial color variation, with slightly higher mean bias; full panels/frame remai
 unmeasured.
 
 A [saved-output local contrast diagnosis](local-material-detail.md) separates
-weak material blocks from strong edges: V114 eight-view high-noise projected
-gain is.31813 in the weakest group, which contains only feather/fur, despite
-high whole-patch gain. Averaging lowers weak-group residual error but slightly
-lowers gain too. This is exploratory evidence for a remaining quality problem,
-not a validated training intervention; V116 remains unchanged.
+weak material blocks from strong edges. The full427-source Tiny/Small comparison
+finds nearly unchanged weakest-stratum ISO12800 gain,.36334/.36422. A separate
+fixed-material V114 eight-view diagnosis finds.31813 in its weakest group,
+which contains only feather/fur; averaging lowers residual error and gain
+together. These have different source support. Neither establishes that encoder
+capacity or averaging fixes faint detail.
 
 The [V116 data trial](v116-quality.md) has completed its original20k run and
 all numerical/native/full-frame review. It raises the tested eight-pixel weak
@@ -46,7 +47,10 @@ retains structure and grain while losing high-noise PSNR. Scaling DINO offsets
 or substituting Wiener/self/clean-oracle previews gives no consistent gain.
 This is a fixed-weight result, not a trained-backbone/fusion ablation; the
 unavailable clean-image oracle is never a candidate method. Current quality
-work now continues from V114 on the further-cleaned corpus; the V112-derived
+work now includes the [running V119 Small continuation](cleaned-diverse-small-training.md)
+from final V115 on90,791 cleaned Commons sources and the corrected83-ID paired
+set with the original camera probabilities. Both discarded16-step checks pass;
+the fresh full20k endpoint and queued reviews remain pending. The V112-derived
 Tiny/Small material, full quality panels and complete-frame review are finished.
 
 The [larger frozen ConvNeXt check](convnext-small-capacity.md) now pins official
