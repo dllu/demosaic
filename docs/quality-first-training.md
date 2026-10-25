@@ -60,6 +60,12 @@ and two flat map/document layouts. Its coupled manifests and targeted actual
 reader checks pass. It is untrained; V119 retains its original 90,791 sources.
 [Latest source decisions, native examples and reader scope](next-source-tail-review.md).
 
+An optional [14-region material bank](weak-photographic-targets.md) preserves
+the six original examples and adds eight measured weak photographic contexts,
+including brick joints, plaster cracks, wavelets and sand ripples. Its actual
+reader checks pass. It is prepared for the future cohort; its quality effect
+is unmeasured and V119's six-region recipe remains unchanged.
+
 The paired set has **83 publisher IDs / 71 groups / 166 cases / 1,492 cached
 crops**, preserving all four corrected legacy masks and every registered new
 case. Camera probabilities remain Sony 75%, Canon 6D 12.5%, Nikon Z6 9.375% and

@@ -103,7 +103,10 @@ cropping, binning, context-thumbnail creation and display/layout conversion.
 [Source/ROI/decision metadata](images/source-tail-top768-20261025-v1/retained-weak-wood.json).
 
 These sources remain eligible under ordinary sampling. This review adds no new
-ROI quota and does not change V119's existing six examples.
+ROI quota and does not change V119's existing six examples. A separate
+[weak photographic material bank](weak-photographic-targets.md) prepares eight
+other measured low-contrast contexts while preserving the original six; it is
+untrained and does not change source membership.
 
 ## Future data and reader checks
 

@@ -196,19 +196,24 @@ selection rebinning reads its supplied manifest instead of the changing index.
 
 ## Reviewed photographic regions
 
-The opt-in reader supports the current
-[32-region fine-detail catalogue](../configs/low-contrast-training-rois-curated-v3.json)
-and its exact88,477-source V102/V103 manifest. It preserves the original six regions
-and adds 26 source photographs after actual native inspection.
-[Examples, source decisions and all 32 real-reader checks](corpus-source-review.md#reviewed-weak-and-fine-texture-rois).
-`reviewed_roi_catalogue` names that file; `reviewed_roi_fraction` defaults to
+The opt-in reader accepts an exact manifest-bound photographic catalogue.
+Current V119 uses the original six regions rebound to its 90,791-source cohort.
+An optional [14-region material catalogue](../configs/low-contrast-training-rois-cleaned90787-v1.json)
+preserves those six and adds eight measured low-contrast contexts for the
+90,787-source future cohort. All fourteen pass actual native256 reader checks;
+the bank is untrained and unapplied. [Native examples, selection and limits](weak-photographic-targets.md).
+The earlier [32-region catalogue](../configs/low-contrast-training-rois-curated-v3.json)
+retains its exact 88,477-source binding and completed six-versus32 comparison.
+`reviewed_roi_catalogue` names the chosen catalogue; `reviewed_roi_fraction` defaults to
 `0.0` and gives the selection probability **conditional on a photographic
 Commons sample**. Flat and synthetic samples retain their existing shares.
 Completed V101 used the [original six-region catalogue](../configs/low-contrast-training-rois-v1.json)
 at `.05`; V100 left it disabled. Their [current selected-detail results](heldout-detail.md)
 and the [full matched results](v84-curated-quality-review.md) are available. The expanded catalogue
-is used by V103 with its matching manifest; V102 uses the same original six
-regions rebound to that manifest. Both production endpoints are still running.
+was used by V103 with its matching manifest; V102 used the same original six
+regions rebound to that manifest. Their completed comparison found a tiny mixed
+effect, so expanding the catalogue at an unchanged quota is not an established
+quality improvement.
 
 Selection happens before opening the image cache. A selected sample loads only
 its reviewed source, crops within the recorded 512×512 bin4 region, applies the
