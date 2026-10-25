@@ -18,7 +18,8 @@ inspection, rather than native inspection of every image.
 | --- | ---: | --- |
 | V102/V103 | 88,477 | Completed model comparison |
 | V104 | 90,872 | Original 20k training, all panels and full-frame exports complete |
-| Current reviewed cohort | **90,864** | V114 is the working baseline; V114/V115 quality review complete; V116 uses this corpus |
+| Current reviewed cohort | **90,864** | V114 is the working baseline; V114/V115/V116 review complete; V117/V118 retain this corpus |
+| Prepared next cohort | **90,862** | [Further30-source review](next-source-tail-review.md):28 retained, two document/visualization withholds; no new training result |
 
 The current cohort applies **eight additional training-source withholds relative
 to V104**: the three previously inspected photo-quality cases and five printed
