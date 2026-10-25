@@ -4,8 +4,9 @@
 missing faint structure in these saved training examples.** At additional
 contrast ×.025, its median corrective slope rises 17–19% while total gradient
 norm rises 3–5%, relative to epsilon .0003. This is a loss diagnosis, with no
-new trained model or restored-quality claim. V114 is the current general baseline;
-the V114/V115 comparison continues unchanged.
+new trained model or restored-quality claim. V114 is the current general baseline
+after the [completed Tiny/Small comparison](v114-v115-quality.md). The term stays
+off in the running V116 data trial.
 
 ![Corrective slope per gradient magnitude on saved V102 predictions](images/band-supervision-gradients/band-gradient-response.png)
 
@@ -158,12 +159,52 @@ and Gram entries. The checkpoint, official encoder, configuration and Torch RNG
 stay unchanged. No noise is regenerated, no RAW is decoded and no CUDA is used
 in this fixed-weight check.
 
+## Fresh Adam response from retained gradients
+
+The raw-gradient cosines above do not directly describe an Adam step. A separate
+[saved-gradient check](results/saved-Adam-band-response-v1.json) reopens the two
+previously retained faint/high-noise examples, with no new model call or backward
+pass. Both baseline/candidate gradient norms are below the production clipping
+limit. The first bias-corrected Adam **gradient component**, per unit learning
+rate, is `u(g) = -g / (abs(g) + 1e-8)`. This omits common weight decay and has no
+accumulated optimizer moments. It is a counterfactual local response at V112,
+not a production update or a measurement of current V114.
+
+Cosine with the saved Jacobian-transposed missing-detail direction:
+
+| Retained training example, contrast×.025 / ISO12800 | Baseline Adam component | With band addition |
+| --- | ---: | ---: |
+| New photograph | −.023574 | −.024727 |
+| Reviewed ROI | +.014318 | +.011085 |
+
+Negative values oppose this particular correction at first order. Adam changes
+the magnitudes substantially, but does not reverse the earlier signs; the added
+term reduces alignment in both cases. The largest adverse incremental module
+contribution comes from the fine decoder in the first case and deeper downsampling/
+bottleneck blocks in the second. This does not identify one consistently safe
+module to modify, or prove a quality effect.
+
+All534 stored FP32 gradient arrays pass hashes/shapes and reproduce their
+per-parameter Gram values. Two independent Torch64 AdamW fixtures, using unrelated
+zero-valued dummy parameters, check clipping and near-epsilon values against the
+formula with maximum discrepancy2.22e-16. There are **zero restoration-model
+updates**, zero model/encoder forwards, no new observations or RAW decodes, no
+CUDA, and unchanged Torch RNG. The two fixture optimizer steps are recorded
+separately. [Reproducible helper](../scripts/probe_saved_adam_response.py).
+
+These two retained examples were selected by the earlier study, not an independent
+generalization set. This first-step calculation does not include mixed batches,
+late Adam moments, parameter rounding, finite-step network changes or trained
+image quality. It gives no reason to assume that Adam automatically repairs the
+observed raw-gradient concern.
+
 ## Next quality question
 
-The normalized term is a candidate for a later matched training comparison after
-the current Tiny/Small results establish the useful architectural baseline.
-The new option remains off, given the mixed parameter response and unmeasured
-trained quality. GPU qualification is still required before a new production run.
+The normalized term remains a candidate for a later matched training comparison.
+It stays off given the mixed parameter response and unmeasured trained quality;
+the running [V116 trial](fine-detail-data-training.md) tests data coverage and
+reviewed reference masks alone. GPU qualification of a nonzero band term is still
+required before a new production run.
 This diagnosis does not show how network gradients, generalization, flat-field
 artifacts, color tails or real foliage would change. Any trained comparison
 still needs complete matched panels, native noisy / restored / GT triplets and

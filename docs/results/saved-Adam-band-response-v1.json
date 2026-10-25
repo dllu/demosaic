@@ -1,0 +1,91 @@
+{
+  "status": "completed-exploratory-saved-V112-first-Adam-gradient-component-analysis",
+  "recorded_local": "2026-10-24T17:25:20.126429-07:00",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/saved-Adam-band-response-v1/plan-v1.json",
+    "sha256": "e9a431ac0cdbdf28a44e88c106181e262f63b0ef1aae803363fa50a3368562fb"
+  },
+  "executed_worker": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/saved-Adam-band-response-v1/work/scripts/probe_saved_adam_response.py",
+    "sha256": "bce0e0aa29f9b083f8ddf2c023c180a2c316d233baaad152b240b221e084fcb2"
+  },
+  "public_worker": {
+    "path": "/home/dllu/proj/demosaic/scripts/probe_saved_adam_response.py",
+    "sha256": "5b1c4ee2ffec018978dd4e4ef410b95578dce38625df7f1fbf439b495233d72d"
+  },
+  "public_and_executed_nonimport_AST_equal": true,
+  "source_difference": "Only standard-library import ordering changed for Ruff; original executed/frozen bytes preserved. No successful model work or analysis was repeated for lint.",
+  "result": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/saved-Adam-band-response-v1/work/response/result-v1.json",
+    "sha256": "a42a7af4e5bf2259e74e4537e08dea814e8feeb9e0a3d36d3e23850f6af85810"
+  },
+  "log": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/saved-Adam-band-response-v1/run-v1.log",
+    "sha256": "d34f409e0fcb7284f19f6d915a40784fce6794bc4beda53491af8fa009c20e14"
+  },
+  "historical_parameter_result": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/normalized-band-integration-v1/work/parameter-study/result-v1.json",
+    "sha256": "d3b3e245e26c1fb2916c55e89b0564a867d2fee81ffdb01902bc364dbb57bccf"
+  },
+  "rows": [
+    {
+      "case_index": 1,
+      "source_id": "342f3fc4b715a86230c76c6493e1ab3aaa7ba0bf",
+      "contrast": 0.025,
+      "condition": "iso12800-prior",
+      "full_gradients": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/normalized-band-integration-v1/work/parameter-study/full-parameter-gradients-01.npz",
+        "sha256": "abbb037dd730823fc548f8ce2ebb264f5c3bbdc99af763fc658276778f55d9b8"
+      },
+      "baseline": {
+        "norm": 3769.24683358841,
+        "dot_saved_correction": -24.550072120412853,
+        "correction_cosine": -0.023573809926555188
+      },
+      "candidate": {
+        "norm": 3769.6979521563794,
+        "dot_saved_correction": -25.75436926857356,
+        "correction_cosine": -0.024727257339568015
+      },
+      "baseline_raw_correction_cosine": -0.40435130498209143,
+      "candidate_raw_correction_cosine": -0.40509256584585795
+    },
+    {
+      "case_index": 5,
+      "source_id": "423c08bacc74f7569806786d83446992a4f568d3",
+      "contrast": 0.025,
+      "condition": "iso12800-prior",
+      "full_gradients": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/normalized-band-integration-v1/work/parameter-study/full-parameter-gradients-05.npz",
+        "sha256": "9d0ac6d16bc5f8d15d9ea993c028a4e886fddd50d9aefed1a268b1132e517801"
+      },
+      "baseline": {
+        "norm": 4003.3935454762604,
+        "dot_saved_correction": 22.204289799696394,
+        "correction_cosine": 0.014318183145454383
+      },
+      "candidate": {
+        "norm": 4007.599313905019,
+        "dot_saved_correction": 17.207807698504876,
+        "correction_cosine": 0.011084613672926007
+      },
+      "baseline_raw_correction_cosine": 0.16344707997015168,
+      "candidate_raw_correction_cosine": 0.1497873399455199
+    }
+  ],
+  "checked_stored_FP32_gradient_arrays": 534,
+  "first_step_formula_fixture": {
+    "fixture_optimizer_steps": 2,
+    "maximum_absolute_Torch64_disagreement": 2.220446049250313e-16,
+    "scope": "Independent zero-valued dummy parameters, never restoration weights"
+  },
+  "model_and_encoder_forwards": 0,
+  "restoration_optimizer_updates": 0,
+  "noise_generation": 0,
+  "RAW_decodes": 0,
+  "Torch_RNG_unchanged": true,
+  "CUDA_initialized": false,
+  "ruff": "passed",
+  "scope": "Exploratory reuse of the two previously retained V112 faint/high-noise training cases. Both raw baseline/band gradient directions looked adverse in the prior diagnosis. Evaluate the fresh AdamW gradient-driven first-step component under production norm1 clipping and epsilon1e-8, before interpreting those raw cosines. All89 named parameter gradients and saved Jacobian-transposed missing-detail direction come from the original immutable study. No network/checkpoint loading, inference, new backward pass, observation generation or restoration-parameter update. Two independent Torch64 AdamW steps use unrelated zero dummy parameters only. Common weight decay is excluded; fresh first-step response has no accumulated moments, batch mixing, EMA effect or nonlinear output/quality verification. It does not rank loss recipes, imply V114 behavior or change V116 training. Module grouping by existing parameter hierarchy, no parameter-group intervention or automatic next training run.",
+  "conclusion": "The normalized-band addition reduces the fresh Adam gradient-component alignment with the saved correction in both retained examples. Raw-gradient sign concerns persist after first-step rescaling. This is not an observed image change, a V114 measurement, a mixed-batch update, a late-Adam response or a trained-quality comparison; no automatic loss/architecture choice follows. V116 stays unchanged."
+}
