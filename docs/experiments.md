@@ -13,10 +13,12 @@ single-view photo mean of37.04408dB, with slightly lower camera means and higher
 ADC bias than V114. V118's band term lowers weak natural response and raises
 worst ADC bias to843.05DN16. All numerical/native/full-frame review is complete;
 the term stays off for further quality work.
-The [running V119 trial](cleaned-diverse-small-training.md) now starts from
+The [V119 trial](cleaned-diverse-small-training.md) continued from
 final V115 Small on90,791 cleaned Commons sources and the corrected83-ID paired
 set with the original camera proportions. Both discarded16-step checks pass;
-the original full20k run and its queued quality/native reviews remain pending.
+the original full20k run is complete and its quality/native reviews are running
+or queued. The additional fine-mesh review finds no clear gain over V115 at the
+same conditioning; full-panel results remain pending.
 The [current V114 eight-view pilot](v114-eight-view.md) improves all12 fixed
 material cases and both selected camera crops, with a small selected color-bias
 tradeoff; independent/native review is complete and full panels/frame remain

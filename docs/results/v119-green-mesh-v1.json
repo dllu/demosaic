@@ -1,0 +1,748 @@
+{
+  "status": "completed-original20000-V119-fine-mesh-qualitative-review",
+  "recorded_local": "2026-10-25T16:41:04.697146-07:00",
+  "completed_training": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v119-training-completed-v1.json",
+    "sha256": "b91fa2b19a756435895bb8b91e2df58779a8e6525b1d9a8e4848af76085a4c15"
+  },
+  "endpoint": {
+    "checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-cleaned-diverse-quality-v1/work/artifacts/weights/weights-b3c0d43264c6ad8446dd930aafa337298e4690d0d08f2967824f03ecd844f427.pt",
+      "sha256": "b3c0d43264c6ad8446dd930aafa337298e4690d0d08f2967824f03ecd844f427"
+    },
+    "expected_step": 20000,
+    "accounting": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V115-cleaned-diverse-training-v1/run/train-V119-accounting-v1.json",
+      "sha256": "dd835f7b0cdc674647bb39018beb53f36881e5187e38ad318b77a57d632e50cd"
+    },
+    "quality_execution": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-cleaned-diverse-quality-v1/evaluation-plan-v1.json",
+      "sha256": "ba81ae2d40c50c0312d71c5fcdeb907ab8aa7eb3c34a23f8ade90bba0f649b83"
+    }
+  },
+  "original_prospective_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v1/queue-plan-v1.json",
+    "sha256": "cae71413539768ba51a654c0953ee20bd8cc0d4573e235c6cd324e7751aa0f5d"
+  },
+  "executed_corrective_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/queue-plan-v1.json",
+    "sha256": "af77159f4b189bb68848aab40c8489afb7b7fa397197c3fa85ea60bc55fc1f92"
+  },
+  "source_and_recovery": {
+    "original_failure": {
+      "owner": {
+        "pid": 3601384,
+        "created": 1792970534.66
+      },
+      "queue_plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v1/queue-plan-v1.json",
+        "sha256": "cae71413539768ba51a654c0953ee20bd8cc0d4573e235c6cd324e7751aa0f5d"
+      },
+      "completed": {},
+      "status": "failed-preserved-no-automatic-retry",
+      "updated_unix": 1792971193.3472657,
+      "child": {
+        "pid": 3606812,
+        "created": 1792971190.3
+      },
+      "variant": "nominal",
+      "error": "AssertionError(1)"
+    },
+    "failure_log": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v1/nominal-run-v1.log",
+      "sha256": "e4c1b943eb9a6eecfcf33447842af25d56d2449aa3d75ee5b5d299cc7990f02e"
+    },
+    "failure_model_forwards": 0,
+    "reason": "Missing prepare_gfx_highlight_inputs import, before any input or model loading. Oldsources/logs/status retained; fresh v2 addshelper and passesactualfrozenevaluatorimport withallNNcallsforbidden. Sameprospective2operators, no repeatforward.",
+    "corrected_import_preflight": {
+      "status": "passed-actual-corrected-frozen-evaluator-import",
+      "module": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/scripts/evaluate_gfx_green_mesh.py",
+      "new_neural_forwards": 0,
+      "RAW_decodes": 0,
+      "CUDA_initialized": false,
+      "scope": "Allneuralmodulecallsforbidden;correctedhelperimportresolvesbeforeanyweightloading."
+    },
+    "endpoint_preflight": {
+      "status": "passed-original20000-immutable-endpoint-resolution",
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/queue-plan-v1.json",
+        "sha256": "af77159f4b189bb68848aab40c8489afb7b7fa397197c3fa85ea60bc55fc1f92"
+      },
+      "endpoint": {
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-cleaned-diverse-quality-v1/work/artifacts/weights/weights-b3c0d43264c6ad8446dd930aafa337298e4690d0d08f2967824f03ecd844f427.pt",
+          "sha256": "b3c0d43264c6ad8446dd930aafa337298e4690d0d08f2967824f03ecd844f427"
+        },
+        "expected_step": 20000,
+        "accounting": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V115-cleaned-diverse-training-v1/run/train-V119-accounting-v1.json",
+          "sha256": "dd835f7b0cdc674647bb39018beb53f36881e5187e38ad318b77a57d632e50cd"
+        },
+        "quality_execution": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-cleaned-diverse-quality-v1/evaluation-plan-v1.json",
+          "sha256": "ba81ae2d40c50c0312d71c5fcdeb907ab8aa7eb3c34a23f8ade90bba0f649b83"
+        }
+      },
+      "new_neural_forwards": 0,
+      "RAW_decodes": 0,
+      "scope": "Actualfinalcompletedreceipt/identity checks, no liveintermediate orNN."
+    }
+  },
+  "executed_variants": {
+    "nominal": {
+      "status": "completed-new-green-mesh-CPU-context-inference-awaiting-actual-native-viewing",
+      "driver": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/scripts/evaluate_gfx_green_mesh.py",
+        "sha256": "ad5850b593547bcc44b92d53f370f84037087eee90fed2debe31e4efcafd88c4"
+      },
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/nominal-evaluation-plan-v1.json",
+        "sha256": "0f8447a12cb9a46c40661a305ad4360a96f88eba38ef44e82579b6de37d149ad"
+      },
+      "inputs": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/result-v1.json",
+        "sha256": "6b4afa65727e4ee792e4bbadcb96c3fc63ea8bbaf82bf3b18d7556efa839dcaa"
+      },
+      "input_arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+        "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+      },
+      "methods": [
+        {
+          "label": "V112",
+          "kind": "checkpoint",
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v112-final20000.pt",
+            "sha256": "21c3cca8370df21e3412f9ccbf441c35afcfad8fd03174c7727f4f88874783b1"
+          },
+          "prediction": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/comparison-v1/V112-RGB-f32.npy",
+            "sha256": "daf1bbd90992a3c9d4254992d0c1a6fe890ad6555ffa0ee07cdd9a870f73de76"
+          },
+          "source_inputs_sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4",
+          "actual_root_forwards": 0,
+          "actual_encoder_forwards": 0,
+          "new_inference": false
+        },
+        {
+          "label": "V114",
+          "kind": "checkpoint",
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/V112-continuations-quality-20261024-v3/weights/weights-2285c84b7015bcf122e71b890723f80aaf216bde849256c77f070c2493f9d2d2.pt",
+            "sha256": "2285c84b7015bcf122e71b890723f80aaf216bde849256c77f070c2493f9d2d2"
+          },
+          "prediction": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/comparison-v1/V114-RGB-f32.npy",
+            "sha256": "0f9c7c5aaddc24673492fe793c9be5dfcd64b4cc7fad5cda8b916144b6cbf334"
+          },
+          "source_inputs_sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4",
+          "actual_root_forwards": 0,
+          "actual_encoder_forwards": 0,
+          "new_inference": false
+        },
+        {
+          "label": "V115",
+          "kind": "checkpoint",
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/V112-continuations-quality-20261024-v3/weights/weights-fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84.pt",
+            "sha256": "fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84"
+          },
+          "prediction": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/comparison-v1/V115-RGB-f32.npy",
+            "sha256": "d28c5c55213d4dd08f92d8b97ff0da23bbe018630188cb3641027ab6c6993f7e"
+          },
+          "source_inputs_sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4",
+          "actual_root_forwards": 0,
+          "actual_encoder_forwards": 0,
+          "new_inference": false
+        },
+        {
+          "label": "V117",
+          "kind": "checkpoint",
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V117-V118-band-quality-v1/work/artifacts/weights/weights-f69452432a852ac4c5ffdcbf7d6fe6837a3ab46adbc8a7fdae073111220b8ab0.pt",
+            "sha256": "f69452432a852ac4c5ffdcbf7d6fe6837a3ab46adbc8a7fdae073111220b8ab0"
+          },
+          "prediction": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/comparison-v1/V117-RGB-f32.npy",
+            "sha256": "7f6968d45c8dc7b33784d61ba0dbe48a9bc42ba01e9fc0b392dc3ecdd7f0962b"
+          },
+          "source_inputs_sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4",
+          "actual_root_forwards": 0,
+          "actual_encoder_forwards": 0,
+          "new_inference": false
+        },
+        {
+          "label": "RawNIND-preup",
+          "kind": "rawnind-preup",
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/references/rawnind-preupsample-20261023-v1/utnet2-bayer.pt",
+            "sha256": "3d8d5fab966f790f4adbaf1786ca1ee81cb027d9cd45220787247b0af99fd814"
+          },
+          "prediction": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/comparison-v1/RawNIND-preup-RGB-f32.npy",
+            "sha256": "59a1a0c84e77b852b964616ae292e2b0ebdb25f2ca142748ff6996d670100f58"
+          },
+          "source_inputs_sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4",
+          "actual_root_forwards": 0,
+          "actual_encoder_forwards": 0,
+          "new_inference": false
+        },
+        {
+          "label": "V119",
+          "kind": "checkpoint",
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-cleaned-diverse-quality-v1/work/artifacts/weights/weights-b3c0d43264c6ad8446dd930aafa337298e4690d0d08f2967824f03ecd844f427.pt",
+            "sha256": "b3c0d43264c6ad8446dd930aafa337298e4690d0d08f2967824f03ecd844f427"
+          },
+          "expected_step": 20000,
+          "step": 20000,
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+            "dino_revision": "421020015aa4266363db803b6049a529999afb1e",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "convnext-pyramid",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false,
+            "adc_cfa_projection_mode": "malvar",
+            "raw_kernel_reconstruction": false,
+            "raw_kernel_windows": [
+              1,
+              5,
+              17
+            ],
+            "raw_kernel_phase_conditioning": false,
+            "raw_directional_residual": false,
+            "raw_directional_bank_context": false,
+            "raw_directional_bank_detach_input": false,
+            "raw_spectral_residual": false,
+            "late_rgb_refinement": "none",
+            "isotropic_groups": 6,
+            "isotropic_blocks": 8,
+            "isotropic_local_width": 32,
+            "isotropic_raw_gain": 1.0,
+            "isotropic_residual_scale": 1.0
+          },
+          "prediction": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/V119-RGB-f32.npy",
+            "sha256": "5f36acc845be449dd71e3bd8a0e31ddd3a0d971fa7ae7142c5ba2b126b64d5b8"
+          },
+          "source_inputs_sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4",
+          "actual_root_forwards": 1,
+          "actual_encoder_forwards": 1,
+          "new_inference": true,
+          "seconds": 89.69485899992287
+        }
+      ],
+      "native_comparison": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/comparison-native.png",
+        "sha256": "f276881928b2d2461469d2b12bca1d5912547edb2c39486a83570473943c975d"
+      },
+      "triplets": [
+        {
+          "label": "V112",
+          "region": "fine-green-mesh-left",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/triplets/crop-265d9b19bc9bb82d.png",
+            "sha256": "5097449d9dff88fabb965aaaec1b8d8fc1a7892934d1de1f448ef8c42b12a3b2"
+          },
+          "metadata": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/triplets/crop-265d9b19bc9bb82d.json",
+            "sha256": "e9b2e5d895cea4798e7f807d04112365a1ea2ee3749c1bd451e6371f72418e9c"
+          }
+        },
+        {
+          "label": "V114",
+          "region": "fine-green-mesh-left",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/triplets/crop-fc24017bbe3bfaca.png",
+            "sha256": "b7576b7a549f2bb50c00a7bffaf99527a132de57ded78d5900e9c8fa661df987"
+          },
+          "metadata": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/triplets/crop-fc24017bbe3bfaca.json",
+            "sha256": "963e9185339b1cc36b78ea57f48fc75a9d1c1e231e99523306918104fb3c3d93"
+          }
+        },
+        {
+          "label": "V115",
+          "region": "fine-green-mesh-left",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/triplets/crop-57a970cf6a40560e.png",
+            "sha256": "bf0ff8032038ce8e022f4aa391e8707a89a76bdc8614be374e013f2c15cde6e5"
+          },
+          "metadata": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/triplets/crop-57a970cf6a40560e.json",
+            "sha256": "702eb8b860af9b962e19441cbf46bbc84471fb1e29107df65e5de8938ac21618"
+          }
+        },
+        {
+          "label": "V117",
+          "region": "fine-green-mesh-left",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/triplets/crop-671345b7fd0fd952.png",
+            "sha256": "9dd3d9f9b7f0ac9185f7363f3d706d9969bf66669d6c2a6283af8fce7baa955d"
+          },
+          "metadata": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/triplets/crop-671345b7fd0fd952.json",
+            "sha256": "47f724c45de438d86b2a9e5269a07e302322f1faa5616d28a48b736fb9e30a07"
+          }
+        },
+        {
+          "label": "RawNIND-preup",
+          "region": "fine-green-mesh-left",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/triplets/crop-e7df4d261b4d89ee.png",
+            "sha256": "78a0030053d4a0b56480d138fc86db76fa908b76b00f2fb44c81cf381dd621e0"
+          },
+          "metadata": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/triplets/crop-e7df4d261b4d89ee.json",
+            "sha256": "0bde512f0a166f387be2d6fcd5300d3669367d6c3865feaab5471f5f253b6801"
+          }
+        },
+        {
+          "label": "V119",
+          "region": "fine-green-mesh-left",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/triplets/crop-d743cf0dd1498c63.png",
+            "sha256": "d6864ee897e0b61015ac7d7d5037338f8c3237b7124c5b15c33917490da73c9a"
+          },
+          "metadata": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/triplets/crop-d743cf0dd1498c63.json",
+            "sha256": "d7c3f422da989253f355d07fc3a8d18c8716594286f57f8778db84f74d4a6b0a"
+          }
+        },
+        {
+          "label": "V112",
+          "region": "fine-green-mesh-right",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/triplets/crop-5b0cec83decb0105.png",
+            "sha256": "eb8a3018f4a24835f827ef404d8cc47f6ac495410be7d1bbb6c938d5efe545fb"
+          },
+          "metadata": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/triplets/crop-5b0cec83decb0105.json",
+            "sha256": "27d428391c89b4d4f868e720e1f07618466e4ab4fef1987c1a096116f6a04e16"
+          }
+        },
+        {
+          "label": "V114",
+          "region": "fine-green-mesh-right",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/triplets/crop-1fedeecb536c3b2a.png",
+            "sha256": "c26ae3022b9506a0412a4c5e4d836fbfe3632ca4ecd42369a0c00855fba274d1"
+          },
+          "metadata": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/triplets/crop-1fedeecb536c3b2a.json",
+            "sha256": "235de78a7968cc2e8309154cb4b0d1f1da4d1b648a8b15bba84ff3bf450a0f10"
+          }
+        },
+        {
+          "label": "V115",
+          "region": "fine-green-mesh-right",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/triplets/crop-0cb3dfe263bcd678.png",
+            "sha256": "c7c5edefdaad2e5d81d7a2ed9be069e4284478532b7ef4d8ef52096a75e587c5"
+          },
+          "metadata": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/triplets/crop-0cb3dfe263bcd678.json",
+            "sha256": "9f5e3c5d33ba4008d317658ea95f5220422bff0497dd4b940fc3ba45f9cce0ad"
+          }
+        },
+        {
+          "label": "V117",
+          "region": "fine-green-mesh-right",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/triplets/crop-1a6387846d959626.png",
+            "sha256": "80ee52ef726659c742078b8c1992c90aa3a4496c4470566c4134162119e6b139"
+          },
+          "metadata": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/triplets/crop-1a6387846d959626.json",
+            "sha256": "ee06e1641c7d7d97793fd2da6376a0be3e8fdfd2d4873803298a27cb3731ddc9"
+          }
+        },
+        {
+          "label": "RawNIND-preup",
+          "region": "fine-green-mesh-right",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/triplets/crop-4cadd10310dd39e9.png",
+            "sha256": "aba22e2c7d8f152a2cd06497c778bfba5cad2001e2f1f53684cf3cdc2925732d"
+          },
+          "metadata": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/triplets/crop-4cadd10310dd39e9.json",
+            "sha256": "4f41d568edda08e9ef8e1bfa5e07f01de3b1550e87d48d84d82b9489520cb094"
+          }
+        },
+        {
+          "label": "V119",
+          "region": "fine-green-mesh-right",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/triplets/crop-48b1b46646b2b978.png",
+            "sha256": "fe69d9dac33fd30a9e17388dacba22a16487fd075062febdf594b272cb14dba1"
+          },
+          "metadata": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/triplets/crop-48b1b46646b2b978.json",
+            "sha256": "ee91a3faafad22b3aa984464a34722962050f4e532370e5d0bd7750d0f5f1440"
+          }
+        }
+      ],
+      "display_exposure": 4.0,
+      "JPEG_display": "Decode camera sRGB, apply sharedlinear x4 display gain, encode sRGB; intrinsic camera tone/sharpness/denoising/geometric processing differs from RAW pipeline.",
+      "new_root_forwards": 1,
+      "new_encoder_forwards": 1,
+      "new_RAW_decodes": 0,
+      "new_noise_observations": 0,
+      "optimizer_updates": 0,
+      "CUDA_initialized": false,
+      "scope": "Two new native160 regions from one768context, same observedRAW and conditioning across RAW methods. CameraJPEGs separately integer-matched; residual lens/framing/processing differences remain. No warp, native resize, target fit, exactGT, PSNR, training or full-frame/speed claim. Future reports may reuse bound FP32 controls without new forwards."
+    },
+    "profile3879": {
+      "status": "completed-new-green-mesh-CPU-context-inference-awaiting-actual-native-viewing",
+      "driver": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/scripts/evaluate_gfx_green_mesh.py",
+        "sha256": "ad5850b593547bcc44b92d53f370f84037087eee90fed2debe31e4efcafd88c4"
+      },
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/profile3879-evaluation-plan-v1.json",
+        "sha256": "6ae08bff2d82646fb554b5f08ed0829d4ce873176d340c72adf726589fc793c0"
+      },
+      "inputs": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/result-v1.json",
+        "sha256": "610a2fe72e84e5a51daf4cf78a853a4624d56e7118a9235ab2bd007ffd849bbc"
+      },
+      "input_arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+        "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+      },
+      "methods": [
+        {
+          "label": "V114-profile3879",
+          "kind": "checkpoint",
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/V112-continuations-quality-20261024-v3/weights/weights-2285c84b7015bcf122e71b890723f80aaf216bde849256c77f070c2493f9d2d2.pt",
+            "sha256": "2285c84b7015bcf122e71b890723f80aaf216bde849256c77f070c2493f9d2d2"
+          },
+          "prediction": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/profile-transfer-v1/V114-profile3879-RGB-f32.npy",
+            "sha256": "0e6bb7d95df34f8da1b69332fdea0cb53f5aa67a1c9076a394ad448f361f4b42"
+          },
+          "source_inputs_sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64",
+          "actual_root_forwards": 0,
+          "actual_encoder_forwards": 0,
+          "new_inference": false
+        },
+        {
+          "label": "V115-profile3879",
+          "kind": "checkpoint",
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/V112-continuations-quality-20261024-v3/weights/weights-fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84.pt",
+            "sha256": "fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84"
+          },
+          "prediction": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/profile-transfer-v1/V115-profile3879-RGB-f32.npy",
+            "sha256": "8a6e92bc30048c3e4d0cfbae952c308a6ce7a9412ab252fc289e7104221c3eee"
+          },
+          "source_inputs_sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64",
+          "actual_root_forwards": 0,
+          "actual_encoder_forwards": 0,
+          "new_inference": false
+        },
+        {
+          "label": "V119-profile3879",
+          "kind": "checkpoint",
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-cleaned-diverse-quality-v1/work/artifacts/weights/weights-b3c0d43264c6ad8446dd930aafa337298e4690d0d08f2967824f03ecd844f427.pt",
+            "sha256": "b3c0d43264c6ad8446dd930aafa337298e4690d0d08f2967824f03ecd844f427"
+          },
+          "expected_step": 20000,
+          "step": 20000,
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+            "dino_revision": "421020015aa4266363db803b6049a529999afb1e",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "convnext-pyramid",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false,
+            "adc_cfa_projection_mode": "malvar",
+            "raw_kernel_reconstruction": false,
+            "raw_kernel_windows": [
+              1,
+              5,
+              17
+            ],
+            "raw_kernel_phase_conditioning": false,
+            "raw_directional_residual": false,
+            "raw_directional_bank_context": false,
+            "raw_directional_bank_detach_input": false,
+            "raw_spectral_residual": false,
+            "late_rgb_refinement": "none",
+            "isotropic_groups": 6,
+            "isotropic_blocks": 8,
+            "isotropic_local_width": 32,
+            "isotropic_raw_gain": 1.0,
+            "isotropic_residual_scale": 1.0
+          },
+          "prediction": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/profile3879/V119-profile3879-RGB-f32.npy",
+            "sha256": "0b949fe5611be2aa15ff14d9186170c2b1bbf176ae3045459bfc1d56277996f1"
+          },
+          "source_inputs_sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64",
+          "actual_root_forwards": 1,
+          "actual_encoder_forwards": 1,
+          "new_inference": true,
+          "seconds": 88.16186207300052
+        }
+      ],
+      "native_comparison": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/profile3879/comparison-native.png",
+        "sha256": "71c23572080d041f9c05b9ead50b26acad3975b62111fd2861a237dc37a12d44"
+      },
+      "triplets": [
+        {
+          "label": "V114-profile3879",
+          "region": "fine-green-mesh-left",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/profile3879/triplets/crop-3940d2d0d4a009b1.png",
+            "sha256": "e86ab2abe1e87d8d0ae2e08d7641e8a67370e98cd758f2ecb33bc524c8efb4dd"
+          },
+          "metadata": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/profile3879/triplets/crop-3940d2d0d4a009b1.json",
+            "sha256": "3f11c6be5a1826fa7be4c7fed24c667423d586c576777d5614a46cabdff13810"
+          }
+        },
+        {
+          "label": "V115-profile3879",
+          "region": "fine-green-mesh-left",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/profile3879/triplets/crop-7b7b3f9a984b03cb.png",
+            "sha256": "ae7a692233fc2ae8dc8cc6ba92ce7f276092746d78a58421ce5b54e74aa8739b"
+          },
+          "metadata": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/profile3879/triplets/crop-7b7b3f9a984b03cb.json",
+            "sha256": "1f0a7cd8e0ce9c0cb4c7c6239f42c6cf174f0cf236dd31fe1ac3ba220d93ef11"
+          }
+        },
+        {
+          "label": "V119-profile3879",
+          "region": "fine-green-mesh-left",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/profile3879/triplets/crop-985ef6b5552f38af.png",
+            "sha256": "55fb374484963cb6396a1d96dd5c2a8a0c024d39fe60cc6bd6800747c4f6ae06"
+          },
+          "metadata": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/profile3879/triplets/crop-985ef6b5552f38af.json",
+            "sha256": "06545358a6880691216229f460696838f061071691c5b160bbddb1a3291c8ab2"
+          }
+        },
+        {
+          "label": "V114-profile3879",
+          "region": "fine-green-mesh-right",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/profile3879/triplets/crop-68a7a35b0c504247.png",
+            "sha256": "92d5fa6987ba81e81c8beaaafd9f3cb35a43c6182b2784baa84bd17aa18f5536"
+          },
+          "metadata": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/profile3879/triplets/crop-68a7a35b0c504247.json",
+            "sha256": "8488e6cf7e25ba8ced591c7bc6f2f3e07abee7b852b28e308824dc236c4d3ebb"
+          }
+        },
+        {
+          "label": "V115-profile3879",
+          "region": "fine-green-mesh-right",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/profile3879/triplets/crop-52e0b0e0cf785b97.png",
+            "sha256": "393e3766778b76820f644251922ca137c439a764d258d0e5240291ff9afaebd5"
+          },
+          "metadata": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/profile3879/triplets/crop-52e0b0e0cf785b97.json",
+            "sha256": "f05e60c75e58227bd1b7afb8718eeeea9287269eda1ed728eb444780198be34f"
+          }
+        },
+        {
+          "label": "V119-profile3879",
+          "region": "fine-green-mesh-right",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/profile3879/triplets/crop-bf03d481ab30fc61.png",
+            "sha256": "8b8c10694afdc4378560345ecd6f21405597e41b87e8cd5bf17cbb4d27fafdad"
+          },
+          "metadata": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/profile3879/triplets/crop-bf03d481ab30fc61.json",
+            "sha256": "fcaf3cbc125ef7962c3fa45194ae8d94968e6053968304ab2985799411bf8e4f"
+          }
+        }
+      ],
+      "display_exposure": 4.0,
+      "JPEG_display": "Decode camera sRGB, apply sharedlinear x4 display gain, encode sRGB; intrinsic camera tone/sharpness/denoising/geometric processing differs from RAW pipeline.",
+      "new_root_forwards": 1,
+      "new_encoder_forwards": 1,
+      "new_RAW_decodes": 0,
+      "new_noise_observations": 0,
+      "optimizer_updates": 0,
+      "CUDA_initialized": false,
+      "scope": "Two new native160 regions from one768context, same observedRAW and conditioning across RAW methods. CameraJPEGs separately integer-matched; residual lens/framing/processing differences remain. No warp, native resize, target fit, exactGT, PSNR, training or full-frame/speed claim. Future reports may reuse bound FP32 controls without new forwards."
+    }
+  },
+  "published_manifest": {
+    "path": "/home/dllu/proj/demosaic/docs/images/v119-green-mesh-v1/manifest.json",
+    "sha256": "c86c391a1321ff5d3207e87a465ff3a9c288760c14c4fd9896656a30bf2d7b3c"
+  },
+  "native_evaluation_boards": {
+    "nominal": {
+      "path": "/home/dllu/proj/demosaic/docs/images/v119-green-mesh-v1/nominal-comparison-2EV.png",
+      "sha256": "f276881928b2d2461469d2b12bca1d5912547edb2c39486a83570473943c975d"
+    },
+    "profile3879": {
+      "path": "/home/dllu/proj/demosaic/docs/images/v119-green-mesh-v1/profile3879-comparison-2EV.png",
+      "sha256": "71c23572080d041f9c05b9ead50b26acad3975b62111fd2861a237dc37a12d44"
+    }
+  },
+  "independent_pixel_audit": {
+    "status": "passed-independent-V119-native-pixels-and-reuse-audit",
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/native-pixel-audit-v1.py",
+      "sha256": "8f11dac11b6f44b0e45cbaa936173e6c23e6a6f4e6609391a7593ede110418d8"
+    },
+    "manifest": {
+      "path": "/home/dllu/proj/demosaic/docs/images/v119-green-mesh-v1/manifest.json",
+      "sha256": "c86c391a1321ff5d3207e87a465ff3a9c288760c14c4fd9896656a30bf2d7b3c"
+    },
+    "native_boards": 6,
+    "native_board_cells": 36,
+    "native_board_pixel_samples": 2764800,
+    "independent_numpy_transform_max_uint8_difference": 0,
+    "independent_numpy_transform_different_samples": 0,
+    "exact_board_to_triplet_cells": 18,
+    "prior_V114_V115_board_PNGs_byte_exact": 4,
+    "actual_new_V119_root_forwards": 2,
+    "actual_new_V119_encoder_forwards": 2,
+    "retained_control_predictions_reused_without_NN": 7,
+    "audit_neural_forwards": 0,
+    "RAW_decodes": 0,
+    "noise_observations": 0,
+    "scope": "IndependentNumPydisplayarithmetic and retained-predictionreceipts only; no Torch, models, estimator ororiginalmedia reads."
+  },
+  "preserved_renderer_sources": {
+    "earlier_two_model_renderer": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/rendering-executed-v1.py",
+      "sha256": "eb1a9435ddd7cd030fba07c8da1ec4a535b4304a3149a48b03153d8f952b6d0f"
+    },
+    "new_three_model_renderer": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/rendering-executed-v1.py",
+      "sha256": "4ffab3fbfd6aaa19b313b01e3a760779e1b5f5ff3f24ab0c0eb052ec6686492d"
+    }
+  },
+  "actual_views": {
+    "nominal10column_twoROI_board": true,
+    "nearby7column_twoROI_board": true,
+    "V119_two_matched_4EV_boards": true,
+    "V119_two_native_noisy_denoised_independent_reference_triplets": true,
+    "prior4control_boards": "byteexacttoalreadyactuallyviewedV114/V115PNGs"
+  },
+  "findings": "V119 does not clearly recover more fine lattice than V115 at matched conditioning. The nearby DSCF3879 profile makes more diagonal texture visible than the nominal prior, as for the parents. The fine green mesh remains weak, soft and irregular; grain/detail ambiguity and the blue point persist. This combined cleaned-data and extra-training continuation does not resolve this qualitative failure. Full quality panels are still running.",
+  "actual_accounting": {
+    "new_root_forwards": 2,
+    "new_encoder_forwards": 2,
+    "retained_control_predictions_reused": 7,
+    "new_control_forwards": 0,
+    "new_RAW_decodes": 0,
+    "new_noise_observations": 0,
+    "optimizer_updates": 0,
+    "CUDA_initialized": false,
+    "native_ROIs": 2,
+    "context_size": 768,
+    "native_crop_size": 160
+  },
+  "reference": "DSCF3835 ISO100 f/5.6, 2.5s, 46s before DSCF3842 ISO6400 f/1.7, 1/300s. Independent AHD and camera JPEG are qualitative references, not exact GT. No real-photo PSNR.",
+  "scope": "Additional standing qualitative case, not full-frame timing, overall quality ranking, a training causal ablation or automatic promotion. The main DSCF3879/3880 frame and all original numerical, independent, matched and native-camera evaluations remain unchanged.",
+  "persistent_model_copy": {
+    "status": "verified-byte-exact-persistent-V119-final20000-checkpoint",
+    "source": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-cleaned-diverse-quality-v1/work/artifacts/weights/weights-b3c0d43264c6ad8446dd930aafa337298e4690d0d08f2967824f03ecd844f427.pt",
+      "sha256": "b3c0d43264c6ad8446dd930aafa337298e4690d0d08f2967824f03ecd844f427"
+    },
+    "persistent_copy": {
+      "path": "/mnt/external/demosaic/models/v119-final20000.pt",
+      "sha256": "b3c0d43264c6ad8446dd930aafa337298e4690d0d08f2967824f03ecd844f427"
+    },
+    "new_neural_forwards": 0,
+    "scope": "Preservedcompletedendpoint, notmodelpromotion ornewqualityresult. Originalimmutablequalitycopy remainsinplace."
+  }
+}

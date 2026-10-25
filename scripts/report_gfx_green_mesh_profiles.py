@@ -30,7 +30,7 @@ def pixels(values):
 
 
 @torch.inference_mode()
-def main(nominal_path, nearby_path, output):
+def main(nominal_path, nearby_path, output, *, models=("V114", "V115")):
     torch.set_num_threads(2)
     nominal, nearby = [json.loads(Path(p).read_text()) for p in (nominal_path, nearby_path)]
     inputs = [read(r["inputs"]) for r in (nominal, nearby)]
@@ -52,7 +52,7 @@ def main(nominal_path, nearby_path, output):
     font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 11)
     rendered = []
     triplets = []
-    for model in ("V114", "V115"):
+    for model in models:
         methods = [
             next(r for r in nominal["methods"] if r["label"] == model),
             next(r for r in nearby["methods"] if r["label"] == model + "-profile3879"),
@@ -158,5 +158,6 @@ if __name__ == "__main__":
     parser.add_argument("nominal", type=Path)
     parser.add_argument("nearby", type=Path)
     parser.add_argument("output", type=Path)
+    parser.add_argument("--models", nargs="+", default=["V114", "V115"])
     args = parser.parse_args()
-    main(args.nominal, args.nearby, args.output)
+    main(args.nominal, args.nearby, args.output, models=args.models)

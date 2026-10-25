@@ -1,12 +1,21 @@
 # V119: cleaned Commons and more paired scenes on the Small model
 
-V119 is training for the full 20,000 updates from the final V115 Small EMA.
+V119 completed the full 20,000 updates from the final V115 Small EMA.
 Both discarded implementation checks passed: 16 CPU updates at 64px/B1/FP32
-and 16 CUDA updates at native 256px/B16/BF16. The production run starts fresh
-from V115, with fresh AdamW and EMA. Quality results are pending; the existing
+and 16 CUDA updates at native 256px/B16/BF16. The production run started fresh
+from V115, with fresh AdamW and EMA. Full quality evaluation is running; the existing
 V114 general, V115 camera/detail and V117 photo-score options remain documented.
 [Recipe](../configs/quality-v115-cleaned-diverse-v119.yaml) ·
 [Started-run and queued-review receipts](results/v119-training-start-v1.json).
+[Completed training, immutable endpoint and actual counts](results/v119-training-completed-v1.json).
+
+All 20,000 model/optimizer updates and 640 scheduled validation forwards finished.
+Actual domain counts match the declared 10,013/5,021/4,966 batches. The final
+EMA checkpoint is immutable with SHA256
+`b3c0d43264c6ad8446dd930aafa337298e4690d0d08f2967824f03ecd844f427`.
+All 89 AdamW states reached step 20,000; model/EMA/optimizer tensors are finite
+and the official Small encoder remains frozen. These are training-completion
+checks, not a model-quality recommendation.
 
 Small has the stronger known-camera mean and eight-pixel analytic response.
 The [full saved-output natural-detail comparison](local-material-detail.md#tiny-versus-fitted-small-on-the-same-full-photo-support)
@@ -45,7 +54,7 @@ updates; the full endpoint is reviewed after 20,000. This is a combined data
 recipe plus additional training. It does not isolate the effect of corpus size,
 reference masks, camera sampling or extra optimization individually.
 
-## Completed implementation checks and queued quality review
+## Completed training and quality review in progress
 
 The seed first reaches native data at step 14, so both discarded checks cover
 16 updates: 11 Commons, four paired and one native batch. Each verifies the
@@ -77,8 +86,21 @@ identical coordinates and display transforms without resizing pixels. GFX's
 separate ISO100 exposure is an approximate reference, not GT. Actual viewing,
 interpretation and current documentation updates follow the completed results.
 
+The additional [DSCF3842/3835 fine green mesh](gfx-green-mesh.md#v119-after-cleaned-data-training)
+has completed its endpoint review under both previously fixed noise profiles. It uses
+the saved768px RAW context and all seven earlier nominal/nearby-profile control
+predictions. Two new V119 CPU FP32 forwards add no fresh noise or RAW decoding.
+That case supplements the original six main GFX regions; no independent ISO100
+reference is exact GT.
+At matched conditioning V119 shows no clear fine-lattice recovery gain over
+V115. The larger numerical and main GFX results remain pending.
+
 A supplementary [native-camera development comparison](native-camera-development.md)
 is queued after that original job chain. It compares the final V119 checkpoint
 with V114/V115/V117 and RawNIND on 240 new, shared stored observations from
 11 held-out camera captures. Low-noise reference estimates retain their own
 scope and do not replace the primary panels or real GFX review.
+
+A byte-verified persistent copy of the completed endpoint is available at
+`/mnt/external/demosaic/models/v119-final20000.pt`. Its availability does not
+change the current model recommendation while full comparisons are running.

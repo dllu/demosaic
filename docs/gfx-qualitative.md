@@ -42,6 +42,11 @@ AHD → ISO100 camera JPEG, with both ISO100 references **not GT**.
 
 [Both regions, V115, triplets and conditioning evidence](gfx-green-mesh.md#fixed-nearby-capture-profile).
 
+The [completed V119 endpoint comparison](gfx-green-mesh.md#v119-after-cleaned-data-training)
+adds the same two fixed profiles after20k cleaned-data updates. At matched
+conditioning it shows no clear fine-lattice recovery gain over V115; this
+remains an adverse case. The complete main GFX/numerical evaluation is running.
+
 ![Fine green mesh, camera controls and all five methods](images/gfx-green-mesh-20231231-v1/comparison-2EV.png)
 
 The original five-method board above uses the nominal prior and +2EV display.

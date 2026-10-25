@@ -34,7 +34,7 @@ updates the current guides without an old promotion gate.
 
 | Topic | Start here |
 | --- | --- |
-| Current work | [Running V119 Small/data trial](cleaned-diverse-small-training.md) · [Current quality training](quality-first-training.md) · [Current model choices](current-model.md) |
+| Current work | [V119 endpoint review](cleaned-diverse-small-training.md) · [Current quality training](quality-first-training.md) · [Current model choices](current-model.md) |
 | Results | [Experiment index](experiments.md), [PSNR history](performance-history.md) |
 | Older work | [Chronological archive](experiment-archive.md), [local-time diary](../diary/index.md) |
 | Current model | [V114, V115 and useful alternatives](current-model.md) · [Real-camera metrics](real-camera-quality.md) · [GFX comparisons](gfx-qualitative.md) · [Q2/Sony/GFX50R](cross-camera-qualitative.md) |

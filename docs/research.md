@@ -47,10 +47,12 @@ retains structure and grain while losing high-noise PSNR. Scaling DINO offsets
 or substituting Wiener/self/clean-oracle previews gives no consistent gain.
 This is a fixed-weight result, not a trained-backbone/fusion ablation; the
 unavailable clean-image oracle is never a candidate method. Current quality
-work now includes the [running V119 Small continuation](cleaned-diverse-small-training.md)
+work now includes the [V119 Small continuation](cleaned-diverse-small-training.md)
 from final V115 on90,791 cleaned Commons sources and the corrected83-ID paired
 set with the original camera probabilities. Both discarded16-step checks pass;
-the fresh full20k endpoint and queued reviews remain pending. The V112-derived
+the fresh full20k training is complete and full quality review is running.
+The additional fine-mesh case has no clear gain over V115 at matched conditioning.
+The V112-derived
 Tiny/Small material, full quality panels and complete-frame review are finished.
 
 The [larger frozen ConvNeXt check](convnext-small-capacity.md) now pins official

@@ -18,9 +18,9 @@ saved-prediction checks, native review and complete102MP RGB16 exports are done.
 [V116's complete review](docs/v116-quality.md) finds higher tested eight-pixel
 carrier gain, similar weak natural detail and a worse ADC color tail; V114
 retains the better overall balance. These models use90,864 sources, zero optical blur and geometry
-before final downsampling. [V119 is training](docs/cleaned-diverse-small-training.md)
-from V115 Small with90,791 cleaned sources and the expanded paired set; quality
-results are pending. A [native-camera comparison](docs/native-camera-development.md)
+before final downsampling. [V119 completed 20k updates](docs/cleaned-diverse-small-training.md)
+from V115 Small with90,791 cleaned sources and the expanded paired set; its full
+quality evaluation is running. A [native-camera comparison](docs/native-camera-development.md)
 is queued on 11 held-out captures. [Data review](docs/incoming-commons-quality.md) ·
 [Training pipeline](docs/training-pipeline.md) · [Historical diary](diary/index.md).
 
@@ -83,6 +83,9 @@ detail still missing. Below: DSCF3842 camera JPEG → noisy Malvar → V114 nomi
 → V114 nearby profile → DSCF3835 ISO100 AHD → ISO100 camera JPEG. Both ISO100
 references are **not GT**. Native160px cells share +4EV display; camera
 processing/aperture differ. [Matched comparison and limits](docs/gfx-green-mesh.md).
+The [completed V119 mesh check](docs/gfx-green-mesh.md#v119-after-cleaned-data-training)
+shows no clear lattice-recovery gain over V115 at the same conditioning; its
+full quality panels are still running.
 
 ![Fine green mesh, left native crop](docs/images/gfx-green-mesh-profile-transfer-v1/V114-fine-green-mesh-left-4EV.png)
 

@@ -1,12 +1,15 @@
 # Current quality training
 
-V119 is running a full 20,000-update continuation from **V115 Small** on the
+V119 completed a full 20,000-update continuation from **V115 Small** on the
 cleaned Commons corpus and expanded paired data. Both discarded 16-step CPU/CUDA
 checks passed before the fresh production run. Full numerical, independent and
-native-image reviews are queued. Quality results are pending.
+native-image reviews are running or queued. The additional fine-mesh review
+shows no clear lattice-recovery gain over V115; full quality results are pending.
 [Current recipe, execution and review](cleaned-diverse-small-training.md) ·
 [Recipe file](../configs/quality-v115-cleaned-diverse-v119.yaml) ·
 [Started-run evidence](results/v119-training-start-v1.json).
+[Completed endpoint](results/v119-training-completed-v1.json) ·
+[Fine green mesh comparison](gfx-green-mesh.md#v119-after-cleaned-data-training).
 
 ## Useful completed models
 

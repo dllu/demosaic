@@ -19,6 +19,45 @@ The existing DSCF3879/3880 standing scene and its six regions remain in use.
 [Native image metadata](images/gfx-green-mesh-20231231-v1/manifest.json) ·
 [Completed native review and data checks](results/gfx-green-mesh-v1.json).
 
+## V119 after cleaned-data training
+
+V119 completed its original 20,000 updates from V115 Small on 90,791 cleaned
+Commons sources and the expanded paired set. On this case it **does not clearly
+recover more fine lattice than V115 at the same conditioning**. The nearby
+profile reveals more diagonal texture than the nominal prior, as it does for
+the parents; weak, soft and irregular mesh, grain/detail ambiguity and the blue
+point remain. Cleaning plus this continuation has not solved this failure.
+Its complete numerical and main GFX panels are still running, so this observation
+does not establish an overall quality ranking.
+
+The endpoint checkpoint is
+`b3c0d43264c6ad8446dd930aafa337298e4690d0d08f2967824f03ecd844f427`.
+Only two new CPU FP32 forwards were needed, one per fixed profile. All seven
+earlier nominal/nearby-profile controls are reused, with no new RAW decode,
+noise generation or control inference. The same noisy observation, coordinates
+and display transforms apply. The nominal and nearby coefficients are listed
+in the next section. These remain 768px context comparisons.
+
+![V119 left mesh: nominal and nearby conditioning with the same camera controls](images/v119-green-mesh-v1/V119-fine-green-mesh-left-4EV.png)
+
+![V119 right mesh, identical native160 coordinates and +4EV display](images/v119-green-mesh-v1/V119-fine-green-mesh-right-4EV.png)
+
+The two native noisy/V119/independent-reference triplets below use the fixed
+nearby profile and the same +4EV display. DSCF3835 remains a separate-aperture,
+separate-time qualitative reference, **not exact GT**.
+
+![V119 left: noisy, restored and independent ISO100 reference](images/v119-green-mesh-v1/triplets/crop-402acb1a6059987f.png)
+
+![V119 right: noisy, restored and independent ISO100 reference](images/v119-green-mesh-v1/triplets/crop-795173216ecceaff.png)
+
+Matched method boards: [V114/V115/V119 with the nearby profile, +2EV](images/v119-green-mesh-v1/profile3879-comparison-2EV.png) ·
+[all nominal controls and V119, +2EV](images/v119-green-mesh-v1/nominal-comparison-2EV.png).
+[Sources/ROI/checkpoint/noise/display metadata](images/v119-green-mesh-v1/manifest.json) ·
+[Completed review, failure preservation and independent pixel checks](results/v119-green-mesh-v1.json).
+Independent NumPy arithmetic reproduces all 36 matched-profile board cells exactly;
+all 18 triplet cells match their boards. Four parent-control PNGs remain
+byte-identical to the earlier actually viewed publication.
+
 ## Fixed nearby-capture profile
 
 The same V114 and V115 checkpoints were each run once more on the stored 768px
@@ -147,7 +186,7 @@ from the complete102MP standing-scene restorations. All predictions are retained
 as FP32 arrays, and future checkpoint additions can reuse these controls without
 new control inference. A retained-output integration check forbids model loading
 and module calls while reproducing all ten triplets and the full board exactly.
-V119 is still training and is not included yet.
+The additional completed V119 endpoint comparison is above.
 
 Preparation saves decoded context intermediates before alignment. Its `--decoded`
 option reuses those bound intermediates for alignment-only follow-ups without
