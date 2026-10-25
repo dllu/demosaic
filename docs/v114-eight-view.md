@@ -61,6 +61,12 @@ The whole-patch statistic mixes contrasts and can include chance noise/GT
 correlation; it does not establish recovery of faint four-pixel structure.
 The separable Hann window is not power-compensated.
 
+A later [GT-only local contrast analysis](local-material-detail.md) finds much
+lower high-noise response in weak feather/fur blocks: projected gain.31813
+versus.94254 in the strongest local group. Coverage and weighting differ, so
+this is not the same statistic as the whole-patch value. Eight views slightly
+reduce both gain and error in the weakest group; finest detail remains open.
+
 ## Adverse real-camera crops
 
 The same two previously selected M100 crops use fixed input-only priors,

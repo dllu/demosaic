@@ -12,6 +12,13 @@ pilot](v114-eight-view.md) adds fixed material/camera gains and lower selected
 spatial color variation, with slightly higher mean bias; full panels/frame remain
 unmeasured.
 
+A [saved-output local contrast diagnosis](local-material-detail.md) separates
+weak material blocks from strong edges: V114 eight-view high-noise projected
+gain is.31813 in the weakest group, which contains only feather/fur, despite
+high whole-patch gain. Averaging lowers weak-group residual error but slightly
+lowers gain too. This is exploratory evidence for a remaining quality problem,
+not a validated training intervention; V116 remains unchanged.
+
 The [V116 data trial](fine-detail-data-training.md) has started its original20k
 run after the eight-update CUDA check. It tests fine weak sources and reviewed
 paired masks against the exact completed V114 control, preserving its original

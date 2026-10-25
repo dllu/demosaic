@@ -27,6 +27,12 @@ tradeoff. Independent mean/metric checks and native review pass. This qualifies
 a useful optional mode without claiming full427/all-camera/full-color-grid or
 complete102MP results. The original V116 training/review chain is unchanged.
 
+The [local material diagnosis](local-material-detail.md) finds substantial
+remaining weak-detail attenuation: high-noise eight-view gain is.31813 in the
+lowest contrast group, drawn only from feather/fur. Averaging slightly lowers
+gain and residual error together. This complements the whole-patch scores and
+does not change the general photo/color baseline choice.
+
 ## Run the current model
 
 [Explicit selection](../configs/current-model.json):

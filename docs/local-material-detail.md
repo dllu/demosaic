@@ -1,0 +1,117 @@
+# Local fine-detail response
+
+**High whole-patch detail gain hides much weaker local structure at high noise.**
+In the weakest fine-contrast group, V114 eight-view's source-balanced projected
+gain is **.31813** at ISO12800, versus **.94254** in the strongest group. The
+weakest group contains only112 blocks from two sources: white feathers and fur.
+This is an exploratory diagnostic of the existing four held-out material
+contexts, not a new benchmark or a change to the current model choice.
+
+[All results, model hashes and original array bindings](results/local-material-detail-v1.json) ·
+[Native images and display receipts](images/local-material-detail-v1/manifest.json) ·
+[Complete V114 eight-view pilot](v114-eight-view.md).
+
+![Local fine-band gain by GT contrast and noise condition](images/local-material-detail-v1/local-detail-response.png)
+
+[SVG](images/local-material-detail-v1/local-detail-response.svg) ·
+[PDF](images/local-material-detail-v1/local-detail-response.pdf).
+Gain is averaged equally across contributing sources, after pooling blocks
+within each source. Coverage differs between contrast groups; lines do not
+represent the same material mixture at each point.
+
+## Fixed inputs and definition
+
+Reuse the exact12 photographic observations and five saved methods from the
+V114 pilot: four sources at ADC-only/ISO100/ISO12800, RGGB. There are no new
+model calls, optimizer updates, noise draws or RAW decodes. The analysis uses
+linear luminance after the common WB/matrix, before clipping or display.
+
+Each native256 context has a240px interior, partitioned into225 disjoint16×16
+blocks. An orthonormal DCT-II measures the radial1/8–1/3-cycle band, with
+frequency coordinates k/(2N). There is no Hann window or window-power scaling.
+For GT coefficients t and predicted coefficients p, projected gain is
+`sum(p*t)/sum(t*t)`. Orthogonal RMS removes this fitted GT component; band
+error RMS compares p directly with t. Neither is a percentage of recovered
+independent details.
+
+Bins use **GT band RMS / local mean luminance**, not analytic carrier peak
+contrast. Eligibility requires GT mean.02–.9, band RMS≥1e-5 and all GT linear
+RGB samples inside[0,1]. Rules and bins were frozen before this output analysis.
+All900 source blocks remain in the private receipt, including128 exclusions;
+the same772 eligible blocks occur in each noise condition, not2316 independent
+material samples.
+
+| Relative GT fine-band RMS | Blocks per condition | Contributing sources |
+| --- | ---: | ---: |
+| <2% | 112 | 2 |
+| 2–5% | 55 | 3 |
+| 5–10% | 53 | 3 |
+| 10–20% | 71 | 4 |
+| ≥20% | 481 | 4 |
+
+There are84 weak blocks in the egret context and28 in fur. Bark and canopy
+contribute none to the<2% group. These four photographic contexts mix contrasts;
+they are not four globally low-contrast images.
+
+## Weakest group and remaining tradeoff
+
+Source-balanced projected gain for the112 weak blocks:
+
+| Noise | V104 eight | V112 eight | V114 single | V114 eight | Stronger RawNIND |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| ADC-only | .95498 | .96335 | .96674 | .96354 | .58894 |
+| ISO100 | .89182 | .90394 | .90211 | .90307 | .58735 |
+| ISO12800 | .32464 | .32798 | .32161 | .31813 | .28701 |
+
+At high noise, V114 eight-view gain is.22029 in the feather context and.41596
+in fur. It falls slightly versus V114 single in both. Across all112 blocks,
+pooled orthogonal RMS falls.00361068→.00349961 and band-error RMS
+.00717149→.00715576. Lower error and lower fitted detail gain can coexist.
+These pooled RMS values weight blocks equally; the gain table weights sources
+equally. None of these methods resolves the weak high-noise detail problem.
+
+The earlier whole-patch/Hann high-noise gain of.92550 uses a different support,
+window and weighting. It cannot establish performance in these weak subregions;
+the two numbers are not interchangeable measurements or a version regression.
+
+Noisy → V114 eight-view → exact synthetic GT, unchanged160×160 cells from the
+same feather/fur contexts. They mix contrasts and illustrate the materials;
+they do not isolate the16px blocks used for the table. Fine white feather
+structure is smoothed while the eye and outline remain clear. Fur retains
+coarse orientation but loses fine hairs.
+
+![High-noise feathers: noisy, V114 eight views and exact GT](images/local-material-detail-v1/crop-a58004c35d9c0892.png)
+
+![High-noise fur: noisy, V114 eight views and exact GT](images/local-material-detail-v1/crop-f8ccbee8fc3e33dd.png)
+
+The cells use ROI[48,48,160,160], shot.00256, read variance.0000262144,
+WB[2,1,1.5], the shared matrix and display exposure×1. Pixels are at the8×-binned
+evaluation resolution, with no resizing. Both triplets were actually viewed.
+V114 checkpoint SHA256:
+`2285c84b7015bcf122e71b890723f80aaf216bde849256c77f070c2493f9d2d2`.
+Full source, prediction, conditioning and display records accompany each image.
+
+## Interpretation and verification
+
+This supports measuring weak local detail separately from photographic PSNR
+and strong edges. It does not establish a new loss, data intervention or
+deployable correction. Local coarse structure and block boundaries can project
+into the selected band; finite noise can correlate with GT. There is no noise
+debiasing, controlled carrier phase, uncertainty estimate or real-camera claim.
+The lowest bin represents only two materials and one draw per condition.
+Held-out blocks remain diagnostic data and are not added to training.
+
+The [analysis script](../scripts/diagnose_local_material_detail.py) checks every
+explicit cosine transform against a separate even-extension FFT formulation;
+the maximum absolute coefficient difference is1.41e-14. A closed-form fixture
+recovers gain.75 and orthogonal RMS.0001, with independent spatial Parseval
+verification. Target fingerprints match across all three conditions. The actual
+frozen script, plan, all2700 block records and original outputs are retained.
+Torch is never imported. V116's original training, recipe and queued complete
+review remain unchanged; its quality is still pending.
+
+Sources: [Serebit, egret](https://commons.wikimedia.org/wiki/File:Snowy_egret_in_profile.jpg),
+[CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/), and
+[Korall, raccoon](https://commons.wikimedia.org/wiki/File:Racoon_clinging_to_a_tree.JPG),
+[CC BY3.0](https://creativecommons.org/licenses/by/3.0/).
+Modified by binning, cropping, simulated noise, restoration and common display.

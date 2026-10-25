@@ -9,6 +9,13 @@ from V111 are small; the completed camera/color panels favor V112.
 [Matched V111/V112 material results](v111-v112-material.md) ·
 [Complete V112 quality report](v112-quality.md).
 
+The [current local V114 diagnostic](local-material-detail.md) separates weak
+fine structure from strong edges in these same four contexts. At high noise,
+V114 eight-view projected gain is.31813 in the weakest group, with112 blocks
+from only feather/fur, versus.94254 in the strongest group. Whole-patch gain
+does not establish weak-region recovery. Native feather/fur triplets and exact
+coverage accompany the analysis; no model or noise observation is repeated.
+
 The four contexts were selected by viewing clean inputs before inspecting
 these model outputs. They cover mixed contrast, including weak fine structures;
 they are not a set of globally low-contrast images. Their exact source IDs are

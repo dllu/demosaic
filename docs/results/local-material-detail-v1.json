@@ -1,0 +1,4807 @@
+{
+  "status": "completed-exploratory-local-material-diagnostic",
+  "recorded_local": "2026-10-24T18:55:25.413244-07:00",
+  "publisher": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-material-local-detail-v1/publish-v1.py",
+    "sha256": "728093c2637cc79ed9e19478d0fbba0c7a76ee668e0caa882b5a6a57724b534f"
+  },
+  "original_result": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-material-local-detail-v1/output-v1/result-v1.json",
+    "sha256": "2f4d6a8121161e77ed4f83b707c447f1db77ed21bdc205e40d5dd90ff59efbb7"
+  },
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-material-local-detail-v1/plan-v1.json",
+    "sha256": "de1dfcc8bb79e40133c7ce642dfb550a97f6ca21fd0508dbf0e1d8023b7acc26"
+  },
+  "script": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-material-local-detail-v1/diagnose_local_material_detail.py",
+    "sha256": "ecd297e210f3d629663ff8a8453befafc07353fc52232916634d101dadcfdb59"
+  },
+  "public_script": {
+    "path": "/home/dllu/proj/demosaic/scripts/diagnose_local_material_detail.py",
+    "sha256": "ecd297e210f3d629663ff8a8453befafc07353fc52232916634d101dadcfdb59"
+  },
+  "models": {
+    "V104 eight": {
+      "path": "/mnt/external/demosaic/models/v104-final20000.pt",
+      "sha256": "8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300",
+      "self_ensemble": "dihedral8"
+    },
+    "V112 eight": {
+      "path": "/mnt/external/demosaic/models/v112-final20000.pt",
+      "sha256": "21c3cca8370df21e3412f9ccbf441c35afcfad8fd03174c7727f4f88874783b1",
+      "self_ensemble": "dihedral8"
+    },
+    "V114 single": {
+      "path": "/mnt/external/demosaic/models/v114-final20000.pt",
+      "sha256": "2285c84b7015bcf122e71b890723f80aaf216bde849256c77f070c2493f9d2d2",
+      "self_ensemble": "none"
+    },
+    "V114 eight": {
+      "path": "/mnt/external/demosaic/models/v114-final20000.pt",
+      "sha256": "2285c84b7015bcf122e71b890723f80aaf216bde849256c77f070c2493f9d2d2",
+      "self_ensemble": "dihedral8"
+    },
+    "RawNIND preup": {
+      "path": "/mnt/external/demosaic/references/rawnind-preupsample-20261023-v1/utnet2-bayer-preupsample.pt",
+      "sha256": "3d8d5fab966f790f4adbaf1786ca1ee81cb027d9cd45220787247b0af99fd814",
+      "self_ensemble": "none",
+      "gain": "input-only CFA-channel"
+    }
+  },
+  "diagnostic": {
+    "recorded_local": "2026-10-24T18:53:14.864417-07:00",
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-material-local-detail-v1/plan-v1.json",
+      "sha256": "de1dfcc8bb79e40133c7ce642dfb550a97f6ca21fd0508dbf0e1d8023b7acc26"
+    },
+    "script": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-material-local-detail-v1/diagnose_local_material_detail.py",
+      "sha256": "ecd297e210f3d629663ff8a8453befafc07353fc52232916634d101dadcfdb59"
+    },
+    "block_observations": 2700,
+    "unique_source_blocks": 900,
+    "same_GT_across_conditions_verified": true,
+    "summaries": [
+      {
+        "condition": "adc-only",
+        "bin": 0,
+        "relative_GT_band_RMS_lower": 0.0,
+        "relative_GT_band_RMS_upper": 0.02,
+        "method": "RawNIND preup",
+        "sources_with_eligible_blocks": 2,
+        "source_balanced_GT_projected_gain": 0.5889345660015493,
+        "pooled": {
+          "blocks": 112,
+          "GT_projected_gain": 0.4617915982686399,
+          "GT_band_RMS": 0.008176976827098012,
+          "band_error_RMS": 0.005703784689163706,
+          "orthogonal_band_RMS": 0.0036283720594993264
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.756473369925395,
+              "cross": 0.7661700674288804,
+              "prediction_energy": 0.6687466778509153,
+              "blocks": 84
+            },
+            "blocks": 84,
+            "GT_projected_gain": 0.4361979410262411,
+            "GT_band_RMS": 0.009037767384749738,
+            "band_error_RMS": 0.006443723561063569,
+            "orthogonal_band_RMS": 0.003944278415061253
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.1606211333605093,
+              "cross": 0.11912806727554158,
+              "prediction_energy": 0.11754584549388447,
+              "blocks": 28
+            },
+            "blocks": 28,
+            "GT_projected_gain": 0.7416711909768575,
+            "GT_band_RMS": 0.004733717589913153,
+            "band_error_RMS": 0.0023596438559952155,
+            "orthogonal_band_RMS": 0.0020180543208815726
+          }
+        ]
+      },
+      {
+        "condition": "adc-only",
+        "bin": 0,
+        "relative_GT_band_RMS_lower": 0.0,
+        "relative_GT_band_RMS_upper": 0.02,
+        "method": "V104 eight",
+        "sources_with_eligible_blocks": 2,
+        "source_balanced_GT_projected_gain": 0.95497662725085,
+        "pooled": {
+          "blocks": 112,
+          "GT_projected_gain": 0.9553314815241005,
+          "GT_band_RMS": 0.008176976827098012,
+          "band_error_RMS": 0.0016433537829051413,
+          "orthogonal_band_RMS": 0.0016022489132489538
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.756473369925395,
+              "cross": 1.678139774355292,
+              "prediction_energy": 1.6708389709467188,
+              "blocks": 84
+            },
+            "blocks": 84,
+            "GT_projected_gain": 0.9554029130692542,
+            "GT_band_RMS": 0.009037767384749738,
+            "band_error_RMS": 0.0018174807406491737,
+            "orthogonal_band_RMS": 0.0017722247071110882
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.1606211333605093,
+              "cross": 0.15332095769054052,
+              "prediction_energy": 0.1524199272538138,
+              "blocks": 28
+            },
+            "blocks": 28,
+            "GT_projected_gain": 0.9545503414324457,
+            "GT_band_RMS": 0.004733717589913153,
+            "band_error_RMS": 0.0009448480805201227,
+            "orthogonal_band_RMS": 0.0009200272600622455
+          }
+        ]
+      },
+      {
+        "condition": "adc-only",
+        "bin": 0,
+        "relative_GT_band_RMS_lower": 0.0,
+        "relative_GT_band_RMS_upper": 0.02,
+        "method": "V112 eight",
+        "sources_with_eligible_blocks": 2,
+        "source_balanced_GT_projected_gain": 0.9633449198477936,
+        "pooled": {
+          "blocks": 112,
+          "GT_projected_gain": 0.9612750565319558,
+          "GT_band_RMS": 0.008176976827098012,
+          "band_error_RMS": 0.001641835942715466,
+          "orthogonal_band_RMS": 0.0016110109131584067
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.756473369925395,
+              "cross": 1.6877221860081868,
+              "prediction_energy": 1.6899493112777186,
+              "blocks": 84
+            },
+            "blocks": 84,
+            "GT_projected_gain": 0.9608583966632365,
+            "GT_band_RMS": 0.009037767384749738,
+            "band_error_RMS": 0.0018167835925478925,
+            "orthogonal_band_RMS": 0.0017820105625758935
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.1606211333605093,
+              "cross": 0.15513294101507233,
+              "prediction_energy": 0.1559554070176787,
+              "blocks": 28
+            },
+            "blocks": 28,
+            "GT_projected_gain": 0.9658314430323507,
+            "GT_band_RMS": 0.004733717589913153,
+            "band_error_RMS": 0.000938292696718816,
+            "orthogonal_band_RMS": 0.0009242467021372989
+          }
+        ]
+      },
+      {
+        "condition": "adc-only",
+        "bin": 0,
+        "relative_GT_band_RMS_lower": 0.0,
+        "relative_GT_band_RMS_upper": 0.02,
+        "method": "V114 eight",
+        "sources_with_eligible_blocks": 2,
+        "source_balanced_GT_projected_gain": 0.9635371336609242,
+        "pooled": {
+          "blocks": 112,
+          "GT_projected_gain": 0.9618878140429327,
+          "GT_band_RMS": 0.008176976827098012,
+          "band_error_RMS": 0.0016355109454026752,
+          "orthogonal_band_RMS": 0.0016055450877455579
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.756473369925395,
+              "cross": 1.6889471720049032,
+              "prediction_energy": 1.6919647198348564,
+              "blocks": 84
+            },
+            "blocks": 84,
+            "GT_projected_gain": 0.9615558088857562,
+            "GT_band_RMS": 0.009037767384749738,
+            "band_error_RMS": 0.0018112134410444116,
+            "orthogonal_band_RMS": 0.0017775749956495891
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.1606211333605093,
+              "cross": 0.1550826690744969,
+              "prediction_energy": 0.15569507865623589,
+              "blocks": 28
+            },
+            "blocks": 28,
+            "GT_projected_gain": 0.9655184584360921,
+            "GT_band_RMS": 0.004733717589913153,
+            "band_error_RMS": 0.0009263378557891286,
+            "orthogonal_band_RMS": 0.0009118438107605067
+          }
+        ]
+      },
+      {
+        "condition": "adc-only",
+        "bin": 0,
+        "relative_GT_band_RMS_lower": 0.0,
+        "relative_GT_band_RMS_upper": 0.02,
+        "method": "V114 single",
+        "sources_with_eligible_blocks": 2,
+        "source_balanced_GT_projected_gain": 0.9667436800618093,
+        "pooled": {
+          "blocks": 112,
+          "GT_projected_gain": 0.9646440315781903,
+          "GT_band_RMS": 0.008176976827098012,
+          "band_error_RMS": 0.0016705416392059655,
+          "orthogonal_band_RMS": 0.0016453351346086074
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.756473369925395,
+              "cross": 1.6936291696695411,
+              "prediction_energy": 1.7046286625466311,
+              "blocks": 84
+            },
+            "blocks": 84,
+            "GT_projected_gain": 0.9642213760072417,
+            "GT_band_RMS": 0.009037767384749738,
+            "band_error_RMS": 0.0018530924163619382,
+            "orthogonal_band_RMS": 0.001824661759795796
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.1606211333605093,
+              "cross": 0.15568460089656186,
+              "prediction_energy": 0.15691959430816885,
+              "blocks": 28
+            },
+            "blocks": 28,
+            "GT_projected_gain": 0.969265984116377,
+            "GT_band_RMS": 0.004733717589913153,
+            "band_error_RMS": 0.0009278916760858697,
+            "orthogonal_band_RMS": 0.0009164151582350365
+          }
+        ]
+      },
+      {
+        "condition": "adc-only",
+        "bin": 1,
+        "relative_GT_band_RMS_lower": 0.02,
+        "relative_GT_band_RMS_upper": 0.05,
+        "method": "RawNIND preup",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.5485371695528212,
+        "pooled": {
+          "blocks": 55,
+          "GT_projected_gain": 0.5328746461774885,
+          "GT_band_RMS": 0.011318702435429817,
+          "band_error_RMS": 0.007283906471143679,
+          "orthogonal_band_RMS": 0.0050100150163151815
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.1366243723892373,
+              "cross": 0.6019664027731458,
+              "prediction_energy": 0.5330663771506161,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.5296089168911489,
+            "GT_band_RMS": 0.019235251828014145,
+            "band_error_RMS": 0.012313160197950979,
+            "orthogonal_band_RMS": 0.008351404934455898
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 0.37681103589263815,
+              "cross": 0.15334471833182917,
+              "prediction_energy": 0.13154933729637466,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.4069538939287343,
+            "GT_band_RMS": 0.011075190400754659,
+            "band_error_RMS": 0.008102350974676866,
+            "orthogonal_band_RMS": 0.004744277908216166
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.2903959812091372,
+              "cross": 0.2059048923338956,
+              "prediction_energy": 0.20100345514333026,
+              "blocks": 31
+            },
+            "blocks": 31,
+            "GT_projected_gain": 0.7090486978385805,
+            "GT_band_RMS": 0.006049151637661727,
+            "band_error_RMS": 0.003166849848713847,
+            "orthogonal_band_RMS": 0.002632737716234457
+          }
+        ]
+      },
+      {
+        "condition": "adc-only",
+        "bin": 1,
+        "relative_GT_band_RMS_lower": 0.02,
+        "relative_GT_band_RMS_upper": 0.05,
+        "method": "V104 eight",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.9762586981450719,
+        "pooled": {
+          "blocks": 55,
+          "GT_projected_gain": 0.9820578189717379,
+          "GT_band_RMS": 0.011318702435429817,
+          "band_error_RMS": 0.0015081168925186758,
+          "orthogonal_band_RMS": 0.001494380867868966
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.1366243723892373,
+              "cross": 1.1251873289626948,
+              "prediction_energy": 1.1276301767310806,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.9899377105538382,
+            "GT_band_RMS": 0.019235251828014145,
+            "band_error_RMS": 0.0021256043254446596,
+            "orthogonal_band_RMS": 0.0021167739335897734
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 0.37681103589263815,
+              "cross": 0.36300341159979005,
+              "prediction_energy": 0.35951072744362894,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.9633566350833148,
+            "GT_band_RMS": 0.011075190400754659,
+            "band_error_RMS": 0.0018324104095638063,
+            "orthogonal_band_RMS": 0.001786904613938214
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.2903959812091372,
+              "cross": 0.28327597959381845,
+              "prediction_energy": 0.283984931832807,
+              "blocks": 31
+            },
+            "blocks": 31,
+            "GT_projected_gain": 0.9754817487980626,
+            "GT_band_RMS": 0.006049151637661727,
+            "band_error_RMS": 0.0009932327634383327,
+            "orthogonal_band_RMS": 0.000982096785472989
+          }
+        ]
+      },
+      {
+        "condition": "adc-only",
+        "bin": 1,
+        "relative_GT_band_RMS_lower": 0.02,
+        "relative_GT_band_RMS_upper": 0.05,
+        "method": "V112 eight",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.9781146485612537,
+        "pooled": {
+          "blocks": 55,
+          "GT_projected_gain": 0.9828088063561369,
+          "GT_band_RMS": 0.011318702435429817,
+          "band_error_RMS": 0.0014972526179733267,
+          "orthogonal_band_RMS": 0.0014845548980136124
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.1366243723892373,
+              "cross": 1.1248538909427435,
+              "prediction_energy": 1.1270752911109865,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.989644352406634,
+            "GT_band_RMS": 0.019235251828014145,
+            "band_error_RMS": 0.002134162356319316,
+            "orthogonal_band_RMS": 0.0021248460925325243
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 0.37681103589263815,
+              "cross": 0.3629424563911073,
+              "prediction_energy": 0.3589409043204361,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.9631948690975114,
+            "GT_band_RMS": 0.011075190400754659,
+            "band_error_RMS": 0.0017921838610523001,
+            "orthogonal_band_RMS": 0.0017452122515668358
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.2903959812091372,
+              "cross": 0.28502502743954317,
+              "prediction_energy": 0.28735922148490667,
+              "blocks": 31
+            },
+            "blocks": 31,
+            "GT_projected_gain": 0.9815047241796161,
+            "GT_band_RMS": 0.006049151637661727,
+            "band_error_RMS": 0.0009853480415434285,
+            "orthogonal_band_RMS": 0.0009789757227182227
+          }
+        ]
+      },
+      {
+        "condition": "adc-only",
+        "bin": 1,
+        "relative_GT_band_RMS_lower": 0.02,
+        "relative_GT_band_RMS_upper": 0.05,
+        "method": "V114 eight",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.9784692043645195,
+        "pooled": {
+          "blocks": 55,
+          "GT_projected_gain": 0.9831624757746313,
+          "GT_band_RMS": 0.011318702435429817,
+          "band_error_RMS": 0.001483350939276645,
+          "orthogonal_band_RMS": 0.0014710573346554837
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.1366243723892373,
+              "cross": 1.125096432903882,
+              "prediction_energy": 1.1275143836431685,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.9898577403710576,
+            "GT_band_RMS": 0.019235251828014145,
+            "band_error_RMS": 0.0021306519677086024,
+            "orthogonal_band_RMS": 0.002121701704186459
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 0.37681103589263815,
+              "cross": 0.36358998885447485,
+              "prediction_energy": 0.3597837449260113,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.964913323181091,
+            "GT_band_RMS": 0.011075190400754659,
+            "band_error_RMS": 0.0017506326153532983,
+            "orthogonal_band_RMS": 0.001706959607579769
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.2903959812091372,
+              "cross": 0.28477291301362034,
+              "prediction_energy": 0.2867697980112271,
+              "blocks": 31
+            },
+            "blocks": 31,
+            "GT_projected_gain": 0.9806365495414098,
+            "GT_band_RMS": 0.006049151637661727,
+            "band_error_RMS": 0.0009798854798235353,
+            "orthogonal_band_RMS": 0.0009728594673344466
+          }
+        ]
+      },
+      {
+        "condition": "adc-only",
+        "bin": 1,
+        "relative_GT_band_RMS_lower": 0.02,
+        "relative_GT_band_RMS_upper": 0.05,
+        "method": "V114 single",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.9809767274268543,
+        "pooled": {
+          "blocks": 55,
+          "GT_projected_gain": 0.9854377562933202,
+          "GT_band_RMS": 0.011318702435429817,
+          "band_error_RMS": 0.0015286098790822458,
+          "orthogonal_band_RMS": 0.0015196975521322728
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.1366243723892373,
+              "cross": 1.1271277243533733,
+              "prediction_energy": 1.132366747826446,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.991644866794558,
+            "GT_band_RMS": 0.019235251828014145,
+            "band_error_RMS": 0.002190152521929781,
+            "orthogonal_band_RMS": 0.0021842480105546554
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 0.37681103589263815,
+              "cross": 0.36536636709509734,
+              "prediction_energy": 0.3643080085600593,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.9696275647276912,
+            "GT_band_RMS": 0.011075190400754659,
+            "band_error_RMS": 0.0018387387992611756,
+            "orthogonal_band_RMS": 0.0018077080872537996
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.2903959812091372,
+              "cross": 0.2850694657430151,
+              "prediction_energy": 0.2875209746324372,
+              "blocks": 31
+            },
+            "blocks": 31,
+            "GT_projected_gain": 0.9816577507583136,
+            "GT_band_RMS": 0.006049151637661727,
+            "band_error_RMS": 0.000989996866056371,
+            "orthogonal_band_RMS": 0.000983759509401591
+          }
+        ]
+      },
+      {
+        "condition": "adc-only",
+        "bin": 2,
+        "relative_GT_band_RMS_lower": 0.05,
+        "relative_GT_band_RMS_upper": 0.1,
+        "method": "RawNIND preup",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.5965010858540558,
+        "pooled": {
+          "blocks": 53,
+          "GT_projected_gain": 0.6303472194131874,
+          "GT_band_RMS": 0.028461277497960534,
+          "band_error_RMS": 0.015595474808909516,
+          "orthogonal_band_RMS": 0.011512245853279536
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 8.079863824698766,
+              "cross": 5.368822959765048,
+              "prediction_energy": 4.761658417838527,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.664469485655621,
+            "GT_band_RMS": 0.047480799175809364,
+            "band_error_RMS": 0.02422847629008192,
+            "orthogonal_band_RMS": 0.01825415335556857
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 1.8699983569803063,
+              "cross": 0.8754070710219879,
+              "prediction_energy": 0.7634684915433224,
+              "blocks": 25
+            },
+            "blocks": 25,
+            "GT_projected_gain": 0.4681325348518513,
+            "GT_band_RMS": 0.017093485404626314,
+            "band_error_RMS": 0.011743699816814366,
+            "orthogonal_band_RMS": 0.007433685580250602
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 1.0408191088792584,
+              "cross": 0.6837153601729503,
+              "prediction_energy": 0.6400757286838079,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.6569012370546952,
+            "GT_band_RMS": 0.017041335553084708,
+            "band_error_RMS": 0.009352116673625867,
+            "orthogonal_band_RMS": 0.007299061652190873
+          }
+        ]
+      },
+      {
+        "condition": "adc-only",
+        "bin": 2,
+        "relative_GT_band_RMS_lower": 0.05,
+        "relative_GT_band_RMS_upper": 0.1,
+        "method": "V104 eight",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.9803037637008284,
+        "pooled": {
+          "blocks": 53,
+          "GT_projected_gain": 0.9879446327659269,
+          "GT_band_RMS": 0.028461277497960534,
+          "band_error_RMS": 0.0028835663319618757,
+          "orthogonal_band_RMS": 0.0028630804264057653
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 8.079863824698766,
+              "cross": 8.019175444617384,
+              "prediction_energy": 8.030208522766229,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.9924889352842967,
+            "GT_band_RMS": 0.047480799175809364,
+            "band_error_RMS": 0.004473429063543809,
+            "orthogonal_band_RMS": 0.004459190695959435
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 1.8699983569803063,
+              "cross": 1.8291214039380002,
+              "prediction_energy": 1.8172008031698748,
+              "blocks": 25
+            },
+            "blocks": 25,
+            "GT_projected_gain": 0.9781406476162285,
+            "GT_band_RMS": 0.017093485404626314,
+            "band_error_RMS": 0.0021270707658281375,
+            "orthogonal_band_RMS": 0.002093994707836188
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 1.0408191088792584,
+              "cross": 1.009887742892608,
+              "prediction_energy": 0.9910958730034529,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.9702817082019595,
+            "GT_band_RMS": 0.017041335553084708,
+            "band_error_RMS": 0.0018404173950268051,
+            "orthogonal_band_RMS": 0.0017693658015441804
+          }
+        ]
+      },
+      {
+        "condition": "adc-only",
+        "bin": 2,
+        "relative_GT_band_RMS_lower": 0.05,
+        "relative_GT_band_RMS_upper": 0.1,
+        "method": "V112 eight",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.9817633663917568,
+        "pooled": {
+          "blocks": 53,
+          "GT_projected_gain": 0.9886019861567814,
+          "GT_band_RMS": 0.028461277497960534,
+          "band_error_RMS": 0.0028146270460000563,
+          "orthogonal_band_RMS": 0.002795869941148269
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 8.079863824698766,
+              "cross": 8.019321740451703,
+              "prediction_energy": 8.027830372269142,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.9925070415095368,
+            "GT_band_RMS": 0.047480799175809364,
+            "band_error_RMS": 0.004389348793442644,
+            "orthogonal_band_RMS": 0.004374906782817873
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 1.8699983569803063,
+              "cross": 1.8348491816888466,
+              "prediction_energy": 1.8264438241560568,
+              "blocks": 25
+            },
+            "blocks": 25,
+            "GT_projected_gain": 0.9812036330618926,
+            "GT_band_RMS": 0.017093485404626314,
+            "band_error_RMS": 0.002044192144782913,
+            "orthogonal_band_RMS": 0.00201878447967148
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 1.0408191088792584,
+              "cross": 1.0112384309215923,
+              "prediction_energy": 0.9933506166775196,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.9715794246038408,
+            "GT_band_RMS": 0.017041335553084708,
+            "band_error_RMS": 0.0018062441078742233,
+            "orthogonal_band_RMS": 0.0017400998522884184
+          }
+        ]
+      },
+      {
+        "condition": "adc-only",
+        "bin": 2,
+        "relative_GT_band_RMS_lower": 0.05,
+        "relative_GT_band_RMS_upper": 0.1,
+        "method": "V114 eight",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.9812575032493709,
+        "pooled": {
+          "blocks": 53,
+          "GT_projected_gain": 0.9878322803388979,
+          "GT_band_RMS": 0.028461277497960534,
+          "band_error_RMS": 0.0027717489354969708,
+          "orthogonal_band_RMS": 0.0027500295170697553
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 8.079863824698766,
+              "cross": 8.01112775863406,
+              "prediction_energy": 8.009576254548444,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.9914929177575257,
+            "GT_band_RMS": 0.047480799175809364,
+            "band_error_RMS": 0.0043296296049993915,
+            "orthogonal_band_RMS": 0.004310746881369599
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 1.8699983569803063,
+              "cross": 1.8354319519466629,
+              "prediction_energy": 1.8264887300993051,
+              "blocks": 25
+            },
+            "blocks": 25,
+            "GT_projected_gain": 0.9815152751848073,
+            "GT_band_RMS": 0.017093485404626314,
+            "band_error_RMS": 0.0020009053882822977,
+            "orthogonal_band_RMS": 0.0019758001821013984
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 1.0408191088792584,
+              "cross": 1.0103900511495738,
+              "prediction_energy": 0.9913906587007794,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.9707643168057798,
+            "GT_band_RMS": 0.017041335553084708,
+            "band_error_RMS": 0.0017857997408819554,
+            "orthogonal_band_RMS": 0.0017148942944639049
+          }
+        ]
+      },
+      {
+        "condition": "adc-only",
+        "bin": 2,
+        "relative_GT_band_RMS_lower": 0.05,
+        "relative_GT_band_RMS_upper": 0.1,
+        "method": "V114 single",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.9840729765351689,
+        "pooled": {
+          "blocks": 53,
+          "GT_projected_gain": 0.9897155104790989,
+          "GT_band_RMS": 0.028461277497960534,
+          "band_error_RMS": 0.002905861030963516,
+          "orthogonal_band_RMS": 0.0028910810014316727
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 8.079863824698766,
+              "cross": 8.022779250772698,
+              "prediction_energy": 8.037844633682528,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.9929349584145751,
+            "GT_band_RMS": 0.047480799175809364,
+            "band_error_RMS": 0.004486772375472336,
+            "orthogonal_band_RMS": 0.004474214689025179
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 1.8699983569803063,
+              "cross": 1.8393926011689044,
+              "prediction_energy": 1.8389370736269104,
+              "blocks": 25
+            },
+            "blocks": 25,
+            "GT_projected_gain": 0.9836332712822141,
+            "GT_band_RMS": 0.017093485404626314,
+            "band_error_RMS": 0.002170477635704875,
+            "orthogonal_band_RMS": 0.0021523719534663867
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 1.0408191088792584,
+              "cross": 1.015475892056416,
+              "prediction_energy": 1.0024010665269714,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.9756506999087173,
+            "GT_band_RMS": 0.017041335553084708,
+            "band_error_RMS": 0.0018501622224210378,
+            "orthogonal_band_RMS": 0.0018030311238947786
+          }
+        ]
+      },
+      {
+        "condition": "adc-only",
+        "bin": 3,
+        "relative_GT_band_RMS_lower": 0.1,
+        "relative_GT_band_RMS_upper": 0.2,
+        "method": "RawNIND preup",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.5779848828864971,
+        "pooled": {
+          "blocks": 71,
+          "GT_projected_gain": 0.5634607661536306,
+          "GT_band_RMS": 0.043863407066316244,
+          "band_error_RMS": 0.026502554345261737,
+          "orthogonal_band_RMS": 0.018323092681542464
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 12.312295848076564,
+              "cross": 4.779747950717829,
+              "prediction_energy": 3.8940489277962635,
+              "blocks": 13
+            },
+            "blocks": 13,
+            "GT_projected_gain": 0.38820931609310905,
+            "GT_band_RMS": 0.06082440404497896,
+            "band_error_RMS": 0.04469060597879104,
+            "orthogonal_band_RMS": 0.024749382305512265
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 13.440606538449472,
+              "cross": 9.074785307442411,
+              "prediction_energy": 8.194199558653356,
+              "blocks": 16
+            },
+            "blocks": 16,
+            "GT_projected_gain": 0.6751767698490556,
+            "GT_band_RMS": 0.05728348872647458,
+            "band_error_RMS": 0.029169977183756593,
+            "orthogonal_band_RMS": 0.022464790852619425
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 3.7165513528772625,
+              "cross": 2.12099124375344,
+              "prediction_energy": 1.824622582868203,
+              "blocks": 19
+            },
+            "blocks": 19,
+            "GT_projected_gain": 0.5706879960400443,
+            "GT_band_RMS": 0.02764224334160804,
+            "band_error_RMS": 0.016343301532531967,
+            "orthogonal_band_RMS": 0.011237185138731136
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 5.501142623359122,
+              "cross": 3.7290345174977992,
+              "prediction_energy": 3.292207397647595,
+              "blocks": 23
+            },
+            "blocks": 23,
+            "GT_projected_gain": 0.6778654495637793,
+            "GT_band_RMS": 0.030566277505501536,
+            "band_error_RMS": 0.015059218398226226,
+            "orthogonal_band_RMS": 0.011394182777003239
+          }
+        ]
+      },
+      {
+        "condition": "adc-only",
+        "bin": 3,
+        "relative_GT_band_RMS_lower": 0.1,
+        "relative_GT_band_RMS_upper": 0.2,
+        "method": "V104 eight",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.9885001424799751,
+        "pooled": {
+          "blocks": 71,
+          "GT_projected_gain": 0.992991712928021,
+          "GT_band_RMS": 0.043863407066316244,
+          "band_error_RMS": 0.0036406044472073974,
+          "orthogonal_band_RMS": 0.0036276027157071877
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 12.312295848076564,
+              "cross": 12.334394114005915,
+              "prediction_energy": 12.439529941369704,
+              "blocks": 13
+            },
+            "blocks": 13,
+            "GT_projected_gain": 1.0017948127791945,
+            "GT_band_RMS": 0.06082440404497896,
+            "band_error_RMS": 0.004995116648774789,
+            "orthogonal_band_RMS": 0.004993923566841108
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 13.440606538449472,
+              "cross": 13.374608460237067,
+              "prediction_energy": 13.396904904187766,
+              "blocks": 16
+            },
+            "blocks": 16,
+            "GT_projected_gain": 0.9950896503053188,
+            "GT_band_RMS": 0.05728348872647458,
+            "band_error_RMS": 0.00464287409101048,
+            "orthogonal_band_RMS": 0.004634345723311994
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 3.7165513528772625,
+              "cross": 3.644231219794661,
+              "prediction_energy": 3.604800943672652,
+              "blocks": 19
+            },
+            "blocks": 19,
+            "GT_projected_gain": 0.9805410644934012,
+            "GT_band_RMS": 0.02764224334160804,
+            "band_error_RMS": 0.002600364384914599,
+            "orthogonal_band_RMS": 0.0025441247523605116
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 5.501142623359122,
+              "cross": 5.372278590336238,
+              "prediction_energy": 5.280097334224104,
+              "blocks": 23
+            },
+            "blocks": 23,
+            "GT_projected_gain": 0.9765750423419859,
+            "GT_band_RMS": 0.030566277505501536,
+            "band_error_RMS": 0.0024960150615105825,
+            "orthogonal_band_RMS": 0.0023911117682021304
+          }
+        ]
+      },
+      {
+        "condition": "adc-only",
+        "bin": 3,
+        "relative_GT_band_RMS_lower": 0.1,
+        "relative_GT_band_RMS_upper": 0.2,
+        "method": "V112 eight",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.9890097716178825,
+        "pooled": {
+          "blocks": 71,
+          "GT_projected_gain": 0.99322347642658,
+          "GT_band_RMS": 0.043863407066316244,
+          "band_error_RMS": 0.003575274985854837,
+          "orthogonal_band_RMS": 0.0035628975241331607
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 12.312295848076564,
+              "cross": 12.333990412221665,
+              "prediction_energy": 12.43655184050817,
+              "blocks": 13
+            },
+            "blocks": 13,
+            "GT_projected_gain": 1.00176202427336,
+            "GT_band_RMS": 0.06082440404497896,
+            "band_error_RMS": 0.004929395251193464,
+            "orthogonal_band_RMS": 0.004928230033171136
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 13.440606538449472,
+              "cross": 13.3752887819889,
+              "prediction_energy": 13.39563959652666,
+              "blocks": 16
+            },
+            "blocks": 16,
+            "GT_projected_gain": 0.9951402671989751,
+            "GT_band_RMS": 0.05728348872647458,
+            "band_error_RMS": 0.004573311542677792,
+            "orthogonal_band_RMS": 0.004564830958360986
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 3.7165513528772625,
+              "cross": 3.6510783337631203,
+              "prediction_energy": 3.615301165389453,
+              "blocks": 19
+            },
+            "blocks": 19,
+            "GT_projected_gain": 0.9823833944703994,
+            "GT_band_RMS": 0.02764224334160804,
+            "band_error_RMS": 0.002470876862839327,
+            "orthogonal_band_RMS": 0.002422416148791407
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 5.501142623359122,
+              "cross": 5.373259764159921,
+              "prediction_energy": 5.2814819971766465,
+              "blocks": 23
+            },
+            "blocks": 23,
+            "GT_projected_gain": 0.9767534005287954,
+            "GT_band_RMS": 0.030566277505501536,
+            "band_error_RMS": 0.002476283298996642,
+            "orthogonal_band_RMS": 0.002372146834858554
+          }
+        ]
+      },
+      {
+        "condition": "adc-only",
+        "bin": 3,
+        "relative_GT_band_RMS_lower": 0.1,
+        "relative_GT_band_RMS_upper": 0.2,
+        "method": "V114 eight",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.9883957354754929,
+        "pooled": {
+          "blocks": 71,
+          "GT_projected_gain": 0.9925594772076748,
+          "GT_band_RMS": 0.043863407066316244,
+          "band_error_RMS": 0.0035158181611095103,
+          "orthogonal_band_RMS": 0.0035006373894130153
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 12.312295848076564,
+              "cross": 12.322603296071213,
+              "prediction_energy": 12.410499107520689,
+              "blocks": 13
+            },
+            "blocks": 13,
+            "GT_projected_gain": 1.000837167017576,
+            "GT_band_RMS": 0.06082440404497896,
+            "band_error_RMS": 0.004828437752965503,
+            "orthogonal_band_RMS": 0.004828169246104539
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 13.440606538449472,
+              "cross": 13.36845885575031,
+              "prediction_energy": 13.379523034694328,
+              "blocks": 16
+            },
+            "blocks": 16,
+            "GT_projected_gain": 0.9946321110961198,
+            "GT_band_RMS": 0.05728348872647458,
+            "band_error_RMS": 0.0045072603551359215,
+            "orthogonal_band_RMS": 0.004496759382682945
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 3.7165513528772625,
+              "cross": 3.6497767546401394,
+              "prediction_energy": 3.6112771959719963,
+              "blocks": 19
+            },
+            "blocks": 19,
+            "GT_projected_gain": 0.9820331829437987,
+            "GT_band_RMS": 0.02764224334160804,
+            "band_error_RMS": 0.0024110422873491197,
+            "orthogonal_band_RMS": 0.0023593368800707737
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 5.501142623359122,
+              "cross": 5.369557937002418,
+              "prediction_energy": 5.273571110146696,
+              "blocks": 23
+            },
+            "blocks": 23,
+            "GT_projected_gain": 0.9760804808444767,
+            "GT_band_RMS": 0.030566277505501536,
+            "band_error_RMS": 0.002458827386445659,
+            "orthogonal_band_RMS": 0.0023476115679336414
+          }
+        ]
+      },
+      {
+        "condition": "adc-only",
+        "bin": 3,
+        "relative_GT_band_RMS_lower": 0.1,
+        "relative_GT_band_RMS_upper": 0.2,
+        "method": "V114 single",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.9892159615747056,
+        "pooled": {
+          "blocks": 71,
+          "GT_projected_gain": 0.993055185491508,
+          "GT_band_RMS": 0.043863407066316244,
+          "band_error_RMS": 0.0036752538844022947,
+          "orthogonal_band_RMS": 0.0036626077875095363
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 12.312295848076564,
+              "cross": 12.338455950826525,
+              "prediction_energy": 12.450955248956591,
+              "blocks": 13
+            },
+            "blocks": 13,
+            "GT_projected_gain": 1.0021247136255296,
+            "GT_band_RMS": 0.06082440404497896,
+            "band_error_RMS": 0.005093453429901937,
+            "orthogonal_band_RMS": 0.005091813655475554
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 13.440606538449472,
+              "cross": 13.353668998526569,
+              "prediction_energy": 13.358125762141409,
+              "blocks": 16
+            },
+            "blocks": 16,
+            "GT_projected_gain": 0.9935317249504922,
+            "GT_band_RMS": 0.05728348872647458,
+            "band_error_RMS": 0.004723670435915744,
+            "orthogonal_band_RMS": 0.004709115983291376
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 3.7165513528772625,
+              "cross": 3.6513318364907907,
+              "prediction_energy": 3.6168492199524955,
+              "blocks": 19
+            },
+            "blocks": 19,
+            "GT_projected_gain": 0.9824516035985941,
+            "GT_band_RMS": 0.02764224334160804,
+            "band_error_RMS": 0.0025138146210588893,
+            "orthogonal_band_RMS": 0.0024665693200959255
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 5.501142623359122,
+              "cross": 5.384275271927804,
+              "prediction_energy": 5.30444968023332,
+              "blocks": 23
+            },
+            "blocks": 23,
+            "GT_projected_gain": 0.9787558041242065,
+            "GT_band_RMS": 0.030566277505501536,
+            "band_error_RMS": 0.0025081985044875022,
+            "orthogonal_band_RMS": 0.0024226837475582676
+          }
+        ]
+      },
+      {
+        "condition": "adc-only",
+        "bin": 4,
+        "relative_GT_band_RMS_lower": 0.2,
+        "relative_GT_band_RMS_upper": null,
+        "method": "RawNIND preup",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.6095216002222579,
+        "pooled": {
+          "blocks": 481,
+          "GT_projected_gain": 0.5280597159718615,
+          "GT_band_RMS": 0.06005991714740956,
+          "band_error_RMS": 0.037501218562686005,
+          "orthogonal_band_RMS": 0.024554423134745918
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 375.9974609325544,
+              "cross": 191.80046466349387,
+              "prediction_energy": 161.28459915552295,
+              "blocks": 212
+            },
+            "blocks": 212,
+            "GT_projected_gain": 0.5101110634837468,
+            "GT_band_RMS": 0.08323472384540995,
+            "band_error_RMS": 0.05321356566630543,
+            "orthogonal_band_RMS": 0.0341909362788524
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 14.853345531609458,
+              "cross": 10.403731711919635,
+              "prediction_energy": 9.09455957440919,
+              "blocks": 22
+            },
+            "blocks": 22,
+            "GT_projected_gain": 0.7004301953239703,
+            "GT_band_RMS": 0.05135477360428826,
+            "band_error_RMS": 0.023613700107635128,
+            "orthogonal_band_RMS": 0.01791448941469428
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 30.340815962380944,
+              "cross": 17.046010361908728,
+              "prediction_energy": 14.137685407597143,
+              "blocks": 155
+            },
+            "blocks": 155,
+            "GT_projected_gain": 0.5618177962993409,
+            "GT_band_RMS": 0.027652079470664392,
+            "band_error_RMS": 0.016178877114045552,
+            "orthogonal_band_RMS": 0.010721141673798718
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 22.98377458325494,
+              "cross": 15.30092724936149,
+              "prediction_energy": 13.58128067900015,
+              "blocks": 92
+            },
+            "blocks": 92,
+            "GT_projected_gain": 0.6657273457819732,
+            "GT_band_RMS": 0.03123897535372168,
+            "band_error_RMS": 0.015912038436404097,
+            "orthogonal_band_RMS": 0.012006273469976231
+          }
+        ]
+      },
+      {
+        "condition": "adc-only",
+        "bin": 4,
+        "relative_GT_band_RMS_lower": 0.2,
+        "relative_GT_band_RMS_upper": null,
+        "method": "V104 eight",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.9869184629283779,
+        "pooled": {
+          "blocks": 481,
+          "GT_projected_gain": 0.9955034171539027,
+          "GT_band_RMS": 0.06005991714740956,
+          "band_error_RMS": 0.0038734997051270066,
+          "orthogonal_band_RMS": 0.003864073652138832
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 375.9974609325544,
+              "cross": 375.3641314583451,
+              "prediction_energy": 376.0448734646023,
+              "blocks": 212
+            },
+            "blocks": 212,
+            "GT_projected_gain": 0.998315601726037,
+            "GT_band_RMS": 0.08323472384540995,
+            "band_error_RMS": 0.004920639876596577,
+            "orthogonal_band_RMS": 0.004918642153677285
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 14.853345531609458,
+              "cross": 14.808569835521885,
+              "prediction_energy": 14.810298877122303,
+              "blocks": 22
+            },
+            "blocks": 22,
+            "GT_projected_gain": 0.9969854807462544,
+            "GT_band_RMS": 0.05135477360428826,
+            "band_error_RMS": 0.0028735401953444333,
+            "orthogonal_band_RMS": 0.002869367026447423
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 30.340815962380944,
+              "cross": 29.41491380605202,
+              "prediction_energy": 28.88192458088455,
+              "blocks": 155
+            },
+            "blocks": 155,
+            "GT_projected_gain": 0.9694832809547069,
+            "GT_band_RMS": 0.027652079470664392,
+            "band_error_RMS": 0.0031467506408679393,
+            "orthogonal_band_RMS": 0.0030314939426008317
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 22.98377458325494,
+              "cross": 22.590510439028023,
+              "prediction_energy": 22.2912896852516,
+              "blocks": 92
+            },
+            "blocks": 92,
+            "GT_projected_gain": 0.9828894882865135,
+            "GT_band_RMS": 0.03123897535372168,
+            "band_error_RMS": 0.0019982519370125434,
+            "orthogonal_band_RMS": 0.0019254362297777502
+          }
+        ]
+      },
+      {
+        "condition": "adc-only",
+        "bin": 4,
+        "relative_GT_band_RMS_lower": 0.2,
+        "relative_GT_band_RMS_upper": null,
+        "method": "V112 eight",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.9876313615106529,
+        "pooled": {
+          "blocks": 481,
+          "GT_projected_gain": 0.9954832955876387,
+          "GT_band_RMS": 0.06005991714740956,
+          "band_error_RMS": 0.00376445117130006,
+          "orthogonal_band_RMS": 0.0037546642511338563
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 375.9974609325544,
+              "cross": 375.2646032528652,
+              "prediction_energy": 375.7964839069924,
+              "blocks": 212
+            },
+            "blocks": 212,
+            "GT_projected_gain": 0.9980508972643816,
+            "GT_band_RMS": 0.08323472384540995,
+            "band_error_RMS": 0.004827390460963051,
+            "orthogonal_band_RMS": 0.004824663626330866
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 14.853345531609458,
+              "cross": 14.813078295504665,
+              "prediction_energy": 14.815953540515792,
+              "blocks": 22
+            },
+            "blocks": 22,
+            "GT_projected_gain": 0.9972890123629656,
+            "GT_band_RMS": 0.05135477360428826,
+            "band_error_RMS": 0.0027677141607130636,
+            "orthogonal_band_RMS": 0.0027642103513652863
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 30.340815962380944,
+              "cross": 29.503309686884965,
+              "prediction_energy": 29.0108057500131,
+              "blocks": 155
+            },
+            "blocks": 155,
+            "GT_projected_gain": 0.9723967121868314,
+            "GT_band_RMS": 0.027652079470664392,
+            "band_error_RMS": 0.0029486633223738037,
+            "orthogonal_band_RMS": 0.0028481584132881484
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 22.98377458325494,
+              "cross": 22.588196799008468,
+              "prediction_energy": 22.284707522197646,
+              "blocks": 92
+            },
+            "blocks": 92,
+            "GT_projected_gain": 0.9827888242284331,
+            "GT_band_RMS": 0.03123897535372168,
+            "band_error_RMS": 0.0019773740056891836,
+            "orthogonal_band_RMS": 0.0019028742010494333
+          }
+        ]
+      },
+      {
+        "condition": "adc-only",
+        "bin": 4,
+        "relative_GT_band_RMS_lower": 0.2,
+        "relative_GT_band_RMS_upper": null,
+        "method": "V114 eight",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.9872822126578031,
+        "pooled": {
+          "blocks": 481,
+          "GT_projected_gain": 0.9947639970096771,
+          "GT_band_RMS": 0.06005991714740956,
+          "band_error_RMS": 0.0036782754963309142,
+          "orthogonal_band_RMS": 0.003664807878933074
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 375.9974609325544,
+              "cross": 374.9463891099465,
+              "prediction_energy": 375.1144405906516,
+              "blocks": 212
+            },
+            "blocks": 212,
+            "GT_projected_gain": 0.9972045773394292,
+            "GT_band_RMS": 0.08323472384540995,
+            "band_error_RMS": 0.004739536839268757,
+            "orthogonal_band_RMS": 0.004733822052136742
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 14.853345531609458,
+              "cross": 14.803595858253654,
+              "prediction_energy": 14.79555030490736,
+              "blocks": 22
+            },
+            "blocks": 22,
+            "GT_projected_gain": 0.9966506082249328,
+            "GT_band_RMS": 0.05135477360428826,
+            "band_error_RMS": 0.0027211855603690733,
+            "orthogonal_band_RMS": 0.0027157437945679584
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 30.340815962380944,
+              "cross": 29.528781145975056,
+              "prediction_energy": 29.03093040143413,
+              "blocks": 155
+            },
+            "blocks": 155,
+            "GT_projected_gain": 0.9732362235276495,
+            "GT_band_RMS": 0.027652079470664392,
+            "band_error_RMS": 0.002813884389860415,
+            "orthogonal_band_RMS": 0.0027148178068830435
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 22.98377458325494,
+              "cross": 22.5709271886534,
+              "prediction_energy": 22.24906274661925,
+              "blocks": 92
+            },
+            "blocks": 92,
+            "GT_projected_gain": 0.982037441539201,
+            "GT_band_RMS": 0.03123897535372168,
+            "band_error_RMS": 0.001965468631103456,
+            "orthogonal_band_RMS": 0.001883666081616993
+          }
+        ]
+      },
+      {
+        "condition": "adc-only",
+        "bin": 4,
+        "relative_GT_band_RMS_lower": 0.2,
+        "relative_GT_band_RMS_upper": null,
+        "method": "V114 single",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.987520451405095,
+        "pooled": {
+          "blocks": 481,
+          "GT_projected_gain": 0.9953435902796853,
+          "GT_band_RMS": 0.06005991714740956,
+          "band_error_RMS": 0.0038906697177361867,
+          "orthogonal_band_RMS": 0.003880605511181042
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 375.9974609325544,
+              "cross": 375.20726916428475,
+              "prediction_energy": 375.7974336896566,
+              "blocks": 212
+            },
+            "blocks": 212,
+            "GT_projected_gain": 0.9978984119565334,
+            "GT_band_RMS": 0.08323472384540995,
+            "band_error_RMS": 0.005043217363700851,
+            "orthogonal_band_RMS": 0.005040182792991895
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 14.853345531609458,
+              "cross": 14.809341136970044,
+              "prediction_energy": 14.811061482393153,
+              "blocks": 22
+            },
+            "blocks": 22,
+            "GT_projected_gain": 0.9970374085389876,
+            "GT_band_RMS": 0.05135477360428826,
+            "band_error_RMS": 0.0028493401618081044,
+            "orthogonal_band_RMS": 0.002845275346991647
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 30.340815962380944,
+              "cross": 29.503007082285976,
+              "prediction_energy": 29.0047509388693,
+              "blocks": 155
+            },
+            "blocks": 155,
+            "GT_projected_gain": 0.9723867386713082,
+            "GT_band_RMS": 0.027652079470664392,
+            "band_error_RMS": 0.0029252823162897114,
+            "orthogonal_band_RMS": 0.0028238708363202427
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 22.98377458325494,
+              "cross": 22.587516990097903,
+              "prediction_energy": 22.28957353569316,
+              "blocks": 92
+            },
+            "blocks": 92,
+            "GT_projected_gain": 0.982759246453551,
+            "GT_band_RMS": 0.03123897535372168,
+            "band_error_RMS": 0.0020431210260742445,
+            "orthogonal_band_RMS": 0.0019708554912822554
+          }
+        ]
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 0,
+        "relative_GT_band_RMS_lower": 0.0,
+        "relative_GT_band_RMS_upper": 0.02,
+        "method": "RawNIND preup",
+        "sources_with_eligible_blocks": 2,
+        "source_balanced_GT_projected_gain": 0.587353623423303,
+        "pooled": {
+          "blocks": 112,
+          "GT_projected_gain": 0.4592097082577819,
+          "GT_band_RMS": 0.008176976827098012,
+          "band_error_RMS": 0.005822697836484802,
+          "orthogonal_band_RMS": 0.0037880685803916175
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.756473369925395,
+              "cross": 0.7612811363720207,
+              "prediction_energy": 0.6945462810459945,
+              "blocks": 84
+            },
+            "blocks": 84,
+            "GT_projected_gain": 0.4334145620461958,
+            "GT_band_RMS": 0.009037767384749738,
+            "band_error_RMS": 0.00657084708036782,
+            "orthogonal_band_RMS": 0.004117620285553413
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.1606211333605093,
+              "cross": 0.11906727118449668,
+              "prediction_energy": 0.1211460738251135,
+              "blocks": 28
+            },
+            "blocks": 28,
+            "GT_projected_gain": 0.7412926848004103,
+            "GT_band_RMS": 0.004733717589913153,
+            "band_error_RMS": 0.0024672142832117836,
+            "orthogonal_band_RMS": 0.0021418181859967824
+          }
+        ]
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 0,
+        "relative_GT_band_RMS_lower": 0.0,
+        "relative_GT_band_RMS_upper": 0.02,
+        "method": "V104 eight",
+        "sources_with_eligible_blocks": 2,
+        "source_balanced_GT_projected_gain": 0.891817412674758,
+        "pooled": {
+          "blocks": 112,
+          "GT_projected_gain": 0.8949603696075807,
+          "GT_band_RMS": 0.008176976827098012,
+          "band_error_RMS": 0.0025597199915744994,
+          "orthogonal_band_RMS": 0.002411316206374355
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.756473369925395,
+              "cross": 1.5730853274153351,
+              "prediction_energy": 1.5608899311247508,
+              "blocks": 84
+            },
+            "blocks": 84,
+            "GT_projected_gain": 0.8955930413463375,
+            "GT_band_RMS": 0.009037767384749738,
+            "band_error_RMS": 0.0028215186604254264,
+            "orthogonal_band_RMS": 0.002659055402704458
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.1606211333605093,
+              "cross": 0.14263827781807908,
+              "prediction_energy": 0.14132649208812445,
+              "blocks": 28
+            },
+            "blocks": 28,
+            "GT_projected_gain": 0.8880417840031783,
+            "GT_band_RMS": 0.004733717589913153,
+            "band_error_RMS": 0.0015250452739764657,
+            "orthogonal_band_RMS": 0.0014299950336401743
+          }
+        ]
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 0,
+        "relative_GT_band_RMS_lower": 0.0,
+        "relative_GT_band_RMS_upper": 0.02,
+        "method": "V112 eight",
+        "sources_with_eligible_blocks": 2,
+        "source_balanced_GT_projected_gain": 0.9039376664114187,
+        "pooled": {
+          "blocks": 112,
+          "GT_projected_gain": 0.9033699446511582,
+          "GT_band_RMS": 0.008176976827098012,
+          "band_error_RMS": 0.002555297743246486,
+          "orthogonal_band_RMS": 0.0024300663804927127
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.756473369925395,
+              "cross": 1.5865445187378813,
+              "prediction_energy": 1.5872061758081972,
+              "blocks": 84
+            },
+            "blocks": 84,
+            "GT_projected_gain": 0.9032556632528216,
+            "GT_band_RMS": 0.009037767384749738,
+            "band_error_RMS": 0.0028165522086116375,
+            "orthogonal_band_RMS": 0.0026774005126585605
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.1606211333605093,
+              "cross": 0.14530103658654536,
+              "prediction_energy": 0.146605590426751,
+              "blocks": 28
+            },
+            "blocks": 28,
+            "GT_projected_gain": 0.9046196695700158,
+            "GT_band_RMS": 0.004733717589913153,
+            "band_error_RMS": 0.0015229206135111372,
+            "orthogonal_band_RMS": 0.001454452385367619
+          }
+        ]
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 0,
+        "relative_GT_band_RMS_lower": 0.0,
+        "relative_GT_band_RMS_upper": 0.02,
+        "method": "V114 eight",
+        "sources_with_eligible_blocks": 2,
+        "source_balanced_GT_projected_gain": 0.9030660593878101,
+        "pooled": {
+          "blocks": 112,
+          "GT_projected_gain": 0.9063254793884686,
+          "GT_band_RMS": 0.008176976827098012,
+          "band_error_RMS": 0.002551526036650124,
+          "orthogonal_band_RMS": 0.002433838194756125
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.756473369925395,
+              "cross": 1.5930890185233066,
+              "prediction_energy": 1.5998940606384382,
+              "blocks": 84
+            },
+            "blocks": 84,
+            "GT_projected_gain": 0.90698159493928,
+            "GT_band_RMS": 0.009037767384749738,
+            "band_error_RMS": 0.0028132389366356454,
+            "orthogonal_band_RMS": 0.0026846922776104522
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.1606211333605093,
+              "cross": 0.14442257620028862,
+              "prediction_energy": 0.1446975203602988,
+              "blocks": 28
+            },
+            "blocks": 28,
+            "GT_projected_gain": 0.8991505238363404,
+            "GT_band_RMS": 0.004733717589913153,
+            "band_error_RMS": 0.001515981701408503,
+            "orthogonal_band_RMS": 0.0014388524943718855
+          }
+        ]
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 0,
+        "relative_GT_band_RMS_lower": 0.0,
+        "relative_GT_band_RMS_upper": 0.02,
+        "method": "V114 single",
+        "sources_with_eligible_blocks": 2,
+        "source_balanced_GT_projected_gain": 0.9021067461754187,
+        "pooled": {
+          "blocks": 112,
+          "GT_projected_gain": 0.9056821259697541,
+          "GT_band_RMS": 0.008176976827098012,
+          "band_error_RMS": 0.002574336385313433,
+          "orthogonal_band_RMS": 0.0024560953342749434
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.756473369925395,
+              "cross": 1.5920707008663177,
+              "prediction_energy": 1.6008747957987892,
+              "blocks": 84
+            },
+            "blocks": 84,
+            "GT_projected_gain": 0.9064018436749428,
+            "GT_band_RMS": 0.009037767384749738,
+            "band_error_RMS": 0.0028380680086862644,
+            "orthogonal_band_RMS": 0.00270906850089061
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.1606211333605093,
+              "cross": 0.1442075245545896,
+              "prediction_energy": 0.14460245450831383,
+              "blocks": 28
+            },
+            "blocks": 28,
+            "GT_projected_gain": 0.8978116486758947,
+            "GT_band_RMS": 0.004733717589913153,
+            "band_error_RMS": 0.001531320094953778,
+            "orthogonal_band_RMS": 0.0014529094087616416
+          }
+        ]
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 1,
+        "relative_GT_band_RMS_lower": 0.02,
+        "relative_GT_band_RMS_upper": 0.05,
+        "method": "RawNIND preup",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.5454397182155627,
+        "pooled": {
+          "blocks": 55,
+          "GT_projected_gain": 0.5307898261636026,
+          "GT_band_RMS": 0.011318702435429817,
+          "band_error_RMS": 0.007325530875843776,
+          "orthogonal_band_RMS": 0.005045619021231906
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.1366243723892373,
+              "cross": 0.6001700753967396,
+              "prediction_energy": 0.5327589686638662,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.5280285114203157,
+            "GT_band_RMS": 0.019235251828014145,
+            "band_error_RMS": 0.012356509627020005,
+            "orthogonal_band_RMS": 0.008382382806886936
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 0.37681103589263815,
+              "cross": 0.15454464567377582,
+              "prediction_energy": 0.13530435245302946,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.41013832120832316,
+            "GT_band_RMS": 0.011075190400754659,
+            "band_error_RMS": 0.008129527924992993,
+            "orthogonal_band_RMS": 0.004838527793911263
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.2903959812091372,
+              "cross": 0.20274062858586892,
+              "prediction_energy": 0.1985966974950624,
+              "blocks": 31
+            },
+            "blocks": 31,
+            "GT_projected_gain": 0.6981523220180492,
+            "GT_band_RMS": 0.006049151637661727,
+            "band_error_RMS": 0.003243934739216572,
+            "orthogonal_band_RMS": 0.0026812534513954195
+          }
+        ]
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 1,
+        "relative_GT_band_RMS_lower": 0.02,
+        "relative_GT_band_RMS_upper": 0.05,
+        "method": "V104 eight",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.9535131775243096,
+        "pooled": {
+          "blocks": 55,
+          "GT_projected_gain": 0.9624991784694346,
+          "GT_band_RMS": 0.011318702435429817,
+          "band_error_RMS": 0.002119943702463267,
+          "orthogonal_band_RMS": 0.002077015759861755
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.1366243723892373,
+              "cross": 1.1067199395071818,
+              "prediction_energy": 1.1053879600348648,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.9736901358016853,
+            "GT_band_RMS": 0.019235251828014145,
+            "band_error_RMS": 0.0030497424226180116,
+            "orthogonal_band_RMS": 0.003007459900419541
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 0.37681103589263815,
+              "cross": 0.355522105879882,
+              "prediction_energy": 0.35162963690314997,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.9435023712553317,
+            "GT_band_RMS": 0.011075190400754659,
+            "band_error_RMS": 0.002379687057891744,
+            "orthogonal_band_RMS": 0.002295949145298509
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.2903959812091372,
+              "cross": 0.27394418509541435,
+              "prediction_energy": 0.27480126566264956,
+              "blocks": 31
+            },
+            "blocks": 31,
+            "GT_projected_gain": 0.9433470255159124,
+            "GT_band_RMS": 0.006049151637661727,
+            "band_error_RMS": 0.0014768405633364362,
+            "orthogonal_band_RMS": 0.0014365281381414404
+          }
+        ]
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 1,
+        "relative_GT_band_RMS_lower": 0.02,
+        "relative_GT_band_RMS_upper": 0.05,
+        "method": "V112 eight",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.9572214803264235,
+        "pooled": {
+          "blocks": 55,
+          "GT_projected_gain": 0.9658333013758735,
+          "GT_band_RMS": 0.011318702435429817,
+          "band_error_RMS": 0.002113146961329129,
+          "orthogonal_band_RMS": 0.0020774589375972116
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.1366243723892373,
+              "cross": 1.1101994166705924,
+              "prediction_energy": 1.1121145920333761,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.9767513733115731,
+            "GT_band_RMS": 0.019235251828014145,
+            "band_error_RMS": 0.0030373184038560196,
+            "orthogonal_band_RMS": 0.003004217258806026
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 0.37681103589263815,
+              "cross": 0.3563639433215209,
+              "prediction_energy": 0.3530629709367714,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.945736481622202,
+            "GT_band_RMS": 0.011075190400754659,
+            "band_error_RMS": 0.002362502768569796,
+            "orthogonal_band_RMS": 0.0022847852888260556
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.2903959812091372,
+              "cross": 0.27563706604542065,
+              "prediction_energy": 0.2782645919427652,
+              "blocks": 31
+            },
+            "blocks": 31,
+            "GT_projected_gain": 0.9491765860454954,
+            "GT_band_RMS": 0.006049151637661727,
+            "band_error_RMS": 0.0014801458667739649,
+            "orthogonal_band_RMS": 0.0014478650946933794
+          }
+        ]
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 1,
+        "relative_GT_band_RMS_lower": 0.02,
+        "relative_GT_band_RMS_upper": 0.05,
+        "method": "V114 eight",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.9574518432434548,
+        "pooled": {
+          "blocks": 55,
+          "GT_projected_gain": 0.9669093869218913,
+          "GT_band_RMS": 0.011318702435429817,
+          "band_error_RMS": 0.0021058535504048215,
+          "orthogonal_band_RMS": 0.002072278182241844
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.1366243723892373,
+              "cross": 1.112412443558879,
+              "prediction_energy": 1.116430856300668,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.9786983902347054,
+            "GT_band_RMS": 0.019235251828014145,
+            "band_error_RMS": 0.003031429417593292,
+            "orthogonal_band_RMS": 0.003003610485414481
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 0.37681103589263815,
+              "cross": 0.3567684496635031,
+              "prediction_energy": 0.3537722865777163,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.9468099808126489,
+            "GT_band_RMS": 0.011075190400754659,
+            "band_error_RMS": 0.002355624305141918,
+            "orthogonal_band_RMS": 0.0022807760350423687
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.2903959812091372,
+              "cross": 0.2749606097008363,
+              "prediction_energy": 0.2766879114716363,
+              "blocks": 31
+            },
+            "blocks": 31,
+            "GT_projected_gain": 0.9468471586830101,
+            "GT_band_RMS": 0.006049151637661727,
+            "band_error_RMS": 0.0014705900998654225,
+            "orthogonal_band_RMS": 0.0014350100905608685
+          }
+        ]
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 1,
+        "relative_GT_band_RMS_lower": 0.02,
+        "relative_GT_band_RMS_upper": 0.05,
+        "method": "V114 single",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.9578943944238536,
+        "pooled": {
+          "blocks": 55,
+          "GT_projected_gain": 0.9667325879317857,
+          "GT_band_RMS": 0.011318702435429817,
+          "band_error_RMS": 0.002138497189649691,
+          "orthogonal_band_RMS": 0.0021050854835130504
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.1366243723892373,
+              "cross": 1.1110772005559977,
+              "prediction_energy": 1.1149238841297269,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.9775236459345507,
+            "GT_band_RMS": 0.019235251828014145,
+            "band_error_RMS": 0.003093268870783127,
+            "orthogonal_band_RMS": 0.0030629064423891234
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 0.37681103589263815,
+              "cross": 0.35803142386779474,
+              "prediction_energy": 0.35664220101230704,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.9501617250132925,
+            "GT_band_RMS": 0.011075190400754659,
+            "band_error_RMS": 0.002379271731938079,
+            "orthogonal_band_RMS": 0.0023143605761993904
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.2903959812091372,
+              "cross": 0.2747139629314432,
+              "prediction_energy": 0.2766379369177906,
+              "blocks": 31
+            },
+            "blocks": 31,
+            "GT_projected_gain": 0.9459978123237176,
+            "GT_band_RMS": 0.006049151637661727,
+            "band_error_RMS": 0.0014894619864494,
+            "orthogonal_band_RMS": 0.0014531983362463163
+          }
+        ]
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 2,
+        "relative_GT_band_RMS_lower": 0.05,
+        "relative_GT_band_RMS_upper": 0.1,
+        "method": "RawNIND preup",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.5954015828356795,
+        "pooled": {
+          "blocks": 53,
+          "GT_projected_gain": 0.6287589101427009,
+          "GT_band_RMS": 0.028461277497960534,
+          "band_error_RMS": 0.01564927078662414,
+          "orthogonal_band_RMS": 0.011543804030957193
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 8.079863824698766,
+              "cross": 5.353890090532165,
+              "prediction_energy": 4.751143753189597,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.6626213271275978,
+            "GT_band_RMS": 0.047480799175809364,
+            "band_error_RMS": 0.02433964581683243,
+            "orthogonal_band_RMS": 0.018325111424897237
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 1.8699983569803063,
+              "cross": 0.8731198533250464,
+              "prediction_energy": 0.7618276721546531,
+              "blocks": 25
+            },
+            "blocks": 25,
+            "GT_projected_gain": 0.4669094227093172,
+            "GT_band_RMS": 0.017093485404626314,
+            "band_error_RMS": 0.011763199517489296,
+            "orthogonal_band_RMS": 0.007438915679160379
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 1.0408191088792584,
+              "cross": 0.6834788461200172,
+              "prediction_energy": 0.6401236700969719,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.6566739986701234,
+            "GT_band_RMS": 0.017041335553084708,
+            "band_error_RMS": 0.009359884939247252,
+            "orthogonal_band_RMS": 0.00730591284525642
+          }
+        ]
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 2,
+        "relative_GT_band_RMS_lower": 0.05,
+        "relative_GT_band_RMS_upper": 0.1,
+        "method": "V104 eight",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.9809562058240934,
+        "pooled": {
+          "blocks": 53,
+          "GT_projected_gain": 0.9896437531326732,
+          "GT_band_RMS": 0.028461277497960534,
+          "band_error_RMS": 0.003303581494671518,
+          "orthogonal_band_RMS": 0.0032904060450105873
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 8.079863824698766,
+              "cross": 8.043612108434436,
+              "prediction_energy": 8.099688032605481,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.995513325836815,
+            "GT_band_RMS": 0.047480799175809364,
+            "band_error_RMS": 0.005075535478088449,
+            "orthogonal_band_RMS": 0.005071062830972426
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 1.8699983569803063,
+              "cross": 1.8186310356135926,
+              "prediction_energy": 1.8093213020016892,
+              "blocks": 25
+            },
+            "blocks": 25,
+            "GT_projected_gain": 0.972530820053948,
+            "GT_band_RMS": 0.017093485404626314,
+            "band_error_RMS": 0.002563493336579817,
+            "orthogonal_band_RMS": 0.002520124301275916
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 1.0408191088792584,
+              "cross": 1.0146159378251687,
+              "prediction_energy": 1.0021039511690835,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.9748244715815172,
+            "GT_band_RMS": 0.017041335553084708,
+            "band_error_RMS": 0.0019545037560667273,
+            "orthogonal_band_RMS": 0.00190683580873462
+          }
+        ]
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 2,
+        "relative_GT_band_RMS_lower": 0.05,
+        "relative_GT_band_RMS_upper": 0.1,
+        "method": "V112 eight",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.9824280278075905,
+        "pooled": {
+          "blocks": 53,
+          "GT_projected_gain": 0.990537240688396,
+          "GT_band_RMS": 0.028461277497960534,
+          "band_error_RMS": 0.003244293246339766,
+          "orthogonal_band_RMS": 0.0032330951440964093
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 8.079863824698766,
+              "cross": 8.046805952119755,
+              "prediction_energy": 8.102396283451837,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.9959086101825183,
+            "GT_band_RMS": 0.047480799175809364,
+            "band_error_RMS": 0.004973372285968127,
+            "orthogonal_band_RMS": 0.004969576842362151
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 1.8699983569803063,
+              "cross": 1.8241381324126822,
+              "prediction_energy": 1.8189900041470166,
+              "blocks": 25
+            },
+            "blocks": 25,
+            "GT_projected_gain": 0.9754757941917769,
+            "GT_band_RMS": 0.017093485404626314,
+            "band_error_RMS": 0.002522154842031118,
+            "orthogonal_band_RMS": 0.0024870731642664145
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 1.0408191088792584,
+              "cross": 1.0157350343027896,
+              "prediction_energy": 1.0040998113640294,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.9758996790484764,
+            "GT_band_RMS": 0.017041335553084708,
+            "band_error_RMS": 0.00193712925871912,
+            "orthogonal_band_RMS": 0.0018930911004283889
+          }
+        ]
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 2,
+        "relative_GT_band_RMS_lower": 0.05,
+        "relative_GT_band_RMS_upper": 0.1,
+        "method": "V114 eight",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.9821426951646058,
+        "pooled": {
+          "blocks": 53,
+          "GT_projected_gain": 0.9906476981631905,
+          "GT_band_RMS": 0.028461277497960534,
+          "band_error_RMS": 0.003208606167007717,
+          "orthogonal_band_RMS": 0.003197546334856031
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 8.079863824698766,
+              "cross": 8.049772999749171,
+              "prediction_energy": 8.105816198884765,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.9962758252363596,
+            "GT_band_RMS": 0.047480799175809364,
+            "band_error_RMS": 0.004902339321929892,
+            "orthogonal_band_RMS": 0.004899149223308812
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 1.8699983569803063,
+              "cross": 1.8230558397610472,
+              "prediction_energy": 1.8163052041192531,
+              "blocks": 25
+            },
+            "blocks": 25,
+            "GT_projected_gain": 0.9748970275593919,
+            "GT_band_RMS": 0.017093485404626314,
+            "band_error_RMS": 0.0025059891253712352,
+            "orthogonal_band_RMS": 0.0024689789406952024
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 1.0408191088792584,
+              "cross": 1.0150642822266347,
+              "prediction_energy": 1.0026681930736931,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.9752552326980658,
+            "GT_band_RMS": 0.017041335553084708,
+            "band_error_RMS": 0.0019306284757288734,
+            "orthogonal_band_RMS": 0.0018840140695607474
+          }
+        ]
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 2,
+        "relative_GT_band_RMS_lower": 0.05,
+        "relative_GT_band_RMS_upper": 0.1,
+        "method": "V114 single",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.983918206183079,
+        "pooled": {
+          "blocks": 53,
+          "GT_projected_gain": 0.9919432495124938,
+          "GT_band_RMS": 0.028461277497960534,
+          "band_error_RMS": 0.003307933563862097,
+          "orthogonal_band_RMS": 0.0032999762864674947
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 8.079863824698766,
+              "cross": 8.057632139187113,
+              "prediction_energy": 8.12677956694734,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.9972485074013632,
+            "GT_band_RMS": 0.047480799175809364,
+            "band_error_RMS": 0.005049396436479667,
+            "orthogonal_band_RMS": 0.005047706089071127
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 1.8699983569803063,
+              "cross": 1.8272241580896202,
+              "prediction_energy": 1.8272927137584125,
+              "blocks": 25
+            },
+            "blocks": 25,
+            "GT_projected_gain": 0.9771260767524105,
+            "GT_band_RMS": 0.017093485404626314,
+            "band_error_RMS": 0.002587311423064197,
+            "orthogonal_band_RMS": 0.002557597163876293
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 1.0408191088792584,
+              "cross": 1.0172758164358648,
+              "prediction_energy": 1.0079774712740848,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.9773800343954631,
+            "GT_band_RMS": 0.017041335553084708,
+            "band_error_RMS": 0.0019936385493937543,
+            "orthogonal_band_RMS": 0.001956017416594144
+          }
+        ]
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 3,
+        "relative_GT_band_RMS_lower": 0.1,
+        "relative_GT_band_RMS_upper": 0.2,
+        "method": "RawNIND preup",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.5774064785475843,
+        "pooled": {
+          "blocks": 71,
+          "GT_projected_gain": 0.5631397756431252,
+          "GT_band_RMS": 0.043863407066316244,
+          "band_error_RMS": 0.026511779356139305,
+          "orthogonal_band_RMS": 0.01832171893123299
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 12.312295848076564,
+              "cross": 4.783194093652558,
+              "prediction_energy": 3.90300326315844,
+              "blocks": 13
+            },
+            "blocks": 13,
+            "GT_projected_gain": 0.388489210515502,
+            "GT_band_RMS": 0.06082440404497896,
+            "band_error_RMS": 0.04469753761639804,
+            "orthogonal_band_RMS": 0.024787461729799884
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 13.440606538449472,
+              "cross": 9.0682213503155,
+              "prediction_energy": 8.179654772663953,
+              "blocks": 16
+            },
+            "blocks": 16,
+            "GT_projected_gain": 0.6746884022215878,
+            "GT_band_RMS": 0.05728348872647458,
+            "band_error_RMS": 0.029164047266279938,
+            "orthogonal_band_RMS": 0.022433881796252237
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 3.7165513528772625,
+              "cross": 2.113757859724774,
+              "prediction_energy": 1.814648055406615,
+              "blocks": 19
+            },
+            "blocks": 19,
+            "GT_projected_gain": 0.5687417336742447,
+            "GT_band_RMS": 0.02764224334160804,
+            "band_error_RMS": 0.01637153243238669,
+            "orthogonal_band_RMS": 0.011221324434302108
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 5.501142623359122,
+              "cross": 3.728160486139489,
+              "prediction_energy": 3.2942110312429067,
+              "blocks": 23
+            },
+            "blocks": 23,
+            "GT_projected_gain": 0.6777065677790026,
+            "GT_band_RMS": 0.030566277505501536,
+            "band_error_RMS": 0.015080359261267206,
+            "orthogonal_band_RMS": 0.011417920875903785
+          }
+        ]
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 3,
+        "relative_GT_band_RMS_lower": 0.1,
+        "relative_GT_band_RMS_upper": 0.2,
+        "method": "V104 eight",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.9906310187599561,
+        "pooled": {
+          "blocks": 71,
+          "GT_projected_gain": 0.9938444610670147,
+          "GT_band_RMS": 0.043863407066316244,
+          "band_error_RMS": 0.003754316499272093,
+          "orthogonal_band_RMS": 0.003744594878666566
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 12.312295848076564,
+              "cross": 12.345996987067824,
+              "prediction_energy": 12.468059279469664,
+              "blocks": 13
+            },
+            "blocks": 13,
+            "GT_projected_gain": 1.0027371937295126,
+            "GT_band_RMS": 0.06082440404497896,
+            "band_error_RMS": 0.005152749493904142,
+            "orthogonal_band_RMS": 0.00515005912914898
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 13.440606538449472,
+              "cross": 13.350017114775854,
+              "prediction_energy": 13.352928871867434,
+              "blocks": 16
+            },
+            "blocks": 16,
+            "GT_projected_gain": 0.9932600196713988,
+            "GT_band_RMS": 0.05728348872647458,
+            "band_error_RMS": 0.004777806684060529,
+            "orthogonal_band_RMS": 0.004762181384715629
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 3.7165513528772625,
+              "cross": 3.662891791370621,
+              "prediction_energy": 3.643192493110028,
+              "blocks": 19
+            },
+            "blocks": 19,
+            "GT_projected_gain": 0.9855620018636095,
+            "GT_band_RMS": 0.02764224334160804,
+            "band_error_RMS": 0.0026423402536475417,
+            "orthogonal_band_RMS": 0.002612026469495858
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 5.501142623359122,
+              "cross": 5.396427602127426,
+              "prediction_energy": 5.332078747312922,
+              "blocks": 23
+            },
+            "blocks": 23,
+            "GT_projected_gain": 0.9809648597753035,
+            "GT_band_RMS": 0.030566277505501536,
+            "band_error_RMS": 0.0026183328380375696,
+            "orthogonal_band_RMS": 0.002552868341777687
+          }
+        ]
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 3,
+        "relative_GT_band_RMS_lower": 0.1,
+        "relative_GT_band_RMS_upper": 0.2,
+        "method": "V112 eight",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.9914160420302846,
+        "pooled": {
+          "blocks": 71,
+          "GT_projected_gain": 0.9945564561656278,
+          "GT_band_RMS": 0.043863407066316244,
+          "band_error_RMS": 0.003696966424039426,
+          "orthogonal_band_RMS": 0.003689247686379812
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 12.312295848076564,
+              "cross": 12.361687739636785,
+              "prediction_energy": 12.496630470822153,
+              "blocks": 13
+            },
+            "blocks": 13,
+            "GT_projected_gain": 1.0040115907032836,
+            "GT_band_RMS": 0.06082440404497896,
+            "band_error_RMS": 0.005070146161492981,
+            "orthogonal_band_RMS": 0.005064271401037001
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 13.440606538449472,
+              "cross": 13.352674389313378,
+              "prediction_energy": 13.355165946081451,
+              "blocks": 16
+            },
+            "blocks": 16,
+            "GT_projected_gain": 0.9934577246283829,
+            "GT_band_RMS": 0.05728348872647458,
+            "band_error_RMS": 0.0046985210518054495,
+            "orthogonal_band_RMS": 0.0046835511901345064
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 3.7165513528772625,
+              "cross": 3.6683585413422675,
+              "prediction_energy": 3.6525796353345528,
+              "blocks": 19
+            },
+            "blocks": 19,
+            "GT_projected_gain": 0.9870329219324023,
+            "GT_band_RMS": 0.02764224334160804,
+            "band_error_RMS": 0.0025814807915525103,
+            "orthogonal_band_RMS": 0.002556475008507199
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 5.501142623359122,
+              "cross": 5.397511718255161,
+              "prediction_energy": 5.333913946113477,
+              "blocks": 23
+            },
+            "blocks": 23,
+            "GT_projected_gain": 0.9811619308570695,
+            "GT_band_RMS": 0.030566277505501536,
+            "band_error_RMS": 0.0026075094366738603,
+            "orthogonal_band_RMS": 0.002543137572047083
+          }
+        ]
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 3,
+        "relative_GT_band_RMS_lower": 0.1,
+        "relative_GT_band_RMS_upper": 0.2,
+        "method": "V114 eight",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.9912309288202877,
+        "pooled": {
+          "blocks": 71,
+          "GT_projected_gain": 0.9946630742261406,
+          "GT_band_RMS": 0.043863407066316244,
+          "band_error_RMS": 0.0036626336666141265,
+          "orthogonal_band_RMS": 0.0036551449433262872
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 12.312295848076564,
+              "cross": 12.36492749769536,
+              "prediction_energy": 12.501504010263488,
+              "blocks": 13
+            },
+            "blocks": 13,
+            "GT_projected_gain": 1.0042747226242958,
+            "GT_band_RMS": 0.06082440404497896,
+            "band_error_RMS": 0.005022331828143913,
+            "orthogonal_band_RMS": 0.005015596984883197
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 13.440606538449472,
+              "cross": 13.360041053858208,
+              "prediction_energy": 13.36762392875126,
+              "blocks": 16
+            },
+            "blocks": 16,
+            "GT_projected_gain": 0.9940058148149199,
+            "GT_band_RMS": 0.05728348872647458,
+            "band_error_RMS": 0.004639029594346874,
+            "orthogonal_band_RMS": 0.004626304584011022
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 3.7165513528772625,
+              "cross": 3.664905501815099,
+              "prediction_energy": 3.6451908355076474,
+              "blocks": 19
+            },
+            "blocks": 19,
+            "GT_projected_gain": 0.9861038241750163,
+            "GT_band_RMS": 0.02764224334160804,
+            "band_error_RMS": 0.0025621864680908995,
+            "orthogonal_band_RMS": 0.002533229202171043
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 5.501142623359122,
+              "cross": 5.394086832338094,
+              "prediction_energy": 5.32683559071953,
+              "blocks": 23
+            },
+            "blocks": 23,
+            "GT_projected_gain": 0.9805393536669192,
+            "GT_band_RMS": 0.030566277505501536,
+            "band_error_RMS": 0.0026000545237039874,
+            "orthogonal_band_RMS": 0.002531096496804731
+          }
+        ]
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 3,
+        "relative_GT_band_RMS_lower": 0.1,
+        "relative_GT_band_RMS_upper": 0.2,
+        "method": "V114 single",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.9920841889452845,
+        "pooled": {
+          "blocks": 71,
+          "GT_projected_gain": 0.9955388549242519,
+          "GT_band_RMS": 0.043863407066316244,
+          "band_error_RMS": 0.0038154772479786266,
+          "orthogonal_band_RMS": 0.0038104560838959443
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 12.312295848076564,
+              "cross": 12.380362203433773,
+              "prediction_energy": 12.542930441519967,
+              "blocks": 13
+            },
+            "blocks": 13,
+            "GT_projected_gain": 1.0055283235715817,
+            "GT_band_RMS": 0.06082440404497896,
+            "band_error_RMS": 0.005328789582650186,
+            "orthogonal_band_RMS": 0.0053181697655413415
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 13.440606538449472,
+              "cross": 13.365404370253094,
+              "prediction_energy": 13.384018569413865,
+              "blocks": 16
+            },
+            "blocks": 16,
+            "GT_projected_gain": 0.9944048530859639,
+            "GT_band_RMS": 0.05728348872647458,
+            "band_error_RMS": 0.0047858527517887625,
+            "orthogonal_band_RMS": 0.004775108396640529
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 3.7165513528772625,
+              "cross": 3.664604917771258,
+              "prediction_energy": 3.646802023471367,
+              "blocks": 19
+            },
+            "blocks": 19,
+            "GT_projected_gain": 0.9860229470350816,
+            "GT_band_RMS": 0.02764224334160804,
+            "band_error_RMS": 0.0026494607820210323,
+            "orthogonal_band_RMS": 0.002621139185034417
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 5.501142623359122,
+              "cross": 5.404215967544582,
+              "prediction_energy": 5.349431304701815,
+              "blocks": 23
+            },
+            "blocks": 23,
+            "GT_projected_gain": 0.9823806320885106,
+            "GT_band_RMS": 0.030566277505501536,
+            "band_error_RMS": 0.0026753070530476475,
+            "orthogonal_band_RMS": 0.0026205386053165004
+          }
+        ]
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 4,
+        "relative_GT_band_RMS_lower": 0.2,
+        "relative_GT_band_RMS_upper": null,
+        "method": "RawNIND preup",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.6092790094188137,
+        "pooled": {
+          "blocks": 481,
+          "GT_projected_gain": 0.5278686287291353,
+          "GT_band_RMS": 0.06005991714740956,
+          "band_error_RMS": 0.03751433496737841,
+          "orthogonal_band_RMS": 0.024561207053516124
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 375.9974609325544,
+              "cross": 191.7337761073469,
+              "prediction_energy": 161.24616232540882,
+              "blocks": 212
+            },
+            "blocks": 212,
+            "GT_projected_gain": 0.5099336991047918,
+            "GT_band_RMS": 0.08323472384540995,
+            "band_error_RMS": 0.05323000012019623,
+            "orthogonal_band_RMS": 0.03419890805780675
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 14.853345531609458,
+              "cross": 10.396469669069615,
+              "prediction_energy": 9.087984614146755,
+              "blocks": 22
+            },
+            "blocks": 22,
+            "GT_projected_gain": 0.699941279016559,
+            "GT_band_RMS": 0.05135477360428826,
+            "band_error_RMS": 0.02364356686698003,
+            "orthogonal_band_RMS": 0.017932294227578256
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 30.340815962380944,
+              "cross": 17.029775256060503,
+              "prediction_energy": 14.113254054498796,
+              "blocks": 155
+            },
+            "blocks": 155,
+            "GT_projected_gain": 0.5612827050259765,
+            "GT_band_RMS": 0.027652079470664392,
+            "band_error_RMS": 0.016185136912425548,
+            "orthogonal_band_RMS": 0.01071385489981699
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 22.98377458325494,
+              "cross": 15.306236702305268,
+              "prediction_energy": 13.602129059818967,
+              "blocks": 92
+            },
+            "blocks": 92,
+            "GT_projected_gain": 0.6659583545279277,
+            "GT_band_RMS": 0.03123897535372168,
+            "band_error_RMS": 0.015925680611009574,
+            "orthogonal_band_RMS": 0.012030610957648796
+          }
+        ]
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 4,
+        "relative_GT_band_RMS_lower": 0.2,
+        "relative_GT_band_RMS_upper": null,
+        "method": "V104 eight",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.9938545603925601,
+        "pooled": {
+          "blocks": 481,
+          "GT_projected_gain": 1.0010328639877357,
+          "GT_band_RMS": 0.06005991714740956,
+          "band_error_RMS": 0.0036609580074590895,
+          "orthogonal_band_RMS": 0.0036604323992223318
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 375.9974609325544,
+              "cross": 377.1682860758826,
+              "prediction_energy": 379.6421047780682,
+              "blocks": 212
+            },
+            "blocks": 212,
+            "GT_projected_gain": 1.0031139176855723,
+            "GT_band_RMS": 0.08323472384540995,
+            "band_error_RMS": 0.004899854921459757,
+            "orthogonal_band_RMS": 0.004892995077454667
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 14.853345531609458,
+              "cross": 14.813785126789044,
+              "prediction_energy": 14.81569116215184,
+              "blocks": 22
+            },
+            "blocks": 22,
+            "GT_projected_gain": 0.9973365997083805,
+            "GT_band_RMS": 0.05135477360428826,
+            "band_error_RMS": 0.002713420199721664,
+            "orthogonal_band_RMS": 0.0027099706403779823
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 30.340815962380944,
+              "cross": 29.940140535237312,
+              "prediction_energy": 29.742217133100823,
+              "blocks": 155
+            },
+            "blocks": 155,
+            "GT_projected_gain": 0.9867941775975827,
+            "GT_band_RMS": 0.027652079470664392,
+            "band_error_RMS": 0.0022604596987283766,
+            "orthogonal_band_RMS": 0.002230768937451898
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 22.98377458325494,
+              "cross": 22.71195804370053,
+              "prediction_energy": 22.54327370002132,
+              "blocks": 92
+            },
+            "blocks": 92,
+            "GT_projected_gain": 0.9881735465787049,
+            "GT_band_RMS": 0.03123897535372168,
+            "band_error_RMS": 0.002092585617534405,
+            "orthogonal_band_RMS": 0.0020597145452151706
+          }
+        ]
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 4,
+        "relative_GT_band_RMS_lower": 0.2,
+        "relative_GT_band_RMS_upper": null,
+        "method": "V112 eight",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.9944277097372853,
+        "pooled": {
+          "blocks": 481,
+          "GT_projected_gain": 1.0016210457333268,
+          "GT_band_RMS": 0.06005991714740956,
+          "band_error_RMS": 0.0036054599726815235,
+          "orthogonal_band_RMS": 0.003604145206543169
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 375.9974609325544,
+              "cross": 377.3809060443781,
+              "prediction_energy": 380.02971218127993,
+              "blocks": 212
+            },
+            "blocks": 212,
+            "GT_projected_gain": 1.0036794001438,
+            "GT_band_RMS": 0.08323472384540995,
+            "band_error_RMS": 0.004828578692501268,
+            "orthogonal_band_RMS": 0.00481885679036485
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 14.853345531609458,
+              "cross": 14.81714643210201,
+              "prediction_energy": 14.821467669253817,
+              "blocks": 22
+            },
+            "blocks": 22,
+            "GT_projected_gain": 0.9975628992518614,
+            "GT_band_RMS": 0.05135477360428826,
+            "band_error_RMS": 0.0026822867201090872,
+            "orthogonal_band_RMS": 0.0026793651925423553
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 30.340815962380944,
+              "cross": 29.98459856788827,
+              "prediction_energy": 29.82145117505935,
+              "blocks": 155
+            },
+            "blocks": 155,
+            "GT_projected_gain": 0.9882594655682846,
+            "GT_band_RMS": 0.027652079470664392,
+            "band_error_RMS": 0.002205827610026481,
+            "orthogonal_band_RMS": 0.0021818060634602576
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 22.98377458325494,
+              "cross": 22.71277459760283,
+              "prediction_energy": 22.54351017760595,
+              "blocks": 92
+            },
+            "blocks": 92,
+            "GT_projected_gain": 0.9882090739851952,
+            "GT_band_RMS": 0.03123897535372168,
+            "band_error_RMS": 0.00207836828070137,
+            "orthogonal_band_RMS": 0.0020454688880324197
+          }
+        ]
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 4,
+        "relative_GT_band_RMS_lower": 0.2,
+        "relative_GT_band_RMS_upper": null,
+        "method": "V114 eight",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.9944062485738295,
+        "pooled": {
+          "blocks": 481,
+          "GT_projected_gain": 1.0018576026608152,
+          "GT_band_RMS": 0.06005991714740956,
+          "band_error_RMS": 0.003565898625307293,
+          "orthogonal_band_RMS": 0.003564152873743446
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 375.9974609325544,
+              "cross": 377.4974413759297,
+              "prediction_energy": 380.23409479746994,
+              "blocks": 212
+            },
+            "blocks": 212,
+            "GT_projected_gain": 1.0039893366291757,
+            "GT_band_RMS": 0.08323472384540995,
+            "band_error_RMS": 0.004773528530045158,
+            "orthogonal_band_RMS": 0.004761965617225252
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 14.853345531609458,
+              "cross": 14.820924864556021,
+              "prediction_energy": 14.828309043769181,
+              "blocks": 22
+            },
+            "blocks": 22,
+            "GT_projected_gain": 0.9978172818383279,
+            "GT_band_RMS": 0.05135477360428826,
+            "band_error_RMS": 0.0026584999250165477,
+            "orthogonal_band_RMS": 0.0026561357290863703
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 30.340815962380944,
+              "cross": 29.983370506617284,
+              "prediction_energy": 29.81379100408975,
+              "blocks": 155
+            },
+            "blocks": 155,
+            "GT_projected_gain": 0.9882189900163908,
+            "GT_band_RMS": 0.027652079470664392,
+            "band_error_RMS": 0.002175896374176029,
+            "orthogonal_band_RMS": 0.0021513714958918974
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 22.98377458325494,
+              "cross": 22.69876166205079,
+              "prediction_energy": 22.515157149001958,
+              "blocks": 92
+            },
+            "blocks": 92,
+            "GT_projected_gain": 0.9875993858114236,
+            "GT_band_RMS": 0.03123897535372168,
+            "band_error_RMS": 0.002075023819550888,
+            "orthogonal_band_RMS": 0.002038543270355497
+          }
+        ]
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 4,
+        "relative_GT_band_RMS_lower": 0.2,
+        "relative_GT_band_RMS_upper": null,
+        "method": "V114 single",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.9952605252196776,
+        "pooled": {
+          "blocks": 481,
+          "GT_projected_gain": 1.0021976603018259,
+          "GT_band_RMS": 0.06005991714740956,
+          "band_error_RMS": 0.003770316630093465,
+          "orthogonal_band_RMS": 0.0037680055452497248
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 375.9974609325544,
+              "cross": 377.58583002178847,
+              "prediction_energy": 380.57344757129863,
+              "blocks": 212
+            },
+            "blocks": 212,
+            "GT_projected_gain": 1.0042244144024126,
+            "GT_band_RMS": 0.08323472384540995,
+            "band_error_RMS": 0.005077611930314811,
+            "orthogonal_band_RMS": 0.00506542275834167
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 14.853345531609458,
+              "cross": 14.848161999649156,
+              "prediction_energy": 14.885024408206899,
+              "blocks": 22
+            },
+            "blocks": 22,
+            "GT_projected_gain": 0.9996510192300266,
+            "GT_band_RMS": 0.05135477360428826,
+            "band_error_RMS": 0.0027323146626709142,
+            "orthogonal_band_RMS": 0.0027322558855113993
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 30.340815962380944,
+              "cross": 30.00164265492012,
+              "prediction_energy": 29.86596860357534,
+              "blocks": 155
+            },
+            "blocks": 155,
+            "GT_projected_gain": 0.9888212199737357,
+            "GT_band_RMS": 0.027652079470664392,
+            "band_error_RMS": 0.00226462126606879,
+            "orthogonal_band_RMS": 0.002243425162493002
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 22.98377458325494,
+              "cross": 22.71590897049823,
+              "prediction_energy": 22.553663341342677,
+              "blocks": 92
+            },
+            "blocks": 92,
+            "GT_projected_gain": 0.9883454472725351,
+            "GT_band_RMS": 0.03123897535372168,
+            "band_error_RMS": 0.002117674229118869,
+            "orthogonal_band_RMS": 0.0020861429958357975
+          }
+        ]
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 0,
+        "relative_GT_band_RMS_lower": 0.0,
+        "relative_GT_band_RMS_upper": 0.02,
+        "method": "RawNIND preup",
+        "sources_with_eligible_blocks": 2,
+        "source_balanced_GT_projected_gain": 0.2870083692621065,
+        "pooled": {
+          "blocks": 112,
+          "GT_projected_gain": 0.1586963508954041,
+          "GT_band_RMS": 0.008176976827098012,
+          "band_error_RMS": 0.007661415475064289,
+          "orthogonal_band_RMS": 0.0033722747990350427
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.756473369925395,
+              "cross": 0.23337798976537605,
+              "prediction_energy": 0.27494912111128994,
+              "blocks": 84
+            },
+            "blocks": 84,
+            "GT_projected_gain": 0.13286736580315398,
+            "GT_band_RMS": 0.009037767384749738,
+            "band_error_RMS": 0.008530043934857302,
+            "orthogonal_band_RMS": 0.0033680815495943203
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.1606211333605093,
+              "cross": 0.07085791222773423,
+              "prediction_energy": 0.09939679479135896,
+              "blocks": 28
+            },
+            "blocks": 28,
+            "GT_projected_gain": 0.441149372721059,
+            "GT_band_RMS": 0.004733717589913153,
+            "band_error_RMS": 0.004062536121000129,
+            "orthogonal_band_RMS": 0.0030831544584383817
+          }
+        ]
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 0,
+        "relative_GT_band_RMS_lower": 0.0,
+        "relative_GT_band_RMS_upper": 0.02,
+        "method": "V104 eight",
+        "sources_with_eligible_blocks": 2,
+        "source_balanced_GT_projected_gain": 0.32463770768481626,
+        "pooled": {
+          "blocks": 112,
+          "GT_projected_gain": 0.24467855836919605,
+          "GT_band_RMS": 0.008176976827098012,
+          "band_error_RMS": 0.007163741408005112,
+          "orthogonal_band_RMS": 0.0036294871858024717
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.756473369925395,
+              "cross": 0.4014998141322681,
+              "prediction_energy": 0.42423023312814634,
+              "blocks": 84
+            },
+            "blocks": 84,
+            "GT_projected_gain": 0.22858292132793426,
+            "GT_band_RMS": 0.009037767384749738,
+            "band_error_RMS": 0.008004207339714377,
+            "orthogonal_band_RMS": 0.0039319347995262505
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.1606211333605093,
+              "cross": 0.06757210518923688,
+              "prediction_energy": 0.06824294545607279,
+              "blocks": 28
+            },
+            "blocks": 28,
+            "GT_projected_gain": 0.4206924940416983,
+            "GT_band_RMS": 0.004733717589913153,
+            "band_error_RMS": 0.0036159035429136847,
+            "orthogonal_band_RMS": 0.0023568345475052503
+          }
+        ]
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 0,
+        "relative_GT_band_RMS_lower": 0.0,
+        "relative_GT_band_RMS_upper": 0.02,
+        "method": "V112 eight",
+        "sources_with_eligible_blocks": 2,
+        "source_balanced_GT_projected_gain": 0.32798039925209316,
+        "pooled": {
+          "blocks": 112,
+          "GT_projected_gain": 0.24798213352653872,
+          "GT_band_RMS": 0.008176976827098012,
+          "band_error_RMS": 0.007162336082680442,
+          "orthogonal_band_RMS": 0.003672328383947447
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.756473369925395,
+              "cross": 0.4072886253362547,
+              "prediction_energy": 0.4354288446058635,
+              "blocks": 84
+            },
+            "blocks": 84,
+            "GT_projected_gain": 0.2318786224203069,
+            "GT_band_RMS": 0.009037767384749738,
+            "band_error_RMS": 0.008003106271996635,
+            "orthogonal_band_RMS": 0.003982075487438631
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.1606211333605093,
+              "cross": 0.06811655976058378,
+              "prediction_energy": 0.06913361790173443,
+              "blocks": 28
+            },
+            "blocks": 28,
+            "GT_projected_gain": 0.42408217608387944,
+            "GT_band_RMS": 0.004733717589913153,
+            "band_error_RMS": 0.003612077330629736,
+            "orthogonal_band_RMS": 0.002369548460505725
+          }
+        ]
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 0,
+        "relative_GT_band_RMS_lower": 0.0,
+        "relative_GT_band_RMS_upper": 0.02,
+        "method": "V114 eight",
+        "sources_with_eligible_blocks": 2,
+        "source_balanced_GT_projected_gain": 0.31812514259873603,
+        "pooled": {
+          "blocks": 112,
+          "GT_projected_gain": 0.23668576796515967,
+          "GT_band_RMS": 0.008176976827098012,
+          "band_error_RMS": 0.007155756960074991,
+          "orthogonal_band_RMS": 0.003499607452156649
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.756473369925395,
+              "cross": 0.38693731993947655,
+              "prediction_energy": 0.3920688142525502,
+              "blocks": 84
+            },
+            "blocks": 84,
+            "GT_projected_gain": 0.22029216415385305,
+            "GT_band_RMS": 0.009037767384749738,
+            "band_error_RMS": 0.007995381922232134,
+            "orthogonal_band_RMS": 0.0037773651497411197
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.1606211333605093,
+              "cross": 0.06681166483253399,
+              "prediction_energy": 0.0664803311674505,
+              "blocks": 28
+            },
+            "blocks": 28,
+            "GT_projected_gain": 0.415958121043619,
+            "GT_band_RMS": 0.004733717589913153,
+            "band_error_RMS": 0.0036112372449864797,
+            "orthogonal_band_RMS": 0.0023232579339030153
+          }
+        ]
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 0,
+        "relative_GT_band_RMS_lower": 0.0,
+        "relative_GT_band_RMS_upper": 0.02,
+        "method": "V114 single",
+        "sources_with_eligible_blocks": 2,
+        "source_balanced_GT_projected_gain": 0.3216102066905826,
+        "pooled": {
+          "blocks": 112,
+          "GT_projected_gain": 0.24223494167686266,
+          "GT_band_RMS": 0.008176976827098012,
+          "band_error_RMS": 0.007171489926330822,
+          "orthogonal_band_RMS": 0.0036106834164650607
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.756473369925395,
+              "cross": 0.39741411338972193,
+              "prediction_energy": 0.4186596318235156,
+              "blocks": 84
+            },
+            "blocks": 84,
+            "GT_projected_gain": 0.22625683952532788,
+            "GT_band_RMS": 0.009037767384749738,
+            "band_error_RMS": 0.00801175886344601,
+            "orthogonal_band_RMS": 0.003909920719026604
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.1606211333605093,
+              "cross": 0.06697316180277302,
+              "prediction_energy": 0.06762905258962294,
+              "blocks": 28
+            },
+            "blocks": 28,
+            "GT_projected_gain": 0.4169635738558374,
+            "GT_band_RMS": 0.004733717589913153,
+            "band_error_RMS": 0.003627151884859622,
+            "orthogonal_band_RMS": 0.0023535119231050746
+          }
+        ]
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 1,
+        "relative_GT_band_RMS_lower": 0.02,
+        "relative_GT_band_RMS_upper": 0.05,
+        "method": "RawNIND preup",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.3417253295757045,
+        "pooled": {
+          "blocks": 55,
+          "GT_projected_gain": 0.3438690102677137,
+          "GT_band_RMS": 0.011318702435429817,
+          "band_error_RMS": 0.009282284522593293,
+          "orthogonal_band_RMS": 0.00556840549838955
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.1366243723892373,
+              "cross": 0.4135559351946291,
+              "prediction_energy": 0.3870215225230214,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.3638457394022928,
+            "GT_band_RMS": 0.019235251828014145,
+            "band_error_RMS": 0.015057766637444863,
+            "orthogonal_band_RMS": 0.008775093435999552
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 0.37681103589263815,
+              "cross": 0.06400369037907676,
+              "prediction_energy": 0.07128222109489443,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.16985619921522901,
+            "GT_band_RMS": 0.011075190400754659,
+            "band_error_RMS": 0.010207576655035104,
+            "orthogonal_band_RMS": 0.004434520622144845
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.2903959812091372,
+              "cross": 0.1427220890204035,
+              "prediction_energy": 0.19157244397321024,
+              "blocks": 31
+            },
+            "blocks": 31,
+            "GT_projected_gain": 0.4914740501095916,
+            "GT_band_RMS": 0.006049151637661727,
+            "band_error_RMS": 0.004976307869575084,
+            "orthogonal_band_RMS": 0.0039116412931313625
+          }
+        ]
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 1,
+        "relative_GT_band_RMS_lower": 0.02,
+        "relative_GT_band_RMS_upper": 0.05,
+        "method": "V104 eight",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.43444979964138986,
+        "pooled": {
+          "blocks": 55,
+          "GT_projected_gain": 0.48058757606164393,
+          "GT_band_RMS": 0.011318702435429817,
+          "band_error_RMS": 0.007906363143655275,
+          "orthogonal_band_RMS": 0.005286497820817258
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.1366243723892373,
+              "cross": 0.6284913154865472,
+              "prediction_energy": 0.5853848429484771,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.5529454855568768,
+            "GT_band_RMS": 0.019235251828014145,
+            "band_error_RMS": 0.012303488987458994,
+            "orthogonal_band_RMS": 0.008799403080682845
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 0.37681103589263815,
+              "cross": 0.08936086217330681,
+              "prediction_energy": 0.07599121321729994,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.23715033176142886,
+            "GT_band_RMS": 0.011075190400754659,
+            "band_error_RMS": 0.00944557678606207,
+            "orthogonal_band_RMS": 0.0042235410721674594
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.2903959812091372,
+              "cross": 0.14904677743953876,
+              "prediction_energy": 0.14873940502565108,
+              "blocks": 31
+            },
+            "blocks": 31,
+            "GT_projected_gain": 0.5132535816058638,
+            "GT_band_RMS": 0.006049151637661727,
+            "band_error_RMS": 0.004215733410089327,
+            "orthogonal_band_RMS": 0.003017101221870685
+          }
+        ]
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 1,
+        "relative_GT_band_RMS_lower": 0.02,
+        "relative_GT_band_RMS_upper": 0.05,
+        "method": "V112 eight",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.43693019718183174,
+        "pooled": {
+          "blocks": 55,
+          "GT_projected_gain": 0.4829159378120716,
+          "GT_band_RMS": 0.011318702435429817,
+          "band_error_RMS": 0.00790161626918808,
+          "orthogonal_band_RMS": 0.0053085968810740874
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.1366243723892373,
+              "cross": 0.6307911839406133,
+              "prediction_energy": 0.5893659003969806,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.5549689055273915,
+            "GT_band_RMS": 0.019235251828014145,
+            "band_error_RMS": 0.012295301875564513,
+            "orthogonal_band_RMS": 0.008825869133405705
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 0.37681103589263815,
+              "cross": 0.09078588483522199,
+              "prediction_energy": 0.07857297014884584,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.24093212827526875,
+            "GT_band_RMS": 0.011075190400754659,
+            "band_error_RMS": 0.009440952672287083,
+            "orthogonal_band_RMS": 0.004296154625149959
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.2903959812091372,
+              "cross": 0.14952185833506923,
+              "prediction_energy": 0.14951999267517882,
+              "blocks": 31
+            },
+            "blocks": 31,
+            "GT_projected_gain": 0.5148895577428348,
+            "GT_band_RMS": 0.006049151637661727,
+            "band_error_RMS": 0.004213198366511694,
+            "orthogonal_band_RMS": 0.0030231955504413195
+          }
+        ]
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 1,
+        "relative_GT_band_RMS_lower": 0.02,
+        "relative_GT_band_RMS_upper": 0.05,
+        "method": "V114 eight",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.4359383024047953,
+        "pooled": {
+          "blocks": 55,
+          "GT_projected_gain": 0.481637200648576,
+          "GT_band_RMS": 0.011318702435429817,
+          "band_error_RMS": 0.007903998193599417,
+          "orthogonal_band_RMS": 0.005296151313128362
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.1366243723892373,
+              "cross": 0.6281471195393,
+              "prediction_energy": 0.5861746736966,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.5526426626053298,
+            "GT_band_RMS": 0.019235251828014145,
+            "band_error_RMS": 0.012323028585984929,
+            "orthogonal_band_RMS": 0.008821024560616618
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 0.37681103589263815,
+              "cross": 0.09307964220516517,
+              "prediction_energy": 0.08205483285858138,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.24701941646869818,
+            "GT_band_RMS": 0.011075190400754659,
+            "band_error_RMS": 0.009421872138281925,
+            "orthogonal_band_RMS": 0.004384749329023031
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.2903959812091372,
+              "cross": 0.1475655391320173,
+              "prediction_energy": 0.14514618492424486,
+              "blocks": 31
+            },
+            "blocks": 31,
+            "GT_projected_gain": 0.508152828140358,
+            "GT_band_RMS": 0.006049151637661727,
+            "band_error_RMS": 0.004206296401707872,
+            "orthogonal_band_RMS": 0.0029733429852347097
+          }
+        ]
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 1,
+        "relative_GT_band_RMS_lower": 0.02,
+        "relative_GT_band_RMS_upper": 0.05,
+        "method": "V114 single",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.4368055736499814,
+        "pooled": {
+          "blocks": 55,
+          "GT_projected_gain": 0.48330677625013424,
+          "GT_band_RMS": 0.011318702435429817,
+          "band_error_RMS": 0.007937912909675398,
+          "orthogonal_band_RMS": 0.005367297766618464
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 1.1366243723892373,
+              "cross": 0.6311807446146431,
+              "prediction_energy": 0.5967914205100519,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.555311640280836,
+            "GT_band_RMS": 0.019235251828014145,
+            "band_error_RMS": 0.012382971754627903,
+            "orthogonal_band_RMS": 0.00895390041552712
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 0.37681103589263815,
+              "cross": 0.09306879307216896,
+              "prediction_energy": 0.08360050928124035,
+              "blocks": 12
+            },
+            "blocks": 12,
+            "GT_projected_gain": 0.24699062449616346,
+            "GT_band_RMS": 0.011075190400754659,
+            "band_error_RMS": 0.009448909339438524,
+            "orthogonal_band_RMS": 0.004441950158510389
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 0.2903959812091372,
+              "cross": 0.14755439606688944,
+              "prediction_energy": 0.14657184419630434,
+              "blocks": 31
+            },
+            "blocks": 31,
+            "GT_projected_gain": 0.5081144561729448,
+            "GT_band_RMS": 0.006049151637661727,
+            "band_error_RMS": 0.004227928832973819,
+            "orthogonal_band_RMS": 0.003003637799502629
+          }
+        ]
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 2,
+        "relative_GT_band_RMS_lower": 0.05,
+        "relative_GT_band_RMS_upper": 0.1,
+        "method": "RawNIND preup",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.5164137090024307,
+        "pooled": {
+          "blocks": 53,
+          "GT_projected_gain": 0.5563312611748619,
+          "GT_band_RMS": 0.028461277497960534,
+          "band_error_RMS": 0.017973377590269398,
+          "orthogonal_band_RMS": 0.012790293165025043
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 8.079863824698766,
+              "cross": 4.878966912475847,
+              "prediction_energy": 4.412184759654581,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.6038427154628123,
+            "GT_band_RMS": 0.047480799175809364,
+            "band_error_RMS": 0.027620044195310542,
+            "orthogonal_band_RMS": 0.0202251289242698
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 1.8699983569803063,
+              "cross": 0.5672017883548046,
+              "prediction_energy": 0.49969887994644235,
+              "blocks": 25
+            },
+            "blocks": 25,
+            "GT_projected_gain": 0.3033167308610518,
+            "GT_band_RMS": 0.017093485404626314,
+            "band_error_RMS": 0.013892970683368193,
+            "orthogonal_band_RMS": 0.007155167360945786
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 1.0408191088792584,
+              "cross": 0.6682908827166221,
+              "prediction_energy": 0.7093921905037329,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.642081680683428,
+            "GT_band_RMS": 0.017041335553084708,
+            "band_error_RMS": 0.01074290585519845,
+            "orthogonal_band_RMS": 0.008843487460509185
+          }
+        ]
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 2,
+        "relative_GT_band_RMS_lower": 0.05,
+        "relative_GT_band_RMS_upper": 0.1,
+        "method": "V104 eight",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.7845786978861212,
+        "pooled": {
+          "blocks": 53,
+          "GT_projected_gain": 0.8449430423364813,
+          "GT_band_RMS": 0.028461277497960534,
+          "band_error_RMS": 0.011476819843881898,
+          "orthogonal_band_RMS": 0.010594421812335355
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 8.079863824698766,
+              "cross": 7.277000318778773,
+              "prediction_energy": 7.296181303957866,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.9006340300605344,
+            "GT_band_RMS": 0.047480799175809364,
+            "band_error_RMS": 0.015144804138137844,
+            "orthogonal_band_RMS": 0.014391170835626466
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 1.8699983569803063,
+              "cross": 1.1210414942605114,
+              "prediction_energy": 1.1428253576170584,
+              "blocks": 25
+            },
+            "blocks": 25,
+            "GT_projected_gain": 0.5994879568080377,
+            "GT_band_RMS": 0.017093485404626314,
+            "band_error_RMS": 0.010973980064198604,
+            "orthogonal_band_RMS": 0.008576625963973563
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 1.0408191088792584,
+              "cross": 0.8884578739557151,
+              "prediction_energy": 0.9304530199707521,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.8536141067897917,
+            "GT_band_RMS": 0.017041335553084708,
+            "band_error_RMS": 0.007364027493941312,
+            "orthogonal_band_RMS": 0.0069286229699269475
+          }
+        ]
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 2,
+        "relative_GT_band_RMS_lower": 0.05,
+        "relative_GT_band_RMS_upper": 0.1,
+        "method": "V112 eight",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.7859565367562033,
+        "pooled": {
+          "blocks": 53,
+          "GT_projected_gain": 0.8456816751077094,
+          "GT_band_RMS": 0.028461277497960534,
+          "band_error_RMS": 0.011468657164878882,
+          "orthogonal_band_RMS": 0.010594318478618825
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 8.079863824698766,
+              "cross": 7.278736410077964,
+              "prediction_energy": 7.298698246172416,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.9008488964663127,
+            "GT_band_RMS": 0.047480799175809364,
+            "band_error_RMS": 0.015136002221775876,
+            "orthogonal_band_RMS": 0.014385250455231596
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 1.8699983569803063,
+              "cross": 1.1262361695365486,
+              "prediction_energy": 1.1518082492672939,
+              "blocks": 25
+            },
+            "blocks": 25,
+            "GT_projected_gain": 0.6022658604658921,
+            "GT_band_RMS": 0.017093485404626314,
+            "band_error_RMS": 0.01096396275285611,
+            "orthogonal_band_RMS": 0.008601550128588325
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 1.0408191088792584,
+              "cross": 0.8896451847598181,
+              "prediction_energy": 0.9326481010925,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.8547548533364049,
+            "GT_band_RMS": 0.017041335553084708,
+            "band_error_RMS": 0.007360625376265363,
+            "orthogonal_band_RMS": 0.006931979014373535
+          }
+        ]
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 2,
+        "relative_GT_band_RMS_lower": 0.05,
+        "relative_GT_band_RMS_upper": 0.1,
+        "method": "V114 eight",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.7869736933767663,
+        "pooled": {
+          "blocks": 53,
+          "GT_projected_gain": 0.8456871985446988,
+          "GT_band_RMS": 0.028461277497960534,
+          "band_error_RMS": 0.01145350578103431,
+          "orthogonal_band_RMS": 0.010577980072930716
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 8.079863824698766,
+              "cross": 7.2717549138111535,
+              "prediction_energy": 7.28219751176091,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.8999848353362886,
+            "GT_band_RMS": 0.047480799175809364,
+            "band_error_RMS": 0.01511259368728131,
+            "orthogonal_band_RMS": 0.014347103784784055
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 1.8699983569803063,
+              "cross": 1.1329271133602248,
+              "prediction_energy": 1.1640724020574726,
+              "blocks": 25
+            },
+            "blocks": 25,
+            "GT_projected_gain": 0.6058439084351325,
+            "GT_band_RMS": 0.017093485404626314,
+            "band_error_RMS": 0.01095599530734578,
+            "orthogonal_band_RMS": 0.008639439106931197
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 1.0408191088792584,
+              "cross": 0.88999644353853,
+              "prediction_energy": 0.9322938952095996,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.8550923363588775,
+            "GT_band_RMS": 0.017041335553084708,
+            "band_error_RMS": 0.007340569543285433,
+            "orthogonal_band_RMS": 0.006912736468950562
+          }
+        ]
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 2,
+        "relative_GT_band_RMS_lower": 0.05,
+        "relative_GT_band_RMS_upper": 0.1,
+        "method": "V114 single",
+        "sources_with_eligible_blocks": 3,
+        "source_balanced_GT_projected_gain": 0.7859838378944692,
+        "pooled": {
+          "blocks": 53,
+          "GT_projected_gain": 0.8462729567594897,
+          "GT_band_RMS": 0.028461277497960534,
+          "band_error_RMS": 0.011609582100137539,
+          "orthogonal_band_RMS": 0.010753577365121822
+        },
+        "per_source": [
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 8.079863824698766,
+              "cross": 7.286307951318277,
+              "prediction_energy": 7.3566131237005745,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.9017859841950896,
+            "GT_band_RMS": 0.047480799175809364,
+            "band_error_RMS": 0.01552522649940799,
+            "orthogonal_band_RMS": 0.014808324613750704
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 1.8699983569803063,
+              "cross": 1.1258237743392467,
+              "prediction_energy": 1.152629845810577,
+              "blocks": 25
+            },
+            "blocks": 25,
+            "GT_projected_gain": 0.6020453280810574,
+            "GT_band_RMS": 0.017093485404626314,
+            "band_error_RMS": 0.010975688006000394,
+            "orthogonal_band_RMS": 0.00861351501844495
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 1.0408191088792584,
+              "cross": 0.8889846269044779,
+              "prediction_energy": 0.9310360013069903,
+              "blocks": 14
+            },
+            "blocks": 14,
+            "GT_projected_gain": 0.8541202014072607,
+            "GT_band_RMS": 0.017041335553084708,
+            "band_error_RMS": 0.007355108168932666,
+            "orthogonal_band_RMS": 0.006922245792377978
+          }
+        ]
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 3,
+        "relative_GT_band_RMS_lower": 0.1,
+        "relative_GT_band_RMS_upper": 0.2,
+        "method": "RawNIND preup",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.5315667092910965,
+        "pooled": {
+          "blocks": 71,
+          "GT_projected_gain": 0.5284377750655401,
+          "GT_band_RMS": 0.043863407066316244,
+          "band_error_RMS": 0.02800910943309199,
+          "orthogonal_band_RMS": 0.01888567913044753
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 12.312295848076564,
+              "cross": 4.517589647471964,
+              "prediction_energy": 3.7849644506533093,
+              "blocks": 13
+            },
+            "blocks": 13,
+            "GT_projected_gain": 0.3669169181130183,
+            "GT_band_RMS": 0.06082440404497896,
+            "band_error_RMS": 0.04606538323283118,
+            "orthogonal_band_RMS": 0.02528315832571086
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 13.440606538449472,
+              "cross": 8.63681782875142,
+              "prediction_energy": 7.780322410149226,
+              "blocks": 16
+            },
+            "blocks": 16,
+            "GT_projected_gain": 0.642591374432703,
+            "GT_band_RMS": 0.05728348872647458,
+            "band_error_RMS": 0.03104343169088188,
+            "orthogonal_band_RMS": 0.023335077093523556
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 3.7165513528772625,
+              "cross": 1.7036978227531174,
+              "prediction_energy": 1.3739378193567235,
+              "blocks": 19
+            },
+            "blocks": 19,
+            "GT_projected_gain": 0.4584082556626472,
+            "GT_band_RMS": 0.02764224334160804,
+            "band_error_RMS": 0.018601901556420285,
+            "orthogonal_band_RMS": 0.011041085356129058
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 5.501142623359122,
+              "cross": 3.6216788356767418,
+              "prediction_energy": 3.309004825790761,
+              "blocks": 23
+            },
+            "blocks": 23,
+            "GT_projected_gain": 0.6583502889560174,
+            "GT_band_RMS": 0.030566277505501536,
+            "band_error_RMS": 0.01631253528334307,
+            "orthogonal_band_RMS": 0.01253169567011547
+          }
+        ]
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 3,
+        "relative_GT_band_RMS_lower": 0.1,
+        "relative_GT_band_RMS_upper": 0.2,
+        "method": "V104 eight",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.9012656571137703,
+        "pooled": {
+          "blocks": 71,
+          "GT_projected_gain": 0.9215518118358986,
+          "GT_band_RMS": 0.043863407066316244,
+          "band_error_RMS": 0.01293640382930154,
+          "orthogonal_band_RMS": 0.012470366070210227
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 12.312295848076564,
+              "cross": 11.476171963391161,
+              "prediction_energy": 11.802569501768067,
+              "blocks": 13
+            },
+            "blocks": 13,
+            "GT_projected_gain": 0.9320903351411896,
+            "GT_band_RMS": 0.06082440404497896,
+            "band_error_RMS": 0.018689979439502093,
+            "orthogonal_band_RMS": 0.018227829412906855
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 13.440606538449472,
+              "cross": 12.772077491452652,
+              "prediction_energy": 12.821506404490735,
+              "blocks": 16
+            },
+            "blocks": 16,
+            "GT_projected_gain": 0.9502605001430283,
+            "GT_band_RMS": 0.05728348872647458,
+            "band_error_RMS": 0.01323943749132288,
+            "orthogonal_band_RMS": 0.012929209862754667
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 3.7165513528772625,
+              "cross": 3.1195282091853476,
+              "prediction_energy": 3.132444536213192,
+              "blocks": 19
+            },
+            "blocks": 19,
+            "GT_projected_gain": 0.8393609862999164,
+            "GT_band_RMS": 0.02764224334160804,
+            "band_error_RMS": 0.011198157878346406,
+            "orthogonal_band_RMS": 0.01028014523500667
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 5.501142623359122,
+              "cross": 4.859438775056437,
+              "prediction_energy": 4.769079561312707,
+              "blocks": 23
+            },
+            "blocks": 23,
+            "GT_projected_gain": 0.8833508068709466,
+            "GT_band_RMS": 0.030566277505501536,
+            "band_error_RMS": 0.00967670887895692,
+            "orthogonal_band_RMS": 0.008995870112480013
+          }
+        ]
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 3,
+        "relative_GT_band_RMS_lower": 0.1,
+        "relative_GT_band_RMS_upper": 0.2,
+        "method": "V112 eight",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.9003286876375937,
+        "pooled": {
+          "blocks": 71,
+          "GT_projected_gain": 0.9204607266788475,
+          "GT_band_RMS": 0.043863407066316244,
+          "band_error_RMS": 0.012926790779221459,
+          "orthogonal_band_RMS": 0.012447078017130847
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 12.312295848076564,
+              "cross": 11.449458862051287,
+              "prediction_energy": 11.74448140256752,
+              "blocks": 13
+            },
+            "blocks": 13,
+            "GT_projected_gain": 0.9299207071798823,
+            "GT_band_RMS": 0.06082440404497896,
+            "band_error_RMS": 0.018652466893051077,
+            "orthogonal_band_RMS": 0.018158891727762284
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 13.440606538449472,
+              "cross": 12.763700007873265,
+              "prediction_energy": 12.80425770519161,
+              "blocks": 16
+            },
+            "blocks": 16,
+            "GT_projected_gain": 0.9496372036009101,
+            "GT_band_RMS": 0.05728348872647458,
+            "band_error_RMS": 0.013234884397429338,
+            "orthogonal_band_RMS": 0.01291662455787969
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 3.7165513528772625,
+              "cross": 3.1149714834445414,
+              "prediction_energy": 3.1228697973077373,
+              "blocks": 19
+            },
+            "blocks": 19,
+            "GT_projected_gain": 0.8381349233969302,
+            "GT_band_RMS": 0.02764224334160804,
+            "band_error_RMS": 0.011193922583963697,
+            "orthogonal_band_RMS": 0.010260819582909501
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 5.501142623359122,
+              "cross": 4.860930187091867,
+              "prediction_energy": 4.773160308281952,
+              "blocks": 23
+            },
+            "blocks": 23,
+            "GT_projected_gain": 0.8836219163726522,
+            "GT_band_RMS": 0.030566277505501536,
+            "band_error_RMS": 0.009686338968446263,
+            "orthogonal_band_RMS": 0.009009504539460688
+          }
+        ]
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 3,
+        "relative_GT_band_RMS_lower": 0.1,
+        "relative_GT_band_RMS_upper": 0.2,
+        "method": "V114 eight",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.9004712872539418,
+        "pooled": {
+          "blocks": 71,
+          "GT_projected_gain": 0.9201351276388421,
+          "GT_band_RMS": 0.043863407066316244,
+          "band_error_RMS": 0.012909414060353607,
+          "orthogonal_band_RMS": 0.012425012822582284
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 12.312295848076564,
+              "cross": 11.421653618310144,
+              "prediction_energy": 11.68555439430151,
+              "blocks": 13
+            },
+            "blocks": 13,
+            "GT_projected_gain": 0.9276623758268806,
+            "GT_band_RMS": 0.06082440404497896,
+            "band_error_RMS": 0.018625734092381552,
+            "orthogonal_band_RMS": 0.018098588705240663
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 13.440606538449472,
+              "cross": 12.767801948747389,
+              "prediction_energy": 12.809967586075237,
+              "blocks": 16
+            },
+            "blocks": 16,
+            "GT_projected_gain": 0.9499423937619634,
+            "GT_band_RMS": 0.05728348872647458,
+            "band_error_RMS": 0.013211861264919484,
+            "orthogonal_band_RMS": 0.012896932545867117
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 3.7165513528772625,
+              "cross": 3.1182316378041164,
+              "prediction_energy": 3.1285317214735158,
+              "blocks": 19
+            },
+            "blocks": 19,
+            "GT_projected_gain": 0.8390121221895827,
+            "GT_band_RMS": 0.02764224334160804,
+            "band_error_RMS": 0.011186037087741104,
+            "orthogonal_band_RMS": 0.010262764612517327
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 5.501142623359122,
+              "cross": 4.8699869429951805,
+              "prediction_energy": 4.789782638933937,
+              "blocks": 23
+            },
+            "blocks": 23,
+            "GT_projected_gain": 0.8852682572373403,
+            "GT_band_RMS": 0.030566277505501536,
+            "band_error_RMS": 0.009673257204412249,
+            "orthogonal_band_RMS": 0.009015176149628466
+          }
+        ]
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 3,
+        "relative_GT_band_RMS_lower": 0.1,
+        "relative_GT_band_RMS_upper": 0.2,
+        "method": "V114 single",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.897912009296931,
+        "pooled": {
+          "blocks": 71,
+          "GT_projected_gain": 0.9187092223002195,
+          "GT_band_RMS": 0.043863407066316244,
+          "band_error_RMS": 0.01299221968474209,
+          "orthogonal_band_RMS": 0.012493343178968509
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 12.312295848076564,
+              "cross": 11.404267050867292,
+              "prediction_energy": 11.656184110803794,
+              "blocks": 13
+            },
+            "blocks": 13,
+            "GT_projected_gain": 0.9262502454120995,
+            "GT_band_RMS": 0.06082440404497896,
+            "band_error_RMS": 0.018669264137110668,
+            "orthogonal_band_RMS": 0.01812233863246876
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 13.440606538449472,
+              "cross": 12.782419142805999,
+              "prediction_energy": 12.858771625640607,
+              "blocks": 16
+            },
+            "blocks": 16,
+            "GT_projected_gain": 0.9510299335256486,
+            "GT_band_RMS": 0.05728348872647458,
+            "band_error_RMS": 0.013391453431911818,
+            "orthogonal_band_RMS": 0.013094350355054204
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 3.7165513528772625,
+              "cross": 3.102748070738169,
+              "prediction_energy": 3.104436984544322,
+              "blocks": 19
+            },
+            "blocks": 19,
+            "GT_projected_gain": 0.8348460107610508,
+            "GT_band_RMS": 0.02764224334160804,
+            "band_error_RMS": 0.011249014905200682,
+            "orthogonal_band_RMS": 0.010281003889351704
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 5.501142623359122,
+              "cross": 4.838375123396888,
+              "prediction_energy": 4.73369800185559,
+              "blocks": 23
+            },
+            "blocks": 23,
+            "GT_projected_gain": 0.8795218474889253,
+            "GT_band_RMS": 0.030566277505501536,
+            "band_error_RMS": 0.009735726543770494,
+            "orthogonal_band_RMS": 0.009012383676067262
+          }
+        ]
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 4,
+        "relative_GT_band_RMS_lower": 0.2,
+        "relative_GT_band_RMS_upper": null,
+        "method": "RawNIND preup",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.5731664786967909,
+        "pooled": {
+          "blocks": 481,
+          "GT_projected_gain": 0.5036305906507833,
+          "GT_band_RMS": 0.06005991714740956,
+          "band_error_RMS": 0.03876439227157944,
+          "orthogonal_band_RMS": 0.024777578426477247
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 375.9974609325544,
+              "cross": 184.18132807651216,
+              "prediction_energy": 154.80314239173782,
+              "blocks": 212
+            },
+            "blocks": 212,
+            "GT_projected_gain": 0.48984726550999286,
+            "GT_band_RMS": 0.08323472384540995,
+            "band_error_RMS": 0.05470862920180329,
+            "orthogonal_band_RMS": 0.034496040776016354
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 14.853345531609458,
+              "cross": 10.088995552837119,
+              "prediction_energy": 8.841695158172271,
+              "blocks": 22
+            },
+            "blocks": 22,
+            "GT_projected_gain": 0.6792406149420473,
+            "GT_band_RMS": 0.05135477360428826,
+            "band_error_RMS": 0.02498952047442713,
+            "orthogonal_band_RMS": 0.018791807626273114
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 30.340815962380944,
+              "cross": 14.87103881683311,
+              "prediction_energy": 11.72577318740855,
+              "blocks": 155
+            },
+            "blocks": 155,
+            "GT_projected_gain": 0.49013312085184046,
+            "GT_band_RMS": 0.027652079470664392,
+            "band_error_RMS": 0.017623778495279817,
+            "orthogonal_band_RMS": 0.010574458207215205
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 22.98377458325494,
+              "cross": 14.558955102409215,
+              "prediction_energy": 12.888398879519213,
+              "blocks": 92
+            },
+            "blocks": 92,
+            "GT_projected_gain": 0.6334449134832834,
+            "GT_band_RMS": 0.03123897535372168,
+            "band_error_RMS": 0.01693460595406494,
+            "orthogonal_band_RMS": 0.012476375134320782
+          }
+        ]
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 4,
+        "relative_GT_band_RMS_lower": 0.2,
+        "relative_GT_band_RMS_upper": null,
+        "method": "V104 eight",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.9436298319957538,
+        "pooled": {
+          "blocks": 481,
+          "GT_projected_gain": 0.9634996473677881,
+          "GT_band_RMS": 0.06005991714740956,
+          "band_error_RMS": 0.013637900169701133,
+          "orthogonal_band_RMS": 0.013460555131351044
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 375.9974609325544,
+              "cross": 364.9050124399703,
+              "prediction_energy": 371.46807220345477,
+              "blocks": 212
+            },
+            "blocks": 212,
+            "GT_projected_gain": 0.9704986079824249,
+            "GT_band_RMS": 0.08323472384540995,
+            "band_error_RMS": 0.018036497213233024,
+            "orthogonal_band_RMS": 0.01786856328758765
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 14.853345531609458,
+              "cross": 14.640427229697439,
+              "prediction_energy": 14.83487252129393,
+              "blocks": 22
+            },
+            "blocks": 22,
+            "GT_projected_gain": 0.9856652966526022,
+            "GT_band_RMS": 0.05135477360428826,
+            "band_error_RMS": 0.008504715368928146,
+            "orthogonal_band_RMS": 0.008472795209796278
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 30.340815962380944,
+              "cross": 27.320716199240245,
+              "prediction_energy": 27.41783474765804,
+              "blocks": 155
+            },
+            "blocks": 155,
+            "GT_projected_gain": 0.9004608258760981,
+            "GT_band_RMS": 0.027652079470664392,
+            "band_error_RMS": 0.008863347517881964,
+            "orthogonal_band_RMS": 0.008425132924916503
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 22.98377458325494,
+              "cross": 21.096682519481455,
+              "prediction_energy": 20.931850737997927,
+              "blocks": 92
+            },
+            "blocks": 92,
+            "GT_projected_gain": 0.9178945974718902,
+            "GT_band_RMS": 0.03123897535372168,
+            "band_error_RMS": 0.008551366041200638,
+            "orthogonal_band_RMS": 0.008157647173315777
+          }
+        ]
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 4,
+        "relative_GT_band_RMS_lower": 0.2,
+        "relative_GT_band_RMS_upper": null,
+        "method": "V112 eight",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.9427474316364746,
+        "pooled": {
+          "blocks": 481,
+          "GT_projected_gain": 0.9623219010927234,
+          "GT_band_RMS": 0.06005991714740956,
+          "band_error_RMS": 0.013618434575900073,
+          "orthogonal_band_RMS": 0.013429104475728098
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 375.9974609325544,
+              "cross": 364.43319456889776,
+              "prediction_energy": 370.4676661854611,
+              "blocks": 212
+            },
+            "blocks": 212,
+            "GT_projected_gain": 0.9692437647451799,
+            "GT_band_RMS": 0.08323472384540995,
+            "band_error_RMS": 0.01800747620358843,
+            "orthogonal_band_RMS": 0.017824580417868927
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 14.853345531609458,
+              "cross": 14.629752498170731,
+              "prediction_energy": 14.811571299271373,
+              "blocks": 22
+            },
+            "blocks": 22,
+            "GT_projected_gain": 0.9849466214218946,
+            "GT_band_RMS": 0.05135477360428826,
+            "band_error_RMS": 0.008484317025787282,
+            "orthogonal_band_RMS": 0.008449024158195977
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 30.340815962380944,
+              "cross": 27.30063761010465,
+              "prediction_energy": 27.375270081491884,
+              "blocks": 155
+            },
+            "blocks": 155,
+            "GT_projected_gain": 0.899799057611181,
+            "GT_band_RMS": 0.027652079470664392,
+            "band_error_RMS": 0.008859924189559757,
+            "orthogonal_band_RMS": 0.00841552857298253
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 22.98377458325494,
+              "cross": 21.07612779191254,
+              "prediction_energy": 20.886539678210497,
+              "blocks": 92
+            },
+            "blocks": 92,
+            "GT_projected_gain": 0.9170002827676427,
+            "GT_band_RMS": 0.03123897535372168,
+            "band_error_RMS": 0.008540928768819612,
+            "orthogonal_band_RMS": 0.008137857023834688
+          }
+        ]
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 4,
+        "relative_GT_band_RMS_lower": 0.2,
+        "relative_GT_band_RMS_upper": null,
+        "method": "V114 eight",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.9425433392477112,
+        "pooled": {
+          "blocks": 481,
+          "GT_projected_gain": 0.9611290538134749,
+          "GT_band_RMS": 0.06005991714740956,
+          "band_error_RMS": 0.013602971988243642,
+          "orthogonal_band_RMS": 0.013401140101528998
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 375.9974609325544,
+              "cross": 363.8934724575875,
+              "prediction_energy": 369.3406873300037,
+              "blocks": 212
+            },
+            "blocks": 212,
+            "GT_projected_gain": 0.9678083239047773,
+            "GT_band_RMS": 0.08323472384540995,
+            "band_error_RMS": 0.017983140437081296,
+            "orthogonal_band_RMS": 0.017782401577041057
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 14.853345531609458,
+              "cross": 14.632688386748118,
+              "prediction_energy": 14.818789962461002,
+              "blocks": 22
+            },
+            "blocks": 22,
+            "GT_projected_gain": 0.9851442798262682,
+            "GT_band_RMS": 0.05135477360428826,
+            "band_error_RMS": 0.008498398919376903,
+            "orthogonal_band_RMS": 0.008464085848452263
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 30.340815962380944,
+              "cross": 27.289367197527895,
+              "prediction_energy": 27.349191323552997,
+              "blocks": 155
+            },
+            "blocks": 155,
+            "GT_projected_gain": 0.8994275971800993,
+            "GT_band_RMS": 0.027652079470664392,
+            "band_error_RMS": 0.008854891023169713,
+            "orthogonal_band_RMS": 0.008406838488987158
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 22.98377458325494,
+              "cross": 21.09435101338994,
+              "prediction_energy": 20.920882210161363,
+              "blocks": 92
+            },
+            "blocks": 92,
+            "GT_projected_gain": 0.9177931560796998,
+            "GT_band_RMS": 0.03123897535372168,
+            "band_error_RMS": 0.008535697614936083,
+            "orthogonal_band_RMS": 0.008140221992364175
+          }
+        ]
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 4,
+        "relative_GT_band_RMS_lower": 0.2,
+        "relative_GT_band_RMS_upper": null,
+        "method": "V114 single",
+        "sources_with_eligible_blocks": 4,
+        "source_balanced_GT_projected_gain": 0.9417953208005745,
+        "pooled": {
+          "blocks": 481,
+          "GT_projected_gain": 0.960399663434209,
+          "GT_band_RMS": 0.06005991714740956,
+          "band_error_RMS": 0.013680108510355527,
+          "orthogonal_band_RMS": 0.013471771075498557
+        },
+        "per_source": [
+          {
+            "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+            "sums": {
+              "GT_energy": 375.9974609325544,
+              "cross": 363.62719924129857,
+              "prediction_energy": 369.0091514727144,
+              "blocks": 212
+            },
+            "blocks": 212,
+            "GT_projected_gain": 0.9671001456749869,
+            "GT_band_RMS": 0.08323472384540995,
+            "band_error_RMS": 0.01808582599866383,
+            "orthogonal_band_RMS": 0.017877309952602442
+          },
+          {
+            "source_id": "14d8ea6cea4a27346a643e6d767f800729fb4693",
+            "sums": {
+              "GT_energy": 14.853345531609458,
+              "cross": 14.643554564696958,
+              "prediction_energy": 14.847395871125093,
+              "blocks": 22
+            },
+            "blocks": 22,
+            "GT_projected_gain": 0.9858758441681679,
+            "GT_band_RMS": 0.05135477360428826,
+            "band_error_RMS": 0.008569902587058694,
+            "orthogonal_band_RMS": 0.008539151488160746
+          },
+          {
+            "source_id": "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+            "sums": {
+              "GT_energy": 30.340815962380944,
+              "cross": 27.292404263032534,
+              "prediction_energy": 27.38853931059517,
+              "blocks": 155
+            },
+            "blocks": 155,
+            "GT_projected_gain": 0.8995276955264458,
+            "GT_band_RMS": 0.027652079470664392,
+            "band_error_RMS": 0.00890211491005088,
+            "orthogonal_band_RMS": 0.008457474562190242
+          },
+          {
+            "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+            "sums": {
+              "GT_energy": 22.98377458325494,
+              "cross": 21.02274372493983,
+              "prediction_energy": 20.795652063043185,
+              "blocks": 92
+            },
+            "blocks": 92,
+            "GT_projected_gain": 0.9146775978326971,
+            "GT_band_RMS": 0.03123897535372168,
+            "band_error_RMS": 0.008580311123634485,
+            "orthogonal_band_RMS": 0.008155823985372932
+          }
+        ]
+      }
+    ],
+    "block_details": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-material-local-detail-v1/output-v1/blocks-v1.json",
+      "sha256": "5dbdf5b302dfbf1b37e797deec41dc95b3beb228e2bbbad4ef9e8612a18112bb"
+    },
+    "closed_form_fixture": {
+      "blocks": 1,
+      "GT_projected_gain": 0.7499999999999547,
+      "GT_band_RMS": 0.00019999999999997532,
+      "band_error_RMS": 0.00011180339887498339,
+      "orthogonal_band_RMS": 9.999999999999172e-05
+    },
+    "maximum_explicit_cosine_vs_even_FFT_absolute_error": 1.4054729602364091e-14,
+    "new_neural_forwards": 0,
+    "optimizer_updates": 0,
+    "new_noise_observations": 0,
+    "RAW_decodes": 0,
+    "Torch_imported": false,
+    "scope": "Exploratory local-luminance diagnostic of the original four held-out material contexts and three fixed noise draws. All225 disjoint16px blocks per context retained. Orthonormal DCT-II, frequencies k/(2N), radial band [1/8,1/3). GT-only eligibility/bins fixed before output analysis. Conditional scalar projection can contain chance noise/GT correlation; no noise debiasing or fine-carrier recovery claim. Local coarse structure and block boundaries can leak into the band. No inference/training/default/source-data/queue changes."
+  },
+  "images": {
+    "path": "/home/dllu/proj/demosaic/docs/images/local-material-detail-v1/manifest.json",
+    "sha256": "1155199bc40f9ff7beb022544b4c4c693a00437986c4e9903469cdcbc688534d"
+  },
+  "current_learned_weights_or_default_changed": false,
+  "V116_training_or_queues_changed": false,
+  "new_neural_forwards": 0,
+  "new_encoder_forwards": 0,
+  "new_noise_observations": 0,
+  "RAW_decodes": 0,
+  "optimizer_updates": 0
+}
