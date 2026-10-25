@@ -1,0 +1,595 @@
+{
+  "status": "completed-current-V114-ADC-sites-full-panels-native-review-and-serialized-export",
+  "recorded_local": "2026-10-25T03:12:30.042220-07:00",
+  "archive_analysis": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-sites-archive-v1/result-v1.json",
+    "sha256": "89d6e881381dfcb4214e8ac51984222452412529e5c8b5d2242cb4f2f0f56a27"
+  },
+  "native_and_statistical_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-sites-archive-v1/qualitative-v1/result-v1.json",
+    "sha256": "883236eed269184be608e0701bb185750773d8a92c26a396e437c6ddd71cbc3e"
+  },
+  "actual_native_review": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-sites-archive-v1/native-review-v1.json",
+    "sha256": "9ffb73865fb3cceb943a8bc2d10b0b8bca8e2312521b840ce69da967f258bd97"
+  },
+  "serialized_export_validation": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-sites-archive-v1/export-validation-v1/result-v1.json",
+    "sha256": "b09e5382ac0c5a02ab5a5a7b74181f0b3a8b9884766384e9daff4bd3f958029d"
+  },
+  "checkpoint": {
+    "path": "/mnt/external/demosaic/models/v114-final20000-adc-sites.pt",
+    "sha256": "2a2f6d1f1b6d4a7090074ba9bd75922418d6940f7706b8dab2d9256b9f84de60"
+  },
+  "parent_checkpoint": {
+    "path": "/mnt/external/demosaic/models/v114-final20000.pt",
+    "sha256": "2285c84b7015bcf122e71b890723f80aaf216bde849256c77f070c2493f9d2d2"
+  },
+  "learned_restoration_tensors_unchanged": 91,
+  "official_Tiny_encoder_unchanged": true,
+  "scope": "ADC-only output policy using current V114 weights. Full427photos\u00d74CFAs,224texture observations and588color cases; all1072 original five-input batch fingerprints exact. Reuses matched GPU parent predictions for numerical contrasts. Actual serialized export receives12 new CPU calls against retained CPU controls,4ADC and8positive-noise; no control model reruns. No training, new noise or RAW decode. Native review is complete; positive-noise real-GFX appearance is the existing parent result. No new primary all-condition PSNR endpoint or general model change.",
+  "photo_sources": 427,
+  "photo_cases": 1708,
+  "photo_statistics": {
+    "linear_psnr": {
+      "V114": 43.766939783773616,
+      "V114-sites": 43.91566576399851,
+      "mean_sites_minus_control": 0.14872598022490177,
+      "source_bootstrap95": [
+        0.1415196607105526,
+        0.15593750929209138
+      ],
+      "sources_increased": 427,
+      "sources_decreased": 0,
+      "minimum_source_delta": 0.04221983552510267,
+      "maximum_source_delta": 0.7194960306746339
+    },
+    "srgb_psnr": {
+      "V114": 37.78012826984572,
+      "V114-sites": 38.01575450788432,
+      "mean_sites_minus_control": 0.23562623803859972,
+      "source_bootstrap95": [
+        0.22433783548598243,
+        0.2472912158068302
+      ],
+      "sources_increased": 427,
+      "sources_decreased": 0,
+      "minimum_source_delta": 0.05703615828709019,
+      "maximum_source_delta": 0.8320413274501846
+    },
+    "chroma_mae": {
+      "V114": 0.006236537867173939,
+      "V114-sites": 0.006212733933439285,
+      "mean_sites_minus_control": -2.3803933734654373e-05,
+      "source_bootstrap95": [
+        -3.3848541861758966e-05,
+        -1.406188726026662e-05
+      ],
+      "sources_increased": 177,
+      "sources_decreased": 250,
+      "minimum_source_delta": -0.0006965341174189864,
+      "maximum_source_delta": 0.0003862651606508019
+    },
+    "gradient_mae": {
+      "V114": 0.009247124392749585,
+      "V114-sites": 0.009150732524316812,
+      "mean_sites_minus_control": -9.639186843277211e-05,
+      "source_bootstrap95": [
+        -0.00010914010166570593,
+        -8.253815702599552e-05
+      ],
+      "sources_increased": 54,
+      "sources_decreased": 373,
+      "minimum_source_delta": -0.0009649325537507622,
+      "maximum_source_delta": 0.0006213449248510354
+    }
+  },
+  "photo_case_directions": {
+    "linear_psnr": {
+      "cases_increased": 1708,
+      "cases_decreased": 0
+    },
+    "srgb_psnr": {
+      "cases_increased": 1708,
+      "cases_decreased": 0
+    },
+    "chroma_mae": {
+      "cases_increased": 696,
+      "cases_decreased": 1012
+    },
+    "gradient_mae": {
+      "cases_increased": 233,
+      "cases_decreased": 1475
+    }
+  },
+  "color_cases": 588,
+  "color_statistics": {
+    "V114": {
+      "mean_per_case_maximum_absolute_channel_mean_bias_DN16": 7.080626634137155,
+      "maximum_absolute_channel_mean_bias_DN16": 51.73073087279918,
+      "mean_spatially_centered_camera_RGB_RMS_DN16": 2.82263735203639
+    },
+    "V114-sites": {
+      "mean_per_case_maximum_absolute_channel_mean_bias_DN16": 5.017569512495685,
+      "maximum_absolute_channel_mean_bias_DN16": 37.81554044925724,
+      "mean_spatially_centered_camera_RGB_RMS_DN16": 3.3690840904597574
+    }
+  },
+  "texture_observations": 224,
+  "texture_statistics": [
+    {
+      "kind_level_contrast_period": [
+        "carrier",
+        0.01,
+        0.02,
+        4
+      ],
+      "observations": 16,
+      "means": {
+        "V114": {
+          "in_phase_gain": 0.8784447045386632,
+          "gain_channel_std": 0.17355833219108902,
+          "quadrature_gain": 0.03584641726627997,
+          "amplitude_ratio": 0.8794664779693497,
+          "dc_bias_abs": 5.997716061673127e-06,
+          "noncarrier_rms": 4.62833812874461e-06,
+          "linear_srgb_rmse": 3.151620862805457e-05
+        },
+        "V114-sites": {
+          "in_phase_gain": 0.891571713224122,
+          "gain_channel_std": 0.13172839676883494,
+          "quadrature_gain": 0.024621604136752455,
+          "amplitude_ratio": 0.8920890301920812,
+          "dc_bias_abs": 5.0144772217030715e-06,
+          "noncarrier_rms": 1.0104050325317827e-05,
+          "linear_srgb_rmse": 2.783289797463674e-05
+        }
+      }
+    },
+    {
+      "kind_level_contrast_period": [
+        "carrier",
+        0.01,
+        0.02,
+        8
+      ],
+      "observations": 16,
+      "means": {
+        "V114": {
+          "in_phase_gain": 0.9661325739342607,
+          "gain_channel_std": 0.08720841392573314,
+          "quadrature_gain": -0.01148902642608283,
+          "amplitude_ratio": 0.9662638544661931,
+          "dc_bias_abs": 3.85120548980084e-06,
+          "noncarrier_rms": 4.760145097689373e-06,
+          "linear_srgb_rmse": 1.5874143068437818e-05
+        },
+        "V114-sites": {
+          "in_phase_gain": 0.9701859669525745,
+          "gain_channel_std": 0.0679566605055949,
+          "quadrature_gain": -0.008722509546369574,
+          "amplitude_ratio": 0.9702740773505598,
+          "dc_bias_abs": 4.126510837860857e-06,
+          "noncarrier_rms": 6.563070894316559e-06,
+          "linear_srgb_rmse": 1.4318337107173028e-05
+        }
+      }
+    },
+    {
+      "kind_level_contrast_period": [
+        "carrier",
+        0.01,
+        0.02,
+        16
+      ],
+      "observations": 16,
+      "means": {
+        "V114": {
+          "in_phase_gain": 0.9872850256814487,
+          "gain_channel_std": 0.014106693711996398,
+          "quadrature_gain": -0.006123420908926022,
+          "amplitude_ratio": 0.9873154419935143,
+          "dc_bias_abs": 4.151907157430174e-06,
+          "noncarrier_rms": 4.583802083262357e-06,
+          "linear_srgb_rmse": 7.397314683589522e-06
+        },
+        "V114-sites": {
+          "in_phase_gain": 0.9897780205838791,
+          "gain_channel_std": 0.015281266637912577,
+          "quadrature_gain": -0.003971991146649442,
+          "amplitude_ratio": 0.9897938182739754,
+          "dc_bias_abs": 3.3770989174240302e-06,
+          "noncarrier_rms": 5.575009292638866e-06,
+          "linear_srgb_rmse": 7.5817049775670804e-06
+        }
+      }
+    },
+    {
+      "kind_level_contrast_period": [
+        "carrier",
+        0.01,
+        0.1,
+        4
+      ],
+      "observations": 16,
+      "means": {
+        "V114": {
+          "in_phase_gain": 0.9845280082497321,
+          "gain_channel_std": 0.08153996294863215,
+          "quadrature_gain": 0.006725689022088074,
+          "amplitude_ratio": 0.9846540813089011,
+          "dc_bias_abs": 7.647978062621293e-06,
+          "noncarrier_rms": 1.5246433760858106e-05,
+          "linear_srgb_rmse": 6.272980910792244e-05
+        },
+        "V114-sites": {
+          "in_phase_gain": 0.9746814126636867,
+          "gain_channel_std": 0.07105709635893762,
+          "quadrature_gain": 0.004492547004944458,
+          "amplitude_ratio": 0.9747521711464341,
+          "dc_bias_abs": 6.161181276438492e-06,
+          "noncarrier_rms": 1.830739605356282e-05,
+          "linear_srgb_rmse": 5.810659887230714e-05
+        }
+      }
+    },
+    {
+      "kind_level_contrast_period": [
+        "carrier",
+        0.01,
+        0.1,
+        8
+      ],
+      "observations": 16,
+      "means": {
+        "V114": {
+          "in_phase_gain": 0.9998227198805654,
+          "gain_channel_std": 0.015203558406348754,
+          "quadrature_gain": 0.00032954283121720455,
+          "amplitude_ratio": 0.9998325319801533,
+          "dc_bias_abs": 8.429522641438132e-06,
+          "noncarrier_rms": 9.092726094427512e-06,
+          "linear_srgb_rmse": 1.8258476215813735e-05
+        },
+        "V114-sites": {
+          "in_phase_gain": 0.9990124105449838,
+          "gain_channel_std": 0.009368417160661661,
+          "quadrature_gain": 0.000176409352674242,
+          "amplitude_ratio": 0.999017443300185,
+          "dc_bias_abs": 7.050927280792136e-06,
+          "noncarrier_rms": 1.0324822212706785e-05,
+          "linear_srgb_rmse": 1.6164295121578254e-05
+        }
+      }
+    },
+    {
+      "kind_level_contrast_period": [
+        "carrier",
+        0.01,
+        0.1,
+        16
+      ],
+      "observations": 16,
+      "means": {
+        "V114": {
+          "in_phase_gain": 0.9944515059588152,
+          "gain_channel_std": 0.008979762130113679,
+          "quadrature_gain": -0.00020582228985818014,
+          "amplitude_ratio": 0.9944519494784158,
+          "dc_bias_abs": 5.78394116134831e-06,
+          "noncarrier_rms": 8.283211725464016e-06,
+          "linear_srgb_rmse": 1.3490308399459224e-05
+        },
+        "V114-sites": {
+          "in_phase_gain": 0.9949570770123409,
+          "gain_channel_std": 0.007526261241888118,
+          "quadrature_gain": -0.0002339279038225578,
+          "amplitude_ratio": 0.9949574243948884,
+          "dc_bias_abs": 4.487629992129133e-06,
+          "noncarrier_rms": 8.298747995252543e-06,
+          "linear_srgb_rmse": 1.2244028732057998e-05
+        }
+      }
+    },
+    {
+      "kind_level_contrast_period": [
+        "carrier",
+        0.18,
+        0.02,
+        4
+      ],
+      "observations": 16,
+      "means": {
+        "V114": {
+          "in_phase_gain": 0.8662928085303336,
+          "gain_channel_std": 0.25321697409272387,
+          "quadrature_gain": 0.025599333120762256,
+          "amplitude_ratio": 0.8669364946094,
+          "dc_bias_abs": 6.472312809418604e-05,
+          "noncarrier_rms": 7.31116247217996e-05,
+          "linear_srgb_rmse": 0.0007416777232916352
+        },
+        "V114-sites": {
+          "in_phase_gain": 0.8768814996362655,
+          "gain_channel_std": 0.2014189947088559,
+          "quadrature_gain": 0.018535016103374952,
+          "amplitude_ratio": 0.8772574993324816,
+          "dc_bias_abs": 4.592055569632714e-05,
+          "noncarrier_rms": 0.0002045474038811253,
+          "linear_srgb_rmse": 0.0006557177015525325
+        }
+      }
+    },
+    {
+      "kind_level_contrast_period": [
+        "carrier",
+        0.18,
+        0.02,
+        8
+      ],
+      "observations": 16,
+      "means": {
+        "V114": {
+          "in_phase_gain": 0.9925389971494336,
+          "gain_channel_std": 0.014121579101394603,
+          "quadrature_gain": 0.0024078333491815277,
+          "amplitude_ratio": 0.9925729241831777,
+          "dc_bias_abs": 5.0829162747643986e-05,
+          "noncarrier_rms": 7.309022115376169e-05,
+          "linear_srgb_rmse": 0.00010601942660127286
+        },
+        "V114-sites": {
+          "in_phase_gain": 0.9938413933428378,
+          "gain_channel_std": 0.010126436375281964,
+          "quadrature_gain": 0.001159236799950534,
+          "amplitude_ratio": 0.9938697645377085,
+          "dc_bias_abs": 3.8481507794003535e-05,
+          "noncarrier_rms": 7.1983756801384e-05,
+          "linear_srgb_rmse": 9.346231162970573e-05
+        }
+      }
+    },
+    {
+      "kind_level_contrast_period": [
+        "carrier",
+        0.18,
+        0.02,
+        16
+      ],
+      "observations": 16,
+      "means": {
+        "V114": {
+          "in_phase_gain": 0.9981450646214645,
+          "gain_channel_std": 0.005941814239930451,
+          "quadrature_gain": -0.0033327719708267645,
+          "amplitude_ratio": 0.9981725128229977,
+          "dc_bias_abs": 1.4322047415459931e-05,
+          "noncarrier_rms": 4.2880805263796964e-05,
+          "linear_srgb_rmse": 5.516593976260243e-05
+        },
+        "V114-sites": {
+          "in_phase_gain": 0.9981944958154092,
+          "gain_channel_std": 0.0036851992575181814,
+          "quadrature_gain": -0.0024340499090285514,
+          "amplitude_ratio": 0.9982095576587885,
+          "dc_bias_abs": 1.1703182371120002e-05,
+          "noncarrier_rms": 3.974293965959787e-05,
+          "linear_srgb_rmse": 4.6998209862859525e-05
+        }
+      }
+    },
+    {
+      "kind_level_contrast_period": [
+        "carrier",
+        0.18,
+        0.1,
+        4
+      ],
+      "observations": 16,
+      "means": {
+        "V114": {
+          "in_phase_gain": 0.9756738128654444,
+          "gain_channel_std": 0.09405658749644133,
+          "quadrature_gain": 0.003262874038020021,
+          "amplitude_ratio": 0.9757262681909358,
+          "dc_bias_abs": 9.319948576214562e-05,
+          "noncarrier_rms": 0.0002105018400121134,
+          "linear_srgb_rmse": 0.0012869440891803714
+        },
+        "V114-sites": {
+          "in_phase_gain": 0.9658671183146453,
+          "gain_channel_std": 0.0833450509391637,
+          "quadrature_gain": 0.002475147863074829,
+          "amplitude_ratio": 0.9659114833326874,
+          "dc_bias_abs": 7.44913233229269e-05,
+          "noncarrier_rms": 0.0002973809527827977,
+          "linear_srgb_rmse": 0.001212504410815044
+        }
+      }
+    },
+    {
+      "kind_level_contrast_period": [
+        "carrier",
+        0.18,
+        0.1,
+        8
+      ],
+      "observations": 16,
+      "means": {
+        "V114": {
+          "in_phase_gain": 0.9913346514826472,
+          "gain_channel_std": 0.01827925825782194,
+          "quadrature_gain": -0.0006356315967734952,
+          "amplitude_ratio": 0.9913444542433867,
+          "dc_bias_abs": 6.836433349232997e-05,
+          "noncarrier_rms": 0.00015045023664977296,
+          "linear_srgb_rmse": 0.0003169098054085273
+        },
+        "V114-sites": {
+          "in_phase_gain": 0.9924339668887245,
+          "gain_channel_std": 0.012267819248111102,
+          "quadrature_gain": -0.00015685185630996454,
+          "amplitude_ratio": 0.9924399134328328,
+          "dc_bias_abs": 4.748892737338704e-05,
+          "noncarrier_rms": 0.00017708165398674832,
+          "linear_srgb_rmse": 0.00026696356391154035
+        }
+      }
+    },
+    {
+      "kind_level_contrast_period": [
+        "carrier",
+        0.18,
+        0.1,
+        16
+      ],
+      "observations": 16,
+      "means": {
+        "V114": {
+          "in_phase_gain": 0.9966247236725118,
+          "gain_channel_std": 0.006450797642785268,
+          "quadrature_gain": 0.0004562787276060067,
+          "amplitude_ratio": 0.9966275464875283,
+          "dc_bias_abs": 2.0423143317523096e-05,
+          "noncarrier_rms": 0.00010852492873973901,
+          "linear_srgb_rmse": 0.00014902187576606464
+        },
+        "V114-sites": {
+          "in_phase_gain": 0.997180370163576,
+          "gain_channel_std": 0.004740463520418662,
+          "quadrature_gain": 0.00044811285193194076,
+          "amplitude_ratio": 0.9971817900290003,
+          "dc_bias_abs": 1.3341238539507638e-05,
+          "noncarrier_rms": 0.00010452211287885246,
+          "linear_srgb_rmse": 0.00012929158127427103
+        }
+      }
+    },
+    {
+      "kind_level_contrast_period": [
+        "flat",
+        0.01,
+        0,
+        null
+      ],
+      "observations": 16,
+      "means": {
+        "V114": {
+          "dc_bias_abs_rgb": 2.9782973956260445e-06,
+          "linear_srgb_rmse": 3.706447156770783e-06,
+          "spatial_luma_rms": 1.3012885862287282e-06,
+          "relative_band_rms": 4.761519610147188e-05,
+          "relative_peak_band_contrast": 4.33408174419823e-05
+        },
+        "V114-sites": {
+          "dc_bias_abs_rgb": 3.3204853967925816e-06,
+          "linear_srgb_rmse": 3.829088806073462e-06,
+          "spatial_luma_rms": 1.5618552147394625e-06,
+          "relative_band_rms": 2.6886840320376627e-05,
+          "relative_peak_band_contrast": 2.456840181752805e-05
+        }
+      }
+    },
+    {
+      "kind_level_contrast_period": [
+        "flat",
+        0.18,
+        0,
+        null
+      ],
+      "observations": 16,
+      "means": {
+        "V114": {
+          "dc_bias_abs_rgb": 1.4595487927452262e-05,
+          "linear_srgb_rmse": 2.9137365825728375e-05,
+          "spatial_luma_rms": 1.6402501233360054e-05,
+          "relative_band_rms": 4.3204588598536855e-05,
+          "relative_peak_band_contrast": 4.593382055934433e-05
+        },
+        "V114-sites": {
+          "dc_bias_abs_rgb": 1.148595227106845e-05,
+          "linear_srgb_rmse": 2.510291133095209e-05,
+          "spatial_luma_rms": 1.3337952401747942e-05,
+          "relative_band_rms": 2.4313200166035716e-05,
+          "relative_peak_band_contrast": 2.595182675131994e-05
+        }
+      }
+    }
+  ],
+  "original_input_batches_all5_fingerprints_exact": 1072,
+  "valid_observed_samples_exactly_replaced": 163553472,
+  "all1708_control_metric_dicts_exact_vs_original_F64": true,
+  "new_neural_forwards": 12,
+  "new_encoder_forwards": 12,
+  "actual_ADC_export_cases_exact": 4,
+  "actual_positive_noise_export_cases_exact": 8,
+  "CPU_deployment_FP32_values_exact": 2359296,
+  "operator_checked_CFA_patterns": [
+    "RGGB",
+    "BGGR",
+    "GRBG",
+    "GBRG"
+  ],
+  "operator_FP32_values_exact": 3145728,
+  "optimizer_updates": 0,
+  "new_noise_observations": 0,
+  "RAW_decodes": 0,
+  "native160_distinct_cells_actually_viewed": 24,
+  "public_native_images": [
+    {
+      "name": "actual-export-bark",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v114-adc-sites-v1/actual-export-bark.png",
+        "sha256": "fb024d26dcf5b50903e0cbaddf629a486d6724360795ee296659046ae177bcb4"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v114-adc-sites-v1/actual-export-bark.json",
+        "sha256": "844ecbc7760867792e6fe1bab4d43d5f8d93625308023326a439264484288816"
+      }
+    },
+    {
+      "name": "actual-export-feather",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v114-adc-sites-v1/actual-export-feather.png",
+        "sha256": "5c9ed494dc472422f73f85eb9cb7a36c20ac572d862a975bfe97bbb61f79e600"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v114-adc-sites-v1/actual-export-feather.json",
+        "sha256": "0bc190fed3a5862176c3776d3d3092a3951ce0c32b505579e75b965fd5bf237e"
+      }
+    },
+    {
+      "name": "actual-export-comparison",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v114-adc-sites-v1/actual-export-comparison.png",
+        "sha256": "637190be96eb22607c2697c17b4ab1fa4b3c28b007c63a738f5c16669b13cfec"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v114-adc-sites-v1/actual-export-comparison.json",
+        "sha256": "2d5997af6edf9bb7fff46521dbc3ee28936ec0adfc1908c47d131659fdcd1ef1"
+      }
+    },
+    {
+      "name": "first-photo-comparison",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v114-adc-sites-v1/first-photo-comparison.png",
+        "sha256": "fdc9b2b81721e12c792d46a79ae576e8e53b58844d509bdc7db94ee8121ffae2"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v114-adc-sites-v1/first-photo-comparison.json",
+        "sha256": "b7dae6dd3780df05d7072c957a5c38257747d5593aa2e4a1d8ddb66575097985"
+      }
+    },
+    {
+      "name": "adverse-photo-comparison",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v114-adc-sites-v1/adverse-photo-comparison.png",
+        "sha256": "e23cbdb622c0653121b254d9c24da85cc0cf2d0f617e1435159c999598a65b57"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v114-adc-sites-v1/adverse-photo-comparison.json",
+        "sha256": "3f60325cde9de7d8d7d8ef6a583fd769a7a8bd050779a983c5f3e25fa9fe11b9"
+      }
+    }
+  ]
+}

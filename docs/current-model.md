@@ -13,7 +13,7 @@ metrics, native review and102MP RGB16 exports are verified.
 | Optional eight-view V114 inference | [Fixed24 pilot](v114-eight-view.md): all12 material cases and both selected adverse camera crops improve; selected color bias rises slightly while spatial variation falls. Real fine detail remains soft; full panels/frame unmeasured; eight evaluations per tile |
 | Exact parent and previously measured optional modes | [V112](v112-quality.md): photo36.90238dB, ADC maximum50.89DN16; [eight-view fixed24 pilot](v112-eight-view.md) improves all12 material cases, but full panels/frame remain unmeasured |
 | Earlier full-panel eight-view option | [V104 dihedral8](dihedral-quality.md): photo37.04376dB, camera54.33283/53.99412dB; worse ADC maximum420.90DN16 and unresolved fine detail; eight evaluations per tile |
-| Explicit ADC observed-sample fidelity | [V104 sites export](adc-consistency.md): +.28850dB on full ADC photo panel over original V104; color/detail tradeoffs remain |
+| Explicit ADC observed-sample fidelity | [V114 sites export](adc-consistency.md): ADC photo 37.78013→38.01575dB across 427 sources; worst color bias 51.73→37.82 DN16, with higher flat-field spatial RMS; positive-noise profiles bypass it |
 
 Small has4/4 known-camera scene means above Tiny and a slightly higher unseen
 mean, with3/5 scenes rising. Tiny has slightly higher photo PSNR and lower color

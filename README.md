@@ -30,8 +30,10 @@ twelve fixed material cases and both selected adverse camera crops. Mean gains
 are+.558/.264/.079dB at ADC/ISO100/ISO12800, with slightly higher selected color
 bias and lower spatial variation. Full V114 eight-view panels/frame remain
 unmeasured. Earlier [V104 eight-view full panels](docs/dihedral-quality.md) reach
-37.044dB with a worse ADC color tail. The [V104 ADC sites option](docs/adc-consistency.md)
-and [camera-outlier study](docs/camera-outliers.md) retain their measured scope.
+37.044dB with a worse ADC color tail. The current [V114 ADC sites option](docs/adc-consistency.md)
+improves its full ADC photo panel by +.236 dB, with lower color bias and higher
+flat-field spatial variation. It activates only at explicit zero shot/read.
+[Camera-outlier diagnostics](docs/camera-outliers.md).
 
 ![PSNR versus model version](docs/images/version-PSNR-history.png)
 
@@ -39,15 +41,21 @@ and [camera-outlier study](docs/camera-outliers.md) retain their measured scope.
 training budgets and data; this describes available models rather than an
 isolated architecture ablation.
 
-## Current100% crops
+## Current 100% crops
 
-Noisy observation → **V114 Tiny, optional eight views** → exact synthetic GT,
-ISO100 prior. Each cell is an unchanged160×160 crop at the8×-binned evaluation
-resolution, with shared coordinates/transforms. Fine texture remains softer than
-GT. The full427 scores above use single view. [Measured option and limitations](docs/v114-eight-view.md) ·
-[Source/ROI/checkpoint/noise/display receipts](docs/images/v114-dihedral8-pilot/manifest.json).
+Each cell is an unchanged160×160 crop at the8×-binned evaluation resolution,
+with shared coordinates/transforms. Fine texture remains softer than GT.
+The full427 scores above use ordinary single-view V114.
 
-![Eight-view V114 bark: noisy, restored and exact GT](docs/images/v114-dihedral8-pilot/crop-9670fee970171aad.png)
+ADC noisy observation → **actual V114 sites export** → exact synthetic GT.
+[Measured ADC scope and tradeoffs](docs/adc-consistency.md) ·
+[Source/ROI/checkpoint/noise/display receipt](docs/images/v114-adc-sites-v1/actual-export-bark.json).
+
+![Current V114 sites bark: ADC noisy, actual export and exact GT](docs/images/v114-adc-sites-v1/actual-export-bark.png)
+
+ISO100-prior noisy observation → **V114 Tiny, optional eight views** → exact GT.
+[Measured eight-view scope](docs/v114-eight-view.md) ·
+[Metadata](docs/images/v114-dihedral8-pilot/manifest.json).
 
 ![Eight-view V114 canopy: noisy, restored and exact GT](docs/images/v114-dihedral8-pilot/crop-b38f8be4dde85710.png)
 

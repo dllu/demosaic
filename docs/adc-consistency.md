@@ -1,18 +1,143 @@
 # ADC-only sample consistency
 
-**The optional V104 observed-site export improves ADC-only photographic
+**The current V114 sites export improves the complete ADC-only photo panel by
+.23563 dB, from 37.78013 to 38.01575 dB.** All 427 source means and all 1,708
+source/CFA cases improve. It keeps V114's learned weights and activates for
+explicit shot=read=0 profiles. V114 remains the general noisy-RAW model.
+[Complete current evidence, export and native review](results/v114-adc-sites-current-v1.json).
+
+## Current V114 results
+
+| ADC-only measure | V114 | V114 + observed sites |
+| --- | ---: | ---: |
+| Source-balanced sRGB PSNR, all 427 photos | 37.78013 dB | **38.01575 dB** |
+| Camera-linear PSNR | 43.76694 dB | **43.91567 dB** |
+| Mean rendered chroma MAE ↓ | .00623654 | **.00621273** |
+| Mean rendered gradient MAE ↓ | .00924712 | **.00915073** |
+| Color-grid mean per-case maximum channel-mean bias ↓ | 7.08063 DN16 | **5.01757 DN16** |
+| Color-grid worst channel-mean bias ↓ | 51.73073 DN16 | **37.81554 DN16** |
+| Color-grid mean centered spatial RMS ↓ | **2.82264 DN16** | 3.36908 DN16 |
+
+The photo-gain source-bootstrap 95% interval is [+.22434,+.24729] dB, using 1,000
+resamples / seed 42. It describes these sources, not training-seed uncertainty.
+Chroma improves in 250 sources and worsens in 177; gradient error improves in 373
+and worsens in 54. The 588-case color panel shows lower bias but more spatial
+variation. The 224 ADC texture observations also retain tradeoffs: the faint
+eight-pixel carrier at level .01 improves gain .96613→.97019 and lowers RMSE,
+while the corresponding sixteen-pixel RMSE rises 7.397e−6→7.582e−6. Projection
+can reintroduce quantization structure even with zero photon/read noise.
+
+These are complete **ADC-only** panels. The six positive-noise priors in the
+primary photo suite, real-camera quality and full-frame timing are not newly
+measured by this study. The existing positive-noise V114/GFX comparisons remain
+the appropriate references for noisy captures.
+
+### Two native current-export triplets
+
+ADC noisy Malvar → **actual serialized V114 sites output** → exact synthetic GT.
+The first two ADC material cases were fixed before export validation. Every
+cell is an unchanged 160×160 crop at [48,48,160,160] in its retained 256px context,
+sharing WB/matrix and display×1. Metadata records the exact input, checkpoint,
+16-bit ADC/black-level .03, zero shot/read and display transform.
+
+![Current V114 sites bark: noisy, actual export and exact GT](images/v114-adc-sites-v1/actual-export-bark.png)
+
+![Current V114 sites feathers: noisy, actual export and exact GT](images/v114-adc-sites-v1/actual-export-feather.png)
+
+[Bark source/ROI/checkpoint metadata](images/v114-adc-sites-v1/actual-export-bark.json) ·
+[Feather metadata](images/v114-adc-sites-v1/actual-export-feather.json).
+
+![Actual current export compared with retained CPU V114 controls](images/v114-adc-sites-v1/actual-export-comparison.png)
+
+The measured gain has small native visual changes. Bark's fine colored texture
+and feather structure remain soft. The independently selected first two full
+photo-panel sources retain faint-cord attenuation and coherent building edges:
+
+![First two ADC validation sources: noisy, V114, sites and exact GT](images/v114-adc-sites-v1/first-photo-comparison.png)
+
+The post-hoc examples below select the largest source-mean chroma and gradient
+increases, then each source's worst CFA. They use fixed central crops without
+optimizing crop coordinates. Dense ornament and trophy lettering retain local
+color/edge errors even though both sources improve in overall PSNR.
+
+![Current sites adverse color and gradient examples](images/v114-adc-sites-v1/adverse-photo-comparison.png)
+
+[Actual export comparison metadata](images/v114-adc-sites-v1/actual-export-comparison.json) ·
+[First-source metadata](images/v114-adc-sites-v1/first-photo-comparison.json) ·
+[Adverse selection and metadata](images/v114-adc-sites-v1/adverse-photo-comparison.json).
+All 24 distinct native cells on these three boards were actually inspected;
+the two triplets share exactly the corresponding viewed board pixels.
+
+### Current export and verification
+
+Checkpoint: `/mnt/external/demosaic/models/v114-final20000-adc-sites.pt`.
+SHA256: `2a2f6d1f1b6d4a7090074ba9bd75922418d6940f7706b8dab2d9256b9f84de60`.
+Its 91 learned restoration tensors equal V114's EMA; the official frozen Tiny
+encoder is unchanged. There are zero new training updates.
+
+```bash
+source scripts/env.sh
+uv run demosaic infer \
+  /mnt/external/demosaic/models/v114-final20000-adc-sites.pt input.raf \
+  /mnt/external/demosaic/output/adc-linear.tiff \
+  --shot 0 --read 0 --precision float32
+```
+
+The numerical comparison reuses retained matched FP32 GPU predictions. All
+1,072 batches match their complete original packed/variance/CFA/WB/matrix
+fingerprints; all 1,708 control metric dictionaries match the prior independent
+NumPy64 audit exactly. Missing ADC measurements are reconstructed with the
+original black-level/quantization arithmetic and accepted only after those
+hashes match. No new model or noise calls are used for these complete panels.
+
+Deployment is checked separately with **12 new CPU model/encoder calls** on
+cached observations and retained CPU identity controls. All four ADC results
+equal projection of their saved controls, and all eight positive-noise results
+equal the saved controls without projection: 2,359,296 FP32 values match exactly.
+The deployed operator also matches the NumPy study at all four CFAs over
+3,145,728 FP32 values. Weights and Torch inference RNG remain unchanged.
+
+Projection replaces valid observed channels and retains every unobserved or
+censored channel exactly. It uses no target fitting or output clamp. Activation
+requires explicit zero shot/read priors; ordinary noisy captures need suitable
+physical profiles. This is a useful ADC option, with remaining fine-detail and
+flat-field tradeoffs. The general V114 selection and primary PSNR-history point
+remain unchanged.
+
+Current-image credits: bark by [Derek Ramsey](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
+[CC BY-SA2.5](https://creativecommons.org/licenses/by-sa/2.5/); egret by
+[Serebit](https://commons.wikimedia.org/wiki/File:Snowy_egret_in_profile.jpg),
+[CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+The first-photo board uses Roy Egloff's
+[Villeneuve photograph](https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg)
+and Dietmar Rabich's
+[Vancouver photograph](https://commons.wikimedia.org/wiki/File:Vancouver_%28BC%2C_Canada%29%2C_Coal_Harbour_Seaside_Park%2C_Blick_in_den_Himmel_--_2022_--_2158.jpg),
+both CC BY-SA4.0. Adverse examples: [Bgag](https://commons.wikimedia.org/wiki/File:Kalan_Minaret_04.jpg),
+[CC0](https://creativecommons.org/publicdomain/zero/1.0/), and
+[Steffen Prößdorf](https://commons.wikimedia.org/wiki/File:2022-03-13_Wintersport,_Skisprung-Weltcup_der_Frauen_in_Oberhof_1DX_7300_by_Stepro.jpg),
+CC BY-SA4.0. Derivatives retain their source licenses; modifications are
+binning, simulated ADC, restoration, cropping and layout.
+
+## Earlier V104 study
+
+The prior study retains its original checkpoints, metrics, crops and receipts.
+
+<details>
+<summary>Earlier V104 measurements and deployment evidence</summary>
+
+**The earlier optional V104 observed-site export improves ADC-only photographic
 restoration with unchanged learned weights.** On all 427 validation photos and
 four CFAs, sRGB PSNR rises **37.39257→37.68106dB**, a **+.28850dB** gain.
 All 427 source means and all 1,708 source/CFA cases improve. The source-bootstrap
-95% interval is [+.27658,+.30072]dB. The ordinary V104 checkpoint remains the
-positive-noise/training baseline; this is an inference-only output policy.
+95% interval is [+.27658,+.30072]dB. V104 was that study's positive-noise/training
+control; its original evidence remains preserved.
 
 [Complete scores, actual native review and serialized-export evidence](results/v104-adc-sites-full427-v1.json).
 The [color/texture diagnostics](v104-adc-color-projection.md) retain meaningful
 tradeoffs: sites leaves a larger flat-color tail than Malvar or unprojected
 V102, and local photographic chroma/SSIM changes remain mixed.
 
-## Complete photographic comparison
+### Complete photographic comparison
 
 | Same V104 final20k weights | sRGB PSNR | Camera-linear PSNR | sRGB SSIM | Chroma MAE ↓ | Gradient MAE ↓ |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -45,7 +170,7 @@ Maximum rendered-PSNR difference is .0001984dB, with mean −1.743e-6dB; each po
 contrast uses the new matched CPU output. Original full-panel scores remain
 unchanged.
 
-## Two native export triplets
+### Two native export triplets
 
 Noisy Malvar → **actual serialized V104 sites export** → exact synthetic GT.
 The first two validation sources were fixed before the complete comparison.
@@ -74,7 +199,7 @@ and Dietmar Rabich's
 both [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0).
 The displayed derivatives are binned, simulated, restored and cropped.
 
-## Adverse examples
+### Adverse examples
 
 The first two columns below are sites' smallest source-mean PSNR gain and a
 separate source with its largest chroma increase. The next two are Malvar's
@@ -94,7 +219,7 @@ color more strongly; the selected flower's score regresses. All 30 distinct
 benchmark cells were viewed natively. Exact original partner-batch reruns
 reproduce all selected case scores, including both operators on every case.
 
-## Use the optional export
+### Use the historical export
 
 Checkpoint: `/mnt/external/demosaic/models/v104-final20000-adc-sites.pt`.
 SHA256: `1d9c02be5876515811fb4067ba84fc666538dbe9024c85ff0cffc478310fc85a`.
@@ -130,7 +255,7 @@ The preflight helper now validates the selected mode rather than assuming
 Malvar, and labels CPU precision as the FP32 actually exercised. Both policy
 exports pass the integration/regression tests. [Preserved validation sources](results/v104-adc-validation-sources-v1.json).
 
-## Remaining tradeoffs
+### Remaining tradeoffs
 
 On the separate 588-case analytic ADC color grid, sites reduces V104's worst
 channel-mean bias 1,218.06→610.67 DN16. Malvar reaches 31.91 DN16; unprojected V102
@@ -139,7 +264,10 @@ fields. On 48 tested ADC carrier/CFA cases, sites improves RGB RMSE in all 48;
 Malvar improves 39 and regresses 9. These are complementary diagnostics rather
 than independent photographs. [Color/texture results and native counterexample](v104-adc-color-projection.md).
 
-Use [V114](v114-v115-quality.md) for current restoration/training, and
-consider V102 when lower unprojected flat-color bias or its higher unseen-camera
-mean matters. The current model selector does not switch checkpoints by noise.
+V102 supplied a lower-bias comparator in this historical V104 study.
+Use [V114](v114-v115-quality.md) for current general restoration/training, with
+the current ADC-only option above when that explicit profile is appropriate.
+The general model selector does not switch checkpoints by noise.
 [Current choices](current-model.md) · [Earlier completed V84 study](v84-adc-consistency-study.md).
+
+</details>
