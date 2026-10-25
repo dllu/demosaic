@@ -1,10 +1,11 @@
 # Training-source quality review
 
 Source quality decisions support the current [V84-based quality experiments](quality-first-training.md).
-A [new30-source tail review](next-source-tail-review.md) retains28 hard sources
-and withholds two specialized/document targets, preparing a separate90,862-source
-next cohort. The cumulative earlier-pool ledger now covers600 sources:567
-retained and33 outside training. The current V117/V118 pair keeps its frozen
+A [further 123-source review](next-source-tail-review.md) retains 108 hard sources
+and withholds 15 flat reproductions, preparing a separate 90,847-source
+next cohort. Every active source in each original global top256 loss list has
+now been inspected. The cumulative earlier-pool ledger covers 723 sources: 675
+retained and 48 outside training. The current V117/V118 pair keeps its frozen
 90,864-source cohort.
 
 **An earlier review covered 570 training sources: 539 retained and 31
@@ -20,7 +21,7 @@ neither changes completed V100/V101 inputs.
 | Completed V102/V103 | 88,477 | Same exact records/order | 31 |
 | Completed V104 20k | 90,872 | Same exact records/order | Prior31 plus four incoming quality withholds; duplicate/series/protected exclusions also apply |
 | Completed V111/V112/V114/V115/V116; active V117/V118 | 90,864 | Same exact records/order | Eight additional withholds relative to V104: three photo-quality cases and five atlas reproductions |
-| Prepared next cohort | 90,862 | Same exact records/order | Two further document/visualization withholds;28 newly inspected hard sources retained |
+| Prepared next cohort | 90,847 | Same exact records/order | Prior 30-source pass withheld two and retained 28; latest 123-source pass withholds 15 reproductions and retains 108 hard photos |
 
 [Current decisions, native examples, catalogue and reader checks](results/source-quality-detail-catalogue-v3.json).
 Originals, existing manifests and protected evaluation scenes remain read-only.
