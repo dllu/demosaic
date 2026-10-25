@@ -1,266 +1,176 @@
 # High-loss source review
 
-**The latest loss-ranked pass inspects 290 additional sources, retains 279 and
-withholds 11, preparing a future cohort of 90,791 training photos.** Every active
-source in both original global top512 difficulty lists now has a visual decision.
-The new withholds cover four unreliable clean-photo targets and seven
-reproduction/composite/visualization targets. Model quality on the prepared
-corpus remains unmeasured.
-Current V117/V118 retain their frozen 90,864 membership and matched recipes.
-[Current quality work](band-loss-training.md).
+**The latest pass visually reviews 336 additional sources: 332 retained and four
+withheld.** The prepared future cohort has **90,787 training sources**. Every
+still-active source through rank 768 in both original difficulty lists now has
+a visual decision. V119 continues its frozen **90,791-source** experiment from
+V115 Small; its endpoint quality review is pending. These four new withholds
+apply to future training, with no change to that running comparison.
 
-[Latest decisions, coverage and future manifests](results/source-tail-top512-review-v1.json) ·
-[Actual six-ROI reader checks](results/source-tail-top512-ROI-reader-v1.json) ·
-[Source schedule and native augmented-reader preflight](results/cleaned90791-source-reader-preflight-v1.json).
+[Decisions, coverage and coupled manifests](results/source-tail-top768-review-v1.json) ·
+[Six-ROI and source-reference constructors](results/source-tail-top768-readers-v1.json) ·
+[Actual augmented clean-reader check](results/source-tail-top768-augmented-reader-v1.json).
 
 ## Selection and actual viewing
 
-Current training logs contain batch-average losses and input hashes. They do
-not identify each photograph's loss. The completed historical V43 screen already
-has per-source scores for all 88,508 earlier eligible sources, so this review
-reuses those instead of assigning a current batch's loss to individual images.
-The latest pass selects every remaining unreviewed active source through global
-rank 512: 166 ADC and 189 ISO12800-prior candidates, each at ranks 258–512. Their
-overlap yields 290 distinct sources, skipping the earlier 768 decisions.
-All 467 ADC and 473 high-noise top512 entries still active in the parent cohort
-are now covered. These original reference-white scores are review cues, not current
-sensor-valid training losses or automatic quality labels.
+Current training logs contain batch-average losses, without individual-photo
+losses. The completed historical V43 screen provides per-source reference-white
+scores for 88,508 earlier sources. These nominate inspection candidates; they
+are not current V119 training losses or automatic quality labels.
 
-All 49 sheets and 290 source contexts were actually viewed, including 580 native
-256px source/8×-binned target cells. Five ambiguous cases also had unchanged
-native1024 crops inspected. Primary Commons revisions resolve two source-domain
-questions; both currently uploaded image hashes match the reviewed cached files.
-Only whole-source context thumbnails are resized. JPEG originals and complete 4×
-caches pass their recorded hashes; source files and cache pixels are preserved.
-There is no new neural inference, RAW decode, noise generation or optimizer update.
+After the preceding 1,058 decisions, the remaining active candidates through
+global rank 768 yield 336 distinct sources. All 714 ADC-only and 715 high-noise
+entries still active in the parent 90,791-source cohort are covered. The two
+lists overlap; their counts are not independent photographs.
 
-Each inspection strip shows a resized whole-source context, an unchanged native
-256px source crop and an unchanged native256 area8 target, at display×1. These
-are source-quality views, without a noisy observation or restored model output.
+All **56 sheets, 336 source contexts and 672 native256 source/target cells** were
+actually viewed. Six ambiguous photographs also received native1024 inspection.
+Original JPEG SHA1, complete 4× cache SHA256 and scored crop bindings were
+verified. Originals and cache pixels remain unchanged.
 
-## Current decisions and native examples
+Each inspection strip contains a resized whole-source thumbnail, an unchanged
+native256 source crop and an unchanged native256 area8 target. Targets use
+linear area2 from the 4× cache, followed by sRGB display at exposure ×1; originals
+are ICC-managed to sRGB. Only context thumbnails are resized. Source and binned
+target crops cover different fields of view. These are source-quality views,
+without noisy observations or restored model outputs.
 
-The four clean-photo withholds have pervasive outlined/flattened woodland
-texture (two scenes), coarse granular/edge-emphasized texture across several
-materials (one scene), or patch-like autumn foliage with strongly traced
-boundaries (one scene). Larger native views and the actual binned targets support
-these conservative supervision decisions. No particular processing tool is inferred.
+## Withheld targets
 
-![Withheld flattened foliage: context, native source and native binned target](images/source-tail-top512-20261025-v1/flattened-foliage-withhold.png)
+Two photographs have pervasive faceted or flattened tonal patches and strongly
+traced boundaries across foliage, bark, petals or leaves. The larger native
+views support image-specific judgments that their fine texture is unreliable
+clean supervision. No particular processing algorithm is inferred, and the
+decisions do not exclude an author, camera or source family.
 
-The [unchanged native1024 source crop](images/source-tail-top512-20261025-v1/flattened-foliage-native1024.png)
-shows the broad patch-like texture and outlines across leaves and other surfaces.
-Source: [Diego Delso, Brown County observation tower view](https://commons.wikimedia.org/wiki/File:Vista_desde_la_torre_de_observaci%C3%B3n,_Parque_Estatal_Brown_County,_Indiana,_Estados_Unidos,_2012-10-14,_DD_06.jpg),
-[CC BY-SA3.0](https://creativecommons.org/licenses/by-sa/3.0/); modified by cropping,
-binning and display/layout conversion. [Metadata](images/source-tail-top512-20261025-v1/flattened-foliage-withhold.json).
+![Withheld foliage: context, native source and native binned target](images/source-tail-top768-20261025-v1/faceted-foliage-withhold.png)
 
-The seven domain withholds comprise one banknote layout, two map/information
-layouts, one pointillist painting reproduction, one photographic portrait collage,
-one tiled facade construction and one cellular 3D visualization. Flat target
-composition determines the document/reproduction decisions; capture method is
-not inferred. Physical signs, murals, mosaics and decorated objects with coherent
-material and scene context remain eligible.
+[Unchanged native1024 foliage view](images/source-tail-top768-20261025-v1/faceted-foliage-native1024.png) ·
+[Source, scored ROI and decision](images/source-tail-top768-20261025-v1/faceted-foliage-withhold.json).
+Source: [Екатерина Борисова, autumn oak in Irinovka](https://commons.wikimedia.org/wiki/File:%D0%98%D1%80%D0%B8%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0,_%D0%B4%D1%83%D0%B1_%D1%87%D0%B5%D1%80%D0%B5%D1%88%D1%87%D0%B0%D1%82%D1%8B%D0%B9_%D0%BE%D1%81%D0%B5%D0%BD%D1%8C%D1%8E_03.jpg),
+[CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/); modified by
+cropping, binning, context-thumbnail creation and display/layout conversion.
 
-![Withheld tiled facade construction: context, native source and native binned target](images/source-tail-top512-20261025-v1/tiled-facade-withhold.png)
+![Withheld tulips: context, native source and native binned target](images/source-tail-top768-20261025-v1/faceted-tulips-withhold.png)
 
-The retained [primary facade revision](https://commons.wikimedia.org/w/index.php?title=File%3ADigitally+altered+image+of+Torre+Lincoln.jpg&oldid=1281145699)
-describes constructing the facade by tiling window images. The
-[cell revision](https://commons.wikimedia.org/w/index.php?title=File%3AFibroblastid+%28BPAE%29.jpg&oldid=1252008600)
-describes a software-built 3D model of fluorescently stained cell organelles.
-These clarify the actual source domain rather than relying on a title alone.
-Facade source: Wilfredor, [CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/);
-modified by cropping, binning and inspection layout.
-[Source/provenance/decision metadata](images/source-tail-top512-20261025-v1/tiled-facade-withhold.json).
+[Unchanged native1024 tulip view](images/source-tail-top768-20261025-v1/faceted-tulips-native1024.png) ·
+[Source, scored ROI and decision](images/source-tail-top768-20261025-v1/faceted-tulips-withhold.json).
+Source: [Екатерина Борисова, Tulip festival 2021 on Yelagin Island 54](https://commons.wikimedia.org/wiki/File:Tulip_festival_2021_on_Yelagin_Island_54.jpg),
+[CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/); modified by
+cropping, binning, context-thumbnail creation and display/layout conversion.
 
-The 279 retained sources preserve difficult thin lines, textiles, bark, grain,
-feathers, foggy branches, grass, foliage, masonry, real glass and saturated lights.
-Native grain that largely disappears after binning and natural defocus or motion
-do not automatically disqualify a source. Optical specimen detail also remains
-eligible when the photographic material and target are coherent.
+The other two withholds are a full-frame schematic ridge/river map with a
+legend, and an information-document layout dominated by text, a map and inset
+reproductions. Their scored targets lack useful photographic material context.
+Capture method is not inferred. Physical signs, murals and decorated objects
+with coherent scene/material context remain eligible.
 
-![Retained fine denim: context, native source and native binned target](images/source-tail-top512-20261025-v1/retained-fine-denim.png)
+[Map inspection](images/source-tail-top768-20261025-v1/schematic-map-withhold.png) ·
+[Map metadata](images/source-tail-top768-20261025-v1/schematic-map-withhold.json).
+Source: [Tadeáš Gregor, Ridges of Tien Shan](https://commons.wikimedia.org/wiki/File:Ridges_of_Tien_Shan.jpg),
+[CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/); modified by
+cropping, binning, context-thumbnail creation and display/layout conversion.
+All four source IDs and reasons appear in the [decision receipt](results/source-tail-top768-review-v1.json).
 
-The weave and fine fibers are useful detail despite high source difficulty.
-Source: [Thegreenj, Jeansfabric](https://commons.wikimedia.org/wiki/File:Jeansfabric.jpg),
-[CC BY-SA3.0](https://creativecommons.org/licenses/by-sa/3.0/); modified by cropping,
-binning and inspection layout. [Metadata](images/source-tail-top512-20261025-v1/retained-fine-denim.json).
+## Retained difficult and low-contrast detail
 
-![Retained weak brick detail: context, native source and native binned target](images/source-tail-top512-20261025-v1/retained-weak-brick.png)
+The 332 retained sources include thin reeds, twigs, wires, fences, textiles,
+fur, pale feathers, stone, lichen, saturated lights and photographed stained
+glass. Real optical specimen detail and physical artwork remain eligible when
+the source and binned target are coherent. High loss, native grain, saturated
+color and natural focus variation alone do not identify a bad photograph.
 
-Faint painted brick joints and surface irregularities remain clean useful texture.
-Source: [Юрий Д.К., Efremov apartments](https://commons.wikimedia.org/wiki/File:Efremov_-_2026_-_Khrushchev-era_apartments_on_Sverdlov_Street.jpg),
-[CC BY4.0](https://creativecommons.org/licenses/by/4.0/); modified by cropping,
-binning and inspection layout. [Metadata](images/source-tail-top512-20261025-v1/retained-weak-brick.json).
+Four of the six ambiguous photographs were retained after larger inspection:
+spring trees, a flowered building, backlit flowers and gray nyala fur. Fine
+blossoms, filaments, stems, masonry and directional hair become clearer at the
+larger scale. The initial small views would have supported overly broad removal.
 
-<details>
-<summary>Preceding source-family and top256 reviews</summary>
+![Retained weak gray fur: context, native source and native binned target](images/source-tail-top768-20261025-v1/retained-weak-gray-fur.png)
 
-## Follow-up of recurring source families
+The [unchanged native1024 fur view](images/source-tail-top768-20261025-v1/retained-gray-fur-native1024.png)
+shows coherent short hair, longer mane hairs and gradual shading.
+Source: [Bernard Gagnon, Nyala in Hluhluwe–Imfolozi Park 02](https://commons.wikimedia.org/wiki/File:Nyala_in_Hluhluwe%E2%80%93Imfolozi_Park_02.jpg),
+[CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/); modified by
+cropping, binning, context-thumbnail creation and display/layout conversion.
+[Source/ROI/decision metadata](images/source-tail-top768-20261025-v1/retained-weak-gray-fur.json).
 
-The preceding family pass searches titles, author, credit and attribution in the prepared
-90,847-source cohort. Its explicit case-insensitive cues cover banknote language
-(`banknote`, `Geldschein`, `Notgeld`, `Pfennig`/`Pfg`, `Papiergeld`, `Rentenmark`)
-and historical window-drawing credits (Camesina, relevant yearbook/atlas terms).
-After skipping the earlier 723 decisions, these rules nominate 45 sources:
-44 banknote entries and one window drawing. Four notes are found through author
-metadata rather than title words.
+![Retained weak wood detail: context, native source and native binned target](images/source-tail-top768-20261025-v1/retained-weak-wood.png)
 
-All eight sheets, 45 whole-source contexts and 90 native256 source/area8-target
-cells were actually inspected. Every candidate is a flat reproduction under the
-reviewed criteria. Metadata nominates sources; the actual visual decision
-determines membership. The future cohort has zero unreviewed active matches of
-these declared rules. Other aliases or missing metadata can escape them, so this
-does not establish exhaustive detection of every document in the corpus.
+The door retains faint grain, scratches, brickwork and fine railing structure.
+Source: [Friedrich Haag, Handorf Hauptstraße 32](https://commons.wikimedia.org/wiki/File:Handorf_Hauptstra%C3%9Fe_32_004_2021_06_21.jpg),
+[CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/); modified by
+cropping, binning, context-thumbnail creation and display/layout conversion.
+[Source/ROI/decision metadata](images/source-tail-top768-20261025-v1/retained-weak-wood.json).
 
-![Withheld flat banknote layout: context, native source and native binned target](images/source-family-20261025-v1/banknote-layout-withhold.png)
+These sources remain eligible under ordinary sampling. This review adds no new
+ROI quota and does not change V119's existing six examples.
 
-This Torgau example has two flat printed note faces as the entire composition.
-Source: [reproduced by Palauenc05](https://commons.wikimedia.org/wiki/File:Torgau_10_Pfennig_1921.jpg),
-public domain. [Metadata](images/source-family-20261025-v1/banknote-layout-withhold.json).
+## Future data and reader checks
 
-![Withheld historical drawing plate: context, native source and native binned target](images/source-family-20261025-v1/window-drawing-withhold.png)
+The cumulative earlier-pool ledger covers **1,394 sources: 1,286 retained,
+104 withheld and four original `exclude` labels**. The arrival review's
+153-source native-coverage count is a separate scope.
 
-The additional window plate has inked ornamental linework and paper-like texture;
-its retained source metadata names Albert Camesina and the historical yearbook.
-Source: [Albert Camesina](https://commons.wikimedia.org/wiki/File:MZK_Heiligenkreuz_Grisaille-Fenster_Albert_Camesina_1838_Print_1858_Jahresband_3-343.jpg),
-public domain. [Metadata](images/source-family-20261025-v1/window-drawing-withhold.json).
+The new coupled 4×/8× manifests remove exactly four training rows from 90,791.
+All other literal row bytes and order are preserved, including the **2,303
+validation and 2,255 test** records and all excluded/reserved rows. Active IDs
+and source/cache metadata agree across scales. No source or cache pixels are
+rewritten. The original six ROI objects and native targets are unchanged;
+only their catalogue's manifest binding changes.
 
-## Preceding loss-ranked decisions
+Prepared files live under
+`.cache/current-quality-20261023-v1/next-source-tail-top768-v1/future-cohort-v1/`:
 
-The preceding pass's 15 withholds comprise 13 flat banknote layouts, one
-full-frame painting reproduction and one historical window drawing. These are photographic-target
-membership decisions; no scanner, camera or assembly method is inferred.
+| File | SHA256 |
+| --- | --- |
+| `manifest4.jsonl` | `2868a417375c41f0e4429313ee31da2378a80d1055b71e34d527879d52157ca8` |
+| `manifest8.jsonl` | `9b282d3ac7ac19aab818e36bfe0b1d2344edccde93326783577267e083349a53` |
+| `six-ROI-catalogue-v1.json` | `68c6673172f80ffbc9c3412a5f7a947e537ecb02d542c9d5c1ffb7ed001863fb` |
 
-![Withheld historical window drawing: context, native source and native binned target](images/source-tail-top256-20261025-v1/drawing-reproduction-withhold.png)
-
-The sepia window is a drawing reproduction, distinct from the many retained
-photographs of actual stained glass. Its native1024 view shows inked linework
-and paper-like texture. The [primary Commons revision](https://commons.wikimedia.org/w/index.php?title=File%3AHeiligenkreuz_Kreuzgang_Glasfenster_Rund_V.jpg&oldid=761863964)
-identifies Albert Camesina's drawings from 1858/1859 and the 1859 yearbook.
-Public domain. [Source/ROI/decision metadata](images/source-tail-top256-20261025-v1/drawing-reproduction-withhold.json).
-
-![Withheld painting reproduction: context, native source and native binned target](images/source-tail-top256-20261025-v1/painting-reproduction-withhold.png)
-
-The flat Van Gogh reproduction presents painted brushstrokes as the entire
-target scene. Photographed murals, relief, mosaics and decorated objects with
-visible physical materials remain eligible.
-Source: [Vincent van Gogh, reproduction uploaded by GoldenArtists](https://commons.wikimedia.org/wiki/File:The_garden_at_the_asylum_at_Saint-R%C3%A9my_-_Vincent_Van_Gogh.jpg),
-public domain. [Metadata](images/source-tail-top256-20261025-v1/painting-reproduction-withhold.json).
-
-## Retained hard photographs
-
-![Retained feather detail: context, native source and native binned target](images/source-tail-top256-20261025-v1/retained-feather-detail.png)
-
-That pass's 108 retained photos include fine feathers and fur, dew-covered
-spiderwebs, grass, foliage, leaf litter, masonry, wood, optical mineral sections and real
-stained glass. These preserve difficult fine and low-contrast structures.
-Physical lettering, artwork, reflective gilt, white/black backgrounds and
-unusual mineral colors are judged in their photographic context. Native grain,
-halos or focus variation do not automatically invalidate a coherent binned
-target. This pass does not add a new blur-based exclusion rule or remove hard
-photos merely to lower training loss.
-Bird source: [King of Hearts](https://commons.wikimedia.org/wiki/File:Anatidae_hybrid_Newark_April_2011_001.jpg),
-[CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/); modified by cropping,
-binning and inspection layout. [Metadata](images/source-tail-top256-20261025-v1/retained-feather-detail.json).
-
-</details>
-
-## Prepared data and limits
-
-### Preserve draws for a matched curation comparison
-
-The latest 90,791-source cohort removes 73 rows from the current 90,864-source
-corpus, changing integer source indices. At seed64 over a prospective
-20,000-update schedule, ordinary
-sampling from the filtered manifest changes 98,605 of 112,330 photo source
-draws. This would change every Commons batch, far beyond the excluded photos.
-
-The optional `photo_sampling_reference_manifest` preserves the original ordered
-source list for sampling, then retries an excluded identity before any image is
-loaded. The active corpus must be an exact source/metadata/cache-path subset of
-that reference. Ordinary photographic sampling remains uniform over eligible
-sources. Reviewed ROI overrides occur before retries, preserving their geometry
-RNG even when the nominal source was excluded.
-
-| Sampling for the prepared 90,791-source cohort | Changed photo source draws | Affected Commons batches |
-| --- | ---: | ---: |
-| Filtered manifest indices | 98,605 | 10,032 |
-| Original reference with exclusion retries | 67 | 66 |
-
-These are prospective source choices at the original seed/quotas. The actual
-sampler's counts match all 112,330 scheduled photo draws, preserving source
-selection RNG for every unaffected draw. The real augmented reader checks
-107 native256 targets: all 67 excluded-photo draws are replaced, and 40 unchanged
-targets match the frozen control byte hashes. This covers the six ROIs and four
-nominal excluded sources overridden by an ROI. Every new target is finite and
-the future reader opens no excluded or held-out cache.
-
-All 55 reader source files remain byte-identical to the preceding checked
-implementation. Its 93 original target hashes are reused; only 14 newly affected
-indices need additional frozen-original clean reads. The new future reader
-generates 21,037,056 FP32 clean values, with matching original hashes for the
-7,864,320 values in unchanged targets. Global RNG states remain unchanged and
-CUDA stays uninitialized. There are no neural forwards, noise observations,
-optimizer updates or RAW decodes. Pixel equivalence outside the sampled indices
-is not independently enumerated.
-[Latest schedule and actual-reader evidence](results/cleaned90791-source-reader-preflight-v1.json).
-
-The preceding 90,802-source comparison retains its 53 changed draws/52 affected
-batches, 93 native reader checks and 45 passing implementation/regression tests.
-[Preserved earlier evidence](results/source-preserving-curation-v1.json).
-The [initial 90,791 source-reference constructor check](results/source-tail-top512-sampling-reference-v1.json)
-also retains its narrower all-73-excluded-identities membership scope.
-
-For a future matched recipe using the latest manifest and rebound six-ROI
-catalogue, the reference fields remain:
+The actual `ReviewedPhotoROIs` constructor verifies all six cache/crop/native
+FP32 target hashes, geometry and dtype. `PhotoSamplingReference` accepts the
+original immutable 90,864-source reference and routes all 77 excluded identities
+to eligible future sources before opening an image. It preserves source-choice
+RNG for unaffected draws and applies ROI overrides before exclusion retries.
+For a future matched recipe, retain:
 
 ```yaml
 photo_sampling_reference_manifest: /mnt/external/demosaic/commons-source-tail-reviewed-20261023-v2/manifest4.jsonl
 photo_sampling_reference_sha256: 4175378ca100351eca4669220892d4d4e8db9c47133016206c7c0eadd7ab427e
 ```
 
-The trainer snapshots those reference bytes, records the hash and rejects a
-changed or disabled reference on resume. The recipe controller includes the
-reference as a frozen input. Omitting it retains existing sampling. Current
-V117/V118 keep their original recipes and executed sources; this optional mode
-is ready for later training. An isolated curation comparison can reuse the
-corresponding completed V117 or V118 control when initializer, coefficient,
-seed, data outside Commons, optimizer, LR, horizon and every other recipe setting
-match. Its actual production prefix still needs checking when run. This is an
-option for attributing a data effect; the preflight does not select the next
-model baseline or establish a restoration-quality gain.
+A separate actual clean-data reader check uses seed 65 and V119's data options
+against the parent 90,791 and future 90,787 manifests. Metadata search selects
+one draw for each of the four new excluded IDs, all six original ROIs, four
+ordinary photos and two procedural samples. All **16 parent/future pairs** are
+actually read at native256. The four excluded-source draws open eligible
+replacement caches; the other 12 have identical cache calls and FP32 pixels.
+Every future target is finite: **3,145,728 FP32 values**, including **2,359,296
+unchanged values**. The future reader opens no excluded or held-out cache.
+Global Python/NumPy/Torch RNG states remain unchanged and CUDA is uninitialized.
 
-### Latest prepared cohort
+The targeted indices are selected by metadata search through index 512382;
+this is not an executed 20k training schedule. The constructor receipt retains
+its earlier, narrower scope; the additive actual-reader receipt records the
+subsequent augmented-pixel check. No neural inference, new noise observations,
+RAW decoding or optimizer updates occur in either check. These inputs are
+prepared and untrained; neither a corpus defect rate nor a restoration gain
+follows from this targeted review.
 
-The cumulative earlier-pool ledger now covers 1,058 sources: 954 retained, 100
-withheld and four original `exclude` labels. The separate arrival review
-retains its 153-source native-coverage count; these are different review scopes.
+## Preserved preceding evidence
 
-The latest 4×/8× manifests remove exactly 11 declared training rows from the
-previously prepared 90,802-source cohort. Every other literal row and its order
-are preserved, including 2,303 validation,
-2,255 test and all previously excluded/reserved rows. Source metadata and active
-IDs agree between scales. No new cache pixels are written. The same six ROI
-objects are rebound to the new manifest; the actual pure-NumPy catalogue reader
-checks all cache/ROI/native-target hashes, geometry and dtype with no Torch import.
+V119's original 90,791-source manifests and executed recipe stay frozen.
+Its [290-source/top512 review](results/source-tail-top512-review-v1.json),
+[six-ROI checks](results/source-tail-top512-ROI-reader-v1.json) and
+[107-target schedule/reader proof](results/cleaned90791-source-reader-preflight-v1.json)
+remain unchanged. That source-preserving preflight covers all 67 affected draws
+and 40 unchanged targets at seed 64 over its prospective 20k schedule. These are
+separate earlier checks, not counts from the new seed 65 targeted test.
 
-The [preceding family receipt](results/reproduction-family-review-v1.json) and
-[six-ROI reader checks](results/reproduction-family-ROI-reader-v1.json) preserve
-the 90,802-source intermediate cohort and its 45 withholds. The
-[preceding 123-source receipt](results/source-tail-top256-review-v1.json) and
-[its six-ROI checks](results/source-tail-top256-ROI-reader-v1.json) preserve the
-90,847-source intermediate cohort and its decisions. The earlier 30-source pass
-retained 28 and withheld a banknote and a specialized
-cell visualization, producing that 90,862-source intermediate cohort. Its
-[original receipt](results/next-source-tail-review-v1.json),
-[six-ROI checks](results/next-source-tail-ROI-reader-v1.json) and
-[banknote](images/source-tail-20261025-v1/banknote-withhold.json),
-[cell](images/source-tail-20261025-v1/microscopy-visualization-withhold.json) and
-[real-window](images/source-tail-20261025-v1/retained-photographed-window.json)
-inspection assets remain unchanged. The cell withhold was a specialized-domain
-choice; its rendering/reconstruction method was not established.
-
-These targeted membership decisions do not estimate the corpus defect rate or
-demonstrate a restoration improvement. The prepared data is available after the
-original loss-pair review; current jobs, models and historical receipts retain
-their original bytes.
+Earlier [45-source family](results/reproduction-family-review-v1.json),
+[123-source/top256](results/source-tail-top256-review-v1.json),
+[30-source](results/next-source-tail-review-v1.json) and
+[source-preserving sampler](results/source-preserving-curation-v1.json) receipts,
+assets and intermediate cohorts remain preserved. V114/V115/V117/V118 retain
+90,864-source inputs. Historical choices are in the timestamped [diary](../diary/index.md);
+current model choices and remaining weaknesses are in [current quality training](quality-first-training.md).

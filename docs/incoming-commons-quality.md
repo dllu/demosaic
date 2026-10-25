@@ -18,20 +18,34 @@ inspection, rather than native inspection of every image.
 | --- | ---: | --- |
 | V102/V103 | 88,477 | Completed model comparison |
 | V104 | 90,872 | Original 20k training, all panels and full-frame exports complete |
-| Current reviewed cohort | **90,864** | V114 is the working baseline; V114/V115/V116 review complete; V117/V118 retain this corpus |
-| Prepared next cohort | **90,791** | [Top512 source review](next-source-tail-review.md): 279 of 290 additional sources retained; 11 withheld for clean-target quality or source domain; all active original top512 candidates inspected; no new training result |
+| Completed-model cohort | **90,864** | V114 is the general baseline; V115/V117 have useful camera/photo tradeoffs; their complete reviews retain this corpus |
+| V119 training cohort | **90,791** | [V119 is training from V115 Small](cleaned-diverse-small-training.md); frozen inputs, endpoint quality results pending |
+| Prepared future cohort | **90,787** | [Latest top768 source review](next-source-tail-review.md): 332 of 336 additional sources retained; four withheld; actual augmented-reader checks pass; not trained |
 
-The current cohort applies **eight additional training-source withholds relative
-to V104**: the three previously inspected photo-quality cases and five printed
+The completed-model 90,864-source cohort applies **eight additional training-source
+withholds relative to V104**: the three previously inspected photo-quality cases and five printed
 atlas images. Four atlas targets were in the older V102 corpus; one was an
-arrival. Relative to V102, the next corpus adds **2,391 eligible arrivals** and
+arrival. Relative to V102, this cohort adds **2,391 eligible arrivals** and
 removes those four older sources. Validation/test remain **2,303/2,255** with
-identical records and order. Other excluded/reserved rows, protected scenes and
-source/cache metadata retain their bytes. Originals and cache pixels are unchanged.
+identical records and order across the later cohorts too. Other excluded/reserved
+rows, protected scenes and source/cache metadata retain their bytes. Originals
+and cache pixels are unchanged.
 [Coupled 4×/8× manifests and literal-row audit](results/commons-source-tail-reviewed90864-v1.json).
 
-The original six training ROI objects are preserved with a new manifest binding.
-Twelve actual clean-reader checks repeat exactly: six new-source draws and all
+The latest 336-source inspection extends both historical loss-ranked lists
+through rank 768, preparing four additional withholds for future training. Two
+have unreliable faceted/flattened clean-photo texture; two are flat map/document
+layouts. Larger native views clear four ambiguous photographs, preserving
+useful fine blossoms, stems, masonry and weak gray fur. Originals and cache
+pixels remain unchanged; V119 keeps its original 90,791 membership. The new
+90,787 manifest preserves all other literal rows and the original six ROI
+objects. Its targeted actual reader checks all four new replacements and 12
+unchanged native256 targets, without neural inference or noise generation.
+[Decisions and examples](next-source-tail-review.md) ·
+[Actual future-reader receipt](results/source-tail-top768-augmented-reader-v1.json).
+
+The original 90,864-source admission preserved the six training ROI objects
+with a new manifest binding. Its twelve actual clean-reader checks repeat exactly: six new-source draws and all
 six ROIs, with finite native256 targets, unchanged Torch RNG and no CUDA.
 [V111/V112](loss-scale-training.md) completed their original 20,000 updates each
 on this cohort, preserving the V104 EMA and learned gates while comparing
@@ -68,7 +82,7 @@ through Commons/synthetic, native-RAW and paired-RAW domains.
 Eight-update CUDA checks also pass at native256/B16/BF16, with exact initial
 EMA/encoder identities, finite model/EMA/Adam, matching actual observations and
 matching first losses. [Actual CUDA checks](results/backbone-cleaned-recipes-CUDA-v1.json).
-Production training did not launch for V109/V110. The active V114/V115
+Production training did not launch for V109/V110. The completed V114/V115
 comparison above instead retains V112's learned function and fits the Small
 laterals to its features. These older prospective counts are not receipts of
 exposure in the current production run.
