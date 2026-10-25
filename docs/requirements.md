@@ -29,7 +29,10 @@ The [V116 data trial](fine-detail-data-training.md) passed its eight discarded
 CUDA updates and started its original20k run. Its matched Tiny control is V114;
 the original V112 initializer/seed/budget stay fixed. A single-candidate evaluator,
 independent audit and direct saved-output comparison are waiting downstream.
-Trained quality and actual native review remain pending.
+Trained quality and actual native review remain pending. A separate
+[V114 eight-view pilot](v114-eight-view.md) is complete on24 saved observations,
+improving selected material/camera scores with a color-bias tradeoff. Its full
+panels/frame remain unmeasured; it does not close broad real-quality or speed goals.
 
 Hot-pixel repair and [linear DNG/JPEG output](dng-export.md) are merged; repair
 was off in these comparisons. Each improved-model report includes at least two

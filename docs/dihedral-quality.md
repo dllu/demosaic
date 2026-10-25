@@ -1,9 +1,10 @@
 # Optional eight-view restoration
 
-The [current V114 fixed24 pilot](results/v114-dihedral8-pilot-running-v1.json)
-is running with exact saved inputs and reused V112/V104/RawNIND controls. Its
-independent metrics and native review are pending. The completed measurements
-below retain their explicit older checkpoints.
+The [current V114 fixed24 comparison](v114-eight-view.md) is complete:
+all12 material cases and both selected adverse camera crops improve over single
+view, with slightly higher selected color bias and lower spatial variation.
+Independent checks and native review pass. Full V114 eight-view panels/frame
+are unmeasured; the completed V104/V112 measurements below retain their scope.
 
 **V112 weights also benefit from eight views on the fixed material
 panel:** all twelve cases improve, with mean+.54335/.27285/.07936dB for
@@ -17,7 +18,7 @@ improve. It uses the original weights and exact sensor rotations/reflections,
 requiring eight evaluations per tile. Its ADC color tail remains worse than
 V112's, and fine high-noise detail stays weak. V114 is now the general learned
 baseline; eight views are a measured V104 higher-PSNR option with explicit
-tradeoffs. V114 eight-view quality is unmeasured.
+tradeoffs. V114 now has the fixed24 result above; full eight-view panels/frame remain unmeasured.
 
 Add `--self-ensemble dihedral8` to `demosaic infer`, `demosaic benchmark`,
 `demosaic quality` or

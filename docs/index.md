@@ -6,7 +6,9 @@ native crops. **V114 Tiny is the current general quality baseline**, with
 V115 fitted Small has a higher known-camera mean and eight-pixel weak response;
 Tiny has slightly higher photo PSNR and lower tested color bias.
 [Completed comparison and native images](v114-v115-quality.md) ·
-[Current choices](current-model.md).
+[Current choices](current-model.md). The optional [V114 eight-view fixed24 comparison](v114-eight-view.md)
+adds material/camera gains and native examples, with selected color-bias tradeoffs
+and unmeasured complete-panel/frame scope.
 
 All primary/analytic panels, independent saved-output checks, native review
 and complete102MP RGB16 exports are finished for both endpoints. Fine foliage,

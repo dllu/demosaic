@@ -31,6 +31,12 @@
   "selection_basis": "Complete independent panels: photo36.97973062dB (+.07734717 over V112),422/427 photo-source means improve; known/unseen measured-CFA54.28627445/54.00290178dB (+.01713458/+.04912459). ADC mean/max bias7.08063/51.73073DN16 and high-noise17.08340/85.40041. V115 fitted Small has slightly lower photo36.97700390dB and higher color bias65.63844/106.79030max, with higher known54.32404974/unseen54.00416793 and8px carrier gain. Tiny selected for general photo/color balance; Small remains useful for camera/8px detail. Both improve over V112, with native comparisons published without a significance gate. Real foliage/neon and dark-camera mottling remain weak; stronger RawNIND wins4/9 camera scene means. All28380 numerical observations independently checked; native photo/camera/GFX viewing and full RGB16 exports complete.",
   "review": "docs/current-model.md",
   "performance_report": "docs/v114-v115-quality.md",
-  "recommendation_scope": "Current general positive-noise RAW and quality-training baseline, preserving the V84-family DRUNet and official frozen DINOv3 ConvNeXt-Tiny architecture. Small is a useful documented alternative. Earlier V112/V104 optional policies retain explicit weights and separate measured tradeoffs; V114 eight-view quality is unmeasured. V116 retains its original V112 initializer and completed V114 control despite this mutable recommendation.",
-  "recorded_local": "2026-10-24T17:07:56.383979-07:00"
+  "recommendation_scope": "Current general positive-noise RAW and quality-training baseline, preserving the V84-family DRUNet and official frozen DINOv3 ConvNeXt-Tiny architecture. Small is a useful documented alternative. Earlier V112/V104 optional policies retain explicit weights and separate measured tradeoffs; V114 eight-view fixed24 quality is independently reviewed: material/camera gains with slightly higher selected color bias and lower spatial variation; full panels/frame unmeasured. V116 retains its original V112 initializer and completed V114 control despite this mutable recommendation.",
+  "recorded_local": "2026-10-24T17:07:56.383979-07:00",
+  "optional_inference_quality": {
+    "self_ensemble": "dihedral8",
+    "recorded_local": "2026-10-24T18:40:42.600622-07:00",
+    "review": "docs/v114-eight-view.md",
+    "scope": "Fixed24 pilot, not full427/all-camera/all1176-color/full102MP. Same learned V114 checkpoint; eight evaluations per tile. Default policy remains explicit none unless the caller opts in."
+  }
 }

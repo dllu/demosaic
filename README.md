@@ -21,14 +21,13 @@ quality is pending. The90,864-source corpus, zero optical blur and geometry
 before final downsampling remain in use. [Data review](docs/incoming-commons-quality.md) ·
 [Training pipeline](docs/training-pipeline.md) · [Historical diary](diary/index.md).
 
-Earlier useful modes remain available: [V104 eight views](docs/dihedral-quality.md)
-reaches37.044dB on the full photo panel, with a worse ADC color tail;
-[V112 eight views](docs/v112-eight-view.md) improves twelve fixed material cases
-but has no complete-panel/frame measurement. A [fixed24 V114 eight-view pilot
-is running](docs/results/v114-dihedral8-pilot-running-v1.json); its quality review
-and complete-panel/frame measurements remain pending. The [V104 ADC sites option](docs/adc-consistency.md) and
-[camera-outlier study](docs/camera-outliers.md) retain their explicit weights
-and measured tradeoffs.
+The optional [V114 eight-view comparison](docs/v114-eight-view.md) improves all
+twelve fixed material cases and both selected adverse camera crops. Mean gains
+are+.558/.264/.079dB at ADC/ISO100/ISO12800, with slightly higher selected color
+bias and lower spatial variation. Full V114 eight-view panels/frame remain
+unmeasured. Earlier [V104 eight-view full panels](docs/dihedral-quality.md) reach
+37.044dB with a worse ADC color tail. The [V104 ADC sites option](docs/adc-consistency.md)
+and [camera-outlier study](docs/camera-outliers.md) retain their measured scope.
 
 ![PSNR versus model version](docs/images/version-PSNR-history.png)
 
@@ -38,15 +37,17 @@ isolated architecture ablation.
 
 ## Current100% crops
 
-Noisy observation → **V114 Tiny** → exact synthetic GT, ISO12800 prior.
-Each cell is an unchanged160×160 crop at the8×-binned evaluation resolution,
-with shared coordinates and display transforms. Fine texture remains softer
-than GT. [Tiny/Small comparison](docs/v114-v115-quality.md) ·
-[Source/ROI/checkpoint/noise/display receipts](docs/images/v114-v115-quality/manifest.json).
+Noisy observation → **V114 Tiny, optional eight views** → exact synthetic GT,
+ISO100 prior. Each cell is an unchanged160×160 crop at the8×-binned evaluation
+resolution, with shared coordinates/transforms. Fine texture remains softer than
+GT. The full427 scores above use single view. [Measured option and limitations](docs/v114-eight-view.md) ·
+[Source/ROI/checkpoint/noise/display receipts](docs/images/v114-dihedral8-pilot/manifest.json).
 
-![V114 bark: noisy, restored and exact GT](docs/images/v114-v115-quality/V114-material-1.png)
+![Eight-view V114 bark: noisy, restored and exact GT](docs/images/v114-dihedral8-pilot/crop-9670fee970171aad.png)
 
-![V114 canopy: noisy, restored and exact GT](docs/images/v114-v115-quality/V114-material-2.png)
+![Eight-view V114 canopy: noisy, restored and exact GT](docs/images/v114-dihedral8-pilot/crop-b38f8be4dde85710.png)
+
+[Higher-noise comparisons against earlier versions and stronger RawNIND](docs/images/v114-dihedral8-pilot/photo-iso12800-prior.png).
 
 Sources: [Derek Ramsey](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
 [CC BY-SA2.5](https://creativecommons.org/licenses/by-sa/2.5/), and

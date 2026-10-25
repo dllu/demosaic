@@ -7,7 +7,10 @@ photo PSNR and lower tested color bias. Both retain the V84-family DRUNet RGB
 restoration path with official frozen DINOv3 pyramids, and improve over V112.
 All numerical panels, independent saved-output checks, native review and full
 RGB16 exports are complete. Fine foliage/neon and dark-camera mottling remain
-unresolved. [Current choices](current-model.md).
+unresolved. [Current choices](current-model.md). The completed [V114 eight-view
+pilot](v114-eight-view.md) adds fixed material/camera gains and lower selected
+spatial color variation, with slightly higher mean bias; full panels/frame remain
+unmeasured.
 
 The [V116 data trial](fine-detail-data-training.md) has started its original20k
 run after the eight-update CUDA check. It tests fine weak sources and reviewed

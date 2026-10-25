@@ -22,6 +22,24 @@ retained ROIs exactly match FP32-to-linear-RGB16 quantization. Ordered FP32
 inference/blending observations are116.57s/101.66s; different warmup/workspace
 states prevent a speed ranking. Quality remains the priority before speed work.
 
+## V114 eight-view context comparison
+
+The [completed fixed24 V114 pilot](v114-eight-view.md) adds all six native GFX
+regions. Rows are noisy, V104 eight views, V112 eight views, V114 single, V114
+eight views, stronger RawNIND and the separate ISO100 reference. Columns: sky,
+building, foliage, fence, neon, platform. All cells are unchanged160px crops
+from512px contexts, with shared +2EV/WB/matrix; these are not full-frame
+eight-view outputs. ISO100 remains approximate, **not GT**.
+
+![Six native GFX regions with V114 single/eight-view and earlier controls](images/v114-dihedral8-pilot/gfx.png)
+
+Sky and mesh/building geometry remain coherent. Foliage stays painterly and
+neon markings smear; differences between V114 single/eight views and V112 eight
+views are modest. The complete pilot improves material and selected camera
+PSNR, with slightly higher selected color bias and lower spatial variation.
+[Source/ROI/weights/noise/display receipts](images/v114-dihedral8-pilot/gfx.json).
+Full V114 eight-view panels,102MP export and timing remain unmeasured.
+
 ## V112 and released RawNIND full-frame references
 
 The following explicitly labeled comparison retains V104/V112 and both released

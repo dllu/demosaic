@@ -28,7 +28,9 @@ The [completed full 102MP RGB16 review](dihedral-fullframe.md) includes native
 foliage/fence comparisons and the actual FP32 inference observation. Broader
 eight-view V104 quality panels and independent checks are complete, with measured
 photo/camera gains and remaining color/detail tradeoffs. V112 has a separate
-[fixed24 pilot](v112-eight-view.md); V114 eight-view quality is unmeasured.
+[fixed24 pilot](v112-eight-view.md). The [current V114 fixed24 result](v114-eight-view.md)
+improves all12 material cases and both selected camera crops, with a small
+selected color-bias tradeoff. Full V114 eight-view panels/frame remain unmeasured.
 
 ## Environment and storage
 

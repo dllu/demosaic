@@ -8,7 +8,9 @@ resolves fine foliage, saturated-sign detail or dark-camera mottling.
 
 [Completed evidence, checkpoints and independent statistics](results/v114-v115-quality-complete-v1.json) ·
 [Matched training and initialization](small-aligned-training.md) ·
-[Current model choices](current-model.md).
+[Current model choices](current-model.md). The later optional [V114 eight-view
+pilot](v114-eight-view.md) has independent/native review and selected gains with
+a color-bias tradeoff; the complete tables here use single-view inference.
 
 ## Complete primary panels
 

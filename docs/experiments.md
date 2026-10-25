@@ -7,7 +7,10 @@ response, while Tiny has slightly higher photo PSNR and lower color bias.
 [Completed panels, native comparisons and full exports](v114-v115-quality.md).
 Fine foliage/neon and dark-camera mottling remain weak. [V116 is training](fine-detail-data-training.md)
 to test fine weak sources and reviewed reference masks against matched V114.
-The earlier [V112 eight-view pilot](v112-eight-view.md) retains its explicit
+The [current V114 eight-view pilot](v114-eight-view.md) improves all12 fixed
+material cases and both selected camera crops, with a small selected color-bias
+tradeoff; independent/native review is complete and full panels/frame remain
+unmeasured. The earlier [V112 eight-view pilot](v112-eight-view.md) retains its explicit
 weights and unmeasured full-panel/frame scope.
 
 [Current model choices and images](current-model.md) ·

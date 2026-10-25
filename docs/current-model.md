@@ -10,6 +10,7 @@ metrics, native review and102MP RGB16 exports are verified.
 | --- | --- |
 | General RAW and further quality work | **V114 Tiny**: photo36.97973dB; known/unseen CFA54.28627/54.00290dB; ADC mean/max bias7.08/51.73DN16 |
 | Higher measured known-camera mean / eight-pixel weak response | **V115 fitted Small**: photo36.97700dB; camera54.32405/54.00417dB; ADC max65.64DN16 and high-noise max106.79 versus Tiny85.40 |
+| Optional eight-view V114 inference | [Fixed24 pilot](v114-eight-view.md): all12 material cases and both selected adverse camera crops improve; selected color bias rises slightly while spatial variation falls. Real fine detail remains soft; full panels/frame unmeasured; eight evaluations per tile |
 | Exact parent and previously measured optional modes | [V112](v112-quality.md): photo36.90238dB, ADC maximum50.89DN16; [eight-view fixed24 pilot](v112-eight-view.md) improves all12 material cases, but full panels/frame remain unmeasured |
 | Earlier full-panel eight-view option | [V104 dihedral8](dihedral-quality.md): photo37.04376dB, camera54.33283/53.99412dB; worse ADC maximum420.90DN16 and unresolved fine detail; eight evaluations per tile |
 | Explicit ADC observed-sample fidelity | [V104 sites export](adc-consistency.md): +.28850dB on full ADC photo panel over original V104; color/detail tradeoffs remain |
@@ -19,12 +20,12 @@ mean, with3/5 scenes rising. Tiny has slightly higher photo PSNR and lower color
 bias. Both improve over V112. This selects a useful general balance without
 hiding Small's gains or applying an old study-specific promotion threshold.
 
-A [V114 eight-view CPU pilot](results/v114-dihedral8-pilot-running-v1.json) is
-running on the same24 saved material/camera/GFX/color inputs as the completed
-V112 pilot. Its192 new model/encoder calls include each identity view as part
-of the mean; all older reference outputs are reused. Independent saved-output
-and native review follow. Quality and complete panels/frame remain unmeasured;
-the original V116 training/review chain continues unchanged.
+The [V114 eight-view pilot](v114-eight-view.md) is complete on the same24 saved
+inputs as V112. Material gains average+.55750/.26416/.07938dB at ADC/ISO100/
+ISO12800; both selected camera crops improve, with a small selected color-bias
+tradeoff. Independent mean/metric checks and native review pass. This qualifies
+a useful optional mode without claiming full427/all-camera/full-color-grid or
+complete102MP results. The original V116 training/review chain is unchanged.
 
 ## Run the current model
 
