@@ -28,9 +28,9 @@ record below retains explicitly named older checkpoints and measurements.
 
 The active [V117/V118 objective comparison](band-loss-training.md) now starts
 from V114. It holds corrected data/legacy weak sources, seed64 and the20k budget
-fixed while changing normalized-band weight0/.0003. CPU/CUDA checks pass;
-V117's control is training, followed by V118 and complete independent/native
-quality review. The earlier local-gradient checks do not decide trained quality.
+fixed while changing normalized-band weight0/.0003. V117's original20k control
+is complete; V118 is training before complete independent/native quality review.
+The earlier local-gradient checks do not decide trained quality.
 
 The current [V104 conditioning study](noise-conditioning.md) repeats the
 fixed-strength comparison on twelve exact-target observations and six standing

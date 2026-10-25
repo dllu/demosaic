@@ -1,0 +1,96 @@
+{
+  "status": "completed-V117-original20000-log-audit-V118-production-prefix-live",
+  "recorded_local": "2026-10-25T04:13:04.611480-07:00",
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/audit-V117-completion-handoff-v2.py",
+    "sha256": "1692ad8daca59439788f89e5d7347af021f797cec5c13479acd497624af42fff"
+  },
+  "preserved_prior_failed_audit": {
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/audit-V117-completion-handoff-v1.py",
+      "sha256": "a41e4aaaa4111c8663eb9d9f87dc7d6dc890a6c2a77397614a9e703a7e74a139"
+    },
+    "log": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V117-completion-handoff-run-v1.log",
+      "sha256": "9639d7d70a1e32844c6d1bb6fa37c16e515f823a369d5c26da06dc39759f1394"
+    },
+    "reason": "Audit-only native log label assumption: actual native-RAW-synthetic, not native-RAW; no training or original receipts changed."
+  },
+  "training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-band-loss-training-v1/plan.json",
+    "sha256": "eca88b354792d0c1babefb38381866122ae393a969246c39d6ca6199010885e3"
+  },
+  "original_V117_accounting": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-band-loss-training-v1/train-V117-accounting-v1.json",
+    "sha256": "fe14a9575a6d2802a2b648c841643a35a11749b4ca928e8da2cabec8732b0b4d"
+  },
+  "original_V117_worker_result": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-band-loss-training-v1/train-V117-result.json",
+    "sha256": "33dca56509b76a0c0fc860eefe6fdb506a5efd04395b068b9d95d5facf3e1397"
+  },
+  "checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-band-loss-training-v1/work/artifacts/train/V117/last.pt",
+    "sha256": "f69452432a852ac4c5ffdcbf7d6fe6837a3ab46adbc8a7fdae073111220b8ab0"
+  },
+  "physical_source_sha256": "707abdcea6f3e14a48a7d6ebc7f1769e3da8e96d8959d856fcfc32961787075b",
+  "original_frozen_files_checked": 72,
+  "actual_original_worker_counts": {
+    "training_forwards": 20000,
+    "encoder_training_forwards": 20000,
+    "validation_forwards": 640,
+    "encoder_validation_forwards": 640,
+    "optimizer_steps": 20000,
+    "prepared_training_batches": 20000,
+    "synthetic_loss_calls": 14987,
+    "paired_loss_calls": 5013,
+    "normalized_band_evaluations": 0
+  },
+  "actual_domain_counts": {
+    "paired": 5013,
+    "native": 4955,
+    "commons": 10032
+  },
+  "completed_V117_log_rows_checked": 801,
+  "completed_V117_input_records_checked": 808,
+  "validation_monitors_finite": 20,
+  "worker_Adam_states_finite_step20000": 89,
+  "worker_model_and_EMA_finite": true,
+  "worker_initial91EMA_exact_to_V114": true,
+  "worker_official_encoder_unchanged": true,
+  "V118_closed_prefix": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V117-completion-handoff-v2/V118-closed-prefix-v1.jsonl",
+    "sha256": "3951c25797144d561b7da955372fa91096d44da32f6b0cb1db017663e3d1e6c6"
+  },
+  "V118_logged_rows_matched_to_control": 37,
+  "V118_prefix_last_logged_step": 900,
+  "V118_prefix_inputs_domains_steps_LRs_exact": true,
+  "V118_unpaired_logged_band_terms_finite_paired_skip": true,
+  "first_production_output_archives": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-band-loss-training-v1/train-V117-first-outputs-v1.npz",
+      "sha256": "cddafc0753e846b7ac8bf66a1905b8c7cdaf5443ff4d9d0d98e3fd5411fe607f"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-band-loss-training-v1/train-V118-first-outputs-v1.npz",
+      "sha256": "cddafc0753e846b7ac8bf66a1905b8c7cdaf5443ff4d9d0d98e3fd5411fe607f"
+    }
+  ],
+  "first_production_FP32_values_exact_between_arms": 4194304,
+  "first_production_losses_exact": true,
+  "original_controller": {
+    "pid": 2091984,
+    "created": 1792908264.52
+  },
+  "live_V118_child_at_audit": {
+    "pid": 2454662,
+    "created": 1792925976.11
+  },
+  "original_controller_and_V118_child_live": true,
+  "V117_owner_completed_and_dead": true,
+  "new_neural_forwards": 0,
+  "optimizer_updates_performed_by_audit": 0,
+  "new_noise_observations": 0,
+  "RAW_decodes": 0,
+  "Torch_imported": false,
+  "scope": "Completed original V117 training, plus immutable observed V118 production prefix. Full optimizer/model/encoder tensor checks are adopted from the bound actual worker receipt; this audit checks source, exact checkpoint hash, complete closed logs and observed inputs without loading the NN checkpoint. All unlogged production input tensors are not independently verified. No full quality, new model selection or completed V118 claim; both full endpoints and numerical/native review remain required."
+}
