@@ -131,6 +131,8 @@ def prepare(root, artifact_root, recipes, after_run_root=None):
             "reviewed_roi_catalogue",
         ):
             inputs.append(ref(config[key]))
+        if config.get("photo_sampling_reference_manifest") is not None:
+            inputs.append(ref(config["photo_sampling_reference_manifest"]))
         arms[name] = {}
         for phase in ("CPU", "CUDA", "train"):
             actual = dict(config, run=str(artifact_root / phase / name))

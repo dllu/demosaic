@@ -30,6 +30,7 @@ from .losses import (
 from .model import JointDemosaic, ModelConfig
 from .optimizer_batches import backward_groups, batch_layout, optimizer_batches
 from .paired_training import PairedDataset, paired_reconstruction_loss, paired_step
+from .photo_sampling import require_resume_photo_sampling
 from .precision import amp_context, ieee_fp32
 from .raw_clean import RawCleanDataset, degrade_raw_clean, raw_clean_step
 from .reviewed_rois import require_resume_rois, validate_roi_fraction
@@ -515,6 +516,16 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
     manifest_hash = hashlib.sha256(manifest_payload).hexdigest()
     records = [json.loads(line) for line in manifest_payload.splitlines()]
     config["manifest_sha256"] = manifest_hash
+    photo_reference_payload = None
+    if config.get("photo_sampling_reference_manifest") is not None:
+        photo_reference_payload = Path(config["photo_sampling_reference_manifest"]).read_bytes()
+        reference_hash = hashlib.sha256(photo_reference_payload).hexdigest()
+        expected_reference_hash = config.get("photo_sampling_reference_sha256")
+        if expected_reference_hash is not None and expected_reference_hash != reference_hash:
+            raise ValueError("Photo sampling reference differs from the declared hash")
+        config["photo_sampling_reference_sha256"] = reference_hash
+    elif config.get("photo_sampling_reference_sha256") is not None:
+        raise ValueError("Photo sampling reference hash requires a manifest")
     if (
         roi_catalogue_payload is not None
         and json.loads(roi_catalogue_payload)["source_manifest"]["sha256"] != manifest_hash
@@ -545,6 +556,8 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
     if raw_clean_data is not None:
         payloads["raw-clean-manifest.json"] = raw_clean_data.payload
     payloads["validation-manifest.jsonl"] = validation_payload
+    if photo_reference_payload is not None:
+        payloads["photo-sampling-reference.jsonl"] = photo_reference_payload
     if roi_catalogue_payload is not None:
         payloads["reviewed-photo-rois.json"] = roi_catalogue_payload
     if config.get("validation_protocol"):
@@ -723,6 +736,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
         ):
             raise ValueError("Resume validation manifest differs from checkpoint")
         require_resume_rois(state["config"], config)
+        require_resume_photo_sampling(state["config"], config)
         if state["config"].get("augmentation_downsample", 1) != config.get(
             "augmentation_downsample", 1
         ):
@@ -845,6 +859,8 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
         reviewed_roi_catalogue=config.get("reviewed_roi_catalogue"),
         reviewed_roi_fraction=config["reviewed_roi_fraction"],
         reviewed_roi_catalogue_sha256=config.get("reviewed_roi_catalogue_sha256"),
+        photo_sampling_reference_manifest=config.get("photo_sampling_reference_manifest"),
+        photo_sampling_reference_sha256=config.get("photo_sampling_reference_sha256"),
         records=records,
     )
     workers = config.get("workers", 2)

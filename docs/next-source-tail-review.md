@@ -106,6 +106,50 @@ binning and inspection layout. [Metadata](images/source-tail-top256-20261025-v1/
 
 ## Prepared data and limits
 
+### Preserve draws for a matched curation comparison
+
+Removing 62 rows from the current 90,864-source cohort also changes integer
+source indices. At seed64 over a prospective 20,000-update schedule, ordinary
+sampling from the filtered manifest changes 98,605 of 112,330 photo source
+draws. This would change every Commons batch, far beyond the excluded photos.
+
+The optional `photo_sampling_reference_manifest` preserves the original ordered
+source list for sampling, then retries an excluded identity before any image is
+loaded. The active corpus must be an exact source/metadata/cache-path subset of
+that reference. Ordinary photographic sampling remains uniform over eligible
+sources. Reviewed ROI overrides occur before retries, preserving their geometry
+RNG even when the nominal source was excluded.
+
+| Sampling for the prepared 90,802-source cohort | Changed photo source draws | Affected Commons batches |
+| --- | ---: | ---: |
+| Filtered manifest indices | 98,605 | 10,032 |
+| Original reference with exclusion retries | 53 | 52 |
+
+These are prospective source choices at the original seed/quotas, rather than
+completed training or measured quality. The actual sampler's counts match all
+112,330 scheduled photo draws. A separate real augmented-reader check exercises
+93 native256 indices: all 93 default targets match the frozen V117 reader;
+40 unchanged future targets remain exact and all 53 excluded-photo draws are
+replaced. It covers the six ROIs and four nominal excluded sources overridden
+by an ROI. All 26,148,864 compared FP32 clean values match, and the future reader
+opens no excluded cache. [Schedule, real-reader evidence and 45 passing tests](results/source-preserving-curation-v1.json).
+
+For a future matched recipe using the latest manifest and rebound six-ROI
+catalogue, the reference fields are:
+
+```yaml
+photo_sampling_reference_manifest: /mnt/external/demosaic/commons-source-tail-reviewed-20261023-v2/manifest4.jsonl
+photo_sampling_reference_sha256: 4175378ca100351eca4669220892d4d4e8db9c47133016206c7c0eadd7ab427e
+```
+
+The trainer snapshots those reference bytes, records the hash and rejects a
+changed or disabled reference on resume. The recipe controller includes the
+reference as a frozen input. Omitting it retains existing sampling. Current
+V117/V118 keep their original recipes and executed sources; this optional mode
+is ready for a later curation comparison after their quality review.
+
+### Latest prepared cohort
+
 The cumulative earlier-pool ledger now covers 768 sources: 675 retained, 89
 withheld and four original `exclude` labels. The separate arrival review
 retains its 153-source native-coverage count; these are different review scopes.

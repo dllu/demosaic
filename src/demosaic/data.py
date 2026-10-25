@@ -13,6 +13,7 @@ from torch.utils.data import Dataset
 
 from .cfa import PATTERNS, color_indices, mosaic
 from .noise import add_noise, sample_coefficients, variance_map
+from .photo_sampling import PhotoSamplingReference
 from .precision import ieee_fp32
 from .reviewed_rois import ReviewedPhotoROIs, validate_roi_fraction
 from .textures import weak_texture
@@ -121,6 +122,8 @@ class CleanDataset(Dataset):
         reviewed_roi_fraction=0.0,
         reviewed_roi_catalogue_sha256=None,
         fine_weak_texture_fraction=0.0,
+        photo_sampling_reference_manifest=None,
+        photo_sampling_reference_sha256=None,
     ):
         self.reviewed_roi_fraction = validate_roi_fraction(reviewed_roi_fraction)
         if self.reviewed_roi_fraction and (
@@ -142,6 +145,20 @@ class CleanDataset(Dataset):
         self.rows = [row for row in records if row["split"] == split]
         if not self.rows:
             raise ValueError(f"No {split} images in {manifest}")
+        if photo_sampling_reference_manifest is not None and split != "train":
+            raise ValueError("Photo sampling reference is only for training")
+        if photo_sampling_reference_manifest is None and photo_sampling_reference_sha256 is not None:
+            raise ValueError("Photo sampling reference hash requires a manifest")
+        self.photo_sampling_reference = (
+            PhotoSamplingReference(
+                photo_sampling_reference_manifest,
+                self.manifest,
+                self.rows,
+                expected_sha256=photo_sampling_reference_sha256,
+            )
+            if photo_sampling_reference_manifest is not None
+            else None
+        )
         if patch_size % 16 or patch_size < 32:
             raise ValueError("Patch size must be >=32 and divisible by 16")
         self.split, self.size, self.seed = split, patch_size, seed
@@ -212,12 +229,17 @@ class CleanDataset(Dataset):
                 rgb = synthetic(size, rng)
         else:
             photographic = True
-            record = self.rows[
-                rng.randrange(len(self.rows)) if self.split == "train" else index % len(self.rows)
-            ]
+            if self.photo_sampling_reference is None:
+                record = self.rows[
+                    rng.randrange(len(self.rows)) if self.split == "train" else index % len(self.rows)
+                ]
+            else:
+                record = self.photo_sampling_reference.initial(rng)
             region = self.reviewed_roi_for_index(index)
             if region is not None:
                 record = region.record
+            elif self.photo_sampling_reference is not None:
+                record = self.photo_sampling_reference.eligible(record, rng)
             array = np.load(self.manifest.parent / record["cache"], mmap_mode="r")
             h, w = array.shape[:2]
             origin_x, origin_y = 0, 0

@@ -27,6 +27,10 @@ neither changes completed V100/V101 inputs.
 [Current decisions, native examples, catalogue and reader checks](results/source-quality-detail-catalogue-v3.json).
 Originals, existing manifests and protected evaluation scenes remain read-only.
 The GFX train/platform pair and siblings remain outside training.
+The optional [source-sampling reference](next-source-tail-review.md#preserve-draws-for-a-matched-curation-comparison)
+keeps unaffected photo/geometry draws exact when comparing this subset with its
+original corpus. The real native256 reader and snapshot/resume checks pass;
+current V117/V118 remain on their original frozen inputs.
 
 The additional [3,809-source arrival batch](commons-download.md) has finalized3,807
 valid caches at both4×/8×. All39 source sheets/3,807 thumbnail contexts and61
