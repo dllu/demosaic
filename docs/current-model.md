@@ -64,6 +64,13 @@ V115 changes the official frozen encoder and eight fitted lateral initializers,
 keeping the remaining V112 trunk/gate tensors and the matched training budget.
 It is a fitted-transfer comparison, not capacity alone.
 
+The [full saved-output local-detail comparison](local-material-detail.md#tiny-versus-fitted-small-on-the-same-full-photo-support)
+now covers the same427 sources for both encoders. Weak natural-detail response
+is nearly unchanged; Small's camera and eight-pixel advantages make it a useful
+parent for the next cleaned-data run, without suggesting that size alone fixes
+faint detail. The [reviewed83-ID paired extension](paired-camera-sampling.md)
+is prepared with corrected reference masks and the original camera proportions.
+
 ## Quality and remaining work
 
 At2% contrast/ISO12800, Tiny's eight/sixteen-pixel carrier gains rise to

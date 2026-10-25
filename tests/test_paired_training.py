@@ -47,6 +47,7 @@ def make_manifest(tmp_path):
                         "scene": "sewingmachine",
                         "unknown_sensor": False,
                         "metadata": {
+                            "camera": "fixture-camera",
                             "pattern": "RGGB",
                             "white_balance": [1.5, 1.0, 1.8],
                             "camera_to_srgb": torch.eye(3).tolist(),
@@ -124,18 +125,20 @@ def test_paired_schedule_continues_at_global_step_without_rng_state():
 
 
 @pytest.mark.parametrize(
-    "paired_fraction,native_fraction,step_rng,steps,native_downsample",
+    "paired_fraction,native_fraction,step_rng,steps,native_downsample,camera_weights",
     [
-        (0.5, 0.0, False, 4, 1),
-        (1.0, 0.0, False, 4, 1),
-        (0.0, 1.0, True, 8, 1),
-        (0.5, 0.25, True, 12, 1),
-        (0.5, 0.25, False, 12, 1),
-        (0.5, 0.25, True, 12, 2),
+        (0.5, 0.0, False, 4, 1, False),
+        (1.0, 0.0, False, 4, 1, False),
+        (0.0, 1.0, True, 8, 1, False),
+        (0.5, 0.25, True, 12, 1, False),
+        (0.5, 0.25, False, 12, 1, False),
+        (0.5, 0.25, True, 12, 2, False),
+        (0.5, 0.25, True, 12, 2, True),
     ],
 )
 def test_paired_training_resume_matches_uninterrupted_weights(
-    tmp_path, capsys, paired_fraction, native_fraction, step_rng, steps, native_downsample
+    tmp_path, capsys, paired_fraction, native_fraction, step_rng, steps, native_downsample,
+    camera_weights,
 ):
     manifest = make_manifest(tmp_path)
     photo = tmp_path / "photo.npy"
@@ -198,6 +201,8 @@ def test_paired_training_resume_matches_uninterrupted_weights(
             "standardized_noise": True,
         },
     }
+    if camera_weights:
+        config["paired_camera_sampling_weights"] = {"fixture-camera": 1}
     path = tmp_path / "config.yaml"
     path.write_text(yaml.safe_dump(config))
     full = train(path)
@@ -235,6 +240,13 @@ def test_paired_training_resume_matches_uninterrupted_weights(
     for group in ("model", "ema"):
         for name, value in expected[group].items():
             assert torch.equal(actual[group][name], value), name
+    if camera_weights:
+        assert actual["config"]["paired_camera_sampling_weights"] == {"fixture-camera": 1.0}
+        changed = dict(config)
+        changed.pop("paired_camera_sampling_weights")
+        path.write_text(yaml.safe_dump(changed))
+        with pytest.raises(ValueError, match="paired camera sampling"):
+            train(path, resume=resumed)
     if native_fraction:
         if native_downsample == 2:
             changed = {**config, "raw_clean_augmentation_downsample": 1}

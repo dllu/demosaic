@@ -113,6 +113,12 @@ absent. Higher eight/sixteen-pixel gains also accompany higher noncarrier RMS;
 the complete phase/residual/flat-field metrics remain in the bound comparison.
 Small improves eight-pixel response but does not fix the finest tested detail.
 
+The [full natural-detail comparison](local-material-detail.md#tiny-versus-fitted-small-on-the-same-full-photo-support)
+uses these same saved predictions across427 sources/5124 cases/96,075 unique
+GT blocks. Weakest-stratum ISO12800 gain is.36334/.36422 for Tiny/Small, with
+band-error RMS.00318289/.00318445. Broad weak natural detail is nearly unchanged.
+This CPU analysis adds no neural inference or new noise observations.
+
 ## Standing GFX and complete RGB16 exports
 
 Rows below are noisy, Tiny, Small and the separate ISO100 reference. Columns1–3

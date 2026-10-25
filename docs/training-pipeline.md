@@ -100,6 +100,13 @@ weights and EMA, and guards reject any fetch from an unselected domain.
 
 ## Internal training artifacts
 
+The optional [paired camera sampler](paired-camera-sampling.md) lets the reviewed
+83-ID extension retain the original32-group camera proportions. A separate
+manifest preserves the four corrected legacy masks and every admitted new case.
+Default scene sampling stays exact; changing camera probabilities on resume is
+rejected. The93 focused sampling/admission/resume checks and actual76-sample
+native256 reader preflight pass without production neural work.
+
 The [completed V117/V118 loss pair](v117-v118-quality.md) retains native256/B16
 and the current90,864-source geometry. Metadata coverage at4×→area2 is90,864
 sources for256px,55,998 for320px,24,753 for384px and1,762 for512px, without

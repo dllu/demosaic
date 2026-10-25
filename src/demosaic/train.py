@@ -486,17 +486,23 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
     raw_clean_fraction = config.get("raw_clean_fraction", 0.0)
     if not 0 <= paired_fraction <= 1 or not 0 <= raw_clean_fraction <= 1 - paired_fraction:
         raise ValueError("Paired/native fractions must be nonnegative and sum to <=1")
+    paired_camera_weights = config.get("paired_camera_sampling_weights")
+    if paired_camera_weights is not None and not paired_fraction:
+        raise ValueError("Paired camera sampling weights require paired training")
     paired_data = (
         PairedDataset(
             config["paired_manifest"],
             patch_size=config.get("patch_size", 256),
             seed=config.get("seed", 42),
+            camera_sampling_weights=paired_camera_weights,
         )
         if paired_fraction
         else None
     )
     if paired_data is not None:
         config["paired_manifest_sha256"] = paired_data.sha256
+        if paired_camera_weights is not None:
+            config["paired_camera_sampling_weights"] = paired_data.camera_sampling_weights
     raw_clean_data = (
         RawCleanDataset(
             config["raw_clean_manifest"],
@@ -756,6 +762,10 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
             raise ValueError("Resume paired manifest differs from checkpoint")
         if state["config"].get("paired_fraction", 0.0) != paired_fraction:
             raise ValueError("Resume paired training fraction differs from checkpoint")
+        if state["config"].get("paired_camera_sampling_weights") != config.get(
+            "paired_camera_sampling_weights"
+        ):
+            raise ValueError("Resume paired camera sampling differs; initialize a new run")
         if state["config"].get("raw_clean_manifest_sha256") != config.get(
             "raw_clean_manifest_sha256"
         ):

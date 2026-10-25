@@ -63,3 +63,10 @@ stays opt-in, with no model promotion or convergence claim.
 Those V53/V54 results describe an older architecture and4000-update recipe.
 They do not measure the extension on current ConvNeXt models or prevent a new
 quality experiment. Current recipes still use the reviewed32-scene data.
+
+The [prepared camera-preserving extension](paired-camera-sampling.md) now
+combines the same reviewed83 IDs with the corrected train32 masks. An opt-in
+sampler retains the original camera probabilities while adding scene diversity,
+instead of increasing Sony's share from75% to60/71. Actual native256 data reads,
+legacy parity and CPU toy-training resume checks pass; no trained-quality gain
+is claimed by that preparation.

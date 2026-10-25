@@ -29,8 +29,35 @@ def transform(value, turns, flip):
     return value.flip(-1) if flip else value
 
 
+def normalized_camera_weights(value):
+    """Canonical positive camera probabilities; None keeps legacy scene sampling."""
+    if value is None:
+        return None
+    if not isinstance(value, dict) or not value:
+        raise ValueError("Paired camera sampling requires a nonempty camera/weight mapping")
+    if any(not isinstance(name, str) or not name.strip() for name in value):
+        raise ValueError("Paired camera sampling requires nonempty camera names")
+    if any(
+        isinstance(weight, bool) or not isinstance(weight, (int, float))
+        or not math.isfinite(weight) or weight <= 0
+        for weight in value.values()
+    ):
+        raise ValueError("Paired camera sampling weights must be positive finite numbers")
+    try:
+        total = math.fsum(value.values())
+    except OverflowError as error:
+        raise ValueError("Paired camera sampling weight total must be finite") from error
+    if not math.isfinite(total):
+        raise ValueError("Paired camera sampling weight total must be finite")
+    result = {name: value[name] / total for name in sorted(value)}
+    if any(weight == 0 for weight in result.values()):
+        raise ValueError("Paired camera sampling weights underflow after normalization")
+    return result
+
+
 class PairedDataset(Dataset):
-    def __init__(self, manifest, *, patch_size=256, seed=42):
+    def __init__(self, manifest, *, patch_size=256, seed=42, camera_sampling_weights=None):
+        self.camera_sampling_weights = normalized_camera_weights(camera_sampling_weights)
         self.path = Path(manifest)
         self.payload = self.path.read_bytes()
         self.sha256 = hashlib.sha256(self.payload).hexdigest()
@@ -73,13 +100,31 @@ class PairedDataset(Dataset):
         self.names = sorted(self.scenes)
         if not self.names:
             raise ValueError("Paired training has no usable scenes")
+        self.camera_scenes = {}
+        if self.camera_sampling_weights is not None:
+            for name in self.names:
+                cameras = {case["metadata"].get("camera") for case in self.scenes[name]}
+                if len(cameras) != 1 or not all(isinstance(c, str) and c for c in cameras):
+                    raise ValueError("Each weighted paired scene group must have one camera")
+                self.camera_scenes.setdefault(next(iter(cameras)), []).append(name)
+            if set(self.camera_sampling_weights) != set(self.camera_scenes):
+                raise ValueError("Paired camera sampling weights must cover exactly the dataset cameras")
+            self.camera_names = sorted(self.camera_scenes)
+            self.camera_probabilities = [self.camera_sampling_weights[c] for c in self.camera_names]
+
+    def _sample_scene(self, rng):
+        if self.camera_sampling_weights is None:
+            return self.names[rng.randrange(len(self.names))]
+        camera = rng.choices(self.camera_names, weights=self.camera_probabilities, k=1)[0]
+        names = self.camera_scenes[camera]
+        return names[rng.randrange(len(names))]
 
     def __len__(self):
         return len(self.names)
 
     def __getitem__(self, index):
         rng = random.Random(self.seed + index)
-        scene = self.names[rng.randrange(len(self.names))]
+        scene = self._sample_scene(rng)
         case = rng.choice(self.scenes[scene])
         crop = rng.choice(case["crops"])
         with np.load(self.path.parent / crop["path"], allow_pickle=False) as arrays:

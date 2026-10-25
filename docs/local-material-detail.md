@@ -187,11 +187,27 @@ reproduce the closed form, checking that a source with more eligible blocks
 does not dominate the reported source-balanced gain. These artificial archive
 identities are engineering fixtures, not trained-model observations.
 
-The waiting CPU controller starts only after the original matched comparison
-successfully exits. It requires16GiB available RAM and2GiB output headroom,
-with an8GiB runtime RAM floor and600s analysis bound. Failures preserve evidence
-without automatic retry. Original training/evaluation/audit/comparison jobs
-continue unchanged; their native review still follows the completed results.
+## Tiny versus fitted Small on the same full photo support
+
+A new [saved-output comparison](results/v114-v115-local-detail-v1.json) applies
+these same definitions to V114 Tiny and V115 fitted Small:427 sources/5124
+source-noise-CFA cases/96,075 unique GT blocks. Weakest-stratum source-balanced
+gain is.94581/.94340 at ADC, .78329/.78286 at ISO100 and.36334/.36422 at ISO12800
+for Tiny/Small. High-noise band-error RMS is.00318289/.00318445, with orthogonal
+RMS.00198759/.00198998. Broad weak natural detail is nearly unchanged, despite
+Small's higher known-camera means and eight-pixel analytic response.
+
+This is a new CPU-only analysis of existing FP32 predictions, with exact input/
+supervision matching and no new neural call, noise draw or RAW decode. Fitted
+Small changes the backbone and eight fitted lateral initializers, so the
+comparison does not isolate capacity. It supports a camera-strength baseline
+choice without suggesting that encoder size alone fixes faint-detail loss.
+[Native Tiny/Small comparisons](v114-v115-quality.md).
+
+Both saved-output analyses have completed and their original receipts are
+preserved. The Tiny/Small analysis took60.38s on CPU. They do not restart the
+completed training, inference or noise generation; native comparisons remain
+available in the corresponding model reports.
 
 Sources: [Serebit, egret](https://commons.wikimedia.org/wiki/File:Snowy_egret_in_profile.jpg),
 [CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/), and
