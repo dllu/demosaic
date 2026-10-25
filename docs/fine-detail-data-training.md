@@ -113,6 +113,14 @@ Actual material/GFX viewing and comparison of strengths and weaknesses remain
 required. No statistical promotion rule or automatic recommendation change is
 introduced.
 
+A separate [local-detail archive audit](local-material-detail.md#full-photo-follow-up)
+is now waiting after that original comparison. It stratifies all427 photos by
+GT local fine contrast, using5124 saved paired observations across three noise
+priors and four CFAs. This broadens the earlier two-source weak stratum without
+new inference or noise generation. The full archives' own GT/inputs must match
+exactly between V114/V116; old CPU-pilot scores are kept separate. Its original
+training and review dependencies are unchanged; quality remains pending.
+
 ## Matched saved-output comparison
 
 The [comparison](../scripts/compare_quality_archives.py) selects exact checkpoint

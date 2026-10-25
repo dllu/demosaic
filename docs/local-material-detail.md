@@ -110,6 +110,44 @@ frozen script, plan, all2700 block records and original outputs are retained.
 Torch is never imported. V116's original training, recipe and queued complete
 review remain unchanged; its quality is still pending.
 
+## Full-photo follow-up
+
+An [additive archive audit is queued](results/local-detail-archive-queued-v1.json)
+after the exact original V114/V116 matched-review owner. It applies the same
+GT-only local definitions to **all427 photographic sources**, three noise
+priors and four Bayer phases:5124 paired source/condition/CFA observations,
+with96075 unique16px source blocks. The16 analytic sources in the full suite
+are excluded. Four CFAs are pooled within each source/condition before equal
+source weighting; stratum coverage is reported explicitly.
+
+The [archive analyzer](../scripts/diagnose_archive_local_detail.py) requires
+identical observation/input fingerprints and actual saved target/WB/matrix
+values across endpoints. It uses the full archives' own matched GT. Those
+targets differ from the earlier CPU pilot by up to1.19e-7, so the pilot's
+measurements remain a separate numerical record. No target or noisy input is
+regenerated. This follow-up adds no model/encoder calls, noise draws, optimizer
+updates, RAW decodes or default changes.
+
+Nine tests cover closed-form gains, CFA/source pooling, changed physical inputs,
+targets, missing fields, duplicate rows and unsupported policies. A completed
+readiness check also joins48 genuine retained V114 observations across all four
+CFAs, with exactly zero self-differences in15 summary groups. Explicit cosine
+and FFT coefficients agree within1.47e-14. This proves engineering readiness;
+V116 quality and broader weak-detail results are pending.
+
+A separate [unequal-coverage fixture](results/local-detail-source-weighting-proof-v1.json)
+gives two sources225 versus15 eligible blocks, with candidate gains.75 and.25.
+The equal-source result is.5; the energy/block-pooled result is.71875. Both
+reproduce the closed form, checking that a source with more eligible blocks
+does not dominate the reported source-balanced gain. These artificial archive
+identities are engineering fixtures, not trained-model observations.
+
+The waiting CPU controller starts only after the original matched comparison
+successfully exits. It requires16GiB available RAM and2GiB output headroom,
+with an8GiB runtime RAM floor and600s analysis bound. Failures preserve evidence
+without automatic retry. Original training/evaluation/audit/comparison jobs
+continue unchanged; their native review still follows the completed results.
+
 Sources: [Serebit, egret](https://commons.wikimedia.org/wiki/File:Snowy_egret_in_profile.jpg),
 [CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/), and
 [Korall, raccoon](https://commons.wikimedia.org/wiki/File:Racoon_clinging_to_a_tree.JPG),
