@@ -2,9 +2,10 @@
 
 **No promotion.** The expanded corpus's early photo PSNR gain disappears at
 4000 updates: expanded−control−.000488dB[−.022240,+.017406]. Real-camera
-differences remain uncertain, and native GFX differences are small. Keep V43
-step2000 and its README crops as the real-photo reference; reviewed83-ID data
-stays a separate opt-in corpus, without a demonstrated general advantage.
+differences remain uncertain, and native GFX differences are small. The study
+retained V43 step2000 as its real-photo reference; reviewed83-ID data remains
+a separate opt-in corpus, without a demonstrated general advantage here.
+[Current model choices](current-model.md) include later improvements.
 [Complete results, hashes and40 native triplets](results/paired-expansion-v53-v54-4k-review.json).
 [First1000 gate](paired-expansion-v53-v54-review.md).
 

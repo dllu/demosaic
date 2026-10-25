@@ -1,14 +1,16 @@
 # Cached Q2, Sony a7R II and GFX50R comparisons
 
-**Current model: [V112](v112-quality.md).** The Q2/Sony/GFX50R images below retain their measured V102/V104 checkpoints; new V112 comparisons on those captures remain open.
+**[Current model choices](current-model.md).** The Q2/Sony/GFX50R images below
+use their measured V102/V104 checkpoints. Updated comparisons of the current
+models on these three captures remain open.
 
-Current comparisons show **V104 and V102 final20k**, alongside RawNIND. They
+These comparisons show **V104 and V102 final20k**, alongside RawNIND. They
 extend the standing [GFX100S train scene](gfx-qualitative.md) using three existing
 cached captures. V104 and V102 look close here, with no clear overall gain or
 regression on these six low-ISO regions. The clearest separation from RawNIND
 is on the GFX50R concrete; Q2 shadows and Sony windows remain soft.
-[Completed exact-target results](v104-reviewed-corpus-quality.md) provide
-complementary evidence for V104 as the positive-noise and training baseline.
+[Completed exact-target results](v104-reviewed-corpus-quality.md) describe
+V104's strengths and weaknesses; the current guide includes later improvements.
 
 Each cell is an unchanged **160×160 native sensor-pixel crop**. Rows are the
 fixed upper-left/lower-right regions; columns are noisy Malvar, V102, V104

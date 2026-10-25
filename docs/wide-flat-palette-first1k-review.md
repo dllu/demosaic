@@ -4,9 +4,10 @@ The wider palette has **not established a general color repair**. Photo PSNR
 is essentially tied with the matched control; our five held-out development
 scenes have a small primary-CFA gain, while known scenes do not. The broader,
 prospectively frozen hue test still exposes large bright-field biases. Fine
-parachute cords and GFX foliage/fence detail remain deficient. **Retain V43 as
-the working model and continue both arms to their originally planned 4,000
-updates.** This is an intermediate review, not evidence of convergence.
+parachute cords and GFX foliage/fence detail remain deficient. This intermediate
+review retained V43 and called for both original4k schedules to finish; the
+[complete4k report](wide-flat-palette-full4k-review.md) now records their endpoints.
+[Current model choices](current-model.md) include later improvements.
 
 [Complete scores, provenance, audits and 88 native crop receipts](results/wide-flat-palette-first1k-review.json).
 [Palette definition and validation](wide-flat-palette.md).

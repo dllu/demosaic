@@ -5,8 +5,8 @@ The versioned study below retains its measured results and original protocol.
 
 The transferred publisher default retains substantial grain in both photos and
 the GFX sky, with textured artifacts around fine structures. These selected
-views do not establish an overall improvement over V43. Keep V43 as the working
-reference and leave the active matched training unchanged.
+views do not establish an overall improvement over the study's V43 reference.
+The pilot left its contemporary matched training unchanged.
 
 [Complete source, ROI, checkpoint, noise/display metadata and audits](results/unified-ISO3200-CPU-pilot-v1.json).
 [Compatibility inspection](results/unified-demosaicing-CPU-preparation-v1.json).

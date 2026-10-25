@@ -4,8 +4,9 @@
 photos and 0.07023 dB on known-camera measured CFA versus matched V54 at the
 same step. Unseen primary is slightly higher with an interval crossing zero.
 Procedural PSNR falls while SSIM rises. Native review does not establish the
-requested detail improvement. Keep the input adapter default-off and V43
-step 2,000 as the README reference.
+requested detail improvement. The study left the input adapter off and retained
+V43 step2,000 as its reference. [Current model choices](current-model.md)
+include the later architectural and data improvements.
 [Complete results, hashes and 46 native triplets](results/dino-input-v56-review.json).
 
 This is one seed and a 1,000-step gate on the original planned 4,000-step

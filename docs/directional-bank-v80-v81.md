@@ -96,5 +96,6 @@ unresized. No tuning against standing photos or new thresholds after results.
 
 An eligible candidate still needs its own full101.996MP FP32 run, linear/sRGB16
 export/quantizer checks, native review and cold/warm timing. These development
-criteria do not prove SOTA, broad real superiority or100MP/10s. README model
-pixels stay at V43 until a stronger candidate passes review.
+criteria do not prove SOTA, broad real superiority or100MP/10s. V43 was the
+README reference during this study; [current model choices](current-model.md)
+reflect subsequent measured improvements.

@@ -212,7 +212,8 @@ All final native boards: [photos](images/spectral-original4k-native-full427.png)
 [highlights](images/spectral-original4k-native-highlights.png).
 
 No new full102MP export or timing was run for these ineligible endpoints.
-The README/default stays on V43. SOTA, decisive real-photo superiority and
+V43 was the README/default reference for this study; see
+[current model choices](current-model.md) for later improvements. SOTA, decisive real-photo superiority and
 100MP/10s remain unmet/unproven; the complete project goal remains active.
 
 A subsequent [fixed-weight component diagnosis](spectral-gate-components.md)

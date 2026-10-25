@@ -172,6 +172,7 @@ calling the policy qualified. Keep every unfavorable field and source.
 Only after that decision may a **separately frozen** actual100MP16-bit study
 proceed, with warmed and startup timings, full unquantized differences,
 linear/sRGB16 TIFF verification and exact native ROI checks. No native-context
-ratio substitutes for a whole-photo result. V43/README and production defaults
-stay unchanged throughout this qualification; broad model quality, decisive
+ratio substitutes for a whole-photo result. This qualification left its
+V43/README reference and production defaults unchanged;
+[current model choices](current-model.md) reflect later quality work. Broad model quality, decisive
 real-photo superiority and100MP/10s remain open.

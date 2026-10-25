@@ -105,7 +105,7 @@ The complete grid covers 1,176 frozen observations and 4,704 saved float predict
 | ISO12800 p95 centered camera-RGB RMS | 0.001916 | 0.001841 |
 | ISO12800 worst centered camera-RGB RMS | 0.002559 | 0.004058 |
 
-V95 improves the ADC-only tails and typical high-noise spatial RMS, but its high-noise bias tail and worst spatial error are worse. The selected magenta field retains extra nonuniformity compared with V43; V93/V94 are visibly cloudier still. This is a concrete issue to address before changing the working reference.
+V95 improves the ADC-only tails and typical high-noise spatial RMS, but its high-noise bias tail and worst spatial error are worse. The selected magenta field retains extra nonuniformity compared with V43; V93/V94 are visibly cloudier still. This is a weakness of these checkpoints; current model choices compare later improvements directly.
 
 [Native gray/orange/magenta board](images/v43-curated-original20k/color-native.png) · [Pixel/source/conditioning/checkpoint receipt](images/v43-curated-original20k/color-native.json).
 

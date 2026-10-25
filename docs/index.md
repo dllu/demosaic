@@ -38,7 +38,7 @@ updates the current guides without an old promotion gate.
 | Current model | [V114, V115 and useful alternatives](current-model.md) · [Real-camera metrics](real-camera-quality.md) · [GFX comparisons](gfx-qualitative.md) · [Q2/Sony/GFX50R](cross-camera-qualitative.md) |
 | Usage | [Commands and data conventions](usage.md) · [Linear DNG/JPEG export](dng-export.md) |
 | Data | [Reviewed90,864-source training corpus and native review](incoming-commons-quality.md), [prior Commons corpus](commons-post4557-reviewed.md), [source quality](corpus-source-review.md), [source exclusions](commons-content-overlap.md), [native RAW targets](public-raw-expansion-v2.md) |
-| Training | [Data/augmentation pipeline](training-pipeline.md), [execution/restart](training-execution.md), [V43 quality-study checks](quality-training-validation.md) |
+| Training | [Data/augmentation pipeline](training-pipeline.md), [execution/restart](training-execution.md), [current loss-pair checks](band-loss-training.md), [earlier V93–V95 engineering evidence](quality-training-validation.md) |
 | Evaluation | [Quality/noise diagnostics](evaluation.md), [natural fine detail](heldout-detail.md), [RawNIND variants](rawnind-variants.md), [noise/detail tradeoff](noise-conditioning.md), [ADC-only consistency](adc-consistency.md), [V104 color/texture projection diagnostics](v104-adc-color-projection.md), [GFX test](gfx-qualitative.md), [prepared test reserve](paired-reserved-test.md) |
 | Method research | [Research/design record](research.md) |
 | Remaining requirements | [Current completion checklist](requirements.md), [historical progress log](requirements-archive.md) |
@@ -46,6 +46,8 @@ updates the current guides without an old promotion gate.
 Per-experiment reports contain numerical evidence, source/ROI metadata,
 checkpoint hashes, noise/display settings and native triplets. Study-specific
 eligibility gates do not prevent showing useful versions or changing the current
-baseline. Timestamped historical decisions belong in the diary. Real low-ISO or
+baseline. References and decisions inside a versioned report apply to that
+study; follow [current model choices](current-model.md) for today's recommendations.
+Timestamped historical decisions belong in the diary. Real low-ISO or
 independently demosaiced references are labeled accurately. Machine receipts
 retain recorded UTC timestamps; diary filenames use America/Los_Angeles time.

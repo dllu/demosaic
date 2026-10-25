@@ -5,9 +5,10 @@ flat-color bias** on this analytic grid. Across all 588 ADC observations, its
 worst channel-mean bias falls **1,218.06→31.91 DN16**; mean bias falls
 14.46→2.57 DN16. A subsequent ADC texture check finds useful carrier gains
 and individual regressions; sites-only has smaller color-tail repair. No
-checkpoint export or recommendation change has been made. V104 remains
-the positive-noise/training baseline; V102 remains the lower-bias unprojected
-ADC alternative. [Current models](current-model.md).
+checkpoint export or recommendation change follows from this diagnostic.
+V104 was its positive-noise/training reference, with V102 the lower-bias
+unprojected ADC alternative. [Current model choices](current-model.md)
+include later quality improvements.
 
 ## Complete flat-color grid
 

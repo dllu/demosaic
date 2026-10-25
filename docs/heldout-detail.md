@@ -154,7 +154,7 @@ lower than V102 on these four-source condition means:
 
 V103 improves 4/12 PSNR cases over V102 and regresses 8; SSIM splits 6/6.
 Chroma/gradient error improve in 4/3 cases and worsen in 8/9 respectively.
-These small differences from one seed and four selected sources support retaining V102;
+These small differences from one seed and four selected sources favored V102 within that study;
 they do not override V103's nearly identical full 427-photo result.
 [Exact scores, identities, input replay and 48 actually viewed native cells](results/V103-final20000-heldout-detail-CPU-v1.json).
 

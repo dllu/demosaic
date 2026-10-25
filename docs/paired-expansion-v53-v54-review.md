@@ -7,8 +7,9 @@ The corpus remains opt-in; no model promotion follows from this first gate.
 The expanded corpus improves photo PSNR by+.09654dB[+.06749,+.13638] and
 SSIM by+.000471[+.000361,+.000572] over the matched control. Real-camera
 primary changes are mixed, with intervals crossing zero; native GFX differences
-remain subtle. **No promotion:** keep V43 step2000 as the real-photo reference
-and finish both original4000-step schedules before the next full review.
+remain subtle. This first gate retained V43 step2000 and called for finishing
+both original4000-step schedules. The linked final review completes that work;
+see [current model choices](current-model.md) for present recommendations.
 
 [Full results, source/checkpoint hashes and40 verified native triplets](results/paired-expansion-v53-v54-review.json).
 [Admission and grouping review](paired-training-admission.md).

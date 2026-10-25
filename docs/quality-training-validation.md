@@ -1,7 +1,9 @@
 # V43 quality training: validation evidence
 
-The [quality study](quality-first-training.md) keeps V43's architecture and
-separates curated membership from the fine-detail augmentation package.
+This page records the completed [V93/V94/V95 study](v43-curated-original20k-review.md),
+which kept V43's architecture and separated curated membership from the
+fine-detail augmentation package. [Current quality work](quality-first-training.md)
+uses the newer architectural baseline in [current model choices](current-model.md).
 The checks below establish engineering behavior only. Source ranking, final
 visual decisions, the production freeze and all six fresh CPU/CUDA preflights
 are complete. V93, V94 and V95 completed their 20k stages and independent
@@ -71,8 +73,8 @@ condition/CFA cells on eight validation sources, and the same worker continues
 beyond step4,000. The older parent omits 19 later configuration defaults; all
 shared fields and effective configurations match. An initial raw-dictionary
 audit failure and its corrected CPU-only check are preserved. This is a
-training diagnostic preceding the completed20k control below. Full native
-quality review remains outstanding.
+training diagnostic preceding the completed20k control below. The linked final
+20k report now includes full native quality review.
 
 The [completed V93 control](results/v43-quality-V93-completed-training-v1.json)
 now records 20,000 optimizer/training forwards, 160 validation forwards and

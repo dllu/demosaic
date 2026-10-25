@@ -110,5 +110,6 @@ Only original4000 endpoints can enter the required full FP32/native review.
 Reports must include at least two native noisy/restored/GT triplets per model
 and the standing GFX sky/building/foliage/fence plus sign/platform comparisons,
 with independent real-photo references labeled accurately. Protected-final
-scenes stay closed. V43 and its README crops remain the working evidence;
+scenes stay closed. V43 and its README crops were the reference at this stage;
+[current model choices](current-model.md) reflect the later completed reviews.
 SOTA, decisive real-photo superiority and100MP/10s remain unmet/unproven.

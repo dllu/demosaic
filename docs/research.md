@@ -44,8 +44,8 @@ retains structure and grain while losing high-noise PSNR. Scaling DINO offsets
 or substituting Wiener/self/clean-oracle previews gives no consistent gain.
 This is a fixed-weight result, not a trained-backbone/fusion ablation; the
 unavailable clean-image oracle is never a candidate method. Current quality
-work now continues from V112 on the further-cleaned corpus; its material,
-full quality panels and complete-frame review are finished.
+work now continues from V114 on the further-cleaned corpus; the V112-derived
+Tiny/Small material, full quality panels and complete-frame review are finished.
 
 The [larger frozen ConvNeXt check](convnext-small-capacity.md) now pins official
 Small weights and verifies compatible native feature shapes. A direct backbone
@@ -82,8 +82,8 @@ The [contrast-normalized band diagnosis](contrast-normalized-band-supervision.md
 reuses all 108 saved training predictions with the current .0003 scale. Its
 normalized 3–9 band term increases faint-detail correction per gradient norm
 by 11–15%; finer-band gains are smaller. Independent derivatives pass without
-new model calls. It is a later training candidate, with no trained-quality
-claim or change to the active Tiny/Small comparison.
+new model calls. The V117/V118 pair now tests it in matched full training;
+trained quality remains pending after the completed Tiny/Small comparison.
 Its [optional trainer implementation and V112 parameter check](contrast-normalized-band-supervision.md#optional-training-implementation)
 now pass CPU/API checks. Parameter alignment is mixed, including two faint
 high-noise declines. The completed data trials keep weight zero; the active

@@ -111,9 +111,9 @@ binds finite115/115/24 states, exact common V63 model/EMA bytes,176 recorded
 input pairs,161 domain/LR logs and final RNG against historical V90.
 Checkpoint SHA is `fa0825f7b5f33482953714a99741eec30d21362b81d9574d836086cabfb81908`.
 Both training owners have exited; the boundary and known-camera stages complete,
-with unseen evaluation actually running at the recorded handoff. Full inference,
-actual native viewing and the final quality decision remain pending. The
-working model and README stay V43.
+with unseen evaluation running at the recorded handoff. Full inference, actual
+native viewing and the final decision were pending then; the final report below
+now completes them. [Current model choices](current-model.md) include later work.
 
 The [first actual native-view report](late-rgb-head-only-interim-native.md)
 now records30 viewed cells from the fixed photo, known and unseen examples,

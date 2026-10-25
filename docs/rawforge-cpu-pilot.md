@@ -5,8 +5,10 @@ small CPU pilot does not justify replacing V43. Both remove noise and lose
 fine parachute cords. The JDD variant retains more fence/foliage structure than
 JDD256, with more residual grain; neither resolves every GFX detail. Their two
 synthetic-photo scores are below saved V43 on the same observations and ROI.
-**Keep V43. The [original-export GPU follow-up](rawforge-original-gpu-review.md)
-now passes the fixed no-autocast parity bound and reviews all 24 new triplets.**
+The pilot retained V43 as its reference. The
+[original-export GPU follow-up](rawforge-original-gpu-review.md) passes the
+fixed no-autocast parity bound and reviews all24 new triplets.
+[Current model choices](current-model.md) include later improvements.
 
 [Complete source, weights, input, crop and audit receipts](results/rawforge-cpu-pilot.json).
 The [CPU renderer preparation](results/rawforge-original-gpu-render-queue.json)

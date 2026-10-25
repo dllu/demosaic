@@ -7,7 +7,7 @@ The genuine Nonlocal Match-Filter reference is callable from the photographic,
 paired-RAW, analytic and GFX evaluators. Its CPU outputs reproduce the earlier
 [two-photo probe](nonlocal-matchfilter-cpu-probe.md) bit for bit. The new standing
 GFX crops show a different grain/detail tradeoff, without establishing a broad
-winner or replacing the V43 README reference.
+winner over the V43 reference used in this study.
 [Complete loader, test, preflight and native-review evidence](results/nonlocal-reference-integration-cpu.json).
 
 This remains the authors' released **RAW denoiser followed by independent Malvar**,

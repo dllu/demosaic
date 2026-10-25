@@ -267,8 +267,8 @@ The [complete seven-stage review](results/v95-palette-complete-quality-review-v1
 binds all 17,824 joint/DINO forwards, independent audits and actual viewing of
 all 96 native triplets as 132 displayed cells. All main workers and controller
 exited. No checkpoint selection, output correction or schedule extension is
-used. Keep V43 as reference and address valid-source color/low-noise failures
-while retaining V95's recovered weak-detail response. Difficult evaluation
+used. This review retained V43 as its reference while identifying color/low-noise
+failures alongside V95's recovered weak-detail response. Difficult evaluation
 sources remain in the panel and outside training. Speed work stays deferred.
 
 These results do not establish SOTA, broad unknown-scene superiority over

@@ -1,9 +1,10 @@
 # Completed V84/V85 original20k native-data comparison
 
-**V84 is the current quality and training baseline; V85 is a closely matched alternative.**
+**V84/V85 established the architectural family used by the current models.**
 Both reach about36.44dB on the fixed photographic panel, roughly1.54dB above
 V43, with improved unseen-camera means and reduced bright-magenta mottling
-versus their V63 parent. [Current choices and native comparisons](current-model.md).
+versus their V63 parent. Later cleaned-data/loss continuations improve this
+family further; see [current choices and native comparisons](current-model.md).
 
 The specific addition of22 native captures has little matched effect:
 expanded−control photo PSNR is **−.00422 [−.00995,+.00310]dB**. The original

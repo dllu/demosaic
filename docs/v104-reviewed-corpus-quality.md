@@ -1,6 +1,7 @@
 # V104: larger-corpus continuation and measured quality tradeoffs
 
-**Current baseline: [V112](v112-quality.md).** This page retains the completed V104 larger-corpus study and its original evidence.
+**[Current model choices](current-model.md).** This page retains the completed
+V104 larger-corpus study and its original evidence.
 
 **V104 was the working baseline for positive-noise captures and continued
 quality training.** Its full 427-photo mean rises by **.12134dB to 36.80085dB**, with higher

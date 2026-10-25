@@ -4,7 +4,8 @@
 PSNR/SSIM scores trail retained V43 and V63. The real-photo views have more
 texture in foliage and fencing, alongside more grain and fine diagonal texture
 in the sky. Fine canopy cords and cloud detail remain missing. The reference
-stays isolated; the running V86/V87 context experiment continues unchanged.
+stays isolated. The [V86/V87 context review](training-context-original4k-review.md)
+is complete; [current model choices](current-model.md) include later improvements.
 
 [Complete source, checkpoint, arrays, arithmetic, native-view and publication
 record](results/RAM-CPU-pilot-v1.json).
@@ -114,4 +115,5 @@ the captures and siblings remain outside training.
 
 This is a selected six-observation reference comparison, without training,
 full-suite uncertainty, full-frame export or a speed benchmark. It does not
-establish SOTA or broad real-photo superiority. README remains on V43.
+establish SOTA or broad real-photo superiority. V43 was the README reference
+when this pilot was reviewed.

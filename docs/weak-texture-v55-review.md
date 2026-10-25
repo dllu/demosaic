@@ -4,8 +4,10 @@
 V55 loses 0.07101 dB on 427 natural photos and 0.06509 dB on known-camera measured
 CFA. Weak-carrier gains are mixed and native crops show no clear improvement.
 Flat residual noise is slightly lower, so these results do not show a simple
-texture-for-noise tradeoff. Keep the weak source default-off and the V43
-step 2,000 README reference. [Complete results, hashes and 46 native triplets](results/weak-texture-v55-review.json).
+texture-for-noise tradeoff. This first-gate decision retained V43 step2,000 and
+left weak sources off in that recipe. Later recipes use reviewed weak-detail
+data; see [current model choices](current-model.md) and [training](quality-first-training.md).
+[Complete results, hashes and 46 native triplets](results/weak-texture-v55-review.json).
 
 This is one seed and a first 1,000-step checkpoint on an unchanged planned 4,000-step
 schedule, not a convergence result or a universal rejection of weak textures.

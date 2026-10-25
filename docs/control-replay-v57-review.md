@@ -86,7 +86,8 @@ These are descriptive differences against the second control, not new matched
 training trials or corrected causal estimates. They do not establish V55/V56
 benefit or prove that all their deficits come from numerical variation. Both
 remain unpromoted, with single-seed limitations. Future small-gain claims need
-stronger repeatability evidence. Keep V43 step 2,000 and its README crops.
+stronger repeatability evidence. This study retained V43 step2,000 and its
+README crops; [current model choices](current-model.md) reflect later reviews.
 
 At level 0.18, 2% peak contrast and ISO12800 prior, signed analytic carrier gain
 averaged over four CFA layouts × four draws (1 is exact recovery):

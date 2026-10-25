@@ -108,7 +108,8 @@ Reports include at least two identical-ROI native 160 noisy/restored/exact-GT
 triplets per checkpoint, source/conditioning/exposure/checkpoint hashes and
 attribution, without resizing. Inspect standing GFX sky/building/foliage/fence
 plus sign/platform, accurately labeling the different-ISO/aperture/time AHD
-references. Keep representative README images on V43 unless a stronger model
-is fully verified. Only eligible checkpoints get a separately bounded full
+references. V43 supplied the representative README images during this study;
+[current model choices](current-model.md) reflect subsequent reviews.
+Only checkpoints eligible under this study's protocol get a separately bounded full
 101.996MP FP32/RGB16/export/native/timing check. Protected-final scenes stay
 closed. Neither engineering nor training completion satisfies PROMPT.md.

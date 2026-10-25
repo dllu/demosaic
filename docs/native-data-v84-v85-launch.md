@@ -23,9 +23,11 @@ The complete [original20k quality and native review](native-data-original20k-rev
 has now finished. Expanded−control photo PSNR is −0.00422dB, with a source95%
 interval spanning zero. Both arms fail known-camera eligibility and both weak
 carrier gain requirements; four ADC layout/draw contrasts exceed the declared
-loss ceiling. All eight final boards were actually viewed. Neither arm is
-promoted or extended, and the README remains on V43. The earlier progress checks
-below retain their original engineering scope.
+loss ceiling. All eight final boards were actually viewed. Those original
+study-specific gates do not erase the useful gains over V43/V63: the final
+review establishes the V84 architectural family used in
+[current model choices](current-model.md). The earlier progress checks below
+retain their original engineering scope.
 
 Both discarded engineering checks passed 16 actual updates per arm, using the
 original20k schedule. CPU used B1/native64/FP32; CUDA used the intended
@@ -89,7 +91,8 @@ references, including the737 data/provenance inputs and engineering receipts.
 [Dated live-owner launch snapshot](results/native-data-v84-v85-launch-v1.json).
 Each arm must pass the declared memory and disk gates. Runs are serial,
 with no automatic retry, extension or promotion. Final quality and native crop
-reviews have completed as linked above; the README stays on V43.
+reviews have completed as linked above. Current recommendations follow the
+measured strengths and weaknesses in the model guide.
 
 The retained control 10k checkpoint now passes a
 [read-only midpoint engineering audit](results/native-control-retained10k-engineering-v1.json)

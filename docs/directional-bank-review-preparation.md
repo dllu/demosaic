@@ -110,8 +110,9 @@ analytic comparisons; see the complete report.
 
 The complete report includes two small100% noisy/restored/exact-GT triplets per checkpoint,
 plus cached DSCF3879/3880 sky/building/foliage/fence/lights with independent ISO100
-labels. The protected-final split remains closed. The existing V43 README pixels
-remain unchanged; full-frame export and timing require separate eligibility.
+labels. The protected-final split remains closed. V43 README pixels were
+unchanged during this study; full-frame export and timing required separate
+eligibility. [Current model choices](current-model.md) reflect later reviews.
 
 The [report-asset packager](bank-report-assets.md) completed after the exact
 review/closure/reference owners exited. Its byte-identical PNGs and metadata

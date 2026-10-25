@@ -1,6 +1,7 @@
 # V102/V103: completed detail-diversity comparison
 
-**Current baseline: [V112](v112-quality.md).** The V102/V103 study below remains a separately scoped reference.
+**[Current model choices](current-model.md).** The V102/V103 study below retains
+its measured checkpoints, comparisons and original evidence.
 
 **V102 final20k is the preferred result of this six/32-ROI study.** The
 [later V104 study](v104-reviewed-corpus-quality.md) adds a further photographic
