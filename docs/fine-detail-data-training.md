@@ -1,6 +1,9 @@
 # Fine-detail data trial: V116 versus matched Tiny V114
 
-**V116 has completed its original20,000 updates; full quality evaluation is running.**
+**V116's original20,000 updates and complete quality/native review are finished.**
+Its tested eight-pixel weak-carrier gain improves, but broad weak natural-detail
+gain does not, photo/unseen-CFA means fall slightly and ADC color tails worsen.
+V114 retains the better general balance. [Complete results and native comparisons](v116-quality.md).
 The exact original owner and worker exited successfully, with20,000 prepared
 batches, training/encoder calls and optimizer steps, plus640 validation calls.
 [Completed training audit](results/v116-training-complete-v1.json) ·
@@ -8,7 +11,7 @@ batches, training/encoder calls and optimizer steps, plus640 validation calls.
 weak-texture sources and reviewed paired-reference masks with the same V112
 Tiny architecture, parent, seed, schedule and 20,000-update budget as completed
 V114. V114's completed evaluation supplies retained control outputs; its training
-and evaluation are not repeated for V116. V116 has no trained-quality result yet.
+and evaluation were not repeated for V116.
 V114 is the current general baseline after [complete Tiny/Small review](v114-v115-quality.md).
 V116 retains its original explicit V112 parent and matched control.
 
@@ -100,21 +103,21 @@ prediction/loss must match the original common V114 starting function and then
 the candidate's own discarded check. Logged controls cover 801 production rows;
 unlogged production tensors are not independently verified in full.
 
-A separate evaluator has started on that exact completed V116 checkpoint.
-It makes **4,586 new model/encoder calls**, retaining FP32 predictions and
+A separate evaluator completed that exact V116 checkpoint with
+**4,586 new model/encoder calls**, retaining FP32 predictions and
 supervision for all **14,190 numerical observations**, plus six standing GFX
-contexts and a complete 102MP export. The independent CPU audit is queued too;
-it prepares at least two native noisy/restored/exact-GT material triplets.
+contexts and a complete102MP export. The independent CPU audit checked all
+numerical observations and prepared two native noisy/restored/exact-GT material triplets.
 Real GFX references remain approximate and include foliage/fence.
 
 The evaluator handles a declared single candidate, so existing V114/V115,
 V112 and stronger RawNIND controls need no repeat inference. A dedicated
-[matched comparison is now queued](results/v114-v116-matched-comparison-queued-v1.json)
-after both exact independent-audit owners. It pairs all 14,190 retained V114/V116
+[matched comparison completed](results/v116-quality-complete-v1.json)
+after both exact independent-audit owners. It pairs all14,190 retained V114/V116
 observations; the candidate audit also reports against existing V112/RawNIND controls.
-Actual material/GFX viewing and comparison of strengths and weaknesses remain
-required. No statistical promotion rule or automatic recommendation change is
-introduced.
+Actual material/GFX viewing is complete; the [report](v116-quality.md) compares
+strengths and remaining weaknesses directly. Original
+[queue receipts](results/v114-v116-matched-comparison-queued-v1.json) stay preserved.
 
 The read-only endpoint audit checks all801 logged batches against V114:
 **520 unchanged input hashes match exactly;281 changes match the declared data
@@ -135,12 +138,15 @@ audit uses the mapping in the frozen trainer. Both source/log versions are
 preserved, with zero new model calls.
 
 A separate [local-detail archive audit](local-material-detail.md#full-photo-follow-up)
-is now waiting after that original comparison. It stratifies all427 photos by
+completed after that original comparison. It stratifies all427 photos by
 GT local fine contrast, using5124 saved paired observations across three noise
 priors and four CFAs. This broadens the earlier two-source weak stratum without
 new inference or noise generation. The full archives' own GT/inputs must match
 exactly between V114/V116; old CPU-pilot scores are kept separate. Its original
-training and review dependencies are unchanged; quality remains pending.
+training and review dependencies remain preserved. The weakest high-noise group
+spans326 photos/15,008 unique blocks and has nearly identical projected gain:
+.36334 for V114 versus.36302 for V116. The analytic carrier gain does not
+transfer to broad weak natural detail.
 
 ## Matched saved-output comparison
 
@@ -181,12 +187,12 @@ The two native material columns were actually viewed. This is **engineering
 readiness, not V114/V116 quality evidence**. It adds zero neural/encoder calls,
 optimizer updates, noise observations or RAW decodes.
 
-The waiting comparison requires 8 GiB available RAM and 2 GiB output headroom.
-It writes a reviewable Markdown report, bound numeric results and native images
-inside its frozen workspace. Existing six owners and sources remain unchanged.
+The comparison declared8GiB available RAM and2GiB output headroom. It wrote a
+reviewable Markdown report, bound numeric results and native images inside its
+frozen workspace. All original owners, sources and receipts remain preserved.
 Failures preserve evidence and stop without automatic retry. Actual viewing and
-publication of useful measured gains/weaknesses follow when results are ready;
-there is no statistical gate freezing the model choice.
+publication are complete; measured gains/weaknesses are documented without a
+statistical gate freezing the model choice.
 
 New training/evaluation artifacts stay in internal SSD caches. Phase starts
 require 128 GiB internal free / 48 GiB available RAM, with a 96 GiB internal

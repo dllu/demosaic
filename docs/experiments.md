@@ -5,9 +5,9 @@ Its full-photo mean is36.97973dB, +.07735 over V112, with422/427 source means
 rising. V115 fitted Small has higher known-camera quality and eight-pixel weak
 response, while Tiny has slightly higher photo PSNR and lower color bias.
 [Completed panels, native comparisons and full exports](v114-v115-quality.md).
-Fine foliage/neon and dark-camera mottling remain weak. [V116 has completed training](fine-detail-data-training.md)
+Fine foliage/neon and dark-camera mottling remain weak. [V116 has completed full review](v116-quality.md)
 to test fine weak sources and reviewed reference masks against matched V114;
-full quality evaluation is running.
+eight-pixel carrier gain rises, but broad weak-material gain is unchanged and ADC tails worsen.
 The [current V114 eight-view pilot](v114-eight-view.md) improves all12 fixed
 material cases and both selected camera crops, with a small selected color-bias
 tradeoff; independent/native review is complete and full panels/frame remain
@@ -87,10 +87,11 @@ gap in dedicated weak textures, while sampled photo/native targets contain
 fine-frequency energy. The optional fine profile passes reader and actual V112
 CPU training checks but has no trained-quality result and does not change the
 completed Tiny/Small recipes.
-The [V116 trial](fine-detail-data-training.md) has completed training after that review,
+The [V116 trial](v116-quality.md) has completed full review after that comparison,
 combining the fine profile and reviewed paired masks while reusing completed
 V114 as its matched Tiny control. Native256 mask-path/source/loss and actual
-CUDA checks pass. Single-candidate evaluation is running; independent review is queued.
+CUDA checks, complete evaluation, independent metrics and native review pass;
+its analytic gain does not establish better natural-detail quality.
 
 The source scan covers88,508 training images, with570 actually reviewed and 31
 withheld/excluded. Completed runs used the earlier 24 exclusions; seven more and

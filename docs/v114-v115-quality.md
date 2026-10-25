@@ -150,9 +150,10 @@ SHA256 values:
 * V115: `fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84`.
 
 The [V116 data trial](fine-detail-data-training.md) passed its eight discarded
-CUDA updates and completed the original20k run. Its full quality evaluation is
-running. It tests fine weak sources
+CUDA updates and completed the original20k run and [full quality review](v116-quality.md).
+It tests fine weak sources
 and reviewed paired-reference masks against completed V114, preserving the
-original matched parent/seed/budget. Its source-frozen training and evaluation
-queues remain unchanged by this recommendation. Quality and native review are
-pending; reducing fine-detail loss remains the priority before speed work.
+original matched parent/seed/budget. All executed sources and receipts remain
+unchanged. Its analytic eight-pixel response improves,
+but broad weak-material gain does not and ADC tails worsen. Reducing fine-detail
+loss remains the priority before speed work.

@@ -19,11 +19,11 @@ high whole-patch gain. Averaging lowers weak-group residual error but slightly
 lowers gain too. This is exploratory evidence for a remaining quality problem,
 not a validated training intervention; V116 remains unchanged.
 
-The [V116 data trial](fine-detail-data-training.md) has completed its original20k
-run after the eight-update CUDA check; full quality evaluation is running.
-It tests fine weak sources and reviewed
-paired masks against the exact completed V114 control, preserving its original
-V112 initializer and matched budget. Trained quality is pending. The design
+The [V116 data trial](v116-quality.md) has completed its original20k run and
+all numerical/native/full-frame review. It raises the tested eight-pixel weak
+carrier gain, but has slightly lower photo/unseen-CFA means, unchanged broad
+weak-material response and a worse ADC color tail. V114 retains the better
+general balance. Same V112 initializer and matched budget remain verified. The design
 record below retains explicitly named older checkpoints and measurements.
 
 The current [V104 conditioning study](noise-conditioning.md) repeats the
@@ -86,11 +86,12 @@ The [clean-target frequency audit](fine-weak-texture-coverage.md) finds fine-ban
 energy in sampled photographs/native targets, but almost none around four-pixel
 structures in the dedicated weak generators. The optional fine profile adds
 coverage within that quota and passes reader and real-model CPU training checks.
-Its trained quality is pending; the completed Tiny/Small recipes retain their legacy profile.
-The [V116 data comparison](fine-detail-data-training.md) has completed training,
-combining the fine profile with reviewed paired-reference masks and reusing
-completed V114's equal-budget Tiny control. Native mask-path/default compatibility
-and actual CUDA checks pass; trained quality remains pending.
+The completed Tiny/Small recipes retain their legacy profile.
+The [V116 data comparison](v116-quality.md) combines the fine profile with
+reviewed paired-reference masks and reuses V114's equal-budget Tiny control.
+All checks/review are complete. Its analytic carrier tradeoff does not transfer
+to a broader weak-material gain; the worse ADC tail and similar native softness
+remain explicit.
 
 The [optional eight-view inference study](dihedral-quality.md) now measures
 uniform averaging of exact sensor rotations/reflections with the same V104
@@ -375,8 +376,8 @@ the current V112/V114/V115 quality recipes as part of the tested fine-detail
 package. The [negative/mixed V55 first gate](weak-texture-v55-review.md) remains
 an earlier architecture-specific result. The new
 [fine-frequency profile](fine-weak-texture-coverage.md) stayed disabled in those
-completed recipes. V116's matched trained-quality evaluation is running, including
-flat-region false-detail checks and complete numerical/native/GFX review.
+completed recipes. V116's matched trained-quality review is complete, including
+flat-region false-detail checks and complete numerical/native/GFX viewing.
 
 ## Learned input adaptation candidate
 

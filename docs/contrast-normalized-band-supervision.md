@@ -6,7 +6,7 @@ contrast ×.025, its median corrective slope rises 17–19% while total gradient
 norm rises 3–5%, relative to epsilon .0003. This is a loss diagnosis, with no
 new trained model or restored-quality claim. V114 is the current general baseline
 after the [completed Tiny/Small comparison](v114-v115-quality.md). The term stays
-off in the completed V116 training run; its full quality evaluation is running.
+off in the [completed V116 data trial](v116-quality.md).
 
 ![Corrective slope per gradient magnitude on saved V102 predictions](images/band-supervision-gradients/band-gradient-response.png)
 
@@ -202,7 +202,7 @@ observed raw-gradient concern.
 
 The normalized term remains a candidate for a later matched training comparison.
 It stays off given the mixed parameter response and unmeasured trained quality;
-the [V116 trial](fine-detail-data-training.md), now in full evaluation, tests data coverage and
+the [completed V116 trial](v116-quality.md) tests data coverage and
 reviewed reference masks alone. GPU qualification of a nonzero band term is still
 required before a new production run.
 This diagnosis does not show how network gradients, generalization, flat-field

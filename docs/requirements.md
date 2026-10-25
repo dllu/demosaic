@@ -19,17 +19,17 @@ the GFX gallery do not establish broad real-camera superiority. Quality precedes
 | 16-bit/full-resolution output | Both101.996MP linear/sRGB RGB16 exports rehashed/reopened;921,600 native channel values match original quantization | Preserve per-checkpoint precision/quality evidence |
 | 100MP within10s on GB10 | Ordered Tiny/Small FP32 observations116.57/101.66s, not a controlled speed ranking | Target open; improve quality before speed work |
 | Modern DINOv3 architecture | V84-family DRUNet and official frozen Tiny/Small pyramids; completed matched trained comparison | Retain useful gains and improve finer detail |
-| Diverse clean targets and binning |90,864 reviewed sources;4×→geometry→area2, zero optical blur, six ROIs, weak textures/photo contrast | V116 fine-source/reference-mask quality remains unmeasured |
+| Diverse clean targets and binning |90,864 reviewed sources;4×→geometry→area2, zero optical blur, six ROIs; completed V116 fine-source/mask comparison | Broader weak natural-detail recovery remains poor |
 | Physical noise/camera/color | Poisson/read noise, signed black subtraction, all Bayer phases, WB/matrix and exposure/clipping; Tiny ADC/high-noise max bias51.73/85.40DN16 | Spatial dark-field/weak-detail failures remain |
-| Resource-aware training and evaluation | Exact source/parent snapshots and retained failures; completed Tiny/Small panels plus V116's20k training audit | Finish V116's running full evaluation and inspect its complete saved-output review |
+| Resource-aware training and evaluation | Exact source/parent snapshots and retained failures; complete V114/V115/V116 numerical, native and RGB16 review | Improve real-photo/detail quality using the measured failures |
 | Protected originals/tests | Local GFX3879/3880 cache; originals read-only; standing scene/siblings outside training;16-scene test reserve unscored | Preserve boundaries in future cohorts |
-| Current documentation |48 completed primary endpoints in plot; native triplets and GFX comparisons with metadata; local-time diary | Update useful results without promotion freezes |
+| Current documentation |49 completed primary endpoints in plot; native triplets and GFX comparisons with metadata; local-time diary | Update useful results without promotion freezes |
 
-The [V116 data trial](fine-detail-data-training.md) passed its eight discarded
-CUDA updates and completed its original20k run. Its matched Tiny control is V114;
-the original V112 initializer/seed/budget stay fixed. A single-candidate evaluator
-is running; independent audit and direct saved-output comparison are waiting downstream.
-Trained quality and actual native review remain pending. A separate
+The [V116 data review](v116-quality.md) is complete at its original20k endpoint.
+Its matched Tiny control is V114; the original V112 initializer/seed/budget stay
+fixed. All numerical/native/full-frame checks pass. Higher analytic eight-pixel
+response does not yield broader weak natural-detail improvement; ADC color
+tails worsen. A separate
 [V114 eight-view pilot](v114-eight-view.md) is complete on24 saved observations,
 improving selected material/camera scores with a color-bias tradeoff. Its full
 panels/frame remain unmeasured; it does not close broad real-quality or speed goals.

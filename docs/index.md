@@ -15,10 +15,10 @@ and complete102MP RGB16 exports are finished for both endpoints. Fine foliage,
 neon detail and camera mottling remain weak; broad real-camera superiority
 and100MP/10s remain goals. [GFX gallery](gfx-qualitative.md).
 
-The [V116 data trial](fine-detail-data-training.md) has completed20,000 updates,
-and its full quality evaluation is running. It tests fine weak sources and reviewed paired-reference masks
-against completed Tiny V114. Its frozen parent/seed/budget and source/receipt
-evidence remain intact. Trained quality is pending.
+The [completed V116 data comparison](v116-quality.md) raises tested eight-pixel
+weak-carrier gain, but does not improve broad weak natural detail and worsens
+the ADC color tail. Complete metrics, native triplets, six GFX regions and RGB16
+checks are published. V114 retains the better overall balance.
 
 Earlier [V112 loss-scale results](v112-quality.md),
 [V104 eight-view full panels](dihedral-quality.md), [V112 eight-view pilot](v112-eight-view.md),

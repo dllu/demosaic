@@ -107,13 +107,15 @@ the maximum absolute coefficient difference is1.41e-14. A closed-form fixture
 recovers gain.75 and orthogonal RMS.0001, with independent spatial Parseval
 verification. Target fingerprints match across all three conditions. The actual
 frozen script, plan, all2700 block records and original outputs are retained.
-Torch is never imported. V116's original training, recipe and queued complete
-review remain unchanged; its quality is still pending.
+Torch is never imported. V116's original training and recipe remain unchanged;
+its [complete trained-quality review](v116-quality.md) is now available.
 
 ## Full-photo follow-up
 
-An [additive archive audit is queued](results/local-detail-archive-queued-v1.json)
-after the exact original V114/V116 matched-review owner. It applies the same
+The [additive archive audit is complete](results/v114-v116-local-detail-v1.json)
+after the exact original V114/V116 matched-review owner. Its
+[original queue receipt](results/local-detail-archive-queued-v1.json) remains preserved.
+It applies the same
 GT-only local definitions to **all427 photographic sources**, three noise
 priors and four Bayer phases:5124 paired source/condition/CFA observations,
 with96075 unique16px source blocks. The16 analytic sources in the full suite
@@ -132,8 +134,37 @@ Nine tests cover closed-form gains, CFA/source pooling, changed physical inputs,
 targets, missing fields, duplicate rows and unsupported policies. A completed
 readiness check also joins48 genuine retained V114 observations across all four
 CFAs, with exactly zero self-differences in15 summary groups. Explicit cosine
-and FFT coefficients agree within1.47e-14. This proves engineering readiness;
-V116 quality and broader weak-detail results are pending.
+and FFT coefficients agree within1.47e-14. That proves engineering readiness;
+the actual full audit then checked2,401,875 block transforms, with maximum
+explicit-cosine/even-FFT difference1.83e-14. Execution took40.79s without Torch,
+neural inference, noise generation or RAW decoding.
+
+The weakest stratum now contains **326 contributing photos and15,008 unique
+GT blocks**. These counts describe independent source/block support; the four
+CFAs and three noise priors reuse the same GT blocks. Source-balanced gains are:
+
+| Noise prior, weakest GT relative band RMS below2% | V114 | V116 |
+| --- | ---: | ---: |
+| ADC-only | .94581 | .94688 |
+| ISO100 | .78329 | .78293 |
+| ISO12800 | .36334 | .36302 |
+
+At ISO12800, the complete contrast stratification is:
+
+| GT local band contrast | Unique eligible GT blocks | Photos | V114 gain | V116 gain |
+| --- | ---: | ---: | ---: | ---: |
+| Below2% | 15,008 | 326 | .36334 | .36302 |
+| 2–5% | 6,946 | 374 | .68485 | .68441 |
+| 5–10% | 9,712 | 412 | .85959 | .85933 |
+| 10–20% | 18,864 | 423 | .93385 | .93374 |
+| At least20% | 35,679 | 425 | .96866 | .96865 |
+
+V116's weakest high-noise band-error RMS is.00318291 versus V114's.00318289;
+orthogonal RMS falls slightly from.00198759 to.00198121. Its larger analytic
+eight-pixel carrier gain does not produce a broader weak natural-detail gain.
+The older four-source/eight-view pilot remains separate: policy, targets,
+sampling and source support differ. No noise-debiasing, training-seed interval,
+four-pixel carrier recovery or real-camera superiority follows from this audit.
 
 A separate [unequal-coverage fixture](results/local-detail-source-weighting-proof-v1.json)
 gives two sources225 versus15 eligible blocks, with candidate gains.75 and.25.

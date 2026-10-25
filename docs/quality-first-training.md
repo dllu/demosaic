@@ -31,10 +31,11 @@ V104-derived V113 plan remains preserved without CUDA/production work.
 
 The [V116 follow-up](fine-detail-data-training.md) has completed20,000 updates
 after the Tiny/Small review and its eight-update CUDA check; full quality
-evaluation is running. It reuses V114 as the matched Tiny control, testing fine weak
+review is complete. It reuses V114 as the matched Tiny control, testing fine weak
 sources and reviewed paired-reference masks with the same parent/20k schedule.
 Native256 mask-path, data/loss compatibility and actual CUDA checks pass;
-trained quality remains pending. Tiny/Small architectural tradeoffs remain
+the [full result](v116-quality.md) raises analytic eight-pixel response but does
+not improve broad weak-material detail and worsens the ADC tail. Tiny/Small architectural tradeoffs remain
 documented independently of this fixed-architecture data comparison.
 
 A [clean-target frequency audit](fine-weak-texture-coverage.md) identifies a gap

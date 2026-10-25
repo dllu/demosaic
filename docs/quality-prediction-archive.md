@@ -173,9 +173,8 @@ model choice.
 
 ## Incremental V116 evaluation
 
-The [V116 data trial](fine-detail-data-training.md) has completed training, with
-a separate evaluator running and CPU audit queued behind that exact owner.
-It declares one new checkpoint:
+The [V116 data trial](v116-quality.md) has completed training, all eight
+evaluation stages, independent numerical audit and native review. It adds one checkpoint:
 4,586 model/encoder calls and 14,190 numerical observations, with the same
 material, analytic, camera and standing GFX/full-frame coverage. The original
 V114/V115 evaluation runs once and retains the matched V114 control outputs.
@@ -192,7 +191,7 @@ V116 outputs stay inside its frozen internal workspace. Phase starts require
 128 GiB internal free, with 96 GiB reserved at runtime and 208 GiB external free
 for the read-only input store. These new limits do not change the original
 queues' guards. The [matched V114/V116 source/scene join](fine-detail-data-training.md#matched-saved-output-comparison)
-is now queued after both exact independent audits. It checks input, target/mask
+completed after both exact independent audits. It checks input, target/mask
 and display identity, reuses the independently rebuilt metrics and prepares a
 Markdown report with native material triplets and all six full-frame GFX regions.
 No control inference is repeated. Actual native viewing remains pending before

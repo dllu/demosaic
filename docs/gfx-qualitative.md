@@ -22,6 +22,26 @@ retained ROIs exactly match FP32-to-linear-RGB16 quantization. Ordered FP32
 inference/blending observations are116.57s/101.66s; different warmup/workspace
 states prevent a speed ranking. Quality remains the priority before speed work.
 
+## Completed V116 data comparison
+
+The [V116 full review](v116-quality.md) adds the fine-source/reviewed-mask
+recipe with the same Tiny architecture and matched20k budget. Rows below are
+noisy, V114, V116 and the separate ISO100 reference. All cells are native160px
+crops from complete blended102MP frames, with common+2EV/WB/matrix.
+
+![V114/V116 full-frame building, fence and neon](images/v116-quality/matched-gfx-1.png)
+
+![V114/V116 full-frame foliage, platform and sky](images/v116-quality/matched-gfx-2.png)
+
+Both preserve coherent fence/building structure and a smooth sky. Foliage stays
+waxy and neon/platform detail soft; no clear visual improvement appears here.
+V116's analytic eight-pixel carrier gain rises, but full-photo/unseen-CFA means
+are slightly lower, broad weak natural-detail gain is unchanged and the ADC
+color tail is worse. V114 remains the general choice for that measured balance.
+ISO100 remains **approximate, not GT**. [Source/ROI/noise/weights/display receipts](images/v116-quality/manifest.json).
+Both V116 TIFFs and all six retained native ROIs pass RGB16 checks. Its113.86s
+FP32 interval is a separate timing observation, not a controlled speed gain.
+
 ## V114 eight-view context comparison
 
 The [completed fixed24 V114 pilot](v114-eight-view.md) adds all six native GFX

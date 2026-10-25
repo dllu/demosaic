@@ -4,9 +4,9 @@
 references.** A separate manifest now excludes small neighborhoods around that
 point from supervision in four registered crops. All input and intensity arrays
 retain their original bytes. The completed Tiny/Small comparison kept its pinned
-original data; the reviewed revision is selected by the [V116 trial](fine-detail-data-training.md),
-which has completed training and is undergoing full quality evaluation.
-Its effect on trained image quality is unmeasured.
+original data; the reviewed revision is selected by the [completed V116 trial](v116-quality.md).
+That combined fine-source/mask comparison has no broader weak-material gain and
+a worse ADC tail; the mask correction's isolated quality effect is unmeasured.
 
 [Scan, independent checks, native images and revised-manifest receipt](results/paired-training-reference-outliers-v1.json).
 
