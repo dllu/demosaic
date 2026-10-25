@@ -71,8 +71,8 @@ The independent ISO100 exposure is an approximate qualitative reference,
 ![V114 GFX fence: noisy, restored and separate ISO100 reference](docs/images/v114-v115-quality/V114-chain-link-fence.png)
 
 The [stronger RawNIND full-frame reference](docs/rawnind-fullframe.md) and
-[Q2/Sony/GFX50R comparisons](docs/cross-camera-qualitative.md) retain additional
-real-camera limitations. Broad real-photo superiority remains a goal.
+[current Tiny/Small Q2/Sony/GFX50R comparisons](docs/cross-camera-qualitative.md)
+show additional real-camera limitations. Broad real-photo superiority remains a goal.
 
 ## Setup and inference
 

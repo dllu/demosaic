@@ -18,6 +18,11 @@ set, not training-repeat/general-camera uncertainty. AHD RGB is not exact GT.
 [Full comparisons, hashes, intervals and native evidence](v114-v115-quality.md) ·
 [Current choices](current-model.md) · [GFX gallery](gfx-qualitative.md).
 
+The separate [Q2/Sony/GFX50R gallery](cross-camera-qualitative.md) now shows
+V114/V115, V104 and both RawNIND variants. These six fixed low-ISO regions have
+no clean reference or pixelwise score. Tiny/Small look close; soft shadows and
+window edges remain, while concrete texture looks finer than both RawNIND variants.
+
 ## Earlier checkpoint-specific panels
 
 **V111 recovers part of V104's unseen-camera loss, with a small known-scene

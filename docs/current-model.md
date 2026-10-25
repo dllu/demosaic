@@ -42,6 +42,12 @@ The architecture retains V84's pretrained DRUNet RGB trunk, physical
 noise/camera conditioning and official frozen DINOv3 ConvNeXt-Tiny pyramid.
 [Inference and linear DNG/JPEG usage](usage.md).
 
+The [Q2/Sony/GFX50R gallery](cross-camera-qualitative.md) now compares both
+current models with V104 and both released RawNIND variants on the same cached
+inputs. Version differences are small in these six low-ISO regions; dark rocks
+and window edges stay soft. Concrete texture looks finer than RawNIND, with no
+clean reference establishing every fluctuation as real detail.
+
 V114 adds20k updates to the V112 EMA at seed63, using90,864 reviewed Commons
 sources, native128/paired32 targets,4×→geometry→area2, zero optical PSFs,
 weak textures and photographic contrast attenuation. Reconstruction epsilon

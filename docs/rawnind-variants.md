@@ -73,7 +73,7 @@ scene means declining. Width48 minus pre-upsampled is −.27265/−.19980 dB,
 intervals [−.30529,−.24002]/[−.31024,−.06174], with eight of nine scenes declining.
 The wider checkpoint does not replace the stronger pre-upsampled comparator.
 
-## Current V112 camera comparison
+## V112 camera reference
 
 V112 minus pre-upsampled RawNIND is **+.00846dB known / +.08850dB unseen**,
 with 2/4 and 3/5 scene means improving. Exact empirical scene-resampling95%
@@ -88,8 +88,8 @@ Known/unseen refer to our training membership. V112 still loses on D60-2
 (−.11473dB), MuseeL-CopteArch-C500D (−.54382), LucieB_Coulicoco (−.46431)
 and LucieB_top_of_Expedit (−.16024). Its larger gains on plates, tapestry and
 other scenes do not remove those weaknesses. These four scenes remain useful
-checks for the active Tiny/Small comparison, whose endpoint archives retain
-every numerical prediction for later native review.
+checks for the [completed Tiny/Small comparison](v114-v115-quality.md), whose
+endpoint archives retain every numerical prediction and completed native review.
 
 [All scene values and standalone SVG](images/current-detail-reference/camera-figure.json) ·
 [Score/input joins and independent checks](results/v112-strong-reference-current-v1.json).
@@ -155,6 +155,12 @@ The [complete pre-upsampled GFX restoration](rawnind-fullframe.md) now supplemen
 these context views. It uses the same six native regions and CFA-channel policy;
 V104 retains more regular mesh, and fine foliage remains unresolved. Its full
 RGB16 exports and retained float crops are separate from the earlier pilot.
+
+The [current Q2/Sony/GFX50R gallery](cross-camera-qualitative.md) also includes
+pre-upsampled RawNIND alongside the half-resolution version, V104 and V114/V115.
+Both reference variants remain coarser on the selected concrete surface;
+dark rocks and window edges stay soft across methods. All36 native cells were
+viewed. These additional captures have no clean reference or pixelwise scores.
 
 The [two adverse Canon EOS M100 fields](images/rawnind-three-variants-current/camera/comparison.png)
 retain the source and ROI selection made before evaluating the new variant.
