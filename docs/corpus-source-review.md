@@ -1,11 +1,12 @@
 # Training-source quality review
 
 Source quality decisions support the current [V84-based quality experiments](quality-first-training.md).
-A [source-family follow-up](next-source-tail-review.md) inspects and withholds 45
-additional flat reproductions, preparing a separate 90,802-source next cohort.
-The preceding 123-source review retained 108 hard photos and withheld 15.
-Every active source in each original global top256 loss list has been inspected.
-The cumulative earlier-pool ledger covers 768 sources: 675 retained and 93
+A [top512 source review](next-source-tail-review.md) inspects 290 more sources,
+retains 279 and withholds 11, preparing a separate 90,791-source next cohort.
+Four new withholds have unreliable clean-photo texture; seven are
+reproduction/composite/visualization targets. Every active source in each
+original global top512 loss list has been inspected.
+The cumulative earlier-pool ledger covers 1,058 sources: 954 retained and 104
 outside training. The current V117/V118 pair keeps its frozen
 90,864-source cohort.
 
@@ -22,15 +23,16 @@ neither changes completed V100/V101 inputs.
 | Completed V102/V103 | 88,477 | Same exact records/order | 31 |
 | Completed V104 20k | 90,872 | Same exact records/order | Prior31 plus four incoming quality withholds; duplicate/series/protected exclusions also apply |
 | Completed V111/V112/V114/V115/V116; active V117/V118 | 90,864 | Same exact records/order | Eight additional withholds relative to V104: three photo-quality cases and five atlas reproductions |
-| Prepared next cohort | 90,802 | Same exact records/order | Prior passes withheld 17 and retained 136; latest family pass inspects and withholds 44 banknote layouts and one drawing plate |
+| Prepared next cohort | 90,791 | Same exact records/order | Prior passes withheld 62 relative to 90,864; latest 290-source pass retains 279 and withholds 11 |
 
-[Current decisions, native examples, catalogue and reader checks](results/source-quality-detail-catalogue-v3.json).
+[Earlier detailed catalogue and reader checks](results/source-quality-detail-catalogue-v3.json).
 Originals, existing manifests and protected evaluation scenes remain read-only.
 The GFX train/platform pair and siblings remain outside training.
 The optional [source-sampling reference](next-source-tail-review.md#preserve-draws-for-a-matched-curation-comparison)
-keeps unaffected photo/geometry draws exact when comparing this subset with its
-original corpus. The real native256 reader and snapshot/resume checks pass;
-current V117/V118 remain on their original frozen inputs.
+keeps unaffected photo/geometry draws exact when comparing a subset with its
+original corpus. The preceding 90,802 native256 reader and snapshot/resume checks
+pass; the latest 90,791 source-reference constructor and six-ROI checks also pass.
+Current V117/V118 remain on their original frozen inputs.
 
 The additional [3,809-source arrival batch](commons-download.md) has finalized3,807
 valid caches at both4×/8×. All39 source sheets/3,807 thumbnail contexts and61
