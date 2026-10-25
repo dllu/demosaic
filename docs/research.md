@@ -26,11 +26,13 @@ weak-material response and a worse ADC color tail. V114 retains the better
 general balance. Same V112 initializer and matched budget remain verified. The design
 record below retains explicitly named older checkpoints and measurements.
 
-The active [V117/V118 objective comparison](band-loss-training.md) now starts
-from V114. It holds corrected data/legacy weak sources, seed64 and the20k budget
-fixed while changing normalized-band weight0/.0003. Both original20k runs are
-complete. Full quality collection has started; independent/native review is pending.
-The earlier local-gradient checks do not decide trained quality.
+The [completed V117/V118 objective comparison](v117-v118-quality.md) holds
+corrected data/legacy weak sources, seed64 and20k fixed from V114. V117 improves
+photo PSNR by.06435dB with slight camera regressions; the band term lowers weak
+natural-detail response against its control and raises worst ADC bias to843.05
+DN16. Its eight-pixel analytic gain is documented alongside those weaknesses.
+Complete independent metrics, native/GFX views and full RGB16 checks support
+keeping the term off for further quality work, without freezing a model baseline.
 
 The current [V104 conditioning study](noise-conditioning.md) repeats the
 fixed-strength comparison on twelve exact-target observations and six standing
@@ -82,12 +84,13 @@ The [contrast-normalized band diagnosis](contrast-normalized-band-supervision.md
 reuses all 108 saved training predictions with the current .0003 scale. Its
 normalized 3–9 band term increases faint-detail correction per gradient norm
 by 11–15%; finer-band gains are smaller. Independent derivatives pass without
-new model calls. The V117/V118 pair now tests it in matched full training;
-trained quality remains pending after the completed Tiny/Small comparison.
+new model calls. The [completed V117/V118 pair](v117-v118-quality.md) finds a
+small eight-pixel carrier gain but lower weak natural response and a worse ADC
+tail for the added term. Local output gradients did not establish trained quality.
 Its [optional trainer implementation and V112 parameter check](contrast-normalized-band-supervision.md#optional-training-implementation)
 now pass CPU/API checks. Parameter alignment is mixed, including two faint
-high-noise declines. The completed data trials keep weight zero; the active
-V117/V118 pair now tests0/.0003 from V114 with matched full training.
+high-noise declines. The completed data trials keep weight zero; V117/V118
+completed0/.0003 from V114 at matched20k. Keep the term off for further quality work.
 
 The [clean-target frequency audit](fine-weak-texture-coverage.md) finds fine-band
 energy in sampled photographs/native targets, but almost none around four-pixel

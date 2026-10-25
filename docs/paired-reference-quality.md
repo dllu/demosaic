@@ -7,6 +7,8 @@ retain their original bytes. The completed Tiny/Small comparison kept its pinned
 original data; the reviewed revision is selected by the [completed V116 trial](v116-quality.md).
 That combined fine-source/mask comparison has no broader weak-material gain and
 a worse ADC tail; the mask correction's isolated quality effect is unmeasured.
+The [completed V117/V118 pair](v117-v118-quality.md) also uses the revision with
+common masks; its parent comparison likewise does not isolate the mask effect.
 
 [Scan, independent checks, native images and revised-manifest receipt](results/paired-training-reference-outliers-v1.json).
 

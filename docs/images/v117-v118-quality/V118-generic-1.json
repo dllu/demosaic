@@ -1,0 +1,268 @@
+{
+  "image": {
+    "path": "/home/dllu/proj/demosaic/docs/images/v117-v118-quality/V118-generic-1.png",
+    "sha256": "776efe3e0f5944dd050d943c7083727660fc1814ca195359cdd3dbc4a32c7158"
+  },
+  "unchanged_original_image": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V117-V118-band-quality-v1/work/artifacts/photo/report/crop-0a7f35e3c26f47f4.png",
+    "sha256": "776efe3e0f5944dd050d943c7083727660fc1814ca195359cdd3dbc4a32c7158"
+  },
+  "metadata": {
+    "image": "crop-0a7f35e3c26f47f4.png",
+    "caption": "0014aa4e075b1827f91ef8a02069e1e318f040ba / iso12800-prior / RGGB / 1:V118:step-20000",
+    "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+    "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+    "panels": [
+      {
+        "label": "Noisy (Malvar)",
+        "png_xywh": [
+          8,
+          24,
+          160,
+          160
+        ]
+      },
+      {
+        "label": "Denoised",
+        "png_xywh": [
+          176,
+          24,
+          160,
+          160
+        ]
+      },
+      {
+        "label": "GT (synthetic)",
+        "png_xywh": [
+          344,
+          24,
+          160,
+          160
+        ]
+      }
+    ],
+    "png_sha256": "776efe3e0f5944dd050d943c7083727660fc1814ca195359cdd3dbc4a32c7158",
+    "source_id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+    "source": {
+      "title": "File:CH.VD.Villeneuve 2007-08-25 Vertigo-Swiss-Riviera 2392 3x2-R 4K.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File:CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/CH.VD.Villeneuve_2007-08-25_Vertigo-Swiss-Riviera_2392_3x2-R_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "author": "Roy Egloff",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": null,
+      "credit": "Own work",
+      "sha1": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+      "sha1_hex": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+      "download_path": "images/00/14/0014aa4e075b1827f91ef8a02069e1e318f040ba.jpg",
+      "width": 3888,
+      "height": 2592,
+      "id": "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+      "split": "val",
+      "bin_factor": 8,
+      "color_space": "linear-sRGB",
+      "dtype": "uint16",
+      "cache": "/mnt/external/demosaic/commons-v1/images/00/0014aa4e075b1827f91ef8a02069e1e318f040ba.npy",
+      "shape": [
+        324,
+        486,
+        3
+      ],
+      "cache_sha256": "ee304db7fa1347a65afe4b127012c924580305c99c3aedfa3508255800970be8"
+    },
+    "validation_index": 0,
+    "validation_seed": 42,
+    "evaluation_tile_xywh": [
+      48,
+      48,
+      160,
+      160
+    ],
+    "condition": {
+      "name": "iso12800-prior",
+      "shot": 0.00256,
+      "read": 2.62144e-05,
+      "exposure": 1.0
+    },
+    "pattern": "RGGB",
+    "model": {
+      "label": "1:V118:step-20000",
+      "source": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V117-V118-band-quality-v1/work/artifacts/weights/weights-5307c1789a9d29343de9e6c1ee35fd31f7551ef9b2b40bbf7e7cbf28cdaee751.pt",
+      "training_run": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V114-band-loss-training-v1/work/artifacts/train/V118",
+      "snapshot": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V117-V118-band-quality-v1/work/artifacts/photo/report/weights/weights-5307c1789a9d29343de9e6c1ee35fd31f7551ef9b2b40bbf7e7cbf28cdaee751.pt",
+      "sha256": "5307c1789a9d29343de9e6c1ee35fd31f7551ef9b2b40bbf7e7cbf28cdaee751",
+      "step": 20000,
+      "model_config": {
+        "restoration_backbone": "pretrained-rgb",
+        "width": 64,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "dino_lora_rank": 0,
+        "dino_input_adapter": false,
+        "dino_feature_fusion": "convnext-pyramid",
+        "camera_conditioning": true,
+        "noise_modulation": false,
+        "physical_fp32": true,
+        "baseline": "bilinear",
+        "prior_window": 7,
+        "standardized_noise": false,
+        "noise_refinement": false,
+        "refinement_width": 24,
+        "refinement_blocks": 4,
+        "refinement_window": 63,
+        "coarse_refinement_factor": 0,
+        "coarse_refinement_width": 24,
+        "coarse_refinement_blocks": 4,
+        "coarse_refinement_window": 31,
+        "pyramid_refinement": false,
+        "pyramid_measurements": true,
+        "pyramid_width": 24,
+        "pyramid_blocks": 2,
+        "variance_stabilization": true,
+        "physical_anchors": true,
+        "rgb_processing_scale": 1,
+        "packed_detail_prior": false,
+        "rgb_hidden_autocast": false,
+        "rgb_center_camera_matrix": false,
+        "rgb_middle_skip_fp32": true,
+        "adc_cfa_projection": false,
+        "adc_cfa_projection_mode": "malvar",
+        "raw_kernel_reconstruction": false,
+        "raw_kernel_windows": [
+          1,
+          5,
+          17
+        ],
+        "raw_kernel_phase_conditioning": false,
+        "raw_directional_residual": false,
+        "raw_directional_bank_context": false,
+        "raw_directional_bank_detach_input": false,
+        "raw_spectral_residual": false,
+        "late_rgb_refinement": "none",
+        "isotropic_groups": 6,
+        "isotropic_blocks": 8,
+        "isotropic_local_width": 32,
+        "isotropic_raw_gain": 1.0,
+        "isotropic_residual_scale": 1.0
+      },
+      "effective_model_config": {
+        "restoration_backbone": "pretrained-rgb",
+        "width": 64,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "dino_lora_rank": 0,
+        "dino_input_adapter": false,
+        "dino_feature_fusion": "convnext-pyramid",
+        "camera_conditioning": true,
+        "noise_modulation": false,
+        "physical_fp32": true,
+        "baseline": "bilinear",
+        "prior_window": 7,
+        "standardized_noise": false,
+        "noise_refinement": false,
+        "refinement_width": 24,
+        "refinement_blocks": 4,
+        "refinement_window": 63,
+        "coarse_refinement_factor": 0,
+        "coarse_refinement_width": 24,
+        "coarse_refinement_blocks": 4,
+        "coarse_refinement_window": 31,
+        "pyramid_refinement": false,
+        "pyramid_measurements": true,
+        "pyramid_width": 24,
+        "pyramid_blocks": 2,
+        "variance_stabilization": true,
+        "physical_anchors": true,
+        "rgb_processing_scale": 1,
+        "packed_detail_prior": false,
+        "rgb_hidden_autocast": false,
+        "rgb_center_camera_matrix": false,
+        "rgb_middle_skip_fp32": true,
+        "adc_cfa_projection": false,
+        "adc_cfa_projection_mode": "malvar",
+        "raw_kernel_reconstruction": false,
+        "raw_kernel_windows": [
+          1,
+          5,
+          17
+        ],
+        "raw_kernel_phase_conditioning": false,
+        "raw_directional_residual": false,
+        "raw_directional_bank_context": false,
+        "raw_directional_bank_detach_input": false,
+        "raw_spectral_residual": false,
+        "late_rgb_refinement": "none",
+        "isotropic_groups": 6,
+        "isotropic_blocks": 8,
+        "isotropic_local_width": 32,
+        "isotropic_raw_gain": 1.0,
+        "isotropic_residual_scale": 1.0
+      },
+      "self_ensemble": "none",
+      "model_views_per_tile": 1,
+      "training_manifest_sha256": "4175378ca100351eca4669220892d4d4e8db9c47133016206c7c0eadd7ab427e",
+      "compute_precision": "float32",
+      "refinement_compute_precision": "float32",
+      "memory_format": "channels_last"
+    },
+    "display_exposure": 1.0,
+    "reference": "Exact synthetic clean target",
+    "retained_display_parameters": {
+      "white_balance": [
+        2.0,
+        1.0,
+        1.5
+      ],
+      "camera_to_srgb": [
+        [
+          1.1176470588,
+          -0.0588235294,
+          -0.0588235294
+        ],
+        [
+          -0.0588235294,
+          1.1176470588,
+          -0.0588235294
+        ],
+        [
+          -0.0588235294,
+          -0.0588235294,
+          1.1176470588
+        ]
+      ]
+    }
+  },
+  "actual_review": "All native cells viewed by primary agent in original triplets or byte-identical comparison-board cells. Original pending-at-capture metadata remains historical.",
+  "native160_panel_pixel_sha256": [
+    "2b3927c97af2af73cb37240108b5073a62dfa4e467c2d7e1bc2228445c60410b",
+    "23453a1c1c23f965171cdcb3e721c6e4f5e56d3cf33f75160e4ff6e7c08e1501",
+    "907f6ea7c8b53a30837d9a816f13174fd4a64dcecd3ff6f8b8c04ecd230eb9ca"
+  ],
+  "pixel_scale": "One native image pixel per PNG pixel; original PNG bytes copied, no resizing or rendering."
+}

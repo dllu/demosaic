@@ -166,15 +166,19 @@ The older four-source/eight-view pilot remains separate: policy, targets,
 sampling and source support differ. No noise-debiasing, training-seed interval,
 four-pixel carrier recovery or real-camera superiority follows from this audit.
 
-The active [V117/V118 loss pair](band-loss-training.md) has a separate
-[queued saved-output review](results/band-loss-matched-review-queued-v1.json).
+The [completed V117/V118 loss pair](v117-v118-quality.md) has a separate
+[closed saved-output review](results/v117-v118-quality-complete-v1.json),
+with its [original queue receipt](results/band-loss-matched-review-queued-v1.json) preserved.
 It repeats these GT-only definitions for the isolated V117/V118 contrast and
 for both endpoints against retained V114. Each must cover all427 photos,
 three priors/four CFAs and5124 paired cases, with actual input/supervision
 matching. The same96,075 GT blocks are reused across contrasts; this does not
 multiply independent sources. No new inference, noise generation or RAW decode
-is added by the local audit. Both original20k runs are complete; results remain
-pending while full-quality collection and its downstream audits proceed.
+is added by the local audit. In the weakest high-noise stratum, source-balanced
+gain is.36334/.36629/.36470 for V114/V117/V118. V118 lowers band error and
+orthogonal RMS slightly against V117 while also lowering response; this does
+not establish improved weak natural detail. All three contrast results and
+actual native material/GFX views are complete.
 
 A separate [unequal-coverage fixture](results/local-detail-source-weighting-proof-v1.json)
 gives two sources225 versus15 eligible blocks, with candidate gains.75 and.25.

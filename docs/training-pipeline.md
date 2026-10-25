@@ -100,7 +100,7 @@ weights and EMA, and guards reject any fetch from an unselected domain.
 
 ## Internal training artifacts
 
-The [active V117/V118 loss pair](band-loss-training.md) retains native256/B16
+The [completed V117/V118 loss pair](v117-v118-quality.md) retains native256/B16
 and the current90,864-source geometry. Metadata coverage at4×→area2 is90,864
 sources for256px,55,998 for320px,24,753 for384px and1,762 for512px, without
 upscaling. A global larger-patch trial would also change source coverage.

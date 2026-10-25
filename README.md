@@ -21,10 +21,11 @@ retains the better overall balance. The90,864-source corpus, zero optical blur a
 before final downsampling remain in use. [Data review](docs/incoming-commons-quality.md) ·
 [Training pipeline](docs/training-pipeline.md) · [Historical diary](diary/index.md).
 
-[V117/V118 are testing normalized-band supervision](docs/band-loss-training.md)
-from V114 with matched data and20k budgets. Both original runs have completed
-20,000 updates. Full quality collection has started; independent/native review
-is pending.
+**V117 is a useful single-view photo-score option:**37.04408dB, +.06435 over
+V114 with421/427 source means rising. Its camera means are slightly lower and
+ADC color bias higher. The matched V118 band-loss arm lowers weak natural-detail
+response and has a large ADC color-tail regression; the term stays off for
+further quality work. [Complete results and native comparisons](docs/v117-v118-quality.md).
 
 The optional [V114 eight-view comparison](docs/v114-eight-view.md) improves all
 twelve fixed material cases and both selected adverse camera crops. Mean gains
@@ -44,23 +45,16 @@ isolated architecture ablation.
 
 ## Current 100% crops
 
-Each cell is an unchanged160×160 crop at the8×-binned evaluation resolution,
-with shared coordinates/transforms. Fine texture remains softer than GT.
-The full427 scores above use ordinary single-view V114.
+Photo cells are unchanged160×160 crops at the8×-binned evaluation resolution,
+with shared coordinates/transforms. ISO12800-prior noisy observation →
+**V117 Tiny, single view** → exact synthetic GT. Fine texture remains softer
+than GT. V117 is the photo-score option; V114 retains the camera/color balance.
+[Results and parent comparison](docs/v117-v118-quality.md) ·
+[Source/ROI/checkpoint/noise/display metadata](docs/images/v117-v118-quality/manifest.json).
 
-ADC noisy observation → **actual V114 sites export** → exact synthetic GT.
-[Measured ADC scope and tradeoffs](docs/adc-consistency.md) ·
-[Source/ROI/checkpoint/noise/display receipt](docs/images/v114-adc-sites-v1/actual-export-bark.json).
+![V117 bark: noisy, restored and exact synthetic GT](docs/images/v117-v118-quality/V117-material-1.png)
 
-![Current V114 sites bark: ADC noisy, actual export and exact GT](docs/images/v114-adc-sites-v1/actual-export-bark.png)
-
-ISO100-prior noisy observation → **V114 Tiny, optional eight views** → exact GT.
-[Measured eight-view scope](docs/v114-eight-view.md) ·
-[Metadata](docs/images/v114-dihedral8-pilot/manifest.json).
-
-![Eight-view V114 canopy: noisy, restored and exact GT](docs/images/v114-dihedral8-pilot/crop-b38f8be4dde85710.png)
-
-[Higher-noise comparisons against earlier versions and stronger RawNIND](docs/images/v114-dihedral8-pilot/photo-iso12800-prior.png).
+![V117 canopy: noisy, restored and exact synthetic GT](docs/images/v117-v118-quality/V117-material-2.png)
 
 Sources: [Derek Ramsey](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
 [CC BY-SA2.5](https://creativecommons.org/licenses/by-sa/2.5/), and
@@ -68,16 +62,16 @@ Sources: [Derek Ramsey](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-
 [CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/), modified by binning,
 cropping, simulated noise and restoration.
 
-Real GFX100S: DSCF3879 ISO6400 → **V114 Tiny** → DSCF3880 ISO100 f/5.6.
+Real GFX100S: DSCF3879 ISO6400 → **V117 Tiny** → DSCF3880 ISO100 f/5.6.
 Native160×160 sensor-pixel crops from complete102MP outputs share +2EV display.
 The independent ISO100 exposure is an approximate qualitative reference,
 **not GT**. Fine foliage remains painterly; fence geometry is coherent.
-[All six Tiny/Small regions and other useful models](docs/gfx-qualitative.md) ·
-[Metadata](docs/images/v114-v115-quality/manifest.json).
+[All six regions and other useful models](docs/gfx-qualitative.md) ·
+[Metadata](docs/images/v117-v118-quality/manifest.json).
 
-![V114 GFX foliage: noisy, restored and separate ISO100 reference](docs/images/v114-v115-quality/V114-foliage.png)
+![V117 GFX foliage: noisy, restored and separate ISO100 reference](docs/images/v117-v118-quality/V117-gfx-foliage.png)
 
-![V114 GFX fence: noisy, restored and separate ISO100 reference](docs/images/v114-v115-quality/V114-chain-link-fence.png)
+![V117 GFX fence: noisy, restored and separate ISO100 reference](docs/images/v117-v118-quality/V117-gfx-chain-link-fence.png)
 
 The [stronger RawNIND full-frame reference](docs/rawnind-fullframe.md) and
 [current Tiny/Small Q2/Sony/GFX50R comparisons](docs/cross-camera-qualitative.md)

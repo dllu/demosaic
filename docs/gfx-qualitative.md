@@ -22,6 +22,30 @@ retained ROIs exactly match FP32-to-linear-RGB16 quantization. Ordered FP32
 inference/blending observations are116.57s/101.66s; different warmup/workspace
 states prevent a speed ranking. Quality remains the priority before speed work.
 
+## Completed V117/V118 comparison
+
+[V117](v117-v118-quality.md) is a useful single-view photo-score option at
+37.04408dB, with slightly lower camera means and higher ADC bias than V114.
+Rows below are noisy, V114, V117 and the separate ISO100 reference. Every cell
+is an unchanged160px sensor crop from a complete blended102MP output, with the
+same source/ROI/+2EV/WB/matrix. ISO100 remains **approximate, not GT**.
+
+![V114/V117 full-frame building, fence and neon](images/v117-v118-quality/V114-V117-gfx-1.png)
+
+![V114/V117 full-frame foliage, platform and sky](images/v117-v118-quality/V114-V117-gfx-2.png)
+
+All three pairwise V114/V117/V118 comparisons were viewed. Geometry and sky
+remain coherent; foliage stays waxy and saturated sign/platform detail soft.
+No clear real-photo gain appears in these regions. The band term in V118 lowers
+weak natural response against its control and worsens the ADC tail despite a
+small analytic eight-pixel gain, so it stays off for further quality work.
+[Matched V117/V118 regions1–3](images/v117-v118-quality/V117-V118-gfx-1.png) ·
+[regions4–6](images/v117-v118-quality/V117-V118-gfx-2.png) ·
+[Source/ROI/checkpoint/noise/display receipts](images/v117-v118-quality/manifest.json).
+All four new TIFFs and921,600 retained-ROI RGB16 values verify. The112.94/95.39s
+FP32 intervals are separate timing observations; warmup/workspace differences
+prevent a speed ranking. Quality and100MP/10s remain open goals.
+
 ## Completed V116 data comparison
 
 The [V116 full review](v116-quality.md) adds the fine-source/reviewed-mask

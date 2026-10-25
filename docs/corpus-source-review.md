@@ -22,7 +22,7 @@ neither changes completed V100/V101 inputs.
 | Completed V100/V101 | 88,484 | 2,303 / 2,255 | 24 |
 | Completed V102/V103 | 88,477 | Same exact records/order | 31 |
 | Completed V104 20k | 90,872 | Same exact records/order | Prior31 plus four incoming quality withholds; duplicate/series/protected exclusions also apply |
-| Completed V111/V112/V114/V115/V116; active V117/V118 | 90,864 | Same exact records/order | Eight additional withholds relative to V104: three photo-quality cases and five atlas reproductions |
+| Completed V111/V112/V114/V115/V116/V117/V118 | 90,864 | Same exact records/order | Eight additional withholds relative to V104: three photo-quality cases and five atlas reproductions |
 | Prepared next cohort | 90,791 | Same exact records/order | Prior passes withheld 62 relative to 90,864; latest 290-source pass retains 279 and withholds 11 |
 
 [Earlier detailed catalogue and reader checks](results/source-quality-detail-catalogue-v3.json).

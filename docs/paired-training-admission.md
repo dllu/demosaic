@@ -10,7 +10,10 @@ The [training-reference quality review](paired-reference-quality.md) separately
 checks all 576 base crops and prepares a mask-only revision for two reviewed
 low-ISO references. It adds no scene or source and keeps the original manifest
 and running comparison unchanged. Actual native256 reader/loss checks pass;
-the revised targets have no trained-quality result yet.
+the revised targets were used in the [completed V116 trial](v116-quality.md)
+and [V117/V118 comparison](v117-v118-quality.md). Those recipes combine mask
+changes with other interventions or added training; the correction's isolated
+quality effect remains unmeasured.
 
 The embedded review payload records acquisition, protected/Commons screening,
 prepared-target and manual-review SHA256s; protected scene names; and every
@@ -56,3 +59,7 @@ scores and subtle GFX native differences. Both arms then finish their original
 [4000-step schedules](paired-expansion-v53-v54-4k-review.md). The early photo
 gain disappears; real-camera differences remain uncertain. The expanded corpus
 stays opt-in, with no model promotion or convergence claim.
+
+Those V53/V54 results describe an older architecture and4000-update recipe.
+They do not measure the extension on current ConvNeXt models or prevent a new
+quality experiment. Current recipes still use the reviewed32-scene data.

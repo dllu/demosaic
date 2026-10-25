@@ -9,6 +9,7 @@ metrics, native review and102MP RGB16 exports are verified.
 | Use | Current choice and tradeoff |
 | --- | --- |
 | General RAW and further quality work | **V114 Tiny**: photo36.97973dB; known/unseen CFA54.28627/54.00290dB; ADC mean/max bias7.08/51.73DN16 |
+| Higher single-view photo score | **[V117 Tiny](v117-v118-quality.md)**: photo37.04408dB, +.06435 over V114; camera54.27303/53.97339dB and ADC max63.89DN16; remaining fine-detail softness |
 | Higher measured known-camera mean / eight-pixel weak response | **V115 fitted Small**: photo36.97700dB; camera54.32405/54.00417dB; ADC max65.64DN16 and high-noise max106.79 versus Tiny85.40 |
 | Optional eight-view V114 inference | [Fixed24 pilot](v114-eight-view.md): all12 material cases and both selected adverse camera crops improve; selected color bias rises slightly while spatial variation falls. Real fine detail remains soft; full panels/frame unmeasured; eight evaluations per tile |
 | Exact parent and previously measured optional modes | [V112](v112-quality.md): photo36.90238dB, ADC maximum50.89DN16; [eight-view fixed24 pilot](v112-eight-view.md) improves all12 material cases, but full panels/frame remain unmeasured |
@@ -41,6 +42,13 @@ does not change the general photo/color baseline choice.
 The architecture retains V84's pretrained DRUNet RGB trunk, physical
 noise/camera conditioning and official frozen DINOv3 ConvNeXt-Tiny pyramid.
 [Inference and linear DNG/JPEG usage](usage.md).
+
+The useful V117 photo-score option is
+`/mnt/external/demosaic/models/v117-final20000.pt`, SHA256
+`f69452432a852ac4c5ffdcbf7d6fe6837a3ab46adbc8a7fdae073111220b8ab0`.
+Its modest photo and weak-carrier gains coexist with lower camera means and
+higher ADC bias. Choosing V114 for camera/color balance does not hide V117's
+progress or impose a study-specific promotion gate.
 
 The [Q2/Sony/GFX50R gallery](cross-camera-qualitative.md) now compares both
 current models with V104 and both released RawNIND variants on the same cached
@@ -79,14 +87,15 @@ slightly, broad weak-material gain is unchanged and ADC worst bias rises to
 239.15DN16. Native GFX foliage/neon softness remains. V114 retains the better
 general balance; the new gains and weaknesses remain documented. Quality precedes speed.
 
-The [V117/V118 loss pair](band-loss-training.md) now starts directly from V114:
-weight0 versus.0003 normalized-band supervision, with common corrected data,
-legacy weak sources, seed64 and20k budgets. Both original runs have completed all
-20,000 updates. Full quality collection has started; independent/native review
-is pending.
-This changes the training objective while retaining the current architectural baseline.
+The [completed V117/V118 loss pair](v117-v118-quality.md) starts directly from
+V114 with matched20k budgets and common corrected data. V117's photo mean rises
+to37.04408dB, with421/427 sources improving. V118's band term lowers weak natural
+response against its control and worsens the ADC maximum to843.05DN16 despite a
+small eight-pixel carrier gain. Complete metrics, native material/GFX comparisons
+and RGB16 checks are published. Keep the term off for further quality work;
+architecture and parent remain choices guided by their measured tradeoffs.
 
-[PSNR history](performance-history.md) includes all three completed endpoints.
+[PSNR history](performance-history.md) includes both new endpoints.
 Earlier useful comparisons retain their exact checkpoints and receipts:
 [V112](v112-quality.md), [V104](v104-reviewed-corpus-quality.md),
 [V102/V103](v102-v103-quality-review.md), [V84/V85](native-data-original20k-review.md)

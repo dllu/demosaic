@@ -20,10 +20,11 @@ weak-carrier gain, but does not improve broad weak natural detail and worsens
 the ADC color tail. Complete metrics, native triplets, six GFX regions and RGB16
 checks are published. V114 retains the better overall balance.
 
-The [V117/V118 band-loss pair](band-loss-training.md) tests explicit band
-supervision from V114 with matched data/20k budgets. Both original runs have
-completed all20,000 updates. Complete evaluation has started; independent
-metrics and native review are pending.
+The [completed V117/V118 comparison](v117-v118-quality.md) adds a useful V117
+single-view photo option at37.04408dB, with slightly lower camera means and
+higher ADC bias than V114. The matched band term lowers weak natural-detail
+response and raises worst ADC bias to843.05DN16. Complete independent metrics,
+native triplets/six GFX regions and full RGB16 checks are published.
 
 Earlier [V112 loss-scale results](v112-quality.md),
 [V104 eight-view full panels](dihedral-quality.md), [V112 eight-view pilot](v112-eight-view.md),

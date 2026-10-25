@@ -1,10 +1,12 @@
 # V114-parent band-loss training
 
-**Both original 20,000-update runs are complete from the shared V114 parent.
-Full quality collection has started; independent/native review is pending.**
+**Both original 20,000-update runs and complete numerical/native/RGB16 review
+are finished.** [Results and images](v117-v118-quality.md): V117 adds.06435dB on
+photos over V114 with small camera regressions. V118 lowers weak natural response
+against its control and raises worst ADC bias to843.05DN16; keep the band term off.
 This tests whether explicit weak-band supervision improves natural detail after the
 [V116 data-only trial](v116-quality.md) left broad weak-material gain unchanged.
-V114 remains the current general model; trained quality for this pair is pending.
+V114 retains camera/color advantages; V117 is a useful photo-score option.
 
 [Execution/checkpoint/input receipts](results/v114-band-loss-training-started-v1.json) ·
 [V117 completion and V118 startup audit](results/v117-training-complete-v1.json) ·
@@ -110,16 +112,16 @@ preserve evidence and stop without automatic retry or a budget extension.
 
 ## Full quality review and resource limits
 
-The original downstream evaluator is now running the full-photo stage on the
-two completed checkpoints. It declares **9,172 new model/encoder calls**, **28,380 numerical
-observations**, all eight stages and retained FP32 predictions/targets. The
-independent CPU audit is queued too, preparing at least two native160px
+The original downstream evaluator completed **9,172 new model/encoder calls**,
+**28,380 numerical observations**, all eight stages and retained FP32 predictions/
+targets. The independent CPU audit is complete, including at least two native160px
 noisy/restored/exact-GT triplets per model. Six standing GFX regions include
 foliage/fence, plus complete102MP outputs. ISO100 remains an approximate
 independent reference, not GT; scene/siblings remain outside training.
-A separate [matched review is now queued](results/band-loss-matched-review-queued-v1.json)
-after the exact original audit owner. It resolves checkpoint hashes from the
-successful original20k receipts, then prepares three complete contrasts:
+The [completed matched review](results/v117-v118-quality-complete-v1.json)
+followed the exact original audit owner; its [queue receipt](results/band-loss-matched-review-queued-v1.json)
+is preserved. It resolves checkpoint hashes from the successful original20k
+receipts and completes three contrasts:
 
 * V118 versus V117 isolates the band-loss coefficient.
 * V117 versus retained V114 measures the zero-band continuation with the common
@@ -152,7 +154,8 @@ retained FP32 quantization. The already verified V114 exports are reused.
 The frozen CPU controller imports with no Torch and rejects unintended changes
 to LR, fine data, band weight, budget and parent. It declares8GiB available RAM,
 4GiB output headroom, a1200s total analysis bound and600s per local audit.
-Actual native viewing/interpretation follows; no model is selected automatically.
+Actual native viewing/interpretation is complete. Model recommendations reflect
+the measured tradeoffs in the linked report; the controller selects none automatically.
 Original training/evaluation/audit sources, owners and budgets stay unchanged.
 
 Artifacts stay in the frozen internal workspace, with128GiB free required at

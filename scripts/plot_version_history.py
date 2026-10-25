@@ -99,6 +99,7 @@ STUDIES = [
     ("v111-v112-primary-quality-v1.json", [111, 112], "v111-v112-primary-quality.md"),
     ("v114-v115-quality-complete-v1.json", [114, 115], "v114-v115-quality.md"),
     ("v116-quality-complete-v1.json", [116], "v116-quality.md"),
+    ("v117-v118-quality-complete-v1.json", [117, 118], "v117-v118-quality.md"),
 ]
 METRICS = {
     ("full427", "photo", "srgb_psnr"): "photo_srgb_PSNR",
@@ -402,7 +403,7 @@ def main():
             if "photo_srgb_PSNR" not in p:
                 continue
             offset, alignment = (0, 7), "center"
-            if 0 < latest - preferred <= 3:
+            if 0 < latest - preferred <= 6:
                 if version == preferred:
                     offset, alignment = (-12, 20), "right"
                 elif version == latest:

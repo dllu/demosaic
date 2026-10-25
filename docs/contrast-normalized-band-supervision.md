@@ -4,9 +4,10 @@
 missing faint structure in these saved training examples.** At additional
 contrast ×.025, its median corrective slope rises 17–19% while total gradient
 norm rises 3–5%, relative to epsilon .0003. This is a loss diagnosis, with no
-restored-quality claim. The [V117/V118 training pair](band-loss-training.md)
-has passed actual CPU/CUDA checks and started its original20k schedule;
-trained quality is pending. V114 is the current general baseline
+restored-quality claim. The [completed V117/V118 training pair](v117-v118-quality.md)
+finds a small eight-pixel analytic gain, lower weak natural-detail response than
+its control and a worse ADC color tail. Keep the term off for further quality
+work. V114 is the current camera/color-balance baseline
 after the [completed Tiny/Small comparison](v114-v115-quality.md). The term stays
 off in the [completed V116 data trial](v116-quality.md).
 
@@ -207,11 +208,14 @@ Both start from V114 with the same corrected data and seed64; only the band
 coefficient0/.0003 differs. Four actual eight-update checks pass at CPU64/B1/FP32
 and CUDA256/B16/BF16. Initial predictions/physical inputs agree, all optimizer
 states remain finite, default-off does no band work and paired RAW omits the term.
-Both original20k production runs are complete; full quality collection has started.
+Both original20k production runs and full numerical/native/RGB16 review are
+[complete](v117-v118-quality.md). The term slightly raises the eight-pixel
+analytic carrier but lowers weak natural-detail response against its matched
+control and raises worst ADC bias to843.05DN16. Keep it disabled for further
+quality work; these measured results apply to the tested coefficient/recipe.
 The [completed V116 trial](v116-quality.md) separately tests data coverage and
 reviewed masks. Its analytic gain did not transfer to broader weak material.
-This diagnosis does not show how network gradients, generalization, flat-field
-artifacts, color tails or real foliage would change. Any trained comparison
-still needs complete matched panels, native noisy / restored / GT triplets and
-standing GFX foliage/fence and other regions. Paired/noisy references are outside
-this prototype's exact-target supervision.
+The local-gradient diagnosis alone did not predict trained quality. The completed
+comparison now supplies matched panels, native noisy/restored/GT triplets and
+all six standing GFX regions. Fine foliage/neon softness remains. Paired/noisy
+references stay outside this prototype's exact-target supervision.
