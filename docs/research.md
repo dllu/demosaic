@@ -1,17 +1,19 @@
 # Method research and design record
 
-**Current quality baseline: [V112](v112-quality.md).** Its completed panels and color repair supersede V104 as the working choice; older measured studies below retain their explicit checkpoints.
+**Current general baseline: [V114 Tiny](v114-v115-quality.md).** The completed
+Tiny/Small comparison reaches36.97973/36.97700dB on full427. Small has higher
+known-camera quality and eight-pixel weak response; Tiny has slightly higher
+photo PSNR and lower tested color bias. Both retain the V84-family DRUNet RGB
+restoration path with official frozen DINOv3 pyramids, and improve over V112.
+All numerical panels, independent saved-output checks, native review and full
+RGB16 exports are complete. Fine foliage/neon and dark-camera mottling remain
+unresolved. [Current choices](current-model.md).
 
-Current implementation: V112's pretrained DRUNet RGB restoration with an official
-frozen DINOv3 ConvNeXt-Tiny pyramid in V84's architectural family. Its completed
-full 427 result reaches 36.90238dB, +.10154dB over V104, with 425/427 photo-source
-means improving. Known/unseen camera means are 54.26914/53.95378dB; worst ADC
-flat-color bias falls from V104's 1,218 to 50.89 DN16. All seven panels and
-complete GFX exports are done. Fine high-noise and real foliage detail remain
-weak. See [current models](current-model.md), [completed V112 results](v112-quality.md)
-and the [matched loss-scale comparison](loss-scale-training.md).
-The literature/design record below explains the explored approaches; its older
-study decisions do not freeze the current architecture or README examples.
+The [V116 data trial](fine-detail-data-training.md) has started its original20k
+run after the eight-update CUDA check. It tests fine weak sources and reviewed
+paired masks against the exact completed V114 control, preserving its original
+V112 initializer and matched budget. Trained quality is pending. The design
+record below retains explicitly named older checkpoints and measurements.
 
 The current [V104 conditioning study](noise-conditioning.md) repeats the
 fixed-strength comparison on twelve exact-target observations and six standing
@@ -42,7 +44,8 @@ sources. Selected photo means remain close to V112, but two dark-camera crops
 lose .20–.32dB. Matched [V114 Tiny / V115 fitted Small continuations](small-aligned-training.md)
 passed eight actual CPU and CUDA optimizer updates each, with exact initial
 identities and matching batches/domains/LRs. Both have completed 20,000 updates;
-their retained-prediction endpoint evaluation is running, with independent review queued.
+their [complete endpoint review](v114-v115-quality.md) now selects V114
+for general photo/color balance and retains V115 as a useful camera/detail alternative.
 The [loss-smoothing diagnostic](loss-smoothing-detail.md) also measures 324
 output gradients on 108 fixed V102 training-source restorations. Smaller epsilon
 strengthens low-noise faint-detail slopes but increases the full gradient more.
@@ -52,8 +55,8 @@ learned fusion gates. Actual CPU/CUDA checks pass. V111 completed20k and
 [improves all twelve material cases](v111-early-quality.md), with small GFX
 changes. Its complete camera panels show −.01336/+.02006dB known/unseen changes
 versus V104, with5/5 unseen scenes improving but persistent dark-field blotches.
-V112 completed20k and all seven matched quality panels, becoming the current
-baseline with V111-like photo PSNR and better camera/color results. The trainer exposes an
+V112 completed20k and all seven matched panels, providing the parent for
+current V114 with V111-like photo PSNR and better camera/color results. The trainer exposes an
 [explicit reconstruction-epsilon option](loss-smoothing-detail.md#configurable-training-scale)
 with exact default/gradient replay and resumed-training checks. Production
 defaults and existing frozen recipes remain unchanged.
@@ -73,10 +76,10 @@ energy in sampled photographs/native targets, but almost none around four-pixel
 structures in the dedicated weak generators. The optional fine profile adds
 coverage within that quota and passes reader and real-model CPU training checks.
 Its trained quality is untested; active Tiny/Small recipes retain their legacy profile.
-The [V116 data comparison](fine-detail-data-training.md) is now queued after
-that review, combining the fine profile with reviewed paired-reference masks
-and reusing completed V114's equal-budget Tiny control. Native mask-path and
-default-source/loss checks pass; CUDA and trained quality remain pending.
+The [V116 data comparison](fine-detail-data-training.md) is now training,
+combining the fine profile with reviewed paired-reference masks and reusing
+completed V114's equal-budget Tiny control. Native mask-path/default compatibility
+and actual CUDA checks pass; trained quality remains pending.
 
 The [optional eight-view inference study](dihedral-quality.md) now measures
 uniform averaging of exact sensor rotations/reflections with the same V104

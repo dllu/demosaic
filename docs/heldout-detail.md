@@ -1,11 +1,13 @@
 # Natural fine-detail comparisons
 
-**V112 final20k is the current quality baseline.** It improves all twelve
+**Current general baseline: [V114](v114-v115-quality.md), with matched
+Tiny/Small native comparisons.** The fixed material results below explicitly
+use V112 and their original noise draws. V112 improves all twelve
 selected material cases over V104, with four-source PSNR means of
 39.74086/40.90266/33.51165dB at ADC-only/ISO100/ISO12800. Its native differences
 from V111 are small; the completed camera/color panels favor V112.
 [Matched V111/V112 material results](v111-v112-material.md) ·
-[Complete current quality report](v112-quality.md).
+[Complete V112 quality report](v112-quality.md).
 
 The four contexts were selected by viewing clean inputs before inspecting
 these model outputs. They cover mixed contrast, including weak fine structures;

@@ -1,6 +1,6 @@
 # Optional eight-view restoration
 
-**Current V112 weights also benefit from eight views on the fixed material
+**V112 weights also benefit from eight views on the fixed material
 panel:** all twelve cases improve, with mean+.54335/.27285/.07936dB for
 ADC/ISO100/ISO12800. Both selected adverse camera crops and four selected color
 cases improve over V112 single. [New native material/GFX comparisons and limits](v112-eight-view.md).
@@ -10,8 +10,9 @@ Fine real detail remains soft; full V112 eight-view panels/frame are unmeasured.
 source mean improving over single-view V104. Known/unseen camera means also
 improve. It uses the original weights and exact sensor rotations/reflections,
 requiring eight evaluations per tile. Its ADC color tail remains worse than
-V112's, and fine high-noise detail stays weak. V112 remains the default learned
-baseline; eight views are a measured higher-PSNR option with explicit tradeoffs.
+V112's, and fine high-noise detail stays weak. V114 is now the general learned
+baseline; eight views are a measured V104 higher-PSNR option with explicit
+tradeoffs. V114 eight-view quality is unmeasured.
 
 Add `--self-ensemble dihedral8` to `demosaic infer`, `demosaic benchmark`,
 `demosaic quality` or
@@ -40,7 +41,7 @@ No weights, noise coefficients or target-dependent gains were fitted.
 Eight views gain .24291dB over V104 on 427 sources, source-bootstrap 95% interval
 [.23543,.25064], with 427/427 source means increasing. Known/unseen gains over
 V104 are .06677/.07712dB, with 4/4 and 5/5 scene means increasing. Relative to
-current V112, the respective mean gains are .14138/.06369/.04034dB. Source/scene
+V112, the respective mean gains are .14138/.06369/.04034dB. Source/scene
 intervals describe fixed evaluation units, not training-seed uncertainty.
 
 [Full-panel sources, independent reductions, color/detail data and provenance](results/v104-dihedral8-full-quality-primary-v1.json) ·
@@ -80,7 +81,7 @@ improve; mean chroma and gradient errors fall in every condition.
 
 These four-source means describe this fixed material panel, not the full 427-photo
 photo panel, all four CFAs, or training-seed uncertainty. The separate
-[current V112 trained-model report](v112-quality.md) retains its own gains.
+[V112 trained-model report](v112-quality.md) retains its own gains.
 
 Noisy Malvar → **V104 eight views** → exact synthetic GT. Both examples use
 160-pixel crops at ROI [48,48,160,160] within their original 256-pixel contexts, the
@@ -219,9 +220,9 @@ Corrected checks pass without changing the pilot scores or model weights.
 The full 427-photo, complete camera and analytic color/weak-texture panels are
 complete and independently checked. The complete 102MP export
 and native review are finished, with their own [file/timing evidence](dihedral-fullframe.md).
-The V111/V112 matched comparison is complete; V112 remains current. The
-[new Tiny/Small continuations](small-aligned-training.md) passed actual CUDA
-checks and started V114 training after this original chain exited.
+The V111/V112 and subsequent Tiny/Small comparisons are complete;
+[V114 is now the general baseline](v114-v115-quality.md). All original
+checkpoints, observations and sources remain unchanged.
 
 Photo attribution: [Derek Ramsey, bark](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
 [CC BY-SA 2.5](https://creativecommons.org/licenses/by-sa/2.5/);

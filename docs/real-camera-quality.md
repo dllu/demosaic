@@ -1,5 +1,25 @@
 # Current real-camera quality
 
+**V114 Tiny is the general baseline; V115 Small has a higher known-camera mean.**
+Both complete72/90-crop panels have independent NumPy64 checks and native review.
+
+| Endpoint | Known4 measured-CFA PSNR | Unseen5 measured-CFA PSNR |
+| --- | ---: | ---: |
+| V112 parent | 54.26914 | 53.95378 |
+| V114 Tiny | 54.28627 | 54.00290 |
+| V115 fitted Small | **54.32405** | **54.00417** |
+| Stronger released RawNIND pre-upsampled | 54.26068 | 53.86528 |
+
+Small exceeds Tiny on4/4 known and3/5 unseen scene means; the unseen difference
+is only+.00127dB. Both improve4/5 unseen scenes over V112 but still lose four
+of nine scene means to RawNIND pre-upsampled. Native dark-field mottling and
+fine-detail smoothing remain. Scene intervals describe this fixed development
+set, not training-repeat/general-camera uncertainty. AHD RGB is not exact GT.
+[Full comparisons, hashes, intervals and native evidence](v114-v115-quality.md) ·
+[Current choices](current-model.md) · [GFX gallery](gfx-qualitative.md).
+
+## Earlier checkpoint-specific panels
+
 **V111 recovers part of V104's unseen-camera loss, with a small known-scene
 tradeoff.** V111−V104 is −.01336dB known and+.02006dB unseen; all five unseen
 scene means improve. V102 still has the higher unseen mean, and selected dark

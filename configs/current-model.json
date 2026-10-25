@@ -1,9 +1,9 @@
 {
-  "preferred_version": 112,
-  "name": "V112 final20000",
+  "preferred_version": 114,
+  "name": "V114 final20000",
   "checkpoint": {
-    "path": "/mnt/external/demosaic/models/v112-final20000.pt",
-    "sha256": "21c3cca8370df21e3412f9ccbf441c35afcfad8fd03174c7727f4f88874783b1"
+    "path": "/mnt/external/demosaic/models/v114-final20000.pt",
+    "sha256": "2285c84b7015bcf122e71b890723f80aaf216bde849256c77f070c2493f9d2d2"
   },
   "architecture": {
     "restoration_backbone": "pretrained-rgb",
@@ -12,7 +12,7 @@
     "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
     "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b"
   },
-  "closely_matched_alternative": 111,
+  "closely_matched_alternative": 115,
   "notable_comparators": [
     43,
     84,
@@ -24,10 +24,13 @@
     102,
     103,
     104,
-    111
+    111,
+    112,
+    115
   ],
-  "selection_basis": "Full427 photographic PSNR36.90238dB (+.10154 over V104),425/427 source means improve and all7 condition means rise. Near-equal photo PSNR to V111 (-.00129dB), with higher known/unseen CFA means54.26914/53.95378dB (+.01644/+.01672 over V111). ADC flat-color maximum bias50.89DN16 versus V1041218.06 and V1112142.98; high-noise mean/max17.53/91.07DN16 improve over V10419.34/115.84. High-noise weak-carrier gains improve at periods8/16 to.09580/.65759, while4-pixel detail remains nearly absent. Same V84-family pretrained DRUNet RGB trunk and official frozen DINOv3 ConvNeXt-Tiny pyramid, cleaned90864-source corpus and retained learned gates. Six standing GFX512 contexts remain close with soft foliage; no broad real-camera superiority claim. Prefer V112 for current restoration and further quality training; retain V111, V104/sites and V102 as explicitly labeled useful alternatives. Full-frame V112 RGB16 exports and native review are complete, with167.51s FP32 inference/blending. Optional V104 dihedral8 reaches37.04376dB photographic and54.33283/53.99412dB known/unseen means, with a worse420.90DN16 ADC tail and weaker16-pixel carrier gain; use its explicit measured tradeoffs alongside the V112 learned baseline.",
+  "selection_basis": "Complete independent panels: photo36.97973062dB (+.07734717 over V112),422/427 photo-source means improve; known/unseen measured-CFA54.28627445/54.00290178dB (+.01713458/+.04912459). ADC mean/max bias7.08063/51.73073DN16 and high-noise17.08340/85.40041. V115 fitted Small has slightly lower photo36.97700390dB and higher color bias65.63844/106.79030max, with higher known54.32404974/unseen54.00416793 and8px carrier gain. Tiny selected for general photo/color balance; Small remains useful for camera/8px detail. Both improve over V112, with native comparisons published without a significance gate. Real foliage/neon and dark-camera mottling remain weak; stronger RawNIND wins4/9 camera scene means. All28380 numerical observations independently checked; native photo/camera/GFX viewing and full RGB16 exports complete.",
   "review": "docs/current-model.md",
-  "performance_report": "docs/v112-quality.md",
-  "recommendation_scope": "Current positive-noise RAW and quality-training baseline, with substantially lower tested ADC flat-color tails as well. Optional V104 ADC-sites export has a separate observed-sample fidelity/photo-PSNR tradeoff. V102 retains a slightly higher unseen-camera panel mean. Preserve original explicit-parent experimental plans and controls independently of this recommendation. Optional measured V104 dihedral8 provides higher photo/camera means at eight evaluations per tile; its full panels, independent audit and102MP export are complete. V112 retains lower flat-color/noisy-color tails and slightly stronger16-pixel weak-detail recovery."
+  "performance_report": "docs/v114-v115-quality.md",
+  "recommendation_scope": "Current general positive-noise RAW and quality-training baseline, preserving the V84-family DRUNet and official frozen DINOv3 ConvNeXt-Tiny architecture. Small is a useful documented alternative. Earlier V112/V104 optional policies retain explicit weights and separate measured tradeoffs; V114 eight-view quality is unmeasured. V116 retains its original V112 initializer and completed V114 control despite this mutable recommendation.",
+  "recorded_local": "2026-10-24T17:07:56.383979-07:00"
 }

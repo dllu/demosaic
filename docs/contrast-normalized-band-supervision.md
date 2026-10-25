@@ -4,7 +4,7 @@
 missing faint structure in these saved training examples.** At additional
 contrast ×.025, its median corrective slope rises 17–19% while total gradient
 norm rises 3–5%, relative to epsilon .0003. This is a loss diagnosis, with no
-new trained model or restored-quality claim. V112 remains the current baseline;
+new trained model or restored-quality claim. V114 is the current general baseline;
 the V114/V115 comparison continues unchanged.
 
 ![Corrective slope per gradient magnitude on saved V102 predictions](images/band-supervision-gradients/band-gradient-response.png)

@@ -2,9 +2,10 @@
 
 **The V104 eight-view export is complete and reviewed at native scale.**
 Both outputs contain the full 101.996MP image as 16-bit RGB TIFFs. The six
-standing regions compare V104 single/eight-view, current V112 and the stronger
+standing regions compare V104 single/eight-view, V112 and the stronger
 RawNIND pre-upsampled reference. Single/eight-view changes look small; fine
-foliage and saturated-sign structure remain soft. V112 remains the default.
+foliage and saturated-sign structure remain soft. [V114 is now the general
+baseline](v114-v115-quality.md); these V104 measurements retain their original scope.
 
 [Original execution, file hashes, integrity checks and native provenance](results/v104-dihedral8-fullframe-review-v1.json) ·
 [Measured context gains and full-panel evaluation](dihedral-quality.md).

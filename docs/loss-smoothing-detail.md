@@ -1,10 +1,10 @@
 # Loss smoothing and faint detail
 
-**The current V112 recipe uses Charbonnier epsilon .0003.** The
-[completed V111/V112 comparison](loss-scale-training.md) on the cleaned corpus
-supports V112 as the current learned baseline, with 36.90238dB photographic PSNR
-and substantially lower tested color tails. Its matched Tiny/Small continuations
-use the same scale. [Current quality evidence](v112-quality.md).
+**Current V114 retains Charbonnier epsilon .0003.** The
+[completed V111/V112 comparison](loss-scale-training.md) established this scale
+on the cleaned corpus, with36.90238dB for V112 and lower tested color tails.
+The [completed Tiny/Small continuations](v114-v115-quality.md) keep the scale;
+V114 is now the general learned baseline.
 
 The fixed-V102 diagnosis below motivated that comparison: smaller epsilon
 strengthens faint low-noise supervision while increasing the overall output

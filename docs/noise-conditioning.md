@@ -1,13 +1,13 @@
 # Noise conditioning and fine detail
 
-**Current model: [V112](v112-quality.md).** The conditioning measurements below hold V104 fixed; they do not claim a new V112 conditioning sweep.
+**Current model: [V114](v114-v115-quality.md).** The conditioning measurements below hold V104 fixed; they do not establish a V114 conditioning sweep.
 
 **Use suitable physical shot/read priors with V104.** Lower conditioning retains
 more structure and grain in these fixed examples, with lower high-noise PSNR.
 It is a useful denoising/detail control, with no demonstrated general quality
-win from the alternative strengths. V112 is the current positive-noise/training
-baseline after its completed quality comparison. These V104 measurements do not
-establish an alternative conditioning recommendation for V112.
+win from the alternative strengths. V114 is the current positive-noise/training
+baseline. These V104 measurements do not establish an alternative conditioning
+recommendation for V114.
 
 This current-model check holds the V104 final20000 EMA and all observations
 fixed. Factors .50/.75/1.00/1.25 multiply the supplied shot coefficient,

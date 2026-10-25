@@ -1,11 +1,14 @@
 # Current RawNIND reference variants
 
-**Current joint model: [V112](v112-quality.md).** The released-reference study below retains its original V104 controls and checkpoint-specific scores.
+**Current joint model: [V114 Tiny](v114-v115-quality.md).** Both trained Tiny/Small
+endpoints still lose four of nine scene means to the stronger RawNIND reference.
+The released-reference study below retains its original V104 controls and
+checkpoint-specific scores.
 
 **The released pre-upsampled RawNIND is a stronger tested comparator than the
 half-resolution variant used in our earlier reports.** It improves all 12
 checked photographic cases and eight of nine development scene means.
-Current V112 retains substantially more detail on the selected synthetic
+The measured V112 reference retains substantially more detail on the selected synthetic
 photos, but its measured real-camera means remain close to this stronger
 reference. It loses four of nine camera scene means; broad real-camera
 superiority remains unproven.
@@ -78,7 +81,7 @@ intervals are [−.38377,+.41835] and [−.24883,+.36799]. These enumerate all
 4⁴/5⁵ resamples of the fixed small scene sets; they do not measure training-seed
 uncertainty or establish a general winner.
 
-![Current V112 and historical V104 differences against the stronger released RawNIND, all nine camera scenes](images/current-detail-reference/camera-scene-gaps.png)
+![V112 and V104 differences against the stronger released RawNIND, all nine camera scenes](images/current-detail-reference/camera-scene-gaps.png)
 
 Each point averages nine crops per noisy capture, two captures per scene.
 Known/unseen refer to our training membership. V112 still loses on D60-2

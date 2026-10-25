@@ -18,7 +18,7 @@ inspection, rather than native inspection of every image.
 | --- | ---: | --- |
 | V102/V103 | 88,477 | Completed model comparison |
 | V104 | 90,872 | Original 20k training, all panels and full-frame exports complete |
-| Current reviewed cohort | **90,864** | V111/V112 complete; V112 is the working baseline; V114/V115 continuations use this corpus |
+| Current reviewed cohort | **90,864** | V114 is the working baseline; V114/V115 quality review complete; V116 uses this corpus |
 
 The current cohort applies **eight additional training-source withholds relative
 to V104**: the three previously inspected photo-quality cases and five printed
@@ -34,18 +34,19 @@ Twelve actual clean-reader checks repeat exactly: six new-source draws and all
 six ROIs, with finite native256 targets, unchanged Torch RNG and no CUDA.
 [V111/V112](loss-scale-training.md) completed their original 20,000 updates each
 on this cohort, preserving the V104 EMA and learned gates while comparing
-reconstruction epsilon. V112 is now the working baseline after
+reconstruction epsilon. V112 supplied the parent after
 [complete photo/camera/color/material/GFX evaluation](v112-quality.md).
 The [V114 Tiny / V115 fitted Small continuations](small-aligned-training.md)
 use seed63 and this same corpus, six ROIs, zero optical blur and existing
 contrast/detail recipe. Their actual CPU/CUDA checks and both original
-20,000-update runs completed; endpoint evaluation is running. No new frequency-profile option changes these
+20,000-update runs and [complete quality review](v114-v115-quality.md) finished;
+V114 is now the general baseline. No new frequency-profile option changes these
 frozen recipes.
 
 A separate [paired-reference review](paired-reference-quality.md) inspects all
 576 cached training crops. It preserves useful fine-detail examples and prepares
 a narrow mask revision for two low-ISO references with a recurring red speck.
-That revision is available for future training; current data bindings stay exact.
+That revision is used by running V116; original Tiny/Small bindings stay exact.
 
 ### Preserved, unlaunched V109/V110 preparation
 

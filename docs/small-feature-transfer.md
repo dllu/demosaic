@@ -4,7 +4,10 @@
 A training-only lateral fit keeps selected photo-condition means within .014dB
 of V112 Tiny and keeps the selected ADC biases low. Two adverse-camera
 crops remain .20–.32dB worse. This initializer has **zero new joint optimizer
-updates**; a trained quality improvement remains unmeasured. V112 is current.
+updates**. The subsequent [trained V115 comparison](v114-v115-quality.md)
+now improves over V112, with higher known-camera quality and color tradeoffs
+against Tiny. V114 is the current general baseline; the initializer results
+below retain their original zero-update scope.
 
 [Sources, checkpoint, independent arithmetic audit and native metadata](results/small-v112-lateral-alignment-CPU-v1.json).
 The fitted checkpoint is
@@ -134,8 +137,9 @@ IDs and preserves all successful observations without repetition.
 The [matched V114/V115 runs](small-aligned-training.md) have continued V112 Tiny and
 this fitted Small initializer for 20,000 additional updates each at seed 63.
 Both passed eight actual discarded CPU and native 256/B16/BF16 CUDA updates.
-Both original runs are complete and endpoint evaluation is running. Trained
-Small quality remains unmeasured.
+Both original runs and all quality stages are complete. The
+[trained comparison](v114-v115-quality.md) improves over V112 for both methods,
+with Small known-camera/eight-pixel gains and Tiny photo/color strengths.
 
 The [public projection fitter](../scripts/fit_dino_laterals.py) reproduces the
 maps from retained training feature pairs:

@@ -1,13 +1,14 @@
 # Experiment index
 
-**V112 is the current quality baseline in V84's architectural family.**
-It reaches36.90238dB on full 427, +.10154dB over V104, with425 source means
-improving, higher known/unseen camera means and worst ADC flat bias50.89DN16.
-[Complete current results and native comparisons](v112-quality.md). Fine
-high-noise/real foliage detail remains weak; original evidence stays visible.
-The [same-weight V112 eight-view comparison](v112-eight-view.md) improves all
-twelve fixed material cases, with modest native changes and remaining real
-detail weaknesses. Its complete V112 panels/frame remain unmeasured.
+**V114 Tiny is the current general baseline in V84's architectural family.**
+Its full-photo mean is36.97973dB, +.07735 over V112, with422/427 source means
+rising. V115 fitted Small has higher known-camera quality and eight-pixel weak
+response, while Tiny has slightly higher photo PSNR and lower color bias.
+[Completed panels, native comparisons and full exports](v114-v115-quality.md).
+Fine foliage/neon and dark-camera mottling remain weak. [V116 is training](fine-detail-data-training.md)
+to test fine weak sources and reviewed reference masks against matched V114.
+The earlier [V112 eight-view pilot](v112-eight-view.md) retains its explicit
+weights and unmeasured full-panel/frame scope.
 
 [Current model choices and images](current-model.md) ·
 [Current quality training](quality-first-training.md) ·
@@ -64,14 +65,15 @@ also prepares a narrow opt-in mask revision for two recurring red-speck
 references, preserving useful flagged texture and the active data bindings.
 The [completed V111/V112 loss-scale comparison](loss-scale-training.md)
 uses the cleaned90,864-source corpus and original V104 EMA/gates. Both add about
-.10dB on full 427; V112 improves camera/color over V111 and becomes the current
-baseline. The [primary report](v111-v112-primary-quality.md) and
+.10dB on full427; V112 improves camera/color over V111 and supplies the
+parent of current V114. The [primary report](v111-v112-primary-quality.md) and
 [complete review](v112-quality.md) show native strengths and remaining limits.
 The [completed Small transfer](small-feature-transfer.md) now uses V112 teacher
 targets and cached training features. Photo means remain close, while two dark
 camera crops lose .20–.32dB. Matched Tiny V114 / fitted Small V115 passed eight
 actual CPU/CUDA updates each; [both have completed 20,000 updates](small-aligned-training.md).
-Endpoint evaluation is running and quality remains pending. The old idle V113 plan and evidence remain preserved.
+[Complete quality review](v114-v115-quality.md) now selects Tiny for general
+photo/color balance while documenting Small's known-camera/eight-pixel gains. The old idle V113 plan and evidence remain preserved.
 Their [endpoint evaluation queue](quality-prediction-archive.md) retains exact
 targets and native predictions across all numerical panels, with standing GFX
 contexts and complete-frame exports; existing controls are reused.
@@ -81,10 +83,10 @@ gap in dedicated weak textures, while sampled photo/native targets contain
 fine-frequency energy. The optional fine profile passes reader and actual V112
 CPU training checks but has no trained-quality result and does not change the
 active comparison.
-The [V116 trial](fine-detail-data-training.md) is now queued after that review,
+The [V116 trial](fine-detail-data-training.md) is now training after that review,
 combining the fine profile and reviewed paired masks while reusing completed
-V114 as its matched Tiny control. Native256 mask-path and source/loss checks
-pass. Single-candidate evaluation and independent review are queued too.
+V114 as its matched Tiny control. Native256 mask-path/source/loss and actual
+CUDA checks pass. Single-candidate evaluation and independent review are queued too.
 
 The source scan covers88,508 training images, with570 actually reviewed and 31
 withheld/excluded. Completed runs used the earlier 24 exclusions; seven more and

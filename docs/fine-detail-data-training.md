@@ -1,12 +1,14 @@
 # Fine-detail data trial: V116 versus matched Tiny V114
 
-**V116 is queued after the original Tiny/Small quality review.** It tests fine
+**V116 is training after the completed Tiny/Small quality review.**
+Its eight discarded CUDA updates passed before the original20k production run
+started. [CUDA and launch evidence](results/v116-detail-data-running-v1.json). It tests fine
 weak-texture sources and reviewed paired-reference masks with the same V112
 Tiny architecture, parent, seed, schedule and 20,000-update budget as completed
-V114. V114's queued evaluation supplies retained control outputs; its training
+V114. V114's completed evaluation supplies retained control outputs; its training
 and evaluation are not repeated for V116. V116 has no trained-quality result yet.
-V112 remains the current learned baseline while the other endpoints are measured
-and inspected.
+V114 is the current general baseline after [complete Tiny/Small review](v114-v115-quality.md).
+V116 retains its original explicit V112 parent and matched control.
 
 [Recipe](../configs/quality-v112-fine-reviewed-v116.yaml) ·
 [Completed preflights and live queue receipts](results/v116-detail-data-queued-v2.json) ·
@@ -14,7 +16,7 @@ and inspected.
 
 ## Data changes with the architecture held fixed
 
-| Setting | Completed V114 control | Queued V116 |
+| Setting | Completed V114 control | Running V116 |
 | --- | --- | --- |
 | Initial restoration weights | V112 final20k EMA | Same exact 91 tensors |
 | Frozen encoder | Official DINOv3 ConvNeXt-Tiny | Same weights/revision |
@@ -79,14 +81,13 @@ unchanged. The gradient replay adds no neural forward or new observation.
 
 The new GPU worker and controller pass a real `__mp_main__` import probe with
 training and module calls prohibited. This checks the multiprocessing guard;
-actual BF16/CUDA readiness remains pending.
+the subsequent actual eight-update BF16/CUDA check also passed.
 
 ## Execution and complete quality review
 
-The controller waits for the exact existing Tiny/Small independent-audit owner
-and successful receipt. It then runs eight discarded native256/B16/BF16 CUDA
-updates. Only after they pass does production start fresh from V112 for its
-original 20,000 updates. Expected monitoring adds 640 validation forwards.
+The controller observed successful exit of the exact original Tiny/Small
+independent audit. Eight discarded native256/B16/BF16 CUDA updates passed;
+production then started fresh from V112 for its original20,000 updates. Expected monitoring adds 640 validation forwards.
 Failures preserve work and stop without automatic retries.
 
 CUDA preparation must match the completed native CPU clean prefix. Unchanged

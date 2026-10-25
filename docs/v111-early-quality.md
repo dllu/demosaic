@@ -13,7 +13,7 @@ carriers and high-noise color, but a worse ADC flat-bias tail.
 [Complete camera execution, independent audit and original adverse views](results/v111-camera-complete-v1.json) ·
 [Complete weak-texture/color execution, independent audit and native review](results/v111-texture-color-complete-v1.json).
 The material comparison covers four selected sources, the GFX comparison six
-real contexts and the camera panels all72/90 development crops. All seven matched panels are now complete, and [V112 is the current baseline](v112-quality.md)
+real contexts and the camera panels all72/90 development crops. All seven matched panels are now complete, and [V114 is the current baseline](v114-v115-quality.md)
 with higher camera means and a repaired ADC tail. This page retains the earlier
 CPU material/camera/analytic evidence with its original scope.
 The [matched material comparison](v111-v112-material.md) is now complete:
@@ -216,7 +216,7 @@ The read-only candidate checkpoint is
 `/mnt/external/demosaic/models/v111-final20000.pt`, SHA256
 `97ab9ca5f1f182ff42a4245c630bba810607a3d13b61cf8aae5842192a18da15`.
 It works with the existing inference commands. The complete primary panels
-now show V111's36.90367dB photo result, while [V112 is the working default](v112-quality.md)
+now show V111's36.90367dB photo result, while [V114 is the working default](v114-v115-quality.md)
 with higher camera means and repaired ADC color tails. The original early
 material/camera/analytic evidence remains preserved here.
 

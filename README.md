@@ -1,42 +1,33 @@
 # demosaic
 
 Joint Bayer demosaicing and denoising in linear camera RGB, with physical noise
-conditioning, frozen DINOv3 features and tiled 16-bit TIFF output on NVIDIA GB10.
-**V112 final20k is the working quality baseline**, using V84's pretrained
-DRUNet RGB trunk and frozen DINOv3 ConvNeXt-Tiny pyramid. It reaches
-**36.902 dB** on the full 427-photo panel: +0.102 dB over V104 and about +2.00 dB
-over V43, with 425/427 source means improving. Known/unseen camera means reach
-54.269/53.954 dB. Worst ADC flat-color bias falls from V104's 1,218 to **50.9 DN16**.
-[Completed panels, native comparisons and remaining weaknesses](docs/v112-quality.md).
+conditioning, frozen DINOv3 features and tiled16-bit output on NVIDIA GB10.
+**V114 Tiny is the current general quality baseline**, using V84's pretrained
+DRUNet RGB trunk and official DINOv3 ConvNeXt-Tiny pyramid. It reaches
+**36.980dB** on the full427-photo panel, +.077dB over V112, with422/427 source
+means improving. Known/unseen measured-CFA means are54.286/54.003dB.
+[Complete results, native comparisons and remaining weaknesses](docs/v114-v115-quality.md).
 
-V111 has near-equal photo PSNR; V112 improves camera and color results. Fine
-high-noise texture and real foliage still need work. All seven matched panels
-and complete 102MP exports are verified. FP32 inference/blending takes 167.51s.
-[Primary comparison](docs/v111-v112-primary-quality.md).
-The [larger-encoder transfer](docs/small-feature-transfer.md) now starts from
-V112. [V114 Tiny and V115 Small have both completed 20,000 updates](docs/small-aligned-training.md).
-Their [complete quality evaluation is running, with independent saved-prediction review queued](docs/quality-prediction-archive.md).
-[V116 is queued](docs/fine-detail-data-training.md) to test fine-detail sources and
-reviewed reference masks against the matched V114 control, with a saved-output
-comparison queued for the complete panels and native crops.
-[Current models](docs/current-model.md) · [Source-quality review](docs/incoming-commons-quality.md) ·
-[Historical diary](diary/index.md).
-The [camera-outlier audit](docs/camera-outliers.md) shows how isolated repair and
-reference-contaminating sensor points affect the real-camera comparisons.
-For explicit zero-shot/read inputs, the [optional V104 sites export](docs/adc-consistency.md)
-adds **.2885dB ADC-only PSNR** across all 427 photos/four CFAs with unchanged learned
-weights. All 1,708 cases improve; positive-noise inputs bypass it. Native crops,
-flat-color limitations and adverse cases accompany the result.
+**V115 Small is a useful alternative:** its known-camera mean is higher at
+54.324dB and its tested eight-pixel weak-carrier response improves. Tiny has
+slightly higher photo PSNR and lower tested color bias. Both retain soft fine
+foliage/neon detail and dark-camera mottling. All numerical panels, independent
+saved-prediction checks, native review and complete102MP RGB16 exports are done.
+[Current choices](docs/current-model.md) · [GFX gallery](docs/gfx-qualitative.md).
 
-The optional [eight-view V104 mode](docs/dihedral-quality.md),
-`--self-ensemble dihedral8`, reaches **37.044dB** on the 427-photo panel (+.243dB over V104,
-427/427 source means up) and 54.333/53.994dB known/unseen CFA. Its worse ADC color
-tail (421 versus V112's 50.9 DN16) and weak fine detail remain visible. All panels
-are independently checked; the [complete 102MP export](docs/dihedral-fullframe.md)
-takes 885.93s. V112 remains the default learned baseline.
-The [V112 eight-view comparison](docs/v112-eight-view.md) improves all twelve
-fixed material cases and both selected adverse camera crops, with native
-photo/GFX/color comparisons. Full V112 eight-view panels remain unmeasured.
+[V116 is training](docs/fine-detail-data-training.md) to test fine weak sources
+and reviewed paired-reference masks against the matched V114 control. Its
+quality is pending. The90,864-source corpus, zero optical blur and geometry
+before final downsampling remain in use. [Data review](docs/incoming-commons-quality.md) ·
+[Training pipeline](docs/training-pipeline.md) · [Historical diary](diary/index.md).
+
+Earlier useful modes remain available: [V104 eight views](docs/dihedral-quality.md)
+reaches37.044dB on the full photo panel, with a worse ADC color tail;
+[V112 eight views](docs/v112-eight-view.md) improves twelve fixed material cases
+but has no complete-panel/frame measurement. V114 eight-view quality is
+unmeasured. The [V104 ADC sites option](docs/adc-consistency.md) and
+[camera-outlier study](docs/camera-outliers.md) retain their explicit weights
+and measured tradeoffs.
 
 ![PSNR versus model version](docs/images/version-PSNR-history.png)
 
@@ -44,37 +35,38 @@ photo/GFX/color comparisons. Full V112 eight-view panels remain unmeasured.
 training budgets and data; this describes available models rather than an
 isolated architecture ablation.
 
-## Current 100% crops
+## Current100% crops
 
-Noisy observation → **V112 final20k, optional eight views** → exact synthetic GT, ISO100 prior.
-These are unchanged 160×160 crops at the 8×-binned evaluation resolution, with
-shared coordinates and display transforms. [Compare useful modes and remaining weaknesses](docs/v112-eight-view.md) ·
-[source/ROI/checkpoint/noise/display metadata](docs/images/v112-dihedral8-pilot/manifest.json).
+Noisy observation → **V114 Tiny** → exact synthetic GT, ISO12800 prior.
+Each cell is an unchanged160×160 crop at the8×-binned evaluation resolution,
+with shared coordinates and display transforms. Fine texture remains softer
+than GT. [Tiny/Small comparison](docs/v114-v115-quality.md) ·
+[Source/ROI/checkpoint/noise/display receipts](docs/images/v114-v115-quality/manifest.json).
 
-![Eight-view V112 bark: noisy, restored and exact GT](docs/images/v112-dihedral8-pilot/crop-ae5e2918b2f5d748.png)
+![V114 bark: noisy, restored and exact GT](docs/images/v114-v115-quality/V114-material-1.png)
 
-![Eight-view V112 canopy: noisy, restored and exact GT](docs/images/v112-dihedral8-pilot/crop-eab57f7bf8e44af3.png)
-
-[Higher-noise crops versus the stronger released RawNIND reference](docs/images/v112-dihedral8-pilot/photo-iso12800-prior.png).
+![V114 canopy: noisy, restored and exact GT](docs/images/v114-v115-quality/V114-material-2.png)
 
 Sources: [Derek Ramsey](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
-[CC BY-SA 2.5](https://creativecommons.org/licenses/by-sa/2.5/), and
+[CC BY-SA2.5](https://creativecommons.org/licenses/by-sa/2.5/), and
 [Grendelkhan](https://commons.wikimedia.org/wiki/File:Forest_covered_hills_on_Yakushima.jpg),
-[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), modified by binning,
+[CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/), modified by binning,
 cropping, simulated noise and restoration.
 
-Real GFX100S: DSCF3879 ISO6400 → **V112** → DSCF3880 ISO100 f/5.6.
-Native 160×160 sensor-pixel crops from complete 102MP outputs use shared +2EV display;
-the independent ISO100 exposure is a qualitative reference, **not GT**.
-Fine foliage and saturated-light detail remain soft. [All six regions and
-complete frame comparisons](docs/gfx-qualitative.md) · [Metadata](docs/images/v112-fullframe/manifest.json).
+Real GFX100S: DSCF3879 ISO6400 → **V114 Tiny** → DSCF3880 ISO100 f/5.6.
+Native160×160 sensor-pixel crops from complete102MP outputs share +2EV display.
+The independent ISO100 exposure is an approximate qualitative reference,
+**not GT**. Fine foliage remains painterly; fence geometry is coherent.
+[All six Tiny/Small regions and other useful models](docs/gfx-qualitative.md) ·
+[Metadata](docs/images/v114-v115-quality/manifest.json).
+
+![V114 GFX foliage: noisy, restored and separate ISO100 reference](docs/images/v114-v115-quality/V114-foliage.png)
+
+![V114 GFX fence: noisy, restored and separate ISO100 reference](docs/images/v114-v115-quality/V114-chain-link-fence.png)
+
 The [stronger RawNIND full-frame reference](docs/rawnind-fullframe.md) and
-[earlier Q2/Sony/GFX50R comparisons](docs/cross-camera-qualitative.md) retain
-additional real-camera limitations.
-
-![V112 GFX foliage: noisy, restored and separate ISO100 reference](docs/images/v112-fullframe/V112-foliage.png)
-
-![V112 GFX fence: noisy, restored and separate ISO100 reference](docs/images/v112-fullframe/V112-chain-link-fence.png)
+[Q2/Sony/GFX50R comparisons](docs/cross-camera-qualitative.md) retain additional
+real-camera limitations. Broad real-photo superiority remains a goal.
 
 ## Setup and inference
 
@@ -84,7 +76,7 @@ the lockfile. DINOv3 requires approved Hugging Face access through `HF_TOKEN`.
 ```bash
 source scripts/env.sh
 uv sync --extra dev
-uv run demosaic infer /mnt/external/demosaic/models/v112-final20000.pt photo.raf \
+uv run demosaic infer /mnt/external/demosaic/models/v114-final20000.pt photo.raf \
   /mnt/external/demosaic/output/photo-linear.tiff \
   --preview /mnt/external/demosaic/output/photo-srgb.tiff \
   --shot 0.001 --read 0.000001 \

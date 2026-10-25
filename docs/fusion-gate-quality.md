@@ -8,7 +8,7 @@ training, rather than an improved model or a trained capacity comparison.
 
 [Weights, exact intervention, retained predictions, independent arithmetic and native metadata](results/fusion-gate-ablation-CPU-v1.json).
 Both original final20k checkpoints remain intact. The selector was V104 at that
-recording; [V112 is now current](v112-quality.md).
+recording; [V114 is now current](v114-v115-quality.md).
 The frozen official DINOv3 ConvNeXt-Tiny identity is unchanged. Only
 `context.gates.0/1/2` are set to zero; the other 88 EMA tensors stay exact.
 The original 91 tensors are restored exactly after each diagnostic.

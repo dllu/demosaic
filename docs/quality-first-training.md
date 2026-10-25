@@ -1,12 +1,11 @@
 # Quality training in the V84 architectural family
 
-**V112 final20k is the current baseline in V84's DRUNet/frozen DINOv3
-ConvNeXt-Tiny family.** All seven matched panels are complete: photo36.90238dB,
-known/unseen CFA54.26914/53.95378dB and worst ADC flat bias50.89DN16.
-It keeps V111-like photographic quality while improving camera and color
-results. [Complete current results and native images](v112-quality.md).
-Complete102MP exports and their167.51s FP32 observation are verified. Fine high-noise and real foliage
-detail remain weak; quality still precedes speed.
+**V114 Tiny is the current general baseline in the DRUNet/frozen DINOv3 family.**
+Its complete photo/camera means are36.97973/54.28627/54.00290dB. V115 fitted
+Small has higher known-camera quality and eight-pixel weak response, while Tiny
+has slightly higher photo PSNR and lower color bias. Both improve over V112.
+[Completed panels, native comparisons and RGB16 exports](v114-v115-quality.md).
+Fine high-noise and real foliage/neon detail remain weak. Quality precedes speed.
 
 ## Completed loss-scale comparison and next training
 
@@ -26,22 +25,23 @@ The [Small feature fit](small-feature-transfer.md) now uses V112 teacher targets
 and retained training previews/Small features. Both Tiny and fitted Small passed
 eight actual CPU optimizer updates with identical input/domain/LR schedules.
 [Matched V114/V115 continuations](small-aligned-training.md) passed actual CUDA
-checks and both have completed 20,000 updates. Their endpoint evaluation is running. The idle
+checks and both completed20k plus all endpoint evaluation, independent metrics
+and native review. [Current results](v114-v115-quality.md). The idle
 V104-derived V113 plan remains preserved without CUDA/production work.
 
-The [V116 follow-up](fine-detail-data-training.md) is queued after the current
-Tiny/Small review. It reuses V114 as the matched Tiny control, testing fine weak
+The [V116 follow-up](fine-detail-data-training.md) is now training after the
+completed Tiny/Small review and its eight-update CUDA check. It reuses V114 as the matched Tiny control, testing fine weak
 sources and reviewed paired-reference masks with the same parent/20k schedule.
-One native256 mask-path update and data/loss compatibility checks pass; CUDA
-and trained quality remain pending. The larger-encoder results can independently
-advance the current architectural recommendation.
+Native256 mask-path, data/loss compatibility and actual CUDA checks pass;
+trained quality remains pending. Tiny/Small architectural tradeoffs remain
+documented independently of this fixed-architecture data comparison.
 
 A [clean-target frequency audit](fine-weak-texture-coverage.md) identifies a gap
 in the dedicated weak-source band, while sampled photos and native targets
 already contain fine energy. An optional fine profile passes reader/routing
 checks and eight actual V112 CPU updates per arm, with no trained-quality claim.
-The active comparison keeps the existing weak profile; this data change awaits
-a later matched training test.
+The completed Tiny/Small comparison kept the legacy profile; the running
+V116 data trial now tests the fine profile.
 
 <a id="active-v104-cleaned-corpus-continuation"></a>
 
@@ -62,7 +62,7 @@ V104 improves PSNR, SSIM and gradient error in all 12 fixed material cases over
 V102, with mean PSNR gains of +.246/.166/.024dB at ADC-only/ISO100/ISO12800.
 Chroma improves in 11/12 cases.
 [Native comparisons and remaining smoothing](heldout-detail.md#v104-versus-v102-on-the-fixed-material-panel).
-V104 is the completed reference for that study; V112 is now the working baseline.
+V104 is the completed reference for that study; V112 is the parent of current V114.
 V102 remains a useful unseen-camera reference. More training, seed and data change together, so the gain cannot be
 attributed solely to the larger corpus.
 

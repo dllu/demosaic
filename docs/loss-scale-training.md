@@ -1,6 +1,7 @@
 # Controlled training test for faint detail
 
-**V112 is the current baseline after the completed matched comparison.**
+**V112 established the .0003 loss scale retained by current V114.**
++[Completed V114/V115 continuation results](v114-v115-quality.md).
 All seven panels are complete: full-photo PSNR36.90238dB, known/unseen CFA
 54.26914/53.95378dB and worst ADC flat bias50.89DN16. V111 photo quality is
 near-equal at36.90367dB, but its camera means are lower and ADC maximum rises
@@ -49,7 +50,7 @@ Its original trainer/controller have exited. All 91 model/EMA tensors and 89
 Adam states at step20000 are finite, and all 801 logged input/domain/LR rows
 match V111. [Endpoint, exact canonical copy and comparison handoff](results/v112-original20000-training-boundary-v1.json).
 Training, matched quality panels and native/full-frame review are complete.
-The [current V112 report](v112-quality.md) records the measured quality conclusions.
+The [completed V112 report](v112-quality.md) records the measured quality conclusions.
 
 The setting changes ordinary camera-linear, rendered, spatial-gradient and
 auxiliary Charbonnier penalties. Paired RAW retains its existing .0001 scale;

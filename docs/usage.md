@@ -2,11 +2,11 @@
 
 ## Current quality model
 
-Use **V112 final20k** for positive-noise restoration and continued quality training:
-`/mnt/external/demosaic/models/v112-final20000.pt`. It uses DRUNet RGB
+Use **V114 Tiny final20k** for general restoration and continued quality training:
+`/mnt/external/demosaic/models/v114-final20000.pt`. It uses DRUNet RGB
 restoration and frozen official DINOv3 ConvNeXt-Tiny features. The
 [current model guide](current-model.md) records its hash and alternatives;
-[completed primary panels, diagnostics and native crops](v112-quality.md)
+[completed primary panels, diagnostics and native crops](v114-v115-quality.md)
 cover full427 photos,known/unseen measured-camera and complete 102MP GFX output.
 Continue quality work with the [reviewed corpus and zero-blur recipe](quality-first-training.md).
 Earlier measurements below retain their checkpoint labels.
@@ -15,8 +15,9 @@ For explicit shot=read=0 inputs, the separately tested
 .2885 dB across 427 sources/four CFAs with unchanged learned weights. All 1,708
 cases improve; positive-noise profiles bypass the correction. Its report includes
 actual serialized-export triplets and remaining flat-color limitations.
-V112 also has a lower tested unprojected ADC flat-color tail; V102 retains
-a slightly higher unseen-camera mean. The model guide records these alternatives.
+V112 retains a slightly lower ADC maximum; V115 Small has higher known-camera
+quality and eight-pixel weak response, with higher color bias. The model guide
+records these useful alternatives.
 
 Add `--self-ensemble dihedral8` to `infer` for optional eight-view quality
 inference. It preserves Bayer geometry and averages camera-RGB predictions
@@ -25,8 +26,9 @@ tile. `benchmark`, `quality` and the DNG batch exporter accept the same option; 
 record the policy. [Measured gains, native comparisons and remaining limitations](dihedral-quality.md).
 The [completed full 102MP RGB16 review](dihedral-fullframe.md) includes native
 foliage/fence comparisons and the actual FP32 inference observation. Broader
-eight-view quality panels and independent checks are complete, with measured
-photo/camera gains and remaining color/detail tradeoffs.
+eight-view V104 quality panels and independent checks are complete, with measured
+photo/camera gains and remaining color/detail tradeoffs. V112 has a separate
+[fixed24 pilot](v112-eight-view.md); V114 eight-view quality is unmeasured.
 
 ## Environment and storage
 

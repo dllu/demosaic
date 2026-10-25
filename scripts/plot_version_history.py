@@ -97,6 +97,7 @@ STUDIES = [
         "v104-reviewed-corpus-quality.md",
     ),
     ("v111-v112-primary-quality-v1.json", [111, 112], "v111-v112-primary-quality.md"),
+    ("v114-v115-quality-complete-v1.json", [114, 115], "v114-v115-quality.md"),
 ]
 METRICS = {
     ("full427", "photo", "srgb_psnr"): "photo_srgb_PSNR",

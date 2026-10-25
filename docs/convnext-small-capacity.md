@@ -1,6 +1,7 @@
 # Larger frozen ConvNeXt capacity: transfer and common initialization
 
-**Small transfer now starts from the current V112 quality baseline.**
+**Small transfer uses the V112 parent; the trained V115 comparison is complete.**
++[Current V114/V115 results and native comparisons](v114-v115-quality.md).
 The completed training-only fit preserves its learned gates and nearly matches
 selected photo means; two adverse-camera crops remain .20–.32dB worse.
 Matched Tiny/Small continuations passed eight actual CPU updates each and are

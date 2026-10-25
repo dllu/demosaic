@@ -8,7 +8,7 @@ manifest. Source RAWs and XMPs remain read-only.
 ```bash
 source scripts/env.sh
 PYTHONPATH=src uv run python scripts/export_raw_dng.py \
-  /mnt/external/demosaic/models/v112-final20000.pt \
+  /mnt/external/demosaic/models/v114-final20000.pt \
   '/path/to/raw/2023-12-31-17*.raf' \
   --only-with-xmp --suffix v104 \
   --output-dir ~/pictures/composites/2023-12-31-ochanomizu \

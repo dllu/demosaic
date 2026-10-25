@@ -4,7 +4,8 @@
 V111 reaches 36.90367dB and V112 reaches 36.90238dB. V112 has higher known/unseen
 camera means than V111; their photographic difference is small and mixed.
 Fine high-noise detail remains unresolved. The [complete color/GFX review](v112-quality.md)
-now selects V112 as the working baseline; this page retains primary-panel scope.
+established V112 as the parent of current [V114](v114-v115-quality.md);
+this page retains the original primary-panel scope.
 
 [Completed panels, original checkpoints and independent source/scene statistics](results/v111-v112-primary-quality-v1.json) ·
 [Matched recipes and execution](loss-scale-training.md) ·

@@ -1,10 +1,12 @@
 # Retained predictions for quality reports
 
-**V114/V115 have both completed 20,000 updates; their endpoint evaluation is running.** It
+**V114/V115 training, endpoint evaluation, independent audit and native review
+are complete.** [Results and current model choices](v114-v115-quality.md).
+The evaluator
 evaluates each new model once per declared observation and retains the native
 FP32 predictions and exact supervision used by the evaluator. This supports
 independent score checks, crop reports and later diagnostics without repeating
-model inference. Their complete endpoint quality results remain pending.
+model inference. Both complete102MP exports and all numerical panels are verified.
 [Completed training, payload inspection and handoff](results/v114-v115-trained-quality-running-v1.json).
 
 [Queue, source boundary, genuine-output replay and test evidence](results/v112-prediction-archive-evaluation-queued-v1.json) ·
@@ -15,8 +17,7 @@ model inference. Their complete endpoint quality results remain pending.
 
 The initial queue stopped after its training dependency's pre-forward spawn
 failure. The current evaluator has observed successful exit of the guarded
-training controller. Photo and both camera stages have completed; analytic and
-GFX evaluation follow. Both actual CUDA checks
+training controller and completed all eight declared stages. Both actual CUDA checks
 and original 20,000-update production runs passed. The failed attempt performed
 zero learned work. Original sources/receipts remain preserved.
 
@@ -29,7 +30,9 @@ v3 and independent audit v2. Only the collector's execution file changes;
 physical model/observations/counts/budgets remain exact to the original queue.
 The old idle owners exited without children or completed stages, and their
 sources, logs and terminal receipts remain preserved. Original training is now
-complete; the evaluator retains its declared source, owner and budgets.
+complete; evaluation and independent audit finished under their original
+identities, frozen sources and budgets. The CPU-only direct Tiny/Small join
+verified14,190 pairs and prepared the published native material/GFX boards.
 
 ## Scheduled coverage
 

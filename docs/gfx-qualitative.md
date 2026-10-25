@@ -1,9 +1,32 @@
 # GFX100S qualitative comparisons
 
-**V112 is the current quality baseline, with complete 101.996MP exports.**
-The full-frame gallery compares V104/V112 and both released RawNIND references
-at all six fixed native regions. The learned models retain more regular mesh;
-fine foliage and saturated-sign structure remain soft. [Current quality report](v112-quality.md).
+**V114 Tiny is the current general baseline; V115 Small is a useful alternative.**
+Both have complete101.996MP FP32 blended outputs and verified linear/sRGB RGB16
+exports. These new boards compare all six fixed regions at native160 pixels,
+with shared +2EV/WB/matrix and no resizing. Rows: noisy, Tiny, Small, separate
+ISO100 reference. DSCF3879 ISO6400 and DSCF3880 ISO100 f/5.6 differ in aperture,
+time and moving subjects; ISO100 is an approximate reference, **not GT**.
+
+![Full-frame building, fence and neon: noisy, Tiny, Small and ISO100 reference](images/v114-v115-quality/matched-gfx-1.png)
+
+![Full-frame foliage, platform and sky: noisy, Tiny, Small and ISO100 reference](images/v114-v115-quality/matched-gfx-2.png)
+
+Both retain coherent mesh/building edges and suppress sky noise. Fine foliage
+remains painterly, neon markings smear and small surface/lattice detail is weak.
+Tiny/Small native differences are small; these are useful current examples,
+not evidence of a large real-photo improvement. [Complete quality comparison](v114-v115-quality.md) ·
+[Source/ROI/checkpoint/noise/display receipts](images/v114-v115-quality/manifest.json).
+
+All four TIFF hashes/shapes/dtypes pass;921,600 channel values in the twelve
+retained ROIs exactly match FP32-to-linear-RGB16 quantization. Ordered FP32
+inference/blending observations are116.57s/101.66s; different warmup/workspace
+states prevent a speed ranking. Quality remains the priority before speed work.
+
+## V112 and released RawNIND full-frame references
+
+The following explicitly labeled comparison retains V104/V112 and both released
+RawNIND variants at the same six regions. Learned methods retain more regular
+mesh while foliage and saturated-sign structure remain soft.
 
 ![Complete-frame V104,V112,half/pre-upsampled RawNIND and independent ISO100 reference](images/v112-fullframe/comparison.png)
 
@@ -20,7 +43,7 @@ remains separately labeled, with its [original metadata](images/v112-quality/gfx
 
 ## V112 eight-view context comparison
 
-The [current eight-view V112 comparison](v112-eight-view.md) improves all twelve
+The [eight-view V112 comparison](v112-eight-view.md) improves all twelve
 fixed photographic cases and both selected adverse camera crops. On the standing
 GFX scene, native changes remain small: foliage and saturated sign detail stay
 soft; sky and building/fence geometry remain coherent.

@@ -1,6 +1,7 @@
-# V112: current quality baseline
+# V112: completed parent and loss-scale reference
 
-**V112 final20k is the current restoration and quality-training baseline.**
+**V112 final20k is the measured parent of the current V114 baseline.**
++[Completed V114/V115 comparison and native images](v114-v115-quality.md).
 It combines V111-like photographic quality with higher camera means and a much
 lower flat-color error tail. All seven matched panels and complete 101.996MP
 linear/sRGB RGB16 exports are verified. FP32 inference/blending takes 167.51s.

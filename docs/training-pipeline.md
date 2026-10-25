@@ -8,7 +8,8 @@ batch32 is only1.3% faster than16 while using roughly twice the CUDA allocation.
 Details and limitations are recorded below.
 
 The [completed V111/V112 quality trial](v112-quality.md) uses90,864 reviewed
-sources and selects V112 as the current baseline. It retains native128/paired32,
+sources. The [completed Tiny/Small continuations](v114-v115-quality.md) now
+select V114 as the general baseline. This recipe retains native128/paired32,
 zero optical PSFs, weak textures, photographic contrast attenuation and six
 reviewed regions. The [Small rebase](small-aligned-training.md) reuses cached
 training features/previews before a new V112-derived initializer and budget.

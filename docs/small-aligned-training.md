@@ -1,11 +1,12 @@
 # Matched quality training from V112
 
-**V114 Tiny and V115 fitted Small have both completed their original
-20,000-update continuations. Their complete quality evaluation is running.**
+**V114 Tiny and V115 fitted Small have completed their original20k training,
+all quality stages, independent metrics, native review and102MP exports.**
+[Completed comparison and current tradeoffs](v114-v115-quality.md).
 Both passed eight actual native 256/B16/BF16
 CUDA updates after the original eight-view evaluation/audit exited successfully.
-They use seed 63 and V112's trained loss scale. V112 remains the current learned
-baseline while endpoint quality is unmeasured.
+They use seed63 and V112's trained loss scale. V114 is the current general
+baseline; V115 has useful known-camera/eight-pixel-detail gains with color tradeoffs.
 
 [Plans, actual CPU checks and queue boundary](results/v112-continuations-queued-v1.json) ·
 [V112 baseline](v112-quality.md) · [Completed Small transfer](small-feature-transfer.md).
@@ -15,8 +16,8 @@ baseline while endpoint quality is unmeasured.
 
 V114 finished on October 24 at 11:12 PDT with 20,000 optimizer updates and 640
 validation forwards. Model, EMA and Adam states are finite; the official Tiny
-encoder remains frozen. Its endpoint has not yet received the complete quality
-evaluation. The generic accounting status string incorrectly says Small; the
+encoder remains frozen. Its complete quality review now selects it as the
+general baseline. The generic accounting status string incorrectly says Small; the
 worker's arm, backbone hash, initializer and checkpoint identify Tiny V114.
 That original receipt is preserved unchanged.
 
@@ -32,8 +33,9 @@ This inspection adds no neural call, update, RAW decode or CUDA work.
 The final Small checkpoint is
 `/mnt/external/demosaic/V112-continuations-20261024-v2/V115/train/V115/last.pt`,
 SHA256 `fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84`.
-This establishes completed training, not a quality improvement. Existing
-V112 remains the learned baseline while the retained endpoints are measured.
+Its completed quality improves over V112; the matched comparison finds
+slightly lower photo PSNR and higher color bias than Tiny, with a higher
+known-camera mean. Both useful versions are documented directly.
 
 ## Models and budget
 
@@ -103,32 +105,14 @@ and [intentional idle supersession](results/small-aligned-v113-superseded-v1.jso
 remain preserved. They have no production CUDA updates and are not resumed.
 
 The [retained-prediction endpoint evaluation](quality-prediction-archive.md)
-started after the exact training controller exited successfully. It covers the complete
-photo/camera/analytic panels, six GFX contexts and complete 102MP exports for
-both new models, reusing existing V112/RawNIND controls. Exact numerical targets
-and native FP32 predictions are retained for independent review without
-repeating model inference. Photo, known-camera and unseen-camera stages have
-completed under the original evaluator owner and frozen source; analytic and
-GFX stages follow. Independent checks and native review remain pending.
-An independent CPU audit is also queued after that exact evaluator. It checks
-the retained numerical panels, source/scene comparisons and color/detail tails,
-and prepares native bark/canopy triplets. Actual photo/GFX viewing follows.
+completed all eight stages after successful original training. Both models have
+complete photo/camera/analytic panels, six GFX contexts and full102MP exports.
+The independent NumPy64 audit checked all28,380 numerical method observations.
+The direct Tiny/Small join verified14,190 exact input/target/mask/display pairs;
+native photo, camera and all six GFX regions were actually viewed.
+[Results, triplets, full-frame boards and limitations](v114-v115-quality.md).
 
-A [direct Tiny-versus-Small comparison](results/v114-v115-matched-review-queued-v1.json)
-is queued after that exact audit exits successfully. It matches all 14,190
-observation pairs by source, noise, targets, masks and display transforms, then
-joins independently rebuilt metrics. Photo differences balance sources; camera
-differences balance captures within scenes, then scenes. It also prepares two
-Small noisy/restored/exact synthetic GT triplets, a matched material board and
-all six native full-frame GFX regions, including foliage and fence. This CPU
-join adds no neural calls, noise draws or RAW decoding. The comparison measures
-the fitted Small transfer method, including its changed initial lateral maps.
-Actual native viewing and a current-model recommendation follow the evidence.
-
-The first CUDA wrapper lacked a multiprocessing main guard. A spawned loader
-re-entered it and failed before the first batch; the root receipt confirms zero
-prepared batches, forwards or optimizer steps. The original controller stopped
-the attempt and its dependent evaluator stopped without CUDA. Sources, logs,
-receipts and partial directories remain preserved. A corrected wrapper passed a
-real spawn-import test, then both actual eight-update CUDA checks with identical
-inputs/domains/LRs and finite state. The original 16 CPU updates were reused.
+The original pre-forward spawn failure and corrected wrapper/checks remain in
+the bound receipts linked above and the timestamped diary. No successful model
+work was repeated for reporting. [V116](fine-detail-data-training.md) has now
+started its separately controlled data trial against completed V114.
