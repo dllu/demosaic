@@ -22,6 +22,23 @@ retained ROIs exactly match FP32-to-linear-RGB16 quantization. Ordered FP32
 inference/blending observations are116.57s/101.66s; different warmup/workspace
 states prevent a speed ranking. Quality remains the priority before speed work.
 
+## Additional fine green mesh case
+
+The [DSCF3842/DSCF3835 comparison](gfx-green-mesh.md) adds the fine green
+chain-link fence beside the red train's cab, with both straight-out-of-camera
+JPEGs. V112, V114, V115 Small and V117 largely lose its fine lattice under the
+disclosed nominal ISO6400 prior; this exposes a weakness that the larger mesh
+in the existing standing case does not resolve. RawNIND pre-upsampled retains
+more directional texture, without clearly recovering the reference lattice.
+
+![Fine green mesh, camera controls and all five methods](images/gfx-green-mesh-20231231-v1/comparison-2EV.png)
+
+All cells are native160 crops from one768px context with shared +2EV display,
+input-only integer coordinate matching and no resizing or warp. The ISO100
+f/5.6 frame was taken46s earlier; its AHD output and camera JPEG are independent
+qualitative references, **not GT**. These context comparisons supplement the
+existing six full-frame regions. [Sources, noise and checkpoint metadata](images/gfx-green-mesh-20231231-v1/manifest.json).
+
 ## Completed V117/V118 comparison
 
 [V117](v117-v118-quality.md) is a useful single-view photo-score option at

@@ -1,0 +1,165 @@
+{
+  "image": "RawNIND-preup-left.png",
+  "caption": "New green mesh case; independent aperture/time/motion differences, not exactGT.",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy Malvar",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "RawNIND-preup",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "ISO100 ref, not GT",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "78a0030053d4a0b56480d138fc86db76fa908b76b00f2fb44c81cf381dd621e0",
+  "case": {
+    "name": "fine-green-mesh-left",
+    "ROI_xywh": [
+      206,
+      229,
+      160,
+      160
+    ],
+    "noisy_raw_xywh": [
+      806,
+      6489,
+      160,
+      160
+    ],
+    "reference_raw_xywh": [
+      805,
+      6489,
+      160,
+      160
+    ],
+    "camera_JPEGs": {
+      "noisy_camera_jpeg": {
+        "pixels": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-noisy_camera_jpeg-native.npy",
+          "sha256": "60c90045b89c53740f8dcbf5b997d69e4e817ba6d61c576eb975c4ebf46ab0ad"
+        },
+        "xywh": [
+          760,
+          6500,
+          160,
+          160
+        ],
+        "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+      },
+      "reference_camera_jpeg": {
+        "pixels": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-reference_camera_jpeg-native.npy",
+          "sha256": "5b41f300c8a198df73c3189f51a288c7c208eaba32f4b604965d0888152e3557"
+        },
+        "xywh": [
+          759,
+          6501,
+          160,
+          160
+        ],
+        "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+      }
+    }
+  },
+  "method": {
+    "label": "RawNIND-preup",
+    "kind": "rawnind-preup",
+    "checkpoint": {
+      "path": "/mnt/external/demosaic/references/rawnind-preupsample-20261023-v1/utnet2-bayer.pt",
+      "sha256": "3d8d5fab966f790f4adbaf1786ca1ee81cb027d9cd45220787247b0af99fd814"
+    },
+    "directory": "/mnt/external/demosaic/references/rawnind-preupsample-20261023-v1",
+    "source_files": [
+      {
+        "path": "/mnt/external/demosaic/references/rawnind-preupsample-20261023-v1/raw_denoiser.py",
+        "sha256": "154868a016cc83a74f8efc54675a2c4ffd120e3f30c159d10f11e012e8ca8d65"
+      },
+      {
+        "path": "/mnt/external/demosaic/references/rawnind-preupsample-20261023-v1/LICENSE",
+        "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+      },
+      {
+        "path": "/mnt/external/demosaic/references/rawnind-preupsample-20261023-v1/provenance.json",
+        "sha256": "f603bbc6b83d910349a1d68d8173726de22a62a3cb733362be27812f92ce731a"
+      }
+    ],
+    "input_scale": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "gain": "Input-only CFA-channel least squares; signed RAW, no reference/output fit",
+    "prediction": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/comparison-v1/RawNIND-preup-RGB-f32.npy",
+      "sha256": "59a1a0c84e77b852b964616ae292e2b0ebdb25f2ca142748ff6996d670100f58"
+    },
+    "source_inputs_sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4",
+    "actual_root_forwards": 1,
+    "actual_encoder_forwards": 0,
+    "new_inference": true,
+    "seconds": 9.451127725187689
+  },
+  "conditioning": {
+    "shot": 0.00128,
+    "read": 6.5536e-06,
+    "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+  },
+  "display_exposure": 4.0,
+  "source_bindings": {
+    "noisy": {
+      "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+      "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+    },
+    "reference": {
+      "path": "/home/dllu/proj/demosaic/.cache/gfx-green-mesh-20231231/2023-12-31-17-07-10_DSCF3835_51f913c3376f7335d5b5f8dede720c5c73ff15ce.raf",
+      "sha256": "89be15b298e32844de067700a277996119cb5c8ad25fc2c4cb03556485d1a7e9"
+    },
+    "noisy_camera_jpeg": {
+      "path": "/home/dllu/proj/demosaic/.cache/gfx-green-mesh-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.jpg",
+      "sha256": "517bf4a00898061570cbd727150a993b893bb7fef6ad17a01f34f6dd505657de"
+    },
+    "reference_camera_jpeg": {
+      "path": "/home/dllu/proj/demosaic/.cache/gfx-green-mesh-20231231/2023-12-31-17-07-10_DSCF3835_51f913c3376f7335d5b5f8dede720c5c73ff15ce.jpg",
+      "sha256": "893146ad29c3e1128b3331f2c7c24cfc6db4b15f802cde7d06c46285e36151c3"
+    }
+  },
+  "input_arrays": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+    "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+  },
+  "RAW_context_xywh": [
+    600,
+    6260,
+    768,
+    768
+  ],
+  "reference": "DSCF3835 ISO100/f5.6/2.5s, independent AHD camera RGB; not exactGT",
+  "scope": "Native160 context-crop comparison, not full-frame inference or a paired quality score.",
+  "original_render_receipt": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/comparison-v1/triplets/crop-e7df4d261b4d89ee.json",
+    "sha256": "019e40661b28f545097431cb8cc57fd34ffee73cf1b832dc3ef9ef515f4cd008"
+  },
+  "publication_note": "PNG bytes copied exactly from actually viewed context comparison; new filename metadata, original receipt bytes preserved."
+}

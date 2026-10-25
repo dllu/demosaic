@@ -1,0 +1,576 @@
+{
+  "status": "published-new-green-mesh-context-comparisons-awaiting-final-publication-view",
+  "recorded_local": "2026-10-25T15:26:07.037392-07:00",
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/publish-green-mesh-v1.py",
+    "sha256": "8d4922b7b6b7fff0be88ce46ccd1feb1303c2e1dad7c250ea151ccd596f7f789"
+  },
+  "actual_inference": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/comparison-v1/result-v1.json",
+    "sha256": "648f6b905c7461347fbf38c5eaf14cca7f252cced7b31f905e1739c37f92351f"
+  },
+  "prepared_inputs": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/result-v1.json",
+    "sha256": "6b4afa65727e4ee792e4bbadcb96c3fc63ea8bbaf82bf3b18d7556efa839dcaa"
+  },
+  "selection": {
+    "path": "/home/dllu/proj/demosaic/configs/gfx-green-mesh-20231231.json",
+    "sha256": "c998ceade0eeb509a11af97806161dbddaaa4bbc5e16cefff14884f6c9d5369f"
+  },
+  "sources": {
+    "noisy": {
+      "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+      "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+    },
+    "reference": {
+      "path": "/home/dllu/proj/demosaic/.cache/gfx-green-mesh-20231231/2023-12-31-17-07-10_DSCF3835_51f913c3376f7335d5b5f8dede720c5c73ff15ce.raf",
+      "sha256": "89be15b298e32844de067700a277996119cb5c8ad25fc2c4cb03556485d1a7e9"
+    },
+    "noisy_camera_jpeg": {
+      "path": "/home/dllu/proj/demosaic/.cache/gfx-green-mesh-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.jpg",
+      "sha256": "517bf4a00898061570cbd727150a993b893bb7fef6ad17a01f34f6dd505657de"
+    },
+    "reference_camera_jpeg": {
+      "path": "/home/dllu/proj/demosaic/.cache/gfx-green-mesh-20231231/2023-12-31-17-07-10_DSCF3835_51f913c3376f7335d5b5f8dede720c5c73ff15ce.jpg",
+      "sha256": "893146ad29c3e1128b3331f2c7c24cfc6db4b15f802cde7d06c46285e36151c3"
+    }
+  },
+  "methods": [
+    {
+      "label": "V112",
+      "kind": "checkpoint",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v112-final20000.pt",
+        "sha256": "21c3cca8370df21e3412f9ccbf441c35afcfad8fd03174c7727f4f88874783b1"
+      },
+      "step": 20000,
+      "model_config": {
+        "restoration_backbone": "pretrained-rgb",
+        "width": 64,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "dino_lora_rank": 0,
+        "dino_input_adapter": false,
+        "dino_feature_fusion": "convnext-pyramid",
+        "camera_conditioning": true,
+        "noise_modulation": false,
+        "physical_fp32": true,
+        "baseline": "bilinear",
+        "prior_window": 7,
+        "standardized_noise": false,
+        "noise_refinement": false,
+        "refinement_width": 24,
+        "refinement_blocks": 4,
+        "refinement_window": 63,
+        "coarse_refinement_factor": 0,
+        "coarse_refinement_width": 24,
+        "coarse_refinement_blocks": 4,
+        "coarse_refinement_window": 31,
+        "pyramid_refinement": false,
+        "pyramid_measurements": true,
+        "pyramid_width": 24,
+        "pyramid_blocks": 2,
+        "variance_stabilization": true,
+        "physical_anchors": true,
+        "rgb_processing_scale": 1,
+        "packed_detail_prior": false,
+        "rgb_hidden_autocast": false,
+        "rgb_center_camera_matrix": false,
+        "rgb_middle_skip_fp32": true,
+        "adc_cfa_projection": false,
+        "adc_cfa_projection_mode": "malvar",
+        "raw_kernel_reconstruction": false,
+        "raw_kernel_windows": [
+          1,
+          5,
+          17
+        ],
+        "raw_kernel_phase_conditioning": false,
+        "raw_directional_residual": false,
+        "raw_directional_bank_context": false,
+        "raw_directional_bank_detach_input": false,
+        "raw_spectral_residual": false,
+        "late_rgb_refinement": "none",
+        "isotropic_groups": 6,
+        "isotropic_blocks": 8,
+        "isotropic_local_width": 32,
+        "isotropic_raw_gain": 1.0,
+        "isotropic_residual_scale": 1.0
+      },
+      "prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/comparison-v1/V112-RGB-f32.npy",
+        "sha256": "daf1bbd90992a3c9d4254992d0c1a6fe890ad6555ffa0ee07cdd9a870f73de76"
+      },
+      "source_inputs_sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4",
+      "actual_root_forwards": 1,
+      "actual_encoder_forwards": 1,
+      "new_inference": true,
+      "seconds": 104.66034844983369
+    },
+    {
+      "label": "V114",
+      "kind": "checkpoint",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/V112-continuations-quality-20261024-v3/weights/weights-2285c84b7015bcf122e71b890723f80aaf216bde849256c77f070c2493f9d2d2.pt",
+        "sha256": "2285c84b7015bcf122e71b890723f80aaf216bde849256c77f070c2493f9d2d2"
+      },
+      "step": 20000,
+      "model_config": {
+        "restoration_backbone": "pretrained-rgb",
+        "width": 64,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "dino_lora_rank": 0,
+        "dino_input_adapter": false,
+        "dino_feature_fusion": "convnext-pyramid",
+        "camera_conditioning": true,
+        "noise_modulation": false,
+        "physical_fp32": true,
+        "baseline": "bilinear",
+        "prior_window": 7,
+        "standardized_noise": false,
+        "noise_refinement": false,
+        "refinement_width": 24,
+        "refinement_blocks": 4,
+        "refinement_window": 63,
+        "coarse_refinement_factor": 0,
+        "coarse_refinement_width": 24,
+        "coarse_refinement_blocks": 4,
+        "coarse_refinement_window": 31,
+        "pyramid_refinement": false,
+        "pyramid_measurements": true,
+        "pyramid_width": 24,
+        "pyramid_blocks": 2,
+        "variance_stabilization": true,
+        "physical_anchors": true,
+        "rgb_processing_scale": 1,
+        "packed_detail_prior": false,
+        "rgb_hidden_autocast": false,
+        "rgb_center_camera_matrix": false,
+        "rgb_middle_skip_fp32": true,
+        "adc_cfa_projection": false,
+        "adc_cfa_projection_mode": "malvar",
+        "raw_kernel_reconstruction": false,
+        "raw_kernel_windows": [
+          1,
+          5,
+          17
+        ],
+        "raw_kernel_phase_conditioning": false,
+        "raw_directional_residual": false,
+        "raw_directional_bank_context": false,
+        "raw_directional_bank_detach_input": false,
+        "raw_spectral_residual": false,
+        "late_rgb_refinement": "none",
+        "isotropic_groups": 6,
+        "isotropic_blocks": 8,
+        "isotropic_local_width": 32,
+        "isotropic_raw_gain": 1.0,
+        "isotropic_residual_scale": 1.0
+      },
+      "prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/comparison-v1/V114-RGB-f32.npy",
+        "sha256": "0f9c7c5aaddc24673492fe793c9be5dfcd64b4cc7fad5cda8b916144b6cbf334"
+      },
+      "source_inputs_sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4",
+      "actual_root_forwards": 1,
+      "actual_encoder_forwards": 1,
+      "new_inference": true,
+      "seconds": 109.02880039485171
+    },
+    {
+      "label": "V115",
+      "kind": "checkpoint",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/V112-continuations-quality-20261024-v3/weights/weights-fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84.pt",
+        "sha256": "fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84"
+      },
+      "step": 20000,
+      "model_config": {
+        "restoration_backbone": "pretrained-rgb",
+        "width": 64,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+        "dino_revision": "421020015aa4266363db803b6049a529999afb1e",
+        "dino_lora_rank": 0,
+        "dino_input_adapter": false,
+        "dino_feature_fusion": "convnext-pyramid",
+        "camera_conditioning": true,
+        "noise_modulation": false,
+        "physical_fp32": true,
+        "baseline": "bilinear",
+        "prior_window": 7,
+        "standardized_noise": false,
+        "noise_refinement": false,
+        "refinement_width": 24,
+        "refinement_blocks": 4,
+        "refinement_window": 63,
+        "coarse_refinement_factor": 0,
+        "coarse_refinement_width": 24,
+        "coarse_refinement_blocks": 4,
+        "coarse_refinement_window": 31,
+        "pyramid_refinement": false,
+        "pyramid_measurements": true,
+        "pyramid_width": 24,
+        "pyramid_blocks": 2,
+        "variance_stabilization": true,
+        "physical_anchors": true,
+        "rgb_processing_scale": 1,
+        "packed_detail_prior": false,
+        "rgb_hidden_autocast": false,
+        "rgb_center_camera_matrix": false,
+        "rgb_middle_skip_fp32": true,
+        "adc_cfa_projection": false,
+        "adc_cfa_projection_mode": "malvar",
+        "raw_kernel_reconstruction": false,
+        "raw_kernel_windows": [
+          1,
+          5,
+          17
+        ],
+        "raw_kernel_phase_conditioning": false,
+        "raw_directional_residual": false,
+        "raw_directional_bank_context": false,
+        "raw_directional_bank_detach_input": false,
+        "raw_spectral_residual": false,
+        "late_rgb_refinement": "none",
+        "isotropic_groups": 6,
+        "isotropic_blocks": 8,
+        "isotropic_local_width": 32,
+        "isotropic_raw_gain": 1.0,
+        "isotropic_residual_scale": 1.0
+      },
+      "prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/comparison-v1/V115-RGB-f32.npy",
+        "sha256": "d28c5c55213d4dd08f92d8b97ff0da23bbe018630188cb3641027ab6c6993f7e"
+      },
+      "source_inputs_sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4",
+      "actual_root_forwards": 1,
+      "actual_encoder_forwards": 1,
+      "new_inference": true,
+      "seconds": 113.2262057447806
+    },
+    {
+      "label": "V117",
+      "kind": "checkpoint",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V117-V118-band-quality-v1/work/artifacts/weights/weights-f69452432a852ac4c5ffdcbf7d6fe6837a3ab46adbc8a7fdae073111220b8ab0.pt",
+        "sha256": "f69452432a852ac4c5ffdcbf7d6fe6837a3ab46adbc8a7fdae073111220b8ab0"
+      },
+      "step": 20000,
+      "model_config": {
+        "restoration_backbone": "pretrained-rgb",
+        "width": 64,
+        "encoder_blocks": [
+          2,
+          2,
+          4
+        ],
+        "middle_blocks": 6,
+        "decoder_blocks": [
+          2,
+          2,
+          2
+        ],
+        "attention": true,
+        "dino": true,
+        "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "dino_lora_rank": 0,
+        "dino_input_adapter": false,
+        "dino_feature_fusion": "convnext-pyramid",
+        "camera_conditioning": true,
+        "noise_modulation": false,
+        "physical_fp32": true,
+        "baseline": "bilinear",
+        "prior_window": 7,
+        "standardized_noise": false,
+        "noise_refinement": false,
+        "refinement_width": 24,
+        "refinement_blocks": 4,
+        "refinement_window": 63,
+        "coarse_refinement_factor": 0,
+        "coarse_refinement_width": 24,
+        "coarse_refinement_blocks": 4,
+        "coarse_refinement_window": 31,
+        "pyramid_refinement": false,
+        "pyramid_measurements": true,
+        "pyramid_width": 24,
+        "pyramid_blocks": 2,
+        "variance_stabilization": true,
+        "physical_anchors": true,
+        "rgb_processing_scale": 1,
+        "packed_detail_prior": false,
+        "rgb_hidden_autocast": false,
+        "rgb_center_camera_matrix": false,
+        "rgb_middle_skip_fp32": true,
+        "adc_cfa_projection": false,
+        "adc_cfa_projection_mode": "malvar",
+        "raw_kernel_reconstruction": false,
+        "raw_kernel_windows": [
+          1,
+          5,
+          17
+        ],
+        "raw_kernel_phase_conditioning": false,
+        "raw_directional_residual": false,
+        "raw_directional_bank_context": false,
+        "raw_directional_bank_detach_input": false,
+        "raw_spectral_residual": false,
+        "late_rgb_refinement": "none",
+        "isotropic_groups": 6,
+        "isotropic_blocks": 8,
+        "isotropic_local_width": 32,
+        "isotropic_raw_gain": 1.0,
+        "isotropic_residual_scale": 1.0
+      },
+      "prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/comparison-v1/V117-RGB-f32.npy",
+        "sha256": "7f6968d45c8dc7b33784d61ba0dbe48a9bc42ba01e9fc0b392dc3ecdd7f0962b"
+      },
+      "source_inputs_sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4",
+      "actual_root_forwards": 1,
+      "actual_encoder_forwards": 1,
+      "new_inference": true,
+      "seconds": 101.27161988290027
+    },
+    {
+      "label": "RawNIND-preup",
+      "kind": "rawnind-preup",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/references/rawnind-preupsample-20261023-v1/utnet2-bayer.pt",
+        "sha256": "3d8d5fab966f790f4adbaf1786ca1ee81cb027d9cd45220787247b0af99fd814"
+      },
+      "directory": "/mnt/external/demosaic/references/rawnind-preupsample-20261023-v1",
+      "source_files": [
+        {
+          "path": "/mnt/external/demosaic/references/rawnind-preupsample-20261023-v1/raw_denoiser.py",
+          "sha256": "154868a016cc83a74f8efc54675a2c4ffd120e3f30c159d10f11e012e8ca8d65"
+        },
+        {
+          "path": "/mnt/external/demosaic/references/rawnind-preupsample-20261023-v1/LICENSE",
+          "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+        },
+        {
+          "path": "/mnt/external/demosaic/references/rawnind-preupsample-20261023-v1/provenance.json",
+          "sha256": "f603bbc6b83d910349a1d68d8173726de22a62a3cb733362be27812f92ce731a"
+        }
+      ],
+      "input_scale": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gain": "Input-only CFA-channel least squares; signed RAW, no reference/output fit",
+      "prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/comparison-v1/RawNIND-preup-RGB-f32.npy",
+        "sha256": "59a1a0c84e77b852b964616ae292e2b0ebdb25f2ca142748ff6996d670100f58"
+      },
+      "source_inputs_sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4",
+      "actual_root_forwards": 1,
+      "actual_encoder_forwards": 0,
+      "new_inference": true,
+      "seconds": 9.451127725187689
+    }
+  ],
+  "comparison_2EV": {
+    "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-20231231-v1/comparison-2EV.png",
+    "sha256": "acc431666680ae2bc8f53e62bd4b0b9c639de0d6e2eca920816fb10eac9d2e06"
+  },
+  "triplets": [
+    {
+      "label": "V112",
+      "region": "fine-green-mesh-left",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-20231231-v1/V112-left.png",
+        "sha256": "5097449d9dff88fabb965aaaec1b8d8fc1a7892934d1de1f448ef8c42b12a3b2"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-20231231-v1/V112-left.json",
+        "sha256": "6aebcaafa19d2a0a86fffc724d7000a031e7edadac9e90f4ad9abf4a97cda188"
+      }
+    },
+    {
+      "label": "V114",
+      "region": "fine-green-mesh-left",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-20231231-v1/V114-left.png",
+        "sha256": "b7576b7a549f2bb50c00a7bffaf99527a132de57ded78d5900e9c8fa661df987"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-20231231-v1/V114-left.json",
+        "sha256": "379c24180c5923054e7c5bce762a20052ff3ebc6b6d03064bd71615e96cae51c"
+      }
+    },
+    {
+      "label": "V115",
+      "region": "fine-green-mesh-left",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-20231231-v1/V115-left.png",
+        "sha256": "bf0ff8032038ce8e022f4aa391e8707a89a76bdc8614be374e013f2c15cde6e5"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-20231231-v1/V115-left.json",
+        "sha256": "ff613fde7f9a28c73ecad65551c1654b3d6ff3fb5991092500b2cf2d51a4a4e2"
+      }
+    },
+    {
+      "label": "V117",
+      "region": "fine-green-mesh-left",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-20231231-v1/V117-left.png",
+        "sha256": "9dd3d9f9b7f0ac9185f7363f3d706d9969bf66669d6c2a6283af8fce7baa955d"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-20231231-v1/V117-left.json",
+        "sha256": "ac6f6e8e2874dbf5afa4e53cc42d703f176a5b1a299a557109b7b84e7e2f85bc"
+      }
+    },
+    {
+      "label": "RawNIND-preup",
+      "region": "fine-green-mesh-left",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-20231231-v1/RawNIND-preup-left.png",
+        "sha256": "78a0030053d4a0b56480d138fc86db76fa908b76b00f2fb44c81cf381dd621e0"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-20231231-v1/RawNIND-preup-left.json",
+        "sha256": "e276cb0415836994d5b6890262ee013d16abccaa5fd36a71d5879760ac80935e"
+      }
+    },
+    {
+      "label": "V112",
+      "region": "fine-green-mesh-right",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-20231231-v1/V112-right.png",
+        "sha256": "eb8a3018f4a24835f827ef404d8cc47f6ac495410be7d1bbb6c938d5efe545fb"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-20231231-v1/V112-right.json",
+        "sha256": "b3f4d277425d6c315283ea5c4b679bfca92db41f7e0e639f33dc9d57d7a0485c"
+      }
+    },
+    {
+      "label": "V114",
+      "region": "fine-green-mesh-right",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-20231231-v1/V114-right.png",
+        "sha256": "c26ae3022b9506a0412a4c5e4d836fbfe3632ca4ecd42369a0c00855fba274d1"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-20231231-v1/V114-right.json",
+        "sha256": "91da3fa9c69ee8b6fb6f8f0a1f550ab5903f2da1cb6c705d06cc32c5a33a73b8"
+      }
+    },
+    {
+      "label": "V115",
+      "region": "fine-green-mesh-right",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-20231231-v1/V115-right.png",
+        "sha256": "c7c5edefdaad2e5d81d7a2ed9be069e4284478532b7ef4d8ef52096a75e587c5"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-20231231-v1/V115-right.json",
+        "sha256": "e61ebcf470e7f65d9dcfbcc43f185c3e3fd0caab9c77149b178bb4cb656320db"
+      }
+    },
+    {
+      "label": "V117",
+      "region": "fine-green-mesh-right",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-20231231-v1/V117-right.png",
+        "sha256": "80ee52ef726659c742078b8c1992c90aa3a4496c4470566c4134162119e6b139"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-20231231-v1/V117-right.json",
+        "sha256": "2effbf68c267078d177edcd4e9171145dd14906c8a86d07aed555f2c99a2e07a"
+      }
+    },
+    {
+      "label": "RawNIND-preup",
+      "region": "fine-green-mesh-right",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-20231231-v1/RawNIND-preup-right.png",
+        "sha256": "aba22e2c7d8f152a2cd06497c778bfba5cad2001e2f1f53684cf3cdc2925732d"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-20231231-v1/RawNIND-preup-right.json",
+        "sha256": "5d98e1c92e561b1cd7cefe0948feb7b0a82126c2dd9dfdcbca4ac6d2d54124c3"
+      }
+    }
+  ],
+  "README_native4EV_views": [
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-20231231-v1/fine-green-mesh-left-4EV.png",
+        "sha256": "b414ff57e439175509753ba1d64e361a041137b6e26035340a4ac53110481f32"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-20231231-v1/fine-green-mesh-left-4EV.json",
+        "sha256": "75a85984ab99b83f51269d4671fe8923f73ffa52663c330f40aba12b0f304dd1"
+      }
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-20231231-v1/fine-green-mesh-right-4EV.png",
+        "sha256": "b86212d9296f5fd6ebbf7bab6f113d4dd1708bcd7ae9dcfe791e4a54dd8e080f"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-20231231-v1/fine-green-mesh-right-4EV.json",
+        "sha256": "183af1e1dc8efc6032c1291335d7dfad3e0540da271d20e6a7613183d0cb5694"
+      }
+    }
+  ],
+  "holdout_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/holdout-audit-v1.json",
+    "sha256": "363411756d8e7d2987672198d387328d4ed7b30a3d11b01b3b591b1d751c041b"
+  },
+  "preserved_initial_preparation_failure": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/preparation-failure-v1.json",
+    "sha256": "62eb47d51e2cb7b78a45ba29be121d352351f2e2dfedfd34519a8c11a72cc30b"
+  },
+  "actual_inference_new_root_forwards": 5,
+  "actual_inference_new_encoder_forwards": 4,
+  "publication_new_neural_forwards": 0,
+  "publication_new_RAW_decodes": 0,
+  "scope": "Newheldout768context/twonative160ROIs;5fixedmethods,nominalISO6400conditioning. Alloriginal9column2rowcellsactuallyviewed. Fourlearnedversionslosefinegrid;RawNINDdirectionaltexturedoesnotestablishcorrectmeshrecovery. ISO100AHD/JPEG independentqualitativecomparators, notGT. Original cameraJPEG hasveryfaintmesh amidgrain. Supplementalshared+4EV displays only, no newNN/RAW/noise/output fit orqualityscore. Standing3879/3880 unchanged."
+}

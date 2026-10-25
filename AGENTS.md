@@ -30,3 +30,12 @@ DSCF3842/DSCF3883 and have nearly identical framing. Include foliage and
 chain-link-fence crops alongside sky and building detail. The ISO100 f/5.6
 exposure still differs in aperture and moving subjects; it is a qualitative
 reference, not a pixelwise scoring target.
+
+Also keep the additional fine green fence beside the red train's cab as a
+qualitative test in `configs/gfx-green-mesh-20231231.json`: DSCF3842 ISO6400 and
+DSCF3835 ISO100 f/5.6, with both straight-out-of-camera JPEGs. Cache the extra
+media in `.cache/gfx-green-mesh-20231231/`; reuse the existing cached DSCF3842
+RAF. Include this difficult mesh in future quality reports alongside the main
+DSCF3879/3880 scene. The reference differs in aperture, exposure time and moving
+subjects; it is not exact GT. Keep both captures, their JPEGs and siblings out
+of training, and preserve original files read-only.

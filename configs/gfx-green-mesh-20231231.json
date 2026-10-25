@@ -1,0 +1,311 @@
+{
+  "sources": {
+    "noisy": {
+      "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+      "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+    },
+    "reference": {
+      "path": ".cache/gfx-green-mesh-20231231/2023-12-31-17-07-10_DSCF3835_51f913c3376f7335d5b5f8dede720c5c73ff15ce.raf",
+      "sha256": "89be15b298e32844de067700a277996119cb5c8ad25fc2c4cb03556485d1a7e9"
+    },
+    "noisy_camera_jpeg": {
+      "path": ".cache/gfx-green-mesh-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.jpg",
+      "sha256": "517bf4a00898061570cbd727150a993b893bb7fef6ad17a01f34f6dd505657de"
+    },
+    "reference_camera_jpeg": {
+      "path": ".cache/gfx-green-mesh-20231231/2023-12-31-17-07-10_DSCF3835_51f913c3376f7335d5b5f8dede720c5c73ff15ce.jpg",
+      "sha256": "893146ad29c3e1128b3331f2c7c24cfc6db4b15f802cde7d06c46285e36151c3"
+    }
+  },
+  "cache_receipt": {
+    "path": "/home/dllu/proj/demosaic/.cache/gfx-green-mesh-20231231/cache-receipt-v1.json",
+    "sha256": "53ce53cdb36031da70838774eeb196b1e17fe3d5785e7b3bb2227a9d2f732241"
+  },
+  "raw_context_xywh": [
+    600,
+    6260,
+    768,
+    768
+  ],
+  "display_exposure": 4.0,
+  "regions": [
+    {
+      "name": "fine-green-mesh-left",
+      "ROI_xywh": [
+        206,
+        229,
+        160,
+        160
+      ],
+      "noisy_raw_xywh": [
+        806,
+        6489,
+        160,
+        160
+      ],
+      "reference_raw_xywh": [
+        805,
+        6489,
+        160,
+        160
+      ],
+      "camera_JPEGs": {
+        "noisy_camera_jpeg": {
+          "pixels": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-noisy_camera_jpeg-native.npy",
+            "sha256": "60c90045b89c53740f8dcbf5b997d69e4e817ba6d61c576eb975c4ebf46ab0ad"
+          },
+          "xywh": [
+            760,
+            6500,
+            160,
+            160
+          ],
+          "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+        },
+        "reference_camera_jpeg": {
+          "pixels": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-reference_camera_jpeg-native.npy",
+            "sha256": "5b41f300c8a198df73c3189f51a288c7c208eaba32f4b604965d0888152e3557"
+          },
+          "xywh": [
+            759,
+            6501,
+            160,
+            160
+          ],
+          "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+        }
+      }
+    },
+    {
+      "name": "fine-green-mesh-right",
+      "ROI_xywh": [
+        426,
+        189,
+        160,
+        160
+      ],
+      "noisy_raw_xywh": [
+        1026,
+        6449,
+        160,
+        160
+      ],
+      "reference_raw_xywh": [
+        1025,
+        6449,
+        160,
+        160
+      ],
+      "camera_JPEGs": {
+        "noisy_camera_jpeg": {
+          "pixels": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-noisy_camera_jpeg-native.npy",
+            "sha256": "db0718b241bf9d9c9794e5a518e0c779986093b2ed843f7c0d99f819d2ba94b5"
+          },
+          "xywh": [
+            980,
+            6460,
+            160,
+            160
+          ],
+          "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+        },
+        "reference_camera_jpeg": {
+          "pixels": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-reference_camera_jpeg-native.npy",
+            "sha256": "faf44e4a1fe312d846a9ca2209449e282dd727c19f8ecae10398983f577bd5d2"
+          },
+          "xywh": [
+            979,
+            6461,
+            160,
+            160
+          ],
+          "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+        }
+      }
+    }
+  ],
+  "conditioning": {
+    "shot": 0.00128,
+    "read": 6.5536e-06,
+    "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+  },
+  "registration": "RAW/reference native integer NCC +/-16; JPEG coarse area8 NCC +/-128 followed by native integer +/-16. Coarse binning for coordinate selection only; native published pixels never resized or warped.",
+  "notes": "User-selected difficult green chain-link mesh next to red train cab. DSCF3842 ISO6400 f1.7 1/300s; DSCF3835 ISO100 f5.6 2.5s,46s earlier. Evaluation-only/private sources cached read-only; both cameraJPEGs and independent AHD lowISO reference are qualitative comparators, never exactGT. Standing3879/3880 case unchanged.",
+  "registrations": {
+    "reference_RAW_minus_noisy_RAW_xy": [
+      -1,
+      0
+    ],
+    "reference_RAW_green_NCC": 0.837847600812493,
+    "noisy_camera_jpeg": {
+      "JPEG_context_minus_noisy_context_xy": [
+        -46,
+        11
+      ],
+      "JPEG_context_origin_xy": [
+        554,
+        6271
+      ],
+      "green_NCC": 0.6291292238228455,
+      "coarse_area8_green_NCC": 0.8510609005601808,
+      "raw_anchor_xy": [
+        600,
+        6260
+      ],
+      "note": "Integer coordinates only. Residual lens/camera-pipeline geometry and radiometry differences remain."
+    },
+    "reference_camera_jpeg": {
+      "JPEG_context_minus_noisy_context_xy": [
+        -47,
+        12
+      ],
+      "JPEG_context_origin_xy": [
+        553,
+        6272
+      ],
+      "green_NCC": 0.7344555012623493,
+      "coarse_area8_green_NCC": 0.8712051485619063,
+      "raw_anchor_xy": [
+        599,
+        6260
+      ],
+      "note": "Integer coordinates only. Residual lens/camera-pipeline geometry and radiometry differences remain."
+    }
+  },
+  "raw_metadata": {
+    "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+    "camera": "GFX100S",
+    "pattern": "RGGB",
+    "black_levels": [
+      4098.0,
+      4097.0,
+      4104.0,
+      4104.0
+    ],
+    "white_levels": [
+      65535.0,
+      65535.0,
+      65535.0,
+      65535.0
+    ],
+    "white_balance": [
+      1.5132450331125828,
+      1.0,
+      2.2152317880794703
+    ],
+    "camera_to_srgb": [
+      [
+        1.0725188393098881,
+        0.17123593128834644,
+        -0.24375477059823436
+      ],
+      [
+        -0.1267191317089774,
+        1.4310509369654432,
+        -0.3043318052564657
+      ],
+      [
+        -0.009697676902906037,
+        -0.29348063283422965,
+        1.3031783097371357
+      ]
+    ],
+    "flip": 0,
+    "iso": 6400,
+    "adc_white_level": 65535.0,
+    "make": "FUJIFILM",
+    "xyz_to_camera": [
+      [
+        1.6211999654769897,
+        -0.8422999978065491,
+        -0.1582999974489212
+      ],
+      [
+        -0.4336000084877014,
+        1.2582999467849731,
+        0.19370000064373016
+      ],
+      [
+        -0.019500000402331352,
+        0.07259999960660934,
+        0.6198999881744385
+      ]
+    ]
+  },
+  "reference_metadata": {
+    "source": "/home/dllu/proj/demosaic/.cache/gfx-green-mesh-20231231/2023-12-31-17-07-10_DSCF3835_51f913c3376f7335d5b5f8dede720c5c73ff15ce.raf",
+    "camera": "GFX100S",
+    "pattern": "RGGB",
+    "black_levels": [
+      255.0,
+      255.0,
+      255.0,
+      255.0
+    ],
+    "white_levels": [
+      65535.0,
+      65535.0,
+      65535.0,
+      65535.0
+    ],
+    "white_balance": [
+      1.5132450331125828,
+      1.0,
+      2.2152317880794703
+    ],
+    "camera_to_srgb": [
+      [
+        1.0725188393098881,
+        0.17123593128834644,
+        -0.24375477059823436
+      ],
+      [
+        -0.1267191317089774,
+        1.4310509369654432,
+        -0.3043318052564657
+      ],
+      [
+        -0.009697676902906037,
+        -0.29348063283422965,
+        1.3031783097371357
+      ]
+    ],
+    "flip": 0,
+    "iso": 100,
+    "adc_white_level": 65535.0,
+    "make": "FUJIFILM",
+    "xyz_to_camera": [
+      [
+        1.6211999654769897,
+        -0.8422999978065491,
+        -0.1582999974489212
+      ],
+      [
+        -0.4336000084877014,
+        1.2582999467849731,
+        0.19370000064373016
+      ],
+      [
+        -0.019500000402331352,
+        0.07259999960660934,
+        0.6198999881744385
+      ]
+    ]
+  },
+  "reference_AHD_calibration": {
+    "rgb_to_sensor_gains": [
+      1.0000569059590505,
+      1.0000551320082693,
+      1.0000695146678378
+    ],
+    "samples": [
+      888770,
+      2241059,
+      743612
+    ]
+  }
+}

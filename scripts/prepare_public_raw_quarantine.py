@@ -39,11 +39,29 @@ def protected_identity(camera, metadata):
     if camera.endswith(("EOSM100", "DMCGH1")):
         return "camera-held-out-for-unseen-development"
     text = json.dumps(metadata)
-    if re.search(r"DSCF(?:3842|3879|3880|3883)", text, re.IGNORECASE):
+    if re.search(r"DSCF(?:3835|3842|3879|3880|3883)", text, re.IGNORECASE):
         return "standing-GFX-capture-identifier"
     if "GFX100S" in camera and "2023:12:31" in text:
         return "standing-GFX-capture-date-family"
     return None
+
+
+def qualitative_capture_hashes(config):
+    """Keep the extra RAW/JPEG comparison out even when capture metadata is absent."""
+    hashes = set()
+    roots = [
+        Path(".cache/gfx-green-mesh-20231231").resolve(),
+        Path(".cache/gfx-qualitative-20231231").resolve(),
+    ]
+    for item in json.loads(Path(config).read_text())["sources"].values():
+        path = Path(item["path"]).resolve()
+        if not any(path.is_relative_to(root) for root in roots):
+            raise ValueError("Use locally cached green-mesh qualitative sources")
+        digest = sha(path)
+        if digest != item["sha256"]:
+            raise ValueError("Green-mesh qualitative source hash differs")
+        hashes.add(digest)
+    return hashes
 
 
 def protected_hashes():
@@ -65,6 +83,10 @@ def protected_hashes():
         if not str(path).startswith(".cache/gfx-qualitative-20231231/"):
             raise ValueError("Use locally cached standing RAWs")
         hashes.add(sha(path))
+    mesh_config = Path("configs/gfx-green-mesh-20231231.json")
+    if mesh_config.exists():
+        sources[str(mesh_config)] = sha(mesh_config)
+        hashes.update(qualitative_capture_hashes(mesh_config))
     return hashes, sources
 
 
